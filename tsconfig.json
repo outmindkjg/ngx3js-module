@@ -10,6 +10,12 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths": {
+      "ngx3js": [
+        "dist/ngx3js/ngx3js",
+        "dist/ngx3js"
+      ]
+    },
     "target": "es2015",
     "module": "es2020",
     "lib": [
