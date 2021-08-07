@@ -4,3 +4,5 @@ npm login
 cd dist/ngx3js
 npm publish
 
+npm install -g npm-install-peers
+npm-install-peers
