@@ -2,15 +2,23 @@ import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnCh
 import * as THREE from 'three';
 import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
 import { FlyControls } from 'three/examples/jsm/controls/FlyControls';
+import { DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOrientationControls';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import { DragControls } from 'three/examples/jsm/controls/DragControls';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
+import { VRButton } from 'three/examples/jsm/webxr/VRButton';
+import { ARButton } from 'three/examples/jsm/webxr/ARButton';
+
 import { CSM } from 'three/examples/jsm/csm/CSM';
 import { RendererTimer, ThreeUtil } from '../interface';
 import { LookatComponent } from '../lookat/lookat.component';
 import { SceneComponent } from '../scene/scene.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { PlaneControls } from './plane-controls';
+import { SelectBoxControls } from './selection-box-controls';
+import { AVRControls } from './avr-controls';
 
 /**
  * Control options
@@ -23,6 +31,8 @@ export interface ControlOptions {
 	 *
 	 * @see FlyControls - FlyControls, Fly
 	 * @see FirstPersonControls - FirstPersonControls, FirstPerson
+	 * @see DeviceOrientationControls - DeviceOrientationControls, DeviceOrientation
+	 * @see DragControls - DragControls, Drag
 	 * @see TransformControls - TransformControls, Transform
 	 * @see TrackballControls - TrackballControls, Trackball
 	 * @see CSM - CSM
@@ -137,7 +147,7 @@ export interface ControlOptions {
 	movementSpeed?: number;
 
 	/**
-	 * The rollSpeed of control
+	 * The rollSpeed of control in degree
 	 */
 	rollSpeed?: number;
 
@@ -281,6 +291,8 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 	 *
 	 * @see FlyControls - FlyControls, Fly
 	 * @see FirstPersonControls - FirstPersonControls, FirstPerson
+	 * @see DeviceOrientationControls - DeviceOrientationControls, DeviceOrientation
+	 * @see DragControls - DragControls, Drag
 	 * @see TransformControls - TransformControls, Transform
 	 * @see TrackballControls - TrackballControls, Trackball
 	 * @see CSM - CSM
@@ -292,187 +304,192 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 	/**
 	 * The autoRotate of control
 	 */
-	@Input() private autoRotate: boolean = null;
+	@Input() public autoRotate: boolean = null;
 
 	/**
 	 * The autoRotateSpeed of control
 	 */
-	@Input() private autoRotateSpeed: number = null;
+	@Input() public autoRotateSpeed: number = null;
 
 	/**
 	 * The screenSpacePanning of control
 	 */
-	@Input() private screenSpacePanning: boolean = null;
+	@Input() public screenSpacePanning: boolean = null;
 
 	/**
 	 * The minDistance of control
 	 */
-	@Input() private minDistance: number = null;
+	@Input() public minDistance: number = null;
 
 	/**
 	 * The maxDistance of control
 	 */
-	@Input() private maxDistance: number = null;
+	@Input() public maxDistance: number = null;
 
 	/**
 	 * The xDistance of control
 	 */
-	@Input() private xDistance: number = null;
+	@Input() public xDistance: number = null;
 
 	/**
 	 * The yDistance of control
 	 */
-	@Input() private yDistance: number = null;
+	@Input() public yDistance: number = null;
 
 	/**
 	 * The enableZoom of control
 	 */
-	@Input() private enableZoom: boolean = null;
+	@Input() public enableZoom: boolean = null;
 
 	/**
 	 * The minZoom of control
 	 */
-	@Input() private minZoom: number = null;
+	@Input() public minZoom: number = null;
 
 	/**
 	 * The maxZoom of control
 	 */
-	@Input() private maxZoom: number = null;
+	@Input() public maxZoom: number = null;
 
 	/**
 	 * The staticMoving of control
 	 */
-	@Input() private staticMoving: boolean = null;
+	@Input() public staticMoving: boolean = null;
+
+	/**
+	 * The keys of control
+	 */
+	@Input() public keys: string[] = null;
 
 	/**
 	 * The rotateSpeed of control
 	 */
-	@Input() private rotateSpeed: number = null;
+	@Input() public rotateSpeed: number = null;
 
 	/**
 	 * The zoomSpeed of control
 	 */
-	@Input() private zoomSpeed: number = null;
+	@Input() public zoomSpeed: number = null;
 
 	/**
 	 * The panSpeed of control
 	 */
-	@Input() private panSpeed: number = null;
+	@Input() public panSpeed: number = null;
 
 	/**
 	 * The minPolarAngle of control
 	 */
-	@Input() private minPolarAngle: number = null;
+	@Input() public minPolarAngle: number = null;
 
 	/**
 	 * The maxPolarAngle of control
 	 */
-	@Input() private maxPolarAngle: number = null;
+	@Input() public maxPolarAngle: number = null;
 
 	/**
 	 * The enableKeys of control
 	 */
-	@Input() private enableKeys: boolean = null;
+	@Input() public enableKeys: boolean = null;
 
 	/**
 	 * The enablePan of control
 	 */
-	@Input() private enablePan: boolean = null;
+	@Input() public enablePan: boolean = null;
 
 	/**
 	 * The enableDamping of control
 	 */
-	@Input() private enableDamping: boolean = null;
+	@Input() public enableDamping: boolean = null;
 
 	/**
 	 * The dampingFactor of control
 	 */
-	@Input() private dampingFactor: number = null;
+	@Input() public dampingFactor: number = null;
 
 	/**
 	 * The movementSpeed of control
 	 */
-	@Input() private movementSpeed: number = null;
+	@Input() public movementSpeed: number = null;
 
 	/**
 	 * The rollSpeed of control
 	 */
-	@Input() private rollSpeed: number = null;
+	@Input() public rollSpeed: number = null;
 
 	/**
 	 * The dragToLook of control
 	 */
-	@Input() private dragToLook: boolean = null;
+	@Input() public dragToLook: boolean = null;
 
 	/**
 	 * The autoForward of control
 	 */
-	@Input() private autoForward: boolean = null;
+	@Input() public autoForward: boolean = null;
 
 	/**
 	 * The lookSpeed of control
 	 */
-	@Input() private lookSpeed: number = null;
+	@Input() public lookSpeed: number = null;
 
 	/**
 	 * The lookVertical of control
 	 */
-	@Input() private lookVertical: boolean = null;
+	@Input() public lookVertical: boolean = null;
 
 	/**
 	 * The activeLook of control
 	 */
-	@Input() private activeLook: boolean = null;
+	@Input() public activeLook: boolean = null;
 
 	/**
 	 * The heightSpeed of control
 	 */
-	@Input() private heightSpeed: boolean = null;
+	@Input() public heightSpeed: boolean = null;
 
 	/**
 	 * The heightCoef of control
 	 */
-	@Input() private heightCoef: number = null;
+	@Input() public heightCoef: number = null;
 
 	/**
 	 * The heightMin of control
 	 */
-	@Input() private heightMin: number = null;
+	@Input() public heightMin: number = null;
 
 	/**
 	 * The heightMax of control
 	 */
-	@Input() private heightMax: number = null;
+	@Input() public heightMax: number = null;
 
 	/**
 	 * The constrainVertical of control
 	 */
-	@Input() private constrainVertical: boolean = null;
+	@Input() public constrainVertical: boolean = null;
 
 	/**
 	 * The verticalMin of control
 	 */
-	@Input() private verticalMin: number = null;
+	@Input() public verticalMin: number = null;
 
 	/**
 	 * The verticalMax of control
 	 */
-	@Input() private verticalMax: number = null;
+	@Input() public verticalMax: number = null;
 
 	/**
 	 * The mouseDragOn of control
 	 */
-	@Input() private mouseDragOn: boolean = null;
+	@Input() public mouseDragOn: boolean = null;
 
 	/**
 	 * The maxFar of control
 	 */
-	@Input() private maxFar: number = null;
+	@Input() public maxFar: number = null;
 
 	/**
 	 * The cascades of control
 	 */
-	@Input() private cascades: number = null;
+	@Input() public cascades: number = null;
 
 	/**
 	 * The mode of control
@@ -480,42 +497,42 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private mode: string = null;
+	@Input() public mode: string = null;
 
 	/**
 	 * The scene of control
 	 */
-	@Input() private scene: any = null;
+	@Input() public scene: any = null;
 
 	/**
 	 * The shadowMapSize of control
 	 */
-	@Input() private shadowMapSize: number = null;
+	@Input() public shadowMapSize: number = null;
 
 	/**
 	 * The lightDirectionX of control
 	 */
-	@Input() private lightDirectionX: number = null;
+	@Input() public lightDirectionX: number = null;
 
 	/**
 	 * The lightDirectionY of control
 	 */
-	@Input() private lightDirectionY: number = null;
+	@Input() public lightDirectionY: number = null;
 
 	/**
 	 * The lightDirectionZ of control
 	 */
-	@Input() private lightDirectionZ: number = null;
+	@Input() public lightDirectionZ: number = null;
 
 	/**
 	 * The target of control
 	 */
-	@Input() private target: THREE.Vector3 | LookatComponent | any = null;
+	@Input() public target: THREE.Vector3 | LookatComponent | any = null;
 
 	/**
 	 * The camera of control
 	 */
-	@Input() private camera: any = null;
+	@Input() public camera: any = null;
 
 	/**
 	 * EventListener of control
@@ -550,7 +567,13 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 	 * before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
-		if (this.control !== null && ThreeUtil.isNotNull(this.control.dispose)) {
+		if (this.controlDomElement !== null && this.controlDomElement.parentElement !== null) {
+			this.controlDomElement.parentElement.removeChild(this.controlDomElement);
+		}
+		if (this.control instanceof TransformControls && this.control.parent) {
+			this.control.parent.remove(this.control);
+		}
+		if (ThreeUtil.isNotNull(this.control.dispose)) {
 			this.control.dispose();
 		}
 		super.ngOnDestroy();
@@ -582,6 +605,8 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 		super.ngAfterContentInit();
 	}
 
+	private _cachedLookatList: LookatComponent[] = [];
+
 	/**
 	 * Applys changes
 	 * @param changes
@@ -606,30 +631,31 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'target':
-						this.unSubscribeRefer('target');
-						if (ThreeUtil.isNotNull(this.control['target'])) {
-							if (ThreeUtil.isNotNull(this.target)) {
-								this.control['target'] = ThreeUtil.getLookAt(this.target);
-								this.subscribeRefer(
-									'target',
-									ThreeUtil.getSubscribe(
-										this.target,
-										(event) => {
-											this.addChanges(event);
-										},
-										'lookat'
-									)
-								);
+						const newLookatList: LookatComponent[] = [];
+						if (ThreeUtil.isNotNull(this.target)) {
+							if (this.target instanceof LookatComponent) {
+								newLookatList.push(this.target);
 							} else {
-								this.unSubscribeReferList('lookatList');
-								if (ThreeUtil.isNotNull(this.lookatList)) {
-									if (this.lookatList.length > 0) {
-										this.control['target'] = this.lookatList.first.getLookAt();
-									}
-									this.subscribeListQuery(this.lookatList, 'lookatList', 'lookat');
-								}
+								this.control['target'] = ThreeUtil.getLookAt(this.target);
 							}
 						}
+						if (ThreeUtil.isNotNull(this.lookatList)) {
+							this.lookatList.forEach((lookat) => {
+								newLookatList.push(lookat);
+							});
+						}
+						this._cachedLookatList.forEach((lookat) => {
+							if (newLookatList.indexOf(lookat) === -1) {
+								lookat.unsetObject3d(this.selfAny);
+							}
+						});
+						newLookatList.forEach((lookat) => {
+							if (this._cachedLookatList.indexOf(lookat) === -1) {
+								lookat.setObject3d(this.selfAny);
+							}
+						});
+						this._cachedLookatList = newLookatList;
+						// this.setSubscribeNext('lookat');
 						break;
 				}
 			});
@@ -640,6 +666,18 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 	 * Camera  of control
 	 */
 	private _camera: THREE.Camera = null;
+
+	/**
+	 * Renderer  of control
+	 */
+	private _renderer: THREE.Renderer = null;
+
+	private _renderCaller: (...args: any[]) => void = null;
+
+	/**
+	 * Renderer  of control
+	 */
+	private controlDomElement: HTMLElement = null;
 
 	/**
 	 * Scene  of control
@@ -657,14 +695,13 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 	 * @param domElement
 	 * @param scenes
 	 */
-	public setCameraDomElement(camera: THREE.Camera, domElement: HTMLElement, scenes: QueryList<SceneComponent>) {
-		if (this._camera !== camera || this._domElement !== domElement || this._scene !== scenes) {
-			if (this.control !== null && ThreeUtil.isNotNull(this.control.dispose)) {
-				this.control.dispose();
-			}
+	public setCameraDomElement(camera: THREE.Camera, domElement: HTMLElement, scenes: QueryList<SceneComponent>, renderer: THREE.Renderer, renderCaller: (...args: any[]) => void = null) {
+		if (this._camera !== camera || this._domElement !== domElement || this._scene !== scenes || this._renderer !== renderer) {
 			this._camera = camera;
 			this._domElement = domElement;
 			this._scene = scenes;
+			this._renderer = renderer;
+			this._renderCaller = renderCaller;
 			this.unSubscribeRefer('cameraload');
 			const cameraCom = ThreeUtil.getThreeComponent(camera);
 			if (ThreeUtil.isNotNull(cameraCom)) {
@@ -676,7 +713,7 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 							this._camera = cameraCom.getCamera();
 							this.needUpdate = true;
 						},
-						'changecamera'
+						'loaded'
 					)
 				);
 			}
@@ -716,6 +753,16 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 			this.control = null;
 			let control: any = null;
 			switch (this.type.toLowerCase()) {
+				case 'ar':
+				case 'vr':
+				case 'xr':
+					control = new AVRControls(this.type, camera, this._scene.first.getScene(), this._renderer as THREE.WebGLRenderer, {}, domElement, this._renderCaller, true);
+					break;
+				case 'ar-only':
+				case 'vr-only':
+				case 'xr-only':
+					control = new AVRControls(this.type.substr(0, 2), camera, this._scene.first.getScene(), this._renderer as THREE.WebGLRenderer, {}, domElement, this._renderCaller, false);
+					break;
 				case 'flycontrols':
 				case 'fly':
 					const flyControls = new FlyControls(camera, domElement);
@@ -732,6 +779,22 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 						flyControls.autoForward = this.autoForward;
 					}
 					control = flyControls;
+					break;
+				case 'deviceorientationcontrols':
+				case 'deviceorientation':
+					const deviceOrientationControls = new DeviceOrientationControls(camera);
+					control = deviceOrientationControls;
+					break;
+				case 'pointerlockcontrols':
+				case 'pointerlock':
+					const pointerLockControls = new PointerLockControls(camera);
+					control = pointerLockControls;
+					this._scene.first.getScene().add(pointerLockControls.getObject());
+					break;
+				case 'dragcontrols':
+				case 'drag':
+					const dragControls = new DragControls([], camera, domElement);
+					control = dragControls;
 					break;
 				case 'firstpersoncontrols':
 				case 'firstperson':
@@ -799,7 +862,15 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 					if (ThreeUtil.isNotNull(this.staticMoving)) {
 						trackballControls.staticMoving = this.staticMoving;
 					}
+					if (ThreeUtil.isNotNull(this.keys)) {
+						trackballControls.keys = this.keys;
+					}
 					control = trackballControls;
+					break;
+				case 'selectbox':
+				case 'selectboxcontrols':
+					const selectBoxControls = new SelectBoxControls(camera, this._scene.first.getScene(), this._renderer as THREE.WebGLRenderer);
+					control = selectBoxControls;
 					break;
 				case 'csm':
 					let csmScene = ThreeUtil.getTypeSafe(this.scene, {});
@@ -921,19 +992,13 @@ export class ControlComponent extends AbstractSubscribeComponent implements OnIn
 	 * @param renderTimer
 	 */
 	public render(renderTimer: RendererTimer) {
-		if (this.control !== null) {
-			if (this.control instanceof OrbitControls) {
-				this.control.update();
-			} else if (this.control instanceof CSM) {
-				this.control.update();
-			} else if (this.control instanceof FlyControls) {
+		if (this.control !== null && ThreeUtil.isNotNull(this.control.update)) {
+			if (this.control instanceof FlyControls || this.control instanceof FirstPersonControls || this.control instanceof PlaneControls || this.control instanceof AVRControls) {
 				this.control.update(renderTimer.delta);
-			} else if (this.control instanceof FirstPersonControls) {
-				this.control.update(renderTimer.delta);
-			} else if (this.control instanceof TrackballControls) {
+			} else if (this.control instanceof TransformControls) {
+				// pass
+			} else {
 				this.control.update();
-			} else if (this.control instanceof PlaneControls) {
-				this.control.update(renderTimer.delta);
 			}
 		}
 	}

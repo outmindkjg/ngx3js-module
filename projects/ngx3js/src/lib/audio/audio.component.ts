@@ -34,7 +34,7 @@ export class AudioComponent extends AbstractObject3dComponent implements OnInit 
 	/**
 	 * The Audio/Video Url
 	 */
-	@Input() private url: any = null;
+	@Input() public url: any = null;
 
 	/**
 	 * The Url Type
@@ -46,39 +46,39 @@ export class AudioComponent extends AbstractObject3dComponent implements OnInit 
 	 * listener,
 	 * auto,
 	 */
-	@Input() private urlType: string = 'auto';
+	@Input() public urlType: string = 'auto';
 
 	/**
 	 * Whether to start playback automatically. Default is *false*.
 	 */
-	@Input() private autoplay: boolean = true;
+	@Input() public autoplay: boolean = true;
 
 	/**
 	 * Setup the [page:Audio.source source] to the audioBuffer, and sets [page:Audio.sourceType sourceType] to 'buffer'.<br />
 	 * If [page:Audio.autoplay autoplay], also starts playback.
 	 */
-	@Input() private play: boolean = true;
+	@Input() public play: boolean = true;
 
 	/**
 	 * Set [link:https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loop source.loop] to *value*
 	 * (whether playback should loop).
 	 */
-	@Input() private loop: boolean = true;
+	@Input() public loop: boolean = true;
 
 	/**
 	 * Set the volume.
 	 */
-	@Input() private volume: number = null;
+	@Input() public volume: number = null;
 
 	/**
 	 * Sets the value of [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance panner.refDistance].
 	 */
-	@Input() private refDistance: number = null;
+	@Input() public refDistance: number = null;
 
 	/**
 	 * Sets the value of [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor panner.rolloffFactor].
 	 */
-	@Input() private rolloffFactor: number = null;
+	@Input() public rolloffFactor: number = null;
 
 	/**
 	 * Sets the value of [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel panner.distanceModel].
@@ -86,33 +86,33 @@ export class AudioComponent extends AbstractObject3dComponent implements OnInit 
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private distanceModel: string = null; // "exponential" | "inverse" | "linear"
+	@Input() public distanceModel: string = null; // "exponential" | "inverse" | "linear"
 
 	/**
 	 * Sets the value of [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance panner.maxDistance].
 	 */
-	@Input() private maxDistance: number = null;
+	@Input() public maxDistance: number = null;
 
 	/**
 	 * This method can be used in order to transform an omnidirectional sound into a [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode directional sound].
 	 */
-	@Input() private coneInnerAngle: number = null;
+	@Input() public coneInnerAngle: number = null;
 
 	/**
 	 * This method can be used in order to transform an omnidirectional sound into a [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode directional sound].
 	 */
-	@Input() private coneOuterAngle: number = null;
+	@Input() public coneOuterAngle: number = null;
 
 	/**
 	 * This method can be used in order to transform an omnidirectional sound into a [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode directional sound].
 	 */
-	@Input() private coneOuterGain: number = 1;
+	@Input() public coneOuterGain: number = 1;
 
 	/**
 	 * A non-zero power of two up to 2048, representing the size of the FFT (Fast Fourier Transform) to be used to determine the frequency domain.
 	 * See [link:https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize this page] for details.
 	 */
-	@Input() private fftSize: number = 128;
+	@Input() public fftSize: number = 128;
 
 	/**
 	 * A callback method that is invoked immediately after the

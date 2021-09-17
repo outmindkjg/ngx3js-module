@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import { SVGLoader, SVGResult } from 'three/examples/jsm/loaders/SVGLoader';
 import { ThreeUtil, ThreeVector } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
-import { AbstractMaterialComponent } from '../material.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { TranslationComponent } from '../translation/translation.component';
 
@@ -57,7 +56,7 @@ export class SvgComponent extends AbstractObject3dComponent {
   /**
    * Input  of svg component
    */
-  @Input() private url: string = null;
+  @Input() public url: string = null;
 
   /**
    * Input  of svg component
@@ -65,57 +64,57 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Notice - case insensitive.
    * 
    */
-  @Input() private path: string = null;
+  @Input() public path: string = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private curveSegments: number = null;
+  @Input() public curveSegments: number = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private depth: number = null;
+  @Input() public depth: number = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private steps: number = null;
+  @Input() public steps: number = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private bevelEnabled: boolean = null;
+  @Input() public bevelEnabled: boolean = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private bevelThickness: number = null;
+  @Input() public bevelThickness: number = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private bevelSize: number = null;
+  @Input() public bevelSize: number = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private bevelOffset: number = null;
+  @Input() public bevelOffset: number = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private bevelSegments: number = null;
+  @Input() public bevelSegments: number = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private closed: boolean = null;
+  @Input() public closed: boolean = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private isCCW: boolean = null;
+  @Input() public isCCW: boolean = null;
 
   /**
    * Input  of svg component
@@ -123,22 +122,17 @@ export class SvgComponent extends AbstractObject3dComponent {
   /**
    * Input  of svg component
    */
-  @Input() private noHoles: boolean = null;
+  @Input() public noHoles: boolean = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private material: AbstractMaterialComponent = null;
+  @Input() public translation: TranslationComponent = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private translation: TranslationComponent = null;
-
-  /**
-   * Input  of svg component
-   */
-  @Input() private text: string = null;
+  @Input() public text: string = null;
 
   /**
    * Input  of svg component
@@ -146,7 +140,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Notice - case insensitive.
    * 
    */
-  @Input() private textAlign: string = null;
+  @Input() public textAlign: string = null;
 
   /**
    * Input  of svg component
@@ -154,79 +148,27 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Notice - case insensitive.
    * 
    */
-  @Input() private align: string = null;
+  @Input() public align: string = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private center: boolean = false;
+  @Input() public center: boolean = false;
 
   /**
    * Input  of svg component
    */
-  @Input() private computeVertexNormals: boolean = false;
+  @Input() public computeVertexNormals: boolean = false;
 
   /**
    * Input  of svg component
    */
-  @Input() private font: string = null;
+  @Input() public font: string = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private size: number = null;
-
-  /**
-   * Input  of svg component
-   *
-   * Notice - case insensitive.
-   * 
-   */
-  @Input() private weight: string = null;
-
-  /**
-   * Input  of svg component
-   */
-  /**
-   * Input  of svg component
-   */
-  @Input() private color: string | number = null;
-
-  /**
-   * Input  of svg component
-   */
-  /**
-   * Input  of svg component
-   */
-  @Input() private opacity: number = null;
-
-  /**
-   * Input  of svg component
-   */
-  @Input() private transparent: boolean = null;
-
-  /**
-   * Input  of svg component
-   */
-  @Input() private wireframe: boolean = null;
-
-  /**
-   * Input  of svg component
-   */
-  @Input() private shininess: number = null;
-
-  /**
-   * Input  of svg component
-   */
-  @Input() private stroke: number = null;
-
-  /**
-   * Input  of svg component
-   */
-  /**
-   * Input  of svg component
-   */
-  @Input() private extrudePath: ThreeVector[] = null;
+  @Input() public size: number = null;
 
   /**
    * Input  of svg component
@@ -234,12 +176,51 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Notice - case insensitive.
    * 
    */
-  @Input() private extrudePathType: string = null;
+  @Input() public weight: string = null;
 
   /**
    * Input  of svg component
    */
-  @Input() private curvePath: ThreeVector[] = null;
+  /**
+   * Input  of svg component
+   */
+  @Input() public color: string | number = null;
+
+  /**
+   * Input  of svg component
+   */
+  /**
+   * Input  of svg component
+   */
+  @Input() public opacity: number = null;
+
+  /**
+   * Input  of svg component
+   */
+  @Input() public transparent: boolean = null;
+
+  /**
+   * Input  of svg component
+   */
+  @Input() public wireframe: boolean = null;
+
+  /**
+   * Input  of svg component
+   */
+  @Input() public shininess: number = null;
+
+  /**
+   * Input  of svg component
+   */
+  @Input() public stroke: number = null;
+
+  /**
+   * Input  of svg component
+   */
+  /**
+   * Input  of svg component
+   */
+  @Input() public extrudePath: ThreeVector[] = null;
 
   /**
    * Input  of svg component
@@ -247,7 +228,12 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Notice - case insensitive.
    * 
    */
-  @Input() private curvePathType: string = null;
+  @Input() public extrudePathType: string = null;
+
+  /**
+   * Input  of svg component
+   */
+  @Input() public curvePath: ThreeVector[] = null;
 
   /**
    * Input  of svg component
@@ -255,12 +241,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Notice - case insensitive.
    * 
    */
-  @Input() private curveType: string = null;
-
-  /**
-   * Input  of svg component
-   */
-  @Input() private tension: number = null;
+  @Input() public curvePathType: string = null;
 
   /**
    * Input  of svg component
@@ -268,7 +249,20 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Notice - case insensitive.
    * 
    */
-  @Input() private uVGenerator: string = null;
+  @Input() public curveType: string = null;
+
+  /**
+   * Input  of svg component
+   */
+  @Input() public tension: number = null;
+
+  /**
+   * Input  of svg component
+   *
+   * Notice - case insensitive.
+   * 
+   */
+  @Input() public uVGenerator: string = null;
 
   /**
    * Content children of svg component
@@ -582,7 +576,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Gets materials
    * @returns materials
    */
-  private getMaterials(): THREE.Material[] {
+  private getSvgMaterials(): THREE.Material[] {
     const materials: THREE.Material[] = [];
     if (this.materialList !== null && this.materialList.length > 0) {
       this.materialList.forEach((material) => {
@@ -600,6 +594,7 @@ export class SvgComponent extends AbstractObject3dComponent {
               side: THREE.DoubleSide,
             })
           );
+          break;
         case 'points':
           materials.push(
             new THREE.PointsMaterial({
@@ -648,7 +643,7 @@ export class SvgComponent extends AbstractObject3dComponent {
           case 'material':
             const mainMaterials = this.meshMaterials;
             if (this.material !== null && this.material.visible) {
-              const materialClone = this.material.getMaterial();
+              const materialClone = ThreeUtil.getMaterialOne(this.material);
               mainMaterials.forEach((material) => {
                 if (material !== materialClone) {
                   material.copy(materialClone);
@@ -723,7 +718,7 @@ export class SvgComponent extends AbstractObject3dComponent {
         this.meshScales = [];
         this.meshTranslations = [];
         this.meshMaterials = [];
-        const materials = this.getMaterials();
+        const materials = this.getSvgMaterials();
         const materialList: THREE.Material[] = [];
         for (let i = 0; i < result.length; i++) {
           materialList.push(materials[i % materials.length]);
@@ -842,11 +837,12 @@ export class SvgComponent extends AbstractObject3dComponent {
             }
           });
           const sumShapes: THREE.Shape[] = shape.shape;
-          sumShapes.push.apply(shape.shape, holeShape);
+          sumShapes.push.apply(shape.shape, holeShape as any);
           if (ThreeUtil.isNotNull(this.stroke)) {
-            const style = SVGLoader.getStrokeStyle(this.stroke, this.getColor(0x006699).getStyle());
+            const AnySVGLoader : any = SVGLoader;
+            const style = AnySVGLoader.getStrokeStyle(this.stroke, this.getColor(0x006699).getStyle());
             sumShapes.forEach((shape) => {
-              const outlineGeometry = SVGLoader.pointsToStroke(shape.getPoints(), style);
+              const outlineGeometry = AnySVGLoader.pointsToStroke(shape.getPoints(), style);
               geometries.push({
                 geometry: this.applyTextAlign(outlineGeometry, boundingSphere),
                 style: null,

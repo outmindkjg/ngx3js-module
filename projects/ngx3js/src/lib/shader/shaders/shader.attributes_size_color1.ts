@@ -28,6 +28,6 @@ export const AttributeSizeColor1 = {
   uniforms: {
     amplitude : { value : 1.0 },
     color : { value : new Color(0xffffff) },
-    pointTexture : { value : null }
+    pointTexture : { value : null } as any
 },
 };

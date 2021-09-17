@@ -29,6 +29,6 @@ export const CustomAttributes = {
   uniforms: {
     amplitude : { value : 1.0 },
     color : { value : new THREE.Color(0xff2200) },
-    colorTexture : { value : null }
+    colorTexture : { value : null } as any
   },
 };

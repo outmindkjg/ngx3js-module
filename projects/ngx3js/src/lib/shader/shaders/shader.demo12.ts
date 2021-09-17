@@ -78,7 +78,7 @@ export const ShaderDemo12 = {
   }
   `,
   uniforms : {
-    map: { value: null },
+    map: { value : null } as any,
     cameraPos: { value: new THREE.Vector3() }
   }
 };

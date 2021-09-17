@@ -22,7 +22,7 @@ export class ListenerComponent extends AbstractObject3dComponent implements OnIn
   /**
    * Set the volume.
    */
-  @Input() private volume: number = 1;
+  @Input() public volume: number = 1;
 
   /**
    * Creates an instance of listener component.

@@ -1,7 +1,6 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { Lut } from 'three/examples/jsm/math/Lut';
-import { FlakesTexture } from 'three/examples/jsm/textures/FlakesTexture';
 import { ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractTextureComponent } from '../texture.abstract';
@@ -20,37 +19,37 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
   /**
    * Input  of texture component
    */
-  @Input() private refer: any = null;
+  @Input() public refer: any = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private image: string = null;
+  @Input() public image: string = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private cubeImage: string[] = null;
+  @Input() public cubeImage: string[] = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private storageName: string = null;
+  @Input() public storageName: string = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private storageOption: any = null;
+  @Input() public storageOption: any = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private program: CanvasFunctionType | string = null;
+  @Input() public program: CanvasFunctionType | string = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private canvas: HTMLVideoElement | HTMLImageElement | HTMLCanvasElement | ImageBitmap | string = null;
+  @Input() public canvas: HTMLVideoElement | HTMLImageElement | HTMLCanvasElement | ImageBitmap | string = null;
 
   /**
    * Input  of texture component
@@ -58,37 +57,37 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
   /**
    * Input  of texture component
    */
-  @Input() private perlin: any = null;
+  @Input() public perlin: any = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private sunX: number = null;
+  @Input() public sunX: number = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private sunY: number = null;
+  @Input() public sunY: number = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private sunZ: number = null;
+  @Input() public sunZ: number = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private useDropImage: boolean = false;
+  @Input() public useDropImage: boolean = false;
 
   /**
    * Input  of texture component
    */
-  @Input() private color: number | string = null;
+  @Input() public color: number | string = null;
 
   /**
    * Input  of texture component
    */
-  @Input() private add: number | string = null;
+  @Input() public add: number | string = null;
 
   /**
    * Gets image
@@ -128,7 +127,6 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
       switch (canvas) {
         case 'flakes':
         case 'flakestexture':
-          return new FlakesTexture();
         case 'lutrainbow':
         case 'lutcooltowarm':
         case 'lutblackbody':
@@ -206,7 +204,7 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
   private setUseDropImage(useDropImage: boolean) {
     if (useDropImage) {
       if (this._dragOverHandler === null) {
-        this._dragOverHandler = (event) => {
+        this._dragOverHandler = (event: any) => {
           event.preventDefault();
           event.dataTransfer.dropEffect = 'copy';
         };
@@ -225,7 +223,7 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
         document.addEventListener('dragleave', this._dragLeaveHandler);
       }
       if (this._dropHandler === null) {
-        this._dropHandler = (event) => {
+        this._dropHandler = (event: any) => {
           event.preventDefault();
           if (this.texture !== null) {
             const texture = this.texture;
@@ -233,7 +231,7 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
             reader.addEventListener('load', (event) => {
               texture.image.src = event.target.result;
               texture.needsUpdate = true;
-              this.applyMaterial();
+              this.synkMaterial(texture);
             });
             reader.readAsDataURL(event.dataTransfer.files[0]);
           }
@@ -264,22 +262,22 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
   /**
    * Drag over handler of texture component
    */
-  private _dragOverHandler = null;
+  private _dragOverHandler: any = null;
 
   /**
    * Drag enter handler of texture component
    */
-  private _dragEnterHandler = null;
+  private _dragEnterHandler: any = null;
 
   /**
    * Drag leave handler of texture component
    */
-  private _dragLeaveHandler = null;
+  private _dragLeaveHandler: any = null;
 
   /**
    * Drop handler of texture component
    */
-  private _dropHandler = null;
+  private _dropHandler: any = null;
 
   /**
    * Applys changes
@@ -322,7 +320,7 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
           this.setReferTexture(this.refer.getTexture());
           this.subscribeRefer(
             'referTexture',
-            this.refer.textureSubscribe().subscribe((texture) => {
+            this.refer.textureSubscribe().subscribe((texture: any) => {
               if (texture instanceof THREE.Texture) {
                 this.setReferTexture(texture);
               } else {
@@ -334,12 +332,26 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
           this.texture = new THREE.Texture();
         }
       } else if (ThreeUtil.isNotNull(this.storageName)) {
-        if (this.storageName.endsWith('.hdr') || this.storageName.endsWith('.exr')) {
-          this.texture = new THREE.DataTexture(new Uint8Array(6), 1, 1);
-        } else if (this.storageName.endsWith('.pvr') || this.storageName.endsWith('.ktx') || this.storageName.endsWith('.ktx2') || this.storageName.endsWith('.dds')) {
-          this.texture = new THREE.CompressedTexture(null, 1, 1);
-        } else {
-          this.texture = new THREE.Texture();
+        const cubeType = ThreeUtil.getTypeSafe(this.cubeType, 'none');
+        switch (cubeType.toLowerCase()) {
+          case 'angular':
+          case 'equirect':
+          case 'equirectangular':
+          case 'fromequirectangular':
+          case 'cube':
+          case 'cubemap':
+          case 'fromcubemap':
+            this.texture = new THREE.CubeTexture([]);
+            break;
+          default:
+            if (this.storageName.endsWith('.hdr') || this.storageName.endsWith('.exr')) {
+              this.texture = new THREE.DataTexture(new Uint8Array(6), 1, 1);
+            } else if (this.storageName.endsWith('.pvr') || this.storageName.endsWith('.ktx') || this.storageName.endsWith('.ktx2') || this.storageName.endsWith('.dds')) {
+              this.texture = new THREE.CompressedTexture(null, 1, 1);
+            } else {
+              this.texture = new THREE.Texture();
+            }
+            break;
         }
         this.localStorageService.getTexture(
           this.storageName,
@@ -368,7 +380,7 @@ export class TextureComponent extends AbstractTextureComponent implements OnInit
           this.texture.mapping = ThreeUtil.getMappingSafe(this.mapping);
         }
       }
-      this.applyMaterial();
+      this.synkMaterial(this.texture);
       super.setObject(this.texture);
     }
     return this.texture as T;

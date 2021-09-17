@@ -25,67 +25,81 @@ export class ViewerComponent extends AbstractSubscribeComponent implements OnIni
    * Notice - case insensitive.
    * 
    */
-  @Input() private type: string = 'shadowmap';
+  @Input() public type: string = 'shadowmap';
 
   /**
    * Input  of viewer component
    */
-  @Input() private light: LightComponent | MeshComponent | THREE.Light = null;
+  @Input() public light: LightComponent | MeshComponent | THREE.Light = null;
 
   /**
    * Input  of viewer component
    */
-  @Input() private mesh: MeshComponent | HelperComponent | THREE.Mesh = null;
+  @Input() public mesh: MeshComponent | HelperComponent | THREE.Mesh = null;
 
   /**
    * Input  of viewer component
    */
-  @Input() private plane: MeshComponent | HelperComponent | THREE.Object3D | THREE.Plane = null;
+  @Input() public plane: MeshComponent | HelperComponent | THREE.Object3D | THREE.Plane = null;
 
   /**
    * Input  of viewer component
    */
-  @Input() private x: number | string = 0;
+  @Input() public x: number | string = 0;
 
   /**
    * Input  of viewer component
    */
-  @Input() private y: number | string = 0;
+  @Input() public y: number | string = 0;
+
+  /**
+   * The size of width 
+   * - type number
+   *  fixed size
+   * - type string with include % 
+   *  relative size from renderer size 
+   *  for example 
+   *    in case renderer = 1024 
+   *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
+   */
+  @Input() public width: number | string = '100%';
+
+  /**
+   * The size of height 
+   * - type number
+   *  fixed size
+   * - type string with include % 
+   *  relative size from renderer size 
+   *  for example 
+   *    in case renderer = 1024 
+   *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
+   */
+  @Input() public height: number | string = '100%';
 
   /**
    * Input  of viewer component
    */
-  @Input() private width: number | string = '100%';
+  @Input() public lightMapRes: number = 1024;
 
   /**
    * Input  of viewer component
    */
-  @Input() private height: number | string = '100%';
+  @Input() public blendWindow: number = 200;
 
   /**
    * Input  of viewer component
    */
-  @Input() private lightMapRes: number = 1024;
+  @Input() public blurEdges: boolean = true;
 
   /**
    * Input  of viewer component
    */
-  @Input() private blendWindow: number = 200;
+  @Input() public debugLightmap: boolean = false;
 
   /**
    * Input  of viewer component
    */
-  @Input() private blurEdges: boolean = true;
-
-  /**
-   * Input  of viewer component
-   */
-  @Input() private debugLightmap: boolean = false;
-
-  /**
-   * Input  of viewer component
-   */
-  @Input() private canvasOptions: any = null;
+  @Input() public canvasOptions: any = null;
 
   /**
    * Gets light
@@ -338,6 +352,22 @@ export class ViewerComponent extends AbstractSubscribeComponent implements OnIni
   }
 
   /**
+   * Sets parent
+   * @param parent
+   * @returns true if parent
+   */
+  public setParent(parent: any): boolean {
+    if (super.setParent(parent)) {
+      if (this.viewer !== null && this.viewer instanceof THREE.Mesh) {
+        this.parent.add(this.viewer);
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
    * Viewer  of viewer component
    */
   private viewer: any = null;
@@ -345,21 +375,30 @@ export class ViewerComponent extends AbstractSubscribeComponent implements OnIni
   /**
    * Renderer width of viewer component
    */
-  private rendererWidth: number = 0;
+  private rendererWidth: number = 1024;
 
   /**
    * Renderer height of viewer component
    */
-  private rendererHeight: number = 0;
+  private rendererHeight: number = 1024;
+
+  /**
+   * Renderer height of viewer component
+   */
+  private pixelRatio: number = 1;
 
   /**
    * Sets viewer size
    * @param width
    * @param height
    */
-  public setViewerSize(width: number, height: number) {
+  public setRendererSize(width: number, height: number, pixelRatio : number) {
     this.rendererWidth = width;
     this.rendererHeight = height;
+    this.pixelRatio = pixelRatio;
+    if (this.viewer !== null) {
+      this.resizeViewer();
+    }
   }
 
   /**
@@ -449,7 +488,8 @@ export class ViewerComponent extends AbstractSubscribeComponent implements OnIni
           break;
         case 'shadowmesh':
         case 'shadow':
-          const shadowMesh = new ShadowMesh(this.getMesh());
+          const ShadowMeshAlias : any = ShadowMesh;
+          const shadowMesh = new ShadowMeshAlias(this.getMesh());
           this._refLight = this.getLight();
           this._refPlane = this.getPlane();
           this._refLightPosition = new THREE.Vector4(0, 0, 0, 0.001);
@@ -461,7 +501,7 @@ export class ViewerComponent extends AbstractSubscribeComponent implements OnIni
         case 'progressivelightmap':
         case 'progressivelight':
           const progressiveSurfacemap = new ProgressiveLightMap(this.getRenderer() as THREE.WebGLRenderer, ThreeUtil.getTypeSafe(this.lightMapRes, 1024));
-          const lightmapObjects = [];
+          const lightmapObjects : any = [];
           progressiveSurfacemap.addObjectsToLightMap(lightmapObjects);
           this.viewer = progressiveSurfacemap;
           break;

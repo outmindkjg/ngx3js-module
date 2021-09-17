@@ -34,8 +34,8 @@ export const ShaderDemo13 = {
     gNormal = vec4( normalize( vNormal ), 0.0 );
   }
   `,
-  uniforms : {
-    tDiffuse: { value: null },
-    repeat: { value: new THREE.Vector2( 5, 0.5 ) }
-  }
+  uniforms: {
+    tDiffuse: { value: null } as any,
+    repeat: { value: new THREE.Vector2(5, 0.5) },
+  },
 };

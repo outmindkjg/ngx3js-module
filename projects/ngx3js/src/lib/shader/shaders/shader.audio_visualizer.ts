@@ -18,6 +18,6 @@ export const AudioVisualizer = {
   }
   `,
   uniforms: {
-    tAudioData: { value: null },
+    tAudioData: { value : null } as any,
   },
 };

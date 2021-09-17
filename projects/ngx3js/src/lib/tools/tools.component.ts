@@ -51,7 +51,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
    * @see THREE.RGBM16Encoding - RGBM16Encoding ,
    * @see THREE.RGBDEncoding - RGBDEncoding ,
    */
-   @Input() private encoding: string = null;
+   @Input() public encoding: string = null;
 
   /**
    * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically
@@ -76,22 +76,22 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
    * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
    * @see THREE.RGBAFormat - RGBAFormat, RGBA 
    */
-   @Input() private format: string = null;
+   @Input() public format: string = null;
 
   /**
    * Input  of tools component
    */
-  @Input() private background: string | number | AbstractTextureComponent = null;
+  @Input() public background: string | number | AbstractTextureComponent = null;
 
   /**
    * Input  of tools component
    */
-  @Input() private storageName: string = null;
+  @Input() public storageName: string = null;
 
   /**
    * Input  of tools component
    */
-  @Input() private storageOption: any = null;
+  @Input() public storageOption: any = null;
 
   /**
    * Gets size

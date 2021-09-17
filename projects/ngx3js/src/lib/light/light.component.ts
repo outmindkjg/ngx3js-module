@@ -224,58 +224,58 @@ export class LightComponent extends AbstractObject3dComponent implements OnInit 
 	/**
 	 * Numeric value of the RGB component of the color. Default is 0xffffff.
 	 */
-	@Input() private color: ThreeColor = null;
+	@Input() public color: ThreeColor = null;
 
 	/**
 	 * hexadecimal color of the sky. Default is 0xffffff.
 	 */
-	@Input() private skyColor: ThreeColor = null;
+	@Input() public skyColor: ThreeColor = null;
 
 	/**
 	 * hexadecimal color of the ground. Default is 0xffffff.
 	 */
-	@Input() private groundColor: ThreeColor = null;
+	@Input() public groundColor: ThreeColor = null;
 
 	/**
 	 * Numeric value of the light's strength/intensity. Default is 1.
 	 */
-	@Input() private intensity: number = null;
+	@Input() public intensity: number = null;
 
 	/**
 	 * Maximum range of the light. Default is 0 (no limit).
 	 */
-	@Input() private distance: number = null;
+	@Input() public distance: number = null;
 
 	/**
 	 * Maximum angle of light dispersion from its direction whose upper bound is Math.PI/2(360).
 	 */
-	@Input() private angle: number = null;
+	@Input() public angle: number = null;
 
 	/**
 	 * Percent of the spotlight cone that is attenuated due to penumbra. Takes values between zero and 1. Default is zero.
 	 */
-	@Input() private penumbra: number = null;
+	@Input() public penumbra: number = null;
 
 	/**
 	 * The amount the light dims along the distance of the light. Default is 1.
 	 */
-	@Input() private decay: number = null;
+	@Input() public decay: number = null;
 
 	/**
 	 * width of the light. Default is 10.
 	 */
-	@Input() private width: number = null;
+	@Input() public width: number = null;
 
 	/**
 	 * height of the light. Default is 10.
 	 */
-	@Input() private height: number = null;
+	@Input() public height: number = null;
 
 	/**
 	 * Shadow map bias, how much to add or subtract from the normalized depth when deciding whether a surface is in shadow.<br />
 	 * The default is 0. Very tiny adjustments here (in the order of 0.0001) may help reduce artefacts in shadows
 	 */
-	@Input() private shadowBias: number = null;
+	@Input() public shadowBias: number = null;
 
 	/**
 	 * Setting this to values greater than 1 will blur the edges of the shadow.<br />
@@ -285,110 +285,110 @@ export class LightComponent extends AbstractObject3dComponent implements OnInit 
 	 * no effect and it is recommended to increase softness by decreasing [page:.mapSize mapSize] instead.<br /><br />
 	 * Note that this has no effect if the [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer BasicShadowMap].
 	 */
-	@Input() private shadowRadius: number = null;
+	@Input() public shadowRadius: number = null;
 
 	/**
 	 * Used to focus the shadow camera. The camera's field of view is set as a percentage of the spotlight's field-of-view. Range is [0, 1]. Default is 1.0.
 	 */
-	@Input() private shadowFocus: number = null;
+	@Input() public shadowFocus: number = null;
 
 	/**
 	 * Input  of light component
 	 */
-	@Input() private shadowCameraNear: number = null;
+	@Input() public shadowCameraNear: number = null;
 
 	/**
 	 * A [Page:Vector2] defining the width and height of the shadow map.
 	 */
-	@Input() private shadowMapSize: number = null;
+	@Input() public shadowMapSize: number = null;
 
 	/**
 	 * A [Page:Vector2] defining the width and height of the shadow map.
 	 * vector2.width
 	 */
-	@Input() private shadowMapSizeWidth: number = null;
+	@Input() public shadowMapSizeWidth: number = null;
 
 	/**
 	 * A [Page:Vector2] defining the width and height of the shadow map.
 	 * vector2.height
 	 */
-	@Input() private shadowMapSizeHeight: number = null;
+	@Input() public shadowMapSizeHeight: number = null;
 
 	/**
 	 * Camera frustum far plane. Default is *2000*.<br /><br />
 	 * Must be greater than the current value of [page:.near near] plane.
 	 */
-	@Input() private shadowCameraFar: number = null;
+	@Input() public shadowCameraFar: number = null;
 
 	/**
 	 * Camera frustum vertical field of view, from bottom to top of view, in degrees. Default is *50*.
 	 */
-	@Input() private shadowCameraFov: number = null;
+	@Input() public shadowCameraFov: number = null;
 
 	/**
 	 * Camera frustum left plane.
 	 */
-	@Input() private shadowCameraLeft: number = null;
+	@Input() public shadowCameraLeft: number = null;
 
 	/**
 	 * Camera frustum right plane.
 	 */
-	@Input() private shadowCameraRight: number = null;
+	@Input() public shadowCameraRight: number = null;
 
 	/**
 	 * Camera frustum top plane.
 	 */
-	@Input() private shadowCameraTop: number = null;
+	@Input() public shadowCameraTop: number = null;
 
 	/**
 	 * Camera frustum bottom plane.
 	 */
-	@Input() private shadowCameraBottom: number = null;
+	@Input() public shadowCameraBottom: number = null;
 
 	/**
 	 * Gets or sets the zoom factor of the camera. Default is *1*.
 	 */
-	@Input() private shadowCameraZoom: number = null;
+	@Input() public shadowCameraZoom: number = null;
 
 	/**
 	 * An instance of [page:SphericalHarmonics3].
 	 */
-	@Input() private sh: string = null;
+	@Input() public sh: string = null;
 
 	/**
 	 * Input  of light component
 	 */
-	@Input() private texture: AbstractTextureComponent = null;
+	@Input() public texture: AbstractTextureComponent = null;
 
 	/**
 	 * Input  of light component
 	 */
-	@Input() private target: any = null;
+	@Input() public target: any = null;
 
 	/**
 	 * Input  of light component
 	 */
-	@Input() private targetX: number = null;
+	@Input() public targetX: number = null;
 
 	/**
 	 * Input  of light component
 	 */
-	@Input() private targetY: number = null;
+	@Input() public targetY: number = null;
 
 	/**
 	 * Input  of light component
 	 */
-	@Input() private targetZ: number = null;
+	@Input() public targetZ: number = null;
 
 	/**
 	 * Input  of light component
 	 */
-	@Input() private renderer: any = null;
+	@Input() public renderer: any = null;
 
 	/**
 	 * Input  of light component
 	 */
-	@Input() private renderTarget: any = null;
+	@Input() public renderTarget: any = null;
 
 	/**
 	 * Gets shadow map size width
@@ -604,8 +604,9 @@ export class LightComponent extends AbstractObject3dComponent implements OnInit 
 		];
 		const light = this.light;
 		if (ThreeUtil.isNotNull(light)) {
+			const anyLight : any = light;
 			attributesKeys.forEach((key) => {
-				if (ThreeUtil.isNotNull(this[key])) {
+				if (ThreeUtil.isNotNull(this.selfAny[key])) {
 					switch (key) {
 						case 'shadowBias':
 						case 'shadowFocus':
@@ -620,7 +621,7 @@ export class LightComponent extends AbstractObject3dComponent implements OnInit 
 									case 'shadowFocus':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['focus'],
+											value: anyLight['shadow']['focus'],
 										});
 										break;
 								}
@@ -646,8 +647,8 @@ export class LightComponent extends AbstractObject3dComponent implements OnInit 
 							}
 							break;
 						case 'angle':
-							if (ThreeUtil.isNotNull(light[key])) {
-								tagAttributes.attributes.push({ name: key, value: ThreeUtil.getRadian2AngleSafe(light[key]) });
+							if (ThreeUtil.isNotNull(anyLight[key])) {
+								tagAttributes.attributes.push({ name: key, value: ThreeUtil.getRadian2AngleSafe(anyLight[key]) });
 							}
 							break;
 						case 'shadowCameraNear':
@@ -659,61 +660,62 @@ export class LightComponent extends AbstractObject3dComponent implements OnInit 
 						case 'shadowCameraBottom':
 						case 'shadowCameraZoom':
 							if (ThreeUtil.isNotNull(light['shadow']) && ThreeUtil.isNotNull(light['shadow']['camera'])) {
+								const anyLightShadowCamera : any = light['shadow']['camera'];
 								switch (key) {
 									case 'shadowCameraNear':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['camera']['near'],
+											value: anyLightShadowCamera['near'],
 										});
 										break;
 									case 'shadowCameraFar':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['camera']['far'],
+											value: anyLightShadowCamera['far'],
 										});
 										break;
 									case 'shadowCameraFov':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['camera']['fov'],
+											value: anyLightShadowCamera['fov'],
 										});
 										break;
 									case 'shadowCameraLeft':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['camera']['left'],
+											value: anyLightShadowCamera['left'],
 										});
 										break;
 									case 'shadowCameraRight':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['camera']['right'],
+											value: anyLightShadowCamera['right'],
 										});
 										break;
 									case 'shadowCameraTop':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['camera']['top'],
+											value: anyLightShadowCamera['top'],
 										});
 										break;
 									case 'shadowCameraBottom':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['camera']['bottom'],
+											value: anyLightShadowCamera['bottom'],
 										});
 										break;
 									case 'shadowCameraZoom':
 										tagAttributes.attributes.push({
 											name: key,
-											value: light['shadow']['camera']['zoom'],
+											value: anyLightShadowCamera['zoom'],
 										});
 										break;
 								}
 							}
 							break;
 						default:
-							if (ThreeUtil.isNotNull(light[key])) {
-								tagAttributes.attributes.push({ name: key, value: light[key] });
+							if (ThreeUtil.isNotNull(anyLight[key])) {
+								tagAttributes.attributes.push({ name: key, value: anyLight[key] });
 							}
 							break;
 					}
@@ -822,7 +824,10 @@ export class LightComponent extends AbstractObject3dComponent implements OnInit 
 							renderTarget = this.renderTarget;
 						}
 						if (renderer instanceof THREE.WebGLRenderer && renderTarget instanceof THREE.WebGLCubeRenderTarget) {
-							basemesh.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, renderTarget));
+							try {
+								basemesh.copy(LightProbeGenerator.fromCubeRenderTarget(renderer, renderTarget));
+							} catch(ex) {}
+							// todo
 						}
 					}
 					break;
@@ -851,11 +856,12 @@ export class LightComponent extends AbstractObject3dComponent implements OnInit 
 					basemesh = new THREE.AmbientLight(ThreeUtil.getColorSafe(this.color, 0x0c0c0c), ThreeUtil.getTypeSafe(this.intensity, 1));
 					break;
 			}
-			if (ThreeUtil.isNotNull(basemesh['target'])) {
+			const anyBasemesh : any = basemesh;
+			if (ThreeUtil.isNotNull(anyBasemesh['target'])) {
 				if (ThreeUtil.isNotNull(this.target)) {
-					basemesh['target'] = this.getTarget();
+					anyBasemesh['target'] = this.getTarget();
 				} else if (ThreeUtil.isNotNull(this.targetX) && ThreeUtil.isNotNull(this.targetY) && ThreeUtil.isNotNull(this.targetZ)) {
-					basemesh['target'].position.copy(ThreeUtil.getVector3Safe(this.targetX, this.targetY, this.targetZ));
+					anyBasemesh['target'].position.copy(ThreeUtil.getVector3Safe(this.targetX, this.targetY, this.targetZ));
 				}
 			}
 			this.light = basemesh;

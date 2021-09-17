@@ -193,14 +193,14 @@ export class GeometryUtils {
         return geometry;
     }
     tolerance = Math.max(tolerance, Number.EPSILON);
-    const hashToIndex = {};
+    const hashToIndex : any = {};
     const indices = geometry.getIndex();
     const positions = geometry.getAttribute('position');
     const vertexCount = indices ? indices.count : positions.count;
     let nextIndex = 0;
     const attributeNames = Object.keys(geometry.attributes);
-    const attrArrays = {};
-    const morphAttrsArrays = {};
+    const attrArrays : any = {};
+    const morphAttrsArrays : any = {};
     const newIndices = [];
     const getters = ['getX', 'getY', 'getZ', 'getW'];
     for (let i = 0, l = attributeNames.length; i < l; i++) {
@@ -222,7 +222,7 @@ export class GeometryUtils {
       let hash = '';
       for (let j = 0, l = attributeNames.length; j < l; j++) {
         const name = attributeNames[j];
-        const attribute = geometry.getAttribute(name);
+        const attribute : any = geometry.getAttribute(name);
         const itemSize = attribute.itemSize;
         for (let k = 0; k < itemSize; k++) {
           hash += `${~~(attribute[getters[k]](index) * shiftMultiplier)},`;
@@ -233,8 +233,8 @@ export class GeometryUtils {
       } else {
         for (var j = 0, l = attributeNames.length; j < l; j++) {
           const name = attributeNames[j];
-          const attribute = geometry.getAttribute(name);
-          const morphAttr = geometry.morphAttributes[name];
+          const attribute : any = geometry.getAttribute(name);
+          const morphAttr : any = geometry.morphAttributes[name];
           const itemSize = attribute.itemSize;
           const newarray = attrArrays[name];
           const newMorphArrays = morphAttrsArrays[name];
@@ -253,9 +253,9 @@ export class GeometryUtils {
         nextIndex++;
       }
     }
-    const result = geometry.clone();
+    const result : any = geometry.clone();
     result.type = geometry.type;
-    result['parameters'] = geometry['parameters'];
+    result['parameters'] = (geometry as any)['parameters'];
     for (let i = 0, l = attributeNames.length; i < l; i++) {
       const name = attributeNames[i];
       const oldAttribute = geometry.getAttribute(name);

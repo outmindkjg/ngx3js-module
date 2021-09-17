@@ -2,6 +2,7 @@ import { Component, ContentChildren, forwardRef, Input, OnChanges, OnDestroy, On
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 import { NodeMaterialLoader } from 'three/examples/jsm/loaders/NodeMaterialLoader';
+
 import * as NODES from 'three/examples/jsm/nodes/Nodes';
 import { ReflectorOptions } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
@@ -23,7 +24,7 @@ import { AbstractTextureComponent } from '../texture.abstract';
  *
  * The following properties and methods are inherited by all other material types
  * (although they may have different defaults).
- * 
+ *
  * @see THREE.Material
  */
 @Component({
@@ -67,32 +68,32 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	/**
 	 * The storage name to restore.
 	 */
-	@Input() private storageName: string = null;
+	@Input() public storageName: string = null;
 
 	/**
 	 * The storage options when restore to be used.
 	 */
-	@Input() private storageOption: any = null;
+	@Input() public storageOption: any = null;
 
 	/**
 	 * Color of the material, by default set to white (0xffffff).
 	 */
-	@Input() protected color: ThreeColor = null;
+	@Input() public color: ThreeColor = null;
 
 	/**
 	 * Color of the material multiply (1)
 	 */
-	@Input() protected colorMultiply: number = null;
+	@Input() public colorMultiply: number = null;
 
 	/**
 	 * Color of the material, by default set to white (0xffffff).
 	 */
-	@Input() protected diffuseColor: ThreeColor = null;
+	@Input() public diffuseColor: ThreeColor = null;
 
 	/**
 	 * Color of the material multiply (1)
 	 */
-	@Input() protected diffuseColorMultiply: number = null;
+	@Input() public diffuseColorMultiply: number = null;
 
 	/**
 	 * The shader type
@@ -100,7 +101,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private shader: string | ShaderType = null;
+	@Input() public shader: string | ShaderType = null;
 
 	/**
 	 * An object of the form:
@@ -115,84 +116,84 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * as defined in the GLSL code. Note that uniforms are refreshed on every frame,
 	 * so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 */
-	@Input() private uniforms: ThreeUniforms = null;
+	@Input() public uniforms: ThreeUniforms = null;
 
 	/**
 	 * Vertex shader GLSL code.  This is the actual code for the shader. In the example above,
 	 * the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed
 	 * as a string directly or loaded via AJAX instead.
 	 */
-	@Input() private vertexShader: string = null;
+	@Input() public vertexShader: string = null;
 
 	/**
 	 * Fragment shader GLSL code.  This is the actual code for the shader. In the example above,
 	 * the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed
 	 * as a string directly or loaded via AJAX instead.
 	 */
-	@Input() private fragmentShader: string = null;
+	@Input() public fragmentShader: string = null;
 
 	/**
 	 * Defines whether this material uses lighting; true to pass uniform data related to lighting to this shader. Default is false.
 	 */
-	@Input() private lights: boolean = null;
+	@Input() public lights: boolean = null;
 
 	/**
 	 * Defines whether this material supports clipping; true to let the renderer pass the clippingPlanes uniform. Default is false.
 	 */
-	@Input() private clipping: boolean = null;
+	@Input() public clipping: boolean = null;
 
 	/**
 	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
-	@Input() private wireframe: boolean = null;
+	@Input() public wireframe: boolean = null;
 
 	/**
 	 * Specular color of the material. Default is a [page:Color] set to *0x111111* (very dark grey).
 	 * This defines how shiny the material is and the color of its shine.
 	 */
-	@Input() private specular: ThreeColor = null;
+	@Input() public specular: ThreeColor = null;
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private specularMultiply: number = null;
+	@Input() public specularMultiply: number = null;
 
 	/**
 	 * How shiny the [page:.specular] highlight is; a higher value gives a sharper highlight. Default is *30*.
 	 */
-	@Input() private shininess: number = null;
+	@Input() public shininess: number = null;
 
 	/**
 	 * Intensity of the baked light. Default is 1.
 	 */
-	@Input() private lightMapIntensity: number = null;
+	@Input() public lightMapIntensity: number = null;
 
 	/**
 	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 */
-	@Input() private aoMapIntensity: number = null;
+	@Input() public aoMapIntensity: number = null;
 
 	/**
 	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
 	 * Default is black.
 	 *
 	 */
-	@Input() private emissive: ThreeColor = null;
+	@Input() public emissive: ThreeColor = null;
 
 	/**
 	 * Emissive (light) color multiply of the material, essentially a solid color unaffected by other lighting.
 	 */
-	@Input() private emissiveMultiply: number = null;
+	@Input() public emissiveMultiply: number = null;
 
 	/**
 	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 */
-	@Input() private emissiveIntensity: number = null;
+	@Input() public emissiveIntensity: number = null;
 
 	/**
 	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 */
-	@Input() private bumpScale: number = null;
+	@Input() public bumpScale: number = null;
 
 	/**
 	 * The type of normal map.<br /><br />
@@ -201,38 +202,38 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private normalMapType: string = null;
+	@Input() public normalMapType: string = null;
 
 	/**
 	 * How much the normal map affects the material. Typical ranges are 0-1.
 	 * Default is a [page:Vector2] set to (1,1) *1*.
 	 */
-	@Input() private normalScale: number = null;
+	@Input() public normalScale: number = null;
 
 	/**
 	 * How much the normal map affects the material. Typical ranges are 0-1.
 	 * Default is a [page:Vector2] set to (1,1).
 	 */
-	@Input() private normalScaleX: number = null;
+	@Input() public normalScaleX: number = null;
 
 	/**
 	 * How much the normal map affects the material. Typical ranges are 0-1.
 	 * Default is a [page:Vector2] set to (1,1).
 	 */
-	@Input() private normalScaleY: number = null;
+	@Input() public normalScaleY: number = null;
 
 	/**
 	 * How much the displacement map affects the mesh (where black is no displacement,
 	 * and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * Default is 1.
 	 */
-	@Input() private displacementScale: number = null;
+	@Input() public displacementScale: number = null;
 
 	/**
 	 * The offset of the displacement map's values on the mesh's vertices.
 	 * Without a displacement map set, this value is not applied. Default is 0.
 	 */
-	@Input() private displacementBias: number = null;
+	@Input() public displacementBias: number = null;
 
 	/**
 	 * How to combine the result of the surface's color with the environment map, if any.<br /><br />
@@ -241,25 +242,25 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * blend between the two colors.
 	 *
 	 * Notice - case insensitive.
-	 * 
+	 *
 	 * @see THREE.MultiplyOperation - MultiplyOperation, Multiply
 	 * @see THREE.MixOperation - MixOperation, Mix
 	 * @see THREE.AddOperation - AddOperation, Add
 	 */
-	@Input() private combine: string = null;
+	@Input() public combine: string = null;
 
 	/**
 	 * How much the environment map affects the surface; also see [page:.combine].
 	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 */
-	@Input() private reflectivity: number = null;
+	@Input() public reflectivity: number = null;
 
 	/**
 	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
 	 * It is used with environment mapping modes [page:Textures THREE.CubeRefractionMapping] and [page:Textures THREE.EquirectangularRefractionMapping].
 	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 */
-	@Input() private refractionRatio: number = null;
+	@Input() public refractionRatio: number = null;
 
 	/**
 	 * Controls wireframe thickness. Default is 1.<br /><br />
@@ -267,7 +268,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * with the [page:WebGLRenderer WebGL] renderer on most platforms linewidth will
 	 * always be 1 regardless of the set value.
 	 */
-	@Input() private wireframeLinewidth: number = null;
+	@Input() public wireframeLinewidth: number = null;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.<br /><br />
@@ -277,7 +278,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private wireframeLinecap: string = null;
+	@Input() public wireframeLinecap: string = null;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.<br /><br />
@@ -285,20 +286,20 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
 	 *
 	 * Notice - case insensitive.
-	 * 
+	 *
 	 */
-	@Input() private wireframeLinejoin: string = null;
+	@Input() public wireframeLinejoin: string = null;
 
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
 	 */
-	@Input() private morphTargets: boolean = null;
+	@Input() public morphTargets: boolean = null;
 
 	/**
 	 * Defines whether the material uses morphNormals. Set as true to pass morphNormal
 	 * attributes from the geometry to the shader. Default is *false*.
 	 */
-	@Input() private morphNormals: boolean = null;
+	@Input() public morphNormals: boolean = null;
 
 	/**
 	 * Controls line thickness. Default is *1*.<br /><br />
@@ -306,7 +307,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * with the [page:WebGLRenderer WebGL] renderer on most platforms linewidth will
 	 * always be 1 regardless of the set value.
 	 */
-	@Input() private linewidth: number = null;
+	@Input() public linewidth: number = null;
 
 	/**
 	 * Define appearance of line ends. Possible values are 'butt', 'round' and 'square'.
@@ -317,7 +318,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private linecap: string = null;
+	@Input() public linecap: string = null;
 
 	/**
 	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'. <br /><br />
@@ -327,89 +328,89 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private linejoin: string = null;
+	@Input() public linejoin: string = null;
 
 	/**
 	 * The scale of the dashed part of a line. Default is *1*.
 	 */
-	@Input() private scale: number = null;
+	@Input() public scale: number = null;
 
 	/**
 	 * The size of the dash. This is both the gap with the stroke. Default is *3*.
 	 */
-	@Input() private dashSize: number = null;
+	@Input() public dashSize: number = null;
 
 	/**
 	 * The size of the gap. Default is *1*.
 	 */
-	@Input() private gapSize: number = null;
+	@Input() public gapSize: number = null;
 
 	/**
 	 * Encoding for depth packing. Default is [page:Textures BasicDepthPacking].
 	 */
-	@Input() private depthPacking: string = null;
+	@Input() public depthPacking: string = null;
 
 	/**
 	 * Encoding for depth packing. Default is [page:Textures BasicDepthPacking].
 	 */
-	@Input() private farDistance: number = null;
+	@Input() public farDistance: number = null;
 
 	/**
 	 * The near value of the point light's internal shadow camera.
 	 */
-	@Input() private nearDistance: number = null;
+	@Input() public nearDistance: number = null;
 
 	/**
 	 * The position of the point light in world space.
 	 */
-	@Input() private referencePositionX: number = null;
+	@Input() public referencePositionX: number = null;
 
 	/**
 	 * The position of the point light in world space.
 	 */
-	@Input() private referencePositionY: number = null;
+	@Input() public referencePositionY: number = null;
 
 	/**
 	 * The position of the point light in world space.
 	 */
-	@Input() private referencePositionZ: number = null;
+	@Input() public referencePositionZ: number = null;
 
 	/**
 	 * Represents the intensity of the clear coat layer, from *0.0* to *1.0*. Use clear coat related properties to enable multilayer
 	 * materials that have a thin translucent layer over the base layer. Default is *0.0*.
 	 */
-	@Input() private clearcoat: number = null;
+	@Input() public clearcoat: number = null;
 
 	/**
 	 * Roughness of the clear coat layer, from *0.0* to *1.0*. Default is *0.0*.
 	 */
-	@Input() private clearcoatRoughness: number = null;
+	@Input() public clearcoatRoughness: number = null;
 
 	/**
 	 * How much [page:.clearcoatNormalMap] affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
 	 */
-	@Input() private clearcoatNormalScale: number = null;
+	@Input() public clearcoatNormalScale: number = null;
 
 	/**
 	 * How much [page:.clearcoatNormalMap] affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
 	 */
-	@Input() private clearcoatNormalScaleX: number = null;
+	@Input() public clearcoatNormalScaleX: number = null;
 
 	/**
 	 * How much [page:.clearcoatNormalMap] affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
 	 */
-	@Input() private clearcoatNormalScaleY: number = null;
+	@Input() public clearcoatNormalScaleY: number = null;
 
 	/**
 	 * If a color is assigned to this property, the material will use a special sheen BRDF intended for rendering cloth materials such as velvet.
 	 * The sheen color provides the ability to create two-tone specular materials. *null* by default.
 	 */
-	@Input() private sheen: ThreeColor = null;
+	@Input() public sheen: ThreeColor = null;
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private sheenMultiply: number = null;
+	@Input() public sheenMultiply: number = null;
 
 	/**
 	 * Degree of transmission (or optical transparency), from *0.0* to *1.0*. Default is *0.0*.<br />
@@ -417,25 +418,25 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * The transmission property can be used to model these materials.<br />
 	 * When transmission is non-zero, [page:Material.opacity opacity] should be set to *1*.
 	 */
-	@Input() private transmission: number = null;
+	@Input() public transmission: number = null;
 
 	/**
 	 * How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse. Default is 1.0.
 	 * If roughnessMap is also provided, both values are multiplied.
 	 */
-	@Input() private roughness: number = null;
+	@Input() public roughness: number = null;
 
 	/**
 	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing
 	 * (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is
 	 * also provided, both values are multiplied.
 	 */
-	@Input() private metalness: number = null;
+	@Input() public metalness: number = null;
 
 	/**
 	 * Scales the effect of the environment map by multiplying its color.
 	 */
-	@Input() private envMapIntensity: number = null;
+	@Input() public envMapIntensity: number = null;
 
 	/**
 	 * Defines whether precomputed vertex tangents, which must be provided in a vec4 "tangent" attribute,
@@ -443,48 +444,48 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * more accurate normal map details in some cases, such as with mirrored UVs. Default is false.
 	 *
 	 */
-	@Input() private vertexTangents: boolean = null;
+	@Input() public vertexTangents: boolean = null;
 
 	/**
 	 * The rotation of the sprite in radians. Default is 0.
 	 */
-	@Input() private rotation: number = null;
+	@Input() public rotation: number = null;
 
 	/**
 	 * Sets the size of the points. Default is 1.0.<br/>
 	 * Will be capped if it exceeds the hardware dependent parameter [link:https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getParameter gl.ALIASED_POINT_SIZE_RANGE].
 	 */
-	@Input() private size: number = null;
+	@Input() public size: number = null;
 
 	/**
 	 * Specify whether points' size is attenuated by the camera depth. (Perspective camera only.) Default is true.
 	 */
-	@Input() private sizeAttenuation: boolean = null;
+	@Input() public sizeAttenuation: boolean = null;
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private dashed: boolean = null;
+	@Input() public dashed: boolean = null;
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private dashScale: number = null;
+	@Input() public dashScale: number = null;
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private dashOffset: number = null;
+	@Input() public dashOffset: number = null;
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private resolutionX: number = null;
+	@Input() public resolutionX: number = null;
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private resolutionY: number = null;
+	@Input() public resolutionY: number = null;
 
 	/**
 	 * Defines the GLSL version of custom shader code. Only relevant for WebGL 2 in order to define whether to specify
@@ -493,7 +494,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private glslVersion: string = null;
+	@Input() public glslVersion: string = null;
 
 	/**
 	 * 	An object with the following properties:
@@ -509,27 +510,27 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private extensions: string = null;
+	@Input() public extensions: string = null;
 
 	/**
 	 * The environment map. Default is null.
 	 */
-	@Input() private envMap: ThreeTexture = null;
+	@Input() public envMap: ThreeTexture = null;
 
 	/**
 	 * The color map. Default is  null.
 	 */
-	@Input() private map: ThreeTexture = null;
+	@Input() public map: ThreeTexture = null;
 
 	/**
 	 * The matcap map. Default is null.
 	 */
-	@Input() private matcap: ThreeTexture = null;
+	@Input() public matcap: ThreeTexture = null;
 
 	/**
 	 * Specular map used by the material. Default is null.
 	 */
-	@Input() private specularMap: ThreeTexture = null;
+	@Input() public specularMap: ThreeTexture = null;
 
 	/**
 	 * The alpha map is a grayscale texture that controls the opacity across the surface
@@ -540,14 +541,14 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and
 	 * luminance/alpha textures will also still work as expected.
 	 */
-	@Input() private alphaMap: ThreeTexture = null;
+	@Input() public alphaMap: ThreeTexture = null;
 
 	/**
 	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
 	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will
 	 * be ignored.
 	 */
-	@Input() private bumpMap: ThreeTexture = null;
+	@Input() public bumpMap: ThreeTexture = null;
 
 	/**
 	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change
@@ -555,7 +556,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * In case the material has a normal map authored using the left handed convention, the y component of normalScale
 	 * should be negated to compensate for the different handedness.
 	 */
-	@Input() private normalMap: ThreeTexture = null;
+	@Input() public normalMap: ThreeTexture = null;
 
 	/**
 	 * The displacement map affects the position of the mesh's vertices. Unlike other maps
@@ -564,44 +565,44 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * an image where the value of each pixel (white being the highest) is mapped against,
 	 * and repositions, the vertices of the mesh.
 	 */
-	@Input() private displacementMap: ThreeTexture = null;
+	@Input() public displacementMap: ThreeTexture = null;
 
 	/**
 	 * Can be used to enable independent normals for the clear coat layer. Default is *null*.
 	 */
-	@Input() private clearcoatNormalMap: ThreeTexture = null;
+	@Input() public clearcoatNormalMap: ThreeTexture = null;
 
 	/**
 	 * The green channel of this texture is used to alter the roughness of the material.
 	 */
-	@Input() private roughnessMap: ThreeTexture = null;
+	@Input() public roughnessMap: ThreeTexture = null;
 
 	/**
 	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 */
-	@Input() private lightMap: ThreeTexture = null;
+	@Input() public lightMap: ThreeTexture = null;
 
 	/**
 	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
 	 * The aoMap requires a second set of UVs.
 	 */
-	@Input() private aoMap: ThreeTexture = null;
+	@Input() public aoMap: ThreeTexture = null;
 
 	/**
 	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
 	 * The aoMap requires a second set of UVs.
 	 */
-	@Input() private diffuseMap: ThreeTexture = null;
+	@Input() public diffuseMap: ThreeTexture = null;
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private environmentType: string = 'mirror';
+	@Input() public environmentType: string = 'mirror';
 
 	/**
 	 * Input  of material component
 	 */
-	@Input() private reflector: any = null;
+	@Input() public reflector: any = null;
 
 	/**
 	 * Content children of material component
@@ -1213,9 +1214,10 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 		} = ThreeUtil.getTypeSafe(this.uniforms, def);
 		const resultUniforms = ShaderUtils.getUniforms(this.shader);
 		Object.entries(uniforms).forEach(([key, value]) => {
-			if (ThreeUtil.isNotNull(value) && ThreeUtil.isNotNull(value['type']) && ThreeUtil.isNotNull(value['value'])) {
-				const valueType: string = value['type'];
-				const valueValue: any = value['value'];
+			const anyValue : any = value;
+			if (ThreeUtil.isNotNull(value) && ThreeUtil.isNotNull(anyValue['type']) && ThreeUtil.isNotNull(anyValue['value'])) {
+				const valueType: string = anyValue['type'];
+				const valueValue: any = anyValue['value'];
 				switch (valueType.toLowerCase()) {
 					case 'projectionmatrixinverse':
 					case 'projectionmatrix':
@@ -1231,7 +1233,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							if (ThreeUtil.isNotNull(valueValue.getSubscribe)) {
 								this.subscribeRefer(
 									'unforms_' + key,
-									valueValue.getSubscribe().subscribe((e) => {
+									valueValue.getSubscribe().subscribe((e : any) => {
 										resultUniforms[key].value = ThreeUtil.getMatrix4Safe(e, valueType);
 									})
 								);
@@ -1252,7 +1254,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							if (ThreeUtil.isNotNull(valueValue.sizeSubscribe)) {
 								this.subscribeRefer(
 									'unforms_' + key,
-									valueValue.sizeSubscribe().subscribe((e) => {
+									valueValue.sizeSubscribe().subscribe((e : any) => {
 										resultUniforms[key].value = e;
 									})
 								);
@@ -1285,7 +1287,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 					case 'video':
 					case 'videotexture':
 						resultUniforms[key] = {
-							value: AbstractTextureComponent.getTextureImageOption(valueValue, value['options'], valueType.toLowerCase()),
+							value: AbstractTextureComponent.getTextureImageOption(valueValue, anyValue['options'], valueType.toLowerCase()),
 						};
 						break;
 					case 'imagelist':
@@ -1294,7 +1296,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 					case 'texturearray':
 						const textureList: THREE.Texture[] = [];
 						const texturePathList: string[] = [];
-						const textureOption = value['options'];
+						const textureOption = anyValue['options'];
 						if (typeof valueValue === 'string') {
 							valueValue.split(',').forEach((path) => {
 								if (path !== '' && path.length > 3) {
@@ -1302,7 +1304,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 								}
 							});
 						} else if (ThreeUtil.isNotNull(valueValue.forEach)) {
-							valueValue.forEach((path) => {
+							valueValue.forEach((path : any) => {
 								if (path !== '' && path.length > 3) {
 									texturePathList.push(path);
 								}
@@ -1333,14 +1335,44 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 						break;
 				}
 			} else if (ThreeUtil.isNotNull(value) && value['value'] !== undefined) {
-				resultUniforms[key] = value;
+				if (value['value'] instanceof AbstractTextureComponent) {
+					resultUniforms[key] = {
+						value: value['value'].getTexture(),
+					};
+				} else {
+					resultUniforms[key] = value;
+				}
 			} else {
-				resultUniforms[key] = { value: value };
+				if (value instanceof AbstractTextureComponent) {
+					resultUniforms[key] = { value: value.getTexture() };
+				} else {
+					resultUniforms[key] = { value: value };
+				}
 			}
 		});
+		if (ThreeUtil.isNotNull(this.textureList)) {
+			this.textureList.forEach((texture) => {
+				const textureType = (texture.type + '..').split('.');
+				switch (textureType[0].toLowerCase()) {
+					case 'uniforms':
+						const uniformKey = textureType[1];
+						const uniformSeqn = parseInt(textureType[2] || '-1');
+						if (uniformSeqn > -1) {
+							if (!Array.isArray(resultUniforms[uniformKey].value)) {
+								resultUniforms[uniformKey].value = [];
+							}
+							resultUniforms[uniformKey].value[uniformSeqn] = texture.getTexture();
+						} else {
+							resultUniforms[uniformKey].value = texture.getTexture();
+						}
+						break;
+				}
+			});
+		}
 		Object.entries(resultUniforms).forEach(([key, value]) => {
 			uniforms[key] = value;
 		});
+
 		if (this.debug) {
 			this.consoleLog('material-uniforms', resultUniforms);
 		}
@@ -1475,22 +1507,40 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * @param texture
 	 * @param textureType
 	 */
-	private synkTexture(texture: any, textureType: string) {
+	private synkTexture(
+		texture: any,
+		textureType: string,
+		textureList: {
+			type: string;
+			component: AbstractTextureComponent;
+		}[]
+	) {
 		if (ThreeUtil.isNotNull(texture) && this.material !== null) {
-			const foundTexture = ThreeUtil.getTexture(texture, textureType, false);
-			if (foundTexture !== null) {
-				if (this.material instanceof NODES.NodeMaterial) {
-					if (this.material[textureType] instanceof NODES.TextureNode) {
-						this.material[textureType].value = foundTexture;
-					} else {
-						this.material[textureType] = this.getTextureNode(foundTexture);
+			if (texture instanceof AbstractTextureComponent) {
+				textureList.push({
+					type: textureType,
+					component: texture,
+				});
+			} else {
+				const foundTexture = ThreeUtil.getTexture(texture, textureType, false);
+				if (ThreeUtil.isNotNull(foundTexture)) {
+					const anyMaterial : any = this.material;
+					if (this.material instanceof NODES.NodeMaterial) {
+						if (anyMaterial[textureType] instanceof NODES.TextureNode) {
+							anyMaterial[textureType].value = foundTexture;
+						} else {
+							anyMaterial[textureType] = this.getTextureNode(foundTexture);
+						}
+					} else if (anyMaterial[textureType] !== undefined) {
+						anyMaterial[textureType] = foundTexture;
 					}
-				} else if (this.material[textureType] !== undefined) {
-					this.material[textureType] = foundTexture;
 				}
 			}
 		}
 	}
+
+	private _cachedTextureList: AbstractTextureComponent[] = [];
+	private _cachedUniformTextureList: AbstractTextureComponent[] = [];
 
 	/**
 	 * Apply changes to material
@@ -1502,10 +1552,6 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 		if (this.material !== null) {
 			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getMaterial();
-				return;
-			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['name', 'refgeometry', 'align'], this.MATERIAL_ATTR)) {
-				this.needUpdate = true;
 				return;
 			}
 			if (
@@ -1622,448 +1668,536 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 			if (ThreeUtil.isIndexOf(changes, ['resolutionx', 'resolutiony'])) {
 				changes = ThreeUtil.pushUniq(changes, ['resolution']);
 			}
-
+			const anyMaterial : any = this.material;
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
+					case 'uniforms':
+						const newUniformTextureList: {
+							type: string;
+							component: AbstractTextureComponent;
+						}[] = [];
+						if (ThreeUtil.isNotNull(this.uniforms)) {
+							const uniforms = this.uniforms;
+							Object.entries(uniforms).forEach(([key, value]) => {
+								const anyValue : any = value;
+								if (ThreeUtil.isNotNull(value) && ThreeUtil.isNotNull(anyValue['type']) && ThreeUtil.isNotNull(anyValue['value'])) {
+									const valueType: string = anyValue['type'];
+									const valueValue: any = anyValue['value'];
+									switch (valueType.toLowerCase()) {
+										case 'image':
+										case 'texture2d':
+										case 'texture3d':
+										case 'texture':
+										case 'datatexture2d':
+										case 'datatexture3d':
+										case 'datatexture':
+										case 'video':
+										case 'videotexture':
+											if (valueValue instanceof AbstractTextureComponent) {
+												newUniformTextureList.push({
+													type: 'uniforms.' + key,
+													component: valueValue,
+												});
+											}
+											break;
+										case 'imagelist':
+										case 'texturelist':
+										case 'imagearray':
+										case 'texturearray':
+											// todo
+											break;
+										default:
+											break;
+									}
+								} else if (ThreeUtil.isNotNull(value) && value['value'] !== undefined) {
+									if (value['value'] instanceof AbstractTextureComponent) {
+										newUniformTextureList.push({
+											type: 'uniforms.' + key,
+											component: value['value'],
+										});
+									}
+								} else {
+									if (value instanceof AbstractTextureComponent) {
+										newUniformTextureList.push({
+											type: 'uniforms.' + key,
+											component: value['value'],
+										});
+									}
+								}
+							});
+						}
+						const cachedUniformTextureList: AbstractTextureComponent[] = [];
+						newUniformTextureList.forEach((texture) => {
+							cachedUniformTextureList.push(texture.component);
+						});
+						this._cachedUniformTextureList.forEach((texture) => {
+							if (cachedUniformTextureList.indexOf(texture) === -1) {
+								texture.unsetMaterial(this.selfAny);
+							}
+						});
+						newUniformTextureList.forEach((material) => {
+							if (this._cachedUniformTextureList.indexOf(material.component) === -1) {
+								material.component.setMaterial(this.selfAny, material.type);
+							}
+						});
+						this._cachedUniformTextureList = cachedUniformTextureList;
+						break;
 					case 'texture':
-						this.synkTexture(this.envMap, 'envMap');
-						this.synkTexture(this.matcap, 'matcap');
-						this.synkTexture(this.map, 'map');
-						this.synkTexture(this.specularMap, 'specularMap');
-						this.synkTexture(this.alphaMap, 'alphaMap');
-						this.synkTexture(this.bumpMap, 'bumpMap');
-						this.synkTexture(this.normalMap, 'normalMap');
-						this.synkTexture(this.aoMap, 'aoMap');
-						this.synkTexture(this.displacementMap, 'displacementMap');
-						this.unSubscribeReferList('textureList');
+						const newTextureList: {
+							type: string;
+							component: AbstractTextureComponent;
+						}[] = [];
+						this.synkTexture(this.envMap, 'envMap', newTextureList);
+						this.synkTexture(this.matcap, 'matcap', newTextureList);
+						this.synkTexture(this.map, 'map', newTextureList);
+						this.synkTexture(this.specularMap, 'specularMap', newTextureList);
+						this.synkTexture(this.alphaMap, 'alphaMap', newTextureList);
+						this.synkTexture(this.bumpMap, 'bumpMap', newTextureList);
+						this.synkTexture(this.normalMap, 'normalMap', newTextureList);
+						this.synkTexture(this.aoMap, 'aoMap', newTextureList);
+						this.synkTexture(this.displacementMap, 'displacementMap', newTextureList);
 						if (ThreeUtil.isNotNull(this.textureList)) {
 							this.textureList.forEach((texture) => {
-								texture.setMaterial(this.material);
+								newTextureList.push({
+									type: 'auto',
+									component: texture,
+								});
 							});
-							this.subscribeListQuery(this.textureList, 'textureList', 'texture');
 						}
+						const cachedTextureList: AbstractTextureComponent[] = [];
+						newTextureList.forEach((texture) => {
+							cachedTextureList.push(texture.component);
+						});
+						this._cachedTextureList.forEach((texture) => {
+							if (cachedTextureList.indexOf(texture) === -1) {
+								texture.unsetMaterial(this.selfAny);
+							}
+						});
+						newTextureList.forEach((material) => {
+							if (this._cachedTextureList.indexOf(material.component) === -1) {
+								material.component.setMaterial(this.selfAny, material.type);
+							}
+						});
+						this._cachedTextureList = cachedTextureList;
 						break;
 					case 'color':
-						if (ThreeUtil.isNotNull(this.color) && this.material['color'] !== undefined) {
-							if (this.material['color'] instanceof NODES.ColorNode) {
-								this.material['color'].value = this.getColor();
+						if (ThreeUtil.isNotNull(this.color) && anyMaterial['color'] !== undefined) {
+							if (anyMaterial['color'] instanceof NODES.ColorNode) {
+								anyMaterial['color'].value = this.getColor();
 							} else {
-								this.material['color'] = this.getColor();
+								anyMaterial['color'] = this.getColor();
 							}
 						}
 						break;
 					case 'lights':
-						if (ThreeUtil.isNotNull(this.lights) && this.material['lights'] !== undefined) {
-							if (this.material['lights'] instanceof NODES.BoolNode) {
-								this.material['lights'].value = ThreeUtil.getTypeSafe(this.lights, true);
+						if (ThreeUtil.isNotNull(this.lights) && anyMaterial['lights'] !== undefined) {
+							if (anyMaterial['lights'] instanceof NODES.BoolNode) {
+								anyMaterial['lights'].value = ThreeUtil.getTypeSafe(this.lights, true);
 							} else {
-								this.material['lights'] = ThreeUtil.getTypeSafe(this.lights, true);
+								anyMaterial['lights'] = ThreeUtil.getTypeSafe(this.lights, true);
 							}
 						}
 						break;
 					case 'clipping':
-						if (ThreeUtil.isNotNull(this.clipping) && this.material['clipping'] !== undefined) {
-							if (this.material['clipping'] instanceof NODES.BoolNode) {
-								this.material['clipping'].value = ThreeUtil.getTypeSafe(this.clipping, true);
+						if (ThreeUtil.isNotNull(this.clipping) && anyMaterial['clipping'] !== undefined) {
+							if (anyMaterial['clipping'] instanceof NODES.BoolNode) {
+								anyMaterial['clipping'].value = ThreeUtil.getTypeSafe(this.clipping, true);
 							} else {
-								this.material['clipping'] = ThreeUtil.getTypeSafe(this.clipping, true);
+								anyMaterial['clipping'] = ThreeUtil.getTypeSafe(this.clipping, true);
 							}
 						}
 						break;
 					case 'wireframe':
-						if (ThreeUtil.isNotNull(this.wireframe) && this.material['wireframe'] !== undefined) {
-							if (this.material['wireframe'] instanceof NODES.BoolNode) {
-								this.material['wireframe'].value = ThreeUtil.getTypeSafe(this.wireframe, false);
+						if (ThreeUtil.isNotNull(this.wireframe) && anyMaterial['wireframe'] !== undefined) {
+							if (anyMaterial['wireframe'] instanceof NODES.BoolNode) {
+								anyMaterial['wireframe'].value = ThreeUtil.getTypeSafe(this.wireframe, false);
 							} else {
-								this.material['wireframe'] = ThreeUtil.getTypeSafe(this.wireframe, false);
+								anyMaterial['wireframe'] = ThreeUtil.getTypeSafe(this.wireframe, false);
 							}
 						}
 						break;
 					case 'specular':
-						if (ThreeUtil.isNotNull(this.specular) && this.material['specular'] !== undefined) {
-							if (this.material['specular'] instanceof NODES.ColorNode) {
-								this.material['specular'].value = this.getSpecular();
+						if (ThreeUtil.isNotNull(this.specular) && anyMaterial['specular'] !== undefined) {
+							if (anyMaterial['specular'] instanceof NODES.ColorNode) {
+								anyMaterial['specular'].value = this.getSpecular();
 							} else {
-								this.material['specular'] = this.getSpecular();
+								anyMaterial['specular'] = this.getSpecular();
 							}
 						}
 						break;
 					case 'shininess':
-						if (ThreeUtil.isNotNull(this.shininess) && this.material['shininess'] !== undefined) {
-							if (this.material['shininess'] instanceof NODES.FloatNode) {
-								this.material['shininess'].value = ThreeUtil.getTypeSafe(this.shininess, 1);
+						if (ThreeUtil.isNotNull(this.shininess) && anyMaterial['shininess'] !== undefined) {
+							if (anyMaterial['shininess'] instanceof NODES.FloatNode) {
+								anyMaterial['shininess'].value = ThreeUtil.getTypeSafe(this.shininess, 1);
 							} else {
-								this.material['shininess'] = ThreeUtil.getTypeSafe(this.shininess, 1);
+								anyMaterial['shininess'] = ThreeUtil.getTypeSafe(this.shininess, 1);
 							}
 						}
 						break;
 					case 'lightmapintensity':
-						if (ThreeUtil.isNotNull(this.lightMapIntensity) && this.material['lightMapIntensity'] !== undefined) {
-							if (this.material['lightMapIntensity'] instanceof NODES.FloatNode) {
-								this.material['lightMapIntensity'].value = ThreeUtil.getTypeSafe(this.lightMapIntensity, 1);
+						if (ThreeUtil.isNotNull(this.lightMapIntensity) && anyMaterial['lightMapIntensity'] !== undefined) {
+							if (anyMaterial['lightMapIntensity'] instanceof NODES.FloatNode) {
+								anyMaterial['lightMapIntensity'].value = ThreeUtil.getTypeSafe(this.lightMapIntensity, 1);
 							} else {
-								this.material['lightMapIntensity'] = ThreeUtil.getTypeSafe(this.lightMapIntensity, 1);
+								anyMaterial['lightMapIntensity'] = ThreeUtil.getTypeSafe(this.lightMapIntensity, 1);
 							}
 						}
 						break;
 					case 'aomapintensity':
-						if (ThreeUtil.isNotNull(this.aoMapIntensity) && this.material['aoMapIntensity'] !== undefined) {
-							if (this.material['aoMapIntensity'] instanceof NODES.FloatNode) {
-								this.material['aoMapIntensity'].value = ThreeUtil.getTypeSafe(this.aoMapIntensity, 1);
+						if (ThreeUtil.isNotNull(this.aoMapIntensity) && anyMaterial['aoMapIntensity'] !== undefined) {
+							if (anyMaterial['aoMapIntensity'] instanceof NODES.FloatNode) {
+								anyMaterial['aoMapIntensity'].value = ThreeUtil.getTypeSafe(this.aoMapIntensity, 1);
 							} else {
-								this.material['aoMapIntensity'] = ThreeUtil.getTypeSafe(this.aoMapIntensity, 1);
+								anyMaterial['aoMapIntensity'] = ThreeUtil.getTypeSafe(this.aoMapIntensity, 1);
 							}
 						}
-
 						break;
 					case 'emissive':
-						if (ThreeUtil.isNotNull(this.emissive) && this.material['emissive'] !== undefined) {
-							if (this.material['emissive'] instanceof NODES.ColorNode) {
-								this.material['emissive'].value = this.getEmissive();
+						if (ThreeUtil.isNotNull(this.emissive) && anyMaterial['emissive'] !== undefined) {
+							if (anyMaterial['emissive'] instanceof NODES.ColorNode) {
+								anyMaterial['emissive'].value = this.getEmissive();
 							} else {
-								this.material['emissive'] = this.getEmissive();
+								anyMaterial['emissive'] = this.getEmissive();
 							}
 						}
 						break;
 					case 'emissiveintensity':
-						if (ThreeUtil.isNotNull(this.emissiveIntensity) && this.material['emissiveIntensity'] !== undefined) {
-							if (this.material['emissiveIntensity'] instanceof NODES.FloatNode) {
-								this.material['emissiveIntensity'].value = ThreeUtil.getTypeSafe(this.emissiveIntensity, 1);
+						if (ThreeUtil.isNotNull(this.emissiveIntensity) && anyMaterial['emissiveIntensity'] !== undefined) {
+							if (anyMaterial['emissiveIntensity'] instanceof NODES.FloatNode) {
+								anyMaterial['emissiveIntensity'].value = ThreeUtil.getTypeSafe(this.emissiveIntensity, 1);
 							} else {
-								this.material['emissiveIntensity'] = ThreeUtil.getTypeSafe(this.emissiveIntensity, 1);
+								anyMaterial['emissiveIntensity'] = ThreeUtil.getTypeSafe(this.emissiveIntensity, 1);
 							}
 						}
 						break;
 					case 'bumpscale':
-						if (ThreeUtil.isNotNull(this.bumpScale) && this.material['bumpScale'] !== undefined) {
-							if (this.material['bumpScale'] instanceof NODES.FloatNode) {
-								this.material['bumpScale'].value = ThreeUtil.getTypeSafe(this.bumpScale, 1);
+						if (ThreeUtil.isNotNull(this.bumpScale) && anyMaterial['bumpScale'] !== undefined) {
+							if (anyMaterial['bumpScale'] instanceof NODES.FloatNode) {
+								anyMaterial['bumpScale'].value = ThreeUtil.getTypeSafe(this.bumpScale, 1);
 							} else {
-								this.material['bumpScale'] = ThreeUtil.getTypeSafe(this.bumpScale, 1);
+								anyMaterial['bumpScale'] = ThreeUtil.getTypeSafe(this.bumpScale, 1);
 							}
 						}
 						break;
 					case 'normalmaptype':
-						if (ThreeUtil.isNotNull(this.normalMapType) && this.material['normalMapType'] !== undefined) {
-							this.material['normalMapType'] = this.getNormalMapType();
+						if (ThreeUtil.isNotNull(this.normalMapType) && anyMaterial['normalMapType'] !== undefined) {
+							anyMaterial['normalMapType'] = this.getNormalMapType();
 						}
 						break;
 					case 'normalscale':
-						if (ThreeUtil.isNotNull(this.roughness) && this.material['normalScale'] !== undefined) {
-							if (this.material['normalScale'] instanceof NODES.Vector2Node) {
-								this.material['normalScale'].value = this.getNormalScale();
+						if (ThreeUtil.isNotNull(this.roughness) && anyMaterial['normalScale'] !== undefined) {
+							if (anyMaterial['normalScale'] instanceof NODES.Vector2Node) {
+								anyMaterial['normalScale'].value = this.getNormalScale();
 							} else {
-								this.material['normalScale'] = this.getNormalScale();
+								anyMaterial['normalScale'] = this.getNormalScale();
 							}
 						}
 						break;
 					case 'displacementscale':
-						if (ThreeUtil.isNotNull(this.displacementScale) && this.material['displacementScale'] !== undefined) {
-							if (this.material['displacementScale'] instanceof NODES.FloatNode) {
-								this.material['displacementScale'].value = ThreeUtil.getTypeSafe(this.displacementScale, 1);
+						if (ThreeUtil.isNotNull(this.displacementScale) && anyMaterial['displacementScale'] !== undefined) {
+							if (anyMaterial['displacementScale'] instanceof NODES.FloatNode) {
+								anyMaterial['displacementScale'].value = ThreeUtil.getTypeSafe(this.displacementScale, 1);
 							} else {
-								this.material['displacementScale'] = ThreeUtil.getTypeSafe(this.displacementScale, 1);
+								anyMaterial['displacementScale'] = ThreeUtil.getTypeSafe(this.displacementScale, 1);
 							}
 						}
 						break;
 					case 'displacementbias':
-						if (ThreeUtil.isNotNull(this.displacementBias) && this.material['displacementBias'] !== undefined) {
-							if (this.material['displacementBias'] instanceof NODES.FloatNode) {
-								this.material['displacementBias'].value = ThreeUtil.getTypeSafe(this.displacementBias, 1);
+						if (ThreeUtil.isNotNull(this.displacementBias) && anyMaterial['displacementBias'] !== undefined) {
+							if (anyMaterial['displacementBias'] instanceof NODES.FloatNode) {
+								anyMaterial['displacementBias'].value = ThreeUtil.getTypeSafe(this.displacementBias, 1);
 							} else {
-								this.material['displacementBias'] = ThreeUtil.getTypeSafe(this.displacementBias, 1);
+								anyMaterial['displacementBias'] = ThreeUtil.getTypeSafe(this.displacementBias, 1);
 							}
 						}
 						break;
 					case 'combine':
-						if (ThreeUtil.isNotNull(this.combine) && this.material['combine'] !== undefined) {
-							this.material['combine'] = this.getCombine();
+						if (ThreeUtil.isNotNull(this.combine) && anyMaterial['combine'] !== undefined) {
+							anyMaterial['combine'] = this.getCombine();
 						}
 						break;
 					case 'reflectivity':
-						if (ThreeUtil.isNotNull(this.reflectivity) && this.material['reflectivity'] !== undefined) {
-							if (this.material['reflectivity'] instanceof NODES.FloatNode) {
-								this.material['reflectivity'].value = ThreeUtil.getTypeSafe(this.reflectivity, 1);
+						if (ThreeUtil.isNotNull(this.reflectivity) && anyMaterial['reflectivity'] !== undefined) {
+							if (anyMaterial['reflectivity'] instanceof NODES.FloatNode) {
+								anyMaterial['reflectivity'].value = ThreeUtil.getTypeSafe(this.reflectivity, 1);
 							} else {
-								this.material['reflectivity'] = ThreeUtil.getTypeSafe(this.reflectivity, 1);
+								anyMaterial['reflectivity'] = ThreeUtil.getTypeSafe(this.reflectivity, 1);
 							}
 						}
 						break;
 					case 'refractionratio':
-						if (ThreeUtil.isNotNull(this.refractionRatio) && this.material['refractionRatio'] !== undefined) {
-							if (this.material['refractionRatio'] instanceof NODES.FloatNode) {
-								this.material['refractionRatio'].value = ThreeUtil.getTypeSafe(this.refractionRatio, 1);
+						if (ThreeUtil.isNotNull(this.refractionRatio) && anyMaterial['refractionRatio'] !== undefined) {
+							if (anyMaterial['refractionRatio'] instanceof NODES.FloatNode) {
+								anyMaterial['refractionRatio'].value = ThreeUtil.getTypeSafe(this.refractionRatio, 1);
 							} else {
-								this.material['refractionRatio'] = ThreeUtil.getTypeSafe(this.refractionRatio, 1);
+								anyMaterial['refractionRatio'] = ThreeUtil.getTypeSafe(this.refractionRatio, 1);
 							}
 						}
 						break;
 					case 'wireframelinewidth':
-						if (ThreeUtil.isNotNull(this.wireframeLinewidth) && this.material['wireframeLinewidth'] !== undefined) {
-							if (this.material['wireframeLinewidth'] instanceof NODES.FloatNode) {
-								this.material['wireframeLinewidth'].value = ThreeUtil.getTypeSafe(this.wireframeLinewidth, 1);
+						if (ThreeUtil.isNotNull(this.wireframeLinewidth) && anyMaterial['wireframeLinewidth'] !== undefined) {
+							if (anyMaterial['wireframeLinewidth'] instanceof NODES.FloatNode) {
+								anyMaterial['wireframeLinewidth'].value = ThreeUtil.getTypeSafe(this.wireframeLinewidth, 1);
 							} else {
-								this.material['wireframeLinewidth'] = ThreeUtil.getTypeSafe(this.wireframeLinewidth, 1);
+								anyMaterial['wireframeLinewidth'] = ThreeUtil.getTypeSafe(this.wireframeLinewidth, 1);
 							}
 						}
 						break;
 					case 'wireframelinecap':
-						if (ThreeUtil.isNotNull(this.wireframeLinecap) && this.material['wireframeLinecap'] !== undefined) {
-							this.material['wireframeLinecap'] = ThreeUtil.getTypeSafe(this.wireframeLinecap, 'round');
+						if (ThreeUtil.isNotNull(this.wireframeLinecap) && anyMaterial['wireframeLinecap'] !== undefined) {
+							anyMaterial['wireframeLinecap'] = ThreeUtil.getTypeSafe(this.wireframeLinecap, 'round');
 						}
 						break;
 					case 'wireframelinejoin':
-						if (ThreeUtil.isNotNull(this.wireframeLinejoin) && this.material['wireframeLinejoin'] !== undefined) {
-							this.material['wireframeLinejoin'] = ThreeUtil.getTypeSafe(this.wireframeLinejoin, 'round');
+						if (ThreeUtil.isNotNull(this.wireframeLinejoin) && anyMaterial['wireframeLinejoin'] !== undefined) {
+							anyMaterial['wireframeLinejoin'] = ThreeUtil.getTypeSafe(this.wireframeLinejoin, 'round');
 						}
 						break;
 					case 'morphtargets':
-						if (ThreeUtil.isNotNull(this.morphTargets) && this.material['morphTargets'] !== undefined) {
-							if (this.material['morphTargets'] instanceof NODES.BoolNode) {
-								this.material['morphTargets'].value = ThreeUtil.getTypeSafe(this.morphTargets, false);
+						if (ThreeUtil.isNotNull(this.morphTargets) && anyMaterial['morphTargets'] !== undefined) {
+							if (anyMaterial['morphTargets'] instanceof NODES.BoolNode) {
+								anyMaterial['morphTargets'].value = ThreeUtil.getTypeSafe(this.morphTargets, false);
 							} else {
-								this.material['morphTargets'] = ThreeUtil.getTypeSafe(this.morphTargets, false);
+								anyMaterial['morphTargets'] = ThreeUtil.getTypeSafe(this.morphTargets, false);
 							}
 						}
 						break;
 					case 'morphNormals':
-						if (ThreeUtil.isNotNull(this.morphNormals) && this.material['morphNormals'] !== undefined) {
-							if (this.material['morphNormals'] instanceof NODES.BoolNode) {
-								this.material['morphNormals'].value = ThreeUtil.getTypeSafe(this.morphNormals, false);
+						if (ThreeUtil.isNotNull(this.morphNormals) && anyMaterial['morphNormals'] !== undefined) {
+							if (anyMaterial['morphNormals'] instanceof NODES.BoolNode) {
+								anyMaterial['morphNormals'].value = ThreeUtil.getTypeSafe(this.morphNormals, false);
 							} else {
-								this.material['morphNormals'] = ThreeUtil.getTypeSafe(this.morphNormals, false);
+								anyMaterial['morphNormals'] = ThreeUtil.getTypeSafe(this.morphNormals, false);
 							}
 						}
 						break;
 					case 'linewidth':
-						if (ThreeUtil.isNotNull(this.linewidth) && this.material['linewidth'] !== undefined) {
-							if (this.material['linewidth'] instanceof NODES.FloatNode) {
-								this.material['linewidth'].value = ThreeUtil.getTypeSafe(this.linewidth, 1);
+						if (ThreeUtil.isNotNull(this.linewidth) && anyMaterial['linewidth'] !== undefined) {
+							if (anyMaterial['linewidth'] instanceof NODES.FloatNode) {
+								anyMaterial['linewidth'].value = ThreeUtil.getTypeSafe(this.linewidth, 1);
 							} else {
-								this.material['linewidth'] = ThreeUtil.getTypeSafe(this.linewidth, 1);
+								anyMaterial['linewidth'] = ThreeUtil.getTypeSafe(this.linewidth, 1);
 							}
 						}
 						break;
 					case 'linecap':
-						if (ThreeUtil.isNotNull(this.linecap) && this.material['linecap'] !== undefined) {
-							this.material['linecap'] = ThreeUtil.getTypeSafe(this.linecap);
+						if (ThreeUtil.isNotNull(this.linecap) && anyMaterial['linecap'] !== undefined) {
+							anyMaterial['linecap'] = ThreeUtil.getTypeSafe(this.linecap);
 						}
 						break;
 					case 'linejoin':
-						if (ThreeUtil.isNotNull(this.linejoin) && this.material['linejoin'] !== undefined) {
-							this.material['linejoin'] = ThreeUtil.getTypeSafe(this.linejoin);
+						if (ThreeUtil.isNotNull(this.linejoin) && anyMaterial['linejoin'] !== undefined) {
+							anyMaterial['linejoin'] = ThreeUtil.getTypeSafe(this.linejoin);
 						}
 
 						break;
 					case 'scale':
-						if (ThreeUtil.isNotNull(this.scale) && this.material['scale'] !== undefined) {
-							if (this.material['scale'] instanceof NODES.FloatNode) {
-								this.material['scale'].value = ThreeUtil.getTypeSafe(this.scale, 1);
+						if (ThreeUtil.isNotNull(this.scale) && anyMaterial['scale'] !== undefined) {
+							if (anyMaterial['scale'] instanceof NODES.FloatNode) {
+								anyMaterial['scale'].value = ThreeUtil.getTypeSafe(this.scale, 1);
 							} else {
-								this.material['scale'] = ThreeUtil.getTypeSafe(this.scale, 1);
+								anyMaterial['scale'] = ThreeUtil.getTypeSafe(this.scale, 1);
 							}
 						}
 						break;
 					case 'dashsize':
-						if (ThreeUtil.isNotNull(this.dashSize) && this.material['dashSize'] !== undefined) {
-							if (this.material['dashSize'] instanceof NODES.FloatNode) {
-								this.material['dashSize'].value = ThreeUtil.getTypeSafe(this.dashSize, 1);
+						if (ThreeUtil.isNotNull(this.dashSize) && anyMaterial['dashSize'] !== undefined) {
+							if (anyMaterial['dashSize'] instanceof NODES.FloatNode) {
+								anyMaterial['dashSize'].value = ThreeUtil.getTypeSafe(this.dashSize, 1);
 							} else {
-								this.material['dashSize'] = ThreeUtil.getTypeSafe(this.dashSize, 1);
+								anyMaterial['dashSize'] = ThreeUtil.getTypeSafe(this.dashSize, 1);
 							}
 						}
 						break;
 					case 'gapsize':
-						if (ThreeUtil.isNotNull(this.gapSize) && this.material['gapSize'] !== undefined) {
-							if (this.material['gapSize'] instanceof NODES.FloatNode) {
-								this.material['gapSize'].value = ThreeUtil.getTypeSafe(this.gapSize, 1);
+						if (ThreeUtil.isNotNull(this.gapSize) && anyMaterial['gapSize'] !== undefined) {
+							if (anyMaterial['gapSize'] instanceof NODES.FloatNode) {
+								anyMaterial['gapSize'].value = ThreeUtil.getTypeSafe(this.gapSize, 1);
 							} else {
-								this.material['gapSize'] = ThreeUtil.getTypeSafe(this.gapSize, 1);
+								anyMaterial['gapSize'] = ThreeUtil.getTypeSafe(this.gapSize, 1);
 							}
 						}
 						break;
 					case 'depthpacking':
-						if (ThreeUtil.isNotNull(this.depthPacking) && this.material['depthPacking'] !== undefined) {
-							this.material['depthPacking'] = this.getDepthPacking();
+						if (ThreeUtil.isNotNull(this.depthPacking) && anyMaterial['depthPacking'] !== undefined) {
+							anyMaterial['depthPacking'] = this.getDepthPacking();
 						}
 						break;
 					case 'fardistance':
-						if (ThreeUtil.isNotNull(this.farDistance) && this.material['farDistance'] !== undefined) {
-							if (this.material['farDistance'] instanceof NODES.FloatNode) {
-								this.material['farDistance'].value = ThreeUtil.getTypeSafe(this.farDistance, 1);
+						if (ThreeUtil.isNotNull(this.farDistance) && anyMaterial['farDistance'] !== undefined) {
+							if (anyMaterial['farDistance'] instanceof NODES.FloatNode) {
+								anyMaterial['farDistance'].value = ThreeUtil.getTypeSafe(this.farDistance, 1);
 							} else {
-								this.material['farDistance'] = ThreeUtil.getTypeSafe(this.farDistance, 1);
+								anyMaterial['farDistance'] = ThreeUtil.getTypeSafe(this.farDistance, 1);
 							}
 						}
 						break;
 					case 'neardistance':
-						if (ThreeUtil.isNotNull(this.nearDistance) && this.material['nearDistance'] !== undefined) {
-							if (this.material['nearDistance'] instanceof NODES.FloatNode) {
-								this.material['nearDistance'].value = ThreeUtil.getTypeSafe(this.nearDistance, 1);
+						if (ThreeUtil.isNotNull(this.nearDistance) && anyMaterial['nearDistance'] !== undefined) {
+							if (anyMaterial['nearDistance'] instanceof NODES.FloatNode) {
+								anyMaterial['nearDistance'].value = ThreeUtil.getTypeSafe(this.nearDistance, 1);
 							} else {
-								this.material['nearDistance'] = ThreeUtil.getTypeSafe(this.nearDistance, 1);
+								anyMaterial['nearDistance'] = ThreeUtil.getTypeSafe(this.nearDistance, 1);
 							}
 						}
 						break;
 					case 'referenceposition':
-						if (ThreeUtil.isNotNull(this.referencePositionX) && ThreeUtil.isNotNull(this.referencePositionY) && ThreeUtil.isNotNull(this.referencePositionZ) && this.material['referencePosition'] !== undefined) {
-							if (this.material['referencePosition'] instanceof NODES.Vector3Node) {
-								this.material['referencePosition'].value = this.getReferencePosition();
+						if (ThreeUtil.isNotNull(this.referencePositionX) && ThreeUtil.isNotNull(this.referencePositionY) && ThreeUtil.isNotNull(this.referencePositionZ) && anyMaterial['referencePosition'] !== undefined) {
+							if (anyMaterial['referencePosition'] instanceof NODES.Vector3Node) {
+								anyMaterial['referencePosition'].value = this.getReferencePosition();
 							} else {
-								this.material['referencePosition'] = this.getReferencePosition();
+								anyMaterial['referencePosition'] = this.getReferencePosition();
 							}
 						}
 						break;
 					case 'clearcoat':
-						if (ThreeUtil.isNotNull(this.clearcoat) && this.material['clearcoat'] !== undefined) {
-							if (this.material['clearcoat'] instanceof NODES.FloatNode) {
-								this.material['clearcoat'].value = ThreeUtil.getTypeSafe(this.clearcoat, 1);
+						if (ThreeUtil.isNotNull(this.clearcoat) && anyMaterial['clearcoat'] !== undefined) {
+							if (anyMaterial['clearcoat'] instanceof NODES.FloatNode) {
+								anyMaterial['clearcoat'].value = ThreeUtil.getTypeSafe(this.clearcoat, 1);
 							} else {
-								this.material['clearcoat'] = ThreeUtil.getTypeSafe(this.clearcoat, 1);
+								anyMaterial['clearcoat'] = ThreeUtil.getTypeSafe(this.clearcoat, 1);
 							}
 						}
 						break;
 					case 'clearcoatroughness':
-						if (ThreeUtil.isNotNull(this.clearcoatRoughness) && this.material['clearcoatRoughness'] !== undefined) {
-							if (this.material['clearcoatRoughness'] instanceof NODES.FloatNode) {
-								this.material['clearcoatRoughness'].value = ThreeUtil.getTypeSafe(this.clearcoatRoughness, 1);
+						if (ThreeUtil.isNotNull(this.clearcoatRoughness) && anyMaterial['clearcoatRoughness'] !== undefined) {
+							if (anyMaterial['clearcoatRoughness'] instanceof NODES.FloatNode) {
+								anyMaterial['clearcoatRoughness'].value = ThreeUtil.getTypeSafe(this.clearcoatRoughness, 1);
 							} else {
-								this.material['clearcoatRoughness'] = ThreeUtil.getTypeSafe(this.clearcoatRoughness, 1);
+								anyMaterial['clearcoatRoughness'] = ThreeUtil.getTypeSafe(this.clearcoatRoughness, 1);
 							}
 						}
 						break;
 					case 'clearcoatNormalScale':
-						if (ThreeUtil.isNotNull(this.clearcoatNormalScale) && ThreeUtil.isNotNull(this.clearcoatNormalScaleX) && ThreeUtil.isNotNull(this.clearcoatNormalScaleY) && this.material['clearcoatNormalScale'] !== undefined) {
-							if (this.material['clearcoatNormalScale'] instanceof NODES.Vector2Node) {
-								this.material['clearcoatNormalScale'].value = this.getClearcoatNormalScale();
+						if (ThreeUtil.isNotNull(this.clearcoatNormalScale) && ThreeUtil.isNotNull(this.clearcoatNormalScaleX) && ThreeUtil.isNotNull(this.clearcoatNormalScaleY) && anyMaterial['clearcoatNormalScale'] !== undefined) {
+							if (anyMaterial['clearcoatNormalScale'] instanceof NODES.Vector2Node) {
+								anyMaterial['clearcoatNormalScale'].value = this.getClearcoatNormalScale();
 							} else {
-								this.material['clearcoatNormalScale'] = this.getClearcoatNormalScale();
+								anyMaterial['clearcoatNormalScale'] = this.getClearcoatNormalScale();
 							}
 						}
 						break;
 					case 'sheen':
-						if (ThreeUtil.isNotNull(this.sheen) && this.material['sheen'] !== undefined) {
-							if (this.material['sheen'] instanceof NODES.ColorNode) {
-								this.material['sheen'].value = this.getSheen();
+						if (ThreeUtil.isNotNull(this.sheen) && anyMaterial['sheen'] !== undefined) {
+							if (anyMaterial['sheen'] instanceof NODES.ColorNode) {
+								anyMaterial['sheen'].value = this.getSheen();
 							} else {
-								this.material['sheen'] = this.getSheen();
+								anyMaterial['sheen'] = this.getSheen();
 							}
 						}
 						break;
 					case 'transmission':
-						if (ThreeUtil.isNotNull(this.roughness) && this.material['transmission'] !== undefined) {
-							if (this.material['transmission'] instanceof NODES.FloatNode) {
-								this.material['transmission'].value = ThreeUtil.getTypeSafe(this.transmission, 1);
+						if (ThreeUtil.isNotNull(this.transmission) && anyMaterial['transmission'] !== undefined) {
+							if (anyMaterial['transmission'] instanceof NODES.FloatNode) {
+								anyMaterial['transmission'].value = ThreeUtil.getTypeSafe(this.transmission, 1);
 							} else {
-								this.material['transmission'] = ThreeUtil.getTypeSafe(this.transmission, 1);
+								anyMaterial['transmission'] = ThreeUtil.getTypeSafe(this.transmission, 1);
 							}
 						}
 						break;
 					case 'roughness':
-						if (ThreeUtil.isNotNull(this.roughness) && this.material['roughness'] !== undefined) {
-							if (this.material['roughness'] instanceof NODES.FloatNode) {
-								this.material['roughness'].value = ThreeUtil.getTypeSafe(this.roughness, 1);
+						if (ThreeUtil.isNotNull(this.roughness) && anyMaterial['roughness'] !== undefined) {
+							if (anyMaterial['roughness'] instanceof NODES.FloatNode) {
+								anyMaterial['roughness'].value = ThreeUtil.getTypeSafe(this.roughness, 1);
 							} else {
-								this.material['roughness'] = ThreeUtil.getTypeSafe(this.roughness, 1);
+								anyMaterial['roughness'] = ThreeUtil.getTypeSafe(this.roughness, 1);
 							}
 						}
 						break;
 					case 'metalness':
-						if (ThreeUtil.isNotNull(this.metalness) && this.material['metalness'] !== undefined) {
-							if (this.material['metalness'] instanceof NODES.FloatNode) {
-								this.material['metalness'].value = ThreeUtil.getTypeSafe(this.metalness, 1);
+						if (ThreeUtil.isNotNull(this.metalness) && anyMaterial['metalness'] !== undefined) {
+							if (anyMaterial['metalness'] instanceof NODES.FloatNode) {
+								anyMaterial['metalness'].value = ThreeUtil.getTypeSafe(this.metalness, 1);
 							} else {
-								this.material['metalness'] = ThreeUtil.getTypeSafe(this.metalness, 1);
+								anyMaterial['metalness'] = ThreeUtil.getTypeSafe(this.metalness, 1);
 							}
 						}
 
 						break;
 					case 'envmapintensity':
-						if (ThreeUtil.isNotNull(this.envMapIntensity) && this.material['envMapIntensity'] !== undefined) {
-							if (this.material['envMapIntensity'] instanceof NODES.FloatNode) {
-								this.material['envMapIntensity'].value = ThreeUtil.getTypeSafe(this.envMapIntensity, 1);
+						if (ThreeUtil.isNotNull(this.envMapIntensity) && anyMaterial['envMapIntensity'] !== undefined) {
+							if (anyMaterial['envMapIntensity'] instanceof NODES.FloatNode) {
+								anyMaterial['envMapIntensity'].value = ThreeUtil.getTypeSafe(this.envMapIntensity, 1);
 							} else {
-								this.material['envMapIntensity'] = ThreeUtil.getTypeSafe(this.envMapIntensity, 1);
+								anyMaterial['envMapIntensity'] = ThreeUtil.getTypeSafe(this.envMapIntensity, 1);
 							}
 						}
-
 						break;
 					case 'vertextangents':
-						if (ThreeUtil.isNotNull(this.vertexTangents) && this.material['vertexTangents'] !== undefined) {
-							if (this.material['vertexTangents'] instanceof NODES.BoolNode) {
-								this.material['vertexTangents'].value = ThreeUtil.getTypeSafe(this.vertexTangents);
+						if (ThreeUtil.isNotNull(this.vertexTangents) && anyMaterial['vertexTangents'] !== undefined) {
+							if (anyMaterial['vertexTangents'] instanceof NODES.BoolNode) {
+								anyMaterial['vertexTangents'].value = ThreeUtil.getTypeSafe(this.vertexTangents);
 							} else {
-								this.material['vertexTangents'] = ThreeUtil.getTypeSafe(this.vertexTangents);
+								anyMaterial['vertexTangents'] = ThreeUtil.getTypeSafe(this.vertexTangents);
 							}
 						}
 						break;
 					case 'rotation':
-						if (ThreeUtil.isNotNull(this.rotation) && this.material['rotation'] !== undefined) {
-							if (this.material['rotation'] instanceof NODES.FloatNode) {
-								this.material['rotation'].value = ThreeUtil.getAngleSafe(this.rotation);
+						if (ThreeUtil.isNotNull(this.rotation) && anyMaterial['rotation'] !== undefined) {
+							if (anyMaterial['rotation'] instanceof NODES.FloatNode) {
+								anyMaterial['rotation'].value = ThreeUtil.getAngleSafe(this.rotation);
 							} else {
-								this.material['rotation'] = ThreeUtil.getAngleSafe(this.rotation);
+								anyMaterial['rotation'] = ThreeUtil.getAngleSafe(this.rotation);
 							}
 						}
 						break;
 					case 'size':
-						if (ThreeUtil.isNotNull(this.size) && this.material['size'] !== undefined) {
-							if (this.material['size'] instanceof NODES.FloatNode) {
-								this.material['size'].value = ThreeUtil.getTypeSafe(this.size, 1);
+						if (ThreeUtil.isNotNull(this.size) && anyMaterial['size'] !== undefined) {
+							if (anyMaterial['size'] instanceof NODES.FloatNode) {
+								anyMaterial['size'].value = ThreeUtil.getTypeSafe(this.size, 1);
 							} else {
-								this.material['size'] = ThreeUtil.getTypeSafe(this.size, 1);
+								anyMaterial['size'] = ThreeUtil.getTypeSafe(this.size, 1);
 							}
 						}
 						break;
 					case 'sizeattenuation':
-						if (ThreeUtil.isNotNull(this.sizeAttenuation) && this.material['sizeAttenuation'] !== undefined) {
-							if (this.material['sizeAttenuation'] instanceof NODES.BoolNode) {
-								this.material['sizeAttenuation'].value = ThreeUtil.getTypeSafe(this.sizeAttenuation);
+						if (ThreeUtil.isNotNull(this.sizeAttenuation) && anyMaterial['sizeAttenuation'] !== undefined) {
+							if (anyMaterial['sizeAttenuation'] instanceof NODES.BoolNode) {
+								anyMaterial['sizeAttenuation'].value = ThreeUtil.getTypeSafe(this.sizeAttenuation);
 							} else {
-								this.material['sizeAttenuation'] = ThreeUtil.getTypeSafe(this.sizeAttenuation);
+								anyMaterial['sizeAttenuation'] = ThreeUtil.getTypeSafe(this.sizeAttenuation);
 							}
 						}
-
 						break;
 					case 'dashed':
-						if (ThreeUtil.isNotNull(this.dashed) && this.material['dashed'] !== undefined) {
-							if (this.material['dashed'] instanceof NODES.BoolNode) {
-								this.material['dashed'].value = ThreeUtil.getTypeSafe(this.dashed);
+						if (ThreeUtil.isNotNull(this.dashed) && anyMaterial['dashed'] !== undefined) {
+							if (anyMaterial['dashed'] instanceof NODES.BoolNode) {
+								anyMaterial['dashed'].value = ThreeUtil.getTypeSafe(this.dashed);
 							} else {
-								this.material['dashed'] = ThreeUtil.getTypeSafe(this.dashed);
+								anyMaterial['dashed'] = ThreeUtil.getTypeSafe(this.dashed);
 							}
 						}
 						break;
 					case 'dashscale':
-						if (ThreeUtil.isNotNull(this.dashScale) && this.material['dashScale'] !== undefined) {
-							if (this.material['dashScale'] instanceof NODES.FloatNode) {
-								this.material['dashScale'].value = ThreeUtil.getTypeSafe(this.dashScale, 1);
+						if (ThreeUtil.isNotNull(this.dashScale) && anyMaterial['dashScale'] !== undefined) {
+							if (anyMaterial['dashScale'] instanceof NODES.FloatNode) {
+								anyMaterial['dashScale'].value = ThreeUtil.getTypeSafe(this.dashScale, 1);
 							} else {
-								this.material['dashScale'] = ThreeUtil.getTypeSafe(this.dashScale, 1);
+								anyMaterial['dashScale'] = ThreeUtil.getTypeSafe(this.dashScale, 1);
 							}
 						}
 						break;
 					case 'dashoffset':
-						if (ThreeUtil.isNotNull(this.dashOffset) && this.material['dashOffset'] !== undefined) {
-							if (this.material['dashOffset'] instanceof NODES.FloatNode) {
-								this.material['dashOffset'].value = ThreeUtil.getTypeSafe(this.dashOffset, 1);
+						if (ThreeUtil.isNotNull(this.dashOffset) && anyMaterial['dashOffset'] !== undefined) {
+							if (anyMaterial['dashOffset'] instanceof NODES.FloatNode) {
+								anyMaterial['dashOffset'].value = ThreeUtil.getTypeSafe(this.dashOffset, 1);
 							} else {
-								this.material['dashOffset'] = ThreeUtil.getTypeSafe(this.dashOffset, 1);
+								anyMaterial['dashOffset'] = ThreeUtil.getTypeSafe(this.dashOffset, 1);
 							}
 						}
 						break;
 					case 'resolution':
-						if (ThreeUtil.isNotNull(this.resolutionX) && ThreeUtil.isNotNull(this.resolutionY) && this.material['resolutionX'] !== undefined) {
-							if (this.material['resolutionX'] instanceof NODES.Vector2Node) {
-								this.material['resolutionX'].value = this.getResolution();
+						if (ThreeUtil.isNotNull(this.resolutionX) && ThreeUtil.isNotNull(this.resolutionY) && anyMaterial['resolutionX'] !== undefined) {
+							if (anyMaterial['resolutionX'] instanceof NODES.Vector2Node) {
+								anyMaterial['resolutionX'].value = this.getResolution();
 							} else {
-								this.material['resolutionX'] = this.getResolution();
+								anyMaterial['resolutionX'] = this.getResolution();
 							}
 						}
 						break;
 					case 'extensions':
-						if (ThreeUtil.isNotNull(this.extensions) && this.material['extensions'] !== undefined) {
-							this.material['extensions'] = this.getExtensions(this.material['extensions']);
+						if (ThreeUtil.isNotNull(this.extensions) && anyMaterial['extensions'] !== undefined) {
+							anyMaterial['extensions'] = this.getExtensions(anyMaterial['extensions']);
 						}
 						break;
 					default:
@@ -2089,20 +2223,22 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 				switch (this.type.toLowerCase()) {
 					case 'nodematerial':
 					case 'node':
-						const modeMateriallibrary = {};
+						const modeMateriallibrary : any = {};
 						if (ThreeUtil.isNotNull(this.storageOption)) {
 							Object.entries(this.storageOption).forEach(([key, value]) => {
-								if (ThreeUtil.isNotNull(value['type']) && ThreeUtil.isNotNull(value['value'])) {
-									switch (value['type'].toLowerCase()) {
+								const anyValue : any = value;
+								if (ThreeUtil.isNotNull(anyValue['type']) && ThreeUtil.isNotNull(anyValue['value'])) {
+									switch (anyValue['type'].toLowerCase()) {
 										case 'texture':
-											const texture = AbstractTextureComponent.getTextureImageOption(value['value'], value['options']);
+											const texture = AbstractTextureComponent.getTextureImageOption(anyValue['value'], anyValue['options']);
 											modeMateriallibrary[key] = texture;
 											break;
 									}
 								}
 							});
 						}
-						const nodeMaterialLoader = new NodeMaterialLoader(undefined, modeMateriallibrary);
+						const NodeMaterialLoaderAlias : any = NodeMaterialLoader;
+						const nodeMaterialLoader = new NodeMaterialLoaderAlias(undefined, modeMateriallibrary);
 						nodeMaterialLoader.load(ThreeUtil.getStoreUrl(this.storageName), (material: THREE.Material) => {
 							this.setUserData('storageSource', nodeMaterialLoader);
 							this.setMaterial(material);
@@ -2145,7 +2281,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							linewidth: ThreeUtil.getTypeSafe(this.linewidth),
 							linecap: ThreeUtil.getTypeSafe(this.linecap),
 							linejoin: ThreeUtil.getTypeSafe(this.linejoin),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 						};
 						material = new THREE.LineBasicMaterial(this.getMaterialParameters(parametersLineBasicMaterial));
 						break;
@@ -2169,7 +2305,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							wireframe: ThreeUtil.getTypeSafe(this.wireframe),
 							wireframeLinewidth: ThreeUtil.getTypeSafe(this.wireframeLinewidth),
 							// skinning: this.getSkinning(),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 							reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
 							combine: this.getCombine(),
 							wireframeLinecap: ThreeUtil.getTypeSafe(this.wireframeLinecap),
@@ -2226,8 +2362,8 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							displacementScale: ThreeUtil.getTypeSafe(this.displacementScale),
 							displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
 							// skinning: this.getSkinning(),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 						};
 						material = new THREE.MeshMatcapMaterial(this.getMaterialParameters(parametersMeshMatcapMaterial));
 						break;
@@ -2247,8 +2383,8 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							wireframe: ThreeUtil.getTypeSafe(this.wireframe),
 							wireframeLinewidth: ThreeUtil.getTypeSafe(this.wireframeLinewidth),
 							// skinning: this.getSkinning(),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 						};
 						material = new THREE.MeshNormalMaterial(this.getMaterialParameters(parametersMeshNormalMaterial));
 						break;
@@ -2280,8 +2416,8 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							wireframe: ThreeUtil.getTypeSafe(this.wireframe),
 							wireframeLinewidth: ThreeUtil.getTypeSafe(this.wireframeLinewidth),
 							// skinning: this.getSkinning(),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 							reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
 							specular: this.getSpecular(),
 							shininess: ThreeUtil.getTypeSafe(this.shininess),
@@ -2325,9 +2461,9 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							wireframe: ThreeUtil.getTypeSafe(this.wireframe),
 							wireframeLinewidth: ThreeUtil.getTypeSafe(this.wireframeLinewidth),
 							// skinning: this.getSkinning(),
-							vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 							clearcoat: ThreeUtil.getTypeSafe(this.clearcoat),
 							// clearcoatMap: this.getTexture('clearcoatMap'),
 							clearcoatRoughness: ThreeUtil.getTypeSafe(this.clearcoatRoughness),
@@ -2375,9 +2511,9 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							wireframe: ThreeUtil.getTypeSafe(this.wireframe),
 							wireframeLinewidth: ThreeUtil.getTypeSafe(this.wireframeLinewidth),
 							// skinning: this.getSkinning(),
-							vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 						};
 						const meshStandardMaterial = new THREE.MeshStandardMaterial(this.getMaterialParameters(parametersMeshStandardMaterial));
 						material = meshStandardMaterial;
@@ -2411,8 +2547,8 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							wireframeLinecap: ThreeUtil.getTypeSafe(this.wireframeLinecap, 'round'),
 							wireframeLinejoin: ThreeUtil.getTypeSafe(this.wireframeLinejoin, 'round'),
 							// skinning: this.getSkinning(),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 						};
 						material = new THREE.MeshToonMaterial(this.getMaterialParameters(parametersMeshToonMaterial));
 						break;
@@ -2424,7 +2560,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							alphaMap: this.getTexture('alphaMap'),
 							size: ThreeUtil.getTypeSafe(this.size),
 							sizeAttenuation: ThreeUtil.getTypeSafe(this.sizeAttenuation),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 						};
 						material = new THREE.PointsMaterial(this.getMaterialParameters(parametersPointsMaterial));
 						break;
@@ -2440,8 +2576,8 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							lights: ThreeUtil.getTypeSafe(this.lights),
 							clipping: ThreeUtil.getTypeSafe(this.clipping),
 							// skinning: this.getSkinning(),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 						};
 						const rawShaderMaterial = new THREE.RawShaderMaterial(this.getMaterialParameters(parametersRawShaderMaterial));
 						if (ThreeUtil.isNotNull(this.glslVersion)) {
@@ -2464,8 +2600,8 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							lights: ThreeUtil.getTypeSafe(this.lights),
 							clipping: ThreeUtil.getTypeSafe(this.clipping),
 							// skinning: this.getSkinning(),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 						};
 						const shaderMaterial = new THREE.ShaderMaterial(this.getMaterialParameters(parametersShaderMaterial));
 						if (ThreeUtil.isNotNull(this.glslVersion)) {
@@ -2631,8 +2767,8 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 							wireframeLinecap: ThreeUtil.getTypeSafe(this.wireframeLinecap, 'round'),
 							wireframeLinejoin: ThreeUtil.getTypeSafe(this.wireframeLinejoin, 'round'),
 							// skinning: this.getSkinning(),
-							morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 						};
 						const meshLambertMaterial = new THREE.MeshLambertMaterial(this.getMaterialParameters(parametersMeshLambertMaterial));
 						material = meshLambertMaterial;
@@ -2653,7 +2789,7 @@ export class MaterialComponent extends AbstractMaterialComponent implements OnIn
 	 * Updates node
 	 * @param delta
 	 */
-	public updateNode(delta) {
+	public updateNode(delta : any) {
 		if (this.material instanceof NODES.NodeMaterial) {
 			if (this._nodeFrame === null) {
 				this._nodeFrame = new NODES.NodeFrame(0);

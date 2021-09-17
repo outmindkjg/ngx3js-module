@@ -15,22 +15,22 @@ export class TranslationComponent extends AbstractSubscribeComponent implements 
   /**
    * Input  of translation component
    */
-  @Input() private visible: boolean = true;
+  @Input() public visible: boolean = true;
 
   /**
    * Input  of translation component
    */
-  @Input() private x: number = 0;
+  @Input() public x: number = 0;
 
   /**
    * Input  of translation component
    */
-  @Input() private y: number = 0;
+  @Input() public y: number = 0;
 
   /**
    * Input  of translation component
    */
-  @Input() private z: number = 0;
+  @Input() public z: number = 0;
 
   /**
    * Creates an instance of translation component.
@@ -98,7 +98,7 @@ export class TranslationComponent extends AbstractSubscribeComponent implements 
       } else if (this.parent.getGeometry) {
         refTranslation.push(this.parent.getGeometry());
       } else if (this.parent.meshTranslations) {
-        this.parent.meshTranslations.forEach((translations) => {
+        this.parent.meshTranslations.forEach((translations : any) => {
           refTranslation.push(translations);
         });
       }

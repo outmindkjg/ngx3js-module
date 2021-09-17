@@ -23,6 +23,6 @@ export const ShaderDemo9 = {
   `,
   uniforms : {
     color: { value: new THREE.Color(0xffffff) },
-    pointTexture: { value: null }
+    pointTexture: { value: null } as any
   }
 };

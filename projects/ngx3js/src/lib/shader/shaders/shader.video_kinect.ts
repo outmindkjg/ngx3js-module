@@ -33,7 +33,7 @@ export const VideoKinect = {
   }
   `,
   uniforms: {
-    map : { value : null},
+    map : { value : null} as any,
     width : { value : 640},
     height : { value : 480},
     nearClipping : { value : 850},

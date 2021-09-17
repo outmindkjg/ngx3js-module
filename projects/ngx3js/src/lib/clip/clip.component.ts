@@ -26,7 +26,7 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
 	/**
 	 * Input  of clip component
 	 */
-	@Input() private index: number = -1;
+	@Input() public index: number = -1;
 
 	/**
 	 * Input  of clip component
@@ -38,7 +38,7 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
 	 * @see THREE.AdditiveAnimationBlendMode - AdditiveAnimationBlendMode, AdditiveAnimation, Additive
 	 *
 	 */
-	@Input() private blendMode: string = '';
+	@Input() public blendMode: string = '';
 
 	/**
 	 * makeClipAdditive
@@ -46,48 +46,48 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
    * @see THREE.AnimationUtils.makeClipAdditive
    * 
 	 */
-	@Input() private additive: boolean = false;
+	@Input() public additive: boolean = false;
 
 	/**
    * subclip
    * 
 	 * @see THREE.AnimationUtils.subclip
 	 */
-	@Input() private subclip: boolean = false;
+	@Input() public subclip: boolean = false;
 
 	/**
 	 * Creates a new clip, containing only the segment of the original clip between the given frames.
 	 */
-	@Input() private startFrame: number = 2;
+	@Input() public startFrame: number = 2;
 
 	/**
 	 * Creates a new clip, containing only the segment of the original clip between the given frames.
 	 */
-	@Input() private endFrame: number = 3;
+	@Input() public endFrame: number = 3;
 
 	/**
 	 * Creates a new clip, containing only the segment of the original clip between the given frames.
 	 */
-	@Input() private fps: number = null;
+	@Input() public fps: number = null;
 
 	/**
 	 * The degree of influence of this action (in the interval [0, 1]). Values between 0 (no impact)
 	 * and 1 (full impact) can be used to blend between several actions. Default is 1. <br /><br />
 	 * Properties/methods concerning  *weight* are:
 	 */
-	@Input() private weight: number = 1;
+	@Input() public weight: number = 1;
 
 	/**
 	 * Scaling factor for the [page:.time time]. A value of 0 causes the animation to pause. Negative
 	 * values cause the animation to play backwards. Default is 1.
 	 */
-	@Input() private timeScale: number = 1;
+	@Input() public timeScale: number = 1;
 
 	/**
 	 * The duration of this clip (in seconds). This can be calculated from the [page:.tracks tracks]
 	 * array via [page:.resetDuration resetDuration].
 	 */
-	@Input() private duration: number = 3;
+	@Input() public duration: number = 3;
 
 	/**
 	 * If *clampWhenFinished* is set to true the animation will automatically be [page:.paused paused]
@@ -102,7 +102,7 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
 	 * Note: *clampWhenFinished* has no impact if the action is interrupted (it has only an effect if
 	 * its last loop has really finished).
 	 */
-	@Input() private clampWhenFinished: boolean = false;
+	@Input() public clampWhenFinished: boolean = false;
 
 	/**
 	 * The looping mode (can be changed with [page:.setLoop setLoop]). Default is
@@ -115,7 +115,7 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
 	 * @see THREE.LoopRepeat - LoopRepeat, Repeat
 	 * @see THREE.LoopPingPong - LoopPingPong, PingPong
 	 */
-	@Input() private loop: string = null;
+	@Input() public loop: string = null;
 
 	/**
 	 * The keyframe list of KeyframeComponent
@@ -253,6 +253,8 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
 	 */
 	private mixer: THREE.AnimationMixer = null;
 
+	private model: any = null;
+	
 	/**
 	 * Clips  of clip component
 	 */
@@ -274,9 +276,10 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
 	 * @param clips
 	 * @param [fps]
 	 */
-	public setMixer(mixer: THREE.AnimationMixer, clips: THREE.AnimationClip[]) {
+	public setMixer(mixer: THREE.AnimationMixer, clips: THREE.AnimationClip[], model : any) {
 		if (this.mixer !== mixer) {
 			this.mixer = mixer;
+			this.model = model;
 			this.clips = clips || null;
 			this.clip = null;
 			this.action = null;
@@ -411,7 +414,11 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
 			this.needUpdate = false;
 			let clip: THREE.AnimationClip = null;
 			if (this.clips !== null) {
-				clip = this.index > -1 ? this.clips[this.index] : THREE.AnimationClip.findByName(this.clips, this.name);
+				if (this.index > -1 || ThreeUtil.isNotNull(this.name)) {
+					clip = this.index > -1 ? this.clips[this.index] : THREE.AnimationClip.findByName(this.clips, this.name);
+				} else {
+					clip = null;
+				}
 			} else {
 				clip = new THREE.AnimationClip(ThreeUtil.getTypeSafe(this.name, 'default'), this.duration, [], this.getBlendMode());
 			}
@@ -440,7 +447,11 @@ export class ClipComponent extends AbstractSubscribeComponent implements OnInit 
 							keyframe.setClip(this.clip);
 						});
 					}
-					this.action = this.mixer.clipAction(clip, null, this.getBlendMode());
+					if (this.model instanceof THREE.Object3D || this.model instanceof THREE.AnimationObjectGroup) {
+						this.action = this.mixer.clipAction(clip, this.model, this.getBlendMode());
+					} else {
+						this.action = this.mixer.clipAction(clip, null, this.getBlendMode());
+					}
 				}
 				if (this.getClampWhenFinished(false)) {
 					this.action.clampWhenFinished = true;

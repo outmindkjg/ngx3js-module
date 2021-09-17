@@ -27,7 +27,7 @@ export class PlanePerlinGeometry {
    * @param z 
    * @returns  
    */
-  public getY( x, z ) { 
+  public getY( x : number, z : number) { 
     return ( this.data[ x + z * this.worldWidth ] * 0.2 ) | 0;
   }
 

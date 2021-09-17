@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as THREE from 'three';
-import * as draco_encoder from 'three/examples/js/libs/draco/draco_encoder';
-import * as LOTTE_CANVAS from 'three/examples/js/libs/lottie_canvas';
 import { ColladaExporter } from 'three/examples/jsm/exporters/ColladaExporter';
 import { DRACOExporter } from 'three/examples/jsm/exporters/DRACOExporter';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
@@ -10,7 +8,6 @@ import { OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
 import { PLYExporter } from 'three/examples/jsm/exporters/PLYExporter';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 import { USDZExporter } from 'three/examples/jsm/exporters/USDZExporter';
-import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module';
 import { Rhino3dmLoader } from 'three/examples/jsm/loaders/3DMLoader';
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
 import { AMFLoader } from 'three/examples/jsm/loaders/AMFLoader';
@@ -62,7 +59,7 @@ import { MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex
 import { Volume } from 'three/examples/jsm/misc/Volume';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
-import { LoadedObject, ThreeUtil } from './interface';
+import { LoadedNameMap, LoadedObject, ThreeUtil } from './interface';
 
 /**
  * LocalStorageService
@@ -359,7 +356,7 @@ export class LocalStorageService {
     if (typeof url === 'string') {
       return ThreeUtil.getStoreUrl(url);
     } else {
-      const modUrl = [];
+      const modUrl : any[] = [];
       url.forEach((path) => {
         modUrl.push(ThreeUtil.getStoreUrl(path));
       });
@@ -371,7 +368,7 @@ export class LocalStorageService {
    * Determines whether progress on
    * @param xhr
    */
-  public onProgress(xhr) {
+  public onProgress(xhr : any) {
     if (xhr.lengthComputable) {
       const percentComplete = (xhr.loaded / xhr.total) * 100;
       console.log(Math.round(percentComplete * 100) / 100 + '% downloaded');
@@ -382,7 +379,7 @@ export class LocalStorageService {
    * Determines whether error on
    * @param event
    */
-  public onError(event: ErrorEvent) {
+  public onError(event: any) {
     console.log(event);
   }
 
@@ -449,6 +446,25 @@ export class LocalStorageService {
    * @param [options]
    */
   public getExportObject(fileName: string, object: THREE.Object3D | THREE.Object3D[], options?: any) {
+    if (object instanceof THREE.Object3D) {
+      object.traverse(child => {
+        Object.entries(child.userData).forEach(([key, value]) => {
+          if (typeof value === 'object') {
+            delete child.userData[key];
+          }
+        })
+      })
+    } else {
+      object.forEach(gchild => {
+        gchild.traverse(child => {
+          Object.entries(child.userData).forEach(([key, value]) => {
+            if (typeof value === 'object') {
+              delete child.userData[key];
+            }
+          })
+        })
+      });
+    }
     if (fileName.endsWith('.dae')) {
       if (this.colladaExporter === null) {
         this.colladaExporter = new ColladaExporter();
@@ -468,11 +484,19 @@ export class LocalStorageService {
     } else if (fileName.endsWith('.drc')) {
       if (this.dracoExporter === null) {
         this.dracoExporter = new DRACOExporter();
-        window['DracoEncoderModule'] = draco_encoder;
       }
       if (object instanceof THREE.Mesh || object instanceof THREE.Points) {
         const result = this.dracoExporter.parse(object, {});
         this.saveArrayBuffer(result, fileName);
+      }
+    } else if (fileName.endsWith('.usdz')) {
+      if (this.usdzExporter === null) {
+        this.usdzExporter = new USDZExporter();
+      }
+      if (object instanceof THREE.Object3D) {
+        this.usdzExporter.parse(object).then(result => {
+          this.saveArrayBuffer(result, fileName);
+        })
       }
     } else if (fileName.endsWith('.gltf') || fileName.endsWith('.glb')) {
       if (this.gltfExporter === null) {
@@ -550,7 +574,7 @@ export class LocalStorageService {
    * @param blob
    * @param filename
    */
-  private save(blob, filename) {
+  private save(blob : any, filename : string) {
     const link = document.createElement('a');
     link.style.display = 'none';
     document.body.appendChild(link);
@@ -565,7 +589,7 @@ export class LocalStorageService {
    * @param buffer
    * @param filename
    */
-  private saveArrayBuffer(buffer, filename) {
+  private saveArrayBuffer(buffer : any, filename : string) {
     this.save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
   }
 
@@ -574,7 +598,7 @@ export class LocalStorageService {
    * @param text
    * @param filename
    */
-  private saveString(text, filename) {
+  private saveString(text : string, filename : string) {
     this.save(new Blob([text], { type: 'text/plain' }), filename);
   }
 
@@ -584,12 +608,28 @@ export class LocalStorageService {
   private _loadedObject: { [key: string]: LoadedObject } = {};
 
   /**
+   * Gets object name map
+   * @param object
+   * @param nameMap
+   * @returns
+   */
+  private getNameMap(object : THREE.Object3D, nameMap : LoadedNameMap): LoadedNameMap {
+    const name = object.name || 'name';
+    const map : LoadedNameMap = {};
+    nameMap[name] = map;
+    object.children.forEach(child => {
+      this.getNameMap(child, map);
+    });
+    return nameMap;
+  }
+
+  /**
    * Gets object from key
    * @param key
    * @param callBack
    * @param options
    */
-  public getObjectFromKey(key: string, callBack: (mesh: LoadedObject) => void, options: any): void {
+  private getObjectFromKey(key: string, callBack: (mesh: LoadedObject) => void, options: any): void {
     options = options || {};
     let safeKey = '';
     if (ThreeUtil.isNotNull(options.path)) {
@@ -599,33 +639,71 @@ export class LocalStorageService {
     }
     if (this._loadedObject[safeKey] !== undefined) {
       const result = this._loadedObject[safeKey];
-      callBack({
-        object: ThreeUtil.isNotNull(result.object) ? result.object.clone(true) : null,
-        material: ThreeUtil.isNotNull(result.material) ? result.material : null,
-        geometry: ThreeUtil.isNotNull(result.geometry) ? result.geometry.clone() : null,
-        texture: ThreeUtil.isNotNull(result.texture) ? result.texture.clone() : null,
-        clips: result.clips,
-        morphTargets: result.morphTargets,
-        source: result.source,
-      });
-    } else {
-      this._getObjectFromKey(
-        safeKey,
-        (result: LoadedObject) => {
-          if (result.object && result.object instanceof THREE.Group && result.object.children.length == 1) {
-            result.object = result.object.children[0];
-          }
-          if (options.autoCenter && result.object) {
-            const object = result.object;
+      setTimeout(() => {
+        let cloneObject3d : THREE.Object3D = null;
+        if (ThreeUtil.isNotNull(result.object)) {
+          result.object.userData = {}
+          cloneObject3d = result.object.clone(true);
+          if (options.autoCenter) {
+            const object = cloneObject3d;
             const objectBox = new THREE.Box3().setFromObject(object);
             const center = objectBox.getCenter(new THREE.Vector3());
             object.position.x += object.position.x - center.x;
             object.position.y += object.position.y - center.y;
             object.position.z += object.position.z - center.z;
-            result.object = new THREE.Group();
-            result.object.add(object);
+            cloneObject3d = new THREE.Group();
+            cloneObject3d.add(object);
           }
+        }
+        callBack({
+          object: cloneObject3d,
+          material: ThreeUtil.isNotNull(result.material) ? result.material : null,
+          geometry: ThreeUtil.isNotNull(result.geometry) ? result.geometry.clone() : null,
+          texture: ThreeUtil.isNotNull(result.texture) ? result.texture.clone() : null,
+          clips: result.clips,
+          morphTargets: result.morphTargets,
+          source: result.source,
+        });
+      }, 10);
+    } else {
+      this._getObjectFromKey(
+        safeKey,
+        (result: LoadedObject) => {
+          if (result.object && options.debugName) {
+            console.log(this.getNameMap(result.object, {}));
+          }
+          if (result.source && options.debug) {
+            console.log(result.source);
+          }
+          let cloneObject3d : THREE.Object3D = null;
+          if (ThreeUtil.isNotNull(result.object)) {
+            cloneObject3d = result.object;
+            if (options.firstMesh) {
+              let foundMesh : THREE.Object3D = null;
+              cloneObject3d.traverse( ( node :any ) => {
+                if (foundMesh === null && node['isMesh']) {
+                  foundMesh = node;
+                }
+              });
+              if (foundMesh !== null) {
+                cloneObject3d = foundMesh;
+              }
+            }
+            if (options.autoCenter) {
+              const object = cloneObject3d;
+              const objectBox = new THREE.Box3().setFromObject(object);
+              const center = objectBox.getCenter(new THREE.Vector3());
+              object.position.x += object.position.x - center.x;
+              object.position.y += object.position.y - center.y;
+              object.position.z += object.position.z - center.z;
+              cloneObject3d = new THREE.Group();
+              cloneObject3d.add(object);
+            }
+          }
+          result.object = cloneObject3d;
+          // this._loadedObject[safeKey] = result;
           callBack(result);
+          // this.getObjectFromKey(key, callBack, options);
         },
         options
       );
@@ -652,9 +730,10 @@ export class LocalStorageService {
           loader.setPath('');
         }
       }
-      if (ThreeUtil.isNotNull(loader['setDataType'])) {
+      const loaderAny : any = loader;
+      if (ThreeUtil.isNotNull(loaderAny['setDataType'])) {
         if (ThreeUtil.isNotNull(options.dataType)) {
-          loader['setDataType'](ThreeUtil.getTextureDataTypeSafe(options.dataType));
+          loaderAny['setDataType'](ThreeUtil.getTextureDataTypeSafe(options.dataType));
           console.log(ThreeUtil.getTextureDataTypeSafe(options.dataType));
         }
       }
@@ -941,7 +1020,7 @@ export class LocalStorageService {
         key,
         (object: BVH) => {
           if (object.skeleton && object.skeleton.bones && object.skeleton.bones.length > 0) {
-            const skeletonHelper = new THREE.SkeletonHelper( object.skeleton.bones[ 0 ] );
+            const skeletonHelper : any = new THREE.SkeletonHelper( object.skeleton.bones[ 0 ] );
             skeletonHelper['skeleton'] = object.skeleton; // allow animation mixer to bind to THREE.SkeletonHelper directly
             callBack({
               object: skeletonHelper,
@@ -1067,7 +1146,7 @@ export class LocalStorageService {
         this.rhino3dmLoader.setLibraryPath(ThreeUtil.getStoreUrl('jsm/libs/rhino3dm/'));
       }
       this.setLoaderWithOption(this.rhino3dmLoader, options);
-      this.rhino3dmLoader.load(key, (result: THREE.Group) => {
+      this.rhino3dmLoader.load(key, (result: THREE.Object3D) => {
         callBack({
           object: result,
           clips: result.animations,
@@ -1134,8 +1213,8 @@ export class LocalStorageService {
           }
           this.gltfLoader.setKTX2Loader(this.ktx2Loader);
         }
-        if (options.useMeshoptDecoder) {
-          this.gltfLoader.setMeshoptDecoder(MeshoptDecoder);
+        if (options.meshoptDecoder) {
+          this.gltfLoader.setMeshoptDecoder(options.meshoptDecoder);
         }
       }
       this.setLoaderWithOption(this.gltfLoader, options);
@@ -1609,8 +1688,8 @@ export class LocalStorageService {
                   material.color.copy(objectMaterial['color']);
                   material.map = objectMaterial['map'];
                   // material.skinning = objectMaterial['skinning'];
-                  material.morphTargets = objectMaterial['morphTargets'];
-                  material.morphNormals = objectMaterial['morphNormals'];
+                  // material.morphTargets = objectMaterial['morphTargets'];
+                  // material.morphNormals = objectMaterial['morphNormals'];
                   object.material[i] = material;
                 }
               } else {
@@ -1620,8 +1699,8 @@ export class LocalStorageService {
                 material.color.copy(objectMaterial['color']);
                 material.map = objectMaterial['map'];
                 // material.skinning = objectMaterial['skinning'];
-                material.morphTargets = objectMaterial['morphTargets'];
-                material.morphNormals = objectMaterial['morphNormals'];
+                // material.morphTargets = objectMaterial['morphTargets'];
+                // material.morphNormals = objectMaterial['morphNormals'];
                 object.material = material;
               }
             }
@@ -1659,7 +1738,6 @@ export class LocalStorageService {
             case 'lottie':
               if (this.lottieLoader === null) {
                 this.lottieLoader = new LottieLoader(ThreeUtil.getLoadingManager());
-                window['bodymovin'] = LOTTE_CANVAS;
               }
               if (ThreeUtil.isNull(options.quality)) {
                 this.lottieLoader.setQuality(options.quality);
@@ -1667,7 +1745,7 @@ export class LocalStorageService {
               this.setLoaderWithOption(this.lottieLoader, options);
               this.lottieLoader.load(
                 key,
-                (texture: THREE.CanvasTexture) => {
+                (texture: any) => {
                   callBack({
                     texture: texture,
                     source: texture,
@@ -1734,6 +1812,15 @@ export class LocalStorageService {
     this.getObjectFromKey(
       key,
       (result) => {
+        if (ThreeUtil.isNotNull(result.object) && ThreeUtil.isNotNull(options)) {
+          if (ThreeUtil.isNotNull(options.name)) {
+            result.object = result.object.getObjectByName(options.name);
+          }
+          if (ThreeUtil.isNotNull(options.scale)) {
+            result.object.scale.setScalar(options.scale);
+            result.object.position.multiplyScalar(options.scale);
+          }
+        }
         callBack(result.object, result.clips, result.geometry, result.morphTargets, result.source);
       },
       options
@@ -1774,10 +1861,11 @@ export class LocalStorageService {
     this.getObjectFromKey(
       key,
       (result) => {
+        const resultMaterial : any = result.material;
         if (result.texture instanceof THREE.Texture) {
           callBack(result.texture, result.source);
-        } else if (result.material instanceof THREE.Material && result.material['map'] instanceof THREE.Texture) {
-          callBack(result.material['map'], result.source);
+        } else if (result.material instanceof THREE.Material && resultMaterial['map'] instanceof THREE.Texture) {
+          callBack(resultMaterial['map'], result.source);
         } else {
           callBack(new THREE.Texture());
         }

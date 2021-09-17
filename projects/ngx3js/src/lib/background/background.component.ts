@@ -16,292 +16,292 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
   /**
    * Input  of background component
    */
-  @Input() private visible: boolean = true;
+  @Input() public visible: boolean = true;
 
   /**
    * Input  of background component
    */
-  @Input() private pseudo: string = null;
+  @Input() public pseudo: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private transition: string[] = null;
+  @Input() public transition: string[] = null;
 
   /**
    * Input  of background component
    */
-  @Input() private content: string = null;
+  @Input() public content: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundColor: string | number = null;
+  @Input() public backgroundColor: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundAlpha: number = null;
+  @Input() public backgroundAlpha: number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundImage: string = null;
+  @Input() public backgroundImage: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundRepeat: string = null;
+  @Input() public backgroundRepeat: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundRepeatX: string = null;
+  @Input() public backgroundRepeatX: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundRepeatY: string = null;
+  @Input() public backgroundRepeatY: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundPosition: string = null;
+  @Input() public backgroundPosition: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundPositionX: string = null;
+  @Input() public backgroundPositionX: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundPositionY: string = null;
+  @Input() public backgroundPositionY: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundSize: string = null;
+  @Input() public backgroundSize: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundSizeX: string = null;
+  @Input() public backgroundSizeX: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundSizeY: string = null;
+  @Input() public backgroundSizeY: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private backgroundClip: string = null;
+  @Input() public backgroundClip: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private padding: string | number = null;
+  @Input() public padding: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private paddingLeft: string | number = null;
+  @Input() public paddingLeft: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private paddingTop: string | number = null;
+  @Input() public paddingTop: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private paddingRight: string | number = null;
+  @Input() public paddingRight: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private paddingBottom: string | number = null;
+  @Input() public paddingBottom: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private margin: string | number = null;
+  @Input() public margin: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private marginLeft: string | number = null;
+  @Input() public marginLeft: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private marginTop: string | number = null;
+  @Input() public marginTop: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private marginRight: string | number = null;
+  @Input() public marginRight: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private marginBottom: string | number = null;
+  @Input() public marginBottom: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private border: string | number = null;
+  @Input() public border: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderColor: string | number = null;
+  @Input() public borderColor: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderStyle: string = null;
+  @Input() public borderStyle: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderWidth: string | number = null;
+  @Input() public borderWidth: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderRadius: string | number = null;
+  @Input() public borderRadius: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderLeft: string | number = null;
+  @Input() public borderLeft: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderTop: string | number = null;
+  @Input() public borderTop: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderRight: string | number = null;
+  @Input() public borderRight: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderBottom: string | number = null;
+  @Input() public borderBottom: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderImage: string = null;
+  @Input() public borderImage: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderImageSource: string = null;
+  @Input() public borderImageSource: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderImageSlice: string | number = null;
+  @Input() public borderImageSlice: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderImageOutset: string | number = null;
+  @Input() public borderImageOutset: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderImageRepeat: string = null;
+  @Input() public borderImageRepeat: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private borderImageWidth: string | number = null;
+  @Input() public borderImageWidth: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private opacity: number = null;
+  @Input() public opacity: number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private color: string | number = null;
+  @Input() public color: string | number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private fontFamily: string = null;
+  @Input() public fontFamily: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private fontSize: number = null;
+  @Input() public fontSize: number = null;
 
   /**
    * Input  of background component
    */
-  @Input() private fontStyle: string = null;
+  @Input() public fontStyle: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private fontWeight: string = null;
+  @Input() public fontWeight: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private textAlign: string = null;
+  @Input() public textAlign: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private textTransform: string = null;
+  @Input() public textTransform: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private textDecoration: string = null;
+  @Input() public textDecoration: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private letterSpacing: string = null;
+  @Input() public letterSpacing: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private textIndent: string = null;
+  @Input() public textIndent: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private textJustify: string = null;
+  @Input() public textJustify: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private textSizeAdjust: string = null;
+  @Input() public textSizeAdjust: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private whiteSpace: string = null;
+  @Input() public whiteSpace: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private wordBreak: string = null;
+  @Input() public wordBreak: string = null;
 
   /**
    * Input  of background component
    */
-  @Input() private wordSpacing: string = null;
+  @Input() public wordSpacing: string = null;
 
   /**
    * Gets background color

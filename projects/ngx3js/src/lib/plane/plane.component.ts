@@ -16,22 +16,22 @@ export class PlaneComponent extends AbstractSubscribeComponent implements OnInit
   /**
    * Input  of plane component
    */
-  @Input() private x: number = null;
+  @Input() public x: number = null;
 
   /**
    * Input  of plane component
    */
-  @Input() private y: number = null;
+  @Input() public y: number = null;
 
   /**
    * Input  of plane component
    */
-  @Input() private z: number = null;
+  @Input() public z: number = null;
 
   /**
    * Input  of plane component
    */
-  @Input() private w: number = null;
+  @Input() public w: number = null;
 
   /**
    * Creates an instance of plane component.

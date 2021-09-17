@@ -50,8 +50,21 @@ import { TranslationComponent } from './translation/translation.component';
 import { TweenComponent } from './tween/tween.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { VisualComponent } from './visual/visual.component';
+import { SizeComponent } from './size/size.component';
+import { ChartLineComponent } from './chart/line/line.component';
+import { ChartBarComponent } from './chart/bar/bar.component';
+import { ChartRadarComponent } from './chart/radar/radar.component';
+import { ChartDoughnutComponent } from './chart/doughnut/doughnut.component';
+import { ChartPieComponent } from './chart/pie/pie.component';
+import { ChartBubbleComponent } from './chart/bubble/bubble.component';
+import { ChartScatterComponent } from './chart/scatter/scatter.component';
+import { ChartAxesComponent } from './chart/axes/axes.component';
+import { ChartLegendComponent } from './chart/legend/legend.component';
+import { ChartTitleComponent } from './chart/title/title.component';
+import { ChartPolarAreaComponent } from './chart/polar-area/polar-area.component';
+import { ChartControllerComponent } from './chart/controller/controller.component';
 
-const COMMON_PIPES = [];
+const COMMON_PIPES:any[] = [];
 const COMMON_DIRECTIVES = [DrawingCanvasDirective];
 const MODULE_COMPONENTS = [
   LookatComponent,
@@ -101,7 +114,20 @@ const MODULE_COMPONENTS = [
   PhysicsConstraintComponent,
   RigidbodyNodeComponent,
   RenderTargetComponent,
-  ChartComponent
+  SizeComponent,
+  ChartComponent,
+  ChartLineComponent, 
+  ChartBarComponent, 
+  ChartRadarComponent, 
+  ChartDoughnutComponent, 
+  ChartPieComponent, 
+  ChartBubbleComponent, 
+  ChartScatterComponent, 
+  ChartAxesComponent, 
+  ChartLegendComponent, 
+  ChartTitleComponent, 
+  ChartPolarAreaComponent,
+  ChartControllerComponent
 ];
 
 /**

@@ -10,15 +10,15 @@ import { ThreeUtil } from '../../interface';
 })
 export class RigidbodyNodeComponent extends AbstractSubscribeComponent implements OnInit {
 
-  @Input() private type:string = "";
+  @Input() public type:string = "";
 
-  @Input() private node: number = 0;
+  @Input() public node: number = 0;
   
-  @Input() private body: any = null;
+  @Input() public body: any = null;
   
-  @Input() private disableCollisionBetweenLinkedBodies: boolean = false;
+  @Input() public disableCollisionBetweenLinkedBodies: boolean = false;
   
-  @Input() private influence: number = 0.5;
+  @Input() public influence: number = 0.5;
 
   constructor() { 
     super();
@@ -72,7 +72,7 @@ export class RigidbodyNodeComponent extends AbstractSubscribeComponent implement
   private ammo: typeof Ammo = null;
   private rigidBody : Ammo.btSoftBody = null;
   
-  public setRigidbody(rigidBody : Ammo.btSoftBody, physics: Ammo.btSoftRigidDynamicsWorld, ammo) {
+  public setRigidbody(rigidBody : Ammo.btSoftBody, physics: Ammo.btSoftRigidDynamicsWorld, ammo : any) {
     this.rigidBody = rigidBody;
     this.physics = physics;
     this.ammo = ammo;
@@ -95,7 +95,7 @@ export class RigidbodyNodeComponent extends AbstractSubscribeComponent implement
     return null;
   }
 
-  private rigidbodyNode = null;
+  private rigidbodyNode : any = null;
 
   public getRigidbodyNode() : Ammo.btTypedConstraint {
     if (ThreeUtil.isNotNull(this.ammo) && ThreeUtil.isNotNull(this.rigidBody) && ThreeUtil.isNotNull(this.physics) && (this.rigidbodyNode === null || this._needUpdate)) {

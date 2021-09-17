@@ -666,7 +666,7 @@ export abstract class AbstractThreeController {
   protected getController<T extends AbstractThreeController>(type: { new (obj: any): T }, refObject?: THREE.Object3D): T {
     const component = this.getComponent(refObject);
     if (ThreeUtil.isNotNull(component.controllerList)) {
-      const controller = component.controllerList.find((controller) => {
+      const controller = component.controllerList.find((controller: any) => {
         return controller.getController() instanceof type;
       });
       if (ThreeUtil.isNotNull(controller)) {
@@ -687,16 +687,15 @@ export abstract class AbstractThreeController {
     const controllers: T[] = [];
     const component = this.getComponent(refObject);
     if (ThreeUtil.isNotNull(component.controllerList)) {
-      const controller = component.controllerList.filter((controller) => {
+      const controller = component.controllerList.filter((controller: any) => {
         if (type === null) {
           return true;
         } else {
           return controller.getController() instanceof type;
         }
       });
-
       if (ThreeUtil.isNotNull(controller) && controller.length > 0) {
-        controller.forEach((controller) => {
+        controller.forEach((controller: any) => {
           controllers.push(controller.getController() as T);
         });
       }
@@ -710,9 +709,10 @@ export abstract class AbstractThreeController {
    */
   public setVariables(variables: { [key: string]: any }) {
     if (variables !== null && typeof variables === 'object') {
+      const selfObj: any = this;
       Object.entries(variables).forEach(([key, value]) => {
-        if (this[key] !== undefined) {
-          this[key] = value;
+        if (selfObj[key] !== undefined) {
+          selfObj[key] = value;
         }
       });
     }
@@ -1017,7 +1017,7 @@ export class AutoMaterialController extends AbstractThreeController {
             repeat: this.getRepeat(),
             yoyo: this.getYoyo(),
             onUpdate: (e) => {
-              this.material['color'].setRGB(colorOpacity.r, colorOpacity.g, colorOpacity.b);
+              material['color'].setRGB(colorOpacity.r, colorOpacity.g, colorOpacity.b);
               material.opacity = colorOpacity.materialOpacity;
             },
           });
@@ -1076,8 +1076,9 @@ export class AutoUniformsController extends AbstractThreeController {
   public setVariables(variables: { [key: string]: any }) {
     super.setVariables(variables);
     this.uniform = null;
-    if (ThreeUtil.isNotNull(this.key) && this.refObject['material']) {
-      const material = this.refObject['material'];
+    const refObject: any = this.refObject;
+    if (ThreeUtil.isNotNull(this.key) && refObject['material']) {
+      const material = refObject['material'];
       if (material instanceof THREE.ShaderMaterial) {
         this.uniform = material.uniforms[this.key];
       }

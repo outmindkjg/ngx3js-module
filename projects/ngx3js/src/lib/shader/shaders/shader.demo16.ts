@@ -29,7 +29,7 @@ export const ShaderDemo16 = {
   uniforms: {
     cameraNear: { value: 0.01 },
     cameraFar: { value: 50 },
-    tDiffuse: { value: null },
-    tDepth: { value: null }
+    tDiffuse: { value: null } as any,
+    tDepth: { value: null } as any,
   },
 };

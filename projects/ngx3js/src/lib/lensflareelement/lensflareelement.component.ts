@@ -19,22 +19,22 @@ export class LensflareelementComponent extends AbstractSubscribeComponent implem
   /**
    * image of LensflareElement
    */
-  @Input() private image: string = null;
+  @Input() public image: string = null;
 
   /**
    * size of LensflareElement
    */
-  @Input() private size: number = null;
+  @Input() public size: number = null;
 
   /**
    * distance of LensflareElement
    */
-  @Input() private distance: number = null;
+  @Input() public distance: number = null;
 
   /**
    * color of LensflareElement
    */
-  @Input() private color: ThreeColor = null;
+  @Input() public color: ThreeColor = null;
 
   /**
    * Creates an instance of LensflareElement.

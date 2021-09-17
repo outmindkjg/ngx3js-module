@@ -23,25 +23,25 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
   /**
    * Fog color.  Example: If set to black, far away objects will be rendered black.
    */
-  @Input() private color: ThreeColor = null;
+  @Input() public color: ThreeColor = null;
 
   /**
    * Defines how fast the fog will grow dense.
    * Default is 0.00025.
    */
-  @Input() private density: number = 0.00025;
+  @Input() public density: number = 0.00025;
 
   /**
    * The minimum distance to start applying fog. Objects that are less than 'near' units from the active camera won't be affected by fog.
    * Default is 1.
    */
-  @Input() private near: number = 1;
+  @Input() public near: number = 1;
 
   /**
    * The maximum distance at which fog stops being calculated and applied. Objects that are more than 'far' units away from the active camera won't be affected by fog.
    * Default is 1000.
    */
-  @Input() private far: number = 1000;
+  @Input() public far: number = 1000;
 
   /**
    * Creates an instance of fog component.
@@ -135,7 +135,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
         case 'exp':
         case 'exp2':
         case 'fogexp2':
-          this.fog = new THREE.FogExp2(ThreeUtil.getColorSafe(this.color,0xffffff).getHex(), ThreeUtil.getTypeSafe(this.density));
+          this.fog = new THREE.FogExp2(ThreeUtil.getColorSafe(this.color,0xffffff).getHex(), ThreeUtil.getTypeSafe(this.density, 0.00025));
           break;
         case 'fog':
         default:

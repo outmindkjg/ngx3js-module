@@ -1,8 +1,5 @@
-ng build ngx3js --prod
+ng build ngx3js --configuration production
 
-npm login
 cd dist/ngx3js
-npm publish
 
-npm install -g npm-install-peers
-npm-install-peers
+npm publish

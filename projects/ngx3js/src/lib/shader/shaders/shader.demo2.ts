@@ -28,6 +28,6 @@ export const ShaderDemo2 = {
   `,
   uniforms: {
     time : { value : 1.0 }, 
-    colorTexture : { value : null}
+    colorTexture : { value : null} as any
   },
 };

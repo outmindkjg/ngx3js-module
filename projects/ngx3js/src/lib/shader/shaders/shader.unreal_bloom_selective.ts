@@ -15,7 +15,7 @@ export const UnrealBloomSelective = {
   }
   `,
   uniforms: {
-    baseTexture : { value : null }, 
-    bloomTexture : { value : null }
+    baseTexture : { value : null } as any, 
+    bloomTexture : { value : null } as any
   },
 };

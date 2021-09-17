@@ -5,7 +5,7 @@ import { HtmlComponent } from '../html/html.component';
 import { CssStyle, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TransformComponent } from '../transform/transform.component';
-// import { ControllerComponent } from '../controller/controller.component';
+// import { AbstractControllerComponent } from '../controller/controller.component';
 
 /**
  * Html collection
@@ -45,32 +45,32 @@ export class VisualComponent extends AbstractSubscribeComponent implements OnIni
    * Notice - case insensitive.
    * 
    */
-  @Input() private childType: string = 'innerHTML';
+  @Input() public childType: string = 'innerHTML';
 
   /**
    * Input  of visual component
    */
-  @Input() private src: string = null;
+  @Input() public src: string = null;
 
   /**
    * Input  of visual component
    */
-  @Input() private value: string | number = '';
+  @Input() public value: string | number = '';
 
   /**
    * Input  of visual component
    */
-  @Input() private inputType: string | number = 'text';
+  @Input() public inputType: string | number = 'text';
 
   /**
    * Input  of visual component
    */
-  @Input() private checked: string | number = 'false';
+  @Input() public checked: string | number = 'false';
 
   /**
    * Input  of visual component
    */
-  @Input() private radioValues: {
+  @Input() public radioValues: {
     value?: string;
     text?: string;
   }[] = null;
@@ -78,7 +78,7 @@ export class VisualComponent extends AbstractSubscribeComponent implements OnIni
   /**
    * Input  of visual component
    */
-  @Input() private selectOptions: {
+  @Input() public selectOptions: {
     value?: string;
     text?: string;
   }[] = null;
@@ -171,7 +171,7 @@ export class VisualComponent extends AbstractSubscribeComponent implements OnIni
   /**
    * Content children of visual component
    */
-  // @ContentChildren(ControllerComponent, { descendants: false }) private controllerList: QueryList<ControllerComponent>;
+  // @ContentChildren(AbstractControllerComponent, { descendants: false }) private controllerList: QueryList<AbstractControllerComponent>;
 
   /**
    * Collection  of visual component

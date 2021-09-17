@@ -12,12 +12,12 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
   /**
    * Input  of abstract subscribe component
    */
-  @Input() protected debug: boolean = false;
+  @Input() public debug: boolean = false;
 
   /**
    * Input  of abstract subscribe component
    */
-  @Input() protected windowExport: string = null;
+  @Input() public windowExport: string = null;
 
   /**
    * Input  of abstract subscribe component
@@ -27,17 +27,17 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
   /**
    * Input  of abstract subscribe component
    */
-  @Input() private overrideParams: { [key: string]: any } = null;
+  @Input() public overrideParams: { [key: string]: any } = null;
 
   /**
    * Input  of abstract subscribe component
    */
-  @Input() private userData: any = null;
+  @Input() public userData: any = null;
 
   /**
    * Input  of abstract subscribe component
    */
-  @Input() private tween: { [key: string]: any } = null;
+  @Input() public tween: { [key: string]: any } = null;
 
   /**
    * Output  of abstract subscribe component
@@ -54,15 +54,27 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
    */
   protected OBJECT_ATTR: string[] = ['init', 'debug', 'enabled', 'userdata', 'overrideparams', 'windowexport', 'tween'];
 
+  protected selfAny : any = this;
   /**
    * Creates an instance of abstract subscribe component.
    */
-  constructor() {}
+  constructor() {
+    this.selfAny = this;
+  }
 
   /**
    * Id  of abstract subscribe component
    */
   protected id: string = '';
+
+  /**
+   * Gets id
+   * 
+   * @returns id 
+   */
+  public getId(): string {
+    return this.id;
+  }
 
   /**
    * A callback method that is invoked immediately after the
@@ -85,6 +97,7 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
    * before a directive, pipe, or service instance is destroyed.
    */
   ngOnDestroy(): void {
+    this.setSubscribeNext('destroy');
     if (this._subscribe !== null) {
       for (let key in this._subscribe) {
         this._subscribe[key].unsubscribe();
@@ -242,7 +255,7 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
   /**
    * Change list of abstract subscribe component
    */
-  private _changeList: string[] = null;
+  protected _changeList: string[] = null;
 
   /**
    * Checks changes
@@ -378,18 +391,7 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
           if (ThreeUtil.isNotNull(this.userData)) {
             Object.entries(this.userData).forEach(([key, value]) => {
               switch (key) {
-                case 'position':
-                case 'positionUp':
-                case 'positionLookat':
-                case 'initPosition':
-                case 'rotation':
-                case 'scale':
-                case 'lookat':
-                case 'customDepthMaterial':
-                case 'customDistanceMaterial':
-                case 'material':
-                case 'geometry':
-                  this.consoleLog('userData Error', key, 'error');
+                case 'component' :
                   break;
                 default:
                   this._userData[key] = value;
@@ -412,7 +414,7 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
    * Gets object
    * @returns object
    */
-  protected getObject<T>(): T {
+  public getObject<T>(): T {
     return this._cashedObj as T;
   }
 
@@ -448,25 +450,17 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
    */
   protected setObject(obj: any) {
     if (this._cashedObj !== obj) {
+      let isLoaded : boolean = this._cashedObj === null ? false : true;
       this._cashedObj = obj;
       this.needUpdate = false;
       if (ThreeUtil.isNotNull(this._cashedObj)) {
         if (ThreeUtil.isNotNull(this._cashedObj.userData)) {
-          Object.entries(this._userData).forEach(([key, value]) => {
+          Object.entries(this._cashedObj.userData).forEach(([key, value]) => {
             switch (key) {
-              case 'position':
-              case 'positionUp':
-              case 'positionLookat':
-              case 'initPosition':
-              case 'rotation':
-              case 'scale':
-              case 'lookat':
-              case 'customDepthMaterial':
-              case 'customDistanceMaterial':
-              case 'material':
-              case 'rigidBody':
-              case 'geometry':
-                delete this._userData[key];
+              case 'component' :
+                break;
+              default :
+                this._userData[key] = value;
                 break;
             }
           });
@@ -477,8 +471,11 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
         }
         this.applyChanges(['init']);
         this.callOnLoad();
+        if (isLoaded) {
+          this.setSubscribeNext('loaded');
+        }
         if (ThreeUtil.isNotNull(this.windowExport) && this.windowExport != '') {
-          window[this.windowExport] = this._cashedObj;
+          (window as any)[this.windowExport] = this._cashedObj;
         }
       }
     }
@@ -552,7 +549,7 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
             }
             this._subject.next(subscribeNext);
           }
-        }, 30);
+        }, 5);
       }
     } else {
       console.trace(this);
@@ -665,17 +662,17 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
   public updateInputParams(params: { [key: string]: any }, firstChange: boolean = true, changes: SimpleChanges = {}, type: string = null) {
     if (ThreeUtil.isNotNull(params)) {
       Object.entries(params).forEach(([key, value]) => {
-        if (this[key] !== undefined && this[key] !== value && ThreeUtil.isNotNull(value)) {
-          changes[key] = new SimpleChange(this[key], value, firstChange);
-          this[key] = value;
+        if (this.selfAny[key] !== undefined && this.selfAny[key] !== value && ThreeUtil.isNotNull(value)) {
+          changes[key] = new SimpleChange(this.selfAny[key], value, firstChange);
+          this.selfAny[key] = value;
         }
       });
     }
     if (ThreeUtil.isNotNull(type)) {
-      if (this['type'] !== undefined) {
-        if (this['type'] !== type) {
-          changes.type = new SimpleChange(this['type'], type, firstChange);
-          this['type'] = type;
+      if (this.selfAny['type'] !== undefined) {
+        if (this.selfAny['type'] !== type) {
+          changes.type = new SimpleChange(this.selfAny['type'], type, firstChange);
+          this.selfAny['type'] = type;
         }
       }
     }

@@ -6,6 +6,8 @@ import { HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureL
 import { NRRDLoader } from 'three/examples/jsm/loaders/NRRDLoader';
 import { RGBMLoader } from 'three/examples/jsm/loaders/RGBMLoader';
 import { NodeMaterial, NormalMapNode, OperatorNode, TextureNode } from 'three/examples/jsm/nodes/Nodes';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { ThreeUtil } from './interface';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { CanvasFunctionType, TextureUtils } from './texture/textureUtils';
@@ -22,7 +24,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	/**
 	 * The Type of Texture of Matrial
 	 */
-	@Input() protected type: string = 'map';
+	@Input() public type: string = 'map';
 
 	/**
 	 * The LoadType of Texture - video, image etc
@@ -30,7 +32,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private loaderType: string = null;
+	@Input() public loaderType: string = null;
 
 	/**
 	 * The CubeType of Texture -
@@ -38,7 +40,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private cubeType: string = null;
+	@Input() public cubeType: string = null;
 
 	/**
 	 * The name of the object (doesn't need to be unique). Default is an empty string.
@@ -46,32 +48,37 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	@Input() public name: string = null;
 
 	/**
+	 * refName  of geometry component
+	 */
+	@Input() public refName: string | string[] = null;
+
+	/**
 	 * If set to *true*, the alpha channel, if present, is multiplied into the color channels when the texture is uploaded to the GPU. Default is *false*.<br /><br />
 	 * Note that this property has no effect for [link:https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap ImageBitmap].
 	 * You need to configure on bitmap creation instead. See [page:ImageBitmapLoader].
 	 *
 	 */
-	@Input() private premultiplyAlpha: boolean = null;
+	@Input() public premultiplyAlpha: boolean = null;
 
 	/**
 	 * The data of DataTexture
 	 */
-	@Input() private data: BufferSource | number[] = null;
+	@Input() public data: BufferSource | number[] = null;
 
 	/**
 	 * Input  of abstract texture component
 	 */
-	@Input() private programParam: any = null;
+	@Input() public programParam: any = null;
 
 	/**
 	 * Input  of abstract texture component
 	 */
-	@Input() private programMipmaps: any[] = null;
+	@Input() public programMipmaps: any[] = null;
 
 	/**
 	 * The Texture param use when call Canvas Program.
 	 */
-	@Input() private text: string = null;
+	@Input() public text: string = null;
 
 	/**
 	 * How the image is applied to the object. An object type of [page:Textures THREE.UVMapping] is the default,
@@ -89,7 +96,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.CubeUVRefractionMapping   - CubeUVRefractionMapping, cubeuvrefraction
 	 * @see THREE.Texture.DEFAULT_MAPPING   - default
 	 */
-	@Input() protected mapping: string = null;
+	@Input() public mapping: string = null;
 
 	/**
 	 * This defines how the texture is wrapped horizontally and corresponds to *U* in UV mapping.<br />
@@ -105,7 +112,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, mirroredrepeat
 	 * @see THREE.ClampToEdgeWrapping    - ClampToEdgeWrapping, clamptoedge
 	 */
-	@Input() private wrap: string = null;
+	@Input() public wrap: string = null;
 
 	/**
 	 * This defines how the texture is wrapped horizontally and corresponds to *U* in UV mapping.<br />
@@ -119,7 +126,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, mirroredrepeat
 	 * @see THREE.ClampToEdgeWrapping    - ClampToEdgeWrapping, clamptoedge
 	 */
-	@Input() private wrapS: string = null;
+	@Input() public wrapS: string = null;
 
 	/**
 	 * This defines how the texture is wrapped vertically and corresponds to *V* in UV mapping.<br />
@@ -135,7 +142,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, mirroredrepeat
 	 * @see THREE.ClampToEdgeWrapping    - ClampToEdgeWrapping, clamptoedge
 	 */
-	@Input() private wrapT: string = null;
+	@Input() public wrapT: string = null;
 
 	/**
 	 * The Default Value of magFilter, minFilter
@@ -150,7 +157,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
 	 * @see THREE.LinearFilter                - Linearfilter, linear
 	 */
-	@Input() private filter: string = null;
+	@Input() public filter: string = null;
 
 	/**
 	 * How the texture is sampled when a texel covers more than one pixel. The default is
@@ -168,7 +175,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
 	 * @see THREE.LinearFilter                - Linearfilter, linear
 	 */
-	@Input() private magFilter: string = null;
+	@Input() public magFilter: string = null;
 
 	/**
 	 * How the texture is sampled when a texel covers less than one pixel. The default is
@@ -185,7 +192,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
 	 * @see THREE.LinearFilter                - Linearfilter, linear
 	 */
-	@Input() private minFilter: string = null;
+	@Input() public minFilter: string = null;
 
 	/**
 	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically
@@ -210,7 +217,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
 	 * @see THREE.RGBAFormat - RGBAFormat, RGBA
 	 */
-	@Input() private format: string = null;
+	@Input() public format: string = null;
 
 	/**
 	 * This must correspond to the [page:Texture.format .format]. The default is [page:Textures THREE.UnsignedByteType],
@@ -233,7 +240,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.UnsignedShort565Type - UnsignedShort565Type , UnsignedShort565
 	 * @see THREE.UnsignedInt248Type - UnsignedInt248Type , UnsignedInt248
 	 */
-	@Input() private dataType: string = null;
+	@Input() public dataType: string = null;
 
 	/**
 	 * The number of samples taken along the axis through the pixel that has the highest density of texels.
@@ -241,7 +248,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * at the cost of more texture samples being used. Use [page:WebGLRenderer.getMaxAnisotropy renderer.getMaxAnisotropy]() to
 	 * find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
 	 */
-	@Input() private anisotropy: number = null;
+	@Input() public anisotropy: number = null;
 
 	/**
 	 * 4 by default. Specifies the alignment requirements for the start of each pixel row in memory.
@@ -250,7 +257,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * See [link:http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml glPixelStorei]
 	 * for more information.
 	 */
-	@Input() private unpackAlignment: number = null;
+	@Input() public unpackAlignment: number = null;
 
 	/**
 	 * [page:Textures THREE.LinearEncoding] is the default.
@@ -271,7 +278,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @see THREE.RGBM16Encoding - RGBM16Encoding ,
 	 * @see THREE.RGBDEncoding - RGBDEncoding ,
 	 */
-	@Input() private encoding: string = null;
+	@Input() public encoding: string = null;
 
 	/**
 	 * How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set
@@ -281,7 +288,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 *
 	 * The default value of repeatX , repeatY
 	 */
-	@Input() private repeat: number = null;
+	@Input() public repeat: number = null;
 
 	/**
 	 * How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set
@@ -291,7 +298,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 *
 	 * The value of repeat.x
 	 */
-	@Input() private repeatX: number = null;
+	@Input() public repeatX: number = null;
 
 	/**
 	 * How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set
@@ -301,7 +308,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 *
 	 * The value of repeat.y
 	 */
-	@Input() private repeatY: number = null;
+	@Input() public repeatY: number = null;
 
 	/**
 	 * How much a single repetition of the texture is offset from the beginning, in each direction U and V.
@@ -309,7 +316,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 *
 	 * The default value of offsetX, offsetY
 	 */
-	@Input() private offset: number = null;
+	@Input() public offset: number = null;
 
 	/**
 	 * How much a single repetition of the texture is offset from the beginning, in each direction U and V.
@@ -317,7 +324,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 *
 	 * The value of offset.x
 	 */
-	@Input() private offsetX: number = null;
+	@Input() public offsetX: number = null;
 
 	/**
 	 * How much a single repetition of the texture is offset from the beginning, in each direction U and V.
@@ -325,56 +332,56 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 *
 	 * The value of offset.y
 	 */
-	@Input() private offsetY: number = null;
+	@Input() public offsetY: number = null;
 
 	/**
 	 * The point around which rotation occurs. A value of (0.5, 0.5) corresponds to the center of the texture. Default is (0, 0), the lower left.
 	 *
 	 * The default value of centerX, centerY
 	 */
-	@Input() private center: number = null;
+	@Input() public center: number = null;
 
 	/**
 	 * The point around which rotation occurs. A value of (0.5, 0.5) corresponds to the center of the texture. Default is (0, 0), the lower left.
 	 *
 	 * The value of center.x
 	 */
-	@Input() private centerX: number = null;
+	@Input() public centerX: number = null;
 
 	/**
 	 * The point around which rotation occurs. A value of (0.5, 0.5) corresponds to the center of the texture. Default is (0, 0), the lower left.
 	 *
 	 * The value of center.y
 	 */
-	@Input() private centerY: number = null;
+	@Input() public centerY: number = null;
 
 	/**
 	 * Input  of abstract texture component
 	 */
-	@Input() private width: number = null;
+	@Input() public width: number = null;
 
 	/**
 	 * Input  of abstract texture component
 	 */
-	@Input() private height: number = null;
+	@Input() public height: number = null;
 
 	/**
 	 * Whether to generate mipmaps (if possible) for a texture. True by default. Set this to false if you are
 	 * creating mipmaps manually.
 	 */
-	@Input() private generateMipmaps: boolean = null;
+	@Input() public generateMipmaps: boolean = null;
 
 	/**
 	 * How much the texture is rotated around the center point, in radians. Positive values are counter-clockwise. Default is *0*.
 	 */
-	@Input() private rotation: number = null;
+	@Input() public rotation: number = null;
 
 	/**
 	 * If set to *true*, the texture is flipped along the vertical axis when uploaded to the GPU. Default is *true*.<br /><br />
 	 * Note that this property has no effect for [link:https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap ImageBitmap].
 	 * You need to configure on bitmap creation instead. See [page:ImageBitmapLoader].
 	 */
-	@Input() private flipY: boolean = null;
+	@Input() public flipY: boolean = null;
 
 	/**
 	 * The base attribute can be fine without re-make Texture
@@ -410,7 +417,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 		if (this.texture !== null) {
 			if (ThreeUtil.isNotNull(this.texture.image)) {
 				if (this.texture instanceof THREE.VideoTexture && ThreeUtil.isNotNull(this.texture.image.srcObject) && ThreeUtil.isNotNull(this.texture.image.srcObject.getTracks)) {
-					this.texture.image.srcObject.getTracks().forEach((track) => {
+					this.texture.image.srcObject.getTracks().forEach((track : any) => {
 						track.stop();
 					});
 				} else if (this.texture.image instanceof HTMLMediaElement) {
@@ -754,6 +761,11 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 								case 'depth':
 									loadOption[key.toLowerCase()] = parseInt(value);
 									break;
+								case 'sigma':
+								case 'near':
+								case 'far':
+									loadOption[key.toLowerCase()] = parseFloat(value);
+									break;
 								case 'loaderType':
 									loadOption.type = value;
 									break;
@@ -789,6 +801,9 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 									}
 									textureOption[key.toLowerCase()] = ThreeUtil.getVector2Safe(parseFloat(x), parseFloat(y), null, null, true);
 									break;
+								default:
+									textureOption[key] = parseFloat(value);
+									break;
 							}
 						}
 				}
@@ -818,17 +833,12 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 		} else if (image instanceof THREE.Texture) {
 			texture = image;
 		} else {
-			if (image === 'room') {
-				const pmremGenerator = new THREE.PMREMGenerator(ThreeUtil.getRenderer() as THREE.WebGLRenderer);
-				texture = pmremGenerator.fromScene(new RoomEnvironment()).texture;
-			} else {
-				texture = this.getTextureImage(image, cubeImage, null, loadOption, () => {
-					this.setTextureOptions(texture, textureOption);
-					if (ThreeUtil.isNotNull(onLoad)) {
-						onLoad();
-					}
-				});
-			}
+			texture = this.getTextureImage(image, cubeImage, null, loadOption, () => {
+				this.setTextureOptions(texture, textureOption);
+				if (ThreeUtil.isNotNull(onLoad)) {
+					onLoad();
+				}
+			});
 		}
 		this.setTextureOptions(texture, textureOption);
 		return texture;
@@ -982,7 +992,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 						this.fileLoader.load(ThreeUtil.getStoreUrl(image), (data) => {
 							const zip = unzipSync(new Uint8Array(data as ArrayBuffer));
 							let fileName = (options.fileName || '').toLowerCase();
-							let fileObject = null;
+							let fileObject : any = null;
 							Object.entries(zip).forEach(([key, value]) => {
 								if (fileObject === null || key.toLowerCase() === fileName) {
 									fileObject = value;
@@ -993,6 +1003,11 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 							onLoad();
 						});
 						return texture;
+					} else if (image.endsWith('.room')) {
+						const pmremGenerator = ThreeUtil.getPmremGenerator();
+						const renderTarget = pmremGenerator.fromScene(new RoomEnvironment(), ThreeUtil.getTypeSafe(options.sigma, 0), ThreeUtil.getTypeSafe(options.near, 0.1), ThreeUtil.getTypeSafe(options.far, 100));
+						pmremGenerator.dispose();
+						return renderTarget.texture;
 					} else if (image.endsWith('.nrrd')) {
 						if (this.nrrdLoader === null) {
 							this.nrrdLoader = new NRRDLoader(ThreeUtil.getLoadingManager());
@@ -1031,9 +1046,9 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 			}
 		} else if (ThreeUtil.isNotNull(options.data)) {
 			const dataWidth: number = ThreeUtil.getTypeSafe(options.width, 32);
-			let dataHeight: number = ThreeUtil.getTypeSafe(options.height, 32);
+			const dataHeight: number = ThreeUtil.getTypeSafe(options.height, 32);
 			const data = options.data;
-			let textureData: BufferSource = null;
+			let textureData: any = null;
 			if (data instanceof Int8Array || data instanceof Uint8Array || data instanceof Uint8ClampedArray || data instanceof Int16Array || data instanceof Uint16Array || data instanceof Int32Array || data instanceof Uint32Array || data instanceof Float32Array || data instanceof Float64Array) {
 				textureData = data;
 			} else if (Array.isArray(data)) {
@@ -1180,7 +1195,7 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @param [options]
 	 * @returns texture options
 	 */
-	public static setTextureOptions(texture: THREE.Texture, options: { [key: string]: any } = {}): THREE.Texture {
+	public static setTextureOptions(texture: { [key: string]: any }, options: { [key: string]: any } = {}): any {
 		if (options == {}) {
 			return;
 		}
@@ -1260,19 +1275,246 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	/**
 	 * Material  of abstract texture component
 	 */
-	private material: THREE.Material | THREE.Scene = null;
+	private _material: {
+		[key: string]: {
+			refType: string;
+			materials: (THREE.Material | THREE.WebGLRenderTarget | THREE.Scene | { [uniform: string]: THREE.IUniform })[];
+		};
+	} = {};
+
+	/**
+	 * unSets object3d
+	 * @param object3d
+	 */
+	public unsetMaterial(material: AbstractSubscribeComponent) {
+		const key: string = material.getId();
+		this.unSubscribeRefer('texture_' + key);
+		this.unSubscribeRefer('untexture_' + key);
+		if (ThreeUtil.isNotNull(this._material[key])) {
+			delete this._material[key];
+		}
+	}
 
 	/**
 	 * Sets material
 	 * @param material
 	 */
-	public setMaterial(material: THREE.Material | THREE.Scene) {
-		if (ThreeUtil.isNotNull(material) && this.material !== material) {
-			this.material = material;
-			if (this.texture !== null) {
-				this.applyMaterial();
-			} else {
-				this.getTexture();
+	public setMaterial(material: AbstractSubscribeComponent, refType: string = 'auto') {
+		if (ThreeUtil.isNotNull(material)) {
+			const key: string = material.getId();
+			let object = material.getObject();
+			let objectList: any[] = [];
+			if (ThreeUtil.isNotNull(object)) {
+				if (ThreeUtil.isNotNull(this.refName) && object instanceof THREE.Object3D) {
+					const object3d: THREE.Object3D = object;
+					if (this.refName === '*') {
+						object3d.traverse((child : any) => {
+							if (ThreeUtil.isNotNull(child['material'])) {
+								objectList.push(child);
+							}
+						});
+					} else if (Array.isArray(this.refName)) {
+						this.refName.forEach((refName) => {
+							const foundObj = object3d.getObjectByName(refName);
+							if (ThreeUtil.isNotNull(foundObj)) {
+								objectList.push(foundObj);
+							}
+						});
+					} else {
+						const foundObj = object3d.getObjectByName(this.refName);
+						if (ThreeUtil.isNotNull(foundObj)) {
+							objectList.push(foundObj);
+						}
+					}
+				} else {
+					objectList.push(object);
+				}
+			}
+			let materials: (THREE.Material | THREE.Scene | THREE.WebGLRenderTarget | { [uniform: string]: THREE.IUniform })[] = [];
+			if (objectList.length > 0) {
+				objectList.forEach((object) => {
+					if (object instanceof THREE.Scene) {
+						materials.push(object);
+					} else if (object instanceof THREE.Material) {
+						if (object instanceof THREE.ShaderMaterial) {
+							if (object instanceof NodeMaterial) {
+								materials.push(object);
+							} else {
+								materials.push(object.uniforms);
+							}
+						} else {
+							materials.push(object);
+						}
+					} else if (object instanceof ShaderPass) {
+						materials.push(object.material.uniforms);
+					} else if (object instanceof EffectComposer) {
+						materials.push(object.renderTarget1);
+					}
+				});
+			}
+			this._material[key] = {
+				refType: refType,
+				materials: materials,
+			};
+			this.subscribeRefer(
+				'texture_' + key,
+				ThreeUtil.getSubscribe(
+					material,
+					() => {
+						this.setMaterial(material);
+					},
+					'loaded'
+				)
+			);
+			this.subscribeRefer(
+				'untexture_' + key,
+				ThreeUtil.getSubscribe(
+					material,
+					() => {
+						this.unsetMaterial(material);
+					},
+					'destroy'
+				)
+			);
+			this.getTexture();
+			this.synkMaterial(this.texture, key);
+		}
+	}
+
+	/**
+	 * Synks object3d
+	 * @param [geometry]
+	 */
+	synkMaterial(texture: THREE.Texture = null, key: string = null) {
+		if (ThreeUtil.isNotNull(texture) && this.enabled) {
+			if (ThreeUtil.isNotNull(this._material)) {
+				const materialList: {
+					refType: string;
+					materials: (THREE.Material | THREE.WebGLRenderTarget | THREE.Scene | { [uniform: string]: THREE.IUniform })[];
+				}[] = [];
+				if (ThreeUtil.isNotNull(key)) {
+					if (ThreeUtil.isNotNull(this._material[key]) && ThreeUtil.isNotNull(this._material[key]) && this._material[key].materials.length > 0) {
+						materialList.push(this._material[key]);
+					}
+				} else {
+					Object.entries(this._material).forEach(([_, material]) => {
+						if (ThreeUtil.isNotNull(material) && material.materials.length > 0) {
+							materialList.push(material);
+						}
+					});
+				}
+				materialList.forEach((info) => {
+					let textureType = info.refType;
+					if (textureType === 'auto' || textureType === 'texture' || textureType === '') {
+						textureType = this.type;
+					}
+					info.materials.forEach((material) => {
+						if (material instanceof THREE.Material) {
+							switch (textureType.toLowerCase()) {
+								case 'matcap':
+									this.applyTexture2Material(material, 'matcap', texture);
+									break;
+								case 'env':
+								case 'envmap':
+									this.applyTexture2Material(material, 'envMap', texture);
+									break;
+								case 'specular':
+								case 'specularmap':
+									this.applyTexture2Material(material, 'specularMap', texture);
+									break;
+								case 'alpha':
+								case 'alphamap':
+									this.applyTexture2Material(material, 'alphaMap', texture);
+									break;
+								case 'emissive':
+								case 'emissivemap':
+									this.applyTexture2Material(material, 'emissiveMap', texture);
+									break;
+								case 'bump':
+								case 'bumpmap':
+									this.applyTexture2Material(material, 'bumpMap', texture);
+									break;
+								case 'normal':
+								case 'normalmap':
+									this.applyTexture2Material(material, 'normalMap', texture);
+									break;
+								case 'ao':
+								case 'aomap':
+									this.applyTexture2Material(material, 'aoMap', texture);
+									break;
+								case 'displace':
+								case 'displacement':
+								case 'displacementmap':
+									this.applyTexture2Material(material, 'displacementMap', texture);
+									break;
+								case 'clearcoatnormal':
+								case 'clearcoatnormalmap':
+									this.applyTexture2Material(material, 'clearcoatNormalMap', texture);
+									break;
+								case 'metalness':
+								case 'metalnessmap':
+									this.applyTexture2Material(material, 'metalnessMap', texture);
+									break;
+								case 'roughness':
+								case 'roughnessmap':
+									this.applyTexture2Material(material, 'roughnessMap', texture);
+									break;
+								case 'light':
+								case 'lightmap':
+									this.applyTexture2Material(material, 'lightMap', texture);
+									break;
+								case 'gradient':
+								case 'gradientmap':
+									this.applyTexture2Material(material, 'gradientMap', texture);
+									break;
+								case 'map':
+									this.applyTexture2Material(material, 'map', texture);
+									break;
+								default:
+									this.applyTexture2Material(material, this.type, texture);
+									break;
+							}
+							material.needsUpdate = true;
+						} else if (material instanceof THREE.Scene) {
+							switch (textureType.toLowerCase()) {
+								case 'environmentbackground':
+								case 'environment-background':
+								case 'background-environment':
+								case 'backgroundenvironment':
+									material.environment = texture;
+									material.background = texture;
+									break;
+								case 'environment':
+									material.environment = texture;
+									break;
+								case 'background':
+								default:
+									material.background = texture;
+									break;
+							}
+						} else if (material instanceof THREE.WebGLRenderTarget) {
+							material.setTexture(texture);
+						} else {
+							const textureTypeInfo = (textureType + '..').split('.');
+							switch (textureTypeInfo[0].toLowerCase()) {
+								case 'uniforms':
+									const uniformKey = textureTypeInfo[1];
+									const uniformSeqn = parseInt(textureTypeInfo[2] || '-1');
+									if (uniformSeqn > -1) {
+										if (!Array.isArray(material[uniformKey].value)) {
+											material[uniformKey].value = [];
+										}
+										material[uniformKey].value[uniformSeqn] = texture;
+									} else {
+										material[uniformKey].value = texture;
+									}
+									break;
+							}
+						}
+					});
+				});
+			} else if (this.texture !== texture) {
+				this.texture = texture;
 			}
 		}
 	}
@@ -1284,132 +1526,39 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 	 * @param texture
 	 */
 	protected applyTexture2Material(material: THREE.Material, key: string, texture: THREE.Texture): void {
+		const materialAny : any = material;
 		if (material instanceof NodeMaterial) {
 			switch (key) {
 				case 'diffuseMap':
-					if (material['color'] instanceof OperatorNode) {
-						const color: OperatorNode = material['color'];
+					if (materialAny['color'] instanceof OperatorNode) {
+						const color: OperatorNode = materialAny['color'];
 						if (color.a instanceof TextureNode) {
 							color.a.value = texture;
 						}
 					}
 					break;
 				case 'normalMap':
-					if (material['normal'] instanceof NormalMapNode) {
-						const normal: NormalMapNode = material['normal'];
+					if (materialAny['normal'] instanceof NormalMapNode) {
+						const normal: NormalMapNode = materialAny['normal'];
 						if (normal.value instanceof TextureNode) {
 							normal.value.value = texture;
 						} else {
 							normal.value = new TextureNode(texture);
 						}
 					} else {
-						material['normal'] = new NormalMapNode(new TextureNode(texture));
+						materialAny['normal'] = new NormalMapNode(new TextureNode(texture));
 					}
 					break;
 				default:
-					if (material[key] instanceof TextureNode) {
-						material[key].value = texture;
+					if (materialAny[key] instanceof TextureNode) {
+						materialAny[key].value = texture;
 					} else {
-						material[key] = new TextureNode(texture);
+						materialAny[key] = new TextureNode(texture);
 					}
 					break;
 			}
-		} else if (material[key] !== undefined) {
-			material[key] = texture;
-		}
-	}
-
-	/**
-	 * Applys material
-	 */
-	protected applyMaterial() {
-		if (this.material !== null && this.texture !== null) {
-			if (this.texture instanceof THREE.VideoTexture && this.texture.image.readyState === 0) {
-				return ;
-			}
-			if (this.material instanceof THREE.Material) {
-				switch (this.type.toLowerCase()) {
-					case 'matcap':
-						this.applyTexture2Material(this.material, 'matcap', this.texture);
-						break;
-					case 'env':
-					case 'envmap':
-						this.applyTexture2Material(this.material, 'envMap', this.texture);
-						break;
-					case 'specular':
-					case 'specularmap':
-						this.applyTexture2Material(this.material, 'specularMap', this.texture);
-						break;
-					case 'alpha':
-					case 'alphamap':
-						this.applyTexture2Material(this.material, 'alphaMap', this.texture);
-						break;
-					case 'emissive':
-					case 'emissivemap':
-						this.applyTexture2Material(this.material, 'emissiveMap', this.texture);
-						break;
-					case 'bump':
-					case 'bumpmap':
-						this.applyTexture2Material(this.material, 'bumpMap', this.texture);
-						break;
-					case 'normal':
-					case 'normalmap':
-						this.applyTexture2Material(this.material, 'normalMap', this.texture);
-						break;
-					case 'ao':
-					case 'aomap':
-						this.applyTexture2Material(this.material, 'aoMap', this.texture);
-						break;
-					case 'displace':
-					case 'displacement':
-					case 'displacementmap':
-						this.applyTexture2Material(this.material, 'displacementMap', this.texture);
-						break;
-					case 'clearcoatnormal':
-					case 'clearcoatnormalmap':
-						this.applyTexture2Material(this.material, 'clearcoatNormalMap', this.texture);
-						break;
-					case 'metalness':
-					case 'metalnessmap':
-						this.applyTexture2Material(this.material, 'metalnessMap', this.texture);
-						break;
-					case 'roughness':
-					case 'roughnessmap':
-						this.applyTexture2Material(this.material, 'roughnessMap', this.texture);
-						break;
-					case 'light':
-					case 'lightmap':
-						this.applyTexture2Material(this.material, 'lightMap', this.texture);
-						break;
-					case 'gradient':
-					case 'gradientmap':
-						this.applyTexture2Material(this.material, 'gradientMap', this.texture);
-						break;
-					case 'map':
-						this.applyTexture2Material(this.material, 'map', this.texture);
-						break;
-					default:
-						this.applyTexture2Material(this.material, this.type, this.texture);
-						break;
-				}
-				this.material.needsUpdate = true;
-			} else {
-				switch (this.type.toLowerCase()) {
-					case 'environment':
-						this.material.environment = this.texture;
-						break;
-					case 'environmentbackground':
-					case 'environment-background':
-					case 'background-environment':
-					case 'backgroundenvironment':
-						this.material.background = this.material.environment = this.texture;
-						break;
-					case 'background':
-					default:
-						this.material.background = this.texture;
-						break;
-				}
-			}
+		} else if (materialAny[key] !== undefined) {
+			materialAny[key] = texture;
 		}
 	}
 
@@ -1424,24 +1573,12 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 				this.getTexture();
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['image', 'storagename', 'storageoption', 'cubeimage', 'loadertype', 'canvas'])) {
-				this.needUpdate = true;
-				return;
-			}
 			AbstractTextureComponent.setTextureOptions(this.texture, this.getTextureOptions());
 			if (ThreeUtil.isTextureLoaded(this.texture)) {
 				this.texture.needsUpdate = true;
 			}
 			super.applyChanges(changes);
 		}
-	}
-
-	/**
-	 * Gets pmrem generator
-	 * @returns pmrem generator
-	 */
-	protected getPmremGenerator(): THREE.PMREMGenerator {
-		return new THREE.PMREMGenerator(ThreeUtil.getRenderer() as THREE.WebGLRenderer);
 	}
 
 	/**
@@ -1458,11 +1595,11 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 					case 'fromequirectangular':
 						{
 							AbstractTextureComponent.setTextureOptions(texture, this.getTextureOptions());
-							const pmremGenerator = this.getPmremGenerator();
+							const pmremGenerator = ThreeUtil.getPmremGenerator();
 							const equirectangular = pmremGenerator.fromEquirectangular(texture).texture;
+							pmremGenerator.dispose();
 							texture.dispose();
 							texture = equirectangular;
-							pmremGenerator.dispose();
 						}
 						break;
 					case 'cube':
@@ -1470,11 +1607,11 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 					case 'fromcubemap':
 						if (texture instanceof THREE.CubeTexture) {
 							AbstractTextureComponent.setTextureOptions(texture, this.getTextureOptions());
-							const pmremGenerator = this.getPmremGenerator();
+							const pmremGenerator = ThreeUtil.getPmremGenerator();
 							const cubemap = pmremGenerator.fromCubemap(texture).texture;
 							texture.dispose();
-							texture = cubemap;
 							pmremGenerator.dispose();
+							texture = cubemap;
 						}
 						break;
 				}
@@ -1484,7 +1621,10 @@ export abstract class AbstractTextureComponent extends AbstractSubscribeComponen
 				super.setObject(this.texture);
 			}
 			AbstractTextureComponent.setTextureOptions(this.texture, this.getTextureOptions());
-			this.applyMaterial();
+			this.synkMaterial(this.texture);
+			if (ThreeUtil.isTextureLoaded(this.texture)) {
+				this.texture.needsUpdate = true;
+			}
 			this.setSubscribeNext(['texture', 'loaded']);
 		}
 	}

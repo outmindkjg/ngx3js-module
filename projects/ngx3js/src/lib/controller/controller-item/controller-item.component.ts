@@ -39,7 +39,7 @@ export class ControllerItemComponent extends AbstractSubscribeComponent implemen
   /**
    * Input  of controller item component
    */
-  @Input() private lookathead: number = null;
+  @Input() public lookathead: number = null;
 
   /**
    * Input  of controller item component
@@ -47,180 +47,92 @@ export class ControllerItemComponent extends AbstractSubscribeComponent implemen
    * Notice - case insensitive.
    *
    */
-  @Input() private curve: string = null;
+  @Input() public curve: string = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private scale: number = null;
+  @Input() public scale: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private radius: number = null;
+  @Input() public radius: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private radiusInner: number = null;
+  @Input() public radiusInner: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private radiusX: number = null;
+  @Input() public radiusX: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private radiusY: number = null;
+  @Input() public radiusY: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private radiusZ: number = null;
+  @Input() public radiusZ: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private rotation: number = null;
+  @Input() public rotation: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private rotationX: number = null;
+  @Input() public rotationX: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private rotationY: number = null;
+  @Input() public rotationY: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private rotationZ: number = null;
+  @Input() public rotationZ: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private center: number = null;
+  @Input() public center: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private centerX: number = null;
+  @Input() public centerX: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private centerY: number = null;
+  @Input() public centerY: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private centerZ: number = null;
+  @Input() public centerZ: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private duration: number = 1;
+  @Input() public duration: number = 1;
 
   /**
    * Input  of controller item component
    */
-  @Input() private delta: number = null;
+  @Input() public delta: number = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private multiply: number = null;
-
-  /**
-   * Input  of controller item component
-   *
-   * Notice - case insensitive.
-   *
-   */
-  @Input() private options: string = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private visible: boolean = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private color: ThreeColor = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private opacity: number = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private tubularSegments: number = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private tubeRadius: number = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private tubeRadiusSegments: number = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private closed: boolean = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private material: string = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private uniform: string = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private wave: number = 0;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private waveR: number = 0;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private waveH: number = 0;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private rate: number = 1;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private rateX: number = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private rateY: number = null;
-
-  /**
-   * Input  of controller item component
-   */
-  @Input() private rateZ: number = null;
+  @Input() public multiply: number = null;
 
   /**
    * Input  of controller item component
@@ -228,22 +140,87 @@ export class ControllerItemComponent extends AbstractSubscribeComponent implemen
    * Notice - case insensitive.
    *
    */
-  @Input() private valueType: string = 'auto';
+  @Input() public options: string = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private refValue: any = null;
+  @Input() public visible: boolean = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private minValue: number = 0;
+  @Input() public color: ThreeColor = null;
 
   /**
    * Input  of controller item component
    */
-  @Input() private maxValue: number = 1;
+  @Input() public opacity: number = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public tubularSegments: number = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public tubeRadius: number = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public tubeRadiusSegments: number = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public closed: boolean = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public material: string = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public uniform: string = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public wave: number = 0;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public waveR: number = 0;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public waveH: number = 0;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public rate: number = 1;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public rateX: number = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public rateY: number = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public rateZ: number = null;
 
   /**
    * Input  of controller item component
@@ -251,12 +228,35 @@ export class ControllerItemComponent extends AbstractSubscribeComponent implemen
    * Notice - case insensitive.
    *
    */
-  @Input() private colorType: string = 'rgb';
+  @Input() public valueType: string = 'auto';
 
   /**
    * Input  of controller item component
    */
-  @Input() private refRate: any = null;
+  @Input() public refValue: any = null;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public minValue: number = 0;
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public maxValue: number = 1;
+
+  /**
+   * Input  of controller item component
+   *
+   * Notice - case insensitive.
+   *
+   */
+  @Input() public colorType: string = 'rgb';
+
+  /**
+   * Input  of controller item component
+   */
+  @Input() public refRate: any = null;
 
   /**
    * Gets curve
@@ -500,6 +500,7 @@ export class ControllerItemComponent extends AbstractSubscribeComponent implemen
           case 'position':
             this._helper.scale.set(1, 1, 1);
             this._helperPoint.visible = false;
+            break;
           case 'positionlookat':
             this._helper.scale.set(1, 1, 1);
             this._helperPoint.visible = true;
@@ -676,7 +677,7 @@ export class ControllerItemComponent extends AbstractSubscribeComponent implemen
           }
         case 'material':
           if (ThreeUtil.isNotNull(this.material) && this._controlItem.material !== null) {
-            const material = this._controlItem.material;
+            const material : any = this._controlItem.material;
             if (ThreeUtil.isNotNull(material) && ThreeUtil.isNotNull(material[this.material])) {
               let scale: number = 1;
               const oldValue = material[this.material];
@@ -770,9 +771,10 @@ export class ControllerItemComponent extends AbstractSubscribeComponent implemen
                     this._controlItem.scale.lerp(value as THREE.Vector3, elapsedAlpha);
                     break;
                   case 'rotation':
-                    const rotationX = this.getLerpFloat(this._controlItem.rotation.x, value['x'], elapsedAlpha);
-                    const rotationY = this.getLerpFloat(this._controlItem.rotation.y, value['y'], elapsedAlpha);
-                    const rotationZ = this.getLerpFloat(this._controlItem.rotation.z, value['z'], elapsedAlpha);
+                    const valueObj : any = value;
+                    const rotationX = this.getLerpFloat(this._controlItem.rotation.x, valueObj['x'], elapsedAlpha);
+                    const rotationY = this.getLerpFloat(this._controlItem.rotation.y, valueObj['y'], elapsedAlpha);
+                    const rotationZ = this.getLerpFloat(this._controlItem.rotation.z, valueObj['z'], elapsedAlpha);
                     this._controlItem.rotation.set(rotationX, rotationY, rotationZ);
                     break;
                 }

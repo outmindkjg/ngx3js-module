@@ -41,11 +41,11 @@ export const ShaderLava = {
   }
   `,
   uniforms: {
-    fogDensity : { value : 0.45 },
-    fogColor : { value : new THREE.Vector3(0,0,0) },
-    time : { value : 1 },
-    uvScale : { value : new THREE.Vector2(3.0,1.0) },
-    texture1 : { value : null},
-    texture2 : { value : null}
+    fogDensity: { value: 0.45 },
+    fogColor: { value: new THREE.Vector3(0, 0, 0) },
+    time: { value: 1 },
+    uvScale: { value: new THREE.Vector2(3.0, 1.0) },
+    texture1: { value: null } as any,
+    texture2: { value: null } as any,
   },
 };

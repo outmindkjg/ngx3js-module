@@ -108,7 +108,7 @@ export class GeometryBirdComponent extends ThreeGeometryCustom implements OnInit
   }
   v : number = 0;
   vertices : any = null;
-  vertsPush(...args) {
+  vertsPush(...args : any[]) {
     for ( let i = 0; i < args.length; i ++ ) {
       this.vertices.array[ this.v ++ ] = args[ i ];
     }

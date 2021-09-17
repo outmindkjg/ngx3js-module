@@ -25,7 +25,7 @@ export const ShaderDemo10 = {
 	}
   `,
   uniforms : {
-    diffuse : { value : null },
+    diffuse : { value : null } as any,
     depth : { value : 55 },
     size : { value : new THREE.Vector2(50, 50) }
   }

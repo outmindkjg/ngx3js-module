@@ -1,6 +1,6 @@
 import { Component, ContentChildren, Input, OnInit, QueryList, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
-import { ControllerComponent } from '../controller/controller.component';
+import { AbstractControllerComponent } from '../controller.component.abstract';
 import { FogComponent } from '../fog/fog.component';
 import { ThreeColor, ThreeTexture, ThreeUtil } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
@@ -26,19 +26,19 @@ export class SceneComponent extends AbstractObject3dComponent implements OnInit 
 	/**
 	 * Input  of scene component
 	 */
-	@Input() private storageName: string = null;
+	@Input() public storageName: string = null;
 
 	/**
 	 * If not null, sets the background used when rendering the scene, and is always rendered first.
 	 * Can be set to a [page:Color] which sets the clear color, a [page:Texture] covering the canvas, a cubemap as a [page:CubeTexture] or an equirectangular as a [page:Texture] . Default is null.
 	 */
-	@Input() private background: ThreeTexture | ThreeColor = null;
+	@Input() public background: ThreeTexture | ThreeColor = null;
 
 	/**
 	 * If not null, this texture is set as the environment map for all physical materials in the scene.
 	 * However, it's not possible to overwrite an existing texture assigned to [page:MeshStandardMaterial.envMap]. Default is null.
 	 */
-	@Input() private environment: ThreeTexture = null;
+	@Input() public environment: ThreeTexture = null;
 
 	/**
 	 * Content children of scene component
@@ -58,7 +58,7 @@ export class SceneComponent extends AbstractObject3dComponent implements OnInit 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(ControllerComponent, { descendants: true }) private sceneControllerList: QueryList<ControllerComponent>;
+	@ContentChildren(AbstractControllerComponent, { descendants: true }) private sceneControllerList: QueryList<AbstractControllerComponent>;
 
 	/**
 	 * Content children of scene component
@@ -252,6 +252,8 @@ export class SceneComponent extends AbstractObject3dComponent implements OnInit 
 		return null;
 	}
 
+	private _cachedTextureList : AbstractTextureComponent[] = [];
+
 	/**
 	 * Applys changes3d
 	 * @param changes
@@ -260,6 +262,9 @@ export class SceneComponent extends AbstractObject3dComponent implements OnInit 
 		if (this.scene !== null) {
 			if (ThreeUtil.isIndexOf(changes, 'init')) {
 				changes = ThreeUtil.pushUniq(changes, ['material', 'background', 'environment', 'texture', 'mesh', 'viewer', 'light', 'camera', 'physics', 'fog', 'scenecontroller']);
+			}
+			if (ThreeUtil.isIndexOf(changes, ['background', 'environment'])) {
+				changes = ThreeUtil.pushUniq(changes, ['texture']);
 			}
 			changes.forEach((change) => {
 				switch (change) {
@@ -313,40 +318,79 @@ export class SceneComponent extends AbstractObject3dComponent implements OnInit 
 						}
 						break;
 					case 'background':
+					case 'environment':
+						break;
+					case 'texture':
+						const newTextureList : {
+							type : string;
+							component : AbstractTextureComponent
+						}[] = [];
+						let backgroundTexture : AbstractTextureComponent = null;
+						let environmentTexture : AbstractTextureComponent = null;
 						if (ThreeUtil.isNotNull(this.background)) {
 							if (ThreeUtil.isColor(this.background)) {
 								this.scene.background = ThreeUtil.getColorSafe(this.background, 0x000000);
+							} else if (this.background instanceof AbstractTextureComponent){
+								backgroundTexture = this.background;
 							} else {
 								this.scene.background = this.getTextureOption(this.background, 'background');
 							}
 						} else {
 							this.scene.background = null;
 						}
-						break;
-					case 'environment':
 						if (ThreeUtil.isNotNull(this.environment)) {
-							this.scene.environment = this.getTextureOption(this.environment, 'environment');
+							if (this.environment instanceof AbstractTextureComponent){
+								environmentTexture = this.environment;
+							} else {
+								this.scene.environment = this.getTextureOption(this.environment, 'environment');
+							}
 						} else {
 							this.scene.environment = null;
 						}
-						break;
-					case 'texture':
-						this.unSubscribeReferList('textureList');
+						if (backgroundTexture !== null || environmentTexture !== null) {
+							if (backgroundTexture === environmentTexture) {
+								newTextureList.push({
+									type : 'background-environment',
+									component : backgroundTexture
+								})
+							} else {
+								if (backgroundTexture !== null) {
+									newTextureList.push({
+										type : 'background',
+										component : backgroundTexture
+									})
+								}
+								if (environmentTexture !== null) {
+									newTextureList.push({
+										type : 'environment',
+										component : environmentTexture
+									})
+								}
+							}
+						}
 						if (ThreeUtil.isNotNull(this.textureList)) {
 							this.textureList.forEach((texture) => {
-								texture.setMaterial(this.scene);
+								newTextureList.push({
+									type : 'auto',
+									component : texture as any
+								})
 							});
-							this.subscribeListQuery(this.textureList, 'textureList', 'texture');
 						}
-						break;
-					case 'material':
-						this.unSubscribeReferList('materialList');
-						if (ThreeUtil.isNotNull(this.materialList)) {
-							this.materialList.forEach((material) => {
-								material.setMesh(this.scene);
-							});
-							this.subscribeListQuery(this.materialList, 'materialList', 'material');
-						}
+						const cachedTextureList : AbstractTextureComponent[] = [];
+						newTextureList.forEach(texture => {
+							cachedTextureList.push(texture.component);
+						});
+						this._cachedTextureList.forEach(texture => {
+							if (cachedTextureList.indexOf(texture) === -1) {
+								texture.unsetMaterial(this.selfAny);
+							}
+						});
+						newTextureList.forEach(material => {
+							if (this._cachedTextureList.indexOf(material.component) === -1) {
+								material.component.setMaterial(this.selfAny, material.type);
+							}
+						});
+						this._cachedTextureList = cachedTextureList;
 						break;
 				}
 			});

@@ -10,23 +10,23 @@ import { RendererTimer, ThreeUtil } from '../../interface';
 })
 export class PhysicsConstraintComponent extends AbstractSubscribeComponent implements OnInit {
 
-  @Input() private type:string = "";
-  @Input() private source1:any = null;
-  @Input() private source2:any = null;
-  @Input() private pivot1x:number = null;
-  @Input() private pivot1y:number = null;
-  @Input() private pivot1z:number = null;
-  @Input() private pivot2x:number = null;
-  @Input() private pivot2y:number = null;
-  @Input() private pivot2z:number = null;
-  @Input() private axisx:number = null;
-  @Input() private axisy:number = null;
-  @Input() private axisz:number = null;
-  @Input() private enableMotor: boolean = false;
-  @Input() private targetVelocity: number = 0;
-  @Input() private maxMotorImpulse: number = 0;
+  @Input() public type:string = "";
+  @Input() public source1:any = null;
+  @Input() public source2:any = null;
+  @Input() public pivot1x:number = null;
+  @Input() public pivot1y:number = null;
+  @Input() public pivot1z:number = null;
+  @Input() public pivot2x:number = null;
+  @Input() public pivot2y:number = null;
+  @Input() public pivot2z:number = null;
+  @Input() public axisx:number = null;
+  @Input() public axisy:number = null;
+  @Input() public axisz:number = null;
+  @Input() public enableMotor: boolean = false;
+  @Input() public targetVelocity: number = 0;
+  @Input() public maxMotorImpulse: number = 0;
 
-  @Input() private disableCollisionsBetweenLinkedBodies:boolean = true;
+  @Input() public disableCollisionsBetweenLinkedBodies:boolean = true;
   
   constructor() { 
     super();
@@ -81,7 +81,7 @@ export class PhysicsConstraintComponent extends AbstractSubscribeComponent imple
   private physics: Ammo.btSoftRigidDynamicsWorld = null;
   private ammo: typeof Ammo = null;
 
-  public setPhysics(physics: Ammo.btSoftRigidDynamicsWorld, ammo) {
+  public setPhysics(physics: Ammo.btSoftRigidDynamicsWorld, ammo : typeof Ammo) {
     this.physics = physics;
     this.ammo = ammo;
     this.getConstraint();
@@ -119,7 +119,6 @@ export class PhysicsConstraintComponent extends AbstractSubscribeComponent imple
       }
 
       if (!ThreeUtil.isOnlyIndexOf(changes, ['angularmotor', 'enablemotor','targetvelocity','maxMotorimpulse'], this.OBJECT_ATTR)) {
-        // console.log(changes);
         this.needUpdate = true;
         return;
       }

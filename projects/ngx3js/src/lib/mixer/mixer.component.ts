@@ -44,170 +44,170 @@ export class MixerComponent extends AbstractSubscribeComponent implements OnInit
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() private action: string = '';
+	@Input() public action: string = '';
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private fps: number = null;
+	@Input() public fps: number = null;
 
 	/**
 	 * Sets the duration for a single loop of this action (by adjusting [page:.timeScale timeScale] 
 	 * and stopping any scheduled warping). This method can be chained.
 	 */
-	@Input() private duration: number = 0.5;
+	@Input() public duration: number = 0.5;
 
 	/**
 	 * Scaling factor for the [page:.time time]. A value of 0 causes the animation to pause. Negative 
 	 * values cause the animation to play backwards. Default is 1.<br /><br />
 	 * Properties/methods concerning *timeScale* (respectively *time*)
 	 */
-	@Input() private timeScale: number = 1;
+	@Input() public timeScale: number = 1;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private sync: boolean = null;
+	@Input() public sync: boolean = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private afterglow: number = null;
+	@Input() public afterglow: number = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private resetPhysicsOnLoop: boolean = null;
+	@Input() public resetPhysicsOnLoop: boolean = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private physics: boolean = null;
+	@Input() public physics: boolean = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private warmup: number = null;
+	@Input() public warmup: number = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private unitStep: number = null;
+	@Input() public unitStep: number = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private maxStepNum: number = null;
+	@Input() public maxStepNum: number = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private gravity: number = null;
+	@Input() public gravity: number = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private delayTime: number = null;
+	@Input() public delayTime: number = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private animationHelper: MixerComponent = null;
+	@Input() public animationHelper: MixerComponent = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private skin: number | string = null;
+	@Input() public skin: number | string = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private weapon: number | string = null;
+	@Input() public weapon: number | string = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private controls: CharacterControl = null;
+	@Input() public controls: CharacterControl = null;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private wireframe: boolean = null;
+	@Input() public wireframe: boolean = null;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see {MD2Character#setPlaybackRate}
 	 */
-	@Input() private rate: number = null;
+	@Input() public rate: number = null;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private scale: number;
+	@Input() public scale: number;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private animationFPS: number;
+	@Input() public animationFPS: number;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private transitionFrames: number;
+	@Input() public transitionFrames: number;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private maxSpeed: number;
+	@Input() public maxSpeed: number;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private maxReverseSpeed: number;
+	@Input() public maxReverseSpeed: number;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private frontAcceleration: number;
+	@Input() public frontAcceleration: number;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private backAcceleration: number;
+	@Input() public backAcceleration: number;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private frontDecceleration: number;
+	@Input() public frontDecceleration: number;
 
 	/**
 	 * The rate of MD2Character
 	 *
 	 * @see MD2Character
 	 */
-	@Input() private angularSpeed: number;
+	@Input() public angularSpeed: number;
 
 	/**
 	 * Input  of mixer component
 	 */
-	@Input() private mmdHelpers: string[] = null;
+	@Input() public mmdHelpers: string[] = null;
 
 	/**
 	 * Content children of mixer component
@@ -421,13 +421,13 @@ export class MixerComponent extends AbstractSubscribeComponent implements OnInit
 			this.clips = clips;
 			this.mixer = null;
 			if (this.debug && this.clips) {
-				const clipsNames = [];
+				const clipsNames : any[] = [];
 				if (this.clips.forEach) {
-					this.clips.forEach((clip) => {
+					this.clips.forEach((clip : any) => {
 						clipsNames.push(clip.name);
 					});
 				} else if (this.clips.meshBody && this.clips.meshBody.geometry && this.clips.meshBody.geometry.animations) {
-					this.clips.meshBody.geometry.animations.forEach((clip) => {
+					this.clips.meshBody.geometry.animations.forEach((clip : any) => {
 						clipsNames.push(clip.name);
 					});
 				}
@@ -652,13 +652,13 @@ export class MixerComponent extends AbstractSubscribeComponent implements OnInit
 							break;
 						case 'clip':
 							this.clipList.forEach((clip) => {
-								clip.setMixer(mixer, this.clips);
+								clip.setMixer(mixer, this.clips, this.model);
 							});
 							break;
 					}
 				});
 			} else if (this.mixer instanceof MD2Character || this.mixer instanceof MD2CharacterComplex) {
-				const character = this.mixer;
+				const character : any = this.mixer;
 				changes.forEach((change) => {
 					switch (change.toLowerCase()) {
 						case 'action':
@@ -678,7 +678,7 @@ export class MixerComponent extends AbstractSubscribeComponent implements OnInit
 								const weapons = character.weapons;
 								if (typeof this.weapon === 'string') {
 									const weaponName = this.weapon.toLowerCase();
-									character.weapons.forEach((mesh, idx) => {
+									character.weapons.forEach((mesh : any, idx : any) => {
 										if (mesh.name !== null && mesh.name.toLowerCase().startsWith(weaponName)) {
 											weapon = idx;
 										}
@@ -707,7 +707,7 @@ export class MixerComponent extends AbstractSubscribeComponent implements OnInit
 								const skinsBody = character.skinsBody;
 								if (typeof this.skin === 'string') {
 									const skinName = this.skin.toLowerCase();
-									skinsBody.forEach((texture, idx) => {
+									skinsBody.forEach((texture : any, idx : any) => {
 										if (texture.name !== null && texture.name.toLowerCase().startsWith(skinName)) {
 											skin = idx;
 										}
@@ -843,11 +843,9 @@ export class MixerComponent extends AbstractSubscribeComponent implements OnInit
 					}
 					break;
 				case 'mixer':
-					if (ThreeUtil.isNotNull(this.clips)) {
-						const animationMixer = new THREE.AnimationMixer(this.model);
-						animationMixer.timeScale = this.getTimeScale(1);
-						mixer = animationMixer;
-					}
+					const animationMixer = new THREE.AnimationMixer(this.model);
+					animationMixer.timeScale = this.getTimeScale(1);
+					mixer = animationMixer;
 					break;
 				case 'virtulous':
 				default:

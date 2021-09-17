@@ -15,7 +15,7 @@ export abstract class AbstractTweenComponent extends AbstractSubscribeComponent 
   /**
    * Input  of abstract tween component
    */
-  @Input() protected tweenStart: boolean = true;
+  @Input() public tweenStart: boolean = true;
 
   /**
    * Content children of abstract tween component

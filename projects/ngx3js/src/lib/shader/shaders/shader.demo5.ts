@@ -22,6 +22,6 @@ export const ShaderDemo5 = {
   }
   `,
   uniforms: {
-    uTextures : { value : []}
+    uTextures : { value : []} as any
   },
 };

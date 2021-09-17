@@ -24,92 +24,92 @@ export class ShapeComponent extends AbstractSubscribeComponent implements OnInit
   /**
    * Input  of shape component
    */
-  @Input() private points: ThreeVector[] = null;
+  @Input() public points: ThreeVector[] = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private x: number = null;
+  @Input() public x: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private y: number = null;
+  @Input() public y: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aCPx: number = null;
+  @Input() public aCPx: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aCPy: number = null;
+  @Input() public aCPy: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aX: number = null;
+  @Input() public aX: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aY: number = null;
+  @Input() public aY: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aCP1x: number = null;
+  @Input() public aCP1x: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aCP1y: number = null;
+  @Input() public aCP1y: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aCP2x: number = null;
+  @Input() public aCP2x: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aCP2y: number = null;
+  @Input() public aCP2y: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aRadius: number = null;
+  @Input() public aRadius: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aStartAngle: number = null;
+  @Input() public aStartAngle: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aEndAngle: number = null;
+  @Input() public aEndAngle: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aClockwise: boolean = null;
+  @Input() public aClockwise: boolean = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private xRadius: number = null;
+  @Input() public xRadius: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private yRadius: number = null;
+  @Input() public yRadius: number = null;
 
   /**
    * Input  of shape component
    */
-  @Input() private aRotation: number = null;
+  @Input() public aRotation: number = null;
 
   /**
    * Content children of shape component
@@ -158,7 +158,7 @@ export class ShapeComponent extends AbstractSubscribeComponent implements OnInit
    * @returns points 
    */
   private getPoints(def: ThreeVector[]): THREE.Vector2[] {
-    const points = [];
+    const points : THREE.Vector2[] = [];
     (this.points === null ? def : this.points).forEach((p) => {
       points.push(new THREE.Vector2(p.x, p.y));
     });

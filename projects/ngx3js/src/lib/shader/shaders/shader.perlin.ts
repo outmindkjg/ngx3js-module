@@ -77,9 +77,9 @@ export const PerlinShader = {
   }  
   `,
   uniforms: {
-    map: { value: null },
+    map: { value: null } as any,
     cameraPos: { value: new THREE.Vector3() },
     threshold: { value: 0.6 },
-    steps: { value: 200 }
+    steps: { value: 200 },
   },
 };

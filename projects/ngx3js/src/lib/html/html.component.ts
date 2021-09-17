@@ -30,42 +30,42 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
    * Notice - case insensitive.
    * 
    */
-  @Input() private childType: string = 'innerHTML';
+  @Input() public childType: string = 'innerHTML';
 
   /**
    * The src of image or iframe
    */
-  @Input() private src: string = null;
+  @Input() public src: string = null;
 
   /**
    * The Style
    */
-  @Input() private style: string | CssStyle = null;
+  @Input() public style: string | CssStyle = null;
 
   /**
    * Input  of html component
    */
-  @Input() private list: (string | CssStyle)[] = null;
+  @Input() public list: (string | CssStyle)[] = null;
 
   /**
    * Input  of html component
    */
-  @Input() private table: (string | CssStyle)[][] = null;
+  @Input() public table: (string | CssStyle)[][] = null;
 
   /**
    * Input  of html component
    */
-  @Input() private tableHead: (string | CssStyle)[] = null;
+  @Input() public tableHead: (string | CssStyle)[] = null;
 
   /**
    * Input  of html component
    */
-  @Input() private tableFoot: (string | CssStyle)[] = null;
+  @Input() public tableFoot: (string | CssStyle)[] = null;
 
   /**
    * Input  of html component
    */
-  @Input() private dlList: {
+  @Input() public dlList: {
     dt?: string | CssStyle;
     dd?: string | CssStyle;
   }[] = null;

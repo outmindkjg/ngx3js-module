@@ -15,117 +15,117 @@ export class TransformComponent extends AbstractSubscribeComponent implements On
   /**
    * Input  of transform component
    */
-  @Input() private visible: boolean = true;
+  @Input() public visible: boolean = true;
 
   /**
    * Input  of transform component
    */
-  @Input() private anchorSeparat: boolean = false;
+  @Input() public anchorSeparat: boolean = false;
 
   /**
    * Input  of transform component
    */
-  @Input() private x: number = null;
+  @Input() public x: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private y: number = null;
+  @Input() public y: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private z: number = null;
+  @Input() public z: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private width: number = null;
+  @Input() public width: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private height: number = null;
+  @Input() public height: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private left: number = null;
+  @Input() public left: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private top: number = null;
+  @Input() public top: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private right: number = null;
+  @Input() public right: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private bottom: number = null;
+  @Input() public bottom: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private anchorMinX: number = null;
+  @Input() public anchorMinX: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private anchorMinY: number = null;
+  @Input() public anchorMinY: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private anchorMaxX: number = null;
+  @Input() public anchorMaxX: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private anchorMaxY: number = null;
+  @Input() public anchorMaxY: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private pivotX: number = null;
+  @Input() public pivotX: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private pivotY: number = null;
+  @Input() public pivotY: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private rotationX: number = null;
+  @Input() public rotationX: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private rotationY: number = null;
+  @Input() public rotationY: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private rotationZ: number = null;
+  @Input() public rotationZ: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private scaleX: number = null;
+  @Input() public scaleX: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private scaleY: number = null;
+  @Input() public scaleY: number = null;
 
   /**
    * Input  of transform component
    */
-  @Input() private scaleZ: number = null;
+  @Input() public scaleZ: number = null;
 
   /**
    * Gets left

@@ -15,6 +15,6 @@ export const ColorScreen = {
   }
   `,
   uniforms: {
-    tDiffuse: { value: null }
+    tDiffuse: { value: null } as any
   },
 };

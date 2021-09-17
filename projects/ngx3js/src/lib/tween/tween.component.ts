@@ -20,12 +20,12 @@ export class TweenComponent extends AbstractSubscribeComponent implements OnInit
   /**
    * Input  of tween component
    */
-  @Input() private to: any = null;
+  @Input() public to: any = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private duration: number = null;
+  @Input() public duration: number = null;
 
   /**
    * Input  of tween component
@@ -33,57 +33,57 @@ export class TweenComponent extends AbstractSubscribeComponent implements OnInit
    * Notice - case insensitive.
    * 
    */
-  @Input() private easing: string = null;
+  @Input() public easing: string = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private template: string = null;
+  @Input() public template: string = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private repeat: number = null;
+  @Input() public repeat: number = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private yoyo: boolean = null;
+  @Input() public yoyo: boolean = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private overshoot: number = null;
+  @Input() public overshoot: number = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private amplitude: number = null;
+  @Input() public amplitude: number = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private period: number = null;
+  @Input() public period: number = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private linearRatio: number = null;
+  @Input() public linearRatio: number = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private power: number = null;
+  @Input() public power: number = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private yoyoMode: boolean = null;
+  @Input() public yoyoMode: boolean = null;
 
   /**
    * Input  of tween component
    */
-  @Input() private steps: number = null;
+  @Input() public steps: number = null;
 
   /**
    * Gets duration
@@ -410,7 +410,7 @@ export class TweenComponent extends AbstractSubscribeComponent implements OnInit
       if (this._tween !== null) {
         this._tween.kill();
       }
-      const fromVar = {};
+      const fromVar : any = {};
       const targets = this.getTargets(this._tweenTarget, null);
       Object.entries(to).forEach(([key, value]) => {
         fromVar[key] = targets[key];

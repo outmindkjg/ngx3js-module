@@ -22,7 +22,7 @@ export class ShaderComponent extends AbstractSubscribeComponent implements OnIni
   /**
    * Input  of shader component
    */
-  @Input() private refShader: ShaderComponent = null;
+  @Input() public refShader: ShaderComponent = null;
 
   /**
    * Creates an instance of shader component.

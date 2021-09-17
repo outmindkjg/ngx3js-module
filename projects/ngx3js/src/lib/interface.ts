@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Injectable, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, Injectable, Input, OnInit } from '@angular/core';
 import Ammo from 'ammojs-typed';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
@@ -18,6 +18,18 @@ export { THREE };
  */
 export interface ApplyMatrix4 {
 	applyMatrix4(matrix: THREE.Matrix4): any;
+}
+
+/**
+ * Curves parameters
+ */
+export interface CurvesParameters {
+	radiusInner?: number;
+	waveH?: number;
+	waveR?: number;
+	rateX?: number;
+	rateY?: number;
+	rateZ?: number;
 }
 
 /**
@@ -87,6 +99,10 @@ export interface LoadedObject {
 	clips?: THREE.AnimationClip[] | any;
 	morphTargets?: THREE.BufferAttribute[];
 	source?: any;
+}
+
+export interface LoadedNameMap {
+	[ key : string] : LoadedNameMap
 }
 
 /**
@@ -268,7 +284,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	 * @param controls
 	 * @param [controlsParams]
 	 */
-	constructor(controls: T, controlsParams: GuiControlParam[] = []) {
+	constructor(@Inject("") controls: T, @Inject("") controlsParams: GuiControlParam[] = []) {
 		this.controls = ThreeUtil.getControls(controls, this);
 		this.setControlsParams(controlsParams);
 	}
@@ -403,12 +419,25 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	public scene: SceneComponent = null;
 
 	/**
+	 * Scene  of base component
+	 */
+	public sceneObject3d: THREE.Scene = null;
+
+	/**
+	 * Scene  of base component
+	 */
+	public sceneChildren: THREE.Object3D[] = null;
+
+	/**
 	 * Sets scene
 	 * @param scene
 	 */
 	public setScene(scene: SceneComponent) {
 		this.scene = scene;
+		this.sceneObject3d = scene.getScene();
+		this.sceneChildren = this.sceneObject3d.children;
 	}
+
 
 	/**
 	 * Camera  of base component
@@ -476,14 +505,15 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 				const maxScale = this.controls.meshScale.x * 1.5;
 				const stepScale = (maxScale - minScale) / 30;
 				controlsParams.children.forEach((child) => {
-					if (ThreeUtil.isNotNull(child.controller['min'])) {
-						child.controller['min'](minScale);
+					const childController : any = child.controller;
+					if (ThreeUtil.isNotNull(childController['min'])) {
+						childController['min'](minScale);
 					}
-					if (ThreeUtil.isNotNull(child.controller['max'])) {
-						child.controller['max'](maxScale);
+					if (ThreeUtil.isNotNull(childController['max'])) {
+						childController['max'](maxScale);
 					}
-					if (ThreeUtil.isNotNull(child.controller['step'])) {
-						child.controller['step'](stepScale);
+					if (ThreeUtil.isNotNull(childController['step'])) {
+						childController['step'](stepScale);
 					}
 				});
 			}
@@ -618,7 +648,7 @@ export class ThreeUtil {
 	 * @param myStr
 	 * @returns
 	 */
-	public static camelCaseToDash(myStr) {
+	public static camelCaseToDash(myStr : string) {
 		return myStr.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 	}
 
@@ -908,9 +938,9 @@ export class ThreeUtil {
 		});
 		switch (vertualClass) {
 			case 'inline':
-				// ele.removeAttribute('style');
+				const eleStyle : any = ele.style;
 				Object.entries(styleList).forEach(([key, value]) => {
-					ele.style[key] = value;
+					eleStyle[key] = value;
 				});
 				if (this.isNotNull(styles.className)) {
 					ele.className = styles.className;
@@ -962,7 +992,7 @@ export class ThreeUtil {
 	 * @param scales
 	 * @returns chroma scale
 	 */
-	public static getChromaScale(...scales): CHROMA.Scale {
+	public static getChromaScale(...scales : any[]): CHROMA.Scale {
 		return CHROMA.scale(scales);
 	}
 
@@ -977,6 +1007,14 @@ export class ThreeUtil {
 	 */
 	public static setRenderer(lastRenderer: any) {
 		this.lastRenderer = lastRenderer;
+	}
+
+	/**
+	 * Gets pmrem generator
+	 * @returns pmrem generator
+	 */
+	public static getPmremGenerator(): THREE.PMREMGenerator {
+		return new THREE.PMREMGenerator(this.getRenderer() as THREE.WebGLRenderer);
 	}
 
 	/**
@@ -1392,7 +1430,7 @@ export class ThreeUtil {
 			return true;
 		} else if (
 			typeof color === 'string' &&
-			(color.startsWith('rgb(') || color.startsWith('RGB(') || color.startsWith('color(') || color.startsWith('COLOR(') || color.startsWith('0x') || color.startsWith('hsl(') || color.startsWith('HSL(') || color.startsWith('#') || /^[a-z]{3,10}$/.test(color) || color.indexOf('random') >= 0)
+			(color.startsWith('0x') || color.startsWith('rgb(') || color.startsWith('RGB(') || color.startsWith('color(') || color.startsWith('COLOR(') || color.startsWith('hsl(') || color.startsWith('HSL(') || color.startsWith('#') || /^[a-z]{3,10}$/.test(color) || color.indexOf('random') >= 0)
 		) {
 			return true;
 		} else {
@@ -1687,20 +1725,21 @@ export class ThreeUtil {
 	 */
 	public static getMatrix4Safe(obj: THREE.Object3D, matrixType: string = 'maxtix'): THREE.Matrix4 {
 		if (this.isNotNull(obj)) {
+			const anyObj : any = obj;
 			switch (matrixType.toLowerCase()) {
 				case 'projectionmatrixinverse':
-					if (this.isNotNull(obj['projectionMatrixInverse'])) {
-						return new THREE.Matrix4().copy(obj['projectionMatrixInverse']);
+					if (this.isNotNull(anyObj['projectionMatrixInverse'])) {
+						return new THREE.Matrix4().copy(anyObj['projectionMatrixInverse']);
 					}
 					break;
 				case 'projectionmatrix':
-					if (this.isNotNull(obj['projectionMatrix'])) {
-						return obj['projectionMatrix'];
+					if (this.isNotNull(anyObj['projectionMatrix'])) {
+						return anyObj['projectionMatrix'];
 					}
 					break;
 				case 'matrixworldinverse':
-					if (this.isNotNull(obj['matrixWorldInverse'])) {
-						return obj['matrixWorldInverse'];
+					if (this.isNotNull(anyObj['matrixWorldInverse'])) {
+						return anyObj['matrixWorldInverse'];
 					}
 					break;
 				case 'matrixworld':
@@ -2027,6 +2066,8 @@ export class ThreeUtil {
 			return object3d.getCamera() as T;
 		} else if (this.isNotNull(object3d.getScene)) {
 			return object3d.getScene() as T;
+		} else if (this.isNotNull(object3d.getMesh)) {
+			return object3d.getMesh() as T;
 		} else if (this.isNotNull(object3d.getObject3d)) {
 			return object3d.getObject3d() as T;
 		}
@@ -2109,11 +2150,17 @@ export class ThreeUtil {
 			const matList = this.getMaterial(material);
 			if (Array.isArray(matList)) {
 				matList.forEach((mat) => {
-					if (this.isNull(mat.userData.materialType) || materialType.toLowerCase() === mat.userData.materialType) {
+					if (
+						(this.isNull(mat.userData.materialType) || materialType.toLowerCase() === mat.userData.materialType) &&
+						(this.isNull(mat.userData.refName) || mat.userData.refName == '')
+					) {
 						matchedMat = mat;
 					}
 				});
-			} else if (this.isNull(matList.userData.materialType) || materialType.toLowerCase() === matList.userData.materialType) {
+			} else if (
+					(this.isNull(matList.userData.materialType) || materialType.toLowerCase() === matList.userData.materialType) &&
+					(this.isNull(matList.userData.refName) || matList.userData.refName == '')
+				) {
 				matchedMat = matList;
 			}
 		} else {
@@ -2294,9 +2341,6 @@ export class ThreeUtil {
 			object.setSubscribeNext(key);
 		} else if (this.isThreeComponent(object)) {
 			const threeComponent = this.getThreeComponent(object);
-			if (threeComponent === null) {
-				console.log(threeComponent, object);
-			}
 			if (this.isNotNull(threeComponent)) {
 				this.setSubscribeNext(threeComponent, key);
 			} else {
@@ -2315,9 +2359,12 @@ export class ThreeUtil {
 	 * @returns subscribe
 	 */
 	public static getSubscribe(object: any, callBack: (key?: string) => void, nextKey: string): Subscription {
+		if (this.isNull(object)) {
+			return null;
+		}
 		if (this.isThreeComponent(object)) {
 			const threeComponent = this.getThreeComponent(object);
-			if (this.isNotNull(threeComponent.getSubscribe)) {
+			if (this.isNotNull(threeComponent) && this.isNotNull(threeComponent.getSubscribe)) {
 				object = threeComponent;
 			}
 		}
@@ -2385,17 +2432,19 @@ export class ThreeUtil {
 		if (texture instanceof THREE.Texture) {
 			return texture;
 		} else if (texture instanceof THREE.Object3D || this.isNotNull(texture.getObject3d)) {
-			const pmremGenerator = new THREE.PMREMGenerator( this.getRenderer() as THREE.WebGLRenderer );
-			return pmremGenerator.fromScene( texture instanceof THREE.Object3D ? texture : texture.getObject3d() ).texture;
+			const pmremGenerator = ThreeUtil.getPmremGenerator();
+			const pmremGeneratorTexture =  pmremGenerator.fromScene( texture instanceof THREE.Object3D ? texture : texture.getObject3d() ).texture;
+			pmremGenerator.dispose();
+			return pmremGeneratorTexture;
 		} else if (this.isNotNull(texture.getTexture)) {
 			const foundTexture = texture.getTexture();
 			if (!(foundTexture instanceof THREE.VideoTexture) || foundTexture.image.readyState > 0) {
 				return foundTexture;
 			}
 		} else if (this.isNotNull(texture)) {
-			const material = this.getMaterial(texture);
+			const material: any = this.getMaterial(texture);
 			if (Array.isArray(material) && material.length > 0) {
-				const firstMaterial = material[0];
+				const firstMaterial : any = material[0];
 				if (this.isNotNull(firstMaterial[refType]) && firstMaterial[refType] instanceof THREE.Texture) {
 					return firstMaterial[refType];
 				}
@@ -2483,7 +2532,7 @@ export class ThreeUtil {
 				return object3d.scale;
 			}
 		}
-		return new THREE.Vector3();
+		return new THREE.Vector3(1,1,1);
 	}
 
 	/**
@@ -2516,20 +2565,26 @@ export class ThreeUtil {
 	 * @returns true if texture loaded
 	 */
 	public static isTextureLoaded(texture: THREE.Texture): boolean {
-		if (texture instanceof THREE.CubeTexture || texture['isCubeTexture']) {
-			if (this.isNotNull(texture.image) && texture.image.length === 6) {
+
+		if (texture instanceof THREE.CubeTexture || (texture as any)['isCubeTexture']) {
+			if (this.isNotNull(texture.image) && texture.image.length >= 6) {
 				return true;
 			}
 		}
-		if (texture instanceof THREE.DataTexture || texture['isDataTexture']) {
+		if (texture instanceof THREE.CompressedTexture || (texture as any)['isCompressedTexture']) {
+			return true;	
+		}
+		if (texture instanceof THREE.DataTexture || (texture as any)['isDataTexture']) {
 			if (this.isNotNull(texture.image) && this.isNotNull(texture.image.data) && texture.image.data.length > 0) {
 				return true;
 			}
-		} else if (texture instanceof THREE.VideoTexture || texture['isVideoTexture']) {
+		}
+		if (texture instanceof THREE.VideoTexture || (texture as any)['isVideoTexture']) {
 			if (this.isNotNull(texture.image) && texture.image instanceof HTMLVideoElement && texture.image.error === null) {
 				return true;
 			}
-		} else if (texture instanceof THREE.Texture && this.isNotNull(texture.image)) {
+		} 
+		if (texture instanceof THREE.Texture && this.isNotNull(texture.image)) {
 			if (texture.image instanceof HTMLImageElement || texture.image instanceof HTMLCanvasElement || texture.image instanceof HTMLVideoElement) {
 				return true;
 			}
@@ -3075,7 +3130,7 @@ export class ThreeUtil {
 	 * @param params
 	 * @returns gui
 	 */
-	public static setupGui(control, gui: ThreeGuiController, params: GuiControlParam[]): ThreeGuiController {
+	public static setupGui(control : any, gui: ThreeGuiController, params: GuiControlParam[]): ThreeGuiController {
 		params.forEach((param) => {
 			const params = param.control ? control[param.control] : control;
 			if (this.isNotNull(params)) {
@@ -3149,6 +3204,7 @@ export interface RendererEvent {
 	rateY?: number;
 	width?: number;
 	height?: number;
+	nativeElement? : HTMLElement;
 	size?: THREE.Vector2;
 	mouse?: THREE.Vector2;
 	direction?: THREE.Vector2;
@@ -3229,7 +3285,8 @@ export class ThreeStats implements Stats {
 	public setStyle(style: object) {
 		if (style !== null && style !== undefined) {
 			Object.entries(style).forEach(([key, value]) => {
-				this.stats.dom.style[key] = value;
+				const statsDomStyle : any = this.stats.dom.style;
+				statsDomStyle[key] = value;
 			});
 		}
 	}
@@ -3393,7 +3450,7 @@ export class ThreeGui implements ThreeGuiController {
 	/**
 	 * Gui  of three gui
 	 */
-	public gui: GUI = null;
+	public gui: any = null;
 
 	/**
 	 * Dom element of three gui
@@ -3422,7 +3479,8 @@ export class ThreeGui implements ThreeGuiController {
 			this.gui = style;
 			this.domElement = this.gui.domElement;
 		} else {
-			this.gui = new GUI(pars);
+			const GUIAny : any = GUI;
+			this.gui = new GUIAny(pars);
 			this.domElement = this.gui.domElement;
 			this.setStyle(style);
 		}
@@ -3436,8 +3494,9 @@ export class ThreeGui implements ThreeGuiController {
 	public setStyle(style: object): this {
 		if (style !== null && style !== undefined) {
 			const domElement = this.domElement;
+			const domElementStyle : any = domElement.style;
 			Object.entries(style).forEach(([key, value]) => {
-				domElement.style[key] = value;
+				domElementStyle[key] = value;
 			});
 		}
 		if (ThreeGui.customCss !== null) {
@@ -3493,7 +3552,7 @@ export class ThreeGui implements ThreeGuiController {
 	 * @param folder
 	 * @returns folder
 	 */
-	removeFolder(folder): this {
+	removeFolder(folder : any): this {
 		this.gui.removeFolder(folder);
 		return this;
 	}
@@ -3578,7 +3637,7 @@ export class ThreeGui implements ThreeGuiController {
 	 * @param controller
 	 * @returns remove
 	 */
-	remove(controller): this {
+	remove(controller : any): this {
 		this.gui.remove(controller);
 		return this;
 	}
@@ -3589,12 +3648,12 @@ export class ThreeGui implements ThreeGuiController {
  */
 export interface ThreeGuiController {
 	domElement?: HTMLElement;
-	add(object, property: string, min?: any, max?, step?): ThreeGuiController;
-	addColor(object, property: string): ThreeGuiController;
-	remove(controller): this;
+	add(object : any, property: string, min?: any, max? : number, step? : number): ThreeGuiController;
+	addColor(object : any, property: string): ThreeGuiController;
+	remove(controller : any): this;
 	destroy(): this;
 	addFolder(name: string): ThreeGuiController;
-	removeFolder(folder): this;
+	removeFolder(folder : any): this;
 	listen(): this;
 	onFinishChange(callBack: (e: any) => void): this;
 	onChange(callBack: (e: any) => void): this;

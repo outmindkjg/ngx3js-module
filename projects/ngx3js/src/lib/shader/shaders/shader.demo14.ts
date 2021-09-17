@@ -21,9 +21,9 @@ export const ShaderDemo14 = {
 		gl_FragColor.r = voxel * uIntensity;
 	}
   `,
-  uniforms : {
-    uTexture: { value: null },
+  uniforms: {
+    uTexture: { value: null } as any,
     uDepth: { value: 55 },
-    uIntensity: { value: 1.0 }
-  }
+    uIntensity: { value: 1.0 },
+  },
 };

@@ -257,62 +257,62 @@ export class HelperComponent extends AbstractObject3dComponent implements OnInit
 	/**
 	 * color -- The desired color.
 	 */
-	@Input() private color: string | number = null;
+	@Input() public color: string | number = null;
 
 	/**
 	 * The target object of helper
 	 */
-	@Input() private target: any = null;
+	@Input() public target: any = null;
 
 	/**
 	 * size of the lines representing the axes. Default is *1*.
 	 */
-	@Input() private size: number = null;
+	@Input() public size: number = null;
 
 	/**
 	 * The radius of the polar grid. This can be any positive number. Default is 10.
 	 */
-	@Input() private radius: number = null;
+	@Input() public radius: number = null;
 
 	/**
 	 * The number of radial lines. This can be any positive integer. Default is 16.
 	 */
-	@Input() private radials: number = null;
+	@Input() public radials: number = null;
 
 	/**
 	 * The number of circles. This can be any positive integer. Default is 8.
 	 */
-	@Input() private circles: number = null;
+	@Input() public circles: number = null;
 
 	/**
 	 * The number of line segments used for each circle. This can be any positive integer that is 3 or greater. Default is 64.
 	 */
-	@Input() private divisions: number = null;
+	@Input() public divisions: number = null;
 
 	/**
 	 * The first color used for grid elements. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0x444444
 	 */
-	@Input() private color1: ThreeColor = null;
+	@Input() public color1: ThreeColor = null;
 
 	/**
 	 * The second color used for grid elements. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0x888888
 	 */
-	@Input() private color2: ThreeColor = null;
+	@Input() public color2: ThreeColor = null;
 
 	/**
 	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
 	 */
-	@Input() private opacity: number = null;
+	@Input() public opacity: number = null;
 
 	/**
 	 * Whether rendering this material has any effect on the depth buffer. Default is *true*.
 	 */
-	@Input() private depthWrite: boolean = null;
+	@Input() public depthWrite: boolean = null;
 
 	/**
 	 * The color of material
 	 */
-	@Input() private materialColor: ThreeColor = null;
+	@Input() public materialColor: ThreeColor = null;
 
 	/**
 	 * Input  of helper component
@@ -330,7 +330,7 @@ export class HelperComponent extends AbstractObject3dComponent implements OnInit
 	 * @see THREE.MultiplyBlending - MultiplyBlending, Multiply
 	 * @see THREE.CustomBlending - CustomBlending, Custom
 	 */
-	@Input() private materialBlending: string = null;
+	@Input() public materialBlending: string = null;
 
 	/**
 	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects.
@@ -338,93 +338,93 @@ export class HelperComponent extends AbstractObject3dComponent implements OnInit
 	 * Default is false.
 	 * @default false
 	 */
-	@Input() private materialTransparent: boolean = null;
+	@Input() public materialTransparent: boolean = null;
 
 	/**
 	 * X Direction from origin. Must be a unit vector.
 	 *
 	 */
-	@Input() private dirX: number = null;
+	@Input() public dirX: number = null;
 
 	/**
 	 * Y Direction from origin. Must be a unit vector.
 	 */
-	@Input() private dirY: number = null;
+	@Input() public dirY: number = null;
 
 	/**
 	 * Z Direction from origin. Must be a unit vector.
 	 */
-	@Input() private dirZ: number = null;
+	@Input() public dirZ: number = null;
 
 	/**
 	 * X Point at which the arrow starts.
 	 */
-	@Input() private originX: number = null;
+	@Input() public originX: number = null;
 
 	/**
 	 * Y Point at which the arrow starts.
 	 */
-	@Input() private originY: number = null;
+	@Input() public originY: number = null;
 
 	/**
 	 * Z Point at which the arrow starts.
 	 */
-	@Input() private originZ: number = null;
+	@Input() public originZ: number = null;
 
 	/**
 	 * Point at which the arrow starts.
 	 */
-	@Input() private arrowFrom: any = null;
+	@Input() public arrowFrom: any = null;
 
 	/**
 	 * Point at which the arrow end.
 	 */
-	@Input() private arrowTo: any = null;
+	@Input() public arrowTo: any = null;
 
 	/**
 	 * length of the arrow. Default is *1*.
 	 */
-	@Input() private length: number = null;
+	@Input() public length: number = null;
 
 	/**
 	 * The length of the head of the arrow. Default is 0.2 * length.
 	 */
-	@Input() private headLength: number = null;
+	@Input() public headLength: number = null;
 
 	/**
 	 * The width of the head of the arrow. Default is 0.2 * headLength.
 	 */
-	@Input() private headWidth: number = null;
+	@Input() public headWidth: number = null;
 
 	/**
 	 * Update matrix for this helper
 	 */
-	@Input() private matrix: THREE.Matrix4 = null;
+	@Input() public matrix: THREE.Matrix4 = null;
 
 	/**
 	 * this children of Gyroscope
 	 */
-	@Input() private children: any[] = null;
+	@Input() public children: any[] = null;
 
 	/**
 	 * The cms control of CSMHelper
 	 */
-	@Input() private control: any = null;
+	@Input() public control: any = null;
 
 	/**
 	 * the range of PositionalAudioHelper
 	 */
-	@Input() private range: number = null;
+	@Input() public range: number = null;
 
 	/**
 	 * the divisionsInnerAngle of PositionalAudioHelper
 	 */
-	@Input() private divisionsInnerAngle: number = null;
+	@Input() public divisionsInnerAngle: number = null;
 
 	/**
 	 * the divisionsOuterAngle of PositionalAudioHelper
 	 */
-	@Input() private divisionsOuterAngle: number = null;
+	@Input() public divisionsOuterAngle: number = null;
 
 	/**
 	 * Gets target
@@ -698,11 +698,17 @@ export class HelperComponent extends AbstractObject3dComponent implements OnInit
 	 * Sets update
 	 */
 	public setUpdate() {
-		const helper: any = this.helper;
-		if (ThreeUtil.isNotNull(helper.update)) {
-			window.setTimeout(() => {
-				helper.update();
-			}, 100);
+		if (ThreeUtil.isNotNull(this.helper)) {
+			const helper: any = this.helper;
+			if (ThreeUtil.isNotNull(helper.update)) {
+				if (helper instanceof THREE.SkeletonHelper) {
+
+				} else {
+					window.setTimeout(() => {
+						helper.update();
+					}, 100);
+				}
+			}
 		}
 	}
 
@@ -751,10 +757,13 @@ export class HelperComponent extends AbstractObject3dComponent implements OnInit
 				return;
 			}
 			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, []);
+				changes = ThreeUtil.pushUniq(changes, ['update']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
+					case 'update' :
+						this.setUpdate();
+						break;
 					default:
 						break;
 				}
@@ -843,7 +852,7 @@ export class HelperComponent extends AbstractObject3dComponent implements OnInit
 				case 'positionalaudiohelper':
 					let audioTarget = this.getTarget(this.parent);
 					if (audioTarget instanceof THREE.PositionalAudio) {
-						const positionalAudioHelper = new PositionalAudioHelper(audioTarget, ThreeUtil.getTypeSafe(this.range, 1), ThreeUtil.getTypeSafe(this.divisionsInnerAngle, 16), ThreeUtil.getTypeSafe(this.divisionsOuterAngle, 2));
+						const positionalAudioHelper : any = new PositionalAudioHelper(audioTarget, ThreeUtil.getTypeSafe(this.range, 1), ThreeUtil.getTypeSafe(this.divisionsInnerAngle, 16), ThreeUtil.getTypeSafe(this.divisionsOuterAngle, 2));
 						parentAdd = false;
 						if (positionalAudioHelper.audio.buffer === null) {
 							this.subscribeRefer(
@@ -852,13 +861,11 @@ export class HelperComponent extends AbstractObject3dComponent implements OnInit
 									audioTarget,
 									() => {
 										positionalAudioHelper.material[0].visible = true;
-										this.setUpdate();
+										this.addChanges('update');
 									},
 									'loaded'
 								)
 							);
-						} else {
-							this.setUpdate();
 						}
 						basemesh = positionalAudioHelper;
 					} else {
@@ -958,20 +965,21 @@ export class HelperComponent extends AbstractObject3dComponent implements OnInit
 			if (basemesh !== null) {
 				if (basemesh instanceof THREE.Line && ThreeUtil.isNotNull(basemesh.material) && basemesh.material instanceof THREE.Material) {
 					const opacity = this.getOpacity(1);
+					const basemeshMaterial : any = basemesh.material;
 					if (opacity >= 0 && opacity < 1) {
-						basemesh.material.opacity = opacity;
-						basemesh.material.transparent = true;
+						basemeshMaterial.opacity = opacity;
+						basemeshMaterial.transparent = true;
 					} else if (ThreeUtil.isNotNull(this.materialTransparent)) {
-						basemesh.material.transparent = this.materialTransparent;
+						basemeshMaterial.transparent = this.materialTransparent;
 					}
-					if (ThreeUtil.isNotNull(this.materialColor) && basemesh.material['color'] !== undefined) {
-						basemesh.material['color'] = ThreeUtil.getColorSafe(this.materialColor);
+					if (ThreeUtil.isNotNull(this.materialColor) && basemeshMaterial['color'] !== undefined) {
+						basemeshMaterial['color'] = ThreeUtil.getColorSafe(this.materialColor);
 					}
 					if (ThreeUtil.isNotNull(this.materialBlending)) {
-						basemesh.material.blending = ThreeUtil.getBlendingSafe(this.materialBlending, 'NormalBlending');
+						basemeshMaterial.blending = ThreeUtil.getBlendingSafe(this.materialBlending, 'NormalBlending');
 					}
 					if (ThreeUtil.isNotNull(this.depthWrite)) {
-						basemesh.material.depthWrite = this.getDepthWrite(false);
+						basemeshMaterial.depthWrite = this.getDepthWrite(false);
 					}
 				}
 				if (ThreeUtil.isNotNull(this.matrix)) {

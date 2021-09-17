@@ -37,32 +37,32 @@ export class CurveComponent extends AbstractSubscribeComponent implements OnInit
   /**
    * The X center of the ellipse. Default is *0*.
    */
-  @Input() private aX: number = null;
+  @Input() public aX: number = null;
 
   /**
    * The Y center of the ellipse. Default is *0*.
    */
-  @Input() private aY: number = null;
+  @Input() public aY: number = null;
 
   /**
    * Input  of curve component
    */
-  @Input() private aRadius: number = null;
+  @Input() public aRadius: number = null;
 
   /**
    * The start angle of the curve in radians starting from the positive X axis.  Default is *0*.
    */
-  @Input() private aStartAngle: number = null;
+  @Input() public aStartAngle: number = null;
 
   /**
    * The end angle of the curve in radians starting from the positive X axis. Default is *2 x Math.PI*.
    */
-  @Input() private aEndAngle: number = null;
+  @Input() public aEndAngle: number = null;
 
   /**
    * Whether the ellipse is drawn clockwise. Default is *false*.
    */
-  @Input() private aClockwise: boolean = null;
+  @Input() public aClockwise: boolean = null;
 
   /**
    * array of [page:Vector2 Vector2s].
@@ -72,12 +72,12 @@ export class CurveComponent extends AbstractSubscribeComponent implements OnInit
    * If no points are specified, an empty path is created and the [page:.currentPoint] is set to
    * the origin.
    */
-  @Input() private points: ThreeVector[] = null;
+  @Input() public points: ThreeVector[] = null;
 
   /**
    * Whether the curve is closed. Default is *false*.
    */
-  @Input() private closed: boolean = null;
+  @Input() public closed: boolean = null;
 
   /**
    * Possible values are *centripetal*, *chordal* and *catmullrom*.
@@ -85,27 +85,27 @@ export class CurveComponent extends AbstractSubscribeComponent implements OnInit
    * Notice - case insensitive.
    *
    */
-  @Input() private curveType: string = null;
+  @Input() public curveType: string = null;
 
   /**
    * When [page:.curveType] is *catmullrom*, defines catmullrom's tension.
    */
-  @Input() private tension: number = null;
+  @Input() public tension: number = null;
 
   /**
    * The radius of the ellipse in the x direction. Default is *1*.
    */
-  @Input() private xRadius: number = null;
+  @Input() public xRadius: number = null;
 
   /**
    * The radius of the ellipse in the y direction. Default is *1*.
    */
-  @Input() private yRadius: number = null;
+  @Input() public yRadius: number = null;
 
   /**
    * The rotation angle of the ellipse in radians, counterclockwise from the positive X axis (optional). Default is *0*.
    */
-  @Input() private aRotation: number = null;
+  @Input() public aRotation: number = null;
 
   /**
    * Gets points v3
