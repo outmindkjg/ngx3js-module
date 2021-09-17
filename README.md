@@ -59,12 +59,7 @@ import { Ngx3JsModule } from './three/ngx3js.module';
 		  ......
           "options": {
             "allowedCommonJsDependencies" : [
-              "ammojs-typed",
-              "three/examples/js/libs/lottie_canvas",
-              "three/examples/js/libs/draco/draco_encoder",
-              "crypto",
-              "crypto-js",
-              "highlight.js"
+              "ammojs-typed"
             ],
 		    ......
             "assets": [
@@ -103,9 +98,14 @@ npm install ammojs-typed
 npm install three
 npm install --save three three.ar.js
 npm install @types/three
+npm i --save-dev @types/three
+npm i --save-dev @types/chroma-js
+
 npm install @types/dat.gui –save-dev
 npm install @types/physijs –save-dev
 npm install @types/stats-js –save-dev
+
+
 npm run maxmem
 npm run maxbuild
 npm run maxbuildprod
