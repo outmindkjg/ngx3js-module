@@ -8,6 +8,9 @@
     "declarationMap": true,
     "inlineSources": true,
     "types": [],
+    "paths": {
+      "fs": ["./node_modules/fs-web"]
+    },
     "lib": [
       "dom",
       "es2018"

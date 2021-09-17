@@ -1,11 +1,36 @@
 {
   "name": "ngx3js",
-  "version": "1.0.5",
-  "license": "UNLICENSED",
+  "version": "1.0.7",
+  "keywords": [
+    "three",
+    "three.js",
+    "javascript",
+    "3d",
+    "virtual-reality",
+    "augmented-reality",
+    "webgl",
+    "webgl2",
+    "webaudio",
+    "webgpu",
+    "webxr",
+    "canvas",
+    "svg",
+    "html5",
+    "ngx3js",
+    "angular",
+    "typescript"
+  ],
+  "license": "MIT",  
   "repository": {
     "type": "git",
     "url": "git://github.com/outmindkjg/ngx3js-module.git"
   },
+  "description": "Angular & Javascript 3D library",
+  "author": "outmindkjg",
+  "bugs": {
+    "url": "https://github.com/outmindkjg/ngx3js-module/issues"
+  },
+  "homepage": "https://outmindkjg.github.io/ngx3js-doc/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -33,7 +58,9 @@
     "oimophysics": "^1.2.2",
     "tslib": "^2.3.1",
     "three": "0.131.0",
-    "rxjs": "^6.6.7"
+    "rxjs": "^6.6.7",
+    "fs": "0.0.1-security",
+    "fs-web": "^1.0.1"
   },
   "devDependencies": {
     "@angular/cli": "^12.2.5",

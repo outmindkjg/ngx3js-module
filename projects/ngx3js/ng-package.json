@@ -222,6 +222,8 @@
     "oimophysics",
     "tslib",
     "three",
-    "rxjs"
+    "rxjs",
+    "fs",
+    "fs-web"
   ]
 }
