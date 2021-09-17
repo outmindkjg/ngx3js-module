@@ -37,10 +37,17 @@ current theejs verion "^0.131.0"
 
 This code creates a scene, a camera, and a geometric cube, and it adds the cube to the scene. It then creates a `WebGL` renderer for the scene and camera, and it adds that viewport to the `document.body` element. Finally, it animates the cube within the scene for the camera.
 
+```sh
+npm install -g @angular/cli
+npm install ngx3js
+npm i --save-dev @types/three
+npm i --save-dev @types/chroma-js
+```
+
 ```javascript
 // src/app/app.module.ts
 
-import { Ngx3JsModule } from './three/ngx3js.module';
+import { Ngx3JsModule } from 'ngx3js';
 
 @NgModule({
 	....
@@ -91,65 +98,107 @@ import { Ngx3JsModule } from './three/ngx3js.module';
 }
 ```
 
-### Document ###
-```sh
-npm install -g @angular/cli
-npm install ammojs-typed
-npm install three
-npm install --save three three.ar.js
-npm install @types/three
-npm i --save-dev @types/three
-npm i --save-dev @types/chroma-js
-
-npm install @types/dat.gui –save-dev
-npm install @types/physijs –save-dev
-npm install @types/stats-js –save-dev
-
-
-npm run maxmem
-npm run maxbuild
-npm run maxbuildprod
-
-npm install typedoc --save-dev
-npx typedoc --out docs --exclude "**/*+(index|.spec|.e2e).ts"
-npx typedoc --exclude "**/*+(index|.spec|.e2e).ts"
-npx typedoc --json docs_api.json --exclude "**/*+(index|.spec|.e2e).ts"
-
-rm -rf src/app/**/*spec.ts
-rm -rf src/app/**/*.js
-
-git remote set-url origin https://github.com/outmindkjg/ngx3js.git
-git remote -v
-
-ng g directive three/drawing-canvas
-ng g c three/viewer
-ng g c three/size
-
-// ng g c three/chart/bar
-// ng g c three/chart/line
-// ng g c three/chart/scatter
-// ng g c three/chart/bubble
-// ng g c three/chart/pie
-// ng g c three/chart/doughnut
-// ng g c three/chart/polarArea
-// ng g c three/chart/radar
-// ng g c three/chart/controller
-
-// ng g c three/chart/axes
-// ng g c three/chart/legend
-// ng g c three/chart/title
-
-
-ng g c examples/webgl-portal
-ng g c examples/webxr-ar-lighting
-ng g c examples/webxr_vr_handinput_pointerclick
-ng g c examples/webxr_vr_handinput_pointerdrag
-ng g c examples/webxr_vr_handinput_pressbutton
-ng g c examples/webxr_vr_layers
-ng g c examples/misc_exporter_usdz
-
-```
-
+// src/app/app.component.html
+~~~
+<div style="width:200px;height:200px;display: block;position: relative;">
+    <ngx3js-renderer [controlType]="'orbit'"
+        [controlOptions]="{ enablePan : false , enableDamping : true , minDistance: 10 , maxDistance: 500 }"
+        [statsMode]="0" [antialias]="true" [clearColor]="'0x000000'" [clearAlpha]="0" [shadowMapEnabled]="true">
+        <ngx3js-lookat [x]="0" [y]="0" [z]="0"></ngx3js-lookat>
+        <ngx3js-camera [type]="'perspective'" #mainCamera [clearColor]="'0x000000'" [clearAlpha]="0" [fov]="40"
+            [near]="1" [far]="1000" [viewport]="true" [x]="0" [y]="0" [width]="'100%'" [height]="'100%'">
+            <ngx3js-position [x]="-50" [y]="0" [z]="50"></ngx3js-position>
+        </ngx3js-camera>
+        <ngx3js-camera [type]="'perspective'" [clearColor]="'0x222222'" [clearAlpha]="1" [clearDepth]="true" [fov]="40"
+            [near]="1" [far]="1000" [viewport]="true" [x]="20" [y]="20" [width]="'25%'" [height]="'width'"
+            [scissorTest]="true" [scissorX]="'x'" [scissorY]="'y'" [scissorWidth]="'width'" [scissorHeight]="'height'"
+            [referObject3d]="mainCamera">
+            <ngx3js-position [x]="-50" [y]="0" [z]="50"></ngx3js-position>
+        </ngx3js-camera>
+        <ngx3js-shared>
+            <ngx3js-material #matLine1 [type]="'Line'" [color]="'0x4080ff'" [linewidth]="5" [dashed]="true"
+                [dashScale]="5" [dashSize]="2" [gapSize]="3" [resolutionX]="1024" [resolutionY]="1024">
+            </ngx3js-material>
+            <ngx3js-material #matLine2 [type]="'LineDashed'" [color]="'0x4080ff'" [scale]="2" [dashSize]="2"
+                [gapSize]="1" [linewidth]="3" [dashed]="true" [resolutionX]="1024" [resolutionY]="1024">
+            </ngx3js-material>
+            <ngx3js-material #matLine3 [type]="'meshlambert'" [color]="'0xff0000'"></ngx3js-material>
+        </ngx3js-shared>
+        <ngx3js-scene #scene>
+            <ngx3js-light [type]="'Hemisphere'" [skyColor]="'0xffffff'" [groundColor]="'0x444444'">
+                <ngx3js-position [x]="0" [y]="20" [z]="0"></ngx3js-position>
+            </ngx3js-light>
+            <ngx3js-light [type]="'directional'" [color]="'0xffffff'" [intensity]="1" [castShadow]="true"
+                [shadowCameraTop]="2" [shadowCameraBottom]="-2" [shadowCameraLeft]="-2" [shadowCameraRight]="2"
+                [shadowCameraNear]="0.1" [shadowCameraFar]="40">
+                <ngx3js-position [x]="-3" [y]="10" [z]="-10"></ngx3js-position>
+            </ngx3js-light>
+            <ngx3js-mesh>
+                <ngx3js-mesh [type]="'Wireframe'" [material]="matLine1">
+                    <ngx3js-position [x]="-10" [y]="-10" [z]="10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Icosahedron'" [radius]="8" [detail]="1" [lineType]="'WireframeGeometry2'">
+                    </ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'LineSegments'" [material]="matLine2">
+                    <ngx3js-position [x]="10" [y]="-10" [z]="10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Icosahedron'" [radius]="8" [detail]="1"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'Wireframe'" [material]="matLine1">
+                    <ngx3js-position [x]="-10" [y]="10" [z]="10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Box'" [width]="16" [height]="16" [depth]="16" [widthSegments]="3"
+                        [heightSegments]="3" [depthSegments]="3" [lineType]="'WireframeGeometry2'"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'LineSegments'" [material]="matLine2">
+                    <ngx3js-position [x]="10" [y]="10" [z]="10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Box'" [width]="16" [height]="16" [depth]="16" [widthSegments]="3"
+                        [heightSegments]="3" [depthSegments]="3"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'Wireframe'" [material]="matLine1">
+                    <ngx3js-position [x]="-10" [y]="10" [z]="-10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Plane'" [width]="16" [height]="16" [depth]="16" [widthSegments]="3"
+                        [heightSegments]="3" [depthSegments]="3" [lineType]="'WireframeGeometry2'"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'LineSegments'" [material]="matLine2">
+                    <ngx3js-position [x]="10" [y]="10" [z]="-10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Plane'" [width]="16" [height]="16" [depth]="16" [widthSegments]="3"
+                        [heightSegments]="3" [depthSegments]="3"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'Wireframe'" [material]="matLine1">
+                    <ngx3js-position [x]="-10" [y]="-10" [z]="-10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Circle'" [radius]="8" [depth]="3" [radiusSegments]="5" [thetaStart]="30"
+                        [thetaLength]="90" [lineType]="'WireframeGeometry2'"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'LineSegments'" [material]="matLine2">
+                    <ngx3js-position [x]="10" [y]="-10" [z]="-10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Circle'" [radius]="8" [depth]="3" [radiusSegments]="5" [thetaStart]="30"
+                        [thetaLength]="90"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [material]="matLine3">
+                    <ngx3js-position [x]="10" [y]="0" [z]="-10"></ngx3js-position>
+                    <ngx3js-geometry [type]="'Circle'" [radius]="8" [depth]="3" [radiusSegments]="5" [thetaStart]="30"
+                        [thetaLength]="90"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'Wireframe'" [material]="matLine1">
+                    <ngx3js-position [x]="-10" [y]="-10" [z]="0"></ngx3js-position>
+                    <ngx3js-geometry [type]="'RingGeometry'" [outerRadius]="8" [innerRadius]="3" [depth]="3"
+                        [phiSegments]="3" [radiusSegments]="15" [thetaStart]="30" [thetaLength]="90"
+                        [lineType]="'WireframeGeometry2'"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [type]="'LineSegments'" [material]="matLine2">
+                    <ngx3js-position [x]="10" [y]="-10" [z]="0"></ngx3js-position>
+                    <ngx3js-geometry [type]="'RingGeometry'" [outerRadius]="8" [innerRadius]="3" [depth]="3"
+                        [phiSegments]="3" [radiusSegments]="15" [thetaStart]="30" [thetaLength]="90"></ngx3js-geometry>
+                </ngx3js-mesh>
+                <ngx3js-mesh [material]="matLine3">
+                    <ngx3js-position [x]="10" [y]="0" [z]="0"></ngx3js-position>
+                    <ngx3js-geometry [type]="'RingGeometry'" [outerRadius]="8" [innerRadius]="3" [depth]="3"
+                        [phiSegments]="3" [radiusSegments]="15" [thetaStart]="30" [thetaLength]="90"></ngx3js-geometry>
+                </ngx3js-mesh>
+            </ngx3js-mesh>
+        </ngx3js-scene>
+    </ngx3js-renderer>
+</div>
+~~~
 
 ### Cloning this repository ###
 
