@@ -21,8 +21,8 @@ export const ShaderDemo9 = {
     if ( gl_FragColor.a < ALPHATEST ) discard;
   }
   `,
-  uniforms : {
+  uniforms: {
     color: { value: new THREE.Color(0xffffff) },
-    pointTexture: { value: null } as any
-  }
+    pointTexture: { value: null } as any,
+  },
 };

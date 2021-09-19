@@ -7,7 +7,7 @@ import { AbstractTextureComponent } from '../texture.abstract';
 
 /**
  * LensflareelementComponent
- * 
+ *
  * @see LensflareElement
  */
 @Component({

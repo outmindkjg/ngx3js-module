@@ -12,16 +12,15 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
   styleUrls: ['./scale.component.scss'],
 })
 export class ScaleComponent extends AbstractSubscribeComponent implements OnInit {
-
   /**
    * Input  of scale component
    */
   @Input() public refer: any = null;
 
-	/**
-	 * refName  of rotation component
-	 */
-   @Input() public refName: string = null;
+  /**
+   * refName  of rotation component
+   */
+  @Input() public refName: string = null;
 
   /**
    * The current value of the x component. Default value is *1*.
@@ -47,7 +46,7 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
    * Input  of scale component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public scaleMode: string = 'max';
 
@@ -82,7 +81,7 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
    * default change detector has checked data-bound properties
    * if at least one has changed, and before the view and content
    * children are checked.
-   * 
+   *
    * @param changes The changed properties.
    */
   ngOnChanges(changes: SimpleChanges): void {
@@ -111,15 +110,15 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
    * Object3d  of scale component
    */
   private _object3d: {
-    [key : string] : THREE.Object3D
-  } = {}
+    [key: string]: THREE.Object3D;
+  } = {};
 
   /**
    * unSets object3d
-   * @param object3d 
+   * @param object3d
    */
   public unsetObject3d(object3d: AbstractSubscribeComponent) {
-    const key : string = object3d.getId();
+    const key: string = object3d.getId();
     this.unSubscribeRefer('scale_' + key);
     this.unSubscribeRefer('unscale_' + key);
     if (ThreeUtil.isNotNull(this._object3d[key])) {
@@ -129,23 +128,37 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Sets object3d
-   * @param object3d 
+   * @param object3d
    */
-  public setObject3d(object3d:  AbstractSubscribeComponent) {
+  public setObject3d(object3d: AbstractSubscribeComponent) {
     if (ThreeUtil.isNotNull(object3d)) {
-      const key : string = object3d.getId();
+      const key: string = object3d.getId();
       const object = ThreeUtil.getObject3d(object3d);
-      if (ThreeUtil.isNotNull(this.refName) && ThreeUtil.isNotNull(object) ) {
+      if (ThreeUtil.isNotNull(this.refName) && ThreeUtil.isNotNull(object)) {
         this._object3d[key] = object.getObjectByName(this.refName);
       } else {
         this._object3d[key] = object;
       }
-      this.subscribeRefer('scale_' + key, ThreeUtil.getSubscribe(object3d, () => {
-        this.setObject3d(object3d);
-      }, 'loaded'));
-      this.subscribeRefer('unscale_' + key, ThreeUtil.getSubscribe(object3d, () => {
-        this.unsetObject3d(object3d);
-      }, 'destroy'));
+      this.subscribeRefer(
+        'scale_' + key,
+        ThreeUtil.getSubscribe(
+          object3d,
+          () => {
+            this.setObject3d(object3d);
+          },
+          'loaded'
+        )
+      );
+      this.subscribeRefer(
+        'unscale_' + key,
+        ThreeUtil.getSubscribe(
+          object3d,
+          () => {
+            this.unsetObject3d(object3d);
+          },
+          'destroy'
+        )
+      );
       this.getScale();
       this.synkObject3d(this.scale, key);
     }
@@ -153,11 +166,11 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Synks object3d
-   * @param [scale] 
+   * @param [scale]
    */
-  public synkObject3d(scale: THREE.Vector3 = null, key : string = null) {
+  public synkObject3d(scale: THREE.Vector3 = null, key: string = null) {
     if (ThreeUtil.isNotNull(scale) && this.enabled) {
-      const object3dList : THREE.Object3D[] = [];
+      const object3dList: THREE.Object3D[] = [];
       if (ThreeUtil.isNotNull(key)) {
         if (ThreeUtil.isNotNull(this._object3d[key])) {
           object3dList.push(this._object3d[key]);
@@ -169,7 +182,7 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
           }
         });
       }
-      object3dList.forEach(object3d => {
+      object3dList.forEach((object3d) => {
         if (object3d instanceof THREE.Object3D) {
           if (ThreeUtil.isNotNull(this.x) && ThreeUtil.isNotNull(this.y) && ThreeUtil.isNotNull(this.z)) {
             object3d.scale.copy(scale);
@@ -191,11 +204,11 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Sets scale
-   * @param [x] 
-   * @param [y] 
-   * @param [z] 
+   * @param [x]
+   * @param [y]
+   * @param [z]
    */
-  public setScale(x?: number, y? : number, z? : number) {
+  public setScale(x?: number, y?: number, z?: number) {
     if (this.scale !== null) {
       this.x = ThreeUtil.getTypeSafe(x, this.scale.x);
       this.y = ThreeUtil.getTypeSafe(y, this.scale.y);
@@ -210,8 +223,8 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets tag attribute
-   * @param [options] 
-   * @returns tag attribute 
+   * @param [options]
+   * @returns tag attribute
    */
   public getTagAttribute(options?: any): TagAttributes {
     const tagAttributes: TagAttributes = {
@@ -232,8 +245,8 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets scale from size
-   * @param size 
-   * @returns scale from size 
+   * @param size
+   * @returns scale from size
    */
   private getScaleFromSize(size: THREE.Vector2): THREE.Vector3 {
     switch (this.scaleMode) {
@@ -250,8 +263,8 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Applys changes
-   * @param changes 
-   * @returns  
+   * @param changes
+   * @returns
    */
   protected applyChanges(changes: string[]) {
     if (this.scale !== null) {
@@ -259,9 +272,9 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
         this.getScale();
         return;
       }
-      if (!ThreeUtil.isOnlyIndexOf(changes, ['init','type','enabled'])) {
+      if (!ThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
         this.needUpdate = true;
-        return ;
+        return;
       }
       super.applyChanges(changes);
     }
@@ -269,10 +282,10 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets scale
-   * @returns scale 
+   * @returns scale
    */
   private _getScale(): THREE.Vector3 {
-    let scale : THREE.Vector3 = null;
+    let scale: THREE.Vector3 = null;
     if (this.refer !== null && this.refer !== undefined) {
       if (this.refer.getSize) {
         scale = this.getScaleFromSize(this.refer.getSize());
@@ -291,7 +304,7 @@ export class ScaleComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets scale
-   * @returns scale 
+   * @returns scale
    */
   public getScale(): THREE.Vector3 {
     if (this.scale === null || this._needUpdate) {

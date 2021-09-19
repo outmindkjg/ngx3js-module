@@ -95,7 +95,7 @@ export const CloudShader = {
   `,
   uniforms: {
     base: { value: new THREE.Color(0x798aa0) },
-    map: { value : null } as any,
+    map: { value: null } as any,
     cameraPos: { value: new THREE.Vector3() },
     threshold: { value: 0.25 },
     opacity: { value: 0.25 },

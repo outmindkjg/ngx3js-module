@@ -258,16 +258,7 @@ export class CurveComponent extends AbstractSubscribeComponent implements OnInit
           break;
         case 'ellipsecurve':
         case 'ellipse':
-          this.curve = new THREE.EllipseCurve(
-            ThreeUtil.getTypeSafe(this.aX, 0),
-            ThreeUtil.getTypeSafe(this.aY, 0),
-            ThreeUtil.getTypeSafe(this.xRadius, 1),
-            ThreeUtil.getTypeSafe(this.yRadius, 1),
-            ThreeUtil.getTypeSafe(this.aStartAngle, 0),
-            ThreeUtil.getTypeSafe(this.aEndAngle, 360),
-            ThreeUtil.getTypeSafe(this.aClockwise, false),
-            ThreeUtil.getTypeSafe(this.aRotation, 0)
-          );
+          this.curve = new THREE.EllipseCurve(ThreeUtil.getTypeSafe(this.aX, 0), ThreeUtil.getTypeSafe(this.aY, 0), ThreeUtil.getTypeSafe(this.xRadius, 1), ThreeUtil.getTypeSafe(this.yRadius, 1), ThreeUtil.getTypeSafe(this.aStartAngle, 0), ThreeUtil.getTypeSafe(this.aEndAngle, 360), ThreeUtil.getTypeSafe(this.aClockwise, false), ThreeUtil.getTypeSafe(this.aRotation, 0));
           break;
         case 'linecurve':
         case 'line':

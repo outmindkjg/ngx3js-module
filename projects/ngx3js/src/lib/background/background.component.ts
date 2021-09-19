@@ -12,7 +12,6 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
   styleUrls: ['./background.component.scss'],
 })
 export class BackgroundComponent extends AbstractSubscribeComponent implements OnInit {
-
   /**
    * Input  of background component
    */
@@ -305,8 +304,8 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
 
   /**
    * Gets background color
-   * @param [def] 
-   * @returns background color 
+   * @param [def]
+   * @returns background color
    */
   private getBackgroundColor(def?: string | number): THREE.Color | THREE.Vector4 {
     return ThreeUtil.getColorAlphaSafe(this.backgroundColor, this.backgroundAlpha, def);
@@ -314,8 +313,8 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
 
   /**
    * Gets background repeat
-   * @param [def] 
-   * @returns background repeat 
+   * @param [def]
+   * @returns background repeat
    */
   private getBackgroundRepeat(def?: string): string {
     if (ThreeUtil.isNotNull(this.backgroundRepeatX) && ThreeUtil.isNotNull(this.backgroundRepeatX)) {
@@ -326,8 +325,8 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
 
   /**
    * Gets background position
-   * @param [def] 
-   * @returns background position 
+   * @param [def]
+   * @returns background position
    */
   private getBackgroundPosition(def?: string): string {
     if (ThreeUtil.isNotNull(this.backgroundPositionX) && ThreeUtil.isNotNull(this.backgroundPositionY)) {
@@ -338,8 +337,8 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
 
   /**
    * Gets background size
-   * @param [def] 
-   * @returns background size 
+   * @param [def]
+   * @returns background size
    */
   private getBackgroundSize(def?: string): string {
     if (ThreeUtil.isNotNull(this.backgroundSizeX) && ThreeUtil.isNotNull(this.backgroundSizeY)) {
@@ -386,7 +385,7 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
    * default change detector has checked data-bound properties
    * if at least one has changed, and before the view and content
    * children are checked.
-   * 
+   *
    * @param changes The changed properties.
    */
   ngOnChanges(changes: SimpleChanges): void {
@@ -413,7 +412,7 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
 
   /**
    * Sets parent node
-   * @param parentNode 
+   * @param parentNode
    */
   public setParentNode(parentNode: HTMLElement) {
     if (this.parentNode !== parentNode) {
@@ -424,7 +423,7 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
 
   /**
    * Gets style
-   * @returns style 
+   * @returns style
    */
   public getStyle(): CssStyle {
     return {
@@ -446,37 +445,37 @@ export class BackgroundComponent extends AbstractSubscribeComponent implements O
       marginTop: ThreeUtil.getTypeSafe(this.marginTop),
       marginRight: ThreeUtil.getTypeSafe(this.marginRight),
       marginBottom: ThreeUtil.getTypeSafe(this.marginBottom),
-      border : ThreeUtil.getTypeSafe(this.border),
-      borderColor : ThreeUtil.getTypeSafe(this.borderColor),
-      borderStyle : ThreeUtil.getTypeSafe(this.borderStyle),
-      borderWidth : ThreeUtil.getTypeSafe(this.borderWidth),
-      borderRadius : ThreeUtil.getTypeSafe(this.borderRadius),
-      borderLeft : ThreeUtil.getTypeSafe(this.borderLeft),
-      borderTop : ThreeUtil.getTypeSafe(this.borderTop),
-      borderRight : ThreeUtil.getTypeSafe(this.borderRight),
-      borderBottom : ThreeUtil.getTypeSafe(this.borderBottom),
-      borderImage : ThreeUtil.getTypeSafe(this.borderImage),
-      borderImageSource : ThreeUtil.getTypeSafe(this.borderImageSource),
-      borderImageSlice : ThreeUtil.getTypeSafe(this.borderImageSlice),
-      borderImageOutset : ThreeUtil.getTypeSafe(this.borderImageOutset),
-      borderImageRepeat : ThreeUtil.getTypeSafe(this.borderImageRepeat),
-      borderImageWidth : ThreeUtil.getTypeSafe(this.borderImageWidth),
-      opacity : ThreeUtil.getTypeSafe(this.opacity),
-      color : ThreeUtil.getTypeSafe(this.color),
-      fontFamily : ThreeUtil.getTypeSafe(this.fontFamily),
-      fontSize : ThreeUtil.getTypeSafe(this.fontSize),
-      fontStyle : ThreeUtil.getTypeSafe(this.fontStyle),
-      fontWeight : ThreeUtil.getTypeSafe(this.fontWeight),
-      textAlign : ThreeUtil.getTypeSafe(this.textAlign),
-      textTransform : ThreeUtil.getTypeSafe(this.textTransform),
-      textDecoration : ThreeUtil.getTypeSafe(this.textDecoration),
-      letterSpacing : ThreeUtil.getTypeSafe(this.letterSpacing),
-      textIndent : ThreeUtil.getTypeSafe(this.textIndent),
-      textJustify : ThreeUtil.getTypeSafe(this.textJustify),
-      textSizeAdjust : ThreeUtil.getTypeSafe(this.textSizeAdjust),
-      whiteSpace : ThreeUtil.getTypeSafe(this.whiteSpace),
-      wordBreak : ThreeUtil.getTypeSafe(this.wordBreak),
-      wordSpacing : ThreeUtil.getTypeSafe(this.wordSpacing),
+      border: ThreeUtil.getTypeSafe(this.border),
+      borderColor: ThreeUtil.getTypeSafe(this.borderColor),
+      borderStyle: ThreeUtil.getTypeSafe(this.borderStyle),
+      borderWidth: ThreeUtil.getTypeSafe(this.borderWidth),
+      borderRadius: ThreeUtil.getTypeSafe(this.borderRadius),
+      borderLeft: ThreeUtil.getTypeSafe(this.borderLeft),
+      borderTop: ThreeUtil.getTypeSafe(this.borderTop),
+      borderRight: ThreeUtil.getTypeSafe(this.borderRight),
+      borderBottom: ThreeUtil.getTypeSafe(this.borderBottom),
+      borderImage: ThreeUtil.getTypeSafe(this.borderImage),
+      borderImageSource: ThreeUtil.getTypeSafe(this.borderImageSource),
+      borderImageSlice: ThreeUtil.getTypeSafe(this.borderImageSlice),
+      borderImageOutset: ThreeUtil.getTypeSafe(this.borderImageOutset),
+      borderImageRepeat: ThreeUtil.getTypeSafe(this.borderImageRepeat),
+      borderImageWidth: ThreeUtil.getTypeSafe(this.borderImageWidth),
+      opacity: ThreeUtil.getTypeSafe(this.opacity),
+      color: ThreeUtil.getTypeSafe(this.color),
+      fontFamily: ThreeUtil.getTypeSafe(this.fontFamily),
+      fontSize: ThreeUtil.getTypeSafe(this.fontSize),
+      fontStyle: ThreeUtil.getTypeSafe(this.fontStyle),
+      fontWeight: ThreeUtil.getTypeSafe(this.fontWeight),
+      textAlign: ThreeUtil.getTypeSafe(this.textAlign),
+      textTransform: ThreeUtil.getTypeSafe(this.textTransform),
+      textDecoration: ThreeUtil.getTypeSafe(this.textDecoration),
+      letterSpacing: ThreeUtil.getTypeSafe(this.letterSpacing),
+      textIndent: ThreeUtil.getTypeSafe(this.textIndent),
+      textJustify: ThreeUtil.getTypeSafe(this.textJustify),
+      textSizeAdjust: ThreeUtil.getTypeSafe(this.textSizeAdjust),
+      whiteSpace: ThreeUtil.getTypeSafe(this.whiteSpace),
+      wordBreak: ThreeUtil.getTypeSafe(this.wordBreak),
+      wordSpacing: ThreeUtil.getTypeSafe(this.wordSpacing),
     };
   }
 

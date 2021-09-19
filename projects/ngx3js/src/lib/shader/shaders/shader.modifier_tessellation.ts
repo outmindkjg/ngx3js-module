@@ -1,4 +1,3 @@
-
 export const ModifierTessellation = {
   vertexShader: `
   uniform float amplitude;
@@ -25,6 +24,6 @@ export const ModifierTessellation = {
   }
   `,
   uniforms: {
-    amplitude: { value: 1.0 }
+    amplitude: { value: 1.0 },
   },
 };

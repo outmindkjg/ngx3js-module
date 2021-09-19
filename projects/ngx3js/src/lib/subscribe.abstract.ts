@@ -54,7 +54,7 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
    */
   protected OBJECT_ATTR: string[] = ['init', 'debug', 'enabled', 'userdata', 'overrideparams', 'windowexport', 'tween'];
 
-  protected selfAny : any = this;
+  protected selfAny: any = this;
   /**
    * Creates an instance of abstract subscribe component.
    */
@@ -69,8 +69,8 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
 
   /**
    * Gets id
-   * 
-   * @returns id 
+   *
+   * @returns id
    */
   public getId(): string {
     return this.id;
@@ -391,7 +391,7 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
           if (ThreeUtil.isNotNull(this.userData)) {
             Object.entries(this.userData).forEach(([key, value]) => {
               switch (key) {
-                case 'component' :
+                case 'component':
                   break;
                 default:
                   this._userData[key] = value;
@@ -450,16 +450,16 @@ export abstract class AbstractSubscribeComponent implements OnInit, OnChanges, O
    */
   protected setObject(obj: any) {
     if (this._cashedObj !== obj) {
-      let isLoaded : boolean = this._cashedObj === null ? false : true;
+      let isLoaded: boolean = this._cashedObj === null ? false : true;
       this._cashedObj = obj;
       this.needUpdate = false;
       if (ThreeUtil.isNotNull(this._cashedObj)) {
         if (ThreeUtil.isNotNull(this._cashedObj.userData)) {
           Object.entries(this._cashedObj.userData).forEach(([key, value]) => {
             switch (key) {
-              case 'component' :
+              case 'component':
                 break;
-              default :
+              default:
                 this._userData[key] = value;
                 break;
             }

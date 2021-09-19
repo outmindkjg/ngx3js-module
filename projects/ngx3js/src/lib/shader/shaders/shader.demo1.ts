@@ -40,6 +40,6 @@ export const ShaderDemo1 = {
   }
   `,
   uniforms: {
-    time : { value : 1.0 }
+    time: { value: 1.0 },
   },
 };

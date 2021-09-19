@@ -20,7 +20,7 @@ export class ControllerComponent extends AbstractControllerComponent implements 
    * Input  of controller component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public type: string = 'auto';
 
@@ -38,7 +38,7 @@ export class ControllerComponent extends AbstractControllerComponent implements 
    * Input  of controller component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public curve: string = null;
 
@@ -116,7 +116,7 @@ export class ControllerComponent extends AbstractControllerComponent implements 
    * Input  of controller component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public options: string = null;
 
@@ -159,7 +159,7 @@ export class ControllerComponent extends AbstractControllerComponent implements 
    * Input  of controller component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public material: string = null;
 
@@ -278,34 +278,7 @@ export class ControllerComponent extends AbstractControllerComponent implements 
           }
         });
       } else if (this._controllerItems !== null) {
-        if (
-          ThreeUtil.isIndexOf(changes, [
-            'controlleritem',
-            'scale',
-            'radius',
-            'radiusx',
-            'radiusy',
-            'radiusz',
-            'rotationx',
-            'rotationy',
-            'rotationz',
-            'centerx',
-            'centery',
-            'centerz',
-            'duration',
-            'delta',
-            'multiply',
-            'options',
-            'controlleritem',
-            'color',
-            'opacity',
-            'tubularsegments',
-            'thubradius',
-            'tuberadiussegments',
-            'closed',
-            'material',
-          ])
-        ) {
+        if (ThreeUtil.isIndexOf(changes, ['controlleritem', 'scale', 'radius', 'radiusx', 'radiusy', 'radiusz', 'rotationx', 'rotationy', 'rotationz', 'centerx', 'centery', 'centerz', 'duration', 'delta', 'multiply', 'options', 'controlleritem', 'color', 'opacity', 'tubularsegments', 'thubradius', 'tuberadiussegments', 'closed', 'material'])) {
           this.needUpdate = true;
           return;
         }

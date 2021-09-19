@@ -1,4 +1,3 @@
-
 export const ColorRainbow = {
   vertexShader: `
   varying vec2 vUV;

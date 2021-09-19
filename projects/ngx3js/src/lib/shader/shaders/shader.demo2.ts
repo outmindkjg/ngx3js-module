@@ -1,4 +1,3 @@
-
 export const ShaderDemo2 = {
   vertexShader: `
   varying vec2 vUv;
@@ -27,7 +26,7 @@ export const ShaderDemo2 = {
   }
   `,
   uniforms: {
-    time : { value : 1.0 }, 
-    colorTexture : { value : null} as any
+    time: { value: 1.0 },
+    colorTexture: { value: null } as any,
   },
 };

@@ -356,7 +356,7 @@ export class LocalStorageService {
     if (typeof url === 'string') {
       return ThreeUtil.getStoreUrl(url);
     } else {
-      const modUrl : any[] = [];
+      const modUrl: any[] = [];
       url.forEach((path) => {
         modUrl.push(ThreeUtil.getStoreUrl(path));
       });
@@ -368,7 +368,7 @@ export class LocalStorageService {
    * Determines whether progress on
    * @param xhr
    */
-  public onProgress(xhr : any) {
+  public onProgress(xhr: any) {
     if (xhr.lengthComputable) {
       const percentComplete = (xhr.loaded / xhr.total) * 100;
       console.log(Math.round(percentComplete * 100) / 100 + '% downloaded');
@@ -447,22 +447,22 @@ export class LocalStorageService {
    */
   public getExportObject(fileName: string, object: THREE.Object3D | THREE.Object3D[], options?: any) {
     if (object instanceof THREE.Object3D) {
-      object.traverse(child => {
+      object.traverse((child) => {
         Object.entries(child.userData).forEach(([key, value]) => {
           if (typeof value === 'object') {
             delete child.userData[key];
           }
-        })
-      })
+        });
+      });
     } else {
-      object.forEach(gchild => {
-        gchild.traverse(child => {
+      object.forEach((gchild) => {
+        gchild.traverse((child) => {
           Object.entries(child.userData).forEach(([key, value]) => {
             if (typeof value === 'object') {
               delete child.userData[key];
             }
-          })
-        })
+          });
+        });
       });
     }
     if (fileName.endsWith('.dae')) {
@@ -494,9 +494,9 @@ export class LocalStorageService {
         this.usdzExporter = new USDZExporter();
       }
       if (object instanceof THREE.Object3D) {
-        this.usdzExporter.parse(object).then(result => {
+        this.usdzExporter.parse(object).then((result) => {
           this.saveArrayBuffer(result, fileName);
-        })
+        });
       }
     } else if (fileName.endsWith('.gltf') || fileName.endsWith('.glb')) {
       if (this.gltfExporter === null) {
@@ -574,7 +574,7 @@ export class LocalStorageService {
    * @param blob
    * @param filename
    */
-  private save(blob : any, filename : string) {
+  private save(blob: any, filename: string) {
     const link = document.createElement('a');
     link.style.display = 'none';
     document.body.appendChild(link);
@@ -589,7 +589,7 @@ export class LocalStorageService {
    * @param buffer
    * @param filename
    */
-  private saveArrayBuffer(buffer : any, filename : string) {
+  private saveArrayBuffer(buffer: any, filename: string) {
     this.save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
   }
 
@@ -598,7 +598,7 @@ export class LocalStorageService {
    * @param text
    * @param filename
    */
-  private saveString(text : string, filename : string) {
+  private saveString(text: string, filename: string) {
     this.save(new Blob([text], { type: 'text/plain' }), filename);
   }
 
@@ -613,11 +613,11 @@ export class LocalStorageService {
    * @param nameMap
    * @returns
    */
-  private getNameMap(object : THREE.Object3D, nameMap : LoadedNameMap): LoadedNameMap {
+  private getNameMap(object: THREE.Object3D, nameMap: LoadedNameMap): LoadedNameMap {
     const name = object.name || 'name';
-    const map : LoadedNameMap = {};
+    const map: LoadedNameMap = {};
     nameMap[name] = map;
-    object.children.forEach(child => {
+    object.children.forEach((child) => {
       this.getNameMap(child, map);
     });
     return nameMap;
@@ -640,9 +640,9 @@ export class LocalStorageService {
     if (this._loadedObject[safeKey] !== undefined) {
       const result = this._loadedObject[safeKey];
       setTimeout(() => {
-        let cloneObject3d : THREE.Object3D = null;
+        let cloneObject3d: THREE.Object3D = null;
         if (ThreeUtil.isNotNull(result.object)) {
-          result.object.userData = {}
+          result.object.userData = {};
           cloneObject3d = result.object.clone(true);
           if (options.autoCenter) {
             const object = cloneObject3d;
@@ -675,12 +675,12 @@ export class LocalStorageService {
           if (result.source && options.debug) {
             console.log(result.source);
           }
-          let cloneObject3d : THREE.Object3D = null;
+          let cloneObject3d: THREE.Object3D = null;
           if (ThreeUtil.isNotNull(result.object)) {
             cloneObject3d = result.object;
             if (options.firstMesh) {
-              let foundMesh : THREE.Object3D = null;
-              cloneObject3d.traverse( ( node :any ) => {
+              let foundMesh: THREE.Object3D = null;
+              cloneObject3d.traverse((node: any) => {
                 if (foundMesh === null && node['isMesh']) {
                   foundMesh = node;
                 }
@@ -730,7 +730,7 @@ export class LocalStorageService {
           loader.setPath('');
         }
       }
-      const loaderAny : any = loader;
+      const loaderAny: any = loader;
       if (ThreeUtil.isNotNull(loaderAny['setDataType'])) {
         if (ThreeUtil.isNotNull(options.dataType)) {
           loaderAny['setDataType'](ThreeUtil.getTextureDataTypeSafe(options.dataType));
@@ -913,7 +913,7 @@ export class LocalStorageService {
         (texture: THREE.CompressedTexture) => {
           callBack({
             texture: texture,
-            source: texture
+            source: texture,
           });
         },
         this.onProgress,
@@ -952,7 +952,6 @@ export class LocalStorageService {
         this.onProgress,
         this.onError
       );
-      
     } else if (key.endsWith('.ifc')) {
       console.log('IFC Loader is not stable!!');
       /*
@@ -1020,11 +1019,11 @@ export class LocalStorageService {
         key,
         (object: BVH) => {
           if (object.skeleton && object.skeleton.bones && object.skeleton.bones.length > 0) {
-            const skeletonHelper : any = new THREE.SkeletonHelper( object.skeleton.bones[ 0 ] );
+            const skeletonHelper: any = new THREE.SkeletonHelper(object.skeleton.bones[0]);
             skeletonHelper['skeleton'] = object.skeleton; // allow animation mixer to bind to THREE.SkeletonHelper directly
             callBack({
               object: skeletonHelper,
-              clips : [object.clip],
+              clips: [object.clip],
               source: object,
             });
           }
@@ -1185,7 +1184,7 @@ export class LocalStorageService {
         (geometry: THREE.BufferGeometry) => {
           callBack({
             geometry: geometry,
-            source : geometry
+            source: geometry,
           });
         },
         this.onProgress,
@@ -1458,34 +1457,34 @@ export class LocalStorageService {
         key,
         (volume: Volume) => {
           const group = new THREE.Group();
-					const geometry = new THREE.BoxGeometry( volume.xLength, volume.yLength, volume.zLength );
-					const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-					const cube = new THREE.Mesh( geometry, material );
-					cube.visible = false;
+          const geometry = new THREE.BoxGeometry(volume.xLength, volume.yLength, volume.zLength);
+          const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+          const cube = new THREE.Mesh(geometry, material);
+          cube.visible = false;
           cube.name = 'box';
           cube.userData.volume = volume;
-					const box = new THREE.BoxHelper( cube );
+          const box = new THREE.BoxHelper(cube);
           box.name = 'helper';
-					box.applyMatrix4( volume.matrix as any );
-					group.add( box );
-					//z plane
+          box.applyMatrix4(volume.matrix as any);
+          group.add(box);
+          //z plane
           const rasDimensions = (volume as any).RASDimensions;
-					const sliceZ = volume.extractSlice( 'z', Math.floor( rasDimensions[ 2 ] / 4 ) );
+          const sliceZ = volume.extractSlice('z', Math.floor(rasDimensions[2] / 4));
           sliceZ.mesh.name = 'z';
           sliceZ.mesh.userData.volumeSlice = sliceZ;
-					group.add( sliceZ.mesh );
-					//y plane
-					const sliceY = volume.extractSlice( 'y', Math.floor( rasDimensions[ 1 ] / 2 ) );
+          group.add(sliceZ.mesh);
+          //y plane
+          const sliceY = volume.extractSlice('y', Math.floor(rasDimensions[1] / 2));
           sliceY.mesh.name = 'y';
           sliceY.mesh.userData.volumeSlice = sliceY;
-					group.add( sliceY.mesh );
-					//x plane
-					const sliceX = volume.extractSlice( 'x', Math.floor( rasDimensions[ 0 ] / 2 ) );
+          group.add(sliceY.mesh);
+          //x plane
+          const sliceX = volume.extractSlice('x', Math.floor(rasDimensions[0] / 2));
           sliceX.mesh.name = 'x';
           sliceX.mesh.userData.volumeSlice = sliceX;
-					group.add( sliceX.mesh );
+          group.add(sliceX.mesh);
           callBack({
-            object : group,
+            object: group,
             source: volume,
           });
         },
@@ -1861,7 +1860,7 @@ export class LocalStorageService {
     this.getObjectFromKey(
       key,
       (result) => {
-        const resultMaterial : any = result.material;
+        const resultMaterial: any = result.material;
         if (result.texture instanceof THREE.Texture) {
           callBack(result.texture, result.source);
         } else if (result.material instanceof THREE.Material && resultMaterial['map'] instanceof THREE.Texture) {

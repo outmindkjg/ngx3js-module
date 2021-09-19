@@ -33,12 +33,12 @@ export const VideoKinect = {
   }
   `,
   uniforms: {
-    map : { value : null} as any,
-    width : { value : 640},
-    height : { value : 480},
-    nearClipping : { value : 850},
-    farClipping : { value : 4000},
-    pointSize : { value : 2},
-    zOffset : { value : 1000}
+    map: { value: null } as any,
+    width: { value: 640 },
+    height: { value: 480 },
+    nearClipping: { value: 850 },
+    farClipping: { value: 4000 },
+    pointSize: { value: 2 },
+    zOffset: { value: 1000 },
   },
 };

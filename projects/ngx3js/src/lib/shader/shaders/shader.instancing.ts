@@ -32,7 +32,7 @@ export const BufferGeometryInstancing = {
   }
   `,
   uniforms: {
-    time : { value : 1.0 },
-    sineTime : { value : 1.0 }
+    time: { value: 1.0 },
+    sineTime: { value: 1.0 },
   },
 };

@@ -57,11 +57,11 @@ export const ShaderDemo11 = {
 
   }
 	`,
-  uniforms : {
-		color : { value : new THREE.Color(0xff2200) },
-		texturePosition : { value : null } as any,
-		textureVelocity : { value : null } as any,
-		time : { value : 1.0},
-		delta : { value : 0.0}
-	}
+  uniforms: {
+    color: { value: new THREE.Color(0xff2200) },
+    texturePosition: { value: null } as any,
+    textureVelocity: { value: null } as any,
+    time: { value: 1.0 },
+    delta: { value: 0.0 },
+  },
 };

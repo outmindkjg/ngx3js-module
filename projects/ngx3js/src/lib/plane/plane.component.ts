@@ -12,7 +12,6 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
   styleUrls: ['./plane.component.scss'],
 })
 export class PlaneComponent extends AbstractSubscribeComponent implements OnInit {
-
   /**
    * Input  of plane component
    */
@@ -64,7 +63,7 @@ export class PlaneComponent extends AbstractSubscribeComponent implements OnInit
    * default change detector has checked data-bound properties
    * if at least one has changed, and before the view and content
    * children are checked.
-   * 
+   *
    * @param changes The changed properties.
    */
   ngOnChanges(changes: SimpleChanges): void {
@@ -93,13 +92,13 @@ export class PlaneComponent extends AbstractSubscribeComponent implements OnInit
    * World plane of plane component
    */
   private worldPlane: THREE.Plane = null;
-  
+
   /**
    * Sets plane
-   * @param x 
-   * @param y 
-   * @param z 
-   * @param w 
+   * @param x
+   * @param y
+   * @param z
+   * @param w
    */
   public setPlane(x: number, y: number, z: number, w: number) {
     if (ThreeUtil.isNotNull(x)) {
@@ -123,8 +122,8 @@ export class PlaneComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets world plane
-   * @param [matrixWorld] 
-   * @returns world plane 
+   * @param [matrixWorld]
+   * @returns world plane
    */
   public getWorldPlane(matrixWorld?: THREE.Matrix4): THREE.Plane {
     if (this.worldPlane === null) {
@@ -139,7 +138,7 @@ export class PlaneComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets plane
-   * @returns plane 
+   * @returns plane
    */
   public getPlane(): THREE.Plane {
     if (this.plane === null || this._needUpdate) {

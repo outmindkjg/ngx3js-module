@@ -18,7 +18,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
    * Input  of tools component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public type: string = '';
 
@@ -51,15 +51,15 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
    * @see THREE.RGBM16Encoding - RGBM16Encoding ,
    * @see THREE.RGBDEncoding - RGBDEncoding ,
    */
-   @Input() public encoding: string = null;
+  @Input() public encoding: string = null;
 
   /**
    * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically
    * set this to [page:Textures THREE.RGBFormat] for JPG images. <br /><br />
    * See the [page:Textures texture constants] page for details of other formats.
-   * 
+   *
    * Notice - case insensitive.
-   * 
+   *
    * @see THREE.PixelFormat
    * @see THREE.AlphaFormat - AlphaFormat, Alpha
    * @see THREE.RedFormat - RedFormat, Red
@@ -74,9 +74,9 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
    * @see THREE.RGBEFormat - RGBEFormat, RGBE
    * @see THREE.DepthFormat - DepthFormat, Depth
    * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
-   * @see THREE.RGBAFormat - RGBAFormat, RGBA 
+   * @see THREE.RGBAFormat - RGBAFormat, RGBA
    */
-   @Input() public format: string = null;
+  @Input() public format: string = null;
 
   /**
    * Input  of tools component

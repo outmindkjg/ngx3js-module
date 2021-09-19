@@ -9,8 +9,14 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	providers: [{ provide: AbstractObject3dComponent, useExisting: forwardRef(() => ChartDoughnutComponent) }],
 })
 export class ChartDoughnutComponent extends AbstractChartComponent implements OnInit {
+	/**
+	 * Input  of chart doughnut component
+	 */
 	@Input() public type: string = '';
 
+	/**
+	 * Creates an instance of chart doughnut component.
+	 */
 	constructor() {
 		super();
 	}

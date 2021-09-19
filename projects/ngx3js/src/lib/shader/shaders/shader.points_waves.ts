@@ -16,6 +16,6 @@ export const PointsWaves = {
   }
   `,
   uniforms: {
-    color: { value: new THREE.Color(0xffffff) }
+    color: { value: new THREE.Color(0xffffff) },
   },
 };

@@ -20,9 +20,9 @@ export const ShaderSkyDome = {
   }
   `,
   uniforms: {
-    topColor: { value: new THREE.Color( 0x0077ff ) },
-    bottomColor: { value: new THREE.Color( 0xffffff ) },
+    topColor: { value: new THREE.Color(0x0077ff) },
+    bottomColor: { value: new THREE.Color(0xffffff) },
     offset: { value: 400 },
-    exponent: { value: 0.6 }
+    exponent: { value: 0.6 },
   },
 };

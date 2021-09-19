@@ -1,4 +1,3 @@
-
 export const ShaderNoiseRandom2D = {
   vertexShader: `
   varying vec2 vUv;

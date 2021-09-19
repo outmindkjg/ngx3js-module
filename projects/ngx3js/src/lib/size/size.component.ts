@@ -3,33 +3,35 @@ import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList,
 import { ThreeUtil } from '../interface';
 import * as THREE from 'three';
 
+/**
+ * Component
+ */
 @Component({
   selector: 'ngx3js-size',
   templateUrl: './size.component.html',
-  styleUrls: ['./size.component.scss']
+  styleUrls: ['./size.component.scss'],
 })
 export class SizeComponent extends AbstractSubscribeComponent implements OnInit, AfterContentInit {
-
   /**
-   * The size of width 
+   * The size of width
    * - type number
    *  fixed size
-   * - type string with include % 
-   *  relative size from renderer size 
-   *  for example 
-   *    in case renderer = 1024 
+   * - type string with include %
+   *  relative size from renderer size
+   *  for example
+   *    in case renderer = 1024
    *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
    */
   @Input() public width: number | string = '100%';
 
   /**
-   * The size of height 
+   * The size of height
    * - type number
    *  fixed size
-   * - type string with include % 
-   *  relative size from renderer size 
-   *  for example 
-   *    in case renderer = 1024 
+   * - type string with include %
+   *  relative size from renderer size
+   *  for example
+   *    in case renderer = 1024
    *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
    */
   @Input() public height: number | string = '100%';
@@ -159,32 +161,32 @@ export class SizeComponent extends AbstractSubscribeComponent implements OnInit,
    * @param width
    * @param height
    */
-  public setRendererSize(width: number, height: number, pixelRatio : number = 1) {
+  public setRendererSize(width: number, height: number, pixelRatio: number = 1) {
     this.rendererWidth = width;
     this.rendererHeight = height;
     this.sizePixelRatio = pixelRatio;
     this.needUpdate = true;
   }
 
-  private size : THREE.Vector2 = null;
+  private size: THREE.Vector2 = null;
 
-	/**
-	 * Applys changes3d
-	 * @param changes
-	 */
-	public applyChanges(changes: string[]) {
-		if (this.size !== null) {
+  /**
+   * Applys changes3d
+   * @param changes
+   */
+  public applyChanges(changes: string[]) {
+    if (this.size !== null) {
       if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
         this.getSize();
         return;
       }
-			if (ThreeUtil.isIndexOf(changes, ['width', 'height'])) {
+      if (ThreeUtil.isIndexOf(changes, ['width', 'height'])) {
         this.needUpdate = true;
-        return ;
-			}
-		}
-		super.applyChanges(changes);
-	}
+        return;
+      }
+    }
+    super.applyChanges(changes);
+  }
 
   /**
    * Gets object
@@ -195,7 +197,7 @@ export class SizeComponent extends AbstractSubscribeComponent implements OnInit,
   }
 
   public getSize(): THREE.Vector2 {
-		if (this.size === null || this._needUpdate) {
+    if (this.size === null || this._needUpdate) {
       this.needUpdate = false;
       this.size = new THREE.Vector2(this.getWidth(), this.getHeight());
       if (this.sizePixelRatio !== 1) {
@@ -205,5 +207,4 @@ export class SizeComponent extends AbstractSubscribeComponent implements OnInit,
     }
     return this.size;
   }
-
 }

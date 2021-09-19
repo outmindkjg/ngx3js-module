@@ -28,6 +28,6 @@ export const SinColor = {
   }
   `,
   uniforms: {
-    time : { value : 1.0 }
+    time: { value: 1.0 },
   },
 };

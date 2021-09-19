@@ -1,4 +1,3 @@
-
 export const ColorRandom = {
   vertexShader: `
   varying vec2 vUv;
@@ -19,6 +18,6 @@ export const ColorRandom = {
   }
   `,
   uniforms: {
-    time: { value: 0.0 }
+    time: { value: 0.0 },
   },
 };

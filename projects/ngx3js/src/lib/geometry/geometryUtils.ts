@@ -98,24 +98,31 @@ export class GeometryUtils {
     return radius;
   }
 
+  /**
+   * Gets flip geometry
+   *
+   * @param geometry
+   * @param [plane]
+   * @returns flip geometry
+   */
   public static getFlipGeometry(geometry: THREE.BufferGeometry, plane: string = 'Z'): THREE.BufferGeometry {
     geometry = geometry.clone();
     const attrVertices = geometry.getAttribute('position');
     const attrUvs = geometry.getAttribute('uv');
     const attrNormals = geometry.getAttribute('normal');
     const attrIndices = geometry.getIndex();
-    switch(plane.toUpperCase()) {
-      case 'Z' :
-        for(let i = 0 ; i < attrVertices.count ; i++) {
+    switch (plane.toUpperCase()) {
+      case 'Z':
+        for (let i = 0; i < attrVertices.count; i++) {
           attrVertices.setZ(i, attrVertices.getZ(i) * -1);
         }
-        for(let i = 0 ; i < attrUvs.count ; i++) {
+        for (let i = 0; i < attrUvs.count; i++) {
           attrUvs.setX(i, attrUvs.getX(i) * -1);
         }
-        for(let i = 0 ; i < attrNormals.count ; i++) {
+        for (let i = 0; i < attrNormals.count; i++) {
           attrNormals.setZ(i, attrNormals.getZ(i) * -1);
         }
-        for(let i = 0 ; i < attrIndices.count ; i +=3 ) {
+        for (let i = 0; i < attrIndices.count; i += 3) {
           let p1 = attrIndices.getX(i + 1);
           let p2 = attrIndices.getX(i + 2);
           attrIndices.setX(i + 1, p2);
@@ -125,6 +132,7 @@ export class GeometryUtils {
     }
     return geometry;
   }
+
   /**
    * Adds geometry
    * @param key
@@ -193,14 +201,14 @@ export class GeometryUtils {
         return geometry;
     }
     tolerance = Math.max(tolerance, Number.EPSILON);
-    const hashToIndex : any = {};
+    const hashToIndex: any = {};
     const indices = geometry.getIndex();
     const positions = geometry.getAttribute('position');
     const vertexCount = indices ? indices.count : positions.count;
     let nextIndex = 0;
     const attributeNames = Object.keys(geometry.attributes);
-    const attrArrays : any = {};
-    const morphAttrsArrays : any = {};
+    const attrArrays: any = {};
+    const morphAttrsArrays: any = {};
     const newIndices = [];
     const getters = ['getX', 'getY', 'getZ', 'getW'];
     for (let i = 0, l = attributeNames.length; i < l; i++) {
@@ -222,7 +230,7 @@ export class GeometryUtils {
       let hash = '';
       for (let j = 0, l = attributeNames.length; j < l; j++) {
         const name = attributeNames[j];
-        const attribute : any = geometry.getAttribute(name);
+        const attribute: any = geometry.getAttribute(name);
         const itemSize = attribute.itemSize;
         for (let k = 0; k < itemSize; k++) {
           hash += `${~~(attribute[getters[k]](index) * shiftMultiplier)},`;
@@ -233,8 +241,8 @@ export class GeometryUtils {
       } else {
         for (var j = 0, l = attributeNames.length; j < l; j++) {
           const name = attributeNames[j];
-          const attribute : any = geometry.getAttribute(name);
-          const morphAttr : any = geometry.morphAttributes[name];
+          const attribute: any = geometry.getAttribute(name);
+          const morphAttr: any = geometry.morphAttributes[name];
           const itemSize = attribute.itemSize;
           const newarray = attrArrays[name];
           const newMorphArrays = morphAttrsArrays[name];
@@ -253,7 +261,7 @@ export class GeometryUtils {
         nextIndex++;
       }
     }
-    const result : any = geometry.clone();
+    const result: any = geometry.clone();
     result.type = geometry.type;
     result['parameters'] = (geometry as any)['parameters'];
     for (let i = 0, l = attributeNames.length; i < l; i++) {

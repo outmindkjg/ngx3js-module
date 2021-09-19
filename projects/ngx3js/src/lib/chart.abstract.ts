@@ -1,17 +1,23 @@
 import { AfterContentInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { RendererTimer, ThreeColor, ThreeUtil } from './interface';
-import { AbstractObject3dComponent } from './object3d.abstract';
 import * as THREE from 'three';
-import { MathUtils, Mesh, RingGeometry } from 'three';
+import { MathUtils, RingGeometry } from 'three';
 import { OutlineGeometry } from './geometry/geometry.outline';
 import { StarGeometry } from './geometry/geometry.star';
+import { RendererTimer, ThreeColor, ThreeUtil } from './interface';
+import { AbstractObject3dComponent } from './object3d.abstract';
 
+/**
+ * Attribute update info
+ */
 export interface AttributeUpdateInfo {
   index: number;
   from: number;
   to: number;
 }
 
+/**
+ * Shape info
+ */
 export interface ShapeInfo {
   backgroundColor?: ThreeColor;
   opacity?: number;
@@ -25,6 +31,9 @@ export interface ShapeInfo {
   hoverRadius?: number;
 }
 
+/**
+ * Chart shape
+ */
 export interface ChartShape {
   mesh: THREE.Mesh;
   geometry: THREE.BufferGeometry;
@@ -195,12 +204,24 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
     return false;
   }
 
+  /**
+   * Chart  of abstract chart component
+   */
   protected chart: THREE.Object3D = null;
 
+  /**
+   * Sets object3d
+   * @param object
+   */
   protected setObject3d(object: THREE.Object3D) {
     this.setChart(object);
   }
 
+  /**
+   * Gets depth center
+   *
+   * @returns depth center
+   */
   protected getDepthCenter(): number {
     const depth = ThreeUtil.getTypeSafe(this.depth, 1);
     const depthIdx = ThreeUtil.getTypeSafe(this.depthIdx, 0);
@@ -208,24 +229,46 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
     return (depth / depthLength) * (depthIdx + 0.5) - depth / 2;
   }
 
+  /**
+   * Gets depth size
+   *
+   * @returns depth size
+   */
   protected getDepthSize(): number {
     const depth = ThreeUtil.getTypeSafe(this.depth, 1);
     const depthLength = Math.max(1, ThreeUtil.getTypeSafe(this.depthLength, 1));
     return (depth / depthLength) * ThreeUtil.getTypeSafe(this.depthSize, 0.9);
   }
 
+  /**
+   * Gets width center
+   * @param widthIdx
+   * @returns width center
+   */
   protected getWidthCenter(widthIdx: number): number {
     const width = ThreeUtil.getTypeSafe(this.width, 1);
     const widthLength = Math.max(1, ThreeUtil.getTypeSafe(this.widthLength, 1));
     return (width / widthLength) * (widthIdx + 0.5) - width / 2;
   }
 
+  /**
+   * Gets height center
+   * @param scaleMin
+   * @param scaleMax
+   * @param value
+   * @returns height center
+   */
   protected getHeightCenter(scaleMin: number, scaleMax: number, value: number): number {
     const scaleDist = scaleMax - scaleMin;
     const height = ThreeUtil.getTypeSafe(this.height, 1);
     return (((value - scaleMin) / scaleDist - 0.5) * height) / 2;
   }
 
+  /**
+   * Gets scale min max
+   * @param data
+   * @returns
+   */
   protected getScaleMinMax(data: number[]) {
     let scaleMax = 100;
     let scaleMin = 0;
@@ -248,6 +291,12 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
     return [scaleMin, scaleMax];
   }
 
+  /**
+   * Gets test data
+   * @param data
+   * @param [len]
+   * @returns
+   */
   protected getTestData(data: number[], len: number = 10) {
     if (data.length === 0) {
       for (let i = 0; i < len; i++) {
@@ -258,6 +307,14 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
     return data;
   }
 
+  /**
+   * Adds pointer
+   * @param upPoints
+   * @param pointer
+   * @param parent
+   * @param middleY
+   * @param baseZ
+   */
   protected addPointer(upPoints: number[], pointer: THREE.Object3D, parent: THREE.Object3D, middleY: number, baseZ: number) {
     const height = ThreeUtil.getTypeSafe(this.height, 1);
     const offsetY = height * ThreeUtil.getTypeSafe(this.pointOffset, 0);
@@ -279,18 +336,32 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
     });
   }
 
+  /**
+   * Update attributes of abstract chart component
+   */
   private _updateAttributes: {
     attribute: THREE.BufferAttribute | THREE.InterleavedBufferAttribute;
     values: AttributeUpdateInfo[];
   }[] = [];
 
+  /**
+   * Update position of abstract chart component
+   */
   private _updatePosition: {
     position: THREE.Vector3;
     value: AttributeUpdateInfo;
   }[] = [];
 
+  /**
+   * Update points of abstract chart component
+   */
   private _updatePoints: THREE.Object3D[] = [];
 
+  /**
+   * Adds update attributes
+   * @param geometry
+   * @param values
+   */
   protected addUpdateAttributes(geometry: THREE.BufferGeometry, values: AttributeUpdateInfo[]) {
     this._updateAttributes.push({
       attribute: geometry.getAttribute('position'),
@@ -298,6 +369,12 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
     });
   }
 
+  /**
+   * Adds update position
+   * @param object3d
+   * @param value
+   * @param [isPointer]
+   */
   protected addUpdatePosition(object3d: THREE.Object3D, value: AttributeUpdateInfo, isPointer: boolean = true) {
     this._updatePosition.push({
       position: object3d.position,
@@ -308,12 +385,19 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
     }
   }
 
+  /**
+   * Clears chart
+   */
   protected clearChart() {
     this._updateAttributes = [];
     this._updatePosition = [];
     this._updatePoints = [];
   }
 
+  /**
+   * Sets chart
+   * @param object
+   */
   protected setChart(object: THREE.Object3D) {
     this.chart = object;
     super.setObject3d(object);
@@ -360,10 +444,21 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
       super.applyChanges3d(changes);
     }
   }
+
+  /**
+   * Gets point shape
+   * @returns point shape
+   */
   protected getPointShape(): ChartShape {
     return this.getMeshAndBorder(ThreeUtil.getTypeSafe(this.pointStyle, 'circle'), this.pointOptions);
   }
 
+  /**
+   * Gets mesh and border
+   * @param type
+   * @param options
+   * @returns mesh and border
+   */
   protected getMeshAndBorder(type: string, options: ShapeInfo): ChartShape {
     if (ThreeUtil.isNull(options)) {
       options = {};
@@ -422,6 +517,12 @@ export abstract class AbstractChartComponent extends AbstractObject3dComponent i
     return { mesh: mesh, geometry: geometry, material: material, geometryBorder: geometryBorder, materialBorder: materialBorder };
   }
 
+  /**
+   * Updates abstract chart component
+   * @param _
+   * @param elapsedTime
+   * @param delta
+   */
   public update(_: RendererTimer, elapsedTime: number, delta: number) {
     if (ThreeUtil.isNotNull(this._updateAttributes) || ThreeUtil.isNotNull(this._updatePosition) || ThreeUtil.isNotNull(this._updatePoints)) {
       if (elapsedTime > 0 && elapsedTime < 1.5 && delta > 0) {

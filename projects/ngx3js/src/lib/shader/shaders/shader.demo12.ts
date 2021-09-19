@@ -77,8 +77,8 @@ export const ShaderDemo12 = {
     if ( color.a == 0.0 ) discard;
   }
   `,
-  uniforms : {
-    map: { value : null } as any,
-    cameraPos: { value: new THREE.Vector3() }
-  }
+  uniforms: {
+    map: { value: null } as any,
+    cameraPos: { value: new THREE.Vector3() },
+  },
 };

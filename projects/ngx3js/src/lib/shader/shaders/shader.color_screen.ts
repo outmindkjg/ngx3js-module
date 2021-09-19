@@ -1,4 +1,3 @@
-
 export const ColorScreen = {
   vertexShader: `
   varying vec2 vUv;
@@ -15,6 +14,6 @@ export const ColorScreen = {
   }
   `,
   uniforms: {
-    tDiffuse: { value: null } as any
+    tDiffuse: { value: null } as any,
   },
 };

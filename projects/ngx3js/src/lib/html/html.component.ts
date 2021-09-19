@@ -18,7 +18,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
    * The html tag.
    *
    * Notice - case insensitive.
-   * 
+   *
    * @see HTMLDivElement - div
    * @see HTMLSpanElement - span
    */
@@ -28,7 +28,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
    * The child append method.
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public childType: string = 'innerHTML';
 

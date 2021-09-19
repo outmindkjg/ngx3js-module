@@ -14,7 +14,7 @@ import { AbstractTweenComponent } from '../tween.abstract';
 
 /**
  * ComposerComponent
- * 
+ *
  */
 @Component({
   selector: 'ngx3js-composer',
@@ -71,25 +71,25 @@ export class ComposerComponent extends AbstractTweenComponent implements OnInit 
   @Input() public y: number | string = 0;
 
   /**
-   * The size of width 
+   * The size of width
    * - type number
    *  fixed size
-   * - type string with include % 
-   *  relative size from renderer size 
-   *  for example 
-   *    in case renderer = 1024 
+   * - type string with include %
+   *  relative size from renderer size
+   *  for example
+   *    in case renderer = 1024
    *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
    */
   @Input() public width: number | string = '100%';
 
   /**
-   * The size of height 
+   * The size of height
    * - type number
    *  fixed size
-   * - type string with include % 
-   *  relative size from renderer size 
-   *  for example 
-   *    in case renderer = 1024 
+   * - type string with include %
+   *  relative size from renderer size
+   *  for example
+   *    in case renderer = 1024
    *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
    */
   @Input() public height: number | string = '100%';
@@ -100,49 +100,49 @@ export class ComposerComponent extends AbstractTweenComponent implements OnInit 
   @Input() public scissorTest: boolean = false;
 
   /**
-   * The scissor position of left 
+   * The scissor position of left
    * - type number
    *  fixed position
-   * - type string with include % 
-   *  relative position from renderer size 
-   *  for example 
-   *    in case renderer = 1024 
+   * - type string with include %
+   *  relative position from renderer size
+   *  for example
+   *    in case renderer = 1024
    *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
    */
   @Input() public scissorX: number | string = 0;
 
   /**
-   * The scissor position of top 
+   * The scissor position of top
    * - type number
    *  fixed position
-   * - type string with include % 
-   *  relative position from renderer size 
-   *  for example 
-   *    in case renderer = 1024 
+   * - type string with include %
+   *  relative position from renderer size
+   *  for example
+   *    in case renderer = 1024
    *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
    */
   @Input() public scissorY: number | string = 0;
 
   /**
-   * The scissor of width 
+   * The scissor of width
    * - type number
    *  fixed size
-   * - type string with include % 
-   *  relative size from renderer size 
-   *  for example 
-   *    in case renderer = 1024 
+   * - type string with include %
+   *  relative size from renderer size
+   *  for example
+   *    in case renderer = 1024
    *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
    */
   @Input() public scissorWidth: number | string = '100%';
 
   /**
-   * The scissor of height 
+   * The scissor of height
    * - type number
    *  fixed size
-   * - type string with include % 
-   *  relative size from renderer size 
-   *  for example 
-   *    in case renderer = 1024 
+   * - type string with include %
+   *  relative size from renderer size
+   *  for example
+   *    in case renderer = 1024
    *    '100%' = 1024, '50%' = 512, '50%-10' = 502, '50%+30' = 542
    */
   @Input() public scissorHeight: number | string = '100%';
@@ -159,7 +159,7 @@ export class ComposerComponent extends AbstractTweenComponent implements OnInit 
 
   /**
    * AsciiEffect
-   * 
+   *
    * @see AsciiEffect AsciiEffect
    */
   @Input() public charSet: string = null;
@@ -465,8 +465,8 @@ export class ComposerComponent extends AbstractTweenComponent implements OnInit 
    * It is invoked only once when the directive is instantiated.
    */
   ngAfterContentInit(): void {
-		this.subscribeListQueryChange(this.passList, 'passList', 'pass');
-		this.subscribeListQueryChange(this.renderTargetList, 'renderTargetList', 'rendertarget');
+    this.subscribeListQueryChange(this.passList, 'passList', 'pass');
+    this.subscribeListQueryChange(this.renderTargetList, 'renderTargetList', 'rendertarget');
     super.ngAfterContentInit();
   }
 
@@ -480,17 +480,17 @@ export class ComposerComponent extends AbstractTweenComponent implements OnInit 
    */
   private rendererHeight: number = 1024;
 
-	/**
-	 * pixelRatio of camera component
-	 */
-	private pixelRatio: number = 1;
+  /**
+   * pixelRatio of camera component
+   */
+  private pixelRatio: number = 1;
 
   /**
    * Sets composer size
    * @param width
    * @param height
    */
-  public setRendererSize(width: number, height: number, pixelRatio : number ) {
+  public setRendererSize(width: number, height: number, pixelRatio: number) {
     this.rendererWidth = width;
     this.rendererHeight = height;
     this.pixelRatio = pixelRatio;
@@ -605,9 +605,9 @@ export class ComposerComponent extends AbstractTweenComponent implements OnInit 
               });
             }
             break;
-          case 'rendertarget' :
+          case 'rendertarget':
             if (ThreeUtil.isNotNull(this.renderTargetList)) {
-              this.renderTargetList.forEach(renderTarget => {
+              this.renderTargetList.forEach((renderTarget) => {
                 renderTarget.setMaterial(this.selfAny, 'effectcomposer');
               });
             }

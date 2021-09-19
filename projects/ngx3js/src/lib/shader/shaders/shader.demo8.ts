@@ -13,5 +13,5 @@ export const ShaderDemo8 = {
     else
       gl_FragColor = vec4( 1.0 );
   }
-  `
+  `,
 };

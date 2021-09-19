@@ -36,7 +36,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public type: string = 'mesh';
 
@@ -44,7 +44,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public geometryType: string = 'shape';
 
@@ -62,7 +62,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public path: string = null;
 
@@ -138,7 +138,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public textAlign: string = null;
 
@@ -146,7 +146,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public align: string = null;
 
@@ -174,7 +174,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public weight: string = null;
 
@@ -226,7 +226,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public extrudePathType: string = null;
 
@@ -239,7 +239,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public curvePathType: string = null;
 
@@ -247,7 +247,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public curveType: string = null;
 
@@ -260,7 +260,7 @@ export class SvgComponent extends AbstractObject3dComponent {
    * Input  of svg component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public uVGenerator: string = null;
 
@@ -839,7 +839,7 @@ export class SvgComponent extends AbstractObject3dComponent {
           const sumShapes: THREE.Shape[] = shape.shape;
           sumShapes.push.apply(shape.shape, holeShape as any);
           if (ThreeUtil.isNotNull(this.stroke)) {
-            const AnySVGLoader : any = SVGLoader;
+            const AnySVGLoader: any = SVGLoader;
             const style = AnySVGLoader.getStrokeStyle(this.stroke, this.getColor(0x006699).getStyle());
             sumShapes.forEach((shape) => {
               const outlineGeometry = AnySVGLoader.pointsToStroke(shape.getPoints(), style);

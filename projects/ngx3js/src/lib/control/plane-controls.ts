@@ -109,7 +109,7 @@ export class PlaneControls {
   public setActive(isActive: boolean) {
     if (isActive) {
       if (this._mouseMoveHandler === null) {
-        this._mouseMoveHandler = (event : any) => {
+        this._mouseMoveHandler = (event: any) => {
           if (this.enabled === false) return;
           event.preventDefault();
           event.stopPropagation();
@@ -132,7 +132,7 @@ export class PlaneControls {
   /**
    * Mouse move handler of plane controls
    */
-  private _mouseMoveHandler : any = null;
+  private _mouseMoveHandler: any = null;
 
   /**
    * Disposes plane controls

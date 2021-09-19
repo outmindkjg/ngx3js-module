@@ -46,7 +46,7 @@ export const ScaleColor = {
   }
   `,
   uniforms: {
-    map : { value : null } as any,
-    time : { value : 0.0 }
+    map: { value: null } as any,
+    time: { value: 0.0 },
   },
 };

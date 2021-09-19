@@ -5,7 +5,19 @@ import { AudioComponent } from './audio/audio.component';
 import { BackgroundComponent } from './background/background.component';
 import { CameraComponent } from './camera/camera.component';
 import { CanvasComponent } from './canvas/canvas.component';
+import { ChartAxesComponent } from './chart/axes/axes.component';
+import { ChartBarComponent } from './chart/bar/bar.component';
+import { ChartBubbleComponent } from './chart/bubble/bubble.component';
 import { ChartComponent } from './chart/chart.component';
+import { ChartControllerComponent } from './chart/controller/controller.component';
+import { ChartDoughnutComponent } from './chart/doughnut/doughnut.component';
+import { ChartLegendComponent } from './chart/legend/legend.component';
+import { ChartLineComponent } from './chart/line/line.component';
+import { ChartPieComponent } from './chart/pie/pie.component';
+import { ChartPolarAreaComponent } from './chart/polar-area/polar-area.component';
+import { ChartRadarComponent } from './chart/radar/radar.component';
+import { ChartScatterComponent } from './chart/scatter/scatter.component';
+import { ChartTitleComponent } from './chart/title/title.component';
 import { ClipComponent } from './clip/clip.component';
 import { ComposerComponent } from './composer/composer.component';
 import { ControlComponent } from './control/control.component';
@@ -42,6 +54,7 @@ import { SceneComponent } from './scene/scene.component';
 import { ShaderComponent } from './shader/shader.component';
 import { ShapeComponent } from './shape/shape.component';
 import { SharedComponent } from './shared/shared.component';
+import { SizeComponent } from './size/size.component';
 import { SvgComponent } from './svg/svg.component';
 import { TextureComponent } from './texture/texture.component';
 import { ToolsComponent } from './tools/tools.component';
@@ -50,21 +63,8 @@ import { TranslationComponent } from './translation/translation.component';
 import { TweenComponent } from './tween/tween.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { VisualComponent } from './visual/visual.component';
-import { SizeComponent } from './size/size.component';
-import { ChartLineComponent } from './chart/line/line.component';
-import { ChartBarComponent } from './chart/bar/bar.component';
-import { ChartRadarComponent } from './chart/radar/radar.component';
-import { ChartDoughnutComponent } from './chart/doughnut/doughnut.component';
-import { ChartPieComponent } from './chart/pie/pie.component';
-import { ChartBubbleComponent } from './chart/bubble/bubble.component';
-import { ChartScatterComponent } from './chart/scatter/scatter.component';
-import { ChartAxesComponent } from './chart/axes/axes.component';
-import { ChartLegendComponent } from './chart/legend/legend.component';
-import { ChartTitleComponent } from './chart/title/title.component';
-import { ChartPolarAreaComponent } from './chart/polar-area/polar-area.component';
-import { ChartControllerComponent } from './chart/controller/controller.component';
 
-const COMMON_PIPES:any[] = [];
+const COMMON_PIPES: any[] = [];
 const COMMON_DIRECTIVES = [DrawingCanvasDirective];
 const MODULE_COMPONENTS = [
   LookatComponent,
@@ -116,18 +116,18 @@ const MODULE_COMPONENTS = [
   RenderTargetComponent,
   SizeComponent,
   ChartComponent,
-  ChartLineComponent, 
-  ChartBarComponent, 
-  ChartRadarComponent, 
-  ChartDoughnutComponent, 
-  ChartPieComponent, 
-  ChartBubbleComponent, 
-  ChartScatterComponent, 
-  ChartAxesComponent, 
-  ChartLegendComponent, 
-  ChartTitleComponent, 
+  ChartLineComponent,
+  ChartBarComponent,
+  ChartRadarComponent,
+  ChartDoughnutComponent,
+  ChartPieComponent,
+  ChartBubbleComponent,
+  ChartScatterComponent,
+  ChartAxesComponent,
+  ChartLegendComponent,
+  ChartTitleComponent,
   ChartPolarAreaComponent,
-  ChartControllerComponent
+  ChartControllerComponent,
 ];
 
 /**

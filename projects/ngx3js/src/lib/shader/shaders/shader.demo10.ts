@@ -24,9 +24,9 @@ export const ShaderDemo10 = {
 		outColor = vec4( color.rrr * 1.5, 1.0 );
 	}
   `,
-  uniforms : {
-    diffuse : { value : null } as any,
-    depth : { value : 55 },
-    size : { value : new THREE.Vector2(50, 50) }
-  }
+  uniforms: {
+    diffuse: { value: null } as any,
+    depth: { value: 55 },
+    size: { value: new THREE.Vector2(50, 50) },
+  },
 };

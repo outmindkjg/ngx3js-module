@@ -8,15 +8,54 @@ import { AbstractSubscribeComponent } from '../../subscribe.abstract';
  * Control object item
  */
 export interface ControlObjectItem {
+  /**
+   * 
+   */
   object3d?: THREE.Object3D;
+  
+  /**
+   * 
+   */
   component?: any;
+  
+  /**
+   * 
+   */
   position?: THREE.Vector3;
+  
+  /**
+   * 
+   */
   rotation?: THREE.Euler;
+  
+  /**
+   * 
+   */
   scale?: THREE.Vector3;
+  
+  /**
+   * 
+   */
   material?: THREE.Material;
+  
+  /**
+   * 
+   */
   uniforms?: { [uniform: string]: THREE.IUniform };
+  
+  /**
+   * 
+   */
   geometry?: THREE.BufferGeometry;
+  
+  /**
+   * 
+   */
   attributes?: { [name: string]: THREE.BufferAttribute | THREE.InterleavedBufferAttribute };
+  
+  /**
+   * 
+   */
   morphAttributes?: {
     [name: string]: (THREE.BufferAttribute | THREE.InterleavedBufferAttribute)[];
   };

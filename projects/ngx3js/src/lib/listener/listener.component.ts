@@ -5,11 +5,11 @@ import { AbstractObject3dComponent } from '../object3d.abstract';
 
 /**
  * ListenerComponent
- * 
+ *
  * The [name] represents a virtual [link:https://developer.mozilla.org/de/docs/Web/API/AudioListener listener] of the all positional and non-positional audio effects in the scene.<br />
  * A three.js application usually creates a single instance of [name]. It is a mandatory construtor parameter for audios entities like [page:Audio Audio] and [page:PositionalAudio PositionalAudio].<br />
  * In most cases, the listener object is a child of the camera. So the 3D transformation of the camera represents the 3D transformation of the listener.
- * 
+ *
  * @see THREE.AudioListener
  */
 @Component({
@@ -104,20 +104,20 @@ export class ListenerComponent extends AbstractObject3dComponent implements OnIn
   public applyChanges3d(changes: string[]) {
     if (this.listener !== null) {
       if (ThreeUtil.isIndexOf(changes, 'init')) {
-        changes = ThreeUtil.pushUniq(changes, ['volume','visible']);
+        changes = ThreeUtil.pushUniq(changes, ['volume', 'visible']);
       }
       changes.forEach((change) => {
         switch (change.toLowerCase()) {
-          case 'visible' :
+          case 'visible':
             if (this.listener.parent !== null) {
               if (!this.visible) {
                 this.listener.parent.remove(this.listener);
-              } else if (this.parent !== this.listener.parent){
+              } else if (this.parent !== this.listener.parent) {
                 this.parent.add(this.listener);
               }
             }
             break;
-          case 'volume' :
+          case 'volume':
             this.listener.setMasterVolume(this.volume);
             break;
           default:

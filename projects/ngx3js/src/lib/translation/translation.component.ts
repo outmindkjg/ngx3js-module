@@ -98,7 +98,7 @@ export class TranslationComponent extends AbstractSubscribeComponent implements 
       } else if (this.parent.getGeometry) {
         refTranslation.push(this.parent.getGeometry());
       } else if (this.parent.meshTranslations) {
-        this.parent.meshTranslations.forEach((translations : any) => {
+        this.parent.meshTranslations.forEach((translations: any) => {
           refTranslation.push(translations);
         });
       }

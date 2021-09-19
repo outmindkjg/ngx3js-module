@@ -3,24 +3,44 @@ import { AbstractSubscribeComponent } from '../../subscribe.abstract';
 import Ammo from 'ammojs-typed';
 import { ThreeUtil } from '../../interface';
 
+/**
+ * Component
+ */
 @Component({
   selector: 'ngx3js-rigidbody-node',
   templateUrl: './rigidbody-node.component.html',
-  styleUrls: ['./rigidbody-node.component.scss']
+  styleUrls: ['./rigidbody-node.component.scss'],
 })
 export class RigidbodyNodeComponent extends AbstractSubscribeComponent implements OnInit {
+  /**
+   * Input  of rigidbody node component
+   */
+  @Input() public type: string = '';
 
-  @Input() public type:string = "";
-
+  /**
+   * Input  of rigidbody node component
+   */
   @Input() public node: number = 0;
-  
+
+  /**
+   * Input  of rigidbody node component
+   */
   @Input() public body: any = null;
-  
+
+  /**
+   * Input  of rigidbody node component
+   */
   @Input() public disableCollisionBetweenLinkedBodies: boolean = false;
-  
+
+  /**
+   * Input  of rigidbody node component
+   */
   @Input() public influence: number = 0.5;
 
-  constructor() { 
+  /**
+   * Creates an instance of rigidbody node component.
+   */
+  constructor() {
     super();
   }
 
@@ -48,7 +68,7 @@ export class RigidbodyNodeComponent extends AbstractSubscribeComponent implement
    * default change detector has checked data-bound properties
    * if at least one has changed, and before the view and content
    * children are checked.
-   * 
+   *
    * @param changes The changed properties.
    */
   ngOnChanges(changes: SimpleChanges): void {
@@ -68,54 +88,86 @@ export class RigidbodyNodeComponent extends AbstractSubscribeComponent implement
     super.ngAfterContentInit();
   }
 
+  /**
+   * Physics  of rigidbody node component
+   */
   private physics: Ammo.btSoftRigidDynamicsWorld = null;
+
+  /**
+   * Ammo  of rigidbody node component
+   */
   private ammo: typeof Ammo = null;
-  private rigidBody : Ammo.btSoftBody = null;
-  
-  public setRigidbody(rigidBody : Ammo.btSoftBody, physics: Ammo.btSoftRigidDynamicsWorld, ammo : any) {
+
+  /**
+   * Rigid body of rigidbody node component
+   */
+  private rigidBody: Ammo.btSoftBody = null;
+
+  /**
+   * Sets rigidbody
+   * @param rigidBody
+   * @param physics
+   * @param ammo
+   */
+  public setRigidbody(rigidBody: Ammo.btSoftBody, physics: Ammo.btSoftRigidDynamicsWorld, ammo: any) {
     this.rigidBody = rigidBody;
     this.physics = physics;
     this.ammo = ammo;
     this.getRigidbodyNode();
   }
 
-  private getRigidBody(obj : any, key : string) {
+  /**
+   * Gets rigid body
+   * @param obj
+   * @param key
+   * @returns
+   */
+  private getRigidBody(obj: any, key: string) {
     if (ThreeUtil.isNotNull(obj)) {
       this.unSubscribeRefer(key);
       const body = ThreeUtil.getRigidbody(obj);
-      this.subscribeRefer(key, ThreeUtil.getSubscribe(obj, (event) => {
-        if (this.rigidbodyNode !== null) {
-          this.needUpdate = true;
-        } else {
-          this.getRigidbodyNode();
-        }
-      }, 'rigidbody'));
+      this.subscribeRefer(
+        key,
+        ThreeUtil.getSubscribe(
+          obj,
+          (event) => {
+            if (this.rigidbodyNode !== null) {
+              this.needUpdate = true;
+            } else {
+              this.getRigidbodyNode();
+            }
+          },
+          'rigidbody'
+        )
+      );
       return body;
     }
     return null;
   }
 
-  private rigidbodyNode : any = null;
+  /**
+   * Rigidbody node of rigidbody node component
+   */
+  private rigidbodyNode: any = null;
 
-  public getRigidbodyNode() : Ammo.btTypedConstraint {
+  /**
+   * Gets rigidbody node
+   * @returns rigidbody node
+   */
+  public getRigidbodyNode(): Ammo.btTypedConstraint {
     if (ThreeUtil.isNotNull(this.ammo) && ThreeUtil.isNotNull(this.rigidBody) && ThreeUtil.isNotNull(this.physics) && (this.rigidbodyNode === null || this._needUpdate)) {
       this.needUpdate = false;
-      switch(this.type.toLowerCase()) {
-        case "anchor" :
-          const body = this.getRigidBody(this.body,'body');
+      switch (this.type.toLowerCase()) {
+        case 'anchor':
+          const body = this.getRigidBody(this.body, 'body');
           if (ThreeUtil.isNotNull(body)) {
-            this.rigidBody.appendAnchor( 
-              ThreeUtil.getTypeSafe(this.node, 0),
-              body, 
-              ThreeUtil.getTypeSafe(this.disableCollisionBetweenLinkedBodies, false), 
-              ThreeUtil.getTypeSafe(this.influence, 0.5)
-            );
+            this.rigidBody.appendAnchor(ThreeUtil.getTypeSafe(this.node, 0), body, ThreeUtil.getTypeSafe(this.disableCollisionBetweenLinkedBodies, false), ThreeUtil.getTypeSafe(this.influence, 0.5));
             this.rigidbodyNode = {
-              type : this.type,
-              node : this.node,
-              disableCollisionBetweenLinkedBodies : this.disableCollisionBetweenLinkedBodies,
-              influence : this.influence,
-            }
+              type: this.type,
+              node: this.node,
+              disableCollisionBetweenLinkedBodies: this.disableCollisionBetweenLinkedBodies,
+              influence: this.influence,
+            };
           } else {
             this.rigidbodyNode = null;
           }
@@ -125,5 +177,4 @@ export class RigidbodyNodeComponent extends AbstractSubscribeComponent implement
     }
     return this.rigidbodyNode;
   }
-
 }

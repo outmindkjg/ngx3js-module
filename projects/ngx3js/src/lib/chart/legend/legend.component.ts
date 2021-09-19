@@ -1,13 +1,10 @@
-import {
-  Component,
-  forwardRef,
-  Input,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractChartComponent } from '../../chart.abstract';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
+/**
+ * Component
+ */
 @Component({
   selector: 'ngx3js-chart-legend',
   templateUrl: './legend.component.html',
@@ -19,12 +16,16 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
     },
   ],
 })
-export class ChartLegendComponent
-  extends AbstractChartComponent
-  implements OnInit
-{
+export class ChartLegendComponent extends AbstractChartComponent implements OnInit {
+  
+  /**
+   * Input  of chart legend component
+   */
   @Input() public type: string = '';
 
+  /**
+   * Creates an instance of chart legend component.
+   */
   constructor() {
     super();
   }

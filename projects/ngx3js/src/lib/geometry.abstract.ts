@@ -1,9 +1,12 @@
 import { AfterContentInit, Component, ContentChildren, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
+import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
+import { WireframeGeometry2 } from 'three/examples/jsm/lines/WireframeGeometry2';
 import { EdgeSplitModifier } from 'three/examples/jsm/modifiers/EdgeSplitModifier';
 import { SimplifyModifier } from 'three/examples/jsm/modifiers/SimplifyModifier';
 import { TessellateModifier } from 'three/examples/jsm/modifiers/TessellateModifier';
 import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils';
+import { GeometryCompressionUtils } from 'three/examples/jsm/utils/GeometryCompressionUtils';
 import { GeometryUtils } from './geometry/geometryUtils';
 import { ThreeUtil, ThreeVector } from './interface';
 import { PositionComponent } from './position/position.component';
@@ -11,9 +14,6 @@ import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { TranslationComponent } from './translation/translation.component';
-import { WireframeGeometry2 } from 'three/examples/jsm/lines/WireframeGeometry2';
-import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
-import { GeometryCompressionUtils } from 'three/examples/jsm/utils/GeometryCompressionUtils';
 
 /**
  * Attr Buffer Attribute

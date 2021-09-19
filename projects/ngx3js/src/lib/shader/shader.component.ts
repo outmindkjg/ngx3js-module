@@ -10,12 +10,11 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
   styleUrls: ['./shader.component.scss'],
 })
 export class ShaderComponent extends AbstractSubscribeComponent implements OnInit {
-
   /**
    * Input  of shader component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public type: string = 'x-shader/x-fragment';
 
@@ -26,7 +25,7 @@ export class ShaderComponent extends AbstractSubscribeComponent implements OnIni
 
   /**
    * Creates an instance of shader component.
-   * @param ele 
+   * @param ele
    */
   constructor(private ele: ElementRef) {
     super();
@@ -68,7 +67,7 @@ export class ShaderComponent extends AbstractSubscribeComponent implements OnIni
 
   /**
    * Gets shader
-   * @returns shader 
+   * @returns shader
    */
   public getShader(): string {
     if (this.shader === null || this._needUpdate) {

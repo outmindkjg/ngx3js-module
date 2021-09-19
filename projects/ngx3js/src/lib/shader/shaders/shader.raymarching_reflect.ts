@@ -128,8 +128,8 @@ export const RaymarchingReflect = {
   }
   `,
   uniforms: {
-    resolution : { value : new THREE.Vector2() },
-    cameraWorldMatrix : { value : new THREE.Matrix4() },
-    cameraProjectionMatrixInverse : { value : new THREE.Matrix4() }
-},
+    resolution: { value: new THREE.Vector2() },
+    cameraWorldMatrix: { value: new THREE.Matrix4() },
+    cameraProjectionMatrixInverse: { value: new THREE.Matrix4() },
+  },
 };

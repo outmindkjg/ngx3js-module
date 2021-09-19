@@ -31,7 +31,7 @@ export class TweenComponent extends AbstractSubscribeComponent implements OnInit
    * Input  of tween component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public easing: string = null;
 
@@ -410,7 +410,7 @@ export class TweenComponent extends AbstractSubscribeComponent implements OnInit
       if (this._tween !== null) {
         this._tween.kill();
       }
-      const fromVar : any = {};
+      const fromVar: any = {};
       const targets = this.getTargets(this._tweenTarget, null);
       Object.entries(to).forEach(([key, value]) => {
         fromVar[key] = targets[key];

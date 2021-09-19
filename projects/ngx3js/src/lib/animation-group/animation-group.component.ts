@@ -6,26 +6,26 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * AnimationGroupComponent
- * 
+ *
  * A group of objects that receives a shared animation state.<br /><br />
- * 
+ *
  * For an overview of the different elements of the three.js animation system see the
  * "Animation System" article in the "Next Steps" section of the manual.
- * 
+ *
  * Usage
- * 
+ *
  * Add objects you would otherwise pass as 'root' to the constructor or the [page:AnimationMixer.clipAction clipAction]
  * method of [page:AnimationMixer AnimationMixer] and instead pass this object as 'root'.<br /><br />
- * 
+ *
  * Note that objects of this class appear as one object to the mixer,
  * so cache control of the individual objects must be done	on the group.
- * 
+ *
  * Limitations
- * 
+ *
  * The animated properties must be compatible among all objects in the group.<br /><br />
- * 
+ *
  * A single property can either be controlled through a target group or directly, but not both.
- * 
+ *
  * @see THREE.AnimationObjectGroup
  */
 @Component({
@@ -33,7 +33,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
   templateUrl: './animation-group.component.html',
   styleUrls: ['./animation-group.component.scss'],
 })
-export class AnimationGroupComponent extends AbstractSubscribeComponent implements OnInit,OnChanges, OnDestroy, AfterContentInit {
+export class AnimationGroupComponent extends AbstractSubscribeComponent implements OnInit, OnChanges, OnDestroy, AfterContentInit {
   /**
     The name of the object (doesn't need to be unique). Default is an empty string.
    */

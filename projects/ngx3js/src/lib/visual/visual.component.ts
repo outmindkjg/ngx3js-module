@@ -30,7 +30,7 @@ export class VisualComponent extends AbstractSubscribeComponent implements OnIni
    * Input  of visual component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public type: string = 'div';
 
@@ -43,7 +43,7 @@ export class VisualComponent extends AbstractSubscribeComponent implements OnIni
    * Input  of visual component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public childType: string = 'innerHTML';
 
@@ -441,22 +441,7 @@ export class VisualComponent extends AbstractSubscribeComponent implements OnIni
           style.zIndex = 1000;
           break;
         default:
-          if (
-            ThreeUtil.isNotNull('change') ||
-            ThreeUtil.isNotNull('click') ||
-            ThreeUtil.isNotNull('dblclick') ||
-            ThreeUtil.isNotNull('focus') ||
-            ThreeUtil.isNotNull('keyup') ||
-            ThreeUtil.isNotNull('keydown') ||
-            ThreeUtil.isNotNull('load') ||
-            ThreeUtil.isNotNull('select') ||
-            ThreeUtil.isNotNull('mousedown') ||
-            ThreeUtil.isNotNull('mouseout') ||
-            ThreeUtil.isNotNull('mouseover') ||
-            ThreeUtil.isNotNull('mouseover') ||
-            ThreeUtil.isNotNull('mousemove') ||
-            ThreeUtil.isNotNull('mouseup')
-          ) {
+          if (ThreeUtil.isNotNull('change') || ThreeUtil.isNotNull('click') || ThreeUtil.isNotNull('dblclick') || ThreeUtil.isNotNull('focus') || ThreeUtil.isNotNull('keyup') || ThreeUtil.isNotNull('keydown') || ThreeUtil.isNotNull('load') || ThreeUtil.isNotNull('select') || ThreeUtil.isNotNull('mousedown') || ThreeUtil.isNotNull('mouseout') || ThreeUtil.isNotNull('mouseover') || ThreeUtil.isNotNull('mouseover') || ThreeUtil.isNotNull('mousemove') || ThreeUtil.isNotNull('mouseup')) {
             style.pointerEvents = 'auto';
           }
       }

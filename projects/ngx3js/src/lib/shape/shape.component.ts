@@ -17,7 +17,7 @@ export class ShapeComponent extends AbstractSubscribeComponent implements OnInit
    * Input  of shape component
    *
    * Notice - case insensitive.
-   * 
+   *
    */
   @Input() public type: string = 'fromPoints';
 
@@ -154,11 +154,11 @@ export class ShapeComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets points
-   * @param def 
-   * @returns points 
+   * @param def
+   * @returns points
    */
   private getPoints(def: ThreeVector[]): THREE.Vector2[] {
-    const points : THREE.Vector2[] = [];
+    const points: THREE.Vector2[] = [];
     (this.points === null ? def : this.points).forEach((p) => {
       points.push(new THREE.Vector2(p.x, p.y));
     });
@@ -167,7 +167,7 @@ export class ShapeComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets holes
-   * @returns holes 
+   * @returns holes
    */
   private getHoles(): THREE.Path {
     const holes = new THREE.Path();
@@ -181,8 +181,8 @@ export class ShapeComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Sets parent
-   * @param parent 
-   * @returns true if parent 
+   * @param parent
+   * @returns true if parent
    */
   public setParent(parent: AbstractGeometryComponent): boolean {
     if (super.setParent(parent)) {
@@ -194,8 +194,8 @@ export class ShapeComponent extends AbstractSubscribeComponent implements OnInit
 
   /**
    * Gets shape
-   * @param shape 
-   * @returns shape 
+   * @param shape
+   * @returns shape
    */
   public getShape(shape: THREE.Shape | THREE.Path): THREE.Shape | THREE.Path {
     switch (this.type.toLowerCase()) {

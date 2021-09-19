@@ -22,6 +22,6 @@ export const CustomAttributesLines = {
   uniforms: {
     amplitude: { value: 5.0 },
     opacity: { value: 0.3 },
-    color: { value: new THREE.Color( 0xffffff ) }
+    color: { value: new THREE.Color(0xffffff) },
   },
 };

@@ -20,7 +20,7 @@ export class CanvasComponent extends AbstractSubscribeComponent implements OnIni
   /**
    * The name of the object (doesn't need to be unique). Default is an empty string.
    */
-  @Input() public name: string = "";
+  @Input() public name: string = '';
 
   /**
    * The visual list of VisualComponent

@@ -21,7 +21,7 @@ export const AttributeSizeColor = {
   }
   `,
   uniforms: {
-    color : { value : new Color(0xffffff) },
-    pointTexture : { value : null } as any
+    color: { value: new Color(0xffffff) },
+    pointTexture: { value: null } as any,
   },
 };
