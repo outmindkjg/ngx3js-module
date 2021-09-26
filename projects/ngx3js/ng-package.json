@@ -5,7 +5,7 @@
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
       "chroma-js": "CHROMA",
-      "three" : "THREE",
+      "three" : "Three",
       "three/examples/jsm/libs/dat.gui.module": "dat_gui_module",
       "three/examples/jsm/libs/stats.module": "Stats",
       "three/examples/jsm/loaders/DDSLoader": "DDSLoader",

@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build ngx3js --configuration production",
-    "publish" : "cd dist/ngx3js && npm publish",
+    "publish": "cd dist/ngx3js && npm publish",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -18,8 +18,16 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.3.0",
+    "ammojs-typed": "^1.0.6",
+    "chroma-js": "^2.1.2",
+    "gsap": "^3.7.1",
+    "oimophysics": "^1.2.2",
+    "tslib": "^2.3.1",
+    "three": "0.131.0",
+    "@types/three": "0.131.0",
+    "rxjs": "^6.6.7",
+    "fs": "0.0.1-security",
+    "fs-web": "^1.0.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

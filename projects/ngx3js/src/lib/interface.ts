@@ -11,8 +11,6 @@ import { MeshComponent } from './mesh/mesh.component';
 import { RendererComponent } from './renderer/renderer.component';
 import { SceneComponent } from './scene/scene.component';
 
-export { THREE };
-
 /**
  * Apply matrix4
  */

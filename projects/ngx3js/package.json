@@ -1,6 +1,6 @@
 {
   "name": "ngx3js",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "keywords": [
     "three",
     "three.js",
@@ -20,7 +20,7 @@
     "angular",
     "typescript"
   ],
-  "license": "MIT",  
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/outmindkjg/ngx3js-module.git"
@@ -51,7 +51,8 @@
     "stream": false,
     "tls": false
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "ammojs-typed": "^1.0.6",
     "chroma-js": "^2.1.2",
     "gsap": "^3.7.1",
@@ -60,9 +61,8 @@
     "three": "0.131.0",
     "rxjs": "^6.6.7",
     "fs": "0.0.1-security",
-    "fs-web": "^1.0.1"
-  },
-  "devDependencies": {
+    "fs-web": "^1.0.1",
+    "@types/three": "0.131.0",
     "@angular/cli": "^12.2.5",
     "@angular/common": "^12.2.5",
     "@angular/core": "^12.2.5",
@@ -70,7 +70,6 @@
     "@angular/compiler-cli": "^12.2.5",
     "@angular/compiler": "^12.2.5",
     "@types/chroma-js": "^2.1.3",
-    "@types/three": "0.131.0",
     "zone.js": "~0.11.4",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
