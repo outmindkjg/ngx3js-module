@@ -31,4 +31,3 @@ export { GeometryUtils } from 'three/examples/jsm/utils/GeometryUtils';
 export { UVsDebug } from 'three/examples/jsm/utils/UVsDebug';
 export * from './lib/index';
 export * from './lib/ngx3js.module';
-
