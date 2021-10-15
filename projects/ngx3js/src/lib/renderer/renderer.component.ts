@@ -491,7 +491,6 @@ export class RendererComponent
 	constructor() {
 		super();
 		console.clear();
-		console.log(this.constructor.name);
 	}
 
 	/**
