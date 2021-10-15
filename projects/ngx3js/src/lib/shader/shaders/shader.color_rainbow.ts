@@ -1,5 +1,5 @@
 export const ColorRainbow = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUV;
   varying vec3 vNormal;
   void main() {
@@ -8,7 +8,7 @@ export const ColorRainbow = {
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   varying vec2 vUV;
   varying vec3 vNormal;
   void main() {

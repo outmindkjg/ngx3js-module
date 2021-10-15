@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 export const RaymarchingReflect = {
-  vertexShader: `
+	vertexShader: `
   attribute vec3 position;
   void main(void) {
     gl_Position = vec4(position, 1.0);
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   precision highp float;
   uniform vec2 resolution;
   uniform mat4 viewMatrix;
@@ -127,9 +127,9 @@ export const RaymarchingReflect = {
     gl_FragColor = vec4( color, 1.0 );
   }
   `,
-  uniforms: {
-    resolution: { value: new THREE.Vector2() },
-    cameraWorldMatrix: { value: new THREE.Matrix4() },
-    cameraProjectionMatrixInverse: { value: new THREE.Matrix4() },
-  },
+	uniforms: {
+		resolution: { value: new THREE.Vector2() },
+		cameraWorldMatrix: { value: new THREE.Matrix4() },
+		cameraProjectionMatrixInverse: { value: new THREE.Matrix4() },
+	},
 };

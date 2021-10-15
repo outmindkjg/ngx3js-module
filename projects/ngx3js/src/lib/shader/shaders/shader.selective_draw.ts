@@ -1,5 +1,5 @@
 export const SelectiveDraw = {
-  vertexShader: `
+	vertexShader: `
   attribute float visible;
   varying float vVisible;
   attribute vec3 vertColor;
@@ -10,7 +10,7 @@ export const SelectiveDraw = {
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   varying float vVisible;
   varying vec3 vColor;
   void main() {
@@ -21,5 +21,5 @@ export const SelectiveDraw = {
     }
   }
   `,
-  uniforms: {},
+	uniforms: {},
 };

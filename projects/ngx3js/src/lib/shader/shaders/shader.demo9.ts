@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderDemo9 = {
-  vertexShader: `
+	vertexShader: `
   attribute float size;
   attribute vec3 customColor;
   varying vec3 vColor;
@@ -11,7 +11,7 @@ export const ShaderDemo9 = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   uniform vec3 color;
   uniform sampler2D pointTexture;
   varying vec3 vColor;
@@ -21,8 +21,8 @@ export const ShaderDemo9 = {
     if ( gl_FragColor.a < ALPHATEST ) discard;
   }
   `,
-  uniforms: {
-    color: { value: new THREE.Color(0xffffff) },
-    pointTexture: { value: null } as any,
-  },
+	uniforms: {
+		color: { value: new THREE.Color(0xffffff) },
+		pointTexture: { value: null } as any,
+	},
 };

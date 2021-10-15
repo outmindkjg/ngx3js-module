@@ -1,5 +1,5 @@
 export const VideoKinect = {
-  vertexShader: `
+	vertexShader: `
   uniform sampler2D map;
   uniform float width;
   uniform float height;
@@ -24,7 +24,7 @@ export const VideoKinect = {
     gl_Position = projectionMatrix * modelViewMatrix * pos;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   uniform sampler2D map;
   varying vec2 vUv;
   void main() {
@@ -32,13 +32,13 @@ export const VideoKinect = {
     gl_FragColor = vec4( color.r, color.g, color.b, 0.2 );
   }
   `,
-  uniforms: {
-    map: { value: null } as any,
-    width: { value: 640 },
-    height: { value: 480 },
-    nearClipping: { value: 850 },
-    farClipping: { value: 4000 },
-    pointSize: { value: 2 },
-    zOffset: { value: 1000 },
-  },
+	uniforms: {
+		map: { value: null } as any,
+		width: { value: 640 },
+		height: { value: 480 },
+		nearClipping: { value: 850 },
+		farClipping: { value: 4000 },
+		pointSize: { value: 2 },
+		zOffset: { value: 1000 },
+	},
 };

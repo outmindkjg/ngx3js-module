@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderDemo15 = {
-  vertexShader: `
+	vertexShader: `
   uniform vec2 size;
   out vec2 vUv;
   void main() {
@@ -9,7 +9,7 @@ export const ShaderDemo15 = {
 	  vUv.y = 1.0 - vUv.y; // original data is upside down
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   precision highp float;
   precision highp int;
   precision highp sampler2DArray;
@@ -21,9 +21,9 @@ export const ShaderDemo15 = {
 	  gl_FragColor = vec4( color.rrr * 1.5, 1.0 );
   }
   `,
-  uniforms: {
-    diffuse: { value: null } as any,
-    depth: { value: 55 },
-    size: { value: new THREE.Vector2(50, 50) },
-  },
+	uniforms: {
+		diffuse: { value: null } as any,
+		depth: { value: 55 },
+		size: { value: new THREE.Vector2(50, 50) },
+	},
 };

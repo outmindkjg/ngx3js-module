@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ScaleColor = {
-  vertexShader: `
+	vertexShader: `
   precision highp float;
   uniform mat4 modelViewMatrix;
   uniform mat4 projectionMatrix;
@@ -21,7 +21,7 @@ export const ScaleColor = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   precision highp float;
   uniform sampler2D map;
   varying vec2 vUv;
@@ -45,8 +45,8 @@ export const ScaleColor = {
     if ( diffuseColor.w < 0.5 ) discard;
   }
   `,
-  uniforms: {
-    map: { value: null } as any,
-    time: { value: 0.0 },
-  },
+	uniforms: {
+		map: { value: null } as any,
+		time: { value: 0.0 },
+	},
 };

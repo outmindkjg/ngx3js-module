@@ -1,12 +1,12 @@
 export const AudioVisualizer = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUv;
   void main() {
     vUv = uv;
     gl_Position = vec4( position, 1.0 );
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   uniform sampler2D tAudioData;
   varying vec2 vUv;
   void main() {
@@ -17,7 +17,7 @@ export const AudioVisualizer = {
     gl_FragColor = vec4( mix( backgroundColor, color, i ), 1.0 );
   }
   `,
-  uniforms: {
-    tAudioData: { value: null } as any,
-  },
+	uniforms: {
+		tAudioData: { value: null } as any,
+	},
 };

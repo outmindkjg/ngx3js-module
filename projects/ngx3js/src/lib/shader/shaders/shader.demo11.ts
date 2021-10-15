@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderDemo11 = {
-  vertexShader: `
+	vertexShader: `
   attribute vec2 reference;
   attribute float birdVertex;
   attribute vec3 birdColor;
@@ -44,7 +44,7 @@ export const ShaderDemo11 = {
     gl_Position = projectionMatrix *  viewMatrix  * vec4( newPosition, 1.0 );
   }
 	`,
-  fragmentShader: `
+	fragmentShader: `
   varying vec4 vColor;
   varying float z;
 
@@ -57,11 +57,11 @@ export const ShaderDemo11 = {
 
   }
 	`,
-  uniforms: {
-    color: { value: new THREE.Color(0xff2200) },
-    texturePosition: { value: null } as any,
-    textureVelocity: { value: null } as any,
-    time: { value: 1.0 },
-    delta: { value: 0.0 },
-  },
+	uniforms: {
+		color: { value: new THREE.Color(0xff2200) },
+		texturePosition: { value: null } as any,
+		textureVelocity: { value: null } as any,
+		time: { value: 1.0 },
+		delta: { value: 0.0 },
+	},
 };

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderDemo12 = {
-  vertexShader: `
+	vertexShader: `
   in vec3 position;
   in mat4 instanceMatrix;
   uniform mat4 modelMatrix;
@@ -16,7 +16,7 @@ export const ShaderDemo12 = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   precision highp float;
   precision highp sampler3D;
   uniform mat4 modelViewMatrix;
@@ -77,8 +77,8 @@ export const ShaderDemo12 = {
     if ( color.a == 0.0 ) discard;
   }
   `,
-  uniforms: {
-    map: { value: null } as any,
-    cameraPos: { value: new THREE.Vector3() },
-  },
+	uniforms: {
+		map: { value: null } as any,
+		cameraPos: { value: new THREE.Vector3() },
+	},
 };

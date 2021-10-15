@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderDemo3 = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUv;
   void main()
   {
@@ -9,7 +9,7 @@ export const ShaderDemo3 = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   uniform float time;
   varying vec2 vUv;
   void main( void ) {
@@ -22,7 +22,7 @@ export const ShaderDemo3 = {
     gl_FragColor = vec4( vec3( color, color * 0.5, sin( color + time / 3.0 ) * 0.75 ), 1.0 );
   }
   `,
-  uniforms: {
-    time: { value: 1.0 },
-  },
+	uniforms: {
+		time: { value: 1.0 },
+	},
 };

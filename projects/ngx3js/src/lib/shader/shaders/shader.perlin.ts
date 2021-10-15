@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const PerlinShader = {
-  vertexShader: `
+	vertexShader: `
   in vec3 position;
   uniform mat4 modelMatrix;
   uniform mat4 modelViewMatrix;
@@ -15,7 +15,7 @@ export const PerlinShader = {
     gl_Position = projectionMatrix * mvPosition;
   }
     `,
-  fragmentShader: `
+	fragmentShader: `
   precision highp float;
   precision highp sampler3D;
   uniform mat4 modelViewMatrix;
@@ -76,10 +76,10 @@ export const PerlinShader = {
     if ( color.a == 0.0 ) discard;
   }  
   `,
-  uniforms: {
-    map: { value: null } as any,
-    cameraPos: { value: new THREE.Vector3() },
-    threshold: { value: 0.6 },
-    steps: { value: 200 },
-  },
+	uniforms: {
+		map: { value: null } as any,
+		cameraPos: { value: new THREE.Vector3() },
+		threshold: { value: 0.6 },
+		steps: { value: 200 },
+	},
 };

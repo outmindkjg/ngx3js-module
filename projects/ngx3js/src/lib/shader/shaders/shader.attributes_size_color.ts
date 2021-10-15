@@ -1,6 +1,6 @@
 import { Color } from 'three';
 export const AttributeSizeColor = {
-  vertexShader: `
+	vertexShader: `
   attribute float size;
   attribute vec3 ca;
   varying vec3 vColor;
@@ -11,7 +11,7 @@ export const AttributeSizeColor = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   uniform vec3 color;
   uniform sampler2D pointTexture;
   varying vec3 vColor;
@@ -20,8 +20,8 @@ export const AttributeSizeColor = {
     gl_FragColor = color;
   }
   `,
-  uniforms: {
-    color: { value: new Color(0xffffff) },
-    pointTexture: { value: null } as any,
-  },
+	uniforms: {
+		color: { value: new Color(0xffffff) },
+		pointTexture: { value: null } as any,
+	},
 };

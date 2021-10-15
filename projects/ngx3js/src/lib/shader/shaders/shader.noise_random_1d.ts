@@ -1,12 +1,12 @@
 export const ShaderNoiseRandom1D = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUv;
   void main() {
     vUv = uv;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   #include <common>
   varying vec2 vUv;
   void main() {

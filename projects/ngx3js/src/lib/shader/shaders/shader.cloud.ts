@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const CloudShader = {
-  vertexShader: `
+	vertexShader: `
   in vec3 position;
   uniform mat4 modelMatrix;
   uniform mat4 modelViewMatrix;
@@ -15,7 +15,7 @@ export const CloudShader = {
     gl_Position = projectionMatrix * mvPosition;
   }    
   `,
-  fragmentShader: `
+	fragmentShader: `
   precision highp float;
   precision highp sampler3D;
   uniform mat4 modelViewMatrix;
@@ -93,14 +93,14 @@ export const CloudShader = {
     if ( color.a == 0.0 ) discard;
   }
   `,
-  uniforms: {
-    base: { value: new THREE.Color(0x798aa0) },
-    map: { value: null } as any,
-    cameraPos: { value: new THREE.Vector3() },
-    threshold: { value: 0.25 },
-    opacity: { value: 0.25 },
-    range: { value: 0.1 },
-    steps: { value: 100 },
-    frame: { value: 0 },
-  },
+	uniforms: {
+		base: { value: new THREE.Color(0x798aa0) },
+		map: { value: null } as any,
+		cameraPos: { value: new THREE.Vector3() },
+		threshold: { value: 0.25 },
+		opacity: { value: 0.25 },
+		range: { value: 0.1 },
+		steps: { value: 100 },
+		frame: { value: 0 },
+	},
 };

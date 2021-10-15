@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderLava = {
-  vertexShader: `
+	vertexShader: `
   uniform vec2 uvScale;
   varying vec2 vUv;
   void main()
@@ -10,7 +10,7 @@ export const ShaderLava = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   uniform float time;
   uniform float fogDensity;
   uniform vec3 fogColor;
@@ -40,12 +40,12 @@ export const ShaderLava = {
     gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
   }
   `,
-  uniforms: {
-    fogDensity: { value: 0.45 },
-    fogColor: { value: new THREE.Vector3(0, 0, 0) },
-    time: { value: 1 },
-    uvScale: { value: new THREE.Vector2(3.0, 1.0) },
-    texture1: { value: null } as any,
-    texture2: { value: null } as any,
-  },
+	uniforms: {
+		fogDensity: { value: 0.45 },
+		fogColor: { value: new THREE.Vector3(0, 0, 0) },
+		time: { value: 1 },
+		uvScale: { value: new THREE.Vector2(3.0, 1.0) },
+		texture1: { value: null } as any,
+		texture2: { value: null } as any,
+	},
 };

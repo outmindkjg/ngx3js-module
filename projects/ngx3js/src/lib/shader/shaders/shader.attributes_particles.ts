@@ -1,5 +1,5 @@
 export const AttributesParticles = {
-  vertexShader: `
+	vertexShader: `
   attribute float size;
   varying vec3 vColor;
   void main() {
@@ -9,7 +9,7 @@ export const AttributesParticles = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   uniform sampler2D pointTexture;
   varying vec3 vColor;
   void main() {
@@ -17,7 +17,7 @@ export const AttributesParticles = {
     gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
   }
   `,
-  uniforms: {
-    pointTexture: { value: [] } as any,
-  },
+	uniforms: {
+		pointTexture: { value: [] } as any,
+	},
 };

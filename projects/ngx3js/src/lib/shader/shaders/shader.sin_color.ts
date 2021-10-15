@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const SinColor = {
-  vertexShader: `
+	vertexShader: `
   precision mediump float;
   precision mediump int;
   uniform mat4 modelViewMatrix; // optional
@@ -15,7 +15,7 @@ export const SinColor = {
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   precision mediump float;
   precision mediump int;
   uniform float time;
@@ -27,7 +27,7 @@ export const SinColor = {
     gl_FragColor = color;
   }
   `,
-  uniforms: {
-    time: { value: 1.0 },
-  },
+	uniforms: {
+		time: { value: 1.0 },
+	},
 };

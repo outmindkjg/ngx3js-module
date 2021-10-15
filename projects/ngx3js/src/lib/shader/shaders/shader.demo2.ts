@@ -1,5 +1,5 @@
 export const ShaderDemo2 = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUv;
   void main()
   {
@@ -8,7 +8,7 @@ export const ShaderDemo2 = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   uniform float time;
   uniform sampler2D colorTexture;
   varying vec2 vUv;
@@ -25,8 +25,8 @@ export const ShaderDemo2 = {
     gl_FragColor = vec4( color * r * 1.5, 1.0 );
   }
   `,
-  uniforms: {
-    time: { value: 1.0 },
-    colorTexture: { value: null } as any,
-  },
+	uniforms: {
+		time: { value: 1.0 },
+		colorTexture: { value: null } as any,
+	},
 };

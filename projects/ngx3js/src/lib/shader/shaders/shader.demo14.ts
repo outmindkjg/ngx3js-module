@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderDemo14 = {
-  vertexShader: `
+	vertexShader: `
 	out vec2 vUv;
 	void main()
 	{
@@ -8,7 +8,7 @@ export const ShaderDemo14 = {
 		gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 	}
   `,
-  fragmentShader: `
+	fragmentShader: `
 	precision highp sampler2DArray;
 	precision mediump float;
 	in vec2 vUv;
@@ -21,9 +21,9 @@ export const ShaderDemo14 = {
 		gl_FragColor.r = voxel * uIntensity;
 	}
   `,
-  uniforms: {
-    uTexture: { value: null } as any,
-    uDepth: { value: 55 },
-    uIntensity: { value: 1.0 },
-  },
+	uniforms: {
+		uTexture: { value: null } as any,
+		uDepth: { value: 55 },
+		uIntensity: { value: 1.0 },
+	},
 };

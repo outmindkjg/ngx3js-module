@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderDemo6 = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUv;
   attribute float invert;
   varying float flip;
@@ -11,7 +11,7 @@ export const ShaderDemo6 = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   varying vec2 vUv;
   varying float flip;
   uniform vec3 color;
@@ -25,7 +25,7 @@ export const ShaderDemo6 = {
     gl_FragColor = vec4(color, 1.);
   }
   `,
-  uniforms: {
-    uTextures: { value: [] } as any,
-  },
+	uniforms: {
+		uTextures: { value: [] } as any,
+	},
 };

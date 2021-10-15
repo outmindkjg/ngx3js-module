@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const ShaderDemo13 = {
-  vertexShader: `
+	vertexShader: `
   in vec3 position;
   in vec3 normal;
   in vec2 uv;
@@ -18,7 +18,7 @@ export const ShaderDemo13 = {
     gl_Position = projectionMatrix * mvPosition;
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   precision highp float;
   precision highp int;
   layout(location = 0) out vec4 gColor;
@@ -34,8 +34,8 @@ export const ShaderDemo13 = {
     gNormal = vec4( normalize( vNormal ), 0.0 );
   }
   `,
-  uniforms: {
-    tDiffuse: { value: null } as any,
-    repeat: { value: new THREE.Vector2(5, 0.5) },
-  },
+	uniforms: {
+		tDiffuse: { value: null } as any,
+		repeat: { value: new THREE.Vector2(5, 0.5) },
+	},
 };

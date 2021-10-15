@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export const CustomAttributes = {
-  vertexShader: `
+	vertexShader: `
   uniform float amplitude;
   attribute float displacement;
   varying vec3 vNormal;
@@ -12,7 +12,7 @@ export const CustomAttributes = {
     gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   varying vec3 vNormal;
   varying vec2 vUv;
   uniform vec3 color;
@@ -26,9 +26,9 @@ export const CustomAttributes = {
     gl_FragColor = gray * vec4( vec3( dProd ) * vec3( color ), 1.0 );
   }
   `,
-  uniforms: {
-    amplitude: { value: 1.0 },
-    color: { value: new THREE.Color(0xff2200) },
-    colorTexture: { value: null } as any,
-  },
+	uniforms: {
+		amplitude: { value: 1.0 },
+		color: { value: new THREE.Color(0xff2200) },
+		colorTexture: { value: null } as any,
+	},
 };

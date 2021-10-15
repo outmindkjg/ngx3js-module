@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 export const ShaderDemo16 = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUv;
   void main() {
     vUv = uv;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   #include <packing>
   varying vec2 vUv;
   uniform sampler2D tDiffuse;
@@ -26,10 +26,10 @@ export const ShaderDemo16 = {
     gl_FragColor.a = 1.0;
   }
   `,
-  uniforms: {
-    cameraNear: { value: 0.01 },
-    cameraFar: { value: 50 },
-    tDiffuse: { value: null } as any,
-    tDepth: { value: null } as any,
-  },
+	uniforms: {
+		cameraNear: { value: 0.01 },
+		cameraFar: { value: 50 },
+		tDiffuse: { value: null } as any,
+		tDepth: { value: null } as any,
+	},
 };

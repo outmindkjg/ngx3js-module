@@ -48,7 +48,9 @@ export class CurvesCircle extends THREE.Curve<THREE.Vector3> {
 		super();
 		options = options || {};
 		this.radius = ThreeUtil.isNotNull(radius) ? radius : 1;
-		this.radiusInner = ThreeUtil.isNotNull(options.radiusInner) ? options.radiusInner : -0.2;
+		this.radiusInner = ThreeUtil.isNotNull(options.radiusInner)
+			? options.radiusInner
+			: -0.2;
 		this.waveH = ThreeUtil.isNotNull(options.waveH) ? options.waveH : 0;
 		this.waveR = ThreeUtil.isNotNull(options.waveR) ? options.waveR : 0;
 		this.rateX = ThreeUtil.isNotNull(options.rateX) ? options.rateX : 1;
@@ -65,8 +67,13 @@ export class CurvesCircle extends THREE.Curve<THREE.Vector3> {
 	public getPoint(t: number, optionalTarget: THREE.Vector3) {
 		const point = optionalTarget || new THREE.Vector3();
 		t = 2 * Math.PI * t;
-		const radius = this.waveR != 0 && this.radiusInner != 0 ? (Math.sin(t * this.waveR) * this.radiusInner + 1) * this.radius : this.radius;
+		const radius =
+			this.waveR != 0 && this.radiusInner != 0
+				? (Math.sin(t * this.waveR) * this.radiusInner + 1) * this.radius
+				: this.radius;
 		const y = this.waveH != 0 ? Math.sin(t * this.waveH) : 0;
-		return point.set(Math.sin(t) * this.rateX, y * this.rateY, Math.cos(t) * this.rateZ).multiplyScalar(radius);
+		return point
+			.set(Math.sin(t) * this.rateX, y * this.rateY, Math.cos(t) * this.rateZ)
+			.multiplyScalar(radius);
 	}
 }

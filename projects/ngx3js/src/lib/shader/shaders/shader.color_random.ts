@@ -1,12 +1,12 @@
 export const ColorRandom = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUv;
   void main() {
     vUv = uv;
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   varying vec2 vUv;
   uniform float time;
   void main() {
@@ -17,7 +17,7 @@ export const ColorRandom = {
     gl_FragColor = vec4( r, g, time, 1.0 );
   }
   `,
-  uniforms: {
-    time: { value: 0.0 },
-  },
+	uniforms: {
+		time: { value: 0.0 },
+	},
 };

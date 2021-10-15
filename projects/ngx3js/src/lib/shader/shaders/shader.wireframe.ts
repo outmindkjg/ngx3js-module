@@ -1,5 +1,5 @@
 export const WireFrame = {
-  vertexShader: `
+	vertexShader: `
   attribute vec3 center;
   varying vec3 vCenter;
   void main() {
@@ -7,7 +7,7 @@ export const WireFrame = {
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
   }
 `,
-  fragmentShader: `
+	fragmentShader: `
   uniform float widthFactor;
   varying vec3 vCenter;
   float edgeFactorTri() {
@@ -20,7 +20,7 @@ export const WireFrame = {
     gl_FragColor = gl_FrontFacing ? vec4( 0.9, 0.9, 1.0, 1.0 ) : vec4( 0.4, 0.4, 0.5, 1.0 );
   }
   `,
-  uniforms: {
-    widthFactor: { value: 1 },
-  },
+	uniforms: {
+		widthFactor: { value: 1 },
+	},
 };

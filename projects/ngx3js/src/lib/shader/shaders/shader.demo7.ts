@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 export const ShaderDemo7 = {
-  vertexShader: `
+	vertexShader: `
   varying vec2 vUv;
   void main()	{
     vUv = uv;
     gl_Position = vec4( position, 1.0 );
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   varying vec2 vUv;
   uniform float time;
   void main()	{
@@ -37,7 +37,7 @@ export const ShaderDemo7 = {
     gl_FragColor = vec4( vec3( f * i / 1.6, i / 2.0 + d / 13.0, i ) * d * p.x + vec3( i / 1.3 + d / 8.0, i / 2.0 + d / 18.0, i ) * d * ( 1.0 - p.x ), 1.0 );
   }
   `,
-  uniforms: {
-    time: { value: 1.0 },
-  },
+	uniforms: {
+		time: { value: 1.0 },
+	},
 };

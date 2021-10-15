@@ -1,4 +1,10 @@
-import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+	Component,
+	forwardRef,
+	Input,
+	OnInit,
+	SimpleChanges,
+} from '@angular/core';
 import { AbstractChartComponent } from '../../chart.abstract';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
@@ -6,9 +12,17 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	selector: 'ngx3js-chart-doughnut',
 	templateUrl: './doughnut.component.html',
 	styleUrls: ['./doughnut.component.scss'],
-	providers: [{ provide: AbstractObject3dComponent, useExisting: forwardRef(() => ChartDoughnutComponent) }],
+	providers: [
+		{
+			provide: AbstractObject3dComponent,
+			useExisting: forwardRef(() => ChartDoughnutComponent),
+		},
+	],
 })
-export class ChartDoughnutComponent extends AbstractChartComponent implements OnInit {
+export class ChartDoughnutComponent
+	extends AbstractChartComponent
+	implements OnInit
+{
 	/**
 	 * Input  of chart doughnut component
 	 */

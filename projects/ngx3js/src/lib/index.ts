@@ -120,4 +120,3 @@ export * from './tween/tween.component';
 export * from './viewer/viewer-canvas';
 export * from './viewer/viewer.component';
 export * from './visual/visual.component';
-

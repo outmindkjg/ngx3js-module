@@ -44,6 +44,14 @@ npm i --save-dev @types/three
 npm i --save-dev @types/chroma-js
 ```
 
+```sh
+# prettier format change
+npx prettier --write src/**/*.json
+npx prettier --write src/**/*.ts
+npx prettier --write src/**/*.html
+npx prettier --write src/**/*.scss
+```
+
 ```javascript
 // src/app/app.module.ts
 

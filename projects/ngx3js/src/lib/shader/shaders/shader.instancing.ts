@@ -1,5 +1,5 @@
 export const BufferGeometryInstancing = {
-  vertexShader: `
+	vertexShader: `
   precision highp float;
   uniform float sineTime;
   uniform mat4 modelViewMatrix;
@@ -20,7 +20,7 @@ export const BufferGeometryInstancing = {
     gl_Position = projectionMatrix * modelViewMatrix * vec4( vPosition, 1.0 );
   }
   `,
-  fragmentShader: `
+	fragmentShader: `
   precision highp float;
   uniform float time;
   varying vec3 vPosition;
@@ -31,8 +31,8 @@ export const BufferGeometryInstancing = {
     gl_FragColor = color;
   }
   `,
-  uniforms: {
-    time: { value: 1.0 },
-    sineTime: { value: 1.0 },
-  },
+	uniforms: {
+		time: { value: 1.0 },
+		sineTime: { value: 1.0 },
+	},
 };
