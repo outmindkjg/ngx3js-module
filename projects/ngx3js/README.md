@@ -39,9 +39,13 @@ This code creates a scene, a camera, and a geometric cube, and it adds the cube 
 
 ```sh
 npm install -g @angular/cli
-npm install ngx3js
+npm install ngx3js@0.131.0
+npm install gsap@3.7.1
+npm install ammojs-typed@1.0.6
+npm install chroma-js@2.1.2
 npm i --save-dev @types/three
 npm i --save-dev @types/chroma-js
+
 ```
 
 ```sh
@@ -78,8 +82,13 @@ import { Ngx3JsModule } from 'ngx3js';
             ],
 		    ......
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+    		    ......
+                {
+                    "glob": "**/*",
+                    "input": "./node_modules/ngx3js/assets",
+                    "output": "/assets/examples/"
+                }
+	    	    ......
             ],
 		    ......
           },
