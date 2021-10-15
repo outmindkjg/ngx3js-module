@@ -45,3 +45,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+projects/ngx3js/package-lock.json
