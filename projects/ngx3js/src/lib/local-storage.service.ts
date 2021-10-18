@@ -24,6 +24,8 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { GCodeLoader } from 'three/examples/jsm/loaders/GCodeLoader';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader';
+// import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decode';
+
 // import { IFC, IFCLoader } from 'three/examples/jsm/loaders/IFCLoader';
 import { KMZLoader } from 'three/examples/jsm/loaders/KMZLoader';
 import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';

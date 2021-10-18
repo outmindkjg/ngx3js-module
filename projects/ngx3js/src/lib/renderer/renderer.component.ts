@@ -901,10 +901,10 @@ export class RendererComponent
 				case 'keydown':
 				case 'keyup':
 				case 'keypress':
-					window.addEventListener(type, listener);
+					window.addEventListener(type, listener, { passive:true });
 					break;
 				default:
-					this.rendererEle.nativeElement.addEventListener(type, listener);
+					this.rendererEle.nativeElement.addEventListener(type, listener, { passive:true });
 					break;
 			}
 		}
