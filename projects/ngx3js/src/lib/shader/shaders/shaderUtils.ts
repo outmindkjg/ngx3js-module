@@ -39,7 +39,7 @@ import { LuminosityShader } from 'three/examples/jsm/shaders/LuminosityShader';
 import { MirrorShader } from 'three/examples/jsm/shaders/MirrorShader';
 import { NormalMapShader } from 'three/examples/jsm/shaders/NormalMapShader';
 // import { OceanShaders } from 'three/examples/jsm/shaders/OceanShaders';
-import { ParallaxShader } from 'three/examples/jsm/shaders/ParallaxShader';
+// import { ParallaxShader } from 'three/examples/jsm/shaders/ParallaxShader';
 import { PixelShader } from 'three/examples/jsm/shaders/PixelShader';
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader';
 import { SAOShader } from 'three/examples/jsm/shaders/SAOShader';
@@ -205,8 +205,8 @@ export const ShaderConf: {
 	sao: 'saoshader',
 	horizontaltiltshiftshader: HorizontalTiltShiftShader,
 	horizontaltiltshift: 'horizontaltiltshiftshader',
-	parallaxshader: ParallaxShader,
-	parallax: 'parallaxshader',
+	// parallaxshader: ParallaxShader,
+	// parallax: 'parallaxshader',
 	luminosityshader: LuminosityShader,
 	luminosity: 'luminosityshader',
 	huesaturationshader: HueSaturationShader,

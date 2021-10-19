@@ -15,8 +15,9 @@ import { WireframeGeometry2 } from 'three/examples/jsm/lines/WireframeGeometry2'
 import { EdgeSplitModifier } from 'three/examples/jsm/modifiers/EdgeSplitModifier';
 import { SimplifyModifier } from 'three/examples/jsm/modifiers/SimplifyModifier';
 import { TessellateModifier } from 'three/examples/jsm/modifiers/TessellateModifier';
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils';
-import { GeometryCompressionUtils } from 'three/examples/jsm/utils/GeometryCompressionUtils';
+import { BufferGeometryUtils } from '../fix/BufferGeometryUtils';
+declare var require: any;
+const  GeometryCompressionUtils:any = require('three/examples/jsm/utils/GeometryCompressionUtils');
 import { GeometryUtils } from './geometry/geometryUtils';
 import { ThreeUtil, ThreeVector } from './interface';
 import { PositionComponent } from './position/position.component';

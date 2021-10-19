@@ -234,19 +234,19 @@ export class TextureComponent
 					event.preventDefault();
 					event.dataTransfer.dropEffect = 'copy';
 				};
-				document.addEventListener('dragover', this._dragOverHandler);
+				document.addEventListener('dragover', this._dragOverHandler,{passive: true});
 			}
 			if (this._dragEnterHandler === null) {
 				this._dragEnterHandler = () => {
 					document.body.style.opacity = (0.5).toString();
 				};
-				document.addEventListener('dragenter', this._dragEnterHandler);
+				document.addEventListener('dragenter', this._dragEnterHandler,{passive: true});
 			}
 			if (this._dragLeaveHandler === null) {
 				this._dragLeaveHandler = () => {
 					document.body.style.opacity = (1).toString();
 				};
-				document.addEventListener('dragleave', this._dragLeaveHandler);
+				document.addEventListener('dragleave', this._dragLeaveHandler,{passive: true});
 			}
 			if (this._dropHandler === null) {
 				this._dropHandler = (event: any) => {
@@ -258,12 +258,12 @@ export class TextureComponent
 							texture.image.src = event.target.result;
 							texture.needsUpdate = true;
 							this.synkMaterial(texture);
-						});
+						},{passive: true});
 						reader.readAsDataURL(event.dataTransfer.files[0]);
 					}
 					document.body.style.opacity = (1).toString();
 				};
-				document.addEventListener('drop', this._dropHandler);
+				document.addEventListener('drop', this._dropHandler,{passive: true});
 			}
 		} else {
 			if (this._dragOverHandler !== null) {

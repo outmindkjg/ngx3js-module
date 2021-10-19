@@ -199,7 +199,7 @@ export class AVRControls {
 						svg.style.top = '20px';
 						svg.addEventListener('click', () => {
 							this.currentSession.end();
-						});
+						},{passive: true});
 						overlay.appendChild(svg);
 						var path = document.createElementNS(
 							'http://www.w3.org/2000/svg',
@@ -256,7 +256,7 @@ export class AVRControls {
 		this._onSessionEnded = () => {
 			this.onSessionEnded();
 		};
-		session.addEventListener('end', this._onSessionEnded);
+		session.addEventListener('end', this._onSessionEnded,{passive: true});
 		try {
 			await this.renderer.xr.setSession(session);
 		} catch (ex) {

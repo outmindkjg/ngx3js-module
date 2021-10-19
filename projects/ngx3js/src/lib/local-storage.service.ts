@@ -13,6 +13,7 @@ import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
 import { AMFLoader } from 'three/examples/jsm/loaders/AMFLoader';
 import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader';
 import { BVH, BVHLoader } from 'three/examples/jsm/loaders/BVHLoader';
+import { FontLoader, Font } from 'three/examples/jsm/loaders/FontLoader';
 import {
 	Collada,
 	ColladaLoader,
@@ -2105,7 +2106,7 @@ export class LocalStorageService {
 	 * @param [fontWeight]
 	 */
 	public getFont(
-		callBack: (font: THREE.Font) => void,
+		callBack: (font: Font) => void,
 		fontName: string = 'helvetiker',
 		fontWeight: string = ''
 	) {
@@ -2214,16 +2215,16 @@ export class LocalStorageService {
 					this.ttfLoader = new TTFLoader(ThreeUtil.getLoadingManager());
 				}
 				this.ttfLoader.load(ThreeUtil.getStoreUrl(fontPath), (json: any) => {
-					this._loadedFonts[fontPath] = new THREE.Font(json);
+					this._loadedFonts[fontPath] = new Font(json);
 					callBack(this._loadedFonts[fontPath]);
 				});
 			} else {
 				if (this.fontLoader === null) {
-					this.fontLoader = new THREE.FontLoader(ThreeUtil.getLoadingManager());
+					this.fontLoader = new FontLoader(ThreeUtil.getLoadingManager());
 				}
 				this.fontLoader.load(
 					ThreeUtil.getStoreUrl(fontPath),
-					(responseFont: THREE.Font) => {
+					(responseFont: Font) => {
 						this._loadedFonts[fontPath] = responseFont;
 						callBack(this._loadedFonts[fontPath]);
 					}
@@ -2236,13 +2237,13 @@ export class LocalStorageService {
 	 * Loaded fonts of local storage service
 	 */
 	private _loadedFonts: {
-		[key: string]: THREE.Font;
+		[key: string]: Font;
 	} = {};
 
 	/**
 	 * Font loader of local storage service
 	 */
-	private fontLoader: THREE.FontLoader = null;
+	private fontLoader: FontLoader = null;
 
 	/**
 	 * Removes item

@@ -5,56 +5,56 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
-import { createText } from 'three/examples/jsm/webxr/Text2D';
-import { TubePainter } from 'three/examples/jsm/misc/TubePainter';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
 import { Wireframe } from 'three/examples/jsm/lines/Wireframe';
 import { MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex';
 import { MorphAnimMesh } from 'three/examples/jsm/misc/MorphAnimMesh';
+import { TubePainter } from 'three/examples/jsm/misc/TubePainter';
 import { Volume } from 'three/examples/jsm/misc/Volume';
 import { VolumeSlice } from 'three/examples/jsm/misc/VolumeSlice';
 import {
 	Flow,
-	InstancedFlow,
+	InstancedFlow
 } from 'three/examples/jsm/modifiers/CurveModifier';
 import {
 	Lensflare,
-	LensflareElement,
+	LensflareElement
 } from 'three/examples/jsm/objects/Lensflare';
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
-import { Reflector } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
 import { Refractor } from 'three/examples/jsm/objects/Refractor';
-import { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
 import { Sky } from 'three/examples/jsm/objects/Sky';
 import { Water } from 'three/examples/jsm/objects/Water';
 import { Water as Water2 } from 'three/examples/jsm/objects/Water2';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import {
 	CSS3DObject,
-	CSS3DSprite,
+	CSS3DSprite
 } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils';
-import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils';
+import { createText } from 'three/examples/jsm/webxr/Text2D';
+import { BufferGeometryUtils } from '../../fix/BufferGeometryUtils';
+import { ReflectorForSSRPass } from '../../fix/ReflectorForSSRPass';
 import { CurveComponent } from '../curve/curve.component';
 import { HtmlComponent } from '../html/html.component';
 import { CssStyle, ThreeColor, ThreeUtil } from '../interface';
 import { LensflareelementComponent } from '../lensflareelement/lensflareelement.component';
 import { MaterialComponent } from '../material/material.component';
 import { AbstractObject3dComponent } from '../object3d.abstract';
+import { SizeComponent } from '../size/size.component';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { HelperComponent, HelperOptions } from './../helper/helper.component';
 import { LightComponent, LightOptions } from './../light/light.component';
 import { LocalStorageService } from './../local-storage.service';
-import { SizeComponent } from '../size/size.component';
+declare var require: any;
+const SceneUtils = require('three/examples/jsm/utils/SceneUtils');
 
 /**
  * Volume Options
@@ -1669,13 +1669,12 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'reflector':
 					const reflectorSize = this.getTextureSize();
-					const reflector = new Reflector(geometry, {
+					const reflector = new ReflectorForSSRPass(geometry, {
 						color: this.getColor(),
 						textureWidth: reflectorSize.x,
 						textureHeight: reflectorSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
-						encoding: this.getEncoding(),
 					});
 					this.subscribeRefer(
 						'textureSize',

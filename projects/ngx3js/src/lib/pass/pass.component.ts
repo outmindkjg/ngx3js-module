@@ -11,7 +11,7 @@ import {
 	LUTCubeLoader,
 	LUTCubeResult,
 } from 'three/examples/jsm/loaders/LUTCubeLoader';
-import { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
+import { ReflectorForSSRPass } from '../../fix/ReflectorForSSRPass';
 import { AdaptiveToneMappingPass } from 'three/examples/jsm/postprocessing/AdaptiveToneMappingPass';
 import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass';
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass';
@@ -1991,7 +1991,7 @@ export class PassComponent
 						break;
 					case 'ssrpass':
 					case 'ssr':
-						let groundReflector: ReflectorForSSRPass = null;
+						let groundReflector: any = null;
 						if (ThreeUtil.isNotNull(this.mesh)) {
 							const object3d = ThreeUtil.getObject3d(this.mesh);
 							if (object3d instanceof ReflectorForSSRPass) {
@@ -2007,11 +2007,8 @@ export class PassComponent
 							width: ssrSize.x,
 							height: ssrSize.y,
 							selects: ThreeUtil.getTypeSafe(this.selects, []),
-							encoding: ThreeUtil.getTextureEncodingSafe(
-								this.encoding,
-								'sRGBEncoding'
-							),
-							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets, false),
+							isPerspectiveCamera : undefined,
+							isBouncing : undefined,
 							groundReflector: groundReflector,
 						});
 						this.subscribeRefer(
@@ -2036,12 +2033,7 @@ export class PassComponent
 							camera: this.getCamera(this.effectCamera),
 							width: ssrrSize.x,
 							height: ssrrSize.y,
-							selects: ThreeUtil.getTypeSafe(this.selects, []),
-							encoding: ThreeUtil.getTextureEncodingSafe(
-								this.encoding,
-								'sRGBEncoding'
-							),
-							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets, false)
+							selects: ThreeUtil.getTypeSafe(this.selects, [])
 						});
 						this.subscribeRefer(
 							'passSize',

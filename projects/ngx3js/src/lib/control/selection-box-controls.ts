@@ -73,7 +73,7 @@ export class SelectBoxControls {
 			}
 			const mouse = this.getMouse(event);
 			this.selectionBox.startPoint.set(mouse.x, mouse.y, 0.5);
-		});
+		},{passive: true});
 
 		docElement.addEventListener('pointermove', (event) => {
 			if (this.helper.isDown) {
@@ -93,7 +93,7 @@ export class SelectBoxControls {
 					}
 				});
 			}
-		});
+		},{passive: true});
 
 		docElement.addEventListener('pointerup', (event) => {
 			const mouse = this.getMouse(event);
@@ -105,7 +105,7 @@ export class SelectBoxControls {
 					material['emissive'].set(ThreeUtil.getColorSafe(this.pointerup));
 				}
 			});
-		});
+		}),{passive: true};
 	}
 
 	/**

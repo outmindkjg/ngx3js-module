@@ -5,11 +5,10 @@ import {
 	OnChanges,
 	OnDestroy,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment';
-import { unzipSync } from 'three/examples/jsm/libs/fflate.module';
 import { HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader';
 import { NRRDLoader } from 'three/examples/jsm/loaders/NRRDLoader';
 import { RGBMLoader } from 'three/examples/jsm/loaders/RGBMLoader';
@@ -17,13 +16,16 @@ import {
 	NodeMaterial,
 	NormalMapNode,
 	OperatorNode,
-	TextureNode,
+	TextureNode
 } from 'three/examples/jsm/nodes/Nodes';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { ThreeUtil } from './interface';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { CanvasFunctionType, TextureUtils } from './texture/textureUtils';
+declare var require: any;
+const fflate = require('three/examples/jsm/libs/fflate.module.min');
+const unzipSync = fflate.fflate;
 
 /**
  * AbstractTextureComponent
@@ -1033,7 +1035,7 @@ export abstract class AbstractTextureComponent
 							window.setTimeout(() => {
 								onLoad();
 							}, 500);
-						});
+						},{passive: true});
 						video.src = ThreeUtil.getStoreUrl(image);
 						video.play();
 					}

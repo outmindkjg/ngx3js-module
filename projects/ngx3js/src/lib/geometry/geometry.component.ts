@@ -15,7 +15,8 @@ import { ParametricGeometries } from 'three/examples/jsm/geometries/ParametricGe
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry';
 import { TeapotGeometry } from 'three/examples/jsm/geometries/TeapotGeometry';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils';
+import { BufferGeometryUtils } from '../../fix/BufferGeometryUtils';
+import { Font } from 'three/examples/jsm/loaders/FontLoader';
 import { BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry';
 import { CurveComponent } from '../curve/curve.component';
 import { CurveUtils } from '../curve/curveUtils';
@@ -37,6 +38,8 @@ import { RopeGeometry } from './geometry.rope';
 import { StarGeometry } from './geometry.star';
 import { StarDepthGeometry } from './geometry.star-depth';
 import * as RollerCoaster from 'three/examples/jsm/misc/RollerCoaster';
+import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
+import { TextGeometry, TextGeometryParameters } from 'three//examples/jsm/geometries/TextGeometry';
 
 /**
  * GeometryComponent
@@ -96,7 +99,7 @@ export class GeometryComponent
 	 * @see THREE.RingGeometry - RingGeometry, Ring,
 	 * @see THREE.SphereGeometry - SphereGeometry, Sphere,
 	 * @see THREE.TetrahedronGeometry - TetrahedronGeometry, Tetrahedron,
-	 * @see THREE.TextBufferGeometry - TextBufferGeometry, TextBuffer, Text
+	 * @see THREE.TextBufferGeometry - TextBufferGeometry, TextGeometry, TextBuffer, Text
 	 * @see THREE.TorusGeometry - TorusGeometry, Torus,
 	 * @see THREE.TorusKnotGeometry - TorusKnotGeometry, TorusKnot
 	 * @see THREE.TubeGeometry - TubeGeometry, Tube,
@@ -598,7 +601,7 @@ export class GeometryComponent
 	 * @param [def]
 	 * @param [callBack]
 	 */
-	private getFont(def?: string, callBack?: (font: THREE.Font) => void) {
+	private getFont(def?: string, callBack?: (font: Font) => void) {
 		const font = ThreeUtil.getTypeSafe(this.font, def, 'helvetiker');
 		const weight = ThreeUtil.getTypeSafe(this.weight, '');
 		this.localStorageService.getFont(callBack, font, weight);
@@ -627,7 +630,7 @@ export class GeometryComponent
 		} else if (ThreeUtil.isNotNull(this.text)) {
 			points.push(new THREE.Vector3(0, 0, 0));
 			points.push(new THREE.Vector3(0, 0, 0));
-			this.getFont('helvetiker', (font: THREE.Font) => {
+			this.getFont('helvetiker', (font: Font) => {
 				const shapes = font.generateShapes(
 					ThreeUtil.getTypeSafe(this.text, 'test'),
 					ThreeUtil.getTypeSafe(this.size, 1)
@@ -688,8 +691,7 @@ export class GeometryComponent
 			case 'plane':
 				return ParametricGeometries.plane(
 					ThreeUtil.getTypeSafe(this.width, this.height, 10),
-					ThreeUtil.getTypeSafe(this.height, this.width, 10),
-					null
+					ThreeUtil.getTypeSafe(this.height, this.width, 10)
 				) as any;
 			case 'mobius':
 				return ParametricGeometries.mobius;
@@ -773,7 +775,7 @@ export class GeometryComponent
 				}, 1);
 			}
 		} else if (ThreeUtil.isNotNull(this.text)) {
-			this.getFont('helvetiker', (font: THREE.Font) => {
+			this.getFont('helvetiker', (font: Font) => {
 				const shapes = font.generateShapes(
 					ThreeUtil.getTypeSafe(this.text, 'test'),
 					ThreeUtil.getTypeSafe(this.size, 1)
@@ -1511,7 +1513,7 @@ export class GeometryComponent
 					case 'parametric':
 					case 'parametricbuffergeometry':
 					case 'parametricbuffer':
-						geometry = new THREE.ParametricBufferGeometry(
+						geometry = new ParametricGeometry(
 							this.getParametric('mobius3d'),
 							ThreeUtil.getTypeSafe(this.slices, 20),
 							ThreeUtil.getTypeSafe(this.stacks, 20)
@@ -1558,7 +1560,7 @@ export class GeometryComponent
 					case 'parametricbuffer':
 					case 'parametricgeometry':
 					case 'parametric':
-						geometry = new THREE.ParametricBufferGeometry(
+						geometry = new ParametricGeometry(
 							this.getParametric('mobius3d'),
 							ThreeUtil.getTypeSafe(this.slices, 20),
 							ThreeUtil.getTypeSafe(this.stacks, 10)
@@ -1651,8 +1653,8 @@ export class GeometryComponent
 					case 'textbuffer':
 					case 'text':
 						geometry = new THREE.BufferGeometry();
-						this.getFont('helvetiker', (font: THREE.Font) => {
-							const textParameters: THREE.TextGeometryParameters = {
+						this.getFont('helvetiker', (font: Font) => {
+							const textParameters: TextGeometryParameters = {
 								font: font,
 								size: ThreeUtil.getTypeSafe(this.size, 1),
 								height: ThreeUtil.getTypeSafe(this.height, this.width),
@@ -1673,7 +1675,7 @@ export class GeometryComponent
 								case 'text':
 								default:
 									this.setGeometry(
-										new THREE.TextBufferGeometry(
+										new TextGeometry(
 											ThreeUtil.getTypeSafe(this.text, 'test'),
 											textParameters
 										)

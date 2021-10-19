@@ -13,7 +13,7 @@ import { ThreeUtil, ThreeVector } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { TranslationComponent } from '../translation/translation.component';
-
+import { Font } from 'three/examples/jsm/loaders/FontLoader';
 /**
  * Svg geometry
  */
@@ -483,7 +483,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @param [callBack]
 	 */
-	private getFont(def?: string, callBack?: (font: THREE.Font) => void) {
+	private getFont(def?: string, callBack?: (font: Font) => void) {
 		const font = ThreeUtil.getTypeSafe(this.font, def, 'helvetiker');
 		const weight = ThreeUtil.getTypeSafe(this.weight, '');
 		this.localStorageService.getFont(callBack, font, weight);
@@ -934,7 +934,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 */
 	public getPaths(onload: (geometry: SvgGeometry[]) => void) {
 		if (ThreeUtil.isNotNull(this.text) && this.text != '') {
-			this.getFont('helvetiker', (font: THREE.Font) => {
+			this.getFont('helvetiker', (font: Font) => {
 				const shapes = font.generateShapes(
 					this.getText('test'),
 					this.getSize(100)

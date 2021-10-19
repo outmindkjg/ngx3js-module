@@ -53,7 +53,7 @@ export class DrawingCanvasDirective implements OnChanges {
 		this.drawingCanvas.parentNode.appendChild(cleatBtn);
 		cleatBtn.addEventListener('click', () => {
 			this.clearCanvas();
-		});
+		},{passive: true});
 		this.drawingContext = this.drawingCanvas.getContext('2d');
 		this.setupCanvasDrawing();
 	}
@@ -125,18 +125,18 @@ export class DrawingCanvasDirective implements OnChanges {
 		this.drawingCanvas.addEventListener('pointerdown', (e) => {
 			this.paint = true;
 			this.drawStartPos.set(e.offsetX, e.offsetY);
-		});
+		},{passive: true});
 		this.drawingCanvas.addEventListener('pointermove', (e) => {
 			if (this.paint) {
 				this.draw(this.drawingContext, e.offsetX, e.offsetY);
 			}
-		});
+		},{passive: true});
 		this.drawingCanvas.addEventListener('pointerup', () => {
 			this.paint = false;
-		});
+		},{passive: true});
 		this.drawingCanvas.addEventListener('pointerleave', () => {
 			this.paint = false;
-		});
+		},{passive: true});
 		this.clearCanvas();
 	}
 

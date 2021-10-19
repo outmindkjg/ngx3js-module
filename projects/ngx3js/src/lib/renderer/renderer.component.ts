@@ -1173,7 +1173,7 @@ export class RendererComponent
 			this._lastConfirmHtml = null;
 			this._userGestureShown = false;
 			this._userGestureSubject.next(true);
-		});
+		},{passive: true});
 		if (ThreeUtil.isNotNull(ele)) {
 			const message = document.createElement('div');
 			message.className = 'message';
@@ -2208,10 +2208,10 @@ export class RendererComponent
 					}
 					this._isPaused = false;
 					callback(resultJson);
-				});
+				},{passive: true});
 				canvasImage.addEventListener('error', () => {
 					this._isPaused = false;
-				});
+				},{passive: true});
 			} else {
 				resultJson.content = this.renderer.domElement.toDataURL(imageType);
 				if (ThreeUtil.isNotNull(options.name)) {

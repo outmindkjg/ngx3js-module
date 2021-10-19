@@ -7,13 +7,10 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
-import { NodeMaterialLoader } from 'three/examples/jsm/loaders/NodeMaterialLoader';
-
-import * as NODES from 'three/examples/jsm/nodes/Nodes';
 import { ReflectorOptions } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
 import {
@@ -21,13 +18,19 @@ import {
 	ThreeColor,
 	ThreeTexture,
 	ThreeUniforms,
-	ThreeUtil,
+	ThreeUtil
 } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractMaterialComponent } from '../material.abstract';
 import { ShaderComponent } from '../shader/shader.component';
 import { ShaderType, ShaderUtils } from '../shader/shaders/shaderUtils';
 import { AbstractTextureComponent } from '../texture.abstract';
+
+import * as  NODES from '../../fix/Nodes';
+
+declare var require: any;
+const NodeMaterialLoader = require('three/examples/jsm/loaders/NodeMaterialLoader');
+
 
 /**
  * MaterialComponent
@@ -861,7 +864,7 @@ export class MaterialComponent
 	 * @param color
 	 * @returns
 	 */
-	private getColorNode(color?: THREE.Color): NODES.ColorNode {
+	private getColorNode(color?: THREE.Color): any {
 		return new NODES.ColorNode(color);
 	}
 
@@ -3145,7 +3148,7 @@ export class MaterialComponent
 								clearcoatNormalMap: this.getTexture('clearcoatNormalMap'),
 								reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
 								// ior: this.getIor(),
-								sheen: this.getSheen(),
+								// sheen: this.getSheen(),
 								transmission: ThreeUtil.getTypeSafe(this.transmission),
 								// transmissionMap: this.getTexture('transmissionMap')
 							};
@@ -3392,9 +3395,6 @@ export class MaterialComponent
 							standardNodeMaterial.emissive = this.getColorNode(
 								this.getEmissive()
 							);
-						}
-						if (ThreeUtil.isNotNull(this.sheen)) {
-							standardNodeMaterial.sheen = this.getColorNode(this.getSheen());
 						}
 						if (ThreeUtil.isNotNull(this.roughness)) {
 							standardNodeMaterial.roughness = this.getFloatNode(

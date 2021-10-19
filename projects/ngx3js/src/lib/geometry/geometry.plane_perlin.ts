@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils';
+import { BufferGeometryUtils } from '../../fix/BufferGeometryUtils';
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
 
 /**

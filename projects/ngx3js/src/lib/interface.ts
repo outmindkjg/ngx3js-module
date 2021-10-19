@@ -10,7 +10,8 @@ import Ammo from 'ammojs-typed';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
 import * as THREE from 'three';
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
+declare var require: any;
+const GUI = require('three/examples/jsm/libs/dat.gui.module');
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
 import { CameraComponent } from './camera/camera.component';
@@ -734,7 +735,7 @@ export class ThreeUtil {
 				if (this.isNotNull(this._elementEvents[clazzName])) {
 					const eleEvents = this._elementEvents[clazzName];
 					Object.entries(eleEvents).forEach(([key, value]) => {
-						ele.addEventListener(key, value, false);
+						ele.addEventListener(key, value, {passive: true});
 					});
 				}
 			}
@@ -1036,7 +1037,7 @@ export class ThreeUtil {
 					if (this.isNotNull(oldEvent)) {
 						ele.removeEventListener(key, oldEvent, false);
 					}
-					ele.addEventListener(key, value, false);
+					ele.addEventListener(key, value,{passive: true});
 					eleEvents[key] = value;
 				} else if (this.isNull(value) && this.isNotNull(oldEvent)) {
 					ele.removeEventListener(key, oldEvent, false);

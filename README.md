@@ -19,17 +19,8 @@ I found some errors on @types/three. Before use this source. You muse fix them b
 current theejs verion "^0.131.0"
 ```javascript
 
-// node_modules/@types/three/examples/jsm/objects/ReflectorForSSRPass.d.ts
- + 59   export { Reflector as ReflectorForSSRPass };
-
 // node_modules/@types/three/examples/jsm/nodes/inputs/ColorNode.d.ts
  + 7    constructor(color: any, g?: number, b?: number);
-
-// node_modules/@types/three/examples/jsm/loaders/NodeMaterialLoader.d.ts - create
- + 1    export class NodeMaterialLoader {}
-
-// node_modules/@types/three/examples/jsm/libs/dat.gui.module.d.ts
- + 1    export class GUI {}
 
 ```
 
@@ -42,6 +33,9 @@ npm install -g @angular/cli
 npm install ngx3js
 npm i --save-dev @types/three
 npm i --save-dev @types/chroma-js
+
+grep -Ril "ColorNode" ./
+
 ```
 
 ```javascript
