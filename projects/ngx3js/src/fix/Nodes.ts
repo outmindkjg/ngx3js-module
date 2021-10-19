@@ -1,1 +1,1 @@
-export *  as NODES from 'three/examples/jsm/nodes/Nodes.js';
+export *  as NODES from 'three/examples/jsm/nodes/Nodes';

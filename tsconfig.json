@@ -12,15 +12,11 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
-    "typeRoots": [
-      "./projects/ngx3js/src/@types",
-      "./node_modules/@types",
-     ],
     "paths": {
       "ngx3js": [
         "dist/ngx3js/ngx3js",
         "dist/ngx3js"
-      ]
+      ],
     },
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -32,8 +28,8 @@
       "dom"
     ],
   },
-  "include": [
-    "./projects/ngx3js/src/@types"
+  "exclude": [
+    "node_modules/@types/three/examples/jsm/nodes/inputs/ColorNode"
   ],
   "angularCompilerOptions": {
      "enableI18nLegacyMessageIdFormat": false,
