@@ -26,7 +26,7 @@ import { ShaderComponent } from '../shader/shader.component';
 import { ShaderType, ShaderUtils } from '../shader/shaders/shaderUtils';
 import { AbstractTextureComponent } from '../texture.abstract';
 
-import * as  NODES from '../../fix/Nodes';
+import { NODES }  from '../../fix/Nodes';
 
 declare var require: any;
 const NodeMaterialLoader = require('three/examples/jsm/loaders/NodeMaterialLoader');

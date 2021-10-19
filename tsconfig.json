@@ -6,7 +6,6 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "allowJs": true,
     "strictNullChecks" : false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -27,10 +26,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "typeRoots": [
+      "types",
+   ],
   },
+  "exclude": ["node_modules", "typings"],
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
+     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true

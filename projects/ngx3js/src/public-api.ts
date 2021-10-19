@@ -17,7 +17,7 @@ export { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.j
 export { OBB } from 'three/examples/jsm/math/OBB';
 export { Octree } from 'three/examples/jsm/math/Octree';
 export { GPUComputationRenderer } from 'three/examples/jsm/misc/GPUComputationRenderer';
-export * as NODES from 'three/examples/jsm/nodes/Nodes';
+export * as NODES from './fix/Nodes';
 export { ReflectorForSSRPass } from './fix/ReflectorForSSRPass';
 export { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 export { SSAOPass } from 'three/examples/jsm/postprocessing/SSAOPass';

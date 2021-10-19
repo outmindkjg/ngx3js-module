@@ -19,7 +19,6 @@
       "three/examples/jsm/modifiers/SimplifyModifier": "SimplifyModifier",
       "three/examples/jsm/modifiers/TessellateModifier": "TessellateModifier",
       "three/examples/jsm/utils/BufferGeometryUtils": "BufferGeometryUtils",
-      "gsap": "GSAP",
       "three/examples/jsm/lines/WireframeGeometry2": "WireframeGeometry2",
       "three/examples/jsm/lines/LineSegmentsGeometry": "LineSegmentsGeometry",
       "three/examples/jsm/utils/GeometryCompressionUtils": "GeometryCompressionUtils",
@@ -29,7 +28,6 @@
       "three/examples/jsm/loaders/HDRCubeTextureLoader": "HDRCubeTextureLoader",
       "three/examples/jsm/loaders/NRRDLoader": "NRRDLoader",
       "three/examples/jsm/loaders/RGBMLoader": "RGBMLoader",
-      "three/examples/jsm/nodes/Nodes": "NODES",
       "three/examples/jsm/postprocessing/EffectComposer": "EffectComposer",
       "three/examples/jsm/postprocessing/ShaderPass": "ShaderPass",
       "three/examples/jsm/math/ImprovedNoise": "ImprovedNoise",
@@ -81,7 +79,6 @@
       "three/examples/jsm/loaders/VRMLoader": "VRMLoader",
       "three/examples/jsm/loaders/VTKLoader": "VTKLoader",
       "three/examples/jsm/loaders/XYZLoader": "XYZLoader",
-      "chart.js": "CHARTJS",
       "three/examples/jsm/renderers/SVGRenderer": "SVGRenderer",
       "three/examples/jsm/effects/AsciiEffect": "AsciiEffect",
       "three/examples/jsm/effects/OutlineEffect": "OutlineEffect",
@@ -163,7 +160,6 @@
       "three/examples/jsm/shaders/VolumeShader": "VolumeShader",
       "three/examples/jsm/shaders/WaterRefractionShader": "WaterRefractionShader",
       "three/examples/jsm/math/Lut": "Lut",
-      "ammojs-typed": "Ammo",
       "three/examples/jsm/misc/ConvexObjectBreaker": "ConvexObjectBreaker",
       "three/examples/jsm/physics/AmmoPhysics": "AmmoPhysics",
       "three/examples/jsm/misc/ProgressiveLightMap": "ProgressiveLightMap",
@@ -222,7 +218,10 @@
       "three/examples/jsm/math/Octree" : "Octree",
       "three/examples/jsm/misc/GPUComputationRenderer" : "GPUComputationRenderer",
       "three/examples/jsm/utils/GeometryUtils" : "GeometryUtils$1",
-      "three/examples/jsm/utils/UVsDebug" : "UVsDebug"
+      "three/examples/jsm/utils/UVsDebug" : "UVsDebug",
+      "ammojs-typed": "Ammo",
+      "chart.js": "CHARTJS",
+      "gsap": "GSAP"
     }
   },
   "allowedNonPeerDependencies": [
