@@ -1,0 +1,58 @@
+{
+  "_from": "@types/chroma-js@^2.1.3",
+  "_id": "@types/chroma-js@2.1.3",
+  "_inBundle": false,
+  "_integrity": "sha512-1xGPhoSGY1CPmXLCBcjVZSQinFjL26vlR8ZqprsBWiFyED4JacJJ9zHhh5aaUXqbY9B37mKQ73nlydVAXmr1+g==",
+  "_location": "/@types/chroma-js",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@types/chroma-js@^2.1.3",
+    "name": "@types/chroma-js",
+    "escapedName": "@types%2fchroma-js",
+    "scope": "@types",
+    "rawSpec": "^2.1.3",
+    "saveSpec": null,
+    "fetchSpec": "^2.1.3"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/chroma-js/-/chroma-js-2.1.3.tgz",
+  "_shasum": "0b03d737ff28fad10eb884e0c6cedd5ffdc4ba0a",
+  "_spec": "@types/chroma-js@^2.1.3",
+  "_where": "/Volumes/WORK/VsCode/ngx3js-module/projects/ngx3js",
+  "bugs": {
+    "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Sebastian Brückner",
+      "url": "https://github.com/invliD"
+    },
+    {
+      "name": "Marcin Pacholec",
+      "url": "https://github.com/mpacholec"
+    }
+  ],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "TypeScript definitions for Chroma.js",
+  "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped#readme",
+  "license": "MIT",
+  "main": "",
+  "name": "@types/chroma-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+    "directory": "types/chroma-js"
+  },
+  "scripts": {},
+  "typeScriptVersion": "3.3",
+  "types": "index.d.ts",
+  "typesPublisherContentHash": "6a85c9a10c7b708b9a56ce490d5bef7185c263ed83b7f68bd4bdaaf090b5c173",
+  "version": "2.1.3"
+}

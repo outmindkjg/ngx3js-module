@@ -28,9 +28,7 @@ import { AbstractTextureComponent } from '../texture.abstract';
 
 import { NODES }  from '../../fix/Nodes';
 
-declare var require: any;
-const NodeMaterialLoader = require('three/examples/jsm/loaders/NodeMaterialLoader');
-
+import { NodeMaterialLoader } from 'three/examples/jsm/loaders/NodeMaterialLoader';
 
 /**
  * MaterialComponent

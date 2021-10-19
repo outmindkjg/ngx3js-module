@@ -36,6 +36,9 @@ npm i --save-dev @types/chroma-js
 
 grep -Ril "ColorNode" ./
 
+npm install --no-optional --no-shrinkwrap --no-package-lock
+npm install -f
+
 ```
 
 ```javascript

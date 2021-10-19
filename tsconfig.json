@@ -12,6 +12,10 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "typeRoots": [
+      "./projects/ngx3js/src/@types",
+      "./node_modules/@types",
+     ],
     "paths": {
       "ngx3js": [
         "dist/ngx3js/ngx3js",
@@ -27,11 +31,10 @@
       "es2018",
       "dom"
     ],
-    "typeRoots": [
-      "types",
-   ],
   },
-  "exclude": ["node_modules", "typings"],
+  "include": [
+    "./projects/ngx3js/src/@types"
+  ],
   "angularCompilerOptions": {
      "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
