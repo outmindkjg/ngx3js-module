@@ -11,7 +11,7 @@ export const GeometryConf: {
 } = {
 	rainbowcolor1: (geometry: THREE.BufferGeometry, options?: any) => {
 		const count = geometry.attributes.position.count;
-		const radius = GeometryUtils.getGeometryRadius(geometry, options);
+		const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 		geometry.setAttribute(
 			'color',
 			new THREE.BufferAttribute(new Float32Array(count * 3), 3)
@@ -29,7 +29,7 @@ export const GeometryConf: {
 	rainbow1: 'rainbowcolor1',
 	rainbowcolor2: (geometry: THREE.BufferGeometry, options?: any) => {
 		const count = geometry.attributes.position.count;
-		const radius = GeometryUtils.getGeometryRadius(geometry, options);
+		const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 		geometry.setAttribute(
 			'color',
 			new THREE.BufferAttribute(new Float32Array(count * 3), 3)
@@ -46,7 +46,7 @@ export const GeometryConf: {
 	rainbow2: 'rainbowcolor2',
 	rainbowcolor3: (geometry: THREE.BufferGeometry, options?: any) => {
 		const count = geometry.attributes.position.count;
-		const radius = GeometryUtils.getGeometryRadius(geometry, options);
+		const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 		geometry.setAttribute(
 			'color',
 			new THREE.BufferAttribute(new Float32Array(count * 3), 3)
@@ -70,7 +70,7 @@ export const GeometryConf: {
 			'position'
 		) as THREE.BufferAttribute;
 		const count = positions.count;
-		const radius = GeometryUtils.getGeometryRadius(geometry, options);
+		const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 		geometry.computeBoundingBox();
 		const box = geometry.boundingBox;
 		const center = box.min.clone().add(box.max).multiplyScalar(0.2);
@@ -99,7 +99,7 @@ export const GeometryConf: {
 /**
  * Geometry utils
  */
-export class GeometryUtils {
+export class NgxGeometryUtils {
 	/**
 	 * Gets geometry radius
 	 * @param geometry

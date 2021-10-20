@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import Ammo from 'ammojs-typed';
 import * as THREE from 'three';
-import { GeometryUtils } from '../geometry/geometryUtils';
+import { NgxGeometryUtils } from '../geometry/geometryUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
@@ -1260,7 +1260,7 @@ export class RigidbodyComponent
 		);
 		posOnlyBufGeometry.setIndex(bufGeometry.getIndex());
 		// Merge the vertices so the triangle soup is converted to indexed triangles
-		const indexedBufferGeom = GeometryUtils.mergeVertices(posOnlyBufGeometry);
+		const indexedBufferGeom = NgxGeometryUtils.mergeVertices(posOnlyBufGeometry);
 		// Create index arrays mapping the indexed vertices to bufGeometry vertices
 		return this._mapIndices(bufGeometry, indexedBufferGeom);
 	}

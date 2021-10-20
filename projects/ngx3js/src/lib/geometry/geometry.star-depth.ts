@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { StarGeometry } from './geometry.star';
-import { GeometryUtils } from './geometryUtils';
+import { NgxGeometryUtils } from './geometryUtils';
 
 /**
  * StarDepth geometry
@@ -62,7 +62,7 @@ export class StarDepthGeometry extends THREE.BufferGeometry {
 			thetaLength
 		);
 		frontGeometry.translate(0, 0, halfDepth);
-		const backGeometry = GeometryUtils.getFlipGeometry(frontGeometry);
+		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry);
 		const vertices = [];
 		const normals = [];
 		const uvs = [];

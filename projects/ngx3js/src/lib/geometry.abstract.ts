@@ -17,7 +17,7 @@ import { SimplifyModifier } from 'three/examples/jsm/modifiers/SimplifyModifier'
 import { TessellateModifier } from 'three/examples/jsm/modifiers/TessellateModifier';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 import * as GeometryCompressionUtils  from 'three/examples/jsm/utils/GeometryCompressionUtils';
-import { GeometryUtils } from './geometry/geometryUtils';
+import { NgxGeometryUtils } from './geometry/geometryUtils';
 import { ThreeUtil, ThreeVector } from './interface';
 import { PositionComponent } from './position/position.component';
 import { RotationComponent } from './rotation/rotation.component';
@@ -1452,7 +1452,7 @@ export abstract class AbstractGeometryComponent
 					}
 				}
 				if (ThreeUtil.isNotNull(this.program)) {
-					GeometryUtils.getGeometry(this.program, geometry, this.programParam);
+					NgxGeometryUtils.getGeometry(this.program, geometry, this.programParam);
 				}
 				if (
 					ThreeUtil.isNotNull(this.drawRangeStart) &&

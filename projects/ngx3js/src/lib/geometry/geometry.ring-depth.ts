@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { GeometryUtils } from './geometryUtils';
+import { NgxGeometryUtils } from './geometryUtils';
 
 /**
  * RingDepth geometry
@@ -66,7 +66,7 @@ export class RingDepthGeometry extends THREE.BufferGeometry {
 			thetaLength
 		);
 		frontGeometry.translate(0, 0, halfDepth);
-		const backGeometry = GeometryUtils.getFlipGeometry(frontGeometry);
+		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry);
 		const vertices = [];
 		const normals = [];
 		const uvs = [];
