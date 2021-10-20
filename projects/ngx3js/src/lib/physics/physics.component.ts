@@ -13,6 +13,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
 import { AmmoPhysics } from 'three/examples/jsm/physics/AmmoPhysics';
+import { OimoPhysics } from 'three/examples/jsm/physics/OimoPhysics';
 
 /**
  * PhysicsComponent
@@ -262,13 +263,23 @@ export class PhysicsComponent
 			switch (this.type.toLowerCase()) {
 				case 'oimophysics':
 				case 'oimo':
+					OimoPhysics().then((physics : any) => {
+						this.dispatcher = null;
+						this.physics = physics;
+						super.setObject(this.physics);
+						this.runSubscribeNext(this.subscribeType);
+						this.applyChanges(['constraint', 'gravity']);
+					});
+					break;
 				case 'ammophysics':
 				case 'ammo':
-					this.physics = new AmmoPhysics() as any;
-					this.dispatcher = null;
-					super.setObject(this.physics);
-					this.runSubscribeNext(this.subscribeType);
-					this.applyChanges(['constraint', 'gravity']);
+					AmmoPhysics().then((physics : any) => {
+						this.dispatcher = null;
+						this.physics = physics;
+						super.setObject(this.physics);
+						this.runSubscribeNext(this.subscribeType);
+						this.applyChanges(['constraint', 'gravity']);
+					});
 					break;
 				default:
 					const collisionConfiguration =

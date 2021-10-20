@@ -6,9 +6,11 @@ function copyFile(soruce, target) {
         fs.writeFile('../node_modules/' + target, planeContents, () => {});
         if (fs.existsSync('../dist/ngx3js/node_modules')) {
             fs.writeFile('../dist/ngx3js/node_modules/' + target, planeContents, () => {});
-        } else {
-            console.log('error : ' + target);
         }
+        if (fs.existsSync('/Users/outmind/Library/Caches/typescript/4.4/node_modules')) {
+            fs.writeFile('/Users/outmind/Library/Caches/typescript/4.4/node_modules/' + target, planeContents, () => {});
+        }
+        console.log('file : ' + '../node_modules/' + target);
     });
 }
 
@@ -22,7 +24,6 @@ copyFile('ReflectorForSSRPass.d.ts', '@types/three/examples/jsm/objects/Reflecto
 copyFile('SceneUtils.d.ts','@types/three/examples/jsm/utils/SceneUtils.d.ts');
 copyFile('meshopt_decoder.module.d.ts','@types/three/examples/jsm/libs/meshopt_decoder.module.d.ts');
 copyFile('meshopt_decoder.module.d.ts','@types/three/examples/jsm/libs/meshopt_decoder.module.d.ts');
-copyFile('AmmoPhysics.js','three/examples/jsm/physics/AmmoPhysics.js');
-copyFile('OimoPhysics.js','three/examples/jsm/physics/OimoPhysics.js');
-
+copyFile('AmmoPhysics.d.ts','@types/three/examples/jsm/physics/AmmoPhysics.d.ts');
+copyFile('OimoPhysics.d.ts','@types/three/examples/jsm/physics/OimoPhysics.d.ts');
 
