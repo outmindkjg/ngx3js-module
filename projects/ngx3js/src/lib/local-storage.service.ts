@@ -8,26 +8,25 @@ import { OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
 import { PLYExporter } from 'three/examples/jsm/exporters/PLYExporter';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 import { USDZExporter } from 'three/examples/jsm/exporters/USDZExporter';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module';
 import { Rhino3dmLoader } from 'three/examples/jsm/loaders/3DMLoader';
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
 import { AMFLoader } from 'three/examples/jsm/loaders/AMFLoader';
 import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader';
 import { BVH, BVHLoader } from 'three/examples/jsm/loaders/BVHLoader';
-import { FontLoader, Font } from 'three/examples/jsm/loaders/FontLoader';
 import {
 	Collada,
-	ColladaLoader,
+	ColladaLoader
 } from 'three/examples/jsm/loaders/ColladaLoader';
 import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { GCodeLoader } from 'three/examples/jsm/loaders/GCodeLoader';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader';
-// import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decode';
-
-// import { IFC, IFCLoader } from 'three/examples/jsm/loaders/IFCLoader';
+import { IFCLoader, IFCModel } from 'three/examples/jsm/loaders/IFCLoader';
 import { KMZLoader } from 'three/examples/jsm/loaders/KMZLoader';
 import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
 import { KTXLoader } from 'three/examples/jsm/loaders/KTXLoader';
@@ -40,7 +39,7 @@ import { MD2Loader } from 'three/examples/jsm/loaders/MD2Loader';
 import { MDD, MDDLoader } from 'three/examples/jsm/loaders/MDDLoader';
 import {
 	MMDLoader,
-	MMDLoaderAnimationObject,
+	MMDLoaderAnimationObject
 } from 'three/examples/jsm/loaders/MMDLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { NRRDLoader } from 'three/examples/jsm/loaders/NRRDLoader';
@@ -61,7 +60,7 @@ import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
 import {
 	Chunk,
 	VOXLoader,
-	VOXMesh,
+	VOXMesh
 } from 'three/examples/jsm/loaders/VOXLoader';
 import { VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoader';
 import { VRMLoader } from 'three/examples/jsm/loaders/VRMLoader';
@@ -281,7 +280,7 @@ export class LocalStorageService {
 	/**
 	 * Ifc loader of local storage service
 	 */
-	// private ifcLoader: IFCLoader = null;
+	private ifcLoader: IFCLoader = null;
 
 	/**
 	 * Vox loader of local storage service
@@ -1009,35 +1008,30 @@ export class LocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.ifc')) {
-			console.log('IFC Loader is not stable!!');
-			/*
-      if (this.ifcLoader === null) {
-        this.ifcLoader = new IFCLoader(ThreeUtil.getLoadingManager());
-      }
-      if (options.wasmPath) {
-        this.ifcLoader.setWasmPath(ThreeUtil.getStoreUrl(options.wasmPath));
-      }
-      this.setLoaderWithOption(this.ifcLoader, options);
-      this.ifcLoader.load(
-        key,
-        (ifc: IFC) => {
-          callBack({
-            object: ifc,
-            source: ifc
-          });
-        },
-        this.onProgress,
-        this.onError
-      );
-      */
+			if (this.ifcLoader === null) {
+				this.ifcLoader = new IFCLoader(ThreeUtil.getLoadingManager());
+			}
+			if (options.useWasm) {
+				this.ifcLoader.ifcManager.setWasmPath(ThreeUtil.getStoreUrl('jsm/loaders/ifc/'));
+			}
+			this.setLoaderWithOption(this.ifcLoader, options);
+			this.ifcLoader.load(
+				key,
+				(ifc: IFCModel) => {
+					callBack({
+						object: ifc,
+						source: ifc,
+					});
+				},
+				this.onProgress,
+				this.onError
+			);
 		} else if (key.endsWith('.ktx2')) {
 			if (this.ktx2Loader === null) {
 				this.ktx2Loader = new KTX2Loader(ThreeUtil.getLoadingManager());
 				this.ktx2Loader.detectSupport(new THREE.WebGLRenderer());
-			}
-			if (options.transcoderPath) {
 				this.ktx2Loader.setTranscoderPath(
-					ThreeUtil.getStoreUrl(options.transcoderPath)
+					ThreeUtil.getStoreUrl('js/libs/basis/')
 				);
 			}
 			this.setLoaderWithOption(this.ktx2Loader, options);
@@ -1295,9 +1289,7 @@ export class LocalStorageService {
 						);
 					}
 					this.gltfLoader.setKTX2Loader(this.ktx2Loader);
-				}
-				if (options.meshoptDecoder) {
-					this.gltfLoader.setMeshoptDecoder(options.meshoptDecoder);
+					this.gltfLoader.setMeshoptDecoder(MeshoptDecoder);
 				}
 			}
 			this.setLoaderWithOption(this.gltfLoader, options);
