@@ -11,7 +11,7 @@ import {
 	LUTCubeLoader,
 	LUTCubeResult,
 } from 'three/examples/jsm/loaders/LUTCubeLoader';
-import { ReflectorForSSRPass } from '../../fix/ReflectorForSSRPass';
+import { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
 import { AdaptiveToneMappingPass } from 'three/examples/jsm/postprocessing/AdaptiveToneMappingPass';
 import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass';
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass';

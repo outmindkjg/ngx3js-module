@@ -15,7 +15,7 @@ import { ParametricGeometries } from 'three/examples/jsm/geometries/ParametricGe
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry';
 import { TeapotGeometry } from 'three/examples/jsm/geometries/TeapotGeometry';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
-import { BufferGeometryUtils } from '../../fix/BufferGeometryUtils';
+import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
 import { BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry';
 import { CurveComponent } from '../curve/curve.component';

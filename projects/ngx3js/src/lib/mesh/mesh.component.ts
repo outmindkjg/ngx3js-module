@@ -40,8 +40,8 @@ import {
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
 import { createText } from 'three/examples/jsm/webxr/Text2D';
-import { BufferGeometryUtils } from '../../fix/BufferGeometryUtils';
-import { ReflectorForSSRPass } from '../../fix/ReflectorForSSRPass';
+import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
+import { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
 import { CurveComponent } from '../curve/curve.component';
 import { HtmlComponent } from '../html/html.component';
 import { CssStyle, ThreeColor, ThreeUtil } from '../interface';

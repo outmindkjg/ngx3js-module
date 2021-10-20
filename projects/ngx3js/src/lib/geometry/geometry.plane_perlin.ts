@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { BufferGeometryUtils } from '../../fix/BufferGeometryUtils';
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
+import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
 /**
  * Plane perlin geometry

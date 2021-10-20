@@ -11,6 +11,8 @@ import {
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
+import { NodeMaterialLoader } from 'three/examples/jsm/loaders/NodeMaterialLoader';
+import * as NODES from 'three/examples/jsm/nodes/Nodes';
 import { ReflectorOptions } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
 import {
@@ -25,10 +27,6 @@ import { AbstractMaterialComponent } from '../material.abstract';
 import { ShaderComponent } from '../shader/shader.component';
 import { ShaderType, ShaderUtils } from '../shader/shaders/shaderUtils';
 import { AbstractTextureComponent } from '../texture.abstract';
-
-import { NODES }  from '../../fix/Nodes';
-
-import { NodeMaterialLoader } from 'three/examples/jsm/loaders/NodeMaterialLoader';
 
 /**
  * MaterialComponent

@@ -1,1 +1,0 @@
-export { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
