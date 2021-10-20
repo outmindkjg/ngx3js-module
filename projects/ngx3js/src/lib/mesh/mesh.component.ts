@@ -53,8 +53,7 @@ import { AbstractTextureComponent } from '../texture.abstract';
 import { HelperComponent, HelperOptions } from './../helper/helper.component';
 import { LightComponent, LightOptions } from './../light/light.component';
 import { LocalStorageService } from './../local-storage.service';
-declare var require: any;
-const SceneUtils = require('three/examples/jsm/utils/SceneUtils');
+import * as SceneUtils from 'three/examples/jsm/utils/SceneUtils';
 
 /**
  * Volume Options

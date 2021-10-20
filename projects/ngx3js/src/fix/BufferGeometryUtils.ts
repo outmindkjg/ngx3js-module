@@ -7,5 +7,3 @@ export const BufferGeometryUtils = {
 export {
     mergeBufferGeometries, mergeBufferAttributes, interleaveAttributes, estimateBytesUsed, mergeVertices, toTrianglesDrawMode, computeMorphedAttributes,
 };
-
-
