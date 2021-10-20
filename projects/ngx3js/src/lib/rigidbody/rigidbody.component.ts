@@ -1179,7 +1179,6 @@ export class RigidbodyComponent
 							switch (this.rigidBody.type) {
 								case 'mesh':
 									const physics: any = this._physics;
-									console.log(physics);
 									if (mass > 0) {
 										physics.addMesh(this.rigidBody.mesh, this.mass);
 									} else {

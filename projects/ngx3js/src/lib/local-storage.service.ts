@@ -785,7 +785,6 @@ export class LocalStorageService {
 					loaderAny['setDataType'](
 						ThreeUtil.getTextureDataTypeSafe(options.dataType)
 					);
-					console.log(ThreeUtil.getTextureDataTypeSafe(options.dataType));
 				}
 			}
 		}

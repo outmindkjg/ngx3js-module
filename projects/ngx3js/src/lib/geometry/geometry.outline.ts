@@ -210,8 +210,6 @@ export class OutlineGeometry extends THREE.WireframeGeometry {
 				new THREE.Float32BufferAttribute(vertices, 3)
 			);
 		}
-		// console.log(this.getAttribute('position').count);
-		// console.log(geometry.getAttribute('position').count);
 	}
 
 	private isZero(v: number) {
