@@ -7,9 +7,6 @@ function copyFile(soruce, target) {
         if (fs.existsSync('../dist/ngx3js/node_modules')) {
             fs.writeFile('../dist/ngx3js/node_modules/' + target, planeContents, () => {});
         }
-        if (fs.existsSync('/Users/outmind/Library/Caches/typescript/4.4/node_modules')) {
-            fs.writeFile('/Users/outmind/Library/Caches/typescript/4.4/node_modules/' + target, planeContents, () => {});
-        }
         console.log('file : ' + '../node_modules/' + target);
     });
 }

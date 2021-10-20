@@ -20,6 +20,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import { ArcballControls } from 'three/examples/jsm/controls/ArcballControls';
 import { CSM } from 'three/examples/jsm/csm/CSM';
 import { RendererTimer, ThreeUtil } from '../interface';
 import { LookatComponent } from '../lookat/lookat.component';
@@ -44,6 +45,7 @@ export interface ControlOptions {
 	 * @see DragControls - DragControls, Drag
 	 * @see TransformControls - TransformControls, Transform
 	 * @see TrackballControls - TrackballControls, Trackball
+	 * @see ArcballControls - ArcballControls, Arcball
 	 * @see CSM - CSM
 	 * @see PlaneControls - PlaneControls, Plane
 	 * @see OrbitControls - OrbitControls, Orbit
@@ -307,6 +309,7 @@ export class ControlComponent
 	 * @see DragControls - DragControls, Drag
 	 * @see TransformControls - TransformControls, Transform
 	 * @see TrackballControls - TrackballControls, Trackball
+	 * @see ArcballControls - ArcballControls, Arcball
 	 * @see CSM - CSM
 	 * @see PlaneControls - PlaneControls, Plane
 	 * @see OrbitControls - OrbitControls, Orbit
@@ -367,6 +370,11 @@ export class ControlComponent
 	 * The staticMoving of control
 	 */
 	@Input() public staticMoving: boolean = null;
+
+	/**
+	 * The gizmoVisible of control
+	 */
+	@Input() public gizmoVisible: boolean = null;
 
 	/**
 	 * The keys of control
@@ -923,6 +931,18 @@ export class ControlComponent
 						trackballControls.keys = this.keys;
 					}
 					control = trackballControls;
+					break;
+				case 'arcballcontrols':
+				case 'arcball':
+					const arcballControls = new ArcballControls(
+						camera,
+						domElement,
+						this._scene.first.getScene()
+					);
+					if (ThreeUtil.isNotNull(this.gizmoVisible)) {
+						(arcballControls as any).setGizmosVisible(this.gizmoVisible);
+					}
+					control = arcballControls;
 					break;
 				case 'selectbox':
 				case 'selectboxcontrols':

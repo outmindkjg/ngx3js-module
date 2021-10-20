@@ -199,6 +199,7 @@
       "three/examples/jsm/controls/TrackballControls": "TrackballControls",
       "three/examples/jsm/controls/TransformControls": "TransformControls",
       "three/examples/jsm/controls/DragControls": "DragControls",
+      "three/examples/jsm/controls/ArcballControls": "ArcballControls",
       "three/examples/jsm/controls/PointerLockControls": "PointerLockControls",
       "three/examples/jsm/interactive/SelectionBox": "SelectionBox",
       "three/examples/jsm/interactive/SelectionHelper": "SelectionHelper",

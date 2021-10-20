@@ -5,6 +5,7 @@
 export * as THREE from 'three';
 export { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
 export { DragControls } from 'three/examples/jsm/controls/DragControls';
+export { ArcballControls } from 'three/examples/jsm/controls/ArcballControls';
 export { FlyControls } from 'three/examples/jsm/controls/FlyControls';
 export { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 export { CSMHelper } from 'three/examples/jsm/csm/CSMHelper';

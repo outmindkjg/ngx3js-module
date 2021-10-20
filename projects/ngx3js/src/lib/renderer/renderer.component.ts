@@ -172,6 +172,11 @@ export class RendererComponent
 	@Input() public antialias: boolean = false;
 
 	/**
+	 * whether to perform alpha. Default is *false*.
+	 */
+	 @Input() public alpha: boolean = false;
+
+	/**
 	 * The quality of SVGRenderer
 	 *
 	 * Notice - case insensitive.
@@ -1922,7 +1927,7 @@ export class RendererComponent
 				case 'webglrenderer':
 				default:
 					const webGLRenderer = new THREE.WebGLRenderer({
-						alpha: false,
+						alpha: this.alpha,
 						antialias: this.antialias,
 						logarithmicDepthBuffer: this.logarithmicDepthBuffer,
 						preserveDrawingBuffer: this.preserveDrawingBuffer,
