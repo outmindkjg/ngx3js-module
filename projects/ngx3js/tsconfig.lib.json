@@ -24,13 +24,9 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "typeRoots": [
-      "./src/@types",
-      "./node_modules/@types",
-     ],
+    "noImplicitAny": false,
     "paths": {
-      "fs": ["./node_modules/fs-web"],
-      "three/examples/jsm/nodes/Nodes" : ["./src/@types/three/examples/jsm/nodes/Nodes"]
+      "fs": ["./node_modules/fs-web"]
     },
     "lib": [
       "dom",
@@ -38,7 +34,6 @@
     ]
   },
   "exclude": [
-    "node_modules/@types/three/examples/jsm/nodes/inputs/ColorNode",
     "src/test.ts",
     "**/*.spec.ts"
   ]

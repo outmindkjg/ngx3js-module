@@ -7,6 +7,7 @@ import {
     Scene,
     Camera,
     IUniform,
+    Color
 } from '../../../src/Three';
 
 export interface ReflectorShader {
@@ -25,9 +26,9 @@ export interface ReflectorOptions {
     clipBias?: number | undefined;
     textureWidth?: number | undefined;
     textureHeight?: number | undefined;
-    color?: number | undefined;
+    color?: Color | number | undefined;
     useDepthTexture?: boolean | undefined;
-    shader?: ReflectorShader | undefined;
+    shader?: any | undefined;
 }
 
 export class Reflector<TGeometry extends BufferGeometry = BufferGeometry> extends Mesh<TGeometry> {
