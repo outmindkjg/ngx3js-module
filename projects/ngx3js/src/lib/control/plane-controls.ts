@@ -116,8 +116,6 @@ export class PlaneControls {
 			if (this._mouseMoveHandler === null) {
 				this._mouseMoveHandler = (event: any) => {
 					if (this.enabled === false) return;
-					event.preventDefault();
-					event.stopPropagation();
 					this.getMouseOnScreen(this.mouse, event.pageX, event.pageY);
 					const cameraPosition = new THREE.Vector2(
 						this.xDistance,
