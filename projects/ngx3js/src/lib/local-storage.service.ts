@@ -1871,7 +1871,7 @@ export class LocalStorageService {
 							}
 							this.setLoaderWithOption(this.lottieLoader, options);
 							if ((window as any).bodymovin === undefined) {
-								console.log('script required "node_modules/three/examples/js/libs/lottie_canvas.js"');
+								console.log('script required in angular.json - projects/{project_name}/architect/build/options/scripts : ["node_modules/ngx3js/assets/js/libs/lottie_canvas.js"]');
 							} else {
 								this.lottieLoader.load(
 									key,
