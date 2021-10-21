@@ -189,11 +189,13 @@ export class PositionComponent
 			);
 			this.getPosition();
 			this.synkObject3d(this.position, key);
-			if (ThreeUtil.isNotNull(object) && ThreeUtil.isNull(object.userData)) {
-				object.userData = {};
-			}
-			if (ThreeUtil.isNull(object.userData.initPosition)) {
-				object.userData.initPosition = object.position.clone();
+			if (object instanceof THREE.Object3D) {
+				if (ThreeUtil.isNotNull(object) && ThreeUtil.isNull(object.userData)) {
+					object.userData = {};
+				}
+				if (ThreeUtil.isNotNull(object) && ThreeUtil.isNull(object.userData.initPosition)) {
+					object.userData.initPosition = object.position.clone();
+				}
 			}
 		}
 	}
