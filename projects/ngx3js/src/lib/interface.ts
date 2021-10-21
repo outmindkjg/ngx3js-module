@@ -41,11 +41,96 @@ export interface CurvesParameters {
  * Texture option
  */
 export interface TextureOption {
+	
+	/** The texture type */
 	type: string;
+
+	/** The texture value */
 	value: string;
+
+	/** The texture options */
 	options?: string;
+
+	/** The cube image url */
 	cubeImage?: string[];
 }
+
+ /**
+  * Storage option
+  */
+ export interface StorageOption {
+
+	path? : string;
+
+	autoCenter? : boolean;
+
+	debugName? : boolean;
+
+	debug? : boolean;
+
+	firstMesh? : boolean;
+
+	name? : string;
+
+	scale? : number;
+
+	/** override material from storage */ 
+	material? : string;
+
+	/** The resource path */
+	resourcePath? : string;
+
+	useDraco ? : boolean;
+
+	useKtx2? : boolean;
+
+	vmdUrl? : string | string[];
+
+	object? : THREE.SkinnedMesh | THREE.Camera | any;
+
+	drawFillShapes? : boolean;
+
+	drawStrokes? : boolean;
+	
+	fillShapesWireframe? : boolean;
+
+	strokesWireframe? : boolean;
+
+	type? : string;
+
+	baseUrl? : string;
+
+	body ? :  any;
+
+	cssType? : string;
+
+	geometry? : boolean;
+
+	loaderType? : string;
+
+	quality? : number;
+
+	dataType? : any;
+
+ }
+
+ /**
+  * Storage export option
+  */
+ export interface StorageExportOption {
+    binary?: boolean;
+    trs?: boolean;
+    onlyVisible?: boolean;
+    truncateDrawRange?: boolean;
+    embedImages?: boolean;
+    animations?: THREE.AnimationClip[];
+    forceIndices?: boolean;
+    forcePowerOfTwoTextures?: boolean;
+    includeCustomExtensions?: boolean;
+    excludeAttributes?: string[];
+    littleEndian?: boolean;
+	maxTextureSize? : number;
+ }
 
 /**
  * ThreeUniform
@@ -305,6 +390,41 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	 */
 	public setControlsParams(controlsParams: GuiControlParam[] = []) {
 		this.controlsParams = ThreeUtil.getControlsParams(controlsParams, this);
+	}
+
+	/**
+	 * Gets timeout
+	 * 특정 시간후에 이벤트 발생시키기
+	 *
+	 * @param [timeDelay]
+	 * @returns timeout
+	 */
+	 protected getTimeout(timeDelay: number = 50): Promise<void> {
+		return new Promise<void>((resolve) => {
+			window.setTimeout(() => {
+				resolve();
+			}, timeDelay);
+		});
+	}
+
+	/**
+	 * Replaces controls value
+	 * 
+	 * @param newValue 
+	 * @param key 
+	 * @param [parent] 
+	 * @param [reDraw] 
+	 */
+	protected replaceControlsValue(newValue : any,  key : string, parent : any = null, reDraw : boolean = true) {
+			if (parent === null) {
+				parent = this.controls;
+			}
+			if (parent[key] !== undefined) {
+				parent[key] = newValue;
+				if (reDraw) {
+					this.controlsParams = Object.assign([], this.controlsParams);
+				}
+			}
 	}
 
 	/**

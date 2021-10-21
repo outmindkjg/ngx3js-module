@@ -24,3 +24,4 @@ copyFile('meshopt_decoder.module.d.ts','@types/three/examples/jsm/libs/meshopt_d
 copyFile('AmmoPhysics.d.ts','@types/three/examples/jsm/physics/AmmoPhysics.d.ts');
 copyFile('OimoPhysics.d.ts','@types/three/examples/jsm/physics/OimoPhysics.d.ts');
 
+

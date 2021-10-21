@@ -33,7 +33,7 @@ import { KTXLoader } from 'three/examples/jsm/loaders/KTXLoader';
 import { LDrawLoader } from 'three/examples/jsm/loaders/LDrawLoader';
 import { LottieLoader } from 'three/examples/jsm/loaders/LottieLoader';
 import { LUT3dlLoader } from 'three/examples/jsm/loaders/LUT3dlLoader';
-import { LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader';
+import { LUTCubeLoader, LUTCubeResult } from 'three/examples/jsm/loaders/LUTCubeLoader';
 import { LWO, LWOLoader } from 'three/examples/jsm/loaders/LWOLoader';
 import { MD2Loader } from 'three/examples/jsm/loaders/MD2Loader';
 import { MDD, MDDLoader } from 'three/examples/jsm/loaders/MDDLoader';
@@ -55,7 +55,7 @@ import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import { SVGLoader, SVGResult } from 'three/examples/jsm/loaders/SVGLoader';
 import { TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
 import { TGALoader } from 'three/examples/jsm/loaders/TGALoader';
-import * as TILT from 'three/examples/jsm/loaders/TiltLoader';
+import { TiltLoader } from './threejs-library/TiltLoader';
 import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
 import {
 	Chunk,
@@ -71,7 +71,7 @@ import { MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex
 import { Volume } from 'three/examples/jsm/misc/Volume';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
-import { LoadedNameMap, LoadedObject, ThreeUtil } from './interface';
+import { LoadedNameMap, LoadedObject, ThreeUtil, StorageOption, StorageExportOption } from './interface';
 
 /**
  * LocalStorageService
@@ -325,7 +325,7 @@ export class LocalStorageService {
 	/**
 	 * Tilt loader of local storage service
 	 */
-	private tiltLoader: TILT.TiltLoader = null;
+	private tiltLoader: TiltLoader = null;
 
 	/**
 	 * Rgbm loader of local storage service
@@ -468,7 +468,7 @@ export class LocalStorageService {
 	public getExportObject(
 		fileName: string,
 		object: THREE.Object3D | THREE.Object3D[],
-		options?: any
+		options?: StorageExportOption
 	) {
 		if (object instanceof THREE.Object3D) {
 			object.traverse((child) => {
@@ -671,7 +671,7 @@ export class LocalStorageService {
 	private getObjectFromKey(
 		key: string,
 		callBack: (mesh: LoadedObject) => void,
-		options: any
+		options: StorageOption
 	): void {
 		options = options || {};
 		let safeKey = '';
@@ -765,7 +765,7 @@ export class LocalStorageService {
 	 * @param options
 	 * @returns
 	 */
-	public setLoaderWithOption(loader: THREE.Loader, options: any) {
+	public setLoaderWithOption(loader: THREE.Loader, options: StorageOption) {
 		if (ThreeUtil.isNotNull(options)) {
 			if (ThreeUtil.isNotNull(loader.setResourcePath)) {
 				if (ThreeUtil.isNotNull(options.resourcePath)) {
@@ -800,7 +800,7 @@ export class LocalStorageService {
 	private _getObjectFromKey(
 		key: string,
 		callBack: (mesh: LoadedObject) => void,
-		options: any
+		options: StorageOption
 	): void {
 		if (key.endsWith('.dae')) {
 			if (this.colladaLoader === null) {
@@ -890,7 +890,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.tilt')) {
 			if (this.tiltLoader === null) {
-				this.tiltLoader = new TILT.TiltLoader(ThreeUtil.getLoadingManager());
+				this.tiltLoader = new TiltLoader(ThreeUtil.getLoadingManager(), ThreeUtil.getStoreUrl(''));
 			}
 			this.setLoaderWithOption(this.tiltLoader, options);
 			this.tiltLoader.load(
@@ -1009,8 +1009,6 @@ export class LocalStorageService {
 		} else if (key.endsWith('.ifc')) {
 			if (this.ifcLoader === null) {
 				this.ifcLoader = new IFCLoader(ThreeUtil.getLoadingManager());
-			}
-			if (options.useWasm) {
 				this.ifcLoader.ifcManager.setWasmPath(ThreeUtil.getStoreUrl('jsm/loaders/ifc/'));
 			}
 			this.setLoaderWithOption(this.ifcLoader, options);
@@ -1028,23 +1026,24 @@ export class LocalStorageService {
 		} else if (key.endsWith('.ktx2')) {
 			if (this.ktx2Loader === null) {
 				this.ktx2Loader = new KTX2Loader(ThreeUtil.getLoadingManager());
-				this.ktx2Loader.detectSupport(new THREE.WebGLRenderer());
 				this.ktx2Loader.setTranscoderPath(
 					ThreeUtil.getStoreUrl('js/libs/basis/')
 				);
+				this.ktx2Loader.detectSupport(
+					ThreeUtil.getRenderer() as THREE.WebGLRenderer
+				);
 			}
 			this.setLoaderWithOption(this.ktx2Loader, options);
-			this.ktx2Loader.load(
-				key,
-				(texture: THREE.CompressedTexture) => {
+			try {
+				this.ktx2Loader.loadAsync(key, this.onProgress).then((texture: THREE.CompressedTexture) => {
 					callBack({
 						texture: texture,
 						source: texture,
 					});
-				},
-				this.onProgress,
-				this.onError
-			);
+				})
+			} catch (ex) {
+				this.onError(ex);
+			}
 		} else if (key.endsWith('.dds')) {
 			if (this.ddsLoader === null) {
 				this.ddsLoader = new DDSLoader(ThreeUtil.getLoadingManager());
@@ -1222,12 +1221,8 @@ export class LocalStorageService {
 				this.basisTextureLoader = new BasisTextureLoader(
 					ThreeUtil.getLoadingManager()
 				);
+				this.basisTextureLoader.setTranscoderPath( ThreeUtil.getStoreUrl('js/libs/basis/'));
 				this.basisTextureLoader.detectSupport(new THREE.WebGLRenderer());
-			}
-			if (options.transcoderPath) {
-				this.basisTextureLoader.setTranscoderPath(
-					ThreeUtil.getStoreUrl(options.transcoderPath)
-				);
 			}
 			this.setLoaderWithOption(this.basisTextureLoader, options);
 			this.basisTextureLoader.load(
@@ -1269,10 +1264,8 @@ export class LocalStorageService {
 				if (options.useDraco) {
 					if (this.dracoLoader === null) {
 						this.dracoLoader = new DRACOLoader(ThreeUtil.getLoadingManager());
-					}
-					if (options.decoderPath) {
 						this.dracoLoader.setDecoderPath(
-							ThreeUtil.getStoreUrl(options.decoderPath)
+							ThreeUtil.getStoreUrl('js/libs/draco/')
 						);
 					}
 					this.gltfLoader.setDRACOLoader(this.dracoLoader);
@@ -1610,7 +1603,7 @@ export class LocalStorageService {
 						source: character,
 					});
 				};
-				character.loadParts(options);
+				character.loadParts(options as any);
 			} else if (optionType === 'md2charactercomplex') {
 				const character = new MD2CharacterComplex();
 				options.baseUrl = ThreeUtil.getStoreUrl(options.baseUrl);
@@ -1779,6 +1772,22 @@ export class LocalStorageService {
 				this.onProgress,
 				this.onError
 			);
+		} else if (key.endsWith('.CUBE') || key.endsWith('.cube')) {
+			if (this.lutCubeLoader === null) {
+				this.lutCubeLoader = new LUTCubeLoader(ThreeUtil.getLoadingManager());
+			}
+			this.setLoaderWithOption(this.lutCubeLoader, options);
+			this.lutCubeLoader.load(
+				key,
+				(result: LUTCubeResult) => {
+					callBack({
+						texture: result.texture,
+						source: result,
+					});
+				},
+				this.onProgress,
+				this.onError
+			)
 		} else if (key.endsWith('.vrm')) {
 			if (this.vrmLoader === null) {
 				this.vrmLoader = new VRMLoader(ThreeUtil.getLoadingManager());
@@ -1861,20 +1870,21 @@ export class LocalStorageService {
 								this.lottieLoader.setQuality(options.quality);
 							}
 							this.setLoaderWithOption(this.lottieLoader, options);
-							this.lottieLoader.load(
-								key,
-								(texture: any) => {
-									callBack({
-										texture: texture,
-										source: texture,
-									});
-									window.setTimeout(() => {
-										texture['animation'].play();
-									}, 1000);
-								},
-								this.onProgress,
-								this.onError
-							);
+							if ((window as any).bodymovin === undefined) {
+								console.log('script required "node_modules/three/examples/js/libs/lottie_canvas.js"');
+							} else {
+								this.lottieLoader.load(
+									key,
+									(texture: any) => {
+										callBack({
+											texture: texture,
+											source: texture,
+										});
+									},
+									this.onProgress,
+									this.onError
+								);
+							}
 							break;
 						default:
 							if (this.objectLoader === null) {
@@ -1939,7 +1949,7 @@ export class LocalStorageService {
 			morphTargets?: any,
 			source?: any
 		) => void,
-		options?: any
+		options?: StorageOption
 	): void {
 		this.getObjectFromKey(
 			key,
@@ -1977,7 +1987,7 @@ export class LocalStorageService {
 	public getGeometry(
 		key: string,
 		callBack: (mesh: THREE.BufferGeometry, source?: any) => void,
-		options?: any
+		options?: StorageOption
 	): void {
 		this.getObjectFromKey(
 			key,
@@ -2008,7 +2018,7 @@ export class LocalStorageService {
 	public getTexture(
 		key: string,
 		callBack: (texture: THREE.Texture, source?: any) => void,
-		options?: any
+		options?: StorageOption
 	): void {
 		this.getObjectFromKey(
 			key,
@@ -2038,7 +2048,7 @@ export class LocalStorageService {
 	public getMaterial(
 		key: string,
 		callBack: (material: THREE.Material, source?: any) => void,
-		options?: any
+		options?: StorageOption
 	): void {
 		this.getObjectFromKey(
 			key,
@@ -2073,7 +2083,7 @@ export class LocalStorageService {
 	public getScene(
 		key: string,
 		callBack: (mesh: THREE.Scene, source?: any) => void,
-		options?: any
+		options?: StorageOption
 	): void {
 		this.getObjectFromKey(
 			key,
