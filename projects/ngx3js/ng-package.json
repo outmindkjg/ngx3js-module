@@ -224,6 +224,9 @@
       "three/examples/jsm/misc/GPUComputationRenderer" : "GPUComputationRenderer",
       "three/examples/jsm/utils/GeometryUtils" : "GeometryUtils",
       "three/examples/jsm/utils/UVsDebug" : "UVsDebug",
+      "three/examples/jsm/libs/meshopt_decoder.module" : "meshopt_decoder_module",
+      "three/examples/jsm/loaders/IFCLoader" : "IFCLoader",
+      "three/examples/jsm/physics/OimoPhysics" : "OimoPhysics",
       "ammojs-typed": "Ammo",
       "chart.js": "CHARTJS",
       "gsap": "GSAP"
