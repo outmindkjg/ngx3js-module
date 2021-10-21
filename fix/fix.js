@@ -12,7 +12,6 @@ function copyFile(soruce, target) {
 }
 
 copyFile('ColorNode.d.ts','@types/three/examples/jsm/nodes/inputs/ColorNode.d.ts');
-copyFile('dat.gui.module.d.ts','@types/three/examples/jsm/libs/dat.gui.module.d.ts');
 copyFile('fflate.module.d.ts','@types/three/examples/jsm/libs/fflate.module.d.ts');
 copyFile('GeometryCompressionUtils.d.ts', '@types/three/examples/jsm/utils/GeometryCompressionUtils.d.ts');
 copyFile('GeometryUtils.d.ts', '@types/three/examples/jsm/utils/GeometryUtils.d.ts');
