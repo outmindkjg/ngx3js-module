@@ -378,10 +378,14 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	 */
 	constructor(
 		@Inject('') controls: T,
-		@Inject('') controlsParams: GuiControlParam[] = []
+		@Inject('') controlsParams: GuiControlParam[] = [],
+		@Inject('') clearConsole: boolean = true,
 	) {
 		this.controls = ThreeUtil.getControls(controls, this);
 		this.setControlsParams(controlsParams);
+		if (clearConsole) {
+			console.clear();
+		}
 	}
 
 	/**
@@ -1415,6 +1419,17 @@ export class ThreeUtil {
 	}
 
 	/**
+	 * Sets loading process
+	 * 
+	 * @param url 
+	 * @param loaded 
+	 * @param total 
+	 */
+	public static setLoadingProcess(url: string, loaded: number, total: number) {
+		console.log('Loaded %c%d%c/%d => %c%s', 'font-weight:bold', loaded, '', total, 'font-style:italic', url);
+	}
+
+	/**
 	 * Manager  of three util
 	 */
 	private static _manager: THREE.LoadingManager = null;
@@ -1426,11 +1441,9 @@ export class ThreeUtil {
 	public static getLoadingManager(): THREE.LoadingManager {
 		if (this._manager === null) {
 			this._manager = new THREE.LoadingManager(
-				() => {
-					console.log('loaded');
-				},
+				() => {},
 				(url: string, loaded: number, total: number) => {
-					console.log(url, loaded, total);
+					this.setLoadingProcess(url, loaded, total);
 				},
 				(url: string) => {
 					console.error(url);

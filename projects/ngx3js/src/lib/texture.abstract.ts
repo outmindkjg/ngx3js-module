@@ -44,6 +44,14 @@ export abstract class AbstractTextureComponent
 
 	/**
 	 * The LoadType of Texture - video, image etc
+	 *  hdrcube, hdrcubetexture - 
+	 *  rgbm, rgbmtexture
+	 *  auto
+	 *  video
+	 *  imagebitmap
+	 *  image
+	 *  texture, texture2d, texture3d
+	 *  datatexture, datatexture2d, datatexture3d
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -382,6 +390,16 @@ export abstract class AbstractTextureComponent
 	@Input() public height: number = null;
 
 	/**
+	 * Input  of abstract texture component
+	 */
+	 @Input() public depth: number = null;
+
+	/**
+	 * Input  of abstract texture component
+	 */
+	 @Input() public scale: number = null;
+
+	/**
 	 * Whether to generate mipmaps (if possible) for a texture. True by default. Set this to false if you are
 	 * creating mipmaps manually.
 	 */
@@ -584,8 +602,11 @@ export abstract class AbstractTextureComponent
 			cubeImage,
 			program,
 			{
+				size : this.width || this.height || this.depth,
 				width: this.width,
 				height: this.height,
+				depth: this.depth,
+				scale : this.scale,
 				type: this.loaderType,
 				text: this.text,
 				programParam: this.programParam,
@@ -613,8 +634,11 @@ export abstract class AbstractTextureComponent
 		onLoad?: () => void
 	): THREE.Texture {
 		const loadOption: { [key: string]: any } = {
-			width: 10,
-			height: 10,
+			size : null,
+			width: null,
+			height: null,
+			depth : null,
+			scale : null,
 			type: loaderType,
 		};
 		const textureOption: { [key: string]: any } = {};
@@ -813,7 +837,7 @@ export abstract class AbstractTextureComponent
 							const [key, value] = option.split('=');
 							switch (key.toLowerCase()) {
 								case 'size':
-									const [width, height, depth] = (option + 'xxx').split('x');
+									const [width, height, depth] = (value + 'xxx').split('x');
 									loadOption.width = parseInt(width);
 									loadOption.height = parseInt(height) || loadOption.width;
 									loadOption.depth = parseInt(depth) || loadOption.width;
@@ -821,7 +845,8 @@ export abstract class AbstractTextureComponent
 								case 'width':
 								case 'height':
 								case 'depth':
-									loadOption[key.toLowerCase()] = parseInt(value);
+								case 'scale':
+										loadOption[key.toLowerCase()] = parseInt(value);
 									break;
 								case 'sigma':
 								case 'near':
@@ -1126,7 +1151,7 @@ export abstract class AbstractTextureComponent
 							case 'datatexture3d':
 								return TextureUtils.dataTexture(image, () => {
 									onLoad();
-								});
+								}, options);
 							default:
 								if (this.textureLoader === null) {
 									this.textureLoader = new THREE.TextureLoader(

@@ -11,7 +11,6 @@ export type CanvasFunctionType = (
 ) => void;
 
 export type DataFunctionType = (
-	scale?: number,
 	options?: any
 ) => THREE.DataTexture | THREE.DataTexture3D;
 
@@ -374,11 +373,11 @@ export const CanvasConf: {
 };
 
 export const DataTextureConf: { [key: string]: DataFunctionType } = {
-	cloud: (size: number = 128) => {
-		size = size | 128;
+	cloud: (options: any) => {
+		const size = options?.size ||  options?.width ||  options?.height || 128;
 		const data = new Uint8Array(size * size * size);
 		let i = 0;
-		const scale = 0.05;
+		const scale = options?.scale || 0.05;
 		const perlin = new ImprovedNoise();
 		const vector = new THREE.Vector3();
 		for (let z = 0; z < size; z++) {
@@ -408,8 +407,8 @@ export const DataTextureConf: { [key: string]: DataFunctionType } = {
 		texture.unpackAlignment = 1;
 		return texture;
 	},
-	perlin: (size: number = 128) => {
-		size = size | 128;
+	perlin: (options: any) => {
+		const size = options?.size || 128;
 		const data = new Uint8Array(size * size * size);
 		let i = 0;
 		const perlin = new ImprovedNoise();
@@ -434,6 +433,41 @@ export const DataTextureConf: { [key: string]: DataFunctionType } = {
 		texture.unpackAlignment = 1;
 		return texture;
 	},
+	datatexture3d: (options: any) => {
+		const size = options?.size || 128;
+		const width = options?.width || size;
+		const height = options?.height || size;
+		const depth = options?.depth || size;
+		const texture = new THREE.DataTexture3D(
+			new Uint8Array(width * height * depth).fill(0),
+			width,
+			height,
+			depth
+		);
+		texture.format = THREE.RedFormat;
+		texture.minFilter = THREE.LinearFilter;
+		texture.magFilter = THREE.LinearFilter;
+		texture.unpackAlignment = 1;
+		return texture;
+	},
+	datatexture: (options: any) => {
+		const size = options?.size || 10;
+		const width = options?.width || size;
+		const height = options?.height || size;
+		const texture = new THREE.DataTexture(
+			new Uint8Array(width * height).fill(0),
+			width,
+			height,
+		);
+		texture.format = THREE.RedFormat;
+		texture.minFilter = THREE.LinearFilter;
+		texture.magFilter = THREE.LinearFilter;
+		texture.unpackAlignment = 1;
+		return texture;
+	},
+	datatexture2d: (options: any) => {
+		return DataTextureConf.datatexture(options);
+	}
 };
 
 /**
@@ -544,14 +578,16 @@ export class TextureUtils {
 	 * Datas texture
 	 * @param value
 	 * @param [onload]
+	 * @param [options]
 	 * @returns texture
 	 */
 	public static dataTexture(
 		value: any,
-		onload?: () => void
+		onload?: () => void,
+		options?: any
 	): THREE.DataTexture | THREE.DataTexture3D {
 		const dataProgram = this.getDataTexture(value);
-		const texture = dataProgram(value);
+		const texture = dataProgram(options);
 		window.setTimeout(() => {
 			if (onload) {
 				onload();

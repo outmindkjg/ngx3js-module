@@ -174,7 +174,7 @@ export class RendererComponent
 	/**
 	 * whether to perform alpha. Default is *false*.
 	 */
-	 @Input() public alpha: boolean = false;
+	@Input() public alpha: boolean = false;
 
 	/**
 	 * The quality of SVGRenderer
@@ -495,7 +495,18 @@ export class RendererComponent
 	 */
 	constructor() {
 		super();
-		console.clear();
+		console.log(
+			[
+				'    __     __',
+				' __/ __\\  / __\\__   ____   _____   _____',
+				'/ __/  /\\/ /  /___\\/ ____\\/ _____\\/ _____\\  with %cNGX3js%c',
+				'\\/_   __/ /   _   / /  __/ / __  / / __  /_   __   _____',
+				'/ /  / / /  / /  / /  / / /  ___/ /  ___/\\ _\\/ __\\/ _____\\',
+				'\\/__/  \\/__/\\/__/\\/__/  \\/_____/\\/_____/\\/__/ /  / /  ___/',
+				'                                         / __/  /  \\__  \\',
+				'                                         \\/____/\\/_____/',
+			].join('\n')
+		, 'color:red;font-style:italic;text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;','');
 	}
 
 	/**
@@ -607,6 +618,9 @@ export class RendererComponent
 						case 'compressed':
 							errorCode = 'WEBGL_compressed_texture_pvrtc';
 							break;
+						case 'depth' :
+							errorCode = 'WEBGL_depth_texture';
+							break;
 						default:
 							errorCode = extension;
 							break;
@@ -676,6 +690,8 @@ export class RendererComponent
 			}
 			case 'compressed':
 				return this.isHasExtension('WEBGL_compressed_texture_pvrtc');
+			case 'depth':
+				return this.isHasExtension('WEBGL_depth_texture');
 		}
 		return true;
 	}
@@ -906,10 +922,12 @@ export class RendererComponent
 				case 'keydown':
 				case 'keyup':
 				case 'keypress':
-					window.addEventListener(type, listener, { passive:true });
+					window.addEventListener(type, listener, { passive: true });
 					break;
 				default:
-					this.rendererEle.nativeElement.addEventListener(type, listener, { passive:true });
+					this.rendererEle.nativeElement.addEventListener(type, listener, {
+						passive: true,
+					});
 					break;
 			}
 		}
@@ -1173,12 +1191,16 @@ export class RendererComponent
 		const button = document.createElement('button');
 		button.className = 'message-button';
 		button.innerHTML = '<b>Re</b>try';
-		button.addEventListener('click', () => {
-			confirm.parentNode.removeChild(confirm);
-			this._lastConfirmHtml = null;
-			this._userGestureShown = false;
-			this._userGestureSubject.next(true);
-		},{passive: true});
+		button.addEventListener(
+			'click',
+			() => {
+				confirm.parentNode.removeChild(confirm);
+				this._lastConfirmHtml = null;
+				this._userGestureShown = false;
+				this._userGestureSubject.next(true);
+			},
+			{ passive: true }
+		);
 		if (ThreeUtil.isNotNull(ele)) {
 			const message = document.createElement('div');
 			message.className = 'message';
@@ -2182,41 +2204,49 @@ export class RendererComponent
 				});
 				const canvasImage: HTMLImageElement = document.createElement('img');
 				canvasImage.src = this.renderer.domElement.toDataURL('png');
-				canvasImage.addEventListener('load', () => {
-					let sx: number = 0;
-					let sy: number = 0;
-					let sw: number = 0;
-					let sh: number = 0;
-					const canvasImageRate =
-						canvasImage.naturalWidth / canvasImage.naturalHeight;
-					const thumbRate = options.width / options.height;
-					if (canvasImageRate > thumbRate) {
-						sw = canvasImage.naturalHeight * thumbRate;
-						sh = canvasImage.naturalHeight;
-						sx = (canvasImage.naturalWidth - sw) / 2;
-					} else {
-						sh = canvasImage.naturalWidth / thumbRate;
-						sw = canvasImage.naturalWidth;
-						sy = (canvasImage.naturalHeight - sh) / 2;
-					}
-					let dx: number = 0;
-					let dy: number = 0;
-					let dw: number = options.width;
-					let dh: number = options.height;
-					context.drawImage(canvasImage, sx, sy, sw, sh, dx, dy, dw, dh);
-					resultJson.content = canvas.toDataURL(imageType);
-					if (ThreeUtil.isNotNull(options.name)) {
-						this.getDownloadFile(resultJson);
-					} else {
-						const blob = this.dataURLtoBlob(resultJson.content);
-						resultJson.size = blob.size;
-					}
-					this._isPaused = false;
-					callback(resultJson);
-				},{passive: true});
-				canvasImage.addEventListener('error', () => {
-					this._isPaused = false;
-				},{passive: true});
+				canvasImage.addEventListener(
+					'load',
+					() => {
+						let sx: number = 0;
+						let sy: number = 0;
+						let sw: number = 0;
+						let sh: number = 0;
+						const canvasImageRate =
+							canvasImage.naturalWidth / canvasImage.naturalHeight;
+						const thumbRate = options.width / options.height;
+						if (canvasImageRate > thumbRate) {
+							sw = canvasImage.naturalHeight * thumbRate;
+							sh = canvasImage.naturalHeight;
+							sx = (canvasImage.naturalWidth - sw) / 2;
+						} else {
+							sh = canvasImage.naturalWidth / thumbRate;
+							sw = canvasImage.naturalWidth;
+							sy = (canvasImage.naturalHeight - sh) / 2;
+						}
+						let dx: number = 0;
+						let dy: number = 0;
+						let dw: number = options.width;
+						let dh: number = options.height;
+						context.drawImage(canvasImage, sx, sy, sw, sh, dx, dy, dw, dh);
+						resultJson.content = canvas.toDataURL(imageType);
+						if (ThreeUtil.isNotNull(options.name)) {
+							this.getDownloadFile(resultJson);
+						} else {
+							const blob = this.dataURLtoBlob(resultJson.content);
+							resultJson.size = blob.size;
+						}
+						this._isPaused = false;
+						callback(resultJson);
+					},
+					{ passive: true }
+				);
+				canvasImage.addEventListener(
+					'error',
+					() => {
+						this._isPaused = false;
+					},
+					{ passive: true }
+				);
 			} else {
 				resultJson.content = this.renderer.domElement.toDataURL(imageType);
 				if (ThreeUtil.isNotNull(options.name)) {

@@ -1182,10 +1182,9 @@ var dom = {
 
 		var bool = newBool || false;
 		if ( elem.addEventListener ) {
-
 			elem.addEventListener( event, func,  {
 				capture : bool,
-				passive : true
+				passive : false
 			});
 
 		} else if ( elem.attachEvent ) {
@@ -2589,7 +2588,6 @@ var GUI = function GUI( pars ) {
 		dom.addClass( titleRowName, 'controller-name' );
 		titleRow = addRow( _this, titleRowName );
 		var onClickTitle = function onClickTitle( e ) {
-
 			e.preventDefault();
 			_this.closed = ! _this.closed;
 			return false;

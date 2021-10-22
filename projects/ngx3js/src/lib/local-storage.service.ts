@@ -347,8 +347,6 @@ export class LocalStorageService {
 	 */
 	private vrmLoader: VRMLoader = null;
 
-	// private xLoader: XLoader = null;
-
 	/**
 	 * Xyz loader of local storage service
 	 */
@@ -1498,24 +1496,6 @@ export class LocalStorageService {
 				this.onProgress,
 				this.onError
 			);
-		} else if (key.endsWith('.x')) {
-			/*
-      if (this.xLoader === null) {
-        this.xLoader = new XLoader(ThreeUtil.getLoadingManager());
-      }
-      this.setLoaderWithOption(this.xLoader, options);
-      this.xLoader.load(
-        key,
-        (object: XResult) => {
-          callBack({
-            object: object.models[0],
-            source: object,
-          });
-        },
-        this.onProgress,
-        this.onError
-      );
-      */
 		} else if (key.endsWith('.mdd')) {
 			if (this.mddLoader === null) {
 				this.mddLoader = new MDDLoader(ThreeUtil.getLoadingManager());

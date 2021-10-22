@@ -1322,7 +1322,6 @@ export abstract class AbstractObject3dComponent
 					case 'object3d':
 						this.unSubscribeReferList('object3dList');
 						if (ThreeUtil.isNotNull(this.object3dList)) {
-							this.consoleLog('object3d', this.object3dList.length, 'info');
 							this.object3dList.forEach((object3d) => {
 								object3d.setParent(this.object3d);
 							});
