@@ -378,7 +378,6 @@ export abstract class AbstractObject3dComponent
 		'customdepthmaterial',
 		'customdistancematerial',
 		'material',
-		'helper',
 		'lodistance',
 		'helper',
 		'mixer',

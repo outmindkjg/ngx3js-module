@@ -14,15 +14,17 @@ export const ShaderDemo9 = {
 	fragmentShader: `
   uniform vec3 color;
   uniform sampler2D pointTexture;
+  uniform float alphaTest;
   varying vec3 vColor;
   void main() {
     gl_FragColor = vec4( color * vColor, 1.0 );
     gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
-    if ( gl_FragColor.a < ALPHATEST ) discard;
+    if ( gl_FragColor.a < alphaTest ) discard;
   }
   `,
 	uniforms: {
 		color: { value: new THREE.Color(0xffffff) },
 		pointTexture: { value: null } as any,
+    alphaTest : { value : 0.9 }
 	},
 };
