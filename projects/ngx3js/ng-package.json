@@ -227,6 +227,9 @@
       "three/examples/jsm/libs/meshopt_decoder.module" : "meshopt_decoder_module",
       "three/examples/jsm/loaders/IFCLoader" : "IFCLoader",
       "three/examples/jsm/physics/OimoPhysics" : "OimoPhysics",
+      "three/examples/jsm/interactive/HTMLMesh" : "HTMLMesh",
+      "three/examples/jsm/interactive/InteractiveGroup" : "InteractiveGroup",
+      "three/examples/jsm/geometries/LightningStrike" : "LightningStrike",
       "ammojs-typed": "Ammo",
       "chart.js": "CHARTJS",
       "gsap": "GSAP"
