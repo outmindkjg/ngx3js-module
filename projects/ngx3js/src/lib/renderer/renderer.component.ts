@@ -71,6 +71,11 @@ export class RendererComponent
 	@Input() public type: string = 'webgl';
 
 	/**
+	 * Input  of renderer component
+	 */
+	@Input() public xrEnabled: boolean = false;
+
+	/**
 	 * The type of css renderer
 	 *
 	 * Notice - case insensitive.
@@ -230,6 +235,11 @@ export class RendererComponent
 	@Input() public statsMode: number = -1;
 
 	/**
+	 * The statsStyle of stats module
+	 */
+	 @Input() public statsStyle: any = null;
+
+	/**
 	 * Defines whether the renderer should automatically clear its output before rendering a frame.
 	 */
 	@Input() public autoClear: boolean = true;
@@ -274,6 +284,11 @@ export class RendererComponent
 	 */
 	@Input() public guiOpen: boolean = false;
 
+	/**
+	 * The guiStyle of GUI
+	 */
+	 @Input() public guiStyle: any = null;
+	 
 	/**
 	 * The guiOpen of GUI
 	 */
@@ -1743,7 +1758,7 @@ export class RendererComponent
 	/**
 	 * Gui  of renderer component
 	 */
-	private gui: ThreeGui = null;
+	public gui: ThreeGui = null;
 
 	/**
 	 * Clock  of renderer component
@@ -1849,11 +1864,11 @@ export class RendererComponent
 	 */
 	private getStats(): ThreeStats {
 		if (this.stats === null) {
-			this.stats = ThreeUtil.getStats({
+			this.stats = ThreeUtil.getStats(ThreeUtil.getTypeSafe(this.statsStyle,{
 				position: 'absolute',
 				left: '0px',
 				top: '0px',
-			});
+			}));
 			this.debugEle.nativeElement.appendChild(this.stats.dom);
 		}
 		return this.stats;
@@ -1865,12 +1880,12 @@ export class RendererComponent
 	 */
 	private getGui(): ThreeGui {
 		if (this.gui === null) {
-			this.gui = new ThreeGui({
+			this.gui = new ThreeGui(ThreeUtil.getTypeSafe(this.guiStyle,{
 				position: 'absolute',
 				marginRight: '0px',
 				right: '0px',
 				top: '0px',
-			});
+			}));
 			this.debugEle.nativeElement.appendChild(this.gui.domElement);
 		}
 		return this.gui;
@@ -1954,7 +1969,7 @@ export class RendererComponent
 						logarithmicDepthBuffer: this.logarithmicDepthBuffer,
 						preserveDrawingBuffer: this.preserveDrawingBuffer,
 					});
-					// webGLRenderer.xr.enabled = true;
+					webGLRenderer.xr.enabled = this.xrEnabled;
 					this.renderer = webGLRenderer;
 					break;
 			}

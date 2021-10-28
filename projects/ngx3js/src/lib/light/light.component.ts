@@ -203,9 +203,17 @@ export interface LightOptions extends Object3dOptions {
 	renderTarget?: any;
 }
 
+
+
+
 /**
  * LightComponent
- *
+ * ```html
+ * <ngx3js-light [type]="'PointLight'" [color]="'0x00ffff'" [intensity]="1" [distance]="5000" [decay]="2"></ngx3js-light>
+ * <ngx3js-light [type]="'Hemisphere'" [skyColor]="'0xffffff'" [groundColor]="'0x444444'" [intensity]="1"></ngx3js-light>
+ * <ngx3js-light [type]="'AmbientLight'" [color]="'0xffffff'" [intensity]="0.2" ></ngx3js-light>
+ * <ngx3js-light [type]="'DirectionalLight'" [color]="'0xffffff'" [intensity]="1"></ngx3js-light>
+ * ```
  * @see THREE.Light
  */
 @Component({

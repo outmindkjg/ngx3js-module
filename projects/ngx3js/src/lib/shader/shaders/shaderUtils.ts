@@ -409,6 +409,8 @@ export class ShaderUtils {
 				} else {
 					return shader;
 				}
+			} else if (THREE.ShaderLib[key] !== undefined) {
+				return THREE.ShaderLib[key];
 			} else {
 				console.error('unknown shader :' + key);
 				return {

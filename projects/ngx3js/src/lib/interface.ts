@@ -80,36 +80,84 @@ export interface TextureOption {
 	/** The resource path */
 	resourcePath? : string;
 
+	/**
+	 * Use Darco
+	 */
 	useDraco ? : boolean;
 
+	/**
+	 * Use Ktx2
+	 */
 	useKtx2? : boolean;
 
+	/**
+	 * vmdUrl 
+	 */
 	vmdUrl? : string | string[];
 
+	/**
+	 * ref object
+	 */
 	object? : THREE.SkinnedMesh | THREE.Camera | any;
 
+	/**
+	 * 
+	 */
 	drawFillShapes? : boolean;
 
+	/**
+	 * 
+	 */
 	drawStrokes? : boolean;
 	
+	/**
+	 * 
+	 */
 	fillShapesWireframe? : boolean;
 
+	/**
+	 * 
+	 */
 	strokesWireframe? : boolean;
 
+	/**
+	 * 
+	 */
 	type? : string;
 
+	/**
+	 * 
+	 */
 	baseUrl? : string;
 
+	/**
+	 * 
+	 */
 	body ? :  any;
 
+	/**
+	 * 
+	 */
 	cssType? : string;
 
+	/**
+	 * 
+	 */
 	geometry? : boolean;
 
+	/**
+	 * 
+	 */
 	loaderType? : string;
 
+	/**
+	 * 
+	 */
 	quality? : number;
 
+	/**
+	 * 
+	 */
 	dataType? : any;
 
  }

@@ -457,6 +457,13 @@ export class MaterialComponent
 	@Input() public metalness: number = null;
 
 	/**
+	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing
+	 * (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is
+	 * also provided, both values are multiplied.
+	 */
+	 @Input() public thickness: number = null;
+
+	/**
 	 * Scales the effect of the environment map by multiplying its color.
 	 */
 	@Input() public envMapIntensity: number = null;
@@ -3093,7 +3100,8 @@ export class MaterialComponent
 					case 'meshphysical':
 					case 'physicalmaterial':
 					case 'physical':
-						const parametersMeshPhysicalMaterial: THREE.MeshPhysicalMaterialParameters =
+						// const parametersMeshPhysicalMaterial: (THREE.MeshPhysicalMaterialParameters extends { thickness? : number }) =
+						const parametersMeshPhysicalMaterial: any =
 							{
 								color: this.getColor(),
 								roughness: ThreeUtil.getTypeSafe(this.roughness),
@@ -3146,6 +3154,7 @@ export class MaterialComponent
 								// ior: this.getIor(),
 								// sheen: this.getSheen(),
 								transmission: ThreeUtil.getTypeSafe(this.transmission),
+								thickness : ThreeUtil.getTypeSafe(this.thickness),
 								// transmissionMap: this.getTexture('transmissionMap')
 							};
 						material = new THREE.MeshPhysicalMaterial(

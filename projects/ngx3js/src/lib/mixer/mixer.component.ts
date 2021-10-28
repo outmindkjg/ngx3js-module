@@ -365,6 +365,10 @@ export class MixerComponent
 	 */
 	private clips: THREE.AnimationClip[] | any = null;
 
+	private oldLoaded : {
+		refTarget : any;
+		clips : any;
+	} = { refTarget : null , clips : null}
 	/**
 	 * Sets parent
 	 * @param parent
@@ -373,7 +377,14 @@ export class MixerComponent
 	public setParent(
 		parent: THREE.Object3D | THREE.AnimationObjectGroup
 	): boolean {
-		if (super.setParent(parent)) {
+		if (super.setParent(parent) || ( parent instanceof THREE.Object3D && ( this.oldLoaded.refTarget !== parent.userData.refTarget || this.oldLoaded.clips !== parent.userData.clips))) {
+			if (parent instanceof THREE.Object3D) {
+				this.oldLoaded.refTarget = parent.userData.refTarget;
+				this.oldLoaded.clips = parent.userData.clips;
+			} else {
+				this.oldLoaded.refTarget = null;
+				this.oldLoaded.clips = null;
+			}
 			this.unSubscribeRefer('mixerReset');
 			this.subscribeRefer(
 				'mixerReset',

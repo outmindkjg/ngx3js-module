@@ -1,3 +1,4 @@
+import { resolve } from 'dns';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
@@ -338,7 +339,9 @@ export class VirtualSession implements THREE.XRSession {
 	requestReferenceSpace(
 		type: THREE.XRReferenceSpaceType
 	): Promise<THREE.XRReferenceSpace> {
-		throw new Error('Method not implemented.');
+		return new Promise<THREE.XRReferenceSpace>((resolve) => {
+			resolve(null);
+		});
 	}
 
 	/**
@@ -347,7 +350,9 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns render state
 	 */
 	updateRenderState(renderStateInit: THREE.XRRenderStateInit): Promise<void> {
-		throw new Error('Method not implemented.');
+		return new Promise<void>((resolve) => {
+			resolve();
+		});
 	}
 
 	/**
@@ -356,23 +361,24 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns animation frame
 	 */
 	requestAnimationFrame(callback: THREE.XRFrameRequestCallback): number {
-		throw new Error('Method not implemented.');
+		return 0;
 	}
 
 	/**
 	 * Cancels animation frame
 	 * @param id
 	 */
-	cancelAnimationFrame(id: number): void {
-		throw new Error('Method not implemented.');
-	}
+	cancelAnimationFrame(id: number): void {}
 
 	/**
 	 * Ends virtual session
 	 * @returns end
 	 */
 	end(): Promise<void> {
-		throw new Error('Method not implemented.');
+		return new Promise<void>((resolve) => {
+			resolve();
+			this.dispatchEvent(new Event('end'))
+		});
 	}
 
 	/**
@@ -403,7 +409,9 @@ export class VirtualSession implements THREE.XRSession {
 	requestHitTestSource(
 		options: THREE.XRHitTestOptionsInit
 	): Promise<THREE.XRHitTestSource> {
-		throw new Error('Method not implemented.');
+		return new Promise<THREE.XRHitTestSource>((resolve) => {
+			resolve(null);
+		});
 	}
 
 	/**
@@ -414,7 +422,9 @@ export class VirtualSession implements THREE.XRSession {
 	requestHitTestSourceForTransientInput(
 		options: THREE.XRTransientInputHitTestOptionsInit
 	): Promise<THREE.XRTransientInputHitTestSource> {
-		throw new Error('Method not implemented.');
+		return new Promise<THREE.XRTransientInputHitTestSource>((resolve) => {
+			resolve(null);
+		});
 	}
 
 	/**
@@ -427,7 +437,9 @@ export class VirtualSession implements THREE.XRSession {
 		ray: THREE.XRRay,
 		referenceSpace: THREE.XRReferenceSpace
 	): Promise<THREE.XRHitResult[]> {
-		throw new Error('Method not implemented.');
+		return new Promise<THREE.XRHitResult[]>((resolve) => {
+			resolve([]);
+		});
 	}
 
 	/**
@@ -436,10 +448,9 @@ export class VirtualSession implements THREE.XRSession {
 	 */
 	updateWorldTrackingState(options: {
 		planeDetectionState?: { enabled: boolean };
-	}): void {
-		throw new Error('Method not implemented.');
-	}
+	}): void {}
 
+	private _listeners : { [key : string] : any[] } = {};
 	/**
 	 * Adds event listener
 	 * @param type
@@ -451,7 +462,20 @@ export class VirtualSession implements THREE.XRSession {
 		callback: EventListenerOrEventListenerObject,
 		options?: boolean | AddEventListenerOptions
 	): void {
-		throw new Error('Method not implemented.');
+		if ( this._listeners === undefined ) this._listeners = {};
+		const listeners = this._listeners;
+		if ( listeners[ type ] === undefined ) {
+			listeners[ type ] = [];
+		}
+		if ( listeners[ type ].indexOf( callback ) === - 1 ) {
+			listeners[ type ].push( callback );
+		}
+	}
+
+	hasEventListener( type : string, listener : any) {
+		if ( this._listeners === undefined ) return false;
+		const listeners = this._listeners;
+		return listeners[ type ] !== undefined && listeners[ type ].indexOf( listener ) !== - 1;
 	}
 
 	/**
@@ -460,7 +484,16 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns true if event
 	 */
 	dispatchEvent(event: Event): boolean {
-		throw new Error('Method not implemented.');
+		if ( this._listeners === undefined ) false;
+		const listeners = this._listeners;
+		const listenerArray = listeners[ event.type ];
+		if ( listenerArray !== undefined ) {
+			const array = listenerArray.slice( 0 );
+			for ( let i = 0, l = array.length; i < l; i ++ ) {
+				array[ i ].call( this, event );
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -471,10 +504,18 @@ export class VirtualSession implements THREE.XRSession {
 	 */
 	removeEventListener(
 		type: string,
-		callback: EventListenerOrEventListenerObject,
+		listener: EventListenerOrEventListenerObject,
 		options?: boolean | EventListenerOptions
 	): void {
-		throw new Error('Method not implemented.');
+		if ( this._listeners === undefined ) return;
+		const listeners = this._listeners;
+		const listenerArray = listeners[ type ];
+		if ( listenerArray !== undefined ) {
+			const index = listenerArray.indexOf( listener );
+			if ( index !== - 1 ) {
+				listenerArray.splice( index, 1 );
+			}
+		}		
 	}
 
 	/**
@@ -482,7 +523,7 @@ export class VirtualSession implements THREE.XRSession {
 	 * @param [eventName]
 	 */
 	removeAllListeners?(eventName?: string): void {
-		throw new Error('Method not implemented.');
+
 	}
 
 	/**
@@ -491,6 +532,6 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns listeners
 	 */
 	eventListeners?(eventName?: string): EventListenerOrEventListenerObject[] {
-		throw new Error('Method not implemented.');
+		return [];
 	}
 }

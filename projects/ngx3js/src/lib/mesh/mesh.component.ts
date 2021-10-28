@@ -5,9 +5,11 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
+import { HTMLMesh } from 'three/examples/jsm/interactive/HTMLMesh';
+import { InteractiveGroup } from 'three/examples/jsm/interactive/InteractiveGroup';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
@@ -20,13 +22,15 @@ import { Volume } from 'three/examples/jsm/misc/Volume';
 import { VolumeSlice } from 'three/examples/jsm/misc/VolumeSlice';
 import {
 	Flow,
-	InstancedFlow
+	InstancedFlow,
 } from 'three/examples/jsm/modifiers/CurveModifier';
 import {
 	Lensflare,
-	LensflareElement
+	LensflareElement,
 } from 'three/examples/jsm/objects/Lensflare';
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
+import { Reflector } from 'three/examples/jsm/objects/Reflector';
+import { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
 import { Refractor } from 'three/examples/jsm/objects/Refractor';
 import { Sky } from 'three/examples/jsm/objects/Sky';
@@ -35,13 +39,13 @@ import { Water as Water2 } from 'three/examples/jsm/objects/Water2';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import {
 	CSS3DObject,
-	CSS3DSprite
+	CSS3DSprite,
 } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
-import { createText } from 'three/examples/jsm/webxr/Text2D';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-import { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
+import * as SceneUtils from 'three/examples/jsm/utils/SceneUtils';
+import { createText } from 'three/examples/jsm/webxr/Text2D';
 import { CurveComponent } from '../curve/curve.component';
 import { HtmlComponent } from '../html/html.component';
 import { CssStyle, ThreeColor, ThreeUtil } from '../interface';
@@ -53,7 +57,6 @@ import { AbstractTextureComponent } from '../texture.abstract';
 import { HelperComponent, HelperOptions } from './../helper/helper.component';
 import { LightComponent, LightOptions } from './../light/light.component';
 import { LocalStorageService } from './../local-storage.service';
-import * as SceneUtils from 'three/examples/jsm/utils/SceneUtils';
 
 /**
  * Volume Options
@@ -145,6 +148,12 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @see HTMLSpanElement - span
 	 */
 	@Input() public cssTag: string | any = null;
+
+	/**
+	 * The domElement of CSS2DObject, CSS3DObject, HtmlMesh
+	 *
+	 */
+	@Input() public domElement: HTMLElement = null;
 
 	/**
 	 * The css style of CSS2DObject, CSS3DObject
@@ -537,6 +546,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * Input  of mesh component
 	 */
+	@Input() public sharedCamera: any = null;
+
+	/**
+	 * Input  of mesh component
+	 */
 	@Input() public moveAlongCurve: number = null;
 
 	/**
@@ -656,6 +670,9 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns css tag
 	 */
 	private getCssTag(): any {
+		if (ThreeUtil.isNotNull(this.domElement)) {
+			return this.domElement;
+		}
 		const cssTag = ThreeUtil.getTypeSafe(this.cssTag, 'div');
 		if (typeof cssTag === 'string') {
 			return document.createElement(cssTag);
@@ -1258,7 +1275,6 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					case 'multi':
 					case 'multimaterial':
 					case 'marchingcubes':
-					case 'md2charactercomplex':
 					case 'reflectorrtt':
 					case 'flow':
 					case 'instancedflow':
@@ -1628,6 +1644,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							break;
 					}
 					break;
+				case 'html':
+				case 'htmlmesh':
+					basemesh = new HTMLMesh(this.getCssTag());
+					break;
 				case 'svg':
 				case 'svgobject':
 				case 'css':
@@ -1668,12 +1688,13 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'reflector':
 					const reflectorSize = this.getTextureSize();
-					const reflector = new ReflectorForSSRPass(geometry, {
+					const reflector = new Reflector(geometry, {
 						color: this.getColor(),
 						textureWidth: reflectorSize.x,
 						textureHeight: reflectorSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
+						encoding: this.getEncoding(),
 					});
 					this.subscribeRefer(
 						'textureSize',
@@ -2257,6 +2278,22 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						);
 						loadShareParts();
 					}
+					break;
+				case 'interactive':
+				case 'interactivegroup':
+					const renderer = ThreeUtil.getRenderer() as THREE.WebGL1Renderer;
+					let camera: THREE.Camera = null;
+					if (ThreeUtil.isNotNull(this.sharedCamera)) {
+						if (this.sharedCamera.getCamera) {
+							camera = this.sharedCamera.getCamera();
+						} else if (this.sharedCamera instanceof THREE.Camera) {
+							camera = this.sharedCamera;
+						}
+					}
+					if (camera === null) {
+						camera = new THREE.Camera();
+					}
+					basemesh = new InteractiveGroup(renderer, camera);
 					break;
 				case 'group':
 					basemesh = new THREE.Group();
