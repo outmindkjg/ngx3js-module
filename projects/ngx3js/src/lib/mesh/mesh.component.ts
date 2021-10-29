@@ -2402,11 +2402,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						this.stormParams,
 						{}
 					);
-					if (ThreeUtil.isNull(stormParams.lightningParameters)) {
-						stormParams.lightningParameters = {};
-					}
 					if (ThreeUtil.isNotNull(this.rayParams)) {
-						Object.assign(stormParams.lightningParameters, this.rayParams);
+						stormParams.lightningParameters = Object.assign(this.rayParams, stormParams.lightningParameters || {});
 					}
 					const lightningMaterial = this.getMaterialOne(
 						{ color: 0xffffff },
