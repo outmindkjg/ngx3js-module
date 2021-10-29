@@ -21,6 +21,12 @@ import { TubePainter } from 'three/examples/jsm/misc/TubePainter';
 import { Volume } from 'three/examples/jsm/misc/Volume';
 import { VolumeSlice } from 'three/examples/jsm/misc/VolumeSlice';
 import {
+	LightningStorm,
+	StormParams,
+} from 'three/examples/jsm/objects/LightningStorm';
+import { RayParameters } from 'three/examples/jsm/geometries/LightningStrike';
+
+import {
 	Flow,
 	InstancedFlow,
 } from 'three/examples/jsm/modifiers/CurveModifier';
@@ -79,6 +85,92 @@ export interface VolumeOptions {
 
 /**
  * MeshComponent
+ *
+ * ```html
+ * <ngx3js-mesh [type]="'skybox'"
+ * 	[skyboxType]="'sun'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'HTMLMesh'"
+ * 	[domElement]="domElement"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'SVGObject'"
+ * 	[cssTag]="'div'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'CSS2DObject'"
+ * 	[cssTag]="'div'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'CSS3DSprite'"
+ * 	[cssTag]="'div'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Reflector'"
+ * 	[color]="'0x889999'"
+ * 	[clipBias]="0.003"
+ * 	[textureWidth]="1024"
+ * 	[textureWidth]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorRTT'"
+ * 	[color]="'0x889999'"
+ * 	[clipBias]="0.003"
+ * 	[textureWidth]="1024"
+ * 	[textureWidth]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Refractor'"
+ * 	[color]="'0x999999'"
+ * 	[textureWidth]="1024"
+ * 	[textureHeight]="1024"
+ * 	[shader]="'WaterRefraction'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorRTT'"
+ * 	[color]="'0x889999'"
+ * 	[clipBias]="0.003"
+ * 	[textureWidth]="1024"
+ * 	[textureWidth]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorForSSRPass'"
+ * 	[color]="'0x889999'"
+ * 	[clipBias]="0.003"
+ * 	[textureWidth]="1024"
+ * 	[textureWidth]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Water'"
+ * 	[sunColor]="'0xffffff'"
+ * 	[waterColor]="'0x001e0f'"
+ * 	[sunDirection]="sunDirection"
+ * 	[textureWidth]="512"
+ * 	[textureHeight]="512"
+ * 	[alpha]="alpha"
+ * 	[distortionScale]="distortionScale"
+ * 	[uniforms]="uniforms"
+ * ></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Water2'"
+ * 	[color]="'#ffffff'"
+ * 	[waterScale]="4"
+ * 	[reflectivity]="0.02"
+ * 	[flowDirectionX]="1"
+ * 	[flowDirectionY]="1"
+ * 	[textureWidth]="1024"
+ * 	[textureHeight]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Sky'"
+ * 	[uniforms]="{
+ * 		sunPosition: { type: 'v3', value: sunDirection },
+ * 		turbidity: { type: 'number', value: 10 },
+ * 		rayleigh: { type: 'number', value: 2 },
+ * 		mieCoefficient: { type: 'number', value: 0.005 },
+ * 		mieDirectionalG: { type: 'number', value: 0.8 }}"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Flow'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'InstancedFlow'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'LineLoop'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Light'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Lensflare'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'InstancedMesh'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'merged'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'naive'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'multimaterial'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Sprite'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Wireframe'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'LOD'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'MarchingCubes'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Points'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Line'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'TubePainter'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Text'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Line2'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'LineSegments'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'MD2CharacterComplex'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'InteractiveGroup'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Group'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Mesh'"></ngx3js-mesh>
+ * ```
  *
  * @see THREE.Mesh
  * @see THREE.Group
@@ -562,6 +654,15 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Input  of mesh component
 	 */
 	@Input() public colors: number[] | string = null;
+
+	@Input() public stormParams: StormParams = {
+		size: 1024,
+	};
+
+	/**
+	 * Input  of geometry component
+	 */
+	@Input() public rayParams: RayParameters = null;
 
 	/**
 	 * Content children of mesh component
@@ -2294,6 +2395,27 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						camera = new THREE.Camera();
 					}
 					basemesh = new InteractiveGroup(renderer, camera);
+					break;
+				case 'lightning':
+				case 'lightningstorm':
+					const stormParams: StormParams = ThreeUtil.getTypeSafe(
+						this.stormParams,
+						{}
+					);
+					if (ThreeUtil.isNull(stormParams.lightningParameters)) {
+						stormParams.lightningParameters = {};
+					}
+					if (ThreeUtil.isNotNull(this.rayParams)) {
+						Object.assign(stormParams.lightningParameters, this.rayParams);
+					}
+					const lightningMaterial = this.getMaterialOne(
+						{ color: 0xffffff },
+						false
+					);
+					if (ThreeUtil.isNotNull(lightningMaterial)) {
+						stormParams.lightningMaterial = lightningMaterial;
+					}
+					basemesh = new LightningStorm(stormParams) as any;
 					break;
 				case 'group':
 					basemesh = new THREE.Group();

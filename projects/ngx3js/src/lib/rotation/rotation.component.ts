@@ -5,6 +5,13 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * RotationComponent
+ * ```html
+ * <ngx3js-rotation 
+ * 	[x]="-90" 
+ * 	[y]="0" 
+ * 	[z]="0"
+ * 	[isRadian]="false"></ngx3js-rotation>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-rotation',

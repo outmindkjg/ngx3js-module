@@ -7,7 +7,7 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
@@ -20,7 +20,7 @@ import {
 	ThreeColor,
 	ThreeTexture,
 	ThreeUniforms,
-	ThreeUtil
+	ThreeUtil,
 } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractMaterialComponent } from '../material.abstract';
@@ -40,6 +40,123 @@ import { AbstractTextureComponent } from '../texture.abstract';
  * The following properties and methods are inherited by all other material types
  * (although they may have different defaults).
  *
+ * ```html
+ *
+ * <ngx3js-material
+ * 	[type]="'LineBasicMaterial'"
+ * 	[color]="'0xffff00'"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'LineDashedMaterial'"
+ * 	[color]="'blue'"
+ * 	[linewidth]="1"
+ * 	[dashSize]="10"
+ * 	[gapSize]="10"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'MeshBasicMaterial'"
+ * 	[color]="'0x000000'"
+ * 	[wireframe]="true"
+ * 	[wireframeLinewidth]="1"
+ * 	[side]="'double'"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[materialType]="'overrideMaterial'"
+ * 	[type]="'MeshDepthMaterial'"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'MeshDepth'"
+ * 	[depthPacking]="'RGBA'"
+ * 	[displacementMap]="displacementMap"
+ * 	[displacementScale]="2.436143"
+ * 	[displacementBias]="-0.428408"
+ * 	[side]="controls.side"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'MeshDistance'"
+ * 	[materialType]="'customdistance'"
+ * 	[alphaTest]="0.5"
+ * 	[alphaMap]="alphaMap"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'MeshMatcapMaterial'"
+ * 	[color]="'0xaa24df'"
+ * 	[matcap]="texture"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'MeshNormal'"
+ * 	[color]="'0xff0000'"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'MeshPhongMaterial'"
+ * 	[specular]="'0x333333'"
+ * 	[shininess]="5"
+ * 	[map]="'textures/planets/earth_atmos_2048.jpg'"
+ * 	[specularMap]="'textures/planets/earth_specular_2048.jpg'"
+ * 	[normalMap]="'textures/planets/earth_normal_2048.jpg'"
+ * 	[normalScale]="0.85"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'MeshPhysicalMaterial'"
+ * 	[roughness]="info.roughness"
+ * 	[metalness]="info.metalness"
+ * 	[color]="'0xffffff'"
+ * 	[envMap]="radianceMap"
+ * 	[envMapIntensity]="1"
+ * 	[reflectivity]="1"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	#sphereMaterial
+ * 	[type]="'MeshStandardMaterial'"
+ * 	[color]="'0x888855'"
+ * 	[roughness]="0.8"
+ * 	[metalness]="0.5"
+ * ></ngx3js-material>
+ * <ngx3js-material [type]="'MeshToonMaterial'" [color]="info.color"></ngx3js-texture>
+ * <ngx3js-material
+ * 	[type]="'PointsMaterial'"
+ * 	[color]="'0xffff00'"
+ * 	[size]="5"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'RawShaderMaterial'"
+ * 	[uniforms]="{
+ * 		time: { type: 'number', value: 1.0 },
+ * 		sineTime: { type: 'number', value: 1.0 }
+ * 	}"
+ * 	[shader]="'instancing'"
+ * 	[side]="'double'"
+ * 	[transparent]="true"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'ShaderMaterial'"
+ * 	[shader]="'audioVisualizer'"
+ * 	[uniforms]="{ tAudioData: { type: 'DataTexture', value: audio } }"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'ShadowMaterial'"
+ * 	[color]="'0x111111'"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'Line'"
+ * 	[color]="'0x4080ff'"
+ * 	[linewidth]="5"
+ * 	[dashed]="true"
+ * 	[dashScale]="5"
+ * 	[dashSize]="2"
+ * 	[gapSize]="3"
+ * 	[resolutionX]="1024"
+ * 	[resolutionY]="1024"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'SpriteMaterial'"
+ * 	[color]="info.color"
+ * ></ngx3js-material>
+ * <ngx3js-material
+ * 	[type]="'meshlambert'"
+ * 	[color]="'0xff0000'"
+ * ></ngx3js-material>
+ * ```
  * @see THREE.Material
  */
 @Component({
@@ -461,7 +578,7 @@ export class MaterialComponent
 	 * (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is
 	 * also provided, both values are multiplied.
 	 */
-	 @Input() public thickness: number = null;
+	@Input() public thickness: number = null;
 
 	/**
 	 * Scales the effect of the environment map by multiplying its color.
@@ -3101,62 +3218,55 @@ export class MaterialComponent
 					case 'physicalmaterial':
 					case 'physical':
 						// const parametersMeshPhysicalMaterial: (THREE.MeshPhysicalMaterialParameters extends { thickness? : number }) =
-						const parametersMeshPhysicalMaterial: any =
-							{
-								color: this.getColor(),
-								roughness: ThreeUtil.getTypeSafe(this.roughness),
-								metalness: ThreeUtil.getTypeSafe(this.metalness),
-								map: this.getTexture('map'),
-								lightMap: this.getTexture('lightMap'),
-								lightMapIntensity: ThreeUtil.getTypeSafe(
-									this.lightMapIntensity
-								),
-								aoMap: this.getTexture('aoMap'),
-								aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
-								emissive: this.getEmissive(),
-								emissiveIntensity: ThreeUtil.getTypeSafe(
-									this.emissiveIntensity
-								),
-								emissiveMap: this.getTexture('emissiveMap'),
-								bumpMap: this.getTexture('bumpMap'),
-								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
-								normalMap: this.getTexture('normalMap'),
-								normalMapType: this.getNormalMapType('tangentspace'),
-								normalScale: this.getNormalScale(),
-								displacementMap: this.getTexture('displacementMap'),
-								displacementScale: ThreeUtil.getTypeSafe(
-									this.displacementScale
-								),
-								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
-								roughnessMap: this.getTexture('roughnessMap'),
-								metalnessMap: this.getTexture('metalnessMap'),
-								alphaMap: this.getTexture('alphaMap'),
-								envMap: this.getTexture('envMap'),
-								envMapIntensity: ThreeUtil.getTypeSafe(this.envMapIntensity),
-								refractionRatio: ThreeUtil.getTypeSafe(this.refractionRatio),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
-									this.wireframeLinewidth
-								),
-								// skinning: this.getSkinning(),
-								// vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
-								clearcoat: ThreeUtil.getTypeSafe(this.clearcoat),
-								// clearcoatMap: this.getTexture('clearcoatMap'),
-								clearcoatRoughness: ThreeUtil.getTypeSafe(
-									this.clearcoatRoughness
-								),
-								// clearcoatRoughnessMap: this.getTexture('clearcoatRoughnessMap'),
-								clearcoatNormalScale: this.getClearcoatNormalScale(),
-								clearcoatNormalMap: this.getTexture('clearcoatNormalMap'),
-								reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
-								// ior: this.getIor(),
-								// sheen: this.getSheen(),
-								transmission: ThreeUtil.getTypeSafe(this.transmission),
-								thickness : ThreeUtil.getTypeSafe(this.thickness),
-								// transmissionMap: this.getTexture('transmissionMap')
-							};
+						const parametersMeshPhysicalMaterial: any = {
+							color: this.getColor(),
+							roughness: ThreeUtil.getTypeSafe(this.roughness),
+							metalness: ThreeUtil.getTypeSafe(this.metalness),
+							map: this.getTexture('map'),
+							lightMap: this.getTexture('lightMap'),
+							lightMapIntensity: ThreeUtil.getTypeSafe(this.lightMapIntensity),
+							aoMap: this.getTexture('aoMap'),
+							aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
+							emissive: this.getEmissive(),
+							emissiveIntensity: ThreeUtil.getTypeSafe(this.emissiveIntensity),
+							emissiveMap: this.getTexture('emissiveMap'),
+							bumpMap: this.getTexture('bumpMap'),
+							bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
+							normalMap: this.getTexture('normalMap'),
+							normalMapType: this.getNormalMapType('tangentspace'),
+							normalScale: this.getNormalScale(),
+							displacementMap: this.getTexture('displacementMap'),
+							displacementScale: ThreeUtil.getTypeSafe(this.displacementScale),
+							displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
+							roughnessMap: this.getTexture('roughnessMap'),
+							metalnessMap: this.getTexture('metalnessMap'),
+							alphaMap: this.getTexture('alphaMap'),
+							envMap: this.getTexture('envMap'),
+							envMapIntensity: ThreeUtil.getTypeSafe(this.envMapIntensity),
+							refractionRatio: ThreeUtil.getTypeSafe(this.refractionRatio),
+							wireframe: ThreeUtil.getTypeSafe(this.wireframe),
+							wireframeLinewidth: ThreeUtil.getTypeSafe(
+								this.wireframeLinewidth
+							),
+							// skinning: this.getSkinning(),
+							// vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
+							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							clearcoat: ThreeUtil.getTypeSafe(this.clearcoat),
+							// clearcoatMap: this.getTexture('clearcoatMap'),
+							clearcoatRoughness: ThreeUtil.getTypeSafe(
+								this.clearcoatRoughness
+							),
+							// clearcoatRoughnessMap: this.getTexture('clearcoatRoughnessMap'),
+							clearcoatNormalScale: this.getClearcoatNormalScale(),
+							clearcoatNormalMap: this.getTexture('clearcoatNormalMap'),
+							reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
+							// ior: this.getIor(),
+							// sheen: this.getSheen(),
+							transmission: ThreeUtil.getTypeSafe(this.transmission),
+							thickness: ThreeUtil.getTypeSafe(this.thickness),
+							// transmissionMap: this.getTexture('transmissionMap')
+						};
 						material = new THREE.MeshPhysicalMaterial(
 							this.getMaterialParameters(parametersMeshPhysicalMaterial)
 						);

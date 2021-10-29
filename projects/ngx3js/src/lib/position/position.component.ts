@@ -6,6 +6,16 @@ import { AbstractTweenComponent } from '../tween.abstract';
 
 /**
  * PositionComponent
+ * 
+ * ```html
+ * <ngx3js-position 
+ * 	[x]="0" 
+ * 	[y]="7.5" 
+ * 	[z]="0"
+ * 	[multiply]="10"
+ * 	[normalize]="false"
+ * ></ngx3js-position>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-position',
