@@ -571,6 +571,7 @@ export class ComposerComponent
 				renderer.autoClear = false;
 				renderer.clear();
 			}
+			
 			if (this.effectComposer instanceof EffectComposer) {
 				this.effectComposer.render(renderTimer.delta);
 			} else {
