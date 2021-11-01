@@ -3539,7 +3539,7 @@ export class MaterialComponent
 							);
 						} else {
 							if (ThreeUtil.isNotNull(this.color)) {
-								standardNodeMaterial.color = this.getColorNode(this.getColor());
+								meshStandardNodeMaterial.color = this.getColorNode(this.getColor());
 							}
 						}
 						if (ThreeUtil.isNotNull(this.roughness)) {
