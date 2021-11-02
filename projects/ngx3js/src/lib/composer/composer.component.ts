@@ -571,12 +571,13 @@ export class ComposerComponent
 				renderer.autoClear = false;
 				renderer.clear();
 			}
-			
+
 			if (this.effectComposer instanceof EffectComposer) {
 				this.effectComposer.render(renderTimer.delta);
 			} else {
 				this.effectComposer.render(this._composerScene, this._composerCamera);
 			}
+
 			if (this.scissorTest) {
 				renderer.setScissorTest(false);
 			}
@@ -593,7 +594,7 @@ export class ComposerComponent
 	 * @returns write buffer
 	 */
 	public getWriteBuffer(): THREE.WebGLRenderTarget {
-		return this.getComposer().writeBuffer;
+		return this.getComposer()?.writeBuffer;
 	}
 
 	/**
@@ -601,7 +602,7 @@ export class ComposerComponent
 	 * @returns read buffer
 	 */
 	public getReadBuffer(): THREE.WebGLRenderTarget {
-		return this.getComposer().readBuffer;
+		return this.getComposer()?.readBuffer;
 	}
 
 	/**
@@ -609,7 +610,7 @@ export class ComposerComponent
 	 * @returns render target1
 	 */
 	public getRenderTarget1(): THREE.WebGLRenderTarget {
-		return this.getComposer().renderTarget1;
+		return this.getComposer()?.renderTarget1;
 	}
 
 	/**
@@ -617,7 +618,7 @@ export class ComposerComponent
 	 * @returns render target2
 	 */
 	public getRenderTarget2(): THREE.WebGLRenderTarget {
-		return this.getComposer().renderTarget2;
+		return this.getComposer()?.renderTarget2;
 	}
 
 	/**
