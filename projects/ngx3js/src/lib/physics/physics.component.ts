@@ -17,6 +17,23 @@ import { OimoPhysics } from 'three/examples/jsm/physics/OimoPhysics';
 
 /**
  * PhysicsComponent
+ * 
+ * ```html
+ * <ngx3js-physics>
+ * </ngx3js-physics>
+ * <ngx3js-physics 
+ * 	[gravity]="-7.8"
+ * ></ngx3js-physics>
+ * <ngx3js-physics
+ * 	[type]="'oimo'"
+ * 	[gravity]="-9.8"
+ * ></ngx3js-physics>
+ * ```
+ * @see {@link http://google.com}
+ * 
+ * @see AmmoPhysics
+ * @see OimoPhysics
+ * @see Ammo
  */
 @Component({
 	selector: 'ngx3js-physics',

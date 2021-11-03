@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 function copyFile(soruce, target) {
-    fs.readFile(soruce, (err, content) => {
+    fs.readFile(soruce + '.tmp', (err, content) => {
         const planeContents = content.toString();
         fs.writeFile('../node_modules/' + target, planeContents, () => {});
         if (fs.existsSync('../dist/ngx3js/node_modules')) {

@@ -15,6 +15,7 @@
     "publish": "cd dist/ngx3js && npm publish",
     "watch": "ng build --watch --configuration development",
     "fixtype": "cd fix && node fix.js && cd ..",
+    "docs" : "npx typedoc --tsconfig tsconfig.json --json docs_api.json --pretty --excludeProtected --excludeExternals --excludePrivate projects/ngx3js/src/public-api.ts",
     "test": "ng test"
   },
   "dependencies": {
