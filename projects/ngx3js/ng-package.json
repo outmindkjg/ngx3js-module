@@ -230,6 +230,7 @@
       "three/examples/jsm/interactive/HTMLMesh" : "HTMLMesh",
       "three/examples/jsm/interactive/InteractiveGroup" : "InteractiveGroup",
       "three/examples/jsm/geometries/LightningStrike" : "LightningStrike",
+      "three/examples/jsm/objects/LightningStorm" : "LightningStorm",
       "ammojs-typed": "Ammo",
       "chart.js": "CHARTJS",
       "gsap": "GSAP"
