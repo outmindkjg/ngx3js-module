@@ -6,6 +6,50 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * KeyframeComponent
  *
+ * ```html
+ * <ngx3js-clip [duration]="3" [name]="'default'">
+ * 	<ngx3js-keyframe
+ * 		[type]="'quaternion'"
+ * 		[times]="[0, 1, 2]"
+ * 		[quaternions]="[
+ * 			{ x: 0, y: 0, z: 0 },
+ * 			{ x: 180, y: 0, z: 0 },
+ * 			{ x: 0, y: 0, z: 0 }
+ * 		]"
+ * 	></ngx3js-keyframe>
+ *	<ngx3js-keyframe
+ *		[type]="'position'"
+ *		[times]="[0, 1, 2]"
+ *		[vectors]="[0, 0, 0, 30, 0, 0, 0, 0, 0]"
+ *	></ngx3js-keyframe>
+ *	<ngx3js-keyframe
+ *		[type]="'scale'"
+ *		[times]="[0, 1, 2]"
+ *		[vectors]="[1, 1, 1, 2, 2, 2, 1, 1, 1]"
+ *	></ngx3js-keyframe>
+ *	<ngx3js-keyframe
+ *		[type]="'quaternion'"
+ *		[times]="[0, 1, 2]"
+ *		[quaternions]="[
+ *			{ x: 0, y: 0, z: 0 },
+ *			{ x: 180, y: 0, z: 0 },
+ *			{ x: 0, y: 0, z: 0 }
+ *		]"
+ *	></ngx3js-keyframe>
+ *	<ngx3js-keyframe
+ *		[type]="'color'"
+ *		[times]="[0, 1, 2]"
+ *		[colors]="['0xff0000', '0x00ff00', '0x0000ff']"
+ *		[interpolation]="'InterpolateDiscrete'"
+ *	></ngx3js-keyframe>
+ *	<ngx3js-keyframe
+ *		[type]="'opacity'"
+ *		[times]="[0, 1, 2]"
+ *		[values]="[1, 0, 1]"
+ *	></ngx3js-keyframe>
+ * </ngx3js-clip>
+ * ```
+ *
  * @see THREE.KeyframeTrack
  */
 @Component({

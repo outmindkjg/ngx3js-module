@@ -8,6 +8,15 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * An abstract base class for creating a [name] object that contains methods for interpolation.
  * For an array of [name]s see [page:CurvePath].
+ * 
+ * ```html
+ * <ngx3js-curve
+ * 	[type]="'catmullrom'"
+ * 	[points]="curvePath"
+ * 	[closed]="true"
+ * 	[curveType]="'centripetal'"
+ * ></ngx3js-curve>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-curve',

@@ -15,7 +15,12 @@ import { AbstractObject3dComponent } from '../object3d.abstract';
  * The [name] represents a virtual [link:https://developer.mozilla.org/de/docs/Web/API/AudioListener listener] of the all positional and non-positional audio effects in the scene.<br />
  * A three.js application usually creates a single instance of [name]. It is a mandatory construtor parameter for audios entities like [page:Audio Audio] and [page:PositionalAudio PositionalAudio].<br />
  * In most cases, the listener object is a child of the camera. So the 3D transformation of the camera represents the 3D transformation of the listener.
- *
+ * 
+ * ```html
+ * <ngx3js-camera>
+ *	<ngx3js-listener></ngx3js-listener>
+ * </ngx3js-camera>
+ * ```
  * @see THREE.AudioListener
  */
 @Component({

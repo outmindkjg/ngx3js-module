@@ -22,6 +22,37 @@ import {
 
 /**
  * ControllerComponent
+ * 
+ * ```html
+ * <ngx3js-controller
+ * 	[type]="'tween'"
+ * 	[options]="'once'"
+ * 	[duration]="info.duration"
+ * ></ngx3js-controller>
+ * <ngx3js-controller>
+ * 	<ngx3js-controller-item
+ * 		[refRate]="analyser1"
+ * 		[type]="'material'"
+ * 		[material]="'emissive'"
+ * 		[colorType]="'rate'"
+ * 	></ngx3js-controller-item>
+ * </ngx3js-controller>
+ * <ngx3js-controller>
+ * 	<ngx3js-controller-item [type]="'autoupdate'"></ngx3js-controller-item>
+ * </ngx3js-controller>
+ * <ngx3js-controller
+ * 	[type]="'uniforms'"
+ * 	[controlParams]="{ key: 'time', speed: controls.speed }"
+ * ></ngx3js-controller>
+ * <ngx3js-controller [type]="'auto'">
+ * 	<ngx3js-controller-item
+ * 		[type]="'uniforms'"
+ * 		[uniform]="'cameraPos'"
+ * 		[valueType]="'copyposition'"
+ * 		[refValue]="camera"
+ * 	></ngx3js-controller-item>
+ * </ngx3js-controller>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-controller',

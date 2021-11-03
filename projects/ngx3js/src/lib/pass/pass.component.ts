@@ -55,6 +55,130 @@ import { TextureComponent } from '../texture/texture.component';
 
 /**
  * PassComponent
+ * 
+ * ```html
+ * <ngx3js-composer>
+ * 	<ngx3js-pass [type]="'RenderPass'"></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'FilmPass'"
+ * 		[noiseIntensity]="0.35"
+ * 		[scanlinesIntensity]="0.75"
+ * 		[scanlinesCount]="2048"
+ * 		[grayscale]="false"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		#copyPass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'CopyShader'"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass [type]="'bloom'" [strength]="0.75"></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'film'"
+ * 		[noiseIntensity]="0.5"
+ * 		[scanlinesIntensity]="0.5"
+ * 		[scanlinesCount]="1448"
+ * 		[grayscale]="false"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'shader'"
+ * 		[shader]="'focus'"
+ * 		[uniforms]="{ screenWidth: 2048, screenHeight: 2048 }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'DotScreen'"
+ * 		[uniforms]="{ scale: 2 }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'RGBShift'"
+ * 		[uniforms]="{ amount: 0.0015 }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'BleachBypassShader'"
+ * 		[uniforms]="{ opacity: 0.95 }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		#effectSepia
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'SepiaShader'"
+ * 		[uniforms]="{ amount: 0.9 }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'VignetteShader'"
+ * 		[uniforms]="{ offset: 0.95, darkness: 1.6 }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'GammaCorrectionShader'"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'BloomPass'"
+ * 		[strength]="0.5"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'FilmPass'"
+ * 		[noiseIntensity]="0.35"
+ * 		[scanlinesIntensity]="0.025"
+ * 		[scanlinesCount]="648"
+ * 		[grayscale]="false"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'FilmPass'"
+ * 		[noiseIntensity]="0.35"
+ * 		[scanlinesIntensity]="0.5"
+ * 		[scanlinesCount]="2048"
+ * 		[grayscale]="true"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'DotScreenPass'"
+ * 		[centerX]="0"
+ * 		[centerY]="0"
+ * 		[angle]="28"
+ * 		[scale]="0.8"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'HorizontalBlurShader'"
+ * 		[uniforms]="{ h: 2 / 400 }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'VerticalBlurShader'"
+ * 		[uniforms]="{ v: 2 / 400 }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'ColorifyShader'"
+ * 		[uniforms]="{ color: '0xffc0c0' }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'ShaderPass'"
+ * 		[shader]="'ColorifyShader'"
+ * 		[uniforms]="{ color: '0xffb0b0' }"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass #clearMask [type]="'ClearMaskPass'"></ngx3js-pass>
+ * 	<ngx3js-pass #renderMask [type]="'MaskPass'"></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'MaskPass'"
+ * 		[inverse]="true"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'RenderPass'"
+ * 		[scene]="sceneBG"
+ * 		[camera]="cameraOrtho"
+ * 	></ngx3js-pass>
+ * 	<ngx3js-pass
+ * 		[type]="'RenderPass'"
+ * 		[clear]="false"
+ * 		[scene]="scene"
+ * 		[camera]="camera"
+ * 	></ngx3js-pass>		
+ * </ngx3js-composer>
+ * 
+ * ```
  */
 @Component({
 	selector: 'ngx3js-pass',

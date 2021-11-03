@@ -21,7 +21,15 @@ import { AbstractTweenComponent } from '../tween.abstract';
 
 /**
  * ComposerComponent
- *
+ * 
+ * ```html
+ * <ngx3js-composer>
+ * 	<ngx3js-pass [type]="'RenderPass'"></ngx3js-pass>
+ * </ngx3js-composer>
+ * <ngx3js-composer [scene]="scene" [camera]="camera">
+ * 	<ngx3js-pass [type]="'RenderPass'"></ngx3js-pass>
+ * </ngx3js-composer>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-composer',

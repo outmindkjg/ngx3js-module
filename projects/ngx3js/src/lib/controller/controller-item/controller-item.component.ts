@@ -68,6 +68,28 @@ export interface ControlObjectItem {
 
 /**
  * ControllerItemComponent
+ * 
+ * ```html
+ * <ngx3js-controller>
+ * 	<ngx3js-controller-item
+ * 		[refRate]="analyser1"
+ * 		[type]="'material'"
+ * 		[material]="'emissive'"
+ * 		[colorType]="'rate'"
+ * 	></ngx3js-controller-item>
+ * </ngx3js-controller>
+ * <ngx3js-controller>
+ * 	<ngx3js-controller-item [type]="'autoupdate'"></ngx3js-controller-item>
+ * </ngx3js-controller>
+ * <ngx3js-controller [type]="'auto'">
+ * 	<ngx3js-controller-item
+ * 		[type]="'uniforms'"
+ * 		[uniform]="'cameraPos'"
+ * 		[valueType]="'copyposition'"
+ * 		[refValue]="camera"
+ * 	></ngx3js-controller-item>
+ * </ngx3js-controller>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-controller-item',

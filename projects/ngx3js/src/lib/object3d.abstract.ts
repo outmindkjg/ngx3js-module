@@ -160,7 +160,7 @@ export abstract class AbstractObject3dComponent
 	 * layer in common with the [page:Camera] in use. This property can also be used to filter out
 	 * unwanted objects in ray-intersection tests when using [page:Raycaster].
 	 */
-	@Input() private layers: number[] = null;
+	@Input() private layers: number | number[] | { [key : number] : boolean } = null;
 
 	/**
 	 * Whether the object gets rendered into shadow map. Default is *false*.
@@ -1264,13 +1264,23 @@ export abstract class AbstractObject3dComponent
 						}
 						break;
 					case 'layers':
-						if (ThreeUtil.isNotNull(this.layers) && this.layers.length > 0) {
-							if (this.layers.length == 1) {
-								this.object3d.layers.set(this.layers[0]);
-							} else {
+						if (ThreeUtil.isNotNull(this.layers)) {
+							if (typeof this.layers === 'number') {
+								this.object3d.layers.set(this.layers);
+							} else if (Array.isArray(this.layers)) {
 								this.layers.forEach((layer) => {
 									this.object3d.layers.enable(layer);
 								});
+							} else {
+								for (const [key, value] of Object.entries(this.layers)) {
+									if (typeof key === 'number') {
+										if (value) {
+											this.object3d.layers.enable(key);
+										} else {
+											this.object3d.layers.disable(key);
+										}
+									}
+								}
 							}
 						}
 						break;

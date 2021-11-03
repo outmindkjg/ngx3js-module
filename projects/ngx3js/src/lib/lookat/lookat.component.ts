@@ -13,6 +13,11 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * This method does not support objects having non-uniformly-scaled parent(s).
  *
+ * ```html
+ * <ngx3js-renderer>
+ * 	<ngx3js-lookat [x]="0" [y]="0" [z]="0"></ngx3js-lookat>
+ * </ngx3js-renderer>
+ * ```
  * @see THREE.Object3D.lookAt
  */
 @Component({

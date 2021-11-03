@@ -288,6 +288,78 @@ export interface ControlOptions {
 
 /**
  * ControlComponent
+ * 
+ * ```html
+ * <ngx3js-renderer
+ * 	[controlType]="'orbit'"
+ * 	[controlOptions]="{ enablePan: false, enableDamping: true }"
+ * ></ngx3js-renderer>
+ * <ngx3js-control 
+ * 	[type]="'arcball'" 
+ * 	[gizmoVisible]="true" 
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'DeviceOrientationControls'"
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'plane'"
+ * ></ngx3js-control>
+ * <ngx3js-control
+ * 	[type]="'FlyControls'"
+ * 	[movementSpeed]="1000"
+ * 	[rollSpeed]="7.5"
+ * 	[autoForward]="false"
+ * 	[dragToLook]="false"
+ * ></ngx3js-control>
+ * <ngx3js-control
+ * 	[type]="'PointerLockControls'"
+ * 	(onLoad)="setPointerLock($event)"
+ * >
+ * </ngx3js-control>
+ * <ngx3js-control
+ * 	[type]="'DragControls'"
+ * 	(onLoad)="setDragControl($event)"
+ * ></ngx3js-control>
+ * <ngx3js-renderer
+ * 	[controlType]="'FirstPerson'"
+ * 	[controlOptions]="{
+ * 		enablePan: false,
+ * 		enableDamping: true,
+ * 		movementSpeed: 1000,
+ * 		lookSpeed: 0.125,
+ * 		lookVertical: true
+ * 	}"
+ * ></ngx3js-renderer>
+ * <ngx3js-control
+ * 	[type]="'TransformControls'"
+ * 	(eventListener)="setTransformEventListener($event)"
+ * 	(onLoad)="setTransformControl($event)"
+ * ></ngx3js-control>
+ * <ngx3js-control
+ * 	[type]="'TrackballControls'"
+ * 	[rollSpeed]="1.0"
+ * 	[zoomSpeed]="1.2"
+ * 	[panSpeed]="0.8"
+ * 	[keys]="['KeyA', 'KeyS', 'KeyD']"
+ * ></ngx3js-control>
+ * <ngx3js-renderer
+ * 	[controlType]="'selectbox'"
+ * 	[controlOptions]="{ enablePan: false, enableDamping: true }"
+ * ></ngx3js-renderer>
+ * <ngx3js-control
+ * 	[type]="'csm'"
+ * 	[maxFar]="1000"
+ * 	[cascades]="4"
+ * 	[mode]="'practical'"
+ * 	[scene]="scene"
+ * 	[shadowMapSize]="1024"
+ * 	[lightDirectionX]="-1"
+ * 	[lightDirectionY]="-1"
+ * 	[lightDirectionZ]="-1"
+ * 	[camera]="camera"
+ * 	(onLoad)="setCsm($event)"
+ * ></ngx3js-control>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-control',

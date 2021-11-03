@@ -36,6 +36,11 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * A single property can either be controlled through a target group or directly, but not both.
  *
+ * ```html
+ * <ngx3js-animation-group #animationGroup>
+ * 	<ngx3js-mixer></ngx3js-mixer>
+ * </ngx3js-animation-group>
+ * ```
  * @see THREE.AnimationObjectGroup
  */
 @Component({

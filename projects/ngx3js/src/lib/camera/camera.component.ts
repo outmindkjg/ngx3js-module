@@ -20,7 +20,39 @@ import { LocalStorageService } from './../local-storage.service';
  * CameraComponent
  *
  * Abstract base class for cameras. This class should always be inherited when you build a new camera.
- *
+ * 
+ * ```html
+ * <ngx3js-camera 
+ * 	[type]="'perspective'" 
+ * 	[fov]="45" 
+ * 	[near]="0.1" 
+ * 	[far]="200"
+ * ></ngx3js-camera>
+ * <ngx3js-camera
+ * 	[type]="'OrthographicCamera'"
+ * 	[orthoSize]="500"
+ * 	[fov]="45"
+ * 	[near]="1"
+ * 	[far]="1000"
+ * ></ngx3js-camera>
+ * <ngx3js-camera 
+ * 	[type]="'cube'" 
+ * 	[fov]="40" 
+ * 	[near]="1" 
+ * 	[far]="1000"
+ * ></ngx3js-camera>
+ * <ngx3js-camera
+ * 	[type]="'CubePingPong'"
+ * 	[near]="1"
+ * 	[far]="1000"
+ * ></ngx3js-camera>
+ * <ngx3js-camera
+ * 	[type]="'Cinematic'"
+ * 	[fov]="60"
+ * 	[near]="1"
+ * 	[far]="1000"
+ * ></ngx3js-camera>
+ * ```
  * @see THREE.Camera
  */
 @Component({

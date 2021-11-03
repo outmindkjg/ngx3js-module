@@ -41,7 +41,6 @@ import { AbstractTextureComponent } from '../texture.abstract';
  * (although they may have different defaults).
  *
  * ```html
- *
  * <ngx3js-material
  * 	[type]="'LineBasicMaterial'"
  * 	[color]="'0xffff00'"

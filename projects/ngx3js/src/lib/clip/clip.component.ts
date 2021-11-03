@@ -18,6 +18,15 @@ import { ThreeUtil } from './../interface';
  *
  * For an overview of the different elements of the three.js animation system see the
  * "Animation System" article in the "Next Steps" section of the manual.
+ * 
+ * ```html
+ * <ngx3js-mixer [action]="'base'">
+ * 	<ngx3js-clip [name]="'base'" [index]="0"></ngx3js-clip>
+ * </ngx3js-mixer>
+ * <ngx3js-mixer [action]="'Run'">
+ * 	<ngx3js-clip [name]="'Run'"></ngx3js-clip>
+ * </ngx3js-mixer>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-clip',
