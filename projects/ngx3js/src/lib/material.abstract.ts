@@ -34,6 +34,22 @@ export type MeshMaterial = MeshMaterialRaw | THREE.Scene;
 
 /**
  * AbstractMaterialComponent
+ * 
+ * ```ts
+ * _@Component({
+ * 	providers: [
+ * 		{
+ * 			provide: AbstractMaterialComponent,
+ * 			useExisting: forwardRef(() => XxxComponent),
+ * 		},
+ * 	],
+ * })
+ * export class XxxComponent extends AbstractMaterialComponent implements OnInit {
+ * 	constructor() {
+ * 		super();
+ * 	}
+ * }
+ * ```
  */
 @Component({
 	template: '',

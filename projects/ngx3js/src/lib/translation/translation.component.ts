@@ -5,6 +5,15 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * TranslationComponent
+ * 
+ * ```html
+ * <ngx3js-geometry>
+ * 	<ngx3js-translation [x]="0" [y]="0.5" [z]="0"></ngx3js-translation>
+ * </ngx3js-geometry>
+ * <ngx3js-geometry>
+ * 	<ngx3js-translation [y]="0.3"></ngx3js-translation>
+ * </ngx3js-geometry>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-translation',

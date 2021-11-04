@@ -15,7 +15,6 @@ import { HtmlComponent } from '../html/html.component';
 import { CssStyle, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TransformComponent } from '../transform/transform.component';
-// import { AbstractControllerComponent } from '../controller/controller.component';
 
 /**
  * Html collection
@@ -29,6 +28,10 @@ export interface HtmlCollection {
 
 /**
  * VisualComponent
+ * 
+ * ```html
+ * 
+ * ```
  */
 @Component({
 	selector: 'ngx3js-visual',

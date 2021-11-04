@@ -49,6 +49,22 @@ export interface GeometriesParametric {
 
 /**
  * AbstractGeometry Component
+ * 
+ * ```ts
+ * _@Component({
+ * 	providers: [
+ * 		{
+ * 			provide: AbstractGeometryComponent,
+ * 			useExisting: forwardRef(() => XxxComponent),
+ * 		},
+ * 	],
+ * })
+ * export class XxxComponent extends AbstractGeometryComponent implements OnInit {
+ * 	constructor() {
+ * 		super();
+ * 	}
+ * }
+ * ```
  */
 @Component({
 	template: '',

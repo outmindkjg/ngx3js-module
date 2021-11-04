@@ -51,7 +51,23 @@ export interface ChartShape {
 }
 
 /**
- * AbstractChartComponent
+ * AbstractChartComponent Component
+ * 
+ * ```ts
+ * _@Component({
+ * 	providers: [
+ * 		{
+ * 			provide: AbstractObject3dComponent,
+ * 			useExisting: forwardRef(() => XxxComponent),
+ * 		},
+ * 	],
+ * })
+ * export class XxxComponent extends AbstractChartComponent implements OnInit {
+ * 	constructor() {
+ * 		super();
+ * 	}
+ * }
+ * ```
  */
 @Component({
 	template: '',

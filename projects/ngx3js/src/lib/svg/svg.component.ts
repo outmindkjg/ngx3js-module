@@ -32,6 +32,34 @@ export interface SvgGeometry {
 
 /**
  * SvgComponent
+ * 
+ * ```html
+ * <ngx3js-geometry
+ * 	[type]="'Extrude'"
+ * 	[depth]="map.depth"
+ * 	[steps]="1"
+ * 	[bevelEnabled]="false"
+ * >
+ * 	<ngx3js-svg [path]="map.path"></ngx3js-svg>
+ * </ngx3js-geometry>
+ * <ngx3js-mesh>
+ * 	<ngx3js-svg
+ * 		[type]="'line'"
+ * 		[geometryType]="'buffer'"
+ * 		[text]="'   Three.js\nSimple text.'"
+ * 		[align]="'center'"
+ * 		[font]="'helvetiker'"
+ * 		[weight]="'regular'"
+ * 		[size]="100"
+ * 	>
+ * 		<ngx3js-material
+ * 			[type]="'LineBasic'"
+ * 			[color]="'0x006699'"
+ * 			[side]="'double'"
+ * 		></ngx3js-material>
+ * 	</ngx3js-svg>
+ * </ngx3js-mesh>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-svg',

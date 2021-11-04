@@ -17,6 +17,22 @@ import { HtmlCollection } from './visual/visual.component';
 
 /**
  * AbstractControllerComponent Component
+ * 
+ * ```ts
+ * _@Component({
+ * 	providers: [
+ * 		{
+ * 			provide: AbstractControllerComponent,
+ * 			useExisting: forwardRef(() => XxxComponent),
+ * 		},
+ * 	],
+ * })
+ * export class XxxComponent extends AbstractControllerComponent implements OnInit {
+ * 	constructor() {
+ * 		super();
+ * 	}
+ * }
+ * ```
  */
 @Component({
 	template: '',

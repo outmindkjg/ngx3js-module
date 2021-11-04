@@ -5,6 +5,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * TransformComponent
+ * ```html
+ * ```
  */
 @Component({
 	selector: 'ngx3js-transform',

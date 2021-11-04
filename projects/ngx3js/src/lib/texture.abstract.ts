@@ -28,6 +28,22 @@ import { unzipSync } from 'three/examples/jsm/libs/fflate.module';
 /**
  * AbstractTextureComponent
  *
+ * ```ts
+ * _@Component({
+ * 	providers: [
+ * 		{
+ * 			provide: AbstractTextureComponent,
+ * 			useExisting: forwardRef(() => XxxComponent),
+ * 		},
+ * 	],
+ * })
+ * export class XxxComponent extends AbstractTextureComponent implements OnInit {
+ * 	constructor() {
+ * 		super();
+ * 	}
+ * }
+ * ```
+ * 
  * @see THREE.Texture
  */
 @Component({

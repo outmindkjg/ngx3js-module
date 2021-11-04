@@ -12,6 +12,10 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * ShapeComponent
+ * 
+ * ```html
+ * 
+ * ```
  */
 @Component({
 	selector: 'ngx3js-shape',

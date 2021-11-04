@@ -1,18 +1,19 @@
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import {
 	AfterContentInit,
-	Component,
-	ContentChildren,
-	Input,
-	OnInit,
-	QueryList,
-	SimpleChanges,
+	Component, Input,
+	OnInit, SimpleChanges
 } from '@angular/core';
-import { ThreeUtil } from '../interface';
 import * as THREE from 'three';
+import { ThreeUtil } from '../interface';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * Component
+ * SizeComponent
+ * 
+ * ```html
+ * <ngx3js-size #renderSize [width]="'100%'" [height]="'100%'"></ngx3js-size>
+ * <ngx3js-size #renderSize></ngx3js-size>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-size',

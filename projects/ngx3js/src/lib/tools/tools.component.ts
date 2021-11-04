@@ -7,6 +7,22 @@ import { AbstractTextureComponent } from '../texture.abstract';
 
 /**
  * ToolsComponent
+ * 
+ * ```html
+ * <ngx3js-tools
+ * 	[type]="'audio'"
+ * 	[url]="'sounds/ping_pong.mp3'"
+ * ></ngx3js-tools>
+ * <ngx3js-tools
+ * 	[type]="'pmremtexture'"
+ * 	[background]="'0xcccccc'"
+ * ></ngx3js-tools>
+ * <ngx3js-tools
+ * 	[type]="'pmremtexture'"
+ * 	[storageName]="'spot1Lux.hdr'"
+ * 	[storageOption]="{ path: 'textures/equirectangular/' }"
+ * ></ngx3js-tools>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-tools',

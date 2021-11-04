@@ -5,6 +5,18 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * TweenComponent
+ * 
+ * ```html
+ * <ngx3js-tween
+ * 	[easing]="'power4.easein'"
+ * 	[targets]="'position'"
+ * 	(onLoad)="setLightTween($event)"
+ * ></ngx3js-tween>
+ * <ngx3js-tween
+ * 	[easing]="'power4.easein'"
+ * 	(onLoad)="setLightTween($event)"
+ * ></ngx3js-tween>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-tween',
