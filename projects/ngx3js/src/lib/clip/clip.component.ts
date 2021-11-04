@@ -90,41 +90,31 @@ export class ClipComponent
 
 	/**
 	 * The degree of influence of this action (in the interval [0, 1]). Values between 0 (no impact)
-	 * and 1 (full impact) can be used to blend between several actions. Default is 1. <br /><br />
+	 * and 1 (full impact) can be used to blend between several actions. Default is 1. 
 	 * Properties/methods concerning  *weight* are:
 	 */
 	@Input() public weight: number = 1;
 
 	/**
-	 * Scaling factor for the [page:.time time]. A value of 0 causes the animation to pause. Negative
-	 * values cause the animation to play backwards. Default is 1.
+	 * Scaling factor for the [page:.time time]. A value of 0 causes the animation to pause. Negative values cause the animation to play backwards. Default is 1.
 	 */
 	@Input() public timeScale: number = 1;
 
 	/**
-	 * The duration of this clip (in seconds). This can be calculated from the [page:.tracks tracks]
-	 * array via [page:.resetDuration resetDuration].
+	 * The duration of this clip (in seconds). This can be calculated from the [page:.tracks tracks] array via [page:.resetDuration resetDuration].
 	 */
 	@Input() public duration: number = 3;
 
 	/**
-	 * If *clampWhenFinished* is set to true the animation will automatically be [page:.paused paused]
-	 * on its last frame.<br /><br />
-	 *
-	 * If *clampWhenFinished* is set to false, [page:.enabled enabled] will automatically be switched
-	 * to false when the last loop of the action has finished, so that this action has no further
-	 * impact.<br /><br />
-	 *
-	 * Default is false.<br /><br />
-	 *
-	 * Note: *clampWhenFinished* has no impact if the action is interrupted (it has only an effect if
-	 * its last loop has really finished).
+	 * If *clampWhenFinished* is set to true the animation will automatically be [page:.paused paused] on its last frame.
+	 * If *clampWhenFinished* is set to false, [page:.enabled enabled] will automatically be switched to false when the last loop of the action has finished, so that this action has no further impact.
+	 * Default is false.
+	 * Note: *clampWhenFinished* has no impact if the action is interrupted (it has only an effect if its last loop has really finished).
 	 */
 	@Input() public clampWhenFinished: boolean = false;
 
 	/**
-	 * The looping mode (can be changed with [page:.setLoop setLoop]). Default is
-	 * [page:Animation THREE.LoopRepeat] (with an infinite number of [page:.repetitions repetitions])<br /><br />
+	 * The looping mode (can be changed with [page:.setLoop setLoop]). Default is [page:Animation THREE.LoopRepeat] (with an infinite number of [page:.repetitions repetitions])
 	 *
 	 * Notice - case insensitive.
 	 *

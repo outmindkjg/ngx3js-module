@@ -6,10 +6,10 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * LookatComponent
  *
- * vector - A vector representing a position in world space.<br /><br />
- * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.<br /><br />
+ * vector - A vector representing a position in world space.
+ * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.
  *
- * Rotates the object to face a point in world space.<br /><br />
+ * Rotates the object to face a point in world space.
  *
  * This method does not support objects having non-uniformly-scaled parent(s).
  *

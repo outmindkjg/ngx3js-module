@@ -17,7 +17,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * AnimationGroupComponent
  *
- * A group of objects that receives a shared animation state.<br /><br />
+ * A group of objects that receives a shared animation state.
  *
  * For an overview of the different elements of the three.js animation system see the
  * "Animation System" article in the "Next Steps" section of the manual.
@@ -25,14 +25,14 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  * Usage
  *
  * Add objects you would otherwise pass as 'root' to the constructor or the [page:AnimationMixer.clipAction clipAction]
- * method of [page:AnimationMixer AnimationMixer] and instead pass this object as 'root'.<br /><br />
+ * method of [page:AnimationMixer AnimationMixer] and instead pass this object as 'root'.
  *
  * Note that objects of this class appear as one object to the mixer,
  * so cache control of the individual objects must be done	on the group.
  *
  * Limitations
  *
- * The animated properties must be compatible among all objects in the group.<br /><br />
+ * The animated properties must be compatible among all objects in the group.
  *
  * A single property can either be controlled through a target group or directly, but not both.
  *

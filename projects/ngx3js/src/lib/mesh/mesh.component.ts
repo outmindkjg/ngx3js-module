@@ -415,9 +415,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	@Input() public distance: number = null;
 
 	/**
-	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing
-	 * (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is
-	 * also provided, both values are multiplied.
+	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is also provided, both values are multiplied.
 	 */
 	@Input() public metalness: number = null;
 
@@ -606,9 +604,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 
 	/**
 	 * [page:Textures THREE.LinearEncoding] is the default.
-	 * See the [page:Textures texture constants] page for details of other formats.<br /><br />
-	 * Note that if this value is changed on a texture after the material has been used,
-	 * it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
+	 * See the [page:Textures texture constants] page for details of other formats.
+	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * Notice - case insensitive.
 	 *

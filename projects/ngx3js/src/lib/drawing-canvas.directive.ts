@@ -12,9 +12,9 @@ import { ThreeColor, ThreeUtil } from './interface';
  * Drawing Canvas Directive
  *
  * @example
- * <code>
+ * ```html
  *  <canvas DrawingCanvasDirective [backgroundColor]="'#ffffff'" [lineColor]="'#000000'" />
- * </code>
+ * ```
  *
  */
 @Directive({

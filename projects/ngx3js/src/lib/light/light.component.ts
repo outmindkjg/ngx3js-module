@@ -84,17 +84,15 @@ export interface LightOptions extends Object3dOptions {
 	height?: number;
 
 	/**
-	 * Shadow map bias, how much to add or subtract from the normalized depth when deciding whether a surface is in shadow.<br />
+	 * Shadow map bias, how much to add or subtract from the normalized depth when deciding whether a surface is in shadow.
 	 * The default is 0. Very tiny adjustments here (in the order of 0.0001) may help reduce artefacts in shadows
 	 */
 	shadowBias?: number;
 
 	/**
-	 * Setting this to values greater than 1 will blur the edges of the shadow.<br />
-	 * High values will cause unwanted banding effects in the shadows - a greater [page:.mapSize mapSize]
-	 * will allow for a higher value to be used here before these effects become visible.<br />
-	 * If [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer PCFSoftShadowMap], radius has
-	 * no effect and it is recommended to increase softness by decreasing [page:.mapSize mapSize] instead.<br /><br />
+	 * Setting this to values greater than 1 will blur the edges of the shadow.
+	 * High values will cause unwanted banding effects in the shadows - a greater [page:.mapSize mapSize] will allow for a higher value to be used here before these effects become visible.
+	 * If [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer PCFSoftShadowMap], radius has no effect and it is recommended to increase softness by decreasing [page:.mapSize mapSize] instead.
 	 * Note that this has no effect if the [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer BasicShadowMap].
 	 */
 	shadowRadius?: number;
@@ -127,7 +125,7 @@ export interface LightOptions extends Object3dOptions {
 	shadowMapSizeHeight?: number;
 
 	/**
-	 * Camera frustum far plane. Default is *2000*.<br /><br />
+	 * Camera frustum far plane. Default is *2000*.
 	 * Must be greater than the current value of [page:.near near] plane.
 	 */
 	shadowCameraFar?: number;
@@ -336,17 +334,15 @@ export class LightComponent
 	@Input() public height: number = null;
 
 	/**
-	 * Shadow map bias, how much to add or subtract from the normalized depth when deciding whether a surface is in shadow.<br />
+	 * Shadow map bias, how much to add or subtract from the normalized depth when deciding whether a surface is in shadow.
 	 * The default is 0. Very tiny adjustments here (in the order of 0.0001) may help reduce artefacts in shadows
 	 */
 	@Input() public shadowBias: number = null;
 
 	/**
-	 * Setting this to values greater than 1 will blur the edges of the shadow.<br />
-	 * High values will cause unwanted banding effects in the shadows - a greater [page:.mapSize mapSize]
-	 * will allow for a higher value to be used here before these effects become visible.<br />
-	 * If [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer PCFSoftShadowMap], radius has
-	 * no effect and it is recommended to increase softness by decreasing [page:.mapSize mapSize] instead.<br /><br />
+	 * Setting this to values greater than 1 will blur the edges of the shadow.
+	 * High values will cause unwanted banding effects in the shadows - a greater [page:.mapSize mapSize] will allow for a higher value to be used here before these effects become visible.
+	 * If [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer PCFSoftShadowMap], radius has no effect and it is recommended to increase softness by decreasing [page:.mapSize mapSize] instead.
 	 * Note that this has no effect if the [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer BasicShadowMap].
 	 */
 	@Input() public shadowRadius: number = null;
@@ -379,7 +375,7 @@ export class LightComponent
 	@Input() public shadowMapSizeHeight: number = null;
 
 	/**
-	 * Camera frustum far plane. Default is *2000*.<br /><br />
+	 * Camera frustum far plane. Default is *2000*.
 	 * Must be greater than the current value of [page:.near near] plane.
 	 */
 	@Input() public shadowCameraFar: number = null;

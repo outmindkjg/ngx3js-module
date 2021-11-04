@@ -62,8 +62,7 @@ export class PositionComponent
 	@Input() public multiply: number = null;
 
 	/**
-	 * Converts this vector to a [link:https://en.wikipedia.org/wiki/Unit_vector unit vector] - that is, sets it equal to a vector with the same direction
-	 * as this one, but [page:.length length] 1.
+	 * Converts this vector to a [link:https://en.wikipedia.org/wiki/Unit_vector unit vector] - that is, sets it equal to a vector with the same direction as this one, but [page:.length length] 1.
 	 */
 	@Input() public normalize: boolean = false;
 

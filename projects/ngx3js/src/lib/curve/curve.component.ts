@@ -78,11 +78,8 @@ export class CurveComponent
 
 	/**
 	 * array of [page:Vector2 Vector2s].
-	 * Creates a Path from the points. The first point defines the offset, then successive points
-	 * are added to the [page:CurvePath.curves curves] array as [page:LineCurve LineCurves].<br /><br />
-	 *
-	 * If no points are specified, an empty path is created and the [page:.currentPoint] is set to
-	 * the origin.
+	 * Creates a Path from the points. The first point defines the offset, then successive points are added to the [page:CurvePath.curves curves] array as [page:LineCurve LineCurves].
+	 * If no points are specified, an empty path is created and the [page:.currentPoint] is set to the origin.
 	 */
 	@Input() public points: ThreeVector[] = null;
 

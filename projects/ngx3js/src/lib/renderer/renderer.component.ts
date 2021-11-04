@@ -198,8 +198,8 @@ export class RendererComponent
 	 *
 	 * Notice - case insensitive.
 	 *
-	 * high - quality
-	 * low -
+	 * high - high quality.
+	 * low - low quality.
 	 */
 	@Input() public quality: string = null;
 
@@ -208,8 +208,8 @@ export class RendererComponent
 	 *
 	 * Notice - case insensitive.
 	 *
-	 * auto - auto fix the size of renderer
-	 * fixed - use fixed size of renderer
+	 * auto - auto fix the size of renderer.
+	 * fixed - use fixed size of renderer.
 	 */
 	@Input() public sizeType: string = 'auto';
 
@@ -226,18 +226,18 @@ export class RendererComponent
 	/**
 	 * The x position of renderer
 	 *
-	 * number : fixed position
-	 * string : % - the percent of renderer
-	 * string : % -/+ number - the percent of renderer and add some value
+	 * number : fixed position.
+	 * string : % - the percent of renderer.
+	 * string : % -/+ number - the percent of renderer and add some value.
 	 */
 	@Input() public x: number | string = 0;
 
 	/**
 	 * The y position of renderer
 	 *
-	 * number : fixed position
-	 * string : % - the percent of renderer
-	 * string : % -/+ number - the percent of renderer and add some value
+	 * number : fixed position.
+	 * string : % - the percent of renderer.
+	 * string : % -/+ number - the percent of renderer and add some value.
 	 */
 	@Input() public y: number | string = 0;
 
@@ -307,17 +307,13 @@ export class RendererComponent
 	@Input() public composerEnable: boolean = true;
 
 	/**
-	 * whether to use a logarithmic depth buffer. It may
-	 * be neccesary to use this if dealing with huge differences in scale in a single scene. Note that this setting
-	 * uses gl_FragDepth if available which disables the [link:https://www.khronos.org/opengl/wiki/Early_Fragment_Test Early Fragment Test]
-	 * optimization and can cause a decrease in performance.
+	 * whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene. Note that this setting uses gl_FragDepth if available which disables the [link:https://www.khronos.org/opengl/wiki/Early_Fragment_Test Early Fragment Test] optimization and can cause a decrease in performance.
 	 * Default is *false*. See the [example:webgl_camera_logarithmicdepthbuffer camera / logarithmicdepthbuffer] example.
 	 */
 	@Input() public logarithmicDepthBuffer: boolean = false;
 
 	/**
-	 * whether to preserve the buffers until manually cleared
-	 * or overwritten. Default is *false*.
+	 * whether to preserve the buffers until manually cleared or overwritten. Default is *false*.
 	 */
 	@Input() public preserveDrawingBuffer: boolean = false;
 
@@ -328,16 +324,16 @@ export class RendererComponent
 	 *
 	 * string join by ,
 	 *
-	 * change - change
-	 * pointerdown, mousedown, down - pointerdown
-	 * pointerup, mouseup, up - pointerup
-	 * pointermove, mousemove, move - pointermove
-	 * keydown - keydown
-	 * keyup - keyup,
-	 * keypress - keypress
-	 * click - click
-	 * mouseover - mouseover, over
-	 * mouseout - mouseout, out
+	 * change - change.
+	 * pointerdown, mousedown, down - pointerdown.
+	 * pointerup, mouseup, up - pointerup.
+	 * pointermove, mousemove, move - pointermove.
+	 * keydown - keydown.
+	 * keyup - keyup.
+	 * keypress - keypress.
+	 * click - click.
+	 * mouseover - mouseover, over.
+	 * mouseout - mouseout, out.
 	 *
 	 * @see HTMLElement.addEventListener
 	 */

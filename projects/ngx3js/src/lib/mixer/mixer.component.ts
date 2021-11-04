@@ -96,14 +96,12 @@ export class MixerComponent
 	@Input() public fps: number = null;
 
 	/**
-	 * Sets the duration for a single loop of this action (by adjusting [page:.timeScale timeScale]
-	 * and stopping any scheduled warping). This method can be chained.
+	 * Sets the duration for a single loop of this action (by adjusting [page:.timeScale timeScale] and stopping any scheduled warping). This method can be chained.
 	 */
 	@Input() public duration: number = 0.5;
 
 	/**
-	 * Scaling factor for the [page:.time time]. A value of 0 causes the animation to pause. Negative
-	 * values cause the animation to play backwards. Default is 1.<br /><br />
+	 * Scaling factor for the [page:.time time]. A value of 0 causes the animation to pause. Negative values cause the animation to play backwards. Default is 1.
 	 * Properties/methods concerning *timeScale* (respectively *time*)
 	 */
 	@Input() public timeScale: number = 1;

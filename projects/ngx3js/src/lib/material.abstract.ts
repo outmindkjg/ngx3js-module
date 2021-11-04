@@ -70,8 +70,8 @@ export abstract class AbstractMaterialComponent
 
 	/**
 	 * refIndex  of material component
-	 * if the material of mesh is array
-	 * use this index
+	 * 
+	 * if the material of mesh is array use this index
 	 */
 	@Input() public refIndex: number = -1;
 
@@ -92,9 +92,8 @@ export abstract class AbstractMaterialComponent
 
 	/**
 	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
-	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.<br />
-	 * If the material's [page:Boolean transparent] property is not set to *true*, the material will remain
-	 * fully opaque and this value will only affect its color. <br />
+	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.
+	 * If the material's [page:Boolean transparent] property is not set to *true*, the material will remain fully opaque and this value will only affect its color.
 	 * Default is *1.0*.
 	 */
 	@Input() public opacity: number = null;
@@ -112,8 +111,8 @@ export abstract class AbstractMaterialComponent
 	@Input() public alphaTest: number = null;
 
 	/**
-	 * Which blending to use when displaying objects with this material. <br />
-	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].<br />
+	 * Which blending to use when displaying objects with this material. 
+	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
 	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
 	 *
 	 * Notice - case insensitive.
@@ -139,7 +138,7 @@ export abstract class AbstractMaterialComponent
 
 	/**
 	 * Blending equation to use when applying blending. Default is [page:CustomBlendingEquation AddEquation].
-	 * See the blending equation [page:CustomBlendingEquation constants] for all possible values.<br />
+	 * See the blending equation [page:CustomBlendingEquation constants] for all possible values.
 	 * The material's [page:Constant blending] must be set to [page:Materials CustomBlending] for this to have any effect.
 	 *
 	 * Notice - case insensitive.
@@ -160,8 +159,8 @@ export abstract class AbstractMaterialComponent
 	@Input() public blendEquationAlpha: number = null;
 
 	/**
-	 * Which blending to use when displaying objects with this material. <br />
-	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].<br />
+	 * Which blending to use when displaying objects with this material. 
+	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
 	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
 	 *
 	 * Notice - case insensitive.
@@ -177,7 +176,7 @@ export abstract class AbstractMaterialComponent
 
 	/**
 	 * Blending source. Default is [page:CustomBlendingEquation SrcAlphaFactor].
-	 * See the source factors [page:CustomBlendingEquation constants] for all possible values.<br />
+	 * See the source factors [page:CustomBlendingEquation constants] for all possible values.
 	 * The material's [page:Constant blending] must be set to [page:Materials CustomBlending] for this to have any effect.
 	 *
 	 * Notice - case insensitive.
@@ -253,7 +252,7 @@ export abstract class AbstractMaterialComponent
 	@Input() public depthTest: boolean = null;
 
 	/**
-	 * Whether rendering this material has any effect on the depth buffer. Default is *true*.<br /><br />
+	 * Whether rendering this material has any effect on the depth buffer. Default is *true*.
 	 * When drawing 2D overlays it can be useful to disable the depth writing in order to layer several things together without creating z-index artifacts.
 	 */
 	@Input() public depthWrite: boolean = null;
@@ -292,9 +291,7 @@ export abstract class AbstractMaterialComponent
 	 * See [Example:webgl_materials_physical_transmission WebGL / Materials / Physical / Transmission] for an example of the difference.
 	 * Default is *false*.
 	 *
-	 * highp
-	 * mediump
-	 * lowp
+	 * highp, mediump, lowp
 	 */
 	@Input() public premultipliedAlpha: boolean = null;
 
@@ -325,8 +322,8 @@ export abstract class AbstractMaterialComponent
 
 	/**
 	 * Defines which side of faces cast shadows.
-	 * When set, can be [page:Materials THREE.FrontSide], [page:Materials THREE.BackSide], or [page:Materials THREE.DoubleSide]. Default is *null*. <br />
-	 * If *null*, the side casting shadows is determined as follows: <br />
+	 * When set, can be [page:Materials THREE.FrontSide], [page:Materials THREE.BackSide], or [page:Materials THREE.DoubleSide]. Default is *null*. 
+	 * If *null*, the side casting shadows is determined as follows: 
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -437,11 +434,8 @@ export abstract class AbstractMaterialComponent
 	@Input() public stencilZPass: string = null;
 
 	/**
-	 * Defines whether this material is transparent. This has an effect on rendering
-	 * as transparent objects need special treatment and are rendered after
-	 * non-transparent objects. <br />
-	 * When set to true, the extent to which the material is transparent is
-	 * controlled by setting its [page:Float opacity] property. <br />
+	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. 
+	 * When set to true, the extent to which the material is transparent is controlled by setting its [page:Float opacity] property. 
 	 * Default is *false*.
 	 */
 	@Input() public transparent: boolean = null;
@@ -482,8 +476,8 @@ export abstract class AbstractMaterialComponent
 	}
 
 	/**
-	 * Which blending to use when displaying objects with this material. <br />
-	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].<br />
+	 * Which blending to use when displaying objects with this material. 
+	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
 	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
 	 *
 	 * Notice - case insensitive.
@@ -553,8 +547,8 @@ export abstract class AbstractMaterialComponent
 	}
 
 	/**
-	 * Which blending to use when displaying objects with this material. <br />
-	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].<br />
+	 * Which blending to use when displaying objects with this material. 
+	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
 	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
 	 *
 	 * Notice - case insensitive.

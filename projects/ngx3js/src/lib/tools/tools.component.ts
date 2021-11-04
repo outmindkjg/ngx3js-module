@@ -53,9 +53,8 @@ export class ToolsComponent
 
 	/**
 	 * [page:Textures THREE.LinearEncoding] is the default.
-	 * See the [page:Textures texture constants] page for details of other formats.<br /><br />
-	 * Note that if this value is changed on a texture after the material has been used,
-	 * it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
+	 * See the [page:Textures texture constants] page for details of other formats.
+	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -73,8 +72,7 @@ export class ToolsComponent
 	@Input() public encoding: string = null;
 
 	/**
-	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically
-	 * set this to [page:Textures THREE.RGBFormat] for JPG images. <br /><br />
+	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically set this to [page:Textures THREE.RGBFormat] for JPG images. 
 	 * See the [page:Textures texture constants] page for details of other formats.
 	 *
 	 * Notice - case insensitive.

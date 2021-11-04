@@ -40,15 +40,12 @@ export interface Object3dOptions {
 	name?: string;
 
 	/**
-	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and
-	 * scale every frame and also recalculates the matrixWorld property. Default is [page:Object3D.DefaultMatrixAutoUpdate] (true).
+	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is [page:Object3D.DefaultMatrixAutoUpdate] (true).
 	 */
 	matrixAutoUpdate?: boolean;
 
 	/**
-	 * The layer membership of the object. The object is only visible if it has at least one
-	 * layer in common with the [page:Camera] in use. This property can also be used to filter out
-	 * unwanted objects in ray-intersection tests when using [page:Raycaster].
+	 * The layer membership of the object. The object is only visible if it has at least one layer in common with the [page:Camera] in use. This property can also be used to filter out unwanted objects in ray-intersection tests when using [page:Raycaster].
 	 */
 	layers?: number[];
 
@@ -68,11 +65,8 @@ export interface Object3dOptions {
 	frustumCulled?: boolean;
 
 	/**
-	 * This value allows the default rendering order of [link:https://en.wikipedia.org/wiki/Scene_graph scene graph]
-	 * objects to be overridden although opaque and transparent objects remain sorted independently. When this property
-	 * is set for an instance of [page:Group Group], all descendants objects will be sorted and rendered together.
+	 * This value allows the default rendering order of [link:https://en.wikipedia.org/wiki/Scene_graph scene graph] objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [page:Group Group], all descendants objects will be sorted and rendered together.
 	 * Sorting is from lowest to highest renderOrder. Default value is *0*.
-	 *
 	 */
 	renderOrder?: number;
 
@@ -97,9 +91,9 @@ export interface Object3dOptions {
 	scale?: THREE.Vector3 | number[] | ScaleComponent | any;
 
 	/**
-	 * vector - A vector representing a position in world space.<br /><br />
-	 * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.<br /><br />
-	 * Rotates the object to face a point in world space.<br /><br />
+	 * vector - A vector representing a position in world space.
+	 * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.
+	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 */
 	lookat?: THREE.Vector3 | number[] | LookatComponent | any;
@@ -111,10 +105,7 @@ export interface Object3dOptions {
 
 	/**
 	 * Custom depth material to be used when rendering to the depth map. Can only be used in context of meshes.
-	 * When shadow-casting with a [page:DirectionalLight] or [page:SpotLight], if you are (a) modifying vertex positions in the vertex shader,
-	 * (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest,
-	 * you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
-	 *
+	 * When shadow-casting with a [page:DirectionalLight] or [page:SpotLight], if you are (a) modifying vertex positions in the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
 	 */
 	customDepth?: AbstractMaterialComponent | THREE.Material | any;
 
@@ -166,15 +157,12 @@ export abstract class AbstractObject3dComponent
 	@Input() public name: string = '';
 
 	/**
-	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and
-	 * scale every frame and also recalculates the matrixWorld property. Default is [page:Object3D.DefaultMatrixAutoUpdate] (true).
+	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is [page:Object3D.DefaultMatrixAutoUpdate] (true).
 	 */
 	@Input() public matrixAutoUpdate: boolean = null;
 
 	/**
-	 * The layer membership of the object. The object is only visible if it has at least one
-	 * layer in common with the [page:Camera] in use. This property can also be used to filter out
-	 * unwanted objects in ray-intersection tests when using [page:Raycaster].
+	 * The layer membership of the object. The object is only visible if it has at least one layer in common with the [page:Camera] in use. This property can also be used to filter out unwanted objects in ray-intersection tests when using [page:Raycaster].
 	 */
 	@Input() private layers: number | number[] | { [key: number]: boolean } =
 		null;
@@ -195,11 +183,8 @@ export abstract class AbstractObject3dComponent
 	@Input() public frustumCulled: boolean = null;
 
 	/**
-	 * This value allows the default rendering order of [link:https://en.wikipedia.org/wiki/Scene_graph scene graph]
-	 * objects to be overridden although opaque and transparent objects remain sorted independently. When this property
-	 * is set for an instance of [page:Group Group], all descendants objects will be sorted and rendered together.
+	 * This value allows the default rendering order of [link:https://en.wikipedia.org/wiki/Scene_graph scene graph] objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [page:Group Group], all descendants objects will be sorted and rendered together.
 	 * Sorting is from lowest to highest renderOrder. Default value is *0*.
-	 *
 	 */
 	@Input() private renderOrder: number = null;
 
@@ -238,9 +223,9 @@ export abstract class AbstractObject3dComponent
 		null;
 
 	/**
-	 * vector - A vector representing a position in world space.<br /><br />
-	 * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.<br /><br />
-	 * Rotates the object to face a point in world space.<br /><br />
+	 * vector - A vector representing a position in world space.
+	 * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.
+	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 */
 	@Input() private lookat: THREE.Vector3 | number[] | LookatComponent | any =
@@ -253,10 +238,7 @@ export abstract class AbstractObject3dComponent
 
 	/**
 	 * Custom depth material to be used when rendering to the depth map. Can only be used in context of meshes.
-	 * When shadow-casting with a [page:DirectionalLight] or [page:SpotLight], if you are (a) modifying vertex positions in the vertex shader,
-	 * (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest,
-	 * you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
-	 *
+	 * When shadow-casting with a [page:DirectionalLight] or [page:SpotLight], if you are (a) modifying vertex positions in the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
 	 */
 	@Input() private customDepth:
 		| AbstractMaterialComponent
@@ -279,16 +261,11 @@ export abstract class AbstractObject3dComponent
 		| THREE.AnimationObjectGroup = null;
 
 	/**
-	 * <p>
 	 * An optional callback that is executed immediately before a 3D object is rendered.
-	 * This function is called with the following parameters: renderer, scene, camera, geometry,
-	 * material, group.
-	 * </p>
-	 * <p>
-	 * Please notice that this callback is only executed for *renderable* 3D objects. Meaning 3D objects which define their visual
-	 * appearance with geometries and materials like instances of [page:Mesh], [page:Line], [page:Points] or [page:Sprite].
+	 * This function is called with the following parameters: renderer, scene, camera, geometry, material, group.
+	 * 
+	 * Please notice that this callback is only executed for *renderable* 3D objects. Meaning 3D objects which define their visual appearance with geometries and materials like instances of [page:Mesh], [page:Line], [page:Points] or [page:Sprite].
 	 * Instances of [page:Object3D], [page:Group] or [page:Bone] are not renderable and thus this callback is not executed for such objects.
-	 * </p>
 	 */
 	@Input() private onBeforeRender: (
 		renderer?: THREE.WebGLRenderer,

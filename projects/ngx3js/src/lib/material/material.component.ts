@@ -31,11 +31,11 @@ import { AbstractTextureComponent } from '../texture.abstract';
 /**
  * MaterialComponent
  *
- * Abstract base class for materials.<br /><br />
+ * Abstract base class for materials.
  *
  * Materials describe the appearance of [page:Object objects].
  * They are defined in a (mostly) renderer-independent way, so you don't have to
- * rewrite materials if you decide to use a different renderer.<br /><br />
+ * rewrite materials if you decide to use a different renderer.
  *
  * The following properties and methods are inherited by all other material types
  * (although they may have different defaults).
@@ -244,30 +244,24 @@ export class MaterialComponent
 
 	/**
 	 * An object of the form:
-	 * <code>
+	 * ```json
 	 * { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }
-	 * </code>
+	 * ```
 	 * specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form
-	 * <code>
+	 * ```json
 	 * { value: 1.0 }
-	 * </code>
-	 * where *value* is the value of the uniform. Names must match the name of the uniform,
-	 * as defined in the GLSL code. Note that uniforms are refreshed on every frame,
-	 * so updating the value of the uniform will immediately update the value available to the GLSL code.
+	 * ```
+	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 */
 	@Input() public uniforms: ThreeUniforms = null;
 
 	/**
-	 * Vertex shader GLSL code.  This is the actual code for the shader. In the example above,
-	 * the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed
-	 * as a string directly or loaded via AJAX instead.
+	 * Vertex shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
 	 */
 	@Input() public vertexShader: string = null;
 
 	/**
-	 * Fragment shader GLSL code.  This is the actual code for the shader. In the example above,
-	 * the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed
-	 * as a string directly or loaded via AJAX instead.
+	 * Fragment shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
 	 */
 	@Input() public fragmentShader: string = null;
 
@@ -335,7 +329,7 @@ export class MaterialComponent
 	@Input() public bumpScale: number = null;
 
 	/**
-	 * The type of normal map.<br /><br />
+	 * The type of normal map.
 	 * Options are [page:constant THREE.TangentSpaceNormalMap] (default), and [page:constant THREE.ObjectSpaceNormalMap].
 	 *
 	 * Notice - case insensitive.
@@ -362,8 +356,7 @@ export class MaterialComponent
 	@Input() public normalScaleY: number = null;
 
 	/**
-	 * How much the displacement map affects the mesh (where black is no displacement,
-	 * and white is maximum displacement). Without a displacement map set, this value is not applied.
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * Default is 1.
 	 */
 	@Input() public displacementScale: number = null;
@@ -375,10 +368,8 @@ export class MaterialComponent
 	@Input() public displacementBias: number = null;
 
 	/**
-	 * How to combine the result of the surface's color with the environment map, if any.<br /><br />
-	 * Options are [page:Materials THREE.Multiply] (default), [page:Materials THREE.MixOperation],
-	 * [page:Materials THREE.AddOperation]. If mix is chosen, the [page:.reflectivity] is used to
-	 * blend between the two colors.
+	 * How to combine the result of the surface's color with the environment map, if any.
+	 * Options are [page:Materials THREE.Multiply] (default), [page:Materials THREE.MixOperation], [page:Materials THREE.AddOperation]. If mix is chosen, the [page:.reflectivity] is used to blend between the two colors.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -402,17 +393,14 @@ export class MaterialComponent
 	@Input() public refractionRatio: number = null;
 
 	/**
-	 * Controls wireframe thickness. Default is 1.<br /><br />
-	 * Due to limitations of the [link:https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf OpenGL Core Profile]
-	 * with the [page:WebGLRenderer WebGL] renderer on most platforms linewidth will
-	 * always be 1 regardless of the set value.
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [link:https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf OpenGL Core Profile] with the [page:WebGLRenderer WebGL] renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	@Input() public wireframeLinewidth: number = null;
 
 	/**
-	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.<br /><br />
-	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap 2D Canvas lineCap]
-	 * property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap 2D Canvas lineCap] roperty and it is ignored by the [page:WebGLRenderer WebGL] renderer.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -420,9 +408,8 @@ export class MaterialComponent
 	@Input() public wireframeLinecap: string = null;
 
 	/**
-	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.<br /><br />
-	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin 2D Canvas lineJoin]
-	 * property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin 2D Canvas lineJoin] property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -435,24 +422,20 @@ export class MaterialComponent
 	@Input() public morphTargets: boolean = null;
 
 	/**
-	 * Defines whether the material uses morphNormals. Set as true to pass morphNormal
-	 * attributes from the geometry to the shader. Default is *false*.
+	 * Defines whether the material uses morphNormals. Set as true to pass morphNormal attributes from the geometry to the shader. Default is *false*.
 	 */
 	@Input() public morphNormals: boolean = null;
 
 	/**
-	 * Controls line thickness. Default is *1*.<br /><br />
-	 * Due to limitations of the [link:https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf OpenGL Core Profile]
-	 * with the [page:WebGLRenderer WebGL] renderer on most platforms linewidth will
-	 * always be 1 regardless of the set value.
+	 * Controls line thickness. Default is *1*.
+	 * Due to limitations of the [link:https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf OpenGL Core Profile] with the [page:WebGLRenderer WebGL] renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	@Input() public linewidth: number = null;
 
 	/**
 	 * Define appearance of line ends. Possible values are 'butt', 'round' and 'square'.
-	 * Default is 'round'.<br /><br />
-	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap 2D Canvas lineCap]
-	 * property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
+	 * Default is 'round'.
+	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap 2D Canvas lineCap] property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -460,9 +443,8 @@ export class MaterialComponent
 	@Input() public linecap: string = null;
 
 	/**
-	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'. <br /><br />
-	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin 2D Canvas lineJoin]
-	 * property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
+	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'. 
+	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin 2D Canvas lineJoin] property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -515,8 +497,8 @@ export class MaterialComponent
 	@Input() public referencePositionZ: number = null;
 
 	/**
-	 * Represents the intensity of the clear coat layer, from *0.0* to *1.0*. Use clear coat related properties to enable multilayer
-	 * materials that have a thin translucent layer over the base layer. Default is *0.0*.
+	 * Represents the intensity of the clear coat layer, from *0.0* to *1.0*. 
+	 * Use clear coat related properties to enable multilayer materials that have a thin translucent layer over the base layer. Default is *0.0*.
 	 */
 	@Input() public clearcoat: number = null;
 
@@ -552,9 +534,9 @@ export class MaterialComponent
 	@Input() public sheenMultiply: number = null;
 
 	/**
-	 * Degree of transmission (or optical transparency), from *0.0* to *1.0*. Default is *0.0*.<br />
+	 * Degree of transmission (or optical transparency), from *0.0* to *1.0*. Default is *0.0*.
 	 * Thin, transparent or semitransparent, plastic or glass materials remain largely reflective even if they are fully transmissive.
-	 * The transmission property can be used to model these materials.<br />
+	 * The transmission property can be used to model these materials.
 	 * When transmission is non-zero, [page:Material.opacity opacity] should be set to *1*.
 	 */
 	@Input() public transmission: number = null;
@@ -566,16 +548,12 @@ export class MaterialComponent
 	@Input() public roughness: number = null;
 
 	/**
-	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing
-	 * (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is
-	 * also provided, both values are multiplied.
+	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is also provided, both values are multiplied.
 	 */
 	@Input() public metalness: number = null;
 
 	/**
-	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing
-	 * (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is
-	 * also provided, both values are multiplied.
+	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is also provided, both values are multiplied.
 	 */
 	@Input() public thickness: number = null;
 
@@ -585,9 +563,7 @@ export class MaterialComponent
 	@Input() public envMapIntensity: number = null;
 
 	/**
-	 * Defines whether precomputed vertex tangents, which must be provided in a vec4 "tangent" attribute,
-	 * are used. When disabled, tangents are derived automatically. Using precomputed tangents will give
-	 * more accurate normal map details in some cases, such as with mirrored UVs. Default is false.
+	 * Defines whether precomputed vertex tangents, which must be provided in a vec4 "tangent" attribute, are used. When disabled, tangents are derived automatically. Using precomputed tangents will give more accurate normal map details in some cases, such as with mirrored UVs. Default is false.
 	 *
 	 */
 	@Input() public vertexTangents: boolean = null;
@@ -598,7 +574,7 @@ export class MaterialComponent
 	@Input() public rotation: number = null;
 
 	/**
-	 * Sets the size of the points. Default is 1.0.<br/>
+	 * Sets the size of the points. Default is 1.0.
 	 * Will be capped if it exceeds the hardware dependent parameter [link:https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getParameter gl.ALIASED_POINT_SIZE_RANGE].
 	 */
 	@Input() public size: number = null;
@@ -634,8 +610,7 @@ export class MaterialComponent
 	@Input() public resolutionY: number = null;
 
 	/**
-	 * Defines the GLSL version of custom shader code. Only relevant for WebGL 2 in order to define whether to specify
-	 * GLSL 3.0 or not. Valid values are *THREE.GLSL1* or *THREE.GLSL3*. Default is *null*.
+	 * Defines the GLSL version of custom shader code. Only relevant for WebGL 2 in order to define whether to specify GLSL 3.0 or not. Valid values are *THREE.GLSL1* or *THREE.GLSL3*. Default is *null*.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -644,14 +619,14 @@ export class MaterialComponent
 
 	/**
 	 * 	An object with the following properties:
-	 * <code>
+	 * ```ts
 	 * this.extensions = {
 	 * 	derivatives: false, // set to use derivatives
 	 * 	fragDepth: false, // set to use fragment depth values
 	 * 	drawBuffers: false, // set to use draw buffers
 	 * 	shaderTextureLOD: false // set to use shader texture LOD
 	 * };
-	 * </code>
+	 * ```
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -679,37 +654,26 @@ export class MaterialComponent
 	@Input() public specularMap: ThreeTexture = null;
 
 	/**
-	 * The alpha map is a grayscale texture that controls the opacity across the surface
-	 * (black: fully transparent; white: fully opaque). Default is null.<br /><br />
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
 	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
-	 * For RGB and RGBA textures, the [page:WebGLRenderer WebGL] renderer will use the
-	 * green channel when sampling this texture due to the extra bit of precision provided
-	 * for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and
-	 * luminance/alpha textures will also still work as expected.
+	 * For RGB and RGBA textures, the [page:WebGLRenderer WebGL] renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	@Input() public alphaMap: ThreeTexture = null;
 
 	/**
 	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
-	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will
-	 * be ignored.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 */
 	@Input() public bumpMap: ThreeTexture = null;
 
 	/**
-	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change
-	 * the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.
-	 * In case the material has a normal map authored using the left handed convention, the y component of normalScale
-	 * should be negated to compensate for the different handedness.
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.
+	 * In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 */
 	@Input() public normalMap: ThreeTexture = null;
 
 	/**
-	 * The displacement map affects the position of the mesh's vertices. Unlike other maps
-	 * which only affect the light and shade of the material the displaced vertices can cast shadows,
-	 * block other objects, and otherwise act as real geometry. The displacement texture is
-	 * an image where the value of each pixel (white being the highest) is mapped against,
-	 * and repositions, the vertices of the mesh.
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
 	@Input() public displacementMap: ThreeTexture = null;
 

@@ -12,7 +12,7 @@ import { AbstractObject3dComponent } from '../object3d.abstract';
 /**
  * AudioComponent
  *
- * Create a ( global ) audio object.<br /><br />
+ * Create a ( global ) audio object.
  *
  * This uses the [link:https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API Web Audio API].
  *
@@ -93,7 +93,7 @@ export class AudioComponent
 	@Input() public autoplay: boolean = true;
 
 	/**
-	 * Setup the [page:Audio.source source] to the audioBuffer, and sets [page:Audio.sourceType sourceType] to 'buffer'.<br />
+	 * Setup the [page:Audio.source source] to the audioBuffer, and sets [page:Audio.sourceType sourceType] to 'buffer'.
 	 * If [page:Audio.autoplay autoplay], also starts playback.
 	 */
 	@Input() public play: boolean = true;

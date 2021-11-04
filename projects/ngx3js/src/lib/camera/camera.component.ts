@@ -102,13 +102,13 @@ export class CameraComponent
 	@Input() public aspect: number = 1;
 
 	/**
-	 * Sets the FOV by focal length in respect to the current [page:PerspectiveCamera.filmGauge .filmGauge].<br /><br />
+	 * Sets the FOV by focal length in respect to the current [page:PerspectiveCamera.filmGauge .filmGauge].
 	 * By default, the focal length is specified for a 35mm (full frame) camera.
 	 */
 	@Input() public focalLength: number = null;
 
 	/**
-	 * Camera frustum near plane. Default is *0.1*.<br /><br />
+	 * Camera frustum near plane. Default is *0.1*.
 	 * The valid range is between 0 and the current value of the [page:.far far] plane.
 	 * Note that, unlike for the [page:PerspectiveCamera], *0* is a valid value for an
 	 * OrthographicCamera's near plane.
@@ -116,7 +116,7 @@ export class CameraComponent
 	@Input() public near: number | string = null;
 
 	/**
-	 * Camera frustum far plane. Default is *2000*.<br /><br />
+	 * Camera frustum far plane. Default is *2000*.
 	 * Must be greater than the current value of [page:.near near] plane.
 	 */
 	@Input() public far: number | string = null;
@@ -254,7 +254,7 @@ export class CameraComponent
 
 	/**
 	 * Tells the renderer to clear its color, depth or stencil drawing buffer(s).
-	 * This method initializes the color buffer to the current clear color value.<br />
+	 * This method initializes the color buffer to the current clear color value.
 	 * Arguments default to *true*.
 	 */
 	@Input() public clear: boolean = null;
@@ -361,7 +361,7 @@ export class CameraComponent
 	}
 
 	/**
-	 * Camera frustum near plane. Default is *0.1*.<br /><br />
+	 * Camera frustum near plane. Default is *0.1*.
 	 * The valid range is between 0 and the current value of the [page:.far far] plane.
 	 * Note that, unlike for the [page:PerspectiveCamera], *0* is a valid value for an
 	 * OrthographicCamera's near plane.
@@ -379,7 +379,7 @@ export class CameraComponent
 	}
 
 	/**
-	 * Camera frustum far plane. Default is *2000*.<br /><br />
+	 * Camera frustum far plane. Default is *2000*.
 	 * Must be greater than the current value of [page:.near near] plane.
 	 *
 	 * @param [def]

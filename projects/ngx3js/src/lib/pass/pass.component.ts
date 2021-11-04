@@ -361,9 +361,8 @@ export class PassComponent
 
 	/**
 	 * [page:Textures THREE.LinearEncoding] is the default.
-	 * See the [page:Textures texture constants] page for details of other formats.<br /><br />
-	 * Note that if this value is changed on a texture after the material has been used,
-	 * it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
+	 * See the [page:Textures texture constants] page for details of other formats.
+	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * Notice - case insensitive.
 	 *
