@@ -64,36 +64,44 @@ export class SelectBoxControls {
 			this.offsetTop += offsetParent.offsetTop;
 			offsetParent = offsetParent.offsetParent;
 		}
-		docElement.addEventListener('pointerdown', (event) => {
-			for (const item of this.selectionBox.collection) {
-				const material: any = item.material;
-				if (ThreeUtil.isNotNull(material['emissive'])) {
-					material['emissive'].set(ThreeUtil.getColorSafe(this.pointerdown));
-				}
-			}
-			const mouse = this.getMouse(event);
-			this.selectionBox.startPoint.set(mouse.x, mouse.y, 0.5);
-		},{passive: true});
-
-		docElement.addEventListener('pointermove', (event) => {
-			if (this.helper.isDown) {
-				for (let i = 0; i < this.selectionBox.collection.length; i++) {
-					const item: any = this.selectionBox.collection[i].material;
-					if (ThreeUtil.isNotNull(item['emissive'])) {
-						item['emissive'].set(ThreeUtil.getColorSafe(this.pointerdown));
+		docElement.addEventListener(
+			'pointerdown',
+			(event) => {
+				for (const item of this.selectionBox.collection) {
+					const material: any = item.material;
+					if (ThreeUtil.isNotNull(material['emissive'])) {
+						material['emissive'].set(ThreeUtil.getColorSafe(this.pointerdown));
 					}
 				}
 				const mouse = this.getMouse(event);
-				this.selectionBox.endPoint.set(mouse.x, mouse.y, 0.5);
-				const allSelected = this.selectionBox.select();
-				allSelected.forEach((item) => {
-					const material: any = item.material;
-					if (ThreeUtil.isNotNull(material['emissive'])) {
-						material['emissive'].set(ThreeUtil.getColorSafe(this.pointerup));
+				this.selectionBox.startPoint.set(mouse.x, mouse.y, 0.5);
+			},
+			{ passive: true }
+		);
+
+		docElement.addEventListener(
+			'pointermove',
+			(event) => {
+				if (this.helper.isDown) {
+					for (let i = 0; i < this.selectionBox.collection.length; i++) {
+						const item: any = this.selectionBox.collection[i].material;
+						if (ThreeUtil.isNotNull(item['emissive'])) {
+							item['emissive'].set(ThreeUtil.getColorSafe(this.pointerdown));
+						}
 					}
-				});
-			}
-		},{passive: true});
+					const mouse = this.getMouse(event);
+					this.selectionBox.endPoint.set(mouse.x, mouse.y, 0.5);
+					const allSelected = this.selectionBox.select();
+					allSelected.forEach((item) => {
+						const material: any = item.material;
+						if (ThreeUtil.isNotNull(material['emissive'])) {
+							material['emissive'].set(ThreeUtil.getColorSafe(this.pointerup));
+						}
+					});
+				}
+			},
+			{ passive: true }
+		);
 
 		docElement.addEventListener('pointerup', (event) => {
 			const mouse = this.getMouse(event);
@@ -105,7 +113,8 @@ export class SelectBoxControls {
 					material['emissive'].set(ThreeUtil.getColorSafe(this.pointerup));
 				}
 			});
-		}),{passive: true};
+		}),
+			{ passive: true };
 	}
 
 	/**

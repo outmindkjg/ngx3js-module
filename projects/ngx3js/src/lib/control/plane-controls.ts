@@ -129,7 +129,11 @@ export class PlaneControls {
 						this.camera.position.z
 					);
 				};
-				this.domElement.addEventListener('pointermove', this._mouseMoveHandler,{passive: true});
+				this.domElement.addEventListener(
+					'pointermove',
+					this._mouseMoveHandler,
+					{ passive: true }
+				);
 			}
 		} else {
 			if (this._mouseMoveHandler !== null) {

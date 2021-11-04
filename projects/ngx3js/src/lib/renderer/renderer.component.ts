@@ -249,7 +249,7 @@ export class RendererComponent
 	/**
 	 * The statsStyle of stats module
 	 */
-	 @Input() public statsStyle: any = null;
+	@Input() public statsStyle: any = null;
 
 	/**
 	 * Defines whether the renderer should automatically clear its output before rendering a frame.
@@ -299,8 +299,8 @@ export class RendererComponent
 	/**
 	 * The guiStyle of GUI
 	 */
-	 @Input() public guiStyle: any = null;
-	 
+	@Input() public guiStyle: any = null;
+
 	/**
 	 * The guiOpen of GUI
 	 */
@@ -532,15 +532,14 @@ export class RendererComponent
 				'\\/__/  \\/__/\\/__/\\/__/  \\/_____/\\/_____/\\/__/ /  / /  ___/',
 				'                                         / __/  /  \\__  \\',
 				'                                         \\/____/\\/_____/',
-			].join('\n')
-		, 'color:red;font-style:italic;text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;','');
+			].join('\n'),
+			'color:red;font-style:italic;text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;',
+			''
+		);
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
@@ -548,8 +547,7 @@ export class RendererComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		this.dispose();
@@ -567,10 +565,9 @@ export class RendererComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -582,9 +579,7 @@ export class RendererComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit() {
@@ -645,7 +640,7 @@ export class RendererComponent
 						case 'compressed':
 							errorCode = 'WEBGL_compressed_texture_pvrtc';
 							break;
-						case 'depth' :
+						case 'depth':
 							errorCode = 'WEBGL_depth_texture';
 							break;
 						default:
@@ -1876,11 +1871,13 @@ export class RendererComponent
 	 */
 	private getStats(): ThreeStats {
 		if (this.stats === null) {
-			this.stats = ThreeUtil.getStats(ThreeUtil.getTypeSafe(this.statsStyle,{
-				position: 'absolute',
-				left: '0px',
-				top: '0px',
-			}));
+			this.stats = ThreeUtil.getStats(
+				ThreeUtil.getTypeSafe(this.statsStyle, {
+					position: 'absolute',
+					left: '0px',
+					top: '0px',
+				})
+			);
 			this.debugEle.nativeElement.appendChild(this.stats.dom);
 		}
 		return this.stats;
@@ -1892,12 +1889,14 @@ export class RendererComponent
 	 */
 	private getGui(): ThreeGui {
 		if (this.gui === null) {
-			this.gui = new ThreeGui(ThreeUtil.getTypeSafe(this.guiStyle,{
-				position: 'absolute',
-				marginRight: '0px',
-				right: '0px',
-				top: '0px',
-			}));
+			this.gui = new ThreeGui(
+				ThreeUtil.getTypeSafe(this.guiStyle, {
+					position: 'absolute',
+					marginRight: '0px',
+					right: '0px',
+					top: '0px',
+				})
+			);
 			this.debugEle.nativeElement.appendChild(this.gui.domElement);
 		}
 		return this.gui;

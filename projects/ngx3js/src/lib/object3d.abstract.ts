@@ -131,7 +131,7 @@ export interface Object3dOptions {
 
 /**
  * AbstractObject3dComponent
- * 
+ *
  * ```ts
  * _@Component({
  * 	providers: [
@@ -176,7 +176,8 @@ export abstract class AbstractObject3dComponent
 	 * layer in common with the [page:Camera] in use. This property can also be used to filter out
 	 * unwanted objects in ray-intersection tests when using [page:Raycaster].
 	 */
-	@Input() private layers: number | number[] | { [key : number] : boolean } = null;
+	@Input() private layers: number | number[] | { [key: number]: boolean } =
+		null;
 
 	/**
 	 * Whether the object gets rendered into shadow map. Default is *false*.
@@ -437,10 +438,7 @@ export abstract class AbstractObject3dComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 *
 	 * @param subscribeType
@@ -450,8 +448,7 @@ export abstract class AbstractObject3dComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		if (this.object3d !== null) {
@@ -471,10 +468,9 @@ export abstract class AbstractObject3dComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -564,9 +560,7 @@ export abstract class AbstractObject3dComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {

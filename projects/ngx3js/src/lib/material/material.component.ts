@@ -771,10 +771,7 @@ export class MaterialComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
@@ -782,18 +779,16 @@ export class MaterialComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -805,9 +800,7 @@ export class MaterialComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {
@@ -3538,7 +3531,9 @@ export class MaterialComponent
 							);
 						} else {
 							if (ThreeUtil.isNotNull(this.color)) {
-								meshStandardNodeMaterial.color = this.getColorNode(this.getColor());
+								meshStandardNodeMaterial.color = this.getColorNode(
+									this.getColor()
+								);
 							}
 						}
 						if (ThreeUtil.isNotNull(this.roughness)) {

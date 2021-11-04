@@ -198,9 +198,13 @@ export class AVRControls {
 						svg.style.position = 'absolute';
 						svg.style.right = '20px';
 						svg.style.top = '20px';
-						svg.addEventListener('click', () => {
-							this.currentSession.end();
-						},{passive: true});
+						svg.addEventListener(
+							'click',
+							() => {
+								this.currentSession.end();
+							},
+							{ passive: true }
+						);
 						overlay.appendChild(svg);
 						var path = document.createElementNS(
 							'http://www.w3.org/2000/svg',
@@ -257,7 +261,7 @@ export class AVRControls {
 		this._onSessionEnded = () => {
 			this.onSessionEnded();
 		};
-		session.addEventListener('end', this._onSessionEnded,{passive: true});
+		session.addEventListener('end', this._onSessionEnded, { passive: true });
 		try {
 			await this.renderer.xr.setSession(session);
 		} catch (ex) {
@@ -377,7 +381,7 @@ export class VirtualSession implements THREE.XRSession {
 	end(): Promise<void> {
 		return new Promise<void>((resolve) => {
 			resolve();
-			this.dispatchEvent(new Event('end'))
+			this.dispatchEvent(new Event('end'));
 		});
 	}
 
@@ -450,7 +454,7 @@ export class VirtualSession implements THREE.XRSession {
 		planeDetectionState?: { enabled: boolean };
 	}): void {}
 
-	private _listeners : { [key : string] : any[] } = {};
+	private _listeners: { [key: string]: any[] } = {};
 	/**
 	 * Adds event listener
 	 * @param type
@@ -462,20 +466,22 @@ export class VirtualSession implements THREE.XRSession {
 		callback: EventListenerOrEventListenerObject,
 		options?: boolean | AddEventListenerOptions
 	): void {
-		if ( this._listeners === undefined ) this._listeners = {};
+		if (this._listeners === undefined) this._listeners = {};
 		const listeners = this._listeners;
-		if ( listeners[ type ] === undefined ) {
-			listeners[ type ] = [];
+		if (listeners[type] === undefined) {
+			listeners[type] = [];
 		}
-		if ( listeners[ type ].indexOf( callback ) === - 1 ) {
-			listeners[ type ].push( callback );
+		if (listeners[type].indexOf(callback) === -1) {
+			listeners[type].push(callback);
 		}
 	}
 
-	hasEventListener( type : string, listener : any) {
-		if ( this._listeners === undefined ) return false;
+	hasEventListener(type: string, listener: any) {
+		if (this._listeners === undefined) return false;
 		const listeners = this._listeners;
-		return listeners[ type ] !== undefined && listeners[ type ].indexOf( listener ) !== - 1;
+		return (
+			listeners[type] !== undefined && listeners[type].indexOf(listener) !== -1
+		);
 	}
 
 	/**
@@ -484,13 +490,13 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns true if event
 	 */
 	dispatchEvent(event: Event): boolean {
-		if ( this._listeners === undefined ) false;
+		if (this._listeners === undefined) false;
 		const listeners = this._listeners;
-		const listenerArray = listeners[ event.type ];
-		if ( listenerArray !== undefined ) {
-			const array = listenerArray.slice( 0 );
-			for ( let i = 0, l = array.length; i < l; i ++ ) {
-				array[ i ].call( this, event );
+		const listenerArray = listeners[event.type];
+		if (listenerArray !== undefined) {
+			const array = listenerArray.slice(0);
+			for (let i = 0, l = array.length; i < l; i++) {
+				array[i].call(this, event);
 			}
 		}
 		return true;
@@ -507,24 +513,22 @@ export class VirtualSession implements THREE.XRSession {
 		listener: EventListenerOrEventListenerObject,
 		options?: boolean | EventListenerOptions
 	): void {
-		if ( this._listeners === undefined ) return;
+		if (this._listeners === undefined) return;
 		const listeners = this._listeners;
-		const listenerArray = listeners[ type ];
-		if ( listenerArray !== undefined ) {
-			const index = listenerArray.indexOf( listener );
-			if ( index !== - 1 ) {
-				listenerArray.splice( index, 1 );
+		const listenerArray = listeners[type];
+		if (listenerArray !== undefined) {
+			const index = listenerArray.indexOf(listener);
+			if (index !== -1) {
+				listenerArray.splice(index, 1);
 			}
-		}		
+		}
 	}
 
 	/**
 	 * Removes all listeners
 	 * @param [eventName]
 	 */
-	removeAllListeners?(eventName?: string): void {
-
-	}
+	removeAllListeners?(eventName?: string): void {}
 
 	/**
 	 * Events listeners

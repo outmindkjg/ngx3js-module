@@ -15,7 +15,7 @@
     "publish": "cd dist/ngx3js && npm publish",
     "watch": "ng build --watch --configuration development",
     "fixtype": "cd fix && node fix.js && cd ..",
-    "docs" : "rm -rf dist && npx typedoc --tsconfig tsconfig.json --json docs_api.json --pretty --excludeProtected --excludeExternals --excludePrivate projects/ngx3js/src/public-api.ts",
+    "docs": "rm -rf dist && npx typedoc --tsconfig tsconfig.json --json docs_api.json --pretty --excludeProtected --excludeExternals --excludePrivate projects/ngx3js/src/public-api.ts",
     "test": "ng test"
   },
   "dependencies": {
@@ -53,6 +53,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "ng-packagr": "^12.2.3",
+    "typedoc": "^0.22.7",
     "typescript": "~4.3.5"
   }
 }

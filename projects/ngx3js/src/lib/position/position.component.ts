@@ -6,11 +6,11 @@ import { AbstractTweenComponent } from '../tween.abstract';
 
 /**
  * PositionComponent
- * 
+ *
  * ```html
- * <ngx3js-position 
- * 	[x]="0" 
- * 	[y]="7.5" 
+ * <ngx3js-position
+ * 	[x]="0"
+ * 	[y]="7.5"
  * 	[z]="0"
  * 	[multiply]="10"
  * 	[normalize]="false"
@@ -96,10 +96,7 @@ export class PositionComponent
 	@Input() public theta: number = null;
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
@@ -107,18 +104,16 @@ export class PositionComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -130,9 +125,7 @@ export class PositionComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {
@@ -203,7 +196,10 @@ export class PositionComponent
 				if (ThreeUtil.isNotNull(object) && ThreeUtil.isNull(object.userData)) {
 					object.userData = {};
 				}
-				if (ThreeUtil.isNotNull(object) && ThreeUtil.isNull(object.userData.initPosition)) {
+				if (
+					ThreeUtil.isNotNull(object) &&
+					ThreeUtil.isNull(object.userData.initPosition)
+				) {
 					object.userData.initPosition = object.position.clone();
 				}
 			}

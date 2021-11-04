@@ -5,7 +5,7 @@ import {
 	OnChanges,
 	OnDestroy,
 	OnInit,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment';
@@ -16,7 +16,7 @@ import {
 	NodeMaterial,
 	NormalMapNode,
 	OperatorNode,
-	TextureNode
+	TextureNode,
 } from 'three/examples/jsm/nodes/Nodes';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
@@ -43,7 +43,7 @@ import { unzipSync } from 'three/examples/jsm/libs/fflate.module';
  * 	}
  * }
  * ```
- * 
+ *
  * @see THREE.Texture
  */
 @Component({
@@ -60,7 +60,7 @@ export abstract class AbstractTextureComponent
 
 	/**
 	 * The LoadType of Texture - video, image etc
-	 *  hdrcube, hdrcubetexture - 
+	 *  hdrcube, hdrcubetexture -
 	 *  rgbm, rgbmtexture
 	 *  auto
 	 *  video
@@ -408,12 +408,12 @@ export abstract class AbstractTextureComponent
 	/**
 	 * Input  of abstract texture component
 	 */
-	 @Input() public depth: number = null;
+	@Input() public depth: number = null;
 
 	/**
 	 * Input  of abstract texture component
 	 */
-	 @Input() public scale: number = null;
+	@Input() public scale: number = null;
 
 	/**
 	 * Whether to generate mipmaps (if possible) for a texture. True by default. Set this to false if you are
@@ -447,10 +447,7 @@ export abstract class AbstractTextureComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 *
 	 * @param subscribeType
@@ -460,8 +457,7 @@ export abstract class AbstractTextureComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		if (this.texture !== null) {
@@ -488,10 +484,9 @@ export abstract class AbstractTextureComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -503,9 +498,7 @@ export abstract class AbstractTextureComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {
@@ -618,11 +611,11 @@ export abstract class AbstractTextureComponent
 			cubeImage,
 			program,
 			{
-				size : this.width || this.height || this.depth,
+				size: this.width || this.height || this.depth,
 				width: this.width,
 				height: this.height,
 				depth: this.depth,
-				scale : this.scale,
+				scale: this.scale,
 				type: this.loaderType,
 				text: this.text,
 				programParam: this.programParam,
@@ -650,11 +643,11 @@ export abstract class AbstractTextureComponent
 		onLoad?: () => void
 	): THREE.Texture {
 		const loadOption: { [key: string]: any } = {
-			size : null,
+			size: null,
 			width: null,
 			height: null,
-			depth : null,
-			scale : null,
+			depth: null,
+			scale: null,
 			type: loaderType,
 		};
 		const textureOption: { [key: string]: any } = {};
@@ -862,7 +855,7 @@ export abstract class AbstractTextureComponent
 								case 'height':
 								case 'depth':
 								case 'scale':
-										loadOption[key.toLowerCase()] = parseInt(value);
+									loadOption[key.toLowerCase()] = parseInt(value);
 									break;
 								case 'sigma':
 								case 'near':
@@ -1070,11 +1063,15 @@ export abstract class AbstractTextureComponent
 							console.error('MediaDevices interface not available.');
 						}
 					} else {
-						video.addEventListener('play', () => {
-							window.setTimeout(() => {
-								onLoad();
-							}, 500);
-						},{passive: true});
+						video.addEventListener(
+							'play',
+							() => {
+								window.setTimeout(() => {
+									onLoad();
+								}, 500);
+							},
+							{ passive: true }
+						);
 						video.src = ThreeUtil.getStoreUrl(image);
 						video.play();
 					}
@@ -1165,9 +1162,13 @@ export abstract class AbstractTextureComponent
 							case 'datatexture':
 							case 'datatexture2d':
 							case 'datatexture3d':
-								return TextureUtils.dataTexture(image, () => {
-									onLoad();
-								}, options);
+								return TextureUtils.dataTexture(
+									image,
+									() => {
+										onLoad();
+									},
+									options
+								);
 							default:
 								if (this.textureLoader === null) {
 									this.textureLoader = new THREE.TextureLoader(

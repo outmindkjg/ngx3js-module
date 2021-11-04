@@ -16,7 +16,7 @@ import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoade
 import { BVH, BVHLoader } from 'three/examples/jsm/loaders/BVHLoader';
 import {
 	Collada,
-	ColladaLoader
+	ColladaLoader,
 } from 'three/examples/jsm/loaders/ColladaLoader';
 import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
@@ -33,13 +33,16 @@ import { KTXLoader } from 'three/examples/jsm/loaders/KTXLoader';
 import { LDrawLoader } from 'three/examples/jsm/loaders/LDrawLoader';
 import { LottieLoader } from 'three/examples/jsm/loaders/LottieLoader';
 import { LUT3dlLoader } from 'three/examples/jsm/loaders/LUT3dlLoader';
-import { LUTCubeLoader, LUTCubeResult } from 'three/examples/jsm/loaders/LUTCubeLoader';
+import {
+	LUTCubeLoader,
+	LUTCubeResult,
+} from 'three/examples/jsm/loaders/LUTCubeLoader';
 import { LWO, LWOLoader } from 'three/examples/jsm/loaders/LWOLoader';
 import { MD2Loader } from 'three/examples/jsm/loaders/MD2Loader';
 import { MDD, MDDLoader } from 'three/examples/jsm/loaders/MDDLoader';
 import {
 	MMDLoader,
-	MMDLoaderAnimationObject
+	MMDLoaderAnimationObject,
 } from 'three/examples/jsm/loaders/MMDLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { NRRDLoader } from 'three/examples/jsm/loaders/NRRDLoader';
@@ -60,7 +63,7 @@ import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
 import {
 	Chunk,
 	VOXLoader,
-	VOXMesh
+	VOXMesh,
 } from 'three/examples/jsm/loaders/VOXLoader';
 import { VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoader';
 import { VRMLoader } from 'three/examples/jsm/loaders/VRMLoader';
@@ -71,7 +74,13 @@ import { MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex
 import { Volume } from 'three/examples/jsm/misc/Volume';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
-import { LoadedNameMap, LoadedObject, ThreeUtil, StorageOption, StorageExportOption } from './interface';
+import {
+	LoadedNameMap,
+	LoadedObject,
+	ThreeUtil,
+	StorageOption,
+	StorageExportOption,
+} from './interface';
 
 /**
  * LocalStorageService
@@ -888,7 +897,10 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.tilt')) {
 			if (this.tiltLoader === null) {
-				this.tiltLoader = new TiltLoader(ThreeUtil.getLoadingManager(), ThreeUtil.getStoreUrl(''));
+				this.tiltLoader = new TiltLoader(
+					ThreeUtil.getLoadingManager(),
+					ThreeUtil.getStoreUrl('')
+				);
 			}
 			this.setLoaderWithOption(this.tiltLoader, options);
 			this.tiltLoader.load(
@@ -1007,7 +1019,9 @@ export class LocalStorageService {
 		} else if (key.endsWith('.ifc')) {
 			if (this.ifcLoader === null) {
 				this.ifcLoader = new IFCLoader(ThreeUtil.getLoadingManager());
-				this.ifcLoader.ifcManager.setWasmPath(ThreeUtil.getStoreUrl('jsm/loaders/ifc/'));
+				this.ifcLoader.ifcManager.setWasmPath(
+					ThreeUtil.getStoreUrl('jsm/loaders/ifc/')
+				);
 			}
 			this.setLoaderWithOption(this.ifcLoader, options);
 			this.ifcLoader.load(
@@ -1033,12 +1047,14 @@ export class LocalStorageService {
 			}
 			this.setLoaderWithOption(this.ktx2Loader, options);
 			try {
-				this.ktx2Loader.loadAsync(key, this.onProgress).then((texture: THREE.CompressedTexture) => {
-					callBack({
-						texture: texture,
-						source: texture,
+				this.ktx2Loader
+					.loadAsync(key, this.onProgress)
+					.then((texture: THREE.CompressedTexture) => {
+						callBack({
+							texture: texture,
+							source: texture,
+						});
 					});
-				})
 			} catch (ex) {
 				this.onError(ex);
 			}
@@ -1219,7 +1235,9 @@ export class LocalStorageService {
 				this.basisTextureLoader = new BasisTextureLoader(
 					ThreeUtil.getLoadingManager()
 				);
-				this.basisTextureLoader.setTranscoderPath( ThreeUtil.getStoreUrl('js/libs/basis/'));
+				this.basisTextureLoader.setTranscoderPath(
+					ThreeUtil.getStoreUrl('js/libs/basis/')
+				);
 				this.basisTextureLoader.detectSupport(new THREE.WebGLRenderer());
 			}
 			this.setLoaderWithOption(this.basisTextureLoader, options);
@@ -1767,7 +1785,7 @@ export class LocalStorageService {
 				},
 				this.onProgress,
 				this.onError
-			)
+			);
 		} else if (key.endsWith('.vrm')) {
 			if (this.vrmLoader === null) {
 				this.vrmLoader = new VRMLoader(ThreeUtil.getLoadingManager());
@@ -1851,7 +1869,9 @@ export class LocalStorageService {
 							}
 							this.setLoaderWithOption(this.lottieLoader, options);
 							if ((window as any).bodymovin === undefined) {
-								console.log('script required in angular.json - projects/{project_name}/architect/build/options/scripts : ["node_modules/ngx3js/assets/js/libs/lottie_canvas.js"]');
+								console.log(
+									'script required in angular.json - projects/{project_name}/architect/build/options/scripts : ["node_modules/ngx3js/assets/js/libs/lottie_canvas.js"]'
+								);
 							} else {
 								this.lottieLoader.load(
 									key,

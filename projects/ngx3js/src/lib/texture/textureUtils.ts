@@ -374,7 +374,7 @@ export const CanvasConf: {
 
 export const DataTextureConf: { [key: string]: DataFunctionType } = {
 	cloud: (options: any) => {
-		const size = options?.size ||  options?.width ||  options?.height || 128;
+		const size = options?.size || options?.width || options?.height || 128;
 		const data = new Uint8Array(size * size * size);
 		let i = 0;
 		const scale = options?.scale || 0.05;
@@ -457,7 +457,7 @@ export const DataTextureConf: { [key: string]: DataFunctionType } = {
 		const texture = new THREE.DataTexture(
 			new Uint8Array(width * height).fill(0),
 			width,
-			height,
+			height
 		);
 		texture.format = THREE.RedFormat;
 		texture.minFilter = THREE.LinearFilter;
@@ -467,7 +467,7 @@ export const DataTextureConf: { [key: string]: DataFunctionType } = {
 	},
 	datatexture2d: (options: any) => {
 		return DataTextureConf.datatexture(options);
-	}
+	},
 };
 
 /**

@@ -20,12 +20,12 @@ import { LocalStorageService } from './../local-storage.service';
  * CameraComponent
  *
  * Abstract base class for cameras. This class should always be inherited when you build a new camera.
- * 
+ *
  * ```html
- * <ngx3js-camera 
- * 	[type]="'perspective'" 
- * 	[fov]="45" 
- * 	[near]="0.1" 
+ * <ngx3js-camera
+ * 	[type]="'perspective'"
+ * 	[fov]="45"
+ * 	[near]="0.1"
  * 	[far]="200"
  * ></ngx3js-camera>
  * <ngx3js-camera
@@ -35,10 +35,10 @@ import { LocalStorageService } from './../local-storage.service';
  * 	[near]="1"
  * 	[far]="1000"
  * ></ngx3js-camera>
- * <ngx3js-camera 
- * 	[type]="'cube'" 
- * 	[fov]="40" 
- * 	[near]="1" 
+ * <ngx3js-camera
+ * 	[type]="'cube'"
+ * 	[fov]="40"
+ * 	[near]="1"
  * 	[far]="1000"
  * ></ngx3js-camera>
  * <ngx3js-camera
@@ -309,10 +309,7 @@ export class CameraComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
@@ -320,18 +317,16 @@ export class CameraComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -343,9 +338,7 @@ export class CameraComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {

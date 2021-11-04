@@ -10,7 +10,7 @@ import Ammo from 'ammojs-typed';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
 import * as THREE from 'three';
-import { GUI }  from './threejs-library/dat.gui.module';
+import { GUI } from './threejs-library/dat.gui.module';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
 import { CameraComponent } from './camera/camera.component';
@@ -41,7 +41,6 @@ export interface CurvesParameters {
  * Texture option
  */
 export interface TextureOption {
-	
 	/** The texture type */
 	type: string;
 
@@ -55,130 +54,128 @@ export interface TextureOption {
 	cubeImage?: string[];
 }
 
- /**
-  * Storage option
-  */
- export interface StorageOption {
+/**
+ * Storage option
+ */
+export interface StorageOption {
+	path?: string;
 
-	path? : string;
+	autoCenter?: boolean;
 
-	autoCenter? : boolean;
+	debugName?: boolean;
 
-	debugName? : boolean;
+	debug?: boolean;
 
-	debug? : boolean;
+	firstMesh?: boolean;
 
-	firstMesh? : boolean;
+	name?: string;
 
-	name? : string;
+	scale?: number;
 
-	scale? : number;
-
-	/** override material from storage */ 
-	material? : string;
+	/** override material from storage */
+	material?: string;
 
 	/** The resource path */
-	resourcePath? : string;
+	resourcePath?: string;
 
 	/**
 	 * Use Darco
 	 */
-	useDraco ? : boolean;
+	useDraco?: boolean;
 
 	/**
 	 * Use Ktx2
 	 */
-	useKtx2? : boolean;
+	useKtx2?: boolean;
 
 	/**
-	 * vmdUrl 
+	 * vmdUrl
 	 */
-	vmdUrl? : string | string[];
+	vmdUrl?: string | string[];
 
 	/**
 	 * ref object
 	 */
-	object? : THREE.SkinnedMesh | THREE.Camera | any;
+	object?: THREE.SkinnedMesh | THREE.Camera | any;
 
 	/**
-	 * 
+	 *
 	 */
-	drawFillShapes? : boolean;
+	drawFillShapes?: boolean;
 
 	/**
-	 * 
+	 *
 	 */
-	drawStrokes? : boolean;
-	
-	/**
-	 * 
-	 */
-	fillShapesWireframe? : boolean;
+	drawStrokes?: boolean;
 
 	/**
-	 * 
+	 *
 	 */
-	strokesWireframe? : boolean;
+	fillShapesWireframe?: boolean;
 
 	/**
-	 * 
+	 *
 	 */
-	type? : string;
+	strokesWireframe?: boolean;
 
 	/**
-	 * 
+	 *
 	 */
-	baseUrl? : string;
+	type?: string;
 
 	/**
-	 * 
+	 *
 	 */
-	body ? :  any;
+	baseUrl?: string;
 
 	/**
-	 * 
+	 *
 	 */
-	cssType? : string;
+	body?: any;
 
 	/**
-	 * 
+	 *
 	 */
-	geometry? : boolean;
+	cssType?: string;
 
 	/**
-	 * 
+	 *
 	 */
-	loaderType? : string;
+	geometry?: boolean;
 
 	/**
-	 * 
+	 *
 	 */
-	quality? : number;
+	loaderType?: string;
 
 	/**
-	 * 
+	 *
 	 */
-	dataType? : any;
+	quality?: number;
 
- }
+	/**
+	 *
+	 */
+	dataType?: any;
+}
 
- /**
-  * Storage export option
-  */
- export interface StorageExportOption {
-    binary?: boolean;
-    trs?: boolean;
-    onlyVisible?: boolean;
-    truncateDrawRange?: boolean;
-    embedImages?: boolean;
-    animations?: THREE.AnimationClip[];
-    forceIndices?: boolean;
-    forcePowerOfTwoTextures?: boolean;
-    includeCustomExtensions?: boolean;
-    excludeAttributes?: string[];
-    littleEndian?: boolean;
-	maxTextureSize? : number;
- }
+/**
+ * Storage export option
+ */
+export interface StorageExportOption {
+	binary?: boolean;
+	trs?: boolean;
+	onlyVisible?: boolean;
+	truncateDrawRange?: boolean;
+	embedImages?: boolean;
+	animations?: THREE.AnimationClip[];
+	forceIndices?: boolean;
+	forcePowerOfTwoTextures?: boolean;
+	includeCustomExtensions?: boolean;
+	excludeAttributes?: string[];
+	littleEndian?: boolean;
+	maxTextureSize?: number;
+}
 
 /**
  * ThreeUniform
@@ -427,7 +424,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	constructor(
 		@Inject('') controls: T,
 		@Inject('') controlsParams: GuiControlParam[] = [],
-		@Inject('') clearConsole: boolean = true,
+		@Inject('') clearConsole: boolean = true
 	) {
 		this.controls = ThreeUtil.getControls(controls, this);
 		this.setControlsParams(controlsParams);
@@ -451,7 +448,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	 * @param [timeDelay]
 	 * @returns timeout
 	 */
-	 protected getTimeout(timeDelay: number = 50): Promise<void> {
+	protected getTimeout(timeDelay: number = 50): Promise<void> {
 		return new Promise<void>((resolve) => {
 			window.setTimeout(() => {
 				resolve();
@@ -461,29 +458,31 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 
 	/**
 	 * Replaces controls value
-	 * 
-	 * @param newValue 
-	 * @param key 
-	 * @param [parent] 
-	 * @param [reDraw] 
+	 *
+	 * @param newValue
+	 * @param key
+	 * @param [parent]
+	 * @param [reDraw]
 	 */
-	protected replaceControlsValue(newValue : any,  key : string, parent : any = null, reDraw : boolean = true) {
-			if (parent === null) {
-				parent = this.controls;
+	protected replaceControlsValue(
+		newValue: any,
+		key: string,
+		parent: any = null,
+		reDraw: boolean = true
+	) {
+		if (parent === null) {
+			parent = this.controls;
+		}
+		if (parent[key] !== undefined) {
+			parent[key] = newValue;
+			if (reDraw) {
+				this.controlsParams = Object.assign([], this.controlsParams);
 			}
-			if (parent[key] !== undefined) {
-				parent[key] = newValue;
-				if (reDraw) {
-					this.controlsParams = Object.assign([], this.controlsParams);
-				}
-			}
+		}
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {}
@@ -498,8 +497,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		if (this._subscribe !== null) {
@@ -906,7 +904,7 @@ export class ThreeUtil {
 				if (this.isNotNull(this._elementEvents[clazzName])) {
 					const eleEvents = this._elementEvents[clazzName];
 					Object.entries(eleEvents).forEach(([key, value]) => {
-						ele.addEventListener(key, value, {passive: true});
+						ele.addEventListener(key, value, { passive: true });
 					});
 				}
 			}
@@ -1208,7 +1206,7 @@ export class ThreeUtil {
 					if (this.isNotNull(oldEvent)) {
 						ele.removeEventListener(key, oldEvent, false);
 					}
-					ele.addEventListener(key, value,{passive: true});
+					ele.addEventListener(key, value, { passive: true });
 					eleEvents[key] = value;
 				} else if (this.isNull(value) && this.isNotNull(oldEvent)) {
 					ele.removeEventListener(key, oldEvent, false);
@@ -1468,13 +1466,21 @@ export class ThreeUtil {
 
 	/**
 	 * Sets loading process
-	 * 
-	 * @param url 
-	 * @param loaded 
-	 * @param total 
+	 *
+	 * @param url
+	 * @param loaded
+	 * @param total
 	 */
 	public static setLoadingProcess(url: string, loaded: number, total: number) {
-		console.log('Loaded %c%d%c/%d => %c%s', 'font-weight:bold', loaded, '', total, 'font-style:italic', url);
+		console.log(
+			'Loaded %c%d%c/%d => %c%s',
+			'font-weight:bold',
+			loaded,
+			'',
+			total,
+			'font-style:italic',
+			url
+		);
 	}
 
 	/**

@@ -11,7 +11,7 @@ import { HtmlCollection, VisualComponent } from './visual/visual.component';
 
 /**
  * Abstract three controller
- * 
+ *
  * ```ts
  * export class XxxControllerComponent extends AbstractControllerComponent implements OnInit {
  * 	constructor() {

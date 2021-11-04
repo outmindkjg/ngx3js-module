@@ -15,7 +15,10 @@ import { ParametricGeometries } from 'three/examples/jsm/geometries/ParametricGe
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry';
 import { TeapotGeometry } from 'three/examples/jsm/geometries/TeapotGeometry';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
-import { LightningStrike, RayParameters } from 'three/examples/jsm/geometries/LightningStrike';
+import {
+	LightningStrike,
+	RayParameters,
+} from 'three/examples/jsm/geometries/LightningStrike';
 
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
@@ -41,54 +44,54 @@ import { StarGeometry } from './geometry.star';
 import { StarDepthGeometry } from './geometry.star-depth';
 import * as RollerCoaster from 'three/examples/jsm/misc/RollerCoaster';
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
-import { TextGeometry, TextGeometryParameters } from 'three//examples/jsm/geometries/TextGeometry';
-
+import {
+	TextGeometry,
+	TextGeometryParameters,
+} from 'three//examples/jsm/geometries/TextGeometry';
 
 /**
  * GeometryComponent
  *
  * ```text
- * A representation of mesh, line, or point geometry. Includes vertex positions, face
- * indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of
- * passing all this data to the GPU.
- *
+ * A representation of mesh, line, or point geometry. Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU.
  * To read and edit data in BufferGeometry attributes, see [page:BufferAttribute] documentation.
  * ```
+ *
  * ```html
- * <ngx3js-geometry 
- * 	[type]="'BoxGeometry'" 
- * 	[width]="16" 
- * 	[height]="16" 
- * 	[depth]="16" 
- * 	[widthSegments]="3" 
- * 	[heightSegments]="3" 
+ * <ngx3js-geometry
+ * 	[type]="'BoxGeometry'"
+ * 	[width]="16"
+ * 	[height]="16"
+ * 	[depth]="16"
+ * 	[widthSegments]="3"
+ * 	[heightSegments]="3"
  * 	[depthSegments]="3"></ngx3js-geometry>
- * <ngx3js-geometry 
- * 	[type]="'IcosahedronGeometry'" 
- * 	[radius]="8" 
+ * <ngx3js-geometry
+ * 	[type]="'IcosahedronGeometry'"
+ * 	[radius]="8"
  * 	[detail]="1"></ngx3js-geometry>
- * <ngx3js-geometry 
- * 	[type]="'PlaneGeometry'" 
- * 	[width]="16" 
- * 	[height]="16"  
- * 	[widthSegments]="3" 
+ * <ngx3js-geometry
+ * 	[type]="'PlaneGeometry'"
+ * 	[width]="16"
+ * 	[height]="16"
+ * 	[widthSegments]="3"
  * 	[heightSegments]="3"></ngx3js-geometry>
- * <ngx3js-geometry 
- * 	[type]="'SphereGeometry'" 
- * 	[radius]="0.4" 
- * 	[widthSegments]="14" 
+ * <ngx3js-geometry
+ * 	[type]="'SphereGeometry'"
+ * 	[radius]="0.4"
+ * 	[widthSegments]="14"
  * 	[heightSegments]="10"></ngx3js-geometry>
- * <ngx3js-geometry 
- * 	[type]="'TextGeometry'" 
- * 	[font]="'helvetiker'" 
- * 	[align]="'center bottom'" 
- * 	[text]="'test contents'" 
+ * <ngx3js-geometry
+ * 	[type]="'TextGeometry'"
+ * 	[font]="'helvetiker'"
+ * 	[align]="'center bottom'"
+ * 	[text]="'test contents'"
  * 	[size]="10"></ngx3js-geometry>
- * <ngx3js-geometry 
- * 	[type]="'TorusKnotGeometry'" 
- * 	[radius]="0.4" 
- * 	[tube]="0.08" 
- * 	[radialSegments]="95" 
+ * <ngx3js-geometry
+ * 	[type]="'TorusKnotGeometry'"
+ * 	[radius]="0.4"
+ * 	[tube]="0.08"
+ * 	[radialSegments]="95"
  * 	[tubularSegments]="20" ></ngx3js-geometry>
  *	<ngx3js-geometry
  *		[type]="'TeapotGeometry'"
@@ -200,7 +203,7 @@ import { TextGeometry, TextGeometryParameters } from 'three//examples/jsm/geomet
  *	></ngx3js-geometry>
  *
  * ```
- * 
+ *
  * @see THREE.BufferGeometry
  */
 @Component({
@@ -718,7 +721,7 @@ export class GeometryComponent
 	/**
 	 * Input  of geometry component
 	 */
-	 @Input() public rayParams: RayParameters = {};
+	@Input() public rayParams: RayParameters = {};
 
 	/**
 	 * Content children of geometry component
@@ -1117,10 +1120,7 @@ export class GeometryComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
@@ -1128,18 +1128,16 @@ export class GeometryComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -1151,9 +1149,7 @@ export class GeometryComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {
@@ -1936,8 +1932,8 @@ export class GeometryComponent
 							ThreeUtil.getTypeSafe(this.slices, 1500)
 						);
 						break;
-					case 'lightning' :
-					case 'lightningstrike' :
+					case 'lightning':
+					case 'lightningstrike':
 						geometry = new LightningStrike(this.rayParams) as any;
 						break;
 					default:

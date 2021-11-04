@@ -15,32 +15,32 @@ import { CanvasFunctionType } from './textureUtils';
 
 /**
  * TextureComponent
- * 
+ *
  * ```html
- * <ngx3js-texture 
- * 	[type]="'environment'" 
- * 	[storageName]="'textures/equirectangular/venice_sunset_1k.hdr'" 
+ * <ngx3js-texture
+ * 	[type]="'environment'"
+ * 	[storageName]="'textures/equirectangular/venice_sunset_1k.hdr'"
  * 	[mapping]="'EquirectangularReflectionMapping'"
  * ></ngx3js-texture>
- * <ngx3js-texture 
- * 	[type]="'map'" 
- * 	[image]="'models/obj/cerberus/Cerberus_A.jpg'" 
- * 	[encoding]="'sRGBEncoding'" 
+ * <ngx3js-texture
+ * 	[type]="'map'"
+ * 	[image]="'models/obj/cerberus/Cerberus_A.jpg'"
+ * 	[encoding]="'sRGBEncoding'"
  * 	[wrapS]="'RepeatWrapping'"
  * ></ngx3js-texture>
- * <ngx3js-texture 
- * 	[type]="'metalnessMap'" 
- * 	[image]="'models/obj/cerberus/Cerberus_RM.jpg'" 
- * 	[wrapS]="'RepeatWrapping'" 
- * ></ngx3js-texture>
- * <ngx3js-texture 
- * 	[type]="'roughnessMap'" 
- * 	[image]="'models/obj/cerberus/Cerberus_RM.jpg'"  
+ * <ngx3js-texture
+ * 	[type]="'metalnessMap'"
+ * 	[image]="'models/obj/cerberus/Cerberus_RM.jpg'"
  * 	[wrapS]="'RepeatWrapping'"
  * ></ngx3js-texture>
- * <ngx3js-texture 
- * 	[type]="'normalMap'" 
- * 	[image]="'models/obj/cerberus/Cerberus_N.jpg'"  
+ * <ngx3js-texture
+ * 	[type]="'roughnessMap'"
+ * 	[image]="'models/obj/cerberus/Cerberus_RM.jpg'"
+ * 	[wrapS]="'RepeatWrapping'"
+ * ></ngx3js-texture>
+ * <ngx3js-texture
+ * 	[type]="'normalMap'"
+ * 	[image]="'models/obj/cerberus/Cerberus_N.jpg'"
  * 	[wrapS]="'RepeatWrapping'"
  * ></ngx3js-texture>
  * <ngx3js-texture
@@ -251,10 +251,7 @@ export class TextureComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
@@ -262,18 +259,16 @@ export class TextureComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -289,9 +284,7 @@ export class TextureComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {
@@ -309,19 +302,25 @@ export class TextureComponent
 					event.preventDefault();
 					event.dataTransfer.dropEffect = 'copy';
 				};
-				document.addEventListener('dragover', this._dragOverHandler,{passive: true});
+				document.addEventListener('dragover', this._dragOverHandler, {
+					passive: true,
+				});
 			}
 			if (this._dragEnterHandler === null) {
 				this._dragEnterHandler = () => {
 					document.body.style.opacity = (0.5).toString();
 				};
-				document.addEventListener('dragenter', this._dragEnterHandler,{passive: true});
+				document.addEventListener('dragenter', this._dragEnterHandler, {
+					passive: true,
+				});
 			}
 			if (this._dragLeaveHandler === null) {
 				this._dragLeaveHandler = () => {
 					document.body.style.opacity = (1).toString();
 				};
-				document.addEventListener('dragleave', this._dragLeaveHandler,{passive: true});
+				document.addEventListener('dragleave', this._dragLeaveHandler, {
+					passive: true,
+				});
 			}
 			if (this._dropHandler === null) {
 				this._dropHandler = (event: any) => {
@@ -329,16 +328,20 @@ export class TextureComponent
 					if (this.texture !== null) {
 						const texture = this.texture;
 						const reader = new FileReader();
-						reader.addEventListener('load', (event) => {
-							texture.image.src = event.target.result;
-							texture.needsUpdate = true;
-							this.synkMaterial(texture);
-						},{passive: true});
+						reader.addEventListener(
+							'load',
+							(event) => {
+								texture.image.src = event.target.result;
+								texture.needsUpdate = true;
+								this.synkMaterial(texture);
+							},
+							{ passive: true }
+						);
 						reader.readAsDataURL(event.dataTransfer.files[0]);
 					}
 					document.body.style.opacity = (1).toString();
 				};
-				document.addEventListener('drop', this._dropHandler,{passive: true});
+				document.addEventListener('drop', this._dropHandler, { passive: true });
 			}
 		} else {
 			if (this._dragOverHandler !== null) {

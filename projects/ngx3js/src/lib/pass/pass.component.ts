@@ -55,7 +55,7 @@ import { TextureComponent } from '../texture/texture.component';
 
 /**
  * PassComponent
- * 
+ *
  * ```html
  * <ngx3js-composer>
  * 	<ngx3js-pass [type]="'RenderPass'"></ngx3js-pass>
@@ -175,9 +175,9 @@ import { TextureComponent } from '../texture/texture.component';
  * 		[clear]="false"
  * 		[scene]="scene"
  * 		[camera]="camera"
- * 	></ngx3js-pass>		
+ * 	></ngx3js-pass>
  * </ngx3js-composer>
- * 
+ *
  * ```
  */
 @Component({
@@ -666,10 +666,7 @@ export class PassComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked the directive's
-	 * data-bound properties for the first time,
-	 * and before any of the view or content children have been checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
@@ -677,8 +674,7 @@ export class PassComponent
 	}
 
 	/**
-	 * A callback method that performs custom clean-up, invoked immediately
-	 * before a directive, pipe, or service instance is destroyed.
+	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
 		if (this.pass !== null) {
@@ -691,10 +687,9 @@ export class PassComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -706,9 +701,7 @@ export class PassComponent
 	}
 
 	/**
-	 * A callback method that is invoked immediately after
-	 * Angular has completed initialization of all of the directive's
-	 * content.
+	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {
@@ -2131,8 +2124,8 @@ export class PassComponent
 							width: ssrSize.x,
 							height: ssrSize.y,
 							selects: ThreeUtil.getTypeSafe(this.selects, []),
-							isPerspectiveCamera : undefined,
-							isBouncing : undefined,
+							isPerspectiveCamera: undefined,
+							isBouncing: undefined,
 							groundReflector: groundReflector,
 						});
 						this.subscribeRefer(
@@ -2157,7 +2150,7 @@ export class PassComponent
 							camera: this.getCamera(this.effectCamera),
 							width: ssrrSize.x,
 							height: ssrrSize.y,
-							selects: ThreeUtil.getTypeSafe(this.selects, [])
+							selects: ThreeUtil.getTypeSafe(this.selects, []),
 						});
 						this.subscribeRefer(
 							'passSize',

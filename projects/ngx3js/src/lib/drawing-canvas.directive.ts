@@ -51,18 +51,21 @@ export class DrawingCanvasDirective implements OnChanges {
 		cleatBtn.className = 'clear-btn';
 		cleatBtn.innerText = 'x';
 		this.drawingCanvas.parentNode.appendChild(cleatBtn);
-		cleatBtn.addEventListener('click', () => {
-			this.clearCanvas();
-		},{passive: true});
+		cleatBtn.addEventListener(
+			'click',
+			() => {
+				this.clearCanvas();
+			},
+			{ passive: true }
+		);
 		this.drawingContext = this.drawingCanvas.getContext('2d');
 		this.setupCanvasDrawing();
 	}
 
 	/**
-	 * A callback method that is invoked immediately after the
-	 * default change detector has checked data-bound properties
-	 * if at least one has changed, and before the view and content
-	 * children are checked.
+	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
+	 * It is invoked only once when the directive is instantiated.
+	 * default change detector has checked data-bound properties if at least one has changed, and before the view and content children are checked.
 	 *
 	 * @param changes The changed properties.
 	 */
@@ -122,21 +125,37 @@ export class DrawingCanvasDirective implements OnChanges {
 	 * Set the canvas be drawable.
 	 */
 	private setupCanvasDrawing(): void {
-		this.drawingCanvas.addEventListener('pointerdown', (e) => {
-			this.paint = true;
-			this.drawStartPos.set(e.offsetX, e.offsetY);
-		},{passive: true});
-		this.drawingCanvas.addEventListener('pointermove', (e) => {
-			if (this.paint) {
-				this.draw(this.drawingContext, e.offsetX, e.offsetY);
-			}
-		},{passive: true});
-		this.drawingCanvas.addEventListener('pointerup', () => {
-			this.paint = false;
-		},{passive: true});
-		this.drawingCanvas.addEventListener('pointerleave', () => {
-			this.paint = false;
-		},{passive: true});
+		this.drawingCanvas.addEventListener(
+			'pointerdown',
+			(e) => {
+				this.paint = true;
+				this.drawStartPos.set(e.offsetX, e.offsetY);
+			},
+			{ passive: true }
+		);
+		this.drawingCanvas.addEventListener(
+			'pointermove',
+			(e) => {
+				if (this.paint) {
+					this.draw(this.drawingContext, e.offsetX, e.offsetY);
+				}
+			},
+			{ passive: true }
+		);
+		this.drawingCanvas.addEventListener(
+			'pointerup',
+			() => {
+				this.paint = false;
+			},
+			{ passive: true }
+		);
+		this.drawingCanvas.addEventListener(
+			'pointerleave',
+			() => {
+				this.paint = false;
+			},
+			{ passive: true }
+		);
 		this.clearCanvas();
 	}
 
