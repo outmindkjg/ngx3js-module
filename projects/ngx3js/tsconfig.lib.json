@@ -36,5 +36,17 @@
   "exclude": [
     "src/test.ts",
     "**/*.spec.ts"
-  ]
+  ],
+	"typedocOptions" : {
+		"entryPoints": ["src/public-api.ts"],
+		"includes" : "src/",
+    "json" : "../../docs_api.json",
+    "pretty" : true,
+    "readme" : "README.md",
+		"excludeProtected" : false,
+		"excludeExternals" : true,
+		"excludePrivate" : true,
+		"excludeNotDocumented" : true,
+		"out" : "../../docs"
+	}
 }

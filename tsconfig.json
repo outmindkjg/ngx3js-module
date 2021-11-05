@@ -27,17 +27,5 @@
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true
-	},
-	"typedocOptions" : {
-		"entryPoints": ["projects/ngx3js/src/public-api.ts"],
-		"includes" : "projects/ngx3js/src/",
-		"exclude": [
-			"dist/ngx3js/lib/",
-			"dist/**/*",
-			"fix/**/*"
-		],
-		"cleanOutputDir" : true,
-		"excludeNotDocumented" : true,
-		"out" : "docs"
 	}
 }
