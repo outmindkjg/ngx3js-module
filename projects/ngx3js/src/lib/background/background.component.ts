@@ -5,6 +5,10 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * BackgroundComponent
+ * 
+ * The background shorthand CSS property sets all background style properties at once, such as color, image, origin and size, or repeat method.
+ * 
+ * @see [MDN Web Docs - background](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
  */
 @Component({
 	selector: 'ngx3js-background',
@@ -36,277 +40,278 @@ export class BackgroundComponent
 	@Input() public content: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-color CSS property sets the background color of an element.
 	 */
 	@Input() public backgroundColor: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The background-color CSS property sets the background color alpha of an element.
 	 */
 	@Input() public backgroundAlpha: number = null;
 
 	/**
-	 * Input  of background component
+	 * The background-image CSS property sets one or more background images on an element.
 	 */
 	@Input() public backgroundImage: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-repeat CSS property sets how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all.
 	 */
 	@Input() public backgroundRepeat: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-repeat CSS property sets how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all.
 	 */
 	@Input() public backgroundRepeatX: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-repeat CSS property sets how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all.
 	 */
 	@Input() public backgroundRepeatY: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-position CSS property sets the initial position for each background image. The position is relative to the position layer set by background-origin.
 	 */
 	@Input() public backgroundPosition: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-position CSS property sets the initial position for each background image. The position is relative to the position layer set by background-origin.
 	 */
 	@Input() public backgroundPositionX: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-position CSS property sets the initial position for each background image. The position is relative to the position layer set by background-origin.
 	 */
 	@Input() public backgroundPositionY: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-size CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space.
 	 */
 	@Input() public backgroundSize: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-size CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space.
 	 */
 	@Input() public backgroundSizeX: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-size CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space.
 	 */
 	@Input() public backgroundSizeY: string = null;
 
 	/**
-	 * Input  of background component
+	 * The background-clip CSS property sets whether an element's background extends underneath its border box, padding box, or content box.
 	 */
 	@Input() public backgroundClip: string = null;
 
 	/**
-	 * Input  of background component
+	 * The padding CSS shorthand property sets the padding area on all four sides of an element at once.
 	 */
 	@Input() public padding: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The padding-left CSS property sets the width of the padding area to the left of an element.
 	 */
 	@Input() public paddingLeft: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The padding-top CSS property sets the height of the padding area on the top of an element.
 	 */
 	@Input() public paddingTop: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The padding-right CSS property sets the width of the padding area on the right of an element.
 	 */
 	@Input() public paddingRight: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The padding-right CSS property sets the width of the padding area on the bottom of an element.
 	 */
 	@Input() public paddingBottom: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The margin CSS shorthand property sets the margin area on all four sides of an element.
 	 */
 	@Input() public margin: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The margin-left CSS property sets the margin area on the left side of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
 	 */
 	@Input() public marginLeft: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The margin-top CSS property sets the margin area on the top of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
 	 */
 	@Input() public marginTop: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The margin-right CSS property sets the margin area on the right side of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
 	 */
 	@Input() public marginRight: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The margin-bottom CSS property sets the margin area on the bottom of an element. A positive value places it farther from its neighbors, while a negative value places it closer.
 	 */
 	@Input() public marginBottom: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border shorthand CSS property sets an element's border. It sets the values of border-width, border-style, and border-color.
 	 */
 	@Input() public border: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-color shorthand CSS property sets the color of an element's border.
 	 */
 	@Input() public borderColor: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-style shorthand CSS property sets the line style for all four sides of an element's border.
 	 */
 	@Input() public borderStyle: string = null;
 
 	/**
-	 * Input  of background component
+	 * The border-width shorthand CSS property sets the width of an element's border.
 	 */
 	@Input() public borderWidth: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-radius CSS property rounds the corners of an element's outer border edge. You can set a single radius to make circular corners, or two radii to make elliptical corners.
 	 */
 	@Input() public borderRadius: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-left shorthand CSS property sets all the properties of an element's left border.
 	 */
 	@Input() public borderLeft: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-top shorthand CSS property sets all the properties of an element's top border.
 	 */
 	@Input() public borderTop: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-right shorthand CSS property sets all the properties of an element's right border.
 	 */
 	@Input() public borderRight: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-bottom shorthand CSS property sets an element's bottom border. It sets the values of border-bottom-width, border-bottom-style and border-bottom-color.
 	 */
 	@Input() public borderBottom: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-image CSS property draws an image around a given element. It replaces the element's regular border.
 	 */
 	@Input() public borderImage: string = null;
 
 	/**
-	 * Input  of background component
+	 * The border-image-source CSS property sets the source image used to create an element's border image.
 	 */
 	@Input() public borderImageSource: string = null;
 
 	/**
-	 * Input  of background component
+	 * The border-image-slice CSS property divides the image specified by border-image-source into regions. These regions form the components of an element's border image.
 	 */
 	@Input() public borderImageSlice: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-image-outset CSS property sets the distance by which an element's border image is set out from its border box.
+	 * The parts of the border image that are rendered outside the element's border box with border-image-outset do not trigger overflow scrollbars and don't capture mouse events.
 	 */
 	@Input() public borderImageOutset: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The border-image-repeat CSS property defines how the edge regions of a source image are adjusted to fit the dimensions of an element's border image.
 	 */
 	@Input() public borderImageRepeat: string = null;
 
 	/**
-	 * Input  of background component
+	 * The border-image-width CSS property sets the width of an element's border image.
 	 */
 	@Input() public borderImageWidth: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The opacity CSS property sets the opacity of an element. Opacity is the degree to which content behind an element is hidden, and is the opposite of transparency.
 	 */
 	@Input() public opacity: number = null;
 
 	/**
-	 * Input  of background component
+	 * The color CSS property sets the foreground color value of an element's text and text decorations, and sets the <currentcolor> value. currentcolor may be used as an indirect value on other properties and is the default for other color properties, such as border-color.
 	 */
 	@Input() public color: string | number = null;
 
 	/**
-	 * Input  of background component
+	 * The font-family CSS property specifies a prioritized list of one or more font family names and/or generic family names for the selected element.
 	 */
 	@Input() public fontFamily: string = null;
 
 	/**
-	 * Input  of background component
+	 * The font-size CSS property sets the size of the font. Changing the font size also updates the sizes of the font size-relative <length> units, such as em, ex, and so forth.
 	 */
 	@Input() public fontSize: number = null;
 
 	/**
-	 * Input  of background component
+	 * The font-style CSS property sets whether a font should be styled with a normal, italic, or oblique face from its font-family.
 	 */
 	@Input() public fontStyle: string = null;
 
 	/**
-	 * Input  of background component
+	 * The font-weight CSS property sets the weight (or boldness) of the font. The weights available depend on the font-family that is currently set.
 	 */
 	@Input() public fontWeight: string = null;
 
 	/**
-	 * Input  of background component
+	 * The text-align CSS property sets the horizontal alignment of the content inside a block element or table-cell box. This means it works like vertical-align but in the horizontal direction.
 	 */
 	@Input() public textAlign: string = null;
 
 	/**
-	 * Input  of background component
+	 * The text-transform CSS property specifies how to capitalize an element's text. It can be used to make text appear in all-uppercase or all-lowercase, or with each word capitalized. It also can help improve legibility for ruby.
 	 */
 	@Input() public textTransform: string = null;
 
 	/**
-	 * Input  of background component
+	 * The text-decoration shorthand CSS property sets the appearance of decorative lines on text. It is a shorthand for text-decoration-line, text-decoration-color, text-decoration-style, and the newer text-decoration-thickness property.
 	 */
 	@Input() public textDecoration: string = null;
 
 	/**
-	 * Input  of background component
+	 * The letter-spacing CSS property sets the horizontal spacing behavior between text characters. This value is added to the natural spacing between characters while rendering the text. Positive values of letter-spacing causes characters to spread farther apart, while negative values of letter-spacing bring characters closer together.
 	 */
 	@Input() public letterSpacing: string = null;
 
 	/**
-	 * Input  of background component
+	 * The text-indent CSS property sets the length of empty space (indentation) that is put before lines of text in a block.
 	 */
 	@Input() public textIndent: string = null;
 
 	/**
-	 * Input  of background component
+	 * The text-justify CSS property sets what type of justification should be applied to text when text-align: justify; is set on an element.
 	 */
 	@Input() public textJustify: string = null;
 
 	/**
-	 * Input  of background component
+	 * The text-size-adjust CSS property controls the text inflation algorithm used on some smartphones and tablets. Other browsers will ignore this property.
 	 */
 	@Input() public textSizeAdjust: string = null;
 
 	/**
-	 * Input  of background component
+	 * The white-space CSS property sets how white space inside an element is handled.
 	 */
 	@Input() public whiteSpace: string = null;
 
 	/**
-	 * Input  of background component
+	 * The word-break CSS property sets whether line breaks appear wherever the text would otherwise overflow its content box.
 	 */
 	@Input() public wordBreak: string = null;
 
 	/**
-	 * Input  of background component
+	 * The word-spacing CSS property sets the length of space between words and between tags.
 	 */
 	@Input() public wordSpacing: string = null;
 
 	/**
-	 * Gets background color
+	 * The background-color CSS property sets the background color of an element.
 	 * @param [def]
 	 * @returns background color
 	 */
@@ -321,7 +326,8 @@ export class BackgroundComponent
 	}
 
 	/**
-	 * Gets background repeat
+	 * The background-repeat CSS property sets how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all.
+	 * 
 	 * @param [def]
 	 * @returns background repeat
 	 */
@@ -336,7 +342,8 @@ export class BackgroundComponent
 	}
 
 	/**
-	 * Gets background position
+	 * The background-position CSS property sets the initial position for each background image. The position is relative to the position layer set by background-origin.
+	 * 
 	 * @param [def]
 	 * @returns background position
 	 */
@@ -351,7 +358,8 @@ export class BackgroundComponent
 	}
 
 	/**
-	 * Gets background size
+	 * The background-size CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space.
+	 * 
 	 * @param [def]
 	 * @returns background size
 	 */

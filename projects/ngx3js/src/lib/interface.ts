@@ -304,99 +304,290 @@ export interface TagAttributes {
 
 /**
  * Css style
+ *
+ * @see [MDN Web Docs - Css](https://developer.mozilla.org/en-US/docs/Web/CSS)
  */
 export interface CssStyle {
+	/**
+	 * The HTTP Content-Security-Policy img-src directive specifies valid sources of images and favicons.
+	 * The HTTP Content-Security-Policy (CSP) frame-src directive specifies valid sources for nested browsing contexts loading using elements such as <frame> and <iframe>.
+	 */
 	src?: string;
+
+	/** The draggable global attribute is an enumerated attribute that indicates whether the element can be dragged, either with native browser behavior or the HTML Drag and Drop API. */
 	draggable?: boolean;
+
+	/** The Element property innerHTML gets or sets the HTML or XML markup contained within the element. */
 	innerHTML?: string;
+
+	/** The textContent property of the Node interface represents the text content of the node and its descendants. */
 	textContent?: string;
+
+	/** The content CSS property replaces an element with a generated value. Objects inserted using the content property are anonymous replaced elements. */
 	content?: string;
+
+	/** The position CSS property sets how an element is positioned in a document. The top, right, bottom, and left properties determine the final location of positioned elements. */
 	position?: string;
+
+	/** The pointer-events CSS property sets under what circumstances (if any) a particular graphic element can become the target of pointer events. */
 	pointerEvents?: string;
+
+	/** The overflow CSS shorthand property sets the desired behavior for an element's overflow — i.e. when an element's content is too big to fit in its block formatting context — in both directions. */
 	overflow?: string;
+
+	/** The z-index CSS property sets the z-order of a positioned element and its descendants or flex items. Overlapping elements with a larger z-index cover those with a smaller one. */
 	zIndex?: number;
+
+	/** The width CSS property sets an element's width. By default, it sets the width of the content area, but if box-sizing is set to border-box, it sets the width of the border area. */
 	width?: number | string;
+
+	/** The height CSS property specifies the height of an element. By default, the property defines the height of the content area. If box-sizing is set to border-box, however, it instead determines the height of the border area. */
 	height?: number | string;
+
+	/** The min-width CSS property sets the minimum width of an element. It prevents the used value of the width property from becoming smaller than the value specified for min-width. */
 	minWidth?: number | string;
+
+	/** The min-height CSS property sets the minimum height of an element. It prevents the used value of the height property from becoming smaller than the value specified for min-height. */
 	minHeight?: number | string;
+
+	/** The max-width CSS property sets the maximum width of an element. It prevents the used value of the width property from becoming larger than the value specified by max-width. */
 	maxWidth?: number | string;
+
+	/** The max-height CSS property sets the maximum height of an element. It prevents the used value of the height property from becoming larger than the value specified for max-height. */
 	maxHeight?: number | string;
+
+	/** The left CSS property participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements. */
 	left?: number | string;
+
+	/** The right CSS property participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements. */
 	right?: number | string;
+
+	/** The top CSS property participates in specifying the vertical position of a positioned element. It has no effect on non-positioned elements. */
 	top?: number | string;
+
+	/** The bottom CSS property participates in setting the vertical position of a positioned element. It has no effect on non-positioned elements. */
 	bottom?: number | string;
+
+	/** The transition CSS property is a shorthand property for transition-property, transition-duration, transition-timing-function, and transition-delay. */
 	transition?: string | string[];
+
+	/** The background shorthand CSS property sets all background style properties at once, such as color, image, origin and size, or repeat method. */
 	background?: ThreeColor | THREE.Vector4;
+
+	/** The background-color CSS property sets the background color of an element. */
 	backgroundColor?: ThreeColor | THREE.Vector4;
+
+	/** The background-image CSS property sets one or more background images on an element. */
 	backgroundImage?: string;
+
+	/** The background-repeat CSS property sets how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all. */
 	backgroundRepeat?: string;
+
+	/** The background-repeat CSS property sets how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all. */
 	backgroundRepeatX?: string;
+
+	/** The background-repeat CSS property sets how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all. */
 	backgroundRepeatY?: string;
+
+	/** The background-position CSS property sets the initial position for each background image. The position is relative to the position layer set by background-origin. */
 	backgroundPosition?: string;
+
+	/** The background-position CSS property sets the initial position for each background image. The position is relative to the position layer set by background-origin. */
 	backgroundPositionX?: number | string;
+
+	/** The background-position CSS property sets the initial position for each background image. The position is relative to the position layer set by background-origin. */
 	backgroundPositionY?: number | string;
+
+	/** The background-size CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space. */
 	backgroundSize?: number | string;
+
+	/** The background-size CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space. */
 	backgroundSizeX?: number | string;
+
+	/** The background-size CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space. */
 	backgroundSizeY?: number | string;
+
+	/** The background-clip CSS property sets whether an element's background extends underneath its border box, padding box, or content box. */
 	backgroundClip?: string;
+
+	/** The padding CSS shorthand property sets the padding area on all four sides of an element at once. */
 	padding?: number | string;
+
+	/** The padding-left CSS property sets the width of the padding area to the left of an element. */
 	paddingLeft?: number | string;
+
+	/** The padding-top CSS property sets the height of the padding area on the top of an element. */
 	paddingTop?: number | string;
+
+	/** The padding-right CSS property sets the width of the padding area on the right of an element. */
 	paddingRight?: number | string;
+
+	/** The padding-right CSS property sets the width of the padding area on the bottom of an element. */
 	paddingBottom?: number | string;
+
+	/** The margin CSS shorthand property sets the margin area on all four sides of an element. */
 	margin?: number | string;
+
+	/** The margin-left CSS property sets the margin area on the left side of an element. A positive value places it farther from its neighbors, while a negative value places it closer. */
 	marginLeft?: number | string;
+
+	/** The margin-top CSS property sets the margin area on the top of an element. A positive value places it farther from its neighbors, while a negative value places it closer. */
 	marginTop?: number | string;
+
+	/** The margin-right CSS property sets the margin area on the right side of an element. A positive value places it farther from its neighbors, while a negative value places it closer. */
 	marginRight?: number | string;
+
+	/** The margin-bottom CSS property sets the margin area on the bottom of an element. A positive value places it farther from its neighbors, while a negative value places it closer. */
 	marginBottom?: number | string;
+
+	/** The border shorthand CSS property sets an element's border. It sets the values of border-width, border-style, and border-color. */
 	border?: number | string;
+
+	/** The border-color shorthand CSS property sets the color of an element's border. */
 	borderColor?: ThreeColor | THREE.Vector4;
+
+	/** The border-style shorthand CSS property sets the line style for all four sides of an element's border. */
 	borderStyle?: string;
+
+	/** The border-width shorthand CSS property sets the width of an element's border. */
 	borderWidth?: number | string;
+
+	/** The border-radius CSS property rounds the corners of an element's outer border edge. You can set a single radius to make circular corners, or two radii to make elliptical corners. */
 	borderRadius?: number | string;
+
+	/** The border-left shorthand CSS property sets all the properties of an element's left border. */
 	borderLeft?: number | string;
+
+	/** The border-top shorthand CSS property sets all the properties of an element's top border. */
 	borderTop?: number | string;
+
+	/** The border-right shorthand CSS property sets all the properties of an element's right border. */
 	borderRight?: number | string;
+
+	/** The border-bottom shorthand CSS property sets an element's bottom border. It sets the values of border-bottom-width, border-bottom-style and border-bottom-color. */
 	borderBottom?: number | string;
+
+	/** The border-image CSS property draws an image around a given element. It replaces the element's regular border. */
 	borderImage?: string;
+
+	/** The border-image-source CSS property sets the source image used to create an element's border image. */
 	borderImageSource?: string;
+
+	/** The border-image-slice CSS property divides the image specified by border-image-source into regions. These regions form the components of an element's border image. */
 	borderImageSlice?: string | number;
+
+	/** 
+	 * The border-image-outset CSS property sets the distance by which an element's border image is set out from its border box.
+	 * The parts of the border image that are rendered outside the element's border box with border-image-outset do not trigger overflow scrollbars and don't capture mouse events.
+	 */
 	borderImageOutset?: string | number;
+
+	/** The border-image-repeat CSS property defines how the edge regions of a source image are adjusted to fit the dimensions of an element's border image. */
 	borderImageRepeat?: string;
+
+	/** The border-image-width CSS property sets the width of an element's border image. */
 	borderImageWidth?: number | string;
+
+	/** The opacity CSS property sets the opacity of an element. Opacity is the degree to which content behind an element is hidden, and is the opposite of transparency. */
 	opacity?: number;
+
+	/** The color CSS property sets the foreground color value of an element's text and text decorations, and sets the <currentcolor> value. currentcolor may be used as an indirect value on other properties and is the default for other color properties, such as border-color. */
 	color?: ThreeColor | THREE.Vector4;
+
+	/** The font-family CSS property specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
 	fontFamily?: string;
+
+	/** The font-size CSS property sets the size of the font. Changing the font size also updates the sizes of the font size-relative <length> units, such as em, ex, and so forth. */
 	fontSize?: number | string;
+
+	/** The font-style CSS property sets whether a font should be styled with a normal, italic, or oblique face from its font-family. */
 	fontStyle?: string;
+
+	/** The font-weight CSS property sets the weight (or boldness) of the font. The weights available depend on the font-family that is currently set. */
 	fontWeight?: number | string;
+
+	/** The text-align CSS property sets the horizontal alignment of the content inside a block element or table-cell box. This means it works like vertical-align but in the horizontal direction. */
 	textAlign?: string;
+
+	/** The text-transform CSS property specifies how to capitalize an element's text. It can be used to make text appear in all-uppercase or all-lowercase, or with each word capitalized. It also can help improve legibility for ruby. */
 	textTransform?: string;
+
+	/** The text-decoration shorthand CSS property sets the appearance of decorative lines on text. It is a shorthand for text-decoration-line, text-decoration-color, text-decoration-style, and the newer text-decoration-thickness property. */
 	textDecoration?: string;
+
+	/** The letter-spacing CSS property sets the horizontal spacing behavior between text characters. This value is added to the natural spacing between characters while rendering the text. Positive values of letter-spacing causes characters to spread farther apart, while negative values of letter-spacing bring characters closer together. */
 	letterSpacing?: string;
+
+	/** The text-indent CSS property sets the length of empty space (indentation) that is put before lines of text in a block. */
 	textIndent?: number | string;
+
+	/** The text-justify CSS property sets what type of justification should be applied to text when text-align: justify; is set on an element. */
 	textJustify?: string;
+
+	/** The text-size-adjust CSS property controls the text inflation algorithm used on some smartphones and tablets. Other browsers will ignore this property. */
 	textSizeAdjust?: string;
+
+	/** The white-space CSS property sets how white space inside an element is handled. */
 	whiteSpace?: string;
+
+	/** The word-break CSS property sets whether line breaks appear wherever the text would otherwise overflow its content box. */
 	wordBreak?: string;
+
+	/** The word-spacing CSS property sets the length of space between words and between tags. */
 	wordSpacing?: string;
+
+	/** The change event is fired for <input>, <select>, and <textarea> elements when an alteration to the element's value is committed by the user. Unlike the input event, the change event is not necessarily fired for each alteration to an element's value. */
 	change?: (e?: any) => void;
+
+	/** An element receives a click event when a pointing device button (such as a mouse's primary mouse button) is both pressed and released while the pointer is located inside the element. */
 	click?: (e?: any) => void;
+
+	/** The dblclick event fires when a pointing device button (such as a mouse's primary button) is double-clicked; that is, when it's rapidly clicked twice on a single element within a very short span of time. */
 	dblclick?: (e?: any) => void;
+
+	/** The HTMLElement.focus() method sets focus on the specified element, if it can be focused. The focused element is the element which will receive keyboard and similar events by default. */
 	focus?: (e?: any) => void;
+
+	/** The keyup event is fired when a key is released. */
 	keyup?: (e?: any) => void;
+
+	/** The keydown event is fired when a key is pressed. */
 	keydown?: (e?: any) => void;
+
+	/** The load event is fired when the whole page has loaded, including all dependent resources such as stylesheets and images. */
 	load?: (e?: any) => void;
+
+	/** The select event fires when some text has been selected. */
 	select?: (e?: any) => void;
+
+	/** The mousedown event is fired at an Element when a pointing device button is pressed while the pointer is inside the element. */
 	mousedown?: (e?: any) => void;
+
+	/** The mouseout event is fired at an Element when a pointing device (usually a mouse) is used to move the cursor so that it is no longer contained within the element or one of its children. */
 	mouseout?: (e?: any) => void;
+
+	/** The mouseover event is fired at an Element when a pointing device (such as a mouse or trackpad) is used to move the cursor onto the element or one of its child elements. */
 	mouseover?: (e?: any) => void;
+
+	/** The mousemove event is fired at an element when a pointing device (usually a mouse) is moved while the cursor's hotspot is inside it. */
 	mousemove?: (e?: any) => void;
+
+	/** The mouseup event is fired at an Element when a button on a pointing device (such as a mouse or trackpad) is released while the pointer is located inside it. */
 	mouseup?: (e?: any) => void;
+
+	/** The Element property innerHTML gets or sets the HTML or XML markup contained within the element. */
 	innerHtml?: string;
+
+	/** The innerText property of the HTMLElement interface represents the "rendered" text content of a node and its descendants. */
 	innerText?: string;
+
+	/** The className property of the Element interface gets and sets the value of the class attribute of the specified element. */
 	className?: string;
+
+	/** The transform CSS property lets you rotate, scale, skew, or translate an element. It modifies the coordinate space of the CSS visual formatting model. */
 	transform?: string | string[];
+
+	/** The transform-origin CSS property sets the origin for an element's transformations. */
 	transformOrigin?: string;
 }
 
