@@ -95,32 +95,33 @@ export abstract class AbstractGeometryComponent
 	@Input() public align: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Center the geometry based on the bounding box.
 	 */
 	@Input() public center: boolean = false;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Computes vertex normals by averaging face normals.
 	 */
 	@Input() public computeVertexNormals: boolean = false;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Computes bounding box of the geometry, updating [page:.boundingBox] attribute. Bounding boxes aren't computed by default. They need to be explicitly computed, otherwise they are *null*.
 	 */
 	@Input() public computeBoundingBox: boolean = false;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Computes bounding sphere of the geometry, updating [page:.boundingSphere] attribute. Bounding spheres aren't computed by default. They need to be explicitly computed, otherwise they are *null*.
 	 */
 	@Input() public computeBoundingSphere: boolean = false;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Calculates and adds a tangent attribute to this geometry.
+	 * The computation is only supported for indexed geometries and if position, normal, and uv attributes are defined.
 	 */
 	@Input() public computeTangents: boolean = false;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [page:Object3D.scale] for typical real-time mesh scaling.
 	 */
 	@Input() public scale: number = null;
 
@@ -130,7 +131,8 @@ export abstract class AbstractGeometryComponent
 	@Input() public sphereScale: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * This hashmap has as id the name of the attribute to be set and as value the [page:BufferAttribute buffer] to set it to.
+	 * Rather than accessing this property directly, use [page:.setAttribute] and [page:.getAttribute] to access attributes of this geometry.
 	 */
 	@Input() public attributes: { [key: string]: AttrBufferAttribute } = null;
 
@@ -350,7 +352,7 @@ export abstract class AbstractGeometryComponent
 	@Input() public attrIndexUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Return a non-index version of an indexed BufferGeometry.
 	 */
 	@Input() public toNonIndexed: boolean = null;
 
@@ -360,13 +362,12 @@ export abstract class AbstractGeometryComponent
 	@Input() public flipY: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * geometry -- Instance of [page:BufferGeometry BufferGeometry] to merge the vertices of.
+	 * tolerance -- The maximum allowable difference between vertex attributes to merge. Defaults to 1e-4.
+	 * Returns a new [page:BufferGeometry BufferGeometry] with vertices for which all similar vertex attributes (within tolerance) are merged.
 	 */
 	@Input() public mergeVertices: boolean = null;
 
-	/**
-	 * Input  of abstract geometry component
-	 */
 	/**
 	 * Input  of abstract geometry component
 	 */
