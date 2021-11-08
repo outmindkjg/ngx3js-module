@@ -1276,6 +1276,7 @@ export class LocalStorageService {
 			if (this.gltfLoader === null) {
 				this.gltfLoader = new GLTFLoader(ThreeUtil.getLoadingManager());
 			}
+			this.setLoaderWithOption(this.gltfLoader, options);
 			if (options) {
 				if (options.useDraco) {
 					if (this.dracoLoader === null) {
@@ -1300,7 +1301,6 @@ export class LocalStorageService {
 					this.gltfLoader.setMeshoptDecoder(MeshoptDecoder);
 				}
 			}
-			this.setLoaderWithOption(this.gltfLoader, options);
 			this.gltfLoader.load(
 				key,
 				(result: GLTF) => {
