@@ -34,7 +34,7 @@ export class ToolsComponent
 	implements OnInit
 {
 	/**
-	 * Input  of tools component
+	 * The Input of tools component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -42,12 +42,12 @@ export class ToolsComponent
 	@Input() public type: string = '';
 
 	/**
-	 * Input  of tools component
+	 * The url of tools component
 	 */
 	@Input() public url: string = null;
 
 	/**
-	 * Input  of tools component
+	 * The size of tools component
 	 */
 	@Input() public size: number = null;
 
@@ -72,7 +72,7 @@ export class ToolsComponent
 	@Input() public encoding: string = null;
 
 	/**
-	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically set this to [page:Textures THREE.RGBFormat] for JPG images. 
+	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically set this to [page:Textures THREE.RGBFormat] for JPG images.
 	 * See the [page:Textures texture constants] page for details of other formats.
 	 *
 	 * Notice - case insensitive.
@@ -96,17 +96,17 @@ export class ToolsComponent
 	@Input() public format: string = null;
 
 	/**
-	 * Input  of tools component
+	 * The background of tools component
 	 */
 	@Input() public background: string | number | AbstractTextureComponent = null;
 
 	/**
-	 * Input  of tools component
+	 * The storageName of tools component
 	 */
 	@Input() public storageName: string = null;
 
 	/**
-	 * Input  of tools component
+	 * The storageOption of tools component
 	 */
 	@Input() public storageOption: any = null;
 

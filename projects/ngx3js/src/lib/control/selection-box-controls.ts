@@ -13,17 +13,17 @@ export class SelectBoxControls {
 	public selectionBox: SelectionBox = null;
 
 	/**
-	 * Helper  of select box controls
+	 * The Helper of select box controls
 	 */
 	public helper: SelectionHelper = null;
 
 	/**
-	 * Pointerup  of select box controls
+	 * The Pointerup of select box controls
 	 */
 	pointerup: ThreeColor = 0xffffff;
 
 	/**
-	 * Pointerdown  of select box controls
+	 * The Pointerdown of select box controls
 	 */
 	pointerdown: ThreeColor = 0x000000;
 
@@ -118,7 +118,7 @@ export class SelectBoxControls {
 	}
 
 	/**
-	 * Mouse  of select box controls
+	 * The Mouse of select box controls
 	 */
 	private mouse: THREE.Vector2 = new THREE.Vector2();
 

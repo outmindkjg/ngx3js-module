@@ -63,7 +63,7 @@ export class RigidbodyComponent
 	implements OnInit
 {
 	/**
-	 * Input  of rigidbody component
+	 * The type  of rigidbody component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -71,107 +71,107 @@ export class RigidbodyComponent
 	@Input() public type: string = 'auto';
 
 	/**
-	 * Input  of rigidbody component
+	 * The isSoftBody of rigidbody component
 	 */
 	@Input() public isSoftBody: boolean = false;
 
 	/**
-	 * Input  of rigidbody component
+	 * The width of rigidbody component
 	 */
 	@Input() public width: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The height of rigidbody component
 	 */
 	@Input() public height: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The depth of rigidbody component
 	 */
 	@Input() public depth: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The radius of rigidbody component
 	 */
 	@Input() public radius: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The mass of rigidbody component
 	 */
 	@Input() public mass: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The margin of rigidbody component
 	 */
 	@Input() public margin: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The friction of rigidbody component
 	 */
 	@Input() public friction: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The rollingFriction of rigidbody component
 	 */
 	@Input() public rollingFriction: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The restitution of rigidbody component
 	 */
 	@Input() public restitution: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The inertia of rigidbody component
 	 */
 	@Input() public inertia: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The inertiaX of rigidbody component
 	 */
 	@Input() public inertiaX: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The inertiaY of rigidbody component
 	 */
 	@Input() public inertiaY: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The inertiaZ of rigidbody component
 	 */
 	@Input() public inertiaZ: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The velocityX of rigidbody component
 	 */
 	@Input() public velocityX: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The velocityY of rigidbody component
 	 */
 	@Input() public velocityY: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The velocityZ of rigidbody component
 	 */
 	@Input() public velocityZ: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The angularVelocityX of rigidbody component
 	 */
 	@Input() public angularVelocityX: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The angularVelocityY of rigidbody component
 	 */
 	@Input() public angularVelocityY: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The angularVelocityZ of rigidbody component
 	 */
 	@Input() public angularVelocityZ: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The velocityType of rigidbody component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -179,62 +179,62 @@ export class RigidbodyComponent
 	@Input() public velocityType: string = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The damping of rigidbody component
 	 */
 	@Input() public damping: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The linDamping of rigidbody component
 	 */
 	@Input() public linDamping: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The angDamping of rigidbody component
 	 */
 	@Input() public angDamping: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The breakable of rigidbody component
 	 */
 	@Input() public breakable: boolean = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The collisions of rigidbody component
 	 */
 	@Input() public collisions: number | string = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The pressure of rigidbody component
 	 */
 	@Input() public pressure: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The stiffness of rigidbody component
 	 */
 	@Input() public stiffness: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The linStiffness of rigidbody component
 	 */
 	@Input() public linStiffness: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The angStiffness of rigidbody component
 	 */
 	@Input() public angStiffness: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The viterations of rigidbody component
 	 */
 	@Input() public viterations: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The piterations of rigidbody component
 	 */
 	@Input() public piterations: number = null;
 
 	/**
-	 * Input  of rigidbody component
+	 * The randomizeConstraints of rigidbody component
 	 */
 	@Input() public randomizeConstraints: boolean = true;
 
@@ -562,7 +562,7 @@ export class RigidbodyComponent
 	}
 
 	/**
-	 * Object3d  of rigidbody component
+	 * The Object3d of rigidbody component
 	 */
 	private object3d: THREE.Object3D = null;
 
@@ -582,17 +582,17 @@ export class RigidbodyComponent
 	}
 
 	/**
-	 * Physics  of rigidbody component
+	 * The Physics of rigidbody component
 	 */
 	private physics: PhysicsComponent = null;
 
 	/**
-	 * Ammo  of rigidbody component
+	 * The Ammo of rigidbody component
 	 */
 	private _ammo: typeof Ammo = null;
 
 	/**
-	 * Physics  of rigidbody component
+	 * The Physics of rigidbody component
 	 */
 	private _physics: Ammo.btSoftRigidDynamicsWorld = null;
 

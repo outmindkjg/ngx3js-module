@@ -34,7 +34,7 @@ export class SceneComponent
 	implements OnInit
 {
 	/**
-	 * Input  of scene component
+	 * The storageName of scene component
 	 */
 	@Input() public storageName: string = null;
 
@@ -157,12 +157,12 @@ export class SceneComponent
 	}
 
 	/**
-	 * Scene  of scene component
+	 * The Scene of scene component
 	 */
 	private scene: THREE.Scene = null;
 
 	/**
-	 * Renderer  of scene component
+	 * The Renderer of scene component
 	 */
 	private renderer: RendererComponent = null;
 
@@ -233,7 +233,7 @@ export class SceneComponent
 	}
 
 	/**
-	 * Physics  of scene component
+	 * The Physics of scene component
 	 */
 	private _physics: PhysicsComponent = null;
 

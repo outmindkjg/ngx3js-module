@@ -5,7 +5,7 @@ import * as THREE from 'three';
  */
 export class RopeGeometry extends THREE.BufferGeometry {
 	/**
-	 * Parameters  of rope geometry
+	 * The Parameters of rope geometry
 	 */
 	public parameters: { width: number; widthSegments: number };
 

@@ -3,7 +3,7 @@ import { Float32BufferAttribute, Vector3 } from 'three';
 
 export class CapsuleGeometry extends THREE.BufferGeometry {
 	/**
-	 * Parameters  of capsule geometry
+	 * The Parameters of capsule geometry
 	 */
 	parameters: {
 		radius: number;

@@ -42,12 +42,12 @@ export class ClipComponent
 	@Input() public name: string = '';
 
 	/**
-	 * Input  of clip component
+	 * The index of clip component
 	 */
 	@Input() public index: number = -1;
 
 	/**
-	 * Input  of clip component
+	 * The blendMode of clip component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -90,7 +90,7 @@ export class ClipComponent
 
 	/**
 	 * The degree of influence of this action (in the interval [0, 1]). Values between 0 (no impact)
-	 * and 1 (full impact) can be used to blend between several actions. Default is 1. 
+	 * and 1 (full impact) can be used to blend between several actions. Default is 1.
 	 * Properties/methods concerning  *weight* are:
 	 */
 	@Input() public weight: number = 1;
@@ -255,24 +255,24 @@ export class ClipComponent
 	}
 
 	/**
-	 * Mixer  of clip component
+	 * The Mixer of clip component
 	 */
 	private mixer: THREE.AnimationMixer = null;
 
 	private model: any = null;
 
 	/**
-	 * Clips  of clip component
+	 * The Clips of clip component
 	 */
 	private clips: THREE.AnimationClip[] = null;
 
 	/**
-	 * Clip  of clip component
+	 * The Clip of clip component
 	 */
 	private clip: THREE.AnimationClip = null;
 
 	/**
-	 * Action  of clip component
+	 * The Action of clip component
 	 */
 	public action: THREE.AnimationAction = null;
 

@@ -5,7 +5,7 @@ import * as THREE from 'three';
  */
 export class GridGeometry extends THREE.BufferGeometry {
 	/**
-	 * Parameters  of grid geometry
+	 * The Parameters of grid geometry
 	 */
 	public parameters: {
 		width: number;

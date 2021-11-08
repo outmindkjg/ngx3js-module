@@ -7,17 +7,17 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
  */
 export class AVRControls {
 	/**
-	 * Control  of avrcontrols
+	 * The Control of avrcontrols
 	 */
 	control: OrbitControls = null;
 
 	/**
-	 * Button  of avrcontrols
+	 * The Button of avrcontrols
 	 */
 	button: HTMLElement = null;
 
 	/**
-	 * Target  of avrcontrols
+	 * The Target of avrcontrols
 	 */
 	public target: THREE.Vector3 = new THREE.Vector3();
 

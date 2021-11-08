@@ -64,7 +64,7 @@ export class AudioComponent
 	implements OnInit
 {
 	/**
-	 * Input  of audio component
+	 * The type  of audio component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -197,22 +197,22 @@ export class AudioComponent
 	}
 
 	/**
-	 * Audio  of audio component
+	 * The Audio of audio component
 	 */
 	private audio: THREE.Audio<any> = null;
 
 	/**
-	 * Video  of audio component
+	 * The Video of audio component
 	 */
 	private video: HTMLVideoElement = null;
 
 	/**
-	 * Listener  of audio component
+	 * The Listener of audio component
 	 */
 	private listener: THREE.AudioListener = null;
 
 	/**
-	 * Analyser  of audio component
+	 * The Analyser of audio component
 	 */
 	private analyser: THREE.AudioAnalyser = null;
 
@@ -248,7 +248,7 @@ export class AudioComponent
 	}
 
 	/**
-	 * Renderer  of audio component
+	 * The Renderer of audio component
 	 */
 	private _renderer: any = null;
 

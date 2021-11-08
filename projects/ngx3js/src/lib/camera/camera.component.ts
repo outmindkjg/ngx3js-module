@@ -122,7 +122,7 @@ export class CameraComponent
 	@Input() public far: number | string = null;
 
 	/**
-	 * orthoSize  of camera component
+	 * The orthoSize of camera component
 	 */
 	@Input() public orthoSize: number = 400;
 
@@ -157,7 +157,7 @@ export class CameraComponent
 	@Input() public autoClear: boolean = null;
 
 	/**
-	 * Input  of camera component
+	 * The controlType of camera component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -165,7 +165,7 @@ export class CameraComponent
 	@Input() public controlType: string = 'none';
 
 	/**
-	 * Input  of camera component
+	 * The autoRotate of camera component
 	 */
 	@Input() public autoRotate: boolean = null;
 
@@ -243,7 +243,7 @@ export class CameraComponent
 	@Input() public clearColor: ThreeColor = null;
 
 	/**
-	 * Input  of camera component
+	 * The clearAlpha of camera component
 	 */
 	@Input() public clearAlpha: number = null;
 
@@ -289,13 +289,13 @@ export class CameraComponent
 	@Input() public scissorHeight: number | string = '100%';
 
 	/**
-	 * Input  of camera component
+	 * The referObject3d of camera component
 	 */
 	@Input() public referObject3d: AbstractObject3dComponent | THREE.Object3D =
 		null;
 
 	/**
-	 * Output  of renderer component
+	 * The Output of renderer component
 	 */
 	@Output() private onRender: EventEmitter<RendererTimer> =
 		new EventEmitter<RendererTimer>();
@@ -653,17 +653,17 @@ export class CameraComponent
 	}
 
 	/**
-	 * Camera  of camera component
+	 * The Camera of camera component
 	 */
 	private camera: THREE.Camera | THREE.Object3D = null;
 
 	/**
-	 * Camera  of camera component
+	 * The Camera of camera component
 	 */
 	private cameraExtra: THREE.CubeCamera[] = null;
 
 	/**
-	 * Renderer  of camera component
+	 * The Renderer of camera component
 	 */
 	private renderer: THREE.Renderer = null;
 
@@ -840,7 +840,7 @@ export class CameraComponent
 	}
 
 	/**
-	 * Raycaster  of camera component
+	 * The Raycaster of camera component
 	 */
 	private raycaster: THREE.Raycaster = null;
 

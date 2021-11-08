@@ -12,7 +12,7 @@ export class StarDepthGeometry extends THREE.BufferGeometry {
 	type: string = 'StarDepthGeometry';
 
 	/**
-	 * Parameters  of star depth geometry
+	 * The Parameters of star depth geometry
 	 */
 	parameters: {
 		innerRadius: number;

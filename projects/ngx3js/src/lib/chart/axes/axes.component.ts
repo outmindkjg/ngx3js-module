@@ -37,27 +37,27 @@ export class ChartAxesComponent
 	@Input() public radiusSegments: number = null;
 
 	/**
-	 * Input  of chart axes component
+	 * The gridColor of chart axes component
 	 */
 	@Input() public gridColor: ThreeColor = null;
 
 	/**
-	 * Input  of chart axes component
+	 * The xGridColor of chart axes component
 	 */
 	@Input() public xGridColor: ThreeColor = null;
 
 	/**
-	 * Input  of chart axes component
+	 * The yGridColor of chart axes component
 	 */
 	@Input() public yGridColor: ThreeColor = null;
 
 	/**
-	 * Input  of chart axes component
+	 * The xGridStep of chart axes component
 	 */
 	@Input() public xGridStep: number[] | number = null;
 
 	/**
-	 * Input  of chart axes component
+	 * The yGridStep of chart axes component
 	 */
 	@Input() public yGridStep: number[] | number = null;
 
@@ -120,7 +120,7 @@ export class ChartAxesComponent
 	}
 
 	/**
-	 * Axes  of chart axes component
+	 * The Axes of chart axes component
 	 */
 	private _axes: THREE.Object3D = null;
 

@@ -18,7 +18,7 @@ export class ShaderComponent
 	implements OnInit
 {
 	/**
-	 * Input  of shader component
+	 * The type of shader component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -26,7 +26,7 @@ export class ShaderComponent
 	@Input() public type: string = 'x-shader/x-fragment';
 
 	/**
-	 * Input  of shader component
+	 * The refShader of shader component
 	 */
 	@Input() public refShader: ShaderComponent = null;
 
@@ -62,7 +62,7 @@ export class ShaderComponent
 	}
 
 	/**
-	 * Shader  of shader component
+	 * The Shader of shader component
 	 */
 	private shader: string = null;
 

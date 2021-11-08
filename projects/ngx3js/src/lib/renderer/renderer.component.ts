@@ -83,7 +83,7 @@ export class RendererComponent
 	@Input() public type: string = 'webgl';
 
 	/**
-	 * Input  of renderer component
+	 * The xrEnabled of renderer component
 	 */
 	@Input() public xrEnabled: boolean = false;
 
@@ -204,7 +204,7 @@ export class RendererComponent
 	@Input() public quality: string = null;
 
 	/**
-	 * Input  of renderer component
+	 * The Input of renderer component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -318,7 +318,7 @@ export class RendererComponent
 	@Input() public preserveDrawingBuffer: boolean = false;
 
 	/**
-	 * Input  of renderer component
+	 * The Input of renderer component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -340,38 +340,38 @@ export class RendererComponent
 	@Input() public useEvent: string = null;
 
 	/**
-	 * Input  of renderer component
+	 * The camera of renderer component
 	 */
 	@Input() public camera: CameraComponent = null;
 
 	/**
-	 * Input  of renderer component
+	 * The scene of renderer component
 	 */
 	@Input() public scene: SceneComponent = null;
 
 	/**
-	 * Input  of renderer component
+	 * The requiredExtensions of renderer component
 	 */
 	@Input() public requiredExtensions: string[] = null;
 
 	/**
-	 * Input  of renderer component
+	 * The beforeRender of renderer component
 	 */
 	@Input() public beforeRender: (info: RendererInfo) => boolean = null;
 
 	/**
-	 * Input  of renderer component
+	 * The afterRender of renderer component
 	 */
 	@Input() public afterRender: (info: RendererInfo) => any = null;
 
 	/**
-	 * Output  of renderer component
+	 * The Output of renderer component
 	 */
 	@Output() private eventListener: EventEmitter<RendererEvent> =
 		new EventEmitter<RendererEvent>();
 
 	/**
-	 * Output  of renderer component
+	 * The Output of renderer component
 	 */
 	@Output() private onRender: EventEmitter<RendererTimer> =
 		new EventEmitter<RendererTimer>();
@@ -802,7 +802,7 @@ export class RendererComponent
 	}
 
 	/**
-	 * Events  of renderer component
+	 * The Events of renderer component
 	 */
 	private events: RendererEvent = {
 		type: 'none',
@@ -1240,7 +1240,7 @@ export class RendererComponent
 	}
 
 	/**
-	 * Renderlistener  of renderer component
+	 * The Renderlistener of renderer component
 	 */
 	private renderlistener: THREE.AudioListener = null;
 
@@ -1731,7 +1731,7 @@ export class RendererComponent
 	}
 
 	/**
-	 * Renderer  of renderer component
+	 * The Renderer of renderer component
 	 */
 	public renderer: THREE.Renderer = null;
 
@@ -1754,22 +1754,22 @@ export class RendererComponent
 	public rendererHeight: number = 768;
 
 	/**
-	 * Stats  of renderer component
+	 * The Stats of renderer component
 	 */
 	private stats: ThreeStats = null;
 
 	/**
-	 * Gui  of renderer component
+	 * The Gui of renderer component
 	 */
 	public gui: ThreeGui = null;
 
 	/**
-	 * Clock  of renderer component
+	 * The Clock of renderer component
 	 */
 	private clock: ThreeClock = null;
 
 	/**
-	 * Controls  of renderer component
+	 * The Controls of renderer component
 	 */
 	private controls: ControlComponent[] = null;
 
@@ -2015,12 +2015,12 @@ export class RendererComponent
 	private _renderCaller: (...args: any[]) => void = null;
 
 	/**
-	 * Cameras  of renderer component
+	 * The Cameras of renderer component
 	 */
 	private _cameras: THREE.Camera[] = null;
 
 	/**
-	 * Scenes  of renderer component
+	 * The Scenes of renderer component
 	 */
 	private _scenes: THREE.Scene[] = null;
 

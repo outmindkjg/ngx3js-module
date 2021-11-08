@@ -30,12 +30,12 @@ export class ChartBarComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart bar component
+	 * The type of chart bar component
 	 */
 	@Input() public type: string = '';
 
 	/**
-	 * Input  of chart bar component
+	 * The data of chart bar component
 	 */
 	@Input() public data: number[] = [];
 
@@ -94,17 +94,17 @@ export class ChartBarComponent
 	}
 
 	/**
-	 * Line  of chart bar component
+	 * The Line of chart bar component
 	 */
 	private _line: THREE.Object3D = null;
 
 	/**
-	 * Material  of chart bar component
+	 * The Material of chart bar component
 	 */
 	private _material: THREE.Material = null;
 
 	/**
-	 * Geometry  of chart bar component
+	 * The Geometry of chart bar component
 	 */
 	private _geometry: THREE.BufferGeometry = null;
 

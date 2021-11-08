@@ -32,12 +32,12 @@ export class ChartLineComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart line component
+	 * The type of chart line component
 	 */
 	@Input() public type: string = '';
 
 	/**
-	 * Input  of chart line component
+	 * The data of chart line component
 	 */
 	@Input() public data: number[] = [];
 
@@ -86,17 +86,17 @@ export class ChartLineComponent
 	}
 
 	/**
-	 * Line  of chart line component
+	 * The Line of chart line component
 	 */
 	private _line: THREE.Object3D = null;
 
 	/**
-	 * Material  of chart line component
+	 * The Material of chart line component
 	 */
 	private _material: THREE.Material = null;
 
 	/**
-	 * Geometry  of chart line component
+	 * The Geometry of chart line component
 	 */
 	private _geometry: THREE.BufferGeometry = null;
 

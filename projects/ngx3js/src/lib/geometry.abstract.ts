@@ -82,14 +82,16 @@ export abstract class AbstractGeometryComponent
 	@Input() public name: string = null;
 
 	/**
-	 * refName  of geometry component
+	 * refer mesh name  of geometry component
 	 */
 	@Input() public refName: string | string[] = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The align of geometry
 	 *
-	 * Notice - case insensitive.
+	 * left, center, right, top, bottom, front, back, double
+	 *
+	 * Notice - case insensitive. mixed
 	 *
 	 */
 	@Input() public align: string = null;
@@ -126,7 +128,7 @@ export abstract class AbstractGeometryComponent
 	@Input() public scale: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [page:Object3D.scale] for typical real-time mesh scaling.
 	 */
 	@Input() public sphereScale: number = null;
 
@@ -137,88 +139,88 @@ export abstract class AbstractGeometryComponent
 	@Input() public attributes: { [key: string]: AttrBufferAttribute } = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * Hashmap of [page:BufferAttribute]s holding details of the geometry's morph targets.
 	 */
 	@Input() public morphAttributes: { [key: string]: AttrBufferAttribute[] } =
 		null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The autoDisplacement of abstract geometry component
 	 */
 	@Input() public autoDisplacement: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The autoDisplacementSize of abstract geometry component
 	 */
 	@Input() public autoDisplacementSize: number = 3;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The autoCustomColor of abstract geometry component
 	 */
 	@Input() public autoCustomColor: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The autoCustomColorSize of abstract geometry component
 	 */
 	@Input() public autoCustomColorSize: number = 3;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The autoCustomColorKey of abstract geometry component
 	 */
 	@Input() public autoCustomColorKey: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The autoSize of abstract geometry component
 	 */
 	@Input() public autoSize: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The autoSizeSize of abstract geometry component
 	 */
 	@Input() public autoSizeSize: number = 1;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrPosition of abstract geometry component
 	 */
 	@Input() public attrPosition: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrPositionUsage of abstract geometry component
 	 */
 	@Input() public attrPositionUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrUv of abstract geometry component
 	 */
 	@Input() public attrUv: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrUvUsage of abstract geometry component
 	 */
 	@Input() public attrUvUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrTextureIndex of abstract geometry component
 	 */
 	@Input() public attrTextureIndex: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrTextureIndexUsage of abstract geometry component
 	 */
 	@Input() public attrTextureIndexUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrVertColor of abstract geometry component
 	 */
 	@Input() public attrVertColor: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrVisible of abstract geometry component
 	 */
 	@Input() public attrVisible: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The vertexBuffer of abstract geometry component
 	 */
 	@Input() public vertexBuffer:
 		| Float32Array
@@ -226,102 +228,102 @@ export abstract class AbstractGeometryComponent
 		| number[] = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The vertexBufferStride of abstract geometry component
 	 */
 	@Input() public vertexBufferStride: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrOffset of abstract geometry component
 	 */
 	@Input() public attrOffset: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrOffsetUsage of abstract geometry component
 	 */
 	@Input() public attrOffsetUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrTranslate of abstract geometry component
 	 */
 	@Input() public attrTranslate: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrTranslateUsage of abstract geometry component
 	 */
 	@Input() public attrTranslateUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrOrientationStart of abstract geometry component
 	 */
 	@Input() public attrOrientationStart: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrOrientationStartUsage of abstract geometry component
 	 */
 	@Input() public attrOrientationStartUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrOrientationEnd of abstract geometry component
 	 */
 	@Input() public attrOrientationEnd: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrOrientationEndUsage of abstract geometry component
 	 */
 	@Input() public attrOrientationEndUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrNormal of abstract geometry component
 	 */
 	@Input() public attrNormal: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrNormalUsage of abstract geometry component
 	 */
 	@Input() public attrNormalUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrNormalNormalized of abstract geometry component
 	 */
 	@Input() public attrNormalNormalized: boolean = false;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrColor of abstract geometry component
 	 */
 	@Input() public attrColor: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrColorUsage of abstract geometry component
 	 */
 	@Input() public attrColorUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrColorSize of abstract geometry component
 	 */
 	@Input() public attrColorSize: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrColorKey of abstract geometry component
 	 */
 	@Input() public attrColorKey: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrColorNormalized of abstract geometry component
 	 */
 	@Input() public attrColorNormalized: boolean = false;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrCustomColor of abstract geometry component
 	 */
 	@Input() public attrCustomColor: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrCustomColorUsage of abstract geometry component
 	 */
 	@Input() public attrCustomColorUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrSize of abstract geometry component
 	 */
 	@Input() public attrSize: AttrBufferAttribute = null;
 
@@ -332,22 +334,22 @@ export abstract class AbstractGeometryComponent
 	@Input() public attrSizeUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrScale of abstract geometry component
 	 */
 	@Input() public attrScale: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrScaleUsage of abstract geometry component
 	 */
 	@Input() public attrScaleUsage: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrIndex of abstract geometry component
 	 */
 	@Input() public attrIndex: AttrBufferAttribute = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The attrIndexUsage of abstract geometry component
 	 */
 	@Input() public attrIndexUsage: string = null;
 
@@ -357,7 +359,7 @@ export abstract class AbstractGeometryComponent
 	@Input() public toNonIndexed: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The flipY of abstract geometry component
 	 */
 	@Input() public flipY: boolean = null;
 
@@ -369,47 +371,47 @@ export abstract class AbstractGeometryComponent
 	@Input() public mergeVertices: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The edgeSplit of abstract geometry component
 	 */
 	@Input() public edgeSplit: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The cutOffAngle of abstract geometry component
 	 */
 	@Input() public cutOffAngle: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The tryKeepNormals of abstract geometry component
 	 */
 	@Input() public tryKeepNormals: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The simplify of abstract geometry component
 	 */
 	@Input() public simplify: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The count of abstract geometry component
 	 */
 	@Input() public count: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The tessellate of abstract geometry component
 	 */
 	@Input() public tessellate: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The maxEdgeLength of abstract geometry component
 	 */
 	@Input() public maxEdgeLength: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The maxIterations of abstract geometry component
 	 */
 	@Input() public maxIterations: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The lineType of abstract geometry component
 	 *
 	 * @see THREE.EdgesGeometry - EdgesGeometry, Edges,
 	 * @see THREE.WireframeGeometry - WireframeGeometry, Wireframe,
@@ -418,17 +420,17 @@ export abstract class AbstractGeometryComponent
 	@Input() public lineType: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The thresholdAngle of geometry component
 	 */
 	@Input() public thresholdAngle: number = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The program of abstract geometry component
 	 */
 	@Input() public program: string = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The programParam of abstract geometry component
 	 */
 	@Input() public programParam: any = null;
 
@@ -477,7 +479,7 @@ export abstract class AbstractGeometryComponent
 	@Input() public compressUvs: boolean = null;
 
 	/**
-	 * Input  of abstract geometry component
+	 * The onInit of abstract geometry component
 	 */
 	@Input() public onInit: (
 		geometry: THREE.BufferGeometry
@@ -1177,7 +1179,7 @@ export abstract class AbstractGeometryComponent
 	}
 
 	/**
-	 * Geometry  of abstract geometry component
+	 * The Geometry of abstract geometry component
 	 */
 	protected geometry: THREE.BufferGeometry = null;
 

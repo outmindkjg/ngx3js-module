@@ -426,32 +426,32 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	@Input() public roughness: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The count of mesh component
 	 */
 	@Input() public count: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The axis of mesh component
 	 */
 	@Input() public axis: string = null;
 
 	/**
-	 * Input  of mesh component
+	 * The index of mesh component
 	 */
 	@Input() public index: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The size of mesh component
 	 */
 	@Input() public size: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The text of mesh component
 	 */
 	@Input() public text: string = null;
 
 	/**
-	 * Input  of mesh component
+	 * The divisions of mesh component
 	 */
 	@Input() public divisions: number = null;
 
@@ -473,58 +473,58 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	@Input() public usage: string = null;
 
 	/**
-	 * Input  of mesh component
+	 * The enableUvs of mesh component
 	 */
 	@Input() public enableUvs: boolean = null;
 
 	/**
-	 * Input  of mesh component
+	 * The enableColors of mesh component
 	 */
 	@Input() public enableColors: boolean = null;
 
 	/**
-	 * Input  of mesh component
+	 * The resolution of mesh component
 	 */
 	@Input() public resolution: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The isolation of mesh component
 	 */
 	@Input() public isolation: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The flowDirectionX of mesh component
 	 */
 	@Input() public flowDirectionX: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The flowDirectionY of mesh component
 	 */
 	@Input() public flowDirectionY: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The flowSpeed of mesh component
 	 */
 	@Input() public flowSpeed: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The reflectivity of mesh component
 	 */
 	@Input() public reflectivity: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The waterScale of mesh component
 	 */
 	@Input() public waterScale: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The flowMap of mesh component
 	 */
 	@Input() public flowMap: string | THREE.Texture | AbstractTextureComponent =
 		null;
 
 	/**
-	 * Input  of mesh component
+	 * The normalMap0 of mesh component
 	 */
 	@Input() public normalMap0:
 		| string
@@ -532,7 +532,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 		| AbstractTextureComponent = null;
 
 	/**
-	 * Input  of mesh component
+	 * The normalMap1 of mesh component
 	 */
 	@Input() public normalMap1:
 		| string
@@ -540,7 +540,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 		| AbstractTextureComponent = null;
 
 	/**
-	 * Input  of mesh component
+	 * The planeInfos of mesh component
 	 */
 	@Input() public planeInfos: {
 		type: string;
@@ -549,7 +549,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	}[] = null;
 
 	/**
-	 * Input  of mesh component
+	 * The blobInfos of mesh component
 	 */
 	@Input() public blobInfos: {
 		x: number;
@@ -561,13 +561,13 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	}[] = null;
 
 	/**
-	 * Input  of mesh component
+	 * The makeMatrix of mesh component
 	 */
 	@Input() public makeMatrix: (mat: THREE.Matrix4, index?: number) => void =
 		null;
 
 	/**
-	 * Input  of mesh component
+	 * The makeColor of mesh component
 	 */
 	@Input() public makeColor: (color: THREE.Color, index?: number) => void =
 		null;
@@ -588,17 +588,17 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	@Input() public morphTargets: boolean = null;
 
 	/**
-	 * Input  of mesh component
+	 * The centerX of mesh component
 	 */
 	@Input() public centerX: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The centerY of mesh component
 	 */
 	@Input() public centerY: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The shader of mesh component
 	 */
 	@Input() public shader: string = null;
 
@@ -623,41 +623,44 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	@Input() public encoding: string = null;
 
 	/**
-	 * Input  of mesh component
+	 * The shareParts of mesh component
 	 */
 	@Input() public shareParts: MeshComponent = null;
 
 	/**
-	 * Input  of mesh component
+	 * The sharedMesh of mesh component
 	 */
 	@Input() public sharedMesh: MeshComponent = null;
 
 	/**
-	 * Input  of mesh component
+	 * The sharedCamera of mesh component
 	 */
 	@Input() public sharedCamera: any = null;
 
 	/**
-	 * Input  of mesh component
+	 * The moveAlongCurve of mesh component
 	 */
 	@Input() public moveAlongCurve: number = null;
 
 	/**
-	 * Input  of mesh component
+	 * The moveIndividualAlongCurve of mesh component
 	 */
 	@Input() public moveIndividualAlongCurve: number[] | string = null;
 
 	/**
-	 * Input  of mesh component
+	 * The colors of mesh component
 	 */
 	@Input() public colors: number[] | string = null;
 
+	/**
+	 * The stormParams  of mesh component
+	 */
 	@Input() public stormParams: StormParams = {
 		size: 1024,
 	};
 
 	/**
-	 * Input  of geometry component
+	 * The rayParams of geometry component
 	 */
 	@Input() public rayParams: RayParameters = null;
 
@@ -1159,7 +1162,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	}
 
 	/**
-	 * Clips  of mesh component
+	 * The Clips of mesh component
 	 */
 	private clips: THREE.AnimationClip[] | any = null;
 

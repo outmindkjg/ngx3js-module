@@ -27,7 +27,7 @@ export class ShapeComponent
 	implements OnInit
 {
 	/**
-	 * Input  of shape component
+	 * The type of shape component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -35,92 +35,92 @@ export class ShapeComponent
 	@Input() public type: string = 'fromPoints';
 
 	/**
-	 * Input  of shape component
+	 * The points of shape component
 	 */
 	@Input() public points: ThreeVector[] = null;
 
 	/**
-	 * Input  of shape component
+	 * The x of shape component
 	 */
 	@Input() public x: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The y of shape component
 	 */
 	@Input() public y: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aCPx of shape component
 	 */
 	@Input() public aCPx: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aCPy of shape component
 	 */
 	@Input() public aCPy: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aX of shape component
 	 */
 	@Input() public aX: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aY of shape component
 	 */
 	@Input() public aY: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aCP1x of shape component
 	 */
 	@Input() public aCP1x: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aCP1y of shape component
 	 */
 	@Input() public aCP1y: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aCP2x of shape component
 	 */
 	@Input() public aCP2x: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aCP2y of shape component
 	 */
 	@Input() public aCP2y: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aRadius of shape component
 	 */
 	@Input() public aRadius: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aStartAngle of shape component
 	 */
 	@Input() public aStartAngle: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aEndAngle of shape component
 	 */
 	@Input() public aEndAngle: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aClockwise of shape component
 	 */
 	@Input() public aClockwise: boolean = null;
 
 	/**
-	 * Input  of shape component
+	 * The xRadius of shape component
 	 */
 	@Input() public xRadius: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The yRadius of shape component
 	 */
 	@Input() public yRadius: number = null;
 
 	/**
-	 * Input  of shape component
+	 * The aRotation of shape component
 	 */
 	@Input() public aRotation: number = null;
 

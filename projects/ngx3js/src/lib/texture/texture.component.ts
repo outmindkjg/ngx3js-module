@@ -107,37 +107,37 @@ export class TextureComponent
 	implements OnInit, OnDestroy
 {
 	/**
-	 * Input  of texture component
+	 * The refer of texture component
 	 */
 	@Input() public refer: any = null;
 
 	/**
-	 * Input  of texture component
+	 * The image of texture component
 	 */
 	@Input() public image: string = null;
 
 	/**
-	 * Input  of texture component
+	 * The cubeImage of texture component
 	 */
 	@Input() public cubeImage: string[] = null;
 
 	/**
-	 * Input  of texture component
+	 * The storageName of texture component
 	 */
 	@Input() public storageName: string = null;
 
 	/**
-	 * Input  of texture component
+	 * The storageOption of texture component
 	 */
 	@Input() public storageOption: any = null;
 
 	/**
-	 * Input  of texture component
+	 * The program of texture component
 	 */
 	@Input() public program: CanvasFunctionType | string = null;
 
 	/**
-	 * Input  of texture component
+	 * The canvas of texture component
 	 */
 	@Input() public canvas:
 		| HTMLVideoElement
@@ -147,40 +147,40 @@ export class TextureComponent
 		| string = null;
 
 	/**
-	 * Input  of texture component
+	 * The Input of texture component
 	 */
 	/**
-	 * Input  of texture component
+	 * The perlin of texture component
 	 */
 	@Input() public perlin: any = null;
 
 	/**
-	 * Input  of texture component
+	 * The sunX of texture component
 	 */
 	@Input() public sunX: number = null;
 
 	/**
-	 * Input  of texture component
+	 * The sunY of texture component
 	 */
 	@Input() public sunY: number = null;
 
 	/**
-	 * Input  of texture component
+	 * The sunZ of texture component
 	 */
 	@Input() public sunZ: number = null;
 
 	/**
-	 * Input  of texture component
+	 * The useDropImage of texture component
 	 */
 	@Input() public useDropImage: boolean = false;
 
 	/**
-	 * Input  of texture component
+	 * The color of texture component
 	 */
 	@Input() public color: number | string = null;
 
 	/**
-	 * Input  of texture component
+	 * The add of texture component
 	 */
 	@Input() public add: number | string = null;
 

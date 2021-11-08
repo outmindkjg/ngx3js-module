@@ -5,9 +5,9 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * BackgroundComponent
- * 
+ *
  * The background shorthand CSS property sets all background style properties at once, such as color, image, origin and size, or repeat method.
- * 
+ *
  * @see [MDN Web Docs - background](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
  */
 @Component({
@@ -20,22 +20,22 @@ export class BackgroundComponent
 	implements OnInit
 {
 	/**
-	 * Input  of background component
+	 * The visible of background component
 	 */
 	@Input() public visible: boolean = true;
 
 	/**
-	 * Input  of background component
+	 * The pseudo of background component
 	 */
 	@Input() public pseudo: string = null;
 
 	/**
-	 * Input  of background component
+	 * The transition of background component
 	 */
 	@Input() public transition: string[] = null;
 
 	/**
-	 * Input  of background component
+	 * The content of background component
 	 */
 	@Input() public content: string = null;
 
@@ -327,7 +327,7 @@ export class BackgroundComponent
 
 	/**
 	 * The background-repeat CSS property sets how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all.
-	 * 
+	 *
 	 * @param [def]
 	 * @returns background repeat
 	 */
@@ -343,7 +343,7 @@ export class BackgroundComponent
 
 	/**
 	 * The background-position CSS property sets the initial position for each background image. The position is relative to the position layer set by background-origin.
-	 * 
+	 *
 	 * @param [def]
 	 * @returns background position
 	 */
@@ -359,7 +359,7 @@ export class BackgroundComponent
 
 	/**
 	 * The background-size CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space.
-	 * 
+	 *
 	 * @param [def]
 	 * @returns background size
 	 */

@@ -64,13 +64,13 @@ export abstract class AbstractMaterialComponent
 	@Input() public name: string = null;
 
 	/**
-	 * refName  of material component
+	 * The refName of material component
 	 */
 	@Input() public refName: string | string[] = null;
 
 	/**
-	 * refIndex  of material component
-	 * 
+	 * The refIndex of material component
+	 *
 	 * if the material of mesh is array use this index
 	 */
 	@Input() public refIndex: number = -1;
@@ -111,7 +111,7 @@ export abstract class AbstractMaterialComponent
 	@Input() public alphaTest: number = null;
 
 	/**
-	 * Which blending to use when displaying objects with this material. 
+	 * Which blending to use when displaying objects with this material.
 	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
 	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
 	 *
@@ -159,7 +159,7 @@ export abstract class AbstractMaterialComponent
 	@Input() public blendEquationAlpha: number = null;
 
 	/**
-	 * Which blending to use when displaying objects with this material. 
+	 * Which blending to use when displaying objects with this material.
 	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
 	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
 	 *
@@ -322,8 +322,8 @@ export abstract class AbstractMaterialComponent
 
 	/**
 	 * Defines which side of faces cast shadows.
-	 * When set, can be [page:Materials THREE.FrontSide], [page:Materials THREE.BackSide], or [page:Materials THREE.DoubleSide]. Default is *null*. 
-	 * If *null*, the side casting shadows is determined as follows: 
+	 * When set, can be [page:Materials THREE.FrontSide], [page:Materials THREE.BackSide], or [page:Materials THREE.DoubleSide]. Default is *null*.
+	 * If *null*, the side casting shadows is determined as follows:
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -434,14 +434,14 @@ export abstract class AbstractMaterialComponent
 	@Input() public stencilZPass: string = null;
 
 	/**
-	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. 
-	 * When set to true, the extent to which the material is transparent is controlled by setting its [page:Float opacity] property. 
+	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects.
+	 * When set to true, the extent to which the material is transparent is controlled by setting its [page:Float opacity] property.
 	 * Default is *false*.
 	 */
 	@Input() public transparent: boolean = null;
 
 	/**
-	 * Input  of abstract material component
+	 * The control of abstract material component
 	 */
 	@Input() public control: any = null;
 
@@ -476,7 +476,7 @@ export abstract class AbstractMaterialComponent
 	}
 
 	/**
-	 * Which blending to use when displaying objects with this material. 
+	 * Which blending to use when displaying objects with this material.
 	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
 	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
 	 *
@@ -547,7 +547,7 @@ export abstract class AbstractMaterialComponent
 	}
 
 	/**
-	 * Which blending to use when displaying objects with this material. 
+	 * Which blending to use when displaying objects with this material.
 	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
 	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
 	 *
@@ -1017,7 +1017,7 @@ export abstract class AbstractMaterialComponent
 	}
 
 	/**
-	 * Object3d  of Material component
+	 * The Object3d of Material component
 	 */
 	private _object3d: {
 		[key: string]: {
@@ -1354,7 +1354,7 @@ export abstract class AbstractMaterialComponent
 	}
 
 	/**
-	 * Material  of abstract material component
+	 * The Material of abstract material component
 	 */
 	protected material: THREE.Material = null;
 

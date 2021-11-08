@@ -75,7 +75,7 @@ export class MixerComponent
 	implements OnInit
 {
 	/**
-	 * Input  of mixer component
+	 * The Input of mixer component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -83,7 +83,7 @@ export class MixerComponent
 	@Input() public type: string = 'mixer';
 
 	/**
-	 * Input  of mixer component
+	 * The Input of mixer component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -91,7 +91,7 @@ export class MixerComponent
 	@Input() public action: string = '';
 
 	/**
-	 * Input  of mixer component
+	 * The fps of mixer component
 	 */
 	@Input() public fps: number = null;
 
@@ -107,72 +107,72 @@ export class MixerComponent
 	@Input() public timeScale: number = 1;
 
 	/**
-	 * Input  of mixer component
+	 * The sync of mixer component
 	 */
 	@Input() public sync: boolean = null;
 
 	/**
-	 * Input  of mixer component
+	 * The afterglow of mixer component
 	 */
 	@Input() public afterglow: number = null;
 
 	/**
-	 * Input  of mixer component
+	 * The resetPhysicsOnLoop of mixer component
 	 */
 	@Input() public resetPhysicsOnLoop: boolean = null;
 
 	/**
-	 * Input  of mixer component
+	 * The physics of mixer component
 	 */
 	@Input() public physics: boolean = null;
 
 	/**
-	 * Input  of mixer component
+	 * The warmup of mixer component
 	 */
 	@Input() public warmup: number = null;
 
 	/**
-	 * Input  of mixer component
+	 * The unitStep of mixer component
 	 */
 	@Input() public unitStep: number = null;
 
 	/**
-	 * Input  of mixer component
+	 * The maxStepNum of mixer component
 	 */
 	@Input() public maxStepNum: number = null;
 
 	/**
-	 * Input  of mixer component
+	 * The gravity of mixer component
 	 */
 	@Input() public gravity: number = null;
 
 	/**
-	 * Input  of mixer component
+	 * The delayTime of mixer component
 	 */
 	@Input() public delayTime: number = null;
 
 	/**
-	 * Input  of mixer component
+	 * The animationHelper of mixer component
 	 */
 	@Input() public animationHelper: MixerComponent = null;
 
 	/**
-	 * Input  of mixer component
+	 * The skin of mixer component
 	 */
 	@Input() public skin: number | string = null;
 
 	/**
-	 * Input  of mixer component
+	 * The weapon of mixer component
 	 */
 	@Input() public weapon: number | string = null;
 
 	/**
-	 * Input  of mixer component
+	 * The controls of mixer component
 	 */
 	@Input() public controls: CharacterControl = null;
 
 	/**
-	 * Input  of mixer component
+	 * The wireframe of mixer component
 	 */
 	@Input() public wireframe: boolean = null;
 
@@ -247,7 +247,7 @@ export class MixerComponent
 	@Input() public angularSpeed: number;
 
 	/**
-	 * Input  of mixer component
+	 * The mmdHelpers of mixer component
 	 */
 	@Input() public mmdHelpers: string[] = null;
 
@@ -372,7 +372,7 @@ export class MixerComponent
 	}
 
 	/**
-	 * Mixer  of mixer component
+	 * The Mixer of mixer component
 	 */
 	private mixer:
 		| THREE.AnimationMixer
@@ -381,12 +381,12 @@ export class MixerComponent
 		| MMDAnimationHelper = null;
 
 	/**
-	 * Model  of mixer component
+	 * The Model of mixer component
 	 */
 	private model: THREE.Object3D | THREE.AnimationObjectGroup = null;
 
 	/**
-	 * Clips  of mixer component
+	 * The Clips of mixer component
 	 */
 	private clips: THREE.AnimationClip[] | any = null;
 
@@ -521,12 +521,12 @@ export class MixerComponent
 	private lastAction: string = null;
 
 	/**
-	 * Physics  of mixer component
+	 * The Physics of mixer component
 	 */
 	private _physics: PhysicsComponent = null;
 
 	/**
-	 * Ammo  of mixer component
+	 * The Ammo of mixer component
 	 */
 	private _ammo: any = null;
 

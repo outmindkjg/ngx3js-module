@@ -190,143 +190,143 @@ export class PassComponent
 	implements OnInit
 {
 	/**
-	 * Input  of pass component
+	 * The Input of pass component
 	 *
 	 */
 	@Input() public type: string = '';
 
 	/**
-	 * Input  of pass component
+	 * The refer of pass component
 	 */
 	@Input() public refer: PassComponent = null;
 
 	/**
-	 * Input  of pass component
+	 * The needsSwap of pass component
 	 */
 	@Input() public needsSwap: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The clear of pass component
 	 */
 	@Input() public clear: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The renderToScreen of pass component
 	 */
 	@Input() public renderToScreen: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The adaptive of pass component
 	 */
 	@Input() public adaptive: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The resolution of pass component
 	 */
 	@Input() public resolution: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The damp of pass component
 	 */
 	@Input() public damp: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The strength of pass component
 	 */
 	@Input() public strength: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The kernelSize of pass component
 	 */
 	@Input() public kernelSize: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The sigma of pass component
 	 */
 	@Input() public sigma: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The scene of pass component
 	 */
 	@Input() public scene: any = null;
 
 	/**
-	 * Input  of pass component
+	 * The camera of pass component
 	 */
 	@Input() public camera: any = null;
 
 	/**
-	 * Input  of pass component
+	 * The params of pass component
 	 */
 	@Input() public params: BokehPassParamters = null;
 
 	/**
-	 * Input  of pass component
+	 * The intensity of pass component
 	 */
 	@Input() public intensity: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The clearColor of pass component
 	 */
 	@Input() public clearColor: THREE.Color | string | number = null;
 
 	/**
-	 * Input  of pass component
+	 * The clearAlpha of pass component
 	 */
 	@Input() public clearAlpha: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The envMap of pass component
 	 */
 	@Input() public envMap: THREE.CubeTexture | TextureComponent = null;
 
 	/**
-	 * Input  of pass component
+	 * The opacity of pass component
 	 */
 	@Input() public opacity: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The centerX of pass component
 	 */
 	@Input() public centerX: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The centerY of pass component
 	 */
 	@Input() public centerY: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The angle of pass component
 	 */
 	@Input() public angle: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The scale of pass component
 	 */
 	@Input() public scale: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The noiseIntensity of pass component
 	 */
 	@Input() public noiseIntensity: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The scanlinesIntensity of pass component
 	 */
 	@Input() public scanlinesIntensity: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The scanlinesCount of pass component
 	 */
 	@Input() public scanlinesCount: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The grayscale of pass component
 	 */
 	@Input() public grayscale: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The dtSize of pass component
 	 */
 	@Input() public dtSize: number = null;
 
@@ -355,7 +355,7 @@ export class PassComponent
 	@Input() public height: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The size of pass component
 	 */
 	@Input() public size: THREE.Vector2 | SizeComponent = null;
 
@@ -390,12 +390,12 @@ export class PassComponent
 	@Input() public morphTargets: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The selectedObjects of pass component
 	 */
 	@Input() public selectedObjects: (THREE.Object3D | any)[] = null;
 
 	/**
-	 * Input  of pass component
+	 * The overrideMaterial of pass component
 	 */
 	@Input() public overrideMaterial: THREE.Material = null;
 
@@ -405,22 +405,22 @@ export class PassComponent
 	@Input() public mesh: THREE.Mesh | MeshComponent | any = null;
 
 	/**
-	 * Input  of pass component
+	 * The depthTexture of pass component
 	 */
 	@Input() public depthTexture: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The useNormals of pass component
 	 */
 	@Input() public useNormals: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The renderTarget of pass component
 	 */
 	@Input() public renderTarget: THREE.WebGLRenderTarget = null;
 
 	/**
-	 * Input  of pass component
+	 * The Input of pass component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -428,7 +428,7 @@ export class PassComponent
 	@Input() public shader: string = null;
 
 	/**
-	 * Input  of pass component
+	 * The Input of pass component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -436,47 +436,47 @@ export class PassComponent
 	@Input() public materialShader: string = null;
 
 	/**
-	 * Input  of pass component
+	 * The textureId of pass component
 	 */
 	@Input() public textureId: string = null;
 
 	/**
-	 * Input  of pass component
+	 * The map of pass component
 	 */
 	@Input() public map: THREE.Texture | TextureComponent | any = null;
 
 	/**
-	 * Input  of pass component
+	 * The texture of pass component
 	 */
 	@Input() public texture: THREE.Texture | TextureComponent = null;
 
 	/**
-	 * Input  of pass component
+	 * The patternTexture of pass component
 	 */
 	@Input() public patternTexture: THREE.Texture | TextureComponent = null;
 
 	/**
-	 * Input  of pass component
+	 * The radius of pass component
 	 */
 	@Input() public radius: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The threshold of pass component
 	 */
 	@Input() public threshold: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The goWild of pass component
 	 */
 	@Input() public goWild: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The uniforms of pass component
 	 */
 	@Input() public uniforms: { [key: string]: any } = null;
 
 	/**
-	 * Input  of pass component
+	 * The Input of pass component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -484,92 +484,92 @@ export class PassComponent
 	@Input() public lut: string = null;
 
 	/**
-	 * Input  of pass component
+	 * The use2DLut of pass component
 	 */
 	@Input() public use2DLut: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The inverse of pass component
 	 */
 	@Input() public inverse: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The focus of pass component
 	 */
 	@Input() public focus: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The aspect of pass component
 	 */
 	@Input() public aspect: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The aperture of pass component
 	 */
 	@Input() public aperture: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The maxblur of pass component
 	 */
 	@Input() public maxblur: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The sampleLevel of pass component
 	 */
 	@Input() public sampleLevel: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The unbiased of pass component
 	 */
 	@Input() public unbiased: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The accumulate of pass component
 	 */
 	@Input() public accumulate: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The visibleEdgeColor of pass component
 	 */
 	@Input() public visibleEdgeColor: ThreeColor = null;
 
 	/**
-	 * Input  of pass component
+	 * The hiddenEdgeColor of pass component
 	 */
 	@Input() public hiddenEdgeColor: ThreeColor = null;
 
 	/**
-	 * Input  of pass component
+	 * The edgeGlow of pass component
 	 */
 	@Input() public edgeGlow: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The usePatternTexture of pass component
 	 */
 	@Input() public usePatternTexture: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The edgeThickness of pass component
 	 */
 	@Input() public edgeThickness: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The edgeStrength of pass component
 	 */
 	@Input() public edgeStrength: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The downSampleRatio of pass component
 	 */
 	@Input() public downSampleRatio: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The pulsePeriod of pass component
 	 */
 	@Input() public pulsePeriod: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The Input of pass component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -577,77 +577,77 @@ export class PassComponent
 	@Input() public output: string = null;
 
 	/**
-	 * Input  of pass component
+	 * The kernelRadius of pass component
 	 */
 	@Input() public kernelRadius: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The minDistance of pass component
 	 */
 	@Input() public minDistance: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The maxDistance of pass component
 	 */
 	@Input() public maxDistance: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoBias of pass component
 	 */
 	@Input() public saoBias: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoIntensity of pass component
 	 */
 	@Input() public saoIntensity: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoScale of pass component
 	 */
 	@Input() public saoScale: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoKernelRadius of pass component
 	 */
 	@Input() public saoKernelRadius: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoMinResolution of pass component
 	 */
 	@Input() public saoMinResolution: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoBlur of pass component
 	 */
 	@Input() public saoBlur: boolean = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoBlurRadius of pass component
 	 */
 	@Input() public saoBlurRadius: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoBlurStdDev of pass component
 	 */
 	@Input() public saoBlurStdDev: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The saoBlurDepthCutoff of pass component
 	 */
 	@Input() public saoBlurDepthCutoff: number = null;
 
 	/**
-	 * Input  of pass component
+	 * The vertexShader of pass component
 	 */
 	@Input() public vertexShader: string = null;
 
 	/**
-	 * Input  of pass component
+	 * The fragmentShader of pass component
 	 */
 	@Input() public fragmentShader: string = null;
 
 	/**
-	 * Input  of pass component
+	 * The bloomTexture of pass component
 	 */
 	@Input() public bloomTexture: any = null;
 
@@ -1613,7 +1613,7 @@ export class PassComponent
 	private effectRenderer: THREE.WebGLRenderer = null;
 
 	/**
-	 * Pass  of pass component
+	 * The Pass of pass component
 	 */
 	private pass: Pass = null;
 

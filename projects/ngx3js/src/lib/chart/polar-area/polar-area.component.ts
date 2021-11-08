@@ -27,7 +27,7 @@ export class ChartPolarAreaComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart polar area component
+	 * The type of chart polar area component
 	 */
 	@Input() public type: string = '';
 

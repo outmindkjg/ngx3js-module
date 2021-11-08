@@ -92,22 +92,22 @@ export interface ChartData {
 })
 export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() guiControl: any = null;
 
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() guiParams: GuiControlParam[] = null;
 
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() type: string = 'bar';
 
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() data: ChartData = {
 		labels: ['Data1', 'Data2', 'Data3', 'Data4', 'Data5', 'Data6', 'Data7'],
@@ -242,27 +242,27 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	};
 
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() options: any = null;
 
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() width: number = 1000;
 
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() height: number = 700;
 
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() depth: number = 200;
 
 	/**
-	 * Input  of chart component
+	 * The Input of chart component
 	 */
 	@Input() padding: number = 0.5;
 
@@ -329,7 +329,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	}
 
 	/**
-	 * Colors  of chart component
+	 * The Colors of chart component
 	 */
 	private COLORS: string[] = [
 		'#4dc9f6',
@@ -775,7 +775,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	private elapsedTime: number = null;
 
 	/**
-	 * Tooltip  of chart component
+	 * The Tooltip of chart component
 	 */
 	tooltip: CSS2DObject = null;
 

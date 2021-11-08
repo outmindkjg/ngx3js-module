@@ -15,7 +15,7 @@ export class GeometryBirdComponent
 	implements OnInit
 {
 	/**
-	 * Input  of geometry bird component
+	 * The Input of geometry bird component
 	 */
 	@Input() width: number = 32;
 

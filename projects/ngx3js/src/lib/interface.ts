@@ -476,7 +476,7 @@ export interface CssStyle {
 	/** The border-image-slice CSS property divides the image specified by border-image-source into regions. These regions form the components of an element's border image. */
 	borderImageSlice?: string | number;
 
-	/** 
+	/**
 	 * The border-image-outset CSS property sets the distance by which an element's border image is set out from its border box.
 	 * The parts of the border image that are rendered outside the element's border box with border-image-outset do not trigger overflow scrollbars and don't capture mouse events.
 	 */
@@ -598,7 +598,7 @@ export interface CssStyle {
 @Injectable()
 export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	/**
-	 * Controls  of base component
+	 * The Controls of base component
 	 */
 	public controls: T & GuiBaseControl;
 
@@ -746,7 +746,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	}
 
 	/**
-	 * Subscribe  of base component
+	 * The Subscribe of base component
 	 */
 	private _subscribe: { [key: string]: Subscription } = {};
 
@@ -776,7 +776,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	}
 
 	/**
-	 * Renderer  of base component
+	 * The Renderer of base component
 	 */
 	public renderer: RendererComponent = null;
 
@@ -789,17 +789,17 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	}
 
 	/**
-	 * Scene  of base component
+	 * The Scene of base component
 	 */
 	public scene: SceneComponent = null;
 
 	/**
-	 * Scene  of base component
+	 * The Scene of base component
 	 */
 	public sceneObject3d: THREE.Scene = null;
 
 	/**
-	 * Scene  of base component
+	 * The Scene of base component
 	 */
 	public sceneChildren: THREE.Object3D[] = null;
 
@@ -814,7 +814,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	}
 
 	/**
-	 * Camera  of base component
+	 * The Camera of base component
 	 */
 	public camera: CameraComponent = null;
 
@@ -827,7 +827,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	}
 
 	/**
-	 * Mesh  of base component
+	 * The Mesh of base component
 	 */
 	public mesh: MeshComponent = null;
 
@@ -1675,7 +1675,7 @@ export class ThreeUtil {
 	}
 
 	/**
-	 * Manager  of three util
+	 * The Manager of three util
 	 */
 	private static _manager: THREE.LoadingManager = null;
 
@@ -3498,7 +3498,7 @@ export class ThreeUtil {
 	}
 
 	/**
-	 * Stats  of three util
+	 * The Stats of three util
 	 */
 	public static stats: ThreeStats = null;
 
@@ -4142,17 +4142,17 @@ export class ThreeClock extends THREE.Clock {
  */
 export class ThreeStats implements Stats {
 	/**
-	 * Revision  of three stats
+	 * The Revision of three stats
 	 */
 	REVISION: number;
 
 	/**
-	 * Stats  of three stats
+	 * The Stats of three stats
 	 */
 	stats: Stats = null;
 
 	/**
-	 * Dom  of three stats
+	 * The Dom of three stats
 	 */
 	dom: HTMLDivElement;
 
@@ -4306,12 +4306,12 @@ export interface GuiControlParam {
 })
 export abstract class ThreeGeometryCustom {
 	/**
-	 * Input  of three geometry custom
+	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [page:Object3D.scale] for typical real-time mesh scaling.
 	 */
 	@Input() scale: number = null;
 
 	/**
-	 * Geometry  of three geometry custom
+	 * The Geometry of three geometry custom
 	 */
 	protected geometry: THREE.BufferGeometry = null;
 
@@ -4352,7 +4352,7 @@ export abstract class ThreeGeometryCustom {
  */
 export class ThreeGui implements ThreeGuiController {
 	/**
-	 * Gui  of three gui
+	 * The Gui of three gui
 	 */
 	public gui: any = null;
 

@@ -28,22 +28,22 @@ export class TweenComponent
 	implements OnInit
 {
 	/**
-	 * Input  of tween component
+	 * The targets of tween component
 	 */
 	@Input() public targets: string = null;
 
 	/**
-	 * Input  of tween component
+	 * The to of tween component
 	 */
 	@Input() public to: any = null;
 
 	/**
-	 * Input  of tween component
+	 * The duration of tween component
 	 */
 	@Input() public duration: number = null;
 
 	/**
-	 * Input  of tween component
+	 * The Input of tween component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -51,52 +51,52 @@ export class TweenComponent
 	@Input() public easing: string = null;
 
 	/**
-	 * Input  of tween component
+	 * The template of tween component
 	 */
 	@Input() public template: string = null;
 
 	/**
-	 * Input  of tween component
+	 * The repeat of tween component
 	 */
 	@Input() public repeat: number = null;
 
 	/**
-	 * Input  of tween component
+	 * The yoyo of tween component
 	 */
 	@Input() public yoyo: boolean = null;
 
 	/**
-	 * Input  of tween component
+	 * The overshoot of tween component
 	 */
 	@Input() public overshoot: number = null;
 
 	/**
-	 * Input  of tween component
+	 * The amplitude of tween component
 	 */
 	@Input() public amplitude: number = null;
 
 	/**
-	 * Input  of tween component
+	 * The period of tween component
 	 */
 	@Input() public period: number = null;
 
 	/**
-	 * Input  of tween component
+	 * The linearRatio of tween component
 	 */
 	@Input() public linearRatio: number = null;
 
 	/**
-	 * Input  of tween component
+	 * The power of tween component
 	 */
 	@Input() public power: number = null;
 
 	/**
-	 * Input  of tween component
+	 * The yoyoMode of tween component
 	 */
 	@Input() public yoyoMode: boolean = null;
 
 	/**
-	 * Input  of tween component
+	 * The steps of tween component
 	 */
 	@Input() public steps: number = null;
 
@@ -414,7 +414,7 @@ export class TweenComponent
 	private _tweenTarget: any = null;
 
 	/**
-	 * Tween  of tween component
+	 * The Tween of tween component
 	 */
 	private _tween: GSAP.TimelineLite = null;
 

@@ -57,7 +57,7 @@ export class CurveComponent
 	@Input() public aY: number = null;
 
 	/**
-	 * Input  of curve component
+	 * The aRadius of curve component
 	 */
 	@Input() public aRadius: number = null;
 
@@ -199,7 +199,7 @@ export class CurveComponent
 	}
 
 	/**
-	 * Curve  of curve component
+	 * The Curve of curve component
 	 */
 	private curve: THREE.Curve<THREE.Vector> = null;
 

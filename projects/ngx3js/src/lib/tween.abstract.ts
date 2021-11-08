@@ -26,7 +26,7 @@ export abstract class AbstractTweenComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {
 	/**
-	 * Input  of abstract tween component
+	 * Start tween
 	 */
 	@Input() public tweenStart: boolean = true;
 

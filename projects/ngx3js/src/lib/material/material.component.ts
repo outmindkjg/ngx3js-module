@@ -287,7 +287,7 @@ export class MaterialComponent
 	@Input() public specular: ThreeColor = null;
 
 	/**
-	 * Input  of material component
+	 * The specularMultiply of material component
 	 */
 	@Input() public specularMultiply: number = null;
 
@@ -443,7 +443,7 @@ export class MaterialComponent
 	@Input() public linecap: string = null;
 
 	/**
-	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'. 
+	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'.
 	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin 2D Canvas lineJoin] property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
 	 *
 	 * Notice - case insensitive.
@@ -497,7 +497,7 @@ export class MaterialComponent
 	@Input() public referencePositionZ: number = null;
 
 	/**
-	 * Represents the intensity of the clear coat layer, from *0.0* to *1.0*. 
+	 * Represents the intensity of the clear coat layer, from *0.0* to *1.0*.
 	 * Use clear coat related properties to enable multilayer materials that have a thin translucent layer over the base layer. Default is *0.0*.
 	 */
 	@Input() public clearcoat: number = null;
@@ -529,7 +529,7 @@ export class MaterialComponent
 	@Input() public sheen: ThreeColor = null;
 
 	/**
-	 * Input  of material component
+	 * The sheenMultiply of material component
 	 */
 	@Input() public sheenMultiply: number = null;
 
@@ -585,27 +585,27 @@ export class MaterialComponent
 	@Input() public sizeAttenuation: boolean = null;
 
 	/**
-	 * Input  of material component
+	 * The dashed of material component
 	 */
 	@Input() public dashed: boolean = null;
 
 	/**
-	 * Input  of material component
+	 * The dashScale of material component
 	 */
 	@Input() public dashScale: number = null;
 
 	/**
-	 * Input  of material component
+	 * The dashOffset of material component
 	 */
 	@Input() public dashOffset: number = null;
 
 	/**
-	 * Input  of material component
+	 * The resolutionX of material component
 	 */
 	@Input() public resolutionX: number = null;
 
 	/**
-	 * Input  of material component
+	 * The resolutionY of material component
 	 */
 	@Input() public resolutionY: number = null;
 
@@ -705,12 +705,12 @@ export class MaterialComponent
 	@Input() public diffuseMap: ThreeTexture = null;
 
 	/**
-	 * Input  of material component
+	 * The environmentType of material component
 	 */
 	@Input() public environmentType: string = 'mirror';
 
 	/**
-	 * Input  of material component
+	 * The reflector of material component
 	 */
 	@Input() public reflector: any = null;
 

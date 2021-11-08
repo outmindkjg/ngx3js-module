@@ -91,7 +91,7 @@ export class ListenerComponent
 	}
 
 	/**
-	 * Listener  of listener component
+	 * The Listener of listener component
 	 */
 	private listener: THREE.AudioListener = null;
 

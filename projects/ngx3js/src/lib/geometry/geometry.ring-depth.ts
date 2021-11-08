@@ -11,7 +11,7 @@ export class RingDepthGeometry extends THREE.BufferGeometry {
 	type: string = 'RingDepthGeometry';
 
 	/**
-	 * Parameters  of ring depth geometry
+	 * The Parameters of ring depth geometry
 	 */
 	parameters: {
 		innerRadius: number;

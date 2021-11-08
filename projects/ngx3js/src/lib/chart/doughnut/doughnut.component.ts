@@ -24,7 +24,7 @@ export class ChartDoughnutComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart doughnut component
+	 * The type of chart doughnut component
 	 */
 	@Input() public type: string = '';
 

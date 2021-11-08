@@ -18,117 +18,117 @@ export class TransformComponent
 	implements OnInit
 {
 	/**
-	 * Input  of transform component
+	 * The visible of transform component
 	 */
 	@Input() public visible: boolean = true;
 
 	/**
-	 * Input  of transform component
+	 * The anchorSeparat of transform component
 	 */
 	@Input() public anchorSeparat: boolean = false;
 
 	/**
-	 * Input  of transform component
+	 * The x of transform component
 	 */
 	@Input() public x: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The y of transform component
 	 */
 	@Input() public y: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The z of transform component
 	 */
 	@Input() public z: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The width of transform component
 	 */
 	@Input() public width: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The height of transform component
 	 */
 	@Input() public height: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The left of transform component
 	 */
 	@Input() public left: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The top of transform component
 	 */
 	@Input() public top: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The right of transform component
 	 */
 	@Input() public right: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The bottom of transform component
 	 */
 	@Input() public bottom: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The anchorMinX of transform component
 	 */
 	@Input() public anchorMinX: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The anchorMinY of transform component
 	 */
 	@Input() public anchorMinY: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The anchorMaxX of transform component
 	 */
 	@Input() public anchorMaxX: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The anchorMaxY of transform component
 	 */
 	@Input() public anchorMaxY: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The pivotX of transform component
 	 */
 	@Input() public pivotX: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The pivotY of transform component
 	 */
 	@Input() public pivotY: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The rotationX of transform component
 	 */
 	@Input() public rotationX: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The rotationY of transform component
 	 */
 	@Input() public rotationY: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The rotationZ of transform component
 	 */
 	@Input() public rotationZ: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The scaleX of transform component
 	 */
 	@Input() public scaleX: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The scaleY of transform component
 	 */
 	@Input() public scaleY: number = null;
 
 	/**
-	 * Input  of transform component
+	 * The scaleZ of transform component
 	 */
 	@Input() public scaleZ: number = null;
 

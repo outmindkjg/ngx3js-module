@@ -314,7 +314,7 @@ export class KeyframeComponent
 	}
 
 	/**
-	 * Clip  of keyframe component
+	 * The Clip of keyframe component
 	 */
 	private clip: THREE.AnimationClip = null;
 
@@ -358,7 +358,7 @@ export class KeyframeComponent
 	}
 
 	/**
-	 * Keyframe  of keyframe component
+	 * The Keyframe of keyframe component
 	 */
 	private keyframe: THREE.KeyframeTrack = null;
 

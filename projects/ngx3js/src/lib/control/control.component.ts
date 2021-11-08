@@ -759,24 +759,24 @@ export class ControlComponent
 	}
 
 	/**
-	 * Camera  of control
+	 * The Camera of control
 	 */
 	private _camera: THREE.Camera = null;
 
 	/**
-	 * Renderer  of control
+	 * The Renderer of control
 	 */
 	private _renderer: THREE.Renderer = null;
 
 	private _renderCaller: (...args: any[]) => void = null;
 
 	/**
-	 * Renderer  of control
+	 * The Renderer of control
 	 */
 	private controlDomElement: HTMLElement = null;
 
 	/**
-	 * Scene  of control
+	 * The Scene of control
 	 */
 	private _scene: QueryList<SceneComponent> = null;
 
@@ -836,7 +836,7 @@ export class ControlComponent
 	}
 
 	/**
-	 * Control  of control
+	 * The Control of control
 	 */
 	private control: any = null;
 

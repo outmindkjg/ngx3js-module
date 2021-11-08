@@ -49,17 +49,17 @@ export abstract class AbstractThreeController {
 	protected yoyo: boolean = null;
 
 	/**
-	 * Overshoot  of abstract three controller
+	 * The Overshoot of abstract three controller
 	 */
 	protected overshoot: number = null;
 
 	/**
-	 * Amplitude  of abstract three controller
+	 * The Amplitude of abstract three controller
 	 */
 	protected amplitude: number = null;
 
 	/**
-	 * Period  of abstract three controller
+	 * The Period of abstract three controller
 	 */
 	protected period: number = null;
 
@@ -69,7 +69,7 @@ export abstract class AbstractThreeController {
 	protected linearRatio: number = null;
 
 	/**
-	 * Power  of abstract three controller
+	 * The Power of abstract three controller
 	 */
 	protected power: number = null;
 
@@ -79,7 +79,7 @@ export abstract class AbstractThreeController {
 	protected yoyoMode: boolean = null;
 
 	/**
-	 * Steps  of abstract three controller
+	 * The Steps of abstract three controller
 	 */
 	protected steps: number = null;
 
@@ -348,22 +348,22 @@ export abstract class AbstractThreeController {
 	}
 
 	/**
-	 * Renderer  of abstract three controller
+	 * The Renderer of abstract three controller
 	 */
 	_renderer: THREE.Renderer = null;
 
 	/**
-	 * Scenes  of abstract three controller
+	 * The Scenes of abstract three controller
 	 */
 	_scenes: QueryList<SceneComponent> = null;
 
 	/**
-	 * Cameras  of abstract three controller
+	 * The Cameras of abstract three controller
 	 */
 	_cameras: QueryList<CameraComponent> = null;
 
 	/**
-	 * Canvases  of abstract three controller
+	 * The Canvases of abstract three controller
 	 */
 	_canvases: QueryList<CanvasComponent> = null;
 
@@ -408,17 +408,17 @@ export abstract class AbstractThreeController {
 	}
 
 	/**
-	 * Scene  of abstract three controller
+	 * The Scene of abstract three controller
 	 */
 	private _scene: THREE.Scene = null;
 
 	/**
-	 * Camera  of abstract three controller
+	 * The Camera of abstract three controller
 	 */
 	private _camera: THREE.Camera = null;
 
 	/**
-	 * Canvas  of abstract three controller
+	 * The Canvas of abstract three controller
 	 */
 	private _canvas: HtmlCollection = null;
 
@@ -884,17 +884,17 @@ export abstract class AbstractThreeController {
  */
 export class AutoRotationController extends AbstractThreeController {
 	/**
-	 * X  of auto rotation controller
+	 * The X of auto rotation controller
 	 */
 	protected x: number = 0;
 
 	/**
-	 * Y  of auto rotation controller
+	 * The Y of auto rotation controller
 	 */
 	protected y: number = 0;
 
 	/**
-	 * Z  of auto rotation controller
+	 * The Z of auto rotation controller
 	 */
 	protected z: number = 0;
 
@@ -948,17 +948,17 @@ export class AutoRotationController extends AbstractThreeController {
  */
 export class AutoScaleController extends AbstractThreeController {
 	/**
-	 * X  of auto scale controller
+	 * The X of auto scale controller
 	 */
 	protected x: number = null;
 
 	/**
-	 * Y  of auto scale controller
+	 * The Y of auto scale controller
 	 */
 	protected y: number = null;
 
 	/**
-	 * Z  of auto scale controller
+	 * The Z of auto scale controller
 	 */
 	protected z: number = null;
 
@@ -1012,17 +1012,17 @@ export class AutoScaleController extends AbstractThreeController {
  */
 export class AutoPositionController extends AbstractThreeController {
 	/**
-	 * X  of auto position controller
+	 * The X of auto position controller
 	 */
 	protected x: number = null;
 
 	/**
-	 * Y  of auto position controller
+	 * The Y of auto position controller
 	 */
 	protected y: number = null;
 
 	/**
-	 * Z  of auto position controller
+	 * The Z of auto position controller
 	 */
 	protected z: number = null;
 
@@ -1072,12 +1072,12 @@ export class AutoPositionController extends AbstractThreeController {
  */
 export class AutoMaterialController extends AbstractThreeController {
 	/**
-	 * Color  of auto material controller
+	 * The Color of auto material controller
 	 */
 	protected color: number | string | THREE.Color = null;
 
 	/**
-	 * Opacity  of auto material controller
+	 * The Opacity of auto material controller
 	 */
 	protected opacity: number = null;
 
@@ -1142,7 +1142,7 @@ export class AutoMaterialController extends AbstractThreeController {
  */
 export class AutoUniformsController extends AbstractThreeController {
 	/**
-	 * Key  of auto uniforms controller
+	 * The Key of auto uniforms controller
 	 */
 	protected key: string = null;
 
@@ -1152,7 +1152,7 @@ export class AutoUniformsController extends AbstractThreeController {
 	protected valueType: string = 'elapsedTime';
 
 	/**
-	 * Speed  of auto uniforms controller
+	 * The Speed of auto uniforms controller
 	 */
 	protected speed: number = 1;
 
@@ -1181,7 +1181,7 @@ export class AutoUniformsController extends AbstractThreeController {
 	}
 
 	/**
-	 * Uniform  of auto uniforms controller
+	 * The Uniform of auto uniforms controller
 	 */
 	private uniform: IUniform = null;
 

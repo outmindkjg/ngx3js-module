@@ -101,17 +101,17 @@ export class ControllerItemComponent
 	implements OnInit
 {
 	/**
-	 * Input  of controller item component
+	 * The type of controller item component
 	 */
 	@Input() public type: string = 'position';
 
 	/**
-	 * Input  of controller item component
+	 * The lookathead of controller item component
 	 */
 	@Input() public lookathead: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The curve of controller item component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -119,92 +119,92 @@ export class ControllerItemComponent
 	@Input() public curve: string = null;
 
 	/**
-	 * Input  of controller item component
+	 * The scale of controller item component
 	 */
 	@Input() public scale: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The radius of controller item component
 	 */
 	@Input() public radius: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The radiusInner of controller item component
 	 */
 	@Input() public radiusInner: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The radiusX of controller item component
 	 */
 	@Input() public radiusX: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The radiusY of controller item component
 	 */
 	@Input() public radiusY: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The radiusZ of controller item component
 	 */
 	@Input() public radiusZ: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The rotation of controller item component
 	 */
 	@Input() public rotation: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The rotationX of controller item component
 	 */
 	@Input() public rotationX: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The rotationY of controller item component
 	 */
 	@Input() public rotationY: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The rotationZ of controller item component
 	 */
 	@Input() public rotationZ: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The center of controller item component
 	 */
 	@Input() public center: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The centerX of controller item component
 	 */
 	@Input() public centerX: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The centerY of controller item component
 	 */
 	@Input() public centerY: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The centerZ of controller item component
 	 */
 	@Input() public centerZ: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The duration of controller item component
 	 */
 	@Input() public duration: number = 1;
 
 	/**
-	 * Input  of controller item component
+	 * The delta of controller item component
 	 */
 	@Input() public delta: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The multiply of controller item component
 	 */
 	@Input() public multiply: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The Input of controller item component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -212,87 +212,87 @@ export class ControllerItemComponent
 	@Input() public options: string = null;
 
 	/**
-	 * Input  of controller item component
+	 * The visible of controller item component
 	 */
 	@Input() public visible: boolean = null;
 
 	/**
-	 * Input  of controller item component
+	 * The color of controller item component
 	 */
 	@Input() public color: ThreeColor = null;
 
 	/**
-	 * Input  of controller item component
+	 * The opacity of controller item component
 	 */
 	@Input() public opacity: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The tubularSegments of controller item component
 	 */
 	@Input() public tubularSegments: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The tubeRadius of controller item component
 	 */
 	@Input() public tubeRadius: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The tubeRadiusSegments of controller item component
 	 */
 	@Input() public tubeRadiusSegments: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The closed of controller item component
 	 */
 	@Input() public closed: boolean = null;
 
 	/**
-	 * Input  of controller item component
+	 * The material of controller item component
 	 */
 	@Input() public material: string = null;
 
 	/**
-	 * Input  of controller item component
+	 * The uniform of controller item component
 	 */
 	@Input() public uniform: string = null;
 
 	/**
-	 * Input  of controller item component
+	 * The wave of controller item component
 	 */
 	@Input() public wave: number = 0;
 
 	/**
-	 * Input  of controller item component
+	 * The waveR of controller item component
 	 */
 	@Input() public waveR: number = 0;
 
 	/**
-	 * Input  of controller item component
+	 * The waveH of controller item component
 	 */
 	@Input() public waveH: number = 0;
 
 	/**
-	 * Input  of controller item component
+	 * The rate of controller item component
 	 */
 	@Input() public rate: number = 1;
 
 	/**
-	 * Input  of controller item component
+	 * The rateX of controller item component
 	 */
 	@Input() public rateX: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The rateY of controller item component
 	 */
 	@Input() public rateY: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The rateZ of controller item component
 	 */
 	@Input() public rateZ: number = null;
 
 	/**
-	 * Input  of controller item component
+	 * The Input of controller item component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -300,22 +300,22 @@ export class ControllerItemComponent
 	@Input() public valueType: string = 'auto';
 
 	/**
-	 * Input  of controller item component
+	 * The refValue of controller item component
 	 */
 	@Input() public refValue: any = null;
 
 	/**
-	 * Input  of controller item component
+	 * The minValue of controller item component
 	 */
 	@Input() public minValue: number = 0;
 
 	/**
-	 * Input  of controller item component
+	 * The maxValue of controller item component
 	 */
 	@Input() public maxValue: number = 1;
 
 	/**
-	 * Input  of controller item component
+	 * The Input of controller item component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -323,7 +323,7 @@ export class ControllerItemComponent
 	@Input() public colorType: string = 'rgb';
 
 	/**
-	 * Input  of controller item component
+	 * The refRate of controller item component
 	 */
 	@Input() public refRate: any = null;
 
@@ -397,7 +397,7 @@ export class ControllerItemComponent
 	}
 
 	/**
-	 * Helper  of controller item component
+	 * The Helper of controller item component
 	 */
 	private _helper: THREE.Object3D = null;
 
@@ -407,32 +407,32 @@ export class ControllerItemComponent
 	private _helperPoint: THREE.Object3D = null;
 
 	/**
-	 * Curve  of controller item component
+	 * The Curve of controller item component
 	 */
 	private _curve: CurvesNormal = null;
 
 	/**
-	 * Lookat  of controller item component
+	 * The Lookat of controller item component
 	 */
 	private _lookat: boolean = false;
 
 	/**
-	 * Duration  of controller item component
+	 * The Duration of controller item component
 	 */
 	private _duration: number = 60;
 
 	/**
-	 * Delta  of controller item component
+	 * The Delta of controller item component
 	 */
 	private _delta: number = 60;
 
 	/**
-	 * Parent  of controller item component
+	 * The Parent of controller item component
 	 */
 	private _parent: THREE.Object3D;
 
 	/**
-	 * Lookathead  of controller item component
+	 * The Lookathead of controller item component
 	 */
 	private _lookathead: number = 0.05;
 

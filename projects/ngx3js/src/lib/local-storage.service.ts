@@ -297,7 +297,7 @@ export class LocalStorageService {
 	private voxLoader: VOXLoader = null;
 
 	/**
-	 * Chunk  of local storage service
+	 * The Chunk of local storage service
 	 */
 	private _chunk: Chunk = null;
 

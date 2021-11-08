@@ -65,7 +65,7 @@ export class CanvasComponent
 	private controllerList: QueryList<AbstractControllerComponent>;
 
 	/**
-	 * Collection  of canvas component
+	 * The Collection of canvas component
 	 */
 	private collection: HtmlCollection = {
 		html: null,
@@ -146,7 +146,7 @@ export class CanvasComponent
 	}
 
 	/**
-	 * Canvas  of canvas component
+	 * The Canvas of canvas component
 	 */
 	private canvas: HTMLElement = null;
 

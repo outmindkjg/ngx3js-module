@@ -11,7 +11,7 @@ export class PlaneDepthGeometry extends THREE.BufferGeometry {
 	type: string = 'PlaneDepthGeometry';
 
 	/**
-	 * Parameters  of plane depth geometry
+	 * The Parameters of plane depth geometry
 	 */
 	parameters: {
 		width: number;

@@ -27,17 +27,17 @@ export class PositionComponent
 	implements OnInit
 {
 	/**
-	 * Input  of position component
+	 * The type of position component
 	 */
 	@Input() public type: string = 'position';
 
 	/**
-	 * refName  of position component
+	 * The refName of position component
 	 */
 	@Input() public refName: string = null;
 
 	/**
-	 * Input  of position component
+	 * The refer of position component
 	 */
 	@Input() public refer: any = null;
 
@@ -67,12 +67,12 @@ export class PositionComponent
 	@Input() public normalize: boolean = false;
 
 	/**
-	 * Input  of position component
+	 * The camera of position component
 	 */
 	@Input() public camera: any = null;
 
 	/**
-	 * Input  of position component
+	 * The Input of position component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -80,17 +80,17 @@ export class PositionComponent
 	@Input() public setfrom: string = null;
 
 	/**
-	 * Input  of position component
+	 * The radius of position component
 	 */
 	@Input() public radius: number = null;
 
 	/**
-	 * Input  of position component
+	 * The phi of position component
 	 */
 	@Input() public phi: number = null;
 
 	/**
-	 * Input  of position component
+	 * The theta of position component
 	 */
 	@Input() public theta: number = null;
 
@@ -132,12 +132,12 @@ export class PositionComponent
 	}
 
 	/**
-	 * Position  of position component
+	 * The Position of position component
 	 */
 	private position: THREE.Vector3 = null;
 
 	/**
-	 * Object3d  of position component
+	 * The Object3d of position component
 	 */
 	private _object3d: {
 		[key: string]: THREE.Object3D;

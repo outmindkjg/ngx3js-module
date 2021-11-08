@@ -25,7 +25,7 @@ export class ChartControllerComponent
 	implements OnInit
 {
 	/**
-	 * Input  of controller component
+	 * The Input of controller component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -33,7 +33,7 @@ export class ChartControllerComponent
 	@Input() public type: string = 'auto';
 
 	/**
-	 * Input  of controller component
+	 * The Input of controller component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -107,12 +107,12 @@ export class ChartControllerComponent
 	}
 
 	/**
-	 * Duration  of controller component
+	 * The Duration of controller component
 	 */
 	private _duration: number = 1;
 
 	/**
-	 * Duration  of controller component
+	 * The Duration of controller component
 	 */
 	private _chartComponent: AbstractChartComponent = null;
 

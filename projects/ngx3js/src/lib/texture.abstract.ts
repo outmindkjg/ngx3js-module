@@ -88,7 +88,7 @@ export abstract class AbstractTextureComponent
 	@Input() public name: string = null;
 
 	/**
-	 * refName  of geometry component
+	 * The refName of geometry component
 	 */
 	@Input() public refName: string | string[] = null;
 
@@ -106,12 +106,12 @@ export abstract class AbstractTextureComponent
 	@Input() public data: BufferSource | number[] = null;
 
 	/**
-	 * Input  of abstract texture component
+	 * The texture program params
 	 */
 	@Input() public programParam: any = null;
 
 	/**
-	 * Input  of abstract texture component
+	 * The texture program mipmaps
 	 */
 	@Input() public programMipmaps: any[] = null;
 
@@ -218,7 +218,7 @@ export abstract class AbstractTextureComponent
 
 	/**
 	 * How the texture is sampled when a texel covers less than one pixel. The default is
-	 * [page:Textures THREE.LinearMipmapLinearFilter], which uses mipmapping and a trilinear filter. 
+	 * [page:Textures THREE.LinearMipmapLinearFilter], which uses mipmapping and a trilinear filter.
 	 * See the [page:Textures texture constants] page for all possible choices.
 	 *
 	 * Notice - case insensitive.
@@ -234,7 +234,7 @@ export abstract class AbstractTextureComponent
 	@Input() public minFilter: string = null;
 
 	/**
-	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically set this to [page:Textures THREE.RGBFormat] for JPG images. 
+	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically set this to [page:Textures THREE.RGBFormat] for JPG images.
 	 * See the [page:Textures texture constants] page for details of other formats.
 	 *
 	 * Notice - case insensitive.
@@ -382,22 +382,22 @@ export abstract class AbstractTextureComponent
 	@Input() public centerY: number = null;
 
 	/**
-	 * Input  of abstract texture component
+	 * width of the texture.
 	 */
 	@Input() public width: number = null;
 
 	/**
-	 * Input  of abstract texture component
+	 * height of the texture.
 	 */
 	@Input() public height: number = null;
 
 	/**
-	 * Input  of abstract texture component
+	 * depth of the texture.
 	 */
 	@Input() public depth: number = null;
 
 	/**
-	 * Input  of abstract texture component
+	 * scale of the texture.
 	 */
 	@Input() public scale: number = null;
 
@@ -538,7 +538,7 @@ export abstract class AbstractTextureComponent
 	private refTexture: THREE.Texture = null;
 
 	/**
-	 * Texture  of abstract texture component
+	 * The Texture of abstract texture component
 	 */
 	protected texture: THREE.Texture = null;
 
@@ -1476,7 +1476,7 @@ export abstract class AbstractTextureComponent
 	}
 
 	/**
-	 * Material  of abstract texture component
+	 * The Material of abstract texture component
 	 */
 	private _material: {
 		[key: string]: {

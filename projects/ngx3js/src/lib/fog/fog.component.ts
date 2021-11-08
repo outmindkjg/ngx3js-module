@@ -110,7 +110,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	}
 
 	/**
-	 * Fog  of fog component
+	 * The Fog of fog component
 	 */
 	private fog: THREE.FogBase = null;
 

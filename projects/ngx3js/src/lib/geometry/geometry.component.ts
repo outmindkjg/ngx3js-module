@@ -263,22 +263,22 @@ export class GeometryComponent
 	@Input() public type: string = 'sphere';
 
 	/**
-	 * Input  of geometry component
+	 * The refer of geometry component
 	 */
 	@Input() public refer: any = null;
 
 	/**
-	 * Input  of geometry component
+	 * The storageName of geometry component
 	 */
 	@Input() public storageName: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The storage2Buffer of geometry component
 	 */
 	@Input() public storage2Buffer: boolean = false;
 
 	/**
-	 * Input  of geometry component
+	 * The Input of geometry component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -286,12 +286,12 @@ export class GeometryComponent
 	@Input() public perlinType: string = 'minecraft';
 
 	/**
-	 * Input  of geometry component
+	 * The light of geometry component
 	 */
 	@Input() public light: string | number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The shadow of geometry component
 	 */
 	@Input() public shadow: string | number = null;
 
@@ -346,7 +346,7 @@ export class GeometryComponent
 	@Input() public depthRate: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The quality of geometry component
 	 */
 	@Input() public quality: number = null;
 
@@ -416,7 +416,7 @@ export class GeometryComponent
 	@Input() public phiSegments: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The tube of geometry component
 	 */
 	@Input() public tube: number = null;
 
@@ -451,22 +451,22 @@ export class GeometryComponent
 	@Input() public color2: ThreeColor = null;
 
 	/**
-	 * Input  of geometry component
+	 * The points of geometry component
 	 */
 	@Input() public points: ThreeVector[] = null;
 
 	/**
-	 * Input  of geometry component
+	 * The shapes of geometry component
 	 */
 	@Input() public shapes: ThreeVector[] | THREE.Shape = null;
 
 	/**
-	 * Input  of geometry component
+	 * The extrudePath of geometry component
 	 */
 	@Input() public extrudePath: ThreeVector[] = null;
 
 	/**
-	 * Input  of geometry component
+	 * The Input of geometry component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -474,12 +474,12 @@ export class GeometryComponent
 	@Input() public extrudePathType: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The curvePath of geometry component
 	 */
 	@Input() public curvePath: ThreeVector[] = null;
 
 	/**
-	 * Input  of geometry component
+	 * The Input of geometry component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -487,7 +487,7 @@ export class GeometryComponent
 	@Input() public curvePathType: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The Input of geometry component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -495,37 +495,37 @@ export class GeometryComponent
 	@Input() public curveType: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The addGroup of geometry component
 	 */
 	@Input() public addGroup: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The bottom of geometry component
 	 */
 	@Input() public bottom: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The lid of geometry component
 	 */
 	@Input() public lid: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The body of geometry component
 	 */
 	@Input() public body: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The fitLid of geometry component
 	 */
 	@Input() public fitLid: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The blinn of geometry component
 	 */
 	@Input() public blinn: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The Input of geometry component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -533,12 +533,12 @@ export class GeometryComponent
 	@Input() public uVGenerator: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The pointsGeometry of geometry component
 	 */
 	@Input() public pointsGeometry: GeometryComponent = null;
 
 	/**
-	 * Input  of geometry component
+	 * The Input of geometry component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -546,172 +546,172 @@ export class GeometryComponent
 	@Input() public parametric: string | GeometriesParametric | any = null;
 
 	/**
-	 * Input  of geometry component
+	 * The slices of geometry component
 	 */
 	@Input() public slices: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The stacks of geometry component
 	 */
 	@Input() public stacks: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The text of geometry component
 	 */
 	@Input() public text: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The font of geometry component
 	 */
 	@Input() public font: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The size of geometry component
 	 */
 	@Input() public size: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The weight of geometry component
 	 */
 	@Input() public weight: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The polyVertices of geometry component
 	 */
 	@Input() public polyVertices: number[] = null;
 
 	/**
-	 * Input  of geometry component
+	 * The polyIndices of geometry component
 	 */
 	@Input() public polyIndices: number[] = null;
 
 	/**
-	 * Input  of geometry component
+	 * The curveSegments of geometry component
 	 */
 	@Input() public curveSegments: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The tension of geometry component
 	 */
 	@Input() public tension: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The steps of geometry component
 	 */
 	@Input() public steps: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The bevelEnabled of geometry component
 	 */
 	@Input() public bevelEnabled: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The bevelThickness of geometry component
 	 */
 	@Input() public bevelThickness: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The bevelSize of geometry component
 	 */
 	@Input() public bevelSize: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The bevelOffset of geometry component
 	 */
 	@Input() public bevelOffset: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The bevelSegments of geometry component
 	 */
 	@Input() public bevelSegments: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The closed of geometry component
 	 */
 	@Input() public closed: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The instanceCount of geometry component
 	 */
 	@Input() public instanceCount: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The mesh of geometry component
 	 */
 	@Input() public mesh: THREE.Mesh | any = null;
 
 	/**
-	 * Input  of geometry component
+	 * The positionX of geometry component
 	 */
 	@Input() public positionX: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The positionY of geometry component
 	 */
 	@Input() public positionY: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The positionZ of geometry component
 	 */
 	@Input() public positionZ: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The orientationX of geometry component
 	 */
 	@Input() public orientationX: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The orientationY of geometry component
 	 */
 	@Input() public orientationY: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The orientationZ of geometry component
 	 */
 	@Input() public orientationZ: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The sizeX of geometry component
 	 */
 	@Input() public sizeX: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The sizeY of geometry component
 	 */
 	@Input() public sizeY: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The sizeZ of geometry component
 	 */
 	@Input() public sizeZ: number = null;
 
 	/**
-	 * Input  of geometry component
+	 * The curve of geometry component
 	 */
 	@Input() public curve: string | THREE.Curve<THREE.Vector3> = null;
 
 	/**
-	 * Input  of geometry component
+	 * The curveOption of geometry component
 	 */
 	@Input() public curveOption: any = null;
 
 	/**
-	 * Input  of geometry component
+	 * The curveNormal of geometry component
 	 */
 	@Input() public curveNormal: boolean = null;
 
 	/**
-	 * Input  of geometry component
+	 * The curveNormalOption of geometry component
 	 */
 	@Input() public curveNormalOption: string = null;
 
 	/**
-	 * Input  of geometry component
+	 * The refGeometry of geometry component
 	 */
 	@Input() public refGeometry: any = null;
 
 	/**
-	 * Input  of geometry component
+	 * The Input of geometry component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -719,7 +719,7 @@ export class GeometryComponent
 	@Input() public refType: string = 'targetMesh';
 
 	/**
-	 * Input  of geometry component
+	 * The rayParams of geometry component
 	 */
 	@Input() public rayParams: RayParameters = {};
 

@@ -5,7 +5,7 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
  */
 export class CurvesCircle extends THREE.Curve<THREE.Vector3> {
 	/**
-	 * Radius  of curves circle
+	 * The Radius of curves circle
 	 */
 	private radius: number = 1;
 

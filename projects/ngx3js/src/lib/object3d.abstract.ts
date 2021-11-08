@@ -99,7 +99,7 @@ export interface Object3dOptions {
 	lookat?: THREE.Vector3 | number[] | LookatComponent | any;
 
 	/**
-	 * Input  of abstract object3d component
+	 * The distance at which to display this level of detail.
 	 */
 	loDistance?: number;
 
@@ -115,7 +115,7 @@ export interface Object3dOptions {
 	customDistance?: AbstractMaterialComponent | THREE.Material | any;
 
 	/**
-	 * Input  of abstract object3d component
+	 * The animaion group of this object 3d
 	 */
 	animationGroup?: AnimationGroupComponent | THREE.AnimationObjectGroup;
 }
@@ -232,7 +232,7 @@ export abstract class AbstractObject3dComponent
 		null;
 
 	/**
-	 * Input  of abstract object3d component
+	 * The distance at which to display this level of detail.
 	 */
 	@Input() private loDistance: number = null;
 
@@ -254,7 +254,7 @@ export abstract class AbstractObject3dComponent
 		| any = null;
 
 	/**
-	 * Input  of abstract object3d component
+	 * The animaion group of this object 3d
 	 */
 	@Input() private animationGroup:
 		| AnimationGroupComponent
@@ -263,7 +263,7 @@ export abstract class AbstractObject3dComponent
 	/**
 	 * An optional callback that is executed immediately before a 3D object is rendered.
 	 * This function is called with the following parameters: renderer, scene, camera, geometry, material, group.
-	 * 
+	 *
 	 * Please notice that this callback is only executed for *renderable* 3D objects. Meaning 3D objects which define their visual appearance with geometries and materials like instances of [page:Mesh], [page:Line], [page:Points] or [page:Sprite].
 	 * Instances of [page:Object3D], [page:Group] or [page:Bone] are not renderable and thus this callback is not executed for such objects.
 	 */
@@ -924,7 +924,7 @@ export abstract class AbstractObject3dComponent
 	}
 
 	/**
-	 * Object3d  of abstract object3d component
+	 * The Object3d of abstract object3d component
 	 */
 	protected object3d: THREE.Object3D = null;
 

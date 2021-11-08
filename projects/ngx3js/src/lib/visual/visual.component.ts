@@ -43,7 +43,7 @@ export class VisualComponent
 	implements OnInit
 {
 	/**
-	 * Input  of visual component
+	 * The Input of visual component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -56,7 +56,7 @@ export class VisualComponent
 	@Input() public name: string = null;
 
 	/**
-	 * Input  of visual component
+	 * The Input of visual component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -64,27 +64,27 @@ export class VisualComponent
 	@Input() public childType: string = 'innerHTML';
 
 	/**
-	 * Input  of visual component
+	 * The src of visual component
 	 */
 	@Input() public src: string = null;
 
 	/**
-	 * Input  of visual component
+	 * The value of visual component
 	 */
 	@Input() public value: string | number = '';
 
 	/**
-	 * Input  of visual component
+	 * The inputType of visual component
 	 */
 	@Input() public inputType: string | number = 'text';
 
 	/**
-	 * Input  of visual component
+	 * The checked of visual component
 	 */
 	@Input() public checked: string | number = 'false';
 
 	/**
-	 * Input  of visual component
+	 * The radioValues of visual component
 	 */
 	@Input() public radioValues: {
 		value?: string;
@@ -92,7 +92,7 @@ export class VisualComponent
 	}[] = null;
 
 	/**
-	 * Input  of visual component
+	 * The selectOptions of visual component
 	 */
 	@Input() public selectOptions: {
 		value?: string;
@@ -100,67 +100,67 @@ export class VisualComponent
 	}[] = null;
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private change: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private click: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private dblclick: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private focus: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private keyup: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private keydown: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private load: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private select: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private mousedown: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private mouseout: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private mouseover: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private mousemove: EventEmitter<any> = new EventEmitter<any>();
 
 	/**
-	 * Output  of visual component
+	 * The Output of visual component
 	 */
 	@Output() private mouseup: EventEmitter<any> = new EventEmitter<any>();
 
@@ -193,7 +193,7 @@ export class VisualComponent
 	// @ContentChildren(AbstractControllerComponent, { descendants: false }) private controllerList: QueryList<AbstractControllerComponent>;
 
 	/**
-	 * Collection  of visual component
+	 * The Collection of visual component
 	 */
 	private collection: HtmlCollection = {
 		html: null,
@@ -517,7 +517,7 @@ export class VisualComponent
 	private cssClazzName: string = null;
 
 	/**
-	 * Visual  of visual component
+	 * The Visual of visual component
 	 */
 	private visual: HTMLElement = null;
 

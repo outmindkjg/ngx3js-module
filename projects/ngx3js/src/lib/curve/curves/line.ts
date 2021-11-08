@@ -6,7 +6,7 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
  */
 export class CurvesLine extends THREE.Curve<THREE.Vector3> {
 	/**
-	 * Radius  of curves line
+	 * The Radius of curves line
 	 */
 	private radius: number = 1;
 

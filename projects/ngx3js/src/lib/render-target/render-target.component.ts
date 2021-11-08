@@ -32,7 +32,7 @@ export class RenderTargetComponent
 	implements OnInit, OnDestroy
 {
 	/**
-	 * Input  of render target component
+	 * The Input of render target component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -40,32 +40,32 @@ export class RenderTargetComponent
 	@Input() public type: string = 'RenderTarget';
 
 	/**
-	 * Input  of render target component
+	 * The size of render target component
 	 */
 	@Input() public size: number = 1024;
 
 	/**
-	 * Input  of render target component
+	 * The count of render target component
 	 */
 	@Input() public count: number = 1;
 
 	/**
-	 * Input  of composer component
+	 * The depthBuffer of composer component
 	 */
 	@Input() public depthBuffer: boolean = null;
 
 	/**
-	 * Input  of composer component
+	 * The stencilBuffer of composer component
 	 */
 	@Input() public stencilBuffer: boolean = null;
 
 	/**
-	 * Input  of composer component
+	 * The depthTexture of composer component
 	 */
 	@Input() public depthTexture: any = null;
 
 	/**
-	 * Input  of pass component
+	 * The targetSize of pass component
 	 */
 	@Input() public targetSize: THREE.Vector2 | SizeComponent = null;
 

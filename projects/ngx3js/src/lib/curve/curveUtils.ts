@@ -267,22 +267,22 @@ export interface CurvesNormalParameters {
  */
 export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	/**
-	 * Scale  of curves normal
+	 * The Scale of curves normal
 	 */
 	private scale: THREE.Vector3 = null;
 
 	/**
-	 * Rotation  of curves normal
+	 * The Rotation of curves normal
 	 */
 	private rotation: THREE.Euler = null;
 
 	/**
-	 * Center  of curves normal
+	 * The Center of curves normal
 	 */
 	private center: THREE.Vector3 = null;
 
 	/**
-	 * Multiply  of curves normal
+	 * The Multiply of curves normal
 	 */
 	private multiply: number = null;
 
@@ -317,7 +317,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	}
 
 	/**
-	 * Curve  of curves normal
+	 * The Curve of curves normal
 	 */
 	public curve: THREE.Curve<THREE.Vector3> = null;
 
@@ -386,12 +386,12 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	}
 
 	/**
-	 * Center  of curves normal
+	 * The Center of curves normal
 	 */
 	private _center: THREE.Vector3 = null;
 
 	/**
-	 * Scale  of curves normal
+	 * The Scale of curves normal
 	 */
 	private _scale: THREE.Vector3 = null;
 

@@ -23,12 +23,12 @@ export class RotationComponent
 	implements OnInit
 {
 	/**
-	 * Input  of rotation component
+	 * The refer of rotation component
 	 */
 	@Input() public refer: any = null;
 
 	/**
-	 * refName  of rotation component
+	 * The refName of rotation component
 	 */
 	@Input() public refName: string = null;
 
@@ -102,12 +102,12 @@ export class RotationComponent
 	}
 
 	/**
-	 * Rotation  of rotation component
+	 * The Rotation of rotation component
 	 */
 	private rotation: THREE.Euler = null;
 
 	/**
-	 * Object3d  of rotation component
+	 * The Object3d of rotation component
 	 */
 	private _object3d: {
 		[key: string]: THREE.Object3D;

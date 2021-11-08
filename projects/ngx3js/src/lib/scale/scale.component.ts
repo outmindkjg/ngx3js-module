@@ -16,12 +16,12 @@ export class ScaleComponent
 	implements OnInit
 {
 	/**
-	 * Input  of scale component
+	 * The refer of scale component
 	 */
 	@Input() public refer: any = null;
 
 	/**
-	 * refName  of rotation component
+	 * The refName of rotation component
 	 */
 	@Input() public refName: string = null;
 
@@ -46,7 +46,7 @@ export class ScaleComponent
 	@Input() public multiply: number = null;
 
 	/**
-	 * Input  of scale component
+	 * The scaleMode of scale component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -98,12 +98,12 @@ export class ScaleComponent
 	}
 
 	/**
-	 * Scale  of scale component
+	 * The Scale of scale component
 	 */
 	private scale: THREE.Vector3 = null;
 
 	/**
-	 * Object3d  of scale component
+	 * The Object3d of scale component
 	 */
 	private _object3d: {
 		[key: string]: THREE.Object3D;

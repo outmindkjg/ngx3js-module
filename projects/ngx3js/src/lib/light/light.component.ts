@@ -103,7 +103,7 @@ export interface LightOptions extends Object3dOptions {
 	shadowFocus?: number;
 
 	/**
-	 * Input  of light component
+	 * Camera frustum near plane.
 	 */
 	shadowCameraNear?: number;
 
@@ -166,37 +166,37 @@ export interface LightOptions extends Object3dOptions {
 	sh?: string;
 
 	/**
-	 * Input  of light component
+	 * The Input of light component
 	 */
 	texture?: AbstractTextureComponent;
 
 	/**
-	 * Input  of light component
+	 * The Input of light component
 	 */
 	target?: any;
 
 	/**
-	 * Input  of light component
+	 * The Input of light component
 	 */
 	targetX?: number;
 
 	/**
-	 * Input  of light component
+	 * The Input of light component
 	 */
 	targetY?: number;
 
 	/**
-	 * Input  of light component
+	 * The Input of light component
 	 */
 	targetZ?: number;
 
 	/**
-	 * Input  of light component
+	 * The Input of light component
 	 */
 	renderer?: any;
 
 	/**
-	 * Input  of light component
+	 * The Input of light component
 	 */
 	renderTarget?: any;
 }
@@ -353,7 +353,7 @@ export class LightComponent
 	@Input() public shadowFocus: number = null;
 
 	/**
-	 * Input  of light component
+	 * The shadowCameraNear of light component
 	 */
 	@Input() public shadowCameraNear: number = null;
 
@@ -416,37 +416,37 @@ export class LightComponent
 	@Input() public sh: string = null;
 
 	/**
-	 * Input  of light component
+	 * The texture of light component
 	 */
 	@Input() public texture: AbstractTextureComponent = null;
 
 	/**
-	 * Input  of light component
+	 * The target of light component
 	 */
 	@Input() public target: any = null;
 
 	/**
-	 * Input  of light component
+	 * The targetX of light component
 	 */
 	@Input() public targetX: number = null;
 
 	/**
-	 * Input  of light component
+	 * The targetY of light component
 	 */
 	@Input() public targetY: number = null;
 
 	/**
-	 * Input  of light component
+	 * The targetZ of light component
 	 */
 	@Input() public targetZ: number = null;
 
 	/**
-	 * Input  of light component
+	 * The renderer of light component
 	 */
 	@Input() public renderer: any = null;
 
 	/**
-	 * Input  of light component
+	 * The renderTarget of light component
 	 */
 	@Input() public renderTarget: any = null;
 
@@ -834,7 +834,7 @@ export class LightComponent
 	}
 
 	/**
-	 * Light  of light component
+	 * The Light of light component
 	 */
 	private light: THREE.Light = null;
 

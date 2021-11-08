@@ -11,7 +11,7 @@ export class CircleDepthGeometry extends THREE.BufferGeometry {
 	type: string = 'CircleDepthGeometry';
 
 	/**
-	 * Parameters  of circle depth geometry
+	 * The Parameters of circle depth geometry
 	 */
 	parameters: {
 		radius: number;

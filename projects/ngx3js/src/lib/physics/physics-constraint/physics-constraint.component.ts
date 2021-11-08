@@ -13,82 +13,82 @@ export class PhysicsConstraintComponent
 	implements OnInit
 {
 	/**
-	 * Input  of physics constraint component
+	 * The type of physics constraint component
 	 */
 	@Input() public type: string = '';
 
 	/**
-	 * Input  of physics constraint component
+	 * The source1 of physics constraint component
 	 */
 	@Input() public source1: any = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The source2 of physics constraint component
 	 */
 	@Input() public source2: any = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The pivot1x of physics constraint component
 	 */
 	@Input() public pivot1x: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The pivot1y of physics constraint component
 	 */
 	@Input() public pivot1y: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The pivot1z of physics constraint component
 	 */
 	@Input() public pivot1z: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The pivot2x of physics constraint component
 	 */
 	@Input() public pivot2x: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The pivot2y of physics constraint component
 	 */
 	@Input() public pivot2y: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The pivot2z of physics constraint component
 	 */
 	@Input() public pivot2z: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The axisx of physics constraint component
 	 */
 	@Input() public axisx: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The axisy of physics constraint component
 	 */
 	@Input() public axisy: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The axisz of physics constraint component
 	 */
 	@Input() public axisz: number = null;
 
 	/**
-	 * Input  of physics constraint component
+	 * The enableMotor of physics constraint component
 	 */
 	@Input() public enableMotor: boolean = false;
 
 	/**
-	 * Input  of physics constraint component
+	 * The targetVelocity of physics constraint component
 	 */
 	@Input() public targetVelocity: number = 0;
 
 	/**
-	 * Input  of physics constraint component
+	 * The maxMotorImpulse of physics constraint component
 	 */
 	@Input() public maxMotorImpulse: number = 0;
 
 	/**
-	 * Input  of physics constraint componenta
+	 * The disableCollisionsBetweenLinkedBodies of physics constraint componenta
 	 */
 	@Input() public disableCollisionsBetweenLinkedBodies: boolean = true;
 
@@ -137,17 +137,17 @@ export class PhysicsConstraintComponent
 	}
 
 	/**
-	 * Constraint  of physics constraint component
+	 * The Constraint of physics constraint component
 	 */
 	private constraint: Ammo.btTypedConstraint = null;
 
 	/**
-	 * Physics  of physics constraint component
+	 * The Physics of physics constraint component
 	 */
 	private physics: Ammo.btSoftRigidDynamicsWorld = null;
 
 	/**
-	 * Ammo  of physics constraint component
+	 * The Ammo of physics constraint component
 	 */
 	private ammo: typeof Ammo = null;
 

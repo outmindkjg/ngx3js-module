@@ -30,12 +30,12 @@ export class LookatComponent
 	implements OnInit
 {
 	/**
-	 * Input  of lookat component
+	 * The refer of lookat component
 	 */
 	@Input() public refer: any = null;
 
 	/**
-	 * refName  of rotation component
+	 * The refName of rotation component
 	 */
 	@Input() public refName: string = null;
 
@@ -99,12 +99,12 @@ export class LookatComponent
 	}
 
 	/**
-	 * Lookat  of lookat component
+	 * The Lookat of lookat component
 	 */
 	private lookat: THREE.Vector3 = null;
 
 	/**
-	 * Object3d  of lookat component
+	 * The Object3d of lookat component
 	 */
 	private _object3d: {
 		[key: string]: THREE.Object3D | { target: THREE.Vector3 };

@@ -70,7 +70,7 @@ export class ControllerComponent
 	implements OnInit
 {
 	/**
-	 * Input  of controller component
+	 * The type of controller component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -78,19 +78,19 @@ export class ControllerComponent
 	@Input() public type: string = 'auto';
 
 	/**
-	 * Input  of controller component
+	 * The controlComponent of controller component
 	 */
 	@Input() public controlComponent: {
 		new (ref3d: THREE.Object3D, ref2d: HtmlCollection): AbstractThreeController;
 	} = null;
 
 	/**
-	 * Input  of controller component
+	 * The controlParams of controller component
 	 */
 	@Input() public controlParams: { [key: string]: any } = null;
 
 	/**
-	 * Input  of controller component
+	 * The curve of controller component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -98,77 +98,77 @@ export class ControllerComponent
 	@Input() public curve: string = null;
 
 	/**
-	 * Input  of controller component
+	 * The scale of controller component
 	 */
 	@Input() public scale: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The radius of controller component
 	 */
 	@Input() public radius: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The radiusX of controller component
 	 */
 	@Input() public radiusX: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The radiusY of controller component
 	 */
 	@Input() public radiusY: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The radiusZ of controller component
 	 */
 	@Input() public radiusZ: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The rotationX of controller component
 	 */
 	@Input() public rotationX: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The rotationY of controller component
 	 */
 	@Input() public rotationY: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The rotationZ of controller component
 	 */
 	@Input() public rotationZ: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The centerX of controller component
 	 */
 	@Input() public centerX: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The centerY of controller component
 	 */
 	@Input() public centerY: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The centerZ of controller component
 	 */
 	@Input() public centerZ: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The duration of controller component
 	 */
 	@Input() public duration: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The delta of controller component
 	 */
 	@Input() public delta: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The multiply of controller component
 	 */
 	@Input() public multiply: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The options of controller component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -176,42 +176,42 @@ export class ControllerComponent
 	@Input() public options: string = null;
 
 	/**
-	 * Input  of controller component
+	 * The visible of controller component
 	 */
 	@Input() public visible: boolean = false;
 
 	/**
-	 * Input  of controller component
+	 * The color of controller component
 	 */
 	@Input() public color: ThreeColor = null;
 
 	/**
-	 * Input  of controller component
+	 * The opacity of controller component
 	 */
 	@Input() public opacity: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The tubularSegments of controller component
 	 */
 	@Input() public tubularSegments: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The tubeRadius of controller component
 	 */
 	@Input() public tubeRadius: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The tubeRadiusSegments of controller component
 	 */
 	@Input() public tubeRadiusSegments: number = null;
 
 	/**
-	 * Input  of controller component
+	 * The closed of controller component
 	 */
 	@Input() public closed: boolean = null;
 
 	/**
-	 * Input  of controller component
+	 * The material of controller component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -219,17 +219,17 @@ export class ControllerComponent
 	@Input() public material: string = null;
 
 	/**
-	 * Input  of controller component
+	 * The useEvent of controller component
 	 */
 	@Input() public useEvent: boolean = false;
 
 	/**
-	 * Input  of controller component
+	 * The eventSeqn of controller component
 	 */
 	@Input() public eventSeqn: number = 1000;
 
 	/**
-	 * Input  of controller component
+	 * The mstDuration of controller component
 	 */
 	@Input() public mstDuration: number = null;
 
@@ -392,7 +392,7 @@ export class ControllerComponent
 	}
 
 	/**
-	 * Controller  of controller component
+	 * The Controller of controller component
 	 */
 	private _controller: AbstractThreeController = null;
 
@@ -407,7 +407,7 @@ export class ControllerComponent
 	private refObject3dposition: THREE.Vector3 = new THREE.Vector3();
 
 	/**
-	 * Duration  of controller component
+	 * The Duration of controller component
 	 */
 	private _duration: number = 1;
 

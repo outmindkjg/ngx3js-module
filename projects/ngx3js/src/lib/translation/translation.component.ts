@@ -25,22 +25,22 @@ export class TranslationComponent
 	implements OnInit
 {
 	/**
-	 * Input  of translation component
+	 * The visible of translation component
 	 */
 	@Input() public visible: boolean = true;
 
 	/**
-	 * Input  of translation component
+	 * The x of translation component
 	 */
 	@Input() public x: number = 0;
 
 	/**
-	 * Input  of translation component
+	 * The y of translation component
 	 */
 	@Input() public y: number = 0;
 
 	/**
-	 * Input  of translation component
+	 * The z of translation component
 	 */
 	@Input() public z: number = 0;
 
@@ -75,7 +75,7 @@ export class TranslationComponent
 	}
 
 	/**
-	 * Translation  of translation component
+	 * The Translation of translation component
 	 */
 	private translation: THREE.Matrix4 = null;
 

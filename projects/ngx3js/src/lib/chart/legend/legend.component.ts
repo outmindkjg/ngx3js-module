@@ -27,7 +27,7 @@ export class ChartLegendComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart legend component
+	 * The type of chart legend component
 	 */
 	@Input() public type: string = '';
 

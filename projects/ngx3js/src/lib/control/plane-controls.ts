@@ -30,17 +30,17 @@ export class PlaneControls {
 	public panSpeed = 0.5;
 
 	/**
-	 * Target  of plane controls
+	 * The Target of plane controls
 	 */
 	public target: THREE.Vector3 = new THREE.Vector3();
 
 	/**
-	 * Enabled  of plane controls
+	 * The Enabled of plane controls
 	 */
 	public enabled: boolean = true;
 
 	/**
-	 * Screen  of plane controls
+	 * The Screen of plane controls
 	 */
 	public screen: {
 		left: number;
@@ -98,7 +98,7 @@ export class PlaneControls {
 	}
 
 	/**
-	 * Mouse  of plane controls
+	 * The Mouse of plane controls
 	 */
 	private mouse: THREE.Vector2 = new THREE.Vector2();
 

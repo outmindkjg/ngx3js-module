@@ -74,7 +74,7 @@ export interface SvgGeometry {
 })
 export class SvgComponent extends AbstractObject3dComponent {
 	/**
-	 * Input  of svg component
+	 * The type of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -82,7 +82,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	@Input() public type: string = 'mesh';
 
 	/**
-	 * Input  of svg component
+	 * The geometryType of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -95,88 +95,82 @@ export class SvgComponent extends AbstractObject3dComponent {
 	@Input() public name: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The url of svg component
 	 */
 	@Input() public url: string = null;
 
 	/**
-	 * Input  of svg component
-	 *
-	 * Notice - case insensitive.
-	 *
+	 * The path of svg component
 	 */
 	@Input() public path: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The curveSegments of svg component
 	 */
 	@Input() public curveSegments: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The depth of svg component
 	 */
 	@Input() public depth: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The steps of svg component
 	 */
 	@Input() public steps: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The bevelEnabled of svg component
 	 */
 	@Input() public bevelEnabled: boolean = null;
 
 	/**
-	 * Input  of svg component
+	 * The bevelThickness of svg component
 	 */
 	@Input() public bevelThickness: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The bevelSize of svg component
 	 */
 	@Input() public bevelSize: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The bevelOffset of svg component
 	 */
 	@Input() public bevelOffset: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The bevelSegments of svg component
 	 */
 	@Input() public bevelSegments: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The closed of svg component
 	 */
 	@Input() public closed: boolean = null;
 
 	/**
-	 * Input  of svg component
+	 * The isCCW of svg component
 	 */
 	@Input() public isCCW: boolean = null;
 
 	/**
-	 * Input  of svg component
-	 */
-	/**
-	 * Input  of svg component
+	 * The noHoles of svg component
 	 */
 	@Input() public noHoles: boolean = null;
 
 	/**
-	 * Input  of svg component
+	 * The translation of svg component
 	 */
 	@Input() public translation: TranslationComponent = null;
 
 	/**
-	 * Input  of svg component
+	 * The text of svg component
 	 */
 	@Input() public text: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The textAlign of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -184,7 +178,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	@Input() public textAlign: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The align of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -192,27 +186,27 @@ export class SvgComponent extends AbstractObject3dComponent {
 	@Input() public align: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The center of svg component
 	 */
 	@Input() public center: boolean = false;
 
 	/**
-	 * Input  of svg component
+	 * The computeVertexNormals of svg component
 	 */
 	@Input() public computeVertexNormals: boolean = false;
 
 	/**
-	 * Input  of svg component
+	 * The font of svg component
 	 */
 	@Input() public font: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The size of svg component
 	 */
 	@Input() public size: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The weight of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -220,51 +214,42 @@ export class SvgComponent extends AbstractObject3dComponent {
 	@Input() public weight: string = null;
 
 	/**
-	 * Input  of svg component
-	 */
-	/**
-	 * Input  of svg component
+	 * The color of svg component
 	 */
 	@Input() public color: string | number = null;
 
 	/**
-	 * Input  of svg component
-	 */
-	/**
-	 * Input  of svg component
+	 * The opacity of svg component
 	 */
 	@Input() public opacity: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The transparent of svg component
 	 */
 	@Input() public transparent: boolean = null;
 
 	/**
-	 * Input  of svg component
+	 * The wireframe of svg component
 	 */
 	@Input() public wireframe: boolean = null;
 
 	/**
-	 * Input  of svg component
+	 * The shininess of svg component
 	 */
 	@Input() public shininess: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The stroke of svg component
 	 */
 	@Input() public stroke: number = null;
 
 	/**
-	 * Input  of svg component
-	 */
-	/**
-	 * Input  of svg component
+	 * The extrudePath of svg component
 	 */
 	@Input() public extrudePath: ThreeVector[] = null;
 
 	/**
-	 * Input  of svg component
+	 * The extrudePathType of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -272,12 +257,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 	@Input() public extrudePathType: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The curvePath of svg component
 	 */
 	@Input() public curvePath: ThreeVector[] = null;
 
 	/**
-	 * Input  of svg component
+	 * The curvePathType of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -285,7 +270,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	@Input() public curvePathType: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The curveType of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -293,12 +278,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 	@Input() public curveType: string = null;
 
 	/**
-	 * Input  of svg component
+	 * The tension of svg component
 	 */
 	@Input() public tension: number = null;
 
 	/**
-	 * Input  of svg component
+	 * The uVGenerator of svg component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -738,7 +723,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	}
 
 	/**
-	 * Meshes  of svg component
+	 * The Meshes of svg component
 	 */
 	private meshes: THREE.Object3D[] = null;
 

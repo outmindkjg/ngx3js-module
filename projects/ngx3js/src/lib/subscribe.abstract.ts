@@ -24,42 +24,42 @@ export abstract class AbstractSubscribeComponent
 	implements OnInit, OnChanges, OnDestroy, AfterContentInit
 {
 	/**
-	 * Input  of abstract subscribe component
+	 * Debug this Object
 	 */
 	@Input() public debug: boolean = false;
 
 	/**
-	 * Input  of abstract subscribe component
+	 * Export this Object to window global variables
 	 */
 	@Input() public windowExport: string = null;
 
 	/**
-	 * Input  of abstract subscribe component
+	 * Enabled or Not
 	 */
 	@Input() public enabled: boolean = true;
 
 	/**
-	 * Input  of abstract subscribe component
+	 * The override params
 	 */
 	@Input() public overrideParams: { [key: string]: any } = null;
 
 	/**
-	 * Input  of abstract subscribe component
+	 * An object that can be used to store custom data about the Object3D. It should not hold references to functions as these will not be cloned.
 	 */
 	@Input() public userData: any = null;
 
 	/**
-	 * Input  of abstract subscribe component
+	 * Tween animation params
 	 */
 	@Input() public tween: { [key: string]: any } = null;
 
 	/**
-	 * Output  of abstract subscribe component
+	 * Will be called when load completes. The argument will be the loaded self
 	 */
 	@Output() private onLoad: EventEmitter<this> = new EventEmitter<this>();
 
 	/**
-	 * Output  of abstract subscribe component
+	 * Will be called when before destory. The argument will be the loaded self
 	 */
 	@Output() private onDestory: EventEmitter<this> = new EventEmitter<this>();
 
@@ -77,6 +77,7 @@ export abstract class AbstractSubscribeComponent
 	];
 
 	protected selfAny: any = this;
+
 	/**
 	 * Creates an instance of abstract subscribe component.
 	 */
@@ -85,7 +86,7 @@ export abstract class AbstractSubscribeComponent
 	}
 
 	/**
-	 * Id  of abstract subscribe component
+	 * The Id of abstract subscribe component
 	 */
 	protected id: string = '';
 
@@ -506,7 +507,7 @@ export abstract class AbstractSubscribeComponent
 	}
 
 	/**
-	 * Subject  of abstract subscribe component
+	 * The Subject of abstract subscribe component
 	 */
 	private _subject: Subject<string[]> = new Subject<string[]>();
 
@@ -603,7 +604,7 @@ export abstract class AbstractSubscribeComponent
 	}
 
 	/**
-	 * Subscribe  of abstract subscribe component
+	 * The Subscribe of abstract subscribe component
 	 */
 	private _subscribe: { [key: string]: Subscription } = {};
 
@@ -804,7 +805,7 @@ export abstract class AbstractSubscribeComponent
 	}
 
 	/**
-	 * Parent  of abstract subscribe component
+	 * The Parent of abstract subscribe component
 	 */
 	protected parent: any = null;
 

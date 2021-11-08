@@ -27,7 +27,7 @@ export class ChartRadarComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart radar component
+	 * The type of chart radar component
 	 */
 	@Input() public type: string = '';
 

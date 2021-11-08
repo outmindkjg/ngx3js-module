@@ -7,7 +7,7 @@ import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUti
  */
 export class PlanePerlinGeometry {
 	/**
-	 * Data  of plane perlin geometry
+	 * The Data of plane perlin geometry
 	 */
 	public data: number[] = [];
 

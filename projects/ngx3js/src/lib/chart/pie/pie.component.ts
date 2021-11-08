@@ -27,7 +27,7 @@ export class ChartPieComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart pie component
+	 * The type of chart pie component
 	 */
 	@Input() public type: string = '';
 

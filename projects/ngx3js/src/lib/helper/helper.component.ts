@@ -110,7 +110,7 @@ export interface HelperOptions {
 	materialColor?: ThreeColor;
 
 	/**
-	 * Input  of helper component
+	 * The Input of helper component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -359,7 +359,7 @@ export class HelperComponent
 	@Input() public materialColor: ThreeColor = null;
 
 	/**
-	 * Input  of helper component
+	 * The Input of helper component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -770,7 +770,7 @@ export class HelperComponent
 	}
 
 	/**
-	 * Helper  of helper component
+	 * The Helper of helper component
 	 */
 	private helper: THREE.Object3D = null;
 

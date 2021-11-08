@@ -16,22 +16,22 @@ export class PlaneComponent
 	implements OnInit
 {
 	/**
-	 * Input  of plane component
+	 * The x of plane component
 	 */
 	@Input() public x: number = null;
 
 	/**
-	 * Input  of plane component
+	 * The y of plane component
 	 */
 	@Input() public y: number = null;
 
 	/**
-	 * Input  of plane component
+	 * The z of plane component
 	 */
 	@Input() public z: number = null;
 
 	/**
-	 * Input  of plane component
+	 * The w of plane component
 	 */
 	@Input() public w: number = null;
 
@@ -80,7 +80,7 @@ export class PlaneComponent
 	}
 
 	/**
-	 * Plane  of plane component
+	 * The Plane of plane component
 	 */
 	private plane: THREE.Plane = null;
 

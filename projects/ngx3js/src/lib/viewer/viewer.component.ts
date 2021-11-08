@@ -66,25 +66,29 @@ export class ViewerComponent
 	implements OnInit
 {
 	/**
-	 * Input  of viewer component
+	 * The type of viewer
 	 *
 	 * Notice - case insensitive.
 	 *
+	 * @see ViewerCanvas -  canvas
+	 * @see ShadowMapViewer - shadowmapviewer, shadowmap
+	 * @see  ShadowMesh - shadowmesh, shadow
+	 * @see  ProgressiveLightMap - progressivelightmap, progressivelight
 	 */
 	@Input() public type: string = 'shadowmap';
 
 	/**
-	 * Input  of viewer component
+	 * The Light of Viewer
 	 */
 	@Input() public light: LightComponent | MeshComponent | THREE.Light = null;
 
 	/**
-	 * Input  of viewer component
+	 * The Mesh of Viewer
 	 */
 	@Input() public mesh: MeshComponent | HelperComponent | THREE.Mesh = null;
 
 	/**
-	 * Input  of viewer component
+	 * The Plane of Viewer
 	 */
 	@Input() public plane:
 		| MeshComponent
@@ -93,12 +97,12 @@ export class ViewerComponent
 		| THREE.Plane = null;
 
 	/**
-	 * Input  of viewer component
+	 * The x of position
 	 */
 	@Input() public x: number | string = 0;
 
 	/**
-	 * Input  of viewer component
+	 * The y of position
 	 */
 	@Input() public y: number | string = 0;
 
@@ -127,27 +131,27 @@ export class ViewerComponent
 	@Input() public height: number | string = '100%';
 
 	/**
-	 * Input  of viewer component
+	 * The lightMapRes of ProgressiveLightMap
 	 */
 	@Input() public lightMapRes: number = 1024;
 
 	/**
-	 * Input  of viewer component
+	 * The blendWindow of viewer component
 	 */
 	@Input() public blendWindow: number = 200;
 
 	/**
-	 * Input  of viewer component
+	 * The blurEdges of viewer component
 	 */
 	@Input() public blurEdges: boolean = true;
 
 	/**
-	 * Input  of viewer component
+	 * The debugLightmap of viewer component
 	 */
 	@Input() public debugLightmap: boolean = false;
 
 	/**
-	 * Input  of viewer component
+	 * The canvasOptions of viewer component
 	 */
 	@Input() public canvasOptions: any = null;
 
@@ -379,7 +383,7 @@ export class ViewerComponent
 	}
 
 	/**
-	 * Renderer  of viewer component
+	 * The Renderer of viewer component
 	 */
 	private renderer: THREE.Renderer = null;
 
@@ -417,7 +421,7 @@ export class ViewerComponent
 	}
 
 	/**
-	 * Viewer  of viewer component
+	 * The Viewer of viewer component
 	 */
 	private viewer: any = null;
 

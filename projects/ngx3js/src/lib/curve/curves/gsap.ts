@@ -12,7 +12,7 @@ export class CurvesGsap extends THREE.Curve<THREE.Vector3> {
 	private easeFunction: (progress: number) => number;
 
 	/**
-	 * Radius  of curves gsap
+	 * The Radius of curves gsap
 	 */
 	private radius: number = 1;
 

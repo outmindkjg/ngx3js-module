@@ -45,7 +45,7 @@ export class PhysicsComponent
 	implements OnInit
 {
 	/**
-	 * Input  of physics component
+	 * The Input of physics component
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -53,27 +53,27 @@ export class PhysicsComponent
 	@Input() public type: string = '';
 
 	/**
-	 * Input  of physics component
+	 * The useCollision of physics component
 	 */
 	@Input() public useCollision: boolean = false;
 
 	/**
-	 * Input  of physics component
+	 * The gravity of physics component
 	 */
 	@Input() public gravity: number = null;
 
 	/**
-	 * Input  of physics component
+	 * The gravityX of physics component
 	 */
 	@Input() public gravityX: number = null;
 
 	/**
-	 * Input  of physics component
+	 * The gravityY of physics component
 	 */
 	@Input() public gravityY: number = null;
 
 	/**
-	 * Input  of physics component
+	 * The gravityZ of physics component
 	 */
 	@Input() public gravityZ: number = null;
 
@@ -150,12 +150,12 @@ export class PhysicsComponent
 	}
 
 	/**
-	 * Ammo  of physics component
+	 * The Ammo of physics component
 	 */
 	private ammo: typeof Ammo = null;
 
 	/**
-	 * Physics  of physics component
+	 * The Physics of physics component
 	 */
 	private physics: Ammo.btSoftRigidDynamicsWorld = null;
 
@@ -259,7 +259,7 @@ export class PhysicsComponent
 	}
 
 	/**
-	 * Dispatcher  of physics component
+	 * The Dispatcher of physics component
 	 */
 	private dispatcher: Ammo.btCollisionDispatcher = null;
 

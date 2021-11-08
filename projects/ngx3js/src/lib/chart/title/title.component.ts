@@ -29,27 +29,27 @@ export class ChartTitleComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart title component
+	 * The type of chart title component
 	 */
 	@Input() public type: string = '';
 
 	/**
-	 * Input  of chart title component
+	 * The message of chart title component
 	 */
 	@Input() public message: string = null;
 
 	/**
-	 * Input  of chart title component
+	 * The color of chart title component
 	 */
 	@Input() public color: ThreeColor = null;
 
 	/**
-	 * Input  of chart title component
+	 * The align of chart title component
 	 */
 	@Input() public align: string = null;
 
 	/**
-	 * Input  of chart title component
+	 * The fontFamily of chart title component
 	 */
 	@Input() public fontFamily: string = null;
 
@@ -98,17 +98,17 @@ export class ChartTitleComponent
 	}
 
 	/**
-	 * Title  of chart title component
+	 * The Title of chart title component
 	 */
 	private _title: THREE.Object3D = null;
 
 	/**
-	 * Material  of chart title component
+	 * The Material of chart title component
 	 */
 	private _material: THREE.MeshBasicMaterial = null;
 
 	/**
-	 * Geometry  of chart title component
+	 * The Geometry of chart title component
 	 */
 	private _geometry: THREE.PlaneGeometry = null;
 

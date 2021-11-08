@@ -51,27 +51,27 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 	@Input() public style: string | CssStyle = null;
 
 	/**
-	 * Input  of html component
+	 * The list of html component
 	 */
 	@Input() public list: (string | CssStyle)[] = null;
 
 	/**
-	 * Input  of html component
+	 * The table of html component
 	 */
 	@Input() public table: (string | CssStyle)[][] = null;
 
 	/**
-	 * Input  of html component
+	 * The tableHead of html component
 	 */
 	@Input() public tableHead: (string | CssStyle)[] = null;
 
 	/**
-	 * Input  of html component
+	 * The tableFoot of html component
 	 */
 	@Input() public tableFoot: (string | CssStyle)[] = null;
 
 	/**
-	 * Input  of html component
+	 * The dlList of html component
 	 */
 	@Input() public dlList: {
 		dt?: string | CssStyle;
@@ -229,7 +229,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 	private cssClazzName: string = null;
 
 	/**
-	 * Html  of html component
+	 * The Html of html component
 	 */
 	private html: HTMLElement = null;
 

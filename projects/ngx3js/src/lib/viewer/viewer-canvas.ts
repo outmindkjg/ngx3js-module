@@ -6,37 +6,37 @@ import { ThreeUtil } from '../interface';
  */
 export class ViewerCanvas {
 	/**
-	 * Position  of viewer canvas
+	 * The Position of viewer canvas
 	 */
 	position: { x: number; y: number } = null;
 
 	/**
-	 * Size  of viewer canvas
+	 * The Size of viewer canvas
 	 */
 	size: { width: number; height: number } = null;
 
 	/**
-	 * Enabled  of viewer canvas
+	 * The Enabled of viewer canvas
 	 */
 	enabled: boolean = true;
 
 	/**
-	 * Camera  of viewer canvas
+	 * The Camera of viewer canvas
 	 */
 	camera: THREE.PerspectiveCamera = null;
 
 	/**
-	 * Scene  of viewer canvas
+	 * The Scene of viewer canvas
 	 */
 	scene: THREE.Scene = null;
 
 	/**
-	 * Renderer  of viewer canvas
+	 * The Renderer of viewer canvas
 	 */
 	private renderer: THREE.Renderer = null;
 
 	/**
-	 * Target  of viewer canvas
+	 * The Target of viewer canvas
 	 */
 	target: THREE.Vector3 = null;
 
@@ -64,7 +64,7 @@ export class ViewerCanvas {
 	}
 
 	/**
-	 * Options  of viewer canvas
+	 * The Options of viewer canvas
 	 */
 	private options: any = null;
 
@@ -247,12 +247,12 @@ export class ViewerCanvas {
 	private _autoClear: boolean = true;
 
 	/**
-	 * Viewport  of viewer canvas
+	 * The Viewport of viewer canvas
 	 */
 	private _viewport = new THREE.Vector4();
 
 	/**
-	 * Aspect  of viewer canvas
+	 * The Aspect of viewer canvas
 	 */
 	private _aspect = 1;
 

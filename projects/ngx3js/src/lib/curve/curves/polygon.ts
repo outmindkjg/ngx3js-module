@@ -6,7 +6,7 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
  */
 export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 	/**
-	 * Radius  of curves polygon
+	 * The Radius of curves polygon
 	 */
 	private radius: number = 1;
 
@@ -41,7 +41,7 @@ export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 	private rateZ: number = 1;
 
 	/**
-	 * Points  of curves polygon
+	 * The Points of curves polygon
 	 */
 	public points: THREE.Vector3[] = [];
 

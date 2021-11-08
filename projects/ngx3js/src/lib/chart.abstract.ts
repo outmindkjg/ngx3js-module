@@ -225,7 +225,7 @@ export abstract class AbstractChartComponent
 	}
 
 	/**
-	 * Chart  of abstract chart component
+	 * The Chart of abstract chart component
 	 */
 	protected chart: THREE.Object3D = null;
 

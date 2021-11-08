@@ -143,37 +143,37 @@ export abstract class AbstractControllerComponent
 	}
 
 	/**
-	 * Renderer  of controller component
+	 * The Renderer of controller component
 	 */
 	protected _renderer: THREE.Renderer = null;
 
 	/**
-	 * Scenes  of controller component
+	 * The Scenes of controller component
 	 */
 	protected _scenes: QueryList<SceneComponent> = null;
 
 	/**
-	 * Cameras  of controller component
+	 * The Cameras of controller component
 	 */
 	protected _cameras: QueryList<CameraComponent> = null;
 
 	/**
-	 * Canvas2ds  of controller component
+	 * The Canvas2ds of controller component
 	 */
 	protected _canvas2ds: QueryList<CanvasComponent> = null;
 
 	/**
-	 * Scene  of controller component
+	 * The Scene of controller component
 	 */
 	protected _scene: THREE.Scene = null;
 
 	/**
-	 * Canvas  of controller component
+	 * The Canvas of controller component
 	 */
 	protected _canvas: HtmlCollection = null;
 
 	/**
-	 * Event  of controller component
+	 * The Event of controller component
 	 */
 	protected _event: RendererEvent = null;
 

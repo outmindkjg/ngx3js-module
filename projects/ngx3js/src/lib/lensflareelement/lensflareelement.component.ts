@@ -132,7 +132,7 @@ export class LensflareelementComponent
 	private lensflareElement: LensflareElement = null;
 
 	/**
-	 * Lensflare  of LensflareElement
+	 * The Lensflare of LensflareElement
 	 */
 	private lensflare: Lensflare = null;
 

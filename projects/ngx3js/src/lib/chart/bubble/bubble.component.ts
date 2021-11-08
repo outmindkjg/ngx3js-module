@@ -24,7 +24,7 @@ export class ChartBubbleComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart bubble component
+	 * The type of chart bubble component
 	 */
 	@Input() public type: string = '';
 

@@ -27,7 +27,7 @@ export class ChartScatterComponent
 	implements OnInit
 {
 	/**
-	 * Input  of chart scatter component
+	 * The type of chart scatter component
 	 */
 	@Input() public type: string = '';
 

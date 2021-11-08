@@ -41,7 +41,7 @@ export class ComposerComponent
 	implements OnInit
 {
 	/**
-	 * Input  of composer component
+	 * The type of composer
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -49,42 +49,42 @@ export class ComposerComponent
 	@Input() public type: string = 'composer';
 
 	/**
-	 * Input  of composer component
+	 * The scene of composer
 	 */
 	@Input() public scene: THREE.Scene | SceneComponent = null;
 
 	/**
-	 * Input  of composer component
+	 * The camera of composer
 	 */
 	@Input() public camera: THREE.Camera | CameraComponent = null;
 
 	/**
-	 * Input  of composer component
+	 * The clear of composer component
 	 */
 	@Input() public clear: boolean = false;
 
 	/**
-	 * Input  of composer component
+	 * The viewport of composer component
 	 */
 	@Input() public viewport: boolean = false;
 
 	/**
-	 * Input  of composer component
+	 * The viewportAspect of composer component
 	 */
 	@Input() public viewportAspect: boolean = false;
 
 	/**
-	 * Input  of composer component
+	 * The renderToScreen of composer component
 	 */
 	@Input() public renderToScreen: boolean = null;
 
 	/**
-	 * Input  of composer component
+	 * The x of composer component
 	 */
 	@Input() public x: number | string = 0;
 
 	/**
-	 * Input  of composer component
+	 * The y of composer component
 	 */
 	@Input() public y: number | string = 0;
 
@@ -113,7 +113,7 @@ export class ComposerComponent
 	@Input() public height: number | string = '100%';
 
 	/**
-	 * Input  of composer component
+	 * The scissorTest of composer component
 	 */
 	@Input() public scissorTest: boolean = false;
 
@@ -166,12 +166,12 @@ export class ComposerComponent
 	@Input() public scissorHeight: number | string = '100%';
 
 	/**
-	 * Input  of composer component
+	 * The reflectFromAbove of composer component
 	 */
 	@Input() public reflectFromAbove: boolean = null;
 
 	/**
-	 * Input  of composer component
+	 * The cameraDistance of composer component
 	 */
 	@Input() public cameraDistance: number = null;
 
@@ -183,32 +183,32 @@ export class ComposerComponent
 	@Input() public charSet: string = null;
 
 	/**
-	 * Input  of composer component
+	 * The resolution of composer component
 	 */
 	@Input() public resolution: number = null;
 
 	/**
-	 * Input  of composer component
+	 * The scale of composer component
 	 */
 	@Input() public scale: number = null;
 
 	/**
-	 * Input  of composer component
+	 * The color of composer component
 	 */
 	@Input() public color: boolean = null;
 
 	/**
-	 * Input  of composer component
+	 * The alpha of composer component
 	 */
 	@Input() public alpha: boolean = null;
 
 	/**
-	 * Input  of composer component
+	 * The block of composer component
 	 */
 	@Input() public block: boolean = null;
 
 	/**
-	 * Input  of composer component
+	 * The invert of composer component
 	 */
 	@Input() public invert: boolean = null;
 

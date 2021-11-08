@@ -16,27 +16,27 @@ export class RigidbodyNodeComponent
 	implements OnInit
 {
 	/**
-	 * Input  of rigidbody node component
+	 * The type of rigidbody node component
 	 */
 	@Input() public type: string = '';
 
 	/**
-	 * Input  of rigidbody node component
+	 * The node of rigidbody node component
 	 */
 	@Input() public node: number = 0;
 
 	/**
-	 * Input  of rigidbody node component
+	 * The body of rigidbody node component
 	 */
 	@Input() public body: any = null;
 
 	/**
-	 * Input  of rigidbody node component
+	 * The disableCollisionBetweenLinkedBodies of rigidbody node component
 	 */
 	@Input() public disableCollisionBetweenLinkedBodies: boolean = false;
 
 	/**
-	 * Input  of rigidbody node component
+	 * The influence of rigidbody node component
 	 */
 	@Input() public influence: number = 0.5;
 
@@ -85,12 +85,12 @@ export class RigidbodyNodeComponent
 	}
 
 	/**
-	 * Physics  of rigidbody node component
+	 * The Physics of rigidbody node component
 	 */
 	private physics: Ammo.btSoftRigidDynamicsWorld = null;
 
 	/**
-	 * Ammo  of rigidbody node component
+	 * The Ammo of rigidbody node component
 	 */
 	private ammo: typeof Ammo = null;
 
