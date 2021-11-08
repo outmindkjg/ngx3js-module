@@ -819,11 +819,17 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	public camera: CameraComponent = null;
 
 	/**
+	 * The Camera Object
+	 */
+	 public cameraObject3d: THREE.Camera = null;
+
+	 /**
 	 * Sets camera
 	 * @param camera
 	 */
 	public setCamera(camera: CameraComponent) {
 		this.camera = camera;
+		this.cameraObject3d = this.camera.getCamera();
 	}
 
 	/**
