@@ -1,1 +1,0 @@
-export function MeshoptDecoder():void;

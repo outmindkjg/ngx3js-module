@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {  CommonModule } from '@angular/common';
 import { AnimationGroupComponent } from './animation-group/animation-group.component';
 import { AudioComponent } from './audio/audio.component';
 import { BackgroundComponent } from './background/background.component';
@@ -139,7 +139,7 @@ const MODULE_COMPONENTS = [
 @NgModule({
 	declarations: [...COMMON_PIPES, ...COMMON_DIRECTIVES, ...MODULE_COMPONENTS],
 	entryComponents: [...MODULE_COMPONENTS],
-	imports: [BrowserModule],
+	imports: [CommonModule],
 	exports: [...COMMON_PIPES, ...COMMON_DIRECTIVES, ...MODULE_COMPONENTS],
 	providers: [LocalStorageService],
 })

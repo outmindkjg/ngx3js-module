@@ -27,7 +27,7 @@ export { TAARenderPass } from 'three/examples/jsm/postprocessing/TAARenderPass';
 export { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 export { CSS3DSprite } from 'three/examples/jsm/renderers/CSS3DRenderer';
 export * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-export * as GeometryUtils from 'three/examples/jsm/utils/GeometryUtils';
+export { GeometryUtils } from './lib/threejs-library/GeometryUtils';
 export { UVsDebug } from 'three/examples/jsm/utils/UVsDebug';
 export * from './lib/index';
 export * from './lib/ngx3js.module';

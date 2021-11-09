@@ -31,53 +31,18 @@
 		"url": "https://github.com/outmindkjg/ngx3js-module/issues"
 	},
 	"homepage": "https://outmindkjg.github.io/ngx3js-doc/",
-	"scripts": {
-		"ng": "ng",
-		"start": "ng serve",
-		"build": "ng build",
-		"test": "ng test",
-		"lint": "ng lint",
-		"e2e": "ng e2e",
-		"maxmem": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng serve",
-		"maxbuild": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build",
-		"maxbuildprod": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --configuration production"
-	},
-	"browser": {
-		"crypto": false,
-		"fs": false,
-		"path": false,
-		"os": false,
-		"net": false,
-		"stream": false,
-		"tls": false
-	},
-	"dependencies": {
+	"peerDependencies": {
+		"@angular/common": "^12.2.10",
+		"@angular/core": "^12.2.10",
 		"ammojs-typed": "^1.0.6",
-		"chroma-js": "^2.1.2",
 		"fs": "0.0.1-security",
 		"fs-web": "^1.0.1",
 		"gsap": "^3.8.0",
 		"rxjs": "^6.6.7",
-		"three": "0.134.0"
-	},
-	"devDependencies": {
-		"@angular/cli": "^12.2.10",
-		"@angular/common": "^12.2.10",
-		"@angular/compiler": "^12.2.10",
-		"@angular/compiler-cli": "^12.2.10",
-		"@angular/core": "^12.2.10",
-		"@angular/platform-browser": "^12.2.10",
-		"@types/chroma-js": "^2.1.3",
-		"lil-gui": "^0.12.0",
-		"oimophysics": "^1.2.2",
-		"ts-node": "~8.3.0",
-		"tslib": "^2.3.1",
-		"tslint": "~6.1.0",
-		"typedoc": "^0.21.9",
-		"typescript": "~4.3.2",
-		"webpack": "^5.58.2",
-		"webworkify": "^1.5.0",
-		"worker-loader": "^3.0.8",
-		"zone.js": "~0.11.4"
-	}
+		"three": "0.134.0",
+		"@types/three": "0.134.0",
+		"chroma-js": "^2.1.2",
+		"@types/chroma-js": "^2.1.2",
+		"lil-gui": "^0.12.0"
+	  }	
 }

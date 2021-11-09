@@ -23,13 +23,12 @@ This code creates a scene, a camera, and a geometric cube, and it adds the cube 
 npm install -g @angular/cli
 npm install ngx3js
 npm install three@0.134.0
+npm i --save-dev @types/three@0.134.0
 npm install gsap
 npm install ammojs-typed
 npm install lil-gui
 npm install chroma-js
-npm i --save-dev @types/three@0.134.0
 npm i --save-dev @types/chroma-js
-
 ```
 
 ```sh
