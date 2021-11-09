@@ -5,9 +5,10 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
+import { RayParameters } from 'three/examples/jsm/geometries/LightningStrike';
 import { HTMLMesh } from 'three/examples/jsm/interactive/HTMLMesh';
 import { InteractiveGroup } from 'three/examples/jsm/interactive/InteractiveGroup';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
@@ -21,22 +22,20 @@ import { TubePainter } from 'three/examples/jsm/misc/TubePainter';
 import { Volume } from 'three/examples/jsm/misc/Volume';
 import { VolumeSlice } from 'three/examples/jsm/misc/VolumeSlice';
 import {
-	LightningStorm,
-	StormParams,
-} from 'three/examples/jsm/objects/LightningStorm';
-import { RayParameters } from 'three/examples/jsm/geometries/LightningStrike';
-
-import {
 	Flow,
-	InstancedFlow,
+	InstancedFlow
 } from 'three/examples/jsm/modifiers/CurveModifier';
 import {
 	Lensflare,
-	LensflareElement,
+	LensflareElement
 } from 'three/examples/jsm/objects/Lensflare';
+import {
+	LightningStorm,
+	StormParams
+} from 'three/examples/jsm/objects/LightningStorm';
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
 import { Reflector } from 'three/examples/jsm/objects/Reflector';
-import { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
+import { ReflectorForSSRPass } from './../threejs-library/ReflectorForSSRPass';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
 import { Refractor } from 'three/examples/jsm/objects/Refractor';
 import { Sky } from 'three/examples/jsm/objects/Sky';
@@ -45,12 +44,12 @@ import { Water as Water2 } from 'three/examples/jsm/objects/Water2';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import {
 	CSS3DObject,
-	CSS3DSprite,
+	CSS3DSprite
 } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-import * as SceneUtils from 'three/examples/jsm/utils/SceneUtils';
+import { SceneUtils } from '../threejs-library/SceneUtils';
 import { createText } from 'three/examples/jsm/webxr/Text2D';
 import { CurveComponent } from '../curve/curve.component';
 import { HtmlComponent } from '../html/html.component';
@@ -2387,6 +2386,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					if (camera === null) {
 						camera = new THREE.Camera();
 					}
+					renderer.domElement.style.pointerEvents = 'all';
+					renderer.domElement.style.touchAction = 'auto';
 					basemesh = new InteractiveGroup(renderer, camera);
 					break;
 				case 'lightning':

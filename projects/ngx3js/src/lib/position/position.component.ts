@@ -15,6 +15,9 @@ import { AbstractTweenComponent } from '../tween.abstract';
  * 	[multiply]="10"
  * 	[normalize]="false"
  * ></ngx3js-position>
+ * <ngx3js-geometry>
+ * 	<ngx3js-position [type]="'scale'" [x]="2" [y]="2" [z]="2"></ngx3js-position>
+ * </ngx3js-geometry>
  * ```
  */
 @Component({
@@ -28,6 +31,17 @@ export class PositionComponent
 {
 	/**
 	 * The type of position component
+	 * 
+	 * position - the position of Object3D.
+	 * rotate - the rotation angular of geometry.
+	 * scale - the scale of geometry.
+	 * translate - the traslate of geometry.
+	 * @see THREE.Object3D#position
+	 * @see THREE.BufferGeometry#rotateX
+	 * @see THREE.BufferGeometry#rotateY
+	 * @see THREE.BufferGeometry#rotateZ
+	 * @see THREE.BufferGeometry#translate
+	 * @see THREE.BufferGeometry#scale
 	 */
 	@Input() public type: string = 'position';
 

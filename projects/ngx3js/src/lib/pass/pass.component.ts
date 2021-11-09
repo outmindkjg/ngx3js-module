@@ -4,20 +4,20 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import {
 	LUTCubeLoader,
-	LUTCubeResult,
+	LUTCubeResult
 } from 'three/examples/jsm/loaders/LUTCubeLoader';
-import { ReflectorForSSRPass } from 'three/examples/jsm/objects/ReflectorForSSRPass';
+import { ReflectorForSSRPass } from './../threejs-library/ReflectorForSSRPass';
 import { AdaptiveToneMappingPass } from 'three/examples/jsm/postprocessing/AdaptiveToneMappingPass';
 import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass';
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass';
 import {
 	BokehPass,
-	BokehPassParamters,
+	BokehPassParamters
 } from 'three/examples/jsm/postprocessing/BokehPass';
 import { ClearPass } from 'three/examples/jsm/postprocessing/ClearPass';
 import { CubeTexturePass } from 'three/examples/jsm/postprocessing/CubeTexturePass';
@@ -29,7 +29,7 @@ import { HalftonePass } from 'three/examples/jsm/postprocessing/HalftonePass';
 import { LUTPass } from 'three/examples/jsm/postprocessing/LUTPass';
 import {
 	ClearMaskPass,
-	MaskPass,
+	MaskPass
 } from 'three/examples/jsm/postprocessing/MaskPass';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
 import { Pass } from 'three/examples/jsm/postprocessing/Pass';

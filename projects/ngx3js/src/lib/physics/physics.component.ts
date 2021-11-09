@@ -12,8 +12,9 @@ import { ConvexObjectBreaker } from 'three/examples/jsm/misc/ConvexObjectBreaker
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
-import { AmmoPhysics } from 'three/examples/jsm/physics/AmmoPhysics';
-import { OimoPhysics } from 'three/examples/jsm/physics/OimoPhysics';
+import { AmmoPhysics as AmmoPhysicsAlias } from 'three/examples/jsm/physics/AmmoPhysics';
+const AmmoPhysics : any = AmmoPhysicsAlias;
+// import { OimoPhysics } from 'three/examples/jsm/physics/OimoPhysics';
 
 /**
  * PhysicsComponent
@@ -273,6 +274,7 @@ export class PhysicsComponent
 			switch (this.type.toLowerCase()) {
 				case 'oimophysics':
 				case 'oimo':
+					/*
 					OimoPhysics().then((physics: any) => {
 						this.dispatcher = null;
 						this.physics = physics;
@@ -281,6 +283,7 @@ export class PhysicsComponent
 						this.applyChanges(['constraint', 'gravity']);
 					});
 					break;
+					*/
 				case 'ammophysics':
 				case 'ammo':
 					AmmoPhysics().then((physics: any) => {

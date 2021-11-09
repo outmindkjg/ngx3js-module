@@ -12,7 +12,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
-import { DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOrientationControls';
+// import { DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOrientationControls';
 import { DragControls } from 'three/examples/jsm/controls/DragControls';
 import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
 import { FlyControls } from 'three/examples/jsm/controls/FlyControls';
@@ -907,10 +907,10 @@ export class ControlComponent
 					break;
 				case 'deviceorientationcontrols':
 				case 'deviceorientation':
-					const deviceOrientationControls = new DeviceOrientationControls(
-						camera
-					);
-					control = deviceOrientationControls;
+					// const deviceOrientationControls = new DeviceOrientationControls(
+					//	camera
+					// );
+					// control = deviceOrientationControls;
 					break;
 				case 'pointerlockcontrols':
 				case 'pointerlock':

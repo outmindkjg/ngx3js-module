@@ -10,7 +10,7 @@ import Ammo from 'ammojs-typed';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
 import * as THREE from 'three';
-import { GUI } from './threejs-library/dat.gui.module';
+import { GUI } from 'lil-gui';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
 import { CameraComponent } from './camera/camera.component';
@@ -821,9 +821,9 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	/**
 	 * The Camera Object
 	 */
-	 public cameraObject3d: THREE.Camera = null;
+	public cameraObject3d: THREE.Camera = null;
 
-	 /**
+	/**
 	 * Sets camera
 	 * @param camera
 	 */
@@ -3941,22 +3941,13 @@ export class ThreeUtil {
 		isEnable: boolean = true
 	) {
 		if (control !== null && control !== undefined && control.domElement) {
-			const parentElement = control.domElement.parentElement.parentElement;
-			const previousElementSibling = control.domElement.previousElementSibling;
+			const domElement = control.domElement;
 			if (isEnable) {
-				if (parentElement) {
-					parentElement.classList.remove('no-pointer-events');
-				}
-				if (previousElementSibling) {
-					previousElementSibling.classList.remove('control-disabled');
-				}
+				domElement.classList.remove('no-pointer-events');
+				domElement.classList.remove('control-disabled');
 			} else {
-				if (parentElement) {
-					parentElement.classList.add('no-pointer-events');
-				}
-				if (previousElementSibling) {
-					previousElementSibling.classList.add('control-disabled');
-				}
+				domElement.classList.add('no-pointer-events');
+				domElement.classList.add('control-disabled');
 			}
 		} else {
 			console.log('error', control);

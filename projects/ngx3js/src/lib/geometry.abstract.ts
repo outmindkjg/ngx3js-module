@@ -7,7 +7,7 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
@@ -16,7 +16,7 @@ import { EdgeSplitModifier } from 'three/examples/jsm/modifiers/EdgeSplitModifie
 import { SimplifyModifier } from 'three/examples/jsm/modifiers/SimplifyModifier';
 import { TessellateModifier } from 'three/examples/jsm/modifiers/TessellateModifier';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-import * as GeometryCompressionUtils from 'three/examples/jsm/utils/GeometryCompressionUtils';
+import { GeometryCompressionUtils } from './threejs-library/GeometryCompressionUtils';
 import { NgxGeometryUtils } from './geometry/geometryUtils';
 import { ThreeUtil, ThreeVector } from './interface';
 import { PositionComponent } from './position/position.component';
@@ -371,17 +371,22 @@ export abstract class AbstractGeometryComponent
 	@Input() public mergeVertices: boolean = null;
 
 	/**
-	 * The edgeSplit of abstract geometry component
+	 * The geometry to modify by splitting edges. This geometry can be any of any type: Geometry or BufferGeometry, indexed or not
 	 */
 	@Input() public edgeSplit: boolean = null;
 
 	/**
-	 * The cutOffAngle of abstract geometry component
+	 * The cutoff angle in radians. If the angle between two face normals is higher than this value, a split will be made.
+	 * 
+	 * @see EdgeSplitModifier
 	 */
 	@Input() public cutOffAngle: number = null;
 
 	/**
-	 * The tryKeepNormals of abstract geometry component
+	 * Set to true to keep the normal values for vertices that won't be split.
+	 * To use this feature, you also need to pass an indexed geometry with a 'normal' BufferAttribute
+	 * 
+	 * @see EdgeSplitModifier
 	 */
 	@Input() public tryKeepNormals: boolean = null;
 
