@@ -35,7 +35,9 @@
   },
   "exclude": [
     "src/test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "tests/**/*",
+    "**/node_modules/**/*",
   ],
 	"typedocOptions" : {
 		"entryPoints": ["src/public-api.ts"],

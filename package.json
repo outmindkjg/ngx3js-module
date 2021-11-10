@@ -11,10 +11,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ngx3js --configuration production",
-    "publish": "cd dist/ngx3js && npm publish",
-    "watch": "ng build --watch --configuration development",
+    "ngx3jsbuild": "ng build ngx3js --configuration production",
+    "ngx3jspublish": "cd dist/ngx3js && npm publish",
+    "assetsbuild": "ng build ngx3js-assets --configuration production",
+    "assetspublish": "cd dist/ngx3js-assets && npm publish",
+    "ngx3jswatch": "ng build ngx3js --watch --configuration development",
+    "assetswatch": "ng build ngx3js-assets --watch --configuration development",
     "docs": "rm -rf docs && cd projects/ngx3js && npx typedoc --tsconfig tsconfig.lib.json",
+    "readme": "cp -rf projects/ngx3js/README.md README.md && cp -rf projects/ngx3js/README.md ../ngx3js/README.md && cp -rf projects/ngx3js/README.md ../ngx3js/src/README.md ",
     "test": "ng test"
   },
   "dependencies": {

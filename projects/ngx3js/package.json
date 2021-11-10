@@ -35,7 +35,8 @@
 		"ammojs-typed": "^1.0.6",
 		"gsap": "^3.8.0",
 		"three": "0.134.0",
-		"chroma-js": "^2.1.2"
+		"chroma-js": "^2.1.2",
+		"tslib": "^2.3.0"
 	},
 	"devDependencies": {
 		"@types/three": "0.134.0",

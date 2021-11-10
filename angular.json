@@ -33,6 +33,37 @@
           }
         }
       }
+    },
+    "ngx3js-assets": {
+      "projectType": "library",
+      "root": "projects/ngx3js-assets",
+      "sourceRoot": "projects/ngx3js-assets/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx3js-assets/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx3js-assets/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx3js-assets/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx3js-assets/src/test.ts",
+            "tsConfig": "projects/ngx3js-assets/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx3js-assets/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx3js"

@@ -13,7 +13,14 @@
 		"declaration": false,
 		"downlevelIteration": true,
 		"paths": {
-			"ngx3js": ["dist/ngx3js/ngx3js", "dist/ngx3js"]
+      "ngx3js": [
+        "dist/ngx3js/ngx3js",
+        "dist/ngx3js"
+      ],
+      "ngx3js-assets": [
+        "dist/ngx3js-assets/ngx3js-assets",
+        "dist/ngx3js-assets"
+      ]
 		},
 		"experimentalDecorators": true,
 		"moduleResolution": "node",
