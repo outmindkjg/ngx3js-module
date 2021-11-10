@@ -7,7 +7,7 @@
     "url": "git://github.com/outmindkjg/ngx3js-module.git"
   },
   "description": "Angular & Javascript 3D library",
-  "author": "outmindkjg",
+  "author": "outmind0@gmail.com",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
