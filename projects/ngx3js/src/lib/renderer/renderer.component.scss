@@ -39,6 +39,14 @@
 			> div {
 				background-color: transparent;
 				z-index: 2;
+				&.ngx3js-canvas {
+					position: absolute;
+					left : 0;
+					top: 0;
+				}
+			}
+			.ngx3js-visual {
+				position: absolute;
 			}
 			> canvas {
 				pointer-events: all;
