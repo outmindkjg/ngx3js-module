@@ -8,7 +8,7 @@ import { OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
 import { PLYExporter } from 'three/examples/jsm/exporters/PLYExporter';
 import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
 import { USDZExporter } from 'three/examples/jsm/exporters/USDZExporter';
-import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module';
+import { MeshoptDecoder } from './threejs-library/meshopt_decoder.module';
 import { Rhino3dmLoader } from 'three/examples/jsm/loaders/3DMLoader';
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
 import { AMFLoader } from 'three/examples/jsm/loaders/AMFLoader';
@@ -2178,9 +2178,6 @@ export class LocalStorageService {
 						fontPath = 'fonts/droid/droid_serif_regular.typeface.json';
 						break;
 				}
-				break;
-			case 'nanumgothic':
-				fontPath = 'fonts/nanum/nanumgothic_regular.typeface.json';
 				break;
 			case 'dohyeon':
 			case 'do_hyeon':

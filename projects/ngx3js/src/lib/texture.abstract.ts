@@ -23,7 +23,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { ThreeUtil } from './interface';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { CanvasFunctionType, TextureUtils } from './texture/textureUtils';
-import { unzipSync } from 'three/examples/jsm/libs/fflate.module';
+import { unzipSync } from './threejs-library/fflate.module';
 
 /**
  * AbstractTextureComponent

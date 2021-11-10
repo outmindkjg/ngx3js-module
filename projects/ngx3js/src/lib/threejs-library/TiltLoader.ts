@@ -13,8 +13,7 @@ import {
 	Vector3,
 	LoadingManager,
 } from 'three';
-import * as fflateAlias from './fflate.module';
-const fflate : any = fflateAlias;
+import * as fflate from './fflate.module';
 
 let _storePath: string = '';
 class TiltLoader extends Loader {

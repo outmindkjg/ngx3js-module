@@ -1,6 +1,6 @@
 {
 	"name": "ngx3js",
-	"version": "0.134.0-2021110922",
+	"version": "0.134.0-2021111012",
 	"keywords": [
 		"three",
 		"three.js",
@@ -31,18 +31,23 @@
 		"url": "https://github.com/outmindkjg/ngx3js-module/issues"
 	},
 	"homepage": "https://outmindkjg.github.io/ngx3js-doc/",
+	"dependencies": {
+		"ammojs-typed": "^1.0.6",
+		"gsap": "^3.8.0",
+		"three": "0.134.0",
+		"chroma-js": "^2.1.2"
+	},
+	"devDependencies": {
+		"@types/three": "0.134.0",
+		"@types/chroma-js": "^2.1.2"
+	},
 	"peerDependencies": {
 		"@angular/common": "^12.2.10",
 		"@angular/core": "^12.2.10",
-		"ammojs-typed": "^1.0.6",
+		"rxjs": "^6.6.7",
 		"fs": "0.0.1-security",
 		"fs-web": "^1.0.1",
-		"gsap": "^3.8.0",
-		"rxjs": "^6.6.7",
-		"three": "0.134.0",
-		"@types/three": "0.134.0",
-		"chroma-js": "^2.1.2",
-		"@types/chroma-js": "^2.1.2",
+		"zone.js": "~0.11.4",
 		"lil-gui": "^0.12.0"
-	  }	
+	}
 }

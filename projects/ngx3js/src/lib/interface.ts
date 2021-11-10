@@ -4,19 +4,19 @@ import {
 	Inject,
 	Injectable,
 	Input,
-	OnInit,
+	OnInit
 } from '@angular/core';
 import Ammo from 'ammojs-typed';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
 import * as THREE from 'three';
-import { GUI } from 'lil-gui';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
 import { CameraComponent } from './camera/camera.component';
 import { MeshComponent } from './mesh/mesh.component';
 import { RendererComponent } from './renderer/renderer.component';
 import { SceneComponent } from './scene/scene.component';
+import { GUI } from './threejs-library/lil-gui';
 
 /**
  * Apply matrix4
@@ -2958,8 +2958,6 @@ export class ThreeUtil {
 			const threeComponent = this.getThreeComponent(object);
 			if (this.isNotNull(threeComponent)) {
 				this.setSubscribeNext(threeComponent, key);
-			} else {
-				console.error(object);
 			}
 		} else {
 			// console.error(object);
