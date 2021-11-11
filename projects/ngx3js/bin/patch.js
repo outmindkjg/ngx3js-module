@@ -22,7 +22,7 @@ function writeJson(fileName, jsonData, comment , callBack) {
   if (comment !== undefined && comment !== null && comment !== '') {
     data = '/** ' + comment + ' */\n' + data;
   }
-	fs.writeFile(cwd + '/' + fileName + '2.json', data, (err) => {
+	fs.writeFile(cwd + '/' + fileName + '.json', data, (err) => {
 		if (err) throw err;
 		console.log('Json file mofifyed -> ' + (fileName + '.json').red);
     if (callBack !== undefined && callBack !== null) {
