@@ -10,7 +10,7 @@
 </a>
 <p>The aim of the project is to create an easy to use, lightweight, cross-browser, general purpose 3D library. The current builds only include a WebGL renderer but WebGPU (experimental), SVG and CSS3D renderers are also available in the examples.</p>
 <p><a href="https://outmindkjg.github.io/ngx3js-doc/#/examples/">Examples</a> &mdash;
-<a href="https://outmindkjg.github.io/ngx3js-doc/#/docs">Documentation</a>
+<a href="https://outmindkjg.github.io/ngx3js-doc/#/docs">Documentation</a> &mdash;
 <a href="https://outmindkjg.github.io/ngx3js-doc/docs">API Documentation</a></p>
 
 <a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
@@ -18,6 +18,9 @@
 </a>
 <p>This code creates a scene, a camera, and a geometric cube, and it adds the cube to the scene. It then creates a <code>WebGL</code> renderer for the scene and camera, and it adds that viewport to the <code>document.body</code> element. Finally, it animates the cube within the scene for the camera.</p>
 <pre><code class="language-sh"><span class="hl-0">npm install -g @angular/cli</span><br/><span class="hl-0">npm install ngx3js</span><br/><span class="hl-0">npm install three@0.134.0</span><br/><span class="hl-0">npm install --save-dev @types/three@0.134.0</span><br/><span class="hl-0">npm install gsap</span><br/><span class="hl-0">npm install ammojs-typed</span><br/><span class="hl-0">npm install lil-gui</span><br/><span class="hl-0">npm install chroma-js</span><br/><span class="hl-0">npm install --save-dev @types/chroma-js</span><br/><span class="hl-0">npm install fs</span><br/><span class="hl-0">npm install fs-web</span>
+</code></pre>
+<p>OR</p>
+<pre><code class="language-sh"><span class="hl-0">npm install -g @angular/cli</span><br/><span class="hl-0">npm install ngx3js</span><br/><span class="hl-0">node ./node_modules/ngx3js/bin/patch.js</span><br/><span class="hl-0">npm install </span>
 </code></pre>
 <pre><code class="language-sh"><span class="hl-1"># prettier format change</span><br/><span class="hl-0">npx prettier --write src/**/*.json</span><br/><span class="hl-0">npx prettier --write src/**/*.ts</span><br/><span class="hl-0">npx prettier --write src/**/*.html</span><br/><span class="hl-0">npx prettier --write src/**/*.scss</span>
 </code></pre>

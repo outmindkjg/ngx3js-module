@@ -1,6 +1,6 @@
 {
 	"name": "ngx3js",
-	"version": "0.134.0-2021111117",
+	"version": "0.134.0-2021111123",
 	"keywords": [
 		"three",
 		"three.js",
@@ -29,6 +29,9 @@
 	"author": "outmind0@gmail.com",
 	"bugs": {
 		"url": "https://github.com/outmindkjg/ngx3js-module/issues"
+	},
+	"bin": {
+		"installthreejs": "./bin/installthreejs.js"
 	},
 	"homepage": "https://outmindkjg.github.io/ngx3js-doc/",
 	"dependencies": {

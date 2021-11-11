@@ -30,6 +30,15 @@ npm install fs
 npm install fs-web
 ```
 
+OR
+
+```sh
+npm install -g @angular/cli
+npm install ngx3js
+node ./node_modules/ngx3js/bin/patch.js
+npm install 
+```
+
 ```sh
 # prettier format change
 npx prettier --write src/**/*.json
