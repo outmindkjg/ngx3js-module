@@ -1,6 +1,7 @@
 import {
 	Component,
 	ContentChildren,
+	ElementRef,
 	Input,
 	OnInit,
 	QueryList,
@@ -36,35 +37,6 @@ export class CanvasComponent
 	@Input() public name: string = '';
 
 	/**
-	 * The visual list of VisualComponent
-	 */
-	@ContentChildren(VisualComponent)
-	private visualList: QueryList<VisualComponent>;
-
-	/**
-	 * The html list of HtmlComponent
-	 */
-	@ContentChildren(HtmlComponent) private htmlList: QueryList<HtmlComponent>;
-
-	/**
-	 * The transform list of TransformComponent
-	 */
-	@ContentChildren(TransformComponent)
-	private transformList: QueryList<TransformComponent>;
-
-	/**
-	 * The transform list of BackgroundComponent
-	 */
-	@ContentChildren(BackgroundComponent)
-	private backgroundList: QueryList<BackgroundComponent>;
-
-	/**
-	 * The controller list of AbstractControllerComponent
-	 */
-	@ContentChildren(AbstractControllerComponent, { descendants: true })
-	private controllerList: QueryList<AbstractControllerComponent>;
-
-	/**
 	 * The Collection of canvas component
 	 */
 	private collection: HtmlCollection = {
@@ -77,7 +49,7 @@ export class CanvasComponent
 	/**
 	 * Creates an instance of canvas component.
 	 */
-	constructor() {
+	constructor(private ele: ElementRef) {
 		super();
 	}
 
@@ -125,23 +97,6 @@ export class CanvasComponent
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {
-		this.subscribeListQueryChange(this.visualList, 'visualList', 'children');
-		this.subscribeListQueryChange(this.htmlList, 'htmlList', 'html');
-		this.subscribeListQueryChange(
-			this.transformList,
-			'transformList',
-			'transform'
-		);
-		this.subscribeListQueryChange(
-			this.backgroundList,
-			'backgroundList',
-			'background'
-		);
-		this.subscribeListQueryChange(
-			this.controllerList,
-			'controllerList',
-			'controller'
-		);
 		super.ngAfterContentInit();
 	}
 
@@ -193,87 +148,8 @@ export class CanvasComponent
 	public applyChanges(changes: string[]) {
 		if (this.canvas !== null) {
 			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
-					'visual',
-					'html',
-					'transform',
-					'background',
-					'controller',
-				]);
+				changes = ThreeUtil.pushUniq(changes, []);
 			}
-			changes.forEach((change) => {
-				switch (change) {
-					case 'visual':
-						this.unSubscribeReferList('visualList');
-						if (ThreeUtil.isNotNull(this.visualList)) {
-							if (this.eleSize !== null) {
-								this.visualList.forEach((child) => {
-									child.setParentNode(
-										this.canvas,
-										this.eleSize,
-										this.collection
-									);
-								});
-							}
-							this.subscribeListQuery(this.visualList, 'visualList', 'visual');
-						}
-						break;
-					case 'html':
-						this.unSubscribeReferList('htmlList');
-						if (ThreeUtil.isNotNull(this.htmlList)) {
-							this.htmlList.forEach((html) => {
-								html.setParent(this.canvas);
-							});
-							this.subscribeListQuery(this.htmlList, 'htmlList', 'html');
-						}
-						break;
-					case 'transform':
-						this.unSubscribeReferList('transformList');
-						if (ThreeUtil.isNotNull(this.transformList)) {
-							if (this.canvasSize !== null) {
-								this.transformList.forEach((transform) => {
-									transform.setParentNode(
-										this.canvas,
-										this.canvasSize,
-										this.eleSize
-									);
-								});
-							}
-							this.subscribeListQuery(
-								this.transformList,
-								'transformList',
-								'transform'
-							);
-						}
-						break;
-					case 'background':
-						this.unSubscribeReferList('backgroundList');
-						if (ThreeUtil.isNotNull(this.backgroundList)) {
-							this.backgroundList.forEach((background) => {
-								background.setParentNode(this.canvas);
-							});
-							this.subscribeListQuery(
-								this.backgroundList,
-								'backgroundList',
-								'background'
-							);
-						}
-						break;
-					case 'controller':
-						this.unSubscribeReferList('controllerList');
-						if (ThreeUtil.isNotNull(this.controllerList)) {
-							this.controllerList.forEach((controller) => {
-								controller.setCanvas(this.collection);
-							});
-							this.subscribeListQuery(
-								this.controllerList,
-								'controllerList',
-								'controller'
-							);
-						}
-						break;
-				}
-			});
 			super.applyChanges(changes);
 		}
 	}
@@ -292,6 +168,9 @@ export class CanvasComponent
 	 */
 	public getStyle(): CssStyle {
 		const style: CssStyle = {
+			position : 'absolute',
+			left : 0,
+			top : 0,
 			width: '100%',
 			height: '100%',
 		};
@@ -314,7 +193,6 @@ export class CanvasComponent
 				this.cssClazzName,
 				'canvas'
 			);
-			this.applyChanges(['transform', 'background', 'children']);
 		}
 	}
 
@@ -344,6 +222,14 @@ export class CanvasComponent
 				this.canvas.parentNode.removeChild(this.canvas);
 			}
 			this.canvas = canvas;
+			this.canvas.appendChild(this.ele.nativeElement);
+			this.canvas.addEventListener(
+				'pointerdown',
+				(e) => {
+					e.stopPropagation();
+				}
+			);
+	
 			this.collection.html = this.canvas;
 			this.collection.children = [];
 			this.collection.component = this;
