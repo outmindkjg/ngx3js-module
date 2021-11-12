@@ -114,6 +114,7 @@ if (!isAssetFounded) {
         console.log('example - https://outmindkjg.github.io/ngx3js-doc/');
         console.log('api doc - https://outmindkjg.github.io/ngx3js-doc/docs');
         console.log('git hub - https://github.com/outmindkjg/ngx3js-module');
+        console.log('npm - https://www.npmjs.com/package/ngx3js');
         console.log('any question - outmind0@gmail.com');
         console.log('\n'+'Thank You'.red+'\n\n');
       })
