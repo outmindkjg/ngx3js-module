@@ -19,7 +19,7 @@ This code creates a scene, a camera, and a geometric cube, and it adds the cube 
 
 To Install you can choose one from two method. 
 
-#### Auto Install ####
+#### Ngx3js Install - Method 1 - Recommanded ####
 ```sh
 # install shell script
 npm install -g @angular/cli
@@ -28,7 +28,7 @@ node ./node_modules/ngx3js/bin/patch.js
 npm install 
 ```
 
-#### Npm Install ####
+#### Ngx3js Install - Method 2 ####
 ```sh
 # install by npm
 npm install -g @angular/cli
@@ -54,7 +54,7 @@ npx prettier --write src/**/*.html
 npx prettier --write src/**/*.scss
 ```
 
-#### Imports Ngx3JsModule ####
+#### Imports Ngx3JsModule - Required ####
 
 To use ngx3js have to import Ngx3JsModule in src/app/app.module.ts or some other place modle.ts
 ```ts
@@ -68,6 +68,24 @@ import { Ngx3JsModule } from 'ngx3js';
 	....
 })
 ```
+
+#### Change Default Assets Url - optional ####
+
+If you chhange assets in angular.json file must be setted!
+
+```ts
+// src/app/app.component.ts
+
+import { ThreeUtil } from 'ngx3js';
+
+export class AppComponent {
+	ngOnInit(): void {
+	  // any where use ngx3js for just one time
+	  ThreeUtil.setAssetUrl('assets/examples/');
+	}
+}
+```
+
 
 #### Chane angular.json for ammojs-typed and basic assets ####
 
@@ -126,8 +144,9 @@ import { Ngx3JsModule } from 'ngx3js';
 
 #### Add Code to your template ####
 
-// src/app/app.component.html
+
 ~~~html
+<!-- src/app/app.component.html -->
 <div style="width: 700px; height: 500px; display: block; position: relative">
   <ngx3js-renderer
     [controlType]="'orbit'"
@@ -207,9 +226,11 @@ Cloning the repo with all its history results in a ~2 GB download. If you don't 
 git clone --depth=1 https://github.com/outmindkjg/ngx3js-module.git
 ```
 
-### Change log ###
+### Change log &amp; Ask Question ###
 
-[Releases](https://github.com/outmindkjg/ngx3js-module/releases)
+ - [Releases - GitHub](https://github.com/outmindkjg/ngx3js-module/releases)
+ - [ISSUE - GitHub](https://github.com/outmindkjg/ngx3js-module/issues)
+ - [Email - outmind0@gmail.com](outmind0@gmail.com)
 
 
 [npm]: https://img.shields.io/npm/v/ngx3js
