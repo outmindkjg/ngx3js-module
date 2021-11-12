@@ -24,7 +24,7 @@ function writeJson(fileName, jsonData, comment , callBack) {
   }
 	fs.writeFile(cwd + '/' + fileName + '.json', data, (err) => {
 		if (err) throw err;
-		console.log('Json file mofifyed -> ' + (fileName + '.json').red);
+		console.log('Json file modified -> ' + (fileName + '.json').red);
     if (callBack !== undefined && callBack !== null) {
       callBack();
     }
@@ -111,7 +111,11 @@ if (!isAssetFounded) {
         console.log('angular.json assets && allowedCommonJsDependencies installed!\n');
         console.log('RE RUN TO INSTALL "' +'npm install'.red + '"' + ' in shell');
         console.log('RE RUN TO UPDATE "' +'npm update'.red + '"' + ' in shell');
-        console.log('\nThank You\n\n');
+        console.log('example - https://outmindkjg.github.io/ngx3js-doc/');
+        console.log('api doc - https://outmindkjg.github.io/ngx3js-doc/docs');
+        console.log('git hub - https://github.com/outmindkjg/ngx3js-module');
+        console.log('any question - outmind0@gmail.com');
+        console.log('\n'+'Thank You'.red+'\n\n');
       })
     });
   });
