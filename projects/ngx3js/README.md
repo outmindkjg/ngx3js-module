@@ -16,7 +16,21 @@ The aim of the project is to create an easy to use, lightweight, cross-browser, 
 
 This code creates a scene, a camera, and a geometric cube, and it adds the cube to the scene. It then creates a `WebGL` renderer for the scene and camera, and it adds that viewport to the `document.body` element. Finally, it animates the cube within the scene for the camera.
 
+
+To Install you can choose one from two method. 
+
+#### Auto Install ####
 ```sh
+# install shell script
+npm install -g @angular/cli
+npm install ngx3js
+node ./node_modules/ngx3js/bin/patch.js
+npm install 
+```
+
+#### Npm Install ####
+```sh
+# install by npm
 npm install -g @angular/cli
 npm install ngx3js
 npm install three@0.134.0
@@ -30,15 +44,8 @@ npm install fs
 npm install fs-web
 ```
 
-OR
 
-```sh
-npm install -g @angular/cli
-npm install ngx3js
-node ./node_modules/ngx3js/bin/patch.js
-npm install 
-```
-
+#### Auto Formater - optional ####
 ```sh
 # prettier format change
 npx prettier --write src/**/*.json
@@ -47,7 +54,10 @@ npx prettier --write src/**/*.html
 npx prettier --write src/**/*.scss
 ```
 
-```javascript
+#### Imports Ngx3JsModule ####
+
+To use ngx3js have to import Ngx3JsModule in src/app/app.module.ts or some other place modle.ts
+```ts
 // src/app/app.module.ts
 
 import { Ngx3JsModule } from 'ngx3js';
@@ -57,7 +67,11 @@ import { Ngx3JsModule } from 'ngx3js';
 	imports: [..., Ngx3JsModule],
 	....
 })
+```
 
+#### Chane angular.json for ammojs-typed and basic assets ####
+
+```json
 // angular.json
 {
   .......
@@ -91,7 +105,11 @@ import { Ngx3JsModule } from 'ngx3js';
   },
   ......
 }
+```
 
+#### Chane tsconfig.json for fs ####
+
+```json
 // tsconfig.json
 {
   ....
@@ -105,6 +123,8 @@ import { Ngx3JsModule } from 'ngx3js';
   ....
 }
 ```
+
+#### Add Code to your template ####
 
 // src/app/app.component.html
 ~~~html
@@ -184,12 +204,12 @@ import { Ngx3JsModule } from 'ngx3js';
 Cloning the repo with all its history results in a ~2 GB download. If you don't need the whole history you can use the `depth` parameter to significantly reduce download size.
 
 ```sh
-git clone --depth=1 https://github.com/outmindkjg/ngx3js.git
+git clone --depth=1 https://github.com/outmindkjg/ngx3js-module.git
 ```
 
 ### Change log ###
 
-[Releases](https://github.com/outmindkjg/ngx3js/releases)
+[Releases](https://github.com/outmindkjg/ngx3js-module/releases)
 
 
 [npm]: https://img.shields.io/npm/v/ngx3js
