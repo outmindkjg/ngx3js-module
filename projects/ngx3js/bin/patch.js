@@ -8,6 +8,7 @@
 
 const colors = require('colors');
 const readline = require('readline');
+const { exec } = require("child_process");
 
 // const prompt = require('prompt');
 const fs = require('fs');
@@ -140,30 +141,42 @@ rl.question(question, function (agree) {
 					function () {
 						console.log('./tsconfig.json -- compilerOptions installed!\n');
 						writeJson('angular', angularJson, null, function () {
-							console.log(
-								'./angular.json -- assets && allowedCommonJsDependencies installed!\n'
-							);
-							console.log(
-								'RE RUN TO INSTALL "' + 'npm install'.red + '"' + ' in shell'
-							);
-							console.log(
-								'RE RUN TO UPDATE "' + 'npm update'.red + '"' + ' in shell'
-							);
-							console.log('example - https://outmindkjg.github.io/ngx3js-doc/');
-							console.log(
-								'api doc - https://outmindkjg.github.io/ngx3js-doc/docs'
-							);
-							console.log(
-								'git hub - https://github.com/outmindkjg/ngx3js-module'
-							);
-							console.log('npm - https://www.npmjs.com/package/ngx3js');
-							console.log(
-								'usage - https://github.com/outmindkjg/ngx3js-module#usage'
-							);
-							console.log('question - outmind0@gmail.com');
-							console.log(
-								'\n' + 'Thank You - Patch ' + 'Success'.green + '!.\n\n'
-							);
+							console.log('auto run '+'npm install'.red +'!!!');
+							exec("npm install", function(error, stdout, stderr) {
+								if (error) {
+									console.log(`error: ${error.message}`);
+								}
+								if (stderr) {
+									console.log(`stderr: ${stderr}`);
+								}
+								if (stdout) {
+									console.log(`stdout: ${stdout}`);
+								}
+								console.log(
+									'./angular.json -- assets && allowedCommonJsDependencies installed!\n'
+								);
+								console.log(
+									'RE RUN TO INSTALL "' + 'npm install'.red + '"' + ' in shell'
+								);
+								console.log(
+									'RE RUN TO UPDATE "' + 'npm update'.red + '"' + ' in shell'
+								);
+								console.log('example - https://outmindkjg.github.io/ngx3js-doc/');
+								console.log(
+									'api doc - https://outmindkjg.github.io/ngx3js-doc/docs'
+								);
+								console.log(
+									'git hub - https://github.com/outmindkjg/ngx3js-module'
+								);
+								console.log('npm - https://www.npmjs.com/package/ngx3js');
+								console.log(
+									'usage - https://github.com/outmindkjg/ngx3js-module#usage'
+								);
+								console.log('question - outmind0@gmail.com');
+								console.log(
+									'\n' + 'Thank You - Patch ' + 'Success'.green + '!.\n\n'
+								);
+							});
 						});
 					}
 				);
