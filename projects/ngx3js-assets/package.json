@@ -1,21 +1,41 @@
 {
   "name": "ngx3js-assets",
-  "version": "0.0.1",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/outmindkjg/ngx3js-module.git"
-	},
-	"description": "Angular & Javascript 3D library",
-	"author": "outmind0@gmail.com",
-	"bugs": {
-		"url": "https://github.com/outmindkjg/ngx3js-module/issues"
-	},
+  "version": "0.134.0-2021111218",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/outmindkjg/ngx3js-module.git"
+  },
+  "description": "Angular & Javascript 3D library",
+  "author": "outmind0@gmail.com",
+  "bugs": {
+    "url": "https://github.com/outmindkjg/ngx3js-module/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^12.2.0",
     "@angular/core": "^12.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "keywords": [
+    "three",
+    "three.js",
+    "javascript",
+    "3d",
+    "virtual-reality",
+    "augmented-reality",
+    "webgl",
+    "webgl2",
+    "webaudio",
+    "webgpu",
+    "webxr",
+    "canvas",
+    "svg",
+    "html5",
+    "ngx3js",
+    "angular",
+    "typescript"
+  ],
+  "homepage": "https://outmindkjg.github.io/ngx3js-doc/"
 }

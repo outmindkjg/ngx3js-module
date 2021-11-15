@@ -1,6 +1,6 @@
 {
   "name": "ngx3js-module",
-  "version": "1.0.1",
+  "version": "0.134.0-2021111218",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
     "assetspublish": "cd dist/ngx3js-assets && npm publish",
     "assetswatch": "ng build ngx3js-assets --watch --configuration development",
     "docs": "rm -rf docs && cd projects/ngx3js && npx typedoc --tsconfig tsconfig.lib.json",
+    "version": "node ./bin/version.js",
     "readme": "cp -rf projects/ngx3js/README.md README.md && cp -rf projects/ngx3js/README.md ../ngx3js/README.md && cp -rf projects/ngx3js/README.md ../ngx3js/src/README.md ",
     "test": "ng test"
   },
@@ -50,5 +51,28 @@
     "ng-packagr": "^12.2.5",
     "typedoc": "^0.22.8",
     "typescript": "~4.3.5"
-  }
+  },
+  "keywords": [
+    "three",
+    "three.js",
+    "javascript",
+    "3d",
+    "virtual-reality",
+    "augmented-reality",
+    "webgl",
+    "webgl2",
+    "webaudio",
+    "webgpu",
+    "webxr",
+    "canvas",
+    "svg",
+    "html5",
+    "ngx3js",
+    "angular",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/outmindkjg/ngx3js-module/issues"
+  },
+  "homepage": "https://outmindkjg.github.io/ngx3js-doc/"
 }
