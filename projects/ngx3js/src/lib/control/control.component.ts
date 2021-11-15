@@ -32,6 +32,51 @@ import { SelectBoxControls } from './selection-box-controls';
 
 /**
  * Control options
+ * 
+ * ```html
+ * <ngx3js-control 
+ * 	[type]="'arcball'" 
+ * 	[gizmoVisible]="true" 
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'DeviceOrientationControls'"
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'DragControls'"
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'FlyControls'" 
+ * 	[movementSpeed]="1000" 
+ * 	[rollSpeed]="7.5" 
+ * 	[autoForward]="false" 
+ * 	[dragToLook]="false"
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'OrbitControls'" 
+ * 	[enableDamping]="true" 
+ * 	[dampingFactor]="0.05" 
+ * 	[screenSpacePanning]="false" 
+ * 	[minDistance]="100" 
+ * 	[maxDistance]="500" 
+ * 	[maxPolarAngle]="90"
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'PointerLockControls'"
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'TrackballControls'" 
+ * 	[rollSpeed]="1.0" 
+ * 	[zoomSpeed]="1.2" 
+ * 	[panSpeed]="0.8" 
+ * 	[keys]="['KeyA', 'KeyS', 'KeyD']"
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'Transform'"
+ * ></ngx3js-control>
+ * <ngx3js-control 
+ * 	[type]="'plane'"
+ * ></ngx3js-control>
+ * ```
  */
 export interface ControlOptions {
 	/**
