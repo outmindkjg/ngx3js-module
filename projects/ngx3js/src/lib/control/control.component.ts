@@ -77,6 +77,7 @@ import { SelectBoxControls } from './selection-box-controls';
  * 	[type]="'plane'"
  * ></ngx3js-control>
  * ```
+ * @see {@link https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control | NGX Control}
  */
 export interface ControlOptions {
 	/**

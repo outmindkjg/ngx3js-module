@@ -204,6 +204,7 @@ import {
  *
  * ```
  *
+ * @see {@link https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry | NGX Geometey}
  * @see THREE.BufferGeometry
  */
 @Component({

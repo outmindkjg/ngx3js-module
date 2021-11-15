@@ -11,7 +11,8 @@ import {
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
-import { NodeMaterialLoader } from 'three/examples/jsm/loaders/NodeMaterialLoader';
+import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
+
 import * as NODES from 'three/examples/jsm/nodes/Nodes';
 import { ReflectorOptions } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
@@ -156,6 +157,8 @@ import { AbstractTextureComponent } from '../texture.abstract';
  * 	[color]="'0xff0000'"
  * ></ngx3js-material>
  * ```
+ * 
+* @see {@link https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material | NGX Material}
  * @see THREE.Material
  */
 @Component({

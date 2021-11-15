@@ -108,6 +108,8 @@ export * from './shape/shape.component';
 export * from './shared/shared.component';
 export * from './size/size.component';
 export * from './subscribe.abstract';
+export * from './controller.component.abstract';
+
 export * from './svg/svg.component';
 export * from './texture.abstract';
 export * from './texture/texture.component';
