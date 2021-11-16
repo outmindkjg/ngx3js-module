@@ -522,14 +522,15 @@ export class RendererComponent
 			[
 				'    __     __',
 				' __/ __\\  / __\\__   ____   _____   _____',
-				'/ __/  /\\/ /  /___\\/ ____\\/ _____\\/ _____\\  with %cNGX3js%c',
+				'/ __/  /\\/ /  /___\\/ ____\\/ _____\\/ _____\\',
 				'\\/_   __/ /   _   / /  __/ / __  / / __  /_   __   _____',
 				'/ /  / / /  / /  / /  / / /  ___/ /  ___/\\ _\\/ __\\/ _____\\',
 				'\\/__/  \\/__/\\/__/\\/__/  \\/_____/\\/_____/\\/__/ /  / /  ___/',
 				'                                         / __/  /  \\__  \\',
-				'                                         \\/____/\\/_____/',
+				' with %c Angular ngx3js %c                   \\/____/\\/_____/',
+				' https://github.com/outmindkjg/ngx3js-module',
 			].join('\n'),
-			'color:red;font-style:italic;text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;',
+			'color:red;font-style:italic;text-shadow: 1px 1px 2px red, 0 0 0.2em white, 0 0 0.03em gray;',
 			''
 		);
 	}
