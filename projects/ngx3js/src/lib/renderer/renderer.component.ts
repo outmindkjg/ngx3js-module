@@ -109,7 +109,16 @@ export class RendererComponent
 	 * The type of control
 	 *
 	 * Notice - case insensitive.
-	 *
+	 * @see FlyControls - FlyControls, Fly
+	 * @see FirstPersonControls - FirstPersonControls, FirstPerson
+	 * @see DeviceOrientationControls - DeviceOrientationControls, DeviceOrientation
+	 * @see DragControls - DragControls, Drag
+	 * @see TransformControls - TransformControls, Transform
+	 * @see TrackballControls - TrackballControls, Trackball
+	 * @see ArcballControls - ArcballControls, Arcball
+	 * @see CSM - CSM
+	 * @see PlaneControls - PlaneControls, Plane
+	 * @see OrbitControls - OrbitControls, Orbit
 	 * @see ControlComponent
 	 */
 	@Input() public controlType: string = 'none';
@@ -1337,6 +1346,7 @@ export class RendererComponent
 				ThreeUtil.isIndexOf(changes, [
 					'localclippingenabled',
 					'globalclippingenabled',
+					'statsmode',
 					'clearcolor',
 					'clearalpha',
 					'tonemapping',
@@ -1364,11 +1374,12 @@ export class RendererComponent
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'guicontrol':
-						if (this.gui !== null) {
+						if (this.gui !== null && changes.indexOf('init') === -1) {
 							this.gui.domElement.parentNode.removeChild(this.gui.domElement);
 							this.gui = null;
 						}
 						if (
+							this.gui == null &&
 							ThreeUtil.isNotNull(this.guiControl) &&
 							ThreeUtil.isNotNull(this.guiParams) &&
 							this.guiParams.length > 0
@@ -2005,7 +2016,6 @@ export class RendererComponent
 			super.setObject(this.renderer);
 			this.resizeRender();
 			this._renderCaller();
-			// GSAP.gsap.ticker.add(this._renderCaller);
 		}
 		return this.renderer;
 	}

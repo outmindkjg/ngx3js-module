@@ -410,8 +410,6 @@ export class SceneComponent
 									'background'
 								);
 							}
-						} else {
-							this.scene.background = null;
 						}
 						if (ThreeUtil.isNotNull(this.environment)) {
 							if (this.environment instanceof AbstractTextureComponent) {
@@ -422,8 +420,6 @@ export class SceneComponent
 									'environment'
 								);
 							}
-						} else {
-							this.scene.environment = null;
 						}
 						if (backgroundTexture !== null || environmentTexture !== null) {
 							if (backgroundTexture === environmentTexture) {

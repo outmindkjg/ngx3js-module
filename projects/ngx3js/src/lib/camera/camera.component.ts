@@ -193,8 +193,14 @@ export class CameraComponent
 	 * The viewport of this render target.
 	 *
 	 * Notice - case insensitive.
-	 *
+	 * 
+	 * @see THREE.WebGLRenderer#setViewport - renderer
+	 * @see THREE.PerspectiveCamera#setViewOffset - viewoffset, offset
+	 * @see THREE.OrthographicCamera#setViewOffset - viewoffset, offset
+	 * @see THREE.PerspectiveCamera - #viewport - camera
+	 * 
 	 */
+
 	@Input() public viewportType: string = 'renderer';
 
 	/**
@@ -749,7 +755,26 @@ export class CameraComponent
 						'audio',
 						'helper',
 						'light',
+						'scissortest',
+						'scissorx',
+						'scissory',
+						'scissorwidth',
+						'scissorheight',
 						'viewport',
+						'viewporttype',
+						'x',
+						'y',
+						'width',
+						'height',
+						'near',
+						'far',
+						'aspect', 
+						'fov', 
+						'orthosize',
+						'left', 
+						'right', 
+						'top', 
+						'bottom'
 					],
 					this.OBJECT3D_ATTR
 				)
@@ -760,8 +785,11 @@ export class CameraComponent
 			if (ThreeUtil.isIndexOf(changes, 'init')) {
 				changes = ThreeUtil.pushUniq(changes, ['viewport']);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['x', 'y', 'width', 'height'])) {
+			if (ThreeUtil.isIndexOf(changes, ['x', 'y', 'width', 'height','viewporttype'])) {
 				changes = ThreeUtil.pushUniq(changes, ['viewport']);
+			}
+			if (ThreeUtil.isIndexOf(changes, ['near', 'far', 'aspect', 'fov', 'orthosize','left', 'right', 'top', 'bottom'])) {
+				changes = ThreeUtil.pushUniq(changes, ['changesize']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -775,7 +803,7 @@ export class CameraComponent
 										this.camera instanceof THREE.OrthographicCamera
 									) {
 										this.camera.setViewOffset(
-											this.fullWidth,
+										 	this.fullWidth,
 											this.fullHeight,
 											this.getX(),
 											this.getY(),
@@ -797,8 +825,35 @@ export class CameraComponent
 											.multiplyScalar(this.pixelRatio);
 									}
 									break;
+								default :
+									if (
+										this.camera instanceof THREE.PerspectiveCamera ||
+										this.camera instanceof THREE.OrthographicCamera
+									) {
+										this.camera.clearViewOffset();
+									}
+									break;
+							}
+						} else {
+							if (
+								this.camera instanceof THREE.PerspectiveCamera ||
+								this.camera instanceof THREE.OrthographicCamera
+							) {
+								this.camera.clearViewOffset();
+							}
+							if (this.renderer !== null && this.renderer instanceof THREE.WebGLRenderer) {
+								this.renderer.setViewport(0,0, this.rendererWidth, this.rendererHeight);
 							}
 						}
+						break;
+					case 'changesize':
+						this.setRendererSize(
+							this.rendererWidth,
+							this.rendererHeight,
+							this.fullWidth,
+							this.fullHeight,
+							this.pixelRatio
+						);
 						break;
 				}
 			});
@@ -924,15 +979,22 @@ export class CameraComponent
 			this.rendererHeight = height;
 		}
 		if (this.camera !== null) {
-			if (this.camera instanceof THREE.OrthographicCamera) {
-				const aspect = width / height;
-				this.camera.left = this.getLeft(aspect);
-				this.camera.right = this.getRight(aspect);
-				this.camera.top = this.getTop();
-				this.camera.bottom = this.getBottom();
-				this.camera.updateProjectionMatrix();
-			} else if (this.camera instanceof THREE.PerspectiveCamera) {
-				this.camera.aspect = this.getAspect(width, height);
+			if (
+				this.camera instanceof THREE.OrthographicCamera ||
+				this.camera instanceof THREE.PerspectiveCamera
+			) {
+				this.camera.near = this.getNear(0.1);
+				this.camera.far = this.getFar(2000);
+				if (this.camera instanceof THREE.OrthographicCamera) {
+					const aspect = width / height;
+					this.camera.left = this.getLeft(aspect);
+					this.camera.right = this.getRight(aspect);
+					this.camera.top = this.getTop();
+					this.camera.bottom = this.getBottom();
+				} else if (this.camera instanceof THREE.PerspectiveCamera) {
+					this.camera.fov = this.getFov(50);
+					this.camera.aspect = this.getAspect(width, height);
+				}
 				this.camera.updateProjectionMatrix();
 			}
 			this.applyChanges(['viewport']);
@@ -1062,7 +1124,7 @@ export class CameraComponent
 						this.getRight(aspect),
 						this.getTop(),
 						this.getBottom(),
-						this.getNear(-200),
+						this.getNear(0.1),
 						this.getFar(2000)
 					);
 					if (ThreeUtil.isNotNull(this.zoom)) {
