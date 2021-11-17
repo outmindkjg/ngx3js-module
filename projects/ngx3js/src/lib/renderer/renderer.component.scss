@@ -25,6 +25,10 @@
 		::ng-deep {
 			.lil-gui {
 				display: block;
+				&.root>.children {
+					max-height: 80vh;
+					overflow: auto;
+				}
 			}
 		}
 	}

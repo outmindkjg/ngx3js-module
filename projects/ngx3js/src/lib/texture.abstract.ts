@@ -446,6 +446,46 @@ export abstract class AbstractTextureComponent
 	 */
 	ngOnDestroy(): void {
 		if (this.texture !== null) {
+			if (this._material !== null) {
+				Object.entries(this._material).forEach(([_, info]) => {
+					let textureType = info.refType;
+					if (
+						textureType === 'auto' ||
+						textureType === 'texture' ||
+						textureType === ''
+					) {
+						textureType = this.type;
+					}
+					info.materials.forEach(material => {
+						if (material instanceof THREE.Scene) {
+							switch (textureType.toLowerCase()) {
+								case 'environmentbackground':
+								case 'environment-background':
+								case 'background-environment':
+								case 'backgroundenvironment':
+									if (this.texture === material.environment) {
+										material.environment = null;
+									}
+									if (this.texture === material.background) {
+										material.background = null;
+									}
+									break;
+								case 'environment':
+									if (this.texture === material.environment) {
+										material.environment = null;
+									}
+									break;
+								case 'background':
+								default:
+									if (this.texture === material.background) {
+										material.background = null;
+									}
+									break;
+							}
+						}
+					});
+				});				
+			}
 			if (ThreeUtil.isNotNull(this.texture.image)) {
 				if (
 					this.texture instanceof THREE.VideoTexture &&

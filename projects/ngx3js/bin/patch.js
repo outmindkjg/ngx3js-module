@@ -27,7 +27,7 @@ function readJson(fileName) {
 function writeJson(fileName, jsonData, comment, callBack) {
 	let data = JSON.stringify(jsonData, null, 2);
 	if (comment !== undefined && comment !== null && comment !== '') {
-		data = '/** ' + comment + ' */\n' + data;
+		// data = '/** ' + comment + ' */\n' + data;
 	}
 	fs.writeFile(cwd + '/' + fileName + '.json', data, (err) => {
 		if (err) throw err;

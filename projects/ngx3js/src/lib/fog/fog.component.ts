@@ -76,6 +76,9 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	 */
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
+		if (this.refScene !== null && this.refScene.fog === this.fog) {
+			this.refScene.fog = null;
+		}
 	}
 
 	/**
@@ -101,15 +104,6 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	}
 
 	/**
-	 * Gets color
-	 * @param [def]
-	 * @returns color
-	 */
-	private getColor(def?: number | string): THREE.Color {
-		return ThreeUtil.getColorSafe(this.color, def);
-	}
-
-	/**
 	 * The Fog of fog component
 	 */
 	private fog: THREE.FogBase = null;
@@ -127,6 +121,77 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 		if (this.refScene !== refScene) {
 			this.refScene = refScene;
 			this.refScene.fog = this.getFog();
+		}
+	}
+
+	/**
+	 * Sets object
+	 * @param fog
+	 */
+	 setObject(fog : THREE.FogBase) {
+		super.setObject(fog);
+		if (this.refScene !== null) {
+			this.refScene.fog = fog;
+		}
+	}
+
+	/**
+	 * Applys changes3d
+	 * @param changes
+	 */
+	public applyChanges(changes: string[]) {
+		if (this.fog !== null) {
+			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+				this.getFog();
+				return;
+			}
+			if (ThreeUtil.isIndexOf(changes, 'init')) {
+				changes = ThreeUtil.pushUniq(changes, []);
+			}
+			if (
+				!ThreeUtil.isOnlyIndexOf(
+					changes,
+					['color', 'density', 'near', 'far'],
+					this.OBJECT_ATTR
+				)
+			) {
+				this.needUpdate = true;
+				return;
+			}
+			changes.forEach((change) => {
+				switch (change.toLowerCase()) {
+					case 'color':
+						if (ThreeUtil.isNotNull(this.color)) {
+							this.fog.color = ThreeUtil.getColorSafe(this.color, 0xffffff);
+						}
+						break;
+					case 'density':
+						if (
+							ThreeUtil.isNotNull(this.density) &&
+							this.fog instanceof THREE.FogExp2
+						) {
+							this.fog.density = ThreeUtil.getTypeSafe(this.density, 0.00025);
+						}
+						break;
+					case 'near':
+						if (
+							ThreeUtil.isNotNull(this.near) &&
+							this.fog instanceof THREE.Fog
+						) {
+							this.fog.near = ThreeUtil.getTypeSafe(this.near);
+						}
+						break;
+					case 'far':
+						if (
+							ThreeUtil.isNotNull(this.far) &&
+							this.fog instanceof THREE.Fog
+						) {
+							this.fog.far = ThreeUtil.getTypeSafe(this.far);
+						}
+						break;
+				}
+			});
+			super.applyChanges(changes);
 		}
 	}
 
@@ -155,7 +220,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 					);
 					break;
 			}
-			super.setObject(this.fog);
+			this.setObject(this.fog);
 		}
 		return this.fog;
 	}

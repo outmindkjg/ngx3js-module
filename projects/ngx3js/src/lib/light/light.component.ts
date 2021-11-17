@@ -820,11 +820,142 @@ export class LightComponent
 	 */
 	public applyChanges3d(changes: string[]) {
 		if (this.light !== null) {
+			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+				this.getLight();
+				return;
+			}
 			if (ThreeUtil.isIndexOf(changes, 'init')) {
 				changes = ThreeUtil.pushUniq(changes, ['helper']);
 			}
+			if (
+				!ThreeUtil.isOnlyIndexOf(
+					changes,
+					[
+						'shadowBias',
+						'shadowRadius',
+						'shadowMapSizeWidth',
+						'shadowMapSize',
+						'shadowMapSizeHeight',
+						'shadowCameraFov',
+						'shadowCameraNear',
+						'shadowCameraFar',
+						'shadowCameraZoom',
+						'shadowCameraLeft',
+						'shadowCameraRight',
+						'shadowCameraTop',
+						'shadowCameraBottom',
+					],
+					this.OBJECT3D_ATTR
+				)
+			) {
+				this.needUpdate = true;
+				return;
+			}
+			if (ThreeUtil.isIndexOf(changes, 'shadowMapSizeWidth') || ThreeUtil.isIndexOf(changes, 'shadowMapSizeHeight')) {
+				changes = ThreeUtil.pushUniq(changes, ['shadowMapSize']);
+			}
+			if (ThreeUtil.isIndexOf(changes, 'shadowCameraFov') || 
+				ThreeUtil.isIndexOf(changes, 'shadowCameraNear') || 
+				ThreeUtil.isIndexOf(changes, 'shadowCameraFar') ||
+				ThreeUtil.isIndexOf(changes, 'shadowCameraZoom') ||
+				ThreeUtil.isIndexOf(changes, 'shadowCameraLeft') ||
+				ThreeUtil.isIndexOf(changes, 'shadowCameraRight') ||
+				ThreeUtil.isIndexOf(changes, 'shadowCameraTop') ||
+				ThreeUtil.isIndexOf(changes, 'shadowCameraBottom')) {
+				changes = ThreeUtil.pushUniq(changes, ['shadowCamera']);
+			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
+					case 'shadowbias' :
+						if (ThreeUtil.isNotNull(this.shadowBias)) {
+							this.light.shadow.bias = ThreeUtil.getTypeSafe(this.shadowBias, 0);
+						}
+						break;
+					case 'shadowradius' :
+						if (ThreeUtil.isNotNull(this.shadowRadius)) {
+							this.light.shadow.radius = ThreeUtil.getTypeSafe(
+								this.shadowRadius,
+								1
+							);
+						}
+						break;
+					case 'shadowmapsize' :
+						if (
+							ThreeUtil.isNotNull(this.shadowMapSizeWidth) ||
+							ThreeUtil.isNotNull(this.shadowMapSize)
+						) {
+							this.light.shadow.mapSize.width = this.getShadowMapSizeWidth(1024);
+						}
+						if (
+							ThreeUtil.isNotNull(this.shadowMapSizeHeight) ||
+							ThreeUtil.isNotNull(this.shadowMapSize)
+						) {
+							this.light.shadow.mapSize.height = this.getShadowMapSizeHeight(1024);
+						}
+						break;
+					case 'shadowcamera' :
+						if (this.light.shadow.camera) {
+							if (this.light.shadow.camera instanceof THREE.PerspectiveCamera) {
+								if (ThreeUtil.isNotNull(this.shadowCameraFov)) {
+									this.light.shadow.camera.fov = ThreeUtil.getTypeSafe(
+										this.shadowCameraFov,
+										50
+									);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraNear)) {
+									this.light.shadow.camera.near = ThreeUtil.getTypeSafe(
+										this.shadowCameraNear,
+										0.5
+									);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraFar)) {
+									this.light.shadow.camera.far = ThreeUtil.getTypeSafe(
+										this.shadowCameraFar,
+										500
+									);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraZoom)) {
+									this.light.shadow.camera.zoom = ThreeUtil.getTypeSafe(
+										this.shadowCameraZoom,
+										1
+									);
+								}
+							} else if (
+								this.light.shadow.camera instanceof THREE.OrthographicCamera
+							) {
+								if (ThreeUtil.isNotNull(this.shadowCameraLeft)) {
+									this.light.shadow.camera.left = this.getShadowCameraLeft(-5);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraRight)) {
+									this.light.shadow.camera.right = this.getShadowCameraRight(5);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraTop)) {
+									this.light.shadow.camera.top = this.getShadowCameraTop(5);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraBottom)) {
+									this.light.shadow.camera.bottom = this.getShadowCameraBottom(-5);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraNear)) {
+									this.light.shadow.camera.near = ThreeUtil.getTypeSafe(
+										this.shadowCameraNear,
+										0.5
+									);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraFar)) {
+									this.light.shadow.camera.far = ThreeUtil.getTypeSafe(
+										this.shadowCameraFar,
+										500
+									);
+								}
+								if (ThreeUtil.isNotNull(this.shadowCameraZoom)) {
+									this.light.shadow.camera.zoom = ThreeUtil.getTypeSafe(
+										this.shadowCameraZoom,
+										1
+									);
+								}
+							}
+						}						
+						break;
 					default:
 						break;
 				}

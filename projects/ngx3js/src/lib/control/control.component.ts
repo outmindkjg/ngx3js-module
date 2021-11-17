@@ -709,11 +709,13 @@ export class ControlComponent
 		) {
 			this.controlDomElement.parentElement.removeChild(this.controlDomElement);
 		}
-		if (this.control instanceof TransformControls && this.control.parent) {
-			this.control.parent.remove(this.control);
-		}
-		if (ThreeUtil.isNotNull(this.control.dispose)) {
-			this.control.dispose();
+		if (ThreeUtil.isNotNull(this.control)) {
+			if (this.control instanceof TransformControls && this.control.parent) {
+				this.control.parent.remove(this.control);
+			}
+			if (ThreeUtil.isNotNull(this.control.dispose)) {
+				this.control.dispose();
+			}
 		}
 		super.ngOnDestroy();
 	}
