@@ -1,6 +1,6 @@
 {
 	"name": "ngx3js",
-	"version": "0.134.0-2021111717",
+	"version": "0.134.0-2021111721",
 	"keywords": [
 		"three",
 		"three.js",
@@ -46,12 +46,12 @@
 		"@types/chroma-js": "^2.1.2"
 	},
 	"peerDependencies": {
-		"@angular/common": "^12.2.10 || >=13.0.2",
-		"@angular/core": "^12.2.10 || >=13.0.2",
-		"rxjs": "^6.6.7",
+		"@angular/common": ">12.2.10",
+		"@angular/core": ">12.2.10",
+		"rxjs": ">6.6.7",
 		"fs": "0.0.1-security",
-		"fs-web": "^1.0.1",
-		"zone.js": "~0.11.4",
+		"fs-web": ">1.0.1",
+		"zone.js": ">0.11.4",
 		"lil-gui": "^0.12.0"
 	}
 }
