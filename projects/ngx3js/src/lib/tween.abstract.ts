@@ -21,7 +21,7 @@ import { TweenComponent } from './tween/tween.component';
 @Component({
 	template: '',
 })
-export abstract class AbstractTweenComponent
+export class AbstractTweenComponent
 	extends AbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {

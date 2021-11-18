@@ -37,7 +37,7 @@ import { HtmlCollection } from './visual/visual.component';
 @Component({
 	template: '',
 })
-export abstract class AbstractControllerComponent
+export class AbstractControllerComponent
 	extends AbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {

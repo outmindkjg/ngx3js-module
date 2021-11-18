@@ -20,7 +20,7 @@ import { ThreeUtil } from './interface';
 @Component({
 	template: '',
 })
-export abstract class AbstractSubscribeComponent
+export class AbstractSubscribeComponent
 	implements OnInit, OnChanges, OnDestroy, AfterContentInit
 {
 	/**

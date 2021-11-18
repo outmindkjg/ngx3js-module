@@ -4319,7 +4319,7 @@ export interface GuiControlParam {
 @Component({
 	template: '',
 })
-export abstract class ThreeGeometryCustom {
+export class ThreeGeometryCustom {
 	/**
 	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [page:Object3D.scale] for typical real-time mesh scaling.
 	 */

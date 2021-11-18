@@ -4,15 +4,16 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import Ammo from 'ammojs-typed';
 import * as THREE from 'three';
 import { NgxGeometryUtils } from '../geometry/geometryUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import * as Ammo from '../threejs-library/ammo.wasm';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
 import { RigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
+
 
 /**
  * Rigidbody type
@@ -589,7 +590,7 @@ export class RigidbodyComponent
 	/**
 	 * The Ammo of rigidbody component
 	 */
-	private _ammo: typeof Ammo = null;
+	private _ammo: Ammo.AmmoType = null;
 
 	/**
 	 * The Physics of rigidbody component

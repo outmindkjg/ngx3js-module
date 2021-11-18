@@ -54,7 +54,7 @@ export type MeshMaterial = MeshMaterialRaw | THREE.Scene;
 @Component({
 	template: '',
 })
-export abstract class AbstractMaterialComponent
+export class AbstractMaterialComponent
 	extends AbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {

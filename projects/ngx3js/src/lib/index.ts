@@ -3,6 +3,7 @@ export * from './audio/audio.component';
 export * from './background/background.component';
 export * from './camera/camera.component';
 export * from './canvas/canvas.component';
+export * from './chart.abstract';
 export * from './chart/axes/axes.component';
 export * from './chart/bar/bar.component';
 export * from './chart/bubble/bubble.component';
@@ -21,6 +22,7 @@ export * from './composer/composer.component';
 export * from './control/control.component';
 export * from './control/plane-controls';
 export * from './controller.abstract';
+export * from './controller.component.abstract';
 export * from './controller/controller-item/controller-item.component';
 export * from './controller/controller.component';
 export * from './curve/curve.component';
@@ -108,8 +110,6 @@ export * from './shape/shape.component';
 export * from './shared/shared.component';
 export * from './size/size.component';
 export * from './subscribe.abstract';
-export * from './controller.component.abstract';
-
 export * from './svg/svg.component';
 export * from './texture.abstract';
 export * from './texture/texture.component';
@@ -122,3 +122,5 @@ export * from './tween/tween.component';
 export * from './viewer/viewer-canvas';
 export * from './viewer/viewer.component';
 export * from './visual/visual.component';
+
+

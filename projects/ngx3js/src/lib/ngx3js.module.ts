@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import {  CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { NgModule, Type } from '@angular/core';
 import { AnimationGroupComponent } from './animation-group/animation-group.component';
 import { AudioComponent } from './audio/audio.component';
 import { BackgroundComponent } from './background/background.component';
 import { CameraComponent } from './camera/camera.component';
 import { CanvasComponent } from './canvas/canvas.component';
+import { AbstractChartComponent } from './chart.abstract';
 import { ChartAxesComponent } from './chart/axes/axes.component';
 import { ChartBarComponent } from './chart/bar/bar.component';
 import { ChartBubbleComponent } from './chart/bubble/bubble.component';
@@ -21,24 +22,29 @@ import { ChartTitleComponent } from './chart/title/title.component';
 import { ClipComponent } from './clip/clip.component';
 import { ComposerComponent } from './composer/composer.component';
 import { ControlComponent } from './control/control.component';
+import { AbstractControllerComponent } from './controller.component.abstract';
 import { ControllerItemComponent } from './controller/controller-item/controller-item.component';
 import { ControllerComponent } from './controller/controller.component';
 import { CurveComponent } from './curve/curve.component';
 import { DrawingCanvasDirective } from './drawing-canvas.directive';
 import { FogComponent } from './fog/fog.component';
+import { AbstractGeometryComponent } from './geometry.abstract';
 import { GeometryBirdComponent } from './geometry/bird/bird.component';
 import { GeometryComponent } from './geometry/geometry.component';
 import { HelperComponent } from './helper/helper.component';
 import { HtmlComponent } from './html/html.component';
+import { ThreeGeometryCustom } from './interface';
 import { KeyframeComponent } from './keyframe/keyframe.component';
 import { LensflareelementComponent } from './lensflareelement/lensflareelement.component';
 import { LightComponent } from './light/light.component';
 import { ListenerComponent } from './listener/listener.component';
 import { LocalStorageService } from './local-storage.service';
 import { LookatComponent } from './lookat/lookat.component';
+import { AbstractMaterialComponent } from './material.abstract';
 import { MaterialComponent } from './material/material.component';
 import { MeshComponent } from './mesh/mesh.component';
 import { MixerComponent } from './mixer/mixer.component';
+import { AbstractObject3dComponent } from './object3d.abstract';
 import { PassComponent } from './pass/pass.component';
 import { PhysicsConstraintComponent } from './physics/physics-constraint/physics-constraint.component';
 import { PhysicsComponent } from './physics/physics.component';
@@ -55,18 +61,21 @@ import { ShaderComponent } from './shader/shader.component';
 import { ShapeComponent } from './shape/shape.component';
 import { SharedComponent } from './shared/shared.component';
 import { SizeComponent } from './size/size.component';
+import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { SvgComponent } from './svg/svg.component';
+import { AbstractTextureComponent } from './texture.abstract';
 import { TextureComponent } from './texture/texture.component';
 import { ToolsComponent } from './tools/tools.component';
 import { TransformComponent } from './transform/transform.component';
 import { TranslationComponent } from './translation/translation.component';
+import { AbstractTweenComponent } from './tween.abstract';
 import { TweenComponent } from './tween/tween.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { VisualComponent } from './visual/visual.component';
 
 const COMMON_PIPES: any[] = [];
 const COMMON_DIRECTIVES = [DrawingCanvasDirective];
-const MODULE_COMPONENTS = [
+const MODULE_COMPONENTS:Array<Type<any>> = [
 	LookatComponent,
 	FogComponent,
 	TextureComponent,
@@ -128,6 +137,15 @@ const MODULE_COMPONENTS = [
 	ChartTitleComponent,
 	ChartPolarAreaComponent,
 	ChartControllerComponent,
+	AbstractSubscribeComponent,
+	AbstractTweenComponent,
+	AbstractTextureComponent,
+	AbstractMaterialComponent,
+	AbstractGeometryComponent,
+	AbstractControllerComponent,
+	AbstractObject3dComponent,
+	ThreeGeometryCustom,
+	AbstractChartComponent
 ];
 
 /**

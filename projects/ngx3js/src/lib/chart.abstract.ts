@@ -72,7 +72,7 @@ export interface ChartShape {
 @Component({
 	template: '',
 })
-export abstract class AbstractChartComponent
+export class AbstractChartComponent
 	extends AbstractObject3dComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {

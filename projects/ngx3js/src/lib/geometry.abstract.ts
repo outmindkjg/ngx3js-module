@@ -69,7 +69,7 @@ export interface GeometriesParametric {
 @Component({
 	template: '',
 })
-export abstract class AbstractGeometryComponent
+export class AbstractGeometryComponent
 	extends AbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {

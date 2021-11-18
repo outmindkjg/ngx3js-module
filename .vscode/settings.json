@@ -1,0 +1,5 @@
+{
+    "angular.suggest.includeAutomaticOptionalChainCompletions": false,
+    "angular.suggest.includeCompletionsWithSnippetText": false,
+    "angular.view-engine": true
+}

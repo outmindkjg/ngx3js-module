@@ -49,7 +49,7 @@ import { unzipSync } from './threejs-library/fflate.module';
 @Component({
 	template: '',
 })
-export abstract class AbstractTextureComponent
+export class AbstractTextureComponent
 	extends AbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {

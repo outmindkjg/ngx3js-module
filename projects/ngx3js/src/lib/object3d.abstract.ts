@@ -142,7 +142,7 @@ export interface Object3dOptions {
 @Component({
 	template: '',
 })
-export abstract class AbstractObject3dComponent
+export class AbstractObject3dComponent
 	extends AbstractTweenComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {

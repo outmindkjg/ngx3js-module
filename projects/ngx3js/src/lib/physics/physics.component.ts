@@ -6,7 +6,7 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import Ammo from 'ammojs-typed';
+import * as Ammo from '../threejs-library/ammo.wasm';
 import * as THREE from 'three';
 import { ConvexObjectBreaker } from 'three/examples/jsm/misc/ConvexObjectBreaker';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
@@ -29,7 +29,6 @@ import { OimoPhysics } from '../threejs-library/OimoPhysics';
  * 	[gravity]="-9.8"
  * ></ngx3js-physics>
  * ```
- * @see {@link http://google.com}
  *
  * @see AmmoPhysics
  * @see OimoPhysics
@@ -108,10 +107,15 @@ export class PhysicsComponent
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
-		Ammo().then((AmmoLib: typeof Ammo) => {
-			this.ammo = AmmoLib;
-			this.getPhysics();
-		});
+		console.log(Ammo);
+		try {
+			Ammo.AmmoInit().then((ammoLib : any) => {
+				this.ammo = ammoLib;
+				this.getPhysics();
+			});
+		} catch(ex : any) {
+			console.log(ex);
+		}
 		super.ngOnInit('physics');
 	}
 
@@ -152,7 +156,7 @@ export class PhysicsComponent
 	/**
 	 * The Ammo of physics component
 	 */
-	private ammo: typeof Ammo = null;
+	private ammo: Ammo.AmmoType = null;
 
 	/**
 	 * The Physics of physics component

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { AbstractSubscribeComponent } from '../../subscribe.abstract';
-import Ammo from 'ammojs-typed';
 import { RendererTimer, ThreeUtil } from '../../interface';
+import { AbstractSubscribeComponent } from '../../subscribe.abstract';
+import * as Ammo from '../../threejs-library/ammo.wasm';
 
 @Component({
 	selector: 'ngx3js-physics-constraint',
@@ -149,14 +149,14 @@ export class PhysicsConstraintComponent
 	/**
 	 * The Ammo of physics constraint component
 	 */
-	private ammo: typeof Ammo = null;
+	private ammo: Ammo.AmmoType = null;
 
 	/**
 	 * Sets physics
 	 * @param physics
 	 * @param ammo
 	 */
-	public setPhysics(physics: Ammo.btSoftRigidDynamicsWorld, ammo: typeof Ammo) {
+	public setPhysics(physics: Ammo.btSoftRigidDynamicsWorld, ammo: Ammo.AmmoType) {
 		this.physics = physics;
 		this.ammo = ammo;
 		this.getConstraint();
@@ -269,8 +269,8 @@ export class PhysicsConstraintComponent
 			let constraint: Ammo.btTypedConstraint = null;
 			switch (this.type.toLowerCase()) {
 				case 'hinge':
-					const source1 = this.getRigidBody(this.source1, 'source1');
-					const source2 = this.getRigidBody(this.source2, 'source2');
+					const source1 : any= this.getRigidBody(this.source1, 'source1');
+					const source2 : any= this.getRigidBody(this.source2, 'source2');
 					if (ThreeUtil.isNotNull(source1) && ThreeUtil.isNotNull(source2)) {
 						const pivotA = this.getBtVector3(
 							this.pivot1x,
