@@ -2,19 +2,11 @@
 // @ts-nocheck
 import * as  _AMMO  from './ammo.wasm';
 
-let loadedAmmo : any = null;
-
 export function AmmoInit<T>(target?: T): Promise<T & AmmoType> {
-    if (loadedAmmo === null) {
-        return _AMMO.default(target).then(ammo => {
-            loadedAmmo = ammo;
-            return ammo;
-        });
-    } else {
-        return new Promise((resolve) => {
-            resolve(loadedAmmo);
-        })
-    }
+    return _AMMO.default(target).then(ammo => {
+        loadedAmmo = ammo;
+        return ammo;
+    });
 }
 
 export interface btIDebugDraw {
