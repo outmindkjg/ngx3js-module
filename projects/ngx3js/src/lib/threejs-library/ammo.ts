@@ -3,10 +3,7 @@
 import * as  _AMMO  from './ammo.wasm';
 
 export function AmmoInit<T>(target?: T): Promise<T & AmmoType> {
-    return _AMMO.default(target).then(ammo => {
-        loadedAmmo = ammo;
-        return ammo;
-    });
+    return _AMMO.default(target);
 }
 
 export interface btIDebugDraw {
