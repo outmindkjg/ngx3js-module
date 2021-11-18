@@ -1,6 +1,6 @@
 {
 	"name": "ngx3js",
-	"version": "0.134.0-2021111722",
+	"version": "0.134.0-2021111822",
 	"keywords": [
 		"three",
 		"three.js",
@@ -35,7 +35,6 @@
 	},
 	"homepage": "https://outmindkjg.github.io/ngx3js-doc/",
 	"dependencies": {
-		"ammojs-typed": "^1.0.6",
 		"gsap": "^3.8.0",
 		"three": "0.134.0",
 		"chroma-js": "^2.1.2",

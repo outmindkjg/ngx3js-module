@@ -6,7 +6,7 @@ import {
 	Input,
 	OnInit
 } from '@angular/core';
-import Ammo from 'ammojs-typed';
+import * as Ammo from './threejs-library/ammo';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
 import * as THREE from 'three';

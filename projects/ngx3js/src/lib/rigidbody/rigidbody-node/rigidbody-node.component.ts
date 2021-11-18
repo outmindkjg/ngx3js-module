@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractSubscribeComponent } from '../../subscribe.abstract';
-import Ammo from 'ammojs-typed';
+import * as Ammo from '../../threejs-library/ammo';
 import { ThreeUtil } from '../../interface';
 
 /**

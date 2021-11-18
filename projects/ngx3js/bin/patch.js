@@ -65,7 +65,6 @@ rl.question(question, function (agree) {
 				packageJson['dependencies'] = {};
 			}
 			const dependencies = packageJson['dependencies'];
-			dependencies['ammojs-typed'] = '^1.0.6';
 			dependencies['chroma-js'] = '^2.1.2';
 			dependencies['fs'] = '0.0.1-security';
 			dependencies['fs-web'] = '^1.0.1';
@@ -100,14 +99,6 @@ rl.question(question, function (agree) {
 				projects['architect']['build']['options'] = {};
 			}
 			const architectBuildOptions = projects['architect']['build']['options'];
-			if (architectBuildOptions['allowedCommonJsDependencies'] === undefined) {
-				architectBuildOptions['allowedCommonJsDependencies'] = [];
-			}
-			const allowedCommonJsDependencies =
-				architectBuildOptions['allowedCommonJsDependencies'];
-			if (allowedCommonJsDependencies.indexOf('ammojs-typed') === -1) {
-				allowedCommonJsDependencies.push('ammojs-typed');
-			}
 			if (architectBuildOptions['assets'] === undefined) {
 				architectBuildOptions['assets'] = [];
 			}
