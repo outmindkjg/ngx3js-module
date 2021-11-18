@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { RendererTimer, ThreeUtil } from '../../interface';
 import { AbstractSubscribeComponent } from '../../subscribe.abstract';
-import * as Ammo from '../../threejs-library/ammo.wasm';
+import * as Ammo from '../../threejs-library/ammo';
 
 @Component({
 	selector: 'ngx3js-physics-constraint',

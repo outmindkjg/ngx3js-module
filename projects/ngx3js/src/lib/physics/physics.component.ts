@@ -6,7 +6,7 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as Ammo from '../threejs-library/ammo.wasm';
+import * as Ammo from '../threejs-library/ammo';
 import * as THREE from 'three';
 import { ConvexObjectBreaker } from 'three/examples/jsm/misc/ConvexObjectBreaker';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
@@ -107,9 +107,10 @@ export class PhysicsComponent
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngOnInit(): void {
-		console.log(Ammo);
 		try {
-			Ammo.AmmoInit().then((ammoLib : any) => {
+			Ammo.AmmoInit({ Ammo : null, locateFile : (ammoFile : string) => {
+				return ThreeUtil.getStoreUrl(ammoFile);
+			}}).then((ammoLib : any) => {
 				this.ammo = ammoLib;
 				this.getPhysics();
 			});

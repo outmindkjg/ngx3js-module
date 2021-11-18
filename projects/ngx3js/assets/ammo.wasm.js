@@ -1,6 +1,5 @@
 
 // This is ammo.js, a port of Bullet Physics to JavaScript. zlib licensed.
-// @ts-nocheck
 
 var Ammo = (function() {
   var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
@@ -807,8 +806,9 @@ function Z(a,c,d,e,g){a&&"object"===typeof a&&(a=a.hy);c&&"object"===typeof c&&(
 Z.prototype.set_m_hitCollisionObject=Z.prototype.PC=function(a){var c=this.hy;a&&"object"===typeof a&&(a=a.hy);gA(c,a)};Object.defineProperty(Z.prototype,"m_hitCollisionObject",{get:Z.prototype.iA,set:Z.prototype.PC});Z.prototype.get_m_localShapeInfo=Z.prototype.CA=function(){return k(hA(this.hy),tB)};Z.prototype.set_m_localShapeInfo=Z.prototype.iD=function(a){var c=this.hy;a&&"object"===typeof a&&(a=a.hy);iA(c,a)};Object.defineProperty(Z.prototype,"m_localShapeInfo",{get:Z.prototype.CA,set:Z.prototype.iD});
 Z.prototype.get_m_hitNormalLocal=Z.prototype.mA=function(){return k(jA(this.hy),p)};Z.prototype.set_m_hitNormalLocal=Z.prototype.TC=function(a){var c=this.hy;a&&"object"===typeof a&&(a=a.hy);kA(c,a)};Object.defineProperty(Z.prototype,"m_hitNormalLocal",{get:Z.prototype.mA,set:Z.prototype.TC});Z.prototype.get_m_hitPointLocal=Z.prototype.oA=function(){return k(lA(this.hy),p)};Z.prototype.set_m_hitPointLocal=Z.prototype.VC=function(a){var c=this.hy;a&&"object"===typeof a&&(a=a.hy);mA(c,a)};
 Object.defineProperty(Z.prototype,"m_hitPointLocal",{get:Z.prototype.oA,set:Z.prototype.VC});Z.prototype.get_m_hitFraction=Z.prototype.jA=function(){return nA(this.hy)};Z.prototype.set_m_hitFraction=Z.prototype.QC=function(a){var c=this.hy;a&&"object"===typeof a&&(a=a.hy);oA(c,a)};Object.defineProperty(Z.prototype,"m_hitFraction",{get:Z.prototype.jA,set:Z.prototype.QC});Z.prototype.__destroy__=function(){pA(this.hy)};
-(function(){function a(){b.BT_CONSTRAINT_ERP=qA();b.BT_CONSTRAINT_STOP_ERP=rA();b.BT_CONSTRAINT_CFM=sA();b.BT_CONSTRAINT_STOP_CFM=tA();b.PHY_FLOAT=uA();b.PHY_DOUBLE=vA();b.PHY_INTEGER=wA();b.PHY_SHORT=xA();b.PHY_FIXEDPOINT88=yA();b.PHY_UCHAR=zA()}Ka?a():Ia.unshift(a)})();
-  Ammo.Ammo=b;
+(function(){function a(){b.BT_CONSTRAINT_ERP=qA();b.BT_CONSTRAINT_STOP_ERP=rA();b.BT_CONSTRAINT_CFM=sA();b.BT_CONSTRAINT_STOP_CFM=tA();b.PHY_FLOAT=uA();b.PHY_DOUBLE=vA();b.PHY_INTEGER=wA();b.PHY_SHORT=xA();b.PHY_FIXEDPOINT88=yA();b.PHY_UCHAR=zA()}Ka?a():Ia.unshift(a)})();this.Ammo=b;
+
+
   return Ammo.ready
 }
 );

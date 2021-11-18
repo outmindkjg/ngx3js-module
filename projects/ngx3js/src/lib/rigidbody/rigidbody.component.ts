@@ -9,7 +9,7 @@ import {
 import * as THREE from 'three';
 import { NgxGeometryUtils } from '../geometry/geometryUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as Ammo from '../threejs-library/ammo.wasm';
+import * as Ammo from '../threejs-library/ammo';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
 import { RigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
