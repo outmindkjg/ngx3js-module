@@ -86,7 +86,7 @@ export class AppComponent {
 ```
 
 
-### Chane angular.json for  basic assets ####
+### Change angular.json for  basic assets ####
 
 if you need lottie_canvas add "node_modules/ngx3js/assets/js/libs/lottie_canvas.js" to scripts like below.
 the assets url can be changed by your site. 
@@ -117,7 +117,7 @@ the assets url can be changed by your site.
 }
 ```
 
-### Chane tsconfig.json for fs ####
+### Change tsconfig.json for fs ####
 
 // tsconfig.json
 ```json
