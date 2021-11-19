@@ -17,11 +17,24 @@ export abstract class AbstractObject3dDirective {
 	 *
 	 * @constructor
 	 */
-	constructor(protected object3d: AbstractObject3dComponent) {
+	constructor(protected object3dCom: AbstractObject3dComponent) {
 
 	}
 
+	/**
+	 * Cachec object3d of abstract object3d directive
+	 */
+	private _cachecObject3d : THREE.Object3D = null;
 
+	/**
+	 * Gets object3d
+	 */
+	protected get object3d():THREE.Object3D {
+		if (this._cachecObject3d === null) {
+			this._cachecObject3d = this.object3dCom.getObject3d();
+		}
+		return this._cachecObject3d;
+	}
 
 	/**
 	 * A callback method that is invoked immediately after the
@@ -40,6 +53,10 @@ export abstract class AbstractObject3dDirective {
 	ngOnDestroy(): void {
 	}
 
-	update(timer : RendererTimer) {}
+	protected elapsedTime : number = 0;
+
+	public update(timer : RendererTimer) {
+		this.elapsedTime += timer.delta;
+	}
 }
 
