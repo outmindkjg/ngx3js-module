@@ -6,7 +6,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
-import { ThreeColor, ThreeUtil } from './interface';
+import { ThreeColor, ThreeUtil } from '../interface';
 
 /**
  * Drawing Canvas Directive
