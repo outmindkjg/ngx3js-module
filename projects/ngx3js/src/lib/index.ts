@@ -27,6 +27,7 @@ export * from './controller/controller-item/controller-item.component';
 export * from './controller/controller.component';
 export * from './curve/curve.component';
 export * from './curve/curveUtils';
+export * from './directive.abstract';
 export * from './directives/index';
 export * from './fog/fog.component';
 export * from './geometry.abstract';

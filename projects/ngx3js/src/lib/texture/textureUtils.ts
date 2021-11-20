@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
 import { ThreeUtil } from '../interface';
 
+/**
+ * CanvasFunctionType
+ */
 export type CanvasFunctionType = (
 	ctx?: CanvasRenderingContext2D,
 	text?: string,
@@ -10,7 +13,10 @@ export type CanvasFunctionType = (
 	options?: any
 ) => void;
 
-export type DataFunctionType = (
+/**
+ * DataFunctionType
+ */
+ export type DataFunctionType = (
 	options?: any
 ) => THREE.DataTexture | THREE.DataTexture3D;
 

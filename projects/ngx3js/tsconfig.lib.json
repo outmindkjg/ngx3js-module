@@ -42,6 +42,7 @@
 	"typedocOptions" : {
 		"entryPoints": ["src/public-api.ts"],
 		"includes" : "src/",
+    "exclude" : "src/lib/threejs-library/**.ts",
     "json" : "../../docs_api.json",
     "pretty" : true,
     "readme" : "README.md",

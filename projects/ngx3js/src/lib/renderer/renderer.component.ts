@@ -24,7 +24,7 @@ import { CanvasComponent } from '../canvas/canvas.component';
 import { ComposerComponent } from '../composer/composer.component';
 import { ControlComponent, ControlOptions } from '../control/control.component';
 import { AbstractControllerComponent } from '../controller.component.abstract';
-import { AbstractObject3dDirective } from '../directive.abstract';
+import { AbstractThreeDirective } from '../directive.abstract';
 import {
 	GuiControlParam,
 	RendererEvent,
@@ -467,8 +467,8 @@ export class RendererComponent
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(AbstractObject3dDirective, { descendants: true })
-	private object3dDirectiveList: QueryList<AbstractObject3dDirective>;
+	@ContentChildren(AbstractThreeDirective, { descendants: true })
+	private threeDirectiveList: QueryList<AbstractThreeDirective>;
 
 	/**
 	 * View child of renderer component
@@ -2093,7 +2093,7 @@ export class RendererComponent
 		this.controllerList.forEach((controller) => {
 			controller.update(renderTimer);
 		});
-		this.object3dDirectiveList.forEach((object3d) => {
+		this.threeDirectiveList.forEach((object3d) => {
 			object3d.update(renderTimer);
 		});
 		this.sceneList.forEach((scene) => {

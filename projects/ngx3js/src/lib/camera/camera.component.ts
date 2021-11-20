@@ -6,13 +6,14 @@ import {
 	OnInit,
 	Output,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { AbstractObject3dComponent } from '../object3d.abstract';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { RendererTimer, ThreeColor, ThreeUtil } from './../interface';
 import { LocalStorageService } from './../local-storage.service';
 
@@ -64,6 +65,10 @@ import { LocalStorageService } from './../local-storage.service';
 			provide: AbstractObject3dComponent,
 			useExisting: forwardRef(() => CameraComponent),
 		},
+		{
+			provide: AbstractSubscribeComponent,
+			useExisting: forwardRef(() => CameraComponent),
+		}
 	],
 })
 export class CameraComponent

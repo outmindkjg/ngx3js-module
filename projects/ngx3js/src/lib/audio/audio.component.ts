@@ -3,11 +3,12 @@ import {
 	forwardRef,
 	Input,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * AudioComponent
@@ -57,6 +58,10 @@ import { AbstractObject3dComponent } from '../object3d.abstract';
 			provide: AbstractObject3dComponent,
 			useExisting: forwardRef(() => AudioComponent),
 		},
+		{
+			provide: AbstractSubscribeComponent,
+			useExisting: forwardRef(() => AudioComponent),
+		}
 	],
 })
 export class AudioComponent

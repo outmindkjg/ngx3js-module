@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import * as THREE from 'three';
 import { Lut } from 'three/examples/jsm/math/Lut';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractTextureComponent } from '../texture.abstract';
@@ -100,6 +101,10 @@ import { CanvasFunctionType } from './textureUtils';
 			provide: AbstractTextureComponent,
 			useExisting: forwardRef(() => TextureComponent),
 		},
+		{
+			provide: AbstractSubscribeComponent,
+			useExisting: forwardRef(() => TextureComponent),
+		}	
 	],
 })
 export class TextureComponent

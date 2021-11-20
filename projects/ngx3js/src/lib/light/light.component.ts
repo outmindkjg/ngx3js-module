@@ -3,14 +3,15 @@ import {
 	forwardRef,
 	Input,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator';
 import {
 	AbstractObject3dComponent,
-	Object3dOptions,
+	Object3dOptions
 } from '../object3d.abstract';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { TagAttributes, ThreeColor, ThreeUtil } from './../interface';
 
@@ -260,6 +261,10 @@ export interface LightOptions extends Object3dOptions {
 	providers: [
 		{
 			provide: AbstractObject3dComponent,
+			useExisting: forwardRef(() => LightComponent),
+		},
+		{
+			provide: AbstractSubscribeComponent,
 			useExisting: forwardRef(() => LightComponent),
 		},
 	],

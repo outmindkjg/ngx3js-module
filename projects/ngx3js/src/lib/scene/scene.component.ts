@@ -1,3 +1,4 @@
+import { forwardRef } from '@angular/core';
 import {
 	Component,
 	ContentChildren,
@@ -7,6 +8,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractControllerComponent } from '../controller.component.abstract';
 import { FogComponent } from '../fog/fog.component';
 import { ThreeColor, ThreeTexture, ThreeUtil } from '../interface';
@@ -28,6 +30,16 @@ import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
 	selector: 'ngx3js-scene',
 	templateUrl: './scene.component.html',
 	styleUrls: ['./scene.component.scss'],
+	providers: [
+		{
+			provide: AbstractObject3dComponent,
+			useExisting: forwardRef(() => SceneComponent),
+		},
+		{
+			provide: AbstractSubscribeComponent,
+			useExisting: forwardRef(() => SceneComponent),
+		}	
+	]
 })
 export class SceneComponent
 	extends AbstractObject3dComponent

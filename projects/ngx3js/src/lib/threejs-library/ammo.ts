@@ -1063,7 +1063,6 @@ export interface btSoftBodyHelpers {
     CreateFromConvexHull(worldInfo: btSoftBodyWorldInfo, vertices: btVector3, nvertices: number, randomizeConstraints: boolean): btSoftBody;
 }
 
-
 export interface AmmoType {
     destroy(obj: any): void;
     _malloc(size: number): number;

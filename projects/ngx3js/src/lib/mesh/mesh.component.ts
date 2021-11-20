@@ -35,7 +35,6 @@ import {
 } from 'three/examples/jsm/objects/LightningStorm';
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
 import { Reflector } from 'three/examples/jsm/objects/Reflector';
-import { ReflectorForSSRPass } from './../threejs-library/ReflectorForSSRPass';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
 import { Refractor } from 'three/examples/jsm/objects/Refractor';
 import { Sky } from 'three/examples/jsm/objects/Sky';
@@ -49,7 +48,6 @@ import {
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-import { SceneUtils } from '../threejs-library/SceneUtils';
 import { createText } from 'three/examples/jsm/webxr/Text2D';
 import { CurveComponent } from '../curve/curve.component';
 import { HtmlComponent } from '../html/html.component';
@@ -58,10 +56,13 @@ import { LensflareelementComponent } from '../lensflareelement/lensflareelement.
 import { MaterialComponent } from '../material/material.component';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { SizeComponent } from '../size/size.component';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
+import { SceneUtils } from '../threejs-library/SceneUtils';
 import { HelperComponent, HelperOptions } from './../helper/helper.component';
 import { LightComponent, LightOptions } from './../light/light.component';
 import { LocalStorageService } from './../local-storage.service';
+import { ReflectorForSSRPass } from './../threejs-library/ReflectorForSSRPass';
 
 /**
  * Volume Options
@@ -183,6 +184,10 @@ export interface VolumeOptions {
 			provide: AbstractObject3dComponent,
 			useExisting: forwardRef(() => MeshComponent),
 		},
+		{
+			provide: AbstractSubscribeComponent,
+			useExisting: forwardRef(() => MeshComponent),
+		}
 	],
 })
 export class MeshComponent extends AbstractObject3dComponent implements OnInit {

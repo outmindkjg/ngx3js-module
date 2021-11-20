@@ -111,7 +111,10 @@ import { UnrealBloomSelective } from './shader.unreal_bloom_selective';
 import { VideoKinect } from './shader.video_kinect';
 import { WireFrame } from './shader.wireframe';
 
-export interface ShaderType {
+/**
+ * ShaderType
+ */
+ export interface ShaderType {
 	defines?: {
 		[key: string]: any;
 	};

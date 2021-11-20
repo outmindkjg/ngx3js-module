@@ -48,6 +48,7 @@ import {
 	TextGeometry,
 	TextGeometryParameters,
 } from 'three//examples/jsm/geometries/TextGeometry';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * GeometryComponent
@@ -216,6 +217,10 @@ import {
 			provide: AbstractGeometryComponent,
 			useExisting: forwardRef(() => GeometryComponent),
 		},
+		{
+			provide: AbstractSubscribeComponent,
+			useExisting: forwardRef(() => GeometryComponent),
+		}		
 	],
 })
 export class GeometryComponent

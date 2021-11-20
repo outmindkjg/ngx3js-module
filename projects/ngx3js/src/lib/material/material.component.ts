@@ -7,12 +7,10 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
-import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
-
 import * as NODES from 'three/examples/jsm/nodes/Nodes';
 import { ReflectorOptions } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
@@ -21,13 +19,16 @@ import {
 	ThreeColor,
 	ThreeTexture,
 	ThreeUniforms,
-	ThreeUtil,
+	ThreeUtil
 } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractMaterialComponent } from '../material.abstract';
 import { ShaderComponent } from '../shader/shader.component';
 import { ShaderType, ShaderUtils } from '../shader/shaders/shaderUtils';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
+import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
+
 
 /**
  * MaterialComponent
@@ -168,6 +169,10 @@ import { AbstractTextureComponent } from '../texture.abstract';
 	providers: [
 		{
 			provide: AbstractMaterialComponent,
+			useExisting: forwardRef(() => MaterialComponent),
+		},
+		{
+			provide: AbstractSubscribeComponent,
 			useExisting: forwardRef(() => MaterialComponent),
 		},
 	],

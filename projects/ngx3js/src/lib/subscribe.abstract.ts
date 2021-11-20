@@ -56,12 +56,12 @@ export class AbstractSubscribeComponent
 	/**
 	 * Will be called when load completes. The argument will be the loaded self
 	 */
-	@Output() private onLoad: EventEmitter<this> = new EventEmitter<this>();
+	@Output() public onLoad: EventEmitter<this> = new EventEmitter<this>();
 
 	/**
 	 * Will be called when before destory. The argument will be the loaded self
 	 */
-	@Output() private onDestory: EventEmitter<this> = new EventEmitter<this>();
+	@Output() public onDestory: EventEmitter<this> = new EventEmitter<this>();
 
 	/**
 	 * Object attr of abstract subscribe component

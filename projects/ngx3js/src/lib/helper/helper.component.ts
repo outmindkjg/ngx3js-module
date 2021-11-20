@@ -14,6 +14,7 @@ import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHel
 import { VertexNormalsHelper } from 'three/examples/jsm/helpers/VertexNormalsHelper';
 import { VertexTangentsHelper } from 'three/examples/jsm/helpers/VertexTangentsHelper';
 import { Gyroscope } from 'three/examples/jsm/misc/Gyroscope';
+import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { ThreeColor, ThreeUtil } from './../interface';
 
@@ -264,6 +265,10 @@ export interface HelperOptions {
 			provide: AbstractObject3dComponent,
 			useExisting: forwardRef(() => HelperComponent),
 		},
+		{
+			provide: AbstractSubscribeComponent,
+			useExisting: forwardRef(() => HelperComponent),
+		}	
 	],
 })
 export class HelperComponent
