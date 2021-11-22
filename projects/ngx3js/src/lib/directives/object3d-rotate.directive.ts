@@ -9,6 +9,7 @@ import { RendererTimer, ThreeUtil } from '../interface';
 import {
 	AbstractObject3dDirective,
 	AbstractThreeDirective,
+	DirectiveOptions,
 } from '../directive.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { Object3dFunction } from '../directive.abstract';
@@ -16,20 +17,21 @@ import { Object3dFunction } from '../directive.abstract';
 /**
  * Rotate options
  */
-export interface RotateOptions {
-	/** type */
-	type?: 'x' | 'y' | 'z' | 'xy' | 'xz' | 'yz' | 'xyz' | 'none' | string;
-
-	/** speed */
-	speed?: number;
-}
+export interface RotateOptions extends DirectiveOptions {}
 
 /**
  * Rotate Directive
  *
  * @example
  * ```html
- *  <ngx3js-mesh [ngx3jsRotate]="{ type : 'xyz', speed : 0.1 }"></ngx3js-mesh>
+ * <ngx3js-mesh [ngx3jsRotate]="{
+ * 		type : 'xyz',
+ * 		speed : 0.1,
+ * 		easing : 'linearIn',
+ * 		repeat : 'yoyo',
+ * 		start : 0,
+ * 		end : 360
+ * }"></ngx3js-mesh>
  * ```
  *
  */
@@ -38,7 +40,7 @@ export interface RotateOptions {
 	providers: [
 		{
 			provide: AbstractThreeDirective,
-			multi : true,
+			multi: true,
 			useExisting: forwardRef(() => RotateDirective),
 		},
 	],
@@ -57,7 +59,7 @@ export class RotateDirective
 
 	/**
 	 * Creates an instance of rotate directive.
-	 * @param object3d 
+	 * @param object3d
 	 */
 	constructor(object3d: AbstractObject3dComponent) {
 		super(object3d);
@@ -74,6 +76,10 @@ export class RotateDirective
 		if (changes.ngx3jsRotate && ThreeUtil.isNotNull(this.ngx3jsRotate)) {
 			const options: RotateOptions = {
 				type: null,
+				easing: 'linearin',
+				repeat: 'yoyo',
+				start: 0,
+				end: 360,
 				speed: 0.1,
 			};
 			if (typeof this.ngx3jsRotate === 'string') {
@@ -90,12 +96,17 @@ export class RotateDirective
 					case 'yz':
 					case 'xyz':
 						options.type = this.ngx3jsRotate;
-						options.speed = 0.1;
 						break;
 					default:
-						const [type, speed] = (this.ngx3jsRotate + ':0.1:').split(':');
+						const [type, speed, easing, repeat, start, end] = (
+							this.ngx3jsRotate + ':0.1:linearin:yoyo:0:360'
+						).split(':');
 						options.type = type;
 						options.speed = parseFloat(speed) || 0.1;
+						options.easing = easing;
+						options.repeat = repeat;
+						options.start = parseFloat(start) || 0;
+						options.end = parseFloat(end) || 1;
 						break;
 				}
 			} else if (typeof this.ngx3jsRotate === 'function') {
@@ -107,9 +118,31 @@ export class RotateDirective
 				if (ThreeUtil.isNotNull(this.ngx3jsRotate.speed)) {
 					options.speed = this.ngx3jsRotate.speed;
 				}
+				if (ThreeUtil.isNotNull(this.ngx3jsRotate.easing)) {
+					options.easing = this.ngx3jsRotate.easing;
+				}
+				if (ThreeUtil.isNotNull(this.ngx3jsRotate.repeat)) {
+					options.repeat = this.ngx3jsRotate.repeat;
+				}
+				if (ThreeUtil.isNotNull(this.ngx3jsRotate.start)) {
+					options.start = this.ngx3jsRotate.start;
+				}
+				if (ThreeUtil.isNotNull(this.ngx3jsRotate.end)) {
+					options.end = this.ngx3jsRotate.end;
+				}
 			}
 			if (options.type !== null) {
-				const speed = options.speed || 0.1;
+				let start = ThreeUtil.getAngleSafe(options.start, 0);
+				let end = ThreeUtil.getAngleSafe(options.end, 360);
+
+				const easing = this.getEasing(
+					options.easing,
+					options.speed || 0.1,
+					options.repeat,
+					start,
+					end
+				);
+
 				switch (options.type) {
 					case 'none':
 					case 'stop':
@@ -122,58 +155,61 @@ export class RotateDirective
 					case 'x':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								object3d.rotation.x += timer.delta * speed;
+								const deltaValue = easing(timer.delta);
+								object3d.rotation.x = deltaValue;
 							}
 						);
 						break;
 					case 'y':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								object3d.rotation.y += timer.delta * speed;
+								const deltaValue = easing(timer.delta);
+								object3d.rotation.y = deltaValue;
 							}
 						);
 						break;
 					case 'z':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								object3d.rotation.z += timer.delta * speed;
+								const deltaValue = easing(timer.delta);
+								object3d.rotation.z = deltaValue;
 							}
 						);
 						break;
 					case 'xy':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaAngle = timer.delta * speed;
-								object3d.rotation.x += deltaAngle;
-								object3d.rotation.y += deltaAngle;
+								const deltaValue = easing(timer.delta);
+								object3d.rotation.x = deltaValue;
+								object3d.rotation.y = deltaValue;
 							}
 						);
 						break;
 					case 'xz':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaAngle = timer.delta * speed;
-								object3d.rotation.x += deltaAngle;
-								object3d.rotation.z += deltaAngle;
+								const deltaValue = easing(timer.delta);
+								object3d.rotation.x = deltaValue;
+								object3d.rotation.z = deltaValue;
 							}
 						);
 						break;
 					case 'yz':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaAngle = timer.delta * speed;
-								object3d.rotation.y += deltaAngle;
-								object3d.rotation.z += deltaAngle;
+								const deltaValue = easing(timer.delta);
+								object3d.rotation.y = deltaValue;
+								object3d.rotation.z = deltaValue;
 							}
 						);
 						break;
 					case 'xyz':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaAngle = timer.delta * speed;
-								object3d.rotation.x += deltaAngle;
-								object3d.rotation.y += deltaAngle;
-								object3d.rotation.z += deltaAngle;
+								const deltaValue = easing(timer.delta);
+								object3d.rotation.x = deltaValue;
+								object3d.rotation.y = deltaValue;
+								object3d.rotation.z = deltaValue;
 							}
 						);
 						break;

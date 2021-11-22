@@ -9,6 +9,7 @@ import { RendererTimer, ThreeUtil } from '../interface';
 import {
 	AbstractObject3dDirective,
 	AbstractThreeDirective,
+	DirectiveOptions,
 } from '../directive.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { Object3dFunction } from '../directive.abstract';
@@ -16,29 +17,20 @@ import { Object3dFunction } from '../directive.abstract';
 /**
  * Scale options
  */
-export interface ScaleOptions {
-	/** type */
-	type?: 'x' | 'y' | 'z' | 'xy' | 'xz' | 'yz' | 'xyz' | 'none' | string;
-
-	/** yoyo */
-	yoyo?: boolean;
-
-	/** min */
-	min?: number;
-
-	/** max */
-	max?: number;
-
-	/** speed */
-	speed?: number;
-}
-
+export interface ScaleOptions extends DirectiveOptions {}
 /**
  * Scale Directive
  *
  * @example
  * ```html
- *  <ngx3js-mesh [ngx3jsScale]="{ type : 'xyz', speed : 0.1,  yoyo : true, min : 0, max : 1 }"></ngx3js-mesh>
+ * <ngx3js-mesh [ngx3jsScale]="{
+ * 		type : 'xyz',
+ * 		speed : 0.1,
+ * 		easing : 'linearIn',
+ * 		repeat : 'yoyo',
+ * 		start : 0,
+ * 		end : 1
+ * }"></ngx3js-mesh>
  * ```
  *
  */
@@ -47,7 +39,7 @@ export interface ScaleOptions {
 	providers: [
 		{
 			provide: AbstractThreeDirective,
-			multi : true,
+			multi: true,
 			useExisting: forwardRef(() => ScaleDirective),
 		},
 	],
@@ -56,7 +48,6 @@ export class ScaleDirective
 	extends AbstractObject3dDirective
 	implements OnChanges
 {
-
 	/**
 	 * Input  of scale directive
 	 */
@@ -67,7 +58,7 @@ export class ScaleDirective
 
 	/**
 	 * Creates an instance of scale directive.
-	 * @param object3d 
+	 * @param object3d
 	 */
 	constructor(object3d: AbstractObject3dComponent) {
 		super(object3d);
@@ -84,9 +75,10 @@ export class ScaleDirective
 		if (changes.ngx3jsScale && ThreeUtil.isNotNull(this.ngx3jsScale)) {
 			const options: ScaleOptions = {
 				type: null,
-				yoyo: true,
-				min: 0,
-				max: 1,
+				easing: 'linearin',
+				repeat: 'yoyo',
+				start: 0,
+				end: 1,
 				speed: 0.1,
 			};
 			if (typeof this.ngx3jsScale === 'string') {
@@ -105,14 +97,15 @@ export class ScaleDirective
 						options.type = this.ngx3jsScale;
 						break;
 					default:
-						const [type, speed, yoyo, min, max] = (
-							this.ngx3jsScale + ':0.1:true:0:1'
+						const [type, speed, easing, repeat, start, end] = (
+							this.ngx3jsScale + ':0.1:linearin:yoyo:0:1'
 						).split(':');
 						options.type = type;
-						options.yoyo = yoyo === 'true' || yoyo === 'yes' ? true : false;
 						options.speed = parseFloat(speed) || 0.1;
-						options.min = parseFloat(min) || 0;
-						options.max = parseFloat(max) || 1;
+						options.easing = easing;
+						options.repeat = repeat;
+						options.start = parseFloat(start) || 0;
+						options.end = parseFloat(end) || 1;
 						break;
 				}
 			} else if (typeof this.ngx3jsScale === 'function') {
@@ -124,22 +117,27 @@ export class ScaleDirective
 				if (ThreeUtil.isNotNull(this.ngx3jsScale.speed)) {
 					options.speed = this.ngx3jsScale.speed;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.yoyo)) {
-					options.yoyo = this.ngx3jsScale.yoyo;
+				if (ThreeUtil.isNotNull(this.ngx3jsScale.easing)) {
+					options.easing = this.ngx3jsScale.easing;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.min)) {
-					options.min = this.ngx3jsScale.min;
+				if (ThreeUtil.isNotNull(this.ngx3jsScale.repeat)) {
+					options.repeat = this.ngx3jsScale.repeat;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.max)) {
-					options.max = this.ngx3jsScale.max;
+				if (ThreeUtil.isNotNull(this.ngx3jsScale.start)) {
+					options.start = this.ngx3jsScale.start;
+				}
+				if (ThreeUtil.isNotNull(this.ngx3jsScale.end)) {
+					options.end = this.ngx3jsScale.end;
 				}
 			}
 			if (options.type !== null) {
-				const speed = options.speed || 0.1;
-				const yoyo = options.yoyo;
-				const min = options.min;
-				const max = options.max;
-				let direction: number = 1;
+				const easing = this.getEasing(
+					options.easing,
+					options.speed || 0.1,
+					options.repeat,
+					options.start,
+					options.end
+				);
 				switch (options.type) {
 					case 'none':
 					case 'stop':
@@ -152,158 +150,61 @@ export class ScaleDirective
 					case 'x':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaValue = timer.delta * speed * direction;
-								object3d.scale.x += deltaValue;
-								if (
-									yoyo &&
-									((direction > 0 && object3d.scale.x > max) ||
-										(direction < 0 && object3d.scale.x < min))
-								) {
-									direction *= -1;
-									object3d.scale.x = Math.min(
-										Math.max(object3d.scale.x, min),
-										max
-									);
-								}
+								const deltaValue = easing(timer.delta);
+								object3d.scale.x = deltaValue;
 							}
 						);
 						break;
 					case 'y':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaValue = timer.delta * speed * direction;
-								object3d.scale.y += deltaValue;
-								if (
-									yoyo &&
-									((direction > 0 && object3d.scale.y > max) ||
-										(direction < 0 && object3d.scale.y < min))
-								) {
-									direction *= -1;
-									object3d.scale.y = Math.min(
-										Math.max(object3d.scale.y, min),
-										max
-									);
-								}
+								const deltaValue = easing(timer.delta);
+								object3d.scale.y = deltaValue;
 							}
 						);
 						break;
 					case 'z':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaValue = timer.delta * speed * direction;
-								object3d.scale.z += deltaValue;
-								if (
-									yoyo &&
-									((direction > 0 && object3d.scale.z > max) ||
-										(direction < 0 && object3d.scale.z < min))
-								) {
-									direction *= -1;
-									object3d.scale.z = Math.min(
-										Math.max(object3d.scale.z, min),
-										max
-									);
-								}
+								const deltaValue = easing(timer.delta);
+								object3d.scale.z = deltaValue;
 							}
 						);
 						break;
 					case 'xy':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaValue = timer.delta * speed * direction;
-								object3d.scale.x += deltaValue;
-								object3d.scale.y += deltaValue;
-								if (
-									yoyo &&
-									((direction > 0 && object3d.scale.x > max) ||
-										(direction < 0 && object3d.scale.x < min))
-								) {
-									direction *= -1;
-									object3d.scale.x = Math.min(
-										Math.max(object3d.scale.x, min),
-										max
-									);
-									object3d.scale.y = Math.min(
-										Math.max(object3d.scale.y, min),
-										max
-									);
-								}
+								const deltaValue = easing(timer.delta);
+								object3d.scale.x = deltaValue;
+								object3d.scale.y = deltaValue;
 							}
 						);
 						break;
 					case 'xz':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaValue = timer.delta * speed * direction;
-								object3d.scale.x += deltaValue;
-								object3d.scale.z += deltaValue;
-								if (
-									yoyo &&
-									((direction > 0 && object3d.scale.x > max) ||
-										(direction < 0 && object3d.scale.x < min))
-								) {
-									direction *= -1;
-									object3d.scale.x = Math.min(
-										Math.max(object3d.scale.x, min),
-										max
-									);
-									object3d.scale.z = Math.min(
-										Math.max(object3d.scale.z, min),
-										max
-									);
-								}
+								const deltaValue = easing(timer.delta);
+								object3d.scale.x = deltaValue;
+								object3d.scale.z = deltaValue;
 							}
 						);
 						break;
 					case 'yz':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaValue = timer.delta * speed * direction;
-								object3d.scale.y += deltaValue;
-								object3d.scale.z += deltaValue;
-								if (
-									yoyo &&
-									((direction > 0 && object3d.scale.y > max) ||
-										(direction < 0 && object3d.scale.y < min))
-								) {
-									direction *= -1;
-									object3d.scale.y = Math.min(
-										Math.max(object3d.scale.y, min),
-										max
-									);
-									object3d.scale.z = Math.min(
-										Math.max(object3d.scale.z, min),
-										max
-									);
-								}
+								const deltaValue = easing(timer.delta);
+								object3d.scale.y = deltaValue;
+								object3d.scale.z = deltaValue;
 							}
 						);
 						break;
 					case 'xyz':
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
-								const deltaValue = timer.delta * speed * direction;
-								object3d.scale.x += deltaValue;
-								object3d.scale.y += deltaValue;
-								object3d.scale.z += deltaValue;
-								if (
-									yoyo &&
-									((direction > 0 && object3d.scale.x > max) ||
-										(direction < 0 && object3d.scale.x < min))
-								) {
-									direction *= -1;
-									object3d.scale.x = Math.min(
-										Math.max(object3d.scale.x, min),
-										max
-									);
-									object3d.scale.y = Math.min(
-										Math.max(object3d.scale.y, min),
-										max
-									);
-									object3d.scale.z = Math.min(
-										Math.max(object3d.scale.z, min),
-										max
-									);
-								}
+								const deltaValue = easing(timer.delta);
+								object3d.scale.x = deltaValue;
+								object3d.scale.y = deltaValue;
+								object3d.scale.z = deltaValue;
 							}
 						);
 						break;

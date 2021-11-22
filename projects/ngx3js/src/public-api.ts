@@ -29,6 +29,7 @@ export { CSS3DSprite } from 'three/examples/jsm/renderers/CSS3DRenderer';
 export * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 export { GeometryUtils } from './lib/threejs-library/GeometryUtils';
 export { UVsDebug } from 'three/examples/jsm/utils/UVsDebug';
+export * as GSAP from 'gsap';
 export * from './lib/index';
 export * from './lib/ngx3js.module';
 export { ReflectorForSSRPass } from './lib/threejs-library/ReflectorForSSRPass';

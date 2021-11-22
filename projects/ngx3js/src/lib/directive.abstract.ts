@@ -2,11 +2,16 @@ import { Directive, Inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RendererTimer, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
+import * as GSAP from 'gsap';
+
+interface EaseFunction {
+	(progress: number): number;
+}
 
 /**
  * ObjectFunction
  */
- export type ObjectFunction = (
+export type ObjectFunction = (
 	object: any,
 	elapsedTime?: number,
 	timer?: RendererTimer
@@ -22,6 +27,29 @@ export type Object3dFunction = (
 ) => void;
 
 /**
+ * Direc options
+ */
+export interface DirectiveOptions {
+	/** type */
+	type?: 'none' | string;
+
+	/** easing */
+	easing? : string;
+
+	/** repeat */
+	repeat?: string;
+
+	/** start */
+	start?: number;
+
+	/** end */
+	end?: number;
+
+	/** speed */
+	speed?: number;
+}
+
+/**
  * AbstractObject3dDirective Abstract
  *
  * @export
@@ -34,7 +62,7 @@ export abstract class AbstractThreeDirective {
 	 *
 	 * @constructor
 	 */
-	constructor(@Inject('')  protected objectCom : any) {}
+	constructor(@Inject('') protected objectCom: any) {}
 
 	/**
 	 * subscription
@@ -115,18 +143,18 @@ export abstract class AbstractThreeDirective {
 	/**
 	 * Cached object of abstract three directive
 	 */
-	 private _cachedObject: any = null;
+	private _cachedObject: any = null;
 
-	 /**
-	  * Gets object3d
-	  */
-	 protected get object(): THREE.Object3D {
-		 if (this._cachedObject === null ) {
-			 this._cachedObject = this.objectCom.getObject();
-		 }
-		 return this._cachedObject;
-	 }
-	 
+	/**
+	 * Gets object3d
+	 */
+	protected get object(): THREE.Object3D {
+		if (this._cachedObject === null) {
+			this._cachedObject = this.objectCom.getObject();
+		}
+		return this._cachedObject;
+	}
+
 	/**
 	 * Enabled  of abstract directive
 	 */
@@ -151,16 +179,221 @@ export abstract class AbstractThreeDirective {
 		this.enabled = false;
 	}
 
+	protected getEasing(type: string, speed : number, repeat : string = 'yoyo', start: number, end: number): EaseFunction {
+		let easing: EaseFunction = null;
+		switch (type.toLowerCase()) {
+			case 'linearinout':
+				easing = GSAP.Linear.easeInOut;
+				break;
+			case 'linearout':
+				easing = GSAP.Linear.easeOut;
+				break;
+			case 'linearnone':
+				easing = GSAP.Linear.easeNone;
+				break;
+			case 'quadin':
+				easing = GSAP.Quad.easeIn;
+				break;
+			case 'quadinout':
+				easing = GSAP.Quad.easeInOut;
+				break;
+			case 'quadout':
+				easing = GSAP.Quad.easeOut;
+				break;
+			case 'cubicin':
+				easing = GSAP.Cubic.easeIn;
+				break;
+			case 'cubicinout':
+				easing = GSAP.Cubic.easeInOut;
+				break;
+			case 'cubicout':
+				easing = GSAP.Cubic.easeOut;
+				break;
+			case 'quartin':
+				easing = GSAP.Quart.easeIn;
+				break;
+			case 'quartinout':
+				easing = GSAP.Quart.easeInOut;
+				break;
+			case 'quartout':
+				easing = GSAP.Quart.easeOut;
+				break;
+			case 'quintin':
+				easing = GSAP.Quint.easeIn;
+				break;
+			case 'quintinout':
+				easing = GSAP.Quint.easeInOut;
+				break;
+			case 'quintout':
+				easing = GSAP.Quint.easeOut;
+				break;
+			case 'strongin':
+				easing = GSAP.Strong.easeIn;
+				break;
+			case 'stronginout':
+				easing = GSAP.Strong.easeInOut;
+				break;
+			case 'strongout':
+				easing = GSAP.Strong.easeOut;
+				break;
+			case 'power1in':
+				easing = GSAP.Power1.easeIn;
+				break;
+			case 'power1inout':
+				easing = GSAP.Power1.easeInOut;
+				break;
+			case 'power1out':
+				easing = GSAP.Power1.easeOut;
+				break;
+			case 'power2in':
+				easing = GSAP.Power2.easeIn;
+				break;
+			case 'power2inout':
+				easing = GSAP.Power2.easeInOut;
+				break;
+			case 'power2out':
+				easing = GSAP.Power2.easeOut;
+				break;
+			case 'power3in':
+				easing = GSAP.Power3.easeIn;
+				break;
+			case 'power3inout':
+				easing = GSAP.Power3.easeInOut;
+				break;
+			case 'power3out':
+				easing = GSAP.Power3.easeOut;
+				break;
+			case 'power4in':
+				easing = GSAP.Power4.easeIn;
+				break;
+			case 'power4inout':
+				easing = GSAP.Power4.easeInOut;
+				break;
+			case 'power4out':
+				easing = GSAP.Power4.easeOut;
+				break;
+			case 'backin':
+				easing = GSAP.Back.easeIn;
+				break;
+			case 'backinout':
+				easing = GSAP.Back.easeInOut;
+				break;
+			case 'backout':
+				easing = GSAP.Back.easeOut;
+				break;
+			case 'elasticin':
+				easing = GSAP.Elastic.easeIn;
+				break;
+			case 'elasticinout':
+				easing = GSAP.Elastic.easeInOut;
+				break;
+			case 'elasticout':
+				easing = GSAP.Elastic.easeOut;
+				break;
+			case 'bouncein':
+				easing = GSAP.Bounce.easeIn;
+				break;
+			case 'bounceinout':
+				easing = GSAP.Bounce.easeInOut;
+				break;
+			case 'bounceout':
+				easing = GSAP.Bounce.easeOut;
+				break;
+			case 'circin':
+				easing = GSAP.Circ.easeIn;
+				break;
+			case 'circinout':
+				easing = GSAP.Circ.easeInOut;
+				break;
+			case 'circout':
+				easing = GSAP.Circ.easeOut;
+				break;
+			case 'expoin':
+				easing = GSAP.Expo.easeIn;
+				break;
+			case 'expoinout':
+				easing = GSAP.Expo.easeInOut;
+				break;
+			case 'expoout':
+				easing = GSAP.Expo.easeOut;
+				break;
+			case 'sinein':
+				easing = GSAP.Sine.easeIn;
+				break;
+			case 'sineinout':
+				easing = GSAP.Sine.easeInOut;
+				break;
+			case 'sineout':
+				easing = GSAP.Sine.easeOut;
+				break;
+			case 'power0none':
+				easing = GSAP.Power0.easeNone;
+				break;
+			case 'linearin':
+			default :
+				easing = GSAP.Linear.easeIn;
+				break;
+		}
+		let elapsedTime : number = 0;
+		const gap = end - start;
+		switch(repeat.toLowerCase()) {
+			case 'yoyo' :
+				return (delta : number):number => {
+					elapsedTime += delta * speed;
+					const progress = elapsedTime % 2;
+					if (progress > 1) {
+						return easing(2 - progress) * gap + start;
+					} else {
+						return easing(progress) * gap + start;
+					}
+				}
+			case 'repeat' :
+				return (delta : number):number => {
+					elapsedTime += delta * speed;
+					const progress = elapsedTime % 1;
+					return easing(progress) * gap + start;
+				}
+			default :
+				return (delta : number):number => {
+					elapsedTime += delta * speed;
+					const progress = Math.min(1, elapsedTime);
+					return easing(progress) * gap + start;
+				}
+		}
+	}
+
+	/**
+	 * Log time seqn of abstract subscribe component
+	 */
+	 private _logTimeSeqn: number = 0;
+
+	 /**
+	  * Consoles log time
+	  * @param key
+	  * @param object
+	  * @param [repeat]
+	  */
+	 protected consoleLogTime(
+		 key: string,
+		 object: any,
+		 repeat: number = 300
+	 ): void {
+		 this._logTimeSeqn++;
+		 if (this._logTimeSeqn % repeat === 0) {
+			 console.log(key, object);
+		 }
+	 }
+ 
 	/**
 	 * Object3d function of abstract object3d directive
 	 */
-	 protected objectFunction: ObjectFunction = null;
+	protected objectFunction: ObjectFunction = null;
 
-	 setObjectFunction(func: ObjectFunction) {
-		 this.objectFunction = func;
-		 this.enabled = this.objectFunction !== null;
-	 }
- 
+	setObjectFunction(func: ObjectFunction) {
+		this.objectFunction = func;
+		this.enabled = this.objectFunction !== null;
+	}
+
 	/**
 	 * Updates abstract directive
 	 * @param timer

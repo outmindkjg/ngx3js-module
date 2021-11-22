@@ -3,10 +3,12 @@ import {
 	forwardRef,
 	Input,
 	OnChanges,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import {
-	AbstractThreeDirective, ObjectFunction
+	AbstractThreeDirective,
+	ObjectFunction,
+	DirectiveOptions,
 } from '../directive.abstract';
 import { RendererTimer, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
@@ -14,29 +16,21 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * Number options
  */
-export interface NumberOptions {
-	/** type */
-	type?: 'none' | string;
-
-	/** yoyo */
-	yoyo?: boolean;
-
-	/** min */
-	min?: number;
-
-	/** max */
-	max?: number;
-
-	/** speed */
-	speed?: number;
-}
+export interface NumberOptions extends DirectiveOptions {}
 
 /**
  * Number Directive
  *
  * @example
  * ```html
- *  <ngx3js-mesh [ngx3jsNumber]="{ type : 'xyz', speed : 0.1,  yoyo : true, min : 0, max : 1 }"></ngx3js-mesh>
+ * <ngx3js-light [ngx3jsNumber]="{
+ * 		type : 'intensity',
+ * 		speed : 0.1,
+ * 		easing : 'linearIn',
+ * 		repeat : 'yoyo',
+ * 		start : 0,
+ * 		end : 1
+ * }"></ngx3js-light>
  * ```
  *
  */
@@ -64,8 +58,8 @@ export class NumberDirective
 
 	/**
 	 * Creates an instance of number directive.
-	 * 
-	 * @param object3d 
+	 *
+	 * @param object3d
 	 */
 	constructor(object: AbstractSubscribeComponent) {
 		super(object);
@@ -82,9 +76,10 @@ export class NumberDirective
 		if (changes.ngx3jsNumber && ThreeUtil.isNotNull(this.ngx3jsNumber)) {
 			const options: NumberOptions = {
 				type: null,
-				yoyo: true,
-				min: 0,
-				max: 1,
+				easing: 'linearin',
+				repeat: 'yoyo',
+				start: 0,
+				end: 1,
 				speed: 0.1,
 			};
 			if (typeof this.ngx3jsNumber === 'string') {
@@ -96,14 +91,15 @@ export class NumberDirective
 						options.type = this.ngx3jsNumber;
 						break;
 					default:
-						const [type, speed, yoyo, min, max] = (
-							this.ngx3jsNumber + ':0.1:true:0:1'
+						const [type, speed, easing, repeat, start, end] = (
+							this.ngx3jsNumber + ':0.1:linearin:yoyo:0:1'
 						).split(':');
 						options.type = type;
-						options.yoyo = yoyo === 'true' || yoyo === 'yes' ? true : false;
 						options.speed = parseFloat(speed) || 0.1;
-						options.min = parseFloat(min) || 0;
-						options.max = parseFloat(max) || 1;
+						options.easing = easing;
+						options.repeat = repeat;
+						options.start = parseFloat(start) || 0;
+						options.end = parseFloat(end) || 1;
 						break;
 				}
 			} else if (typeof this.ngx3jsNumber === 'function') {
@@ -115,22 +111,20 @@ export class NumberDirective
 				if (ThreeUtil.isNotNull(this.ngx3jsNumber.speed)) {
 					options.speed = this.ngx3jsNumber.speed;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.yoyo)) {
-					options.yoyo = this.ngx3jsNumber.yoyo;
+				if (ThreeUtil.isNotNull(this.ngx3jsNumber.easing)) {
+					options.easing = this.ngx3jsNumber.easing;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.min)) {
-					options.min = this.ngx3jsNumber.min;
+				if (ThreeUtil.isNotNull(this.ngx3jsNumber.repeat)) {
+					options.repeat = this.ngx3jsNumber.repeat;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.max)) {
-					options.max = this.ngx3jsNumber.max;
+				if (ThreeUtil.isNotNull(this.ngx3jsNumber.start)) {
+					options.start = this.ngx3jsNumber.start;
+				}
+				if (ThreeUtil.isNotNull(this.ngx3jsNumber.end)) {
+					options.end = this.ngx3jsNumber.end;
 				}
 			}
 			if (options.type !== null) {
-				const speed = options.speed || 0.1;
-				const yoyo = options.yoyo;
-				const min = options.min;
-				const max = options.max;
-				let direction: number = 1;
 				switch (options.type) {
 					case 'none':
 					case 'stop':
@@ -142,25 +136,21 @@ export class NumberDirective
 						break;
 					default:
 						const property = options.type;
+						const easing = this.getEasing(
+							options.easing,
+							options.speed || 0.1,
+							options.repeat,
+							options.start,
+							options.end
+						);
 						this.setObjectFunction(
 							(object: any, _: number, timer: RendererTimer) => {
 								if (
 									object[property] !== undefined &&
 									typeof object[property] === 'number'
 								) {
-									const deltaValue = timer.delta * speed * direction;
+									const deltaValue = easing(timer.delta);
 									object[property] += deltaValue;
-									if (
-										yoyo &&
-										((direction > 0 && object[property] > max) ||
-											(direction < 0 && object[property] < min))
-									) {
-										direction *= -1;
-										object[property] = Math.min(
-											Math.max(object[property], min),
-											max
-										);
-									}
 								}
 							}
 						);
