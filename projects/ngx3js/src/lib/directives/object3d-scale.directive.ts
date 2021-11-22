@@ -258,7 +258,7 @@ export class ScaleDirective
 						this.setObject3dFunction(
 							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
 								const deltaValue = timer.delta * speed * direction;
-								object3d.scale.x += deltaValue;
+								object3d.scale.y += deltaValue;
 								object3d.scale.z += deltaValue;
 								if (
 									yoyo &&

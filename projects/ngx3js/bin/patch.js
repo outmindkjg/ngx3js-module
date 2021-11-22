@@ -120,7 +120,21 @@ rl.question(question, function (agree) {
 					output: '/assets/examples/',
 				});
 			}
-
+			if (architectBuildOptions['allowedCommonJsDependencies'] === undefined) {
+				architectBuildOptions['allowedCommonJsDependencies'] = [];
+			}
+			let allowedCommonJsDependencies = architectBuildOptions['allowedCommonJsDependencies'];
+			let isFsFounded = false;
+			allowedCommonJsDependencies.forEach(function (allowedCommonJs) {
+				if (typeof allowedCommonJs === 'string') {
+					if (allowedCommonJs === 'fs') {
+						isAssetFounded = true;
+					}
+				}
+			});
+			if (!isFsFounded) {
+				allowedCommonJsDependencies.push('fs');
+			}
 			writeJson('package', packageJson, null, function () {
 				console.log(
 					'./package.json -- dependencies && devDependencies installed!\n'

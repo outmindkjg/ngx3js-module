@@ -1567,7 +1567,6 @@ export class RendererComponent
 							if (ThreeUtil.isNotNull(this.gammaFactor)) {
 								this.renderer.gammaFactor = this.gammaFactor;
 							}
-
 							if (
 								this.renderer.shadowMap.enabled &&
 								ThreeUtil.isNotNull(this.shadowMapType)
@@ -1913,6 +1912,12 @@ export class RendererComponent
 				})
 			);
 			this.debugEle.nativeElement.appendChild(this.gui.domElement);
+			this.gui.domElement.addEventListener('pointerdown', (e) => {
+				e.stopPropagation();
+			})
+			this.gui.domElement.addEventListener('click', (e) => {
+				e.stopPropagation();
+			})
 		}
 		return this.gui;
 	}

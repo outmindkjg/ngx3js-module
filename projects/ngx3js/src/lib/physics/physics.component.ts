@@ -253,8 +253,8 @@ export class PhysicsComponent
 							break;
 						case 'gravity':
 							const gravity = this.getGravity(-9.8);
-							// this.physics.setGravity(gravity);
-							this.physics.getWorldInfo().set_m_gravity(gravity);
+							this.physics.setGravity(gravity);
+							// this.physics.getWorldInfo().set_m_gravity(gravity);
 							break;
 					}
 				});
