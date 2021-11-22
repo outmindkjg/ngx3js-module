@@ -9,7 +9,7 @@
   "description": "Angular & Javascript 3D library",
   "author": "outmind0@gmail.com",
   "scripts": {
-    "ng": "ng",
+    "ng": "ng", 
     "start": "ng serve",
     "ngx3jsbuild": "ng build ngx3js --configuration production",
     "ngx3jspublish": "cd dist/ngx3js && npm publish",
