@@ -150,7 +150,7 @@ export class NumberDirective
 									typeof object[property] === 'number'
 								) {
 									const deltaValue = easing(timer.delta);
-									object[property] += deltaValue;
+									object[property] = deltaValue;
 								}
 							}
 						);
