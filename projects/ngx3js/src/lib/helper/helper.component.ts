@@ -1086,6 +1086,7 @@ export class HelperComponent
 				case 'axes':
 				default:
 					basemesh = new THREE.AxesHelper(this.getSize(10));
+					parentAdd = false;
 					break;
 			}
 			if (basemesh !== null) {

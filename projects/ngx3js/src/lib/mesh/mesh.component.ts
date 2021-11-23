@@ -5,7 +5,7 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { RayParameters } from 'three/examples/jsm/geometries/LightningStrike';
@@ -23,15 +23,15 @@ import { Volume } from 'three/examples/jsm/misc/Volume';
 import { VolumeSlice } from 'three/examples/jsm/misc/VolumeSlice';
 import {
 	Flow,
-	InstancedFlow
+	InstancedFlow,
 } from 'three/examples/jsm/modifiers/CurveModifier';
 import {
 	Lensflare,
-	LensflareElement
+	LensflareElement,
 } from 'three/examples/jsm/objects/Lensflare';
 import {
 	LightningStorm,
-	StormParams
+	StormParams,
 } from 'three/examples/jsm/objects/LightningStorm';
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
 import { Reflector } from 'three/examples/jsm/objects/Reflector';
@@ -43,12 +43,12 @@ import { Water as Water2 } from 'three/examples/jsm/objects/Water2';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import {
 	CSS3DObject,
-	CSS3DSprite
+	CSS3DSprite,
 } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-import { createText } from 'three/examples/jsm/webxr/Text2D';
+import { MeshText } from './mesh.text';
 import { CurveComponent } from '../curve/curve.component';
 import { HtmlComponent } from '../html/html.component';
 import { CssStyle, ThreeColor, ThreeUtil } from '../interface';
@@ -187,7 +187,7 @@ export interface VolumeOptions {
 		{
 			provide: AbstractSubscribeComponent,
 			useExisting: forwardRef(() => MeshComponent),
-		}
+		},
 	],
 })
 export class MeshComponent extends AbstractObject3dComponent implements OnInit {
@@ -2305,9 +2305,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					basemesh = tubePainter.mesh;
 					break;
 				case 'text':
-					basemesh = createText(
+					basemesh = new MeshText(
 						ThreeUtil.getTypeSafe(this.text, 'test'),
-						ThreeUtil.getTypeSafe(this.size, 1)
+						ThreeUtil.getTypeSafe(this.size, 1),
+						ThreeUtil.getColorSafe(this.color, 0xffffff)
 					);
 					break;
 				case 'line2':

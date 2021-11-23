@@ -2113,8 +2113,8 @@ export class LocalStorageService {
 	) {
 		let fontPath: string = '';
 		if (ThreeUtil.isNull(fontWeight) || fontWeight === '') {
-			if (fontName.indexOf('_') > 0) {
-				[fontName, fontWeight] = fontName.split('_');
+			if (fontName.indexOf('-') > 0 && !(fontName.endsWith('.json') || fontName.endsWith('.ttf') || fontName.startsWith('http://') || fontName.startsWith('https://'))) {
+				[fontName, fontWeight] = fontName.split('-');
 			}
 		}
 		switch (fontName.toLowerCase()) {
@@ -2179,11 +2179,8 @@ export class LocalStorageService {
 						break;
 				}
 				break;
-			case 'dohyeon':
-			case 'do_hyeon':
-				fontPath = 'fonts/nanum/do_hyeon_regular.typeface.json';
-				break;
 			default:
+				console.log(fontName);
 				if (
 					fontName.startsWith('/') ||
 					fontName.startsWith('http://') ||
@@ -2191,9 +2188,7 @@ export class LocalStorageService {
 					fontName.endsWith('.json') ||
 					fontName.endsWith('.ttf')
 				) {
-					if (fontName.endsWith('.json')) {
-						fontPath = fontName;
-					} else if (fontName.endsWith('.ttf')) {
+					if (fontName.endsWith('.ttf') || fontName.endsWith('.json')) {
 						fontPath = fontName;
 					} else {
 						fontPath = fontName + '_' + fontWeight + '.typeface.json';

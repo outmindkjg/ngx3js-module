@@ -1,19 +1,11 @@
 import {
-	Component,
-	ContentChildren,
-	ElementRef,
+	Component, ElementRef,
 	Input,
-	OnInit,
-	QueryList,
-	SimpleChanges,
+	OnInit, SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
-import { BackgroundComponent } from '../background/background.component';
-import { AbstractControllerComponent } from '../controller.component.abstract';
-import { HtmlComponent } from '../html/html.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { TransformComponent } from '../transform/transform.component';
-import { HtmlCollection, VisualComponent } from '../visual/visual.component';
+import { HtmlCollection } from '../visual/visual.component';
 import { CssStyle, ThreeUtil } from './../interface';
 
 /**

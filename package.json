@@ -1,6 +1,6 @@
 {
   "name": "ngx3js-module",
-  "version": "0.134.0-2021112221",
+  "version": "0.134.0-2021112317",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "description": "Angular & Javascript 3D library",
   "author": "outmind0@gmail.com",
   "scripts": {
-    "ng": "ng", 
+    "ng": "ng",
     "start": "ng serve",
     "ngx3jsbuild": "ng build ngx3js --configuration production",
     "ngx3jspublish": "cd dist/ngx3js && npm publish",

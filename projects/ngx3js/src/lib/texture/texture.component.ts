@@ -407,6 +407,9 @@ export class TextureComponent
 					'cubeimage',
 					'loadertype',
 					'canvas',
+					'text',
+					'width',
+					'height'
 				])
 			) {
 				this.needUpdate = true;

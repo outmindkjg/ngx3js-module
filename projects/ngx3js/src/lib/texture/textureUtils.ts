@@ -302,6 +302,20 @@ CanvasConf.labelgreen = (
 	ctx.font = calc(12, s.x) + 'pt arial bold';
 	ctx.fillText(text || 'test', calc(8, s.x), calc(22, s.y));
 };
+CanvasConf.labeltrans = (
+	ctx: CanvasRenderingContext2D,
+	text: string,
+	width: number,
+	height: number
+) => {
+	const s = TextureUtils.scale(width, height, 128, 32);
+	ctx.fillStyle = 'rgba( 0, 0, 0, 0 )';
+	ctx.fillRect(0, 0, calc(128, s.x), calc(32, s.y));
+	ctx.fillStyle = 'white';
+	ctx.font = calc(12, s.x) + 'pt arial bold';
+	ctx.fillText(text || 'test', calc(8, s.x), calc(22, s.y));
+};
+
 CanvasConf.grass = (
 	ctx: CanvasRenderingContext2D,
 	_: string,

@@ -55,6 +55,7 @@ export * from './lookat/lookat.component';
 export * from './material.abstract';
 export * from './material/material.component';
 export * from './mesh/mesh.component';
+export * from './mesh/mesh.text';
 export * from './mixer/mixer.component';
 export * from './object3d.abstract';
 export * from './pass/pass.component';
