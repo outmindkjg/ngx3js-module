@@ -22,6 +22,11 @@ import { GUI } from './threejs-library/lil-gui';
  * Apply matrix4
  */
 export interface ApplyMatrix4 {
+	/**
+	 * applyMatrix4
+	 * @param matrix 
+	 * @returns matrix4 
+	 */
 	applyMatrix4(matrix: THREE.Matrix4): any;
 }
 
@@ -29,11 +34,23 @@ export interface ApplyMatrix4 {
  * Curves parameters
  */
 export interface CurvesParameters {
+
+	/** radiusInner */
 	radiusInner?: number;
+
+	/** waveH */
 	waveH?: number;
+
+	/** waveR */
 	waveR?: number;
+
+	/** rateX */
 	rateX?: number;
+
+	/** rateY */
 	rateY?: number;
+
+	/** rateZ */
 	rateZ?: number;
 }
 
@@ -58,104 +75,79 @@ export interface TextureOption {
  * Storage option
  */
 export interface StorageOption {
+	/** path */
 	path?: string;
 
+	/** autoCenter */
 	autoCenter?: boolean;
 
+	/** debugName */
 	debugName?: boolean;
 
+	/** debug */
 	debug?: boolean;
 
+	/** firstMesh */
 	firstMesh?: boolean;
 
+	/** name */
 	name?: string;
 
+	/** scale */
 	scale?: number;
 
-	/** override material from storage */
+	/** material */
 	material?: string;
 
 	/** The resource path */
 	resourcePath?: string;
 
-	/**
-	 * Use Darco
-	 */
+	/** Use Darco */
 	useDraco?: boolean;
 
-	/**
-	 * Use Ktx2
-	 */
+	/** Use Ktx2 */
 	useKtx2?: boolean;
 
-	/**
-	 * vmdUrl
-	 */
+	/** vmdUrl */
 	vmdUrl?: string | string[];
 
-	/**
-	 * ref object
-	 */
+	/** ref object */
 	object?: THREE.SkinnedMesh | THREE.Camera | any;
 
-	/**
-	 *
-	 */
+	/** drawFillShapes */
 	drawFillShapes?: boolean;
 
-	/**
-	 *
-	 */
+	/** drawStrokes */
 	drawStrokes?: boolean;
 
-	/**
-	 *
-	 */
+	/** fillShapesWireframe */
 	fillShapesWireframe?: boolean;
 
-	/**
-	 *
-	 */
+	/** strokesWireframe */
 	strokesWireframe?: boolean;
 
-	/**
-	 *
-	 */
+	/** type */
 	type?: string;
 
-	/**
-	 *
-	 */
+	/** baseUrl */
 	baseUrl?: string;
 
-	/**
-	 *
-	 */
+	/** body */
 	body?: any;
 
-	/**
-	 *
-	 */
+	/** cssType */
 	cssType?: string;
 
-	/**
-	 *
-	 */
+	/** geometry */
 	geometry?: boolean;
 
-	/**
-	 *
-	 */
+	/** loaderType */
 	loaderType?: string;
 
-	/**
-	 *
-	 */
+	/** quality */
 	quality?: number;
 
-	/**
-	 *
-	 */
+	/** dataType */
 	dataType?: any;
 }
 
@@ -163,17 +155,41 @@ export interface StorageOption {
  * Storage export option
  */
 export interface StorageExportOption {
+
+	/** binary */
 	binary?: boolean;
+
+	/** trs */
 	trs?: boolean;
+
+	/** onlyVisible */
 	onlyVisible?: boolean;
+
+	/** truncateDrawRange */
 	truncateDrawRange?: boolean;
+
+	/** embedImages */
 	embedImages?: boolean;
+
+	/** animations */
 	animations?: THREE.AnimationClip[];
+
+	/** forceIndices */
 	forceIndices?: boolean;
+
+	/** forcePowerOfTwoTextures */
 	forcePowerOfTwoTextures?: boolean;
+
+	/** includeCustomExtensions */
 	includeCustomExtensions?: boolean;
+
+	/** excludeAttributes */
 	excludeAttributes?: string[];
+
+	/** littleEndian */
 	littleEndian?: boolean;
+
+	/** maxTextureSize */
 	maxTextureSize?: number;
 }
 
