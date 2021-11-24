@@ -10,10 +10,9 @@
   "author": "outmind0@gmail.com",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "ngx3jsbuild": "ng build ngx3js --configuration production",
+    "start": "ng build ngx3js --watch --configuration development",
+    "build": "ng build ngx3js --configuration production",
     "ngx3jspublish": "cd dist/ngx3js && npm publish",
-    "ngx3jswatch": "ng build ngx3js --watch --configuration development",
     "assetsbuild": "ng build ngx3js-assets --configuration production",
     "assetspublish": "cd dist/ngx3js-assets && npm publish",
     "assetswatch": "ng build ngx3js-assets --watch --configuration development",
