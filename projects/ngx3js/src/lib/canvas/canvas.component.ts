@@ -10,9 +10,6 @@ import { CssStyle, ThreeUtil } from './../interface';
 
 /**
  * CanvasComponent
- *
- * ```html
- * ```
  */
 @Component({
 	selector: 'ngx3js-canvas',
