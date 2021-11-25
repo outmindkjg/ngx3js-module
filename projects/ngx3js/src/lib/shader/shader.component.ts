@@ -3,10 +3,6 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * ShaderComponent
- *
- * ```html
- *
- * ```
  */
 @Component({
 	selector: 'ngx3js-shader',
