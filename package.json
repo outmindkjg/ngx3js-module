@@ -19,7 +19,7 @@
     "docs": "rm -rf docs && cd projects/ngx3js && npx typedoc --tsconfig tsconfig.lib.json",
     "version": "node ./bin/version.js",
     "readme": "cp -rf projects/ngx3js/README.md README.md && cp -rf projects/ngx3js/README.md ../ngx3js/README.md && cp -rf projects/ngx3js/README.md ../ngx3js/src/README.md ",
-    "test": "ng test"
+    "test": ""
   },
   "dependencies": {
     "@angular/animations": "^12.2.13",

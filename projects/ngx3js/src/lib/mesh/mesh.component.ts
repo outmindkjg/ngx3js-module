@@ -68,18 +68,43 @@ import { ReflectorForSSRPass } from './../threejs-library/ReflectorForSSRPass';
  * Volume Options
  */
 export interface VolumeOptions {
+	/** x */
 	x?: number;
+
+	/** y */
 	y?: number;
+
+	/** z */
 	z?: number;
+
+	/** helperVisible */
 	helperVisible?: boolean;
+
+	/** helperColor */
 	helperColor?: ThreeColor;
+
+	/** boxVisible */
 	boxVisible?: boolean;
+
+	/** xVisible */
 	xVisible?: boolean;
+
+	/** yVisible */
 	yVisible?: boolean;
+
+	/** zVisible */
 	zVisible?: boolean;
+
+	/** lowerThreshold */
 	lowerThreshold?: number;
+
+	/** upperThreshold */
 	upperThreshold?: number;
+
+	/** windowLow */
 	windowLow?: number;
+
+	/** windowHigh */
 	windowHigh?: number;
 }
 

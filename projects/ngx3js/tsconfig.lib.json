@@ -49,7 +49,6 @@
 		"excludeProtected" : false,
 		"excludeExternals" : true,
 		"excludePrivate" : true,
-		"excludeNotDocumented" : true,
 		"out" : "../../docs"
 	}
 }
