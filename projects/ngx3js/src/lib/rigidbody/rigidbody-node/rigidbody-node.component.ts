@@ -4,7 +4,10 @@ import * as Ammo from '../../threejs-library/ammo';
 import { ThreeUtil } from '../../interface';
 
 /**
- * Component
+ * The Rigidbody Node component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RigidbodyNodeComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-rigidbody-node',

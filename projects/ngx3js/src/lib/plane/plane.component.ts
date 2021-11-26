@@ -4,7 +4,10 @@ import { ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * PlaneComponent
+ * The Plane component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PlaneComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-plane',

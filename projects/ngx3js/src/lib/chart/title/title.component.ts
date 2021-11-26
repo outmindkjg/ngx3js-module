@@ -11,7 +11,10 @@ import { ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
- * Component
+ * The Chart Title component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartTitleComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-chart-title',

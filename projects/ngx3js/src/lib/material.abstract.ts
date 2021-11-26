@@ -35,6 +35,9 @@ export type MeshMaterial = MeshMaterialRaw | THREE.Scene;
 /**
  * AbstractMaterialComponent
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractMaterialComponent) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material) page for a live demo.
+ *
  * ```ts
  * _@Component({
  * 	providers: [
@@ -93,7 +96,7 @@ export class AbstractMaterialComponent
 	/**
 	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
 	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.
-	 * If the material's [page:Boolean transparent] property is not set to *true*, the material will remain fully opaque and this value will only affect its color.
+	 * If the material's transparent property is not set to *true*, the material will remain fully opaque and this value will only affect its color.
 	 * Default is *1.0*.
 	 */
 	@Input() public opacity: number = null;
@@ -112,8 +115,8 @@ export class AbstractMaterialComponent
 
 	/**
 	 * Which blending to use when displaying objects with this material.
-	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
-	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -132,14 +135,14 @@ export class AbstractMaterialComponent
 	@Input() public blendDst: string = null;
 
 	/**
-	 * The transparency of the [page:.blendDst]. Uses [page:.blendDst] value if null. Default is *null*.
+	 * The transparency of the [Material.blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/Material.blendDst). Uses [Material.blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/Material.blendDst) value if null. Default is *null*.
 	 */
 	@Input() public blendDstAlpha: number = null;
 
 	/**
-	 * Blending equation to use when applying blending. Default is [page:CustomBlendingEquation AddEquation].
-	 * See the blending equation [page:CustomBlendingEquation constants] for all possible values.
-	 * The material's [page:Constant blending] must be set to [page:Materials CustomBlending] for this to have any effect.
+	 * Blending equation to use when applying blending. Default is [AddEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.CustomBlendingEquation).
+	 * See the blending equation [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.CustomBlendingEquation) for all possible values.
+	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blending) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for this to have any effect.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -154,14 +157,14 @@ export class AbstractMaterialComponent
 	@Input() public blendEquation: string = null;
 
 	/**
-	 * The transparency of the [page:.blendEquation]. Uses [page:.blendEquation] value if null. Default is *null*.
+	 * The transparency of the [Material.blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/Material.blendEquation). Uses [Material.blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/Material.blendEquation) value if null. Default is *null*.
 	 */
 	@Input() public blendEquationAlpha: number = null;
 
 	/**
 	 * Which blending to use when displaying objects with this material.
-	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
-	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -175,9 +178,9 @@ export class AbstractMaterialComponent
 	@Input() public blending: string = null;
 
 	/**
-	 * Blending source. Default is [page:CustomBlendingEquation SrcAlphaFactor].
-	 * See the source factors [page:CustomBlendingEquation constants] for all possible values.
-	 * The material's [page:Constant blending] must be set to [page:Materials CustomBlending] for this to have any effect.
+	 * Blending source. Default is [SrcAlphaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.CustomBlendingEquation).
+	 * See the source factors [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.CustomBlendingEquation) for all possible values.
+	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blending) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for this to have any effect.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -192,7 +195,7 @@ export class AbstractMaterialComponent
 	@Input() public blendSrc: string = null;
 
 	/**
-	 * The transparency of the [page:.blendSrc]. Uses [page:.blendSrc] value if null. Default is *null*.
+	 * The transparency of the [Material.blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/Material.blendSrc). Uses [Material.blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/Material.blendSrc) value if null. Default is *null*.
 	 */
 	@Input() public blendSrcAlpha: number = null;
 
@@ -206,7 +209,7 @@ export class AbstractMaterialComponent
 	 * User-defined clipping planes specified as THREE.Plane objects in world space.
 	 * These planes apply to the objects this material is attached to.
 	 * Points in space whose signed distance to the plane is negative are clipped (not rendered).
-	 * This requires [page:WebGLRenderer.localClippingEnabled] to be *true*.
+	 * This requires [WebGLRenderer.localClippingEnabled](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.localClippingEnabled) to be *true*.
 	 * See the [example:webgl_clipping_intersection WebGL / clipping /intersection] example.
 	 * Default is *null*.
 	 */
@@ -219,7 +222,7 @@ export class AbstractMaterialComponent
 
 	/**
 	 * Whether to render the material's color.
-	 * This can be used in conjunction with a mesh's [page:Integer renderOrder] property to create invisible objects that occlude other objects. Default is *true*.
+	 * This can be used in conjunction with a mesh's renderOrder property to create invisible objects that occlude other objects. Default is *true*.
 	 */
 	@Input() public colorWrite: boolean = null;
 
@@ -229,7 +232,7 @@ export class AbstractMaterialComponent
 	@Input() public defines: any = null;
 
 	/**
-	 * Which depth function to use. Default is [page:Materials LessEqualDepth]. See the depth mode [page:Materials constants] for all possible values.
+	 * Which depth function to use. Default is [LessEqualDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See the depth mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -308,8 +311,8 @@ export class AbstractMaterialComponent
 
 	/**
 	 * Defines which side of faces will be rendered - front, back or both.
-	 * Default is [page:Materials THREE.FrontSide].
-	 * Other options are [page:Materials THREE.BackSide] and [page:Materials THREE.DoubleSide].
+	 * Default is [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
+	 * Other options are [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) and [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -322,7 +325,7 @@ export class AbstractMaterialComponent
 
 	/**
 	 * Defines which side of faces cast shadows.
-	 * When set, can be [page:Materials THREE.FrontSide], [page:Materials THREE.BackSide], or [page:Materials THREE.DoubleSide]. Default is *null*.
+	 * When set, can be [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials), [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials), or [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). Default is *null*.
 	 * If *null*, the side casting shadows is determined as follows:
 	 *
 	 * Notice - case insensitive.
@@ -335,7 +338,7 @@ export class AbstractMaterialComponent
 	@Input() public shadowSide: string = null;
 
 	/**
-	 * Defines whether this material is tone mapped according to the renderer's [page:WebGLRenderer.toneMapping toneMapping] setting. Default is *true*.
+	 * Defines whether this material is tone mapped according to the renderer's [toneMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.toneMapping) setting. Default is *true*.
 	 */
 	@Input() public toneMapped: boolean = null;
 
@@ -350,7 +353,7 @@ export class AbstractMaterialComponent
 	@Input() public stencilWrite: boolean = null;
 
 	/**
-	 * The stencil comparison function to use. Default is [page:Materials AlwaysStencilFunc]. See stencil function [page:Materials constants] for all possible values.
+	 * The stencil comparison function to use. Default is [AlwaysStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See stencil function [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -383,7 +386,7 @@ export class AbstractMaterialComponent
 	@Input() public stencilFuncMask: number = null;
 
 	/**
-	 * Which stencil operation to perform when the comparison function returns false. Default is [page:Materials KeepStencilOp]. See the stencil operations [page:Materials constants] for all possible values.
+	 * Which stencil operation to perform when the comparison function returns false. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -400,7 +403,7 @@ export class AbstractMaterialComponent
 	@Input() public stencilFail: string = null;
 
 	/**
-	 * Which stencil operation to perform when the comparison function returns true but the depth test fails. Default is [page:Materials KeepStencilOp]. See the stencil operations [page:Materials constants] for all possible values.
+	 * Which stencil operation to perform when the comparison function returns true but the depth test fails. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -417,7 +420,7 @@ export class AbstractMaterialComponent
 	@Input() public stencilZFail: string = null;
 
 	/**
-	 * Which stencil operation to perform when the comparison function returns true and the depth test passes. Default is [page:Materials KeepStencilOp]. See the stencil operations [page:Materials constants] for all possible values.
+	 * Which stencil operation to perform when the comparison function returns true and the depth test passes. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -435,7 +438,7 @@ export class AbstractMaterialComponent
 
 	/**
 	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects.
-	 * When set to true, the extent to which the material is transparent is controlled by setting its [page:Float opacity] property.
+	 * When set to true, the extent to which the material is transparent is controlled by setting its opacity property.
 	 * Default is *false*.
 	 */
 	@Input() public transparent: boolean = null;
@@ -477,8 +480,8 @@ export class AbstractMaterialComponent
 
 	/**
 	 * Which blending to use when displaying objects with this material.
-	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
-	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -548,8 +551,8 @@ export class AbstractMaterialComponent
 
 	/**
 	 * Which blending to use when displaying objects with this material.
-	 * This must be set to [page:Materials CustomBlending] to use custom [page:Constant blendSrc], [page:Constant blendDst] or [page:Constant blendEquation].
-	 * See the blending mode [page:Materials constants] for all possible values. Default is [page:Materials NormalBlending].
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * Notice - case insensitive.
 	 *

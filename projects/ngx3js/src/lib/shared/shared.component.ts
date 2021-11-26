@@ -31,6 +31,8 @@ import { ScaleComponent } from './../scale/scale.component';
 /**
  * SharedComponent
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SharedComponent) page for details.
+ *
  * ```html
  * <ngx3js-shared></ngx3js-shared>
  * <ngx3js-shared (onLoad)="setShared($event)"></ngx3js-shared>

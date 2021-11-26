@@ -3,6 +3,9 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
 
 /**
  * Curves polygon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesPolygon) page for details.
+ *
  */
 export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 	/**
@@ -130,6 +133,9 @@ export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 
 /**
  * Curves regular polygon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygon) page for details.
+ *
  */
 export class CurvesRegularPolygon extends CurvesPolygon {
 	/**
@@ -162,6 +168,9 @@ export class CurvesRegularPolygon extends CurvesPolygon {
 
 /**
  * Curves regular polygon triangle
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonTriangle) page for details.
+ *
  */
 export class CurvesRegularPolygonTriangle extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -171,6 +180,9 @@ export class CurvesRegularPolygonTriangle extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon square
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonSquare) page for details.
+ *
  */
 export class CurvesRegularPolygonSquare extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -180,6 +192,9 @@ export class CurvesRegularPolygonSquare extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon pentagon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonPentagon) page for details.
+ *
  */
 export class CurvesRegularPolygonPentagon extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -189,6 +204,9 @@ export class CurvesRegularPolygonPentagon extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon hexagon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonHexagon) page for details.
+ *
  */
 export class CurvesRegularPolygonHexagon extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -198,6 +216,9 @@ export class CurvesRegularPolygonHexagon extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon heptagon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonHeptagon) page for details.
+ *
  */
 export class CurvesRegularPolygonHeptagon extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -207,6 +228,9 @@ export class CurvesRegularPolygonHeptagon extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon octagon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonOctagon) page for details.
+ *
  */
 export class CurvesRegularPolygonOctagon extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -216,6 +240,9 @@ export class CurvesRegularPolygonOctagon extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon nonagon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonNonagon) page for details.
+ *
  */
 export class CurvesRegularPolygonNonagon extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -225,6 +252,9 @@ export class CurvesRegularPolygonNonagon extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon decagon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonDecagon) page for details.
+ *
  */
 export class CurvesRegularPolygonDecagon extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -234,6 +264,9 @@ export class CurvesRegularPolygonDecagon extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon undecagon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonUndecagon) page for details.
+ *
  */
 export class CurvesRegularPolygonUndecagon extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -243,6 +276,9 @@ export class CurvesRegularPolygonUndecagon extends CurvesRegularPolygon {
 
 /**
  * Curves regular polygon dodecagon
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonDodecagon) page for details.
+ *
  */
 export class CurvesRegularPolygonDodecagon extends CurvesRegularPolygon {
 	constructor(radius: number = 1, options?: CurvesParameters) {

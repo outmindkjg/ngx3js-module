@@ -1,9 +1,12 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
-import { ThreeGeometryCustom, ThreeUtil } from '../../interface';
+import { ThreeGeometryCustom } from '../../interface';
 
 /**
- * Component
+ * The Geometry Bird component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GeometryBirdComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-geometry-bird',

@@ -4,7 +4,7 @@ import {
 	Inject,
 	Injectable,
 	Input,
-	OnInit
+	OnInit,
 } from '@angular/core';
 import * as Ammo from './threejs-library/ammo';
 import * as CHROMA from 'chroma-js';
@@ -24,8 +24,8 @@ import { GUI } from './threejs-library/lil-gui';
 export interface ApplyMatrix4 {
 	/**
 	 * applyMatrix4
-	 * @param matrix 
-	 * @returns matrix4 
+	 * @param matrix
+	 * @returns matrix4
 	 */
 	applyMatrix4(matrix: THREE.Matrix4): any;
 }
@@ -34,7 +34,6 @@ export interface ApplyMatrix4 {
  * Curves parameters
  */
 export interface CurvesParameters {
-
 	/** radiusInner */
 	radiusInner?: number;
 
@@ -155,7 +154,6 @@ export interface StorageOption {
  * Storage export option
  */
 export interface StorageExportOption {
-
 	/** binary */
 	binary?: boolean;
 
@@ -632,8 +630,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 		@Inject('') controls: T,
 		@Inject('') controlsParams: GuiControlParam[] = [],
 		@Inject('') clearConsole: boolean = true,
-		@Inject('') addBaseParam: boolean = true,
-		
+		@Inject('') addBaseParam: boolean = true
 	) {
 		this.controls = ThreeUtil.getControls(controls, this, addBaseParam);
 		this.setControlsParams(controlsParams, addBaseParam);
@@ -646,8 +643,15 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	 * Sets controls params
 	 * @param [controlsParams]
 	 */
-	public setControlsParams(controlsParams: GuiControlParam[] = [], addBaseParam: boolean = true) {
-		this.controlsParams = ThreeUtil.getControlsParams(controlsParams, this, addBaseParam);
+	public setControlsParams(
+		controlsParams: GuiControlParam[] = [],
+		addBaseParam: boolean = true
+	) {
+		this.controlsParams = ThreeUtil.getControlsParams(
+			controlsParams,
+			this,
+			addBaseParam
+		);
 	}
 
 	/**
@@ -989,6 +993,9 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 
 /**
  * Three util
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeUtil) page for details.
+ *
  */
 export class ThreeUtil {
 	/**
@@ -3553,7 +3560,7 @@ export class ThreeUtil {
 	public static getControls<T>(
 		param: T,
 		component: { mesh?: MeshComponent; controls?: any; controlsParams?: any },
-		addBaseParam : boolean = true
+		addBaseParam: boolean = true
 	): T & GuiBaseControl {
 		const baseControl: GuiBaseControl = {
 			meshShape: {
@@ -3709,7 +3716,7 @@ export class ThreeUtil {
 	public static getControlsParams(
 		params: GuiControlParam[],
 		component: { mesh?: MeshComponent; controls?: any; controlsParams?: any },
-		addBaseParam : boolean = true
+		addBaseParam: boolean = true
 	): GuiControlParam[] {
 		if (addBaseParam) {
 			params.push({
@@ -3919,7 +3926,11 @@ export class ThreeUtil {
 			controlsParams?: any;
 		}
 	) {
-		if (this.isNotNull(component.controls) && this.isNotNull(component.mesh) && component.controls.meshRotate !== undefined) {
+		if (
+			this.isNotNull(component.controls) &&
+			this.isNotNull(component.mesh) &&
+			component.controls.meshRotate !== undefined
+		) {
 			if (
 				component.controls.meshRotate.autoRotate &&
 				component.controls.meshRotate.speed !== 0
@@ -4145,6 +4156,9 @@ export interface RendererEvent {
 
 /**
  * Three clock
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeClock) page for details.
+ *
  */
 export class ThreeClock extends THREE.Clock {
 	/**
@@ -4170,6 +4184,9 @@ export class ThreeClock extends THREE.Clock {
 
 /**
  * Three stats
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeStats) page for details.
+ *
  */
 export class ThreeStats implements Stats {
 	/**
@@ -4331,13 +4348,16 @@ export interface GuiControlParam {
 
 /**
  * ThreeGeometryCustom
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeGeometryCustom) page for details.
+ *
  */
 @Component({
 	template: '',
 })
 export class ThreeGeometryCustom {
 	/**
-	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [page:Object3D.scale] for typical real-time mesh scaling.
+	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [Object3D.scale](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.scale) for typical real-time mesh scaling.
 	 */
 	@Input() scale: number = null;
 
@@ -4380,6 +4400,9 @@ export class ThreeGeometryCustom {
 
 /**
  * Three gui
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeGui) page for details.
+ *
  */
 export class ThreeGui implements ThreeGuiController {
 	/**

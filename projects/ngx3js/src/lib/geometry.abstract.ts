@@ -7,7 +7,7 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
@@ -48,7 +48,10 @@ export interface GeometriesParametric {
 }
 
 /**
- * AbstractGeometry Component
+ * The Abstract Geometry component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractGeometryComponent) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
  *
  * ```ts
  * _@Component({
@@ -107,12 +110,12 @@ export class AbstractGeometryComponent
 	@Input() public computeVertexNormals: boolean = false;
 
 	/**
-	 * Computes bounding box of the geometry, updating [page:.boundingBox] attribute. Bounding boxes aren't computed by default. They need to be explicitly computed, otherwise they are *null*.
+	 * Computes bounding box of the geometry, updating [BufferGeometry.boundingBox](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferGeometry.boundingBox) attribute. Bounding boxes aren't computed by default. They need to be explicitly computed, otherwise they are *null*.
 	 */
 	@Input() public computeBoundingBox: boolean = false;
 
 	/**
-	 * Computes bounding sphere of the geometry, updating [page:.boundingSphere] attribute. Bounding spheres aren't computed by default. They need to be explicitly computed, otherwise they are *null*.
+	 * Computes bounding sphere of the geometry, updating [BufferGeometry.boundingSphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferGeometry.boundingSphere) attribute. Bounding spheres aren't computed by default. They need to be explicitly computed, otherwise they are *null*.
 	 */
 	@Input() public computeBoundingSphere: boolean = false;
 
@@ -123,23 +126,23 @@ export class AbstractGeometryComponent
 	@Input() public computeTangents: boolean = false;
 
 	/**
-	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [page:Object3D.scale] for typical real-time mesh scaling.
+	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [Object3D.scale](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.scale) for typical real-time mesh scaling.
 	 */
 	@Input() public scale: number = null;
 
 	/**
-	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [page:Object3D.scale] for typical real-time mesh scaling.
+	 * Scale the geometry data. This is typically done as a one time operation, and not during a loop. Use [Object3D.scale](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.scale) for typical real-time mesh scaling.
 	 */
 	@Input() public sphereScale: number = null;
 
 	/**
-	 * This hashmap has as id the name of the attribute to be set and as value the [page:BufferAttribute buffer] to set it to.
-	 * Rather than accessing this property directly, use [page:.setAttribute] and [page:.getAttribute] to access attributes of this geometry.
+	 * This hashmap has as id the name of the attribute to be set and as value the [buffer](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferAttribute) to set it to.
+	 * Rather than accessing this property directly, use [BufferGeometry.setAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferGeometry.setAttribute) and [BufferGeometry.getAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferGeometry.getAttribute) to access attributes of this geometry.
 	 */
 	@Input() public attributes: { [key: string]: AttrBufferAttribute } = null;
 
 	/**
-	 * Hashmap of [page:BufferAttribute]s holding details of the geometry's morph targets.
+	 * Hashmap of [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferAttribute)s holding details of the geometry's morph targets.
 	 */
 	@Input() public morphAttributes: { [key: string]: AttrBufferAttribute[] } =
 		null;
@@ -329,7 +332,7 @@ export class AbstractGeometryComponent
 
 	/**
 	 * Defines the intended usage pattern of the data store for optimization purposes. Corresponds to the *usage* parameter of
-	 * [link:https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData WebGLRenderingContext.bufferData]().
+	 * [WebGLRenderingContext.bufferData](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData)().
 	 */
 	@Input() public attrSizeUsage: string = null;
 
@@ -364,9 +367,9 @@ export class AbstractGeometryComponent
 	@Input() public flipY: boolean = null;
 
 	/**
-	 * geometry -- Instance of [page:BufferGeometry BufferGeometry] to merge the vertices of.
+	 * geometry -- Instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferGeometry) to merge the vertices of.
 	 * tolerance -- The maximum allowable difference between vertex attributes to merge. Defaults to 1e-4.
-	 * Returns a new [page:BufferGeometry BufferGeometry] with vertices for which all similar vertex attributes (within tolerance) are merged.
+	 * Returns a new [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferGeometry) with vertices for which all similar vertex attributes (within tolerance) are merged.
 	 */
 	@Input() public mergeVertices: boolean = null;
 
@@ -377,7 +380,7 @@ export class AbstractGeometryComponent
 
 	/**
 	 * The cutoff angle in radians. If the angle between two face normals is higher than this value, a split will be made.
-	 * 
+	 *
 	 * @see EdgeSplitModifier
 	 */
 	@Input() public cutOffAngle: number = null;
@@ -385,7 +388,7 @@ export class AbstractGeometryComponent
 	/**
 	 * Set to true to keep the normal values for vertices that won't be split.
 	 * To use this feature, you also need to pass an indexed geometry with a 'normal' BufferAttribute
-	 * 
+	 *
 	 * @see EdgeSplitModifier
 	 */
 	@Input() public tryKeepNormals: boolean = null;

@@ -47,17 +47,14 @@ import { LookatComponent } from './../lookat/lookat.component';
 import { SceneComponent } from './../scene/scene.component';
 
 /**
- * RendererComponent
+ * The Renderer component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RendererComponent) page for details.
+ * See the [ngx renderer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_renderer) page for a live demo.
+ *
  * ```html
  * <ngx3js-renderer
- * 	[controlType]="'orbit'"
- * 	[controlOptions]="{ enablePan: false, enableDamping: true }"
- * 	[cssType]="'css2d'"
- * 	[statsMode]="0"
- * 	[antialias]="true"
- * 	[shadowMapEnabled]="true"
- * 	[guiControl]="controls"
- * 	[guiParams]="controlsParams"
+ * 	[controlType]="'orbit'" [controlOptions]="{ enablePan: false, enableDamping: true } " [cssType]="'css2d'" [statsMode]="0 " [antialias]="true " [shadowMapEnabled]="true " [guiControl]="controls " [guiParams]="controlsParams"
  * 	(onRender)="onRender($event)"
  * ></ngx3js-renderer>
  * ```
@@ -141,13 +138,13 @@ export class RendererComponent
 	@Input() public physicallyCorrectLights: boolean = null;
 
 	/**
-	 * Converts this color from gamma space to linear space by taking [page:.r r], [page:.g g] and [page:.b b] to the power of [page:Float gammaFactor].
+	 * Converts this color from gamma space to linear space by taking [Color.r](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color.r), [Color.g](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color.g) and [Color.b](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color.b) to the power of gammaFactor.
 	 */
 	@Input() public gammaFactor: number = null;
 
 	/**
 	 * Defines shadow map type (unfiltered, percentage close filtering, percentage close filtering with bilinear filtering in shader)
-	 * Options are THREE.BasicShadowMap, THREE.PCFShadowMap (default), THREE.PCFSoftShadowMap and THREE.VSMShadowMap. See [page:Renderer Renderer constants] for details.
+	 * Options are THREE.BasicShadowMap, THREE.PCFShadowMap (default), THREE.PCFSoftShadowMap and THREE.VSMShadowMap. See [Renderer constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer) for details.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -165,7 +162,7 @@ export class RendererComponent
 	@Input() public clearAlpha: number = null;
 
 	/**
-	 * Default is [page:Renderer NoToneMapping]. See the [page:Renderer Renderer constants] for other choices.
+	 * Default is [NoToneMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer). See the [Renderer constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer) for other choices.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -267,15 +264,15 @@ export class RendererComponent
 	@Input() public autoClear: boolean = true;
 
 	/**
-	 * If [page:.autoClear autoClear] is true, defines whether the renderer should clear the color buffer.
+	 * If [WebGLRenderer.autoClear](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.autoClear) is true, defines whether the renderer should clear the color buffer.
 	 * 	Default is *true*.
 	 */
 	@Input() public autoClearColor: boolean = true;
 
 	/**
-	 * Defines the output encoding of the renderer. Default is [page:Textures THREE.LinearEncoding].
-	 * If a render target has been set using [page:WebGLRenderer.setRenderTarget .setRenderTarget] then renderTarget.texture.encoding will be used instead.
-	 * See the [page:Textures texture constants] page for details of other formats.
+	 * Defines the output encoding of the renderer. Default is [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures).
+	 * If a render target has been set using [.setRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.setRenderTarget) then renderTarget.texture.encoding will be used instead.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -317,7 +314,7 @@ export class RendererComponent
 	@Input() public composerEnable: boolean = true;
 
 	/**
-	 * whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene. Note that this setting uses gl_FragDepth if available which disables the [link:https://www.khronos.org/opengl/wiki/Early_Fragment_Test Early Fragment Test] optimization and can cause a decrease in performance.
+	 * whether to use a logarithmic depth buffer. It may be neccesary to use this if dealing with huge differences in scale in a single scene. Note that this setting uses gl_FragDepth if available which disables the [Early Fragment Test](https://www.khronos.org/opengl/wiki/Early_Fragment_Test) optimization and can cause a decrease in performance.
 	 * Default is *false*. See the [example:webgl_camera_logarithmicdepthbuffer camera / logarithmicdepthbuffer] example.
 	 */
 	@Input() public logarithmicDepthBuffer: boolean = false;
@@ -1914,10 +1911,10 @@ export class RendererComponent
 			this.debugEle.nativeElement.appendChild(this.gui.domElement);
 			this.gui.domElement.addEventListener('pointerdown', (e) => {
 				e.stopPropagation();
-			})
+			});
 			this.gui.domElement.addEventListener('click', (e) => {
 				e.stopPropagation();
-			})
+			});
 		}
 		return this.gui;
 	}

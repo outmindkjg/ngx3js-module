@@ -2,7 +2,10 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * ShaderComponent
+ * The Shader component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-shader',

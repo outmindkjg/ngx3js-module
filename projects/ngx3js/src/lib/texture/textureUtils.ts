@@ -16,7 +16,7 @@ export type CanvasFunctionType = (
 /**
  * DataFunctionType
  */
- export type DataFunctionType = (
+export type DataFunctionType = (
 	options?: any
 ) => THREE.DataTexture | THREE.DataTexture3D;
 
@@ -492,6 +492,9 @@ DataTextureConf.datatexture2d = (options: any) => {
 
 /**
  * Texture utils
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TextureUtils) page for details.
+ *
  */
 export class TextureUtils {
 	/**

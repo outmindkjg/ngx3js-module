@@ -4,7 +4,9 @@ import { ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * KeyframeComponent
+ * The Keyframe component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeComponent) page for details.
  *
  * ```html
  * <ngx3js-clip [duration]="3" [name]="'default'">
@@ -64,8 +66,8 @@ export class KeyframeComponent
 	/**
 	 * identifier for the KeyframeTrack
 	 *
-	 * @example material.opacity - The material opacity
-	 * @example material.color - The material color
+	 * material.opacity - The material opacity
+	 * material.color - The material color
 	 */
 	@Input() public name: string = '';
 

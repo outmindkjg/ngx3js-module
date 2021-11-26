@@ -2,6 +2,9 @@ import * as THREE from 'three';
 
 /**
  * Plane controls
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PlaneControls) page for details.
+ *
  */
 export class PlaneControls {
 	/**

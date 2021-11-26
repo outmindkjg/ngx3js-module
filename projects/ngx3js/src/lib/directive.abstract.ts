@@ -34,7 +34,7 @@ export interface DirectiveOptions {
 	type?: 'none' | string;
 
 	/** easing */
-	easing? : string;
+	easing?: string;
 
 	/** repeat */
 	repeat?: string;
@@ -179,7 +179,13 @@ export abstract class AbstractThreeDirective {
 		this.enabled = false;
 	}
 
-	protected getEasing(type: string, speed : number, repeat : string = 'yoyo', start: number, end: number): EaseFunction {
+	protected getEasing(
+		type: string,
+		speed: number,
+		repeat: string = 'yoyo',
+		start: number,
+		end: number
+	): EaseFunction {
 		let easing: EaseFunction = null;
 		switch (type.toLowerCase()) {
 			case 'linearinout':
@@ -330,15 +336,15 @@ export abstract class AbstractThreeDirective {
 				easing = GSAP.Power0.easeNone;
 				break;
 			case 'linearin':
-			default :
+			default:
 				easing = GSAP.Linear.easeIn;
 				break;
 		}
-		let elapsedTime : number = 0;
+		let elapsedTime: number = 0;
 		const gap = end - start;
-		switch(repeat.toLowerCase()) {
-			case 'yoyo' :
-				return (delta : number):number => {
+		switch (repeat.toLowerCase()) {
+			case 'yoyo':
+				return (delta: number): number => {
 					elapsedTime += delta * speed;
 					const progress = elapsedTime % 2;
 					if (progress > 1) {
@@ -346,44 +352,44 @@ export abstract class AbstractThreeDirective {
 					} else {
 						return easing(progress) * gap + start;
 					}
-				}
-			case 'repeat' :
-				return (delta : number):number => {
+				};
+			case 'repeat':
+				return (delta: number): number => {
 					elapsedTime += delta * speed;
 					const progress = elapsedTime % 1;
 					return easing(progress) * gap + start;
-				}
-			default :
-				return (delta : number):number => {
+				};
+			default:
+				return (delta: number): number => {
 					elapsedTime += delta * speed;
 					const progress = Math.min(1, elapsedTime);
 					return easing(progress) * gap + start;
-				}
+				};
 		}
 	}
 
 	/**
 	 * Log time seqn of abstract subscribe component
 	 */
-	 private _logTimeSeqn: number = 0;
+	private _logTimeSeqn: number = 0;
 
-	 /**
-	  * Consoles log time
-	  * @param key
-	  * @param object
-	  * @param [repeat]
-	  */
-	 protected consoleLogTime(
-		 key: string,
-		 object: any,
-		 repeat: number = 300
-	 ): void {
-		 this._logTimeSeqn++;
-		 if (this._logTimeSeqn % repeat === 0) {
-			 console.log(key, object);
-		 }
-	 }
- 
+	/**
+	 * Consoles log time
+	 * @param key
+	 * @param object
+	 * @param [repeat]
+	 */
+	protected consoleLogTime(
+		key: string,
+		object: any,
+		repeat: number = 300
+	): void {
+		this._logTimeSeqn++;
+		if (this._logTimeSeqn % repeat === 0) {
+			console.log(key, object);
+		}
+	}
+
 	/**
 	 * Object3d function of abstract object3d directive
 	 */

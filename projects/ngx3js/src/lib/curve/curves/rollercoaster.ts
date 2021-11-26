@@ -1,8 +1,10 @@
 import * as THREE from 'three';
-import { ThreeUtil, CurvesParameters } from '../../interface';
 
 /**
- * CurvesRollerCoaster line
+ * Curves Roller Coaster
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRollerCoaster) page for details.
+ *
  */
 export class CurvesRollerCoaster extends THREE.Curve<THREE.Vector3> {
 	/**

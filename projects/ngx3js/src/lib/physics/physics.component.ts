@@ -18,6 +18,9 @@ import { OimoPhysics } from '../threejs-library/OimoPhysics';
 /**
  * PhysicsComponent
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PhysicsComponent) page for details.
+ * See the [ngx physics](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_physics) page for a live demo.
+ *
  * ```html
  * <ngx3js-physics>
  * </ngx3js-physics>
@@ -25,8 +28,7 @@ import { OimoPhysics } from '../threejs-library/OimoPhysics';
  * 	[gravity]="-7.8"
  * ></ngx3js-physics>
  * <ngx3js-physics
- * 	[type]="'oimo'"
- * 	[gravity]="-9.8"
+ * 	[type]="'oimo'" [gravity]="-9.8"
  * ></ngx3js-physics>
  * ```
  *
@@ -108,13 +110,16 @@ export class PhysicsComponent
 	 */
 	ngOnInit(): void {
 		try {
-			Ammo.AmmoInit({ Ammo : null, locateFile : (ammoFile : string) => {
-				return ThreeUtil.getStoreUrl(ammoFile);
-			}}).then((ammoLib : any) => {
+			Ammo.AmmoInit({
+				Ammo: null,
+				locateFile: (ammoFile: string) => {
+					return ThreeUtil.getStoreUrl(ammoFile);
+				},
+			}).then((ammoLib: any) => {
 				this.ammo = ammoLib;
 				this.getPhysics();
 			});
-		} catch(ex : any) {
+		} catch (ex: any) {
 			console.log(ex);
 		}
 		super.ngOnInit('physics');

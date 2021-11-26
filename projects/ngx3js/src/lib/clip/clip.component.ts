@@ -12,7 +12,9 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeUtil } from './../interface';
 
 /**
- * ClipComponent
+ * The Clip component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ClipComponent) page for details.
  *
  * An AnimationClip is a reusable set of keyframe tracks which represent an animation.
  *
@@ -37,7 +39,7 @@ export class ClipComponent
 	implements OnInit
 {
 	/**
-	 * A name for this clip. A certain clip can be searched via [page:.findByName findByName].
+	 * A name for this clip. A certain clip can be searched via [AnimationClip.findByName](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.findByName).
 	 */
 	@Input() public name: string = '';
 
@@ -96,25 +98,25 @@ export class ClipComponent
 	@Input() public weight: number = 1;
 
 	/**
-	 * Scaling factor for the [page:.time time]. A value of 0 causes the animation to pause. Negative values cause the animation to play backwards. Default is 1.
+	 * Scaling factor for the [AnimationClip.time](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.time). A value of 0 causes the animation to pause. Negative values cause the animation to play backwards. Default is 1.
 	 */
 	@Input() public timeScale: number = 1;
 
 	/**
-	 * The duration of this clip (in seconds). This can be calculated from the [page:.tracks tracks] array via [page:.resetDuration resetDuration].
+	 * The duration of this clip (in seconds). This can be calculated from the [AnimationClip.tracks](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.tracks) array via [AnimationClip.resetDuration](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.resetDuration).
 	 */
 	@Input() public duration: number = 3;
 
 	/**
-	 * If *clampWhenFinished* is set to true the animation will automatically be [page:.paused paused] on its last frame.
-	 * If *clampWhenFinished* is set to false, [page:.enabled enabled] will automatically be switched to false when the last loop of the action has finished, so that this action has no further impact.
+	 * If *clampWhenFinished* is set to true the animation will automatically be [AnimationClip.paused](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.paused) on its last frame.
+	 * If *clampWhenFinished* is set to false, [AnimationClip.enabled](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.enabled) will automatically be switched to false when the last loop of the action has finished, so that this action has no further impact.
 	 * Default is false.
 	 * Note: *clampWhenFinished* has no impact if the action is interrupted (it has only an effect if its last loop has really finished).
 	 */
 	@Input() public clampWhenFinished: boolean = false;
 
 	/**
-	 * The looping mode (can be changed with [page:.setLoop setLoop]). Default is [page:Animation THREE.LoopRepeat] (with an infinite number of [page:.repetitions repetitions])
+	 * The looping mode (can be changed with [AnimationClip.setLoop](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.setLoop)). Default is [THREE.LoopRepeat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/Animation) (with an infinite number of [AnimationClip.repetitions](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.repetitions))
 	 *
 	 * Notice - case insensitive.
 	 *

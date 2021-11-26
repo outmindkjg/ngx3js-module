@@ -83,7 +83,10 @@ import {
 } from './interface';
 
 /**
- * LocalStorageService
+ * Local Storage Service
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LocalStorageService) page for details.
+ *
  */
 @Injectable({
 	providedIn: 'root',
@@ -2113,7 +2116,15 @@ export class LocalStorageService {
 	) {
 		let fontPath: string = '';
 		if (ThreeUtil.isNull(fontWeight) || fontWeight === '') {
-			if (fontName.indexOf('-') > 0 && !(fontName.endsWith('.json') || fontName.endsWith('.ttf') || fontName.startsWith('http://') || fontName.startsWith('https://'))) {
+			if (
+				fontName.indexOf('-') > 0 &&
+				!(
+					fontName.endsWith('.json') ||
+					fontName.endsWith('.ttf') ||
+					fontName.startsWith('http://') ||
+					fontName.startsWith('https://')
+				)
+			) {
 				[fontName, fontWeight] = fontName.split('-');
 			}
 		}

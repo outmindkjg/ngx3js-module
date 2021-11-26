@@ -4,7 +4,10 @@ import { SelectionHelper } from 'three/examples/jsm/interactive/SelectionHelper'
 import { ThreeColor, ThreeUtil } from '../interface';
 
 /**
- * Plane controls
+ * Select Box Controls
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SelectBoxControls) page for details.
+ *
  */
 export class SelectBoxControls {
 	/**

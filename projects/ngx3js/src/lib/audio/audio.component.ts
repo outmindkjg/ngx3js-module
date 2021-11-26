@@ -3,7 +3,7 @@ import {
 	forwardRef,
 	Input,
 	OnInit,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
@@ -11,39 +11,26 @@ import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * AudioComponent
+ * The Audio component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioComponent) page for details.
  *
  * Create a ( global ) audio object.
  *
- * This uses the [link:https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API Web Audio API].
+ * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
  *
  * ```html
  * <ngx3-audio
- * 	[type]="'audio'"
- * 	[url]="'sounds/376737_Skullbeatz___Bad_Cat_Maste.mp3'"
- * 	[refDistance]="1"
- * 	[coneInnerAngle]="180"
- * 	[coneOuterAngle]="230"
- * 	[cconeOuterGain]="0.1"
+ * 	[type]="'audio'" [url]="'sounds/376737_Skullbeatz___Bad_Cat_Maste.mp3'" [refDistance]="1 " [coneInnerAngle]="180 " [coneOuterAngle]="230 " [cconeOuterGain]="0.1"
  * ></ngx3-audio>
  * <ngx3js-audio
- * 	[type]="'audio'"
- * 	[url]="'sounds/Project_Utopia.ogg'"
- * 	[volume]="0.5"
- * 	[loop]="true"
- * 	[autoplay]="true"
+ * 	[type]="'audio'" [url]="'sounds/Project_Utopia.ogg'" [volume]="0.5 " [loop]="true " [autoplay]="true"
  * ></ngx3js-audio>
  * <ngx3js-audio
- * 	[type]="'PositionalAudio'"
- * 	[url]="'sounds/358232_j_s_song.ogg'"
- * 	[refDistance]="20"
- * 	[autoplay]="true"
+ * 	[type]="'PositionalAudio'" [url]="'sounds/358232_j_s_song.ogg'" [refDistance]="20 " [autoplay]="true"
  * ></ngx3js-audio>
  * <ngx3js-audio
- * 	[type]="'PositionalAudio'"
- * 	[urlType]="'listener'"
- * 	[volume]="0.5"
- * 	[refDistance]="20"
+ * 	[type]="'PositionalAudio'" [urlType]="'listener'" [volume]="0.5 " [refDistance]="20"
  * ></ngx3js-audio>
  * ```
  * @see THREE.PositionalAudio - PositionalAudio, Positional, Position
@@ -61,7 +48,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 		{
 			provide: AbstractSubscribeComponent,
 			useExisting: forwardRef(() => AudioComponent),
-		}
+		},
 	],
 })
 export class AudioComponent
@@ -98,13 +85,13 @@ export class AudioComponent
 	@Input() public autoplay: boolean = true;
 
 	/**
-	 * Setup the [page:Audio.source source] to the audioBuffer, and sets [page:Audio.sourceType sourceType] to 'buffer'.
-	 * If [page:Audio.autoplay autoplay], also starts playback.
+	 * Setup the [source](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/audio/Audio.source) to the audioBuffer, and sets [sourceType](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/audio/Audio.sourceType) to 'buffer'.
+	 * If [autoplay](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/audio/Audio.autoplay), also starts playback.
 	 */
 	@Input() public play: boolean = true;
 
 	/**
-	 * Set [link:https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loop source.loop] to *value*
+	 * Set [source.loop](https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loop) to *value*
 	 * (whether playback should loop).
 	 */
 	@Input() public loop: boolean = true;
@@ -115,17 +102,17 @@ export class AudioComponent
 	@Input() public volume: number = null;
 
 	/**
-	 * Sets the value of [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance panner.refDistance].
+	 * Sets the value of [panner.refDistance](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance).
 	 */
 	@Input() public refDistance: number = null;
 
 	/**
-	 * Sets the value of [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor panner.rolloffFactor].
+	 * Sets the value of [panner.rolloffFactor](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor).
 	 */
 	@Input() public rolloffFactor: number = null;
 
 	/**
-	 * Sets the value of [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel panner.distanceModel].
+	 * Sets the value of [panner.distanceModel](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel).
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -133,28 +120,28 @@ export class AudioComponent
 	@Input() public distanceModel: string = null; // "exponential" | "inverse" | "linear"
 
 	/**
-	 * Sets the value of [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance panner.maxDistance].
+	 * Sets the value of [panner.maxDistance](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance).
 	 */
 	@Input() public maxDistance: number = null;
 
 	/**
-	 * This method can be used in order to transform an omnidirectional sound into a [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode directional sound].
+	 * This method can be used in order to transform an omnidirectional sound into a [directional sound](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode).
 	 */
 	@Input() public coneInnerAngle: number = null;
 
 	/**
-	 * This method can be used in order to transform an omnidirectional sound into a [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode directional sound].
+	 * This method can be used in order to transform an omnidirectional sound into a [directional sound](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode).
 	 */
 	@Input() public coneOuterAngle: number = null;
 
 	/**
-	 * This method can be used in order to transform an omnidirectional sound into a [link:https://developer.mozilla.org/en-US/docs/Web/API/PannerNode directional sound].
+	 * This method can be used in order to transform an omnidirectional sound into a [directional sound](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode).
 	 */
 	@Input() public coneOuterGain: number = 1;
 
 	/**
 	 * A non-zero power of two up to 2048, representing the size of the FFT (Fast Fourier Transform) to be used to determine the frequency domain.
-	 * See [link:https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize this page] for details.
+	 * See [this page](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize) for details.
 	 */
 	@Input() public fftSize: number = 128;
 
@@ -368,7 +355,7 @@ export class AudioComponent
 	/**
 	 * Gets analyser
 	 * @param [fftSize] A non-zero power of two up to 2048, representing the size of the FFT (Fast Fourier Transform) to be used to determine the frequency domain.
-	 *                  See [link:https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize this page] for details.
+	 *                  See [this page](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize) for details.
 	 * @returns analyser
 	 */
 	public getAnalyser(fftSize?: number): THREE.AudioAnalyser {

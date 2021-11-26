@@ -26,7 +26,9 @@ import { CanvasFunctionType, TextureUtils } from './texture/textureUtils';
 import { unzipSync } from './threejs-library/fflate.module';
 
 /**
- * AbstractTextureComponent
+ * The Abstract Texture component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractTextureComponent) page for details.
  *
  * ```ts
  * _@Component({
@@ -94,8 +96,8 @@ export class AbstractTextureComponent
 
 	/**
 	 * If set to *true*, the alpha channel, if present, is multiplied into the color channels when the texture is uploaded to the GPU. Default is *false*.
-	 * Note that this property has no effect for [link:https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap ImageBitmap].
-	 * You need to configure on bitmap creation instead. See [page:ImageBitmapLoader].
+	 * Note that this property has no effect for [ImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap).
+	 * You need to configure on bitmap creation instead. See [ImageBitmapLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/loaders/ImageBitmapLoader).
 	 *
 	 */
 	@Input() public premultiplyAlpha: boolean = null;
@@ -121,8 +123,8 @@ export class AbstractTextureComponent
 	@Input() public text: string = null;
 
 	/**
-	 * How the image is applied to the object. An object type of [page:Textures THREE.UVMapping] is the default, where the U,V coordinates are used to apply the map.
-	 * See the [page:Textures texture constants] page for other mapping types.
+	 * How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) is the default, where the U,V coordinates are used to apply the map.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for other mapping types.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -139,9 +141,9 @@ export class AbstractTextureComponent
 
 	/**
 	 * This defines how the texture is wrapped horizontally and corresponds to *U* in UV mapping.
-	 * The default is [page:Textures THREE.ClampToEdgeWrapping], where the edge is clamped to the outer edge texels.
-	 * The other two choices are [page:Textures THREE.RepeatWrapping] and [page:Textures THREE.MirroredRepeatWrapping].
-	 * See the [page:Textures texture constants] page for details.
+	 * The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), where the edge is clamped to the outer edge texels.
+	 * The other two choices are [THREE.RepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) and [THREE.MirroredRepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures).
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details.
 	 *
 	 * The Default Value of wrapS, wrapT.
 	 *
@@ -155,9 +157,9 @@ export class AbstractTextureComponent
 
 	/**
 	 * This defines how the texture is wrapped horizontally and corresponds to *U* in UV mapping.
-	 * The default is [page:Textures THREE.ClampToEdgeWrapping], where the edge is clamped to the outer edge texels.
-	 * The other two choices are [page:Textures THREE.RepeatWrapping] and [page:Textures THREE.MirroredRepeatWrapping].
-	 * See the [page:Textures texture constants] page for details.
+	 * The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), where the edge is clamped to the outer edge texels.
+	 * The other two choices are [THREE.RepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) and [THREE.MirroredRepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures).
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -200,9 +202,9 @@ export class AbstractTextureComponent
 
 	/**
 	 * How the texture is sampled when a texel covers more than one pixel. The default is
-	 * [page:Textures THREE.LinearFilter], which takes the four closest texels and bilinearly interpolates among them.
-	 * The other option is [page:Textures THREE.NearestFilter], which uses the value of the closest texel.
-	 * See the [page:Textures texture constants] page for details.
+	 * [THREE.LinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), which takes the four closest texels and bilinearly interpolates among them.
+	 * The other option is [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), which uses the value of the closest texel.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -218,8 +220,8 @@ export class AbstractTextureComponent
 
 	/**
 	 * How the texture is sampled when a texel covers less than one pixel. The default is
-	 * [page:Textures THREE.LinearMipmapLinearFilter], which uses mipmapping and a trilinear filter.
-	 * See the [page:Textures texture constants] page for all possible choices.
+	 * [THREE.LinearMipmapLinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), which uses mipmapping and a trilinear filter.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for all possible choices.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -234,8 +236,8 @@ export class AbstractTextureComponent
 	@Input() public minFilter: string = null;
 
 	/**
-	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically set this to [page:Textures THREE.RGBFormat] for JPG images.
-	 * See the [page:Textures texture constants] page for details of other formats.
+	 * The default is [THREE.RGBAFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), although the [TextureLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/TextureLoader) will automatically set this to [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) for JPG images.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -258,8 +260,8 @@ export class AbstractTextureComponent
 	@Input() public format: string = null;
 
 	/**
-	 * This must correspond to the [page:Texture.format .format]. The default is [page:Textures THREE.UnsignedByteType], which will be used for most texture formats.
-	 * See the [page:Textures texture constants] page for details of other formats.
+	 * This must correspond to the [.format](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture.format). The default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), which will be used for most texture formats.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -281,20 +283,20 @@ export class AbstractTextureComponent
 
 	/**
 	 * The number of samples taken along the axis through the pixel that has the highest density of texels.
-	 * By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used. Use [page:WebGLRenderer.getMaxAnisotropy renderer.getMaxAnisotropy]() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
+	 * By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used. Use [renderer.getMaxAnisotropy](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.getMaxAnisotropy)() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
 	 */
 	@Input() public anisotropy: number = null;
 
 	/**
 	 * 4 by default. Specifies the alignment requirements for the start of each pixel row in memory.
 	 * The allowable values are 1 (byte-alignment), 2 (rows aligned to even-numbered bytes), 4 (word-alignment), and 8 (rows start on double-word boundaries).
-	 * See [link:http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml glPixelStorei] for more information.
+	 * See [glPixelStorei](http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml) for more information.
 	 */
 	@Input() public unpackAlignment: number = null;
 
 	/**
-	 * [page:Textures THREE.LinearEncoding] is the default.
-	 * See the [page:Textures texture constants] page for details of other formats.
+	 * [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) is the default.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * Notice - case insensitive.
@@ -314,7 +316,7 @@ export class AbstractTextureComponent
 
 	/**
 	 * How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to
-	 * [page:Textures THREE.RepeatWrapping] or [page:Textures THREE.MirroredRepeatWrapping] to achieve the desired tiling effect. Setting different repeat values for textures is restricted in the same way like [page:.offset].
+	 * [THREE.RepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) or [THREE.MirroredRepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) to achieve the desired tiling effect. Setting different repeat values for textures is restricted in the same way like [Texture.offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture.offset).
 	 *
 	 * The default value of repeatX , repeatY
 	 */
@@ -322,7 +324,7 @@ export class AbstractTextureComponent
 
 	/**
 	 * How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to
-	 * [page:Textures THREE.RepeatWrapping] or [page:Textures THREE.MirroredRepeatWrapping] to achieve the desired tiling effect. Setting different repeat values for textures is restricted in the same way like [page:.offset].
+	 * [THREE.RepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) or [THREE.MirroredRepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) to achieve the desired tiling effect. Setting different repeat values for textures is restricted in the same way like [Texture.offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture.offset).
 	 *
 	 * The value of repeat.x
 	 */
@@ -330,7 +332,7 @@ export class AbstractTextureComponent
 
 	/**
 	 * How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to
-	 * [page:Textures THREE.RepeatWrapping] or [page:Textures THREE.MirroredRepeatWrapping] to achieve the desired tiling effect. Setting different repeat values for textures is restricted in the same way like [page:.offset].
+	 * [THREE.RepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) or [THREE.MirroredRepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) to achieve the desired tiling effect. Setting different repeat values for textures is restricted in the same way like [Texture.offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture.offset).
 	 *
 	 * The value of repeat.y
 	 */
@@ -413,8 +415,8 @@ export class AbstractTextureComponent
 
 	/**
 	 * If set to *true*, the texture is flipped along the vertical axis when uploaded to the GPU. Default is *true*.
-	 * Note that this property has no effect for [link:https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap ImageBitmap].
-	 * You need to configure on bitmap creation instead. See [page:ImageBitmapLoader].
+	 * Note that this property has no effect for [ImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap).
+	 * You need to configure on bitmap creation instead. See [ImageBitmapLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/loaders/ImageBitmapLoader).
 	 */
 	@Input() public flipY: boolean = null;
 
@@ -456,7 +458,7 @@ export class AbstractTextureComponent
 					) {
 						textureType = this.type;
 					}
-					info.materials.forEach(material => {
+					info.materials.forEach((material) => {
 						if (material instanceof THREE.Scene) {
 							switch (textureType.toLowerCase()) {
 								case 'environmentbackground':
@@ -484,7 +486,7 @@ export class AbstractTextureComponent
 							}
 						}
 					});
-				});				
+				});
 			}
 			if (ThreeUtil.isNotNull(this.texture.image)) {
 				if (

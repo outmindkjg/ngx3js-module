@@ -3,13 +3,13 @@ import {
 	forwardRef,
 	Input,
 	OnInit,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator';
 import {
 	AbstractObject3dComponent,
-	Object3dOptions
+	Object3dOptions,
 } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
@@ -92,9 +92,9 @@ export interface LightOptions extends Object3dOptions {
 
 	/**
 	 * Setting this to values greater than 1 will blur the edges of the shadow.
-	 * High values will cause unwanted banding effects in the shadows - a greater [page:.mapSize mapSize] will allow for a higher value to be used here before these effects become visible.
-	 * If [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer PCFSoftShadowMap], radius has no effect and it is recommended to increase softness by decreasing [page:.mapSize mapSize] instead.
-	 * Note that this has no effect if the [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer BasicShadowMap].
+	 * High values will cause unwanted banding effects in the shadows - a greater [LightShadow.mapSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/shadows/LightShadow.mapSize) will allow for a higher value to be used here before these effects become visible.
+	 * If [WebGLRenderer.shadowMap.type](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.shadowMap.type) is set to [PCFSoftShadowMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer), radius has no effect and it is recommended to increase softness by decreasing [LightShadow.mapSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/shadows/LightShadow.mapSize) instead.
+	 * Note that this has no effect if the [WebGLRenderer.shadowMap.type](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.shadowMap.type) is set to [BasicShadowMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer).
 	 */
 	shadowRadius?: number;
 
@@ -109,25 +109,25 @@ export interface LightOptions extends Object3dOptions {
 	shadowCameraNear?: number;
 
 	/**
-	 * A [Page:Vector2] defining the width and height of the shadow map.
+	 * A [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) defining the width and height of the shadow map.
 	 */
 	shadowMapSize?: number;
 
 	/**
-	 * A [Page:Vector2] defining the width and height of the shadow map.
+	 * A [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) defining the width and height of the shadow map.
 	 * vector2.width
 	 */
 	shadowMapSizeWidth?: number;
 
 	/**
-	 * A [Page:Vector2] defining the width and height of the shadow map.
+	 * A [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) defining the width and height of the shadow map.
 	 * vector2.height
 	 */
 	shadowMapSizeHeight?: number;
 
 	/**
 	 * Camera frustum far plane. Default is *2000*.
-	 * Must be greater than the current value of [page:.near near] plane.
+	 * Must be greater than the current value of [Camera.near](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/Camera.near) plane.
 	 */
 	shadowCameraFar?: number;
 
@@ -162,7 +162,7 @@ export interface LightOptions extends Object3dOptions {
 	shadowCameraZoom?: number;
 
 	/**
-	 * An instance of [page:SphericalHarmonics3].
+	 * An instance of [SphericalHarmonics3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/SphericalHarmonics3).
 	 */
 	sh?: string;
 
@@ -203,51 +203,32 @@ export interface LightOptions extends Object3dOptions {
 }
 
 /**
- * LightComponent
+ * The Light component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightComponent) page for details.
+ * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light) page for a live demo.
+ *
  * ```html
  * <ngx3js-light
- * 	[type]="'Hemisphere'"
- * 	[skyColor]="'0xffffff'"
- * 	[groundColor]="'0x444444'"
+ * 	[type]="'Hemisphere'" [skyColor]="'0xffffff'" [groundColor]="'0x444444'"
  * >
  * 	<ngx3js-position [x]="0" [y]="20" [z]="0"></ngx3js-position>
  * </ngx3js-light>
  * <ngx3js-light
- * 	[type]="'directional'"
- * 	[color]="'0xffffff'"
- * 	[intensity]="1"
+ * 	[type]="'directional'" [color]="'0xffffff'" [intensity]="1"
  * >
  * 	<ngx3js-position [x]="-3" [y]="10" [z]="-10"></ngx3js-position>
  * </ngx3js-light>
  * <ngx3js-light
- * 	[type]="'AmbientLight'"
- * 	[color]="'0x6688cc'"
+ * 	[type]="'AmbientLight'" [color]="'0x6688cc'"
  * ></ngx3js-light>
  * <ngx3js-light
- * 	[type]="'SpotLight'"
- * 	[color]="'0xffffff'"
- * 	[intensity]="1.5"
- * 	[angle]="180 / 9"
- * 	[castShadow]="true"
- * 	[shadowCameraTop]="2"
- * 	[shadowCameraBottom]="-2"
- * 	[shadowCameraLeft]="-2"
- * 	[shadowCameraRight]="2"
- * 	[shadowCameraNear]="1000"
- * 	[shadowCameraFar]="4000"
- * 	[shadowMapSize]="1024"
+ * 	[type]="'SpotLight'" [color]="'0xffffff'" [intensity]="1.5 " [angle]="180 / 9 " [castShadow]="true " [shadowCameraTop]="2 " [shadowCameraBottom]="-2 " [shadowCameraLeft]="-2 " [shadowCameraRight]="2 " [shadowCameraNear]="1000 " [shadowCameraFar]="4000 " [shadowMapSize]="1024"
  * >
  * 	<ngx3js-position [x]="0" [y]="500" [z]="2000"></ngx3js-position>
  * </ngx3js-light>
  * <ngx3js-light
- * 	[type]="'SpotLight'"
- * 	[color]="'0xffffff'"
- * 	[intensity]="1.5"
- * 	[angle]="20"
- * 	[castShadow]="true"
- * 	[shadowCameraNear]="1000"
- * 	[shadowCameraFar]="4000"
- * 	[shadowMapSize]="1024"
+ * 	[type]="'SpotLight'" [color]="'0xffffff'" [intensity]="1.5 " [angle]="20 " [castShadow]="true " [shadowCameraNear]="1000 " [shadowCameraFar]="4000 " [shadowMapSize]="1024"
  * >
  * 	<ngx3js-position [x]="0" [y]="500" [z]="2000"></ngx3js-position>
  * </ngx3js-light>
@@ -346,9 +327,9 @@ export class LightComponent
 
 	/**
 	 * Setting this to values greater than 1 will blur the edges of the shadow.
-	 * High values will cause unwanted banding effects in the shadows - a greater [page:.mapSize mapSize] will allow for a higher value to be used here before these effects become visible.
-	 * If [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer PCFSoftShadowMap], radius has no effect and it is recommended to increase softness by decreasing [page:.mapSize mapSize] instead.
-	 * Note that this has no effect if the [page:WebGLRenderer.shadowMap.type] is set to [page:Renderer BasicShadowMap].
+	 * High values will cause unwanted banding effects in the shadows - a greater [LightShadow.mapSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/shadows/LightShadow.mapSize) will allow for a higher value to be used here before these effects become visible.
+	 * If [WebGLRenderer.shadowMap.type](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.shadowMap.type) is set to [PCFSoftShadowMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer), radius has no effect and it is recommended to increase softness by decreasing [LightShadow.mapSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/shadows/LightShadow.mapSize) instead.
+	 * Note that this has no effect if the [WebGLRenderer.shadowMap.type](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.shadowMap.type) is set to [BasicShadowMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer).
 	 */
 	@Input() public shadowRadius: number = null;
 
@@ -363,25 +344,25 @@ export class LightComponent
 	@Input() public shadowCameraNear: number = null;
 
 	/**
-	 * A [Page:Vector2] defining the width and height of the shadow map.
+	 * A [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) defining the width and height of the shadow map.
 	 */
 	@Input() public shadowMapSize: number = null;
 
 	/**
-	 * A [Page:Vector2] defining the width and height of the shadow map.
+	 * A [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) defining the width and height of the shadow map.
 	 * vector2.width
 	 */
 	@Input() public shadowMapSizeWidth: number = null;
 
 	/**
-	 * A [Page:Vector2] defining the width and height of the shadow map.
+	 * A [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) defining the width and height of the shadow map.
 	 * vector2.height
 	 */
 	@Input() public shadowMapSizeHeight: number = null;
 
 	/**
 	 * Camera frustum far plane. Default is *2000*.
-	 * Must be greater than the current value of [page:.near near] plane.
+	 * Must be greater than the current value of [Camera.near](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/Camera.near) plane.
 	 */
 	@Input() public shadowCameraFar: number = null;
 
@@ -416,7 +397,7 @@ export class LightComponent
 	@Input() public shadowCameraZoom: number = null;
 
 	/**
-	 * An instance of [page:SphericalHarmonics3].
+	 * An instance of [SphericalHarmonics3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/SphericalHarmonics3).
 	 */
 	@Input() public sh: string = null;
 
@@ -856,27 +837,35 @@ export class LightComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'shadowMapSizeWidth') || ThreeUtil.isIndexOf(changes, 'shadowMapSizeHeight')) {
+			if (
+				ThreeUtil.isIndexOf(changes, 'shadowMapSizeWidth') ||
+				ThreeUtil.isIndexOf(changes, 'shadowMapSizeHeight')
+			) {
 				changes = ThreeUtil.pushUniq(changes, ['shadowMapSize']);
 			}
-			if (ThreeUtil.isIndexOf(changes, 'shadowCameraFov') || 
-				ThreeUtil.isIndexOf(changes, 'shadowCameraNear') || 
+			if (
+				ThreeUtil.isIndexOf(changes, 'shadowCameraFov') ||
+				ThreeUtil.isIndexOf(changes, 'shadowCameraNear') ||
 				ThreeUtil.isIndexOf(changes, 'shadowCameraFar') ||
 				ThreeUtil.isIndexOf(changes, 'shadowCameraZoom') ||
 				ThreeUtil.isIndexOf(changes, 'shadowCameraLeft') ||
 				ThreeUtil.isIndexOf(changes, 'shadowCameraRight') ||
 				ThreeUtil.isIndexOf(changes, 'shadowCameraTop') ||
-				ThreeUtil.isIndexOf(changes, 'shadowCameraBottom')) {
+				ThreeUtil.isIndexOf(changes, 'shadowCameraBottom')
+			) {
 				changes = ThreeUtil.pushUniq(changes, ['shadowCamera']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
-					case 'shadowbias' :
+					case 'shadowbias':
 						if (ThreeUtil.isNotNull(this.shadowBias)) {
-							this.light.shadow.bias = ThreeUtil.getTypeSafe(this.shadowBias, 0);
+							this.light.shadow.bias = ThreeUtil.getTypeSafe(
+								this.shadowBias,
+								0
+							);
 						}
 						break;
-					case 'shadowradius' :
+					case 'shadowradius':
 						if (ThreeUtil.isNotNull(this.shadowRadius)) {
 							this.light.shadow.radius = ThreeUtil.getTypeSafe(
 								this.shadowRadius,
@@ -884,21 +873,23 @@ export class LightComponent
 							);
 						}
 						break;
-					case 'shadowmapsize' :
+					case 'shadowmapsize':
 						if (
 							ThreeUtil.isNotNull(this.shadowMapSizeWidth) ||
 							ThreeUtil.isNotNull(this.shadowMapSize)
 						) {
-							this.light.shadow.mapSize.width = this.getShadowMapSizeWidth(1024);
+							this.light.shadow.mapSize.width =
+								this.getShadowMapSizeWidth(1024);
 						}
 						if (
 							ThreeUtil.isNotNull(this.shadowMapSizeHeight) ||
 							ThreeUtil.isNotNull(this.shadowMapSize)
 						) {
-							this.light.shadow.mapSize.height = this.getShadowMapSizeHeight(1024);
+							this.light.shadow.mapSize.height =
+								this.getShadowMapSizeHeight(1024);
 						}
 						break;
-					case 'shadowcamera' :
+					case 'shadowcamera':
 						if (this.light.shadow.camera) {
 							if (this.light.shadow.camera instanceof THREE.PerspectiveCamera) {
 								if (ThreeUtil.isNotNull(this.shadowCameraFov)) {
@@ -938,7 +929,8 @@ export class LightComponent
 									this.light.shadow.camera.top = this.getShadowCameraTop(5);
 								}
 								if (ThreeUtil.isNotNull(this.shadowCameraBottom)) {
-									this.light.shadow.camera.bottom = this.getShadowCameraBottom(-5);
+									this.light.shadow.camera.bottom =
+										this.getShadowCameraBottom(-5);
 								}
 								if (ThreeUtil.isNotNull(this.shadowCameraNear)) {
 									this.light.shadow.camera.near = ThreeUtil.getTypeSafe(
@@ -959,7 +951,7 @@ export class LightComponent
 									);
 								}
 							}
-						}						
+						}
 						break;
 					default:
 						break;

@@ -24,7 +24,11 @@ import { MixerComponent } from './../mixer/mixer.component';
 import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
 
 /**
- * SceneComponent
+ * The Scene component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SceneComponent) page for details.
+ * See the [ngx scene](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_scene) page for a live demo.
+ *
  */
 @Component({
 	selector: 'ngx3js-scene',
@@ -38,8 +42,8 @@ import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
 		{
 			provide: AbstractSubscribeComponent,
 			useExisting: forwardRef(() => SceneComponent),
-		}	
-	]
+		},
+	],
 })
 export class SceneComponent
 	extends AbstractObject3dComponent
@@ -52,13 +56,13 @@ export class SceneComponent
 
 	/**
 	 * If not null, sets the background used when rendering the scene, and is always rendered first.
-	 * Can be set to a [page:Color] which sets the clear color, a [page:Texture] covering the canvas, a cubemap as a [page:CubeTexture] or an equirectangular as a [page:Texture] . Default is null.
+	 * Can be set to a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color) which sets the clear color, a [Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture) covering the canvas, a cubemap as a [CubeTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/CubeTexture) or an equirectangular as a [Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture) . Default is null.
 	 */
 	@Input() public background: ThreeTexture | ThreeColor = null;
 
 	/**
 	 * If not null, this texture is set as the environment map for all physical materials in the scene.
-	 * However, it's not possible to overwrite an existing texture assigned to [page:MeshStandardMaterial.envMap]. Default is null.
+	 * However, it's not possible to overwrite an existing texture assigned to [MeshStandardMaterial.envMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshStandardMaterial.envMap). Default is null.
 	 */
 	@Input() public environment: ThreeTexture = null;
 

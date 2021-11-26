@@ -21,7 +21,9 @@ export interface ScaleOptions extends DirectiveOptions {}
 /**
  * Scale Directive
  *
- * @example
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ScaleDirective) page for details.
+ * See the [ngx directives](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_directives) page for a live demo.
+ *
  * ```html
  * <ngx3js-mesh [ngx3jsScale]="{
  * 		type : 'xyz',

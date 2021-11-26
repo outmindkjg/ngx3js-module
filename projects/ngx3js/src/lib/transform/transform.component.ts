@@ -4,7 +4,10 @@ import { CssStyle, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * TransformComponent
+ * Transform Component
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TransformComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-transform',

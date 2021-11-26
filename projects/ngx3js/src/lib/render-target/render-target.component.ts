@@ -12,7 +12,9 @@ import { SizeComponent } from '../size/size.component';
 import { AbstractTextureComponent } from '../texture.abstract';
 
 /**
- * RenderTargetComponent
+ * The Render Target component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RenderTargetComponent) page for details.
  *
  * @see THREE.RenderTarget
  */

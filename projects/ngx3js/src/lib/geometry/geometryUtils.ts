@@ -105,7 +105,10 @@ GeometryConf.terrainsin = (geometry: THREE.BufferGeometry, options?: any) => {
 };
 
 /**
- * Geometry utils
+ * Ngx Geometry Utils
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxGeometryUtils) page for details.
+ *
  */
 export class NgxGeometryUtils {
 	/**

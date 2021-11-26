@@ -9,6 +9,12 @@ import { AbstractChartComponent } from '../../chart.abstract';
 import { AbstractControllerComponent } from '../../controller.component.abstract';
 import { RendererTimer, ThreeUtil } from '../../interface';
 
+/**
+ * The Chart Controller component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartControllerComponent) page for details.
+ *
+ */
 @Component({
 	selector: 'ngx3js-chart-controller',
 	templateUrl: './controller.component.html',

@@ -27,11 +27,10 @@ export interface HtmlCollection {
 }
 
 /**
- * VisualComponent
+ * The Visual component.
  *
- * ```html
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VisualComponent) page for details.
  *
- * ```
  */
 @Component({
 	selector: 'ngx3js-visual',

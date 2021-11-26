@@ -22,7 +22,9 @@ export interface RotateOptions extends DirectiveOptions {}
 /**
  * Rotate Directive
  *
- * @example
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RotateDirective) page for details.
+ * See the [ngx directives](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_directives) page for a live demo.
+ *
  * ```html
  * <ngx3js-mesh [ngx3jsRotate]="{
  * 		type : 'xyz',

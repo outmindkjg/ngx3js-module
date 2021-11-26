@@ -8,6 +8,12 @@ import {
 import { AbstractChartComponent } from '../../chart.abstract';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
+/**
+ * The Chart Doughnut component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartDoughnutComponent) page for details.
+ *
+ */
 @Component({
 	selector: 'ngx3js-chart-doughnut',
 	templateUrl: './doughnut.component.html',

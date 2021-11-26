@@ -3,7 +3,11 @@ import { StarGeometry } from './geometry.star';
 import { NgxGeometryUtils } from './geometryUtils';
 
 /**
- * StarDepth geometry
+ * The Star Depth geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/StarDepthGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
+ *
  */
 export class StarDepthGeometry extends THREE.BufferGeometry {
 	/**

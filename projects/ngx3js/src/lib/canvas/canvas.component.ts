@@ -1,7 +1,9 @@
 import {
-	Component, ElementRef,
+	Component,
+	ElementRef,
 	Input,
-	OnInit, SimpleChanges
+	OnInit,
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
@@ -9,7 +11,11 @@ import { HtmlCollection } from '../visual/visual.component';
 import { CssStyle, ThreeUtil } from './../interface';
 
 /**
- * CanvasComponent
+ * The Canvas component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CanvasComponent) page for details.
+ * See the [ngx hud](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_hud) page for a live demo.
+ *
  */
 @Component({
 	selector: 'ngx3js-canvas',
@@ -157,9 +163,9 @@ export class CanvasComponent
 	 */
 	public getStyle(): CssStyle {
 		const style: CssStyle = {
-			position : 'absolute',
-			left : 0,
-			top : 0,
+			position: 'absolute',
+			left: 0,
+			top: 0,
 			width: '100%',
 			height: '100%',
 		};
@@ -212,13 +218,10 @@ export class CanvasComponent
 			}
 			this.canvas = canvas;
 			this.canvas.appendChild(this.ele.nativeElement);
-			this.canvas.addEventListener(
-				'pointerdown',
-				(e) => {
-					e.stopPropagation();
-				}
-			);
-	
+			this.canvas.addEventListener('pointerdown', (e) => {
+				e.stopPropagation();
+			});
+
 			this.collection.html = this.canvas;
 			this.collection.children = [];
 			this.collection.component = this;

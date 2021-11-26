@@ -7,7 +7,7 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
@@ -19,7 +19,7 @@ import {
 	ThreeColor,
 	ThreeTexture,
 	ThreeUniforms,
-	ThreeUtil
+	ThreeUtil,
 } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractMaterialComponent } from '../material.abstract';
@@ -29,13 +29,15 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
 
-
 /**
- * MaterialComponent
+ * The Material component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MaterialComponent) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material) page for a live demo.
  *
  * Abstract base class for materials.
  *
- * Materials describe the appearance of [page:Object objects].
+ * Materials describe the appearance of objects.
  * They are defined in a (mostly) renderer-independent way, so you don't have to
  * rewrite materials if you decide to use a different renderer.
  *
@@ -44,122 +46,65 @@ import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
  *
  * ```html
  * <ngx3js-material
- * 	[type]="'LineBasicMaterial'"
- * 	[color]="'0xffff00'"
+ * 	[type]="'LineBasicMaterial'" [color]="'0xffff00'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'LineDashedMaterial'"
- * 	[color]="'blue'"
- * 	[linewidth]="1"
- * 	[dashSize]="10"
- * 	[gapSize]="10"
+ * 	[type]="'LineDashedMaterial'" [color]="'blue'" [linewidth]="1 " [dashSize]="10 " [gapSize]="10"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshBasicMaterial'"
- * 	[color]="'0x000000'"
- * 	[wireframe]="true"
- * 	[wireframeLinewidth]="1"
- * 	[side]="'double'"
+ * 	[type]="'MeshBasicMaterial'" [color]="'0x000000'" [wireframe]="true " [wireframeLinewidth]="1 " [side]="'double'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[materialType]="'overrideMaterial'"
- * 	[type]="'MeshDepthMaterial'"
+ * 	[materialType]="'overrideMaterial'" [type]="'MeshDepthMaterial'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshDepth'"
- * 	[depthPacking]="'RGBA'"
- * 	[displacementMap]="displacementMap"
- * 	[displacementScale]="2.436143"
- * 	[displacementBias]="-0.428408"
- * 	[side]="controls.side"
+ * 	[type]="'MeshDepth'" [depthPacking]="'RGBA'" [displacementMap]="displacementMap " [displacementScale]="2.436143 " [displacementBias]="-0.428408 " [side]="controls.side"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshDistance'"
- * 	[materialType]="'customdistance'"
- * 	[alphaTest]="0.5"
- * 	[alphaMap]="alphaMap"
+ * 	[type]="'MeshDistance'" [materialType]="'customdistance'" [alphaTest]="0.5 " [alphaMap]="alphaMap"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshMatcapMaterial'"
- * 	[color]="'0xaa24df'"
- * 	[matcap]="texture"
+ * 	[type]="'MeshMatcapMaterial'" [color]="'0xaa24df'" [matcap]="texture"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshNormal'"
- * 	[color]="'0xff0000'"
+ * 	[type]="'MeshNormal'" [color]="'0xff0000'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshPhongMaterial'"
- * 	[specular]="'0x333333'"
- * 	[shininess]="5"
- * 	[map]="'textures/planets/earth_atmos_2048.jpg'"
- * 	[specularMap]="'textures/planets/earth_specular_2048.jpg'"
- * 	[normalMap]="'textures/planets/earth_normal_2048.jpg'"
- * 	[normalScale]="0.85"
+ * 	[type]="'MeshPhongMaterial'" [specular]="'0x333333'" [shininess]="5 " [map]="'textures/planets/earth_atmos_2048.jpg'" [specularMap]="'textures/planets/earth_specular_2048.jpg'" [normalMap]="'textures/planets/earth_normal_2048.jpg'" [normalScale]="0.85"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshPhysicalMaterial'"
- * 	[roughness]="info.roughness"
- * 	[metalness]="info.metalness"
- * 	[color]="'0xffffff'"
- * 	[envMap]="radianceMap"
- * 	[envMapIntensity]="1"
- * 	[reflectivity]="1"
+ * 	[type]="'MeshPhysicalMaterial'" [roughness]="info.roughness " [metalness]="info.metalness " [color]="'0xffffff'" [envMap]="radianceMap " [envMapIntensity]="1 " [reflectivity]="1"
  * ></ngx3js-material>
  * <ngx3js-material
  * 	#sphereMaterial
- * 	[type]="'MeshStandardMaterial'"
- * 	[color]="'0x888855'"
- * 	[roughness]="0.8"
- * 	[metalness]="0.5"
+ * 	[type]="'MeshStandardMaterial'" [color]="'0x888855'" [roughness]="0.8 " [metalness]="0.5"
  * ></ngx3js-material>
  * <ngx3js-material [type]="'MeshToonMaterial'" [color]="info.color"></ngx3js-texture>
  * <ngx3js-material
- * 	[type]="'PointsMaterial'"
- * 	[color]="'0xffff00'"
- * 	[size]="5"
+ * 	[type]="'PointsMaterial'" [color]="'0xffff00'" [size]="5"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'RawShaderMaterial'"
- * 	[uniforms]="{
+ * 	[type]="'RawShaderMaterial'" [uniforms]="{
  * 		time: { type: 'number', value: 1.0 },
  * 		sineTime: { type: 'number', value: 1.0 }
- * 	}"
- * 	[shader]="'instancing'"
- * 	[side]="'double'"
- * 	[transparent]="true"
+ * 	} " [shader]="'instancing'" [side]="'double'" [transparent]="true"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'ShaderMaterial'"
- * 	[shader]="'audioVisualizer'"
- * 	[uniforms]="{ tAudioData: { type: 'DataTexture', value: audio } }"
+ * 	[type]="'ShaderMaterial'" [shader]="'audioVisualizer'" [uniforms]="{ tAudioData: { type: 'DataTexture', value: audio } }"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'ShadowMaterial'"
- * 	[color]="'0x111111'"
+ * 	[type]="'ShadowMaterial'" [color]="'0x111111'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'Line'"
- * 	[color]="'0x4080ff'"
- * 	[linewidth]="5"
- * 	[dashed]="true"
- * 	[dashScale]="5"
- * 	[dashSize]="2"
- * 	[gapSize]="3"
- * 	[resolutionX]="1024"
- * 	[resolutionY]="1024"
+ * 	[type]="'Line'" [color]="'0x4080ff'" [linewidth]="5 " [dashed]="true " [dashScale]="5 " [dashSize]="2 " [gapSize]="3 " [resolutionX]="1024 " [resolutionY]="1024"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'SpriteMaterial'"
- * 	[color]="info.color"
+ * 	[type]="'SpriteMaterial'" [color]="info.color"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'meshlambert'"
- * 	[color]="'0xff0000'"
+ * 	[type]="'meshlambert'" [color]="'0xff0000'"
  * ></ngx3js-material>
  * ```
- * 
-* @see {@link https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material | NGX Material}
  * @see THREE.Material
  */
 @Component({
@@ -289,7 +234,7 @@ export class MaterialComponent
 	@Input() public wireframe: boolean = null;
 
 	/**
-	 * Specular color of the material. Default is a [page:Color] set to *0x111111* (very dark grey).
+	 * Specular color of the material. Default is a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color) set to *0x111111* (very dark grey).
 	 * This defines how shiny the material is and the color of its shine.
 	 */
 	@Input() public specular: ThreeColor = null;
@@ -300,7 +245,7 @@ export class MaterialComponent
 	@Input() public specularMultiply: number = null;
 
 	/**
-	 * How shiny the [page:.specular] highlight is; a higher value gives a sharper highlight. Default is *30*.
+	 * How shiny the [MeshPhongMaterial.specular](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshPhongMaterial.specular) highlight is; a higher value gives a sharper highlight. Default is *30*.
 	 */
 	@Input() public shininess: number = null;
 
@@ -338,7 +283,7 @@ export class MaterialComponent
 
 	/**
 	 * The type of normal map.
-	 * Options are [page:constant THREE.TangentSpaceNormalMap] (default), and [page:constant THREE.ObjectSpaceNormalMap].
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.THREE.TangentSpaceNormalMap) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.THREE.ObjectSpaceNormalMap).
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -347,19 +292,19 @@ export class MaterialComponent
 
 	/**
 	 * How much the normal map affects the material. Typical ranges are 0-1.
-	 * Default is a [page:Vector2] set to (1,1) *1*.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) set to (1,1) *1*.
 	 */
 	@Input() public normalScale: number = null;
 
 	/**
 	 * How much the normal map affects the material. Typical ranges are 0-1.
-	 * Default is a [page:Vector2] set to (1,1).
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) set to (1,1).
 	 */
 	@Input() public normalScaleX: number = null;
 
 	/**
 	 * How much the normal map affects the material. Typical ranges are 0-1.
-	 * Default is a [page:Vector2] set to (1,1).
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2) set to (1,1).
 	 */
 	@Input() public normalScaleY: number = null;
 
@@ -377,7 +322,7 @@ export class MaterialComponent
 
 	/**
 	 * How to combine the result of the surface's color with the environment map, if any.
-	 * Options are [page:Materials THREE.Multiply] (default), [page:Materials THREE.MixOperation], [page:Materials THREE.AddOperation]. If mix is chosen, the [page:.reflectivity] is used to blend between the two colors.
+	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials), [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). If mix is chosen, the [MeshBasicMaterial.reflectivity](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshBasicMaterial.reflectivity) is used to blend between the two colors.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -388,27 +333,27 @@ export class MaterialComponent
 	@Input() public combine: string = null;
 
 	/**
-	 * How much the environment map affects the surface; also see [page:.combine].
+	 * How much the environment map affects the surface; also see [MeshBasicMaterial.combine](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshBasicMaterial.combine).
 	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 */
 	@Input() public reflectivity: number = null;
 
 	/**
 	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
-	 * It is used with environment mapping modes [page:Textures THREE.CubeRefractionMapping] and [page:Textures THREE.EquirectangularRefractionMapping].
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures).
 	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 */
 	@Input() public refractionRatio: number = null;
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [link:https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf OpenGL Core Profile] with the [page:WebGLRenderer WebGL] renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	@Input() public wireframeLinewidth: number = null;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap 2D Canvas lineCap] roperty and it is ignored by the [page:WebGLRenderer WebGL] renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) roperty and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -417,7 +362,7 @@ export class MaterialComponent
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin 2D Canvas lineJoin] property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -436,14 +381,14 @@ export class MaterialComponent
 
 	/**
 	 * Controls line thickness. Default is *1*.
-	 * Due to limitations of the [link:https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf OpenGL Core Profile] with the [page:WebGLRenderer WebGL] renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	@Input() public linewidth: number = null;
 
 	/**
 	 * Define appearance of line ends. Possible values are 'butt', 'round' and 'square'.
 	 * Default is 'round'.
-	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap 2D Canvas lineCap] property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -452,7 +397,7 @@ export class MaterialComponent
 
 	/**
 	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'.
-	 * This corresponds to the [link:https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin 2D Canvas lineJoin] property and it is ignored by the [page:WebGLRenderer WebGL] renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer.
 	 *
 	 * Notice - case insensitive.
 	 *
@@ -475,12 +420,12 @@ export class MaterialComponent
 	@Input() public gapSize: number = null;
 
 	/**
-	 * Encoding for depth packing. Default is [page:Textures BasicDepthPacking].
+	 * Encoding for depth packing. Default is [BasicDepthPacking](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures).
 	 */
 	@Input() public depthPacking: string = null;
 
 	/**
-	 * Encoding for depth packing. Default is [page:Textures BasicDepthPacking].
+	 * Encoding for depth packing. Default is [BasicDepthPacking](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures).
 	 */
 	@Input() public farDistance: number = null;
 
@@ -516,17 +461,17 @@ export class MaterialComponent
 	@Input() public clearcoatRoughness: number = null;
 
 	/**
-	 * How much [page:.clearcoatNormalMap] affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
+	 * How much [MeshPhysicalMaterial.clearcoatNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshPhysicalMaterial.clearcoatNormalMap) affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
 	 */
 	@Input() public clearcoatNormalScale: number = null;
 
 	/**
-	 * How much [page:.clearcoatNormalMap] affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
+	 * How much [MeshPhysicalMaterial.clearcoatNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshPhysicalMaterial.clearcoatNormalMap) affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
 	 */
 	@Input() public clearcoatNormalScaleX: number = null;
 
 	/**
-	 * How much [page:.clearcoatNormalMap] affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
+	 * How much [MeshPhysicalMaterial.clearcoatNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshPhysicalMaterial.clearcoatNormalMap) affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
 	 */
 	@Input() public clearcoatNormalScaleY: number = null;
 
@@ -545,7 +490,7 @@ export class MaterialComponent
 	 * Degree of transmission (or optical transparency), from *0.0* to *1.0*. Default is *0.0*.
 	 * Thin, transparent or semitransparent, plastic or glass materials remain largely reflective even if they are fully transmissive.
 	 * The transmission property can be used to model these materials.
-	 * When transmission is non-zero, [page:Material.opacity opacity] should be set to *1*.
+	 * When transmission is non-zero, [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/Material.opacity) should be set to *1*.
 	 */
 	@Input() public transmission: number = null;
 
@@ -583,7 +528,7 @@ export class MaterialComponent
 
 	/**
 	 * Sets the size of the points. Default is 1.0.
-	 * Will be capped if it exceeds the hardware dependent parameter [link:https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getParameter gl.ALIASED_POINT_SIZE_RANGE].
+	 * Will be capped if it exceeds the hardware dependent parameter [gl.ALIASED_POINT_SIZE_RANGE](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getParameter).
 	 */
 	@Input() public size: number = null;
 
@@ -664,7 +609,7 @@ export class MaterialComponent
 	/**
 	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
 	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
-	 * For RGB and RGBA textures, the [page:WebGLRenderer WebGL] renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	@Input() public alphaMap: ThreeTexture = null;
 
@@ -897,7 +842,7 @@ export class MaterialComponent
 	}
 
 	/**
-	 * [page:Color] of the material, by default set to white (0xffffff).
+	 * [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color) of the material, by default set to white (0xffffff).
 	 *
 	 * @param def
 	 * @returns
@@ -907,7 +852,7 @@ export class MaterialComponent
 	}
 
 	/**
-	 * [page:Color] of the material, by default set to white (0xffffff).
+	 * [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color) of the material, by default set to white (0xffffff).
 	 *
 	 * @param def
 	 * @returns

@@ -31,14 +31,13 @@ export interface SvgGeometry {
 }
 
 /**
- * SvgComponent
+ * The Svg component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SvgComponent) page for details.
  *
  * ```html
  * <ngx3js-geometry
- * 	[type]="'Extrude'"
- * 	[depth]="map.depth"
- * 	[steps]="1"
- * 	[bevelEnabled]="false"
+ * 	[type]="'Extrude'" [depth]="map.depth " [steps]="1 " [bevelEnabled]="false"
  * >
  * 	<ngx3js-svg [path]="map.path"></ngx3js-svg>
  * </ngx3js-geometry>

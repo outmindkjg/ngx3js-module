@@ -3,7 +3,10 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 /**
- * Plane controls
+ * AVR Controls
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AVRControls) page for details.
+ *
  */
 export class AVRControls {
 	/**
@@ -326,6 +329,9 @@ export class AVRControls {
 
 /**
  * Virtual session
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VirtualSession) page for details.
+ *
  */
 export class VirtualSession implements THREE.XRSession {
 	/**

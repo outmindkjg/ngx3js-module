@@ -8,6 +8,12 @@ import {
 import { AbstractChartComponent } from '../../chart.abstract';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
+/**
+ * The Chart Bubble component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartBubbleComponent) page for details.
+ *
+ */
 @Component({
 	selector: 'ngx3js-chart-bubble',
 	templateUrl: './bubble.component.html',

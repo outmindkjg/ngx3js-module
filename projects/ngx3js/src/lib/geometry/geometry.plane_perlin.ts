@@ -3,7 +3,11 @@ import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
 /**
- * Plane perlin geometry
+ * The Plane Perlin geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PlanePerlinGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
+ *
  */
 export class PlanePerlinGeometry {
 	/**

@@ -32,52 +32,6 @@ import { SelectBoxControls } from './selection-box-controls';
 
 /**
  * Control options
- * 
- * ```html
- * <ngx3js-control 
- * 	[type]="'arcball'" 
- * 	[gizmoVisible]="true" 
- * ></ngx3js-control>
- * <ngx3js-control 
- * 	[type]="'DeviceOrientationControls'"
- * ></ngx3js-control>
- * <ngx3js-control 
- * 	[type]="'DragControls'"
- * ></ngx3js-control>
- * <ngx3js-control 
- * 	[type]="'FlyControls'" 
- * 	[movementSpeed]="1000" 
- * 	[rollSpeed]="7.5" 
- * 	[autoForward]="false" 
- * 	[dragToLook]="false"
- * ></ngx3js-control>
- * <ngx3js-control 
- * 	[type]="'OrbitControls'" 
- * 	[enableDamping]="true" 
- * 	[dampingFactor]="0.05" 
- * 	[screenSpacePanning]="false" 
- * 	[minDistance]="100" 
- * 	[maxDistance]="500" 
- * 	[maxPolarAngle]="90"
- * ></ngx3js-control>
- * <ngx3js-control 
- * 	[type]="'PointerLockControls'"
- * ></ngx3js-control>
- * <ngx3js-control 
- * 	[type]="'TrackballControls'" 
- * 	[rollSpeed]="1.0" 
- * 	[zoomSpeed]="1.2" 
- * 	[panSpeed]="0.8" 
- * 	[keys]="['KeyA', 'KeyS', 'KeyD']"
- * ></ngx3js-control>
- * <ngx3js-control 
- * 	[type]="'Transform'"
- * ></ngx3js-control>
- * <ngx3js-control 
- * 	[type]="'plane'"
- * ></ngx3js-control>
- * ```
- * @see {@link https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control | NGX Control}
  */
 export interface ControlOptions {
 	/**
@@ -335,14 +289,15 @@ export interface ControlOptions {
 /**
  * ControlComponent
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ControlComponent) page for details.
+ * See the [ngx control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control) page for a live demo.
+ *
  * ```html
  * <ngx3js-renderer
- * 	[controlType]="'orbit'"
- * 	[controlOptions]="{ enablePan: false, enableDamping: true }"
+ * 	[controlType]="'orbit'" [controlOptions]="{ enablePan: false, enableDamping: true }"
  * ></ngx3js-renderer>
  * <ngx3js-control
- * 	[type]="'arcball'"
- * 	[gizmoVisible]="true"
+ * 	[type]="'arcball'" [gizmoVisible]="true"
  * ></ngx3js-control>
  * <ngx3js-control
  * 	[type]="'DeviceOrientationControls'"
@@ -351,11 +306,7 @@ export interface ControlOptions {
  * 	[type]="'plane'"
  * ></ngx3js-control>
  * <ngx3js-control
- * 	[type]="'FlyControls'"
- * 	[movementSpeed]="1000"
- * 	[rollSpeed]="7.5"
- * 	[autoForward]="false"
- * 	[dragToLook]="false"
+ * 	[type]="'FlyControls'" [movementSpeed]="1000 " [rollSpeed]="7.5 " [autoForward]="false " [dragToLook]="false"
  * ></ngx3js-control>
  * <ngx3js-control
  * 	[type]="'PointerLockControls'"
@@ -367,8 +318,7 @@ export interface ControlOptions {
  * 	(onLoad)="setDragControl($event)"
  * ></ngx3js-control>
  * <ngx3js-renderer
- * 	[controlType]="'FirstPerson'"
- * 	[controlOptions]="{
+ * 	[controlType]="'FirstPerson'" [controlOptions]="{
  * 		enablePan: false,
  * 		enableDamping: true,
  * 		movementSpeed: 1000,
@@ -382,27 +332,13 @@ export interface ControlOptions {
  * 	(onLoad)="setTransformControl($event)"
  * ></ngx3js-control>
  * <ngx3js-control
- * 	[type]="'TrackballControls'"
- * 	[rollSpeed]="1.0"
- * 	[zoomSpeed]="1.2"
- * 	[panSpeed]="0.8"
- * 	[keys]="['KeyA', 'KeyS', 'KeyD']"
+ * 	[type]="'TrackballControls'" [rollSpeed]="1.0 " [zoomSpeed]="1.2 " [panSpeed]="0.8 " [keys]="['KeyA', 'KeyS', 'KeyD']"
  * ></ngx3js-control>
  * <ngx3js-renderer
- * 	[controlType]="'selectbox'"
- * 	[controlOptions]="{ enablePan: false, enableDamping: true }"
+ * 	[controlType]="'selectbox'" [controlOptions]="{ enablePan: false, enableDamping: true }"
  * ></ngx3js-renderer>
  * <ngx3js-control
- * 	[type]="'csm'"
- * 	[maxFar]="1000"
- * 	[cascades]="4"
- * 	[mode]="'practical'"
- * 	[scene]="scene"
- * 	[shadowMapSize]="1024"
- * 	[lightDirectionX]="-1"
- * 	[lightDirectionY]="-1"
- * 	[lightDirectionZ]="-1"
- * 	[camera]="camera"
+ * 	[type]="'csm'" [maxFar]="1000 " [cascades]="4 " [mode]="'practical'" [scene]="scene " [shadowMapSize]="1024 " [lightDirectionX]="-1 " [lightDirectionY]="-1 " [lightDirectionZ]="-1 " [camera]="camera"
  * 	(onLoad)="setCsm($event)"
  * ></ngx3js-control>
  * ```

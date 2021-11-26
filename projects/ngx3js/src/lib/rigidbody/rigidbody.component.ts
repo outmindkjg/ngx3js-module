@@ -4,7 +4,7 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { NgxGeometryUtils } from '../geometry/geometryUtils';
@@ -13,7 +13,6 @@ import * as Ammo from '../threejs-library/ammo';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
 import { RigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
-
 
 /**
  * Rigidbody type
@@ -51,7 +50,10 @@ export interface RigidbodyType {
 }
 
 /**
- * RigidbodyComponent
+ * The Rigidbody component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RigidbodyComponent) page for details.
+ *
  * @see
  */
 @Component({

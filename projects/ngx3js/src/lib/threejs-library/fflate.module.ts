@@ -17,5 +17,3 @@ version 0.6.9
 // @ts-nocheck
 
 export { unzipSync, strFromU8 } from 'three/examples/jsm/libs/fflate.module';
-
-

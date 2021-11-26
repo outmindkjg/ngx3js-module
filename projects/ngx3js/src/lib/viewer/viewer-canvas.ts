@@ -3,6 +3,9 @@ import { ThreeUtil } from '../interface';
 
 /**
  * Viewer canvas
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ViewerCanvas) page for details.
+ *
  */
 export class ViewerCanvas {
 	/**

@@ -33,4 +33,3 @@ export * as GSAP from 'gsap';
 export * from './lib/index';
 export * from './lib/ngx3js.module';
 export { ReflectorForSSRPass } from './lib/threejs-library/ReflectorForSSRPass';
-

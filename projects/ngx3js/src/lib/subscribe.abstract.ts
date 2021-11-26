@@ -15,7 +15,10 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { ThreeUtil } from './interface';
 
 /**
- * AbstractSubscribeComponent
+ * The Abstract Subscribe component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractSubscribeComponent) page for details.
+ *
  */
 @Component({
 	template: '',

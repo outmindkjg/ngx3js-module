@@ -5,15 +5,20 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
+import * as THREE from 'three';
 import {
 	AbstractChartComponent,
 	AttributeUpdateInfo,
 } from '../../chart.abstract';
+import { ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import * as THREE from 'three';
-import { RendererTimer, ThreeUtil } from '../../interface';
-import { MathUtils } from 'three';
 
+/**
+ * The Chart Bar component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartBarComponent) page for details.
+ *
+ */
 @Component({
 	selector: 'ngx3js-chart-bar',
 	templateUrl: './bar.component.html',

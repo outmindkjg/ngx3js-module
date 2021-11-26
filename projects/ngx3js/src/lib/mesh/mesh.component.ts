@@ -109,64 +109,25 @@ export interface VolumeOptions {
 }
 
 /**
- * MeshComponent
+ * The Mesh component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshComponent) page for details.
  *
  * ```html
- * <ngx3js-mesh [type]="'skybox'"
- * 	[skyboxType]="'sun'"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'HTMLMesh'"
- * 	[domElement]="domElement"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'SVGObject'"
- * 	[cssTag]="'div'"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'CSS2DObject'"
- * 	[cssTag]="'div'"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'CSS3DSprite'"
- * 	[cssTag]="'div'"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Reflector'"
- * 	[color]="'0x889999'"
- * 	[clipBias]="0.003"
- * 	[textureWidth]="1024"
- * 	[textureWidth]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'ReflectorRTT'"
- * 	[color]="'0x889999'"
- * 	[clipBias]="0.003"
- * 	[textureWidth]="1024"
- * 	[textureWidth]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Refractor'"
- * 	[color]="'0x999999'"
- * 	[textureWidth]="1024"
- * 	[textureHeight]="1024"
- * 	[shader]="'WaterRefraction'"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'ReflectorRTT'"
- * 	[color]="'0x889999'"
- * 	[clipBias]="0.003"
- * 	[textureWidth]="1024"
- * 	[textureWidth]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'ReflectorForSSRPass'"
- * 	[color]="'0x889999'"
- * 	[clipBias]="0.003"
- * 	[textureWidth]="1024"
- * 	[textureWidth]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Water'"
- * 	[sunColor]="'0xffffff'"
- * 	[waterColor]="'0x001e0f'"
- * 	[sunDirection]="sunDirection"
- * 	[textureWidth]="512"
- * 	[textureHeight]="512"
- * 	[alpha]="alpha"
- * 	[distortionScale]="distortionScale"
- * 	[uniforms]="uniforms"
+ * <ngx3js-mesh [type]="'skybox'" [skyboxType]="'sun'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'HTMLMesh'" [domElement]="domElement"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'SVGObject'" [cssTag]="'div'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'CSS2DObject'" [cssTag]="'div'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'CSS3DSprite'" [cssTag]="'div'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Reflector'" [color]="'0x889999'" [clipBias]="0.003 " [textureWidth]="1024 " [textureWidth]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorRTT'" [color]="'0x889999'" [clipBias]="0.003 " [textureWidth]="1024 " [textureWidth]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Refractor'" [color]="'0x999999'" [textureWidth]="1024 " [textureHeight]="1024 " [shader]="'WaterRefraction'"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorRTT'" [color]="'0x889999'" [clipBias]="0.003 " [textureWidth]="1024 " [textureWidth]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorForSSRPass'" [color]="'0x889999'" [clipBias]="0.003 " [textureWidth]="1024 " [textureWidth]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Water'" [sunColor]="'0xffffff'" [waterColor]="'0x001e0f'" [sunDirection]="sunDirection " [textureWidth]="512 " [textureHeight]="512 " [alpha]="alpha " [distortionScale]="distortionScale " [uniforms]="uniforms"
  * ></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Water2'"
- * 	[color]="'#ffffff'"
- * 	[waterScale]="4"
- * 	[reflectivity]="0.02"
- * 	[flowDirectionX]="1"
- * 	[flowDirectionY]="1"
- * 	[textureWidth]="1024"
- * 	[textureHeight]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Sky'"
- * 	[uniforms]="{
+ * <ngx3js-mesh [type]="'Water2'" [color]="'#ffffff'" [waterScale]="4 " [reflectivity]="0.02 " [flowDirectionX]="1 " [flowDirectionY]="1 " [textureWidth]="1024 " [textureHeight]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Sky'" [uniforms]="{
  * 		sunPosition: { type: 'v3', value: sunDirection },
  * 		turbidity: { type: 'number', value: 10 },
  * 		rayleigh: { type: 'number', value: 2 },
@@ -632,8 +593,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	@Input() public shader: string = null;
 
 	/**
-	 * [page:Textures THREE.LinearEncoding] is the default.
-	 * See the [page:Textures texture constants] page for details of other formats.
+	 * [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) is the default.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * Notice - case insensitive.

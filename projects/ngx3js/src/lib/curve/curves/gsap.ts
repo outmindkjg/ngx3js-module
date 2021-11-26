@@ -4,6 +4,9 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
 
 /**
  * Curves gsap
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsap) page for details.
+ *
  */
 export class CurvesGsap extends THREE.Curve<THREE.Vector3> {
 	/**
@@ -69,6 +72,9 @@ export class CurvesGsap extends THREE.Curve<THREE.Vector3> {
 
 /**
  * Curves gsap linear ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapLinearEaseIn) page for details.
+ *
  */
 export class CurvesGsapLinearEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -78,6 +84,9 @@ export class CurvesGsapLinearEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap linear ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapLinearEaseInOut) page for details.
+ *
  */
 export class CurvesGsapLinearEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -87,6 +96,9 @@ export class CurvesGsapLinearEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap linear ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapLinearEaseOut) page for details.
+ *
  */
 export class CurvesGsapLinearEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -96,6 +108,9 @@ export class CurvesGsapLinearEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap linear ease none
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapLinearEaseNone) page for details.
+ *
  */
 export class CurvesGsapLinearEaseNone extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -105,6 +120,9 @@ export class CurvesGsapLinearEaseNone extends CurvesGsap {
 
 /**
  * Curves gsap quad ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuadEaseIn) page for details.
+ *
  */
 export class CurvesGsapQuadEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -114,6 +132,9 @@ export class CurvesGsapQuadEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap quad ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuadEaseInOut) page for details.
+ *
  */
 export class CurvesGsapQuadEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -123,6 +144,9 @@ export class CurvesGsapQuadEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap quad ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuadEaseOut) page for details.
+ *
  */
 export class CurvesGsapQuadEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -132,6 +156,9 @@ export class CurvesGsapQuadEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap cubic ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCubicEaseIn) page for details.
+ *
  */
 export class CurvesGsapCubicEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -141,6 +168,9 @@ export class CurvesGsapCubicEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap cubic ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCubicEaseInOut) page for details.
+ *
  */
 export class CurvesGsapCubicEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -150,6 +180,9 @@ export class CurvesGsapCubicEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap cubic ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCubicEaseOut) page for details.
+ *
  */
 export class CurvesGsapCubicEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -159,6 +192,9 @@ export class CurvesGsapCubicEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap quart ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuartEaseIn) page for details.
+ *
  */
 export class CurvesGsapQuartEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -168,6 +204,9 @@ export class CurvesGsapQuartEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap quart ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuartEaseInOut) page for details.
+ *
  */
 export class CurvesGsapQuartEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -177,6 +216,9 @@ export class CurvesGsapQuartEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap quart ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuartEaseOut) page for details.
+ *
  */
 export class CurvesGsapQuartEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -186,6 +228,9 @@ export class CurvesGsapQuartEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap quint ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuintEaseIn) page for details.
+ *
  */
 export class CurvesGsapQuintEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -195,6 +240,9 @@ export class CurvesGsapQuintEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap quint ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuintEaseInOut) page for details.
+ *
  */
 export class CurvesGsapQuintEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -204,6 +252,9 @@ export class CurvesGsapQuintEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap quint ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuintEaseOut) page for details.
+ *
  */
 export class CurvesGsapQuintEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -213,6 +264,9 @@ export class CurvesGsapQuintEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap strong ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapStrongEaseIn) page for details.
+ *
  */
 export class CurvesGsapStrongEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -222,6 +276,9 @@ export class CurvesGsapStrongEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap strong ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapStrongEaseInOut) page for details.
+ *
  */
 export class CurvesGsapStrongEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -231,6 +288,9 @@ export class CurvesGsapStrongEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap strong ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapStrongEaseOut) page for details.
+ *
  */
 export class CurvesGsapStrongEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -240,6 +300,9 @@ export class CurvesGsapStrongEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap power1 ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower1EaseIn) page for details.
+ *
  */
 export class CurvesGsapPower1EaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -249,6 +312,9 @@ export class CurvesGsapPower1EaseIn extends CurvesGsap {
 
 /**
  * Curves gsap power1 ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower1EaseInOut) page for details.
+ *
  */
 export class CurvesGsapPower1EaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -258,6 +324,9 @@ export class CurvesGsapPower1EaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap power1 ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower1EaseOut) page for details.
+ *
  */
 export class CurvesGsapPower1EaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -267,6 +336,9 @@ export class CurvesGsapPower1EaseOut extends CurvesGsap {
 
 /**
  * Curves gsap power2 ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower2EaseIn) page for details.
+ *
  */
 export class CurvesGsapPower2EaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -276,6 +348,9 @@ export class CurvesGsapPower2EaseIn extends CurvesGsap {
 
 /**
  * Curves gsap power2 ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower2EaseInOut) page for details.
+ *
  */
 export class CurvesGsapPower2EaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -285,6 +360,9 @@ export class CurvesGsapPower2EaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap power2 ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower2EaseOut) page for details.
+ *
  */
 export class CurvesGsapPower2EaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -294,6 +372,9 @@ export class CurvesGsapPower2EaseOut extends CurvesGsap {
 
 /**
  * Curves gsap power3 ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower3EaseIn) page for details.
+ *
  */
 export class CurvesGsapPower3EaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -303,6 +384,9 @@ export class CurvesGsapPower3EaseIn extends CurvesGsap {
 
 /**
  * Curves gsap power3 ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower3EaseInOut) page for details.
+ *
  */
 export class CurvesGsapPower3EaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -312,6 +396,9 @@ export class CurvesGsapPower3EaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap power3 ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower3EaseOut) page for details.
+ *
  */
 export class CurvesGsapPower3EaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -321,6 +408,9 @@ export class CurvesGsapPower3EaseOut extends CurvesGsap {
 
 /**
  * Curves gsap power4 ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower4EaseIn) page for details.
+ *
  */
 export class CurvesGsapPower4EaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -330,6 +420,9 @@ export class CurvesGsapPower4EaseIn extends CurvesGsap {
 
 /**
  * Curves gsap power4 ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower4EaseInOut) page for details.
+ *
  */
 export class CurvesGsapPower4EaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -339,6 +432,9 @@ export class CurvesGsapPower4EaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap power4 ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower4EaseOut) page for details.
+ *
  */
 export class CurvesGsapPower4EaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -348,6 +444,9 @@ export class CurvesGsapPower4EaseOut extends CurvesGsap {
 
 /**
  * Curves gsap back ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBackEaseIn) page for details.
+ *
  */
 export class CurvesGsapBackEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -357,6 +456,9 @@ export class CurvesGsapBackEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap back ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBackEaseInOut) page for details.
+ *
  */
 export class CurvesGsapBackEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -366,6 +468,9 @@ export class CurvesGsapBackEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap back ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBackEaseOut) page for details.
+ *
  */
 export class CurvesGsapBackEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -375,6 +480,9 @@ export class CurvesGsapBackEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap elastic ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapElasticEaseIn) page for details.
+ *
  */
 export class CurvesGsapElasticEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -384,6 +492,9 @@ export class CurvesGsapElasticEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap elastic ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapElasticEaseInOut) page for details.
+ *
  */
 export class CurvesGsapElasticEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -393,6 +504,9 @@ export class CurvesGsapElasticEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap elastic ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapElasticEaseOut) page for details.
+ *
  */
 export class CurvesGsapElasticEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -402,6 +516,9 @@ export class CurvesGsapElasticEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap bounce ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBounceEaseIn) page for details.
+ *
  */
 export class CurvesGsapBounceEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -411,6 +528,9 @@ export class CurvesGsapBounceEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap bounce ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBounceEaseInOut) page for details.
+ *
  */
 export class CurvesGsapBounceEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -420,6 +540,9 @@ export class CurvesGsapBounceEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap bounce ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBounceEaseOut) page for details.
+ *
  */
 export class CurvesGsapBounceEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -429,6 +552,9 @@ export class CurvesGsapBounceEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap circ ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCircEaseIn) page for details.
+ *
  */
 export class CurvesGsapCircEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -438,6 +564,9 @@ export class CurvesGsapCircEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap circ ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCircEaseInOut) page for details.
+ *
  */
 export class CurvesGsapCircEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -447,6 +576,9 @@ export class CurvesGsapCircEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap circ ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCircEaseOut) page for details.
+ *
  */
 export class CurvesGsapCircEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -456,6 +588,9 @@ export class CurvesGsapCircEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap expo ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapExpoEaseIn) page for details.
+ *
  */
 export class CurvesGsapExpoEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -465,6 +600,9 @@ export class CurvesGsapExpoEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap expo ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapExpoEaseInOut) page for details.
+ *
  */
 export class CurvesGsapExpoEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -474,6 +612,9 @@ export class CurvesGsapExpoEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap expo ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapExpoEaseOut) page for details.
+ *
  */
 export class CurvesGsapExpoEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -483,6 +624,9 @@ export class CurvesGsapExpoEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap sine ease in
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapSineEaseIn) page for details.
+ *
  */
 export class CurvesGsapSineEaseIn extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -492,6 +636,9 @@ export class CurvesGsapSineEaseIn extends CurvesGsap {
 
 /**
  * Curves gsap sine ease in out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapSineEaseInOut) page for details.
+ *
  */
 export class CurvesGsapSineEaseInOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -501,6 +648,9 @@ export class CurvesGsapSineEaseInOut extends CurvesGsap {
 
 /**
  * Curves gsap sine ease out
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapSineEaseOut) page for details.
+ *
  */
 export class CurvesGsapSineEaseOut extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {
@@ -510,6 +660,9 @@ export class CurvesGsapSineEaseOut extends CurvesGsap {
 
 /**
  * Curves gsap power0 ease none
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower0EaseNone) page for details.
+ *
  */
 export class CurvesGsapPower0EaseNone extends CurvesGsap {
 	constructor(radius: number = 1, options?: CurvesParameters) {

@@ -4,17 +4,16 @@ import { ThreeUtil, ThreeVector } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * CurveComponent
+ * The Curve component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurveComponent) page for details.
  *
  * An abstract base class for creating a [name] object that contains methods for interpolation.
- * For an array of [name]s see [page:CurvePath].
+ * For an array of [name]s see [CurvePath](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/CurvePath).
  *
  * ```html
  * <ngx3js-curve
- * 	[type]="'catmullrom'"
- * 	[points]="curvePath"
- * 	[closed]="true"
- * 	[curveType]="'centripetal'"
+ * 	[type]="'catmullrom'" [points]="curvePath " [closed]="true " [curveType]="'centripetal'"
  * ></ngx3js-curve>
  * ```
  */
@@ -77,9 +76,9 @@ export class CurveComponent
 	@Input() public aClockwise: boolean = null;
 
 	/**
-	 * array of [page:Vector2 Vector2s].
-	 * Creates a Path from the points. The first point defines the offset, then successive points are added to the [page:CurvePath.curves curves] array as [page:LineCurve LineCurves].
-	 * If no points are specified, an empty path is created and the [page:.currentPoint] is set to the origin.
+	 * array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector2).
+	 * Creates a Path from the points. The first point defines the offset, then successive points are added to the [curves](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/CurvePath.curves) array as [LineCurves](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/LineCurve).
+	 * If no points are specified, an empty path is created and the [LineCurve.currentPoint](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/LineCurve.currentPoint) is set to the origin.
 	 */
 	@Input() public points: ThreeVector[] = null;
 
@@ -97,7 +96,7 @@ export class CurveComponent
 	@Input() public curveType: string = null;
 
 	/**
-	 * When [page:.curveType] is *catmullrom*, defines catmullrom's tension.
+	 * When [CatmullRomCurve3.curveType](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/extras/curves/CatmullRomCurve3.curveType) is *catmullrom*, defines catmullrom's tension.
 	 */
 	@Input() public tension: number = null;
 

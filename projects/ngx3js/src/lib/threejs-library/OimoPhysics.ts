@@ -1,3 +1,2 @@
-
 // @ts-nocheck
-export { OimoPhysics } from 'three/examples/jsm/physics/OimoPhysics'
+export { OimoPhysics } from 'three/examples/jsm/physics/OimoPhysics';

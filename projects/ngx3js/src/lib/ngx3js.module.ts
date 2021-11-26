@@ -74,7 +74,7 @@ import { TweenComponent } from './tween/tween.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { VisualComponent } from './visual/visual.component';
 
-const NGX3JS_COMPONENTS:Array<Type<any>> = [
+const NGX3JS_COMPONENTS: Array<Type<any>> = [
 	LookatComponent,
 	FogComponent,
 	TextureComponent,
@@ -144,7 +144,7 @@ const NGX3JS_COMPONENTS:Array<Type<any>> = [
 	AbstractControllerComponent,
 	AbstractObject3dComponent,
 	ThreeGeometryCustom,
-	AbstractChartComponent
+	AbstractChartComponent,
 ];
 
 /**

@@ -5,15 +5,13 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTweenComponent } from '../tween.abstract';
 
 /**
- * PositionComponent
+ * The Position component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PositionComponent) page for details.
  *
  * ```html
  * <ngx3js-position
- * 	[x]="0"
- * 	[y]="7.5"
- * 	[z]="0"
- * 	[multiply]="10"
- * 	[normalize]="false"
+ * 	[x]="0 " [y]="7.5 " [z]="0 " [multiply]="10 " [normalize]="false"
  * ></ngx3js-position>
  * <ngx3js-geometry>
  * 	<ngx3js-position [type]="'scale'" [x]="2" [y]="2" [z]="2"></ngx3js-position>
@@ -31,7 +29,7 @@ export class PositionComponent
 {
 	/**
 	 * The type of position component
-	 * 
+	 *
 	 * position - the position of Object3D.
 	 * rotate - the rotation angular of geometry.
 	 * scale - the scale of geometry.
@@ -71,12 +69,12 @@ export class PositionComponent
 	@Input() public z: number = null;
 
 	/**
-	 * Multiplies this vector by scalar [page:Float s].
+	 * Multiplies this vector by scalar s.
 	 */
 	@Input() public multiply: number = null;
 
 	/**
-	 * Converts this vector to a [link:https://en.wikipedia.org/wiki/Unit_vector unit vector] - that is, sets it equal to a vector with the same direction as this one, but [page:.length length] 1.
+	 * Converts this vector to a [unit vector](https://en.wikipedia.org/wiki/Unit_vector) - that is, sets it equal to a vector with the same direction as this one, but [Vector3.length](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3.length) 1.
 	 */
 	@Input() public normalize: boolean = false;
 

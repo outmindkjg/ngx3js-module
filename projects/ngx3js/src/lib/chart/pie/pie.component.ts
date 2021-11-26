@@ -9,7 +9,10 @@ import { AbstractChartComponent } from '../../chart.abstract';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
- * Component
+ * The Chart Pie component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartPieComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-chart-pie',

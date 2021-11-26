@@ -51,7 +51,9 @@ export interface ChartShape {
 }
 
 /**
- * AbstractChartComponent Component
+ * The Abstract Chart component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractChartComponent) page for details.
  *
  * ```ts
  * _@Component({

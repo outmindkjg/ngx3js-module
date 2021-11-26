@@ -51,49 +51,28 @@ import {
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * GeometryComponent
+ * The Geometry component.
  *
- * ```text
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GeometryComponent) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
+ * See the [ngx font](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_font) page for a live demo.
+ *
  * A representation of mesh, line, or point geometry. Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU.
- * To read and edit data in BufferGeometry attributes, see [page:BufferAttribute] documentation.
- * ```
+ * To read and edit data in BufferGeometry attributes, see [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferAttribute) documentation.
  *
  * ```html
  * <ngx3js-geometry
- * 	[type]="'BoxGeometry'"
- * 	[width]="16"
- * 	[height]="16"
- * 	[depth]="16"
- * 	[widthSegments]="3"
- * 	[heightSegments]="3"
- * 	[depthSegments]="3"></ngx3js-geometry>
+ * 	[type]="'BoxGeometry'" [width]="16 " [height]="16 " [depth]="16 " [widthSegments]="3 " [heightSegments]="3 " [depthSegments]="3"></ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'IcosahedronGeometry'"
- * 	[radius]="8"
- * 	[detail]="1"></ngx3js-geometry>
+ * 	[type]="'IcosahedronGeometry'" [radius]="8 " [detail]="1"></ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'PlaneGeometry'"
- * 	[width]="16"
- * 	[height]="16"
- * 	[widthSegments]="3"
- * 	[heightSegments]="3"></ngx3js-geometry>
+ * 	[type]="'PlaneGeometry'" [width]="16 " [height]="16 " [widthSegments]="3 " [heightSegments]="3"></ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'SphereGeometry'"
- * 	[radius]="0.4"
- * 	[widthSegments]="14"
- * 	[heightSegments]="10"></ngx3js-geometry>
+ * 	[type]="'SphereGeometry'" [radius]="0.4 " [widthSegments]="14 " [heightSegments]="10"></ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'TextGeometry'"
- * 	[font]="'helvetiker'"
- * 	[align]="'center bottom'"
- * 	[text]="'test contents'"
- * 	[size]="10"></ngx3js-geometry>
+ * 	[type]="'TextGeometry'" [font]="'helvetiker'" [align]="'center bottom'" [text]="'test contents'" [size]="10"></ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'TorusKnotGeometry'"
- * 	[radius]="0.4"
- * 	[tube]="0.08"
- * 	[radialSegments]="95"
- * 	[tubularSegments]="20" ></ngx3js-geometry>
+ * 	[type]="'TorusKnotGeometry'" [radius]="0.4 " [tube]="0.08 " [radialSegments]="95 " [tubularSegments]="20" ></ngx3js-geometry>
  *	<ngx3js-geometry
  *		[type]="'TeapotGeometry'"
  *		[size]="400"
@@ -205,7 +184,6 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * ```
  *
- * @see {@link https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry | NGX Geometey}
  * @see THREE.BufferGeometry
  */
 @Component({
@@ -220,7 +198,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 		{
 			provide: AbstractSubscribeComponent,
 			useExisting: forwardRef(() => GeometryComponent),
-		}		
+		},
 	],
 })
 export class GeometryComponent

@@ -40,12 +40,12 @@ export interface Object3dOptions {
 	name?: string;
 
 	/**
-	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is [page:Object3D.DefaultMatrixAutoUpdate] (true).
+	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is [Object3D.DefaultMatrixAutoUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.DefaultMatrixAutoUpdate) (true).
 	 */
 	matrixAutoUpdate?: boolean;
 
 	/**
-	 * The layer membership of the object. The object is only visible if it has at least one layer in common with the [page:Camera] in use. This property can also be used to filter out unwanted objects in ray-intersection tests when using [page:Raycaster].
+	 * The layer membership of the object. The object is only visible if it has at least one layer in common with the [Camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/Camera) in use. This property can also be used to filter out unwanted objects in ray-intersection tests when using [Raycaster](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Raycaster).
 	 */
 	layers?: number[];
 
@@ -65,7 +65,7 @@ export interface Object3dOptions {
 	frustumCulled?: boolean;
 
 	/**
-	 * This value allows the default rendering order of [link:https://en.wikipedia.org/wiki/Scene_graph scene graph] objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [page:Group Group], all descendants objects will be sorted and rendered together.
+	 * This value allows the default rendering order of [scene graph](https://en.wikipedia.org/wiki/Scene_graph) objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Group), all descendants objects will be sorted and rendered together.
 	 * Sorting is from lowest to highest renderOrder. Default value is *0*.
 	 */
 	renderOrder?: number;
@@ -76,23 +76,23 @@ export interface Object3dOptions {
 	controller?: AbstractControllerComponent;
 
 	/**
-	 * A [page:Vector3] representing the object's local position. Default is (0, 0, 0).
+	 * A [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3) representing the object's local position. Default is (0, 0, 0).
 	 */
 	position?: THREE.Vector3 | number[] | PositionComponent | any;
 
 	/**
-	 * Object's local rotation (see [link:https://en.wikipedia.org/wiki/Euler_angles Euler angles]), in radians.
+	 * Object's local rotation (see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)), in radians.
 	 */
 	rotation?: THREE.Vector3 | number[] | RotationComponent | any;
 
 	/**
-	 * The object's local scale. Default is [page:Vector3]( 1, 1, 1 ).
+	 * The object's local scale. Default is [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3)( 1, 1, 1 ).
 	 */
 	scale?: THREE.Vector3 | number[] | ScaleComponent | any;
 
 	/**
 	 * vector - A vector representing a position in world space.
-	 * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.
+	 * Optionally, the [Object3D.x](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.x), [Object3D.y](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.y) and [Object3D.z](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.z) components of the world space position.
 	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 */
@@ -105,12 +105,12 @@ export interface Object3dOptions {
 
 	/**
 	 * Custom depth material to be used when rendering to the depth map. Can only be used in context of meshes.
-	 * When shadow-casting with a [page:DirectionalLight] or [page:SpotLight], if you are (a) modifying vertex positions in the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
+	 * When shadow-casting with a [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/DirectionalLight) or [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/SpotLight), if you are (a) modifying vertex positions in the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
 	 */
 	customDepth?: AbstractMaterialComponent | THREE.Material | any;
 
 	/**
-	 * Same as [page:.customDepthMaterial customDepthMaterial], but used with [page:PointLight]. Default is *undefined*.
+	 * Same as [Object3D.customDepthMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.customDepthMaterial), but used with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/PointLight). Default is *undefined*.
 	 */
 	customDistance?: AbstractMaterialComponent | THREE.Material | any;
 
@@ -121,7 +121,9 @@ export interface Object3dOptions {
 }
 
 /**
- * AbstractObject3dComponent
+ * The Abstract Object3d component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractObject3dComponent) page for details.
  *
  * ```ts
  * _@Component({
@@ -157,12 +159,12 @@ export class AbstractObject3dComponent
 	@Input() public name: string = '';
 
 	/**
-	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is [page:Object3D.DefaultMatrixAutoUpdate] (true).
+	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is [Object3D.DefaultMatrixAutoUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.DefaultMatrixAutoUpdate) (true).
 	 */
 	@Input() public matrixAutoUpdate: boolean = null;
 
 	/**
-	 * The layer membership of the object. The object is only visible if it has at least one layer in common with the [page:Camera] in use. This property can also be used to filter out unwanted objects in ray-intersection tests when using [page:Raycaster].
+	 * The layer membership of the object. The object is only visible if it has at least one layer in common with the [Camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/Camera) in use. This property can also be used to filter out unwanted objects in ray-intersection tests when using [Raycaster](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Raycaster).
 	 */
 	@Input() private layers: number | number[] | { [key: number]: boolean } =
 		null;
@@ -183,7 +185,7 @@ export class AbstractObject3dComponent
 	@Input() public frustumCulled: boolean = null;
 
 	/**
-	 * This value allows the default rendering order of [link:https://en.wikipedia.org/wiki/Scene_graph scene graph] objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [page:Group Group], all descendants objects will be sorted and rendered together.
+	 * This value allows the default rendering order of [scene graph](https://en.wikipedia.org/wiki/Scene_graph) objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Group), all descendants objects will be sorted and rendered together.
 	 * Sorting is from lowest to highest renderOrder. Default value is *0*.
 	 */
 	@Input() private renderOrder: number = null;
@@ -199,7 +201,7 @@ export class AbstractObject3dComponent
 	@Input() private prefab: AbstractObject3dComponent = null;
 
 	/**
-	 * A [page:Vector3] representing the object's local position. Default is (0, 0, 0).
+	 * A [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3) representing the object's local position. Default is (0, 0, 0).
 	 */
 	@Input() private position:
 		| THREE.Vector3
@@ -208,7 +210,7 @@ export class AbstractObject3dComponent
 		| any = null;
 
 	/**
-	 * Object's local rotation (see [link:https://en.wikipedia.org/wiki/Euler_angles Euler angles]), in radians.
+	 * Object's local rotation (see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)), in radians.
 	 */
 	@Input() private rotation:
 		| THREE.Vector3
@@ -217,14 +219,14 @@ export class AbstractObject3dComponent
 		| any = null;
 
 	/**
-	 * The object's local scale. Default is [page:Vector3]( 1, 1, 1 ).
+	 * The object's local scale. Default is [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3)( 1, 1, 1 ).
 	 */
 	@Input() private scale: THREE.Vector3 | number[] | ScaleComponent | any =
 		null;
 
 	/**
 	 * vector - A vector representing a position in world space.
-	 * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.
+	 * Optionally, the [Object3D.x](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.x), [Object3D.y](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.y) and [Object3D.z](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.z) components of the world space position.
 	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 */
@@ -238,7 +240,7 @@ export class AbstractObject3dComponent
 
 	/**
 	 * Custom depth material to be used when rendering to the depth map. Can only be used in context of meshes.
-	 * When shadow-casting with a [page:DirectionalLight] or [page:SpotLight], if you are (a) modifying vertex positions in the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
+	 * When shadow-casting with a [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/DirectionalLight) or [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/SpotLight), if you are (a) modifying vertex positions in the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
 	 */
 	@Input() private customDepth:
 		| AbstractMaterialComponent
@@ -246,7 +248,7 @@ export class AbstractObject3dComponent
 		| any = null;
 
 	/**
-	 * Same as [page:.customDepthMaterial customDepthMaterial], but used with [page:PointLight]. Default is *undefined*.
+	 * Same as [Object3D.customDepthMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.customDepthMaterial), but used with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/PointLight). Default is *undefined*.
 	 */
 	@Input() private customDistance:
 		| AbstractMaterialComponent
@@ -264,8 +266,8 @@ export class AbstractObject3dComponent
 	 * An optional callback that is executed immediately before a 3D object is rendered.
 	 * This function is called with the following parameters: renderer, scene, camera, geometry, material, group.
 	 *
-	 * Please notice that this callback is only executed for *renderable* 3D objects. Meaning 3D objects which define their visual appearance with geometries and materials like instances of [page:Mesh], [page:Line], [page:Points] or [page:Sprite].
-	 * Instances of [page:Object3D], [page:Group] or [page:Bone] are not renderable and thus this callback is not executed for such objects.
+	 * Please notice that this callback is only executed for *renderable* 3D objects. Meaning 3D objects which define their visual appearance with geometries and materials like instances of [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Mesh), [Line](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Line), [Points](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Points) or [Sprite](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Sprite).
+	 * Instances of [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D), [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Group) or [Bone](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Bone) are not renderable and thus this callback is not executed for such objects.
 	 */
 	@Input() private onBeforeRender: (
 		renderer?: THREE.WebGLRenderer,

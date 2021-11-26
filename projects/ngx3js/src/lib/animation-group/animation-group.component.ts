@@ -15,7 +15,9 @@ import { MixerComponent } from '../mixer/mixer.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * AnimationGroupComponent
+ * The Animation Group component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationGroupComponent) page for details.
  *
  * A group of objects that receives a shared animation state.
  *
@@ -24,8 +26,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * Usage
  *
- * Add objects you would otherwise pass as 'root' to the constructor or the [page:AnimationMixer.clipAction clipAction]
- * method of [page:AnimationMixer AnimationMixer] and instead pass this object as 'root'.
+ * Add objects you would otherwise pass as 'root' to the constructor or the [clipAction](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationMixer.clipAction)
+ * method of [AnimationMixer](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationMixer) and instead pass this object as 'root'.
  *
  * Note that objects of this class appear as one object to the mixer,
  * so cache control of the individual objects must be done	on the group.

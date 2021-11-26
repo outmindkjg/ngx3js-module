@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import { ThreeUtil, CurvesParameters } from '../../interface';
 /**
  * Curves circle
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesCircle) page for details.
+ *
  */
 export class CurvesCircle extends THREE.Curve<THREE.Vector3> {
 	/**

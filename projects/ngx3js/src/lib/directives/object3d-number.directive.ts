@@ -21,7 +21,9 @@ export interface NumberOptions extends DirectiveOptions {}
 /**
  * Number Directive
  *
- * @example
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NumberDirective) page for details.
+ * See the [ngx directives](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_directives) page for a live demo.
+ *
  * ```html
  * <ngx3js-light [ngx3jsNumber]="{
  * 		type : 'intensity',

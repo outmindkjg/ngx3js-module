@@ -6,7 +6,7 @@ import {
 	OnInit,
 	Output,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
@@ -18,40 +18,28 @@ import { RendererTimer, ThreeColor, ThreeUtil } from './../interface';
 import { LocalStorageService } from './../local-storage.service';
 
 /**
- * CameraComponent
+ * The Camera component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CameraComponent) page for details.
+ * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera) page for a live demo.
  *
  * Abstract base class for cameras. This class should always be inherited when you build a new camera.
  *
  * ```html
  * <ngx3js-camera
- * 	[type]="'perspective'"
- * 	[fov]="45"
- * 	[near]="0.1"
- * 	[far]="200"
+ * 	[type]="'perspective'" [fov]="45 " [near]="0.1 " [far]="200"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'OrthographicCamera'"
- * 	[orthoSize]="500"
- * 	[fov]="45"
- * 	[near]="1"
- * 	[far]="1000"
+ * 	[type]="'OrthographicCamera'" [orthoSize]="500 " [fov]="45 " [near]="1 " [far]="1000"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'cube'"
- * 	[fov]="40"
- * 	[near]="1"
- * 	[far]="1000"
+ * 	[type]="'cube'" [fov]="40 " [near]="1 " [far]="1000"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'CubePingPong'"
- * 	[near]="1"
- * 	[far]="1000"
+ * 	[type]="'CubePingPong'" [near]="1 " [far]="1000"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'Cinematic'"
- * 	[fov]="60"
- * 	[near]="1"
- * 	[far]="1000"
+ * 	[type]="'Cinematic'" [fov]="60 " [near]="1 " [far]="1000"
  * ></ngx3js-camera>
  * ```
  * @see THREE.Camera
@@ -68,7 +56,7 @@ import { LocalStorageService } from './../local-storage.service';
 		{
 			provide: AbstractSubscribeComponent,
 			useExisting: forwardRef(() => CameraComponent),
-		}
+		},
 	],
 })
 export class CameraComponent
@@ -107,22 +95,22 @@ export class CameraComponent
 	@Input() public aspect: number = 1;
 
 	/**
-	 * Sets the FOV by focal length in respect to the current [page:PerspectiveCamera.filmGauge .filmGauge].
+	 * Sets the FOV by focal length in respect to the current [.filmGauge](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/PerspectiveCamera.filmGauge).
 	 * By default, the focal length is specified for a 35mm (full frame) camera.
 	 */
 	@Input() public focalLength: number = null;
 
 	/**
 	 * Camera frustum near plane. Default is *0.1*.
-	 * The valid range is between 0 and the current value of the [page:.far far] plane.
-	 * Note that, unlike for the [page:PerspectiveCamera], *0* is a valid value for an
+	 * The valid range is between 0 and the current value of the [Camera.far](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/Camera.far) plane.
+	 * Note that, unlike for the [PerspectiveCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/PerspectiveCamera), *0* is a valid value for an
 	 * OrthographicCamera's near plane.
 	 */
 	@Input() public near: number | string = null;
 
 	/**
 	 * Camera frustum far plane. Default is *2000*.
-	 * Must be greater than the current value of [page:.near near] plane.
+	 * Must be greater than the current value of [Camera.near](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/Camera.near) plane.
 	 */
 	@Input() public far: number | string = null;
 
@@ -198,12 +186,12 @@ export class CameraComponent
 	 * The viewport of this render target.
 	 *
 	 * Notice - case insensitive.
-	 * 
+	 *
 	 * @see THREE.WebGLRenderer#setViewport - renderer
 	 * @see THREE.PerspectiveCamera#setViewOffset - viewoffset, offset
 	 * @see THREE.OrthographicCamera#setViewOffset - viewoffset, offset
 	 * @see THREE.PerspectiveCamera - #viewport - camera
-	 * 
+	 *
 	 */
 
 	@Input() public viewportType: string = 'renderer';
@@ -249,7 +237,7 @@ export class CameraComponent
 	@Input() public height: number | string = '100%';
 
 	/**
-	 * Clear the color buffer. Equivalent to calling [page:WebGLRenderer.clear .clear]( true, false, false ).
+	 * Clear the color buffer. Equivalent to calling [.clear](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.clear)( true, false, false ).
 	 */
 	@Input() public clearColor: ThreeColor = null;
 
@@ -259,7 +247,7 @@ export class CameraComponent
 	@Input() public clearAlpha: number = null;
 
 	/**
-	 * Clear the depth buffer. Equivalent to calling [page:WebGLRenderer.clear .clear]( false, true, false ).
+	 * Clear the depth buffer. Equivalent to calling [.clear](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.clear)( false, true, false ).
 	 */
 	@Input() public clearDepth: boolean = null;
 
@@ -373,8 +361,8 @@ export class CameraComponent
 
 	/**
 	 * Camera frustum near plane. Default is *0.1*.
-	 * The valid range is between 0 and the current value of the [page:.far far] plane.
-	 * Note that, unlike for the [page:PerspectiveCamera], *0* is a valid value for an
+	 * The valid range is between 0 and the current value of the [Camera.far](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/Camera.far) plane.
+	 * Note that, unlike for the [PerspectiveCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/PerspectiveCamera), *0* is a valid value for an
 	 * OrthographicCamera's near plane.
 	 *
 	 * @param [def]
@@ -391,7 +379,7 @@ export class CameraComponent
 
 	/**
 	 * Camera frustum far plane. Default is *2000*.
-	 * Must be greater than the current value of [page:.near near] plane.
+	 * Must be greater than the current value of [Camera.near](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/cameras/Camera.near) plane.
 	 *
 	 * @param [def]
 	 * @returns far
@@ -773,13 +761,13 @@ export class CameraComponent
 						'height',
 						'near',
 						'far',
-						'aspect', 
-						'fov', 
+						'aspect',
+						'fov',
 						'orthosize',
-						'left', 
-						'right', 
-						'top', 
-						'bottom'
+						'left',
+						'right',
+						'top',
+						'bottom',
 					],
 					this.OBJECT3D_ATTR
 				)
@@ -790,10 +778,30 @@ export class CameraComponent
 			if (ThreeUtil.isIndexOf(changes, 'init')) {
 				changes = ThreeUtil.pushUniq(changes, ['viewport']);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['x', 'y', 'width', 'height','viewporttype'])) {
+			if (
+				ThreeUtil.isIndexOf(changes, [
+					'x',
+					'y',
+					'width',
+					'height',
+					'viewporttype',
+				])
+			) {
 				changes = ThreeUtil.pushUniq(changes, ['viewport']);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['near', 'far', 'aspect', 'fov', 'orthosize','left', 'right', 'top', 'bottom'])) {
+			if (
+				ThreeUtil.isIndexOf(changes, [
+					'near',
+					'far',
+					'aspect',
+					'fov',
+					'orthosize',
+					'left',
+					'right',
+					'top',
+					'bottom',
+				])
+			) {
 				changes = ThreeUtil.pushUniq(changes, ['changesize']);
 			}
 			changes.forEach((change) => {
@@ -808,7 +816,7 @@ export class CameraComponent
 										this.camera instanceof THREE.OrthographicCamera
 									) {
 										this.camera.setViewOffset(
-										 	this.fullWidth,
+											this.fullWidth,
 											this.fullHeight,
 											this.getX(),
 											this.getY(),
@@ -830,7 +838,7 @@ export class CameraComponent
 											.multiplyScalar(this.pixelRatio);
 									}
 									break;
-								default :
+								default:
 									if (
 										this.camera instanceof THREE.PerspectiveCamera ||
 										this.camera instanceof THREE.OrthographicCamera
@@ -846,8 +854,16 @@ export class CameraComponent
 							) {
 								this.camera.clearViewOffset();
 							}
-							if (this.renderer !== null && this.renderer instanceof THREE.WebGLRenderer) {
-								this.renderer.setViewport(0,0, this.rendererWidth, this.rendererHeight);
+							if (
+								this.renderer !== null &&
+								this.renderer instanceof THREE.WebGLRenderer
+							) {
+								this.renderer.setViewport(
+									0,
+									0,
+									this.rendererWidth,
+									this.rendererHeight
+								);
 							}
 						}
 						break;

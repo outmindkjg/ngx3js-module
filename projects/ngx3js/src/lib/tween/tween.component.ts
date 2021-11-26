@@ -4,12 +4,13 @@ import { ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * TweenComponent
+ * Tween Component
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TweenComponent) page for details.
  *
  * ```html
  * <ngx3js-tween
- * 	[easing]="'power4.easein'"
- * 	[targets]="'position'"
+ * 	[easing]="'power4.easein'" [targets]="'position'"
  * 	(onLoad)="setLightTween($event)"
  * ></ngx3js-tween>
  * <ngx3js-tween

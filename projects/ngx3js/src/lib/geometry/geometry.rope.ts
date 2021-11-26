@@ -1,7 +1,11 @@
 import * as THREE from 'three';
 
 /**
- * Rope geometry
+ * The Rope geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RopeGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
+ *
  */
 export class RopeGeometry extends THREE.BufferGeometry {
 	/**

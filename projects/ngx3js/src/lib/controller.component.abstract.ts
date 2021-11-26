@@ -16,7 +16,10 @@ import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { HtmlCollection } from './visual/visual.component';
 
 /**
- * AbstractControllerComponent Component
+ * The Abstract Controller component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractControllerComponent) page for details.
+ *
  *
  * ```ts
  * _@Component({

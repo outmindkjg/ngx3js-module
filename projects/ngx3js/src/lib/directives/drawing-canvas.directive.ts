@@ -11,7 +11,9 @@ import { ThreeColor, ThreeUtil } from '../interface';
 /**
  * Drawing Canvas Directive
  *
- * @example
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DrawingCanvasDirective) page for details.
+ * See the [ngx directives](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_directives) page for a live demo.
+ *
  * ```html
  *  <canvas ngx3jsDrawingCanvas [clearColor]="'#ffffff'" [lineColor]="'#000000'" />
  * ```
@@ -39,7 +41,7 @@ export class DrawingCanvasDirective implements OnChanges {
 	/**
 	 * The drawing line width
 	 */
-	 @Input() public lineWidth: number = 1;
+	@Input() public lineWidth: number = 1;
 
 	/**
 	 * The Canvas
@@ -199,14 +201,14 @@ export class DrawingCanvasDirective implements OnChanges {
 			drawContext.beginPath();
 		}
 		if (ThreeUtil.isNotNull(this.lineDash)) {
-			switch(this.lineDash) {
-				case 'dashed' :
-					drawContext.setLineDash([4,8]);
+			switch (this.lineDash) {
+				case 'dashed':
+					drawContext.setLineDash([4, 8]);
 					break;
-				case 'dotted' :
-					drawContext.setLineDash([4,4]);
+				case 'dotted':
+					drawContext.setLineDash([4, 4]);
 					break;
-				case 'solid' :
+				case 'solid':
 					drawContext.setLineDash([]);
 					break;
 			}

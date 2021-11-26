@@ -6,21 +6,19 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 
 /**
- * ToolsComponent
+ * Tools Component
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ToolsComponent) page for details.
  *
  * ```html
  * <ngx3js-tools
- * 	[type]="'audio'"
- * 	[url]="'sounds/ping_pong.mp3'"
+ * 	[type]="'audio'" [url]="'sounds/ping_pong.mp3'"
  * ></ngx3js-tools>
  * <ngx3js-tools
- * 	[type]="'pmremtexture'"
- * 	[background]="'0xcccccc'"
+ * 	[type]="'pmremtexture'" [background]="'0xcccccc'"
  * ></ngx3js-tools>
  * <ngx3js-tools
- * 	[type]="'pmremtexture'"
- * 	[storageName]="'spot1Lux.hdr'"
- * 	[storageOption]="{ path: 'textures/equirectangular/' }"
+ * 	[type]="'pmremtexture'" [storageName]="'spot1Lux.hdr'" [storageOption]="{ path: 'textures/equirectangular/' }"
  * ></ngx3js-tools>
  * ```
  */
@@ -52,8 +50,8 @@ export class ToolsComponent
 	@Input() public size: number = null;
 
 	/**
-	 * [page:Textures THREE.LinearEncoding] is the default.
-	 * See the [page:Textures texture constants] page for details of other formats.
+	 * [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) is the default.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * Notice - case insensitive.
@@ -72,8 +70,8 @@ export class ToolsComponent
 	@Input() public encoding: string = null;
 
 	/**
-	 * The default is [page:Textures THREE.RGBAFormat], although the [page:TextureLoader TextureLoader] will automatically set this to [page:Textures THREE.RGBFormat] for JPG images.
-	 * See the [page:Textures texture constants] page for details of other formats.
+	 * The default is [THREE.RGBAFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), although the [TextureLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/TextureLoader) will automatically set this to [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) for JPG images.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
 	 * Notice - case insensitive.
 	 *

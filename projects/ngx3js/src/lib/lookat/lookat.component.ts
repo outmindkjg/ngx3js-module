@@ -4,10 +4,12 @@ import { TagAttributes, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * LookatComponent
+ * The Lookat component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LookatComponent) page for details.
  *
  * vector - A vector representing a position in world space.
- * Optionally, the [page:.x x], [page:.y y] and [page:.z z] components of the world space position.
+ * Optionally, the [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3.x), [y](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3.y) and [z](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3.z) components of the world space position.
  *
  * Rotates the object to face a point in world space.
  *

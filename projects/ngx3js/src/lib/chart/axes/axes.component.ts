@@ -10,6 +10,12 @@ import { AbstractChartComponent } from '../../chart.abstract';
 import { ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
+/**
+ * The Chart Axes component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartAxesComponent) page for details.
+ *
+ */
 @Component({
 	selector: 'ngx3js-chart-axes',
 	templateUrl: './axes.component.html',
@@ -63,8 +69,8 @@ export class ChartAxesComponent
 
 	/**
 	 * Defines which side of faces will be rendered - front, back or both.
-	 * Default is [page:Materials THREE.FrontSide].
-	 * Other options are [page:Materials THREE.BackSide] and [page:Materials THREE.DoubleSide].
+	 * Default is [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
+	 * Other options are [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) and [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * Notice - case insensitive.
 	 *

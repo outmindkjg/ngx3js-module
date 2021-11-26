@@ -4,6 +4,8 @@ import { ThreeUtil } from '../interface';
 /**
  * Mesh text
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshText) page for details.
+ *
  * ```ts
  * const mesh = new MeshText('message', 10, 0xffffff);
  * ```

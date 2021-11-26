@@ -7,17 +7,17 @@ import { RotateDirective } from './object3d-rotate.directive';
 import { ScaleDirective } from './object3d-scale.directive';
 
 export const NGX3JS_DIRECTIVES = [
-    DrawingCanvasDirective,
-    RotateDirective,
-    ScaleDirective,
-    PositionDirective,
-    NumberDirective
+	DrawingCanvasDirective,
+	RotateDirective,
+	ScaleDirective,
+	PositionDirective,
+	NumberDirective,
 ];
 
 export {
-    DrawingCanvasDirective,
-    RotateDirective,
-    ScaleDirective,
-    PositionDirective,
-    NumberDirective
-}
+	DrawingCanvasDirective,
+	RotateDirective,
+	ScaleDirective,
+	PositionDirective,
+	NumberDirective,
+};

@@ -86,12 +86,12 @@ export interface HelperOptions {
 	divisions?: number;
 
 	/**
-	 * The first color used for grid elements. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0x444444
+	 * The first color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444
 	 */
 	color1?: ThreeColor;
 
 	/**
-	 * The second color used for grid elements. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0x888888
+	 * The second color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
 	 */
 	color2?: ThreeColor;
 
@@ -224,35 +224,23 @@ export interface HelperOptions {
 }
 
 /**
- * HelperComponent
+ * The Helper component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HelperComponent) page for details.
  *
  * ```html
  * <ngx3js-helper
- * 	[type]="'GridHelper'"
- * 	[size]="500"
- * 	[divisions]="100"
- * 	[color1]="'0x000000'"
- * 	[opacity]="0.2"
+ * 	[type]="'GridHelper'" [size]="500 " [divisions]="100 " [color1]="'0x000000'" [opacity]="0.2"
  * ></ngx3js-helper>
  * <ngx3js-helper
- * 	[type]="'Camera'"
- * 	[target]="sunLight"
- * 	[visible]="controls.shadowCameraVisible"
+ * 	[type]="'Camera'" [target]="sunLight " [visible]="controls.shadowCameraVisible"
  * ></ngx3js-helper>
  * <ngx3js-helper
- * 	[visible]="false"
- * 	[type]="'csmhelper'"
- * 	[control]="csm"
+ * 	[visible]="false " [type]="'csmhelper'" [control]="csm"
  * 	(onLoad)="setHelper($event)"
  * ></ngx3js-helper>
  * <ngx3js-helper
- * 	[type]="'arrowhelper'"
- * 	[arrowFrom]="sunLight"
- * 	[arrowTo]="scene"
- * 	[length]="0.9"
- * 	[color]="'0xffff00'"
- * 	[headLength]="0.25"
- * 	[headWidth]="0.08"
+ * 	[type]="'arrowhelper'" [arrowFrom]="sunLight " [arrowTo]="scene " [length]="0.9 " [color]="'0xffff00'" [headLength]="0.25 " [headWidth]="0.08"
  * ></ngx3js-helper>
  * ```
  */
@@ -268,7 +256,7 @@ export interface HelperOptions {
 		{
 			provide: AbstractSubscribeComponent,
 			useExisting: forwardRef(() => HelperComponent),
-		}	
+		},
 	],
 })
 export class HelperComponent
@@ -339,12 +327,12 @@ export class HelperComponent
 	@Input() public divisions: number = null;
 
 	/**
-	 * The first color used for grid elements. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0x444444
+	 * The first color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444
 	 */
 	@Input() public color1: ThreeColor = null;
 
 	/**
-	 * The second color used for grid elements. This can be a [page:Color], a hexadecimal value and an CSS-Color name. Default is 0x888888
+	 * The second color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
 	 */
 	@Input() public color2: ThreeColor = null;
 

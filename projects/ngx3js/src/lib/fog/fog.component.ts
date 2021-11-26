@@ -4,18 +4,16 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeColor, ThreeUtil } from './../interface';
 
 /**
- * FogComponent
+ * The Fog component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FogComponent) page for details.
  *
  * ```html
  * <ngx3js-fog
- * 	[color]="'0xa0a0a0'"
- * 	[near]="10"
- * 	[far]="50"
+ * 	[color]="'0xa0a0a0'" [near]="10 " [far]="50"
  * ></ngx3js-fog>
  * <ngx3js-fog
- * 	[type]="'FogExp2'"
- * 	[color]="'0x000000'"
- * 	[density]="0.00000025"
+ * 	[type]="'FogExp2'" [color]="'0x000000'" [density]="0.00000025"
  * ></ngx3js-fog>
  * ```
  */
@@ -128,7 +126,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	 * Sets object
 	 * @param fog
 	 */
-	 setObject(fog : THREE.FogBase) {
+	setObject(fog: THREE.FogBase) {
 		super.setObject(fog);
 		if (this.refScene !== null) {
 			this.refScene.fog = fog;

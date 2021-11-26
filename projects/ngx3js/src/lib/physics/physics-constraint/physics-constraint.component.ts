@@ -3,6 +3,13 @@ import { RendererTimer, ThreeUtil } from '../../interface';
 import { AbstractSubscribeComponent } from '../../subscribe.abstract';
 import * as Ammo from '../../threejs-library/ammo';
 
+/**
+ * The Physics Constraint component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PhysicsConstraintComponent) page for details.
+ * See the [ngx physics](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_physics) page for a live demo.
+ *
+ */
 @Component({
 	selector: 'ngx3js-physics-constraint',
 	templateUrl: './physics-constraint.component.html',
@@ -156,7 +163,10 @@ export class PhysicsConstraintComponent
 	 * @param physics
 	 * @param ammo
 	 */
-	public setPhysics(physics: Ammo.btSoftRigidDynamicsWorld, ammo: Ammo.AmmoType) {
+	public setPhysics(
+		physics: Ammo.btSoftRigidDynamicsWorld,
+		ammo: Ammo.AmmoType
+	) {
 		this.physics = physics;
 		this.ammo = ammo;
 		this.getConstraint();
@@ -269,8 +279,8 @@ export class PhysicsConstraintComponent
 			let constraint: Ammo.btTypedConstraint = null;
 			switch (this.type.toLowerCase()) {
 				case 'hinge':
-					const source1 : any= this.getRigidBody(this.source1, 'source1');
-					const source2 : any= this.getRigidBody(this.source2, 'source2');
+					const source1: any = this.getRigidBody(this.source1, 'source1');
+					const source2: any = this.getRigidBody(this.source2, 'source2');
 					if (ThreeUtil.isNotNull(source1) && ThreeUtil.isNotNull(source2)) {
 						const pivotA = this.getBtVector3(
 							this.pivot1x,

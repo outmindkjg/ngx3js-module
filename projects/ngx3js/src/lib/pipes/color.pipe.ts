@@ -42,6 +42,9 @@ type OperatorType =
 /**
  * Change Color Pipe
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ColorPipe) page for details.
+ * See the [ngx pipes](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_pipes) page for a live demo.
+ *
  * ```html
  * {{ '#ff0000' |  ngx3jsColor }}
  * ```

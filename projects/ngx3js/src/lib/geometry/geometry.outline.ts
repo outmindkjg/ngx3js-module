@@ -1,8 +1,11 @@
 import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
 
 /**
- * CircleDepth geometry
+ * The Outline geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OutlineGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
+ *
  */
 export class OutlineGeometry extends THREE.WireframeGeometry {
 	/**

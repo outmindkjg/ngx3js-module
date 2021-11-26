@@ -114,7 +114,7 @@ import { WireFrame } from './shader.wireframe';
 /**
  * ShaderType
  */
- export interface ShaderType {
+export interface ShaderType {
 	defines?: {
 		[key: string]: any;
 	};
@@ -390,6 +390,12 @@ export const ShaderConf: {
 	colorscreen: 'colorscreenshader',
 };
 
+/**
+ * Shader utils
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderUtils) page for details.
+ *
+ */
 export class ShaderUtils {
 	public static addShader(key: string, shader: ShaderType, alias?: string[]) {
 		key = key.toLowerCase();

@@ -4,7 +4,10 @@ import { TagAttributes, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
- * ScaleComponent
+ * The Scale component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ScaleComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-scale',
@@ -41,7 +44,7 @@ export class ScaleComponent
 	@Input() public z: number = 1;
 
 	/**
-	 * Multiplies this vector by scalar [page:Float s].
+	 * Multiplies this vector by scalar s.
 	 */
 	@Input() public multiply: number = null;
 

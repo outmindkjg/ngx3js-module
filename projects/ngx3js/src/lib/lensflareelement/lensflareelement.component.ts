@@ -9,7 +9,10 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 
 /**
- * LensflareelementComponent
+ * The Lensflareelement component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LensflareelementComponent) page for details.
+ * See the [ngx lensflares](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lensflares) page for a live demo.
  *
  * ```html
  * <ngx3js-mesh [type]="'lensflare'">

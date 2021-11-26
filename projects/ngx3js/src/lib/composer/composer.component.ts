@@ -20,7 +20,9 @@ import { SceneComponent } from '../scene/scene.component';
 import { AbstractTweenComponent } from '../tween.abstract';
 
 /**
- * ComposerComponent
+ * The Composer component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ComposerComponent) page for details.
  *
  * ```html
  * <ngx3js-composer>

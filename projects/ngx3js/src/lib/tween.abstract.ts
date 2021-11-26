@@ -16,7 +16,10 @@ import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { TweenComponent } from './tween/tween.component';
 
 /**
- * AbstractTweenComponent
+ * The Abstract Tween component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractTweenComponent) page for details.
+ *
  */
 @Component({
 	template: '',

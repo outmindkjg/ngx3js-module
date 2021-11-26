@@ -4,12 +4,12 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import {
 	LUTCubeLoader,
-	LUTCubeResult
+	LUTCubeResult,
 } from 'three/examples/jsm/loaders/LUTCubeLoader';
 import { ReflectorForSSRPass } from './../threejs-library/ReflectorForSSRPass';
 import { AdaptiveToneMappingPass } from 'three/examples/jsm/postprocessing/AdaptiveToneMappingPass';
@@ -17,7 +17,7 @@ import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass';
 import {
 	BokehPass,
-	BokehPassParamters
+	BokehPassParamters,
 } from 'three/examples/jsm/postprocessing/BokehPass';
 import { ClearPass } from 'three/examples/jsm/postprocessing/ClearPass';
 import { CubeTexturePass } from 'three/examples/jsm/postprocessing/CubeTexturePass';
@@ -29,7 +29,7 @@ import { HalftonePass } from 'three/examples/jsm/postprocessing/HalftonePass';
 import { LUTPass } from 'three/examples/jsm/postprocessing/LUTPass';
 import {
 	ClearMaskPass,
-	MaskPass
+	MaskPass,
 } from 'three/examples/jsm/postprocessing/MaskPass';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
 import { Pass } from 'three/examples/jsm/postprocessing/Pass';
@@ -54,7 +54,9 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TextureComponent } from '../texture/texture.component';
 
 /**
- * PassComponent
+ * The Pass component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PassComponent) page for details.
  *
  * ```html
  * <ngx3js-composer>
@@ -360,8 +362,8 @@ export class PassComponent
 	@Input() public size: THREE.Vector2 | SizeComponent = null;
 
 	/**
-	 * [page:Textures THREE.LinearEncoding] is the default.
-	 * See the [page:Textures texture constants] page for details of other formats.
+	 * [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) is the default.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * Notice - case insensitive.

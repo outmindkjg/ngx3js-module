@@ -29,36 +29,28 @@ export interface CharacterControl {
 }
 
 /**
- * MixerComponent
+ * The Mixer component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MixerComponent) page for details.
  *
  * ```html
  * <ngx3js-mixer [action]="'default'">
  * 	<ngx3js-clip [name]="'default'" [index]="0"></ngx3js-clip>
  * </ngx3js-mixer>
  * <ngx3js-mixer
- * 	[action]="controls.animation"
- * 	[type]="'Character'"
- * 	[skin]="controls.skinIdx"
- * 	[weapon]="controls.weaponIdx"
+ * 	[action]="controls.animation " [type]="'Character'" [skin]="controls.skinIdx " [weapon]="controls.weaponIdx"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
- * 	[type]="'MMDAnimationHelper'"
- * 	[mmdHelpers]="['iksolver', 'physics']"
- * 	[afterglow]="2.0"
- * 	[gravity]="-9.8 * 10"
- * 	[physics]="true"
+ * 	[type]="'MMDAnimationHelper'" [mmdHelpers]="['iksolver', 'physics'] " [afterglow]="2.0 " [gravity]="-9.8 * 10 " [physics]="true"
  * 	(onLoad)="setMixer($event)"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
- * 	[type]="'MMDAnimationHelper'"
- * 	[animationHelper]="animationHelper"
+ * 	[type]="'MMDAnimationHelper'" [animationHelper]="animationHelper"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
  * 	[type]="'MMDAnimationHelper'"
  * 	#animationHelper
- * 	[afterglow]="2.0"
- * 	[gravity]="-9.8 * 10"
- * 	[physics]="true"
+ * 	[afterglow]="2.0 " [gravity]="-9.8 * 10 " [physics]="true"
  * ></ngx3js-mixer>
  * <ngx3js-mixer [action]="'run'" [delayTime]="info.delay">
  * 	<ngx3js-clip [name]="'run'" [index]="0"></ngx3js-clip>
@@ -96,12 +88,12 @@ export class MixerComponent
 	@Input() public fps: number = null;
 
 	/**
-	 * Sets the duration for a single loop of this action (by adjusting [page:.timeScale timeScale] and stopping any scheduled warping). This method can be chained.
+	 * Sets the duration for a single loop of this action (by adjusting [AnimationAction.timeScale](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationAction.timeScale) and stopping any scheduled warping). This method can be chained.
 	 */
 	@Input() public duration: number = 0.5;
 
 	/**
-	 * Scaling factor for the [page:.time time]. A value of 0 causes the animation to pause. Negative values cause the animation to play backwards. Default is 1.
+	 * Scaling factor for the [KeyframeTrack.time](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/KeyframeTrack.time). A value of 0 causes the animation to pause. Negative values cause the animation to play backwards. Default is 1.
 	 * Properties/methods concerning *timeScale* (respectively *time*)
 	 */
 	@Input() public timeScale: number = 1;

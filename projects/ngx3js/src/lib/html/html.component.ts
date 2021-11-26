@@ -14,7 +14,10 @@ import { CssStyle, ThreeUtil } from '../interface';
 import { AbstractTweenComponent } from '../tween.abstract';
 
 /**
- * HtmlComponent
+ * The Html component.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HtmlComponent) page for details.
+ *
  */
 @Component({
 	selector: 'ngx3js-html',

@@ -881,6 +881,9 @@ export abstract class AbstractThreeController {
 
 /**
  * Auto rotation controller
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoRotationController) page for details.
+ *
  */
 export class AutoRotationController extends AbstractThreeController {
 	/**
@@ -945,6 +948,9 @@ export class AutoRotationController extends AbstractThreeController {
 
 /**
  * Auto scale controller
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoScaleController) page for details.
+ *
  */
 export class AutoScaleController extends AbstractThreeController {
 	/**
@@ -1009,6 +1015,9 @@ export class AutoScaleController extends AbstractThreeController {
 
 /**
  * Auto position controller
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoPositionController) page for details.
+ *
  */
 export class AutoPositionController extends AbstractThreeController {
 	/**
@@ -1069,6 +1078,9 @@ export class AutoPositionController extends AbstractThreeController {
 
 /**
  * Auto material controller
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoMaterialController) page for details.
+ *
  */
 export class AutoMaterialController extends AbstractThreeController {
 	/**
@@ -1139,6 +1151,9 @@ export class AutoMaterialController extends AbstractThreeController {
 
 /**
  * Auto uniforms controller
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoUniformsController) page for details.
+ *
  */
 export class AutoUniformsController extends AbstractThreeController {
 	/**
