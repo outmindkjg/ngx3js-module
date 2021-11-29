@@ -1,10 +1,21 @@
 // @ts-nocheck
+// @ignore
+
 import * as _AMMO from './ammo.wasm';
 
+/**
+ * Ammos init
+ * @template T 
+ * @param [target] 
+ * @returns init 
+ */
 export function AmmoInit<T>(target?: T): Promise<T & AmmoType> {
 	return _AMMO.default(target);
 }
 
+/**
+ * Bt idebug draw
+ */
 export interface btIDebugDraw {
 	drawLine(from: btVector3, to: btVector3, color: btVector3): void;
 	drawContactPoint(
@@ -19,6 +30,9 @@ export interface btIDebugDraw {
 	setDebugMode(debugMode: number): void;
 	getDebugMode(): number;
 }
+/**
+ * Debug drawer
+ */
 export interface DebugDrawer {
 	new (): this;
 	drawLine(from: btVector3, to: btVector3, color: btVector3): void;
@@ -34,6 +48,10 @@ export interface DebugDrawer {
 	setDebugMode(debugMode: number): void;
 	getDebugMode(): number;
 }
+
+/**
+ * Bt vector3
+ */
 export interface btVector3 {
 	new (x?: number, y?: number, z?: number): this;
 	length(): number;
@@ -51,6 +69,9 @@ export interface btVector3 {
 	op_add(v: btVector3): btVector3;
 	op_sub(v: btVector3): btVector3;
 }
+/**
+ * Bt vector4
+ */
 export interface btVector4 extends btVector3 {
 	new (): this;
 	new (x: number, y: number, z: number, w: number): this;
@@ -58,6 +79,9 @@ export interface btVector4 extends btVector3 {
 	setValue(x: number, y: number, z: number): void;
 	setValue(x: number, y: number, z: number, w: number): void;
 }
+/**
+ * Bt quad word
+ */
 export interface btQuadWord {
 	x(): number;
 	y(): number;
@@ -68,6 +92,9 @@ export interface btQuadWord {
 	setZ(z: number): void;
 	setW(w: number): void;
 }
+/**
+ * Bt quaternion
+ */
 export interface btQuaternion extends btQuadWord {
 	new (x: number, y: number, z: number, w: number): this;
 	setValue(x: number, y: number, z: number, w: number): void;
@@ -90,11 +117,17 @@ export interface btQuaternion extends btQuadWord {
 	op_mulq(q: btQuaternion): btQuaternion;
 	op_div(s: number): btQuaternion;
 }
+/**
+ * Bt matrix3x3
+ */
 export interface btMatrix3x3 {
 	setEulerZYX(ex: number, ey: number, ez: number): void;
 	getRotation(q: btQuaternion): void;
 	getRow(y: number): btVector3;
 }
+/**
+ * Bt transform
+ */
 export interface btTransform {
 	new (): this;
 	new (q: btQuaternion, v: btVector3): this;
@@ -108,15 +141,24 @@ export interface btTransform {
 	inverse(): btTransform;
 	op_mul(t: btTransform): btTransform;
 }
+/**
+ * Bt motion state
+ */
 export interface btMotionState {
 	getWorldTransform(worldTrans: btTransform): void;
 	setWorldTransform(worldTrans: btTransform): void;
 }
+/**
+ * Bt default motion state
+ */
 export interface btDefaultMotionState extends btMotionState {
 	new (startTrans?: btTransform, centerOfMassOffset?: btTransform): this;
 	get_m_graphicsWorldTrans(): btTransform;
 	set_m_graphicsWorldTrans(m_graphicsWorldTrans: btTransform): void;
 }
+/**
+ * Bt collision object
+ */
 export interface btCollisionObject {
 	setAnisotropicFriction(
 		anisotropicFriction: btVector3,
@@ -150,11 +192,17 @@ export interface btCollisionObject {
 	setUserPointer(userPointer: unknown): void;
 	getBroadphaseHandle(): btBroadphaseProxy;
 }
+/**
+ * Bt collision object wrapper
+ */
 export interface btCollisionObjectWrapper {
 	getWorldTransform(): btTransform;
 	getCollisionObject(): btCollisionObject;
 	getCollisionShape(): btCollisionShape;
 }
+/**
+ * Ray result callback
+ */
 export interface RayResultCallback {
 	hasHit(): boolean;
 	get_m_collisionFilterGroup(): number;
@@ -166,6 +214,9 @@ export interface RayResultCallback {
 	get_m_collisionObject(): btCollisionObject;
 	set_m_collisionObject(m_collisionObject: btCollisionObject): void;
 }
+/**
+ * Closest ray result callback
+ */
 export interface ClosestRayResultCallback extends RayResultCallback {
 	new (from: btVector3, to: btVector3): this;
 	get_m_rayFromWorld(): btVector3;
@@ -177,14 +228,23 @@ export interface ClosestRayResultCallback extends RayResultCallback {
 	get_m_hitPointWorld(): btVector3;
 	set_m_hitPointWorld(m_hitPointWorld: btVector3): void;
 }
+/**
+ * Bt const collision object array
+ */
 export interface btConstCollisionObjectArray {
 	size(): number;
 	at(n: number): btCollisionObject;
 }
+/**
+ * Bt scalar array
+ */
 export interface btScalarArray {
 	size(): number;
 	at(n: number): number;
 }
+/**
+ * All hits ray result callback
+ */
 export interface AllHitsRayResultCallback extends RayResultCallback {
 	new (from: btVector3, to: btVector3): this;
 	get_m_collisionObjects(): btConstCollisionObjectArray;
@@ -200,6 +260,9 @@ export interface AllHitsRayResultCallback extends RayResultCallback {
 	get_m_hitFractions(): btScalarArray;
 	set_m_hitFractions(m_hitFractions: btScalarArray): void;
 }
+/**
+ * Bt manifold point
+ */
 export interface btManifoldPoint {
 	getPositionWorldOnA(): btVector3;
 	getPositionWorldOnB(): btVector3;
@@ -218,6 +281,9 @@ export interface btManifoldPoint {
 	get_m_userPersistentData(): any;
 	set_m_userPersistentData(m_userPersistentData: any): void;
 }
+/**
+ * Contact result callback
+ */
 export interface ContactResultCallback {
 	addSingleResult(
 		cp: btManifoldPoint,
@@ -229,6 +295,9 @@ export interface ContactResultCallback {
 		index1: number
 	): number;
 }
+/**
+ * Concrete contact result callback
+ */
 export interface ConcreteContactResultCallback {
 	new (): this;
 	addSingleResult(
@@ -241,12 +310,18 @@ export interface ConcreteContactResultCallback {
 		index1: number
 	): number;
 }
+/**
+ * Local shape info
+ */
 export interface LocalShapeInfo {
 	get_m_shapePart(): number;
 	set_m_shapePart(m_shapePart: number): void;
 	get_m_triangleIndex(): number;
 	set_m_triangleIndex(m_triangleIndex: number): void;
 }
+/**
+ * Local convex result
+ */
 export interface LocalConvexResult {
 	new (
 		hitCollisionObject: btCollisionObject,
@@ -266,6 +341,9 @@ export interface LocalConvexResult {
 	get_m_hitFraction(): number;
 	set_m_hitFraction(m_hitFraction: number): void;
 }
+/**
+ * Convex result callback
+ */
 export interface ConvexResultCallback {
 	hasHit(): boolean;
 	get_m_collisionFilterGroup(): number;
@@ -275,6 +353,9 @@ export interface ConvexResultCallback {
 	get_m_closestHitFraction(): number;
 	set_m_closestHitFraction(m_closestHitFraction: number): void;
 }
+/**
+ * Closest convex result callback
+ */
 export interface ClosestConvexResultCallback extends ConvexResultCallback {
 	new (convexFromWorld: btVector3, convexToWorld: btVector3): this;
 	get_m_convexFromWorld(): btVector3;
@@ -286,6 +367,9 @@ export interface ClosestConvexResultCallback extends ConvexResultCallback {
 	get_m_hitPointWorld(): btVector3;
 	set_m_hitPointWorld(m_hitPointWorld: btVector3): void;
 }
+/**
+ * Bt collision shape
+ */
 export interface btCollisionShape {
 	setLocalScaling(scaling: btVector3): void;
 	getLocalScaling(): btVector3;
@@ -293,15 +377,27 @@ export interface btCollisionShape {
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt convex shape
+ */
 export interface btConvexShape extends btCollisionShape {}
+/**
+ * Bt convex triangle mesh shape
+ */
 export interface btConvexTriangleMeshShape extends btConvexShape {
 	new (meshInterface: btStridingMeshInterface, calcAabb?: boolean): this;
 }
+/**
+ * Bt box shape
+ */
 export interface btBoxShape extends btCollisionShape {
 	new (boxHalfExtents: btVector3): this;
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt capsule shape
+ */
 export interface btCapsuleShape extends btCollisionShape {
 	new (radius: number, height: number): this;
 	setMargin(margin: number): void;
@@ -310,36 +406,57 @@ export interface btCapsuleShape extends btCollisionShape {
 	getRadius(): number;
 	getHalfHeight(): number;
 }
+/**
+ * Bt capsule shape x
+ */
 export interface btCapsuleShapeX extends btCapsuleShape {
 	new (radius: number, height: number): this;
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt capsule shape z
+ */
 export interface btCapsuleShapeZ extends btCapsuleShape {
 	new (radius: number, height: number): this;
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt cylinder shape
+ */
 export interface btCylinderShape extends btCollisionShape {
 	new (halfExtents: btVector3): this;
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt cylinder shape x
+ */
 export interface btCylinderShapeX extends btCylinderShape {
 	new (halfExtents: btVector3): this;
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt cylinder shape z
+ */
 export interface btCylinderShapeZ extends btCylinderShape {
 	new (halfExtents: btVector3): this;
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt sphere shape
+ */
 export interface btSphereShape extends btCollisionShape {
 	new (radius: number): this;
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt multi sphere shape
+ */
 export interface btMultiSphereShape extends btCollisionShape {
 	new (
 		positions: btVector3,
@@ -347,39 +464,66 @@ export interface btMultiSphereShape extends btCollisionShape {
 		numPoints: number
 	): this;
 }
+/**
+ * Bt cone shape
+ */
 export interface btConeShape extends btCollisionShape {
 	new (radius: number, height: number): this;
 }
+/**
+ * Bt cone shape x
+ */
 export interface btConeShapeX extends btConeShape {
 	new (radius: number, height: number): this;
 }
+/**
+ * Bt cone shape z
+ */
 export interface btConeShapeZ extends btConeShape {
 	new (radius: number, height: number): this;
 }
+/**
+ * Bt int array
+ */
 export interface btIntArray {
 	size(): number;
 	at(n: number): number;
 }
+/**
+ * Bt face
+ */
 export interface btFace {
 	get_m_indices(): btIntArray;
 	set_m_indices(m_indices: btIntArray): void;
 	get_m_plane(): ReadonlyArray<number>;
 	set_m_plane(m_plane: ReadonlyArray<number>): void;
 }
+/**
+ * Bt vector3 array
+ */
 export interface btVector3Array {
 	size(): number;
 	at(n: number): btVector3;
 }
+/**
+ * Bt face array
+ */
 export interface btFaceArray {
 	size(): number;
 	at(n: number): btFace;
 }
+/**
+ * Bt convex polyhedron
+ */
 export interface btConvexPolyhedron {
 	get_m_vertices(): btVector3Array;
 	set_m_vertices(m_vertices: btVector3Array): void;
 	get_m_faces(): btFaceArray;
 	set_m_faces(m_faces: btFaceArray): void;
 }
+/**
+ * Bt convex hull shape
+ */
 export interface btConvexHullShape extends btCollisionShape {
 	new (points?: ReadonlyArray<number>, numPoints?: number): this;
 	addPoint(point: btVector3, recalculateLocalAABB?: boolean): void;
@@ -390,12 +534,18 @@ export interface btConvexHullShape extends btCollisionShape {
 	recalcLocalAabb(): void;
 	getConvexPolyhedron(): btConvexPolyhedron;
 }
+/**
+ * Bt shape hull
+ */
 export interface btShapeHull {
 	new (shape: btConvexShape): this;
 	buildHull(margin: number): boolean;
 	numVertices(): number;
 	getVertexPointer(): btVector3;
 }
+/**
+ * Bt compound shape
+ */
 export interface btCompoundShape extends btCollisionShape {
 	new (enableDynamicAabbTree?: boolean): this;
 	addChildShape(localTransform: btTransform, shape: btCollisionShape): void;
@@ -411,17 +561,29 @@ export interface btCompoundShape extends btCollisionShape {
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt striding mesh interface
+ */
 export interface btStridingMeshInterface {
 	setScaling(scaling: btVector3): void;
 }
+/**
+ * Bt indexed mesh
+ */
 export interface btIndexedMesh {
 	get_m_numTriangles(): number;
 	set_m_numTriangles(m_numTriangles: number): void;
 }
+/**
+ * Bt indexed mesh array
+ */
 export interface btIndexedMeshArray {
 	size(): number;
 	at(n: number): btIndexedMesh;
 }
+/**
+ * Bt triangle mesh
+ */
 export interface btTriangleMesh extends btStridingMeshInterface {
 	new (use32bitIndices?: boolean, use4componentVertices?: boolean): this;
 	addTriangle(
@@ -441,14 +603,29 @@ export type PHY_ScalarType =
 	| 'PHY_SHORT'
 	| 'PHY_FIXEDPOINT88'
 	| 'PHY_UCHAR';
+/**
+ * Bt concave shape
+ */
 export interface btConcaveShape extends btCollisionShape {}
+/**
+ * Bt empty shape
+ */
 export interface btEmptyShape extends btConcaveShape {
 	new (): this;
 }
+/**
+ * Bt static plane shape
+ */
 export interface btStaticPlaneShape extends btConcaveShape {
 	new (planeNormal: btVector3, planeConstant: number): this;
 }
+/**
+ * Bt triangle mesh shape
+ */
 export interface btTriangleMeshShape extends btConcaveShape {}
+/**
+ * Bt bvh triangle mesh shape
+ */
 export interface btBvhTriangleMeshShape extends btTriangleMeshShape {
 	new (
 		meshInterface: btStridingMeshInterface,
@@ -456,6 +633,9 @@ export interface btBvhTriangleMeshShape extends btTriangleMeshShape {
 		buildBvh?: boolean
 	): this;
 }
+/**
+ * Bt heightfield terrain shape
+ */
 export interface btHeightfieldTerrainShape extends btConcaveShape {
 	new (
 		heightStickWidth: number,
@@ -471,12 +651,21 @@ export interface btHeightfieldTerrainShape extends btConcaveShape {
 	setMargin(margin: number): void;
 	getMargin(): number;
 }
+/**
+ * Bt default collision construction info
+ */
 export interface btDefaultCollisionConstructionInfo {
 	new (): this;
 }
+/**
+ * Bt default collision configuration
+ */
 export interface btDefaultCollisionConfiguration {
 	new (info?: btDefaultCollisionConstructionInfo): this;
 }
+/**
+ * Bt persistent manifold
+ */
 export interface btPersistentManifold {
 	new (): this;
 	getBody0(): btCollisionObject;
@@ -484,20 +673,35 @@ export interface btPersistentManifold {
 	getNumContacts(): number;
 	getContactPoint(index: number): btManifoldPoint;
 }
+/**
+ * Bt dispatcher
+ */
 export interface btDispatcher {
 	getNumManifolds(): number;
 	getManifoldByIndexInternal(index: number): btPersistentManifold;
 }
+/**
+ * Bt collision dispatcher
+ */
 export interface btCollisionDispatcher extends btDispatcher {
 	new (conf: btDefaultCollisionConfiguration): this;
 }
+/**
+ * Bt overlapping pair callback
+ */
 export interface btOverlappingPairCallback {}
+/**
+ * Bt overlapping pair cache
+ */
 export interface btOverlappingPairCache {
 	setInternalGhostPairCallback(
 		ghostPairCallback: btOverlappingPairCallback
 	): void;
 	getNumOverlappingPairs(): number;
 }
+/**
+ * Bt axis sweep3
+ */
 export interface btAxisSweep3 {
 	new (
 		worldAabbMin: btVector3,
@@ -507,19 +711,34 @@ export interface btAxisSweep3 {
 		disableRaycastAccelerator?: boolean
 	): this;
 }
+/**
+ * Bt broadphase interface
+ */
 export interface btBroadphaseInterface {
 	getOverlappingPairCache(): btOverlappingPairCache;
 }
+/**
+ * Bt collision configuration
+ */
 export interface btCollisionConfiguration {}
+/**
+ * Bt dbvt broadphase
+ */
 export interface btDbvtBroadphase extends btBroadphaseInterface {
 	new (): this;
 }
+/**
+ * Bt broadphase proxy
+ */
 export interface btBroadphaseProxy {
 	get_m_collisionFilterGroup(): number;
 	set_m_collisionFilterGroup(m_collisionFilterGroup: number): void;
 	get_m_collisionFilterMask(): number;
 	set_m_collisionFilterMask(m_collisionFilterMask: number): void;
 }
+/**
+ * Bt rigid body construction info
+ */
 export interface btRigidBodyConstructionInfo {
 	new (
 		mass: number,
@@ -558,6 +777,9 @@ export interface btRigidBodyConstructionInfo {
 		m_additionalAngularDampingFactor: number
 	): void;
 }
+/**
+ * Bt rigid body
+ */
 export interface btRigidBody extends btCollisionObject {
 	new (constructionInfo: btRigidBodyConstructionInfo): this;
 	getCenterOfMassTransform(): btTransform;
@@ -594,6 +816,9 @@ export interface btRigidBody extends btCollisionObject {
 	getBroadphaseProxy(): btBroadphaseProxy;
 	clearForces(): void;
 }
+/**
+ * Bt constraint setting
+ */
 export interface btConstraintSetting {
 	new (): this;
 	get_m_tau(): number;
@@ -603,6 +828,9 @@ export interface btConstraintSetting {
 	get_m_impulseClamp(): number;
 	set_m_impulseClamp(m_impulseClamp: number): void;
 }
+/**
+ * Bt typed constraint
+ */
 export interface btTypedConstraint {
 	enableFeedback(needsFeedback: boolean): void;
 	getBreakingImpulseThreshold(): number;
@@ -615,6 +843,9 @@ export type btConstraintParams =
 	| 'BT_CONSTRAINT_STOP_ERP'
 	| 'BT_CONSTRAINT_CFM'
 	| 'BT_CONSTRAINT_STOP_CFM';
+/**
+ * Bt point2 point constraint
+ */
 export interface btPoint2PointConstraint extends btTypedConstraint {
 	new (
 		rbA: btRigidBody,
@@ -630,6 +861,9 @@ export interface btPoint2PointConstraint extends btTypedConstraint {
 	get_m_setting(): btConstraintSetting;
 	set_m_setting(m_setting: btConstraintSetting): void;
 }
+/**
+ * Bt generic6 dof constraint
+ */
 export interface btGeneric6DofConstraint extends btTypedConstraint {
 	new (
 		rbA: btRigidBody,
@@ -649,6 +883,9 @@ export interface btGeneric6DofConstraint extends btTypedConstraint {
 	setAngularUpperLimit(angularUpper: btVector3): void;
 	getFrameOffsetA(): btTransform;
 }
+/**
+ * Bt generic6 dof spring constraint
+ */
 export interface btGeneric6DofSpringConstraint extends btGeneric6DofConstraint {
 	new (
 		rbA: btRigidBody,
@@ -669,9 +906,15 @@ export interface btGeneric6DofSpringConstraint extends btGeneric6DofConstraint {
 	setEquilibriumPoint(index: number): void;
 	setEquilibriumPoint(): void;
 }
+/**
+ * Bt sequential impulse constraint solver
+ */
 export interface btSequentialImpulseConstraintSolver {
 	new (): this;
 }
+/**
+ * Bt cone twist constraint
+ */
 export interface btConeTwistConstraint extends btTypedConstraint {
 	new (
 		rbA: btRigidBody,
@@ -689,6 +932,9 @@ export interface btConeTwistConstraint extends btTypedConstraint {
 	setMotorTarget(q: btQuaternion): void;
 	setMotorTargetInConstraintSpace(q: btQuaternion): void;
 }
+/**
+ * Bt hinge constraint
+ */
 export interface btHingeConstraint extends btTypedConstraint {
 	new (
 		rbA: btRigidBody,
@@ -728,6 +974,9 @@ export interface btHingeConstraint extends btTypedConstraint {
 	setMaxMotorImpulse(maxMotorImpulse: number): void;
 	setMotorTarget(targetAngle: number, dt: number): void;
 }
+/**
+ * Bt slider constraint
+ */
 export interface btSliderConstraint extends btTypedConstraint {
 	new (
 		rbA: btRigidBody,
@@ -746,6 +995,9 @@ export interface btSliderConstraint extends btTypedConstraint {
 	setLowerAngLimit(lowerAngLimit: number): void;
 	setUpperAngLimit(upperAngLimit: number): void;
 }
+/**
+ * Bt fixed constraint
+ */
 export interface btFixedConstraint extends btTypedConstraint {
 	new (
 		rbA: btRigidBody,
@@ -754,7 +1006,13 @@ export interface btFixedConstraint extends btTypedConstraint {
 		frameInB: btTransform
 	): this;
 }
+/**
+ * Bt constraint solver
+ */
 export interface btConstraintSolver {}
+/**
+ * Bt dispatcher info
+ */
 export interface btDispatcherInfo {
 	get_m_timeStep(): number;
 	set_m_timeStep(m_timeStep: number): void;
@@ -783,6 +1041,9 @@ export interface btDispatcherInfo {
 		m_convexConservativeDistanceThreshold: number
 	): void;
 }
+/**
+ * Bt collision world
+ */
 export interface btCollisionWorld {
 	getDispatcher(): btDispatcher;
 	rayTest(
@@ -825,6 +1086,9 @@ export interface btCollisionWorld {
 		color: btVector3
 	): void;
 }
+/**
+ * Bt contact solver info
+ */
 export interface btContactSolverInfo {
 	get_m_splitImpulse(): boolean;
 	set_m_splitImpulse(m_splitImpulse: boolean): void;
@@ -839,6 +1103,9 @@ export type btInternalTickCallback = (
 	world: btDynamicsWorld,
 	timeStep: number
 ) => void;
+/**
+ * Bt dynamics world
+ */
 export interface btDynamicsWorld extends btCollisionWorld {
 	addAction(action: btActionInterface): void;
 	removeAction(action: btActionInterface): void;
@@ -849,6 +1116,9 @@ export interface btDynamicsWorld extends btCollisionWorld {
 		isPreTick?: boolean
 	): void;
 }
+/**
+ * Bt discrete dynamics world
+ */
 export interface btDiscreteDynamicsWorld extends btDynamicsWorld {
 	new (
 		dispatcher: btDispatcher,
@@ -875,6 +1145,9 @@ export interface btDiscreteDynamicsWorld extends btDynamicsWorld {
 	setContactProcessedCallback(funcpointer: number): void;
 	setContactDestroyedCallback(funcpointer: number): void;
 }
+/**
+ * Bt vehicle tuning
+ */
 export interface btVehicleTuning {
 	new (): this;
 	get_m_suspensionStiffness(): number;
@@ -890,6 +1163,9 @@ export interface btVehicleTuning {
 	get_m_maxSuspensionForce(): number;
 	set_m_maxSuspensionForce(m_maxSuspensionForce: number): void;
 }
+/**
+ * Bt vehicle raycaster result
+ */
 export interface btVehicleRaycasterResult {
 	get_m_hitPointInWorld(): btVector3;
 	set_m_hitPointInWorld(m_hitPointInWorld: btVector3): void;
@@ -898,6 +1174,9 @@ export interface btVehicleRaycasterResult {
 	get_m_distFraction(): number;
 	set_m_distFraction(m_distFraction: number): void;
 }
+/**
+ * Bt vehicle raycaster
+ */
 export interface btVehicleRaycaster {
 	castRay(
 		from: btVector3,
@@ -905,9 +1184,15 @@ export interface btVehicleRaycaster {
 		result: btVehicleRaycasterResult
 	): void;
 }
+/**
+ * Bt default vehicle raycaster
+ */
 export interface btDefaultVehicleRaycaster extends btVehicleRaycaster {
 	new (world: btDynamicsWorld): this;
 }
+/**
+ * Raycast info
+ */
 export interface RaycastInfo {
 	get_m_contactNormalWS(): btVector3;
 	set_m_contactNormalWS(m_contactNormalWS: btVector3): void;
@@ -926,6 +1211,9 @@ export interface RaycastInfo {
 	get_m_groundObject(): any;
 	set_m_groundObject(m_groundObject: any): void;
 }
+/**
+ * Bt wheel info construction info
+ */
 export interface btWheelInfoConstructionInfo {
 	get_m_chassisConnectionCS(): btVector3;
 	set_m_chassisConnectionCS(m_chassisConnectionCS: btVector3): void;
@@ -952,6 +1240,9 @@ export interface btWheelInfoConstructionInfo {
 	get_m_bIsFrontWheel(): boolean;
 	set_m_bIsFrontWheel(m_bIsFrontWheel: boolean): void;
 }
+/**
+ * Bt wheel info
+ */
 export interface btWheelInfo {
 	get_m_suspensionStiffness(): number;
 	set_m_suspensionStiffness(m_suspensionStiffness: number): void;
@@ -1007,9 +1298,15 @@ export interface btWheelInfo {
 	get_m_skidInfo(): number;
 	set_m_skidInfo(m_skidInfo: number): void;
 }
+/**
+ * Bt action interface
+ */
 export interface btActionInterface {
 	updateAction(collisionWorld: btCollisionWorld, deltaTimeStep: number): void;
 }
+/**
+ * Bt kinematic character controller
+ */
 export interface btKinematicCharacterController extends btActionInterface {
 	new (
 		ghostObject: btPairCachingGhostObject,
@@ -1037,6 +1334,9 @@ export interface btKinematicCharacterController extends btActionInterface {
 	onGround(): boolean;
 	setUpInterpolate(value: boolean): void;
 }
+/**
+ * Bt raycast vehicle
+ */
 export interface btRaycastVehicle extends btActionInterface {
 	new (
 		tuning: btVehicleTuning,
@@ -1090,17 +1390,29 @@ export interface btRaycastVehicle extends btActionInterface {
 	setUserConstraintId(uid: number): void;
 	getUserConstraintId(): number;
 }
+/**
+ * Bt ghost object
+ */
 export interface btGhostObject extends btCollisionObject {
 	new (): this;
 	getNumOverlappingObjects(): number;
 	getOverlappingObject(index: number): btCollisionObject;
 }
+/**
+ * Bt pair caching ghost object
+ */
 export interface btPairCachingGhostObject extends btGhostObject {
 	new (): this;
 }
+/**
+ * Bt ghost pair callback
+ */
 export interface btGhostPairCallback {
 	new (): this;
 }
+/**
+ * Bt soft body world info
+ */
 export interface btSoftBodyWorldInfo {
 	new (): this;
 	get_air_density(): number;
@@ -1120,6 +1432,9 @@ export interface btSoftBodyWorldInfo {
 	get_m_gravity(): btVector3;
 	set_m_gravity(m_gravity: btVector3): void;
 }
+/**
+ * Face
+ */
 export interface Face {
 	get_m_n(): ReadonlyArray<Node>;
 	set_m_n(m_n: ReadonlyArray<Node>): void;
@@ -1128,10 +1443,16 @@ export interface Face {
 	get_m_ra(): number;
 	set_m_ra(m_ra: number): void;
 }
+/**
+ * T face array
+ */
 export interface tFaceArray {
 	size(): number;
 	at(n: number): Face;
 }
+/**
+ * Node
+ */
 export interface Node {
 	get_m_x(): btVector3;
 	set_m_x(m_x: btVector3): void;
@@ -1148,10 +1469,16 @@ export interface Node {
 	get_m_area(): number;
 	set_m_area(m_area: number): void;
 }
+/**
+ * T node array
+ */
 export interface tNodeArray {
 	size(): number;
 	at(n: number): Node;
 }
+/**
+ * Material
+ */
 export interface Material {
 	get_m_kLST(): number;
 	set_m_kLST(m_kLST: number): void;
@@ -1162,10 +1489,16 @@ export interface Material {
 	get_m_flags(): number;
 	set_m_flags(m_flags: number): void;
 }
+/**
+ * T material array
+ */
 export interface tMaterialArray {
 	size(): number;
 	at(n: number): Material;
 }
+/**
+ * Anchor
+ */
 export interface Anchor {
 	get_m_node(): Node;
 	set_m_node(m_node: Node): void;
@@ -1182,6 +1515,9 @@ export interface Anchor {
 	get_m_c2(): number;
 	set_m_c2(m_c2: number): void;
 }
+/**
+ * T anchor array
+ */
 export interface tAnchorArray {
 	size(): number;
 	at(n: number): Anchor;
@@ -1189,6 +1525,9 @@ export interface tAnchorArray {
 	push_back(val: Anchor): void;
 	pop_back(): void;
 }
+/**
+ * Config
+ */
 export interface Config {
 	get_kVCF(): number;
 	set_kVCF(kVCF: number): void;
@@ -1241,6 +1580,9 @@ export interface Config {
 	get_collisions(): number;
 	set_collisions(collisions: number): void;
 }
+/**
+ * Bt soft body
+ */
 export interface btSoftBody extends btCollisionObject {
 	new (
 		worldInfo: btSoftBodyWorldInfo,
@@ -1296,18 +1638,33 @@ export interface btSoftBody extends btCollisionObject {
 	generateBendingConstraints(distance: number, mat: Material): number;
 	upcast(colObj: btCollisionObject): btSoftBody;
 }
+/**
+ * Bt soft body rigid body collision configuration
+ */
 export interface btSoftBodyRigidBodyCollisionConfiguration
 	extends btDefaultCollisionConfiguration {
 	new (info?: btDefaultCollisionConstructionInfo): this;
 }
+/**
+ * Bt soft body solver
+ */
 export interface btSoftBodySolver {}
+/**
+ * Bt default soft body solver
+ */
 export interface btDefaultSoftBodySolver extends btSoftBodySolver {
 	new (): this;
 }
+/**
+ * Bt soft body array
+ */
 export interface btSoftBodyArray {
 	size(): number;
 	at(n: number): btSoftBody;
 }
+/**
+ * Bt soft rigid dynamics world
+ */
 export interface btSoftRigidDynamicsWorld extends btDiscreteDynamicsWorld {
 	new (
 		dispatcher: btDispatcher,
@@ -1326,6 +1683,9 @@ export interface btSoftRigidDynamicsWorld extends btDiscreteDynamicsWorld {
 	getWorldInfo(): btSoftBodyWorldInfo;
 	getSoftBodyArray(): btSoftBodyArray;
 }
+/**
+ * Bt soft body helpers
+ */
 export interface btSoftBodyHelpers {
 	new (): this;
 	CreateRope(
@@ -1379,6 +1739,9 @@ export interface btSoftBodyHelpers {
 	): btSoftBody;
 }
 
+/**
+ * Ammo type
+ */
 export interface AmmoType {
 	destroy(obj: any): void;
 	_malloc(size: number): number;

@@ -27,6 +27,11 @@ export * from './controller/controller-item/controller-item.component';
 export * from './controller/controller.component';
 export * from './curve/curve.component';
 export * from './curve/curveUtils';
+export * from './curve/curves/circle';
+export * from './curve/curves/gsap';
+export * from './curve/curves/line';
+export * from './curve/curves/polygon';
+export * from './curve/curves/rollercoaster';
 export * from './directive.abstract';
 export * from './directives/index';
 export * from './fog/fog.component';
@@ -125,3 +130,5 @@ export * from './tween/tween.component';
 export * from './viewer/viewer-canvas';
 export * from './viewer/viewer.component';
 export * from './visual/visual.component';
+export * from './threejs-library/ammo';
+

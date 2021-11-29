@@ -1,10 +1,10 @@
 /** @format */
 
 import { DrawingCanvasDirective } from './drawing-canvas.directive';
-import { NumberDirective } from './object3d-number.directive';
-import { PositionDirective } from './object3d-position.directive';
-import { RotateDirective } from './object3d-rotate.directive';
-import { ScaleDirective } from './object3d-scale.directive';
+import { NumberDirective, NumberOptions } from './object3d-number.directive';
+import { PositionDirective, PositionOptions } from './object3d-position.directive';
+import { RotateDirective, RotateOptions } from './object3d-rotate.directive';
+import { ScaleDirective, ScaleOptions } from './object3d-scale.directive';
 
 export const NGX3JS_DIRECTIVES = [
 	DrawingCanvasDirective,
@@ -20,4 +20,8 @@ export {
 	ScaleDirective,
 	PositionDirective,
 	NumberDirective,
+	NumberOptions,
+	PositionOptions,
+	RotateOptions,
+	ScaleOptions
 };
