@@ -32,6 +32,7 @@ export * from './curve/curves/gsap';
 export * from './curve/curves/line';
 export * from './curve/curves/polygon';
 export * from './curve/curves/rollercoaster';
+export * from './curve/curves/curves';
 export * from './directive.abstract';
 export * from './directives/index';
 export * from './fog/fog.component';

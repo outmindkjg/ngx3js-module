@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Curves } from 'three/examples/jsm/curves/CurveExtras';
+import * as Curves from './curves/curves';
 import { RendererTimer, ThreeUtil } from '../interface';
 import { CurvesCircle } from './curves/circle';
 import * as GSAP from './curves/gsap';
@@ -17,33 +17,33 @@ export interface CurveClass {
 export const CurveConf: {
 	[key: string]: CurveClass | string;
 } = {
-	grannyknotcurve: Curves.GrannyKnot,
+	grannyknotcurve: Curves.CurvesGrannyKnot,
 	grannyknot: 'grannyknotcurve',
-	heartcurve: Curves.HeartCurve,
+	heartcurve: Curves.CurvesHeartCurve,
 	heart: 'heartcurve',
-	vivianicurve: Curves.VivianiCurve,
+	vivianicurve: Curves.CurvesVivianiCurve,
 	viviani: 'vivianicurve',
-	knotcurve: Curves.KnotCurve,
+	knotcurve: Curves.CurvesKnotCurve,
 	knot: 'knotcurve',
-	helixcurve: Curves.HelixCurve,
+	helixcurve: Curves.CurvesHelixCurve,
 	helix: 'helixcurve',
-	trefoilknotcurve: Curves.TrefoilKnot,
+	trefoilknotcurve: Curves.CurvesTrefoilKnot,
 	trefoilknot: 'trefoilknotcurve',
-	torusknotcurve: Curves.TorusKnot,
+	torusknotcurve: Curves.CurvesTorusKnot,
 	torusknot: 'torusknotcurve',
-	cinquefoilknotcurve: Curves.CinquefoilKnot,
+	cinquefoilknotcurve: Curves.CurvesCinquefoilKnot,
 	cinquefoilknot: 'cinquefoilknotcurve',
-	trefoilpolynomialknotcurve: Curves.TrefoilPolynomialKnot,
+	trefoilpolynomialknotcurve: Curves.CurvesTrefoilPolynomialKnot,
 	trefoilpolynomialknot: 'trefoilpolynomialknotcurve',
-	decoratedtorusknot4bcurve: Curves.DecoratedTorusKnot4b,
+	decoratedtorusknot4bcurve: Curves.CurvesDecoratedTorusKnot4b,
 	decoratedtorusknot4b: 'decoratedtorusknot4bcurve',
-	decoratedtorusknot4acurve: Curves.DecoratedTorusKnot4a,
+	decoratedtorusknot4acurve: Curves.CurvesDecoratedTorusKnot4a,
 	decoratedtorusknot4a: 'decoratedtorusknot4acurve',
-	figureeightpolynomialknotcurve: Curves.FigureEightPolynomialKnot,
+	figureeightpolynomialknotcurve: Curves.CurvesFigureEightPolynomialKnot,
 	figureeightpolynomialknot: 'figureeightpolynomialknotcurve',
-	decoratedtorusknot5acurve: Curves.DecoratedTorusKnot5a,
+	decoratedtorusknot5acurve: Curves.CurvesDecoratedTorusKnot5a,
 	decoratedtorusknot5a: 'decoratedtorusknot5acurve',
-	decoratedtorusknot5ccurve: Curves.DecoratedTorusKnot5c,
+	decoratedtorusknot5ccurve: Curves.CurvesDecoratedTorusKnot5c,
 	decoratedtorusknot5c: 'decoratedtorusknot5ccurve',
 	circlecurve: CurvesCircle,
 	circle: 'circlecurve',
