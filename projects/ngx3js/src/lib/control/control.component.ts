@@ -356,6 +356,9 @@ export class ControlComponent
 	 * The type of control
 	 *
 	 * Notice - case insensitive.
+	 * See the [ngx TransformControls control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control/TransformControls) page for a live demo.
+	 * See the [ngx DragControls control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control/DragControls) page for a live demo.
+	 * See the [ngx OrbitControls control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control/OrbitControls) page for a live demo.
 	 *
 	 * @see FlyControls - FlyControls, Fly
 	 * @see FirstPersonControls - FirstPersonControls, FirstPerson

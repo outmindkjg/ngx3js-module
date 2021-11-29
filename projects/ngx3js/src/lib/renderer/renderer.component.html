@@ -3,7 +3,10 @@
 	#renderer
 	[ngClass]="sizeType == 'auto' ? 'auto-size' : 'fix-size'"
 >
-	<div class="debug" #debug></div>
+	<div class="debug" #debug>
+		<div class="debug-stats" #debugStats></div>
+		<div class="debug-controls" #debugControls></div>
+	</div>
 	<div
 		class="canvas"
 		#canvas

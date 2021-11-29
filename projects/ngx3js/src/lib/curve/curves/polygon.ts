@@ -135,6 +135,7 @@ export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
  * Curves regular polygon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/square) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygon extends CurvesPolygon {
@@ -170,6 +171,7 @@ export class CurvesRegularPolygon extends CurvesPolygon {
  * Curves regular polygon triangle
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonTriangle) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/triangle) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonTriangle extends CurvesRegularPolygon {
@@ -182,6 +184,7 @@ export class CurvesRegularPolygonTriangle extends CurvesRegularPolygon {
  * Curves regular polygon square
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonSquare) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/square) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonSquare extends CurvesRegularPolygon {
@@ -194,6 +197,7 @@ export class CurvesRegularPolygonSquare extends CurvesRegularPolygon {
  * Curves regular polygon pentagon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonPentagon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/pentagon) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonPentagon extends CurvesRegularPolygon {
@@ -206,6 +210,7 @@ export class CurvesRegularPolygonPentagon extends CurvesRegularPolygon {
  * Curves regular polygon hexagon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonHexagon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/hexagon) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonHexagon extends CurvesRegularPolygon {
@@ -218,6 +223,7 @@ export class CurvesRegularPolygonHexagon extends CurvesRegularPolygon {
  * Curves regular polygon heptagon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonHeptagon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/heptagon) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonHeptagon extends CurvesRegularPolygon {
@@ -230,6 +236,7 @@ export class CurvesRegularPolygonHeptagon extends CurvesRegularPolygon {
  * Curves regular polygon octagon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonOctagon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/octagon) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonOctagon extends CurvesRegularPolygon {
@@ -242,6 +249,7 @@ export class CurvesRegularPolygonOctagon extends CurvesRegularPolygon {
  * Curves regular polygon nonagon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonNonagon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/nonagon) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonNonagon extends CurvesRegularPolygon {
@@ -254,6 +262,7 @@ export class CurvesRegularPolygonNonagon extends CurvesRegularPolygon {
  * Curves regular polygon decagon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonDecagon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/decagon) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonDecagon extends CurvesRegularPolygon {
@@ -266,6 +275,7 @@ export class CurvesRegularPolygonDecagon extends CurvesRegularPolygon {
  * Curves regular polygon undecagon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonUndecagon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/undecagon) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonUndecagon extends CurvesRegularPolygon {
@@ -278,6 +288,7 @@ export class CurvesRegularPolygonUndecagon extends CurvesRegularPolygon {
  * Curves regular polygon dodecagon
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRegularPolygonDodecagon) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/dodecagon) page for a live curve demo.
  *
  */
 export class CurvesRegularPolygonDodecagon extends CurvesRegularPolygon {

@@ -475,7 +475,12 @@ export class RendererComponent
 	/**
 	 * View child of renderer component
 	 */
-	@ViewChild('debug') private debugEle: ElementRef = null;
+	@ViewChild('debugStats') private debugStatsEle: ElementRef = null;
+
+	/**
+	 * View child of renderer component
+	 */
+	@ViewChild('debugControls') private debugControlsEle: ElementRef = null;
 
 	/**
 	 * View child of renderer component
@@ -1600,7 +1605,7 @@ export class RendererComponent
 							this.stats.showPanel(this.statsMode);
 						} else {
 							if (this.stats !== null) {
-								this.debugEle.nativeElement.removeChild(this.stats.dom);
+								this.stats.dom.parentNode.removeChild(this.stats.dom);
 							}
 							this.stats = null;
 						}
@@ -1889,7 +1894,7 @@ export class RendererComponent
 					top: '0px',
 				})
 			);
-			this.debugEle.nativeElement.appendChild(this.stats.dom);
+			this.debugStatsEle.nativeElement.appendChild(this.stats.dom);
 		}
 		return this.stats;
 	}
@@ -1908,7 +1913,7 @@ export class RendererComponent
 					top: '0px',
 				})
 			);
-			this.debugEle.nativeElement.appendChild(this.gui.domElement);
+			this.debugControlsEle.nativeElement.appendChild(this.gui.domElement);
 			this.gui.domElement.addEventListener('pointerdown', (e) => {
 				e.stopPropagation();
 			});

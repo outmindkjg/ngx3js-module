@@ -4,6 +4,7 @@ import * as THREE from 'three';
  * Plane controls
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PlaneControls) page for details.
+ * See the [ngx control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control/PlaneControls) page for a live curve demo.
  *
  */
 export class PlaneControls {

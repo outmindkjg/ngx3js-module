@@ -70,7 +70,7 @@ rl.question(question, function (agree) {
 			dependencies['fs-web'] = '^1.0.1';
 			dependencies['gsap'] = '^3.8.0';
 			dependencies['lil-gui'] = '^0.12.0';
-			dependencies['three'] = '0.134.0';
+			dependencies['three'] = '0.135.0';
 
 			if (packageJson['devDependencies'] === undefined) {
 				packageJson['devDependencies'] = {};

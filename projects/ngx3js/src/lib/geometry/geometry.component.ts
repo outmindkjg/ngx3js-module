@@ -55,7 +55,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GeometryComponent) page for details.
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
- * See the [ngx font](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_font) page for a live demo.
+ * See the [ngx font](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_font) page for a live font demo.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve) page for a live curve demo.
  *
  * A representation of mesh, line, or point geometry. Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU.
  * To read and edit data in BufferGeometry attributes, see [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferAttribute) documentation.

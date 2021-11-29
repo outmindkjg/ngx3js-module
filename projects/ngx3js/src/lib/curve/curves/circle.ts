@@ -4,6 +4,7 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
  * Curves circle
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesCircle) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/circle) page for a live curve demo.
  *
  */
 export class CurvesCircle extends THREE.Curve<THREE.Vector3> {

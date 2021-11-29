@@ -3,6 +3,7 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
 
 /**
  * Curves line
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearin) page for a live curve demo.
  */
 export class CurvesLine extends THREE.Curve<THREE.Vector3> {
 	/**

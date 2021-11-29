@@ -4,6 +4,8 @@ import * as THREE from 'three';
  * Curves Roller Coaster
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesRollerCoaster) page for details.
+ * See the [webxr vr rollercoaster](https://outmindkjg.github.io/ngx3js-doc/#/examples/webxr_vr_rollercoaster) page for a live curve demo.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/rollercoaster) page for a live curve demo.
  *
  */
 export class CurvesRollerCoaster extends THREE.Curve<THREE.Vector3> {

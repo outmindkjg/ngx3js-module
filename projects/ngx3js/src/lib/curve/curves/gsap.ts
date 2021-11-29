@@ -6,6 +6,7 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
  * Curves gsap
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsap) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearin) page for a live curve demo.
  *
  */
 export class CurvesGsap extends THREE.Curve<THREE.Vector3> {
@@ -74,6 +75,7 @@ export class CurvesGsap extends THREE.Curve<THREE.Vector3> {
  * Curves gsap linear ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapLinearEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearin) page for a live curve demo.
  *
  */
 export class CurvesGsapLinearEaseIn extends CurvesGsap {
@@ -86,6 +88,7 @@ export class CurvesGsapLinearEaseIn extends CurvesGsap {
  * Curves gsap linear ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapLinearEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearinout) page for a live curve demo.
  *
  */
 export class CurvesGsapLinearEaseInOut extends CurvesGsap {
@@ -98,6 +101,7 @@ export class CurvesGsapLinearEaseInOut extends CurvesGsap {
  * Curves gsap linear ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapLinearEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearout) page for a live curve demo.
  *
  */
 export class CurvesGsapLinearEaseOut extends CurvesGsap {
@@ -110,6 +114,7 @@ export class CurvesGsapLinearEaseOut extends CurvesGsap {
  * Curves gsap linear ease none
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapLinearEaseNone) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearnone) page for a live curve demo.
  *
  */
 export class CurvesGsapLinearEaseNone extends CurvesGsap {
@@ -122,6 +127,7 @@ export class CurvesGsapLinearEaseNone extends CurvesGsap {
  * Curves gsap quad ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuadEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quadin) page for a live curve demo.
  *
  */
 export class CurvesGsapQuadEaseIn extends CurvesGsap {
@@ -134,6 +140,7 @@ export class CurvesGsapQuadEaseIn extends CurvesGsap {
  * Curves gsap quad ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuadEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quadinout) page for a live curve demo.
  *
  */
 export class CurvesGsapQuadEaseInOut extends CurvesGsap {
@@ -146,6 +153,7 @@ export class CurvesGsapQuadEaseInOut extends CurvesGsap {
  * Curves gsap quad ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuadEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quadout) page for a live curve demo.
  *
  */
 export class CurvesGsapQuadEaseOut extends CurvesGsap {
@@ -158,6 +166,7 @@ export class CurvesGsapQuadEaseOut extends CurvesGsap {
  * Curves gsap cubic ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCubicEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/cubicin) page for a live curve demo.
  *
  */
 export class CurvesGsapCubicEaseIn extends CurvesGsap {
@@ -170,6 +179,7 @@ export class CurvesGsapCubicEaseIn extends CurvesGsap {
  * Curves gsap cubic ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCubicEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/cubicinout) page for a live curve demo.
  *
  */
 export class CurvesGsapCubicEaseInOut extends CurvesGsap {
@@ -182,6 +192,7 @@ export class CurvesGsapCubicEaseInOut extends CurvesGsap {
  * Curves gsap cubic ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCubicEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/cubicout) page for a live curve demo.
  *
  */
 export class CurvesGsapCubicEaseOut extends CurvesGsap {
@@ -194,6 +205,7 @@ export class CurvesGsapCubicEaseOut extends CurvesGsap {
  * Curves gsap quart ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuartEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quartin) page for a live curve demo.
  *
  */
 export class CurvesGsapQuartEaseIn extends CurvesGsap {
@@ -206,6 +218,7 @@ export class CurvesGsapQuartEaseIn extends CurvesGsap {
  * Curves gsap quart ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuartEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quartinout) page for a live curve demo.
  *
  */
 export class CurvesGsapQuartEaseInOut extends CurvesGsap {
@@ -218,6 +231,7 @@ export class CurvesGsapQuartEaseInOut extends CurvesGsap {
  * Curves gsap quart ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuartEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quartout) page for a live curve demo.
  *
  */
 export class CurvesGsapQuartEaseOut extends CurvesGsap {
@@ -230,6 +244,7 @@ export class CurvesGsapQuartEaseOut extends CurvesGsap {
  * Curves gsap quint ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuintEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quintin) page for a live curve demo.
  *
  */
 export class CurvesGsapQuintEaseIn extends CurvesGsap {
@@ -242,6 +257,7 @@ export class CurvesGsapQuintEaseIn extends CurvesGsap {
  * Curves gsap quint ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuintEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quintinout) page for a live curve demo.
  *
  */
 export class CurvesGsapQuintEaseInOut extends CurvesGsap {
@@ -254,6 +270,7 @@ export class CurvesGsapQuintEaseInOut extends CurvesGsap {
  * Curves gsap quint ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapQuintEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/quintout) page for a live curve demo.
  *
  */
 export class CurvesGsapQuintEaseOut extends CurvesGsap {
@@ -266,6 +283,7 @@ export class CurvesGsapQuintEaseOut extends CurvesGsap {
  * Curves gsap strong ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapStrongEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/strongin) page for a live curve demo.
  *
  */
 export class CurvesGsapStrongEaseIn extends CurvesGsap {
@@ -278,6 +296,7 @@ export class CurvesGsapStrongEaseIn extends CurvesGsap {
  * Curves gsap strong ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapStrongEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/stronginout) page for a live curve demo.
  *
  */
 export class CurvesGsapStrongEaseInOut extends CurvesGsap {
@@ -290,6 +309,7 @@ export class CurvesGsapStrongEaseInOut extends CurvesGsap {
  * Curves gsap strong ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapStrongEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/strongout) page for a live curve demo.
  *
  */
 export class CurvesGsapStrongEaseOut extends CurvesGsap {
@@ -302,6 +322,7 @@ export class CurvesGsapStrongEaseOut extends CurvesGsap {
  * Curves gsap power1 ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower1EaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power1in) page for a live curve demo.
  *
  */
 export class CurvesGsapPower1EaseIn extends CurvesGsap {
@@ -314,6 +335,7 @@ export class CurvesGsapPower1EaseIn extends CurvesGsap {
  * Curves gsap power1 ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower1EaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power1inout) page for a live curve demo.
  *
  */
 export class CurvesGsapPower1EaseInOut extends CurvesGsap {
@@ -326,6 +348,7 @@ export class CurvesGsapPower1EaseInOut extends CurvesGsap {
  * Curves gsap power1 ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower1EaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power1out) page for a live curve demo.
  *
  */
 export class CurvesGsapPower1EaseOut extends CurvesGsap {
@@ -338,6 +361,7 @@ export class CurvesGsapPower1EaseOut extends CurvesGsap {
  * Curves gsap power2 ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower2EaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power2in) page for a live curve demo.
  *
  */
 export class CurvesGsapPower2EaseIn extends CurvesGsap {
@@ -350,6 +374,7 @@ export class CurvesGsapPower2EaseIn extends CurvesGsap {
  * Curves gsap power2 ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower2EaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power2inout) page for a live curve demo.
  *
  */
 export class CurvesGsapPower2EaseInOut extends CurvesGsap {
@@ -362,6 +387,7 @@ export class CurvesGsapPower2EaseInOut extends CurvesGsap {
  * Curves gsap power2 ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower2EaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power2out) page for a live curve demo.
  *
  */
 export class CurvesGsapPower2EaseOut extends CurvesGsap {
@@ -374,6 +400,7 @@ export class CurvesGsapPower2EaseOut extends CurvesGsap {
  * Curves gsap power3 ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower3EaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power3in) page for a live curve demo.
  *
  */
 export class CurvesGsapPower3EaseIn extends CurvesGsap {
@@ -386,6 +413,7 @@ export class CurvesGsapPower3EaseIn extends CurvesGsap {
  * Curves gsap power3 ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower3EaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power3inout) page for a live curve demo.
  *
  */
 export class CurvesGsapPower3EaseInOut extends CurvesGsap {
@@ -398,6 +426,7 @@ export class CurvesGsapPower3EaseInOut extends CurvesGsap {
  * Curves gsap power3 ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower3EaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power3out) page for a live curve demo.
  *
  */
 export class CurvesGsapPower3EaseOut extends CurvesGsap {
@@ -410,6 +439,7 @@ export class CurvesGsapPower3EaseOut extends CurvesGsap {
  * Curves gsap power4 ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower4EaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power4in) page for a live curve demo.
  *
  */
 export class CurvesGsapPower4EaseIn extends CurvesGsap {
@@ -422,6 +452,7 @@ export class CurvesGsapPower4EaseIn extends CurvesGsap {
  * Curves gsap power4 ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower4EaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power4inout) page for a live curve demo.
  *
  */
 export class CurvesGsapPower4EaseInOut extends CurvesGsap {
@@ -434,6 +465,7 @@ export class CurvesGsapPower4EaseInOut extends CurvesGsap {
  * Curves gsap power4 ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower4EaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power4out) page for a live curve demo.
  *
  */
 export class CurvesGsapPower4EaseOut extends CurvesGsap {
@@ -446,6 +478,7 @@ export class CurvesGsapPower4EaseOut extends CurvesGsap {
  * Curves gsap back ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBackEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/backin) page for a live curve demo.
  *
  */
 export class CurvesGsapBackEaseIn extends CurvesGsap {
@@ -458,6 +491,7 @@ export class CurvesGsapBackEaseIn extends CurvesGsap {
  * Curves gsap back ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBackEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/backinout) page for a live curve demo.
  *
  */
 export class CurvesGsapBackEaseInOut extends CurvesGsap {
@@ -470,6 +504,7 @@ export class CurvesGsapBackEaseInOut extends CurvesGsap {
  * Curves gsap back ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBackEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/backout) page for a live curve demo.
  *
  */
 export class CurvesGsapBackEaseOut extends CurvesGsap {
@@ -482,6 +517,7 @@ export class CurvesGsapBackEaseOut extends CurvesGsap {
  * Curves gsap elastic ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapElasticEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/elasticin) page for a live curve demo.
  *
  */
 export class CurvesGsapElasticEaseIn extends CurvesGsap {
@@ -494,6 +530,7 @@ export class CurvesGsapElasticEaseIn extends CurvesGsap {
  * Curves gsap elastic ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapElasticEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/elasticout) page for a live curve demo.
  *
  */
 export class CurvesGsapElasticEaseInOut extends CurvesGsap {
@@ -506,6 +543,7 @@ export class CurvesGsapElasticEaseInOut extends CurvesGsap {
  * Curves gsap elastic ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapElasticEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/elasticinout) page for a live curve demo.
  *
  */
 export class CurvesGsapElasticEaseOut extends CurvesGsap {
@@ -518,6 +556,7 @@ export class CurvesGsapElasticEaseOut extends CurvesGsap {
  * Curves gsap bounce ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBounceEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/bouncein) page for a live curve demo.
  *
  */
 export class CurvesGsapBounceEaseIn extends CurvesGsap {
@@ -530,6 +569,7 @@ export class CurvesGsapBounceEaseIn extends CurvesGsap {
  * Curves gsap bounce ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBounceEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/bounceinout) page for a live curve demo.
  *
  */
 export class CurvesGsapBounceEaseInOut extends CurvesGsap {
@@ -542,6 +582,7 @@ export class CurvesGsapBounceEaseInOut extends CurvesGsap {
  * Curves gsap bounce ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapBounceEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/bounceout) page for a live curve demo.
  *
  */
 export class CurvesGsapBounceEaseOut extends CurvesGsap {
@@ -554,6 +595,7 @@ export class CurvesGsapBounceEaseOut extends CurvesGsap {
  * Curves gsap circ ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCircEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/circin) page for a live curve demo.
  *
  */
 export class CurvesGsapCircEaseIn extends CurvesGsap {
@@ -566,6 +608,7 @@ export class CurvesGsapCircEaseIn extends CurvesGsap {
  * Curves gsap circ ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCircEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/circinout) page for a live curve demo.
  *
  */
 export class CurvesGsapCircEaseInOut extends CurvesGsap {
@@ -578,6 +621,7 @@ export class CurvesGsapCircEaseInOut extends CurvesGsap {
  * Curves gsap circ ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapCircEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/circout) page for a live curve demo.
  *
  */
 export class CurvesGsapCircEaseOut extends CurvesGsap {
@@ -590,6 +634,7 @@ export class CurvesGsapCircEaseOut extends CurvesGsap {
  * Curves gsap expo ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapExpoEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/expoin) page for a live curve demo.
  *
  */
 export class CurvesGsapExpoEaseIn extends CurvesGsap {
@@ -602,6 +647,7 @@ export class CurvesGsapExpoEaseIn extends CurvesGsap {
  * Curves gsap expo ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapExpoEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/expoinout) page for a live curve demo.
  *
  */
 export class CurvesGsapExpoEaseInOut extends CurvesGsap {
@@ -614,6 +660,7 @@ export class CurvesGsapExpoEaseInOut extends CurvesGsap {
  * Curves gsap expo ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapExpoEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/expoout) page for a live curve demo.
  *
  */
 export class CurvesGsapExpoEaseOut extends CurvesGsap {
@@ -626,6 +673,7 @@ export class CurvesGsapExpoEaseOut extends CurvesGsap {
  * Curves gsap sine ease in
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapSineEaseIn) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/sinein) page for a live curve demo.
  *
  */
 export class CurvesGsapSineEaseIn extends CurvesGsap {
@@ -638,6 +686,7 @@ export class CurvesGsapSineEaseIn extends CurvesGsap {
  * Curves gsap sine ease in out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapSineEaseInOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/sineinout) page for a live curve demo.
  *
  */
 export class CurvesGsapSineEaseInOut extends CurvesGsap {
@@ -650,6 +699,7 @@ export class CurvesGsapSineEaseInOut extends CurvesGsap {
  * Curves gsap sine ease out
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapSineEaseOut) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/sineout) page for a live curve demo.
  *
  */
 export class CurvesGsapSineEaseOut extends CurvesGsap {
@@ -662,6 +712,7 @@ export class CurvesGsapSineEaseOut extends CurvesGsap {
  * Curves gsap power0 ease none
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesGsapPower0EaseNone) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/power0none) page for a live curve demo.
  *
  */
 export class CurvesGsapPower0EaseNone extends CurvesGsap {

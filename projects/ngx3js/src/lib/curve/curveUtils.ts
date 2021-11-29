@@ -177,6 +177,7 @@ export const CurveConf: {
  * Curve utils
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurveUtils) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve) page for a live curve demo.
  *
  */
 export class CurveUtils {
@@ -269,6 +270,7 @@ export interface CurvesNormalParameters {
  * Curves normal
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesNormal) page for details.
+ * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve) page for a live curve demo.
  *
  */
 export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
