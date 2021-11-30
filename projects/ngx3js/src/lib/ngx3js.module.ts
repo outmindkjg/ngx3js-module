@@ -20,7 +20,7 @@ import { ChartRadarComponent } from './chart/radar/radar.component';
 import { ChartScatterComponent } from './chart/scatter/scatter.component';
 import { ChartTitleComponent } from './chart/title/title.component';
 import { ClipComponent } from './clip/clip.component';
-import { ComposerComponent } from './composer/composer.component';
+import { EffectComponent } from './effect/effect.component';
 import { ControlComponent } from './control/control.component';
 import { AbstractControllerComponent } from './controller.component.abstract';
 import { ControllerItemComponent } from './controller/controller-item/controller-item.component';
@@ -94,7 +94,7 @@ const NGX3JS_COMPONENTS: Array<Type<any>> = [
 	SvgComponent,
 	TranslationComponent,
 	PassComponent,
-	ComposerComponent,
+	EffectComponent,
 	TweenComponent,
 	SharedComponent,
 	MixerComponent,

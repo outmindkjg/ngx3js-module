@@ -21,7 +21,7 @@ import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGRenderer } from 'three/examples/jsm/renderers/SVGRenderer';
 import { CanvasComponent } from '../canvas/canvas.component';
-import { ComposerComponent } from '../composer/composer.component';
+import { EffectComponent } from '../effect/effect.component';
 import { ControlComponent, ControlOptions } from '../control/control.component';
 import { AbstractControllerComponent } from '../controller.component.abstract';
 import { AbstractThreeDirective } from '../directive.abstract';
@@ -398,8 +398,8 @@ export class RendererComponent
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(ComposerComponent, { descendants: true })
-	private composerList: QueryList<ComposerComponent>;
+	@ContentChildren(EffectComponent, { descendants: true })
+	private effectList: QueryList<EffectComponent>;
 
 	/**
 	 * Content children of renderer component
@@ -601,9 +601,9 @@ export class RendererComponent
 		this.subscribeListQueryChange(this.sceneList, 'sceneList', 'scene');
 		this.subscribeListQueryChange(this.cameraList, 'cameraList', 'camera');
 		this.subscribeListQueryChange(
-			this.composerList,
-			'composerList',
-			'composer'
+			this.effectList,
+			'effectList',
+			'effect'
 		);
 		this.subscribeListQueryChange(this.viewerList, 'viewerList', 'viewer');
 		this.subscribeListQueryChange(
@@ -1107,7 +1107,7 @@ export class RendererComponent
 			const pixelRatio = window.devicePixelRatio;
 			this.events.size.set(this.rendererWidth, this.rendererHeight);
 			this.renderer.setSize(this.rendererWidth, this.rendererHeight);
-			this.composerList.forEach((composer) => {
+			this.effectList.forEach((composer) => {
 				composer.setRendererSize(
 					this.rendererWidth,
 					this.rendererHeight,
@@ -1640,14 +1640,14 @@ export class RendererComponent
 						}
 						break;
 					case 'composer':
-						this.unSubscribeReferList('composerList');
+						this.unSubscribeReferList('effectList');
 						if (
-							ThreeUtil.isNotNull(this.composerList) &&
+							ThreeUtil.isNotNull(this.effectList) &&
 							this.renderer instanceof THREE.WebGLRenderer
 						) {
 							const renderer = this.renderer;
 							if (
-								this.composerList.length > 0 &&
+								this.effectList.length > 0 &&
 								this.cameraList.length > 0 &&
 								this.sceneList.length > 0 &&
 								this.renderer instanceof THREE.WebGLRenderer
@@ -1662,13 +1662,13 @@ export class RendererComponent
 									}
 								});
 								const scene = this.sceneList.first.getScene();
-								this.composerList.forEach((composer) => {
+								this.effectList.forEach((composer) => {
 									composer.setRenderer(renderer, camera, scene);
 								});
 							}
 							this.subscribeListQuery(
-								this.composerList,
-								'composerList',
+								this.effectList,
+								'effectList',
 								'composer'
 							);
 						}
@@ -2116,14 +2116,14 @@ export class RendererComponent
 			ThreeUtil.isNull(this.beforeRender) ||
 			!this.beforeRender(this.getRenderInfo(renderTimer))
 		) {
-			// if (this.composerList.length > 0 && this.renderer instanceof THREE.WebGLRenderer && this.panSpeed ) {
+			// if (this.effectList.length > 0 && this.renderer instanceof THREE.WebGLRenderer && this.panSpeed ) {
 			this._updateSubject.next(renderTimer);
 			if (
 				this.composerEnable &&
-				this.composerList.length > 0 &&
+				this.effectList.length > 0 &&
 				this.renderer instanceof THREE.WebGLRenderer
 			) {
-				this.composerList.forEach((composer) => {
+				this.effectList.forEach((composer) => {
 					composer.render(this.renderer as THREE.WebGLRenderer, renderTimer);
 				});
 			} else if (this.cameraList && this.cameraList.length > 0) {

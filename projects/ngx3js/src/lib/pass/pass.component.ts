@@ -12,6 +12,8 @@ import {
 	LUTCubeResult,
 } from 'three/examples/jsm/loaders/LUTCubeLoader';
 import * as THREE_PASS from './passes/three-passes';
+import * as THREE_EFFECT from './../effect/effects/three-effects';
+
 import { ThreeColor, ThreeUtil } from '../interface';
 import { MeshComponent } from '../mesh/mesh.component';
 import { ShaderComponent } from '../shader/shader.component';
@@ -24,6 +26,7 @@ import { TextureComponent } from '../texture/texture.component';
  * The Pass component.
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PassComponent) page for details.
+ * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect) page for a live demo.
  *
  * ```html
  * <ngx3js-composer>
@@ -1485,7 +1488,7 @@ export class PassComponent
 	 * @returns map
 	 */
 	private getMap(
-		effectComposer?: THREE_PASS.EffectComposer,
+		effectComposer?: THREE_EFFECT.EffectComposer,
 		camera?: THREE.Camera,
 		scene?: THREE.Scene,
 		mapType?: string
@@ -1564,7 +1567,7 @@ export class PassComponent
 	/**
 	 * Effect composer of pass component
 	 */
-	private effectComposer: THREE_PASS.EffectComposer = null;
+	private effectComposer: THREE_EFFECT.EffectComposer = null;
 
 	/**
 	 * Effect scene of pass component
@@ -1609,7 +1612,7 @@ export class PassComponent
 	public setEffectComposer(
 		scene?: THREE.Scene,
 		camera?: THREE.Camera,
-		effectComposer?: THREE_PASS.EffectComposer,
+		effectComposer?: THREE_EFFECT.EffectComposer,
 		renderer?: THREE.WebGLRenderer
 	) {
 		if (
@@ -1740,7 +1743,7 @@ export class PassComponent
 							this.getStrength(1),
 							this.getKernelSize(25),
 							this.getSigma(4),
-							this.getResolution(256)
+							this.getResolution(255)
 						);
 						break;
 					case 'bokehpass':
