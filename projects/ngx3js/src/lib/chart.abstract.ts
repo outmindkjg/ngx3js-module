@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import * as THREE from 'three';
 import { MathUtils, RingGeometry } from 'three';
-import { OutlineGeometry } from './geometry/geometry.outline';
-import { StarGeometry } from './geometry/geometry.star';
+import { NgxOutlineGeometry } from './geometry/geometries/outline';
+import { NgxStarGeometry } from './geometry/geometries/star';
 import { RendererTimer, ThreeColor, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
 
@@ -519,7 +519,7 @@ export class AbstractChartComponent
 				side = 'double';
 				break;
 			case 'star':
-				geometry = new StarGeometry(options.radius * 0.5, options.radius, 5);
+				geometry = new NgxStarGeometry(options.radius * 0.5, options.radius, 5);
 				side = 'double';
 				break;
 			case 'ring':
@@ -550,7 +550,7 @@ export class AbstractChartComponent
 		});
 		const mesh: THREE.Mesh = new THREE.Mesh(geometry, material);
 		mesh.castShadow = true;
-		const geometryBorder = new OutlineGeometry(geometry, 1.2);
+		const geometryBorder = new NgxOutlineGeometry(geometry, 1.2);
 		const materialBorder = new THREE.LineDashedMaterial({
 			color: ThreeUtil.getColorSafe(options.borderColor, 0x000000),
 			linewidth: 3,

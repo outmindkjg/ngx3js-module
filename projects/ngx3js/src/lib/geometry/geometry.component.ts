@@ -9,20 +9,10 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
-import { ConvexGeometry } from 'three/examples/jsm/geometries/ConvexGeometry';
-import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
-import { ParametricGeometries } from 'three/examples/jsm/geometries/ParametricGeometries';
-import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry';
-import { TeapotGeometry } from 'three/examples/jsm/geometries/TeapotGeometry';
-import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
-import {
-	LightningStrike,
-	RayParameters,
-} from 'three/examples/jsm/geometries/LightningStrike';
+import * as THREEGEO from './geometries/three-geometries';
 
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
-import { BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry';
 import { CurveComponent } from '../curve/curve.component';
 import { CurveUtils } from '../curve/curveUtils';
 import {
@@ -33,21 +23,15 @@ import { ThreeColor, ThreeUtil, ThreeVector } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { ShapeComponent } from '../shape/shape.component';
 import { SvgComponent } from '../svg/svg.component';
-import { CapsuleGeometry } from './geometry.capsule';
-import { CircleDepthGeometry } from './geometry.circle-depth';
-import { GridGeometry } from './geometry.grid';
-import { PlaneDepthGeometry } from './geometry.plane-depth';
-import { PlanePerlinGeometry } from './geometry.plane_perlin';
-import { RingDepthGeometry } from './geometry.ring-depth';
-import { RopeGeometry } from './geometry.rope';
-import { StarGeometry } from './geometry.star';
-import { StarDepthGeometry } from './geometry.star-depth';
-import * as RollerCoaster from 'three/examples/jsm/misc/RollerCoaster';
-import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
-import {
-	TextGeometry,
-	TextGeometryParameters,
-} from 'three//examples/jsm/geometries/TextGeometry';
+import { NgxCapsuleGeometry } from './geometries/capsule';
+import { NgxCircleDepthGeometry } from './geometries/circle-depth';
+import { NgxGridGeometry } from './geometries/grid';
+import { NgxPlaneDepthGeometry } from './geometries/plane-depth';
+import { NgxPlanePerlinGeometry } from './geometries/plane-perlin';
+import { NgxRingDepthGeometry } from './geometries/ring-depth';
+import { NgxRopeGeometry } from './geometries/rope';
+import { NgxStarGeometry } from './geometries/star';
+import { NgxStarDepthGeometry } from './geometries/star-depth';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -706,7 +690,7 @@ export class GeometryComponent
 	/**
 	 * The rayParams of geometry component
 	 */
-	@Input() public rayParams: RayParameters = {};
+	@Input() public rayParams: THREEGEO.RayParameters = {};
 
 	/**
 	 * Content children of geometry component
@@ -829,16 +813,16 @@ export class GeometryComponent
 		const parametric = this.parametric === null ? def : this.parametric;
 		switch (parametric) {
 			case 'mobius3d':
-				return ParametricGeometries.mobius3d;
+				return THREEGEO.ParametricGeometries.mobius3d;
 			case 'klein':
-				return ParametricGeometries.klein;
+				return THREEGEO.ParametricGeometries.klein;
 			case 'plane':
-				return ParametricGeometries.plane(
+				return THREEGEO.ParametricGeometries.plane(
 					ThreeUtil.getTypeSafe(this.width, this.height, 10),
 					ThreeUtil.getTypeSafe(this.height, this.width, 10)
 				) as any;
 			case 'mobius':
-				return ParametricGeometries.mobius;
+				return THREEGEO.ParametricGeometries.mobius;
 			default:
 				if (parametric !== null) {
 					if (typeof parametric === 'function') {
@@ -858,7 +842,7 @@ export class GeometryComponent
 					}
 				}
 		}
-		return ParametricGeometries.klein;
+		return THREEGEO.ParametricGeometries.klein;
 	}
 
 	/**
@@ -1152,15 +1136,15 @@ export class GeometryComponent
 	/**
 	 * Perlin geometry of geometry component
 	 */
-	private perlinGeometry: PlanePerlinGeometry = null;
+	private perlinGeometry: NgxPlanePerlinGeometry = null;
 
 	/**
 	 * Gets perlin geometry
 	 * @returns perlin geometry
 	 */
-	private getPerlinGeometry(): PlanePerlinGeometry {
+	private getPerlinGeometry(): NgxPlanePerlinGeometry {
 		if (this.perlinGeometry === null) {
-			this.perlinGeometry = new PlanePerlinGeometry(
+			this.perlinGeometry = new NgxPlanePerlinGeometry(
 				ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 128),
 				ThreeUtil.getTypeSafe(this.depthSegments, this.segments, 128),
 				ThreeUtil.getTypeSafe(this.quality, 2)
@@ -1192,7 +1176,7 @@ export class GeometryComponent
 					)
 				);
 			} else if (ThreeUtil.isNotNull(this.storageName)) {
-				geometry = new THREE.BufferGeometry();
+				geometry = new THREEGEO.NgxBufferGeometry();
 				this.localStorageService.getGeometry(
 					this.storageName,
 					(loadGeometry, model: THREE.Object3D) => {
@@ -1214,7 +1198,7 @@ export class GeometryComponent
 								}
 							});
 							const positions = new THREE.BufferAttribute(combined, 3);
-							const loadGeometry = new THREE.BufferGeometry();
+							const loadGeometry = new THREEGEO.NgxBufferGeometry();
 							loadGeometry.setAttribute('position', positions.clone());
 							this.setGeometry(loadGeometry);
 						} else {
@@ -1231,7 +1215,7 @@ export class GeometryComponent
 					case 'custom':
 					case 'geometry':
 					case 'buffer':
-						geometry = new THREE.BufferGeometry();
+						geometry = new THREEGEO.NgxBufferGeometry();
 						const attributes = this.getAttributes();
 						if (ThreeUtil.isNotNull(attributes) && attributes.length > 0) {
 							attributes.forEach((attribute) => {
@@ -1281,7 +1265,8 @@ export class GeometryComponent
 					case 'instancedbuffergeometry':
 					case 'instancedbuffer':
 					case 'instanced':
-						const instancedBufferGeometry = new THREE.InstancedBufferGeometry();
+						const instancedBufferGeometry =
+							new THREEGEO.NgxInstancedBufferGeometry();
 						if (ThreeUtil.isNotNull(this.instanceCount)) {
 							instancedBufferGeometry.instanceCount = ThreeUtil.getTypeSafe(
 								this.instanceCount,
@@ -1315,9 +1300,8 @@ export class GeometryComponent
 					case 'teapotgeometry':
 					case 'teapotbuffer':
 					case 'teapot':
-						const TeapotGeometryAlias: any = TeapotGeometry;
-						const teapot = new TeapotGeometryAlias(
-							ThreeUtil.getTypeSafe(this.size),
+						const teapot = new THREEGEO.NgxTeapotGeometry(
+							ThreeUtil.getTypeSafe(this.size, this.radius),
 							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments),
 							ThreeUtil.getTypeSafe(this.bottom),
 							ThreeUtil.getTypeSafe(this.lid),
@@ -1364,7 +1348,7 @@ export class GeometryComponent
 					case 'ropegeometry':
 					case 'ropebuffer':
 					case 'rope':
-						const ropeGeometry = new RopeGeometry(
+						const ropeGeometry = new NgxRopeGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1)
 						);
@@ -1374,7 +1358,7 @@ export class GeometryComponent
 					case 'gridgeometry':
 					case 'gridbuffer':
 					case 'grid':
-						const gridGeometry = new GridGeometry(
+						const gridGeometry = new NgxGridGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, 0),
@@ -1389,12 +1373,12 @@ export class GeometryComponent
 					case 'capsulegeometry':
 					case 'capsulebuffer':
 					case 'capsule':
-						const capsuleGeometry = new CapsuleGeometry(
+						const capsuleGeometry = new NgxCapsuleGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(
 								this.radiusSegments,
 								this.radialSegments,
-								8
+								this.segments
 							),
 							ThreeUtil.getTypeSafe(this.height, this.width, 10),
 							ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 3),
@@ -1407,7 +1391,7 @@ export class GeometryComponent
 					case 'linegeometry':
 					case 'linebuffer':
 					case 'line':
-						const lineGeometry = new LineGeometry();
+						const lineGeometry = new THREEGEO.NgxLineGeometry();
 						if (
 							this.attrPosition instanceof Float32Array ||
 							this.attrPosition instanceof Array
@@ -1426,7 +1410,7 @@ export class GeometryComponent
 					case 'roundedboxgeometry':
 					case 'roundedboxbuffer':
 					case 'roundedbox':
-						geometry = new RoundedBoxGeometry(
+						geometry = new THREEGEO.NgxRoundedBoxGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, this.width, 1),
@@ -1437,7 +1421,7 @@ export class GeometryComponent
 					case 'boxlinebuffergeometry':
 					case 'boxlinegeometry':
 					case 'boxline':
-						geometry = new BoxLineGeometry(
+						geometry = new THREEGEO.NgxBoxLineGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, this.width, 1),
@@ -1451,7 +1435,7 @@ export class GeometryComponent
 					case 'boxgeometry':
 					case 'boxbuffer':
 					case 'box':
-						geometry = new THREE.BoxBufferGeometry(
+						geometry = new THREEGEO.NgxBoxBufferGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, this.width, 1),
@@ -1464,53 +1448,57 @@ export class GeometryComponent
 					case 'circlegeometry':
 					case 'circlebuffer':
 					case 'circle':
-						if (ThreeUtil.isNotNull(this.depth) && this.depth > 0) {
-							geometry = new CircleDepthGeometry(
-								ThreeUtil.getTypeSafe(this.radius, 1),
-								ThreeUtil.getTypeSafe(this.depth, 1),
-								ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 8),
-								ThreeUtil.getAngleSafe(this.thetaStart, 0),
-								ThreeUtil.getAngleSafe(this.thetaLength, 360),
-								ThreeUtil.getTypeSafe(this.depthRate, 1)
-							);
-						} else {
-							geometry = new THREE.CircleBufferGeometry(
-								ThreeUtil.getTypeSafe(this.radius, 1),
-								ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 8),
-								ThreeUtil.getAngleSafe(this.thetaStart, 0),
-								ThreeUtil.getAngleSafe(this.thetaLength, 360)
-							);
-						}
+						geometry = new THREEGEO.NgxCircleBufferGeometry(
+							ThreeUtil.getTypeSafe(this.radius, 1),
+							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 8),
+							ThreeUtil.getAngleSafe(this.thetaStart, 0),
+							ThreeUtil.getAngleSafe(this.thetaLength, 360)
+						);
+						break;
+					case 'circledepthbuffergeometry':
+					case 'circledepthgeometry':
+					case 'circledepthbuffer':
+					case 'circledepth':
+						geometry = new NgxCircleDepthGeometry(
+							ThreeUtil.getTypeSafe(this.radius, 1),
+							ThreeUtil.getTypeSafe(this.depth, 1),
+							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 8),
+							ThreeUtil.getAngleSafe(this.thetaStart, 0),
+							ThreeUtil.getAngleSafe(this.thetaLength, 360),
+							ThreeUtil.getTypeSafe(this.depthRate, 1)
+						);
 						break;
 					case 'starbuffergeometry':
 					case 'stargeometry':
 					case 'starbuffer':
 					case 'star':
-						if (ThreeUtil.isNotNull(this.depth) && this.depth > 0) {
-							geometry = new StarDepthGeometry(
-								ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
-								ThreeUtil.getTypeSafe(this.outerRadius, 1),
-								ThreeUtil.getTypeSafe(this.depth, 1),
-								ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 5),
-								ThreeUtil.getAngleSafe(this.thetaStart, 0),
-								ThreeUtil.getAngleSafe(this.thetaLength, 360),
-								ThreeUtil.getTypeSafe(this.depthRate, 1)
-							);
-						} else {
-							geometry = new StarGeometry(
-								ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
-								ThreeUtil.getTypeSafe(this.outerRadius, 1),
-								ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 5),
-								ThreeUtil.getAngleSafe(this.thetaStart, 0),
-								ThreeUtil.getAngleSafe(this.thetaLength, 360)
-							);
-						}
+						geometry = new NgxStarGeometry(
+							ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
+							ThreeUtil.getTypeSafe(this.outerRadius, 1),
+							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 5),
+							ThreeUtil.getAngleSafe(this.thetaStart, 0),
+							ThreeUtil.getAngleSafe(this.thetaLength, 360)
+						);
+						break;
+					case 'stardepthbuffergeometry':
+					case 'stardepthgeometry':
+					case 'stardepthbuffer':
+					case 'stardepth':
+						geometry = new NgxStarDepthGeometry(
+							ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
+							ThreeUtil.getTypeSafe(this.outerRadius, 1),
+							ThreeUtil.getTypeSafe(this.depth, 1),
+							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 5),
+							ThreeUtil.getAngleSafe(this.thetaStart, 0),
+							ThreeUtil.getAngleSafe(this.thetaLength, 360),
+							ThreeUtil.getTypeSafe(this.depthRate, 1)
+						);
 						break;
 					case 'conebuffergeometry':
 					case 'conegeometry':
 					case 'conebuffer':
 					case 'cone':
-						geometry = new THREE.ConeBufferGeometry(
+						geometry = new THREEGEO.NgxConeBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(
@@ -1528,7 +1516,7 @@ export class GeometryComponent
 					case 'cylindergeometry':
 					case 'cylinderbuffer':
 					case 'cylinder':
-						geometry = new THREE.CylinderBufferGeometry(
+						geometry = new THREEGEO.NgxCylinderBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radiusTop, this.radiusBottom, 1),
 							ThreeUtil.getTypeSafe(this.radiusBottom, this.radiusTop, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
@@ -1547,7 +1535,7 @@ export class GeometryComponent
 					case 'dodecahedrongeometry':
 					case 'dodecahedronbuffer':
 					case 'dodecahedron':
-						geometry = new THREE.DodecahedronBufferGeometry(
+						geometry = new THREEGEO.NgxDodecahedronBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.detail, 0)
 						);
@@ -1556,7 +1544,7 @@ export class GeometryComponent
 					case 'mergebuffergeometry':
 					case 'mergebuffer':
 					case 'merge':
-						const geometries: THREE.BufferGeometry[] = [];
+						const geometries: THREEGEO.NgxBufferGeometry[] = [];
 						if (this.geometryList !== null && this.geometryList.length > 0) {
 							this.geometryList.forEach((geometryComponent) => {
 								const geometry = geometryComponent.getGeometry().clone();
@@ -1575,18 +1563,18 @@ export class GeometryComponent
 					case 'shape':
 					case 'extrudebuffer':
 					case 'extrude':
-						geometry = new THREE.ShapeBufferGeometry(
+						geometry = new THREEGEO.NgxShapeBufferGeometry(
 							[],
 							ThreeUtil.getTypeSafe(this.curveSegments, this.segments)
 						);
 						this.getShapes((shapes) => {
-							let shapeGeometry: THREE.BufferGeometry = null;
+							let shapeGeometry: THREEGEO.NgxBufferGeometry = null;
 							switch (this.type.toLowerCase()) {
 								case 'shapebuffergeometry':
 								case 'shapegeometry':
 								case 'shapebuffer':
 								case 'shape':
-									shapeGeometry = new THREE.ShapeBufferGeometry(
+									shapeGeometry = new THREEGEO.NgxShapeBufferGeometry(
 										shapes,
 										ThreeUtil.getTypeSafe(this.curveSegments, this.segments)
 									);
@@ -1596,21 +1584,26 @@ export class GeometryComponent
 								case 'extrudebuffer':
 								case 'extrude':
 								default:
-									shapeGeometry = new THREE.ExtrudeBufferGeometry(shapes, {
-										curveSegments: ThreeUtil.getTypeSafe(
-											this.curveSegments,
-											this.segments
-										),
-										steps: ThreeUtil.getTypeSafe(this.steps),
-										depth: ThreeUtil.getTypeSafe(this.depth, this.width),
-										bevelEnabled: ThreeUtil.getTypeSafe(this.bevelEnabled),
-										bevelThickness: ThreeUtil.getTypeSafe(this.bevelThickness),
-										bevelSize: ThreeUtil.getTypeSafe(this.bevelSize),
-										bevelOffset: ThreeUtil.getTypeSafe(this.bevelOffset),
-										bevelSegments: ThreeUtil.getTypeSafe(this.bevelSegments),
-										extrudePath: this.getExtrudePath(),
-										UVGenerator: this.getUVGenerator(),
-									});
+									shapeGeometry = new THREEGEO.NgxExtrudeBufferGeometry(
+										shapes,
+										{
+											curveSegments: ThreeUtil.getTypeSafe(
+												this.curveSegments,
+												this.segments
+											),
+											steps: ThreeUtil.getTypeSafe(this.steps),
+											depth: ThreeUtil.getTypeSafe(this.depth, this.width),
+											bevelEnabled: ThreeUtil.getTypeSafe(this.bevelEnabled),
+											bevelThickness: ThreeUtil.getTypeSafe(
+												this.bevelThickness
+											),
+											bevelSize: ThreeUtil.getTypeSafe(this.bevelSize),
+											bevelOffset: ThreeUtil.getTypeSafe(this.bevelOffset),
+											bevelSegments: ThreeUtil.getTypeSafe(this.bevelSegments),
+											extrudePath: this.getExtrudePath(),
+											UVGenerator: this.getUVGenerator(),
+										}
+									);
 									break;
 							}
 							this.setGeometry(shapeGeometry);
@@ -1621,7 +1614,7 @@ export class GeometryComponent
 					case 'icosahedrongeometry':
 					case 'icosahedronbuffer':
 					case 'icosahedron':
-						geometry = new THREE.IcosahedronBufferGeometry(
+						geometry = new THREEGEO.NgxIcosahedronBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.detail, 0)
 						);
@@ -1630,7 +1623,7 @@ export class GeometryComponent
 					case 'lathegeometry':
 					case 'lathebuffer':
 					case 'lathe':
-						geometry = new THREE.LatheBufferGeometry(
+						geometry = new THREEGEO.NgxLatheBufferGeometry(
 							this.getPointsV2([]),
 							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 12),
 							ThreeUtil.getAngleSafe(this.phiStart, 0),
@@ -1641,7 +1634,7 @@ export class GeometryComponent
 					case 'octahedrongeometry':
 					case 'octahedronbuffer':
 					case 'octahedron':
-						geometry = new THREE.OctahedronBufferGeometry(
+						geometry = new THREEGEO.NgxOctahedronBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.detail, 0)
 						);
@@ -1650,7 +1643,7 @@ export class GeometryComponent
 					case 'parametric':
 					case 'parametricbuffergeometry':
 					case 'parametricbuffer':
-						geometry = new ParametricGeometry(
+						geometry = new THREEGEO.NgxParametricGeometry(
 							this.getParametric('mobius3d'),
 							ThreeUtil.getTypeSafe(this.slices, 20),
 							ThreeUtil.getTypeSafe(this.stacks, 20)
@@ -1658,7 +1651,7 @@ export class GeometryComponent
 						break;
 					case 'parametrictorusknotgeometry':
 					case 'parametrictorusknot':
-						geometry = new ParametricGeometries.TorusKnotGeometry(
+						geometry = new THREEGEO.NgxParametricTorusKnotGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.tube, 0.4),
 							ThreeUtil.getTypeSafe(
@@ -1673,7 +1666,7 @@ export class GeometryComponent
 						break;
 					case 'parametricspheregeometry':
 					case 'parametricsphere':
-						geometry = new ParametricGeometries.SphereGeometry(
+						geometry = new THREEGEO.NgxParametricSphereGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 8),
 							ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 6)
@@ -1681,7 +1674,7 @@ export class GeometryComponent
 						break;
 					case 'parametrictubegeometry':
 					case 'parametrictube':
-						geometry = new ParametricGeometries.TubeGeometry(
+						geometry = new THREEGEO.NgxParametricTubeGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.tubularSegments, 64),
 							ThreeUtil.getTypeSafe(this.radius, 1),
@@ -1697,7 +1690,7 @@ export class GeometryComponent
 					case 'parametricbuffer':
 					case 'parametricgeometry':
 					case 'parametric':
-						geometry = new ParametricGeometry(
+						geometry = new THREEGEO.NgxParametricGeometry(
 							this.getParametric('mobius3d'),
 							ThreeUtil.getTypeSafe(this.slices, 20),
 							ThreeUtil.getTypeSafe(this.stacks, 10)
@@ -1707,29 +1700,31 @@ export class GeometryComponent
 					case 'planebuffer':
 					case 'planegeometry':
 					case 'plane':
-						if (ThreeUtil.isNotNull(this.depth) && this.depth > 0) {
-							geometry = new PlaneDepthGeometry(
-								ThreeUtil.getTypeSafe(this.width, this.height, 1),
-								ThreeUtil.getTypeSafe(this.height, this.width, 1),
-								ThreeUtil.getTypeSafe(this.depth, this.width, 1),
-								ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1),
-								ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 1),
-								ThreeUtil.getTypeSafe(this.depthRate, 1)
-							);
-						} else {
-							geometry = new THREE.PlaneBufferGeometry(
-								ThreeUtil.getTypeSafe(this.width, this.height, 1),
-								ThreeUtil.getTypeSafe(this.height, this.width, 1),
-								ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1),
-								ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 1)
-							);
-						}
+						geometry = new THREEGEO.NgxPlaneBufferGeometry(
+							ThreeUtil.getTypeSafe(this.width, this.height, 1),
+							ThreeUtil.getTypeSafe(this.height, this.width, 1),
+							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1),
+							ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 1)
+						);
+						break;
+					case 'planedepthbuffergeometry':
+					case 'planedepthbuffer':
+					case 'planedepthgeometry':
+					case 'planedepth':
+						geometry = new NgxPlaneDepthGeometry(
+							ThreeUtil.getTypeSafe(this.width, this.height, 1),
+							ThreeUtil.getTypeSafe(this.height, this.width, 1),
+							ThreeUtil.getTypeSafe(this.depth, this.width, 1),
+							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1),
+							ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 1),
+							ThreeUtil.getTypeSafe(this.depthRate, 1)
+						);
 						break;
 					case 'polyhedronbuffergeometry':
 					case 'polyhedrongeometry':
 					case 'polyhedronbuffer':
 					case 'polyhedron':
-						geometry = new THREE.PolyhedronBufferGeometry(
+						geometry = new THREEGEO.NgxPolyhedronBufferGeometry(
 							this.getPolyVertices([]),
 							this.getPolyIndices([]),
 							ThreeUtil.getTypeSafe(this.radius, 1),
@@ -1740,33 +1735,35 @@ export class GeometryComponent
 					case 'ringgeometry':
 					case 'ringbuffer':
 					case 'ring':
-						if (ThreeUtil.isNotNull(this.depth) && this.depth > 0) {
-							geometry = new RingDepthGeometry(
-								ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
-								ThreeUtil.getTypeSafe(this.outerRadius, 1),
-								ThreeUtil.getTypeSafe(this.depth, 1),
-								ThreeUtil.getTypeSafe(this.thetaSegments, 8),
-								ThreeUtil.getTypeSafe(this.phiSegments, 1),
-								ThreeUtil.getAngleSafe(this.thetaStart, 0),
-								ThreeUtil.getAngleSafe(this.thetaLength, 360),
-								ThreeUtil.getTypeSafe(this.depthRate, 1)
-							);
-						} else {
-							geometry = new THREE.RingBufferGeometry(
-								ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
-								ThreeUtil.getTypeSafe(this.outerRadius, 1),
-								ThreeUtil.getTypeSafe(this.thetaSegments, 8),
-								ThreeUtil.getTypeSafe(this.phiSegments, 1),
-								ThreeUtil.getAngleSafe(this.thetaStart, 0),
-								ThreeUtil.getAngleSafe(this.thetaLength, 360)
-							);
-						}
+						geometry = new THREEGEO.NgxRingBufferGeometry(
+							ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
+							ThreeUtil.getTypeSafe(this.outerRadius, 1),
+							ThreeUtil.getTypeSafe(this.thetaSegments, 8),
+							ThreeUtil.getTypeSafe(this.phiSegments, 1),
+							ThreeUtil.getAngleSafe(this.thetaStart, 0),
+							ThreeUtil.getAngleSafe(this.thetaLength, 360)
+						);
+						break;
+					case 'ringdepthbuffergeometry':
+					case 'ringdepthgeometry':
+					case 'ringdepthbuffer':
+					case 'ringdepth':
+						geometry = new NgxRingDepthGeometry(
+							ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
+							ThreeUtil.getTypeSafe(this.outerRadius, 1),
+							ThreeUtil.getTypeSafe(this.depth, 1),
+							ThreeUtil.getTypeSafe(this.thetaSegments, 8),
+							ThreeUtil.getTypeSafe(this.phiSegments, 1),
+							ThreeUtil.getAngleSafe(this.thetaStart, 0),
+							ThreeUtil.getAngleSafe(this.thetaLength, 360),
+							ThreeUtil.getTypeSafe(this.depthRate, 1)
+						);
 						break;
 					case 'spherebuffergeometry':
 					case 'spheregeometry':
 					case 'spherebuffer':
 					case 'sphere':
-						geometry = new THREE.SphereBufferGeometry(
+						geometry = new THREEGEO.NgxSphereBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 8),
 							ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 6),
@@ -1780,7 +1777,7 @@ export class GeometryComponent
 					case 'tetrahedrongeometry':
 					case 'tetrahedronbuffer':
 					case 'tetrahedron':
-						geometry = new THREE.TetrahedronBufferGeometry(
+						geometry = new THREEGEO.NgxTetrahedronBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.detail, 0)
 						);
@@ -1789,9 +1786,9 @@ export class GeometryComponent
 					case 'textgeometry':
 					case 'textbuffer':
 					case 'text':
-						geometry = new THREE.BufferGeometry();
+						geometry = new THREEGEO.NgxBufferGeometry();
 						this.getFont('helvetiker', (font: Font) => {
-							const textParameters: TextGeometryParameters = {
+							const textParameters: THREEGEO.TextGeometryParameters = {
 								font: font,
 								size: ThreeUtil.getTypeSafe(this.size, 1),
 								height: ThreeUtil.getTypeSafe(this.height, this.width),
@@ -1812,7 +1809,7 @@ export class GeometryComponent
 								case 'text':
 								default:
 									this.setGeometry(
-										new TextGeometry(
+										new THREEGEO.NgxTextGeometry(
 											ThreeUtil.getTypeSafe(this.text, 'test'),
 											textParameters
 										)
@@ -1826,7 +1823,7 @@ export class GeometryComponent
 					case 'torusgeometry':
 					case 'torusbuffer':
 					case 'torus':
-						geometry = new THREE.TorusBufferGeometry(
+						geometry = new THREEGEO.NgxTorusBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.tube, 0.4),
 							ThreeUtil.getTypeSafe(
@@ -1842,7 +1839,7 @@ export class GeometryComponent
 					case 'torusknotgeometry':
 					case 'torusknotbuffer':
 					case 'torusknot':
-						geometry = new THREE.TorusKnotBufferGeometry(
+						geometry = new THREEGEO.NgxTorusKnotBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.tube, 0.4),
 							ThreeUtil.getTypeSafe(
@@ -1859,7 +1856,7 @@ export class GeometryComponent
 					case 'tubegeometry':
 					case 'tubebuffer':
 					case 'tube':
-						geometry = new THREE.TubeBufferGeometry(
+						geometry = new THREEGEO.NgxTubeBufferGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.tubularSegments, 64),
 							ThreeUtil.getTypeSafe(this.radius, 1),
@@ -1875,13 +1872,13 @@ export class GeometryComponent
 					case 'convexgeometry':
 					case 'convexbuffer':
 					case 'convex':
-						geometry = new ConvexGeometry(this.getPointsV3([]));
+						geometry = new THREEGEO.NgxConvexGeometry(this.getPointsV3([]));
 						break;
 					case 'decalbuffergeometry':
 					case 'decalgeometry':
 					case 'decalbuffer':
 					case 'decal':
-						geometry = new DecalGeometry(
+						geometry = new THREEGEO.NgxDecalGeometry(
 							this.getMesh(),
 							this.getPositionV3(),
 							this.getOrientation(),
@@ -1890,39 +1887,43 @@ export class GeometryComponent
 						break;
 					case 'treesgeometry':
 					case 'trees':
-						geometry = new RollerCoaster.TreesGeometry(this.getMesh());
+						geometry = new THREEGEO.NgxRollerCoasterTreesGeometry(
+							this.getMesh()
+						);
 						break;
 					case 'skygeometry':
 					case 'sky':
-						geometry = new RollerCoaster.SkyGeometry(null, null);
+						geometry = new THREEGEO.NgxRollerCoasterSkyGeometry(null, null);
 						break;
 					case 'rollercoastergeometry':
 					case 'rollercoaster':
-						geometry = new RollerCoaster.RollerCoasterGeometry(
+						geometry = new THREEGEO.NgxRollerCoasterGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.slices, 1500)
 						);
 						break;
 					case 'rollercoasterliftersgeometry':
 					case 'rollercoasterlifters':
-						geometry = new RollerCoaster.RollerCoasterLiftersGeometry(
+						geometry = new THREEGEO.NgxRollerCoasterLiftersGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.slices, 1500)
 						);
 						break;
 					case 'rollercoastershadowgeometry':
 					case 'rollercoastershadow':
-						geometry = new RollerCoaster.RollerCoasterShadowGeometry(
+						geometry = new THREEGEO.NgxRollerCoasterShadowGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.slices, 1500)
 						);
 						break;
 					case 'lightning':
 					case 'lightningstrike':
-						geometry = new LightningStrike(this.rayParams) as any;
+						geometry = new THREEGEO.NgxLightningStrikeGeometry(
+							this.rayParams
+						) as any;
 						break;
 					default:
-						geometry = new THREE.PlaneBufferGeometry(
+						geometry = new THREEGEO.NgxPlaneBufferGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1),

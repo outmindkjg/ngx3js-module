@@ -4,7 +4,7 @@ import { RendererTimer, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
 import * as GSAP from 'gsap';
 
-interface EaseFunction {
+export interface EaseFunction {
 	(progress: number): number;
 }
 

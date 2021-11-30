@@ -7,11 +7,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
-import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect';
-import { OutlineEffect } from 'three/examples/jsm/effects/OutlineEffect';
-import { ParallaxBarrierEffect } from 'three/examples/jsm/effects/ParallaxBarrierEffect';
-import { PeppersGhostEffect } from 'three/examples/jsm/effects/PeppersGhostEffect';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import * as THREE_EFFECT from './effects/three-effects';
 import { CameraComponent } from '../camera/camera.component';
 import { RendererTimer, ThreeUtil } from '../interface';
 import { PassComponent } from '../pass/pass.component';
@@ -23,6 +19,7 @@ import { AbstractTweenComponent } from '../tween.abstract';
  * The Composer component.
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ComposerComponent) page for details.
+ * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_composer) page for a live demo.
  *
  * ```html
  * <ngx3js-composer>
@@ -466,7 +463,7 @@ export class ComposerComponent
 	ngOnDestroy(): void {
 		if (
 			this.effectComposer !== null &&
-			this.effectComposer instanceof AsciiEffect
+			this.effectComposer instanceof THREE_EFFECT.NgxAsciiEffect
 		) {
 			this.effectComposer.domElement.parentNode.removeChild(
 				this.effectComposer.domElement
@@ -529,11 +526,11 @@ export class ComposerComponent
 		this.pixelRatio = pixelRatio;
 		if (this.effectComposer !== null) {
 			if (
-				this.effectComposer instanceof AsciiEffect ||
-				this.effectComposer instanceof PeppersGhostEffect
+				this.effectComposer instanceof THREE_EFFECT.AsciiEffect ||
+				this.effectComposer instanceof THREE_EFFECT.PeppersGhostEffect
 			) {
 				this.effectComposer.setSize(this.rendererWidth, this.rendererHeight);
-			} else if (this.effectComposer instanceof EffectComposer) {
+			} else if (this.effectComposer instanceof THREE_EFFECT.EffectComposer) {
 				this.effectComposer.setSize(this.rendererWidth, this.rendererHeight);
 				this.effectComposer.setPixelRatio(this.pixelRatio);
 			}
@@ -575,7 +572,7 @@ export class ComposerComponent
 				renderer.clear();
 			}
 
-			if (this.effectComposer instanceof EffectComposer) {
+			if (this.effectComposer instanceof THREE_EFFECT.EffectComposer) {
 				this.effectComposer.render(renderTimer.delta);
 			} else {
 				this.effectComposer.render(this._composerScene, this._composerCamera);
@@ -590,7 +587,7 @@ export class ComposerComponent
 	/**
 	 * Effect composer of composer component
 	 */
-	private effectComposer: EffectComposer | any = null;
+	private effectComposer: THREE_EFFECT.EffectComposer | any = null;
 
 	/**
 	 * Gets write buffer
@@ -666,7 +663,7 @@ export class ComposerComponent
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'pass':
-						if (this.effectComposer instanceof EffectComposer) {
+						if (this.effectComposer instanceof THREE_EFFECT.EffectComposer) {
 							const scene = this.getScene(this._composerScene);
 							const camera = this.getCamera(this._composerCamera);
 							this.passList.forEach((pass) => {
@@ -746,7 +743,7 @@ export class ComposerComponent
 	 * Gets composer
 	 * @returns composer
 	 */
-	public getComposer(): EffectComposer | any {
+	public getComposer(): THREE_EFFECT.EffectComposer | any {
 		if (
 			this._composerRenderer !== null &&
 			this._composerCamera &&
@@ -756,7 +753,7 @@ export class ComposerComponent
 			this.needUpdate = false;
 			if (
 				this.effectComposer !== null &&
-				this.effectComposer instanceof AsciiEffect
+				this.effectComposer instanceof THREE_EFFECT.AsciiEffect
 			) {
 				this.effectComposer.domElement.parentNode.removeChild(
 					this.effectComposer.domElement
@@ -765,7 +762,7 @@ export class ComposerComponent
 			switch (this.type.toLowerCase()) {
 				case 'asciieffect':
 				case 'ascii':
-					const asciiEffect = new AsciiEffect(
+					const asciiEffect = new THREE_EFFECT.NgxAsciiEffect(
 						this._composerRenderer,
 						ThreeUtil.getTypeSafe(this.charSet, ' .:-+*=%@#'),
 						{
@@ -790,7 +787,7 @@ export class ComposerComponent
 					break;
 				case 'peppersghosteffect':
 				case 'peppersghost':
-					const peppersGhostEffect = new PeppersGhostEffect(
+					const peppersGhostEffect = new THREE_EFFECT.NgxPeppersGhostEffect(
 						this._composerRenderer
 					);
 					peppersGhostEffect.cameraDistance = this.getCameraDistance(15);
@@ -799,17 +796,20 @@ export class ComposerComponent
 					break;
 				case 'outlineeffect':
 				case 'outline':
-					const outlineEffect = new OutlineEffect(this._composerRenderer, {});
+					const outlineEffect = new THREE_EFFECT.NgxOutlineEffect(
+						this._composerRenderer,
+						{}
+					);
 					this.effectComposer = outlineEffect;
 					break;
 				case 'parallaxbarriereffect':
 				case 'parallaxbarrier':
-					this.effectComposer = new ParallaxBarrierEffect(
+					this.effectComposer = new THREE_EFFECT.NgxParallaxBarrierEffect(
 						this._composerRenderer
 					);
 					break;
 				default:
-					const effectComposer = new EffectComposer(
+					const effectComposer = new THREE_EFFECT.NgxEffectComposer(
 						this._composerRenderer,
 						this.getRenderTarget()
 					);
