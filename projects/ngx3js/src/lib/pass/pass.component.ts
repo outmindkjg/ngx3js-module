@@ -26,7 +26,7 @@ import { TextureComponent } from '../texture/texture.component';
  * The Pass component.
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PassComponent) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect) page for a live demo.
  *
  * ```html
  * <ngx3js-composer>
@@ -862,7 +862,9 @@ export class PassComponent
 	 * @param [def]
 	 * @returns params
 	 */
-	private getParams(def?: THREE_PASS.BokehPassParamters): THREE_PASS.BokehPassParamters {
+	private getParams(
+		def?: THREE_PASS.BokehPassParamters
+	): THREE_PASS.BokehPassParamters {
 		return ThreeUtil.getTypeSafe(this.params, def);
 	}
 
@@ -1945,6 +1947,97 @@ export class PassComponent
 					case 'save':
 						pass = new THREE_PASS.NgxSavePass(this.getRenderTarget());
 						break;
+					case 'copypass':
+					case 'copy':
+						pass = new THREE_PASS.NgxShaderCopyPass(this.getTextureId());
+						break;
+					case 'rgbshiftpass':
+					case 'rgbshift':
+						const rgbshiftpass = new THREE_PASS.NgxShaderRGBShiftPass(
+							this.getTextureId()
+						);
+						this.getUniforms(rgbshiftpass.uniforms);
+						pass = rgbshiftpass;
+						break;
+					case 'bleachbypasspass':
+					case 'bleachbypass':
+						const bleachbypass = new THREE_PASS.NgxShaderBleachBypassPass(
+							this.getTextureId()
+						);
+						this.getUniforms(bleachbypass.uniforms);
+						pass = bleachbypass;
+						break;
+					case 'sepiapass':
+					case 'sepia':
+						const sepiapass = new THREE_PASS.NgxShaderSepiaPass(
+							this.getTextureId()
+						);
+						this.getUniforms(sepiapass.uniforms);
+						pass = sepiapass;
+						break;
+					case 'vignettepass':
+					case 'vignette':
+						const vignettepass = new THREE_PASS.NgxShaderVignettePass(
+							this.getTextureId()
+						);
+						this.getUniforms(vignettepass.uniforms);
+						pass = vignettepass;
+						break;
+					case 'gammacorrectionpass':
+					case 'gammacorrection':
+						const gammacorrectionpass =
+							new THREE_PASS.NgxShaderGammaCorrectionPass(this.getTextureId());
+						this.getUniforms(gammacorrectionpass.uniforms);
+						pass = gammacorrectionpass;
+						break;
+					case 'fxaapass':
+					case 'fxaa':
+						const fxaapass = new THREE_PASS.NgxShaderFXAAPass(
+							this.getTextureId()
+						);
+						this.getUniforms(fxaapass.uniforms);
+						pass = fxaapass;
+						break;
+					case 'pixelpass':
+					case 'pixel':
+						const pixelpass = new THREE_PASS.NgxShaderPixelPass(
+							this.getTextureId()
+						);
+						this.getUniforms(pixelpass.uniforms);
+						pass = pixelpass;
+						break;
+					case 'luminositypass':
+					case 'luminosity':
+						const luminositypass = new THREE_PASS.NgxShaderLuminosityPass(
+							this.getTextureId()
+						);
+						this.getUniforms(luminositypass.uniforms);
+						pass = luminositypass;
+						break;
+					case 'shaderdotscreenpass':
+					case 'shaderdotscreen':
+						const dotscreenpass = new THREE_PASS.NgxShaderDotScreenPass(
+							this.getTextureId()
+						);
+						this.getUniforms(dotscreenpass.uniforms);
+						pass = dotscreenpass;
+						break;
+					case 'sobeloperatorpass':
+					case 'sobeloperator':
+						const sobeloperatorpass = new THREE_PASS.NgxSobelOperatorPass(
+							this.getTextureId()
+						);
+						this.getUniforms(sobeloperatorpass.uniforms);
+						pass = sobeloperatorpass;
+						break;
+					case 'materialpass':
+					case 'material':
+						const materialpass = new THREE_PASS.NgxShaderMaterialPass(
+							this.getTextureId()
+						);
+						this.getUniforms(materialpass.uniforms);
+						pass = materialpass;
+						break;
 					case 'shaderpass':
 					case 'shader':
 						const shaderPass = new THREE_PASS.NgxShaderPass(
@@ -2154,7 +2247,10 @@ export class PassComponent
 						break;
 					case 'clearpass':
 					case 'clear':
-						pass = new THREE_PASS.NgxClearPass(this.getClearColor(), this.getClearAlpha());
+						pass = new THREE_PASS.NgxClearPass(
+							this.getClearColor(),
+							this.getClearAlpha()
+						);
 						break;
 					default:
 						pass = null;

@@ -8,7 +8,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * Ascii effect
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAsciiEffect) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/AsciiEffect) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/AsciiEffect) page for a live demo.
  *
  */
  export class NgxAsciiEffect extends AsciiEffect {
@@ -28,7 +28,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * Outline effect
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxOutlineEffect) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/OutlineEffect) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/OutlineEffect) page for a live demo.
  *
  */
  export class NgxOutlineEffect extends OutlineEffect {
@@ -47,7 +47,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * ParallaxBarrier effect
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxParallaxBarrierEffect) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ParallaxBarrierEffect) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ParallaxBarrierEffect) page for a live demo.
  *
  */
  export class NgxParallaxBarrierEffect extends ParallaxBarrierEffect {
@@ -65,7 +65,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * PeppersGhost effect
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPeppersGhostEffect) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/PeppersGhostEffect) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/PeppersGhostEffect) page for a live demo.
  *
  */
  export class NgxPeppersGhostEffect extends PeppersGhostEffect {
@@ -83,7 +83,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
  * NgxEffect composer
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxEffectComposer) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/EffectComposer) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/EffectComposer) page for a live demo.
  *
  */
  export class NgxEffectComposer extends EffectComposer {

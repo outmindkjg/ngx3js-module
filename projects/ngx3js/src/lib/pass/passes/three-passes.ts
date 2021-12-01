@@ -44,6 +44,7 @@ import {
 import { TAARenderPass } from 'three/examples/jsm/postprocessing/TAARenderPass';
 import { TexturePass } from 'three/examples/jsm/postprocessing/TexturePass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import { ShaderUtils } from '../../shader/shaders/shaderUtils';
 
 /**
  * Reflector shader
@@ -76,7 +77,7 @@ export interface ReflectorOptions {
  * ReflectorForSSR pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxReflectorForSSRPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ReflectorForSSRPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ReflectorForSSRPass) page for a live demo.
  *
  */
 export class NgxReflectorForSSRPass extends ReflectorForSSRPass {
@@ -95,7 +96,7 @@ export class NgxReflectorForSSRPass extends ReflectorForSSRPass {
  * AdaptiveToneMapping pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAdaptiveToneMappingPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/AdaptiveToneMappingPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/AdaptiveToneMappingPass) page for a live demo.
  *
  */
 export class NgxAdaptiveToneMappingPass extends AdaptiveToneMappingPass {
@@ -114,7 +115,7 @@ export class NgxAdaptiveToneMappingPass extends AdaptiveToneMappingPass {
  * Afterimage pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAfterimagePass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/AfterimagePass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/AfterimagePass) page for a live demo.
  *
  */
 export class NgxAfterimagePass extends AfterimagePass {
@@ -132,7 +133,7 @@ export class NgxAfterimagePass extends AfterimagePass {
  * Bloom pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxBloomPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BloomPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BloomPass) page for a live demo.
  *
  */
 export class NgxBloomPass extends BloomPass {
@@ -158,7 +159,7 @@ export class NgxBloomPass extends BloomPass {
  * Bokeh pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxBokehPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BokehPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BokehPass) page for a live demo.
  *
  */
 export class NgxBokehPass extends BokehPass {
@@ -182,7 +183,7 @@ export class NgxBokehPass extends BokehPass {
  * Clear pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxClearPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ClearPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ClearPass) page for a live demo.
  *
  */
 export class NgxClearPass extends ClearPass {
@@ -201,7 +202,7 @@ export class NgxClearPass extends ClearPass {
  * CubeTexture pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCubeTexturePass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/CubeTexturePass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/CubeTexturePass) page for a live demo.
  *
  */
 export class NgxCubeTexturePass extends CubeTexturePass {
@@ -225,7 +226,7 @@ export class NgxCubeTexturePass extends CubeTexturePass {
  * DotScreen pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxDotScreenPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/DotScreenPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/DotScreenPass) page for a live demo.
  *
  */
 export class NgxDotScreenPass extends DotScreenPass {
@@ -245,7 +246,7 @@ export class NgxDotScreenPass extends DotScreenPass {
  * Film pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxFilmPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/FilmPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/FilmPass) page for a live demo.
  *
  */
 export class NgxFilmPass extends FilmPass {
@@ -271,7 +272,7 @@ export class NgxFilmPass extends FilmPass {
  * Glitch pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxGlitchPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/GlitchPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/GlitchPass) page for a live demo.
  *
  */
 export class NgxGlitchPass extends GlitchPass {
@@ -289,7 +290,7 @@ export class NgxGlitchPass extends GlitchPass {
  * Halftone pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxHalftonePass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/HalftonePass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/HalftonePass) page for a live demo.
  *
  */
 export class NgxHalftonePass extends HalftonePass {
@@ -309,7 +310,7 @@ export class NgxHalftonePass extends HalftonePass {
  * LUT pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLUTPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/LUTPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/LUTPass) page for a live demo.
  *
  */
 export class NgxLUTPass extends LUTPass {
@@ -327,7 +328,7 @@ export class NgxLUTPass extends LUTPass {
  * ClearMask pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxClearMaskPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ClearMaskPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ClearMaskPass) page for a live demo.
  *
  */
 export class NgxClearMaskPass extends ClearMaskPass {
@@ -343,7 +344,7 @@ export class NgxClearMaskPass extends ClearMaskPass {
  * Mask pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMaskPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/MaskPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/MaskPass) page for a live demo.
  *
  */
 export class NgxMaskPass extends MaskPass {
@@ -362,7 +363,7 @@ export class NgxMaskPass extends MaskPass {
  * OutlinePass pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxOutlinePass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/OutlinePass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/OutlinePass) page for a live demo.
  *
  */
 export class NgxOutlinePass extends OutlinePass {
@@ -388,7 +389,7 @@ export class NgxOutlinePass extends OutlinePass {
  * Pass pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect) page for a live demo.
  *
  */
 export class NgxPass extends Pass {
@@ -404,7 +405,7 @@ export class NgxPass extends Pass {
  * Render pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRenderPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/RenderPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/RenderPass) page for a live demo.
  *
  */
 export class NgxRenderPass extends RenderPass {
@@ -431,7 +432,7 @@ export class NgxRenderPass extends RenderPass {
  * SAO pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSAOPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SAOPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SAOPass) page for a live demo.
  *
  */
 export class NgxSAOPass extends SAOPass {
@@ -450,7 +451,7 @@ export class NgxSAOPass extends SAOPass {
  * Save pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSavePass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SavePass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SavePass) page for a live demo.
  *
  */
 export class NgxSavePass extends SavePass {
@@ -468,7 +469,7 @@ export class NgxSavePass extends SavePass {
  * Shader pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ShaderPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ShaderPass) page for a live demo.
  *
  */
 export class NgxShaderPass extends ShaderPass {
@@ -487,7 +488,7 @@ export class NgxShaderPass extends ShaderPass {
  * SMAA pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSMAAPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SMAAPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SMAAPass) page for a live demo.
  *
  */
 export class NgxSMAAPass extends SMAAPass {
@@ -506,7 +507,7 @@ export class NgxSMAAPass extends SMAAPass {
  * SSAARender pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSSAARenderPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSAARenderPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSAARenderPass) page for a live demo.
  *
  */
 export class NgxSSAARenderPass extends SSAARenderPass {
@@ -532,7 +533,7 @@ export class NgxSSAARenderPass extends SSAARenderPass {
  * SSAO pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSSAOPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSAOPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSAOPass) page for a live demo.
  *
  */
 export class NgxSSAOPass extends SSAOPass {
@@ -558,7 +559,7 @@ export class NgxSSAOPass extends SSAOPass {
  * SSR pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSSRPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSRPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSRPass) page for a live demo.
  *
  */
 export class NgxSSRPass extends SSRPass {
@@ -576,7 +577,7 @@ export class NgxSSRPass extends SSRPass {
  * SSRr pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSSRrPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSRrPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSRrPass) page for a live demo.
  *
  */
 export class NgxSSRrPass extends SSRrPass {
@@ -594,7 +595,7 @@ export class NgxSSRrPass extends SSRrPass {
  * TAARender pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTAARenderPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/TAARenderPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/TAARenderPass) page for a live demo.
  *
  */
 export class NgxTAARenderPass extends TAARenderPass {
@@ -620,7 +621,7 @@ export class NgxTAARenderPass extends TAARenderPass {
  * Texture pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTexturePass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/TexturePass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/TexturePass) page for a live demo.
  *
  */
 export class NgxTexturePass extends TexturePass {
@@ -639,7 +640,7 @@ export class NgxTexturePass extends TexturePass {
  * UnrealBloom pass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxUnrealBloomPass) page for details.
- * See the [ngx composer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/UnrealBloomPass) page for a live demo.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/UnrealBloomPass) page for a live demo.
  *
  */
 export class NgxUnrealBloomPass extends UnrealBloomPass {
@@ -660,6 +661,249 @@ export class NgxUnrealBloomPass extends UnrealBloomPass {
 		super(resolution, strength, radius, threshold);
 	}
 }
+
+/**
+ * Copy pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderCopyPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/CopyPass) page for a live demo.
+ *
+ */
+ export class NgxShaderCopyPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx copy pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('copyshader'), textureId);
+	}
+}
+
+/**
+ * RGBShift pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderRGBShiftPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/RGBShiftPass) page for a live demo.
+ *
+ */
+ export class NgxShaderRGBShiftPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx RGBShift pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('RGBShift'), textureId);
+	}
+}
+
+/**
+ * BleachBypass pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderBleachBypassPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BleachBypassPass) page for a live demo.
+ *
+ */
+ export class NgxShaderBleachBypassPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx BleachBypass pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('BleachBypassShader'), textureId);
+	}
+}
+
+/**
+ * Sepia pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderSepiaPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SepiaPass) page for a live demo.
+ *
+ */
+ export class NgxShaderSepiaPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx Sepia pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('SepiaShader'), textureId);
+	}
+}
+
+/**
+ * Vignette pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderVignettePass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/VignettePass) page for a live demo.
+ *
+ */
+ export class NgxShaderVignettePass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx Vignette pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('VignetteShader'), textureId);
+	}
+}
+
+/**
+ * GammaCorrection pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderGammaCorrectionPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/GammaCorrectionPass) page for a live demo.
+ *
+ */
+ export class NgxShaderGammaCorrectionPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx GammaCorrection pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('GammaCorrectionShader'), textureId);
+	}
+}
+
+/**
+ * FXAA pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderFXAAPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/FXAAPass) page for a live demo.
+ *
+ */
+ export class NgxShaderFXAAPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx FXAA pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('FXAAShader'), textureId);
+	}
+}
+
+/**
+ * Pixel pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderPixelPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/PixelPass) page for a live demo.
+ *
+ */
+ export class NgxShaderPixelPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx Pixel pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('PixelShader'), textureId);
+	}
+}
+
+/**
+ * Luminosity pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderLuminosityPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/LuminosityPass) page for a live demo.
+ *
+ */
+ export class NgxShaderLuminosityPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx Luminosity pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('LuminosityShader'), textureId);
+	}
+}
+
+/**
+ * DotScreen pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderDotScreenPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/DotScreenPass) page for a live demo.
+ *
+ */
+ export class NgxShaderDotScreenPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx Luminosity pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('DotScreen'), textureId);
+	}
+}
+
+
+
+/**
+ * SobelOperator pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSobelOperatorPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SobelOperatorPass) page for a live demo.
+ *
+ */
+ export class NgxSobelOperatorPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx SobelOperator pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('SobelOperatorShader'), textureId);
+	}
+}
+
+/**
+ * ShaderMaterial pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderMaterialPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ShaderMaterialPass) page for a live demo.
+ *
+ */
+ export class NgxShaderMaterialPass extends ShaderPass {
+	/**
+	 * Creates an instance of ngx ShaderMaterial pass.
+	 * 
+	 * @param [textureId] 
+	 */
+	constructor(
+		textureId?: string
+	) {
+		super(ShaderUtils.getShaderClone('ShaderMaterial'), textureId);
+	}
+}
+
 
 export {
 	ReflectorForSSRPass,
