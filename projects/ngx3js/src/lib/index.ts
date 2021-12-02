@@ -46,6 +46,7 @@ export * from './local-storage.service';
 export * from './lookat/lookat.component';
 export * from './material.abstract';
 export * from './material/material.component';
+export * from './material/index';
 export * from './mesh/mesh.component';
 export * from './mesh/mesh.text';
 export * from './mixer/mixer.component';
