@@ -113,7 +113,6 @@ export class NgxViewportInComponent implements OnInit, OnChanges {
 			scrollSize.clientWidth = scrollObj.clientWidth;
 			scrollSize.clientHeight = scrollObj.clientHeight;
 		}
-		console.log(rect.top + ' / ' + rect.bottom + ' <= ' + scrollSize.clientHeight);
 		return (
 			rect.top >= 0 &&
 			(rect.top + (rect.bottom - rect.top) * this.scrollRate) <=
