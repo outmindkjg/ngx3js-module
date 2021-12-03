@@ -587,18 +587,18 @@ export class NgxShaderAttributeSizeColor1Material extends NgxShaderMaterial {
 /**
  * ShaderSkyDome material
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderShaderSkyDomeMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShaderShaderSkyDomeMaterial) page for a live demo.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderSkyDomeMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShaderSkyDomeMaterial) page for a live demo.
  *
  */
-export class NgxShaderShaderSkyDomeMaterial extends NgxShaderMaterial {
+export class NgxShaderSkyDomeMaterial extends NgxShaderMaterial {
 	/**
 	 * Creates an instance of ngx shader shader sky dome material.
 	 *
 	 * @param [parameters]
 	 */
 	constructor(parameters?: THREE.ShaderMaterialParameters) {
-		super(parameters, 'ShaderSkyDome');
+		super(parameters, 'SkyDome');
 	}
 }
 

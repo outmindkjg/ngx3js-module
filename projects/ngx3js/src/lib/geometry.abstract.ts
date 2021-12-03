@@ -419,13 +419,13 @@ export class AbstractGeometryComponent
 	@Input() public maxIterations: number = null;
 
 	/**
-	 * The lineType of abstract geometry component
+	 * The meshType of abstract geometry component
 	 *
 	 * @see THREE.EdgesGeometry - EdgesGeometry, Edges,
 	 * @see THREE.WireframeGeometry - WireframeGeometry, Wireframe,
 	 * @see WireframeGeometry2 - WireframeGeometry2, Wireframe2,
 	 */
-	@Input() public lineType: string = null;
+	@Input() public meshType: string = null;
 
 	/**
 	 * The thresholdAngle of geometry component
@@ -1199,49 +1199,14 @@ export class AbstractGeometryComponent
 		if (ThreeUtil.isNotNull(geometry) && this.geometry !== geometry) {
 			const anyGeometry: any = geometry;
 			if (ThreeUtil.isNotNull(geometry.getAttribute('position'))) {
-				if (ThreeUtil.isNotNull(this.lineType)) {
-					let lineGeometry: THREE.BufferGeometry = null;
-					switch (this.lineType.toLowerCase()) {
+				if (ThreeUtil.isNotNull(this.meshType)) {
+					const meshType = this.meshType.toLowerCase();
+					switch (meshType) {
 						case 'wireframesimple':
-							const simpleParameters: any = anyGeometry['parameters'] || {};
-							lineGeometry = new THREE.WireframeGeometry(geometry);
-							let simplePositions: Float32Array = null;
-							switch (geometry.type) {
-								case 'PlaneGeometry':
-									simplePositions = new Float32Array(15);
-									const halfWidth = simpleParameters['width'] / 2;
-									const halfHeight = simpleParameters['height'] / 2;
-									simplePositions[0] = -halfWidth;
-									simplePositions[1] = halfHeight;
-									simplePositions[2] = 0;
-									simplePositions[3] = -halfWidth;
-									simplePositions[4] = -halfHeight;
-									simplePositions[5] = 0;
-									simplePositions[6] = halfWidth;
-									simplePositions[7] = -halfHeight;
-									simplePositions[8] = 0;
-									simplePositions[9] = halfWidth;
-									simplePositions[10] = halfHeight;
-									simplePositions[11] = 0;
-									simplePositions[12] = -halfWidth;
-									simplePositions[13] = halfHeight;
-									simplePositions[14] = 0;
-									break;
-							}
-							if (simplePositions !== null) {
-								const positionAttribe = new THREE.Float32BufferAttribute(
-									simplePositions,
-									3
-								);
-								lineGeometry.setAttribute('position', positionAttribe);
-							}
-							break;
 						case 'wireframebuffergeometry':
 						case 'wireframegeometry':
 						case 'wireframebuffer':
 						case 'wireframe':
-							lineGeometry = new THREE.WireframeGeometry(geometry);
-							break;
 						case 'wireframe2buffergeometry':
 						case 'wireframe2geometry':
 						case 'wireframe2buffer':
@@ -1249,226 +1214,281 @@ export class AbstractGeometryComponent
 						case 'wireframebuffergeometry2':
 						case 'wireframegeometry2':
 						case 'wireframebuffer2':
-							const vertices: number[] = [];
-							const parameters: any = anyGeometry['parameters'] || {};
-							const attrPosition = geometry.getAttribute('position');
-							const attrIndex = geometry.getIndex();
-							let px1 = 0;
-							let py1 = 0;
-							let pz1 = 0;
-							let px2 = 0;
-							let py2 = 0;
-							let pz2 = 0;
-							switch (geometry.type) {
-								case 'CircleGeometry':
-									{
-										lineGeometry = new LineSegmentsGeometry();
-										const segments = (parameters.segments || 1) + 2;
-										const isClosed =
-											parameters.thetaLength < Math.PI * 2 ? false : true;
-										for (
-											let i = isClosed ? 1 : 0;
-											i <= (isClosed ? segments - 2 : segments - 1);
-											i++
-										) {
-											const idx = (i + 1) % segments;
-											px1 = attrPosition.getX(i);
-											py1 = attrPosition.getY(i);
-											pz1 = attrPosition.getZ(i);
-											px2 = attrPosition.getX(idx);
-											py2 = attrPosition.getY(idx);
-											pz2 = attrPosition.getZ(idx);
-											vertices.push(px1, py1, pz1, px2, py2, pz2);
-										}
-									}
-									break;
-								case 'CircleDepthGeometry':
-								case 'PlaneDepthGeometry':
-								case 'RingDepthGeometry':
-								case 'StarDepthGeometry':
-									{
-										const sideGroup = geometry.groups[2];
-										if (ThreeUtil.isNotNull(sideGroup)) {
-											lineGeometry = new LineSegmentsGeometry();
-											for (
-												let i = sideGroup.start;
-												i < sideGroup.start + sideGroup.count;
-												i += 3
-											) {
-												const idxStart = attrIndex.getX(i);
-												const idxEnd = attrIndex.getX(i + 1);
-												px1 = attrPosition.getX(idxStart);
-												py1 = attrPosition.getY(idxStart);
-												pz1 = attrPosition.getZ(idxStart);
-												px2 = attrPosition.getX(idxEnd);
-												py2 = attrPosition.getY(idxEnd);
-												pz2 = attrPosition.getZ(idxEnd);
-												vertices.push(px1, py1, pz1, px2, py2, pz2);
-											}
-										}
-									}
-									break;
-								case 'BoxGeometry':
-									{
-										lineGeometry = new LineSegmentsGeometry();
-										const gridY = parameters.heightSegments + 1;
-										const gridZ = parameters.depthSegments + 1;
-										const p1 = 0;
-										const p2 = p1 + gridZ - 1;
-										const p3 = gridZ * gridY - 1;
-										const p4 = p3 - p2;
-										const skipDepth = gridZ * gridY;
-										const p5 = p1 + skipDepth;
-										const p6 = p2 + skipDepth;
-										const p7 = p3 + skipDepth;
-										const p8 = p4 + skipDepth;
-										const lineList: { start: number; end: number }[] = [];
-										lineList.push({ start: p1, end: p2 });
-										lineList.push({ start: p2, end: p3 });
-										lineList.push({ start: p3, end: p4 });
-										lineList.push({ start: p4, end: p1 });
-										lineList.push({ start: p5, end: p6 });
-										lineList.push({ start: p6, end: p7 });
-										lineList.push({ start: p7, end: p8 });
-										lineList.push({ start: p8, end: p5 });
-										lineList.push({ start: p1, end: p6 });
-										lineList.push({ start: p2, end: p5 });
-										lineList.push({ start: p3, end: p8 });
-										lineList.push({ start: p4, end: p7 });
-										lineList.forEach((line) => {
-											const idxStart = line.start;
-											const idxEnd = line.end;
-											px1 = attrPosition.getX(idxStart);
-											py1 = attrPosition.getY(idxStart);
-											pz1 = attrPosition.getZ(idxStart);
-											px2 = attrPosition.getX(idxEnd);
-											py2 = attrPosition.getY(idxEnd);
-											pz2 = attrPosition.getZ(idxEnd);
-											vertices.push(px1, py1, pz1, px2, py2, pz2);
-										});
-									}
-									break;
-								case 'PlaneGeometry':
-									{
-										lineGeometry = new LineSegmentsGeometry();
-										const gridX = parameters.widthSegments + 1;
-										const gridY = parameters.heightSegments + 1;
-										const p1 = 0;
-										const p2 = p1 + gridX - 1;
-										const p3 = gridX * gridY - 1;
-										const p4 = p3 - p2;
-										const lineList: { start: number; end: number }[] = [];
-										lineList.push({ start: p1, end: p2 });
-										lineList.push({ start: p2, end: p3 });
-										lineList.push({ start: p3, end: p4 });
-										lineList.push({ start: p4, end: p1 });
-										lineList.forEach((line) => {
-											const idxStart = line.start;
-											const idxEnd = line.end;
-											px1 = attrPosition.getX(idxStart);
-											py1 = attrPosition.getY(idxStart);
-											pz1 = attrPosition.getZ(idxStart);
-											px2 = attrPosition.getX(idxEnd);
-											py2 = attrPosition.getY(idxEnd);
-											pz2 = attrPosition.getZ(idxEnd);
-											vertices.push(px1, py1, pz1, px2, py2, pz2);
-										});
-									}
-									break;
-								case 'RingGeometry':
-									{
-										lineGeometry = new LineSegmentsGeometry();
-										const gridX = parameters.thetaSegments + 1;
-										const gridY = parameters.phiSegments + 1;
-										const lineList: { start: number; end: number }[] = [];
-										for (let i = 0; i < gridX - 1; i++) {
-											lineList.push({ start: i, end: i + 1 });
-										}
-										const topStart = gridX * (gridY - 1);
-										for (let i = 0; i < gridX - 1; i++) {
-											lineList.push({
-												start: topStart + i,
-												end: topStart + i + 1,
-											});
-										}
-
-										lineList.push({ start: 0, end: topStart });
-										lineList.push({
-											start: 0 + gridX - 1,
-											end: topStart + gridX - 1,
-										});
-										lineList.forEach((line) => {
-											const idxStart = line.start;
-											const idxEnd = line.end;
-											px1 = attrPosition.getX(idxStart);
-											py1 = attrPosition.getY(idxStart);
-											pz1 = attrPosition.getZ(idxStart);
-											px2 = attrPosition.getX(idxEnd);
-											py2 = attrPosition.getY(idxEnd);
-											pz2 = attrPosition.getZ(idxEnd);
-											vertices.push(px1, py1, pz1, px2, py2, pz2);
-										});
-									}
-									break;
-								case 'StarGeometry':
-									{
-										lineGeometry = new LineSegmentsGeometry();
-										const segments = (parameters.segments || 1) + 2;
-										const isClosed =
-											parameters.thetaLength < Math.PI * 2 ? false : true;
-										for (
-											let i = isClosed ? 1 : 0;
-											i <= (isClosed ? segments - 2 : segments - 1);
-											i++
-										) {
-											const idx = (i + 1) % segments;
-											px1 = attrPosition.getX(i);
-											py1 = attrPosition.getY(i);
-											pz1 = attrPosition.getZ(i);
-											px2 = attrPosition.getX(idx);
-											py2 = attrPosition.getY(idx);
-											pz2 = attrPosition.getZ(idx);
-											vertices.push(px1, py1, pz1, px2, py2, pz2);
-										}
-									}
-									break;
-								default:
-									break;
-							}
-							if (lineGeometry === null) {
-								lineGeometry = new WireframeGeometry2(geometry);
-							}
-							if (vertices.length > 0) {
-								const lineSegments = new Float32Array(vertices);
-								const instanceBuffer = new THREE.InstancedInterleavedBuffer(
-									lineSegments,
-									6,
-									1
-								); // xyz, xyz
-								lineGeometry.setAttribute(
-									'instanceStart',
-									new THREE.InterleavedBufferAttribute(instanceBuffer, 3, 0)
-								); // xyz
-								lineGeometry.setAttribute(
-									'instanceEnd',
-									new THREE.InterleavedBufferAttribute(instanceBuffer, 3, 3)
-								); // xyz
-								lineGeometry.computeBoundingBox();
-								lineGeometry.computeBoundingSphere();
-							}
-							break;
 						case 'edgesbuffergeometry':
 						case 'edgesbuffer':
 						case 'edgesgeometry':
 						case 'edges':
-							lineGeometry = new THREE.EdgesGeometry(
-								geometry,
-								ThreeUtil.getTypeSafe(this.thresholdAngle, 0)
-							);
+							let lineGeometry: THREE.BufferGeometry = null;
+							switch (meshType) {
+								case 'wireframesimple':
+									const simpleParameters: any = anyGeometry['parameters'] || {};
+									lineGeometry = new THREE.WireframeGeometry(geometry);
+									let simplePositions: Float32Array = null;
+									switch (geometry.type) {
+										case 'PlaneGeometry':
+											simplePositions = new Float32Array(15);
+											const halfWidth = simpleParameters['width'] / 2;
+											const halfHeight = simpleParameters['height'] / 2;
+											simplePositions[0] = -halfWidth;
+											simplePositions[1] = halfHeight;
+											simplePositions[2] = 0;
+											simplePositions[3] = -halfWidth;
+											simplePositions[4] = -halfHeight;
+											simplePositions[5] = 0;
+											simplePositions[6] = halfWidth;
+											simplePositions[7] = -halfHeight;
+											simplePositions[8] = 0;
+											simplePositions[9] = halfWidth;
+											simplePositions[10] = halfHeight;
+											simplePositions[11] = 0;
+											simplePositions[12] = -halfWidth;
+											simplePositions[13] = halfHeight;
+											simplePositions[14] = 0;
+											break;
+									}
+									if (simplePositions !== null) {
+										const positionAttribe = new THREE.Float32BufferAttribute(
+											simplePositions,
+											3
+										);
+										lineGeometry.setAttribute('position', positionAttribe);
+									}
+									break;
+								case 'wireframebuffergeometry':
+								case 'wireframegeometry':
+								case 'wireframebuffer':
+								case 'wireframe':
+									lineGeometry = new THREE.WireframeGeometry(geometry);
+									break;
+								case 'wireframe2buffergeometry':
+								case 'wireframe2geometry':
+								case 'wireframe2buffer':
+								case 'wireframe2':
+								case 'wireframebuffergeometry2':
+								case 'wireframegeometry2':
+								case 'wireframebuffer2':
+									const vertices: number[] = [];
+									const parameters: any = anyGeometry['parameters'] || {};
+									const attrPosition = geometry.getAttribute('position');
+									const attrIndex = geometry.getIndex();
+									let px1 = 0;
+									let py1 = 0;
+									let pz1 = 0;
+									let px2 = 0;
+									let py2 = 0;
+									let pz2 = 0;
+									switch (geometry.type) {
+										case 'CircleGeometry':
+											{
+												lineGeometry = new LineSegmentsGeometry();
+												const segments = (parameters.segments || 1) + 2;
+												const isClosed =
+													parameters.thetaLength < Math.PI * 2 ? false : true;
+												for (
+													let i = isClosed ? 1 : 0;
+													i <= (isClosed ? segments - 2 : segments - 1);
+													i++
+												) {
+													const idx = (i + 1) % segments;
+													px1 = attrPosition.getX(i);
+													py1 = attrPosition.getY(i);
+													pz1 = attrPosition.getZ(i);
+													px2 = attrPosition.getX(idx);
+													py2 = attrPosition.getY(idx);
+													pz2 = attrPosition.getZ(idx);
+													vertices.push(px1, py1, pz1, px2, py2, pz2);
+												}
+											}
+											break;
+										case 'CircleDepthGeometry':
+										case 'PlaneDepthGeometry':
+										case 'RingDepthGeometry':
+										case 'StarDepthGeometry':
+											{
+												const sideGroup = geometry.groups[2];
+												if (ThreeUtil.isNotNull(sideGroup)) {
+													lineGeometry = new LineSegmentsGeometry();
+													for (
+														let i = sideGroup.start;
+														i < sideGroup.start + sideGroup.count;
+														i += 3
+													) {
+														const idxStart = attrIndex.getX(i);
+														const idxEnd = attrIndex.getX(i + 1);
+														px1 = attrPosition.getX(idxStart);
+														py1 = attrPosition.getY(idxStart);
+														pz1 = attrPosition.getZ(idxStart);
+														px2 = attrPosition.getX(idxEnd);
+														py2 = attrPosition.getY(idxEnd);
+														pz2 = attrPosition.getZ(idxEnd);
+														vertices.push(px1, py1, pz1, px2, py2, pz2);
+													}
+												}
+											}
+											break;
+										case 'BoxGeometry':
+											{
+												lineGeometry = new LineSegmentsGeometry();
+												const gridY = parameters.heightSegments + 1;
+												const gridZ = parameters.depthSegments + 1;
+												const p1 = 0;
+												const p2 = p1 + gridZ - 1;
+												const p3 = gridZ * gridY - 1;
+												const p4 = p3 - p2;
+												const skipDepth = gridZ * gridY;
+												const p5 = p1 + skipDepth;
+												const p6 = p2 + skipDepth;
+												const p7 = p3 + skipDepth;
+												const p8 = p4 + skipDepth;
+												const lineList: { start: number; end: number }[] = [];
+												lineList.push({ start: p1, end: p2 });
+												lineList.push({ start: p2, end: p3 });
+												lineList.push({ start: p3, end: p4 });
+												lineList.push({ start: p4, end: p1 });
+												lineList.push({ start: p5, end: p6 });
+												lineList.push({ start: p6, end: p7 });
+												lineList.push({ start: p7, end: p8 });
+												lineList.push({ start: p8, end: p5 });
+												lineList.push({ start: p1, end: p6 });
+												lineList.push({ start: p2, end: p5 });
+												lineList.push({ start: p3, end: p8 });
+												lineList.push({ start: p4, end: p7 });
+												lineList.forEach((line) => {
+													const idxStart = line.start;
+													const idxEnd = line.end;
+													px1 = attrPosition.getX(idxStart);
+													py1 = attrPosition.getY(idxStart);
+													pz1 = attrPosition.getZ(idxStart);
+													px2 = attrPosition.getX(idxEnd);
+													py2 = attrPosition.getY(idxEnd);
+													pz2 = attrPosition.getZ(idxEnd);
+													vertices.push(px1, py1, pz1, px2, py2, pz2);
+												});
+											}
+											break;
+										case 'PlaneGeometry':
+											{
+												lineGeometry = new LineSegmentsGeometry();
+												const gridX = parameters.widthSegments + 1;
+												const gridY = parameters.heightSegments + 1;
+												const p1 = 0;
+												const p2 = p1 + gridX - 1;
+												const p3 = gridX * gridY - 1;
+												const p4 = p3 - p2;
+												const lineList: { start: number; end: number }[] = [];
+												lineList.push({ start: p1, end: p2 });
+												lineList.push({ start: p2, end: p3 });
+												lineList.push({ start: p3, end: p4 });
+												lineList.push({ start: p4, end: p1 });
+												lineList.forEach((line) => {
+													const idxStart = line.start;
+													const idxEnd = line.end;
+													px1 = attrPosition.getX(idxStart);
+													py1 = attrPosition.getY(idxStart);
+													pz1 = attrPosition.getZ(idxStart);
+													px2 = attrPosition.getX(idxEnd);
+													py2 = attrPosition.getY(idxEnd);
+													pz2 = attrPosition.getZ(idxEnd);
+													vertices.push(px1, py1, pz1, px2, py2, pz2);
+												});
+											}
+											break;
+										case 'RingGeometry':
+											{
+												lineGeometry = new LineSegmentsGeometry();
+												const gridX = parameters.thetaSegments + 1;
+												const gridY = parameters.phiSegments + 1;
+												const lineList: { start: number; end: number }[] = [];
+												for (let i = 0; i < gridX - 1; i++) {
+													lineList.push({ start: i, end: i + 1 });
+												}
+												const topStart = gridX * (gridY - 1);
+												for (let i = 0; i < gridX - 1; i++) {
+													lineList.push({
+														start: topStart + i,
+														end: topStart + i + 1,
+													});
+												}
+
+												lineList.push({ start: 0, end: topStart });
+												lineList.push({
+													start: 0 + gridX - 1,
+													end: topStart + gridX - 1,
+												});
+												lineList.forEach((line) => {
+													const idxStart = line.start;
+													const idxEnd = line.end;
+													px1 = attrPosition.getX(idxStart);
+													py1 = attrPosition.getY(idxStart);
+													pz1 = attrPosition.getZ(idxStart);
+													px2 = attrPosition.getX(idxEnd);
+													py2 = attrPosition.getY(idxEnd);
+													pz2 = attrPosition.getZ(idxEnd);
+													vertices.push(px1, py1, pz1, px2, py2, pz2);
+												});
+											}
+											break;
+										case 'StarGeometry':
+											{
+												lineGeometry = new LineSegmentsGeometry();
+												const segments = (parameters.segments || 1) + 2;
+												const isClosed =
+													parameters.thetaLength < Math.PI * 2 ? false : true;
+												for (
+													let i = isClosed ? 1 : 0;
+													i <= (isClosed ? segments - 2 : segments - 1);
+													i++
+												) {
+													const idx = (i + 1) % segments;
+													px1 = attrPosition.getX(i);
+													py1 = attrPosition.getY(i);
+													pz1 = attrPosition.getZ(i);
+													px2 = attrPosition.getX(idx);
+													py2 = attrPosition.getY(idx);
+													pz2 = attrPosition.getZ(idx);
+													vertices.push(px1, py1, pz1, px2, py2, pz2);
+												}
+											}
+											break;
+										default:
+											break;
+									}
+									if (lineGeometry === null) {
+										lineGeometry = new WireframeGeometry2(geometry);
+									}
+									if (vertices.length > 0) {
+										const lineSegments = new Float32Array(vertices);
+										const instanceBuffer = new THREE.InstancedInterleavedBuffer(
+											lineSegments,
+											6,
+											1
+										); // xyz, xyz
+										lineGeometry.setAttribute(
+											'instanceStart',
+											new THREE.InterleavedBufferAttribute(instanceBuffer, 3, 0)
+										); // xyz
+										lineGeometry.setAttribute(
+											'instanceEnd',
+											new THREE.InterleavedBufferAttribute(instanceBuffer, 3, 3)
+										); // xyz
+										lineGeometry.computeBoundingBox();
+										lineGeometry.computeBoundingSphere();
+									}
+									break;
+								case 'edgesbuffergeometry':
+								case 'edgesbuffer':
+								case 'edgesgeometry':
+								case 'edges':
+									lineGeometry = new THREE.EdgesGeometry(
+										geometry,
+										ThreeUtil.getTypeSafe(this.thresholdAngle, 0)
+									);
+									break;
+							}
+							if (lineGeometry !== null) {
+								geometry = lineGeometry;
+							}
 							break;
-					}
-					if (lineGeometry !== null) {
-						geometry = lineGeometry;
 					}
 				}
 				if (ThreeUtil.isNotNull(this.program)) {

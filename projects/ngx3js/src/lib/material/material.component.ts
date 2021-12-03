@@ -1846,18 +1846,30 @@ export class MaterialComponent
 				});
 			} else {
 				const foundTexture = ThreeUtil.getTexture(texture, textureType, false);
-				if (ThreeUtil.isNotNull(foundTexture)) {
-					const anyMaterial: any = this.material;
-					if (this.material instanceof THREE_MAT.NODES.NodeMaterial) {
-						if (
-							anyMaterial[textureType] instanceof THREE_MAT.NODES.TextureNode
-						) {
-							anyMaterial[textureType].value = foundTexture;
+				const anyMaterial: any = this.material;
+				if (anyMaterial[textureType] !== undefined) {
+					if (ThreeUtil.isNotNull(foundTexture)) {
+						if (this.material instanceof THREE_MAT.NODES.NodeMaterial) {
+							if (
+								anyMaterial[textureType] instanceof THREE_MAT.NODES.TextureNode
+							) {
+								anyMaterial[textureType].value = foundTexture;
+							} else {
+								anyMaterial[textureType] = this.getTextureNode(foundTexture);
+							}
 						} else {
-							anyMaterial[textureType] = this.getTextureNode(foundTexture);
+							anyMaterial[textureType] = foundTexture;
 						}
 					} else if (anyMaterial[textureType] !== undefined) {
-						anyMaterial[textureType] = foundTexture;
+						if (this.material instanceof THREE_MAT.NODES.NodeMaterial) {
+							if (
+								anyMaterial[textureType] instanceof THREE_MAT.NODES.TextureNode
+							) {
+								anyMaterial[textureType].value = null;
+							}
+						} else {
+							anyMaterial[textureType] = null;
+						}
 					}
 				}
 			}
@@ -3548,10 +3560,10 @@ export class MaterialComponent
 							)
 						);
 						break;
-					case 'shadershaderskydomematerial':
-					case 'shadershaderskydome':
+					case 'shaderskydomematerial':
+					case 'shaderskydome':
 						material = this.getShaderMaterialUpdate(
-							new THREE_MAT.NgxShaderShaderSkyDomeMaterial(
+							new THREE_MAT.NgxShaderSkyDomeMaterial(
 								this.getShaderMaterialParameters()
 							)
 						);

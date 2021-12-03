@@ -880,16 +880,18 @@ export class AbstractMaterialComponent
 	protected getTextureOption(map: ThreeTexture, name: string): THREE.Texture {
 		if (ThreeUtil.isNotNull(map)) {
 			if (typeof map === 'string') {
-				const texture = AbstractTextureComponent.getTextureImageOption(
-					map,
-					null,
-					'texture',
-					null,
-					() => {
-						this.addChanges('texture');
-					}
-				);
-				return texture;
+				if (map !== 'none') {
+					const texture = AbstractTextureComponent.getTextureImageOption(
+						map,
+						null,
+						'texture',
+						null,
+						() => {
+							this.addChanges('texture');
+						}
+					);
+					return texture;
+				}
 			} else if (ThreeUtil.isNotNull(map['value'])) {
 				const texture = AbstractTextureComponent.getTextureImageOption(
 					map['value'],
