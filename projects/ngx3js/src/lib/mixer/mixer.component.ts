@@ -38,19 +38,23 @@ export interface CharacterControl {
  * 	<ngx3js-clip [name]="'default'" [index]="0"></ngx3js-clip>
  * </ngx3js-mixer>
  * <ngx3js-mixer
- * 	[action]="controls.animation " [type]="'Character'" [skin]="controls.skinIdx " [weapon]="controls.weaponIdx"
+ * 	[action]="controls.animation" 
+ * 	[type]="'Character'" 
+ * 	[skin]="controls.skinIdx" [weapon]="controls.weaponIdx"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
- * 	[type]="'MMDAnimationHelper'" [mmdHelpers]="['iksolver', 'physics'] " [afterglow]="2.0 " [gravity]="-9.8 * 10 " [physics]="true"
+ * 	[type]="'MMDAnimationHelper'" 
+ * 	[mmdHelpers]="['iksolver', 'physics']" 
+ * 	[afterglow]="2.0" [gravity]="-9.8 * 10" [physics]="true"
  * 	(onLoad)="setMixer($event)"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
- * 	[type]="'MMDAnimationHelper'" [animationHelper]="animationHelper"
+ * 	[type]="'MMDAnimationHelper'" 
+ * 	[animationHelper]="animationHelper"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
  * 	[type]="'MMDAnimationHelper'"
- * 	#animationHelper
- * 	[afterglow]="2.0 " [gravity]="-9.8 * 10 " [physics]="true"
+ * 	[afterglow]="2.0" [gravity]="-9.8 * 10" [physics]="true"
  * ></ngx3js-mixer>
  * <ngx3js-mixer [action]="'run'" [delayTime]="info.delay">
  * 	<ngx3js-clip [name]="'run'" [index]="0"></ngx3js-clip>

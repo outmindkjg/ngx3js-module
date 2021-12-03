@@ -22,8 +22,7 @@ import { OimoPhysics } from '../threejs-library/OimoPhysics';
  * See the [ngx physics](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_physics) page for a live demo.
  *
  * ```html
- * <ngx3js-physics>
- * </ngx3js-physics>
+ * <ngx3js-physics></ngx3js-physics>
  * <ngx3js-physics
  * 	[gravity]="-7.8"
  * ></ngx3js-physics>

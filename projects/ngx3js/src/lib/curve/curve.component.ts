@@ -14,7 +14,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * ```html
  * <ngx3js-curve
- * 	[type]="'catmullrom'" [points]="curvePath " [closed]="true " [curveType]="'centripetal'"
+ * 	[type]="'catmullrom'" [points]="curvePath" [closed]="true " 
+ * 	[curveType]="'centripetal'"
  * ></ngx3js-curve>
  * ```
  */

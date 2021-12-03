@@ -230,17 +230,22 @@ export interface HelperOptions {
  *
  * ```html
  * <ngx3js-helper
- * 	[type]="'GridHelper'" [size]="500 " [divisions]="100 " [color1]="'0x000000'" [opacity]="0.2"
+ * 	[type]="'GridHelper'" [size]="500" [divisions]="100 " 
+ * 	[color1]="'0x000000'" [opacity]="0.2"
  * ></ngx3js-helper>
  * <ngx3js-helper
- * 	[type]="'Camera'" [target]="sunLight " [visible]="controls.shadowCameraVisible"
+ * 	[type]="'Camera'" [target]="sunLight " 
+ * 	[visible]="true"
  * ></ngx3js-helper>
  * <ngx3js-helper
- * 	[visible]="false " [type]="'csmhelper'" [control]="csm"
+ * 	[visible]="false" [type]="'csmhelper'" [control]="csm"
  * 	(onLoad)="setHelper($event)"
  * ></ngx3js-helper>
  * <ngx3js-helper
- * 	[type]="'arrowhelper'" [arrowFrom]="sunLight " [arrowTo]="scene " [length]="0.9 " [color]="'0xffff00'" [headLength]="0.25 " [headWidth]="0.08"
+ * 	[type]="'arrowhelper'" 
+ * 	[arrowFrom]="sunLight" [arrowTo]="scene" 
+ * 	[length]="0.9" [color]="'0xffff00'" [headLength]="0.25" 
+ * 	[headWidth]="0.08"
  * ></ngx3js-helper>
  * ```
  */

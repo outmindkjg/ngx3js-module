@@ -27,19 +27,20 @@ import { LocalStorageService } from './../local-storage.service';
  *
  * ```html
  * <ngx3js-camera
- * 	[type]="'perspective'" [fov]="45 " [near]="0.1 " [far]="200"
+ * 	[type]="'perspective'" [fov]="45" [near]="0.1" [far]="200"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'OrthographicCamera'" [orthoSize]="500 " [fov]="45 " [near]="1 " [far]="1000"
+ * 	[type]="'OrthographicCamera'" [orthoSize]="500" [fov]="45 " 
+ * 	[near]="1" [far]="1000"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'cube'" [fov]="40 " [near]="1 " [far]="1000"
+ * 	[type]="'cube'" [fov]="40" [near]="1" [far]="1000"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'CubePingPong'" [near]="1 " [far]="1000"
+ * 	[type]="'CubePingPong'" [near]="1" [far]="1000"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'Cinematic'" [fov]="60 " [near]="1 " [far]="1000"
+ * 	[type]="'Cinematic'" [fov]="60" [near]="1" [far]="1000"
  * ></ngx3js-camera>
  * ```
  * @see THREE.Camera

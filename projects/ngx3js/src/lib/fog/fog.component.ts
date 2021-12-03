@@ -10,7 +10,7 @@ import { ThreeColor, ThreeUtil } from './../interface';
  *
  * ```html
  * <ngx3js-fog
- * 	[color]="'0xa0a0a0'" [near]="10 " [far]="50"
+ * 	[color]="'0xa0a0a0'" [near]="10" [far]="50"
  * ></ngx3js-fog>
  * <ngx3js-fog
  * 	[type]="'FogExp2'" [color]="'0x000000'" [density]="0.00000025"

@@ -11,7 +11,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * ```html
  * <ngx3js-rotation
- * 	[x]="-90 " [y]="0 " [z]="0 " [isRadian]="false"></ngx3js-rotation>
+ * 	[x]="-90" [y]="0" [z]="0" [isRadian]="false"
+ * ></ngx3js-rotation>
  * ```
  */
 @Component({

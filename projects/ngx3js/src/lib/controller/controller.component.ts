@@ -41,7 +41,11 @@ import {
  * 	<ngx3js-controller-item [type]="'autoupdate'"></ngx3js-controller-item>
  * </ngx3js-controller>
  * <ngx3js-controller
- * 	[type]="'uniforms'" [controlParams]="{ key: 'time', speed: controls.speed }"
+ * 	[type]="'uniforms'" 
+ * 	[controlParams]="{ 
+ * 		key: 'time', 
+ * 		speed: controls.speed 
+ * 	}"
  * ></ngx3js-controller>
  * <ngx3js-controller [type]="'auto'">
  * 	<ngx3js-controller-item

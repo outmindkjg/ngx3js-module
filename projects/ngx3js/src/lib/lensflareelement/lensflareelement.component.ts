@@ -18,29 +18,23 @@ import { AbstractTextureComponent } from '../texture.abstract';
  * <ngx3js-mesh [type]="'lensflare'">
  * 	<ngx3js-lensflareelement
  * 		[image]="'textures/lensflare/lensflare0.png'"
- * 		[size]="700"
- * 		[distance]="0"
- * 		[color]="light.color"
+ * 		[size]="700" [distance]="0" [color]="light.color"
  * 	></ngx3js-lensflareelement>
  * 	<ngx3js-lensflareelement
  * 		[image]="'textures/lensflare/lensflare3.png'"
- * 		[size]="60"
- * 		[distance]="0.6"
+ * 		[size]="60" [distance]="0.6"
  * 	></ngx3js-lensflareelement>
  * 	<ngx3js-lensflareelement
  * 		[image]="'textures/lensflare/lensflare3.png'"
- * 		[size]="70"
- * 		[distance]="0.7"
+ * 		[size]="70" [distance]="0.7"
  * 	></ngx3js-lensflareelement>
  * 	<ngx3js-lensflareelement
  * 		[image]="'textures/lensflare/lensflare3.png'"
- * 		[size]="120"
- * 		[distance]="0.9"
+ * 		[size]="120" [distance]="0.9"
  * 	></ngx3js-lensflareelement>
  * 	<ngx3js-lensflareelement
  * 		[image]="'textures/lensflare/lensflare3.png'"
- * 		[size]="70"
- * 		[distance]="1"
+ * 		[size]="70" [distance]="1"
  * 	></ngx3js-lensflareelement>
  * </ngx3js-mesh>
  * ```

@@ -37,7 +37,8 @@ export interface SvgGeometry {
  *
  * ```html
  * <ngx3js-geometry
- * 	[type]="'Extrude'" [depth]="map.depth " [steps]="1 " [bevelEnabled]="false"
+ * 	[type]="'Extrude'" 
+ * 	[depth]="map.depth" [steps]="1" [bevelEnabled]="false"
  * >
  * 	<ngx3js-svg [path]="map.path"></ngx3js-svg>
  * </ngx3js-geometry>

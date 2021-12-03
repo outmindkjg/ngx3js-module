@@ -210,7 +210,8 @@ export interface LightOptions extends Object3dOptions {
  *
  * ```html
  * <ngx3js-light
- * 	[type]="'Hemisphere'" [skyColor]="'0xffffff'" [groundColor]="'0x444444'"
+ * 	[type]="'Hemisphere'" [skyColor]="'0xffffff'" 
+ * 	[groundColor]="'0x444444'"
  * >
  * 	<ngx3js-position [x]="0" [y]="20" [z]="0"></ngx3js-position>
  * </ngx3js-light>
@@ -223,12 +224,20 @@ export interface LightOptions extends Object3dOptions {
  * 	[type]="'AmbientLight'" [color]="'0x6688cc'"
  * ></ngx3js-light>
  * <ngx3js-light
- * 	[type]="'SpotLight'" [color]="'0xffffff'" [intensity]="1.5 " [angle]="180 / 9 " [castShadow]="true " [shadowCameraTop]="2 " [shadowCameraBottom]="-2 " [shadowCameraLeft]="-2 " [shadowCameraRight]="2 " [shadowCameraNear]="1000 " [shadowCameraFar]="4000 " [shadowMapSize]="1024"
+ * 	[type]="'SpotLight'" 
+ * 	[color]="'0xffffff'" [intensity]="1.5 " 
+ * 	[angle]="180/9" [castShadow]="true" [shadowCameraTop]="2 " 
+ * 	[shadowCameraBottom]="-2" [shadowCameraLeft]="-2 " 
+ * 	[shadowCameraRight]="2" [shadowCameraNear]="1000 " 
+ * 	[shadowCameraFar]="4000" [shadowMapSize]="1024"
  * >
  * 	<ngx3js-position [x]="0" [y]="500" [z]="2000"></ngx3js-position>
  * </ngx3js-light>
  * <ngx3js-light
- * 	[type]="'SpotLight'" [color]="'0xffffff'" [intensity]="1.5 " [angle]="20 " [castShadow]="true " [shadowCameraNear]="1000 " [shadowCameraFar]="4000 " [shadowMapSize]="1024"
+ * 	[type]="'SpotLight'" 
+ * 	[color]="'0xffffff'" [intensity]="1.5 " 
+ * 	[angle]="20" [castShadow]="true" [shadowCameraNear]="1000 " 
+ * 	[shadowCameraFar]="4000" [shadowMapSize]="1024"
  * >
  * 	<ngx3js-position [x]="0" [y]="500" [z]="2000"></ngx3js-position>
  * </ngx3js-light>

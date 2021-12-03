@@ -18,7 +18,9 @@ import { AbstractTextureComponent } from '../texture.abstract';
  * 	[type]="'pmremtexture'" [background]="'0xcccccc'"
  * ></ngx3js-tools>
  * <ngx3js-tools
- * 	[type]="'pmremtexture'" [storageName]="'spot1Lux.hdr'" [storageOption]="{ path: 'textures/equirectangular/' }"
+ * 	[type]="'pmremtexture'" 
+ * 	[storageName]="'spot1Lux.hdr'" 
+ * 	[storageOption]="{ path: 'textures/equirectangular/' }"
  * ></ngx3js-tools>
  * ```
  */

@@ -21,16 +21,22 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * ```html
  * <ngx3-audio
- * 	[type]="'audio'" [url]="'sounds/376737_Skullbeatz___Bad_Cat_Maste.mp3'" [refDistance]="1 " [coneInnerAngle]="180 " [coneOuterAngle]="230 " [cconeOuterGain]="0.1"
+ * 	[type]="'audio'" 
+ * 	[url]="'sounds/376737_Skullbeatz___Bad_Cat_Maste.mp3'" 
+ * 	[refDistance]="1" [coneInnerAngle]="180 " 
+ * 	[coneOuterAngle]="230" [cconeOuterGain]="0.1"
  * ></ngx3-audio>
  * <ngx3js-audio
- * 	[type]="'audio'" [url]="'sounds/Project_Utopia.ogg'" [volume]="0.5 " [loop]="true " [autoplay]="true"
+ * 	[type]="'audio'" [url]="'sounds/Project_Utopia.ogg'" 
+ * 	[volume]="0.5" [loop]="true" [autoplay]="true"
  * ></ngx3js-audio>
  * <ngx3js-audio
- * 	[type]="'PositionalAudio'" [url]="'sounds/358232_j_s_song.ogg'" [refDistance]="20 " [autoplay]="true"
+ * 	[type]="'PositionalAudio'" [url]="'sounds/358232_j_s_song.ogg'" 
+ * 	[refDistance]="20" [autoplay]="true"
  * ></ngx3js-audio>
  * <ngx3js-audio
- * 	[type]="'PositionalAudio'" [urlType]="'listener'" [volume]="0.5 " [refDistance]="20"
+ * 	[type]="'PositionalAudio'" [urlType]="'listener'" [volume]="0.5 " 
+ * 	[refDistance]="20"
  * ></ngx3js-audio>
  * ```
  * @see THREE.PositionalAudio - PositionalAudio, Positional, Position

@@ -48,19 +48,27 @@ import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
  * 	[type]="'LineBasicMaterial'" [color]="'0xffff00'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'LineDashedMaterial'" [color]="'blue'" [linewidth]="1 " [dashSize]="10 " [gapSize]="10"
+ * 	[type]="'LineDashedMaterial'" 
+ * 	[color]="'blue'" [linewidth]="1" [dashSize]="10" [gapSize]="10"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshBasicMaterial'" [color]="'0x000000'" [wireframe]="true " [wireframeLinewidth]="1 " [side]="'double'"
+ * 	[type]="'MeshBasicMaterial'" 
+ * 	[color]="'0x000000'" [wireframe]="true" 
+ * 	[wireframeLinewidth]="1" [side]="'double'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[materialType]="'overrideMaterial'" [type]="'MeshDepthMaterial'"
+ * 	[materialType]="'overrideMaterial'" 
+ * 	[type]="'MeshDepthMaterial'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshDepth'" [depthPacking]="'RGBA'" [displacementMap]="displacementMap " [displacementScale]="2.436143 " [displacementBias]="-0.428408 " [side]="controls.side"
+ * 	[type]="'MeshDepth'" 
+ * 	[depthPacking]="'RGBA'" [displacementMap]="displacementMap" 
+ * 	[displacementScale]="2.436143" [displacementBias]="-0.428408" 
+ * 	[side]="controls.side"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshDistance'" [materialType]="'customdistance'" [alphaTest]="0.5 " [alphaMap]="alphaMap"
+ * 	[type]="'MeshDistance'" 
+ * 	[materialType]="'customdistance'" [alphaTest]="0.5" [alphaMap]="alphaMap"
  * ></ngx3js-material>
  * <ngx3js-material
  * 	[type]="'MeshMatcapMaterial'" [color]="'0xaa24df'" [matcap]="texture"
@@ -69,16 +77,27 @@ import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
  * 	[type]="'MeshNormal'" [color]="'0xff0000'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshPhongMaterial'" [specular]="'0x333333'" [shininess]="5 " [map]="'textures/planets/earth_atmos_2048.jpg'" [specularMap]="'textures/planets/earth_specular_2048.jpg'" [normalMap]="'textures/planets/earth_normal_2048.jpg'" [normalScale]="0.85"
+ * 	[type]="'MeshPhongMaterial'" 
+ * 	[specular]="'0x333333'" [shininess]="5" 
+ * 	[map]="'textures/planets/earth_atmos_2048.jpg'" 
+ * 	[specularMap]="'textures/planets/earth_specular_2048.jpg'" 
+ * 	[normalMap]="'textures/planets/earth_normal_2048.jpg'" 
+ * 	[normalScale]="0.85"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshPhysicalMaterial'" [roughness]="info.roughness " [metalness]="info.metalness " [color]="'0xffffff'" [envMap]="radianceMap " [envMapIntensity]="1 " [reflectivity]="1"
+ * 	[type]="'MeshPhysicalMaterial'" 
+ * 	[roughness]="info.roughness" [metalness]="info.metalness" 
+ * 	[color]="'0xffffff'" 
+ * 	[envMap]="radianceMap" [envMapIntensity]="1" [reflectivity]="1"
  * ></ngx3js-material>
  * <ngx3js-material
  * 	#sphereMaterial
- * 	[type]="'MeshStandardMaterial'" [color]="'0x888855'" [roughness]="0.8 " [metalness]="0.5"
+ * 	[type]="'MeshStandardMaterial'" 
+ * 	[color]="'0x888855'" [roughness]="0.8" [metalness]="0.5"
  * ></ngx3js-material>
- * <ngx3js-material [type]="'MeshToonMaterial'" [color]="info.color"></ngx3js-texture>
+ * <ngx3js-material 
+ * 	[type]="'MeshToonMaterial'" [color]="info.color"
+ * ></ngx3js-texture>
  * <ngx3js-material
  * 	[type]="'PointsMaterial'" [color]="'0xffff00'" [size]="5"
  * ></ngx3js-material>
@@ -86,16 +105,22 @@ import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
  * 	[type]="'RawShaderMaterial'" [uniforms]="{
  * 		time: { type: 'number', value: 1.0 },
  * 		sineTime: { type: 'number', value: 1.0 }
- * 	} " [shader]="'instancing'" [side]="'double'" [transparent]="true"
+ * 	}" [shader]="'instancing'" [side]="'double'" [transparent]="true"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'ShaderMaterial'" [shader]="'audioVisualizer'" [uniforms]="{ tAudioData: { type: 'DataTexture', value: audio } }"
+ * 	[type]="'ShaderMaterial'" 
+ * 	[shader]="'audioVisualizer'" 
+ * 	[uniforms]="{ tAudioData: { type: 'DataTexture', value: audio } }"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'ShadowMaterial'" [color]="'0x111111'"
+ * 	[type]="'ShadowMaterial'" 
+ * 	[color]="'0x111111'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'Line'" [color]="'0x4080ff'" [linewidth]="5 " [dashed]="true " [dashScale]="5 " [dashSize]="2 " [gapSize]="3 " [resolutionX]="1024 " [resolutionY]="1024"
+ * 	[type]="'Line'" 
+ * 	[color]="'0x4080ff'" 
+ * 	[linewidth]="5" [dashed]="true" [dashScale]="5" [dashSize]="2" 
+ * 	[gapSize]="3" [resolutionX]="1024" [resolutionY]="1024"
  * ></ngx3js-material>
  * <ngx3js-material
  * 	[type]="'SpriteMaterial'" [color]="info.color"

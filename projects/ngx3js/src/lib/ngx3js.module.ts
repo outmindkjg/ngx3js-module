@@ -73,6 +73,7 @@ import { AbstractTweenComponent } from './tween.abstract';
 import { TweenComponent } from './tween/tween.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { VisualComponent } from './visual/visual.component';
+import { NgxViewportInComponent } from '.';
 
 const NGX3JS_COMPONENTS: Array<Type<any>> = [
 	LookatComponent,
@@ -145,6 +146,7 @@ const NGX3JS_COMPONENTS: Array<Type<any>> = [
 	AbstractObject3dComponent,
 	ThreeGeometryCustom,
 	AbstractChartComponent,
+	NgxViewportInComponent
 ];
 
 /**

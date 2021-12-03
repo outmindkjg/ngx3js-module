@@ -54,7 +54,14 @@ import { SceneComponent } from './../scene/scene.component';
  *
  * ```html
  * <ngx3js-renderer
- * 	[controlType]="'orbit'" [controlOptions]="{ enablePan: false, enableDamping: true } " [cssType]="'css2d'" [statsMode]="0 " [antialias]="true " [shadowMapEnabled]="true " [guiControl]="controls " [guiParams]="controlsParams"
+ * 	[controlType]="'orbit'" 
+ * 	[controlOptions]="{ 
+ * 		enablePan: false, 
+ * 		enableDamping: true 
+ * 	}" 
+ * 	[cssType]="'css2d'" 
+ * 	[statsMode]="0" [antialias]="true" [shadowMapEnabled]="true" 
+ * 	[guiControl]="controls" [guiParams]="controlsParams"
  * 	(onRender)="onRender($event)"
  * ></ngx3js-renderer>
  * ```

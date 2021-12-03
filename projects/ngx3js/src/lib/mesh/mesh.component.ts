@@ -119,14 +119,37 @@ export interface VolumeOptions {
  * <ngx3js-mesh [type]="'SVGObject'" [cssTag]="'div'"></ngx3js-mesh>
  * <ngx3js-mesh [type]="'CSS2DObject'" [cssTag]="'div'"></ngx3js-mesh>
  * <ngx3js-mesh [type]="'CSS3DSprite'" [cssTag]="'div'"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Reflector'" [color]="'0x889999'" [clipBias]="0.003 " [textureWidth]="1024 " [textureWidth]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'ReflectorRTT'" [color]="'0x889999'" [clipBias]="0.003 " [textureWidth]="1024 " [textureWidth]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Refractor'" [color]="'0x999999'" [textureWidth]="1024 " [textureHeight]="1024 " [shader]="'WaterRefraction'"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'ReflectorRTT'" [color]="'0x889999'" [clipBias]="0.003 " [textureWidth]="1024 " [textureWidth]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'ReflectorForSSRPass'" [color]="'0x889999'" [clipBias]="0.003 " [textureWidth]="1024 " [textureWidth]="1024"></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Water'" [sunColor]="'0xffffff'" [waterColor]="'0x001e0f'" [sunDirection]="sunDirection " [textureWidth]="512 " [textureHeight]="512 " [alpha]="alpha " [distortionScale]="distortionScale " [uniforms]="uniforms"
+ * <ngx3js-mesh [type]="'Reflector'" 
+ * 	[color]="'0x889999'" [clipBias]="0.003" 
+ * 	[textureWidth]="1024" [textureWidth]="1024"
  * ></ngx3js-mesh>
- * <ngx3js-mesh [type]="'Water2'" [color]="'#ffffff'" [waterScale]="4 " [reflectivity]="0.02 " [flowDirectionX]="1 " [flowDirectionY]="1 " [textureWidth]="1024 " [textureHeight]="1024"></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorRTT'" 
+ * 	[color]="'0x889999'" [clipBias]="0.003" 
+ * 	[textureWidth]="1024" [textureWidth]="1024"
+ * ></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Refractor'" 
+ * 	[color]="'0x999999'" 
+ * 	[textureWidth]="1024" [textureHeight]="1024" [shader]="'WaterRefraction'"
+ * ></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorRTT'" 
+ * 	[color]="'0x889999'" [clipBias]="0.003" 
+ * 	[textureWidth]="1024" [textureWidth]="1024"
+ * ></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'ReflectorForSSRPass'" 
+ * 	[color]="'0x889999'" [clipBias]="0.003" 
+ * 	[textureWidth]="1024" [textureWidth]="1024"
+ * ></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Water'" 
+ * 	[sunColor]="'0xffffff'" [waterColor]="'0x001e0f'" 
+ * 	[sunDirection]="sunDirection" 
+ * 	[textureWidth]="512" [textureHeight]="512" 
+ * 	[alpha]="alpha" [distortionScale]="distortionScale" 
+ * 	[uniforms]="uniforms"
+ * ></ngx3js-mesh>
+ * <ngx3js-mesh [type]="'Water2'" 
+ * 	[color]="'#ffffff'" [waterScale]="4" [reflectivity]="0.02" 
+ * 	[flowDirectionX]="1" [flowDirectionY]="1" [textureWidth]="1024" 
+ * 	[textureHeight]="1024"></ngx3js-mesh>
  * <ngx3js-mesh [type]="'Sky'" [uniforms]="{
  * 		sunPosition: { type: 'v3', value: sunDirection },
  * 		turbidity: { type: 'number', value: 10 },

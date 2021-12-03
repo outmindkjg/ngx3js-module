@@ -33,22 +33,17 @@ import { TextureComponent } from '../texture/texture.component';
  * 	<ngx3js-pass [type]="'RenderPass'"></ngx3js-pass>
  * 	<ngx3js-pass
  * 		[type]="'FilmPass'"
- * 		[noiseIntensity]="0.35"
- * 		[scanlinesIntensity]="0.75"
- * 		[scanlinesCount]="2048"
- * 		[grayscale]="false"
+ * 		[noiseIntensity]="0.35" [scanlinesIntensity]="0.75"
+ * 		[scanlinesCount]="2048" [grayscale]="false"
  * 	></ngx3js-pass>
  * 	<ngx3js-pass
- * 		#copyPass
- * 		[type]="'ShaderPass'"
- * 		[shader]="'CopyShader'"
+ * 		[type]="'ShaderPass'" [shader]="'CopyShader'"
  * 	></ngx3js-pass>
  * 	<ngx3js-pass [type]="'bloom'" [strength]="0.75"></ngx3js-pass>
  * 	<ngx3js-pass
  * 		[type]="'film'"
- * 		[noiseIntensity]="0.5"
- * 		[scanlinesIntensity]="0.5"
- * 		[scanlinesCount]="1448"
+ * 		[noiseIntensity]="0.5" 
+ * 		[scanlinesIntensity]="0.5" [scanlinesCount]="1448"
  * 		[grayscale]="false"
  * 	></ngx3js-pass>
  * 	<ngx3js-pass
@@ -72,7 +67,6 @@ import { TextureComponent } from '../texture/texture.component';
  * 		[uniforms]="{ opacity: 0.95 }"
  * 	></ngx3js-pass>
  * 	<ngx3js-pass
- * 		#effectSepia
  * 		[type]="'ShaderPass'"
  * 		[shader]="'SepiaShader'"
  * 		[uniforms]="{ amount: 0.9 }"
@@ -131,8 +125,8 @@ import { TextureComponent } from '../texture/texture.component';
  * 		[shader]="'ColorifyShader'"
  * 		[uniforms]="{ color: '0xffb0b0' }"
  * 	></ngx3js-pass>
- * 	<ngx3js-pass #clearMask [type]="'ClearMaskPass'"></ngx3js-pass>
- * 	<ngx3js-pass #renderMask [type]="'MaskPass'"></ngx3js-pass>
+ * 	<ngx3js-pass [type]="'ClearMaskPass'"></ngx3js-pass>
+ * 	<ngx3js-pass [type]="'MaskPass'"></ngx3js-pass>
  * 	<ngx3js-pass
  * 		[type]="'MaskPass'"
  * 		[inverse]="true"
