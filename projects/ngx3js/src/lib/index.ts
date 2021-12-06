@@ -48,7 +48,7 @@ export * from './material.abstract';
 export * from './material/index';
 export * from './material/material.component';
 export * from './mesh/mesh.component';
-export * from './mesh/mesh.text';
+export * from './mesh/index';
 export * from './mixer/mixer.component';
 export * from './object3d.abstract';
 export * from './pass/index';
