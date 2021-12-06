@@ -1,5 +1,5 @@
-import { ThreeUtil } from 'projects/ngx3js/src/public-api';
 import * as THREE from 'three';
+import { RayParameters } from 'three/examples/jsm/geometries/LightningStrike';
 import { HTMLMesh } from 'three/examples/jsm/interactive/HTMLMesh';
 import { InteractiveGroup } from 'three/examples/jsm/interactive/InteractiveGroup';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
@@ -10,37 +10,37 @@ import { Wireframe } from 'three/examples/jsm/lines/Wireframe';
 import { TubePainter } from 'three/examples/jsm/misc/TubePainter';
 import {
 	Flow,
-	InstancedFlow,
+	InstancedFlow
 } from 'three/examples/jsm/modifiers/CurveModifier';
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare';
 import {
 	LightningStorm,
-	StormParams,
+	StormParams
 } from 'three/examples/jsm/objects/LightningStorm';
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
 import {
 	Reflector,
-	ReflectorOptions,
+	ReflectorOptions
 } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
 import {
 	Refractor,
-	RefractorOptions,
+	RefractorOptions
 } from 'three/examples/jsm/objects/Refractor';
 import { Sky } from 'three/examples/jsm/objects/Sky';
 import { Water, WaterOptions } from 'three/examples/jsm/objects/Water';
 import {
 	Water as Water2,
-	Water2Options,
+	Water2Options
 } from 'three/examples/jsm/objects/Water2';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import {
 	CSS3DObject,
-	CSS3DSprite,
+	CSS3DSprite
 } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
+import { ThreeUtil } from '../../interface';
 import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass';
-import { RayParameters } from 'three/examples/jsm/geometries/LightningStrike';
 
 /**
  * Lensflare mesh
@@ -664,4 +664,4 @@ export {
 	RayParameters,
 	StormParams,
 	LensflareElement
-}
+};

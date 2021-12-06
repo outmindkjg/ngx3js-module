@@ -12,6 +12,7 @@
     "ng": "ng",
     "start": "ng build ngx3js --watch --configuration development",
     "build": "ng build ngx3js --configuration production",
+    "watch": "ng build ngx3js --watch --configuration development",
     "ngx3jspublish": "cd dist/ngx3js && npm publish",
     "assetsbuild": "ng build ngx3js-assets --configuration production",
     "assetspublish": "cd dist/ngx3js-assets && npm publish",

@@ -3427,9 +3427,9 @@ export class ThreeUtil {
 			case 'rgbeencoding':
 			case 'rgbe':
 				return THREE.RGBEEncoding;
-			case 'logluvencoding':
-			case 'logluv':
-				return THREE.LogLuvEncoding;
+			// case 'logluvencoding':
+			// case 'logluv':
+			//	return THREE.LogLuvEncoding;
 			case 'rgbm7encoding':
 			case 'rgbm7':
 				return THREE.RGBM7Encoding;
