@@ -104,7 +104,7 @@ export class AbstractMaterialComponent
 	/**
 	 * Enables alpha to coverage. Can only be used with MSAA-enabled contexts (meaning when the renderer was created with *antialias* parameter set to *true*). Default is *false*.
 	 */
-	@Input() public alphaToCoverage: number = null;
+	@Input() public alphaToCoverage: boolean = null;
 
 	/**
 	 * Sets the alpha value to be used when running an alpha test.
@@ -303,11 +303,6 @@ export class AbstractMaterialComponent
 	 * Default is *false*.
 	 */
 	@Input() public dithering: boolean = null;
-
-	/**
-	 * Define whether the material is rendered with flat shading. Default is false.
-	 */
-	@Input() public flatShading: boolean = null;
 
 	/**
 	 * Defines which side of faces will be rendered - front, back or both.
@@ -673,19 +668,7 @@ export class AbstractMaterialComponent
 	 * @returns side
 	 */
 	protected getSide(def?: string): THREE.Side {
-		const side = ThreeUtil.getTypeSafe(this.side, def, '');
-		switch (side.toLowerCase()) {
-			case 'backside':
-			case 'back':
-				return THREE.BackSide;
-			case 'doubleside':
-			case 'double':
-				return THREE.DoubleSide;
-			case 'frontside':
-			case 'front':
-				return THREE.FrontSide;
-		}
-		return undefined;
+		return ThreeUtil.getSideSafe(this.side, def, '');
 	}
 
 	/**
@@ -1302,8 +1285,7 @@ export class AbstractMaterialComponent
 	 * @returns material parameters
 	 */
 	protected getMaterialParameters(extendObj: any): THREE.MaterialParameters {
-		const materialParameters: THREE.MaterialParameters = Object.assign(
-			{
+		const baseParameters : THREE.MaterialParameters = {
 				alphaToCoverage: ThreeUtil.getTypeSafe(this.alphaToCoverage),
 				blending: ThreeUtil.getBlendingSafe(this.blending),
 				blendDst: this.getBlendDst(),
@@ -1328,7 +1310,6 @@ export class AbstractMaterialComponent
 				precision: this.getPrecision(),
 				premultipliedAlpha: ThreeUtil.getTypeSafe(this.premultipliedAlpha),
 				dithering: ThreeUtil.getTypeSafe(this.dithering),
-				flatShading: ThreeUtil.getTypeSafe(this.flatShading),
 				shadowSide: this.getShadowSide(),
 				toneMapped: ThreeUtil.getTypeSafe(this.toneMapped),
 				transparent: ThreeUtil.getTypeSafe(this.transparent),
@@ -1346,7 +1327,10 @@ export class AbstractMaterialComponent
 				side: this.getSide(),
 				vertexColors: this.getVertexColors(),
 				visible: ThreeUtil.getTypeSafe(this.visible),
-			},
+		}
+		const materialParameters: THREE.MaterialParameters = Object.assign(
+			baseParameters
+			,		
 			extendObj
 		);
 		const materialParametersSafe: any = {};
@@ -1554,11 +1538,6 @@ export class AbstractMaterialComponent
 					case 'dithering':
 						if (ThreeUtil.isNotNull(this.dithering)) {
 							this.material.dithering = ThreeUtil.getTypeSafe(this.dithering);
-						}
-						break;
-					case 'flatshading':
-						if (ThreeUtil.isNotNull(this.flatShading)) {
-							//  this.material.flatShading = ThreeUtil.getTypeSafe(this.flatShading);
 						}
 						break;
 					case 'shadowside':

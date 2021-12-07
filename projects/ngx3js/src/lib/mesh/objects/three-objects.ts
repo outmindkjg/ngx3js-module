@@ -39,14 +39,14 @@ import {
 	CSS3DSprite
 } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
-import { ThreeUtil } from '../../interface';
+import { ThreeUtil, MaterialParameters } from '../../interface';
 import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass';
 
 /**
  * Lensflare mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSkyboxLensflare) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Lensflare) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Lensflare) page for a live demo.
  *
  */
 export class NgxSkyboxLensflare extends Lensflare {
@@ -62,7 +62,7 @@ export class NgxSkyboxLensflare extends Lensflare {
  * HTMLMesh mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxHTMLMesh) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/HTMLMesh) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/HTMLMesh) page for a live demo.
  *
  */
 export class NgxHTMLMesh extends HTMLMesh {
@@ -70,8 +70,35 @@ export class NgxHTMLMesh extends HTMLMesh {
 	 * Creates an instance of ngx htmlmesh.
 	 * @param dom
 	 */
-	constructor(dom: HTMLElement) {
+	constructor(dom: HTMLElement, options? : MaterialParameters) {
 		super(dom);
+		if (options !== null && options !== undefined) {
+			const material = this.material as THREE.Material;
+			if (ThreeUtil.isNotNull(options.fog)) {
+				material.fog = ThreeUtil.getBooleanSafe(options.fog, true);
+			}
+			if (ThreeUtil.isNotNull(options.side)) {
+				material.side = ThreeUtil.getSideSafe(options.side, 'front');
+			}
+			if (ThreeUtil.isNotNull(options.opacity)) {
+				material.opacity = ThreeUtil.getNumberSafe(options.opacity, 1);
+			}
+			if (ThreeUtil.isNotNull(options.shadowSide)) {
+				material.shadowSide = ThreeUtil.getSideSafe(options.shadowSide, null);
+			}
+			if (ThreeUtil.isNotNull(options.toneMapped)) {
+				material.toneMapped = ThreeUtil.getBooleanSafe(options.toneMapped, true);
+			}
+			if (ThreeUtil.isNotNull(options.transparent)) {
+				material.transparent = ThreeUtil.getBooleanSafe(options.transparent, false);
+			}
+			if (ThreeUtil.isNotNull(options.vertexColors)) {
+				material.vertexColors = ThreeUtil.getBooleanSafe(options.transparent, false);
+			}
+			if (ThreeUtil.isNotNull(options.visible)) {
+				material.visible = ThreeUtil.getBooleanSafe(options.visible, true);
+			}
+		}
 	}
 }
 
@@ -79,7 +106,7 @@ export class NgxHTMLMesh extends HTMLMesh {
  * SVGObject mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSVGObject) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/SVGObject) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/SVGObject) page for a live demo.
  *
  */
 export class NgxSVGObject extends SVGObject {
@@ -96,7 +123,7 @@ export class NgxSVGObject extends SVGObject {
  * CSS2DObject mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCSS2DObject) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/CSS2DObject) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/CSS2DObject) page for a live demo.
  *
  */
 export class NgxCSS2DObject extends CSS2DObject {
@@ -113,7 +140,7 @@ export class NgxCSS2DObject extends CSS2DObject {
  * CSS3DSprite mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCSS3DSprite) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/CSS3DSprite) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/CSS3DSprite) page for a live demo.
  *
  */
 export class NgxCSS3DSprite extends CSS3DSprite {
@@ -130,7 +157,7 @@ export class NgxCSS3DSprite extends CSS3DSprite {
  * CSS3DObject mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCSS3DObject) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/CSS3DObject) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/CSS3DObject) page for a live demo.
  *
  */
 export class NgxCSS3DObject extends CSS3DObject {
@@ -147,7 +174,7 @@ export class NgxCSS3DObject extends CSS3DObject {
  * Reflector mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxReflector) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Reflector) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Reflector) page for a live demo.
  *
  */
 export class NgxReflector extends Reflector {
@@ -165,7 +192,7 @@ export class NgxReflector extends Reflector {
  * ReflectorRTT mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxReflectorRTT) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorRTT) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorRTT) page for a live demo.
  *
  */
 export class NgxReflectorRTT extends ReflectorRTT {
@@ -183,7 +210,7 @@ export class NgxReflectorRTT extends ReflectorRTT {
  * Refractor mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRefractor) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Refractor) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Refractor) page for a live demo.
  *
  */
 export class NgxRefractor extends Refractor {
@@ -201,7 +228,7 @@ export class NgxRefractor extends Refractor {
  * ReflectorForSSRPass mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxReflectorForSSRMesh) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorForSSRMesh) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorForSSRMesh) page for a live demo.
  *
  */
 export class NgxReflectorForSSRMesh extends ReflectorForSSRPass {
@@ -219,7 +246,7 @@ export class NgxReflectorForSSRMesh extends ReflectorForSSRPass {
  * Water mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxWater) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Water) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Water) page for a live demo.
  *
  */
 export class NgxWater extends Water {
@@ -237,7 +264,7 @@ export class NgxWater extends Water {
  * Water2 mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxWater2) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Water2) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Water2) page for a live demo.
  *
  */
 export class NgxWater2 extends Water2 {
@@ -255,7 +282,7 @@ export class NgxWater2 extends Water2 {
  * Sky mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSky) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Sky) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Sky) page for a live demo.
  *
  */
 export class NgxSky extends Sky {
@@ -271,7 +298,7 @@ export class NgxSky extends Sky {
  * Flow mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxFlow) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Flow) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Flow) page for a live demo.
  *
  */
 export class NgxFlow extends Flow {
@@ -289,7 +316,7 @@ export class NgxFlow extends Flow {
  * InstancedFlow mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxInstancedFlow) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/InstancedFlow) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/InstancedFlow) page for a live demo.
  *
  */
 export class NgxInstancedFlow extends InstancedFlow {
@@ -314,7 +341,7 @@ export class NgxInstancedFlow extends InstancedFlow {
  * LineLoop mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLineLoop) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LineLoop) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LineLoop) page for a live demo.
  *
  */
 export class NgxLineLoop extends THREE.LineLoop {
@@ -335,7 +362,7 @@ export class NgxLineLoop extends THREE.LineLoop {
  * Lensflare mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLensflare) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Lensflare) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Lensflare) page for a live demo.
  *
  */
 export class NgxLensflare extends Lensflare {
@@ -351,7 +378,7 @@ export class NgxLensflare extends Lensflare {
  * InstancedMesh mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxInstancedMesh) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/InstancedMesh) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/InstancedMesh) page for a live demo.
  *
  */
 export class NgxInstancedMesh extends THREE.InstancedMesh {
@@ -374,7 +401,7 @@ export class NgxInstancedMesh extends THREE.InstancedMesh {
  * Sprite mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSprite) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Sprite) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Sprite) page for a live demo.
  *
  */
 export class NgxSprite extends THREE.Sprite {
@@ -391,7 +418,7 @@ export class NgxSprite extends THREE.Sprite {
  * Wireframe mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxWireframe) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Wireframe) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Wireframe) page for a live demo.
  *
  */
 export class NgxWireframe extends Wireframe {
@@ -409,7 +436,7 @@ export class NgxWireframe extends Wireframe {
  * MarchingCubes mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMarchingCubes) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/MarchingCubes) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/MarchingCubes) page for a live demo.
  *
  */
 export class NgxMarchingCubes extends MarchingCubes {
@@ -436,7 +463,7 @@ export class NgxMarchingCubes extends MarchingCubes {
  * Points mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPoints) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Points) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Points) page for a live demo.
  *
  */
 export class NgxPoints extends THREE.Points {
@@ -457,7 +484,7 @@ export class NgxPoints extends THREE.Points {
  * Line mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLine) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Line) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Line) page for a live demo.
  *
  */
 export class NgxLine extends THREE.Line {
@@ -478,7 +505,7 @@ export class NgxLine extends THREE.Line {
  * TubePainter mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTubePainter) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/TubePainter) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/TubePainter) page for a live demo.
  *
  */
 export class NgxTubePainter extends TubePainter {
@@ -494,7 +521,7 @@ export class NgxTubePainter extends TubePainter {
  * MeshText mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshText) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/MeshText) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/MeshText) page for a live demo.
  *
  */
 export class NgxMeshText extends THREE.Mesh {
@@ -552,7 +579,7 @@ export class NgxMeshText extends THREE.Mesh {
  * Line2 mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLine2) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Line2) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Line2) page for a live demo.
  *
  */
 export class NgxLine2 extends Line2 {
@@ -570,7 +597,7 @@ export class NgxLine2 extends Line2 {
  * LineSegments mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLineSegments) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LineSegments) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LineSegments) page for a live demo.
  *
  */
 export class NgxLineSegments extends THREE.LineSegments {
@@ -591,7 +618,7 @@ export class NgxLineSegments extends THREE.LineSegments {
  * InteractiveGroup mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxInteractiveGroup) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/InteractiveGroup) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/InteractiveGroup) page for a live demo.
  *
  */
 export class NgxInteractiveGroup extends InteractiveGroup {
@@ -609,7 +636,7 @@ export class NgxInteractiveGroup extends InteractiveGroup {
  * LightningStorm mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLightningStorm) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LightningStorm) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LightningStorm) page for a live demo.
  *
  */
 export class NgxLightningStorm extends LightningStorm {
@@ -626,7 +653,7 @@ export class NgxLightningStorm extends LightningStorm {
  * Group mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxGroup) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Group) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Group) page for a live demo.
  *
  */
 export class NgxGroup extends THREE.Group {
@@ -642,7 +669,7 @@ export class NgxGroup extends THREE.Group {
  * Mesh mesh
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMesh) page for details.
- * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Mesh) page for a live demo.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Mesh) page for a live demo.
  *
  */
 export class NgxMesh extends THREE.Mesh {

@@ -48,26 +48,26 @@ import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
  * 	[type]="'LineBasicMaterial'" [color]="'0xffff00'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'LineDashedMaterial'" 
+ * 	[type]="'LineDashedMaterial'"
  * 	[color]="'blue'" [linewidth]="1" [dashSize]="10" [gapSize]="10"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshBasicMaterial'" 
- * 	[color]="'0x000000'" [wireframe]="true" 
+ * 	[type]="'MeshBasicMaterial'"
+ * 	[color]="'0x000000'" [wireframe]="true"
  * 	[wireframeLinewidth]="1" [side]="'double'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[materialType]="'overrideMaterial'" 
+ * 	[materialType]="'overrideMaterial'"
  * 	[type]="'MeshDepthMaterial'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshDepth'" 
- * 	[depthPacking]="'RGBA'" [displacementMap]="displacementMap" 
- * 	[displacementScale]="2.436143" [displacementBias]="-0.428408" 
+ * 	[type]="'MeshDepth'"
+ * 	[depthPacking]="'RGBA'" [displacementMap]="displacementMap"
+ * 	[displacementScale]="2.436143" [displacementBias]="-0.428408"
  * 	[side]="controls.side"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshDistance'" 
+ * 	[type]="'MeshDistance'"
  * 	[materialType]="'customdistance'" [alphaTest]="0.5" [alphaMap]="alphaMap"
  * ></ngx3js-material>
  * <ngx3js-material
@@ -77,25 +77,25 @@ import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
  * 	[type]="'MeshNormal'" [color]="'0xff0000'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshPhongMaterial'" 
- * 	[specular]="'0x333333'" [shininess]="5" 
- * 	[map]="'textures/planets/earth_atmos_2048.jpg'" 
- * 	[specularMap]="'textures/planets/earth_specular_2048.jpg'" 
- * 	[normalMap]="'textures/planets/earth_normal_2048.jpg'" 
+ * 	[type]="'MeshPhongMaterial'"
+ * 	[specular]="'0x333333'" [shininess]="5"
+ * 	[map]="'textures/planets/earth_atmos_2048.jpg'"
+ * 	[specularMap]="'textures/planets/earth_specular_2048.jpg'"
+ * 	[normalMap]="'textures/planets/earth_normal_2048.jpg'"
  * 	[normalScale]="0.85"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'MeshPhysicalMaterial'" 
- * 	[roughness]="info.roughness" [metalness]="info.metalness" 
- * 	[color]="'0xffffff'" 
+ * 	[type]="'MeshPhysicalMaterial'"
+ * 	[roughness]="info.roughness" [metalness]="info.metalness"
+ * 	[color]="'0xffffff'"
  * 	[envMap]="radianceMap" [envMapIntensity]="1" [reflectivity]="1"
  * ></ngx3js-material>
  * <ngx3js-material
  * 	#sphereMaterial
- * 	[type]="'MeshStandardMaterial'" 
+ * 	[type]="'MeshStandardMaterial'"
  * 	[color]="'0x888855'" [roughness]="0.8" [metalness]="0.5"
  * ></ngx3js-material>
- * <ngx3js-material 
+ * <ngx3js-material
  * 	[type]="'MeshToonMaterial'" [color]="info.color"
  * ></ngx3js-texture>
  * <ngx3js-material
@@ -108,18 +108,18 @@ import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
  * 	}" [shader]="'instancing'" [side]="'double'" [transparent]="true"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'ShaderMaterial'" 
- * 	[shader]="'audioVisualizer'" 
+ * 	[type]="'ShaderMaterial'"
+ * 	[shader]="'audioVisualizer'"
  * 	[uniforms]="{ tAudioData: { type: 'DataTexture', value: audio } }"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'ShadowMaterial'" 
+ * 	[type]="'ShadowMaterial'"
  * 	[color]="'0x111111'"
  * ></ngx3js-material>
  * <ngx3js-material
- * 	[type]="'Line'" 
- * 	[color]="'0x4080ff'" 
- * 	[linewidth]="5" [dashed]="true" [dashScale]="5" [dashSize]="2" 
+ * 	[type]="'Line'"
+ * 	[color]="'0x4080ff'"
+ * 	[linewidth]="5" [dashed]="true" [dashScale]="5" [dashSize]="2"
  * 	[gapSize]="3" [resolutionX]="1024" [resolutionY]="1024"
  * ></ngx3js-material>
  * <ngx3js-material
@@ -690,6 +690,11 @@ export class MaterialComponent
 	 * The reflector of material component
 	 */
 	@Input() public reflector: any = null;
+
+	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
+	 */
+	@Input() public flatShading: boolean = null;
 
 	/**
 	 * Content children of material component
@@ -1674,7 +1679,7 @@ export class MaterialComponent
 	 * Sets assign uniforms
 	 * @param resultUniforms
 	 */
-	 private setAssignUniforms(resultUniforms: { [key: string]: THREE.IUniform }) {
+	private setAssignUniforms(resultUniforms: { [key: string]: THREE.IUniform }) {
 		if (ThreeUtil.isNotNull(this.uniforms)) {
 			Object.entries(resultUniforms).forEach(([key, value]) => {
 				this.uniforms[key] = value;
@@ -3116,6 +3121,9 @@ export class MaterialComponent
 						const parametersLineDashedMaterial: THREE.LineDashedMaterialParameters =
 							{
 								color: this.getColor(),
+								linewidth: ThreeUtil.getTypeSafe(this.linewidth),
+								linecap: ThreeUtil.getTypeSafe(this.linecap),
+								linejoin: ThreeUtil.getTypeSafe(this.linejoin),
 								vertexColors: this.getVertexColors(),
 								dashSize: ThreeUtil.getTypeSafe(this.dashSize),
 								gapSize: ThreeUtil.getTypeSafe(this.gapSize),
@@ -3212,6 +3220,7 @@ export class MaterialComponent
 									this.displacementScale
 								),
 								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
+								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
 								// skinning: this.getSkinning(),
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
@@ -3240,6 +3249,7 @@ export class MaterialComponent
 								wireframeLinewidth: ThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
+								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
 								// skinning: this.getSkinning(),
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
@@ -3296,6 +3306,7 @@ export class MaterialComponent
 								wireframeLinejoin: ThreeUtil.getTypeSafe(
 									this.wireframeLinejoin
 								),
+								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
 							};
 						material = new THREE_MAT.NgxMeshPhongMaterial(
 							this.getMaterialParameters(parametersMeshPhongMaterial)
@@ -3400,6 +3411,7 @@ export class MaterialComponent
 								wireframeLinewidth: ThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
+								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
 								// skinning: this.getSkinning(),
 								// vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),

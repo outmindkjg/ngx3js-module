@@ -231,6 +231,20 @@ export interface ThreeVector {
 }
 
 /**
+ * MaterialParameters
+ */
+export interface MaterialParameters{
+    fog?: boolean | undefined;
+    opacity?: number | undefined;
+    side?: string | undefined;
+    shadowSide?: string | undefined;
+    toneMapped?: boolean | undefined;
+    transparent?: boolean | undefined;
+    vertexColors?: boolean | undefined;
+    visible?: boolean | undefined;
+}
+
+/**
  * Three Face
  */
 export interface ThreeFace {
@@ -2464,6 +2478,35 @@ export class ThreeUtil {
 			default:
 				return undefined;
 		}
+	}
+
+	/**
+	 * Gets side
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.Side
+	 * @see THREE.FrontSide - FrontSide , Front
+	 * @see THREE.BackSide - BackSide , Back
+	 * @see THREE.DoubleSide - DoubleSide , Double
+	 *
+	 * @param [def]
+	 * @returns side
+	 */
+	 public static getSideSafe(baseSide : string, altSide?: string, def?: string): THREE.Side {
+		const side = ThreeUtil.getTypeSafe(baseSide, altSide, def || '');
+		switch (side.toLowerCase()) {
+			case 'backside':
+			case 'back':
+				return THREE.BackSide;
+			case 'doubleside':
+			case 'double':
+				return THREE.DoubleSide;
+			case 'frontside':
+			case 'front':
+				return THREE.FrontSide;
+		}
+		return undefined;
 	}
 
 	/**

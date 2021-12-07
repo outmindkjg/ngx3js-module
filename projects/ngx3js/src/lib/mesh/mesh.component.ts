@@ -5,11 +5,9 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as THREE from 'three';
-import * as THREE_OBJ from './objects/three-objects';
-
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
@@ -21,7 +19,7 @@ import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractio
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 import { CurveComponent } from '../curve/curve.component';
 import { HtmlComponent } from '../html/html.component';
-import { CssStyle, ThreeColor, ThreeUtil } from '../interface';
+import { CssStyle, MaterialParameters, ThreeColor, ThreeUtil } from '../interface';
 import { LensflareelementComponent } from '../lensflareelement/lensflareelement.component';
 import { MaterialComponent } from '../material/material.component';
 import { AbstractObject3dComponent } from '../object3d.abstract';
@@ -32,7 +30,8 @@ import { SceneUtils } from '../threejs-library/SceneUtils';
 import { HelperComponent, HelperOptions } from './../helper/helper.component';
 import { LightComponent, LightOptions } from './../light/light.component';
 import { LocalStorageService } from './../local-storage.service';
-import { ReflectorForSSRPass } from './../threejs-library/ReflectorForSSRPass';
+import * as THREE_OBJ from './objects/three-objects';
+
 
 /**
  * Volume Options
@@ -546,7 +545,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The makeMatrix of mesh component
 	 */
-	@Input() public makeMatrix: (mat: THREE.Matrix4, index?: number) => void =
+	@Input() public makeMatrix: (matrix4: THREE.Matrix4, index?: number) => void =
 		null;
 
 	/**
@@ -604,6 +603,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @see THREE.RGBDEncoding - RGBDEncoding ,
 	 */
 	@Input() public encoding: string = null;
+
+	/**
+	 * Input  of mesh component
+	 */
+	@Input() public materialOption: MaterialParameters = null;
 
 	/**
 	 * The shareParts of mesh component
@@ -1723,7 +1727,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'html':
 				case 'htmlmesh':
-					basemesh = new THREE_OBJ.NgxHTMLMesh(this.getCssTag());
+					basemesh = new THREE_OBJ.NgxHTMLMesh(this.getCssTag(), this.materialOption);
 					break;
 				case 'svg':
 				case 'svgobject':
@@ -1840,7 +1844,9 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					);
 					basemesh = refractor;
 					break;
+				case 'reflectorforssrmesh':
 				case 'reflectorforssrpass':
+				case 'reflectorforssr':
 					const reflectorForSSRPassSize = this.getTextureSize();
 					const reflectorForSSRPass = new THREE_OBJ.NgxReflectorForSSRMesh(
 						geometry,
