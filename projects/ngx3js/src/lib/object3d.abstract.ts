@@ -24,6 +24,7 @@ import { RigidbodyComponent } from './rigidbody/rigidbody.component';
 import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
 import { AbstractTweenComponent } from './tween.abstract';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * Object3d options
@@ -928,14 +929,14 @@ export class AbstractObject3dComponent
 	/**
 	 * The Object3d of abstract object3d component
 	 */
-	protected object3d: THREE.Object3D = null;
+	protected object3d: THREE_CORE.Object3D = null;
 
 	/**
 	 * Gets object3d
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.Object3D>(): T {
 		return this.object3d as T;
 	}
 

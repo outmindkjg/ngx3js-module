@@ -17,6 +17,7 @@ import { MeshComponent } from './mesh/mesh.component';
 import { RendererComponent } from './renderer/renderer.component';
 import { SceneComponent } from './scene/scene.component';
 import { GUI } from './threejs-library/lil-gui';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * Apply matrix4
@@ -988,7 +989,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	public setMesh(mesh: MeshComponent) {
 		this.mesh = mesh;
 		if (this.mesh !== null) {
-			this.meshObject3d = this.mesh.getObject3d();
+			this.meshObject3d = this.mesh.getObject3d() as THREE_CORE.Object3D;
 			this.meshChildren = this.meshObject3d.children;
 			window.setTimeout(() => {
 				this.updateGuiController();

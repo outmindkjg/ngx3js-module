@@ -31,6 +31,7 @@ import { HelperComponent, HelperOptions } from './../helper/helper.component';
 import { LightComponent, LightOptions } from './../light/light.component';
 import { LocalStorageService } from './../local-storage.service';
 import * as THREE_OBJ from './objects/three-objects';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 
 /**
@@ -1275,7 +1276,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param wireframe
 	 * @param [child]
 	 */
-	public setWireFrame(wireframe: boolean, child: THREE.Object3D = null) {
+	public setWireFrame(wireframe: boolean, child: THREE_CORE.Object3D = null) {
 		if (child === null) {
 			child = this.object3d;
 		}
@@ -1395,7 +1396,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 								const volumeMax: number = (volume as any).max;
 								const volumeMin: number = (volume as any).min;
 								Object.entries(this.volumeOption).forEach(([key, value]) => {
-									let sliceMesh: THREE.Object3D = null;
+									let sliceMesh: THREE_CORE.Object3D = null;
 									let rasDimensionsSize: number = 0;
 									switch (key.toLowerCase()) {
 										case 'helpervisible':
@@ -1561,7 +1562,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Css clazz name of mesh component
 	 */
 	private cssClazzName: string = null;
-	private mesh: THREE.Object3D = null;
+	private mesh: THREE_CORE.Object3D = null;
 
 	/**
 	 * Gets real mesh
@@ -1589,7 +1590,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 		) {
 			return this.mesh.userData.refTarget;
 		}
-		let mesh: THREE.Object3D = this.mesh;
+		let mesh: THREE_CORE.Object3D = this.mesh;
 		while (mesh.children && mesh.children.length > 0) {
 			mesh = mesh.children[0];
 			if (
@@ -1632,7 +1633,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.Object3D>(): T {
 		return this.getMesh();
 	}
 
@@ -1661,7 +1662,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 			) {
 				geometry = this.getGeometry();
 			}
-			let basemesh: THREE.Object3D = null;
+			let basemesh: THREE_CORE.Object3D = null;
 			switch (this.type.toLowerCase()) {
 				case 'skybox':
 					const skyboxSize = this.getSkyboxSize(1500);
@@ -1678,7 +1679,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							);
 							lensflare.position.set(0, 0, skyboxSize * 0.99);
 							lensflare.position.applyEuler(this.getSkySunPosition());
-							basemesh = lensflare;
+							basemesh = lensflare ;
 							break;
 						case 'box':
 						case 'sphere':
@@ -2548,7 +2549,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Sets mesh
 	 * @param mesh
 	 */
-	private setMesh(mesh: THREE.Object3D) {
+	private setMesh(mesh: THREE_CORE.Object3D) {
 		if (mesh !== null && this.mesh !== mesh) {
 			if (
 				mesh instanceof THREE.Mesh ||

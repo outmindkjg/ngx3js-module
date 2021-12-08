@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeColor, ThreeUtil } from './../interface';
+import * as THREE_FOG from './fogs/three-fogs';
 
 /**
  * The Fog component.
@@ -204,14 +205,14 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 				case 'exp':
 				case 'exp2':
 				case 'fogexp2':
-					this.fog = new THREE.FogExp2(
+					this.fog = new THREE_FOG.NgxFogExp2(
 						ThreeUtil.getColorSafe(this.color, 0xffffff).getHex(),
 						ThreeUtil.getTypeSafe(this.density, 0.00025)
 					);
 					break;
 				case 'fog':
 				default:
-					this.fog = new THREE.Fog(
+					this.fog = new THREE_FOG.NgxFog(
 						ThreeUtil.getColorSafe(this.color, 0xffffff),
 						ThreeUtil.getTypeSafe(this.near),
 						ThreeUtil.getTypeSafe(this.far)

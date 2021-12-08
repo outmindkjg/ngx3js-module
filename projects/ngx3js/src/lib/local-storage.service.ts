@@ -81,6 +81,7 @@ import {
 	StorageOption,
 	StorageExportOption,
 } from './interface';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * Local Storage Service
@@ -120,7 +121,7 @@ export class LocalStorageService {
 	 * @param key
 	 * @param mesh
 	 */
-	public setObject(key: string, mesh: THREE.Object3D) {
+	public setObject(key: string, mesh: THREE_CORE.Object3D) {
 		this.setItem(key, JSON.stringify(mesh.toJSON()));
 	}
 

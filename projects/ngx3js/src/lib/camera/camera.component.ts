@@ -9,7 +9,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
-import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
+import * as THREE_CAMERA from './cameras/three-cameras';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { AbstractObject3dComponent } from '../object3d.abstract';
@@ -1079,15 +1079,15 @@ export class CameraComponent
 			switch (this.type.toLowerCase()) {
 				case 'arraycamera':
 				case 'array':
-					this.camera = new THREE.ArrayCamera();
+					this.camera = new THREE_CAMERA.NgxArrayCamera();
 					break;
 				case 'stereocamera':
 				case 'stereo':
-					this.camera = new THREE.StereoCamera();
+					this.camera = new THREE_CAMERA.NgxStereoCamera();
 					break;
 				case 'cubecamera':
 				case 'cube':
-					this.camera = new THREE.CubeCamera(
+					this.camera = new THREE_CAMERA.NgxCubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
 						new THREE.WebGLCubeRenderTarget(512, {
@@ -1108,7 +1108,7 @@ export class CameraComponent
 						generateMipmaps: true,
 						minFilter: THREE.LinearMipmapLinearFilter,
 					});
-					const cubeCamera1 = new THREE.CubeCamera(
+					const cubeCamera1 = new THREE_CAMERA.NgxCubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
 						webGLCubeRenderTarget1
@@ -1119,7 +1119,7 @@ export class CameraComponent
 						generateMipmaps: true,
 						minFilter: THREE.LinearMipmapLinearFilter,
 					});
-					const cubeCamera2 = new THREE.CubeCamera(
+					const cubeCamera2 = new THREE_CAMERA.NgxCubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
 						webGLCubeRenderTarget2
@@ -1130,7 +1130,7 @@ export class CameraComponent
 					this.cameraExtra.push(cubeCamera1, cubeCamera2);
 					break;
 				case 'cinematic':
-					this.camera = new CinematicCamera(
+					this.camera = new THREE_CAMERA.NgxCinematicCamera(
 						this.getFov(50),
 						this.getAspect(width, height),
 						this.getNear(0.1),
@@ -1141,7 +1141,7 @@ export class CameraComponent
 				case 'orthographic':
 				case 'ortho':
 					const aspect = width / height;
-					const orthographicCamera = new THREE.OrthographicCamera(
+					const orthographicCamera = new THREE_CAMERA.NgxOrthographicCamera(
 						this.getLeft(aspect),
 						this.getRight(aspect),
 						this.getTop(),
@@ -1157,7 +1157,7 @@ export class CameraComponent
 				case 'perspectivecamera':
 				case 'perspective':
 				default:
-					const perspectiveCamera: any = new THREE.PerspectiveCamera(
+					const perspectiveCamera: any = new THREE_CAMERA.NgxPerspectiveCamera(
 						this.getFov(50),
 						this.getAspect(width, height),
 						this.getNear(0.1),

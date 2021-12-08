@@ -41,6 +41,7 @@ import {
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { ThreeUtil, MaterialParameters } from '../../interface';
 import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * Lensflare mesh
@@ -49,7 +50,7 @@ import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Lensflare) page for a live demo.
  *
  */
-export class NgxSkyboxLensflare extends Lensflare {
+export class NgxSkyboxLensflare extends Lensflare{
 	/**
 	 * Creates an instance of ngx skybox lensflare.
 	 */
@@ -365,7 +366,7 @@ export class NgxLineLoop extends THREE.LineLoop {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Lensflare) page for a live demo.
  *
  */
-export class NgxLensflare extends Lensflare {
+export class NgxLensflare extends Lensflare{
 	/**
 	 * Creates an instance of ngx lensflare.
 	 */
@@ -381,7 +382,7 @@ export class NgxLensflare extends Lensflare {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/InstancedMesh) page for a live demo.
  *
  */
-export class NgxInstancedMesh extends THREE.InstancedMesh {
+export class NgxInstancedMesh extends THREE.InstancedMesh{
 	/**
 	 * Creates an instance of ngx instanced mesh.
 	 * @param geometry
@@ -404,7 +405,7 @@ export class NgxInstancedMesh extends THREE.InstancedMesh {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Sprite) page for a live demo.
  *
  */
-export class NgxSprite extends THREE.Sprite {
+export class NgxSprite extends THREE.Sprite{
 	/**
 	 * Creates an instance of ngx sprite.
 	 * @param [material]
@@ -421,7 +422,7 @@ export class NgxSprite extends THREE.Sprite {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Wireframe) page for a live demo.
  *
  */
-export class NgxWireframe extends Wireframe {
+export class NgxWireframe extends Wireframe{
 	/**
 	 * Creates an instance of ngx wireframe.
 	 * @param [geometry]
@@ -439,7 +440,7 @@ export class NgxWireframe extends Wireframe {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/MarchingCubes) page for a live demo.
  *
  */
-export class NgxMarchingCubes extends MarchingCubes {
+export class NgxMarchingCubes extends MarchingCubes{
 	/**
 	 * Creates an instance of ngx marching cubes.
 	 * @param resolution
@@ -466,7 +467,7 @@ export class NgxMarchingCubes extends MarchingCubes {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Points) page for a live demo.
  *
  */
-export class NgxPoints extends THREE.Points {
+export class NgxPoints extends THREE.Points{
 	/**
      * Creates an instance of ngx points.
      * @param [geometry] 
@@ -487,7 +488,7 @@ export class NgxPoints extends THREE.Points {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Line) page for a live demo.
  *
  */
-export class NgxLine extends THREE.Line {
+export class NgxLine extends THREE.Line{
 	/**
      * Creates an instance of ngx line.
      * @param [geometry] 
@@ -508,7 +509,7 @@ export class NgxLine extends THREE.Line {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/TubePainter) page for a live demo.
  *
  */
-export class NgxTubePainter extends TubePainter {
+export class NgxTubePainter extends TubePainter{
 	/**
      * Creates an instance of ngx tube painter.
      */
@@ -524,7 +525,7 @@ export class NgxTubePainter extends TubePainter {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/MeshText) page for a live demo.
  *
  */
-export class NgxMeshText extends THREE.Mesh {
+export class NgxMeshText extends THREE.Mesh{
 	/**
 	 * Creates an instance of mesh text.
 	 * @param message
@@ -582,7 +583,7 @@ export class NgxMeshText extends THREE.Mesh {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Line2) page for a live demo.
  *
  */
-export class NgxLine2 extends Line2 {
+export class NgxLine2 extends Line2{
 	/**
      * Creates an instance of ngx line2.
      * @param [geometry] 
@@ -600,7 +601,7 @@ export class NgxLine2 extends Line2 {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LineSegments) page for a live demo.
  *
  */
-export class NgxLineSegments extends THREE.LineSegments {
+export class NgxLineSegments extends THREE.LineSegments{
 	/**
      * Creates an instance of ngx line segments.
      * @param [geometry] 
@@ -621,7 +622,7 @@ export class NgxLineSegments extends THREE.LineSegments {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/InteractiveGroup) page for a live demo.
  *
  */
-export class NgxInteractiveGroup extends InteractiveGroup {
+export class NgxInteractiveGroup extends InteractiveGroup{
 	/**
      * Creates an instance of ngx interactive group.
      * @param renderer 
@@ -656,7 +657,7 @@ export class NgxLightningStorm extends LightningStorm {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Group) page for a live demo.
  *
  */
-export class NgxGroup extends THREE.Group {
+export class NgxGroup extends THREE.Group{
 	/**
      * Creates an instance of ngx group.
      */
@@ -672,7 +673,7 @@ export class NgxGroup extends THREE.Group {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Mesh) page for a live demo.
  *
  */
-export class NgxMesh extends THREE.Mesh {
+export class NgxMesh extends THREE.Mesh{
 	/**
 	 * Creates an instance of ngx mesh.
 	 *
