@@ -5,7 +5,7 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
@@ -19,7 +19,12 @@ import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractio
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 import { CurveComponent } from '../curve/curve.component';
 import { HtmlComponent } from '../html/html.component';
-import { CssStyle, MaterialParameters, ThreeColor, ThreeUtil } from '../interface';
+import {
+	CssStyle,
+	MaterialParameters,
+	ThreeColor,
+	ThreeUtil,
+} from '../interface';
 import { LensflareelementComponent } from '../lensflareelement/lensflareelement.component';
 import { MaterialComponent } from '../material/material.component';
 import { AbstractObject3dComponent } from '../object3d.abstract';
@@ -32,7 +37,6 @@ import { LightComponent, LightOptions } from './../light/light.component';
 import { LocalStorageService } from './../local-storage.service';
 import * as THREE_OBJ from './objects/three-objects';
 import * as THREE_CORE from './../threejs-library/three-core';
-
 
 /**
  * Volume Options
@@ -1157,7 +1161,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * Clip mesh of mesh component
 	 */
-	private clipMesh: THREE.Object3D = null;
+	private clipMesh: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Storage source of mesh component
@@ -1263,7 +1267,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getMesh();
 			return true;
@@ -1276,7 +1280,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param wireframe
 	 * @param [child]
 	 */
-	public setWireFrame(wireframe: boolean, child: THREE_CORE.Object3D = null) {
+	public setWireFrame(wireframe: boolean, child: THREE_CORE.IObject3D = null) {
 		if (child === null) {
 			child = this.object3d;
 		}
@@ -1396,7 +1400,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 								const volumeMax: number = (volume as any).max;
 								const volumeMin: number = (volume as any).min;
 								Object.entries(this.volumeOption).forEach(([key, value]) => {
-									let sliceMesh: THREE_CORE.Object3D = null;
+									let sliceMesh: THREE_CORE.IObject3D = null;
 									let rasDimensionsSize: number = 0;
 									switch (key.toLowerCase()) {
 										case 'helpervisible':
@@ -1562,7 +1566,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Css clazz name of mesh component
 	 */
 	private cssClazzName: string = null;
-	private mesh: THREE_CORE.Object3D = null;
+	private mesh: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Gets real mesh
@@ -1590,7 +1594,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 		) {
 			return this.mesh.userData.refTarget;
 		}
-		let mesh: THREE_CORE.Object3D = this.mesh;
+		let mesh: THREE_CORE.IObject3D = this.mesh;
 		while (mesh.children && mesh.children.length > 0) {
 			mesh = mesh.children[0];
 			if (
@@ -1633,7 +1637,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE_CORE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
 		return this.getMesh();
 	}
 
@@ -1642,7 +1646,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @template T
 	 * @returns mesh
 	 */
-	public getMesh<T extends THREE.Object3D>(): T {
+	public getMesh<T extends THREE_CORE.IObject3D>(): T {
 		if (this.mesh === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.setUserData('refTarget', null);
@@ -1662,7 +1666,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 			) {
 				geometry = this.getGeometry();
 			}
-			let basemesh: THREE_CORE.Object3D = null;
+			let basemesh: any = null;
 			switch (this.type.toLowerCase()) {
 				case 'skybox':
 					const skyboxSize = this.getSkyboxSize(1500);
@@ -1679,7 +1683,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							);
 							lensflare.position.set(0, 0, skyboxSize * 0.99);
 							lensflare.position.applyEuler(this.getSkySunPosition());
-							basemesh = lensflare ;
+							basemesh = lensflare;
 							break;
 						case 'box':
 						case 'sphere':
@@ -1728,7 +1732,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'html':
 				case 'htmlmesh':
-					basemesh = new THREE_OBJ.NgxHTMLMesh(this.getCssTag(), this.materialOption);
+					basemesh = new THREE_OBJ.NgxHTMLMesh(
+						this.getCssTag(),
+						this.materialOption
+					);
 					break;
 				case 'svg':
 				case 'svgobject':
@@ -2189,12 +2196,12 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						geometry,
 						this.getMaterialsMulti()
 					);
-					basemesh.children.forEach(function (e) {
+					basemesh.children.forEach((e: any) => {
 						e.castShadow = true;
 					});
 					if (this.scaleStep != 1) {
 						let scaleStep = this.scaleStep;
-						basemesh.children.forEach((mesh) => {
+						basemesh.children.forEach((mesh: any) => {
 							mesh.scale.x *= scaleStep;
 							mesh.scale.y *= scaleStep;
 							mesh.scale.z *= scaleStep;
@@ -2342,11 +2349,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 								if (this.receiveShadow) {
 									character.enableShadows(this.receiveShadow);
 								}
-								basemesh.children.forEach((child) => {
+								basemesh.children.forEach((child: any) => {
 									child.parent.remove(child);
 								});
 								basemesh.add(character.root);
-								this.clipMesh = character.root;
+								this.clipMesh = character.root as any;
 								this.clips = character;
 								this.setUserData('refTarget', character);
 								this.setUserData('clips', this.clips);
@@ -2485,7 +2492,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 										this.addChanges(['volumeoption']);
 									}
 									loadedMesh.parent = null;
-									this.setMesh(loadedMesh);
+									this.setMesh(loadedMesh as any);
 									if (
 										ThreeUtil.isNotNull(source) &&
 										ThreeUtil.isNotNull(source.skeleton) &&
@@ -2514,7 +2521,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						}
 						if (clipMeshClone !== null) {
 							basemesh = clipMeshClone;
-							basemesh.traverse((object) => {
+							basemesh.traverse((object: any) => {
 								if (object instanceof THREE.Mesh) {
 									object.castShadow = this.castShadow;
 									object.receiveShadow = this.receiveShadow;
@@ -2549,7 +2556,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Sets mesh
 	 * @param mesh
 	 */
-	private setMesh(mesh: THREE_CORE.Object3D) {
+	private setMesh(mesh: THREE_CORE.IObject3D) {
 		if (mesh !== null && this.mesh !== mesh) {
 			if (
 				mesh instanceof THREE.Mesh ||

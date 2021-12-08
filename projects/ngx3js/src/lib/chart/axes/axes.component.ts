@@ -573,7 +573,7 @@ export class ChartAxesComponent
 				gridYMesh.name = 'gridy';
 				this._axes.add(gridYMesh);
 			}
-			this.setChart(this._axes);
+			this.setChart(this._axes as any);
 		}
 		return this._axes as T;
 	}

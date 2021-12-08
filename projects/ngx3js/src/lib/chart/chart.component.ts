@@ -792,7 +792,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @param mesh
 	 */
 	public setToolTip(mesh: MeshComponent) {
-		this.tooltip = mesh.getMesh();
+		this.tooltip = mesh.getMesh() as any;
 	}
 
 	/**

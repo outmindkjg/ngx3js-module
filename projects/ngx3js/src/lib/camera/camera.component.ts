@@ -16,6 +16,7 @@ import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { RendererTimer, ThreeColor, ThreeUtil } from './../interface';
 import { LocalStorageService } from './../local-storage.service';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Camera component.
@@ -30,7 +31,7 @@ import { LocalStorageService } from './../local-storage.service';
  * 	[type]="'perspective'" [fov]="45" [near]="0.1" [far]="200"
  * ></ngx3js-camera>
  * <ngx3js-camera
- * 	[type]="'OrthographicCamera'" [orthoSize]="500" [fov]="45 " 
+ * 	[type]="'OrthographicCamera'" [orthoSize]="500" [fov]="45 "
  * 	[near]="1" [far]="1000"
  * ></ngx3js-camera>
  * <ngx3js-camera
@@ -717,7 +718,7 @@ export class CameraComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getCamera();
 			return true;
@@ -1189,11 +1190,11 @@ export class CameraComponent
 				this.parentObject3d.cameras.push(
 					this.camera as THREE.PerspectiveCamera
 				);
-				this.object3d = this.camera;
+				this.object3d = this.camera as any;
 				this.setObject(this.camera);
 			} else {
 				this.isCameraChild = false;
-				this.setObject3d(this.camera);
+				this.setObject3d(this.camera as any);
 			}
 			this.setUserData('clips', null);
 			if (ThreeUtil.isNotNull(this.storageName)) {

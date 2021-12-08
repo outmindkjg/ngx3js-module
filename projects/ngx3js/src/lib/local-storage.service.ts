@@ -121,7 +121,7 @@ export class LocalStorageService {
 	 * @param key
 	 * @param mesh
 	 */
-	public setObject(key: string, mesh: THREE_CORE.Object3D) {
+	public setObject(key: string, mesh: THREE_CORE.IObject3D) {
 		this.setItem(key, JSON.stringify(mesh.toJSON()));
 	}
 

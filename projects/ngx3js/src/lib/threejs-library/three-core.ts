@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export type Matrix4Tuple = [
+export type TMatrix4Tuple = [
 	number,
 	number,
 	number,
@@ -28,7 +28,7 @@ export type Matrix4Tuple = [
  * const vector = new THREE.Vector3( 1, 0, 0 );
  * vector.applyQuaternion( quaternion );
  */
-export interface Quaternion {
+export interface IQuaternion {
 	/**
 	 * @default 0
 	 */
@@ -53,7 +53,7 @@ export interface Quaternion {
 	/**
 	 * Sets values of this quaternion.
 	 */
-	set(x: number, y: number, z: number, w: number): Quaternion;
+	set(x: number, y: number, z: number, w: number): IQuaternion;
 
 	/**
 	 * Clones this quaternion.
@@ -63,37 +63,37 @@ export interface Quaternion {
 	/**
 	 * Copies values of q to this quaternion.
 	 */
-	copy(q: Quaternion): this;
+	copy(q: IQuaternion): this;
 
 	/**
 	 * Sets this quaternion from rotation specified by Euler angles.
 	 */
-	setFromEuler(euler: Euler, update?: boolean): Quaternion;
+	setFromEuler(euler: IEuler, update?: boolean): IQuaternion;
 
 	/**
 	 * Sets this quaternion from rotation specified by axis and angle.
 	 * Adapted from http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm.
 	 * Axis have to be normalized, angle is in radians.
 	 */
-	setFromAxisAngle(axis: Vector3, angle: number): Quaternion;
+	setFromAxisAngle(axis: IVector3, angle: number): IQuaternion;
 
 	/**
 	 * Sets this quaternion from rotation component of m. Adapted from http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm.
 	 */
-	setFromRotationMatrix(m: Matrix4): Quaternion;
-	setFromUnitVectors(vFrom: Vector3, vTo: Vector3): Quaternion;
-	angleTo(q: Quaternion): number;
-	rotateTowards(q: Quaternion, step: number): Quaternion;
+	setFromRotationMatrix(m: IMatrix4): IQuaternion;
+	setFromUnitVectors(vFrom: IVector3, vTo: IVector3): IQuaternion;
+	angleTo(q: IQuaternion): number;
+	rotateTowards(q: IQuaternion, step: number): IQuaternion;
 
-	identity(): Quaternion;
+	identity(): IQuaternion;
 
 	/**
 	 * Inverts this quaternion.
 	 */
-	invert(): Quaternion;
+	invert(): IQuaternion;
 
-	conjugate(): Quaternion;
-	dot(v: Quaternion): number;
+	conjugate(): IQuaternion;
+	dot(v: IQuaternion): number;
 	lengthSq(): number;
 
 	/**
@@ -104,23 +104,23 @@ export interface Quaternion {
 	/**
 	 * Normalizes this quaternion.
 	 */
-	normalize(): Quaternion;
+	normalize(): IQuaternion;
 
 	/**
 	 * Multiplies this quaternion by b.
 	 */
-	multiply(q: Quaternion): Quaternion;
-	premultiply(q: Quaternion): Quaternion;
+	multiply(q: IQuaternion): IQuaternion;
+	premultiply(q: IQuaternion): IQuaternion;
 
 	/**
 	 * Sets this quaternion to a x b
 	 * Adapted from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm.
 	 */
-	multiplyQuaternions(a: Quaternion, b: Quaternion): Quaternion;
+	multiplyQuaternions(a: IQuaternion, b: IQuaternion): IQuaternion;
 
-	slerp(qb: Quaternion, t: number): Quaternion;
-	slerpQuaternions(qa: Quaternion, qb: Quaternion, t: number): Quaternion;
-	equals(v: Quaternion): boolean;
+	slerp(qb: IQuaternion, t: number): IQuaternion;
+	slerpQuaternions(qa: IQuaternion, qb: IQuaternion, t: number): IQuaternion;
+	equals(v: IQuaternion): boolean;
 
 	/**
 	 * Sets this quaternion's x, y, z and w value from the provided array or array-like.
@@ -145,23 +145,23 @@ export interface Quaternion {
 	 */
 	toArray(array: ArrayLike<number>, offset?: number): ArrayLike<number>;
 
-	_onChange(callback: () => void): Quaternion;
+	_onChange(callback: () => void): IQuaternion;
 	_onChangeCallback: () => void;
 
 	/**
-	 * @deprecated Use {@link Vector#applyQuaternion vector.applyQuaternion( quaternion )} instead.
+	 * @deprecated Use {@link IVector#applyQuaternion vector.applyQuaternion( quaternion )} instead.
 	 */
 	multiplyVector3(v: any): any;
 
 	/**
-	 * @deprecated Use {@link Quaternion#invert .invert()} instead.
+	 * @deprecated Use {@link IQuaternion#invert .invert()} instead.
 	 */
-	inverse(): Quaternion;
+	inverse(): IQuaternion;
 
-	random(): Quaternion;
+	random(): IQuaternion;
 }
 
-export type Matrix3Tuple = [
+export type TMatrix3Tuple = [
 	number,
 	number,
 	number,
@@ -176,7 +176,7 @@ export type Matrix3Tuple = [
 /**
  * ( interface Matrix<T> )
  */
-export interface Matrix {
+export interface IMatrix {
 	/**
 	 * Array with matrix values.
 	 */
@@ -185,7 +185,7 @@ export interface Matrix {
 	/**
 	 * identity():T;
 	 */
-	identity(): Matrix;
+	identity(): IMatrix;
 
 	/**
 	 * copy(m:T):T;
@@ -195,27 +195,27 @@ export interface Matrix {
 	/**
 	 * multiplyScalar(s:number):T;
 	 */
-	multiplyScalar(s: number): Matrix;
+	multiplyScalar(s: number): IMatrix;
 
 	determinant(): number;
 
 	/**
 	 * transpose():T;
 	 */
-	transpose(): Matrix;
+	transpose(): IMatrix;
 
 	/**
 	 * invert():T;
 	 */
-	invert(): Matrix;
+	invert(): IMatrix;
 
 	/**
 	 * clone():T;
 	 */
-	clone(): Matrix;
+	clone(): IMatrix;
 }
 
-export interface Matrix4 {
+export interface IMatrix4 {
 	/**
 	 * Array with matrix values.
 	 * @default [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
@@ -242,40 +242,40 @@ export interface Matrix4 {
 		n42: number,
 		n43: number,
 		n44: number
-	): Matrix4;
+	): IMatrix4;
 
 	/**
 	 * Resets this matrix to identity.
 	 */
-	identity(): Matrix4;
-	clone(): Matrix4;
-	copy(m: Matrix4): this;
-	copyPosition(m: Matrix4): Matrix4;
-	extractBasis(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3): Matrix4;
-	makeBasis(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3): Matrix4;
+	identity(): IMatrix4;
+	clone(): IMatrix4;
+	copy(m: IMatrix4): this;
+	copyPosition(m: IMatrix4): IMatrix4;
+	extractBasis(xAxis: IVector3, yAxis: IVector3, zAxis: IVector3): IMatrix4;
+	makeBasis(xAxis: IVector3, yAxis: IVector3, zAxis: IVector3): IMatrix4;
 
 	/**
 	 * Copies the rotation component of the supplied matrix m into this matrix rotation component.
 	 */
-	extractRotation(m: Matrix4): Matrix4;
-	makeRotationFromEuler(euler: Euler): Matrix4;
-	makeRotationFromQuaternion(q: Quaternion): Matrix4;
+	extractRotation(m: IMatrix4): IMatrix4;
+	makeRotationFromEuler(euler: IEuler): IMatrix4;
+	makeRotationFromQuaternion(q: IQuaternion): IMatrix4;
 	/**
 	 * Constructs a rotation matrix, looking from eye towards center with defined up vector.
 	 */
-	lookAt(eye: Vector3, target: Vector3, up: Vector3): Matrix4;
+	lookAt(eye: IVector3, target: IVector3, up: IVector3): IMatrix4;
 
 	/**
 	 * Multiplies this matrix by m.
 	 */
-	multiply(m: Matrix4): Matrix4;
+	multiply(m: IMatrix4): IMatrix4;
 
-	premultiply(m: Matrix4): Matrix4;
+	premultiply(m: IMatrix4): IMatrix4;
 
 	/**
 	 * Sets this matrix to a x b.
 	 */
-	multiplyMatrices(a: Matrix4, b: Matrix4): Matrix4;
+	multiplyMatrices(a: IMatrix4, b: IMatrix4): IMatrix4;
 
 	/**
 	 * Sets this matrix to a x b and stores the result into the flat array r.
@@ -283,12 +283,12 @@ export interface Matrix4 {
 	 *
 	 * @deprecated This method has been removed completely.
 	 */
-	multiplyToArray(a: Matrix4, b: Matrix4, r: number[]): Matrix4;
+	multiplyToArray(a: IMatrix4, b: IMatrix4, r: number[]): IMatrix4;
 
 	/**
 	 * Multiplies this matrix by s.
 	 */
-	multiplyScalar(s: number): Matrix4;
+	multiplyScalar(s: number): IMatrix4;
 
 	/**
 	 * Computes determinant of this matrix.
@@ -299,49 +299,49 @@ export interface Matrix4 {
 	/**
 	 * Transposes this matrix.
 	 */
-	transpose(): Matrix4;
+	transpose(): IMatrix4;
 
 	/**
 	 * Sets the position component for this matrix from vector v.
 	 */
-	setPosition(v: Vector3 | number, y?: number, z?: number): Matrix4;
+	setPosition(v: IVector3 | number, y?: number, z?: number): IMatrix4;
 
 	/**
 	 * Inverts this matrix.
 	 */
-	invert(): Matrix4;
+	invert(): IMatrix4;
 
 	/**
 	 * Multiplies the columns of this matrix by vector v.
 	 */
-	scale(v: Vector3): Matrix4;
+	scale(v: IVector3): IMatrix4;
 
 	getMaxScaleOnAxis(): number;
 	/**
 	 * Sets this matrix as translation transform.
 	 */
-	makeTranslation(x: number, y: number, z: number): Matrix4;
+	makeTranslation(x: number, y: number, z: number): IMatrix4;
 
 	/**
 	 * Sets this matrix as rotation transform around x axis by theta radians.
 	 *
 	 * @param theta Rotation angle in radians.
 	 */
-	makeRotationX(theta: number): Matrix4;
+	makeRotationX(theta: number): IMatrix4;
 
 	/**
 	 * Sets this matrix as rotation transform around y axis by theta radians.
 	 *
 	 * @param theta Rotation angle in radians.
 	 */
-	makeRotationY(theta: number): Matrix4;
+	makeRotationY(theta: number): IMatrix4;
 
 	/**
 	 * Sets this matrix as rotation transform around z axis by theta radians.
 	 *
 	 * @param theta Rotation angle in radians.
 	 */
-	makeRotationZ(theta: number): Matrix4;
+	makeRotationZ(theta: number): IMatrix4;
 
 	/**
 	 * Sets this matrix as rotation transform around axis by angle radians.
@@ -350,12 +350,12 @@ export interface Matrix4 {
 	 * @param axis Rotation axis.
 	 * @param theta Rotation angle in radians.
 	 */
-	makeRotationAxis(axis: Vector3, angle: number): Matrix4;
+	makeRotationAxis(axis: IVector3, angle: number): IMatrix4;
 
 	/**
 	 * Sets this matrix as scale transform.
 	 */
-	makeScale(x: number, y: number, z: number): Matrix4;
+	makeScale(x: number, y: number, z: number): IMatrix4;
 
 	/**
 	 * Sets this matrix as shear transform.
@@ -367,21 +367,25 @@ export interface Matrix4 {
 		yz: number,
 		zx: number,
 		zy: number
-	): Matrix4;
+	): IMatrix4;
 
 	/**
 	 * Sets this matrix to the transformation composed of translation, rotation and scale.
 	 */
-	compose(translation: Vector3, rotation: Quaternion, scale: Vector3): Matrix4;
+	compose(
+		translation: IVector3,
+		rotation: IQuaternion,
+		scale: IVector3
+	): IMatrix4;
 
 	/**
 	 * Decomposes this matrix into it's position, quaternion and scale components.
 	 */
 	decompose(
-		translation: Vector3,
-		rotation: Quaternion,
-		scale: Vector3
-	): Matrix4;
+		translation: IVector3,
+		rotation: IQuaternion,
+		scale: IVector3
+	): IMatrix4;
 
 	/**
 	 * Creates a frustum matrix.
@@ -393,7 +397,7 @@ export interface Matrix4 {
 		top: number,
 		near: number,
 		far: number
-	): Matrix4;
+	): IMatrix4;
 
 	/**
 	 * Creates a perspective projection matrix.
@@ -403,7 +407,7 @@ export interface Matrix4 {
 		aspect: number,
 		near: number,
 		far: number
-	): Matrix4;
+	): IMatrix4;
 
 	/**
 	 * Creates an orthographic projection matrix.
@@ -415,15 +419,15 @@ export interface Matrix4 {
 		bottom: number,
 		near: number,
 		far: number
-	): Matrix4;
-	equals(matrix: Matrix4): boolean;
+	): IMatrix4;
+	equals(matrix: IMatrix4): boolean;
 
 	/**
 	 * Sets the values of this matrix from the provided array or array-like.
 	 * @param array the source array or array-like.
 	 * @param offset (optional) offset into the array-like. Default is 0.
 	 */
-	fromArray(array: number[] | ArrayLike<number>, offset?: number): Matrix4;
+	fromArray(array: number[] | ArrayLike<number>, offset?: number): IMatrix4;
 
 	/**
 	 * Returns an array with the values of this matrix, or copies them into the provided array.
@@ -432,7 +436,7 @@ export interface Matrix4 {
 	 * @return The created or provided array.
 	 */
 	toArray(array?: number[], offset?: number): number[];
-	toArray(array?: Matrix4Tuple, offset?: 0): Matrix4Tuple;
+	toArray(array?: TMatrix4Tuple, offset?: 0): TMatrix4Tuple;
 
 	/**
 	 * Copies he values of this matrix into the provided array-like.
@@ -445,25 +449,25 @@ export interface Matrix4 {
 	/**
 	 * Set the upper 3x3 elements of this matrix to the values of the Matrix3 m.
 	 */
-	setFromMatrix3(m: Matrix3): Matrix4;
+	setFromMatrix3(m: IMatrix3): IMatrix4;
 
 	/**
-	 * @deprecated Use {@link Matrix4#copyPosition .copyPosition()} instead.
+	 * @deprecated Use {@link IMatrix4#copyPosition .copyPosition()} instead.
 	 */
-	extractPosition(m: Matrix4): Matrix4;
+	extractPosition(m: IMatrix4): IMatrix4;
 
 	/**
-	 * @deprecated Use {@link Matrix4#makeRotationFromQuaternion .makeRotationFromQuaternion()} instead.
+	 * @deprecated Use {@link IMatrix4#makeRotationFromQuaternion .makeRotationFromQuaternion()} instead.
 	 */
-	setRotationFromQuaternion(q: Quaternion): Matrix4;
+	setRotationFromQuaternion(q: IQuaternion): IMatrix4;
 
 	/**
-	 * @deprecated Use {@link Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+	 * @deprecated Use {@link IVector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 	 */
 	multiplyVector3(v: any): any;
 
 	/**
-	 * @deprecated Use {@link Vector4#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+	 * @deprecated Use {@link IVector4#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 	 */
 	multiplyVector4(v: any): any;
 
@@ -473,30 +477,30 @@ export interface Matrix4 {
 	multiplyVector3Array(array: number[]): number[];
 
 	/**
-	 * @deprecated Use {@link Vector3#transformDirection Vector3.transformDirection( matrix )} instead.
+	 * @deprecated Use {@link IVector3#transformDirection Vector3.transformDirection( matrix )} instead.
 	 */
 	rotateAxis(v: any): void;
 
 	/**
-	 * @deprecated Use {@link Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+	 * @deprecated Use {@link IVector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 	 */
 	crossVector(v: any): void;
 
 	/**
-	 * @deprecated Use {@link Matrix4#toArray .toArray()} instead.
+	 * @deprecated Use {@link IMatrix4#toArray .toArray()} instead.
 	 */
 	flattenToArrayOffset(array: number[], offset: number): number[];
 
 	/**
-	 * @deprecated Use {@link Matrix4#invert .invert()} instead.
+	 * @deprecated Use {@link IMatrix4#invert .invert()} instead.
 	 */
-	getInverse(matrix: Matrix): Matrix;
+	getInverse(matrix: IMatrix): IMatrix;
 }
 
 /**
  * ( class Matrix3 implements Matrix<Matrix3> )
  */
-export interface Matrix3 {
+export interface IMatrix3 {
 	/**
 	 * Array with matrix values.
 	 * @default [1, 0, 0, 0, 1, 0, 0, 0, 1]
@@ -513,30 +517,30 @@ export interface Matrix3 {
 		n31: number,
 		n32: number,
 		n33: number
-	): Matrix3;
-	identity(): Matrix3;
+	): IMatrix3;
+	identity(): IMatrix3;
 	clone(): this;
-	copy(m: Matrix3): this;
-	extractBasis(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3): Matrix3;
-	setFromMatrix4(m: Matrix4): Matrix3;
-	multiplyScalar(s: number): Matrix3;
+	copy(m: IMatrix3): this;
+	extractBasis(xAxis: IVector3, yAxis: IVector3, zAxis: IVector3): IMatrix3;
+	setFromMatrix4(m: IMatrix4): IMatrix3;
+	multiplyScalar(s: number): IMatrix3;
 	determinant(): number;
 
 	/**
 	 * Inverts this matrix in place.
 	 */
-	invert(): Matrix3;
+	invert(): IMatrix3;
 
 	/**
 	 * Transposes this matrix in place.
 	 */
-	transpose(): Matrix3;
-	getNormalMatrix(matrix4: Matrix4): Matrix3;
+	transpose(): IMatrix3;
+	getNormalMatrix(matrix4: IMatrix4): IMatrix3;
 
 	/**
 	 * Transposes this matrix into the supplied array r, and returns itself.
 	 */
-	transposeIntoArray(r: number[]): Matrix3;
+	transposeIntoArray(r: number[]): IMatrix3;
 
 	setUvTransform(
 		tx: number,
@@ -546,22 +550,22 @@ export interface Matrix3 {
 		rotation: number,
 		cx: number,
 		cy: number
-	): Matrix3;
+	): IMatrix3;
 
-	scale(sx: number, sy: number): Matrix3;
+	scale(sx: number, sy: number): IMatrix3;
 
-	rotate(theta: number): Matrix3;
+	rotate(theta: number): IMatrix3;
 
-	translate(tx: number, ty: number): Matrix3;
+	translate(tx: number, ty: number): IMatrix3;
 
-	equals(matrix: Matrix3): boolean;
+	equals(matrix: IMatrix3): boolean;
 
 	/**
 	 * Sets the values of this matrix from the provided array or array-like.
 	 * @param array the source array or array-like.
 	 * @param offset (optional) offset into the array-like. Default is 0.
 	 */
-	fromArray(array: number[] | ArrayLike<number>, offset?: number): Matrix3;
+	fromArray(array: number[] | ArrayLike<number>, offset?: number): IMatrix3;
 
 	/**
 	 * Returns an array with the values of this matrix, or copies them into the provided array.
@@ -570,7 +574,7 @@ export interface Matrix3 {
 	 * @return The created or provided array.
 	 */
 	toArray(array?: number[], offset?: number): number[];
-	toArray(array?: Matrix3Tuple, offset?: 0): Matrix3Tuple;
+	toArray(array?: TMatrix3Tuple, offset?: 0): TMatrix3Tuple;
 
 	/**
 	 * Copies he values of this matrix into the provided array-like.
@@ -583,19 +587,19 @@ export interface Matrix3 {
 	/**
 	 * Multiplies this matrix by m.
 	 */
-	multiply(m: Matrix3): Matrix3;
+	multiply(m: IMatrix3): IMatrix3;
 
-	premultiply(m: Matrix3): Matrix3;
+	premultiply(m: IMatrix3): IMatrix3;
 
 	/**
 	 * Sets this matrix to a x b.
 	 */
-	multiplyMatrices(a: Matrix3, b: Matrix3): Matrix3;
+	multiplyMatrices(a: IMatrix3, b: IMatrix3): IMatrix3;
 
 	/**
-	 * @deprecated Use {@link Vector3.applyMatrix3 vector.applyMatrix3( matrix )} instead.
+	 * @deprecated Use {@link IVector3.applyMatrix3 vector.applyMatrix3( matrix )} instead.
 	 */
-	multiplyVector3(vector: Vector3): any;
+	multiplyVector3(vector: IVector3): any;
 
 	/**
 	 * @deprecated This method has been removed completely.
@@ -603,18 +607,18 @@ export interface Matrix3 {
 	multiplyVector3Array(a: any): any;
 
 	/**
-	 * @deprecated Use {@link Matrix3#invert .invert()} instead.
+	 * @deprecated Use {@link IMatrix3#invert .invert()} instead.
 	 */
-	getInverse(matrix: Matrix4, throwOnDegenerate?: boolean): Matrix3;
-	getInverse(matrix: Matrix): Matrix;
+	getInverse(matrix: IMatrix4, throwOnDegenerate?: boolean): IMatrix3;
+	getInverse(matrix: IMatrix): IMatrix;
 
 	/**
-	 * @deprecated Use {@link Matrix3#toArray .toArray()} instead.
+	 * @deprecated Use {@link IMatrix3#toArray .toArray()} instead.
 	 */
 	flattenToArrayOffset(array: number[], offset: number): number[];
 }
 
-export interface Euler {
+export interface IEuler {
 	/**
 	 * @default 0
 	 */
@@ -638,21 +642,21 @@ export interface Euler {
 
 	_onChangeCallback: () => void;
 
-	set(x: number, y: number, z: number, order?: string): Euler;
+	set(x: number, y: number, z: number, order?: string): IEuler;
 	clone(): this;
-	copy(euler: Euler): this;
-	setFromRotationMatrix(m: Matrix4, order?: string, update?: boolean): Euler;
-	setFromQuaternion(q: Quaternion, order?: string, update?: boolean): Euler;
-	setFromVector3(v: Vector3, order?: string): Euler;
-	reorder(newOrder: string): Euler;
-	equals(euler: Euler): boolean;
-	fromArray(xyzo: any[]): Euler;
+	copy(euler: IEuler): this;
+	setFromRotationMatrix(m: IMatrix4, order?: string, update?: boolean): IEuler;
+	setFromQuaternion(q: IQuaternion, order?: string, update?: boolean): IEuler;
+	setFromVector3(v: IVector3, order?: string): IEuler;
+	reorder(newOrder: string): IEuler;
+	equals(euler: IEuler): boolean;
+	fromArray(xyzo: any[]): IEuler;
 	toArray(array?: number[], offset?: number): number[];
-	toVector3(optionalResult?: Vector3): Vector3;
+	toVector3(optionalResult?: IVector3): IVector3;
 	_onChange(callback: () => void): this;
 }
 
-export interface Vector {
+export interface IVector {
 	setComponent(index: number, value: number): this;
 
 	getComponent(index: number): number;
@@ -664,21 +668,21 @@ export interface Vector {
 	/**
 	 * copy(v:T):T;
 	 */
-	copy(v: Vector): this;
+	copy(v: IVector): this;
 
 	/**
 	 * NOTE: The second argument is deprecated.
 	 *
 	 * add(v:T):T;
 	 */
-	add(v: Vector): this;
+	add(v: IVector): this;
 
 	/**
 	 * addVectors(a:T, b:T):T;
 	 */
-	addVectors(a: Vector, b: Vector): this;
+	addVectors(a: IVector, b: IVector): this;
 
-	addScaledVector(vector: Vector, scale: number): this;
+	addScaledVector(vector: IVector, scale: number): this;
 
 	/**
 	 * Adds the scalar value s to this vector's values.
@@ -688,12 +692,12 @@ export interface Vector {
 	/**
 	 * sub(v:T):T;
 	 */
-	sub(v: Vector): this;
+	sub(v: IVector): this;
 
 	/**
 	 * subVectors(a:T, b:T):T;
 	 */
-	subVectors(a: Vector, b: Vector): this;
+	subVectors(a: IVector, b: IVector): this;
 
 	/**
 	 * multiplyScalar(s:number):T;
@@ -713,7 +717,7 @@ export interface Vector {
 	/**
 	 * dot(v:T):T;
 	 */
-	dot(v: Vector): number;
+	dot(v: IVector): number;
 
 	/**
 	 * lengthSq():number;
@@ -735,14 +739,14 @@ export interface Vector {
 	 *
 	 * distanceTo(v:T):number;
 	 */
-	distanceTo?(v: Vector): number;
+	distanceTo?(v: IVector): number;
 
 	/**
 	 * NOTE: Vector4 doesn't have the property.
 	 *
 	 * distanceToSquared(v:T):number;
 	 */
-	distanceToSquared?(v: Vector): number;
+	distanceToSquared?(v: IVector): number;
 
 	/**
 	 * setLength(l:number):T;
@@ -752,20 +756,20 @@ export interface Vector {
 	/**
 	 * lerp(v:T, alpha:number):T;
 	 */
-	lerp(v: Vector, alpha: number): this;
+	lerp(v: IVector, alpha: number): this;
 
 	/**
 	 * equals(v:T):boolean;
 	 */
-	equals(v: Vector): boolean;
+	equals(v: IVector): boolean;
 
 	/**
 	 * clone():T;
 	 */
-	clone(): Vector;
+	clone(): IVector;
 }
 
-export interface Spherical {
+export interface ISpherical {
 	/**
 	 * @default 1
 	 */
@@ -783,13 +787,13 @@ export interface Spherical {
 
 	set(radius: number, phi: number, theta: number): this;
 	clone(): this;
-	copy(other: Spherical): this;
+	copy(other: ISpherical): this;
 	makeSafe(): this;
-	setFromVector3(v: Vector3): this;
+	setFromVector3(v: IVector3): this;
 	setFromCartesianCoords(x: number, y: number, z: number): this;
 }
 
-export interface Cylindrical {
+export interface ICylindrical {
 	/**
 	 * @default 1
 	 */
@@ -806,13 +810,13 @@ export interface Cylindrical {
 	y: number;
 
 	clone(): this;
-	copy(other: Cylindrical): this;
+	copy(other: ICylindrical): this;
 	set(radius: number, theta: number, y: number): this;
-	setFromVector3(vec3: Vector3): this;
+	setFromVector3(vec3: IVector3): this;
 	setFromCartesianCoords(x: number, y: number, z: number): this;
 }
 
-export interface BufferAttribute {
+export interface IBufferAttribute {
 	/**
 	 * @default ''
 	 */
@@ -853,8 +857,8 @@ export interface BufferAttribute {
 	onUpload(callback: () => void): this;
 	setUsage(usage: THREE.Usage): this;
 	clone(): this;
-	copy(source: BufferAttribute): this;
-	copyAt(index1: number, attribute: BufferAttribute, index2: number): this;
+	copy(source: IBufferAttribute): this;
+	copyAt(index1: number, attribute: IBufferAttribute, index2: number): this;
 	copyArray(array: ArrayLike<number>): this;
 	copyColorsArray(colors: Array<{ r: number; g: number; b: number }>): this;
 	copyVector2sArray(vectors: Array<{ x: number; y: number }>): this;
@@ -862,10 +866,10 @@ export interface BufferAttribute {
 	copyVector4sArray(
 		vectors: Array<{ x: number; y: number; z: number; w: number }>
 	): this;
-	applyMatrix3(m: Matrix3): this;
-	applyMatrix4(m: Matrix4): this;
-	applyNormalMatrix(m: Matrix3): this;
-	transformDirection(m: Matrix4): this;
+	applyMatrix3(m: IMatrix3): this;
+	applyMatrix4(m: IMatrix4): this;
+	applyNormalMatrix(m: IMatrix3): this;
+	transformDirection(m: IMatrix4): this;
 	set(value: ArrayLike<number> | ArrayBufferView, offset?: number): this;
 	getX(index: number): number;
 	setX(index: number, x: number): this;
@@ -886,7 +890,7 @@ export interface BufferAttribute {
 	};
 }
 
-export interface InterleavedBuffer {
+export interface IInterleavedBuffer {
 	array: ArrayLike<number>;
 	stride: number;
 
@@ -914,15 +918,15 @@ export interface InterleavedBuffer {
 	needsUpdate: boolean;
 	uuid: string;
 
-	setUsage(usage: THREE.Usage): InterleavedBuffer;
-	clone(data: object): InterleavedBuffer;
-	copy(source: InterleavedBuffer): this;
+	setUsage(usage: THREE.Usage): IInterleavedBuffer;
+	clone(data: object): IInterleavedBuffer;
+	copy(source: IInterleavedBuffer): this;
 	copyAt(
 		index1: number,
-		attribute: InterleavedBufferAttribute,
+		attribute: IInterleavedBufferAttribute,
 		index2: number
-	): InterleavedBuffer;
-	set(value: ArrayLike<number>, index: number): InterleavedBuffer;
+	): IInterleavedBuffer;
+	set(value: ArrayLike<number>, index: number): IInterleavedBuffer;
 	toJSON(data: object): {
 		uuid: string;
 		buffer: string;
@@ -931,12 +935,12 @@ export interface InterleavedBuffer {
 	};
 }
 
-export interface InterleavedBufferAttribute {
+export interface IInterleavedBufferAttribute {
 	/**
 	 * @default ''
 	 */
 	name: string;
-	data: InterleavedBuffer;
+	data: IInterleavedBuffer;
 	itemSize: number;
 	offset: number;
 
@@ -951,8 +955,8 @@ export interface InterleavedBufferAttribute {
 
 	readonly isInterleavedBufferAttribute: true;
 
-	applyMatrix4(m: Matrix4): this;
-	clone(data?: object): BufferAttribute;
+	applyMatrix4(m: IMatrix4): this;
+	clone(data?: object): IBufferAttribute;
 	getX(index: number): number;
 	setX(index: number, x: number): this;
 	getY(index: number): number;
@@ -971,18 +975,18 @@ export interface InterleavedBufferAttribute {
 		offset: number;
 		normalized: boolean;
 	};
-	applyNormalMatrix(matrix: Matrix): this;
-	transformDirection(matrix: Matrix): this;
+	applyNormalMatrix(matrix: IMatrix): this;
+	transformDirection(matrix: IMatrix): this;
 }
 
-export type Vector2Tuple = [number, number];
+export type TVector2Tuple = [number, number];
 
 /**
  * 2D vector.
  *
  * ( class Vector2 implements Vector<Vector2> )
  */
-export interface Vector2 extends Vector {
+export interface IVector2 extends IVector {
 	/**
 	 * @default 0
 	 */
@@ -1034,12 +1038,12 @@ export interface Vector2 extends Vector {
 	/**
 	 * Copies value of v to this vector.
 	 */
-	copy(v: Vector2): this;
+	copy(v: IVector2): this;
 
 	/**
 	 * Adds v to this vector.
 	 */
-	add(v: Vector2, w?: Vector2): this;
+	add(v: IVector2, w?: IVector2): this;
 
 	/**
 	 * Adds the scalar value s to this vector's x and y values.
@@ -1049,17 +1053,17 @@ export interface Vector2 extends Vector {
 	/**
 	 * Sets this vector to a + b.
 	 */
-	addVectors(a: Vector2, b: Vector2): this;
+	addVectors(a: IVector2, b: IVector2): this;
 
 	/**
 	 * Adds the multiple of v and s to this vector.
 	 */
-	addScaledVector(v: Vector2, s: number): this;
+	addScaledVector(v: IVector2, s: number): this;
 
 	/**
 	 * Subtracts v from this vector.
 	 */
-	sub(v: Vector2): this;
+	sub(v: IVector2): this;
 
 	/**
 	 * Subtracts s from this vector's x and y components.
@@ -1069,12 +1073,12 @@ export interface Vector2 extends Vector {
 	/**
 	 * Sets this vector to a - b.
 	 */
-	subVectors(a: Vector2, b: Vector2): this;
+	subVectors(a: IVector2, b: IVector2): this;
 
 	/**
 	 * Multiplies this vector by v.
 	 */
-	multiply(v: Vector2): this;
+	multiply(v: IVector2): this;
 
 	/**
 	 * Multiplies this vector by scalar s.
@@ -1084,7 +1088,7 @@ export interface Vector2 extends Vector {
 	/**
 	 * Divides this vector by v.
 	 */
-	divide(v: Vector2): this;
+	divide(v: IVector2): this;
 
 	/**
 	 * Divides this vector by scalar s.
@@ -1095,17 +1099,17 @@ export interface Vector2 extends Vector {
 	/**
 	 * Multiplies this vector (with an implicit 1 as the 3rd component) by m.
 	 */
-	applyMatrix3(m: Matrix3): this;
+	applyMatrix3(m: IMatrix3): this;
 
 	/**
 	 * If this vector's x or y value is greater than v's x or y value, replace that value with the corresponding min value.
 	 */
-	min(v: Vector2): this;
+	min(v: IVector2): this;
 
 	/**
 	 * If this vector's x or y value is less than v's x or y value, replace that value with the corresponding max value.
 	 */
-	max(v: Vector2): this;
+	max(v: IVector2): this;
 
 	/**
 	 * If this vector's x or y value is greater than the max vector's x or y value, it is replaced by the corresponding value.
@@ -1113,7 +1117,7 @@ export interface Vector2 extends Vector {
 	 * @param min the minimum x and y values.
 	 * @param max the maximum x and y values in the desired range.
 	 */
-	clamp(min: Vector2, max: Vector2): this;
+	clamp(min: IVector2, max: IVector2): this;
 
 	/**
 	 * If this vector's x or y values are greater than the max value, they are replaced by the max value.
@@ -1159,12 +1163,12 @@ export interface Vector2 extends Vector {
 	/**
 	 * Computes dot product of this vector and v.
 	 */
-	dot(v: Vector2): number;
+	dot(v: IVector2): number;
 
 	/**
 	 * Computes cross product of this vector and v.
 	 */
-	cross(v: Vector2): number;
+	cross(v: IVector2): number;
 
 	/**
 	 * Computes squared length of this vector.
@@ -1177,7 +1181,7 @@ export interface Vector2 extends Vector {
 	length(): number;
 
 	/**
-	 * @deprecated Use {@link Vector2#manhattanLength .manhattanLength()} instead.
+	 * @deprecated Use {@link IVector2#manhattanLength .manhattanLength()} instead.
 	 */
 	lengthManhattan(): number;
 
@@ -1201,24 +1205,24 @@ export interface Vector2 extends Vector {
 	/**
 	 * Computes distance of this vector to v.
 	 */
-	distanceTo(v: Vector2): number;
+	distanceTo(v: IVector2): number;
 
 	/**
 	 * Computes squared distance of this vector to v.
 	 */
-	distanceToSquared(v: Vector2): number;
+	distanceToSquared(v: IVector2): number;
 
 	/**
-	 * @deprecated Use {@link Vector2#manhattanDistanceTo .manhattanDistanceTo()} instead.
+	 * @deprecated Use {@link IVector2#manhattanDistanceTo .manhattanDistanceTo()} instead.
 	 */
-	distanceToManhattan(v: Vector2): number;
+	distanceToManhattan(v: IVector2): number;
 
 	/**
 	 * Computes the Manhattan length (distance) from this vector to the given vector v
 	 *
 	 * see {@link http://en.wikipedia.org/wiki/Taxicab_geometry|Wikipedia: Taxicab Geometry}
 	 */
-	manhattanDistanceTo(v: Vector2): number;
+	manhattanDistanceTo(v: IVector2): number;
 
 	/**
 	 * Normalizes this vector and multiplies it by l.
@@ -1230,7 +1234,7 @@ export interface Vector2 extends Vector {
 	 * @param v vector to interpolate towards.
 	 * @param alpha interpolation factor in the closed interval [0, 1].
 	 */
-	lerp(v: Vector2, alpha: number): this;
+	lerp(v: IVector2, alpha: number): this;
 
 	/**
 	 * Sets this vector to be the vector linearly interpolated between v1 and v2 where alpha is the distance along the line connecting the two vectors - alpha = 0 will be v1, and alpha = 1 will be v2.
@@ -1238,12 +1242,12 @@ export interface Vector2 extends Vector {
 	 * @param v2 vector to interpolate towards.
 	 * @param alpha interpolation factor in the closed interval [0, 1].
 	 */
-	lerpVectors(v1: Vector2, v2: Vector2, alpha: number): this;
+	lerpVectors(v1: IVector2, v2: IVector2, alpha: number): this;
 
 	/**
 	 * Checks for strict equality of this vector and v.
 	 */
-	equals(v: Vector2): boolean;
+	equals(v: IVector2): boolean;
 
 	/**
 	 * Sets this vector's x and y value from the provided array or array-like.
@@ -1259,7 +1263,7 @@ export interface Vector2 extends Vector {
 	 * @return The created or provided array.
 	 */
 	toArray(array?: number[], offset?: number): number[];
-	toArray(array?: Vector2Tuple, offset?: 0): Vector2Tuple;
+	toArray(array?: TVector2Tuple, offset?: 0): TVector2Tuple;
 
 	/**
 	 * Copies x and y into the provided array-like.
@@ -1274,14 +1278,14 @@ export interface Vector2 extends Vector {
 	 * @param attribute the source attribute.
 	 * @param index index in the attribute.
 	 */
-	fromBufferAttribute(attribute: BufferAttribute, index: number): this;
+	fromBufferAttribute(attribute: IBufferAttribute, index: number): this;
 
 	/**
 	 * Rotates the vector around center by angle radians.
 	 * @param center the point around which to rotate.
 	 * @param angle the angle to rotate, in radians.
 	 */
-	rotateAround(center: Vector2, angle: number): this;
+	rotateAround(center: IVector2, angle: number): this;
 
 	/**
 	 * Sets this vector's x and y from Math.random
@@ -1289,10 +1293,9 @@ export interface Vector2 extends Vector {
 	random(): this;
 }
 
-export type Vector3Tuple = [number, number, number];
+export type TVector3Tuple = [number, number, number];
 
-
-export interface Vector3 extends Vector {
+export interface IVector3 extends IVector {
 	/**
 	 * @default 0
 	 */
@@ -1322,17 +1325,17 @@ export interface Vector3 extends Vector {
 	/**
 	 * Sets x value of this vector.
 	 */
-	setX(x: number): Vector3;
+	setX(x: number): IVector3;
 
 	/**
 	 * Sets y value of this vector.
 	 */
-	setY(y: number): Vector3;
+	setY(y: number): IVector3;
 
 	/**
 	 * Sets z value of this vector.
 	 */
-	setZ(z: number): Vector3;
+	setZ(z: number): IVector3;
 
 	setComponent(index: number, value: number): this;
 
@@ -1383,7 +1386,7 @@ export interface Vector3 extends Vector {
 
 	multiplyVectors(a: THREE.Vector3, b: THREE.Vector3): this;
 
-	applyEuler(euler: Euler): this;
+	applyEuler(euler: IEuler): this;
 
 	applyAxisAngle(axis: THREE.Vector3, angle: number): this;
 
@@ -1391,7 +1394,7 @@ export interface Vector3 extends Vector {
 
 	applyNormalMatrix(m: THREE.Matrix3): this;
 
-	applyMatrix4(m: THREE.Matrix4): this;
+	applyMatrix4(m: IMatrix4): this;
 
 	applyQuaternion(q: THREE.Quaternion): this;
 
@@ -1399,7 +1402,7 @@ export interface Vector3 extends Vector {
 
 	unproject(camera: THREE.Camera): this;
 
-	transformDirection(m: THREE.Matrix4): this;
+	transformDirection(m: IMatrix4): this;
 
 	divide(v: THREE.Vector3): this;
 
@@ -1409,11 +1412,11 @@ export interface Vector3 extends Vector {
 	 */
 	divideScalar(s: number): this;
 
-	min(v: Vector3): this;
+	min(v: IVector3): this;
 
-	max(v: Vector3): this;
+	max(v: IVector3): this;
 
-	clamp(min: Vector3, max: Vector3): this;
+	clamp(min: IVector3, max: IVector3): this;
 
 	clampScalar(min: number, max: number): this;
 
@@ -1435,7 +1438,7 @@ export interface Vector3 extends Vector {
 	/**
 	 * Computes dot product of this vector and v.
 	 */
-	dot(v: Vector3): number;
+	dot(v: IVector3): number;
 
 	/**
 	 * Computes squared length of this vector.
@@ -1451,7 +1454,7 @@ export interface Vector3 extends Vector {
 	 * Computes Manhattan length of this vector.
 	 * http://en.wikipedia.org/wiki/Taxicab_geometry
 	 *
-	 * @deprecated Use {@link Vector3#manhattanLength .manhattanLength()} instead.
+	 * @deprecated Use {@link IVector3#manhattanLength .manhattanLength()} instead.
 	 */
 	lengthManhattan(): number;
 
@@ -1467,7 +1470,7 @@ export interface Vector3 extends Vector {
 	 *
 	 * see {@link http://en.wikipedia.org/wiki/Taxicab_geometry|Wikipedia: Taxicab Geometry}
 	 */
-	manhattanDistanceTo(v: Vector3): number;
+	manhattanDistanceTo(v: IVector3): number;
 
 	/**
 	 * Normalizes this vector.
@@ -1507,7 +1510,7 @@ export interface Vector3 extends Vector {
 	distanceToSquared(v: THREE.Vector3): number;
 
 	/**
-	 * @deprecated Use {@link Vector3#manhattanDistanceTo .manhattanDistanceTo()} instead.
+	 * @deprecated Use {@link IVector3#manhattanDistanceTo .manhattanDistanceTo()} instead.
 	 */
 	distanceToManhattan(v: THREE.Vector3): number;
 
@@ -1515,9 +1518,9 @@ export interface Vector3 extends Vector {
 	setFromSphericalCoords(r: number, phi: number, theta: number): this;
 	setFromCylindrical(s: THREE.Cylindrical): this;
 	setFromCylindricalCoords(radius: number, theta: number, y: number): this;
-	setFromMatrixPosition(m: THREE.Matrix4): this;
-	setFromMatrixScale(m: THREE.Matrix4): this;
-	setFromMatrixColumn(matrix: THREE.Matrix4, index: number): this;
+	setFromMatrixPosition(m: IMatrix4): this;
+	setFromMatrixScale(m: IMatrix4): this;
+	setFromMatrixColumn(matrix: IMatrix4, index: number): this;
 	setFromMatrix3Column(matrix: THREE.Matrix3, index: number): this;
 
 	/**
@@ -1539,7 +1542,7 @@ export interface Vector3 extends Vector {
 	 * @return The created or provided array.
 	 */
 	toArray(array?: number[], offset?: number): number[];
-	toArray(array?: THREE.Vector3Tuple, offset?: 0): Vector3Tuple;
+	toArray(array?: THREE.Vector3Tuple, offset?: 0): TVector3Tuple;
 
 	/**
 	 * Copies x, y and z into the provided array-like.
@@ -1569,7 +1572,7 @@ export type Vector4Tuple = [number, number, number, number];
  *
  * ( class Vector4 implements Vector<Vector4> )
  */
-export interface Vector4 extends Vector {
+export interface IVector4 extends IVector {
 	/**
 	 * @default 0
 	 */
@@ -1636,41 +1639,41 @@ export interface Vector4 extends Vector {
 	/**
 	 * Copies value of v to this vector.
 	 */
-	copy(v: Vector4): this;
+	copy(v: IVector4): this;
 
 	/**
 	 * Adds v to this vector.
 	 */
-	add(v: Vector4): this;
+	add(v: IVector4): this;
 
 	addScalar(scalar: number): this;
 
 	/**
 	 * Sets this vector to a + b.
 	 */
-	addVectors(a: Vector4, b: Vector4): this;
+	addVectors(a: IVector4, b: IVector4): this;
 
-	addScaledVector(v: Vector4, s: number): this;
+	addScaledVector(v: IVector4, s: number): this;
 	/**
 	 * Subtracts v from this vector.
 	 */
-	sub(v: Vector4): this;
+	sub(v: IVector4): this;
 
 	subScalar(s: number): this;
 
 	/**
 	 * Sets this vector to a - b.
 	 */
-	subVectors(a: Vector4, b: Vector4): this;
+	subVectors(a: IVector4, b: IVector4): this;
 
-	multiply(v: Vector4): this;
+	multiply(v: IVector4): this;
 
 	/**
 	 * Multiplies this vector by scalar s.
 	 */
 	multiplyScalar(s: number): this;
 
-	applyMatrix4(m: Matrix4): this;
+	applyMatrix4(m: IMatrix4): this;
 
 	/**
 	 * Divides this vector by scalar s.
@@ -1682,17 +1685,17 @@ export interface Vector4 extends Vector {
 	 * http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToAngle/index.htm
 	 * @param q is assumed to be normalized
 	 */
-	setAxisAngleFromQuaternion(q: Quaternion): this;
+	setAxisAngleFromQuaternion(q: IQuaternion): this;
 
 	/**
 	 * http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/index.htm
 	 * @param m assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled)
 	 */
-	setAxisAngleFromRotationMatrix(m: Matrix4): this;
+	setAxisAngleFromRotationMatrix(m: IMatrix4): this;
 
-	min(v: Vector4): this;
-	max(v: Vector4): this;
-	clamp(min: Vector4, max: Vector4): this;
+	min(v: IVector4): this;
+	max(v: IVector4): this;
+	clamp(min: IVector4, max: IVector4): this;
 	clampScalar(min: number, max: number): this;
 	floor(): this;
 	ceil(): this;
@@ -1707,7 +1710,7 @@ export interface Vector4 extends Vector {
 	/**
 	 * Computes dot product of this vector and v.
 	 */
-	dot(v: Vector4): number;
+	dot(v: IVector4): number;
 
 	/**
 	 * Computes squared length of this vector.
@@ -1738,14 +1741,14 @@ export interface Vector4 extends Vector {
 	/**
 	 * Linearly interpolate between this vector and v with alpha factor.
 	 */
-	lerp(v: Vector4, alpha: number): this;
+	lerp(v: IVector4, alpha: number): this;
 
-	lerpVectors(v1: Vector4, v2: Vector4, alpha: number): this;
+	lerpVectors(v1: IVector4, v2: IVector4, alpha: number): this;
 
 	/**
 	 * Checks for strict equality of this vector and v.
 	 */
-	equals(v: Vector4): boolean;
+	equals(v: IVector4): boolean;
 
 	/**
 	 * Sets this vector's x, y, z and w value from the provided array or array-like.
@@ -1771,7 +1774,7 @@ export interface Vector4 extends Vector {
 	 */
 	toArray(array: ArrayLike<number>, offset?: number): ArrayLike<number>;
 
-	fromBufferAttribute(attribute: BufferAttribute, index: number): this;
+	fromBufferAttribute(attribute: IBufferAttribute, index: number): this;
 
 	/**
 	 * Sets this vector's x, y, z and w from Math.random
@@ -1779,13 +1782,13 @@ export interface Vector4 extends Vector {
 	random(): this;
 }
 
-export interface HSL {
+export interface IHSL {
 	h: number;
 	s: number;
 	l: number;
 }
 
-export type ColorRepresentation = Color | string | number;
+export type TColorRepresentation = IColor | string | number;
 
 /**
  * Represents a color. See also {@link ColorUtils}.
@@ -1795,7 +1798,7 @@ export type ColorRepresentation = Color | string | number;
  * @example
  * const color = new THREE.Color( 0xff0000 );
  */
-export interface Color {
+export interface IColor {
 	readonly isColor: true;
 
 	/**
@@ -1816,9 +1819,9 @@ export interface Color {
 	 */
 	b: number;
 
-	set(color: ColorRepresentation): Color;
-	setScalar(scalar: number): Color;
-	setHex(hex: number): Color;
+	set(color: TColorRepresentation): IColor;
+	setScalar(scalar: number): IColor;
+	setHex(hex: number): IColor;
 
 	/**
 	 * Sets this color from RGB values.
@@ -1826,7 +1829,7 @@ export interface Color {
 	 * @param g Green channel value between 0 and 1.
 	 * @param b Blue channel value between 0 and 1.
 	 */
-	setRGB(r: number, g: number, b: number): Color;
+	setRGB(r: number, g: number, b: number): IColor;
 
 	/**
 	 * Sets this color from HSL values.
@@ -1836,20 +1839,20 @@ export interface Color {
 	 * @param s Saturation value channel between 0 and 1.
 	 * @param l Value channel value between 0 and 1.
 	 */
-	setHSL(h: number, s: number, l: number): Color;
+	setHSL(h: number, s: number, l: number): IColor;
 
 	/**
 	 * Sets this color from a CSS context style string.
 	 * @param contextStyle Color in CSS context style format.
 	 */
-	setStyle(style: string): Color;
+	setStyle(style: string): IColor;
 
 	/**
 	 * Sets this color from a color name.
-	 * Faster than {@link Color#setStyle .setStyle()} method if you don't need the other CSS-style formats.
+	 * Faster than {@link IColor#setStyle .setStyle()} method if you don't need the other CSS-style formats.
 	 * @param style Color name in X11 format.
 	 */
-	setColorName(style: string): Color;
+	setColorName(style: string): IColor;
 
 	/**
 	 * Clones this color.
@@ -1860,51 +1863,51 @@ export interface Color {
 	 * Copies given color.
 	 * @param color Color to copy.
 	 */
-	copy(color: Color): this;
+	copy(color: IColor): this;
 
 	/**
 	 * Copies given color making conversion from gamma to linear space.
 	 * @param color Color to copy.
 	 */
-	copyGammaToLinear(color: Color, gammaFactor?: number): Color;
+	copyGammaToLinear(color: IColor, gammaFactor?: number): IColor;
 
 	/**
 	 * Copies given color making conversion from linear to gamma space.
 	 * @param color Color to copy.
 	 */
-	copyLinearToGamma(color: Color, gammaFactor?: number): Color;
+	copyLinearToGamma(color: IColor, gammaFactor?: number): IColor;
 
 	/**
 	 * Converts this color from gamma to linear space.
 	 */
-	convertGammaToLinear(gammaFactor?: number): Color;
+	convertGammaToLinear(gammaFactor?: number): IColor;
 
 	/**
 	 * Converts this color from linear to gamma space.
 	 */
-	convertLinearToGamma(gammaFactor?: number): Color;
+	convertLinearToGamma(gammaFactor?: number): IColor;
 
 	/**
 	 * Copies given color making conversion from sRGB to linear space.
 	 * @param color Color to copy.
 	 */
-	copySRGBToLinear(color: Color): Color;
+	copySRGBToLinear(color: IColor): IColor;
 
 	/**
 	 * Copies given color making conversion from linear to sRGB space.
 	 * @param color Color to copy.
 	 */
-	copyLinearToSRGB(color: Color): Color;
+	copyLinearToSRGB(color: IColor): IColor;
 
 	/**
 	 * Converts this color from sRGB to linear space.
 	 */
-	convertSRGBToLinear(): Color;
+	convertSRGBToLinear(): IColor;
 
 	/**
 	 * Converts this color from linear to sRGB space.
 	 */
-	convertLinearToSRGB(): Color;
+	convertLinearToSRGB(): IColor;
 
 	/**
 	 * Returns the hexadecimal value of this color.
@@ -1916,7 +1919,7 @@ export interface Color {
 	 */
 	getHexString(): string;
 
-	getHSL(target: HSL): HSL;
+	getHSL(target: IHSL): IHSL;
 
 	/**
 	 * Returns the value of this color in CSS context style.
@@ -1926,16 +1929,16 @@ export interface Color {
 
 	offsetHSL(h: number, s: number, l: number): this;
 
-	add(color: Color): this;
-	addColors(color1: Color, color2: Color): this;
+	add(color: IColor): this;
+	addColors(color1: IColor, color2: IColor): this;
 	addScalar(s: number): this;
-	sub(color: Color): this;
-	multiply(color: Color): this;
+	sub(color: IColor): this;
+	multiply(color: IColor): this;
 	multiplyScalar(s: number): this;
-	lerp(color: Color, alpha: number): this;
-	lerpColors(color1: Color, color2: Color, alpha: number): this;
-	lerpHSL(color: Color, alpha: number): this;
-	equals(color: Color): boolean;
+	lerp(color: IColor, alpha: number): this;
+	lerpColors(color1: IColor, color2: IColor, alpha: number): this;
+	lerpHSL(color: IColor, alpha: number): this;
+	equals(color: IColor): boolean;
 
 	/**
 	 * Sets this color's red, green and blue value from the provided array or array-like.
@@ -1960,10 +1963,10 @@ export interface Color {
 	 */
 	toArray(xyz: ArrayLike<number>, offset?: number): ArrayLike<number>;
 
-	fromBufferAttribute(attribute: BufferAttribute, index: number): this;
+	fromBufferAttribute(attribute: IBufferAttribute, index: number): this;
 }
 
-export interface Layers {
+export interface ILayers {
 	/**
 	 * @default 1 | 0
 	 */
@@ -1975,10 +1978,10 @@ export interface Layers {
 	toggle(channel: number): void;
 	disable(channel: number): void;
 	disableAll(): void;
-	test(layers: Layers): boolean;
+	test(layers: ILayers): boolean;
 }
 
-export interface Interpolant {
+export interface IInterpolant {
 	parameterPositions: any;
 	sampleValues: any;
 	valueSize: number;
@@ -1987,19 +1990,19 @@ export interface Interpolant {
 	evaluate(time: number): any;
 }
 
-export interface LinearInterpolant extends Interpolant {
+export interface ILinearInterpolant extends IInterpolant {
 	interpolate_(i1: number, t0: number, t: number, t1: number): any;
 }
 
-export interface DiscreteInterpolant extends Interpolant {
+export interface IDiscreteInterpolant extends IInterpolant {
 	interpolate_(i1: number, t0: number, t: number, t1: number): any;
 }
 
-export interface CubicInterpolant extends Interpolant {
+export interface ICubicInterpolant extends IInterpolant {
 	interpolate_(i1: number, t0: number, t: number, t1: number): any;
 }
 
-export interface KeyframeTrack {
+export interface IKeyframeTrack {
 	name: string;
 	times: Float32Array;
 	values: Float32Array;
@@ -2007,33 +2010,33 @@ export interface KeyframeTrack {
 	ValueTypeName: string;
 	TimeBufferType: Float32Array;
 	ValueBufferType: Float32Array;
-    DefaultInterpolation: THREE.InterpolationModes;
+	DefaultInterpolation: THREE.InterpolationModes;
 
-	InterpolantFactoryMethodDiscrete(result: any): DiscreteInterpolant;
-	InterpolantFactoryMethodLinear(result: any): LinearInterpolant;
-	InterpolantFactoryMethodSmooth(result: any): CubicInterpolant;
+	InterpolantFactoryMethodDiscrete(result: any): IDiscreteInterpolant;
+	InterpolantFactoryMethodLinear(result: any): ILinearInterpolant;
+	InterpolantFactoryMethodSmooth(result: any): ICubicInterpolant;
 
-	setInterpolation(interpolation: THREE.InterpolationModes): KeyframeTrack;
+	setInterpolation(interpolation: THREE.InterpolationModes): IKeyframeTrack;
 	getInterpolation(): THREE.InterpolationModes;
 
 	getValueSize(): number;
 
-	shift(timeOffset: number): KeyframeTrack;
-	scale(timeScale: number): KeyframeTrack;
-	trim(startTime: number, endTime: number): KeyframeTrack;
+	shift(timeOffset: number): IKeyframeTrack;
+	scale(timeScale: number): IKeyframeTrack;
+	trim(startTime: number, endTime: number): IKeyframeTrack;
 	validate(): boolean;
-	optimize(): KeyframeTrack;
+	optimize(): IKeyframeTrack;
 	clone(): this;
 }
 
-export interface MorphTarget {
+export interface IMorphTarget {
 	name: string;
-	vertices: Vector3[];
+	vertices: IVector3[];
 }
 
-export interface AnimationClip {
+export interface IAnimationClip {
 	name: string;
-	tracks: KeyframeTrack[];
+	tracks: IKeyframeTrack[];
 
 	/**
 	 * @default THREE.NormalAnimationBlendMode
@@ -2047,49 +2050,39 @@ export interface AnimationClip {
 	uuid: string;
 	results: any[];
 
-	resetDuration(): AnimationClip;
-	trim(): AnimationClip;
+	resetDuration(): IAnimationClip;
+	trim(): IAnimationClip;
 	validate(): boolean;
-	optimize(): AnimationClip;
+	optimize(): IAnimationClip;
 	clone(): this;
-	toJSON(clip: AnimationClip): any;
+	toJSON(clip: IAnimationClip): any;
 }
 
 export type EventListener<E, T, U> = (
 	event: E & { type: T } & { target: U }
 ) => void;
 
-
-export interface EventDispatcher<E = THREE.Event> {
+export interface IEventDispatcher<E = THREE.Event> {
 	/**
 	 * Adds a listener to an event type.
 	 * @param type The type of event to listen to.
 	 * @param listener The function that gets called when the event is fired.
 	 */
-	addEventListener<T>(
-		type: T,
-		listener: EventListener<E, T, this>
-	): void;
+	addEventListener<T>(type: T, listener: EventListener<E, T, this>): void;
 
 	/**
 	 * Checks if listener is added to an event type.
 	 * @param type The type of event to listen to.
 	 * @param listener The function that gets called when the event is fired.
 	 */
-	hasEventListener<T>(
-		type: T,
-		listener: EventListener<E, T, this>
-	): boolean;
+	hasEventListener<T>(type: T, listener: EventListener<E, T, this>): boolean;
 
 	/**
 	 * Removes a listener from an event type.
 	 * @param type The type of the listener that gets removed.
 	 * @param listener The listener function that gets removed.
 	 */
-	removeEventListener<T>(
-		type: T,
-		listener: EventListener<E, T, this>
-	): void;
+	removeEventListener<T>(type: T, listener: EventListener<E, T, this>): void;
 
 	/**
 	 * Fire an event type.
@@ -2098,7 +2091,7 @@ export interface EventDispatcher<E = THREE.Event> {
 	dispatchEvent(event: E): void;
 }
 
-export interface MaterialParameters {
+export interface IMaterialParameters {
 	alphaTest?: number | undefined;
 	alphaToCoverage?: boolean | undefined;
 	blendDst?: THREE.BlendingDstFactor | undefined;
@@ -2109,7 +2102,7 @@ export interface MaterialParameters {
 	blendSrc?: THREE.BlendingSrcFactor | THREE.BlendingDstFactor | undefined;
 	blendSrcAlpha?: number | undefined;
 	clipIntersection?: boolean | undefined;
-	clippingPlanes?: Plane[] | undefined;
+	clippingPlanes?: IPlane[] | undefined;
 	clipShadows?: boolean | undefined;
 	colorWrite?: boolean | undefined;
 	defines?: any;
@@ -2147,7 +2140,7 @@ export interface IUniform<TValue = any> {
 	value: TValue;
 }
 
-export interface Shader {
+export interface IShader {
 	uniforms: { [uniform: string]: THREE.IUniform };
 	vertexShader: string;
 	fragmentShader: string;
@@ -2156,7 +2149,7 @@ export interface Shader {
 /**
  * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
  */
-export interface Material extends EventDispatcher {
+export interface IMaterial extends IEventDispatcher {
 	/**
 	 * Sets the alpha value to be used when running an alpha test. Default is 0.
 	 * @default 0
@@ -2467,10 +2460,10 @@ export interface Material extends EventDispatcher {
 	 * Copy the parameters from the passed material into this material.
 	 * @param material
 	 */
-	copy(material: Material): this;
+	copy(material: IMaterial): this;
 
 	/**
-	 * This disposes the material. Textures of a material don't get disposed. These needs to be disposed by {@link Texture}.
+	 * This disposes the material. Textures of a material don't get disposed. These needs to be disposed by {@link ITexture}.
 	 */
 	dispose(): void;
 
@@ -2481,7 +2474,7 @@ export interface Material extends EventDispatcher {
 	 * @param shader Source code of the shader
 	 * @param renderer WebGLRenderer Context that is initializing the material
 	 */
-	onBeforeCompile(shader: Shader, renderer: WebGLRenderer): void;
+	onBeforeCompile(shader: IShader, renderer: IWebGLRenderer): void;
 
 	/**
 	 * In case onBeforeCompile is used, this callback can be used to identify values of settings used in onBeforeCompile, so three.js can reuse a cached shader or recompile the shader as needed.
@@ -2492,7 +2485,7 @@ export interface Material extends EventDispatcher {
 	 * Sets the properties based on the values.
 	 * @param values A container with parameters.
 	 */
-	setValues(values: MaterialParameters): void;
+	setValues(values: IMaterialParameters): void;
 
 	/**
 	 * Convert the material to three.js JSON format.
@@ -2501,22 +2494,22 @@ export interface Material extends EventDispatcher {
 	toJSON(meta?: any): any;
 }
 
-export interface Renderer {
+export interface IRenderer {
 	domElement: HTMLCanvasElement;
 
-	render(scene: Object3D, camera: Camera): void;
+	render(scene: IObject3D, camera: ICamera): void;
 	setSize(width: number, height: number, updateStyle?: boolean): void;
 }
 
 /** This is only available in worker JS contexts, not the DOM. */
 // tslint:disable-next-line:no-empty-interface
-export interface OffscreenCanvas extends EventTarget {}
+export interface IOffscreenCanvas extends EventTarget {}
 
-export interface WebGLRendererParameters {
+export interface IWebGLRendererParameters {
 	/**
 	 * A Canvas where the renderer draws its output.
 	 */
-	canvas?: HTMLCanvasElement | OffscreenCanvas | undefined;
+	canvas?: HTMLCanvasElement | IOffscreenCanvas | undefined;
 
 	/**
 	 * A WebGL Rendering Context.
@@ -2576,14 +2569,14 @@ export interface WebGLRendererParameters {
 	failIfMajorPerformanceCaveat?: boolean | undefined;
 }
 
-export interface WebGLDebug {
+export interface IWebGLDebug {
 	/**
 	 * Enables error checking and reporting when shader programs are being compiled.
 	 */
 	checkShaderErrors: boolean;
 }
 
-export interface WebGLRenderTargetOptions {
+export interface IWebGLRenderTargetOptions {
 	wrapS?: THREE.Wrapping | undefined;
 	wrapT?: THREE.Wrapping | undefined;
 	magFilter?: THREE.TextureFilter | undefined;
@@ -2598,7 +2591,7 @@ export interface WebGLRenderTargetOptions {
 	encoding?: THREE.TextureEncoding | undefined;
 }
 
-export interface Texture extends EventDispatcher {
+export interface ITexture extends IEventDispatcher {
 	id: number;
 	uuid: string;
 
@@ -2663,7 +2656,7 @@ export interface Texture extends EventDispatcher {
 	/**
 	 * @default new THREE.Matrix3()
 	 */
-	matrix: Matrix3;
+	matrix: IMatrix3;
 
 	/**
 	 * @default true
@@ -2673,17 +2666,17 @@ export interface Texture extends EventDispatcher {
 	/**
 	 * @default new THREE.Vector2( 0, 0 )
 	 */
-	offset: Vector2;
+	offset: IVector2;
 
 	/**
 	 * @default new THREE.Vector2( 1, 1 )
 	 */
-	repeat: Vector2;
+	repeat: IVector2;
 
 	/**
 	 * @default new THREE.Vector2( 0, 0 )
 	 */
-	center: Vector2;
+	center: IVector2;
 
 	/**
 	 * @default 0
@@ -2735,14 +2728,14 @@ export interface Texture extends EventDispatcher {
 
 	onUpdate: () => void;
 	clone(): this;
-	copy(source: Texture): this;
+	copy(source: ITexture): this;
 	toJSON(meta: any): any;
 	dispose(): void;
-	transformUv(uv: Vector2): Vector2;
+	transformUv(uv: IVector2): IVector2;
 	updateMatrix(): void;
 }
 
-export interface DataTexture3D extends Texture {
+export interface IDataTexture3D extends ITexture {
 	/**
 	 * @default THREE.NearestFilter
 	 */
@@ -2771,7 +2764,7 @@ export interface DataTexture3D extends Texture {
 	readonly isDataTexture3D: true;
 }
 
-export interface DataTexture2DArray extends Texture {
+export interface IDataTexture2DArray extends ITexture {
 	/**
 	 * @default THREE.NearestFilter
 	 */
@@ -2800,7 +2793,7 @@ export interface DataTexture2DArray extends Texture {
 	readonly isDataTexture2DArray: true;
 }
 
-export interface DepthTexture extends Texture {
+export interface IDepthTexture extends ITexture {
 	image: { width: number; height: number };
 
 	/**
@@ -2819,7 +2812,7 @@ export interface DepthTexture extends Texture {
 /**
  * Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
  */
-export interface Scene extends Object3D {
+export interface IScene extends IObject3D {
 	type: 'Scene';
 
 	/**
@@ -2832,7 +2825,7 @@ export interface Scene extends Object3D {
 	 * If not null, it will force everything in the scene to be rendered with that material. Default is null.
 	 * @default null
 	 */
-	overrideMaterial: Material | null;
+	overrideMaterial: IMaterial | null;
 
 	/**
 	 * @default true
@@ -2842,12 +2835,12 @@ export interface Scene extends Object3D {
 	/**
 	 * @default null
 	 */
-	background: null | Color | Texture;
+	background: null | IColor | ITexture;
 
 	/**
 	 * @default null
 	 */
-	environment: null | Texture;
+	environment: null | ITexture;
 
 	readonly isScene: true;
 
@@ -2855,7 +2848,7 @@ export interface Scene extends Object3D {
 	 * Calls before rendering scene
 	 */
 	onBeforeRender: (
-        renderer: THREE.WebGLRenderer,
+		renderer: THREE.WebGLRenderer,
 		scene: THREE.Scene,
 		camera: THREE.Camera,
 		renderTarget: any // any required for Object3D.onBeforeRender compatibility
@@ -2873,18 +2866,18 @@ export interface Scene extends Object3D {
 	toJSON(meta?: any): any;
 }
 
-export interface WebGLRenderTarget extends EventDispatcher {
+export interface IWebGLRenderTarget extends IEventDispatcher {
 	uuid: string;
 	width: number;
 	height: number;
 	depth: number;
 
-	scissor: Vector4;
+	scissor: IVector4;
 	/**
 	 * @default false
 	 */
 	scissorTest: boolean;
-	viewport: Vector4;
+	viewport: IVector4;
 	texture: THREE.Texture;
 
 	/**
@@ -2901,46 +2894,47 @@ export interface WebGLRenderTarget extends EventDispatcher {
 	 * @default null
 	 */
 	depthTexture: THREE.DepthTexture;
+
 	readonly isWebGLRenderTarget: true;
 
 	/**
-	 * @deprecated Use {@link Texture#wrapS texture.wrapS} instead.
+	 * @deprecated Use {@link ITexture#wrapS texture.wrapS} instead.
 	 */
 	wrapS: any;
 	/**
-	 * @deprecated Use {@link Texture#wrapT texture.wrapT} instead.
+	 * @deprecated Use {@link ITexture#wrapT texture.wrapT} instead.
 	 */
 	wrapT: any;
 	/**
-	 * @deprecated Use {@link Texture#magFilter texture.magFilter} instead.
+	 * @deprecated Use {@link ITexture#magFilter texture.magFilter} instead.
 	 */
 	magFilter: any;
 	/**
-	 * @deprecated Use {@link Texture#minFilter texture.minFilter} instead.
+	 * @deprecated Use {@link ITexture#minFilter texture.minFilter} instead.
 	 */
 	minFilter: any;
 	/**
-	 * @deprecated Use {@link Texture#anisotropy texture.anisotropy} instead.
+	 * @deprecated Use {@link ITexture#anisotropy texture.anisotropy} instead.
 	 */
 	anisotropy: any;
 	/**
-	 * @deprecated Use {@link Texture#offset texture.offset} instead.
+	 * @deprecated Use {@link ITexture#offset texture.offset} instead.
 	 */
 	offset: any;
 	/**
-	 * @deprecated Use {@link Texture#repeat texture.repeat} instead.
+	 * @deprecated Use {@link ITexture#repeat texture.repeat} instead.
 	 */
 	repeat: any;
 	/**
-	 * @deprecated Use {@link Texture#format texture.format} instead.
+	 * @deprecated Use {@link ITexture#format texture.format} instead.
 	 */
 	format: any;
 	/**
-	 * @deprecated Use {@link Texture#type texture.type} instead.
+	 * @deprecated Use {@link ITexture#type texture.type} instead.
 	 */
 	type: any;
 	/**
-	 * @deprecated Use {@link Texture#generateMipmaps texture.generateMipmaps} instead.
+	 * @deprecated Use {@link ITexture#generateMipmaps texture.generateMipmaps} instead.
 	 */
 	generateMipmaps: any;
 
@@ -2955,63 +2949,63 @@ export interface WebGLRenderTarget extends EventDispatcher {
  * This class originall extended WebGLMultipleRenderTarget
  * However, there are some issues with this method as documented below
  */
-export interface WebGLMultipleRenderTargets extends EventDispatcher {
-	texture: Texture[];
+export interface IWebGLMultipleRenderTargets extends IEventDispatcher {
+	texture: ITexture[];
 
 	readonly isWebGLMultipleRenderTargets: true;
 
 	setSize(width: number, height: number, depth?: number): this;
-	copy(source: WebGLMultipleRenderTargets): this;
+	copy(source: IWebGLMultipleRenderTargets): this;
 	clone(): this;
 	dispose(): void;
 	// This is an available method, however it will break the code see https://github.com/mrdoob/three.js/issues/21930
-	setTexture(texture: Texture): void;
+	setTexture(texture: ITexture): void;
 }
 
-export type XRAnimationLoopCallback = (
+export type TXRAnimationLoopCallback = (
 	time: number,
 	frame?: THREE.XRFrame
 ) => void;
 
-export type XRFrameRequestCallback = (
+export type TXRFrameRequestCallback = (
 	time: number,
 	frame: THREE.XRFrame
 ) => void;
 
-export interface Line3 {
+export interface ILine3 {
 	/**
 	 * @default new THREE.Vector3()
 	 */
-	start: Vector3;
+	start: IVector3;
 
 	/**
 	 * @default new THREE.Vector3()
 	 */
-	end: Vector3;
+	end: IVector3;
 
-	set(start?: Vector3, end?: Vector3): Line3;
+	set(start?: IVector3, end?: IVector3): ILine3;
 	clone(): this;
-	copy(line: Line3): this;
-	getCenter(target: Vector3): Vector3;
-	delta(target: Vector3): Vector3;
+	copy(line: ILine3): this;
+	getCenter(target: IVector3): IVector3;
+	delta(target: IVector3): IVector3;
 	distanceSq(): number;
 	distance(): number;
-	at(t: number, target: Vector3): Vector3;
-	closestPointToPointParameter(point: Vector3, clampToLine?: boolean): number;
+	at(t: number, target: IVector3): IVector3;
+	closestPointToPointParameter(point: IVector3, clampToLine?: boolean): number;
 	closestPointToPoint(
-		point: Vector3,
+		point: IVector3,
 		clampToLine: boolean,
-		target: Vector3
-	): Vector3;
-	applyMatrix4(matrix: Matrix4): Line3;
-	equals(line: Line3): boolean;
+		target: IVector3
+	): IVector3;
+	applyMatrix4(matrix: IMatrix4): ILine3;
+	equals(line: ILine3): boolean;
 }
 
-export interface Plane {
+export interface IPlane {
 	/**
 	 * @default new THREE.Vector3( 1, 0, 0 )
 	 */
-	normal: Vector3;
+	normal: IVector3;
 
 	/**
 	 * @default 0
@@ -3020,172 +3014,172 @@ export interface Plane {
 
 	readonly isPlane: true;
 
-	set(normal: Vector3, constant: number): Plane;
-	setComponents(x: number, y: number, z: number, w: number): Plane;
-	setFromNormalAndCoplanarPoint(normal: Vector3, point: Vector3): Plane;
-	setFromCoplanarPoints(a: Vector3, b: Vector3, c: Vector3): Plane;
+	set(normal: IVector3, constant: number): IPlane;
+	setComponents(x: number, y: number, z: number, w: number): IPlane;
+	setFromNormalAndCoplanarPoint(normal: IVector3, point: IVector3): IPlane;
+	setFromCoplanarPoints(a: IVector3, b: IVector3, c: IVector3): IPlane;
 	clone(): this;
-	copy(plane: Plane): this;
-	normalize(): Plane;
-	negate(): Plane;
-	distanceToPoint(point: Vector3): number;
-	distanceToSphere(sphere: Sphere): number;
-	projectPoint(point: Vector3, target: Vector3): Vector3;
-	orthoPoint(point: Vector3, target: Vector3): Vector3;
-	intersectLine(line: Line3, target: Vector3): Vector3 | null;
-	intersectsLine(line: Line3): boolean;
-	intersectsBox(box: Box3): boolean;
-	intersectsSphere(sphere: Sphere): boolean;
-	coplanarPoint(target: Vector3): Vector3;
-	applyMatrix4(matrix: Matrix4, optionalNormalMatrix?: Matrix3): Plane;
-	translate(offset: Vector3): Plane;
-	equals(plane: Plane): boolean;
+	copy(plane: IPlane): this;
+	normalize(): IPlane;
+	negate(): IPlane;
+	distanceToPoint(point: IVector3): number;
+	distanceToSphere(sphere: ISphere): number;
+	projectPoint(point: IVector3, target: IVector3): IVector3;
+	orthoPoint(point: IVector3, target: IVector3): IVector3;
+	intersectLine(line: ILine3, target: IVector3): IVector3 | null;
+	intersectsLine(line: ILine3): boolean;
+	intersectsBox(box: IBox3): boolean;
+	intersectsSphere(sphere: ISphere): boolean;
+	coplanarPoint(target: IVector3): IVector3;
+	applyMatrix4(matrix: IMatrix4, optionalNormalMatrix?: IMatrix3): IPlane;
+	translate(offset: IVector3): IPlane;
+	equals(plane: IPlane): boolean;
 
 	/**
-	 * @deprecated Use {@link Plane#intersectsLine .intersectsLine()} instead.
+	 * @deprecated Use {@link IPlane#intersectsLine .intersectsLine()} instead.
 	 */
 	isIntersectionLine(l: any): any;
 }
 
-export interface Triangle {
+export interface ITriangle {
 	/**
 	 * @default new THREE.Vector3()
 	 */
-	a: Vector3;
+	a: IVector3;
 
 	/**
 	 * @default new THREE.Vector3()
 	 */
-	b: Vector3;
+	b: IVector3;
 
 	/**
 	 * @default new THREE.Vector3()
 	 */
-	c: Vector3;
+	c: IVector3;
 
-	set(a: Vector3, b: Vector3, c: Vector3): Triangle;
+	set(a: IVector3, b: IVector3, c: IVector3): ITriangle;
 	setFromPointsAndIndices(
-		points: Vector3[],
+		points: IVector3[],
 		i0: number,
 		i1: number,
 		i2: number
 	): this;
 	setFromAttributeAndIndices(
-		attribute: BufferAttribute | InterleavedBufferAttribute,
+		attribute: IBufferAttribute | IInterleavedBufferAttribute,
 		i0: number,
 		i1: number,
 		i2: number
 	): this;
 	clone(): this;
-	copy(triangle: Triangle): this;
+	copy(triangle: ITriangle): this;
 	getArea(): number;
-	getMidpoint(target: Vector3): Vector3;
-	getNormal(target: Vector3): Vector3;
-	getPlane(target: Plane): Plane;
-	getBarycoord(point: Vector3, target: Vector3): Vector3;
+	getMidpoint(target: IVector3): IVector3;
+	getNormal(target: IVector3): IVector3;
+	getPlane(target: IPlane): IPlane;
+	getBarycoord(point: IVector3, target: IVector3): IVector3;
 	getUV(
-		point: Vector3,
-		uv1: Vector2,
-		uv2: Vector2,
-		uv3: Vector2,
-		target: Vector2
-	): Vector2;
-	containsPoint(point: Vector3): boolean;
-	intersectsBox(box: Box3): boolean;
-	isFrontFacing(direction: Vector3): boolean;
-	closestPointToPoint(point: Vector3, target: Vector3): Vector3;
-	equals(triangle: Triangle): boolean;
+		point: IVector3,
+		uv1: IVector2,
+		uv2: IVector2,
+		uv3: IVector2,
+		target: IVector2
+	): IVector2;
+	containsPoint(point: IVector3): boolean;
+	intersectsBox(box: IBox3): boolean;
+	isFrontFacing(direction: IVector3): boolean;
+	closestPointToPoint(point: IVector3, target: IVector3): IVector3;
+	equals(triangle: ITriangle): boolean;
 }
 
-export interface Sphere {
+export interface ISphere {
 	/**
 	 * @default new Vector3()
 	 */
-	center: Vector3;
+	center: IVector3;
 
 	/**
 	 * @default 1
 	 */
 	radius: number;
 
-	set(center: Vector3, radius: number): Sphere;
-	setFromPoints(points: Vector3[], optionalCenter?: Vector3): Sphere;
+	set(center: IVector3, radius: number): ISphere;
+	setFromPoints(points: IVector3[], optionalCenter?: IVector3): ISphere;
 	clone(): this;
-	copy(sphere: Sphere): this;
-	expandByPoint(point: Vector3): this;
+	copy(sphere: ISphere): this;
+	expandByPoint(point: IVector3): this;
 	isEmpty(): boolean;
 	makeEmpty(): this;
-	containsPoint(point: Vector3): boolean;
-	distanceToPoint(point: Vector3): number;
-	intersectsSphere(sphere: Sphere): boolean;
-	intersectsBox(box: Box3): boolean;
+	containsPoint(point: IVector3): boolean;
+	distanceToPoint(point: IVector3): number;
+	intersectsSphere(sphere: ISphere): boolean;
+	intersectsBox(box: IBox3): boolean;
 	intersectsPlane(plane: THREE.Plane): boolean;
-	clampPoint(point: Vector3, target: Vector3): Vector3;
-	getBoundingBox(target: Box3): Box3;
-	applyMatrix4(matrix: Matrix4): Sphere;
-	translate(offset: Vector3): Sphere;
-	equals(sphere: Sphere): boolean;
-	union(sphere: Sphere): this;
+	clampPoint(point: IVector3, target: IVector3): IVector3;
+	getBoundingBox(target: IBox3): IBox3;
+	applyMatrix4(matrix: IMatrix4): ISphere;
+	translate(offset: IVector3): ISphere;
+	equals(sphere: ISphere): boolean;
+	union(sphere: ISphere): this;
 
 	/**
-	 * @deprecated Use {@link Sphere#isEmpty .isEmpty()} instead.
+	 * @deprecated Use {@link ISphere#isEmpty .isEmpty()} instead.
 	 */
 	empty(): any;
 }
 
-export interface Box3 {
+export interface IBox3 {
 	/**
 	 * @default new THREE.Vector3( + Infinity, + Infinity, + Infinity )
 	 */
-	min: Vector3;
+	min: IVector3;
 
 	/**
 	 * @default new THREE.Vector3( - Infinity, - Infinity, - Infinity )
 	 */
-	max: Vector3;
+	max: IVector3;
 	readonly isBox3: true;
 
-	set(min: Vector3, max: Vector3): this;
+	set(min: IVector3, max: IVector3): this;
 	setFromArray(array: ArrayLike<number>): this;
-	setFromBufferAttribute(bufferAttribute: BufferAttribute): this;
-	setFromPoints(points: Vector3[]): this;
-	setFromCenterAndSize(center: Vector3, size: Vector3): this;
-	setFromObject(object: Object3D): this;
+	setFromBufferAttribute(bufferAttribute: IBufferAttribute): this;
+	setFromPoints(points: IVector3[]): this;
+	setFromCenterAndSize(center: IVector3, size: IVector3): this;
+	setFromObject(object: IObject3D): this;
 	clone(): this;
-	copy(box: Box3): this;
+	copy(box: IBox3): this;
 	makeEmpty(): this;
 	isEmpty(): boolean;
-	getCenter(target: Vector3): Vector3;
-	getSize(target: Vector3): Vector3;
-	expandByPoint(point: Vector3): this;
-	expandByVector(vector: Vector3): this;
+	getCenter(target: IVector3): IVector3;
+	getSize(target: IVector3): IVector3;
+	expandByPoint(point: IVector3): this;
+	expandByVector(vector: IVector3): this;
 	expandByScalar(scalar: number): this;
-	expandByObject(object: Object3D): this;
-	containsPoint(point: Vector3): boolean;
-	containsBox(box: Box3): boolean;
-	getParameter(point: Vector3, target: Vector3): Vector3;
-	intersectsBox(box: Box3): boolean;
+	expandByObject(object: IObject3D): this;
+	containsPoint(point: IVector3): boolean;
+	containsBox(box: IBox3): boolean;
+	getParameter(point: IVector3, target: IVector3): IVector3;
+	intersectsBox(box: IBox3): boolean;
 	intersectsSphere(sphere: THREE.Sphere): boolean;
-	intersectsPlane(plane: Plane): boolean;
+	intersectsPlane(plane: IPlane): boolean;
 	intersectsTriangle(triangle: THREE.Triangle): boolean;
-	clampPoint(point: Vector3, target: Vector3): Vector3;
-	distanceToPoint(point: Vector3): number;
-	getBoundingSphere(target: Sphere): Sphere;
-	intersect(box: Box3): this;
-	union(box: Box3): this;
-	applyMatrix4(matrix: Matrix4): this;
-	translate(offset: Vector3): this;
-	equals(box: Box3): boolean;
+	clampPoint(point: IVector3, target: IVector3): IVector3;
+	distanceToPoint(point: IVector3): number;
+	getBoundingSphere(target: ISphere): ISphere;
+	intersect(box: IBox3): this;
+	union(box: IBox3): this;
+	applyMatrix4(matrix: IMatrix4): this;
+	translate(offset: IVector3): this;
+	equals(box: IBox3): boolean;
 	/**
-	 * @deprecated Use {@link Box3#isEmpty .isEmpty()} instead.
+	 * @deprecated Use {@link IBox3#isEmpty .isEmpty()} instead.
 	 */
 	empty(): any;
 	/**
-	 * @deprecated Use {@link Box3#intersectsBox .intersectsBox()} instead.
+	 * @deprecated Use {@link IBox3#intersectsBox .intersectsBox()} instead.
 	 */
 	isIntersectionBox(b: any): any;
 	/**
-	 * @deprecated Use {@link Box3#intersectsSphere .intersectsSphere()} instead.
+	 * @deprecated Use {@link IBox3#intersectsSphere .intersectsSphere()} instead.
 	 */
 	isIntersectionSphere(s: any): any;
 }
@@ -3196,7 +3190,7 @@ export interface Box3 {
  *
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js|src/renderers/WebGLRenderer.js}
  */
-export interface WebGLRenderer extends Renderer{
+export interface IWebGLRenderer extends IRenderer {
 	/**
 	 * A Canvas where the renderer draws its output.
 	 * This is automatically created by the renderer in the constructor (if not provided already); you just need to add it to your page.
@@ -3237,7 +3231,7 @@ export interface WebGLRenderer extends Renderer{
 	 * Debug configurations.
 	 * @default { checkShaderErrors: true }
 	 */
-	debug: WebGLDebug;
+	debug: IWebGLDebug;
 
 	/**
 	 * Defines whether the renderer should sort objects. Default is true.
@@ -3312,29 +3306,29 @@ export interface WebGLRenderer extends Renderer{
 	getPixelRatio(): number;
 	setPixelRatio(value: number): void;
 
-	getDrawingBufferSize(target: Vector2): Vector2;
+	getDrawingBufferSize(target: IVector2): IVector2;
 	setDrawingBufferSize(width: number, height: number, pixelRatio: number): void;
 
-	getSize(target: Vector2): Vector2;
+	getSize(target: IVector2): IVector2;
 
 	/**
 	 * Resizes the output canvas to (width, height), and also sets the viewport to fit that size, starting in (0, 0).
 	 */
 	setSize(width: number, height: number, updateStyle?: boolean): void;
 
-	getCurrentViewport(target: Vector4): Vector4;
+	getCurrentViewport(target: IVector4): IVector4;
 
 	/**
 	 * Copies the viewport into target.
 	 */
-	getViewport(target: Vector4): Vector4;
+	getViewport(target: IVector4): IVector4;
 
 	/**
 	 * Sets the viewport to render from (x, y) to (x + width, y + height).
 	 * (x, y) is the lower-left corner of the region.
 	 */
 	setViewport(
-		x: Vector4 | number,
+		x: IVector4 | number,
 		y?: number,
 		width?: number,
 		height?: number
@@ -3343,13 +3337,13 @@ export interface WebGLRenderer extends Renderer{
 	/**
 	 * Copies the scissor area into target.
 	 */
-	getScissor(target: Vector4): Vector4;
+	getScissor(target: IVector4): IVector4;
 
 	/**
 	 * Sets the scissor area from (x, y) to (x + width, y + height).
 	 */
 	setScissor(
-		x: Vector4 | number,
+		x: IVector4 | number,
 		y?: number,
 		width?: number,
 		height?: number
@@ -3378,12 +3372,12 @@ export interface WebGLRenderer extends Renderer{
 	/**
 	 * Returns a THREE.Color instance with the current clear color.
 	 */
-	getClearColor(target: Color): Color;
+	getClearColor(target: IColor): IColor;
 
 	/**
 	 * Sets the clear color, using color for the color and alpha for the opacity.
 	 */
-	setClearColor(color: ColorRepresentation, alpha?: number): void;
+	setClearColor(color: TColorRepresentation, alpha?: number): void;
 
 	/**
 	 * Returns a float with the current clear alpha. Ranges from 0 to 1.
@@ -3402,7 +3396,7 @@ export interface WebGLRenderer extends Renderer{
 	clearDepth(): void;
 	clearStencil(): void;
 	clearTarget(
-		renderTarget: WebGLRenderTarget,
+		renderTarget: IWebGLRenderTarget,
 		color: boolean,
 		depth: boolean,
 		stencil: boolean
@@ -3415,11 +3409,11 @@ export interface WebGLRenderer extends Renderer{
 	dispose(): void;
 
 	renderBufferDirect(
-		camera: Camera,
-		scene: Scene,
-		geometry: BufferGeometry,
-		material: Material,
-		object: Object3D,
+		camera: ICamera,
+		scene: IScene,
+		geometry: IBufferGeometry,
+		material: IMaterial,
+		object: IObject3D,
 		geometryGroup: any
 	): void;
 
@@ -3427,30 +3421,30 @@ export interface WebGLRenderer extends Renderer{
 	 * A build in function that can be used instead of requestAnimationFrame. For WebXR projects this function must be used.
 	 * @param callback The function will be called every available frame. If `null` is passed it will stop any already ongoing animation.
 	 */
-	setAnimationLoop(callback: XRAnimationLoopCallback | null): void;
+	setAnimationLoop(callback: TXRAnimationLoopCallback | null): void;
 
 	/**
-	 * @deprecated Use {@link WebGLRenderer#setAnimationLoop .setAnimationLoop()} instead.
+	 * @deprecated Use {@link IWebGLRenderer#setAnimationLoop .setAnimationLoop()} instead.
 	 */
 	animate(callback: () => void): void;
 
 	/**
 	 * Compiles all materials in the scene with the camera. This is useful to precompile shaders before the first rendering.
 	 */
-	compile(scene: Object3D, camera: Camera): void;
+	compile(scene: IObject3D, camera: ICamera): void;
 
 	/**
 	 * Render a scene or an object using a camera.
-	 * The render is done to a previously specified {@link WebGLRenderTarget#renderTarget .renderTarget} set by calling
-	 * {@link WebGLRenderer#setRenderTarget .setRenderTarget} or to the canvas as usual.
+	 * The render is done to a previously specified {@link IWebGLRenderTarget#renderTarget .renderTarget} set by calling
+	 * {@link IWebGLRenderer#setRenderTarget .setRenderTarget} or to the canvas as usual.
 	 *
 	 * By default render buffers are cleared before rendering but you can prevent this by setting the property
-	 * {@link WebGLRenderer#autoClear autoClear} to false. If you want to prevent only certain buffers being cleared
-	 * you can set either the {@link WebGLRenderer#autoClearColor autoClearColor},
-	 * {@link WebGLRenderer#autoClearStencil autoClearStencil} or {@link WebGLRenderer#autoClearDepth autoClearDepth}
-	 * properties to false. To forcibly clear one ore more buffers call {@link WebGLRenderer#clear .clear}.
+	 * {@link IWebGLRenderer#autoClear autoClear} to false. If you want to prevent only certain buffers being cleared
+	 * you can set either the {@link IWebGLRenderer#autoClearColor autoClearColor},
+	 * {@link IWebGLRenderer#autoClearStencil autoClearStencil} or {@link IWebGLRenderer#autoClearDepth autoClearDepth}
+	 * properties to false. To forcibly clear one ore more buffers call {@link IWebGLRenderer#clear .clear}.
 	 */
-	render(scene: Object3D, camera: Camera): void;
+	render(scene: IObject3D, camera: ICamera): void;
 
 	/**
 	 * Returns the current active cube face.
@@ -3465,28 +3459,28 @@ export interface WebGLRenderer extends Renderer{
 	/**
 	 * Returns the current render target. If no render target is set, null is returned.
 	 */
-	getRenderTarget(): WebGLRenderTarget | null;
+	getRenderTarget(): IWebGLRenderTarget | null;
 
 	/**
-	 * @deprecated Use {@link WebGLRenderer#getRenderTarget .getRenderTarget()} instead.
+	 * @deprecated Use {@link IWebGLRenderer#getRenderTarget .getRenderTarget()} instead.
 	 */
-	getCurrentRenderTarget(): WebGLRenderTarget | null;
+	getCurrentRenderTarget(): IWebGLRenderTarget | null;
 
 	/**
 	 * Sets the active render target.
 	 *
-	 * @param renderTarget The {@link WebGLRenderTarget renderTarget} that needs to be activated. When `null` is given, the canvas is set as the active render target instead.
+	 * @param renderTarget The {@link IWebGLRenderTarget renderTarget} that needs to be activated. When `null` is given, the canvas is set as the active render target instead.
 	 * @param activeCubeFace Specifies the active cube side (PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5) of {@link WebGLCubeRenderTarget}.
 	 * @param activeMipmapLevel Specifies the active mipmap level.
 	 */
 	setRenderTarget(
-		renderTarget: WebGLRenderTarget | WebGLMultipleRenderTargets | null,
+		renderTarget: IWebGLRenderTarget | IWebGLMultipleRenderTargets | null,
 		activeCubeFace?: number,
 		activeMipmapLevel?: number
 	): void;
 
 	readRenderTargetPixels(
-		renderTarget: WebGLRenderTarget | WebGLMultipleRenderTargets,
+		renderTarget: IWebGLRenderTarget | IWebGLMultipleRenderTargets,
 		x: number,
 		y: number,
 		width: number,
@@ -3504,8 +3498,8 @@ export interface WebGLRenderer extends Renderer{
 	 * @param level Specifies the destination mipmap level of the texture.
 	 */
 	copyFramebufferToTexture(
-		position: Vector2,
-		texture: Texture,
+		position: IVector2,
+		texture: ITexture,
 		level?: number
 	): void;
 
@@ -3518,9 +3512,9 @@ export interface WebGLRenderer extends Renderer{
 	 * @param level Specifies the destination mipmap level of the texture.
 	 */
 	copyTextureToTexture(
-		position: Vector2,
-		srcTexture: Texture,
-		dstTexture: Texture,
+		position: IVector2,
+		srcTexture: ITexture,
+		dstTexture: ITexture,
 		level?: number
 	): void;
 
@@ -3533,10 +3527,10 @@ export interface WebGLRenderer extends Renderer{
 	 * @param level Specifies the destination mipmap level of the texture.
 	 */
 	copyTextureToTexture3D(
-		sourceBox: Box3,
-		position: Vector3,
-		srcTexture: Texture,
-		dstTexture: DataTexture3D | DataTexture2DArray,
+		sourceBox: IBox3,
+		position: IVector3,
+		srcTexture: ITexture,
+		dstTexture: IDataTexture3D | IDataTexture2DArray,
 		level?: number
 	): void;
 
@@ -3545,7 +3539,7 @@ export interface WebGLRenderer extends Renderer{
 	 *
 	 * @param texture The texture to Initialize.
 	 */
-	initTexture(texture: Texture): void;
+	initTexture(texture: ITexture): void;
 
 	/**
 	 * Can be used to reset the internal WebGL state.
@@ -3558,7 +3552,7 @@ export interface WebGLRenderer extends Renderer{
 	gammaFactor: number;
 
 	/**
-	 * @deprecated Use {@link WebGLRenderer#xr .xr} instead.
+	 * @deprecated Use {@link IWebGLRenderer#xr .xr} instead.
 	 */
 	vr: boolean;
 
@@ -3618,7 +3612,7 @@ export interface WebGLRenderer extends Renderer{
 	supportsInstancedArrays(): any;
 
 	/**
-	 * @deprecated Use {@link WebGLRenderer#setScissorTest .setScissorTest()} instead.
+	 * @deprecated Use {@link IWebGLRenderer#setScissorTest .setScissorTest()} instead.
 	 */
 	enableScissorTest(boolean: any): any;
 }
@@ -3630,7 +3624,7 @@ export interface WebGLRenderer extends Renderer{
  *
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/BufferGeometry.js|src/core/BufferGeometry.js}
  */
-export interface BufferGeometry extends EventDispatcher {
+export interface IBufferGeometry extends IEventDispatcher {
 	/**
 	 * Unique number of this buffergeometry instance
 	 */
@@ -3650,20 +3644,20 @@ export interface BufferGeometry extends EventDispatcher {
 	/**
 	 * @default null
 	 */
-	index: BufferAttribute | null;
+	index: IBufferAttribute | null;
 
 	/**
 	 * @default {}
 	 */
 	attributes: {
-		[name: string]: BufferAttribute | InterleavedBufferAttribute;
+		[name: string]: IBufferAttribute | IInterleavedBufferAttribute;
 	};
 
 	/**
 	 * @default {}
 	 */
 	morphAttributes: {
-		[name: string]: Array<BufferAttribute | InterleavedBufferAttribute>;
+		[name: string]: Array<IBufferAttribute | IInterleavedBufferAttribute>;
 	};
 
 	/**
@@ -3701,19 +3695,19 @@ export interface BufferGeometry extends EventDispatcher {
 	userData: { [key: string]: any };
 	readonly isBufferGeometry: true;
 
-	getIndex(): BufferAttribute | null;
-	setIndex(index: BufferAttribute | number[] | null): BufferGeometry;
+	getIndex(): IBufferAttribute | null;
+	setIndex(index: IBufferAttribute | number[] | null): IBufferGeometry;
 
 	setAttribute(
 		name: THREE.BuiltinShaderAttributeName | (string & {}),
-		attribute: BufferAttribute | InterleavedBufferAttribute
-	): BufferGeometry;
+		attribute: IBufferAttribute | IInterleavedBufferAttribute
+	): IBufferGeometry;
 	getAttribute(
 		name: THREE.BuiltinShaderAttributeName | (string & {})
-	): BufferAttribute | InterleavedBufferAttribute;
+	): IBufferAttribute | IInterleavedBufferAttribute;
 	deleteAttribute(
 		name: THREE.BuiltinShaderAttributeName | (string & {})
-	): BufferGeometry;
+	): IBufferGeometry;
 	hasAttribute(name: THREE.BuiltinShaderAttributeName | (string & {})): boolean;
 
 	addGroup(start: number, count: number, materialIndex?: number): void;
@@ -3724,19 +3718,19 @@ export interface BufferGeometry extends EventDispatcher {
 	/**
 	 * Bakes matrix transform directly into vertex coordinates.
 	 */
-	applyMatrix4(matrix: Matrix4): BufferGeometry;
-	applyQuaternion(q: Quaternion): BufferGeometry;
+	applyMatrix4(matrix: IMatrix4): IBufferGeometry;
+	applyQuaternion(q: IQuaternion): IBufferGeometry;
 
-	rotateX(angle: number): BufferGeometry;
-	rotateY(angle: number): BufferGeometry;
-	rotateZ(angle: number): BufferGeometry;
-	translate(x: number, y: number, z: number): BufferGeometry;
-	scale(x: number, y: number, z: number): BufferGeometry;
-	lookAt(v: Vector3): void;
+	rotateX(angle: number): IBufferGeometry;
+	rotateY(angle: number): IBufferGeometry;
+	rotateZ(angle: number): IBufferGeometry;
+	translate(x: number, y: number, z: number): IBufferGeometry;
+	scale(x: number, y: number, z: number): IBufferGeometry;
+	lookAt(v: IVector3): void;
 
-	center(): BufferGeometry;
+	center(): IBufferGeometry;
 
-	setFromPoints(points: Vector3[] | Vector2[]): BufferGeometry;
+	setFromPoints(points: IVector3[] | IVector2[]): IBufferGeometry;
 
 	/**
 	 * Computes bounding box of the geometry, updating Geometry.boundingBox attribute.
@@ -3760,14 +3754,14 @@ export interface BufferGeometry extends EventDispatcher {
 	 */
 	computeVertexNormals(): void;
 
-	merge(geometry: BufferGeometry, offset?: number): BufferGeometry;
+	merge(geometry: IBufferGeometry, offset?: number): IBufferGeometry;
 	normalizeNormals(): void;
 
-	toNonIndexed(): BufferGeometry;
+	toNonIndexed(): IBufferGeometry;
 
 	toJSON(): any;
-	clone(): BufferGeometry;
-	copy(source: BufferGeometry): this;
+	clone(): IBufferGeometry;
+	copy(source: IBufferGeometry): this;
 
 	/**
 	 * Disposes the object from memory.
@@ -3776,132 +3770,132 @@ export interface BufferGeometry extends EventDispatcher {
 	dispose(): void;
 
 	/**
-	 * @deprecated Use {@link BufferGeometry#groups .groups} instead.
+	 * @deprecated Use {@link IBufferGeometry#groups .groups} instead.
 	 */
 	drawcalls: any;
 
 	/**
-	 * @deprecated Use {@link BufferGeometry#groups .groups} instead.
+	 * @deprecated Use {@link IBufferGeometry#groups .groups} instead.
 	 */
 	offsets: any;
 
 	/**
-	 * @deprecated Use {@link BufferGeometry#setIndex .setIndex()} instead.
+	 * @deprecated Use {@link IBufferGeometry#setIndex .setIndex()} instead.
 	 */
 	addIndex(index: any): void;
 
 	/**
-	 * @deprecated Use {@link BufferGeometry#addGroup .addGroup()} instead.
+	 * @deprecated Use {@link IBufferGeometry#addGroup .addGroup()} instead.
 	 */
 	addDrawCall(start: any, count: any, indexOffset?: any): void;
 
 	/**
-	 * @deprecated Use {@link BufferGeometry#clearGroups .clearGroups()} instead.
+	 * @deprecated Use {@link IBufferGeometry#clearGroups .clearGroups()} instead.
 	 */
 	clearDrawCalls(): void;
 
 	/**
-	 * @deprecated Use {@link BufferGeometry#setAttribute .setAttribute()} instead.
+	 * @deprecated Use {@link IBufferGeometry#setAttribute .setAttribute()} instead.
 	 */
 	addAttribute(
 		name: string,
-		attribute: BufferAttribute | InterleavedBufferAttribute
-	): BufferGeometry;
+		attribute: IBufferAttribute | IInterleavedBufferAttribute
+	): IBufferGeometry;
 	addAttribute(name: any, array: any, itemSize: any): any;
 
 	/**
-	 * @deprecated Use {@link BufferGeometry#deleteAttribute .deleteAttribute()} instead.
+	 * @deprecated Use {@link IBufferGeometry#deleteAttribute .deleteAttribute()} instead.
 	 */
-	removeAttribute(name: string): BufferGeometry;
+	removeAttribute(name: string): IBufferGeometry;
 }
 
-export interface Group extends Object3D {
+export interface IGroup extends IObject3D {
 	type: 'Group';
 	readonly isGroup: true;
 }
 
-export interface Ray {
+export interface IRay {
 	/**
 	 * @default new THREE.Vector3()
 	 */
-	origin: Vector3;
+	origin: IVector3;
 
 	/**
 	 * @default new THREE.Vector3( 0, 0, - 1 )
 	 */
-	direction: Vector3;
+	direction: IVector3;
 
-	set(origin: Vector3, direction: Vector3): Ray;
+	set(origin: IVector3, direction: IVector3): IRay;
 	clone(): this;
-	copy(ray: Ray): this;
-	at(t: number, target: Vector3): Vector3;
-	lookAt(v: Vector3): Ray;
-	recast(t: number): Ray;
-	closestPointToPoint(point: Vector3, target: Vector3): Vector3;
-	distanceToPoint(point: Vector3): number;
-	distanceSqToPoint(point: Vector3): number;
+	copy(ray: IRay): this;
+	at(t: number, target: IVector3): IVector3;
+	lookAt(v: IVector3): IRay;
+	recast(t: number): IRay;
+	closestPointToPoint(point: IVector3, target: IVector3): IVector3;
+	distanceToPoint(point: IVector3): number;
+	distanceSqToPoint(point: IVector3): number;
 	distanceSqToSegment(
-		v0: Vector3,
-		v1: Vector3,
-		optionalPointOnRay?: Vector3,
-		optionalPointOnSegment?: Vector3
+		v0: IVector3,
+		v1: IVector3,
+		optionalPointOnRay?: IVector3,
+		optionalPointOnSegment?: IVector3
 	): number;
-	intersectSphere(sphere: Sphere, target: Vector3): Vector3 | null;
-	intersectsSphere(sphere: Sphere): boolean;
-	distanceToPlane(plane: Plane): number;
-	intersectPlane(plane: Plane, target: Vector3): Vector3 | null;
-	intersectsPlane(plane: Plane): boolean;
-	intersectBox(box: Box3, target: Vector3): Vector3 | null;
-	intersectsBox(box: Box3): boolean;
+	intersectSphere(sphere: ISphere, target: IVector3): IVector3 | null;
+	intersectsSphere(sphere: ISphere): boolean;
+	distanceToPlane(plane: IPlane): number;
+	intersectPlane(plane: IPlane, target: IVector3): IVector3 | null;
+	intersectsPlane(plane: IPlane): boolean;
+	intersectBox(box: IBox3, target: IVector3): IVector3 | null;
+	intersectsBox(box: IBox3): boolean;
 	intersectTriangle(
-		a: Vector3,
-		b: Vector3,
-		c: Vector3,
+		a: IVector3,
+		b: IVector3,
+		c: IVector3,
 		backfaceCulling: boolean,
-		target: Vector3
-	): Vector3 | null;
-	applyMatrix4(matrix4: Matrix4): Ray;
-	equals(ray: Ray): boolean;
+		target: IVector3
+	): IVector3 | null;
+	applyMatrix4(matrix4: IMatrix4): IRay;
+	equals(ray: IRay): boolean;
 
 	/**
-	 * @deprecated Use {@link Ray#intersectsBox .intersectsBox()} instead.
+	 * @deprecated Use {@link IRay#intersectsBox .intersectsBox()} instead.
 	 */
 	isIntersectionBox(b: any): any;
 
 	/**
-	 * @deprecated Use {@link Ray#intersectsPlane .intersectsPlane()} instead.
+	 * @deprecated Use {@link IRay#intersectsPlane .intersectsPlane()} instead.
 	 */
 	isIntersectionPlane(p: any): any;
 
 	/**
-	 * @deprecated Use {@link Ray#intersectsSphere .intersectsSphere()} instead.
+	 * @deprecated Use {@link IRay#intersectsSphere .intersectsSphere()} instead.
 	 */
 	isIntersectionSphere(s: any): any;
 }
 
-export interface Face {
+export interface IFace {
 	a: number;
 	b: number;
 	c: number;
-	normal: Vector3;
+	normal: IVector3;
 	materialIndex: number;
 }
 
-export interface Intersection<TIntersected extends Object3D = Object3D> {
+export interface IIntersection<TIntersected extends IObject3D = IObject3D> {
 	distance: number;
 	distanceToRay?: number | undefined;
-	point: Vector3;
+	point: IVector3;
 	index?: number | undefined;
-	face?: Face | null | undefined;
+	face?: IFace | null | undefined;
 	faceIndex?: number | undefined;
 	object: TIntersected;
-	uv?: Vector2 | undefined;
+	uv?: IVector2 | undefined;
 	instanceId?: number | undefined;
 }
 
-export interface Raycaster {
+export interface IRaycaster {
 	/** The Ray used for the raycasting. */
-	ray: Ray;
+	ray: IRay;
 
 	/**
 	 * The near factor of the raycaster. This value indicates which objects can be discarded based on the
@@ -3921,13 +3915,13 @@ export interface Raycaster {
 	 * The camera to use when raycasting against view-dependent objects such as billboarded objects like Sprites. This field
 	 * can be set manually or is set when calling "setFromCamera".
 	 */
-	camera: Camera;
+	camera: ICamera;
 
 	/**
 	 * Used by Raycaster to selectively ignore 3D objects when performing intersection tests.
 	 * @default new THREE.Layers()
 	 */
-	layers: Layers;
+	layers: ILayers;
 
 	/**
 	 * @default { Mesh: {}, Line: { threshold: 1 }, LOD: {}, Points: { threshold: 1 }, Sprite: {} }
@@ -3939,14 +3933,14 @@ export interface Raycaster {
 	 * @param origin The origin vector where the ray casts from.
 	 * @param direction The normalized direction vector that gives direction to the ray.
 	 */
-	set(origin: Vector3, direction: Vector3): void;
+	set(origin: IVector3, direction: IVector3): void;
 
 	/**
 	 * Updates the ray with a new origin and direction.
 	 * @param coords 2D coordinates of the mouse, in normalized device coordinates (NDC)---X and Y components should be between -1 and 1.
 	 * @param camera camera from which the ray should originate
 	 */
-	setFromCamera(coords: { x: number; y: number }, camera: Camera): void;
+	setFromCamera(coords: { x: number; y: number }, camera: ICamera): void;
 
 	/**
 	 * Checks all intersection between the ray and the object with or without the descendants. Intersections are returned sorted by distance, closest first.
@@ -3954,11 +3948,11 @@ export interface Raycaster {
 	 * @param recursive If true, it also checks all descendants. Otherwise it only checks intersecton with the object. Default is false.
 	 * @param optionalTarget (optional) target to set the result. Otherwise a new Array is instantiated. If set, you must clear this array prior to each call (i.e., array.length = 0;).
 	 */
-	intersectObject<TIntersected extends Object3D>(
-		object: Object3D,
+	intersectObject<TIntersected extends IObject3D>(
+		object: IObject3D,
 		recursive?: boolean,
-		optionalTarget?: Array<Intersection<TIntersected>>
-	): Array<Intersection<TIntersected>>;
+		optionalTarget?: Array<IIntersection<TIntersected>>
+	): Array<IIntersection<TIntersected>>;
 
 	/**
 	 * Checks all intersection between the ray and the objects with or without the descendants.
@@ -3968,17 +3962,17 @@ export interface Raycaster {
 	 * @param recursive If true, it also checks all descendants of the objects. Otherwise it only checks intersecton with the objects. Default is false.
 	 * @param optionalTarget (optional) target to set the result. Otherwise a new Array is instantiated. If set, you must clear this array prior to each call (i.e., array.length = 0;).
 	 */
-	intersectObjects<TIntersected extends Object3D>(
-		objects: Object3D[],
+	intersectObjects<TIntersected extends IObject3D>(
+		objects: IObject3D[],
 		recursive?: boolean,
-		optionalTarget?: Array<Intersection<TIntersected>>
-	): Array<Intersection<TIntersected>>;
+		optionalTarget?: Array<IIntersection<TIntersected>>
+	): Array<IIntersection<TIntersected>>;
 }
 
 /**
  * Object3D
  */
-export interface Object3D extends EventDispatcher<THREE.Event> {
+export interface IObject3D extends IEventDispatcher<any> {
 	/**
 	 * Unique number of this object instance.
 	 */
@@ -4001,65 +3995,65 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 	 * Object's parent in the scene graph.
 	 * @default null
 	 */
-	parent: Object3D | null;
+	parent: IObject3D | null;
 
 	/**
 	 * Array with object's children.
 	 * @default []
 	 */
-	children: Object3D[];
+	children: IObject3D[];
 
 	/**
 	 * Up direction.
 	 * @default THREE.Object3D.DefaultUp.clone()
 	 */
-	up: Vector3;
+	up: IVector3;
 
 	/**
 	 * Object's local position.
 	 * @default new THREE.Vector3()
 	 */
-	readonly position: Vector3;
+	readonly position: IVector3;
 
 	/**
 	 * Object's local rotation (Euler angles), in radians.
 	 * @default new THREE.Euler()
 	 */
-	readonly rotation: Euler;
+	readonly rotation: IEuler;
 
 	/**
 	 * Object's local rotation as a Quaternion.
 	 * @default new THREE.Quaternion()
 	 */
-	readonly quaternion: Quaternion;
+	readonly quaternion: IQuaternion;
 
 	/**
 	 * Object's local scale.
 	 * @default new THREE.Vector3()
 	 */
-	readonly scale: Vector3;
+	readonly scale: IVector3;
 
 	/**
-	 * @default new THREE.Matrix4()
+	 * @default new IMatrix4()
 	 */
-	readonly modelViewMatrix: Matrix4;
+	readonly modelViewMatrix: IMatrix4;
 
 	/**
 	 * @default new THREE.Matrix3()
 	 */
-	readonly normalMatrix: Matrix3;
+	readonly normalMatrix: IMatrix3;
 
 	/**
 	 * Local transform.
-	 * @default new THREE.Matrix4()
+	 * @default new IMatrix4()
 	 */
-	matrix: Matrix4;
+	matrix: IMatrix4;
 
 	/**
 	 * The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.
-	 * @default new THREE.Matrix4()
+	 * @default new IMatrix4()
 	 */
-	matrixWorld: Matrix4;
+	matrixWorld: IMatrix4;
 
 	/**
 	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also
@@ -4077,7 +4071,7 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 	/**
 	 * @default new THREE.Layers()
 	 */
-	layers: Layers;
+	layers: ILayers;
 	/**
 	 * Object gets rendered if true.
 	 * @default true
@@ -4115,7 +4109,7 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 	 * Array with animation clips.
 	 * @default []
 	 */
-	animations: AnimationClip[];
+	animations: IAnimationClip[];
 
 	/**
 	 * An object that can be used to store custom data about the Object3d. It should not hold references to functions as these will not be cloned.
@@ -4146,7 +4140,7 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 	 * Calls before rendering object
 	 */
 	onBeforeRender: (
-		renderer: THREE.WebGLRenderer ,
+		renderer: THREE.WebGLRenderer,
 		scene: THREE.Scene,
 		camera: THREE.Camera,
 		geometry: THREE.BufferGeometry,
@@ -4169,7 +4163,7 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 	/**
 	 * This updates the position, rotation and scale with the matrix.
 	 */
-	applyMatrix4(matrix: THREE.Matrix4): void;
+	applyMatrix4(matrix: IMatrix4): void;
 
 	applyQuaternion(quaternion: THREE.Quaternion): this;
 
@@ -4177,7 +4171,7 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 
 	setRotationFromEuler(euler: THREE.Euler): void;
 
-	setRotationFromMatrix(m: THREE.Matrix4): void;
+	setRotationFromMatrix(m: IMatrix4): void;
 
 	setRotationFromQuaternion(q: THREE.Quaternion): void;
 
@@ -4241,13 +4235,13 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 	 * Updates the vector from local space to world space.
 	 * @param vector A local vector.
 	 */
-	localToWorld(vector: THREE.Vector3): Vector3;
+	localToWorld(vector: THREE.Vector3): IVector3;
 
 	/**
 	 * Updates the vector from world space to local space.
 	 * @param vector A world vector.
 	 */
-	worldToLocal(vector: THREE.Vector3): Vector3;
+	worldToLocal(vector: THREE.Vector3): IVector3;
 
 	/**
 	 * Rotates object to face point in space.
@@ -4258,12 +4252,12 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 	/**
 	 * Adds object as child of this object.
 	 */
-	add(...object: THREE.Object3D[]): this;
+	add(...object: IObject3D[]): this;
 
 	/**
 	 * Removes object as child of this object.
 	 */
-	remove(...object: THREE.Object3D[]): this;
+	remove(...object: IObject3D[]): this;
 
 	/**
 	 * Removes this object from its current parent.
@@ -4284,20 +4278,20 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 	 * Searches through the object's children and returns the first with a matching id.
 	 * @param id	Unique number of the object instance
 	 */
-	getObjectById(id: number): Object3D | undefined;
+	getObjectById(id: number): IObject3D | undefined;
 
 	/**
 	 * Searches through the object's children and returns the first with a matching name.
 	 * @param name	String to match to the children's Object3d.name property.
 	 */
-	getObjectByName(name: string): Object3D | undefined;
+	getObjectByName(name: string): IObject3D | undefined;
 
-	getObjectByProperty(name: string, value: string): Object3D | undefined;
+	getObjectByProperty(name: string, value: string): IObject3D | undefined;
 
-	getWorldPosition(target: THREE.Vector3): Vector3;
-	getWorldQuaternion(target: THREE.Quaternion): Quaternion;
-	getWorldScale(target: THREE.Vector3): Vector3;
-	getWorldDirection(target: THREE.Vector3): Vector3;
+	getWorldPosition(target: THREE.Vector3): IVector3;
+	getWorldQuaternion(target: THREE.Quaternion): IQuaternion;
+	getWorldScale(target: THREE.Vector3): IVector3;
+	getWorldDirection(target: THREE.Vector3): IVector3;
 
 	raycast(raycaster: THREE.Raycaster, intersects: THREE.Intersection[]): void;
 
@@ -4339,28 +4333,28 @@ export interface Object3D extends EventDispatcher<THREE.Event> {
 /**
  * Abstract base class for cameras. This class should always be inherited when you build a new camera.
  */
-export interface Camera extends Object3D {
+export interface ICamera extends IObject3D {
 	/**
 	 * This is the inverse of matrixWorld. MatrixWorld contains the Matrix which has the world transform of the Camera.
-	 * @default new THREE.Matrix4()
+	 * @default new IMatrix4()
 	 */
-	matrixWorldInverse: THREE.Matrix4;
+	matrixWorldInverse: IMatrix4;
 
 	/**
 	 * This is the matrix which contains the projection.
-	 * @default new THREE.Matrix4()
+	 * @default new IMatrix4()
 	 */
-	projectionMatrix: THREE.Matrix4;
+	projectionMatrix: IMatrix4;
 
 	/**
 	 * This is the inverse of projectionMatrix.
-	 * @default new THREE.Matrix4()
+	 * @default new IMatrix4()
 	 */
-	projectionMatrixInverse: THREE.Matrix4;
+	projectionMatrixInverse: IMatrix4;
 
 	readonly isCamera: true;
 
-	getWorldDirection(target: THREE.Vector3): Vector3;
+	getWorldDirection(target: THREE.Vector3): IVector3;
 
 	updateMatrixWorld(force?: boolean): void;
 }

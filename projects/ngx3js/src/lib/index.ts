@@ -116,7 +116,6 @@ export * from './texture/texture.component';
 export * from './texture/textureUtils';
 export * from './threejs-library/ammo';
 export * from './threejs-library/three-ngx';
-export * as THREE_CORE from './threejs-library/three-core';
 export * from './tools/tools.component';
 export * from './transform/transform.component';
 export * from './translation/translation.component';
@@ -126,4 +125,3 @@ export * from './viewer/viewer-canvas';
 export * from './viewer/viewer.component';
 export * from './viewport-in/viewport-in.component';
 export * from './visual/visual.component';
-

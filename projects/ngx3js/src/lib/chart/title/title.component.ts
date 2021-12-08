@@ -254,7 +254,7 @@ export class ChartTitleComponent
 			const width = (height * textWidth) / textHeight;
 			this._geometry = new THREE.PlaneGeometry(width, height);
 			this._title = new THREE.Mesh(this._geometry, this._material);
-			this.setChart(this._title);
+			this.setChart(this._title as any);
 		}
 		return this._title as T;
 	}

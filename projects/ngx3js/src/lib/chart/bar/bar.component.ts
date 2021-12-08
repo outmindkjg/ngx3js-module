@@ -326,7 +326,7 @@ export class ChartBarComponent
 					true
 				);
 			});
-			this.setChart(this._line);
+			this.setChart(this._line as any);
 		}
 		return this._line as T;
 	}

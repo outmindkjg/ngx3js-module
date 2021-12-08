@@ -42,7 +42,7 @@ import { TextureComponent } from '../texture/texture.component';
  * 	<ngx3js-pass [type]="'bloom'" [strength]="0.75"></ngx3js-pass>
  * 	<ngx3js-pass
  * 		[type]="'film'"
- * 		[noiseIntensity]="0.5" 
+ * 		[noiseIntensity]="0.5"
  * 		[scanlinesIntensity]="0.5" [scanlinesCount]="1448"
  * 		[grayscale]="false"
  * 	></ngx3js-pass>

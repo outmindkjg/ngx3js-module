@@ -234,15 +234,15 @@ export interface ThreeVector {
 /**
  * MaterialParameters
  */
-export interface MaterialParameters{
-    fog?: boolean | undefined;
-    opacity?: number | undefined;
-    side?: string | undefined;
-    shadowSide?: string | undefined;
-    toneMapped?: boolean | undefined;
-    transparent?: boolean | undefined;
-    vertexColors?: boolean | undefined;
-    visible?: boolean | undefined;
+export interface MaterialParameters {
+	fog?: boolean | undefined;
+	opacity?: number | undefined;
+	side?: string | undefined;
+	shadowSide?: string | undefined;
+	toneMapped?: boolean | undefined;
+	transparent?: boolean | undefined;
+	vertexColors?: boolean | undefined;
+	visible?: boolean | undefined;
 }
 
 /**
@@ -879,12 +879,12 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	/**
 	 * Mesh object3d of base component
 	 */
-	public meshObject3d: THREE.Object3D = null;
+	public meshObject3d: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Mesh children of base component
 	 */
-	protected meshChildren: THREE.Object3D[] = null;
+	protected meshChildren: THREE_CORE.IObject3D[] = null;
 
 	/**
 	 * Updates gui controller
@@ -989,7 +989,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	public setMesh(mesh: MeshComponent) {
 		this.mesh = mesh;
 		if (this.mesh !== null) {
-			this.meshObject3d = this.mesh.getObject3d() as THREE_CORE.Object3D;
+			this.meshObject3d = this.mesh.getObject3d() as THREE_CORE.IObject3D;
 			this.meshChildren = this.meshObject3d.children;
 			window.setTimeout(() => {
 				this.updateGuiController();
@@ -2494,7 +2494,11 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns side
 	 */
-	 public static getSideSafe(baseSide : string, altSide?: string, def?: string): THREE.Side {
+	public static getSideSafe(
+		baseSide: string,
+		altSide?: string,
+		def?: string
+	): THREE.Side {
 		const side = ThreeUtil.getTypeSafe(baseSide, altSide, def || '');
 		switch (side.toLowerCase()) {
 			case 'backside':

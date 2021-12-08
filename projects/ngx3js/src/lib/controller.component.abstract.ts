@@ -14,6 +14,7 @@ import { RendererEvent, RendererTimer, ThreeUtil } from './interface';
 import { SceneComponent } from './scene/scene.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { HtmlCollection } from './visual/visual.component';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * The Abstract Controller component.
@@ -97,7 +98,7 @@ export class AbstractControllerComponent
 	/**
 	 * Ref object3d of controller component
 	 */
-	protected refObject3d: THREE.Object3D = null;
+	protected refObject3d: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Ref object2d of controller component
@@ -108,7 +109,7 @@ export class AbstractControllerComponent
 	 * Sets object3d
 	 * @param refObject3d
 	 */
-	public setObject3d(refObject3d: THREE.Object3D) {
+	public setObject3d(refObject3d: THREE_CORE.IObject3D) {
 		if (this.refObject3d !== refObject3d) {
 			this.refObject3d = refObject3d;
 			if (this.refObject3d !== null) {

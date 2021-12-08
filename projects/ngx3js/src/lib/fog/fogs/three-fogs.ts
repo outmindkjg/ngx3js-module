@@ -7,8 +7,8 @@ import * as THREE from 'three';
  * See the [ngx fog](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_fog/FogExp2) page for a live demo.
  *
  */
- export class NgxFogExp2 extends THREE.FogExp2 {
-    constructor(hex: number | string, density?: number) {
+export class NgxFogExp2 extends THREE.FogExp2 {
+	constructor(hex: number | string, density?: number) {
 		super(hex, density);
 	}
 }
@@ -20,10 +20,8 @@ import * as THREE from 'three';
  * See the [ngx fog](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_fog/Fog) page for a live demo.
  *
  */
- export class NgxFog extends THREE.Fog {
-    constructor(color: THREE.ColorRepresentation, near?: number, far?: number) {
+export class NgxFog extends THREE.Fog {
+	constructor(color: THREE.ColorRepresentation, near?: number, far?: number) {
 		super(color, near, far);
 	}
 }
-
-

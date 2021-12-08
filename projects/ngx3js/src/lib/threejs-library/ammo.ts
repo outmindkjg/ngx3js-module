@@ -5,9 +5,9 @@ import * as _AMMO from './ammo.wasm';
 
 /**
  * Ammos init
- * @template T 
- * @param [target] 
- * @returns init 
+ * @template T
+ * @param [target]
+ * @returns init
  */
 export function AmmoInit<T>(target?: T): Promise<T & AmmoType> {
 	return _AMMO.default(target);

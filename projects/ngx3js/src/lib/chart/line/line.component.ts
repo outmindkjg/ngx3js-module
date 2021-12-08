@@ -382,7 +382,7 @@ export class ChartLineComponent
 			this._geometryPointBorder = pointerInfo.geometryBorder;
 			this._materialPointBorder = pointerInfo.materialBorder;
 			this.addPointer(upPoints, pointer, this._line, middleY, baseZ);
-			this.setChart(this._line);
+			this.setChart(this._line as any);
 		}
 		return this._line as T;
 	}

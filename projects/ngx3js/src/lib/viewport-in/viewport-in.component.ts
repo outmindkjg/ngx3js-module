@@ -1,4 +1,12 @@
-import { Component, HostListener, ElementRef, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+	Component,
+	HostListener,
+	ElementRef,
+	OnInit,
+	Input,
+	OnChanges,
+	SimpleChanges,
+} from '@angular/core';
 
 /**
  * Component
@@ -11,13 +19,11 @@ import { Component, HostListener, ElementRef, OnInit, Input, OnChanges, SimpleCh
 	styleUrls: ['./viewport-in.component.scss'],
 })
 export class NgxViewportInComponent implements OnInit, OnChanges {
+	@Input() public scrollEle: Element = null;
 
+	@Input() public isRepeat: boolean = false;
 
-	@Input() public scrollEle : Element = null;
-
-	@Input() public isRepeat : boolean = false;
-
-	@Input() public scrollRate : number = 0.7;
+	@Input() public scrollRate: number = 0.7;
 
 	/**
 	 * Creates an instance of chart axes component.
@@ -34,8 +40,8 @@ export class NgxViewportInComponent implements OnInit, OnChanges {
 
 	/**
 	 * on changes
-	 * 
-	 * @param changes 
+	 *
+	 * @param changes
 	 */
 	ngOnChanges(changes: SimpleChanges): void {
 		this.setScrollEvent(this.scrollEle || window);
@@ -53,36 +59,45 @@ export class NgxViewportInComponent implements OnInit, OnChanges {
 	/**
 	 * Last scroll obj of ngx viewport in component
 	 */
-	private _lastScrollObj : Element | Window = null;
+	private _lastScrollObj: Element | Window = null;
 
 	/**
 	 * Last scroll event of ngx viewport in component
 	 */
-	private _lastScrollEvent : EventListener = null;
+	private _lastScrollEvent: EventListener = null;
 
 	/**
 	 * Sets scroll event
-	 * 
-	 * @param ele 
+	 *
+	 * @param ele
 	 */
-	private setScrollEvent(ele : Element | Window) {
+	private setScrollEvent(ele: Element | Window) {
 		if (ele === null) {
 			if (this._lastScrollObj !== null) {
-				this._lastScrollObj.removeEventListener('scroll', this._lastScrollEvent);
+				this._lastScrollObj.removeEventListener(
+					'scroll',
+					this._lastScrollEvent
+				);
 				this._lastScrollObj = null;
 			}
 		} else if (this._lastScrollObj !== ele) {
 			if (this._lastScrollObj !== null) {
-				this._lastScrollObj.removeEventListener('scroll', this._lastScrollEvent);
+				this._lastScrollObj.removeEventListener(
+					'scroll',
+					this._lastScrollEvent
+				);
 				this._lastScrollObj = null;
 			}
 			if (this._lastScrollEvent === null) {
 				this._lastScrollEvent = () => {
-					this.isVisible = this.isElementInViewport(this.el.nativeElement, this._lastScrollObj);
+					this.isVisible = this.isElementInViewport(
+						this.el.nativeElement,
+						this._lastScrollObj
+					);
 					if (!this.isRepeat && this.isVisible) {
 						this.setScrollEvent(null);
 					}
-				}
+				};
 			}
 			this._lastScrollObj = ele;
 			ele.addEventListener('scroll', this._lastScrollEvent);
@@ -92,20 +107,23 @@ export class NgxViewportInComponent implements OnInit, OnChanges {
 
 	/**
 	 * Determines whether element in viewport is
-	 * 
-	 * @param el 
-	 * @param scrollObj 
-	 * @returns true if element in viewport 
+	 *
+	 * @param el
+	 * @param scrollObj
+	 * @returns true if element in viewport
 	 */
-	private isElementInViewport(el: HTMLElement, scrollObj : Element | Window): boolean {
+	private isElementInViewport(
+		el: HTMLElement,
+		scrollObj: Element | Window
+	): boolean {
 		const rect = el.getBoundingClientRect();
-		const scrollSize : {
-			clientHeight : number;
-			clientWidth : number;
+		const scrollSize: {
+			clientHeight: number;
+			clientWidth: number;
 		} = {
-			clientHeight : 0,
-			clientWidth : 0
-		}
+			clientHeight: 0,
+			clientWidth: 0,
+		};
 		if (scrollObj instanceof Window) {
 			scrollSize.clientWidth = scrollObj.innerWidth;
 			scrollSize.clientHeight = scrollObj.innerHeight;
@@ -115,9 +133,8 @@ export class NgxViewportInComponent implements OnInit, OnChanges {
 		}
 		return (
 			rect.top >= 0 &&
-			(rect.top + (rect.bottom - rect.top) * this.scrollRate) <=
-				(scrollSize.clientHeight ||
-					document.documentElement.clientHeight)
+			rect.top + (rect.bottom - rect.top) * this.scrollRate <=
+				(scrollSize.clientHeight || document.documentElement.clientHeight)
 		);
 	}
 

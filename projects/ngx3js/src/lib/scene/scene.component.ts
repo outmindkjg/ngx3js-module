@@ -22,6 +22,7 @@ import { RendererTimer } from './../interface';
 import { LocalStorageService } from './../local-storage.service';
 import { MixerComponent } from './../mixer/mixer.component';
 import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Scene component.
@@ -528,11 +529,11 @@ export class SceneComponent
 					this.storageName,
 					(scene: THREE.Scene) => {
 						this.scene = scene;
-						this.setObject3d(scene);
+						this.setObject3d(scene as any);
 					}
 				);
 			} else {
-				this.setObject3d(this.scene);
+				this.setObject3d(this.scene as any);
 			}
 		}
 		return this.scene;

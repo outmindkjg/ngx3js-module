@@ -123,11 +123,8 @@ export class NgxPlaneControls {
 					this.getMouseOnScreen(this.mouse, event.pageX, event.pageY);
 					const xDistance = this.maxDistance;
 					const yDistance = this.maxDistance;
-					
-					const cameraPosition = new THREE.Vector2(
-						xDistance,
-						yDistance
-					);
+
+					const cameraPosition = new THREE.Vector2(xDistance, yDistance);
 					cameraPosition.multiply(this.mouse);
 					cameraPosition.add(new THREE.Vector2(this.target.x, this.target.y));
 					this.cameraPosition = new THREE.Vector3(

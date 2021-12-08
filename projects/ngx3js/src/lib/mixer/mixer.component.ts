@@ -14,6 +14,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ClipComponent } from './../clip/clip.component';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * Character Control
@@ -38,18 +39,18 @@ export interface CharacterControl {
  * 	<ngx3js-clip [name]="'default'" [index]="0"></ngx3js-clip>
  * </ngx3js-mixer>
  * <ngx3js-mixer
- * 	[action]="controls.animation" 
- * 	[type]="'Character'" 
+ * 	[action]="controls.animation"
+ * 	[type]="'Character'"
  * 	[skin]="controls.skinIdx" [weapon]="controls.weaponIdx"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
- * 	[type]="'MMDAnimationHelper'" 
- * 	[mmdHelpers]="['iksolver', 'physics']" 
+ * 	[type]="'MMDAnimationHelper'"
+ * 	[mmdHelpers]="['iksolver', 'physics']"
  * 	[afterglow]="2.0" [gravity]="-9.8 * 10" [physics]="true"
  * 	(onLoad)="setMixer($event)"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
- * 	[type]="'MMDAnimationHelper'" 
+ * 	[type]="'MMDAnimationHelper'"
  * 	[animationHelper]="animationHelper"
  * ></ngx3js-mixer>
  * <ngx3js-mixer
@@ -396,7 +397,7 @@ export class MixerComponent
 	 * @returns true if parent
 	 */
 	public setParent(
-		parent: THREE.Object3D | THREE.AnimationObjectGroup
+		parent: THREE_CORE.IObject3D | THREE.AnimationObjectGroup
 	): boolean {
 		if (
 			super.setParent(parent) ||
@@ -434,7 +435,7 @@ export class MixerComponent
 	 * @returns target
 	 */
 	private getTarget(
-		target?: THREE.Object3D | THREE.AnimationObjectGroup
+		target?: THREE_CORE.IObject3D | THREE.AnimationObjectGroup
 	): THREE.Object3D | THREE.AnimationObjectGroup {
 		let targetMesh: THREE.Object3D | THREE.AnimationObjectGroup = null;
 		if (ThreeUtil.isNotNull(target)) {
@@ -463,7 +464,7 @@ export class MixerComponent
 	 * Checks model
 	 * @param parent
 	 */
-	public checkModel(parent: THREE.Object3D | THREE.AnimationObjectGroup) {
+	public checkModel(parent: THREE_CORE.IObject3D | THREE.AnimationObjectGroup) {
 		const model = this.getTarget(parent);
 		if (ThreeUtil.isNotNull(model)) {
 			if (model instanceof THREE.Object3D) {

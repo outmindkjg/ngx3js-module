@@ -13,6 +13,7 @@ import { NgxOutlineGeometry } from './geometry/geometries/outline';
 import { NgxStarGeometry } from './geometry/geometries/star';
 import { RendererTimer, ThreeColor, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * Attribute update info
@@ -218,7 +219,7 @@ export class AbstractChartComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getChart();
 			return true;
@@ -235,7 +236,7 @@ export class AbstractChartComponent
 	 * Sets object3d
 	 * @param object
 	 */
-	protected setObject3d(object: THREE.Object3D) {
+	protected setObject3d(object: THREE_CORE.IObject3D) {
 		this.setChart(object);
 	}
 
@@ -437,7 +438,7 @@ export class AbstractChartComponent
 	 * Sets chart
 	 * @param object
 	 */
-	protected setChart(object: THREE.Object3D) {
+	protected setChart(object: THREE_CORE.IObject3D) {
 		this.chart = object;
 		super.setObject3d(object);
 		if (this.controllerList.length === 0) {

@@ -47,31 +47,31 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * ```html
  * <ngx3js-geometry
- * 	[type]="'BoxGeometry'" [width]="16" [height]="16" [depth]="16 " 
+ * 	[type]="'BoxGeometry'" [width]="16" [height]="16" [depth]="16 "
  * 	[widthSegments]="3" [heightSegments]="3" [depthSegments]="3"
  * ></ngx3js-geometry>
  * <ngx3js-geometry
  * 	[type]="'IcosahedronGeometry'" [radius]="8" [detail]="1">
  * </ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'PlaneGeometry'" [width]="16" [height]="16 " 
+ * 	[type]="'PlaneGeometry'" [width]="16" [height]="16 "
  * 	[widthSegments]="3" [heightSegments]="3">
  * </ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'SphereGeometry'" [radius]="0.4 " 
+ * 	[type]="'SphereGeometry'" [radius]="0.4 "
  * 	[widthSegments]="14" [heightSegments]="10">
  * </ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'TextGeometry'" [font]="'helvetiker'" [align]="'center bottom'" 
+ * 	[type]="'TextGeometry'" [font]="'helvetiker'" [align]="'center bottom'"
  * 	[text]="'test contents'" [size]="10">
  * </ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'TorusKnotGeometry'" [radius]="0.4" [tube]="0.08 " 
- * 	[radialSegments]="95" [tubularSegments]="20" 
+ * 	[type]="'TorusKnotGeometry'" [radius]="0.4" [tube]="0.08 "
+ * 	[radialSegments]="95" [tubularSegments]="20"
  * >
  * </ngx3js-geometry>
  * <ngx3js-geometry
- * 	[type]="'TeapotGeometry'" [size]="400" [segments]="30" 
+ * 	[type]="'TeapotGeometry'" [size]="400" [segments]="30"
  * 	[bottom]="true" [lid]="true" [body]="true" [fitLid]="true" [blinn]="true"
  * ></ngx3js-geometry>
  * <ngx3js-geometry

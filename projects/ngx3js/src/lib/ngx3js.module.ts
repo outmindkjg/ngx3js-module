@@ -146,7 +146,7 @@ const NGX3JS_COMPONENTS: Array<Type<any>> = [
 	AbstractObject3dComponent,
 	ThreeGeometryCustom,
 	AbstractChartComponent,
-	NgxViewportInComponent
+	NgxViewportInComponent,
 ];
 
 /**

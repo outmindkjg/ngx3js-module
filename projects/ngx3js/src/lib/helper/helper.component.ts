@@ -17,6 +17,7 @@ import { Gyroscope } from 'three/examples/jsm/misc/Gyroscope';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { ThreeColor, ThreeUtil } from './../interface';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * Helper options
@@ -230,11 +231,11 @@ export interface HelperOptions {
  *
  * ```html
  * <ngx3js-helper
- * 	[type]="'GridHelper'" [size]="500" [divisions]="100 " 
+ * 	[type]="'GridHelper'" [size]="500" [divisions]="100 "
  * 	[color1]="'0x000000'" [opacity]="0.2"
  * ></ngx3js-helper>
  * <ngx3js-helper
- * 	[type]="'Camera'" [target]="sunLight " 
+ * 	[type]="'Camera'" [target]="sunLight "
  * 	[visible]="true"
  * ></ngx3js-helper>
  * <ngx3js-helper
@@ -242,9 +243,9 @@ export interface HelperOptions {
  * 	(onLoad)="setHelper($event)"
  * ></ngx3js-helper>
  * <ngx3js-helper
- * 	[type]="'arrowhelper'" 
- * 	[arrowFrom]="sunLight" [arrowTo]="scene" 
- * 	[length]="0.9" [color]="'0xffff00'" [headLength]="0.25" 
+ * 	[type]="'arrowhelper'"
+ * 	[arrowFrom]="sunLight" [arrowTo]="scene"
+ * 	[length]="0.9" [color]="'0xffff00'" [headLength]="0.25"
  * 	[headWidth]="0.08"
  * ></ngx3js-helper>
  * ```
@@ -770,14 +771,14 @@ export class HelperComponent
 	/**
 	 * The Helper of helper component
 	 */
-	private helper: THREE.Object3D = null;
+	private helper: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getHelper();
 			this.unSubscribeRefer('helperReset');
@@ -832,7 +833,7 @@ export class HelperComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
 		return this.getHelper();
 	}
 
@@ -841,7 +842,7 @@ export class HelperComponent
 	 * @template T
 	 * @returns helper
 	 */
-	public getHelper<T extends THREE.Object3D>(): T {
+	public getHelper<T extends THREE_CORE.IObject3D>(): T {
 		if (this.helper === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.removeObject3d(this.helper);
@@ -850,7 +851,7 @@ export class HelperComponent
 			}
 			this.helper = null;
 			let parentAdd: boolean = true;
-			let basemesh: THREE.Object3D = null;
+			let basemesh: any = null;
 			switch (this.type.toLowerCase()) {
 				case 'gyroscopehelper':
 				case 'gyroscope':

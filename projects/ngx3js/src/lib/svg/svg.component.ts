@@ -14,6 +14,8 @@ import { LocalStorageService } from '../local-storage.service';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { TranslationComponent } from '../translation/translation.component';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
+import * as THREE_CORE from './../threejs-library/three-core';
+
 /**
  * Svg geometry
  */
@@ -37,7 +39,7 @@ export interface SvgGeometry {
  *
  * ```html
  * <ngx3js-geometry
- * 	[type]="'Extrude'" 
+ * 	[type]="'Extrude'"
  * 	[depth]="map.depth" [steps]="1" [bevelEnabled]="false"
  * >
  * 	<ngx3js-svg [path]="map.path"></ngx3js-svg>
@@ -732,7 +734,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.meshes = null;
 			this.resetMeshes();
@@ -794,7 +796,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 					this.svgMesh.add(mesh);
 				});
 			});
-			this.setObject3d(this.svgMesh);
+			this.setObject3d(this.svgMesh as any);
 		}
 	}
 

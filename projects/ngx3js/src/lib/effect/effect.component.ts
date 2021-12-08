@@ -35,10 +35,7 @@ import { AbstractTweenComponent } from '../tween.abstract';
 	templateUrl: './effect.component.html',
 	styleUrls: ['./effect.component.scss'],
 })
-export class EffectComponent
-	extends AbstractTweenComponent
-	implements OnInit
-{
+export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * The type of effect
 	 *

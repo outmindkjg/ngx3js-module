@@ -891,7 +891,7 @@ export class AbstractObject3dComponent
 	 * @param name
 	 * @returns object by name
 	 */
-	public getObjectByName(name: string): THREE.Object3D | undefined {
+	public getObjectByName(name: string): THREE_CORE.IObject3D | undefined {
 		if (this.object3d !== null) {
 			return this.object3d.getObjectByName(name);
 		}
@@ -903,7 +903,7 @@ export class AbstractObject3dComponent
 	 * @param id
 	 * @returns object by id
 	 */
-	public getObjectById(id: number): THREE.Object3D | undefined {
+	public getObjectById(id: number): THREE_CORE.IObject3D | undefined {
 		if (this.object3d !== null) {
 			return this.object3d.getObjectById(id);
 		}
@@ -919,7 +919,7 @@ export class AbstractObject3dComponent
 	public getObjectByProperty(
 		name: string,
 		value: string
-	): THREE.Object3D | undefined {
+	): THREE_CORE.IObject3D | undefined {
 		if (this.object3d !== null) {
 			return this.object3d.getObjectByProperty(name, value);
 		}
@@ -929,14 +929,14 @@ export class AbstractObject3dComponent
 	/**
 	 * The Object3d of abstract object3d component
 	 */
-	protected object3d: THREE_CORE.Object3D = null;
+	protected object3d: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Gets object3d
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE_CORE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
 		return this.object3d as T;
 	}
 
@@ -966,14 +966,14 @@ export class AbstractObject3dComponent
 	/**
 	 * Parent object3d of abstract object3d component
 	 */
-	protected parentObject3d: THREE.Object3D = null;
+	protected parentObject3d: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			const oldParent = this.parentObject3d;
 			this.parentObject3d = parent;
@@ -987,7 +987,10 @@ export class AbstractObject3dComponent
 					this.parentObject3d.parent === null
 				) {
 					if (this.parentObject3d instanceof THREE.LOD) {
-						this.parentObject3d.addLevel(this.object3d, this.getLoDistance(0));
+						this.parentObject3d.addLevel(
+							this.object3d as THREE.Object3D,
+							this.getLoDistance(0)
+						);
 					} else {
 						this.parentObject3d.add(this.object3d);
 					}
@@ -1006,7 +1009,7 @@ export class AbstractObject3dComponent
 	 * Removes object3d
 	 * @param object3d
 	 */
-	removeObject3d(object3d: THREE.Object3D) {
+	removeObject3d(object3d: THREE_CORE.IObject3D) {
 		if (object3d !== null && object3d.parent !== null) {
 			object3d.traverse((child) => {
 				if (child instanceof CSS2DObject || child instanceof CSS3DObject) {
@@ -1023,7 +1026,7 @@ export class AbstractObject3dComponent
 	/**
 	 * Added refer child of abstract object3d component
 	 */
-	private _addedReferChild: THREE.Object3D[] = [];
+	private _addedReferChild: THREE_CORE.IObject3D[] = [];
 
 	/**
 	 * Adds parent object3d
@@ -1031,7 +1034,7 @@ export class AbstractObject3dComponent
 	 * @param [changes]
 	 */
 	public addParentObject3d(
-		object3d: THREE.Object3D,
+		object3d: THREE_CORE.IObject3D,
 		changes?: string | string[]
 	) {
 		if (ThreeUtil.isNotNull(this.object3d) && ThreeUtil.isNotNull(object3d)) {
@@ -1053,7 +1056,7 @@ export class AbstractObject3dComponent
 	 * @param [changes]
 	 */
 	public addChildObject3d(
-		object3d: THREE.Object3D,
+		object3d: THREE_CORE.IObject3D,
 		changes?: string | string[]
 	) {
 		if (ThreeUtil.isNotNull(this.object3d) && ThreeUtil.isNotNull(object3d)) {
@@ -1075,7 +1078,7 @@ export class AbstractObject3dComponent
 	 * Sets parent object3d
 	 * @param object3d
 	 */
-	public setParentObject3d(object3d: THREE.Object3D) {
+	public setParentObject3d(object3d: THREE_CORE.IObject3D) {
 		if (ThreeUtil.isNotNull(object3d) && this.object3d !== object3d) {
 			this.setObject3d(object3d);
 			if (this.parentObject3d !== null && this.parentObject3d.parent !== null) {
@@ -1088,7 +1091,7 @@ export class AbstractObject3dComponent
 	 * Sets object3d
 	 * @param object3d
 	 */
-	protected setObject3d(object3d: THREE.Object3D) {
+	protected setObject3d(object3d: THREE_CORE.IObject3D) {
 		if (ThreeUtil.isNotNull(object3d) && this.object3d !== object3d) {
 			if (this.object3d !== null && this.object3d.parent !== null) {
 				this.object3d.parent.remove(this.object3d);
@@ -1154,7 +1157,7 @@ export class AbstractObject3dComponent
 		this.applyChanges3d(changes);
 	}
 
-	private cachedPrefab: THREE.Object3D = null;
+	private cachedPrefab: THREE_CORE.IObject3D = null;
 	protected cachedPositionList: PositionComponent[] = [];
 	protected cachedRotationList: RotationComponent[] = [];
 	protected cachedScaleList: ScaleComponent[] = [];
@@ -1222,7 +1225,7 @@ export class AbstractObject3dComponent
 							) {
 								this.cachedPrefab.parent.remove(this.cachedPrefab.parent);
 							}
-							const tmpPrefab: THREE.Object3D = ThreeUtil.getObject3d(
+							const tmpPrefab: THREE_CORE.IObject3D = ThreeUtil.getObject3d(
 								this.prefab,
 								false
 							);
@@ -1313,7 +1316,7 @@ export class AbstractObject3dComponent
 							this.parentObject3d instanceof THREE.LOD
 						) {
 							this.parentObject3d.addLevel(
-								this.object3d,
+								this.object3d as THREE.Object3D,
 								this.getLoDistance(0)
 							);
 						}

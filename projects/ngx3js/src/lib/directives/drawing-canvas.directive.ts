@@ -15,9 +15,9 @@ import { ThreeColor, ThreeUtil } from '../interface';
  * See the [ngx directives](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_directives) page for a live demo.
  *
  * ```html
- * <canvas ngx3jsDrawingCanvas 
- * 	[clearColor]="'#ffffff'" 
- * 	[lineColor]="'#000000'" 
+ * <canvas ngx3jsDrawingCanvas
+ * 	[clearColor]="'#ffffff'"
+ * 	[lineColor]="'#000000'"
  * />
  * ```
  *

@@ -15,7 +15,7 @@ import { AbstractTweenComponent } from '../tween.abstract';
  * 	[x]="0" [y]="7.5" [z]="0" [multiply]="10" [normalize]="false"
  * ></ngx3js-position>
  * <ngx3js-geometry>
- * 	<ngx3js-position 
+ * 	<ngx3js-position
  * 		[type]="'scale'" [x]="2" [y]="2" [z]="2"
  * 	></ngx3js-position>
  * </ngx3js-geometry>

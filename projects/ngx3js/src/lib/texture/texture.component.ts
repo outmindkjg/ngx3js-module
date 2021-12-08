@@ -21,70 +21,70 @@ import { CanvasFunctionType } from './textureUtils';
  *
  * ```html
  * <ngx3js-texture
- * 	[type]="'environment'" 
- * 	[storageName]="'textures/equirectangular/venice_sunset_1k.hdr'" 
+ * 	[type]="'environment'"
+ * 	[storageName]="'textures/equirectangular/venice_sunset_1k.hdr'"
  * 	[mapping]="'EquirectangularReflectionMapping'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'map'" 
- * 	[image]="'models/obj/cerberus/Cerberus_A.jpg'" 
+ * 	[type]="'map'"
+ * 	[image]="'models/obj/cerberus/Cerberus_A.jpg'"
  * 	[encoding]="'sRGBEncoding'" [wrapS]="'RepeatWrapping'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'metalnessMap'" 
- * 	[image]="'models/obj/cerberus/Cerberus_RM.jpg'" 
+ * 	[type]="'metalnessMap'"
+ * 	[image]="'models/obj/cerberus/Cerberus_RM.jpg'"
  * 	[wrapS]="'RepeatWrapping'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'roughnessMap'" 
- * 	[image]="'models/obj/cerberus/Cerberus_RM.jpg'" 
+ * 	[type]="'roughnessMap'"
+ * 	[image]="'models/obj/cerberus/Cerberus_RM.jpg'"
  * 	[wrapS]="'RepeatWrapping'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'normalMap'" 
- * 	[image]="'models/obj/cerberus/Cerberus_N.jpg'" 
+ * 	[type]="'normalMap'"
+ * 	[image]="'models/obj/cerberus/Cerberus_N.jpg'"
  * 	[wrapS]="'RepeatWrapping'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'map'" 
+ * 	[type]="'map'"
  * 	[image]="'textures/planets/earth_atmos_2048.jpg'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'specularMap'" 
+ * 	[type]="'specularMap'"
  * 	[image]="'textures/planets/earth_specular_2048.jpg'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'normalMap'" 
+ * 	[type]="'normalMap'"
  * 	[image]="'textures/planets/earth_normal_2048.jpg'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[program]="'shadow2'" 
+ * 	[program]="'shadow2'"
  * 	[width]="128" [height]="128"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'background-environment'" 
- * 	[storageName]="'textures/equirectangular/venice_sunset_1k.hdr'" 
+ * 	[type]="'background-environment'"
+ * 	[storageName]="'textures/equirectangular/venice_sunset_1k.hdr'"
  * 	[cubeType]="'Equirectangular'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[type]="'map'" 
- * 	[image]="'textures/uv_grid_opengl.jpg'" 
+ * 	[type]="'map'"
+ * 	[image]="'textures/uv_grid_opengl.jpg'"
  * 	[wrap]="'RepeatWrapping'"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[image]="'textures/grid.png'" 
+ * 	[image]="'textures/grid.png'"
  * 	[wrap]="'RepeatWrapping'" [repeat]="40"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[image]="'textures/grid.png'" 
+ * 	[image]="'textures/grid.png'"
  * 	[wrap]="'RepeatWrapping'" [repeatX]="4 * 5" [repeatY]="3 * 5"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[image]="'textures/patterns/circuit_pattern.png'" 
+ * 	[image]="'textures/patterns/circuit_pattern.png'"
  * 	[anisotropy]="16"
  * ></ngx3js-texture>
  * <ngx3js-texture
- * 	[image]="'textures/crate.gif'" 
+ * 	[image]="'textures/crate.gif'"
  * 	[flipY]="true"
  * ></ngx3js-texture>
  * ```

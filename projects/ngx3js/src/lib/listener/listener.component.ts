@@ -8,6 +8,7 @@ import {
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Listener component.
@@ -102,7 +103,7 @@ export class ListenerComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getListener();
 			return true;
@@ -147,7 +148,7 @@ export class ListenerComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
 		return this.getListener() as any;
 	}
 
@@ -159,7 +160,7 @@ export class ListenerComponent
 		if (this.listener === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.listener = new THREE.AudioListener();
-			super.setObject3d(this.listener);
+			super.setObject3d(this.listener as any);
 		}
 		return this.listener;
 	}

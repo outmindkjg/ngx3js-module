@@ -9,6 +9,7 @@ import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Audio component.
@@ -21,21 +22,21 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
  *
  * ```html
  * <ngx3-audio
- * 	[type]="'audio'" 
- * 	[url]="'sounds/376737_Skullbeatz___Bad_Cat_Maste.mp3'" 
- * 	[refDistance]="1" [coneInnerAngle]="180 " 
+ * 	[type]="'audio'"
+ * 	[url]="'sounds/376737_Skullbeatz___Bad_Cat_Maste.mp3'"
+ * 	[refDistance]="1" [coneInnerAngle]="180 "
  * 	[coneOuterAngle]="230" [cconeOuterGain]="0.1"
  * ></ngx3-audio>
  * <ngx3js-audio
- * 	[type]="'audio'" [url]="'sounds/Project_Utopia.ogg'" 
+ * 	[type]="'audio'" [url]="'sounds/Project_Utopia.ogg'"
  * 	[volume]="0.5" [loop]="true" [autoplay]="true"
  * ></ngx3js-audio>
  * <ngx3js-audio
- * 	[type]="'PositionalAudio'" [url]="'sounds/358232_j_s_song.ogg'" 
+ * 	[type]="'PositionalAudio'" [url]="'sounds/358232_j_s_song.ogg'"
  * 	[refDistance]="20" [autoplay]="true"
  * ></ngx3js-audio>
  * <ngx3js-audio
- * 	[type]="'PositionalAudio'" [urlType]="'listener'" [volume]="0.5 " 
+ * 	[type]="'PositionalAudio'" [urlType]="'listener'" [volume]="0.5 "
  * 	[refDistance]="20"
  * ></ngx3js-audio>
  * ```
@@ -280,7 +281,7 @@ export class AudioComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getAudio();
 			return true;
@@ -599,7 +600,7 @@ export class AudioComponent
 					this.audio = new THREE.PositionalAudio(this.getListener());
 					break;
 			}
-			this.setObject3d(this.audio);
+			this.setObject3d(this.audio as any);
 		}
 		return this.audio as T;
 	}

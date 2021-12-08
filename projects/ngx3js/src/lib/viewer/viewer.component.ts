@@ -23,29 +23,29 @@ import { ViewerCanvas } from './viewer-canvas';
  *
  * ```html
  * <ngx3js-viewer
- * 	[type]="'canvas'" 
- * 	[canvasOptions]="canvasOptions" 
- * 	[x]="viewPort.x" [y]="viewPort.y" 
+ * 	[type]="'canvas'"
+ * 	[canvasOptions]="canvasOptions"
+ * 	[x]="viewPort.x" [y]="viewPort.y"
  * 	[width]="viewPort.width" [height]="viewPort.height"
  * ></ngx3js-viewer>
  * <ngx3js-viewer
- * 	[type]="'canvas'" 
+ * 	[type]="'canvas'"
  * 	[canvasOptions]="canvasOptions"
  * ></ngx3js-viewer>
  * <ngx3js-viewer
- * 	[type]="'shadowmapviewer'" 
- * 	[x]="10" [y]="-10" 
- * 	[width]="'25%'" [height]="'25%'" 
+ * 	[type]="'shadowmapviewer'"
+ * 	[x]="10" [y]="-10"
+ * 	[width]="'25%'" [height]="'25%'"
  * 	[light]="spotLight" [enabled]="controls.hudEnable"
  * ></ngx3js-viewer>
  * <ngx3js-viewer
- * 	[type]="'shadowmapviewer'" 
- * 	[x]="-10" [y]="-10" [width]="'15%'" 
+ * 	[type]="'shadowmapviewer'"
+ * 	[x]="-10" [y]="-10" [width]="'15%'"
  * 	[height]="'width'" [light]="spotLight"
  * ></ngx3js-viewer>
  * <ngx3js-viewer
- * 	[type]="'shadowmesh'" 
- * 	[mesh]="cube" 
+ * 	[type]="'shadowmesh'"
+ * 	[mesh]="cube"
  * 	[light]="sunLight" [plane]="plane"
  * ></ngx3js-viewer>
  * ```

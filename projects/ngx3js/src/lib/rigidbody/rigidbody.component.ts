@@ -13,6 +13,7 @@ import * as Ammo from '../threejs-library/ammo';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
 import { RigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * Rigidbody type
@@ -550,7 +551,7 @@ export class RigidbodyComponent
 	 */
 	private getAbsoluteGeometry(
 		bufGeometry: THREE.BufferGeometry,
-		object3d: THREE.Object3D
+		object3d: THREE_CORE.IObject3D
 	): THREE.BufferGeometry {
 		const absBufGeometry = bufGeometry.clone();
 		const positions = absBufGeometry.getAttribute('position');
@@ -567,14 +568,14 @@ export class RigidbodyComponent
 	/**
 	 * The Object3d of rigidbody component
 	 */
-	private object3d: THREE.Object3D = null;
+	private object3d: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D): boolean {
+	public setParent(parent: THREE_CORE.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.object3d = parent;
 			this.getRigidBody();
@@ -1194,7 +1195,7 @@ export class RigidbodyComponent
 	 * Creates debris from breakable object
 	 * @param objects
 	 */
-	private _createDebrisFromBreakableObject(objects: THREE.Object3D[]) {
+	private _createDebrisFromBreakableObject(objects: THREE_CORE.IObject3D[]) {
 		this.rigidBody.debris = [];
 		const castShadow = this.object3d.castShadow;
 		const receiveShadow = this.object3d.receiveShadow;

@@ -78,7 +78,6 @@ export class NgxGridHelper extends THREE.GridHelper {
 	}
 }
 
-
 /**
  * PolarGrid helper
  *
@@ -86,14 +85,14 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/PolarGridHelper) page for a live demo.
  *
  */
- export class NgxPolarGridHelper extends THREE.PolarGridHelper {
+export class NgxPolarGridHelper extends THREE.PolarGridHelper {
 	constructor(
-        radius?: number,
-        radials?: number,
-        circles?: number,
-        divisions?: number,
-        color1?: THREE.ColorRepresentation,
-        color2?: THREE.ColorRepresentation,
+		radius?: number,
+		radials?: number,
+		circles?: number,
+		divisions?: number,
+		color1?: THREE.ColorRepresentation,
+		color2?: THREE.ColorRepresentation
 	) {
 		super(radius, radials, circles, divisions, color1, color2);
 	}
@@ -106,9 +105,12 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/PositionalAudioHelper) page for a live demo.
  *
  */
- export class NgxPositionalAudioHelper extends PositionalAudioHelper {
+export class NgxPositionalAudioHelper extends PositionalAudioHelper {
 	constructor(
-        audio: THREE.PositionalAudio, range?: number, divisionsInnerAngle?: number, divisionsOuterAngle?: number
+		audio: THREE.PositionalAudio,
+		range?: number,
+		divisionsInnerAngle?: number,
+		divisionsOuterAngle?: number
 	) {
 		super(audio, range, divisionsInnerAngle, divisionsOuterAngle);
 	}
@@ -121,10 +123,8 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/AxesHelper) page for a live demo.
  *
  */
- export class NgxAxesHelper extends THREE.AxesHelper {
-	constructor(
-        size?: number
-	) {
+export class NgxAxesHelper extends THREE.AxesHelper {
+	constructor(size?: number) {
 		super(size);
 	}
 }
@@ -136,14 +136,11 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/CameraHelper) page for a live demo.
  *
  */
- export class NgxCameraHelper extends THREE.CameraHelper {
-	constructor(
-        camera: THREE.Camera
-	) {
+export class NgxCameraHelper extends THREE.CameraHelper {
+	constructor(camera: THREE.Camera) {
 		super(camera);
 	}
 }
-
 
 /**
  * DirectionalLight helper
@@ -152,9 +149,11 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/DirectionalLightHelper) page for a live demo.
  *
  */
- export class NgxDirectionalLightHelper extends THREE.DirectionalLightHelper {
+export class NgxDirectionalLightHelper extends THREE.DirectionalLightHelper {
 	constructor(
-        light: THREE.DirectionalLight, size?: number, color?: THREE.ColorRepresentation
+		light: THREE.DirectionalLight,
+		size?: number,
+		color?: THREE.ColorRepresentation
 	) {
 		super(light, size, color);
 	}
@@ -167,9 +166,11 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/HemisphereLightHelper) page for a live demo.
  *
  */
- export class NgxHemisphereLightHelper extends THREE.HemisphereLightHelper {
+export class NgxHemisphereLightHelper extends THREE.HemisphereLightHelper {
 	constructor(
-        light: THREE.HemisphereLight, size: number, color?: THREE.ColorRepresentation
+		light: THREE.HemisphereLight,
+		size: number,
+		color?: THREE.ColorRepresentation
 	) {
 		super(light, size, color);
 	}
@@ -182,9 +183,11 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/PointLightHelper) page for a live demo.
  *
  */
- export class NgxPointLightHelper extends THREE.PointLightHelper {
+export class NgxPointLightHelper extends THREE.PointLightHelper {
 	constructor(
-        light: THREE.PointLight, sphereSize?: number, color?: THREE.ColorRepresentation
+		light: THREE.PointLight,
+		sphereSize?: number,
+		color?: THREE.ColorRepresentation
 	) {
 		super(light, sphereSize, color);
 	}
@@ -197,10 +200,8 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/SpotLightHelper) page for a live demo.
  *
  */
- export class NgxSpotLightHelper extends THREE.SpotLightHelper {
-	constructor(
-        light: THREE.Light, color?: THREE.ColorRepresentation
-	) {
+export class NgxSpotLightHelper extends THREE.SpotLightHelper {
+	constructor(light: THREE.Light, color?: THREE.ColorRepresentation) {
 		super(light, color);
 	}
 }
@@ -212,10 +213,8 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/RectAreaLightHelper) page for a live demo.
  *
  */
- export class NgxRectAreaLightHelper extends RectAreaLightHelper {
-	constructor(
-        light: THREE.RectAreaLight, color?: THREE.ColorRepresentation
-	) {
+export class NgxRectAreaLightHelper extends RectAreaLightHelper {
+	constructor(light: THREE.RectAreaLight, color?: THREE.ColorRepresentation) {
 		super(light, color);
 	}
 }
@@ -227,10 +226,8 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/LightProbeHelper) page for a live demo.
  *
  */
- export class NgxLightProbeHelper extends LightProbeHelper {
-	constructor(
-        lightProbe: THREE.LightProbe, size: number
-	) {
+export class NgxLightProbeHelper extends LightProbeHelper {
+	constructor(lightProbe: THREE.LightProbe, size: number) {
 		super(lightProbe, size);
 	}
 }
@@ -242,10 +239,8 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/PlaneHelper) page for a live demo.
  *
  */
- export class NgxPlaneHelper extends THREE.PlaneHelper {
-	constructor(
-        plane: THREE.Plane, size?: number, hex?: number
-	) {
+export class NgxPlaneHelper extends THREE.PlaneHelper {
+	constructor(plane: THREE.Plane, size?: number, hex?: number) {
 		super(plane, size, hex);
 	}
 }
@@ -257,10 +252,8 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/VertexTangentsHelper) page for a live demo.
  *
  */
- export class NgxVertexTangentsHelper extends VertexTangentsHelper {
-	constructor(
-        object: THREE.Object3D, size?: number, hex?: number
-	) {
+export class NgxVertexTangentsHelper extends VertexTangentsHelper {
+	constructor(object: THREE.Object3D, size?: number, hex?: number) {
 		super(object, size, hex);
 	}
 }
@@ -272,10 +265,8 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/VertexNormalsHelper) page for a live demo.
  *
  */
- export class NgxVertexNormalsHelper extends VertexNormalsHelper {
-	constructor(
-        object: THREE.Object3D, size?: number, hex?: number
-	) {
+export class NgxVertexNormalsHelper extends VertexNormalsHelper {
+	constructor(object: THREE.Object3D, size?: number, hex?: number) {
 		super(object, size, hex);
 	}
 }
@@ -287,10 +278,8 @@ export class NgxGridHelper extends THREE.GridHelper {
  * See the [ngx helper](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_helper/SkeletonHelper) page for a live demo.
  *
  */
- export class NgxSkeletonHelper extends THREE.SkeletonHelper {
-	constructor(
-        object: THREE.Object3D
-	) {
+export class NgxSkeletonHelper extends THREE.SkeletonHelper {
+	constructor(object: THREE.Object3D) {
 		super(object);
 	}
 }

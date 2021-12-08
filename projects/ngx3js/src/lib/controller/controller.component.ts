@@ -19,6 +19,7 @@ import {
 	ControllerItemComponent,
 	ControlObjectItem,
 } from './controller-item/controller-item.component';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * ControllerComponent
@@ -41,10 +42,10 @@ import {
  * 	<ngx3js-controller-item [type]="'autoupdate'"></ngx3js-controller-item>
  * </ngx3js-controller>
  * <ngx3js-controller
- * 	[type]="'uniforms'" 
- * 	[controlParams]="{ 
- * 		key: 'time', 
- * 		speed: controls.speed 
+ * 	[type]="'uniforms'"
+ * 	[controlParams]="{
+ * 		key: 'time',
+ * 		speed: controls.speed
  * 	}"
  * ></ngx3js-controller>
  * <ngx3js-controller [type]="'auto'">
@@ -531,13 +532,13 @@ export class ControllerComponent
 						this.pathGuide = new THREE.Group();
 						this.pathGuide.add(new THREE.Group());
 						if (this.visible) {
-							this.refObject3d.parent.add(this.pathGuide);
+							this.refObject3d.parent.add(this.pathGuide as any);
 						}
 					} else if (
 						this.visible &&
 						this.refObject3d.parent !== this.pathGuide.parent
 					) {
-						this.refObject3d.parent.add(this.pathGuide);
+						this.refObject3d.parent.add(this.pathGuide as any);
 					}
 					switch (controller.toLowerCase()) {
 						case 'positionlookat':

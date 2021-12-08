@@ -9,7 +9,7 @@ import {
 	OnInit,
 	Output,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as THREE from 'three';
 import { RendererTimer, ThreeUtil } from '../interface';
@@ -285,7 +285,7 @@ export interface ControlOptions {
  *
  * ```html
  * <ngx3js-renderer
- * 	[controlType]="'orbit'" 
+ * 	[controlType]="'orbit'"
  * 	[controlOptions]="{ enablePan: false, enableDamping: true }"
  * ></ngx3js-renderer>
  * <ngx3js-control
@@ -298,8 +298,8 @@ export interface ControlOptions {
  * 	[type]="'plane'"
  * ></ngx3js-control>
  * <ngx3js-control
- * 	[type]="'FlyControls'" 
- * 	[movementSpeed]="1000" [rollSpeed]="7.5" [autoForward]="false" 
+ * 	[type]="'FlyControls'"
+ * 	[movementSpeed]="1000" [rollSpeed]="7.5" [autoForward]="false"
  * 	[dragToLook]="false"
  * ></ngx3js-control>
  * <ngx3js-control
@@ -326,20 +326,20 @@ export interface ControlOptions {
  * 	(onLoad)="setTransformControl($event)"
  * ></ngx3js-control>
  * <ngx3js-control
- * 	[type]="'TrackballControls'" [rollSpeed]="1.0" [zoomSpeed]="1.2 " 
+ * 	[type]="'TrackballControls'" [rollSpeed]="1.0" [zoomSpeed]="1.2 "
  * 	[panSpeed]="0.8" [keys]="['KeyA', 'KeyS', 'KeyD']"
  * ></ngx3js-control>
  * <ngx3js-renderer
- * 	[controlType]="'selectbox'" 
- * 	[controlOptions]="{ 
- * 		enablePan: false, 
- * 		enableDamping: true 
+ * 	[controlType]="'selectbox'"
+ * 	[controlOptions]="{
+ * 		enablePan: false,
+ * 		enableDamping: true
  * 	}"
  * ></ngx3js-renderer>
  * <ngx3js-control
- * 	[type]="'csm'" [maxFar]="1000" [cascades]="4 " 
- * 	[mode]="'practical'" [scene]="scene" [shadowMapSize]="1024 " 
- * 	[lightDirectionX]="-1" [lightDirectionY]="-1" [lightDirectionZ]="-1 " 
+ * 	[type]="'csm'" [maxFar]="1000" [cascades]="4 "
+ * 	[mode]="'practical'" [scene]="scene" [shadowMapSize]="1024 "
+ * 	[lightDirectionX]="-1" [lightDirectionY]="-1" [lightDirectionZ]="-1 "
  * 	[camera]="camera"
  * 	(onLoad)="setCsm($event)"
  * ></ngx3js-control>
@@ -651,7 +651,10 @@ export class ControlComponent
 			this.controlDomElement.parentElement.removeChild(this.controlDomElement);
 		}
 		if (ThreeUtil.isNotNull(this.control)) {
-			if (this.control instanceof THREE_CTRL.TransformControls && this.control.parent) {
+			if (
+				this.control instanceof THREE_CTRL.TransformControls &&
+				this.control.parent
+			) {
 				this.control.parent.remove(this.control);
 			}
 			if (ThreeUtil.isNotNull(this.control.dispose)) {
@@ -839,7 +842,10 @@ export class ControlComponent
 			const camera = this._camera;
 			const domElement = this._domElement;
 			if (this.control !== null) {
-				if (this.control instanceof THREE_CTRL.TransformControls && this.control.parent) {
+				if (
+					this.control instanceof THREE_CTRL.TransformControls &&
+					this.control.parent
+				) {
 					this.control.parent.remove(this.control);
 				}
 				if (ThreeUtil.isNotNull(this.control.dispose)) {
@@ -907,13 +913,19 @@ export class ControlComponent
 					break;
 				case 'pointerlockcontrols':
 				case 'pointerlock':
-					const pointerLockControls = new THREE_CTRL.NgxPointerLockControls(camera);
+					const pointerLockControls = new THREE_CTRL.NgxPointerLockControls(
+						camera
+					);
 					control = pointerLockControls;
 					this._scene.first.getScene().add(pointerLockControls.getObject());
 					break;
 				case 'dragcontrols':
 				case 'drag':
-					const dragControls = new THREE_CTRL.NgxDragControls([], camera, domElement);
+					const dragControls = new THREE_CTRL.NgxDragControls(
+						[],
+						camera,
+						domElement
+					);
 					control = dragControls;
 					break;
 				case 'firstpersoncontrols':
@@ -965,7 +977,10 @@ export class ControlComponent
 					break;
 				case 'transformcontrols':
 				case 'transform':
-					const transformControls = new THREE_CTRL.NgxTransformControls(camera, domElement);
+					const transformControls = new THREE_CTRL.NgxTransformControls(
+						camera,
+						domElement
+					);
 					transformControls.addEventListener('dragging-changed', (event) => {
 						this.eventListener.emit({ type: 'dragging-changed', event: event });
 					});
@@ -981,7 +996,10 @@ export class ControlComponent
 					break;
 				case 'trackballcontrols':
 				case 'trackball':
-					const trackballControls = new THREE_CTRL.NgxTrackballControls(camera, domElement);
+					const trackballControls = new THREE_CTRL.NgxTrackballControls(
+						camera,
+						domElement
+					);
 					if (ThreeUtil.isNotNull(this.staticMoving)) {
 						trackballControls.staticMoving = this.staticMoving;
 					}
@@ -1067,7 +1085,10 @@ export class ControlComponent
 				case 'orbitcontrols':
 				case 'orbit':
 				default:
-					const orbitControls = new THREE_CTRL.NgxOrbitControls(camera, domElement);
+					const orbitControls = new THREE_CTRL.NgxOrbitControls(
+						camera,
+						domElement
+					);
 					if (ThreeUtil.isNotNull(this.autoRotate)) {
 						orbitControls.autoRotate = this.autoRotate;
 					}

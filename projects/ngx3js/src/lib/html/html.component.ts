@@ -177,7 +177,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 	 * @param refObject3d
 	 * @returns true if parent
 	 */
-	public setParent(refObject3d: THREE_CORE.Object3D | HTMLElement): boolean {
+	public setParent(refObject3d: THREE_CORE.IObject3D | HTMLElement): boolean {
 		if (super.setParent(refObject3d)) {
 			let parentElement: HTMLElement = null;
 			if (
