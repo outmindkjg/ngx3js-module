@@ -2381,7 +2381,7 @@ export interface IAnimationAction {
     getRoot(): IObject3D;
 }
 
-export interface IAnimationMixer extends IEventDispatcher {
+export interface IAnimationMixer extends THREE.EventDispatcher {
 
     /**
      * @default 0
@@ -2500,7 +2500,7 @@ export interface IShader {
 /**
  * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
  */
-export interface IMaterial extends IEventDispatcher {
+export interface IMaterial extends THREE.EventDispatcher {
 	/**
 	 * Sets the alpha value to be used when running an alpha test. Default is 0.
 	 * @default 0
@@ -4214,7 +4214,7 @@ export interface IWebGLRenderTargetOptions {
 	encoding?: THREE.TextureEncoding | undefined;
 }
 
-export interface ITexture extends IEventDispatcher {
+export interface ITexture extends THREE.EventDispatcher {
 	id: number;
 	uuid: string;
 
@@ -4598,7 +4598,7 @@ export interface IFogExp2 extends IFogBase {
 	toJSON(): any;
 }
 
-export interface IWebGLRenderTarget extends IEventDispatcher {
+export interface IWebGLRenderTarget extends THREE.EventDispatcher {
 	uuid: string;
 	width: number;
 	height: number;
@@ -4707,7 +4707,7 @@ export interface IWebGL1Renderer extends IWebGLRenderer {
  * This class originall extended WebGLMultipleRenderTarget
  * However, there are some issues with this method as documented below
  */
-export interface IWebGLMultipleRenderTargets extends IEventDispatcher {
+export interface IWebGLMultipleRenderTargets extends THREE.EventDispatcher {
 	texture: ITexture[];
 
 	readonly isWebGLMultipleRenderTargets: true;
@@ -5414,7 +5414,7 @@ export interface IWebGLRenderer extends IRenderer {
  *
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/BufferGeometry.js|src/core/BufferGeometry.js}
  */
-export interface IBufferGeometry extends IEventDispatcher {
+export interface IBufferGeometry extends THREE.EventDispatcher {
 	/**
 	 * Unique number of this buffergeometry instance
 	 */
@@ -6064,7 +6064,7 @@ export interface IAnimationObjectGroup {
  * Object3D
  */
 export interface IObject3D<E extends THREE.BaseEvent = THREE.Event>
-	extends IEventDispatcher<E> {
+	extends THREE.EventDispatcher<E> {
 	/**
 	 * Unique number of this object instance.
 	 */
