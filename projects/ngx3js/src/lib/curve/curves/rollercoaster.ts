@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * Curves Roller Coaster
@@ -8,7 +9,7 @@ import * as THREE from 'three';
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/rollercoaster) page for a live curve demo.
  *
  */
-export class CurvesRollerCoaster extends THREE.Curve<THREE.Vector3> {
+export class CurvesRollerCoaster extends THREE.Curve<THREE_CORE.IVector3> {
 	/**
 	 * Creates an instance of curves line.
 	 * @param [radius]
@@ -24,7 +25,7 @@ export class CurvesRollerCoaster extends THREE.Curve<THREE.Vector3> {
 	 * @param optionalTarget
 	 * @returns
 	 */
-	public getPoint(t: number, optionalTarget: THREE.Vector3) {
+	public getPoint(t: number, optionalTarget: THREE_CORE.IVector3) {
 		const point = optionalTarget || new THREE.Vector3();
 		t = t * Math.PI * 2;
 		const x = Math.sin(t * 3) * Math.cos(t * 4) * 50;

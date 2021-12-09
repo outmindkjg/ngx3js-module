@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Keyframe component.
@@ -294,37 +295,15 @@ export class KeyframeComponent
 	}
 
 	/**
-	 * Gets interpolation
-	 * @param [def]
-	 * @returns interpolation
-	 */
-	private getInterpolation(def?: string): THREE.InterpolationModes {
-		const interpolation = ThreeUtil.getTypeSafe(this.interpolation, def, '');
-		switch (interpolation.toLowerCase()) {
-			case 'interpolatediscrete':
-			case 'discrete':
-				return THREE.InterpolateDiscrete;
-			case 'interpolatelinear':
-			case 'linear':
-				return THREE.InterpolateLinear;
-			case 'interpolatesmooth':
-			case 'smooth':
-				return THREE.InterpolateSmooth;
-			default:
-				return undefined;
-		}
-	}
-
-	/**
 	 * The Clip of keyframe component
 	 */
-	private clip: THREE.AnimationClip = null;
+	private clip: THREE_CORE.IAnimationClip = null;
 
 	/**
 	 * Sets clip
 	 * @param clip
 	 */
-	public setClip(clip: THREE.AnimationClip) {
+	public setClip(clip: THREE_CORE.IAnimationClip) {
 		if (this.clip !== clip) {
 			this.clip = clip;
 			this.getKeyframe();
@@ -362,13 +341,13 @@ export class KeyframeComponent
 	/**
 	 * The Keyframe of keyframe component
 	 */
-	private keyframe: THREE.KeyframeTrack = null;
+	private keyframe: THREE_CORE.IKeyframeTrack = null;
 
 	/**
 	 * Gets keyframe
 	 * @returns keyframe
 	 */
-	public getKeyframe(): THREE.KeyframeTrack {
+	public getKeyframe(): THREE_CORE.IKeyframeTrack {
 		if (this.clip !== null && (this.keyframe === null || this._needUpdate)) {
 			this.needUpdate = false;
 			if (this.keyframe !== null) {
@@ -378,7 +357,7 @@ export class KeyframeComponent
 				}
 			}
 			const times: number[] = ThreeUtil.getTypeSafe(this.times, [0, 1, 2]);
-			const interpolation: THREE.InterpolationModes = this.getInterpolation();
+			const interpolation: THREE.InterpolationModes = ThreeUtil.getInterpolationSafe(this.interpolation);
 			switch (this.type.toLowerCase()) {
 				case 'position':
 					this.keyframe = new THREE.VectorKeyframeTrack(

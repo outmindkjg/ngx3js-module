@@ -6,12 +6,13 @@ import * as GSAP from './curves/gsap';
 import { CurvesLine } from './curves/line';
 import * as POLYGON from './curves/polygon';
 import { CurvesRollerCoaster } from './curves/rollercoaster';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * Curve class
  */
 export interface CurveClass {
-	new (scale?: number, options?: any): THREE.Curve<THREE.Vector3>;
+	new (scale?: number, options?: any): THREE_CORE.ICurve<THREE_CORE.IVector3>;
 }
 
 export const CurveConf: {
@@ -230,7 +231,7 @@ export class CurveUtils {
 		key: string,
 		scale?: number,
 		options?: any
-	): THREE.Curve<THREE.Vector3> {
+	): THREE_CORE.ICurve<THREE_CORE.IVector3> {
 		const curve = this.getCurveClass(key);
 		return new curve(scale, options);
 	}
@@ -243,14 +244,16 @@ export class CurveUtils {
 	 * @returns curve normal
 	 */
 	public static getCurveNormal(
-		key: string | THREE.Curve<THREE.Vector3>,
+		key: string | THREE_CORE.ICurve<THREE_CORE.IVector3>,
 		normalOption?: CurvesNormalParameters,
 		option?: any
 	): CurvesNormal {
 		if (key instanceof THREE.Curve) {
 			return new CurvesNormal(key, normalOption);
-		} else {
+		} else if (typeof key === 'string'){
 			return new CurvesNormal(this.getCurve(key, option), normalOption);
+		} else {
+			return new CurvesNormal(this.getCurve('circle', option), normalOption);
 		}
 	}
 }
@@ -259,9 +262,9 @@ export class CurveUtils {
  * Curves normal parameters
  */
 export interface CurvesNormalParameters {
-	scale?: THREE.Vector3;
-	rotation?: THREE.Euler;
-	center?: THREE.Vector3;
+	scale?: THREE_CORE.IVector3;
+	rotation?: THREE_CORE.IEuler;
+	center?: THREE_CORE.IVector3;
 	multiply?: number;
 	options?: string;
 }
@@ -273,21 +276,21 @@ export interface CurvesNormalParameters {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve) page for a live curve demo.
  *
  */
-export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
+export class CurvesNormal extends THREE.Curve<THREE_CORE.IVector3> {
 	/**
 	 * The Scale of curves normal
 	 */
-	private scale: THREE.Vector3 = null;
+	private scale: THREE_CORE.IVector3 = null;
 
 	/**
 	 * The Rotation of curves normal
 	 */
-	private rotation: THREE.Euler = null;
+	private rotation: THREE_CORE.IEuler = null;
 
 	/**
 	 * The Center of curves normal
 	 */
-	private center: THREE.Vector3 = null;
+	private center: THREE_CORE.IVector3 = null;
 
 	/**
 	 * The Multiply of curves normal
@@ -300,7 +303,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	 * @param parameters
 	 */
 	constructor(
-		curve: THREE.Curve<THREE.Vector3>,
+		curve: THREE_CORE.ICurve<THREE_CORE.IVector3>,
 		parameters: CurvesNormalParameters
 	) {
 		super();
@@ -327,7 +330,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * The Curve of curves normal
 	 */
-	public curve: THREE.Curve<THREE.Vector3> = null;
+	public curve: THREE_CORE.ICurve<THREE_CORE.IVector3> = null;
 
 	/**
 	 * Sets options
@@ -364,7 +367,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	 * Sets curve
 	 * @param curve
 	 */
-	public setCurve(curve: THREE.Curve<THREE.Vector3>) {
+	public setCurve(curve: THREE_CORE.ICurve<THREE_CORE.IVector3>) {
 		let minX = +Infinity;
 		let minY = +Infinity;
 		let minZ = +Infinity;
@@ -396,12 +399,12 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * The Center of curves normal
 	 */
-	private _center: THREE.Vector3 = null;
+	private _center: THREE_CORE.IVector3 = null;
 
 	/**
 	 * The Scale of curves normal
 	 */
-	private _scale: THREE.Vector3 = null;
+	private _scale: THREE_CORE.IVector3 = null;
 
 	/**
 	 * Abs x of curves normal
@@ -429,7 +432,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	 * @param [optionalTarget]
 	 * @returns point
 	 */
-	public getPoint(t: number, optionalTarget?: THREE.Vector3): THREE.Vector3 {
+	public getPoint(t: number, optionalTarget?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
 		optionalTarget = this.curve.getPoint(t, optionalTarget);
 		optionalTarget.sub(this._center);
 		if (this._scale !== null) {
@@ -486,12 +489,12 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * Last v3 of curves normal
 	 */
-	private _lastV3: THREE.Vector3 = null;
+	private _lastV3: THREE_CORE.IVector3 = null;
 
 	/**
 	 * Refer center of curves normal
 	 */
-	public referCenter: THREE.Vector3 = null;
+	public referCenter: THREE_CORE.IVector3 = null;
 
 	/**
 	 * Gets point v3
@@ -499,7 +502,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	 * @param p
 	 * @returns point v3
 	 */
-	public getPointV3(timer: RendererTimer, p: THREE.Vector3): THREE.Vector3 {
+	public getPointV3(timer: RendererTimer, p: THREE_CORE.IVector3): THREE_CORE.IVector3 {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastV3 === null) {
 			this._lastV3 = new THREE.Vector3(cp.x, cp.y, cp.z);
@@ -516,7 +519,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * Last v2 of curves normal
 	 */
-	private _lastV2: THREE.Vector2 = null;
+	private _lastV2: THREE_CORE.IVector2 = null;
 
 	/**
 	 * Gets point v2
@@ -524,7 +527,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	 * @param p
 	 * @returns point v2
 	 */
-	public getPointV2(timer: RendererTimer, p: THREE.Vector2): THREE.Vector2 {
+	public getPointV2(timer: RendererTimer, p: THREE_CORE.IVector2): THREE_CORE.IVector2 {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastV2 === null) {
 			this._lastV2 = new THREE.Vector2(cp.x, cp.y);
@@ -538,7 +541,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * Last euler of curves normal
 	 */
-	private _lastEuler: THREE.Euler = null;
+	private _lastEuler: THREE_CORE.IEuler = null;
 
 	/**
 	 * Gets point euler
@@ -546,7 +549,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	 * @param p
 	 * @returns point euler
 	 */
-	public getPointEuler(timer: RendererTimer, p: THREE.Euler): THREE.Euler {
+	public getPointEuler(timer: RendererTimer, p: THREE_CORE.IEuler): THREE_CORE.IEuler {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastEuler === null) {
 			this._lastEuler = new THREE.Euler(cp.x, cp.y, cp.z);
@@ -560,7 +563,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * Last color of curves normal
 	 */
-	private _lastColor: THREE.Color = null;
+	private _lastColor: THREE_CORE.IColor = null;
 
 	/**
 	 * Gets point color
@@ -568,7 +571,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	 * @param p
 	 * @returns point color
 	 */
-	public getPointColor(timer: RendererTimer, p: THREE.Color): THREE.Color {
+	public getPointColor(timer: RendererTimer, p: THREE_CORE.IColor): THREE_CORE.IColor {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		cp.clampScalar(0, 1);
 		if (this._lastColor === null) {
@@ -583,7 +586,7 @@ export class CurvesNormal extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * Last float of curves normal
 	 */
-	private _lastFloat: THREE.Vector3 = null;
+	private _lastFloat: THREE_CORE.IVector3 = null;
 
 	/**
 	 * Gets point float

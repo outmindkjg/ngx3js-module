@@ -9,6 +9,7 @@ import * as THREE from 'three';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { HtmlCollection } from '../visual/visual.component';
 import { CssStyle, ThreeUtil } from './../interface';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Canvas component.
@@ -108,18 +109,18 @@ export class CanvasComponent
 	/**
 	 * Canvas size of canvas component
 	 */
-	private canvasSize: THREE.Vector2 = null;
+	private canvasSize: THREE_CORE.IVector2 = null;
 
 	/**
 	 * Ele size of canvas component
 	 */
-	private eleSize: THREE.Vector2 = null;
+	private eleSize: THREE_CORE.IVector2 = null;
 
 	/**
 	 * Sets size
 	 * @param size
 	 */
-	public setSize(size: THREE.Vector2) {
+	public setSize(size: THREE_CORE.IVector2) {
 		this.canvasSize = size;
 		this.eleSize = new THREE.Vector2(this.canvasSize.x, this.canvasSize.y);
 		this.applyHtmlStyle();

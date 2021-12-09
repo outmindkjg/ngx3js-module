@@ -20,7 +20,7 @@ import * as THREE_CORE from './../threejs-library/three-core';
  * Svg geometry
  */
 export interface SvgGeometry {
-	geometry: THREE.BufferGeometry;
+	geometry: THREE_CORE.IBufferGeometry;
 	style?: {
 		fill?: string;
 		fillOpacity?: number;
@@ -301,27 +301,27 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * Mesh positions of svg component
 	 */
-	private meshPositions: THREE.Vector3[] = [];
+	private meshPositions: THREE_CORE.IVector3[] = [];
 
 	/**
 	 * Mesh rotations of svg component
 	 */
-	private meshRotations: THREE.Euler[] = [];
+	private meshRotations: THREE_CORE.IEuler[] = [];
 
 	/**
 	 * Mesh scales of svg component
 	 */
-	private meshScales: THREE.Vector3[] = [];
+	private meshScales: THREE_CORE.IVector3[] = [];
 
 	/**
 	 * Mesh translations of svg component
 	 */
-	private meshTranslations: THREE.BufferGeometry[] = [];
+	private meshTranslations: THREE_CORE.IBufferGeometry[] = [];
 
 	/**
 	 * Mesh materials of svg component
 	 */
-	private meshMaterials: THREE.Material[] = [];
+	private meshMaterials: THREE_CORE.IMaterial[] = [];
 
 	/**
 	 * Creates an instance of svg component.
@@ -529,7 +529,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @returns color
 	 */
-	private getColor(def?: string | number): THREE.Color {
+	private getColor(def?: string | number): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.color, def);
 	}
 
@@ -564,12 +564,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets extrude path
 	 * @returns extrude path
 	 */
-	private getExtrudePath(): THREE.Curve<THREE.Vector3> {
+	private getExtrudePath(): THREE_CORE.ICurve<THREE_CORE.IVector3> {
 		if (
 			ThreeUtil.isNotNull(this.extrudePath) ||
 			ThreeUtil.isNotNull(this.curvePath)
 		) {
-			const vectors: THREE.Vector3[] = [];
+			const vectors: THREE_CORE.IVector3[] = [];
 			if (ThreeUtil.isNotNull(this.extrudePath)) {
 				this.extrudePath.forEach((p) => {
 					vectors.push(new THREE.Vector3(p.x, p.y, p.z));
@@ -605,7 +605,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @returns uvgenerator
 	 */
-	private getUVGenerator(def?: string): THREE.UVGenerator {
+	private getUVGenerator(def?: string): THREE_CORE.IUVGenerator {
 		const uVGenerator = ThreeUtil.getTypeSafe(this.uVGenerator, def, '');
 		switch (uVGenerator.toLowerCase()) {
 			case 'world':
@@ -619,8 +619,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets materials
 	 * @returns materials
 	 */
-	private getSvgMaterials(): THREE.Material[] {
-		const materials: THREE.Material[] = [];
+	private getSvgMaterials(): THREE_CORE.IMaterial[] {
+		const materials: THREE_CORE.IMaterial[] = [];
 		if (this.materialList !== null && this.materialList.length > 0) {
 			this.materialList.forEach((material) => {
 				materials.push(material.getMaterial());
@@ -727,7 +727,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * The Meshes of svg component
 	 */
-	private meshes: THREE.Object3D[] = null;
+	private meshes: THREE_CORE.IObject3D[] = null;
 
 	/**
 	 * Sets parent
@@ -747,7 +747,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * Svg mesh of svg component
 	 */
-	private svgMesh: THREE.Group = null;
+	private svgMesh: THREE_CORE.IGroup = null;
 
 	/**
 	 * Resets meshes
@@ -764,14 +764,14 @@ export class SvgComponent extends AbstractObject3dComponent {
 				this.meshTranslations = [];
 				this.meshMaterials = [];
 				const materials = this.getSvgMaterials();
-				const materialList: THREE.Material[] = [];
+				const materialList: THREE_CORE.IMaterial[] = [];
 				for (let i = 0; i < result.length; i++) {
 					materialList.push(materials[i % materials.length]);
 				}
 				result.forEach((data, idx) => {
 					const geometry = data.geometry;
-					let mesh: THREE.Object3D = null;
-					const meshMaterial: THREE.Material = materialList[idx];
+					let mesh: THREE_CORE.IObject3D = null;
+					const meshMaterial: THREE_CORE.IMaterial = materialList[idx];
 					switch (this.type.toLowerCase()) {
 						case 'points':
 							mesh = new THREE.Points(geometry, meshMaterial);
@@ -808,10 +808,10 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns text align
 	 */
 	public applyTextAlign(
-		geometry: THREE.BufferGeometry,
-		boundingSphere: THREE.Sphere,
+		geometry: THREE_CORE.IBufferGeometry,
+		boundingSphere: THREE_CORE.ISphere,
 		def: string = 'left'
-	): THREE.BufferGeometry {
+	): THREE_CORE.IBufferGeometry {
 		if (geometry !== null && boundingSphere !== null) {
 			switch (this.getTextAlign(def)) {
 				case 'left':
@@ -834,12 +834,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns geometries
 	 */
 	private getGeometries(
-		data: SVGResult | THREE.Shape[],
-		boundingSphere: THREE.Sphere
+		data: SVGResult | THREE_CORE.IShape[],
+		boundingSphere: THREE_CORE.ISphere
 	): SvgGeometry[] {
 		const geometries: SvgGeometry[] = [];
 		const shapes: {
-			shape: THREE.Shape[];
+			shape: THREE_CORE.IShape[];
 			userData: any;
 		}[] = [];
 		if (data instanceof Array) {
@@ -856,7 +856,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 			});
 		}
 		shapes.forEach((shape) => {
-			let geometry: THREE.BufferGeometry = null;
+			let geometry: THREE_CORE.IBufferGeometry = null;
 			switch (this.geometryType.toLowerCase()) {
 				case 'extrudebuffer':
 				case 'extrude':
@@ -876,8 +876,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 				case 'custom':
 				case 'geometry':
 				case 'buffer':
-					const holeShape: THREE.Path[] = [];
-					const bufferShapes: THREE.Shape[] = [];
+					const holeShape: THREE_CORE.IPath[] = [];
+					const bufferShapes: THREE_CORE.IShape[] = [];
 					shape.shape.forEach((sh) => {
 						bufferShapes.push(sh);
 					});
@@ -888,7 +888,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 							});
 						}
 					});
-					const sumShapes: THREE.Shape[] = shape.shape;
+					const sumShapes: THREE_CORE.IShape[] = shape.shape;
 					sumShapes.push.apply(shape.shape, holeShape as any);
 					if (ThreeUtil.isNotNull(this.stroke)) {
 						const AnySVGLoader: any = SVGLoader;
@@ -956,7 +956,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 			});
 		} else {
 			this.getSVGResult((data: SVGResult) => {
-				const shapes: THREE.Shape[] = [];
+				const shapes: THREE_CORE.IShape[] = [];
 				data.paths.forEach((path) => {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))
@@ -1006,10 +1006,10 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets shapes
 	 * @param onload
 	 */
-	public getShapes(onload: (data: THREE.Shape[]) => void) {
+	public getShapes(onload: (data: THREE_CORE.IShape[]) => void) {
 		this.getSVGResult((data: SVGResult) => {
 			if (data.paths.length > 0) {
-				const shapes: THREE.Shape[] = [];
+				const shapes: THREE_CORE.IShape[] = [];
 				data.paths.forEach((path) => {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))

@@ -45,6 +45,7 @@ import { TAARenderPass } from 'three/examples/jsm/postprocessing/TAARenderPass';
 import { TexturePass } from 'three/examples/jsm/postprocessing/TexturePass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import { ShaderUtils } from '../../shader/shaders/shaderUtils';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * Reflector shader
@@ -55,7 +56,7 @@ export interface ReflectorShader {
 		FRESNEL: boolean;
 	};
 	uniforms: {
-		[key: string]: THREE.IUniform;
+		[key: string]: THREE_CORE.IUniform;
 	};
 	vertexShader: string;
 	fragmentShader: string;
@@ -87,7 +88,7 @@ export class NgxReflectorForSSRPass extends ReflectorForSSRPass {
 	 * @param geometry
 	 * @param options
 	 */
-	constructor(geometry: THREE.BufferGeometry, options: ReflectorOptions) {
+	constructor(geometry: THREE_CORE.IBufferGeometry, options: ReflectorOptions) {
 		super(geometry, options);
 	}
 }
@@ -171,8 +172,8 @@ export class NgxBokehPass extends BokehPass {
 	 * @param params
 	 */
 	constructor(
-		scene: THREE.Scene,
-		camera: THREE.Camera,
+		scene: THREE_CORE.IScene,
+		camera: THREE_CORE.ICamera,
 		params: BokehPassParamters
 	) {
 		super(scene, camera, params);
@@ -193,7 +194,7 @@ export class NgxClearPass extends ClearPass {
 	 * @param [clearColor]
 	 * @param [clearAlpha]
 	 */
-	constructor(clearColor?: THREE.ColorRepresentation, clearAlpha?: number) {
+	constructor(clearColor?: THREE_CORE.TColorRepresentation, clearAlpha?: number) {
 		super(clearColor, clearAlpha);
 	}
 }
@@ -214,8 +215,8 @@ export class NgxCubeTexturePass extends CubeTexturePass {
 	 * @param [opacity]
 	 */
 	constructor(
-		camera: THREE.PerspectiveCamera,
-		envMap?: THREE.CubeTexture,
+		camera: THREE_CORE.IPerspectiveCamera,
+		envMap?: THREE_CORE.ICubeTexture,
 		opacity?: number
 	) {
 		super(camera, envMap, opacity);
@@ -237,7 +238,7 @@ export class NgxDotScreenPass extends DotScreenPass {
 	 * @param [angle]
 	 * @param [scale]
 	 */
-	constructor(center?: THREE.Vector2, angle?: number, scale?: number) {
+	constructor(center?: THREE_CORE.IVector2, angle?: number, scale?: number) {
 		super(center, angle, scale);
 	}
 }
@@ -354,7 +355,7 @@ export class NgxMaskPass extends MaskPass {
 	 * @param scene
 	 * @param camera
 	 */
-	constructor(scene: THREE.Scene, camera: THREE.Camera) {
+	constructor(scene: THREE_CORE.IScene, camera: THREE_CORE.ICamera) {
 		super(scene, camera);
 	}
 }
@@ -376,10 +377,10 @@ export class NgxOutlinePass extends OutlinePass {
 	 * @param [selectedObjects]
 	 */
 	constructor(
-		resolution: THREE.Vector2,
-		scene: THREE.Scene,
-		camera: THREE.Camera,
-		selectedObjects?: THREE.Object3D[]
+		resolution: THREE_CORE.IVector2,
+		scene: THREE_CORE.IScene,
+		camera: THREE_CORE.ICamera,
+		selectedObjects?: THREE_CORE.IObject3D[]
 	) {
 		super(resolution, scene, camera, selectedObjects);
 	}
@@ -418,10 +419,10 @@ export class NgxRenderPass extends RenderPass {
 	 * @param [clearAlpha]
 	 */
 	constructor(
-		scene: THREE.Scene,
-		camera: THREE.Camera,
-		overrideMaterial?: THREE.Material,
-		clearColor?: THREE.Color,
+		scene: THREE_CORE.IScene,
+		camera: THREE_CORE.ICamera,
+		overrideMaterial?: THREE_CORE.IMaterial,
+		clearColor?: THREE_CORE.IColor,
 		clearAlpha?: number
 	) {
 		super(scene, camera, overrideMaterial, clearColor, clearAlpha);
@@ -437,11 +438,11 @@ export class NgxRenderPass extends RenderPass {
  */
 export class NgxSAOPass extends SAOPass {
 	constructor(
-		scene: THREE.Scene,
-		camera: THREE.Camera,
+		scene: THREE_CORE.IScene,
+		camera: THREE_CORE.ICamera,
 		depthTexture?: boolean,
 		useNormals?: boolean,
-		resolution?: THREE.Vector2
+		resolution?: THREE_CORE.IVector2
 	) {
 		super(scene, camera, depthTexture, useNormals, resolution);
 	}
@@ -460,7 +461,7 @@ export class NgxSavePass extends SavePass {
 	 *
 	 * @param renderTarget
 	 */
-	constructor(renderTarget: THREE.WebGLRenderTarget) {
+	constructor(renderTarget: THREE_CORE.IWebGLRenderTarget) {
 		super(renderTarget);
 	}
 }
@@ -520,9 +521,9 @@ export class NgxSSAARenderPass extends SSAARenderPass {
 	 * @param clearAlpha
 	 */
 	constructor(
-		scene: THREE.Scene,
-		camera: THREE.Camera,
-		clearColor: THREE.ColorRepresentation,
+		scene: THREE_CORE.IScene,
+		camera: THREE_CORE.ICamera,
+		clearColor: THREE_CORE.TColorRepresentation,
 		clearAlpha: number
 	) {
 		super(scene, camera, clearColor, clearAlpha);
@@ -546,8 +547,8 @@ export class NgxSSAOPass extends SSAOPass {
 	 * @param [height]
 	 */
 	constructor(
-		scene: THREE.Scene,
-		camera: THREE.Camera,
+		scene: THREE_CORE.IScene,
+		camera: THREE_CORE.ICamera,
 		width?: number,
 		height?: number
 	) {
@@ -608,9 +609,9 @@ export class NgxTAARenderPass extends TAARenderPass {
 	 * @param clearAlpha
 	 */
 	constructor(
-		scene: THREE.Scene,
-		camera: THREE.Camera,
-		clearColor: THREE.ColorRepresentation,
+		scene: THREE_CORE.IScene,
+		camera: THREE_CORE.ICamera,
+		clearColor: THREE_CORE.TColorRepresentation,
 		clearAlpha: number
 	) {
 		super(scene, camera, clearColor, clearAlpha);
@@ -631,7 +632,7 @@ export class NgxTexturePass extends TexturePass {
 	 * @param map
 	 * @param [opacity]
 	 */
-	constructor(map: THREE.Texture, opacity?: number) {
+	constructor(map: THREE_CORE.ITexture, opacity?: number) {
 		super(map, opacity);
 	}
 }
@@ -653,7 +654,7 @@ export class NgxUnrealBloomPass extends UnrealBloomPass {
 	 * @param threshold
 	 */
 	constructor(
-		resolution: THREE.Vector2,
+		resolution: THREE_CORE.IVector2,
 		strength: number,
 		radius: number,
 		threshold: number

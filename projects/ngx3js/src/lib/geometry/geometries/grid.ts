@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * The Grid geometry.
@@ -31,8 +32,8 @@ export class NgxGridGeometry extends THREE.BufferGeometry {
 		depth: number = 0,
 		widthSegments: number = 1,
 		heightSegments: number = 1,
-		colorW: THREE.Color = null,
-		colorH: THREE.Color = null
+		colorW: THREE_CORE.IColor = null,
+		colorH: THREE_CORE.IColor = null
 	) {
 		super();
 		this.type = 'GridGeometry';

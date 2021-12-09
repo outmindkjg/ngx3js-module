@@ -21,6 +21,7 @@ import { ShaderUtils } from '../shader/shaders/shaderUtils';
 import { SizeComponent } from '../size/size.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TextureComponent } from '../texture/texture.component';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Pass component.
@@ -234,7 +235,7 @@ export class PassComponent
 	/**
 	 * The clearColor of pass component
 	 */
-	@Input() public clearColor: THREE.Color | string | number = null;
+	@Input() public clearColor: ThreeColor = null;
 
 	/**
 	 * The clearAlpha of pass component
@@ -244,7 +245,7 @@ export class PassComponent
 	/**
 	 * The envMap of pass component
 	 */
-	@Input() public envMap: THREE.CubeTexture | TextureComponent = null;
+	@Input() public envMap: THREE_CORE.ICubeTexture | TextureComponent = null;
 
 	/**
 	 * The opacity of pass component
@@ -323,7 +324,7 @@ export class PassComponent
 	/**
 	 * The size of pass component
 	 */
-	@Input() public size: THREE.Vector2 | SizeComponent = null;
+	@Input() public size: THREE_CORE.IVector2 | SizeComponent = null;
 
 	/**
 	 * [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) is the default.
@@ -348,7 +349,7 @@ export class PassComponent
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
 	 */
-	@Input() public selects: THREE.Mesh[] = null;
+	@Input() public selects: THREE_CORE.IMesh[] = null;
 
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
@@ -358,17 +359,17 @@ export class PassComponent
 	/**
 	 * The selectedObjects of pass component
 	 */
-	@Input() public selectedObjects: (THREE.Object3D | any)[] = null;
+	@Input() public selectedObjects: (THREE_CORE.IObject3D | any)[] = null;
 
 	/**
 	 * The overrideMaterial of pass component
 	 */
-	@Input() public overrideMaterial: THREE.Material = null;
+	@Input() public overrideMaterial: THREE_CORE.IMaterial = null;
 
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
 	 */
-	@Input() public mesh: THREE.Mesh | MeshComponent | any = null;
+	@Input() public mesh: THREE_CORE.IMesh | MeshComponent | any = null;
 
 	/**
 	 * The depthTexture of pass component
@@ -383,7 +384,7 @@ export class PassComponent
 	/**
 	 * The renderTarget of pass component
 	 */
-	@Input() public renderTarget: THREE.WebGLRenderTarget = null;
+	@Input() public renderTarget: THREE_CORE.IWebGLRenderTarget = null;
 
 	/**
 	 * The Input of pass component
@@ -409,17 +410,17 @@ export class PassComponent
 	/**
 	 * The map of pass component
 	 */
-	@Input() public map: THREE.Texture | TextureComponent | any = null;
+	@Input() public map: THREE_CORE.ITexture | TextureComponent | any = null;
 
 	/**
 	 * The texture of pass component
 	 */
-	@Input() public texture: THREE.Texture | TextureComponent = null;
+	@Input() public texture: THREE_CORE.ITexture | TextureComponent = null;
 
 	/**
 	 * The patternTexture of pass component
 	 */
-	@Input() public patternTexture: THREE.Texture | TextureComponent = null;
+	@Input() public patternTexture: THREE_CORE.ITexture | TextureComponent = null;
 
 	/**
 	 * The radius of pass component
@@ -820,7 +821,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns scene
 	 */
-	private getScene(def?: any): THREE.Scene {
+	private getScene(def?: any): THREE_CORE.IScene {
 		const scene = ThreeUtil.getTypeSafe(this.scene, def);
 		if (ThreeUtil.isNotNull(scene)) {
 			if (scene instanceof THREE.Scene) {
@@ -838,7 +839,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns camera
 	 */
-	private getCamera(def?: any): THREE.Camera {
+	private getCamera(def?: any): THREE_CORE.ICamera {
 		const camera = ThreeUtil.getTypeSafe(this.camera, def);
 		if (ThreeUtil.isNotNull(camera)) {
 			if (camera instanceof THREE.Camera) {
@@ -876,7 +877,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns clear color
 	 */
-	private getClearColor(def?: THREE.Color | string | number): THREE.Color {
+	private getClearColor(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.clearColor, def);
 	}
 
@@ -894,7 +895,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns env map
 	 */
-	private getEnvMap(def?: THREE.CubeTexture): THREE.CubeTexture {
+	private getEnvMap(def?: THREE_CORE.ICubeTexture): THREE_CORE.ICubeTexture {
 		const cubeTexture = this.getTexture(this.envMap, def);
 		if (cubeTexture instanceof THREE.CubeTexture) {
 			return cubeTexture;
@@ -907,7 +908,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns pattern texture
 	 */
-	private getPatternTexture(def?: THREE.Texture): THREE.Texture {
+	private getPatternTexture(def?: THREE_CORE.ITexture): THREE_CORE.ITexture {
 		return this.getTexture(this.patternTexture, def);
 	}
 
@@ -918,9 +919,9 @@ export class PassComponent
 	 * @returns texture
 	 */
 	private getTexture(
-		baseTexture: THREE.Texture | TextureComponent | any,
-		def?: THREE.Texture | TextureComponent | any
-	): THREE.Texture {
+		baseTexture: THREE_CORE.ITexture | TextureComponent | any,
+		def?: THREE_CORE.ITexture | TextureComponent | any
+	): THREE_CORE.ITexture {
 		const texture = ThreeUtil.getTypeSafe(
 			baseTexture,
 			ThreeUtil.getTypeSafe(this.texture, this.map, def),
@@ -948,7 +949,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns center
 	 */
-	private getCenter(def?: THREE.Vector2): THREE.Vector2 {
+	private getCenter(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
 		return ThreeUtil.getVector2Safe(this.centerX, this.centerY, def);
 	}
 
@@ -1024,7 +1025,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns height
 	 */
-	private getSize(width?: number, height?: number): THREE.Vector2 {
+	private getSize(width?: number, height?: number): THREE_CORE.IVector2 {
 		if (ThreeUtil.isNotNull(this.size)) {
 			if (this.size instanceof THREE.Vector2) {
 				return this.size;
@@ -1046,9 +1047,9 @@ export class PassComponent
 	 * @param [def]
 	 * @returns selected objects
 	 */
-	private getSelectedObjects(def?: THREE.Object3D[]): THREE.Object3D[] {
+	private getSelectedObjects(def?: THREE_CORE.IObject3D[]): THREE_CORE.IObject3D[] {
 		const selectedObjects = ThreeUtil.getTypeSafe(this.selectedObjects, def);
-		const safeObject3d: THREE.Object3D[] = [];
+		const safeObject3d: THREE_CORE.IObject3D[] = [];
 		selectedObjects.forEach((child) => {
 			if (child instanceof THREE.Object3D) {
 				safeObject3d.push(child);
@@ -1068,7 +1069,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns override material
 	 */
-	private getOverrideMaterial(def?: THREE.Material): THREE.Material {
+	private getOverrideMaterial(def?: THREE_CORE.IMaterial): THREE_CORE.IMaterial {
 		return ThreeUtil.getTypeSafe(this.overrideMaterial, def);
 	}
 
@@ -1142,8 +1143,8 @@ export class PassComponent
 	 * @returns render target
 	 */
 	private getRenderTarget(
-		def?: THREE.WebGLRenderTarget
-	): THREE.WebGLRenderTarget {
+		def?: THREE_CORE.IWebGLRenderTarget
+	): THREE_CORE.IWebGLRenderTarget {
 		return ThreeUtil.getTypeSafe(this.renderTarget, def);
 	}
 
@@ -1193,8 +1194,8 @@ export class PassComponent
 	 * @param resultUniforms
 	 * @returns uniforms
 	 */
-	private getUniforms(resultUniforms: { [uniform: string]: THREE.IUniform }): {
-		[uniform: string]: THREE.IUniform;
+	private getUniforms(resultUniforms: { [uniform: string]: THREE_CORE.IUniform }): {
+		[uniform: string]: THREE_CORE.IUniform;
 	} {
 		const uniforms: {
 			[key: string]: any;
@@ -1215,7 +1216,7 @@ export class PassComponent
 					case 'matrix':
 						if (ThreeUtil.isNotNull(valueValue.getObject3d)) {
 							this.unSubscribeRefer('unforms_' + key);
-							const object3d: THREE.Object3D = valueValue.getObject3d();
+							const object3d: THREE_CORE.IObject3D = valueValue.getObject3d();
 							resultUniforms[key] = {
 								value: ThreeUtil.getMatrix4Safe(object3d, valueType),
 							};
@@ -1299,7 +1300,7 @@ export class PassComponent
 					case 'texturelist':
 					case 'imagearray':
 					case 'texturearray':
-						const textureList: THREE.Texture[] = [];
+						const textureList: THREE_CORE.ITexture[] = [];
 						const texturePathList: string[] = [];
 						const textureOption = value['options'];
 						if (typeof valueValue === 'string') {
@@ -1422,7 +1423,7 @@ export class PassComponent
 	 * Sets assign uniforms
 	 * @param resultUniforms
 	 */
-	private setAssignUniforms(resultUniforms: { [key: string]: THREE.IUniform }) {
+	private setAssignUniforms(resultUniforms: { [key: string]: THREE_CORE.IUniform }) {
 		if (ThreeUtil.isNotNull(this.uniforms)) {
 			Object.entries(resultUniforms).forEach(([key, value]) => {
 				this.uniforms[key] = value;
@@ -1485,10 +1486,10 @@ export class PassComponent
 	 */
 	private getMap(
 		effectComposer?: THREE_EFFECT.EffectComposer,
-		camera?: THREE.Camera,
-		scene?: THREE.Scene,
+		camera?: THREE_CORE.ICamera,
+		scene?: THREE_CORE.IScene,
 		mapType?: string
-	): THREE.Texture {
+	): THREE_CORE.ITexture {
 		const map = this.getTexture(this.map, this.texture);
 		if (ThreeUtil.isNotNull(map)) {
 			return map;
@@ -1568,17 +1569,17 @@ export class PassComponent
 	/**
 	 * Effect scene of pass component
 	 */
-	private effectScene: THREE.Scene = null;
+	private effectScene: THREE_CORE.IScene = null;
 
 	/**
 	 * Effect camera of pass component
 	 */
-	private effectCamera: THREE.Camera = null;
+	private effectCamera: THREE_CORE.ICamera = null;
 
 	/**
 	 * Effect camera of pass component
 	 */
-	private effectRenderer: THREE.WebGLRenderer = null;
+	private effectRenderer: THREE_CORE.IWebGLRenderer = null;
 
 	/**
 	 * The Pass of pass component
@@ -1589,7 +1590,7 @@ export class PassComponent
 	 * Sets scene
 	 * @param [scene]
 	 */
-	public setScene(scene?: THREE.Scene) {
+	public setScene(scene?: THREE_CORE.IScene) {
 		if (this.effectScene !== scene) {
 			this.effectScene = scene;
 			const anyPass: any = this.pass;
@@ -1606,10 +1607,10 @@ export class PassComponent
 	 * @param [effectComposer]
 	 */
 	public setEffectComposer(
-		scene?: THREE.Scene,
-		camera?: THREE.Camera,
+		scene?: THREE_CORE.IScene,
+		camera?: THREE_CORE.ICamera,
 		effectComposer?: THREE_EFFECT.EffectComposer,
-		renderer?: THREE.WebGLRenderer
+		renderer?: THREE_CORE.IWebGLRenderer
 	) {
 		if (
 			this.effectComposer !== effectComposer ||

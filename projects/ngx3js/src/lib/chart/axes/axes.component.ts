@@ -9,6 +9,7 @@ import * as THREE from 'three';
 import { AbstractChartComponent } from '../../chart.abstract';
 import { ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * The Chart Axes component.
@@ -128,47 +129,47 @@ export class ChartAxesComponent
 	/**
 	 * The Axes of chart axes component
 	 */
-	private _axes: THREE.Object3D = null;
+	private _axes: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Material wall of chart axes component
 	 */
-	private _materialWall: THREE.MeshBasicMaterial = null;
+	private _materialWall: THREE_CORE.IMeshBasicMaterial = null;
 
 	/**
 	 * Geometry wall of chart axes component
 	 */
-	private _geometryWall: THREE.PlaneGeometry | THREE.CircleGeometry = null;
+	private _geometryWall: THREE_CORE.IPlaneBufferGeometry | THREE_CORE.ICircleBufferGeometry = null;
 
 	/**
 	 * Material wall border of chart axes component
 	 */
-	private _materialWallBorder: THREE.LineBasicMaterial = null;
+	private _materialWallBorder: THREE_CORE.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry wall border of chart axes component
 	 */
-	private _geometryWallBorder: THREE.BufferGeometry = null;
+	private _geometryWallBorder: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Material grid x of chart axes component
 	 */
-	private _materialGridX: THREE.LineBasicMaterial = null;
+	private _materialGridX: THREE_CORE.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry grid x of chart axes component
 	 */
-	private _geometryGridX: THREE.BufferGeometry = null;
+	private _geometryGridX: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Material grid y of chart axes component
 	 */
-	private _materialGridY: THREE.LineBasicMaterial = null;
+	private _materialGridY: THREE_CORE.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry grid y of chart axes component
 	 */
-	private _geometryGridY: THREE.BufferGeometry = null;
+	private _geometryGridY: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Applys changes3d
@@ -282,7 +283,7 @@ export class ChartAxesComponent
 			this._materialWall = new THREE.MeshPhongMaterial({
 				color: ThreeUtil.getColorSafe(options.backgroundColor, 0xd0d0d0),
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
-				side: this.getSide(this.side, 'front'),
+				side: ThreeUtil.getSideSafe(this.side,'front'),
 				transparent: true,
 			});
 			const wallMesh = new THREE.Mesh(this._geometryWall, this._materialWall);

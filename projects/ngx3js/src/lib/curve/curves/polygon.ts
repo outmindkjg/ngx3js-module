@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { ThreeUtil, CurvesParameters } from '../../interface';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * Curves polygon
@@ -7,7 +8,7 @@ import { ThreeUtil, CurvesParameters } from '../../interface';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesPolygon) page for details.
  *
  */
-export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
+export class CurvesPolygon extends THREE.Curve<THREE_CORE.IVector3> {
 	/**
 	 * The Radius of curves polygon
 	 */
@@ -46,7 +47,7 @@ export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * The Points of curves polygon
 	 */
-	public points: THREE.Vector3[] = [];
+	public points: THREE_CORE.IVector3[] = [];
 
 	/**
 	 * Creates an instance of curves polygon.
@@ -55,7 +56,7 @@ export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 	 * @param [options]
 	 */
 	constructor(
-		points: THREE.Vector3[] = [],
+		points: THREE_CORE.IVector3[] = [],
 		radius: number = 1,
 		options?: CurvesParameters
 	) {
@@ -76,7 +77,7 @@ export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 	/**
 	 * Rate v of curves polygon
 	 */
-	private _rateV: THREE.Vector3 = null;
+	private _rateV: THREE_CORE.IVector3 = null;
 
 	/**
 	 * Clears points
@@ -89,7 +90,7 @@ export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 	 * Adds point
 	 * @param p
 	 */
-	public addPoint(p: THREE.Vector3) {
+	public addPoint(p: THREE_CORE.IVector3) {
 		this.points.push(p);
 	}
 
@@ -99,7 +100,7 @@ export class CurvesPolygon extends THREE.Curve<THREE.Vector3> {
 	 * @param optionalTarget
 	 * @returns
 	 */
-	public getPoint(t: number, optionalTarget: THREE.Vector3) {
+	public getPoint(t: number, optionalTarget: THREE_CORE.IVector3) {
 		const point = optionalTarget || new THREE.Vector3();
 		const len = this.points.length;
 		if (len >= 2) {

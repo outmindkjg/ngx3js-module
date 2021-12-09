@@ -24,6 +24,7 @@ import { ThreeUtil } from './interface';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { CanvasFunctionType, TextureUtils } from './texture/textureUtils';
 import { unzipSync } from './threejs-library/fflate.module';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * The Abstract Texture component.
@@ -538,7 +539,7 @@ export class AbstractTextureComponent
 	 * @param defY
 	 * @returns repeat
 	 */
-	protected getRepeat(defX: number, defY: number): THREE.Vector2 {
+	protected getRepeat(defX: number, defY: number): THREE_CORE.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(this.repeatX, this.repeat),
 			ThreeUtil.getTypeSafe(this.repeatY, this.repeat),
@@ -552,7 +553,7 @@ export class AbstractTextureComponent
 	 * @param defY
 	 * @returns offset
 	 */
-	protected getOffset(defX: number, defY: number): THREE.Vector2 {
+	protected getOffset(defX: number, defY: number): THREE_CORE.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(this.offsetX, this.offset),
 			ThreeUtil.getTypeSafe(this.offsetY, this.offset),
@@ -566,7 +567,7 @@ export class AbstractTextureComponent
 	 * @param defY
 	 * @returns center
 	 */
-	private getCenter(defX: number, defY: number): THREE.Vector2 {
+	private getCenter(defX: number, defY: number): THREE_CORE.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(this.centerX, this.center),
 			ThreeUtil.getTypeSafe(this.centerY, this.center),
@@ -577,12 +578,12 @@ export class AbstractTextureComponent
 	/**
 	 * Ref texture of abstract texture component
 	 */
-	private refTexture: THREE.Texture = null;
+	private refTexture: THREE_CORE.ITexture = null;
 
 	/**
 	 * The Texture of abstract texture component
 	 */
-	protected texture: THREE.Texture = null;
+	protected texture: THREE_CORE.ITexture = null;
 
 	/**
 	 * Texture loader of abstract texture component
@@ -632,7 +633,7 @@ export class AbstractTextureComponent
 		cubeImage?: string[],
 		program?: CanvasFunctionType | string,
 		onLoad?: () => void
-	): THREE.Texture {
+	): THREE_CORE.ITexture {
 		return AbstractTextureComponent.getTextureImage(
 			image,
 			cubeImage,
@@ -668,7 +669,7 @@ export class AbstractTextureComponent
 		loaderType?: string,
 		cubeImage?: string[],
 		onLoad?: () => void
-	): THREE.Texture {
+	): THREE_CORE.ITexture {
 		const loadOption: { [key: string]: any } = {
 			size: null,
 			width: null,
@@ -941,7 +942,7 @@ export class AbstractTextureComponent
 				}
 			});
 		}
-		let texture: THREE.Texture = null;
+		let texture: THREE_CORE.ITexture = null;
 		if (ThreeUtil.isNotNull(image.getTexture)) {
 			texture = image.getTexture();
 			ThreeUtil.getSubscribe(
@@ -991,7 +992,7 @@ export class AbstractTextureComponent
 		program?: CanvasFunctionType | string,
 		options?: any,
 		onLoad?: () => void
-	): THREE.Texture {
+	): THREE_CORE.ITexture {
 		options = options || {};
 		onLoad = onLoad || (() => {});
 		let loaderType = (options.type || 'auto').toLowerCase();
@@ -1120,7 +1121,7 @@ export class AbstractTextureComponent
 							);
 							this.fileLoader.setResponseType('arraybuffer');
 						}
-						let texture: THREE.Texture = null;
+						let texture: THREE_CORE.ITexture = null;
 						const width = options.width || 1;
 						const height = options.height || 1;
 						const depth = options.depth || 1;
@@ -1301,7 +1302,7 @@ export class AbstractTextureComponent
 	 * Sets texture
 	 * @param refTexture
 	 */
-	public setTexture(refTexture: THREE.Texture) {
+	public setTexture(refTexture: THREE_CORE.ITexture) {
 		if (this.refTexture !== refTexture) {
 			this.refTexture = refTexture;
 			this.refTexture.copy(this.getTexture());
@@ -1524,10 +1525,10 @@ export class AbstractTextureComponent
 		[key: string]: {
 			refType: string;
 			materials: (
-				| THREE.Material
-				| THREE.WebGLRenderTarget
-				| THREE.Scene
-				| { [uniform: string]: THREE.IUniform }
+				| THREE_CORE.IMaterial
+				| THREE_CORE.IWebGLRenderTarget
+				| THREE_CORE.IScene
+				| { [uniform: string]: THREE_CORE.IUniform }
 			)[];
 		};
 	} = {};
@@ -1562,7 +1563,7 @@ export class AbstractTextureComponent
 					ThreeUtil.isNotNull(this.refName) &&
 					object instanceof THREE.Object3D
 				) {
-					const object3d: THREE.Object3D = object;
+					const object3d: THREE_CORE.IObject3D = object;
 					if (this.refName === '*') {
 						object3d.traverse((child: any) => {
 							if (ThreeUtil.isNotNull(child['material'])) {
@@ -1590,7 +1591,7 @@ export class AbstractTextureComponent
 				| THREE.Material
 				| THREE.Scene
 				| THREE.WebGLRenderTarget
-				| { [uniform: string]: THREE.IUniform }
+				| { [uniform: string]: THREE_CORE.IUniform }
 			)[] = [];
 			if (objectList.length > 0) {
 				objectList.forEach((object) => {
@@ -1646,16 +1647,16 @@ export class AbstractTextureComponent
 	 * Synks object3d
 	 * @param [geometry]
 	 */
-	synkMaterial(texture: THREE.Texture = null, key: string = null) {
+	synkMaterial(texture: THREE_CORE.ITexture = null, key: string = null) {
 		if (ThreeUtil.isNotNull(texture) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._material)) {
 				const materialList: {
 					refType: string;
 					materials: (
-						| THREE.Material
-						| THREE.WebGLRenderTarget
-						| THREE.Scene
-						| { [uniform: string]: THREE.IUniform }
+						| THREE_CORE.IMaterial
+						| THREE_CORE.IWebGLRenderTarget
+						| THREE_CORE.IScene
+						| { [uniform: string]: THREE_CORE.IUniform }
 					)[];
 				}[] = [];
 				if (ThreeUtil.isNotNull(key)) {
@@ -1779,19 +1780,20 @@ export class AbstractTextureComponent
 							}
 						} else if (material instanceof THREE.WebGLRenderTarget) {
 							material.setTexture(texture);
-						} else {
+						} else if (typeof material === 'object') {
 							const textureTypeInfo = (textureType + '..').split('.');
+							const materialUniform : {[key : string] : THREE_CORE.IUniform} = material as any;
 							switch (textureTypeInfo[0].toLowerCase()) {
 								case 'uniforms':
 									const uniformKey = textureTypeInfo[1];
 									const uniformSeqn = parseInt(textureTypeInfo[2] || '-1');
 									if (uniformSeqn > -1) {
-										if (!Array.isArray(material[uniformKey].value)) {
-											material[uniformKey].value = [];
+										if (!Array.isArray(materialUniform[uniformKey].value)) {
+											materialUniform[uniformKey].value = [];
 										}
-										material[uniformKey].value[uniformSeqn] = texture;
+										materialUniform[uniformKey].value[uniformSeqn] = texture;
 									} else {
-										material[uniformKey].value = texture;
+										materialUniform[uniformKey].value = texture;
 									}
 									break;
 							}
@@ -1811,9 +1813,9 @@ export class AbstractTextureComponent
 	 * @param texture
 	 */
 	protected applyTexture2Material(
-		material: THREE.Material,
+		material: THREE_CORE.IMaterial,
 		key: string,
-		texture: THREE.Texture
+		texture: THREE_CORE.ITexture
 	): void {
 		const materialAny: any = material;
 		if (material instanceof NodeMaterial) {
@@ -1877,7 +1879,7 @@ export class AbstractTextureComponent
 	 * Sets texture loaded
 	 * @param texture
 	 */
-	protected setTextureLoaded(texture: THREE.Texture) {
+	protected setTextureLoaded(texture: THREE_CORE.ITexture) {
 		if (texture !== null) {
 			if (ThreeUtil.isNotNull(this.cubeType)) {
 				switch (this.cubeType.toLowerCase()) {
@@ -1936,7 +1938,7 @@ export class AbstractTextureComponent
 	 * @template T
 	 * @returns texture
 	 */
-	public getTexture<T extends THREE.Texture>(): T {
+	public getTexture<T extends THREE_CORE.ITexture>(): T {
 		return this.texture as T;
 	}
 }

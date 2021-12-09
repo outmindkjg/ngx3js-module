@@ -12,6 +12,7 @@ import {
 } from '../../chart.abstract';
 import { ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * The Chart Line component.
@@ -91,47 +92,47 @@ export class ChartLineComponent
 	/**
 	 * The Line of chart line component
 	 */
-	private _line: THREE.Object3D = null;
+	private _line: THREE_CORE.IObject3D = null;
 
 	/**
 	 * The Material of chart line component
 	 */
-	private _material: THREE.Material = null;
+	private _material: THREE_CORE.IMaterial = null;
 
 	/**
 	 * The Geometry of chart line component
 	 */
-	private _geometry: THREE.BufferGeometry = null;
+	private _geometry: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Material border of chart line component
 	 */
-	private _materialBorder: THREE.LineBasicMaterial = null;
+	private _materialBorder: THREE_CORE.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry border of chart line component
 	 */
-	private _geometryBorder: THREE.BufferGeometry = null;
+	private _geometryBorder: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Material point of chart line component
 	 */
-	private _materialPoint: THREE.Material = null;
+	private _materialPoint: THREE_CORE.IMaterial = null;
 
 	/**
 	 * Geometry point of chart line component
 	 */
-	private _geometryPoint: THREE.BufferGeometry = null;
+	private _geometryPoint: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Material point border of chart line component
 	 */
-	private _materialPointBorder: THREE.LineBasicMaterial = null;
+	private _materialPointBorder: THREE_CORE.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry point border of chart line component
 	 */
-	private _geometryPointBorder: THREE.BufferGeometry = null;
+	private _geometryPointBorder: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Applys changes3d
@@ -350,7 +351,7 @@ export class ChartLineComponent
 			this._material = new THREE.MeshPhongMaterial({
 				color: ThreeUtil.getColorSafe(options.backgroundColor, 0xff0000),
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
-				side: this.getSide(side),
+				side: ThreeUtil.getSideSafe(side),
 				transparent: true,
 			});
 			const wallMesh = new THREE.Mesh(this._geometry, this._material);
@@ -376,7 +377,7 @@ export class ChartLineComponent
 			this._line.add(borderMesh);
 			this.addUpdateAttributes(this._geometryBorder, lineUpdateAttributes);
 			let pointerInfo = this.getPointShape();
-			let pointer: THREE.Object3D = pointerInfo.mesh;
+			let pointer: THREE_CORE.IObject3D = pointerInfo.mesh;
 			this._geometryPoint = pointerInfo.geometry;
 			this._materialPoint = pointerInfo.material;
 			this._geometryPointBorder = pointerInfo.geometryBorder;

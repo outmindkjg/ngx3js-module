@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * Plane controls
@@ -36,7 +37,7 @@ export class NgxPlaneControls {
 	/**
 	 * The Target of plane controls
 	 */
-	public target: THREE.Vector3 = new THREE.Vector3();
+	public target: THREE_CORE.IVector3 = new THREE.Vector3();
 
 	/**
 	 * The Enabled of plane controls
@@ -58,7 +59,7 @@ export class NgxPlaneControls {
 	 * @param camera
 	 * @param domElement
 	 */
-	constructor(private camera: THREE.Camera, private domElement: HTMLElement) {
+	constructor(private camera: THREE_CORE.ICamera, private domElement: HTMLElement) {
 		if (domElement === undefined) {
 			console.warn(
 				'THREE.PlainControls: The second parameter "domElement" is now mandatory.'
@@ -93,7 +94,7 @@ export class NgxPlaneControls {
 	 * @param pageY
 	 * @returns
 	 */
-	public getMouseOnScreen(vector: THREE.Vector2, pageX: number, pageY: number) {
+	public getMouseOnScreen(vector: THREE_CORE.IVector2, pageX: number, pageY: number) {
 		vector.set(
 			((pageX - this.screen.left) / this.screen.width - 0.5) * 2,
 			(0.5 - (pageY - this.screen.top) / this.screen.height) * 2
@@ -104,12 +105,12 @@ export class NgxPlaneControls {
 	/**
 	 * The Mouse of plane controls
 	 */
-	private mouse: THREE.Vector2 = new THREE.Vector2();
+	private mouse: THREE_CORE.IVector2 = new THREE.Vector2();
 
 	/**
 	 * Camera position of plane controls
 	 */
-	private cameraPosition: THREE.Vector3 = null;
+	private cameraPosition: THREE_CORE.IVector3 = null;
 
 	/**
 	 * Sets active

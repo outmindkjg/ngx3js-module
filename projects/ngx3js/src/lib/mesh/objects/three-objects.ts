@@ -196,7 +196,7 @@ export class NgxReflector extends Reflector {
 	 * @param [geometry]
 	 * @param [options]
 	 */
-	constructor(geometry?: THREE.BufferGeometry, options?: ReflectorOptions) {
+	constructor(geometry?: THREE_CORE.IBufferGeometry, options?: ReflectorOptions) {
 		super(geometry, options);
 	}
 }
@@ -214,7 +214,7 @@ export class NgxReflectorRTT extends ReflectorRTT {
 	 * @param [geometry]
 	 * @param [options]
 	 */
-	constructor(geometry?: THREE.BufferGeometry, options?: ReflectorOptions) {
+	constructor(geometry?: THREE_CORE.IBufferGeometry, options?: ReflectorOptions) {
 		super(geometry, options);
 	}
 }
@@ -232,7 +232,7 @@ export class NgxRefractor extends Refractor {
 	 * @param [geometry]
 	 * @param [options]
 	 */
-	constructor(geometry?: THREE.BufferGeometry, options?: RefractorOptions) {
+	constructor(geometry?: THREE_CORE.IBufferGeometry, options?: RefractorOptions) {
 		super(geometry, options);
 	}
 }
@@ -250,7 +250,7 @@ export class NgxReflectorForSSRMesh extends ReflectorForSSRPass {
 	 * @param geometry
 	 * @param options
 	 */
-	constructor(geometry: THREE.BufferGeometry, options: any) {
+	constructor(geometry: THREE_CORE.IBufferGeometry, options: any) {
 		super(geometry, options);
 	}
 }
@@ -268,7 +268,7 @@ export class NgxWater extends Water {
 	 * @param geometry
 	 * @param options
 	 */
-	constructor(geometry: THREE.BufferGeometry, options: WaterOptions) {
+	constructor(geometry: THREE_CORE.IBufferGeometry, options: WaterOptions) {
 		super(geometry, options);
 	}
 }
@@ -286,7 +286,7 @@ export class NgxWater2 extends Water2 {
 	 * @param geometry
 	 * @param options
 	 */
-	constructor(geometry: THREE.BufferGeometry, options: Water2Options) {
+	constructor(geometry: THREE_CORE.IBufferGeometry, options: Water2Options) {
 		super(geometry, options);
 	}
 }
@@ -320,7 +320,7 @@ export class NgxFlow extends Flow {
 	 * @param mesh
 	 * @param [numberOfCurves]
 	 */
-	constructor(mesh: THREE.Mesh, numberOfCurves?: number) {
+	constructor(mesh: THREE_CORE.IMesh, numberOfCurves?: number) {
 		super(mesh, numberOfCurves);
 	}
 }
@@ -343,8 +343,8 @@ export class NgxInstancedFlow extends InstancedFlow {
 	constructor(
 		count: number,
 		curveCount: number,
-		geometry: THREE.BufferGeometry,
-		material: THREE.Material
+		geometry: THREE_CORE.IBufferGeometry,
+		material: THREE_CORE.IMaterial
 	) {
 		super(count, curveCount, geometry, material);
 	}
@@ -364,8 +364,8 @@ export class NgxLineLoop extends THREE.LineLoop {
 	 * @param [material]
 	 */
 	constructor(
-		geometry?: THREE.BufferGeometry,
-		material?: THREE.Material | THREE.Material[]
+		geometry?: THREE_CORE.IBufferGeometry,
+		material?: THREE_CORE.IMaterial | THREE_CORE.IMaterial[]
 	) {
 		super(geometry, material);
 	}
@@ -402,8 +402,8 @@ export class NgxInstancedMesh extends THREE.InstancedMesh {
 	 * @param count
 	 */
 	constructor(
-		geometry: THREE.BufferGeometry,
-		material: THREE.Material | THREE.Material[],
+		geometry: THREE_CORE.IBufferGeometry,
+		material: THREE_CORE.IMaterial | THREE_CORE.IMaterial[],
 		count: number
 	) {
 		super(geometry, material, count);
@@ -422,7 +422,7 @@ export class NgxSprite extends THREE.Sprite {
 	 * Creates an instance of ngx sprite.
 	 * @param [material]
 	 */
-	constructor(material?: THREE.SpriteMaterial) {
+	constructor(material?: THREE_CORE.ISpriteMaterial) {
 		super(material);
 	}
 }
@@ -463,7 +463,7 @@ export class NgxMarchingCubes extends MarchingCubes {
 	 */
 	constructor(
 		resolution: number,
-		material: THREE.Material,
+		material: THREE_CORE.IMaterial,
 		enableUvs?: boolean,
 		enableColors?: boolean,
 		maxPolyCount?: number
@@ -486,8 +486,8 @@ export class NgxPoints extends THREE.Points {
 	 * @param [material]
 	 */
 	constructor(
-		geometry?: THREE.BufferGeometry,
-		material?: THREE.Material | THREE.Material[]
+		geometry?: THREE_CORE.IBufferGeometry,
+		material?: THREE_CORE.IMaterial | THREE_CORE.IMaterial[]
 	) {
 		super(geometry, material);
 	}
@@ -507,8 +507,8 @@ export class NgxLine extends THREE.Line {
 	 * @param [material]
 	 */
 	constructor(
-		geometry?: THREE.BufferGeometry,
-		material?: THREE.Material | THREE.Material[]
+		geometry?: THREE_CORE.IBufferGeometry,
+		material?: THREE_CORE.IMaterial | THREE_CORE.IMaterial[]
 	) {
 		super(geometry, material);
 	}
@@ -548,7 +548,7 @@ export class NgxMeshText extends THREE.Mesh {
 	constructor(
 		public message: string,
 		public height: number = 20,
-		public fontColor: THREE.ColorRepresentation = 0xffffff,
+		public fontColor: THREE_CORE.TColorRepresentation = 0xffffff,
 		public fontFamily: string = 'Arial',
 		public side: THREE.Side = THREE.DoubleSide
 	) {
@@ -620,8 +620,8 @@ export class NgxLineSegments extends THREE.LineSegments {
 	 * @param [material]
 	 */
 	constructor(
-		geometry?: THREE.BufferGeometry,
-		material?: THREE.Material | THREE.Material[]
+		geometry?: THREE_CORE.IBufferGeometry,
+		material?: THREE_CORE.IMaterial | THREE_CORE.IMaterial[]
 	) {
 		super(geometry, material);
 	}
@@ -640,7 +640,7 @@ export class NgxInteractiveGroup extends InteractiveGroup {
 	 * @param renderer
 	 * @param camera
 	 */
-	constructor(renderer: THREE.WebGLRenderer, camera: THREE.Camera) {
+	constructor(renderer: THREE_CORE.IWebGLRenderer, camera: THREE_CORE.ICamera) {
 		super(renderer, camera);
 	}
 }
@@ -693,8 +693,8 @@ export class NgxMesh extends THREE.Mesh {
 	 * @param [material]
 	 */
 	constructor(
-		geometry?: THREE.BufferGeometry,
-		material?: THREE.Material | THREE.Material[]
+		geometry?: THREE_CORE.IBufferGeometry,
+		material?: THREE_CORE.IMaterial | THREE_CORE.IMaterial[]
 	) {
 		super(geometry, material);
 	}

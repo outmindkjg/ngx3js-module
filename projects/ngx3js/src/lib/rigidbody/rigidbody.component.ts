@@ -47,7 +47,7 @@ export interface RigidbodyType {
 	/**
 	 *
 	 */
-	mesh?: THREE.Object3D;
+	mesh?: THREE_CORE.IObject3D;
 }
 
 /**
@@ -255,8 +255,8 @@ export class RigidbodyComponent
 	 * @returns box half extents
 	 */
 	private getBoxHalfExtents(
-		geometry: THREE.BufferGeometry,
-		def?: THREE.Vector3
+		geometry: THREE_CORE.IBufferGeometry,
+		def?: THREE_CORE.IVector3
 	): Ammo.btVector3 {
 		let boxHalfExtents = ThreeUtil.getVector3Safe(
 			this.width,
@@ -279,7 +279,7 @@ export class RigidbodyComponent
 	 * @param [def]
 	 * @returns radius
 	 */
-	private getRadius(geometry: THREE.BufferGeometry, def?: number): number {
+	private getRadius(geometry: THREE_CORE.IBufferGeometry, def?: number): number {
 		let radius = this.radius;
 		if (ThreeUtil.isNull(radius)) {
 			const geometrySize = this.getGeometrySize(geometry, def);
@@ -294,7 +294,7 @@ export class RigidbodyComponent
 	 * @param [def]
 	 * @returns height
 	 */
-	private getHeight(geometry: THREE.BufferGeometry, def?: number): number {
+	private getHeight(geometry: THREE_CORE.IBufferGeometry, def?: number): number {
 		let height = this.height;
 		if (ThreeUtil.isNull(height)) {
 			height = this.getGeometrySize(geometry, def).y;
@@ -385,9 +385,9 @@ export class RigidbodyComponent
 	 * @returns geometry size
 	 */
 	private getGeometrySize(
-		geometry: THREE.BufferGeometry,
-		def?: THREE.Vector3 | number
-	): THREE.Vector3 {
+		geometry: THREE_CORE.IBufferGeometry,
+		def?: THREE_CORE.IVector3 | number
+	): THREE_CORE.IVector3 {
 		if (ThreeUtil.isNotNull(geometry)) {
 			const anyGeometry: any = geometry;
 			const parameters = anyGeometry['parameters'];
@@ -423,12 +423,11 @@ export class RigidbodyComponent
 		if (ThreeUtil.isNotNull(def)) {
 			if (def instanceof THREE.Vector3) {
 				return def;
-			} else {
+			} else if (typeof def === 'number'){
 				return new THREE.Vector3(def, def, def);
 			}
-		} else {
-			return new THREE.Vector3();
 		}
+		return new THREE.Vector3();
 	}
 
 	/**
@@ -438,9 +437,9 @@ export class RigidbodyComponent
 	 * @returns geometry segments
 	 */
 	private getGeometrySegments(
-		geometry: THREE.BufferGeometry,
-		def?: THREE.Vector3 | number
-	): THREE.Vector3 {
+		geometry: THREE_CORE.IBufferGeometry,
+		def?: THREE_CORE.IVector3 | number
+	): THREE_CORE.IVector3 {
 		if (ThreeUtil.isNotNull(geometry)) {
 			if (geometry instanceof THREE.BoxGeometry) {
 				return new THREE.Vector3(
@@ -465,12 +464,11 @@ export class RigidbodyComponent
 		if (ThreeUtil.isNotNull(def)) {
 			if (def instanceof THREE.Vector3) {
 				return def;
-			} else {
+			} else if (typeof def === 'number'){
 				return new THREE.Vector3(def, def, def);
 			}
-		} else {
-			return new THREE.Vector3();
 		}
+		return new THREE.Vector3();
 	}
 
 	/**
@@ -550,9 +548,9 @@ export class RigidbodyComponent
 	 * @returns absolute geometry
 	 */
 	private getAbsoluteGeometry(
-		bufGeometry: THREE.BufferGeometry,
+		bufGeometry: THREE_CORE.IBufferGeometry,
 		object3d: THREE_CORE.IObject3D
-	): THREE.BufferGeometry {
+	): THREE_CORE.IBufferGeometry {
 		const absBufGeometry = bufGeometry.clone();
 		const positions = absBufGeometry.getAttribute('position');
 		const tmp = new THREE.Vector3();
@@ -702,7 +700,7 @@ export class RigidbodyComponent
 	public getVelocity(
 		type: string = 'linear',
 		index: number = null
-	): THREE.Vector3 {
+	): THREE_CORE.IVector3 {
 		if (this.rigidBody !== null) {
 			let velocity: Ammo.btVector3 = null;
 			this._getRigidBodies(index).forEach((rigidBody) => {
@@ -763,7 +761,7 @@ export class RigidbodyComponent
 	public getFactor(
 		type: string = 'linear',
 		index: number = null
-	): THREE.Vector3 {
+	): THREE_CORE.IVector3 {
 		if (this.rigidBody !== null) {
 			let factor: Ammo.btVector3 = null;
 			this._getRigidBodies(index).forEach((rigidBody) => {
@@ -922,7 +920,7 @@ export class RigidbodyComponent
 		if (this.rigidBody !== null) {
 			const transform = new this._ammo.btTransform();
 			transform.setIdentity();
-			const quaternion: THREE.Quaternion = new THREE.Quaternion();
+			const quaternion: THREE_CORE.IQuaternion = new THREE.Quaternion();
 			quaternion.setFromEuler(ThreeUtil.getEulerSafe(x, y, z));
 			transform.setRotation(
 				new this._ammo.btQuaternion(
@@ -1244,7 +1242,7 @@ export class RigidbodyComponent
 	 * @param bufGeometry
 	 * @returns geometry
 	 */
-	private _processGeometry(bufGeometry: THREE.BufferGeometry): {
+	private _processGeometry(bufGeometry: THREE_CORE.IBufferGeometry): {
 		ammoVertices: number[];
 		ammoIndices: number[];
 		ammoIndexAssociation: number[][];
@@ -1296,8 +1294,8 @@ export class RigidbodyComponent
 	 * @returns indices
 	 */
 	private _mapIndices(
-		bufGeometry: THREE.BufferGeometry,
-		indexedBufferGeom: THREE.BufferGeometry
+		bufGeometry: THREE_CORE.IBufferGeometry,
+		indexedBufferGeom: THREE_CORE.IBufferGeometry
 	): {
 		ammoVertices: number[];
 		ammoIndices: number[];
@@ -1381,7 +1379,7 @@ export class RigidbodyComponent
 				let shape: Ammo.btCollisionShape = null;
 				let softBody: Ammo.btSoftBody = null;
 				let type: string = this.type;
-				let geometry: THREE.BufferGeometry = null;
+				let geometry: THREE_CORE.IBufferGeometry = null;
 				let ammoIndexAssociation: number[][] = null;
 				const localScaling = new THREE.Vector3(1, 1, 1);
 				const anyObject3d: any = this.object3d;
@@ -1975,7 +1973,7 @@ export class RigidbodyComponent
 	/**
 	 * Position aux of rigidbody component
 	 */
-	private positionAux: THREE.Vector3 = null;
+	private positionAux: THREE_CORE.IVector3 = null;
 
 	/**
 	 * Instanced mesh compose
@@ -2039,7 +2037,7 @@ export class RigidbodyComponent
 						ThreeUtil.isNotNull(this.rigidBody.softBody)
 					) {
 						const softBody = this.rigidBody.softBody;
-						const geometry: THREE.BufferGeometry = object3dAny['geometry'];
+						const geometry: THREE_CORE.IBufferGeometry = object3dAny['geometry'];
 						const meshPositions = geometry.getAttribute(
 							'position'
 						) as THREE.BufferAttribute;

@@ -196,7 +196,7 @@ export interface HelperOptions {
 	/**
 	 * Update matrix for this helper
 	 */
-	matrix?: THREE.Matrix4;
+	matrix?: THREE_CORE.IMatrix4;
 
 	/**
 	 * this children of Gyroscope
@@ -442,7 +442,7 @@ export class HelperComponent
 	/**
 	 * Update matrix for this helper
 	 */
-	@Input() public matrix: THREE.Matrix4 = null;
+	@Input() public matrix: THREE_CORE.IMatrix4 = null;
 
 	/**
 	 * this children of Gyroscope
@@ -475,9 +475,9 @@ export class HelperComponent
 	 * @param [target]
 	 * @returns target
 	 */
-	private getTarget(target?: THREE.Object3D): THREE.Object3D {
+	private getTarget(target?: THREE_CORE.IObject3D): THREE_CORE.IObject3D {
 		this.unSubscribeRefer('target');
-		let targetMesh: THREE.Object3D = null;
+		let targetMesh: THREE_CORE.IObject3D = null;
 		if (ThreeUtil.isNotNull(this.target)) {
 			targetMesh = ThreeUtil.getObject3d(this.target, false);
 			this.subscribeRefer(
@@ -521,7 +521,7 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color
 	 */
-	private getColor(def?: number | string): THREE.Color {
+	private getColor(def?: number | string): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.color, def);
 	}
 
@@ -580,7 +580,7 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color1
 	 */
-	private getColor1(def?: ThreeColor): THREE.Color {
+	private getColor1(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.color1, this.color, def);
 	}
 
@@ -589,7 +589,7 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color2
 	 */
-	private getColor2(def?: ThreeColor): THREE.Color {
+	private getColor2(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.color2, this.color1 || this.color, def);
 	}
 
@@ -617,13 +617,13 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns dir
 	 */
-	private getDirection(def?: THREE.Vector3): THREE.Vector3 {
+	private getDirection(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
 		if (
 			ThreeUtil.isNotNull(this.arrowFrom) &&
 			ThreeUtil.isNotNull(this.arrowTo)
 		) {
-			const arrowFrom: THREE.Vector3 = this.getObjectPosition(this.arrowFrom);
-			const arrowTo: THREE.Vector3 = this.getObjectPosition(this.arrowTo);
+			const arrowFrom: THREE_CORE.IVector3 = this.getObjectPosition(this.arrowFrom);
+			const arrowTo: THREE_CORE.IVector3 = this.getObjectPosition(this.arrowTo);
 			const arrowDirection = new THREE.Vector3();
 			arrowDirection.subVectors(arrowTo, arrowFrom).normalize();
 			return arrowDirection;
@@ -640,8 +640,8 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns origin
 	 */
-	private getOrigin(def?: THREE.Vector3): THREE.Vector3 {
-		let origin: THREE.Vector3 = def;
+	private getOrigin(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+		let origin: THREE_CORE.IVector3 = def;
 		if (ThreeUtil.isNotNull(this.arrowFrom)) {
 			origin = this.getObjectPosition(this.arrowFrom);
 		}
@@ -667,7 +667,7 @@ export class HelperComponent
 	 * @param obj
 	 * @returns object position
 	 */
-	private getObjectPosition(obj: any): THREE.Vector3 {
+	private getObjectPosition(obj: any): THREE_CORE.IVector3 {
 		if (ThreeUtil.isNotNull(obj)) {
 			if (obj instanceof THREE.Vector3) {
 				return obj;
@@ -1017,7 +1017,7 @@ export class HelperComponent
 						this.parent.material instanceof THREE.Material
 					) {
 						basemesh = new THREE.Group();
-						const clippingPlanes: THREE.Plane[] =
+						const clippingPlanes: THREE_CORE.IPlane[] =
 							this.parent.material.clippingPlanes;
 						if (clippingPlanes !== null && clippingPlanes !== undefined) {
 							clippingPlanes.forEach((clippingPlane) => {

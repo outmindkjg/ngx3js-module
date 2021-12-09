@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { TagAttributes, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTweenComponent } from '../tween.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Position component.
@@ -149,13 +150,13 @@ export class PositionComponent
 	/**
 	 * The Position of position component
 	 */
-	private position: THREE.Vector3 = null;
+	private position: THREE_CORE.IVector3 = null;
 
 	/**
 	 * The Object3d of position component
 	 */
 	private _object3d: {
-		[key: string]: THREE.Object3D;
+		[key: string]: THREE_CORE.IObject3D;
 	} = {};
 
 	/**
@@ -224,10 +225,10 @@ export class PositionComponent
 	 * Synks object3d
 	 * @param [position]
 	 */
-	synkObject3d(position: THREE.Vector3 = null, key: string = null) {
+	synkObject3d(position: THREE_CORE.IVector3 = null, key: string = null) {
 		if (ThreeUtil.isNotNull(position) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._object3d)) {
-				const object3dList: THREE.Object3D[] = [];
+				const object3dList: THREE_CORE.IObject3D[] = [];
 				if (ThreeUtil.isNotNull(key)) {
 					if (ThreeUtil.isNotNull(this._object3d[key])) {
 						object3dList.push(this._object3d[key]);
@@ -251,7 +252,7 @@ export class PositionComponent
 								break;
 							case 'target':
 								if (ThreeUtil.isNotNull(anyObject3d['target'])) {
-									const target: THREE.Object3D = anyObject3d['target'];
+									const target: THREE_CORE.IObject3D = anyObject3d['target'];
 									target.position.copy(position);
 								}
 								break;
@@ -338,7 +339,7 @@ export class PositionComponent
 	/**
 	 * Last ref camera of position component
 	 */
-	private _lastRefCamera: THREE.Camera = null;
+	private _lastRefCamera: THREE_CORE.ICamera = null;
 
 	/**
 	 * Last ref camera bind of position component
@@ -368,8 +369,8 @@ export class PositionComponent
 	 * Gets position
 	 * @returns position
 	 */
-	private _getPosition(): THREE.Vector3 {
-		let position: THREE.Vector3 = null;
+	private _getPosition(): THREE_CORE.IVector3 {
+		let position: THREE_CORE.IVector3 = null;
 		if (this.refer !== null && this.refer !== undefined) {
 			position = ThreeUtil.getPosition(this.refer);
 		}
@@ -407,7 +408,7 @@ export class PositionComponent
 				position.multiplyScalar(this.multiply);
 			}
 			if (this.camera !== null) {
-				const camera: THREE.Camera = ThreeUtil.isNotNull(this.camera.getCamera)
+				const camera: THREE_CORE.ICamera = ThreeUtil.isNotNull(this.camera.getCamera)
 					? this.camera.getObject3d()
 					: this.camera;
 				if (camera !== null) {
@@ -448,7 +449,7 @@ export class PositionComponent
 	 * Gets position
 	 * @returns position
 	 */
-	public getPosition(): THREE.Vector3 {
+	public getPosition(): THREE_CORE.IVector3 {
 		if (this.position === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.position = this._getPosition();

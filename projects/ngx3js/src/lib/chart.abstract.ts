@@ -44,11 +44,11 @@ export interface ShapeInfo {
  * Chart shape
  */
 export interface ChartShape {
-	mesh: THREE.Mesh;
-	geometry: THREE.BufferGeometry;
-	material: THREE.Material;
-	geometryBorder: THREE.BufferGeometry;
-	materialBorder: THREE.LineDashedMaterial;
+	mesh: THREE_CORE.IMesh;
+	geometry: THREE_CORE.IBufferGeometry;
+	material: THREE_CORE.IMaterial;
+	geometryBorder: THREE_CORE.IBufferGeometry;
+	materialBorder: THREE_CORE.ILineDashedMaterial;
 }
 
 /**
@@ -186,35 +186,6 @@ export class AbstractChartComponent
 	}
 
 	/**
-	 * Gets side
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Side
-	 * @see THREE.FrontSide - FrontSide , Front
-	 * @see THREE.BackSide - BackSide , Back
-	 * @see THREE.DoubleSide - DoubleSide , Double
-	 *
-	 * @param [def]
-	 * @returns side
-	 */
-	protected getSide(value: string, def?: string): THREE.Side {
-		const side = ThreeUtil.getTypeSafe(value, def);
-		switch (side.toLowerCase()) {
-			case 'backside':
-			case 'back':
-				return THREE.BackSide;
-			case 'doubleside':
-			case 'double':
-				return THREE.DoubleSide;
-			case 'frontside':
-			case 'front':
-			default:
-				return THREE.FrontSide;
-		}
-	}
-
-	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
@@ -230,7 +201,7 @@ export class AbstractChartComponent
 	/**
 	 * The Chart of abstract chart component
 	 */
-	protected chart: THREE.Object3D = null;
+	protected chart: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Sets object3d
@@ -344,8 +315,8 @@ export class AbstractChartComponent
 	 */
 	protected addPointer(
 		upPoints: number[],
-		pointer: THREE.Object3D,
-		parent: THREE.Object3D,
+		pointer: THREE_CORE.IObject3D,
+		parent: THREE_CORE.IObject3D,
 		middleY: number,
 		baseZ: number
 	) {
@@ -373,7 +344,7 @@ export class AbstractChartComponent
 	 * Update attributes of abstract chart component
 	 */
 	private _updateAttributes: {
-		attribute: THREE.BufferAttribute | THREE.InterleavedBufferAttribute;
+		attribute: THREE_CORE.IBufferAttribute | THREE_CORE.IInterleavedBufferAttribute;
 		values: AttributeUpdateInfo[];
 	}[] = [];
 
@@ -381,14 +352,14 @@ export class AbstractChartComponent
 	 * Update position of abstract chart component
 	 */
 	private _updatePosition: {
-		position: THREE.Vector3;
+		position: THREE_CORE.IVector3;
 		value: AttributeUpdateInfo;
 	}[] = [];
 
 	/**
 	 * Update points of abstract chart component
 	 */
-	private _updatePoints: THREE.Object3D[] = [];
+	private _updatePoints: THREE_CORE.IObject3D[] = [];
 
 	/**
 	 * Adds update attributes
@@ -396,7 +367,7 @@ export class AbstractChartComponent
 	 * @param values
 	 */
 	protected addUpdateAttributes(
-		geometry: THREE.BufferGeometry,
+		geometry: THREE_CORE.IBufferGeometry,
 		values: AttributeUpdateInfo[]
 	) {
 		this._updateAttributes.push({
@@ -412,7 +383,7 @@ export class AbstractChartComponent
 	 * @param [isPointer]
 	 */
 	protected addUpdatePosition(
-		object3d: THREE.Object3D,
+		object3d: THREE_CORE.IObject3D,
 		value: AttributeUpdateInfo,
 		isPointer: boolean = true
 	) {
@@ -451,7 +422,7 @@ export class AbstractChartComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
 		return this.getChart();
 	}
 
@@ -460,7 +431,7 @@ export class AbstractChartComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getChart<T extends THREE.Object3D>(): T {
+	public getChart<T extends THREE_CORE.IObject3D>(): T {
 		return this.chart as T;
 	}
 
@@ -509,7 +480,7 @@ export class AbstractChartComponent
 		if (ThreeUtil.isNull(options.radius)) {
 			options.radius = 0.06;
 		}
-		let geometry: THREE.BufferGeometry = null;
+		let geometry: THREE_CORE.IBufferGeometry = null;
 		let side: string = 'front';
 		switch (type.toLowerCase()) {
 			case 'plane':
@@ -546,10 +517,10 @@ export class AbstractChartComponent
 		const material = new THREE.MeshPhongMaterial({
 			color: ThreeUtil.getColorSafe(options.backgroundColor, 0xff0000),
 			opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
-			side: this.getSide(side),
+			side: ThreeUtil.getSideSafe(side),
 			transparent: true,
 		});
-		const mesh: THREE.Mesh = new THREE.Mesh(geometry, material);
+		const mesh: THREE_CORE.IMesh = new THREE.Mesh(geometry, material);
 		mesh.castShadow = true;
 		const geometryBorder = new NgxOutlineGeometry(geometry, 1.2);
 		const materialBorder = new THREE.LineDashedMaterial({
@@ -561,7 +532,7 @@ export class AbstractChartComponent
 			gapSize: 1,
 			scale: 500,
 		});
-		let border: THREE.LineSegments = new THREE.LineSegments(
+		let border: THREE_CORE.ILineSegments = new THREE.LineSegments(
 			geometryBorder,
 			materialBorder
 		);

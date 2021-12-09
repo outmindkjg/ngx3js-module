@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { RendererTimer, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
 import * as GSAP from 'gsap';
+import * as THREE_CORE from './threejs-library/three-core';
 
 export interface EaseFunction {
 	(progress: number): number;
@@ -21,7 +22,7 @@ export type ObjectFunction = (
  * Object3dFunction
  */
 export type Object3dFunction = (
-	object3d: THREE.Object3D,
+	object3d: THREE_CORE.IObject3D,
 	elapsedTime?: number,
 	timer?: RendererTimer
 ) => void;
@@ -148,7 +149,7 @@ export abstract class AbstractThreeDirective {
 	/**
 	 * Gets object3d
 	 */
-	protected get object(): THREE.Object3D {
+	protected get object(): THREE_CORE.IObject3D {
 		if (this._cachedObject === null) {
 			this._cachedObject = this.objectCom.getObject();
 		}
@@ -433,12 +434,12 @@ export abstract class AbstractObject3dDirective extends AbstractThreeDirective {
 	/**
 	 * Cached object3d of abstract object3d directive
 	 */
-	private _cachedObject3d: THREE.Object3D = null;
+	private _cachedObject3d: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Gets object3d
 	 */
-	protected get object3d(): THREE.Object3D {
+	protected get object3d(): THREE_CORE.IObject3D {
 		if (this._cachedObject3d === null) {
 			this._cachedObject3d = this.object3dCom.getObject3d();
 		}

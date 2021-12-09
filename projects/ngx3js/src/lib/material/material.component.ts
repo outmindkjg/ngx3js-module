@@ -27,6 +27,7 @@ import { ShaderType, ShaderUtils } from '../shader/shaders/shaderUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Material component.
@@ -760,7 +761,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns emissive
 	 */
-	private getEmissive(def?: ThreeColor): THREE.Color {
+	private getEmissive(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorMultiplySafe(
 			this.emissive,
 			def,
@@ -769,28 +770,12 @@ export class MaterialComponent
 	}
 
 	/**
-	 * Gets normal map type
-	 * @param [def]
-	 * @returns normal map type
-	 */
-	private getNormalMapType(def?: string): THREE.NormalMapTypes {
-		const normalMapType = ThreeUtil.getTypeSafe(this.normalMapType, def, '');
-		switch (normalMapType.toLowerCase()) {
-			case 'tangentspace':
-				return THREE.TangentSpaceNormalMap;
-			case 'objectspace':
-				return THREE.ObjectSpaceNormalMap;
-		}
-		return undefined;
-	}
-
-	/**
 	 * How much the normal map affects the material. Typical ranges are 0-1.
 	 *
 	 * @param def
 	 * @returns
 	 */
-	private getNormalScale(def?: THREE.Vector2): THREE.Vector2 {
+	private getNormalScale(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(this.normalScaleX, this.normalScale, 1),
 			ThreeUtil.getTypeSafe(this.normalScaleY, this.normalScale, 1),
@@ -799,50 +784,11 @@ export class MaterialComponent
 	}
 
 	/**
-	 * Gets combine
-	 * @param [def]
-	 * @returns combine
-	 */
-	private getCombine(def?: string): THREE.Combine {
-		const combine = ThreeUtil.getTypeSafe(this.combine, def, '');
-		switch (combine.toLowerCase()) {
-			case 'multiplyoperation':
-			case 'multiply':
-				return THREE.MultiplyOperation;
-			case 'mixoperation':
-			case 'mix':
-				return THREE.MixOperation;
-			case 'addoperation':
-			case 'add':
-				return THREE.AddOperation;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets depth packing
-	 * @param [def]
-	 * @returns depth packing
-	 */
-	private getDepthPacking(def?: string): THREE.DepthPackingStrategies {
-		const depthPacking = ThreeUtil.getTypeSafe(this.depthPacking, def, '');
-		switch (depthPacking.toLowerCase()) {
-			case 'rgba':
-			case 'rgbadepth':
-				return THREE.RGBADepthPacking;
-			case 'basic':
-			case 'basicdepth':
-			default:
-				return THREE.BasicDepthPacking;
-		}
-	}
-
-	/**
 	 * Gets reference position
 	 * @param [def]
 	 * @returns reference position
 	 */
-	private getReferencePosition(def?: THREE.Vector3): THREE.Vector3 {
+	private getReferencePosition(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
 		return ThreeUtil.getVector3Safe(
 			this.referencePositionX,
 			this.referencePositionY,
@@ -856,7 +802,9 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns clearcoat normal scale
 	 */
-	private getClearcoatNormalScale(def?: THREE.Vector2): THREE.Vector2 {
+	private getClearcoatNormalScale(
+		def?: THREE_CORE.IVector2
+	): THREE_CORE.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(
 				this.clearcoatNormalScaleX,
@@ -876,7 +824,7 @@ export class MaterialComponent
 	 * @param def
 	 * @returns
 	 */
-	private getColor(def?: ThreeColor): THREE.Color {
+	private getColor(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorMultiplySafe(this.color, def, this.colorMultiply);
 	}
 
@@ -886,7 +834,7 @@ export class MaterialComponent
 	 * @param def
 	 * @returns
 	 */
-	private getDiffuseColor(def?: ThreeColor): THREE.Color {
+	private getDiffuseColor(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorMultiplySafe(
 			this.diffuseColor,
 			def,
@@ -899,7 +847,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns sheen
 	 */
-	private getSheen(def?: ThreeColor): THREE.Color {
+	private getSheen(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorMultiplySafe(this.sheen, def, this.sheenMultiply);
 	}
 
@@ -908,7 +856,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns specular
 	 */
-	private getSpecular(def?: ThreeColor): THREE.Color {
+	private getSpecular(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorMultiplySafe(
 			this.specular,
 			def,
@@ -922,7 +870,7 @@ export class MaterialComponent
 	 * @param color
 	 * @returns
 	 */
-	private getColorNode(color?: THREE.Color): any {
+	private getColorNode(color?: THREE_CORE.IColor): any {
 		return new THREE_MAT.NODES.ColorNode(color);
 	}
 
@@ -962,7 +910,9 @@ export class MaterialComponent
 	 * @param matrix
 	 * @returns
 	 */
-	private getMatrix3Node(matrix?: THREE.Matrix3): THREE_MAT.NODES.Matrix3Node {
+	private getMatrix3Node(
+		matrix?: THREE_CORE.IMatrix3
+	): THREE_MAT.NODES.Matrix3Node {
 		return new THREE_MAT.NODES.Matrix3Node(matrix);
 	}
 
@@ -972,7 +922,9 @@ export class MaterialComponent
 	 * @param matrix
 	 * @returns
 	 */
-	private getMatrix4Node(matrix?: THREE.Matrix4): THREE_MAT.NODES.Matrix4Node {
+	private getMatrix4Node(
+		matrix?: THREE_CORE.IMatrix4
+	): THREE_MAT.NODES.Matrix4Node {
 		return new THREE_MAT.NODES.Matrix4Node(matrix);
 	}
 
@@ -1014,7 +966,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getTextureNode(
-		value: THREE.Texture,
+		value: THREE_CORE.ITexture,
 		uv?: THREE_MAT.NODES.UVNode,
 		bias?: THREE_MAT.NODES.Node,
 		project?: boolean
@@ -1031,7 +983,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getCubeTextureNode(
-		value: THREE.CubeTexture,
+		value: THREE_CORE.ICubeTexture,
 		uv?: THREE_MAT.NODES.UVNode,
 		bias?: THREE_MAT.NODES.Node
 	): THREE_MAT.NODES.CubeTextureNode {
@@ -1072,7 +1024,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getReflectorRTT(
-		geometry: THREE.BufferGeometry,
+		geometry: THREE_CORE.IBufferGeometry,
 		options?: ReflectorOptions
 	): ReflectorRTT {
 		return new ReflectorRTT(geometry, options);
@@ -1367,26 +1319,6 @@ export class MaterialComponent
 	}
 
 	/**
-	 * Gets glsl version
-	 * @param [def]
-	 * @returns glsl version
-	 */
-	private getGlslVersion(def?: string): THREE.GLSLVersion {
-		const glslVersion = ThreeUtil.getTypeSafe(this.glslVersion, def, '');
-		switch (glslVersion.toLowerCase()) {
-			case '1':
-			case 'gl1':
-			case 'glsl1':
-				return THREE.GLSL1;
-			case '3':
-			case 'gl3':
-			case 'glsl3':
-				return THREE.GLSL3;
-		}
-		return null;
-	}
-
-	/**
 	 * Gets extensions
 	 * @param extensions
 	 * @returns extensions
@@ -1432,15 +1364,15 @@ export class MaterialComponent
 	 * @returns uniforms
 	 */
 	private getUniforms(
-		def?: { [uniform: string]: THREE.IUniform },
+		def?: { [uniform: string]: THREE_CORE.IUniform },
 		targetUniforms?: {
-			[key: string]: THREE.IUniform;
+			[key: string]: THREE_CORE.IUniform;
 		}
 	): {
-		[uniform: string]: THREE.IUniform;
+		[uniform: string]: THREE_CORE.IUniform;
 	} {
 		const uniforms: {
-			[key: string]: THREE.IUniform;
+			[key: string]: THREE_CORE.IUniform;
 		} = ThreeUtil.getTypeSafe(this.uniforms, def);
 		const resultUniforms = targetUniforms
 			? targetUniforms
@@ -1462,7 +1394,7 @@ export class MaterialComponent
 					case 'matrix':
 						if (ThreeUtil.isNotNull(valueValue.getObject3d)) {
 							this.unSubscribeRefer('unforms_' + key);
-							const object3d: THREE.Object3D = valueValue.getObject3d();
+							const object3d: THREE_CORE.IObject3D = valueValue.getObject3d();
 							resultUniforms[key] = {
 								value: ThreeUtil.getMatrix4Safe(object3d, valueType),
 							};
@@ -1546,7 +1478,7 @@ export class MaterialComponent
 					case 'texturelist':
 					case 'imagearray':
 					case 'texturearray':
-						const textureList: THREE.Texture[] = [];
+						const textureList: THREE_CORE.ITexture[] = [];
 						const texturePathList: string[] = [];
 						const textureOption = anyValue['options'];
 						if (typeof valueValue === 'string') {
@@ -1662,11 +1594,11 @@ export class MaterialComponent
 	 * @returns shader material update
 	 */
 	private getShaderMaterialUpdate(
-		shaderMaterial: THREE.ShaderMaterial
-	): THREE.ShaderMaterial {
+		shaderMaterial: THREE_CORE.IShaderMaterial
+	): THREE_CORE.IShaderMaterial {
 		this.getUniforms({}, shaderMaterial.uniforms);
 		if (ThreeUtil.isNotNull(this.glslVersion)) {
-			shaderMaterial.glslVersion = this.getGlslVersion();
+			shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(this.glslVersion);
 		}
 		if (ThreeUtil.isNotNull(this.extensions)) {
 			this.getExtensions(shaderMaterial.extensions);
@@ -1679,7 +1611,9 @@ export class MaterialComponent
 	 * Sets assign uniforms
 	 * @param resultUniforms
 	 */
-	private setAssignUniforms(resultUniforms: { [key: string]: THREE.IUniform }) {
+	private setAssignUniforms(resultUniforms: {
+		[key: string]: THREE_CORE.IUniform;
+	}) {
 		if (ThreeUtil.isNotNull(this.uniforms)) {
 			Object.entries(resultUniforms).forEach(([key, value]) => {
 				this.uniforms[key] = value;
@@ -1692,7 +1626,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns resolution
 	 */
-	private getResolution(def?: THREE.Vector2): THREE.Vector2 {
+	private getResolution(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
 		return ThreeUtil.getVector2Safe(this.resolutionX, this.resolutionY, def);
 	}
 
@@ -1737,8 +1671,8 @@ export class MaterialComponent
 	 * @param type
 	 * @returns texture
 	 */
-	protected getTexture(type: string): THREE.Texture {
-		let texture: THREE.Texture = null;
+	protected getTexture(type: string): THREE_CORE.ITexture {
+		let texture: THREE_CORE.ITexture = null;
 		switch (type.toLowerCase()) {
 			case 'envmap':
 				if (ThreeUtil.isNotNull(this.envMap)) {
@@ -2368,7 +2302,9 @@ export class MaterialComponent
 							ThreeUtil.isNotNull(this.normalMapType) &&
 							anyMaterial['normalMapType'] !== undefined
 						) {
-							anyMaterial['normalMapType'] = this.getNormalMapType();
+							anyMaterial['normalMapType'] = ThreeUtil.getNormalMapTypeSafe(
+								this.normalMapType
+							);
 						}
 						break;
 					case 'normalscale':
@@ -2433,7 +2369,7 @@ export class MaterialComponent
 							ThreeUtil.isNotNull(this.combine) &&
 							anyMaterial['combine'] !== undefined
 						) {
-							anyMaterial['combine'] = this.getCombine();
+							anyMaterial['combine'] = ThreeUtil.getCombineSafe(this.combine);
 						}
 						break;
 					case 'reflectivity':
@@ -2652,7 +2588,9 @@ export class MaterialComponent
 							ThreeUtil.isNotNull(this.depthPacking) &&
 							anyMaterial['depthPacking'] !== undefined
 						) {
-							anyMaterial['depthPacking'] = this.getDepthPacking();
+							anyMaterial['depthPacking'] = ThreeUtil.getDepthPackingSafe(
+								this.depthPacking
+							);
 						}
 						break;
 					case 'fardistance':
@@ -3030,7 +2968,7 @@ export class MaterialComponent
 		if (this.material === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.setUserData('storageSource', null);
-			let material: THREE.Material = null;
+			let material: THREE_CORE.IMaterial = null;
 			if (ThreeUtil.isNotNull(this.storageName)) {
 				material = new THREE_MAT.NgxMeshLambertMaterial(
 					this.getMaterialParameters({})
@@ -3066,7 +3004,7 @@ export class MaterialComponent
 						);
 						nodeMaterialLoader.load(
 							ThreeUtil.getStoreUrl(this.storageName),
-							(material: THREE.Material) => {
+							(material: THREE_CORE.IMaterial) => {
 								this.setUserData('storageSource', nodeMaterialLoader);
 								this.setMaterial(material);
 							}
@@ -3075,7 +3013,7 @@ export class MaterialComponent
 					default:
 						this.localStorageService.getMaterial(
 							this.storageName,
-							(material: THREE.Material, storageSource: any) => {
+							(material: THREE_CORE.IMaterial, storageSource: any) => {
 								this.setUserData('storageSource', storageSource);
 								this.setMaterial(material);
 							},
@@ -3147,7 +3085,7 @@ export class MaterialComponent
 								// skinning: this.getSkinning(),
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
-								combine: this.getCombine(),
+								combine: ThreeUtil.getCombineSafe(this.combine),
 								wireframeLinecap: ThreeUtil.getTypeSafe(this.wireframeLinecap),
 								wireframeLinejoin: ThreeUtil.getTypeSafe(
 									this.wireframeLinejoin
@@ -3168,7 +3106,7 @@ export class MaterialComponent
 							{
 								map: this.getTexture('map'),
 								alphaMap: this.getTexture('alphaMap'),
-								depthPacking: this.getDepthPacking(),
+								depthPacking: ThreeUtil.getDepthPackingSafe(this.depthPacking),
 								displacementMap: this.getTexture('displacementMap'),
 								displacementScale: ThreeUtil.getTypeSafe(
 									this.displacementScale
@@ -3213,7 +3151,9 @@ export class MaterialComponent
 								bumpMap: this.getTexture('bumpMap'),
 								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: this.getNormalMapType(),
+								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+									this.normalMapType
+								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
 								displacementScale: ThreeUtil.getTypeSafe(
@@ -3238,7 +3178,9 @@ export class MaterialComponent
 								bumpMap: this.getTexture('bumpMap'),
 								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: this.getNormalMapType(),
+								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+									this.normalMapType
+								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
 								displacementScale: ThreeUtil.getTypeSafe(
@@ -3280,7 +3222,9 @@ export class MaterialComponent
 								bumpMap: this.getTexture('bumpMap'),
 								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: this.getNormalMapType(),
+								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+									this.normalMapType
+								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
 								displacementScale: ThreeUtil.getTypeSafe(
@@ -3301,7 +3245,7 @@ export class MaterialComponent
 								specular: this.getSpecular(),
 								shininess: ThreeUtil.getTypeSafe(this.shininess),
 								specularMap: this.getTexture('specularMap'),
-								combine: this.getCombine(),
+								combine: ThreeUtil.getCombineSafe(this.combine),
 								wireframeLinecap: ThreeUtil.getTypeSafe(this.wireframeLinecap),
 								wireframeLinejoin: ThreeUtil.getTypeSafe(
 									this.wireframeLinejoin
@@ -3332,7 +3276,10 @@ export class MaterialComponent
 							bumpMap: this.getTexture('bumpMap'),
 							bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
 							normalMap: this.getTexture('normalMap'),
-							normalMapType: this.getNormalMapType('tangentspace'),
+							normalMapType: ThreeUtil.getNormalMapTypeSafe(
+								this.normalMapType,
+								'tangentspace'
+							),
 							normalScale: this.getNormalScale(),
 							displacementMap: this.getTexture('displacementMap'),
 							displacementScale: ThreeUtil.getTypeSafe(this.displacementScale),
@@ -3394,7 +3341,10 @@ export class MaterialComponent
 								bumpMap: this.getTexture('bumpMap'),
 								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: this.getNormalMapType('tangentspace'),
+								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+									this.normalMapType,
+									'tangentspace'
+								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
 								displacementScale: ThreeUtil.getTypeSafe(
@@ -3445,7 +3395,10 @@ export class MaterialComponent
 								bumpMap: this.getTexture('bumpMap'),
 								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: this.getNormalMapType('tangentspace'),
+								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+									this.normalMapType,
+									'tangentspace'
+								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
 								displacementScale: ThreeUtil.getTypeSafe(
@@ -3509,7 +3462,7 @@ export class MaterialComponent
 							this.getMaterialParameters(parametersRawShaderMaterial)
 						);
 						if (ThreeUtil.isNotNull(this.glslVersion)) {
-							rawShaderMaterial.glslVersion = this.getGlslVersion();
+							rawShaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(this.glslVersion);
 						}
 						if (ThreeUtil.isNotNull(this.extensions)) {
 							this.getExtensions(rawShaderMaterial.extensions);
@@ -3729,7 +3682,7 @@ export class MaterialComponent
 							this.getMaterialParameters(parametersShaderMaterial)
 						);
 						if (ThreeUtil.isNotNull(this.glslVersion)) {
-							shaderMaterial.glslVersion = this.getGlslVersion();
+							shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(this.glslVersion);
 						}
 						if (ThreeUtil.isNotNull(this.extensions)) {
 							this.getExtensions(shaderMaterial.extensions);
@@ -3777,7 +3730,7 @@ export class MaterialComponent
 						const standardNodeMaterial =
 							new THREE_MAT.NgxStandardNodeMaterial();
 						if (ThreeUtil.isNotNull(this.side)) {
-							standardNodeMaterial.side = this.getSide();
+							standardNodeMaterial.side = ThreeUtil.getSideSafe(this.side);
 						}
 						if (ThreeUtil.isNotNull(this.metalness)) {
 							standardNodeMaterial.metalness = this.getFloatNode(
@@ -3923,7 +3876,7 @@ export class MaterialComponent
 								specularMap: this.getTexture('specularMap'),
 								alphaMap: this.getTexture('alphaMap'),
 								envMap: this.getTexture('envMap'),
-								combine: this.getCombine('multiply'),
+								combine: ThreeUtil.getCombineSafe(this.combine, 'multiply'),
 								reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
 								refractionRatio: ThreeUtil.getTypeSafe(this.refractionRatio),
 								wireframe: ThreeUtil.getTypeSafe(this.wireframe),

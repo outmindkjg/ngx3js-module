@@ -15,6 +15,7 @@ import { LightComponent } from '../light/light.component';
 import { MeshComponent } from '../mesh/mesh.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ViewerCanvas } from './viewer-canvas';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Viewer component.
@@ -153,7 +154,7 @@ export class ViewerComponent
 	 * Gets light
 	 * @returns light
 	 */
-	private getLight(): THREE.Light {
+	private getLight(): THREE_CORE.ILight {
 		this.unSubscribeRefer('light');
 		if (ThreeUtil.isNotNull(this.light)) {
 			const light = ThreeUtil.getLight(this.light);
@@ -176,7 +177,7 @@ export class ViewerComponent
 	 * Gets mesh
 	 * @returns mesh
 	 */
-	private getMesh(): THREE.Mesh {
+	private getMesh(): THREE_CORE.IMesh {
 		this.unSubscribeRefer('mesh');
 		if (ThreeUtil.isNotNull(this.mesh)) {
 			const mesh = ThreeUtil.getMesh(this.mesh);
@@ -199,10 +200,10 @@ export class ViewerComponent
 	 * Gets plane
 	 * @returns plane
 	 */
-	private getPlane(): THREE.Plane {
+	private getPlane(): THREE_CORE.IPlane {
 		const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0.01);
 		if (ThreeUtil.isNotNull(this.plane)) {
-			let mesh: THREE.Object3D = null;
+			let mesh: THREE_CORE.IObject3D = null;
 			if (this.plane instanceof THREE.Plane) {
 				plane.copy(this.plane);
 			} else if (this.plane instanceof THREE.Mesh) {
@@ -379,13 +380,13 @@ export class ViewerComponent
 	/**
 	 * The Renderer of viewer component
 	 */
-	private renderer: THREE.Renderer = null;
+	private renderer: THREE_CORE.IRenderer = null;
 
 	/**
 	 * Sets renderer
 	 * @param renderer
 	 */
-	public setRenderer(renderer: THREE.Renderer) {
+	public setRenderer(renderer: THREE_CORE.IRenderer) {
 		this.renderer = renderer;
 		this.getViewer();
 	}
@@ -394,7 +395,7 @@ export class ViewerComponent
 	 * Gets renderer
 	 * @returns renderer
 	 */
-	public getRenderer(): THREE.Renderer {
+	public getRenderer(): THREE_CORE.IRenderer {
 		return this.renderer;
 	}
 
@@ -571,17 +572,17 @@ export class ViewerComponent
 	/**
 	 * Ref light of viewer component
 	 */
-	private _refLight: THREE.Light = null;
+	private _refLight: THREE_CORE.ILight = null;
 
 	/**
 	 * Ref plane of viewer component
 	 */
-	private _refPlane: THREE.Plane = null;
+	private _refPlane: THREE_CORE.IPlane = null;
 
 	/**
 	 * Ref light position of viewer component
 	 */
-	private _refLightPosition: THREE.Vector4 = null;
+	private _refLightPosition: THREE_CORE.IVector4 = null;
 
 	/**
 	 * Updates viewer component
@@ -608,7 +609,7 @@ export class ViewerComponent
 	 * @param [scenes]
 	 * @returns scene
 	 */
-	public getScene(scenes?: QueryList<any> | any): THREE.Scene {
+	public getScene(scenes?: QueryList<any> | any): THREE_CORE.IScene {
 		if (ThreeUtil.isNotNull(scenes)) {
 			if (scenes instanceof QueryList && scenes.length > 0) {
 				return scenes.first.getScene();
@@ -626,7 +627,7 @@ export class ViewerComponent
 	 * @param [cameras]
 	 * @returns camera
 	 */
-	public getCamera(cameras?: QueryList<any> | any): THREE.Camera {
+	public getCamera(cameras?: QueryList<any> | any): THREE_CORE.ICamera {
 		if (ThreeUtil.isNotNull(cameras)) {
 			if (cameras instanceof QueryList && cameras.length > 0) {
 				return cameras.first.getCamera();
@@ -647,7 +648,7 @@ export class ViewerComponent
 	 * @param [renderTimer]
 	 */
 	public render(
-		renderer: THREE.Renderer,
+		renderer: THREE_CORE.IRenderer,
 		scenes: QueryList<any> | any,
 		cameras: QueryList<any> | any,
 		renderTimer?: RendererTimer

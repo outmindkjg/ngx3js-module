@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as THREE from 'three';
 import { ApplyMatrix4 } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * Translation Component
@@ -79,14 +80,14 @@ export class TranslationComponent
 	/**
 	 * The Translation of translation component
 	 */
-	private translation: THREE.Matrix4 = null;
+	private translation: THREE_CORE.IMatrix4 = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE.Object3D | any): boolean {
+	public setParent(parent: THREE_CORE.IObject3D | any): boolean {
 		if (super.setParent(parent)) {
 			this.resetTranslation();
 			return true;
@@ -111,7 +112,7 @@ export class TranslationComponent
 				});
 			}
 			if (refTranslation.length > 0) {
-				const translation: THREE.Matrix4 = this.getTranslation();
+				const translation: THREE_CORE.IMatrix4 = this.getTranslation();
 				refTranslation.forEach((refTranslation) => {
 					refTranslation.applyMatrix4(translation);
 				});
@@ -123,7 +124,7 @@ export class TranslationComponent
 	 * Gets translation
 	 * @returns translation
 	 */
-	public getTranslation(): THREE.Matrix4 {
+	public getTranslation(): THREE_CORE.IMatrix4 {
 		if (this.translation === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.translation = new THREE.Matrix4().makeTranslation(

@@ -24,6 +24,7 @@ import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { TranslationComponent } from './translation/translation.component';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * Attr Buffer Attribute
@@ -38,7 +39,7 @@ export type AttrBufferAttribute =
 	| Uint32Array
 	| Float32Array
 	| Float64Array
-	| THREE.BufferAttribute;
+	| THREE_CORE.IBufferAttribute;
 
 /**
  * Geometries parametric
@@ -490,8 +491,8 @@ export class AbstractGeometryComponent
 	 * The onInit of abstract geometry component
 	 */
 	@Input() public onInit: (
-		geometry: THREE.BufferGeometry
-	) => void | THREE.BufferGeometry = null;
+		geometry: THREE_CORE.IBufferGeometry
+	) => void | THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Content children of abstract geometry component
@@ -608,9 +609,9 @@ export class AbstractGeometryComponent
 	 */
 	protected getMorphAttributes(): {
 		key: string;
-		value: THREE.BufferAttribute[];
+		value: THREE_CORE.IBufferAttribute[];
 	}[] {
-		const attributes: { key: string; value: THREE.BufferAttribute[] }[] = [];
+		const attributes: { key: string; value: THREE_CORE.IBufferAttribute[] }[] = [];
 		if (ThreeUtil.isNotNull(this.morphAttributes)) {
 			Object.entries(this.morphAttributes).forEach(([key, value]) => {
 				switch (key) {
@@ -619,7 +620,7 @@ export class AbstractGeometryComponent
 					case 'normal':
 					case 'customColor':
 					default:
-						const valueList: THREE.BufferAttribute[] = [];
+						const valueList: THREE_CORE.IBufferAttribute[] = [];
 						value.forEach((val) => {
 							valueList.push(this.getAttribute(val, 3));
 						});
@@ -638,7 +639,7 @@ export class AbstractGeometryComponent
 	 */
 	protected getAttributes(
 		colorType: string = ''
-	): { key: string; value: THREE.BufferAttribute }[] {
+	): { key: string; value: THREE_CORE.IBufferAttribute }[] {
 		const attributes: { key: string; value: any }[] = [];
 		if (ThreeUtil.isNotNull(this.attrPosition)) {
 			attributes.push({
@@ -790,7 +791,7 @@ export class AbstractGeometryComponent
 			});
 		}
 		if (ThreeUtil.isNotNull(this.vertexBuffer)) {
-			let vertexBuffer: THREE.InterleavedBuffer = null;
+			let vertexBuffer: THREE_CORE.IInterleavedBuffer = null;
 			if (this.vertexBuffer instanceof THREE.InterleavedBuffer) {
 				vertexBuffer = this.vertexBuffer;
 			} else if (this.vertexBuffer instanceof Float32Array) {
@@ -907,12 +908,12 @@ export class AbstractGeometryComponent
 		usage?: string,
 		bufferType?: string,
 		normalized?: boolean
-	): THREE.BufferAttribute {
+	): THREE_CORE.IBufferAttribute {
 		if (value instanceof THREE.BufferAttribute) {
 			return value;
 		}
 		const attribute = ThreeUtil.getTypeSafe(value, []);
-		let bufferAttribute: THREE.BufferAttribute = null;
+		let bufferAttribute: THREE_CORE.IBufferAttribute = null;
 		if (attribute instanceof THREE.BufferAttribute) {
 			return attribute;
 		} else if (attribute instanceof Int8Array) {
@@ -931,7 +932,7 @@ export class AbstractGeometryComponent
 			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Float64Array) {
 			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
-		} else {
+		} else if (Array.isArray(attribute)){
 			switch ((bufferType || 'float').toLowerCase()) {
 				case 'int':
 					const intArray = new Uint32Array(attribute.length);
@@ -1053,7 +1054,7 @@ export class AbstractGeometryComponent
 		if (ThreeUtil.isNotNull(object3d)) {
 			const key: string = object3d.getId();
 			let object = ThreeUtil.getObject3d(object3d);
-			const objectList: THREE.Object3D[] = [];
+			const objectList: THREE_CORE.IObject3D[] = [];
 			let meshes: (THREE.Mesh | THREE.Line | THREE.Points | THREE.Sprite)[] =
 				[];
 			if (ThreeUtil.isNotNull(object)) {
@@ -1123,7 +1124,7 @@ export class AbstractGeometryComponent
 	 * Synks object3d
 	 * @param [geometry]
 	 */
-	synkObject3d(geometry: THREE.BufferGeometry = null, key: string = null) {
+	synkObject3d(geometry: THREE_CORE.IBufferGeometry = null, key: string = null) {
 		if (ThreeUtil.isNotNull(geometry) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._object3d)) {
 				let object3dList: (
@@ -1189,13 +1190,13 @@ export class AbstractGeometryComponent
 	/**
 	 * The Geometry of abstract geometry component
 	 */
-	protected geometry: THREE.BufferGeometry = null;
+	protected geometry: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Sets geometry
 	 * @param geometry
 	 */
-	protected setGeometry(geometry: THREE.BufferGeometry) {
+	protected setGeometry(geometry: THREE_CORE.IBufferGeometry) {
 		if (ThreeUtil.isNotNull(geometry) && this.geometry !== geometry) {
 			const anyGeometry: any = geometry;
 			if (ThreeUtil.isNotNull(geometry.getAttribute('position'))) {
@@ -1218,7 +1219,7 @@ export class AbstractGeometryComponent
 						case 'edgesbuffer':
 						case 'edgesgeometry':
 						case 'edges':
-							let lineGeometry: THREE.BufferGeometry = null;
+							let lineGeometry: THREE_CORE.IBufferGeometry = null;
 							switch (meshType) {
 								case 'wireframesimple':
 									const simpleParameters: any = anyGeometry['parameters'] || {};
@@ -1689,7 +1690,7 @@ export class AbstractGeometryComponent
 	 * @template T
 	 * @returns geometry
 	 */
-	public getGeometry<T extends THREE.BufferGeometry>(): T {
+	public getGeometry<T extends THREE_CORE.IBufferGeometry>(): T {
 		return this.geometry as T;
 	}
 

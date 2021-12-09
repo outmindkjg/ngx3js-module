@@ -8,6 +8,7 @@ import { RendererTimer, ThreeUtil } from './interface';
 import { AbstractMaterialComponent } from './material.abstract';
 import { SceneComponent } from './scene/scene.component';
 import { HtmlCollection, VisualComponent } from './visual/visual.component';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * Abstract three controller
@@ -86,7 +87,7 @@ export abstract class AbstractThreeController {
 	/**
 	 * Ref object of abstract three controller
 	 */
-	protected refObject: THREE.Object3D = null;
+	protected refObject: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Ref object2d of abstract three controller
@@ -104,7 +105,7 @@ export abstract class AbstractThreeController {
 	 * @param refObject3D
 	 * @param refObject2D
 	 */
-	constructor(refObject3D: THREE.Object3D, refObject2D: HtmlCollection) {
+	constructor(refObject3D: THREE_CORE.IObject3D, refObject2D: HtmlCollection) {
 		this.setObject3d(refObject3D);
 		this.setObject2d(refObject2D);
 	}
@@ -350,7 +351,7 @@ export abstract class AbstractThreeController {
 	/**
 	 * The Renderer of abstract three controller
 	 */
-	_renderer: THREE.Renderer = null;
+	_renderer: THREE_CORE.IRenderer = null;
 
 	/**
 	 * The Scenes of abstract three controller
@@ -375,7 +376,7 @@ export abstract class AbstractThreeController {
 	 * @param canvases
 	 */
 	public setRenderer(
-		renderer: THREE.Renderer,
+		renderer: THREE_CORE.IRenderer,
 		scenes: QueryList<SceneComponent>,
 		cameras: QueryList<CameraComponent>,
 		canvases: QueryList<CanvasComponent>
@@ -410,12 +411,12 @@ export abstract class AbstractThreeController {
 	/**
 	 * The Scene of abstract three controller
 	 */
-	private _scene: THREE.Scene = null;
+	private _scene: THREE_CORE.IScene = null;
 
 	/**
 	 * The Camera of abstract three controller
 	 */
-	private _camera: THREE.Camera = null;
+	private _camera: THREE_CORE.ICamera = null;
 
 	/**
 	 * The Canvas of abstract three controller
@@ -427,7 +428,7 @@ export abstract class AbstractThreeController {
 	 *
 	 * @param scene
 	 */
-	public setScene(scene: THREE.Scene) {
+	public setScene(scene: THREE_CORE.IScene) {
 		this._scene = scene;
 	}
 
@@ -443,7 +444,7 @@ export abstract class AbstractThreeController {
 	 * Sets object3d
 	 * @param refObject
 	 */
-	public setObject3d(refObject: THREE.Object3D) {
+	public setObject3d(refObject: THREE_CORE.IObject3D) {
 		this.refObject = refObject;
 	}
 
@@ -458,28 +459,28 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets position
 	 */
-	protected get position(): THREE.Vector3 {
+	protected get position(): THREE_CORE.IVector3 {
 		return this.refObject.position;
 	}
 
 	/**
 	 * Gets scale
 	 */
-	protected get scale(): THREE.Vector3 {
+	protected get scale(): THREE_CORE.IVector3 {
 		return this.refObject.scale;
 	}
 
 	/**
 	 * Gets rotation
 	 */
-	protected get rotation(): THREE.Euler {
+	protected get rotation(): THREE_CORE.IEuler {
 		return this.refObject.rotation;
 	}
 
 	/**
 	 * Gets material
 	 */
-	protected get material(): THREE.Material {
+	protected get material(): THREE_CORE.IMaterial {
 		if (this.refObject instanceof THREE.Mesh) {
 			if (this.refObject.material instanceof Array) {
 				return this.refObject.material[0];
@@ -493,7 +494,7 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets materials
 	 */
-	protected get materials(): THREE.Material[] {
+	protected get materials(): THREE_CORE.IMaterial[] {
 		if (this.refObject instanceof THREE.Mesh) {
 			if (this.refObject.material instanceof Array) {
 				return this.refObject.material;
@@ -507,7 +508,7 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets geometry
 	 */
-	protected get geometry(): THREE.BufferGeometry {
+	protected get geometry(): THREE_CORE.IBufferGeometry {
 		if (this.refObject instanceof THREE.Mesh) {
 			return this.refObject.geometry;
 		}
@@ -517,9 +518,9 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets scene
 	 */
-	protected get scene(): THREE.Scene {
+	protected get scene(): THREE_CORE.IScene {
 		if (this._scene === null && this.refObject !== null) {
-			let lastObj: THREE.Object3D = this.refObject;
+			let lastObj: THREE_CORE.IObject3D = this.refObject;
 			while (!(lastObj instanceof THREE.Scene) && lastObj.parent) {
 				lastObj = lastObj.parent;
 			}
@@ -537,7 +538,7 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets camera
 	 */
-	protected get camera(): THREE.Camera {
+	protected get camera(): THREE_CORE.ICamera {
 		if (
 			this._camera === null &&
 			this._cameras !== null &&
@@ -553,7 +554,7 @@ export abstract class AbstractThreeController {
 	 * @param name  The name of the object (doesn't need to be unique). Default is an empty string.
 	 * @returns camera by name
 	 */
-	protected getCameraByName(name: string): THREE.Camera {
+	protected getCameraByName(name: string): THREE_CORE.ICamera {
 		if (this._cameras !== null) {
 			const camara = this._cameras.find((camera) => {
 				return camera.name == name;
@@ -574,7 +575,7 @@ export abstract class AbstractThreeController {
 	protected getObjectByName(
 		name: string,
 		fromTop: boolean = false
-	): THREE.Object3D {
+	): THREE_CORE.IObject3D {
 		if (fromTop) {
 			return this.scene.getObjectByName(name);
 		} else {
@@ -593,7 +594,7 @@ export abstract class AbstractThreeController {
 		name: string,
 		value: string,
 		fromTop: boolean = false
-	): THREE.Object3D {
+	): THREE_CORE.IObject3D {
 		if (fromTop) {
 			return this.scene.getObjectByProperty(name, value);
 		} else {
@@ -611,8 +612,8 @@ export abstract class AbstractThreeController {
 	protected getObjectByFunction(
 		fn: (arg: any) => boolean,
 		fromTop: boolean = false,
-		obj3d: THREE.Object3D = null
-	): THREE.Object3D {
+		obj3d: THREE_CORE.IObject3D = null
+	): THREE_CORE.IObject3D {
 		if (obj3d === null) {
 			obj3d = fromTop ? this.scene : this.refObject;
 		}
@@ -638,9 +639,9 @@ export abstract class AbstractThreeController {
 	protected getObjectsByFunction(
 		fn: (arg: any) => boolean,
 		fromTop: boolean = false,
-		obj3d: THREE.Object3D = null,
-		result: THREE.Object3D[] = []
-	): THREE.Object3D[] {
+		obj3d: THREE_CORE.IObject3D = null,
+		result: THREE_CORE.IObject3D[] = []
+	): THREE_CORE.IObject3D[] {
 		if (obj3d === null) {
 			obj3d = fromTop ? this.scene : this.refObject;
 		}
@@ -657,7 +658,7 @@ export abstract class AbstractThreeController {
 	 * @param [refObject]
 	 * @returns component
 	 */
-	protected getComponent(refObject?: THREE.Object3D): any {
+	protected getComponent(refObject?: THREE_CORE.IObject3D): any {
 		const object3d = refObject || this.refObject;
 		if (
 			ThreeUtil.isNotNull(object3d) &&
@@ -708,7 +709,7 @@ export abstract class AbstractThreeController {
 	 * @returns abstract material component
 	 */
 	protected getAbstractMaterialComponent(
-		refObject?: THREE.Object3D
+		refObject?: THREE_CORE.IObject3D
 	): AbstractMaterialComponent {
 		const object3d = refObject || this.refObject;
 		if (
@@ -747,7 +748,7 @@ export abstract class AbstractThreeController {
 	 */
 	protected getController<T extends AbstractThreeController>(
 		type: { new (obj: any): T },
-		refObject?: THREE.Object3D
+		refObject?: THREE_CORE.IObject3D
 	): T {
 		const component = this.getComponent(refObject);
 		if (ThreeUtil.isNotNull(component.controllerList)) {
@@ -770,7 +771,7 @@ export abstract class AbstractThreeController {
 	 */
 	protected getControllers<T extends AbstractThreeController>(
 		type: { new (obj: any): T } = null,
-		refObject?: THREE.Object3D
+		refObject?: THREE_CORE.IObject3D
 	): T[] {
 		const controllers: T[] = [];
 		const component = this.getComponent(refObject);
@@ -1175,7 +1176,7 @@ export class AutoUniformsController extends AbstractThreeController {
 	 * Sets object3d
 	 * @param refObject
 	 */
-	public setObject3d(refObject: THREE.Object3D) {
+	public setObject3d(refObject: THREE_CORE.IObject3D) {
 		super.setObject3d(refObject);
 	}
 

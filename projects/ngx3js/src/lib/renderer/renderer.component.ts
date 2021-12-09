@@ -45,6 +45,7 @@ import { CameraComponent } from './../camera/camera.component';
 import { ListenerComponent } from './../listener/listener.component';
 import { LookatComponent } from './../lookat/lookat.component';
 import { SceneComponent } from './../scene/scene.component';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Renderer component.
@@ -494,41 +495,18 @@ export class RendererComponent
 	 */
 	@ViewChild('renderer') private rendererEle: ElementRef = null;
 
-	/**
-	 * Gets shadow map type
-	 * @param [def]
-	 * @returns shadow map type
-	 */
-	private getShadowMapType(def?: string): THREE.ShadowMapType {
-		const shadowMapType = ThreeUtil.getTypeSafe(this.shadowMapType, def, '');
-		switch (shadowMapType.toLowerCase()) {
-			case 'basicshadowmap':
-			case 'basic':
-				return THREE.BasicShadowMap;
-			case 'pcfshadowmap':
-			case 'pcf':
-				return THREE.PCFShadowMap;
-			case 'vsmshadowmap':
-			case 'vsm':
-				return THREE.VSMShadowMap;
-			case 'pcfsoftshadowmap':
-			case 'pcfsoft':
-			default:
-				return THREE.PCFSoftShadowMap;
-		}
-	}
 
 	/**
 	 * Gets clipping planes
 	 * @param [def]
 	 * @returns clipping planes
 	 */
-	private getClippingPlanes(def?: THREE.Plane[]): THREE.Plane[] {
+	private getClippingPlanes(def?: THREE_CORE.IPlane[]): THREE_CORE.IPlane[] {
 		if (
 			this.clippingPlanesList !== null &&
 			this.clippingPlanesList !== undefined
 		) {
-			const clippingPlanes: THREE.Plane[] = [];
+			const clippingPlanes: THREE_CORE.IPlane[] = [];
 			this.clippingPlanesList.forEach((plane) => {
 				clippingPlanes.push(plane.getWorldPlane());
 			});
@@ -986,7 +964,7 @@ export class RendererComponent
 	 * @param [def]
 	 * @returns clear color
 	 */
-	private getClearColor(def?: string | number): THREE.Color {
+	private getClearColor(def?: string | number): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.clearColor, def);
 	}
 
@@ -1257,14 +1235,14 @@ export class RendererComponent
 	 * Gets size
 	 * @returns size
 	 */
-	public getSize(): THREE.Vector2 {
+	public getSize(): THREE_CORE.IVector2 {
 		return new THREE.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
 	/**
 	 * The Renderlistener of renderer component
 	 */
-	private renderlistener: THREE.AudioListener = null;
+	private renderlistener: THREE_CORE.IAudioListener = null;
 
 	/**
 	 * Applys changes
@@ -1576,7 +1554,7 @@ export class RendererComponent
 								this.renderer.shadowMap.enabled &&
 								ThreeUtil.isNotNull(this.shadowMapType)
 							) {
-								this.renderer.shadowMap.type = this.getShadowMapType('pcfsoft');
+								this.renderer.shadowMap.type = ThreeUtil.getShadowMapTypeSafe(this.shadowMapType, 'pcfsoft');
 							}
 							if (ThreeUtil.isNotNull(this.autoClear)) {
 								this.renderer.autoClear = this.autoClear;
@@ -1655,7 +1633,7 @@ export class RendererComponent
 								this.sceneList.length > 0 &&
 								this.renderer instanceof THREE.WebGLRenderer
 							) {
-								let camera: THREE.Camera = null;
+								let camera: THREE_CORE.ICamera = null;
 								this.cameraList.forEach((cameraCom) => {
 									if (camera === null) {
 										const tmpCamera = cameraCom.getCamera();
@@ -1756,7 +1734,7 @@ export class RendererComponent
 	/**
 	 * The Renderer of renderer component
 	 */
-	public renderer: THREE.Renderer = null;
+	public renderer: THREE_CORE.IRenderer = null;
 
 	/**
 	 * Css renderer of renderer component
@@ -1843,7 +1821,7 @@ export class RendererComponent
 		}
 		let controls: ControlComponent[] = [];
 		if (cameraComp !== null && cameraComp !== undefined) {
-			const camera: THREE.Camera = cameraComp.getCamera();
+			const camera: THREE_CORE.ICamera = cameraComp.getCamera();
 			switch (controlType.toLowerCase()) {
 				case 'none':
 					break;
@@ -1939,7 +1917,7 @@ export class RendererComponent
 	 * Gets Renderer
 	 * @returns Renderer
 	 */
-	public getRenderer(): THREE.Renderer {
+	public getRenderer(): THREE_CORE.IRenderer {
 		if (this.renderer === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.dispose();
@@ -2045,12 +2023,12 @@ export class RendererComponent
 	/**
 	 * The Cameras of renderer component
 	 */
-	private _cameras: THREE.Camera[] = null;
+	private _cameras: THREE_CORE.ICamera[] = null;
 
 	/**
 	 * The Scenes of renderer component
 	 */
-	private _scenes: THREE.Scene[] = null;
+	private _scenes: THREE_CORE.IScene[] = null;
 
 	/**
 	 * Gets render info

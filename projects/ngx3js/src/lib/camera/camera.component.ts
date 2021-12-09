@@ -640,7 +640,7 @@ export class CameraComponent
 	 * @param [def]
 	 * @returns clear color
 	 */
-	private getClearColor(def?: string | number): THREE.Color {
+	private getClearColor(def?: string | number): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.clearColor, def);
 	}
 
@@ -656,17 +656,17 @@ export class CameraComponent
 	/**
 	 * The Camera of camera component
 	 */
-	private camera: THREE.Camera | THREE.Object3D = null;
+	private camera: THREE_CORE.ICamera | THREE_CORE.IObject3D = null;
 
 	/**
 	 * The Camera of camera component
 	 */
-	private cameraExtra: THREE.CubeCamera[] = null;
+	private cameraExtra: THREE_CORE.ICubeCamera[] = null;
 
 	/**
 	 * The Renderer of camera component
 	 */
-	private renderer: THREE.Renderer = null;
+	private renderer: THREE_CORE.IRenderer = null;
 
 	/**
 	 * Css renderer of camera component
@@ -685,7 +685,7 @@ export class CameraComponent
 	 * Gets renderer
 	 * @returns renderer
 	 */
-	public getRenderer(): THREE.Renderer {
+	public getRenderer(): THREE_CORE.IRenderer {
 		return this.renderer;
 	}
 
@@ -696,7 +696,7 @@ export class CameraComponent
 	 * @param rendererScenes
 	 */
 	public setRenderer(
-		renderer: THREE.Renderer,
+		renderer: THREE_CORE.IRenderer,
 		cssRenderer:
 			| CSS3DRenderer
 			| CSS2DRenderer
@@ -913,21 +913,21 @@ export class CameraComponent
 	 * Gets size
 	 * @returns size
 	 */
-	public getSize(): THREE.Vector2 {
+	public getSize(): THREE_CORE.IVector2 {
 		return new THREE.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
 	/**
 	 * The Raycaster of camera component
 	 */
-	private raycaster: THREE.Raycaster = null;
+	private raycaster: THREE_CORE.IRaycaster = null;
 
 	/**
 	 * Gets raycaster
 	 * @param [mouse]
 	 * @returns raycaster
 	 */
-	public getRaycaster(mouse: THREE.Vector2 = null): THREE.Raycaster {
+	public getRaycaster(mouse: THREE_CORE.IVector2 = null): THREE_CORE.IRaycaster {
 		if (this.raycaster === null) {
 			this.raycaster = new THREE.Raycaster();
 		}
@@ -945,15 +945,17 @@ export class CameraComponent
 	 * @returns intersections
 	 */
 	public getIntersections(
-		mouse: THREE.Vector2,
-		mesh: THREE.Object3D | THREE.Object3D[],
+		mouse: THREE_CORE.IVector2,
+		mesh: THREE_CORE.IObject3D | THREE_CORE.IObject3D[],
 		recursive: boolean = false
-	): THREE.Intersection[] {
+	): THREE_CORE.IIntersection[] {
 		const raycaster = this.getRaycaster(mouse);
 		if (mesh instanceof THREE.Object3D) {
 			return raycaster.intersectObject(mesh, recursive);
-		} else {
+		} else if (Array.isArray(mesh)){
 			return raycaster.intersectObjects(mesh, recursive);
+		} else {
+			return [];
 		}
 	}
 
@@ -965,10 +967,10 @@ export class CameraComponent
 	 * @returns intersection
 	 */
 	public getIntersection(
-		mouse: THREE.Vector2,
-		mesh: THREE.Object3D | THREE.Object3D[],
+		mouse: THREE_CORE.IVector2,
+		mesh: THREE_CORE.IObject3D | THREE_CORE.IObject3D[],
 		recursive: boolean = false
-	): THREE.Intersection {
+	): THREE_CORE.IIntersection {
 		const intersects = this.getIntersections(mouse, mesh, recursive);
 		if (intersects !== null && intersects.length > 0) {
 			return intersects[0];
@@ -1039,7 +1041,7 @@ export class CameraComponent
 	 * Gets cube render target
 	 * @returns cube render target
 	 */
-	public getCubeRenderTarget(): THREE.WebGLCubeRenderTarget {
+	public getCubeRenderTarget(): THREE_CORE.IWebGLCubeRenderTarget {
 		if (this.camera === null) {
 			this.getObject3d();
 		}
@@ -1053,7 +1055,7 @@ export class CameraComponent
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): THREE.WebGLCubeRenderTarget {
+	public getTexture(): THREE_CORE.IWebGLCubeRenderTarget {
 		return this.getCubeRenderTarget();
 	}
 
@@ -1062,7 +1064,7 @@ export class CameraComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.ICamera | THREE_CORE.IObject3D>(): T {
 		return this.getCamera() as any;
 	}
 
@@ -1071,7 +1073,7 @@ export class CameraComponent
 	 * @template T
 	 * @returns camera
 	 */
-	public getCamera<T extends THREE.Camera | THREE.Object3D>(): T {
+	public getCamera<T extends THREE_CORE.ICamera | THREE_CORE.IObject3D>(): T {
 		if (this.camera === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.cameraExtra = null;
@@ -1200,7 +1202,7 @@ export class CameraComponent
 			if (ThreeUtil.isNotNull(this.storageName)) {
 				this.localStorageService.getObject(
 					this.storageName,
-					(_: THREE.Object3D, clips?: THREE.AnimationClip[]) => {
+					(_: THREE_CORE.IObject3D, clips?: THREE_CORE.IAnimationClip[]) => {
 						this.setUserData('clips', clips);
 						this.setSubscribeNext('loaded');
 					},
@@ -1217,7 +1219,7 @@ export class CameraComponent
 	 * @param [scenes]
 	 * @returns scene
 	 */
-	public getScene(scenes?: QueryList<any> | any): THREE.Scene {
+	public getScene(scenes?: QueryList<any> | any): THREE_CORE.IScene {
 		if (
 			ThreeUtil.isNotNull(this.scene) &&
 			ThreeUtil.isNotNull(this.scene.getScene)
@@ -1250,7 +1252,7 @@ export class CameraComponent
 	 * @returns
 	 */
 	public render(
-		renderer: THREE.Renderer,
+		renderer: THREE_CORE.IRenderer,
 		cssRenderer:
 			| CSS3DRenderer
 			| CSS2DRenderer
@@ -1282,7 +1284,7 @@ export class CameraComponent
 				this.camera instanceof THREE.CubeCamera ||
 				this.camera instanceof THREE.Group
 			) {
-				let cubeCamera: THREE.CubeCamera = null;
+				let cubeCamera: THREE_CORE.ICubeCamera = null;
 				if (
 					this.cameraExtra !== null &&
 					this.cameraExtra !== null &&
@@ -1368,9 +1370,9 @@ export class CameraComponent
 	 * @param scene
 	 */
 	private renderWithScene(
-		renderer: THREE.Renderer,
-		camera: THREE.Camera,
-		scene: THREE.Scene
+		renderer: THREE_CORE.IRenderer,
+		camera: THREE_CORE.ICamera,
+		scene: THREE_CORE.IScene
 	) {
 		if (scene !== null) {
 			try {

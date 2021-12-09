@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * AVR Controls
@@ -22,7 +23,7 @@ export class NgxAVRControls {
 	/**
 	 * The Target of avrcontrols
 	 */
-	public target: THREE.Vector3 = new THREE.Vector3();
+	public target: THREE_CORE.IVector3 = new THREE.Vector3();
 
 	/**
 	 * Creates an instance of plane controls.
@@ -31,9 +32,9 @@ export class NgxAVRControls {
 	 */
 	constructor(
 		private type: string,
-		private camera: THREE.Camera,
-		private scene: THREE.Scene,
-		private renderer: THREE.WebGLRenderer,
+		private camera: THREE_CORE.ICamera,
+		private scene: THREE_CORE.IScene,
+		private renderer: THREE_CORE.IWebGLRenderer,
 		private sessionInit: any,
 		private domElement: HTMLElement,
 		private renderCaller: any,

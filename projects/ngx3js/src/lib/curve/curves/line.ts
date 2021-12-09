@@ -1,11 +1,12 @@
 import * as THREE from 'three';
 import { ThreeUtil, CurvesParameters } from '../../interface';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * Curves line
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearin) page for a live curve demo.
  */
-export class CurvesLine extends THREE.Curve<THREE.Vector3> {
+export class CurvesLine extends THREE.Curve<THREE_CORE.IVector3> {
 	/**
 	 * The Radius of curves line
 	 */
@@ -66,7 +67,7 @@ export class CurvesLine extends THREE.Curve<THREE.Vector3> {
 	 * @param optionalTarget
 	 * @returns
 	 */
-	public getPoint(t: number, optionalTarget: THREE.Vector3) {
+	public getPoint(t: number, optionalTarget: THREE_CORE.IVector3) {
 		const point = optionalTarget || new THREE.Vector3();
 		const v = Math.max(-1, Math.min(1, t * 2 - 1));
 		const y = this.waveH != 0 ? Math.sin(2 * Math.PI * t * this.waveH) : v;

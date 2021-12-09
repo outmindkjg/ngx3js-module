@@ -4,6 +4,7 @@ import { ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * Tools Component
@@ -120,24 +121,6 @@ export class ToolsComponent
 	}
 
 	/**
-	 * Gets encoding
-	 * @param [def]
-	 * @returns encoding
-	 */
-	private getEncoding(def?: string): THREE.TextureEncoding {
-		return ThreeUtil.getTextureEncodingSafe(this.encoding, def, '');
-	}
-
-	/**
-	 * Gets format
-	 * @param [def]
-	 * @returns format
-	 */
-	private getFormat(def?: string): THREE.PixelFormat {
-		return ThreeUtil.getPixelFormatSafe(this.format, def, '');
-	}
-
-	/**
 	 * Creates an instance of tools component.
 	 * @param localStorageService
 	 */
@@ -173,7 +156,7 @@ export class ToolsComponent
 	/**
 	 * Audio loader of tools component
 	 */
-	private audioLoader: THREE.AudioLoader = null;
+	private audioLoader: THREE_CORE.IAudioLoader = null;
 
 	/**
 	 * Gets audio
@@ -192,7 +175,7 @@ export class ToolsComponent
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): THREE.Texture {
+	public getTexture(): THREE_CORE.ITexture {
 		const texture = this.getTool();
 		if (texture instanceof THREE.Texture) {
 			return texture;
@@ -261,8 +244,8 @@ export class ToolsComponent
 				case 'webglcuberendertarget':
 				default:
 					tool = new THREE.WebGLCubeRenderTarget(this.getSize(256), {
-						encoding: this.getEncoding('sRGB'),
-						format: this.getFormat('RGBA'),
+						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, 'sRGB'),
+						format: ThreeUtil.getPixelFormatSafe(this.format, 'RGBA', ''),
 					});
 					break;
 			}

@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeColor, ThreeUtil } from './../interface';
 import * as THREE_FOG from './fogs/three-fogs';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Fog component.
@@ -105,18 +106,18 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	/**
 	 * The Fog of fog component
 	 */
-	private fog: THREE.FogBase = null;
+	private fog: THREE_CORE.IFogBase = null;
 
 	/**
 	 * Ref scene of fog component
 	 */
-	private refScene: THREE.Scene = null;
+	private refScene: THREE_CORE.IScene = null;
 
 	/**
 	 * Sets scene
 	 * @param refScene
 	 */
-	public setScene(refScene: THREE.Scene) {
+	public setScene(refScene: THREE_CORE.IScene) {
 		if (this.refScene !== refScene) {
 			this.refScene = refScene;
 			this.refScene.fog = this.getFog();
@@ -127,7 +128,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	 * Sets object
 	 * @param fog
 	 */
-	setObject(fog: THREE.FogBase) {
+	setObject(fog: THREE_CORE.IFogBase) {
 		super.setObject(fog);
 		if (this.refScene !== null) {
 			this.refScene.fog = fog;
@@ -198,7 +199,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	 * Gets fog
 	 * @returns fog
 	 */
-	public getFog(): THREE.FogBase {
+	public getFog(): THREE_CORE.IFogBase {
 		if (this.fog === null || this._needUpdate) {
 			this.needUpdate = false;
 			switch (this.type.toLowerCase()) {

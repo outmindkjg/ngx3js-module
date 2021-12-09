@@ -85,7 +85,7 @@ export class ControllerComponent
 	 * The controlComponent of controller component
 	 */
 	@Input() public controlComponent: {
-		new (ref3d: THREE.Object3D, ref2d: HtmlCollection): AbstractThreeController;
+		new (ref3d: THREE_CORE.IObject3D, ref2d: HtmlCollection): AbstractThreeController;
 	} = null;
 
 	/**
@@ -403,12 +403,12 @@ export class ControllerComponent
 	/**
 	 * Path guide of controller component
 	 */
-	private pathGuide: THREE.Object3D = null;
+	private pathGuide: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Ref object3dposition of controller component
 	 */
-	private refObject3dposition: THREE.Vector3 = new THREE.Vector3();
+	private refObject3dposition: THREE_CORE.IVector3 = new THREE.Vector3();
 
 	/**
 	 * The Duration of controller component

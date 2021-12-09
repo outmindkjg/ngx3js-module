@@ -413,9 +413,9 @@ export class LocalStorageService {
 	 * @returns store object
 	 */
 	private getStoreObject(
-		object: THREE.Object3D,
+		object: THREE_CORE.IObject3D,
 		options: any = null
-	): THREE.Object3D {
+	): THREE_CORE.IObject3D {
 		if (
 			object !== null &&
 			options !== null &&
@@ -478,7 +478,7 @@ export class LocalStorageService {
 	 */
 	public getExportObject(
 		fileName: string,
-		object: THREE.Object3D | THREE.Object3D[],
+		object: THREE_CORE.IObject3D | THREE_CORE.IObject3D[],
 		options?: StorageExportOption
 	) {
 		if (object instanceof THREE.Object3D) {
@@ -489,7 +489,7 @@ export class LocalStorageService {
 					}
 				});
 			});
-		} else {
+		} else if (Array.isArray(object)) {
 			object.forEach((gchild) => {
 				gchild.traverse((child) => {
 					Object.entries(child.userData).forEach(([key, value]) => {
@@ -661,7 +661,7 @@ export class LocalStorageService {
 	 * @returns
 	 */
 	private getNameMap(
-		object: THREE.Object3D,
+		object: THREE_CORE.IObject3D,
 		nameMap: LoadedNameMap
 	): LoadedNameMap {
 		const name = object.name || 'name';
@@ -694,7 +694,7 @@ export class LocalStorageService {
 		if (this._loadedObject[safeKey] !== undefined) {
 			const result = this._loadedObject[safeKey];
 			setTimeout(() => {
-				let cloneObject3d: THREE.Object3D = null;
+				let cloneObject3d: THREE_CORE.IObject3D = null;
 				if (ThreeUtil.isNotNull(result.object)) {
 					result.object.userData = {};
 					cloneObject3d = result.object.clone(true);
@@ -735,11 +735,11 @@ export class LocalStorageService {
 					if (result.source && options.debug) {
 						console.log(result.source);
 					}
-					let cloneObject3d: THREE.Object3D = null;
+					let cloneObject3d: THREE_CORE.IObject3D = null;
 					if (ThreeUtil.isNotNull(result.object)) {
 						cloneObject3d = result.object;
 						if (options.firstMesh) {
-							let foundMesh: THREE.Object3D = null;
+							let foundMesh: THREE_CORE.IObject3D = null;
 							cloneObject3d.traverse((node: any) => {
 								if (foundMesh === null && node['isMesh']) {
 									foundMesh = node;
@@ -776,7 +776,7 @@ export class LocalStorageService {
 	 * @param options
 	 * @returns
 	 */
-	public setLoaderWithOption(loader: THREE.Loader, options: StorageOption) {
+	public setLoaderWithOption(loader: THREE_CORE.ILoader, options: StorageOption) {
 		if (ThreeUtil.isNotNull(options)) {
 			if (ThreeUtil.isNotNull(loader.setResourcePath)) {
 				if (ThreeUtil.isNotNull(options.resourcePath)) {
@@ -840,7 +840,7 @@ export class LocalStorageService {
 						}
 						this.objLoader.load(
 							key,
-							(result: THREE.Group) => {
+							(result: THREE_CORE.IGroup) => {
 								callBack({
 									object: this.getStoreObject(result, options),
 									source: result,
@@ -856,7 +856,7 @@ export class LocalStorageService {
 				this.objLoader.setMaterials(null);
 				this.objLoader.load(
 					key,
-					(result: THREE.Group) => {
+					(result: THREE_CORE.IGroup) => {
 						callBack({
 							object: result,
 							source: result,
@@ -890,7 +890,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.tdsLoader, options);
 			this.tdsLoader.load(
 				key,
-				(object: THREE.Group) => {
+				(object: THREE_CORE.IGroup) => {
 					callBack({
 						object: object,
 						source: object,
@@ -909,7 +909,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.tiltLoader, options);
 			this.tiltLoader.load(
 				key,
-				(object: THREE.Group) => {
+				(object: THREE_CORE.IGroup) => {
 					callBack({
 						object: object,
 						source: object,
@@ -925,7 +925,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.amfLoader, options);
 			this.amfLoader.load(
 				key,
-				(object: THREE.Group) => {
+				(object: THREE_CORE.IGroup) => {
 					callBack({
 						object: object,
 						source: object,
@@ -962,7 +962,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.exrLoader, options);
 			this.exrLoader.load(
 				key,
-				(dataTexture: THREE.DataTexture) => {
+				(dataTexture: THREE_CORE.IDataTexture) => {
 					callBack({
 						texture: dataTexture,
 						source: dataTexture,
@@ -978,7 +978,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.pvrLoader, options);
 			this.pvrLoader.load(
 				key,
-				(texture: THREE.CompressedTexture) => {
+				(texture: THREE_CORE.ICompressedTexture) => {
 					callBack({
 						texture: texture,
 						source: texture,
@@ -995,7 +995,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.rgbeLoader, options);
 			this.rgbeLoader.load(
 				key,
-				(dataTexture: THREE.DataTexture) => {
+				(dataTexture: THREE_CORE.IDataTexture) => {
 					callBack({
 						texture: dataTexture,
 						source: dataTexture,
@@ -1011,7 +1011,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.ktxLoader, options);
 			this.ktxLoader.load(
 				key,
-				(texture: THREE.CompressedTexture) => {
+				(texture: THREE_CORE.ICompressedTexture) => {
 					callBack({
 						texture: texture,
 						source: texture,
@@ -1053,7 +1053,7 @@ export class LocalStorageService {
 			try {
 				this.ktx2Loader
 					.loadAsync(key, this.onProgress)
-					.then((texture: THREE.CompressedTexture) => {
+					.then((texture: THREE_CORE.ICompressedTexture) => {
 						callBack({
 							texture: texture,
 							source: texture,
@@ -1069,7 +1069,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.ddsLoader, options);
 			this.ddsLoader.load(
 				key,
-				(texture: THREE.CompressedTexture) => {
+				(texture: THREE_CORE.ICompressedTexture) => {
 					callBack({
 						texture: texture,
 						source: texture,
@@ -1112,7 +1112,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.fbxLoader, options);
 			this.fbxLoader.load(
 				key,
-				(object: THREE.Group) => {
+				(object: THREE_CORE.IGroup) => {
 					callBack({
 						object: object,
 						clips: object.animations,
@@ -1177,7 +1177,7 @@ export class LocalStorageService {
 			}
 			this.lDrawLoader.load(
 				key,
-				(object: THREE.Group) => {
+				(object: THREE_CORE.IGroup) => {
 					callBack({
 						object: object,
 						source: object,
@@ -1193,7 +1193,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.gCodeLoader, options);
 			this.gCodeLoader.load(
 				key,
-				(object: THREE.Group) => {
+				(object: THREE_CORE.IGroup) => {
 					callBack({
 						object: object,
 						clips: object.animations,
@@ -1210,7 +1210,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.threeMFLoader, options);
 			this.threeMFLoader.load(
 				key,
-				(object: THREE.Group) => {
+				(object: THREE_CORE.IGroup) => {
 					callBack({
 						object: object,
 						source: object,
@@ -1227,7 +1227,7 @@ export class LocalStorageService {
 				);
 			}
 			this.setLoaderWithOption(this.rhino3dmLoader, options);
-			this.rhino3dmLoader.load(key, (result: THREE.Object3D) => {
+			this.rhino3dmLoader.load(key, (result: THREE_CORE.IObject3D) => {
 				callBack({
 					object: result,
 					clips: result.animations,
@@ -1247,7 +1247,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.basisTextureLoader, options);
 			this.basisTextureLoader.load(
 				key,
-				(texture: THREE.CompressedTexture) => {
+				(texture: THREE_CORE.ICompressedTexture) => {
 					callBack({
 						texture: texture,
 						source: texture,
@@ -1267,7 +1267,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.dracoLoader, options);
 			this.dracoLoader.load(
 				key,
-				(geometry: THREE.BufferGeometry) => {
+				(geometry: THREE_CORE.IBufferGeometry) => {
 					callBack({
 						geometry: geometry,
 						source: geometry,
@@ -1341,11 +1341,11 @@ export class LocalStorageService {
 					this.onError
 				);
 			} else if (key.endsWith('.vmd')) {
-				const object: THREE.SkinnedMesh | THREE.Camera = options.object;
+				const object: THREE_CORE.ISkinnedMesh | THREE_CORE.ICamera = options.object;
 				this.mmdLoader.loadAnimation(
 					key,
 					object,
-					(result: THREE.SkinnedMesh | THREE.AnimationClip) => {
+					(result: THREE_CORE.ISkinnedMesh | THREE.AnimationClip) => {
 						if (result instanceof THREE.SkinnedMesh) {
 							callBack({
 								object: this.getStoreObject(result, options),
@@ -1364,7 +1364,7 @@ export class LocalStorageService {
 			} else {
 				this.mmdLoader.load(
 					key,
-					(result: THREE.SkinnedMesh) => {
+					(result: THREE_CORE.ISkinnedMesh) => {
 						callBack({
 							object: this.getStoreObject(result, options),
 						});
@@ -1380,7 +1380,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.pcdLoader, options);
 			this.pcdLoader.load(
 				key,
-				(points: THREE.Points) => {
+				(points: THREE_CORE.IPoints) => {
 					callBack({
 						object: points,
 						source: points,
@@ -1396,7 +1396,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.prwmLoader, options);
 			this.prwmLoader.load(
 				key,
-				(geometry: THREE.BufferGeometry) => {
+				(geometry: THREE_CORE.IBufferGeometry) => {
 					callBack({
 						geometry: geometry,
 						source: geometry,
@@ -1410,7 +1410,7 @@ export class LocalStorageService {
 				this.tgaLoader = new TGALoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.tgaLoader, options);
-			this.tgaLoader.load(key, (texture: THREE.Texture) => {
+			this.tgaLoader.load(key, (texture: THREE_CORE.ITexture) => {
 				callBack({
 					texture: texture,
 					source: texture,
@@ -1493,7 +1493,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.plyLoader, options);
 			this.plyLoader.load(
 				key,
-				(geometry: THREE.BufferGeometry) => {
+				(geometry: THREE_CORE.IBufferGeometry) => {
 					callBack({
 						geometry: geometry,
 						source: geometry,
@@ -1509,7 +1509,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.vtkLoader, options);
 			this.vtkLoader.load(
 				key,
-				(geometry: THREE.BufferGeometry) => {
+				(geometry: THREE_CORE.IBufferGeometry) => {
 					callBack({
 						geometry: geometry,
 						source: geometry,
@@ -1626,7 +1626,7 @@ export class LocalStorageService {
 				}
 				this.md2Loader.load(
 					key,
-					(geometry: THREE.BufferGeometry) => {
+					(geometry: THREE_CORE.IBufferGeometry) => {
 						callBack({
 							geometry: geometry,
 							source: geometry,
@@ -1679,7 +1679,7 @@ export class LocalStorageService {
 							'rgb(' + atom[3][0] + ',' + atom[3][1] + ',' + atom[3][2] + ')';
 						text.style.marginTop = '1.5em';
 						text.textContent = atom[4];
-						let label: THREE.Object3D = null;
+						let label: THREE_CORE.IObject3D = null;
 						switch (cssType.toLowerCase()) {
 							case '3d':
 							case 'css3d':
@@ -1730,7 +1730,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.stlLoader, options);
 			this.stlLoader.load(
 				key,
-				(geometry: THREE.BufferGeometry) => {
+				(geometry: THREE_CORE.IBufferGeometry) => {
 					const mesh = new THREE.Mesh();
 					mesh.geometry = geometry;
 					mesh.material = new THREE.MeshLambertMaterial({ color: 0x7777ff });
@@ -1749,7 +1749,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.vrmlLoader, options);
 			this.vrmlLoader.load(
 				key,
-				(scene: THREE.Scene) => {
+				(scene: THREE_CORE.IScene) => {
 					callBack({
 						object: scene,
 						source: scene,
@@ -1765,7 +1765,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.xyzLoader, options);
 			this.xyzLoader.load(
 				key,
-				(geometry: THREE.BufferGeometry) => {
+				(geometry: THREE_CORE.IBufferGeometry) => {
 					callBack({
 						geometry: geometry,
 						source: geometry,
@@ -1847,7 +1847,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.rgbmLoader, options);
 			this.rgbmLoader.load(
 				key,
-				(dataTexture: THREE.DataTexture) => {
+				(dataTexture: THREE_CORE.IDataTexture) => {
 					callBack({
 						texture: dataTexture,
 						source: dataTexture,
@@ -1947,9 +1947,9 @@ export class LocalStorageService {
 	public getObject(
 		key: string,
 		callBack: (
-			mesh: THREE.Object3D,
-			clips?: THREE.AnimationClip[],
-			geometry?: THREE.BufferGeometry,
+			mesh: THREE_CORE.IObject3D,
+			clips?: THREE_CORE.IAnimationClip[],
+			geometry?: THREE_CORE.IBufferGeometry,
 			morphTargets?: any,
 			source?: any
 		) => void,
@@ -1990,7 +1990,7 @@ export class LocalStorageService {
 	 */
 	public getGeometry(
 		key: string,
-		callBack: (mesh: THREE.BufferGeometry, source?: any) => void,
+		callBack: (mesh: THREE_CORE.IBufferGeometry, source?: any) => void,
 		options?: StorageOption
 	): void {
 		this.getObjectFromKey(
@@ -2021,7 +2021,7 @@ export class LocalStorageService {
 	 */
 	public getTexture(
 		key: string,
-		callBack: (texture: THREE.Texture, source?: any) => void,
+		callBack: (texture: THREE_CORE.ITexture, source?: any) => void,
 		options?: StorageOption
 	): void {
 		this.getObjectFromKey(
@@ -2051,7 +2051,7 @@ export class LocalStorageService {
 	 */
 	public getMaterial(
 		key: string,
-		callBack: (material: THREE.Material, source?: any) => void,
+		callBack: (material: THREE_CORE.IMaterial, source?: any) => void,
 		options?: StorageOption
 	): void {
 		this.getObjectFromKey(
@@ -2074,7 +2074,7 @@ export class LocalStorageService {
 	 * @param key
 	 * @param scene
 	 */
-	public setScene(key: string, scene: THREE.Scene) {
+	public setScene(key: string, scene: THREE_CORE.IScene) {
 		this.setItem(key, JSON.stringify(scene.toJSON()));
 	}
 
@@ -2086,7 +2086,7 @@ export class LocalStorageService {
 	 */
 	public getScene(
 		key: string,
-		callBack: (mesh: THREE.Scene, source?: any) => void,
+		callBack: (mesh: THREE_CORE.IScene, source?: any) => void,
 		options?: StorageOption
 	): void {
 		this.getObjectFromKey(

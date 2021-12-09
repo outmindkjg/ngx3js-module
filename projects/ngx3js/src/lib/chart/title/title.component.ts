@@ -9,6 +9,7 @@ import * as THREE from 'three';
 import { AbstractChartComponent } from '../../chart.abstract';
 import { ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * The Chart Title component.
@@ -103,17 +104,17 @@ export class ChartTitleComponent
 	/**
 	 * The Title of chart title component
 	 */
-	private _title: THREE.Object3D = null;
+	private _title: THREE_CORE.IObject3D = null;
 
 	/**
 	 * The Material of chart title component
 	 */
-	private _material: THREE.MeshBasicMaterial = null;
+	private _material: THREE_CORE.IMeshBasicMaterial = null;
 
 	/**
 	 * The Geometry of chart title component
 	 */
-	private _geometry: THREE.PlaneGeometry = null;
+	private _geometry: THREE_CORE.IPlaneBufferGeometry = null;
 
 	/**
 	 * Applys changes3d

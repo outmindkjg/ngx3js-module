@@ -149,7 +149,7 @@ export class AbstractControllerComponent
 	/**
 	 * The Renderer of controller component
 	 */
-	protected _renderer: THREE.Renderer = null;
+	protected _renderer: THREE_CORE.IRenderer = null;
 
 	/**
 	 * The Scenes of controller component
@@ -169,7 +169,7 @@ export class AbstractControllerComponent
 	/**
 	 * The Scene of controller component
 	 */
-	protected _scene: THREE.Scene = null;
+	protected _scene: THREE_CORE.IScene = null;
 
 	/**
 	 * The Canvas of controller component
@@ -189,7 +189,7 @@ export class AbstractControllerComponent
 	 * @param canvas2ds
 	 */
 	public setRenderer(
-		renderer: THREE.Renderer,
+		renderer: THREE_CORE.IRenderer,
 		scenes: QueryList<SceneComponent>,
 		cameras: QueryList<CameraComponent>,
 		canvas2ds: QueryList<CanvasComponent>
@@ -208,7 +208,7 @@ export class AbstractControllerComponent
 	 * Sets scene
 	 * @param scene
 	 */
-	public setScene(scene: THREE.Scene) {
+	public setScene(scene: THREE_CORE.IScene) {
 		this._scene = scene;
 		if (this.checkController()) {
 			this.addChanges('scene');

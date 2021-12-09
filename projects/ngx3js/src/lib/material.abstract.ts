@@ -15,22 +15,23 @@ import { ThreeTexture, ThreeUtil } from './interface';
 import { PlaneComponent } from './plane/plane.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { AbstractTextureComponent } from './texture.abstract';
+import * as THREE_CORE from './threejs-library/three-core';
 
 /**
  * Mesh material raw
  */
 export interface MeshMaterialRaw {
-	geometry?: THREE.BufferGeometry;
+	geometry?: THREE_CORE.IBufferGeometry;
 	userData?: any;
-	material: THREE.Material | THREE.Material[];
-	customDepthMaterial?: THREE.Material;
-	customDistanceMaterial?: THREE.Material;
+	material: THREE_CORE.IMaterial | THREE_CORE.IMaterial[];
+	customDepthMaterial?: THREE_CORE.IMaterial;
+	customDistanceMaterial?: THREE_CORE.IMaterial;
 }
 
 /**
  * Mesh Material
  */
-export type MeshMaterial = MeshMaterialRaw | THREE.Scene;
+export type MeshMaterial = MeshMaterialRaw | THREE_CORE.IScene;
 
 /**
  * AbstractMaterialComponent
@@ -448,8 +449,8 @@ export class AbstractMaterialComponent
 	 * This function is called with the shader source code as a parameter. Useful for the modification of built-in materials.
 	 */
 	@Input() public onBeforeCompile: (
-		shader: THREE.Shader,
-		renderer?: THREE.WebGLRenderer
+		shader: THREE_CORE.IShader,
+		renderer?: THREE_CORE.IWebGLRenderer
 	) => void = null;
 
 	/**
@@ -474,233 +475,6 @@ export class AbstractMaterialComponent
 	}
 
 	/**
-	 * Which blending to use when displaying objects with this material.
-	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
-	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BlendingDstFactor
-	 * @see THREE.ZeroFactor - ZeroFactor , Zero
-	 * @see THREE.OneFactor - OneFactor , One
-	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
-	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
-	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
-	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
-	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
-	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
-	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
-	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
-	 *
-	 * @param [def]
-	 * @returns blend dst
-	 */
-	protected getBlendDst(def?: string): THREE.BlendingDstFactor {
-		const blendDst = ThreeUtil.getTypeSafe(this.blendDst, def, '');
-		switch (blendDst.toLowerCase()) {
-			case 'zero':
-				return THREE.ZeroFactor;
-			case 'one':
-				return THREE.OneFactor;
-			case 'srccolor':
-				return THREE.SrcColorFactor;
-			case 'oneminussrccolor':
-				return THREE.OneMinusSrcColorFactor;
-			case 'srcalpha':
-				return THREE.SrcAlphaFactor;
-			case 'oneminussrcalpha':
-				return THREE.OneMinusSrcAlphaFactor;
-			case 'dstalpha':
-				return THREE.DstAlphaFactor;
-			case 'oneminusdstalpha':
-				return THREE.OneMinusDstAlphaFactor;
-			case 'dstcolor':
-				return THREE.DstColorFactor;
-			case 'oneminusdstcolor':
-				return THREE.OneMinusDstColorFactor;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets blend equation
-	 * @param [def]
-	 * @returns blend equation
-	 */
-	protected getBlendEquation(def?: string): THREE.BlendingEquation {
-		const blendEquation = ThreeUtil.getTypeSafe(this.blendEquation, def, '');
-		switch (blendEquation.toLowerCase()) {
-			case 'add':
-				return THREE.AddEquation;
-			case 'subtract':
-				return THREE.SubtractEquation;
-			case 'reversesubtract':
-				return THREE.ReverseSubtractEquation;
-			case 'min':
-				return THREE.MinEquation;
-			case 'max':
-				return THREE.MaxEquation;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Which blending to use when displaying objects with this material.
-	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
-	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BlendingDstFactor
-	 * @see THREE.ZeroFactor - ZeroFactor , Zero
-	 * @see THREE.OneFactor - OneFactor , One
-	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
-	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
-	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
-	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
-	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
-	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
-	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
-	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
-	 *
-	 * @param [def]
-	 * @returns blend src
-	 */
-	protected getBlendSrc(
-		def?: string
-	): THREE.BlendingSrcFactor | THREE.BlendingDstFactor {
-		const blendSrc = ThreeUtil.getTypeSafe(this.blendSrc, def, '');
-		switch (blendSrc.toLowerCase()) {
-			case 'srcalphasaturatefactor':
-			case 'srcalphasaturate':
-				return THREE.SrcAlphaSaturateFactor;
-			case 'zerofactor':
-			case 'zero':
-				return THREE.ZeroFactor;
-			case 'onefactor':
-			case 'one':
-				return THREE.OneFactor;
-			case 'srccolorfactor':
-			case 'srccolor':
-				return THREE.SrcColorFactor;
-			case 'oneminussrccolorfactor':
-			case 'oneminussrccolor':
-				return THREE.OneMinusSrcColorFactor;
-			case 'srcalphafactor':
-			case 'srcalpha':
-				return THREE.SrcAlphaFactor;
-			case 'oneminussrcalphafactor':
-			case 'oneminussrcalpha':
-				return THREE.OneMinusSrcAlphaFactor;
-			case 'dstalphafactor':
-			case 'dstalpha':
-				return THREE.DstAlphaFactor;
-			case 'oneminusdstalphafactor':
-			case 'oneminusdstalpha':
-				return THREE.OneMinusDstAlphaFactor;
-			case 'dstcolorfactor':
-			case 'dstcolor':
-				return THREE.DstColorFactor;
-			case 'oneminusdstcolorfactor':
-			case 'oneminusdstcolor':
-				return THREE.OneMinusDstColorFactor;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets depth func
-	 * @param [def]
-	 * @returns depth func
-	 */
-	protected getDepthFunc(def?: string): THREE.DepthModes {
-		const depthFunc = ThreeUtil.getTypeSafe(this.depthFunc, def, '');
-		switch (depthFunc.toLowerCase()) {
-			case 'never':
-				return THREE.NeverDepth;
-			case 'always':
-				return THREE.AlwaysDepth;
-			case 'less':
-				return THREE.LessDepth;
-			case 'lessequal':
-				return THREE.LessEqualDepth;
-			case 'equal':
-				return THREE.EqualDepth;
-			case 'greaterequal':
-				return THREE.GreaterEqualDepth;
-			case 'greater':
-				return THREE.GreaterDepth;
-			case 'notequal':
-				return THREE.NotEqualDepth;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets precision
-	 * @param [def]
-	 * @returns precision
-	 */
-	protected getPrecision(def?: string): 'highp' | 'mediump' | 'lowp' | null {
-		const precision = ThreeUtil.getTypeSafe(this.precision, def, '');
-		switch (precision.toLowerCase()) {
-			case 'highp':
-				return 'highp';
-			case 'mediump':
-				return 'mediump';
-			case 'lowp':
-				return 'lowp';
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets side
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Side
-	 * @see THREE.FrontSide - FrontSide , Front
-	 * @see THREE.BackSide - BackSide , Back
-	 * @see THREE.DoubleSide - DoubleSide , Double
-	 *
-	 * @param [def]
-	 * @returns side
-	 */
-	protected getSide(def?: string): THREE.Side {
-		return ThreeUtil.getSideSafe(this.side, def, '');
-	}
-
-	/**
-	 * Gets shadow side
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Side
-	 * @see THREE.FrontSide - FrontSide , Front
-	 * @see THREE.BackSide - BackSide , Back
-	 * @see THREE.DoubleSide - DoubleSide , Double
-	 *
-	 * @param [def]
-	 * @returns shadow side
-	 */
-	protected getShadowSide(def?: string): THREE.Side {
-		const shadowSide = ThreeUtil.getTypeSafe(this.shadowSide, def, '');
-		switch (shadowSide.toLowerCase()) {
-			case 'backside':
-			case 'back':
-				return THREE.BackSide;
-			case 'doubleside':
-			case 'double':
-				return THREE.DoubleSide;
-			case 'frontside':
-			case 'front':
-				return THREE.FrontSide;
-		}
-		return undefined;
-	}
-
-	/**
 	 * Gets vertex colors
 	 * @param [def]
 	 * @returns true if vertex colors
@@ -710,125 +484,13 @@ export class AbstractMaterialComponent
 	}
 
 	/**
-	 * Gets stencil func
-	 * @param [def]
-	 * @returns stencil func
-	 */
-	protected getStencilFunc(def?: string): THREE.StencilFunc {
-		const stencilFunc = ThreeUtil.getTypeSafe(this.stencilFunc, def, '');
-		switch (stencilFunc.toLowerCase()) {
-			case 'never':
-				return THREE.NeverStencilFunc;
-			case 'less':
-				return THREE.LessStencilFunc;
-			case 'equal':
-				return THREE.EqualStencilFunc;
-			case 'lessequal':
-				return THREE.LessEqualStencilFunc;
-			case 'greater':
-				return THREE.GreaterStencilFunc;
-			case 'notequal':
-				return THREE.NotEqualStencilFunc;
-			case 'greaterequal':
-				return THREE.GreaterEqualStencilFunc;
-			case 'always':
-				return THREE.AlwaysStencilFunc;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets stencil fail
-	 * @param [def]
-	 * @returns stencil fail
-	 */
-	protected getStencilFail(def?: string): THREE.StencilOp {
-		const stencilFail = ThreeUtil.getTypeSafe(this.stencilFail, def, '');
-		switch (stencilFail.toLowerCase()) {
-			case 'zero':
-				return THREE.ZeroStencilOp;
-			case 'keep':
-				return THREE.KeepStencilOp;
-			case 'replace':
-				return THREE.ReplaceStencilOp;
-			case 'increment':
-				return THREE.IncrementStencilOp;
-			case 'decrement':
-				return THREE.DecrementStencilOp;
-			case 'incrementwrap':
-				return THREE.IncrementWrapStencilOp;
-			case 'decrementwrap':
-				return THREE.DecrementWrapStencilOp;
-			case 'invert':
-				return THREE.InvertStencilOp;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets stencil zfail
-	 * @param [def]
-	 * @returns stencil zfail
-	 */
-	protected getStencilZFail(def?: string): THREE.StencilOp {
-		const stencilZFail = ThreeUtil.getTypeSafe(this.stencilZFail, def, '');
-		switch (stencilZFail.toLowerCase()) {
-			case 'zero':
-				return THREE.ZeroStencilOp;
-			case 'keep':
-				return THREE.KeepStencilOp;
-			case 'replace':
-				return THREE.ReplaceStencilOp;
-			case 'increment':
-				return THREE.IncrementStencilOp;
-			case 'decrement':
-				return THREE.DecrementStencilOp;
-			case 'incrementwrap':
-				return THREE.IncrementWrapStencilOp;
-			case 'decrementwrap':
-				return THREE.DecrementWrapStencilOp;
-			case 'invert':
-				return THREE.InvertStencilOp;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets stencil zpass
-	 * @param [def]
-	 * @returns stencil zpass
-	 */
-	protected getStencilZPass(def?: string): THREE.StencilOp {
-		const stencilZPass = ThreeUtil.getTypeSafe(this.stencilZPass, def, '');
-		switch (stencilZPass.toLowerCase()) {
-			case 'zero':
-				return THREE.ZeroStencilOp;
-			case 'keep':
-				return THREE.KeepStencilOp;
-			case 'replace':
-				return THREE.ReplaceStencilOp;
-			case 'increment':
-				return THREE.IncrementStencilOp;
-			case 'decrement':
-				return THREE.DecrementStencilOp;
-			case 'incrementwrap':
-				return THREE.IncrementWrapStencilOp;
-			case 'decrementwrap':
-				return THREE.DecrementWrapStencilOp;
-			case 'invert':
-				return THREE.InvertStencilOp;
-		}
-		return undefined;
-	}
-
-	/**
 	 * Gets clipping planes
 	 * @param [def]
 	 * @returns clipping planes
 	 */
-	protected getClippingPlanes(def?: THREE.Plane[]): THREE.Plane[] {
+	protected getClippingPlanes(def?: THREE_CORE.IPlane[]): THREE_CORE.IPlane[] {
 		if (this.clippingPlanes !== null && this.clippingPlanes !== undefined) {
-			const clippingPlanes: THREE.Plane[] = [];
+			const clippingPlanes: THREE_CORE.IPlane[] = [];
 			this.clippingPlanes.forEach((plane) => {
 				if (plane instanceof PlaneComponent) {
 					clippingPlanes.push(plane.getWorldPlane());
@@ -843,7 +505,7 @@ export class AbstractMaterialComponent
 			this.clippingPlanesList !== null &&
 			this.clippingPlanesList !== undefined
 		) {
-			const clippingPlanes: THREE.Plane[] = [];
+			const clippingPlanes: THREE_CORE.IPlane[] = [];
 			this.clippingPlanesList.forEach((plane) => {
 				clippingPlanes.push(plane.getWorldPlane());
 			});
@@ -860,7 +522,10 @@ export class AbstractMaterialComponent
 	 * @param name
 	 * @returns texture option
 	 */
-	protected getTextureOption(map: ThreeTexture, name: string): THREE.Texture {
+	protected getTextureOption(
+		map: ThreeTexture,
+		name: string
+	): THREE_CORE.ITexture {
 		if (ThreeUtil.isNotNull(map)) {
 			if (typeof map === 'string') {
 				if (map !== 'none') {
@@ -1049,7 +714,7 @@ export class AbstractMaterialComponent
 				refType = this._object3d[key].refType;
 			}
 			let object = ThreeUtil.getObject3d(object3d);
-			const objectList: THREE.Object3D[] = [];
+			const objectList: THREE_CORE.IObject3D[] = [];
 			let meshes: {
 				refIndex: number;
 				mesh:
@@ -1147,7 +812,7 @@ export class AbstractMaterialComponent
 	 * Synks object3d
 	 * @param [material]
 	 */
-	synkObject3d(material: THREE.Material = null, key: string = null) {
+	synkObject3d(material: THREE_CORE.IMaterial = null, key: string = null) {
 		if (ThreeUtil.isNotNull(material) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._object3d)) {
 				const object3dList: {
@@ -1155,9 +820,9 @@ export class AbstractMaterialComponent
 					meshes: {
 						refIndex: number;
 						mesh:
-							| THREE.Scene
-							| THREE.Mesh
-							| THREE.Line
+							| THREE_CORE.IScene
+							| THREE_CORE.IMesh
+							| THREE_CORE.ILine
 							| THREE.Points
 							| THREE.Sprite;
 					}[];
@@ -1209,7 +874,7 @@ export class AbstractMaterialComponent
 										case 'background-angular':
 										case 'backgroundangular':
 										case 'background':
-											const backgroundTexture: THREE.Texture =
+											const backgroundTexture: THREE_CORE.ITexture =
 												materialAny['map'];
 											if (ThreeUtil.isNotNull(backgroundTexture)) {
 												mesh.background = backgroundTexture;
@@ -1218,12 +883,12 @@ export class AbstractMaterialComponent
 										case 'environment-angular':
 										case 'environmentangular':
 										case 'environment':
-											const environmentTexture: THREE.Texture =
+											const environmentTexture: THREE_CORE.ITexture =
 												materialAny['map'];
 											if (ThreeUtil.isNotNull(environmentTexture)) {
 												mesh.environment = environmentTexture;
 											} else {
-												const environmentTextureEnv: THREE.Texture =
+												const environmentTextureEnv: THREE_CORE.ITexture =
 													materialAny['envMap'];
 												if (ThreeUtil.isNotNull(environmentTextureEnv)) {
 													mesh.environment = environmentTextureEnv;
@@ -1238,13 +903,13 @@ export class AbstractMaterialComponent
 										case 'environment-background-angular':
 										case 'backgroundenvironmentangular':
 										case 'environmentbackgroundangular':
-											const bgEnvironmentTexture: THREE.Texture =
+											const bgEnvironmentTexture: THREE_CORE.ITexture =
 												materialAny['map'];
 											if (ThreeUtil.isNotNull(bgEnvironmentTexture)) {
 												mesh.environment = bgEnvironmentTexture;
 												mesh.background = bgEnvironmentTexture;
 											} else {
-												const bgEnvironmentTextureEnv: THREE.Texture =
+												const bgEnvironmentTextureEnv: THREE_CORE.ITexture =
 													materialAny['envMap'];
 												if (ThreeUtil.isNotNull(bgEnvironmentTextureEnv)) {
 													mesh.environment = bgEnvironmentTextureEnv;
@@ -1257,7 +922,12 @@ export class AbstractMaterialComponent
 											mesh.overrideMaterial = material;
 											break;
 									}
-								} else {
+								} else if (
+									mesh instanceof THREE.Mesh ||
+									mesh instanceof THREE.Line ||
+									mesh instanceof THREE.Points ||
+									mesh instanceof THREE.Sprite
+								) {
 									if (Array.isArray(mesh.material)) {
 										const refIndex = info.refIndex;
 										if (refIndex > -1) {
@@ -1288,18 +958,18 @@ export class AbstractMaterialComponent
 		const baseParameters: THREE.MaterialParameters = {
 			alphaToCoverage: ThreeUtil.getTypeSafe(this.alphaToCoverage),
 			blending: ThreeUtil.getBlendingSafe(this.blending),
-			blendDst: this.getBlendDst(),
+			blendDst: ThreeUtil.getBlendDstSafe(this.blendDst),
 			blendDstAlpha: ThreeUtil.getTypeSafe(this.blendDstAlpha),
-			blendEquation: this.getBlendEquation(),
+			blendEquation: ThreeUtil.getBlendEquationSafe(this.blendEquation),
 			blendEquationAlpha: ThreeUtil.getTypeSafe(this.blendEquationAlpha),
-			blendSrc: this.getBlendSrc(),
+			blendSrc: ThreeUtil.getBlendSrcSafe(this.blendSrc),
 			blendSrcAlpha: ThreeUtil.getTypeSafe(this.blendSrcAlpha),
 			clipIntersection: ThreeUtil.getTypeSafe(this.clipIntersection),
 			clippingPlanes: this.getClippingPlanes(),
 			clipShadows: ThreeUtil.getTypeSafe(this.clipShadows),
 			colorWrite: ThreeUtil.getTypeSafe(this.colorWrite),
 			defines: ThreeUtil.getTypeSafe(this.defines),
-			depthFunc: this.getDepthFunc(),
+			depthFunc: ThreeUtil.getDepthModesSafe(this.depthFunc),
 			depthTest: ThreeUtil.getTypeSafe(this.depthTest),
 			depthWrite: ThreeUtil.getTypeSafe(this.depthWrite),
 			fog: ThreeUtil.getTypeSafe(this.fog),
@@ -1307,24 +977,24 @@ export class AbstractMaterialComponent
 			polygonOffset: ThreeUtil.getTypeSafe(this.polygonOffset),
 			polygonOffsetFactor: ThreeUtil.getTypeSafe(this.polygonOffsetFactor),
 			polygonOffsetUnits: ThreeUtil.getTypeSafe(this.polygonOffsetUnits),
-			precision: this.getPrecision(),
+			precision: ThreeUtil.getPrecisionSafe(this.precision),
 			premultipliedAlpha: ThreeUtil.getTypeSafe(this.premultipliedAlpha),
 			dithering: ThreeUtil.getTypeSafe(this.dithering),
-			shadowSide: this.getShadowSide(),
+			shadowSide: ThreeUtil.getSideSafe(this.shadowSide),
 			toneMapped: ThreeUtil.getTypeSafe(this.toneMapped),
 			transparent: ThreeUtil.getTypeSafe(this.transparent),
 			stencilWrite: ThreeUtil.getTypeSafe(this.stencilWrite),
-			stencilFunc: this.getStencilFunc(),
+			stencilFunc: ThreeUtil.getStencilFuncSafe(this.stencilFunc),
 			stencilRef: ThreeUtil.getTypeSafe(this.stencilRef),
 			stencilWriteMask: ThreeUtil.getTypeSafe(this.stencilWriteMask),
 			stencilFuncMask: ThreeUtil.getTypeSafe(this.stencilFuncMask),
-			stencilFail: this.getStencilFail(),
-			stencilZFail: this.getStencilZFail(),
-			stencilZPass: this.getStencilZPass(),
+			stencilFail: ThreeUtil.getStencilOpSafe(this.stencilFail),
+			stencilZFail: ThreeUtil.getStencilOpSafe(this.stencilZFail),
+			stencilZPass: ThreeUtil.getStencilOpSafe(this.stencilZPass),
 			userData: {},
 			alphaTest: ThreeUtil.getTypeSafe(this.alphaTest),
 			name: ThreeUtil.getTypeSafe(this.name),
-			side: this.getSide(),
+			side: ThreeUtil.getSideSafe(this.side),
 			vertexColors: this.getVertexColors(),
 			visible: ThreeUtil.getTypeSafe(this.visible),
 		};
@@ -1344,14 +1014,14 @@ export class AbstractMaterialComponent
 	/**
 	 * The Material of abstract material component
 	 */
-	protected material: THREE.Material = null;
+	protected material: THREE_CORE.IMaterial = null;
 
 	/**
 	 * Gets material
 	 * @template T
 	 * @returns material
 	 */
-	public getMaterial<T extends THREE.Material>(): T {
+	public getMaterial<T extends THREE_CORE.IMaterial>(): T {
 		return this.material as T;
 	}
 
@@ -1359,7 +1029,7 @@ export class AbstractMaterialComponent
 	 * Sets material
 	 * @param material
 	 */
-	protected setMaterial(material: THREE.Material) {
+	protected setMaterial(material: THREE_CORE.IMaterial) {
 		if (this.material !== material && ThreeUtil.isNotNull(material)) {
 			if (this.material !== null) {
 				this.material.dispose();
@@ -1407,7 +1077,7 @@ export class AbstractMaterialComponent
 						break;
 					case 'blenddst':
 						if (ThreeUtil.isNotNull(this.blendDst)) {
-							this.material.blendDst = this.getBlendDst();
+							this.material.blendDst = ThreeUtil.getBlendDstSafe(this.blendDst);
 						}
 						break;
 					case 'blenddstalpha':
@@ -1419,7 +1089,9 @@ export class AbstractMaterialComponent
 						break;
 					case 'blendequation':
 						if (ThreeUtil.isNotNull(this.blendEquation)) {
-							this.material.blendEquation = this.getBlendEquation();
+							this.material.blendEquation = ThreeUtil.getBlendEquationSafe(
+								this.blendEquation
+							);
 						}
 						break;
 					case 'blendequationalpha':
@@ -1431,7 +1103,7 @@ export class AbstractMaterialComponent
 						break;
 					case 'blendsrc':
 						if (ThreeUtil.isNotNull(this.blendSrc)) {
-							this.material.blendSrc = this.getBlendSrc();
+							this.material.blendSrc = ThreeUtil.getBlendSrcSafe(this.blendSrc);
 						}
 						break;
 					case 'blendsrcalpha':
@@ -1478,7 +1150,9 @@ export class AbstractMaterialComponent
 						break;
 					case 'depthfunc':
 						if (ThreeUtil.isNotNull(this.depthFunc)) {
-							this.material.depthFunc = this.getDepthFunc();
+							this.material.depthFunc = ThreeUtil.getDepthModesSafe(
+								this.depthFunc
+							);
 						}
 						break;
 					case 'depthtest':
@@ -1524,7 +1198,9 @@ export class AbstractMaterialComponent
 						break;
 					case 'precision':
 						if (ThreeUtil.isNotNull(this.precision)) {
-							this.material.precision = this.getPrecision();
+							this.material.precision = ThreeUtil.getPrecisionSafe(
+								this.precision
+							);
 						}
 						break;
 					case 'premultipliedalpha':
@@ -1541,7 +1217,7 @@ export class AbstractMaterialComponent
 						break;
 					case 'shadowside':
 						if (ThreeUtil.isNotNull(this.shadowSide)) {
-							this.material.shadowSide = this.getShadowSide();
+							this.material.shadowSide = ThreeUtil.getSideSafe(this.shadowSide);
 						}
 						break;
 					case 'tonemapped':
@@ -1565,7 +1241,9 @@ export class AbstractMaterialComponent
 						break;
 					case 'stencilfunc':
 						if (ThreeUtil.isNotNull(this.stencilFunc)) {
-							this.material.stencilFunc = this.getStencilFunc();
+							this.material.stencilFunc = ThreeUtil.getStencilFuncSafe(
+								this.stencilFunc
+							);
 						}
 						break;
 					case 'stencilref':
@@ -1589,17 +1267,23 @@ export class AbstractMaterialComponent
 						break;
 					case 'stencilfail':
 						if (ThreeUtil.isNotNull(this.stencilFail)) {
-							this.material.stencilFail = this.getStencilFail();
+							this.material.stencilFail = ThreeUtil.getStencilOpSafe(
+								this.stencilFail
+							);
 						}
 						break;
 					case 'stencilzfail':
 						if (ThreeUtil.isNotNull(this.stencilZFail)) {
-							this.material.stencilZFail = this.getStencilZFail();
+							this.material.stencilZFail = ThreeUtil.getStencilOpSafe(
+								this.stencilZFail
+							);
 						}
 						break;
 					case 'stencilzpass':
 						if (ThreeUtil.isNotNull(this.stencilZPass)) {
-							this.material.stencilZPass = this.getStencilZPass();
+							this.material.stencilZPass = ThreeUtil.getStencilOpSafe(
+								this.stencilZPass
+							);
 						}
 						break;
 					case 'alphatest':
@@ -1614,7 +1298,7 @@ export class AbstractMaterialComponent
 						break;
 					case 'side':
 						if (ThreeUtil.isNotNull(this.side)) {
-							this.material.side = this.getSide();
+							this.material.side = ThreeUtil.getSideSafe(this.side);
 						}
 						break;
 					case 'vertexcolors':

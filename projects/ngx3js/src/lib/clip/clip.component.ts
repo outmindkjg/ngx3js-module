@@ -10,6 +10,7 @@ import * as THREE from 'three';
 import { KeyframeComponent } from '../keyframe/keyframe.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeUtil } from './../interface';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Clip component.
@@ -134,33 +135,6 @@ export class ClipComponent
 	private keyframeList: QueryList<KeyframeComponent>;
 
 	/**
-	 * Gets blend mode
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AnimationBlendMode
-	 * @see THREE.NormalAnimationBlendMode - NormalAnimationBlendMode, NormalAnimation, Normal
-	 * @see THREE.AdditiveAnimationBlendMode - AdditiveAnimationBlendMode, AdditiveAnimation, Additive
-	 *
-	 * @param [def]
-	 * @returns blend mode
-	 */
-	private getBlendMode(def?: string): THREE.AnimationBlendMode {
-		const blendMode = ThreeUtil.getTypeSafe(this.blendMode, def, '');
-		switch (blendMode.toLowerCase()) {
-			case 'normalanimationblendmode':
-			case 'normalanimation':
-			case 'normal':
-				return THREE.NormalAnimationBlendMode;
-			case 'additiveanimationblendmode':
-			case 'additiveanimation':
-			case 'additive':
-				return THREE.AdditiveAnimationBlendMode;
-		}
-		return THREE.NormalAnimationBlendMode;
-	}
-
-	/**
 	 * Gets fps
 	 * @param [def]
 	 * @returns fps
@@ -176,35 +150,6 @@ export class ClipComponent
 	 */
 	private getClampWhenFinished(def?: boolean): boolean {
 		return ThreeUtil.getTypeSafe(this.clampWhenFinished, def);
-	}
-
-	/**
-	 * Gets loop
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AnimationActionLoopStyles
-	 * @see THREE.LoopOnce - LoopOnce, Once
-	 * @see THREE.LoopRepeat - LoopRepeat, Repeat
-	 * @see THREE.LoopPingPong - LoopPingPong, PingPong
-	 *
-	 * @param [def]
-	 * @returns loop
-	 */
-	private getLoop(def?: string): THREE.AnimationActionLoopStyles {
-		const loop = ThreeUtil.getTypeSafe(this.loop, def, '');
-		switch (loop.toLowerCase()) {
-			case 'looponce':
-			case 'once':
-				return THREE.LoopOnce;
-			case 'looppingpong':
-			case 'pingpong':
-				return THREE.LoopPingPong;
-			case 'looprepeat':
-			case 'repeat':
-			default:
-				return THREE.LoopRepeat;
-		}
 	}
 
 	/**
@@ -259,24 +204,24 @@ export class ClipComponent
 	/**
 	 * The Mixer of clip component
 	 */
-	private mixer: THREE.AnimationMixer = null;
+	private mixer: THREE_CORE.IAnimationMixer = null;
 
 	private model: any = null;
 
 	/**
 	 * The Clips of clip component
 	 */
-	private clips: THREE.AnimationClip[] = null;
+	private clips: THREE_CORE.IAnimationClip[] = null;
 
 	/**
 	 * The Clip of clip component
 	 */
-	private clip: THREE.AnimationClip = null;
+	private clip: THREE_CORE.IAnimationClip = null;
 
 	/**
 	 * The Action of clip component
 	 */
-	public action: THREE.AnimationAction = null;
+	public action: THREE_CORE.IAnimationAction = null;
 
 	/**
 	 * Sets mixer
@@ -285,8 +230,8 @@ export class ClipComponent
 	 * @param [fps]
 	 */
 	public setMixer(
-		mixer: THREE.AnimationMixer,
-		clips: THREE.AnimationClip[],
+		mixer: THREE_CORE.IAnimationMixer,
+		clips: THREE_CORE.IAnimationClip[],
 		model: any
 	) {
 		if (this.mixer !== mixer) {
@@ -426,10 +371,10 @@ export class ClipComponent
 	 * Gets clip
 	 * @returns
 	 */
-	public getClip(): THREE.AnimationClip {
+	public getClip(): THREE_CORE.IAnimationClip {
 		if (this.clip === null || this._needUpdate) {
 			this.needUpdate = false;
-			let clip: THREE.AnimationClip = null;
+			let clip: THREE_CORE.IAnimationClip = null;
 			if (this.clips !== null) {
 				if (this.index > -1 || ThreeUtil.isNotNull(this.name)) {
 					clip =
@@ -444,7 +389,7 @@ export class ClipComponent
 					ThreeUtil.getTypeSafe(this.name, 'default'),
 					this.duration,
 					[],
-					this.getBlendMode()
+					ThreeUtil.getBlendModeSafe(this.blendMode)
 				);
 			}
 			if (clip !== null) {
@@ -464,14 +409,14 @@ export class ClipComponent
 						this.action = this.mixer.clipAction(
 							subClip,
 							null,
-							this.getBlendMode()
+							ThreeUtil.getBlendModeSafe(this.blendMode)
 						);
 						this.clip = subClip;
 					} else {
 						this.action = this.mixer.clipAction(
 							clip,
 							null,
-							this.getBlendMode()
+							ThreeUtil.getBlendModeSafe(this.blendMode)
 						);
 						this.clip = clip;
 					}
@@ -493,20 +438,20 @@ export class ClipComponent
 						this.action = this.mixer.clipAction(
 							clip,
 							this.model,
-							this.getBlendMode()
+							ThreeUtil.getBlendModeSafe(this.blendMode)
 						);
 					} else {
 						this.action = this.mixer.clipAction(
 							clip,
 							null,
-							this.getBlendMode()
+							ThreeUtil.getBlendModeSafe(this.blendMode)
 						);
 					}
 				}
 				if (this.getClampWhenFinished(false)) {
 					this.action.clampWhenFinished = true;
 				}
-				this.action.loop = this.getLoop('repeat');
+				this.action.loop = ThreeUtil.getLoopSafe(this.loop ,'repeat');
 			} else {
 				this.action = null;
 			}

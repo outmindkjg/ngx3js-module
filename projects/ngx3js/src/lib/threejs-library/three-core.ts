@@ -24,8 +24,8 @@ export type TMatrix4Tuple = [
  *
  * @example
  * const quaternion = new THREE.Quaternion();
- * quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
- * const vector = new THREE.Vector3( 1, 0, 0 );
+ * quaternion.setFromAxisAngle( new IVector3( 0, 1, 0 ), Math.PI / 2 );
+ * const vector = new IVector3( 1, 0, 0 );
  * vector.applyQuaternion( quaternion );
  */
 export interface IQuaternion {
@@ -149,12 +149,12 @@ export interface IQuaternion {
 	_onChangeCallback: () => void;
 
 	/**
-	 * @deprecated Use {@link IVector#applyQuaternion vector.applyQuaternion( quaternion )} instead.
+	 * @deprecated Use {@link THREE.Vector#applyQuaternion vector.applyQuaternion( quaternion )} instead.
 	 */
 	multiplyVector3(v: any): any;
 
 	/**
-	 * @deprecated Use {@link IQuaternion#invert .invert()} instead.
+	 * @deprecated Use {@link THREE.Quaternion#invert .invert()} instead.
 	 */
 	inverse(): IQuaternion;
 
@@ -452,22 +452,22 @@ export interface IMatrix4 {
 	setFromMatrix3(m: IMatrix3): IMatrix4;
 
 	/**
-	 * @deprecated Use {@link IMatrix4#copyPosition .copyPosition()} instead.
+	 * @deprecated Use {@link THREE.Matrix4#copyPosition .copyPosition()} instead.
 	 */
 	extractPosition(m: IMatrix4): IMatrix4;
 
 	/**
-	 * @deprecated Use {@link IMatrix4#makeRotationFromQuaternion .makeRotationFromQuaternion()} instead.
+	 * @deprecated Use {@link THREE.Matrix4#makeRotationFromQuaternion .makeRotationFromQuaternion()} instead.
 	 */
 	setRotationFromQuaternion(q: IQuaternion): IMatrix4;
 
 	/**
-	 * @deprecated Use {@link IVector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+	 * @deprecated Use {@link THREE.Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 	 */
 	multiplyVector3(v: any): any;
 
 	/**
-	 * @deprecated Use {@link IVector4#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+	 * @deprecated Use {@link THREE.Vector4#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 	 */
 	multiplyVector4(v: any): any;
 
@@ -477,22 +477,22 @@ export interface IMatrix4 {
 	multiplyVector3Array(array: number[]): number[];
 
 	/**
-	 * @deprecated Use {@link IVector3#transformDirection Vector3.transformDirection( matrix )} instead.
+	 * @deprecated Use {@link THREE.Vector3#transformDirection Vector3.transformDirection( matrix )} instead.
 	 */
 	rotateAxis(v: any): void;
 
 	/**
-	 * @deprecated Use {@link IVector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+	 * @deprecated Use {@link THREE.Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 	 */
 	crossVector(v: any): void;
 
 	/**
-	 * @deprecated Use {@link IMatrix4#toArray .toArray()} instead.
+	 * @deprecated Use {@link THREE.Matrix4#toArray .toArray()} instead.
 	 */
 	flattenToArrayOffset(array: number[], offset: number): number[];
 
 	/**
-	 * @deprecated Use {@link IMatrix4#invert .invert()} instead.
+	 * @deprecated Use {@link THREE.Matrix4#invert .invert()} instead.
 	 */
 	getInverse(matrix: IMatrix): IMatrix;
 }
@@ -597,7 +597,7 @@ export interface IMatrix3 {
 	multiplyMatrices(a: IMatrix3, b: IMatrix3): IMatrix3;
 
 	/**
-	 * @deprecated Use {@link IVector3.applyMatrix3 vector.applyMatrix3( matrix )} instead.
+	 * @deprecated Use {@link THREE.Vector3.applyMatrix3 vector.applyMatrix3( matrix )} instead.
 	 */
 	multiplyVector3(vector: IVector3): any;
 
@@ -607,13 +607,13 @@ export interface IMatrix3 {
 	multiplyVector3Array(a: any): any;
 
 	/**
-	 * @deprecated Use {@link IMatrix3#invert .invert()} instead.
+	 * @deprecated Use {@link THREE.Matrix3#invert .invert()} instead.
 	 */
 	getInverse(matrix: IMatrix4, throwOnDegenerate?: boolean): IMatrix3;
 	getInverse(matrix: IMatrix): IMatrix;
 
 	/**
-	 * @deprecated Use {@link IMatrix3#toArray .toArray()} instead.
+	 * @deprecated Use {@link THREE.Matrix3#toArray .toArray()} instead.
 	 */
 	flattenToArrayOffset(array: number[], offset: number): number[];
 }
@@ -1181,7 +1181,7 @@ export interface IVector2 extends IVector {
 	length(): number;
 
 	/**
-	 * @deprecated Use {@link IVector2#manhattanLength .manhattanLength()} instead.
+	 * @deprecated Use {@link THREE.Vector2#manhattanLength .manhattanLength()} instead.
 	 */
 	lengthManhattan(): number;
 
@@ -1213,7 +1213,7 @@ export interface IVector2 extends IVector {
 	distanceToSquared(v: IVector2): number;
 
 	/**
-	 * @deprecated Use {@link IVector2#manhattanDistanceTo .manhattanDistanceTo()} instead.
+	 * @deprecated Use {@link THREE.Vector2#manhattanDistanceTo .manhattanDistanceTo()} instead.
 	 */
 	distanceToManhattan(v: IVector2): number;
 
@@ -1349,62 +1349,62 @@ export interface IVector3 extends IVector {
 	/**
 	 * Copies value of v to this vector.
 	 */
-	copy(v: THREE.Vector3): this;
+	copy(v: IVector3): this;
 
 	/**
 	 * Adds v to this vector.
 	 */
-	add(v: THREE.Vector3): this;
+	add(v: IVector3): this;
 
 	addScalar(s: number): this;
 
-	addScaledVector(v: THREE.Vector3, s: number): this;
+	addScaledVector(v: IVector3, s: number): this;
 
 	/**
 	 * Sets this vector to a + b.
 	 */
-	addVectors(a: THREE.Vector3, b: THREE.Vector3): this;
+	addVectors(a: IVector3, b: IVector3): this;
 
 	/**
 	 * Subtracts v from this vector.
 	 */
-	sub(a: THREE.Vector3): this;
+	sub(a: IVector3): this;
 
 	subScalar(s: number): this;
 
 	/**
 	 * Sets this vector to a - b.
 	 */
-	subVectors(a: THREE.Vector3, b: THREE.Vector3): this;
+	subVectors(a: IVector3, b: IVector3): this;
 
-	multiply(v: THREE.Vector3): this;
+	multiply(v: IVector3): this;
 
 	/**
 	 * Multiplies this vector by scalar s.
 	 */
 	multiplyScalar(s: number): this;
 
-	multiplyVectors(a: THREE.Vector3, b: THREE.Vector3): this;
+	multiplyVectors(a: IVector3, b: IVector3): this;
 
 	applyEuler(euler: IEuler): this;
 
-	applyAxisAngle(axis: THREE.Vector3, angle: number): this;
+	applyAxisAngle(axis: IVector3, angle: number): this;
 
-	applyMatrix3(m: THREE.Matrix3): this;
+	applyMatrix3(m: IMatrix3): this;
 
-	applyNormalMatrix(m: THREE.Matrix3): this;
+	applyNormalMatrix(m: IMatrix3): this;
 
 	applyMatrix4(m: IMatrix4): this;
 
-	applyQuaternion(q: THREE.Quaternion): this;
+	applyQuaternion(q: IQuaternion): this;
 
-	project(camera: THREE.Camera): this;
+	project(camera: ICamera): this;
 
-	unproject(camera: THREE.Camera): this;
+	unproject(camera: ICamera): this;
 
 	transformDirection(m: IMatrix4): this;
 
-	divide(v: THREE.Vector3): this;
+	divide(v: IVector3): this;
 
 	/**
 	 * Divides this vector by scalar s.
@@ -1454,7 +1454,7 @@ export interface IVector3 extends IVector {
 	 * Computes Manhattan length of this vector.
 	 * http://en.wikipedia.org/wiki/Taxicab_geometry
 	 *
-	 * @deprecated Use {@link IVector3#manhattanLength .manhattanLength()} instead.
+	 * @deprecated Use {@link THREE.Vector3#manhattanLength .manhattanLength()} instead.
 	 */
 	lengthManhattan(): number;
 
@@ -1481,52 +1481,52 @@ export interface IVector3 extends IVector {
 	 * Normalizes this vector and multiplies it by l.
 	 */
 	setLength(l: number): this;
-	lerp(v: THREE.Vector3, alpha: number): this;
+	lerp(v: IVector3, alpha: number): this;
 
-	lerpVectors(v1: THREE.Vector3, v2: THREE.Vector3, alpha: number): this;
+	lerpVectors(v1: IVector3, v2: IVector3, alpha: number): this;
 
 	/**
 	 * Sets this vector to cross product of itself and v.
 	 */
-	cross(a: THREE.Vector3): this;
+	cross(a: IVector3): this;
 
 	/**
 	 * Sets this vector to cross product of a and b.
 	 */
-	crossVectors(a: THREE.Vector3, b: THREE.Vector3): this;
-	projectOnVector(v: THREE.Vector3): this;
-	projectOnPlane(planeNormal: THREE.Vector3): this;
-	reflect(vector: THREE.Vector3): this;
-	angleTo(v: THREE.Vector3): number;
+	crossVectors(a: IVector3, b: IVector3): this;
+	projectOnVector(v: IVector3): this;
+	projectOnPlane(planeNormal: IVector3): this;
+	reflect(vector: IVector3): this;
+	angleTo(v: IVector3): number;
 
 	/**
 	 * Computes distance of this vector to v.
 	 */
-	distanceTo(v: THREE.Vector3): number;
+	distanceTo(v: IVector3): number;
 
 	/**
 	 * Computes squared distance of this vector to v.
 	 */
-	distanceToSquared(v: THREE.Vector3): number;
+	distanceToSquared(v: IVector3): number;
 
 	/**
-	 * @deprecated Use {@link IVector3#manhattanDistanceTo .manhattanDistanceTo()} instead.
+	 * @deprecated Use {@link THREE.Vector3#manhattanDistanceTo .manhattanDistanceTo()} instead.
 	 */
-	distanceToManhattan(v: THREE.Vector3): number;
+	distanceToManhattan(v: IVector3): number;
 
-	setFromSpherical(s: THREE.Spherical): this;
+	setFromSpherical(s: ISpherical): this;
 	setFromSphericalCoords(r: number, phi: number, theta: number): this;
-	setFromCylindrical(s: THREE.Cylindrical): this;
+	setFromCylindrical(s: ICylindrical): this;
 	setFromCylindricalCoords(radius: number, theta: number, y: number): this;
 	setFromMatrixPosition(m: IMatrix4): this;
 	setFromMatrixScale(m: IMatrix4): this;
 	setFromMatrixColumn(matrix: IMatrix4, index: number): this;
-	setFromMatrix3Column(matrix: THREE.Matrix3, index: number): this;
+	setFromMatrix3Column(matrix: IMatrix3, index: number): this;
 
 	/**
 	 * Checks for strict equality of this vector and v.
 	 */
-	equals(v: THREE.Vector3): boolean;
+	equals(v: IVector3): boolean;
 
 	/**
 	 * Sets this vector's x, y and z value from the provided array or array-like.
@@ -1542,7 +1542,7 @@ export interface IVector3 extends IVector {
 	 * @return The created or provided array.
 	 */
 	toArray(array?: number[], offset?: number): number[];
-	toArray(array?: THREE.Vector3Tuple, offset?: 0): TVector3Tuple;
+	toArray(array?: TVector3Tuple, offset?: 0): TVector3Tuple;
 
 	/**
 	 * Copies x, y and z into the provided array-like.
@@ -1553,7 +1553,7 @@ export interface IVector3 extends IVector {
 	toArray(array: ArrayLike<number>, offset?: number): ArrayLike<number>;
 
 	fromBufferAttribute(
-		attribute: THREE.BufferAttribute | THREE.InterleavedBufferAttribute,
+		attribute: IBufferAttribute | IInterleavedBufferAttribute,
 		index: number
 	): this;
 
@@ -1849,7 +1849,7 @@ export interface IColor {
 
 	/**
 	 * Sets this color from a color name.
-	 * Faster than {@link IColor#setStyle .setStyle()} method if you don't need the other CSS-style formats.
+	 * Faster than {@link THREE.Color#setStyle .setStyle()} method if you don't need the other CSS-style formats.
 	 * @param style Color name in X11 format.
 	 */
 	setColorName(style: string): IColor;
@@ -1966,6 +1966,249 @@ export interface IColor {
 	fromBufferAttribute(attribute: IBufferAttribute, index: number): this;
 }
 
+export interface ICurvePath<T extends IVector> extends ICurve<T> {
+	/**
+	 * @default 'CurvePath'
+	 */
+	type: string;
+
+	/**
+	 * @default []
+	 */
+	curves: Array<ICurve<T>>;
+
+	/**
+	 * @default false
+	 */
+	autoClose: boolean;
+
+	add(curve: ICurve<T>): void;
+	closePath(): void;
+	getPoint(t: number, optionalTarget?: T): T;
+	getCurveLengths(): number[];
+}
+
+/**
+ * a 2d path representation, comprising of points, lines, and cubes, similar to the html5 2d canvas api. It extends CurvePath.
+ */
+export interface IPath extends ICurvePath<IVector2> {
+	/**
+	 * @default 'Path'
+	 */
+	type: string;
+
+	/**
+	 * @default new THREE.Vector2()
+	 */
+	currentPoint: IVector2;
+
+	/**
+	 * @deprecated Use {@link Path#setFromPoints .setFromPoints()} instead.
+	 */
+	fromPoints(vectors: IVector2[]): this;
+	setFromPoints(vectors: IVector2[]): this;
+	moveTo(x: number, y: number): this;
+	lineTo(x: number, y: number): this;
+	quadraticCurveTo(aCPx: number, aCPy: number, aX: number, aY: number): this;
+	bezierCurveTo(
+		aCP1x: number,
+		aCP1y: number,
+		aCP2x: number,
+		aCP2y: number,
+		aX: number,
+		aY: number
+	): this;
+	splineThru(pts: IVector2[]): this;
+	arc(
+		aX: number,
+		aY: number,
+		aRadius: number,
+		aStartAngle: number,
+		aEndAngle: number,
+		aClockwise: boolean
+	): this;
+	absarc(
+		aX: number,
+		aY: number,
+		aRadius: number,
+		aStartAngle: number,
+		aEndAngle: number,
+		aClockwise: boolean
+	): this;
+	ellipse(
+		aX: number,
+		aY: number,
+		xRadius: number,
+		yRadius: number,
+		aStartAngle: number,
+		aEndAngle: number,
+		aClockwise: boolean,
+		aRotation: number
+	): this;
+	absellipse(
+		aX: number,
+		aY: number,
+		xRadius: number,
+		yRadius: number,
+		aStartAngle: number,
+		aEndAngle: number,
+		aClockwise: boolean,
+		aRotation: number
+	): this;
+}
+
+/**
+ * Defines a 2d shape plane using paths.
+ */
+export interface IShape extends IPath {
+	/**
+	 * @default 'Shape'
+	 */
+	type: string;
+
+	uuid: string;
+
+	/**
+	 * @default []
+	 */
+	holes: IPath[];
+
+	getPointsHoles(divisions: number): IVector2[][];
+
+	extractPoints(divisions: number): {
+		shape: IVector2[];
+		holes: IVector2[][];
+	};
+}
+
+export interface IShapePath {
+	/**
+	 * @default 'ShapePath'
+	 */
+	type: string;
+
+	/**
+	 * @default new THREE.Color()
+	 */
+	color: IColor;
+
+	/**
+	 * @default []
+	 */
+	subPaths: any[];
+
+	/**
+	 * @default null
+	 */
+	currentPath: any;
+
+	moveTo(x: number, y: number): this;
+	lineTo(x: number, y: number): this;
+	quadraticCurveTo(aCPx: number, aCPy: number, aX: number, aY: number): this;
+	bezierCurveTo(
+		aCP1x: number,
+		aCP1y: number,
+		aCP2x: number,
+		aCP2y: number,
+		aX: number,
+		aY: number
+	): this;
+	splineThru(pts: IVector2[]): this;
+	toShapes(isCCW: boolean, noHoles?: boolean): IShape[];
+}
+
+/**
+ * An extensible curve object which contains methods for interpolation
+ * class Curve<T extends Vector>
+ */
+export interface ICurve<T extends IVector> {
+	/**
+	 * @default 'Curve'
+	 */
+	type: string;
+
+	/**
+	 * This value determines the amount of divisions when calculating the cumulative segment lengths of a curve via .getLengths.
+	 * To ensure precision when using methods like .getSpacedPoints, it is recommended to increase .arcLengthDivisions if the curve is very large.
+	 * @default 200
+	 */
+	arcLengthDivisions: number;
+
+	/**
+	 * Returns a vector for point t of the curve where t is between 0 and 1
+	 * getPoint(t: number, optionalTarget?: T): T;
+	 */
+	getPoint(t: number, optionalTarget?: T): T;
+
+	/**
+	 * Returns a vector for point at relative position in curve according to arc length
+	 * getPointAt(u: number, optionalTarget?: T): T;
+	 */
+	getPointAt(u: number, optionalTarget?: T): T;
+
+	/**
+	 * Get sequence of points using getPoint( t )
+	 * getPoints(divisions?: number): T[];
+	 */
+	getPoints(divisions?: number): T[];
+
+	/**
+	 * Get sequence of equi-spaced points using getPointAt( u )
+	 * getSpacedPoints(divisions?: number): T[];
+	 */
+	getSpacedPoints(divisions?: number): T[];
+
+	/**
+	 * Get total curve arc length
+	 */
+	getLength(): number;
+
+	/**
+	 * Get list of cumulative segment lengths
+	 */
+	getLengths(divisions?: number): number[];
+
+	/**
+	 * Update the cumlative segment distance cache
+	 */
+	updateArcLengths(): void;
+
+	/**
+	 * Given u ( 0 .. 1 ), get a t to find p. This gives you points which are equi distance
+	 */
+	getUtoTmapping(u: number, distance: number): number;
+
+	/**
+	 * Returns a unit vector tangent at t. If the subclassed curve do not implement its tangent derivation, 2 points a
+	 * small delta apart will be used to find its gradient which seems to give a reasonable approximation
+	 * getTangent(t: number, optionalTarget?: T): T;
+	 */
+	getTangent(t: number, optionalTarget?: T): T;
+
+	/**
+	 * Returns tangent at equidistance point u on the curve
+	 * getTangentAt(u: number, optionalTarget?: T): T;
+	 */
+	getTangentAt(u: number, optionalTarget?: T): T;
+
+	/**
+	 * Generate Frenet frames of the curve
+	 */
+	computeFrenetFrames(
+		segments: number,
+		closed?: boolean
+	): {
+		tangents: IVector3[];
+		normals: IVector3[];
+		binormals: IVector3[];
+	};
+
+	clone(): this;
+	copy(source: ICurve<T>): this;
+	toJSON(): object;
+	fromJSON(json: object): this;
+}
+
 export interface ILayers {
 	/**
 	 * @default 1 | 0
@@ -2058,6 +2301,114 @@ export interface IAnimationClip {
 	toJSON(clip: IAnimationClip): any;
 }
 
+export interface IAnimationAction {
+
+    blendMode: THREE.AnimationBlendMode;
+
+    /**
+     * @default THREE.LoopRepeat
+     */
+    loop: THREE.AnimationActionLoopStyles;
+
+    /**
+     * @default 0
+     */
+    time: number;
+
+    /**
+     * @default 1
+     */
+    timeScale: number;
+
+    /**
+     * @default 1
+     */
+    weight: number;
+
+    /**
+     * @default Infinity
+     */
+    repetitions: number;
+
+    /**
+     * @default false
+     */
+    paused: boolean;
+
+    /**
+     * @default true
+     */
+    enabled: boolean;
+
+    /**
+     * @default false
+     */
+    clampWhenFinished: boolean;
+
+    /**
+     * @default true
+     */
+    zeroSlopeAtStart: boolean;
+
+    /**
+     * @default true
+     */
+    zeroSlopeAtEnd: boolean;
+
+    play(): IAnimationAction;
+    stop(): IAnimationAction;
+    reset(): IAnimationAction;
+    isRunning(): boolean;
+    isScheduled(): boolean;
+    startAt(time: number): IAnimationAction;
+    setLoop(mode: THREE.AnimationActionLoopStyles, repetitions: number): IAnimationAction;
+    setEffectiveWeight(weight: number): IAnimationAction;
+    getEffectiveWeight(): number;
+    fadeIn(duration: number): IAnimationAction;
+    fadeOut(duration: number): IAnimationAction;
+    crossFadeFrom(fadeOutAction: IAnimationAction, duration: number, warp: boolean): IAnimationAction;
+    crossFadeTo(fadeInAction: IAnimationAction, duration: number, warp: boolean): IAnimationAction;
+    stopFading(): IAnimationAction;
+    setEffectiveTimeScale(timeScale: number): IAnimationAction;
+    getEffectiveTimeScale(): number;
+    setDuration(duration: number): IAnimationAction;
+    syncWith(action: IAnimationAction): IAnimationAction;
+    halt(duration: number): IAnimationAction;
+    warp(statTimeScale: number, endTimeScale: number, duration: number): IAnimationAction;
+    stopWarping(): IAnimationAction;
+    getMixer(): IAnimationMixer;
+    getClip(): IAnimationClip;
+    getRoot(): IObject3D;
+}
+
+export interface IAnimationMixer extends IEventDispatcher {
+
+    /**
+     * @default 0
+     */
+    time: number;
+
+    /**
+     * @default 1.0
+     */
+    timeScale: number;
+
+    clipAction(
+        clip: IAnimationClip,
+        root?: IObject3D | IAnimationObjectGroup,
+        blendMode?: THREE.AnimationBlendMode,
+    ): IAnimationAction;
+    existingAction(clip: IAnimationClip, root?: IObject3D | IAnimationObjectGroup): IAnimationAction | null;
+    stopAllAction(): IAnimationMixer;
+    update(deltaTime: number): IAnimationMixer;
+    setTime(timeInSeconds: number): IAnimationMixer;
+    getRoot(): IObject3D | IAnimationObjectGroup;
+    uncacheClip(clip: IAnimationClip): void;
+    uncacheRoot(root: IObject3D | IAnimationObjectGroup): void;
+    uncacheAction(clip: IAnimationClip, root?: IObject3D | IAnimationObjectGroup): void;
+}
+
+
 export type EventListener<E, T, U> = (
 	event: E & { type: T } & { target: U }
 ) => void;
@@ -2141,7 +2492,7 @@ export interface IUniform<TValue = any> {
 }
 
 export interface IShader {
-	uniforms: { [uniform: string]: THREE.IUniform };
+	uniforms: { [uniform: string]: IUniform };
 	vertexShader: string;
 	fragmentShader: string;
 }
@@ -2211,7 +2562,7 @@ export interface IMaterial extends IEventDispatcher {
 	clipIntersection: boolean;
 
 	/**
-	 * User-defined clipping planes specified as THREE.Plane objects in world space.
+	 * User-defined clipping planes specified as IPlane objects in world space.
 	 * These planes apply to the objects this material is attached to.
 	 * Points in space whose signed distance to the plane is negative are clipped (not rendered).
 	 * See the WebGL / clipping /intersection example. Default is null.
@@ -2463,7 +2814,7 @@ export interface IMaterial extends IEventDispatcher {
 	copy(material: IMaterial): this;
 
 	/**
-	 * This disposes the material. Textures of a material don't get disposed. These needs to be disposed by {@link ITexture}.
+	 * This disposes the material. Textures of a material don't get disposed. These needs to be disposed by {@link THREE.Texture}.
 	 */
 	dispose(): void;
 
@@ -2492,6 +2843,1278 @@ export interface IMaterial extends IEventDispatcher {
 	 * @param meta Object containing metadata such as textures or images for the material.
 	 */
 	toJSON(meta?: any): any;
+}
+
+export interface ISpriteMaterial extends IMaterial {
+	/**
+	 * @default 'SpriteMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: IColor;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default 0
+	 */
+	rotation: number;
+
+	/**
+	 * @default true
+	 */
+	sizeAttenuation: boolean;
+
+	/**
+	 * @default true
+	 */
+	transparent: boolean;
+
+	readonly isSpriteMaterial: true;
+
+	setValues(parameters: THREE.SpriteMaterialParameters): void;
+	copy(source: ISpriteMaterial): this;
+}
+
+export interface ILineBasicMaterial extends IMaterial {
+	/**
+	 * @default 'LineBasicMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default 0xffffff
+	 */
+	color: IColor;
+
+	/**
+	 * @default 1
+	 */
+	linewidth: number;
+
+	/**
+	 * @default 'round'
+	 */
+	linecap: string;
+
+	/**
+	 * @default 'round'
+	 */
+	linejoin: string;
+
+	setValues(parameters: THREE.LineBasicMaterialParameters): void;
+}
+
+export interface ILineDashedMaterial extends ILineBasicMaterial {
+	/**
+	 * @default 'LineDashedMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default 1
+	 */
+	scale: number;
+
+	/**
+	 * @default 1
+	 */
+	dashSize: number;
+
+	/**
+	 * @default 1
+	 */
+	gapSize: number;
+	readonly isLineDashedMaterial: true;
+
+	setValues(parameters: THREE.LineDashedMaterialParameters): void;
+}
+
+export interface IMeshBasicMaterial extends IMaterial {
+	/**
+	 * @default 'MeshBasicMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: IColor;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	lightMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	lightMapIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	aoMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	aoMapIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	specularMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	envMap: ITexture | null;
+
+	/**
+	 * @default THREE.MultiplyOperation
+	 */
+	combine: THREE.Combine;
+
+	/**
+	 * @default 1
+	 */
+	reflectivity: number;
+
+	/**
+	 * @default 0.98
+	 */
+	refractionRatio: number;
+
+	/**
+	 * @default false
+	 */
+	wireframe: boolean;
+
+	/**
+	 * @default 1
+	 */
+	wireframeLinewidth: number;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinecap: string;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinejoin: string;
+
+	setValues(parameters: THREE.MeshBasicMaterialParameters): void;
+}
+
+export interface IMeshDepthMaterial extends IMaterial {
+	/**
+	 * @default 'MeshDepthMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default THREE.BasicDepthPacking
+	 */
+	depthPacking: THREE.DepthPackingStrategies;
+
+	/**
+	 * @default null
+	 */
+	displacementMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	displacementScale: number;
+
+	/**
+	 * @default 0
+	 */
+	displacementBias: number;
+
+	/**
+	 * @default false
+	 */
+	wireframe: boolean;
+
+	/**
+	 * @default 1
+	 */
+	wireframeLinewidth: number;
+
+	/**
+	 * @default false
+	 */
+	fog: boolean;
+
+	setValues(parameters: THREE.MeshDepthMaterialParameters): void;
+}
+
+export interface IMeshDistanceMaterial extends IMaterial {
+	/**
+	 * @default 'MeshDistanceMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	displacementMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	displacementScale: number;
+
+	/**
+	 * @default 0
+	 */
+	displacementBias: number;
+
+	/**
+	 * @default 1000
+	 */
+	farDistance: number;
+
+	/**
+	 * @default 1
+	 */
+	nearDistance: number;
+
+	/**
+	 * @default new THREE.Vector3()
+	 */
+	referencePosition: IVector3;
+
+	/**
+	 * @default false
+	 */
+	fog: boolean;
+
+	setValues(parameters: THREE.MeshDistanceMaterialParameters): void;
+}
+
+export interface IMeshLambertMaterial extends IMaterial {
+	/**
+	 * @default 'MeshLambertMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: IColor;
+
+	/**
+	 * @default new THREE.Color( 0x000000 )
+	 */
+	emissive: IColor;
+
+	/**
+	 * @default 1
+	 */
+	emissiveIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	emissiveMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	lightMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	lightMapIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	aoMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	aoMapIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	specularMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	envMap: ITexture | null;
+
+	/**
+	 * @default THREE.MultiplyOperation
+	 */
+	combine: THREE.Combine;
+
+	/**
+	 * @default 1
+	 */
+	reflectivity: number;
+
+	/**
+	 * @default 0.98
+	 */
+	refractionRatio: number;
+
+	/**
+	 * @default false
+	 */
+	wireframe: boolean;
+
+	/**
+	 * @default 1
+	 */
+	wireframeLinewidth: number;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinecap: string;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinejoin: string;
+
+	setValues(parameters: THREE.MeshLambertMaterialParameters): void;
+}
+
+export interface IMeshMatcapMaterial extends IMaterial {
+	/**
+	 * @default 'MeshMatcapMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default { 'MATCAP': '' }
+	 */
+	defines: { [key: string]: any };
+
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: IColor;
+
+	/**
+	 * @default null
+	 */
+	matcap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	bumpMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	bumpScale: number;
+
+	/**
+	 * @default null
+	 */
+	normalMap: ITexture | null;
+
+	/**
+	 * @default THREE.TangentSpaceNormalMap
+	 */
+	normalMapType: THREE.NormalMapTypes;
+
+	/**
+	 * @default new Vector2( 1, 1 )
+	 */
+	normalScale: IVector2;
+
+	/**
+	 * @default null
+	 */
+	displacementMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	displacementScale: number;
+
+	/**
+	 * @default 0
+	 */
+	displacementBias: number;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
+	 * @default false
+	 */
+	flatShading: boolean;
+
+	setValues(parameters: THREE.MeshMatcapMaterialParameters): void;
+}
+
+export interface IMeshNormalMaterial extends IMaterial {
+	/**
+	 * @default 'MeshNormalMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default null
+	 */
+	bumpMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	bumpScale: number;
+
+	/**
+	 * @default null
+	 */
+	normalMap: ITexture | null;
+
+	/**
+	 * @default THREE.TangentSpaceNormalMap
+	 */
+	normalMapType: THREE.NormalMapTypes;
+
+	/**
+	 * @default new THREE.Vector2( 1, 1 )
+	 */
+	normalScale: IVector2;
+
+	/**
+	 * @default null
+	 */
+	displacementMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	displacementScale: number;
+
+	/**
+	 * @default 0
+	 */
+	displacementBias: number;
+
+	/**
+	 * @default false
+	 */
+	wireframe: boolean;
+
+	/**
+	 * @default 1
+	 */
+	wireframeLinewidth: number;
+
+	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
+	 * @default false
+	 */
+	flatShading: boolean;
+
+	setValues(parameters: THREE.MeshNormalMaterialParameters): void;
+}
+
+export interface IMeshPhongMaterial extends IMaterial {
+	/**
+	 * @default 'MeshNormalMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: IColor;
+
+	/**
+	 * @default new THREE.Color( 0x111111 )
+	 */
+	specular: IColor;
+
+	/**
+	 * @default 30
+	 */
+	shininess: number;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	lightMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	lightMapIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	aoMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	aoMapIntensity: number;
+
+	/**
+	 * @default new THREE.Color( 0x000000 )
+	 */
+	emissive: IColor;
+
+	/**
+	 * @default 1
+	 */
+	emissiveIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	emissiveMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	bumpMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	bumpScale: number;
+
+	/**
+	 * @default null
+	 */
+	normalMap: ITexture | null;
+
+	/**
+	 * @default THREE.TangentSpaceNormalMap
+	 */
+	normalMapType: THREE.NormalMapTypes;
+
+	/**
+	 * @default new Vector2( 1, 1 )
+	 */
+	normalScale: IVector2;
+
+	/**
+	 * @default null
+	 */
+	displacementMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	displacementScale: number;
+
+	/**
+	 * @default 0
+	 */
+	displacementBias: number;
+
+	/**
+	 * @default null
+	 */
+	specularMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	envMap: ITexture | null;
+
+	/**
+	 * @default THREE.MultiplyOperation
+	 */
+	combine: THREE.Combine;
+
+	/**
+	 * @default 1
+	 */
+	reflectivity: number;
+
+	/**
+	 * @default 0.98
+	 */
+	refractionRatio: number;
+
+	/**
+	 * @default false
+	 */
+	wireframe: boolean;
+
+	/**
+	 * @default 1
+	 */
+	wireframeLinewidth: number;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinecap: string;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinejoin: string;
+
+	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
+	 * @default false
+	 */
+	flatShading: boolean;
+
+	/**
+	 * @deprecated Use {@link MeshStandardMaterial THREE.MeshStandardMaterial} instead.
+	 */
+	metal: boolean;
+
+	setValues(parameters: THREE.MeshPhongMaterialParameters): void;
+}
+
+export interface IMeshStandardMaterial extends IMaterial {
+	/**
+	 * @default 'MeshStandardMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default { 'STANDARD': '' }
+	 */
+	defines: { [key: string]: any };
+
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: IColor;
+
+	/**
+	 * @default 1
+	 */
+	roughness: number;
+
+	/**
+	 * @default 0
+	 */
+	metalness: number;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	lightMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	lightMapIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	aoMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	aoMapIntensity: number;
+
+	/**
+	 * @default new THREE.Color( 0x000000 )
+	 */
+	emissive: IColor;
+
+	/**
+	 * @default 1
+	 */
+	emissiveIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	emissiveMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	bumpMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	bumpScale: number;
+
+	/**
+	 * @default null
+	 */
+	normalMap: ITexture | null;
+
+	/**
+	 * @default THREE.TangentSpaceNormalMap
+	 */
+	normalMapType: THREE.NormalMapTypes;
+
+	/**
+	 * @default new THREE.Vector2( 1, 1 )
+	 */
+	normalScale: IVector2;
+
+	/**
+	 * @default null
+	 */
+	displacementMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	displacementScale: number;
+
+	/**
+	 * @default 0
+	 */
+	displacementBias: number;
+
+	/**
+	 * @default null
+	 */
+	roughnessMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	metalnessMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	envMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	envMapIntensity: number;
+
+	/**
+	 * @default 0.98
+	 */
+	refractionRatio: number;
+
+	/**
+	 * @default false
+	 */
+	wireframe: boolean;
+
+	/**
+	 * @default 1
+	 */
+	wireframeLinewidth: number;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinecap: string;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinejoin: string;
+
+	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
+	 * @default false
+	 */
+	flatShading: boolean;
+
+	isMeshStandardMaterial: boolean;
+
+	setValues(parameters: THREE.MeshStandardMaterialParameters): void;
+}
+
+export interface IMeshPhysicalMaterial extends IMeshStandardMaterial {
+	/**
+	 * @default 'MeshPhysicalMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default { 'STANDARD': '', 'PHYSICAL': '' }
+	 */
+	defines: { [key: string]: any };
+
+	/**
+	 * @default 0
+	 */
+	clearcoat: number;
+
+	/**
+	 * @default null
+	 */
+	clearcoatMap: ITexture | null;
+
+	/**
+	 * @default 0
+	 */
+	clearcoatRoughness: number;
+
+	/**
+	 * @default null
+	 */
+	clearcoatRoughnessMap: ITexture | null;
+
+	/**
+	 * @default new THREE.Vector2( 1, 1 )
+	 */
+	clearcoatNormalScale: IVector2;
+
+	/**
+	 * @default null
+	 */
+	clearcoatNormalMap: ITexture | null;
+
+	/**
+	 * @default 0.5
+	 */
+	reflectivity: number;
+
+	/**
+	 * @default 1.5
+	 */
+	ior: number;
+
+	/**
+	 * @default 0.0
+	 */
+	sheen: number;
+
+	/**
+	 * @default Color( 0x000000 )
+	 */
+	sheenColor: IColor;
+
+	/**
+	 * @default null
+	 */
+	sheenColorMap: ITexture | null;
+
+	/**
+	 * @default 1.0
+	 */
+	sheenRoughness: number;
+
+	/**
+	 * @default null
+	 */
+	sheenRoughnessMap: ITexture | null;
+
+	/**
+	 * @default 0
+	 */
+	transmission: number;
+
+	/**
+	 * @default null
+	 */
+	transmissionMap: ITexture | null;
+
+	/**
+	 * @default 0.01
+	 */
+	thickness: number;
+
+	/**
+	 * @default null
+	 */
+	thicknessMap: ITexture | null;
+
+	/**
+	 * @default 0.0
+	 */
+	attenuationDistance: number;
+
+	/**
+	 * @default Color( 1, 1, 1 )
+	 */
+	attenuationColor: IColor;
+
+	/**
+	 * @default 1.0
+	 */
+	specularIntensity: number;
+
+	/**
+	 * @default Color(1, 1, 1)
+	 */
+	specularColor: IColor;
+
+	/**
+	 * @default null
+	 */
+	specularIntensityMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	specularColorMap: ITexture | null;
+}
+
+export interface IMeshToonMaterial extends IMaterial {
+	/**
+	 * @default 'MeshToonMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default { 'TOON': '' }
+	 */
+	defines: { [key: string]: any };
+
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: IColor;
+
+	/**
+	 * @default null
+	 */
+	gradientMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	lightMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	lightMapIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	aoMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	aoMapIntensity: number;
+
+	/**
+	 * @default new THREE.Color( 0x000000 )
+	 */
+	emissive: IColor;
+
+	/**
+	 * @default 1
+	 */
+	emissiveIntensity: number;
+
+	/**
+	 * @default null
+	 */
+	emissiveMap: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	bumpMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	bumpScale: number;
+
+	/**
+	 * @default null
+	 */
+	normalMap: ITexture | null;
+
+	/**
+	 * @default THREE.TangentSpaceNormalMap
+	 */
+	normalMapType: THREE.NormalMapTypes;
+
+	/**
+	 * @default new THREE.Vector2( 1, 1 )
+	 */
+	normalScale: IVector2;
+
+	/**
+	 * @default null
+	 */
+	displacementMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	displacementScale: number;
+
+	/**
+	 * @default 0
+	 */
+	displacementBias: number;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default false
+	 */
+	wireframe: boolean;
+
+	/**
+	 * @default 1
+	 */
+	wireframeLinewidth: number;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinecap: string;
+
+	/**
+	 * @default 'round'
+	 */
+	wireframeLinejoin: string;
+
+	setValues(parameters: THREE.MeshToonMaterialParameters): void;
+}
+
+export interface IPointsMaterial extends IMaterial {
+	/**
+	 * @default 'PointsMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: IColor;
+
+	/**
+	 * @default null
+	 */
+	map: ITexture | null;
+
+	/**
+	 * @default null
+	 */
+	alphaMap: ITexture | null;
+
+	/**
+	 * @default 1
+	 */
+	size: number;
+
+	/**
+	 * @default true
+	 */
+	sizeAttenuation: boolean;
+
+	setValues(parameters: THREE.PointsMaterialParameters): void;
+}
+
+export interface IShaderMaterial extends IMaterial {
+	/**
+	 * @default 'ShaderMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default {}
+	 */
+	defines: { [key: string]: any };
+
+	/**
+	 * @default {}
+	 */
+	uniforms: { [uniform: string]: IUniform };
+	vertexShader: string;
+	fragmentShader: string;
+
+	/**
+	 * @default 1
+	 */
+	linewidth: number;
+
+	/**
+	 * @default false
+	 */
+	wireframe: boolean;
+
+	/**
+	 * @default 1
+	 */
+	wireframeLinewidth: number;
+
+	/**
+	 * @default false
+	 */
+	fog: boolean;
+
+	/**
+	 * @default false
+	 */
+	lights: boolean;
+
+	/**
+	 * @default false
+	 */
+	clipping: boolean;
+
+	/**
+	 * @deprecated Use {@link ShaderMaterial#extensions.derivatives extensions.derivatives} instead.
+	 */
+	derivatives: any;
+
+	/**
+	 * @default { derivatives: false, fragDepth: false, drawBuffers: false, shaderTextureLOD: false }
+	 */
+	extensions: {
+		derivatives: boolean;
+		fragDepth: boolean;
+		drawBuffers: boolean;
+		shaderTextureLOD: boolean;
+	};
+
+	/**
+	 * @default { 'color': [ 1, 1, 1 ], 'uv': [ 0, 0 ], 'uv2': [ 0, 0 ] }
+	 */
+	defaultAttributeValues: any;
+
+	/**
+	 * @default undefined
+	 */
+	index0AttributeName: string | undefined;
+
+	/**
+	 * @default false
+	 */
+	uniformsNeedUpdate: boolean;
+
+	/**
+	 * @default null
+	 */
+	glslVersion: THREE.GLSLVersion | null;
+
+	isShaderMaterial: boolean;
+
+	setValues(parameters: THREE.ShaderMaterialParameters): void;
+	toJSON(meta: any): any;
+}
+
+export interface IRawShaderMaterial extends IShaderMaterial {}
+
+export interface IShadowMaterial extends IMaterial {
+	/**
+	 * @default 'ShadowMaterial'
+	 */
+	type: string;
+
+	/**
+	 * @default new THREE.Color( 0x000000 )
+	 */
+	color: IColor;
+
+	/**
+	 * @default true
+	 */
+	transparent: boolean;
 }
 
 export interface IRenderer {
@@ -2654,7 +4277,7 @@ export interface ITexture extends IEventDispatcher {
 	type: THREE.TextureDataType;
 
 	/**
-	 * @default new THREE.Matrix3()
+	 * @default new IMatrix3()
 	 */
 	matrix: IMatrix3;
 
@@ -2664,17 +4287,17 @@ export interface ITexture extends IEventDispatcher {
 	matrixAutoUpdate: boolean;
 
 	/**
-	 * @default new THREE.Vector2( 0, 0 )
+	 * @default new IVector2( 0, 0 )
 	 */
 	offset: IVector2;
 
 	/**
-	 * @default new THREE.Vector2( 1, 1 )
+	 * @default new IVector2( 1, 1 )
 	 */
 	repeat: IVector2;
 
 	/**
-	 * @default new THREE.Vector2( 0, 0 )
+	 * @default new IVector2( 0, 0 )
 	 */
 	center: IVector2;
 
@@ -2733,6 +4356,32 @@ export interface ITexture extends IEventDispatcher {
 	dispose(): void;
 	transformUv(uv: IVector2): IVector2;
 	updateMatrix(): void;
+}
+
+export interface IDataTexture extends ITexture {
+	image: ImageData;
+
+	/**
+	 * @default false
+	 */
+	flipY: boolean;
+
+	/**
+	 * @default false
+	 */
+	generateMipmaps: boolean;
+
+	/**
+	 * @default 1
+	 */
+	unpackAlignment: number;
+
+	/**
+	 * @default THREE.DepthFormat
+	 */
+	format: THREE.PixelFormat;
+
+	readonly isDataTexture: true;
 }
 
 export interface IDataTexture3D extends ITexture {
@@ -2809,6 +4458,47 @@ export interface IDepthTexture extends ITexture {
 	readonly isDepthTexture: true;
 }
 
+export interface ICanvasTexture extends ITexture {
+	readonly isCanvasTexture: true;
+}
+
+export interface ICompressedTexture extends ITexture {
+	image: { width: number; height: number };
+
+	mipmaps: ImageData[];
+
+	/**
+	 * @default false
+	 */
+	flipY: boolean;
+
+	/**
+	 * @default false
+	 */
+	generateMipmaps: boolean;
+
+	readonly isCompressedTexture: true;
+}
+
+export interface ICubeTexture extends ITexture {
+	images: any; // returns and sets the value of Texture.image in the codde ?
+
+	/**
+	 * @default false
+	 */
+	flipY: boolean;
+
+	readonly isCubeTexture: true;
+}
+
+export interface IVideoTexture extends ITexture {
+	readonly isVideoTexture: true;
+	/**
+	 * @default false
+	 */
+	generateMipmaps: boolean;
+}
+
 /**
  * Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
  */
@@ -2819,7 +4509,7 @@ export interface IScene extends IObject3D {
 	 * A fog instance defining the type of fog that affects everything rendered in the scene. Default is null.
 	 * @default null
 	 */
-	fog: THREE.FogBase | null;
+	fog: IFogBase | null;
 
 	/**
 	 * If not null, it will force everything in the scene to be rendered with that material. Default is null.
@@ -2848,9 +4538,9 @@ export interface IScene extends IObject3D {
 	 * Calls before rendering scene
 	 */
 	onBeforeRender: (
-		renderer: THREE.WebGLRenderer,
-		scene: THREE.Scene,
-		camera: THREE.Camera,
+		renderer: IWebGLRenderer,
+		scene: IScene,
+		camera: ICamera,
 		renderTarget: any // any required for Object3D.onBeforeRender compatibility
 	) => void;
 
@@ -2858,12 +4548,54 @@ export interface IScene extends IObject3D {
 	 * Calls after rendering scene
 	 */
 	onAfterRender: (
-		renderer: THREE.WebGLRenderer,
-		scene: THREE.Scene,
-		camera: THREE.Camera
+		renderer: IWebGLRenderer,
+		scene: IScene,
+		camera: ICamera
 	) => void;
 
 	toJSON(meta?: any): any;
+}
+
+export interface IFogBase {
+	name: string;
+	color: IColor;
+	clone(): IFogBase;
+	toJSON(): any;
+}
+
+/**
+ * This class contains the parameters that define linear fog, i.e., that grows linearly denser with the distance.
+ */
+export interface IFog extends IFogBase {
+	/**
+	 * The minimum distance to start applying fog. Objects that are less than 'near' units from the active camera won't be affected by fog.
+	 * @default 1
+	 */
+	near: number;
+
+	/**
+	 * The maximum distance at which fog stops being calculated and applied. Objects that are more than 'far' units away from the active camera won't be affected by fog.
+	 * @default 1000
+	 */
+	far: number;
+
+	readonly isFog: true;
+
+	clone(): IFog;
+	toJSON(): any;
+}
+
+export interface IFogExp2 extends IFogBase {
+	/**
+	 * Defines how fast the fog will grow dense.
+	 * @default 0.00025
+	 */
+	density: number;
+
+	readonly isFogExp2: true;
+
+	clone(): IFogExp2;
+	toJSON(): any;
 }
 
 export interface IWebGLRenderTarget extends IEventDispatcher {
@@ -2878,7 +4610,7 @@ export interface IWebGLRenderTarget extends IEventDispatcher {
 	 */
 	scissorTest: boolean;
 	viewport: IVector4;
-	texture: THREE.Texture;
+	texture: ITexture;
 
 	/**
 	 * @default true
@@ -2893,56 +4625,82 @@ export interface IWebGLRenderTarget extends IEventDispatcher {
 	/**
 	 * @default null
 	 */
-	depthTexture: THREE.DepthTexture;
+	depthTexture: IDepthTexture;
 
 	readonly isWebGLRenderTarget: true;
 
 	/**
-	 * @deprecated Use {@link ITexture#wrapS texture.wrapS} instead.
+	 * @deprecated Use {@link THREE.Texture#wrapS texture.wrapS} instead.
 	 */
 	wrapS: any;
 	/**
-	 * @deprecated Use {@link ITexture#wrapT texture.wrapT} instead.
+	 * @deprecated Use {@link THREE.Texture#wrapT texture.wrapT} instead.
 	 */
 	wrapT: any;
 	/**
-	 * @deprecated Use {@link ITexture#magFilter texture.magFilter} instead.
+	 * @deprecated Use {@link THREE.Texture#magFilter texture.magFilter} instead.
 	 */
 	magFilter: any;
 	/**
-	 * @deprecated Use {@link ITexture#minFilter texture.minFilter} instead.
+	 * @deprecated Use {@link THREE.Texture#minFilter texture.minFilter} instead.
 	 */
 	minFilter: any;
 	/**
-	 * @deprecated Use {@link ITexture#anisotropy texture.anisotropy} instead.
+	 * @deprecated Use {@link THREE.Texture#anisotropy texture.anisotropy} instead.
 	 */
 	anisotropy: any;
 	/**
-	 * @deprecated Use {@link ITexture#offset texture.offset} instead.
+	 * @deprecated Use {@link THREE.Texture#offset texture.offset} instead.
 	 */
 	offset: any;
 	/**
-	 * @deprecated Use {@link ITexture#repeat texture.repeat} instead.
+	 * @deprecated Use {@link THREE.Texture#repeat texture.repeat} instead.
 	 */
 	repeat: any;
 	/**
-	 * @deprecated Use {@link ITexture#format texture.format} instead.
+	 * @deprecated Use {@link THREE.Texture#format texture.format} instead.
 	 */
 	format: any;
 	/**
-	 * @deprecated Use {@link ITexture#type texture.type} instead.
+	 * @deprecated Use {@link THREE.Texture#type texture.type} instead.
 	 */
 	type: any;
 	/**
-	 * @deprecated Use {@link ITexture#generateMipmaps texture.generateMipmaps} instead.
+	 * @deprecated Use {@link THREE.Texture#generateMipmaps texture.generateMipmaps} instead.
 	 */
 	generateMipmaps: any;
 
-	setTexture(texture: THREE.Texture): void;
+	setTexture(texture: ITexture): void;
 	setSize(width: number, height: number, depth?: number): void;
 	clone(): this;
-	copy(source: THREE.WebGLRenderTarget): this;
+	copy(source: IWebGLRenderTarget): this;
 	dispose(): void;
+}
+
+export interface IWebGLMultisampleRenderTarget extends IWebGLRenderTarget {
+	readonly isWebGLMultisampleRenderTarget: true;
+	/**
+	 * Specifies the number of samples to be used for the renderbuffer storage.However, the maximum supported size for multisampling is platform dependent and defined via gl.MAX_SAMPLES.
+	 * @default 4
+	 */
+	samples: number;
+}
+
+export interface IWebGLCubeRenderTarget extends IWebGLRenderTarget {
+	texture: ICubeTexture;
+
+	fromEquirectangularTexture(renderer: IWebGLRenderer, texture: ITexture): this;
+
+	clear(
+		renderer: IWebGLRenderer,
+		color: boolean,
+		depth: boolean,
+		stencil: boolean
+	): void;
+}
+
+export interface IWebGL1Renderer extends IWebGLRenderer {
+	readonly isWebGL1Renderer: true;
 }
 
 /**
@@ -2974,12 +4732,12 @@ export type TXRFrameRequestCallback = (
 
 export interface ILine3 {
 	/**
-	 * @default new THREE.Vector3()
+	 * @default new IVector3()
 	 */
 	start: IVector3;
 
 	/**
-	 * @default new THREE.Vector3()
+	 * @default new IVector3()
 	 */
 	end: IVector3;
 
@@ -3003,7 +4761,7 @@ export interface ILine3 {
 
 export interface IPlane {
 	/**
-	 * @default new THREE.Vector3( 1, 0, 0 )
+	 * @default new IVector3( 1, 0, 0 )
 	 */
 	normal: IVector3;
 
@@ -3036,24 +4794,24 @@ export interface IPlane {
 	equals(plane: IPlane): boolean;
 
 	/**
-	 * @deprecated Use {@link IPlane#intersectsLine .intersectsLine()} instead.
+	 * @deprecated Use {@link THREE.Plane#intersectsLine .intersectsLine()} instead.
 	 */
 	isIntersectionLine(l: any): any;
 }
 
 export interface ITriangle {
 	/**
-	 * @default new THREE.Vector3()
+	 * @default new IVector3()
 	 */
 	a: IVector3;
 
 	/**
-	 * @default new THREE.Vector3()
+	 * @default new IVector3()
 	 */
 	b: IVector3;
 
 	/**
-	 * @default new THREE.Vector3()
+	 * @default new IVector3()
 	 */
 	c: IVector3;
 
@@ -3113,7 +4871,7 @@ export interface ISphere {
 	distanceToPoint(point: IVector3): number;
 	intersectsSphere(sphere: ISphere): boolean;
 	intersectsBox(box: IBox3): boolean;
-	intersectsPlane(plane: THREE.Plane): boolean;
+	intersectsPlane(plane: IPlane): boolean;
 	clampPoint(point: IVector3, target: IVector3): IVector3;
 	getBoundingBox(target: IBox3): IBox3;
 	applyMatrix4(matrix: IMatrix4): ISphere;
@@ -3122,19 +4880,19 @@ export interface ISphere {
 	union(sphere: ISphere): this;
 
 	/**
-	 * @deprecated Use {@link ISphere#isEmpty .isEmpty()} instead.
+	 * @deprecated Use {@link THREE.Sphere#isEmpty .isEmpty()} instead.
 	 */
 	empty(): any;
 }
 
 export interface IBox3 {
 	/**
-	 * @default new THREE.Vector3( + Infinity, + Infinity, + Infinity )
+	 * @default new IVector3( + Infinity, + Infinity, + Infinity )
 	 */
 	min: IVector3;
 
 	/**
-	 * @default new THREE.Vector3( - Infinity, - Infinity, - Infinity )
+	 * @default new IVector3( - Infinity, - Infinity, - Infinity )
 	 */
 	max: IVector3;
 	readonly isBox3: true;
@@ -3159,9 +4917,9 @@ export interface IBox3 {
 	containsBox(box: IBox3): boolean;
 	getParameter(point: IVector3, target: IVector3): IVector3;
 	intersectsBox(box: IBox3): boolean;
-	intersectsSphere(sphere: THREE.Sphere): boolean;
+	intersectsSphere(sphere: ISphere): boolean;
 	intersectsPlane(plane: IPlane): boolean;
-	intersectsTriangle(triangle: THREE.Triangle): boolean;
+	intersectsTriangle(triangle: ITriangle): boolean;
 	clampPoint(point: IVector3, target: IVector3): IVector3;
 	distanceToPoint(point: IVector3): number;
 	getBoundingSphere(target: ISphere): ISphere;
@@ -3171,17 +4929,49 @@ export interface IBox3 {
 	translate(offset: IVector3): this;
 	equals(box: IBox3): boolean;
 	/**
-	 * @deprecated Use {@link IBox3#isEmpty .isEmpty()} instead.
+	 * @deprecated Use {@link THREE.Box3#isEmpty .isEmpty()} instead.
 	 */
 	empty(): any;
 	/**
-	 * @deprecated Use {@link IBox3#intersectsBox .intersectsBox()} instead.
+	 * @deprecated Use {@link THREE.Box3#intersectsBox .intersectsBox()} instead.
 	 */
 	isIntersectionBox(b: any): any;
 	/**
-	 * @deprecated Use {@link IBox3#intersectsSphere .intersectsSphere()} instead.
+	 * @deprecated Use {@link THREE.Box3#intersectsSphere .intersectsSphere()} instead.
 	 */
 	isIntersectionSphere(s: any): any;
+}
+
+export interface IPMREMGenerator {
+	fromScene(
+		scene: IScene,
+		sigma?: number,
+		near?: number,
+		far?: number
+	): IWebGLRenderTarget;
+	fromEquirectangular(equirectangular: ITexture): IWebGLRenderTarget;
+	fromCubemap(cubemap: ICubeTexture): IWebGLRenderTarget;
+	compileCubemapShader(): void;
+	compileEquirectangularShader(): void;
+	dispose(): void;
+}
+
+export interface IUVGenerator {
+	generateTopUV(
+		geometry: IExtrudeGeometry,
+		vertices: number[],
+		indexA: number,
+		indexB: number,
+		indexC: number
+	): IVector2[];
+	generateSideWallUV(
+		geometry: IExtrudeGeometry,
+		vertices: number[],
+		indexA: number,
+		indexB: number,
+		indexC: number,
+		indexD: number
+	): IVector2[];
 }
 
 /**
@@ -3424,7 +5214,7 @@ export interface IWebGLRenderer extends IRenderer {
 	setAnimationLoop(callback: TXRAnimationLoopCallback | null): void;
 
 	/**
-	 * @deprecated Use {@link IWebGLRenderer#setAnimationLoop .setAnimationLoop()} instead.
+	 * @deprecated Use {@link THREE.WebGLRenderer#setAnimationLoop .setAnimationLoop()} instead.
 	 */
 	animate(callback: () => void): void;
 
@@ -3435,14 +5225,14 @@ export interface IWebGLRenderer extends IRenderer {
 
 	/**
 	 * Render a scene or an object using a camera.
-	 * The render is done to a previously specified {@link IWebGLRenderTarget#renderTarget .renderTarget} set by calling
-	 * {@link IWebGLRenderer#setRenderTarget .setRenderTarget} or to the canvas as usual.
+	 * The render is done to a previously specified {@link THREE.WebGLRenderTarget#renderTarget .renderTarget} set by calling
+	 * {@link THREE.WebGLRenderer#setRenderTarget .setRenderTarget} or to the canvas as usual.
 	 *
 	 * By default render buffers are cleared before rendering but you can prevent this by setting the property
-	 * {@link IWebGLRenderer#autoClear autoClear} to false. If you want to prevent only certain buffers being cleared
-	 * you can set either the {@link IWebGLRenderer#autoClearColor autoClearColor},
-	 * {@link IWebGLRenderer#autoClearStencil autoClearStencil} or {@link IWebGLRenderer#autoClearDepth autoClearDepth}
-	 * properties to false. To forcibly clear one ore more buffers call {@link IWebGLRenderer#clear .clear}.
+	 * {@link THREE.WebGLRenderer#autoClear autoClear} to false. If you want to prevent only certain buffers being cleared
+	 * you can set either the {@link THREE.WebGLRenderer#autoClearColor autoClearColor},
+	 * {@link THREE.WebGLRenderer#autoClearStencil autoClearStencil} or {@link THREE.WebGLRenderer#autoClearDepth autoClearDepth}
+	 * properties to false. To forcibly clear one ore more buffers call {@link THREE.WebGLRenderer#clear .clear}.
 	 */
 	render(scene: IObject3D, camera: ICamera): void;
 
@@ -3462,14 +5252,14 @@ export interface IWebGLRenderer extends IRenderer {
 	getRenderTarget(): IWebGLRenderTarget | null;
 
 	/**
-	 * @deprecated Use {@link IWebGLRenderer#getRenderTarget .getRenderTarget()} instead.
+	 * @deprecated Use {@link THREE.WebGLRenderer#getRenderTarget .getRenderTarget()} instead.
 	 */
 	getCurrentRenderTarget(): IWebGLRenderTarget | null;
 
 	/**
 	 * Sets the active render target.
 	 *
-	 * @param renderTarget The {@link IWebGLRenderTarget renderTarget} that needs to be activated. When `null` is given, the canvas is set as the active render target instead.
+	 * @param renderTarget The {@link THREE.WebGLRenderTarget renderTarget} that needs to be activated. When `null` is given, the canvas is set as the active render target instead.
 	 * @param activeCubeFace Specifies the active cube side (PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5) of {@link WebGLCubeRenderTarget}.
 	 * @param activeMipmapLevel Specifies the active mipmap level.
 	 */
@@ -3552,7 +5342,7 @@ export interface IWebGLRenderer extends IRenderer {
 	gammaFactor: number;
 
 	/**
-	 * @deprecated Use {@link IWebGLRenderer#xr .xr} instead.
+	 * @deprecated Use {@link THREE.WebGLRenderer#xr .xr} instead.
 	 */
 	vr: boolean;
 
@@ -3612,7 +5402,7 @@ export interface IWebGLRenderer extends IRenderer {
 	supportsInstancedArrays(): any;
 
 	/**
-	 * @deprecated Use {@link IWebGLRenderer#setScissorTest .setScissorTest()} instead.
+	 * @deprecated Use {@link THREE.WebGLRenderer#setScissorTest .setScissorTest()} instead.
 	 */
 	enableScissorTest(boolean: any): any;
 }
@@ -3677,12 +5467,12 @@ export interface IBufferGeometry extends IEventDispatcher {
 	/**
 	 * @default null
 	 */
-	boundingBox: THREE.Box3 | null;
+	boundingBox: IBox3 | null;
 
 	/**
 	 * @default null
 	 */
-	boundingSphere: THREE.Sphere | null;
+	boundingSphere: ISphere | null;
 
 	/**
 	 * @default { start: 0, count: Infinity }
@@ -3770,32 +5560,32 @@ export interface IBufferGeometry extends IEventDispatcher {
 	dispose(): void;
 
 	/**
-	 * @deprecated Use {@link IBufferGeometry#groups .groups} instead.
+	 * @deprecated Use {@link THREE.BufferGeometry#groups .groups} instead.
 	 */
 	drawcalls: any;
 
 	/**
-	 * @deprecated Use {@link IBufferGeometry#groups .groups} instead.
+	 * @deprecated Use {@link THREE.BufferGeometry#groups .groups} instead.
 	 */
 	offsets: any;
 
 	/**
-	 * @deprecated Use {@link IBufferGeometry#setIndex .setIndex()} instead.
+	 * @deprecated Use {@link THREE.BufferGeometry#setIndex .setIndex()} instead.
 	 */
 	addIndex(index: any): void;
 
 	/**
-	 * @deprecated Use {@link IBufferGeometry#addGroup .addGroup()} instead.
+	 * @deprecated Use {@link THREE.BufferGeometry#addGroup .addGroup()} instead.
 	 */
 	addDrawCall(start: any, count: any, indexOffset?: any): void;
 
 	/**
-	 * @deprecated Use {@link IBufferGeometry#clearGroups .clearGroups()} instead.
+	 * @deprecated Use {@link THREE.BufferGeometry#clearGroups .clearGroups()} instead.
 	 */
 	clearDrawCalls(): void;
 
 	/**
-	 * @deprecated Use {@link IBufferGeometry#setAttribute .setAttribute()} instead.
+	 * @deprecated Use {@link THREE.BufferGeometry#setAttribute .setAttribute()} instead.
 	 */
 	addAttribute(
 		name: string,
@@ -3804,9 +5594,47 @@ export interface IBufferGeometry extends IEventDispatcher {
 	addAttribute(name: any, array: any, itemSize: any): any;
 
 	/**
-	 * @deprecated Use {@link IBufferGeometry#deleteAttribute .deleteAttribute()} instead.
+	 * @deprecated Use {@link THREE.BufferGeometry#deleteAttribute .deleteAttribute()} instead.
 	 */
 	removeAttribute(name: string): IBufferGeometry;
+}
+
+export interface IExtrudeGeometry extends IBufferGeometry {
+	/**
+	 * @default 'ExtrudeGeometry'
+	 */
+	type: string;
+
+	addShapeList(shapes: IShape[], options?: any): void;
+	addShape(shape: IShape, options?: any): void;
+}
+
+export interface IPlaneBufferGeometry extends IBufferGeometry {
+	/**
+	 * @default 'PlaneGeometry'
+	 */
+	type: string;
+
+	parameters: {
+		width: number;
+		height: number;
+		widthSegments: number;
+		heightSegments: number;
+	};
+}
+
+export interface ICircleBufferGeometry extends IBufferGeometry {
+	/**
+	 * @default 'CircleGeometry'
+	 */
+	type: string;
+
+	parameters: {
+		radius: number;
+		segments: number;
+		thetaStart: number;
+		thetaLength: number;
+	};
 }
 
 export interface IGroup extends IObject3D {
@@ -3816,12 +5644,12 @@ export interface IGroup extends IObject3D {
 
 export interface IRay {
 	/**
-	 * @default new THREE.Vector3()
+	 * @default new IVector3()
 	 */
 	origin: IVector3;
 
 	/**
-	 * @default new THREE.Vector3( 0, 0, - 1 )
+	 * @default new IVector3( 0, 0, - 1 )
 	 */
 	direction: IVector3;
 
@@ -3858,17 +5686,17 @@ export interface IRay {
 	equals(ray: IRay): boolean;
 
 	/**
-	 * @deprecated Use {@link IRay#intersectsBox .intersectsBox()} instead.
+	 * @deprecated Use {@link THREE.Ray#intersectsBox .intersectsBox()} instead.
 	 */
 	isIntersectionBox(b: any): any;
 
 	/**
-	 * @deprecated Use {@link IRay#intersectsPlane .intersectsPlane()} instead.
+	 * @deprecated Use {@link THREE.Ray#intersectsPlane .intersectsPlane()} instead.
 	 */
 	isIntersectionPlane(p: any): any;
 
 	/**
-	 * @deprecated Use {@link IRay#intersectsSphere .intersectsSphere()} instead.
+	 * @deprecated Use {@link THREE.Ray#intersectsSphere .intersectsSphere()} instead.
 	 */
 	isIntersectionSphere(s: any): any;
 }
@@ -3969,10 +5797,274 @@ export interface IRaycaster {
 	): Array<IIntersection<TIntersected>>;
 }
 
+export interface ILoader {
+	/**
+	 * @default 'anonymous'
+	 */
+	crossOrigin: string;
+
+	/**
+	 * @default: false
+	 */
+	withCredentials: boolean;
+
+	/**
+	 * @default ''
+	 */
+	path: string;
+
+	/**
+	 * @default ''
+	 */
+	resourcePath: string;
+	manager: ILoadingManager;
+
+	/**
+	 * @default {}
+	 */
+	requestHeader: { [header: string]: string };
+
+	/*
+	load(): void;
+	parse(): void;
+	*/
+
+	loadAsync(
+		url: string,
+		onProgress?: (event: ProgressEvent) => void
+	): Promise<any>;
+
+	setCrossOrigin(crossOrigin: string): this;
+	setWithCredentials(value: boolean): this;
+	setPath(path: string): this;
+	setResourcePath(resourcePath: string): this;
+	setRequestHeader(requestHeader: { [header: string]: string }): this;
+}
+
+/**
+ * Handles and keeps track of loaded and pending data.
+ */
+export interface ILoadingManager {
+	/**
+	 * Will be called when loading of an item starts.
+	 * @param url The url of the item that started loading.
+	 * @param loaded The number of items already loaded so far.
+	 * @param total The total amount of items to be loaded.
+	 */
+	onStart?: ((url: string, loaded: number, total: number) => void) | undefined;
+
+	/**
+	 * Will be called when all items finish loading.
+	 * The default is a function with empty body.
+	 */
+	onLoad: () => void;
+
+	/**
+	 * Will be called for each loaded item.
+	 * The default is a function with empty body.
+	 * @param url The url of the item just loaded.
+	 * @param loaded The number of items already loaded so far.
+	 * @param total The total amount of items to be loaded.
+	 */
+	onProgress: (url: string, loaded: number, total: number) => void;
+
+	/**
+	 * Will be called when item loading fails.
+	 * The default is a function with empty body.
+	 * @param url The url of the item that errored.
+	 */
+	onError: (url: string) => void;
+
+	/**
+	 * If provided, the callback will be passed each resource URL before a request is sent.
+	 * The callback may return the original URL, or a new URL to override loading behavior.
+	 * This behavior can be used to load assets from .ZIP files, drag-and-drop APIs, and Data URIs.
+	 * @param callback URL modifier callback. Called with url argument, and must return resolvedURL.
+	 */
+	setURLModifier(callback?: (url: string) => string): this;
+
+	/**
+	 * Given a URL, uses the URL modifier callback (if any) and returns a resolved URL.
+	 * If no URL modifier is set, returns the original URL.
+	 * @param url the url to load
+	 */
+	resolveURL(url: string): string;
+
+	itemStart(url: string): void;
+	itemEnd(url: string): void;
+	itemError(url: string): void;
+
+	// handlers
+
+	addHandler(regex: RegExp, loader: ILoader): this;
+	removeHandler(regex: RegExp): this;
+	getHandler(file: string): ILoader | null;
+}
+
+export interface IAudio<NodeType extends AudioNode = GainNode> extends IObject3D {
+    type: 'Audio';
+    listener: IAudioListener;
+    context: AudioContext;
+    gain: GainNode;
+
+    /**
+     * @default false
+     */
+    autoplay: boolean;
+    buffer: null | AudioBuffer;
+
+    /**
+     * @default 0
+     */
+    detune: number;
+
+    /**
+     * @default false
+     */
+    loop: boolean;
+
+    /**
+     * @default 0
+     */
+    loopStart: number;
+
+    /**
+     * @default 0
+     */
+    loopEnd: number;
+
+    /**
+     * @default 0
+     */
+    offset: number;
+
+    /**
+     * @default undefined
+     */
+    duration: number | undefined;
+
+    /**
+     * @default 1
+     */
+    playbackRate: number;
+
+    /**
+     * @default false
+     */
+    isPlaying: boolean;
+
+    /**
+     * @default true
+     */
+    hasPlaybackControl: boolean;
+
+    /**
+     * @default 'empty'
+     */
+    sourceType: string;
+    source: null | AudioBufferSourceNode;
+
+    /**
+     * @default []
+     */
+    filters: AudioNode[];
+
+    getOutput(): NodeType;
+    setNodeSource(audioNode: AudioBufferSourceNode): this;
+    setMediaElementSource(mediaElement: HTMLMediaElement): this;
+    setMediaStreamSource(mediaStream: MediaStream): this;
+    setBuffer(audioBuffer: AudioBuffer): this;
+    play(delay?: number): this;
+    onEnded(): void;
+    pause(): this;
+    stop(): this;
+    connect(): this;
+    disconnect(): this;
+    setDetune(value: number): this;
+    getDetune(): number;
+    getFilters(): AudioNode[];
+    setFilters(value: AudioNode[]): this;
+    getFilter(): AudioNode;
+    setFilter(filter: AudioNode): this;
+    setPlaybackRate(value: number): this;
+    getPlaybackRate(): number;
+    getLoop(): boolean;
+    setLoop(value: boolean): this;
+    setLoopStart(value: number): this;
+    setLoopEnd(value: number): this;
+    getVolume(): number;
+    setVolume(value: number): this;
+    /**
+     * @deprecated Use {@link AudioLoader} instead.
+     */
+    load(file: string): IAudio;
+}
+
+export interface IAudioListener extends IObject3D {
+
+    type: 'AudioListener';
+    context: AudioContext;
+    gain: GainNode;
+
+    /**
+     * @default null
+     */
+    filter: any;
+
+    /**
+     * @default 0
+     */
+    timeDelta: number;
+
+    getInput(): GainNode;
+    removeFilter(): this;
+    setFilter(value: any): this;
+    getFilter(): any;
+    setMasterVolume(value: number): this;
+    getMasterVolume(): number;
+    updateMatrixWorld(force?: boolean): void;
+}
+
+export interface IAudioAnalyser {
+    analyser: AnalyserNode;
+    data: Uint8Array;
+    getFrequencyData(): Uint8Array;
+    getAverageFrequency(): number;
+}
+
+export interface IAudioLoader extends ILoader {
+    load(
+        url: string,
+        onLoad: (audioBuffer: AudioBuffer) => void,
+        onProgress?: (request: ProgressEvent) => void,
+        onError?: (event: ErrorEvent) => void,
+    ): void;
+    loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<AudioBuffer>;
+}
+
+
+export interface IAnimationObjectGroup {
+    uuid: string;
+    stats: {
+        bindingsPerObject: number;
+        objects: {
+            total: number;
+            inUse: number;
+        };
+    };
+    readonly isAnimationObjectGroup: true;
+
+    add(...args: any[]): void;
+    remove(...args: any[]): void;
+    uncache(...args: any[]): void;
+}
+
+
 /**
  * Object3D
  */
-export interface IObject3D extends IEventDispatcher<any> {
+export interface IObject3D<E extends THREE.BaseEvent = THREE.Event>
+	extends IEventDispatcher<E> {
 	/**
 	 * Unique number of this object instance.
 	 */
@@ -4011,7 +6103,7 @@ export interface IObject3D extends IEventDispatcher<any> {
 
 	/**
 	 * Object's local position.
-	 * @default new THREE.Vector3()
+	 * @default new IVector3()
 	 */
 	readonly position: IVector3;
 
@@ -4029,7 +6121,7 @@ export interface IObject3D extends IEventDispatcher<any> {
 
 	/**
 	 * Object's local scale.
-	 * @default new THREE.Vector3()
+	 * @default new IVector3()
 	 */
 	readonly scale: IVector3;
 
@@ -4039,7 +6131,7 @@ export interface IObject3D extends IEventDispatcher<any> {
 	readonly modelViewMatrix: IMatrix4;
 
 	/**
-	 * @default new THREE.Matrix3()
+	 * @default new IMatrix3()
 	 */
 	readonly normalMatrix: IMatrix3;
 
@@ -4123,12 +6215,12 @@ export interface IObject3D extends IEventDispatcher<any> {
 	 * the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a
 	 * transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows.
 	 */
-	customDepthMaterial: THREE.Material;
+	customDepthMaterial: IMaterial;
 
 	/**
 	 * Same as customDepthMaterial, but used with PointLight.
 	 */
-	customDistanceMaterial: THREE.Material;
+	customDistanceMaterial: IMaterial;
 
 	/**
 	 * Used to check whether this or derived classes are Object3Ds. Default is true.
@@ -4140,24 +6232,24 @@ export interface IObject3D extends IEventDispatcher<any> {
 	 * Calls before rendering object
 	 */
 	onBeforeRender: (
-		renderer: THREE.WebGLRenderer,
-		scene: THREE.Scene,
-		camera: THREE.Camera,
-		geometry: THREE.BufferGeometry,
-		material: THREE.Material,
-		group: THREE.Group
+		renderer: IWebGLRenderer,
+		scene: IScene,
+		camera: ICamera,
+		geometry: IBufferGeometry,
+		material: IMaterial,
+		group: IGroup
 	) => void;
 
 	/**
 	 * Calls after rendering object
 	 */
 	onAfterRender: (
-		renderer: THREE.WebGLRenderer,
-		scene: THREE.Scene,
-		camera: THREE.Camera,
-		geometry: THREE.BufferGeometry,
-		material: THREE.Material,
-		group: THREE.Group
+		renderer: IWebGLRenderer,
+		scene: IScene,
+		camera: ICamera,
+		geometry: IBufferGeometry,
+		material: IMaterial,
+		group: IGroup
 	) => void;
 
 	/**
@@ -4165,29 +6257,29 @@ export interface IObject3D extends IEventDispatcher<any> {
 	 */
 	applyMatrix4(matrix: IMatrix4): void;
 
-	applyQuaternion(quaternion: THREE.Quaternion): this;
+	applyQuaternion(quaternion: IQuaternion): this;
 
-	setRotationFromAxisAngle(axis: THREE.Vector3, angle: number): void;
+	setRotationFromAxisAngle(axis: IVector3, angle: number): void;
 
-	setRotationFromEuler(euler: THREE.Euler): void;
+	setRotationFromEuler(euler: IEuler): void;
 
 	setRotationFromMatrix(m: IMatrix4): void;
 
-	setRotationFromQuaternion(q: THREE.Quaternion): void;
+	setRotationFromQuaternion(q: IQuaternion): void;
 
 	/**
 	 * Rotate an object along an axis in object space. The axis is assumed to be normalized.
 	 * @param axis	A normalized vector in object space.
 	 * @param angle	The angle in radians.
 	 */
-	rotateOnAxis(axis: THREE.Vector3, angle: number): this;
+	rotateOnAxis(axis: IVector3, angle: number): this;
 
 	/**
 	 * Rotate an object along an axis in world space. The axis is assumed to be normalized. Method Assumes no rotated parent.
 	 * @param axis	A normalized vector in object space.
 	 * @param angle	The angle in radians.
 	 */
-	rotateOnWorldAxis(axis: THREE.Vector3, angle: number): this;
+	rotateOnWorldAxis(axis: IVector3, angle: number): this;
 
 	/**
 	 *
@@ -4211,7 +6303,7 @@ export interface IObject3D extends IEventDispatcher<any> {
 	 * @param axis	A normalized vector in object space.
 	 * @param distance	The distance to translate.
 	 */
-	translateOnAxis(axis: THREE.Vector3, distance: number): this;
+	translateOnAxis(axis: IVector3, distance: number): this;
 
 	/**
 	 * Translates object along x axis by distance.
@@ -4235,19 +6327,19 @@ export interface IObject3D extends IEventDispatcher<any> {
 	 * Updates the vector from local space to world space.
 	 * @param vector A local vector.
 	 */
-	localToWorld(vector: THREE.Vector3): IVector3;
+	localToWorld(vector: IVector3): IVector3;
 
 	/**
 	 * Updates the vector from world space to local space.
 	 * @param vector A world vector.
 	 */
-	worldToLocal(vector: THREE.Vector3): IVector3;
+	worldToLocal(vector: IVector3): IVector3;
 
 	/**
 	 * Rotates object to face point in space.
 	 * @param vector A world vector to look at.
 	 */
-	lookAt(vector: THREE.Vector3 | number, y?: number, z?: number): void;
+	lookAt(vector: IVector3 | number, y?: number, z?: number): void;
 
 	/**
 	 * Adds object as child of this object.
@@ -4272,7 +6364,7 @@ export interface IObject3D extends IEventDispatcher<any> {
 	/**
 	 * Adds object as a child of this, while maintaining the object's world transform.
 	 */
-	attach(object: THREE.Object3D): this;
+	attach(object: IObject3D): this;
 
 	/**
 	 * Searches through the object's children and returns the first with a matching id.
@@ -4288,18 +6380,18 @@ export interface IObject3D extends IEventDispatcher<any> {
 
 	getObjectByProperty(name: string, value: string): IObject3D | undefined;
 
-	getWorldPosition(target: THREE.Vector3): IVector3;
-	getWorldQuaternion(target: THREE.Quaternion): IQuaternion;
-	getWorldScale(target: THREE.Vector3): IVector3;
-	getWorldDirection(target: THREE.Vector3): IVector3;
+	getWorldPosition(target: IVector3): IVector3;
+	getWorldQuaternion(target: IQuaternion): IQuaternion;
+	getWorldScale(target: IVector3): IVector3;
+	getWorldDirection(target: IVector3): IVector3;
 
-	raycast(raycaster: THREE.Raycaster, intersects: THREE.Intersection[]): void;
+	raycast(raycaster: IRaycaster, intersects: IIntersection[]): void;
 
-	traverse(callback: (object: THREE.Object3D) => any): void;
+	traverse(callback: (object: IObject3D) => any): void;
 
-	traverseVisible(callback: (object: THREE.Object3D) => any): void;
+	traverseVisible(callback: (object: IObject3D) => any): void;
 
-	traverseAncestors(callback: (object: THREE.Object3D) => any): void;
+	traverseAncestors(callback: (object: IObject3D) => any): void;
 
 	/**
 	 * Updates local transform.
@@ -4354,7 +6446,593 @@ export interface ICamera extends IObject3D {
 
 	readonly isCamera: true;
 
-	getWorldDirection(target: THREE.Vector3): IVector3;
+	getWorldDirection(target: IVector3): IVector3;
 
 	updateMatrixWorld(force?: boolean): void;
+}
+
+/**
+ * Camera with orthographic projection
+ *
+ * see {@link https://github.com/mrdoob/three.js/blob/master/src/cameras/OrthographicCamera.js|src/cameras/OrthographicCamera.js}
+ *
+ * @example
+ * const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+ * scene.add( camera );
+ */
+export interface IOrthographicCamera extends ICamera {
+	type: 'OrthographicCamera';
+
+	readonly isOrthographicCamera: true;
+
+	/**
+	 * @default 1
+	 */
+	zoom: number;
+
+	/**
+	 * @default null
+	 */
+	view: null | {
+		enabled: boolean;
+		fullWidth: number;
+		fullHeight: number;
+		offsetX: number;
+		offsetY: number;
+		width: number;
+		height: number;
+	};
+
+	/**
+	 * Camera frustum left plane.
+	 * @default -1
+	 */
+	left: number;
+
+	/**
+	 * Camera frustum right plane.
+	 * @default 1
+	 */
+	right: number;
+
+	/**
+	 * Camera frustum top plane.
+	 * @default 1
+	 */
+	top: number;
+
+	/**
+	 * Camera frustum bottom plane.
+	 * @default -1
+	 */
+	bottom: number;
+
+	/**
+	 * Camera frustum near plane.
+	 * @default 0.1
+	 */
+	near: number;
+
+	/**
+	 * Camera frustum far plane.
+	 * @default 2000
+	 */
+	far: number;
+
+	/**
+	 * Updates the camera projection matrix. Must be called after change of parameters.
+	 */
+	updateProjectionMatrix(): void;
+	setViewOffset(
+		fullWidth: number,
+		fullHeight: number,
+		offsetX: number,
+		offsetY: number,
+		width: number,
+		height: number
+	): void;
+	clearViewOffset(): void;
+	toJSON(meta?: any): any;
+}
+
+/**
+ * Camera with perspective projection.
+ *
+ * @source https://github.com/mrdoob/three.js/blob/master/src/cameras/PerspectiveCamera.js
+ */
+export interface IPerspectiveCamera extends ICamera {
+	type: 'PerspectiveCamera';
+
+	readonly isPerspectiveCamera: true;
+
+	/**
+	 * @default 1
+	 */
+	zoom: number;
+
+	/**
+	 * Camera frustum vertical field of view, from bottom to top of view, in degrees.
+	 * @default 50
+	 */
+	fov: number;
+
+	/**
+	 * Camera frustum aspect ratio, window width divided by window height.
+	 * @default 1
+	 */
+	aspect: number;
+
+	/**
+	 * Camera frustum near plane.
+	 * @default 0.1
+	 */
+	near: number;
+
+	/**
+	 * Camera frustum far plane.
+	 * @default 2000
+	 */
+	far: number;
+
+	/**
+	 * @default 10
+	 */
+	focus: number;
+
+	/**
+	 * @default null
+	 */
+	view: null | {
+		enabled: boolean;
+		fullWidth: number;
+		fullHeight: number;
+		offsetX: number;
+		offsetY: number;
+		width: number;
+		height: number;
+	};
+
+	/**
+	 * @default 35
+	 */
+	filmGauge: number;
+
+	/**
+	 * @default 0
+	 */
+	filmOffset: number;
+
+	setFocalLength(focalLength: number): void;
+	getFocalLength(): number;
+	getEffectiveFOV(): number;
+	getFilmWidth(): number;
+	getFilmHeight(): number;
+
+	/**
+	 * Sets an offset in a larger frustum. This is useful for multi-window or multi-monitor/multi-machine setups.
+	 * For example, if you have 3x2 monitors and each monitor is 1920x1080 and the monitors are in grid like this:
+	 *
+	 * +---+---+---+
+	 * | A | B | C |
+	 * +---+---+---+
+	 * | D | E | F |
+	 * +---+---+---+
+	 *
+	 * then for each monitor you would call it like this:
+	 *
+	 * const w = 1920;
+	 * const h = 1080;
+	 * const fullWidth = w * 3;
+	 * const fullHeight = h * 2;
+	 *
+	 * // A
+	 * camera.setViewOffset( fullWidth, fullHeight, w * 0, h * 0, w, h );
+	 * // B
+	 * camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 0, w, h );
+	 * // C
+	 * camera.setViewOffset( fullWidth, fullHeight, w * 2, h * 0, w, h );
+	 * // D
+	 * camera.setViewOffset( fullWidth, fullHeight, w * 0, h * 1, w, h );
+	 * // E
+	 * camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 1, w, h );
+	 * // F
+	 * camera.setViewOffset( fullWidth, fullHeight, w * 2, h * 1, w, h ); Note there is no reason monitors have to be the same size or in a grid.
+	 *
+	 * @param fullWidth full width of multiview setup
+	 * @param fullHeight full height of multiview setup
+	 * @param x horizontal offset of subcamera
+	 * @param y vertical offset of subcamera
+	 * @param width width of subcamera
+	 * @param height height of subcamera
+	 */
+	setViewOffset(
+		fullWidth: number,
+		fullHeight: number,
+		x: number,
+		y: number,
+		width: number,
+		height: number
+	): void;
+	clearViewOffset(): void;
+
+	/**
+	 * Updates the camera projection matrix. Must be called after change of parameters.
+	 */
+	updateProjectionMatrix(): void;
+	toJSON(meta?: any): any;
+
+	/**
+	 * @deprecated Use {@link PerspectiveCamera#setFocalLength .setFocalLength()} and {@link PerspectiveCamera#filmGauge .filmGauge} instead.
+	 */
+	setLens(focalLength: number, frameHeight?: number): void;
+}
+
+export interface ICubeCamera extends IObject3D {
+	type: 'CubeCamera';
+
+	renderTarget: IWebGLCubeRenderTarget;
+
+	update(renderer: IWebGLRenderer, scene: IScene): void;
+}
+
+export interface IStereoCamera extends ICamera {
+	type: 'StereoCamera';
+
+	/**
+	 * @default 1
+	 */
+	aspect: number;
+
+	/**
+	 * @default 0.064
+	 */
+	eyeSep: number;
+
+	cameraL: IPerspectiveCamera;
+	cameraR: IPerspectiveCamera;
+
+	update(camera: IPerspectiveCamera): void;
+}
+
+export interface IArrayCamera extends IPerspectiveCamera {
+	/**
+	 * @default []
+	 */
+	cameras: IPerspectiveCamera[];
+	readonly isArrayCamera: true;
+}
+
+export interface ILightShadow {
+	camera: ICamera;
+
+	/**
+	 * @default 0
+	 */
+	bias: number;
+
+	/**
+	 * @default 0
+	 */
+	normalBias: number;
+
+	/**
+	 * @default 1
+	 */
+	radius: number;
+
+	/**
+	 * @default 8
+	 */
+	blurSamples: number;
+
+	/**
+	 * @default new THREE.Vector2( 512, 512 )
+	 */
+	mapSize: IVector2;
+
+	/**
+	 * @default null
+	 */
+	map: IWebGLRenderTarget;
+
+	/**
+	 * @default null
+	 */
+	mapPass: IWebGLRenderTarget;
+
+	/**
+	 * @default new THREE.Matrix4()
+	 */
+	matrix: IMatrix4;
+
+	/**
+	 * @default true
+	 */
+	autoUpdate: boolean;
+
+	/**
+	 * @default false
+	 */
+	needsUpdate: boolean;
+
+	copy(source: ILightShadow): this;
+	clone(recursive?: boolean): this;
+	toJSON(): any;
+	getFrustum(): number;
+	updateMatrices(light: ILight, viewportIndex?: number): void;
+	getViewport(viewportIndex: number): IVector4;
+	getFrameExtents(): IVector2;
+	dispose(): void;
+}
+
+/**
+ * Abstract base class for lights.
+ */
+export interface ILight extends IObject3D {
+	/**
+	 * @default 'Light'
+	 */
+	type: string;
+
+	color: IColor;
+
+	/**
+	 * @default 1
+	 */
+	intensity: number;
+	readonly isLight: true;
+
+	shadow: ILightShadow;
+	/**
+	 * @deprecated Use shadow.camera.fov instead.
+	 */
+	shadowCameraFov: any;
+	/**
+	 * @deprecated Use shadow.camera.left instead.
+	 */
+	shadowCameraLeft: any;
+	/**
+	 * @deprecated Use shadow.camera.right instead.
+	 */
+	shadowCameraRight: any;
+	/**
+	 * @deprecated Use shadow.camera.top instead.
+	 */
+	shadowCameraTop: any;
+	/**
+	 * @deprecated Use shadow.camera.bottom instead.
+	 */
+	shadowCameraBottom: any;
+	/**
+	 * @deprecated Use shadow.camera.near instead.
+	 */
+	shadowCameraNear: any;
+	/**
+	 * @deprecated Use shadow.camera.far instead.
+	 */
+	shadowCameraFar: any;
+	/**
+	 * @deprecated Use shadow.bias instead.
+	 */
+	shadowBias: any;
+	/**
+	 * @deprecated Use shadow.mapSize.width instead.
+	 */
+	shadowMapWidth: any;
+	/**
+	 * @deprecated Use shadow.mapSize.height instead.
+	 */
+	shadowMapHeight: any;
+
+	dispose(): void;
+}
+
+export interface IMesh<
+	TGeometry extends IBufferGeometry = THREE.BufferGeometry,
+	TMaterial extends IMaterial | IMaterial[] = THREE.Material | THREE.Material[]
+> extends IObject3D {
+	geometry: TGeometry;
+	material: TMaterial;
+	morphTargetInfluences?: number[] | undefined;
+	morphTargetDictionary?: { [key: string]: number } | undefined;
+	readonly isMesh: true;
+	type: string;
+	updateMorphTargets(): void;
+	raycast(raycaster: IRaycaster, intersects: IIntersection[]): void;
+}
+
+export interface IBone extends IObject3D {
+	readonly isBone: true;
+	type: 'Bone';
+}
+
+export interface IGroup extends IObject3D {
+	type: 'Group';
+	readonly isGroup: true;
+}
+
+/**
+ * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/InstancedBufferAttribute.js|src/core/InstancedBufferAttribute.js}
+ */
+export interface IInstancedBufferAttribute extends IBufferAttribute {
+	/**
+	 * @default 1
+	 */
+	meshPerAttribute: number;
+}
+
+export interface IInstancedMesh<
+	TGeometry extends IBufferGeometry = THREE.BufferGeometry,
+	TMaterial extends IMaterial | IMaterial[] = THREE.Material | THREE.Material[]
+> extends IMesh<TGeometry, TMaterial> {
+	count: number;
+	instanceColor: null | IInstancedBufferAttribute;
+	instanceMatrix: IInstancedBufferAttribute;
+	readonly isInstancedMesh: true;
+
+	getColorAt(index: number, color: IColor): void;
+	getMatrixAt(index: number, matrix: IMatrix4): void;
+	setColorAt(index: number, color: IColor): void;
+	setMatrixAt(index: number, matrix: IMatrix4): void;
+	dispose(): void;
+}
+
+export interface ILine<
+	TGeometry extends IBufferGeometry = THREE.BufferGeometry,
+	TMaterial extends IMaterial | IMaterial[] = THREE.Material | THREE.Material[]
+> extends IObject3D {
+	geometry: TGeometry;
+	material: TMaterial;
+
+	type: 'Line' | 'LineLoop' | 'LineSegments' | string;
+	readonly isLine: true;
+
+	morphTargetInfluences?: number[] | undefined;
+	morphTargetDictionary?: { [key: string]: number } | undefined;
+
+	computeLineDistances(): this;
+	raycast(raycaster: IRaycaster, intersects: IIntersection[]): void;
+	updateMorphTargets(): void;
+}
+/**
+ * A class for displaying points. The points are rendered by the WebGLRenderer using gl.POINTS.
+ */
+export interface IPoints<
+	TGeometry extends IBufferGeometry = THREE.BufferGeometry,
+	TMaterial extends IMaterial | IMaterial[] = THREE.Material | THREE.Material[]
+> extends IObject3D {
+	type: 'Points';
+	morphTargetInfluences?: number[] | undefined;
+	morphTargetDictionary?: { [key: string]: number } | undefined;
+	readonly isPoints: true;
+
+	/**
+	 * An instance of BufferGeometry, where each vertex designates the position of a particle in the system.
+	 */
+	geometry: TGeometry;
+
+	/**
+	 * An instance of Material, defining the object's appearance. Default is a PointsMaterial with randomised colour.
+	 */
+	material: TMaterial;
+
+	raycast(raycaster: IRaycaster, intersects: IIntersection[]): void;
+	updateMorphTargets(): void;
+}
+
+export interface ILineLoop<
+	TGeometry extends IBufferGeometry = THREE.BufferGeometry,
+	TMaterial extends IMaterial | IMaterial[] = THREE.Material | THREE.Material[]
+> extends ILine<TGeometry, TMaterial> {
+	type: 'LineLoop';
+	readonly isLineLoop: true;
+}
+
+export interface ILineSegments<
+	TGeometry extends IBufferGeometry = THREE.BufferGeometry,
+	TMaterial extends IMaterial | IMaterial[] = THREE.Material | THREE.Material[]
+> extends ILine<TGeometry, TMaterial> {
+	/**
+	 * @default 'LineSegments'
+	 */
+	type: 'LineSegments' | string;
+	readonly isLineSegments: true;
+}
+
+export interface ILOD extends IObject3D {
+	type: 'LOD';
+	levels: Array<{ distance: number; object: IObject3D }>;
+	autoUpdate: boolean;
+	readonly isLOD: true;
+
+	addLevel(object: IObject3D, distance?: number): this;
+	getCurrentLevel(): number;
+	getObjectForDistance(distance: number): IObject3D | null;
+	raycast(raycaster: IRaycaster, intersects: IIntersection[]): void;
+	update(camera: ICamera): void;
+	toJSON(meta: any): any;
+
+	/**
+	 * @deprecated Use {@link LOD#levels .levels} instead.
+	 */
+	objects: any[];
+}
+
+/**
+ * A class for displaying points. The points are rendered by the WebGLRenderer using gl.POINTS.
+ */
+export interface Points<
+	TGeometry extends IBufferGeometry = THREE.BufferGeometry,
+	TMaterial extends IMaterial | IMaterial[] = THREE.Material | THREE.Material[]
+> extends IObject3D {
+	type: 'Points';
+	morphTargetInfluences?: number[] | undefined;
+	morphTargetDictionary?: { [key: string]: number } | undefined;
+	readonly isPoints: true;
+
+	/**
+	 * An instance of BufferGeometry, where each vertex designates the position of a particle in the system.
+	 */
+	geometry: TGeometry;
+
+	/**
+	 * An instance of Material, defining the object's appearance. Default is a PointsMaterial with randomised colour.
+	 */
+	material: TMaterial;
+
+	raycast(raycaster: IRaycaster, intersects: IIntersection[]): void;
+	updateMorphTargets(): void;
+}
+
+export interface ISkeleton {
+	uuid: string;
+	bones: IBone[];
+	boneInverses: IMatrix4[];
+	boneMatrices: Float32Array;
+	boneTexture: null | IDataTexture;
+	boneTextureSize: number;
+	frame: number;
+
+	init(): void;
+	calculateInverses(): void;
+	computeBoneTexture(): this;
+	pose(): void;
+	update(): void;
+	clone(): ISkeleton;
+	getBoneByName(name: string): undefined | IBone;
+	dispose(): void;
+
+	/**
+	 * @deprecated This property has been removed completely.
+	 */
+	useVertexTexture: boolean;
+}
+
+export interface ISkinnedMesh<
+	TGeometry extends IBufferGeometry = THREE.BufferGeometry,
+	TMaterial extends IMaterial | IMaterial[] = THREE.Material | THREE.Material[]
+> extends IMesh<TGeometry, TMaterial> {
+	bindMode: string;
+	bindMatrix: IMatrix4;
+	bindMatrixInverse: IMatrix4;
+	skeleton: ISkeleton;
+	readonly isSkinnedMesh: true;
+
+	bind(skeleton: ISkeleton, bindMatrix?: IMatrix4): void;
+	pose(): void;
+	normalizeSkinWeights(): void;
+	updateMatrixWorld(force?: boolean): void;
+	boneTransform(index: number, target: IVector3): IVector3;
+}
+
+export interface ISprite extends IObject3D {
+	type: 'Sprite';
+	readonly isSprite: true;
+
+	geometry: IBufferGeometry;
+	material: ISpriteMaterial;
+	center: IVector2;
+
+	raycast(raycaster: IRaycaster, intersects: IIntersection[]): void;
+	copy(source: this): this;
 }

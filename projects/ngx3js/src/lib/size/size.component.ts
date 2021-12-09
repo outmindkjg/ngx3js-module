@@ -8,6 +8,7 @@ import {
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Size component.
@@ -185,7 +186,7 @@ export class SizeComponent
 		this.needUpdate = true;
 	}
 
-	private size: THREE.Vector2 = null;
+	private size: THREE_CORE.IVector2 = null;
 
 	/**
 	 * Applys changes3d
@@ -213,7 +214,7 @@ export class SizeComponent
 		return this.getSize() as any;
 	}
 
-	public getSize(): THREE.Vector2 {
+	public getSize(): THREE_CORE.IVector2 {
 		if (this.size === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.size = new THREE.Vector2(this.getWidth(), this.getHeight());

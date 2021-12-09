@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { ThreeUtil, CurvesParameters } from '../../interface';
+import * as THREE_CORE from './../../threejs-library/three-core';
+
 /**
  * Curves circle
  *
@@ -68,7 +70,7 @@ export class CurvesCircle extends THREE.Curve<THREE.Vector3> {
 	 * @param optionalTarget
 	 * @returns
 	 */
-	public getPoint(t: number, optionalTarget: THREE.Vector3) {
+	public getPoint(t: number, optionalTarget: THREE_CORE.IVector3) {
 		const point = optionalTarget || new THREE.Vector3();
 		t = 2 * Math.PI * t;
 		const radius =

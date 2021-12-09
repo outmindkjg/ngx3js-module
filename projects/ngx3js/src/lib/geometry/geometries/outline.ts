@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * The Outline geometry.
@@ -15,7 +16,7 @@ export class NgxOutlineGeometry extends THREE.WireframeGeometry {
 	 * @param [thetaStart=0]
 	 * @param [thetaLength=Math.PI * 2]
 	 */
-	constructor(geometry: THREE.BufferGeometry, scale: number = 1) {
+	constructor(geometry: THREE_CORE.IBufferGeometry, scale: number = 1) {
 		super(geometry);
 		this.type = 'OutlineGeometry';
 		if (scale !== 1) {

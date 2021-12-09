@@ -7,6 +7,7 @@ import {
 import { ThreeColor, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Lensflareelement component.
@@ -117,7 +118,7 @@ export class LensflareelementComponent
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): THREE.Texture {
+	public getTexture(): THREE_CORE.ITexture {
 		return AbstractTextureComponent.getTextureImage(
 			ThreeUtil.getTypeSafe(this.image)
 		);

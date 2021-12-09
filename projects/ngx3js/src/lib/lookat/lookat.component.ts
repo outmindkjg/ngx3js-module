@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { TagAttributes, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Lookat component.
@@ -103,13 +104,13 @@ export class LookatComponent
 	/**
 	 * The Lookat of lookat component
 	 */
-	private lookat: THREE.Vector3 = null;
+	private lookat: THREE_CORE.IVector3 = null;
 
 	/**
 	 * The Object3d of lookat component
 	 */
 	private _object3d: {
-		[key: string]: THREE.Object3D | { target: THREE.Vector3 };
+		[key: string]: THREE_CORE.IObject3D | { target: THREE_CORE.IVector3 };
 	} = {};
 
 	/**
@@ -171,10 +172,10 @@ export class LookatComponent
 	 * Synks object3d
 	 * @param [lookat]
 	 */
-	public synkObject3d(lookat: THREE.Vector3 = null, key: string = null) {
+	public synkObject3d(lookat: THREE_CORE.IVector3 = null, key: string = null) {
 		if (ThreeUtil.isNotNull(lookat) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._object3d)) {
-				const object3dList: (THREE.Object3D | { target: THREE.Vector3 })[] = [];
+				const object3dList: (THREE_CORE.IObject3D | { target: THREE_CORE.IVector3 })[] = [];
 				if (ThreeUtil.isNotNull(key)) {
 					if (ThreeUtil.isNotNull(this._object3d[key])) {
 						object3dList.push(this._object3d[key]);
@@ -194,8 +195,9 @@ export class LookatComponent
 					) {
 						if (object3d instanceof THREE.Object3D) {
 							object3d.lookAt(lookat);
-						} else if (ThreeUtil.isNotNull(object3d.target)) {
-							object3d.target.set(lookat.x, lookat.y, lookat.z);
+						} else if (object3d !== null && object3d !== undefined) {
+							const objectTraget : any = object3d;
+							objectTraget.target.set(lookat.x, lookat.y, lookat.z);
 							const object3dAny: any = object3d;
 							if (ThreeUtil.isNotNull(object3dAny['update'])) {
 								object3dAny['update']();
@@ -273,8 +275,8 @@ export class LookatComponent
 	 * Gets look at
 	 * @returns look at
 	 */
-	private _getLookAt(): THREE.Vector3 {
-		let lookat: THREE.Vector3 = null;
+	private _getLookAt(): THREE_CORE.IVector3 {
+		let lookat: THREE_CORE.IVector3 = null;
 		if (this.refer !== null) {
 			this.unSubscribeRefer('refer');
 			lookat = ThreeUtil.getLookAt(this.refer);
@@ -306,7 +308,7 @@ export class LookatComponent
 	 * Gets look at
 	 * @returns look at
 	 */
-	public getLookAt(): THREE.Vector3 {
+	public getLookAt(): THREE_CORE.IVector3 {
 		if (this._needUpdate) {
 			this.needUpdate = false;
 			this.lookat = this._getLookAt();

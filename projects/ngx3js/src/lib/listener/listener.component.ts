@@ -96,7 +96,7 @@ export class ListenerComponent
 	/**
 	 * The Listener of listener component
 	 */
-	private listener: THREE.AudioListener = null;
+	private listener: THREE_CORE.IAudioListener = null;
 
 	/**
 	 * Sets parent
@@ -156,7 +156,7 @@ export class ListenerComponent
 	 * Gets listener
 	 * @returns listener
 	 */
-	public getListener(): THREE.AudioListener {
+	public getListener(): THREE_CORE.IAudioListener {
 		if (this.listener === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.listener = new THREE.AudioListener();

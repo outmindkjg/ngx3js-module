@@ -198,7 +198,7 @@ export class AudioComponent
 	/**
 	 * The Audio of audio component
 	 */
-	private audio: THREE.Audio<any> = null;
+	private audio: THREE_CORE.IAudio<any> = null;
 
 	/**
 	 * The Video of audio component
@@ -208,17 +208,17 @@ export class AudioComponent
 	/**
 	 * The Listener of audio component
 	 */
-	private listener: THREE.AudioListener = null;
+	private listener: THREE_CORE.IAudioListener = null;
 
 	/**
 	 * The Analyser of audio component
 	 */
-	private analyser: THREE.AudioAnalyser = null;
+	private analyser: THREE_CORE.IAudioAnalyser = null;
 
 	/**
 	 * Audio loader of audio component
 	 */
-	private static audioLoader: THREE.AudioLoader = null;
+	private static audioLoader: THREE_CORE.IAudioLoader = null;
 
 	/**
 	 * Loads audio
@@ -256,7 +256,7 @@ export class AudioComponent
 	 * @param listener
 	 * @param renderer
 	 */
-	public setListener(listener: THREE.AudioListener, renderer: any) {
+	public setListener(listener: THREE_CORE.IAudioListener, renderer: any) {
 		if (this.listener !== listener) {
 			this.listener = listener;
 			this._renderer = renderer;
@@ -268,7 +268,7 @@ export class AudioComponent
 	 * Gets listener
 	 * @returns listener
 	 */
-	private getListener(): THREE.AudioListener {
+	private getListener(): THREE_CORE.IAudioListener {
 		if (this.listener !== null) {
 			return this.listener;
 		} else {
@@ -292,18 +292,18 @@ export class AudioComponent
 	/**
 	 * Loaded video texture of audio component
 	 */
-	private loadedVideoTexture: THREE.VideoTexture = null;
+	private loadedVideoTexture: THREE_CORE.IVideoTexture = null;
 
 	/**
 	 * Loaded audio texture of audio component
 	 */
-	private loadedAudioTexture: THREE.DataTexture = null;
+	private loadedAudioTexture: THREE_CORE.IDataTexture = null;
 
 	/**
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): THREE.Texture {
+	public getTexture(): THREE_CORE.ITexture {
 		this.getAudio();
 		if (this.video !== null) {
 			if (this.loadedVideoTexture === null) {
@@ -365,7 +365,7 @@ export class AudioComponent
 	 *                  See [this page](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize) for details.
 	 * @returns analyser
 	 */
-	public getAnalyser(fftSize?: number): THREE.AudioAnalyser {
+	public getAnalyser(fftSize?: number): THREE_CORE.IAudioAnalyser {
 		if (this.analyser === null && this.audio !== null) {
 			this.analyser = new THREE.AudioAnalyser(
 				this.audio,

@@ -12,6 +12,7 @@ import {
 } from '../../chart.abstract';
 import { ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * The Chart Bar component.
@@ -101,47 +102,47 @@ export class ChartBarComponent
 	/**
 	 * The Line of chart bar component
 	 */
-	private _line: THREE.Object3D = null;
+	private _line: THREE_CORE.IObject3D = null;
 
 	/**
 	 * The Material of chart bar component
 	 */
-	private _material: THREE.Material = null;
+	private _material: THREE_CORE.IMaterial = null;
 
 	/**
 	 * The Geometry of chart bar component
 	 */
-	private _geometry: THREE.BufferGeometry = null;
+	private _geometry: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Material border of chart bar component
 	 */
-	private _materialBorder: THREE.LineBasicMaterial = null;
+	private _materialBorder: THREE_CORE.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry border of chart bar component
 	 */
-	private _geometryBorder: THREE.BufferGeometry = null;
+	private _geometryBorder: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Material point of chart bar component
 	 */
-	private _materialPoint: THREE.Material = null;
+	private _materialPoint: THREE_CORE.IMaterial = null;
 
 	/**
 	 * Geometry point of chart bar component
 	 */
-	private _geometryPoint: THREE.BufferGeometry = null;
+	private _geometryPoint: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Material point border of chart bar component
 	 */
-	private _materialPointBorder: THREE.LineBasicMaterial = null;
+	private _materialPointBorder: THREE_CORE.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry point border of chart bar component
 	 */
-	private _geometryPointBorder: THREE.BufferGeometry = null;
+	private _geometryPointBorder: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Applys changes3d
@@ -278,7 +279,7 @@ export class ChartBarComponent
 			this._material = new THREE.MeshPhongMaterial({
 				color: ThreeUtil.getColorSafe(options.backgroundColor, 0xff0000),
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
-				side: this.getSide('double'),
+				side: ThreeUtil.getSideSafe('double'),
 				transparent: true,
 			});
 			const wallMesh = new THREE.Mesh(this._geometry, this._material);
@@ -304,14 +305,14 @@ export class ChartBarComponent
 			this._line.add(borderMesh);
 			this.addUpdateAttributes(this._geometryBorder, lineUpdateAttributes);
 			let pointerInfo = this.getPointShape();
-			let pointer: THREE.Object3D = pointerInfo.mesh;
+			let pointer: THREE_CORE.IObject3D = pointerInfo.mesh;
 			this._geometryPoint = pointerInfo.geometry;
 			this._materialPoint = pointerInfo.material;
 			this._geometryPointBorder = pointerInfo.geometryBorder;
 			this._materialPointBorder = pointerInfo.materialBorder;
 			upPoints.forEach((p, i) => {
 				const x = i * lineStepX + lineBaseX;
-				const position: THREE.Vector3 = new THREE.Vector3(x, middleY, baseZ);
+				const position: THREE_CORE.IVector3 = new THREE.Vector3(x, middleY, baseZ);
 				const point = pointer.clone(true);
 				point.position.copy(position);
 				point.castShadow = true;

@@ -340,7 +340,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The texture size
 	 */
-	@Input() public textureSize: THREE.Vector2 | SizeComponent = null;
+	@Input() public textureSize: THREE_CORE.IVector2 | SizeComponent = null;
 
 	/**
 	 * The clip bias of Reflector
@@ -550,24 +550,24 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The makeMatrix of mesh component
 	 */
-	@Input() public makeMatrix: (matrix4: THREE.Matrix4, index?: number) => void =
+	@Input() public makeMatrix: (matrix4: THREE_CORE.IMatrix4, index?: number) => void =
 		null;
 
 	/**
 	 * The makeColor of mesh component
 	 */
-	@Input() public makeColor: (color: THREE.Color, index?: number) => void =
+	@Input() public makeColor: (color: THREE_CORE.IColor, index?: number) => void =
 		null;
 
 	/**
 	 * The refer texture
 	 */
-	@Input() public texture: AbstractTextureComponent | THREE.Texture = null;
+	@Input() public texture: AbstractTextureComponent | THREE_CORE.ITexture = null;
 
 	/**
 	 * The curve
 	 */
-	@Input() public curve: CurveComponent | THREE.Curve<THREE.Vector3> = null;
+	@Input() public curve: CurveComponent | THREE_CORE.ICurve<THREE_CORE.IVector3> = null;
 
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
@@ -772,7 +772,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets sky sun position
 	 * @returns sky sun position
 	 */
-	private getSkySunPosition(): THREE.Euler {
+	private getSkySunPosition(): THREE_CORE.IEuler {
 		return new THREE.Euler(
 			ThreeUtil.getAngleSafe(this.skyboxSunX, 0),
 			ThreeUtil.getAngleSafe(this.skyboxSunY, 0),
@@ -832,7 +832,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns color
 	 */
-	private getColor(def?: ThreeColor): THREE.Color {
+	private getColor(def?: ThreeColor): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.color, this.waterColor, def);
 	}
 
@@ -841,7 +841,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns height
 	 */
-	private getTextureSize(width?: number, height?: number): THREE.Vector2 {
+	private getTextureSize(width?: number, height?: number): THREE_CORE.IVector2 {
 		if (ThreeUtil.isNotNull(this.textureSize)) {
 			if (this.textureSize instanceof THREE.Vector2) {
 				return this.textureSize;
@@ -872,7 +872,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns sun color
 	 */
-	private getSunColor(def?: string | number): THREE.Color {
+	private getSunColor(def?: string | number): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.sunColor, def);
 	}
 
@@ -881,7 +881,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [orgUniforms]
 	 */
 	private getUndateUniforms(orgUniforms?: {
-		[uniform: string]: THREE.IUniform;
+		[uniform: string]: THREE_CORE.IUniform;
 	}): void {
 		const uniforms = ThreeUtil.getTypeSafe(this.uniforms, {});
 		Object.entries(uniforms).forEach(([key, value]) => {
@@ -944,8 +944,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns sun direction
 	 */
-	private getSunDirection(def?: THREE.Vector3): THREE.Vector3 {
-		let sunDirection: THREE.Vector3 = null;
+	private getSunDirection(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+		let sunDirection: THREE_CORE.IVector3 = null;
 		if (ThreeUtil.isNotNull(this.sunDirection)) {
 			sunDirection = ThreeUtil.getVector3VSafe(this.sunDirection, def);
 		} else {
@@ -981,7 +981,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns sky color
 	 */
-	private getSkyColor(def?: string | number): THREE.Color {
+	private getSkyColor(def?: string | number): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.skyColor, def);
 	}
 
@@ -990,7 +990,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns water color
 	 */
-	private getWaterColor(def?: string | number): THREE.Color {
+	private getWaterColor(def?: string | number): THREE_CORE.IColor {
 		return ThreeUtil.getColorSafe(this.waterColor, def);
 	}
 
@@ -1010,45 +1010,6 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 */
 	private getDivisions(def?: number): number {
 		return ThreeUtil.getTypeSafe(this.divisions, def);
-	}
-
-	/**
-	 * Gets usage
-	 * @param [def]
-	 * @returns usage
-	 */
-	private getUsage(def?: string): THREE.Usage {
-		const usage = ThreeUtil.getTypeSafe(this.usage, def, '');
-		switch (usage.toLowerCase()) {
-			case 'streamdrawusage':
-			case 'streamdraw':
-				return THREE.StreamDrawUsage;
-			case 'staticreadusage':
-			case 'staticread':
-				return THREE.StaticReadUsage;
-			case 'dynamicreadusage':
-			case 'dynamicread':
-				return THREE.DynamicReadUsage;
-			case 'streamreadusage':
-			case 'streamread':
-				return THREE.StreamReadUsage;
-			case 'staticcopyusage':
-			case 'staticcopy':
-				return THREE.StaticCopyUsage;
-			case 'dynamiccopyusage':
-			case 'dynamiccopy':
-				return THREE.DynamicCopyUsage;
-			case 'streamcopyusage':
-			case 'streamcopy':
-				return THREE.StreamCopyUsage;
-			case 'staticdrawusage':
-			case 'staticdraw':
-				return THREE.StaticDrawUsage;
-			case 'dynamicdrawusage':
-			case 'dynamicdraw':
-			default:
-				return THREE.DynamicDrawUsage;
-		}
 	}
 
 	/**
@@ -1092,7 +1053,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns flow direction
 	 */
-	private getFlowDirection(def?: THREE.Vector2): THREE.Vector2 {
+	private getFlowDirection(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			this.flowDirectionX,
 			this.flowDirectionY,
@@ -1145,18 +1106,9 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	}
 
 	/**
-	 * Gets encoding
-	 * @param [def]
-	 * @returns encoding
-	 */
-	private getEncoding(def?: string): THREE.TextureEncoding {
-		return ThreeUtil.getTextureEncodingSafe(this.encoding, def, '');
-	}
-
-	/**
 	 * The Clips of mesh component
 	 */
-	private clips: THREE.AnimationClip[] | any = null;
+	private clips: THREE_CORE.IAnimationClip[] | any = null;
 
 	/**
 	 * Clip mesh of mesh component
@@ -1180,7 +1132,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets material
 	 * @returns material
 	 */
-	public getMaterial(): THREE.Material {
+	public getMaterial(): THREE_CORE.IMaterial {
 		if (this.mesh !== null && this.object3d instanceof THREE.Mesh) {
 			if (Array.isArray(this.object3d.material)) {
 				return this.object3d.material[0];
@@ -1195,13 +1147,13 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets curve
 	 * @returns curve
 	 */
-	public getCurve(): THREE.Curve<THREE.Vector3> {
+	public getCurve(): THREE_CORE.ICurve<THREE_CORE.IVector3>{
 		if (this.curve !== null) {
 			this.unSubscribeRefer('curve');
 			if (this.curve instanceof THREE.Curve) {
 				return this.curve;
-			} else {
-				const curve = this.curve.getCurve() as THREE.Curve<THREE.Vector3>;
+			} else if (this.curve instanceof CurveComponent) {
+				const curve = this.curve.getCurve() as THREE_CORE.ICurve<THREE_CORE.IVector3>;
 				this.subscribeRefer(
 					'curve',
 					ThreeUtil.getSubscribe(
@@ -1216,7 +1168,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 			}
 		}
 		if (this.curveList !== null && this.curveList.length > 0) {
-			return this.curveList.first.getCurve() as THREE.Curve<THREE.Vector3>;
+			return this.curveList.first.getCurve() as THREE_CORE.ICurve<THREE_CORE.IVector3>;
 		}
 		return null;
 	}
@@ -1230,9 +1182,9 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 */
 	private getTexture(
 		type: string,
-		alterTexture?: string | THREE.Texture | AbstractTextureComponent,
+		alterTexture?: string | THREE_CORE.ITexture | AbstractTextureComponent,
 		defImage?: string
-	): THREE.Texture {
+	): THREE_CORE.ITexture {
 		if (this.texture !== null && this.texture !== undefined) {
 			const texture = ThreeUtil.getTexture(this.texture, type, false);
 			if (ThreeUtil.isNotNull(texture)) {
@@ -1252,7 +1204,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 				return alterTexture;
 			} else if (alterTexture instanceof AbstractTextureComponent) {
 				return alterTexture.getTexture();
-			} else {
+			} else if (typeof alterTexture === 'string'){
 				return AbstractTextureComponent.getTextureImage(alterTexture);
 			}
 		}
@@ -1613,7 +1565,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets clips
 	 * @returns clips
 	 */
-	public getClips(): THREE.AnimationClip[] | any {
+	public getClips(): THREE_CORE.IAnimationClip[] | any {
 		return this.clips;
 	}
 
@@ -1621,7 +1573,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets uniforms
 	 * @returns uniforms
 	 */
-	public getUniforms(): { [uniform: string]: THREE.IUniform } {
+	public getUniforms(): { [uniform: string]: THREE_CORE.IUniform } {
 		const material: any = this.getMaterial();
 		if (
 			ThreeUtil.isNotNull(material) &&
@@ -1659,14 +1611,14 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 			}
 			this.unSubscribeRefer('customGeometry');
 			this.unSubscribeRefer('textureSize');
-			let geometry: THREE.BufferGeometry = null;
+			let geometry: THREE_CORE.IBufferGeometry = null;
 			if (
 				(this.geometryList !== null && this.geometryList.length > 0) ||
 				this.geometry !== null
 			) {
 				geometry = this.getGeometry();
 			}
-			let basemesh: any = null;
+			let basemesh: THREE_CORE.IObject3D = null;
 			switch (this.type.toLowerCase()) {
 				case 'skybox':
 					const skyboxSize = this.getSkyboxSize(1500);
@@ -1688,8 +1640,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						case 'box':
 						case 'sphere':
 						default:
-							let skyGeometry: THREE.BufferGeometry = null;
-							let skyMaterial: THREE.Material = null;
+							let skyGeometry: THREE_CORE.IBufferGeometry = null;
+							let skyMaterial: THREE_CORE.IMaterial = null;
 							switch (this.skyboxType.toLowerCase()) {
 								case 'box':
 									skyGeometry = new THREE.BoxGeometry(
@@ -1783,7 +1735,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						textureHeight: reflectorSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
-						encoding: this.getEncoding(),
+						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					this.subscribeRefer(
 						'textureSize',
@@ -1806,7 +1758,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						textureHeight: reflectorRTTSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
-						encoding: this.getEncoding(),
+						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					this.subscribeRefer(
 						'textureSize',
@@ -1829,7 +1781,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						textureHeight: refractorSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
-						encoding: this.getEncoding(),
+						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					const refractorMaterial = refractor.material as THREE.ShaderMaterial;
 					Object.entries(refractorMaterial.uniforms).forEach(([key, value]) => {
@@ -1934,7 +1886,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							this.normalMap1,
 							'textures/water/Water_2_M_Normal.jpg'
 						),
-						encoding: this.getEncoding(),
+						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					this.getUndateUniforms(water2.material['uniforms']);
 					this.subscribeRefer(
@@ -1991,7 +1943,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							this.colors,
 							'rand'
 						);
-						const instancedFlowColors: THREE.Color[] = [];
+						const instancedFlowColors: THREE_CORE.IColor[] = [];
 						if (typeof instancedFlowColor === 'string') {
 							switch (instancedFlowColor.toLowerCase()) {
 								case 'null':
@@ -2137,7 +2089,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						this.getCount(1)
 					);
 					if (ThreeUtil.isNotNull(this.usage)) {
-						instanced.instanceMatrix.setUsage(this.getUsage('dynamicdraw'));
+						instanced.instanceMatrix.setUsage(ThreeUtil.getUsageSafe(this.usage,'dynamicdraw'));
 					}
 					if (ThreeUtil.isNotNull(this.makeMatrix)) {
 						const matrix = new THREE.Matrix4();
@@ -2379,7 +2331,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 				case 'interactive':
 				case 'interactivegroup':
 					const renderer = ThreeUtil.getRenderer() as THREE.WebGL1Renderer;
-					let camera: THREE.Camera = null;
+					let camera: THREE_CORE.ICamera = null;
 					if (ThreeUtil.isNotNull(this.sharedCamera)) {
 						if (this.sharedCamera.getCamera) {
 							camera = this.sharedCamera.getCamera();
@@ -2425,10 +2377,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						this.localStorageService.getObject(
 							this.storageName,
 							(
-								loadedMesh: THREE.Object3D,
-								clips?: THREE.AnimationClip[] | any,
-								geometry?: THREE.BufferGeometry,
-								morphTargets?: THREE.BufferAttribute[],
+								loadedMesh: THREE_CORE.IObject3D,
+								clips?: THREE_CORE.IAnimationClip[] | any,
+								geometry?: THREE_CORE.IBufferGeometry,
+								morphTargets?: THREE_CORE.IBufferAttribute[],
 								source?: any
 							) => {
 								if (ThreeUtil.isNull(loadedMesh)) {
@@ -2510,7 +2462,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						const mesh = this.sharedMesh.getObject3d();
 						const clips = mesh.userData.clips;
 						const clipMesh = mesh.userData.refTarget || mesh;
-						let clipMeshClone: THREE.Object3D = null;
+						let clipMeshClone: THREE_CORE.IObject3D = null;
 						this.setUserData('clips', clips);
 						this.setUserData('storageSource', clipMesh.userData.storageSource);
 						if (ThreeUtil.isNotNull(clipMesh)) {
@@ -2725,10 +2677,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	}
 
 	private createPlaneStencilGroup(
-		geometry: THREE.BufferGeometry,
-		plane: THREE.Plane,
+		geometry: THREE_CORE.IBufferGeometry,
+		plane: THREE_CORE.IPlane,
 		renderOrder: number
-	): THREE.Group {
+	): THREE_CORE.IGroup {
 		const group = new THREE.Group();
 		const baseMat = new THREE.MeshBasicMaterial();
 		baseMat.depthWrite = false;

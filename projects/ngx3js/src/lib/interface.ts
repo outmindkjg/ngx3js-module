@@ -28,7 +28,7 @@ export interface ApplyMatrix4 {
 	 * @param matrix
 	 * @returns matrix4
 	 */
-	applyMatrix4(matrix: THREE.Matrix4): any;
+	applyMatrix4(matrix: THREE_CORE.IMatrix4): any;
 }
 
 /**
@@ -112,7 +112,7 @@ export interface StorageOption {
 	vmdUrl?: string | string[];
 
 	/** ref object */
-	object?: THREE.SkinnedMesh | THREE.Camera | any;
+	object?: THREE_CORE.ISkinnedMesh | THREE_CORE.ICamera | any;
 
 	/** drawFillShapes */
 	drawFillShapes?: boolean;
@@ -171,7 +171,7 @@ export interface StorageExportOption {
 	embedImages?: boolean;
 
 	/** animations */
-	animations?: THREE.AnimationClip[];
+	animations?: THREE_CORE.IAnimationClip[];
 
 	/** forceIndices */
 	forceIndices?: boolean;
@@ -197,7 +197,7 @@ export interface StorageExportOption {
  */
 export type ThreeUniform =
 	| { type: string; value: any; options?: any }
-	| THREE.IUniform;
+	| THREE_CORE.IUniform;
 
 /**
  * ThreeUniforms
@@ -207,7 +207,7 @@ export type ThreeUniforms = { [key: string]: ThreeUniform };
 /**
  * ThreeTexture
  */
-export type ThreeTexture = string | THREE.Texture | TextureOption | any;
+export type ThreeTexture = string | THREE_CORE.ITexture | TextureOption | any;
 
 /**
  * Three Color
@@ -219,7 +219,7 @@ export type ThreeTexture = string | THREE.Texture | TextureOption | any;
  * number 0xffffff
  * THREE.Color
  */
-export type ThreeColor = string | number | THREE.Color;
+export type ThreeColor = string | number | THREE_CORE.IColor;
 
 /**
  * Three Vector
@@ -258,12 +258,12 @@ export interface ThreeFace {
  * Loaded object
  */
 export interface LoadedObject {
-	object?: THREE.Object3D;
-	material?: THREE.Material | any;
-	geometry?: THREE.BufferGeometry;
-	texture?: THREE.Texture;
-	clips?: THREE.AnimationClip[] | any;
-	morphTargets?: THREE.BufferAttribute[];
+	object?: THREE_CORE.IObject3D;
+	material?: THREE_CORE.IMaterial | any;
+	geometry?: THREE_CORE.IBufferGeometry;
+	texture?: THREE_CORE.ITexture;
+	clips?: THREE_CORE.IAnimationClip[] | any;
+	morphTargets?: THREE_CORE.IBufferAttribute[];
 	source?: any;
 }
 
@@ -401,10 +401,10 @@ export interface CssStyle {
 	transition?: string | string[];
 
 	/** The background shorthand CSS property sets all background style properties at once, such as color, image, origin and size, or repeat method. */
-	background?: ThreeColor | THREE.Vector4;
+	background?: ThreeColor | THREE_CORE.IVector4;
 
 	/** The background-color CSS property sets the background color of an element. */
-	backgroundColor?: ThreeColor | THREE.Vector4;
+	backgroundColor?: ThreeColor | THREE_CORE.IVector4;
 
 	/** The background-image CSS property sets one or more background images on an element. */
 	backgroundImage?: string;
@@ -473,7 +473,7 @@ export interface CssStyle {
 	border?: number | string;
 
 	/** The border-color shorthand CSS property sets the color of an element's border. */
-	borderColor?: ThreeColor | THREE.Vector4;
+	borderColor?: ThreeColor | THREE_CORE.IVector4;
 
 	/** The border-style shorthand CSS property sets the line style for all four sides of an element's border. */
 	borderStyle?: string;
@@ -521,7 +521,7 @@ export interface CssStyle {
 	opacity?: number;
 
 	/** The color CSS property sets the foreground color value of an element's text and text decorations, and sets the <currentcolor> value. currentcolor may be used as an indirect value on other properties and is the default for other color properties, such as border-color. */
-	color?: ThreeColor | THREE.Vector4;
+	color?: ThreeColor | THREE_CORE.IVector4;
 
 	/** The font-family CSS property specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
 	fontFamily?: string;
@@ -835,12 +835,12 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	/**
 	 * The Scene of base component
 	 */
-	public sceneObject3d: THREE.Scene = null;
+	public sceneObject3d: THREE_CORE.IScene = null;
 
 	/**
 	 * The Scene of base component
 	 */
-	public sceneChildren: THREE.Object3D[] = null;
+	public sceneChildren: THREE_CORE.IObject3D[] = null;
 
 	/**
 	 * Sets scene
@@ -860,7 +860,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	/**
 	 * The Camera Object
 	 */
-	public cameraObject3d: THREE.Camera = null;
+	public cameraObject3d: THREE_CORE.ICamera = null;
 
 	/**
 	 * Sets camera
@@ -989,7 +989,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	public setMesh(mesh: MeshComponent) {
 		this.mesh = mesh;
 		if (this.mesh !== null) {
-			this.meshObject3d = this.mesh.getObject3d() as THREE_CORE.IObject3D;
+			this.meshObject3d = this.mesh.getObject3d();
 			this.meshChildren = this.meshObject3d.children;
 			window.setTimeout(() => {
 				this.updateGuiController();
@@ -1496,15 +1496,17 @@ export class ThreeUtil {
 	 * Gets pmrem generator
 	 * @returns pmrem generator
 	 */
-	public static getPmremGenerator(): THREE.PMREMGenerator {
-		return new THREE.PMREMGenerator(this.getRenderer() as THREE.WebGLRenderer);
+	public static getPmremGenerator(): THREE_CORE.IPMREMGenerator {
+		return new THREE.PMREMGenerator(
+			this.getRenderer() as THREE_CORE.IWebGLRenderer
+		);
 	}
 
 	/**
 	 * Gets renderer
 	 * @returns renderer
 	 */
-	public static getRenderer(): THREE.Renderer {
+	public static getRenderer(): THREE_CORE.IRenderer {
 		if (this.lastRenderer !== null) {
 			return this.lastRenderer.getRenderer();
 		} else {
@@ -1516,7 +1518,7 @@ export class ThreeUtil {
 	 * Gets renderer size
 	 * @returns renderer size
 	 */
-	public static getRendererSize(): THREE.Vector2 {
+	public static getRendererSize(): THREE_CORE.IVector2 {
 		if (this.lastRenderer !== null) {
 			return this.lastRenderer.getSize();
 		} else {
@@ -1528,7 +1530,7 @@ export class ThreeUtil {
 	 * Gets size subscribe
 	 * @returns size subscribe
 	 */
-	public static getSizeSubscribe(): Observable<THREE.Vector2> {
+	public static getSizeSubscribe(): Observable<THREE_CORE.IVector2> {
 		if (this.lastRenderer !== null) {
 			return this.lastRenderer.sizeSubscribe();
 		} else {
@@ -1733,13 +1735,13 @@ export class ThreeUtil {
 	/**
 	 * The Manager of three util
 	 */
-	private static _manager: THREE.LoadingManager = null;
+	private static _manager: THREE_CORE.ILoadingManager = null;
 
 	/**
 	 * Gets loading manager
 	 * @returns loading manager
 	 */
-	public static getLoadingManager(): THREE.LoadingManager {
+	public static getLoadingManager(): THREE_CORE.ILoadingManager {
 		if (this._manager === null) {
 			this._manager = new THREE.LoadingManager(
 				() => {},
@@ -1806,7 +1808,7 @@ export class ThreeUtil {
 	 */
 	public static getColor(
 		color: ThreeColor | { r: number; g: number; b: number }
-	): THREE.Color {
+	): THREE_CORE.IColor {
 		if (this.isNotNull(color)) {
 			if (color instanceof THREE.Color) {
 				return color;
@@ -1840,7 +1842,7 @@ export class ThreeUtil {
 		g: number,
 		b: number,
 		color?: ThreeColor
-	): THREE.Color {
+	): THREE_CORE.IColor {
 		const colorObj = this.isNotNull(color)
 			? this.getColor(color)
 			: new THREE.Color(0x000000);
@@ -1867,7 +1869,7 @@ export class ThreeUtil {
 		s?: number,
 		l?: number,
 		color?: ThreeColor
-	): THREE.Color {
+	): THREE_CORE.IColor {
 		const colorObj = this.isNotNull(color)
 			? this.getColor(color)
 			: new THREE.Color(0x000000);
@@ -1932,7 +1934,7 @@ export class ThreeUtil {
 		color: ThreeColor,
 		altColor?: ThreeColor,
 		multiply?: number
-	): THREE.Color {
+	): THREE_CORE.IColor {
 		const safeColor = this.getColorSafe(color, altColor);
 		if (this.isNotNull(safeColor) && this.isNotNull(multiply)) {
 			safeColor.multiplyScalar(multiply);
@@ -2005,7 +2007,7 @@ export class ThreeUtil {
 		color: ThreeColor,
 		altColor?: ThreeColor,
 		nullColor?: ThreeColor
-	): THREE.Color {
+	): THREE_CORE.IColor {
 		const defColor = this.isNotNull(color)
 			? color
 			: this.isNotNull(altColor)
@@ -2067,7 +2069,7 @@ export class ThreeUtil {
 		color: ThreeColor,
 		alpha: number,
 		altColor?: ThreeColor
-	): THREE.Color | THREE.Vector4 {
+	): THREE_CORE.IColor | THREE_CORE.IVector4 {
 		const defColor = this.getColorSafe(color, altColor);
 		if (this.isNotNull(defColor)) {
 			if (this.isNotNull(alpha) && alpha >= 0 && alpha <= 1) {
@@ -2219,12 +2221,12 @@ export class ThreeUtil {
 	 * @returns vector2 vsafe
 	 */
 	public static getVector2VSafe(
-		v2: number[] | THREE.Vector2,
-		altValue?: THREE.Vector2
-	): THREE.Vector2 {
+		v2: number[] | THREE_CORE.IVector2,
+		altValue?: THREE_CORE.IVector2
+	): THREE_CORE.IVector2 {
 		if (v2 instanceof THREE.Vector2) {
 			return v2;
-		} else if (this.isNotNull(v2) && v2.length >= 2) {
+		} else if (Array.isArray(v2) && this.isNotNull(v2) && v2.length >= 2) {
 			return this.getVector2Safe(v2[0], v2[1], altValue);
 		}
 		return undefined;
@@ -2242,10 +2244,10 @@ export class ThreeUtil {
 	public static getVector2Safe(
 		x: number,
 		y: number,
-		altValue?: THREE.Vector2,
-		v2?: number[] | THREE.Vector2,
+		altValue?: THREE_CORE.IVector2,
+		v2?: number[] | THREE_CORE.IVector2,
 		isRequired?: boolean
-	): THREE.Vector2 {
+	): THREE_CORE.IVector2 {
 		const defValue =
 			this.isNotNull(x) || this.isNotNull(y)
 				? new THREE.Vector2(this.getTypeSafe(x, y), this.getTypeSafe(y, x))
@@ -2272,12 +2274,12 @@ export class ThreeUtil {
 	 * @returns vector3 vsafe
 	 */
 	public static getVector3VSafe(
-		v3: number[] | THREE.Vector3,
-		altValue?: THREE.Vector3
-	): THREE.Vector3 {
+		v3: number[] | THREE_CORE.IVector3,
+		altValue?: THREE_CORE.IVector3
+	): THREE_CORE.IVector3 {
 		if (v3 instanceof THREE.Vector3) {
 			return v3;
-		} else if (this.isNotNull(v3) && v3.length >= 3) {
+		} else if (Array.isArray(v3) && this.isNotNull(v3) && v3.length >= 3) {
 			return this.getVector3Safe(v3[0], v3[1], v3[2], altValue);
 		}
 		return undefined;
@@ -2297,10 +2299,10 @@ export class ThreeUtil {
 		x: number,
 		y: number,
 		z: number,
-		altValue?: THREE.Vector3,
-		v3?: number[] | THREE.Vector3,
+		altValue?: THREE_CORE.IVector3,
+		v3?: number[] | THREE_CORE.IVector3,
 		isRequired?: boolean
-	): THREE.Vector3 {
+	): THREE_CORE.IVector3 {
 		const defValue =
 			this.isNotNull(x) || this.isNotNull(y) || this.isNotNull(z)
 				? new THREE.Vector3(
@@ -2331,9 +2333,9 @@ export class ThreeUtil {
 	 * @returns matrix4 safe
 	 */
 	public static getMatrix4Safe(
-		obj: THREE.Object3D,
+		obj: THREE_CORE.IObject3D,
 		matrixType: string = 'maxtix'
-	): THREE.Matrix4 {
+	): THREE_CORE.IMatrix4 {
 		if (this.isNotNull(obj)) {
 			const anyObj: any = obj;
 			switch (matrixType.toLowerCase()) {
@@ -2376,9 +2378,9 @@ export class ThreeUtil {
 		x: number | string,
 		y: number | string,
 		z: number | string,
-		altValue?: THREE.Euler,
+		altValue?: THREE_CORE.IEuler,
 		isRequired?: boolean
-	): THREE.Euler {
+	): THREE_CORE.IEuler {
 		const defValue =
 			this.isNotNull(x) || this.isNotNull(y) || this.isNotNull(z)
 				? new THREE.Euler(
@@ -2499,7 +2501,7 @@ export class ThreeUtil {
 		altSide?: string,
 		def?: string
 	): THREE.Side {
-		const side = ThreeUtil.getTypeSafe(baseSide, altSide, def || '');
+		const side = this.getTypeSafe(baseSide, altSide, def || '');
 		switch (side.toLowerCase()) {
 			case 'backside':
 			case 'back':
@@ -2510,6 +2512,135 @@ export class ThreeUtil {
 			case 'frontside':
 			case 'front':
 				return THREE.FrontSide;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets shadow map type
+	 * @param [def]
+	 * @returns shadow map type
+	 */
+	 public static getShadowMapTypeSafe(baseShadowMapType : string , def?: string): THREE.ShadowMapType {
+		const shadowMapType = this.getTypeSafe(baseShadowMapType, def, '');
+		switch (shadowMapType.toLowerCase()) {
+			case 'basicshadowmap':
+			case 'basic':
+				return THREE.BasicShadowMap;
+			case 'pcfshadowmap':
+			case 'pcf':
+				return THREE.PCFShadowMap;
+			case 'vsmshadowmap':
+			case 'vsm':
+				return THREE.VSMShadowMap;
+			case 'pcfsoftshadowmap':
+			case 'pcfsoft':
+			default:
+				return THREE.PCFSoftShadowMap;
+		}
+	}
+
+	/**
+	 * Gets interpolation
+	 * @param [def]
+	 * @returns interpolation
+	 */
+	public static getInterpolationSafe(
+		baseInterpolation: string,
+		def?: string
+	): THREE.InterpolationModes {
+		const interpolation = this.getTypeSafe(baseInterpolation, def, '');
+		switch (interpolation.toLowerCase()) {
+			case 'interpolatediscrete':
+			case 'discrete':
+				return THREE.InterpolateDiscrete;
+			case 'interpolatelinear':
+			case 'linear':
+				return THREE.InterpolateLinear;
+			case 'interpolatesmooth':
+			case 'smooth':
+				return THREE.InterpolateSmooth;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets normal map type
+	 * @param [def]
+	 * @returns normal map type
+	 */
+	public static getNormalMapTypeSafe(
+		baseNormalMapType: string,
+		def?: string
+	): THREE.NormalMapTypes {
+		const normalMapType = ThreeUtil.getTypeSafe(baseNormalMapType, def, '');
+		switch (normalMapType.toLowerCase()) {
+			case 'tangentspace':
+				return THREE.TangentSpaceNormalMap;
+			case 'objectspace':
+				return THREE.ObjectSpaceNormalMap;
+		}
+		return undefined;
+	}
+	/**
+	 * Gets stencil func
+	 * @param [def]
+	 * @returns stencil func
+	 */
+	public static getStencilFuncSafe(
+		baseStencilFunc: string,
+		def?: string
+	): THREE.StencilFunc {
+		const stencilFunc = ThreeUtil.getTypeSafe(baseStencilFunc, def, '');
+		switch (stencilFunc.toLowerCase()) {
+			case 'never':
+				return THREE.NeverStencilFunc;
+			case 'less':
+				return THREE.LessStencilFunc;
+			case 'equal':
+				return THREE.EqualStencilFunc;
+			case 'lessequal':
+				return THREE.LessEqualStencilFunc;
+			case 'greater':
+				return THREE.GreaterStencilFunc;
+			case 'notequal':
+				return THREE.NotEqualStencilFunc;
+			case 'greaterequal':
+				return THREE.GreaterEqualStencilFunc;
+			case 'always':
+				return THREE.AlwaysStencilFunc;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets stencil fail
+	 * @param [def]
+	 * @returns stencil fail
+	 */
+	public static getStencilOpSafe(
+		baseStencilFail: string,
+		def?: string
+	): THREE.StencilOp {
+		const stencilFail = this.getTypeSafe(baseStencilFail, def, '');
+		switch (stencilFail.toLowerCase()) {
+			case 'zero':
+				return THREE.ZeroStencilOp;
+			case 'keep':
+				return THREE.KeepStencilOp;
+			case 'replace':
+				return THREE.ReplaceStencilOp;
+			case 'increment':
+				return THREE.IncrementStencilOp;
+			case 'decrement':
+				return THREE.DecrementStencilOp;
+			case 'incrementwrap':
+				return THREE.IncrementWrapStencilOp;
+			case 'decrementwrap':
+				return THREE.DecrementWrapStencilOp;
+			case 'invert':
+				return THREE.InvertStencilOp;
 		}
 		return undefined;
 	}
@@ -2558,6 +2689,179 @@ export class ThreeUtil {
 			case 'customblending':
 			case 'custom':
 				return THREE.CustomBlending;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets blend equation
+	 * @param [def]
+	 * @returns blend equation
+	 */
+	public static getBlendEquationSafe(
+		baseBlendEquation: string,
+		def?: string
+	): THREE.BlendingEquation {
+		const blendEquation = this.getTypeSafe(baseBlendEquation, def, '');
+		switch (blendEquation.toLowerCase()) {
+			case 'add':
+				return THREE.AddEquation;
+			case 'subtract':
+				return THREE.SubtractEquation;
+			case 'reversesubtract':
+				return THREE.ReverseSubtractEquation;
+			case 'min':
+				return THREE.MinEquation;
+			case 'max':
+				return THREE.MaxEquation;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Which blending to use when displaying objects with this material.
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.BlendingDstFactor
+	 * @see THREE.ZeroFactor - ZeroFactor , Zero
+	 * @see THREE.OneFactor - OneFactor , One
+	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
+	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
+	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
+	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
+	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
+	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
+	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
+	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
+	 *
+	 * @param [def]
+	 * @returns blend src
+	 */
+	public static getBlendDstSafe(
+		baseBlendSrc: string,
+		def?: string
+	): THREE.BlendingDstFactor {
+		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
+		switch (blendSrc.toLowerCase()) {
+			case 'zerofactor':
+			case 'zero':
+				return THREE.ZeroFactor;
+			case 'onefactor':
+			case 'one':
+				return THREE.OneFactor;
+			case 'srccolorfactor':
+			case 'srccolor':
+				return THREE.SrcColorFactor;
+			case 'oneminussrccolorfactor':
+			case 'oneminussrccolor':
+				return THREE.OneMinusSrcColorFactor;
+			case 'srcalphafactor':
+			case 'srcalpha':
+				return THREE.SrcAlphaFactor;
+			case 'oneminussrcalphafactor':
+			case 'oneminussrcalpha':
+				return THREE.OneMinusSrcAlphaFactor;
+			case 'dstalphafactor':
+			case 'dstalpha':
+				return THREE.DstAlphaFactor;
+			case 'oneminusdstalphafactor':
+			case 'oneminusdstalpha':
+				return THREE.OneMinusDstAlphaFactor;
+			case 'dstcolorfactor':
+			case 'dstcolor':
+				return THREE.DstColorFactor;
+			case 'oneminusdstcolorfactor':
+			case 'oneminusdstcolor':
+				return THREE.OneMinusDstColorFactor;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Which blending to use when displaying objects with this material.
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.BlendingDstFactor
+	 * @see THREE.ZeroFactor - ZeroFactor , Zero
+	 * @see THREE.OneFactor - OneFactor , One
+	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
+	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
+	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
+	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
+	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
+	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
+	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
+	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
+	 *
+	 * @param [def]
+	 * @returns blend src
+	 */
+	public static getBlendSrcSafe(
+		baseBlendSrc: string,
+		def?: string
+	): THREE.BlendingSrcFactor {
+		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
+		switch (blendSrc.toLowerCase()) {
+			case 'srcalphasaturatefactor':
+			case 'srcalphasaturate':
+				return THREE.SrcAlphaSaturateFactor;
+		}
+		return undefined;
+	}
+	/**
+	 * Gets depth func
+	 * @param [def]
+	 * @returns depth func
+	 */
+	public static getDepthModesSafe(
+		baseDepthFunc: string,
+		def?: string
+	): THREE.DepthModes {
+		const depthFunc = ThreeUtil.getTypeSafe(baseDepthFunc, def, '');
+		switch (depthFunc.toLowerCase()) {
+			case 'never':
+				return THREE.NeverDepth;
+			case 'always':
+				return THREE.AlwaysDepth;
+			case 'less':
+				return THREE.LessDepth;
+			case 'lessequal':
+				return THREE.LessEqualDepth;
+			case 'equal':
+				return THREE.EqualDepth;
+			case 'greaterequal':
+				return THREE.GreaterEqualDepth;
+			case 'greater':
+				return THREE.GreaterDepth;
+			case 'notequal':
+				return THREE.NotEqualDepth;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets precision
+	 * @param [def]
+	 * @returns precision
+	 */
+	public static getPrecisionSafe(
+		basePrecision: string,
+		def?: string
+	): 'highp' | 'mediump' | 'lowp' | null {
+		const precision = this.getTypeSafe(basePrecision, def, '');
+		switch (precision.toLowerCase()) {
+			case 'highp':
+				return 'highp';
+			case 'mediump':
+				return 'mediump';
+			case 'lowp':
+				return 'lowp';
 		}
 		return undefined;
 	}
@@ -2644,6 +2948,169 @@ export class ThreeUtil {
 	}
 
 	/**
+	 * Gets combine
+	 * @param [def]
+	 * @returns combine
+	 */
+	public static getCombineSafe(baseCombine : string, def?: string): THREE.Combine {
+		const combine = this.getTypeSafe(baseCombine, def, '');
+		switch (combine.toLowerCase()) {
+			case 'multiplyoperation':
+			case 'multiply':
+				return THREE.MultiplyOperation;
+			case 'mixoperation':
+			case 'mix':
+				return THREE.MixOperation;
+			case 'addoperation':
+			case 'add':
+				return THREE.AddOperation;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets depth packing
+	 * @param [def]
+	 * @returns depth packing
+	 */
+	public static getDepthPackingSafe(
+		baseDepthPacking: string,
+		def?: string
+	): THREE.DepthPackingStrategies {
+		const depthPacking = this.getTypeSafe(baseDepthPacking, def, '');
+		switch (depthPacking.toLowerCase()) {
+			case 'rgba':
+			case 'rgbadepth':
+				return THREE.RGBADepthPacking;
+			case 'basic':
+			case 'basicdepth':
+			default:
+				return THREE.BasicDepthPacking;
+		}
+	}
+
+	/**
+	 * Gets glsl version
+	 * @param [def]
+	 * @returns glsl version
+	 */
+	 public static getGlslVersionSafe(baseGlslVersion : string , def?: string): THREE.GLSLVersion {
+		const glslVersion = this.getTypeSafe(baseGlslVersion, def, '');
+		switch (glslVersion.toLowerCase()) {
+			case '1':
+			case 'gl1':
+			case 'glsl1':
+				return THREE.GLSL1;
+			case '3':
+			case 'gl3':
+			case 'glsl3':
+				return THREE.GLSL3;
+		}
+		return null;
+	}
+
+	/**
+	 * Gets blend mode
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.AnimationBlendMode
+	 * @see THREE.NormalAnimationBlendMode - NormalAnimationBlendMode, NormalAnimation, Normal
+	 * @see THREE.AdditiveAnimationBlendMode - AdditiveAnimationBlendMode, AdditiveAnimation, Additive
+	 *
+	 * @param [def]
+	 * @returns blend mode
+	 */
+	public static getBlendModeSafe(
+		baseBlendMode: string,
+		def?: string
+	): THREE.AnimationBlendMode {
+		const blendMode = this.getTypeSafe(baseBlendMode, def, '');
+		switch (blendMode.toLowerCase()) {
+			case 'normalanimationblendmode':
+			case 'normalanimation':
+			case 'normal':
+				return THREE.NormalAnimationBlendMode;
+			case 'additiveanimationblendmode':
+			case 'additiveanimation':
+			case 'additive':
+				return THREE.AdditiveAnimationBlendMode;
+		}
+		return THREE.NormalAnimationBlendMode;
+	}
+
+	/**
+	 * Gets loop
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.AnimationActionLoopStyles
+	 * @see THREE.LoopOnce - LoopOnce, Once
+	 * @see THREE.LoopRepeat - LoopRepeat, Repeat
+	 * @see THREE.LoopPingPong - LoopPingPong, PingPong
+	 *
+	 * @param [def]
+	 * @returns loop
+	 */
+	public static getLoopSafe(
+		baseLoop: string,
+		def?: string
+	): THREE.AnimationActionLoopStyles {
+		const loop = this.getTypeSafe(baseLoop, def, '');
+		switch (loop.toLowerCase()) {
+			case 'looponce':
+			case 'once':
+				return THREE.LoopOnce;
+			case 'looppingpong':
+			case 'pingpong':
+				return THREE.LoopPingPong;
+			case 'looprepeat':
+			case 'repeat':
+			default:
+				return THREE.LoopRepeat;
+		}
+	}
+
+	/**
+	 * Gets usage
+	 * @param [def]
+	 * @returns usage
+	 */
+	public static getUsageSafe(baseUsage: string, def?: string): THREE.Usage {
+		const usage = ThreeUtil.getTypeSafe(baseUsage, def, '');
+		switch (usage.toLowerCase()) {
+			case 'streamdrawusage':
+			case 'streamdraw':
+				return THREE.StreamDrawUsage;
+			case 'staticreadusage':
+			case 'staticread':
+				return THREE.StaticReadUsage;
+			case 'dynamicreadusage':
+			case 'dynamicread':
+				return THREE.DynamicReadUsage;
+			case 'streamreadusage':
+			case 'streamread':
+				return THREE.StreamReadUsage;
+			case 'staticcopyusage':
+			case 'staticcopy':
+				return THREE.StaticCopyUsage;
+			case 'dynamiccopyusage':
+			case 'dynamiccopy':
+				return THREE.DynamicCopyUsage;
+			case 'streamcopyusage':
+			case 'streamcopy':
+				return THREE.StreamCopyUsage;
+			case 'staticdrawusage':
+			case 'staticdraw':
+				return THREE.StaticDrawUsage;
+			case 'dynamicdrawusage':
+			case 'dynamicdraw':
+			default:
+				return THREE.DynamicDrawUsage;
+		}
+	}
+
+	/**
 	 * Gets texture data type safe
 	 *
 	 * Notice - case insensitive.
@@ -2722,14 +3189,14 @@ export class ThreeUtil {
 	 * @param [isRequired]
 	 * @returns object3d
 	 */
-	public static getObject3d<T extends THREE.Object3D>(
+	public static getObject3d<T extends THREE_CORE.IObject3D>(
 		object3d: any,
 		isRequired: boolean = true
 	): T {
 		if (object3d instanceof THREE.Object3D) {
 			return object3d as T;
 		} else if (this.isNotNull(object3d.getMesh)) {
-			const mesh: THREE.Object3D = object3d.getMesh();
+			const mesh: THREE_CORE.IObject3D = object3d.getMesh();
 			if (mesh !== null && this.isNotNull(mesh.userData.refTarget)) {
 				return mesh.userData.refTarget as T;
 			} else {
@@ -2761,7 +3228,7 @@ export class ThreeUtil {
 	 * @param mesh
 	 * @returns mesh find
 	 */
-	public static getMeshFind(mesh: any): THREE.Mesh {
+	public static getMeshFind(mesh: any): THREE_CORE.IMesh {
 		if (mesh instanceof THREE.Mesh) {
 			return mesh;
 		} else if (this.isNotNull(mesh.getHelper)) {
@@ -2774,7 +3241,7 @@ export class ThreeUtil {
 		if (mesh instanceof THREE.Mesh) {
 			return mesh;
 		} else if (mesh instanceof THREE.Group) {
-			let childMesh: THREE.Mesh = null;
+			let childMesh: THREE_CORE.IMesh = null;
 			mesh.children.forEach((child) => {
 				if (childMesh === null && child instanceof THREE.Mesh) {
 					childMesh = child;
@@ -2792,7 +3259,7 @@ export class ThreeUtil {
 	 * @param mesh
 	 * @returns mesh
 	 */
-	public static getMesh(mesh: any): THREE.Mesh {
+	public static getMesh(mesh: any): THREE_CORE.IMesh {
 		const findedMesh = this.getMeshFind(mesh);
 		if (findedMesh !== null) {
 			return findedMesh;
@@ -2805,7 +3272,7 @@ export class ThreeUtil {
 	 * @param light
 	 * @returns light
 	 */
-	public static getLight(light: any): THREE.Light {
+	public static getLight(light: any): THREE_CORE.ILight {
 		if (light instanceof THREE.Light) {
 			return light;
 		} else if (this.isNotNull(light)) {
@@ -2826,8 +3293,8 @@ export class ThreeUtil {
 	public static getMaterialByType(
 		material: any,
 		materialType?: string
-	): THREE.Material {
-		let matchedMat: THREE.Material = null;
+	): THREE_CORE.IMaterial {
+		let matchedMat: THREE_CORE.IMaterial = null;
 		if (this.isNotNull(materialType) && materialType != '') {
 			const matList = this.getMaterial(material);
 			if (Array.isArray(matList)) {
@@ -2866,7 +3333,9 @@ export class ThreeUtil {
 	 * @param material
 	 * @returns material
 	 */
-	public static getMaterial(material: any): THREE.Material | THREE.Material[] {
+	public static getMaterial(
+		material: any
+	): THREE_CORE.IMaterial | THREE_CORE.IMaterial[] {
 		if (material instanceof THREE.Material) {
 			return material;
 		} else if (Array.isArray(material)) {
@@ -2889,7 +3358,7 @@ export class ThreeUtil {
 	 * @param material
 	 * @returns material one
 	 */
-	public static getMaterialOne(material: any): THREE.Material {
+	public static getMaterialOne(material: any): THREE_CORE.IMaterial {
 		const materialList = this.getMaterial(material);
 		if (Array.isArray(materialList)) {
 			if (materialList.length > 0) {
@@ -2907,7 +3376,7 @@ export class ThreeUtil {
 	 * @param geometry
 	 * @returns geometry
 	 */
-	public static getGeometry(geometry: any): THREE.BufferGeometry {
+	public static getGeometry(geometry: any): THREE_CORE.IBufferGeometry {
 		if (this.isNotNull(geometry)) {
 			if (geometry instanceof THREE.BufferGeometry) {
 				return geometry;
@@ -3166,7 +3635,7 @@ export class ThreeUtil {
 		texture: any,
 		refType: string = 'map',
 		isRequired: boolean = true
-	): THREE.Texture {
+	): THREE_CORE.ITexture {
 		if (texture instanceof THREE.Texture) {
 			return texture;
 		} else if (
@@ -3217,7 +3686,7 @@ export class ThreeUtil {
 	 * @param position
 	 * @returns position
 	 */
-	public static getPosition(position: any): THREE.Vector3 {
+	public static getPosition(position: any): THREE_CORE.IVector3 {
 		if (this.isNotNull(position)) {
 			if (position instanceof THREE.Vector3) {
 				return position;
@@ -3260,7 +3729,7 @@ export class ThreeUtil {
 	 * @param rotation
 	 * @returns rotation
 	 */
-	public static getRotation(rotation: any): THREE.Euler {
+	public static getRotation(rotation: any): THREE_CORE.IEuler {
 		if (this.isNotNull(rotation)) {
 			if (rotation instanceof THREE.Euler) {
 				return rotation;
@@ -3303,7 +3772,7 @@ export class ThreeUtil {
 	 * @param scale
 	 * @returns scale
 	 */
-	public static getScale(scale: any): THREE.Vector3 {
+	public static getScale(scale: any): THREE_CORE.IVector3 {
 		if (this.isNotNull(scale)) {
 			if (scale instanceof THREE.Vector3) {
 				return scale;
@@ -3337,7 +3806,7 @@ export class ThreeUtil {
 	 * @param lookat
 	 * @returns look at
 	 */
-	public static getLookAt(lookat: any): THREE.Vector3 {
+	public static getLookAt(lookat: any): THREE_CORE.IVector3 {
 		if (this.isNotNull(lookat)) {
 			if (lookat instanceof THREE.Vector3) {
 				return lookat;
@@ -3379,7 +3848,7 @@ export class ThreeUtil {
 	 * @param texture
 	 * @returns true if texture loaded
 	 */
-	public static isTextureLoaded(texture: THREE.Texture): boolean {
+	public static isTextureLoaded(texture: THREE_CORE.ITexture): boolean {
 		if (
 			texture instanceof THREE.CubeTexture ||
 			(texture as any)['isCubeTexture']
@@ -4152,7 +4621,7 @@ export class ThreeUtil {
 export interface RendererTimer {
 	delta: number;
 	elapsedTime: number;
-	renderer?: THREE.Renderer;
+	renderer?: THREE_CORE.IRenderer;
 	event?: RendererEvent;
 }
 
@@ -4163,10 +4632,10 @@ export interface RendererInfo {
 	timer: RendererTimer;
 	innerWidth: number;
 	innerHeight: number;
-	renderer: THREE.Renderer;
+	renderer: THREE_CORE.IRenderer;
 	cssRenderer: any;
-	cameras: THREE.Camera[];
-	scenes: THREE.Scene[];
+	cameras: THREE_CORE.ICamera[];
+	scenes: THREE_CORE.IScene[];
 }
 
 /**
@@ -4174,21 +4643,21 @@ export interface RendererInfo {
  */
 export interface RendererEvent {
 	type: string;
-	client?: THREE.Vector2;
+	client?: THREE_CORE.IVector2;
 	clientX?: number;
 	clientY?: number;
-	offset?: THREE.Vector2;
+	offset?: THREE_CORE.IVector2;
 	offsetX?: number;
 	offsetY?: number;
-	rate?: THREE.Vector2;
+	rate?: THREE_CORE.IVector2;
 	rateX?: number;
 	rateY?: number;
 	width?: number;
 	height?: number;
 	nativeElement?: HTMLElement;
-	size?: THREE.Vector2;
-	mouse?: THREE.Vector2;
-	direction?: THREE.Vector2;
+	size?: THREE_CORE.IVector2;
+	mouse?: THREE_CORE.IVector2;
+	direction?: THREE_CORE.IVector2;
 	keyInfo?: {
 		code: string;
 		ctrlKey: boolean;
@@ -4197,7 +4666,7 @@ export interface RendererEvent {
 		key: string;
 		timeStamp: number;
 		timeRepeat: number;
-		xy: THREE.Vector2;
+		xy: THREE_CORE.IVector2;
 	};
 	event: any;
 }
@@ -4216,7 +4685,7 @@ export class ThreeClock extends THREE.Clock {
 	 * @returns timer
 	 */
 	public getTimer(
-		renderer: THREE.Renderer,
+		renderer: THREE_CORE.IRenderer,
 		event: RendererEvent
 	): RendererTimer {
 		const delta = this.getDelta();
@@ -4412,13 +4881,13 @@ export class ThreeGeometryCustom {
 	/**
 	 * The Geometry of three geometry custom
 	 */
-	protected geometry: THREE.BufferGeometry = null;
+	protected geometry: THREE_CORE.IBufferGeometry = null;
 
 	/**
 	 * Inits geometry
 	 * @returns geometry
 	 */
-	public initGeometry(): THREE.BufferGeometry {
+	public initGeometry(): THREE_CORE.IBufferGeometry {
 		return new THREE.BufferGeometry();
 	}
 
@@ -4426,7 +4895,7 @@ export class ThreeGeometryCustom {
 	 * Sets geometry
 	 * @param geometry
 	 */
-	public setGeometry(geometry: THREE.BufferGeometry) {
+	public setGeometry(geometry: THREE_CORE.IBufferGeometry) {
 		if (ThreeUtil.isNotNull(this.scale)) {
 			const scale = ThreeUtil.getTypeSafe(this.scale, 1);
 			geometry.scale(scale, scale, scale);
@@ -4438,7 +4907,7 @@ export class ThreeGeometryCustom {
 	 * Gets geometry
 	 * @returns geometry
 	 */
-	public getGeometry(): THREE.BufferGeometry {
+	public getGeometry(): THREE_CORE.IBufferGeometry {
 		if (this.geometry === null) {
 			this.setGeometry(this.initGeometry());
 		}

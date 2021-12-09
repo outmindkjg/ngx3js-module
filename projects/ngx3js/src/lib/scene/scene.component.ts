@@ -176,7 +176,7 @@ export class SceneComponent
 	/**
 	 * The Scene of scene component
 	 */
-	private scene: THREE.Scene = null;
+	private scene: THREE_CORE.IScene = null;
 
 	/**
 	 * The Renderer of scene component
@@ -203,7 +203,7 @@ export class SceneComponent
 	 * Gets three renderer
 	 * @returns three renderer
 	 */
-	public getThreeRenderer(): THREE.Renderer {
+	public getThreeRenderer(): THREE_CORE.IRenderer {
 		if (ThreeUtil.isNotNull(this.renderer)) {
 			return this.renderer.getRenderer();
 		} else {
@@ -216,7 +216,7 @@ export class SceneComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
 		return this.getScene() as any;
 	}
 
@@ -260,7 +260,7 @@ export class SceneComponent
 	 * @param name
 	 * @returns texture option
 	 */
-	private getTextureOption(map: ThreeTexture, name: string): THREE.Texture {
+	private getTextureOption(map: ThreeTexture, name: string): THREE_CORE.ITexture {
 		if (ThreeUtil.isNotNull(map)) {
 			if (typeof map === 'string') {
 				const texture = AbstractTextureComponent.getTextureImageOption(
@@ -517,7 +517,7 @@ export class SceneComponent
 	 * Gets scene
 	 * @returns scene
 	 */
-	public getScene(): THREE.Scene {
+	public getScene(): THREE_CORE.IScene {
 		if (this.scene === null || this._needUpdate) {
 			this.getSceneDumpy();
 		}
@@ -527,7 +527,7 @@ export class SceneComponent
 				this.scene = new THREE.Scene();
 				this.localStorageService.getScene(
 					this.storageName,
-					(scene: THREE.Scene) => {
+					(scene: THREE_CORE.IScene) => {
 						this.scene = scene;
 						this.setObject3d(scene as any);
 					}
@@ -543,7 +543,7 @@ export class SceneComponent
 	 * Gets scene dumpy
 	 * @returns scene dumpy
 	 */
-	public getSceneDumpy(): THREE.Scene {
+	public getSceneDumpy(): THREE_CORE.IScene {
 		if (this.scene === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.scene = new THREE.Scene();

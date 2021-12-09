@@ -380,12 +380,12 @@ export class MixerComponent
 	/**
 	 * The Model of mixer component
 	 */
-	private model: THREE.Object3D | THREE.AnimationObjectGroup = null;
+	private model: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup = null;
 
 	/**
 	 * The Clips of mixer component
 	 */
-	private clips: THREE.AnimationClip[] | any = null;
+	private clips: THREE_CORE.IAnimationClip[] | any = null;
 
 	private oldLoaded: {
 		refTarget: any;
@@ -397,7 +397,7 @@ export class MixerComponent
 	 * @returns true if parent
 	 */
 	public setParent(
-		parent: THREE_CORE.IObject3D | THREE.AnimationObjectGroup
+		parent: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup
 	): boolean {
 		if (
 			super.setParent(parent) ||
@@ -435,9 +435,9 @@ export class MixerComponent
 	 * @returns target
 	 */
 	private getTarget(
-		target?: THREE_CORE.IObject3D | THREE.AnimationObjectGroup
-	): THREE.Object3D | THREE.AnimationObjectGroup {
-		let targetMesh: THREE.Object3D | THREE.AnimationObjectGroup = null;
+		target?: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup
+	): THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup {
+		let targetMesh: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup = null;
 		if (ThreeUtil.isNotNull(target)) {
 			if (
 				target instanceof THREE.AnimationObjectGroup ||
@@ -464,7 +464,7 @@ export class MixerComponent
 	 * Checks model
 	 * @param parent
 	 */
-	public checkModel(parent: THREE_CORE.IObject3D | THREE.AnimationObjectGroup) {
+	public checkModel(parent: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup) {
 		const model = this.getTarget(parent);
 		if (ThreeUtil.isNotNull(model)) {
 			if (model instanceof THREE.Object3D) {
@@ -483,8 +483,8 @@ export class MixerComponent
 	 * @param clips
 	 */
 	private setModel(
-		model: THREE.Object3D | THREE.AnimationObjectGroup,
-		clips: THREE.AnimationClip[] | any
+		model: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup,
+		clips: THREE_CORE.IAnimationClip[] | any
 	) {
 		if (this.model !== model || this.clips !== clips) {
 			this.model = model;
@@ -595,7 +595,7 @@ export class MixerComponent
 	/**
 	 * Mmd animation helpers of mixer component
 	 */
-	private mmdAnimationHelpers: THREE.Object3D[] = [];
+	private mmdAnimationHelpers: THREE_CORE.IObject3D[] = [];
 
 	/**
 	 * Gets mmd animation helper
@@ -613,7 +613,7 @@ export class MixerComponent
 	 * Gets mmd animation helper object3 d
 	 * @returns mmd animation helper object3 d
 	 */
-	public getMmdAnimationHelperObject3D(): THREE.Object3D[] {
+	public getMmdAnimationHelperObject3D(): THREE_CORE.IObject3D[] {
 		return this.mmdAnimationHelpers;
 	}
 
@@ -661,7 +661,7 @@ export class MixerComponent
 					});
 					this.mmdAnimationHelpers = [];
 					if (ThreeUtil.isNotNull(this.mmdHelpers)) {
-						let rootObject3d: THREE.Object3D = skinnedMesh;
+						let rootObject3d: THREE_CORE.IObject3D = skinnedMesh;
 						while (rootObject3d.parent) {
 							rootObject3d = rootObject3d.parent;
 						}

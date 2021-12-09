@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { CurvesNormal, CurveUtils } from '../../curve/curveUtils';
 import { RendererTimer, ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractSubscribeComponent } from '../../subscribe.abstract';
+import * as THREE_CORE from './../../threejs-library/three-core';
 
 /**
  * Control object item
@@ -11,7 +12,7 @@ export interface ControlObjectItem {
 	/**
 	 *
 	 */
-	object3d?: THREE.Object3D;
+	object3d?: THREE_CORE.IObject3D;
 
 	/**
 	 *
@@ -21,38 +22,38 @@ export interface ControlObjectItem {
 	/**
 	 *
 	 */
-	position?: THREE.Vector3;
+	position?: THREE_CORE.IVector3;
 
 	/**
 	 *
 	 */
-	rotation?: THREE.Euler;
+	rotation?: THREE_CORE.IEuler;
 
 	/**
 	 *
 	 */
-	scale?: THREE.Vector3;
+	scale?: THREE_CORE.IVector3;
 
 	/**
 	 *
 	 */
-	material?: THREE.Material;
+	material?: THREE_CORE.IMaterial;
 
 	/**
 	 *
 	 */
-	uniforms?: { [uniform: string]: THREE.IUniform };
+	uniforms?: { [uniform: string]: THREE_CORE.IUniform };
 
 	/**
 	 *
 	 */
-	geometry?: THREE.BufferGeometry;
+	geometry?: THREE_CORE.IBufferGeometry;
 
 	/**
 	 *
 	 */
 	attributes?: {
-		[name: string]: THREE.BufferAttribute | THREE.InterleavedBufferAttribute;
+		[name: string]: THREE_CORE.IBufferAttribute | THREE_CORE.IInterleavedBufferAttribute;
 	};
 
 	/**
@@ -60,8 +61,8 @@ export interface ControlObjectItem {
 	 */
 	morphAttributes?: {
 		[name: string]: (
-			| THREE.BufferAttribute
-			| THREE.InterleavedBufferAttribute
+			| THREE_CORE.IBufferAttribute
+			| THREE_CORE.IInterleavedBufferAttribute
 		)[];
 	};
 }
@@ -333,7 +334,7 @@ export class ControllerItemComponent
 	 * Gets curve
 	 * @returns curve
 	 */
-	private getCurve(): THREE.Curve<THREE.Vector3> {
+	private getCurve(): THREE_CORE.ICurve<THREE_CORE.IVector3> {
 		let curve: string = 'line';
 		switch (this.type.toLowerCase()) {
 			case 'tween':
@@ -401,12 +402,12 @@ export class ControllerItemComponent
 	/**
 	 * The Helper of controller item component
 	 */
-	private _helper: THREE.Object3D = null;
+	private _helper: THREE_CORE.IObject3D = null;
 
 	/**
 	 * Helper point of controller item component
 	 */
-	private _helperPoint: THREE.Object3D = null;
+	private _helperPoint: THREE_CORE.IObject3D = null;
 
 	/**
 	 * The Curve of controller item component
@@ -431,7 +432,7 @@ export class ControllerItemComponent
 	/**
 	 * The Parent of controller item component
 	 */
-	private _parent: THREE.Object3D;
+	private _parent: THREE_CORE.IObject3D = null;
 
 	/**
 	 * The Lookathead of controller item component
@@ -496,7 +497,7 @@ export class ControllerItemComponent
 	 */
 	public getController(
 		controlItem: ControlObjectItem,
-		parent: THREE.Object3D
+		parent: THREE_CORE.IObject3D
 	): this {
 		if (this._curve === null || this._needUpdate) {
 			this._needUpdate = false;
@@ -518,17 +519,17 @@ export class ControllerItemComponent
 				}
 			}
 			const curve = this.getCurve();
-			let scale: THREE.Vector3 = ThreeUtil.getVector3Safe(
+			let scale: THREE_CORE.IVector3 = ThreeUtil.getVector3Safe(
 				ThreeUtil.getTypeSafe(this.radiusX, this.radius, 1),
 				ThreeUtil.getTypeSafe(this.radiusY, this.radius, 1),
 				ThreeUtil.getTypeSafe(this.radiusZ, this.radius, 1)
 			);
-			let rotation: THREE.Euler = ThreeUtil.getEulerSafe(
+			let rotation: THREE_CORE.IEuler = ThreeUtil.getEulerSafe(
 				ThreeUtil.getTypeSafe(this.rotationX, this.rotation, 0),
 				ThreeUtil.getTypeSafe(this.rotationY, this.rotation, 0),
 				ThreeUtil.getTypeSafe(this.rotationZ, this.rotation, 0)
 			);
-			let center: THREE.Vector3 = ThreeUtil.getVector3Safe(
+			let center: THREE_CORE.IVector3 = ThreeUtil.getVector3Safe(
 				ThreeUtil.getTypeSafe(this.centerX, this.center, 0),
 				ThreeUtil.getTypeSafe(this.centerY, this.center, 0),
 				ThreeUtil.getTypeSafe(this.centerZ, this.center, 0)
@@ -632,7 +633,7 @@ export class ControllerItemComponent
 	/**
 	 * Last look at of controller item component
 	 */
-	private _lastLookAt: THREE.Vector3 = null;
+	private _lastLookAt: THREE_CORE.IVector3 = null;
 
 	/**
 	 * Updates helper point
@@ -663,7 +664,7 @@ export class ControllerItemComponent
 	 * @param targetColor
 	 * @param srcColor
 	 */
-	private updateColor(targetColor: THREE.Color, srcColor: THREE.Color) {
+	private updateColor(targetColor: THREE_CORE.IColor, srcColor: THREE_CORE.IColor) {
 		switch (this.colorType) {
 			case 'rate':
 				if (this._rateCallBack !== null) {
@@ -694,7 +695,7 @@ export class ControllerItemComponent
 	/**
 	 * Tmp color of controller item component
 	 */
-	private _tmpColor: THREE.Color = new THREE.Color();
+	private _tmpColor: THREE_CORE.IColor = new THREE.Color();
 
 	/**
 	 * Gets lerp float
@@ -842,7 +843,7 @@ export class ControllerItemComponent
 					) {
 						const uniforms = this._controlItem.uniforms;
 						if (ThreeUtil.isNotNull(uniforms[this.uniform])) {
-							const uniform: THREE.IUniform = uniforms[this.uniform];
+							const uniform: THREE_CORE.IUniform = uniforms[this.uniform];
 							const oldValue = uniform.value;
 							switch (this.valueType.toLowerCase()) {
 								case 'copyposition':

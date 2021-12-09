@@ -14,6 +14,7 @@ import { PassComponent } from '../pass/pass.component';
 import { RenderTargetComponent } from '../render-target/render-target.component';
 import { SceneComponent } from '../scene/scene.component';
 import { AbstractTweenComponent } from '../tween.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Effect component.
@@ -47,12 +48,12 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * The scene of effect
 	 */
-	@Input() public scene: THREE.Scene | SceneComponent = null;
+	@Input() public scene: THREE_CORE.IScene | SceneComponent = null;
 
 	/**
 	 * The camera of effect
 	 */
-	@Input() public camera: THREE.Camera | CameraComponent = null;
+	@Input() public camera: THREE_CORE.ICamera | CameraComponent = null;
 
 	/**
 	 * The clear of effect component
@@ -265,7 +266,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @param [def]
 	 * @returns scene
 	 */
-	private getScene(def?: THREE.Scene): THREE.Scene {
+	private getScene(def?: THREE_CORE.IScene): THREE_CORE.IScene {
 		if (ThreeUtil.isNotNull(this.scene)) {
 			if (this.scene instanceof SceneComponent) {
 				return this.scene.getScene();
@@ -281,7 +282,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @param [def]
 	 * @returns camera
 	 */
-	private getCamera(def?: THREE.Camera): THREE.Camera {
+	private getCamera(def?: THREE_CORE.ICamera): THREE_CORE.ICamera {
 		if (ThreeUtil.isNotNull(this.camera)) {
 			if (this.camera instanceof CameraComponent) {
 				return this.camera.getObject3d();
@@ -539,7 +540,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @param renderer
 	 * @param renderTimer
 	 */
-	public render(renderer: THREE.WebGLRenderer, renderTimer: RendererTimer) {
+	public render(renderer: THREE_CORE.IWebGLRenderer, renderTimer: RendererTimer) {
 		if (this.effectEffect !== null) {
 			if (this.viewport) {
 				renderer.setViewport(
@@ -590,7 +591,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets write buffer
 	 * @returns write buffer
 	 */
-	public getWriteBuffer(): THREE.WebGLRenderTarget {
+	public getWriteBuffer(): THREE_CORE.IWebGLRenderTarget {
 		return this.getEffect()?.writeBuffer;
 	}
 
@@ -598,7 +599,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets read buffer
 	 * @returns read buffer
 	 */
-	public getReadBuffer(): THREE.WebGLRenderTarget {
+	public getReadBuffer(): THREE_CORE.IWebGLRenderTarget {
 		return this.getEffect()?.readBuffer;
 	}
 
@@ -606,7 +607,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets render target1
 	 * @returns render target1
 	 */
-	public getRenderTarget1(): THREE.WebGLRenderTarget {
+	public getRenderTarget1(): THREE_CORE.IWebGLRenderTarget {
 		return this.getEffect()?.renderTarget1;
 	}
 
@@ -614,7 +615,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets render target2
 	 * @returns render target2
 	 */
-	public getRenderTarget2(): THREE.WebGLRenderTarget {
+	public getRenderTarget2(): THREE_CORE.IWebGLRenderTarget {
 		return this.getEffect()?.renderTarget2;
 	}
 
@@ -689,17 +690,17 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * Effect renderer of effect component
 	 */
-	private _effectRenderer: THREE.WebGLRenderer = null;
+	private _effectRenderer: THREE_CORE.IWebGLRenderer = null;
 
 	/**
 	 * Effect camera of effect component
 	 */
-	private _effectCamera: THREE.Camera = null;
+	private _effectCamera: THREE_CORE.ICamera = null;
 
 	/**
 	 * Effect scene of effect component
 	 */
-	private _effectScene: THREE.Scene = null;
+	private _effectScene: THREE_CORE.IScene = null;
 
 	/**
 	 * Sets renderer
@@ -708,9 +709,9 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @param scene
 	 */
 	public setRenderer(
-		webGLRenderer: THREE.WebGLRenderer,
-		camera: THREE.Camera,
-		scene: THREE.Scene
+		webGLRenderer: THREE_CORE.IWebGLRenderer,
+		camera: THREE_CORE.ICamera,
+		scene: THREE_CORE.IScene
 	) {
 		if (
 			this._effectRenderer !== webGLRenderer ||

@@ -1,17 +1,18 @@
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 export type GeometryFunctionType = (
-	geometry: THREE.BufferGeometry,
+	geometry: THREE_CORE.IBufferGeometry,
 	options?: any
-) => THREE.BufferGeometry;
+) => THREE_CORE.IBufferGeometry;
 
 const GeometryConf: {
 	[key: string]: GeometryFunctionType | string;
 } = {};
 
 GeometryConf.rainbowcolor1 = (
-	geometry: THREE.BufferGeometry,
+	geometry: THREE_CORE.IBufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
@@ -32,7 +33,7 @@ GeometryConf.rainbowcolor1 = (
 GeometryConf.rainbow = 'rainbowcolor1';
 GeometryConf.rainbow1 = 'rainbowcolor1';
 GeometryConf.rainbowcolor2 = (
-	geometry: THREE.BufferGeometry,
+	geometry: THREE_CORE.IBufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
@@ -52,7 +53,7 @@ GeometryConf.rainbowcolor2 = (
 };
 GeometryConf.rainbow2 = 'rainbowcolor2';
 GeometryConf.rainbowcolor3 = (
-	geometry: THREE.BufferGeometry,
+	geometry: THREE_CORE.IBufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
@@ -72,7 +73,7 @@ GeometryConf.rainbowcolor3 = (
 };
 GeometryConf.rainbow3 = 'rainbowcolor3';
 
-GeometryConf.terrainsin = (geometry: THREE.BufferGeometry, options?: any) => {
+GeometryConf.terrainsin = (geometry: THREE_CORE.IBufferGeometry, options?: any) => {
 	switch (geometry.type) {
 		case 'PlaneGeometry':
 			geometry.rotateX(-Math.PI / 2);
@@ -118,7 +119,7 @@ export class NgxGeometryUtils {
 	 * @returns geometry radius
 	 */
 	public static getGeometryRadius(
-		geometry: THREE.BufferGeometry,
+		geometry: THREE_CORE.IBufferGeometry,
 		options: any
 	): number {
 		let radius = options.radius || 0;
@@ -137,9 +138,9 @@ export class NgxGeometryUtils {
 	 * @returns flip geometry
 	 */
 	public static getFlipGeometry(
-		geometry: THREE.BufferGeometry,
+		geometry: THREE_CORE.IBufferGeometry,
 		plane: string = 'Z'
-	): THREE.BufferGeometry {
+	): THREE_CORE.IBufferGeometry {
 		geometry = geometry.clone();
 		const attrVertices = geometry.getAttribute('position');
 		const attrUvs = geometry.getAttribute('uv');
@@ -220,9 +221,9 @@ export class NgxGeometryUtils {
 	 */
 	public static getGeometry(
 		key: string,
-		geometry: THREE.BufferGeometry,
+		geometry: THREE_CORE.IBufferGeometry,
 		options?: any
-	): THREE.BufferGeometry {
+	): THREE_CORE.IBufferGeometry {
 		const keyList = key.split(',');
 		keyList.forEach((funcName) => {
 			const func = this.getGeometryFunction(funcName);
@@ -238,7 +239,7 @@ export class NgxGeometryUtils {
 	 * @return {BufferGeometry>}
 	 */
 	static mergeVertices(
-		geometry: THREE.BufferGeometry,
+		geometry: THREE_CORE.IBufferGeometry,
 		tolerance: number = 1e-4
 	) {
 		switch (geometry.type.toLowerCase()) {

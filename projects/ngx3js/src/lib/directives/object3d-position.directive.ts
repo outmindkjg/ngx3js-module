@@ -13,6 +13,7 @@ import {
 } from '../directive.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { Object3dFunction } from '../directive.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * Position options
@@ -153,7 +154,7 @@ export class PositionDirective
 						break;
 					case 'x':
 						this.setObject3dFunction(
-							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
+							(object3d: THREE_CORE.IObject3D, _: number, timer: RendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.position.x = deltaValue;
 							}
@@ -161,7 +162,7 @@ export class PositionDirective
 						break;
 					case 'y':
 						this.setObject3dFunction(
-							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
+							(object3d: THREE_CORE.IObject3D, _: number, timer: RendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.position.y = deltaValue;
 							}
@@ -169,7 +170,7 @@ export class PositionDirective
 						break;
 					case 'z':
 						this.setObject3dFunction(
-							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
+							(object3d: THREE_CORE.IObject3D, _: number, timer: RendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.position.z = deltaValue;
 							}
@@ -177,7 +178,7 @@ export class PositionDirective
 						break;
 					case 'xy':
 						this.setObject3dFunction(
-							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
+							(object3d: THREE_CORE.IObject3D, _: number, timer: RendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.position.x = deltaValue;
 								object3d.position.y = deltaValue;
@@ -186,7 +187,7 @@ export class PositionDirective
 						break;
 					case 'xz':
 						this.setObject3dFunction(
-							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
+							(object3d: THREE_CORE.IObject3D, _: number, timer: RendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.position.x = deltaValue;
 								object3d.position.z = deltaValue;
@@ -195,7 +196,7 @@ export class PositionDirective
 						break;
 					case 'yz':
 						this.setObject3dFunction(
-							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
+							(object3d: THREE_CORE.IObject3D, _: number, timer: RendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.position.y = deltaValue;
 								object3d.position.z = deltaValue;
@@ -204,7 +205,7 @@ export class PositionDirective
 						break;
 					case 'xyz':
 						this.setObject3dFunction(
-							(object3d: THREE.Object3D, _: number, timer: RendererTimer) => {
+							(object3d: THREE_CORE.IObject3D, _: number, timer: RendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.position.x = deltaValue;
 								object3d.position.y = deltaValue;

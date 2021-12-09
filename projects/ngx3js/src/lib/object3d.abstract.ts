@@ -79,17 +79,17 @@ export interface Object3dOptions {
 	/**
 	 * A [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3) representing the object's local position. Default is (0, 0, 0).
 	 */
-	position?: THREE.Vector3 | number[] | PositionComponent | any;
+	position?: THREE_CORE.IVector3 | number[] | PositionComponent | any;
 
 	/**
 	 * Object's local rotation (see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)), in radians.
 	 */
-	rotation?: THREE.Vector3 | number[] | RotationComponent | any;
+	rotation?: THREE_CORE.IVector3 | number[] | RotationComponent | any;
 
 	/**
 	 * The object's local scale. Default is [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3)( 1, 1, 1 ).
 	 */
-	scale?: THREE.Vector3 | number[] | ScaleComponent | any;
+	scale?: THREE_CORE.IVector3 | number[] | ScaleComponent | any;
 
 	/**
 	 * vector - A vector representing a position in world space.
@@ -97,7 +97,7 @@ export interface Object3dOptions {
 	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 */
-	lookat?: THREE.Vector3 | number[] | LookatComponent | any;
+	lookat?: THREE_CORE.IVector3 | number[] | LookatComponent | any;
 
 	/**
 	 * The distance at which to display this level of detail.
@@ -108,17 +108,17 @@ export interface Object3dOptions {
 	 * Custom depth material to be used when rendering to the depth map. Can only be used in context of meshes.
 	 * When shadow-casting with a [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/DirectionalLight) or [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/SpotLight), if you are (a) modifying vertex positions in the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
 	 */
-	customDepth?: AbstractMaterialComponent | THREE.Material | any;
+	customDepth?: AbstractMaterialComponent | THREE_CORE.IMaterial | any;
 
 	/**
 	 * Same as [Object3D.customDepthMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.customDepthMaterial), but used with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/PointLight). Default is *undefined*.
 	 */
-	customDistance?: AbstractMaterialComponent | THREE.Material | any;
+	customDistance?: AbstractMaterialComponent | THREE_CORE.IMaterial | any;
 
 	/**
 	 * The animaion group of this object 3d
 	 */
-	animationGroup?: AnimationGroupComponent | THREE.AnimationObjectGroup;
+	animationGroup?: AnimationGroupComponent | THREE_CORE.IAnimationObjectGroup;
 }
 
 /**
@@ -222,7 +222,7 @@ export class AbstractObject3dComponent
 	/**
 	 * The object's local scale. Default is [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3)( 1, 1, 1 ).
 	 */
-	@Input() private scale: THREE.Vector3 | number[] | ScaleComponent | any =
+	@Input() private scale: THREE_CORE.IVector3 | number[] | ScaleComponent | any =
 		null;
 
 	/**
@@ -231,7 +231,7 @@ export class AbstractObject3dComponent
 	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 */
-	@Input() private lookat: THREE.Vector3 | number[] | LookatComponent | any =
+	@Input() private lookat: THREE_CORE.IVector3 | number[] | LookatComponent | any =
 		null;
 
 	/**
@@ -253,7 +253,7 @@ export class AbstractObject3dComponent
 	 */
 	@Input() private customDistance:
 		| AbstractMaterialComponent
-		| THREE.Material
+		| THREE_CORE.IMaterial
 		| any = null;
 
 	/**
@@ -261,7 +261,7 @@ export class AbstractObject3dComponent
 	 */
 	@Input() private animationGroup:
 		| AnimationGroupComponent
-		| THREE.AnimationObjectGroup = null;
+		| THREE_CORE.IAnimationObjectGroup = null;
 
 	/**
 	 * An optional callback that is executed immediately before a 3D object is rendered.
@@ -271,12 +271,12 @@ export class AbstractObject3dComponent
 	 * Instances of [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D), [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Group) or [Bone](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Bone) are not renderable and thus this callback is not executed for such objects.
 	 */
 	@Input() private onBeforeRender: (
-		renderer?: THREE.WebGLRenderer,
-		scene?: THREE.Scene,
-		camera?: THREE.Camera,
-		geometry?: THREE.BufferGeometry,
-		material?: THREE.Material,
-		group?: THREE.Group
+		renderer?: THREE_CORE.IWebGLRenderer,
+		scene?: THREE_CORE.IScene,
+		camera?: THREE_CORE.ICamera,
+		geometry?: THREE_CORE.IBufferGeometry,
+		material?: THREE_CORE.IMaterial,
+		group?: THREE_CORE.IGroup
 	) => void = null;
 
 	/**
@@ -594,8 +594,8 @@ export class AbstractObject3dComponent
 	protected getMaterials(
 		parameters?: THREE.MeshBasicMaterialParameters,
 		required: boolean = true
-	): THREE.Material | THREE.Material[] {
-		const materials: THREE.Material[] = [];
+	): THREE_CORE.IMaterial | THREE_CORE.IMaterial[] {
+		const materials: THREE_CORE.IMaterial[] = [];
 		if (this.material !== null && this.material !== undefined) {
 			const material = ThreeUtil.getMaterialByType(this.material, 'material');
 			if (ThreeUtil.isNotNull(material)) {
@@ -637,7 +637,7 @@ export class AbstractObject3dComponent
 	protected getMaterialOne(
 		parameters?: THREE.MeshBasicMaterialParameters,
 		required: boolean = true
-	): THREE.Material {
+	): THREE_CORE.IMaterial {
 		const materials = this.getMaterials(parameters, required);
 		if (Array.isArray(materials)) {
 			return materials[0];
@@ -655,7 +655,7 @@ export class AbstractObject3dComponent
 	protected getMaterialsMulti(
 		parameters?: THREE.MeshBasicMaterialParameters,
 		required: boolean = true
-	): THREE.Material[] {
+	): THREE_CORE.IMaterial[] {
 		const materials = this.getMaterials(parameters, required);
 		if (Array.isArray(materials)) {
 			return materials;
@@ -669,8 +669,8 @@ export class AbstractObject3dComponent
 	 * Gets geometry
 	 * @returns geometry
 	 */
-	public getGeometry(): THREE.BufferGeometry {
-		let geometry: THREE.BufferGeometry = null;
+	public getGeometry(): THREE_CORE.IBufferGeometry {
+		let geometry: THREE_CORE.IBufferGeometry = null;
 		if (this.geometry !== null) {
 			return ThreeUtil.getGeometry(this.geometry);
 		}
@@ -691,7 +691,7 @@ export class AbstractObject3dComponent
 	 * Gets position
 	 * @returns position
 	 */
-	public getPosition(): THREE.Vector3 {
+	public getPosition(): THREE_CORE.IVector3 {
 		if (this.object3d !== null) {
 			return this.object3d.position;
 		} else if (this.positionList !== null && this.positionList.length > 0) {
@@ -756,7 +756,7 @@ export class AbstractObject3dComponent
 	 * Gets scale
 	 * @returns scale
 	 */
-	public getScale(): THREE.Vector3 {
+	public getScale(): THREE_CORE.IVector3 {
 		if (this.object3d !== null) {
 			return this.object3d.scale;
 		} else if (this.scaleList !== null && this.scaleList.length > 0) {
@@ -806,7 +806,7 @@ export class AbstractObject3dComponent
 	 * Gets rotation
 	 * @returns rotation
 	 */
-	public getRotation(): THREE.Euler {
+	public getRotation(): THREE_CORE.IEuler {
 		if (this.object3d !== null) {
 			return this.object3d.rotation;
 		} else if (this.rotationList !== null && this.rotationList.length > 0) {
@@ -1141,8 +1141,8 @@ export class AbstractObject3dComponent
 	 * Gets object top
 	 * @returns object top
 	 */
-	public getObjectTop(): THREE.Object3D {
-		let parent: THREE.Object3D = this.parent;
+	public getObjectTop(): THREE_CORE.IObject3D {
+		let parent: THREE_CORE.IObject3D = this.parent;
 		while (parent.parent !== null) {
 			parent = parent.parent;
 		}
@@ -1585,7 +1585,7 @@ export class AbstractObject3dComponent
 								animationGroup = this.animationGroup;
 							}
 							if (animationGroup !== null) {
-								let oldObject: THREE.Object3D = null;
+								let oldObject: THREE_CORE.IObject3D = null;
 								animationGroup['_objects'].forEach((object: any) => {
 									if (object.userData.component == this.id) {
 										oldObject = object;
@@ -1632,7 +1632,7 @@ export class AbstractObject3dComponent
 	 * Shows debug
 	 * @param obj
 	 */
-	public showDebug(obj: THREE.Object3D) {
+	public showDebug(obj: THREE_CORE.IObject3D) {
 		const lines: string[] = [];
 		lines.push(obj.name || obj.id.toString());
 		this.addDebugLine(obj.children, lines, '\t');
@@ -1647,7 +1647,7 @@ export class AbstractObject3dComponent
 	 * @returns debug line
 	 */
 	public addDebugLine(
-		objs: THREE.Object3D[],
+		objs: THREE_CORE.IObject3D[],
 		lines: string[],
 		prefix: string
 	): string[] {

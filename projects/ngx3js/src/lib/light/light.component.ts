@@ -552,7 +552,7 @@ export class LightComponent
 	 * Gets target
 	 * @returns target
 	 */
-	private getTarget(): THREE.Object3D {
+	private getTarget(): THREE_CORE.IObject3D {
 		if (ThreeUtil.isNotNull(this.target)) {
 			return ThreeUtil.getObject3d(this.target);
 		}
@@ -563,7 +563,7 @@ export class LightComponent
 	 * Gets three renderer
 	 * @returns three renderer
 	 */
-	public getThreeRenderer(): THREE.Renderer {
+	public getThreeRenderer(): THREE_CORE.IRenderer {
 		if (
 			ThreeUtil.isNotNull(this.renderer) &&
 			ThreeUtil.isNotNull(this.renderer.getRenderer)
@@ -974,14 +974,14 @@ export class LightComponent
 	/**
 	 * The Light of light component
 	 */
-	private light: THREE.Light = null;
+	private light: THREE_CORE.ILight = null;
 
 	/**
 	 * Gets object3d
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE.Object3D>(): T {
+	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
 		return this.getLight() as any;
 	}
 
@@ -990,11 +990,11 @@ export class LightComponent
 	 * @template T
 	 * @returns light
 	 */
-	public getLight<T extends THREE.Light>(): T {
+	public getLight<T extends THREE_CORE.ILight>(): T {
 		if (this.light === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.light = null;
-			let basemesh: THREE.Light = null;
+			let basemesh: THREE_CORE.ILight = null;
 			switch (this.type.toLowerCase()) {
 				case 'directionallight':
 				case 'directional':

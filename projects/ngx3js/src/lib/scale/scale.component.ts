@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { TagAttributes, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import * as THREE_CORE from './../threejs-library/three-core';
 
 /**
  * The Scale component.
@@ -104,13 +105,13 @@ export class ScaleComponent
 	/**
 	 * The Scale of scale component
 	 */
-	private scale: THREE.Vector3 = null;
+	private scale: THREE_CORE.IVector3 = null;
 
 	/**
 	 * The Object3d of scale component
 	 */
 	private _object3d: {
-		[key: string]: THREE.Object3D;
+		[key: string]: THREE_CORE.IObject3D;
 	} = {};
 
 	/**
@@ -168,9 +169,9 @@ export class ScaleComponent
 	 * Synks object3d
 	 * @param [scale]
 	 */
-	public synkObject3d(scale: THREE.Vector3 = null, key: string = null) {
+	public synkObject3d(scale: THREE_CORE.IVector3 = null, key: string = null) {
 		if (ThreeUtil.isNotNull(scale) && this.enabled) {
-			const object3dList: THREE.Object3D[] = [];
+			const object3dList: THREE_CORE.IObject3D[] = [];
 			if (ThreeUtil.isNotNull(key)) {
 				if (ThreeUtil.isNotNull(this._object3d[key])) {
 					object3dList.push(this._object3d[key]);
@@ -252,7 +253,7 @@ export class ScaleComponent
 	 * @param size
 	 * @returns scale from size
 	 */
-	private getScaleFromSize(size: THREE.Vector2): THREE.Vector3 {
+	private getScaleFromSize(size: THREE_CORE.IVector2): THREE_CORE.IVector3 {
 		switch (this.scaleMode) {
 			case 'max':
 				const maxSize = Math.max(size.x, size.y);
@@ -288,8 +289,8 @@ export class ScaleComponent
 	 * Gets scale
 	 * @returns scale
 	 */
-	private _getScale(): THREE.Vector3 {
-		let scale: THREE.Vector3 = null;
+	private _getScale(): THREE_CORE.IVector3 {
+		let scale: THREE_CORE.IVector3 = null;
 		if (this.refer !== null && this.refer !== undefined) {
 			if (this.refer.getSize) {
 				scale = this.getScaleFromSize(this.refer.getSize());
@@ -317,7 +318,7 @@ export class ScaleComponent
 	 * Gets scale
 	 * @returns scale
 	 */
-	public getScale(): THREE.Vector3 {
+	public getScale(): THREE_CORE.IVector3 {
 		if (this.scale === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.scale = this._getScale();
