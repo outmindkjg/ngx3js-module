@@ -216,8 +216,7 @@ export namespace I3JS {
 	}
 
 	export interface IMatrix4 {
-
-		new() : this;
+		new (): this;
 
 		/**
 		 * Array with matrix values.
@@ -622,6 +621,8 @@ export namespace I3JS {
 	}
 
 	export interface IEuler {
+		new (x?: number, y?: number, z?: number, order?: string): this;
+
 		/**
 		 * @default 0
 		 */
@@ -1053,6 +1054,9 @@ export namespace I3JS {
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/Clock.js|src/core/Clock.js}
 	 */
 	export interface IClock {
+
+		new(autoStart?: boolean) : this;
+
 		/**
 		 * If set, starts the clock automatically when the first update is called.
 		 * @default true
@@ -1396,8 +1400,7 @@ export namespace I3JS {
 	 * ( class Vector2 implements Vector<Vector2> )
 	 */
 	export interface IVector2 extends IVector {
-
-		new(x?: number, y?: number):this;
+		new (x?: number, y?: number): this;
 
 		/**
 		 * @default 0
@@ -1708,8 +1711,7 @@ export namespace I3JS {
 	export type TVector3Tuple = [number, number, number];
 
 	export interface IVector3 extends IVector {
-
-		new(x?: number, y?: number, z?: number):this;
+		new (x?: number, y?: number, z?: number): this;
 
 		/**
 		 * @default 0
@@ -1988,8 +1990,7 @@ export namespace I3JS {
 	 * ( class Vector4 implements Vector<Vector4> )
 	 */
 	export interface IVector4 extends IVector {
-
-		new(x?: number, y?: number, z?: number, w?: number):this;
+		new (x?: number, y?: number, z?: number, w?: number): this;
 
 		/**
 		 * @default 0
@@ -2217,6 +2218,9 @@ export namespace I3JS {
 	 * const color = new O3JS.Color( 0xff0000 );
 	 */
 	export interface IColor {
+		new (color?: TColorRepresentation): this;
+		new (r: number, g: number, b: number): this;
+
 		readonly isColor: true;
 
 		/**
@@ -2388,8 +2392,7 @@ export namespace I3JS {
 	 * a 2d path representation, comprising of points, lines, and cubes, similar to the html5 2d canvas api. It extends CurvePath.
 	 */
 	export interface IPath extends ICurvePath<IVector2> {
-
-		new(points?: IVector2[]) : this;
+		new (points?: IVector2[]): this;
 
 		/**
 		 * @default 'Path'
@@ -2799,8 +2802,7 @@ export namespace I3JS {
 	 * Defines a 2d shape plane using paths.
 	 */
 	export interface IShape extends IPath {
-
-		new(points?: IVector2[]):this;
+		new (points?: IVector2[]): this;
 
 		/**
 		 * @default 'Shape'
@@ -2823,8 +2825,7 @@ export namespace I3JS {
 	}
 
 	export interface IShapePath {
-
-		new() : this;
+		new (): this;
 
 		/**
 		 * @default 'ShapePath'
@@ -3353,6 +3354,8 @@ export namespace I3JS {
 	 * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
 	 */
 	export interface IMaterial extends O3JS.EventDispatcher {
+		new (): this;
+
 		/**
 		 * Sets the alpha value to be used when running an alpha test. Default is 0.
 		 * @default 0
@@ -3698,6 +3701,9 @@ export namespace I3JS {
 	}
 
 	export interface ISpriteMaterial extends IMaterial {
+
+		new(parameters?: O3JS.SpriteMaterialParameters):this;
+		
 		/**
 		 * @default 'SpriteMaterial'
 		 */
@@ -3740,6 +3746,9 @@ export namespace I3JS {
 	}
 
 	export interface ILineBasicMaterial extends IMaterial {
+
+		new(parameters?: O3JS.LineBasicMaterialParameters):this;
+		
 		/**
 		 * @default 'LineBasicMaterial'
 		 */
@@ -3769,6 +3778,9 @@ export namespace I3JS {
 	}
 
 	export interface ILineDashedMaterial extends ILineBasicMaterial {
+
+		new(parameters?: O3JS.LineDashedMaterialParameters):this;
+
 		/**
 		 * @default 'LineDashedMaterial'
 		 */
@@ -3794,6 +3806,9 @@ export namespace I3JS {
 	}
 
 	export interface IMeshBasicMaterial extends IMaterial {
+
+		new(parameters?: O3JS.MeshBasicMaterialParameters):this;
+
 		/**
 		 * @default 'MeshBasicMaterial'
 		 */
@@ -3883,6 +3898,9 @@ export namespace I3JS {
 	}
 
 	export interface IMeshDepthMaterial extends IMaterial {
+
+		new(parameters?: O3JS.MeshDepthMaterialParameters):this;
+		
 		/**
 		 * @default 'MeshDepthMaterial'
 		 */
@@ -3937,6 +3955,9 @@ export namespace I3JS {
 	}
 
 	export interface IMeshDistanceMaterial extends IMaterial {
+
+		new(parameters?: O3JS.MeshDistanceMaterialParameters):this;
+
 		/**
 		 * @default 'MeshDistanceMaterial'
 		 */
@@ -3991,6 +4012,9 @@ export namespace I3JS {
 	}
 
 	export interface IMeshLambertMaterial extends IMaterial {
+
+		new(parameters?: O3JS.MeshLambertMaterialParameters):this;
+		
 		/**
 		 * @default 'MeshLambertMaterial'
 		 */
@@ -4095,6 +4119,9 @@ export namespace I3JS {
 	}
 
 	export interface IMeshMatcapMaterial extends IMaterial {
+
+		new(parameters?: O3JS.MeshMatcapMaterialParameters):this;
+		
 		/**
 		 * @default 'MeshMatcapMaterial'
 		 */
@@ -4175,6 +4202,9 @@ export namespace I3JS {
 	}
 
 	export interface IMeshNormalMaterial extends IMaterial {
+
+		new(parameters?: O3JS.MeshNormalMaterialParameters):this;
+
 		/**
 		 * @default 'MeshNormalMaterial'
 		 */
@@ -4240,6 +4270,9 @@ export namespace I3JS {
 	}
 
 	export interface IMeshPhongMaterial extends IMaterial {
+
+		new(parameters?: O3JS.MeshPhongMaterialParameters):this;
+
 		/**
 		 * @default 'MeshNormalMaterial'
 		 */
@@ -5067,6 +5100,31 @@ export namespace I3JS {
 	}
 
 	export interface ITexture extends O3JS.EventDispatcher {
+		/**
+		 * @param [image]
+		 * @param [mapping=THREE.Texture.DEFAULT_MAPPING]
+		 * @param [wrapS=THREE.ClampToEdgeWrapping]
+		 * @param [wrapT=THREE.ClampToEdgeWrapping]
+		 * @param [magFilter=THREE.LinearFilter]
+		 * @param [minFilter=THREE.LinearMipmapLinearFilter]
+		 * @param [format=THREE.RGBAFormat]
+		 * @param [type=THREE.UnsignedByteType]
+		 * @param [anisotropy=1]
+		 * @param [encoding=THREE.LinearEncoding]
+		 */
+		new (
+			image?: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
+			mapping?: O3JS.Mapping,
+			wrapS?: O3JS.Wrapping,
+			wrapT?: O3JS.Wrapping,
+			magFilter?: O3JS.TextureFilter,
+			minFilter?: O3JS.TextureFilter,
+			format?: O3JS.PixelFormat,
+			type?: O3JS.TextureDataType,
+			anisotropy?: number,
+			encoding?: O3JS.TextureEncoding
+		): this;
+
 		id: number;
 		uuid: string;
 
@@ -5838,6 +5896,7 @@ export namespace I3JS {
 	}
 
 	export interface IPMREMGenerator {
+		new (renderer: IWebGLRenderer): this;
 		fromScene(
 			scene: IScene,
 			sigma?: number,
@@ -5876,6 +5935,8 @@ export namespace I3JS {
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js|src/renderers/WebGLRenderer.js}
 	 */
 	export interface IWebGLRenderer extends IRenderer {
+		new (parameters?: O3JS.WebGLRendererParameters): this;
+
 		/**
 		 * A Canvas where the renderer draws its output.
 		 * This is automatically created by the renderer in the constructor (if not provided already); you just need to add it to your page.
@@ -6314,6 +6375,7 @@ export namespace I3JS {
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/BufferGeometry.js|src/core/BufferGeometry.js}
 	 */
 	export interface IBufferGeometry extends O3JS.EventDispatcher {
+		new (): this;
 		/**
 		 * Unique number of this buffergeometry instance
 		 */
@@ -6639,7 +6701,7 @@ export namespace I3JS {
 	}
 
 	export interface IEdgesGeometry<
-		TBufferGeometry extends O3JS.BufferGeometry = O3JS.BufferGeometry
+		TBufferGeometry extends IBufferGeometry = IBufferGeometry
 	> extends IBufferGeometry {
 		/**
 		 * @param geometry
@@ -6736,7 +6798,6 @@ export namespace I3JS {
 			widthSegments: number;
 			heightSegments: number;
 		};
-
 	}
 
 	export interface IPolyhedronGeometry extends IBufferGeometry {
@@ -6764,7 +6825,6 @@ export namespace I3JS {
 			radius: number;
 			detail: number;
 		};
-
 	}
 
 	export interface IExtrudeGeometry extends IBufferGeometry {
@@ -6929,7 +6989,6 @@ export namespace I3JS {
 			p: number;
 			q: number;
 		};
-
 	}
 
 	export interface ITubeGeometry extends IBufferGeometry {
@@ -6966,7 +7025,7 @@ export namespace I3JS {
 	}
 
 	export interface IWireframeGeometry<
-		TBufferGeometry extends O3JS.BufferGeometry = O3JS.BufferGeometry
+		TBufferGeometry extends IBufferGeometry = IBufferGeometry
 	> extends IBufferGeometry {
 		new (geometry?: TBufferGeometry): this;
 
@@ -7141,7 +7200,7 @@ export namespace I3JS {
 	}
 
 	export interface ILoader {
-		new(manager?: ILoadingManager): this;
+		new (manager?: ILoadingManager): this;
 		/**
 		 * @default 'anonymous'
 		 */
@@ -7189,6 +7248,12 @@ export namespace I3JS {
 	 * Handles and keeps track of loaded and pending data.
 	 */
 	export interface ILoadingManager {
+		new (
+			onLoad?: () => void,
+			onProgress?: (url: string, loaded: number, total: number) => void,
+			onError?: (url: string) => void
+		): this;
+
 		/**
 		 * Will be called when loading of an item starts.
 		 * @param url The url of the item that started loading.
@@ -7430,7 +7495,6 @@ export namespace I3JS {
 	}
 
 	export interface IObjectLoader extends ILoader {
-		
 		load(
 			url: string,
 			// tslint:disable-next-line:no-unnecessary-generics
@@ -7884,6 +7948,8 @@ export namespace I3JS {
 	}
 
 	export interface ISkeletonHelper extends ILineSegments {
+		new (object: IObject3D): this;
+
 		/**
 		 * @default 'SkeletonHelper'
 		 */
@@ -7925,6 +7991,8 @@ export namespace I3JS {
 	 */
 	export interface IObject3D<E extends O3JS.BaseEvent = O3JS.Event>
 		extends O3JS.EventDispatcher<E> {
+		new (): this;
+
 		/**
 		 * Unique number of this object instance.
 		 */
@@ -8763,6 +8831,7 @@ export namespace I3JS {
 	 * Abstract base class for lights.
 	 */
 	export interface ILight extends IObject3D {
+		new (hex?: number | string, intensity?: number): this;
 		/**
 		 * @default 'Light'
 		 */
@@ -8918,9 +8987,11 @@ export namespace I3JS {
 	}
 
 	export interface IMesh<
-		TGeometry extends O3JS.BufferGeometry = O3JS.BufferGeometry,
-		TMaterial extends O3JS.Material | O3JS.Material[] = O3JS.Material | O3JS.Material[]
+		TGeometry extends IBufferGeometry = IBufferGeometry,
+		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IObject3D {
+		new (geometry?: TGeometry, material?: TMaterial): this;
+
 		geometry: TGeometry;
 		material: TMaterial;
 		morphTargetInfluences?: number[] | undefined;
@@ -8952,8 +9023,8 @@ export namespace I3JS {
 	}
 
 	export interface IInstancedMesh<
-		TGeometry extends O3JS.BufferGeometry = O3JS.BufferGeometry,
-		TMaterial extends O3JS.Material | O3JS.Material[] = O3JS.Material | O3JS.Material[]
+		TGeometry extends IBufferGeometry = IBufferGeometry,
+		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IMesh<TGeometry, TMaterial> {
 		count: number;
 		instanceColor: null | IInstancedBufferAttribute;
@@ -8968,8 +9039,8 @@ export namespace I3JS {
 	}
 
 	export interface ILine<
-		TGeometry extends O3JS.BufferGeometry = O3JS.BufferGeometry,
-		TMaterial extends O3JS.Material | O3JS.Material[] = O3JS.Material | O3JS.Material[]
+		TGeometry extends IBufferGeometry = IBufferGeometry,
+		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IObject3D {
 		geometry: TGeometry;
 		material: TMaterial;
@@ -8989,8 +9060,8 @@ export namespace I3JS {
 	 * A class for displaying points. The points are rendered by the WebGLRenderer using gl.POINTS.
 	 */
 	export interface IPoints<
-		TGeometry extends O3JS.BufferGeometry = O3JS.BufferGeometry,
-		TMaterial extends O3JS.Material | O3JS.Material[] = O3JS.Material | O3JS.Material[]
+		TGeometry extends IBufferGeometry = IBufferGeometry,
+		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IObject3D {
 		type: 'Points';
 		morphTargetInfluences?: number[] | undefined;
@@ -9012,16 +9083,16 @@ export namespace I3JS {
 	}
 
 	export interface ILineLoop<
-		TGeometry extends IBufferGeometry = O3JS.BufferGeometry,
-		TMaterial extends IMaterial | IMaterial[] = O3JS.Material | O3JS.Material[]
+		TGeometry extends IBufferGeometry = IBufferGeometry,
+		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends ILine<TGeometry, TMaterial> {
 		type: 'LineLoop';
 		readonly isLineLoop: true;
 	}
 
 	export interface ILineSegments<
-		TGeometry extends IBufferGeometry = O3JS.BufferGeometry,
-		TMaterial extends IMaterial | IMaterial[] = O3JS.Material | O3JS.Material[]
+		TGeometry extends IBufferGeometry = IBufferGeometry,
+		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends ILine<TGeometry, TMaterial> {
 		/**
 		 * @default 'LineSegments'
@@ -9074,8 +9145,8 @@ export namespace I3JS {
 	}
 
 	export interface ISkinnedMesh<
-		TGeometry extends IBufferGeometry = O3JS.BufferGeometry,
-		TMaterial extends IMaterial | IMaterial[] = O3JS.Material | O3JS.Material[]
+		TGeometry extends IBufferGeometry = IBufferGeometry,
+		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IMesh<TGeometry, TMaterial> {
 		bindMode: string;
 		bindMatrix: IMatrix4;
@@ -9374,279 +9445,4 @@ export namespace I3JS {
 			uvTransform: IUniform;
 		};
 	}
-
-	export const CullFaceNone: O3JS.CullFace = O3JS.CullFaceNone;
-	export const CullFaceBack: O3JS.CullFace = O3JS.CullFaceBack;
-	export const CullFaceFront: O3JS.CullFace = O3JS.CullFaceFront;
-	export const CullFaceFrontBack: O3JS.CullFace = O3JS.CullFaceFrontBack;
-	export const BasicShadowMap: O3JS.ShadowMapType = O3JS.BasicShadowMap;
-	export const PCFShadowMap: O3JS.ShadowMapType = O3JS.PCFShadowMap;
-	export const PCFSoftShadowMap: O3JS.ShadowMapType = O3JS.PCFSoftShadowMap;
-	export const VSMShadowMap: O3JS.ShadowMapType = O3JS.VSMShadowMap;
-	export const FrontSide: O3JS.Side = O3JS.FrontSide;
-	export const BackSide: O3JS.Side = O3JS.BackSide;
-	export const DoubleSide: O3JS.Side = O3JS.DoubleSide;
-	export const FlatShading: O3JS.Shading = O3JS.FlatShading;
-	export const SmoothShading: O3JS.Shading = O3JS.SmoothShading;
-	export const NoBlending: O3JS.Blending = O3JS.NoBlending;
-	export const NormalBlending: O3JS.Blending = O3JS.NormalBlending;
-	export const AdditiveBlending: O3JS.Blending = O3JS.AdditiveBlending;
-	export const SubtractiveBlending: O3JS.Blending = O3JS.SubtractiveBlending;
-	export const MultiplyBlending: O3JS.Blending = O3JS.MultiplyBlending;
-	export const CustomBlending: O3JS.Blending = O3JS.CustomBlending;
-	export const AddEquation: O3JS.BlendingEquation = O3JS.AddEquation;
-	export const SubtractEquation: O3JS.BlendingEquation = O3JS.SubtractEquation;
-	export const ReverseSubtractEquation: O3JS.BlendingEquation =
-		O3JS.ReverseSubtractEquation;
-	export const MinEquation: O3JS.BlendingEquation = O3JS.MinEquation;
-	export const MaxEquation: O3JS.BlendingEquation = O3JS.MaxEquation;
-	export const ZeroFactor: O3JS.BlendingDstFactor = O3JS.ZeroFactor;
-	export const OneFactor: O3JS.BlendingDstFactor = O3JS.OneFactor;
-	export const SrcColorFactor: O3JS.BlendingDstFactor = O3JS.SrcColorFactor;
-	export const OneMinusSrcColorFactor: O3JS.BlendingDstFactor =
-		O3JS.OneMinusSrcColorFactor;
-	export const SrcAlphaFactor: O3JS.BlendingDstFactor = O3JS.SrcAlphaFactor;
-	export const OneMinusSrcAlphaFactor: O3JS.BlendingDstFactor =
-		O3JS.OneMinusSrcAlphaFactor;
-	export const DstAlphaFactor: O3JS.BlendingDstFactor = O3JS.DstAlphaFactor;
-	export const OneMinusDstAlphaFactor: O3JS.BlendingDstFactor =
-		O3JS.OneMinusDstAlphaFactor;
-	export const DstColorFactor: O3JS.BlendingDstFactor = O3JS.DstColorFactor;
-	export const OneMinusDstColorFactor: O3JS.BlendingDstFactor =
-		O3JS.OneMinusDstColorFactor;
-	export const SrcAlphaSaturateFactor: O3JS.BlendingSrcFactor =
-		O3JS.SrcAlphaSaturateFactor;
-	export const NeverDepth: O3JS.DepthModes = O3JS.NeverDepth;
-	export const AlwaysDepth: O3JS.DepthModes = O3JS.AlwaysDepth;
-	export const LessDepth: O3JS.DepthModes = O3JS.LessDepth;
-	export const LessEqualDepth: O3JS.DepthModes = O3JS.LessEqualDepth;
-	export const EqualDepth: O3JS.DepthModes = O3JS.EqualDepth;
-	export const GreaterEqualDepth: O3JS.DepthModes = O3JS.GreaterEqualDepth;
-	export const GreaterDepth: O3JS.DepthModes = O3JS.GreaterDepth;
-	export const NotEqualDepth: O3JS.DepthModes = O3JS.NotEqualDepth;
-	export const MultiplyOperation: O3JS.Combine = O3JS.MultiplyOperation;
-	export const MixOperation: O3JS.Combine = O3JS.MixOperation;
-	export const AddOperation: O3JS.Combine = O3JS.AddOperation;
-	export const NoToneMapping: O3JS.ToneMapping = O3JS.NoToneMapping;
-	export const LinearToneMapping: O3JS.ToneMapping = O3JS.LinearToneMapping;
-	export const ReinhardToneMapping: O3JS.ToneMapping = O3JS.ReinhardToneMapping;
-	export const CineonToneMapping: O3JS.ToneMapping = O3JS.CineonToneMapping;
-	export const ACESFilmicToneMapping: O3JS.ToneMapping =
-		O3JS.ACESFilmicToneMapping;
-	export const UVMapping: O3JS.Mapping = O3JS.UVMapping;
-	export const CubeReflectionMapping: O3JS.Mapping = O3JS.CubeReflectionMapping;
-	export const CubeRefractionMapping: O3JS.Mapping = O3JS.CubeRefractionMapping;
-	export const EquirectangularReflectionMapping: O3JS.Mapping =
-		O3JS.EquirectangularReflectionMapping;
-	export const EquirectangularRefractionMapping: O3JS.Mapping =
-		O3JS.EquirectangularRefractionMapping;
-	export const CubeUVReflectionMapping: O3JS.Mapping =
-		O3JS.CubeUVReflectionMapping;
-	export const CubeUVRefractionMapping: O3JS.Mapping =
-		O3JS.CubeUVRefractionMapping;
-	export const RepeatWrapping: O3JS.Wrapping = O3JS.RepeatWrapping;
-	export const ClampToEdgeWrapping: O3JS.Wrapping = O3JS.ClampToEdgeWrapping;
-	export const MirroredRepeatWrapping: O3JS.Wrapping =
-		O3JS.MirroredRepeatWrapping;
-	export const NearestFilter: O3JS.TextureFilter = O3JS.NearestFilter;
-	export const NearestMipmapNearestFilter: O3JS.TextureFilter =
-		O3JS.NearestMipmapNearestFilter;
-	export const NearestMipMapNearestFilter: O3JS.TextureFilter =
-		O3JS.NearestMipMapNearestFilter;
-	export const NearestMipmapLinearFilter: O3JS.TextureFilter =
-		O3JS.NearestMipmapLinearFilter;
-	export const NearestMipMapLinearFilter: O3JS.TextureFilter =
-		O3JS.NearestMipMapLinearFilter;
-	export const LinearFilter: O3JS.TextureFilter = O3JS.LinearFilter;
-	export const LinearMipmapNearestFilter: O3JS.TextureFilter =
-		O3JS.LinearMipmapNearestFilter;
-	export const LinearMipMapNearestFilter: O3JS.TextureFilter =
-		O3JS.LinearMipMapNearestFilter;
-	export const LinearMipmapLinearFilter: O3JS.TextureFilter =
-		O3JS.LinearMipmapLinearFilter;
-	export const LinearMipMapLinearFilter: O3JS.TextureFilter =
-		O3JS.LinearMipMapLinearFilter;
-	export const UnsignedByteType: O3JS.TextureDataType = O3JS.UnsignedByteType;
-	export const ByteType: O3JS.TextureDataType = O3JS.ByteType;
-	export const ShortType: O3JS.TextureDataType = O3JS.ShortType;
-	export const UnsignedShortType: O3JS.TextureDataType = O3JS.UnsignedShortType;
-	export const IntType: O3JS.TextureDataType = O3JS.IntType;
-	export const UnsignedIntType: O3JS.TextureDataType = O3JS.UnsignedIntType;
-	export const FloatType: O3JS.TextureDataType = O3JS.FloatType;
-	export const HalfFloatType: O3JS.TextureDataType = O3JS.HalfFloatType;
-	export const UnsignedShort4444Type: O3JS.TextureDataType =
-		O3JS.UnsignedShort4444Type;
-	export const UnsignedShort5551Type: O3JS.TextureDataType =
-		O3JS.UnsignedShort5551Type;
-	export const UnsignedShort565Type: O3JS.TextureDataType =
-		O3JS.UnsignedShort565Type;
-	export const UnsignedInt248Type: O3JS.TextureDataType =
-		O3JS.UnsignedInt248Type;
-	export const AlphaFormat: O3JS.PixelFormat = O3JS.AlphaFormat;
-	export const RGBFormat: O3JS.PixelFormat = O3JS.RGBFormat;
-	export const RGBAFormat: O3JS.PixelFormat = O3JS.RGBAFormat;
-	export const LuminanceFormat: O3JS.PixelFormat = O3JS.LuminanceFormat;
-	export const LuminanceAlphaFormat: O3JS.PixelFormat =
-		O3JS.LuminanceAlphaFormat;
-	export const RGBEFormat: O3JS.PixelFormat = O3JS.RGBEFormat;
-	export const DepthFormat: O3JS.PixelFormat = O3JS.DepthFormat;
-	export const DepthStencilFormat: O3JS.PixelFormat = O3JS.DepthStencilFormat;
-	export const RedFormat: O3JS.PixelFormat = O3JS.RedFormat;
-	export const RedIntegerFormat: O3JS.PixelFormat = O3JS.RedIntegerFormat;
-	export const RGFormat: O3JS.PixelFormat = O3JS.RGFormat;
-	export const RGIntegerFormat: O3JS.PixelFormat = O3JS.RGIntegerFormat;
-	export const RGBIntegerFormat: O3JS.PixelFormat = O3JS.RGBIntegerFormat;
-	export const RGBAIntegerFormat: O3JS.PixelFormat = O3JS.RGBAIntegerFormat;
-	export const RGB_S3TC_DXT1_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGB_S3TC_DXT1_Format;
-	export const RGBA_S3TC_DXT1_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_S3TC_DXT1_Format;
-	export const RGBA_S3TC_DXT3_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_S3TC_DXT3_Format;
-	export const RGBA_S3TC_DXT5_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_S3TC_DXT5_Format;
-	export const RGB_PVRTC_4BPPV1_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGB_PVRTC_4BPPV1_Format;
-	export const RGB_PVRTC_2BPPV1_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGB_PVRTC_2BPPV1_Format;
-	export const RGBA_PVRTC_4BPPV1_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_PVRTC_4BPPV1_Format;
-	export const RGBA_PVRTC_2BPPV1_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_PVRTC_2BPPV1_Format;
-	export const RGB_ETC1_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGB_ETC1_Format;
-	export const RGB_ETC2_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGB_ETC2_Format;
-	export const RGBA_ETC2_EAC_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ETC2_EAC_Format;
-	export const RGBA_ASTC_4x4_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_4x4_Format;
-	export const RGBA_ASTC_5x4_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_5x4_Format;
-	export const RGBA_ASTC_5x5_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_5x5_Format;
-	export const RGBA_ASTC_6x5_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_6x5_Format;
-	export const RGBA_ASTC_6x6_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_6x6_Format;
-	export const RGBA_ASTC_8x5_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_8x5_Format;
-	export const RGBA_ASTC_8x6_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_8x6_Format;
-	export const RGBA_ASTC_8x8_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_8x8_Format;
-	export const RGBA_ASTC_10x5_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_10x5_Format;
-	export const RGBA_ASTC_10x6_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_10x6_Format;
-	export const RGBA_ASTC_10x8_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_10x8_Format;
-	export const RGBA_ASTC_10x10_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_10x10_Format;
-	export const RGBA_ASTC_12x10_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_12x10_Format;
-	export const RGBA_ASTC_12x12_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_ASTC_12x12_Format;
-	export const SRGB8_ALPHA8_ASTC_4x4_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_4x4_Format;
-	export const SRGB8_ALPHA8_ASTC_5x4_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_5x4_Format;
-	export const SRGB8_ALPHA8_ASTC_5x5_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_5x5_Format;
-	export const SRGB8_ALPHA8_ASTC_6x5_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_6x5_Format;
-	export const SRGB8_ALPHA8_ASTC_6x6_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_6x6_Format;
-	export const SRGB8_ALPHA8_ASTC_8x5_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_8x5_Format;
-	export const SRGB8_ALPHA8_ASTC_8x6_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_8x6_Format;
-	export const SRGB8_ALPHA8_ASTC_8x8_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_8x8_Format;
-	export const SRGB8_ALPHA8_ASTC_10x5_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_10x5_Format;
-	export const SRGB8_ALPHA8_ASTC_10x6_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_10x6_Format;
-	export const SRGB8_ALPHA8_ASTC_10x8_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_10x8_Format;
-	export const SRGB8_ALPHA8_ASTC_10x10_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_10x10_Format;
-	export const SRGB8_ALPHA8_ASTC_12x10_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_12x10_Format;
-	export const SRGB8_ALPHA8_ASTC_12x12_Format: O3JS.CompressedPixelFormat =
-		O3JS.SRGB8_ALPHA8_ASTC_12x12_Format;
-	export const RGBA_BPTC_Format: O3JS.CompressedPixelFormat =
-		O3JS.RGBA_BPTC_Format;
-	export const LoopOnce: O3JS.AnimationActionLoopStyles = O3JS.LoopOnce;
-	export const LoopRepeat: O3JS.AnimationActionLoopStyles = O3JS.LoopRepeat;
-	export const LoopPingPong: O3JS.AnimationActionLoopStyles = O3JS.LoopPingPong;
-	export const InterpolateDiscrete: O3JS.InterpolationModes =
-		O3JS.InterpolateDiscrete;
-	export const InterpolateLinear: O3JS.InterpolationModes =
-		O3JS.InterpolateLinear;
-	export const InterpolateSmooth: O3JS.InterpolationModes =
-		O3JS.InterpolateSmooth;
-	export const ZeroCurvatureEnding: O3JS.InterpolationEndingModes =
-		O3JS.ZeroCurvatureEnding;
-	export const ZeroSlopeEnding: O3JS.InterpolationEndingModes =
-		O3JS.ZeroSlopeEnding;
-	export const WrapAroundEnding: O3JS.InterpolationEndingModes =
-		O3JS.WrapAroundEnding;
-	export const NormalAnimationBlendMode: O3JS.AnimationBlendMode =
-		O3JS.NormalAnimationBlendMode;
-	export const AdditiveAnimationBlendMode: O3JS.AnimationBlendMode =
-		O3JS.AdditiveAnimationBlendMode;
-	export const TrianglesDrawMode: O3JS.TrianglesDrawModes =
-		O3JS.TrianglesDrawMode;
-	export const TriangleStripDrawMode: O3JS.TrianglesDrawModes =
-		O3JS.TriangleStripDrawMode;
-	export const TriangleFanDrawMode: O3JS.TrianglesDrawModes =
-		O3JS.TriangleFanDrawMode;
-	export const LinearEncoding: O3JS.TextureEncoding = O3JS.LinearEncoding;
-	export const sRGBEncoding: O3JS.TextureEncoding = O3JS.sRGBEncoding;
-	export const GammaEncoding: O3JS.TextureEncoding = O3JS.GammaEncoding;
-	export const RGBEEncoding: O3JS.TextureEncoding = O3JS.RGBEEncoding;
-	// export const LogLuvEncoding: O3JS.TextureEncoding = O3JS.LogLuvEncoding;
-	export const RGBM7Encoding: O3JS.TextureEncoding = O3JS.RGBM7Encoding;
-	export const RGBM16Encoding: O3JS.TextureEncoding = O3JS.RGBM16Encoding;
-	export const RGBDEncoding: O3JS.TextureEncoding = O3JS.RGBDEncoding;
-	export const BasicDepthPacking: O3JS.DepthPackingStrategies =
-		O3JS.BasicDepthPacking;
-	export const RGBADepthPacking: O3JS.DepthPackingStrategies =
-		O3JS.RGBADepthPacking;
-	export const TangentSpaceNormalMap: O3JS.NormalMapTypes =
-		O3JS.TangentSpaceNormalMap;
-	export const ObjectSpaceNormalMap: O3JS.NormalMapTypes =
-		O3JS.ObjectSpaceNormalMap;
-	export const ZeroStencilOp: O3JS.StencilOp = O3JS.ZeroStencilOp;
-	export const KeepStencilOp: O3JS.StencilOp = O3JS.KeepStencilOp;
-	export const ReplaceStencilOp: O3JS.StencilOp = O3JS.ReplaceStencilOp;
-	export const IncrementStencilOp: O3JS.StencilOp = O3JS.IncrementStencilOp;
-	export const DecrementStencilOp: O3JS.StencilOp = O3JS.DecrementStencilOp;
-	export const IncrementWrapStencilOp: O3JS.StencilOp =
-		O3JS.IncrementWrapStencilOp;
-	export const DecrementWrapStencilOp: O3JS.StencilOp =
-		O3JS.DecrementWrapStencilOp;
-	export const InvertStencilOp: O3JS.StencilOp = O3JS.InvertStencilOp;
-	export const NeverStencilFunc: O3JS.StencilFunc = O3JS.NeverStencilFunc;
-	export const LessStencilFunc: O3JS.StencilFunc = O3JS.LessStencilFunc;
-	export const EqualStencilFunc: O3JS.StencilFunc = O3JS.EqualStencilFunc;
-	export const LessEqualStencilFunc: O3JS.StencilFunc =
-		O3JS.LessEqualStencilFunc;
-	export const GreaterStencilFunc: O3JS.StencilFunc = O3JS.GreaterStencilFunc;
-	export const NotEqualStencilFunc: O3JS.StencilFunc = O3JS.NotEqualStencilFunc;
-	export const GreaterEqualStencilFunc: O3JS.StencilFunc =
-		O3JS.GreaterEqualStencilFunc;
-	export const AlwaysStencilFunc: O3JS.StencilFunc = O3JS.AlwaysStencilFunc;
-	export const StaticDrawUsage: O3JS.Usage = O3JS.StaticDrawUsage;
-	export const DynamicDrawUsage: O3JS.Usage = O3JS.DynamicDrawUsage;
-	export const StreamDrawUsage: O3JS.Usage = O3JS.StreamDrawUsage;
-	export const StaticReadUsage: O3JS.Usage = O3JS.StaticReadUsage;
-	export const DynamicReadUsage: O3JS.Usage = O3JS.DynamicReadUsage;
-	export const StreamReadUsage: O3JS.Usage = O3JS.StreamReadUsage;
-	export const StaticCopyUsage: O3JS.Usage = O3JS.StaticCopyUsage;
-	export const DynamicCopyUsage: O3JS.Usage = O3JS.DynamicCopyUsage;
-	export const StreamCopyUsage: O3JS.Usage = O3JS.StreamCopyUsage;
-	export const GLSL1: O3JS.GLSLVersion = O3JS.GLSL1;
-	export const GLSL3: O3JS.GLSLVersion = O3JS.GLSL3;
 }

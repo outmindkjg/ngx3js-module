@@ -7,13 +7,10 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
-import { MathUtils, RingGeometry } from 'three';
 import { NgxOutlineGeometry } from './geometry/geometries/outline';
 import { NgxStarGeometry } from './geometry/geometries/star';
-import { RendererTimer, ThreeColor, ThreeUtil } from './interface';
+import { RendererTimer, ThreeColor, ThreeUtil, THREE,  I3JS} from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
-import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Attribute update info
@@ -495,7 +492,7 @@ export class AbstractChartComponent
 				side = 'double';
 				break;
 			case 'ring':
-				geometry = new RingGeometry(options.radius * 0.5, options.radius);
+				geometry = new THREE.RingGeometry(options.radius * 0.5, options.radius);
 				side = 'double';
 				break;
 			case 'sphere':

@@ -9,7 +9,6 @@ import {
 import * as Ammo from './threejs-library/ammo';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
-import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
 import { CameraComponent } from './camera/camera.component';
@@ -18,7 +17,9 @@ import { RendererComponent } from './renderer/renderer.component';
 import { SceneComponent } from './scene/scene.component';
 import { GUI } from './threejs-library/lil-gui';
 import { I3JS } from './threejs-library/three-interface';
+import { THREE } from './threejs-library/three-core';
 
+export { I3JS, THREE }
 /**
  * Apply matrix4
  */
@@ -3350,7 +3351,7 @@ export class ThreeUtil {
 		} else if (Array.isArray(material)) {
 			return material;
 		} else if (this.isNotNull(material.getMaterial)) {
-			return material.getMaterial() as THREE.Material;
+			return material.getMaterial() as I3JS.IMaterial;
 		} else if (this.isNotNull(material)) {
 			const mesh = this.getObject3d(material);
 			if (mesh instanceof THREE.Mesh) {
@@ -3709,9 +3710,9 @@ export class ThreeUtil {
 					true
 				);
 			} else if (this.isNotNull(position.getPosition)) {
-				return position.getPosition() as THREE.Vector3;
+				return position.getPosition();
 			} else if (this.isNotNull(position.getLookAt)) {
-				return position.getLookAt() as THREE.Vector3;
+				return position.getLookAt();
 			} else if (
 				this.isNotNull(position.x) &&
 				this.isNotNull(position.y) &&
@@ -3795,7 +3796,7 @@ export class ThreeUtil {
 					true
 				);
 			} else if (this.isNotNull(scale.getScale)) {
-				return scale.getScale() as THREE.Vector3;
+				return scale.getScale();
 			} else if (
 				this.isNotNull(scale.x) &&
 				this.isNotNull(scale.y) &&
@@ -3829,9 +3830,9 @@ export class ThreeUtil {
 					true
 				);
 			} else if (this.isNotNull(lookat.getLookAt)) {
-				return lookat.getLookAt() as THREE.Vector3;
+				return lookat.getLookAt();
 			} else if (this.isNotNull(lookat.getPosition)) {
-				return lookat.getPosition() as THREE.Vector3;
+				return lookat.getPosition();
 			} else if (
 				this.isNotNull(lookat.x) &&
 				this.isNotNull(lookat.y) &&
@@ -4021,7 +4022,7 @@ export class ThreeUtil {
 			case 'cubeuvrefraction':
 				return THREE.CubeUVRefractionMapping;
 			default:
-				return THREE.Texture.DEFAULT_MAPPING;
+				return THREE.DEFAULT_MAPPING;
 		}
 	}
 
