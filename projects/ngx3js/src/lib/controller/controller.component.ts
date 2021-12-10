@@ -19,7 +19,7 @@ import {
 	ControllerItemComponent,
 	ControlObjectItem,
 } from './controller-item/controller-item.component';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * ControllerComponent
@@ -85,7 +85,7 @@ export class ControllerComponent
 	 * The controlComponent of controller component
 	 */
 	@Input() public controlComponent: {
-		new (ref3d: THREE_CORE.IObject3D, ref2d: HtmlCollection): AbstractThreeController;
+		new (ref3d: I3JS.IObject3D, ref2d: HtmlCollection): AbstractThreeController;
 	} = null;
 
 	/**
@@ -403,12 +403,12 @@ export class ControllerComponent
 	/**
 	 * Path guide of controller component
 	 */
-	private pathGuide: THREE_CORE.IObject3D = null;
+	private pathGuide: I3JS.IObject3D = null;
 
 	/**
 	 * Ref object3dposition of controller component
 	 */
-	private refObject3dposition: THREE_CORE.IVector3 = new THREE.Vector3();
+	private refObject3dposition: I3JS.IVector3 = new THREE.Vector3();
 
 	/**
 	 * The Duration of controller component

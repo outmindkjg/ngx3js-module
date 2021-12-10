@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { CssStyle, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Transform Component
@@ -175,7 +175,7 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns position
 	 */
-	private getPosition(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+	private getPosition(def?: I3JS.IVector3): I3JS.IVector3 {
 		return ThreeUtil.getVector3Safe(this.x, this.y, this.z, def);
 	}
 
@@ -184,7 +184,7 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns size
 	 */
-	private getSize(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
+	private getSize(def?: I3JS.IVector2): I3JS.IVector2 {
 		return ThreeUtil.getVector2Safe(this.width, this.height, def);
 	}
 
@@ -193,7 +193,7 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns anchor min
 	 */
-	private getAnchorMin(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
+	private getAnchorMin(def?: I3JS.IVector2): I3JS.IVector2 {
 		return ThreeUtil.getVector2Safe(this.anchorMinX, this.anchorMinY, def);
 	}
 
@@ -202,7 +202,7 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns anchor max
 	 */
-	private getAnchorMax(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
+	private getAnchorMax(def?: I3JS.IVector2): I3JS.IVector2 {
 		return ThreeUtil.getVector2Safe(this.anchorMaxX, this.anchorMaxY, def);
 	}
 
@@ -211,7 +211,7 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns pivot
 	 */
-	private getPivot(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
+	private getPivot(def?: I3JS.IVector2): I3JS.IVector2 {
 		return ThreeUtil.getVector2Safe(this.pivotX, this.pivotY, def);
 	}
 
@@ -220,7 +220,7 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns rotation
 	 */
-	private getRotation(def?: THREE_CORE.IEuler): THREE_CORE.IEuler {
+	private getRotation(def?: I3JS.IEuler): I3JS.IEuler {
 		return ThreeUtil.getEulerSafe(
 			this.rotationX,
 			this.rotationY,
@@ -234,7 +234,7 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns scale
 	 */
-	private getScale(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+	private getScale(def?: I3JS.IVector3): I3JS.IVector3 {
 		return ThreeUtil.getVector3Safe(this.scaleX, this.scaleY, this.scaleZ, def);
 	}
 
@@ -298,12 +298,12 @@ export class TransformComponent
 	/**
 	 * Parent size of transform component
 	 */
-	private parentSize: THREE_CORE.IVector2 = null;
+	private parentSize: I3JS.IVector2 = null;
 
 	/**
 	 * Ele size of transform component
 	 */
-	private eleSize: THREE_CORE.IVector2 = null;
+	private eleSize: I3JS.IVector2 = null;
 
 	/**
 	 * Sets parent node
@@ -313,8 +313,8 @@ export class TransformComponent
 	 */
 	public setParentNode(
 		parentNode: HTMLElement,
-		parentSize: THREE_CORE.IVector2,
-		eleSize: THREE_CORE.IVector2
+		parentSize: I3JS.IVector2,
+		eleSize: I3JS.IVector2
 	) {
 		if (this.parentNode !== parentNode) {
 			this.parentNode = parentNode;
@@ -367,7 +367,7 @@ export class TransformComponent
 			}
 			const rotation = this.getRotation(new THREE.Euler(0, 0, 0));
 			if (rotation.x !== 0 || rotation.y !== 0 || rotation.z !== 0) {
-				const quaternion: THREE_CORE.IQuaternion = new THREE.Quaternion();
+				const quaternion: I3JS.IQuaternion = new THREE.Quaternion();
 				quaternion.setFromEuler(rotation);
 				transform.push(
 					'rotate3d(' +

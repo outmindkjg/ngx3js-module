@@ -14,7 +14,7 @@ import {
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { TagAttributes, ThreeColor, ThreeUtil } from './../interface';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Light options
@@ -552,7 +552,7 @@ export class LightComponent
 	 * Gets target
 	 * @returns target
 	 */
-	private getTarget(): THREE_CORE.IObject3D {
+	private getTarget(): I3JS.IObject3D {
 		if (ThreeUtil.isNotNull(this.target)) {
 			return ThreeUtil.getObject3d(this.target);
 		}
@@ -563,7 +563,7 @@ export class LightComponent
 	 * Gets three renderer
 	 * @returns three renderer
 	 */
-	public getThreeRenderer(): THREE_CORE.IRenderer {
+	public getThreeRenderer(): I3JS.IRenderer {
 		if (
 			ThreeUtil.isNotNull(this.renderer) &&
 			ThreeUtil.isNotNull(this.renderer.getRenderer)
@@ -802,7 +802,7 @@ export class LightComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE_CORE.IObject3D): boolean {
+	public setParent(parent: I3JS.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getLight();
 			return true;
@@ -974,14 +974,14 @@ export class LightComponent
 	/**
 	 * The Light of light component
 	 */
-	private light: THREE_CORE.ILight = null;
+	private light: I3JS.ILight = null;
 
 	/**
 	 * Gets object3d
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
+	public getObject3d<T extends I3JS.IObject3D>(): T {
 		return this.getLight() as any;
 	}
 
@@ -990,11 +990,11 @@ export class LightComponent
 	 * @template T
 	 * @returns light
 	 */
-	public getLight<T extends THREE_CORE.ILight>(): T {
+	public getLight<T extends I3JS.ILight>(): T {
 		if (this.light === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.light = null;
-			let basemesh: THREE_CORE.ILight = null;
+			let basemesh: I3JS.ILight = null;
 			switch (this.type.toLowerCase()) {
 				case 'directionallight':
 				case 'directional':

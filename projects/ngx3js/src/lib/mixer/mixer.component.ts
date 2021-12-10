@@ -14,7 +14,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ClipComponent } from './../clip/clip.component';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Character Control
@@ -380,12 +380,12 @@ export class MixerComponent
 	/**
 	 * The Model of mixer component
 	 */
-	private model: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup = null;
+	private model: I3JS.IObject3D | I3JS.IAnimationObjectGroup = null;
 
 	/**
 	 * The Clips of mixer component
 	 */
-	private clips: THREE_CORE.IAnimationClip[] | any = null;
+	private clips: I3JS.IAnimationClip[] | any = null;
 
 	private oldLoaded: {
 		refTarget: any;
@@ -397,7 +397,7 @@ export class MixerComponent
 	 * @returns true if parent
 	 */
 	public setParent(
-		parent: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup
+		parent: I3JS.IObject3D | I3JS.IAnimationObjectGroup
 	): boolean {
 		if (
 			super.setParent(parent) ||
@@ -435,9 +435,9 @@ export class MixerComponent
 	 * @returns target
 	 */
 	private getTarget(
-		target?: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup
-	): THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup {
-		let targetMesh: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup = null;
+		target?: I3JS.IObject3D | I3JS.IAnimationObjectGroup
+	): I3JS.IObject3D | I3JS.IAnimationObjectGroup {
+		let targetMesh: I3JS.IObject3D | I3JS.IAnimationObjectGroup = null;
 		if (ThreeUtil.isNotNull(target)) {
 			if (
 				target instanceof THREE.AnimationObjectGroup ||
@@ -464,7 +464,7 @@ export class MixerComponent
 	 * Checks model
 	 * @param parent
 	 */
-	public checkModel(parent: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup) {
+	public checkModel(parent: I3JS.IObject3D | I3JS.IAnimationObjectGroup) {
 		const model = this.getTarget(parent);
 		if (ThreeUtil.isNotNull(model)) {
 			if (model instanceof THREE.Object3D) {
@@ -483,8 +483,8 @@ export class MixerComponent
 	 * @param clips
 	 */
 	private setModel(
-		model: THREE_CORE.IObject3D | THREE_CORE.IAnimationObjectGroup,
-		clips: THREE_CORE.IAnimationClip[] | any
+		model: I3JS.IObject3D | I3JS.IAnimationObjectGroup,
+		clips: I3JS.IAnimationClip[] | any
 	) {
 		if (this.model !== model || this.clips !== clips) {
 			this.model = model;
@@ -595,7 +595,7 @@ export class MixerComponent
 	/**
 	 * Mmd animation helpers of mixer component
 	 */
-	private mmdAnimationHelpers: THREE_CORE.IObject3D[] = [];
+	private mmdAnimationHelpers: I3JS.IObject3D[] = [];
 
 	/**
 	 * Gets mmd animation helper
@@ -613,7 +613,7 @@ export class MixerComponent
 	 * Gets mmd animation helper object3 d
 	 * @returns mmd animation helper object3 d
 	 */
-	public getMmdAnimationHelperObject3D(): THREE_CORE.IObject3D[] {
+	public getMmdAnimationHelperObject3D(): I3JS.IObject3D[] {
 		return this.mmdAnimationHelpers;
 	}
 
@@ -661,7 +661,7 @@ export class MixerComponent
 					});
 					this.mmdAnimationHelpers = [];
 					if (ThreeUtil.isNotNull(this.mmdHelpers)) {
-						let rootObject3d: THREE_CORE.IObject3D = skinnedMesh;
+						let rootObject3d: I3JS.IObject3D = skinnedMesh;
 						while (rootObject3d.parent) {
 							rootObject3d = rootObject3d.parent;
 						}

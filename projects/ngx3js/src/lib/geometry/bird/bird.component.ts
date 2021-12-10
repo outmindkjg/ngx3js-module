@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { ThreeGeometryCustom } from '../../interface';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * The Geometry Bird component.
@@ -54,7 +54,7 @@ export class GeometryBirdComponent
 	 *
 	 * @returns geometry
 	 */
-	initGeometry(): THREE_CORE.IBufferGeometry {
+	initGeometry(): I3JS.IBufferGeometry {
 		const birds: number = this.width * this.width;
 		const triangles = birds * 3;
 		const points = triangles * 3;

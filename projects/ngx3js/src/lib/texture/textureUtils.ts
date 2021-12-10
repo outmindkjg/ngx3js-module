@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
 import { ThreeUtil } from '../interface';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * CanvasFunctionType
@@ -511,7 +511,7 @@ export class TextureUtils {
 		h: number,
 		ow: number,
 		oh: number
-	): THREE_CORE.IVector2 {
+	): I3JS.IVector2 {
 		return new THREE.Vector2(w / ow, h / oh);
 	}
 
@@ -609,7 +609,7 @@ export class TextureUtils {
 		value: any,
 		onload?: () => void,
 		options?: any
-	): THREE_CORE.IDataTexture | THREE_CORE.IDataTexture3D {
+	): I3JS.IDataTexture | I3JS.IDataTexture3D {
 		const dataProgram = this.getDataTexture(value);
 		const texture = dataProgram(options);
 		window.setTimeout(() => {

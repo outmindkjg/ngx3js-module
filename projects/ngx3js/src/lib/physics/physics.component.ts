@@ -14,7 +14,7 @@ import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
 import { AmmoPhysics } from '../threejs-library/AmmoPhysics';
 import { OimoPhysics } from '../threejs-library/OimoPhysics';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * PhysicsComponent
@@ -345,7 +345,7 @@ export class PhysicsComponent
 	 * @param body
 	 * @returns collision object
 	 */
-	public getCollisionObject(body: Ammo.btCollisionObject): THREE_CORE.IObject3D {
+	public getCollisionObject(body: Ammo.btCollisionObject): I3JS.IObject3D {
 		const rigidBody: any = this.getRigidBody(body);
 		if (
 			ThreeUtil.isNotNull(rigidBody) &&
@@ -459,7 +459,7 @@ export class PhysicsComponent
 
 					const fractureImpulse = 250;
 					if (breakable0 && !collided0 && maxImpulse > fractureImpulse) {
-						const fragments: THREE_CORE.IObject3D[] = [];
+						const fragments: I3JS.IObject3D[] = [];
 						const debris = convexBreaker.subdivideByImpact(
 							threeObject0,
 							this.impactPoint,
@@ -489,7 +489,7 @@ export class PhysicsComponent
 						});
 					}
 					if (breakable1 && !collided1 && maxImpulse > fractureImpulse) {
-						const fragments: THREE_CORE.IObject3D[] = [];
+						const fragments: I3JS.IObject3D[] = [];
 						const debris = convexBreaker.subdivideByImpact(
 							threeObject1,
 							this.impactPoint,

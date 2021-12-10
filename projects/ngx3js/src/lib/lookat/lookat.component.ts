@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { TagAttributes, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Lookat component.
@@ -104,13 +104,13 @@ export class LookatComponent
 	/**
 	 * The Lookat of lookat component
 	 */
-	private lookat: THREE_CORE.IVector3 = null;
+	private lookat: I3JS.IVector3 = null;
 
 	/**
 	 * The Object3d of lookat component
 	 */
 	private _object3d: {
-		[key: string]: THREE_CORE.IObject3D | { target: THREE_CORE.IVector3 };
+		[key: string]: I3JS.IObject3D | { target: I3JS.IVector3 };
 	} = {};
 
 	/**
@@ -172,10 +172,10 @@ export class LookatComponent
 	 * Synks object3d
 	 * @param [lookat]
 	 */
-	public synkObject3d(lookat: THREE_CORE.IVector3 = null, key: string = null) {
+	public synkObject3d(lookat: I3JS.IVector3 = null, key: string = null) {
 		if (ThreeUtil.isNotNull(lookat) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._object3d)) {
-				const object3dList: (THREE_CORE.IObject3D | { target: THREE_CORE.IVector3 })[] = [];
+				const object3dList: (I3JS.IObject3D | { target: I3JS.IVector3 })[] = [];
 				if (ThreeUtil.isNotNull(key)) {
 					if (ThreeUtil.isNotNull(this._object3d[key])) {
 						object3dList.push(this._object3d[key]);
@@ -275,8 +275,8 @@ export class LookatComponent
 	 * Gets look at
 	 * @returns look at
 	 */
-	private _getLookAt(): THREE_CORE.IVector3 {
-		let lookat: THREE_CORE.IVector3 = null;
+	private _getLookAt(): I3JS.IVector3 {
+		let lookat: I3JS.IVector3 = null;
 		if (this.refer !== null) {
 			this.unSubscribeRefer('refer');
 			lookat = ThreeUtil.getLookAt(this.refer);
@@ -308,7 +308,7 @@ export class LookatComponent
 	 * Gets look at
 	 * @returns look at
 	 */
-	public getLookAt(): THREE_CORE.IVector3 {
+	public getLookAt(): I3JS.IVector3 {
 		if (this._needUpdate) {
 			this.needUpdate = false;
 			this.lookat = this._getLookAt();

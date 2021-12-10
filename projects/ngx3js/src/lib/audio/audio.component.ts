@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Audio component.
@@ -198,7 +198,7 @@ export class AudioComponent
 	/**
 	 * The Audio of audio component
 	 */
-	private audio: THREE_CORE.IAudio<any> = null;
+	private audio: I3JS.IAudio<any> = null;
 
 	/**
 	 * The Video of audio component
@@ -208,17 +208,17 @@ export class AudioComponent
 	/**
 	 * The Listener of audio component
 	 */
-	private listener: THREE_CORE.IAudioListener = null;
+	private listener: I3JS.IAudioListener = null;
 
 	/**
 	 * The Analyser of audio component
 	 */
-	private analyser: THREE_CORE.IAudioAnalyser = null;
+	private analyser: I3JS.IAudioAnalyser = null;
 
 	/**
 	 * Audio loader of audio component
 	 */
-	private static audioLoader: THREE_CORE.IAudioLoader = null;
+	private static audioLoader: I3JS.IAudioLoader = null;
 
 	/**
 	 * Loads audio
@@ -256,7 +256,7 @@ export class AudioComponent
 	 * @param listener
 	 * @param renderer
 	 */
-	public setListener(listener: THREE_CORE.IAudioListener, renderer: any) {
+	public setListener(listener: I3JS.IAudioListener, renderer: any) {
 		if (this.listener !== listener) {
 			this.listener = listener;
 			this._renderer = renderer;
@@ -268,7 +268,7 @@ export class AudioComponent
 	 * Gets listener
 	 * @returns listener
 	 */
-	private getListener(): THREE_CORE.IAudioListener {
+	private getListener(): I3JS.IAudioListener {
 		if (this.listener !== null) {
 			return this.listener;
 		} else {
@@ -281,7 +281,7 @@ export class AudioComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE_CORE.IObject3D): boolean {
+	public setParent(parent: I3JS.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getAudio();
 			return true;
@@ -292,18 +292,18 @@ export class AudioComponent
 	/**
 	 * Loaded video texture of audio component
 	 */
-	private loadedVideoTexture: THREE_CORE.IVideoTexture = null;
+	private loadedVideoTexture: I3JS.IVideoTexture = null;
 
 	/**
 	 * Loaded audio texture of audio component
 	 */
-	private loadedAudioTexture: THREE_CORE.IDataTexture = null;
+	private loadedAudioTexture: I3JS.IDataTexture = null;
 
 	/**
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): THREE_CORE.ITexture {
+	public getTexture(): I3JS.ITexture {
 		this.getAudio();
 		if (this.video !== null) {
 			if (this.loadedVideoTexture === null) {
@@ -365,7 +365,7 @@ export class AudioComponent
 	 *                  See [this page](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize) for details.
 	 * @returns analyser
 	 */
-	public getAnalyser(fftSize?: number): THREE_CORE.IAudioAnalyser {
+	public getAnalyser(fftSize?: number): I3JS.IAudioAnalyser {
 		if (this.analyser === null && this.audio !== null) {
 			this.analyser = new THREE.AudioAnalyser(
 				this.audio,

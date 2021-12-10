@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CssStyle, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Background component.
@@ -319,7 +319,7 @@ export class BackgroundComponent
 	 */
 	private getBackgroundColor(
 		def?: string | number
-	): THREE_CORE.IColor | THREE_CORE.IVector4 {
+	): I3JS.IColor | I3JS.IVector4 {
 		return ThreeUtil.getColorAlphaSafe(
 			this.backgroundColor,
 			this.backgroundAlpha,

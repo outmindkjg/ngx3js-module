@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { AbstractChartComponent } from '../../chart.abstract';
 import { ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * The Chart Title component.
@@ -104,17 +104,17 @@ export class ChartTitleComponent
 	/**
 	 * The Title of chart title component
 	 */
-	private _title: THREE_CORE.IObject3D = null;
+	private _title: I3JS.IObject3D = null;
 
 	/**
 	 * The Material of chart title component
 	 */
-	private _material: THREE_CORE.IMeshBasicMaterial = null;
+	private _material: I3JS.IMeshBasicMaterial = null;
 
 	/**
 	 * The Geometry of chart title component
 	 */
-	private _geometry: THREE_CORE.IPlaneBufferGeometry = null;
+	private _geometry: I3JS.IPlaneBufferGeometry = null;
 
 	/**
 	 * Applys changes3d

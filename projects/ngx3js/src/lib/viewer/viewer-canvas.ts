@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Viewer canvas
@@ -27,34 +27,34 @@ export class ViewerCanvas {
 	/**
 	 * The Camera of viewer canvas
 	 */
-	camera: THREE_CORE.IPerspectiveCamera = null;
+	camera: I3JS.IPerspectiveCamera = null;
 
 	/**
 	 * The Scene of viewer canvas
 	 */
-	scene: THREE_CORE.IScene = null;
+	scene: I3JS.IScene = null;
 
 	/**
 	 * The Renderer of viewer canvas
 	 */
-	private renderer: THREE_CORE.IRenderer = null;
+	private renderer: I3JS.IRenderer = null;
 
 	/**
 	 * The Target of viewer canvas
 	 */
-	target: THREE_CORE.IVector3 = null;
+	target: I3JS.IVector3 = null;
 
 	/**
 	 * Virtual camera of viewer canvas
 	 */
-	virtualCamera: THREE_CORE.IGroup = null;
+	virtualCamera: I3JS.IGroup = null;
 
 	/**
 	 * Creates an instance of viewer canvas.
 	 * @param renderer
 	 * @param [options]
 	 */
-	constructor(renderer: THREE_CORE.IRenderer, options: any = {}) {
+	constructor(renderer: I3JS.IRenderer, options: any = {}) {
 		this.target = new THREE.Vector3();
 		this.position = { x: 0, y: 0 };
 		this.size = { width: 100, height: 100 };
@@ -216,7 +216,7 @@ export class ViewerCanvas {
 	 * Sets renderer
 	 * @param renderer
 	 */
-	public setRenderer(renderer: THREE_CORE.IRenderer) {
+	public setRenderer(renderer: I3JS.IRenderer) {
 		if (this.renderer !== renderer) {
 			this.renderer = renderer;
 			this.updateForWindowResize();
@@ -271,7 +271,7 @@ export class ViewerCanvas {
 	 * @param scene
 	 * @param camera
 	 */
-	render(renderer: THREE_CORE.IRenderer, scene: THREE_CORE.IScene, camera: THREE_CORE.ICamera) {
+	render(renderer: I3JS.IRenderer, scene: I3JS.IScene, camera: I3JS.ICamera) {
 		if (this.enabled && renderer instanceof THREE.WebGLRenderer) {
 			this._autoClear = renderer.autoClear;
 			renderer.getClearColor(this._clearColor);

@@ -22,7 +22,7 @@ import { LocalStorageService } from '../local-storage.service';
 import { ShapeComponent } from '../shape/shape.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { SvgComponent } from '../svg/svg.component';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 import { NgxCapsuleGeometry } from './geometries/capsule';
 import { NgxCircleDepthGeometry } from './geometries/circle-depth';
 import { NgxGridGeometry } from './geometries/grid';
@@ -581,7 +581,7 @@ export class GeometryComponent
 	/**
 	 * The mesh of geometry component
 	 */
-	@Input() public mesh: THREE_CORE.IMesh | any = null;
+	@Input() public mesh: I3JS.IMesh | any = null;
 
 	/**
 	 * The positionX of geometry component
@@ -716,8 +716,8 @@ export class GeometryComponent
 	 */
 	private getPointsV3(
 		def: { x: number; y: number; z: number }[]
-	): THREE_CORE.IVector3[] {
-		const points: THREE_CORE.IVector3[] = [];
+	): I3JS.IVector3[] {
+		const points: I3JS.IVector3[] = [];
 		if (this.pointsGeometry !== null) {
 			let pointsGeometry = this.pointsGeometry.getGeometry().clone();
 			pointsGeometry.deleteAttribute('normal');
@@ -737,7 +737,7 @@ export class GeometryComponent
 					ThreeUtil.getTypeSafe(this.text, 'test'),
 					ThreeUtil.getTypeSafe(this.size, 1)
 				);
-				const points: THREE_CORE.IVector2[] = [];
+				const points: I3JS.IVector2[] = [];
 				shapes.forEach((shape) => {
 					shape.getPoints().forEach((p) => {
 						points.push(p);
@@ -768,8 +768,8 @@ export class GeometryComponent
 	 * @param [def]
 	 * @returns points v2
 	 */
-	private getPointsV2(def?: ThreeVector[]): THREE_CORE.IVector2[] {
-		const points: THREE_CORE.IVector2[] = [];
+	private getPointsV2(def?: ThreeVector[]): I3JS.IVector2[] {
+		const points: I3JS.IVector2[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
 			points.push(new THREE.Vector2(p.x, p.y));
 		});
@@ -783,7 +783,7 @@ export class GeometryComponent
 	 */
 	private getParametric(
 		def: string | GeometriesParametric
-	): (u: number, v: number, dest: THREE_CORE.IVector3) => void {
+	): (u: number, v: number, dest: I3JS.IVector3) => void {
 		const parametric = this.parametric === null ? def : this.parametric;
 		switch (parametric) {
 			case 'mobius3d':
@@ -800,14 +800,14 @@ export class GeometryComponent
 			default:
 				if (parametric !== null) {
 					if (typeof parametric === 'function') {
-						return (u: number, v: number, dest: THREE_CORE.IVector3) => {
+						return (u: number, v: number, dest: I3JS.IVector3) => {
 							const ov = parametric(u, v, dest);
 							if (ov !== null && ov !== undefined) {
 								dest.set(ov.x, ov.y, ov.z);
 							}
 						};
 					} else if (typeof parametric.getPoint === 'function') {
-						return (u: number, v: number, dest: THREE_CORE.IVector3) => {
+						return (u: number, v: number, dest: I3JS.IVector3) => {
 							const ov = parametric.getPoint(u, v, dest);
 							if (ov !== null && ov !== undefined) {
 								dest.set(ov.x, ov.y, ov.z);
@@ -849,7 +849,7 @@ export class GeometryComponent
 	 * Gets shapes
 	 * @param onload
 	 */
-	private getShapes(onload: (data: THREE_CORE.IShape[] | THREE_CORE.IShape) => void): void {
+	private getShapes(onload: (data: I3JS.IShape[] | I3JS.IShape) => void): void {
 		if (ThreeUtil.isNotNull(this.svgList) && this.svgList.length > 0) {
 			window.setTimeout(() => {
 				this.svgList.forEach((svg) => {
@@ -864,9 +864,9 @@ export class GeometryComponent
 					onload(this.shapes as THREE.Shape);
 				}, 1);
 			} else {
-				const shapes: THREE_CORE.IShape[] = [];
+				const shapes: I3JS.IShape[] = [];
 				const shape = new THREE.Shape();
-				const vectors: THREE_CORE.IVector2[] = [];
+				const vectors: I3JS.IVector2[] = [];
 				this.shapes.forEach((p) => {
 					vectors.push(new THREE.Vector2(p.x, p.y));
 				});
@@ -885,7 +885,7 @@ export class GeometryComponent
 				onload(shapes);
 			});
 		} else {
-			const shapes: THREE_CORE.IShape[] = [];
+			const shapes: I3JS.IShape[] = [];
 			if (this.shapeList !== null && this.shapeList.length > 0) {
 				const shape = new THREE.Shape();
 				this.shapeList.forEach((path) => {
@@ -903,12 +903,12 @@ export class GeometryComponent
 	 * Gets extrude path
 	 * @returns extrude path
 	 */
-	private getExtrudePath(): THREE_CORE.ICurve<THREE_CORE.IVector3> {
+	private getExtrudePath(): I3JS.ICurve<I3JS.IVector3> {
 		if (
 			ThreeUtil.isNotNull(this.extrudePath) ||
 			ThreeUtil.isNotNull(this.curvePath)
 		) {
-			const vectors: THREE_CORE.IVector3[] = [];
+			const vectors: I3JS.IVector3[] = [];
 			if (ThreeUtil.isNotNull(this.extrudePath)) {
 				this.extrudePath.forEach((p) => {
 					vectors.push(new THREE.Vector3(p.x, p.y, p.z));
@@ -944,7 +944,7 @@ export class GeometryComponent
 	 * @param [def]
 	 * @returns uvgenerator
 	 */
-	private getUVGenerator(def?: string): THREE_CORE.IUVGenerator {
+	private getUVGenerator(def?: string): I3JS.IUVGenerator {
 		const uVGenerator = ThreeUtil.getTypeSafe(this.uVGenerator, def, '');
 		switch (uVGenerator.toLowerCase()) {
 			case 'world':
@@ -959,9 +959,9 @@ export class GeometryComponent
 	 * @param [def]
 	 * @returns curve
 	 */
-	private getCurve(def?: string): THREE_CORE.ICurve<THREE_CORE.IVector3> {
+	private getCurve(def?: string): I3JS.ICurve<I3JS.IVector3> {
 		const curve = ThreeUtil.getTypeSafe(this.curve, def, '');
-		let curveLine: THREE_CORE.ICurve<THREE_CORE.IVector3> = null;
+		let curveLine: I3JS.ICurve<I3JS.IVector3> = null;
 		if (ThreeUtil.isNotNull(curve) && curve !== '') {
 			if (typeof curve === 'string') {
 				curveLine = CurveUtils.getCurve(
@@ -976,7 +976,7 @@ export class GeometryComponent
 		if (curveLine === null) {
 			if (this.curveList !== null && this.curveList.length > 0) {
 				curveLine =
-					this.curveList.first.getCurve() as THREE_CORE.ICurve<THREE_CORE.IVector3>;
+					this.curveList.first.getCurve() as I3JS.ICurve<I3JS.IVector3>;
 			} else {
 				const extrudePath = this.getExtrudePath();
 				if (ThreeUtil.isNotNull(extrudePath)) {
@@ -1005,9 +1005,9 @@ export class GeometryComponent
 	 * @param [def]
 	 * @returns mesh
 	 */
-	private getMesh(def?: THREE_CORE.IMesh | any): THREE_CORE.IMesh {
+	private getMesh(def?: I3JS.IMesh | any): I3JS.IMesh {
 		let value = ThreeUtil.getTypeSafe(this.mesh, def);
-		let mesh: THREE_CORE.IObject3D = null;
+		let mesh: I3JS.IObject3D = null;
 		if (ThreeUtil.isNotNull(value)) {
 			mesh = ThreeUtil.getObject3d(value);
 			while (mesh instanceof THREE.Group) {
@@ -1030,7 +1030,7 @@ export class GeometryComponent
 	 * @param [def]
 	 * @returns position v3
 	 */
-	private getPositionV3(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+	private getPositionV3(def?: I3JS.IVector3): I3JS.IVector3 {
 		return ThreeUtil.getVector3Safe(
 			this.positionX,
 			this.positionY,
@@ -1044,7 +1044,7 @@ export class GeometryComponent
 	 * @param [def]
 	 * @returns orientation
 	 */
-	private getOrientation(def?: THREE_CORE.IEuler): THREE_CORE.IEuler {
+	private getOrientation(def?: I3JS.IEuler): I3JS.IEuler {
 		return ThreeUtil.getEulerSafe(
 			this.orientationX,
 			this.orientationY,
@@ -1058,7 +1058,7 @@ export class GeometryComponent
 	 * @param [def]
 	 * @returns size v3
 	 */
-	private getSizeV3(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+	private getSizeV3(def?: I3JS.IVector3): I3JS.IVector3 {
 		return ThreeUtil.getVector3Safe(this.sizeX, this.sizeY, this.sizeZ, def);
 	}
 
@@ -1132,10 +1132,10 @@ export class GeometryComponent
 	 * @template T
 	 * @returns geometry
 	 */
-	public getGeometry<T extends THREE_CORE.IBufferGeometry>(): T {
+	public getGeometry<T extends I3JS.IBufferGeometry>(): T {
 		if (this.geometry === null || this._needUpdate) {
 			this.needUpdate = false;
-			let geometry: THREE_CORE.IBufferGeometry = null;
+			let geometry: I3JS.IBufferGeometry = null;
 			this.unSubscribeRefer('refGeometry');
 			if (this.refer !== null && this.refer !== undefined) {
 				geometry = ThreeUtil.getGeometry(this.refer);
@@ -1153,10 +1153,10 @@ export class GeometryComponent
 				geometry = new THREE_GEO.NgxBufferGeometry();
 				this.localStorageService.getGeometry(
 					this.storageName,
-					(loadGeometry, model: THREE_CORE.IObject3D) => {
+					(loadGeometry, model: I3JS.IObject3D) => {
 						if (model !== null && this.storage2Buffer) {
 							let count = 0;
-							model.traverse((child: THREE_CORE.IObject3D) => {
+							model.traverse((child: I3JS.IObject3D) => {
 								if (child instanceof THREE.Mesh && child.isMesh) {
 									const buffer = child.geometry.attributes['position'];
 									count += buffer.array.length;
@@ -1164,7 +1164,7 @@ export class GeometryComponent
 							});
 							const combined = new Float32Array(count);
 							let offset = 0;
-							model.traverse((child: THREE_CORE.IObject3D) => {
+							model.traverse((child: I3JS.IObject3D) => {
 								if (child instanceof THREE.Mesh && child.isMesh) {
 									const buffer = child.geometry.attributes['position'];
 									combined.set(buffer.array, offset);

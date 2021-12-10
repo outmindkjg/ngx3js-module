@@ -9,7 +9,7 @@ import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 import { ArcballControls } from 'three/examples/jsm/controls/ArcballControls';
 import { CSM } from 'three/examples/jsm/csm/CSM';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * Drag controls
@@ -27,8 +27,8 @@ export class NgxDragControls extends DragControls {
 	 * @param [domElement]
 	 */
 	constructor(
-		objects: THREE_CORE.IObject3D[],
-		camera: THREE_CORE.ICamera,
+		objects: I3JS.IObject3D[],
+		camera: I3JS.ICamera,
 		domElement?: HTMLElement
 	) {
 		super(objects, camera, domElement);
@@ -49,7 +49,7 @@ export class NgxFirstPersonControls extends FirstPersonControls {
 	 * @param camera
 	 * @param [domElement]
 	 */
-	constructor(camera: THREE_CORE.ICamera, domElement?: HTMLElement) {
+	constructor(camera: I3JS.ICamera, domElement?: HTMLElement) {
 		super(camera, domElement);
 	}
 }
@@ -68,7 +68,7 @@ export class NgxFlyControls extends FlyControls {
 	 * @param camera
 	 * @param [domElement]
 	 */
-	constructor(camera: THREE_CORE.ICamera, domElement?: HTMLElement) {
+	constructor(camera: I3JS.ICamera, domElement?: HTMLElement) {
 		super(camera, domElement);
 	}
 }
@@ -87,7 +87,7 @@ export class NgxOrbitControls extends OrbitControls {
 	 * @param camera
 	 * @param [domElement]
 	 */
-	constructor(camera: THREE_CORE.ICamera, domElement?: HTMLElement) {
+	constructor(camera: I3JS.ICamera, domElement?: HTMLElement) {
 		super(camera, domElement);
 	}
 }
@@ -106,7 +106,7 @@ export class NgxPointerLockControls extends PointerLockControls {
 	 * @param camera
 	 * @param [domElement]
 	 */
-	constructor(camera: THREE_CORE.ICamera, domElement?: HTMLElement) {
+	constructor(camera: I3JS.ICamera, domElement?: HTMLElement) {
 		super(camera, domElement);
 	}
 }
@@ -125,7 +125,7 @@ export class NgxTrackballControls extends TrackballControls {
 	 * @param camera
 	 * @param [domElement]
 	 */
-	constructor(camera: THREE_CORE.ICamera, domElement?: HTMLElement) {
+	constructor(camera: I3JS.ICamera, domElement?: HTMLElement) {
 		super(camera, domElement);
 	}
 }
@@ -144,7 +144,7 @@ export class NgxTransformControls extends TransformControls {
 	 * @param camera
 	 * @param [domElement]
 	 */
-	constructor(camera: THREE_CORE.ICamera, domElement?: HTMLElement) {
+	constructor(camera: I3JS.ICamera, domElement?: HTMLElement) {
 		super(camera, domElement);
 	}
 }
@@ -165,9 +165,9 @@ export class NgxArcballControls extends ArcballControls {
 	 * @param [scene]
 	 */
 	constructor(
-		camera: THREE_CORE.ICamera,
+		camera: I3JS.ICamera,
 		domElement?: HTMLElement,
-		scene?: THREE_CORE.IScene
+		scene?: I3JS.IScene
 	) {
 		super(camera, domElement, scene);
 	}

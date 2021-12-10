@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { TagAttributes, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Rotation component.
@@ -107,13 +107,13 @@ export class RotationComponent
 	/**
 	 * The Rotation of rotation component
 	 */
-	private rotation: THREE_CORE.IEuler = null;
+	private rotation: I3JS.IEuler = null;
 
 	/**
 	 * The Object3d of rotation component
 	 */
 	private _object3d: {
-		[key: string]: THREE_CORE.IObject3D;
+		[key: string]: I3JS.IObject3D;
 	} = {};
 
 	/**
@@ -171,10 +171,10 @@ export class RotationComponent
 	 * Synks object3d
 	 * @param [rotation]
 	 */
-	public synkObject3d(rotation: THREE_CORE.IEuler = null, key: string = null) {
+	public synkObject3d(rotation: I3JS.IEuler = null, key: string = null) {
 		if (ThreeUtil.isNotNull(rotation) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._object3d)) {
-				const object3dList: THREE_CORE.IObject3D[] = [];
+				const object3dList: I3JS.IObject3D[] = [];
 				if (ThreeUtil.isNotNull(key)) {
 					if (ThreeUtil.isNotNull(this._object3d[key])) {
 						object3dList.push(this._object3d[key]);
@@ -290,8 +290,8 @@ export class RotationComponent
 	 * Gets rotation
 	 * @returns rotation
 	 */
-	private _getRotation(): THREE_CORE.IEuler {
-		let rotation: THREE_CORE.IEuler = null;
+	private _getRotation(): I3JS.IEuler {
+		let rotation: I3JS.IEuler = null;
 		if (ThreeUtil.isNotNull(this.refer)) {
 			rotation = ThreeUtil.getRotation(this.refer);
 		}
@@ -317,7 +317,7 @@ export class RotationComponent
 	 * Gets rotation
 	 * @returns rotation
 	 */
-	public getRotation(): THREE_CORE.IEuler {
+	public getRotation(): I3JS.IEuler {
 		if (this.rotation === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.rotation = this._getRotation();

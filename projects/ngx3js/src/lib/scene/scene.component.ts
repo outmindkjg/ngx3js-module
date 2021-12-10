@@ -22,7 +22,7 @@ import { RendererTimer } from './../interface';
 import { LocalStorageService } from './../local-storage.service';
 import { MixerComponent } from './../mixer/mixer.component';
 import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Scene component.
@@ -176,7 +176,7 @@ export class SceneComponent
 	/**
 	 * The Scene of scene component
 	 */
-	private scene: THREE_CORE.IScene = null;
+	private scene: I3JS.IScene = null;
 
 	/**
 	 * The Renderer of scene component
@@ -203,7 +203,7 @@ export class SceneComponent
 	 * Gets three renderer
 	 * @returns three renderer
 	 */
-	public getThreeRenderer(): THREE_CORE.IRenderer {
+	public getThreeRenderer(): I3JS.IRenderer {
 		if (ThreeUtil.isNotNull(this.renderer)) {
 			return this.renderer.getRenderer();
 		} else {
@@ -216,7 +216,7 @@ export class SceneComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
+	public getObject3d<T extends I3JS.IObject3D>(): T {
 		return this.getScene() as any;
 	}
 
@@ -260,7 +260,7 @@ export class SceneComponent
 	 * @param name
 	 * @returns texture option
 	 */
-	private getTextureOption(map: ThreeTexture, name: string): THREE_CORE.ITexture {
+	private getTextureOption(map: ThreeTexture, name: string): I3JS.ITexture {
 		if (ThreeUtil.isNotNull(map)) {
 			if (typeof map === 'string') {
 				const texture = AbstractTextureComponent.getTextureImageOption(
@@ -517,7 +517,7 @@ export class SceneComponent
 	 * Gets scene
 	 * @returns scene
 	 */
-	public getScene(): THREE_CORE.IScene {
+	public getScene(): I3JS.IScene {
 		if (this.scene === null || this._needUpdate) {
 			this.getSceneDumpy();
 		}
@@ -527,7 +527,7 @@ export class SceneComponent
 				this.scene = new THREE.Scene();
 				this.localStorageService.getScene(
 					this.storageName,
-					(scene: THREE_CORE.IScene) => {
+					(scene: I3JS.IScene) => {
 						this.scene = scene;
 						this.setObject3d(scene as any);
 					}
@@ -543,7 +543,7 @@ export class SceneComponent
 	 * Gets scene dumpy
 	 * @returns scene dumpy
 	 */
-	public getSceneDumpy(): THREE_CORE.IScene {
+	public getSceneDumpy(): I3JS.IScene {
 		if (this.scene === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.scene = new THREE.Scene();

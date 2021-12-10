@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Keyframe component.
@@ -297,13 +297,13 @@ export class KeyframeComponent
 	/**
 	 * The Clip of keyframe component
 	 */
-	private clip: THREE_CORE.IAnimationClip = null;
+	private clip: I3JS.IAnimationClip = null;
 
 	/**
 	 * Sets clip
 	 * @param clip
 	 */
-	public setClip(clip: THREE_CORE.IAnimationClip) {
+	public setClip(clip: I3JS.IAnimationClip) {
 		if (this.clip !== clip) {
 			this.clip = clip;
 			this.getKeyframe();
@@ -341,13 +341,13 @@ export class KeyframeComponent
 	/**
 	 * The Keyframe of keyframe component
 	 */
-	private keyframe: THREE_CORE.IKeyframeTrack = null;
+	private keyframe: I3JS.IKeyframeTrack = null;
 
 	/**
 	 * Gets keyframe
 	 * @returns keyframe
 	 */
-	public getKeyframe(): THREE_CORE.IKeyframeTrack {
+	public getKeyframe(): I3JS.IKeyframeTrack {
 		if (this.clip !== null && (this.keyframe === null || this._needUpdate)) {
 			this.needUpdate = false;
 			if (this.keyframe !== null) {

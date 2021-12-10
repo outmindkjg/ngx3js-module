@@ -27,7 +27,7 @@ import { ShaderType, ShaderUtils } from '../shader/shaders/shaderUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Material component.
@@ -761,7 +761,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns emissive
 	 */
-	private getEmissive(def?: ThreeColor): THREE_CORE.IColor {
+	private getEmissive(def?: ThreeColor): I3JS.IColor {
 		return ThreeUtil.getColorMultiplySafe(
 			this.emissive,
 			def,
@@ -775,7 +775,7 @@ export class MaterialComponent
 	 * @param def
 	 * @returns
 	 */
-	private getNormalScale(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
+	private getNormalScale(def?: I3JS.IVector2): I3JS.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(this.normalScaleX, this.normalScale, 1),
 			ThreeUtil.getTypeSafe(this.normalScaleY, this.normalScale, 1),
@@ -788,7 +788,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns reference position
 	 */
-	private getReferencePosition(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+	private getReferencePosition(def?: I3JS.IVector3): I3JS.IVector3 {
 		return ThreeUtil.getVector3Safe(
 			this.referencePositionX,
 			this.referencePositionY,
@@ -803,8 +803,8 @@ export class MaterialComponent
 	 * @returns clearcoat normal scale
 	 */
 	private getClearcoatNormalScale(
-		def?: THREE_CORE.IVector2
-	): THREE_CORE.IVector2 {
+		def?: I3JS.IVector2
+	): I3JS.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(
 				this.clearcoatNormalScaleX,
@@ -824,7 +824,7 @@ export class MaterialComponent
 	 * @param def
 	 * @returns
 	 */
-	private getColor(def?: ThreeColor): THREE_CORE.IColor {
+	private getColor(def?: ThreeColor): I3JS.IColor {
 		return ThreeUtil.getColorMultiplySafe(this.color, def, this.colorMultiply);
 	}
 
@@ -834,7 +834,7 @@ export class MaterialComponent
 	 * @param def
 	 * @returns
 	 */
-	private getDiffuseColor(def?: ThreeColor): THREE_CORE.IColor {
+	private getDiffuseColor(def?: ThreeColor): I3JS.IColor {
 		return ThreeUtil.getColorMultiplySafe(
 			this.diffuseColor,
 			def,
@@ -847,7 +847,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns sheen
 	 */
-	private getSheen(def?: ThreeColor): THREE_CORE.IColor {
+	private getSheen(def?: ThreeColor): I3JS.IColor {
 		return ThreeUtil.getColorMultiplySafe(this.sheen, def, this.sheenMultiply);
 	}
 
@@ -856,7 +856,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns specular
 	 */
-	private getSpecular(def?: ThreeColor): THREE_CORE.IColor {
+	private getSpecular(def?: ThreeColor): I3JS.IColor {
 		return ThreeUtil.getColorMultiplySafe(
 			this.specular,
 			def,
@@ -870,7 +870,7 @@ export class MaterialComponent
 	 * @param color
 	 * @returns
 	 */
-	private getColorNode(color?: THREE_CORE.IColor): any {
+	private getColorNode(color?: I3JS.IColor): any {
 		return new THREE_MAT.NODES.ColorNode(color);
 	}
 
@@ -911,7 +911,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getMatrix3Node(
-		matrix?: THREE_CORE.IMatrix3
+		matrix?: I3JS.IMatrix3
 	): THREE_MAT.NODES.Matrix3Node {
 		return new THREE_MAT.NODES.Matrix3Node(matrix);
 	}
@@ -923,7 +923,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getMatrix4Node(
-		matrix?: THREE_CORE.IMatrix4
+		matrix?: I3JS.IMatrix4
 	): THREE_MAT.NODES.Matrix4Node {
 		return new THREE_MAT.NODES.Matrix4Node(matrix);
 	}
@@ -966,7 +966,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getTextureNode(
-		value: THREE_CORE.ITexture,
+		value: I3JS.ITexture,
 		uv?: THREE_MAT.NODES.UVNode,
 		bias?: THREE_MAT.NODES.Node,
 		project?: boolean
@@ -983,7 +983,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getCubeTextureNode(
-		value: THREE_CORE.ICubeTexture,
+		value: I3JS.ICubeTexture,
 		uv?: THREE_MAT.NODES.UVNode,
 		bias?: THREE_MAT.NODES.Node
 	): THREE_MAT.NODES.CubeTextureNode {
@@ -1024,7 +1024,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getReflectorRTT(
-		geometry: THREE_CORE.IBufferGeometry,
+		geometry: I3JS.IBufferGeometry,
 		options?: ReflectorOptions
 	): ReflectorRTT {
 		return new ReflectorRTT(geometry, options);
@@ -1364,15 +1364,15 @@ export class MaterialComponent
 	 * @returns uniforms
 	 */
 	private getUniforms(
-		def?: { [uniform: string]: THREE_CORE.IUniform },
+		def?: { [uniform: string]: I3JS.IUniform },
 		targetUniforms?: {
-			[key: string]: THREE_CORE.IUniform;
+			[key: string]: I3JS.IUniform;
 		}
 	): {
-		[uniform: string]: THREE_CORE.IUniform;
+		[uniform: string]: I3JS.IUniform;
 	} {
 		const uniforms: {
-			[key: string]: THREE_CORE.IUniform;
+			[key: string]: I3JS.IUniform;
 		} = ThreeUtil.getTypeSafe(this.uniforms, def);
 		const resultUniforms = targetUniforms
 			? targetUniforms
@@ -1394,7 +1394,7 @@ export class MaterialComponent
 					case 'matrix':
 						if (ThreeUtil.isNotNull(valueValue.getObject3d)) {
 							this.unSubscribeRefer('unforms_' + key);
-							const object3d: THREE_CORE.IObject3D = valueValue.getObject3d();
+							const object3d: I3JS.IObject3D = valueValue.getObject3d();
 							resultUniforms[key] = {
 								value: ThreeUtil.getMatrix4Safe(object3d, valueType),
 							};
@@ -1478,7 +1478,7 @@ export class MaterialComponent
 					case 'texturelist':
 					case 'imagearray':
 					case 'texturearray':
-						const textureList: THREE_CORE.ITexture[] = [];
+						const textureList: I3JS.ITexture[] = [];
 						const texturePathList: string[] = [];
 						const textureOption = anyValue['options'];
 						if (typeof valueValue === 'string') {
@@ -1594,8 +1594,8 @@ export class MaterialComponent
 	 * @returns shader material update
 	 */
 	private getShaderMaterialUpdate(
-		shaderMaterial: THREE_CORE.IShaderMaterial
-	): THREE_CORE.IShaderMaterial {
+		shaderMaterial: I3JS.IShaderMaterial
+	): I3JS.IShaderMaterial {
 		this.getUniforms({}, shaderMaterial.uniforms);
 		if (ThreeUtil.isNotNull(this.glslVersion)) {
 			shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(this.glslVersion);
@@ -1612,7 +1612,7 @@ export class MaterialComponent
 	 * @param resultUniforms
 	 */
 	private setAssignUniforms(resultUniforms: {
-		[key: string]: THREE_CORE.IUniform;
+		[key: string]: I3JS.IUniform;
 	}) {
 		if (ThreeUtil.isNotNull(this.uniforms)) {
 			Object.entries(resultUniforms).forEach(([key, value]) => {
@@ -1626,7 +1626,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns resolution
 	 */
-	private getResolution(def?: THREE_CORE.IVector2): THREE_CORE.IVector2 {
+	private getResolution(def?: I3JS.IVector2): I3JS.IVector2 {
 		return ThreeUtil.getVector2Safe(this.resolutionX, this.resolutionY, def);
 	}
 
@@ -1671,8 +1671,8 @@ export class MaterialComponent
 	 * @param type
 	 * @returns texture
 	 */
-	protected getTexture(type: string): THREE_CORE.ITexture {
-		let texture: THREE_CORE.ITexture = null;
+	protected getTexture(type: string): I3JS.ITexture {
+		let texture: I3JS.ITexture = null;
 		switch (type.toLowerCase()) {
 			case 'envmap':
 				if (ThreeUtil.isNotNull(this.envMap)) {
@@ -2968,7 +2968,7 @@ export class MaterialComponent
 		if (this.material === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.setUserData('storageSource', null);
-			let material: THREE_CORE.IMaterial = null;
+			let material: I3JS.IMaterial = null;
 			if (ThreeUtil.isNotNull(this.storageName)) {
 				material = new THREE_MAT.NgxMeshLambertMaterial(
 					this.getMaterialParameters({})
@@ -3004,7 +3004,7 @@ export class MaterialComponent
 						);
 						nodeMaterialLoader.load(
 							ThreeUtil.getStoreUrl(this.storageName),
-							(material: THREE_CORE.IMaterial) => {
+							(material: I3JS.IMaterial) => {
 								this.setUserData('storageSource', nodeMaterialLoader);
 								this.setMaterial(material);
 							}
@@ -3013,7 +3013,7 @@ export class MaterialComponent
 					default:
 						this.localStorageService.getMaterial(
 							this.storageName,
-							(material: THREE_CORE.IMaterial, storageSource: any) => {
+							(material: I3JS.IMaterial, storageSource: any) => {
 								this.setUserData('storageSource', storageSource);
 								this.setMaterial(material);
 							},

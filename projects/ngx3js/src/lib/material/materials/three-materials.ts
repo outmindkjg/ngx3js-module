@@ -5,7 +5,7 @@ import {
 } from 'three/examples/jsm/lines/LineMaterial';
 import * as NODES from 'three/examples/jsm/nodes/Nodes';
 import { ShaderUtils } from '../../shader/shaders/shaderUtils';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * LineBasic material
@@ -14,7 +14,7 @@ import * as THREE_CORE from './../../threejs-library/three-core';
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/LineBasicMaterial) page for a live demo.
  *
  */
-export class NgxLineBasicMaterial extends THREE.LineBasicMaterial implements THREE_CORE.ILineBasicMaterial{
+export class NgxLineBasicMaterial extends THREE.LineBasicMaterial implements I3JS.ILineBasicMaterial{
 	/**
 	 * Creates an instance of ngx line basic material.
 	 * @param [parameters]
@@ -31,7 +31,7 @@ export class NgxLineBasicMaterial extends THREE.LineBasicMaterial implements THR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/LineDashedMaterial) page for a live demo.
  *
  */
-export class NgxLineDashedMaterial extends THREE.LineDashedMaterial implements THREE_CORE.ILineDashedMaterial {
+export class NgxLineDashedMaterial extends THREE.LineDashedMaterial implements I3JS.ILineDashedMaterial {
 	/**
 	 * Creates an instance of ngx line dashed material.
 	 * @param [parameters]
@@ -48,7 +48,7 @@ export class NgxLineDashedMaterial extends THREE.LineDashedMaterial implements T
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshBasicMaterial) page for a live demo.
  *
  */
-export class NgxMeshBasicMaterial extends THREE.MeshBasicMaterial implements THREE_CORE.IMeshBasicMaterial {
+export class NgxMeshBasicMaterial extends THREE.MeshBasicMaterial implements I3JS.IMeshBasicMaterial {
 	/**
 	 * Creates an instance of ngx mesh basic material.
 	 * @param [parameters]
@@ -65,7 +65,7 @@ export class NgxMeshBasicMaterial extends THREE.MeshBasicMaterial implements THR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshDistanceMaterial) page for a live demo.
  *
  */
-export class NgxMeshDistanceMaterial extends THREE.MeshDistanceMaterial implements THREE_CORE.IMeshDistanceMaterial {
+export class NgxMeshDistanceMaterial extends THREE.MeshDistanceMaterial implements I3JS.IMeshDistanceMaterial {
 	/**
 	 * Creates an instance of ngx mesh distance material.
 	 * @param [parameters]
@@ -82,7 +82,7 @@ export class NgxMeshDistanceMaterial extends THREE.MeshDistanceMaterial implemen
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshMatcapMaterial) page for a live demo.
  *
  */
-export class NgxMeshMatcapMaterial extends THREE.MeshMatcapMaterial implements THREE_CORE.IMeshMatcapMaterial {
+export class NgxMeshMatcapMaterial extends THREE.MeshMatcapMaterial implements I3JS.IMeshMatcapMaterial {
 	/**
 	 * Creates an instance of ngx mesh matcap material.
 	 * @param [parameters]
@@ -99,7 +99,7 @@ export class NgxMeshMatcapMaterial extends THREE.MeshMatcapMaterial implements T
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshNormalMaterial) page for a live demo.
  *
  */
-export class NgxMeshNormalMaterial extends THREE.MeshNormalMaterial implements THREE_CORE.IMeshNormalMaterial {
+export class NgxMeshNormalMaterial extends THREE.MeshNormalMaterial implements I3JS.IMeshNormalMaterial {
 	/**
 	 * Creates an instance of ngx mesh normal material.
 	 * @param [parameters]
@@ -116,7 +116,7 @@ export class NgxMeshNormalMaterial extends THREE.MeshNormalMaterial implements T
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshPhongMaterial) page for a live demo.
  *
  */
-export class NgxMeshPhongMaterial extends THREE.MeshPhongMaterial implements THREE_CORE.IMeshPhongMaterial {
+export class NgxMeshPhongMaterial extends THREE.MeshPhongMaterial implements I3JS.IMeshPhongMaterial {
 	/**
 	 * Creates an instance of ngx mesh phong material.
 	 * @param [parameters]
@@ -133,7 +133,7 @@ export class NgxMeshPhongMaterial extends THREE.MeshPhongMaterial implements THR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshPhysicalMaterial) page for a live demo.
  *
  */
-export class NgxMeshPhysicalMaterial extends THREE.MeshPhysicalMaterial implements THREE_CORE.IMeshPhysicalMaterial {
+export class NgxMeshPhysicalMaterial extends THREE.MeshPhysicalMaterial implements I3JS.IMeshPhysicalMaterial {
 	/**
 	 * Creates an instance of ngx mesh physical material.
 	 * @param [parameters]
@@ -154,7 +154,7 @@ export class NgxMeshPhysicalMaterial extends THREE.MeshPhysicalMaterial implemen
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshStandardMaterial) page for a live demo.
  *
  */
-export class NgxMeshStandardMaterial extends THREE.MeshStandardMaterial implements THREE_CORE.IMeshStandardMaterial {
+export class NgxMeshStandardMaterial extends THREE.MeshStandardMaterial implements I3JS.IMeshStandardMaterial {
 	/**
 	 * Creates an instance of ngx mesh standard material.
 	 * @param [parameters]
@@ -171,7 +171,7 @@ export class NgxMeshStandardMaterial extends THREE.MeshStandardMaterial implemen
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshToonMaterial) page for a live demo.
  *
  */
-export class NgxMeshToonMaterial extends THREE.MeshToonMaterial implements THREE_CORE.IMeshToonMaterial {
+export class NgxMeshToonMaterial extends THREE.MeshToonMaterial implements I3JS.IMeshToonMaterial {
 	/**
 	 * Creates an instance of ngx mesh toon material.
 	 * @param [parameters]
@@ -188,7 +188,7 @@ export class NgxMeshToonMaterial extends THREE.MeshToonMaterial implements THREE
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/PointsMaterial) page for a live demo.
  *
  */
-export class NgxPointsMaterial extends THREE.PointsMaterial implements THREE_CORE.IPointsMaterial {
+export class NgxPointsMaterial extends THREE.PointsMaterial implements I3JS.IPointsMaterial {
 	/**
 	 * Creates an instance of ngx points material.
 	 * @param [parameters]
@@ -205,7 +205,7 @@ export class NgxPointsMaterial extends THREE.PointsMaterial implements THREE_COR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShadowMaterial) page for a live demo.
  *
  */
-export class NgxShadowMaterial extends THREE.ShadowMaterial implements THREE_CORE.IShadowMaterial {
+export class NgxShadowMaterial extends THREE.ShadowMaterial implements I3JS.IShadowMaterial {
 	/**
 	 * Creates an instance of ngx shadow material.
 	 * @param [parameters]
@@ -222,7 +222,7 @@ export class NgxShadowMaterial extends THREE.ShadowMaterial implements THREE_COR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/LineMaterial) page for a live demo.
  *
  */
-export class NgxLineMaterial extends LineMaterial implements THREE_CORE.IShaderMaterial {
+export class NgxLineMaterial extends LineMaterial implements I3JS.IShaderMaterial {
 	/**
 	 * Creates an instance of ngx line material.
 	 * @param [parameters]
@@ -239,7 +239,7 @@ export class NgxLineMaterial extends LineMaterial implements THREE_CORE.IShaderM
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/SpriteMaterial) page for a live demo.
  *
  */
-export class NgxSpriteMaterial extends THREE.SpriteMaterial implements THREE_CORE.ISpriteMaterial {
+export class NgxSpriteMaterial extends THREE.SpriteMaterial implements I3JS.ISpriteMaterial {
 	/**
 	 * Creates an instance of ngx sprite material.
 	 * @param [parameters]
@@ -256,7 +256,7 @@ export class NgxSpriteMaterial extends THREE.SpriteMaterial implements THREE_COR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshLambertMaterial) page for a live demo.
  *
  */
-export class NgxMeshLambertMaterial extends THREE.MeshLambertMaterial implements THREE_CORE.IMeshLambertMaterial {
+export class NgxMeshLambertMaterial extends THREE.MeshLambertMaterial implements I3JS.IMeshLambertMaterial {
 	/**
 	 * Creates an instance of ngx mesh lambert material.
 	 * @param [parameters]
@@ -273,7 +273,7 @@ export class NgxMeshLambertMaterial extends THREE.MeshLambertMaterial implements
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshDepthMaterial) page for a live demo.
  *
  */
-export class NgxMeshDepthMaterial extends THREE.MeshDepthMaterial implements THREE_CORE.IMeshDepthMaterial {
+export class NgxMeshDepthMaterial extends THREE.MeshDepthMaterial implements I3JS.IMeshDepthMaterial {
 	/**
 	 * Creates an instance of ngx mesh depth material.
 	 * @param [parameters]
@@ -290,7 +290,7 @@ export class NgxMeshDepthMaterial extends THREE.MeshDepthMaterial implements THR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/RawShaderMaterial) page for a live demo.
  *
  */
-export class NgxRawShaderMaterial extends THREE.RawShaderMaterial implements THREE_CORE.IRawShaderMaterial {
+export class NgxRawShaderMaterial extends THREE.RawShaderMaterial implements I3JS.IRawShaderMaterial {
 	/**
 	 * Creates an instance of ngx raw shader material.
 	 *
@@ -323,7 +323,7 @@ export class NgxRawShaderMaterial extends THREE.RawShaderMaterial implements THR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShaderMaterial) page for a live demo.
  *
  */
-export class NgxShaderMaterial extends THREE.ShaderMaterial implements THREE_CORE.IShaderMaterial {
+export class NgxShaderMaterial extends THREE.ShaderMaterial implements I3JS.IShaderMaterial {
 	/**
 	 * Creates an instance of ngx shader material.
 	 *
@@ -349,7 +349,7 @@ export class NgxShaderMaterial extends THREE.ShaderMaterial implements THREE_COR
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/StandardNodeMaterial) page for a live demo.
  *
  */
-export class NgxStandardNodeMaterial extends NODES.StandardNodeMaterial implements THREE_CORE.IShaderMaterial {
+export class NgxStandardNodeMaterial extends NODES.StandardNodeMaterial implements I3JS.IShaderMaterial {
 	/**
 	 * Creates an instance of ngx standard node material.
 	 */

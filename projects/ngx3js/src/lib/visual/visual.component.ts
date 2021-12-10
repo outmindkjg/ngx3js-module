@@ -15,7 +15,7 @@ import { HtmlComponent } from '../html/html.component';
 import { CssStyle, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TransformComponent } from '../transform/transform.component';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Html collection
@@ -281,12 +281,12 @@ export class VisualComponent
 	/**
 	 * Parent size of visual component
 	 */
-	private parentSize: THREE_CORE.IVector2 = null;
+	private parentSize: I3JS.IVector2 = null;
 
 	/**
 	 * Ele size of visual component
 	 */
-	private eleSize: THREE_CORE.IVector2 = null;
+	private eleSize: I3JS.IVector2 = null;
 
 	/**
 	 * Parent collection of visual component
@@ -301,7 +301,7 @@ export class VisualComponent
 	 */
 	public setParentNode(
 		parentNode: HTMLElement,
-		parentSize: THREE_CORE.IVector2,
+		parentSize: I3JS.IVector2,
 		parentCollection: HtmlCollection
 	) {
 		if (this.parentNode !== parentNode) {

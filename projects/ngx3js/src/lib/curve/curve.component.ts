@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { ThreeUtil, ThreeVector } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Curve component.
@@ -124,8 +124,8 @@ export class CurveComponent
 	 * @param min
 	 * @returns points v3
 	 */
-	private getPointsV3(def: ThreeVector[], min: number): THREE_CORE.IVector3[] {
-		const points: THREE_CORE.IVector3[] = [];
+	private getPointsV3(def: ThreeVector[], min: number): I3JS.IVector3[] {
+		const points: I3JS.IVector3[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
 			points.push(new THREE.Vector3(p.x, p.y, p.z));
 		});
@@ -143,8 +143,8 @@ export class CurveComponent
 	 * @param min
 	 * @returns points v2
 	 */
-	private getPointsV2(def: ThreeVector[], min: number): THREE_CORE.IVector2[] {
-		const points: THREE_CORE.IVector2[] = [];
+	private getPointsV2(def: ThreeVector[], min: number): I3JS.IVector2[] {
+		const points: I3JS.IVector2[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
 			points.push(new THREE.Vector2(p.x, p.y));
 		});
@@ -203,7 +203,7 @@ export class CurveComponent
 	/**
 	 * The Curve of curve component
 	 */
-	private curve: THREE_CORE.ICurve<THREE_CORE.IVector> = null;
+	private curve: I3JS.ICurve<I3JS.IVector> = null;
 
 	/**
 	 * Applys changes
@@ -237,7 +237,7 @@ export class CurveComponent
 	 * Gets curve
 	 * @returns curve
 	 */
-	public getCurve(): THREE_CORE.ICurve<THREE_CORE.IVector> {
+	public getCurve(): I3JS.ICurve<I3JS.IVector> {
 		if (this.curve === null || this._needUpdate) {
 			this.needUpdate = false;
 			switch (this.type.toLowerCase()) {

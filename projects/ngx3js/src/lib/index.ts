@@ -1,4 +1,3 @@
-export * as THREE from 'three';
 export * from './animation-group/animation-group.component';
 export * from './audio/audio.component';
 export * from './background/background.component';
@@ -116,6 +115,7 @@ export * from './texture/texture.component';
 export * from './texture/textureUtils';
 export * from './threejs-library/ammo';
 export * from './threejs-library/three-ngx';
+export * as I3JS from './threejs-library/three-interface';
 export * from './threejs-library/three-core';
 export * from './tools/tools.component';
 export * from './transform/transform.component';

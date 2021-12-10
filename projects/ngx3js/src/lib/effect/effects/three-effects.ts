@@ -10,7 +10,7 @@ import {
 import { ParallaxBarrierEffect } from 'three/examples/jsm/effects/ParallaxBarrierEffect';
 import { PeppersGhostEffect } from 'three/examples/jsm/effects/PeppersGhostEffect';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * Ascii effect
@@ -28,7 +28,7 @@ export class NgxAsciiEffect extends AsciiEffect {
 	 * @param [options]
 	 */
 	constructor(
-		renderer: THREE_CORE.IWebGLRenderer,
+		renderer: I3JS.IWebGLRenderer,
 		charSet?: string,
 		options?: AsciiEffectOptions
 	) {
@@ -51,7 +51,7 @@ export class NgxOutlineEffect extends OutlineEffect {
 	 * @param [parameters]
 	 */
 	constructor(
-		renderer: THREE_CORE.IWebGLRenderer,
+		renderer: I3JS.IWebGLRenderer,
 		parameters?: OutlineEffectParameters
 	) {
 		super(renderer, parameters);
@@ -71,7 +71,7 @@ export class NgxParallaxBarrierEffect extends ParallaxBarrierEffect {
 	 *
 	 * @param renderer
 	 */
-	constructor(renderer: THREE_CORE.IWebGLRenderer) {
+	constructor(renderer: I3JS.IWebGLRenderer) {
 		super(renderer);
 	}
 }
@@ -89,7 +89,7 @@ export class NgxPeppersGhostEffect extends PeppersGhostEffect {
 	 *
 	 * @param renderer
 	 */
-	constructor(renderer: THREE_CORE.IWebGLRenderer) {
+	constructor(renderer: I3JS.IWebGLRenderer) {
 		super(renderer);
 	}
 }
@@ -109,8 +109,8 @@ export class NgxEffectComposer extends EffectComposer {
 	 * @param [renderTarget]
 	 */
 	constructor(
-		renderer: THREE_CORE.IWebGLRenderer,
-		renderTarget?: THREE_CORE.IWebGLRenderTarget
+		renderer: I3JS.IWebGLRenderer,
+		renderTarget?: I3JS.IWebGLRenderTarget
 	) {
 		super(renderer, renderTarget);
 	}

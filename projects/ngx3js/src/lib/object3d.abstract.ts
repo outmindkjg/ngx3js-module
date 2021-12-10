@@ -24,7 +24,7 @@ import { RigidbodyComponent } from './rigidbody/rigidbody.component';
 import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
 import { AbstractTweenComponent } from './tween.abstract';
-import * as THREE_CORE from './threejs-library/three-core';
+import * as I3JS from './threejs-library/three-interface';
 
 /**
  * Object3d options
@@ -79,17 +79,17 @@ export interface Object3dOptions {
 	/**
 	 * A [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3) representing the object's local position. Default is (0, 0, 0).
 	 */
-	position?: THREE_CORE.IVector3 | number[] | PositionComponent | any;
+	position?: I3JS.IVector3 | number[] | PositionComponent | any;
 
 	/**
 	 * Object's local rotation (see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)), in radians.
 	 */
-	rotation?: THREE_CORE.IVector3 | number[] | RotationComponent | any;
+	rotation?: I3JS.IVector3 | number[] | RotationComponent | any;
 
 	/**
 	 * The object's local scale. Default is [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3)( 1, 1, 1 ).
 	 */
-	scale?: THREE_CORE.IVector3 | number[] | ScaleComponent | any;
+	scale?: I3JS.IVector3 | number[] | ScaleComponent | any;
 
 	/**
 	 * vector - A vector representing a position in world space.
@@ -97,7 +97,7 @@ export interface Object3dOptions {
 	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 */
-	lookat?: THREE_CORE.IVector3 | number[] | LookatComponent | any;
+	lookat?: I3JS.IVector3 | number[] | LookatComponent | any;
 
 	/**
 	 * The distance at which to display this level of detail.
@@ -108,17 +108,17 @@ export interface Object3dOptions {
 	 * Custom depth material to be used when rendering to the depth map. Can only be used in context of meshes.
 	 * When shadow-casting with a [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/DirectionalLight) or [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/SpotLight), if you are (a) modifying vertex positions in the vertex shader, (b) using a displacement map, (c) using an alpha map with alphaTest, or (d) using a transparent texture with alphaTest, you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
 	 */
-	customDepth?: AbstractMaterialComponent | THREE_CORE.IMaterial | any;
+	customDepth?: AbstractMaterialComponent | I3JS.IMaterial | any;
 
 	/**
 	 * Same as [Object3D.customDepthMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D.customDepthMaterial), but used with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/lights/PointLight). Default is *undefined*.
 	 */
-	customDistance?: AbstractMaterialComponent | THREE_CORE.IMaterial | any;
+	customDistance?: AbstractMaterialComponent | I3JS.IMaterial | any;
 
 	/**
 	 * The animaion group of this object 3d
 	 */
-	animationGroup?: AnimationGroupComponent | THREE_CORE.IAnimationObjectGroup;
+	animationGroup?: AnimationGroupComponent | I3JS.IAnimationObjectGroup;
 }
 
 /**
@@ -222,7 +222,7 @@ export class AbstractObject3dComponent
 	/**
 	 * The object's local scale. Default is [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3)( 1, 1, 1 ).
 	 */
-	@Input() private scale: THREE_CORE.IVector3 | number[] | ScaleComponent | any =
+	@Input() private scale: I3JS.IVector3 | number[] | ScaleComponent | any =
 		null;
 
 	/**
@@ -231,7 +231,7 @@ export class AbstractObject3dComponent
 	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 */
-	@Input() private lookat: THREE_CORE.IVector3 | number[] | LookatComponent | any =
+	@Input() private lookat: I3JS.IVector3 | number[] | LookatComponent | any =
 		null;
 
 	/**
@@ -253,7 +253,7 @@ export class AbstractObject3dComponent
 	 */
 	@Input() private customDistance:
 		| AbstractMaterialComponent
-		| THREE_CORE.IMaterial
+		| I3JS.IMaterial
 		| any = null;
 
 	/**
@@ -261,7 +261,7 @@ export class AbstractObject3dComponent
 	 */
 	@Input() private animationGroup:
 		| AnimationGroupComponent
-		| THREE_CORE.IAnimationObjectGroup = null;
+		| I3JS.IAnimationObjectGroup = null;
 
 	/**
 	 * An optional callback that is executed immediately before a 3D object is rendered.
@@ -271,12 +271,12 @@ export class AbstractObject3dComponent
 	 * Instances of [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/Object3D), [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Group) or [Bone](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/objects/Bone) are not renderable and thus this callback is not executed for such objects.
 	 */
 	@Input() private onBeforeRender: (
-		renderer?: THREE_CORE.IWebGLRenderer,
-		scene?: THREE_CORE.IScene,
-		camera?: THREE_CORE.ICamera,
-		geometry?: THREE_CORE.IBufferGeometry,
-		material?: THREE_CORE.IMaterial,
-		group?: THREE_CORE.IGroup
+		renderer?: I3JS.IWebGLRenderer,
+		scene?: I3JS.IScene,
+		camera?: I3JS.ICamera,
+		geometry?: I3JS.IBufferGeometry,
+		material?: I3JS.IMaterial,
+		group?: I3JS.IGroup
 	) => void = null;
 
 	/**
@@ -594,8 +594,8 @@ export class AbstractObject3dComponent
 	protected getMaterials(
 		parameters?: THREE.MeshBasicMaterialParameters,
 		required: boolean = true
-	): THREE_CORE.IMaterial | THREE_CORE.IMaterial[] {
-		const materials: THREE_CORE.IMaterial[] = [];
+	): I3JS.IMaterial | I3JS.IMaterial[] {
+		const materials: I3JS.IMaterial[] = [];
 		if (this.material !== null && this.material !== undefined) {
 			const material = ThreeUtil.getMaterialByType(this.material, 'material');
 			if (ThreeUtil.isNotNull(material)) {
@@ -637,7 +637,7 @@ export class AbstractObject3dComponent
 	protected getMaterialOne(
 		parameters?: THREE.MeshBasicMaterialParameters,
 		required: boolean = true
-	): THREE_CORE.IMaterial {
+	): I3JS.IMaterial {
 		const materials = this.getMaterials(parameters, required);
 		if (Array.isArray(materials)) {
 			return materials[0];
@@ -655,7 +655,7 @@ export class AbstractObject3dComponent
 	protected getMaterialsMulti(
 		parameters?: THREE.MeshBasicMaterialParameters,
 		required: boolean = true
-	): THREE_CORE.IMaterial[] {
+	): I3JS.IMaterial[] {
 		const materials = this.getMaterials(parameters, required);
 		if (Array.isArray(materials)) {
 			return materials;
@@ -669,8 +669,8 @@ export class AbstractObject3dComponent
 	 * Gets geometry
 	 * @returns geometry
 	 */
-	public getGeometry(): THREE_CORE.IBufferGeometry {
-		let geometry: THREE_CORE.IBufferGeometry = null;
+	public getGeometry(): I3JS.IBufferGeometry {
+		let geometry: I3JS.IBufferGeometry = null;
 		if (this.geometry !== null) {
 			return ThreeUtil.getGeometry(this.geometry);
 		}
@@ -691,7 +691,7 @@ export class AbstractObject3dComponent
 	 * Gets position
 	 * @returns position
 	 */
-	public getPosition(): THREE_CORE.IVector3 {
+	public getPosition(): I3JS.IVector3 {
 		if (this.object3d !== null) {
 			return this.object3d.position;
 		} else if (this.positionList !== null && this.positionList.length > 0) {
@@ -756,7 +756,7 @@ export class AbstractObject3dComponent
 	 * Gets scale
 	 * @returns scale
 	 */
-	public getScale(): THREE_CORE.IVector3 {
+	public getScale(): I3JS.IVector3 {
 		if (this.object3d !== null) {
 			return this.object3d.scale;
 		} else if (this.scaleList !== null && this.scaleList.length > 0) {
@@ -806,7 +806,7 @@ export class AbstractObject3dComponent
 	 * Gets rotation
 	 * @returns rotation
 	 */
-	public getRotation(): THREE_CORE.IEuler {
+	public getRotation(): I3JS.IEuler {
 		if (this.object3d !== null) {
 			return this.object3d.rotation;
 		} else if (this.rotationList !== null && this.rotationList.length > 0) {
@@ -891,7 +891,7 @@ export class AbstractObject3dComponent
 	 * @param name
 	 * @returns object by name
 	 */
-	public getObjectByName(name: string): THREE_CORE.IObject3D | undefined {
+	public getObjectByName(name: string): I3JS.IObject3D | undefined {
 		if (this.object3d !== null) {
 			return this.object3d.getObjectByName(name);
 		}
@@ -903,7 +903,7 @@ export class AbstractObject3dComponent
 	 * @param id
 	 * @returns object by id
 	 */
-	public getObjectById(id: number): THREE_CORE.IObject3D | undefined {
+	public getObjectById(id: number): I3JS.IObject3D | undefined {
 		if (this.object3d !== null) {
 			return this.object3d.getObjectById(id);
 		}
@@ -919,7 +919,7 @@ export class AbstractObject3dComponent
 	public getObjectByProperty(
 		name: string,
 		value: string
-	): THREE_CORE.IObject3D | undefined {
+	): I3JS.IObject3D | undefined {
 		if (this.object3d !== null) {
 			return this.object3d.getObjectByProperty(name, value);
 		}
@@ -929,14 +929,14 @@ export class AbstractObject3dComponent
 	/**
 	 * The Object3d of abstract object3d component
 	 */
-	protected object3d: THREE_CORE.IObject3D = null;
+	protected object3d: I3JS.IObject3D = null;
 
 	/**
 	 * Gets object3d
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
+	public getObject3d<T extends I3JS.IObject3D>(): T {
 		return this.object3d as T;
 	}
 
@@ -966,14 +966,14 @@ export class AbstractObject3dComponent
 	/**
 	 * Parent object3d of abstract object3d component
 	 */
-	protected parentObject3d: THREE_CORE.IObject3D = null;
+	protected parentObject3d: I3JS.IObject3D = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE_CORE.IObject3D): boolean {
+	public setParent(parent: I3JS.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			const oldParent = this.parentObject3d;
 			this.parentObject3d = parent;
@@ -1009,7 +1009,7 @@ export class AbstractObject3dComponent
 	 * Removes object3d
 	 * @param object3d
 	 */
-	removeObject3d(object3d: THREE_CORE.IObject3D) {
+	removeObject3d(object3d: I3JS.IObject3D) {
 		if (object3d !== null && object3d.parent !== null) {
 			object3d.traverse((child) => {
 				if (child instanceof CSS2DObject || child instanceof CSS3DObject) {
@@ -1026,7 +1026,7 @@ export class AbstractObject3dComponent
 	/**
 	 * Added refer child of abstract object3d component
 	 */
-	private _addedReferChild: THREE_CORE.IObject3D[] = [];
+	private _addedReferChild: I3JS.IObject3D[] = [];
 
 	/**
 	 * Adds parent object3d
@@ -1034,7 +1034,7 @@ export class AbstractObject3dComponent
 	 * @param [changes]
 	 */
 	public addParentObject3d(
-		object3d: THREE_CORE.IObject3D,
+		object3d: I3JS.IObject3D,
 		changes?: string | string[]
 	) {
 		if (ThreeUtil.isNotNull(this.object3d) && ThreeUtil.isNotNull(object3d)) {
@@ -1056,7 +1056,7 @@ export class AbstractObject3dComponent
 	 * @param [changes]
 	 */
 	public addChildObject3d(
-		object3d: THREE_CORE.IObject3D,
+		object3d: I3JS.IObject3D,
 		changes?: string | string[]
 	) {
 		if (ThreeUtil.isNotNull(this.object3d) && ThreeUtil.isNotNull(object3d)) {
@@ -1078,7 +1078,7 @@ export class AbstractObject3dComponent
 	 * Sets parent object3d
 	 * @param object3d
 	 */
-	public setParentObject3d(object3d: THREE_CORE.IObject3D) {
+	public setParentObject3d(object3d: I3JS.IObject3D) {
 		if (ThreeUtil.isNotNull(object3d) && this.object3d !== object3d) {
 			this.setObject3d(object3d);
 			if (this.parentObject3d !== null && this.parentObject3d.parent !== null) {
@@ -1091,7 +1091,7 @@ export class AbstractObject3dComponent
 	 * Sets object3d
 	 * @param object3d
 	 */
-	protected setObject3d(object3d: THREE_CORE.IObject3D) {
+	protected setObject3d(object3d: I3JS.IObject3D) {
 		if (ThreeUtil.isNotNull(object3d) && this.object3d !== object3d) {
 			if (this.object3d !== null && this.object3d.parent !== null) {
 				this.object3d.parent.remove(this.object3d);
@@ -1141,8 +1141,8 @@ export class AbstractObject3dComponent
 	 * Gets object top
 	 * @returns object top
 	 */
-	public getObjectTop(): THREE_CORE.IObject3D {
-		let parent: THREE_CORE.IObject3D = this.parent;
+	public getObjectTop(): I3JS.IObject3D {
+		let parent: I3JS.IObject3D = this.parent;
 		while (parent.parent !== null) {
 			parent = parent.parent;
 		}
@@ -1157,7 +1157,7 @@ export class AbstractObject3dComponent
 		this.applyChanges3d(changes);
 	}
 
-	private cachedPrefab: THREE_CORE.IObject3D = null;
+	private cachedPrefab: I3JS.IObject3D = null;
 	protected cachedPositionList: PositionComponent[] = [];
 	protected cachedRotationList: RotationComponent[] = [];
 	protected cachedScaleList: ScaleComponent[] = [];
@@ -1225,7 +1225,7 @@ export class AbstractObject3dComponent
 							) {
 								this.cachedPrefab.parent.remove(this.cachedPrefab.parent);
 							}
-							const tmpPrefab: THREE_CORE.IObject3D = ThreeUtil.getObject3d(
+							const tmpPrefab: I3JS.IObject3D = ThreeUtil.getObject3d(
 								this.prefab,
 								false
 							);
@@ -1585,7 +1585,7 @@ export class AbstractObject3dComponent
 								animationGroup = this.animationGroup;
 							}
 							if (animationGroup !== null) {
-								let oldObject: THREE_CORE.IObject3D = null;
+								let oldObject: I3JS.IObject3D = null;
 								animationGroup['_objects'].forEach((object: any) => {
 									if (object.userData.component == this.id) {
 										oldObject = object;
@@ -1632,7 +1632,7 @@ export class AbstractObject3dComponent
 	 * Shows debug
 	 * @param obj
 	 */
-	public showDebug(obj: THREE_CORE.IObject3D) {
+	public showDebug(obj: I3JS.IObject3D) {
 		const lines: string[] = [];
 		lines.push(obj.name || obj.id.toString());
 		this.addDebugLine(obj.children, lines, '\t');
@@ -1647,7 +1647,7 @@ export class AbstractObject3dComponent
 	 * @returns debug line
 	 */
 	public addDebugLine(
-		objs: THREE_CORE.IObject3D[],
+		objs: I3JS.IObject3D[],
 		lines: string[],
 		prefix: string
 	): string[] {

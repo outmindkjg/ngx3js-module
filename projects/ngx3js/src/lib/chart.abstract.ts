@@ -13,7 +13,7 @@ import { NgxOutlineGeometry } from './geometry/geometries/outline';
 import { NgxStarGeometry } from './geometry/geometries/star';
 import { RendererTimer, ThreeColor, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
-import * as THREE_CORE from './threejs-library/three-core';
+import * as I3JS from './threejs-library/three-interface';
 
 /**
  * Attribute update info
@@ -44,11 +44,11 @@ export interface ShapeInfo {
  * Chart shape
  */
 export interface ChartShape {
-	mesh: THREE_CORE.IMesh;
-	geometry: THREE_CORE.IBufferGeometry;
-	material: THREE_CORE.IMaterial;
-	geometryBorder: THREE_CORE.IBufferGeometry;
-	materialBorder: THREE_CORE.ILineDashedMaterial;
+	mesh: I3JS.IMesh;
+	geometry: I3JS.IBufferGeometry;
+	material: I3JS.IMaterial;
+	geometryBorder: I3JS.IBufferGeometry;
+	materialBorder: I3JS.ILineDashedMaterial;
 }
 
 /**
@@ -190,7 +190,7 @@ export class AbstractChartComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE_CORE.IObject3D): boolean {
+	public setParent(parent: I3JS.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getChart();
 			return true;
@@ -201,13 +201,13 @@ export class AbstractChartComponent
 	/**
 	 * The Chart of abstract chart component
 	 */
-	protected chart: THREE_CORE.IObject3D = null;
+	protected chart: I3JS.IObject3D = null;
 
 	/**
 	 * Sets object3d
 	 * @param object
 	 */
-	protected setObject3d(object: THREE_CORE.IObject3D) {
+	protected setObject3d(object: I3JS.IObject3D) {
 		this.setChart(object);
 	}
 
@@ -315,8 +315,8 @@ export class AbstractChartComponent
 	 */
 	protected addPointer(
 		upPoints: number[],
-		pointer: THREE_CORE.IObject3D,
-		parent: THREE_CORE.IObject3D,
+		pointer: I3JS.IObject3D,
+		parent: I3JS.IObject3D,
 		middleY: number,
 		baseZ: number
 	) {
@@ -344,7 +344,7 @@ export class AbstractChartComponent
 	 * Update attributes of abstract chart component
 	 */
 	private _updateAttributes: {
-		attribute: THREE_CORE.IBufferAttribute | THREE_CORE.IInterleavedBufferAttribute;
+		attribute: I3JS.IBufferAttribute | I3JS.IInterleavedBufferAttribute;
 		values: AttributeUpdateInfo[];
 	}[] = [];
 
@@ -352,14 +352,14 @@ export class AbstractChartComponent
 	 * Update position of abstract chart component
 	 */
 	private _updatePosition: {
-		position: THREE_CORE.IVector3;
+		position: I3JS.IVector3;
 		value: AttributeUpdateInfo;
 	}[] = [];
 
 	/**
 	 * Update points of abstract chart component
 	 */
-	private _updatePoints: THREE_CORE.IObject3D[] = [];
+	private _updatePoints: I3JS.IObject3D[] = [];
 
 	/**
 	 * Adds update attributes
@@ -367,7 +367,7 @@ export class AbstractChartComponent
 	 * @param values
 	 */
 	protected addUpdateAttributes(
-		geometry: THREE_CORE.IBufferGeometry,
+		geometry: I3JS.IBufferGeometry,
 		values: AttributeUpdateInfo[]
 	) {
 		this._updateAttributes.push({
@@ -383,7 +383,7 @@ export class AbstractChartComponent
 	 * @param [isPointer]
 	 */
 	protected addUpdatePosition(
-		object3d: THREE_CORE.IObject3D,
+		object3d: I3JS.IObject3D,
 		value: AttributeUpdateInfo,
 		isPointer: boolean = true
 	) {
@@ -409,7 +409,7 @@ export class AbstractChartComponent
 	 * Sets chart
 	 * @param object
 	 */
-	protected setChart(object: THREE_CORE.IObject3D) {
+	protected setChart(object: I3JS.IObject3D) {
 		this.chart = object;
 		super.setObject3d(object);
 		if (this.controllerList.length === 0) {
@@ -422,7 +422,7 @@ export class AbstractChartComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
+	public getObject3d<T extends I3JS.IObject3D>(): T {
 		return this.getChart();
 	}
 
@@ -431,7 +431,7 @@ export class AbstractChartComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getChart<T extends THREE_CORE.IObject3D>(): T {
+	public getChart<T extends I3JS.IObject3D>(): T {
 		return this.chart as T;
 	}
 
@@ -480,7 +480,7 @@ export class AbstractChartComponent
 		if (ThreeUtil.isNull(options.radius)) {
 			options.radius = 0.06;
 		}
-		let geometry: THREE_CORE.IBufferGeometry = null;
+		let geometry: I3JS.IBufferGeometry = null;
 		let side: string = 'front';
 		switch (type.toLowerCase()) {
 			case 'plane':
@@ -520,7 +520,7 @@ export class AbstractChartComponent
 			side: ThreeUtil.getSideSafe(side),
 			transparent: true,
 		});
-		const mesh: THREE_CORE.IMesh = new THREE.Mesh(geometry, material);
+		const mesh: I3JS.IMesh = new THREE.Mesh(geometry, material);
 		mesh.castShadow = true;
 		const geometryBorder = new NgxOutlineGeometry(geometry, 1.2);
 		const materialBorder = new THREE.LineDashedMaterial({
@@ -532,7 +532,7 @@ export class AbstractChartComponent
 			gapSize: 1,
 			scale: 500,
 		});
-		let border: THREE_CORE.ILineSegments = new THREE.LineSegments(
+		let border: I3JS.ILineSegments = new THREE.LineSegments(
 			geometryBorder,
 			materialBorder
 		);

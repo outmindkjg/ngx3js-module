@@ -14,7 +14,7 @@ import * as THREE from 'three';
 import { ThreeUtil } from './interface';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { TweenComponent } from './tween/tween.component';
-import * as THREE_CORE from './threejs-library/three-core';
+import * as I3JS from './threejs-library/three-interface';
 
 /**
  * The Abstract Tween component.
@@ -95,7 +95,7 @@ export class AbstractTweenComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE_CORE.IObject3D | any): boolean {
+	public setParent(parent: I3JS.IObject3D | any): boolean {
 		return super.setParent(parent);
 	}
 

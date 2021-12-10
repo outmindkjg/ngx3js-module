@@ -10,7 +10,7 @@ import * as THREE from 'three';
 import { KeyframeComponent } from '../keyframe/keyframe.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeUtil } from './../interface';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Clip component.
@@ -204,24 +204,24 @@ export class ClipComponent
 	/**
 	 * The Mixer of clip component
 	 */
-	private mixer: THREE_CORE.IAnimationMixer = null;
+	private mixer: I3JS.IAnimationMixer = null;
 
 	private model: any = null;
 
 	/**
 	 * The Clips of clip component
 	 */
-	private clips: THREE_CORE.IAnimationClip[] = null;
+	private clips: I3JS.IAnimationClip[] = null;
 
 	/**
 	 * The Clip of clip component
 	 */
-	private clip: THREE_CORE.IAnimationClip = null;
+	private clip: I3JS.IAnimationClip = null;
 
 	/**
 	 * The Action of clip component
 	 */
-	public action: THREE_CORE.IAnimationAction = null;
+	public action: I3JS.IAnimationAction = null;
 
 	/**
 	 * Sets mixer
@@ -230,8 +230,8 @@ export class ClipComponent
 	 * @param [fps]
 	 */
 	public setMixer(
-		mixer: THREE_CORE.IAnimationMixer,
-		clips: THREE_CORE.IAnimationClip[],
+		mixer: I3JS.IAnimationMixer,
+		clips: I3JS.IAnimationClip[],
 		model: any
 	) {
 		if (this.mixer !== mixer) {
@@ -371,10 +371,10 @@ export class ClipComponent
 	 * Gets clip
 	 * @returns
 	 */
-	public getClip(): THREE_CORE.IAnimationClip {
+	public getClip(): I3JS.IAnimationClip {
 		if (this.clip === null || this._needUpdate) {
 			this.needUpdate = false;
-			let clip: THREE_CORE.IAnimationClip = null;
+			let clip: I3JS.IAnimationClip = null;
 			if (this.clips !== null) {
 				if (this.index > -1 || ThreeUtil.isNotNull(this.name)) {
 					clip =

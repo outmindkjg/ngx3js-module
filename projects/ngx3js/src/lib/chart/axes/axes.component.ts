@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { AbstractChartComponent } from '../../chart.abstract';
 import { ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * The Chart Axes component.
@@ -129,47 +129,47 @@ export class ChartAxesComponent
 	/**
 	 * The Axes of chart axes component
 	 */
-	private _axes: THREE_CORE.IObject3D = null;
+	private _axes: I3JS.IObject3D = null;
 
 	/**
 	 * Material wall of chart axes component
 	 */
-	private _materialWall: THREE_CORE.IMeshBasicMaterial = null;
+	private _materialWall: I3JS.IMeshBasicMaterial = null;
 
 	/**
 	 * Geometry wall of chart axes component
 	 */
-	private _geometryWall: THREE_CORE.IPlaneBufferGeometry | THREE_CORE.ICircleBufferGeometry = null;
+	private _geometryWall: I3JS.IPlaneBufferGeometry | I3JS.ICircleBufferGeometry = null;
 
 	/**
 	 * Material wall border of chart axes component
 	 */
-	private _materialWallBorder: THREE_CORE.ILineBasicMaterial = null;
+	private _materialWallBorder: I3JS.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry wall border of chart axes component
 	 */
-	private _geometryWallBorder: THREE_CORE.IBufferGeometry = null;
+	private _geometryWallBorder: I3JS.IBufferGeometry = null;
 
 	/**
 	 * Material grid x of chart axes component
 	 */
-	private _materialGridX: THREE_CORE.ILineBasicMaterial = null;
+	private _materialGridX: I3JS.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry grid x of chart axes component
 	 */
-	private _geometryGridX: THREE_CORE.IBufferGeometry = null;
+	private _geometryGridX: I3JS.IBufferGeometry = null;
 
 	/**
 	 * Material grid y of chart axes component
 	 */
-	private _materialGridY: THREE_CORE.ILineBasicMaterial = null;
+	private _materialGridY: I3JS.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry grid y of chart axes component
 	 */
-	private _geometryGridY: THREE_CORE.IBufferGeometry = null;
+	private _geometryGridY: I3JS.IBufferGeometry = null;
 
 	/**
 	 * Applys changes3d

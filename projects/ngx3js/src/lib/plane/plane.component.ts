@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Plane component.
@@ -86,12 +86,12 @@ export class PlaneComponent
 	/**
 	 * The Plane of plane component
 	 */
-	private plane: THREE_CORE.IPlane = null;
+	private plane: I3JS.IPlane = null;
 
 	/**
 	 * World plane of plane component
 	 */
-	private worldPlane: THREE_CORE.IPlane = null;
+	private worldPlane: I3JS.IPlane = null;
 
 	/**
 	 * Sets plane
@@ -125,7 +125,7 @@ export class PlaneComponent
 	 * @param [matrixWorld]
 	 * @returns world plane
 	 */
-	public getWorldPlane(matrixWorld?: THREE_CORE.IMatrix4): THREE_CORE.IPlane {
+	public getWorldPlane(matrixWorld?: I3JS.IMatrix4): I3JS.IPlane {
 		if (this.worldPlane === null) {
 			this.worldPlane = new THREE.Plane();
 		}
@@ -140,7 +140,7 @@ export class PlaneComponent
 	 * Gets plane
 	 * @returns plane
 	 */
-	public getPlane(): THREE_CORE.IPlane {
+	public getPlane(): I3JS.IPlane {
 		if (this.plane === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.plane = new THREE.Plane(

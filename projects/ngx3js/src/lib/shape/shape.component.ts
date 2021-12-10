@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { AbstractGeometryComponent } from '../geometry.abstract';
 import { ThreeUtil, ThreeVector } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Shape component.
@@ -165,8 +165,8 @@ export class ShapeComponent
 	 * @param def
 	 * @returns points
 	 */
-	private getPoints(def: ThreeVector[]): THREE_CORE.IVector2[] {
-		const points: THREE_CORE.IVector2[] = [];
+	private getPoints(def: ThreeVector[]): I3JS.IVector2[] {
+		const points: I3JS.IVector2[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
 			points.push(new THREE.Vector2(p.x, p.y));
 		});
@@ -177,7 +177,7 @@ export class ShapeComponent
 	 * Gets holes
 	 * @returns holes
 	 */
-	private getHoles(): THREE_CORE.IPath {
+	private getHoles(): I3JS.IPath {
 		const holes = new THREE.Path();
 		if (this.holes !== null && this.holes.length > 0) {
 			this.holes.forEach((hole) => {
@@ -205,7 +205,7 @@ export class ShapeComponent
 	 * @param shape
 	 * @returns shape
 	 */
-	public getShape(shape: THREE_CORE.IShape | THREE_CORE.IPath): THREE_CORE.IShape | THREE_CORE.IPath {
+	public getShape(shape: I3JS.IShape | I3JS.IPath): I3JS.IShape | I3JS.IPath {
 		switch (this.type.toLowerCase()) {
 			case 'frompoints':
 				shape.setFromPoints(this.getPoints([]));

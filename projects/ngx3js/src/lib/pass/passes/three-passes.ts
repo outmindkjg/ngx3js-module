@@ -45,7 +45,7 @@ import { TAARenderPass } from 'three/examples/jsm/postprocessing/TAARenderPass';
 import { TexturePass } from 'three/examples/jsm/postprocessing/TexturePass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import { ShaderUtils } from '../../shader/shaders/shaderUtils';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * Reflector shader
@@ -56,7 +56,7 @@ export interface ReflectorShader {
 		FRESNEL: boolean;
 	};
 	uniforms: {
-		[key: string]: THREE_CORE.IUniform;
+		[key: string]: I3JS.IUniform;
 	};
 	vertexShader: string;
 	fragmentShader: string;
@@ -88,7 +88,7 @@ export class NgxReflectorForSSRPass extends ReflectorForSSRPass {
 	 * @param geometry
 	 * @param options
 	 */
-	constructor(geometry: THREE_CORE.IBufferGeometry, options: ReflectorOptions) {
+	constructor(geometry: I3JS.IBufferGeometry, options: ReflectorOptions) {
 		super(geometry, options);
 	}
 }
@@ -172,8 +172,8 @@ export class NgxBokehPass extends BokehPass {
 	 * @param params
 	 */
 	constructor(
-		scene: THREE_CORE.IScene,
-		camera: THREE_CORE.ICamera,
+		scene: I3JS.IScene,
+		camera: I3JS.ICamera,
 		params: BokehPassParamters
 	) {
 		super(scene, camera, params);
@@ -194,7 +194,7 @@ export class NgxClearPass extends ClearPass {
 	 * @param [clearColor]
 	 * @param [clearAlpha]
 	 */
-	constructor(clearColor?: THREE_CORE.TColorRepresentation, clearAlpha?: number) {
+	constructor(clearColor?: I3JS.TColorRepresentation, clearAlpha?: number) {
 		super(clearColor, clearAlpha);
 	}
 }
@@ -215,8 +215,8 @@ export class NgxCubeTexturePass extends CubeTexturePass {
 	 * @param [opacity]
 	 */
 	constructor(
-		camera: THREE_CORE.IPerspectiveCamera,
-		envMap?: THREE_CORE.ICubeTexture,
+		camera: I3JS.IPerspectiveCamera,
+		envMap?: I3JS.ICubeTexture,
 		opacity?: number
 	) {
 		super(camera, envMap, opacity);
@@ -238,7 +238,7 @@ export class NgxDotScreenPass extends DotScreenPass {
 	 * @param [angle]
 	 * @param [scale]
 	 */
-	constructor(center?: THREE_CORE.IVector2, angle?: number, scale?: number) {
+	constructor(center?: I3JS.IVector2, angle?: number, scale?: number) {
 		super(center, angle, scale);
 	}
 }
@@ -355,7 +355,7 @@ export class NgxMaskPass extends MaskPass {
 	 * @param scene
 	 * @param camera
 	 */
-	constructor(scene: THREE_CORE.IScene, camera: THREE_CORE.ICamera) {
+	constructor(scene: I3JS.IScene, camera: I3JS.ICamera) {
 		super(scene, camera);
 	}
 }
@@ -377,10 +377,10 @@ export class NgxOutlinePass extends OutlinePass {
 	 * @param [selectedObjects]
 	 */
 	constructor(
-		resolution: THREE_CORE.IVector2,
-		scene: THREE_CORE.IScene,
-		camera: THREE_CORE.ICamera,
-		selectedObjects?: THREE_CORE.IObject3D[]
+		resolution: I3JS.IVector2,
+		scene: I3JS.IScene,
+		camera: I3JS.ICamera,
+		selectedObjects?: I3JS.IObject3D[]
 	) {
 		super(resolution, scene, camera, selectedObjects);
 	}
@@ -419,10 +419,10 @@ export class NgxRenderPass extends RenderPass {
 	 * @param [clearAlpha]
 	 */
 	constructor(
-		scene: THREE_CORE.IScene,
-		camera: THREE_CORE.ICamera,
-		overrideMaterial?: THREE_CORE.IMaterial,
-		clearColor?: THREE_CORE.IColor,
+		scene: I3JS.IScene,
+		camera: I3JS.ICamera,
+		overrideMaterial?: I3JS.IMaterial,
+		clearColor?: I3JS.IColor,
 		clearAlpha?: number
 	) {
 		super(scene, camera, overrideMaterial, clearColor, clearAlpha);
@@ -438,11 +438,11 @@ export class NgxRenderPass extends RenderPass {
  */
 export class NgxSAOPass extends SAOPass {
 	constructor(
-		scene: THREE_CORE.IScene,
-		camera: THREE_CORE.ICamera,
+		scene: I3JS.IScene,
+		camera: I3JS.ICamera,
 		depthTexture?: boolean,
 		useNormals?: boolean,
-		resolution?: THREE_CORE.IVector2
+		resolution?: I3JS.IVector2
 	) {
 		super(scene, camera, depthTexture, useNormals, resolution);
 	}
@@ -461,7 +461,7 @@ export class NgxSavePass extends SavePass {
 	 *
 	 * @param renderTarget
 	 */
-	constructor(renderTarget: THREE_CORE.IWebGLRenderTarget) {
+	constructor(renderTarget: I3JS.IWebGLRenderTarget) {
 		super(renderTarget);
 	}
 }
@@ -521,9 +521,9 @@ export class NgxSSAARenderPass extends SSAARenderPass {
 	 * @param clearAlpha
 	 */
 	constructor(
-		scene: THREE_CORE.IScene,
-		camera: THREE_CORE.ICamera,
-		clearColor: THREE_CORE.TColorRepresentation,
+		scene: I3JS.IScene,
+		camera: I3JS.ICamera,
+		clearColor: I3JS.TColorRepresentation,
 		clearAlpha: number
 	) {
 		super(scene, camera, clearColor, clearAlpha);
@@ -547,8 +547,8 @@ export class NgxSSAOPass extends SSAOPass {
 	 * @param [height]
 	 */
 	constructor(
-		scene: THREE_CORE.IScene,
-		camera: THREE_CORE.ICamera,
+		scene: I3JS.IScene,
+		camera: I3JS.ICamera,
 		width?: number,
 		height?: number
 	) {
@@ -609,9 +609,9 @@ export class NgxTAARenderPass extends TAARenderPass {
 	 * @param clearAlpha
 	 */
 	constructor(
-		scene: THREE_CORE.IScene,
-		camera: THREE_CORE.ICamera,
-		clearColor: THREE_CORE.TColorRepresentation,
+		scene: I3JS.IScene,
+		camera: I3JS.ICamera,
+		clearColor: I3JS.TColorRepresentation,
 		clearAlpha: number
 	) {
 		super(scene, camera, clearColor, clearAlpha);
@@ -632,7 +632,7 @@ export class NgxTexturePass extends TexturePass {
 	 * @param map
 	 * @param [opacity]
 	 */
-	constructor(map: THREE_CORE.ITexture, opacity?: number) {
+	constructor(map: I3JS.ITexture, opacity?: number) {
 		super(map, opacity);
 	}
 }
@@ -654,7 +654,7 @@ export class NgxUnrealBloomPass extends UnrealBloomPass {
 	 * @param threshold
 	 */
 	constructor(
-		resolution: THREE_CORE.IVector2,
+		resolution: I3JS.IVector2,
 		strength: number,
 		radius: number,
 		threshold: number

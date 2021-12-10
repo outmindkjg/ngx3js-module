@@ -4,7 +4,7 @@ import { ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Tools Component
@@ -156,7 +156,7 @@ export class ToolsComponent
 	/**
 	 * Audio loader of tools component
 	 */
-	private audioLoader: THREE_CORE.IAudioLoader = null;
+	private audioLoader: I3JS.IAudioLoader = null;
 
 	/**
 	 * Gets audio
@@ -175,7 +175,7 @@ export class ToolsComponent
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): THREE_CORE.ITexture {
+	public getTexture(): I3JS.ITexture {
 		const texture = this.getTool();
 		if (texture instanceof THREE.Texture) {
 			return texture;

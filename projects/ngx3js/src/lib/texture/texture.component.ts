@@ -13,7 +13,7 @@ import { ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { CanvasFunctionType } from './textureUtils';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Texture Component
@@ -429,7 +429,7 @@ export class TextureComponent
 	 * @template T
 	 * @returns texture
 	 */
-	public getTexture<T extends THREE_CORE.ITexture>(): T {
+	public getTexture<T extends I3JS.ITexture>(): T {
 		if (this.texture === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.unSubscribeRefer('referTexture');

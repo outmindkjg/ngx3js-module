@@ -45,7 +45,7 @@ import { CameraComponent } from './../camera/camera.component';
 import { ListenerComponent } from './../listener/listener.component';
 import { LookatComponent } from './../lookat/lookat.component';
 import { SceneComponent } from './../scene/scene.component';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Renderer component.
@@ -501,12 +501,12 @@ export class RendererComponent
 	 * @param [def]
 	 * @returns clipping planes
 	 */
-	private getClippingPlanes(def?: THREE_CORE.IPlane[]): THREE_CORE.IPlane[] {
+	private getClippingPlanes(def?: I3JS.IPlane[]): I3JS.IPlane[] {
 		if (
 			this.clippingPlanesList !== null &&
 			this.clippingPlanesList !== undefined
 		) {
-			const clippingPlanes: THREE_CORE.IPlane[] = [];
+			const clippingPlanes: I3JS.IPlane[] = [];
 			this.clippingPlanesList.forEach((plane) => {
 				clippingPlanes.push(plane.getWorldPlane());
 			});
@@ -964,7 +964,7 @@ export class RendererComponent
 	 * @param [def]
 	 * @returns clear color
 	 */
-	private getClearColor(def?: string | number): THREE_CORE.IColor {
+	private getClearColor(def?: string | number): I3JS.IColor {
 		return ThreeUtil.getColorSafe(this.clearColor, def);
 	}
 
@@ -1235,14 +1235,14 @@ export class RendererComponent
 	 * Gets size
 	 * @returns size
 	 */
-	public getSize(): THREE_CORE.IVector2 {
+	public getSize(): I3JS.IVector2 {
 		return new THREE.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
 	/**
 	 * The Renderlistener of renderer component
 	 */
-	private renderlistener: THREE_CORE.IAudioListener = null;
+	private renderlistener: I3JS.IAudioListener = null;
 
 	/**
 	 * Applys changes
@@ -1633,7 +1633,7 @@ export class RendererComponent
 								this.sceneList.length > 0 &&
 								this.renderer instanceof THREE.WebGLRenderer
 							) {
-								let camera: THREE_CORE.ICamera = null;
+								let camera: I3JS.ICamera = null;
 								this.cameraList.forEach((cameraCom) => {
 									if (camera === null) {
 										const tmpCamera = cameraCom.getCamera();
@@ -1734,7 +1734,7 @@ export class RendererComponent
 	/**
 	 * The Renderer of renderer component
 	 */
-	public renderer: THREE_CORE.IRenderer = null;
+	public renderer: I3JS.IRenderer = null;
 
 	/**
 	 * Css renderer of renderer component
@@ -1821,7 +1821,7 @@ export class RendererComponent
 		}
 		let controls: ControlComponent[] = [];
 		if (cameraComp !== null && cameraComp !== undefined) {
-			const camera: THREE_CORE.ICamera = cameraComp.getCamera();
+			const camera: I3JS.ICamera = cameraComp.getCamera();
 			switch (controlType.toLowerCase()) {
 				case 'none':
 					break;
@@ -1917,7 +1917,7 @@ export class RendererComponent
 	 * Gets Renderer
 	 * @returns Renderer
 	 */
-	public getRenderer(): THREE_CORE.IRenderer {
+	public getRenderer(): I3JS.IRenderer {
 		if (this.renderer === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.dispose();
@@ -2023,12 +2023,12 @@ export class RendererComponent
 	/**
 	 * The Cameras of renderer component
 	 */
-	private _cameras: THREE_CORE.ICamera[] = null;
+	private _cameras: I3JS.ICamera[] = null;
 
 	/**
 	 * The Scenes of renderer component
 	 */
-	private _scenes: THREE_CORE.IScene[] = null;
+	private _scenes: I3JS.IScene[] = null;
 
 	/**
 	 * Gets render info

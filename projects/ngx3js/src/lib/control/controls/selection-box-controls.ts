@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { SelectionBox } from 'three/examples/jsm/interactive/SelectionBox';
 import { SelectionHelper } from 'three/examples/jsm/interactive/SelectionHelper';
 import { ThreeColor, ThreeUtil } from '../../interface';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * Select Box Controls
@@ -52,9 +52,9 @@ export class NgxSelectBoxControls {
 	 * @param domElement
 	 */
 	constructor(
-		camera: THREE_CORE.ICamera,
-		scene: THREE_CORE.IScene,
-		renderer: THREE_CORE.IWebGLRenderer
+		camera: I3JS.ICamera,
+		scene: I3JS.IScene,
+		renderer: I3JS.IWebGLRenderer
 	) {
 		this.selectionBox = new SelectionBox(camera, scene);
 		this.helper = new SelectionHelper(this.selectionBox, renderer, 'selectBox');
@@ -124,14 +124,14 @@ export class NgxSelectBoxControls {
 	/**
 	 * The Mouse of select box controls
 	 */
-	private mouse: THREE_CORE.IVector2 = new THREE.Vector2();
+	private mouse: I3JS.IVector2 = new THREE.Vector2();
 
 	/**
 	 * Gets mouse
 	 * @param event
 	 * @returns mouse
 	 */
-	private getMouse(event: any): THREE_CORE.IVector2 {
+	private getMouse(event: any): I3JS.IVector2 {
 		const clientX = event.clientX;
 		const clientY = event.clientY;
 		const offsetX = clientX - this.offsetLeft;

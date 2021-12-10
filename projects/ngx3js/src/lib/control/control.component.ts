@@ -20,7 +20,7 @@ import { NgxAVRControls } from './controls/avr-controls';
 import { NgxPlaneControls } from './controls/plane-controls';
 import { NgxSelectBoxControls } from './controls/selection-box-controls';
 import * as THREE_CTRL from './controls/three-controls';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Control options
@@ -265,7 +265,7 @@ export interface ControlOptions {
 	/**
 	 * The target of control
 	 */
-	target?: THREE_CORE.IVector3 | LookatComponent | any;
+	target?: I3JS.IVector3 | LookatComponent | any;
 
 	/**
 	 * The camera of control
@@ -607,7 +607,7 @@ export class ControlComponent
 	/**
 	 * The target of control
 	 */
-	@Input() public target: THREE_CORE.IVector3 | LookatComponent | any = null;
+	@Input() public target: I3JS.IVector3 | LookatComponent | any = null;
 
 	/**
 	 * The camera of control
@@ -754,12 +754,12 @@ export class ControlComponent
 	/**
 	 * The Camera of control
 	 */
-	private _camera: THREE_CORE.ICamera = null;
+	private _camera: I3JS.ICamera = null;
 
 	/**
 	 * The Renderer of control
 	 */
-	private _renderer: THREE_CORE.IRenderer = null;
+	private _renderer: I3JS.IRenderer = null;
 
 	private _renderCaller: (...args: any[]) => void = null;
 
@@ -785,10 +785,10 @@ export class ControlComponent
 	 * @param scenes
 	 */
 	public setCameraDomElement(
-		camera: THREE_CORE.ICamera,
+		camera: I3JS.ICamera,
 		domElement: HTMLElement,
 		scenes: QueryList<SceneComponent>,
-		renderer: THREE_CORE.IRenderer,
+		renderer: I3JS.IRenderer,
 		renderCaller: (...args: any[]) => void = null
 	) {
 		if (

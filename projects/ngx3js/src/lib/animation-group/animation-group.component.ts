@@ -13,7 +13,7 @@ import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { MixerComponent } from '../mixer/mixer.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Animation Group component.
@@ -114,7 +114,7 @@ export class AnimationGroupComponent
 	/**
 	 * Animation group of animation group component
 	 */
-	private animationGroup: THREE_CORE.IAnimationObjectGroup = null;
+	private animationGroup: I3JS.IAnimationObjectGroup = null;
 
 	/**
 	 * Applys changes
@@ -163,7 +163,7 @@ export class AnimationGroupComponent
 	 * Gets animation group
 	 * @returns animation group
 	 */
-	public getAnimationGroup<T extends THREE_CORE.IAnimationObjectGroup>(): T {
+	public getAnimationGroup<T extends I3JS.IAnimationObjectGroup>(): T {
 		if (this.animationGroup === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.animationGroup = new THREE.AnimationObjectGroup();

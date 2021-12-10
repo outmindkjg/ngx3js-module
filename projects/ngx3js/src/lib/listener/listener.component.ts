@@ -8,7 +8,7 @@ import {
 import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Listener component.
@@ -96,14 +96,14 @@ export class ListenerComponent
 	/**
 	 * The Listener of listener component
 	 */
-	private listener: THREE_CORE.IAudioListener = null;
+	private listener: I3JS.IAudioListener = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE_CORE.IObject3D): boolean {
+	public setParent(parent: I3JS.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getListener();
 			return true;
@@ -148,7 +148,7 @@ export class ListenerComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
+	public getObject3d<T extends I3JS.IObject3D>(): T {
 		return this.getListener() as any;
 	}
 
@@ -156,7 +156,7 @@ export class ListenerComponent
 	 * Gets listener
 	 * @returns listener
 	 */
-	public getListener(): THREE_CORE.IAudioListener {
+	public getListener(): I3JS.IAudioListener {
 		if (this.listener === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.listener = new THREE.AudioListener();

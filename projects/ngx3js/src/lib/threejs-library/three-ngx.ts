@@ -1,4 +1,3 @@
-export * as THREE from 'three';
 export { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
 export { ArcballControls } from 'three/examples/jsm/controls/ArcballControls';
 export { DragControls } from 'three/examples/jsm/controls/DragControls';
@@ -26,4 +25,4 @@ export * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUti
 export { GeometryUtils } from '../threejs-library/GeometryUtils';
 export { UVsDebug } from 'three/examples/jsm/utils/UVsDebug';
 export { ReflectorForSSRPass } from '../threejs-library/ReflectorForSSRPass';
-export * as GSAP from 'gsap';
+

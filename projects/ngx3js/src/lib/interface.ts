@@ -17,7 +17,7 @@ import { MeshComponent } from './mesh/mesh.component';
 import { RendererComponent } from './renderer/renderer.component';
 import { SceneComponent } from './scene/scene.component';
 import { GUI } from './threejs-library/lil-gui';
-import * as THREE_CORE from './threejs-library/three-core';
+import * as I3JS from './threejs-library/three-interface';
 
 /**
  * Apply matrix4
@@ -28,7 +28,7 @@ export interface ApplyMatrix4 {
 	 * @param matrix
 	 * @returns matrix4
 	 */
-	applyMatrix4(matrix: THREE_CORE.IMatrix4): any;
+	applyMatrix4(matrix: I3JS.IMatrix4): any;
 }
 
 /**
@@ -112,7 +112,7 @@ export interface StorageOption {
 	vmdUrl?: string | string[];
 
 	/** ref object */
-	object?: THREE_CORE.ISkinnedMesh | THREE_CORE.ICamera | any;
+	object?: I3JS.ISkinnedMesh | I3JS.ICamera | any;
 
 	/** drawFillShapes */
 	drawFillShapes?: boolean;
@@ -171,7 +171,7 @@ export interface StorageExportOption {
 	embedImages?: boolean;
 
 	/** animations */
-	animations?: THREE_CORE.IAnimationClip[];
+	animations?: I3JS.IAnimationClip[];
 
 	/** forceIndices */
 	forceIndices?: boolean;
@@ -197,7 +197,7 @@ export interface StorageExportOption {
  */
 export type ThreeUniform =
 	| { type: string; value: any; options?: any }
-	| THREE_CORE.IUniform;
+	| I3JS.IUniform;
 
 /**
  * ThreeUniforms
@@ -207,7 +207,7 @@ export type ThreeUniforms = { [key: string]: ThreeUniform };
 /**
  * ThreeTexture
  */
-export type ThreeTexture = string | THREE_CORE.ITexture | TextureOption | any;
+export type ThreeTexture = string | I3JS.ITexture | TextureOption | any;
 
 /**
  * Three Color
@@ -219,7 +219,7 @@ export type ThreeTexture = string | THREE_CORE.ITexture | TextureOption | any;
  * number 0xffffff
  * THREE.Color
  */
-export type ThreeColor = string | number | THREE_CORE.IColor;
+export type ThreeColor = string | number | I3JS.IColor;
 
 /**
  * Three Vector
@@ -258,12 +258,12 @@ export interface ThreeFace {
  * Loaded object
  */
 export interface LoadedObject {
-	object?: THREE_CORE.IObject3D;
-	material?: THREE_CORE.IMaterial | any;
-	geometry?: THREE_CORE.IBufferGeometry;
-	texture?: THREE_CORE.ITexture;
-	clips?: THREE_CORE.IAnimationClip[] | any;
-	morphTargets?: THREE_CORE.IBufferAttribute[];
+	object?: I3JS.IObject3D;
+	material?: I3JS.IMaterial | any;
+	geometry?: I3JS.IBufferGeometry;
+	texture?: I3JS.ITexture;
+	clips?: I3JS.IAnimationClip[] | any;
+	morphTargets?: I3JS.IBufferAttribute[];
 	source?: any;
 }
 
@@ -401,10 +401,10 @@ export interface CssStyle {
 	transition?: string | string[];
 
 	/** The background shorthand CSS property sets all background style properties at once, such as color, image, origin and size, or repeat method. */
-	background?: ThreeColor | THREE_CORE.IVector4;
+	background?: ThreeColor | I3JS.IVector4;
 
 	/** The background-color CSS property sets the background color of an element. */
-	backgroundColor?: ThreeColor | THREE_CORE.IVector4;
+	backgroundColor?: ThreeColor | I3JS.IVector4;
 
 	/** The background-image CSS property sets one or more background images on an element. */
 	backgroundImage?: string;
@@ -473,7 +473,7 @@ export interface CssStyle {
 	border?: number | string;
 
 	/** The border-color shorthand CSS property sets the color of an element's border. */
-	borderColor?: ThreeColor | THREE_CORE.IVector4;
+	borderColor?: ThreeColor | I3JS.IVector4;
 
 	/** The border-style shorthand CSS property sets the line style for all four sides of an element's border. */
 	borderStyle?: string;
@@ -521,7 +521,7 @@ export interface CssStyle {
 	opacity?: number;
 
 	/** The color CSS property sets the foreground color value of an element's text and text decorations, and sets the <currentcolor> value. currentcolor may be used as an indirect value on other properties and is the default for other color properties, such as border-color. */
-	color?: ThreeColor | THREE_CORE.IVector4;
+	color?: ThreeColor | I3JS.IVector4;
 
 	/** The font-family CSS property specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
 	fontFamily?: string;
@@ -835,12 +835,12 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	/**
 	 * The Scene of base component
 	 */
-	public sceneObject3d: THREE_CORE.IScene = null;
+	public sceneObject3d: I3JS.IScene = null;
 
 	/**
 	 * The Scene of base component
 	 */
-	public sceneChildren: THREE_CORE.IObject3D[] = null;
+	public sceneChildren: I3JS.IObject3D[] = null;
 
 	/**
 	 * Sets scene
@@ -860,7 +860,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	/**
 	 * The Camera Object
 	 */
-	public cameraObject3d: THREE_CORE.ICamera = null;
+	public cameraObject3d: I3JS.ICamera = null;
 
 	/**
 	 * Sets camera
@@ -879,12 +879,12 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	/**
 	 * Mesh object3d of base component
 	 */
-	public meshObject3d: THREE_CORE.IObject3D = null;
+	public meshObject3d: I3JS.IObject3D = null;
 
 	/**
 	 * Mesh children of base component
 	 */
-	protected meshChildren: THREE_CORE.IObject3D[] = null;
+	protected meshChildren: I3JS.IObject3D[] = null;
 
 	/**
 	 * Updates gui controller
@@ -1496,9 +1496,9 @@ export class ThreeUtil {
 	 * Gets pmrem generator
 	 * @returns pmrem generator
 	 */
-	public static getPmremGenerator(): THREE_CORE.IPMREMGenerator {
+	public static getPmremGenerator(): I3JS.IPMREMGenerator {
 		return new THREE.PMREMGenerator(
-			this.getRenderer() as THREE_CORE.IWebGLRenderer
+			this.getRenderer() as I3JS.IWebGLRenderer
 		);
 	}
 
@@ -1506,7 +1506,7 @@ export class ThreeUtil {
 	 * Gets renderer
 	 * @returns renderer
 	 */
-	public static getRenderer(): THREE_CORE.IRenderer {
+	public static getRenderer(): I3JS.IRenderer {
 		if (this.lastRenderer !== null) {
 			return this.lastRenderer.getRenderer();
 		} else {
@@ -1518,7 +1518,7 @@ export class ThreeUtil {
 	 * Gets renderer size
 	 * @returns renderer size
 	 */
-	public static getRendererSize(): THREE_CORE.IVector2 {
+	public static getRendererSize(): I3JS.IVector2 {
 		if (this.lastRenderer !== null) {
 			return this.lastRenderer.getSize();
 		} else {
@@ -1530,7 +1530,7 @@ export class ThreeUtil {
 	 * Gets size subscribe
 	 * @returns size subscribe
 	 */
-	public static getSizeSubscribe(): Observable<THREE_CORE.IVector2> {
+	public static getSizeSubscribe(): Observable<I3JS.IVector2> {
 		if (this.lastRenderer !== null) {
 			return this.lastRenderer.sizeSubscribe();
 		} else {
@@ -1735,13 +1735,13 @@ export class ThreeUtil {
 	/**
 	 * The Manager of three util
 	 */
-	private static _manager: THREE_CORE.ILoadingManager = null;
+	private static _manager: I3JS.ILoadingManager = null;
 
 	/**
 	 * Gets loading manager
 	 * @returns loading manager
 	 */
-	public static getLoadingManager(): THREE_CORE.ILoadingManager {
+	public static getLoadingManager(): I3JS.ILoadingManager {
 		if (this._manager === null) {
 			this._manager = new THREE.LoadingManager(
 				() => {},
@@ -1808,7 +1808,7 @@ export class ThreeUtil {
 	 */
 	public static getColor(
 		color: ThreeColor | { r: number; g: number; b: number }
-	): THREE_CORE.IColor {
+	): I3JS.IColor {
 		if (this.isNotNull(color)) {
 			if (color instanceof THREE.Color) {
 				return color;
@@ -1842,7 +1842,7 @@ export class ThreeUtil {
 		g: number,
 		b: number,
 		color?: ThreeColor
-	): THREE_CORE.IColor {
+	): I3JS.IColor {
 		const colorObj = this.isNotNull(color)
 			? this.getColor(color)
 			: new THREE.Color(0x000000);
@@ -1869,7 +1869,7 @@ export class ThreeUtil {
 		s?: number,
 		l?: number,
 		color?: ThreeColor
-	): THREE_CORE.IColor {
+	): I3JS.IColor {
 		const colorObj = this.isNotNull(color)
 			? this.getColor(color)
 			: new THREE.Color(0x000000);
@@ -1934,7 +1934,7 @@ export class ThreeUtil {
 		color: ThreeColor,
 		altColor?: ThreeColor,
 		multiply?: number
-	): THREE_CORE.IColor {
+	): I3JS.IColor {
 		const safeColor = this.getColorSafe(color, altColor);
 		if (this.isNotNull(safeColor) && this.isNotNull(multiply)) {
 			safeColor.multiplyScalar(multiply);
@@ -2007,7 +2007,7 @@ export class ThreeUtil {
 		color: ThreeColor,
 		altColor?: ThreeColor,
 		nullColor?: ThreeColor
-	): THREE_CORE.IColor {
+	): I3JS.IColor {
 		const defColor = this.isNotNull(color)
 			? color
 			: this.isNotNull(altColor)
@@ -2069,7 +2069,7 @@ export class ThreeUtil {
 		color: ThreeColor,
 		alpha: number,
 		altColor?: ThreeColor
-	): THREE_CORE.IColor | THREE_CORE.IVector4 {
+	): I3JS.IColor | I3JS.IVector4 {
 		const defColor = this.getColorSafe(color, altColor);
 		if (this.isNotNull(defColor)) {
 			if (this.isNotNull(alpha) && alpha >= 0 && alpha <= 1) {
@@ -2221,9 +2221,9 @@ export class ThreeUtil {
 	 * @returns vector2 vsafe
 	 */
 	public static getVector2VSafe(
-		v2: number[] | THREE_CORE.IVector2,
-		altValue?: THREE_CORE.IVector2
-	): THREE_CORE.IVector2 {
+		v2: number[] | I3JS.IVector2,
+		altValue?: I3JS.IVector2
+	): I3JS.IVector2 {
 		if (v2 instanceof THREE.Vector2) {
 			return v2;
 		} else if (Array.isArray(v2) && this.isNotNull(v2) && v2.length >= 2) {
@@ -2244,10 +2244,10 @@ export class ThreeUtil {
 	public static getVector2Safe(
 		x: number,
 		y: number,
-		altValue?: THREE_CORE.IVector2,
-		v2?: number[] | THREE_CORE.IVector2,
+		altValue?: I3JS.IVector2,
+		v2?: number[] | I3JS.IVector2,
 		isRequired?: boolean
-	): THREE_CORE.IVector2 {
+	): I3JS.IVector2 {
 		const defValue =
 			this.isNotNull(x) || this.isNotNull(y)
 				? new THREE.Vector2(this.getTypeSafe(x, y), this.getTypeSafe(y, x))
@@ -2274,9 +2274,9 @@ export class ThreeUtil {
 	 * @returns vector3 vsafe
 	 */
 	public static getVector3VSafe(
-		v3: number[] | THREE_CORE.IVector3,
-		altValue?: THREE_CORE.IVector3
-	): THREE_CORE.IVector3 {
+		v3: number[] | I3JS.IVector3,
+		altValue?: I3JS.IVector3
+	): I3JS.IVector3 {
 		if (v3 instanceof THREE.Vector3) {
 			return v3;
 		} else if (Array.isArray(v3) && this.isNotNull(v3) && v3.length >= 3) {
@@ -2299,10 +2299,10 @@ export class ThreeUtil {
 		x: number,
 		y: number,
 		z: number,
-		altValue?: THREE_CORE.IVector3,
-		v3?: number[] | THREE_CORE.IVector3,
+		altValue?: I3JS.IVector3,
+		v3?: number[] | I3JS.IVector3,
 		isRequired?: boolean
-	): THREE_CORE.IVector3 {
+	): I3JS.IVector3 {
 		const defValue =
 			this.isNotNull(x) || this.isNotNull(y) || this.isNotNull(z)
 				? new THREE.Vector3(
@@ -2333,9 +2333,9 @@ export class ThreeUtil {
 	 * @returns matrix4 safe
 	 */
 	public static getMatrix4Safe(
-		obj: THREE_CORE.IObject3D,
+		obj: I3JS.IObject3D,
 		matrixType: string = 'maxtix'
-	): THREE_CORE.IMatrix4 {
+	): I3JS.IMatrix4 {
 		if (this.isNotNull(obj)) {
 			const anyObj: any = obj;
 			switch (matrixType.toLowerCase()) {
@@ -2378,9 +2378,9 @@ export class ThreeUtil {
 		x: number | string,
 		y: number | string,
 		z: number | string,
-		altValue?: THREE_CORE.IEuler,
+		altValue?: I3JS.IEuler,
 		isRequired?: boolean
-	): THREE_CORE.IEuler {
+	): I3JS.IEuler {
 		const defValue =
 			this.isNotNull(x) || this.isNotNull(y) || this.isNotNull(z)
 				? new THREE.Euler(
@@ -2521,7 +2521,10 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns shadow map type
 	 */
-	 public static getShadowMapTypeSafe(baseShadowMapType : string , def?: string): THREE.ShadowMapType {
+	public static getShadowMapTypeSafe(
+		baseShadowMapType: string,
+		def?: string
+	): THREE.ShadowMapType {
 		const shadowMapType = this.getTypeSafe(baseShadowMapType, def, '');
 		switch (shadowMapType.toLowerCase()) {
 			case 'basicshadowmap':
@@ -2952,7 +2955,10 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns combine
 	 */
-	public static getCombineSafe(baseCombine : string, def?: string): THREE.Combine {
+	public static getCombineSafe(
+		baseCombine: string,
+		def?: string
+	): THREE.Combine {
 		const combine = this.getTypeSafe(baseCombine, def, '');
 		switch (combine.toLowerCase()) {
 			case 'multiplyoperation':
@@ -2994,7 +3000,10 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns glsl version
 	 */
-	 public static getGlslVersionSafe(baseGlslVersion : string , def?: string): THREE.GLSLVersion {
+	public static getGlslVersionSafe(
+		baseGlslVersion: string,
+		def?: string
+	): THREE.GLSLVersion {
 		const glslVersion = this.getTypeSafe(baseGlslVersion, def, '');
 		switch (glslVersion.toLowerCase()) {
 			case '1':
@@ -3189,14 +3198,14 @@ export class ThreeUtil {
 	 * @param [isRequired]
 	 * @returns object3d
 	 */
-	public static getObject3d<T extends THREE_CORE.IObject3D>(
+	public static getObject3d<T extends I3JS.IObject3D>(
 		object3d: any,
 		isRequired: boolean = true
 	): T {
 		if (object3d instanceof THREE.Object3D) {
 			return object3d as T;
 		} else if (this.isNotNull(object3d.getMesh)) {
-			const mesh: THREE_CORE.IObject3D = object3d.getMesh();
+			const mesh: I3JS.IObject3D = object3d.getMesh();
 			if (mesh !== null && this.isNotNull(mesh.userData.refTarget)) {
 				return mesh.userData.refTarget as T;
 			} else {
@@ -3228,7 +3237,7 @@ export class ThreeUtil {
 	 * @param mesh
 	 * @returns mesh find
 	 */
-	public static getMeshFind(mesh: any): THREE_CORE.IMesh {
+	public static getMeshFind(mesh: any): I3JS.IMesh {
 		if (mesh instanceof THREE.Mesh) {
 			return mesh;
 		} else if (this.isNotNull(mesh.getHelper)) {
@@ -3241,7 +3250,7 @@ export class ThreeUtil {
 		if (mesh instanceof THREE.Mesh) {
 			return mesh;
 		} else if (mesh instanceof THREE.Group) {
-			let childMesh: THREE_CORE.IMesh = null;
+			let childMesh: I3JS.IMesh = null;
 			mesh.children.forEach((child) => {
 				if (childMesh === null && child instanceof THREE.Mesh) {
 					childMesh = child;
@@ -3259,7 +3268,7 @@ export class ThreeUtil {
 	 * @param mesh
 	 * @returns mesh
 	 */
-	public static getMesh(mesh: any): THREE_CORE.IMesh {
+	public static getMesh(mesh: any): I3JS.IMesh {
 		const findedMesh = this.getMeshFind(mesh);
 		if (findedMesh !== null) {
 			return findedMesh;
@@ -3272,7 +3281,7 @@ export class ThreeUtil {
 	 * @param light
 	 * @returns light
 	 */
-	public static getLight(light: any): THREE_CORE.ILight {
+	public static getLight(light: any): I3JS.ILight {
 		if (light instanceof THREE.Light) {
 			return light;
 		} else if (this.isNotNull(light)) {
@@ -3293,8 +3302,8 @@ export class ThreeUtil {
 	public static getMaterialByType(
 		material: any,
 		materialType?: string
-	): THREE_CORE.IMaterial {
-		let matchedMat: THREE_CORE.IMaterial = null;
+	): I3JS.IMaterial {
+		let matchedMat: I3JS.IMaterial = null;
 		if (this.isNotNull(materialType) && materialType != '') {
 			const matList = this.getMaterial(material);
 			if (Array.isArray(matList)) {
@@ -3335,7 +3344,7 @@ export class ThreeUtil {
 	 */
 	public static getMaterial(
 		material: any
-	): THREE_CORE.IMaterial | THREE_CORE.IMaterial[] {
+	): I3JS.IMaterial | I3JS.IMaterial[] {
 		if (material instanceof THREE.Material) {
 			return material;
 		} else if (Array.isArray(material)) {
@@ -3358,7 +3367,7 @@ export class ThreeUtil {
 	 * @param material
 	 * @returns material one
 	 */
-	public static getMaterialOne(material: any): THREE_CORE.IMaterial {
+	public static getMaterialOne(material: any): I3JS.IMaterial {
 		const materialList = this.getMaterial(material);
 		if (Array.isArray(materialList)) {
 			if (materialList.length > 0) {
@@ -3376,7 +3385,7 @@ export class ThreeUtil {
 	 * @param geometry
 	 * @returns geometry
 	 */
-	public static getGeometry(geometry: any): THREE_CORE.IBufferGeometry {
+	public static getGeometry(geometry: any): I3JS.IBufferGeometry {
 		if (this.isNotNull(geometry)) {
 			if (geometry instanceof THREE.BufferGeometry) {
 				return geometry;
@@ -3635,7 +3644,7 @@ export class ThreeUtil {
 		texture: any,
 		refType: string = 'map',
 		isRequired: boolean = true
-	): THREE_CORE.ITexture {
+	): I3JS.ITexture {
 		if (texture instanceof THREE.Texture) {
 			return texture;
 		} else if (
@@ -3686,7 +3695,7 @@ export class ThreeUtil {
 	 * @param position
 	 * @returns position
 	 */
-	public static getPosition(position: any): THREE_CORE.IVector3 {
+	public static getPosition(position: any): I3JS.IVector3 {
 		if (this.isNotNull(position)) {
 			if (position instanceof THREE.Vector3) {
 				return position;
@@ -3729,7 +3738,7 @@ export class ThreeUtil {
 	 * @param rotation
 	 * @returns rotation
 	 */
-	public static getRotation(rotation: any): THREE_CORE.IEuler {
+	public static getRotation(rotation: any): I3JS.IEuler {
 		if (this.isNotNull(rotation)) {
 			if (rotation instanceof THREE.Euler) {
 				return rotation;
@@ -3772,7 +3781,7 @@ export class ThreeUtil {
 	 * @param scale
 	 * @returns scale
 	 */
-	public static getScale(scale: any): THREE_CORE.IVector3 {
+	public static getScale(scale: any): I3JS.IVector3 {
 		if (this.isNotNull(scale)) {
 			if (scale instanceof THREE.Vector3) {
 				return scale;
@@ -3806,7 +3815,7 @@ export class ThreeUtil {
 	 * @param lookat
 	 * @returns look at
 	 */
-	public static getLookAt(lookat: any): THREE_CORE.IVector3 {
+	public static getLookAt(lookat: any): I3JS.IVector3 {
 		if (this.isNotNull(lookat)) {
 			if (lookat instanceof THREE.Vector3) {
 				return lookat;
@@ -3848,7 +3857,7 @@ export class ThreeUtil {
 	 * @param texture
 	 * @returns true if texture loaded
 	 */
-	public static isTextureLoaded(texture: THREE_CORE.ITexture): boolean {
+	public static isTextureLoaded(texture: I3JS.ITexture): boolean {
 		if (
 			texture instanceof THREE.CubeTexture ||
 			(texture as any)['isCubeTexture']
@@ -4621,7 +4630,7 @@ export class ThreeUtil {
 export interface RendererTimer {
 	delta: number;
 	elapsedTime: number;
-	renderer?: THREE_CORE.IRenderer;
+	renderer?: I3JS.IRenderer;
 	event?: RendererEvent;
 }
 
@@ -4632,10 +4641,10 @@ export interface RendererInfo {
 	timer: RendererTimer;
 	innerWidth: number;
 	innerHeight: number;
-	renderer: THREE_CORE.IRenderer;
+	renderer: I3JS.IRenderer;
 	cssRenderer: any;
-	cameras: THREE_CORE.ICamera[];
-	scenes: THREE_CORE.IScene[];
+	cameras: I3JS.ICamera[];
+	scenes: I3JS.IScene[];
 }
 
 /**
@@ -4643,21 +4652,21 @@ export interface RendererInfo {
  */
 export interface RendererEvent {
 	type: string;
-	client?: THREE_CORE.IVector2;
+	client?: I3JS.IVector2;
 	clientX?: number;
 	clientY?: number;
-	offset?: THREE_CORE.IVector2;
+	offset?: I3JS.IVector2;
 	offsetX?: number;
 	offsetY?: number;
-	rate?: THREE_CORE.IVector2;
+	rate?: I3JS.IVector2;
 	rateX?: number;
 	rateY?: number;
 	width?: number;
 	height?: number;
 	nativeElement?: HTMLElement;
-	size?: THREE_CORE.IVector2;
-	mouse?: THREE_CORE.IVector2;
-	direction?: THREE_CORE.IVector2;
+	size?: I3JS.IVector2;
+	mouse?: I3JS.IVector2;
+	direction?: I3JS.IVector2;
 	keyInfo?: {
 		code: string;
 		ctrlKey: boolean;
@@ -4666,7 +4675,7 @@ export interface RendererEvent {
 		key: string;
 		timeStamp: number;
 		timeRepeat: number;
-		xy: THREE_CORE.IVector2;
+		xy: I3JS.IVector2;
 	};
 	event: any;
 }
@@ -4685,7 +4694,7 @@ export class ThreeClock extends THREE.Clock {
 	 * @returns timer
 	 */
 	public getTimer(
-		renderer: THREE_CORE.IRenderer,
+		renderer: I3JS.IRenderer,
 		event: RendererEvent
 	): RendererTimer {
 		const delta = this.getDelta();
@@ -4881,13 +4890,13 @@ export class ThreeGeometryCustom {
 	/**
 	 * The Geometry of three geometry custom
 	 */
-	protected geometry: THREE_CORE.IBufferGeometry = null;
+	protected geometry: I3JS.IBufferGeometry = null;
 
 	/**
 	 * Inits geometry
 	 * @returns geometry
 	 */
-	public initGeometry(): THREE_CORE.IBufferGeometry {
+	public initGeometry(): I3JS.IBufferGeometry {
 		return new THREE.BufferGeometry();
 	}
 
@@ -4895,7 +4904,7 @@ export class ThreeGeometryCustom {
 	 * Sets geometry
 	 * @param geometry
 	 */
-	public setGeometry(geometry: THREE_CORE.IBufferGeometry) {
+	public setGeometry(geometry: I3JS.IBufferGeometry) {
 		if (ThreeUtil.isNotNull(this.scale)) {
 			const scale = ThreeUtil.getTypeSafe(this.scale, 1);
 			geometry.scale(scale, scale, scale);
@@ -4907,7 +4916,7 @@ export class ThreeGeometryCustom {
 	 * Gets geometry
 	 * @returns geometry
 	 */
-	public getGeometry(): THREE_CORE.IBufferGeometry {
+	public getGeometry(): I3JS.IBufferGeometry {
 		if (this.geometry === null) {
 			this.setGeometry(this.initGeometry());
 		}

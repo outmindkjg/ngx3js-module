@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * FogExp2 fog
@@ -8,7 +8,7 @@ import * as THREE_CORE from './../../threejs-library/three-core';
  * See the [ngx fog](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_fog/FogExp2) page for a live demo.
  *
  */
-export class NgxFogExp2 extends THREE.FogExp2 implements THREE_CORE.IFogExp2{
+export class NgxFogExp2 extends THREE.FogExp2 implements I3JS.IFogExp2{
 	constructor(hex: number | string, density?: number) {
 		super(hex, density);
 	}
@@ -21,8 +21,8 @@ export class NgxFogExp2 extends THREE.FogExp2 implements THREE_CORE.IFogExp2{
  * See the [ngx fog](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_fog/Fog) page for a live demo.
  *
  */
-export class NgxFog extends THREE.Fog implements THREE_CORE.IFog {
-	constructor(color: THREE_CORE.TColorRepresentation, near?: number, far?: number) {
+export class NgxFog extends THREE.Fog implements I3JS.IFog {
+	constructor(color: I3JS.TColorRepresentation, near?: number, far?: number) {
 		super(color, near, far);
 	}
 }

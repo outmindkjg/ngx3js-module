@@ -12,7 +12,7 @@ import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { CssStyle, ThreeUtil } from '../interface';
 import { AbstractTweenComponent } from '../tween.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Html component.
@@ -177,7 +177,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 	 * @param refObject3d
 	 * @returns true if parent
 	 */
-	public setParent(refObject3d: THREE_CORE.IObject3D | HTMLElement): boolean {
+	public setParent(refObject3d: I3JS.IObject3D | HTMLElement): boolean {
 		if (super.setParent(refObject3d)) {
 			let parentElement: HTMLElement = null;
 			if (

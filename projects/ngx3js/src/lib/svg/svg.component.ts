@@ -14,13 +14,13 @@ import { LocalStorageService } from '../local-storage.service';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { TranslationComponent } from '../translation/translation.component';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Svg geometry
  */
 export interface SvgGeometry {
-	geometry: THREE_CORE.IBufferGeometry;
+	geometry: I3JS.IBufferGeometry;
 	style?: {
 		fill?: string;
 		fillOpacity?: number;
@@ -301,27 +301,27 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * Mesh positions of svg component
 	 */
-	private meshPositions: THREE_CORE.IVector3[] = [];
+	private meshPositions: I3JS.IVector3[] = [];
 
 	/**
 	 * Mesh rotations of svg component
 	 */
-	private meshRotations: THREE_CORE.IEuler[] = [];
+	private meshRotations: I3JS.IEuler[] = [];
 
 	/**
 	 * Mesh scales of svg component
 	 */
-	private meshScales: THREE_CORE.IVector3[] = [];
+	private meshScales: I3JS.IVector3[] = [];
 
 	/**
 	 * Mesh translations of svg component
 	 */
-	private meshTranslations: THREE_CORE.IBufferGeometry[] = [];
+	private meshTranslations: I3JS.IBufferGeometry[] = [];
 
 	/**
 	 * Mesh materials of svg component
 	 */
-	private meshMaterials: THREE_CORE.IMaterial[] = [];
+	private meshMaterials: I3JS.IMaterial[] = [];
 
 	/**
 	 * Creates an instance of svg component.
@@ -529,7 +529,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @returns color
 	 */
-	private getColor(def?: string | number): THREE_CORE.IColor {
+	private getColor(def?: string | number): I3JS.IColor {
 		return ThreeUtil.getColorSafe(this.color, def);
 	}
 
@@ -564,12 +564,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets extrude path
 	 * @returns extrude path
 	 */
-	private getExtrudePath(): THREE_CORE.ICurve<THREE_CORE.IVector3> {
+	private getExtrudePath(): I3JS.ICurve<I3JS.IVector3> {
 		if (
 			ThreeUtil.isNotNull(this.extrudePath) ||
 			ThreeUtil.isNotNull(this.curvePath)
 		) {
-			const vectors: THREE_CORE.IVector3[] = [];
+			const vectors: I3JS.IVector3[] = [];
 			if (ThreeUtil.isNotNull(this.extrudePath)) {
 				this.extrudePath.forEach((p) => {
 					vectors.push(new THREE.Vector3(p.x, p.y, p.z));
@@ -605,7 +605,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @returns uvgenerator
 	 */
-	private getUVGenerator(def?: string): THREE_CORE.IUVGenerator {
+	private getUVGenerator(def?: string): I3JS.IUVGenerator {
 		const uVGenerator = ThreeUtil.getTypeSafe(this.uVGenerator, def, '');
 		switch (uVGenerator.toLowerCase()) {
 			case 'world':
@@ -619,8 +619,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets materials
 	 * @returns materials
 	 */
-	private getSvgMaterials(): THREE_CORE.IMaterial[] {
-		const materials: THREE_CORE.IMaterial[] = [];
+	private getSvgMaterials(): I3JS.IMaterial[] {
+		const materials: I3JS.IMaterial[] = [];
 		if (this.materialList !== null && this.materialList.length > 0) {
 			this.materialList.forEach((material) => {
 				materials.push(material.getMaterial());
@@ -727,14 +727,14 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * The Meshes of svg component
 	 */
-	private meshes: THREE_CORE.IObject3D[] = null;
+	private meshes: I3JS.IObject3D[] = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE_CORE.IObject3D): boolean {
+	public setParent(parent: I3JS.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.meshes = null;
 			this.resetMeshes();
@@ -747,7 +747,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * Svg mesh of svg component
 	 */
-	private svgMesh: THREE_CORE.IGroup = null;
+	private svgMesh: I3JS.IGroup = null;
 
 	/**
 	 * Resets meshes
@@ -764,14 +764,14 @@ export class SvgComponent extends AbstractObject3dComponent {
 				this.meshTranslations = [];
 				this.meshMaterials = [];
 				const materials = this.getSvgMaterials();
-				const materialList: THREE_CORE.IMaterial[] = [];
+				const materialList: I3JS.IMaterial[] = [];
 				for (let i = 0; i < result.length; i++) {
 					materialList.push(materials[i % materials.length]);
 				}
 				result.forEach((data, idx) => {
 					const geometry = data.geometry;
-					let mesh: THREE_CORE.IObject3D = null;
-					const meshMaterial: THREE_CORE.IMaterial = materialList[idx];
+					let mesh: I3JS.IObject3D = null;
+					const meshMaterial: I3JS.IMaterial = materialList[idx];
 					switch (this.type.toLowerCase()) {
 						case 'points':
 							mesh = new THREE.Points(geometry, meshMaterial);
@@ -808,10 +808,10 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns text align
 	 */
 	public applyTextAlign(
-		geometry: THREE_CORE.IBufferGeometry,
-		boundingSphere: THREE_CORE.ISphere,
+		geometry: I3JS.IBufferGeometry,
+		boundingSphere: I3JS.ISphere,
 		def: string = 'left'
-	): THREE_CORE.IBufferGeometry {
+	): I3JS.IBufferGeometry {
 		if (geometry !== null && boundingSphere !== null) {
 			switch (this.getTextAlign(def)) {
 				case 'left':
@@ -834,12 +834,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns geometries
 	 */
 	private getGeometries(
-		data: SVGResult | THREE_CORE.IShape[],
-		boundingSphere: THREE_CORE.ISphere
+		data: SVGResult | I3JS.IShape[],
+		boundingSphere: I3JS.ISphere
 	): SvgGeometry[] {
 		const geometries: SvgGeometry[] = [];
 		const shapes: {
-			shape: THREE_CORE.IShape[];
+			shape: I3JS.IShape[];
 			userData: any;
 		}[] = [];
 		if (data instanceof Array) {
@@ -856,7 +856,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 			});
 		}
 		shapes.forEach((shape) => {
-			let geometry: THREE_CORE.IBufferGeometry = null;
+			let geometry: I3JS.IBufferGeometry = null;
 			switch (this.geometryType.toLowerCase()) {
 				case 'extrudebuffer':
 				case 'extrude':
@@ -876,8 +876,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 				case 'custom':
 				case 'geometry':
 				case 'buffer':
-					const holeShape: THREE_CORE.IPath[] = [];
-					const bufferShapes: THREE_CORE.IShape[] = [];
+					const holeShape: I3JS.IPath[] = [];
+					const bufferShapes: I3JS.IShape[] = [];
 					shape.shape.forEach((sh) => {
 						bufferShapes.push(sh);
 					});
@@ -888,7 +888,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 							});
 						}
 					});
-					const sumShapes: THREE_CORE.IShape[] = shape.shape;
+					const sumShapes: I3JS.IShape[] = shape.shape;
 					sumShapes.push.apply(shape.shape, holeShape as any);
 					if (ThreeUtil.isNotNull(this.stroke)) {
 						const AnySVGLoader: any = SVGLoader;
@@ -956,7 +956,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 			});
 		} else {
 			this.getSVGResult((data: SVGResult) => {
-				const shapes: THREE_CORE.IShape[] = [];
+				const shapes: I3JS.IShape[] = [];
 				data.paths.forEach((path) => {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))
@@ -1006,10 +1006,10 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets shapes
 	 * @param onload
 	 */
-	public getShapes(onload: (data: THREE_CORE.IShape[]) => void) {
+	public getShapes(onload: (data: I3JS.IShape[]) => void) {
 		this.getSVGResult((data: SVGResult) => {
 			if (data.paths.length > 0) {
-				const shapes: THREE_CORE.IShape[] = [];
+				const shapes: I3JS.IShape[] = [];
 				data.paths.forEach((path) => {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))

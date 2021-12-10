@@ -7,7 +7,7 @@ import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHel
 import { VertexNormalsHelper } from 'three/examples/jsm/helpers/VertexNormalsHelper';
 import { VertexTangentsHelper } from 'three/examples/jsm/helpers/VertexTangentsHelper';
 import { Gyroscope } from 'three/examples/jsm/misc/Gyroscope';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * Gyroscope helper
@@ -43,7 +43,7 @@ export class NgxCSMHelper extends CSMHelper {
  *
  */
 export class NgxBoxHelper extends THREE.BoxHelper {
-	constructor(object: THREE_CORE.IObject3D, color?: THREE_CORE.TColorRepresentation) {
+	constructor(object: I3JS.IObject3D, color?: I3JS.TColorRepresentation) {
 		super(object, color);
 	}
 }
@@ -56,7 +56,7 @@ export class NgxBoxHelper extends THREE.BoxHelper {
  *
  */
 export class NgxBox3Helper extends THREE.Box3Helper {
-	constructor(box: THREE_CORE.IBox3, color?: THREE_CORE.IColor) {
+	constructor(box: I3JS.IBox3, color?: I3JS.IColor) {
 		super(box, color);
 	}
 }
@@ -72,8 +72,8 @@ export class NgxGridHelper extends THREE.GridHelper {
 	constructor(
 		size?: number,
 		divisions?: number,
-		color1?: THREE_CORE.TColorRepresentation,
-		color2?: THREE_CORE.TColorRepresentation
+		color1?: I3JS.TColorRepresentation,
+		color2?: I3JS.TColorRepresentation
 	) {
 		super(size, divisions, color1, color2);
 	}
@@ -92,8 +92,8 @@ export class NgxPolarGridHelper extends THREE.PolarGridHelper {
 		radials?: number,
 		circles?: number,
 		divisions?: number,
-		color1?: THREE_CORE.TColorRepresentation,
-		color2?: THREE_CORE.TColorRepresentation
+		color1?: I3JS.TColorRepresentation,
+		color2?: I3JS.TColorRepresentation
 	) {
 		super(radius, radials, circles, divisions, color1, color2);
 	}
@@ -138,7 +138,7 @@ export class NgxAxesHelper extends THREE.AxesHelper {
  *
  */
 export class NgxCameraHelper extends THREE.CameraHelper {
-	constructor(camera: THREE_CORE.ICamera) {
+	constructor(camera: I3JS.ICamera) {
 		super(camera);
 	}
 }
@@ -154,7 +154,7 @@ export class NgxDirectionalLightHelper extends THREE.DirectionalLightHelper {
 	constructor(
 		light: THREE.DirectionalLight,
 		size?: number,
-		color?: THREE_CORE.TColorRepresentation
+		color?: I3JS.TColorRepresentation
 	) {
 		super(light, size, color);
 	}
@@ -171,7 +171,7 @@ export class NgxHemisphereLightHelper extends THREE.HemisphereLightHelper {
 	constructor(
 		light: THREE.HemisphereLight,
 		size: number,
-		color?: THREE_CORE.TColorRepresentation
+		color?: I3JS.TColorRepresentation
 	) {
 		super(light, size, color);
 	}
@@ -188,7 +188,7 @@ export class NgxPointLightHelper extends THREE.PointLightHelper {
 	constructor(
 		light: THREE.PointLight,
 		sphereSize?: number,
-		color?: THREE_CORE.TColorRepresentation
+		color?: I3JS.TColorRepresentation
 	) {
 		super(light, sphereSize, color);
 	}
@@ -202,7 +202,7 @@ export class NgxPointLightHelper extends THREE.PointLightHelper {
  *
  */
 export class NgxSpotLightHelper extends THREE.SpotLightHelper {
-	constructor(light: THREE_CORE.ILight, color?: THREE_CORE.TColorRepresentation) {
+	constructor(light: I3JS.ILight, color?: I3JS.TColorRepresentation) {
 		super(light, color);
 	}
 }
@@ -215,7 +215,7 @@ export class NgxSpotLightHelper extends THREE.SpotLightHelper {
  *
  */
 export class NgxRectAreaLightHelper extends RectAreaLightHelper {
-	constructor(light: THREE.RectAreaLight, color?: THREE_CORE.TColorRepresentation) {
+	constructor(light: THREE.RectAreaLight, color?: I3JS.TColorRepresentation) {
 		super(light, color);
 	}
 }
@@ -241,7 +241,7 @@ export class NgxLightProbeHelper extends LightProbeHelper {
  *
  */
 export class NgxPlaneHelper extends THREE.PlaneHelper {
-	constructor(plane: THREE_CORE.IPlane, size?: number, hex?: number) {
+	constructor(plane: I3JS.IPlane, size?: number, hex?: number) {
 		super(plane, size, hex);
 	}
 }
@@ -254,7 +254,7 @@ export class NgxPlaneHelper extends THREE.PlaneHelper {
  *
  */
 export class NgxVertexTangentsHelper extends VertexTangentsHelper {
-	constructor(object: THREE_CORE.IObject3D, size?: number, hex?: number) {
+	constructor(object: I3JS.IObject3D, size?: number, hex?: number) {
 		super(object, size, hex);
 	}
 }
@@ -267,7 +267,7 @@ export class NgxVertexTangentsHelper extends VertexTangentsHelper {
  *
  */
 export class NgxVertexNormalsHelper extends VertexNormalsHelper {
-	constructor(object: THREE_CORE.IObject3D, size?: number, hex?: number) {
+	constructor(object: I3JS.IObject3D, size?: number, hex?: number) {
 		super(object, size, hex);
 	}
 }
@@ -280,7 +280,7 @@ export class NgxVertexNormalsHelper extends VertexNormalsHelper {
  *
  */
 export class NgxSkeletonHelper extends THREE.SkeletonHelper {
-	constructor(object: THREE_CORE.IObject3D) {
+	constructor(object: I3JS.IObject3D) {
 		super(object);
 	}
 }

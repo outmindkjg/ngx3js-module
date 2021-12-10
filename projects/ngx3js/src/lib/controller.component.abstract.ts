@@ -14,7 +14,7 @@ import { RendererEvent, RendererTimer, ThreeUtil } from './interface';
 import { SceneComponent } from './scene/scene.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { HtmlCollection } from './visual/visual.component';
-import * as THREE_CORE from './threejs-library/three-core';
+import * as I3JS from './threejs-library/three-interface';
 
 /**
  * The Abstract Controller component.
@@ -98,7 +98,7 @@ export class AbstractControllerComponent
 	/**
 	 * Ref object3d of controller component
 	 */
-	protected refObject3d: THREE_CORE.IObject3D = null;
+	protected refObject3d: I3JS.IObject3D = null;
 
 	/**
 	 * Ref object2d of controller component
@@ -109,7 +109,7 @@ export class AbstractControllerComponent
 	 * Sets object3d
 	 * @param refObject3d
 	 */
-	public setObject3d(refObject3d: THREE_CORE.IObject3D) {
+	public setObject3d(refObject3d: I3JS.IObject3D) {
 		if (this.refObject3d !== refObject3d) {
 			this.refObject3d = refObject3d;
 			if (this.refObject3d !== null) {
@@ -149,7 +149,7 @@ export class AbstractControllerComponent
 	/**
 	 * The Renderer of controller component
 	 */
-	protected _renderer: THREE_CORE.IRenderer = null;
+	protected _renderer: I3JS.IRenderer = null;
 
 	/**
 	 * The Scenes of controller component
@@ -169,7 +169,7 @@ export class AbstractControllerComponent
 	/**
 	 * The Scene of controller component
 	 */
-	protected _scene: THREE_CORE.IScene = null;
+	protected _scene: I3JS.IScene = null;
 
 	/**
 	 * The Canvas of controller component
@@ -189,7 +189,7 @@ export class AbstractControllerComponent
 	 * @param canvas2ds
 	 */
 	public setRenderer(
-		renderer: THREE_CORE.IRenderer,
+		renderer: I3JS.IRenderer,
 		scenes: QueryList<SceneComponent>,
 		cameras: QueryList<CameraComponent>,
 		canvas2ds: QueryList<CanvasComponent>
@@ -208,7 +208,7 @@ export class AbstractControllerComponent
 	 * Sets scene
 	 * @param scene
 	 */
-	public setScene(scene: THREE_CORE.IScene) {
+	public setScene(scene: I3JS.IScene) {
 		this._scene = scene;
 		if (this.checkController()) {
 			this.addChanges('scene');

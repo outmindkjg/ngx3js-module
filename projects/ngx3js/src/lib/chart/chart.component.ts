@@ -11,7 +11,7 @@ import {
 	ThreeVector,
 } from '../interface';
 import { MeshComponent } from '../mesh/mesh.component';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Color opacity
@@ -519,7 +519,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 							const z = barChartCurrIdx;
 							const position = this.getLocalPosition(x, y, z);
 							const colorInfo = barColorInfo[idx % barColorInfo.length];
-							const tooltipPosition: THREE_CORE.IVector3 =
+							const tooltipPosition: I3JS.IVector3 =
 								this.getGlobalPosition(position);
 							this.barChart.push({
 								position: { x: position.x, y: 0, z: position.z },
@@ -576,7 +576,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 							const z = lineChartCurrIdx;
 							const position = this.getLocalPosition(x, y, z);
 							const colorInfo = lineColorInfo[idx % lineColorInfo.length];
-							const tooltipPosition: THREE_CORE.IVector3 =
+							const tooltipPosition: I3JS.IVector3 =
 								this.getGlobalPosition(position);
 							lineCurvePath.push(position);
 							this.lineChart.push({
@@ -661,7 +661,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @param value
 	 * @returns tooltip text
 	 */
-	private getGlobalPosition(p: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+	private getGlobalPosition(p: I3JS.IVector3): I3JS.IVector3 {
 		return p.clone().add(this.chartPosition);
 	}
 
@@ -671,7 +671,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @param value
 	 * @returns tooltip text
 	 */
-	private getLocalPosition(x: number, y: number, z: number): THREE_CORE.IVector3 {
+	private getLocalPosition(x: number, y: number, z: number): I3JS.IVector3 {
 		return new THREE.Vector3(x, y, z)
 			.sub(this.chartZero)
 			.multiply(this.chartScale);
@@ -680,17 +680,17 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * Axis x of chart component
 	 */
-	public chartScale: THREE_CORE.IVector3 = new THREE.Vector3(1, 1, 1);
+	public chartScale: I3JS.IVector3 = new THREE.Vector3(1, 1, 1);
 
 	/**
 	 * Axis x of chart component
 	 */
-	public chartZero: THREE_CORE.IVector3 = new THREE.Vector3(0, 0, 0);
+	public chartZero: I3JS.IVector3 = new THREE.Vector3(0, 0, 0);
 
 	/**
 	 * Axis x of chart component
 	 */
-	public chartPosition: THREE_CORE.IVector3 = new THREE.Vector3(0, 0, 0);
+	public chartPosition: I3JS.IVector3 = new THREE.Vector3(0, 0, 0);
 
 	/**
 	 * Axis x of chart component
@@ -786,7 +786,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * Tooltip position of chart component
 	 */
-	tooltipPosition: THREE_CORE.IVector3 = null;
+	tooltipPosition: I3JS.IVector3 = null;
 
 	/**
 	 * Sets tool tip
@@ -799,7 +799,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * Last intersect of chart component
 	 */
-	lastIntersect: THREE_CORE.IMesh = null;
+	lastIntersect: I3JS.IMesh = null;
 
 	/**
 	 * Determines whether mouse move on
@@ -841,8 +841,8 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @param isHover
 	 * @returns material color
 	 */
-	private setMaterialColor(mesh: THREE_CORE.IMesh, isHover: boolean): void {
-		const material: THREE_CORE.IMeshLambertMaterial =
+	private setMaterialColor(mesh: I3JS.IMesh, isHover: boolean): void {
+		const material: I3JS.IMeshLambertMaterial =
 			mesh.material as THREE.MeshLambertMaterial;
 		const colorInfo: BackgroundBorder = mesh.userData.colorInfo;
 		if (ThreeUtil.isNull(colorInfo)) {
@@ -860,7 +860,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 			if (ThreeUtil.isNotNull(borderColor) && mesh.children.length > 0) {
 				const child = mesh.children[0];
 				if (child instanceof THREE.LineSegments) {
-					const childMaterial: THREE_CORE.ILineBasicMaterial =
+					const childMaterial: I3JS.ILineBasicMaterial =
 						child.material as THREE.LineBasicMaterial;
 					childMaterial.color = ThreeUtil.getColorSafe(borderColor.color);
 					childMaterial.opacity = ThreeUtil.getTypeSafe(borderColor.opacity, 1);

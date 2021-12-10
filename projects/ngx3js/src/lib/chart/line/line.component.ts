@@ -12,7 +12,7 @@ import {
 } from '../../chart.abstract';
 import { ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * The Chart Line component.
@@ -92,47 +92,47 @@ export class ChartLineComponent
 	/**
 	 * The Line of chart line component
 	 */
-	private _line: THREE_CORE.IObject3D = null;
+	private _line: I3JS.IObject3D = null;
 
 	/**
 	 * The Material of chart line component
 	 */
-	private _material: THREE_CORE.IMaterial = null;
+	private _material: I3JS.IMaterial = null;
 
 	/**
 	 * The Geometry of chart line component
 	 */
-	private _geometry: THREE_CORE.IBufferGeometry = null;
+	private _geometry: I3JS.IBufferGeometry = null;
 
 	/**
 	 * Material border of chart line component
 	 */
-	private _materialBorder: THREE_CORE.ILineBasicMaterial = null;
+	private _materialBorder: I3JS.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry border of chart line component
 	 */
-	private _geometryBorder: THREE_CORE.IBufferGeometry = null;
+	private _geometryBorder: I3JS.IBufferGeometry = null;
 
 	/**
 	 * Material point of chart line component
 	 */
-	private _materialPoint: THREE_CORE.IMaterial = null;
+	private _materialPoint: I3JS.IMaterial = null;
 
 	/**
 	 * Geometry point of chart line component
 	 */
-	private _geometryPoint: THREE_CORE.IBufferGeometry = null;
+	private _geometryPoint: I3JS.IBufferGeometry = null;
 
 	/**
 	 * Material point border of chart line component
 	 */
-	private _materialPointBorder: THREE_CORE.ILineBasicMaterial = null;
+	private _materialPointBorder: I3JS.ILineBasicMaterial = null;
 
 	/**
 	 * Geometry point border of chart line component
 	 */
-	private _geometryPointBorder: THREE_CORE.IBufferGeometry = null;
+	private _geometryPointBorder: I3JS.IBufferGeometry = null;
 
 	/**
 	 * Applys changes3d
@@ -377,7 +377,7 @@ export class ChartLineComponent
 			this._line.add(borderMesh);
 			this.addUpdateAttributes(this._geometryBorder, lineUpdateAttributes);
 			let pointerInfo = this.getPointShape();
-			let pointer: THREE_CORE.IObject3D = pointerInfo.mesh;
+			let pointer: I3JS.IObject3D = pointerInfo.mesh;
 			this._geometryPoint = pointerInfo.geometry;
 			this._materialPoint = pointerInfo.material;
 			this._geometryPointBorder = pointerInfo.geometryBorder;

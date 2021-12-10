@@ -15,23 +15,23 @@ import { ThreeTexture, ThreeUtil } from './interface';
 import { PlaneComponent } from './plane/plane.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { AbstractTextureComponent } from './texture.abstract';
-import * as THREE_CORE from './threejs-library/three-core';
+import * as I3JS from './threejs-library/three-interface';
 
 /**
  * Mesh material raw
  */
 export interface MeshMaterialRaw {
-	geometry?: THREE_CORE.IBufferGeometry;
+	geometry?: I3JS.IBufferGeometry;
 	userData?: any;
-	material: THREE_CORE.IMaterial | THREE_CORE.IMaterial[];
-	customDepthMaterial?: THREE_CORE.IMaterial;
-	customDistanceMaterial?: THREE_CORE.IMaterial;
+	material: I3JS.IMaterial | I3JS.IMaterial[];
+	customDepthMaterial?: I3JS.IMaterial;
+	customDistanceMaterial?: I3JS.IMaterial;
 }
 
 /**
  * Mesh Material
  */
-export type MeshMaterial = MeshMaterialRaw | THREE_CORE.IScene;
+export type MeshMaterial = MeshMaterialRaw | I3JS.IScene;
 
 /**
  * AbstractMaterialComponent
@@ -449,8 +449,8 @@ export class AbstractMaterialComponent
 	 * This function is called with the shader source code as a parameter. Useful for the modification of built-in materials.
 	 */
 	@Input() public onBeforeCompile: (
-		shader: THREE_CORE.IShader,
-		renderer?: THREE_CORE.IWebGLRenderer
+		shader: I3JS.IShader,
+		renderer?: I3JS.IWebGLRenderer
 	) => void = null;
 
 	/**
@@ -488,9 +488,9 @@ export class AbstractMaterialComponent
 	 * @param [def]
 	 * @returns clipping planes
 	 */
-	protected getClippingPlanes(def?: THREE_CORE.IPlane[]): THREE_CORE.IPlane[] {
+	protected getClippingPlanes(def?: I3JS.IPlane[]): I3JS.IPlane[] {
 		if (this.clippingPlanes !== null && this.clippingPlanes !== undefined) {
-			const clippingPlanes: THREE_CORE.IPlane[] = [];
+			const clippingPlanes: I3JS.IPlane[] = [];
 			this.clippingPlanes.forEach((plane) => {
 				if (plane instanceof PlaneComponent) {
 					clippingPlanes.push(plane.getWorldPlane());
@@ -505,7 +505,7 @@ export class AbstractMaterialComponent
 			this.clippingPlanesList !== null &&
 			this.clippingPlanesList !== undefined
 		) {
-			const clippingPlanes: THREE_CORE.IPlane[] = [];
+			const clippingPlanes: I3JS.IPlane[] = [];
 			this.clippingPlanesList.forEach((plane) => {
 				clippingPlanes.push(plane.getWorldPlane());
 			});
@@ -525,7 +525,7 @@ export class AbstractMaterialComponent
 	protected getTextureOption(
 		map: ThreeTexture,
 		name: string
-	): THREE_CORE.ITexture {
+	): I3JS.ITexture {
 		if (ThreeUtil.isNotNull(map)) {
 			if (typeof map === 'string') {
 				if (map !== 'none') {
@@ -714,7 +714,7 @@ export class AbstractMaterialComponent
 				refType = this._object3d[key].refType;
 			}
 			let object = ThreeUtil.getObject3d(object3d);
-			const objectList: THREE_CORE.IObject3D[] = [];
+			const objectList: I3JS.IObject3D[] = [];
 			let meshes: {
 				refIndex: number;
 				mesh:
@@ -812,7 +812,7 @@ export class AbstractMaterialComponent
 	 * Synks object3d
 	 * @param [material]
 	 */
-	synkObject3d(material: THREE_CORE.IMaterial = null, key: string = null) {
+	synkObject3d(material: I3JS.IMaterial = null, key: string = null) {
 		if (ThreeUtil.isNotNull(material) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._object3d)) {
 				const object3dList: {
@@ -820,9 +820,9 @@ export class AbstractMaterialComponent
 					meshes: {
 						refIndex: number;
 						mesh:
-							| THREE_CORE.IScene
-							| THREE_CORE.IMesh
-							| THREE_CORE.ILine
+							| I3JS.IScene
+							| I3JS.IMesh
+							| I3JS.ILine
 							| THREE.Points
 							| THREE.Sprite;
 					}[];
@@ -874,7 +874,7 @@ export class AbstractMaterialComponent
 										case 'background-angular':
 										case 'backgroundangular':
 										case 'background':
-											const backgroundTexture: THREE_CORE.ITexture =
+											const backgroundTexture: I3JS.ITexture =
 												materialAny['map'];
 											if (ThreeUtil.isNotNull(backgroundTexture)) {
 												mesh.background = backgroundTexture;
@@ -883,12 +883,12 @@ export class AbstractMaterialComponent
 										case 'environment-angular':
 										case 'environmentangular':
 										case 'environment':
-											const environmentTexture: THREE_CORE.ITexture =
+											const environmentTexture: I3JS.ITexture =
 												materialAny['map'];
 											if (ThreeUtil.isNotNull(environmentTexture)) {
 												mesh.environment = environmentTexture;
 											} else {
-												const environmentTextureEnv: THREE_CORE.ITexture =
+												const environmentTextureEnv: I3JS.ITexture =
 													materialAny['envMap'];
 												if (ThreeUtil.isNotNull(environmentTextureEnv)) {
 													mesh.environment = environmentTextureEnv;
@@ -903,13 +903,13 @@ export class AbstractMaterialComponent
 										case 'environment-background-angular':
 										case 'backgroundenvironmentangular':
 										case 'environmentbackgroundangular':
-											const bgEnvironmentTexture: THREE_CORE.ITexture =
+											const bgEnvironmentTexture: I3JS.ITexture =
 												materialAny['map'];
 											if (ThreeUtil.isNotNull(bgEnvironmentTexture)) {
 												mesh.environment = bgEnvironmentTexture;
 												mesh.background = bgEnvironmentTexture;
 											} else {
-												const bgEnvironmentTextureEnv: THREE_CORE.ITexture =
+												const bgEnvironmentTextureEnv: I3JS.ITexture =
 													materialAny['envMap'];
 												if (ThreeUtil.isNotNull(bgEnvironmentTextureEnv)) {
 													mesh.environment = bgEnvironmentTextureEnv;
@@ -1014,14 +1014,14 @@ export class AbstractMaterialComponent
 	/**
 	 * The Material of abstract material component
 	 */
-	protected material: THREE_CORE.IMaterial = null;
+	protected material: I3JS.IMaterial = null;
 
 	/**
 	 * Gets material
 	 * @template T
 	 * @returns material
 	 */
-	public getMaterial<T extends THREE_CORE.IMaterial>(): T {
+	public getMaterial<T extends I3JS.IMaterial>(): T {
 		return this.material as T;
 	}
 
@@ -1029,7 +1029,7 @@ export class AbstractMaterialComponent
 	 * Sets material
 	 * @param material
 	 */
-	protected setMaterial(material: THREE_CORE.IMaterial) {
+	protected setMaterial(material: I3JS.IMaterial) {
 		if (this.material !== material && ThreeUtil.isNotNull(material)) {
 			if (this.material !== null) {
 				this.material.dispose();

@@ -17,7 +17,7 @@ import {
 	TextGeometry,
 	TextGeometryParameters,
 } from 'three/examples/jsm/geometries/TextGeometry';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * Buffer geometry
@@ -281,7 +281,7 @@ export class NgxShapeBufferGeometry extends THREE.ShapeBufferGeometry {
 	 * @param [shapes]
 	 * @param [curveSegments]
 	 */
-	constructor(shapes?: THREE_CORE.IShape | THREE_CORE.IShape[], curveSegments?: number) {
+	constructor(shapes?: I3JS.IShape | I3JS.IShape[], curveSegments?: number) {
 		super(shapes, curveSegments);
 	}
 }
@@ -301,7 +301,7 @@ export class NgxExtrudeBufferGeometry extends THREE.ExtrudeBufferGeometry {
 	 * @param [options]
 	 */
 	constructor(
-		shapes?: THREE_CORE.IShape | THREE_CORE.IShape[],
+		shapes?: I3JS.IShape | I3JS.IShape[],
 		options?: THREE.ExtrudeGeometryOptions
 	) {
 		super(shapes, options);
@@ -506,7 +506,7 @@ export class NgxTubeBufferGeometry extends THREE.TubeBufferGeometry {
 	 * @param [closed]
 	 */
 	constructor(
-		path?: THREE_CORE.ICurve<THREE_CORE.IVector3>,
+		path?: I3JS.ICurve<I3JS.IVector3>,
 		tubularSegments?: number,
 		radius?: number,
 		radiusSegments?: number,
@@ -551,7 +551,7 @@ export class NgxLatheBufferGeometry extends THREE.LatheBufferGeometry {
 	 * @param [phiLength]
 	 */
 	constructor(
-		points?: THREE_CORE.IVector2[],
+		points?: I3JS.IVector2[],
 		segments: number = 12,
 		phiStart: number = 0,
 		phiLength: number = Math.PI * 2
@@ -591,7 +591,7 @@ export class NgxConvexGeometry extends ConvexGeometry {
 	 * Creates an instance of convex geometry.
 	 * @param points
 	 */
-	constructor(points: THREE_CORE.IVector3[]) {
+	constructor(points: I3JS.IVector3[]) {
 		super(points);
 	}
 }
@@ -613,10 +613,10 @@ export class NgxDecalGeometry extends DecalGeometry {
 	 * @param size
 	 */
 	constructor(
-		mesh: THREE_CORE.IMesh,
-		position: THREE_CORE.IVector3,
-		orientation: THREE_CORE.IEuler,
-		size: THREE_CORE.IVector3
+		mesh: I3JS.IMesh,
+		position: I3JS.IVector3,
+		orientation: I3JS.IEuler,
+		size: I3JS.IVector3
 	) {
 		super(mesh, position, orientation, size);
 	}
@@ -631,7 +631,7 @@ export class NgxDecalGeometry extends DecalGeometry {
  */
 export class NgxParametricTubeGeometry extends ParametricGeometries.TubeGeometry {
 	constructor(
-		path: THREE_CORE.ICurve<THREE_CORE.IVector3>,
+		path: I3JS.ICurve<I3JS.IVector3>,
 		segments?: number,
 		radius?: number,
 		segmentsRadius?: number,
@@ -825,7 +825,7 @@ export class NgxParametricGeometry extends ParametricGeometry {
 	 * @param [stacks]
 	 */
 	constructor(
-		func?: (u: number, v: number, target: THREE_CORE.IVector3) => void,
+		func?: (u: number, v: number, target: I3JS.IVector3) => void,
 		slices?: number,
 		stacks?: number
 	) {
@@ -866,7 +866,7 @@ export class NgxRollerCoasterShadowGeometry extends RollerCoaster.RollerCoasterS
 	 * @param curve
 	 * @param divisions
 	 */
-	constructor(curve: THREE_CORE.ICurve<THREE_CORE.IVector3>, divisions: number) {
+	constructor(curve: I3JS.ICurve<I3JS.IVector3>, divisions: number) {
 		super(curve, divisions);
 	}
 }
@@ -885,7 +885,7 @@ export class NgxRollerCoasterLiftersGeometry extends RollerCoaster.RollerCoaster
 	 * @param curve
 	 * @param divisions
 	 */
-	constructor(curve: THREE_CORE.ICurve<THREE_CORE.IVector3>, divisions: number) {
+	constructor(curve: I3JS.ICurve<I3JS.IVector3>, divisions: number) {
 		super(curve, divisions);
 	}
 }
@@ -904,7 +904,7 @@ export class NgxRollerCoasterGeometry extends RollerCoaster.RollerCoasterGeometr
 	 * @param curve
 	 * @param divisions
 	 */
-	constructor(curve: THREE_CORE.ICurve<THREE_CORE.IVector3>, divisions: number) {
+	constructor(curve: I3JS.ICurve<I3JS.IVector3>, divisions: number) {
 		super(curve, divisions);
 	}
 }
@@ -923,7 +923,7 @@ export class NgxRollerCoasterSkyGeometry extends RollerCoaster.SkyGeometry {
 	 * @param curve
 	 * @param divisions
 	 */
-	constructor(curve: THREE_CORE.ICurve<THREE_CORE.IVector3>, divisions: number) {
+	constructor(curve: I3JS.ICurve<I3JS.IVector3>, divisions: number) {
 		super(curve, divisions);
 	}
 }
@@ -941,7 +941,7 @@ export class NgxRollerCoasterTreesGeometry extends RollerCoaster.TreesGeometry {
 	 *
 	 * @param landscape
 	 */
-	constructor(landscape: THREE_CORE.IMesh) {
+	constructor(landscape: I3JS.IMesh) {
 		super(landscape);
 	}
 }

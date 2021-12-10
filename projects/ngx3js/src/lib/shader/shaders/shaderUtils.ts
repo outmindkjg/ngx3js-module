@@ -110,7 +110,7 @@ import { ShaderSkyDome } from './shader.skydome';
 import { UnrealBloomSelective } from './shader.unreal_bloom_selective';
 import { VideoKinect } from './shader.video_kinect';
 import { WireFrame } from './shader.wireframe';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * ShaderType
@@ -120,7 +120,7 @@ export interface ShaderType {
 		[key: string]: any;
 	};
 	uniforms?: {
-		[key: string]: THREE_CORE.IUniform;
+		[key: string]: I3JS.IUniform;
 	};
 	fragmentShader: string;
 	vertexShader?: string;
@@ -468,7 +468,7 @@ export class ShaderUtils {
 	}
 
 	public static getUniforms(key: string | ShaderType): {
-		[key: string]: THREE_CORE.IUniform;
+		[key: string]: I3JS.IUniform;
 	} {
 		if (ThreeUtil.isNotNull(key)) {
 			if (typeof key === 'string') {

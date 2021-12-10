@@ -10,7 +10,7 @@ import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { SizeComponent } from '../size/size.component';
 import { AbstractTextureComponent } from '../texture.abstract';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * The Render Target component.
@@ -70,14 +70,14 @@ export class RenderTargetComponent
 	/**
 	 * The targetSize of pass component
 	 */
-	@Input() public targetSize: THREE_CORE.IVector2 | SizeComponent = null;
+	@Input() public targetSize: I3JS.IVector2 | SizeComponent = null;
 
 	/**
 	 * Gets height
 	 * @param [def]
 	 * @returns height
 	 */
-	private getTargetSize(width?: number, height?: number): THREE_CORE.IVector2 {
+	private getTargetSize(width?: number, height?: number): I3JS.IVector2 {
 		if (ThreeUtil.isNotNull(this.targetSize)) {
 			if (this.targetSize instanceof THREE.Vector2) {
 				return this.targetSize;
@@ -98,8 +98,8 @@ export class RenderTargetComponent
 	 * Gets depth texture
 	 * @returns depth texture
 	 */
-	private getTargetTextureOptions(): THREE_CORE.IWebGLRenderTargetOptions {
-		const options: THREE_CORE.IWebGLRenderTargetOptions =
+	private getTargetTextureOptions(): I3JS.IWebGLRenderTargetOptions {
+		const options: I3JS.IWebGLRenderTargetOptions =
 			AbstractTextureComponent.setTextureOptions({}, this.getTextureOptions());
 		if (ThreeUtil.isNotNull(this.depthBuffer)) {
 			options.depthBuffer = ThreeUtil.getTypeSafe(this.depthBuffer, false);
@@ -298,7 +298,7 @@ export class RenderTargetComponent
 					'loaded'
 				)
 			);
-			let texture: THREE_CORE.ITexture = null;
+			let texture: I3JS.ITexture = null;
 			if (Array.isArray(this.renderTarget.texture)) {
 				texture = this.renderTarget.texture[0];
 			} else {

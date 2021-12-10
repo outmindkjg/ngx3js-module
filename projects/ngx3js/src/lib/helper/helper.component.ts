@@ -17,7 +17,7 @@ import { Gyroscope } from 'three/examples/jsm/misc/Gyroscope';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { ThreeColor, ThreeUtil } from './../interface';
-import * as THREE_CORE from './../threejs-library/three-core';
+import * as I3JS from '../threejs-library/three-interface';
 
 /**
  * Helper options
@@ -196,7 +196,7 @@ export interface HelperOptions {
 	/**
 	 * Update matrix for this helper
 	 */
-	matrix?: THREE_CORE.IMatrix4;
+	matrix?: I3JS.IMatrix4;
 
 	/**
 	 * this children of Gyroscope
@@ -442,7 +442,7 @@ export class HelperComponent
 	/**
 	 * Update matrix for this helper
 	 */
-	@Input() public matrix: THREE_CORE.IMatrix4 = null;
+	@Input() public matrix: I3JS.IMatrix4 = null;
 
 	/**
 	 * this children of Gyroscope
@@ -475,9 +475,9 @@ export class HelperComponent
 	 * @param [target]
 	 * @returns target
 	 */
-	private getTarget(target?: THREE_CORE.IObject3D): THREE_CORE.IObject3D {
+	private getTarget(target?: I3JS.IObject3D): I3JS.IObject3D {
 		this.unSubscribeRefer('target');
-		let targetMesh: THREE_CORE.IObject3D = null;
+		let targetMesh: I3JS.IObject3D = null;
 		if (ThreeUtil.isNotNull(this.target)) {
 			targetMesh = ThreeUtil.getObject3d(this.target, false);
 			this.subscribeRefer(
@@ -521,7 +521,7 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color
 	 */
-	private getColor(def?: number | string): THREE_CORE.IColor {
+	private getColor(def?: number | string): I3JS.IColor {
 		return ThreeUtil.getColorSafe(this.color, def);
 	}
 
@@ -580,7 +580,7 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color1
 	 */
-	private getColor1(def?: ThreeColor): THREE_CORE.IColor {
+	private getColor1(def?: ThreeColor): I3JS.IColor {
 		return ThreeUtil.getColorSafe(this.color1, this.color, def);
 	}
 
@@ -589,7 +589,7 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color2
 	 */
-	private getColor2(def?: ThreeColor): THREE_CORE.IColor {
+	private getColor2(def?: ThreeColor): I3JS.IColor {
 		return ThreeUtil.getColorSafe(this.color2, this.color1 || this.color, def);
 	}
 
@@ -617,13 +617,13 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns dir
 	 */
-	private getDirection(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
+	private getDirection(def?: I3JS.IVector3): I3JS.IVector3 {
 		if (
 			ThreeUtil.isNotNull(this.arrowFrom) &&
 			ThreeUtil.isNotNull(this.arrowTo)
 		) {
-			const arrowFrom: THREE_CORE.IVector3 = this.getObjectPosition(this.arrowFrom);
-			const arrowTo: THREE_CORE.IVector3 = this.getObjectPosition(this.arrowTo);
+			const arrowFrom: I3JS.IVector3 = this.getObjectPosition(this.arrowFrom);
+			const arrowTo: I3JS.IVector3 = this.getObjectPosition(this.arrowTo);
 			const arrowDirection = new THREE.Vector3();
 			arrowDirection.subVectors(arrowTo, arrowFrom).normalize();
 			return arrowDirection;
@@ -640,8 +640,8 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns origin
 	 */
-	private getOrigin(def?: THREE_CORE.IVector3): THREE_CORE.IVector3 {
-		let origin: THREE_CORE.IVector3 = def;
+	private getOrigin(def?: I3JS.IVector3): I3JS.IVector3 {
+		let origin: I3JS.IVector3 = def;
 		if (ThreeUtil.isNotNull(this.arrowFrom)) {
 			origin = this.getObjectPosition(this.arrowFrom);
 		}
@@ -667,7 +667,7 @@ export class HelperComponent
 	 * @param obj
 	 * @returns object position
 	 */
-	private getObjectPosition(obj: any): THREE_CORE.IVector3 {
+	private getObjectPosition(obj: any): I3JS.IVector3 {
 		if (ThreeUtil.isNotNull(obj)) {
 			if (obj instanceof THREE.Vector3) {
 				return obj;
@@ -771,14 +771,14 @@ export class HelperComponent
 	/**
 	 * The Helper of helper component
 	 */
-	private helper: THREE_CORE.IObject3D = null;
+	private helper: I3JS.IObject3D = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: THREE_CORE.IObject3D): boolean {
+	public setParent(parent: I3JS.IObject3D): boolean {
 		if (super.setParent(parent)) {
 			this.getHelper();
 			this.unSubscribeRefer('helperReset');
@@ -833,7 +833,7 @@ export class HelperComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends THREE_CORE.IObject3D>(): T {
+	public getObject3d<T extends I3JS.IObject3D>(): T {
 		return this.getHelper();
 	}
 
@@ -842,7 +842,7 @@ export class HelperComponent
 	 * @template T
 	 * @returns helper
 	 */
-	public getHelper<T extends THREE_CORE.IObject3D>(): T {
+	public getHelper<T extends I3JS.IObject3D>(): T {
 		if (this.helper === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.removeObject3d(this.helper);
@@ -1017,7 +1017,7 @@ export class HelperComponent
 						this.parent.material instanceof THREE.Material
 					) {
 						basemesh = new THREE.Group();
-						const clippingPlanes: THREE_CORE.IPlane[] =
+						const clippingPlanes: I3JS.IPlane[] =
 							this.parent.material.clippingPlanes;
 						if (clippingPlanes !== null && clippingPlanes !== undefined) {
 							clippingPlanes.forEach((clippingPlane) => {

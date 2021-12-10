@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-import * as THREE_CORE from './../../threejs-library/three-core';
+import * as I3JS from '../../threejs-library/three-interface';
 
 /**
  * The Plane Perlin geometry.
@@ -83,7 +83,7 @@ export class NgxPlanePerlinGeometry {
 		planeWidth: number,
 		planeHeight: number,
 		planeDepth: number
-	): THREE_CORE.IBufferGeometry {
+	): I3JS.IBufferGeometry {
 		const geometry = new THREE.PlaneGeometry(
 			planeWidth,
 			planeDepth,
@@ -114,14 +114,14 @@ export class NgxPlanePerlinGeometry {
 		planeWidth: number,
 		planeHeight: number,
 		planeDepth: number
-	): THREE_CORE.IBufferGeometry {
+	): I3JS.IBufferGeometry {
 		const planeGeometry = new THREE.PlaneGeometry(planeWidth, planeDepth);
 		const geometry: {
-			px: THREE_CORE.IBufferGeometry;
-			nx: THREE_CORE.IBufferGeometry;
-			py: THREE_CORE.IBufferGeometry;
-			pz: THREE_CORE.IBufferGeometry;
-			nz: THREE_CORE.IBufferGeometry;
+			px: I3JS.IBufferGeometry;
+			nx: I3JS.IBufferGeometry;
+			py: I3JS.IBufferGeometry;
+			pz: I3JS.IBufferGeometry;
+			nz: I3JS.IBufferGeometry;
 		} = {
 			px: this.getGeometry(
 				planeGeometry,
@@ -154,7 +154,7 @@ export class NgxPlanePerlinGeometry {
 				{ x: 0, y: 0, z: -50 }
 			),
 		};
-		const geometries: THREE_CORE.IBufferGeometry[] = [];
+		const geometries: I3JS.IBufferGeometry[] = [];
 		const worldDepth = this.worldDepth;
 		const worldWidth = this.worldWidth;
 		const worldHalfWidth = worldWidth / 2;
@@ -203,9 +203,9 @@ export class NgxPlanePerlinGeometry {
 		planeWidth: number,
 		planeHeight: number,
 		planeDepth: number,
-		light: THREE_CORE.IColor,
-		shadow: THREE_CORE.IColor
-	): THREE_CORE.IBufferGeometry {
+		light: I3JS.IColor,
+		shadow: I3JS.IColor
+	): I3JS.IBufferGeometry {
 		const planeGeometry = new THREE.PlaneGeometry(
 			planeWidth,
 			planeDepth
@@ -215,12 +215,12 @@ export class NgxPlanePerlinGeometry {
 			planeGeometry.attributes.position.clone()
 		);
 		const geometry: {
-			px: THREE_CORE.IBufferGeometry;
-			nx: THREE_CORE.IBufferGeometry;
-			py: THREE_CORE.IBufferGeometry;
-			py2: THREE_CORE.IBufferGeometry;
-			pz: THREE_CORE.IBufferGeometry;
-			nz: THREE_CORE.IBufferGeometry;
+			px: I3JS.IBufferGeometry;
+			nx: I3JS.IBufferGeometry;
+			py: I3JS.IBufferGeometry;
+			py2: I3JS.IBufferGeometry;
+			pz: I3JS.IBufferGeometry;
+			nz: I3JS.IBufferGeometry;
 		} = {
 			px: this.getGeometry(
 				planeGeometry,
@@ -265,7 +265,7 @@ export class NgxPlanePerlinGeometry {
 				[light, shadow, light, shadow, shadow, light]
 			),
 		};
-		const geometries: THREE_CORE.IBufferGeometry[] = [];
+		const geometries: I3JS.IBufferGeometry[] = [];
 		const worldDepth = this.worldDepth;
 		const worldWidth = this.worldWidth;
 		const worldHalfWidth = worldWidth / 2;
@@ -377,12 +377,12 @@ export class NgxPlanePerlinGeometry {
 	 * @returns geometry
 	 */
 	public getGeometry(
-		planeGeometry: THREE_CORE.IBufferGeometry,
+		planeGeometry: I3JS.IBufferGeometry,
 		uv: number[],
 		rotate: { x: number; y: number; z: number },
 		translate: { x: number; y: number; z: number },
-		colors?: THREE_CORE.IColor[]
-	): THREE_CORE.IBufferGeometry {
+		colors?: I3JS.IColor[]
+	): I3JS.IBufferGeometry {
 		const geometry = planeGeometry.clone() as THREE.PlaneGeometry;
 		if (colors !== null && colors !== undefined && colors.length > 0) {
 			geometry.setAttribute('color', planeGeometry.attributes.position.clone());
@@ -414,9 +414,9 @@ export class NgxPlanePerlinGeometry {
 	 * @returns texture
 	 */
 	public getTexture(
-		sun: THREE_CORE.IVector3,
-		color: THREE_CORE.IColor,
-		add: THREE_CORE.IColor
+		sun: I3JS.IVector3,
+		color: I3JS.IColor,
+		add: I3JS.IColor
 	): HTMLCanvasElement {
 		let context, image, imageData, shade;
 		const vector3 = new THREE.Vector3(0, 0, 0);
