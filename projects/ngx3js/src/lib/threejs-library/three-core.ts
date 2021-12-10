@@ -2349,6 +2349,7 @@ export class N3js {
 	public static Raycaster: any = THREE.Raycaster;
 	public static Uniform: any = THREE.Uniform;
 	public static UniformsUtils: any = THREE.UniformsUtils;
+	public static UniformsLib: any = THREE.UniformsLib;
 	public static BoxGeometry: any = THREE.BoxGeometry;
 	public static CircleGeometry: any = THREE.CircleGeometry;
 	public static ConeGeometry: any = THREE.ConeGeometry;
