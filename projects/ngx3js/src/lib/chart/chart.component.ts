@@ -11,7 +11,7 @@ import {
 	ThreeVector,
 } from '../interface';
 import { MeshComponent } from '../mesh/mesh.component';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Color opacity

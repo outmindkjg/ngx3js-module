@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * AVR Controls

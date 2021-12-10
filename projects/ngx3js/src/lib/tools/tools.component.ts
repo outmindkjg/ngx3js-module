@@ -4,7 +4,7 @@ import { ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Tools Component
@@ -178,7 +178,7 @@ export class ToolsComponent
 	public getTexture(): I3JS.ITexture {
 		const texture = this.getTool();
 		if (texture instanceof THREE.Texture) {
-			return texture;
+			return texture as any;
 		} else {
 			return null;
 		}
@@ -195,7 +195,7 @@ export class ToolsComponent
 			switch (this.type.toLowerCase()) {
 				case 'pmremtexture':
 					const pmremGenerator = new THREE.PMREMGenerator(
-						ThreeUtil.getRenderer() as THREE.WebGLRenderer
+						ThreeUtil.getRenderer() as any
 					);
 					if (ThreeUtil.isNotNull(this.storageName)) {
 						this.localStorageService.getTexture(
@@ -203,7 +203,7 @@ export class ToolsComponent
 							(texture) => {
 								if (texture !== null) {
 									this.tool =
-										pmremGenerator.fromEquirectangular(texture).texture;
+										pmremGenerator.fromEquirectangular(texture as any).texture;
 									super.setObject(this.tool);
 									this.setSubscribeNext(['texture', 'loaded']);
 									pmremGenerator.dispose();
@@ -216,9 +216,9 @@ export class ToolsComponent
 						const envScene = new THREE.Scene();
 						if (ThreeUtil.isNotNull(this.background)) {
 							if (this.background instanceof AbstractTextureComponent) {
-								envScene.background = this.background.getTexture();
+								envScene.background = this.background.getTexture() as any;
 							} else {
-								envScene.background = ThreeUtil.getColorSafe(this.background);
+								envScene.background = ThreeUtil.getColorSafe(this.background) as any;
 							}
 						}
 						tool = pmremGenerator.fromScene(envScene).texture;
@@ -227,7 +227,7 @@ export class ToolsComponent
 					break;
 				case 'audio':
 					if (this.audioLoader === null) {
-						this.audioLoader = new THREE.AudioLoader();
+						this.audioLoader = new THREE.AudioLoader() as any;
 					}
 					tool = {};
 					this.audioLoader.load(

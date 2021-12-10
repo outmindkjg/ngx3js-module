@@ -13,7 +13,7 @@ import {
 } from '../directive.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { Object3dFunction } from '../directive.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Rotate options

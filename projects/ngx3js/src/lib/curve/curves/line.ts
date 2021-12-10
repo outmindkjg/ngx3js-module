@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { ThreeUtil, CurvesParameters } from '../../interface';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * Curves line

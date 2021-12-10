@@ -8,7 +8,7 @@ import { RendererTimer, ThreeUtil } from './interface';
 import { AbstractMaterialComponent } from './material.abstract';
 import { SceneComponent } from './scene/scene.component';
 import { HtmlCollection, VisualComponent } from './visual/visual.component';
-import * as I3JS from './threejs-library/three-interface';
+import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Abstract three controller

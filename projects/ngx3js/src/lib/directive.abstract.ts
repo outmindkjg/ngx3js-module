@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { RendererTimer, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
 import * as GSAP from 'gsap';
-import * as I3JS from './threejs-library/three-interface';
+import { I3JS } from './threejs-library/three-interface';
 
 export interface EaseFunction {
 	(progress: number): number;

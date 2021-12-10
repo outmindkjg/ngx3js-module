@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as THREE from 'three';
 import { TagAttributes, ThreeUtil } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Scale component.

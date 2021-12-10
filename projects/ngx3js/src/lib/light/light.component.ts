@@ -14,7 +14,7 @@ import {
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { TagAttributes, ThreeColor, ThreeUtil } from './../interface';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Light options

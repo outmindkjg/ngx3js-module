@@ -110,7 +110,7 @@ import { ShaderSkyDome } from './shader.skydome';
 import { UnrealBloomSelective } from './shader.unreal_bloom_selective';
 import { VideoKinect } from './shader.video_kinect';
 import { WireFrame } from './shader.wireframe';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * ShaderType

@@ -17,7 +17,7 @@ import { MeshComponent } from './mesh/mesh.component';
 import { RendererComponent } from './renderer/renderer.component';
 import { SceneComponent } from './scene/scene.component';
 import { GUI } from './threejs-library/lil-gui';
-import * as I3JS from './threejs-library/three-interface';
+import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Apply matrix4
@@ -1751,8 +1751,8 @@ export class ThreeUtil {
 				(url: string) => {
 					console.error(url);
 				}
-			);
-			this._manager.addHandler(/\.dds$/i, new DDSLoader());
+			) as any;
+			this._manager.addHandler(/\.dds$/i, new DDSLoader() as any);
 		}
 		return this._manager;
 	}

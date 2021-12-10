@@ -17,7 +17,7 @@ import {
 	TextGeometry,
 	TextGeometryParameters,
 } from 'three/examples/jsm/geometries/TextGeometry';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * Buffer geometry
@@ -282,7 +282,7 @@ export class NgxShapeBufferGeometry extends THREE.ShapeBufferGeometry {
 	 * @param [curveSegments]
 	 */
 	constructor(shapes?: I3JS.IShape | I3JS.IShape[], curveSegments?: number) {
-		super(shapes, curveSegments);
+		super(shapes as any, curveSegments);
 	}
 }
 
@@ -304,7 +304,7 @@ export class NgxExtrudeBufferGeometry extends THREE.ExtrudeBufferGeometry {
 		shapes?: I3JS.IShape | I3JS.IShape[],
 		options?: THREE.ExtrudeGeometryOptions
 	) {
-		super(shapes, options);
+		super(shapes as any, options);
 	}
 }
 
@@ -512,7 +512,7 @@ export class NgxTubeBufferGeometry extends THREE.TubeBufferGeometry {
 		radiusSegments?: number,
 		closed?: boolean
 	) {
-		super(path, tubularSegments, radius, radiusSegments, closed);
+		super(path as any, tubularSegments, radius, radiusSegments, closed);
 	}
 }
 
@@ -637,7 +637,7 @@ export class NgxParametricTubeGeometry extends ParametricGeometries.TubeGeometry
 		segmentsRadius?: number,
 		closed?: boolean
 	) {
-		super(path, segments, radius, segmentsRadius, closed);
+		super(path as any, segments, radius, segmentsRadius, closed);
 	}
 }
 
@@ -867,7 +867,7 @@ export class NgxRollerCoasterShadowGeometry extends RollerCoaster.RollerCoasterS
 	 * @param divisions
 	 */
 	constructor(curve: I3JS.ICurve<I3JS.IVector3>, divisions: number) {
-		super(curve, divisions);
+		super(curve as any, divisions);
 	}
 }
 
@@ -886,7 +886,7 @@ export class NgxRollerCoasterLiftersGeometry extends RollerCoaster.RollerCoaster
 	 * @param divisions
 	 */
 	constructor(curve: I3JS.ICurve<I3JS.IVector3>, divisions: number) {
-		super(curve, divisions);
+		super(curve as any, divisions);
 	}
 }
 
@@ -905,7 +905,7 @@ export class NgxRollerCoasterGeometry extends RollerCoaster.RollerCoasterGeometr
 	 * @param divisions
 	 */
 	constructor(curve: I3JS.ICurve<I3JS.IVector3>, divisions: number) {
-		super(curve, divisions);
+		super(curve as any, divisions);
 	}
 }
 
@@ -924,7 +924,7 @@ export class NgxRollerCoasterSkyGeometry extends RollerCoaster.SkyGeometry {
 	 * @param divisions
 	 */
 	constructor(curve: I3JS.ICurve<I3JS.IVector3>, divisions: number) {
-		super(curve, divisions);
+		super(curve as any, divisions);
 	}
 }
 

@@ -10,7 +10,7 @@ import {
 import { ParallaxBarrierEffect } from 'three/examples/jsm/effects/ParallaxBarrierEffect';
 import { PeppersGhostEffect } from 'three/examples/jsm/effects/PeppersGhostEffect';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * Ascii effect

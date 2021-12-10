@@ -20,7 +20,7 @@ import { NgxAVRControls } from './controls/avr-controls';
 import { NgxPlaneControls } from './controls/plane-controls';
 import { NgxSelectBoxControls } from './controls/selection-box-controls';
 import * as THREE_CTRL from './controls/three-controls';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Control options

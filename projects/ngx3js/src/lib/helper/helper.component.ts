@@ -17,7 +17,7 @@ import { Gyroscope } from 'three/examples/jsm/misc/Gyroscope';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { ThreeColor, ThreeUtil } from './../interface';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Helper options

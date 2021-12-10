@@ -9,7 +9,7 @@ import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 import { ArcballControls } from 'three/examples/jsm/controls/ArcballControls';
 import { CSM } from 'three/examples/jsm/csm/CSM';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * Drag controls

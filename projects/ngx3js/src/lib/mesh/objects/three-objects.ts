@@ -44,7 +44,7 @@ import {
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { ThreeUtil, MaterialParameters } from '../../interface';
 import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * Lensflare mesh

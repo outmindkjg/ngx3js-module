@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { AbstractChartComponent } from '../../chart.abstract';
 import { ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * The Chart Axes component.
@@ -139,7 +139,7 @@ export class ChartAxesComponent
 	/**
 	 * Geometry wall of chart axes component
 	 */
-	private _geometryWall: I3JS.IPlaneBufferGeometry | I3JS.ICircleBufferGeometry = null;
+	private _geometryWall: I3JS.IPlaneGeometry | I3JS.ICircleGeometry = null;
 
 	/**
 	 * Material wall border of chart axes component
@@ -233,7 +233,7 @@ export class ChartAxesComponent
 			const borderIndex: number[] = [];
 			switch (this.type.toLowerCase()) {
 				case 'radar':
-					this._geometryWall = new THREE.CircleGeometry(radius, radiusSegments);
+					this._geometryWall = new THREE.CircleGeometry(radius, radiusSegments) as any;
 					this._geometryWall.translate(0, 0, -depth / 2);
 					for (let i = 1; i < radiusSegments + 1; i++) {
 						borderIndex.push(i);
@@ -241,32 +241,32 @@ export class ChartAxesComponent
 					break;
 				case 'front':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(width, height);
+					this._geometryWall = new THREE.PlaneGeometry(width, height) as any;
 					this._geometryWall.rotateY(Math.PI);
 					this._geometryWall.translate(0, 0, depth / 2);
 					break;
 				case 'back':
 				case 'z':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(width, height);
+					this._geometryWall = new THREE.PlaneGeometry(width, height) as any;
 					this._geometryWall.translate(0, 0, -depth / 2);
 					break;
 				case 'right':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(depth, height);
+					this._geometryWall = new THREE.PlaneGeometry(depth, height) as any;
 					this._geometryWall.rotateY(-Math.PI / 2);
 					this._geometryWall.translate(width / 2, 0, 0);
 					break;
 				case 'left':
 				case 'y':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(depth, height);
+					this._geometryWall = new THREE.PlaneGeometry(depth, height) as any;
 					this._geometryWall.rotateY(Math.PI / 2);
 					this._geometryWall.translate(-width / 2, 0, 0);
 					break;
 				case 'top':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(width, depth);
+					this._geometryWall = new THREE.PlaneGeometry(width, depth) as any;
 					this._geometryWall.rotateX(Math.PI / 2);
 					this._geometryWall.translate(0, height / 2, 0);
 					break;
@@ -274,7 +274,7 @@ export class ChartAxesComponent
 				case 'x':
 				default:
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(width, depth);
+					this._geometryWall = new THREE.PlaneGeometry(width, depth) as any;
 					this._geometryWall.rotateX(-Math.PI / 2);
 					this._geometryWall.translate(0, -height / 2, 0);
 					break;

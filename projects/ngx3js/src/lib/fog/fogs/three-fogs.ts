@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * FogExp2 fog

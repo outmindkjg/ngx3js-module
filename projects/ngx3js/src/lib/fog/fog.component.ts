@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeColor, ThreeUtil } from './../interface';
 import * as THREE_FOG from './fogs/three-fogs';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Fog component.

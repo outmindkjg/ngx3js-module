@@ -22,7 +22,7 @@ import { LocalStorageService } from '../local-storage.service';
 import { ShapeComponent } from '../shape/shape.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { SvgComponent } from '../svg/svg.component';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 import { NgxCapsuleGeometry } from './geometries/capsule';
 import { NgxCircleDepthGeometry } from './geometries/circle-depth';
 import { NgxGridGeometry } from './geometries/grid';
@@ -861,7 +861,7 @@ export class GeometryComponent
 		} else if (ThreeUtil.isNotNull(this.shapes)) {
 			if (this.shapes instanceof THREE.Shape) {
 				window.setTimeout(() => {
-					onload(this.shapes as THREE.Shape);
+					onload(this.shapes as any);
 				}, 1);
 			} else {
 				const shapes: I3JS.IShape[] = [];
@@ -871,7 +871,7 @@ export class GeometryComponent
 					vectors.push(new THREE.Vector2(p.x, p.y));
 				});
 				shape.setFromPoints(vectors);
-				shapes.push(shape);
+				shapes.push(shape as any);
 				window.setTimeout(() => {
 					onload(shapes);
 				}, 1);
@@ -882,16 +882,16 @@ export class GeometryComponent
 					ThreeUtil.getTypeSafe(this.text, 'test'),
 					ThreeUtil.getTypeSafe(this.size, 1)
 				);
-				onload(shapes);
+				onload(shapes as any);
 			});
 		} else {
 			const shapes: I3JS.IShape[] = [];
 			if (this.shapeList !== null && this.shapeList.length > 0) {
 				const shape = new THREE.Shape();
 				this.shapeList.forEach((path) => {
-					path.getShape(shape);
+					path.getShape(shape as any);
 				});
-				shapes.push(shape);
+				shapes.push(shape as any);
 			}
 			window.setTimeout(() => {
 				onload(shapes);
@@ -1574,8 +1574,8 @@ export class GeometryComponent
 											bevelSize: ThreeUtil.getTypeSafe(this.bevelSize),
 											bevelOffset: ThreeUtil.getTypeSafe(this.bevelOffset),
 											bevelSegments: ThreeUtil.getTypeSafe(this.bevelSegments),
-											extrudePath: this.getExtrudePath(),
-											UVGenerator: this.getUVGenerator(),
+											extrudePath: this.getExtrudePath() as any,
+											UVGenerator: this.getUVGenerator() as any,
 										}
 									);
 									break;

@@ -14,7 +14,7 @@ import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
 import { AmmoPhysics } from '../threejs-library/AmmoPhysics';
 import { OimoPhysics } from '../threejs-library/OimoPhysics';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * PhysicsComponent

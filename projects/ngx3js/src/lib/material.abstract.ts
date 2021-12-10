@@ -15,7 +15,7 @@ import { ThreeTexture, ThreeUtil } from './interface';
 import { PlaneComponent } from './plane/plane.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { AbstractTextureComponent } from './texture.abstract';
-import * as I3JS from './threejs-library/three-interface';
+import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Mesh material raw

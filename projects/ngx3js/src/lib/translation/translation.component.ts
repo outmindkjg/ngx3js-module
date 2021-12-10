@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as THREE from 'three';
 import { ApplyMatrix4 } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Translation Component

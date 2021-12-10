@@ -14,7 +14,7 @@ import { LocalStorageService } from '../local-storage.service';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { TranslationComponent } from '../translation/translation.component';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Svg geometry
@@ -850,7 +850,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 		} else if (data.paths) {
 			data.paths.forEach((path) => {
 				shapes.push({
-					shape: path.toShapes(this.getIsCCW(true), this.getNoHoles(false)),
+					shape: path.toShapes(this.getIsCCW(true), this.getNoHoles(false)) as any,
 					userData: path['userData'] ? path['userData'] : null,
 				});
 			});
@@ -952,7 +952,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 					this.getCurveSegments(12)
 				);
 				geometry.computeBoundingSphere();
-				onload(this.getGeometries(shapes, geometry.boundingSphere));
+				onload(this.getGeometries(shapes as any, geometry.boundingSphere));
 			});
 		} else {
 			this.getSVGResult((data: SVGResult) => {
@@ -961,7 +961,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))
 						.forEach((shape) => {
-							shapes.push(shape);
+							shapes.push(shape as any);
 						});
 				});
 				const geometry = new THREE.ShapeGeometry(
@@ -1014,7 +1014,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))
 						.forEach((shape) => {
-							shapes.push(shape);
+							shapes.push(shape as any);
 						});
 				});
 				onload(shapes);

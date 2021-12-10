@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { CurvesNormal, CurveUtils } from '../../curve/curveUtils';
 import { RendererTimer, ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractSubscribeComponent } from '../../subscribe.abstract';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * Control object item

@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { AbstractChartComponent } from '../../chart.abstract';
 import { ThreeColor, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * The Chart Title component.
@@ -114,7 +114,7 @@ export class ChartTitleComponent
 	/**
 	 * The Geometry of chart title component
 	 */
-	private _geometry: I3JS.IPlaneBufferGeometry = null;
+	private _geometry: I3JS.IPlaneGeometry = null;
 
 	/**
 	 * Applys changes3d
@@ -253,7 +253,7 @@ export class ChartTitleComponent
 				transparent: true,
 			});
 			const width = (height * textWidth) / textHeight;
-			this._geometry = new THREE.PlaneGeometry(width, height);
+			this._geometry = new THREE.PlaneGeometry(width, height) as any;
 			this._title = new THREE.Mesh(this._geometry, this._material);
 			this.setChart(this._title as any);
 		}

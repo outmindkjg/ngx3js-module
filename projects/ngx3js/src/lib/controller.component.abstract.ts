@@ -14,7 +14,7 @@ import { RendererEvent, RendererTimer, ThreeUtil } from './interface';
 import { SceneComponent } from './scene/scene.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { HtmlCollection } from './visual/visual.component';
-import * as I3JS from './threejs-library/three-interface';
+import { I3JS } from './threejs-library/three-interface';
 
 /**
  * The Abstract Controller component.

@@ -14,7 +14,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ClipComponent } from './../clip/clip.component';
 import { RendererTimer, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Character Control

@@ -15,7 +15,7 @@ import { LightComponent } from '../light/light.component';
 import { MeshComponent } from '../mesh/mesh.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ViewerCanvas } from './viewer-canvas';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Viewer component.

@@ -81,7 +81,7 @@ import {
 	StorageOption,
 	StorageExportOption,
 } from './interface';
-import * as I3JS from './threejs-library/three-interface';
+import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Local Storage Service
@@ -776,7 +776,7 @@ export class LocalStorageService {
 	 * @param options
 	 * @returns
 	 */
-	public setLoaderWithOption(loader: I3JS.ILoader, options: StorageOption) {
+	public setLoaderWithOption(loader: I3JS.ILoader | THREE.Loader, options: StorageOption) {
 		if (ThreeUtil.isNotNull(options)) {
 			if (ThreeUtil.isNotNull(loader.setResourcePath)) {
 				if (ThreeUtil.isNotNull(options.resourcePath)) {

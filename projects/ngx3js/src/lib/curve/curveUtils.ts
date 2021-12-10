@@ -6,7 +6,7 @@ import * as GSAP from './curves/gsap';
 import { CurvesLine } from './curves/line';
 import * as POLYGON from './curves/polygon';
 import { CurvesRollerCoaster } from './curves/rollercoaster';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Curve class

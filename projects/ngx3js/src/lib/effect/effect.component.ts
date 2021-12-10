@@ -14,7 +14,7 @@ import { PassComponent } from '../pass/pass.component';
 import { RenderTargetComponent } from '../render-target/render-target.component';
 import { SceneComponent } from '../scene/scene.component';
 import { AbstractTweenComponent } from '../tween.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Effect component.

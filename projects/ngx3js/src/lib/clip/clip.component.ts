@@ -10,7 +10,7 @@ import * as THREE from 'three';
 import { KeyframeComponent } from '../keyframe/keyframe.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ThreeUtil } from './../interface';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Clip component.

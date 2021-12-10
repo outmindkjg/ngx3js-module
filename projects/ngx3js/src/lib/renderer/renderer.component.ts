@@ -45,7 +45,7 @@ import { CameraComponent } from './../camera/camera.component';
 import { ListenerComponent } from './../listener/listener.component';
 import { LookatComponent } from './../lookat/lookat.component';
 import { SceneComponent } from './../scene/scene.component';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Renderer component.

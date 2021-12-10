@@ -13,7 +13,7 @@ import { NgxOutlineGeometry } from './geometry/geometries/outline';
 import { NgxStarGeometry } from './geometry/geometries/star';
 import { RendererTimer, ThreeColor, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
-import * as I3JS from './threejs-library/three-interface';
+import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Attribute update info

@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { AbstractGeometryComponent } from '../geometry.abstract';
 import { ThreeUtil, ThreeVector } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Shape component.
@@ -181,10 +181,10 @@ export class ShapeComponent
 		const holes = new THREE.Path();
 		if (this.holes !== null && this.holes.length > 0) {
 			this.holes.forEach((hole) => {
-				hole.getShape(holes);
+				hole.getShape(holes as any);
 			});
 		}
-		return holes;
+		return holes as any;
 	}
 
 	/**

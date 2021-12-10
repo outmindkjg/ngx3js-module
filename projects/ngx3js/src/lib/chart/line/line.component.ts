@@ -12,7 +12,7 @@ import {
 } from '../../chart.abstract';
 import { ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * The Chart Line component.

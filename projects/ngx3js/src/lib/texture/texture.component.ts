@@ -13,7 +13,7 @@ import { ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { CanvasFunctionType } from './textureUtils';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Texture Component

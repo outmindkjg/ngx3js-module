@@ -10,7 +10,7 @@ import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { SizeComponent } from '../size/size.component';
 import { AbstractTextureComponent } from '../texture.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Render Target component.

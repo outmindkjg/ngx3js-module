@@ -13,7 +13,7 @@ import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { MixerComponent } from '../mixer/mixer.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Animation Group component.

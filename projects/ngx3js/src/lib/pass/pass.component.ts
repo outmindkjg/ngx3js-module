@@ -21,7 +21,7 @@ import { ShaderUtils } from '../shader/shaders/shaderUtils';
 import { SizeComponent } from '../size/size.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TextureComponent } from '../texture/texture.component';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Pass component.

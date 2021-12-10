@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import { ThreeUtil } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Audio component.
@@ -239,7 +239,7 @@ export class AudioComponent
 		onLoad: (audioBuffer: AudioBuffer) => void
 	) {
 		if (this.audioLoader === null) {
-			this.audioLoader = new THREE.AudioLoader(ThreeUtil.getLoadingManager());
+			this.audioLoader = new THREE.AudioLoader(ThreeUtil.getLoadingManager()) as any;
 		}
 		this.audioLoader.load(url, (audioBuffer: AudioBuffer): void => {
 			onLoad(audioBuffer);

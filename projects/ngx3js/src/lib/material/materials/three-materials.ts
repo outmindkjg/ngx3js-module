@@ -5,7 +5,7 @@ import {
 } from 'three/examples/jsm/lines/LineMaterial';
 import * as NODES from 'three/examples/jsm/nodes/Nodes';
 import { ShaderUtils } from '../../shader/shaders/shaderUtils';
-import * as I3JS from '../../threejs-library/three-interface';
+import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * LineBasic material

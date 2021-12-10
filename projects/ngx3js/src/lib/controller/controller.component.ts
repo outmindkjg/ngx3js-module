@@ -19,7 +19,7 @@ import {
 	ControllerItemComponent,
 	ControlObjectItem,
 } from './controller-item/controller-item.component';
-import * as I3JS from '../threejs-library/three-interface';
+import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * ControllerComponent

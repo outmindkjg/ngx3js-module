@@ -24,7 +24,7 @@ import { RigidbodyComponent } from './rigidbody/rigidbody.component';
 import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
 import { AbstractTweenComponent } from './tween.abstract';
-import * as I3JS from './threejs-library/three-interface';
+import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Object3d options
