@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import { CSM } from 'three/examples/jsm/csm/CSM';
 import { CSMHelper } from 'three/examples/jsm/csm/CSMHelper';
 import { LightProbeHelper } from 'three/examples/jsm/helpers/LightProbeHelper';
@@ -7,7 +6,7 @@ import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHel
 import { VertexNormalsHelper } from 'three/examples/jsm/helpers/VertexNormalsHelper';
 import { VertexTangentsHelper } from 'three/examples/jsm/helpers/VertexTangentsHelper';
 import { Gyroscope } from 'three/examples/jsm/misc/Gyroscope';
-import { I3JS } from '../../threejs-library/three-interface';
+import { I3JS, THREE } from '../../interface';
 
 /**
  * Gyroscope helper

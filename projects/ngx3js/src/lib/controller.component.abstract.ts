@@ -5,16 +5,14 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import * as THREE from 'three';
 import { CameraComponent } from './camera/camera.component';
 import { CanvasComponent } from './canvas/canvas.component';
-import { RendererEvent, RendererTimer, ThreeUtil } from './interface';
+import { I3JS, RendererEvent, RendererTimer, ThreeUtil } from './interface';
 import { SceneComponent } from './scene/scene.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { HtmlCollection } from './visual/visual.component';
-import { I3JS } from './threejs-library/three-interface';
 
 /**
  * The Abstract Controller component.

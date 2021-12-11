@@ -3,17 +3,15 @@ import {
 	forwardRef,
 	Input,
 	OnChanges,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { RendererTimer, ThreeUtil } from '../interface';
 import {
 	AbstractObject3dDirective,
 	AbstractThreeDirective,
-	DirectiveOptions,
+	DirectiveOptions, Object3dFunction
 } from '../directive.abstract';
+import { I3JS, RendererTimer, ThreeUtil } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
-import { Object3dFunction } from '../directive.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Rotate options

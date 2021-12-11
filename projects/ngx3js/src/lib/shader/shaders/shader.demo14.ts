@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 export const ShaderDemo14 = {
 	vertexShader: `
 	out vec2 vUv;

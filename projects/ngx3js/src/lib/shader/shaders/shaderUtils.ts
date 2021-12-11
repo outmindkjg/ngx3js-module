@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import { AfterimageShader } from 'three/examples/jsm/shaders/AfterimageShader';
 import { BasicShader } from 'three/examples/jsm/shaders/BasicShader';
 import { BleachBypassShader } from 'three/examples/jsm/shaders/BleachBypassShader';
@@ -6,7 +5,7 @@ import { BlendShader } from 'three/examples/jsm/shaders/BlendShader';
 import { BokehShader } from 'three/examples/jsm/shaders/BokehShader';
 import {
 	BokehDepthShader,
-	BokehShader as BokehShader2,
+	BokehShader as BokehShader2
 } from 'three/examples/jsm/shaders/BokehShader2';
 import { BrightnessContrastShader } from 'three/examples/jsm/shaders/BrightnessContrastShader';
 import { ColorCorrectionShader } from 'three/examples/jsm/shaders/ColorCorrectionShader';
@@ -27,7 +26,7 @@ import {
 	GodRaysCombineShader,
 	GodRaysDepthMaskShader,
 	GodRaysFakeSunShader,
-	GodRaysGenerateShader,
+	GodRaysGenerateShader
 } from 'three/examples/jsm/shaders/GodRaysShader';
 import { HalftoneShader } from 'three/examples/jsm/shaders/HalftoneShader';
 import { HorizontalBlurShader } from 'three/examples/jsm/shaders/HorizontalBlurShader';
@@ -47,7 +46,7 @@ import { SepiaShader } from 'three/examples/jsm/shaders/SepiaShader';
 import {
 	SMAABlendShader,
 	SMAAEdgesShader,
-	SMAAWeightsShader,
+	SMAAWeightsShader
 } from 'three/examples/jsm/shaders/SMAAShader';
 import { SobelOperatorShader } from 'three/examples/jsm/shaders/SobelOperatorShader';
 import { SSAOShader } from 'three/examples/jsm/shaders/SSAOShader';
@@ -56,7 +55,7 @@ import { TechnicolorShader } from 'three/examples/jsm/shaders/TechnicolorShader'
 import { ToneMapShader } from 'three/examples/jsm/shaders/ToneMapShader';
 import {
 	ToonShader1,
-	ToonShader2,
+	ToonShader2
 } from 'three/examples/jsm/shaders/ToonShader';
 import { TriangleBlurShader } from 'three/examples/jsm/shaders/TriangleBlurShader';
 import { UnpackDepthRGBAShader } from 'three/examples/jsm/shaders/UnpackDepthRGBAShader';
@@ -65,7 +64,7 @@ import { VerticalTiltShiftShader } from 'three/examples/jsm/shaders/VerticalTilt
 import { VignetteShader } from 'three/examples/jsm/shaders/VignetteShader';
 import { VolumeRenderShader1 } from 'three/examples/jsm/shaders/VolumeShader';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
-import { ThreeUtil } from '../../interface';
+import { I3JS, THREE, ThreeUtil } from '../../interface';
 import { AttributesParticles } from './shader.attributes_particles';
 import { AttributeSizeColor } from './shader.attributes_size_color';
 import { AttributeSizeColor1 } from './shader.attributes_size_color1';
@@ -110,7 +109,6 @@ import { ShaderSkyDome } from './shader.skydome';
 import { UnrealBloomSelective } from './shader.unreal_bloom_selective';
 import { VideoKinect } from './shader.video_kinect';
 import { WireFrame } from './shader.wireframe';
-import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * ShaderType

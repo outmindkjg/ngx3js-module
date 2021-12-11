@@ -1,11 +1,9 @@
-import * as THREE from 'three';
-import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass';
 import { AdaptiveToneMappingPass } from 'three/examples/jsm/postprocessing/AdaptiveToneMappingPass';
 import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass';
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass';
 import {
 	BokehPass,
-	BokehPassParamters,
+	BokehPassParamters
 } from 'three/examples/jsm/postprocessing/BokehPass';
 import { ClearPass } from 'three/examples/jsm/postprocessing/ClearPass';
 import { CubeTexturePass } from 'three/examples/jsm/postprocessing/CubeTexturePass';
@@ -14,15 +12,15 @@ import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass';
 import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass';
 import {
 	HalftonePass,
-	HalftonePassParameters,
+	HalftonePassParameters
 } from 'three/examples/jsm/postprocessing/HalftonePass';
 import {
 	LUTPass,
-	LUTPassParameters,
+	LUTPassParameters
 } from 'three/examples/jsm/postprocessing/LUTPass';
 import {
 	ClearMaskPass,
-	MaskPass,
+	MaskPass
 } from 'three/examples/jsm/postprocessing/MaskPass';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
 import { Pass } from 'three/examples/jsm/postprocessing/Pass';
@@ -35,17 +33,18 @@ import { SSAARenderPass } from 'three/examples/jsm/postprocessing/SSAARenderPass
 import { SSAOPass } from 'three/examples/jsm/postprocessing/SSAOPass';
 import {
 	SSRPass,
-	SSRPassParams,
+	SSRPassParams
 } from 'three/examples/jsm/postprocessing/SSRPass';
 import {
 	SSRrPass,
-	SSRrPassParams,
+	SSRrPassParams
 } from 'three/examples/jsm/postprocessing/SSRrPass';
 import { TAARenderPass } from 'three/examples/jsm/postprocessing/TAARenderPass';
 import { TexturePass } from 'three/examples/jsm/postprocessing/TexturePass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import { I3JS } from '../../interface';
 import { ShaderUtils } from '../../shader/shaders/shaderUtils';
-import { I3JS } from '../../threejs-library/three-interface';
+import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass';
 
 /**
  * Reflector shader

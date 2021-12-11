@@ -4,17 +4,15 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import * as THREE from 'three';
-import * as THREE_EFFECT from './effects/three-effects';
 import { CameraComponent } from '../camera/camera.component';
-import { RendererTimer, ThreeUtil } from '../interface';
+import { I3JS, RendererTimer, THREE, ThreeUtil } from '../interface';
 import { PassComponent } from '../pass/pass.component';
 import { RenderTargetComponent } from '../render-target/render-target.component';
 import { SceneComponent } from '../scene/scene.component';
 import { AbstractTweenComponent } from '../tween.abstract';
-import { I3JS } from '../threejs-library/three-interface';
+import * as THREE_EFFECT from './effects/three-effects';
 
 /**
  * The Effect component.

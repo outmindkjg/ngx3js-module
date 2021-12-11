@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { THREE } from '../../interface';
 export const ShaderDemo15 = {
 	vertexShader: `
   uniform vec2 size;

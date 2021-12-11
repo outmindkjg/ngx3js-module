@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { THREE } from '../../interface';
 export const RaymarchingReflect = {
 	vertexShader: `
   attribute vec3 position;

@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
+import { I3JS, THREE, ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Tools Component
@@ -30,10 +28,7 @@ import { I3JS } from '../threejs-library/three-interface';
 	templateUrl: './tools.component.html',
 	styleUrls: ['./tools.component.scss'],
 })
-export class ToolsComponent
-	extends AbstractSubscribeComponent
-	implements OnInit
-{
+export class ToolsComponent extends AbstractSubscribeComponent implements OnInit {
 	/**
 	 * The Input of tools component
 	 *
@@ -194,17 +189,13 @@ export class ToolsComponent
 			let tool: any = null;
 			switch (this.type.toLowerCase()) {
 				case 'pmremtexture':
-					const pmremGenerator = new THREE.PMREMGenerator(
-						ThreeUtil.getRenderer() as any
-					);
+					const pmremGenerator = new THREE.PMREMGenerator(ThreeUtil.getRenderer() as any);
 					if (ThreeUtil.isNotNull(this.storageName)) {
 						this.localStorageService.getTexture(
 							this.storageName,
 							(texture) => {
 								if (texture !== null) {
-									this.tool = pmremGenerator.fromEquirectangular(
-										texture as any
-									).texture;
+									this.tool = pmremGenerator.fromEquirectangular(texture as any).texture;
 									super.setObject(this.tool);
 									this.setSubscribeNext(['texture', 'loaded']);
 									pmremGenerator.dispose();
@@ -219,9 +210,7 @@ export class ToolsComponent
 							if (this.background instanceof AbstractTextureComponent) {
 								envScene.background = this.background.getTexture() as any;
 							} else {
-								envScene.background = ThreeUtil.getColorSafe(
-									this.background
-								) as any;
+								envScene.background = ThreeUtil.getColorSafe(this.background) as any;
 							}
 						}
 						tool = pmremGenerator.fromScene(envScene).texture;
@@ -233,14 +222,11 @@ export class ToolsComponent
 						this.audioLoader = new THREE.AudioLoader() as any;
 					}
 					tool = {};
-					this.audioLoader.load(
-						ThreeUtil.getStoreUrl(this.url),
-						(audioBuffer: AudioBuffer) => {
-							this.tool = audioBuffer;
-							this.setObject(this.tool);
-							this.setSubscribeNext('audio');
-						}
-					);
+					this.audioLoader.load(ThreeUtil.getStoreUrl(this.url), (audioBuffer: AudioBuffer) => {
+						this.tool = audioBuffer;
+						this.setObject(this.tool);
+						this.setSubscribeNext('audio');
+					});
 					break;
 				case 'cuberendertarget':
 				case 'cuberender':

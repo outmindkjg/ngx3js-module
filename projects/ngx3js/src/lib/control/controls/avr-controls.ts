@@ -1,6 +1,6 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { I3JS } from '../../interface';
-import * as THREE from 'three';
+import { I3JS, THREE } from '../../interface';
+import * as XR from '../../threejs-library/three-xr';
 
 /**
  * AVR Controls
@@ -337,7 +337,7 @@ export class NgxAVRControls {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VirtualSession) page for details.
  *
  */
-export class VirtualSession implements THREE.XRSession {
+export class VirtualSession implements XR.IXRSession {
 	/**
 	 * Creates an instance of plane controls.
 	 * @param camera
@@ -351,9 +351,9 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns reference space
 	 */
 	requestReferenceSpace(
-		type: THREE.XRReferenceSpaceType
-	): Promise<THREE.XRReferenceSpace> {
-		return new Promise<THREE.XRReferenceSpace>((resolve) => {
+		type: XR.TXRReferenceSpaceType
+	): Promise<XR.IXRReferenceSpace> {
+		return new Promise<XR.IXRReferenceSpace>((resolve) => {
 			resolve(null);
 		});
 	}
@@ -363,7 +363,7 @@ export class VirtualSession implements THREE.XRSession {
 	 * @param renderStateInit
 	 * @returns render state
 	 */
-	updateRenderState(renderStateInit: THREE.XRRenderStateInit): Promise<void> {
+	updateRenderState(renderStateInit: XR.IXRRenderStateInit): Promise<void> {
 		return new Promise<void>((resolve) => {
 			resolve();
 		});
@@ -374,7 +374,7 @@ export class VirtualSession implements THREE.XRSession {
 	 * @param callback
 	 * @returns animation frame
 	 */
-	requestAnimationFrame(callback: THREE.XRFrameRequestCallback): number {
+	requestAnimationFrame(callback: XR.TXRFrameRequestCallback): number {
 		return 0;
 	}
 
@@ -398,22 +398,22 @@ export class VirtualSession implements THREE.XRSession {
 	/**
 	 * Render state of virtual session
 	 */
-	renderState: THREE.XRRenderState;
+	renderState: XR.IXRRenderState;
 
 	/**
 	 * Input sources of virtual session
 	 */
-	inputSources: THREE.XRInputSource[];
+	inputSources: XR.IXRInputSource[];
 
 	/**
 	 * Environment blend mode of virtual session
 	 */
-	environmentBlendMode: THREE.XREnvironmentBlendMode;
+	environmentBlendMode: XR.TXREnvironmentBlendMode;
 
 	/**
 	 * Visibility state of virtual session
 	 */
-	visibilityState: THREE.XRVisibilityState;
+	visibilityState: XR.TXRVisibilityState;
 
 	/**
 	 * Requests hit test source
@@ -421,9 +421,9 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns hit test source
 	 */
 	requestHitTestSource(
-		options: THREE.XRHitTestOptionsInit
-	): Promise<THREE.XRHitTestSource> {
-		return new Promise<THREE.XRHitTestSource>((resolve) => {
+		options: XR.IXRHitTestOptionsInit
+	): Promise<XR.IXRHitTestSource> {
+		return new Promise<XR.IXRHitTestSource>((resolve) => {
 			resolve(null);
 		});
 	}
@@ -434,9 +434,9 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns hit test source for transient input
 	 */
 	requestHitTestSourceForTransientInput(
-		options: THREE.XRTransientInputHitTestOptionsInit
-	): Promise<THREE.XRTransientInputHitTestSource> {
-		return new Promise<THREE.XRTransientInputHitTestSource>((resolve) => {
+		options: XR.IXRTransientInputHitTestOptionsInit
+	): Promise<XR.IXRTransientInputHitTestSource> {
+		return new Promise<XR.IXRTransientInputHitTestSource>((resolve) => {
 			resolve(null);
 		});
 	}
@@ -448,10 +448,10 @@ export class VirtualSession implements THREE.XRSession {
 	 * @returns hit test
 	 */
 	requestHitTest(
-		ray: THREE.XRRay,
-		referenceSpace: THREE.XRReferenceSpace
-	): Promise<THREE.XRHitResult[]> {
-		return new Promise<THREE.XRHitResult[]>((resolve) => {
+		ray: XR.IXRRay,
+		referenceSpace: XR.IXRReferenceSpace
+	): Promise<XR.IXRHitResult[]> {
+		return new Promise<XR.IXRHitResult[]>((resolve) => {
 			resolve([]);
 		});
 	}

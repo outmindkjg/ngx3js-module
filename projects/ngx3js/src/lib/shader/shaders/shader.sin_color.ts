@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 export const SinColor = {
 	vertexShader: `
   precision mediump float;

@@ -1,5 +1,4 @@
-import * as THREE from 'three';
-import { I3JS } from '../../threejs-library/three-interface';
+import { I3JS, THREE } from '../../interface';
 
 /**
  * The Outline geometry.
@@ -28,50 +27,18 @@ export class NgxOutlineGeometry extends THREE.WireframeGeometry {
 		switch (geometry.type) {
 			case 'StarGeometry':
 			case 'CircleGeometry':
-				vertices.push(
-					attrPosition.getX(0),
-					attrPosition.getY(0),
-					attrPosition.getZ(0)
-				);
-				vertices.push(
-					attrPosition.getX(1),
-					attrPosition.getY(1),
-					attrPosition.getZ(1)
-				);
+				vertices.push(attrPosition.getX(0), attrPosition.getY(0), attrPosition.getZ(0));
+				vertices.push(attrPosition.getX(1), attrPosition.getY(1), attrPosition.getZ(1));
 				for (let i = 6; i < attrPosition.count; i += 4) {
-					vertices.push(
-						attrPosition.getX(i),
-						attrPosition.getY(i),
-						attrPosition.getZ(i)
-					);
-					vertices.push(
-						attrPosition.getX(i + 1),
-						attrPosition.getY(i + 1),
-						attrPosition.getZ(i + 1)
-					);
+					vertices.push(attrPosition.getX(i), attrPosition.getY(i), attrPosition.getZ(i));
+					vertices.push(attrPosition.getX(i + 1), attrPosition.getY(i + 1), attrPosition.getZ(i + 1));
 				}
 				if (parameters.thetaLength < Math.PI * 2) {
-					vertices.push(
-						attrPosition.getX(0),
-						attrPosition.getY(0),
-						attrPosition.getZ(0)
-					);
-					vertices.push(
-						attrPosition.getX(2),
-						attrPosition.getY(2),
-						attrPosition.getZ(2)
-					);
+					vertices.push(attrPosition.getX(0), attrPosition.getY(0), attrPosition.getZ(0));
+					vertices.push(attrPosition.getX(2), attrPosition.getY(2), attrPosition.getZ(2));
 					const endIdx = attrPosition.count - 1;
-					vertices.push(
-						attrPosition.getX(endIdx),
-						attrPosition.getY(endIdx),
-						attrPosition.getZ(endIdx)
-					);
-					vertices.push(
-						attrPosition.getX(2),
-						attrPosition.getY(2),
-						attrPosition.getZ(2)
-					);
+					vertices.push(attrPosition.getX(endIdx), attrPosition.getY(endIdx), attrPosition.getZ(endIdx));
+					vertices.push(attrPosition.getX(2), attrPosition.getY(2), attrPosition.getZ(2));
 				}
 				break;
 			case 'RingGeometry':
@@ -88,8 +55,7 @@ export class NgxOutlineGeometry extends THREE.WireframeGeometry {
 						vertex.x = outerRadius * Math.cos(segmentStart);
 						vertex.y = outerRadius * Math.sin(segmentStart);
 						vertices.push(vertex.x, vertex.y, vertex.z);
-						const segmentEnd =
-							thetaStart + ((i + 1) / thetaSegments) * thetaLength;
+						const segmentEnd = thetaStart + ((i + 1) / thetaSegments) * thetaLength;
 						vertex.x = outerRadius * Math.cos(segmentEnd);
 						vertex.y = outerRadius * Math.sin(segmentEnd);
 						vertices.push(vertex.x, vertex.y, vertex.z);
@@ -99,30 +65,17 @@ export class NgxOutlineGeometry extends THREE.WireframeGeometry {
 						vertex.x = innerRadius * Math.cos(segmentStart);
 						vertex.y = innerRadius * Math.sin(segmentStart);
 						vertices.push(vertex.x, vertex.y, vertex.z);
-						const segmentEnd =
-							thetaStart + ((i - 1) / thetaSegments) * thetaLength;
+						const segmentEnd = thetaStart + ((i - 1) / thetaSegments) * thetaLength;
 						vertex.x = innerRadius * Math.cos(segmentEnd);
 						vertex.y = innerRadius * Math.sin(segmentEnd);
 						vertices.push(vertex.x, vertex.y, vertex.z);
 					}
 					if (parameters.thetaLength < Math.PI * 2) {
 						const idx1 = (thetaSegments * 2 - 1) * 3;
-						vertices.push(
-							vertices[idx1 + 0],
-							vertices[idx1 + 1],
-							vertices[idx1 + 2]
-						);
-						vertices.push(
-							vertices[idx1 + 3],
-							vertices[idx1 + 4],
-							vertices[idx1 + 5]
-						);
+						vertices.push(vertices[idx1 + 0], vertices[idx1 + 1], vertices[idx1 + 2]);
+						vertices.push(vertices[idx1 + 3], vertices[idx1 + 4], vertices[idx1 + 5]);
 						const idx2 = (thetaSegments * 4 - 1) * 3;
-						vertices.push(
-							vertices[idx2 + 0],
-							vertices[idx2 + 1],
-							vertices[idx2 + 2]
-						);
+						vertices.push(vertices[idx2 + 0], vertices[idx2 + 1], vertices[idx2 + 2]);
 						vertices.push(vertices[0], vertices[1], vertices[2]);
 					}
 				}
@@ -175,22 +128,10 @@ export class NgxOutlineGeometry extends THREE.WireframeGeometry {
 					const zero = new THREE.Vector3(0, 0, 0);
 					const plane = new THREE.Plane();
 					for (let i = 0; i < attrPosition.count; i += 2) {
-						p1.set(
-							attrPosition.getX(i),
-							attrPosition.getY(i),
-							attrPosition.getZ(i)
-						);
-						p2.set(
-							attrPosition.getX(i + 1),
-							attrPosition.getY(i + 1),
-							attrPosition.getZ(i + 1)
-						);
+						p1.set(attrPosition.getX(i), attrPosition.getY(i), attrPosition.getZ(i));
+						p2.set(attrPosition.getX(i + 1), attrPosition.getY(i + 1), attrPosition.getZ(i + 1));
 						plane.setFromCoplanarPoints(p1, p2, zero);
-						if (
-							this.isZero(p1.y - p2.y) ||
-							this.isZero(plane.normal.x) ||
-							this.isZero(plane.normal.y)
-						) {
+						if (this.isZero(p1.y - p2.y) || this.isZero(plane.normal.x) || this.isZero(plane.normal.y)) {
 							vertices.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
 						}
 					}
@@ -209,10 +150,7 @@ export class NgxOutlineGeometry extends THREE.WireframeGeometry {
 				break;
 		}
 		if (vertices.length > 0) {
-			this.setAttribute(
-				'position',
-				new THREE.Float32BufferAttribute(vertices, 3)
-			);
+			this.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 		}
 	}
 

@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { THREE } from '../../interface';
 export const LightsHemisphere = {
 	vertexShader: `
   varying vec3 vWorldPosition;

@@ -1,23 +1,22 @@
-import * as THREE from 'three';
-import { TeapotGeometry } from 'three/examples/jsm/geometries/TeapotGeometry';
+import { BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry';
 import { ConvexGeometry } from 'three/examples/jsm/geometries/ConvexGeometry';
 import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
-import { ParametricGeometries } from 'three/examples/jsm/geometries/ParametricGeometries';
-import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry';
-import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 import {
 	LightningStrike,
-	RayParameters,
+	RayParameters
 } from 'three/examples/jsm/geometries/LightningStrike';
-
-import { BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry';
-import * as RollerCoaster from 'three/examples/jsm/misc/RollerCoaster';
+import { ParametricGeometries } from 'three/examples/jsm/geometries/ParametricGeometries';
 import { ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
+import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry';
+import { TeapotGeometry } from 'three/examples/jsm/geometries/TeapotGeometry';
 import {
 	TextGeometry,
-	TextGeometryParameters,
+	TextGeometryParameters
 } from 'three/examples/jsm/geometries/TextGeometry';
-import { I3JS } from '../../threejs-library/three-interface';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
+import * as RollerCoaster from 'three/examples/jsm/misc/RollerCoaster';
+import { I3JS, THREE } from '../../interface';
+
 
 /**
  * Buffer geometry
@@ -302,7 +301,7 @@ export class NgxExtrudeBufferGeometry extends THREE.ExtrudeBufferGeometry {
 	 */
 	constructor(
 		shapes?: I3JS.IShape | I3JS.IShape[],
-		options?: THREE.ExtrudeGeometryOptions
+		options?: I3JS.IExtrudeGeometryOptions
 	) {
 		super(shapes as any, options);
 	}

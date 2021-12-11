@@ -7,14 +7,12 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import * as GSAP from 'gsap';
-import * as THREE from 'three';
-import { ThreeUtil } from './interface';
+import { I3JS, ThreeUtil } from './interface';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { TweenComponent } from './tween/tween.component';
-import { I3JS } from './threejs-library/three-interface';
 
 /**
  * The Abstract Tween component.

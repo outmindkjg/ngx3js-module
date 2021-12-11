@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+import { THREE } from '../../interface';
+
 export const CustomAttributes = {
 	vertexShader: `
   uniform float amplitude;

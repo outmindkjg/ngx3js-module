@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import { RayParameters } from 'three/examples/jsm/geometries/LightningStrike';
 import { HTMLMesh } from 'three/examples/jsm/interactive/HTMLMesh';
 import { InteractiveGroup } from 'three/examples/jsm/interactive/InteractiveGroup';
@@ -10,41 +9,40 @@ import { Wireframe } from 'three/examples/jsm/lines/Wireframe';
 import { TubePainter } from 'three/examples/jsm/misc/TubePainter';
 import {
 	Flow,
-	InstancedFlow,
+	InstancedFlow
 } from 'three/examples/jsm/modifiers/CurveModifier';
 import {
 	Lensflare,
-	LensflareElement,
+	LensflareElement
 } from 'three/examples/jsm/objects/Lensflare';
 import {
 	LightningStorm,
-	StormParams,
+	StormParams
 } from 'three/examples/jsm/objects/LightningStorm';
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
 import {
 	Reflector,
-	ReflectorOptions,
+	ReflectorOptions
 } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
 import {
 	Refractor,
-	RefractorOptions,
+	RefractorOptions
 } from 'three/examples/jsm/objects/Refractor';
 import { Sky } from 'three/examples/jsm/objects/Sky';
 import { Water, WaterOptions } from 'three/examples/jsm/objects/Water';
 import {
 	Water as Water2,
-	Water2Options,
+	Water2Options
 } from 'three/examples/jsm/objects/Water2';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import {
 	CSS3DObject,
-	CSS3DSprite,
+	CSS3DSprite
 } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
-import { ThreeUtil, MaterialParameters } from '../../interface';
+import { I3JS, MaterialParameters, THREE, ThreeUtil } from '../../interface';
 import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass';
-import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * Lensflare mesh
@@ -77,7 +75,7 @@ export class NgxHTMLMesh extends HTMLMesh {
 	constructor(dom: HTMLElement, options?: MaterialParameters) {
 		super(dom);
 		if (options !== null && options !== undefined) {
-			const material = this.material as THREE.Material;
+			const material = this.material as any;
 			if (ThreeUtil.isNotNull(options.fog)) {
 				material.fog = ThreeUtil.getBooleanSafe(options.fog, true);
 			}
@@ -550,7 +548,7 @@ export class NgxMeshText extends THREE.Mesh {
 		public height: number = 20,
 		public fontColor: I3JS.TColorRepresentation = 0xffffff,
 		public fontFamily: string = 'Arial',
-		public side: THREE.Side = THREE.DoubleSide
+		public side: I3JS.TSide = THREE.DoubleSide
 	) {
 		super(new THREE.BufferGeometry(), new THREE.Material());
 		this.redraw();

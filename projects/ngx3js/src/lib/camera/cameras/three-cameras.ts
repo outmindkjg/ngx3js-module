@@ -1,6 +1,5 @@
-import * as THREE from 'three';
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
-import { I3JS } from '../../threejs-library/three-interface';
+import { I3JS, THREE } from '../../interface';
 
 /**
  * Array camera
@@ -15,7 +14,7 @@ export class NgxArrayCamera extends THREE.ArrayCamera {
 	 * @param [cameras]
 	 */
 	constructor(cameras?: I3JS.IPerspectiveCamera[]) {
-		super(cameras as any[]);
+		super(cameras);
 	}
 }
 

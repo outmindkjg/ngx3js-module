@@ -5,7 +5,7 @@ import {
 	OnChanges,
 	SimpleChanges,
 } from '@angular/core';
-import { RendererTimer, ThreeUtil } from '../interface';
+import { RendererTimer, ThreeUtil, I3JS } from '../interface';
 import {
 	AbstractObject3dDirective,
 	AbstractThreeDirective,
@@ -13,7 +13,6 @@ import {
 } from '../directive.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { Object3dFunction } from '../directive.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Position options

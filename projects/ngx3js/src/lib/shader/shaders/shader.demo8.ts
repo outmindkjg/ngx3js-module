@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 export const ShaderDemo8 = {
 	vertexShader: `
   void main() {

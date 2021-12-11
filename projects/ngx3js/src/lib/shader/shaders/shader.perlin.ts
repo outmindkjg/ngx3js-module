@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { THREE } from '../../interface';
 export const PerlinShader = {
 	vertexShader: `
   in vec3 position;

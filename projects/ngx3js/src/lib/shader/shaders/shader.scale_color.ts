@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 export const ScaleColor = {
 	vertexShader: `
   precision highp float;

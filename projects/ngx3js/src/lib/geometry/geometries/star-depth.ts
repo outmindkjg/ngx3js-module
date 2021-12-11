@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { THREE } from '../../interface';
 import { NgxStarGeometry } from './star';
 import { NgxGeometryUtils } from './../geometryUtils';
 

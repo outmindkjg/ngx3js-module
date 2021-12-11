@@ -1,5 +1,4 @@
-import * as THREE from 'three';
-import { Float32BufferAttribute, Vector3 } from 'three';
+import { THREE } from '../../interface';
 
 /**
  * The Capsule geometry.
@@ -52,8 +51,8 @@ export class NgxCapsuleGeometry extends THREE.BufferGeometry {
 		};
 		let index = 0;
 		const grid = [];
-		const vertex = new Vector3();
-		const normal = new Vector3();
+		const vertex = new THREE.Vector3();
+		const normal = new THREE.Vector3();
 		const indices = [];
 		const vertices = [];
 		const normals = [];
@@ -144,8 +143,8 @@ export class NgxCapsuleGeometry extends THREE.BufferGeometry {
 			}
 		}
 		this.setIndex(indices);
-		this.setAttribute('position', new Float32BufferAttribute(vertices, 3));
-		this.setAttribute('normal', new Float32BufferAttribute(normals, 3));
-		this.setAttribute('uv', new Float32BufferAttribute(uvs, 2));
+		this.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+		this.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+		this.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
 	}
 }

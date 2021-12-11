@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 export const ShaderDemo5 = {
 	vertexShader: `
   in int textureIndex;

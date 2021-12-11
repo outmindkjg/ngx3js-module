@@ -1,15 +1,15 @@
 import {
 	AsciiEffect,
-	AsciiEffectOptions,
+	AsciiEffectOptions
 } from 'three/examples/jsm/effects/AsciiEffect';
 import {
 	OutlineEffect,
-	OutlineEffectParameters,
+	OutlineEffectParameters
 } from 'three/examples/jsm/effects/OutlineEffect';
 import { ParallaxBarrierEffect } from 'three/examples/jsm/effects/ParallaxBarrierEffect';
 import { PeppersGhostEffect } from 'three/examples/jsm/effects/PeppersGhostEffect';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { I3JS } from '../../threejs-library/three-interface';
+import { I3JS } from '../../interface';
 
 /**
  * Ascii effect

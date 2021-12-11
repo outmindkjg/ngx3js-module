@@ -1,5 +1,5 @@
-import * as THREE from 'three';
 import { NgxGeometryUtils } from '../geometryUtils';
+import { THREE } from '../../interface';
 
 /**
  * The Circle Depth geometry.

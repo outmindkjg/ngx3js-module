@@ -1,9 +1,8 @@
 import { Directive, Inject } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { RendererTimer, ThreeUtil } from './interface';
-import { AbstractObject3dComponent } from './object3d.abstract';
 import * as GSAP from 'gsap';
-import { I3JS } from './threejs-library/three-interface';
+import { Subscription } from 'rxjs';
+import { I3JS, RendererTimer, ThreeUtil } from './interface';
+import { AbstractObject3dComponent } from './object3d.abstract';
 
 export interface EaseFunction {
 	(progress: number): number;

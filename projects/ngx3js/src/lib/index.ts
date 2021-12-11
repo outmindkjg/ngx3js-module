@@ -115,6 +115,9 @@ export * from './texture/texture.component';
 export * from './texture/textureUtils';
 export * from './threejs-library/ammo';
 export * from './threejs-library/three-ngx';
+export * from './threejs-library/three-core';
+export * from './threejs-library/three-interface';
+
 export * from './tools/tools.component';
 export * from './transform/transform.component';
 export * from './translation/translation.component';
