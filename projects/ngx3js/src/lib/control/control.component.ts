@@ -11,8 +11,7 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
-import { RendererTimer, ThreeUtil } from '../interface';
+import { I3JS, RendererTimer, THREE, ThreeUtil } from '../interface';
 import { LookatComponent } from '../lookat/lookat.component';
 import { SceneComponent } from '../scene/scene.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
@@ -20,7 +19,6 @@ import { NgxAVRControls } from './controls/avr-controls';
 import { NgxPlaneControls } from './controls/plane-controls';
 import { NgxSelectBoxControls } from './controls/selection-box-controls';
 import * as THREE_CTRL from './controls/three-controls';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Control options
@@ -865,7 +863,7 @@ export class ControlComponent
 						this.type,
 						camera,
 						this._scene.first.getScene(),
-						this._renderer as THREE.WebGLRenderer,
+						this._renderer as I3JS.IWebGLRenderer,
 						{},
 						domElement,
 						this._renderCaller,
@@ -881,7 +879,7 @@ export class ControlComponent
 						this.type.substr(0, 2),
 						camera,
 						this._scene.first.getScene(),
-						this._renderer as THREE.WebGLRenderer,
+						this._renderer as I3JS.IWebGLRenderer,
 						{},
 						domElement,
 						this._renderCaller,
@@ -918,7 +916,9 @@ export class ControlComponent
 						camera
 					);
 					control = pointerLockControls;
-					this._scene.first.getScene().add(pointerLockControls.getObject());
+					this._scene.first
+						.getScene()
+						.add(pointerLockControls.getObject() as any);
 					break;
 				case 'dragcontrols':
 				case 'drag':
@@ -1026,7 +1026,7 @@ export class ControlComponent
 					const selectBoxControls = new NgxSelectBoxControls(
 						camera,
 						this._scene.first.getScene(),
-						this._renderer as THREE.WebGLRenderer
+						this._renderer as I3JS.IWebGLRenderer
 					);
 					control = selectBoxControls;
 					break;

@@ -5,11 +5,9 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
+import { ThreeUtil, THREE, I3JS } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Audio component.
@@ -239,7 +237,9 @@ export class AudioComponent
 		onLoad: (audioBuffer: AudioBuffer) => void
 	) {
 		if (this.audioLoader === null) {
-			this.audioLoader = new THREE.AudioLoader(ThreeUtil.getLoadingManager()) as any;
+			this.audioLoader = new THREE.AudioLoader(
+				ThreeUtil.getLoadingManager()
+			) as any;
 		}
 		this.audioLoader.load(url, (audioBuffer: AudioBuffer): void => {
 			onLoad(audioBuffer);
@@ -584,7 +584,7 @@ export class AudioComponent
 	 * @template T
 	 * @returns audio
 	 */
-	public getAudio<T extends THREE.Audio>(): T {
+	public getAudio<T extends I3JS.IAudio>(): T {
 		if (this.audio === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.loadedVideoTexture = null;

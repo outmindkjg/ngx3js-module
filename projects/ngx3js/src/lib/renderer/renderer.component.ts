@@ -16,7 +16,6 @@ import {
 } from '@angular/core';
 import * as GSAP from 'gsap';
 import { Observable, Subject } from 'rxjs';
-import * as THREE from 'three';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGRenderer } from 'three/examples/jsm/renderers/SVGRenderer';
@@ -34,6 +33,8 @@ import {
 	ThreeGui,
 	ThreeStats,
 	ThreeUtil,
+	THREE,
+	I3JS,
 } from '../interface';
 import { PlaneComponent } from '../plane/plane.component';
 import { SharedComponent } from '../shared/shared.component';
@@ -45,7 +46,6 @@ import { CameraComponent } from './../camera/camera.component';
 import { ListenerComponent } from './../listener/listener.component';
 import { LookatComponent } from './../lookat/lookat.component';
 import { SceneComponent } from './../scene/scene.component';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Renderer component.
@@ -494,7 +494,6 @@ export class RendererComponent
 	 * View child of renderer component
 	 */
 	@ViewChild('renderer') private rendererEle: ElementRef = null;
-
 
 	/**
 	 * Gets clipping planes
@@ -992,7 +991,7 @@ export class RendererComponent
 	 * @param [def]
 	 * @returns tone mapping
 	 */
-	private getToneMapping(def?: string): THREE.ToneMapping {
+	private getToneMapping(def?: string): I3JS.TToneMapping {
 		const toneMapping = ThreeUtil.getTypeSafe(this.toneMapping, def, '');
 		switch (toneMapping.toLowerCase()) {
 			case 'lineartonemapping':
@@ -1139,7 +1138,7 @@ export class RendererComponent
 	/**
 	 * Size subject of renderer component
 	 */
-	protected _sizeSubject: Subject<THREE.Vector2> = new Subject<THREE.Vector2>();
+	protected _sizeSubject: Subject<I3JS.IVector2> = new Subject<I3JS.IVector2>();
 
 	/**
 	 * Update subject of renderer component
@@ -1151,7 +1150,7 @@ export class RendererComponent
 	 * Sizes subscribe
 	 * @returns subscribe
 	 */
-	public sizeSubscribe(): Observable<THREE.Vector2> {
+	public sizeSubscribe(): Observable<I3JS.IVector2> {
 		return this._sizeSubject.asObservable();
 	}
 
@@ -1554,7 +1553,10 @@ export class RendererComponent
 								this.renderer.shadowMap.enabled &&
 								ThreeUtil.isNotNull(this.shadowMapType)
 							) {
-								this.renderer.shadowMap.type = ThreeUtil.getShadowMapTypeSafe(this.shadowMapType, 'pcfsoft');
+								this.renderer.shadowMap.type = ThreeUtil.getShadowMapTypeSafe(
+									this.shadowMapType,
+									'pcfsoft'
+								);
 							}
 							if (ThreeUtil.isNotNull(this.autoClear)) {
 								this.renderer.autoClear = this.autoClear;
@@ -2105,7 +2107,7 @@ export class RendererComponent
 				this.renderer instanceof THREE.WebGLRenderer
 			) {
 				this.effectList.forEach((composer) => {
-					composer.render(this.renderer as THREE.WebGLRenderer, renderTimer);
+					composer.render(this.renderer as I3JS.IWebGLRenderer, renderTimer);
 				});
 			} else if (this.cameraList && this.cameraList.length > 0) {
 				this.cameraList.forEach((camera) => {

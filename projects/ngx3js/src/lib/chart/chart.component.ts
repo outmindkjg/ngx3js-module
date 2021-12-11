@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import {
 	BaseComponent,
@@ -8,10 +7,11 @@ import {
 	RendererTimer,
 	ThreeColor,
 	ThreeUtil,
+	I3JS,
+	THREE,
 	ThreeVector,
 } from '../interface';
 import { MeshComponent } from '../mesh/mesh.component';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Color opacity
@@ -825,7 +825,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 						this.setMaterialColor(this.lastIntersect, false);
 						this.lastIntersect = null;
 					}
-					this.lastIntersect = intersect.object as THREE.Mesh;
+					this.lastIntersect = intersect.object as I3JS.IMesh;
 					this.setMaterialColor(this.lastIntersect, true);
 				}
 			} else if (this.lastIntersect !== null) {
@@ -843,7 +843,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 */
 	private setMaterialColor(mesh: I3JS.IMesh, isHover: boolean): void {
 		const material: I3JS.IMeshLambertMaterial =
-			mesh.material as THREE.MeshLambertMaterial;
+			mesh.material as I3JS.IMeshLambertMaterial;
 		const colorInfo: BackgroundBorder = mesh.userData.colorInfo;
 		if (ThreeUtil.isNull(colorInfo)) {
 			return;
@@ -861,7 +861,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 				const child = mesh.children[0];
 				if (child instanceof THREE.LineSegments) {
 					const childMaterial: I3JS.ILineBasicMaterial =
-						child.material as THREE.LineBasicMaterial;
+						child.material as I3JS.ILineBasicMaterial;
 					childMaterial.color = ThreeUtil.getColorSafe(borderColor.color);
 					childMaterial.opacity = ThreeUtil.getTypeSafe(borderColor.opacity, 1);
 				}
@@ -912,7 +912,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 			});
 		}
 		if (this.tooltip !== null && this.tooltipPosition !== null) {
-			this.tooltip.position.lerp(this.tooltipPosition, timer.delta * 3);
+			this.tooltip.position.lerp(this.tooltipPosition as any, timer.delta * 3);
 		}
 	}
 }

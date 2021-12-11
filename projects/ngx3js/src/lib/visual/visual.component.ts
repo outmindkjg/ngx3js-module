@@ -9,13 +9,11 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { BackgroundComponent } from '../background/background.component';
 import { HtmlComponent } from '../html/html.component';
-import { CssStyle, ThreeUtil } from '../interface';
+import { CssStyle, ThreeUtil, THREE, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TransformComponent } from '../transform/transform.component';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Html collection

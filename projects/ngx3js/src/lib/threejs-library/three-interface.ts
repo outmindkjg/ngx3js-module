@@ -1,5 +1,36 @@
 import * as O3JS from 'three';
 export namespace I3JS {
+	export type TCullFace = O3JS.CullFace;
+	export type TShadowMapType = O3JS.ShadowMapType;
+	export type TSide = O3JS.Side;
+	export type TShading = O3JS.Shading;
+	export type TBlending = O3JS.Blending;
+	export type TBlendingEquation = O3JS.BlendingEquation;
+	export type TBlendingDstFactor = O3JS.BlendingDstFactor;
+	export type TBlendingSrcFactor = O3JS.BlendingSrcFactor;
+	export type TDepthModes = O3JS.DepthModes;
+	export type TCombine = O3JS.Combine;
+	export type TToneMapping = O3JS.ToneMapping;
+	export type TMapping = O3JS.Mapping;
+	export type TWrapping = O3JS.Wrapping;
+	export type TTextureFilter = O3JS.TextureFilter;
+	export type TTextureDataType = O3JS.TextureDataType;
+	export type TPixelFormat = O3JS.PixelFormat;
+	export type TPixelFormatGPU = O3JS.PixelFormatGPU;
+	export type TCompressedPixelFormat = O3JS.CompressedPixelFormat;
+	export type TAnimationActionLoopStyles = O3JS.AnimationActionLoopStyles;
+	export type TInterpolationModes = O3JS.InterpolationModes;
+	export type TInterpolationEndingModes = O3JS.InterpolationEndingModes;
+	export type TAnimationBlendMode = O3JS.AnimationBlendMode;
+	export type TTrianglesDrawModes = O3JS.TrianglesDrawModes;
+	export type TTextureEncoding = O3JS.TextureEncoding;
+	export type TDepthPackingStrategies = O3JS.DepthPackingStrategies;
+	export type TNormalMapTypes = O3JS.NormalMapTypes;
+	export type TStencilOp = O3JS.StencilOp;
+	export type TStencilFunc = O3JS.StencilFunc;
+	export type TUsage = O3JS.Usage;
+	export type TGLSLVersion = O3JS.GLSLVersion;
+
 	export type TMatrix4Tuple = [
 		number,
 		number,
@@ -23,12 +54,14 @@ export namespace I3JS {
 	 * Implementation of a quaternion. This is used for rotating things without incurring in the dreaded gimbal lock issue, amongst other advantages.
 	 *
 	 * @example
-	 * const quaternion = new O3JS.Quaternion();
+	 * const quaternion = new THREE.Quaternion();
 	 * quaternion.setFromAxisAngle( new IVector3( 0, 1, 0 ), Math.PI / 2 );
 	 * const vector = new IVector3( 1, 0, 0 );
 	 * vector.applyQuaternion( quaternion );
 	 */
 	export interface IQuaternion {
+		new (x?: number, y?: number, z?: number, w?: number): this;
+
 		/**
 		 * @default 0
 		 */
@@ -149,12 +182,12 @@ export namespace I3JS {
 		_onChangeCallback: () => void;
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector#applyQuaternion vector.applyQuaternion( quaternion )} instead.
+		 * @deprecated Use {@line THREE.Vector#applyQuaternion vector.applyQuaternion( quaternion )} instead.
 		 */
 		multiplyVector3(v: any): any;
 
 		/**
-		 * @deprecated Use {@link O3JS.Quaternion#invert .invert()} instead.
+		 * @deprecated Use {@line THREE.Quaternion#invert .invert()} instead.
 		 */
 		inverse(): IQuaternion;
 
@@ -454,22 +487,22 @@ export namespace I3JS {
 		setFromMatrix3(m: IMatrix3): IMatrix4;
 
 		/**
-		 * @deprecated Use {@link O3JS.Matrix4#copyPosition .copyPosition()} instead.
+		 * @deprecated Use {@line THREE.Matrix4#copyPosition .copyPosition()} instead.
 		 */
 		extractPosition(m: IMatrix4): IMatrix4;
 
 		/**
-		 * @deprecated Use {@link O3JS.Matrix4#makeRotationFromQuaternion .makeRotationFromQuaternion()} instead.
+		 * @deprecated Use {@line THREE.Matrix4#makeRotationFromQuaternion .makeRotationFromQuaternion()} instead.
 		 */
 		setRotationFromQuaternion(q: IQuaternion): IMatrix4;
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+		 * @deprecated Use {@line THREE.Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 		 */
 		multiplyVector3(v: any): any;
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector4#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+		 * @deprecated Use {@line THREE.Vector4#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 		 */
 		multiplyVector4(v: any): any;
 
@@ -479,30 +512,79 @@ export namespace I3JS {
 		multiplyVector3Array(array: number[]): number[];
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector3#transformDirection Vector3.transformDirection( matrix )} instead.
+		 * @deprecated Use {@line THREE.Vector3#transformDirection Vector3.transformDirection( matrix )} instead.
 		 */
 		rotateAxis(v: any): void;
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
+		 * @deprecated Use {@line THREE.Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
 		 */
 		crossVector(v: any): void;
 
 		/**
-		 * @deprecated Use {@link O3JS.Matrix4#toArray .toArray()} instead.
+		 * @deprecated Use {@line THREE.Matrix4#toArray .toArray()} instead.
 		 */
 		flattenToArrayOffset(array: number[], offset: number): number[];
 
 		/**
-		 * @deprecated Use {@link O3JS.Matrix4#invert .invert()} instead.
+		 * @deprecated Use {@line THREE.Matrix4#invert .invert()} instead.
 		 */
 		getInverse(matrix: IMatrix): IMatrix;
 	}
 
 	/**
-	 * ( class Matrix3 implements Matrix<Matrix3> )
+	 * ( interface IMatrix<T> )
 	 */
-	export interface IMatrix3 {
+	export interface IMatrix {
+		/**
+		 * Array with matrix values.
+		 */
+		elements: number[];
+
+		/**
+		 * identity():T;
+		 */
+		identity(): IMatrix;
+
+		/**
+		 * copy(m:T):T;
+		 */
+		copy(m: this): this;
+
+		/**
+		 * multiplyScalar(s:number):T;
+		 */
+		multiplyScalar(s: number): IMatrix;
+
+		determinant(): number;
+
+		/**
+		 * transpose():T;
+		 */
+		transpose(): IMatrix;
+
+		/**
+		 * invert():T;
+		 */
+		invert(): IMatrix;
+
+		/**
+		 * clone():T;
+		 */
+		clone(): IMatrix;
+	}
+
+	export type IMatrix3Tuple = O3JS.Matrix3Tuple;
+
+	/**
+	 * ( class IMatrix3 implements IMatrix<IMatrix3> )
+	 */
+	export interface IMatrix3 extends IMatrix {
+		/**
+		 * Creates an identity matrix.
+		 */
+		new (): this;
+
 		/**
 		 * Array with matrix values.
 		 * @default [1, 0, 0, 0, 1, 0, 0, 0, 1]
@@ -524,7 +606,7 @@ export namespace I3JS {
 		clone(): this;
 		copy(m: IMatrix3): this;
 		extractBasis(xAxis: IVector3, yAxis: IVector3, zAxis: IVector3): IMatrix3;
-		setFromMatrix4(m: IMatrix4): IMatrix3;
+		setFromIMatrix4(m: IMatrix4): IMatrix3;
 		multiplyScalar(s: number): IMatrix3;
 		determinant(): number;
 
@@ -537,7 +619,7 @@ export namespace I3JS {
 		 * Transposes this matrix in place.
 		 */
 		transpose(): IMatrix3;
-		getNormalMatrix(matrix4: IMatrix4): IMatrix3;
+		getNormalIMatrix(matrix4: IMatrix4): IMatrix3;
 
 		/**
 		 * Transposes this matrix into the supplied array r, and returns itself.
@@ -576,7 +658,7 @@ export namespace I3JS {
 		 * @return The created or provided array.
 		 */
 		toArray(array?: number[], offset?: number): number[];
-		toArray(array?: TMatrix3Tuple, offset?: 0): TMatrix3Tuple;
+		toArray(array?: IMatrix3Tuple, offset?: 0): IMatrix3Tuple;
 
 		/**
 		 * Copies he values of this matrix into the provided array-like.
@@ -599,25 +681,346 @@ export namespace I3JS {
 		multiplyMatrices(a: IMatrix3, b: IMatrix3): IMatrix3;
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector3.applyMatrix3 vector.applyMatrix3( matrix )} instead.
+		 * @deprecated Use {@link IVector3.applyIMatrix3 vector.applyIMatrix3( matrix )} instead.
 		 */
-		multiplyVector3(vector: IVector3): any;
+		multiplyIVector3(vector: IVector3): any;
 
 		/**
 		 * @deprecated This method has been removed completely.
 		 */
-		multiplyVector3Array(a: any): any;
+		multiplyIVector3Array(a: any): any;
 
 		/**
-		 * @deprecated Use {@link O3JS.Matrix3#invert .invert()} instead.
+		 * @deprecated Use {@link IMatrix3#invert .invert()} instead.
 		 */
 		getInverse(matrix: IMatrix4, throwOnDegenerate?: boolean): IMatrix3;
 		getInverse(matrix: IMatrix): IMatrix;
 
 		/**
-		 * @deprecated Use {@link O3JS.Matrix3#toArray .toArray()} instead.
+		 * @deprecated Use {@link IMatrix3#toArray .toArray()} instead.
 		 */
 		flattenToArrayOffset(array: number[], offset: number): number[];
+	}
+
+	export type IMatrix4Tuple = [
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number,
+		number
+	];
+
+	/**
+	 * A 4x4 IMatrix.
+	 *
+	 * @example
+	 * // Simple rig for rotating around 3 axes
+	 * const m = new THREE.IMatrix4();
+	 * const m1 = new THREE.IMatrix4();
+	 * const m2 = new THREE.IMatrix4();
+	 * const m3 = new THREE.IMatrix4();
+	 * const alpha = 0;
+	 * const beta = Math.PI;
+	 * const gamma = Math.PI/2;
+	 * m1.makeRotationX( alpha );
+	 * m2.makeRotationY( beta );
+	 * m3.makeRotationZ( gamma );
+	 * m.multiplyMatrices( m1, m2 );
+	 * m.multiply( m3 );
+	 */
+	export interface IMatrix4 extends IMatrix {
+		new (): this;
+
+		/**
+		 * Array with matrix values.
+		 * @default [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+		 */
+		elements: number[];
+
+		/**
+		 * Sets all fields of this matrix.
+		 */
+		set(
+			n11: number,
+			n12: number,
+			n13: number,
+			n14: number,
+			n21: number,
+			n22: number,
+			n23: number,
+			n24: number,
+			n31: number,
+			n32: number,
+			n33: number,
+			n34: number,
+			n41: number,
+			n42: number,
+			n43: number,
+			n44: number
+		): IMatrix4;
+
+		/**
+		 * Resets this matrix to identity.
+		 */
+		identity(): IMatrix4;
+		clone(): IMatrix4;
+		copy(m: IMatrix4): this;
+		copyPosition(m: IMatrix4): IMatrix4;
+		extractBasis(xAxis: IVector3, yAxis: IVector3, zAxis: IVector3): IMatrix4;
+		makeBasis(xAxis: IVector3, yAxis: IVector3, zAxis: IVector3): IMatrix4;
+
+		/**
+		 * Copies the rotation component of the supplied matrix m into this matrix rotation component.
+		 */
+		extractRotation(m: IMatrix4): IMatrix4;
+		makeRotationFromIEuler(euler: IEuler): IMatrix4;
+		makeRotationFromIQuaternion(q: IQuaternion): IMatrix4;
+		/**
+		 * Constructs a rotation matrix, looking from eye towards center with defined up vector.
+		 */
+		lookAt(eye: IVector3, target: IVector3, up: IVector3): IMatrix4;
+
+		/**
+		 * Multiplies this matrix by m.
+		 */
+		multiply(m: IMatrix4): IMatrix4;
+
+		premultiply(m: IMatrix4): IMatrix4;
+
+		/**
+		 * Sets this matrix to a x b.
+		 */
+		multiplyMatrices(a: IMatrix4, b: IMatrix4): IMatrix4;
+
+		/**
+		 * Sets this matrix to a x b and stores the result into the flat array r.
+		 * r can be either a regular Array or a TypedArray.
+		 *
+		 * @deprecated This method has been removed completely.
+		 */
+		multiplyToArray(a: IMatrix4, b: IMatrix4, r: number[]): IMatrix4;
+
+		/**
+		 * Multiplies this matrix by s.
+		 */
+		multiplyScalar(s: number): IMatrix4;
+
+		/**
+		 * Computes determinant of this matrix.
+		 * Based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
+		 */
+		determinant(): number;
+
+		/**
+		 * Transposes this matrix.
+		 */
+		transpose(): IMatrix4;
+
+		/**
+		 * Sets the position component for this matrix from vector v.
+		 */
+		setPosition(v: IVector3 | number, y?: number, z?: number): IMatrix4;
+
+		/**
+		 * Inverts this matrix.
+		 */
+		invert(): IMatrix4;
+
+		/**
+		 * Multiplies the columns of this matrix by vector v.
+		 */
+		scale(v: IVector3): IMatrix4;
+
+		getMaxScaleOnAxis(): number;
+		/**
+		 * Sets this matrix as translation transform.
+		 */
+		makeTranslation(x: number, y: number, z: number): IMatrix4;
+
+		/**
+		 * Sets this matrix as rotation transform around x axis by theta radians.
+		 *
+		 * @param theta Rotation angle in radians.
+		 */
+		makeRotationX(theta: number): IMatrix4;
+
+		/**
+		 * Sets this matrix as rotation transform around y axis by theta radians.
+		 *
+		 * @param theta Rotation angle in radians.
+		 */
+		makeRotationY(theta: number): IMatrix4;
+
+		/**
+		 * Sets this matrix as rotation transform around z axis by theta radians.
+		 *
+		 * @param theta Rotation angle in radians.
+		 */
+		makeRotationZ(theta: number): IMatrix4;
+
+		/**
+		 * Sets this matrix as rotation transform around axis by angle radians.
+		 * Based on http://www.gamedev.net/reference/articles/article1199.asp.
+		 *
+		 * @param axis Rotation axis.
+		 * @param theta Rotation angle in radians.
+		 */
+		makeRotationAxis(axis: IVector3, angle: number): IMatrix4;
+
+		/**
+		 * Sets this matrix as scale transform.
+		 */
+		makeScale(x: number, y: number, z: number): IMatrix4;
+
+		/**
+		 * Sets this matrix as shear transform.
+		 */
+		makeShear(
+			xy: number,
+			xz: number,
+			yx: number,
+			yz: number,
+			zx: number,
+			zy: number
+		): IMatrix4;
+
+		/**
+		 * Sets this matrix to the transformation composed of translation, rotation and scale.
+		 */
+		compose(
+			translation: IVector3,
+			rotation: IQuaternion,
+			scale: IVector3
+		): IMatrix4;
+
+		/**
+		 * Decomposes this matrix into it's position, quaternion and scale components.
+		 */
+		decompose(
+			translation: IVector3,
+			rotation: IQuaternion,
+			scale: IVector3
+		): IMatrix4;
+
+		/**
+		 * Creates a frustum matrix.
+		 */
+		makePerspective(
+			left: number,
+			right: number,
+			bottom: number,
+			top: number,
+			near: number,
+			far: number
+		): IMatrix4;
+
+		/**
+		 * Creates a perspective projection matrix.
+		 */
+		makePerspective(
+			fov: number,
+			aspect: number,
+			near: number,
+			far: number
+		): IMatrix4;
+
+		/**
+		 * Creates an orthographic projection matrix.
+		 */
+		makeOrthographic(
+			left: number,
+			right: number,
+			top: number,
+			bottom: number,
+			near: number,
+			far: number
+		): IMatrix4;
+		equals(matrix: IMatrix4): boolean;
+
+		/**
+		 * Sets the values of this matrix from the provided array or array-like.
+		 * @param array the source array or array-like.
+		 * @param offset (optional) offset into the array-like. Default is 0.
+		 */
+		fromArray(array: number[] | ArrayLike<number>, offset?: number): IMatrix4;
+
+		/**
+		 * Returns an array with the values of this matrix, or copies them into the provided array.
+		 * @param array (optional) array to store the matrix to. If this is not provided, a new array will be created.
+		 * @param offset (optional) optional offset into the array.
+		 * @return The created or provided array.
+		 */
+		toArray(array?: number[], offset?: number): number[];
+		toArray(array?: IMatrix4Tuple, offset?: 0): IMatrix4Tuple;
+
+		/**
+		 * Copies he values of this matrix into the provided array-like.
+		 * @param array array-like to store the matrix to.
+		 * @param offset (optional) optional offset into the array-like.
+		 * @return The provided array-like.
+		 */
+		toArray(array?: ArrayLike<number>, offset?: number): ArrayLike<number>;
+
+		/**
+		 * Set the upper 3x3 elements of this matrix to the values of the IMatrix3 m.
+		 */
+		setFromIMatrix3(m: IMatrix3): IMatrix4;
+
+		/**
+		 * @deprecated Use {@link IMatrix4#copyPosition .copyPosition()} instead.
+		 */
+		extractPosition(m: IMatrix4): IMatrix4;
+
+		/**
+		 * @deprecated Use {@link IMatrix4#makeRotationFromIQuaternion .makeRotationFromIQuaternion()} instead.
+		 */
+		setRotationFromIQuaternion(q: IQuaternion): IMatrix4;
+
+		/**
+		 * @deprecated Use {@link IVector3#applyIMatrix4 vector.applyIMatrix4( matrix )} instead.
+		 */
+		multiplyIVector3(v: any): any;
+
+		/**
+		 * @deprecated Use {@link IVector4#applyIMatrix4 vector.applyIMatrix4( matrix )} instead.
+		 */
+		multiplyIVector4(v: any): any;
+
+		/**
+		 * @deprecated This method has been removed completely.
+		 */
+		multiplyIVector3Array(array: number[]): number[];
+
+		/**
+		 * @deprecated Use {@link IVector3#transformDirection IVector3.transformDirection( matrix )} instead.
+		 */
+		rotateAxis(v: any): void;
+
+		/**
+		 * @deprecated Use {@link IVector3#applyIMatrix4 vector.applyIMatrix4( matrix )} instead.
+		 */
+		crossIVector(v: any): void;
+
+		/**
+		 * @deprecated Use {@link IMatrix4#toArray .toArray()} instead.
+		 */
+		flattenToArrayOffset(array: number[], offset: number): number[];
+
+		/**
+		 * @deprecated Use {@link IMatrix4#invert .invert()} instead.
+		 */
+		getInverse(matrix: IMatrix): IMatrix;
 	}
 
 	export interface IEuler {
@@ -639,7 +1042,7 @@ export namespace I3JS {
 		z: number;
 
 		/**
-		 * @default O3JS.Euler.DefaultOrder
+		 * @default THREE.Euler.DefaultOrder
 		 */
 		order: string;
 		readonly isEuler: true;
@@ -668,6 +1071,15 @@ export namespace I3JS {
 	 * Frustums are used to determine what is inside the camera's field of view. They help speed up the rendering process.
 	 */
 	export interface IFrustum {
+		new (
+			p0?: IPlane,
+			p1?: IPlane,
+			p2?: IPlane,
+			p3?: IPlane,
+			p4?: IPlane,
+			p5?: IPlane
+		): this;
+
 		/**
 		 * Array of 6 vectors.
 		 */
@@ -927,6 +1339,7 @@ export namespace I3JS {
 	}
 
 	export interface ISpherical {
+		new (radius?: number, phi?: number, theta?: number): this;
 		/**
 		 * @default 1
 		 */
@@ -951,6 +1364,12 @@ export namespace I3JS {
 	}
 
 	export interface IInterpolant {
+		new (
+			parameterPositions: any,
+			sampleValues: any,
+			sampleSize: number,
+			resultBuffer?: any
+		): this;
 		parameterPositions: any;
 		sampleValues: any;
 		valueSize: number;
@@ -959,9 +1378,10 @@ export namespace I3JS {
 	}
 
 	export interface ISphericalHarmonics3 {
+		new (): this;
 		/**
-		 * @default [new O3JS.Vector3(), new O3JS.Vector3(), new O3JS.Vector3(), new O3JS.Vector3(),
-		 * new O3JS.Vector3(), new O3JS.Vector3(), new O3JS.Vector3(), new O3JS.Vector3(), new O3JS.Vector3()]
+		 * @default [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(),
+		 * new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]
 		 */
 		coefficients: IVector3[];
 		readonly isSphericalHarmonics3: true;
@@ -1004,6 +1424,8 @@ export namespace I3JS {
 	}
 
 	export interface ICylindrical {
+		new (radius?: number, theta?: number, y?: number): this;
+
 		/**
 		 * @default 1
 		 */
@@ -1054,8 +1476,7 @@ export namespace I3JS {
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/Clock.js|src/core/Clock.js}
 	 */
 	export interface IClock {
-
-		new(autoStart?: boolean) : this;
+		new (autoStart?: boolean): this;
 
 		/**
 		 * If set, starts the clock automatically when the first update is called.
@@ -1112,6 +1533,12 @@ export namespace I3JS {
 	}
 
 	export interface IBufferAttribute {
+		new (
+			array: ArrayLike<number>,
+			itemSize: number,
+			normalized?: boolean
+		): this; // array parameter should be TypedArray.
+
 		/**
 		 * @default ''
 		 */
@@ -1120,9 +1547,9 @@ export namespace I3JS {
 		itemSize: number;
 
 		/**
-		 * @default O3JS.StaticDrawUsage
+		 * @default THREE.StaticDrawUsage
 		 */
-		usage: O3JS.Usage;
+		usage: TUsage;
 
 		/**
 		 * @default { offset: number; count: number }
@@ -1150,7 +1577,7 @@ export namespace I3JS {
 
 		onUploadCallback: () => void;
 		onUpload(callback: () => void): this;
-		setUsage(usage: O3JS.Usage): this;
+		setUsage(usage: TUsage): this;
 		clone(): this;
 		copy(source: IBufferAttribute): this;
 		copyAt(index1: number, attribute: IBufferAttribute, index2: number): this;
@@ -1297,6 +1724,12 @@ export namespace I3JS {
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/InstancedInterleavedBuffer.js|src/core/InstancedInterleavedBuffer.js}
 	 */
 	export interface IInstancedInterleavedBuffer extends IInterleavedBuffer {
+		new (
+			array: ArrayLike<number>,
+			stride: number,
+			meshPerAttribute?: number
+		): this;
+
 		/**
 		 * @default 1
 		 */
@@ -1304,13 +1737,15 @@ export namespace I3JS {
 	}
 
 	export interface IInterleavedBuffer {
+		new (array: ArrayLike<number>, stride: number): this;
+
 		array: ArrayLike<number>;
 		stride: number;
 
 		/**
-		 * @default O3JS.StaticDrawUsage
+		 * @default THREE.StaticDrawUsage
 		 */
-		usage: O3JS.Usage;
+		usage: TUsage;
 
 		/**
 		 * @default { offset: number; count: number }
@@ -1331,7 +1766,7 @@ export namespace I3JS {
 		needsUpdate: boolean;
 		uuid: string;
 
-		setUsage(usage: O3JS.Usage): IInterleavedBuffer;
+		setUsage(usage: TUsage): IInterleavedBuffer;
 		clone(data: object): IInterleavedBuffer;
 		copy(source: IInterleavedBuffer): this;
 		copyAt(
@@ -1349,6 +1784,13 @@ export namespace I3JS {
 	}
 
 	export interface IInterleavedBufferAttribute {
+		new (
+			interleavedBuffer: IInterleavedBuffer,
+			itemSize: number,
+			offset: number,
+			normalized?: boolean
+		): this;
+
 		/**
 		 * @default ''
 		 */
@@ -1596,7 +2038,7 @@ export namespace I3JS {
 		length(): number;
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector2#manhattanLength .manhattanLength()} instead.
+		 * @deprecated Use {@line THREE.Vector2#manhattanLength .manhattanLength()} instead.
 		 */
 		lengthManhattan(): number;
 
@@ -1628,7 +2070,7 @@ export namespace I3JS {
 		distanceToSquared(v: IVector2): number;
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector2#manhattanDistanceTo .manhattanDistanceTo()} instead.
+		 * @deprecated Use {@line THREE.Vector2#manhattanDistanceTo .manhattanDistanceTo()} instead.
 		 */
 		distanceToManhattan(v: IVector2): number;
 
@@ -1871,7 +2313,7 @@ export namespace I3JS {
 		 * Computes Manhattan length of this vector.
 		 * http://en.wikipedia.org/wiki/Taxicab_geometry
 		 *
-		 * @deprecated Use {@link O3JS.Vector3#manhattanLength .manhattanLength()} instead.
+		 * @deprecated Use {@line THREE.Vector3#manhattanLength .manhattanLength()} instead.
 		 */
 		lengthManhattan(): number;
 
@@ -1927,7 +2369,7 @@ export namespace I3JS {
 		distanceToSquared(v: IVector3): number;
 
 		/**
-		 * @deprecated Use {@link O3JS.Vector3#manhattanDistanceTo .manhattanDistanceTo()} instead.
+		 * @deprecated Use {@line THREE.Vector3#manhattanDistanceTo .manhattanDistanceTo()} instead.
 		 */
 		distanceToManhattan(v: IVector3): number;
 
@@ -2207,7 +2649,7 @@ export namespace I3JS {
 		l: number;
 	}
 
-	export type TColorRepresentation = IColor | string | number;
+	export type TColorRepresentation = O3JS.ColorRepresentation | any;
 
 	/**
 	 * Represents a color. See also {@link ColorUtils}.
@@ -2215,7 +2657,7 @@ export namespace I3JS {
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/math/Color.js|src/math/Color.js}
 	 *
 	 * @example
-	 * const color = new O3JS.Color( 0xff0000 );
+	 * const color = new THREE.Color( 0xff0000 );
 	 */
 	export interface IColor {
 		new (color?: TColorRepresentation): this;
@@ -2271,7 +2713,7 @@ export namespace I3JS {
 
 		/**
 		 * Sets this color from a color name.
-		 * Faster than {@link O3JS.Color#setStyle .setStyle()} method if you don't need the other CSS-style formats.
+		 * Faster than {@line THREE.Color#setStyle .setStyle()} method if you don't need the other CSS-style formats.
 		 * @param style Color name in X11 format.
 		 */
 		setColorName(style: string): IColor;
@@ -2400,7 +2842,7 @@ export namespace I3JS {
 		type: string;
 
 		/**
-		 * @default new O3JS.Vector2()
+		 * @default new THREE.Vector2()
 		 */
 		currentPoint: IVector2;
 
@@ -2833,7 +3275,7 @@ export namespace I3JS {
 		type: string;
 
 		/**
-		 * @default new O3JS.Color()
+		 * @default new THREE.Color()
 		 */
 		color: IColor;
 
@@ -2866,7 +3308,9 @@ export namespace I3JS {
 	 * An extensible curve object which contains methods for interpolation
 	 * class Curve<T extends Vector>
 	 */
-	export interface ICurve<T extends O3JS.Vector> {
+	export interface ICurve<T extends IVector = IVector3> {
+		new (): this;
+
 		/**
 		 * @default 'Curve'
 		 */
@@ -2955,6 +3399,9 @@ export namespace I3JS {
 	}
 
 	export interface ILayers {
+
+		new():this;
+		
 		/**
 		 * @default 1 | 0
 		 */
@@ -3009,14 +3456,14 @@ export namespace I3JS {
 		ValueTypeName: string;
 		TimeBufferType: Float32Array;
 		ValueBufferType: Float32Array;
-		DefaultInterpolation: O3JS.InterpolationModes;
+		DefaultInterpolation: TInterpolationModes;
 
 		InterpolantFactoryMethodDiscrete(result: any): IDiscreteInterpolant;
 		InterpolantFactoryMethodLinear(result: any): ILinearInterpolant;
 		InterpolantFactoryMethodSmooth(result: any): ICubicInterpolant;
 
-		setInterpolation(interpolation: O3JS.InterpolationModes): IKeyframeTrack;
-		getInterpolation(): O3JS.InterpolationModes;
+		setInterpolation(interpolation: TInterpolationModes): IKeyframeTrack;
+		getInterpolation(): TInterpolationModes;
 
 		getValueSize(): number;
 
@@ -3042,7 +3489,7 @@ export namespace I3JS {
 			name: string,
 			times: any[],
 			values: any[],
-			interpolation?: O3JS.InterpolationModes
+			interpolation?: TInterpolationModes
 		): this;
 
 		/**
@@ -3056,7 +3503,7 @@ export namespace I3JS {
 			name: string,
 			times: any[],
 			values: any[],
-			interpolation?: O3JS.InterpolationModes
+			interpolation?: TInterpolationModes
 		): this;
 
 		/**
@@ -3070,7 +3517,7 @@ export namespace I3JS {
 			name: string,
 			times: any[],
 			values: any[],
-			interpolation?: O3JS.InterpolationModes
+			interpolation?: TInterpolationModes
 		): this;
 
 		/**
@@ -3084,7 +3531,7 @@ export namespace I3JS {
 			name: string,
 			times: any[],
 			values: any[],
-			interpolation?: O3JS.InterpolationModes
+			interpolation?: TInterpolationModes
 		): this;
 
 		/**
@@ -3098,7 +3545,7 @@ export namespace I3JS {
 			name: string,
 			times: any[],
 			values: any[],
-			interpolation?: O3JS.InterpolationModes
+			interpolation?: TInterpolationModes
 		): this;
 
 		/**
@@ -3113,13 +3560,19 @@ export namespace I3JS {
 	}
 
 	export interface IAnimationClip {
+		new (
+			name?: string,
+			duration?: number,
+			tracks?: IKeyframeTrack[],
+			blendMode?: TAnimationBlendMode
+		): this;
 		name: string;
 		tracks: IKeyframeTrack[];
 
 		/**
-		 * @default O3JS.NormalAnimationBlendMode
+		 * @default THREE.NormalAnimationBlendMode
 		 */
-		blendMode: O3JS.AnimationBlendMode;
+		blendMode: TAnimationBlendMode;
 
 		/**
 		 * @default -1
@@ -3134,15 +3587,30 @@ export namespace I3JS {
 		optimize(): IAnimationClip;
 		clone(): this;
 		toJSON(clip: IAnimationClip): any;
+
+		CreateFromMorphTargetSequence(
+			name: string,
+			morphTargetSequence: IMorphTarget[],
+			fps: number,
+			noLoop: boolean
+		): IAnimationClip;
+		findByName(clipArray: IAnimationClip[], name: string): IAnimationClip;
+		CreateClipsFromMorphTargetSequences(
+			morphTargets: IMorphTarget[],
+			fps: number,
+			noLoop: boolean
+		): IAnimationClip[];
+		parse(json: any): IAnimationClip;
+		parseAnimation(animation: any, bones: IBone[]): IAnimationClip;
 	}
 
 	export interface IAnimationAction {
-		blendMode: O3JS.AnimationBlendMode;
+		blendMode: TAnimationBlendMode;
 
 		/**
-		 * @default O3JS.LoopRepeat
+		 * @default THREE.LoopRepeat
 		 */
-		loop: O3JS.AnimationActionLoopStyles;
+		loop: TAnimationActionLoopStyles;
 
 		/**
 		 * @default 0
@@ -3196,7 +3664,7 @@ export namespace I3JS {
 		isScheduled(): boolean;
 		startAt(time: number): IAnimationAction;
 		setLoop(
-			mode: O3JS.AnimationActionLoopStyles,
+			mode: TAnimationActionLoopStyles,
 			repetitions: number
 		): IAnimationAction;
 		setEffectiveWeight(weight: number): IAnimationAction;
@@ -3230,7 +3698,8 @@ export namespace I3JS {
 		getRoot(): IObject3D;
 	}
 
-	export interface IAnimationMixer extends O3JS.EventDispatcher {
+	export interface IAnimationMixer extends IEventDispatcher {
+		new (root: IObject3D | IAnimationObjectGroup): this;
 		/**
 		 * @default 0
 		 */
@@ -3244,7 +3713,7 @@ export namespace I3JS {
 		clipAction(
 			clip: IAnimationClip,
 			root?: IObject3D | IAnimationObjectGroup,
-			blendMode?: O3JS.AnimationBlendMode
+			blendMode?: TAnimationBlendMode
 		): IAnimationAction;
 		existingAction(
 			clip: IAnimationClip,
@@ -3262,7 +3731,18 @@ export namespace I3JS {
 		): void;
 	}
 
-	export type EventListener<E, T, U> = (
+	export interface IBaseEvent {
+		type: string;
+	}
+
+	/**
+	 * Event object.
+	 */
+	export interface IEvent extends IBaseEvent {
+		target?: any;
+		[attachment: string]: any;
+	}
+	export type IEventListener<E, T, U> = (
 		event: E & { type: T } & { target: U }
 	) => void;
 
@@ -3272,72 +3752,27 @@ export namespace I3JS {
 		 * @param type The type of event to listen to.
 		 * @param listener The function that gets called when the event is fired.
 		 */
-		addEventListener<T>(type: T, listener: EventListener<E, T, this>): void;
+		addEventListener<T>(type: T, listener: IEventListener<E, T, this>): void;
 
 		/**
 		 * Checks if listener is added to an event type.
 		 * @param type The type of event to listen to.
 		 * @param listener The function that gets called when the event is fired.
 		 */
-		hasEventListener<T>(type: T, listener: EventListener<E, T, this>): boolean;
+		hasEventListener<T>(type: T, listener: IEventListener<E, T, this>): boolean;
 
 		/**
 		 * Removes a listener from an event type.
 		 * @param type The type of the listener that gets removed.
 		 * @param listener The listener function that gets removed.
 		 */
-		removeEventListener<T>(type: T, listener: EventListener<E, T, this>): void;
+		removeEventListener<T>(type: T, listener: IEventListener<E, T, this>): void;
 
 		/**
 		 * Fire an event type.
 		 * @param type The type of event that gets fired.
 		 */
 		dispatchEvent(event: E): void;
-	}
-
-	export interface IMaterialParameters {
-		alphaTest?: number | undefined;
-		alphaToCoverage?: boolean | undefined;
-		blendDst?: O3JS.BlendingDstFactor | undefined;
-		blendDstAlpha?: number | undefined;
-		blendEquation?: O3JS.BlendingEquation | undefined;
-		blendEquationAlpha?: number | undefined;
-		blending?: O3JS.Blending | undefined;
-		blendSrc?: O3JS.BlendingSrcFactor | O3JS.BlendingDstFactor | undefined;
-		blendSrcAlpha?: number | undefined;
-		clipIntersection?: boolean | undefined;
-		clippingPlanes?: IPlane[] | undefined;
-		clipShadows?: boolean | undefined;
-		colorWrite?: boolean | undefined;
-		defines?: any;
-		depthFunc?: O3JS.DepthModes | undefined;
-		depthTest?: boolean | undefined;
-		depthWrite?: boolean | undefined;
-		fog?: boolean | undefined;
-		name?: string | undefined;
-		opacity?: number | undefined;
-		polygonOffset?: boolean | undefined;
-		polygonOffsetFactor?: number | undefined;
-		polygonOffsetUnits?: number | undefined;
-		precision?: 'highp' | 'mediump' | 'lowp' | null | undefined;
-		premultipliedAlpha?: boolean | undefined;
-		dithering?: boolean | undefined;
-		side?: O3JS.Side | undefined;
-		shadowSide?: O3JS.Side | undefined;
-		toneMapped?: boolean | undefined;
-		transparent?: boolean | undefined;
-		vertexColors?: boolean | undefined;
-		visible?: boolean | undefined;
-		format?: O3JS.PixelFormat | undefined;
-		stencilWrite?: boolean | undefined;
-		stencilFunc?: O3JS.StencilFunc | undefined;
-		stencilRef?: number | undefined;
-		stencilWriteMask?: number | undefined;
-		stencilFuncMask?: number | undefined;
-		stencilFail?: O3JS.StencilOp | undefined;
-		stencilZFail?: O3JS.StencilOp | undefined;
-		stencilZPass?: O3JS.StencilOp | undefined;
-		userData?: any;
 	}
 
 	export interface IUniform<TValue = any> {
@@ -3350,11 +3785,56 @@ export namespace I3JS {
 		fragmentShader: string;
 	}
 
+	export interface IMaterialParameters {
+		alphaTest?: number | undefined;
+		alphaToCoverage?: boolean | undefined;
+		blendDst?: TBlendingDstFactor | undefined;
+		blendDstAlpha?: number | undefined;
+		blendEquation?: TBlendingEquation | undefined;
+		blendEquationAlpha?: number | undefined;
+		blending?: TBlending | undefined;
+		blendSrc?: TBlendingSrcFactor | TBlendingDstFactor | undefined;
+		blendSrcAlpha?: number | undefined;
+		clipIntersection?: boolean | undefined;
+		clippingPlanes?: IPlane[] | undefined;
+		clipShadows?: boolean | undefined;
+		colorWrite?: boolean | undefined;
+		defines?: any;
+		depthFunc?: TDepthModes | undefined;
+		depthTest?: boolean | undefined;
+		depthWrite?: boolean | undefined;
+		fog?: boolean | undefined;
+		name?: string | undefined;
+		opacity?: number | undefined;
+		polygonOffset?: boolean | undefined;
+		polygonOffsetFactor?: number | undefined;
+		polygonOffsetUnits?: number | undefined;
+		precision?: 'highp' | 'mediump' | 'lowp' | null | undefined;
+		premultipliedAlpha?: boolean | undefined;
+		dithering?: boolean | undefined;
+		side?: TSide | undefined;
+		shadowSide?: TSide | undefined;
+		toneMapped?: boolean | undefined;
+		transparent?: boolean | undefined;
+		vertexColors?: boolean | undefined;
+		visible?: boolean | undefined;
+		format?: TPixelFormat | undefined;
+		stencilWrite?: boolean | undefined;
+		stencilFunc?: TStencilFunc | undefined;
+		stencilRef?: number | undefined;
+		stencilWriteMask?: number | undefined;
+		stencilFuncMask?: number | undefined;
+		stencilFail?: TStencilOp | undefined;
+		stencilZFail?: TStencilOp | undefined;
+		stencilZPass?: TStencilOp | undefined;
+		userData?: any;
+	}
+
 	/**
 	 * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
 	 */
-	export interface IMaterial extends O3JS.EventDispatcher {
-		new (): this;
+	export interface IMaterial extends IEventDispatcher {
+		new (parameters?: IMaterialParameters): this;
 
 		/**
 		 * Sets the alpha value to be used when running an alpha test. Default is 0.
@@ -3370,9 +3850,9 @@ export namespace I3JS {
 
 		/**
 		 * Blending destination. It's one of the blending mode constants defined in Three.js. Default is {@link OneMinusSrcAlphaFactor}.
-		 * @default O3JS.OneMinusSrcAlphaFactor
+		 * @default THREE.OneMinusSrcAlphaFactor
 		 */
-		blendDst: O3JS.BlendingDstFactor;
+		blendDst: TBlendingDstFactor;
 
 		/**
 		 * The tranparency of the .blendDst. Default is null.
@@ -3382,9 +3862,9 @@ export namespace I3JS {
 
 		/**
 		 * Blending equation to use when applying blending. It's one of the constants defined in Three.js. Default is {@link AddEquation}.
-		 * @default O3JS.AddEquation
+		 * @default THREE.AddEquation
 		 */
-		blendEquation: O3JS.BlendingEquation;
+		blendEquation: TBlendingEquation;
 
 		/**
 		 * The tranparency of the .blendEquation. Default is null.
@@ -3394,15 +3874,15 @@ export namespace I3JS {
 
 		/**
 		 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
-		 * @default O3JS.NormalBlending
+		 * @default THREE.NormalBlending
 		 */
-		blending: O3JS.Blending;
+		blending: TBlending;
 
 		/**
 		 * Blending source. It's one of the blending mode constants defined in Three.js. Default is {@link SrcAlphaFactor}.
-		 * @default O3JS.SrcAlphaFactor
+		 * @default THREE.SrcAlphaFactor
 		 */
-		blendSrc: O3JS.BlendingSrcFactor | O3JS.BlendingDstFactor;
+		blendSrc: TBlendingSrcFactor | TBlendingDstFactor;
 
 		/**
 		 * The tranparency of the .blendSrc. Default is null.
@@ -3446,9 +3926,9 @@ export namespace I3JS {
 
 		/**
 		 * Which depth function to use. Default is {@link LessEqualDepth}. See the depth mode constants for all possible values.
-		 * @default O3JS.LessEqualDepth
+		 * @default THREE.LessEqualDepth
 		 */
-		depthFunc: O3JS.DepthModes;
+		depthFunc: TDepthModes;
 
 		/**
 		 * Whether to have depth test enabled when rendering this material. Default is true.
@@ -3471,9 +3951,9 @@ export namespace I3JS {
 
 		/**
 		 * When this property is set to O3JS.RGBFormat, the material is considered to be opaque and alpha values are ignored.
-		 * @default O3JS.RGBAFormat
+		 * @default THREE.RGBAFormat
 		 */
-		format: O3JS.PixelFormat;
+		format: TPixelFormat;
 
 		/**
 		 * Unique number of this material instance.
@@ -3488,9 +3968,9 @@ export namespace I3JS {
 
 		/**
 		 * The stencil comparison function to use. Default is {@link AlwaysStencilFunc}. See stencil operation constants for all possible values.
-		 * @default O3JS.AlwaysStencilFunc
+		 * @default THREE.AlwaysStencilFunc
 		 */
-		stencilFunc: O3JS.StencilFunc;
+		stencilFunc: TStencilFunc;
 
 		/**
 		 * The value to use when performing stencil comparisons or stencil operations. Default is *0*.
@@ -3512,25 +3992,25 @@ export namespace I3JS {
 
 		/**
 		 * Which stencil operation to perform when the comparison function returns false. Default is {@link KeepStencilOp}. See the stencil operation constants for all possible values.
-		 * @default O3JS.KeepStencilOp
+		 * @default THREE.KeepStencilOp
 		 */
-		stencilFail: O3JS.StencilOp;
+		stencilFail: TStencilOp;
 
 		/**
 		 * Which stencil operation to perform when the comparison function returns true but the depth test fails.
 		 * Default is {@link KeepStencilOp}.
 		 * See the stencil operation constants for all possible values.
-		 * @default O3JS.KeepStencilOp
+		 * @default THREE.KeepStencilOp
 		 */
-		stencilZFail: O3JS.StencilOp;
+		stencilZFail: TStencilOp;
 
 		/**
 		 * Which stencil operation to perform when the comparison function returns true and the depth test passes.
 		 * Default is {@link KeepStencilOp}.
 		 * See the stencil operation constants for all possible values.
-		 * @default O3JS.KeepStencilOp
+		 * @default THREE.KeepStencilOp
 		 */
-		stencilZPass: O3JS.StencilOp;
+		stencilZPass: TStencilOp;
 
 		/**
 		 * Used to check whether this or derived classes are materials. Default is true.
@@ -3596,16 +4076,16 @@ export namespace I3JS {
 		/**
 		 * Defines which of the face sides will be rendered - front, back or both.
 		 * Default is O3JS.FrontSide. Other options are O3JS.BackSide and O3JS.DoubleSide.
-		 * @default O3JS.FrontSide
+		 * @default THREE.FrontSide
 		 */
-		side: O3JS.Side;
+		side: TSide;
 
 		/**
 		 * Defines which of the face sides will cast shadows. Default is *null*.
 		 * If *null*, the value is opposite that of side, above.
 		 * @default null
 		 */
-		shadowSide: O3JS.Side | null;
+		shadowSide: TSide | null;
 
 		/**
 		 * Defines whether this material is tone mapped according to the renderer's toneMapping setting.
@@ -3669,7 +4149,7 @@ export namespace I3JS {
 		copy(material: IMaterial): this;
 
 		/**
-		 * This disposes the material. Textures of a material don't get disposed. These needs to be disposed by {@link O3JS.Texture}.
+		 * This disposes the material. Textures of a material don't get disposed. These needs to be disposed by {@line THREE.Texture}.
 		 */
 		dispose(): void;
 
@@ -3691,7 +4171,7 @@ export namespace I3JS {
 		 * Sets the properties based on the values.
 		 * @param values A container with parameters.
 		 */
-		setValues(values: O3JS.MaterialParameters): void;
+		setValues(values: IMaterialParameters): void;
 
 		/**
 		 * Convert the material to three.js JSON format.
@@ -3700,17 +4180,24 @@ export namespace I3JS {
 		toJSON(meta?: any): any;
 	}
 
-	export interface ISpriteMaterial extends IMaterial {
+	export interface ISpriteMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+		map?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		rotation?: number | undefined;
+		sizeAttenuation?: boolean | undefined;
+	}
 
-		new(parameters?: O3JS.SpriteMaterialParameters):this;
-		
+	export interface ISpriteMaterial extends IMaterial {
+		new (parameters?: ISpriteMaterialParameters): this;
+
 		/**
 		 * @default 'SpriteMaterial'
 		 */
 		type: string;
 
 		/**
-		 * @default new O3JS.Color( 0xffffff )
+		 * @default new THREE.Color( 0xffffff )
 		 */
 		color: IColor;
 
@@ -3741,14 +4228,20 @@ export namespace I3JS {
 
 		readonly isSpriteMaterial: true;
 
-		setValues(parameters: O3JS.SpriteMaterialParameters): void;
+		setValues(parameters: ISpriteMaterialParameters): void;
 		copy(source: ISpriteMaterial): this;
 	}
 
-	export interface ILineBasicMaterial extends IMaterial {
+	export interface ILineBasicMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+		linewidth?: number | undefined;
+		linecap?: string | undefined;
+		linejoin?: string | undefined;
+	}
 
-		new(parameters?: O3JS.LineBasicMaterialParameters):this;
-		
+	export interface ILineBasicMaterial extends IMaterial {
+		new (parameters?: ILineBasicMaterialParameters): this;
+
 		/**
 		 * @default 'LineBasicMaterial'
 		 */
@@ -3774,12 +4267,18 @@ export namespace I3JS {
 		 */
 		linejoin: string;
 
-		setValues(parameters: O3JS.LineBasicMaterialParameters): void;
+		setValues(parameters: ILineBasicMaterialParameters): void;
+	}
+
+	export interface ILineDashedMaterialParameters
+		extends ILineBasicMaterialParameters {
+		scale?: number | undefined;
+		dashSize?: number | undefined;
+		gapSize?: number | undefined;
 	}
 
 	export interface ILineDashedMaterial extends ILineBasicMaterial {
-
-		new(parameters?: O3JS.LineDashedMaterialParameters):this;
+		new (parameters?: ILineDashedMaterialParameters): this;
 
 		/**
 		 * @default 'LineDashedMaterial'
@@ -3800,14 +4299,34 @@ export namespace I3JS {
 		 * @default 1
 		 */
 		gapSize: number;
+
 		readonly isLineDashedMaterial: true;
 
-		setValues(parameters: O3JS.LineDashedMaterialParameters): void;
+		setValues(parameters: ILineDashedMaterialParameters): void;
+	}
+
+	export interface IMeshBasicMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+		opacity?: number | undefined;
+		map?: ITexture | null | undefined;
+		lightMap?: ITexture | null;
+		lightMapIntensity?: number | undefined;
+		aoMap?: ITexture | null | undefined;
+		aoMapIntensity?: number | undefined;
+		specularMap?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		envMap?: ITexture | null | undefined;
+		combine?: TCombine | undefined;
+		reflectivity?: number | undefined;
+		refractionRatio?: number | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
+		wireframeLinecap?: string | undefined;
+		wireframeLinejoin?: string | undefined;
 	}
 
 	export interface IMeshBasicMaterial extends IMaterial {
-
-		new(parameters?: O3JS.MeshBasicMaterialParameters):this;
+		new (parameters?: IMeshBasicMaterialParameters): this;
 
 		/**
 		 * @default 'MeshBasicMaterial'
@@ -3815,7 +4334,7 @@ export namespace I3JS {
 		type: string;
 
 		/**
-		 * @default new O3JS.Color( 0xffffff )
+		 * @default new THREE.Color( 0xffffff )
 		 */
 		color: IColor;
 
@@ -3860,9 +4379,9 @@ export namespace I3JS {
 		envMap: ITexture | null;
 
 		/**
-		 * @default O3JS.MultiplyOperation
+		 * @default THREE.MultiplyOperation
 		 */
-		combine: O3JS.Combine;
+		combine: TCombine;
 
 		/**
 		 * @default 1
@@ -3894,13 +4413,23 @@ export namespace I3JS {
 		 */
 		wireframeLinejoin: string;
 
-		setValues(parameters: O3JS.MeshBasicMaterialParameters): void;
+		setValues(parameters: IMeshBasicMaterialParameters): void;
+	}
+
+	export interface IMeshDepthMaterialParameters extends IMaterialParameters {
+		map?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		depthPacking?: TDepthPackingStrategies | undefined;
+		displacementMap?: ITexture | null | undefined;
+		displacementScale?: number | undefined;
+		displacementBias?: number | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
 	}
 
 	export interface IMeshDepthMaterial extends IMaterial {
+		new (parameters?: IMeshDepthMaterialParameters): this;
 
-		new(parameters?: O3JS.MeshDepthMaterialParameters):this;
-		
 		/**
 		 * @default 'MeshDepthMaterial'
 		 */
@@ -3917,9 +4446,9 @@ export namespace I3JS {
 		alphaMap: ITexture | null;
 
 		/**
-		 * @default O3JS.BasicDepthPacking
+		 * @default THREE.BasicDepthPacking
 		 */
-		depthPacking: O3JS.DepthPackingStrategies;
+		depthPacking: TDepthPackingStrategies;
 
 		/**
 		 * @default null
@@ -3951,12 +4480,22 @@ export namespace I3JS {
 		 */
 		fog: boolean;
 
-		setValues(parameters: O3JS.MeshDepthMaterialParameters): void;
+		setValues(parameters: IMeshDepthMaterialParameters): void;
+	}
+
+	export interface IMeshDistanceMaterialParameters extends IMaterialParameters {
+		map?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		displacementMap?: ITexture | null | undefined;
+		displacementScale?: number | undefined;
+		displacementBias?: number | undefined;
+		farDistance?: number | undefined;
+		nearDistance?: number | undefined;
+		referencePosition?: IVector3 | undefined;
 	}
 
 	export interface IMeshDistanceMaterial extends IMaterial {
-
-		new(parameters?: O3JS.MeshDistanceMaterialParameters):this;
+		new (parameters?: IMeshDistanceMaterialParameters): this;
 
 		/**
 		 * @default 'MeshDistanceMaterial'
@@ -3999,7 +4538,7 @@ export namespace I3JS {
 		nearDistance: number;
 
 		/**
-		 * @default new O3JS.Vector3()
+		 * @default new THREE.Vector3()
 		 */
 		referencePosition: IVector3;
 
@@ -4008,25 +4547,46 @@ export namespace I3JS {
 		 */
 		fog: boolean;
 
-		setValues(parameters: O3JS.MeshDistanceMaterialParameters): void;
+		setValues(parameters: IMeshDistanceMaterialParameters): void;
+	}
+
+	export interface IMeshLambertMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+		emissive?: TColorRepresentation | undefined;
+		emissiveIntensity?: number | undefined;
+		emissiveMap?: ITexture | null | undefined;
+		map?: ITexture | null | undefined;
+		lightMap?: ITexture | null | undefined;
+		lightMapIntensity?: number | undefined;
+		aoMap?: ITexture | null | undefined;
+		aoMapIntensity?: number | undefined;
+		specularMap?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		envMap?: ITexture | null | undefined;
+		combine?: TCombine | undefined;
+		reflectivity?: number | undefined;
+		refractionRatio?: number | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
+		wireframeLinecap?: string | undefined;
+		wireframeLinejoin?: string | undefined;
 	}
 
 	export interface IMeshLambertMaterial extends IMaterial {
+		new (parameters?: IMeshLambertMaterialParameters): this;
 
-		new(parameters?: O3JS.MeshLambertMaterialParameters):this;
-		
 		/**
 		 * @default 'MeshLambertMaterial'
 		 */
 		type: string;
 
 		/**
-		 * @default new O3JS.Color( 0xffffff )
+		 * @default new THREE.Color( 0xffffff )
 		 */
 		color: IColor;
 
 		/**
-		 * @default new O3JS.Color( 0x000000 )
+		 * @default new THREE.Color( 0x000000 )
 		 */
 		emissive: IColor;
 
@@ -4081,9 +4641,9 @@ export namespace I3JS {
 		envMap: ITexture | null;
 
 		/**
-		 * @default O3JS.MultiplyOperation
+		 * @default THREE.MultiplyOperation
 		 */
-		combine: O3JS.Combine;
+		combine: TCombine;
 
 		/**
 		 * @default 1
@@ -4115,13 +4675,28 @@ export namespace I3JS {
 		 */
 		wireframeLinejoin: string;
 
-		setValues(parameters: O3JS.MeshLambertMaterialParameters): void;
+		setValues(parameters: IMeshLambertMaterialParameters): void;
+	}
+
+	export interface IMeshMatcapMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+		matcap?: ITexture | null | undefined;
+		map?: ITexture | null | undefined;
+		bumpMap?: ITexture | null | undefined;
+		bumpScale?: number | undefined;
+		normalMap?: ITexture | null | undefined;
+		normalMapType?: TNormalMapTypes | undefined;
+		normalScale?: IVector2 | undefined;
+		displacementMap?: ITexture | null | undefined;
+		displacementScale?: number | undefined;
+		displacementBias?: number | undefined;
+		alphaMap?: ITexture | null | undefined;
+		flatShading?: boolean | undefined;
 	}
 
 	export interface IMeshMatcapMaterial extends IMaterial {
+		new (parameters?: IMeshMatcapMaterialParameters): this;
 
-		new(parameters?: O3JS.MeshMatcapMaterialParameters):this;
-		
 		/**
 		 * @default 'MeshMatcapMaterial'
 		 */
@@ -4133,7 +4708,7 @@ export namespace I3JS {
 		defines: { [key: string]: any };
 
 		/**
-		 * @default new O3JS.Color( 0xffffff )
+		 * @default new THREE.Color( 0xffffff )
 		 */
 		color: IColor;
 
@@ -4163,9 +4738,9 @@ export namespace I3JS {
 		normalMap: ITexture | null;
 
 		/**
-		 * @default O3JS.TangentSpaceNormalMap
+		 * @default THREE.TangentSpaceNormalMap
 		 */
-		normalMapType: O3JS.NormalMapTypes;
+		normalMapType: TNormalMapTypes;
 
 		/**
 		 * @default new Vector2( 1, 1 )
@@ -4198,12 +4773,25 @@ export namespace I3JS {
 		 */
 		flatShading: boolean;
 
-		setValues(parameters: O3JS.MeshMatcapMaterialParameters): void;
+		setValues(parameters: IMeshMatcapMaterialParameters): void;
+	}
+
+	export interface IMeshNormalMaterialParameters extends IMaterialParameters {
+		bumpMap?: ITexture | null | undefined;
+		bumpScale?: number | undefined;
+		normalMap?: ITexture | null | undefined;
+		normalMapType?: TNormalMapTypes | undefined;
+		normalScale?: IVector2 | undefined;
+		displacementMap?: ITexture | null | undefined;
+		displacementScale?: number | undefined;
+		displacementBias?: number | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
+		flatShading?: boolean | undefined;
 	}
 
 	export interface IMeshNormalMaterial extends IMaterial {
-
-		new(parameters?: O3JS.MeshNormalMaterialParameters):this;
+		new (parameters?: IMeshNormalMaterialParameters): this;
 
 		/**
 		 * @default 'MeshNormalMaterial'
@@ -4226,12 +4814,12 @@ export namespace I3JS {
 		normalMap: ITexture | null;
 
 		/**
-		 * @default O3JS.TangentSpaceNormalMap
+		 * @default THREE.TangentSpaceNormalMap
 		 */
-		normalMapType: O3JS.NormalMapTypes;
+		normalMapType: TNormalMapTypes;
 
 		/**
-		 * @default new O3JS.Vector2( 1, 1 )
+		 * @default new THREE.Vector2( 1, 1 )
 		 */
 		normalScale: IVector2;
 
@@ -4266,12 +4854,46 @@ export namespace I3JS {
 		 */
 		flatShading: boolean;
 
-		setValues(parameters: O3JS.MeshNormalMaterialParameters): void;
+		setValues(parameters: IMeshNormalMaterialParameters): void;
+	}
+
+	export interface IMeshPhongMaterialParameters extends IMaterialParameters {
+		/** geometry color in hexadecimal. Default is 0xffffff. */
+		color?: TColorRepresentation | undefined;
+		specular?: TColorRepresentation | undefined;
+		shininess?: number | undefined;
+		opacity?: number | undefined;
+		map?: ITexture | null | undefined;
+		lightMap?: ITexture | null | undefined;
+		lightMapIntensity?: number | undefined;
+		aoMap?: ITexture | null | undefined;
+		aoMapIntensity?: number | undefined;
+		emissive?: TColorRepresentation | undefined;
+		emissiveIntensity?: number | undefined;
+		emissiveMap?: ITexture | null | undefined;
+		bumpMap?: ITexture | null | undefined;
+		bumpScale?: number | undefined;
+		normalMap?: ITexture | null | undefined;
+		normalMapType?: TNormalMapTypes | undefined;
+		normalScale?: IVector2 | undefined;
+		displacementMap?: ITexture | null | undefined;
+		displacementScale?: number | undefined;
+		displacementBias?: number | undefined;
+		specularMap?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		envMap?: ITexture | null | undefined;
+		combine?: TCombine | undefined;
+		reflectivity?: number | undefined;
+		refractionRatio?: number | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
+		wireframeLinecap?: string | undefined;
+		wireframeLinejoin?: string | undefined;
+		flatShading?: boolean | undefined;
 	}
 
 	export interface IMeshPhongMaterial extends IMaterial {
-
-		new(parameters?: O3JS.MeshPhongMaterialParameters):this;
+		new (parameters?: IMeshPhongMaterialParameters): this;
 
 		/**
 		 * @default 'MeshNormalMaterial'
@@ -4279,12 +4901,12 @@ export namespace I3JS {
 		type: string;
 
 		/**
-		 * @default new O3JS.Color( 0xffffff )
+		 * @default new THREE.Color( 0xffffff )
 		 */
 		color: IColor;
 
 		/**
-		 * @default new O3JS.Color( 0x111111 )
+		 * @default new THREE.Color( 0x111111 )
 		 */
 		specular: IColor;
 
@@ -4319,7 +4941,7 @@ export namespace I3JS {
 		aoMapIntensity: number;
 
 		/**
-		 * @default new O3JS.Color( 0x000000 )
+		 * @default new THREE.Color( 0x000000 )
 		 */
 		emissive: IColor;
 
@@ -4349,9 +4971,9 @@ export namespace I3JS {
 		normalMap: ITexture | null;
 
 		/**
-		 * @default O3JS.TangentSpaceNormalMap
+		 * @default THREE.TangentSpaceNormalMap
 		 */
-		normalMapType: O3JS.NormalMapTypes;
+		normalMapType: TNormalMapTypes;
 
 		/**
 		 * @default new Vector2( 1, 1 )
@@ -4389,9 +5011,9 @@ export namespace I3JS {
 		envMap: ITexture | null;
 
 		/**
-		 * @default O3JS.MultiplyOperation
+		 * @default THREE.MultiplyOperation
 		 */
-		combine: O3JS.Combine;
+		combine: TCombine;
 
 		/**
 		 * @default 1
@@ -4434,10 +5056,75 @@ export namespace I3JS {
 		 */
 		metal: boolean;
 
-		setValues(parameters: O3JS.MeshPhongMaterialParameters): void;
+		setValues(parameters: IMeshPhongMaterialParameters): void;
+	}
+
+	export interface IMeshStandardMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+		roughness?: number | undefined;
+		metalness?: number | undefined;
+		map?: ITexture | null | undefined;
+		lightMap?: ITexture | null | undefined;
+		lightMapIntensity?: number | undefined;
+		aoMap?: ITexture | null | undefined;
+		aoMapIntensity?: number | undefined;
+		emissive?: TColorRepresentation | undefined;
+		emissiveIntensity?: number | undefined;
+		emissiveMap?: ITexture | null | undefined;
+		bumpMap?: ITexture | null | undefined;
+		bumpScale?: number | undefined;
+		normalMap?: ITexture | null | undefined;
+		normalMapType?: TNormalMapTypes | undefined;
+		normalScale?: IVector2 | undefined;
+		displacementMap?: ITexture | null | undefined;
+		displacementScale?: number | undefined;
+		displacementBias?: number | undefined;
+		roughnessMap?: ITexture | null | undefined;
+		metalnessMap?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		envMap?: ITexture | null | undefined;
+		envMapIntensity?: number | undefined;
+		refractionRatio?: number | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
+
+		flatShading?: boolean | undefined;
+	}
+
+	export interface IMeshStandardMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+		roughness?: number | undefined;
+		metalness?: number | undefined;
+		map?: ITexture | null | undefined;
+		lightMap?: ITexture | null | undefined;
+		lightMapIntensity?: number | undefined;
+		aoMap?: ITexture | null | undefined;
+		aoMapIntensity?: number | undefined;
+		emissive?: TColorRepresentation | undefined;
+		emissiveIntensity?: number | undefined;
+		emissiveMap?: ITexture | null | undefined;
+		bumpMap?: ITexture | null | undefined;
+		bumpScale?: number | undefined;
+		normalMap?: ITexture | null | undefined;
+		normalMapType?: TNormalMapTypes | undefined;
+		normalScale?: IVector2 | undefined;
+		displacementMap?: ITexture | null | undefined;
+		displacementScale?: number | undefined;
+		displacementBias?: number | undefined;
+		roughnessMap?: ITexture | null | undefined;
+		metalnessMap?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		envMap?: ITexture | null | undefined;
+		envMapIntensity?: number | undefined;
+		refractionRatio?: number | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
+
+		flatShading?: boolean | undefined;
 	}
 
 	export interface IMeshStandardMaterial extends IMaterial {
+		new (parameters?: IMeshStandardMaterialParameters): this;
 		/**
 		 * @default 'MeshStandardMaterial'
 		 */
@@ -4449,7 +5136,7 @@ export namespace I3JS {
 		defines: { [key: string]: any };
 
 		/**
-		 * @default new O3JS.Color( 0xffffff )
+		 * @default new THREE.Color( 0xffffff )
 		 */
 		color: IColor;
 
@@ -4489,7 +5176,7 @@ export namespace I3JS {
 		aoMapIntensity: number;
 
 		/**
-		 * @default new O3JS.Color( 0x000000 )
+		 * @default new THREE.Color( 0x000000 )
 		 */
 		emissive: IColor;
 
@@ -4519,12 +5206,12 @@ export namespace I3JS {
 		normalMap: ITexture | null;
 
 		/**
-		 * @default O3JS.TangentSpaceNormalMap
+		 * @default THREE.TangentSpaceNormalMap
 		 */
-		normalMapType: O3JS.NormalMapTypes;
+		normalMapType: TNormalMapTypes;
 
 		/**
-		 * @default new O3JS.Vector2( 1, 1 )
+		 * @default new THREE.Vector2( 1, 1 )
 		 */
 		normalScale: IVector2;
 
@@ -4601,10 +5288,39 @@ export namespace I3JS {
 
 		isMeshStandardMaterial: boolean;
 
-		setValues(parameters: O3JS.MeshStandardMaterialParameters): void;
+		setValues(parameters: IMeshStandardMaterialParameters): void;
+	}
+
+	export interface IMeshPhysicalMaterialParameters
+		extends IMeshStandardMaterialParameters {
+		clearcoat?: number | undefined;
+		clearcoatMap?: ITexture | null | undefined;
+		clearcoatRoughness?: number | undefined;
+		clearcoatRoughnessMap?: ITexture | null | undefined;
+		clearcoatNormalScale?: IVector2 | undefined;
+		clearcoatNormalMap?: ITexture | null | undefined;
+
+		reflectivity?: number | undefined;
+		ior?: number | undefined;
+
+		sheen?: number | undefined;
+		sheenColor?: IColor | undefined;
+		sheenRoughness?: number | undefined;
+
+		transmission?: number | undefined;
+		transmissionMap?: ITexture | null | undefined;
+		attenuationDistance?: number | undefined;
+		attenuationColor?: IColor | undefined;
+
+		specularIntensity?: number | undefined;
+		specularColor?: IColor | undefined;
+		specularIntensityMap?: ITexture | null | undefined;
+		specularColorMap?: ITexture | null | undefined;
 	}
 
 	export interface IMeshPhysicalMaterial extends IMeshStandardMaterial {
+		new (parameters?: IMeshPhysicalMaterialParameters): this;
+
 		/**
 		 * @default 'MeshPhysicalMaterial'
 		 */
@@ -4636,7 +5352,7 @@ export namespace I3JS {
 		clearcoatRoughnessMap: ITexture | null;
 
 		/**
-		 * @default new O3JS.Vector2( 1, 1 )
+		 * @default new THREE.Vector2( 1, 1 )
 		 */
 		clearcoatNormalScale: IVector2;
 
@@ -4731,7 +5447,37 @@ export namespace I3JS {
 		specularColorMap: ITexture | null;
 	}
 
+	export interface IMeshToonMaterialParameters extends IMaterialParameters {
+		/** geometry color in hexadecimal. Default is 0xffffff. */
+		color?: TColorRepresentation | undefined;
+		opacity?: number | undefined;
+		gradientMap?: ITexture | null | undefined;
+		map?: ITexture | null | undefined;
+		lightMap?: ITexture | null | undefined;
+		lightMapIntensity?: number | undefined;
+		aoMap?: ITexture | null | undefined;
+		aoMapIntensity?: number | undefined;
+		emissive?: TColorRepresentation | undefined;
+		emissiveIntensity?: number | undefined;
+		emissiveMap?: ITexture | null | undefined;
+		bumpMap?: ITexture | null | undefined;
+		bumpScale?: number | undefined;
+		normalMap?: ITexture | null | undefined;
+		normalMapType?: TNormalMapTypes | undefined;
+		normalScale?: IVector2 | undefined;
+		displacementMap?: ITexture | null | undefined;
+		displacementScale?: number | undefined;
+		displacementBias?: number | undefined;
+		alphaMap?: ITexture | null | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
+		wireframeLinecap?: string | undefined;
+		wireframeLinejoin?: string | undefined;
+	}
+
 	export interface IMeshToonMaterial extends IMaterial {
+		new (parameters?: IMeshToonMaterialParameters): this;
+
 		/**
 		 * @default 'MeshToonMaterial'
 		 */
@@ -4743,7 +5489,7 @@ export namespace I3JS {
 		defines: { [key: string]: any };
 
 		/**
-		 * @default new O3JS.Color( 0xffffff )
+		 * @default new THREE.Color( 0xffffff )
 		 */
 		color: IColor;
 
@@ -4778,7 +5524,7 @@ export namespace I3JS {
 		aoMapIntensity: number;
 
 		/**
-		 * @default new O3JS.Color( 0x000000 )
+		 * @default new THREE.Color( 0x000000 )
 		 */
 		emissive: IColor;
 
@@ -4808,12 +5554,12 @@ export namespace I3JS {
 		normalMap: ITexture | null;
 
 		/**
-		 * @default O3JS.TangentSpaceNormalMap
+		 * @default THREE.TangentSpaceNormalMap
 		 */
-		normalMapType: O3JS.NormalMapTypes;
+		normalMapType: TNormalMapTypes;
 
 		/**
-		 * @default new O3JS.Vector2( 1, 1 )
+		 * @default new THREE.Vector2( 1, 1 )
 		 */
 		normalScale: IVector2;
 
@@ -4857,17 +5603,26 @@ export namespace I3JS {
 		 */
 		wireframeLinejoin: string;
 
-		setValues(parameters: O3JS.MeshToonMaterialParameters): void;
+		setValues(parameters: IMeshToonMaterialParameters): void;
+	}
+
+	export interface IPointsMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+		map?: ITexture | null | undefined;
+		alphaMap?: ITexture | null | undefined;
+		size?: number | undefined;
+		sizeAttenuation?: boolean | undefined;
 	}
 
 	export interface IPointsMaterial extends IMaterial {
+		new (parameters?: IPointsMaterialParameters): this;
 		/**
 		 * @default 'PointsMaterial'
 		 */
 		type: string;
 
 		/**
-		 * @default new O3JS.Color( 0xffffff )
+		 * @default new THREE.Color( 0xffffff )
 		 */
 		color: IColor;
 
@@ -4891,10 +5646,33 @@ export namespace I3JS {
 		 */
 		sizeAttenuation: boolean;
 
-		setValues(parameters: O3JS.PointsMaterialParameters): void;
+		setValues(parameters: IPointsMaterialParameters): void;
+	}
+
+	export interface IShaderMaterialParameters extends IMaterialParameters {
+		uniforms?: { [uniform: string]: IUniform } | undefined;
+		vertexShader?: string | undefined;
+		fragmentShader?: string | undefined;
+		linewidth?: number | undefined;
+		wireframe?: boolean | undefined;
+		wireframeLinewidth?: number | undefined;
+		lights?: boolean | undefined;
+		clipping?: boolean | undefined;
+
+		extensions?:
+			| {
+					derivatives?: boolean | undefined;
+					fragDepth?: boolean | undefined;
+					drawBuffers?: boolean | undefined;
+					shaderTextureLOD?: boolean | undefined;
+			  }
+			| undefined;
+		glslVersion?: TGLSLVersion | undefined;
 	}
 
 	export interface IShaderMaterial extends IMaterial {
+		new (parameters?: IShaderMaterialParameters): this;
+
 		/**
 		 * @default 'ShaderMaterial'
 		 */
@@ -4975,24 +5753,30 @@ export namespace I3JS {
 		/**
 		 * @default null
 		 */
-		glslVersion: O3JS.GLSLVersion | null;
+		glslVersion: TGLSLVersion | null;
 
 		isShaderMaterial: boolean;
 
-		setValues(parameters: O3JS.ShaderMaterialParameters): void;
+		setValues(parameters: IShaderMaterialParameters): void;
 		toJSON(meta: any): any;
 	}
 
 	export interface IRawShaderMaterial extends IShaderMaterial {}
 
+	export interface IShadowMaterialParameters extends IMaterialParameters {
+		color?: TColorRepresentation | undefined;
+	}
+
 	export interface IShadowMaterial extends IMaterial {
+		new (parameters?: IShadowMaterialParameters): this;
+
 		/**
 		 * @default 'ShadowMaterial'
 		 */
 		type: string;
 
 		/**
-		 * @default new O3JS.Color( 0x000000 )
+		 * @default new THREE.Color( 0x000000 )
 		 */
 		color: IColor;
 
@@ -5004,7 +5788,6 @@ export namespace I3JS {
 
 	export interface IRenderer {
 		domElement: HTMLCanvasElement;
-
 		render(scene: IObject3D, camera: ICamera): void;
 		setSize(width: number, height: number, updateStyle?: boolean): void;
 	}
@@ -5085,21 +5868,21 @@ export namespace I3JS {
 	}
 
 	export interface IWebGLRenderTargetOptions {
-		wrapS?: O3JS.Wrapping | undefined;
-		wrapT?: O3JS.Wrapping | undefined;
-		magFilter?: O3JS.TextureFilter | undefined;
-		minFilter?: O3JS.TextureFilter | undefined;
+		wrapS?: TWrapping | undefined;
+		wrapT?: TWrapping | undefined;
+		magFilter?: TTextureFilter | undefined;
+		minFilter?: TTextureFilter | undefined;
 		format?: number | undefined; // RGBAFormat;
-		type?: O3JS.TextureDataType | undefined; // UnsignedByteType;
+		type?: TTextureDataType | undefined; // UnsignedByteType;
 		anisotropy?: number | undefined; // 1;
 		depthBuffer?: boolean | undefined; // true;
 		stencilBuffer?: boolean | undefined; // false;
 		generateMipmaps?: boolean | undefined; // true;
-		depthTexture?: O3JS.DepthTexture | undefined;
-		encoding?: O3JS.TextureEncoding | undefined;
+		depthTexture?: IDepthTexture | undefined;
+		encoding?: TTextureEncoding | undefined;
 	}
 
-	export interface ITexture extends O3JS.EventDispatcher {
+	export interface ITexture extends IEventDispatcher {
 		/**
 		 * @param [image]
 		 * @param [mapping=THREE.Texture.DEFAULT_MAPPING]
@@ -5114,15 +5897,15 @@ export namespace I3JS {
 		 */
 		new (
 			image?: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
-			mapping?: O3JS.Mapping,
-			wrapS?: O3JS.Wrapping,
-			wrapT?: O3JS.Wrapping,
-			magFilter?: O3JS.TextureFilter,
-			minFilter?: O3JS.TextureFilter,
-			format?: O3JS.PixelFormat,
-			type?: O3JS.TextureDataType,
+			mapping?: TMapping,
+			wrapS?: TWrapping,
+			wrapT?: TWrapping,
+			magFilter?: TTextureFilter,
+			minFilter?: TTextureFilter,
+			format?: TPixelFormat,
+			type?: TTextureDataType,
 			anisotropy?: number,
-			encoding?: O3JS.TextureEncoding
+			encoding?: TTextureEncoding
 		): this;
 
 		id: number;
@@ -5135,7 +5918,7 @@ export namespace I3JS {
 		sourceFile: string;
 
 		/**
-		 * @default O3JS.Texture.DEFAULT_IMAGE
+		 * @default THREE.Texture.DEFAULT_IMAGE
 		 */
 		image: any; // HTMLImageElement or ImageData or { width: number, height: number } in some children;
 
@@ -5145,29 +5928,29 @@ export namespace I3JS {
 		mipmaps: any[]; // ImageData[] for 2D textures and CubeTexture[] for cube textures;
 
 		/**
-		 * @default O3JS.Texture.DEFAULT_MAPPING
+		 * @default THREE.Texture.DEFAULT_MAPPING
 		 */
-		mapping: O3JS.Mapping;
+		mapping: TMapping;
 
 		/**
-		 * @default O3JS.ClampToEdgeWrapping
+		 * @default THREE.ClampToEdgeWrapping
 		 */
-		wrapS: O3JS.Wrapping;
+		wrapS: TWrapping;
 
 		/**
-		 * @default O3JS.ClampToEdgeWrapping
+		 * @default THREE.ClampToEdgeWrapping
 		 */
-		wrapT: O3JS.Wrapping;
+		wrapT: TWrapping;
 
 		/**
-		 * @default O3JS.LinearFilter
+		 * @default THREE.LinearFilter
 		 */
-		magFilter: O3JS.TextureFilter;
+		magFilter: TTextureFilter;
 
 		/**
-		 * @default O3JS.LinearMipmapLinearFilter
+		 * @default THREE.LinearMipmapLinearFilter
 		 */
-		minFilter: O3JS.TextureFilter;
+		minFilter: TTextureFilter;
 
 		/**
 		 * @default 1
@@ -5175,16 +5958,16 @@ export namespace I3JS {
 		anisotropy: number;
 
 		/**
-		 * @default O3JS.RGBAFormat
+		 * @default THREE.RGBAFormat
 		 */
-		format: O3JS.PixelFormat;
+		format: TPixelFormat;
 
-		internalFormat: O3JS.PixelFormatGPU | null;
+		internalFormat: TPixelFormatGPU | null;
 
 		/**
-		 * @default O3JS.UnsignedByteType
+		 * @default THREE.UnsignedByteType
 		 */
-		type: O3JS.TextureDataType;
+		type: TTextureDataType;
 
 		/**
 		 * @default new IMatrix3()
@@ -5237,9 +6020,9 @@ export namespace I3JS {
 		unpackAlignment: number;
 
 		/**
-		 * @default O3JS.LinearEncoding
+		 * @default THREE.LinearEncoding
 		 */
-		encoding: O3JS.TextureEncoding;
+		encoding: TTextureEncoding;
 
 		/**
 		 * @default false
@@ -5269,6 +6052,35 @@ export namespace I3JS {
 	}
 
 	export interface IDataTexture extends ITexture {
+		/**
+		 * @param data
+		 * @param width
+		 * @param height
+		 * @param [format=THREE.RGBAFormat]
+		 * @param [type=THREE.UnsignedByteType]
+		 * @param [mapping=THREE.Texture.DEFAULT_MAPPING]
+		 * @param [wrapS=THREE.ClampToEdgeWrapping]
+		 * @param [wrapT=THREE.ClampToEdgeWrapping]
+		 * @param [magFilter=THREE.NearestFilter]
+		 * @param [minFilter=THREE.NearestFilter]
+		 * @param [anisotropy=1]
+		 * @param [encoding=THREE.LinearEncoding]
+		 */
+		new (
+			data?: BufferSource | null,
+			width?: number,
+			height?: number,
+			format?: TPixelFormat,
+			type?: TTextureDataType,
+			mapping?: TMapping,
+			wrapS?: TWrapping,
+			wrapT?: TWrapping,
+			magFilter?: TTextureFilter,
+			minFilter?: TTextureFilter,
+			anisotropy?: number,
+			encoding?: TTextureEncoding
+		): this;
+
 		image: ImageData;
 
 		/**
@@ -5287,26 +6099,33 @@ export namespace I3JS {
 		unpackAlignment: number;
 
 		/**
-		 * @default O3JS.DepthFormat
+		 * @default THREE.DepthFormat
 		 */
-		format: O3JS.PixelFormat;
+		format: TPixelFormat;
 
 		readonly isDataTexture: true;
 	}
 
 	export interface IDataTexture3D extends ITexture {
-		/**
-		 * @default O3JS.NearestFilter
-		 */
-		magFilter: O3JS.TextureFilter;
+		new (
+			data: BufferSource,
+			width: number,
+			height: number,
+			depth: number
+		): this;
 
 		/**
-		 * @default O3JS.NearestFilter
+		 * @default THREE.NearestFilter
 		 */
-		minFilter: O3JS.TextureFilter;
+		magFilter: TTextureFilter;
 
 		/**
-		 * @default O3JS.ClampToEdgeWrapping
+		 * @default THREE.NearestFilter
+		 */
+		minFilter: TTextureFilter;
+
+		/**
+		 * @default THREE.ClampToEdgeWrapping
 		 */
 		wrapR: boolean;
 
@@ -5324,18 +6143,25 @@ export namespace I3JS {
 	}
 
 	export interface IDataTexture2DArray extends ITexture {
-		/**
-		 * @default O3JS.NearestFilter
-		 */
-		magFilter: O3JS.TextureFilter;
+		new (
+			data?: BufferSource,
+			width?: number,
+			height?: number,
+			depth?: number
+		): this;
 
 		/**
-		 * @default O3JS.NearestFilter
+		 * @default THREE.NearestFilter
 		 */
-		minFilter: O3JS.TextureFilter;
+		magFilter: TTextureFilter;
 
 		/**
-		 * @default O3JS.ClampToEdgeWrapping
+		 * @default THREE.NearestFilter
+		 */
+		minFilter: TTextureFilter;
+
+		/**
+		 * @default THREE.ClampToEdgeWrapping
 		 */
 		wrapR: boolean;
 
@@ -5353,6 +6179,29 @@ export namespace I3JS {
 	}
 
 	export interface IDepthTexture extends ITexture {
+		/**
+		 * @param width
+		 * @param height
+		 * @param type
+		 * @param [mapping=THREE.Texture.DEFAULT_MAPPING]
+		 * @param [wrapS=THREE.ClampToEdgeWrapping]
+		 * @param [wrapT=THREE.ClampToEdgeWrapping]
+		 * @param [magFilter=THREE.NearestFilter]
+		 * @param [minFilter=THREE.NearestFilter]
+		 * @param [anisotropy=1]
+		 */
+		new (
+			width: number,
+			height: number,
+			type?: TTextureDataType,
+			mapping?: TMapping,
+			wrapS?: TWrapping,
+			wrapT?: TWrapping,
+			magFilter?: TTextureFilter,
+			minFilter?: TTextureFilter,
+			anisotropy?: number
+		): this;
+
 		image: { width: number; height: number };
 
 		/**
@@ -5369,10 +6218,54 @@ export namespace I3JS {
 	}
 
 	export interface ICanvasTexture extends ITexture {
+		new (
+			canvas:
+				| HTMLImageElement
+				| HTMLCanvasElement
+				| HTMLVideoElement
+				| ImageBitmap,
+			mapping?: TMapping,
+			wrapS?: TWrapping,
+			wrapT?: TWrapping,
+			magFilter?: TTextureFilter,
+			minFilter?: TTextureFilter,
+			format?: TPixelFormat,
+			type?: TTextureDataType,
+			anisotropy?: number
+		): this;
 		readonly isCanvasTexture: true;
 	}
 
 	export interface ICompressedTexture extends ITexture {
+		/**
+		 * @param mipmaps
+		 * @param width
+		 * @param height
+		 * @param [format=THREE.RGBAFormat]
+		 * @param [type=THREE.UnsignedByteType]
+		 * @param [mapping=THREE.Texture.DEFAULT_MAPPING]
+		 * @param [wrapS=THREE.ClampToEdgeWrapping]
+		 * @param [wrapT=THREE.ClampToEdgeWrapping]
+		 * @param [magFilter=THREE.LinearFilter]
+		 * @param [minFilter=THREE.LinearMipmapLinearFilter]
+		 * @param [anisotropy=1]
+		 * @param [encoding=THREE.LinearEncoding]
+		 */
+		new (
+			mipmaps: ImageData[],
+			width: number,
+			height: number,
+			format?: TCompressedPixelFormat,
+			type?: TTextureDataType,
+			mapping?: TMapping,
+			wrapS?: TWrapping,
+			wrapT?: TWrapping,
+			magFilter?: TTextureFilter,
+			minFilter?: TTextureFilter,
+			anisotropy?: number,
+			encoding?: TTextureEncoding
+		): this;
+
 		image: { width: number; height: number };
 
 		mipmaps: ImageData[];
@@ -5391,6 +6284,31 @@ export namespace I3JS {
 	}
 
 	export interface ICubeTexture extends ITexture {
+		/**
+		 * @param [images=[]]
+		 * @param [mapping=THREE.CubeReflectionMapping]
+		 * @param [wrapS=THREE.ClampToEdgeWrapping]
+		 * @param [wrapT=THREE.ClampToEdgeWrapping]
+		 * @param [magFilter=THREE.LinearFilter]
+		 * @param [minFilter=THREE.LinearMipmapLinearFilter]
+		 * @param [format=THREE.RGBFormat]
+		 * @param [type=THREE.UnsignedByteType]
+		 * @param [anisotropy=1]
+		 * @param [encoding=THREE.LinearEncoding]
+		 */
+		new (
+			images?: any[], // HTMLImageElement or HTMLCanvasElement
+			mapping?: TMapping,
+			wrapS?: TWrapping,
+			wrapT?: TWrapping,
+			magFilter?: TTextureFilter,
+			minFilter?: TTextureFilter,
+			format?: TPixelFormat,
+			type?: TTextureDataType,
+			anisotropy?: number,
+			encoding?: TTextureEncoding
+		): this;
+
 		images: any; // returns and sets the value of Texture.image in the codde ?
 
 		/**
@@ -5402,7 +6320,31 @@ export namespace I3JS {
 	}
 
 	export interface IVideoTexture extends ITexture {
+		/**
+		 * @param video
+		 * @param [mapping=THREE.Texture.DEFAULT_MAPPING]
+		 * @param [wrapS=THREE.ClampToEdgeWrapping]
+		 * @param [wrapT=THREE.ClampToEdgeWrapping]
+		 * @param [magFilter=THREE.LinearFilter]
+		 * @param [minFilter=THREE.LinearFilter]
+		 * @param [format=THREE.RGBFormat]
+		 * @param [type=THREE.UnsignedByteType]
+		 * @param [anisotropy=1]
+		 */
+		new (
+			video: HTMLVideoElement,
+			mapping?: TMapping,
+			wrapS?: TWrapping,
+			wrapT?: TWrapping,
+			magFilter?: TTextureFilter,
+			minFilter?: TTextureFilter,
+			format?: TPixelFormat,
+			type?: TTextureDataType,
+			anisotropy?: number
+		): this;
+
 		readonly isVideoTexture: true;
+
 		/**
 		 * @default false
 		 */
@@ -5477,6 +6419,8 @@ export namespace I3JS {
 	 * This class contains the parameters that define linear fog, i.e., that grows linearly denser with the distance.
 	 */
 	export interface IFog extends IFogBase {
+		new (color: TColorRepresentation, near?: number, far?: number): this;
+
 		/**
 		 * The minimum distance to start applying fog. Objects that are less than 'near' units from the active camera won't be affected by fog.
 		 * @default 1
@@ -5496,6 +6440,7 @@ export namespace I3JS {
 	}
 
 	export interface IFogExp2 extends IFogBase {
+		new (hex: number | string, density?: number): this;
 		/**
 		 * Defines how fast the fog will grow dense.
 		 * @default 0.00025
@@ -5508,7 +6453,12 @@ export namespace I3JS {
 		toJSON(): any;
 	}
 
-	export interface IWebGLRenderTarget extends O3JS.EventDispatcher {
+	export interface IWebGLRenderTarget extends IEventDispatcher {
+		new (
+			width: number,
+			height: number,
+			options?: IWebGLRenderTargetOptions
+		): this;
 		uuid: string;
 		width: number;
 		height: number;
@@ -5540,43 +6490,43 @@ export namespace I3JS {
 		readonly isWebGLRenderTarget: true;
 
 		/**
-		 * @deprecated Use {@link O3JS.Texture#wrapS texture.wrapS} instead.
+		 * @deprecated Use {@line THREE.Texture#wrapS texture.wrapS} instead.
 		 */
 		wrapS: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#wrapT texture.wrapT} instead.
+		 * @deprecated Use {@line THREE.Texture#wrapT texture.wrapT} instead.
 		 */
 		wrapT: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#magFilter texture.magFilter} instead.
+		 * @deprecated Use {@line THREE.Texture#magFilter texture.magFilter} instead.
 		 */
 		magFilter: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#minFilter texture.minFilter} instead.
+		 * @deprecated Use {@line THREE.Texture#minFilter texture.minFilter} instead.
 		 */
 		minFilter: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#anisotropy texture.anisotropy} instead.
+		 * @deprecated Use {@line THREE.Texture#anisotropy texture.anisotropy} instead.
 		 */
 		anisotropy: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#offset texture.offset} instead.
+		 * @deprecated Use {@line THREE.Texture#offset texture.offset} instead.
 		 */
 		offset: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#repeat texture.repeat} instead.
+		 * @deprecated Use {@line THREE.Texture#repeat texture.repeat} instead.
 		 */
 		repeat: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#format texture.format} instead.
+		 * @deprecated Use {@line THREE.Texture#format texture.format} instead.
 		 */
 		format: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#type texture.type} instead.
+		 * @deprecated Use {@line THREE.Texture#type texture.type} instead.
 		 */
 		type: any;
 		/**
-		 * @deprecated Use {@link O3JS.Texture#generateMipmaps texture.generateMipmaps} instead.
+		 * @deprecated Use {@line THREE.Texture#generateMipmaps texture.generateMipmaps} instead.
 		 */
 		generateMipmaps: any;
 
@@ -5588,6 +6538,12 @@ export namespace I3JS {
 	}
 
 	export interface IWebGLMultisampleRenderTarget extends IWebGLRenderTarget {
+		new (
+			width: number,
+			height: number,
+			options?: IWebGLRenderTargetOptions
+		): this;
+
 		readonly isWebGLMultisampleRenderTarget: true;
 		/**
 		 * Specifies the number of samples to be used for the renderbuffer storage.However, the maximum supported size for multisampling is platform dependent and defined via gl.MAX_SAMPLES.
@@ -5597,6 +6553,8 @@ export namespace I3JS {
 	}
 
 	export interface IWebGLCubeRenderTarget extends IWebGLRenderTarget {
+		new (size: number, options?: IWebGLRenderTargetOptions): this;
+
 		texture: ICubeTexture;
 
 		fromEquirectangularTexture(
@@ -5613,6 +6571,7 @@ export namespace I3JS {
 	}
 
 	export interface IWebGL1Renderer extends IWebGLRenderer {
+		new (parameters?: IWebGLRendererParameters): this;
 		readonly isWebGL1Renderer: true;
 	}
 
@@ -5620,7 +6579,9 @@ export namespace I3JS {
 	 * This class originall extended WebGLMultipleRenderTarget
 	 * However, there are some issues with this method as documented below
 	 */
-	export interface IWebGLMultipleRenderTargets extends O3JS.EventDispatcher {
+	export interface IWebGLMultipleRenderTargets extends IEventDispatcher {
+		new (width: number, height: number, count: number): this;
+
 		texture: ITexture[];
 
 		readonly isWebGLMultipleRenderTargets: true;
@@ -5644,6 +6605,8 @@ export namespace I3JS {
 	) => void;
 
 	export interface ILine3 {
+		new (start?: IVector3, end?: IVector3): this;
+
 		/**
 		 * @default new IVector3()
 		 */
@@ -5676,6 +6639,8 @@ export namespace I3JS {
 	}
 
 	export interface IPlane {
+		new (normal?: IVector3, constant?: number): this;
+
 		/**
 		 * @default new IVector3( 1, 0, 0 )
 		 */
@@ -5710,12 +6675,14 @@ export namespace I3JS {
 		equals(plane: IPlane): boolean;
 
 		/**
-		 * @deprecated Use {@link O3JS.Plane#intersectsLine .intersectsLine()} instead.
+		 * @deprecated Use {@line THREE.Plane#intersectsLine .intersectsLine()} instead.
 		 */
 		isIntersectionLine(l: any): any;
 	}
 
 	export interface ITriangle {
+		new (a?: IVector3, b?: IVector3, c?: IVector3): this;
+
 		/**
 		 * @default new IVector3()
 		 */
@@ -5766,6 +6733,7 @@ export namespace I3JS {
 	}
 
 	export interface ISphere {
+		new (center?: IVector3, radius?: number): this;
 		/**
 		 * @default new Vector3()
 		 */
@@ -5796,7 +6764,7 @@ export namespace I3JS {
 		union(sphere: ISphere): this;
 
 		/**
-		 * @deprecated Use {@link O3JS.Sphere#isEmpty .isEmpty()} instead.
+		 * @deprecated Use {@line THREE.Sphere#isEmpty .isEmpty()} instead.
 		 */
 		empty(): any;
 	}
@@ -5805,12 +6773,12 @@ export namespace I3JS {
 		new (min?: IVector2, max?: IVector2): this;
 
 		/**
-		 * @default new O3JS.Vector2( + Infinity, + Infinity )
+		 * @default new THREE.Vector2( + Infinity, + Infinity )
 		 */
 		min: IVector2;
 
 		/**
-		 * @default new O3JS.Vector2( - Infinity, - Infinity )
+		 * @default new THREE.Vector2( - Infinity, - Infinity )
 		 */
 		max: IVector2;
 
@@ -5839,6 +6807,8 @@ export namespace I3JS {
 	}
 
 	export interface IBox3 {
+		new (min?: IVector3, max?: IVector3): this;
+
 		/**
 		 * @default new IVector3( + Infinity, + Infinity, + Infinity )
 		 */
@@ -5882,15 +6852,15 @@ export namespace I3JS {
 		translate(offset: IVector3): this;
 		equals(box: IBox3): boolean;
 		/**
-		 * @deprecated Use {@link O3JS.Box3#isEmpty .isEmpty()} instead.
+		 * @deprecated Use {@line THREE.Box3#isEmpty .isEmpty()} instead.
 		 */
 		empty(): any;
 		/**
-		 * @deprecated Use {@link O3JS.Box3#intersectsBox .intersectsBox()} instead.
+		 * @deprecated Use {@line THREE.Box3#intersectsBox .intersectsBox()} instead.
 		 */
 		isIntersectionBox(b: any): any;
 		/**
-		 * @deprecated Use {@link O3JS.Box3#intersectsSphere .intersectsSphere()} instead.
+		 * @deprecated Use {@line THREE.Box3#intersectsSphere .intersectsSphere()} instead.
 		 */
 		isIntersectionSphere(s: any): any;
 	}
@@ -5928,6 +6898,70 @@ export namespace I3JS {
 		): IVector2[];
 	}
 
+	export interface IWebGLRendererParameters {
+		/**
+		 * A Canvas where the renderer draws its output.
+		 */
+		canvas?: HTMLCanvasElement | IOffscreenCanvas | undefined;
+
+		/**
+		 * A WebGL Rendering Context.
+		 * (https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext)
+		 * Default is null
+		 */
+		context?: WebGLRenderingContext | undefined;
+
+		/**
+		 * shader precision. Can be "highp", "mediump" or "lowp".
+		 */
+		precision?: string | undefined;
+
+		/**
+		 * default is false.
+		 */
+		alpha?: boolean | undefined;
+
+		/**
+		 * default is true.
+		 */
+		premultipliedAlpha?: boolean | undefined;
+
+		/**
+		 * default is false.
+		 */
+		antialias?: boolean | undefined;
+
+		/**
+		 * default is true.
+		 */
+		stencil?: boolean | undefined;
+
+		/**
+		 * default is false.
+		 */
+		preserveDrawingBuffer?: boolean | undefined;
+
+		/**
+		 * Can be "high-performance", "low-power" or "default"
+		 */
+		powerPreference?: string | undefined;
+
+		/**
+		 * default is true.
+		 */
+		depth?: boolean | undefined;
+
+		/**
+		 * default is false.
+		 */
+		logarithmicDepthBuffer?: boolean | undefined;
+
+		/**
+		 * default is false.
+		 */
+		failIfMajorPerformanceCaveat?: boolean | undefined;
+	}
+
 	/**
 	 * The WebGL renderer displays your beautifully crafted scenes using WebGL, if your device supports it.
 	 * This renderer has way better performance than CanvasRenderer.
@@ -5935,7 +6969,7 @@ export namespace I3JS {
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js|src/renderers/WebGLRenderer.js}
 	 */
 	export interface IWebGLRenderer extends IRenderer {
-		new (parameters?: O3JS.WebGLRendererParameters): this;
+		new (parameters?: IWebGLRendererParameters): this;
 
 		/**
 		 * A Canvas where the renderer draws its output.
@@ -5999,7 +7033,7 @@ export namespace I3JS {
 
 		/**
 		 * Default is LinearEncoding.
-		 * @default O3JS.LinearEncoding
+		 * @default THREE.LinearEncoding
 		 */
 		outputEncoding: O3JS.TextureEncoding;
 
@@ -6009,7 +7043,7 @@ export namespace I3JS {
 		physicallyCorrectLights: boolean;
 
 		/**
-		 * @default O3JS.NoToneMapping
+		 * @default THREE.NoToneMapping
 		 */
 		toneMapping: O3JS.ToneMapping;
 
@@ -6174,7 +7208,7 @@ export namespace I3JS {
 		setAnimationLoop(callback: TXRAnimationLoopCallback | null): void;
 
 		/**
-		 * @deprecated Use {@link O3JS.WebGLRenderer#setAnimationLoop .setAnimationLoop()} instead.
+		 * @deprecated Use {@line THREE.WebGLRenderer#setAnimationLoop .setAnimationLoop()} instead.
 		 */
 		animate(callback: () => void): void;
 
@@ -6185,14 +7219,14 @@ export namespace I3JS {
 
 		/**
 		 * Render a scene or an object using a camera.
-		 * The render is done to a previously specified {@link O3JS.WebGLRenderTarget#renderTarget .renderTarget} set by calling
-		 * {@link O3JS.WebGLRenderer#setRenderTarget .setRenderTarget} or to the canvas as usual.
+		 * The render is done to a previously specified {@line THREE.WebGLRenderTarget#renderTarget .renderTarget} set by calling
+		 * {@line THREE.WebGLRenderer#setRenderTarget .setRenderTarget} or to the canvas as usual.
 		 *
 		 * By default render buffers are cleared before rendering but you can prevent this by setting the property
-		 * {@link O3JS.WebGLRenderer#autoClear autoClear} to false. If you want to prevent only certain buffers being cleared
-		 * you can set either the {@link O3JS.WebGLRenderer#autoClearColor autoClearColor},
-		 * {@link O3JS.WebGLRenderer#autoClearStencil autoClearStencil} or {@link O3JS.WebGLRenderer#autoClearDepth autoClearDepth}
-		 * properties to false. To forcibly clear one ore more buffers call {@link O3JS.WebGLRenderer#clear .clear}.
+		 * {@line THREE.WebGLRenderer#autoClear autoClear} to false. If you want to prevent only certain buffers being cleared
+		 * you can set either the {@line THREE.WebGLRenderer#autoClearColor autoClearColor},
+		 * {@line THREE.WebGLRenderer#autoClearStencil autoClearStencil} or {@line THREE.WebGLRenderer#autoClearDepth autoClearDepth}
+		 * properties to false. To forcibly clear one ore more buffers call {@line THREE.WebGLRenderer#clear .clear}.
 		 */
 		render(scene: IObject3D, camera: ICamera): void;
 
@@ -6212,14 +7246,14 @@ export namespace I3JS {
 		getRenderTarget(): IWebGLRenderTarget | null;
 
 		/**
-		 * @deprecated Use {@link O3JS.WebGLRenderer#getRenderTarget .getRenderTarget()} instead.
+		 * @deprecated Use {@line THREE.WebGLRenderer#getRenderTarget .getRenderTarget()} instead.
 		 */
 		getCurrentRenderTarget(): IWebGLRenderTarget | null;
 
 		/**
 		 * Sets the active render target.
 		 *
-		 * @param renderTarget The {@link O3JS.WebGLRenderTarget renderTarget} that needs to be activated. When `null` is given, the canvas is set as the active render target instead.
+		 * @param renderTarget The {@line THREE.WebGLRenderTarget renderTarget} that needs to be activated. When `null` is given, the canvas is set as the active render target instead.
 		 * @param activeCubeFace Specifies the active cube side (PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5) of {@link WebGLCubeRenderTarget}.
 		 * @param activeMipmapLevel Specifies the active mipmap level.
 		 */
@@ -6302,7 +7336,7 @@ export namespace I3JS {
 		gammaFactor: number;
 
 		/**
-		 * @deprecated Use {@link O3JS.WebGLRenderer#xr .xr} instead.
+		 * @deprecated Use {@line THREE.WebGLRenderer#xr .xr} instead.
 		 */
 		vr: boolean;
 
@@ -6362,9 +7396,31 @@ export namespace I3JS {
 		supportsInstancedArrays(): any;
 
 		/**
-		 * @deprecated Use {@link O3JS.WebGLRenderer#setScissorTest .setScissorTest()} instead.
+		 * @deprecated Use {@line THREE.WebGLRenderer#setScissorTest .setScissorTest()} instead.
 		 */
 		enableScissorTest(boolean: any): any;
+	}
+
+	export interface IBufferGeometryUtils {
+		computeTangents(geometry: IBufferGeometry): null;
+		mergeBufferAttributes(attributes: IBufferAttribute[]): IBufferAttribute;
+		mergeBufferGeometries(
+			geometries: IBufferGeometry[],
+			useGroups?: boolean
+		): IBufferGeometry;
+		interleaveAttributes(
+			attributes: IBufferAttribute[]
+		): IInterleavedBufferAttribute;
+		estimateBytesUsed(geometry: IBufferGeometry): number;
+		mergeVertices(
+			geometry: IBufferGeometry,
+			tolerance?: number
+		): IBufferGeometry;
+		toTrianglesDrawMode(
+			geometry: IBufferGeometry,
+			drawMode: TTrianglesDrawModes
+		): IBufferGeometry;
+		computeMorphedAttributes(object: IMesh | ILine | IPoints): object;
 	}
 
 	/**
@@ -6374,7 +7430,7 @@ export namespace I3JS {
 	 *
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/BufferGeometry.js|src/core/BufferGeometry.js}
 	 */
-	export interface IBufferGeometry extends O3JS.EventDispatcher {
+	export interface IBufferGeometry extends IEventDispatcher {
 		new (): this;
 		/**
 		 * Unique number of this buffergeometry instance
@@ -6523,32 +7579,32 @@ export namespace I3JS {
 		dispose(): void;
 
 		/**
-		 * @deprecated Use {@link O3JS.BufferGeometry#groups .groups} instead.
+		 * @deprecated Use {@line THREE.BufferGeometry#groups .groups} instead.
 		 */
 		drawcalls: any;
 
 		/**
-		 * @deprecated Use {@link O3JS.BufferGeometry#groups .groups} instead.
+		 * @deprecated Use {@line THREE.BufferGeometry#groups .groups} instead.
 		 */
 		offsets: any;
 
 		/**
-		 * @deprecated Use {@link O3JS.BufferGeometry#setIndex .setIndex()} instead.
+		 * @deprecated Use {@line THREE.BufferGeometry#setIndex .setIndex()} instead.
 		 */
 		addIndex(index: any): void;
 
 		/**
-		 * @deprecated Use {@link O3JS.BufferGeometry#addGroup .addGroup()} instead.
+		 * @deprecated Use {@line THREE.BufferGeometry#addGroup .addGroup()} instead.
 		 */
 		addDrawCall(start: any, count: any, indexOffset?: any): void;
 
 		/**
-		 * @deprecated Use {@link O3JS.BufferGeometry#clearGroups .clearGroups()} instead.
+		 * @deprecated Use {@line THREE.BufferGeometry#clearGroups .clearGroups()} instead.
 		 */
 		clearDrawCalls(): void;
 
 		/**
-		 * @deprecated Use {@link O3JS.BufferGeometry#setAttribute .setAttribute()} instead.
+		 * @deprecated Use {@line THREE.BufferGeometry#setAttribute .setAttribute()} instead.
 		 */
 		addAttribute(
 			name: string,
@@ -6557,7 +7613,7 @@ export namespace I3JS {
 		addAttribute(name: any, array: any, itemSize: any): any;
 
 		/**
-		 * @deprecated Use {@link O3JS.BufferGeometry#deleteAttribute .deleteAttribute()} instead.
+		 * @deprecated Use {@line THREE.BufferGeometry#deleteAttribute .deleteAttribute()} instead.
 		 */
 		removeAttribute(name: string): IBufferGeometry;
 	}
@@ -6827,7 +7883,42 @@ export namespace I3JS {
 		};
 	}
 
+	export interface IExtrudeGeometryOptions {
+		/**
+		 * @default 12
+		 */
+		curveSegments?: number | undefined;
+		/**
+		 * @default 1
+		 */
+		steps?: number | undefined;
+		/**
+		 * @default 100
+		 */
+		depth?: number | undefined;
+		/**
+		 * @default true
+		 */
+		bevelEnabled?: boolean | undefined;
+		/**
+		 * @default 6
+		 */
+		bevelThickness?: number | undefined;
+		bevelSize?: number | undefined;
+		/**
+		 * @default 0
+		 */
+		bevelOffset?: number | undefined;
+		/**
+		 * @default 3
+		 */
+		bevelSegments?: number | undefined;
+		extrudePath?: ICurve<IVector3> | undefined;
+		UVGenerator?: IUVGenerator | undefined;
+	}
+
 	export interface IExtrudeGeometry extends IBufferGeometry {
+		new (shapes?: IShape | IShape[], options?: IExtrudeGeometryOptions): this;
 		/**
 		 * @default 'ExtrudeGeometry'
 		 */
@@ -6871,6 +7962,8 @@ export namespace I3JS {
 	}
 
 	export interface IShapeGeometry extends IBufferGeometry {
+		new (shapes?: IShape | IShape[], curveSegments?: number): this;
+
 		/**
 		 * @default 'ShapShapeGeometryeBufferGeometry'
 		 */
@@ -7045,6 +8138,8 @@ export namespace I3JS {
 	}
 
 	export interface IRay {
+		new (origin?: IVector3, direction?: IVector3): this;
+
 		/**
 		 * @default new IVector3()
 		 */
@@ -7088,17 +8183,17 @@ export namespace I3JS {
 		equals(ray: IRay): boolean;
 
 		/**
-		 * @deprecated Use {@link O3JS.Ray#intersectsBox .intersectsBox()} instead.
+		 * @deprecated Use {@line THREE.Ray#intersectsBox .intersectsBox()} instead.
 		 */
 		isIntersectionBox(b: any): any;
 
 		/**
-		 * @deprecated Use {@link O3JS.Ray#intersectsPlane .intersectsPlane()} instead.
+		 * @deprecated Use {@line THREE.Ray#intersectsPlane .intersectsPlane()} instead.
 		 */
 		isIntersectionPlane(p: any): any;
 
 		/**
-		 * @deprecated Use {@link O3JS.Ray#intersectsSphere .intersectsSphere()} instead.
+		 * @deprecated Use {@line THREE.Ray#intersectsSphere .intersectsSphere()} instead.
 		 */
 		isIntersectionSphere(s: any): any;
 	}
@@ -7124,6 +8219,13 @@ export namespace I3JS {
 	}
 
 	export interface IRaycaster {
+		new (
+			origin?: IVector3,
+			direction?: IVector3,
+			near?: number,
+			far?: number
+		): this;
+
 		/** The Ray used for the raycasting. */
 		ray: IRay;
 
@@ -7149,7 +8251,7 @@ export namespace I3JS {
 
 		/**
 		 * Used by Raycaster to selectively ignore 3D objects when performing intersection tests.
-		 * @default new O3JS.Layers()
+		 * @default new THREE.Layers()
 		 */
 		layers: ILayers;
 
@@ -7559,6 +8661,7 @@ export namespace I3JS {
 
 	export interface IAudio<NodeType extends AudioNode = GainNode>
 		extends IObject3D {
+		new (listener: IAudioListener): this;
 		type: 'Audio';
 		listener: IAudioListener;
 		context: AudioContext;
@@ -7702,6 +8805,7 @@ export namespace I3JS {
 	}
 
 	export interface IAudioAnalyser {
+		new (audio: IAudio<AudioNode>, fftSize?: number): this;
 		analyser: AnalyserNode;
 		data: Uint8Array;
 		getFrequencyData(): Uint8Array;
@@ -7722,6 +8826,7 @@ export namespace I3JS {
 	}
 
 	export interface IAnimationObjectGroup {
+		new (...args: any[]): this;
 		uuid: string;
 		stats: {
 			bindingsPerObject: number;
@@ -7781,6 +8886,23 @@ export namespace I3JS {
 
 	export interface IArrowHelper extends IObject3D {
 		/**
+		 * @param [dir] Direction from origin. Must be a unit vector.
+		 * @param [origin] Point at which the arrow starts.
+		 * @param [length] Length of the arrow.
+		 * @param [color] Hexadecimal value to define color.
+		 * @param [headLength] The length of the head of the arrow.
+		 * @param [headWidth] The width of the head of the arrow.
+		 */
+		new (
+			dir?: IVector3,
+			origin?: IVector3,
+			length?: number,
+			color?: TColorRepresentation,
+			headLength?: number,
+			headWidth?: number
+		): this;
+
+		/**
 		 * @default 'ArrowHelper'
 		 */
 		type: string;
@@ -7815,6 +8937,11 @@ export namespace I3JS {
 
 	export interface IAxesHelper extends ILineSegments {
 		/**
+		 * @param [size=1]
+		 */
+		new (size?: number): this;
+
+		/**
 		 * @default 'AxesHelper'
 		 */
 		type: string;
@@ -7835,6 +8962,12 @@ export namespace I3JS {
 
 	export interface IBoxHelper extends ILineSegments {
 		/**
+		 * @param object
+		 * @param [color=0xffff00]
+		 */
+		new (object: IObject3D, color?: TColorRepresentation): this;
+
+		/**
 		 * @default 'BoxHelper'
 		 */
 		type: string;
@@ -7845,6 +8978,8 @@ export namespace I3JS {
 	}
 
 	export interface ICameraHelper extends ILineSegments {
+		new (camera: ICamera): this;
+
 		camera: ICamera;
 		pointMap: { [id: string]: number[] };
 
@@ -7859,6 +8994,17 @@ export namespace I3JS {
 	}
 
 	export interface IDirectionalLightHelper extends IObject3D {
+		/**
+		 * @param light
+		 * @param [size=1]
+		 * @param color
+		 */
+		new (
+			light: IDirectionalLight,
+			size?: number,
+			color?: TColorRepresentation
+		): this;
+
 		light: IDirectionalLight;
 		lightPlane: ILine;
 		targetLine: ILine;
@@ -7879,6 +9025,13 @@ export namespace I3JS {
 	}
 
 	export interface IGridHelper extends ILineSegments {
+		new (
+			size?: number,
+			divisions?: number,
+			color1?: TColorRepresentation,
+			color2?: TColorRepresentation
+		): this;
+
 		/**
 		 * @default 'GridHelper'
 		 */
@@ -7894,6 +9047,11 @@ export namespace I3JS {
 	}
 
 	export interface IHemisphereLightHelper extends IObject3D {
+		new (
+			light: IHemisphereLight,
+			size: number,
+			color?: TColorRepresentation
+		): this;
 		light: IHemisphereLight;
 		matrix: IMatrix4;
 		matrixAutoUpdate: boolean;
@@ -7906,6 +9064,7 @@ export namespace I3JS {
 	}
 
 	export interface IPlaneHelper extends ILineSegments {
+		new (plane: IPlane, size?: number, hex?: number): this;
 		/**
 		 * @default 'PlaneHelper'
 		 */
@@ -7922,6 +9081,11 @@ export namespace I3JS {
 	}
 
 	export interface IPointLightHelper extends IObject3D {
+		new (
+			light: IPointLight,
+			sphereSize?: number,
+			color?: TColorRepresentation
+		): this;
 		/**
 		 * @default 'PointLightHelper'
 		 */
@@ -7941,6 +9105,22 @@ export namespace I3JS {
 	}
 
 	export interface IPolarGridHelper extends ILineSegments {
+		/**
+		 * @param [radius=10]
+		 * @param [radials=16]
+		 * @param [circles=8]
+		 * @param [divisions=64]
+		 * @param [color1=0x444444]
+		 * @param [color2=0x888888]
+		 */
+		new (
+			radius?: number,
+			radials?: number,
+			circles?: number,
+			divisions?: number,
+			color1?: TColorRepresentation,
+			color2?: TColorRepresentation
+		): this;
 		/**
 		 * @default 'PolarGridHelper'
 		 */
@@ -7972,6 +9152,8 @@ export namespace I3JS {
 	}
 
 	export interface ISpotLightHelper extends IObject3D {
+		new (light: ILight, color?: TColorRepresentation): this;
+
 		light: ILight;
 		matrix: IMatrix4;
 
@@ -7989,8 +9171,7 @@ export namespace I3JS {
 	/**
 	 * Object3D
 	 */
-	export interface IObject3D<E extends O3JS.BaseEvent = O3JS.Event>
-		extends O3JS.EventDispatcher<E> {
+	export interface IObject3D extends IEventDispatcher<IEvent> {
 		new (): this;
 
 		/**
@@ -8025,7 +9206,7 @@ export namespace I3JS {
 
 		/**
 		 * Up direction.
-		 * @default O3JS.Object3D.DefaultUp.clone()
+		 * @default THREE.Object3D.DefaultUp.clone()
 		 */
 		up: IVector3;
 
@@ -8037,13 +9218,13 @@ export namespace I3JS {
 
 		/**
 		 * Object's local rotation (Euler angles), in radians.
-		 * @default new O3JS.Euler()
+		 * @default new THREE.Euler()
 		 */
 		readonly rotation: IEuler;
 
 		/**
 		 * Object's local rotation as a Quaternion.
-		 * @default new O3JS.Quaternion()
+		 * @default new THREE.Quaternion()
 		 */
 		readonly quaternion: IQuaternion;
 
@@ -8078,7 +9259,7 @@ export namespace I3JS {
 		/**
 		 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also
 		 * recalculates the matrixWorld property.
-		 * @default O3JS.Object3D.DefaultMatrixAutoUpdate
+		 * @default THREE.Object3D.DefaultMatrixAutoUpdate
 		 */
 		matrixAutoUpdate: boolean;
 
@@ -8089,7 +9270,7 @@ export namespace I3JS {
 		matrixWorldNeedsUpdate: boolean;
 
 		/**
-		 * @default new O3JS.Layers()
+		 * @default new THREE.Layers()
 		 */
 		layers: ILayers;
 		/**
@@ -8385,10 +9566,27 @@ export namespace I3JS {
 	 * see {@link https://github.com/mrdoob/three.js/blob/master/src/cameras/OrthographicCamera.js|src/cameras/OrthographicCamera.js}
 	 *
 	 * @example
-	 * const camera = new O3JS.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+	 * const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
 	 * scene.add( camera );
 	 */
 	export interface IOrthographicCamera extends ICamera {
+		/**
+		 * @param left Camera frustum left plane.
+		 * @param right Camera frustum right plane.
+		 * @param top Camera frustum top plane.
+		 * @param bottom Camera frustum bottom plane.
+		 * @param [near=0.1] Camera frustum near plane.
+		 * @param [far=2000] Camera frustum far plane.
+		 */
+		new (
+			left: number,
+			right: number,
+			top: number,
+			bottom: number,
+			near?: number,
+			far?: number
+		): this;
+
 		type: 'OrthographicCamera';
 
 		readonly isOrthographicCamera: true;
@@ -8469,6 +9667,14 @@ export namespace I3JS {
 	 * @source https://github.com/mrdoob/three.js/blob/master/src/cameras/PerspectiveCamera.js
 	 */
 	export interface IPerspectiveCamera extends ICamera {
+		/**
+		 * @param [fov=50] Camera frustum vertical field of view. Default value is 50.
+		 * @param [aspect=1] Camera frustum aspect ratio. Default value is 1.
+		 * @param [near=0.1] Camera frustum near plane. Default value is 0.1.
+		 * @param [far=2000] Camera frustum far plane. Default value is 2000.
+		 */
+		new (fov?: number, aspect?: number, near?: number, far?: number): this;
+
 		type: 'PerspectiveCamera';
 
 		readonly isPerspectiveCamera: true;
@@ -8596,6 +9802,8 @@ export namespace I3JS {
 	}
 
 	export interface ICubeCamera extends IObject3D {
+		new (near: number, far: number, renderTarget: IWebGLCubeRenderTarget): this;
+
 		type: 'CubeCamera';
 
 		renderTarget: IWebGLCubeRenderTarget;
@@ -8654,7 +9862,7 @@ export namespace I3JS {
 		blurSamples: number;
 
 		/**
-		 * @default new O3JS.Vector2( 512, 512 )
+		 * @default new THREE.Vector2( 512, 512 )
 		 */
 		mapSize: IVector2;
 
@@ -8669,7 +9877,7 @@ export namespace I3JS {
 		mapPass: IWebGLRenderTarget;
 
 		/**
-		 * @default new O3JS.Matrix4()
+		 * @default new THREE.Matrix4()
 		 */
 		matrix: IMatrix4;
 
@@ -8695,11 +9903,18 @@ export namespace I3JS {
 
 	/**
 	 * @example
-	 * const light = new O3JS.PointLight( 0xff0000, 1, 100 );
+	 * const light = new THREE.PointLight( 0xff0000, 1, 100 );
 	 * light.position.set( 50, 50, 50 );
 	 * scene.add( light );
 	 */
 	export interface IPointLight extends ILight {
+		new (
+			color?: TColorRepresentation,
+			intensity?: number,
+			distance?: number,
+			decay?: number
+		): this;
+
 		/**
 		 * @default 'PointLight'
 		 */
@@ -8723,7 +9938,7 @@ export namespace I3JS {
 		decay: number;
 
 		/**
-		 * @default new O3JS.PointLightShadow()
+		 * @default new THREE.PointLightShadow()
 		 */
 		shadow: IPointLightShadow;
 
@@ -8735,6 +9950,12 @@ export namespace I3JS {
 	}
 
 	export interface IRectAreaLight extends ILight {
+		new (
+			color?: TColorRepresentation,
+			intensity?: number,
+			width?: number,
+			height?: number
+		): this;
 		/**
 		 * @default 'RectAreaLight'
 		 */
@@ -8764,19 +9985,28 @@ export namespace I3JS {
 	 * A point light that can cast shadow in one direction.
 	 */
 	export interface ISpotLight extends ILight {
+		new (
+			color?: TColorRepresentation,
+			intensity?: number,
+			distance?: number,
+			angle?: number,
+			penumbra?: number,
+			decay?: number
+		): this;
+
 		/**
 		 * @default 'SpotLight'
 		 */
 		type: string;
 
 		/**
-		 * @default O3JS.Object3D.DefaultUp
+		 * @default THREE.Object3D.DefaultUp
 		 */
 		position: IVector3;
 
 		/**
 		 * Spotlight focus points at target.position.
-		 * @default new O3JS.Object3D()
+		 * @default new THREE.Object3D()
 		 */
 		target: IObject3D;
 
@@ -8804,7 +10034,7 @@ export namespace I3JS {
 		decay: number;
 
 		/**
-		 * @default new O3JS.SpotLightShadow()
+		 * @default new THREE.SpotLightShadow()
 		 */
 		shadow: ISpotLightShadow;
 		power: number;
@@ -8896,6 +10126,7 @@ export namespace I3JS {
 	 * @source https://github.com/mrdoob/three.js/blob/master/src/lights/AmbientLight.js
 	 */
 	export interface IAmbientLight extends ILight {
+		new (color?: TColorRepresentation, intensity?: number): this;
 		/**
 		 * @default 'AmbientLight'
 		 */
@@ -8905,6 +10136,8 @@ export namespace I3JS {
 	}
 
 	export interface ILightProbe extends ILight {
+		new (sh?: ISphericalHarmonics3, intensity?: number): this;
+
 		/**
 		 * @default 'LightProbe'
 		 */
@@ -8913,7 +10146,7 @@ export namespace I3JS {
 		readonly isLightProbe: true;
 
 		/**
-		 * @default new O3JS.SphericalHarmonics3()
+		 * @default new THREE.SphericalHarmonics3()
 		 */
 		sh: ISphericalHarmonics3;
 	}
@@ -8927,24 +10160,25 @@ export namespace I3JS {
 	 *
 	 * @example
 	 * // White directional light at half intensity shining from the top.
-	 * const directionalLight = new O3JS.DirectionalLight( 0xffffff, 0.5 );
+	 * const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
 	 * directionalLight.position.set( 0, 1, 0 );
 	 * scene.add( directionalLight );
 	 */
 	export interface IDirectionalLight extends ILight {
+		new (color?: TColorRepresentation, intensity?: number): this;
 		/**
 		 * @default 'DirectionalLight'
 		 */
 		type: string;
 
 		/**
-		 * @default O3JS.Object3D.DefaultUp
+		 * @default THREE.Object3D.DefaultUp
 		 */
 		readonly position: IVector3;
 
 		/**
 		 * Target used for shadow camera orientation.
-		 * @default new O3JS.Object3D()
+		 * @default new THREE.Object3D()
 		 */
 		target: IObject3D;
 
@@ -8955,7 +10189,7 @@ export namespace I3JS {
 		intensity: number;
 
 		/**
-		 * @default new O3JS.DirectionalLightShadow()
+		 * @default new THREE.DirectionalLightShadow()
 		 */
 		shadow: IDirectionalLightShadow;
 		readonly isDirectionalLight: true;
@@ -8967,13 +10201,19 @@ export namespace I3JS {
 	}
 
 	export interface IHemisphereLight extends ILight {
+		new (
+			skyColor?: TColorRepresentation,
+			groundColor?: TColorRepresentation,
+			intensity?: number
+		): this;
+
 		/**
 		 * @default 'HemisphereLight'
 		 */
 		type: string;
 
 		/**
-		 * @default O3JS.Object3D.DefaultUp
+		 * @default THREE.Object3D.DefaultUp
 		 */
 		position: IVector3;
 
@@ -9003,11 +10243,13 @@ export namespace I3JS {
 	}
 
 	export interface IBone extends IObject3D {
+		new (): this;
 		readonly isBone: true;
 		type: 'Bone';
 	}
 
 	export interface IGroup extends IObject3D {
+		new (): this;
 		type: 'Group';
 		readonly isGroup: true;
 	}
@@ -9026,6 +10268,11 @@ export namespace I3JS {
 		TGeometry extends IBufferGeometry = IBufferGeometry,
 		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IMesh<TGeometry, TMaterial> {
+		new (
+			geometry: TGeometry | undefined,
+			material: TMaterial | undefined,
+			count: number
+		): this;
 		count: number;
 		instanceColor: null | IInstancedBufferAttribute;
 		instanceMatrix: IInstancedBufferAttribute;
@@ -9042,6 +10289,8 @@ export namespace I3JS {
 		TGeometry extends IBufferGeometry = IBufferGeometry,
 		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IObject3D {
+		new (geometry?: TGeometry, material?: TMaterial): this;
+
 		geometry: TGeometry;
 		material: TMaterial;
 
@@ -9063,6 +10312,8 @@ export namespace I3JS {
 		TGeometry extends IBufferGeometry = IBufferGeometry,
 		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IObject3D {
+		new (geometry?: TGeometry, material?: TMaterial): this;
+
 		type: 'Points';
 		morphTargetInfluences?: number[] | undefined;
 		morphTargetDictionary?: { [key: string]: number } | undefined;
@@ -9086,6 +10337,7 @@ export namespace I3JS {
 		TGeometry extends IBufferGeometry = IBufferGeometry,
 		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends ILine<TGeometry, TMaterial> {
+		new (geometry?: TGeometry, material?: TMaterial): this;
 		type: 'LineLoop';
 		readonly isLineLoop: true;
 	}
@@ -9094,6 +10346,7 @@ export namespace I3JS {
 		TGeometry extends IBufferGeometry = IBufferGeometry,
 		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends ILine<TGeometry, TMaterial> {
+		new (geometry?: TGeometry, material?: TMaterial): this;
 		/**
 		 * @default 'LineSegments'
 		 */
@@ -9102,6 +10355,7 @@ export namespace I3JS {
 	}
 
 	export interface ILOD extends IObject3D {
+		new (): this;
 		type: 'LOD';
 		levels: Array<{ distance: number; object: IObject3D }>;
 		autoUpdate: boolean;
@@ -9121,6 +10375,7 @@ export namespace I3JS {
 	}
 
 	export interface ISkeleton {
+		new (bones: IBone[], boneInverses?: IMatrix4[]): this;
 		uuid: string;
 		bones: IBone[];
 		boneInverses: IMatrix4[];
@@ -9148,6 +10403,11 @@ export namespace I3JS {
 		TGeometry extends IBufferGeometry = IBufferGeometry,
 		TMaterial extends IMaterial | IMaterial[] = IMaterial | IMaterial[]
 	> extends IMesh<TGeometry, TMaterial> {
+		new (
+			geometry?: TGeometry,
+			material?: TMaterial,
+			useVertexTexture?: boolean
+		): this;
 		bindMode: string;
 		bindMatrix: IMatrix4;
 		bindMatrixInverse: IMatrix4;
@@ -9162,6 +10422,8 @@ export namespace I3JS {
 	}
 
 	export interface ISprite extends IObject3D {
+		new (material?: ISpriteMaterial): this;
+
 		type: 'Sprite';
 		readonly isSprite: true;
 

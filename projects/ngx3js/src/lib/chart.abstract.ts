@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { NgxOutlineGeometry } from './geometry/geometries/outline';
 import { NgxStarGeometry } from './geometry/geometries/star';
-import { RendererTimer, ThreeColor, ThreeUtil, THREE,  I3JS} from './interface';
+import { RendererTimer, ThreeColor, ThreeUtil, THREE, I3JS } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
 
 /**
@@ -488,7 +488,11 @@ export class AbstractChartComponent
 				side = 'double';
 				break;
 			case 'star':
-				geometry = new NgxStarGeometry(options.radius * 0.5, options.radius, 5);
+				geometry = new NgxStarGeometry(
+					options.radius * 0.5,
+					options.radius,
+					5
+				) as any;
 				side = 'double';
 				break;
 			case 'ring':
@@ -519,7 +523,7 @@ export class AbstractChartComponent
 		});
 		const mesh: I3JS.IMesh = new THREE.Mesh(geometry, material);
 		mesh.castShadow = true;
-		const geometryBorder = new NgxOutlineGeometry(geometry, 1.2);
+		const geometryBorder = new NgxOutlineGeometry(geometry, 1.2) as any;
 		const materialBorder = new THREE.LineDashedMaterial({
 			color: ThreeUtil.getColorSafe(options.borderColor, 0x000000),
 			linewidth: 3,
@@ -530,7 +534,7 @@ export class AbstractChartComponent
 			scale: 500,
 		});
 		let border: I3JS.ILineSegments = new THREE.LineSegments(
-			geometryBorder,
+			geometryBorder as any,
 			materialBorder
 		);
 		border.computeLineDistances();
@@ -567,7 +571,7 @@ export class AbstractChartComponent
 						info.values.forEach((data) => {
 							attribute.setY(
 								data.index,
-								MathUtils.lerp(data.from, data.to, elapsedTime)
+								THREE.MathUtils.lerp(data.from, data.to, elapsedTime)
 							);
 						});
 						attribute.needsUpdate = true;
@@ -580,7 +584,9 @@ export class AbstractChartComponent
 					this._updatePosition.forEach((info) => {
 						const position = info.position;
 						const data = info.value;
-						position.setY(MathUtils.lerp(data.from, data.to, elapsedTime));
+						position.setY(
+							THREE.MathUtils.lerp(data.from, data.to, elapsedTime)
+						);
 					});
 				}
 			}

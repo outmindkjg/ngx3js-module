@@ -5,11 +5,9 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { AbstractChartComponent } from '../../chart.abstract';
-import { ThreeColor, ThreeUtil } from '../../interface';
+import { ThreeUtil, I3JS, THREE, ThreeColor } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * The Chart Axes component.
@@ -209,7 +207,7 @@ export class ChartAxesComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getChart<T extends THREE.Object3D>(): T {
+	public getChart<T extends I3JS.IObject3D>(): T {
 		return this.getTitle();
 	}
 
@@ -218,7 +216,7 @@ export class ChartAxesComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getTitle<T extends THREE.Object3D>(): T {
+	public getTitle<T extends I3JS.IObject3D>(): T {
 		if (this._axes === null || this._needUpdate) {
 			this.needUpdate = false;
 			this._axes = new THREE.Group();
@@ -233,7 +231,10 @@ export class ChartAxesComponent
 			const borderIndex: number[] = [];
 			switch (this.type.toLowerCase()) {
 				case 'radar':
-					this._geometryWall = new THREE.CircleGeometry(radius, radiusSegments) as any;
+					this._geometryWall = new THREE.CircleGeometry(
+						radius,
+						radiusSegments
+					) as any;
 					this._geometryWall.translate(0, 0, -depth / 2);
 					for (let i = 1; i < radiusSegments + 1; i++) {
 						borderIndex.push(i);
@@ -283,9 +284,9 @@ export class ChartAxesComponent
 			this._materialWall = new THREE.MeshPhongMaterial({
 				color: ThreeUtil.getColorSafe(options.backgroundColor, 0xd0d0d0),
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
-				side: ThreeUtil.getSideSafe(this.side,'front'),
+				side: ThreeUtil.getSideSafe(this.side, 'front'),
 				transparent: true,
-			});
+			} as any);
 			const wallMesh = new THREE.Mesh(this._geometryWall, this._materialWall);
 			wallMesh.name = 'wall';
 			wallMesh.receiveShadow = true;
@@ -318,7 +319,7 @@ export class ChartAxesComponent
 				color: ThreeUtil.getColorSafe(options.borderColor, 0x909090),
 				linewidth: 1,
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
-			});
+			} as any);
 			const borderMesh = new THREE.LineSegments(
 				this._geometryWallBorder,
 				this._materialWallBorder
@@ -442,7 +443,7 @@ export class ChartAxesComponent
 						0xf0f0f0
 					),
 					linewidth: 1,
-				});
+				} as any);
 				const gridXMesh = new THREE.LineSegments(
 					this._geometryGridX,
 					this._materialGridX
@@ -566,7 +567,7 @@ export class ChartAxesComponent
 						0xf0f0f0
 					),
 					linewidth: 1,
-				});
+				} as any);
 				const gridYMesh = new THREE.LineSegments(
 					this._geometryGridY,
 					this._materialGridY

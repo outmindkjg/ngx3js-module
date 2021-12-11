@@ -1,6 +1,4 @@
-import * as THREE from 'three';
-import { ThreeUtil, CurvesParameters } from '../../interface';
-import { I3JS } from '../../threejs-library/three-interface';
+import { ThreeUtil, CurvesParameters, I3JS, THREE } from '../../interface';
 
 /**
  * Curves circle
@@ -9,7 +7,7 @@ import { I3JS } from '../../threejs-library/three-interface';
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/circle) page for a live curve demo.
  *
  */
-export class CurvesCircle extends THREE.Curve<THREE.Vector3> {
+export class CurvesCircle extends THREE.Curve {
 	/**
 	 * The Radius of curves circle
 	 */

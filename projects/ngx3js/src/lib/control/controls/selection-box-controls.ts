@@ -1,8 +1,6 @@
-import * as THREE from 'three';
 import { SelectionBox } from 'three/examples/jsm/interactive/SelectionBox';
 import { SelectionHelper } from 'three/examples/jsm/interactive/SelectionHelper';
-import { ThreeColor, ThreeUtil } from '../../interface';
-import { I3JS } from '../../threejs-library/three-interface';
+import { ThreeColor, ThreeUtil, THREE, I3JS } from '../../interface';
 
 /**
  * Select Box Controls
@@ -56,8 +54,12 @@ export class NgxSelectBoxControls {
 		scene: I3JS.IScene,
 		renderer: I3JS.IWebGLRenderer
 	) {
-		this.selectionBox = new SelectionBox(camera, scene);
-		this.helper = new SelectionHelper(this.selectionBox, renderer, 'selectBox');
+		this.selectionBox = new SelectionBox(camera as any, scene as any);
+		this.helper = new SelectionHelper(
+			this.selectionBox,
+			renderer as any,
+			'selectBox'
+		);
 		const docElement = renderer.domElement.parentElement;
 		this.docElement = docElement;
 		let offsetParent: any = docElement;

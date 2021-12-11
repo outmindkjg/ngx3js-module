@@ -9,7 +9,6 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import * as THREE_MAT from './materials/three-materials';
 import { ReflectorOptions } from 'three/examples/jsm/objects/Reflector';
 import { ReflectorRTT } from 'three/examples/jsm/objects/ReflectorRTT';
@@ -19,6 +18,8 @@ import {
 	ThreeTexture,
 	ThreeUniforms,
 	ThreeUtil,
+	THREE,
+	I3JS,
 } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractMaterialComponent } from '../material.abstract';
@@ -27,7 +28,6 @@ import { ShaderType, ShaderUtils } from '../shader/shaders/shaderUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Material component.
@@ -802,9 +802,7 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns clearcoat normal scale
 	 */
-	private getClearcoatNormalScale(
-		def?: I3JS.IVector2
-	): I3JS.IVector2 {
+	private getClearcoatNormalScale(def?: I3JS.IVector2): I3JS.IVector2 {
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(
 				this.clearcoatNormalScaleX,
@@ -871,7 +869,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getColorNode(color?: I3JS.IColor): any {
-		return new THREE_MAT.NODES.ColorNode(color);
+		return new THREE_MAT.NODES.ColorNode(color as any);
 	}
 
 	/**
@@ -910,10 +908,8 @@ export class MaterialComponent
 	 * @param matrix
 	 * @returns
 	 */
-	private getMatrix3Node(
-		matrix?: I3JS.IMatrix3
-	): THREE_MAT.NODES.Matrix3Node {
-		return new THREE_MAT.NODES.Matrix3Node(matrix);
+	private getMatrix3Node(matrix?: I3JS.IMatrix3): THREE_MAT.NODES.Matrix3Node {
+		return new THREE_MAT.NODES.Matrix3Node(matrix as any);
 	}
 
 	/**
@@ -922,10 +918,8 @@ export class MaterialComponent
 	 * @param matrix
 	 * @returns
 	 */
-	private getMatrix4Node(
-		matrix?: I3JS.IMatrix4
-	): THREE_MAT.NODES.Matrix4Node {
-		return new THREE_MAT.NODES.Matrix4Node(matrix);
+	private getMatrix4Node(matrix?: I3JS.IMatrix4): THREE_MAT.NODES.Matrix4Node {
+		return new THREE_MAT.NODES.Matrix4Node(matrix as any);
 	}
 
 	/**
@@ -971,7 +965,7 @@ export class MaterialComponent
 		bias?: THREE_MAT.NODES.Node,
 		project?: boolean
 	): THREE_MAT.NODES.TextureNode {
-		return new THREE_MAT.NODES.TextureNode(value, uv, bias, project);
+		return new THREE_MAT.NODES.TextureNode(value as any, uv, bias, project);
 	}
 
 	/**
@@ -987,7 +981,7 @@ export class MaterialComponent
 		uv?: THREE_MAT.NODES.UVNode,
 		bias?: THREE_MAT.NODES.Node
 	): THREE_MAT.NODES.CubeTextureNode {
-		return new THREE_MAT.NODES.CubeTextureNode(value, uv, bias);
+		return new THREE_MAT.NODES.CubeTextureNode(value as any, uv, bias);
 	}
 
 	/**
@@ -1027,7 +1021,7 @@ export class MaterialComponent
 		geometry: I3JS.IBufferGeometry,
 		options?: ReflectorOptions
 	): ReflectorRTT {
-		return new ReflectorRTT(geometry, options);
+		return new ReflectorRTT(geometry as any, options);
 	}
 
 	/**
@@ -1194,10 +1188,10 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getVector2Node(
-		x: number | THREE.Vector2,
+		x: number | I3JS.IVector2,
 		y?: number
 	): THREE_MAT.NODES.Vector2Node {
-		return new THREE_MAT.NODES.Vector2Node(x, y);
+		return new THREE_MAT.NODES.Vector2Node(x as any, y);
 	}
 
 	/**
@@ -1209,14 +1203,14 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getVector3Node(
-		x: number | THREE.Vector3 | THREE.Color,
+		x: number | I3JS.IVector3 | I3JS.IColor,
 		y?: number,
 		z?: number
 	): THREE_MAT.NODES.Vector3Node {
 		if (x instanceof THREE.Color) {
 			return new THREE_MAT.NODES.Vector3Node(x.r, x.g, x.b);
 		} else {
-			return new THREE_MAT.NODES.Vector3Node(x, y, z);
+			return new THREE_MAT.NODES.Vector3Node(x as any, y, z);
 		}
 	}
 
@@ -1255,7 +1249,7 @@ export class MaterialComponent
 					.multiplyScalar(window.devicePixelRatio);
 				const groundMirror: ReflectorRTT = ThreeUtil.getMesh(
 					this.reflector
-				) as ReflectorRTT;
+				) as any;
 				const mirror: any = this.getReflectorNode(groundMirror);
 				const normalXYFlip = this.getMathNode(
 					this.getSwitchNode(
@@ -1275,7 +1269,7 @@ export class MaterialComponent
 					THREE_MAT.NODES.OperatorNode.MUL
 				);
 				const blurMirror = new THREE_MAT.NODES.BlurNode(mirror);
-				blurMirror.size = size;
+				blurMirror.size = size as any;
 				const blurMirrorUv: any = new THREE_MAT.NODES.ExpressionNode(
 					'projCoord.xyz / projCoord.q',
 					'vec3'
@@ -1575,7 +1569,7 @@ export class MaterialComponent
 	 *
 	 * @returns shader material parameters
 	 */
-	private getShaderMaterialParameters(): THREE.ShaderMaterialParameters {
+	private getShaderMaterialParameters(): I3JS.IShaderMaterialParameters {
 		return this.getMaterialParameters({
 			linewidth: ThreeUtil.getTypeSafe(this.linewidth),
 			wireframe: ThreeUtil.getTypeSafe(this.wireframe),
@@ -1598,7 +1592,9 @@ export class MaterialComponent
 	): I3JS.IShaderMaterial {
 		this.getUniforms({}, shaderMaterial.uniforms);
 		if (ThreeUtil.isNotNull(this.glslVersion)) {
-			shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(this.glslVersion);
+			shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(
+				this.glslVersion
+			);
 		}
 		if (ThreeUtil.isNotNull(this.extensions)) {
 			this.getExtensions(shaderMaterial.extensions);
@@ -1611,9 +1607,7 @@ export class MaterialComponent
 	 * Sets assign uniforms
 	 * @param resultUniforms
 	 */
-	private setAssignUniforms(resultUniforms: {
-		[key: string]: I3JS.IUniform;
-	}) {
+	private setAssignUniforms(resultUniforms: { [key: string]: I3JS.IUniform }) {
 		if (ThreeUtil.isNotNull(this.uniforms)) {
 			Object.entries(resultUniforms).forEach(([key, value]) => {
 				this.uniforms[key] = value;
@@ -2104,7 +2098,7 @@ export class MaterialComponent
 							anyMaterial['color'] !== undefined
 						) {
 							if (anyMaterial['color'] instanceof THREE_MAT.NODES.ColorNode) {
-								anyMaterial['color'].value = this.getColor();
+								anyMaterial['color'].value = this.getColor() as any;
 							} else {
 								anyMaterial['color'] = this.getColor();
 							}
@@ -2174,7 +2168,7 @@ export class MaterialComponent
 							if (
 								anyMaterial['specular'] instanceof THREE_MAT.NODES.ColorNode
 							) {
-								anyMaterial['specular'].value = this.getSpecular();
+								anyMaterial['specular'].value = this.getSpecular() as any;
 							} else {
 								anyMaterial['specular'] = this.getSpecular();
 							}
@@ -2250,7 +2244,7 @@ export class MaterialComponent
 							if (
 								anyMaterial['emissive'] instanceof THREE_MAT.NODES.ColorNode
 							) {
-								anyMaterial['emissive'].value = this.getEmissive();
+								anyMaterial['emissive'].value = this.getEmissive() as any;
 							} else {
 								anyMaterial['emissive'] = this.getEmissive();
 							}
@@ -2316,7 +2310,7 @@ export class MaterialComponent
 								anyMaterial['normalScale'] instanceof
 								THREE_MAT.NODES.Vector2Node
 							) {
-								anyMaterial['normalScale'].value = this.getNormalScale();
+								anyMaterial['normalScale'].value = this.getNormalScale() as any;
 							} else {
 								anyMaterial['normalScale'] = this.getNormalScale();
 							}
@@ -2645,7 +2639,7 @@ export class MaterialComponent
 								THREE_MAT.NODES.Vector3Node
 							) {
 								anyMaterial['referencePosition'].value =
-									this.getReferencePosition();
+									this.getReferencePosition() as any;
 							} else {
 								anyMaterial['referencePosition'] = this.getReferencePosition();
 							}
@@ -2704,7 +2698,7 @@ export class MaterialComponent
 								THREE_MAT.NODES.Vector2Node
 							) {
 								anyMaterial['clearcoatNormalScale'].value =
-									this.getClearcoatNormalScale();
+									this.getClearcoatNormalScale() as any;
 							} else {
 								anyMaterial['clearcoatNormalScale'] =
 									this.getClearcoatNormalScale();
@@ -2717,7 +2711,7 @@ export class MaterialComponent
 							anyMaterial['sheen'] !== undefined
 						) {
 							if (anyMaterial['sheen'] instanceof THREE_MAT.NODES.ColorNode) {
-								anyMaterial['sheen'].value = this.getSheen();
+								anyMaterial['sheen'].value = this.getSheen() as any;
 							} else {
 								anyMaterial['sheen'] = this.getSheen();
 							}
@@ -2935,7 +2929,7 @@ export class MaterialComponent
 								anyMaterial['resolutionX'] instanceof
 								THREE_MAT.NODES.Vector2Node
 							) {
-								anyMaterial['resolutionX'].value = this.getResolution();
+								anyMaterial['resolutionX'].value = this.getResolution() as any;
 							} else {
 								anyMaterial['resolutionX'] = this.getResolution();
 							}
@@ -2964,13 +2958,13 @@ export class MaterialComponent
 	 * @template T
 	 * @returns material
 	 */
-	public getMaterial<T extends THREE.Material>(): T {
+	public getMaterial<T extends I3JS.IMaterial>(): T {
 		if (this.material === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.setUserData('storageSource', null);
 			let material: I3JS.IMaterial = null;
 			if (ThreeUtil.isNotNull(this.storageName)) {
-				material = new THREE_MAT.NgxMeshLambertMaterial(
+				material = new THREE.MeshLambertMaterial(
 					this.getMaterialParameters({})
 				);
 				switch (this.type.toLowerCase()) {
@@ -3042,7 +3036,7 @@ export class MaterialComponent
 				switch (this.type.toLowerCase()) {
 					case 'linebasicmaterial':
 					case 'linebasic':
-						const parametersLineBasicMaterial: THREE.LineBasicMaterialParameters =
+						const parametersLineBasicMaterial: I3JS.ILineBasicMaterialParameters =
 							{
 								color: this.getColor(),
 								linewidth: ThreeUtil.getTypeSafe(this.linewidth),
@@ -3050,13 +3044,13 @@ export class MaterialComponent
 								linejoin: ThreeUtil.getTypeSafe(this.linejoin),
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 							};
-						material = new THREE_MAT.NgxLineBasicMaterial(
+						material = new THREE.LineBasicMaterial(
 							this.getMaterialParameters(parametersLineBasicMaterial)
 						);
 						break;
 					case 'linedashedmaterial':
 					case 'linedashed':
-						const parametersLineDashedMaterial: THREE.LineDashedMaterialParameters =
+						const parametersLineDashedMaterial: I3JS.ILineDashedMaterialParameters =
 							{
 								color: this.getColor(),
 								linewidth: ThreeUtil.getTypeSafe(this.linewidth),
@@ -3067,13 +3061,13 @@ export class MaterialComponent
 								gapSize: ThreeUtil.getTypeSafe(this.gapSize),
 								scale: ThreeUtil.getTypeSafe(this.scale),
 							};
-						material = new THREE_MAT.NgxLineDashedMaterial(
+						material = new THREE.LineDashedMaterial(
 							this.getMaterialParameters(parametersLineDashedMaterial)
 						);
 						break;
 					case 'meshbasicmaterial':
 					case 'meshbasic':
-						const parametersMeshBasicMaterial: THREE.MeshBasicMaterialParameters =
+						const parametersMeshBasicMaterial: I3JS.IMeshBasicMaterialParameters =
 							{
 								color: this.getColor(),
 								aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
@@ -3096,13 +3090,13 @@ export class MaterialComponent
 								alphaMap: this.getTexture('alphaMap'),
 								envMap: this.getTexture('envMap'),
 							};
-						material = new THREE_MAT.NgxMeshBasicMaterial(
+						material = new THREE.MeshBasicMaterial(
 							this.getMaterialParameters(parametersMeshBasicMaterial)
 						);
 						break;
 					case 'meshdepthmaterial':
 					case 'meshdepth':
-						const parametersMeshDepthMaterial: THREE.MeshDepthMaterialParameters =
+						const parametersMeshDepthMaterial: I3JS.IMeshDepthMaterialParameters =
 							{
 								map: this.getTexture('map'),
 								alphaMap: this.getTexture('alphaMap'),
@@ -3117,13 +3111,13 @@ export class MaterialComponent
 									this.wireframeLinewidth
 								),
 							};
-						material = new THREE_MAT.NgxMeshDepthMaterial(
+						material = new THREE.MeshDepthMaterial(
 							this.getMaterialParameters(parametersMeshDepthMaterial)
 						);
 						break;
 					case 'meshdistancematerial':
 					case 'meshdistance':
-						const parametersMeshDistanceMaterial: THREE.MeshDistanceMaterialParameters =
+						const parametersMeshDistanceMaterial: I3JS.IMeshDistanceMaterialParameters =
 							{
 								map: this.getTexture('map'),
 								alphaMap: this.getTexture('alphaMap'),
@@ -3136,13 +3130,13 @@ export class MaterialComponent
 								nearDistance: ThreeUtil.getTypeSafe(this.nearDistance),
 								referencePosition: this.getReferencePosition(),
 							};
-						material = new THREE_MAT.NgxMeshDistanceMaterial(
+						material = new THREE.MeshDistanceMaterial(
 							this.getMaterialParameters(parametersMeshDistanceMaterial)
 						);
 						break;
 					case 'meshmatcapmaterial':
 					case 'meshmatcap':
-						const parametersMeshMatcapMaterial: THREE.MeshMatcapMaterialParameters =
+						const parametersMeshMatcapMaterial: I3JS.IMeshMatcapMaterialParameters =
 							{
 								color: this.getColor(),
 								matcap: this.getTexture('matcap'),
@@ -3165,7 +3159,7 @@ export class MaterialComponent
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 							};
-						material = new THREE_MAT.NgxMeshMatcapMaterial(
+						material = new THREE.MeshMatcapMaterial(
 							this.getMaterialParameters(parametersMeshMatcapMaterial)
 						);
 						break;
@@ -3173,7 +3167,7 @@ export class MaterialComponent
 					case 'meshnormal':
 					case 'normalmaterial':
 					case 'normal':
-						const parametersMeshNormalMaterial: THREE.MeshNormalMaterialParameters =
+						const parametersMeshNormalMaterial: I3JS.IMeshNormalMaterialParameters =
 							{
 								bumpMap: this.getTexture('bumpMap'),
 								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
@@ -3196,7 +3190,7 @@ export class MaterialComponent
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 							};
-						material = new THREE_MAT.NgxMeshNormalMaterial(
+						material = new THREE.MeshNormalMaterial(
 							this.getMaterialParameters(parametersMeshNormalMaterial)
 						);
 						break;
@@ -3204,7 +3198,7 @@ export class MaterialComponent
 					case 'meshphong':
 					case 'phongmaterial':
 					case 'phong':
-						const parametersMeshPhongMaterial: THREE.MeshPhongMaterialParameters =
+						const parametersMeshPhongMaterial: I3JS.IMeshPhongMaterialParameters =
 							{
 								color: this.getColor(),
 								map: this.getTexture('map'),
@@ -3252,7 +3246,7 @@ export class MaterialComponent
 								),
 								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
 							};
-						material = new THREE_MAT.NgxMeshPhongMaterial(
+						material = new THREE.MeshPhongMaterial(
 							this.getMaterialParameters(parametersMeshPhongMaterial)
 						);
 						break;
@@ -3313,7 +3307,7 @@ export class MaterialComponent
 							thickness: ThreeUtil.getTypeSafe(this.thickness),
 							// transmissionMap: this.getTexture('transmissionMap')
 						};
-						material = new THREE_MAT.NgxMeshPhysicalMaterial(
+						material = new THREE.MeshPhysicalMaterial(
 							this.getMaterialParameters(parametersMeshPhysicalMaterial)
 						);
 						break;
@@ -3321,7 +3315,7 @@ export class MaterialComponent
 					case 'meshstandard':
 					case 'standardmaterial':
 					case 'standard':
-						const parametersMeshStandardMaterial: THREE.MeshStandardMaterialParameters =
+						const parametersMeshStandardMaterial: I3JS.IMeshStandardMaterialParameters =
 							{
 								color: this.getColor(),
 								roughness: ThreeUtil.getTypeSafe(this.roughness),
@@ -3367,7 +3361,7 @@ export class MaterialComponent
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 							};
-						const meshStandardMaterial = new THREE_MAT.NgxMeshStandardMaterial(
+						const meshStandardMaterial = new THREE.MeshStandardMaterial(
 							this.getMaterialParameters(parametersMeshStandardMaterial)
 						);
 						material = meshStandardMaterial;
@@ -3376,7 +3370,7 @@ export class MaterialComponent
 					case 'meshtoon':
 					case 'toonmaterial':
 					case 'toon':
-						const parametersMeshToonMaterial: THREE.MeshToonMaterialParameters =
+						const parametersMeshToonMaterial: I3JS.IMeshToonMaterialParameters =
 							{
 								color: this.getColor(),
 								gradientMap: this.getTexture('gradientMap'),
@@ -3422,13 +3416,13 @@ export class MaterialComponent
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 							};
-						material = new THREE_MAT.NgxMeshToonMaterial(
+						material = new THREE.MeshToonMaterial(
 							this.getMaterialParameters(parametersMeshToonMaterial)
 						);
 						break;
 					case 'pointsmaterial':
 					case 'points':
-						const parametersPointsMaterial: THREE.PointsMaterialParameters = {
+						const parametersPointsMaterial: I3JS.IPointsMaterialParameters = {
 							color: this.getColor(),
 							map: this.getTexture('map'),
 							alphaMap: this.getTexture('alphaMap'),
@@ -3436,13 +3430,13 @@ export class MaterialComponent
 							sizeAttenuation: ThreeUtil.getTypeSafe(this.sizeAttenuation),
 							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 						};
-						material = new THREE_MAT.NgxPointsMaterial(
+						material = new THREE.PointsMaterial(
 							this.getMaterialParameters(parametersPointsMaterial)
 						);
 						break;
 					case 'rawshadermaterial':
 					case 'rawshader':
-						const parametersRawShaderMaterial: THREE.ShaderMaterialParameters =
+						const parametersRawShaderMaterial: I3JS.IShaderMaterialParameters =
 							{
 								uniforms: this.getUniforms({}),
 								vertexShader: this.getShader('x-shader/x-vertex'),
@@ -3458,11 +3452,13 @@ export class MaterialComponent
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 							};
-						const rawShaderMaterial = new THREE_MAT.NgxRawShaderMaterial(
+						const rawShaderMaterial = new THREE.RawShaderMaterial(
 							this.getMaterialParameters(parametersRawShaderMaterial)
 						);
 						if (ThreeUtil.isNotNull(this.glslVersion)) {
-							rawShaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(this.glslVersion);
+							rawShaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(
+								this.glslVersion
+							);
 						}
 						if (ThreeUtil.isNotNull(this.extensions)) {
 							this.getExtensions(rawShaderMaterial.extensions);
@@ -3473,197 +3469,197 @@ export class MaterialComponent
 					case 'shaderattributesparticles':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderAttributesParticlesMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderselectivedrawmaterial':
 					case 'shaderselectivedraw':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderSelectiveDrawMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadercustomattributesmaterial':
 					case 'shadercustomattributes':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderCustomAttributesMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadercustomattributeslinesmaterial':
 					case 'shadercustomattributeslines':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderCustomAttributesLinesMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadercustomattributespointsmaterial':
 					case 'shadercustomattributespoints':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderCustomAttributesPointsMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderattributesizecolormaterial':
 					case 'shaderattributesizecolor':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderAttributeSizeColorMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderattributesizecolor1material':
 					case 'shaderattributesizecolor1':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderAttributeSizeColor1Material(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderskydomematerial':
 					case 'shaderskydome':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderSkyDomeMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderparallaxmaterial':
 					case 'shaderparallax':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderParallaxMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderfresnelmaterial':
 					case 'shaderfresnel':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderFresnelMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadersubsurfacescatteringmaterial':
 					case 'shadersubsurfacescattering':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderSubsurfaceScatteringMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderwireframematerial':
 					case 'shaderwireframe':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderWireframeMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadernoiserandom1dmaterial':
 					case 'shadernoiserandom1d':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderNoiseRandom1DMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadernoiserandom2dmaterial':
 					case 'shadernoiserandom2d':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderNoiseRandom2DMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadernoiserandom3dmaterial':
 					case 'shadernoiserandom3d':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderNoiseRandom3DMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadercolorrainbowmaterial':
 					case 'shadercolorrainbow':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderColorRainbowMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadervideokinectmaterial':
 					case 'shadervideokinect':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderVideoKinectMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadervolumerendershader1material':
 					case 'shadervolumerendershader1':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderVolumeRenderShader1Material(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderinstancingmaterial':
 					case 'shaderinstancing':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderInstancingMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderscalecolormaterial':
 					case 'shaderscalecolor':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderScaleColorMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadersincolormaterial':
 					case 'shadersincolor':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderSinColorMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderraymarchingreflectmaterial':
 					case 'shaderraymarchingreflect':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderRaymarchingReflectMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadercloudmaterial':
 					case 'shadercloud':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderCloudMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shaderperlinmaterial':
 					case 'shaderperlin':
 						material = this.getShaderMaterialUpdate(
 							new THREE_MAT.NgxShaderPerlinMaterial(
-								this.getShaderMaterialParameters()
-							)
+								this.getShaderMaterialParameters() as any
+							) as any
 						);
 						break;
 					case 'shadermaterial':
 					case 'shader':
-						const parametersShaderMaterial: THREE.ShaderMaterialParameters = {
+						const parametersShaderMaterial: I3JS.IShaderMaterialParameters = {
 							uniforms: this.getUniforms({}),
 							vertexShader: this.getShader('x-shader/x-vertex'),
 							fragmentShader: this.getShader('x-shader/x-fragment'),
@@ -3678,11 +3674,13 @@ export class MaterialComponent
 							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 						};
-						const shaderMaterial = new THREE_MAT.NgxShaderMaterial(
+						const shaderMaterial = new THREE.ShaderMaterial(
 							this.getMaterialParameters(parametersShaderMaterial)
 						);
 						if (ThreeUtil.isNotNull(this.glslVersion)) {
-							shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(this.glslVersion);
+							shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(
+								this.glslVersion
+							);
 						}
 						if (ThreeUtil.isNotNull(this.extensions)) {
 							this.getExtensions(shaderMaterial.extensions);
@@ -3691,7 +3689,7 @@ export class MaterialComponent
 						break;
 					case 'shadowmaterial':
 					case 'shadow':
-						material = new THREE_MAT.NgxShadowMaterial(
+						material = new THREE.ShadowMaterial(
 							this.getMaterialParameters({
 								color: this.getColor(),
 							})
@@ -3709,26 +3707,26 @@ export class MaterialComponent
 								gapSize: ThreeUtil.getTypeSafe(this.gapSize),
 								linewidth: ThreeUtil.getTypeSafe(this.linewidth),
 								resolution: this.getResolution(),
-							})
-						);
+							}) as any
+						) as any;
 						break;
 					case 'spritematerial':
 					case 'sprite':
-						const parametersSpriteMaterial: THREE.SpriteMaterialParameters = {
+						const parametersSpriteMaterial: I3JS.ISpriteMaterialParameters = {
 							color: this.getColor(),
 							map: this.getTexture('map'),
 							alphaMap: this.getTexture('alphaMap'),
 							rotation: ThreeUtil.getAngleSafe(this.rotation),
 							sizeAttenuation: ThreeUtil.getTypeSafe(this.sizeAttenuation),
 						};
-						material = new THREE_MAT.NgxSpriteMaterial(
+						material = new THREE.SpriteMaterial(
 							this.getMaterialParameters(parametersSpriteMaterial)
 						);
 						break;
 					case 'standardnodematerial':
 					case 'standardnode':
 						const standardNodeMaterial =
-							new THREE_MAT.NgxStandardNodeMaterial();
+							new THREE_MAT.NgxStandardNodeMaterial() as any;
 						if (ThreeUtil.isNotNull(this.side)) {
 							standardNodeMaterial.side = ThreeUtil.getSideSafe(this.side);
 						}
@@ -3770,7 +3768,7 @@ export class MaterialComponent
 					case 'basicnode':
 					case 'basicnodematerial':
 						const basicNodeMaterial = new THREE_MAT.NgxBasicNodeMaterial();
-						material = basicNodeMaterial;
+						material = basicNodeMaterial as any;
 						break;
 					case 'meshstandardnode':
 					case 'meshstandardnodematerial':
@@ -3809,7 +3807,7 @@ export class MaterialComponent
 								this.getNormalScale()
 							);
 						}
-						material = meshStandardNodeMaterial;
+						material = meshStandardNodeMaterial as any;
 						break;
 					case 'phongnodematerial':
 					case 'phongnode':
@@ -3846,19 +3844,19 @@ export class MaterialComponent
 								}
 							)
 						);
-						material = phongNodeMaterial;
+						material = phongNodeMaterial as any;
 						break;
 					case 'spritenodematerial':
 					case 'spritenode':
 						const spriteNodeMaterial = new THREE_MAT.NgxSpriteNodeMaterial();
-						material = spriteNodeMaterial;
+						material = spriteNodeMaterial as any;
 						break;
 					case 'meshlambertmaterial':
 					case 'meshlambert':
 					case 'lambertmaterial':
 					case 'lambert':
 					default:
-						const parametersMeshLambertMaterial: THREE.MeshLambertMaterialParameters =
+						const parametersMeshLambertMaterial: I3JS.IMeshLambertMaterialParameters =
 							{
 								color: this.getColor(),
 								emissive: this.getEmissive(),
@@ -3895,7 +3893,7 @@ export class MaterialComponent
 								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
 								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
 							};
-						const meshLambertMaterial = new THREE_MAT.NgxMeshLambertMaterial(
+						const meshLambertMaterial = new THREE.MeshLambertMaterial(
 							this.getMaterialParameters(parametersMeshLambertMaterial)
 						);
 						material = meshLambertMaterial;

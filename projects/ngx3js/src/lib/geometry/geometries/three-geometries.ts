@@ -556,7 +556,7 @@ export class NgxLatheBufferGeometry extends THREE.LatheBufferGeometry {
 		phiStart: number = 0,
 		phiLength: number = Math.PI * 2
 	) {
-		super(points, segments, phiStart, phiLength);
+		super(points as any, segments, phiStart, phiLength);
 	}
 }
 
@@ -592,7 +592,7 @@ export class NgxConvexGeometry extends ConvexGeometry {
 	 * @param points
 	 */
 	constructor(points: I3JS.IVector3[]) {
-		super(points);
+		super(points as any);
 	}
 }
 
@@ -618,7 +618,7 @@ export class NgxDecalGeometry extends DecalGeometry {
 		orientation: I3JS.IEuler,
 		size: I3JS.IVector3
 	) {
-		super(mesh, position, orientation, size);
+		super(mesh as any, position as any, orientation as any, size as any);
 	}
 }
 
@@ -829,7 +829,7 @@ export class NgxParametricGeometry extends ParametricGeometry {
 		slices?: number,
 		stacks?: number
 	) {
-		super(func, slices, stacks);
+		super(func as any, slices, stacks);
 	}
 }
 
@@ -942,7 +942,7 @@ export class NgxRollerCoasterTreesGeometry extends RollerCoaster.TreesGeometry {
 	 * @param landscape
 	 */
 	constructor(landscape: I3JS.IMesh) {
-		super(landscape);
+		super(landscape as any);
 	}
 }
 

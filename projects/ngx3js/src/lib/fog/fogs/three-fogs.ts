@@ -8,7 +8,7 @@ import { I3JS } from '../../threejs-library/three-interface';
  * See the [ngx fog](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_fog/FogExp2) page for a live demo.
  *
  */
-export class NgxFogExp2 extends THREE.FogExp2 implements I3JS.IFogExp2{
+export class NgxFogExp2 extends THREE.FogExp2 {
 	constructor(hex: number | string, density?: number) {
 		super(hex, density);
 	}
@@ -21,8 +21,8 @@ export class NgxFogExp2 extends THREE.FogExp2 implements I3JS.IFogExp2{
  * See the [ngx fog](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_fog/Fog) page for a live demo.
  *
  */
-export class NgxFog extends THREE.Fog implements I3JS.IFog {
+export class NgxFog extends THREE.Fog {
 	constructor(color: I3JS.TColorRepresentation, near?: number, far?: number) {
-		super(color, near, far);
+		super(color as any, near, far);
 	}
 }

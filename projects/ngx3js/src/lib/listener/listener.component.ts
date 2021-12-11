@@ -5,10 +5,8 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
+import { ThreeUtil, I3JS, THREE } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Listener component.

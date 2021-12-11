@@ -1,5 +1,4 @@
-import * as THREE from 'three';
-import { I3JS } from '../../threejs-library/three-interface';
+import { I3JS, THREE } from '../../interface';
 
 /**
  * The Grid geometry.

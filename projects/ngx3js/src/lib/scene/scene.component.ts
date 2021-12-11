@@ -7,7 +7,6 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractControllerComponent } from '../controller.component.abstract';
 import { FogComponent } from '../fog/fog.component';
@@ -18,11 +17,10 @@ import { RendererComponent } from '../renderer/renderer.component';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { TextureComponent } from '../texture/texture.component';
 import { ViewerComponent } from '../viewer/viewer.component';
-import { RendererTimer } from './../interface';
+import { RendererTimer, THREE, I3JS } from './../interface';
 import { LocalStorageService } from './../local-storage.service';
 import { MixerComponent } from './../mixer/mixer.component';
 import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Scene component.

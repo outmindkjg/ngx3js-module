@@ -197,7 +197,7 @@ export class NgxReflector extends Reflector {
 	 * @param [options]
 	 */
 	constructor(geometry?: I3JS.IBufferGeometry, options?: ReflectorOptions) {
-		super(geometry, options);
+		super(geometry as any, options);
 	}
 }
 
@@ -215,7 +215,7 @@ export class NgxReflectorRTT extends ReflectorRTT {
 	 * @param [options]
 	 */
 	constructor(geometry?: I3JS.IBufferGeometry, options?: ReflectorOptions) {
-		super(geometry, options);
+		super(geometry as any, options);
 	}
 }
 
@@ -233,7 +233,7 @@ export class NgxRefractor extends Refractor {
 	 * @param [options]
 	 */
 	constructor(geometry?: I3JS.IBufferGeometry, options?: RefractorOptions) {
-		super(geometry, options);
+		super(geometry as any, options);
 	}
 }
 
@@ -269,7 +269,7 @@ export class NgxWater extends Water {
 	 * @param options
 	 */
 	constructor(geometry: I3JS.IBufferGeometry, options: WaterOptions) {
-		super(geometry, options);
+		super(geometry as any, options);
 	}
 }
 
@@ -287,7 +287,7 @@ export class NgxWater2 extends Water2 {
 	 * @param options
 	 */
 	constructor(geometry: I3JS.IBufferGeometry, options: Water2Options) {
-		super(geometry, options);
+		super(geometry as any, options);
 	}
 }
 
@@ -321,7 +321,7 @@ export class NgxFlow extends Flow {
 	 * @param [numberOfCurves]
 	 */
 	constructor(mesh: I3JS.IMesh, numberOfCurves?: number) {
-		super(mesh, numberOfCurves);
+		super(mesh as any, numberOfCurves);
 	}
 }
 
@@ -346,7 +346,7 @@ export class NgxInstancedFlow extends InstancedFlow {
 		geometry: I3JS.IBufferGeometry,
 		material: I3JS.IMaterial
 	) {
-		super(count, curveCount, geometry, material);
+		super(count, curveCount, geometry as any, material as any);
 	}
 }
 
@@ -367,7 +367,7 @@ export class NgxLineLoop extends THREE.LineLoop {
 		geometry?: I3JS.IBufferGeometry,
 		material?: I3JS.IMaterial | I3JS.IMaterial[]
 	) {
-		super(geometry, material);
+		super(geometry as any, material as any);
 	}
 }
 
@@ -406,7 +406,7 @@ export class NgxInstancedMesh extends THREE.InstancedMesh {
 		material: I3JS.IMaterial | I3JS.IMaterial[],
 		count: number
 	) {
-		super(geometry, material, count);
+		super(geometry as any, material as any, count);
 	}
 }
 
@@ -423,7 +423,7 @@ export class NgxSprite extends THREE.Sprite {
 	 * @param [material]
 	 */
 	constructor(material?: I3JS.ISpriteMaterial) {
-		super(material);
+		super(material as any);
 	}
 }
 
@@ -468,7 +468,7 @@ export class NgxMarchingCubes extends MarchingCubes {
 		enableColors?: boolean,
 		maxPolyCount?: number
 	) {
-		super(resolution, material, enableUvs, enableColors, maxPolyCount);
+		super(resolution, material as any, enableUvs, enableColors, maxPolyCount);
 	}
 }
 
@@ -489,7 +489,7 @@ export class NgxPoints extends THREE.Points {
 		geometry?: I3JS.IBufferGeometry,
 		material?: I3JS.IMaterial | I3JS.IMaterial[]
 	) {
-		super(geometry, material);
+		super(geometry as any, material as any);
 	}
 }
 
@@ -510,7 +510,7 @@ export class NgxLine extends THREE.Line {
 		geometry?: I3JS.IBufferGeometry,
 		material?: I3JS.IMaterial | I3JS.IMaterial[]
 	) {
-		super(geometry, material);
+		super(geometry as any, material as any);
 	}
 }
 
@@ -576,7 +576,7 @@ export class NgxMeshText extends THREE.Mesh {
 		const texture = new THREE.Texture(canvas);
 		texture.needsUpdate = true;
 		this.material = new THREE.MeshBasicMaterial({
-			color: ThreeUtil.getColorSafe(this.fontColor, 0xffffff),
+			color: ThreeUtil.getColorSafe(this.fontColor, 0xffffff) as any,
 			side: this.side,
 			map: texture,
 			transparent: true,
@@ -623,7 +623,7 @@ export class NgxLineSegments extends THREE.LineSegments {
 		geometry?: I3JS.IBufferGeometry,
 		material?: I3JS.IMaterial | I3JS.IMaterial[]
 	) {
-		super(geometry, material);
+		super(geometry as any, material as any);
 	}
 }
 
@@ -641,7 +641,7 @@ export class NgxInteractiveGroup extends InteractiveGroup {
 	 * @param camera
 	 */
 	constructor(renderer: I3JS.IWebGLRenderer, camera: I3JS.ICamera) {
-		super(renderer, camera);
+		super(renderer as any, camera as any);
 	}
 }
 
@@ -696,7 +696,7 @@ export class NgxMesh extends THREE.Mesh {
 		geometry?: I3JS.IBufferGeometry,
 		material?: I3JS.IMaterial | I3JS.IMaterial[]
 	) {
-		super(geometry, material);
+		super(geometry as any, material as any);
 	}
 }
 

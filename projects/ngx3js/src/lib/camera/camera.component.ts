@@ -8,15 +8,19 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
-import * as THREE_CAMERA from './cameras/three-cameras';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { RendererTimer, ThreeColor, ThreeUtil } from './../interface';
+import {
+	I3JS,
+	RendererTimer,
+	THREE,
+	ThreeColor,
+	ThreeUtil,
+} from './../interface';
 import { LocalStorageService } from './../local-storage.service';
-import { I3JS } from '../threejs-library/three-interface';
+import * as THREE_CAMERA from './cameras/three-cameras';
 
 /**
  * The Camera component.
@@ -292,7 +296,7 @@ export class CameraComponent
 	/**
 	 * The referObject3d of camera component
 	 */
-	@Input() public referObject3d: AbstractObject3dComponent | THREE.Object3D =
+	@Input() public referObject3d: AbstractObject3dComponent | I3JS.IObject3D =
 		null;
 
 	/**
@@ -952,7 +956,7 @@ export class CameraComponent
 		const raycaster = this.getRaycaster(mouse);
 		if (mesh instanceof THREE.Object3D) {
 			return raycaster.intersectObject(mesh, recursive);
-		} else if (Array.isArray(mesh)){
+		} else if (Array.isArray(mesh)) {
 			return raycaster.intersectObjects(mesh, recursive);
 		} else {
 			return [];
@@ -1082,15 +1086,15 @@ export class CameraComponent
 			switch (this.type.toLowerCase()) {
 				case 'arraycamera':
 				case 'array':
-					this.camera = new THREE_CAMERA.NgxArrayCamera();
+					this.camera = new THREE.ArrayCamera();
 					break;
 				case 'stereocamera':
 				case 'stereo':
-					this.camera = new THREE_CAMERA.NgxStereoCamera();
+					this.camera = new THREE.StereoCamera();
 					break;
 				case 'cubecamera':
 				case 'cube':
-					this.camera = new THREE_CAMERA.NgxCubeCamera(
+					this.camera = new THREE.CubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
 						new THREE.WebGLCubeRenderTarget(512, {
@@ -1111,7 +1115,7 @@ export class CameraComponent
 						generateMipmaps: true,
 						minFilter: THREE.LinearMipmapLinearFilter,
 					});
-					const cubeCamera1 = new THREE_CAMERA.NgxCubeCamera(
+					const cubeCamera1 = new THREE.CubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
 						webGLCubeRenderTarget1
@@ -1122,7 +1126,7 @@ export class CameraComponent
 						generateMipmaps: true,
 						minFilter: THREE.LinearMipmapLinearFilter,
 					});
-					const cubeCamera2 = new THREE_CAMERA.NgxCubeCamera(
+					const cubeCamera2 = new THREE.CubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
 						webGLCubeRenderTarget2
@@ -1138,13 +1142,13 @@ export class CameraComponent
 						this.getAspect(width, height),
 						this.getNear(0.1),
 						this.getFar(2000)
-					);
+					) as any;
 					break;
 				case 'orthographiccamera':
 				case 'orthographic':
 				case 'ortho':
 					const aspect = width / height;
-					const orthographicCamera = new THREE_CAMERA.NgxOrthographicCamera(
+					const orthographicCamera = new THREE.OrthographicCamera(
 						this.getLeft(aspect),
 						this.getRight(aspect),
 						this.getTop(),
@@ -1190,7 +1194,7 @@ export class CameraComponent
 			if (this.parentObject3d instanceof THREE.ArrayCamera) {
 				this.isCameraChild = true;
 				this.parentObject3d.cameras.push(
-					this.camera as THREE.PerspectiveCamera
+					this.camera as I3JS.IPerspectiveCamera
 				);
 				this.object3d = this.camera as any;
 				this.setObject(this.camera);
@@ -1333,7 +1337,7 @@ export class CameraComponent
 						const scene = sceneCom.getScene();
 						if (scene !== null) {
 							cssRenderer.forEach((child) => {
-								child.render(scene, this.getObject3d());
+								child.render(scene, this.getObject3d() as any);
 							});
 						}
 					});
@@ -1341,7 +1345,7 @@ export class CameraComponent
 					const scene = this.getScene(scenes);
 					if (scene !== null) {
 						cssRenderer.forEach((child) => {
-							child.render(scene, this.getObject3d());
+							child.render(scene as any, this.getObject3d() as any);
 						});
 					}
 				}
@@ -1350,13 +1354,13 @@ export class CameraComponent
 					this.scenes.forEach((sceneCom) => {
 						const scene = sceneCom.getScene();
 						if (scene !== null) {
-							cssRenderer.render(scene, this.getObject3d());
+							cssRenderer.render(scene, this.getObject3d() as any);
 						}
 					});
 				} else {
 					const scene = this.getScene(scenes);
 					if (scene !== null) {
-						cssRenderer.render(scene, this.getObject3d());
+						cssRenderer.render(scene as any, this.getObject3d() as any);
 					}
 				}
 			}

@@ -7,7 +7,6 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment';
 import { HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader';
 import { NRRDLoader } from 'three/examples/jsm/loaders/NRRDLoader';
@@ -20,11 +19,10 @@ import {
 } from 'three/examples/jsm/nodes/Nodes';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
-import { ThreeUtil } from './interface';
+import { I3JS, THREE, ThreeUtil } from './interface';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { CanvasFunctionType, TextureUtils } from './texture/textureUtils';
 import { unzipSync } from './threejs-library/fflate.module';
-import { I3JS } from './threejs-library/three-interface';
 
 /**
  * The Abstract Texture component.
@@ -588,7 +586,7 @@ export class AbstractTextureComponent
 	/**
 	 * Texture loader of abstract texture component
 	 */
-	public static textureLoader: THREE.TextureLoader = null;
+	public static textureLoader: I3JS.ITextureLoader = null;
 
 	/**
 	 * Nrrd loader of abstract texture component
@@ -598,17 +596,17 @@ export class AbstractTextureComponent
 	/**
 	 * File loader of abstract texture component
 	 */
-	public static fileLoader: THREE.FileLoader = null;
+	public static fileLoader: I3JS.IFileLoader = null;
 
 	/**
 	 * Cube texture loader of abstract texture component
 	 */
-	public static cubeTextureLoader: THREE.CubeTextureLoader = null;
+	public static cubeTextureLoader: I3JS.ICubeTextureLoader = null;
 
 	/**
 	 * Image bitmap loader of abstract texture component
 	 */
-	public static imageBitmapLoader: THREE.ImageBitmapLoader = null;
+	public static imageBitmapLoader: I3JS.IImageBitmapLoader = null;
 
 	/**
 	 * Hdr cube map loader of abstract texture component
@@ -1012,7 +1010,7 @@ export class AbstractTextureComponent
 					const cubeTexture = new THREE.CubeTexture();
 					this.hdrCubeMapLoader.setDataType(THREE.UnsignedByteType);
 					this.hdrCubeMapLoader.load(cubeImage, (hdrCubeMap) => {
-						cubeTexture.copy(hdrCubeMap);
+						cubeTexture.copy(hdrCubeMap as any);
 						cubeTexture.needsUpdate = true;
 						onLoad();
 					});
@@ -1027,7 +1025,7 @@ export class AbstractTextureComponent
 					}
 					const rgbmTexture = new THREE.CubeTexture();
 					this.rgbmLoader.loadCubemap(cubeImage, (rgbmCube) => {
-						rgbmTexture.copy(rgbmCube);
+						rgbmTexture.copy(rgbmCube as any);
 						rgbmTexture.needsUpdate = true;
 						onLoad();
 					});
@@ -1162,7 +1160,7 @@ export class AbstractTextureComponent
 					} else if (image.endsWith('.room')) {
 						const pmremGenerator = ThreeUtil.getPmremGenerator();
 						const renderTarget = pmremGenerator.fromScene(
-							new RoomEnvironment(),
+							new RoomEnvironment() as any,
 							ThreeUtil.getTypeSafe(options.sigma, 0),
 							ThreeUtil.getTypeSafe(options.near, 0.1),
 							ThreeUtil.getTypeSafe(options.far, 100)
@@ -1588,9 +1586,9 @@ export class AbstractTextureComponent
 				}
 			}
 			let materials: (
-				| THREE.Material
-				| THREE.Scene
-				| THREE.WebGLRenderTarget
+				| I3JS.IMaterial
+				| I3JS.IScene
+				| I3JS.IWebGLRenderTarget
 				| { [uniform: string]: I3JS.IUniform }
 			)[] = [];
 			if (objectList.length > 0) {
@@ -1610,7 +1608,7 @@ export class AbstractTextureComponent
 					} else if (object instanceof ShaderPass) {
 						materials.push(object.material.uniforms);
 					} else if (object instanceof EffectComposer) {
-						materials.push(object.renderTarget1);
+						materials.push(object.renderTarget1 as any);
 					}
 				});
 			}
@@ -1782,7 +1780,8 @@ export class AbstractTextureComponent
 							material.setTexture(texture);
 						} else if (typeof material === 'object') {
 							const textureTypeInfo = (textureType + '..').split('.');
-							const materialUniform : {[key : string] : I3JS.IUniform} = material as any;
+							const materialUniform: { [key: string]: I3JS.IUniform } =
+								material as any;
 							switch (textureTypeInfo[0].toLowerCase()) {
 								case 'uniforms':
 									const uniformKey = textureTypeInfo[1];
@@ -1824,7 +1823,7 @@ export class AbstractTextureComponent
 					if (materialAny['color'] instanceof OperatorNode) {
 						const color: OperatorNode = materialAny['color'];
 						if (color.a instanceof TextureNode) {
-							color.a.value = texture;
+							color.a.value = texture as any;
 						}
 					}
 					break;
@@ -1832,19 +1831,21 @@ export class AbstractTextureComponent
 					if (materialAny['normal'] instanceof NormalMapNode) {
 						const normal: NormalMapNode = materialAny['normal'];
 						if (normal.value instanceof TextureNode) {
-							normal.value.value = texture;
+							normal.value.value = texture as any;
 						} else {
-							normal.value = new TextureNode(texture);
+							normal.value = new TextureNode(texture as any);
 						}
 					} else {
-						materialAny['normal'] = new NormalMapNode(new TextureNode(texture));
+						materialAny['normal'] = new NormalMapNode(
+							new TextureNode(texture as any)
+						);
 					}
 					break;
 				default:
 					if (materialAny[key] instanceof TextureNode) {
 						materialAny[key].value = texture;
 					} else {
-						materialAny[key] = new TextureNode(texture);
+						materialAny[key] = new TextureNode(texture as any);
 					}
 					break;
 			}

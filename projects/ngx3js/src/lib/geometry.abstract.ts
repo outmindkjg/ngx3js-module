@@ -9,22 +9,19 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
 import { WireframeGeometry2 } from 'three/examples/jsm/lines/WireframeGeometry2';
 import { EdgeSplitModifier } from 'three/examples/jsm/modifiers/EdgeSplitModifier';
 import { SimplifyModifier } from 'three/examples/jsm/modifiers/SimplifyModifier';
 import { TessellateModifier } from 'three/examples/jsm/modifiers/TessellateModifier';
-import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 import { GeometryCompressionUtils } from './threejs-library/GeometryCompressionUtils';
 import { NgxGeometryUtils } from './geometry/geometryUtils';
-import { ThreeUtil, ThreeVector } from './interface';
+import { ThreeUtil, ThreeVector, THREE, I3JS } from './interface';
 import { PositionComponent } from './position/position.component';
 import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { TranslationComponent } from './translation/translation.component';
-import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Attr Buffer Attribute
@@ -228,7 +225,7 @@ export class AbstractGeometryComponent
 	 */
 	@Input() public vertexBuffer:
 		| Float32Array
-		| THREE.InterleavedBuffer
+		| I3JS.IInterleavedBuffer
 		| number[] = null;
 
 	/**
@@ -932,7 +929,7 @@ export class AbstractGeometryComponent
 			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Float64Array) {
 			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
-		} else if (Array.isArray(attribute)){
+		} else if (Array.isArray(attribute)) {
 			switch ((bufferType || 'float').toLowerCase()) {
 				case 'int':
 					const intArray = new Uint32Array(attribute.length);
@@ -1030,7 +1027,7 @@ export class AbstractGeometryComponent
 	 * Object3d of Geomerty component
 	 */
 	private _object3d: {
-		[key: string]: (THREE.Mesh | THREE.Line | THREE.Points | THREE.Sprite)[];
+		[key: string]: (I3JS.IMesh | I3JS.ILine | I3JS.IPoints | I3JS.ISprite)[];
 	} = {};
 
 	/**
@@ -1055,7 +1052,7 @@ export class AbstractGeometryComponent
 			const key: string = object3d.getId();
 			let object = ThreeUtil.getObject3d(object3d);
 			const objectList: I3JS.IObject3D[] = [];
-			let meshes: (THREE.Mesh | THREE.Line | THREE.Points | THREE.Sprite)[] =
+			let meshes: (I3JS.IMesh | I3JS.ILine | I3JS.IPoints | I3JS.ISprite)[] =
 				[];
 			if (ThreeUtil.isNotNull(object)) {
 				if (ThreeUtil.isNotNull(this.refName)) {
@@ -1128,10 +1125,10 @@ export class AbstractGeometryComponent
 		if (ThreeUtil.isNotNull(geometry) && this.enabled) {
 			if (ThreeUtil.isNotNull(this._object3d)) {
 				let object3dList: (
-					| THREE.Mesh
-					| THREE.Line
-					| THREE.Points
-					| THREE.Sprite
+					| I3JS.IMesh
+					| I3JS.ILine
+					| I3JS.IPoints
+					| I3JS.ISprite
 				)[] = [];
 				if (ThreeUtil.isNotNull(key)) {
 					if (
@@ -1281,7 +1278,7 @@ export class AbstractGeometryComponent
 									switch (geometry.type) {
 										case 'CircleGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry();
+												lineGeometry = new LineSegmentsGeometry() as any;
 												const segments = (parameters.segments || 1) + 2;
 												const isClosed =
 													parameters.thetaLength < Math.PI * 2 ? false : true;
@@ -1308,7 +1305,7 @@ export class AbstractGeometryComponent
 											{
 												const sideGroup = geometry.groups[2];
 												if (ThreeUtil.isNotNull(sideGroup)) {
-													lineGeometry = new LineSegmentsGeometry();
+													lineGeometry = new LineSegmentsGeometry() as any;
 													for (
 														let i = sideGroup.start;
 														i < sideGroup.start + sideGroup.count;
@@ -1329,7 +1326,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'BoxGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry();
+												lineGeometry = new LineSegmentsGeometry() as any;
 												const gridY = parameters.heightSegments + 1;
 												const gridZ = parameters.depthSegments + 1;
 												const p1 = 0;
@@ -1369,7 +1366,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'PlaneGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry();
+												lineGeometry = new LineSegmentsGeometry() as any;
 												const gridX = parameters.widthSegments + 1;
 												const gridY = parameters.heightSegments + 1;
 												const p1 = 0;
@@ -1396,7 +1393,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'RingGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry();
+												lineGeometry = new LineSegmentsGeometry() as any;
 												const gridX = parameters.thetaSegments + 1;
 												const gridY = parameters.phiSegments + 1;
 												const lineList: { start: number; end: number }[] = [];
@@ -1431,7 +1428,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'StarGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry();
+												lineGeometry = new LineSegmentsGeometry() as any;
 												const segments = (parameters.segments || 1) + 2;
 												const isClosed =
 													parameters.thetaLength < Math.PI * 2 ? false : true;
@@ -1455,7 +1452,9 @@ export class AbstractGeometryComponent
 											break;
 									}
 									if (lineGeometry === null) {
-										lineGeometry = new WireframeGeometry2(geometry);
+										lineGeometry = new WireframeGeometry2(
+											geometry as any
+										) as any;
 									}
 									if (vertices.length > 0) {
 										const lineSegments = new Float32Array(vertices);
@@ -1619,15 +1618,15 @@ export class AbstractGeometryComponent
 					);
 				}
 				if (this.mergeVertices) {
-					geometry = BufferGeometryUtils.mergeVertices(geometry);
+					geometry = THREE.BufferGeometryUtils.mergeVertices(geometry);
 				}
 				if (this.edgeSplit) {
 					const modifier = new EdgeSplitModifier();
 					geometry = modifier.modify(
-						geometry,
+						geometry as any,
 						ThreeUtil.getAngleSafe(this.cutOffAngle, 0),
 						ThreeUtil.getTypeSafe(this.tryKeepNormals, false)
-					);
+					) as any;
 				}
 				if (this.simplify) {
 					const modifier = new SimplifyModifier();
@@ -1635,7 +1634,7 @@ export class AbstractGeometryComponent
 						geometry.attributes.position.count *
 							Math.max(0, Math.min(1, ThreeUtil.getTypeSafe(this.count, 1)))
 					);
-					geometry = modifier.modify(geometry, count);
+					geometry = modifier.modify(geometry as any, count) as any;
 					geometry.computeVertexNormals();
 				}
 				if (this.tessellate) {
@@ -1643,7 +1642,7 @@ export class AbstractGeometryComponent
 						ThreeUtil.getTypeSafe(this.maxEdgeLength, 8),
 						ThreeUtil.getTypeSafe(this.maxIterations, 6)
 					);
-					geometry = modifier.modify(geometry);
+					geometry = modifier.modify(geometry as any) as any;
 				}
 				if (this.computeVertexNormals) {
 					geometry.computeVertexNormals();

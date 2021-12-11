@@ -6,11 +6,9 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
+import { ThreeUtil, THREE, I3JS } from '../interface';
 import { SizeComponent } from '../size/size.component';
 import { AbstractTextureComponent } from '../texture.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Render Target component.
@@ -204,7 +202,7 @@ export class RenderTargetComponent
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture<T extends THREE.Texture>(): T {
+	public getTexture<T extends I3JS.ITexture>(): T {
 		if (this.renderTarget === null) {
 			this.getRenderTarget();
 		}
@@ -219,8 +217,8 @@ export class RenderTargetComponent
 	 * Render target of render target component
 	 */
 	private renderTarget:
-		| THREE.WebGLRenderTarget
-		| THREE.WebGLMultipleRenderTargets = null;
+		| I3JS.IWebGLRenderTarget
+		| I3JS.IWebGLMultipleRenderTargets = null;
 
 	/**
 	 * Gets render target

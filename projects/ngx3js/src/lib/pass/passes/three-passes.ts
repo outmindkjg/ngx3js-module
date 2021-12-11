@@ -176,7 +176,7 @@ export class NgxBokehPass extends BokehPass {
 		camera: I3JS.ICamera,
 		params: BokehPassParamters
 	) {
-		super(scene, camera, params);
+		super(scene as any, camera as any, params);
 	}
 }
 
@@ -195,7 +195,7 @@ export class NgxClearPass extends ClearPass {
 	 * @param [clearAlpha]
 	 */
 	constructor(clearColor?: I3JS.TColorRepresentation, clearAlpha?: number) {
-		super(clearColor, clearAlpha);
+		super(clearColor as any, clearAlpha);
 	}
 }
 
@@ -219,7 +219,7 @@ export class NgxCubeTexturePass extends CubeTexturePass {
 		envMap?: I3JS.ICubeTexture,
 		opacity?: number
 	) {
-		super(camera, envMap, opacity);
+		super(camera as any, envMap as any, opacity);
 	}
 }
 
@@ -239,7 +239,7 @@ export class NgxDotScreenPass extends DotScreenPass {
 	 * @param [scale]
 	 */
 	constructor(center?: I3JS.IVector2, angle?: number, scale?: number) {
-		super(center, angle, scale);
+		super(center as any, angle, scale);
 	}
 }
 
@@ -356,7 +356,7 @@ export class NgxMaskPass extends MaskPass {
 	 * @param camera
 	 */
 	constructor(scene: I3JS.IScene, camera: I3JS.ICamera) {
-		super(scene, camera);
+		super(scene as any, camera as any);
 	}
 }
 
@@ -382,7 +382,12 @@ export class NgxOutlinePass extends OutlinePass {
 		camera: I3JS.ICamera,
 		selectedObjects?: I3JS.IObject3D[]
 	) {
-		super(resolution, scene, camera, selectedObjects);
+		super(
+			resolution as any,
+			scene as any,
+			camera as any,
+			selectedObjects as any[]
+		);
 	}
 }
 
@@ -425,7 +430,13 @@ export class NgxRenderPass extends RenderPass {
 		clearColor?: I3JS.IColor,
 		clearAlpha?: number
 	) {
-		super(scene, camera, overrideMaterial, clearColor, clearAlpha);
+		super(
+			scene as any,
+			camera as any,
+			overrideMaterial as any,
+			clearColor as any,
+			clearAlpha
+		);
 	}
 }
 
@@ -444,7 +455,13 @@ export class NgxSAOPass extends SAOPass {
 		useNormals?: boolean,
 		resolution?: I3JS.IVector2
 	) {
-		super(scene, camera, depthTexture, useNormals, resolution);
+		super(
+			scene as any,
+			camera as any,
+			depthTexture,
+			useNormals,
+			resolution as any
+		);
 	}
 }
 
@@ -462,7 +479,7 @@ export class NgxSavePass extends SavePass {
 	 * @param renderTarget
 	 */
 	constructor(renderTarget: I3JS.IWebGLRenderTarget) {
-		super(renderTarget);
+		super(renderTarget as any);
 	}
 }
 
@@ -526,7 +543,7 @@ export class NgxSSAARenderPass extends SSAARenderPass {
 		clearColor: I3JS.TColorRepresentation,
 		clearAlpha: number
 	) {
-		super(scene, camera, clearColor, clearAlpha);
+		super(scene as any, camera as any, clearColor as any, clearAlpha);
 	}
 }
 
@@ -552,7 +569,7 @@ export class NgxSSAOPass extends SSAOPass {
 		width?: number,
 		height?: number
 	) {
-		super(scene, camera, width, height);
+		super(scene as any, camera as any, width, height);
 	}
 }
 
@@ -614,7 +631,7 @@ export class NgxTAARenderPass extends TAARenderPass {
 		clearColor: I3JS.TColorRepresentation,
 		clearAlpha: number
 	) {
-		super(scene, camera, clearColor, clearAlpha);
+		super(scene as any, camera as any, clearColor as any, clearAlpha);
 	}
 }
 
@@ -633,7 +650,7 @@ export class NgxTexturePass extends TexturePass {
 	 * @param [opacity]
 	 */
 	constructor(map: I3JS.ITexture, opacity?: number) {
-		super(map, opacity);
+		super(map as any, opacity);
 	}
 }
 
@@ -659,7 +676,7 @@ export class NgxUnrealBloomPass extends UnrealBloomPass {
 		radius: number,
 		threshold: number
 	) {
-		super(resolution, strength, radius, threshold);
+		super(resolution as any, strength, radius, threshold);
 	}
 }
 

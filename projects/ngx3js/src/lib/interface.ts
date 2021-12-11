@@ -19,7 +19,8 @@ import { GUI } from './threejs-library/lil-gui';
 import { I3JS } from './threejs-library/three-interface';
 import { THREE } from './threejs-library/three-core';
 
-export { I3JS, THREE }
+export { I3JS, THREE };
+
 /**
  * Apply matrix4
  */
@@ -990,7 +991,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	public setMesh(mesh: MeshComponent) {
 		this.mesh = mesh;
 		if (this.mesh !== null) {
-			this.meshObject3d = this.mesh.getObject3d();
+			this.meshObject3d = this.mesh.getObject3d() as any;
 			this.meshChildren = this.meshObject3d.children;
 			window.setTimeout(() => {
 				this.updateGuiController();
@@ -1498,9 +1499,7 @@ export class ThreeUtil {
 	 * @returns pmrem generator
 	 */
 	public static getPmremGenerator(): I3JS.IPMREMGenerator {
-		return new THREE.PMREMGenerator(
-			this.getRenderer() as I3JS.IWebGLRenderer
-		);
+		return new THREE.PMREMGenerator(this.getRenderer() as I3JS.IWebGLRenderer);
 	}
 
 	/**
@@ -2418,7 +2417,7 @@ export class ThreeUtil {
 		baseWrap: string,
 		altWrap?: string,
 		def?: string
-	): THREE.Wrapping {
+	): I3JS.TWrapping {
 		const wrap = this.getTypeSafe(baseWrap, altWrap, def || '');
 		switch (wrap.toLowerCase()) {
 			case 'wraprepeat':
@@ -2458,7 +2457,7 @@ export class ThreeUtil {
 		baseFilter: string,
 		altFilter?: string,
 		def?: string
-	): THREE.TextureFilter {
+	): I3JS.TTextureFilter {
 		const filter = this.getTypeSafe(baseFilter, altFilter, def || '');
 		switch (filter.toLowerCase()) {
 			case 'nearestfilter':
@@ -2501,7 +2500,7 @@ export class ThreeUtil {
 		baseSide: string,
 		altSide?: string,
 		def?: string
-	): THREE.Side {
+	): I3JS.TSide {
 		const side = this.getTypeSafe(baseSide, altSide, def || '');
 		switch (side.toLowerCase()) {
 			case 'backside':
@@ -2525,7 +2524,7 @@ export class ThreeUtil {
 	public static getShadowMapTypeSafe(
 		baseShadowMapType: string,
 		def?: string
-	): THREE.ShadowMapType {
+	): I3JS.TShadowMapType {
 		const shadowMapType = this.getTypeSafe(baseShadowMapType, def, '');
 		switch (shadowMapType.toLowerCase()) {
 			case 'basicshadowmap':
@@ -2552,7 +2551,7 @@ export class ThreeUtil {
 	public static getInterpolationSafe(
 		baseInterpolation: string,
 		def?: string
-	): THREE.InterpolationModes {
+	): I3JS.TInterpolationModes {
 		const interpolation = this.getTypeSafe(baseInterpolation, def, '');
 		switch (interpolation.toLowerCase()) {
 			case 'interpolatediscrete':
@@ -2577,7 +2576,7 @@ export class ThreeUtil {
 	public static getNormalMapTypeSafe(
 		baseNormalMapType: string,
 		def?: string
-	): THREE.NormalMapTypes {
+	): I3JS.TNormalMapTypes {
 		const normalMapType = ThreeUtil.getTypeSafe(baseNormalMapType, def, '');
 		switch (normalMapType.toLowerCase()) {
 			case 'tangentspace':
@@ -2595,7 +2594,7 @@ export class ThreeUtil {
 	public static getStencilFuncSafe(
 		baseStencilFunc: string,
 		def?: string
-	): THREE.StencilFunc {
+	): I3JS.TStencilFunc {
 		const stencilFunc = ThreeUtil.getTypeSafe(baseStencilFunc, def, '');
 		switch (stencilFunc.toLowerCase()) {
 			case 'never':
@@ -2626,7 +2625,7 @@ export class ThreeUtil {
 	public static getStencilOpSafe(
 		baseStencilFail: string,
 		def?: string
-	): THREE.StencilOp {
+	): I3JS.TStencilOp {
 		const stencilFail = this.getTypeSafe(baseStencilFail, def, '');
 		switch (stencilFail.toLowerCase()) {
 			case 'zero':
@@ -2672,7 +2671,7 @@ export class ThreeUtil {
 		baseBlending: string,
 		altBlending?: string,
 		def?: string
-	): THREE.Blending {
+	): I3JS.TBlending {
 		const blending = this.getTypeSafe(baseBlending, altBlending, def || '');
 		switch (blending.toLowerCase()) {
 			case 'noblending':
@@ -2705,7 +2704,7 @@ export class ThreeUtil {
 	public static getBlendEquationSafe(
 		baseBlendEquation: string,
 		def?: string
-	): THREE.BlendingEquation {
+	): I3JS.TBlendingEquation {
 		const blendEquation = this.getTypeSafe(baseBlendEquation, def, '');
 		switch (blendEquation.toLowerCase()) {
 			case 'add':
@@ -2747,7 +2746,7 @@ export class ThreeUtil {
 	public static getBlendDstSafe(
 		baseBlendSrc: string,
 		def?: string
-	): THREE.BlendingDstFactor {
+	): I3JS.TBlendingDstFactor {
 		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
 		switch (blendSrc.toLowerCase()) {
 			case 'zerofactor':
@@ -2809,7 +2808,7 @@ export class ThreeUtil {
 	public static getBlendSrcSafe(
 		baseBlendSrc: string,
 		def?: string
-	): THREE.BlendingSrcFactor {
+	): I3JS.TBlendingSrcFactor {
 		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
 		switch (blendSrc.toLowerCase()) {
 			case 'srcalphasaturatefactor':
@@ -2826,7 +2825,7 @@ export class ThreeUtil {
 	public static getDepthModesSafe(
 		baseDepthFunc: string,
 		def?: string
-	): THREE.DepthModes {
+	): I3JS.TDepthModes {
 		const depthFunc = ThreeUtil.getTypeSafe(baseDepthFunc, def, '');
 		switch (depthFunc.toLowerCase()) {
 			case 'never':
@@ -2900,7 +2899,7 @@ export class ThreeUtil {
 		baseFormat: string,
 		altFormat?: string,
 		def?: string
-	): THREE.PixelFormat {
+	): I3JS.TPixelFormat {
 		const format = this.getTypeSafe(baseFormat, altFormat, def || '');
 		switch (format.toLowerCase()) {
 			case 'alphaformat':
@@ -2959,7 +2958,7 @@ export class ThreeUtil {
 	public static getCombineSafe(
 		baseCombine: string,
 		def?: string
-	): THREE.Combine {
+	): I3JS.TCombine {
 		const combine = this.getTypeSafe(baseCombine, def, '');
 		switch (combine.toLowerCase()) {
 			case 'multiplyoperation':
@@ -2983,7 +2982,7 @@ export class ThreeUtil {
 	public static getDepthPackingSafe(
 		baseDepthPacking: string,
 		def?: string
-	): THREE.DepthPackingStrategies {
+	): I3JS.TDepthPackingStrategies {
 		const depthPacking = this.getTypeSafe(baseDepthPacking, def, '');
 		switch (depthPacking.toLowerCase()) {
 			case 'rgba':
@@ -3004,7 +3003,7 @@ export class ThreeUtil {
 	public static getGlslVersionSafe(
 		baseGlslVersion: string,
 		def?: string
-	): THREE.GLSLVersion {
+	): I3JS.TGLSLVersion {
 		const glslVersion = this.getTypeSafe(baseGlslVersion, def, '');
 		switch (glslVersion.toLowerCase()) {
 			case '1':
@@ -3034,7 +3033,7 @@ export class ThreeUtil {
 	public static getBlendModeSafe(
 		baseBlendMode: string,
 		def?: string
-	): THREE.AnimationBlendMode {
+	): I3JS.TAnimationBlendMode {
 		const blendMode = this.getTypeSafe(baseBlendMode, def, '');
 		switch (blendMode.toLowerCase()) {
 			case 'normalanimationblendmode':
@@ -3065,7 +3064,7 @@ export class ThreeUtil {
 	public static getLoopSafe(
 		baseLoop: string,
 		def?: string
-	): THREE.AnimationActionLoopStyles {
+	): I3JS.TAnimationActionLoopStyles {
 		const loop = this.getTypeSafe(baseLoop, def, '');
 		switch (loop.toLowerCase()) {
 			case 'looponce':
@@ -3086,7 +3085,7 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns usage
 	 */
-	public static getUsageSafe(baseUsage: string, def?: string): THREE.Usage {
+	public static getUsageSafe(baseUsage: string, def?: string): I3JS.TUsage {
 		const usage = ThreeUtil.getTypeSafe(baseUsage, def, '');
 		switch (usage.toLowerCase()) {
 			case 'streamdrawusage':
@@ -3148,7 +3147,7 @@ export class ThreeUtil {
 		baseFormat: string,
 		altFormat?: string,
 		def?: string
-	): THREE.TextureDataType {
+	): I3JS.TTextureDataType {
 		const type = this.getTypeSafe(baseFormat, altFormat, def || '');
 		switch (type.toLowerCase()) {
 			case 'bytetype':
@@ -3343,9 +3342,7 @@ export class ThreeUtil {
 	 * @param material
 	 * @returns material
 	 */
-	public static getMaterial(
-		material: any
-	): I3JS.IMaterial | I3JS.IMaterial[] {
+	public static getMaterial(material: any): I3JS.IMaterial | I3JS.IMaterial[] {
 		if (material instanceof THREE.Material) {
 			return material;
 		} else if (Array.isArray(material)) {
@@ -3942,7 +3939,7 @@ export class ThreeUtil {
 		baseEncoding: string,
 		altEncoding?: string,
 		def?: string
-	): THREE.TextureEncoding {
+	): I3JS.TTextureEncoding {
 		const encoding = this.getTypeSafe(baseEncoding, altEncoding, def || '');
 		switch (encoding.toLowerCase()) {
 			case 'srgbencoding':
@@ -3997,7 +3994,7 @@ export class ThreeUtil {
 		baseMapping: string,
 		altMapping?: string,
 		def?: string
-	): THREE.Mapping {
+	): I3JS.TMapping {
 		const mapping = this.getTypeSafe(baseMapping, altMapping, def || '');
 		switch (mapping.toLowerCase()) {
 			case 'uvmapping':

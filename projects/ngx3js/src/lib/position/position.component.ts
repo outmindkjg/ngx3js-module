@@ -1,9 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
-import { TagAttributes, ThreeUtil } from '../interface';
+import { TagAttributes, ThreeUtil, I3JS, THREE } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTweenComponent } from '../tween.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Position component.
@@ -246,7 +244,7 @@ export class PositionComponent
 						switch (this.type.toLowerCase()) {
 							case 'up':
 								if (ThreeUtil.isNull(object3d.up)) {
-									object3d.up = THREE.Object3D.DefaultUp.clone();
+									object3d.up = new THREE.Vector3(0, 1, 0);
 								}
 								object3d.up.copy(position);
 								break;

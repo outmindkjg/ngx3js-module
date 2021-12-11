@@ -7,14 +7,12 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import * as Ammo from '../threejs-library/ammo';
-import * as THREE from 'three';
 import { ConvexObjectBreaker } from 'three/examples/jsm/misc/ConvexObjectBreaker';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { RendererTimer, ThreeUtil } from './../interface';
+import { RendererTimer, ThreeUtil, THREE, I3JS } from './../interface';
 import { PhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
 import { AmmoPhysics } from '../threejs-library/AmmoPhysics';
 import { OimoPhysics } from '../threejs-library/OimoPhysics';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * PhysicsComponent
@@ -462,8 +460,8 @@ export class PhysicsComponent
 						const fragments: I3JS.IObject3D[] = [];
 						const debris = convexBreaker.subdivideByImpact(
 							threeObject0,
-							this.impactPoint,
-							this.impactNormal,
+							this.impactPoint as any,
+							this.impactNormal as any,
 							1,
 							2
 						);
@@ -478,7 +476,7 @@ export class PhysicsComponent
 								angVel.y(),
 								angVel.z()
 							);
-							fragments.push(fragment);
+							fragments.push(fragment as any);
 						}
 						userData0.collided = true;
 						threeObject0.dispatchEvent({
@@ -492,8 +490,8 @@ export class PhysicsComponent
 						const fragments: I3JS.IObject3D[] = [];
 						const debris = convexBreaker.subdivideByImpact(
 							threeObject1,
-							this.impactPoint,
-							this.impactNormal,
+							this.impactPoint as any,
+							this.impactNormal as any,
 							1,
 							2
 						);
@@ -508,7 +506,7 @@ export class PhysicsComponent
 								angVel.y(),
 								angVel.z()
 							);
-							fragments.push(fragment);
+							fragments.push(fragment as any);
 						}
 						threeObject1.dispatchEvent({
 							type: 'debris',

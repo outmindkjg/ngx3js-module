@@ -6,11 +6,9 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { KeyframeComponent } from '../keyframe/keyframe.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ThreeUtil } from './../interface';
-import { I3JS } from '../threejs-library/three-interface';
+import { ThreeUtil, THREE, I3JS } from './../interface';
 
 /**
  * The Clip component.
@@ -451,7 +449,7 @@ export class ClipComponent
 				if (this.getClampWhenFinished(false)) {
 					this.action.clampWhenFinished = true;
 				}
-				this.action.loop = ThreeUtil.getLoopSafe(this.loop ,'repeat');
+				this.action.loop = ThreeUtil.getLoopSafe(this.loop, 'repeat');
 			} else {
 				this.action = null;
 			}

@@ -1,14 +1,11 @@
 import { QueryList } from '@angular/core';
 import * as GSAP from 'gsap';
-import * as THREE from 'three';
-import { IUniform } from 'three';
 import { CameraComponent } from './camera/camera.component';
 import { CanvasComponent } from './canvas/canvas.component';
-import { RendererTimer, ThreeUtil } from './interface';
+import { RendererTimer, ThreeUtil, I3JS, THREE } from './interface';
 import { AbstractMaterialComponent } from './material.abstract';
 import { SceneComponent } from './scene/scene.component';
 import { HtmlCollection, VisualComponent } from './visual/visual.component';
-import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Abstract three controller
@@ -1087,7 +1084,7 @@ export class AutoMaterialController extends AbstractThreeController {
 	/**
 	 * The Color of auto material controller
 	 */
-	protected color: number | string | THREE.Color = null;
+	protected color: number | string | I3JS.IColor = null;
 
 	/**
 	 * The Opacity of auto material controller
@@ -1199,7 +1196,7 @@ export class AutoUniformsController extends AbstractThreeController {
 	/**
 	 * The Uniform of auto uniforms controller
 	 */
-	private uniform: IUniform = null;
+	private uniform: I3JS.IUniform = null;
 
 	/**
 	 * Updates auto uniforms controller

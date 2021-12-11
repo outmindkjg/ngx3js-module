@@ -1,6 +1,4 @@
-import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
-import { I3JS } from '../threejs-library/three-interface';
+import { ThreeUtil, THREE, I3JS } from '../interface';
 
 /**
  * Viewer canvas

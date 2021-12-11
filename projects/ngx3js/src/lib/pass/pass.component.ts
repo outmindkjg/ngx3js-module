@@ -6,7 +6,6 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import {
 	LUTCubeLoader,
 	LUTCubeResult,
@@ -14,14 +13,13 @@ import {
 import * as THREE_PASS from './passes/three-passes';
 import * as THREE_EFFECT from './../effect/effects/three-effects';
 
-import { ThreeColor, ThreeUtil } from '../interface';
+import { ThreeColor, ThreeUtil, THREE, I3JS } from '../interface';
 import { MeshComponent } from '../mesh/mesh.component';
 import { ShaderComponent } from '../shader/shader.component';
 import { ShaderUtils } from '../shader/shaders/shaderUtils';
 import { SizeComponent } from '../size/size.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TextureComponent } from '../texture/texture.component';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Pass component.
@@ -1167,7 +1165,7 @@ export class PassComponent
 		switch (shader.toLowerCase()) {
 			case 'shadermaterial':
 			case 'material':
-				const shaderMaterialParameters: THREE.ShaderMaterialParameters = {
+				const shaderMaterialParameters: I3JS.IShaderMaterialParameters = {
 					vertexShader: this.getMaterialShader('x-shader/x-vertex'),
 					fragmentShader: this.getMaterialShader('x-shader/x-fragment'),
 					uniforms: this.getUniforms(
@@ -1497,14 +1495,14 @@ export class PassComponent
 		if (ThreeUtil.isNotNull(effectComposer)) {
 			switch ((mapType || '').toLowerCase()) {
 				case 'target1':
-					return effectComposer.renderTarget1.texture;
+					return effectComposer.renderTarget1.texture as any;
 				case 'write':
-					return effectComposer.writeBuffer.texture;
+					return effectComposer.writeBuffer.texture as any;
 				case 'read':
-					return effectComposer.readBuffer.texture;
+					return effectComposer.readBuffer.texture as any;
 				case 'target2':
 				default:
-					return effectComposer.renderTarget2.texture;
+					return effectComposer.renderTarget2.texture as any;
 			}
 		}
 		const refMap = this.map;
@@ -1761,7 +1759,7 @@ export class PassComponent
 					case 'cubetexturepass':
 					case 'cubetexture':
 						pass = new THREE_PASS.NgxCubeTexturePass(
-							this.getCamera(this.effectCamera) as THREE.PerspectiveCamera,
+							this.getCamera(this.effectCamera) as I3JS.IPerspectiveCamera,
 							this.getEnvMap(),
 							this.getOpacity()
 						);
@@ -1835,22 +1833,22 @@ export class PassComponent
 							this.getCamera(this.effectCamera)
 						);
 						if (ThreeUtil.isNotNull(this.patternTexture)) {
-							outlinePass.patternTexture = this.getPatternTexture();
+							outlinePass.patternTexture = this.getPatternTexture() as any;
 						}
 						if (ThreeUtil.isNotNull(this.selectedObjects)) {
-							outlinePass.selectedObjects = this.getSelectedObjects();
+							outlinePass.selectedObjects = this.getSelectedObjects() as any;
 						}
 						if (ThreeUtil.isNotNull(this.visibleEdgeColor)) {
 							outlinePass.visibleEdgeColor = ThreeUtil.getColorSafe(
 								this.visibleEdgeColor,
 								0xffffff
-							);
+							) as any;
 						}
 						if (ThreeUtil.isNotNull(this.hiddenEdgeColor)) {
 							outlinePass.hiddenEdgeColor = ThreeUtil.getColorSafe(
 								this.hiddenEdgeColor,
 								0xffffff
-							);
+							) as any;
 						}
 						if (ThreeUtil.isNotNull(this.edgeGlow)) {
 							outlinePass.edgeGlow = ThreeUtil.getTypeSafe(this.edgeGlow, 0);
@@ -2158,7 +2156,7 @@ export class PassComponent
 							ThreeUtil.getVector2Safe(
 								this.width | 512,
 								this.height | 512,
-								new THREE.Vector2(512, 512)
+								new THREE.Vector2(512, 512) as any
 							),
 							this.getStrength(1.5),
 							this.getRadius(0.4),
@@ -2177,12 +2175,12 @@ export class PassComponent
 						}
 						const ssrSize = this.getSize();
 						const ssrPass = new THREE_PASS.NgxSSRPass({
-							renderer: this.effectRenderer,
-							scene: this.getScene(this.effectScene),
-							camera: this.getCamera(this.effectCamera),
+							renderer: this.effectRenderer as any,
+							scene: this.getScene(this.effectScene) as any,
+							camera: this.getCamera(this.effectCamera) as any,
 							width: ssrSize.x,
 							height: ssrSize.y,
-							selects: ThreeUtil.getTypeSafe(this.selects, []),
+							selects: ThreeUtil.getTypeSafe(this.selects, []) as any,
 							isPerspectiveCamera: undefined,
 							isBouncing: undefined,
 							groundReflector: groundReflector,
@@ -2204,12 +2202,12 @@ export class PassComponent
 					case 'ssrr':
 						const ssrrSize = this.getSize();
 						const ssrrPass = new THREE_PASS.NgxSSRrPass({
-							renderer: this.effectRenderer,
-							scene: this.getScene(this.effectScene),
-							camera: this.getCamera(this.effectCamera),
+							renderer: this.effectRenderer as any,
+							scene: this.getScene(this.effectScene) as any,
+							camera: this.getCamera(this.effectCamera) as any,
 							width: ssrrSize.x,
 							height: ssrrSize.y,
-							selects: ThreeUtil.getTypeSafe(this.selects, []),
+							selects: ThreeUtil.getTypeSafe(this.selects, []) as any,
 						});
 						this.subscribeRefer(
 							'passSize',

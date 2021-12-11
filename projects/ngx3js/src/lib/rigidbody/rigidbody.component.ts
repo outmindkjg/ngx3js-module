@@ -6,14 +6,12 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { NgxGeometryUtils } from '../geometry/geometryUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import * as Ammo from '../threejs-library/ammo';
-import { RendererTimer, ThreeUtil } from './../interface';
+import { I3JS, RendererTimer, THREE, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
 import { RigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Rigidbody type
@@ -423,7 +421,7 @@ export class RigidbodyComponent
 		if (ThreeUtil.isNotNull(def)) {
 			if (def instanceof THREE.Vector3) {
 				return def;
-			} else if (typeof def === 'number'){
+			} else if (typeof def === 'number') {
 				return new THREE.Vector3(def, def, def);
 			}
 		}
@@ -464,7 +462,7 @@ export class RigidbodyComponent
 		if (ThreeUtil.isNotNull(def)) {
 			if (def instanceof THREE.Vector3) {
 				return def;
-			} else if (typeof def === 'number'){
+			} else if (typeof def === 'number') {
 				return new THREE.Vector3(def, def, def);
 			}
 		}
@@ -1562,7 +1560,7 @@ export class RigidbodyComponent
 							const segments = this.getGeometrySegments(geometry);
 							const meshPositions = geometry.getAttribute(
 								'position'
-							) as THREE.BufferAttribute;
+							) as I3JS.IBufferAttribute;
 							const heightStickWidth: number = segments.x + 1;
 							const heightStickLength: number = segments.y + 1;
 							const heightfieldData = this._ammo._malloc(
@@ -1613,7 +1611,7 @@ export class RigidbodyComponent
 								);
 								const attrPos = absGeometry.getAttribute(
 									'position'
-								) as THREE.BufferAttribute;
+								) as I3JS.IBufferAttribute;
 								let index = 0;
 								const ropeStart = new this._ammo.btVector3(
 									attrPos.getX(index),
@@ -1636,7 +1634,7 @@ export class RigidbodyComponent
 										0
 									);
 								(
-									geometry.getAttribute('position') as THREE.BufferAttribute
+									geometry.getAttribute('position') as I3JS.IBufferAttribute
 								).setUsage(THREE.DynamicDrawUsage);
 								break;
 							default:
@@ -1662,7 +1660,7 @@ export class RigidbodyComponent
 									ThreeUtil.getTypeSafe(this.randomizeConstraints, true)
 								);
 							(
-								geometry.getAttribute('position') as THREE.BufferAttribute
+								geometry.getAttribute('position') as I3JS.IBufferAttribute
 							).setUsage(THREE.DynamicDrawUsage);
 						}
 						break;
@@ -1704,7 +1702,7 @@ export class RigidbodyComponent
 									);
 									const attrPos = absGeometry.getAttribute(
 										'position'
-									) as THREE.BufferAttribute;
+									) as I3JS.IBufferAttribute;
 									const attrCount = attrPos.count;
 									let index = 0;
 									const clothCorner00 = new this._ammo.btVector3(
@@ -1933,10 +1931,10 @@ export class RigidbodyComponent
 							this.physics
 								.getConvexObjectBreaker()
 								.prepareBreakableObject(
-									this.object3d,
+									this.object3d as any,
 									mass,
-									new THREE.Vector3(),
-									new THREE.Vector3(),
+									new THREE.Vector3() as any,
+									new THREE.Vector3() as any,
 									true
 								);
 							const btVecUserData: any = new this._ammo.btVector3(0, 0, 0);
@@ -2040,7 +2038,7 @@ export class RigidbodyComponent
 						const geometry: I3JS.IBufferGeometry = object3dAny['geometry'];
 						const meshPositions = geometry.getAttribute(
 							'position'
-						) as THREE.BufferAttribute;
+						) as I3JS.IBufferAttribute;
 						const nodes = softBody.get_m_nodes();
 						const position = this.positionAux;
 						if (ThreeUtil.isNotNull(this.rigidBody.ammoIndexAssociation)) {

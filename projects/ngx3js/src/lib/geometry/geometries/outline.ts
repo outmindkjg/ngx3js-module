@@ -17,7 +17,7 @@ export class NgxOutlineGeometry extends THREE.WireframeGeometry {
 	 * @param [thetaLength=Math.PI * 2]
 	 */
 	constructor(geometry: I3JS.IBufferGeometry, scale: number = 1) {
-		super(geometry);
+		super(geometry as any);
 		this.type = 'OutlineGeometry';
 		if (scale !== 1) {
 			this.scale(scale, scale, scale);

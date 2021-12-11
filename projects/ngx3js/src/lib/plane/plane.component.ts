@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
+import { ThreeUtil, THREE, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Plane component.

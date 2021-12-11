@@ -1,7 +1,5 @@
-import * as THREE from 'three';
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
-import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-import { I3JS } from '../../threejs-library/three-interface';
+import { I3JS, THREE } from '../../interface';
 
 /**
  * The Plane Perlin geometry.
@@ -187,7 +185,7 @@ export class NgxPlanePerlinGeometry {
 				}
 			}
 		}
-		return BufferGeometryUtils.mergeBufferGeometries(geometries);
+		return THREE.BufferGeometryUtils.mergeBufferGeometries(geometries);
 	}
 
 	/**
@@ -270,7 +268,7 @@ export class NgxPlanePerlinGeometry {
 		const worldWidth = this.worldWidth;
 		const worldHalfWidth = worldWidth / 2;
 		const worldHalfDepth = worldDepth / 2;
-		const matrix : I3JS.IMatrix4  = new THREE.Matrix4();
+		const matrix: I3JS.IMatrix4 = new THREE.Matrix4();
 		for (let z = 0; z < worldDepth; z++) {
 			for (let x = 0; x < worldWidth; x++) {
 				const h = this.getY(x, z);
@@ -364,7 +362,7 @@ export class NgxPlanePerlinGeometry {
 				}
 			}
 		}
-		return BufferGeometryUtils.mergeBufferGeometries(geometries);
+		return THREE.BufferGeometryUtils.mergeBufferGeometries(geometries);
 	}
 
 	/**
@@ -383,7 +381,7 @@ export class NgxPlanePerlinGeometry {
 		translate: { x: number; y: number; z: number },
 		colors?: I3JS.IColor[]
 	): I3JS.IBufferGeometry {
-		const geometry = planeGeometry.clone() as THREE.PlaneGeometry;
+		const geometry = planeGeometry.clone() as any;
 		if (colors !== null && colors !== undefined && colors.length > 0) {
 			geometry.setAttribute('color', planeGeometry.attributes.position.clone());
 			const color = geometry.attributes.color as any;

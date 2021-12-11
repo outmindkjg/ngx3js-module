@@ -9,13 +9,12 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { AnimationGroupComponent } from './animation-group/animation-group.component';
 import { AbstractControllerComponent } from './controller.component.abstract';
 import { AbstractGeometryComponent } from './geometry.abstract';
-import { TagAttributes, ThreeUtil } from './interface';
+import { I3JS, TagAttributes, THREE, ThreeUtil } from './interface';
 import { LookatComponent } from './lookat/lookat.component';
 import { AbstractMaterialComponent } from './material.abstract';
 import { MixerComponent } from './mixer/mixer.component';
@@ -24,7 +23,6 @@ import { RigidbodyComponent } from './rigidbody/rigidbody.component';
 import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
 import { AbstractTweenComponent } from './tween.abstract';
-import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Object3d options
@@ -205,7 +203,7 @@ export class AbstractObject3dComponent
 	 * A [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3) representing the object's local position. Default is (0, 0, 0).
 	 */
 	@Input() private position:
-		| THREE.Vector3
+		| I3JS.IVector3
 		| number[]
 		| PositionComponent
 		| any = null;
@@ -214,7 +212,7 @@ export class AbstractObject3dComponent
 	 * Object's local rotation (see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)), in radians.
 	 */
 	@Input() private rotation:
-		| THREE.Vector3
+		| I3JS.IVector3
 		| number[]
 		| RotationComponent
 		| any = null;
@@ -245,7 +243,7 @@ export class AbstractObject3dComponent
 	 */
 	@Input() private customDepth:
 		| AbstractMaterialComponent
-		| THREE.Material
+		| I3JS.IMaterial
 		| any = null;
 
 	/**
@@ -284,13 +282,13 @@ export class AbstractObject3dComponent
 	 */
 	@Input() public geometry:
 		| AbstractGeometryComponent
-		| THREE.BufferGeometry
+		| I3JS.IBufferGeometry
 		| any = null;
 
 	/**
 	 * The material of mesh
 	 */
-	@Input() public material: AbstractMaterialComponent | THREE.Material = null;
+	@Input() public material: AbstractMaterialComponent | I3JS.IMaterial = null;
 
 	/**
 	 * The material of mesh is array
@@ -592,7 +590,7 @@ export class AbstractObject3dComponent
 	 * @returns materials
 	 */
 	protected getMaterials(
-		parameters?: THREE.MeshBasicMaterialParameters,
+		parameters?: I3JS.IMeshBasicMaterialParameters,
 		required: boolean = true
 	): I3JS.IMaterial | I3JS.IMaterial[] {
 		const materials: I3JS.IMaterial[] = [];
@@ -635,7 +633,7 @@ export class AbstractObject3dComponent
 	 * @returns material one
 	 */
 	protected getMaterialOne(
-		parameters?: THREE.MeshBasicMaterialParameters,
+		parameters?: I3JS.IMeshBasicMaterialParameters,
 		required: boolean = true
 	): I3JS.IMaterial {
 		const materials = this.getMaterials(parameters, required);
@@ -653,7 +651,7 @@ export class AbstractObject3dComponent
 	 * @returns materials multi
 	 */
 	protected getMaterialsMulti(
-		parameters?: THREE.MeshBasicMaterialParameters,
+		parameters?: I3JS.IMeshBasicMaterialParameters,
 		required: boolean = true
 	): I3JS.IMaterial[] {
 		const materials = this.getMaterials(parameters, required);
@@ -988,7 +986,7 @@ export class AbstractObject3dComponent
 				) {
 					if (this.parentObject3d instanceof THREE.LOD) {
 						this.parentObject3d.addLevel(
-							this.object3d as THREE.Object3D,
+							this.object3d as I3JS.IObject3D,
 							this.getLoDistance(0)
 						);
 					} else {
@@ -1316,7 +1314,7 @@ export class AbstractObject3dComponent
 							this.parentObject3d instanceof THREE.LOD
 						) {
 							this.parentObject3d.addLevel(
-								this.object3d as THREE.Object3D,
+								this.object3d as I3JS.IObject3D,
 								this.getLoDistance(0)
 							);
 						}

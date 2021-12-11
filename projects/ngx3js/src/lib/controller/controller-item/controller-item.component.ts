@@ -1,9 +1,13 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
 import { CurvesNormal, CurveUtils } from '../../curve/curveUtils';
-import { RendererTimer, ThreeColor, ThreeUtil } from '../../interface';
+import {
+	I3JS,
+	RendererTimer,
+	THREE,
+	ThreeColor,
+	ThreeUtil,
+} from '../../interface';
 import { AbstractSubscribeComponent } from '../../subscribe.abstract';
-import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * Control object item
@@ -572,7 +576,7 @@ export class ControllerItemComponent
 						depthTest: true,
 						transparent: true,
 						side: THREE.DoubleSide,
-					})
+					} as any)
 				);
 				this._helperPoint = new THREE.Mesh(
 					new THREE.SphereGeometry(
@@ -586,7 +590,7 @@ export class ControllerItemComponent
 						depthTest: true,
 						transparent: true,
 						side: THREE.DoubleSide,
-					})
+					} as any)
 				);
 				this._helperPoint.visible = false;
 				switch (this.type.toLowerCase()) {
@@ -930,13 +934,13 @@ export class ControllerItemComponent
 								switch (key) {
 									case 'position':
 										this._controlItem.position.lerp(
-											value as THREE.Vector3,
+											value as I3JS.IVector3,
 											elapsedAlpha
 										);
 										break;
 									case 'scale':
 										this._controlItem.scale.lerp(
-											value as THREE.Vector3,
+											value as I3JS.IVector3,
 											elapsedAlpha
 										);
 										break;

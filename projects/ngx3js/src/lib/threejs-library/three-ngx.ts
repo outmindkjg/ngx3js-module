@@ -21,8 +21,6 @@ export { SSRrPass } from 'three/examples/jsm/postprocessing/SSRrPass';
 export { TAARenderPass } from 'three/examples/jsm/postprocessing/TAARenderPass';
 export { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 export { CSS3DSprite } from 'three/examples/jsm/renderers/CSS3DRenderer';
-export * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 export { GeometryUtils } from '../threejs-library/GeometryUtils';
 export { UVsDebug } from 'three/examples/jsm/utils/UVsDebug';
 export { ReflectorForSSRPass } from '../threejs-library/ReflectorForSSRPass';
-

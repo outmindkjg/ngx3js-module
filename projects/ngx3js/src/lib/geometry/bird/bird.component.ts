@@ -1,7 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
-import { ThreeGeometryCustom } from '../../interface';
-import { I3JS } from '../../threejs-library/three-interface';
+import { ThreeGeometryCustom, I3JS, THREE } from '../../interface';
 
 /**
  * The Geometry Bird component.

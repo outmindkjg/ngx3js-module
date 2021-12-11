@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
+import { ThreeUtil, THREE, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Keyframe component.
@@ -357,7 +355,8 @@ export class KeyframeComponent
 				}
 			}
 			const times: number[] = ThreeUtil.getTypeSafe(this.times, [0, 1, 2]);
-			const interpolation: THREE.InterpolationModes = ThreeUtil.getInterpolationSafe(this.interpolation);
+			const interpolation: I3JS.TInterpolationModes =
+				ThreeUtil.getInterpolationSafe(this.interpolation);
 			switch (this.type.toLowerCase()) {
 				case 'position':
 					this.keyframe = new THREE.VectorKeyframeTrack(

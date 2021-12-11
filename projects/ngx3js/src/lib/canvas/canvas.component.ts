@@ -5,11 +5,9 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { HtmlCollection } from '../visual/visual.component';
-import { CssStyle, ThreeUtil } from './../interface';
-import { I3JS } from '../threejs-library/three-interface';
+import { CssStyle, ThreeUtil, I3JS, THREE } from './../interface';
 
 /**
  * The Canvas component.

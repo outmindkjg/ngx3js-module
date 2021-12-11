@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
-import { TagAttributes, ThreeUtil } from '../interface';
+import { TagAttributes, ThreeUtil, THREE, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Lookat component.
@@ -196,7 +194,7 @@ export class LookatComponent
 						if (object3d instanceof THREE.Object3D) {
 							object3d.lookAt(lookat);
 						} else if (object3d !== null && object3d !== undefined) {
-							const objectTraget : any = object3d;
+							const objectTraget: any = object3d;
 							objectTraget.target.set(lookat.x, lookat.y, lookat.z);
 							const object3dAny: any = object3d;
 							if (ThreeUtil.isNotNull(object3dAny['update'])) {

@@ -5,17 +5,15 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { ProgressiveLightMap } from 'three/examples/jsm/misc/ProgressiveLightMap';
 import { ShadowMesh } from 'three/examples/jsm/objects/ShadowMesh';
 import { ShadowMapViewer } from 'three/examples/jsm/utils/ShadowMapViewer';
 import { HelperComponent } from '../helper/helper.component';
-import { RendererTimer, ThreeUtil } from '../interface';
+import { RendererTimer, ThreeUtil, THREE, I3JS } from '../interface';
 import { LightComponent } from '../light/light.component';
 import { MeshComponent } from '../mesh/mesh.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ViewerCanvas } from './viewer-canvas';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Viewer component.
@@ -75,12 +73,12 @@ export class ViewerComponent
 	/**
 	 * The Light of Viewer
 	 */
-	@Input() public light: LightComponent | MeshComponent | THREE.Light = null;
+	@Input() public light: LightComponent | MeshComponent | I3JS.ILight = null;
 
 	/**
 	 * The Mesh of Viewer
 	 */
-	@Input() public mesh: MeshComponent | HelperComponent | THREE.Mesh = null;
+	@Input() public mesh: MeshComponent | HelperComponent | I3JS.IMesh = null;
 
 	/**
 	 * The Plane of Viewer
@@ -88,8 +86,8 @@ export class ViewerComponent
 	@Input() public plane:
 		| MeshComponent
 		| HelperComponent
-		| THREE.Object3D
-		| THREE.Plane = null;
+		| I3JS.IObject3D
+		| I3JS.IPlane = null;
 
 	/**
 	 * The x of position
@@ -536,7 +534,7 @@ export class ViewerComponent
 					break;
 				case 'shadowmapviewer':
 				case 'shadowmap':
-					this.viewer = new ShadowMapViewer(this.getLight());
+					this.viewer = new ShadowMapViewer(this.getLight() as any);
 					this.resizeViewer();
 					break;
 				case 'shadowmesh':
@@ -554,7 +552,7 @@ export class ViewerComponent
 				case 'progressivelightmap':
 				case 'progressivelight':
 					const progressiveSurfacemap = new ProgressiveLightMap(
-						this.getRenderer() as THREE.WebGLRenderer,
+						this.getRenderer() as any,
 						ThreeUtil.getTypeSafe(this.lightMapRes, 1024)
 					);
 					const lightmapObjects: any = [];
@@ -671,7 +669,7 @@ export class ViewerComponent
 					if (this.viewer instanceof ProgressiveLightMap) {
 						const camera = this.getCamera(cameras);
 						this.viewer.update(
-							camera,
+							camera as any,
 							ThreeUtil.getTypeSafe(this.blendWindow, 200),
 							ThreeUtil.getTypeSafe(this.blurEdges, true)
 						);

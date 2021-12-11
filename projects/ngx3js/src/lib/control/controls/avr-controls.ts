@@ -1,6 +1,6 @@
-import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { I3JS } from '../../threejs-library/three-interface';
+import { I3JS } from '../../interface';
+import * as THREE from 'three';
 
 /**
  * AVR Controls
@@ -23,7 +23,7 @@ export class NgxAVRControls {
 	/**
 	 * The Target of avrcontrols
 	 */
-	public target: I3JS.IVector3 = new THREE.Vector3();
+	public target: I3JS.IVector3 = new THREE.Vector3() as any;
 
 	/**
 	 * Creates an instance of plane controls.
@@ -99,12 +99,15 @@ export class NgxAVRControls {
 			this.buttonVirtualClick();
 		};
 		if (this.control === null && this.altControl) {
-			this.control = new OrbitControls(this.camera, this.domElement);
+			this.control = new OrbitControls(this.camera as any, this.domElement);
 			this.control.enablePan = true;
 			this.control.enableDamping = true;
-			if (this.target !== null && this.control.target !== this.target) {
-				this.control.target.copy(this.target);
-				this.target = this.control.target;
+			if (
+				this.target !== null &&
+				this.control.target !== (this.target as any)
+			) {
+				this.control.target.copy(this.target as any);
+				this.target = this.control.target as any;
 			}
 		}
 	}

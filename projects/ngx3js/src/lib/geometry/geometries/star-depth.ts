@@ -66,7 +66,7 @@ export class NgxStarDepthGeometry extends THREE.BufferGeometry {
 			thetaLength
 		);
 		frontGeometry.translate(0, 0, halfDepth);
-		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry);
+		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry as any);
 		const vertices = [];
 		const normals = [];
 		const uvs = [];

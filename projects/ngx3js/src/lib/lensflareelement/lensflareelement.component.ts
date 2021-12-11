@@ -1,13 +1,11 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
 import {
 	Lensflare,
 	LensflareElement,
 } from 'three/examples/jsm/objects/Lensflare';
-import { ThreeColor, ThreeUtil } from '../interface';
+import { ThreeColor, ThreeUtil, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Lensflareelement component.
@@ -153,10 +151,10 @@ export class LensflareelementComponent
 		if (this.lensflareElement === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.lensflareElement = new LensflareElement(
-				this.getTexture(),
+				this.getTexture() as any,
 				ThreeUtil.getTypeSafe(this.size, 100),
 				ThreeUtil.getTypeSafe(this.distance, 0),
-				ThreeUtil.getColorSafe(this.color)
+				ThreeUtil.getColorSafe(this.color) as any
 			);
 			super.setObject(this.lensflareElement);
 		}

@@ -6,14 +6,12 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { Lut } from 'three/examples/jsm/math/Lut';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ThreeUtil } from '../interface';
+import { ThreeUtil, THREE, I3JS } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { CanvasFunctionType } from './textureUtils';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Texture Component

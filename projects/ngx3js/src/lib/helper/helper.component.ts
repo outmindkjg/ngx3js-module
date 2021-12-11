@@ -5,7 +5,6 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { CSM } from 'three/examples/jsm/csm/CSM';
 import { CSMHelper } from 'three/examples/jsm/csm/CSMHelper';
 import { LightProbeHelper } from 'three/examples/jsm/helpers/LightProbeHelper';
@@ -16,8 +15,7 @@ import { VertexTangentsHelper } from 'three/examples/jsm/helpers/VertexTangentsH
 import { Gyroscope } from 'three/examples/jsm/misc/Gyroscope';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
-import { ThreeColor, ThreeUtil } from './../interface';
-import { I3JS } from '../threejs-library/three-interface';
+import { ThreeColor, ThreeUtil, THREE, I3JS } from './../interface';
 
 /**
  * Helper options
@@ -931,7 +929,7 @@ export class HelperComponent
 					let audioTarget = this.getTarget(this.parent);
 					if (audioTarget instanceof THREE.PositionalAudio) {
 						const positionalAudioHelper: any = new PositionalAudioHelper(
-							audioTarget,
+							audioTarget as any,
 							ThreeUtil.getTypeSafe(this.range, 1),
 							ThreeUtil.getTypeSafe(this.divisionsInnerAngle, 16),
 							ThreeUtil.getTypeSafe(this.divisionsOuterAngle, 2)
@@ -1005,9 +1003,15 @@ export class HelperComponent
 					} else if (lightTarget instanceof THREE.SpotLight) {
 						basemesh = new THREE.SpotLightHelper(lightTarget, this.getColor());
 					} else if (lightTarget instanceof THREE.RectAreaLight) {
-						basemesh = new RectAreaLightHelper(lightTarget, this.getColor());
+						basemesh = new RectAreaLightHelper(
+							lightTarget as any,
+							this.getColor() as any
+						);
 					} else if (lightTarget instanceof THREE.LightProbe) {
-						basemesh = new LightProbeHelper(lightTarget, this.getSize(10));
+						basemesh = new LightProbeHelper(
+							lightTarget as any,
+							this.getSize(10)
+						);
 					}
 					break;
 				case 'planehelper':
@@ -1053,7 +1057,7 @@ export class HelperComponent
 							case 'vertextangentshelper':
 							case 'vertextangents':
 								basemesh = new VertexTangentsHelper(
-									vertexMesh,
+									vertexMesh as any,
 									this.getSize(),
 									this.getColorHex()
 								);
@@ -1062,7 +1066,7 @@ export class HelperComponent
 							case 'vertexnormals':
 							default:
 								basemesh = new VertexNormalsHelper(
-									vertexMesh,
+									vertexMesh as any,
 									this.getSize(),
 									this.getColorHex()
 								);

@@ -9,13 +9,11 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { CSM } from 'three/examples/jsm/csm/CSM';
-import { ThreeTexture, ThreeUtil } from './interface';
+import { I3JS, THREE, ThreeTexture, ThreeUtil } from './interface';
 import { PlaneComponent } from './plane/plane.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { AbstractTextureComponent } from './texture.abstract';
-import { I3JS } from './threejs-library/three-interface';
 
 /**
  * Mesh material raw
@@ -214,7 +212,7 @@ export class AbstractMaterialComponent
 	 * See the [example:webgl_clipping_intersection WebGL / clipping /intersection] example.
 	 * Default is *null*.
 	 */
-	@Input() public clippingPlanes: PlaneComponent[] | THREE.Plane[] = null;
+	@Input() public clippingPlanes: PlaneComponent[] | I3JS.IPlane[] = null;
 
 	/**
 	 * Defines whether to clip shadows according to the clipping planes specified on this material. Default is *false*.
@@ -522,10 +520,7 @@ export class AbstractMaterialComponent
 	 * @param name
 	 * @returns texture option
 	 */
-	protected getTextureOption(
-		map: ThreeTexture,
-		name: string
-	): I3JS.ITexture {
+	protected getTextureOption(map: ThreeTexture, name: string): I3JS.ITexture {
 		if (ThreeUtil.isNotNull(map)) {
 			if (typeof map === 'string') {
 				if (map !== 'none') {
@@ -678,11 +673,11 @@ export class AbstractMaterialComponent
 			meshes: {
 				refIndex: number;
 				mesh:
-					| THREE.Scene
-					| THREE.Mesh
-					| THREE.Line
-					| THREE.Points
-					| THREE.Sprite;
+					| I3JS.IScene
+					| I3JS.IMesh
+					| I3JS.ILine
+					| I3JS.IPoints
+					| I3JS.ISprite;
 			}[];
 		};
 	} = {};
@@ -718,11 +713,11 @@ export class AbstractMaterialComponent
 			let meshes: {
 				refIndex: number;
 				mesh:
-					| THREE.Scene
-					| THREE.Mesh
-					| THREE.Line
-					| THREE.Points
-					| THREE.Sprite;
+					| I3JS.IScene
+					| I3JS.IMesh
+					| I3JS.ILine
+					| I3JS.IPoints
+					| I3JS.ISprite;
 			}[] = [];
 			if (ThreeUtil.isNotNull(object)) {
 				if (ThreeUtil.isNotNull(this.refName)) {
@@ -823,8 +818,8 @@ export class AbstractMaterialComponent
 							| I3JS.IScene
 							| I3JS.IMesh
 							| I3JS.ILine
-							| THREE.Points
-							| THREE.Sprite;
+							| I3JS.IPoints
+							| I3JS.ISprite;
 					}[];
 				}[] = [];
 				if (ThreeUtil.isNotNull(key)) {
@@ -954,8 +949,8 @@ export class AbstractMaterialComponent
 	 * @param extendObj
 	 * @returns material parameters
 	 */
-	protected getMaterialParameters(extendObj: any): THREE.MaterialParameters {
-		const baseParameters: THREE.MaterialParameters = {
+	protected getMaterialParameters(extendObj: any): I3JS.IMaterialParameters {
+		const baseParameters: I3JS.IMaterialParameters = {
 			alphaToCoverage: ThreeUtil.getTypeSafe(this.alphaToCoverage),
 			blending: ThreeUtil.getBlendingSafe(this.blending),
 			blendDst: ThreeUtil.getBlendDstSafe(this.blendDst),
@@ -998,7 +993,7 @@ export class AbstractMaterialComponent
 			vertexColors: this.getVertexColors(),
 			visible: ThreeUtil.getTypeSafe(this.visible),
 		};
-		const materialParameters: THREE.MaterialParameters = Object.assign(
+		const materialParameters: I3JS.IMaterialParameters = Object.assign(
 			baseParameters,
 			extendObj
 		);

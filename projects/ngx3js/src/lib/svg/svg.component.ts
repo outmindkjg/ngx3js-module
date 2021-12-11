@@ -7,14 +7,12 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { SVGLoader, SVGResult } from 'three/examples/jsm/loaders/SVGLoader';
-import { ThreeUtil, ThreeVector } from '../interface';
+import { ThreeUtil, ThreeVector, THREE, I3JS } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { TranslationComponent } from '../translation/translation.component';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Svg geometry
@@ -850,7 +848,10 @@ export class SvgComponent extends AbstractObject3dComponent {
 		} else if (data.paths) {
 			data.paths.forEach((path) => {
 				shapes.push({
-					shape: path.toShapes(this.getIsCCW(true), this.getNoHoles(false)) as any,
+					shape: path.toShapes(
+						this.getIsCCW(true),
+						this.getNoHoles(false)
+					) as any,
 					userData: path['userData'] ? path['userData'] : null,
 				});
 			});
@@ -946,7 +947,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 				const shapes = font.generateShapes(
 					this.getText('test'),
 					this.getSize(100)
-				);
+				) as any;
 				const geometry = new THREE.ShapeGeometry(
 					shapes,
 					this.getCurveSegments(12)

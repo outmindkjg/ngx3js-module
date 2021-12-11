@@ -1,6 +1,4 @@
-import * as THREE from 'three';
-import { ThreeUtil } from '../interface';
-import { I3JS } from '../threejs-library/three-interface';
+import { ThreeUtil, THREE, I3JS } from '../interface';
 
 export type GeometryFunctionType = (
 	geometry: I3JS.IBufferGeometry,
@@ -79,7 +77,7 @@ GeometryConf.terrainsin = (geometry: I3JS.IBufferGeometry, options?: any) => {
 			geometry.rotateX(-Math.PI / 2);
 			break;
 	}
-	const positions = geometry.getAttribute('position') as THREE.BufferAttribute;
+	const positions = geometry.getAttribute('position') as I3JS.IBufferAttribute;
 	const count = positions.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.computeBoundingBox();

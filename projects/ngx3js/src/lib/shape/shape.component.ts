@@ -5,11 +5,9 @@ import {
 	OnInit,
 	QueryList,
 } from '@angular/core';
-import * as THREE from 'three';
 import { AbstractGeometryComponent } from '../geometry.abstract';
-import { ThreeUtil, ThreeVector } from '../interface';
+import { ThreeUtil, ThreeVector, I3JS, THREE } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * The Shape component.

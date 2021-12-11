@@ -5,14 +5,12 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import {
 	AbstractChartComponent,
 	AttributeUpdateInfo,
 } from '../../chart.abstract';
-import { ThreeUtil } from '../../interface';
+import { ThreeUtil, I3JS, THREE } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * The Chart Bar component.
@@ -182,7 +180,7 @@ export class ChartBarComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getChart<T extends THREE.Object3D>(): T {
+	public getChart<T extends I3JS.IObject3D>(): T {
 		return this.getLine();
 	}
 
@@ -191,7 +189,7 @@ export class ChartBarComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getLine<T extends THREE.Object3D>(): T {
+	public getLine<T extends I3JS.IObject3D>(): T {
 		if (this._line === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.clearChart();
@@ -281,7 +279,7 @@ export class ChartBarComponent
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
 				side: ThreeUtil.getSideSafe('double'),
 				transparent: true,
-			});
+			} as any);
 			const wallMesh = new THREE.Mesh(this._geometry, this._material);
 			wallMesh.name = 'wall';
 			wallMesh.receiveShadow = true;
@@ -296,7 +294,7 @@ export class ChartBarComponent
 			this._materialBorder = new THREE.LineBasicMaterial({
 				color: ThreeUtil.getColorSafe(options.borderColor, 0x00ff00),
 				transparent: true,
-			});
+			} as any);
 			const borderMesh = new THREE.LineSegments(
 				this._geometryBorder,
 				this._materialBorder

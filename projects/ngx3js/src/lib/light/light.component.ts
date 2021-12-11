@@ -5,7 +5,6 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator';
 import {
 	AbstractObject3dComponent,
@@ -13,8 +12,13 @@ import {
 } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
-import { TagAttributes, ThreeColor, ThreeUtil } from './../interface';
-import { I3JS } from '../threejs-library/three-interface';
+import {
+	TagAttributes,
+	ThreeColor,
+	ThreeUtil,
+	THREE,
+	I3JS,
+} from './../interface';
 
 /**
  * Light options
@@ -537,7 +541,7 @@ export class LightComponent
 	 * @param [def]
 	 * @returns sh
 	 */
-	private getSh(def?: string): THREE.SphericalHarmonics3 {
+	private getSh(def?: string): I3JS.ISphericalHarmonics3 {
 		const sh = ThreeUtil.getTypeSafe(this.sh, def, '');
 		if (ThreeUtil.isNotNull(sh) && sh != '') {
 			switch (sh.toLowerCase()) {
@@ -1026,7 +1030,9 @@ export class LightComponent
 							ThreeUtil.isTextureLoaded(texture) &&
 							texture instanceof THREE.CubeTexture
 						) {
-							basemesh.copy(LightProbeGenerator.fromCubeTexture(texture));
+							basemesh.copy(
+								LightProbeGenerator.fromCubeTexture(texture as any) as any
+							);
 						}
 						this.subscribeRefer(
 							'texture',
@@ -1037,7 +1043,9 @@ export class LightComponent
 										ThreeUtil.isTextureLoaded(texture) &&
 										texture instanceof THREE.CubeTexture
 									) {
-										basemesh.copy(LightProbeGenerator.fromCubeTexture(texture));
+										basemesh.copy(
+											LightProbeGenerator.fromCubeTexture(texture as any) as any
+										);
 									}
 								},
 								'loaded'
@@ -1062,9 +1070,9 @@ export class LightComponent
 							try {
 								basemesh.copy(
 									LightProbeGenerator.fromCubeRenderTarget(
-										renderer,
-										renderTarget
-									)
+										renderer as any,
+										renderTarget as any
+									) as any
 								);
 							} catch (ex) {}
 							// todo

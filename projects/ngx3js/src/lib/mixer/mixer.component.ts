@@ -6,15 +6,13 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { MMDAnimationHelper } from 'three/examples/jsm/animation/MMDAnimationHelper';
 import { MD2Character } from 'three/examples/jsm/misc/MD2Character';
 import { MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ClipComponent } from './../clip/clip.component';
-import { RendererTimer, ThreeUtil } from './../interface';
+import { I3JS, RendererTimer, THREE, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Character Control
@@ -372,7 +370,7 @@ export class MixerComponent
 	 * The Mixer of mixer component
 	 */
 	private mixer:
-		| THREE.AnimationMixer
+		| I3JS.IAnimationMixer
 		| MD2Character
 		| MD2CharacterComplex
 		| MMDAnimationHelper = null;
@@ -639,7 +637,7 @@ export class MixerComponent
 						skinnedMesh.parent = null;
 					}
 					this.clips.forEach((clip) => {
-						helper.add(skinnedMesh, {
+						helper.add(skinnedMesh as any, {
 							animation: clip,
 							physics: this.getPhysics(),
 							// warmup: this.getWarmup(),
@@ -661,11 +659,11 @@ export class MixerComponent
 					});
 					this.mmdAnimationHelpers = [];
 					if (ThreeUtil.isNotNull(this.mmdHelpers)) {
-						let rootObject3d: I3JS.IObject3D = skinnedMesh;
+						let rootObject3d: I3JS.IObject3D = skinnedMesh as any;
 						while (rootObject3d.parent) {
 							rootObject3d = rootObject3d.parent;
 						}
-						let objectsHelper: any = helper['objects'].get(skinnedMesh);
+						let objectsHelper: any = helper['objects'].get(skinnedMesh as any);
 						this.mmdHelpers.forEach((mmdHelper) => {
 							switch (mmdHelper.toLowerCase()) {
 								case 'iksolver':
@@ -694,7 +692,7 @@ export class MixerComponent
 			} else if (this.model instanceof THREE.Audio) {
 				const audioMode = this.model;
 				if (audioMode.buffer !== null) {
-					helper.add(audioMode, {
+					helper.add(audioMode as any, {
 						delayTime: this.getDelayTime(),
 					});
 				} else {
@@ -703,7 +701,7 @@ export class MixerComponent
 						ThreeUtil.getSubscribe(
 							audioMode,
 							() => {
-								helper.add(audioMode, {
+								helper.add(audioMode as any, {
 									delayTime: this.getDelayTime(),
 								});
 							},
@@ -765,7 +763,7 @@ export class MixerComponent
 							break;
 						case 'clip':
 							this.clipList.forEach((clip) => {
-								clip.setMixer(mixer, this.clips, this.model);
+								clip.setMixer(mixer as any, this.clips, this.model);
 							});
 							break;
 					}
@@ -932,7 +930,7 @@ export class MixerComponent
 					switch (change.toLowerCase()) {
 						case 'pose':
 							if (this.model instanceof THREE.SkinnedMesh) {
-								helper.pose(this.model, null);
+								helper.pose(this.model as any, null);
 							}
 							break;
 					}
@@ -946,14 +944,14 @@ export class MixerComponent
 	 * Resets mixer
 	 */
 	public getMixer():
-		| THREE.AnimationMixer
+		| I3JS.IAnimationMixer
 		| MD2Character
 		| MD2CharacterComplex
 		| MMDAnimationHelper {
 		if (this.mixer === null || this._needUpdate) {
 			this.needUpdate = false;
 			let mixer:
-				| THREE.AnimationMixer
+				| I3JS.IAnimationMixer
 				| MD2Character
 				| MD2CharacterComplex
 				| MMDAnimationHelper = null;

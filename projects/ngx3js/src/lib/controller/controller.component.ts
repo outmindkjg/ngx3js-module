@@ -7,19 +7,23 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import {
 	AbstractThreeController,
 	AutoUniformsController,
 } from '../controller.abstract';
 import { AbstractControllerComponent } from '../controller.component.abstract';
-import { RendererTimer, ThreeColor, ThreeUtil } from '../interface';
+import {
+	RendererTimer,
+	ThreeColor,
+	ThreeUtil,
+	I3JS,
+	THREE,
+} from '../interface';
 import { HtmlCollection } from '../visual/visual.component';
 import {
 	ControllerItemComponent,
 	ControlObjectItem,
 } from './controller-item/controller-item.component';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * ControllerComponent

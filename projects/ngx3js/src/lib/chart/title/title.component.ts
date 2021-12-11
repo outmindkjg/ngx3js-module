@@ -5,11 +5,9 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import * as THREE from 'three';
 import { AbstractChartComponent } from '../../chart.abstract';
-import { ThreeColor, ThreeUtil } from '../../interface';
+import { ThreeColor, ThreeUtil, I3JS, THREE } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
-import { I3JS } from '../../threejs-library/three-interface';
 
 /**
  * The Chart Title component.
@@ -182,7 +180,7 @@ export class ChartTitleComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getChart<T extends THREE.Object3D>(): T {
+	public getChart<T extends I3JS.IObject3D>(): T {
 		return this.getTitle();
 	}
 
@@ -191,7 +189,7 @@ export class ChartTitleComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getTitle<T extends THREE.Object3D>(): T {
+	public getTitle<T extends I3JS.IObject3D>(): T {
 		if (this._title === null || this._needUpdate) {
 			this.needUpdate = false;
 			const canvas = document.createElement('canvas');

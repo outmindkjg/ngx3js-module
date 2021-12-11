@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import {
 	AsciiEffect,
 	AsciiEffectOptions,
@@ -32,7 +31,7 @@ export class NgxAsciiEffect extends AsciiEffect {
 		charSet?: string,
 		options?: AsciiEffectOptions
 	) {
-		super(renderer, charSet, options);
+		super(renderer as any, charSet, options);
 	}
 }
 
@@ -54,7 +53,7 @@ export class NgxOutlineEffect extends OutlineEffect {
 		renderer: I3JS.IWebGLRenderer,
 		parameters?: OutlineEffectParameters
 	) {
-		super(renderer, parameters);
+		super(renderer as any, parameters);
 	}
 }
 
@@ -72,7 +71,7 @@ export class NgxParallaxBarrierEffect extends ParallaxBarrierEffect {
 	 * @param renderer
 	 */
 	constructor(renderer: I3JS.IWebGLRenderer) {
-		super(renderer);
+		super(renderer as any);
 	}
 }
 
@@ -90,7 +89,7 @@ export class NgxPeppersGhostEffect extends PeppersGhostEffect {
 	 * @param renderer
 	 */
 	constructor(renderer: I3JS.IWebGLRenderer) {
-		super(renderer);
+		super(renderer as any);
 	}
 }
 
@@ -112,7 +111,7 @@ export class NgxEffectComposer extends EffectComposer {
 		renderer: I3JS.IWebGLRenderer,
 		renderTarget?: I3JS.IWebGLRenderTarget
 	) {
-		super(renderer, renderTarget);
+		super(renderer as any, renderTarget as any);
 	}
 }
 

@@ -1,6 +1,4 @@
-import * as THREE from 'three';
-import { ThreeUtil, CurvesParameters } from '../../interface';
-import { I3JS } from '../../threejs-library/three-interface';
+import { ThreeUtil, CurvesParameters, I3JS, THREE } from '../../interface';
 
 /**
  * Curves polygon
@@ -8,7 +6,7 @@ import { I3JS } from '../../threejs-library/three-interface';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesPolygon) page for details.
  *
  */
-export class CurvesPolygon extends THREE.Curve<I3JS.IVector3> {
+export class CurvesPolygon extends THREE.Curve {
 	/**
 	 * The Radius of curves polygon
 	 */

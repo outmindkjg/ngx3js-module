@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as THREE from 'three';
-import { CssStyle, ThreeUtil } from '../interface';
+import { CssStyle, ThreeUtil, THREE, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Transform Component

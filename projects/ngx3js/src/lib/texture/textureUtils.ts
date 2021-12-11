@@ -1,7 +1,5 @@
-import * as THREE from 'three';
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
-import { ThreeUtil } from '../interface';
-import { I3JS } from '../threejs-library/three-interface';
+import { ThreeUtil, THREE, I3JS } from '../interface';
 
 /**
  * CanvasFunctionType
@@ -19,7 +17,7 @@ export type CanvasFunctionType = (
  */
 export type DataFunctionType = (
 	options?: any
-) => THREE.DataTexture | THREE.DataTexture3D;
+) => I3JS.IDataTexture | I3JS.IDataTexture3D;
 
 function calc(v: number, scale: number): number {
 	return v * scale;

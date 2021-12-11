@@ -202,8 +202,9 @@ export class ToolsComponent
 							this.storageName,
 							(texture) => {
 								if (texture !== null) {
-									this.tool =
-										pmremGenerator.fromEquirectangular(texture as any).texture;
+									this.tool = pmremGenerator.fromEquirectangular(
+										texture as any
+									).texture;
 									super.setObject(this.tool);
 									this.setSubscribeNext(['texture', 'loaded']);
 									pmremGenerator.dispose();
@@ -218,7 +219,9 @@ export class ToolsComponent
 							if (this.background instanceof AbstractTextureComponent) {
 								envScene.background = this.background.getTexture() as any;
 							} else {
-								envScene.background = ThreeUtil.getColorSafe(this.background) as any;
+								envScene.background = ThreeUtil.getColorSafe(
+									this.background
+								) as any;
 							}
 						}
 						tool = pmremGenerator.fromScene(envScene).texture;

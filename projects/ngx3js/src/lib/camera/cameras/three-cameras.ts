@@ -9,13 +9,13 @@ import { I3JS } from '../../threejs-library/three-interface';
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/ArrayCamera) page for a live demo.
  *
  */
-export class NgxArrayCamera extends THREE.ArrayCamera implements I3JS.IArrayCamera{
+export class NgxArrayCamera extends THREE.ArrayCamera {
 	/**
 	 * Creates an instance of ngx array camera.
 	 * @param [cameras]
 	 */
 	constructor(cameras?: I3JS.IPerspectiveCamera[]) {
-		super(cameras);
+		super(cameras as any[]);
 	}
 }
 
@@ -26,7 +26,7 @@ export class NgxArrayCamera extends THREE.ArrayCamera implements I3JS.IArrayCame
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/StereoCamera) page for a live demo.
  *
  */
-export class NgxStereoCamera extends THREE.StereoCamera implements I3JS.IStereoCamera {
+export class NgxStereoCamera extends THREE.StereoCamera {
 	/**
 	 * Creates an instance of ngx stereo camera.
 	 */
@@ -42,7 +42,7 @@ export class NgxStereoCamera extends THREE.StereoCamera implements I3JS.IStereoC
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/CubeCamera) page for a live demo.
  *
  */
-export class NgxCubeCamera extends THREE.CubeCamera implements I3JS.ICubeCamera {
+export class NgxCubeCamera extends THREE.CubeCamera {
 	/**
 	 * Creates an instance of ngx cube camera.
 	 *
@@ -55,7 +55,7 @@ export class NgxCubeCamera extends THREE.CubeCamera implements I3JS.ICubeCamera 
 		far: number,
 		renderTarget: I3JS.IWebGLCubeRenderTarget
 	) {
-		super(near, far, renderTarget);
+		super(near, far, renderTarget as any);
 	}
 }
 
@@ -66,7 +66,7 @@ export class NgxCubeCamera extends THREE.CubeCamera implements I3JS.ICubeCamera 
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/CinematicCamera) page for a live demo.
  *
  */
-export class NgxCinematicCamera extends CinematicCamera implements I3JS.ICamera {
+export class NgxCinematicCamera extends CinematicCamera {
 	/**
 	 * Creates an instance of ngx cinematic camera.
 	 *
@@ -87,7 +87,7 @@ export class NgxCinematicCamera extends CinematicCamera implements I3JS.ICamera 
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/OrthographicCamera) page for a live demo.
  *
  */
-export class NgxOrthographicCamera extends THREE.OrthographicCamera implements I3JS.IOrthographicCamera {
+export class NgxOrthographicCamera extends THREE.OrthographicCamera {
 	/**
 	 * Creates an instance of ngx orthographic camera.
 	 *
@@ -117,7 +117,7 @@ export class NgxOrthographicCamera extends THREE.OrthographicCamera implements I
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/PerspectiveCamera) page for a live demo.
  *
  */
-export class NgxPerspectiveCamera extends THREE.PerspectiveCamera implements I3JS.IPerspectiveCamera {
+export class NgxPerspectiveCamera extends THREE.PerspectiveCamera {
 	/**
 	 * Creates an instance of ngx perspective camera.
 	 *

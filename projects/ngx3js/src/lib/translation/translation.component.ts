@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as THREE from 'three';
-import { ApplyMatrix4 } from '../interface';
+import { ApplyMatrix4, THREE, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { I3JS } from '../threejs-library/three-interface';
 
 /**
  * Translation Component
