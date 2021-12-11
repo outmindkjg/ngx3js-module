@@ -7402,7 +7402,7 @@ export namespace I3JS {
 	}
 
 	export interface IBufferGeometryUtils {
-		computeTangents(geometry: IBufferGeometry): null;
+		// computeTangents(geometry: IBufferGeometry): null;
 		mergeBufferAttributes(attributes: IBufferAttribute[]): IBufferAttribute;
 		mergeBufferGeometries(
 			geometries: IBufferGeometry[],

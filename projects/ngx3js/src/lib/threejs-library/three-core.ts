@@ -59,7 +59,7 @@ export namespace THREE {
 		O3JS.Float64BufferAttribute as any;
 
 	export const BufferGeometryUtils: I3JS.IBufferGeometryUtils = {
-		computeTangents: O3JS.BufferGeometryUtils.computeTangents as any,
+		// computeTangents: O3JS.BufferGeometryUtils.computeTangents as any,
 		mergeBufferAttributes: E_G_UTIL.mergeBufferAttributes as any,
 		mergeBufferGeometries: E_G_UTIL.mergeBufferGeometries as any,
 		interleaveAttributes: E_G_UTIL.interleaveAttributes as any,
