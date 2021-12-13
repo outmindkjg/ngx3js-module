@@ -9,7 +9,7 @@ import {
 	OnInit,
 	Output,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { I3JS, RendererTimer, THREE, ThreeUtil } from '../interface';
 import { LookatComponent } from '../lookat/lookat.component';
@@ -18,7 +18,6 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAVRControls } from './controls/avr-controls';
 import { NgxPlaneControls } from './controls/plane-controls';
 import { NgxSelectBoxControls } from './controls/selection-box-controls';
-import * as THREE_CTRL from './controls/three-controls';
 
 /**
  * Control options
@@ -651,7 +650,7 @@ export class ControlComponent
 		}
 		if (ThreeUtil.isNotNull(this.control)) {
 			if (
-				this.control instanceof THREE_CTRL.TransformControls &&
+				this.control instanceof THREE.TransformControls &&
 				this.control.parent
 			) {
 				this.control.parent.remove(this.control);
@@ -842,7 +841,7 @@ export class ControlComponent
 			const domElement = this._domElement;
 			if (this.control !== null) {
 				if (
-					this.control instanceof THREE_CTRL.TransformControls &&
+					this.control instanceof THREE.TransformControls &&
 					this.control.parent
 				) {
 					this.control.parent.remove(this.control);
@@ -888,7 +887,7 @@ export class ControlComponent
 					break;
 				case 'flycontrols':
 				case 'fly':
-					const flyControls = new THREE_CTRL.NgxFlyControls(camera, domElement);
+					const flyControls = new THREE.FlyControls(camera, domElement);
 					if (ThreeUtil.isNotNull(this.movementSpeed)) {
 						flyControls.movementSpeed = this.movementSpeed;
 					}
@@ -912,7 +911,7 @@ export class ControlComponent
 					break;
 				case 'pointerlockcontrols':
 				case 'pointerlock':
-					const pointerLockControls = new THREE_CTRL.NgxPointerLockControls(
+					const pointerLockControls = new THREE.PointerLockControls(
 						camera
 					);
 					control = pointerLockControls;
@@ -922,7 +921,7 @@ export class ControlComponent
 					break;
 				case 'dragcontrols':
 				case 'drag':
-					const dragControls = new THREE_CTRL.NgxDragControls(
+					const dragControls = new THREE.DragControls(
 						[],
 						camera,
 						domElement
@@ -931,7 +930,7 @@ export class ControlComponent
 					break;
 				case 'firstpersoncontrols':
 				case 'firstperson':
-					const firstPersonControls = new THREE_CTRL.NgxFirstPersonControls(
+					const firstPersonControls = new THREE.FirstPersonControls(
 						camera,
 						domElement
 					);
@@ -978,7 +977,7 @@ export class ControlComponent
 					break;
 				case 'transformcontrols':
 				case 'transform':
-					const transformControls = new THREE_CTRL.NgxTransformControls(
+					const transformControls = new THREE.TransformControls(
 						camera,
 						domElement
 					);
@@ -997,7 +996,7 @@ export class ControlComponent
 					break;
 				case 'trackballcontrols':
 				case 'trackball':
-					const trackballControls = new THREE_CTRL.NgxTrackballControls(
+					const trackballControls = new THREE.TrackballControls(
 						camera,
 						domElement
 					);
@@ -1011,7 +1010,7 @@ export class ControlComponent
 					break;
 				case 'arcballcontrols':
 				case 'arcball':
-					const arcballControls = new THREE_CTRL.NgxArcballControls(
+					const arcballControls = new THREE.ArcballControls(
 						camera,
 						domElement,
 						this._scene.first.getScene()
@@ -1047,7 +1046,7 @@ export class ControlComponent
 						this.consoleLog('error Camera', csmCamera, 'error');
 						csmCamera = new THREE.Camera();
 					}
-					const csm = new THREE_CTRL.NgxCsmControls({
+					const csm = new THREE.CsmControls({
 						maxFar: ThreeUtil.getTypeSafe(this.maxFar, 100000),
 						cascades: ThreeUtil.getTypeSafe(this.cascades, 3),
 						mode: ThreeUtil.getTypeSafe(this.mode, 'practical'),
@@ -1086,7 +1085,7 @@ export class ControlComponent
 				case 'orbitcontrols':
 				case 'orbit':
 				default:
-					const orbitControls = new THREE_CTRL.NgxOrbitControls(
+					const orbitControls = new THREE.OrbitControls(
 						camera,
 						domElement
 					);
@@ -1166,13 +1165,13 @@ export class ControlComponent
 	public render(renderTimer: RendererTimer) {
 		if (this.control !== null && ThreeUtil.isNotNull(this.control.update)) {
 			if (
-				this.control instanceof THREE_CTRL.FlyControls ||
-				this.control instanceof THREE_CTRL.FirstPersonControls ||
+				this.control instanceof THREE.FlyControls ||
+				this.control instanceof THREE.FirstPersonControls ||
 				this.control instanceof NgxPlaneControls ||
 				this.control instanceof NgxAVRControls
 			) {
 				this.control.update(renderTimer.delta);
-			} else if (this.control instanceof THREE_CTRL.TransformControls) {
+			} else if (this.control instanceof THREE.TransformControls) {
 				// pass
 			} else {
 				this.control.update();

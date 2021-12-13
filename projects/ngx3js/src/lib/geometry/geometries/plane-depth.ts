@@ -1,5 +1,5 @@
 import { NgxGeometryUtils } from './../geometryUtils';
-import { THREE } from '../../interface';
+import { BufferGeometry, PlaneBufferGeometry, Float32BufferAttribute } from 'three';
 
 /**
  * The Plane Depth geometry.
@@ -8,7 +8,7 @@ import { THREE } from '../../interface';
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/PlaneDepthGeometry) page for a live demo.
  *
  */
-export class NgxPlaneDepthGeometry extends THREE.BufferGeometry {
+export class NgxPlaneDepthGeometry extends BufferGeometry {
 	/**
 	 * @default 'PlaneDepthGeometry'
 	 */
@@ -53,7 +53,7 @@ export class NgxPlaneDepthGeometry extends THREE.BufferGeometry {
 			depthRate: depthRate,
 		};
 		const halfDepth = depth / 2;
-		const frontGeometry = new THREE.PlaneBufferGeometry(
+		const frontGeometry = new PlaneBufferGeometry(
 			width,
 			height,
 			widthSegments,
@@ -232,10 +232,10 @@ export class NgxPlaneDepthGeometry extends THREE.BufferGeometry {
 		this.setIndex(indices);
 		this.setAttribute(
 			'position',
-			new THREE.Float32BufferAttribute(vertices, 3)
+			new Float32BufferAttribute(vertices, 3)
 		);
-		this.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
-		this.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+		this.setAttribute('normal', new Float32BufferAttribute(normals, 3));
+		this.setAttribute('uv', new Float32BufferAttribute(uvs, 2));
 		this.computeVertexNormals();
 	}
 }

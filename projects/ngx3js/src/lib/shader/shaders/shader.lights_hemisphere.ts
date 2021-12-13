@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Color } from 'three';
 export const LightsHemisphere = {
 	vertexShader: `
   varying vec3 vWorldPosition;
@@ -20,8 +20,8 @@ export const LightsHemisphere = {
   }  
   `,
 	uniforms: {
-		topColor: { value: new THREE.Color(0x3284ff) },
-		bottomColor: { value: new THREE.Color(0xffffff) },
+		topColor: { value: new Color(0x3284ff) },
+		bottomColor: { value: new Color(0xffffff) },
 		offset: { value: 33 },
 		exponent: { value: 0.6 },
 	},

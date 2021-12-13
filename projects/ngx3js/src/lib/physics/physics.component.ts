@@ -7,6 +7,8 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import * as Ammo from '../threejs-library/ammo';
+import * as AmmoType from '../threejs-library/ammo-type';
+
 import { ConvexObjectBreaker } from 'three/examples/jsm/misc/ConvexObjectBreaker';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { RendererTimer, ThreeUtil, THREE, I3JS } from './../interface';
@@ -87,7 +89,7 @@ export class PhysicsComponent
 	 * @param [def]
 	 * @returns gravity
 	 */
-	private getGravity(def?: number): Ammo.btVector3 {
+	private getGravity(def?: number): AmmoType.btVector3 {
 		const gravity = ThreeUtil.getTypeSafe(this.gravity, def);
 		const gravityX = ThreeUtil.getTypeSafe(this.gravityX, 0);
 		const gravityY = ThreeUtil.getTypeSafe(this.gravityY, gravity);
@@ -160,12 +162,12 @@ export class PhysicsComponent
 	/**
 	 * The Ammo of physics component
 	 */
-	private ammo: Ammo.AmmoType = null;
+	private ammo: AmmoType.AmmoType = null;
 
 	/**
 	 * The Physics of physics component
 	 */
-	private physics: Ammo.btSoftRigidDynamicsWorld = null;
+	private physics: AmmoType.btSoftRigidDynamicsWorld = null;
 
 	/**
 	 * Gets ammo
@@ -194,13 +196,13 @@ export class PhysicsComponent
 	/**
 	 * Soft body helpers of physics component
 	 */
-	private softBodyHelpers: Ammo.btSoftBodyHelpers = null;
+	private softBodyHelpers: AmmoType.btSoftBodyHelpers = null;
 
 	/**
 	 * Gets soft body helpers
 	 * @returns soft body helpers
 	 */
-	public getSoftBodyHelpers(): Ammo.btSoftBodyHelpers {
+	public getSoftBodyHelpers(): AmmoType.btSoftBodyHelpers {
 		if (this.softBodyHelpers === null) {
 			this.softBodyHelpers = new this.ammo.btSoftBodyHelpers();
 		}
@@ -269,13 +271,13 @@ export class PhysicsComponent
 	/**
 	 * The Dispatcher of physics component
 	 */
-	private dispatcher: Ammo.btCollisionDispatcher = null;
+	private dispatcher: AmmoType.btCollisionDispatcher = null;
 
 	/**
 	 * Gets physics
 	 * @returns physics
 	 */
-	public getPhysics(): Ammo.btSoftRigidDynamicsWorld {
+	public getPhysics(): AmmoType.btSoftRigidDynamicsWorld {
 		if (this.ammo !== null && (this.physics === null || this._needUpdate)) {
 			this.needUpdate = false;
 			switch (this.type.toLowerCase()) {
@@ -334,7 +336,7 @@ export class PhysicsComponent
 	 * @param body
 	 * @returns rigid body
 	 */
-	public getRigidBody(body: Ammo.btCollisionObject): Ammo.btRigidBody {
+	public getRigidBody(body: AmmoType.btCollisionObject): AmmoType.btRigidBody {
 		return (this.ammo as any).castObject(body, this.ammo.btRigidBody);
 	}
 
@@ -343,7 +345,7 @@ export class PhysicsComponent
 	 * @param body
 	 * @returns collision object
 	 */
-	public getCollisionObject(body: Ammo.btCollisionObject): I3JS.IObject3D {
+	public getCollisionObject(body: AmmoType.btCollisionObject): I3JS.IObject3D {
 		const rigidBody: any = this.getRigidBody(body);
 		if (
 			ThreeUtil.isNotNull(rigidBody) &&
@@ -395,7 +397,7 @@ export class PhysicsComponent
 					const body1 = this.getCollisionObject(contactManifold.getBody1());
 					if (body0 !== null && body1 !== null) {
 						let numContacts = contactManifold.getNumContacts();
-						const contactPoints: Ammo.btManifoldPoint[] = [];
+						const contactPoints: AmmoType.btManifoldPoint[] = [];
 						for (let j = 0; j < numContacts; j++) {
 							contactPoints.push(contactManifold.getContactPoint(j));
 						}

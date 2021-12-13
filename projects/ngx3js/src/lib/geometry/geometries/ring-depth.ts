@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { BufferGeometry, Float32BufferAttribute, RingBufferGeometry, Vector2 } from 'three';
 import { NgxGeometryUtils } from './../geometryUtils';
 
 /**
@@ -8,7 +8,7 @@ import { NgxGeometryUtils } from './../geometryUtils';
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/RingDepthGeometry) page for a live demo.
  *
  */
-export class NgxRingDepthGeometry extends THREE.BufferGeometry {
+export class NgxRingDepthGeometry extends BufferGeometry {
 	/**
 	 * @default 'RingDepthGeometry'
 	 */
@@ -61,7 +61,7 @@ export class NgxRingDepthGeometry extends THREE.BufferGeometry {
 			depthRate: depthRate,
 		};
 		const halfDepth = depth / 2;
-		const frontGeometry = new THREE.RingBufferGeometry(
+		const frontGeometry = new RingBufferGeometry(
 			innerRadius,
 			outerRadius,
 			thetaSegments,
@@ -70,7 +70,7 @@ export class NgxRingDepthGeometry extends THREE.BufferGeometry {
 			thetaLength
 		);
 		frontGeometry.translate(0, 0, halfDepth);
-		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry);
+		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry as any);
 		const vertices = [];
 		const normals = [];
 		const uvs = [];
@@ -184,7 +184,7 @@ export class NgxRingDepthGeometry extends THREE.BufferGeometry {
 			let x = 0;
 			let y = 0;
 			let z = 0;
-			let vector2 = new THREE.Vector2();
+			let vector2 = new Vector2();
 			for (let i = 0; i < vertices.length; i += 3) {
 				x = vertices[i];
 				y = vertices[i + 1];
@@ -286,10 +286,10 @@ export class NgxRingDepthGeometry extends THREE.BufferGeometry {
 		this.setIndex(indices);
 		this.setAttribute(
 			'position',
-			new THREE.Float32BufferAttribute(vertices, 3)
+			new Float32BufferAttribute(vertices, 3)
 		);
-		this.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
-		this.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+		this.setAttribute('normal', new Float32BufferAttribute(normals, 3));
+		this.setAttribute('uv', new Float32BufferAttribute(uvs, 2));
 		this.computeVertexNormals();
 	}
 }

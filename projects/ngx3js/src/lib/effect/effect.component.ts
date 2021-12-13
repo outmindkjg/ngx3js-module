@@ -12,7 +12,6 @@ import { PassComponent } from '../pass/pass.component';
 import { RenderTargetComponent } from '../render-target/render-target.component';
 import { SceneComponent } from '../scene/scene.component';
 import { AbstractTweenComponent } from '../tween.abstract';
-import * as THREE_EFFECT from './effects/three-effects';
 
 /**
  * The Effect component.
@@ -459,7 +458,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	ngOnDestroy(): void {
 		if (
 			this.effectEffect !== null &&
-			this.effectEffect instanceof THREE_EFFECT.NgxAsciiEffect
+			this.effectEffect instanceof THREE.AsciiEffect
 		) {
 			this.effectEffect.domElement.parentNode.removeChild(
 				this.effectEffect.domElement
@@ -522,11 +521,11 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 		this.pixelRatio = pixelRatio;
 		if (this.effectEffect !== null) {
 			if (
-				this.effectEffect instanceof THREE_EFFECT.AsciiEffect ||
-				this.effectEffect instanceof THREE_EFFECT.PeppersGhostEffect
+				this.effectEffect instanceof THREE.AsciiEffect ||
+				this.effectEffect instanceof THREE.PeppersGhostEffect
 			) {
 				this.effectEffect.setSize(this.rendererWidth, this.rendererHeight);
-			} else if (this.effectEffect instanceof THREE_EFFECT.EffectComposer) {
+			} else if (this.effectEffect instanceof THREE.EffectComposer) {
 				this.effectEffect.setSize(this.rendererWidth, this.rendererHeight);
 				this.effectEffect.setPixelRatio(this.pixelRatio);
 			}
@@ -568,7 +567,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 				renderer.clear();
 			}
 
-			if (this.effectEffect instanceof THREE_EFFECT.EffectComposer) {
+			if (this.effectEffect instanceof THREE.EffectComposer) {
 				this.effectEffect.render(renderTimer.delta);
 			} else {
 				this.effectEffect.render(this._effectScene, this._effectCamera);
@@ -583,7 +582,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * Effect effect of effect component
 	 */
-	private effectEffect: THREE_EFFECT.EffectComposer | any = null;
+	private effectEffect: I3JS.IEffectComposer | any = null;
 
 	/**
 	 * Gets write buffer
@@ -659,7 +658,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'pass':
-						if (this.effectEffect instanceof THREE_EFFECT.EffectComposer) {
+						if (this.effectEffect instanceof THREE.EffectComposer) {
 							const scene = this.getScene(this._effectScene);
 							const camera = this.getCamera(this._effectCamera);
 							this.passList.forEach((pass) => {
@@ -739,7 +738,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets effect
 	 * @returns effect
 	 */
-	public getEffect(): THREE_EFFECT.EffectComposer | any {
+	public getEffect(): I3JS.IEffectComposer | any {
 		if (
 			this._effectRenderer !== null &&
 			this._effectCamera &&
@@ -749,7 +748,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 			this.needUpdate = false;
 			if (
 				this.effectEffect !== null &&
-				this.effectEffect instanceof THREE_EFFECT.AsciiEffect
+				this.effectEffect instanceof THREE.AsciiEffect
 			) {
 				this.effectEffect.domElement.parentNode.removeChild(
 					this.effectEffect.domElement
@@ -758,7 +757,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 			switch (this.type.toLowerCase()) {
 				case 'asciieffect':
 				case 'ascii':
-					const asciiEffect = new THREE_EFFECT.NgxAsciiEffect(
+					const asciiEffect = new THREE.AsciiEffect(
 						this._effectRenderer,
 						ThreeUtil.getTypeSafe(this.charSet, ' .:-+*=%@#'),
 						{
@@ -783,7 +782,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 					break;
 				case 'peppersghosteffect':
 				case 'peppersghost':
-					const peppersGhostEffect = new THREE_EFFECT.NgxPeppersGhostEffect(
+					const peppersGhostEffect = new THREE.PeppersGhostEffect(
 						this._effectRenderer
 					);
 					peppersGhostEffect.cameraDistance = this.getCameraDistance(15);
@@ -792,7 +791,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 					break;
 				case 'outlineeffect':
 				case 'outline':
-					const outlineEffect = new THREE_EFFECT.NgxOutlineEffect(
+					const outlineEffect = new THREE.OutlineEffect(
 						this._effectRenderer,
 						{}
 					);
@@ -800,12 +799,12 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 					break;
 				case 'parallaxbarriereffect':
 				case 'parallaxbarrier':
-					this.effectEffect = new THREE_EFFECT.NgxParallaxBarrierEffect(
+					this.effectEffect = new THREE.ParallaxBarrierEffect(
 						this._effectRenderer
 					);
 					break;
 				default:
-					const effectEffect = new THREE_EFFECT.NgxEffectComposer(
+					const effectEffect = new THREE.EffectComposer(
 						this._effectRenderer,
 						this.getRenderTarget()
 					);

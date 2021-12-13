@@ -49,6 +49,125 @@ export type TMatrix4Tuple = [
 	number
 ];
 
+export interface IStats {
+	REVISION: number;
+	dom: HTMLDivElement;
+	addPanel(panel: IPanel): IPanel;
+	showPanel(id: number): void;
+	begin(): void;
+	end(): void;
+	update(): void;
+	domElement: HTMLDivElement;
+	setMode(id: number): void;
+}
+
+export interface ICSM {
+	new (data: any): this;
+	camera: any;
+	parent: any;
+	cascades: any;
+	maxFar: any;
+	mode: any;
+	shadowMapSize: any;
+	shadowBias: any;
+	lightDirection: any;
+	lightIntensity: any;
+	lightNear: any;
+	lightFar: any;
+	lightMargin: any;
+	customSplitsCallback: any;
+	fade: boolean;
+	mainFrustum: IFrustum;
+	frustums: any[];
+	breaks: any[];
+	lights: any[];
+	shaders: Map<any, any>;
+	createLights(): void;
+	initCascades(): void;
+	updateShadowBounds(): void;
+	getBreaks(): void;
+	update(): void;
+	injectInclude(): void;
+	setupMaterial(material: any): void;
+	updateUniforms(): void;
+	getExtendedBreaks(target: any): void;
+	updateFrustums(): void;
+	remove(): void;
+	dispose(): void;
+}
+
+export interface ICSMHelper {
+	new (csm: any): this;
+	csm: any;
+	displayFrustum: boolean;
+	displayPlanes: boolean;
+	displayShadowBounds: boolean;
+	frustumLines: any;
+	cascadeLines: any[];
+	cascadePlanes: any[];
+	shadowLines: any[];
+	updateVisibility(): void;
+	update(): void;
+}
+
+export interface IGyroscope extends IObject3D {
+	new (): this;
+}
+
+export interface IPositionalAudioHelper extends ILine {
+	new (audio: IPositionalAudio, range?: number, divisionsInnerAngle?: number, divisionsOuterAngle?: number): this;
+
+	audio: IPositionalAudio;
+	range: number;
+	divisionsInnerAngle: number;
+	divisionsOuterAngle: number;
+
+	dispose(): void;
+	update(): void;
+}
+
+export interface IRectAreaLightHelper extends ILine {
+	new (light: IRectAreaLight, color?: TColorRepresentation): this;
+
+	light: IRectAreaLight;
+	color: TColorRepresentation | undefined;
+
+	dispose(): void;
+}
+
+export interface IVertexNormalsHelper extends ILineSegments {
+	new (object: IObject3D, size?: number, hex?: number): this;
+
+	object: IObject3D;
+	size: number;
+
+	update(): void;
+}
+
+export interface IVertexTangentsHelper extends ILineSegments {
+	new (object: IObject3D, size?: number, hex?: number): this;
+
+	object: IObject3D;
+	size: number;
+
+	update(): void;
+}
+
+export interface ILightProbeHelper extends IMesh {
+	new (lightProbe: ILightProbe, size: number): this;
+
+	lightProbe: ILightProbe;
+	size: number;
+
+	dispose(): void;
+}
+
+export interface IPanel {
+	new (name?: string, fg?: string, bg?: string): this;
+	dom: HTMLCanvasElement;
+	update(value: number, maxValue: number): void;
+}
+
 /**
  * Implementation of a quaternion. This is used for rotating things without incurring in the dreaded gimbal lock issue, amongst other advantages.
  *
@@ -148,10 +267,17 @@ export interface IQuaternion {
 	 * Sets this quaternion to a x b
 	 * Adapted from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm.
 	 */
-	multiplyQuaternions(a: IQuaternion | O3JS.Quaternion, b: IQuaternion | O3JS.Quaternion): IQuaternion | O3JS.Quaternion;
+	multiplyQuaternions(
+		a: IQuaternion | O3JS.Quaternion,
+		b: IQuaternion | O3JS.Quaternion
+	): IQuaternion | O3JS.Quaternion;
 
 	slerp(qb: IQuaternion | O3JS.Quaternion, t: number): IQuaternion | O3JS.Quaternion;
-	slerpQuaternions(qa: IQuaternion | O3JS.Quaternion, qb: IQuaternion | O3JS.Quaternion, t: number): IQuaternion | O3JS.Quaternion;
+	slerpQuaternions(
+		qa: IQuaternion | O3JS.Quaternion,
+		qb: IQuaternion | O3JS.Quaternion,
+		t: number
+	): IQuaternion | O3JS.Quaternion;
 	equals(v: IQuaternion | O3JS.Quaternion): boolean;
 
 	/**
@@ -275,7 +401,11 @@ export interface IMatrix4 {
 	clone(): IMatrix4;
 	copy(m: IMatrix4 | O3JS.Matrix4): this;
 	copyPosition(m: IMatrix4 | O3JS.Matrix4): IMatrix4;
-	extractBasis(xAxis: IVector3 | O3JS.Vector3, yAxis: IVector3 | O3JS.Vector3, zAxis: IVector3 | O3JS.Vector3): IMatrix4;
+	extractBasis(
+		xAxis: IVector3 | O3JS.Vector3,
+		yAxis: IVector3 | O3JS.Vector3,
+		zAxis: IVector3 | O3JS.Vector3
+	): IMatrix4;
 	makeBasis(xAxis: IVector3 | O3JS.Vector3, yAxis: IVector3 | O3JS.Vector3, zAxis: IVector3 | O3JS.Vector3): IMatrix4;
 
 	/**
@@ -389,12 +519,20 @@ export interface IMatrix4 {
 	/**
 	 * Sets this matrix to the transformation composed of translation, rotation and scale.
 	 */
-	compose(translation: IVector3 | O3JS.Vector3, rotation: IQuaternion | O3JS.Quaternion, scale: IVector3 | O3JS.Vector3): IMatrix4;
+	compose(
+		translation: IVector3 | O3JS.Vector3,
+		rotation: IQuaternion | O3JS.Quaternion,
+		scale: IVector3 | O3JS.Vector3
+	): IMatrix4;
 
 	/**
 	 * Decomposes this matrix into it's position, quaternion and scale components.
 	 */
-	decompose(translation: IVector3 | O3JS.Vector3, rotation: IQuaternion | O3JS.Quaternion, scale: IVector3 | O3JS.Vector3): IMatrix4;
+	decompose(
+		translation: IVector3 | O3JS.Vector3,
+		rotation: IQuaternion | O3JS.Quaternion,
+		scale: IVector3 | O3JS.Vector3
+	): IMatrix4;
 
 	/**
 	 * Creates a frustum matrix.
@@ -560,7 +698,11 @@ export interface IMatrix3 extends IMatrix {
 	identity(): IMatrix3;
 	clone(): this;
 	copy(m: IMatrix3 | O3JS.Matrix3): this;
-	extractBasis(xAxis: IVector3 | O3JS.Vector3, yAxis: IVector3 | O3JS.Vector3, zAxis: IVector3 | O3JS.Vector3): IMatrix3;
+	extractBasis(
+		xAxis: IVector3 | O3JS.Vector3,
+		yAxis: IVector3 | O3JS.Vector3,
+		zAxis: IVector3 | O3JS.Vector3
+	): IMatrix3;
 	setFromIMatrix4(m: IMatrix4 | O3JS.Matrix4): IMatrix3;
 	multiplyScalar(s: number): IMatrix3;
 	determinant(): number;
@@ -724,7 +866,11 @@ export interface IMatrix4 extends IMatrix {
 	clone(): IMatrix4;
 	copy(m: IMatrix4 | O3JS.Matrix4): this;
 	copyPosition(m: IMatrix4 | O3JS.Matrix4): IMatrix4;
-	extractBasis(xAxis: IVector3 | O3JS.Vector3, yAxis: IVector3 | O3JS.Vector3, zAxis: IVector3 | O3JS.Vector3): IMatrix4;
+	extractBasis(
+		xAxis: IVector3 | O3JS.Vector3,
+		yAxis: IVector3 | O3JS.Vector3,
+		zAxis: IVector3 | O3JS.Vector3
+	): IMatrix4;
 	makeBasis(xAxis: IVector3 | O3JS.Vector3, yAxis: IVector3 | O3JS.Vector3, zAxis: IVector3 | O3JS.Vector3): IMatrix4;
 
 	/**
@@ -838,12 +984,20 @@ export interface IMatrix4 extends IMatrix {
 	/**
 	 * Sets this matrix to the transformation composed of translation, rotation and scale.
 	 */
-	compose(translation: IVector3 | O3JS.Vector3, rotation: IQuaternion | O3JS.Quaternion, scale: IVector3 | O3JS.Vector3): IMatrix4;
+	compose(
+		translation: IVector3 | O3JS.Vector3,
+		rotation: IQuaternion | O3JS.Quaternion,
+		scale: IVector3 | O3JS.Vector3
+	): IMatrix4;
 
 	/**
 	 * Decomposes this matrix into it's position, quaternion and scale components.
 	 */
-	decompose(translation: IVector3 | O3JS.Vector3, rotation: IQuaternion | O3JS.Quaternion, scale: IVector3 | O3JS.Vector3): IMatrix4;
+	decompose(
+		translation: IVector3 | O3JS.Vector3,
+		rotation: IQuaternion | O3JS.Quaternion,
+		scale: IVector3 | O3JS.Vector3
+	): IMatrix4;
 
 	/**
 	 * Creates a frustum matrix.
@@ -2686,7 +2840,7 @@ export interface IColor {
 /**
  * a 2d path representation, comprising of points, lines, and cubes, similar to the html5 2d canvas api. It extends CurvePath.
  */
-export interface IPath extends ICurvePath<IVector2|O3JS.Vector2> {
+export interface IPath extends ICurvePath<IVector2 | O3JS.Vector2> {
 	new (points?: (IVector2 | O3JS.Vector2)[]): this;
 
 	/**
@@ -2762,8 +2916,13 @@ export interface ICatmullRomCurve3 extends ICurve<IVector3> {
 	points: (IVector3 | O3JS.Vector3)[];
 }
 
-export interface ICubicBezierCurve extends ICurve<IVector2|O3JS.Vector2> {
-	new (v0: IVector2 | O3JS.Vector2, v1: IVector2 | O3JS.Vector2, v2: IVector2 | O3JS.Vector2, v3: IVector2 | O3JS.Vector2): this;
+export interface ICubicBezierCurve extends ICurve<IVector2 | O3JS.Vector2> {
+	new (
+		v0: IVector2 | O3JS.Vector2,
+		v1: IVector2 | O3JS.Vector2,
+		v2: IVector2 | O3JS.Vector2,
+		v3: IVector2 | O3JS.Vector2
+	): this;
 
 	/**
 	 * @default 'CubicBezierCurve'
@@ -2792,7 +2951,12 @@ export interface ICubicBezierCurve extends ICurve<IVector2|O3JS.Vector2> {
 }
 
 export interface ICubicBezierCurve3 extends ICurve<IVector3> {
-	new (v0: IVector3 | O3JS.Vector3, v1: IVector3 | O3JS.Vector3, v2: IVector3 | O3JS.Vector3, v3: IVector3 | O3JS.Vector3): this;
+	new (
+		v0: IVector3 | O3JS.Vector3,
+		v1: IVector3 | O3JS.Vector3,
+		v2: IVector3 | O3JS.Vector3,
+		v3: IVector3 | O3JS.Vector3
+	): this;
 
 	/**
 	 * @default 'CubicBezierCurve3'
@@ -2820,8 +2984,13 @@ export interface ICubicBezierCurve3 extends ICurve<IVector3> {
 	v3: IVector3 | O3JS.Vector3;
 }
 
-export interface ICubicBezierCurve extends ICurve<IVector2|O3JS.Vector2> {
-	new (v0: IVector2 | O3JS.Vector2, v1: IVector2 | O3JS.Vector2, v2: IVector2 | O3JS.Vector2, v3: IVector2 | O3JS.Vector2): this;
+export interface ICubicBezierCurve extends ICurve<IVector2 | O3JS.Vector2> {
+	new (
+		v0: IVector2 | O3JS.Vector2,
+		v1: IVector2 | O3JS.Vector2,
+		v2: IVector2 | O3JS.Vector2,
+		v3: IVector2 | O3JS.Vector2
+	): this;
 
 	/**
 	 * @default 'CubicBezierCurve'
@@ -2850,7 +3019,12 @@ export interface ICubicBezierCurve extends ICurve<IVector2|O3JS.Vector2> {
 }
 
 export interface ICubicBezierCurve3 extends ICurve<IVector3> {
-	new (v0: IVector3 | O3JS.Vector3, v1: IVector3 | O3JS.Vector3, v2: IVector3 | O3JS.Vector3, v3: IVector3 | O3JS.Vector3): this;
+	new (
+		v0: IVector3 | O3JS.Vector3,
+		v1: IVector3 | O3JS.Vector3,
+		v2: IVector3 | O3JS.Vector3,
+		v3: IVector3 | O3JS.Vector3
+	): this;
 
 	/**
 	 * @default 'CubicBezierCurve3'
@@ -2878,7 +3052,7 @@ export interface ICubicBezierCurve3 extends ICurve<IVector3> {
 	v3: IVector3 | O3JS.Vector3;
 }
 
-export interface IEllipseCurve extends ICurve<IVector2|O3JS.Vector2> {
+export interface IEllipseCurve extends ICurve<IVector2 | O3JS.Vector2> {
 	new (
 		aX: number,
 		aY: number,
@@ -2936,7 +3110,7 @@ export interface IEllipseCurve extends ICurve<IVector2|O3JS.Vector2> {
 	aRotation: number;
 }
 
-export interface ILineCurve extends ICurve<IVector2|O3JS.Vector2> {
+export interface ILineCurve extends ICurve<IVector2 | O3JS.Vector2> {
 	new (v1: IVector2 | O3JS.Vector2, v2: IVector2 | O3JS.Vector2): this;
 
 	/**
@@ -2974,7 +3148,7 @@ export interface ILineCurve3 extends ICurve<IVector3> {
 	v2: IVector3 | O3JS.Vector3;
 }
 
-export interface IQuadraticBezierCurve extends ICurve<IVector2|O3JS.Vector2> {
+export interface IQuadraticBezierCurve extends ICurve<IVector2 | O3JS.Vector2> {
 	new (v0: IVector2 | O3JS.Vector2, v1: IVector2 | O3JS.Vector2, v2: IVector2 | O3JS.Vector2): this;
 
 	/**
@@ -3022,7 +3196,7 @@ export interface IQuadraticBezierCurve3 extends ICurve<IVector3> {
 	v2: IVector3 | O3JS.Vector3;
 }
 
-export interface ISplineCurve extends ICurve<IVector2|O3JS.Vector2> {
+export interface ISplineCurve extends ICurve<IVector2 | O3JS.Vector2> {
 	new (points?: (IVector2 | O3JS.Vector2)[]): this;
 
 	/**
@@ -6183,6 +6357,66 @@ export interface IFogExp2 extends IFogBase {
 	toJSON(): any;
 }
 
+export interface IWebGLCapabilitiesParameters {
+	precision?: string | undefined;
+	logarithmicDepthBuffer?: boolean | undefined;
+}
+
+export interface IWebGLCapabilities {
+	new (gl: WebGLRenderingContext, extensions: any, parameters: IWebGLCapabilitiesParameters): this;
+
+	readonly isWebGL2: boolean;
+	precision: string;
+	logarithmicDepthBuffer: boolean;
+	maxTextures: number;
+	maxVertexTextures: number;
+	maxTextureSize: number;
+	maxCubemapSize: number;
+	maxAttributes: number;
+	maxVertexUniforms: number;
+	maxVaryings: number;
+	maxFragmentUniforms: number;
+	vertexTextures: boolean;
+	floatFragmentTextures: boolean;
+	floatVertexTextures: boolean;
+
+	getMaxAnisotropy(): number;
+	getMaxPrecision(precision: string): string;
+}
+
+export interface IWebGLObjects {
+	new (gl: WebGLRenderingContext, geometries: any, attributes: any, info: any): this;
+
+	update(object: any): any;
+	dispose(): void;
+}
+
+export interface IWebGLShadowMap {
+	new (_renderer: IWebGLRenderer, _objects: IWebGLObjects, _capabilities: IWebGLCapabilities): this;
+
+	/**
+	 * @default false
+	 */
+	enabled: boolean;
+
+	/**
+	 * @default true
+	 */
+	autoUpdate: boolean;
+
+	/**
+	 * @default false
+	 */
+	needsUpdate: boolean;
+
+	/**
+	 * @default THREE.PCFShadowMap
+	 */
+	type: O3JS.ShadowMapType;
+
+	render(shadowsArray: ILight[], scene: IScene, camera: ICamera): void;
+}
+
 export interface IWebGLRenderTarget extends IEventDispatcher {
 	new (width: number, height: number, options?: IWebGLRenderTargetOptions): this;
 	uuid: string;
@@ -6414,7 +6648,13 @@ export interface ITriangle {
 	getNormal(target: IVector3 | O3JS.Vector3): IVector3;
 	getPlane(target: IPlane): IPlane;
 	getBarycoord(point: IVector3 | O3JS.Vector3, target: IVector3 | O3JS.Vector3): IVector3;
-	getUV(point: IVector3 | O3JS.Vector3, uv1: IVector2 | O3JS.Vector2, uv2: IVector2 | O3JS.Vector2, uv3: IVector2 | O3JS.Vector2, target: IVector2 | O3JS.Vector2): IVector2;
+	getUV(
+		point: IVector3 | O3JS.Vector3,
+		uv1: IVector2 | O3JS.Vector2,
+		uv2: IVector2 | O3JS.Vector2,
+		uv3: IVector2 | O3JS.Vector2,
+		target: IVector2 | O3JS.Vector2
+	): IVector2;
 	containsPoint(point: IVector3 | O3JS.Vector3): boolean;
 	intersectsBox(box: IBox3): boolean;
 	isFrontFacing(direction: IVector3 | O3JS.Vector3): boolean;
@@ -6957,7 +7197,12 @@ export interface IWebGLRenderer extends IRenderer {
 	 * @param dstTexture Specifies the destination texture.
 	 * @param level Specifies the destination mipmap level of the texture.
 	 */
-	copyTextureToTexture(position: IVector2 | O3JS.Vector2, srcTexture: ITexture, dstTexture: ITexture, level?: number): void;
+	copyTextureToTexture(
+		position: IVector2 | O3JS.Vector2,
+		srcTexture: ITexture,
+		dstTexture: ITexture,
+		level?: number
+	): void;
 
 	/**
 	 * Copies the pixels of a texture in the bounds sourceBox in the desination texture starting from the given position.
@@ -7070,6 +7315,24 @@ export interface IBufferGeometryUtils {
 }
 
 /**
+ * @deprecated
+ */
+ export interface IGeometryUtils {
+    /**
+     * @deprecated Use {@link Geometry#merge geometry.merge( geometry2, matrix, materialIndexOffset )} instead.
+     */
+    merge(geometry1: any, geometry2: any, materialIndexOffset?: any): any;
+    /**
+     * @deprecated Use {@link Geometry#center geometry.center()} instead.
+     */
+    center(geometry: any): any;
+
+    hilbert2D: any;
+    hilbert3D: any;
+    gosper: any;
+}
+
+/**
  * This is a superefficent class for geometries because it saves all data in buffers.
  * It reduces memory costs and cpu cycles. But it is not as easy to work with because of all the necessary buffer calculations.
  * It is mainly interesting when working with static objects.
@@ -7179,7 +7442,7 @@ export interface IBufferGeometry extends IEventDispatcher {
 
 	center(): IBufferGeometry;
 
-	setFromPoints(points: (IVector3 | O3JS.Vector3)[] |  (IVector2 | O3JS.Vector2)[]): IBufferGeometry;
+	setFromPoints(points: (IVector3 | O3JS.Vector3)[] | (IVector2 | O3JS.Vector2)[]): IBufferGeometry;
 
 	/**
 	 * Computes bounding box of the geometry, updating Geometry.boundingBox attribute.
@@ -7732,6 +7995,682 @@ export interface IWireframeGeometry<TBufferGeometry extends IBufferGeometry = IB
 	};
 }
 
+export interface ILineSegmentsGeometry extends IInstancedBufferGeometry {
+	new (): this;
+	readonly isLineSegmentsGeometry: true;
+
+	applyMatrix4(matrix: IMatrix4): this;
+	computeBoundingBox(): void;
+	computeBoundingSphere(): void;
+	fromEdgesGeometry(geometry: IEdgesGeometry): this;
+	fromLineSegments(lineSegments: ILineSegments): this;
+	fromMesh(mesh: IMesh): this;
+	fromWireframeGeometry(geometry: IWireframeGeometry): this;
+	setColors(array: number[] | Float32Array): this;
+	setPositions(array: number[] | Float32Array): this;
+}
+
+export interface IWireframeGeometry2 extends ILineSegmentsGeometry {
+	new (geometry: IBufferGeometry): this;
+	readonly sWireframeGeometry2: boolean;
+}
+
+export interface IWireframeGeometry2 extends ILineSegmentsGeometry {
+	new (geometry: IBufferGeometry): this;
+	readonly sWireframeGeometry2: boolean;
+}
+
+export interface IBoxLineGeometry extends IBufferGeometry {
+	new (
+		width?: number,
+		height?: number,
+		depth?: number,
+		widthSegments?: number,
+		heightSegments?: number,
+		depthSegments?: number
+	): this;
+}
+
+export interface IConvexGeometry extends IBufferGeometry {
+	new (points: IVector3[]): this;
+}
+
+export interface IDecalGeometry extends IBufferGeometry {
+	new (mesh: IMesh, position: IVector3, orientation: IEuler, size: IVector3): this;
+}
+
+export interface IDecalVertex {
+	new (position: IVector3, normal: IVector3): this;
+	clone(): this;
+}
+
+export interface IRandomGenerator {
+	random(): number;
+	getSeed(): number;
+	setSeed(seed: number): void;
+}
+
+export interface ILightningSegment {
+	iteration: number;
+	pos0: IVector3;
+	pos1: IVector3;
+	linPos0: IVector3;
+	linPos1: IVector3;
+	up0: IVector3;
+	up1: IVector3;
+	radius0: number;
+	radius1: number;
+	fraction0: number;
+	fraction1: number;
+	positionVariationFactor: number;
+}
+
+export interface ILightningSubray {
+	seed: number;
+	maxIterations: number;
+	recursion: number;
+	pos0: IVector3;
+	pos1: IVector3;
+	linPos0: IVector3;
+	linPos1: IVector3;
+	up0: IVector3;
+	up1: IVector3;
+	radius0: number;
+	radius1: number;
+	birthTime: number;
+	deathTime: number;
+	timeScale: number;
+	roughness: number;
+	straightness: number;
+	propagationTimeFactor: number;
+	vanishingTimeFactor: number;
+	endPropagationTime: number;
+	beginVanishingTime: number;
+}
+
+export interface IRayParameters {
+	sourceOffset?: IVector3;
+	destOffset?: IVector3;
+
+	timeScale?: number;
+	roughness?: number;
+	straightness?: number;
+
+	up0?: IVector3;
+	up1?: IVector3;
+	radius0?: number;
+	radius1?: number;
+	radius0Factor?: number;
+	radius1Factor?: number;
+	minRadius?: number;
+
+	isEternal?: boolean;
+	birthTime?: number;
+	deathTime?: number;
+	propagationTimeFactor?: number;
+	vanishingTimeFactor?: number;
+	subrayPeriod?: number;
+	subrayDutyCycle?: number;
+
+	maxIterations?: number;
+	isStatic?: boolean;
+	ramification?: number;
+	maxSubrayRecursion?: number;
+	recursionProbability?: number;
+	generateUVs?: boolean;
+
+	randomGenerator?: IRandomGenerator;
+	noiseSeed?: number;
+
+	onDecideSubrayCreation?: (segment: ILightningSegment, lightningStrike: ILightningStrike) => void;
+	onSubrayCreation?: (
+		segment: ILightningSegment,
+		parentSubray: ILightningSubray,
+		childSubray: ILightningSubray,
+		lightningStrike: ILightningStrike
+	) => void;
+}
+
+export interface ILightningStrike {
+	new (rayParameters?: IRayParameters): this;
+	copyParameters(dest?: IRayParameters, source?: IRayParameters): IRayParameters;
+	state: number;
+	update(time: number): void;
+
+	copy(source: ILightningStrike): ILightningStrike;
+	clone(): this;
+}
+
+export interface IParametricGeometry extends IBufferGeometry {
+	new (func?: (u: number, v: number, target: IVector3) => void, slices?: number, stacks?: number): this;
+
+	/**
+	 * @default 'ParametricGeometry'
+	 */
+	type: string;
+
+	parameters: {
+		func: (u: number, v: number, dest: IVector3) => void;
+		slices: number;
+		stacks: number;
+	};
+}
+
+interface IParametricTubeGeometry extends IParametricGeometry {
+	new (path: ICurve<IVector3>, segments?: number, radius?: number, segmentsRadius?: number, closed?: boolean): this;
+}
+
+interface IParametricTorusKnotGeometry extends IParametricTubeGeometry {
+	new (radius?: number, tube?: number, segmentsT?: number, segmentsR?: number, p?: number, q?: number): this;
+}
+
+interface IParametricSphereGeometry extends IParametricGeometry {
+	new (size: number, u: number, v: number): this;
+}
+
+interface IParametricPlaneGeometry extends IParametricGeometry {
+	new (width: number, depth: number, segmentsWidth: number, segmentsDepth: number): this;
+}
+
+export interface IParametricGeometries {
+	klein(v: number, u: number, target: IVector3): IVector3;
+	plane(width: number, height: number): (u: number, v: number, target: IVector3) => IVector3;
+	mobius(u: number, t: number, target: IVector3): IVector3;
+	mobius3d(u: number, t: number, target: IVector3): IVector3;
+	TubeGeometry: IParametricTubeGeometry;
+	TorusKnotGeometry: IParametricTorusKnotGeometry;
+	SphereGeometry: IParametricSphereGeometry;
+	PlaneGeometry: IParametricPlaneGeometry;
+}
+
+export interface IRoundedBoxGeometry extends IBoxGeometry {
+	new (width?: number, height?: number, depth?: number, segments?: number, radius?: number): this;
+}
+
+export interface ITeapotGeometry extends IBufferGeometry {
+	new (
+		size?: number,
+		segments?: number,
+		bottom?: boolean,
+		lid?: boolean,
+		body?: boolean,
+		fitLid?: boolean,
+		blinn?: boolean
+	): this;
+}
+
+export interface ITextGeometryParameters {
+	font: IFont;
+	size?: number | undefined;
+	height?: number | undefined;
+	curveSegments?: number | undefined;
+	bevelEnabled?: boolean | undefined;
+	bevelThickness?: number | undefined;
+	bevelSize?: number | undefined;
+	bevelOffset?: number | undefined;
+	bevelSegments?: number | undefined;
+}
+
+export interface ITextGeometry extends IExtrudeGeometry {
+	/**
+	 * @default 'TextGeometry'
+	 */
+	type: string;
+
+	new (text: string, parameters: ITextGeometryParameters): this;
+
+	parameters: {
+		font: IFont;
+		size: number;
+		height: number;
+		curveSegments: number;
+		bevelEnabled: boolean;
+		bevelThickness: number;
+		bevelSize: number;
+		bevelOffset: number;
+		bevelSegments: number;
+	};
+}
+
+export interface ILineGeometry extends ILineSegmentsGeometry {
+	new (): this;
+	readonly isLineGeometry: true;
+
+	fromLine(line: ILine): this;
+}
+
+export interface IRollerCoasterGeometry extends IBufferGeometry {
+	new (curve: ICurve<IVector3>, divisions: number): this;
+}
+
+export interface IRollerCoasterLiftersGeometry extends IBufferGeometry {
+	new (curve: ICurve<IVector3>, divisions: number): this;
+}
+
+export interface IRollerCoasterShadowGeometry extends IBufferGeometry {
+	new (curve: ICurve<IVector3>, divisions: number): this;
+}
+
+export interface IRollerCoasterSkyGeometry extends IBufferGeometry {
+	new (curve: ICurve<IVector3>, divisions: number): this;
+}
+
+export interface IRollerCoasterTreesGeometry extends IBufferGeometry {
+	new (landscape: IMesh): this;
+}
+
+/**
+ * The Capsule geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCapsuleGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/CapsuleGeometry) page for a live demo.
+ *
+ */
+export interface ICapsuleGeometry extends IBufferGeometry {
+	/**
+	 * The Parameters of capsule geometry
+	 */
+	parameters: {
+		radius: number;
+		radiusSegments: number;
+		height: number;
+		heightSegments: number;
+		phiStart: number;
+		phiLength: number;
+	};
+
+	/**
+	 * @param [radius=50] — sphere radius. Default is 50.
+	 * @param [radiusSegments=30] — number of horizontal segments. Minimum value is 3, and the default is 8.
+	 * @param [height=10] — specify vertical starting angle. Default is 0.
+	 * @param [heightSegments=1] — specify vertical sweep angle size. Default is Math.PI.
+	 * @param [phiStart=0] — specify horizontal starting angle. Default is 0.
+	 * @param [phiLength=Math.PI * 2] — specify horizontal sweep angle size. Default is Math.PI * 2.
+	 */
+	new (
+		radius?: number,
+		radiusSegments?: number,
+		height?: number,
+		heightSegments?: number,
+		phiStart?: number,
+		phiLength?: number
+	): this;
+}
+
+/**
+ * The Circle Depth geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCircleDepthGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/CircleDepthGeometry) page for a live demo.
+ *
+ */
+export interface ICircleDepthGeometry extends IBufferGeometry {
+	/**
+	 * @default 'CircleDepthGeometry'
+	 */
+	type: string;
+
+	/**
+	 * The Parameters of circle depth geometry
+	 */
+	parameters: {
+		radius: number;
+		depth: number;
+		segments: number;
+		thetaStart: number;
+		thetaLength: number;
+		depthRate: number;
+	};
+
+	/**
+	 * @param [radius=1]
+	 * @param [depth=1]
+	 * @param [segments=8]
+	 * @param [thetaStart=0]
+	 * @param [thetaLength=Math.PI * 2]
+	 * @param [depthRate=1]
+	 */
+	new (
+		radius?: number,
+		depth?: number,
+		segments?: number,
+		thetaStart?: number,
+		thetaLength?: number,
+		depthRate?: number
+	): this;
+}
+
+/**
+ * The Grid geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxGridGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/GridGeometry) page for a live demo.
+ *
+ */
+export interface IGridGeometry extends IBufferGeometry {
+	/**
+	 * The Parameters of grid geometry
+	 */
+	parameters: {
+		width: number;
+		height: number;
+		depth: number;
+		widthSegments: number;
+		heightSegments: number;
+		colorW: IColor;
+		colorH: IColor;
+	};
+
+	/**
+	 * @param [width=1]
+	 * @param [height=1]
+	 * @param [depth=1]
+	 * @param [widthSegments=1]
+	 * @param [heightSegments=1]
+	 */
+	new (
+		width?: number,
+		height?: number,
+		depth?: number,
+		widthSegments?: number,
+		heightSegments?: number,
+		colorW?: IColor,
+		colorH?: IColor
+	): this;
+}
+
+export interface IPlaneDepthGeometry extends IBufferGeometry {
+	/**
+	 * @default 'PlaneDepthGeometry'
+	 */
+	type: string ;
+
+	/**
+	 * The Parameters of plane depth geometry
+	 */
+	parameters: {
+		width: number;
+		height: number;
+		depth: number;
+		widthSegments: number;
+		heightSegments: number;
+		depthRate: number;
+	};
+
+	/**
+	 * @param [width=1] — Width of the sides on the X axis.
+	 * @param [height=1] — Height of the sides on the Y axis.
+	 * @param [depth=1] — Depth of the sides on the Z axis.
+	 * @param [widthSegments=1] — Number of segmented faces along the width of the sides.
+	 * @param [heightSegments=1] — Number of segmented faces along the height of the sides.
+	 * @param [depthRate=1]
+	 */
+	new(
+		width?: number,
+		height?: number,
+		depth?: number,
+		widthSegments?: number,
+		heightSegments?: number,
+		depthRate?: number
+	) :this;
+}
+
+/**
+ * The Plane Perlin geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPlanePerlinGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/PlanePerlinGeometry) page for a live demo.
+ *
+ */
+ export interface IPlanePerlinGeometry {
+    /**
+     * The Data of plane perlin geometry
+     */
+    data: number[];
+    /**
+     * Creates an instance of plane perlin geometry.
+     * @param worldWidth
+     * @param worldDepth
+     * @param [quality]
+     */
+    new(worldWidth: number, worldDepth: number, quality?: number): this;
+    /**
+     * Gets y
+     * @param x
+     * @param z
+     * @returns
+     */
+    getY(x: number, z: number): number;
+    /**
+     * Generates height
+     * @param width
+     * @param height
+     * @param [quality]
+     * @returns height
+     */
+    generateHeight(width: number, height: number, quality?: number): number[];
+    /**
+     * Gets terrain
+     * @param planeWidth
+     * @param planeHeight
+     * @param planeDepth
+     * @returns terrain
+     */
+    getTerrain(planeWidth: number, planeHeight: number, planeDepth: number): IBufferGeometry;
+    /**
+     * Gets minecraft
+     * @param planeWidth
+     * @param planeHeight
+     * @param planeDepth
+     * @returns minecraft
+     */
+    getMinecraft(planeWidth: number, planeHeight: number, planeDepth: number): IBufferGeometry;
+    /**
+     * Gets minecraft ao
+     * @param planeWidth
+     * @param planeHeight
+     * @param planeDepth
+     * @param light
+     * @param shadow
+     * @returns minecraft ao
+     */
+    getMinecraftAo(planeWidth: number, planeHeight: number, planeDepth: number, light: IColor, shadow: IColor): IBufferGeometry;
+    /**
+     * Gets geometry
+     * @param planeGeometry
+     * @param uv
+     * @param rotate
+     * @param translate
+     * @param [colors]
+     * @returns geometry
+     */
+    getGeometry(planeGeometry: IBufferGeometry, uv: number[], rotate: {
+        x: number;
+        y: number;
+        z: number;
+    }, translate: {
+        x: number;
+        y: number;
+        z: number;
+    }, colors?: IColor[]): IBufferGeometry;
+    /**
+     * Gets texture
+     * @param sun
+     * @param color
+     * @param add
+     * @returns texture
+     */
+    getTexture(sun: IVector3, color: IColor, add: IColor): HTMLCanvasElement;
+}
+
+/**
+ * The RingDepth geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRingDepthGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/RingDepthGeometry) page for a live demo.
+ *
+ */
+ export interface IRingDepthGeometry extends IBufferGeometry {
+    /**
+     * @default 'RingDepthGeometry'
+     */
+    type: string;
+    /**
+     * The Parameters of ring depth geometry
+     */
+    parameters: {
+        innerRadius: number;
+        outerRadius: number;
+        depth: number;
+        thetaSegments: number;
+        phiSegments: number;
+        thetaStart: number;
+        thetaLength: number;
+        depthRate: number;
+    };
+    /**
+     * @param [innerRadius=0.5]
+     * @param [outerRadius=1]
+     * @param [depth=1]
+     * @param [thetaSegments=8]
+     * @param [phiSegments=1]
+     * @param [thetaStart=0]
+     * @param [thetaLength=Math.PI * 2]
+     * @param [depthRate=1]
+     */
+    new(innerRadius?: number, outerRadius?: number, depth?: number, thetaSegments?: number, phiSegments?: number, thetaStart?: number, thetaLength?: number, depthRate?: number) : this;
+}
+
+/**
+ * The Rope geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRopeGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/RopeGeometry) page for a live demo.
+ *
+ */
+ export interface IRopeGeometry extends IBufferGeometry {
+    /**
+     * The Parameters of rope geometry
+     */
+    parameters: {
+        width: number;
+        widthSegments: number;
+    };
+    /**
+     * @param [width=1]
+     * @param [widthSegments=1]
+     */
+    new(width?: number, widthSegments?: number) : this;
+}
+
+/**
+ * The Star Depth geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxStarDepthGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/StarDepthGeometry) page for a live demo.
+ *
+ */
+ export interface IStarDepthGeometry extends IBufferGeometry {
+    /**
+     * @default 'StarDepthGeometry'
+     */
+    type: string;
+    /**
+     * The Parameters of star depth geometry
+     */
+    parameters: {
+        innerRadius: number;
+        outerRadius: number;
+        depth: number;
+        segments: number;
+        thetaStart: number;
+        thetaLength: number;
+        depthRate: number;
+    };
+    /**
+     * @param [innerRadius=0.5]
+     * @param [outerRadius=1]
+     * @param [depth=1]
+     * @param [segments=5]
+     * @param [thetaStart=0]
+     * @param [thetaLength=Math.PI * 2]
+     * @param [depthRate=1]
+     */
+    new(innerRadius?: number, outerRadius?: number, depth?: number, segments?: number, thetaStart?: number, thetaLength?: number, depthRate?: number):this;
+}
+
+/**
+ * The Outline geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxOutlineGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/OutlineGeometry) page for a live demo.
+ *
+ */
+ export interface IOutlineGeometry extends IWireframeGeometry {
+    /**
+     * @param [innerRadius=0.5]
+     * @param [outerRadius=1]
+     * @param [segments=5]
+     * @param [thetaStart=0]
+     * @param [thetaLength=Math.PI * 2]
+     */
+    new(geometry: IBufferGeometry, scale?: number) : this;
+}
+
+/**
+ * The Star geometry.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxStarGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/StarGeometry) page for a live demo.
+ *
+ */
+ export interface IStarGeometry extends ICircleGeometry {
+    /**
+     * @param [innerRadius=0.5]
+     * @param [outerRadius=1]
+     * @param [segments=5]
+     * @param [thetaStart=0]
+     * @param [thetaLength=Math.PI * 2]
+     */
+    new(innerRadius?: number, outerRadius?: number, segments?: number, thetaStart?: number, thetaLength?: number):this;
+}
+
+export interface IEdgeSplitModifier {
+	new (): this;
+	/**
+	 * @param geometry					The geometry to modify by splitting edges.
+	 * 									This geometry can be any of any type: Geometry or BufferGeometry, indexed or
+	 * 									not...
+	 *
+	 * @param cutOffPoint				The cutoff angle in radians. If the angle between two face normals is higher
+	 * 									than this value, a split will be made.
+	 *
+	 * @param [tryKeepNormals = true]	Set to true to keep the normal values for vertices that won't be split.
+	 * 									To use this feature, you also need to pass an indexed geometry with a 'normal'
+	 * 									BufferAttribute.
+	 */
+	modify(geometry: IBufferGeometry, cutOffPoint: number, tryKeepNormals: boolean): IBufferGeometry;
+}
+
+export interface ISimplifyModifier {
+	new (): this;
+	modify(geometry: IBufferGeometry, count: number): IBufferGeometry;
+}
+
+export interface IGeometryCompressionUtils {
+	compressNormals(mesh: IMesh, encodeMethod: string): void;
+	compressPositions(mesh: IMesh): void;
+	compressUvs(mesh: IMesh): void;
+}
+
+export interface ITessellateModifier {
+	new (maxEdgeLength?: number, maxIterations?: number): this;
+	maxEdgeLength: number;
+	maxIterations: number;
+
+	modify<TGeometry extends IBufferGeometry>(geometry: TGeometry): TGeometry;
+}
+
 export interface IGroup extends IObject3D {
 	type: 'Group';
 	readonly isGroup: true;
@@ -7772,7 +8711,13 @@ export interface IRay {
 	intersectsPlane(plane: IPlane): boolean;
 	intersectBox(box: IBox3, target: IVector3 | O3JS.Vector3): IVector3 | null;
 	intersectsBox(box: IBox3): boolean;
-	intersectTriangle(a: IVector3 | O3JS.Vector3, b: IVector3 | O3JS.Vector3, c: IVector3 | O3JS.Vector3, backfaceCulling: boolean, target: IVector3 | O3JS.Vector3): IVector3 | null;
+	intersectTriangle(
+		a: IVector3 | O3JS.Vector3,
+		b: IVector3 | O3JS.Vector3,
+		c: IVector3 | O3JS.Vector3,
+		backfaceCulling: boolean,
+		target: IVector3 | O3JS.Vector3
+	): IVector3 | null;
 	applyMatrix4(matrix4: IMatrix4 | O3JS.Matrix4): IRay;
 	equals(ray: IRay): boolean;
 
@@ -8082,6 +9027,2056 @@ export interface IDataTextureLoader extends ILoader {
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IDataTexture>;
 }
 
+export interface IChunk {
+	palette: number[];
+	size: { x: number; y: number; z: number };
+	data: Uint8Array;
+}
+
+export interface IVOXMesh extends IMesh {
+	new (chunk: IChunk): this;
+}
+
+export interface IVOXDataTexture3D extends IDataTexture3D {
+	new (chunk: IChunk): this;
+}
+
+export interface IVOXLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (chunks: IChunk[]) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object[]>;
+	parse(data: ArrayBuffer): object[];
+}
+
+export interface IVRMLLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (scene: IScene) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IScene>;
+	parse(data: string, path: string): IScene;
+}
+
+export interface IVRMLoader extends ILoader {
+	gltfLoader: IGLTFLoader;
+
+	load(
+		url: string,
+		onLoad: (scene: IGLTF) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGLTF>;
+	parse(gltf: IGLTF, onLoad: (scene: IGLTF) => void): void;
+	setDRACOLoader(dracoLoader: IDRACOLoader): this;
+}
+
+export interface IVTKLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (geometry: IBufferGeometry) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IBufferGeometry>;
+	parse(data: ArrayBuffer | string, path: string): IBufferGeometry;
+}
+
+export interface IXYZLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (geometry: IBufferGeometry) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IBufferGeometry>;
+	parse(data: string, onLoad: (geometry: IBufferGeometry) => void): object;
+}
+
+export interface IMD2PartsConfig {
+	baseUrl: string;
+	body: string;
+	skins: string[];
+	weapons: Array<[string, string]>;
+}
+
+export interface IMD2Character {
+	new (): this;
+	scale: number;
+	animationFPS: number;
+	root: IObject3D;
+	meshBody: IMesh | null;
+	meshWeapon: IMesh | null;
+	skinsBody: ITexture[];
+	skinsWeapon: ITexture[];
+	weapons: IMesh[];
+	activeAnimation: string | null;
+	mixer: IAnimationMixer | null;
+	loadCounter: number;
+
+	onLoadComplete(): void;
+	loadParts(config: IMD2PartsConfig): void;
+	setPlaybackRate(rate: number): void;
+	setWireframe(wireframeEnabled: boolean): void;
+	setSkin(index: number): void;
+	setWeapon(index: number): void;
+	setAnimation(clipName: string): void;
+	syncWeaponAnimation(): void;
+	update(delta: number): void;
+}
+
+export interface IMD2CharacterComplex {
+	new (): this;
+	scale: number;
+	animationFPS: number;
+	transitionFrames: number;
+	maxSpeed: number;
+	maxReverseSpeed: number;
+	frontAcceleration: number;
+	backAcceleration: number;
+	frontDecceleration: number;
+	angularSpeed: number;
+	root: IObject3D;
+	meshBody: IMesh | null;
+	meshWeapon: IMesh | null;
+	controls: null;
+	skinsBody: ITexture[];
+	skinsWeapon: ITexture[];
+	weapons: IMesh[];
+	currentSkin: number;
+	onLoadComplete: () => void;
+
+	meshes: IMesh[];
+	animations: object[];
+	loadCounter: number;
+	speed: number;
+	bodyOrientation: number;
+	walkSpeed: number;
+	crouchSpeed: number;
+	activeAnimation: string;
+	oldAnimation: string;
+
+	enableShadows(enable: boolean): void;
+	setVisible(enable: boolean): void;
+	shareParts(original: IMD2CharacterComplex): void;
+	loadParts(config: object): void;
+	setPlaybackRate(rate: number): void;
+	setWireframe(wireframeEnabled: boolean): void;
+	setSkin(index: number): void;
+	setWeapon(index: number): void;
+	setAnimation(animationName: string): void;
+	update(delta: number): void;
+	updateAnimations(delta: number): void;
+	updateBehaviors(): void;
+	updateMovementModel(delta: number): void;
+}
+
+export interface ICSS2DObject extends IObject3D {
+	new (element: HTMLElement): this;
+	element: HTMLElement;
+
+	onBeforeRender: (renderer: unknown, scene: IScene, camera: ICamera) => void;
+	onAfterRender: (renderer: unknown, scene: IScene, camera: ICamera) => void;
+}
+
+export type TCSS2DParameters = {
+	element?: HTMLElement;
+};
+
+export interface ICSS2DRenderer {
+	new (parameters?: TCSS2DParameters): this;
+	domElement: HTMLElement;
+
+	getSize(): { width: number; height: number };
+	setSize(width: number, height: number): void;
+	render(scene: IScene, camera: ICamera): void;
+}
+
+export interface ICSS3DObject extends IObject3D {
+	new (element: HTMLElement): this;
+	element: HTMLElement;
+
+	onBeforeRender: (renderer: unknown, scene: IScene, camera: ICamera) => void;
+	onAfterRender: (renderer: unknown, scene: IScene, camera: ICamera) => void;
+}
+
+export interface ICSS3DSprite extends ICSS3DObject {
+	new (element: HTMLElement): this;
+}
+
+export type TCSS3DParameters = {
+	element?: HTMLElement;
+};
+
+export interface ICSS3DRenderer {
+	new (parameters?: TCSS3DParameters): this;
+	domElement: HTMLElement;
+
+	getSize(): { width: number; height: number };
+	setSize(width: number, height: number): void;
+	render(scene: IScene, camera: ICamera): void;
+}
+
+export interface ISVGObject extends IObject3D {
+	new (node: SVGElement): this;
+	node: SVGElement;
+}
+
+export interface ISVGRenderer {
+	new (): this;
+	domElement: SVGElement;
+	autoClear: boolean;
+	sortObjects: boolean;
+	sortElements: boolean;
+	overdraw: number;
+	info: { render: { vertices: number; faces: number } };
+
+	getSize(): { width: number; height: number };
+	setQuality(quality: string): void;
+	setClearColor(color: IColor, alpha: number): void;
+	setPixelRatio(): void;
+	setSize(width: number, height: number): void;
+	setPrecision(precision: number): void;
+	clear(): void;
+	render(scene: IScene, camera: ICamera): void;
+}
+
+export enum EArcballControlsMouseActionOperations {
+	PAN = 'PAN',
+	ROTATE = 'ROTATE',
+	ZOOM = 'ZOOM',
+	FOV = 'FOV',
+}
+
+export type TArcballControlsMouseActionMouse = 0 | 1 | 2 | 'WHEEL';
+
+export enum EArcballControlsMouseActionKeys {
+	SHIFT = 'SHIFT',
+	CTRL = 'CTRL',
+}
+
+export interface IArcballControls extends IEventDispatcher {
+	camera: ICamera | null;
+	domElement: HTMLElement;
+	scene?: IScene | null | undefined;
+
+	/**
+	 * @default 500
+	 */
+	focusAnimationTime: number;
+
+	/**
+	 * @default true
+	 */
+	enabled: boolean;
+
+	/**
+	 * @default true
+	 */
+	enablePan: boolean;
+
+	/**
+	 * @default true
+	 */
+	enableRotate: boolean;
+
+	/**
+	 * @default true
+	 */
+	enableZoom: boolean;
+
+	/**
+	 * @default true
+	 */
+	enableGizmos: boolean;
+
+	/**
+	 * @default true
+	 */
+	adjustNearFar: boolean;
+
+	/**
+	 * @default 1.1
+	 */
+	scaleFactor: number;
+
+	/**
+	 * @default 25
+	 */
+	dampingFactor: number;
+
+	/**
+	 * @default 20
+	 */
+	wMax: number; // maximum angular velocity allowed
+
+	/**
+	 * @default true
+	 */
+	enableAnimations: boolean; // if animations should be performed
+
+	/**
+	 * @default false
+	 */
+	enableGrid: boolean; // if grid should be showed during pan operation
+
+	/**
+	 * @default false
+	 */
+	cursorZoom: boolean; // if wheel zoom should be cursor centered
+
+	/**
+	 * @default 5
+	 */
+	minFov: number;
+
+	/**
+	 * @default 90
+	 */
+	maxFov: number;
+
+	/**
+	 * @default 0
+	 */
+	minDistance: number;
+
+	/**
+	 * @default Infinity
+	 */
+	maxDistance: number;
+
+	/**
+	 * @default 0
+	 */
+	minZoom: number;
+
+	/**
+	 * @default Infinity
+	 */
+	maxZoom: number;
+
+	/**
+	 * @default Vector3(0,0,0)
+	 */
+	target: IVector3;
+
+	/**
+	 * @default 0.67
+	 */
+	radiusFactor: number;
+
+	new (camera: ICamera, domElement: HTMLElement, scene?: IScene | null): this;
+
+	getRaycaster(): IRaycaster;
+
+	activateGizmos(isActive: boolean): void;
+
+	copyState(): void;
+
+	pasteState(): void;
+
+	saveState(): void;
+
+	reset(): void;
+
+	setCamera(camera: ICamera): void;
+
+	setGizmosVisible(value: boolean): void;
+
+	setTbRadius(value: number): void;
+
+	setMouseAction(
+		operation: EArcballControlsMouseActionOperations,
+		mouse: TArcballControlsMouseActionMouse,
+		key?: EArcballControlsMouseActionKeys
+	): boolean;
+
+	unsetMouseAction(mouse: TArcballControlsMouseActionMouse, key?: EArcballControlsMouseActionKeys): boolean;
+
+	setTarget(x: number, y: number, z: number): void;
+
+	update(): void;
+
+	dispose(): void;
+}
+
+export interface IDragControls extends IEventDispatcher {
+	new (objects: IObject3D[], camera: ICamera, domElement?: HTMLElement): this;
+
+	object: ICamera;
+
+	// API
+
+	enabled: boolean;
+	transformGroup: boolean;
+
+	activate(): void;
+	deactivate(): void;
+	dispose(): void;
+	getObjects(): IObject3D[];
+}
+
+export interface IFirstPersonControls {
+	new (object: ICamera, domElement?: HTMLElement): this;
+
+	object: ICamera;
+	domElement: HTMLElement | HTMLDocument;
+
+	enabled: boolean;
+	movementSpeed: number;
+	lookSpeed: number;
+	lookVertical: boolean;
+	autoForward: boolean;
+	activeLook: boolean;
+	heightSpeed: boolean;
+	heightCoef: number;
+	heightMin: number;
+	heightMax: number;
+	constrainVertical: boolean;
+	verticalMin: number;
+	verticalMax: number;
+	mouseDragOn: boolean;
+
+	handleResize(): void;
+	lookAt(x: number | IVector3, y: number, z: number): this;
+	update(delta: number): this;
+	dispose(): void;
+}
+
+export interface IFlyControls extends IEventDispatcher {
+	new (object: ICamera, domElement?: HTMLElement): this;
+
+	object: ICamera;
+	domElement: HTMLElement | HTMLDocument;
+
+	movementSpeed: number;
+	rollSpeed: number;
+	dragToLook: boolean;
+	autoForward: boolean;
+
+	update(delta: number): void;
+	dispose(): void;
+}
+
+export enum EMOUSE {
+	LEFT = 0,
+	MIDDLE = 1,
+	RIGHT = 2,
+	ROTATE = 0,
+	DOLLY = 1,
+	PAN = 2,
+}
+
+export enum ETOUCH {
+	ROTATE,
+	PAN,
+	DOLLY_PAN,
+	DOLLY_ROTATE,
+}
+
+export interface IOrbitControls {
+	new (object: ICamera, domElement?: HTMLElement): this;
+
+	object: ICamera;
+	domElement: HTMLElement | HTMLDocument;
+
+	// API
+	enabled: boolean;
+	target: IVector3;
+
+	// deprecated
+	center: IVector3;
+
+	minDistance: number;
+	maxDistance: number;
+
+	minZoom: number;
+	maxZoom: number;
+
+	minPolarAngle: number;
+	maxPolarAngle: number;
+
+	minAzimuthAngle: number;
+	maxAzimuthAngle: number;
+
+	enableDamping: boolean;
+	dampingFactor: number;
+
+	enableZoom: boolean;
+	zoomSpeed: number;
+
+	enableRotate: boolean;
+	rotateSpeed: number;
+
+	enablePan: boolean;
+	panSpeed: number;
+	screenSpacePanning: boolean;
+	keyPanSpeed: number;
+
+	autoRotate: boolean;
+	autoRotateSpeed: number;
+
+	enableKeys: boolean;
+	keys: { LEFT: string; UP: string; RIGHT: string; BOTTOM: string };
+	mouseButtons: { LEFT: EMOUSE; MIDDLE: EMOUSE; RIGHT: EMOUSE };
+	touches: { ONE: ETOUCH; TWO: ETOUCH };
+
+	update(): boolean;
+
+	listenToKeyEvents(domElement: HTMLElement): void;
+
+	saveState(): void;
+
+	reset(): void;
+
+	dispose(): void;
+
+	getPolarAngle(): number;
+
+	getAzimuthalAngle(): number;
+
+	getDistance(): number;
+
+	// EventDispatcher mixins
+	addEventListener(type: string, listener: (event: any) => void): void;
+
+	hasEventListener(type: string, listener: (event: any) => void): boolean;
+
+	removeEventListener(type: string, listener: (event: any) => void): void;
+
+	dispatchEvent(event: { type: string; target: any }): void;
+}
+
+export interface IMapControls extends IOrbitControls {
+	new (object: ICamera, domElement?: HTMLElement): this;
+}
+
+export interface IPointerLockControls extends IEventDispatcher {
+	new (camera: ICamera, domElement?: HTMLElement): this;
+
+	domElement: HTMLElement;
+
+	// API
+
+	isLocked: boolean;
+
+	minPolarAngle: number;
+	maxPolarAngle: number;
+
+	connect(): void;
+	disconnect(): void;
+	dispose(): void;
+	getObject(): ICamera;
+	getDirection(v: IVector3): IVector3;
+	moveForward(distance: number): void;
+	moveRight(distance: number): void;
+	lock(): void;
+	unlock(): void;
+}
+
+export interface ITrackballControls extends IEventDispatcher {
+	new (object: ICamera, domElement?: HTMLElement): this;
+
+	object: ICamera;
+	domElement: HTMLElement;
+
+	// API
+	enabled: boolean;
+	screen: { left: number; top: number; width: number; height: number };
+	rotateSpeed: number;
+	zoomSpeed: number;
+	panSpeed: number;
+	noRotate: boolean;
+	noZoom: boolean;
+	noPan: boolean;
+	noRoll: boolean;
+	staticMoving: boolean;
+	dynamicDampingFactor: number;
+	minDistance: number;
+	maxDistance: number;
+	keys: string[];
+	mouseButtons: { LEFT: EMOUSE; MIDDLE: EMOUSE; RIGHT: EMOUSE };
+
+	target: IVector3;
+	position0: IVector3;
+	target0: IVector3;
+	up0: IVector3;
+
+	update(): void;
+
+	reset(): void;
+
+	dispose(): void;
+
+	checkDistances(): void;
+
+	zoomCamera(): void;
+
+	panCamera(): void;
+
+	rotateCamera(): void;
+
+	handleResize(): void;
+}
+
+export interface ITransformControls extends IObject3D {
+	new (object: ICamera, domElement?: HTMLElement): this;
+
+	domElement: HTMLElement;
+
+	// API
+
+	camera: ICamera;
+	object: IObject3D | undefined;
+	enabled: boolean;
+	axis: 'X' | 'Y' | 'Z' | 'E' | 'XY' | 'YZ' | 'XZ' | 'XYZ' | 'XYZE' | null;
+	mode: 'translate' | 'rotate' | 'scale';
+	translationSnap: number | null;
+	rotationSnap: number | null;
+	space: 'world' | 'local';
+	size: number;
+	dragging: boolean;
+	showX: boolean;
+	showY: boolean;
+	showZ: boolean;
+	readonly isTransformControls: true;
+	mouseButtons: {
+		LEFT: EMOUSE;
+		MIDDLE: EMOUSE;
+		RIGHT: EMOUSE;
+	};
+
+	attach(object: IObject3D): this;
+	detach(): this;
+	getMode(): 'translate' | 'rotate' | 'scale';
+	getRaycaster(): IRaycaster;
+	setMode(mode: 'translate' | 'rotate' | 'scale'): void;
+	setTranslationSnap(translationSnap: number | null): void;
+	setRotationSnap(rotationSnap: number | null): void;
+	setScaleSnap(scaleSnap: number | null): void;
+	setSize(size: number): void;
+	setSpace(space: 'world' | 'local'): void;
+	dispose(): void;
+}
+
+/**
+ * Reflector shader
+ */
+export interface IReflectorShader {
+	defines: {
+		DISTANCE_ATTENUATION: boolean;
+		FRESNEL: boolean;
+	};
+	uniforms: {
+		[key: string]: IUniform;
+	};
+	vertexShader: string;
+	fragmentShader: string;
+}
+
+/**
+ * Reflector options
+ */
+export interface IReflectorOptions {
+	clipBias?: number | undefined;
+	textureWidth?: number | undefined;
+	textureHeight?: number | undefined;
+	color?: number | undefined;
+	useDepthTexture?: boolean | undefined;
+	shader?: IReflectorShader | undefined;
+}
+
+/**
+ * ReflectorForSSR pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxReflectorForSSRPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ReflectorForSSRPass) page for a live demo.
+ *
+ */
+export interface IReflectorForSSRPass extends IPass {
+	/**
+	 * Creates an instance of ngx reflector for ssrpass.
+	 *
+	 * @param geometry
+	 * @param options
+	 */
+	new (geometry: IBufferGeometry, options: IReflectorOptions): this;
+}
+
+/**
+ * AdaptiveToneMapping pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAdaptiveToneMappingPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/AdaptiveToneMappingPass) page for a live demo.
+ *
+ */
+export interface IAdaptiveToneMappingPass extends IPass {
+	/**
+	 * Creates an instance of ngx adaptive tone mapping pass.
+	 *
+	 * @param [adaptive]
+	 * @param [resolution]
+	 */
+	new (adaptive?: boolean, resolution?: number): this;
+
+	adaptive: boolean;
+	resolution: number;
+	needsInit: number;
+	luminanceRT: IWebGLRenderTarget;
+	previousLuminanceRT: IWebGLRenderTarget;
+	currentLuminanceRT: IWebGLRenderTarget;
+	copyUniforms: object;
+	materialCopy: IShaderMaterial;
+	materialLuminance: IShaderMaterial;
+	adaptLuminanceShader: object;
+	materialAdaptiveLum: IShaderMaterial;
+	materialToneMap: IShaderMaterial;
+	fsQuad: object;
+
+	reset(): void;
+	setAdaptive(adaptive: boolean): void;
+	setAdaptionRate(rate: number): void;
+	setMinLuminance(minLum: number): void;
+	setMaxLuminance(maxLum: number): void;
+	setAverageLuminance(avgLum: number): void;
+	setMiddleGrey(middleGrey: number): void;
+	dispose(): void;
+}
+
+/**
+ * Afterimage pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAfterimagePass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/AfterimagePass) page for a live demo.
+ *
+ */
+export interface IAfterimagePass extends IPass {
+	/**
+	 * Creates an instance of ngx afterimage pass.
+	 *
+	 * @param [damp]
+	 */
+	new (damp?: number): this;
+
+	shader: object;
+	uniforms: object;
+	textureComp: IWebGLRenderTarget;
+	textureOld: IWebGLRenderTarget;
+	shaderMaterial: IShaderMaterial;
+	compFsQuad: object;
+	copyFsQuad: object;
+}
+
+/**
+ * Bloom pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxBloomPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BloomPass) page for a live demo.
+ *
+ */
+export interface IBloomPass extends IPass {
+	/**
+	 * Creates an instance of ngx bloom pass.
+	 *
+	 * @param [strength]
+	 * @param [kernelSize]
+	 * @param [sigma]
+	 * @param [resolution]
+	 */
+	new (strength?: number, kernelSize?: number, sigma?: number, resolution?: number): this;
+	renderTargetX: IWebGLRenderTarget;
+	renderTargetY: IWebGLRenderTarget;
+	copyUniforms: object;
+	materialCopy: IShaderMaterial;
+	convolutionUniforms: object;
+	materialConvolution: IShaderMaterial;
+	fsQuad: object;
+}
+
+export interface IBokehPassParamters {
+	focus?: number;
+	aspect?: number;
+	aperture?: number;
+	maxblur?: number;
+	width?: number;
+	height?: number;
+}
+
+/**
+ * Bokeh pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxBokehPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BokehPass) page for a live demo.
+ *
+ */
+export interface IBokehPass extends IPass {
+	/**
+	 * Creates an instance of ngx bokeh pass.
+	 *
+	 * @param scene
+	 * @param camera
+	 * @param params
+	 */
+	new (scene: IScene, camera: ICamera, params: IBokehPassParamters): this;
+
+	scene: IScene;
+	camera: ICamera;
+	renderTargetColor: IWebGLRenderTarget;
+	renderTargetDepth: IWebGLRenderTarget;
+	materialDepth: IMeshDepthMaterial;
+	materialBokeh: IShaderMaterial;
+	uniforms: object;
+	fsQuad: object;
+	oldClearColor: IColor;
+}
+
+/**
+ * Clear pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxClearPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ClearPass) page for a live demo.
+ *
+ */
+export interface IClearPass extends IPass {
+	/**
+	 * Creates an instance of ngx clear pass.
+	 *
+	 * @param [clearColor]
+	 * @param [clearAlpha]
+	 */
+	new (clearColor?: TColorRepresentation, clearAlpha?: number): this;
+
+	clearColor: TColorRepresentation;
+	clearAlpha: number;
+}
+
+/**
+ * CubeTexture pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCubeTexturePass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/CubeTexturePass) page for a live demo.
+ *
+ */
+export interface ICubeTexturePass extends IPass {
+	/**
+	 * Creates an instance of ngx cube texture pass.
+	 *
+	 * @param camera
+	 * @param [envMap]
+	 * @param [opacity]
+	 */
+	new (camera: IPerspectiveCamera, envMap?: ICubeTexture, opacity?: number): this;
+
+	camera: IPerspectiveCamera;
+	cubeShader: object;
+	cubeMesh: IMesh;
+	envMap: ICubeTexture;
+	opacity: number;
+	cubeScene: IScene;
+	cubeCamera: IPerspectiveCamera;
+}
+
+/**
+ * DotScreen pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxDotScreenPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/DotScreenPass) page for a live demo.
+ *
+ */
+export interface IDotScreenPass extends IPass {
+	/**
+	 * Creates an instance of ngx dot screen pass.
+	 *
+	 * @param [center]
+	 * @param [angle]
+	 * @param [scale]
+	 */
+	new (center?: IVector2, angle?: number, scale?: number): this;
+
+	uniforms: object;
+	material: IShaderMaterial;
+	fsQuad: object;
+}
+
+/**
+ * Film pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxFilmPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/FilmPass) page for a live demo.
+ *
+ */
+export interface IFilmPass extends IPass {
+	/**
+	 * Creates an instance of ngx film pass.
+	 *
+	 * @param [noiseIntensity]
+	 * @param [scanlinesIntensity]
+	 * @param [scanlinesCount]
+	 * @param [grayscale]
+	 */
+	new (noiseIntensity?: number, scanlinesIntensity?: number, scanlinesCount?: number, grayscale?: number): this;
+
+	uniforms: object;
+	material: IShaderMaterial;
+	fsQuad: object;
+}
+
+/**
+ * Glitch pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxGlitchPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/GlitchPass) page for a live demo.
+ *
+ */
+export interface IGlitchPass extends IPass {
+	/**
+	 * Creates an instance of ngx glitch pass.
+	 *
+	 * @param [dtSize]
+	 */
+	new (dtSize?: number): this;
+
+	uniforms: object;
+	material: IShaderMaterial;
+	fsQuad: object;
+	goWild: boolean;
+	curF: number;
+	randX: number;
+
+	generateTrigger(): void;
+	generateHeightmap(dt_size: number): IDataTexture;
+}
+
+export interface IHalftonePassParameters {
+	shape?: number;
+	radius?: number;
+	rotateR?: number;
+	rotateB?: number;
+	rotateG?: number;
+	scatter?: number;
+	blending?: number;
+	blendingMode?: number;
+	greyscale?: boolean;
+	disable?: boolean;
+}
+
+/**
+ * Halftone pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxHalftonePass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/HalftonePass) page for a live demo.
+ *
+ */
+export interface IHalftonePass extends IPass {
+	/**
+	 * Creates an instance of ngx halftone pass.
+	 *
+	 * @param width
+	 * @param height
+	 * @param params
+	 */
+	new (width: number, height: number, params: IHalftonePassParameters): this;
+	uniforms: object;
+	material: IShaderMaterial;
+	fsQuad: object;
+}
+
+export interface ILUTPassParameters {
+	lut?: IDataTexture | IDataTexture3D;
+	intensity?: number;
+}
+
+/**
+ * LUT pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLUTPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/LUTPass) page for a live demo.
+ *
+ */
+export interface ILUTPass extends IPass {
+	/**
+	 * Creates an instance of ngx lutpass.
+	 *
+	 * @param params
+	 */
+	new (params: ILUTPassParameters): this;
+
+	lut?: IDataTexture | IDataTexture3D;
+	intensity?: number;
+}
+
+/**
+ * ClearMask pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxClearMaskPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ClearMaskPass) page for a live demo.
+ *
+ */
+export interface IClearMaskPass extends IPass {
+	/**
+	 * Creates an instance of ngx clear mask pass.
+	 */
+	new (): this;
+}
+
+/**
+ * Mask pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMaskPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/MaskPass) page for a live demo.
+ *
+ */
+export interface IMaskPass extends IPass {
+	/**
+	 * Creates an instance of ngx mask pass.
+	 *
+	 * @param scene
+	 * @param camera
+	 */
+	new (scene: IScene, camera: ICamera): this;
+
+	scene: IScene;
+	camera: ICamera;
+	inverse: boolean;
+}
+
+/**
+ * OutlinePass pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxOutlinePass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/OutlinePass) page for a live demo.
+ *
+ */
+export interface IOutlinePass extends IPass {
+	/**
+	 * Creates an instance of ngx outline pass.
+	 *
+	 * @param resolution
+	 * @param scene
+	 * @param camera
+	 * @param [selectedObjects]
+	 */
+	new (resolution: IVector2, scene: IScene, camera: ICamera, selectedObjects?: IObject3D[]): this;
+
+	renderScene: IScene;
+	renderCamera: ICamera;
+	selectedObjects: IObject3D[];
+	visibleEdgeColor: IColor;
+	hiddenEdgeColor: IColor;
+	edgeGlow: number;
+	usePatternTexture: boolean;
+	edgeThickness: number;
+	edgeStrength: number;
+	downSampleRatio: number;
+	pulsePeriod: number;
+	resolution: IVector2;
+	patternTexture: ITexture;
+
+	maskBufferMaterial: IMeshBasicMaterial;
+	renderTargetMaskBuffer: IWebGLRenderTarget;
+	depthMaterial: IMeshDepthMaterial;
+	prepareMaskMaterial: IShaderMaterial;
+	renderTargetDepthBuffer: IWebGLRenderTarget;
+	renderTargetMaskDownSampleBuffer: IWebGLRenderTarget;
+	renderTargetBlurBuffer1: IWebGLRenderTarget;
+	renderTargetBlurBuffer2: IWebGLRenderTarget;
+	edgeDetectionMaterial: IShaderMaterial;
+	renderTargetEdgeBuffer1: IWebGLRenderTarget;
+	renderTargetEdgeBuffer2: IWebGLRenderTarget;
+	separableBlurMaterial1: IShaderMaterial;
+	separableBlurMaterial2: IShaderMaterial;
+	overlayMaterial: IShaderMaterial;
+	copyUniforms: object;
+	materialCopy: IShaderMaterial;
+	oldClearColor: IColor;
+	oldClearAlpha: number;
+	fsQuad: object;
+	tempPulseColor1: IColor;
+	tempPulseColor2: IColor;
+	textureMatrix: IMatrix4;
+
+	dispose(): void;
+	changeVisibilityOfSelectedObjects(bVisible: boolean): void;
+	changeVisibilityOfNonSelectedObjects(bVisible: boolean): void;
+	updateTextureMatrix(): void;
+	getPrepareMaskMaterial(): IShaderMaterial;
+	getEdgeDetectionMaterial(): IShaderMaterial;
+	getSeperableBlurMaterial(): IShaderMaterial;
+	getOverlayMaterial(): IShaderMaterial;
+}
+
+export interface IPass {
+	new (): this;
+	enabled: boolean;
+	needsSwap: boolean;
+	clear: boolean;
+	renderToScreen: boolean;
+
+	setSize(width: number, height: number): void;
+	render(
+		renderer: IWebGLRenderer,
+		writeBuffer: IWebGLRenderTarget,
+		readBuffer: IWebGLRenderTarget,
+		deltaTime: number,
+		maskActive: boolean
+	): void;
+}
+
+export interface IFullScreenQuad {
+	new (material?: IMaterial): this;
+
+	render(renderer: IWebGLRenderer): void;
+	dispose(): void;
+
+	material: IMaterial;
+}
+
+/**
+ * Render pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRenderPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/RenderPass) page for a live demo.
+ *
+ */
+export interface IRenderPass extends IPass {
+	/**
+	 * Creates an instance of ngx render pass.
+	 * @param scene
+	 * @param camera
+	 * @param [overrideMaterial]
+	 * @param [clearColor]
+	 * @param [clearAlpha]
+	 */
+	new (scene: IScene, camera: ICamera, overrideMaterial?: IMaterial, clearColor?: IColor, clearAlpha?: number): this;
+
+	scene: IScene;
+	camera: ICamera;
+	overrideMaterial: IMaterial;
+	clearColor: IColor;
+	clearAlpha: number;
+	clearDepth: boolean;
+}
+
+export enum ESAO_OUTPUT {
+	Beauty,
+	Default,
+	SAO,
+	Depth,
+	Normal,
+}
+
+export interface ISAOPassParams {
+	output: ESAO_OUTPUT;
+	saoBias: number;
+	saoIntensity: number;
+	saoScale: number;
+	saoKernelRadius: number;
+	saoMinResolution: number;
+	saoBlur: boolean;
+	saoBlurRadius: number;
+	saoBlurStdDev: number;
+	saoBlurDepthCutoff: number;
+}
+
+/**
+ * SAO pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSAOPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SAOPass) page for a live demo.
+ *
+ */
+export interface ISAOPass extends IPass {
+	new (scene: IScene, camera: ICamera, depthTexture?: boolean, useNormals?: boolean, resolution?: IVector2): this;
+
+	scene: IScene;
+	camera: ICamera;
+	supportsDepthTextureExtension: boolean;
+	supportsNormalTexture: boolean;
+	originalClearColor: IColor;
+	oldClearColor: IColor;
+	oldClearAlpha: number;
+	resolution: IVector2;
+	saoRenderTarget: IWebGLRenderTarget;
+	blurIntermediateRenderTarget: IWebGLRenderTarget;
+	beautyRenderTarget: IWebGLRenderTarget;
+	normalRenderTarget: IWebGLRenderTarget;
+	depthRenderTarget: IWebGLRenderTarget;
+	depthMaterial: IMeshDepthMaterial;
+	normalMaterial: IMeshNormalMaterial;
+	saoMaterial: IShaderMaterial;
+	vBlurMaterial: IShaderMaterial;
+	hBlurMaterial: IShaderMaterial;
+	materialCopy: IShaderMaterial;
+	depthCopy: IShaderMaterial;
+	fsQuad: object;
+	params: ISAOPassParams;
+
+	renderPass(
+		renderer: IWebGLRenderer,
+		passMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor?: TColorRepresentation,
+		clearAlpha?: number
+	): void;
+	renderOverride(
+		renderer: IWebGLRenderer,
+		overrideMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor?: TColorRepresentation,
+		clearAlpha?: number
+	): void;
+}
+
+/**
+ * Save pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSavePass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SavePass) page for a live demo.
+ *
+ */
+export interface ISavePass extends IPass {
+	/**
+	 * Creates an instance of ngx save pass.
+	 *
+	 * @param renderTarget
+	 */
+	new (renderTarget: IWebGLRenderTarget): this;
+
+	textureID: string;
+	renderTarget: IWebGLRenderTarget;
+	uniforms: object;
+	material: IShaderMaterial;
+	fsQuad: object;
+}
+
+/**
+ * Shader pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ShaderPass) page for a live demo.
+ *
+ */
+export interface IShaderPass extends IPass {
+	/**
+	 * Creates an instance of ngx shader pass.
+	 *
+	 * @param shader
+	 * @param [textureId]
+	 */
+	new (shader: object, textureId?: string): this;
+
+	textureID: string;
+	uniforms: { [name: string]: { value: any } };
+	material: IShaderMaterial;
+	fsQuad: object;
+}
+
+/**
+ * SMAA pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSMAAPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SMAAPass) page for a live demo.
+ *
+ */
+export interface ISMAAPass extends IPass {
+	/**
+	 * Creates an instance of ngx smaapass.
+	 *
+	 * @param width
+	 * @param height
+	 */
+	new (width: number, height: number): this;
+
+	edgesRT: IWebGLRenderTarget;
+	weightsRT: IWebGLRenderTarget;
+	areaTexture: ITexture;
+	searchTexture: ITexture;
+	uniformsEdges: object;
+	materialEdges: IShaderMaterial;
+	uniformsWeights: object;
+	materialWeights: IShaderMaterial;
+	uniformsBlend: object;
+	materialBlend: IShaderMaterial;
+	fsQuad: object;
+
+	getAreaTexture(): string;
+	getSearchTexture(): string;
+}
+
+/**
+ * SSAARender pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSSAARenderPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSAARenderPass) page for a live demo.
+ *
+ */
+export interface ISSAARenderPass extends IPass {
+	/**
+	 * Creates an instance of ngx ssaarender pass.
+	 *
+	 * @param scene
+	 * @param camera
+	 * @param clearColor
+	 * @param clearAlpha
+	 */
+	new (scene: IScene, camera: ICamera, clearColor: TColorRepresentation, clearAlpha: number): this;
+
+	scene: IScene;
+	camera: ICamera;
+	sampleLevel: number;
+	unbiased: boolean;
+	clearColor: TColorRepresentation;
+	clearAlpha: number;
+	copyUniforms: object;
+	copyMaterial: IShaderMaterial;
+	fsQuad: object;
+	sampleRenderTarget: undefined | IWebGLRenderTarget;
+}
+
+/**
+ * SSAO pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSSAOPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSAOPass) page for a live demo.
+ *
+ */
+export interface ISSAOPass extends IPass {
+	/**
+	 * Creates an instance of ngx ssaopass.
+	 *
+	 * @param scene
+	 * @param camera
+	 * @param [width]
+	 * @param [height]
+	 */
+	new (scene: IScene, camera: ICamera, width?: number, height?: number): this;
+
+	scene: IScene;
+	camera: ICamera;
+	width: number;
+	height: boolean;
+	clear: boolean;
+	kernelRadius: number;
+	kernelSize: number;
+	kernel: IVector3[];
+	noiseTexture: IDataTexture;
+	output: any;
+	minDistance: number;
+	maxDistance: number;
+	beautyRenderTarget: IWebGLRenderTarget;
+	normalRenderTarget: IWebGLRenderTarget;
+	ssaoRenderTarget: IWebGLRenderTarget;
+	blurRenderTarget: IWebGLRenderTarget;
+	ssaoMaterial: IShaderMaterial;
+	normalMaterial: IMeshNormalMaterial;
+	blurMaterial: IShaderMaterial;
+	depthRenderMaterial: IShaderMaterial;
+	copyMaterial: IShaderMaterial;
+	fsQuad: object;
+	originalClearColor: IColor;
+	dipose(): void;
+	generateSampleKernel(): IVector3[];
+	generateRandomKernelRotations(): void;
+	renderPass(
+		renderer: IWebGLRenderer,
+		passMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor?: TColorRepresentation,
+		clearAlpha?: number
+	): void;
+	renderOverride(
+		renderer: IWebGLRenderer,
+		overrideMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor?: TColorRepresentation,
+		clearAlpha?: number
+	): void;
+}
+
+export interface ISSRPassParams {
+	renderer: IWebGLRenderer;
+	scene: IScene;
+	camera: ICamera;
+	width?: number | undefined;
+	height?: number | undefined;
+	selects: IMesh[] | null;
+	isPerspectiveCamera?: boolean | undefined;
+	isBouncing?: boolean | undefined;
+	groundReflector: any | null;
+}
+
+/**
+ * SSR pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSSRPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSRPass) page for a live demo.
+ *
+ */
+export interface ISSRPass extends IPass {
+	/**
+	 * Creates an instance of ngx ssrpass.
+	 *
+	 * @param params
+	 */
+	new (params: ISSRPassParams): this;
+
+	width: number;
+	height: number;
+	clear: boolean;
+	renderer: IWebGLRenderer;
+	scene: IScene;
+	camera: ICamera;
+	groundReflector: any | null;
+	opacity: number;
+	output: number;
+	maxDistance: number;
+	thickness: number;
+	tempColor: IColor;
+
+	get selects(): IMesh[] | null;
+	set selects(val: IMesh[] | null);
+	selective: boolean;
+	get isBouncing(): boolean;
+	set isBouncing(val: boolean);
+
+	blur: boolean;
+
+	get isDistanceAttenuation(): boolean;
+	set isDistanceAttenuation(val: boolean);
+	get isFresnel(): boolean;
+	set isFresnel(val: boolean);
+	get isInfiniteThick(): boolean;
+	set isInfiniteThick(val: boolean);
+
+	thickTolerance: number;
+
+	beautyRenderTarget: IWebGLRenderTarget;
+	prevRenderTarget: IWebGLRenderTarget;
+	normalRenderTarget: IWebGLRenderTarget;
+	metalnessRenderTarget: IWebGLRenderTarget;
+	ssrRenderTarget: IWebGLRenderTarget;
+
+	blurRenderTarget: IWebGLRenderTarget;
+	blurRenderTarget2: IWebGLRenderTarget;
+
+	ssrMaterial: IShaderMaterial;
+
+	normalMaterial: IMeshNormalMaterial;
+
+	metalnessOnMaterial: IMeshBasicMaterial;
+
+	metalnessOffMaterial: IMeshBasicMaterial;
+
+	blurMaterial: IShaderMaterial;
+	blurMaterial2: IShaderMaterial;
+
+	depthRenderMaterial: IShaderMaterial;
+
+	copyMaterial: IShaderMaterial;
+
+	fsQuad: IFullScreenQuad;
+
+	originalClearColor: IColor;
+
+	dispose: () => void;
+
+	renderPass: (
+		renderer: IWebGLRenderer,
+		passMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor: TColorRepresentation,
+		clearAlpha: TColorRepresentation
+	) => void;
+
+	renderOverride: (
+		renderer: IWebGLRenderer,
+		passMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor: TColorRepresentation,
+		clearAlpha: TColorRepresentation
+	) => void;
+
+	renderMetalness: (
+		renderer: IWebGLRenderer,
+		passMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor: TColorRepresentation,
+		clearAlpha: TColorRepresentation
+	) => void;
+}
+
+export interface ISSRrPassParams {
+	renderer: IWebGLRenderer;
+	scene: IScene;
+	camera: ICamera;
+	width?: number | undefined;
+	height?: number | undefined;
+	selects: IMesh[] | null;
+}
+
+/**
+ * SSRr pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSSRrPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SSRrPass) page for a live demo.
+ *
+ */
+export interface ISSRrPass extends IPass {
+	/**
+	 * Creates an instance of ngx ssrr pass.
+	 *
+	 * @param params
+	 */
+	new (params: ISSRrPassParams): this;
+
+	width: number;
+	height: number;
+	clear: boolean;
+
+	renderer: IWebGLRenderer;
+	scene: IScene;
+	camera: ICamera;
+
+	output: number;
+
+	ior: number;
+	maxDistance: number;
+	surfDist: number;
+
+	color: IColor;
+
+	seleects: IMesh[] | null;
+
+	_specular: boolean;
+	get specular(): boolean;
+	set specular(spec: boolean);
+
+	_fillHole: boolean;
+	get fillHole(): boolean;
+	set fillHole(spec: boolean);
+
+	_infiniteThick: boolean;
+	get infiniteThick(): boolean;
+	set infiniteThick(spec: boolean);
+
+	beautyRenderTarget: IWebGLRenderTarget;
+	specularRenderTarget: IWebGLRenderTarget;
+	normalSelectsRenderTarget: IWebGLRenderTarget;
+	refractiveRenderTarget: IWebGLRenderTarget;
+	ssrrRenderTarget: IWebGLRenderTarget;
+
+	ssrrMaterial: IShaderMaterial;
+
+	normalMaterial: IMeshNormalMaterial;
+	refractiveOnMaterial: IMeshBasicMaterial;
+	refractiveOffMaterial: IMeshBasicMaterial;
+	specularMaterial: IMeshStandardMaterial;
+
+	depthRenderMaterial: IShaderMaterial;
+	copyMaterial: IShaderMaterial;
+
+	fsQuad: IFullScreenQuad;
+
+	originalClearColor: IColor;
+
+	dispose: () => void;
+
+	render: (renderer: IWebGLRenderer, writeBuffer: IWebGLRenderTarget) => void;
+
+	renderPass: (
+		renderer: IWebGLRenderer,
+		passMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor: TColorRepresentation,
+		clearAlpha: TColorRepresentation
+	) => void;
+
+	renderOverride: (
+		renderer: IWebGLRenderer,
+		passMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor: TColorRepresentation,
+		clearAlpha: TColorRepresentation
+	) => void;
+
+	renderRefractive: (
+		renderer: IWebGLRenderer,
+		passMaterial: IMaterial,
+		renderTarget: IWebGLRenderTarget,
+		clearColor: TColorRepresentation,
+		clearAlpha: TColorRepresentation
+	) => void;
+
+	setSize: (width: number, height: number) => void;
+}
+
+/**
+ * TAARender pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTAARenderPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/TAARenderPass) page for a live demo.
+ *
+ */
+export interface ITAARenderPass extends ISSAARenderPass {
+	/**
+	 * Creates an instance of ngx taarender pass.
+	 *
+	 * @param scene
+	 * @param camera
+	 * @param clearColor
+	 * @param clearAlpha
+	 */
+	new (scene: IScene, camera: ICamera, clearColor: TColorRepresentation, clearAlpha: number): this;
+
+	accumulate: boolean;
+}
+
+/**
+ * Texture pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTexturePass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/TexturePass) page for a live demo.
+ *
+ */
+export interface ITexturePass extends IPass {
+	/**
+	 * Creates an instance of ngx texture pass.
+	 *
+	 * @param map
+	 * @param [opacity]
+	 */
+	new (map: ITexture, opacity?: number): this;
+
+	map: ITexture;
+	opacity: number;
+	uniforms: object;
+	material: IShaderMaterial;
+	fsQuad: object;
+}
+
+/**
+ * UnrealBloom pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxUnrealBloomPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/UnrealBloomPass) page for a live demo.
+ *
+ */
+export interface IUnrealBloomPass extends IPass {
+	/**
+	 * Creates an instance of ngx unreal bloom pass.
+	 *
+	 * @param resolution
+	 * @param strength
+	 * @param radius
+	 * @param threshold
+	 */
+	new (resolution: IVector2, strength: number, radius: number, threshold: number): this;
+
+	resolution: IVector2;
+	strength: number;
+	radius: number;
+	threshold: number;
+	clearColor: IColor;
+	renderTargetsHorizontal: IWebGLRenderTarget[];
+	renderTargetsVertical: IWebGLRenderTarget[];
+	nMips: number;
+	renderTargetBright: IWebGLRenderTarget;
+	highPassUniforms: object;
+	materialHighPassFilter: IShaderMaterial;
+	separableBlurMaterials: IShaderMaterial[];
+	compositeMaterial: IShaderMaterial;
+	bloomTintColors: IVector3[];
+	copyUniforms: object;
+	materialCopy: IShaderMaterial;
+	oldClearColor: IColor;
+	oldClearAlpha: number;
+	basic: IMeshBasicMaterial;
+	fsQuad: object;
+
+	dispose(): void;
+	getSeperableBlurMaterial(): IShaderMaterial;
+	getCompositeMaterial(): IShaderMaterial;
+}
+
+/**
+ * Copy pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderCopyPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/CopyPass) page for a live demo.
+ *
+ */
+export interface IShaderCopyPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx copy pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * RGBShift pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderRGBShiftPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/RGBShiftPass) page for a live demo.
+ *
+ */
+export interface IShaderRGBShiftPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx RGBShift pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * BleachBypass pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderBleachBypassPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BleachBypassPass) page for a live demo.
+ *
+ */
+export interface IShaderBleachBypassPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx BleachBypass pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * Sepia pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderSepiaPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SepiaPass) page for a live demo.
+ *
+ */
+export interface IShaderSepiaPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx Sepia pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * Vignette pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderVignettePass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/VignettePass) page for a live demo.
+ *
+ */
+export interface IShaderVignettePass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx Vignette pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * GammaCorrection pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderGammaCorrectionPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/GammaCorrectionPass) page for a live demo.
+ *
+ */
+export interface IShaderGammaCorrectionPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx GammaCorrection pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * FXAA pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderFXAAPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/FXAAPass) page for a live demo.
+ *
+ */
+export interface IShaderFXAAPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx FXAA pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * Pixel pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderPixelPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/PixelPass) page for a live demo.
+ *
+ */
+export interface IShaderPixelPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx Pixel pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * Luminosity pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderLuminosityPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/LuminosityPass) page for a live demo.
+ *
+ */
+export interface IShaderLuminosityPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx Luminosity pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * DotScreen pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderDotScreenPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/DotScreenPass) page for a live demo.
+ *
+ */
+export interface IShaderDotScreenPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx Luminosity pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * SobelOperator pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSobelOperatorPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SobelOperatorPass) page for a live demo.
+ *
+ */
+export interface ISobelOperatorPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx SobelOperator pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+/**
+ * ShaderMaterial pass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderMaterialPass) page for details.
+ * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ShaderMaterialPass) page for a live demo.
+ *
+ */
+export interface IShaderMaterialPass extends IShaderPass {
+	/**
+	 * Creates an instance of ngx ShaderMaterial pass.
+	 *
+	 * @param [textureId]
+	 */
+	new (textureId?: string): this;
+}
+
+export interface IAsciiEffectOptions {
+	resolution?: number;
+	scale?: number;
+	color?: boolean;
+	alpha?: boolean;
+	block?: boolean;
+	invert?: boolean;
+}
+
+export interface IAsciiEffect {
+	new (renderer: IWebGLRenderer, charSet?: string, options?: IAsciiEffectOptions): this;
+	domElement: HTMLElement;
+
+	render(scene: IScene, camera: ICamera): void;
+	setSize(width: number, height: number): void;
+}
+
+export interface IOutlineEffectParameters {
+	defaultThickness?: number | undefined;
+	defaultColor?: number[] | undefined;
+	defaultAlpha?: number | undefined;
+	defaultKeepAlive?: boolean | undefined;
+}
+
+export interface IOutlineEffect {
+	new (renderer: IWebGLRenderer, parameters?: IOutlineEffectParameters): this;
+	enabled: boolean;
+	autoClear: boolean;
+	domElement: HTMLElement;
+	shadowMap: IWebGLShadowMap;
+
+	clear(color?: boolean, depth?: boolean, stencil?: boolean): void;
+	getPixelRatio(): number;
+	getSize(target: IVector2): IVector2;
+	render(scene: IScene, camera: ICamera): void;
+	renderOutline(scene: IScene, camera: ICamera): void;
+	setRenderTarget(renderTarget: IWebGLRenderTarget | null): void;
+	setPixelRatio(value: number): void;
+	setScissor(x: IVector4 | number, y?: number, width?: number, height?: number): void;
+	setScissorTest(enable: boolean): void;
+	setSize(width: number, height: number, updateStyle?: boolean): void;
+	setViewport(x: IVector4 | number, y?: number, width?: number, height?: number): void;
+}
+
+export interface IParallaxBarrierEffect {
+	new (renderer: IWebGLRenderer): this;
+
+	render(scene: IScene, camera: ICamera): void;
+	setSize(width: number, height: number): void;
+}
+
+export interface IPeppersGhostEffect {
+	new (renderer: IWebGLRenderer): this;
+	cameraDistance: number;
+	reflectFromAbove: boolean;
+
+	render(scene: IScene, camera: ICamera): void;
+	setSize(width: number, height: number): void;
+}
+
+export interface IEffectComposer {
+	new (renderer: IWebGLRenderer, renderTarget?: IWebGLRenderTarget): this;
+	renderer: IWebGLRenderer;
+	renderTarget1: IWebGLRenderTarget;
+	renderTarget2: IWebGLRenderTarget;
+	writeBuffer: IWebGLRenderTarget;
+	readBuffer: IWebGLRenderTarget;
+	passes: IPass[];
+	copyPass: IShaderPass;
+	clock: IClock;
+	renderToScreen: boolean;
+
+	swapBuffers(): void;
+	addPass(pass: IPass): void;
+	insertPass(pass: IPass, index: number): void;
+	removePass(pass: IPass): void;
+	isLastEnabledPass(passIndex: number): boolean;
+	render(deltaTime?: number): void;
+	reset(renderTarget?: IWebGLRenderTarget): void;
+	setSize(width: number, height: number): void;
+	setPixelRatio(pixelRatio: number): void;
+}
+
+export interface IUVBoxes {
+	w: number;
+	h: number;
+	index: number;
+}
+
+export interface ILightMapContainers {
+	basicMat: IMaterial | IMaterial[];
+	object: IObject3D;
+}
+
+export interface IProgressiveLightMap {
+	renderer: IWebGLRenderer;
+	res: number;
+	lightMapContainers: ILightMapContainers[];
+	compiled: boolean;
+	scene: IScene;
+	tinyTarget: IWebGLRenderTarget;
+	buffer1Active: boolean;
+	firstUpdate: boolean;
+	warned: boolean;
+
+	progressiveLightMap1: IWebGLRenderTarget;
+	progressiveLightMap2: IWebGLRenderTarget;
+
+	uvMat: IMeshPhongMaterial;
+
+	uv_boxes: IUVBoxes[];
+
+	blurringPlane: IMesh<IPlaneGeometry, IMeshBasicMaterial>;
+
+	labelMaterial: IMeshBasicMaterial;
+	labelPlane: IPlaneGeometry;
+	labelMesh: IMesh<IPlaneGeometry, IMeshBasicMaterial>;
+
+	new (renderer: IWebGLRenderer, res?: number): this;
+
+	addObjectsToLightMap(objects: IObject3D[]): void;
+
+	update(camera: ICamera, blendWindow?: number, blurEdges?: boolean): void;
+
+	showDebugLightmap(visible: boolean, position?: IVector3): void;
+}
+
+export interface ISceneUtils {
+	createMeshesFromInstancedMesh(instancedMesh: IInstancedMesh): IGroup;
+	createMultiMaterialObject(geometry: IBufferGeometry, materials: IMaterial[]): IGroup;
+	/**
+	 * @deprecated Use scene.attach( child ) instead.
+	 */
+	detach(child: IObject3D, parent: IObject3D, scene: IScene): void;
+	/**
+	 * @deprecated Use parent.attach( child ) instead.
+	 */
+	attach(child: IObject3D, scene: IScene, parent: IObject3D): void;
+}
+
+export interface IShadowMesh extends IMesh {
+	new (mesh?: IMesh): this;
+
+	update(plane: IPlane, lightPosition4D: IVector4): void;
+}
+
+export interface ISize {
+	width: number;
+	height: number;
+	set: (width: number, height: number) => void;
+}
+
+export interface IPosition {
+	x: number;
+	y: number;
+	set: (x: number, y: number) => void;
+}
+
+export interface IShadowMapViewer {
+	new (light: ILight): this;
+
+	enabled: boolean;
+	size: ISize;
+	position: IPosition;
+	render(renderer: IRenderer): void;
+	updateForWindowResize(): void;
+	update(): void;
+}
+
+export interface ITiltLoader extends ILoader {
+	new (manager?: ILoadingManager, storePath?: string): this;
+	load(
+		url: string,
+		onLoad: (object: IGroup) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGroup>;
+	parse(data: ArrayBuffer): IGroup;
+}
+
 export interface IFileLoader extends ILoader {
 	mimeType: undefined | MimeType;
 	responseType: undefined | string;
@@ -8195,11 +11190,1387 @@ export interface ITextureLoader extends ILoader {
 
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ITexture>;
 }
+export interface IColladaExporterOptions {
+	author?: string;
+	textureDirectory?: string;
+	version?: string;
+}
+
+export interface IColladaExporterResult {
+	data: string;
+	textures: object[];
+}
+
+export interface IColladaExporter {
+	new (): this;
+
+	parse(
+		object: IObject3D,
+		onDone: (res: IColladaExporterResult) => void,
+		options: IColladaExporterOptions
+	): IColladaExporterResult | null;
+}
+
+export interface IDRACOExporterOptions {
+	decodeSpeed?: number;
+	encodeSpeed?: number;
+	encoderMethod?: number;
+	quantization?: number[];
+	exportUvs?: boolean;
+	exportNormals?: boolean;
+	exportColor?: boolean;
+}
+
+export interface IDRACOExporter {
+	new (): this;
+	parse(object: IMesh | IPoints, options: IDRACOExporterOptions): Int8Array;
+}
+
+export interface IGLTFExporterOptions {
+	binary?: boolean;
+	trs?: boolean;
+	onlyVisible?: boolean;
+	truncateDrawRange?: boolean;
+	embedImages?: boolean;
+	animations?: IAnimationClip[];
+	forceIndices?: boolean;
+	forcePowerOfTwoTextures?: boolean;
+	includeCustomExtensions?: boolean;
+}
+
+export interface IGLTFExporter {
+	new (): this;
+	parse(input: IObject3D, onCompleted: (gltf: object) => void, options: IGLTFExporterOptions): void;
+}
+
+export interface IMMDExporter {
+	new (): this;
+	parseVpd(skin: IObject3D, outputShiftJis: boolean, useOriginalBones: boolean): [] | Uint8Array;
+}
+
+export interface IOBJExporter {
+	new (): this;
+	parse(object: IObject3D): string;
+}
+
+export interface IPLYExporterOptions {
+	binary?: boolean;
+	excludeAttributes?: string[];
+	littleEndian?: boolean;
+}
+
+export interface IPLYExporter {
+	new (): this;
+	parse(object: IObject3D, onDone: (res: string) => void, options: IPLYExporterOptions): string | null;
+}
+
+export interface ISTLExporterOptions {
+	binary?: boolean;
+}
+
+export interface ISTLExporter {
+	new (): this;
+
+	parse(scene: IObject3D, options?: ISTLExporterOptions): string;
+}
+
+export interface IUSDZExporter {
+	new (): this;
+	parse(scene: IObject3D): Promise<Uint8Array>;
+}
+
+export interface IRhino3dmLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (object: IObject3D) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IObject3D>;
+	parse(data: ArrayBufferLike, onLoad: (object: IObject3D) => void, onError?: (event: ErrorEvent) => void): void;
+	setLibraryPath(path: string): IRhino3dmLoader;
+	setWorkerLimit(workerLimit: number): IRhino3dmLoader;
+	dispose(): IRhino3dmLoader;
+}
+
+export interface IThreeMFLoader extends ILoader {
+	availableExtensions: object[];
+	load(
+		url: string,
+		onLoad: (object: IGroup) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGroup>;
+	parse(data: ArrayBuffer): IGroup;
+	addExtension(extension: object): void;
+}
+
+export interface IAMFLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (object: IGroup) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGroup>;
+	parse(data: ArrayBuffer): IGroup;
+}
+
+export interface IBasisTextureLoader extends ILoader {
+	transcoderBinary: ArrayBuffer | null;
+	transcoderPath: string;
+	transcoderPending: Promise<void> | null;
+
+	workerConfig: {
+		format: number;
+		astcSupported: boolean;
+		etcSupported: boolean;
+		dxtSupported: boolean;
+		pvrtcSupported: boolean;
+	};
+	workerLimit: number;
+	workerNextTaskID: number;
+	workerPool: object[];
+	workerSourceURL: string;
+
+	detectSupport(renderer: IWebGLRenderer): this;
+	load(
+		url: string,
+		onLoad: (texture: ICompressedTexture) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ICompressedTexture>;
+	setTranscoderPath(path: string): this;
+	setWorkerLimit(workerLimit: number): this;
+	dispose(): void;
+}
+
+export interface IBVH {
+	clip: IAnimationClip;
+	skeleton: ISkeleton;
+}
+
+export interface IBVHLoader extends ILoader {
+	animateBonePositions: boolean;
+	animateBoneRotations: boolean;
+	load(
+		url: string,
+		onLoad: (bvh: IBVH) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IBVH>;
+	parse(text: string): IBVH;
+}
+
+export interface ICollada {
+	kinematics: object;
+	library: object;
+	scene: IScene;
+}
+
+export interface IColladaLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (collada: ICollada) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ICollada>;
+	parse(text: string, path: string): ICollada;
+}
+
+export interface IDDS {
+	mipmaps: object[];
+	width: number;
+	height: number;
+	format: O3JS.PixelFormat | O3JS.CompressedPixelFormat;
+	mipmapCount: number;
+	isCubemap: boolean;
+}
+
+export interface IDDSLoader extends ICompressedTextureLoader {
+	parse(buffer: ArrayBuffer, loadMipmaps: boolean): IDDS;
+}
+
+export interface IDRACOLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (geometry: IBufferGeometry) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IBufferGeometry>;
+	setDecoderPath(path: string): IDRACOLoader;
+	setDecoderConfig(config: object): IDRACOLoader;
+	setWorkerLimit(workerLimit: number): IDRACOLoader;
+	preload(): IDRACOLoader;
+	dispose(): IDRACOLoader;
+}
+
+export interface IEXR {
+	header: object;
+	width: number;
+	height: number;
+	data: Float32Array;
+	format: O3JS.PixelFormat;
+	type: O3JS.TextureDataType;
+}
+
+export interface IEXRLoader extends IDataTextureLoader {
+	type: O3JS.TextureDataType;
+
+	parse(buffer: ArrayBuffer): IEXR;
+	setDataType(type: O3JS.TextureDataType): this;
+}
+
+export interface IFBXLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (object: IGroup) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGroup>;
+	parse(FBXBuffer: ArrayBuffer | string, path: string): IGroup;
+}
+
+export interface IFont {
+	new (jsondata: any): this;
+
+	/**
+	 * @default 'Font'
+	 */
+	type: string;
+
+	data: string;
+
+	generateShapes(text: string, size: number): IShape[];
+}
+
+export interface IFontLoader extends ILoader {
+	load(
+		url: string,
+		onLoad?: (responseFont: IFont) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IFont>;
+	parse(json: any): IFont;
+}
+
+export interface IGCodeLoader extends ILoader {
+	splitLayer: boolean;
+	load(
+		url: string,
+		onLoad: (object: IGroup) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGroup>;
+	parse(data: string): IGroup;
+}
+
+export interface IGLTF {
+	animations: IAnimationClip[];
+	scene: IGroup;
+	scenes: IGroup[];
+	cameras: ICamera[];
+	asset: {
+		copyright?: string | undefined;
+		generator?: string | undefined;
+		version?: string | undefined;
+		minVersion?: string | undefined;
+		extensions?: any;
+		extras?: any;
+	};
+	parser: IGLTFParser;
+	userData: any;
+}
+
+export interface IGLTFLoader extends ILoader {
+	dracoLoader: IDRACOLoader | null;
+
+	load(
+		url: string,
+		onLoad: (gltf: IGLTF) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGLTF>;
+
+	setDRACOLoader(dracoLoader: IDRACOLoader): IGLTFLoader;
+
+	register(callback: (parser: IGLTFParser) => IGLTFLoaderPlugin): IGLTFLoader;
+	unregister(callback: (parser: IGLTFParser) => IGLTFLoaderPlugin): IGLTFLoader;
+
+	setKTX2Loader(ktx2Loader: IKTX2Loader): IGLTFLoader;
+	setMeshoptDecoder(meshoptDecoder: /* MeshoptDecoder */ any): IGLTFLoader;
+
+	parse(
+		data: ArrayBuffer | string,
+		path: string,
+		onLoad: (gltf: IGLTF) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+}
+
+export type TGLTFReferenceType = 'materials' | 'nodes' | 'textures' | 'meshes';
+
+export interface IGLTFReference {
+	materials?: number;
+	nodes?: number;
+	textures?: number;
+	meshes?: number;
+}
+
+export interface IGLTFParser {
+	json: any;
+
+	options: {
+		path: string;
+		manager: ILoadingManager;
+		ktx2Loader: IKTX2Loader;
+		meshoptDecoder: /* MeshoptDecoder */ any;
+		crossOrigin: string;
+		requestHeader: { [header: string]: string };
+	};
+
+	fileLoader: IFileLoader;
+	textureLoader: ITextureLoader | IImageBitmapLoader;
+	plugins: IGLTFLoaderPlugin;
+	extensions: { [name: string]: any };
+	associations: Map<IObject3D | IMaterial | ITexture, IGLTFReference>;
+
+	getDependency: (type: string, index: number) => Promise<any>;
+	getDependencies: (type: string) => Promise<any[]>;
+	loadBuffer: (bufferIndex: number) => Promise<ArrayBuffer>;
+	loadBufferView: (bufferViewIndex: number) => Promise<ArrayBuffer>;
+	loadAccessor: (accessorIndex: number) => Promise<IBufferAttribute | IInterleavedBufferAttribute>;
+	loadTexture: (textureIndex: number) => Promise<ITexture>;
+	loadTextureImage: (
+		textureIndex: number,
+		/**
+		 * GLTF.Image
+		 * See: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/schema/image.schema.json
+		 */
+		source: { [key: string]: any },
+		loader: ILoader
+	) => Promise<ITexture>;
+	assignTexture: (
+		materialParams: { [key: string]: any },
+		mapName: string,
+		mapDef: {
+			index: number;
+			texCoord?: number | undefined;
+			extensions?: any;
+		}
+	) => Promise<void>;
+	assignFinalMaterial: (object: IMesh) => void;
+	getMaterialType: () => any;
+	loadMaterial: (materialIndex: number) => Promise<IMaterial>;
+	createUniqueName: (originalName: string) => string;
+	createNodeMesh: (nodeIndex: number) => Promise<IGroup | IMesh | ISkinnedMesh>;
+	loadGeometries: (
+		/**
+		 * GLTF.Primitive[]
+		 * See: https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/schema/mesh.primitive.schema.json
+		 */
+		primitives: Array<{ [key: string]: any }>
+	) => Promise<IBufferGeometry[]>;
+	loadMesh: (meshIndex: number) => Promise<IGroup | IMesh | ISkinnedMesh>;
+	loadCamera: (cameraIndex: number) => Promise<ICamera>;
+	loadSkin: (skinIndex: number) => Promise<{
+		joints: number[];
+		inverseBindMatrices?: IBufferAttribute | IInterleavedBufferAttribute | undefined;
+	}>;
+	loadAnimation: (animationIndex: number) => Promise<IAnimationClip>;
+	loadNode: (nodeIndex: number) => Promise<IObject3D>;
+	loadScene: () => Promise<IGroup>;
+}
+
+export interface IGLTFLoaderPlugin {
+	beforeRoot?: (() => Promise<void> | null) | undefined;
+	afterRoot?: ((result: IGLTF) => Promise<void> | null) | undefined;
+	loadMesh?: ((meshIndex: number) => Promise<IGroup | IMesh | ISkinnedMesh> | null) | undefined;
+	loadBufferView?: ((bufferViewIndex: number) => Promise<ArrayBuffer> | null) | undefined;
+	loadMaterial?: ((materialIndex: number) => Promise<IMaterial> | null) | undefined;
+	loadTexture?: ((textureIndex: number) => Promise<ITexture> | null) | undefined;
+	getMaterialType?: ((materialIndex: number) => IMaterial | null) | undefined;
+	extendMaterialParams?:
+		| ((materialIndex: number, materialParams: { [key: string]: any }) => Promise<any> | null)
+		| undefined;
+	createNodeMesh?: ((nodeIndex: number) => Promise<IGroup | IMesh | ISkinnedMesh> | null) | undefined;
+	createNodeAttachment?: ((nodeIndex: number) => Promise<IObject3D> | null) | undefined;
+}
+
+export interface IHDRCubeTextureLoader extends ILoader {
+	hdrLoader: IRGBELoader;
+	type: O3JS.TextureDataType;
+
+	load(
+		urls: string[],
+		onLoad: (texture: ICubeTexture) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): ICubeTexture;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ICubeTexture>;
+	setDataType(type: O3JS.TextureDataType): this;
+}
+
+export interface IIFCLoaderSettings {
+	COORDINATE_TO_ORIGIN: boolean;
+	USE_FAST_BOOLS: boolean;
+	CIRCLE_SEGMENTS_LOW?: number;
+	CIRCLE_SEGMENTS_MEDIUM?: number;
+	CIRCLE_SEGMENTS_HIGH?: number;
+}
+
+export interface IIFCJSONObject {
+	expressID: number;
+	type: string;
+
+	[key: string]: any;
+}
+
+export interface IIFCHighlightConfig {
+	scene: IObject3D;
+	ids: number[];
+	removePrevious: boolean;
+	material?: IMaterial;
+}
+
+export interface IIFCHighlightConfigOfModel extends IIFCHighlightConfig {
+	modelID: number;
+}
+
+export interface IIFCManager {
+	parse(buffer: ArrayBuffer): Promise<IIFCModel>;
+
+	/**
+	 * Sets the relative path of web-ifc.wasm file in the project.
+	 * Beware: you **must** serve this file in your page; this means
+	 * that you have to copy this files from *node_modules/web-ifc*
+	 * to your deployment directory.
+	 *
+	 * If you don't use this methods,
+	 * IFC.js assumes that you are serving it in the root directory.
+	 *
+	 * Example if web-ifc.wasm is in dist/wasmDir:
+	 * `ifcLoader.setWasmPath("dist/wasmDir/");`
+	 *
+	 * @path Relative path to web-ifc.wasm.
+	 */
+	setWasmPath(path: string): void;
+
+	/**
+	 * Applies a configuration for [web-ifc](https://ifcjs.github.io/info/docs/Guide/web-ifc/Introduction).
+	 */
+	applyWebIfcConfig(settings: IIFCLoaderSettings): void;
+
+	/**
+	 * Enables the JSON mode (which consumes way less memory) and eliminates the WASM data.
+	 * Only use this in the following scenarios:
+	 * - If you don't need to access the properties of the IFC
+	 * - If you will provide the properties as JSON.
+	 */
+	useJSONData(useJSON?: boolean): void;
+
+	/**
+	 * Adds the properties of a model as JSON data.
+	 * @modelID ID of the IFC model.
+	 * @data: data as an object where the keys are the expressIDs and the values the properties.
+	 */
+	addModelJSONData(
+		modelID: number,
+		data: {
+			[id: number]: IIFCJSONObject;
+		}
+	): void;
+
+	/**
+	 * Completely releases the WASM memory, thus drastically decreasing the memory use of the app.
+	 * Only use this in the following scenarios:
+	 * - If you don't need to access the properties of the IFC
+	 * - If you will provide the properties as JSON.
+	 */
+	disposeMemory(): void;
+
+	/**
+	 * Makes object picking a lot faster
+	 * Courtesy of gkjohnson's [work](https://github.com/gkjohnson/three-mesh-bvh).
+	 * Import these objects from his library and pass them as arguments. IFC.js takes care of the rest!
+	 */
+	setupThreeMeshBVH(computeBoundsTree: any, disposeBoundsTree: any, acceleratedRaycast: any): void;
+
+	/**
+	 * Closes the specified model and deletes it from the [scene](https://threejs.org/docs/#api/en/scenes/Scene).
+	 * @modelID ID of the IFC model.
+	 * @scene Scene where the model is (if it's located in a scene).
+	 */
+	close(modelID: number, scene?: IScene): void;
+
+	/**
+	 * Gets the **Express ID** to which the given face belongs.
+	 * This ID uniquely identifies this entity within this IFC file.
+	 * @geometry The geometry of the IFC model.
+	 * @faceIndex The index of the face of a geometry.You can easily get this index using the [Raycaster](https://threejs.org/docs/#api/en/core/Raycaster).
+	 */
+	getExpressId(geometry: IBufferGeometry, faceIndex: number): number | undefined;
+
+	/**
+	 * Returns all items of the specified type. You can import
+	 * the types from *web-ifc*.
+	 *
+	 * Example to get all the standard walls of a project:
+	 * ```js
+	 * import { IFCWALLSTANDARDCASE } from 'web-ifc';
+	 * const walls = ifcLoader.getAllItemsOfType(IFCWALLSTANDARDCASE);
+	 * ```
+	 * @modelID ID of the IFC model.
+	 * @ifcType type of IFC items to get.
+	 * @verbose If false (default), this only gets IDs. If true, this also gets the native properties of all the fetched items.
+	 */
+	getAllItemsOfType(modelID: number, type: number, verbose: boolean): any[];
+
+	/**
+	 * Gets the native properties of the given element.
+	 * @modelID ID of the IFC model.
+	 * @id Express ID of the element.
+	 * @recursive Wether you want to get the information of the referenced elements recursively.
+	 */
+	getItemProperties(modelID: number, id: number, recursive?: boolean): any;
+
+	/**
+	 * Gets the [property sets](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifckernel/lexical/ifcpropertyset.htm)
+	 * assigned to the given element.
+	 * @modelID ID of the IFC model.
+	 * @id Express ID of the element.
+	 * @recursive If true, this gets the native properties of the referenced elements recursively.
+	 */
+	getPropertySets(modelID: number, id: number, recursive?: boolean): any[];
+
+	/**
+	 * Gets the properties of the type assigned to the element.
+	 * For example, if applied to a wall (IfcWall), this would get back the information
+	 * contained in the IfcWallType assigned to it, if any.
+	 * @modelID ID of the IFC model.
+	 * @id Express ID of the element.
+	 * @recursive If true, this gets the native properties of the referenced elements recursively.
+	 */
+	getTypeProperties(modelID: number, id: number, recursive?: boolean): any[];
+
+	/**
+	 * Gets the materials assigned to the given element.
+	 * @modelID ID of the IFC model.
+	 * @id Express ID of the element.
+	 * @recursive If true, this gets the native properties of the referenced elements recursively.
+	 */
+	getMaterialsProperties(modelID: number, id: number, recursive?: boolean): any[];
+
+	/**
+	 * Gets the ifc type of the specified item.
+	 * @modelID ID of the IFC model.
+	 * @id Express ID of the element.
+	 */
+	getIfcType(modelID: number, id: number): string;
+
+	/**
+	 * Gets the spatial structure of the project. The
+	 * [spatial structure](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifcproductextension/lexical/ifcspatialstructureelement.htm)
+	 * is the hierarchical structure that organizes every IFC project (all physical items
+	 * are referenced to an element of the spatial structure). It is formed by
+	 * one IfcProject that contains one or more IfcSites, that contain one or more
+	 * IfcBuildings, that contain one or more IfcBuildingStoreys, that contain
+	 * one or more IfcSpaces.
+	 * @modelID ID of the IFC model.
+	 */
+	getSpatialStructure(modelID: number): {
+		expressID: number;
+		type: string;
+		children: never[];
+	};
+
+	/**
+	 * Gets the mesh of the subset with the specified [material](https://threejs.org/docs/#api/en/materials/Material).
+	 * If no material is given, this returns the subset with the original materials.
+	 * @modelID ID of the IFC model.
+	 * @material Material assigned to the subset (if any).
+	 */
+	getSubset(modelID: number, material?: IMaterial): IMesh | null;
+
+	/**
+	 * Removes the specified subset.
+	 * @modelID ID of the IFC model.
+	 * @parent The parent where the subset is (can be any `THREE.Object3D`).
+	 * @material Material assigned to the subset, if any.
+	 */
+	removeSubset(modelID: number, parent?: IObject3D, material?: IMaterial): void;
+
+	/**
+	 * Creates a new geometric subset.
+	 * @config A configuration object with the following options:
+	 * - **scene**: `THREE.Object3D` where the model is located.
+	 * - **modelID**: ID of the model.
+	 * - **ids**: Express IDs of the items of the model that will conform the subset.
+	 * - **removePrevious**: wether to remove the previous subset of this model with this material.
+	 * - **material**: (optional) wether to apply a material to the subset
+	 */
+	createSubset(config: IIFCHighlightConfigOfModel): void | IMesh;
+
+	/**
+	 * Hides the selected items in the specified model
+	 * @modelID ID of the IFC model.
+	 * @ids Express ID of the elements.
+	 */
+	hideItems(modelID: number, ids: number[]): void;
+
+	/**
+	 * Hides all the items of the specified model
+	 * @modelID ID of the IFC model.
+	 */
+	hideAllItems(modelID: number): void;
+
+	/**
+	 * Shows all the items of the specified model
+	 * @modelID ID of the IFC model.
+	 * @ids Express ID of the elements.
+	 */
+	showItems(modelID: number, ids: number[]): void;
+
+	/**
+	 * Shows all the items of the specified model
+	 * @modelID ID of the IFC model.
+	 */
+	showAllItems(modelID: number): void;
+}
+
+export interface IIFCModel extends IMesh {
+	modelID: number;
+	ifcManager: IIFCManager | null;
+	/**
+	 * @deprecated `IfcModel` is already a mesh; you can place it in the scene directly.
+	 */
+	mesh: this;
+
+	setIFCManager(manager: IIFCManager): void;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.setWasmPath` instead.
+	 *
+	 * Sets the relative path of web-ifc.wasm file in the project.
+	 * Beware: you **must** serve this file in your page; this means
+	 * that you have to copy this files from *node_modules/web-ifc*
+	 * to your deployment directory.
+	 *
+	 * If you don't use this methods,
+	 * IFC.js assumes that you are serving it in the root directory.
+	 *
+	 * Example if web-ifc.wasm is in dist/wasmDir:
+	 * `ifcLoader.setWasmPath("dist/wasmDir/");`
+	 *
+	 * @path Relative path to web-ifc.wasm.
+	 */
+	setWasmPath(path: string): void;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.close` instead.
+	 *
+	 * Closes the specified model and deletes it from the [scene](https://threejs.org/docs/#api/en/scenes/Scene).
+	 * @scene Scene where the model is (if it's located in a scene).
+	 */
+	close(scene?: IScene): void;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.getExpressId` instead.
+	 *
+	 * Gets the **Express ID** to which the given face belongs.
+	 * This ID uniquely identifies this entity within this IFC file.
+	 * @geometry The geometry of the IFC model.
+	 * @faceIndex The index of the face of a geometry.You can easily get this index using the [Raycaster](https://threejs.org/docs/#api/en/core/Raycaster).
+	 */
+	getExpressId(geometry: IBufferGeometry, faceIndex: number): number | undefined;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.getAllItemsOfType` instead.
+	 *
+	 * Returns all items of the specified type. You can import
+	 * the types from *web-ifc*.
+	 *
+	 * Example to get all the standard walls of a project:
+	 * ```js
+	 * import { IFCWALLSTANDARDCASE } from 'web-ifc';
+	 * const walls = ifcLoader.getAllItemsOfType(IFCWALLSTANDARDCASE);
+	 * ```
+	 * @ifcType The type of IFC items to get.
+	 * @verbose If false (default), this only gets IDs. If true, this also gets the native properties of all the fetched items.
+	 */
+	getAllItemsOfType(type: number, verbose: boolean): any[];
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.getItemProperties` instead.
+	 *
+	 * Gets the native properties of the given element.
+	 * @id Express ID of the element.
+	 * @recursive Wether you want to get the information of the referenced elements recursively.
+	 */
+	getItemProperties(id: number, recursive?: boolean): any;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.getPropertySets` instead.
+	 *
+	 * Gets the [property sets](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifckernel/lexical/ifcpropertyset.htm)
+	 * assigned to the given element.
+	 * @id Express ID of the element.
+	 * @recursive If true, this gets the native properties of the referenced elements recursively.
+	 */
+	getPropertySets(id: number, recursive?: boolean): any[];
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.getTypeProperties` instead.
+	 *
+	 * Gets the properties of the type assigned to the element.
+	 * For example, if applied to a wall (IfcWall), this would get back the information
+	 * contained in the IfcWallType assigned to it, if any.
+	 * @id Express ID of the element.
+	 * @recursive If true, this gets the native properties of the referenced elements recursively.
+	 */
+	getTypeProperties(id: number, recursive?: boolean): any[];
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.getIfcType` instead.
+	 *
+	 * Gets the ifc type of the specified item.
+	 * @id Express ID of the element.
+	 */
+	getIfcType(id: number): string;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.getSpatialStructure` instead.
+	 *
+	 * Gets the spatial structure of the project. The
+	 * [spatial structure](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifcproductextension/lexical/ifcspatialstructureelement.htm)
+	 * is the hierarchical structure that organizes every IFC project (all physical items
+	 * are referenced to an element of the spatial structure). It is formed by
+	 * one IfcProject that contains one or more IfcSites, that contain one or more
+	 * IfcBuildings, that contain one or more IfcBuildingStoreys, that contain
+	 * one or more IfcSpaces.
+	 */
+	getSpatialStructure(): {
+		expressID: number;
+		type: string;
+		children: never[];
+	};
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.getSubset` instead.
+	 *
+	 * Gets the mesh of the subset with the specified [material](https://threejs.org/docs/#api/en/materials/Material).
+	 * If no material is given, this returns the subset with the original materials.
+	 * @material Material assigned to the subset, if any.
+	 */
+	getSubset(material?: IMaterial): IMesh | null;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.removeSubset` instead.
+	 *
+	 * Removes the specified subset.
+	 * @parent The parent where the subset is (can be any `THREE.Object3D`).
+	 * @material Material assigned to the subset, if any.
+	 */
+	removeSubset(parent?: IObject3D, material?: IMaterial): void;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.createSubset` instead.
+	 *
+	 * Creates a new geometric subset.
+	 * @config A configuration object with the following options:
+	 * - **scene**: `THREE.Object3D` where the model is located.
+	 * - **ids**: Express IDs of the items of the model that will conform the subset.
+	 * - **removePrevious**: Wether to remove the previous subset of this model with this material.
+	 * - **material**: (optional) Wether to apply a material to the subset
+	 */
+	createSubset(config: IIFCHighlightConfig): void | IMesh;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.hideItems` instead.
+	 *
+	 * Hides the selected items in the specified model
+	 * @ids Express ID of the elements.
+	 */
+	hideItems(ids: number[]): void;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.hideAllItems` instead.
+	 *
+	 * Hides all the items of the specified model
+	 */
+	hideAllItems(): void;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.showItems` instead.
+	 *
+	 * Hides all the items of the specified model
+	 * @ids Express ID of the elements.
+	 */
+	showItems(ids: number[]): void;
+
+	/**
+	 * @deprecated Use `IfcModel.ifcManager.showAllItems` instead.
+	 *
+	 * Shows all the items of the specified model
+	 */
+	showAllItems(): void;
+}
+
+export interface IIFCLoader extends ILoader {
+	ifcManager: IIFCManager;
+	load(
+		url: any,
+		onLoad: (ifc: IIFCModel) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+
+	parse(buffer: ArrayBuffer): Promise<IIFCModel>;
+}
+
+export interface IKTX {
+	mipmaps: object[];
+	width: number;
+	height: number;
+	format: O3JS.PixelFormat | O3JS.CompressedPixelFormat;
+	mipmapCount: number;
+	isCubemap: boolean;
+}
+
+export interface IKTXLoader extends ICompressedTextureLoader {
+	parse(buffer: ArrayBuffer, loadMipmaps: boolean): IKTX;
+}
+
+export interface ILDrawLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (data: IGroup) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGroup>;
+	setFileMap(fileMap: Record<string, string>): void;
+	setMaterials(materials: IMaterial[]): void;
+
+	parse(text: string, path: string, onLoad: (data: IGroup) => void): void;
+
+	addMaterial(material: IMaterial): void;
+	getMaterial(colourCode: string): IMaterial | null;
+}
+
+export interface ILottieLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (texture: ICanvasTexture) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ICanvasTexture>;
+	setQuality(value: number): void;
+}
+
+export interface ILUT3dlResult {
+	size: number;
+	texture: IDataTexture;
+	texture3D: IDataTexture3D;
+}
+
+export interface ILUT3dlLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (result: ILUT3dlResult) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: Error) => void
+	): any;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ILUT3dlResult>;
+	parse(data: string): ILUT3dlResult;
+}
+
+export interface ILWO {
+	materials: IMaterial[];
+	meshes: IObject3D[];
+}
+
+export interface ILWOLoaderParameters {
+	/**
+	 * Base content delivery folder path, use when it differs from Lightwave default structure
+	 */
+	resourcePath?: string;
+}
+
+export interface ILWOLoader extends ILoader {
+	new (manager?: ILoadingManager, parameters?: ILWOLoaderParameters): this;
+
+	load(
+		url: string,
+		onLoad: (lwo: ILWO) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ILWO>;
+	parse(data: ArrayBuffer, path: string, modelName: string): ILWO;
+}
+
+export interface ILUTCubeResult {
+	title: string;
+	size: number;
+	domainMin: IVector3;
+	domainMax: IVector3;
+	texture: IDataTexture;
+	texture3D: IDataTexture3D;
+}
+
+export interface ILUTCubeLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (result: ILUTCubeResult) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: Error) => void
+	): any;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ILUTCubeResult>;
+	parse(data: string): ILUTCubeResult;
+}
+
+export interface IMD2Loader extends ILoader {
+	load(
+		url: string,
+		onLoad: (geometry: IBufferGeometry) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IBufferGeometry>;
+	parse(data: ArrayBuffer): IBufferGeometry;
+}
+
+export interface IMDD {
+	morphTargets: IBufferAttribute[];
+	clip: IAnimationClip;
+}
+
+export interface IMDDLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (result: IMDD) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IMDD>;
+	parse(data: ArrayBuffer): IMDD;
+}
+
+export interface IMMDLoaderAnimationObject {
+	animation: IAnimationClip;
+	mesh: ISkinnedMesh;
+}
+
+export interface IMMDLoader extends ILoader {
+	animationBuilder: object;
+	animationPath: string;
+	loader: IFileLoader;
+	meshBuilder: object;
+	parser: object | null;
+
+	load(
+		url: string,
+		onLoad: (mesh: ISkinnedMesh) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ISkinnedMesh>;
+	loadAnimation(
+		url: string,
+		object: ISkinnedMesh | ICamera,
+		onLoad: (object: ISkinnedMesh | IAnimationClip) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadPMD(
+		url: string,
+		onLoad: (object: object) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadPMX(
+		url: string,
+		onLoad: (object: object) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadVMD(
+		url: string,
+		onLoad: (object: object) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadVPD(
+		url: string,
+		isUnicode: boolean,
+		onLoad: (object: object) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadWithAnimation(
+		url: string,
+		vmdUrl: string | string[],
+		onLoad: (object: IMMDLoaderAnimationObject) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	setAnimationPath(animationPath: string): this;
+}
+
+export interface IMTLLoader extends ILoader {
+	materialOptions: any;
+
+	load(
+		url: string,
+		onLoad: (materialCreator: any) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	parse(text: string, path: string): any;
+	setMaterialOptions(value: any): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<any>;
+}
+
+export interface IVolume {
+	new (xLength?: number, yLength?: number, zLength?: number, type?: string, arrayBuffer?: ArrayLike<number>): this;
+
+	xLength: number;
+	yLength: number;
+	zLength: number;
+
+	axisOrder: Array<'x' | 'y' | 'z'>;
+
+	data: ArrayLike<number>;
+
+	spacing: number[];
+	offset: number[];
+
+	matrix: IMatrix3;
+
+	lowerThreshold: number;
+	upperThreshold: number;
+
+	sliceList: IVolumeSlice[];
+
+	getData(i: number, j: number, k: number): number;
+	access(i: number, j: number, k: number): number;
+	reverseAccess(index: number): number[];
+
+	map(functionToMap: () => void, context: this): this;
+
+	extractPerpendicularPlane(axis: string, RASIndex: number): object;
+	extractSlice(axis: string, index: number): IVolumeSlice;
+
+	repaintAllSlices(): this;
+	computeMinMax(): number[];
+}
+
+export interface IVolumeSlice {
+	new (volume: IVolume, index?: number, axis?: string): this;
+	index: number;
+	axis: string;
+
+	canvas: HTMLCanvasElement;
+	canvasBuffer: HTMLCanvasElement;
+
+	ctx: CanvasRenderingContext2D;
+	ctxBuffer: CanvasRenderingContext2D;
+
+	mesh: IMesh;
+
+	geometryNeedsUpdate: boolean;
+
+	sliceAccess: number;
+	jLength: number;
+	iLength: number;
+	matrix: IMatrix3;
+
+	repaint(): void;
+	updateGeometry(): void;
+}
+
+export interface INRRDLoader extends ILoader {
+	path: string;
+	fieldFunctions: object;
+
+	load(
+		url: string,
+		onLoad: (group: IVolume) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	parse(data: string): IVolume;
+	parseChars(array: number[], start?: number, end?: number): string;
+	setPath(value: string): this;
+}
+
+export interface IOBJLoader extends ILoader {
+	materials: any;
+
+	load(
+		url: string,
+		onLoad: (group: IGroup) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGroup>;
+	parse(data: string): IGroup;
+	setMaterials(materials: any): this;
+}
+
+export interface IPCDLoader extends ILoader {
+	littleEndian: boolean;
+	load(
+		url: string,
+		onLoad: (points: IPoints) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IPoints>;
+	parse(data: ArrayBuffer | string, url: string): IPoints;
+}
+
+export interface IPDB {
+	geometryAtoms: IBufferGeometry;
+	geometryBonds: IBufferGeometry;
+	json: {
+		atoms: any[][];
+	};
+}
+
+export interface IPDBLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (pdb: IPDB) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IPDB>;
+	parse(text: string): IPDB;
+}
+
+export interface IPRWMLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (geometry: IBufferGeometry) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IBufferGeometry>;
+	parse(data: ArrayBuffer): IBufferGeometry;
+	isBigEndianPlatform(): boolean;
+}
+
+export interface IPLYLoader extends ILoader {
+	propertyNameMapping: object;
+	load(
+		url: string,
+		onLoad: (geometry: IBufferGeometry) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IBufferGeometry>;
+	setPropertyNameMapping(mapping: object): void;
+	parse(data: ArrayBuffer | string): IBufferGeometry;
+}
+
+export interface IPVR {
+	mipmaps: object[];
+	width: number;
+	height: number;
+	format: O3JS.CompressedPixelFormat;
+	mipmapCount: number;
+	isCubemap: boolean;
+}
+
+export interface IPVRLoader extends ICompressedTextureLoader {
+	parse(buffer: ArrayBuffer, loadMipmaps: boolean): IPVR;
+}
 
 export interface ILoaderUtils {
 	decodeText(array: BufferSource): string;
 	extractUrlBase(url: string): string;
 	resolveURL(url: string, path: string): string;
+}
+
+export interface IRGBE {
+	width: number;
+	height: number;
+	data: Float32Array | Uint8Array;
+	header: string;
+	gamma: number;
+	exposure: number;
+	format: O3JS.PixelFormat;
+	type: O3JS.TextureDataType;
+}
+
+export interface IRGBELoader extends IDataTextureLoader {
+	type: O3JS.TextureDataType;
+	parse(buffer: ArrayBuffer): IRGBE;
+	setDataType(type: O3JS.TextureDataType): this;
+}
+
+export interface IRGBM {
+	width: number;
+	height: number;
+	data: Uint8Array;
+	header: string;
+	format: O3JS.PixelFormat;
+	type: O3JS.TextureDataType;
+	flipY: boolean;
+	encoding: O3JS.TextureEncoding;
+}
+
+export interface IRGBMLoader extends IDataTextureLoader {
+	loadCubemap(
+		urls: string[],
+		onLoad?: (texture: ICubeTexture) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): ICubeTexture;
+
+	parse(buffer: ArrayBuffer): IRGBM;
+}
+
+export interface ISTLLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (geometry: IBufferGeometry) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IBufferGeometry>;
+	parse(data: ArrayBuffer | string): IBufferGeometry;
+}
+
+export interface ISVGResultPaths extends IShapePath {
+	userData?:
+		| {
+				[key: string]: any;
+		  }
+		| undefined;
+}
+
+export interface ISVGResult {
+	paths: ISVGResultPaths[];
+	xml: XMLDocument;
+}
+
+export interface IStrokeStyle {
+	strokeColor: string;
+	strokeWidth: number;
+	strokeLineJoin: string;
+	strokeLineCap: string;
+	strokeMiterLimit: number;
+}
+
+export interface ISVGLoader extends ILoader {
+	defaultDPI: number;
+	defaultUnit: string;
+
+	load(
+		url: string,
+		onLoad: (data: ISVGResult) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ISVGResult>;
+	parse(text: string): ISVGResult;
+
+	getStrokeStyle(
+		width?: number,
+		color?: string,
+		lineJoin?: string,
+		lineCap?: string,
+		miterLimit?: number
+	): IStrokeStyle;
+
+	pointsToStroke(points: IVector3[], style: IStrokeStyle, arcDivisions?: number, minDistance?: number): IBufferGeometry;
+	pointsToStrokeWithBuffers(
+		points: IVector3[],
+		style: IStrokeStyle,
+		arcDivisions?: number,
+		minDistance?: number,
+		vertices?: number[],
+		normals?: number[],
+		uvs?: number[],
+		vertexOffset?: number
+	): number;
+	createShapes(shapePath: IShapePath): IShape[];
+}
+
+export interface ITDSLoader extends ILoader {
+	debug: boolean;
+	group: IGroup;
+	manager: ILoadingManager;
+	materials: IMaterial[];
+	meshes: IMesh[];
+	position: number;
+
+	load(
+		url: string,
+		onLoad: (object: IGroup) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IGroup>;
+	parse(arraybuffer: ArrayBuffer, path: string): IGroup;
+
+	debugMessage(message: object): void;
+	endChunk(chunk: object): void;
+	nextChunk(data: DataView, chunk: object): void;
+	readByte(data: DataView): number;
+	readChunk(data: DataView): object;
+	readColor(data: DataView): IColor;
+	readDWord(data: DataView): number;
+	readFaceArray(data: DataView, mesh: IMesh): void;
+	readFile(arraybuffer: ArrayBuffer, path: string): void;
+	readFloat(data: DataView): number;
+	readInt(data: DataView): number;
+	readMap(data: DataView, path: string): ITexture;
+	readMesh(data: DataView): IMesh;
+	readMeshData(data: DataView, path: string): void;
+	readMaterialEntry(data: DataView, path: string): void;
+	readMaterialGroup(data: DataView): object;
+	readNamedObject(data: DataView): void;
+	readShort(data: DataView): number;
+	readString(data: DataView, maxLength: number): string;
+	readWord(data: DataView): number;
+	resetPosition(): void;
+}
+
+export interface ITGALoader extends IDataTextureLoader {
+	load(
+		url: string,
+		onLoad?: (texture: IDataTexture, texData: object) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): IDataTexture;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<IDataTexture>;
+	parse(data: ArrayBuffer): IDataTexture;
+}
+
+export interface ITTFLoader extends ILoader {
+	reversed: boolean;
+	load(
+		url: string,
+		onLoad: (json: object) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object>;
+	parse(arraybuffer: ArrayBuffer): object;
 }
 
 export interface IAudio<NodeType extends AudioNode = GainNode> extends IObject3D {
@@ -8340,6 +12711,30 @@ export interface IAudioListener extends IObject3D {
 	setMasterVolume(value: number): this;
 	getMasterVolume(): number;
 	updateMatrixWorld(force?: boolean): void;
+}
+
+export interface IKMZLoader extends ILoader {
+	load(
+		url: string,
+		onLoad: (kmz: ICollada) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): void;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<ICollada>;
+	parse(data: ArrayBuffer): ICollada;
+}
+
+export interface IKTX2Loader extends ICompressedTextureLoader {
+	setTranscoderPath(path: string): IKTX2Loader;
+	setWorkerLimit(limit: number): IKTX2Loader;
+	detectSupport(renderer: IWebGLRenderer): IKTX2Loader;
+	dispose(): IKTX2Loader;
+
+	parse(
+		buffer: ArrayBuffer,
+		onLoad: (texture: ICompressedTexture) => void,
+		onError?: (event: ErrorEvent) => void
+	): IKTX2Loader;
 }
 
 export interface IAudioAnalyser {

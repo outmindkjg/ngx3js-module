@@ -5,11 +5,10 @@ import {
 	OnChanges,
 	OnDestroy,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { NgxOutlineGeometry } from './geometry/geometries/outline';
 import { NgxStarGeometry } from './geometry/geometries/star';
-import { RendererTimer, ThreeColor, ThreeUtil, THREE, I3JS } from './interface';
+import { I3JS, RendererTimer, THREE, ThreeColor, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
 
 /**
@@ -488,7 +487,7 @@ export class AbstractChartComponent
 				side = 'double';
 				break;
 			case 'star':
-				geometry = new NgxStarGeometry(
+				geometry = new THREE.StarGeometry(
 					options.radius * 0.5,
 					options.radius,
 					5
@@ -523,7 +522,7 @@ export class AbstractChartComponent
 		});
 		const mesh: I3JS.IMesh = new THREE.Mesh(geometry, material);
 		mesh.castShadow = true;
-		const geometryBorder = new NgxOutlineGeometry(geometry, 1.2) as any;
+		const geometryBorder = new THREE.OutlineGeometry(geometry, 1.2) as any;
 		const materialBorder = new THREE.LineDashedMaterial({
 			color: ThreeUtil.getColorSafe(options.borderColor, 0x000000),
 			linewidth: 3,

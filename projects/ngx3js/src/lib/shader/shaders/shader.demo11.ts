@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Color } from 'three';
 export const ShaderDemo11 = {
 	vertexShader: `
   attribute vec2 reference;
@@ -58,7 +58,7 @@ export const ShaderDemo11 = {
   }
 	`,
 	uniforms: {
-		color: { value: new THREE.Color(0xff2200) },
+		color: { value: new Color(0xff2200) },
 		texturePosition: { value: null } as any,
 		textureVelocity: { value: null } as any,
 		time: { value: 1.0 },

@@ -7,8 +7,6 @@ import {
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
-import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
-import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { CssStyle, I3JS, THREE, ThreeUtil } from '../interface';
 import { AbstractTweenComponent } from '../tween.abstract';
 
@@ -179,13 +177,13 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 		if (super.setParent(refObject3d)) {
 			let parentElement: HTMLElement = null;
 			if (
-				refObject3d instanceof CSS3DObject ||
-				refObject3d instanceof CSS2DObject
+				refObject3d instanceof THREE.CSS3DObject ||
+				refObject3d instanceof THREE.CSS2DObject
 			) {
 				parentElement = refObject3d.element;
 			} else if (refObject3d instanceof THREE.Mesh) {
 				refObject3d.children.forEach((child) => {
-					if (child instanceof CSS3DObject || child instanceof CSS2DObject) {
+					if (child instanceof THREE.CSS3DObject || child instanceof THREE.CSS2DObject) {
 						parentElement = child.element;
 					}
 				});

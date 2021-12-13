@@ -7,16 +7,10 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
-import { WireframeGeometry2 } from 'three/examples/jsm/lines/WireframeGeometry2';
-import { EdgeSplitModifier } from 'three/examples/jsm/modifiers/EdgeSplitModifier';
-import { SimplifyModifier } from 'three/examples/jsm/modifiers/SimplifyModifier';
-import { TessellateModifier } from 'three/examples/jsm/modifiers/TessellateModifier';
-import { GeometryCompressionUtils } from './threejs-library/GeometryCompressionUtils';
 import { NgxGeometryUtils } from './geometry/geometryUtils';
-import { ThreeUtil, ThreeVector, THREE, I3JS } from './interface';
+import { I3JS, THREE, ThreeUtil, ThreeVector } from './interface';
 import { PositionComponent } from './position/position.component';
 import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
@@ -1152,26 +1146,26 @@ export class AbstractGeometryComponent
 							ThreeUtil.isNotNull(this.compressPositions) &&
 							this.compressPositions
 						) {
-							GeometryCompressionUtils.compressPositions(info);
+							THREE.GeometryCompressionUtils.compressPositions(info);
 						}
 						if (ThreeUtil.isNotNull(this.compressNormals)) {
 							switch (this.compressNormals.toLowerCase()) {
 								case 'default':
-									GeometryCompressionUtils.compressNormals(info, 'DEFAULT');
+									THREE.GeometryCompressionUtils.compressNormals(info, 'DEFAULT');
 									break;
 								case 'oct1byte':
-									GeometryCompressionUtils.compressNormals(info, 'OCT1Byte');
+									THREE.GeometryCompressionUtils.compressNormals(info, 'OCT1Byte');
 									break;
 								case 'oct2byte':
-									GeometryCompressionUtils.compressNormals(info, 'OCT2Byte');
+									THREE.GeometryCompressionUtils.compressNormals(info, 'OCT2Byte');
 									break;
 								case 'angles':
-									GeometryCompressionUtils.compressNormals(info, 'ANGLES');
+									THREE.GeometryCompressionUtils.compressNormals(info, 'ANGLES');
 									break;
 							}
 						}
 						if (this.compressUvs) {
-							GeometryCompressionUtils.compressUvs(info);
+							THREE.GeometryCompressionUtils.compressUvs(info);
 						}
 					}
 					if (ThreeUtil.isNotNull(info['updateMorphTargets'])) {
@@ -1278,7 +1272,7 @@ export class AbstractGeometryComponent
 									switch (geometry.type) {
 										case 'CircleGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry() as any;
+												lineGeometry = new THREE.LineSegmentsGeometry();
 												const segments = (parameters.segments || 1) + 2;
 												const isClosed =
 													parameters.thetaLength < Math.PI * 2 ? false : true;
@@ -1305,7 +1299,7 @@ export class AbstractGeometryComponent
 											{
 												const sideGroup = geometry.groups[2];
 												if (ThreeUtil.isNotNull(sideGroup)) {
-													lineGeometry = new LineSegmentsGeometry() as any;
+													lineGeometry = new THREE.LineSegmentsGeometry();
 													for (
 														let i = sideGroup.start;
 														i < sideGroup.start + sideGroup.count;
@@ -1326,7 +1320,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'BoxGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry() as any;
+												lineGeometry = new THREE.LineSegmentsGeometry();
 												const gridY = parameters.heightSegments + 1;
 												const gridZ = parameters.depthSegments + 1;
 												const p1 = 0;
@@ -1366,7 +1360,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'PlaneGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry() as any;
+												lineGeometry = new THREE.LineSegmentsGeometry();
 												const gridX = parameters.widthSegments + 1;
 												const gridY = parameters.heightSegments + 1;
 												const p1 = 0;
@@ -1393,7 +1387,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'RingGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry() as any;
+												lineGeometry = new THREE.LineSegmentsGeometry();
 												const gridX = parameters.thetaSegments + 1;
 												const gridY = parameters.phiSegments + 1;
 												const lineList: { start: number; end: number }[] = [];
@@ -1428,7 +1422,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'StarGeometry':
 											{
-												lineGeometry = new LineSegmentsGeometry() as any;
+												lineGeometry = new THREE.LineSegmentsGeometry();
 												const segments = (parameters.segments || 1) + 2;
 												const isClosed =
 													parameters.thetaLength < Math.PI * 2 ? false : true;
@@ -1452,9 +1446,9 @@ export class AbstractGeometryComponent
 											break;
 									}
 									if (lineGeometry === null) {
-										lineGeometry = new WireframeGeometry2(
-											geometry as any
-										) as any;
+										lineGeometry = new THREE.WireframeGeometry2(
+											geometry
+										);
 									}
 									if (vertices.length > 0) {
 										const lineSegments = new Float32Array(vertices);
@@ -1494,7 +1488,7 @@ export class AbstractGeometryComponent
 				if (ThreeUtil.isNotNull(this.program)) {
 					NgxGeometryUtils.getGeometry(
 						this.program,
-						geometry,
+						geometry as any,
 						this.programParam
 					);
 				}
@@ -1621,28 +1615,28 @@ export class AbstractGeometryComponent
 					geometry = THREE.BufferGeometryUtils.mergeVertices(geometry);
 				}
 				if (this.edgeSplit) {
-					const modifier = new EdgeSplitModifier();
+					const modifier = new THREE.EdgeSplitModifier();
 					geometry = modifier.modify(
-						geometry as any,
+						geometry,
 						ThreeUtil.getAngleSafe(this.cutOffAngle, 0),
 						ThreeUtil.getTypeSafe(this.tryKeepNormals, false)
-					) as any;
+					);
 				}
 				if (this.simplify) {
-					const modifier = new SimplifyModifier();
+					const modifier = new THREE.SimplifyModifier();
 					const count = Math.floor(
 						geometry.attributes.position.count *
 							Math.max(0, Math.min(1, ThreeUtil.getTypeSafe(this.count, 1)))
 					);
-					geometry = modifier.modify(geometry as any, count) as any;
+					geometry = modifier.modify(geometry, count);
 					geometry.computeVertexNormals();
 				}
 				if (this.tessellate) {
-					const modifier = new TessellateModifier(
+					const modifier = new THREE.TessellateModifier(
 						ThreeUtil.getTypeSafe(this.maxEdgeLength, 8),
 						ThreeUtil.getTypeSafe(this.maxIterations, 6)
 					);
-					geometry = modifier.modify(geometry as any) as any;
+					geometry = modifier.modify(geometry);
 				}
 				if (this.computeVertexNormals) {
 					geometry.computeVertexNormals();

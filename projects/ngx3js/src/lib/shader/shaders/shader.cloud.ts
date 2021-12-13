@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Color, Vector3 } from 'three';
 export const CloudShader = {
 	vertexShader: `
   in vec3 position;
@@ -94,9 +94,9 @@ export const CloudShader = {
   }
   `,
 	uniforms: {
-		base: { value: new THREE.Color(0x798aa0) },
+		base: { value: new Color(0x798aa0) },
 		map: { value: null } as any,
-		cameraPos: { value: new THREE.Vector3() },
+		cameraPos: { value: new Vector3() },
 		threshold: { value: 0.25 },
 		opacity: { value: 0.25 },
 		range: { value: 0.1 },

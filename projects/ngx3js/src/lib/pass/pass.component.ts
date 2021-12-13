@@ -10,8 +10,6 @@ import {
 	LUTCubeLoader,
 	LUTCubeResult,
 } from 'three/examples/jsm/loaders/LUTCubeLoader';
-import * as THREE_PASS from './passes/three-passes';
-import * as THREE_EFFECT from './../effect/effects/three-effects';
 
 import { ThreeColor, ThreeUtil, THREE, I3JS } from '../interface';
 import { MeshComponent } from '../mesh/mesh.component';
@@ -223,7 +221,7 @@ export class PassComponent
 	/**
 	 * The params of pass component
 	 */
-	@Input() public params: THREE_PASS.BokehPassParamters = null;
+	@Input() public params: I3JS.IBokehPassParamters = null;
 
 	/**
 	 * The intensity of pass component
@@ -856,8 +854,8 @@ export class PassComponent
 	 * @returns params
 	 */
 	private getParams(
-		def?: THREE_PASS.BokehPassParamters
-	): THREE_PASS.BokehPassParamters {
+		def?: I3JS.IBokehPassParamters
+	): I3JS.IBokehPassParamters {
 		return ThreeUtil.getTypeSafe(this.params, def);
 	}
 
@@ -1483,7 +1481,7 @@ export class PassComponent
 	 * @returns map
 	 */
 	private getMap(
-		effectComposer?: THREE_EFFECT.EffectComposer,
+		effectComposer?: I3JS.IEffectComposer,
 		camera?: I3JS.ICamera,
 		scene?: I3JS.IScene,
 		mapType?: string
@@ -1562,7 +1560,7 @@ export class PassComponent
 	/**
 	 * Effect composer of pass component
 	 */
-	private effectComposer: THREE_EFFECT.EffectComposer = null;
+	private effectComposer: I3JS.IEffectComposer = null;
 
 	/**
 	 * Effect scene of pass component
@@ -1582,7 +1580,7 @@ export class PassComponent
 	/**
 	 * The Pass of pass component
 	 */
-	private pass: THREE_PASS.Pass = null;
+	private pass: I3JS.IPass = null;
 
 	/**
 	 * Sets scene
@@ -1607,7 +1605,7 @@ export class PassComponent
 	public setEffectComposer(
 		scene?: I3JS.IScene,
 		camera?: I3JS.ICamera,
-		effectComposer?: THREE_EFFECT.EffectComposer,
+		effectComposer?: I3JS.IEffectComposer,
 		renderer?: I3JS.IWebGLRenderer
 	) {
 		if (
@@ -1698,10 +1696,10 @@ export class PassComponent
 	 * Gets pass
 	 * @returns pass
 	 */
-	public getPass<T extends THREE_PASS.Pass>(): T {
+	public getPass<T extends I3JS.IPass>(): T {
 		if (this.pass === null || this._needUpdate) {
 			this.needUpdate = false;
-			let pass: THREE_PASS.Pass = null;
+			let pass: I3JS.IPass = null;
 			this.unSubscribeRefer('passSize');
 			if (ThreeUtil.isNotNull(this.refer)) {
 				this.unSubscribeRefer('referPass');
@@ -1723,18 +1721,18 @@ export class PassComponent
 				switch (this.type.toLowerCase()) {
 					case 'adaptivetonemappingpass':
 					case 'adaptivetonemapping':
-						pass = new THREE_PASS.NgxAdaptiveToneMappingPass(
+						pass = new THREE.AdaptiveToneMappingPass(
 							this.getAdaptive(),
 							this.getResolution()
 						);
 						break;
 					case 'afterimagepass':
 					case 'afterimage':
-						pass = new THREE_PASS.NgxAfterimagePass(this.getDamp());
+						pass = new THREE.AfterimagePass(this.getDamp());
 						break;
 					case 'bloompass':
 					case 'bloom':
-						pass = new THREE_PASS.NgxBloomPass(
+						pass = new THREE.BloomPass(
 							this.getStrength(1),
 							this.getKernelSize(25),
 							this.getSigma(4),
@@ -1743,7 +1741,7 @@ export class PassComponent
 						break;
 					case 'bokehpass':
 					case 'bokeh':
-						pass = new THREE_PASS.NgxBokehPass(
+						pass = new THREE.BokehPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera),
 							{
@@ -1758,7 +1756,7 @@ export class PassComponent
 						break;
 					case 'cubetexturepass':
 					case 'cubetexture':
-						pass = new THREE_PASS.NgxCubeTexturePass(
+						pass = new THREE.CubeTexturePass(
 							this.getCamera(this.effectCamera) as I3JS.IPerspectiveCamera,
 							this.getEnvMap(),
 							this.getOpacity()
@@ -1766,7 +1764,7 @@ export class PassComponent
 						break;
 					case 'dotscreenpass':
 					case 'dotscreen':
-						pass = new THREE_PASS.NgxDotScreenPass(
+						pass = new THREE.DotScreenPass(
 							this.getCenter(),
 							this.getAngle(),
 							this.getScale()
@@ -1774,7 +1772,7 @@ export class PassComponent
 						break;
 					case 'filmpass':
 					case 'film':
-						pass = new THREE_PASS.NgxFilmPass(
+						pass = new THREE.FilmPass(
 							this.getNoiseIntensity(),
 							this.getScanlinesIntensity(),
 							this.getScanlinesCount(),
@@ -1783,14 +1781,14 @@ export class PassComponent
 						break;
 					case 'glitchpass':
 					case 'glitch':
-						const glitchpass = new THREE_PASS.NgxGlitchPass(this.getDtSize());
+						const glitchpass = new THREE.GlitchPass(this.getDtSize());
 						glitchpass.goWild = this.getGoWild(false);
 						pass = glitchpass;
 						break;
 					case 'halftonepass':
 					case 'halftone':
 						const halftoneSize = this.getSize();
-						const halftonePass: any = new THREE_PASS.NgxHalftonePass(
+						const halftonePass: any = new THREE.HalftonePass(
 							halftoneSize.x,
 							halftoneSize.y,
 							null // this.getParams(null)
@@ -1811,11 +1809,11 @@ export class PassComponent
 						break;
 					case 'clearmaskpass':
 					case 'clearmask':
-						pass = new THREE_PASS.NgxClearMaskPass();
+						pass = new THREE.ClearMaskPass();
 						break;
 					case 'maskpass':
 					case 'mask':
-						const maskpass = new THREE_PASS.NgxMaskPass(
+						const maskpass = new THREE.MaskPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera)
 						);
@@ -1827,7 +1825,7 @@ export class PassComponent
 					case 'outlinepass':
 					case 'outline':
 						const outlineSize = this.getSize();
-						const outlinePass = new THREE_PASS.NgxOutlinePass(
+						const outlinePass = new THREE.OutlinePass(
 							outlineSize,
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera)
@@ -1898,7 +1896,7 @@ export class PassComponent
 						break;
 					case 'renderpass':
 					case 'render':
-						pass = new THREE_PASS.NgxRenderPass(
+						pass = new THREE.RenderPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera)
 							//this.getOverrideMaterial(null),
@@ -1908,7 +1906,7 @@ export class PassComponent
 						break;
 					case 'saopass':
 					case 'sao':
-						const saoPass = new THREE_PASS.NgxSAOPass(
+						const saoPass = new THREE.SAOPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera),
 							this.getDepthTexture(),
@@ -1938,15 +1936,15 @@ export class PassComponent
 						break;
 					case 'savepass':
 					case 'save':
-						pass = new THREE_PASS.NgxSavePass(this.getRenderTarget());
+						pass = new THREE.SavePass(this.getRenderTarget());
 						break;
 					case 'copypass':
 					case 'copy':
-						pass = new THREE_PASS.NgxShaderCopyPass(this.getTextureId());
+						pass = new THREE.ShaderCopyPass(this.getTextureId());
 						break;
 					case 'rgbshiftpass':
 					case 'rgbshift':
-						const rgbshiftpass = new THREE_PASS.NgxShaderRGBShiftPass(
+						const rgbshiftpass = new THREE.ShaderRGBShiftPass(
 							this.getTextureId()
 						);
 						this.getUniforms(rgbshiftpass.uniforms);
@@ -1954,7 +1952,7 @@ export class PassComponent
 						break;
 					case 'bleachbypasspass':
 					case 'bleachbypass':
-						const bleachbypass = new THREE_PASS.NgxShaderBleachBypassPass(
+						const bleachbypass = new THREE.ShaderBleachBypassPass(
 							this.getTextureId()
 						);
 						this.getUniforms(bleachbypass.uniforms);
@@ -1962,7 +1960,7 @@ export class PassComponent
 						break;
 					case 'sepiapass':
 					case 'sepia':
-						const sepiapass = new THREE_PASS.NgxShaderSepiaPass(
+						const sepiapass = new THREE.ShaderSepiaPass(
 							this.getTextureId()
 						);
 						this.getUniforms(sepiapass.uniforms);
@@ -1970,7 +1968,7 @@ export class PassComponent
 						break;
 					case 'vignettepass':
 					case 'vignette':
-						const vignettepass = new THREE_PASS.NgxShaderVignettePass(
+						const vignettepass = new THREE.ShaderVignettePass(
 							this.getTextureId()
 						);
 						this.getUniforms(vignettepass.uniforms);
@@ -1979,13 +1977,13 @@ export class PassComponent
 					case 'gammacorrectionpass':
 					case 'gammacorrection':
 						const gammacorrectionpass =
-							new THREE_PASS.NgxShaderGammaCorrectionPass(this.getTextureId());
+							new THREE.ShaderGammaCorrectionPass(this.getTextureId());
 						this.getUniforms(gammacorrectionpass.uniforms);
 						pass = gammacorrectionpass;
 						break;
 					case 'fxaapass':
 					case 'fxaa':
-						const fxaapass = new THREE_PASS.NgxShaderFXAAPass(
+						const fxaapass = new THREE.ShaderFXAAPass(
 							this.getTextureId()
 						);
 						this.getUniforms(fxaapass.uniforms);
@@ -1993,7 +1991,7 @@ export class PassComponent
 						break;
 					case 'pixelpass':
 					case 'pixel':
-						const pixelpass = new THREE_PASS.NgxShaderPixelPass(
+						const pixelpass = new THREE.ShaderPixelPass(
 							this.getTextureId()
 						);
 						this.getUniforms(pixelpass.uniforms);
@@ -2001,7 +1999,7 @@ export class PassComponent
 						break;
 					case 'luminositypass':
 					case 'luminosity':
-						const luminositypass = new THREE_PASS.NgxShaderLuminosityPass(
+						const luminositypass = new THREE.ShaderLuminosityPass(
 							this.getTextureId()
 						);
 						this.getUniforms(luminositypass.uniforms);
@@ -2009,7 +2007,7 @@ export class PassComponent
 						break;
 					case 'shaderdotscreenpass':
 					case 'shaderdotscreen':
-						const dotscreenpass = new THREE_PASS.NgxShaderDotScreenPass(
+						const dotscreenpass = new THREE.ShaderDotScreenPass(
 							this.getTextureId()
 						);
 						this.getUniforms(dotscreenpass.uniforms);
@@ -2017,7 +2015,7 @@ export class PassComponent
 						break;
 					case 'sobeloperatorpass':
 					case 'sobeloperator':
-						const sobeloperatorpass = new THREE_PASS.NgxSobelOperatorPass(
+						const sobeloperatorpass = new THREE.SobelOperatorPass(
 							this.getTextureId()
 						);
 						this.getUniforms(sobeloperatorpass.uniforms);
@@ -2025,7 +2023,7 @@ export class PassComponent
 						break;
 					case 'materialpass':
 					case 'material':
-						const materialpass = new THREE_PASS.NgxShaderMaterialPass(
+						const materialpass = new THREE.ShaderMaterialPass(
 							this.getTextureId()
 						);
 						this.getUniforms(materialpass.uniforms);
@@ -2033,7 +2031,7 @@ export class PassComponent
 						break;
 					case 'shaderpass':
 					case 'shader':
-						const shaderPass = new THREE_PASS.NgxShaderPass(
+						const shaderPass = new THREE.ShaderPass(
 							this.getShader(),
 							this.getTextureId()
 						);
@@ -2042,7 +2040,7 @@ export class PassComponent
 					case 'smaapass':
 					case 'smaa':
 						const smaaSize = this.getSize();
-						const smaaPass = new THREE_PASS.NgxSMAAPass(smaaSize.x, smaaSize.y);
+						const smaaPass = new THREE.SMAAPass(smaaSize.x, smaaSize.y);
 						this.subscribeRefer(
 							'passSize',
 							ThreeUtil.getSubscribe(
@@ -2058,7 +2056,7 @@ export class PassComponent
 						break;
 					case 'ssaarenderpass':
 					case 'ssaarender':
-						const ssaaRenderPass = new THREE_PASS.NgxSSAARenderPass(
+						const ssaaRenderPass = new THREE.SSAARenderPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera),
 							this.getClearColor(),
@@ -2081,7 +2079,7 @@ export class PassComponent
 					case 'ssaopass':
 					case 'ssao':
 						const ssaoSize = this.getSize();
-						const ssaoPass = new THREE_PASS.NgxSSAOPass(
+						const ssaoPass = new THREE.SSAOPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera),
 							ssaoSize.x,
@@ -2113,7 +2111,7 @@ export class PassComponent
 						break;
 					case 'taarenderpass':
 					case 'taarender':
-						const taaRenderPass = new THREE_PASS.NgxTAARenderPass(
+						const taaRenderPass = new THREE.TAARenderPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera),
 							this.getClearColor(),
@@ -2141,7 +2139,7 @@ export class PassComponent
 						break;
 					case 'texturepass':
 					case 'texture':
-						pass = new THREE_PASS.NgxTexturePass(
+						pass = new THREE.TexturePass(
 							this.getMap(
 								this.effectComposer,
 								this.effectCamera,
@@ -2152,7 +2150,7 @@ export class PassComponent
 						break;
 					case 'unrealbloompass':
 					case 'unrealbloom':
-						pass = new THREE_PASS.NgxUnrealBloomPass(
+						pass = new THREE.UnrealBloomPass(
 							ThreeUtil.getVector2Safe(
 								this.width | 512,
 								this.height | 512,
@@ -2168,13 +2166,13 @@ export class PassComponent
 						let groundReflector: any = null;
 						if (ThreeUtil.isNotNull(this.mesh)) {
 							const object3d = ThreeUtil.getObject3d(this.mesh);
-							if (object3d instanceof THREE_PASS.ReflectorForSSRPass) {
+							if (object3d instanceof THREE.ReflectorForSSRPass) {
 								groundReflector = object3d;
 								groundReflector.material.depthWrite = false;
 							}
 						}
 						const ssrSize = this.getSize();
-						const ssrPass = new THREE_PASS.NgxSSRPass({
+						const ssrPass = new THREE.SSRPass({
 							renderer: this.effectRenderer as any,
 							scene: this.getScene(this.effectScene) as any,
 							camera: this.getCamera(this.effectCamera) as any,
@@ -2201,7 +2199,7 @@ export class PassComponent
 					case 'ssrrpass':
 					case 'ssrr':
 						const ssrrSize = this.getSize();
-						const ssrrPass = new THREE_PASS.NgxSSRrPass({
+						const ssrrPass = new THREE.SSRrPass({
 							renderer: this.effectRenderer as any,
 							scene: this.getScene(this.effectScene) as any,
 							camera: this.getCamera(this.effectCamera) as any,
@@ -2224,7 +2222,7 @@ export class PassComponent
 						break;
 					case 'lutpass':
 					case 'lut':
-						const lutPass = new THREE_PASS.NgxLUTPass({
+						const lutPass = new THREE.LUTPass({
 							lut: null,
 							intensity: this.getIntensity(),
 						});
@@ -2240,7 +2238,7 @@ export class PassComponent
 						break;
 					case 'clearpass':
 					case 'clear':
-						pass = new THREE_PASS.NgxClearPass(
+						pass = new THREE.ClearPass(
 							this.getClearColor(),
 							this.getClearAlpha()
 						);

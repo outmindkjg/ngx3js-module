@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Color } from 'three';
 export const ShaderSkyDome = {
 	vertexShader: `
   varying vec3 vWorldPosition;
@@ -20,8 +20,8 @@ export const ShaderSkyDome = {
   }
   `,
 	uniforms: {
-		topColor: { value: new THREE.Color(0x0077ff) },
-		bottomColor: { value: new THREE.Color(0xffffff) },
+		topColor: { value: new Color(0x0077ff) },
+		bottomColor: { value: new Color(0xffffff) },
 		offset: { value: 400 },
 		exponent: { value: 0.6 },
 	},

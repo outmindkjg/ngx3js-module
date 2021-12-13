@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Vector2, Matrix4 } from 'three';
 export const RaymarchingReflect = {
 	vertexShader: `
   attribute vec3 position;
@@ -128,8 +128,8 @@ export const RaymarchingReflect = {
   }
   `,
 	uniforms: {
-		resolution: { value: new THREE.Vector2() },
-		cameraWorldMatrix: { value: new THREE.Matrix4() },
-		cameraProjectionMatrixInverse: { value: new THREE.Matrix4() },
+		resolution: { value: new Vector2() },
+		cameraWorldMatrix: { value: new Matrix4() },
+		cameraProjectionMatrixInverse: { value: new Matrix4() },
 	},
 };

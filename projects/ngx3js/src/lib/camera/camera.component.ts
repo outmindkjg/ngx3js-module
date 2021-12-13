@@ -8,8 +8,6 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
-import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import {
@@ -676,9 +674,9 @@ export class CameraComponent
 	 * Css renderer of camera component
 	 */
 	private cssRenderer:
-		| CSS3DRenderer
-		| CSS2DRenderer
-		| (CSS3DRenderer | CSS2DRenderer)[] = null;
+		| I3JS.ICSS3DRenderer
+		| I3JS.ICSS2DRenderer
+		| (I3JS.ICSS3DRenderer | I3JS.ICSS2DRenderer)[] = null;
 
 	/**
 	 * Renderer scenes of camera component
@@ -702,9 +700,9 @@ export class CameraComponent
 	public setRenderer(
 		renderer: I3JS.IRenderer,
 		cssRenderer:
-			| CSS3DRenderer
-			| CSS2DRenderer
-			| (CSS3DRenderer | CSS2DRenderer)[],
+			| I3JS.ICSS3DRenderer
+			| I3JS.ICSS2DRenderer
+			| (I3JS.ICSS3DRenderer | I3JS.ICSS2DRenderer)[],
 		rendererScenes: QueryList<any>
 	) {
 		if (this.cssRenderer !== cssRenderer) {
@@ -1258,9 +1256,9 @@ export class CameraComponent
 	public render(
 		renderer: I3JS.IRenderer,
 		cssRenderer:
-			| CSS3DRenderer
-			| CSS2DRenderer
-			| (CSS3DRenderer | CSS2DRenderer)[],
+			| I3JS.ICSS3DRenderer
+			| I3JS.ICSS2DRenderer
+			| (I3JS.ICSS3DRenderer | I3JS.ICSS2DRenderer)[],
 		scenes: QueryList<any> | any,
 		renderTimer: RendererTimer
 	) {

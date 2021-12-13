@@ -5,14 +5,6 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { CSM } from 'three/examples/jsm/csm/CSM';
-import { CSMHelper } from 'three/examples/jsm/csm/CSMHelper';
-import { LightProbeHelper } from 'three/examples/jsm/helpers/LightProbeHelper';
-import { PositionalAudioHelper } from 'three/examples/jsm/helpers/PositionalAudioHelper';
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
-import { VertexNormalsHelper } from 'three/examples/jsm/helpers/VertexNormalsHelper';
-import { VertexTangentsHelper } from 'three/examples/jsm/helpers/VertexTangentsHelper';
-import { Gyroscope } from 'three/examples/jsm/misc/Gyroscope';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { ThreeColor, ThreeUtil, THREE, I3JS } from './../interface';
@@ -853,7 +845,7 @@ export class HelperComponent
 			switch (this.type.toLowerCase()) {
 				case 'gyroscopehelper':
 				case 'gyroscope':
-					const gyroscope = new Gyroscope();
+					const gyroscope = new THREE.Gyroscope();
 					if (ThreeUtil.isNotNull(this.children)) {
 						this.children.forEach((child) => {
 							if (child.getMesh) {
@@ -873,10 +865,10 @@ export class HelperComponent
 					if (ThreeUtil.isNotNull(csm.getControl)) {
 						csm = csm.getControl();
 					}
-					if (!(csm instanceof CSM)) {
+					if (!(csm instanceof THREE.CSM)) {
 						// csm = new CSM({ parent: new THREE.Scene() });
 					}
-					const csmHelper = new CSMHelper(csm);
+					const csmHelper = new THREE.CSMHelper(csm);
 					basemesh = csmHelper as any;
 					break;
 				case 'arrowhelper':
@@ -928,7 +920,7 @@ export class HelperComponent
 				case 'positionalaudiohelper':
 					let audioTarget = this.getTarget(this.parent);
 					if (audioTarget instanceof THREE.PositionalAudio) {
-						const positionalAudioHelper: any = new PositionalAudioHelper(
+						const positionalAudioHelper: any = new THREE.PositionalAudioHelper(
 							audioTarget as any,
 							ThreeUtil.getTypeSafe(this.range, 1),
 							ThreeUtil.getTypeSafe(this.divisionsInnerAngle, 16),
@@ -1003,12 +995,12 @@ export class HelperComponent
 					} else if (lightTarget instanceof THREE.SpotLight) {
 						basemesh = new THREE.SpotLightHelper(lightTarget, this.getColor());
 					} else if (lightTarget instanceof THREE.RectAreaLight) {
-						basemesh = new RectAreaLightHelper(
+						basemesh = new THREE.RectAreaLightHelper(
 							lightTarget as any,
 							this.getColor() as any
 						);
 					} else if (lightTarget instanceof THREE.LightProbe) {
-						basemesh = new LightProbeHelper(
+						basemesh = new THREE.LightProbeHelper(
 							lightTarget as any,
 							this.getSize(10)
 						);
@@ -1056,7 +1048,7 @@ export class HelperComponent
 						switch (this.type.toLowerCase()) {
 							case 'vertextangentshelper':
 							case 'vertextangents':
-								basemesh = new VertexTangentsHelper(
+								basemesh = new THREE.VertexTangentsHelper(
 									vertexMesh as any,
 									this.getSize(),
 									this.getColorHex()
@@ -1065,7 +1057,7 @@ export class HelperComponent
 							case 'vertexnormalshelper':
 							case 'vertexnormals':
 							default:
-								basemesh = new VertexNormalsHelper(
+								basemesh = new THREE.VertexNormalsHelper(
 									vertexMesh as any,
 									this.getSize(),
 									this.getColorHex()

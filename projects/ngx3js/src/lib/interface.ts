@@ -6,11 +6,9 @@ import {
 	Input,
 	OnInit,
 } from '@angular/core';
-import * as Ammo from './threejs-library/ammo';
+import * as Ammo from './threejs-library/ammo-type';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
-import Stats from 'three/examples/jsm/libs/stats.module';
-import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
 import { CameraComponent } from './camera/camera.component';
 import { MeshComponent } from './mesh/mesh.component';
 import { RendererComponent } from './renderer/renderer.component';
@@ -1751,7 +1749,7 @@ export class ThreeUtil {
 					console.error(url);
 				}
 			) as any;
-			this._manager.addHandler(/\.dds$/i, new DDSLoader() as any);
+			this._manager.addHandler(/\.dds$/i, new THREE.DDSLoader());
 		}
 		return this._manager;
 	}
@@ -4711,7 +4709,7 @@ export class ThreeClock extends THREE.Clock {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeStats) page for details.
  *
  */
-export class ThreeStats implements Stats {
+export class ThreeStats implements I3JS.IStats {
 	/**
 	 * The Revision of three stats
 	 */
@@ -4720,7 +4718,7 @@ export class ThreeStats implements Stats {
 	/**
 	 * The Stats of three stats
 	 */
-	stats: Stats = null;
+	stats: I3JS.IStats = null;
 
 	/**
 	 * The Dom of three stats
@@ -4737,7 +4735,7 @@ export class ThreeStats implements Stats {
 	 * @param [style]
 	 */
 	constructor(style?: object) {
-		this.stats = Stats();
+		this.stats = (THREE.Stats as any)();
 		this.domElement = this.dom = this.stats.dom;
 		this.REVISION = this.stats.REVISION;
 		this.setStyle(style);
@@ -4761,7 +4759,7 @@ export class ThreeStats implements Stats {
 	 * @param panel
 	 * @returns panel
 	 */
-	public addPanel(panel: Stats.Panel): Stats.Panel {
+	public addPanel(panel: I3JS.IPanel): I3JS.IPanel {
 		return this.stats.addPanel(panel);
 	}
 

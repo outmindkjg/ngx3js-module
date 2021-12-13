@@ -9,7 +9,6 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { CSM } from 'three/examples/jsm/csm/CSM';
 import { I3JS, THREE, ThreeTexture, ThreeUtil } from './interface';
 import { PlaneComponent } from './plane/plane.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
@@ -1034,7 +1033,7 @@ export class AbstractMaterialComponent
 				if (ThreeUtil.isNotNull(control.getControl)) {
 					control = control.getControl();
 				}
-				if (control instanceof CSM) {
+				if (control instanceof THREE.CSM) {
 					control.setupMaterial(material);
 				}
 			}

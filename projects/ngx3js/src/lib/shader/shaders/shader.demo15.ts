@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Vector2 } from 'three';
 export const ShaderDemo15 = {
 	vertexShader: `
   uniform vec2 size;
@@ -24,6 +24,6 @@ export const ShaderDemo15 = {
 	uniforms: {
 		diffuse: { value: null } as any,
 		depth: { value: 55 },
-		size: { value: new THREE.Vector2(50, 50) },
+		size: { value: new Vector2(50, 50) },
 	},
 };

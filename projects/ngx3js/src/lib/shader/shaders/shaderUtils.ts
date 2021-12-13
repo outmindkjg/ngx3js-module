@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import { AfterimageShader } from 'three/examples/jsm/shaders/AfterimageShader';
 import { BasicShader } from 'three/examples/jsm/shaders/BasicShader';
 import { BleachBypassShader } from 'three/examples/jsm/shaders/BleachBypassShader';
@@ -64,7 +65,6 @@ import { VerticalTiltShiftShader } from 'three/examples/jsm/shaders/VerticalTilt
 import { VignetteShader } from 'three/examples/jsm/shaders/VignetteShader';
 import { VolumeRenderShader1 } from 'three/examples/jsm/shaders/VolumeShader';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
-import { I3JS, THREE, ThreeUtil } from '../../interface';
 import { AttributesParticles } from './shader.attributes_particles';
 import { AttributeSizeColor } from './shader.attributes_size_color';
 import { AttributeSizeColor1 } from './shader.attributes_size_color1';
@@ -118,7 +118,7 @@ export interface ShaderType {
 		[key: string]: any;
 	};
 	uniforms?: {
-		[key: string]: I3JS.IUniform;
+		[key: string]: THREE.IUniform;
 	};
 	fragmentShader: string;
 	vertexShader?: string;
@@ -398,7 +398,7 @@ export const ShaderConf: {
 export class ShaderUtils {
 	public static addShader(key: string, shader: ShaderType, alias?: string[]) {
 		key = key.toLowerCase();
-		if (ThreeUtil.isNotNull(alias)) {
+		if (alias !== undefined && alias !== null) {
 			alias.forEach((aliasKey) => {
 				if (aliasKey !== null && aliasKey.length > 3) {
 					ShaderConf[aliasKey.toLowerCase()] = key;
@@ -410,7 +410,8 @@ export class ShaderUtils {
 
 	public static getShader(key: string | ShaderType): ShaderType {
 		if (typeof key === 'string') {
-			if (ThreeUtil.isNotNull(ShaderConf[key.toLowerCase()])) {
+			const lowKey = key.toLowerCase();
+			if (ShaderConf[lowKey] !== null && ShaderConf[lowKey] !== undefined) {
 				const shader = ShaderConf[key.toLowerCase()];
 				if (typeof shader === 'string') {
 					return this.getShader(shader);
@@ -440,10 +441,10 @@ export class ShaderUtils {
 		return {
 			vertexShader: shader.vertexShader,
 			fragmentShader: shader.fragmentShader,
-			uniforms: ThreeUtil.isNotNull(shader.uniforms)
+			uniforms: shader.uniforms !== undefined && shader.uniforms !== null
 				? THREE.UniformsUtils.clone(shader.uniforms)
 				: undefined,
-			defines: ThreeUtil.isNotNull(shader.defines)
+			defines: shader.defines !== undefined && shader.defines !== null
 				? THREE.UniformsUtils.clone(shader.defines)
 				: undefined,
 		};
@@ -466,14 +467,14 @@ export class ShaderUtils {
 	}
 
 	public static getUniforms(key: string | ShaderType): {
-		[key: string]: I3JS.IUniform;
+		[key: string]: THREE.IUniform;
 	} {
-		if (ThreeUtil.isNotNull(key)) {
+		if (key !== undefined && key !== null) {
 			if (typeof key === 'string') {
-				if (ThreeUtil.isNotNull(key) && key !== '') {
+				if (key !== undefined && key !== null && key !== '') {
 					return THREE.UniformsUtils.clone(this.getShader(key).uniforms);
 				}
-			} else if (ThreeUtil.isNotNull(key.uniforms)) {
+			} else if (key.uniforms !== undefined && key.uniforms !== null) {
 				return THREE.UniformsUtils.clone(key.uniforms);
 			}
 		}

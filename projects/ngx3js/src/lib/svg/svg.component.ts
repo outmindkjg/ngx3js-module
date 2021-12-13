@@ -5,14 +5,12 @@ import {
 	forwardRef,
 	Input,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { SVGLoader, SVGResult } from 'three/examples/jsm/loaders/SVGLoader';
-import { ThreeUtil, ThreeVector, THREE, I3JS } from '../interface';
+import { I3JS, THREE, ThreeUtil, ThreeVector } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { TranslationComponent } from '../translation/translation.component';
-import { Font } from 'three/examples/jsm/loaders/FontLoader';
 
 /**
  * Svg geometry
@@ -489,7 +487,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @param [callBack]
 	 */
-	private getFont(def?: string, callBack?: (font: Font) => void) {
+	private getFont(def?: string, callBack?: (font: I3JS.IFont) => void) {
 		const font = ThreeUtil.getTypeSafe(this.font, def, 'helvetiker');
 		const weight = ThreeUtil.getTypeSafe(this.weight, '');
 		this.localStorageService.getFont(callBack, font, weight);
@@ -832,7 +830,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns geometries
 	 */
 	private getGeometries(
-		data: SVGResult | I3JS.IShape[],
+		data: I3JS.ISVGResult | I3JS.IShape[],
 		boundingSphere: I3JS.ISphere
 	): SvgGeometry[] {
 		const geometries: SvgGeometry[] = [];
@@ -892,7 +890,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 					const sumShapes: I3JS.IShape[] = shape.shape;
 					sumShapes.push.apply(shape.shape, holeShape as any);
 					if (ThreeUtil.isNotNull(this.stroke)) {
-						const AnySVGLoader: any = SVGLoader;
+						const AnySVGLoader = THREE.SVGLoader as any;
 						const style = AnySVGLoader.getStrokeStyle(
 							this.stroke,
 							this.getColor(0x006699).getStyle()
@@ -943,7 +941,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 */
 	public getPaths(onload: (geometry: SvgGeometry[]) => void) {
 		if (ThreeUtil.isNotNull(this.text) && this.text != '') {
-			this.getFont('helvetiker', (font: Font) => {
+			this.getFont('helvetiker', (font: I3JS.IFont) => {
 				const shapes = font.generateShapes(
 					this.getText('test'),
 					this.getSize(100)
@@ -956,12 +954,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 				onload(this.getGeometries(shapes as any, geometry.boundingSphere));
 			});
 		} else {
-			this.getSVGResult((data: SVGResult) => {
+			this.getSVGResult((data) => {
 				const shapes: I3JS.IShape[] = [];
-				data.paths.forEach((path) => {
+				data.paths.forEach((path : any) => {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))
-						.forEach((shape) => {
+						.forEach((shape : any) => {
 							shapes.push(shape as any);
 						});
 				});
@@ -979,10 +977,10 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets svgresult
 	 * @param onload
 	 */
-	public getSVGResult(onload: (data: SVGResult) => void) {
-		const loader = new SVGLoader();
+	public getSVGResult(onload: (data: I3JS.ISVGResult) => void) {
+		const loader = new THREE.SVGLoader();
 		if (ThreeUtil.isNotNull(this.url)) {
-			loader.load(this.url, (data: SVGResult) => {
+			loader.load(this.url, (data: I3JS.ISVGResult) => {
 				onload(data);
 			});
 		} else if (ThreeUtil.isNotNull(this.path) && this.path != '') {
@@ -1008,7 +1006,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param onload
 	 */
 	public getShapes(onload: (data: I3JS.IShape[]) => void) {
-		this.getSVGResult((data: SVGResult) => {
+		this.getSVGResult((data: I3JS.ISVGResult) => {
 			if (data.paths.length > 0) {
 				const shapes: I3JS.IShape[] = [];
 				data.paths.forEach((path) => {

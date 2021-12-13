@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Color } from 'three';
 export const AttributeSizeColor = {
 	vertexShader: `
   attribute float size;
@@ -21,7 +21,7 @@ export const AttributeSizeColor = {
   }
   `,
 	uniforms: {
-		color: { value: new THREE.Color(0xffffff) },
+		color: { value: new Color(0xffffff) },
 		pointTexture: { value: null } as any,
 	},
 };

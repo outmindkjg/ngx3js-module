@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Color } from 'three';
 export const PointsWaves = {
 	vertexShader: `
   attribute float scale;
@@ -16,6 +16,6 @@ export const PointsWaves = {
   }
   `,
 	uniforms: {
-		color: { value: new THREE.Color(0xffffff) },
+		color: { value: new Color(0xffffff) },
 	},
 };

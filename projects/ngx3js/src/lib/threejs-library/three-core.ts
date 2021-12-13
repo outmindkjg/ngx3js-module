@@ -1,7 +1,243 @@
 import * as O3JS from 'three';
-import * as I3JS from '../threejs-library/three-interface';
-import * as XR from '../threejs-library/three-xr';
+import { ColladaExporter as EX_ColladaExporter } from 'three/examples/jsm/exporters/ColladaExporter';
+import { DRACOExporter as EX_DRACOExporter } from 'three/examples/jsm/exporters/DRACOExporter';
+import { GLTFExporter as EX_GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
+import { MMDExporter as EX_MMDExporter } from 'three/examples/jsm/exporters/MMDExporter';
+import { OBJExporter as EX_OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
+import { PLYExporter as EX_PLYExporter } from 'three/examples/jsm/exporters/PLYExporter';
+import { STLExporter as EX_STLExporter } from 'three/examples/jsm/exporters/STLExporter';
+import { USDZExporter as EX_USDZExporter } from 'three/examples/jsm/exporters/USDZExporter';
+import { Rhino3dmLoader as EX_Rhino3dmLoader } from 'three/examples/jsm/loaders/3DMLoader';
+import { ThreeMFLoader as EX_ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
+import { AMFLoader as EX_AMFLoader } from 'three/examples/jsm/loaders/AMFLoader';
+import { BasisTextureLoader as EX_BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader';
+import { BVHLoader as EX_BVHLoader } from 'three/examples/jsm/loaders/BVHLoader';
+import { ColladaLoader as EX_ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader';
+import { DDSLoader as EX_DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
+import { DRACOLoader as EX_DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { EXRLoader as EX_EXRLoader } from 'three/examples/jsm/loaders/EXRLoader';
+import { FBXLoader as EX_FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+import { Font as EX_Font, FontLoader as EX_FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { GCodeLoader as EX_GCodeLoader } from 'three/examples/jsm/loaders/GCodeLoader';
+import { GLTFLoader as EX_GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { HDRCubeTextureLoader as EX_HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader';
+import { IFCLoader as EX_IFCLoader } from 'three/examples/jsm/loaders/IFCLoader';
+import { KMZLoader as EX_KMZLoader } from 'three/examples/jsm/loaders/KMZLoader';
+import { KTX2Loader as EX_KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
+import { KTXLoader as EX_KTXLoader } from 'three/examples/jsm/loaders/KTXLoader';
+import { LDrawLoader as EX_LDrawLoader } from 'three/examples/jsm/loaders/LDrawLoader';
+import { LottieLoader as EX_LottieLoader } from 'three/examples/jsm/loaders/LottieLoader';
+import { LUT3dlLoader as EX_LUT3dlLoader } from 'three/examples/jsm/loaders/LUT3dlLoader';
+import { LUTCubeLoader as EX_LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader';
+import { LWOLoader as EX_LWOLoader } from 'three/examples/jsm/loaders/LWOLoader';
+import { MD2Loader as EX_MD2Loader } from 'three/examples/jsm/loaders/MD2Loader';
+import { MDDLoader as EX_MDDLoader } from 'three/examples/jsm/loaders/MDDLoader';
+import { MMDLoader as EX_MMDLoader } from 'three/examples/jsm/loaders/MMDLoader';
+import { MTLLoader as EX_MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { NRRDLoader as EX_NRRDLoader } from 'three/examples/jsm/loaders/NRRDLoader';
+import { OBJLoader as EX_OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { PCDLoader as EX_PCDLoader } from 'three/examples/jsm/loaders/PCDLoader';
+import { PDBLoader as EX_PDBLoader } from 'three/examples/jsm/loaders/PDBLoader';
+import { PLYLoader as EX_PLYLoader } from 'three/examples/jsm/loaders/PLYLoader';
+import { PRWMLoader as EX_PRWMLoader } from 'three/examples/jsm/loaders/PRWMLoader';
+import { PVRLoader as EX_PVRLoader } from 'three/examples/jsm/loaders/PVRLoader';
+import { RGBELoader as EX_RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
+import { RGBMLoader as EX_RGBMLoader } from 'three/examples/jsm/loaders/RGBMLoader';
+import { STLLoader as EX_STLLoader } from 'three/examples/jsm/loaders/STLLoader';
+import { SVGLoader as EX_SVGLoader } from 'three/examples/jsm/loaders/SVGLoader';
+import { TDSLoader as EX_TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
+import { TGALoader as EX_TGALoader } from 'three/examples/jsm/loaders/TGALoader';
+import { TTFLoader as EX_TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
+import { VOXDataTexture3D as EX_VOXDataTexture3D, VOXLoader as EX_VOXLoader, VOXMesh as EX_VOXMesh } from 'three/examples/jsm/loaders/VOXLoader';
+import { VRMLLoader as EX_VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoader';
+import { VRMLoader as EX_VRMLoader } from 'three/examples/jsm/loaders/VRMLoader';
+import { VTKLoader as EX_VTKLoader } from 'three/examples/jsm/loaders/VTKLoader';
+import { XYZLoader as EX_XYZLoader } from 'three/examples/jsm/loaders/XYZLoader';
+import { MD2Character as EX_MD2Character } from 'three/examples/jsm/misc/MD2Character';
+import { MD2CharacterComplex as EX_MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex';
+import { Volume as EX_Volume } from 'three/examples/jsm/misc/Volume';
+import { CSS2DObject as EX_CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
+import { CSS3DObject as EX_CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import * as E_G_UTIL from 'three/examples/jsm/utils/BufferGeometryUtils';
+import * as I3JS from '../threejs-library/three-interface';
+import { MeshoptDecoder as EX_MeshoptDecoder } from './meshopt_decoder.module';
+import { TiltLoader as EX_TiltLoader } from './TiltLoader';
+import { LineSegmentsGeometry as EX_LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
+import { WireframeGeometry2 as EX_WireframeGeometry2 } from 'three/examples/jsm/lines/WireframeGeometry2';
+import { EdgeSplitModifier as EX_EdgeSplitModifier } from 'three/examples/jsm/modifiers/EdgeSplitModifier';
+import { SimplifyModifier as EX_SimplifyModifier } from 'three/examples/jsm/modifiers/SimplifyModifier';
+import { TessellateModifier as EX_TessellateModifier } from 'three/examples/jsm/modifiers/TessellateModifier';
+import * as EX_GeometryCompressionUtils from 'three/examples/jsm/utils/GeometryCompressionUtils';
+import * as EX_Stats from 'three/examples/jsm/libs/stats.module';
+import { CSM as EX_CSM } from 'three/examples/jsm/csm/CSM';
+import { CSMHelper as EX_CSMHelper } from 'three/examples/jsm/csm/CSMHelper';
+import { Gyroscope as EX_Gyroscope} from 'three/examples/jsm/misc/Gyroscope';
+import { LightProbeHelper as EX_LightProbeHelper } from 'three/examples/jsm/helpers/LightProbeHelper';
+import { PositionalAudioHelper as EX_PositionalAudioHelper  } from 'three/examples/jsm/helpers/PositionalAudioHelper';
+import { RectAreaLightHelper as EX_RectAreaLightHelper  } from 'three/examples/jsm/helpers/RectAreaLightHelper';
+import { VertexNormalsHelper as EX_VertexNormalsHelper  } from 'three/examples/jsm/helpers/VertexNormalsHelper';
+import { VertexTangentsHelper as EX_VertexTangentsHelper  } from 'three/examples/jsm/helpers/VertexTangentsHelper';
+import { CSS2DRenderer as EX_CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
+import { CSS3DRenderer as EX_CSS3DRenderer  } from 'three/examples/jsm/renderers/CSS3DRenderer';
+import { SVGRenderer as EX_SVGRenderer } from 'three/examples/jsm/renderers/SVGRenderer';
+import { ArcballControls as EX_ArcballControls } from 'three/examples/jsm/controls/ArcballControls';
+// import { DeviceOrientationControls as EX_DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOrientationControls';
+import { DragControls as EX_DragControls } from 'three/examples/jsm/controls/DragControls';
+import { FirstPersonControls as EX_FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
+import { FlyControls as EX_FlyControls } from 'three/examples/jsm/controls/FlyControls';
+import { OrbitControls as EX_OrbitControls, MapControls as EX_MapControls } from 'three/examples/jsm/controls/OrbitControls';
+import { PointerLockControls as EX_PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
+import { TrackballControls as EX_TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
+import { TransformControls as EX_TransformControls } from 'three/examples/jsm/controls/TransformControls';
+
+import { AdaptiveToneMappingPass as EX_AdaptiveToneMappingPass } from 'three/examples/jsm/postprocessing/AdaptiveToneMappingPass';
+import { AfterimagePass as EX_AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass';
+import { BloomPass as EX_BloomPass } from 'three/examples/jsm/postprocessing/BloomPass';
+import { BokehPass as EX_BokehPass } from 'three/examples/jsm/postprocessing/BokehPass';
+import { ClearPass as EX_ClearPass } from 'three/examples/jsm/postprocessing/ClearPass';
+import { CubeTexturePass as EX_CubeTexturePass } from 'three/examples/jsm/postprocessing/CubeTexturePass';
+import { DotScreenPass as EX_DotScreenPass } from 'three/examples/jsm/postprocessing/DotScreenPass';
+import { FilmPass as EX_FilmPass } from 'three/examples/jsm/postprocessing/FilmPass';
+import { GlitchPass as EX_GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass';
+import { HalftonePass as EX_HalftonePass } from 'three/examples/jsm/postprocessing/HalftonePass';
+import { LUTPass as EX_LUTPass } from 'three/examples/jsm/postprocessing/LUTPass';
+import { MaskPass as EX_MaskPass, ClearMaskPass as EX_ClearMaskPass } from 'three/examples/jsm/postprocessing/MaskPass';
+import { OutlinePass as EX_OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
+import { Pass as EX_Pass } from 'three/examples/jsm/postprocessing/Pass';
+import { RenderPass as EX_RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { SAOPass as EX_SAOPass } from 'three/examples/jsm/postprocessing/SAOPass';
+import { SavePass as EX_SavePass } from 'three/examples/jsm/postprocessing/SavePass';
+import { ShaderPass as EX_ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import { SMAAPass as EX_SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass';
+import { SSAARenderPass as EX_SSAARenderPass } from 'three/examples/jsm/postprocessing/SSAARenderPass';
+import { SSAOPass as EX_SSAOPass } from 'three/examples/jsm/postprocessing/SSAOPass';
+import { SSRPass as EX_SSRPass } from 'three/examples/jsm/postprocessing/SSRPass';
+import { SSRrPass as EX_SSRrPass } from 'three/examples/jsm/postprocessing/SSRrPass';
+import { TAARenderPass as EX_TAARenderPass } from 'three/examples/jsm/postprocessing/TAARenderPass';
+import { TexturePass as EX_TexturePass } from 'three/examples/jsm/postprocessing/TexturePass';
+import { UnrealBloomPass as EX_UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+
+import { BoxLineGeometry as EX_BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry';
+import { ConvexGeometry as EX_ConvexGeometry  } from 'three/examples/jsm/geometries/ConvexGeometry';
+import { DecalGeometry as EX_DecalGeometry, DecalVertex as  EX_DecalVertex  } from 'three/examples/jsm/geometries/DecalGeometry';
+import { LightningStrike as EX_LightningStrike  } from 'three/examples/jsm/geometries/LightningStrike';
+import { ParametricGeometries as EX_ParametricGeometries  } from 'three/examples/jsm/geometries/ParametricGeometries';
+import { ParametricGeometry as EX_ParametricGeometry  } from 'three/examples/jsm/geometries/ParametricGeometry';
+import { RoundedBoxGeometry as EX_RoundedBoxGeometry  } from 'three/examples/jsm/geometries/RoundedBoxGeometry';
+import { TeapotGeometry as EX_TeapotGeometry  } from 'three/examples/jsm/geometries/TeapotGeometry';
+import { TextGeometry as EX_TextGeometry  } from 'three/examples/jsm/geometries/TextGeometry';
+import { LineGeometry as EX_LineGeometry  } from 'three/examples/jsm/lines/LineGeometry';
+
+import * as EX_RollerCoaster from 'three/examples/jsm/misc/RollerCoaster';
+
+import { NgxCapsuleGeometry } from '../geometry/geometries/capsule';
+import { NgxCircleDepthGeometry } from '../geometry/geometries/circle-depth';
+import { NgxGridGeometry } from '../geometry/geometries/grid';
+import { NgxPlaneDepthGeometry } from '../geometry/geometries/plane-depth';
+import { NgxPlanePerlinGeometry } from '../geometry/geometries/plane-perlin';
+import { NgxRingDepthGeometry } from '../geometry/geometries/ring-depth';
+import { NgxRopeGeometry } from '../geometry/geometries/rope';
+import { NgxStarGeometry } from '../geometry/geometries/star';
+import { NgxOutlineGeometry } from '../geometry/geometries/outline';
+import { NgxStarDepthGeometry } from '../geometry/geometries/star-depth';
+
+import { AsciiEffect as EX_AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect';
+import { OutlineEffect as EX_OutlineEffect  } from 'three/examples/jsm/effects/OutlineEffect';
+import { ParallaxBarrierEffect as EX_ParallaxBarrierEffect  } from 'three/examples/jsm/effects/ParallaxBarrierEffect';
+import { PeppersGhostEffect as EX_PeppersGhostEffect  } from 'three/examples/jsm/effects/PeppersGhostEffect';
+import { EffectComposer as EX_EffectComposer  } from 'three/examples/jsm/postprocessing/EffectComposer';
+
+import { ProgressiveLightMap as EX_ProgressiveLightMap } from 'three/examples/jsm/misc/ProgressiveLightMap';
+import { ShadowMesh as EX_ShadowMesh } from 'three/examples/jsm/objects/ShadowMesh';
+import { ShadowMapViewer as EX_ShadowMapViewer } from 'three/examples/jsm/utils/ShadowMapViewer';
+
+
+import * as EX_SceneUtils from 'three/examples/jsm/utils/SceneUtils';
+
+import * as EX_ReflectorForSSRPass from 'three/examples/jsm/objects/ReflectorForSSRPass';
+import * as NGX_PASS from './../pass/passes/three-passes';
+
+export const Stats: I3JS.IStats = EX_Stats.default as any;
+export const SceneUtils: I3JS.ISceneUtils = EX_SceneUtils as any;
+
+export const CSM: I3JS.ICSM = EX_CSM as any;
+export const CSMHelper: I3JS.ICSMHelper = EX_CSMHelper as any;
+export const Gyroscope: I3JS.IGyroscope = EX_Gyroscope as any;
+export const LightProbeHelper: I3JS.ILightProbeHelper = EX_LightProbeHelper as any;
+export const PositionalAudioHelper: I3JS.IPositionalAudioHelper = EX_PositionalAudioHelper as any;
+export const RectAreaLightHelper: I3JS.IRectAreaLightHelper = EX_RectAreaLightHelper as any;
+export const VertexNormalsHelper: I3JS.IVertexNormalsHelper = EX_VertexNormalsHelper as any;
+export const VertexTangentsHelper: I3JS.IVertexTangentsHelper = EX_VertexTangentsHelper as any;
+
+export const CSS2DRenderer: I3JS.ICSS2DRenderer = EX_CSS2DRenderer as any;
+export const CSS3DRenderer: I3JS.ICSS3DRenderer = EX_CSS3DRenderer as any;
+export const SVGRenderer: I3JS.ISVGRenderer = EX_SVGRenderer as any;
+
+export const ArcballControls: I3JS.IArcballControls = EX_ArcballControls as any;
+// export const DeviceOrientationControls: I3JS.IDeviceOrientationControls = EX_DeviceOrientationControls as any;
+export const DragControls: I3JS.IDragControls = EX_DragControls as any;
+export const FirstPersonControls: I3JS.IFirstPersonControls = EX_FirstPersonControls as any;
+export const FlyControls: I3JS.IFlyControls = EX_FlyControls as any;
+export const OrbitControls: I3JS.IOrbitControls = EX_OrbitControls as any;
+export const MapControls: I3JS.IMapControls = EX_MapControls as any;
+export const CsmControls: I3JS.ICSM = EX_CSM as any;
+
+export const PointerLockControls: I3JS.IPointerLockControls = EX_PointerLockControls as any;
+export const TrackballControls: I3JS.ITrackballControls = EX_TrackballControls as any;
+export const TransformControls: I3JS.ITransformControls = EX_TransformControls as any;
+
+
+export const AdaptiveToneMappingPass: I3JS.IAdaptiveToneMappingPass = EX_AdaptiveToneMappingPass as any;
+export const AfterimagePass: I3JS.IAfterimagePass = EX_AfterimagePass as any;
+export const BloomPass: I3JS.IBloomPass = EX_BloomPass as any;
+export const BokehPass: I3JS.IBokehPass = EX_BokehPass as any;
+export const ClearPass: I3JS.IClearPass = EX_ClearPass as any;
+export const CubeTexturePass: I3JS.ICubeTexturePass = EX_CubeTexturePass as any;
+export const DotScreenPass: I3JS.IDotScreenPass = EX_DotScreenPass as any;
+export const FilmPass: I3JS.IFilmPass = EX_FilmPass as any;
+export const GlitchPass: I3JS.IGlitchPass = EX_GlitchPass as any;
+export const HalftonePass: I3JS.IHalftonePass = EX_HalftonePass as any;
+export const LUTPass: I3JS.ILUTPass = EX_LUTPass as any;
+export const MaskPass: I3JS.IMaskPass = EX_MaskPass as any;
+export const ClearMaskPass: I3JS.IClearMaskPass = EX_ClearMaskPass as any;
+export const OutlinePass: I3JS.IOutlinePass = EX_OutlinePass as any;
+export const Pass: I3JS.IPass = EX_Pass as any;
+export const RenderPass: I3JS.IRenderPass = EX_RenderPass as any;
+export const SAOPass: I3JS.ISAOPass = EX_SAOPass as any;
+export const SavePass: I3JS.ISavePass = EX_SavePass as any;
+export const ShaderPass: I3JS.IShaderPass = EX_ShaderPass as any;
+export const SMAAPass: I3JS.ISMAAPass = EX_SMAAPass as any;
+export const SSAARenderPass: I3JS.ISSAARenderPass = EX_SSAARenderPass as any;
+export const SSAOPass: I3JS.ISSAOPass = EX_SSAOPass as any;
+export const SSRPass: I3JS.ISSRPass = EX_SSRPass as any;
+export const SSRrPass: I3JS.ISSRrPass = EX_SSRrPass as any;
+export const TAARenderPass: I3JS.ITAARenderPass = EX_TAARenderPass as any;
+export const TexturePass: I3JS.ITexturePass = EX_TexturePass as any;
+export const UnrealBloomPass: I3JS.IUnrealBloomPass = EX_UnrealBloomPass as any;
+
+export const ShaderCopyPass: I3JS.IShaderCopyPass = NGX_PASS.ShaderCopyPass as any;
+export const ShaderRGBShiftPass: I3JS.IShaderRGBShiftPass = NGX_PASS.ShaderRGBShiftPass as any;
+export const ShaderBleachBypassPass: I3JS.IShaderBleachBypassPass = NGX_PASS.ShaderBleachBypassPass as any;
+export const ShaderSepiaPass: I3JS.IShaderSepiaPass = NGX_PASS.ShaderSepiaPass as any;
+export const ShaderVignettePass: I3JS.IShaderVignettePass = NGX_PASS.ShaderVignettePass as any;
+export const ShaderGammaCorrectionPass: I3JS.IShaderGammaCorrectionPass = NGX_PASS.ShaderGammaCorrectionPass as any;
+export const ShaderFXAAPass: I3JS.IShaderFXAAPass = NGX_PASS.ShaderFXAAPass as any;
+export const ShaderPixelPass: I3JS.IShaderPixelPass = NGX_PASS.ShaderPixelPass as any;
+export const ShaderLuminosityPass: I3JS.IShaderLuminosityPass = NGX_PASS.ShaderLuminosityPass as any;
+export const ShaderDotScreenPass: I3JS.IShaderDotScreenPass = NGX_PASS.ShaderDotScreenPass as any;
+export const SobelOperatorPass: I3JS.ISobelOperatorPass = NGX_PASS.SobelOperatorPass as any;
+export const ShaderMaterialPass: I3JS.IShaderMaterialPass = NGX_PASS.ShaderMaterialPass as any;
+export const ReflectorForSSRPass: any = (EX_ReflectorForSSRPass as any).ReflectorForSSRPass as any;
+
+export const AsciiEffect: I3JS.IAsciiEffect = EX_AsciiEffect as any;
+export const OutlineEffect: I3JS.IOutlineEffect = EX_OutlineEffect as any;
+export const ParallaxBarrierEffect: I3JS.IParallaxBarrierEffect = EX_ParallaxBarrierEffect as any;
+export const PeppersGhostEffect: I3JS.IPeppersGhostEffect = EX_PeppersGhostEffect as any;
+export const EffectComposer: I3JS.IEffectComposer = EX_EffectComposer as any;
+
+export const ProgressiveLightMap: I3JS.IProgressiveLightMap = EX_ProgressiveLightMap as any;
+export const ShadowMesh: I3JS.IShadowMesh = EX_ShadowMesh as any;
+export const ShadowMapViewer: I3JS.IShadowMapViewer = EX_ShadowMapViewer as any;
 
 export const AnimationUtils: I3JS.IAnimationUtils = O3JS.AnimationUtils as any;
 export const ShaderChunk: I3JS.IShaderChunk = O3JS.ShaderChunk as any;
@@ -51,6 +287,14 @@ export const BufferGeometryUtils: I3JS.IBufferGeometryUtils = {
 	mergeVertices: E_G_UTIL.mergeVertices as any,
 	toTrianglesDrawMode: E_G_UTIL.toTrianglesDrawMode as any,
 	computeMorphedAttributes: E_G_UTIL.computeMorphedAttributes as any,
+};
+
+export const GeometryUtils: I3JS.IGeometryUtils = {
+	 merge(geometry1: any, geometry2: any, materialIndexOffset?: any){ return null; },
+	 center(geometry: any) { return null; },
+	 hilbert2D: () => {},
+	 hilbert3D: () => {},
+	 gosper: () => {}
 };
 
 export const BufferGeometry: I3JS.IBufferGeometry = O3JS.BufferGeometry as any;
@@ -108,6 +352,48 @@ export const TubeGeometry: I3JS.ITubeGeometry = O3JS.TubeGeometry as any;
 export const TubeBufferGeometry: I3JS.ITubeGeometry = O3JS.TubeGeometry as any;
 export const WireframeGeometry: I3JS.IWireframeGeometry = O3JS.WireframeGeometry as any;
 export const WireframeBufferGeometry: I3JS.IWireframeGeometry = O3JS.WireframeGeometry as any;
+export const LineSegmentsGeometry: I3JS.ILineSegmentsGeometry = EX_LineSegmentsGeometry as any;
+export const WireframeGeometry2: I3JS.IWireframeGeometry2 = EX_WireframeGeometry2 as any;
+export const EdgeSplitModifier: I3JS.IEdgeSplitModifier = EX_EdgeSplitModifier as any;
+export const SimplifyModifier: I3JS.ISimplifyModifier = EX_SimplifyModifier as any;
+
+export const BoxLineGeometry: I3JS.IBoxLineGeometry = EX_BoxLineGeometry as any;
+export const ConvexGeometry: I3JS.IConvexGeometry = EX_ConvexGeometry as any;
+export const DecalGeometry: I3JS.IDecalGeometry = EX_DecalGeometry as any;
+export const DecalVertex: I3JS.IDecalVertex = EX_DecalVertex as any;
+
+export const LightningStrike: I3JS.ILightningStrike = EX_LightningStrike as any;
+export const ParametricGeometries: I3JS.IParametricGeometries = EX_ParametricGeometries as any;
+export const ParametricGeometry: I3JS.IParametricGeometry = EX_ParametricGeometry as any;
+export const RoundedBoxGeometry: I3JS.IRoundedBoxGeometry = EX_RoundedBoxGeometry as any;
+export const TeapotGeometry: I3JS.ITeapotGeometry = EX_TeapotGeometry as any;
+export const TextGeometry: I3JS.ITextGeometry = EX_TextGeometry as any;
+export const LineGeometry: I3JS.ILineGeometry = EX_LineGeometry as any;
+
+export const RollerCoasterGeometry: I3JS.IRollerCoasterGeometry = EX_RollerCoaster.RollerCoasterGeometry as any;
+export const RollerCoasterLiftersGeometry: I3JS.IRollerCoasterLiftersGeometry = EX_RollerCoaster.RollerCoasterLiftersGeometry as any;
+export const RollerCoasterShadowGeometry: I3JS.IRollerCoasterShadowGeometry = EX_RollerCoaster.RollerCoasterShadowGeometry as any;
+export const RollerCoasterSkyGeometry: I3JS.IRollerCoasterSkyGeometry = EX_RollerCoaster.SkyGeometry as any;
+export const RollerCoasterTreesGeometry: I3JS.IRollerCoasterTreesGeometry = EX_RollerCoaster.TreesGeometry as any;
+
+export const CapsuleGeometry: I3JS.ICapsuleGeometry = NgxCapsuleGeometry as any;
+export const CircleDepthGeometry: I3JS.ICircleDepthGeometry = NgxCircleDepthGeometry as any;
+export const GridGeometry: I3JS.IGridGeometry = NgxGridGeometry as any;
+export const PlaneDepthGeometry: I3JS.IPlaneDepthGeometry = NgxPlaneDepthGeometry as any;
+export const PlanePerlinGeometry: I3JS.IPlanePerlinGeometry = NgxPlanePerlinGeometry as any;
+export const RingDepthGeometry: I3JS.IRingDepthGeometry = NgxRingDepthGeometry as any;
+export const RopeGeometry: I3JS.IRopeGeometry = NgxRopeGeometry as any;
+export const StarGeometry: I3JS.IStarGeometry = NgxStarGeometry as any;
+export const StarDepthGeometry: I3JS.IStarDepthGeometry = NgxStarDepthGeometry as any;
+export const OutlineGeometry: I3JS.IOutlineGeometry = NgxOutlineGeometry as any;
+
+
+export const GeometryCompressionUtils: I3JS.IGeometryCompressionUtils = {
+	compressNormals: (EX_GeometryCompressionUtils as any).compressNormals,
+	compressPositions: (EX_GeometryCompressionUtils as any).compressPositions,
+	compressUvs: (EX_GeometryCompressionUtils as any).compressUvs,
+};
+export const TessellateModifier: I3JS.ITessellateModifier = EX_TessellateModifier as any;
 export const AmbientLight: I3JS.IAmbientLight = O3JS.AmbientLight as any;
 export const AmbientLightProbe: I3JS.IAmbientLightProbe = O3JS.AmbientLightProbe as any;
 export const DirectionalLight: I3JS.IDirectionalLight = O3JS.DirectionalLight as any;
@@ -202,8 +488,13 @@ export const DataTexture3D: I3JS.IDataTexture3D = O3JS.DataTexture3D as any;
 export const DepthTexture: I3JS.IDepthTexture = O3JS.DepthTexture as any;
 export const Texture: I3JS.ITexture = O3JS.Texture as any;
 export const VideoTexture: I3JS.IVideoTexture = O3JS.VideoTexture as any;
+export const Loader: I3JS.ILoader = O3JS.Loader as any;
+export const LoadingManager: I3JS.ILoadingManager = O3JS.LoadingManager as any;
 export const AnimationLoader: I3JS.IAnimationLoader = O3JS.AnimationLoader as any;
 export const AudioLoader: I3JS.IAudioLoader = O3JS.AudioLoader as any;
+export const MaterialLoader: I3JS.IMaterialLoader = O3JS.MaterialLoader as any;
+export const ObjectLoader: I3JS.IObjectLoader = O3JS.ObjectLoader as any;
+export const TextureLoader: I3JS.ITextureLoader = O3JS.TextureLoader as any;
 export const BufferGeometryLoader: I3JS.IBufferGeometryLoader = O3JS.BufferGeometryLoader as any;
 export const CompressedTextureLoader: I3JS.ICompressedTextureLoader = O3JS.CompressedTextureLoader as any;
 export const CubeTextureLoader: I3JS.ICubeTextureLoader = O3JS.CubeTextureLoader as any;
@@ -211,11 +502,73 @@ export const DataTextureLoader: I3JS.IDataTextureLoader = O3JS.DataTextureLoader
 export const FileLoader: I3JS.IFileLoader = O3JS.FileLoader as any;
 export const ImageBitmapLoader: I3JS.IImageBitmapLoader = O3JS.ImageBitmapLoader as any;
 export const ImageLoader: I3JS.IImageLoader = O3JS.ImageLoader as any;
-export const Loader: I3JS.ILoader = O3JS.Loader as any;
-export const LoadingManager: I3JS.ILoadingManager = O3JS.LoadingManager as any;
-export const MaterialLoader: I3JS.IMaterialLoader = O3JS.MaterialLoader as any;
-export const ObjectLoader: I3JS.IObjectLoader = O3JS.ObjectLoader as any;
-export const TextureLoader: I3JS.ITextureLoader = O3JS.TextureLoader as any;
+
+export const ColladaExporter: I3JS.IColladaExporter = EX_ColladaExporter as any;
+export const DRACOExporter: I3JS.IDRACOExporter = EX_DRACOExporter as any;
+export const GLTFExporter: I3JS.IGLTFExporter = EX_GLTFExporter as any;
+export const MMDExporter: I3JS.IMMDExporter = EX_MMDExporter as any;
+export const OBJExporter: I3JS.IOBJExporter = EX_OBJExporter as any;
+export const PLYExporter: I3JS.IPLYExporter = EX_PLYExporter as any;
+export const STLExporter: I3JS.ISTLExporter = EX_STLExporter as any;
+export const USDZExporter: I3JS.IUSDZExporter = EX_USDZExporter as any;
+export const Rhino3dmLoader: I3JS.IRhino3dmLoader = EX_Rhino3dmLoader as any;
+export const ThreeMFLoader: I3JS.IThreeMFLoader = EX_ThreeMFLoader as any;
+export const AMFLoader: I3JS.IAMFLoader = EX_AMFLoader as any;
+export const BasisTextureLoader: I3JS.IBasisTextureLoader = EX_BasisTextureLoader as any;
+export const BVHLoader: I3JS.IBVHLoader = EX_BVHLoader as any;
+export const ColladaLoader: I3JS.IColladaLoader = EX_ColladaLoader as any; 
+export const DDSLoader: I3JS.IDDSLoader = EX_DDSLoader as any;
+export const DRACOLoader: I3JS.IDRACOLoader = EX_DRACOLoader as any;
+export const EXRLoader: I3JS.IEXRLoader = EX_EXRLoader as any;
+export const FBXLoader: I3JS.IFBXLoader = EX_FBXLoader as any;
+export const Font: I3JS.IFont = EX_Font as any;
+export const FontLoader: I3JS.IFontLoader = EX_FontLoader as any;
+export const GCodeLoader: I3JS.IGCodeLoader = EX_GCodeLoader as any;
+export const GLTFLoader: I3JS.IGLTFLoader = EX_GLTFLoader as any;
+export const HDRCubeTextureLoader: I3JS.IHDRCubeTextureLoader = EX_HDRCubeTextureLoader as any;
+export const IFCLoader: I3JS.IIFCLoader = EX_IFCLoader as any;
+export const KMZLoader: I3JS.IKMZLoader = EX_KMZLoader as any;
+export const KTX2Loader: I3JS.IKTX2Loader = EX_KTX2Loader as any;
+export const KTXLoader: I3JS.IKTXLoader = EX_KTXLoader as any;
+export const LDrawLoader: I3JS.ILDrawLoader = EX_LDrawLoader as any;
+export const LottieLoader: I3JS.ILottieLoader = EX_LottieLoader as any;
+export const LUT3dlLoader: I3JS.ILUT3dlLoader = EX_LUT3dlLoader as any;
+export const LUTCubeLoader: I3JS.ILUTCubeLoader = EX_LUTCubeLoader as any;
+export const LWOLoader: I3JS.ILWOLoader = EX_LWOLoader as any;
+export const MD2Loader: I3JS.IMD2Loader = EX_MD2Loader as any;
+export const MDDLoader: I3JS.IMDDLoader = EX_MDDLoader as any;
+export const MMDLoader: I3JS.IMMDLoader = EX_MMDLoader as any;
+export const MTLLoader: I3JS.IMTLLoader = EX_MTLLoader as any;
+export const NRRDLoader: I3JS.INRRDLoader = EX_NRRDLoader as any;
+export const OBJLoader: I3JS.IOBJLoader = EX_OBJLoader as any;
+export const PCDLoader: I3JS.IPCDLoader = EX_PCDLoader as any;
+export const PDBLoader: I3JS.IPDBLoader = EX_PDBLoader as any;
+export const PLYLoader: I3JS.IPLYLoader = EX_PLYLoader as any;
+export const PRWMLoader: I3JS.IPRWMLoader = EX_PRWMLoader as any;
+export const PVRLoader: I3JS.IPVRLoader = EX_PVRLoader as any;
+export const RGBELoader: I3JS.IRGBELoader = EX_RGBELoader as any;
+export const RGBMLoader: I3JS.IRGBMLoader = EX_RGBMLoader as any;
+export const STLLoader: I3JS.ISTLLoader = EX_STLLoader as any;
+export const SVGLoader: I3JS.ISVGLoader = EX_SVGLoader as any;
+export const TDSLoader: I3JS.ITDSLoader = EX_TDSLoader as any;
+export const TGALoader: I3JS.ITGALoader = EX_TGALoader as any;
+export const TTFLoader: I3JS.ITTFLoader = EX_TTFLoader as any;
+export const VOXLoader: I3JS.IVOXLoader = EX_VOXLoader as any;
+export const VOXMesh: I3JS.IVOXMesh = EX_VOXMesh as any;
+export const VOXDataTexture3D: I3JS.IVOXDataTexture3D = EX_VOXDataTexture3D as any;
+export const VRMLLoader: I3JS.IVRMLLoader = EX_VRMLLoader as any;
+export const VRMLoader: I3JS.IVRMLoader = EX_VRMLoader as any;
+export const VTKLoader: I3JS.IVTKLoader = EX_VTKLoader as any;
+export const XYZLoader: I3JS.IXYZLoader = EX_XYZLoader as any;
+export const MD2Character: I3JS.IMD2Character = EX_MD2Character as any;
+export const MD2CharacterComplex: I3JS.IMD2CharacterComplex = EX_MD2CharacterComplex as any;
+export const Volume: I3JS.IVolume = EX_Volume as any;
+export const CSS2DObject: I3JS.ICSS2DObject = EX_CSS2DObject as any;
+export const CSS3DObject: I3JS.ICSS3DObject = EX_CSS3DObject as any;
+export const MeshoptDecoder: any = EX_MeshoptDecoder as any;
+export const TiltLoader: I3JS.ITiltLoader = EX_TiltLoader as any;
+
+
 export const ArcCurve: I3JS.IArcCurve = O3JS.ArcCurve as any;
 export const CatmullRomCurve3: I3JS.ICatmullRomCurve3 = O3JS.CatmullRomCurve3 as any;
 export const CubicBezierCurve: I3JS.ICubicBezierCurve = O3JS.CubicBezierCurve as any;

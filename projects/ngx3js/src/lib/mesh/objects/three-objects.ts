@@ -42,7 +42,6 @@ import {
 } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 import { I3JS, MaterialParameters, THREE, ThreeUtil } from '../../interface';
-import { ReflectorForSSRPass } from './../../threejs-library/ReflectorForSSRPass';
 
 /**
  * Lensflare mesh
@@ -235,23 +234,6 @@ export class NgxRefractor extends Refractor {
 	}
 }
 
-/**
- * ReflectorForSSRPass mesh
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxReflectorForSSRMesh) page for details.
- * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorForSSRMesh) page for a live demo.
- *
- */
-export class NgxReflectorForSSRMesh extends ReflectorForSSRPass {
-	/**
-	 * Creates an instance of ngx reflector for ssrpass.
-	 * @param geometry
-	 * @param options
-	 */
-	constructor(geometry: I3JS.IBufferGeometry, options: any) {
-		super(geometry, options);
-	}
-}
 
 /**
  * Water mesh

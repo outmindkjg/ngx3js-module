@@ -7,5 +7,4 @@ export * from './geometries/ring-depth';
 export * from './geometries/rope';
 export * from './geometries/star';
 export * from './geometries/star-depth';
-export * from './geometries/three-geometries';
 export * from './geometryUtils';

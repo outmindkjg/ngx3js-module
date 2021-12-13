@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Color } from 'three';
 
 export const CustomAttributesPoints = {
 	vertexShader: `
@@ -22,7 +22,7 @@ export const CustomAttributesPoints = {
   }
   `,
 	uniforms: {
-		color: { value: new THREE.Color(0xffffff) },
+		color: { value: new Color(0xffffff) },
 		pointTexture: { value: null } as any,
 	},
 };

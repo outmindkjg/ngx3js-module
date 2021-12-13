@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Vector3 } from 'three';
 export const ShaderDemo12 = {
 	vertexShader: `
   in vec3 position;
@@ -79,6 +79,6 @@ export const ShaderDemo12 = {
   `,
 	uniforms: {
 		map: { value: null } as any,
-		cameraPos: { value: new THREE.Vector3() },
+		cameraPos: { value: new Vector3() },
 	},
 };

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { RendererTimer, ThreeUtil } from '../../interface';
 import { AbstractSubscribeComponent } from '../../subscribe.abstract';
-import * as Ammo from '../../threejs-library/ammo';
+import * as AmmoType from '../../threejs-library/ammo-type';
 
 /**
  * The Physics Constraint component.
@@ -146,17 +146,17 @@ export class PhysicsConstraintComponent
 	/**
 	 * The Constraint of physics constraint component
 	 */
-	private constraint: Ammo.btTypedConstraint = null;
+	private constraint: AmmoType.btTypedConstraint = null;
 
 	/**
 	 * The Physics of physics constraint component
 	 */
-	private physics: Ammo.btSoftRigidDynamicsWorld = null;
+	private physics: AmmoType.btSoftRigidDynamicsWorld = null;
 
 	/**
 	 * The Ammo of physics constraint component
 	 */
-	private ammo: Ammo.AmmoType = null;
+	private ammo: AmmoType.AmmoType = null;
 
 	/**
 	 * Sets physics
@@ -164,8 +164,8 @@ export class PhysicsConstraintComponent
 	 * @param ammo
 	 */
 	public setPhysics(
-		physics: Ammo.btSoftRigidDynamicsWorld,
-		ammo: Ammo.AmmoType
+		physics: AmmoType.btSoftRigidDynamicsWorld,
+		ammo: AmmoType.AmmoType
 	) {
 		this.physics = physics;
 		this.ammo = ammo;
@@ -208,7 +208,7 @@ export class PhysicsConstraintComponent
 	 * @param z
 	 * @returns bt vector3
 	 */
-	private getBtVector3(x: number, y: number, z: number): Ammo.btVector3 {
+	private getBtVector3(x: number, y: number, z: number): AmmoType.btVector3 {
 		return new this.ammo.btVector3(
 			ThreeUtil.getTypeSafe(x, 0),
 			ThreeUtil.getTypeSafe(y, 0),
@@ -266,7 +266,7 @@ export class PhysicsConstraintComponent
 	 * Gets constraint
 	 * @returns constraint
 	 */
-	public getConstraint(): Ammo.btTypedConstraint {
+	public getConstraint(): AmmoType.btTypedConstraint {
 		if (
 			ThreeUtil.isNotNull(this.ammo) &&
 			ThreeUtil.isNotNull(this.physics) &&
@@ -276,7 +276,7 @@ export class PhysicsConstraintComponent
 			if (this.constraint !== null) {
 				this.physics.removeConstraint(this.constraint);
 			}
-			let constraint: Ammo.btTypedConstraint = null;
+			let constraint: AmmoType.btTypedConstraint = null;
 			switch (this.type.toLowerCase()) {
 				case 'hinge':
 					const source1: any = this.getRigidBody(this.source1, 'source1');

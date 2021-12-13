@@ -31,7 +31,6 @@ import { AbstractObject3dComponent } from '../object3d.abstract';
 import { SizeComponent } from '../size/size.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
-import { SceneUtils } from '../threejs-library/SceneUtils';
 import { HelperComponent, HelperOptions } from './../helper/helper.component';
 import { LightComponent, LightOptions } from './../light/light.component';
 import { LocalStorageService } from './../local-storage.service';
@@ -1813,7 +1812,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 				case 'reflectorforssrpass':
 				case 'reflectorforssr':
 					const reflectorForSSRPassSize = this.getTextureSize();
-					const reflectorForSSRPass = new THREE_OBJ.NgxReflectorForSSRMesh(
+					const reflectorForSSRPass = new THREE.ReflectorForSSRPass(
 						geometry,
 						{
 							textureWidth: reflectorForSSRPassSize.x,
@@ -2153,7 +2152,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'multi':
 				case 'multimaterial':
-					basemesh = SceneUtils.createMultiMaterialObject(
+					basemesh = THREE.SceneUtils.createMultiMaterialObject(
 						geometry,
 						this.getMaterialsMulti()
 					);
@@ -2588,7 +2587,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 									})
 								);
 								const planeMat = materialComponent.getMaterial();
-								const po = new THREE.Mesh(planeGeom, planeMat);
+								const po = new THREE.Mesh(planeGeom, planeMat as any);
 								po.onBeforeRender = () => {
 									plane.coplanarPoint(po.position);
 									const position = po.position;

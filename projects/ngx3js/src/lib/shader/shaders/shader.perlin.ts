@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Vector3 } from 'three';
 export const PerlinShader = {
 	vertexShader: `
   in vec3 position;
@@ -78,7 +78,7 @@ export const PerlinShader = {
   `,
 	uniforms: {
 		map: { value: null } as any,
-		cameraPos: { value: new THREE.Vector3() },
+		cameraPos: { value: new Vector3() },
 		threshold: { value: 0.6 },
 		steps: { value: 200 },
 	},

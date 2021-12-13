@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractSubscribeComponent } from '../../subscribe.abstract';
-import * as Ammo from '../../threejs-library/ammo';
+import * as AmmoType from '../../threejs-library/ammo-type';
 import { ThreeUtil } from '../../interface';
 
 /**
@@ -90,7 +90,7 @@ export class RigidbodyNodeComponent
 	/**
 	 * The Physics of rigidbody node component
 	 */
-	private physics: Ammo.btSoftRigidDynamicsWorld = null;
+	private physics: AmmoType.btSoftRigidDynamicsWorld = null;
 
 	/**
 	 * The Ammo of rigidbody node component
@@ -100,7 +100,7 @@ export class RigidbodyNodeComponent
 	/**
 	 * Rigid body of rigidbody node component
 	 */
-	private rigidBody: Ammo.btSoftBody = null;
+	private rigidBody: AmmoType.btSoftBody = null;
 
 	/**
 	 * Sets rigidbody
@@ -109,8 +109,8 @@ export class RigidbodyNodeComponent
 	 * @param ammo
 	 */
 	public setRigidbody(
-		rigidBody: Ammo.btSoftBody,
-		physics: Ammo.btSoftRigidDynamicsWorld,
+		rigidBody: AmmoType.btSoftBody,
+		physics: AmmoType.btSoftRigidDynamicsWorld,
 		ammo: any
 	) {
 		this.rigidBody = rigidBody;
@@ -157,7 +157,7 @@ export class RigidbodyNodeComponent
 	 * Gets rigidbody node
 	 * @returns rigidbody node
 	 */
-	public getRigidbodyNode(): Ammo.btTypedConstraint {
+	public getRigidbodyNode(): AmmoType.btTypedConstraint {
 		if (
 			ThreeUtil.isNotNull(this.ammo) &&
 			ThreeUtil.isNotNull(this.rigidBody) &&

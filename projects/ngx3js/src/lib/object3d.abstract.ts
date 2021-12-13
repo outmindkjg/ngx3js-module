@@ -7,10 +7,8 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
-import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { AnimationGroupComponent } from './animation-group/animation-group.component';
 import { AbstractControllerComponent } from './controller.component.abstract';
 import { AbstractGeometryComponent } from './geometry.abstract';
@@ -1010,7 +1008,7 @@ export class AbstractObject3dComponent
 	removeObject3d(object3d: I3JS.IObject3D) {
 		if (object3d !== null && object3d.parent !== null) {
 			object3d.traverse((child) => {
-				if (child instanceof CSS2DObject || child instanceof CSS3DObject) {
+				if (child instanceof THREE.CSS2DObject || child instanceof THREE.CSS3DObject) {
 					if (child.element.parentNode) {
 						child.element.parentNode.removeChild(child.element);
 					}

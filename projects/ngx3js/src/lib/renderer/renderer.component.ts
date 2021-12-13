@@ -16,9 +16,6 @@ import {
 } from '@angular/core';
 import * as GSAP from 'gsap';
 import { Observable, Subject } from 'rxjs';
-import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
-import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer';
-import { SVGRenderer } from 'three/examples/jsm/renderers/SVGRenderer';
 import { CanvasComponent } from '../canvas/canvas.component';
 import { EffectComponent } from '../effect/effect.component';
 import { ControlComponent, ControlOptions } from '../control/control.component';
@@ -1742,9 +1739,9 @@ export class RendererComponent
 	 * Css renderer of renderer component
 	 */
 	private cssRenderer:
-		| CSS3DRenderer
-		| CSS2DRenderer
-		| (CSS3DRenderer | CSS2DRenderer)[] = null;
+		| I3JS.ICSS3DRenderer
+		| I3JS.ICSS2DRenderer
+		| (I3JS.ICSS3DRenderer | I3JS.ICSS2DRenderer)[] = null;
 
 	/**
 	 * Renderer width of renderer component
@@ -1944,18 +1941,18 @@ export class RendererComponent
 				case 'css3drenderer,css2drenderer':
 				case 'css2drenderer,css3drenderer':
 					this.cssRenderer = [];
-					this.cssRenderer.push(new CSS2DRenderer());
-					this.cssRenderer.push(new CSS3DRenderer());
+					this.cssRenderer.push(new THREE.CSS2DRenderer());
+					this.cssRenderer.push(new THREE.CSS3DRenderer());
 					break;
 				case '3d':
 				case 'css3d':
 				case 'css3drenderer':
-					this.cssRenderer = new CSS3DRenderer();
+					this.cssRenderer = new THREE.CSS3DRenderer();
 					break;
 				case '2d':
 				case 'css2d':
 				case 'css2drenderer':
-					this.cssRenderer = new CSS2DRenderer();
+					this.cssRenderer = new THREE.CSS2DRenderer();
 					break;
 				default:
 					this.cssRenderer = null;
@@ -1964,7 +1961,7 @@ export class RendererComponent
 			switch (this.type.toLowerCase()) {
 				case 'svg':
 				case 'svgrenderer':
-					const svgRenderer = new SVGRenderer();
+					const svgRenderer = new THREE.SVGRenderer();
 					if (ThreeUtil.isNotNull(this.quality)) {
 						svgRenderer.setQuality(
 							ThreeUtil.getTypeSafe(this.quality, 'high').toLowerCase()

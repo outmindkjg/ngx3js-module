@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import {
 	BaseComponent,
 	GuiControlParam,
@@ -781,7 +780,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * The Tooltip of chart component
 	 */
-	tooltip: CSS2DObject = null;
+	tooltip: I3JS.ICSS2DObject = null;
 
 	/**
 	 * Tooltip position of chart component

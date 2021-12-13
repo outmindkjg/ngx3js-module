@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Vector2, Vector3 } from 'three';
 export const ShaderLava = {
 	vertexShader: `
   uniform vec2 uvScale;
@@ -42,9 +42,9 @@ export const ShaderLava = {
   `,
 	uniforms: {
 		fogDensity: { value: 0.45 },
-		fogColor: { value: new THREE.Vector3(0, 0, 0) },
+		fogColor: { value: new Vector3(0, 0, 0) },
 		time: { value: 1 },
-		uvScale: { value: new THREE.Vector2(3.0, 1.0) },
+		uvScale: { value: new Vector2(3.0, 1.0) },
 		texture1: { value: null } as any,
 		texture2: { value: null } as any,
 	},

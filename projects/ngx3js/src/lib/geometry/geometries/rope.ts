@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { BufferGeometry, BufferAttribute } from 'three';
 
 /**
  * The Rope geometry.
@@ -7,7 +7,7 @@ import { THREE } from '../../interface';
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/RopeGeometry) page for a live demo.
  *
  */
-export class NgxRopeGeometry extends THREE.BufferGeometry {
+export class NgxRopeGeometry extends BufferGeometry {
 	/**
 	 * The Parameters of rope geometry
 	 */
@@ -36,10 +36,10 @@ export class NgxRopeGeometry extends THREE.BufferGeometry {
 		for (let i = 0; i < widthSegments; i++) {
 			ropeIndices.push(i, i + 1);
 		}
-		this.setIndex(new THREE.BufferAttribute(new Uint16Array(ropeIndices), 1));
+		this.setIndex(new BufferAttribute(new Uint16Array(ropeIndices), 1));
 		this.setAttribute(
 			'position',
-			new THREE.BufferAttribute(new Float32Array(ropePositions), 3)
+			new BufferAttribute(new Float32Array(ropePositions), 3)
 		);
 		this.computeBoundingSphere();
 	}

@@ -1,10 +1,10 @@
-import { I3JS, THREE } from '../interface';
+import { BufferAttribute, BufferGeometry, DoubleSide, FileLoader, Group, Loader, LoadingManager, Mesh, MeshBasicMaterial, Quaternion, RawShaderMaterial, TextureLoader, Vector3 } from 'three';
 import * as fflate from './fflate.module';
 
 
 let _storePath: string = '';
-class TiltLoader extends THREE.Loader {
-	constructor(manager?: I3JS.ILoadingManager, storePath?: string) {
+class TiltLoader extends Loader {
+	constructor(manager?: LoadingManager, storePath?: string) {
 		super(manager);
 		if (storePath) {
 			_storePath = storePath;
@@ -13,13 +13,13 @@ class TiltLoader extends THREE.Loader {
 
 	load(
 		url: string,
-		onLoad: (object: I3JS.IGroup) => void,
+		onLoad: (object: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	) {
 		const scope = this;
 
-		const loader = new THREE.FileLoader(this.manager);
+		const loader = new FileLoader(this.manager);
 		loader.setPath(this.path);
 		loader.setResponseType('arraybuffer');
 		loader.setWithCredentials(this.withCredentials);
@@ -44,8 +44,8 @@ class TiltLoader extends THREE.Loader {
 		);
 	}
 
-	parse(buffer: ArrayBuffer): I3JS.IGroup {
-		const group = new THREE.Group();
+	parse(buffer: ArrayBuffer): Group {
+		const group = new Group();
 		// https://docs.google.com/document/d/11ZsHozYn9FnWG7y3s3WAyKIACfbfwb4PbaS8cZ_xjvo/edit#
 
 		const zip = fflate.unzipSync(new Uint8Array(buffer.slice(16)));
@@ -139,14 +139,14 @@ class TiltLoader extends THREE.Loader {
 			const geometry = new StrokeGeometry(brushes[brush_index]);
 			const material = getMaterial(metadata.BrushIndex[brush_index]);
 
-			group.add(new THREE.Mesh(geometry as any, material));
+			group.add(new Mesh(geometry as any, material));
 		}
 
 		return group;
 	}
 }
 
-class StrokeGeometry extends THREE.BufferGeometry {
+class StrokeGeometry extends BufferGeometry {
 	constructor(strokes: any) {
 		super();
 
@@ -154,16 +154,16 @@ class StrokeGeometry extends THREE.BufferGeometry {
 		const colors = [];
 		const uvs = [];
 
-		const position = new THREE.Vector3();
-		const prevPosition = new THREE.Vector3();
+		const position = new Vector3();
+		const prevPosition = new Vector3();
 
-		const quaternion = new THREE.Quaternion();
-		const prevQuaternion = new THREE.Quaternion();
+		const quaternion = new Quaternion();
+		const prevQuaternion = new Quaternion();
 
-		const vector1 = new THREE.Vector3();
-		const vector2 = new THREE.Vector3();
-		const vector3 = new THREE.Vector3();
-		const vector4 = new THREE.Vector3();
+		const vector1 = new Vector3();
+		const vector2 = new Vector3();
+		const vector3 = new Vector3();
+		const vector4 = new Vector3();
 
 		// size = size / 2;
 
@@ -231,13 +231,13 @@ class StrokeGeometry extends THREE.BufferGeometry {
 
 		this.setAttribute(
 			'position',
-			new THREE.BufferAttribute(new Float32Array(vertices), 3)
+			new BufferAttribute(new Float32Array(vertices), 3)
 		);
 		this.setAttribute(
 			'color',
-			new THREE.BufferAttribute(new Float32Array(colors), 4)
+			new BufferAttribute(new Float32Array(colors), 4)
 		);
-		this.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(uvs), 2));
+		this.setAttribute('uv', new BufferAttribute(new Float32Array(uvs), 2));
 	}
 }
 
@@ -382,7 +382,7 @@ let shaders: any = null;
 
 function getShaders() {
 	if (shaders === null) {
-		const loader = new THREE.TextureLoader().setPath(
+		const loader = new TextureLoader().setPath(
 			_storePath + './textures/tiltbrush/'
 		);
 
@@ -476,10 +476,10 @@ function getMaterial(GUID: any) {
 
 	switch (name) {
 		case 'Light':
-			return new THREE.RawShaderMaterial(getShaders().Light);
+			return new RawShaderMaterial(getShaders().Light);
 
 		default:
-			return new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide });
+			return new MeshBasicMaterial({ vertexColors: true, side: DoubleSide });
 	}
 }
 

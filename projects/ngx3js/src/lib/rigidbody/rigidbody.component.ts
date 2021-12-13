@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { NgxGeometryUtils } from '../geometry/geometryUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import * as Ammo from '../threejs-library/ammo';
+import * as AmmoType from '../threejs-library/ammo-type';
 import { I3JS, RendererTimer, THREE, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
 import { RigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
@@ -25,12 +25,12 @@ export interface RigidbodyType {
 	/**
 	 *
 	 */
-	rigidBodies: Ammo.btRigidBody[];
+	rigidBodies: AmmoType.btRigidBody[];
 
 	/**
 	 *
 	 */
-	softBody: Ammo.btSoftBody;
+	softBody: AmmoType.btSoftBody;
 
 	/**
 	 *
@@ -255,7 +255,7 @@ export class RigidbodyComponent
 	private getBoxHalfExtents(
 		geometry: I3JS.IBufferGeometry,
 		def?: I3JS.IVector3
-	): Ammo.btVector3 {
+	): AmmoType.btVector3 {
 		let boxHalfExtents = ThreeUtil.getVector3Safe(
 			this.width,
 			this.height,
@@ -350,7 +350,7 @@ export class RigidbodyComponent
 	 * @param [def]
 	 * @returns inertia
 	 */
-	private getInertia(def?: number): Ammo.btVector3 {
+	private getInertia(def?: number): AmmoType.btVector3 {
 		const inertia = ThreeUtil.getTypeSafe(this.inertia, def);
 		const inertiaX = ThreeUtil.getTypeSafe(this.inertiaX, 0);
 		const inertiaY = ThreeUtil.getTypeSafe(this.inertiaY, inertia);
@@ -589,12 +589,12 @@ export class RigidbodyComponent
 	/**
 	 * The Ammo of rigidbody component
 	 */
-	private _ammo: Ammo.AmmoType = null;
+	private _ammo: AmmoType.AmmoType = null;
 
 	/**
 	 * The Physics of rigidbody component
 	 */
-	private _physics: Ammo.btSoftRigidDynamicsWorld = null;
+	private _physics: AmmoType.btSoftRigidDynamicsWorld = null;
 
 	/**
 	 * Sets physics
@@ -633,8 +633,8 @@ export class RigidbodyComponent
 	 * @param [index]
 	 * @returns rigid bodies
 	 */
-	private _getRigidBodies(index: number = null): Ammo.btRigidBody[] {
-		const rigidBodies: Ammo.btRigidBody[] = [];
+	private _getRigidBodies(index: number = null): AmmoType.btRigidBody[] {
+		const rigidBodies: AmmoType.btRigidBody[] = [];
 		if (this.rigidBody !== null) {
 			switch (this.rigidBody.type) {
 				case 'rigidbody':
@@ -674,7 +674,7 @@ export class RigidbodyComponent
 		index: number = null
 	) {
 		if (this.rigidBody !== null) {
-			const velocity: Ammo.btVector3 = new this._ammo.btVector3(x, y, z);
+			const velocity: AmmoType.btVector3 = new this._ammo.btVector3(x, y, z);
 			this._getRigidBodies(index).forEach((rigidBody) => {
 				switch (type.toLowerCase()) {
 					case 'angular':
@@ -700,7 +700,7 @@ export class RigidbodyComponent
 		index: number = null
 	): I3JS.IVector3 {
 		if (this.rigidBody !== null) {
-			let velocity: Ammo.btVector3 = null;
+			let velocity: AmmoType.btVector3 = null;
 			this._getRigidBodies(index).forEach((rigidBody) => {
 				switch (type.toLowerCase()) {
 					case 'angular':
@@ -735,7 +735,7 @@ export class RigidbodyComponent
 		index: number = null
 	) {
 		if (this.rigidBody !== null) {
-			const factor: Ammo.btVector3 = new this._ammo.btVector3(x, y, z);
+			const factor: AmmoType.btVector3 = new this._ammo.btVector3(x, y, z);
 			this._getRigidBodies(index).forEach((rigidBody) => {
 				switch (type.toLowerCase()) {
 					case 'angular':
@@ -761,7 +761,7 @@ export class RigidbodyComponent
 		index: number = null
 	): I3JS.IVector3 {
 		if (this.rigidBody !== null) {
-			let factor: Ammo.btVector3 = null;
+			let factor: AmmoType.btVector3 = null;
 			this._getRigidBodies(index).forEach((rigidBody) => {
 				switch (type.toLowerCase()) {
 					case 'angular':
@@ -808,7 +808,7 @@ export class RigidbodyComponent
 		index: number = null
 	) {
 		if (this.rigidBody !== null) {
-			const torque: Ammo.btVector3 = new this._ammo.btVector3(x, y, z);
+			const torque: AmmoType.btVector3 = new this._ammo.btVector3(x, y, z);
 			this._getRigidBodies(index).forEach((rigidBody) => {
 				switch (type.toLowerCase()) {
 					case 'local':
@@ -831,7 +831,7 @@ export class RigidbodyComponent
 	 * @param [index]
 	 * @returns motion state
 	 */
-	public getMotionState(index: number = null): Ammo.btMotionState {
+	public getMotionState(index: number = null): AmmoType.btMotionState {
 		let motionState = null;
 		if (this.rigidBody !== null) {
 			this._getRigidBodies(index).forEach((rigidBody) => {
@@ -846,7 +846,7 @@ export class RigidbodyComponent
 	 * @param motionState
 	 * @param [index]
 	 */
-	public setMotionState(motionState: Ammo.btMotionState, index: number = null) {
+	public setMotionState(motionState: AmmoType.btMotionState, index: number = null) {
 		if (this.rigidBody !== null) {
 			this._getRigidBodies(index).forEach((rigidBody) => {
 				rigidBody.setMotionState(motionState);
@@ -946,7 +946,7 @@ export class RigidbodyComponent
 	 */
 	public setPosition(x: number, y: number, z: number, index: number = null) {
 		if (this.rigidBody !== null) {
-			let rigidBody: Ammo.btRigidBody | Ammo.btSoftBody = null;
+			let rigidBody: AmmoType.btRigidBody | AmmoType.btSoftBody = null;
 			switch (this.rigidBody.type) {
 				case 'rigidbody':
 					if (this.rigidBody.rigidBodies.length > 0) {
@@ -1013,7 +1013,7 @@ export class RigidbodyComponent
 		index: number = null
 	) {
 		if (this.rigidBody !== null) {
-			const force: Ammo.btVector3 = new this._ammo.btVector3(x, y, z);
+			const force: AmmoType.btVector3 = new this._ammo.btVector3(x, y, z);
 			this._getRigidBodies(index).forEach((rigidBody) => {
 				switch (type.toLowerCase()) {
 					case 'centrallocal':
@@ -1024,7 +1024,7 @@ export class RigidbodyComponent
 						break;
 					case 'force':
 					default:
-						const relPos: Ammo.btVector3 = new this._ammo.btVector3(
+						const relPos: AmmoType.btVector3 = new this._ammo.btVector3(
 							relX,
 							relY,
 							relZ
@@ -1254,7 +1254,7 @@ export class RigidbodyComponent
 		posOnlyBufGeometry.setIndex(bufGeometry.getIndex());
 		// Merge the vertices so the triangle soup is converted to indexed triangles
 		const indexedBufferGeom =
-			NgxGeometryUtils.mergeVertices(posOnlyBufGeometry);
+			NgxGeometryUtils.mergeVertices(posOnlyBufGeometry as any);
 		// Create index arrays mapping the indexed vertices to bufGeometry vertices
 		return this._mapIndices(bufGeometry, indexedBufferGeom);
 	}
@@ -1335,13 +1335,13 @@ export class RigidbodyComponent
 	/**
 	 * World info of rigidbody component
 	 */
-	private worldInfo: Ammo.btSoftBodyWorldInfo = null;
+	private worldInfo: AmmoType.btSoftBodyWorldInfo = null;
 
 	/**
 	 * Gets world info
 	 * @returns world info
 	 */
-	public getWorldInfo(): Ammo.btSoftBodyWorldInfo {
+	public getWorldInfo(): AmmoType.btSoftBodyWorldInfo {
 		if (this.worldInfo === null) {
 			this.worldInfo = this._physics.getWorldInfo();
 		}
@@ -1374,8 +1374,8 @@ export class RigidbodyComponent
 				}
 				this.transformAux = new this._ammo.btTransform();
 				this.positionAux = new THREE.Vector3();
-				let shape: Ammo.btCollisionShape = null;
-				let softBody: Ammo.btSoftBody = null;
+				let shape: AmmoType.btCollisionShape = null;
+				let softBody: AmmoType.btSoftBody = null;
 				let type: string = this.type;
 				let geometry: I3JS.IBufferGeometry = null;
 				let ammoIndexAssociation: number[][] = null;
@@ -1434,7 +1434,7 @@ export class RigidbodyComponent
 				switch (type.toLowerCase()) {
 					case 'convextriangle':
 						{
-							const meshInterface: Ammo.btStridingMeshInterface = null;
+							const meshInterface: AmmoType.btStridingMeshInterface = null;
 							const calcAabb: boolean = false;
 							shape = new this._ammo.btConvexTriangleMeshShape(
 								meshInterface,
@@ -1483,7 +1483,7 @@ export class RigidbodyComponent
 						break;
 					case 'multisphere':
 						{
-							const positions: Ammo.btVector3 = null;
+							const positions: AmmoType.btVector3 = null;
 							const radii: ReadonlyArray<number> = null;
 							const numPoints: number = null;
 							shape = new this._ammo.btMultiSphereShape(
@@ -1533,7 +1533,7 @@ export class RigidbodyComponent
 					case 'plane':
 					case 'staticplane':
 						{
-							const planeNormal: Ammo.btVector3 = null;
+							const planeNormal: AmmoType.btVector3 = null;
 							const planeConstant: number = null;
 							shape = new this._ammo.btStaticPlaneShape(
 								planeNormal,
@@ -1543,7 +1543,7 @@ export class RigidbodyComponent
 						break;
 					case 'bvhtriangle':
 						{
-							const meshInterface: Ammo.btStridingMeshInterface = null;
+							const meshInterface: AmmoType.btStridingMeshInterface = null;
 							const useQuantizedAabbCompression: boolean = null;
 							const buildBvh: boolean = null;
 							shape = new this._ammo.btBvhTriangleMeshShape(
@@ -1582,7 +1582,7 @@ export class RigidbodyComponent
 							}
 							const heightScale: number = 1;
 							const upAxis: number = 1;
-							const hdt: Ammo.PHY_ScalarType = 'PHY_FLOAT';
+							const hdt: AmmoType.PHY_ScalarType = 'PHY_FLOAT';
 							const flipQuadEdges: boolean = false;
 							shape = new this._ammo.btHeightfieldTerrainShape(
 								heightStickWidth,
@@ -1667,8 +1667,8 @@ export class RigidbodyComponent
 					case 'ellipsoid':
 					case 'softellipsoid':
 						{
-							const center: Ammo.btVector3 = null;
-							const radius: Ammo.btVector3 = null;
+							const center: AmmoType.btVector3 = null;
+							const radius: AmmoType.btVector3 = null;
 							const res: number = null;
 							softBody = this.physics
 								.getSoftBodyHelpers()
@@ -1678,7 +1678,7 @@ export class RigidbodyComponent
 					case 'softconvex':
 					case 'softconvexhull':
 						{
-							const vertices: Ammo.btVector3 = null;
+							const vertices: AmmoType.btVector3 = null;
 							const nvertices: number = null;
 							const randomizeConstraints: boolean = null;
 							softBody = this.physics
@@ -1837,7 +1837,7 @@ export class RigidbodyComponent
 					shape.calculateLocalInertia(mass, localInertia);
 					if (this.object3d instanceof THREE.InstancedMesh) {
 						const array = this.object3d.instanceMatrix.array as [];
-						const bodies: Ammo.btRigidBody[] = [];
+						const bodies: AmmoType.btRigidBody[] = [];
 						for (let i = 0; i < this.object3d.count; i++) {
 							const index = i * 16;
 							const transform = new this._ammo.btTransform();
@@ -1966,7 +1966,7 @@ export class RigidbodyComponent
 	/**
 	 * Transform aux of rigidbody component
 	 */
-	private transformAux: Ammo.btTransform = null;
+	private transformAux: AmmoType.btTransform = null;
 
 	/**
 	 * Position aux of rigidbody component
@@ -1981,8 +1981,8 @@ export class RigidbodyComponent
 	 * @param index
 	 */
 	private _instancedMeshCompose(
-		position: Ammo.btVector3,
-		quaternion: Ammo.btQuaternion,
+		position: AmmoType.btVector3,
+		quaternion: AmmoType.btQuaternion,
 		array: number[],
 		index: number
 	) {

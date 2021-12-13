@@ -1,87 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ColladaExporter } from 'three/examples/jsm/exporters/ColladaExporter';
-import { DRACOExporter } from 'three/examples/jsm/exporters/DRACOExporter';
-import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
-import { MMDExporter } from 'three/examples/jsm/exporters/MMDExporter';
-import { OBJExporter } from 'three/examples/jsm/exporters/OBJExporter';
-import { PLYExporter } from 'three/examples/jsm/exporters/PLYExporter';
-import { STLExporter } from 'three/examples/jsm/exporters/STLExporter';
-import { USDZExporter } from 'three/examples/jsm/exporters/USDZExporter';
-import { Rhino3dmLoader } from 'three/examples/jsm/loaders/3DMLoader';
-import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
-import { AMFLoader } from 'three/examples/jsm/loaders/AMFLoader';
-import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader';
-import { BVHLoader } from 'three/examples/jsm/loaders/BVHLoader';
 import {
-	Collada,
-	ColladaLoader,
-} from 'three/examples/jsm/loaders/ColladaLoader';
-import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-import { GCodeLoader } from 'three/examples/jsm/loaders/GCodeLoader';
-import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader';
-import { IFCLoader, IFCModel } from 'three/examples/jsm/loaders/IFCLoader';
-import { KMZLoader } from 'three/examples/jsm/loaders/KMZLoader';
-import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
-import { KTXLoader } from 'three/examples/jsm/loaders/KTXLoader';
-import { LDrawLoader } from 'three/examples/jsm/loaders/LDrawLoader';
-import { LottieLoader } from 'three/examples/jsm/loaders/LottieLoader';
-import { LUT3dlLoader } from 'three/examples/jsm/loaders/LUT3dlLoader';
-import {
-	LUTCubeLoader,
-	LUTCubeResult,
-} from 'three/examples/jsm/loaders/LUTCubeLoader';
-import { LWO, LWOLoader } from 'three/examples/jsm/loaders/LWOLoader';
-import { MD2Loader } from 'three/examples/jsm/loaders/MD2Loader';
-import { MDD, MDDLoader } from 'three/examples/jsm/loaders/MDDLoader';
-import {
-	MMDLoader,
-	MMDLoaderAnimationObject,
-} from 'three/examples/jsm/loaders/MMDLoader';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-import { NRRDLoader } from 'three/examples/jsm/loaders/NRRDLoader';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader';
-import { PDB, PDBLoader } from 'three/examples/jsm/loaders/PDBLoader';
-import { PLYLoader } from 'three/examples/jsm/loaders/PLYLoader';
-import { PRWMLoader } from 'three/examples/jsm/loaders/PRWMLoader';
-import { PVRLoader } from 'three/examples/jsm/loaders/PVRLoader';
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
-import { RGBMLoader } from 'three/examples/jsm/loaders/RGBMLoader';
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
-import { SVGLoader, SVGResult } from 'three/examples/jsm/loaders/SVGLoader';
-import { TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
-import { TGALoader } from 'three/examples/jsm/loaders/TGALoader';
-import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
-import {
-	Chunk,
-	VOXLoader,
-	VOXMesh,
-} from 'three/examples/jsm/loaders/VOXLoader';
-import { VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoader';
-import { VRMLoader } from 'three/examples/jsm/loaders/VRMLoader';
-import { VTKLoader } from 'three/examples/jsm/loaders/VTKLoader';
-import { XYZLoader } from 'three/examples/jsm/loaders/XYZLoader';
-import { MD2Character } from 'three/examples/jsm/misc/MD2Character';
-import { MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex';
-import { Volume } from 'three/examples/jsm/misc/Volume';
-import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
-import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
-import {
-	I3JS,
 	LoadedNameMap,
 	LoadedObject,
 	StorageExportOption,
 	StorageOption,
+	I3JS,
 	THREE,
 	ThreeUtil,
 } from './interface';
-import { MeshoptDecoder } from './threejs-library/meshopt_decoder.module';
-import { TiltLoader } from './threejs-library/TiltLoader';
 
 /**
  * Local Storage Service
@@ -138,237 +64,237 @@ export class LocalStorageService {
 	/**
 	 * Obj loader of local storage service
 	 */
-	private objLoader: OBJLoader = null;
+	private objLoader: I3JS.IOBJLoader = null;
 
 	/**
 	 * Collada loader of local storage service
 	 */
-	private colladaLoader: ColladaLoader = null;
+	private colladaLoader: I3JS.IColladaLoader = null;
 
 	/**
 	 * Stl loader of local storage service
 	 */
-	private stlLoader: STLLoader = null;
+	private stlLoader: I3JS.ISTLLoader = null;
 
 	/**
 	 * Vtk loader of local storage service
 	 */
-	private vtkLoader: VTKLoader = null;
+	private vtkLoader: I3JS.IVTKLoader = null;
 
 	/**
 	 * Pdb loader of local storage service
 	 */
-	private pdbLoader: PDBLoader = null;
+	private pdbLoader: I3JS.IPDBLoader = null;
 
 	/**
 	 * Ply loader of local storage service
 	 */
-	private plyLoader: PLYLoader = null;
+	private plyLoader: I3JS.IPLYLoader = null;
 
 	/**
 	 * Rhino3dm loader of local storage service
 	 */
-	private rhino3dmLoader: Rhino3dmLoader = null;
+	private rhino3dmLoader: I3JS.IRhino3dmLoader = null;
 
 	/**
 	 * Basis texture loader of local storage service
 	 */
-	private basisTextureLoader: BasisTextureLoader = null;
+	private basisTextureLoader: I3JS.IBasisTextureLoader = null;
 
 	/**
 	 * Draco loader of local storage service
 	 */
-	private dracoLoader: DRACOLoader = null;
+	private dracoLoader: I3JS.IDRACOLoader = null;
 
 	/**
 	 * Gltf loader of local storage service
 	 */
-	private gltfLoader: GLTFLoader = null;
+	private gltfLoader: I3JS.IGLTFLoader = null;
 
 	/**
 	 * Mmd loader of local storage service
 	 */
-	private mmdLoader: MMDLoader = null;
+	private mmdLoader: I3JS.IMMDLoader = null;
 
 	/**
 	 * Mtl loader of local storage service
 	 */
-	private mtlLoader: MTLLoader = null;
+	private mtlLoader: I3JS.IMTLLoader = null;
 
 	/**
 	 * Pcd loader of local storage service
 	 */
-	private pcdLoader: PCDLoader = null;
+	private pcdLoader: I3JS.IPCDLoader = null;
 
 	/**
 	 * Prwm loader of local storage service
 	 */
-	private prwmLoader: PRWMLoader = null;
+	private prwmLoader: I3JS.IPRWMLoader = null;
 
 	/**
 	 * Svg loader of local storage service
 	 */
-	private svgLoader: SVGLoader = null;
+	private svgLoader: I3JS.ISVGLoader = null;
 
 	/**
 	 * Tga loader of local storage service
 	 */
-	private tgaLoader: TGALoader = null;
+	private tgaLoader: I3JS.ITGALoader = null;
 
 	/**
 	 * Md2 loader of local storage service
 	 */
-	private md2Loader: MD2Loader = null;
+	private md2Loader: I3JS.IMD2Loader = null;
 
 	/**
 	 * Amf loader of local storage service
 	 */
-	private amfLoader: AMFLoader = null;
+	private amfLoader: I3JS.IAMFLoader = null;
 
 	/**
 	 * Bvh loader of local storage service
 	 */
-	private bvhLoader: BVHLoader = null;
+	private bvhLoader: I3JS.IBVHLoader = null;
 
 	/**
 	 * Dds loader of local storage service
 	 */
-	private ddsLoader: DDSLoader = null;
+	private ddsLoader: I3JS.IDDSLoader = null;
 
 	/**
 	 * Exr loader of local storage service
 	 */
-	private exrLoader: EXRLoader = null;
+	private exrLoader: I3JS.IEXRLoader = null;
 
 	/**
 	 * Fbx loader of local storage service
 	 */
-	private fbxLoader: FBXLoader = null;
+	private fbxLoader: I3JS.IFBXLoader = null;
 
 	/**
 	 * G code loader of local storage service
 	 */
-	private gCodeLoader: GCodeLoader = null;
+	private gCodeLoader: I3JS.IGCodeLoader = null;
 
 	/**
 	 * Hdr cube texture loader of local storage service
 	 */
-	private hdrCubeTextureLoader: HDRCubeTextureLoader = null;
+	private hdrCubeTextureLoader: I3JS.IHDRCubeTextureLoader = null;
 
 	/**
 	 * Kmz loader of local storage service
 	 */
-	private kmzLoader: KMZLoader = null;
+	private kmzLoader: I3JS.IKMZLoader = null;
 
 	/**
 	 * Ktx2 loader of local storage service
 	 */
-	private ktx2Loader: KTX2Loader = null;
+	private ktx2Loader: I3JS.IKTX2Loader = null;
 
 	/**
 	 * Ktx loader of local storage service
 	 */
-	private ktxLoader: KTXLoader = null;
+	private ktxLoader: I3JS.IKTXLoader = null;
 
 	/**
 	 * Determines whether draw loader l
 	 */
-	private lDrawLoader: LDrawLoader = null;
+	private lDrawLoader: I3JS.ILDrawLoader = null;
 
 	/**
 	 * Lottie loader of local storage service
 	 */
-	private lottieLoader: LottieLoader = null;
+	private lottieLoader: I3JS.ILottieLoader = null;
 
 	/**
 	 * Lut3dl loader of local storage service
 	 */
-	private lut3dlLoader: LUT3dlLoader = null;
+	private lut3dlLoader: I3JS.ILUT3dlLoader = null;
 
 	/**
 	 * Lut cube loader of local storage service
 	 */
-	private lutCubeLoader: LUTCubeLoader = null;
+	private lutCubeLoader: I3JS.ILUTCubeLoader = null;
 
 	/**
 	 * Ifc loader of local storage service
 	 */
-	private ifcLoader: IFCLoader = null;
+	private ifcLoader: I3JS.IIFCLoader = null;
 
 	/**
 	 * Vox loader of local storage service
 	 */
-	private voxLoader: VOXLoader = null;
+	private voxLoader: I3JS.IVOXLoader = null;
 
 	/**
 	 * The Chunk of local storage service
 	 */
-	private _chunk: Chunk = null;
+	private _chunk: I3JS.IChunk = null;
 
 	/**
 	 * Lwo loader of local storage service
 	 */
-	private lwoLoader: LWOLoader = null;
+	private lwoLoader: I3JS.ILWOLoader = null;
 
 	/**
 	 * Mdd loader of local storage service
 	 */
-	private mddLoader: MDDLoader = null;
+	private mddLoader: I3JS.IMDDLoader = null;
 
 	/**
 	 * Nrrd loader of local storage service
 	 */
-	private nrrdLoader: NRRDLoader = null;
+	private nrrdLoader: I3JS.INRRDLoader = null;
 
 	/**
 	 * Pvr loader of local storage service
 	 */
-	private pvrLoader: PVRLoader = null;
+	private pvrLoader: I3JS.IPVRLoader = null;
 
 	/**
 	 * Rgbe loader of local storage service
 	 */
-	private rgbeLoader: RGBELoader = null;
+	private rgbeLoader: I3JS.IRGBELoader = null;
 
 	/**
 	 * Tds loader of local storage service
 	 */
-	private tdsLoader: TDSLoader = null;
+	private tdsLoader: I3JS.ITDSLoader = null;
 
 	/**
 	 * Tilt loader of local storage service
 	 */
-	private tiltLoader: TiltLoader = null;
+	private tiltLoader: I3JS.ITiltLoader = null;
 
 	/**
 	 * Rgbm loader of local storage service
 	 */
-	private rgbmLoader: RGBMLoader = null;
+	private rgbmLoader: I3JS.IRGBMLoader = null;
 
 	/**
 	 * Ttf loader of local storage service
 	 */
-	private ttfLoader: TTFLoader = null;
+	private ttfLoader: I3JS.ITTFLoader = null;
 
 	/**
 	 * Vrml loader of local storage service
 	 */
-	private vrmlLoader: VRMLLoader = null;
+	private vrmlLoader: I3JS.IVRMLLoader = null;
 
 	/**
 	 * Vrm loader of local storage service
 	 */
-	private vrmLoader: VRMLoader = null;
+	private vrmLoader: I3JS.IVRMLoader = null;
 
 	/**
 	 * Xyz loader of local storage service
 	 */
-	private xyzLoader: XYZLoader = null;
+	private xyzLoader: I3JS.IXYZLoader = null;
 
 	/**
 	 * Three mfloader of local storage service
 	 */
-	private threeMFLoader: ThreeMFLoader = null;
+	private threeMFLoader: I3JS.IThreeMFLoader = null;
 
 	/**
 	 * Gets store url list
@@ -433,42 +359,42 @@ export class LocalStorageService {
 	/**
 	 * Collada exporter of local storage service
 	 */
-	private colladaExporter: ColladaExporter = null;
+	private colladaExporter: I3JS.IColladaExporter = null;
 
 	/**
 	 * Obj exporter of local storage service
 	 */
-	private objExporter: OBJExporter = null;
+	private objExporter: I3JS.IOBJExporter = null;
 
 	/**
 	 * Draco exporter of local storage service
 	 */
-	private dracoExporter: DRACOExporter = null;
+	private dracoExporter: I3JS.IDRACOExporter = null;
 
 	/**
 	 * Gltf exporter of local storage service
 	 */
-	private gltfExporter: GLTFExporter = null;
+	private gltfExporter: I3JS.IGLTFExporter = null;
 
 	/**
 	 * Mmd exporter of local storage service
 	 */
-	private mmdExporter: MMDExporter = null;
+	private mmdExporter: I3JS.IMMDExporter = null;
 
 	/**
 	 * Ply exporter of local storage service
 	 */
-	private plyExporter: PLYExporter = null;
+	private plyExporter: I3JS.IPLYExporter = null;
 
 	/**
 	 * Usdz exporter of local storage service
 	 */
-	private usdzExporter: USDZExporter = null;
+	private usdzExporter: I3JS.IUSDZExporter = null;
 
 	/**
 	 * Stl exporter of local storage service
 	 */
-	private stlExporter: STLExporter = null;
+	private stlExporter: I3JS.ISTLExporter = null;
 
 	/**
 	 * Gets export object
@@ -502,11 +428,11 @@ export class LocalStorageService {
 		}
 		if (fileName.endsWith('.dae')) {
 			if (this.colladaExporter === null) {
-				this.colladaExporter = new ColladaExporter();
+				this.colladaExporter = new THREE.ColladaExporter();
 			}
 			if (object instanceof THREE.Object3D) {
 				this.colladaExporter.parse(
-					object as any,
+					object,
 					(res) => {
 						this.saveString(res.data, fileName);
 						res.textures.forEach((tex: any) => {
@@ -518,7 +444,7 @@ export class LocalStorageService {
 			}
 		} else if (fileName.endsWith('.drc')) {
 			if (this.dracoExporter === null) {
-				this.dracoExporter = new DRACOExporter();
+				this.dracoExporter = new THREE.DRACOExporter();
 			}
 			if (object instanceof THREE.Mesh || object instanceof THREE.Points) {
 				const result = this.dracoExporter.parse(object as any, {});
@@ -526,7 +452,7 @@ export class LocalStorageService {
 			}
 		} else if (fileName.endsWith('.usdz')) {
 			if (this.usdzExporter === null) {
-				this.usdzExporter = new USDZExporter();
+				this.usdzExporter = new THREE.USDZExporter();
 			}
 			if (object instanceof THREE.Object3D) {
 				this.usdzExporter.parse(object as any).then((result) => {
@@ -535,7 +461,7 @@ export class LocalStorageService {
 			}
 		} else if (fileName.endsWith('.gltf') || fileName.endsWith('.glb')) {
 			if (this.gltfExporter === null) {
-				this.gltfExporter = new GLTFExporter();
+				this.gltfExporter = new THREE.GLTFExporter();
 			}
 			const fileNameOnly = fileName.substr(0, fileName.lastIndexOf('.'));
 			this.gltfExporter.parse(
@@ -552,13 +478,13 @@ export class LocalStorageService {
 			);
 		} else if (fileName.endsWith('.obj')) {
 			if (this.objExporter === null) {
-				this.objExporter = new OBJExporter();
+				this.objExporter = new THREE.OBJExporter();
 			}
 			const result = this.objExporter.parse(object as any);
 			this.saveString(result, fileName);
 		} else if (fileName.endsWith('.ply')) {
 			if (this.plyExporter === null) {
-				this.plyExporter = new PLYExporter();
+				this.plyExporter = new THREE.PLYExporter();
 			}
 			this.plyExporter.parse(
 				object as any,
@@ -573,7 +499,7 @@ export class LocalStorageService {
 			);
 		} else if (fileName.endsWith('.stl')) {
 			if (this.stlExporter === null) {
-				this.stlExporter = new STLExporter();
+				this.stlExporter = new THREE.STLExporter();
 			}
 			const result: any = this.stlExporter.parse(object as any, options);
 			if (result instanceof ArrayBuffer) {
@@ -588,7 +514,7 @@ export class LocalStorageService {
 			fileName.endsWith('.vpd')
 		) {
 			if (this.mmdExporter === null) {
-				this.mmdExporter = new MMDExporter();
+				this.mmdExporter = new THREE.MMDExporter();
 			}
 			const result: any = this.mmdExporter.parseVpd(
 				object as any,
@@ -602,7 +528,7 @@ export class LocalStorageService {
 			}
 		} else if (fileName.endsWith('.usdz')) {
 			if (this.usdzExporter === null) {
-				this.usdzExporter = new USDZExporter();
+				this.usdzExporter = new THREE.USDZExporter();
 			}
 			const result: any = this.usdzExporter.parse(object as any);
 			if (result instanceof ArrayBuffer) {
@@ -815,10 +741,10 @@ export class LocalStorageService {
 	): void {
 		if (key.endsWith('.dae')) {
 			if (this.colladaLoader === null) {
-				this.colladaLoader = new ColladaLoader(ThreeUtil.getLoadingManager());
+				this.colladaLoader = new THREE.ColladaLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.colladaLoader as any, options);
-			this.colladaLoader.load(key, (result: Collada) => {
+			this.colladaLoader.load(key, (result) => {
 				callBack({
 					object: result.scene as any,
 					clips: result.scene.animations,
@@ -827,7 +753,7 @@ export class LocalStorageService {
 			});
 		} else if (key.endsWith('.obj')) {
 			if (this.objLoader === null) {
-				this.objLoader = new OBJLoader(ThreeUtil.getLoadingManager());
+				this.objLoader = new THREE.OBJLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.objLoader as any, options);
 			const materialUrl: string = options.material ? options.material : null;
@@ -868,12 +794,12 @@ export class LocalStorageService {
 			}
 		} else if (key.endsWith('.mtl')) {
 			if (this.mtlLoader === null) {
-				this.mtlLoader = new MTLLoader(ThreeUtil.getLoadingManager());
+				this.mtlLoader = new THREE.MTLLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.mtlLoader as any, options);
 			this.mtlLoader.load(
 				key,
-				(materials: MTLLoader.MaterialCreator) => {
+				(materials) => {
 					materials.preload();
 					callBack({
 						material: materials,
@@ -885,7 +811,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.3ds')) {
 			if (this.tdsLoader === null) {
-				this.tdsLoader = new TDSLoader(ThreeUtil.getLoadingManager());
+				this.tdsLoader = new THREE.TDSLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.tdsLoader as any, options);
 			this.tdsLoader.load(
@@ -901,7 +827,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.tilt')) {
 			if (this.tiltLoader === null) {
-				this.tiltLoader = new TiltLoader(
+				this.tiltLoader = new THREE.TiltLoader(
 					ThreeUtil.getLoadingManager(),
 					ThreeUtil.getStoreUrl('')
 				);
@@ -920,7 +846,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.amf')) {
 			if (this.amfLoader === null) {
-				this.amfLoader = new AMFLoader(ThreeUtil.getLoadingManager());
+				this.amfLoader = new THREE.AMFLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.amfLoader as any, options);
 			this.amfLoader.load(
@@ -936,15 +862,15 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.vox')) {
 			if (this.voxLoader === null) {
-				this.voxLoader = new VOXLoader(ThreeUtil.getLoadingManager());
+				this.voxLoader = new THREE.VOXLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.voxLoader as any, options);
 			this.voxLoader.load(
 				key,
-				(chunks: Chunk[]) => {
+				(chunks) => {
 					const object3d = new THREE.Group();
 					chunks.forEach((chunk) => {
-						object3d.add(new VOXMesh(chunk) as any);
+						object3d.add(new THREE.VOXMesh(chunk) as any);
 					});
 					callBack({
 						object: object3d,
@@ -956,7 +882,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.exr')) {
 			if (this.exrLoader === null) {
-				this.exrLoader = new EXRLoader(ThreeUtil.getLoadingManager());
+				this.exrLoader = new THREE.EXRLoader(ThreeUtil.getLoadingManager());
 				this.exrLoader.setDataType(THREE.UnsignedByteType);
 			}
 			this.setLoaderWithOption(this.exrLoader as any, options);
@@ -973,7 +899,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.pvr')) {
 			if (this.pvrLoader === null) {
-				this.pvrLoader = new PVRLoader(ThreeUtil.getLoadingManager());
+				this.pvrLoader = new THREE.PVRLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.pvrLoader as any, options);
 			this.pvrLoader.load(
@@ -989,7 +915,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.hdr')) {
 			if (this.rgbeLoader === null) {
-				this.rgbeLoader = new RGBELoader(ThreeUtil.getLoadingManager());
+				this.rgbeLoader = new THREE.RGBELoader(ThreeUtil.getLoadingManager());
 				this.rgbeLoader.setDataType(THREE.UnsignedByteType);
 			}
 			this.setLoaderWithOption(this.rgbeLoader as any, options);
@@ -1006,7 +932,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.ktx')) {
 			if (this.ktxLoader === null) {
-				this.ktxLoader = new KTXLoader(ThreeUtil.getLoadingManager());
+				this.ktxLoader = new THREE.KTXLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.ktxLoader as any, options);
 			this.ktxLoader.load(
@@ -1022,7 +948,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.ifc')) {
 			if (this.ifcLoader === null) {
-				this.ifcLoader = new IFCLoader(ThreeUtil.getLoadingManager());
+				this.ifcLoader = new THREE.IFCLoader(ThreeUtil.getLoadingManager());
 				this.ifcLoader.ifcManager.setWasmPath(
 					ThreeUtil.getStoreUrl('jsm/loaders/ifc/')
 				);
@@ -1030,7 +956,7 @@ export class LocalStorageService {
 			this.setLoaderWithOption(this.ifcLoader as any, options);
 			this.ifcLoader.load(
 				key,
-				(ifc: IFCModel) => {
+				(ifc) => {
 					callBack({
 						object: ifc as any,
 						source: ifc,
@@ -1041,7 +967,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.ktx2')) {
 			if (this.ktx2Loader === null) {
-				this.ktx2Loader = new KTX2Loader(ThreeUtil.getLoadingManager());
+				this.ktx2Loader = new THREE.KTX2Loader(ThreeUtil.getLoadingManager());
 				this.ktx2Loader.setTranscoderPath(
 					ThreeUtil.getStoreUrl('js/libs/basis/')
 				);
@@ -1060,7 +986,7 @@ export class LocalStorageService {
 			}
 		} else if (key.endsWith('.dds')) {
 			if (this.ddsLoader === null) {
-				this.ddsLoader = new DDSLoader(ThreeUtil.getLoadingManager());
+				this.ddsLoader = new THREE.DDSLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.ddsLoader as any, options);
 			this.ddsLoader.load(
@@ -1076,7 +1002,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.bvh')) {
 			if (this.bvhLoader === null) {
-				this.bvhLoader = new BVHLoader(ThreeUtil.getLoadingManager());
+				this.bvhLoader = new THREE.BVHLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.bvhLoader as any, options);
 			this.bvhLoader.load(
@@ -1103,7 +1029,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.fbx')) {
 			if (this.fbxLoader === null) {
-				this.fbxLoader = new FBXLoader(ThreeUtil.getLoadingManager());
+				this.fbxLoader = new THREE.FBXLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.fbxLoader as any, options);
 			this.fbxLoader.load(
@@ -1120,7 +1046,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.kmz')) {
 			if (this.kmzLoader === null) {
-				this.kmzLoader = new KMZLoader(ThreeUtil.getLoadingManager());
+				this.kmzLoader = new THREE.KMZLoader(ThreeUtil.getLoadingManager());
 			}
 			if (options.resourcePath) {
 				this.kmzLoader.setResourcePath(
@@ -1129,7 +1055,7 @@ export class LocalStorageService {
 			}
 			this.kmzLoader.load(
 				key,
-				(object: Collada) => {
+				(object) => {
 					callBack({
 						object: object.scene as any,
 						source: object,
@@ -1140,7 +1066,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.lwo')) {
 			if (this.lwoLoader === null) {
-				this.lwoLoader = new LWOLoader(ThreeUtil.getLoadingManager());
+				this.lwoLoader = new THREE.LWOLoader(ThreeUtil.getLoadingManager());
 			}
 			if (options.resourcePath) {
 				this.lwoLoader.setResourcePath(
@@ -1149,7 +1075,7 @@ export class LocalStorageService {
 			}
 			this.lwoLoader.load(
 				key,
-				(object: LWO) => {
+				(object) => {
 					const mesh = new THREE.Group();
 					object.meshes.forEach((obj) => {
 						mesh.add(obj as any);
@@ -1164,7 +1090,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.mpd')) {
 			if (this.lDrawLoader === null) {
-				this.lDrawLoader = new LDrawLoader(ThreeUtil.getLoadingManager());
+				this.lDrawLoader = new THREE.LDrawLoader(ThreeUtil.getLoadingManager());
 			}
 			if (options.resourcePath) {
 				this.lDrawLoader.setResourcePath(
@@ -1184,7 +1110,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.gcode')) {
 			if (this.gCodeLoader === null) {
-				this.gCodeLoader = new GCodeLoader(ThreeUtil.getLoadingManager());
+				this.gCodeLoader = new THREE.GCodeLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.gCodeLoader as any, options);
 			this.gCodeLoader.load(
@@ -1201,7 +1127,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.3mf')) {
 			if (this.threeMFLoader === null) {
-				this.threeMFLoader = new ThreeMFLoader(ThreeUtil.getLoadingManager());
+				this.threeMFLoader = new THREE.ThreeMFLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.threeMFLoader as any, options);
 			this.threeMFLoader.load(
@@ -1217,7 +1143,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.3dm')) {
 			if (this.rhino3dmLoader === null) {
-				this.rhino3dmLoader = new Rhino3dmLoader(ThreeUtil.getLoadingManager());
+				this.rhino3dmLoader = new THREE.Rhino3dmLoader(ThreeUtil.getLoadingManager());
 				this.rhino3dmLoader.setLibraryPath(
 					ThreeUtil.getStoreUrl('jsm/libs/rhino3dm/')
 				);
@@ -1232,7 +1158,7 @@ export class LocalStorageService {
 			});
 		} else if (key.endsWith('.basis')) {
 			if (this.basisTextureLoader === null) {
-				this.basisTextureLoader = new BasisTextureLoader(
+				this.basisTextureLoader = new THREE.BasisTextureLoader(
 					ThreeUtil.getLoadingManager()
 				);
 				this.basisTextureLoader.setTranscoderPath(
@@ -1254,7 +1180,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.drc')) {
 			if (this.dracoLoader === null) {
-				this.dracoLoader = new DRACOLoader(ThreeUtil.getLoadingManager());
+				this.dracoLoader = new THREE.DRACOLoader(ThreeUtil.getLoadingManager());
 				this.dracoLoader.setDecoderPath(
 					ThreeUtil.getStoreUrl('js/libs/draco/')
 				);
@@ -1274,13 +1200,13 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.gltf') || key.endsWith('.glb')) {
 			if (this.gltfLoader === null) {
-				this.gltfLoader = new GLTFLoader(ThreeUtil.getLoadingManager());
+				this.gltfLoader = new THREE.GLTFLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.gltfLoader as any, options);
 			if (options) {
 				if (options.useDraco) {
 					if (this.dracoLoader === null) {
-						this.dracoLoader = new DRACOLoader(ThreeUtil.getLoadingManager());
+						this.dracoLoader = new THREE.DRACOLoader(ThreeUtil.getLoadingManager());
 						this.dracoLoader.setDecoderPath(
 							ThreeUtil.getStoreUrl('js/libs/draco/')
 						);
@@ -1289,19 +1215,19 @@ export class LocalStorageService {
 				}
 				if (options.useKtx2) {
 					if (this.ktx2Loader === null) {
-						this.ktx2Loader = new KTX2Loader(ThreeUtil.getLoadingManager());
+						this.ktx2Loader = new THREE.KTX2Loader(ThreeUtil.getLoadingManager());
 						this.ktx2Loader.setTranscoderPath(
 							ThreeUtil.getStoreUrl('js/libs/basis/')
 						);
 						this.ktx2Loader.detectSupport(ThreeUtil.getRenderer() as any);
 					}
 					this.gltfLoader.setKTX2Loader(this.ktx2Loader);
-					this.gltfLoader.setMeshoptDecoder(MeshoptDecoder);
+					this.gltfLoader.setMeshoptDecoder(THREE.MeshoptDecoder);
 				}
 			}
 			this.gltfLoader.load(
 				key,
-				(result: GLTF) => {
+				(result) => {
 					callBack({
 						object: this.getStoreObject(result.scene as any, options),
 						clips: result.animations,
@@ -1317,7 +1243,7 @@ export class LocalStorageService {
 			key.endsWith('.vpd')
 		) {
 			if (this.mmdLoader === null) {
-				this.mmdLoader = new MMDLoader(ThreeUtil.getLoadingManager());
+				this.mmdLoader = new THREE.MMDLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.mmdLoader as any, options);
 			const vmdUrl = options && options.vmdUrl ? options.vmdUrl : null;
@@ -1325,7 +1251,7 @@ export class LocalStorageService {
 				this.mmdLoader.loadWithAnimation(
 					key,
 					this.getStoreUrlList(vmdUrl),
-					(result: MMDLoaderAnimationObject) => {
+					(result) => {
 						callBack({
 							object: this.getStoreObject(result.mesh as any, options),
 							clips: result.animation ? [result.animation] : null,
@@ -1369,7 +1295,7 @@ export class LocalStorageService {
 			}
 		} else if (key.endsWith('.pcd')) {
 			if (this.pcdLoader === null) {
-				this.pcdLoader = new PCDLoader(ThreeUtil.getLoadingManager());
+				this.pcdLoader = new THREE.PCDLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.pcdLoader as any, options);
 			this.pcdLoader.load(
@@ -1385,7 +1311,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.prwm')) {
 			if (this.prwmLoader === null) {
-				this.prwmLoader = new PRWMLoader(ThreeUtil.getLoadingManager());
+				this.prwmLoader = new THREE.PRWMLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.prwmLoader as any, options);
 			this.prwmLoader.load(
@@ -1401,7 +1327,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.tga')) {
 			if (this.tgaLoader === null) {
-				this.tgaLoader = new TGALoader(ThreeUtil.getLoadingManager());
+				this.tgaLoader = new THREE.TGALoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.tgaLoader as any, options);
 			this.tgaLoader.load(key, (texture) => {
@@ -1412,12 +1338,12 @@ export class LocalStorageService {
 			});
 		} else if (key.endsWith('.svg')) {
 			if (this.svgLoader === null) {
-				this.svgLoader = new SVGLoader(ThreeUtil.getLoadingManager());
+				this.svgLoader = new THREE.SVGLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.svgLoader as any, options);
 			this.svgLoader.load(
 				key,
-				(data: SVGResult) => {
+				(data) => {
 					const paths = data.paths;
 					const group = new THREE.Group();
 					const drawFillShapes = options.drawFillShapes || false;
@@ -1461,7 +1387,7 @@ export class LocalStorageService {
 								wireframe: strokesWireframe,
 							});
 							path.subPaths.forEach((subPath) => {
-								const geometry = SVGLoader.pointsToStroke(
+								const geometry = THREE.SVGLoader.pointsToStroke(
 									subPath.getPoints(),
 									path.userData.style
 								);
@@ -1482,7 +1408,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.ply')) {
 			if (this.plyLoader === null) {
-				this.plyLoader = new PLYLoader(ThreeUtil.getLoadingManager());
+				this.plyLoader = new THREE.PLYLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.plyLoader as any, options);
 			this.plyLoader.load(
@@ -1498,7 +1424,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.vtk') || key.endsWith('.vtp')) {
 			if (this.vtkLoader === null) {
-				this.vtkLoader = new VTKLoader(ThreeUtil.getLoadingManager());
+				this.vtkLoader = new THREE.VTKLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.vtkLoader as any, options);
 			this.vtkLoader.load(
@@ -1514,12 +1440,12 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.mdd')) {
 			if (this.mddLoader === null) {
-				this.mddLoader = new MDDLoader(ThreeUtil.getLoadingManager());
+				this.mddLoader = new THREE.MDDLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.mddLoader as any, options);
 			this.mddLoader.load(
 				key,
-				(mdd: MDD) => {
+				(mdd) => {
 					callBack({
 						clips: [mdd.clip],
 						morphTargets: mdd.morphTargets as any,
@@ -1531,11 +1457,11 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.nrrd')) {
 			if (this.nrrdLoader === null) {
-				this.nrrdLoader = new NRRDLoader(ThreeUtil.getLoadingManager());
+				this.nrrdLoader = new THREE.NRRDLoader(ThreeUtil.getLoadingManager());
 			}
 			this.nrrdLoader.load(
 				key,
-				(volume: Volume) => {
+				(volume) => {
 					const group = new THREE.Group();
 					const geometry = new THREE.BoxGeometry(
 						volume.xLength,
@@ -1587,7 +1513,7 @@ export class LocalStorageService {
 		} else if (key.endsWith('.md2')) {
 			const optionType = (options.type || '').toLowerCase();
 			if (optionType === 'md2character') {
-				const character = new MD2Character();
+				const character = new THREE.MD2Character();
 				options.baseUrl = ThreeUtil.getStoreUrl(options.baseUrl);
 				if (ThreeUtil.isNull(options.body)) {
 					options.body = key;
@@ -1601,7 +1527,7 @@ export class LocalStorageService {
 				};
 				character.loadParts(options as any);
 			} else if (optionType === 'md2charactercomplex') {
-				const character = new MD2CharacterComplex();
+				const character = new THREE.MD2CharacterComplex();
 				options.baseUrl = ThreeUtil.getStoreUrl(options.baseUrl);
 				if (ThreeUtil.isNull(options.body)) {
 					options.body = key;
@@ -1616,7 +1542,7 @@ export class LocalStorageService {
 				character.loadParts(options);
 			} else {
 				if (this.md2Loader === null) {
-					this.md2Loader = new MD2Loader(ThreeUtil.getLoadingManager());
+					this.md2Loader = new THREE.MD2Loader(ThreeUtil.getLoadingManager());
 				}
 				this.md2Loader.load(
 					key,
@@ -1632,12 +1558,12 @@ export class LocalStorageService {
 			}
 		} else if (key.endsWith('.pdb')) {
 			if (this.pdbLoader === null) {
-				this.pdbLoader = new PDBLoader(ThreeUtil.getLoadingManager());
+				this.pdbLoader = new THREE.PDBLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.pdbLoader as any, options);
 			this.pdbLoader.load(
 				key,
-				(pdb: PDB) => {
+				(pdb) => {
 					const geometryAtoms = pdb.geometryAtoms;
 					const geometryBonds = pdb.geometryBonds;
 					const json = pdb.json;
@@ -1677,10 +1603,10 @@ export class LocalStorageService {
 						switch (cssType.toLowerCase()) {
 							case '3d':
 							case 'css3d':
-								label = new CSS3DObject(text) as any;
+								label = new THREE.CSS3DObject(text) as any;
 								break;
 							default:
-								label = new CSS2DObject(text) as any;
+								label = new THREE.CSS2DObject(text) as any;
 								break;
 						}
 						label.name = 'label';
@@ -1719,7 +1645,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.stl')) {
 			if (this.stlLoader === null) {
-				this.stlLoader = new STLLoader(ThreeUtil.getLoadingManager());
+				this.stlLoader = new THREE.STLLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.stlLoader as any, options);
 			this.stlLoader.load(
@@ -1738,7 +1664,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.wrl')) {
 			if (this.vrmlLoader === null) {
-				this.vrmlLoader = new VRMLLoader(ThreeUtil.getLoadingManager());
+				this.vrmlLoader = new THREE.VRMLLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.vrmlLoader as any, options);
 			this.vrmlLoader.load(
@@ -1754,7 +1680,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.xyz')) {
 			if (this.xyzLoader === null) {
-				this.xyzLoader = new XYZLoader(ThreeUtil.getLoadingManager());
+				this.xyzLoader = new THREE.XYZLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.xyzLoader as any, options);
 			this.xyzLoader.load(
@@ -1770,12 +1696,12 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.CUBE') || key.endsWith('.cube')) {
 			if (this.lutCubeLoader === null) {
-				this.lutCubeLoader = new LUTCubeLoader(ThreeUtil.getLoadingManager());
+				this.lutCubeLoader = new THREE.LUTCubeLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.lutCubeLoader as any, options);
 			this.lutCubeLoader.load(
 				key,
-				(result: LUTCubeResult) => {
+				(result) => {
 					callBack({
 						texture: result.texture as any,
 						source: result,
@@ -1786,12 +1712,12 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.vrm')) {
 			if (this.vrmLoader === null) {
-				this.vrmLoader = new VRMLoader(ThreeUtil.getLoadingManager());
+				this.vrmLoader = new THREE.VRMLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.vrmLoader as any, options);
 			this.vrmLoader.load(
 				key,
-				(vrm: GLTF) => {
+				(vrm) => {
 					vrm.scene.traverse((object) => {
 						if (object instanceof THREE.Mesh && object.material) {
 							if (Array.isArray(object.material)) {
@@ -1836,7 +1762,7 @@ export class LocalStorageService {
 			key.endsWith('.jpeg')
 		) {
 			if (this.rgbmLoader === null) {
-				this.rgbmLoader = new RGBMLoader(ThreeUtil.getLoadingManager());
+				this.rgbmLoader = new THREE.RGBMLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.rgbmLoader as any, options);
 			this.rgbmLoader.load(
@@ -1858,7 +1784,7 @@ export class LocalStorageService {
 					switch (loaderType.toLowerCase()) {
 						case 'lottie':
 							if (this.lottieLoader === null) {
-								this.lottieLoader = new LottieLoader(
+								this.lottieLoader = new THREE.LottieLoader(
 									ThreeUtil.getLoadingManager()
 								);
 							}
@@ -2105,7 +2031,7 @@ export class LocalStorageService {
 	 * @param [fontWeight]
 	 */
 	public getFont(
-		callBack: (font: Font) => void,
+		callBack: (font: I3JS.IFont) => void,
 		fontName: string = 'helvetiker',
 		fontWeight: string = ''
 	) {
@@ -2211,19 +2137,19 @@ export class LocalStorageService {
 		} else {
 			if (fontPath.endsWith('.ttf')) {
 				if (this.ttfLoader === null) {
-					this.ttfLoader = new TTFLoader(ThreeUtil.getLoadingManager());
+					this.ttfLoader = new THREE.TTFLoader(ThreeUtil.getLoadingManager());
 				}
 				this.ttfLoader.load(ThreeUtil.getStoreUrl(fontPath), (json: any) => {
-					this._loadedFonts[fontPath] = new Font(json);
+					this._loadedFonts[fontPath] = new THREE.Font(json);
 					callBack(this._loadedFonts[fontPath]);
 				});
 			} else {
 				if (this.fontLoader === null) {
-					this.fontLoader = new FontLoader(ThreeUtil.getLoadingManager());
+					this.fontLoader = new THREE.FontLoader(ThreeUtil.getLoadingManager());
 				}
 				this.fontLoader.load(
 					ThreeUtil.getStoreUrl(fontPath),
-					(responseFont: Font) => {
+					(responseFont) => {
 						this._loadedFonts[fontPath] = responseFont;
 						callBack(this._loadedFonts[fontPath]);
 					}
@@ -2236,13 +2162,13 @@ export class LocalStorageService {
 	 * Loaded fonts of local storage service
 	 */
 	private _loadedFonts: {
-		[key: string]: Font;
+		[key: string]: I3JS.IFont;
 	} = {};
 
 	/**
 	 * Font loader of local storage service
 	 */
-	private fontLoader: FontLoader = null;
+	private fontLoader: I3JS.IFontLoader = null;
 
 	/**
 	 * Removes item

@@ -1,25 +1,25 @@
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { BufferAttribute, BufferGeometry, Color } from 'three';
 
 export type GeometryFunctionType = (
-	geometry: I3JS.IBufferGeometry,
+	geometry: BufferGeometry,
 	options?: any
-) => I3JS.IBufferGeometry;
+) => BufferGeometry;
 
 const GeometryConf: {
 	[key: string]: GeometryFunctionType | string;
 } = {};
 
 GeometryConf.rainbowcolor1 = (
-	geometry: I3JS.IBufferGeometry,
+	geometry: BufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.setAttribute(
 		'color',
-		new THREE.BufferAttribute(new Float32Array(count * 3), 3)
+		new BufferAttribute(new Float32Array(count * 3), 3)
 	);
-	const color = new THREE.Color();
+	const color = new Color();
 	const positions = geometry.attributes.position;
 	const colors = geometry.attributes.color;
 	for (let i = 0; i < count; i++) {
@@ -31,16 +31,16 @@ GeometryConf.rainbowcolor1 = (
 GeometryConf.rainbow = 'rainbowcolor1';
 GeometryConf.rainbow1 = 'rainbowcolor1';
 GeometryConf.rainbowcolor2 = (
-	geometry: I3JS.IBufferGeometry,
+	geometry: BufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.setAttribute(
 		'color',
-		new THREE.BufferAttribute(new Float32Array(count * 3), 3)
+		new BufferAttribute(new Float32Array(count * 3), 3)
 	);
-	const color = new THREE.Color();
+	const color = new Color();
 	const positions = geometry.attributes.position;
 	const colors = geometry.attributes.color;
 	for (let i = 0; i < count; i++) {
@@ -51,16 +51,16 @@ GeometryConf.rainbowcolor2 = (
 };
 GeometryConf.rainbow2 = 'rainbowcolor2';
 GeometryConf.rainbowcolor3 = (
-	geometry: I3JS.IBufferGeometry,
+	geometry: BufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.setAttribute(
 		'color',
-		new THREE.BufferAttribute(new Float32Array(count * 3), 3)
+		new BufferAttribute(new Float32Array(count * 3), 3)
 	);
-	const color = new THREE.Color();
+	const color = new Color();
 	const positions = geometry.attributes.position;
 	const colors = geometry.attributes.color;
 	for (let i = 0; i < count; i++) {
@@ -71,21 +71,21 @@ GeometryConf.rainbowcolor3 = (
 };
 GeometryConf.rainbow3 = 'rainbowcolor3';
 
-GeometryConf.terrainsin = (geometry: I3JS.IBufferGeometry, options?: any) => {
+GeometryConf.terrainsin = (geometry: BufferGeometry, options?: any) => {
 	switch (geometry.type) {
 		case 'PlaneGeometry':
 			geometry.rotateX(-Math.PI / 2);
 			break;
 	}
-	const positions = geometry.getAttribute('position') as I3JS.IBufferAttribute;
+	const positions = geometry.getAttribute('position') as BufferAttribute;
 	const count = positions.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.computeBoundingBox();
 	const box = geometry.boundingBox;
 	const center = box.min.clone().add(box.max).multiplyScalar(0.2);
-	const minHeight = ThreeUtil.getTypeSafe(options.minHeight, radius * -0.1);
-	const maxHeight = ThreeUtil.getTypeSafe(options.maxHeight, radius * 0.3);
-	const repeat = ThreeUtil.getTypeSafe(options.repeat, 4);
+	const minHeight = options.minHeight || radius * -0.1;
+	const maxHeight = options.maxHeight || radius * 0.3;
+	const repeat = options.repeat || 4;
 	const hRange = maxHeight - minHeight;
 	const distLength = ((Math.PI * 2) / radius) * repeat;
 	for (let i = 0; i < count; i++) {
@@ -117,7 +117,7 @@ export class NgxGeometryUtils {
 	 * @returns geometry radius
 	 */
 	public static getGeometryRadius(
-		geometry: I3JS.IBufferGeometry,
+		geometry: BufferGeometry,
 		options: any
 	): number {
 		let radius = options.radius || 0;
@@ -136,9 +136,9 @@ export class NgxGeometryUtils {
 	 * @returns flip geometry
 	 */
 	public static getFlipGeometry(
-		geometry: I3JS.IBufferGeometry,
+		geometry: BufferGeometry,
 		plane: string = 'Z'
-	): I3JS.IBufferGeometry {
+	): BufferGeometry {
 		geometry = geometry.clone();
 		const attrVertices = geometry.getAttribute('position');
 		const attrUvs = geometry.getAttribute('uv');
@@ -178,7 +178,7 @@ export class NgxGeometryUtils {
 		alias?: string[]
 	) {
 		key = key.toLowerCase();
-		if (ThreeUtil.isNotNull(alias)) {
+		if (alias !== null && alias !== undefined) {
 			alias.forEach((aliasKey) => {
 				if (aliasKey !== null && aliasKey.length > 3) {
 					GeometryConf[aliasKey.toLowerCase()] = key;
@@ -195,7 +195,7 @@ export class NgxGeometryUtils {
 	 */
 	public static getGeometryFunction(key: string): GeometryFunctionType {
 		key = key.toLowerCase();
-		if (ThreeUtil.isNotNull(GeometryConf[key])) {
+		if (GeometryConf[key] !== null && GeometryConf[key] !== undefined) {
 			const func = GeometryConf[key.toLowerCase()];
 			if (typeof func === 'string') {
 				return this.getGeometryFunction(func);
@@ -219,9 +219,9 @@ export class NgxGeometryUtils {
 	 */
 	public static getGeometry(
 		key: string,
-		geometry: I3JS.IBufferGeometry,
+		geometry: BufferGeometry,
 		options?: any
-	): I3JS.IBufferGeometry {
+	): BufferGeometry {
 		const keyList = key.split(',');
 		keyList.forEach((funcName) => {
 			const func = this.getGeometryFunction(funcName);
@@ -232,12 +232,12 @@ export class NgxGeometryUtils {
 	}
 
 	/**
-	 * @param {THREE.BufferGeometry} geometry
+	 * @param {BufferGeometry} geometry
 	 * @param {number} tolerance
 	 * @return {BufferGeometry>}
 	 */
 	static mergeVertices(
-		geometry: I3JS.IBufferGeometry,
+		geometry: BufferGeometry,
 		tolerance: number = 1e-4
 	) {
 		switch (geometry.type.toLowerCase()) {
@@ -313,7 +313,7 @@ export class NgxGeometryUtils {
 			const oldAttribute = geometry.getAttribute(name);
 			const constructor = oldAttribute.array.constructor as any;
 			const buffer = new constructor(attrArrays[name]);
-			const attribute = new THREE.BufferAttribute(
+			const attribute = new BufferAttribute(
 				buffer,
 				oldAttribute.itemSize,
 				oldAttribute.normalized

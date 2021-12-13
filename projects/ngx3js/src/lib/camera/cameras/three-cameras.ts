@@ -1,6 +1,5 @@
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
 import { I3JS, THREE } from '../../interface';
-
 /**
  * Array camera
  *

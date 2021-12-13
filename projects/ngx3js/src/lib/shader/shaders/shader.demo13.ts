@@ -1,4 +1,4 @@
-import { THREE } from '../../interface';
+import { Vector2 } from 'three';
 export const ShaderDemo13 = {
 	vertexShader: `
   in vec3 position;
@@ -36,6 +36,6 @@ export const ShaderDemo13 = {
   `,
 	uniforms: {
 		tDiffuse: { value: null } as any,
-		repeat: { value: new THREE.Vector2(5, 0.5) },
+		repeat: { value: new Vector2(5, 0.5) },
 	},
 };
