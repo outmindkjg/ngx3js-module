@@ -1,5 +1,6 @@
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
-import { BufferGeometry, PlaneGeometry, Matrix4, BufferGeometryUtils, Color, Vector3 } from 'three';
+import { BufferGeometry, PlaneGeometry, Matrix4, Color, Vector3 } from 'three';
+import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
 
 /**
  * The Plane Perlin geometry.

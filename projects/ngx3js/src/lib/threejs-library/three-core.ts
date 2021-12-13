@@ -53,13 +53,20 @@ import { VRMLLoader as EX_VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoad
 import { VRMLoader as EX_VRMLoader } from 'three/examples/jsm/loaders/VRMLoader';
 import { VTKLoader as EX_VTKLoader } from 'three/examples/jsm/loaders/VTKLoader';
 import { XYZLoader as EX_XYZLoader } from 'three/examples/jsm/loaders/XYZLoader';
+
 import { MD2Character as EX_MD2Character } from 'three/examples/jsm/misc/MD2Character';
 import { MD2CharacterComplex as EX_MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex';
 import { Volume as EX_Volume } from 'three/examples/jsm/misc/Volume';
 import { CSS2DObject as EX_CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import { CSS3DObject as EX_CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
-import * as E_G_UTIL from 'three/examples/jsm/utils/BufferGeometryUtils';
+import * as E_GF_UTIL from 'three/examples/jsm/utils/BufferGeometryUtils';
+import * as E_G_UTIL from 'three/examples/jsm/utils/GeometryUtils';
 import * as I3JS from '../threejs-library/three-interface';
+
+import { RoomEnvironment as EX_RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment';
+
+import * as NODES from 'three/examples/jsm/nodes/Nodes';
+
 import { MeshoptDecoder as EX_MeshoptDecoder } from './meshopt_decoder.module';
 import { TiltLoader as EX_TiltLoader } from './TiltLoader';
 import { LineSegmentsGeometry as EX_LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry';
@@ -278,24 +285,126 @@ export const Float16BufferAttribute: I3JS.IFloat16BufferAttribute = O3JS.Float16
 export const Float32BufferAttribute: I3JS.IFloat32BufferAttribute = O3JS.Float32BufferAttribute as any;
 export const Float64BufferAttribute: I3JS.IFloat64BufferAttribute = O3JS.Float64BufferAttribute as any;
 
-export const BufferGeometryUtils: I3JS.IBufferGeometryUtils = {
-	// computeTangents: O3JS.BufferGeometryUtils.computeTangents as any,
-	mergeBufferAttributes: E_G_UTIL.mergeBufferAttributes as any,
-	mergeBufferGeometries: E_G_UTIL.mergeBufferGeometries as any,
-	interleaveAttributes: E_G_UTIL.interleaveAttributes as any,
-	estimateBytesUsed: E_G_UTIL.estimateBytesUsed as any,
-	mergeVertices: E_G_UTIL.mergeVertices as any,
-	toTrianglesDrawMode: E_G_UTIL.toTrianglesDrawMode as any,
-	computeMorphedAttributes: E_G_UTIL.computeMorphedAttributes as any,
+export const GeometryUtils: I3JS.IGeometryUtils = {
+	mergeBufferAttributes: E_GF_UTIL.mergeBufferAttributes as any,
+	mergeBufferGeometries: E_GF_UTIL.mergeBufferGeometries as any,
+	interleaveAttributes: E_GF_UTIL.interleaveAttributes as any,
+	estimateBytesUsed: E_GF_UTIL.estimateBytesUsed as any,
+	mergeVertices: E_GF_UTIL.mergeVertices as any,
+	toTrianglesDrawMode: E_GF_UTIL.toTrianglesDrawMode as any,
+	computeMorphedAttributes: E_GF_UTIL.computeMorphedAttributes as any,
+	 hilbert2D: (E_G_UTIL as any).hilbert2D,
+	 hilbert3D: (E_G_UTIL as any).hilbert3D,
+	 gosper: (E_G_UTIL as any).gosper
 };
 
-export const GeometryUtils: I3JS.IGeometryUtils = {
-	 merge(geometry1: any, geometry2: any, materialIndexOffset?: any){ return null; },
-	 center(geometry: any) { return null; },
-	 hilbert2D: () => {},
-	 hilbert3D: () => {},
-	 gosper: () => {}
-};
+export const RoomEnvironment: I3JS.IRoomEnvironment = EX_RoomEnvironment as any;
+
+export const Node: I3JS.INode = NODES.Node as any;
+export const TempNode: I3JS.ITempNode = NODES.TempNode as any;
+export const InputNode: I3JS.IInputNode = NODES.InputNode as any;
+export const ConstNode: I3JS.IConstNode = NODES.ConstNode as any;
+export const VarNode: I3JS.IVarNode = NODES.VarNode as any;
+export const StructNode: I3JS.IStructNode = NODES.StructNode as any;
+export const AttributeNode: I3JS.IAttributeNode = NODES.AttributeNode as any;
+export const FunctionNode: I3JS.IFunctionNode = NODES.FunctionNode as any;
+export const ExpressionNode: I3JS.IExpressionNode = NODES.ExpressionNode as any;
+export const FunctionCallNode: I3JS.IFunctionCallNode = NODES.FunctionCallNode as any;
+export const NodeLib: I3JS.INodeLib = NODES.NodeLib as any;
+export const NodeUtils: I3JS.INodeUtils = NODES.NodeUtils as any;
+export const NodeFrame: I3JS.INodeFrame = NODES.NodeFrame as any;
+export const NodeUniform: I3JS.INodeUniform = NODES.NodeUniform as any;
+export const NodeBuilder: I3JS.INodeBuilder = NODES.NodeBuilder as any;
+
+// inputs
+
+export const BoolNode: I3JS.IBoolNode = NODES.BoolNode as any;
+export const IntNode: I3JS.IIntNode = NODES.IntNode as any;
+export const FloatNode: I3JS.IFloatNode = NODES.FloatNode as any;
+export const Vector2Node: I3JS.IVector2Node = NODES.Vector2Node as any;
+export const Vector3Node: I3JS.IVector3Node = NODES.Vector3Node as any;
+export const Vector4Node: I3JS.IVector4Node = NODES.Vector4Node as any;
+export const ColorNode: I3JS.IColorNode = NODES.ColorNode as any;
+export const Matrix3Node: I3JS.IMatrix3Node = NODES.Matrix3Node as any;
+export const Matrix4Node: I3JS.IMatrix4Node = NODES.Matrix4Node as any;
+export const TextureNode: I3JS.ITextureNode = NODES.TextureNode as any;
+export const CubeTextureNode: I3JS.ICubeTextureNode = NODES.CubeTextureNode as any;
+export const ScreenNode: I3JS.IScreenNode = NODES.ScreenNode as any;
+export const ReflectorNode: I3JS.IReflectorNode = NODES.ReflectorNode as any;
+export const PropertyNode: I3JS.IPropertyNode = NODES.PropertyNode as any;
+export const RTTNode: I3JS.IRTTNode = NODES.RTTNode as any;
+
+// accessors
+
+export const UVNode: I3JS.IUVNode = NODES.UVNode as any;
+export const ColorsNode: I3JS.IColorsNode = NODES.ColorsNode as any;
+export const PositionNode: I3JS.IPositionNode = NODES.PositionNode as any;
+export const NormalNode: I3JS.INormalNode = NODES.NormalNode as any;
+export const CameraNode: I3JS.ICameraNode = NODES.CameraNode as any;
+export const LightNode: I3JS.ILightNode = NODES.LightNode as any;
+export const ReflectNode: I3JS.IReflectNode = NODES.ReflectNode as any;
+export const ScreenUVNode: I3JS.IScreenUVNode = NODES.ScreenUVNode as any;
+export const ResolutionNode: I3JS.IResolutionNode = NODES.ResolutionNode as any;
+
+// math
+
+export const MathNode: I3JS.IMathNode = NODES.MathNode as any;
+export const OperatorNode: I3JS.IOperatorNode = NODES.OperatorNode as any;
+export const CondNode: I3JS.ICondNode = NODES.CondNode as any;
+
+// procedural
+
+// export const NoiseNode: I3JS.INoiseNode = NODES.NoiseNode as any;
+export const CheckerNode: I3JS.ICheckerNode = NODES.CheckerNode as any;
+
+// misc
+
+export const TextureCubeUVNode: I3JS.ITextureCubeUVNode = NODES.TextureCubeUVNode as any;
+export const TextureCubeNode: I3JS.ITextureCubeNode = NODES.TextureCubeNode as any;
+export const NormalMapNode: I3JS.INormalMapNode = NODES.NormalMapNode as any;
+export const BumpMapNode: I3JS.IBumpMapNode = NODES.BumpMapNode as any;
+
+// utils
+
+export const BypassNode: I3JS.IBypassNode = NODES.BypassNode as any;
+export const JoinNode: I3JS.IJoinNode = NODES.JoinNode as any;
+export const SwitchNode: I3JS.ISwitchNode = NODES.SwitchNode as any;
+export const TimerNode: I3JS.ITimerNode = NODES.TimerNode as any;
+export const VelocityNode: I3JS.IVelocityNode = NODES.VelocityNode as any;
+export const UVTransformNode: I3JS.IUVTransformNode = NODES.UVTransformNode as any;
+export const MaxMIPLevelNode: I3JS.IMaxMIPLevelNode = NODES.MaxMIPLevelNode as any;
+export const SpecularMIPLevelNode: I3JS.ISpecularMIPLevelNode = NODES.SpecularMIPLevelNode as any;
+export const ColorSpaceNode: I3JS.IColorSpaceNode = NODES.ColorSpaceNode as any;
+
+// effects
+
+export const BlurNode: I3JS.IBlurNode = NODES.BlurNode as any;
+export const ColorAdjustmentNode: I3JS.IColorAdjustmentNode = NODES.ColorAdjustmentNode as any;
+export const LuminanceNode: I3JS.ILuminanceNode = NODES.LuminanceNode as any;
+
+// material nodes
+
+export const RawNode: I3JS.IRawNode = NODES.RawNode as any;
+export const BasicNode: I3JS.IBasicNode = NODES.BasicNode as any;
+export const SpriteNode: I3JS.ISpriteNode = NODES.SpriteNode as any;
+export const PhongNode: I3JS.IPhongNode = NODES.PhongNode as any;
+export const StandardNode: I3JS.IStandardNode = NODES.StandardNode as any;
+export const MeshStandardNode: I3JS.IMeshStandardNode = NODES.MeshStandardNode as any;
+
+// materials
+
+export const NodeMaterial: I3JS.INodeMaterial = NODES.NodeMaterial as any;
+export const BasicNodeMaterial: I3JS.IBasicNodeMaterial = NODES.BasicNodeMaterial as any;
+export const SpriteNodeMaterial: I3JS.ISpriteNodeMaterial = NODES.SpriteNodeMaterial as any;
+export const PhongNodeMaterial: I3JS.IPhongNodeMaterial = NODES.PhongNodeMaterial as any;
+export const StandardNodeMaterial: I3JS.IStandardNodeMaterial = NODES.StandardNodeMaterial as any;
+export const MeshStandardNodeMaterial: I3JS.IMeshStandardNodeMaterial = NODES.MeshStandardNodeMaterial as any;
+
+// postprocessing
+
+export const NodePostProcessing: I3JS.INodePostProcessing = NODES.NodePostProcessing as any;
+// export const NodePass: I3JS.INodePass = NODES.NodePass as any;
+
 
 export const BufferGeometry: I3JS.IBufferGeometry = O3JS.BufferGeometry as any;
 export const Clock: I3JS.IClock = O3JS.Clock as any;

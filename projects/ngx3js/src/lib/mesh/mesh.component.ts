@@ -2128,7 +2128,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						}
 						const materials = this.getMaterials();
 						const mergedGeometry =
-							THREE.BufferGeometryUtils.mergeBufferGeometries(
+							THREE.GeometryUtils.mergeBufferGeometries(
 								geometries as any
 							);
 						basemesh = new THREE_OBJ.NgxMesh(mergedGeometry, materials) as any;

@@ -7303,8 +7303,7 @@ export interface IWebGLRenderer extends IRenderer {
 	enableScissorTest(boolean: any): any;
 }
 
-export interface IBufferGeometryUtils {
-	// computeTangents(geometry: IBufferGeometry): null;
+export interface IGeometryUtils {
 	mergeBufferAttributes(attributes: IBufferAttribute[]): IBufferAttribute;
 	mergeBufferGeometries(geometries: IBufferGeometry[], useGroups?: boolean): IBufferGeometry;
 	interleaveAttributes(attributes: IBufferAttribute[]): IInterleavedBufferAttribute;
@@ -7312,25 +7311,1344 @@ export interface IBufferGeometryUtils {
 	mergeVertices(geometry: IBufferGeometry, tolerance?: number): IBufferGeometry;
 	toTrianglesDrawMode(geometry: IBufferGeometry, drawMode: TTrianglesDrawModes): IBufferGeometry;
 	computeMorphedAttributes(object: IMesh | ILine | IPoints): object;
+	hilbert2D(
+		center?: IVector3,
+		size?: number,
+		iterations?: number,
+		v0?: number,
+		v1?: number,
+		v2?: number,
+		v3?: number
+	): IVector3[];
+	hilbert3D(
+		center?: IVector3,
+		size?: number,
+		iterations?: number,
+		v0?: number,
+		v1?: number,
+		v2?: number,
+		v3?: number,
+		v4?: number,
+		v5?: number,
+		v6?: number,
+		v7?: number
+	): IVector3[];
+	gosper(size?: number): number[];
 }
 
-/**
- * @deprecated
- */
- export interface IGeometryUtils {
-    /**
-     * @deprecated Use {@link Geometry#merge geometry.merge( geometry2, matrix, materialIndexOffset )} instead.
-     */
-    merge(geometry1: any, geometry2: any, materialIndexOffset?: any): any;
-    /**
-     * @deprecated Use {@link Geometry#center geometry.center()} instead.
-     */
-    center(geometry: any): any;
-
-    hilbert2D: any;
-    hilbert3D: any;
-    gosper: any;
+export interface IRoomEnvironment extends IScene {
+    new() : this;
 }
+
+export interface IFlow {
+    result: string;
+    code: string;
+    extra: object;
+}
+
+export interface INode {
+    new(type?: string) : this;
+
+    uuid: string;
+    name: string;
+    type: string | undefined;
+    userData: object;
+    readonly isNode: true;
+    frameId: number | undefined;
+    hashProperties: string[] | undefined;
+
+    analyze(builder: INodeBuilder, settings?: object): void;
+    analyzeAndFlow(builder: INodeBuilder, output: string, settings?: object): IFlow;
+    flow(builder: INodeBuilder, output: string, settings?: object): IFlow;
+    build(builder: INodeBuilder, output: string, uuid?: string): string;
+    generate(builder: INodeBuilder, output: string, uuid?: string, type?: string, ns?: string): string;
+    appendDepsNode(builder: INodeBuilder, data: object, output: string): void;
+    setName(name: string): this;
+    getName(builder: INodeBuilder): string;
+    getType(builder: INodeBuilder, output?: string): string;
+    getJSONNode(meta?: object | string): object | undefined;
+    getHash(): string;
+    copy(source: INode): this;
+    createJSONNode(meta?: object | string): object;
+    toJSON(meta?: object | string): object;
+}
+
+export interface INodeBuilder {
+    new() : this;
+
+    slots: string[];
+    caches: string[];
+    contexts: object[];
+
+    keywords: object;
+    nodeData: object;
+
+    requires: {
+        uv: boolean[];
+        color: boolean[];
+        lights: boolean;
+        fog: boolean;
+        transparent: boolean;
+        irradiance: boolean;
+    };
+
+    includes: {
+        consts: object[];
+        functions: object[];
+        structs: object[];
+    };
+
+    attributes: object;
+    prefixCode: string;
+
+    parsCode: {
+        vertex: string;
+        fragment: string;
+    };
+
+    code: {
+        vertex: string;
+        fragment: string;
+    };
+
+    nodeCode: {
+        vertex: string;
+        fragment: string;
+    };
+
+    resultCode: {
+        vertex: string;
+        fragment: string;
+    };
+
+    finalCode: {
+        vertex: string;
+        fragment: string;
+    };
+
+    inputs: {
+        uniforms: {
+            list: object[];
+            vertex: object[];
+            fragment: object[];
+        };
+        vars: {
+            varying: object[];
+            vertex: object[];
+            fragment: object[];
+        };
+    };
+
+    defines: object;
+    uniforms: object;
+    extensions: object;
+    updaters: object[];
+    nodes: object[];
+
+    analyzing: boolean;
+
+    build(vertex: INode, fragment: INode): this;
+    buildShader(shader: string, node: INode): void;
+    setMaterial(material: IMaterial, renderer: IWebGLRenderer): this;
+    addFlow(slot: string, cache?: string, context?: object): this;
+    removeFlow(): this;
+    addCache(name: string): this;
+    removeCache(): this;
+    addContext(context: object): this;
+    removeContext(): this;
+    addSlot(name: string): this;
+    removeSlot(): this;
+    addVertexCode(code: string): void;
+    addFragmentCode(code: string): void;
+    addCode(code: string, shader?: string): void;
+    addVertexNodeCode(code: string): void;
+    addFragmentNodeCode(code: string): void;
+    addNodeCode(code: string, shader?: string): void;
+    clearNodeCode(shader: string): string;
+    clearVertexNodeCode(): string;
+    clearFragmentNodeCode(): string;
+    addVertexFinalCode(code: string): void;
+    addFragmentFinalCode(code: string): void;
+    addFinalCode(code: string, shader?: string): void;
+    addVertexParsCode(code: string): void;
+    addFragmentParsCode(code: string): void;
+    addParsCode(code: string, shader?: string): void;
+    addVaryCode(code: string): void;
+    isCache(name: string): boolean;
+    isSlot(name: string): boolean;
+    define(name: string, value: any): void;
+    isDefined(name: string): boolean;
+    getVar(uuid: string, type: string, ns: string, labelOrShader?: string, prefix?: string, label?: string): object;
+    getAttribute(name: string, type: string): any;
+    getCode(shader: string): string;
+    getVarListCode(vars: object[], prefix?: string): string;
+    getVars(shader: string): object[];
+    getNodeData(node: INode): object;
+    createUniform(
+        shader: string,
+        type: string,
+        node: INode,
+        ns?: string,
+        needsUpdate?: boolean,
+        label?: string,
+    ): INodeUniform;
+    createVertexUniform(type: string, node: INode, ns?: string, needsUpdate?: boolean, label?: string): INodeUniform;
+    createFragmentUniform(type: string, node: INode, ns?: string, needsUpdate?: boolean, label?: string): INodeUniform;
+    include(node: INode, parent?: boolean, source?: string): void;
+    colorToVectorProperties(color: string): string;
+    colorToVector(color: string): string;
+    getIncludes(type: string, shader: string): object[];
+    getIncludesCode(type: string, shader: string): string;
+    getConstructorFromLength(len: number): string;
+    isTypeMatrix(format: string): boolean;
+    getTypeLength(type: string): number;
+    getTypeFromLength(len: number): string;
+    findNode(): INode;
+    resolve(): void;
+    format(code: string, from: string, to: string): string;
+    getTypeByFormat(format: string): string;
+    getFormatByType(type: string): string;
+    getUuid(uuid: string, useCache?: boolean): string;
+    getElementByIndex(index: number): string;
+    getIndexByElement(elm: string): number;
+    isShader(shader: string): boolean;
+    setShader(shader: string): this;
+    mergeDefines(defines: object): object;
+    mergeUniform(uniforms: object): object;
+    getTextureEncodingFromMap(map: ITexture): O3JS.TextureEncoding;
+}
+
+export interface IBoolNode extends IInputNode {
+    new(value?: boolean) : this;
+
+    value: boolean;
+    nodeType: string;
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IBoolNode): this;
+}
+
+export interface IIntNode extends IInputNode {
+    new(value?: number) : this;
+
+    value: number;
+    nodeType: string;
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IIntNode): this;
+}
+
+export interface IFloatNode extends IInputNode {
+    new(value?: number) : this;
+
+    value: number;
+    nodeType: string;
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IFloatNode): this;
+}
+
+
+
+export interface ITempNodeParams {
+    shared?: boolean;
+    unique?: boolean;
+}
+
+export interface ITempNode extends INode {
+    new(type: string, params?: ITempNodeParams):this;
+
+    shared: boolean;
+    unique: boolean;
+    label: string | undefined;
+
+    build(builder: INodeBuilder, output: string, uuid?: string, ns?: string): string;
+    getShared(builder: INodeBuilder, output: string): boolean;
+    getUnique(builder: INodeBuilder, output: string): boolean;
+    setLabel(name: string): this;
+    getLabel(builder: INodeBuilder): string;
+    getUuid(unique: boolean): string;
+    getTemp(builder: INodeBuilder, uuid: string): string | undefined;
+}
+
+export interface IFunctionNodeInput {
+    name: string;
+    type: string;
+    qualifier: string;
+}
+
+export interface IFunctionNode extends ITempNode {
+    new(src: string, includes?: object[], extensions?: object, keywords?: object, type?: string) : this;
+
+    isMethod: boolean;
+    nodeType: string;
+    useKeywords: boolean;
+
+    inputs: IFunctionNodeInput[] | undefined;
+    includes: object[] | undefined;
+    extensions: object | undefined;
+    keywords: object | undefined;
+
+    getShared(builder: INodeBuilder, output: string): boolean;
+    getType(builder: INodeBuilder): string;
+    getInputByName(name: string): IFunctionNodeInput | undefined;
+    getIncludeByName(name: string): object | undefined;
+    parse(src: string, includes?: object[], extensions?: object, keywords?: object): void;
+    copy(source: IFunctionNode): this;
+}
+
+export interface IInputNode extends ITempNode {
+    new(type: string, params?: ITempNodeParams) : this;
+
+    readonly: boolean;
+
+    setReadonly(value: boolean): this;
+    getReadonly(builder: INodeBuilder): boolean;
+    copy(source: IInputNode): this;
+}
+
+export interface IConstNode extends ITempNode {
+    new(src: string, useDefine?: boolean) : this;
+
+    src: string;
+    useDefine: boolean;
+    nodeType: string;
+
+    getType(builder: INodeBuilder): string;
+    parse(src: string, useDefine?: boolean): void;
+    build(builder: INodeBuilder, output: string): string;
+    copy(source: IConstNode): this;
+}
+
+export interface IVarNode extends INode {
+    new(type: string, value?: any) : this;
+
+    value: any;
+    nodeType: string;
+
+    getType(builder: INodeBuilder): string;
+    copy(source: IVarNode): this;
+}
+
+export interface IStructNodeInput {
+    type: string;
+    name: string;
+}
+
+export interface IStructNode extends ITempNode {
+    new(src?: string) : this;
+
+    inputs: IStructNodeInput[];
+    src: string;
+    nodeType: string;
+
+    getType(builder: INodeBuilder): string;
+    getInputByName(name: string): IStructNodeInput;
+    parse(src: string): void;
+}
+
+export interface IAttributeNode extends ITempNode {
+    new(name: string, type?: string) : this;
+
+    name: string;
+    nodeType: string;
+
+    getAttributeType(builder: INodeBuilder): string;
+    getType(builder: INodeBuilder): string;
+    copy(source: IAttributeNode): this;
+}
+
+
+
+export interface IUVNode extends ITempNode {
+    new(index?: number) : this;
+
+    index: number;
+    nodeType: string;
+
+    copy(source: IUVNode): this;
+}
+
+export interface IExpressionNode extends IFunctionNode {
+    new(src: string, type?: string, keywords?: object, extensions?: object, includes?: object[]) : this;
+}
+
+export interface IFunctionCallNode extends ITempNode {
+    new(func: IFunctionNode, inputs?: INode[]) : this;
+
+    nodeType: string;
+
+    value: IFunctionNode;
+    inputs: INode[];
+
+    setFunction(func: IFunctionNode, inputs?: INode[]): void;
+    getFunction(): IFunctionNode;
+    getType(): string;
+    copy(source: IFunctionCallNode): this;
+}
+
+export interface INodeLibKeyword {
+    callback: (builder: INodeBuilder) => void;
+    cache?: object;
+}
+
+export interface INodeLib {
+    add(node: INode): void;
+    addKeyword(name: string, callback: (builder: INodeBuilder) => void, cache?: object): void;
+    remove(node: INode): void;
+    removeKeyword(name: string): void;
+    get(name: string): INode;
+    getKeyword(name: string, builder: INodeBuilder): any;
+    getKeywordData(name: string): INodeLibKeyword;
+    contains(name: string): boolean;
+    containsKeyword(name: string): boolean;
+}
+
+export interface INodeUtils {
+    addShortcuts(proto: INode, proxy: string, list: any[]): void;
+}
+
+
+
+export interface IMatrix3Node extends IInputNode {
+    new(matrix?: IMatrix3) : this;
+
+    value: IMatrix3;
+    nodeType: string;
+    elements: number[];
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IMatrix3Node): this;
+}
+
+export interface IMatrix4Node extends IInputNode {
+    new(matrix?: IMatrix4) : this;
+
+    value: IMatrix4;
+    nodeType: string;
+    elements: number[];
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IMatrix4Node): this;
+}
+
+export interface ICubeTextureNode extends IInputNode {
+    new(value: ICubeTexture, uv?: INode, bias?: INode) : this;
+
+    value: ICubeTexture;
+    uv: INode | undefined;
+    bias: INode | undefined;
+    nodeType: string;
+
+    getTexture(builder: INodeBuilder, output: string): string;
+    copy(source: ICubeTextureNode): this;
+}
+
+export interface IScreenNode extends ITextureNode {
+    new(uv?: IUVNode) : this;
+
+    nodeType: string;
+
+    getTexture(builder: INodeBuilder, output: string): string;
+}
+
+export interface IReflectorOptions {
+    color?: TColorRepresentation;
+    textureWidth?: number;
+    textureHeight?: number;
+    clipBias?: number;
+    shader?: object;
+    encoding?: O3JS.TextureEncoding;
+}
+
+export interface IReflector extends IMesh {
+    new(geometry?: IBufferGeometry, options?: IReflectorOptions) : this;
+
+    getRenderTarget(): IWebGLRenderTarget;
+}
+
+export interface IReflectorRTT extends IReflector {
+    new(geometry?: IBufferGeometry, options?: IReflectorOptions) : this;
+}
+
+export interface IReflectorNode extends ITempNode {
+    new(mirror?: IReflectorRTT) : this;
+
+    mirror: IReflectorRTT;
+    textureMatrix: IMatrix4Node;
+    localPosition: IPositionNode;
+    uv: IOperatorNode;
+    uvResult: IOperatorNode;
+    texture: ITextureNode;
+
+    nodeType: string;
+
+    copy(source: IReflectorNode): this;
+}
+
+export interface IPropertyNode extends IInputNode {
+    new(object: object, property: string, type: string) : this;
+
+    object: object;
+    property: string;
+    nodeType: string;
+    value: any;
+}
+
+export interface IRTTNodeOptions extends IWebGLRenderTargetOptions {
+    clear?: boolean;
+}
+
+export interface IRTTNode extends ITextureNode {
+    new(width: number, height: number, input: ITextureNode, options?: IRTTNodeOptions) : this;
+
+    input: ITextureNode;
+    clear: boolean;
+    renderTarget: IWebGLRenderTarget;
+    material: object; // NodeMaterial
+    camera: IOrthographicCamera;
+    scene: IScene;
+    quad: IMesh;
+    render: boolean;
+
+    build(builder: INodeBuilder, output: string, uuid?: string): string;
+    updateFramesaveTo(frame: INodeFrame): void;
+    updateFrame(frame: INodeFrame): void;
+    copy(source: IRTTNode): this;
+}
+
+export interface IColorsNode extends ITempNode {
+    new(index?: number) : this;
+
+    index: number;
+    nodeType: string;
+
+    copy(source: IColorsNode): this;
+}
+
+export interface IPositionNode extends ITempNode {
+    new(scope?: string) : this;
+
+    scope: string;
+    nodeType: string;
+
+    copy(source: IPositionNode): this;
+
+    LOCAL: string;
+    WORLD: string;
+    VIEW: string;
+    PROJECTION: string;
+}
+
+export interface INormalNode extends ITempNode {
+    new(scope?: string) : this;
+
+    scope: string;
+    nodeType: string;
+
+    copy(source: INormalNode): this;
+
+    LOCAL: string;
+    WORLD: string;
+}
+
+export interface ICameraNode extends ITempNode {
+    new(scope?: string, camera?: ICamera) : this;
+
+    scope: string;
+    near: IFloatNode | undefined;
+    far: IFloatNode | undefined;
+    camera: ICamera | undefined;
+    updateFrame: boolean | undefined;
+    nodeType: string;
+
+    setCamera(camera: ICamera): void;
+    setScope(scope: string): void;
+    onUpdateFrame(frame: INodeFrame): void;
+    copy(source: ICameraNode): this;
+
+    Nodes: {
+        depthColor: IFunctionNode;
+    };
+    POSITION: string;
+    DEPTH: string;
+    TO_VERTEX: string;
+}
+
+export interface ILightNode extends ITempNode {
+    new(scope?: string) : this;
+
+    scope: string;
+    nodeType: string;
+
+    copy(source: ILightNode): this;
+
+    TOTAL: string;
+}
+
+export interface IReflectNode extends ITempNode {
+    new(scope?: string) : this;
+
+    scope: string;
+    nodeType: string;
+
+    CUBE: string;
+    SPHERE: string;
+    VECTOR: string;
+}
+
+export interface IScreenUVNode extends ITempNode {
+    new(resolution?: IResolutionNode) : this;
+
+    resolution: IResolutionNode;
+    nodeType: string;
+
+    copy(source: IScreenUVNode): this;
+}
+
+export interface IResolutionNode extends IVector2Node {
+    new() : this;
+
+    size: IVector2;
+    nodeType: string;
+
+    updateFrame(frame: INodeFrame): void;
+    copy(source: IResolutionNode): this;
+}
+
+export interface IMathNode extends ITempNode {
+    new(a: INode, bOrMethod: INode | string, cOrMethod?: INode | string, method?: string) : this;
+
+    a: INode;
+    b: INode | string | undefined;
+    c: INode | string | undefined;
+    method: string;
+    nodeType: string;
+
+    getNumInputs(builder: INodeBuilder): number;
+    getInputType(builder: INodeBuilder): string;
+    copy(source: IMathNode): this;
+
+    RAD: string;
+    DEG: string;
+    EXP: string;
+    EXP2: string;
+    LOG: string;
+    LOG2: string;
+    SQRT: string;
+    INV_SQRT: string;
+    FLOOR: string;
+    CEIL: string;
+    NORMALIZE: string;
+    SATURATE: string;
+    SIN: string;
+    COS: string;
+    TAN: string;
+    ASIN: string;
+    ACOS: string;
+    ARCTAN: string;
+    ABS: string;
+    SIGN: string;
+    LENGTH: string;
+    NEGATE: string;
+    INVERT: string;
+
+    MIN: string;
+    MAX: string;
+    MOD: string;
+    STEP: string;
+    REFLECT: string;
+    DISTANCE: string;
+    DOT: string;
+    CROSS: string;
+    POW: string;
+
+    MIX: string;
+    CLAMP: string;
+    REFRACT: string;
+    SMOOTHSTEP: string;
+    FACEFORWARD: string;
+}
+
+export interface ICondNode extends ITempNode {
+    new(a: INode, b: INode, op: string, ifNode?: INode, elseNode?: INode) : this;
+
+    a: INode;
+    b: INode;
+    op: string;
+    ifNode: INode | undefined;
+    elseNode: INode | undefined;
+    nodeType: string;
+
+    getCondType(builder: INodeBuilder): string;
+    copy(source: ICondNode): this;
+
+    EQUAL: string;
+    NOT_EQUAL: string;
+    GREATER: string;
+    GREATER_EQUAL: string;
+    LESS: string;
+    LESS_EQUAL: string;
+    AND: string;
+    OR: string;
+}
+
+export interface ICheckerNode extends ITempNode {
+    new(uv?: IUVNode | IUVTransformNode) : this;
+
+    uv: IUVNode | IUVTransformNode;
+    nodeType: string;
+
+    copy(source: ICheckerNode): this;
+
+    Nodes: {
+        checker: IFunctionNode;
+    };
+}
+
+export interface ITextureCubeUVNode extends ITempNode {
+    new(uv: INode, textureSize: IFloatNode) : this;
+
+    uv: INode;
+    textureSize: IFloatNode;
+    nodeType: string;
+
+    Nodes: {
+        TextureCubeUVData: IStructNode;
+        textureCubeUV: IFunctionNode;
+    };
+}
+
+export interface ITextureCubeNode extends ITempNode {
+    new(value: ITextureNode, textureSize?: IFloatNode) : this;
+
+    value: ITextureNode;
+    textureSize: IFloatNode;
+    radianceCache: {
+        uv: ITextureCubeUVNode;
+    };
+    irradianceCache: {
+        uv: ITextureCubeUVNode;
+    };
+    nodeType: string;
+
+    generateTextureCubeUV(builder: INodeBuilder, output: string): string;
+}
+
+export interface IBumpMapNode extends ITempNode {
+    new(value: ITextureNode, scale?: IFloatNode) : this;
+
+    value: ITextureNode;
+    scale: IFloatNode;
+    toNormalMap: boolean;
+    nodeType: string;
+
+    copy(source: IBumpMapNode): this;
+
+    Nodes: {
+        dHdxy_fwd: IFunctionNode;
+        perturbNormalArb: IFunctionNode;
+        bumpToNormal: IFunctionNode;
+    };
+}
+
+export interface IBypassNode extends INode {
+    new(code: INode, value?: INode) : this;
+
+    code: INode;
+    value: INode | undefined;
+    nodeType: string;
+
+    copy(source: IBypassNode): this;
+}
+
+export interface IJoinNode extends ITempNode {
+    new(x: INode, y: INode, z?: INode, w?: INode) : this;
+
+    x: INode;
+    y: INode;
+    z: INode | undefined;
+    w: INode | undefined;
+    nodeType: string;
+
+    getNumElements(): number;
+    copy(source: IJoinNode): this;
+}
+
+export interface ISwitchNode extends INode {
+    new(node: INode, components?: string) : this;
+
+    node: INode;
+    components: string;
+    nodeType: string;
+
+    copy(source: ISwitchNode): this;
+}
+
+export interface ITimerNode extends IFloatNode {
+    new(scale?: number, scope?: string, timeScale?: boolean) : this;
+
+    scale: number;
+    scope: string;
+    timeScale: boolean;
+    nodeType: string;
+
+    getUnique(): boolean;
+    updateFrame(frame: INodeFrame): void;
+    copy(source: ITimerNode): this;
+
+    GLOBAL: string;
+    LOCAL: string;
+    DELTA: string;
+}
+
+export interface IVelocityNodeParams {
+    damping: number;
+    spring: number;
+    type: string;
+}
+
+export interface IVelocityNode extends IVector3Node {
+    new(target: IObject3D, params?: IVelocityNodeParams) : this;
+
+    velocity: IVector3;
+    moment: IVector3 | undefined;
+    speed: IVector3 | undefined;
+    springVelocity: IVector3 | undefined;
+    lastVelocity: IVector3 | undefined;
+
+    nodeType: string;
+
+    setParams(params: IVelocityNodeParams): void;
+    setTarget(target: IObject3D): void;
+    updateFrameVelocity(frame: INodeFrame): void;
+    updateFrame(frame: INodeFrame): void;
+    copy(source: IVelocityNode): this;
+}
+
+export interface IMaxMIPLevelNode extends IFloatNode {
+    new(texture: INode) : this;
+
+    texture: INode;
+    maxMIPLevel: number;
+    nodeType: string;
+    value: number;
+}
+
+export interface ISpecularMIPLevelNode extends ITempNode {
+    new(texture: INode) : this;
+
+    texture: INode;
+    maxMIPLevel: IMaxMIPLevelNode;
+    nodeType: string;
+
+    copy(source: ISpecularMIPLevelNode): this;
+
+    Nodes: {
+        getSpecularMIPLevel: IFunctionNode;
+    };
+}
+
+
+export interface IColorSpaceNode extends ITempNode {
+    new(input: INode, method?: string) : this;
+
+    input: INode;
+    method: string | undefined;
+    nodeType: string;
+
+    fromEncoding(encoding: number): void;
+    fromDecoding(encoding: number): void;
+    copy(source: IColorSpaceNode): this;
+
+    Nodes: {
+        LinearToLinear: IFunctionNode;
+        GammaToLinear: IFunctionNode;
+        LinearToGamma: IFunctionNode;
+        sRGBToLinear: IFunctionNode;
+        LinearTosRGB: IFunctionNode;
+        RGBEToLinear: IFunctionNode;
+        LinearToRGBE: IFunctionNode;
+        RGBMToLinear: IFunctionNode;
+        LinearToRGBM: IFunctionNode;
+        RGBDToLinear: IFunctionNode;
+        LinearToRGBD: IFunctionNode;
+        cLogLuvM: IFunctionNode;
+        LinearToLogLuv: IFunctionNode;
+        cLogLuvInverseM: IFunctionNode;
+        LogLuvToLinear: IFunctionNode;
+    };
+
+    LINEAR_TO_LINEAR: string;
+
+    GAMMA_TO_LINEAR: string;
+    LINEAR_TO_GAMMA: string;
+
+    SRGB_TO_LINEAR: string;
+    LINEAR_TO_SRGB: string;
+
+    RGBE_TO_LINEAR: string;
+    LINEAR_TO_RGBE: string;
+
+    RGBM_TO_LINEAR: string;
+    LINEAR_TO_RGBM: string;
+
+    RGBD_TO_LINEAR: string;
+    LINEAR_TO_RGBD: string;
+
+    LINEAR_TO_LOG_LUV: string;
+    LOG_LUV_TO_LINEAR: string;
+
+    getEncodingComponents(encoding: number): any[];
+}
+
+export interface IBlurNode extends ITempNode {
+    new(value: ITextureNode, uv?: IUVNode, radius?: number, size?: IVector2) : this;
+
+    value: ITextureNode;
+    uv: IUVNode;
+    radius: IVector2Node;
+    size: IVector2;
+    blurX: boolean;
+    blurY: boolean;
+    horizontal: IFloatNode;
+    vertical: IFloatNode;
+    nodeType: string;
+
+    updateFrame(frame: INodeFrame): void;
+    copy(source: IBlurNode): this;
+
+    Nodes: {
+        blurX: IFunctionNode;
+        blurY: IFunctionNode;
+    };
+}
+
+export interface IColorAdjustmentNode extends ITempNode {
+    new(rgb: INode, adjustment?: IFloatNode, method?: string) : this;
+
+    rgb: INode;
+    adjustment: IFloatNode | undefined;
+    method: string;
+    nodeType: string;
+
+    copy(source: IColorAdjustmentNode): this;
+
+    Nodes: {
+        hue: IFunctionNode;
+        saturation: IFunctionNode;
+        vibrance: IFunctionNode;
+    };
+
+    SATURATION: string;
+    HUE: string;
+    VIBRANCE: string;
+    BRIGHTNESS: string;
+    CONTRAST: string;
+}
+
+export interface ILuminanceNode extends ITempNode {
+    new(rgb: INode) : this;
+
+    rgb: INode;
+    nodeType: string;
+
+    copy(source: ILuminanceNode): this;
+
+    Nodes: {
+        LUMA: IConstNode;
+        luminance: IFunctionNode;
+    };
+}
+
+export interface IBasicNode extends INode {
+    new() : this;
+
+    position: INode;
+    color: INode;
+    alpha: INode;
+    mask: INode;
+    nodeType: string;
+
+    build(builder: INodeBuilder): string;
+    copy(source: IBasicNode): this;
+}
+
+export interface ISpriteNode extends INode {
+    new() : this;
+
+    color: INode;
+    spherical: true;
+    nodeType: string;
+
+    build(builder: INodeBuilder): string;
+    copy(source: ISpriteNode): this;
+}
+
+export interface IPhongNode extends INode {
+    new() : this;
+
+    color: INode;
+    specular: INode;
+    shininess: INode;
+    nodeType: string;
+
+    build(builder: INodeBuilder): string;
+    copy(source: IPhongNode): this;
+}
+
+export interface IStandardNode extends INode {
+    new() : this;
+
+    color: INode;
+    roughness: INode;
+    metalness: INode;
+    nodeType: string;
+    sheenColor: INode;
+
+    build(builder: INodeBuilder): string;
+    copy(source: IStandardNode): this;
+}
+
+export interface IMeshStandardNode extends IStandardNode {
+    new() : this;
+
+    properties: {
+        color: IColor;
+        roughness: number;
+        metalness: number;
+        normalScale: IVector2;
+    };
+
+    inputs: {
+        color: IPropertyNode;
+        roughness: IPropertyNode;
+        metalness: IPropertyNode;
+        normalScale: IPropertyNode;
+    };
+
+    build(builder: INodeBuilder): string;
+}
+
+export interface IBasicNodeMaterial extends INodeMaterial {
+    new() : this;
+
+    color: INode;
+    alpha: INode;
+    mask: INode;
+    position: INode;
+}
+
+export interface ISpriteNodeMaterial extends INodeMaterial {
+    new() : this;
+
+    color: INode;
+    alpha: INode;
+    mask: INode;
+    position: INode;
+    spherical: INode;
+}
+
+export interface IPhongNodeMaterial extends INodeMaterial {
+    new() : this;
+
+    color: INode;
+    alpha: INode;
+    specular: INode;
+    shininess: INode;
+    normal: INode;
+    emissive: INode;
+    ambient: INode;
+    light: INode;
+    shadow: INode;
+    ao: INode;
+    environment: INode;
+    environmentAlpha: INode;
+    mask: INode;
+    position: INode;
+}
+
+export interface IStandardNodeMaterial extends INodeMaterial {
+    new() : this;
+
+    color: INode;
+    alpha: INode;
+    roughness: INode;
+    metalness: INode;
+    reflectivity: INode;
+    clearcoat: INode;
+    clearcoatRoughness: INode;
+    clearcoatNormal: INode;
+    normal: INode;
+    emissive: INode;
+    ambient: INode;
+    light: INode;
+    shadow: INode;
+    ao: INode;
+    environment: INode;
+    mask: INode;
+    position: INode;
+    sheenColor: INode;
+}
+
+export interface IMeshStandardNodeMaterial extends INodeMaterial {
+    new() : this;
+
+    color: IColor | INode;
+    roughness: number | INode;
+    metalness: number | INode;
+    map: ITexture | INode;
+    normalMap: ITexture | INode;
+    normalScale: IVector2 | INode;
+    metalnessMap: ITexture | INode;
+    roughnessMap: ITexture | INode;
+    envMap: ICubeTexture | INode;
+}
+
+export interface INodePostProcessing {
+    new(renderer: IWebGLRenderer, renderTarget?: IWebGLRenderTarget) : this;
+
+    renderer: IWebGLRenderer;
+    renderTarget: IWebGLRenderTarget;
+
+    output: IScreenNode;
+    material: INodeMaterial;
+
+    camera: IOrthographicCamera;
+    scene: IScene;
+
+    quad: IMesh;
+    needsUpdate: boolean;
+
+    render(scene: IScene, camera: ICamera, frame: INodeFrame): void;
+    setSize(width: number, height: number): void;
+    copy(source: INodePostProcessing): this;
+    toJSON(meta?: object | string): object;
+}
+
+
+export interface IUVTransformNode extends IExpressionNode {
+    new(uv?: IUVNode, position?: IMatrix3Node) : this;
+
+    uv: IUVNode;
+    position: IMatrix3Node;
+
+    nodeType: string;
+
+    setUvTransform(tx: number, ty: number, sx: number, sy: number, rotation: number, cx?: number, cy?: number): void;
+    copy(source: IUVTransformNode): this;
+}
+
+export interface ITextureNode extends IInputNode {
+    new(value: ITexture, uv?: IUVNode | IUVTransformNode, bias?: INode, project?: boolean) : this;
+
+    value: ITexture;
+    uv: IUVNode | IUVTransformNode;
+    bias: INode;
+    project: boolean;
+    nodeType: string;
+
+    getTexture(builder: INodeBuilder, output: string): string;
+    copy(source: ITextureNode): this;
+}
+
+export interface IVector2Node extends IInputNode {
+    new(x: IVector2 | number, y?: number) : this;
+
+    value: IVector2;
+    nodeType: string;
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IVector2Node): this;
+}
+
+export interface IVector3Node extends IInputNode {
+    new(x: IVector3 | number, y?: number, z?: number) : this;
+
+    value: IVector3;
+    nodeType: string;
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IVector3Node): this;
+}
+
+export interface IVector4Node extends IInputNode {
+    new(x: IVector4 | number, y?: number, z?: number, w?: number) : this;
+
+    value: IVector4;
+    nodeType: string;
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IVector4Node): this;
+}
+
+export interface IColorNode extends IInputNode {
+    new(color: TColorRepresentation, g?: number, b?: number) : this;
+
+    value: IColor;
+    nodeType: string;
+
+    generateReadonly(
+        builder: INodeBuilder,
+        output: string,
+        uuid?: string,
+        type?: string,
+        ns?: string,
+        needsUpdate?: boolean,
+    ): string;
+    copy(source: IColorNode): this;
+}
+
+
+
+export interface INormalMapNode extends ITempNode {
+    new(value: ITextureNode, scale?: IVector2Node) : this;
+
+    value: ITextureNode;
+    scale: IVector2Node;
+    toNormalMap: boolean;
+    nodeType: string;
+
+    copy(source: INormalMapNode): this;
+
+    Nodes: {
+        perturbNormal2Arb: IFunctionNode;
+    };
+}
+
+export interface IOperatorNode extends ITempNode {
+    new(a: INode, b: INode, op: string) : this;
+
+    a: INode;
+    b: INode;
+    op: string;
+
+    copy(source: IOperatorNode): this;
+
+    ADD: string;
+    SUB: string;
+    MUL: string;
+    DIV: string;
+}
+
+export interface INodeMaterialBuildParams {
+    builder?: INodeBuilder;
+    renderer?: IWebGLRenderer;
+}
+
+export interface INodeUniformParams {
+    name?: string;
+    type?: string;
+    node?: INode;
+    needsUpdate?: boolean;
+}
+
+export interface INodeUniform {
+    new(params?: INodeUniformParams):this;
+    name: string | undefined;
+    type: string | undefined;
+    node: INode | undefined;
+    needsUpdate: boolean | undefined;
+    value: any;
+}
+
+export interface INodeFrame {
+    new(time: number) : this;
+    time: number;
+    id: number;
+    delta: number | undefined;
+    renderer: IWebGLRenderer | undefined;
+    renderTexture: ITexture | undefined;
+
+    update(delta: number): this;
+    setRenderer(renderer: IWebGLRenderer): this;
+    setRenderTexture(renderTexture: ITexture): this;
+    updateNode(node: INode): this;
+}
+
+export interface IRawNode extends INode {
+    new(value: INode) : this;
+
+    value: INode;
+    nodeType: string;
+
+    copy(source: IRawNode): this;
+}
+
+
+export interface INodeMaterial extends IShaderMaterial {
+    new(vertex: INode, fragment: INode) : this;
+
+    vertex: INode | IRawNode;
+    fragment: INode | IRawNode;
+
+    updaters: object[];
+
+    readonly isNodeMaterial: true;
+    properties: object;
+
+    updateFrame(frame: INodeFrame): void;
+    build(params?: INodeMaterialBuildParams): this;
+    getHash(): string;
+    copy(source: INodeMaterial): this;
+}
+
 
 /**
  * This is a superefficent class for geometries because it saves all data in buffers.
@@ -8383,7 +9701,7 @@ export interface IPlaneDepthGeometry extends IBufferGeometry {
 	/**
 	 * @default 'PlaneDepthGeometry'
 	 */
-	type: string ;
+	type: string;
 
 	/**
 	 * The Parameters of plane depth geometry
@@ -8405,14 +9723,14 @@ export interface IPlaneDepthGeometry extends IBufferGeometry {
 	 * @param [heightSegments=1] — Number of segmented faces along the height of the sides.
 	 * @param [depthRate=1]
 	 */
-	new(
+	new (
 		width?: number,
 		height?: number,
 		depth?: number,
 		widthSegments?: number,
 		heightSegments?: number,
 		depthRate?: number
-	) :this;
+	): this;
 }
 
 /**
@@ -8422,85 +9740,97 @@ export interface IPlaneDepthGeometry extends IBufferGeometry {
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/PlanePerlinGeometry) page for a live demo.
  *
  */
- export interface IPlanePerlinGeometry {
-    /**
-     * The Data of plane perlin geometry
-     */
-    data: number[];
-    /**
-     * Creates an instance of plane perlin geometry.
-     * @param worldWidth
-     * @param worldDepth
-     * @param [quality]
-     */
-    new(worldWidth: number, worldDepth: number, quality?: number): this;
-    /**
-     * Gets y
-     * @param x
-     * @param z
-     * @returns
-     */
-    getY(x: number, z: number): number;
-    /**
-     * Generates height
-     * @param width
-     * @param height
-     * @param [quality]
-     * @returns height
-     */
-    generateHeight(width: number, height: number, quality?: number): number[];
-    /**
-     * Gets terrain
-     * @param planeWidth
-     * @param planeHeight
-     * @param planeDepth
-     * @returns terrain
-     */
-    getTerrain(planeWidth: number, planeHeight: number, planeDepth: number): IBufferGeometry;
-    /**
-     * Gets minecraft
-     * @param planeWidth
-     * @param planeHeight
-     * @param planeDepth
-     * @returns minecraft
-     */
-    getMinecraft(planeWidth: number, planeHeight: number, planeDepth: number): IBufferGeometry;
-    /**
-     * Gets minecraft ao
-     * @param planeWidth
-     * @param planeHeight
-     * @param planeDepth
-     * @param light
-     * @param shadow
-     * @returns minecraft ao
-     */
-    getMinecraftAo(planeWidth: number, planeHeight: number, planeDepth: number, light: IColor, shadow: IColor): IBufferGeometry;
-    /**
-     * Gets geometry
-     * @param planeGeometry
-     * @param uv
-     * @param rotate
-     * @param translate
-     * @param [colors]
-     * @returns geometry
-     */
-    getGeometry(planeGeometry: IBufferGeometry, uv: number[], rotate: {
-        x: number;
-        y: number;
-        z: number;
-    }, translate: {
-        x: number;
-        y: number;
-        z: number;
-    }, colors?: IColor[]): IBufferGeometry;
-    /**
-     * Gets texture
-     * @param sun
-     * @param color
-     * @param add
-     * @returns texture
-     */
-    getTexture(sun: IVector3, color: IColor, add: IColor): HTMLCanvasElement;
+export interface IPlanePerlinGeometry {
+	/**
+	 * The Data of plane perlin geometry
+	 */
+	data: number[];
+	/**
+	 * Creates an instance of plane perlin geometry.
+	 * @param worldWidth
+	 * @param worldDepth
+	 * @param [quality]
+	 */
+	new (worldWidth: number, worldDepth: number, quality?: number): this;
+	/**
+	 * Gets y
+	 * @param x
+	 * @param z
+	 * @returns
+	 */
+	getY(x: number, z: number): number;
+	/**
+	 * Generates height
+	 * @param width
+	 * @param height
+	 * @param [quality]
+	 * @returns height
+	 */
+	generateHeight(width: number, height: number, quality?: number): number[];
+	/**
+	 * Gets terrain
+	 * @param planeWidth
+	 * @param planeHeight
+	 * @param planeDepth
+	 * @returns terrain
+	 */
+	getTerrain(planeWidth: number, planeHeight: number, planeDepth: number): IBufferGeometry;
+	/**
+	 * Gets minecraft
+	 * @param planeWidth
+	 * @param planeHeight
+	 * @param planeDepth
+	 * @returns minecraft
+	 */
+	getMinecraft(planeWidth: number, planeHeight: number, planeDepth: number): IBufferGeometry;
+	/**
+	 * Gets minecraft ao
+	 * @param planeWidth
+	 * @param planeHeight
+	 * @param planeDepth
+	 * @param light
+	 * @param shadow
+	 * @returns minecraft ao
+	 */
+	getMinecraftAo(
+		planeWidth: number,
+		planeHeight: number,
+		planeDepth: number,
+		light: IColor,
+		shadow: IColor
+	): IBufferGeometry;
+	/**
+	 * Gets geometry
+	 * @param planeGeometry
+	 * @param uv
+	 * @param rotate
+	 * @param translate
+	 * @param [colors]
+	 * @returns geometry
+	 */
+	getGeometry(
+		planeGeometry: IBufferGeometry,
+		uv: number[],
+		rotate: {
+			x: number;
+			y: number;
+			z: number;
+		},
+		translate: {
+			x: number;
+			y: number;
+			z: number;
+		},
+		colors?: IColor[]
+	): IBufferGeometry;
+	/**
+	 * Gets texture
+	 * @param sun
+	 * @param color
+	 * @param add
+	 * @returns texture
+	 */
+	getTexture(sun: IVector3, color: IColor, add: IColor): HTMLCanvasElement;
 }
 
 /**
@@ -8510,35 +9840,44 @@ export interface IPlaneDepthGeometry extends IBufferGeometry {
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/RingDepthGeometry) page for a live demo.
  *
  */
- export interface IRingDepthGeometry extends IBufferGeometry {
-    /**
-     * @default 'RingDepthGeometry'
-     */
-    type: string;
-    /**
-     * The Parameters of ring depth geometry
-     */
-    parameters: {
-        innerRadius: number;
-        outerRadius: number;
-        depth: number;
-        thetaSegments: number;
-        phiSegments: number;
-        thetaStart: number;
-        thetaLength: number;
-        depthRate: number;
-    };
-    /**
-     * @param [innerRadius=0.5]
-     * @param [outerRadius=1]
-     * @param [depth=1]
-     * @param [thetaSegments=8]
-     * @param [phiSegments=1]
-     * @param [thetaStart=0]
-     * @param [thetaLength=Math.PI * 2]
-     * @param [depthRate=1]
-     */
-    new(innerRadius?: number, outerRadius?: number, depth?: number, thetaSegments?: number, phiSegments?: number, thetaStart?: number, thetaLength?: number, depthRate?: number) : this;
+export interface IRingDepthGeometry extends IBufferGeometry {
+	/**
+	 * @default 'RingDepthGeometry'
+	 */
+	type: string;
+	/**
+	 * The Parameters of ring depth geometry
+	 */
+	parameters: {
+		innerRadius: number;
+		outerRadius: number;
+		depth: number;
+		thetaSegments: number;
+		phiSegments: number;
+		thetaStart: number;
+		thetaLength: number;
+		depthRate: number;
+	};
+	/**
+	 * @param [innerRadius=0.5]
+	 * @param [outerRadius=1]
+	 * @param [depth=1]
+	 * @param [thetaSegments=8]
+	 * @param [phiSegments=1]
+	 * @param [thetaStart=0]
+	 * @param [thetaLength=Math.PI * 2]
+	 * @param [depthRate=1]
+	 */
+	new (
+		innerRadius?: number,
+		outerRadius?: number,
+		depth?: number,
+		thetaSegments?: number,
+		phiSegments?: number,
+		thetaStart?: number,
+		thetaLength?: number,
+		depthRate?: number
+	): this;
 }
 
 /**
@@ -8548,19 +9887,19 @@ export interface IPlaneDepthGeometry extends IBufferGeometry {
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/RopeGeometry) page for a live demo.
  *
  */
- export interface IRopeGeometry extends IBufferGeometry {
-    /**
-     * The Parameters of rope geometry
-     */
-    parameters: {
-        width: number;
-        widthSegments: number;
-    };
-    /**
-     * @param [width=1]
-     * @param [widthSegments=1]
-     */
-    new(width?: number, widthSegments?: number) : this;
+export interface IRopeGeometry extends IBufferGeometry {
+	/**
+	 * The Parameters of rope geometry
+	 */
+	parameters: {
+		width: number;
+		widthSegments: number;
+	};
+	/**
+	 * @param [width=1]
+	 * @param [widthSegments=1]
+	 */
+	new (width?: number, widthSegments?: number): this;
 }
 
 /**
@@ -8570,33 +9909,41 @@ export interface IPlaneDepthGeometry extends IBufferGeometry {
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/StarDepthGeometry) page for a live demo.
  *
  */
- export interface IStarDepthGeometry extends IBufferGeometry {
-    /**
-     * @default 'StarDepthGeometry'
-     */
-    type: string;
-    /**
-     * The Parameters of star depth geometry
-     */
-    parameters: {
-        innerRadius: number;
-        outerRadius: number;
-        depth: number;
-        segments: number;
-        thetaStart: number;
-        thetaLength: number;
-        depthRate: number;
-    };
-    /**
-     * @param [innerRadius=0.5]
-     * @param [outerRadius=1]
-     * @param [depth=1]
-     * @param [segments=5]
-     * @param [thetaStart=0]
-     * @param [thetaLength=Math.PI * 2]
-     * @param [depthRate=1]
-     */
-    new(innerRadius?: number, outerRadius?: number, depth?: number, segments?: number, thetaStart?: number, thetaLength?: number, depthRate?: number):this;
+export interface IStarDepthGeometry extends IBufferGeometry {
+	/**
+	 * @default 'StarDepthGeometry'
+	 */
+	type: string;
+	/**
+	 * The Parameters of star depth geometry
+	 */
+	parameters: {
+		innerRadius: number;
+		outerRadius: number;
+		depth: number;
+		segments: number;
+		thetaStart: number;
+		thetaLength: number;
+		depthRate: number;
+	};
+	/**
+	 * @param [innerRadius=0.5]
+	 * @param [outerRadius=1]
+	 * @param [depth=1]
+	 * @param [segments=5]
+	 * @param [thetaStart=0]
+	 * @param [thetaLength=Math.PI * 2]
+	 * @param [depthRate=1]
+	 */
+	new (
+		innerRadius?: number,
+		outerRadius?: number,
+		depth?: number,
+		segments?: number,
+		thetaStart?: number,
+		thetaLength?: number,
+		depthRate?: number
+	): this;
 }
 
 /**
@@ -8606,15 +9953,15 @@ export interface IPlaneDepthGeometry extends IBufferGeometry {
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/OutlineGeometry) page for a live demo.
  *
  */
- export interface IOutlineGeometry extends IWireframeGeometry {
-    /**
-     * @param [innerRadius=0.5]
-     * @param [outerRadius=1]
-     * @param [segments=5]
-     * @param [thetaStart=0]
-     * @param [thetaLength=Math.PI * 2]
-     */
-    new(geometry: IBufferGeometry, scale?: number) : this;
+export interface IOutlineGeometry extends IWireframeGeometry {
+	/**
+	 * @param [innerRadius=0.5]
+	 * @param [outerRadius=1]
+	 * @param [segments=5]
+	 * @param [thetaStart=0]
+	 * @param [thetaLength=Math.PI * 2]
+	 */
+	new (geometry: IBufferGeometry, scale?: number): this;
 }
 
 /**
@@ -8624,15 +9971,15 @@ export interface IPlaneDepthGeometry extends IBufferGeometry {
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/StarGeometry) page for a live demo.
  *
  */
- export interface IStarGeometry extends ICircleGeometry {
-    /**
-     * @param [innerRadius=0.5]
-     * @param [outerRadius=1]
-     * @param [segments=5]
-     * @param [thetaStart=0]
-     * @param [thetaLength=Math.PI * 2]
-     */
-    new(innerRadius?: number, outerRadius?: number, segments?: number, thetaStart?: number, thetaLength?: number):this;
+export interface IStarGeometry extends ICircleGeometry {
+	/**
+	 * @param [innerRadius=0.5]
+	 * @param [outerRadius=1]
+	 * @param [segments=5]
+	 * @param [thetaStart=0]
+	 * @param [thetaLength=Math.PI * 2]
+	 */
+	new (innerRadius?: number, outerRadius?: number, segments?: number, thetaStart?: number, thetaLength?: number): this;
 }
 
 export interface IEdgeSplitModifier {
@@ -9678,18 +11025,6 @@ export interface IReflectorShader {
 	};
 	vertexShader: string;
 	fragmentShader: string;
-}
-
-/**
- * Reflector options
- */
-export interface IReflectorOptions {
-	clipBias?: number | undefined;
-	textureWidth?: number | undefined;
-	textureHeight?: number | undefined;
-	color?: number | undefined;
-	useDepthTexture?: boolean | undefined;
-	shader?: IReflectorShader | undefined;
 }
 
 /**

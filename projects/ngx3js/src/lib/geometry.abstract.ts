@@ -1612,7 +1612,7 @@ export class AbstractGeometryComponent
 					);
 				}
 				if (this.mergeVertices) {
-					geometry = THREE.BufferGeometryUtils.mergeVertices(geometry);
+					geometry = THREE.GeometryUtils.mergeVertices(geometry);
 				}
 				if (this.edgeSplit) {
 					const modifier = new THREE.EdgeSplitModifier();

@@ -707,7 +707,7 @@ export class GeometryComponent
 			let pointsGeometry = this.pointsGeometry.getGeometry().clone();
 			pointsGeometry.deleteAttribute('normal');
 			pointsGeometry.deleteAttribute('uv');
-			pointsGeometry = THREE.BufferGeometryUtils.mergeVertices(pointsGeometry);
+			pointsGeometry = THREE.GeometryUtils.mergeVertices(pointsGeometry);
 			const positionAttribute = pointsGeometry.getAttribute('position');
 			for (let i = 0; i < positionAttribute.count; i++) {
 				const vertex = new THREE.Vector3();
@@ -1509,12 +1509,12 @@ export class GeometryComponent
 								geometry.deleteAttribute('normal');
 								geometry.deleteAttribute('uv');
 								geometries.push(
-									THREE.BufferGeometryUtils.mergeVertices(geometry)
+									THREE.GeometryUtils.mergeVertices(geometry)
 								);
 							});
 						}
 						geometry =
-							THREE.BufferGeometryUtils.mergeBufferGeometries(geometries);
+							THREE.GeometryUtils.mergeBufferGeometries(geometries);
 						break;
 					case 'shapebuffergeometry':
 					case 'extrudebuffergeometry':

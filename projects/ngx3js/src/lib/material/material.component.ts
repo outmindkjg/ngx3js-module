@@ -869,7 +869,7 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getColorNode(color?: I3JS.IColor): any {
-		return new THREE_MAT.NODES.ColorNode(color as any);
+		return new THREE.ColorNode(color as any);
 	}
 
 	/**
