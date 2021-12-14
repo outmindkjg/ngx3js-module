@@ -1,6 +1,6 @@
 {
 	"name": "ngx3js",
-	"version": "0.135.0-2021120323",
+	"version": "0.135.0-2021121422",
 	"keywords": [
 		"three",
 		"three.js",
@@ -36,12 +36,12 @@
 	"homepage": "https://outmindkjg.github.io/ngx3js-doc/",
 	"dependencies": {
 		"gsap": "^3.8.0",
-		"three": "0.134.0",
+		"three": "0.135.0",
 		"chroma-js": "^2.1.2",
 		"tslib": "^2.3.0"
 	},
 	"devDependencies": {
-		"@types/three": "0.134.0",
+		"@types/three": "0.135.0",
 		"@types/chroma-js": "^2.1.2"
 	},
 	"peerDependencies": {

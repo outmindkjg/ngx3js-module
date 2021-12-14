@@ -76,7 +76,7 @@ rl.question(question, function (agree) {
 				packageJson['devDependencies'] = {};
 			}
 			const devDependencies = packageJson['devDependencies'];
-			devDependencies['@types/three'] = '0.134.0';
+			devDependencies['@types/three'] = '0.135.0';
 			devDependencies['@types/chroma-js'] = '^2.1.2';
 
 			const tsconfigJson = readJson('tsconfig');
