@@ -9,7 +9,7 @@ import {
 import { RotateDirective, RotateOptions } from './object3d-rotate.directive';
 import { ScaleDirective, ScaleOptions } from './object3d-scale.directive';
 
-export const NGX3JS_DIRECTIVES = [
+export const N3JS_DIRECTIVES = [
 	DrawingCanvasDirective,
 	RotateDirective,
 	ScaleDirective,

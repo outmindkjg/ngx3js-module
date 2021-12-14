@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ThreeColor, ThreeUtil, THREE, I3JS } from './../interface';
-import * as THREE_FOG from './fogs/three-fogs';
+import { ThreeColor, ThreeUtil, N3JS, I3JS } from './../interface';
 
 /**
  * The Fog component.
@@ -166,7 +165,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 					case 'density':
 						if (
 							ThreeUtil.isNotNull(this.density) &&
-							this.fog instanceof THREE.FogExp2
+							this.fog instanceof N3JS.FogExp2
 						) {
 							this.fog.density = ThreeUtil.getTypeSafe(this.density, 0.00025);
 						}
@@ -174,7 +173,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 					case 'near':
 						if (
 							ThreeUtil.isNotNull(this.near) &&
-							this.fog instanceof THREE.Fog
+							this.fog instanceof N3JS.Fog
 						) {
 							this.fog.near = ThreeUtil.getTypeSafe(this.near);
 						}
@@ -182,7 +181,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 					case 'far':
 						if (
 							ThreeUtil.isNotNull(this.far) &&
-							this.fog instanceof THREE.Fog
+							this.fog instanceof N3JS.Fog
 						) {
 							this.fog.far = ThreeUtil.getTypeSafe(this.far);
 						}
@@ -204,14 +203,14 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 				case 'exp':
 				case 'exp2':
 				case 'fogexp2':
-					this.fog = new THREE.FogExp2(
+					this.fog = new N3JS.FogExp2(
 						ThreeUtil.getColorSafe(this.color, 0xffffff).getHex(),
 						ThreeUtil.getTypeSafe(this.density, 0.00025)
 					);
 					break;
 				case 'fog':
 				default:
-					this.fog = new THREE.Fog(
+					this.fog = new N3JS.Fog(
 						ThreeUtil.getColorSafe(this.color, 0xffffff),
 						ThreeUtil.getTypeSafe(this.near),
 						ThreeUtil.getTypeSafe(this.far)

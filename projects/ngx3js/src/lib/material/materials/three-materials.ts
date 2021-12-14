@@ -1,286 +1,6 @@
-import { THREE, I3JS } from '../../interface';
-import {
-	LineMaterial,
-	LineMaterialParameters,
-} from 'three/examples/jsm/lines/LineMaterial';
-import * as NODES from 'three/examples/jsm/nodes/Nodes';
+import { GLSL3, GLSLVersion, RawShaderMaterial, ShaderMaterial, ShaderMaterialParameters } from 'three';
+
 import { ShaderUtils } from '../../shader/shaders/shaderUtils';
-
-/**
- * LineBasic material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLineBasicMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/LineBasicMaterial) page for a live demo.
- *
- */
-export class NgxLineBasicMaterial extends THREE.LineBasicMaterial {
-	/**
-	 * Creates an instance of ngx line basic material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.ILineBasicMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * LineDashed material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLineDashedMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/LineDashedMaterial) page for a live demo.
- *
- */
-export class NgxLineDashedMaterial extends THREE.LineDashedMaterial {
-	/**
-	 * Creates an instance of ngx line dashed material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.ILineDashedMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshBasic material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshBasicMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshBasicMaterial) page for a live demo.
- *
- */
-export class NgxMeshBasicMaterial extends THREE.MeshBasicMaterial {
-	/**
-	 * Creates an instance of ngx mesh basic material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshBasicMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshDistance material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshDistanceMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshDistanceMaterial) page for a live demo.
- *
- */
-export class NgxMeshDistanceMaterial extends THREE.MeshDistanceMaterial {
-	/**
-	 * Creates an instance of ngx mesh distance material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshDistanceMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshMatcap material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshMatcapMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshMatcapMaterial) page for a live demo.
- *
- */
-export class NgxMeshMatcapMaterial extends THREE.MeshMatcapMaterial {
-	/**
-	 * Creates an instance of ngx mesh matcap material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshMatcapMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshNormal material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshNormalMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshNormalMaterial) page for a live demo.
- *
- */
-export class NgxMeshNormalMaterial extends THREE.MeshNormalMaterial {
-	/**
-	 * Creates an instance of ngx mesh normal material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshNormalMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshPhong material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshPhongMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshPhongMaterial) page for a live demo.
- *
- */
-export class NgxMeshPhongMaterial extends THREE.MeshPhongMaterial {
-	/**
-	 * Creates an instance of ngx mesh phong material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshPhongMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshPhysical material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshPhysicalMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshPhysicalMaterial) page for a live demo.
- *
- */
-export class NgxMeshPhysicalMaterial extends THREE.MeshPhysicalMaterial {
-	/**
-	 * Creates an instance of ngx mesh physical material.
-	 * @param [parameters]
-	 */
-	/**
-	 * Creates an instance of ngx mesh physical material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshPhysicalMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshStandard material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshStandardMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshStandardMaterial) page for a live demo.
- *
- */
-export class NgxMeshStandardMaterial extends THREE.MeshStandardMaterial {
-	/**
-	 * Creates an instance of ngx mesh standard material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshStandardMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshToon material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshToonMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshToonMaterial) page for a live demo.
- *
- */
-export class NgxMeshToonMaterial extends THREE.MeshToonMaterial {
-	/**
-	 * Creates an instance of ngx mesh toon material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshToonMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * Points material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPointsMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/PointsMaterial) page for a live demo.
- *
- */
-export class NgxPointsMaterial extends THREE.PointsMaterial {
-	/**
-	 * Creates an instance of ngx points material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IPointsMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * Shadow material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShadowMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShadowMaterial) page for a live demo.
- *
- */
-export class NgxShadowMaterial extends THREE.ShadowMaterial {
-	/**
-	 * Creates an instance of ngx shadow material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IShadowMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * Line material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLineMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/LineMaterial) page for a live demo.
- *
- */
-export class NgxLineMaterial extends LineMaterial {
-	/**
-	 * Creates an instance of ngx line material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: LineMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * Sprite material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSpriteMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/SpriteMaterial) page for a live demo.
- *
- */
-export class NgxSpriteMaterial extends THREE.SpriteMaterial {
-	/**
-	 * Creates an instance of ngx sprite material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.ISpriteMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshLambert material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshLambertMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshLambertMaterial) page for a live demo.
- *
- */
-export class NgxMeshLambertMaterial extends THREE.MeshLambertMaterial {
-	/**
-	 * Creates an instance of ngx mesh lambert material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshLambertMaterialParameters) {
-		super(parameters);
-	}
-}
-
-/**
- * MeshDepth material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshDepthMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshDepthMaterial) page for a live demo.
- *
- */
-export class NgxMeshDepthMaterial extends THREE.MeshDepthMaterial {
-	/**
-	 * Creates an instance of ngx mesh depth material.
-	 * @param [parameters]
-	 */
-	constructor(parameters?: I3JS.IMeshDepthMaterialParameters) {
-		super(parameters);
-	}
-}
 
 /**
  * RawShader material
@@ -289,7 +9,7 @@ export class NgxMeshDepthMaterial extends THREE.MeshDepthMaterial {
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/RawShaderMaterial) page for a live demo.
  *
  */
-export class NgxRawShaderMaterial extends THREE.RawShaderMaterial {
+export class NgxRawShaderMaterial extends RawShaderMaterial {
 	/**
 	 * Creates an instance of ngx raw shader material.
 	 *
@@ -297,9 +17,9 @@ export class NgxRawShaderMaterial extends THREE.RawShaderMaterial {
 	 * @param [shaderId]
 	 */
 	constructor(
-		parameters?: I3JS.IShaderMaterialParameters,
+		parameters?: ShaderMaterialParameters,
 		shaderId?: string,
-		glslVersion?: I3JS.TGLSLVersion
+		glslVersion?: GLSLVersion
 	) {
 		if (shaderId !== null && shaderId !== undefined) {
 			const shader = ShaderUtils.getShaderClone(shaderId);
@@ -322,14 +42,14 @@ export class NgxRawShaderMaterial extends THREE.RawShaderMaterial {
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShaderMaterial) page for a live demo.
  *
  */
-export class NgxShaderMaterial extends THREE.ShaderMaterial {
+export class NgxShaderMaterial extends ShaderMaterial {
 	/**
 	 * Creates an instance of ngx shader material.
 	 *
 	 * @param [parameters]
 	 * @param [shaderId]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters, shaderId?: string) {
+	constructor(parameters?: ShaderMaterialParameters, shaderId?: string) {
 		if (shaderId !== null && shaderId !== undefined) {
 			const shader = ShaderUtils.getShaderClone(shaderId);
 			parameters.vertexShader = shader.vertexShader;
@@ -338,105 +58,6 @@ export class NgxShaderMaterial extends THREE.ShaderMaterial {
 			parameters.defines = shader.defines;
 		}
 		super(parameters);
-	}
-}
-
-/**
- * StandardNode material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxStandardNodeMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/StandardNodeMaterial) page for a live demo.
- *
- */
-export class NgxStandardNodeMaterial extends NODES.StandardNodeMaterial {
-	/**
-	 * Creates an instance of ngx standard node material.
-	 */
-	constructor() {
-		super();
-	}
-}
-
-/**
- * BasicNode material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxBasicNodeMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/BasicNodeMaterial) page for a live demo.
- *
- */
-export class NgxBasicNodeMaterial extends NODES.BasicNodeMaterial {
-	/**
-	 * Creates an instance of ngx basic node material.
-	 */
-	constructor() {
-		super();
-	}
-}
-
-/**
- * MeshStandardNode material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshStandardNodeMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshStandardNodeMaterial) page for a live demo.
- *
- */
-export class NgxMeshStandardNodeMaterial extends NODES.MeshStandardNodeMaterial {
-	/**
-	 * Creates an instance of ngx mesh standard node material.
-	 */
-	constructor() {
-		super();
-	}
-}
-
-/**
- * PhongNode material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPhongNodeMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/PhongNodeMaterial) page for a live demo.
- *
- */
-export class NgxPhongNodeMaterial extends NODES.PhongNodeMaterial {
-	/**
-	 * Creates an instance of ngx phong node material.
-	 */
-	constructor() {
-		super();
-	}
-}
-
-/**
- * SpriteNode material
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSpriteNodeMaterial) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/SpriteNodeMaterial) page for a live demo.
- *
- */
-export class NgxSpriteNodeMaterial extends NODES.SpriteNodeMaterial {
-	/**
-	 * Creates an instance of ngx sprite node material.
-	 */
-	constructor() {
-		super();
-	}
-}
-
-/**
- * NormalMap node
- *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxNormalMapNode) page for details.
- * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/PhongNodeMaterial) page for a live demo.
- *
- */
-export class NgxNormalMapNode extends NODES.NormalMapNode {
-	/**
-	 * Creates an instance of ngx normal map node.
-	 *
-	 * @param value
-	 * @param [scale]
-	 */
-	constructor(value: NODES.TextureNode, scale?: NODES.Vector2Node) {
-		super(value, scale);
 	}
 }
 
@@ -453,7 +74,7 @@ export class NgxShaderAudioVisualizerMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'AudioVisualizer');
 	}
 }
@@ -471,7 +92,7 @@ export class NgxShaderAttributesParticlesMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'AttributesParticles');
 	}
 }
@@ -489,7 +110,7 @@ export class NgxShaderSelectiveDrawMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'SelectiveDraw');
 	}
 }
@@ -507,7 +128,7 @@ export class NgxShaderCustomAttributesMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'CustomAttributes');
 	}
 }
@@ -525,7 +146,7 @@ export class NgxShaderCustomAttributesLinesMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'CustomAttributesLines');
 	}
 }
@@ -543,7 +164,7 @@ export class NgxShaderCustomAttributesPointsMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'CustomAttributesPoints');
 	}
 }
@@ -561,7 +182,7 @@ export class NgxShaderAttributeSizeColorMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'AttributeSizeColor');
 	}
 }
@@ -579,7 +200,7 @@ export class NgxShaderAttributeSizeColor1Material extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'AttributeSizeColor1');
 	}
 }
@@ -597,7 +218,7 @@ export class NgxShaderSkyDomeMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'SkyDome');
 	}
 }
@@ -615,7 +236,7 @@ export class NgxShaderParallaxMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'Parallax');
 	}
 }
@@ -633,7 +254,7 @@ export class NgxShaderFresnelMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'Fresnel');
 	}
 }
@@ -651,7 +272,7 @@ export class NgxShaderSubsurfaceScatteringMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'SubsurfaceScattering');
 	}
 }
@@ -669,7 +290,7 @@ export class NgxShaderWireframeMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'Wireframe');
 	}
 }
@@ -687,7 +308,7 @@ export class NgxShaderNoiseRandom1DMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'NoiseRandom1D');
 	}
 }
@@ -705,7 +326,7 @@ export class NgxShaderNoiseRandom2DMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'NoiseRandom2D');
 	}
 }
@@ -723,7 +344,7 @@ export class NgxShaderNoiseRandom3DMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'NoiseRandom3D');
 	}
 }
@@ -741,7 +362,7 @@ export class NgxShaderColorRainbowMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'ColorRainbow');
 	}
 }
@@ -759,7 +380,7 @@ export class NgxShaderVideoKinectMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'VideoKinect');
 	}
 }
@@ -777,7 +398,7 @@ export class NgxShaderVolumeRenderShader1Material extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'VolumeRenderShader1');
 	}
 }
@@ -795,7 +416,7 @@ export class NgxShaderInstancingMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'Instancing');
 	}
 }
@@ -813,7 +434,7 @@ export class NgxShaderScaleColorMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'ScaleColor');
 	}
 }
@@ -831,7 +452,7 @@ export class NgxShaderSinColorMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'SinColor');
 	}
 }
@@ -849,7 +470,7 @@ export class NgxShaderRaymarchingReflectMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
+	constructor(parameters?: ShaderMaterialParameters) {
 		super(parameters, 'RaymarchingReflect');
 	}
 }
@@ -867,8 +488,8 @@ export class NgxShaderCloudMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
-		super(parameters, 'Cloud', THREE.GLSL3);
+	constructor(parameters?: ShaderMaterialParameters) {
+		super(parameters, 'Cloud', GLSL3);
 	}
 }
 
@@ -885,9 +506,8 @@ export class NgxShaderPerlinMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: I3JS.IShaderMaterialParameters) {
-		super(parameters, 'Perlin', THREE.GLSL3);
+	constructor(parameters?: ShaderMaterialParameters) {
+		super(parameters, 'Perlin', GLSL3);
 	}
 }
 
-export { LineMaterial, LineMaterialParameters, NODES };

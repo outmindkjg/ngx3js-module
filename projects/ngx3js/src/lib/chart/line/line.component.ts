@@ -9,7 +9,7 @@ import {
 	AbstractChartComponent,
 	AttributeUpdateInfo,
 } from '../../chart.abstract';
-import { I3JS, THREE, ThreeUtil } from '../../interface';
+import { I3JS, N3JS, ThreeUtil } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
@@ -183,7 +183,7 @@ export class ChartLineComponent
 		if (this._line === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.clearChart();
-			this._line = new THREE.Group();
+			this._line = new N3JS.Group();
 			const data: number[] = ThreeUtil.getTypeSafe(this.data, []);
 			this.getTestData(data);
 			const baseZ = this.getDepthCenter();
@@ -338,36 +338,36 @@ export class ChartLineComponent
 					side = 'double';
 					break;
 			}
-			this._geometry = new THREE.BufferGeometry();
+			this._geometry = new N3JS.BufferGeometry();
 			this._geometry.setAttribute(
 				'position',
-				new THREE.BufferAttribute(attributePosition, 3)
+				new N3JS.BufferAttribute(attributePosition, 3)
 			);
 			this._geometry.setIndex(attributeIndex);
 			this._geometry.computeVertexNormals();
 			const options = ThreeUtil.getTypeSafe(this.options, {});
-			this._material = new THREE.MeshPhongMaterial({
+			this._material = new N3JS.MeshPhongMaterial({
 				color: ThreeUtil.getColorSafe(options.backgroundColor, 0xff0000),
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
 				side: ThreeUtil.getSideSafe(side),
 				transparent: true,
 			} as any);
-			const wallMesh = new THREE.Mesh(this._geometry, this._material);
+			const wallMesh = new N3JS.Mesh(this._geometry, this._material);
 			wallMesh.name = 'wall';
 			wallMesh.receiveShadow = true;
 			wallMesh.castShadow = true;
 			this._line.add(wallMesh);
 			this.addUpdateAttributes(this._geometry, areaUpdateAttributes);
-			this._geometryBorder = new THREE.BufferGeometry();
+			this._geometryBorder = new N3JS.BufferGeometry();
 			this._geometryBorder.setAttribute(
 				'position',
-				new THREE.BufferAttribute(attributeLine, 3)
+				new N3JS.BufferAttribute(attributeLine, 3)
 			);
-			this._materialBorder = new THREE.LineBasicMaterial({
+			this._materialBorder = new N3JS.LineBasicMaterial({
 				color: ThreeUtil.getColorSafe(options.borderColor, 0x00ff00),
 				transparent: true,
 			} as any);
-			const borderMesh = new THREE.LineSegments(
+			const borderMesh = new N3JS.LineSegments(
 				this._geometryBorder,
 				this._materialBorder
 			);

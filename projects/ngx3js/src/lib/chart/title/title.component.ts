@@ -6,7 +6,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import { AbstractChartComponent } from '../../chart.abstract';
-import { ThreeColor, ThreeUtil, I3JS, THREE } from '../../interface';
+import { ThreeColor, ThreeUtil, I3JS, N3JS } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
@@ -241,18 +241,18 @@ export class ChartTitleComponent
 					context.fillText(message, textWidth * 0.5, textHeight * 0.6);
 					break;
 			}
-			const texture = new THREE.Texture(canvas);
+			const texture = new N3JS.Texture(canvas);
 			texture.needsUpdate = true;
-			this._material = new THREE.MeshBasicMaterial({
+			this._material = new N3JS.MeshBasicMaterial({
 				color: 0xffffff,
-				side: THREE.DoubleSide,
+				side: N3JS.DoubleSide,
 				map: texture,
 				opacity: 1,
 				transparent: true,
 			});
 			const width = (height * textWidth) / textHeight;
-			this._geometry = new THREE.PlaneGeometry(width, height) as any;
-			this._title = new THREE.Mesh(this._geometry, this._material);
+			this._geometry = new N3JS.PlaneGeometry(width, height) as any;
+			this._title = new N3JS.Mesh(this._geometry, this._material);
 			this.setChart(this._title as any);
 		}
 		return this._title as T;

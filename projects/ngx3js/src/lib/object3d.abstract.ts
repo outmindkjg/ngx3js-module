@@ -12,7 +12,7 @@ import {
 import { AnimationGroupComponent } from './animation-group/animation-group.component';
 import { AbstractControllerComponent } from './controller.component.abstract';
 import { AbstractGeometryComponent } from './geometry.abstract';
-import { I3JS, TagAttributes, THREE, ThreeUtil } from './interface';
+import { I3JS, TagAttributes, N3JS, ThreeUtil } from './interface';
 import { LookatComponent } from './lookat/lookat.component';
 import { AbstractMaterialComponent } from './material.abstract';
 import { MixerComponent } from './mixer/mixer.component';
@@ -606,7 +606,7 @@ export class AbstractObject3dComponent
 			});
 		}
 		if (materials.length == 0 && required) {
-			materials.push(new THREE.MeshBasicMaterial(parameters));
+			materials.push(new N3JS.MeshBasicMaterial(parameters));
 		}
 		if (ThreeUtil.isNotNull(this.materialIsArray)) {
 			if (this.materialIsArray) {
@@ -680,7 +680,7 @@ export class AbstractObject3dComponent
 				return geometry;
 			}
 		}
-		return new THREE.BufferGeometry();
+		return new N3JS.BufferGeometry();
 	}
 
 	/**
@@ -693,7 +693,7 @@ export class AbstractObject3dComponent
 		} else if (this.positionList !== null && this.positionList.length > 0) {
 			return this.positionList.first.getPosition();
 		} else {
-			return new THREE.Vector3(0, 0, 0);
+			return new N3JS.Vector3(0, 0, 0);
 		}
 	}
 
@@ -758,7 +758,7 @@ export class AbstractObject3dComponent
 		} else if (this.scaleList !== null && this.scaleList.length > 0) {
 			return this.scaleList.first.getScale();
 		} else {
-			return new THREE.Vector3(1, 1, 1);
+			return new N3JS.Vector3(1, 1, 1);
 		}
 	}
 
@@ -808,7 +808,7 @@ export class AbstractObject3dComponent
 		} else if (this.rotationList !== null && this.rotationList.length > 0) {
 			return this.rotationList.first.getRotation();
 		} else {
-			return new THREE.Euler(0, 0, 0);
+			return new N3JS.Euler(0, 0, 0);
 		}
 	}
 
@@ -976,13 +976,13 @@ export class AbstractObject3dComponent
 			if (
 				this.object3d !== null &&
 				this.parentObject3d !== null &&
-				this.parentObject3d instanceof THREE.Object3D
+				this.parentObject3d instanceof N3JS.Object3D
 			) {
 				if (
 					oldParent === this.object3d.parent ||
 					this.parentObject3d.parent === null
 				) {
-					if (this.parentObject3d instanceof THREE.LOD) {
+					if (this.parentObject3d instanceof N3JS.LOD) {
 						this.parentObject3d.addLevel(
 							this.object3d as I3JS.IObject3D,
 							this.getLoDistance(0)
@@ -1008,7 +1008,7 @@ export class AbstractObject3dComponent
 	removeObject3d(object3d: I3JS.IObject3D) {
 		if (object3d !== null && object3d.parent !== null) {
 			object3d.traverse((child) => {
-				if (child instanceof THREE.CSS2DObject || child instanceof THREE.CSS3DObject) {
+				if (child instanceof N3JS.CSS2DObject || child instanceof N3JS.CSS3DObject) {
 					if (child.element.parentNode) {
 						child.element.parentNode.removeChild(child.element);
 					}
@@ -1275,11 +1275,11 @@ export class AbstractObject3dComponent
 						break;
 					case 'castshadow':
 						if (
-							!(this.object3d instanceof THREE.Scene) &&
-							!(this.object3d instanceof THREE.Camera) &&
-							!(this.object3d instanceof THREE.HemisphereLight) &&
-							!(this.object3d instanceof THREE.AmbientLight) &&
-							!(this.object3d instanceof THREE.RectAreaLight)
+							!(this.object3d instanceof N3JS.Scene) &&
+							!(this.object3d instanceof N3JS.Camera) &&
+							!(this.object3d instanceof N3JS.HemisphereLight) &&
+							!(this.object3d instanceof N3JS.AmbientLight) &&
+							!(this.object3d instanceof N3JS.RectAreaLight)
 						) {
 							if (ThreeUtil.isNotNull(this.castShadow)) {
 								this.object3d.castShadow = this.castShadow;
@@ -1288,8 +1288,8 @@ export class AbstractObject3dComponent
 						break;
 					case 'receiveshadow':
 						if (
-							!(this.object3d instanceof THREE.Scene) &&
-							!(this.object3d instanceof THREE.Camera)
+							!(this.object3d instanceof N3JS.Scene) &&
+							!(this.object3d instanceof N3JS.Camera)
 						) {
 							if (ThreeUtil.isNotNull(this.receiveShadow)) {
 								this.object3d.receiveShadow = this.receiveShadow;
@@ -1309,7 +1309,7 @@ export class AbstractObject3dComponent
 					case 'lodistance':
 						if (
 							ThreeUtil.isNotNull(this.loDistance) &&
-							this.parentObject3d instanceof THREE.LOD
+							this.parentObject3d instanceof N3JS.LOD
 						) {
 							this.parentObject3d.addLevel(
 								this.object3d as I3JS.IObject3D,

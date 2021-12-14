@@ -1,4 +1,4 @@
-import { THREE, I3JS } from '../../interface';
+import { N3JS, I3JS } from '../../interface';
 
 /**
  * Curves Roller Coaster
@@ -8,7 +8,7 @@ import { THREE, I3JS } from '../../interface';
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/rollercoaster) page for a live curve demo.
  *
  */
-export class CurvesRollerCoaster extends THREE.Curve {
+export class CurvesRollerCoaster extends N3JS.Curve {
 	/**
 	 * Creates an instance of curves line.
 	 * @param [radius]
@@ -25,7 +25,7 @@ export class CurvesRollerCoaster extends THREE.Curve {
 	 * @returns
 	 */
 	public getPoint(t: number, optionalTarget: I3JS.IVector3) {
-		const point = optionalTarget || new THREE.Vector3();
+		const point = optionalTarget || new N3JS.Vector3();
 		t = t * Math.PI * 2;
 		const x = Math.sin(t * 3) * Math.cos(t * 4) * 50;
 		const y = Math.sin(t * 10) * 2 + Math.cos(t * 17) * 2 + 5;

@@ -9,7 +9,7 @@ import {
 import { NgxGeometryUtils } from '../geometry/geometryUtils';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import * as AmmoType from '../threejs-library/ammo-type';
-import { I3JS, RendererTimer, THREE, ThreeUtil } from './../interface';
+import { I3JS, RendererTimer, N3JS, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
 import { RigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
 
@@ -391,27 +391,27 @@ export class RigidbodyComponent
 			const parameters = anyGeometry['parameters'];
 			switch (geometry.type.toLowerCase()) {
 				case 'boxgeometry':
-					return new THREE.Vector3(
+					return new N3JS.Vector3(
 						parameters.width,
 						parameters.height,
 						parameters.depth
 					);
 				case 'spheregeometry':
-					return new THREE.Vector3(
+					return new N3JS.Vector3(
 						parameters.radius * 2,
 						parameters.radius * 2,
 						parameters.radius * 2
 					);
 				case 'planegeometry':
-					return new THREE.Vector3(parameters.width, parameters.height, 0.01);
+					return new N3JS.Vector3(parameters.width, parameters.height, 0.01);
 				case 'cylindergeometry':
-					return new THREE.Vector3(
+					return new N3JS.Vector3(
 						Math.max(parameters.radiusTop, parameters.radiusBottom) * 2,
 						parameters.height,
 						Math.max(parameters.radiusTop, parameters.radiusBottom) * 2
 					);
 				case 'conegeometry':
-					return new THREE.Vector3(
+					return new N3JS.Vector3(
 						parameters.radius * 2,
 						parameters.height,
 						parameters.radius * 2
@@ -419,13 +419,13 @@ export class RigidbodyComponent
 			}
 		}
 		if (ThreeUtil.isNotNull(def)) {
-			if (def instanceof THREE.Vector3) {
+			if (def instanceof N3JS.Vector3) {
 				return def;
 			} else if (typeof def === 'number') {
-				return new THREE.Vector3(def, def, def);
+				return new N3JS.Vector3(def, def, def);
 			}
 		}
-		return new THREE.Vector3();
+		return new N3JS.Vector3();
 	}
 
 	/**
@@ -439,20 +439,20 @@ export class RigidbodyComponent
 		def?: I3JS.IVector3 | number
 	): I3JS.IVector3 {
 		if (ThreeUtil.isNotNull(geometry)) {
-			if (geometry instanceof THREE.BoxGeometry) {
-				return new THREE.Vector3(
+			if (geometry instanceof N3JS.BoxGeometry) {
+				return new N3JS.Vector3(
 					geometry.parameters.widthSegments,
 					geometry.parameters.heightSegments,
 					geometry.parameters.depthSegments
 				);
-			} else if (geometry instanceof THREE.SphereGeometry) {
-				return new THREE.Vector3(
+			} else if (geometry instanceof N3JS.SphereGeometry) {
+				return new N3JS.Vector3(
 					geometry.parameters.widthSegments,
 					geometry.parameters.heightSegments,
 					geometry.parameters.heightSegments
 				);
-			} else if (geometry instanceof THREE.PlaneGeometry) {
-				return new THREE.Vector3(
+			} else if (geometry instanceof N3JS.PlaneGeometry) {
+				return new N3JS.Vector3(
 					geometry.parameters.widthSegments,
 					geometry.parameters.heightSegments,
 					geometry.parameters.heightSegments
@@ -460,13 +460,13 @@ export class RigidbodyComponent
 			}
 		}
 		if (ThreeUtil.isNotNull(def)) {
-			if (def instanceof THREE.Vector3) {
+			if (def instanceof N3JS.Vector3) {
 				return def;
 			} else if (typeof def === 'number') {
-				return new THREE.Vector3(def, def, def);
+				return new N3JS.Vector3(def, def, def);
 			}
 		}
-		return new THREE.Vector3();
+		return new N3JS.Vector3();
 	}
 
 	/**
@@ -551,7 +551,7 @@ export class RigidbodyComponent
 	): I3JS.IBufferGeometry {
 		const absBufGeometry = bufGeometry.clone();
 		const positions = absBufGeometry.getAttribute('position');
-		const tmp = new THREE.Vector3();
+		const tmp = new N3JS.Vector3();
 		object3d.updateMatrixWorld(true);
 		for (let i = 0; i < positions.count; i++) {
 			tmp.set(positions.getX(i), positions.getY(i), positions.getZ(i));
@@ -713,7 +713,7 @@ export class RigidbodyComponent
 				}
 			});
 			if (velocity !== null) {
-				return new THREE.Vector3(velocity.x(), velocity.y(), velocity.z());
+				return new N3JS.Vector3(velocity.x(), velocity.y(), velocity.z());
 			}
 		}
 		return null;
@@ -774,7 +774,7 @@ export class RigidbodyComponent
 				}
 			});
 			if (factor !== null) {
-				return new THREE.Vector3(factor.x(), factor.y(), factor.z());
+				return new N3JS.Vector3(factor.x(), factor.y(), factor.z());
 			}
 		}
 		return null;
@@ -918,7 +918,7 @@ export class RigidbodyComponent
 		if (this.rigidBody !== null) {
 			const transform = new this._ammo.btTransform();
 			transform.setIdentity();
-			const quaternion: I3JS.IQuaternion = new THREE.Quaternion();
+			const quaternion: I3JS.IQuaternion = new N3JS.Quaternion();
 			quaternion.setFromEuler(ThreeUtil.getEulerSafe(x, y, z));
 			transform.setRotation(
 				new this._ammo.btQuaternion(
@@ -983,7 +983,7 @@ export class RigidbodyComponent
 				if (ThreeUtil.isNotNull(physics.setMeshPosition)) {
 					physics.setMeshPosition(
 						this.rigidBody.mesh,
-						new THREE.Vector3(x, y, z),
+						new N3JS.Vector3(x, y, z),
 						index
 					);
 				}
@@ -1246,7 +1246,7 @@ export class RigidbodyComponent
 		ammoIndexAssociation: number[][];
 	} {
 		// Ony consider the position values when merging the vertices
-		const posOnlyBufGeometry = new THREE.BufferGeometry();
+		const posOnlyBufGeometry = new N3JS.BufferGeometry();
 		posOnlyBufGeometry.setAttribute(
 			'position',
 			bufGeometry.getAttribute('position')
@@ -1373,13 +1373,13 @@ export class RigidbodyComponent
 					});
 				}
 				this.transformAux = new this._ammo.btTransform();
-				this.positionAux = new THREE.Vector3();
+				this.positionAux = new N3JS.Vector3();
 				let shape: AmmoType.btCollisionShape = null;
 				let softBody: AmmoType.btSoftBody = null;
 				let type: string = this.type;
 				let geometry: I3JS.IBufferGeometry = null;
 				let ammoIndexAssociation: number[][] = null;
-				const localScaling = new THREE.Vector3(1, 1, 1);
+				const localScaling = new N3JS.Vector3(1, 1, 1);
 				const anyObject3d: any = this.object3d;
 				if (ThreeUtil.isNotNull(anyObject3d['geometry'])) {
 					geometry = anyObject3d['geometry'];
@@ -1635,7 +1635,7 @@ export class RigidbodyComponent
 									);
 								(
 									geometry.getAttribute('position') as I3JS.IBufferAttribute
-								).setUsage(THREE.DynamicDrawUsage);
+								).setUsage(N3JS.DynamicDrawUsage);
 								break;
 							default:
 								break;
@@ -1661,7 +1661,7 @@ export class RigidbodyComponent
 								);
 							(
 								geometry.getAttribute('position') as I3JS.IBufferAttribute
-							).setUsage(THREE.DynamicDrawUsage);
+							).setUsage(N3JS.DynamicDrawUsage);
 						}
 						break;
 					case 'ellipsoid':
@@ -1741,7 +1741,7 @@ export class RigidbodyComponent
 											0,
 											true
 										);
-									attrPos.setUsage(THREE.DynamicDrawUsage);
+									attrPos.setUsage(N3JS.DynamicDrawUsage);
 								}
 								break;
 						}
@@ -1823,7 +1823,7 @@ export class RigidbodyComponent
 					};
 				} else if (shape !== null) {
 					localScaling.multiply(
-						this.object3d.getWorldScale(new THREE.Vector3(1, 1, 1))
+						this.object3d.getWorldScale(new N3JS.Vector3(1, 1, 1))
 					);
 					shape.setLocalScaling(
 						new this._ammo.btVector3(
@@ -1835,7 +1835,7 @@ export class RigidbodyComponent
 					shape.setMargin(margin);
 					const localInertia = this.getInertia(0);
 					shape.calculateLocalInertia(mass, localInertia);
-					if (this.object3d instanceof THREE.InstancedMesh) {
+					if (this.object3d instanceof N3JS.InstancedMesh) {
 						const array = this.object3d.instanceMatrix.array as [];
 						const bodies: AmmoType.btRigidBody[] = [];
 						for (let i = 0; i < this.object3d.count; i++) {
@@ -1868,7 +1868,7 @@ export class RigidbodyComponent
 							bodies.push(body);
 						}
 						if (mass > 0) {
-							this.object3d.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+							this.object3d.instanceMatrix.setUsage(N3JS.DynamicDrawUsage);
 						}
 						this.rigidBody = {
 							type: 'instanced',
@@ -1880,7 +1880,7 @@ export class RigidbodyComponent
 						const transform = new this._ammo.btTransform();
 						transform.setIdentity();
 						const quaternion = this.object3d.getWorldQuaternion(
-							new THREE.Quaternion()
+							new N3JS.Quaternion()
 						);
 						transform.setRotation(
 							new this._ammo.btQuaternion(
@@ -1891,7 +1891,7 @@ export class RigidbodyComponent
 							)
 						);
 						const position = this.object3d.getWorldPosition(
-							new THREE.Vector3()
+							new N3JS.Vector3()
 						);
 						transform.setOrigin(
 							new this._ammo.btVector3(position.x, position.y, position.z)
@@ -1933,8 +1933,8 @@ export class RigidbodyComponent
 								.prepareBreakableObject(
 									this.object3d as any,
 									mass,
-									new THREE.Vector3() as any,
-									new THREE.Vector3() as any,
+									new N3JS.Vector3() as any,
+									new N3JS.Vector3() as any,
 									true
 								);
 							const btVecUserData: any = new this._ammo.btVector3(0, 0, 0);
@@ -2091,7 +2091,7 @@ export class RigidbodyComponent
 					}
 					break;
 				case 'instanced':
-					if (this.object3d instanceof THREE.InstancedMesh) {
+					if (this.object3d instanceof N3JS.InstancedMesh) {
 						const array = this.object3d.instanceMatrix.array as number[];
 						const bodies = this.rigidBody.rigidBodies;
 						const worldTransform = this.transformAux;

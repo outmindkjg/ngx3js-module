@@ -8,7 +8,7 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import { NgxStarGeometry } from './geometry/geometries/star';
-import { I3JS, RendererTimer, THREE, ThreeColor, ThreeUtil } from './interface';
+import { I3JS, RendererTimer, N3JS, ThreeColor, ThreeUtil } from './interface';
 import { AbstractObject3dComponent } from './object3d.abstract';
 
 /**
@@ -480,14 +480,14 @@ export class AbstractChartComponent
 		let side: string = 'front';
 		switch (type.toLowerCase()) {
 			case 'plane':
-				geometry = new THREE.PlaneGeometry(
+				geometry = new N3JS.PlaneGeometry(
 					options.radius * 2,
 					options.radius * 2
 				);
 				side = 'double';
 				break;
 			case 'star':
-				geometry = new THREE.StarGeometry(
+				geometry = new N3JS.StarGeometry(
 					options.radius * 0.5,
 					options.radius,
 					5
@@ -495,14 +495,14 @@ export class AbstractChartComponent
 				side = 'double';
 				break;
 			case 'ring':
-				geometry = new THREE.RingGeometry(options.radius * 0.5, options.radius);
+				geometry = new N3JS.RingGeometry(options.radius * 0.5, options.radius);
 				side = 'double';
 				break;
 			case 'sphere':
-				geometry = new THREE.SphereGeometry(options.radius, 10, 5);
+				geometry = new N3JS.SphereGeometry(options.radius, 10, 5);
 				break;
 			case 'box':
-				geometry = new THREE.BoxGeometry(
+				geometry = new N3JS.BoxGeometry(
 					options.radius * 2,
 					options.radius * 2,
 					options.radius * 2
@@ -510,20 +510,20 @@ export class AbstractChartComponent
 				break;
 			case 'circle':
 			default:
-				geometry = new THREE.CircleGeometry(options.radius, 32);
+				geometry = new N3JS.CircleGeometry(options.radius, 32);
 				side = 'double';
 				break;
 		}
-		const material = new THREE.MeshPhongMaterial({
+		const material = new N3JS.MeshPhongMaterial({
 			color: ThreeUtil.getColorSafe(options.backgroundColor, 0xff0000),
 			opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
 			side: ThreeUtil.getSideSafe(side),
 			transparent: true,
 		});
-		const mesh: I3JS.IMesh = new THREE.Mesh(geometry, material);
+		const mesh: I3JS.IMesh = new N3JS.Mesh(geometry, material);
 		mesh.castShadow = true;
-		const geometryBorder = new THREE.OutlineGeometry(geometry, 1.2) as any;
-		const materialBorder = new THREE.LineDashedMaterial({
+		const geometryBorder = new N3JS.OutlineGeometry(geometry, 1.2) as any;
+		const materialBorder = new N3JS.LineDashedMaterial({
 			color: ThreeUtil.getColorSafe(options.borderColor, 0x000000),
 			linewidth: 3,
 			linecap: 'round',
@@ -532,7 +532,7 @@ export class AbstractChartComponent
 			gapSize: 1,
 			scale: 500,
 		});
-		let border: I3JS.ILineSegments = new THREE.LineSegments(
+		let border: I3JS.ILineSegments = new N3JS.LineSegments(
 			geometryBorder as any,
 			materialBorder
 		);
@@ -570,7 +570,7 @@ export class AbstractChartComponent
 						info.values.forEach((data) => {
 							attribute.setY(
 								data.index,
-								THREE.MathUtils.lerp(data.from, data.to, elapsedTime)
+								N3JS.MathUtils.lerp(data.from, data.to, elapsedTime)
 							);
 						});
 						attribute.needsUpdate = true;
@@ -584,7 +584,7 @@ export class AbstractChartComponent
 						const position = info.position;
 						const data = info.value;
 						position.setY(
-							THREE.MathUtils.lerp(data.from, data.to, elapsedTime)
+							N3JS.MathUtils.lerp(data.from, data.to, elapsedTime)
 						);
 					});
 				}

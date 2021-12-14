@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { CssStyle, ThreeUtil, THREE, I3JS } from '../interface';
+import { CssStyle, ThreeUtil, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -329,10 +329,10 @@ export class TransformComponent
 	public getStyle(): CssStyle {
 		let style: CssStyle = {};
 		if (this.parentSize !== null) {
-			const anchorMin = this.getAnchorMin(new THREE.Vector2(0, 0)).multiply(
+			const anchorMin = this.getAnchorMin(new N3JS.Vector2(0, 0)).multiply(
 				this.parentSize
 			);
-			const anchorMax = this.getAnchorMax(new THREE.Vector2(1, 1)).multiply(
+			const anchorMax = this.getAnchorMax(new N3JS.Vector2(1, 1)).multiply(
 				this.parentSize
 			);
 			if (this.anchorSeparat) {
@@ -357,15 +357,15 @@ export class TransformComponent
 				style.top = this.parentSize.y - anchorMax.y;
 			}
 			const transform: string[] = [];
-			const scale = this.getScale(new THREE.Vector3(1, 1, 1));
+			const scale = this.getScale(new N3JS.Vector3(1, 1, 1));
 			if (scale.x !== 1 || scale.y !== 1 || scale.z !== 1) {
 				transform.push(
 					'scale3d(' + scale.x + ',' + scale.y + ',' + scale.z + ')'
 				);
 			}
-			const rotation = this.getRotation(new THREE.Euler(0, 0, 0));
+			const rotation = this.getRotation(new N3JS.Euler(0, 0, 0));
 			if (rotation.x !== 0 || rotation.y !== 0 || rotation.z !== 0) {
-				const quaternion: I3JS.IQuaternion = new THREE.Quaternion();
+				const quaternion: I3JS.IQuaternion = new N3JS.Quaternion();
 				quaternion.setFromEuler(rotation);
 				transform.push(
 					'rotate3d(' +
@@ -382,7 +382,7 @@ export class TransformComponent
 			if (transform.length > 0) {
 				style.transform = transform;
 			}
-			const pivot = this.getPivot(new THREE.Vector2(0.5, 0.5));
+			const pivot = this.getPivot(new N3JS.Vector2(0.5, 0.5));
 			if (pivot.x !== 0.5 || pivot.y !== 0.5) {
 				style.transformOrigin = pivot.x * 100 + '% ' + pivot.y * 100 + '%';
 			}

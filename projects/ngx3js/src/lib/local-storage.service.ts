@@ -5,7 +5,7 @@ import {
 	StorageExportOption,
 	StorageOption,
 	I3JS,
-	THREE,
+	N3JS,
 	ThreeUtil,
 } from './interface';
 
@@ -349,7 +349,7 @@ export class LocalStorageService {
 			typeof options.onLoad === 'function'
 		) {
 			const result = options.onLoad(object);
-			if (result !== null && result instanceof THREE.Object3D) {
+			if (result !== null && result instanceof N3JS.Object3D) {
 				return result;
 			}
 		}
@@ -407,7 +407,7 @@ export class LocalStorageService {
 		object: I3JS.IObject3D | I3JS.IObject3D[],
 		options?: StorageExportOption
 	) {
-		if (object instanceof THREE.Object3D) {
+		if (object instanceof N3JS.Object3D) {
 			object.traverse((child) => {
 				Object.entries(child.userData).forEach(([key, value]) => {
 					if (typeof value === 'object') {
@@ -428,9 +428,9 @@ export class LocalStorageService {
 		}
 		if (fileName.endsWith('.dae')) {
 			if (this.colladaExporter === null) {
-				this.colladaExporter = new THREE.ColladaExporter();
+				this.colladaExporter = new N3JS.ColladaExporter();
 			}
-			if (object instanceof THREE.Object3D) {
+			if (object instanceof N3JS.Object3D) {
 				this.colladaExporter.parse(
 					object,
 					(res) => {
@@ -444,24 +444,24 @@ export class LocalStorageService {
 			}
 		} else if (fileName.endsWith('.drc')) {
 			if (this.dracoExporter === null) {
-				this.dracoExporter = new THREE.DRACOExporter();
+				this.dracoExporter = new N3JS.DRACOExporter();
 			}
-			if (object instanceof THREE.Mesh || object instanceof THREE.Points) {
+			if (object instanceof N3JS.Mesh || object instanceof N3JS.Points) {
 				const result = this.dracoExporter.parse(object as any, {});
 				this.saveArrayBuffer(result, fileName);
 			}
 		} else if (fileName.endsWith('.usdz')) {
 			if (this.usdzExporter === null) {
-				this.usdzExporter = new THREE.USDZExporter();
+				this.usdzExporter = new N3JS.USDZExporter();
 			}
-			if (object instanceof THREE.Object3D) {
+			if (object instanceof N3JS.Object3D) {
 				this.usdzExporter.parse(object as any).then((result) => {
 					this.saveArrayBuffer(result, fileName);
 				});
 			}
 		} else if (fileName.endsWith('.gltf') || fileName.endsWith('.glb')) {
 			if (this.gltfExporter === null) {
-				this.gltfExporter = new THREE.GLTFExporter();
+				this.gltfExporter = new N3JS.GLTFExporter();
 			}
 			const fileNameOnly = fileName.substr(0, fileName.lastIndexOf('.'));
 			this.gltfExporter.parse(
@@ -478,13 +478,13 @@ export class LocalStorageService {
 			);
 		} else if (fileName.endsWith('.obj')) {
 			if (this.objExporter === null) {
-				this.objExporter = new THREE.OBJExporter();
+				this.objExporter = new N3JS.OBJExporter();
 			}
 			const result = this.objExporter.parse(object as any);
 			this.saveString(result, fileName);
 		} else if (fileName.endsWith('.ply')) {
 			if (this.plyExporter === null) {
-				this.plyExporter = new THREE.PLYExporter();
+				this.plyExporter = new N3JS.PLYExporter();
 			}
 			this.plyExporter.parse(
 				object as any,
@@ -499,7 +499,7 @@ export class LocalStorageService {
 			);
 		} else if (fileName.endsWith('.stl')) {
 			if (this.stlExporter === null) {
-				this.stlExporter = new THREE.STLExporter();
+				this.stlExporter = new N3JS.STLExporter();
 			}
 			const result: any = this.stlExporter.parse(object as any, options);
 			if (result instanceof ArrayBuffer) {
@@ -514,7 +514,7 @@ export class LocalStorageService {
 			fileName.endsWith('.vpd')
 		) {
 			if (this.mmdExporter === null) {
-				this.mmdExporter = new THREE.MMDExporter();
+				this.mmdExporter = new N3JS.MMDExporter();
 			}
 			const result: any = this.mmdExporter.parseVpd(
 				object as any,
@@ -528,7 +528,7 @@ export class LocalStorageService {
 			}
 		} else if (fileName.endsWith('.usdz')) {
 			if (this.usdzExporter === null) {
-				this.usdzExporter = new THREE.USDZExporter();
+				this.usdzExporter = new N3JS.USDZExporter();
 			}
 			const result: any = this.usdzExporter.parse(object as any);
 			if (result instanceof ArrayBuffer) {
@@ -626,12 +626,12 @@ export class LocalStorageService {
 					cloneObject3d = result.object.clone(true);
 					if (options.autoCenter) {
 						const object = cloneObject3d;
-						const objectBox = new THREE.Box3().setFromObject(object);
-						const center = objectBox.getCenter(new THREE.Vector3());
+						const objectBox = new N3JS.Box3().setFromObject(object);
+						const center = objectBox.getCenter(new N3JS.Vector3());
 						object.position.x += object.position.x - center.x;
 						object.position.y += object.position.y - center.y;
 						object.position.z += object.position.z - center.z;
-						cloneObject3d = new THREE.Group();
+						cloneObject3d = new N3JS.Group();
 						cloneObject3d.add(object);
 					}
 				}
@@ -677,12 +677,12 @@ export class LocalStorageService {
 						}
 						if (options.autoCenter) {
 							const object = cloneObject3d;
-							const objectBox = new THREE.Box3().setFromObject(object);
-							const center = objectBox.getCenter(new THREE.Vector3());
+							const objectBox = new N3JS.Box3().setFromObject(object);
+							const center = objectBox.getCenter(new N3JS.Vector3());
 							object.position.x += object.position.x - center.x;
 							object.position.y += object.position.y - center.y;
 							object.position.z += object.position.z - center.z;
-							cloneObject3d = new THREE.Group();
+							cloneObject3d = new N3JS.Group();
 							cloneObject3d.add(object);
 						}
 					}
@@ -741,7 +741,7 @@ export class LocalStorageService {
 	): void {
 		if (key.endsWith('.dae')) {
 			if (this.colladaLoader === null) {
-				this.colladaLoader = new THREE.ColladaLoader(ThreeUtil.getLoadingManager());
+				this.colladaLoader = new N3JS.ColladaLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.colladaLoader as any, options);
 			this.colladaLoader.load(key, (result) => {
@@ -753,7 +753,7 @@ export class LocalStorageService {
 			});
 		} else if (key.endsWith('.obj')) {
 			if (this.objLoader === null) {
-				this.objLoader = new THREE.OBJLoader(ThreeUtil.getLoadingManager());
+				this.objLoader = new N3JS.OBJLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.objLoader as any, options);
 			const materialUrl: string = options.material ? options.material : null;
@@ -794,7 +794,7 @@ export class LocalStorageService {
 			}
 		} else if (key.endsWith('.mtl')) {
 			if (this.mtlLoader === null) {
-				this.mtlLoader = new THREE.MTLLoader(ThreeUtil.getLoadingManager());
+				this.mtlLoader = new N3JS.MTLLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.mtlLoader as any, options);
 			this.mtlLoader.load(
@@ -811,7 +811,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.3ds')) {
 			if (this.tdsLoader === null) {
-				this.tdsLoader = new THREE.TDSLoader(ThreeUtil.getLoadingManager());
+				this.tdsLoader = new N3JS.TDSLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.tdsLoader as any, options);
 			this.tdsLoader.load(
@@ -827,7 +827,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.tilt')) {
 			if (this.tiltLoader === null) {
-				this.tiltLoader = new THREE.TiltLoader(
+				this.tiltLoader = new N3JS.TiltLoader(
 					ThreeUtil.getLoadingManager(),
 					ThreeUtil.getStoreUrl('')
 				);
@@ -846,7 +846,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.amf')) {
 			if (this.amfLoader === null) {
-				this.amfLoader = new THREE.AMFLoader(ThreeUtil.getLoadingManager());
+				this.amfLoader = new N3JS.AMFLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.amfLoader as any, options);
 			this.amfLoader.load(
@@ -862,15 +862,15 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.vox')) {
 			if (this.voxLoader === null) {
-				this.voxLoader = new THREE.VOXLoader(ThreeUtil.getLoadingManager());
+				this.voxLoader = new N3JS.VOXLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.voxLoader as any, options);
 			this.voxLoader.load(
 				key,
 				(chunks) => {
-					const object3d = new THREE.Group();
+					const object3d = new N3JS.Group();
 					chunks.forEach((chunk) => {
-						object3d.add(new THREE.VOXMesh(chunk) as any);
+						object3d.add(new N3JS.VOXMesh(chunk) as any);
 					});
 					callBack({
 						object: object3d,
@@ -882,8 +882,8 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.exr')) {
 			if (this.exrLoader === null) {
-				this.exrLoader = new THREE.EXRLoader(ThreeUtil.getLoadingManager());
-				this.exrLoader.setDataType(THREE.UnsignedByteType);
+				this.exrLoader = new N3JS.EXRLoader(ThreeUtil.getLoadingManager());
+				this.exrLoader.setDataType(N3JS.UnsignedByteType);
 			}
 			this.setLoaderWithOption(this.exrLoader as any, options);
 			this.exrLoader.load(
@@ -899,7 +899,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.pvr')) {
 			if (this.pvrLoader === null) {
-				this.pvrLoader = new THREE.PVRLoader(ThreeUtil.getLoadingManager());
+				this.pvrLoader = new N3JS.PVRLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.pvrLoader as any, options);
 			this.pvrLoader.load(
@@ -915,8 +915,8 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.hdr')) {
 			if (this.rgbeLoader === null) {
-				this.rgbeLoader = new THREE.RGBELoader(ThreeUtil.getLoadingManager());
-				this.rgbeLoader.setDataType(THREE.UnsignedByteType);
+				this.rgbeLoader = new N3JS.RGBELoader(ThreeUtil.getLoadingManager());
+				this.rgbeLoader.setDataType(N3JS.UnsignedByteType);
 			}
 			this.setLoaderWithOption(this.rgbeLoader as any, options);
 			this.rgbeLoader.load(
@@ -932,7 +932,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.ktx')) {
 			if (this.ktxLoader === null) {
-				this.ktxLoader = new THREE.KTXLoader(ThreeUtil.getLoadingManager());
+				this.ktxLoader = new N3JS.KTXLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.ktxLoader as any, options);
 			this.ktxLoader.load(
@@ -948,7 +948,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.ifc')) {
 			if (this.ifcLoader === null) {
-				this.ifcLoader = new THREE.IFCLoader(ThreeUtil.getLoadingManager());
+				this.ifcLoader = new N3JS.IFCLoader(ThreeUtil.getLoadingManager());
 				this.ifcLoader.ifcManager.setWasmPath(
 					ThreeUtil.getStoreUrl('jsm/loaders/ifc/')
 				);
@@ -967,7 +967,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.ktx2')) {
 			if (this.ktx2Loader === null) {
-				this.ktx2Loader = new THREE.KTX2Loader(ThreeUtil.getLoadingManager());
+				this.ktx2Loader = new N3JS.KTX2Loader(ThreeUtil.getLoadingManager());
 				this.ktx2Loader.setTranscoderPath(
 					ThreeUtil.getStoreUrl('js/libs/basis/')
 				);
@@ -986,7 +986,7 @@ export class LocalStorageService {
 			}
 		} else if (key.endsWith('.dds')) {
 			if (this.ddsLoader === null) {
-				this.ddsLoader = new THREE.DDSLoader(ThreeUtil.getLoadingManager());
+				this.ddsLoader = new N3JS.DDSLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.ddsLoader as any, options);
 			this.ddsLoader.load(
@@ -1002,7 +1002,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.bvh')) {
 			if (this.bvhLoader === null) {
-				this.bvhLoader = new THREE.BVHLoader(ThreeUtil.getLoadingManager());
+				this.bvhLoader = new N3JS.BVHLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.bvhLoader as any, options);
 			this.bvhLoader.load(
@@ -1013,7 +1013,7 @@ export class LocalStorageService {
 						object.skeleton.bones &&
 						object.skeleton.bones.length > 0
 					) {
-						const skeletonHelper: any = new THREE.SkeletonHelper(
+						const skeletonHelper: any = new N3JS.SkeletonHelper(
 							object.skeleton.bones[0]
 						);
 						skeletonHelper['skeleton'] = object.skeleton; // allow animation mixer to bind to THREE.SkeletonHelper directly
@@ -1029,7 +1029,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.fbx')) {
 			if (this.fbxLoader === null) {
-				this.fbxLoader = new THREE.FBXLoader(ThreeUtil.getLoadingManager());
+				this.fbxLoader = new N3JS.FBXLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.fbxLoader as any, options);
 			this.fbxLoader.load(
@@ -1046,7 +1046,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.kmz')) {
 			if (this.kmzLoader === null) {
-				this.kmzLoader = new THREE.KMZLoader(ThreeUtil.getLoadingManager());
+				this.kmzLoader = new N3JS.KMZLoader(ThreeUtil.getLoadingManager());
 			}
 			if (options.resourcePath) {
 				this.kmzLoader.setResourcePath(
@@ -1066,7 +1066,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.lwo')) {
 			if (this.lwoLoader === null) {
-				this.lwoLoader = new THREE.LWOLoader(ThreeUtil.getLoadingManager());
+				this.lwoLoader = new N3JS.LWOLoader(ThreeUtil.getLoadingManager());
 			}
 			if (options.resourcePath) {
 				this.lwoLoader.setResourcePath(
@@ -1076,7 +1076,7 @@ export class LocalStorageService {
 			this.lwoLoader.load(
 				key,
 				(object) => {
-					const mesh = new THREE.Group();
+					const mesh = new N3JS.Group();
 					object.meshes.forEach((obj) => {
 						mesh.add(obj as any);
 					});
@@ -1090,7 +1090,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.mpd')) {
 			if (this.lDrawLoader === null) {
-				this.lDrawLoader = new THREE.LDrawLoader(ThreeUtil.getLoadingManager());
+				this.lDrawLoader = new N3JS.LDrawLoader(ThreeUtil.getLoadingManager());
 			}
 			if (options.resourcePath) {
 				this.lDrawLoader.setResourcePath(
@@ -1110,7 +1110,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.gcode')) {
 			if (this.gCodeLoader === null) {
-				this.gCodeLoader = new THREE.GCodeLoader(ThreeUtil.getLoadingManager());
+				this.gCodeLoader = new N3JS.GCodeLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.gCodeLoader as any, options);
 			this.gCodeLoader.load(
@@ -1127,7 +1127,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.3mf')) {
 			if (this.threeMFLoader === null) {
-				this.threeMFLoader = new THREE.ThreeMFLoader(ThreeUtil.getLoadingManager());
+				this.threeMFLoader = new N3JS.ThreeMFLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.threeMFLoader as any, options);
 			this.threeMFLoader.load(
@@ -1143,7 +1143,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.3dm')) {
 			if (this.rhino3dmLoader === null) {
-				this.rhino3dmLoader = new THREE.Rhino3dmLoader(ThreeUtil.getLoadingManager());
+				this.rhino3dmLoader = new N3JS.Rhino3dmLoader(ThreeUtil.getLoadingManager());
 				this.rhino3dmLoader.setLibraryPath(
 					ThreeUtil.getStoreUrl('jsm/libs/rhino3dm/')
 				);
@@ -1158,13 +1158,13 @@ export class LocalStorageService {
 			});
 		} else if (key.endsWith('.basis')) {
 			if (this.basisTextureLoader === null) {
-				this.basisTextureLoader = new THREE.BasisTextureLoader(
+				this.basisTextureLoader = new N3JS.BasisTextureLoader(
 					ThreeUtil.getLoadingManager()
 				);
 				this.basisTextureLoader.setTranscoderPath(
 					ThreeUtil.getStoreUrl('js/libs/basis/')
 				);
-				this.basisTextureLoader.detectSupport(new THREE.WebGLRenderer() as any);
+				this.basisTextureLoader.detectSupport(new N3JS.WebGLRenderer() as any);
 			}
 			this.setLoaderWithOption(this.basisTextureLoader as any, options);
 			this.basisTextureLoader.load(
@@ -1180,7 +1180,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.drc')) {
 			if (this.dracoLoader === null) {
-				this.dracoLoader = new THREE.DRACOLoader(ThreeUtil.getLoadingManager());
+				this.dracoLoader = new N3JS.DRACOLoader(ThreeUtil.getLoadingManager());
 				this.dracoLoader.setDecoderPath(
 					ThreeUtil.getStoreUrl('js/libs/draco/')
 				);
@@ -1200,13 +1200,13 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.gltf') || key.endsWith('.glb')) {
 			if (this.gltfLoader === null) {
-				this.gltfLoader = new THREE.GLTFLoader(ThreeUtil.getLoadingManager());
+				this.gltfLoader = new N3JS.GLTFLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.gltfLoader as any, options);
 			if (options) {
 				if (options.useDraco) {
 					if (this.dracoLoader === null) {
-						this.dracoLoader = new THREE.DRACOLoader(ThreeUtil.getLoadingManager());
+						this.dracoLoader = new N3JS.DRACOLoader(ThreeUtil.getLoadingManager());
 						this.dracoLoader.setDecoderPath(
 							ThreeUtil.getStoreUrl('js/libs/draco/')
 						);
@@ -1215,14 +1215,14 @@ export class LocalStorageService {
 				}
 				if (options.useKtx2) {
 					if (this.ktx2Loader === null) {
-						this.ktx2Loader = new THREE.KTX2Loader(ThreeUtil.getLoadingManager());
+						this.ktx2Loader = new N3JS.KTX2Loader(ThreeUtil.getLoadingManager());
 						this.ktx2Loader.setTranscoderPath(
 							ThreeUtil.getStoreUrl('js/libs/basis/')
 						);
 						this.ktx2Loader.detectSupport(ThreeUtil.getRenderer() as any);
 					}
 					this.gltfLoader.setKTX2Loader(this.ktx2Loader);
-					this.gltfLoader.setMeshoptDecoder(THREE.MeshoptDecoder);
+					this.gltfLoader.setMeshoptDecoder(N3JS.MeshoptDecoder);
 				}
 			}
 			this.gltfLoader.load(
@@ -1243,7 +1243,7 @@ export class LocalStorageService {
 			key.endsWith('.vpd')
 		) {
 			if (this.mmdLoader === null) {
-				this.mmdLoader = new THREE.MMDLoader(ThreeUtil.getLoadingManager());
+				this.mmdLoader = new N3JS.MMDLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.mmdLoader as any, options);
 			const vmdUrl = options && options.vmdUrl ? options.vmdUrl : null;
@@ -1266,7 +1266,7 @@ export class LocalStorageService {
 					key,
 					object as any,
 					(result) => {
-						if (result instanceof THREE.SkinnedMesh) {
+						if (result instanceof N3JS.SkinnedMesh) {
 							callBack({
 								object: this.getStoreObject(result, options),
 								source: result,
@@ -1295,7 +1295,7 @@ export class LocalStorageService {
 			}
 		} else if (key.endsWith('.pcd')) {
 			if (this.pcdLoader === null) {
-				this.pcdLoader = new THREE.PCDLoader(ThreeUtil.getLoadingManager());
+				this.pcdLoader = new N3JS.PCDLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.pcdLoader as any, options);
 			this.pcdLoader.load(
@@ -1311,7 +1311,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.prwm')) {
 			if (this.prwmLoader === null) {
-				this.prwmLoader = new THREE.PRWMLoader(ThreeUtil.getLoadingManager());
+				this.prwmLoader = new N3JS.PRWMLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.prwmLoader as any, options);
 			this.prwmLoader.load(
@@ -1327,7 +1327,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.tga')) {
 			if (this.tgaLoader === null) {
-				this.tgaLoader = new THREE.TGALoader(ThreeUtil.getLoadingManager());
+				this.tgaLoader = new N3JS.TGALoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.tgaLoader as any, options);
 			this.tgaLoader.load(key, (texture) => {
@@ -1338,14 +1338,14 @@ export class LocalStorageService {
 			});
 		} else if (key.endsWith('.svg')) {
 			if (this.svgLoader === null) {
-				this.svgLoader = new THREE.SVGLoader(ThreeUtil.getLoadingManager());
+				this.svgLoader = new N3JS.SVGLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.svgLoader as any, options);
 			this.svgLoader.load(
 				key,
 				(data) => {
 					const paths = data.paths;
-					const group = new THREE.Group();
+					const group = new N3JS.Group();
 					const drawFillShapes = options.drawFillShapes || false;
 					const drawStrokes = options.drawStrokes || false;
 					const fillShapesWireframe = options.fillShapesWireframe || false;
@@ -1357,18 +1357,18 @@ export class LocalStorageService {
 							fillColor !== undefined &&
 							fillColor !== 'none'
 						) {
-							const material = new THREE.MeshBasicMaterial({
-								color: new THREE.Color().setStyle(fillColor),
+							const material = new N3JS.MeshBasicMaterial({
+								color: new N3JS.Color().setStyle(fillColor),
 								opacity: path.userData.style.fillOpacity,
 								transparent: path.userData.style.fillOpacity < 1,
-								side: THREE.DoubleSide,
+								side: N3JS.DoubleSide,
 								depthWrite: false,
 								wireframe: fillShapesWireframe,
 							});
 							const shapes = path.toShapes(true);
 							shapes.forEach((shape) => {
-								const geometry = new THREE.ShapeGeometry(shape as any);
-								const mesh = new THREE.Mesh(geometry, material);
+								const geometry = new N3JS.ShapeGeometry(shape as any);
+								const mesh = new N3JS.Mesh(geometry, material);
 								group.add(mesh);
 							});
 						}
@@ -1378,21 +1378,21 @@ export class LocalStorageService {
 							strokeColor !== undefined &&
 							strokeColor !== 'none'
 						) {
-							const material = new THREE.MeshBasicMaterial({
-								color: new THREE.Color().setStyle(strokeColor),
+							const material = new N3JS.MeshBasicMaterial({
+								color: new N3JS.Color().setStyle(strokeColor),
 								opacity: path.userData.style.strokeOpacity,
 								transparent: path.userData.style.strokeOpacity < 1,
-								side: THREE.DoubleSide,
+								side: N3JS.DoubleSide,
 								depthWrite: false,
 								wireframe: strokesWireframe,
 							});
 							path.subPaths.forEach((subPath) => {
-								const geometry = THREE.SVGLoader.pointsToStroke(
+								const geometry = N3JS.SVGLoader.pointsToStroke(
 									subPath.getPoints(),
 									path.userData.style
 								);
 								if (geometry) {
-									const mesh = new THREE.Mesh(geometry as any, material);
+									const mesh = new N3JS.Mesh(geometry as any, material);
 									group.add(mesh);
 								}
 							});
@@ -1408,7 +1408,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.ply')) {
 			if (this.plyLoader === null) {
-				this.plyLoader = new THREE.PLYLoader(ThreeUtil.getLoadingManager());
+				this.plyLoader = new N3JS.PLYLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.plyLoader as any, options);
 			this.plyLoader.load(
@@ -1424,7 +1424,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.vtk') || key.endsWith('.vtp')) {
 			if (this.vtkLoader === null) {
-				this.vtkLoader = new THREE.VTKLoader(ThreeUtil.getLoadingManager());
+				this.vtkLoader = new N3JS.VTKLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.vtkLoader as any, options);
 			this.vtkLoader.load(
@@ -1440,7 +1440,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.mdd')) {
 			if (this.mddLoader === null) {
-				this.mddLoader = new THREE.MDDLoader(ThreeUtil.getLoadingManager());
+				this.mddLoader = new N3JS.MDDLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.mddLoader as any, options);
 			this.mddLoader.load(
@@ -1457,23 +1457,23 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.nrrd')) {
 			if (this.nrrdLoader === null) {
-				this.nrrdLoader = new THREE.NRRDLoader(ThreeUtil.getLoadingManager());
+				this.nrrdLoader = new N3JS.NRRDLoader(ThreeUtil.getLoadingManager());
 			}
 			this.nrrdLoader.load(
 				key,
 				(volume) => {
-					const group = new THREE.Group();
-					const geometry = new THREE.BoxGeometry(
+					const group = new N3JS.Group();
+					const geometry = new N3JS.BoxGeometry(
 						volume.xLength,
 						volume.yLength,
 						volume.zLength
 					);
-					const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-					const cube = new THREE.Mesh(geometry, material);
+					const material = new N3JS.MeshBasicMaterial({ color: 0x00ff00 });
+					const cube = new N3JS.Mesh(geometry, material);
 					cube.visible = false;
 					cube.name = 'box';
 					cube.userData.volume = volume;
-					const box = new THREE.BoxHelper(cube as any);
+					const box = new N3JS.BoxHelper(cube as any);
 					box.name = 'helper';
 					box.applyMatrix4(volume.matrix as any);
 					group.add(box);
@@ -1513,7 +1513,7 @@ export class LocalStorageService {
 		} else if (key.endsWith('.md2')) {
 			const optionType = (options.type || '').toLowerCase();
 			if (optionType === 'md2character') {
-				const character = new THREE.MD2Character();
+				const character = new N3JS.MD2Character();
 				options.baseUrl = ThreeUtil.getStoreUrl(options.baseUrl);
 				if (ThreeUtil.isNull(options.body)) {
 					options.body = key;
@@ -1527,7 +1527,7 @@ export class LocalStorageService {
 				};
 				character.loadParts(options as any);
 			} else if (optionType === 'md2charactercomplex') {
-				const character = new THREE.MD2CharacterComplex();
+				const character = new N3JS.MD2CharacterComplex();
 				options.baseUrl = ThreeUtil.getStoreUrl(options.baseUrl);
 				if (ThreeUtil.isNull(options.body)) {
 					options.body = key;
@@ -1542,7 +1542,7 @@ export class LocalStorageService {
 				character.loadParts(options);
 			} else {
 				if (this.md2Loader === null) {
-					this.md2Loader = new THREE.MD2Loader(ThreeUtil.getLoadingManager());
+					this.md2Loader = new N3JS.MD2Loader(ThreeUtil.getLoadingManager());
 				}
 				this.md2Loader.load(
 					key,
@@ -1558,7 +1558,7 @@ export class LocalStorageService {
 			}
 		} else if (key.endsWith('.pdb')) {
 			if (this.pdbLoader === null) {
-				this.pdbLoader = new THREE.PDBLoader(ThreeUtil.getLoadingManager());
+				this.pdbLoader = new N3JS.PDBLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.pdbLoader as any, options);
 			this.pdbLoader.load(
@@ -1568,14 +1568,14 @@ export class LocalStorageService {
 					const geometryBonds = pdb.geometryBonds;
 					const json = pdb.json;
 					const cssType: string = options.cssType || 'css2d';
-					const group = new THREE.Mesh();
-					const boxGeometry = new THREE.BoxBufferGeometry(1, 1, 1);
-					const sphereGeometry = new THREE.IcosahedronBufferGeometry(1, 3);
+					const group = new N3JS.Mesh();
+					const boxGeometry = new N3JS.BoxBufferGeometry(1, 1, 1);
+					const sphereGeometry = new N3JS.IcosahedronBufferGeometry(1, 3);
 					let positions = geometryAtoms.getAttribute('position');
 					const colors = geometryAtoms.getAttribute('color');
-					const position = new THREE.Vector3();
-					const color = new THREE.Color();
-					const tmpVec = new THREE.Vector3();
+					const position = new N3JS.Vector3();
+					const color = new N3JS.Color();
+					const tmpVec = new N3JS.Vector3();
 					for (let i = 0; i < positions.count; i++) {
 						position.x = positions.getX(i);
 						position.y = positions.getY(i);
@@ -1583,10 +1583,10 @@ export class LocalStorageService {
 						color.r = colors.getX(i);
 						color.g = colors.getY(i);
 						color.b = colors.getZ(i);
-						const material = new THREE.MeshPhongMaterial({
+						const material = new N3JS.MeshPhongMaterial({
 							color: color.clone(),
 						});
-						const object = new THREE.Mesh(sphereGeometry, material);
+						const object = new N3JS.Mesh(sphereGeometry, material);
 						object.name = 'atom';
 						object.position.copy(position);
 						object.position.multiplyScalar(75);
@@ -1603,10 +1603,10 @@ export class LocalStorageService {
 						switch (cssType.toLowerCase()) {
 							case '3d':
 							case 'css3d':
-								label = new THREE.CSS3DObject(text) as any;
+								label = new N3JS.CSS3DObject(text) as any;
 								break;
 							default:
-								label = new THREE.CSS2DObject(text) as any;
+								label = new N3JS.CSS2DObject(text) as any;
 								break;
 						}
 						label.name = 'label';
@@ -1616,8 +1616,8 @@ export class LocalStorageService {
 						group.add(label);
 					}
 					positions = geometryBonds.getAttribute('position');
-					const start = new THREE.Vector3();
-					const end = new THREE.Vector3();
+					const start = new N3JS.Vector3();
+					const end = new N3JS.Vector3();
 					for (let i = 0; i < positions.count; i += 2) {
 						start.x = positions.getX(i);
 						start.y = positions.getY(i);
@@ -1627,9 +1627,9 @@ export class LocalStorageService {
 						end.z = positions.getZ(i + 1);
 						start.multiplyScalar(75);
 						end.multiplyScalar(75);
-						const bond = new THREE.Mesh(
+						const bond = new N3JS.Mesh(
 							boxGeometry,
-							new THREE.MeshPhongMaterial({ color: 0xffffff })
+							new N3JS.MeshPhongMaterial({ color: 0xffffff })
 						);
 						bond.name = 'bone';
 						bond.position.copy(start);
@@ -1645,15 +1645,15 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.stl')) {
 			if (this.stlLoader === null) {
-				this.stlLoader = new THREE.STLLoader(ThreeUtil.getLoadingManager());
+				this.stlLoader = new N3JS.STLLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.stlLoader as any, options);
 			this.stlLoader.load(
 				key,
 				(geometry) => {
-					const mesh = new THREE.Mesh();
+					const mesh = new N3JS.Mesh();
 					mesh.geometry = geometry as any;
-					mesh.material = new THREE.MeshLambertMaterial({ color: 0x7777ff });
+					mesh.material = new N3JS.MeshLambertMaterial({ color: 0x7777ff });
 					callBack({
 						object: mesh,
 						source: geometry,
@@ -1664,7 +1664,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.wrl')) {
 			if (this.vrmlLoader === null) {
-				this.vrmlLoader = new THREE.VRMLLoader(ThreeUtil.getLoadingManager());
+				this.vrmlLoader = new N3JS.VRMLLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.vrmlLoader as any, options);
 			this.vrmlLoader.load(
@@ -1680,7 +1680,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.xyz')) {
 			if (this.xyzLoader === null) {
-				this.xyzLoader = new THREE.XYZLoader(ThreeUtil.getLoadingManager());
+				this.xyzLoader = new N3JS.XYZLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.xyzLoader as any, options);
 			this.xyzLoader.load(
@@ -1696,7 +1696,7 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.CUBE') || key.endsWith('.cube')) {
 			if (this.lutCubeLoader === null) {
-				this.lutCubeLoader = new THREE.LUTCubeLoader(ThreeUtil.getLoadingManager());
+				this.lutCubeLoader = new N3JS.LUTCubeLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.lutCubeLoader as any, options);
 			this.lutCubeLoader.load(
@@ -1712,19 +1712,19 @@ export class LocalStorageService {
 			);
 		} else if (key.endsWith('.vrm')) {
 			if (this.vrmLoader === null) {
-				this.vrmLoader = new THREE.VRMLoader(ThreeUtil.getLoadingManager());
+				this.vrmLoader = new N3JS.VRMLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.vrmLoader as any, options);
 			this.vrmLoader.load(
 				key,
 				(vrm) => {
 					vrm.scene.traverse((object) => {
-						if (object instanceof THREE.Mesh && object.material) {
+						if (object instanceof N3JS.Mesh && object.material) {
 							if (Array.isArray(object.material)) {
 								for (let i = 0, il = object.material.length; i < il; i++) {
 									const objectMaterial = object.material[i] as any;
-									const material = new THREE.MeshPhongMaterial();
-									THREE.Material.prototype.copy.call(
+									const material = new N3JS.MeshPhongMaterial();
+									N3JS.Material.prototype.copy.call(
 										material,
 										object.material[i]
 									);
@@ -1737,8 +1737,8 @@ export class LocalStorageService {
 								}
 							} else {
 								const objectMaterial = object.material as any;
-								const material = new THREE.MeshPhongMaterial();
-								THREE.Material.prototype.copy.call(material, object.material);
+								const material = new N3JS.MeshPhongMaterial();
+								N3JS.Material.prototype.copy.call(material, object.material);
 								material.color.copy(objectMaterial['color']);
 								material.map = objectMaterial['map'];
 								// material.skinning = objectMaterial['skinning'];
@@ -1762,7 +1762,7 @@ export class LocalStorageService {
 			key.endsWith('.jpeg')
 		) {
 			if (this.rgbmLoader === null) {
-				this.rgbmLoader = new THREE.RGBMLoader(ThreeUtil.getLoadingManager());
+				this.rgbmLoader = new N3JS.RGBMLoader(ThreeUtil.getLoadingManager());
 			}
 			this.setLoaderWithOption(this.rgbmLoader as any, options);
 			this.rgbmLoader.load(
@@ -1784,7 +1784,7 @@ export class LocalStorageService {
 					switch (loaderType.toLowerCase()) {
 						case 'lottie':
 							if (this.lottieLoader === null) {
-								this.lottieLoader = new THREE.LottieLoader(
+								this.lottieLoader = new N3JS.LottieLoader(
 									ThreeUtil.getLoadingManager()
 								);
 							}
@@ -1812,7 +1812,7 @@ export class LocalStorageService {
 							break;
 						default:
 							if (this.objectLoader === null) {
-								this.objectLoader = new THREE.ObjectLoader(
+								this.objectLoader = new N3JS.ObjectLoader(
 									ThreeUtil.getLoadingManager()
 								);
 							}
@@ -1832,7 +1832,7 @@ export class LocalStorageService {
 					}
 				} else {
 					if (this.geometryLoader === null) {
-						this.geometryLoader = new THREE.BufferGeometryLoader(
+						this.geometryLoader = new N3JS.BufferGeometryLoader(
 							ThreeUtil.getLoadingManager()
 						);
 					}
@@ -1916,17 +1916,17 @@ export class LocalStorageService {
 		this.getObjectFromKey(
 			key,
 			(result) => {
-				if (result.geometry instanceof THREE.BufferGeometry) {
+				if (result.geometry instanceof N3JS.BufferGeometry) {
 					callBack(result.geometry, result.source);
-				} else if (result.object instanceof THREE.Mesh) {
+				} else if (result.object instanceof N3JS.Mesh) {
 					callBack(result.object.geometry, result.source);
 				} else if (
 					result.object.children.length > 0 &&
-					result.object.children[0] instanceof THREE.Mesh
+					result.object.children[0] instanceof N3JS.Mesh
 				) {
 					callBack(result.object.children[0]['geometry'], result.source);
 				} else {
-					callBack(new THREE.BufferGeometry());
+					callBack(new N3JS.BufferGeometry());
 				}
 			},
 			Object.assign(options || {}, { geometry: true })
@@ -1948,15 +1948,15 @@ export class LocalStorageService {
 			key,
 			(result) => {
 				const resultMaterial: any = result.material;
-				if (result.texture instanceof THREE.Texture) {
+				if (result.texture instanceof N3JS.Texture) {
 					callBack(result.texture, result.source);
 				} else if (
-					result.material instanceof THREE.Material &&
-					resultMaterial['map'] instanceof THREE.Texture
+					result.material instanceof N3JS.Material &&
+					resultMaterial['map'] instanceof N3JS.Texture
 				) {
 					callBack(resultMaterial['map'], result.source);
 				} else {
-					callBack(new THREE.Texture());
+					callBack(new N3JS.Texture());
 				}
 			},
 			Object.assign(options || {}, { texture: true })
@@ -1977,10 +1977,10 @@ export class LocalStorageService {
 		this.getObjectFromKey(
 			key,
 			(result) => {
-				if (result.material instanceof THREE.Material) {
+				if (result.material instanceof N3JS.Material) {
 					callBack(result.material, result.source);
-				} else if (result.texture instanceof THREE.Texture) {
-					const material = new THREE.MeshLambertMaterial();
+				} else if (result.texture instanceof N3JS.Texture) {
+					const material = new N3JS.MeshLambertMaterial();
 					material.map = result.texture;
 					callBack(material, result.source);
 				}
@@ -2012,10 +2012,10 @@ export class LocalStorageService {
 		this.getObjectFromKey(
 			key,
 			(result) => {
-				if (result.object instanceof THREE.Scene) {
+				if (result.object instanceof N3JS.Scene) {
 					callBack(result.object, result.source);
 				} else {
-					const scene = new THREE.Scene();
+					const scene = new N3JS.Scene();
 					scene.add(result.object);
 					callBack(scene, result.source);
 				}
@@ -2137,15 +2137,15 @@ export class LocalStorageService {
 		} else {
 			if (fontPath.endsWith('.ttf')) {
 				if (this.ttfLoader === null) {
-					this.ttfLoader = new THREE.TTFLoader(ThreeUtil.getLoadingManager());
+					this.ttfLoader = new N3JS.TTFLoader(ThreeUtil.getLoadingManager());
 				}
 				this.ttfLoader.load(ThreeUtil.getStoreUrl(fontPath), (json: any) => {
-					this._loadedFonts[fontPath] = new THREE.Font(json);
+					this._loadedFonts[fontPath] = new N3JS.Font(json);
 					callBack(this._loadedFonts[fontPath]);
 				});
 			} else {
 				if (this.fontLoader === null) {
-					this.fontLoader = new THREE.FontLoader(ThreeUtil.getLoadingManager());
+					this.fontLoader = new N3JS.FontLoader(ThreeUtil.getLoadingManager());
 				}
 				this.fontLoader.load(
 					ThreeUtil.getStoreUrl(fontPath),

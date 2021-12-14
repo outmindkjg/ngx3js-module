@@ -1,4 +1,4 @@
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 
 /**
  * Viewer canvas
@@ -53,14 +53,14 @@ export class ViewerCanvas {
 	 * @param [options]
 	 */
 	constructor(renderer: I3JS.IRenderer, options: any = {}) {
-		this.target = new THREE.Vector3();
+		this.target = new N3JS.Vector3();
 		this.position = { x: 0, y: 0 };
 		this.size = { width: 100, height: 100 };
-		const camera = new THREE.PerspectiveCamera(70, 1, 1, 20000);
+		const camera = new N3JS.PerspectiveCamera(70, 1, 1, 20000);
 		this.camera = camera;
-		const virtualCamera = new THREE.Group();
+		const virtualCamera = new N3JS.Group();
 		this.virtualCamera = virtualCamera;
-		this.scene = new THREE.Scene();
+		this.scene = new N3JS.Scene();
 		this.setOptions(options);
 		this.setRenderer(renderer);
 	}
@@ -146,16 +146,16 @@ export class ViewerCanvas {
 					3
 				);
 				this.options.frameLinewidth = wireframeLinewidth;
-				const planeGeometry = new THREE.PlaneBufferGeometry(
+				const planeGeometry = new N3JS.PlaneBufferGeometry(
 					screenWidth,
 					screenHeight,
 					1,
 					1
 				);
-				const planeFrameMaterial = new THREE.MeshBasicMaterial({
+				const planeFrameMaterial = new N3JS.MeshBasicMaterial({
 					depthTest: false,
 					depthWrite: false,
-					side: THREE.FrontSide,
+					side: N3JS.FrontSide,
 					color: frameColor,
 					wireframe: true,
 					wireframeLinewidth: wireframeLinewidth,
@@ -171,19 +171,19 @@ export class ViewerCanvas {
 				this.virtualCamera.position.z = -screenRadius * 1.2;
 				const screenZ = ThreeUtil.getTypeSafe(this.options.screenZ, 200);
 				for (let i = 0; i < screenCnt; i++) {
-					const planeTarget = new THREE.WebGLRenderTarget(1024, 1024, {
-						minFilter: THREE.LinearFilter,
-						magFilter: THREE.LinearFilter,
-						format: THREE.RGBAFormat,
+					const planeTarget = new N3JS.WebGLRenderTarget(1024, 1024, {
+						minFilter: N3JS.LinearFilter,
+						magFilter: N3JS.LinearFilter,
+						format: N3JS.RGBAFormat,
 					});
-					const planeMaterial = new THREE.MeshBasicMaterial({
+					const planeMaterial = new N3JS.MeshBasicMaterial({
 						map: planeTarget.texture,
 						depthTest: false,
 						depthWrite: false,
-						side: THREE.FrontSide,
+						side: N3JS.FrontSide,
 					});
-					const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
-					planeMesh.add(new THREE.Mesh(planeGeometry, planeFrameMaterial));
+					const planeMesh = new N3JS.Mesh(planeGeometry, planeMaterial);
+					planeMesh.add(new N3JS.Mesh(planeGeometry, planeFrameMaterial));
 					const angle = screenAngle * (i / (screenCnt - 1) - 0.5);
 					planeMesh.position.x = Math.sin(angle) * screenRadius;
 					planeMesh.position.y = 0;
@@ -241,7 +241,7 @@ export class ViewerCanvas {
 	/**
 	 * Clear color of viewer canvas
 	 */
-	private _clearColor = new THREE.Color();
+	private _clearColor = new N3JS.Color();
 
 	/**
 	 * Auto clear of viewer canvas
@@ -251,7 +251,7 @@ export class ViewerCanvas {
 	/**
 	 * The Viewport of viewer canvas
 	 */
-	private _viewport = new THREE.Vector4();
+	private _viewport = new N3JS.Vector4();
 
 	/**
 	 * The Aspect of viewer canvas
@@ -261,7 +261,7 @@ export class ViewerCanvas {
 	/**
 	 * Camera rotation of viewer canvas
 	 */
-	private _cameraRotation = new THREE.Euler();
+	private _cameraRotation = new N3JS.Euler();
 
 	/**
 	 * Renders viewer canvas
@@ -270,21 +270,21 @@ export class ViewerCanvas {
 	 * @param camera
 	 */
 	render(renderer: I3JS.IRenderer, scene: I3JS.IScene, camera: I3JS.ICamera) {
-		if (this.enabled && renderer instanceof THREE.WebGLRenderer) {
+		if (this.enabled && renderer instanceof N3JS.WebGLRenderer) {
 			this._autoClear = renderer.autoClear;
 			renderer.getClearColor(this._clearColor);
 			renderer.getViewport(this._viewport);
-			if (camera instanceof THREE.PerspectiveCamera) {
+			if (camera instanceof N3JS.PerspectiveCamera) {
 				this._aspect = camera.aspect;
 			}
 			this._cameraRotation.copy(camera.rotation);
 			switch (this.renderType) {
 				case 'circlescreen':
-					if (camera instanceof THREE.PerspectiveCamera) {
+					if (camera instanceof N3JS.PerspectiveCamera) {
 						camera.aspect = this.options.width / this.options.height;
 						camera.updateProjectionMatrix();
 					}
-					this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+					this.camera.lookAt(new N3JS.Vector3(0, 0, 0));
 					renderer.autoClear = false;
 					this.canvasList.forEach((info) => {
 						renderer.setRenderTarget(info.planeTarget);
@@ -320,7 +320,7 @@ export class ViewerCanvas {
 							renderer.setClearColor(view.background);
 							renderer.clear();
 						}
-						if (camera instanceof THREE.PerspectiveCamera) {
+						if (camera instanceof N3JS.PerspectiveCamera) {
 							camera.aspect = view.width / view.height;
 							camera.updateProjectionMatrix();
 						}
@@ -333,7 +333,7 @@ export class ViewerCanvas {
 			renderer.autoClear = this._autoClear;
 			renderer.setViewport(this._viewport);
 			camera.rotation.copy(this._cameraRotation);
-			if (camera instanceof THREE.PerspectiveCamera) {
+			if (camera instanceof N3JS.PerspectiveCamera) {
 				camera.aspect = this._aspect;
 				camera.updateProjectionMatrix();
 			}

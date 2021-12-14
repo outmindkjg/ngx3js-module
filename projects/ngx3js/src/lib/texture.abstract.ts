@@ -7,7 +7,7 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { I3JS, THREE, ThreeUtil } from './interface';
+import { I3JS, N3JS, ThreeUtil } from './interface';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { CanvasFunctionType, TextureUtils } from './texture/textureUtils';
 import { unzipSync } from './threejs-library/fflate.module';
@@ -446,7 +446,7 @@ export class AbstractTextureComponent
 						textureType = this.type;
 					}
 					info.materials.forEach((material) => {
-						if (material instanceof THREE.Scene) {
+						if (material instanceof N3JS.Scene) {
 							switch (textureType.toLowerCase()) {
 								case 'environmentbackground':
 								case 'environment-background':
@@ -477,7 +477,7 @@ export class AbstractTextureComponent
 			}
 			if (ThreeUtil.isNotNull(this.texture.image)) {
 				if (
-					this.texture instanceof THREE.VideoTexture &&
+					this.texture instanceof N3JS.VideoTexture &&
 					ThreeUtil.isNotNull(this.texture.image.srcObject) &&
 					ThreeUtil.isNotNull(this.texture.image.srcObject.getTracks)
 				) {
@@ -529,7 +529,7 @@ export class AbstractTextureComponent
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(this.repeatX, this.repeat),
 			ThreeUtil.getTypeSafe(this.repeatY, this.repeat),
-			new THREE.Vector2(defX, defY)
+			new N3JS.Vector2(defX, defY)
 		);
 	}
 
@@ -543,7 +543,7 @@ export class AbstractTextureComponent
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(this.offsetX, this.offset),
 			ThreeUtil.getTypeSafe(this.offsetY, this.offset),
-			new THREE.Vector2(defX, defY)
+			new N3JS.Vector2(defX, defY)
 		);
 	}
 
@@ -557,7 +557,7 @@ export class AbstractTextureComponent
 		return ThreeUtil.getVector2Safe(
 			ThreeUtil.getTypeSafe(this.centerX, this.center),
 			ThreeUtil.getTypeSafe(this.centerY, this.center),
-			new THREE.Vector2(defX, defY)
+			new N3JS.Vector2(defX, defY)
 		);
 	}
 
@@ -935,7 +935,7 @@ export class AbstractTextureComponent
 				image,
 				() => {
 					const loadedTexture = image.getTexture();
-					if (loadedTexture instanceof THREE.Texture) {
+					if (loadedTexture instanceof N3JS.Texture) {
 						texture.image = loadedTexture.image;
 						texture.needsUpdate = true;
 					}
@@ -949,7 +949,7 @@ export class AbstractTextureComponent
 				},
 				'needsupdate'
 			);
-		} else if (image instanceof THREE.Texture) {
+		} else if (image instanceof N3JS.Texture) {
 			texture = image;
 		} else {
 			texture = this.getTextureImage(image, cubeImage, null, loadOption, () => {
@@ -988,15 +988,15 @@ export class AbstractTextureComponent
 				case 'hdrcube':
 				case 'hdrcubetexture':
 					if (this.hdrCubeMapLoader === null) {
-						this.hdrCubeMapLoader = new THREE.HDRCubeTextureLoader(
+						this.hdrCubeMapLoader = new N3JS.HDRCubeTextureLoader(
 							ThreeUtil.getLoadingManager()
 						);
 					}
 					if (ThreeUtil.isNotNull(image) && image !== '') {
 						this.hdrCubeMapLoader.setPath(ThreeUtil.getStoreUrl(image));
 					}
-					const cubeTexture = new THREE.CubeTexture();
-					this.hdrCubeMapLoader.setDataType(THREE.UnsignedByteType);
+					const cubeTexture = new N3JS.CubeTexture();
+					this.hdrCubeMapLoader.setDataType(N3JS.UnsignedByteType);
 					this.hdrCubeMapLoader.load(cubeImage, (hdrCubeMap) => {
 						cubeTexture.copy(hdrCubeMap as any);
 						cubeTexture.needsUpdate = true;
@@ -1006,12 +1006,12 @@ export class AbstractTextureComponent
 				case 'rgbm':
 				case 'rgbmtexture':
 					if (this.rgbmLoader === null) {
-						this.rgbmLoader = new THREE.RGBMLoader(ThreeUtil.getLoadingManager());
+						this.rgbmLoader = new N3JS.RGBMLoader(ThreeUtil.getLoadingManager());
 					}
 					if (ThreeUtil.isNotNull(image) && image !== '') {
 						this.rgbmLoader.setPath(ThreeUtil.getStoreUrl(image));
 					}
-					const rgbmTexture = new THREE.CubeTexture();
+					const rgbmTexture = new N3JS.CubeTexture();
 					this.rgbmLoader.loadCubemap(cubeImage, (rgbmCube) => {
 						rgbmTexture.copy(rgbmCube as any);
 						rgbmTexture.needsUpdate = true;
@@ -1020,7 +1020,7 @@ export class AbstractTextureComponent
 					return rgbmTexture;
 				default:
 					if (this.cubeTextureLoader === null) {
-						this.cubeTextureLoader = new THREE.CubeTextureLoader(
+						this.cubeTextureLoader = new N3JS.CubeTextureLoader(
 							ThreeUtil.getLoadingManager()
 						);
 					}
@@ -1089,7 +1089,7 @@ export class AbstractTextureComponent
 						video.src = ThreeUtil.getStoreUrl(image);
 						video.play();
 					}
-					const videoTexture = new THREE.VideoTexture(video);
+					const videoTexture = new N3JS.VideoTexture(video);
 					return videoTexture;
 				case 'imagebitmap':
 				case 'image':
@@ -1102,7 +1102,7 @@ export class AbstractTextureComponent
 				default:
 					if (image.endsWith('.zip')) {
 						if (this.fileLoader === null) {
-							this.fileLoader = new THREE.FileLoader(
+							this.fileLoader = new N3JS.FileLoader(
 								ThreeUtil.getLoadingManager()
 							);
 							this.fileLoader.setResponseType('arraybuffer');
@@ -1114,7 +1114,7 @@ export class AbstractTextureComponent
 						switch ((loaderType || 'texture').toLowerCase()) {
 							case 'datatexture2d':
 							case 'texture2d':
-								texture = new THREE.DataTexture2DArray(
+								texture = new N3JS.DataTexture2DArray(
 									null,
 									width,
 									height,
@@ -1123,12 +1123,12 @@ export class AbstractTextureComponent
 								break;
 							case 'datatexture3d':
 							case 'texture3d':
-								texture = new THREE.DataTexture3D(null, width, height, depth);
+								texture = new N3JS.DataTexture3D(null, width, height, depth);
 								break;
 							case 'texture':
 							case 'datatexture':
 							default:
-								texture = new THREE.DataTexture(null, width, height);
+								texture = new N3JS.DataTexture(null, width, height);
 								break;
 						}
 						this.fileLoader.load(ThreeUtil.getStoreUrl(image), (data) => {
@@ -1148,7 +1148,7 @@ export class AbstractTextureComponent
 					} else if (image.endsWith('.room')) {
 						const pmremGenerator = ThreeUtil.getPmremGenerator();
 						const renderTarget = pmremGenerator.fromScene(
-							new THREE.RoomEnvironment() as any,
+							new N3JS.RoomEnvironment() as any,
 							ThreeUtil.getTypeSafe(options.sigma, 0),
 							ThreeUtil.getTypeSafe(options.near, 0.1),
 							ThreeUtil.getTypeSafe(options.far, 100)
@@ -1157,9 +1157,9 @@ export class AbstractTextureComponent
 						return renderTarget.texture;
 					} else if (image.endsWith('.nrrd')) {
 						if (this.nrrdLoader === null) {
-							this.nrrdLoader = new THREE.NRRDLoader(ThreeUtil.getLoadingManager());
+							this.nrrdLoader = new N3JS.NRRDLoader(ThreeUtil.getLoadingManager());
 						}
-						const texture = new THREE.DataTexture3D(null, 1, 1, 1);
+						const texture = new N3JS.DataTexture3D(null, 1, 1, 1);
 						this.nrrdLoader.load(ThreeUtil.getStoreUrl(image), (volume) => {
 							texture.image = {
 								data: volume.data,
@@ -1185,7 +1185,7 @@ export class AbstractTextureComponent
 								);
 							default:
 								if (this.textureLoader === null) {
-									this.textureLoader = new THREE.TextureLoader(
+									this.textureLoader = new N3JS.TextureLoader(
 										ThreeUtil.getLoadingManager()
 									);
 								}
@@ -1223,7 +1223,7 @@ export class AbstractTextureComponent
 					textureData[idx] = parseFloat(value);
 				});
 			}
-			return new THREE.DataTexture(data, dataWidth, dataHeight);
+			return new N3JS.DataTexture(data, dataWidth, dataHeight);
 		} else {
 			const canvas: HTMLCanvasElement = document.createElement('canvas');
 			const canvasWidth: number = ThreeUtil.getTypeSafe(options.width, 32);
@@ -1244,7 +1244,7 @@ export class AbstractTextureComponent
 					options.programParam
 				);
 			}
-			const canvasTexture = new THREE.CanvasTexture(canvas);
+			const canvasTexture = new N3JS.CanvasTexture(canvas);
 			if (
 				ThreeUtil.isNotNull(program) &&
 				ThreeUtil.isNotNull(options.programMipmaps)
@@ -1301,8 +1301,8 @@ export class AbstractTextureComponent
 	 */
 	public setReferTexture(texture: any) {
 		if (texture instanceof HTMLVideoElement) {
-			this.texture = new THREE.VideoTexture(texture);
-		} else if (texture instanceof THREE.Texture) {
+			this.texture = new N3JS.VideoTexture(texture);
+		} else if (texture instanceof N3JS.Texture) {
 			this.texture = texture;
 		}
 		if (texture !== null && this.texture !== null && this.refTexture !== null) {
@@ -1547,7 +1547,7 @@ export class AbstractTextureComponent
 			if (ThreeUtil.isNotNull(object)) {
 				if (
 					ThreeUtil.isNotNull(this.refName) &&
-					object instanceof THREE.Object3D
+					object instanceof N3JS.Object3D
 				) {
 					const object3d: I3JS.IObject3D = object;
 					if (this.refName === '*') {
@@ -1581,11 +1581,11 @@ export class AbstractTextureComponent
 			)[] = [];
 			if (objectList.length > 0) {
 				objectList.forEach((object) => {
-					if (object instanceof THREE.Scene) {
+					if (object instanceof N3JS.Scene) {
 						materials.push(object);
-					} else if (object instanceof THREE.Material) {
-						if (object instanceof THREE.ShaderMaterial) {
-							if (object instanceof THREE.NodeMaterial) {
+					} else if (object instanceof N3JS.Material) {
+						if (object instanceof N3JS.ShaderMaterial) {
+							if (object instanceof N3JS.NodeMaterial) {
 								materials.push(object);
 							} else {
 								materials.push(object.uniforms);
@@ -1593,9 +1593,9 @@ export class AbstractTextureComponent
 						} else {
 							materials.push(object);
 						}
-					} else if (object instanceof THREE.ShaderPass) {
+					} else if (object instanceof N3JS.ShaderPass) {
 						materials.push(object.material.uniforms);
-					} else if (object instanceof THREE.EffectComposer) {
+					} else if (object instanceof N3JS.EffectComposer) {
 						materials.push(object.renderTarget1 as any);
 					}
 				});
@@ -1673,7 +1673,7 @@ export class AbstractTextureComponent
 						textureType = this.type;
 					}
 					info.materials.forEach((material) => {
-						if (material instanceof THREE.Material) {
+						if (material instanceof N3JS.Material) {
 							switch (textureType.toLowerCase()) {
 								case 'matcap':
 									this.applyTexture2Material(material, 'matcap', texture);
@@ -1747,7 +1747,7 @@ export class AbstractTextureComponent
 									break;
 							}
 							material.needsUpdate = true;
-						} else if (material instanceof THREE.Scene) {
+						} else if (material instanceof N3JS.Scene) {
 							switch (textureType.toLowerCase()) {
 								case 'environmentbackground':
 								case 'environment-background':
@@ -1764,7 +1764,7 @@ export class AbstractTextureComponent
 									material.background = texture;
 									break;
 							}
-						} else if (material instanceof THREE.WebGLRenderTarget) {
+						} else if (material instanceof N3JS.WebGLRenderTarget) {
 							material.setTexture(texture);
 						} else if (typeof material === 'object') {
 							const textureTypeInfo = (textureType + '..').split('.');
@@ -1805,35 +1805,35 @@ export class AbstractTextureComponent
 		texture: I3JS.ITexture
 	): void {
 		const materialAny: any = material;
-		if (material instanceof THREE.NodeMaterial) {
+		if (material instanceof N3JS.NodeMaterial) {
 			switch (key) {
 				case 'diffuseMap':
-					if (materialAny['color'] instanceof THREE.OperatorNode) {
+					if (materialAny['color'] instanceof N3JS.OperatorNode) {
 						const color: I3JS.IOperatorNode = materialAny['color'];
-						if (color.a instanceof THREE.TextureNode) {
+						if (color.a instanceof N3JS.TextureNode) {
 							color.a.value = texture as any;
 						}
 					}
 					break;
 				case 'normalMap':
-					if (materialAny['normal'] instanceof THREE.NormalMapNode) {
+					if (materialAny['normal'] instanceof N3JS.NormalMapNode) {
 						const normal: I3JS.INormalMapNode = materialAny['normal'];
-						if (normal.value instanceof THREE.TextureNode) {
+						if (normal.value instanceof N3JS.TextureNode) {
 							normal.value.value = texture as any;
 						} else {
-							normal.value = new THREE.TextureNode(texture as any);
+							normal.value = new N3JS.TextureNode(texture as any);
 						}
 					} else {
-						materialAny['normal'] = new THREE.NormalMapNode(
-							new THREE.TextureNode(texture as any)
+						materialAny['normal'] = new N3JS.NormalMapNode(
+							new N3JS.TextureNode(texture as any)
 						);
 					}
 					break;
 				default:
-					if (materialAny[key] instanceof THREE.TextureNode) {
+					if (materialAny[key] instanceof N3JS.TextureNode) {
 						materialAny[key].value = texture;
 					} else {
-						materialAny[key] = new THREE.TextureNode(texture as any);
+						materialAny[key] = new N3JS.TextureNode(texture as any);
 					}
 					break;
 			}
@@ -1892,7 +1892,7 @@ export class AbstractTextureComponent
 					case 'cube':
 					case 'cubemap':
 					case 'fromcubemap':
-						if (texture instanceof THREE.CubeTexture) {
+						if (texture instanceof N3JS.CubeTexture) {
 							AbstractTextureComponent.setTextureOptions(
 								texture,
 								this.getTextureOptions()

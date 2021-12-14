@@ -1,10 +1,10 @@
-import { ThreeUtil, CurvesParameters, THREE, I3JS } from '../../interface';
+import { ThreeUtil, CurvesParameters, N3JS, I3JS } from '../../interface';
 
 /**
  * Curves line
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearin) page for a live curve demo.
  */
-export class CurvesLine extends THREE.Curve {
+export class CurvesLine extends N3JS.Curve {
 	/**
 	 * The Radius of curves line
 	 */
@@ -66,7 +66,7 @@ export class CurvesLine extends THREE.Curve {
 	 * @returns
 	 */
 	public getPoint(t: number, optionalTarget: I3JS.IVector3) {
-		const point = optionalTarget || new THREE.Vector3();
+		const point = optionalTarget || new N3JS.Vector3();
 		const v = Math.max(-1, Math.min(1, t * 2 - 1));
 		const y = this.waveH != 0 ? Math.sin(2 * Math.PI * t * this.waveH) : v;
 		const radius =

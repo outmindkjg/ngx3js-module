@@ -11,7 +11,7 @@ import * as AmmoType from '../threejs-library/ammo-type';
 
 import { ConvexObjectBreaker } from 'three/examples/jsm/misc/ConvexObjectBreaker';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { RendererTimer, ThreeUtil, THREE, I3JS } from './../interface';
+import { RendererTimer, ThreeUtil, N3JS, I3JS } from './../interface';
 import { PhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
 import { AmmoPhysics } from '../threejs-library/AmmoPhysics';
 import { OimoPhysics } from '../threejs-library/OimoPhysics';
@@ -368,12 +368,12 @@ export class PhysicsComponent
 	/**
 	 * Impact point of physics component
 	 */
-	private impactPoint = new THREE.Vector3();
+	private impactPoint = new N3JS.Vector3();
 
 	/**
 	 * Impact normal of physics component
 	 */
-	private impactNormal = new THREE.Vector3();
+	private impactNormal = new N3JS.Vector3();
 
 	/**
 	 * Updates physics component

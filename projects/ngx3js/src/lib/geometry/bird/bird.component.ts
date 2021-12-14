@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeGeometryCustom, I3JS, THREE } from '../../interface';
+import { ThreeGeometryCustom, I3JS, N3JS } from '../../interface';
 
 /**
  * The Geometry Bird component.
@@ -56,17 +56,17 @@ export class GeometryBirdComponent
 		const birds: number = this.width * this.width;
 		const triangles = birds * 3;
 		const points = triangles * 3;
-		const geometry = new THREE.BufferGeometry();
-		this.vertices = new THREE.BufferAttribute(new Float32Array(points * 3), 3);
-		const birdColors: any = new THREE.BufferAttribute(
+		const geometry = new N3JS.BufferGeometry();
+		this.vertices = new N3JS.BufferAttribute(new Float32Array(points * 3), 3);
+		const birdColors: any = new N3JS.BufferAttribute(
 			new Float32Array(points * 3),
 			3
 		);
-		const references: any = new THREE.BufferAttribute(
+		const references: any = new N3JS.BufferAttribute(
 			new Float32Array(points * 2),
 			2
 		);
-		const birdVertex: any = new THREE.BufferAttribute(
+		const birdVertex: any = new N3JS.BufferAttribute(
 			new Float32Array(points),
 			1
 		);
@@ -91,7 +91,7 @@ export class GeometryBirdComponent
 			const i = ~~(v / 3);
 			const x = (i % this.width) / this.width;
 			const y = ~~(i / this.width) / this.width;
-			const c = new THREE.Color(0x444444 + (~~(v / 9) / birds) * 0x666666);
+			const c = new N3JS.Color(0x444444 + (~~(v / 9) / birds) * 0x666666);
 
 			birdColors.array[v * 3 + 0] = c.r;
 			birdColors.array[v * 3 + 1] = c.g;

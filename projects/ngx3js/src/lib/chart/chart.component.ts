@@ -7,7 +7,7 @@ import {
 	ThreeColor,
 	ThreeUtil,
 	I3JS,
-	THREE,
+	N3JS,
 	ThreeVector,
 } from '../interface';
 import { MeshComponent } from '../mesh/mesh.component';
@@ -444,14 +444,14 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 		} else if (minValue <= 1000) {
 			minValue = 500;
 		}
-		this.chartZero = new THREE.Vector3(0, minValue, 0);
-		this.chartScale = new THREE.Vector3(
+		this.chartZero = new N3JS.Vector3(0, minValue, 0);
+		this.chartScale = new N3JS.Vector3(
 			this.width / chartXMax,
 			this.height / Math.max(1, maxValue - minValue),
 			this.depth / chartZMax
 		);
 		const chartPadding = this.getLocalPosition(1, 0, 1);
-		this.chartPosition = new THREE.Vector3(
+		this.chartPosition = new N3JS.Vector3(
 			-this.width / 2 - chartPadding.x / 2,
 			-this.height / 2,
 			-this.depth / 2 + chartPadding.z / 2
@@ -671,7 +671,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @returns tooltip text
 	 */
 	private getLocalPosition(x: number, y: number, z: number): I3JS.IVector3 {
-		return new THREE.Vector3(x, y, z)
+		return new N3JS.Vector3(x, y, z)
 			.sub(this.chartZero)
 			.multiply(this.chartScale);
 	}
@@ -679,17 +679,17 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * Axis x of chart component
 	 */
-	public chartScale: I3JS.IVector3 = new THREE.Vector3(1, 1, 1);
+	public chartScale: I3JS.IVector3 = new N3JS.Vector3(1, 1, 1);
 
 	/**
 	 * Axis x of chart component
 	 */
-	public chartZero: I3JS.IVector3 = new THREE.Vector3(0, 0, 0);
+	public chartZero: I3JS.IVector3 = new N3JS.Vector3(0, 0, 0);
 
 	/**
 	 * Axis x of chart component
 	 */
-	public chartPosition: I3JS.IVector3 = new THREE.Vector3(0, 0, 0);
+	public chartPosition: I3JS.IVector3 = new N3JS.Vector3(0, 0, 0);
 
 	/**
 	 * Axis x of chart component
@@ -858,7 +858,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 				: colorInfo.borderColor;
 			if (ThreeUtil.isNotNull(borderColor) && mesh.children.length > 0) {
 				const child = mesh.children[0];
-				if (child instanceof THREE.LineSegments) {
+				if (child instanceof N3JS.LineSegments) {
 					const childMaterial: I3JS.ILineBasicMaterial =
 						child.material as I3JS.ILineBasicMaterial;
 					childMaterial.color = ThreeUtil.getColorSafe(borderColor.color);

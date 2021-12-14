@@ -1,5 +1,5 @@
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 
 /**
  * CanvasFunctionType
@@ -402,7 +402,7 @@ DataTextureConf.cloud = (options: any) => {
 	let i = 0;
 	const scale = options?.scale || 0.05;
 	const perlin = new ImprovedNoise();
-	const vector = new THREE.Vector3();
+	const vector = new N3JS.Vector3();
 	for (let z = 0; z < size; z++) {
 		for (let y = 0; y < size; y++) {
 			for (let x = 0; x < size; x++) {
@@ -423,10 +423,10 @@ DataTextureConf.cloud = (options: any) => {
 			}
 		}
 	}
-	const texture = new THREE.DataTexture3D(data, size, size, size);
-	texture.format = THREE.RedFormat;
-	texture.minFilter = THREE.LinearFilter;
-	texture.magFilter = THREE.LinearFilter;
+	const texture = new N3JS.DataTexture3D(data, size, size, size);
+	texture.format = N3JS.RedFormat;
+	texture.minFilter = N3JS.LinearFilter;
+	texture.magFilter = N3JS.LinearFilter;
 	texture.unpackAlignment = 1;
 	return texture;
 };
@@ -436,7 +436,7 @@ DataTextureConf.perlin = (options: any) => {
 	const data = new Uint8Array(size * size * size);
 	let i = 0;
 	const perlin = new ImprovedNoise();
-	const vector = new THREE.Vector3();
+	const vector = new N3JS.Vector3();
 	for (let z = 0; z < size; z++) {
 		for (let y = 0; y < size; y++) {
 			for (let x = 0; x < size; x++) {
@@ -446,10 +446,10 @@ DataTextureConf.perlin = (options: any) => {
 			}
 		}
 	}
-	const texture = new THREE.DataTexture3D(data, size, size, size);
-	texture.format = THREE.RedFormat;
-	texture.minFilter = THREE.LinearFilter;
-	texture.magFilter = THREE.LinearFilter;
+	const texture = new N3JS.DataTexture3D(data, size, size, size);
+	texture.format = N3JS.RedFormat;
+	texture.minFilter = N3JS.LinearFilter;
+	texture.magFilter = N3JS.LinearFilter;
 	texture.unpackAlignment = 1;
 	return texture;
 };
@@ -458,15 +458,15 @@ DataTextureConf.datatexture3d = (options: any) => {
 	const width = options?.width || size;
 	const height = options?.height || size;
 	const depth = options?.depth || size;
-	const texture = new THREE.DataTexture3D(
+	const texture = new N3JS.DataTexture3D(
 		new Uint8Array(width * height * depth).fill(0),
 		width,
 		height,
 		depth
 	);
-	texture.format = THREE.RedFormat;
-	texture.minFilter = THREE.LinearFilter;
-	texture.magFilter = THREE.LinearFilter;
+	texture.format = N3JS.RedFormat;
+	texture.minFilter = N3JS.LinearFilter;
+	texture.magFilter = N3JS.LinearFilter;
 	texture.unpackAlignment = 1;
 	return texture;
 };
@@ -474,14 +474,14 @@ DataTextureConf.datatexture = (options: any) => {
 	const size = options?.size || 10;
 	const width = options?.width || size;
 	const height = options?.height || size;
-	const texture = new THREE.DataTexture(
+	const texture = new N3JS.DataTexture(
 		new Uint8Array(width * height).fill(0),
 		width,
 		height
 	);
-	texture.format = THREE.RedFormat;
-	texture.minFilter = THREE.LinearFilter;
-	texture.magFilter = THREE.LinearFilter;
+	texture.format = N3JS.RedFormat;
+	texture.minFilter = N3JS.LinearFilter;
+	texture.magFilter = N3JS.LinearFilter;
 	texture.unpackAlignment = 1;
 	return texture;
 };
@@ -510,7 +510,7 @@ export class TextureUtils {
 		ow: number,
 		oh: number
 	): I3JS.IVector2 {
-		return new THREE.Vector2(w / ow, h / oh);
+		return new N3JS.Vector2(w / ow, h / oh);
 	}
 
 	/**

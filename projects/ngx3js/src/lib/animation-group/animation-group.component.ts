@@ -9,7 +9,7 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 import { MixerComponent } from '../mixer/mixer.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
@@ -164,7 +164,7 @@ export class AnimationGroupComponent
 	public getAnimationGroup<T extends I3JS.IAnimationObjectGroup>(): T {
 		if (this.animationGroup === null || this._needUpdate) {
 			this.needUpdate = false;
-			this.animationGroup = new THREE.AnimationObjectGroup();
+			this.animationGroup = new N3JS.AnimationObjectGroup();
 			this.setObject(this.animationGroup);
 		}
 		return this.animationGroup as T;

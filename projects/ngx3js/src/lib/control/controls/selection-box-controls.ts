@@ -1,6 +1,6 @@
 import { SelectionBox } from 'three/examples/jsm/interactive/SelectionBox';
 import { SelectionHelper } from 'three/examples/jsm/interactive/SelectionHelper';
-import { ThreeColor, ThreeUtil, THREE, I3JS } from '../../interface';
+import { ThreeColor, ThreeUtil, N3JS, I3JS } from '../../interface';
 
 /**
  * Select Box Controls
@@ -126,7 +126,7 @@ export class NgxSelectBoxControls {
 	/**
 	 * The Mouse of select box controls
 	 */
-	private mouse: I3JS.IVector2 = new THREE.Vector2();
+	private mouse: I3JS.IVector2 = new N3JS.Vector2();
 
 	/**
 	 * Gets mouse

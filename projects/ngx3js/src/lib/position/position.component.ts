@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TagAttributes, ThreeUtil, I3JS, THREE } from '../interface';
+import { TagAttributes, ThreeUtil, I3JS, N3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTweenComponent } from '../tween.abstract';
 
@@ -205,7 +205,7 @@ export class PositionComponent
 			);
 			this.getPosition();
 			this.synkObject3d(this.position, key);
-			if (object instanceof THREE.Object3D) {
+			if (object instanceof N3JS.Object3D) {
 				if (ThreeUtil.isNotNull(object) && ThreeUtil.isNull(object.userData)) {
 					object.userData = {};
 				}
@@ -239,12 +239,12 @@ export class PositionComponent
 					});
 				}
 				object3dList.forEach((object3d) => {
-					if (object3d instanceof THREE.Object3D) {
+					if (object3d instanceof N3JS.Object3D) {
 						const anyObject3d: any = object3d;
 						switch (this.type.toLowerCase()) {
 							case 'up':
 								if (ThreeUtil.isNull(object3d.up)) {
-									object3d.up = new THREE.Vector3(0, 1, 0);
+									object3d.up = new N3JS.Vector3(0, 1, 0);
 								}
 								object3d.up.copy(position);
 								break;
@@ -377,7 +377,7 @@ export class PositionComponent
 				this.x,
 				this.y,
 				this.z,
-				new THREE.Vector3(0, 0, 0)
+				new N3JS.Vector3(0, 0, 0)
 			);
 			if (ThreeUtil.isNotNull(this.setfrom)) {
 				switch (this.setfrom.toLowerCase()) {
@@ -428,7 +428,7 @@ export class PositionComponent
 						camera.addEventListener('change', this._lastRefCameraBind);
 						this._lastRefCamera = camera;
 					}
-					if (camera instanceof THREE.OrthographicCamera) {
+					if (camera instanceof N3JS.OrthographicCamera) {
 						position.x =
 							((camera.right - camera.left) / 2) * position.x +
 							(camera.right + camera.left) / 2;

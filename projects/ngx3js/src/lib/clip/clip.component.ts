@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { KeyframeComponent } from '../keyframe/keyframe.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ThreeUtil, THREE, I3JS } from './../interface';
+import { ThreeUtil, N3JS, I3JS } from './../interface';
 
 /**
  * The Clip component.
@@ -378,12 +378,12 @@ export class ClipComponent
 					clip =
 						this.index > -1
 							? this.clips[this.index]
-							: THREE.AnimationClip.findByName(this.clips, this.name);
+							: N3JS.AnimationClip.findByName(this.clips, this.name);
 				} else {
 					clip = null;
 				}
 			} else {
-				clip = new THREE.AnimationClip(
+				clip = new N3JS.AnimationClip(
 					ThreeUtil.getTypeSafe(this.name, 'default'),
 					this.duration,
 					[],
@@ -395,9 +395,9 @@ export class ClipComponent
 					this.action.stop();
 				}
 				if (this.additive) {
-					THREE.AnimationUtils.makeClipAdditive(clip);
+					N3JS.AnimationUtils.makeClipAdditive(clip);
 					if (this.subclip) {
-						const subClip = THREE.AnimationUtils.subclip(
+						const subClip = N3JS.AnimationUtils.subclip(
 							clip,
 							clip.name,
 							this.startFrame,
@@ -430,8 +430,8 @@ export class ClipComponent
 						});
 					}
 					if (
-						this.model instanceof THREE.Object3D ||
-						this.model instanceof THREE.AnimationObjectGroup
+						this.model instanceof N3JS.Object3D ||
+						this.model instanceof N3JS.AnimationObjectGroup
 					) {
 						this.action = this.mixer.clipAction(
 							clip,

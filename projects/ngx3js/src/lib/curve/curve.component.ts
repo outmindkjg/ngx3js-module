@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeUtil, ThreeVector, THREE, I3JS } from '../interface';
+import { ThreeUtil, ThreeVector, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -125,11 +125,11 @@ export class CurveComponent
 	private getPointsV3(def: ThreeVector[], min: number): I3JS.IVector3[] {
 		const points: I3JS.IVector3[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
-			points.push(new THREE.Vector3(p.x, p.y, p.z));
+			points.push(new N3JS.Vector3(p.x, p.y, p.z));
 		});
 		if (points.length < min) {
 			for (let i = 0; i < min - points.length; i++) {
-				points.push(new THREE.Vector3(0, 0, 0));
+				points.push(new N3JS.Vector3(0, 0, 0));
 			}
 		}
 		return points;
@@ -144,11 +144,11 @@ export class CurveComponent
 	private getPointsV2(def: ThreeVector[], min: number): I3JS.IVector2[] {
 		const points: I3JS.IVector2[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
-			points.push(new THREE.Vector2(p.x, p.y));
+			points.push(new N3JS.Vector2(p.x, p.y));
 		});
 		if (points.length < min) {
 			for (let i = 0; i < min - points.length; i++) {
-				points.push(new THREE.Vector2(0, 0));
+				points.push(new N3JS.Vector2(0, 0));
 			}
 		}
 		return points;
@@ -241,7 +241,7 @@ export class CurveComponent
 			switch (this.type.toLowerCase()) {
 				case 'arccurve':
 				case 'arc':
-					this.curve = new THREE.ArcCurve(
+					this.curve = new N3JS.ArcCurve(
 						ThreeUtil.getTypeSafe(this.aX, 1),
 						ThreeUtil.getTypeSafe(this.aY, 1),
 						ThreeUtil.getTypeSafe(this.aRadius, 1),
@@ -253,7 +253,7 @@ export class CurveComponent
 				case 'catmullromcurve3':
 				case 'spline3':
 				case 'catmullrom':
-					this.curve = new THREE.CatmullRomCurve3(
+					this.curve = new N3JS.CatmullRomCurve3(
 						this.getPointsV3([], 3),
 						ThreeUtil.getTypeSafe(this.closed, false),
 						ThreeUtil.getTypeSafe(this.curveType, 'centripetal'),
@@ -263,7 +263,7 @@ export class CurveComponent
 				case 'cubicbeziercurve':
 				case 'cubicbezier':
 					const cubicbezierV2 = this.getPointsV2([], 4);
-					this.curve = new THREE.CubicBezierCurve(
+					this.curve = new N3JS.CubicBezierCurve(
 						cubicbezierV2[0],
 						cubicbezierV2[1],
 						cubicbezierV2[2],
@@ -273,7 +273,7 @@ export class CurveComponent
 				case 'cubicbeziercurve3':
 				case 'cubicbezier3':
 					const cubicbezierV3 = this.getPointsV3([], 4);
-					this.curve = new THREE.CubicBezierCurve3(
+					this.curve = new N3JS.CubicBezierCurve3(
 						cubicbezierV3[0],
 						cubicbezierV3[1],
 						cubicbezierV3[2],
@@ -282,7 +282,7 @@ export class CurveComponent
 					break;
 				case 'ellipsecurve':
 				case 'ellipse':
-					this.curve = new THREE.EllipseCurve(
+					this.curve = new N3JS.EllipseCurve(
 						ThreeUtil.getTypeSafe(this.aX, 0),
 						ThreeUtil.getTypeSafe(this.aY, 0),
 						ThreeUtil.getTypeSafe(this.xRadius, 1),
@@ -296,17 +296,17 @@ export class CurveComponent
 				case 'linecurve':
 				case 'line':
 					const lineV2 = this.getPointsV2([], 2);
-					this.curve = new THREE.LineCurve(lineV2[0], lineV2[1]);
+					this.curve = new N3JS.LineCurve(lineV2[0], lineV2[1]);
 					break;
 				case 'linecurve3':
 				case 'line3':
 					const lineV3 = this.getPointsV3([], 2);
-					this.curve = new THREE.LineCurve3(lineV3[0], lineV3[1]);
+					this.curve = new N3JS.LineCurve3(lineV3[0], lineV3[1]);
 					break;
 				case 'quadraticbeziercurve':
 				case 'quadraticbezier':
 					const quadraticbezierV2 = this.getPointsV2([], 3);
-					this.curve = new THREE.QuadraticBezierCurve(
+					this.curve = new N3JS.QuadraticBezierCurve(
 						quadraticbezierV2[0],
 						quadraticbezierV2[1],
 						quadraticbezierV2[2]
@@ -315,7 +315,7 @@ export class CurveComponent
 				case 'quadraticbeziercurve3':
 				case 'quadraticbezier3':
 					const quadraticbezierV3 = this.getPointsV3([], 3);
-					this.curve = new THREE.QuadraticBezierCurve3(
+					this.curve = new N3JS.QuadraticBezierCurve3(
 						quadraticbezierV3[0],
 						quadraticbezierV3[1],
 						quadraticbezierV3[2]
@@ -323,7 +323,7 @@ export class CurveComponent
 					break;
 				case 'splinecurve':
 				case 'spline':
-					this.curve = new THREE.SplineCurve(this.getPointsV2([], 1));
+					this.curve = new N3JS.SplineCurve(this.getPointsV2([], 1));
 					break;
 			}
 			this.setObject(this.curve);

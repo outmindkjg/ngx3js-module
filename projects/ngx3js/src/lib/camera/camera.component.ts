@@ -13,7 +13,7 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import {
 	I3JS,
 	RendererTimer,
-	THREE,
+	N3JS,
 	ThreeColor,
 	ThreeUtil,
 } from './../interface';
@@ -449,7 +449,7 @@ export class CameraComponent
 				case 'ortho':
 					switch (zoom.toLowerCase()) {
 						case 'auto':
-							const fov = THREE.MathUtils.degToRad(this.getFov(50));
+							const fov = N3JS.MathUtils.degToRad(this.getFov(50));
 							const hyperfocus = (this.getNear(-200) + this.getFar(2000)) / 2;
 							const _height = 2 * Math.tan(fov / 2) * hyperfocus;
 							return this.getHeight() / _height;
@@ -816,8 +816,8 @@ export class CameraComponent
 								case 'viewoffset':
 								case 'offset':
 									if (
-										this.camera instanceof THREE.PerspectiveCamera ||
-										this.camera instanceof THREE.OrthographicCamera
+										this.camera instanceof N3JS.PerspectiveCamera ||
+										this.camera instanceof N3JS.OrthographicCamera
 									) {
 										this.camera.setViewOffset(
 											this.fullWidth,
@@ -831,7 +831,7 @@ export class CameraComponent
 									break;
 								case 'viewport':
 								case 'camera':
-									if (this.camera instanceof THREE.PerspectiveCamera) {
+									if (this.camera instanceof N3JS.PerspectiveCamera) {
 										(this.camera as any)['viewport']
 											.set(
 												this.getX(),
@@ -844,8 +844,8 @@ export class CameraComponent
 									break;
 								default:
 									if (
-										this.camera instanceof THREE.PerspectiveCamera ||
-										this.camera instanceof THREE.OrthographicCamera
+										this.camera instanceof N3JS.PerspectiveCamera ||
+										this.camera instanceof N3JS.OrthographicCamera
 									) {
 										this.camera.clearViewOffset();
 									}
@@ -853,14 +853,14 @@ export class CameraComponent
 							}
 						} else {
 							if (
-								this.camera instanceof THREE.PerspectiveCamera ||
-								this.camera instanceof THREE.OrthographicCamera
+								this.camera instanceof N3JS.PerspectiveCamera ||
+								this.camera instanceof N3JS.OrthographicCamera
 							) {
 								this.camera.clearViewOffset();
 							}
 							if (
 								this.renderer !== null &&
-								this.renderer instanceof THREE.WebGLRenderer
+								this.renderer instanceof N3JS.WebGLRenderer
 							) {
 								this.renderer.setViewport(
 									0,
@@ -916,7 +916,7 @@ export class CameraComponent
 	 * @returns size
 	 */
 	public getSize(): I3JS.IVector2 {
-		return new THREE.Vector2(this.rendererWidth, this.rendererHeight);
+		return new N3JS.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
 	/**
@@ -931,7 +931,7 @@ export class CameraComponent
 	 */
 	public getRaycaster(mouse: I3JS.IVector2 = null): I3JS.IRaycaster {
 		if (this.raycaster === null) {
-			this.raycaster = new THREE.Raycaster();
+			this.raycaster = new N3JS.Raycaster();
 		}
 		if (mouse !== null) {
 			this.raycaster.setFromCamera(mouse, this.getCamera());
@@ -952,7 +952,7 @@ export class CameraComponent
 		recursive: boolean = false
 	): I3JS.IIntersection[] {
 		const raycaster = this.getRaycaster(mouse);
-		if (mesh instanceof THREE.Object3D) {
+		if (mesh instanceof N3JS.Object3D) {
 			return raycaster.intersectObject(mesh, recursive);
 		} else if (Array.isArray(mesh)) {
 			return raycaster.intersectObjects(mesh, recursive);
@@ -1007,18 +1007,18 @@ export class CameraComponent
 		}
 		if (this.camera !== null) {
 			if (
-				this.camera instanceof THREE.OrthographicCamera ||
-				this.camera instanceof THREE.PerspectiveCamera
+				this.camera instanceof N3JS.OrthographicCamera ||
+				this.camera instanceof N3JS.PerspectiveCamera
 			) {
 				this.camera.near = this.getNear(0.1);
 				this.camera.far = this.getFar(2000);
-				if (this.camera instanceof THREE.OrthographicCamera) {
+				if (this.camera instanceof N3JS.OrthographicCamera) {
 					const aspect = width / height;
 					this.camera.left = this.getLeft(aspect);
 					this.camera.right = this.getRight(aspect);
 					this.camera.top = this.getTop();
 					this.camera.bottom = this.getBottom();
-				} else if (this.camera instanceof THREE.PerspectiveCamera) {
+				} else if (this.camera instanceof N3JS.PerspectiveCamera) {
 					this.camera.fov = this.getFov(50);
 					this.camera.aspect = this.getAspect(width, height);
 				}
@@ -1047,7 +1047,7 @@ export class CameraComponent
 		if (this.camera === null) {
 			this.getObject3d();
 		}
-		if (this.camera instanceof THREE.CubeCamera) {
+		if (this.camera instanceof N3JS.CubeCamera) {
 			return this.camera.renderTarget;
 		}
 		return undefined;
@@ -1084,22 +1084,22 @@ export class CameraComponent
 			switch (this.type.toLowerCase()) {
 				case 'arraycamera':
 				case 'array':
-					this.camera = new THREE.ArrayCamera();
+					this.camera = new N3JS.ArrayCamera();
 					break;
 				case 'stereocamera':
 				case 'stereo':
-					this.camera = new THREE.StereoCamera();
+					this.camera = new N3JS.StereoCamera();
 					break;
 				case 'cubecamera':
 				case 'cube':
-					this.camera = new THREE.CubeCamera(
+					this.camera = new N3JS.CubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
-						new THREE.WebGLCubeRenderTarget(512, {
-							encoding: THREE.sRGBEncoding,
-							format: THREE.RGBFormat,
+						new N3JS.WebGLCubeRenderTarget(512, {
+							encoding: N3JS.sRGBEncoding,
+							format: N3JS.RGBFormat,
 							generateMipmaps: true,
-							minFilter: THREE.LinearMipmapLinearFilter,
+							minFilter: N3JS.LinearMipmapLinearFilter,
 						})
 					);
 					break;
@@ -1107,29 +1107,29 @@ export class CameraComponent
 				case 'cubepingpong':
 				case 'pingpongcamera':
 				case 'pingpong':
-					const webGLCubeRenderTarget1 = new THREE.WebGLCubeRenderTarget(512, {
-						encoding: THREE.sRGBEncoding,
-						format: THREE.RGBFormat,
+					const webGLCubeRenderTarget1 = new N3JS.WebGLCubeRenderTarget(512, {
+						encoding: N3JS.sRGBEncoding,
+						format: N3JS.RGBFormat,
 						generateMipmaps: true,
-						minFilter: THREE.LinearMipmapLinearFilter,
+						minFilter: N3JS.LinearMipmapLinearFilter,
 					});
-					const cubeCamera1 = new THREE.CubeCamera(
+					const cubeCamera1 = new N3JS.CubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
 						webGLCubeRenderTarget1
 					);
-					const webGLCubeRenderTarget2 = new THREE.WebGLCubeRenderTarget(512, {
-						encoding: THREE.sRGBEncoding,
-						format: THREE.RGBFormat,
+					const webGLCubeRenderTarget2 = new N3JS.WebGLCubeRenderTarget(512, {
+						encoding: N3JS.sRGBEncoding,
+						format: N3JS.RGBFormat,
 						generateMipmaps: true,
-						minFilter: THREE.LinearMipmapLinearFilter,
+						minFilter: N3JS.LinearMipmapLinearFilter,
 					});
-					const cubeCamera2 = new THREE.CubeCamera(
+					const cubeCamera2 = new N3JS.CubeCamera(
 						this.getNear(0.1),
 						this.getFar(2000),
 						webGLCubeRenderTarget2
 					);
-					this.camera = new THREE.Group();
+					this.camera = new N3JS.Group();
 					this.camera.add(cubeCamera1, cubeCamera2);
 					this.cameraExtra = [];
 					this.cameraExtra.push(cubeCamera1, cubeCamera2);
@@ -1146,7 +1146,7 @@ export class CameraComponent
 				case 'orthographic':
 				case 'ortho':
 					const aspect = width / height;
-					const orthographicCamera = new THREE.OrthographicCamera(
+					const orthographicCamera = new N3JS.OrthographicCamera(
 						this.getLeft(aspect),
 						this.getRight(aspect),
 						this.getTop(),
@@ -1177,7 +1177,7 @@ export class CameraComponent
 						switch (this.viewportType.toLowerCase()) {
 							case 'viewport':
 							case 'camera':
-								perspectiveCamera['viewport'] = new THREE.Vector4(
+								perspectiveCamera['viewport'] = new N3JS.Vector4(
 									this.getX(),
 									this.getY(),
 									this.getWidth(),
@@ -1189,7 +1189,7 @@ export class CameraComponent
 					this.camera = perspectiveCamera;
 					break;
 			}
-			if (this.parentObject3d instanceof THREE.ArrayCamera) {
+			if (this.parentObject3d instanceof N3JS.ArrayCamera) {
 				this.isCameraChild = true;
 				this.parentObject3d.cameras.push(
 					this.camera as I3JS.IPerspectiveCamera
@@ -1240,7 +1240,7 @@ export class CameraComponent
 				return this.rendererScenes.first.getScene();
 			}
 		}
-		return new THREE.Scene();
+		return new N3JS.Scene();
 	}
 
 	private cubePingPong: number = 0;
@@ -1281,10 +1281,10 @@ export class CameraComponent
 				camera.quaternion.copy(object3d.quaternion);
 			}
 		}
-		if (renderer instanceof THREE.WebGLRenderer) {
+		if (renderer instanceof N3JS.WebGLRenderer) {
 			if (
-				this.camera instanceof THREE.CubeCamera ||
-				this.camera instanceof THREE.Group
+				this.camera instanceof N3JS.CubeCamera ||
+				this.camera instanceof N3JS.Group
 			) {
 				let cubeCamera: I3JS.ICubeCamera = null;
 				if (
@@ -1294,7 +1294,7 @@ export class CameraComponent
 				) {
 					this.cubePingPong = (this.cubePingPong + 1) % this.cameraExtra.length;
 					cubeCamera = this.cameraExtra[this.cubePingPong];
-				} else if (this.camera instanceof THREE.CubeCamera) {
+				} else if (this.camera instanceof N3JS.CubeCamera) {
 					cubeCamera = this.camera;
 				}
 				if (cubeCamera !== null) {
@@ -1318,7 +1318,7 @@ export class CameraComponent
 				renderer.setClearColor(this.getClearColor(), this.getClearAlpha(1));
 			}
 		}
-		if (camera instanceof THREE.Camera) {
+		if (camera instanceof N3JS.Camera) {
 			this.onRender.emit(renderTimer);
 			if (this.scenes !== null && this.scenes.length > 0) {
 				this.scenes.forEach((sceneCom) => {
@@ -1378,7 +1378,7 @@ export class CameraComponent
 	) {
 		if (scene !== null) {
 			try {
-				if (renderer instanceof THREE.WebGLRenderer) {
+				if (renderer instanceof N3JS.WebGLRenderer) {
 					if (this.scissorTest) {
 						renderer.setScissorTest(true);
 						renderer.setScissor(
@@ -1401,7 +1401,7 @@ export class CameraComponent
 						}
 					}
 				}
-				if (renderer instanceof THREE.WebGLRenderer) {
+				if (renderer instanceof N3JS.WebGLRenderer) {
 					if (ThreeUtil.isNotNull(this.clear) && this.clear) {
 						renderer.clear();
 					}
@@ -1410,7 +1410,7 @@ export class CameraComponent
 					}
 				}
 				renderer.render(scene, camera);
-				if (renderer instanceof THREE.WebGLRenderer) {
+				if (renderer instanceof N3JS.WebGLRenderer) {
 					if (this.scissorTest) {
 						renderer.setScissorTest(false);
 					}

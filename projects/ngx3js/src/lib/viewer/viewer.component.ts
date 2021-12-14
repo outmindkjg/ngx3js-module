@@ -6,7 +6,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import { HelperComponent } from '../helper/helper.component';
-import { RendererTimer, ThreeUtil, THREE, I3JS } from '../interface';
+import { RendererTimer, ThreeUtil, N3JS, I3JS } from '../interface';
 import { LightComponent } from '../light/light.component';
 import { MeshComponent } from '../mesh/mesh.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
@@ -165,7 +165,7 @@ export class ViewerComponent
 			);
 			return light;
 		}
-		return new THREE.PointLight();
+		return new N3JS.PointLight();
 	}
 
 	/**
@@ -188,7 +188,7 @@ export class ViewerComponent
 			);
 			return mesh;
 		}
-		return new THREE.Mesh();
+		return new N3JS.Mesh();
 	}
 
 	/**
@@ -196,12 +196,12 @@ export class ViewerComponent
 	 * @returns plane
 	 */
 	private getPlane(): I3JS.IPlane {
-		const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0.01);
+		const plane = new N3JS.Plane(new N3JS.Vector3(0, 1, 0), 0.01);
 		if (ThreeUtil.isNotNull(this.plane)) {
 			let mesh: I3JS.IObject3D = null;
-			if (this.plane instanceof THREE.Plane) {
+			if (this.plane instanceof N3JS.Plane) {
 				plane.copy(this.plane);
-			} else if (this.plane instanceof THREE.Mesh) {
+			} else if (this.plane instanceof N3JS.Mesh) {
 				mesh = this.plane;
 			} else if (this.plane instanceof MeshComponent) {
 				mesh = this.plane.getObject3d();
@@ -218,9 +218,9 @@ export class ViewerComponent
 			}
 			if (mesh !== null) {
 				mesh.updateMatrixWorld();
-				const p1 = new THREE.Vector3(0, 0.01, 0);
-				const p2 = new THREE.Vector3(100, 0.01, 0);
-				const p3 = new THREE.Vector3(0, 0.01, 100);
+				const p1 = new N3JS.Vector3(0, 0.01, 0);
+				const p2 = new N3JS.Vector3(100, 0.01, 0);
+				const p3 = new N3JS.Vector3(0, 0.01, 100);
 				mesh.localToWorld(p1);
 				mesh.localToWorld(p2);
 				mesh.localToWorld(p3);
@@ -401,7 +401,7 @@ export class ViewerComponent
 	 */
 	public setParent(parent: any): boolean {
 		if (super.setParent(parent)) {
-			if (this.viewer !== null && this.viewer instanceof THREE.Mesh) {
+			if (this.viewer !== null && this.viewer instanceof N3JS.Mesh) {
 				this.parent.add(this.viewer);
 			}
 			return true;
@@ -531,15 +531,15 @@ export class ViewerComponent
 					break;
 				case 'shadowmapviewer':
 				case 'shadowmap':
-					this.viewer = new THREE.ShadowMapViewer(this.getLight() as any);
+					this.viewer = new N3JS.ShadowMapViewer(this.getLight() as any);
 					this.resizeViewer();
 					break;
 				case 'shadowmesh':
 				case 'shadow':
-					const shadowMesh = new THREE.ShadowMesh(this.getMesh());
+					const shadowMesh = new N3JS.ShadowMesh(this.getMesh());
 					this._refLight = this.getLight();
 					this._refPlane = this.getPlane();
-					this._refLightPosition = new THREE.Vector4(0, 0, 0, 0.001);
+					this._refLightPosition = new N3JS.Vector4(0, 0, 0, 0.001);
 					this.viewer = shadowMesh;
 					if (this.parent !== null) {
 						this.parent.add(this.viewer);
@@ -547,7 +547,7 @@ export class ViewerComponent
 					break;
 				case 'progressivelightmap':
 				case 'progressivelight':
-					const progressiveSurfacemap = new THREE.ProgressiveLightMap(
+					const progressiveSurfacemap = new N3JS.ProgressiveLightMap(
 						this.getRenderer() as any,
 						ThreeUtil.getTypeSafe(this.lightMapRes, 1024)
 					);
@@ -607,13 +607,13 @@ export class ViewerComponent
 		if (ThreeUtil.isNotNull(scenes)) {
 			if (scenes instanceof QueryList && scenes.length > 0) {
 				return scenes.first.getScene();
-			} else if (scenes instanceof THREE.Scene) {
+			} else if (scenes instanceof N3JS.Scene) {
 				return scenes;
 			} else if (ThreeUtil.isNotNull(scenes.getScene)) {
 				return scenes.getScene();
 			}
 		}
-		return new THREE.Scene();
+		return new N3JS.Scene();
 	}
 
 	/**
@@ -625,13 +625,13 @@ export class ViewerComponent
 		if (ThreeUtil.isNotNull(cameras)) {
 			if (cameras instanceof QueryList && cameras.length > 0) {
 				return cameras.first.getCamera();
-			} else if (cameras instanceof THREE.Camera) {
+			} else if (cameras instanceof N3JS.Camera) {
 				return cameras;
 			} else if (ThreeUtil.isNotNull(cameras.getCamera)) {
 				return cameras.getCamera();
 			}
 		}
-		return new THREE.Camera();
+		return new N3JS.Camera();
 	}
 
 	/**
@@ -662,7 +662,7 @@ export class ViewerComponent
 					break;
 				case 'progressivelightmap':
 				case 'progressivelight':
-					if (this.viewer instanceof THREE.ProgressiveLightMap) {
+					if (this.viewer instanceof N3JS.ProgressiveLightMap) {
 						const camera = this.getCamera(cameras);
 						this.viewer.update(
 							camera,

@@ -6,7 +6,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import { AbstractChartComponent } from '../../chart.abstract';
-import { ThreeUtil, I3JS, THREE, ThreeColor } from '../../interface';
+import { ThreeUtil, I3JS, N3JS, ThreeColor } from '../../interface';
 import { AbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
@@ -219,7 +219,7 @@ export class ChartAxesComponent
 	public getTitle<T extends I3JS.IObject3D>(): T {
 		if (this._axes === null || this._needUpdate) {
 			this.needUpdate = false;
-			this._axes = new THREE.Group();
+			this._axes = new N3JS.Group();
 			const width = ThreeUtil.getTypeSafe(this.width, 1);
 			const height = ThreeUtil.getTypeSafe(this.height, 1);
 			const depth = ThreeUtil.getTypeSafe(this.depth, 1);
@@ -231,7 +231,7 @@ export class ChartAxesComponent
 			const borderIndex: number[] = [];
 			switch (this.type.toLowerCase()) {
 				case 'radar':
-					this._geometryWall = new THREE.CircleGeometry(
+					this._geometryWall = new N3JS.CircleGeometry(
 						radius,
 						radiusSegments
 					) as any;
@@ -242,32 +242,32 @@ export class ChartAxesComponent
 					break;
 				case 'front':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(width, height) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(width, height) as any;
 					this._geometryWall.rotateY(Math.PI);
 					this._geometryWall.translate(0, 0, depth / 2);
 					break;
 				case 'back':
 				case 'z':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(width, height) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(width, height) as any;
 					this._geometryWall.translate(0, 0, -depth / 2);
 					break;
 				case 'right':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(depth, height) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(depth, height) as any;
 					this._geometryWall.rotateY(-Math.PI / 2);
 					this._geometryWall.translate(width / 2, 0, 0);
 					break;
 				case 'left':
 				case 'y':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(depth, height) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(depth, height) as any;
 					this._geometryWall.rotateY(Math.PI / 2);
 					this._geometryWall.translate(-width / 2, 0, 0);
 					break;
 				case 'top':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(width, depth) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(width, depth) as any;
 					this._geometryWall.rotateX(Math.PI / 2);
 					this._geometryWall.translate(0, height / 2, 0);
 					break;
@@ -275,23 +275,23 @@ export class ChartAxesComponent
 				case 'x':
 				default:
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new THREE.PlaneGeometry(width, depth) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(width, depth) as any;
 					this._geometryWall.rotateX(-Math.PI / 2);
 					this._geometryWall.translate(0, -height / 2, 0);
 					break;
 			}
 			const options = ThreeUtil.getTypeSafe(this.options, {});
-			this._materialWall = new THREE.MeshPhongMaterial({
+			this._materialWall = new N3JS.MeshPhongMaterial({
 				color: ThreeUtil.getColorSafe(options.backgroundColor, 0xd0d0d0),
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
 				side: ThreeUtil.getSideSafe(this.side, 'front'),
 				transparent: true,
 			} as any);
-			const wallMesh = new THREE.Mesh(this._geometryWall, this._materialWall);
+			const wallMesh = new N3JS.Mesh(this._geometryWall, this._materialWall);
 			wallMesh.name = 'wall';
 			wallMesh.receiveShadow = true;
 			this._axes.add(wallMesh);
-			this._geometryWallBorder = new THREE.BufferGeometry();
+			this._geometryWallBorder = new N3JS.BufferGeometry();
 			const attributePosition = this._geometryWall.getAttribute('position');
 			const attributeBorder = new Float32Array(borderIndex.length * 2 * 3);
 			for (let i = 0; i < borderIndex.length; i++) {
@@ -313,14 +313,14 @@ export class ChartAxesComponent
 			}
 			this._geometryWallBorder.setAttribute(
 				'position',
-				new THREE.BufferAttribute(attributeBorder, 3)
+				new N3JS.BufferAttribute(attributeBorder, 3)
 			);
-			this._materialWallBorder = new THREE.LineBasicMaterial({
+			this._materialWallBorder = new N3JS.LineBasicMaterial({
 				color: ThreeUtil.getColorSafe(options.borderColor, 0x909090),
 				linewidth: 1,
 				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
 			} as any);
-			const borderMesh = new THREE.LineSegments(
+			const borderMesh = new N3JS.LineSegments(
 				this._geometryWallBorder,
 				this._materialWallBorder
 			);
@@ -331,7 +331,7 @@ export class ChartAxesComponent
 				const xGridSteps = Array.isArray(xGridStep)
 					? xGridStep
 					: this.getGridStep(xGridStep, this.type);
-				this._geometryGridX = new THREE.BufferGeometry();
+				this._geometryGridX = new N3JS.BufferGeometry();
 				let gridLine: Float32Array = null;
 				switch (this.type.toLowerCase()) {
 					case 'radar':
@@ -434,9 +434,9 @@ export class ChartAxesComponent
 				}
 				this._geometryGridX.setAttribute(
 					'position',
-					new THREE.BufferAttribute(gridLine, 3)
+					new N3JS.BufferAttribute(gridLine, 3)
 				);
-				this._materialGridX = new THREE.LineBasicMaterial({
+				this._materialGridX = new N3JS.LineBasicMaterial({
 					color: ThreeUtil.getColorSafe(
 						this.xGridColor,
 						this.gridColor,
@@ -444,7 +444,7 @@ export class ChartAxesComponent
 					),
 					linewidth: 1,
 				} as any);
-				const gridXMesh = new THREE.LineSegments(
+				const gridXMesh = new N3JS.LineSegments(
 					this._geometryGridX,
 					this._materialGridX
 				);
@@ -456,7 +456,7 @@ export class ChartAxesComponent
 				const yGridSteps = Array.isArray(yGridStep)
 					? yGridStep
 					: this.getGridStep(yGridStep, this.type);
-				this._geometryGridY = new THREE.BufferGeometry();
+				this._geometryGridY = new N3JS.BufferGeometry();
 				let gridLine: Float32Array = null;
 				switch (this.type.toLowerCase()) {
 					case 'radar':
@@ -558,9 +558,9 @@ export class ChartAxesComponent
 				}
 				this._geometryGridY.setAttribute(
 					'position',
-					new THREE.BufferAttribute(gridLine, 3)
+					new N3JS.BufferAttribute(gridLine, 3)
 				);
-				this._materialGridY = new THREE.LineDashedMaterial({
+				this._materialGridY = new N3JS.LineDashedMaterial({
 					color: ThreeUtil.getColorSafe(
 						this.yGridColor,
 						this.gridColor,
@@ -568,7 +568,7 @@ export class ChartAxesComponent
 					),
 					linewidth: 1,
 				} as any);
-				const gridYMesh = new THREE.LineSegments(
+				const gridYMesh = new N3JS.LineSegments(
 					this._geometryGridY,
 					this._materialGridY
 				);

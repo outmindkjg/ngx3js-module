@@ -5,7 +5,7 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, I3JS, THREE } from '../interface';
+import { ThreeUtil, I3JS, N3JS } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 
 /**
@@ -157,7 +157,7 @@ export class ListenerComponent
 	public getListener(): I3JS.IAudioListener {
 		if (this.listener === null || this._needUpdate) {
 			this.needUpdate = false;
-			this.listener = new THREE.AudioListener();
+			this.listener = new N3JS.AudioListener();
 			super.setObject3d(this.listener as any);
 		}
 		return this.listener;

@@ -17,7 +17,7 @@ import { RendererComponent } from '../renderer/renderer.component';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { TextureComponent } from '../texture/texture.component';
 import { ViewerComponent } from '../viewer/viewer.component';
-import { RendererTimer, THREE, I3JS } from './../interface';
+import { RendererTimer, N3JS, I3JS } from './../interface';
 import { LocalStorageService } from './../local-storage.service';
 import { MixerComponent } from './../mixer/mixer.component';
 import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
@@ -522,7 +522,7 @@ export class SceneComponent
 		if (!this._sceneSynked) {
 			this._sceneSynked = true;
 			if (ThreeUtil.isNotNull(this.storageName)) {
-				this.scene = new THREE.Scene();
+				this.scene = new N3JS.Scene();
 				this.localStorageService.getScene(
 					this.storageName,
 					(scene: I3JS.IScene) => {
@@ -544,7 +544,7 @@ export class SceneComponent
 	public getSceneDumpy(): I3JS.IScene {
 		if (this.scene === null || this._needUpdate) {
 			this.needUpdate = false;
-			this.scene = new THREE.Scene();
+			this.scene = new N3JS.Scene();
 			this._sceneSynked = false;
 		}
 		return this.scene;

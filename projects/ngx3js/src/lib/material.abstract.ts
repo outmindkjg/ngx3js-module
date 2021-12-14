@@ -9,7 +9,7 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { I3JS, THREE, ThreeTexture, ThreeUtil } from './interface';
+import { I3JS, N3JS, ThreeTexture, ThreeUtil } from './interface';
 import { PlaneComponent } from './plane/plane.component';
 import { AbstractSubscribeComponent } from './subscribe.abstract';
 import { AbstractTextureComponent } from './texture.abstract';
@@ -746,10 +746,10 @@ export class AbstractMaterialComponent
 			if (objectList.length > 0) {
 				objectList.forEach((object) => {
 					if (
-						object instanceof THREE.Mesh ||
-						object instanceof THREE.Line ||
-						object instanceof THREE.Points ||
-						object instanceof THREE.Sprite
+						object instanceof N3JS.Mesh ||
+						object instanceof N3JS.Line ||
+						object instanceof N3JS.Points ||
+						object instanceof N3JS.Sprite
 					) {
 						let refIndex: number = -1;
 						if (Array.isArray(object.material)) {
@@ -765,7 +765,7 @@ export class AbstractMaterialComponent
 							refIndex: refIndex,
 							mesh: object,
 						});
-					} else if (object instanceof THREE.Scene) {
+					} else if (object instanceof N3JS.Scene) {
 						meshes.push({
 							refIndex: -1,
 							mesh: object,
@@ -863,7 +863,7 @@ export class AbstractMaterialComponent
 							case 'material':
 							default:
 								const materialAny: any = material;
-								if (mesh instanceof THREE.Scene) {
+								if (mesh instanceof N3JS.Scene) {
 									switch (materialType.toLowerCase()) {
 										case 'background-angular':
 										case 'backgroundangular':
@@ -917,10 +917,10 @@ export class AbstractMaterialComponent
 											break;
 									}
 								} else if (
-									mesh instanceof THREE.Mesh ||
-									mesh instanceof THREE.Line ||
-									mesh instanceof THREE.Points ||
-									mesh instanceof THREE.Sprite
+									mesh instanceof N3JS.Mesh ||
+									mesh instanceof N3JS.Line ||
+									mesh instanceof N3JS.Points ||
+									mesh instanceof N3JS.Sprite
 								) {
 									if (Array.isArray(mesh.material)) {
 										const refIndex = info.refIndex;
@@ -1033,7 +1033,7 @@ export class AbstractMaterialComponent
 				if (ThreeUtil.isNotNull(control.getControl)) {
 					control = control.getControl();
 				}
-				if (control instanceof THREE.CSM) {
+				if (control instanceof N3JS.CSM) {
 					control.setupMaterial(material);
 				}
 			}

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TagAttributes, ThreeUtil, THREE, I3JS } from '../interface';
+import { TagAttributes, ThreeUtil, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -132,7 +132,7 @@ export class LookatComponent
 		if (ThreeUtil.isNotNull(object3d)) {
 			const key: string = object3d.getId();
 			const object: any = object3d.getObject();
-			if (object instanceof THREE.Object3D) {
+			if (object instanceof N3JS.Object3D) {
 				if (ThreeUtil.isNotNull(this.refName) && ThreeUtil.isNotNull(object)) {
 					this._object3d[key] = object.getObjectByName(this.refName);
 				} else {
@@ -191,7 +191,7 @@ export class LookatComponent
 						ThreeUtil.isNotNull(this.y) &&
 						ThreeUtil.isNotNull(this.z)
 					) {
-						if (object3d instanceof THREE.Object3D) {
+						if (object3d instanceof N3JS.Object3D) {
 							object3d.lookAt(lookat);
 						} else if (object3d !== null && object3d !== undefined) {
 							const objectTraget: any = object3d;

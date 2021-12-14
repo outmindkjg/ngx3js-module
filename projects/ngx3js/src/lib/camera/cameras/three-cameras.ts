@@ -1,5 +1,5 @@
 import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
-import { I3JS, THREE } from '../../interface';
+import { I3JS, N3JS } from '../../interface';
 
 /**
  * Array camera
@@ -8,7 +8,7 @@ import { I3JS, THREE } from '../../interface';
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/ArrayCamera) page for a live demo.
  *
  */
-export class NgxArrayCamera extends THREE.ArrayCamera {
+export class NgxArrayCamera extends N3JS.ArrayCamera {
 	/**
 	 * Creates an instance of ngx array camera.
 	 * @param [cameras]
@@ -25,7 +25,7 @@ export class NgxArrayCamera extends THREE.ArrayCamera {
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/StereoCamera) page for a live demo.
  *
  */
-export class NgxStereoCamera extends THREE.StereoCamera {
+export class NgxStereoCamera extends N3JS.StereoCamera {
 	/**
 	 * Creates an instance of ngx stereo camera.
 	 */
@@ -41,7 +41,7 @@ export class NgxStereoCamera extends THREE.StereoCamera {
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/CubeCamera) page for a live demo.
  *
  */
-export class NgxCubeCamera extends THREE.CubeCamera {
+export class NgxCubeCamera extends N3JS.CubeCamera {
 	/**
 	 * Creates an instance of ngx cube camera.
 	 *
@@ -86,7 +86,7 @@ export class NgxCinematicCamera extends CinematicCamera {
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/OrthographicCamera) page for a live demo.
  *
  */
-export class NgxOrthographicCamera extends THREE.OrthographicCamera {
+export class NgxOrthographicCamera extends N3JS.OrthographicCamera {
 	/**
 	 * Creates an instance of ngx orthographic camera.
 	 *
@@ -116,7 +116,7 @@ export class NgxOrthographicCamera extends THREE.OrthographicCamera {
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/PerspectiveCamera) page for a live demo.
  *
  */
-export class NgxPerspectiveCamera extends THREE.PerspectiveCamera {
+export class NgxPerspectiveCamera extends N3JS.PerspectiveCamera {
 	/**
 	 * Creates an instance of ngx perspective camera.
 	 *

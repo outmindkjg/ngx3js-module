@@ -5,7 +5,6 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { LightProbeGenerator } from 'three/examples/jsm/lights/LightProbeGenerator';
 import {
 	AbstractObject3dComponent,
 	Object3dOptions,
@@ -16,7 +15,7 @@ import {
 	TagAttributes,
 	ThreeColor,
 	ThreeUtil,
-	THREE,
+	N3JS,
 	I3JS,
 } from './../interface';
 
@@ -546,7 +545,7 @@ export class LightComponent
 		if (ThreeUtil.isNotNull(sh) && sh != '') {
 			switch (sh.toLowerCase()) {
 				case 'harmonics3':
-					return new THREE.SphericalHarmonics3();
+					return new N3JS.SphericalHarmonics3();
 			}
 		}
 		return undefined;
@@ -905,7 +904,7 @@ export class LightComponent
 						break;
 					case 'shadowcamera':
 						if (this.light.shadow.camera) {
-							if (this.light.shadow.camera instanceof THREE.PerspectiveCamera) {
+							if (this.light.shadow.camera instanceof N3JS.PerspectiveCamera) {
 								if (ThreeUtil.isNotNull(this.shadowCameraFov)) {
 									this.light.shadow.camera.fov = ThreeUtil.getTypeSafe(
 										this.shadowCameraFov,
@@ -931,7 +930,7 @@ export class LightComponent
 									);
 								}
 							} else if (
-								this.light.shadow.camera instanceof THREE.OrthographicCamera
+								this.light.shadow.camera instanceof N3JS.OrthographicCamera
 							) {
 								if (ThreeUtil.isNotNull(this.shadowCameraLeft)) {
 									this.light.shadow.camera.left = this.getShadowCameraLeft(-5);
@@ -1002,7 +1001,7 @@ export class LightComponent
 			switch (this.type.toLowerCase()) {
 				case 'directionallight':
 				case 'directional':
-					const directionalLight = new THREE.DirectionalLight(
+					const directionalLight = new N3JS.DirectionalLight(
 						ThreeUtil.getColorSafe(this.color, 0xffffff),
 						ThreeUtil.getTypeSafe(this.intensity, 1)
 					);
@@ -1010,7 +1009,7 @@ export class LightComponent
 					break;
 				case 'hemispherelight':
 				case 'hemisphere':
-					const hemisphereLight = new THREE.HemisphereLight(
+					const hemisphereLight = new N3JS.HemisphereLight(
 						ThreeUtil.getColorSafe(this.skyColor, this.color, 0xffffff),
 						ThreeUtil.getColorSafe(this.groundColor, this.color, 0xffffff),
 						ThreeUtil.getTypeSafe(this.intensity, 1)
@@ -1019,7 +1018,7 @@ export class LightComponent
 					break;
 				case 'lightprobe':
 				case 'probe':
-					basemesh = new THREE.LightProbe(
+					basemesh = new N3JS.LightProbe(
 						this.getSh(),
 						ThreeUtil.getTypeSafe(this.intensity, 1)
 					);
@@ -1028,10 +1027,10 @@ export class LightComponent
 						const texture = this.texture.getTexture();
 						if (
 							ThreeUtil.isTextureLoaded(texture) &&
-							texture instanceof THREE.CubeTexture
+							texture instanceof N3JS.CubeTexture
 						) {
 							basemesh.copy(
-								LightProbeGenerator.fromCubeTexture(texture as any) as any
+								N3JS.LightProbeGenerator.fromCubeTexture(texture as any) as any
 							);
 						}
 						this.subscribeRefer(
@@ -1041,10 +1040,10 @@ export class LightComponent
 								() => {
 									if (
 										ThreeUtil.isTextureLoaded(texture) &&
-										texture instanceof THREE.CubeTexture
+										texture instanceof N3JS.CubeTexture
 									) {
 										basemesh.copy(
-											LightProbeGenerator.fromCubeTexture(texture as any) as any
+											N3JS.LightProbeGenerator.fromCubeTexture(texture as any) as any
 										);
 									}
 								},
@@ -1064,12 +1063,12 @@ export class LightComponent
 							renderTarget = this.renderTarget;
 						}
 						if (
-							renderer instanceof THREE.WebGLRenderer &&
-							renderTarget instanceof THREE.WebGLCubeRenderTarget
+							renderer instanceof N3JS.WebGLRenderer &&
+							renderTarget instanceof N3JS.WebGLCubeRenderTarget
 						) {
 							try {
 								basemesh.copy(
-									LightProbeGenerator.fromCubeRenderTarget(
+									N3JS.LightProbeGenerator.fromCubeRenderTarget(
 										renderer as any,
 										renderTarget as any
 									) as any
@@ -1081,7 +1080,7 @@ export class LightComponent
 					break;
 				case 'pointlight':
 				case 'point':
-					const pointLight = new THREE.PointLight(
+					const pointLight = new N3JS.PointLight(
 						ThreeUtil.getColorSafe(this.color, 0xffffff),
 						ThreeUtil.getTypeSafe(this.intensity, 1),
 						ThreeUtil.getTypeSafe(this.distance),
@@ -1093,7 +1092,7 @@ export class LightComponent
 				case 'area':
 				case 'rectarealight':
 				case 'rectarea':
-					basemesh = new THREE.RectAreaLight(
+					basemesh = new N3JS.RectAreaLight(
 						ThreeUtil.getColorSafe(this.color, 0xffffff),
 						ThreeUtil.getTypeSafe(this.intensity, 1),
 						ThreeUtil.getTypeSafe(this.width, 10),
@@ -1102,7 +1101,7 @@ export class LightComponent
 					break;
 				case 'spotlight':
 				case 'spot':
-					const spotLight = new THREE.SpotLight(
+					const spotLight = new N3JS.SpotLight(
 						ThreeUtil.getColorSafe(this.color, 0xffffff),
 						ThreeUtil.getTypeSafe(this.intensity, 1),
 						ThreeUtil.getTypeSafe(this.distance),
@@ -1118,7 +1117,7 @@ export class LightComponent
 				case 'ambientlight':
 				case 'ambient':
 				default:
-					basemesh = new THREE.AmbientLight(
+					basemesh = new N3JS.AmbientLight(
 						ThreeUtil.getColorSafe(this.color, 0x0c0c0c),
 						ThreeUtil.getTypeSafe(this.intensity, 1)
 					);
@@ -1140,8 +1139,8 @@ export class LightComponent
 			}
 			this.light = basemesh;
 			if (
-				this.light instanceof THREE.SpotLight ||
-				this.light instanceof THREE.DirectionalLight
+				this.light instanceof N3JS.SpotLight ||
+				this.light instanceof N3JS.DirectionalLight
 			) {
 				const target = this.getTarget();
 				if (ThreeUtil.isNotNull(target)) {
@@ -1180,7 +1179,7 @@ export class LightComponent
 					this.light.shadow.mapSize.height = this.getShadowMapSizeHeight(1024);
 				}
 				if (this.light.shadow.camera) {
-					if (this.light.shadow.camera instanceof THREE.PerspectiveCamera) {
+					if (this.light.shadow.camera instanceof N3JS.PerspectiveCamera) {
 						if (ThreeUtil.isNotNull(this.shadowCameraFov)) {
 							this.light.shadow.camera.fov = ThreeUtil.getTypeSafe(
 								this.shadowCameraFov,
@@ -1206,7 +1205,7 @@ export class LightComponent
 							);
 						}
 					} else if (
-						this.light.shadow.camera instanceof THREE.OrthographicCamera
+						this.light.shadow.camera instanceof N3JS.OrthographicCamera
 					) {
 						if (ThreeUtil.isNotNull(this.shadowCameraLeft)) {
 							this.light.shadow.camera.left = this.getShadowCameraLeft(-5);

@@ -1,4 +1,4 @@
-import { ThreeUtil, CurvesParameters, I3JS, THREE } from '../../interface';
+import { ThreeUtil, CurvesParameters, I3JS, N3JS } from '../../interface';
 
 /**
  * Curves polygon
@@ -6,7 +6,7 @@ import { ThreeUtil, CurvesParameters, I3JS, THREE } from '../../interface';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesPolygon) page for details.
  *
  */
-export class CurvesPolygon extends THREE.Curve {
+export class CurvesPolygon extends N3JS.Curve {
 	/**
 	 * The Radius of curves polygon
 	 */
@@ -69,7 +69,7 @@ export class CurvesPolygon extends THREE.Curve {
 		this.rateX = ThreeUtil.isNotNull(options.rateX) ? options.rateX : 1;
 		this.rateY = ThreeUtil.isNotNull(options.rateY) ? options.rateY : 1;
 		this.rateZ = ThreeUtil.isNotNull(options.rateZ) ? options.rateZ : 1;
-		this._rateV = new THREE.Vector3(this.rateX, this.rateY, this.rateZ);
+		this._rateV = new N3JS.Vector3(this.rateX, this.rateY, this.rateZ);
 	}
 
 	/**
@@ -99,7 +99,7 @@ export class CurvesPolygon extends THREE.Curve {
 	 * @returns
 	 */
 	public getPoint(t: number, optionalTarget: I3JS.IVector3) {
-		const point = optionalTarget || new THREE.Vector3();
+		const point = optionalTarget || new N3JS.Vector3();
 		const len = this.points.length;
 		if (len >= 2) {
 			const index = len * t;
@@ -109,7 +109,7 @@ export class CurvesPolygon extends THREE.Curve {
 			const nextP = this.points[nextIndex].clone().sub(prevP);
 			const waveT = index - prevIndex;
 			const currentP = prevP.clone().addScaledVector(nextP, waveT);
-			const waveP = new THREE.Vector3(0, 0, 0);
+			const waveP = new N3JS.Vector3(0, 0, 0);
 			if (this.waveH != 0) {
 				const waveR = t * 2 * Math.PI;
 				waveP.y = Math.sin(waveR * this.waveH);
@@ -161,7 +161,7 @@ export class CurvesRegularPolygon extends CurvesPolygon {
 		this.clearPoints();
 		for (let i = 0; i < vertex; i++) {
 			const t = (2 * Math.PI * i) / vertex;
-			this.addPoint(new THREE.Vector3(Math.sin(t), 0, Math.cos(t)));
+			this.addPoint(new N3JS.Vector3(Math.sin(t), 0, Math.cos(t)));
 		}
 	}
 }

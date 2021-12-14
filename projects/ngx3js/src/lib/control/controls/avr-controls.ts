@@ -1,5 +1,5 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { I3JS, THREE } from '../../interface';
+import { I3JS, N3JS } from '../../interface';
 import * as XR from '../../threejs-library/three-xr';
 
 /**
@@ -23,7 +23,7 @@ export class NgxAVRControls {
 	/**
 	 * The Target of avrcontrols
 	 */
-	public target: I3JS.IVector3 = new THREE.Vector3() as any;
+	public target: I3JS.IVector3 = new N3JS.Vector3() as any;
 
 	/**
 	 * Creates an instance of plane controls.

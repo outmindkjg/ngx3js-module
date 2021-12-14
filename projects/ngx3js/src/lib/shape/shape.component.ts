@@ -6,7 +6,7 @@ import {
 	QueryList,
 } from '@angular/core';
 import { AbstractGeometryComponent } from '../geometry.abstract';
-import { ThreeUtil, ThreeVector, I3JS, THREE } from '../interface';
+import { ThreeUtil, ThreeVector, I3JS, N3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -166,7 +166,7 @@ export class ShapeComponent
 	private getPoints(def: ThreeVector[]): I3JS.IVector2[] {
 		const points: I3JS.IVector2[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
-			points.push(new THREE.Vector2(p.x, p.y));
+			points.push(new N3JS.Vector2(p.x, p.y));
 		});
 		return points;
 	}
@@ -176,7 +176,7 @@ export class ShapeComponent
 	 * @returns holes
 	 */
 	private getHoles(): I3JS.IPath {
-		const holes = new THREE.Path();
+		const holes = new N3JS.Path();
 		if (this.holes !== null && this.holes.length > 0) {
 			this.holes.forEach((hole) => {
 				hole.getShape(holes as any);
@@ -287,7 +287,7 @@ export class ShapeComponent
 				break;
 			case 'holes':
 			case 'hole':
-				if (shape instanceof THREE.Shape) {
+				if (shape instanceof N3JS.Shape) {
 					shape.holes.push(this.getHoles());
 				}
 				break;

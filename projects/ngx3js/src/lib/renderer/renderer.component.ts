@@ -30,7 +30,7 @@ import {
 	ThreeGui,
 	ThreeStats,
 	ThreeUtil,
-	THREE,
+	N3JS,
 	I3JS,
 } from '../interface';
 import { PlaneComponent } from '../plane/plane.component';
@@ -741,7 +741,7 @@ export class RendererComponent
 	dispose() {
 		if (
 			this.renderer !== null &&
-			this.renderer instanceof THREE.WebGLRenderer
+			this.renderer instanceof N3JS.WebGLRenderer
 		) {
 			if (this.renderer.domElement && this.renderer.domElement.parentNode) {
 				this.renderer.domElement.parentNode.removeChild(
@@ -803,20 +803,20 @@ export class RendererComponent
 	private events: RendererEvent = {
 		type: 'none',
 		nativeElement: null,
-		client: new THREE.Vector2(),
+		client: new N3JS.Vector2(),
 		clientX: 0,
 		clientY: 0,
-		offset: new THREE.Vector2(),
+		offset: new N3JS.Vector2(),
 		offsetX: 0,
 		offsetY: 0,
-		rate: new THREE.Vector2(),
+		rate: new N3JS.Vector2(),
 		rateX: 0,
 		rateY: 0,
-		size: new THREE.Vector2(),
+		size: new N3JS.Vector2(),
 		width: 0,
 		height: 0,
-		mouse: new THREE.Vector2(),
-		direction: new THREE.Vector2(),
+		mouse: new N3JS.Vector2(),
+		direction: new N3JS.Vector2(),
 		keyInfo: {
 			code: null,
 			ctrlKey: false,
@@ -825,7 +825,7 @@ export class RendererComponent
 			key: '',
 			timeStamp: 0,
 			timeRepeat: 0,
-			xy: new THREE.Vector2(),
+			xy: new N3JS.Vector2(),
 		},
 		event: {},
 	};
@@ -993,20 +993,20 @@ export class RendererComponent
 		switch (toneMapping.toLowerCase()) {
 			case 'lineartonemapping':
 			case 'linear':
-				return THREE.LinearToneMapping;
+				return N3JS.LinearToneMapping;
 			case 'reinhardtonemapping':
 			case 'reinhard':
-				return THREE.ReinhardToneMapping;
+				return N3JS.ReinhardToneMapping;
 			case 'cineontonemapping':
 			case 'cineon':
-				return THREE.CineonToneMapping;
+				return N3JS.CineonToneMapping;
 			case 'acesfilmictonemapping':
 			case 'acesfilmic':
-				return THREE.ACESFilmicToneMapping;
+				return N3JS.ACESFilmicToneMapping;
 			case 'notonemapping':
 			case 'no':
 			default:
-				return THREE.NoToneMapping;
+				return N3JS.NoToneMapping;
 		}
 	}
 
@@ -1232,7 +1232,7 @@ export class RendererComponent
 	 * @returns size
 	 */
 	public getSize(): I3JS.IVector2 {
-		return new THREE.Vector2(this.rendererWidth, this.rendererHeight);
+		return new N3JS.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
 	/**
@@ -1522,7 +1522,7 @@ export class RendererComponent
 						this.resizeRender();
 						break;
 					case 'webglrenderer':
-						if (this.renderer instanceof THREE.WebGLRenderer) {
+						if (this.renderer instanceof N3JS.WebGLRenderer) {
 							if (ThreeUtil.isNotNull(this.clearColor)) {
 								this.renderer.setClearColor(this.getClearColor());
 							}
@@ -1623,20 +1623,20 @@ export class RendererComponent
 						this.unSubscribeReferList('effectList');
 						if (
 							ThreeUtil.isNotNull(this.effectList) &&
-							this.renderer instanceof THREE.WebGLRenderer
+							this.renderer instanceof N3JS.WebGLRenderer
 						) {
 							const renderer = this.renderer;
 							if (
 								this.effectList.length > 0 &&
 								this.cameraList.length > 0 &&
 								this.sceneList.length > 0 &&
-								this.renderer instanceof THREE.WebGLRenderer
+								this.renderer instanceof N3JS.WebGLRenderer
 							) {
 								let camera: I3JS.ICamera = null;
 								this.cameraList.forEach((cameraCom) => {
 									if (camera === null) {
 										const tmpCamera = cameraCom.getCamera();
-										if (tmpCamera instanceof THREE.Camera) {
+										if (tmpCamera instanceof N3JS.Camera) {
 											camera = tmpCamera;
 										}
 									}
@@ -1941,18 +1941,18 @@ export class RendererComponent
 				case 'css3drenderer,css2drenderer':
 				case 'css2drenderer,css3drenderer':
 					this.cssRenderer = [];
-					this.cssRenderer.push(new THREE.CSS2DRenderer());
-					this.cssRenderer.push(new THREE.CSS3DRenderer());
+					this.cssRenderer.push(new N3JS.CSS2DRenderer());
+					this.cssRenderer.push(new N3JS.CSS3DRenderer());
 					break;
 				case '3d':
 				case 'css3d':
 				case 'css3drenderer':
-					this.cssRenderer = new THREE.CSS3DRenderer();
+					this.cssRenderer = new N3JS.CSS3DRenderer();
 					break;
 				case '2d':
 				case 'css2d':
 				case 'css2drenderer':
-					this.cssRenderer = new THREE.CSS2DRenderer();
+					this.cssRenderer = new N3JS.CSS2DRenderer();
 					break;
 				default:
 					this.cssRenderer = null;
@@ -1961,7 +1961,7 @@ export class RendererComponent
 			switch (this.type.toLowerCase()) {
 				case 'svg':
 				case 'svgrenderer':
-					const svgRenderer = new THREE.SVGRenderer();
+					const svgRenderer = new N3JS.SVGRenderer();
 					if (ThreeUtil.isNotNull(this.quality)) {
 						svgRenderer.setQuality(
 							ThreeUtil.getTypeSafe(this.quality, 'high').toLowerCase()
@@ -1976,7 +1976,7 @@ export class RendererComponent
 				case 'webgl':
 				case 'webglrenderer':
 				default:
-					const webGLRenderer = new THREE.WebGLRenderer({
+					const webGLRenderer = new N3JS.WebGLRenderer({
 						alpha: this.alpha,
 						antialias: this.antialias,
 						logarithmicDepthBuffer: this.logarithmicDepthBuffer,
@@ -2101,7 +2101,7 @@ export class RendererComponent
 			if (
 				this.composerEnable &&
 				this.effectList.length > 0 &&
-				this.renderer instanceof THREE.WebGLRenderer
+				this.renderer instanceof N3JS.WebGLRenderer
 			) {
 				this.effectList.forEach((composer) => {
 					composer.render(this.renderer as I3JS.IWebGLRenderer, renderTimer);

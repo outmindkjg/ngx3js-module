@@ -110,6 +110,7 @@ export interface ICSMHelper {
 	update(): void;
 }
 
+
 export interface IGyroscope extends IObject3D {
 	new (): this;
 }
@@ -152,6 +153,252 @@ export interface IVertexTangentsHelper extends ILineSegments {
 
 	update(): void;
 }
+
+export interface ILightProbeGenerator {
+    fromCubeTexture(cubeTexture: ICubeTexture): ILightProbe;
+    fromCubeRenderTarget(renderer: IWebGLRenderer, cubeRenderTarget: IWebGLCubeRenderTarget): ILightProbe;
+}
+
+export interface ILensflareElement {
+    new(texture: ITexture, size?: number, distance?: number, color?: IColor) : this;
+    texture: ITexture;
+    size: number;
+    distance: number;
+    color: IColor;
+}
+
+/**
+ * Imorph anim mesh
+ */
+export interface IMorphAnimMesh extends IMesh {
+	
+	new(geometry: IBufferGeometry, material: IMaterial) : this;
+    mixer: IAnimationMixer;
+    activeAction: IAnimationAction | null;
+
+    setDirectionForward(): void;
+    setDirectionBackward(): void;
+    playAnimation(label: string, fps: number): void;
+    updateAnimation(delta: number): void;
+    copy(source: IMorphAnimMesh): this;
+}
+
+
+export interface ICinematicCamera extends IPerspectiveCamera {
+    new(fov: number, aspect: number, near: number, far: number) : this;
+
+    postprocessing: {
+        enabled: boolean;
+        scene: IScene;
+        camera: IOrthographicCamera;
+        rtTextureDepth: IWebGLRenderTarget;
+        rtTextureColor: IWebGLRenderTarget;
+        bokeh_uniforms: any;
+    };
+    shaderSettings: {
+        rings: number;
+        samples: number;
+    };
+    materialDepth: IShaderMaterial;
+    coc: number;
+    aperture: number;
+    fNumber: number;
+    hyperFocal: number;
+    filmGauge: number;
+
+    linearize(depth: number): number;
+    smoothstep(near: number, far: number, depth: number): number;
+    saturate(x: number): number;
+    focusAt(focusDistance: number): void;
+    initPostProcessing(): void;
+    renderCinematic(scene: IScene, renderer: IWebGLRenderer): void;
+    setLens(focalLength: number, frameHeight?: number, fNumber?: number, coc?: number): void;
+}
+
+export interface INURBSCurve extends ICurve<IVector3> {
+    new(
+        degree: number,
+        knots: number[],
+        controlPoints: IVector2[] | IVector3[] | IVector4[],
+        startKnot: number,
+        endKnot: number,
+    ) : this;
+}
+
+export interface INURBSSurface {
+    new(
+        degree1: number,
+        degree2: number,
+        knots1: number[],
+        knots2: number[],
+        controlPoints: IVector2[][] | IVector3[][] | IVector4[][],
+    ) : this;
+
+    getPoint(t1: number, t2: number, target: IVector3): void;
+}
+
+export interface ICapsule {
+    new(start?: IVector3, end?: IVector3, radius?: number) : this;
+    start: IVector3;
+    end: IVector3;
+    radius: number;
+
+    set(start: IVector3, end: IVector3, radius: number): this;
+    clone(): ICapsule;
+    copy(capsule: ICapsule): this;
+    getCenter(target: number): IVector3;
+    translate(v: IVector3): this;
+    checkAABBAxis(
+        p1x: number,
+        p1y: number,
+        p2x: number,
+        p2y: number,
+        minx: number,
+        maxx: number,
+        miny: number,
+        maxy: number,
+        radius: number,
+    ): boolean;
+    intersectsBox(box: IBox3): boolean;
+    lineLineMinimumPoints(line1: ILine3, line2: ILine3): IVector3[];
+}
+
+export interface ILut {
+    new(colormap?: string, numberofcolors?: number) : this;
+    lut: IColor[];
+    map: object[];
+    n: number;
+    minV: number;
+    maxV: number;
+
+    set(value: ILut): this;
+    setMin(min: number): this;
+    setMax(max: number): this;
+    setColorMap(colormap?: string, numberofcolors?: number): this;
+    copy(lut: ILut): this;
+    getColor(alpha: number): IColor;
+    addColorMap(colormapName: string, arrayOfColors: number[][]): void;
+    createCanvas(): HTMLCanvasElement;
+    updateCanvas(canvas: HTMLCanvasElement): HTMLCanvasElement;
+}
+
+export interface IColorMapKeywords {
+    rainbow: number[][];
+    cooltowarm: number[][];
+    blackbody: number[][];
+    grayscale: number[][];
+}
+
+export interface IMeshSurfaceSampler {
+    distribution: Float32Array | null;
+    geometry: IBufferGeometry;
+    positionAttribute: Float32Array;
+    weightAttribute: string | null;
+
+    new(mesh: IMesh) : this;
+    binarySearch(x: number): number;
+    build(): this;
+    sample(targetPosition: IVector3, targetNormal?: IVector3, targetColor?: IColor): this;
+    sampleFace(faceIndex: number, targetPosition: IVector3, targetNormal?: IVector3, targetColor?: IColor): this;
+    setWeightAttribute(name: string | null): this;
+}
+
+export interface IOBB {
+    center: IVector3;
+    halfSize: IVector3;
+    rotation: IMatrix3;
+
+    new(center?: IVector3, halfSize?: IVector3, rotation?: IMatrix3) : this;
+    set(center: IVector3, halfSize: IVector3, rotation: IMatrix3): this;
+    copy(obb: IOBB): this;
+    clone(): this;
+    getSize(result: IVector3): IVector3;
+    clampPoint(point: IVector3, result: IVector3): IVector3;
+    containsPoint(point: IVector3): boolean;
+    intersectsBox3(box3: IBox3): boolean;
+    intersectsSphere(sphere: ISphere): boolean;
+    intersectsOBB(obb: IOBB, epsilon: number): boolean;
+    intersectsPlane(plane: IPlane): boolean;
+    intersectRay(ray: IRay, result: IVector3): IVector3 | null;
+    intersectsRay(ray: IRay): boolean;
+    fromBox3(box3: IBox3): this;
+    equals(obb: IOBB): boolean;
+    applyMatrix4(matrix: IMatrix4): this;
+}
+
+export interface IOctree {
+    new(box?: IBox3) : this;
+    triangles: ITriangle[];
+    box: IBox3;
+    subTrees: IOctree[];
+
+    addTriangle(triangle: ITriangle): this;
+    calcBox(): this;
+    split(level: number): this;
+    build(): this;
+    getRayTriangles(ray: IRay, triangles: ITriangle[]): ITriangle[];
+    triangleCapsuleIntersect(capsule: ICapsule, triangle: ITriangle): any;
+    triangleSphereIntersect(sphere: ISphere, triangle: ITriangle): any;
+    getSphereTriangles(sphere: ISphere, triangles: ITriangle[]): ITriangle[];
+    getCapsuleTriangles(capsule: ICapsule, triangles: ITriangle[]): ITriangle[];
+    sphereIntersect(sphere: ISphere): any;
+    capsuleIntersect(capsule: ICapsule): any;
+    rayIntersect(ray: IRay): any;
+    fromGraphNode(group: IObject3D): this;
+}
+
+export interface IGPUComputationVariable {
+    name: string;
+    initialValueTexture: ITexture;
+    material: IShaderMaterial;
+    dependencies: IGPUComputationVariable[];
+    renderTargets: IWebGLRenderTarget[];
+    wrapS: number;
+    wrapT: number;
+    minFilter: number;
+    magFilter: number;
+}
+
+export interface IGPUComputationRenderer {
+    new(sizeX: number, sizeY: number, renderer: IWebGLRenderer) : this;
+
+    setDataType(type: O3JS.TextureDataType): void;
+
+    addIGPUComputationVariable(variableName: string, computeFragmentShader: string, initialValueTexture: ITexture): IGPUComputationVariable;
+    setIGPUComputationVariableDependencies(variable: IGPUComputationVariable, dependencies: IGPUComputationVariable[] | null): void;
+
+    init(): string | null;
+    compute(): void;
+
+    getCurrentRenderTarget(variable: IGPUComputationVariable): IWebGLRenderTarget;
+    getAlternateRenderTarget(variable: IGPUComputationVariable): IWebGLRenderTarget;
+    addResolutionDefine(materialShader: IShaderMaterial): void;
+    createShaderMaterial(computeFragmentShader: string, uniforms?: { [uniform: string]: IUniform }): IShaderMaterial;
+    createRenderTarget(
+        sizeXTexture: number,
+        sizeYTexture: number,
+        wrapS: O3JS.Wrapping,
+        wrapT: number,
+        minFilter: O3JS.TextureFilter,
+        magFilter: O3JS.TextureFilter,
+    ): IWebGLRenderTarget;
+    createTexture(): O3JS.DataTexture;
+    renderTexture(input: ITexture, output: ITexture): void;
+    doRenderTarget(material: IMaterial, output: IWebGLRenderTarget): void;
+}
+
+export interface IUVsDebug {
+	(geometry: IBufferGeometry, size: number) : HTMLCanvasElement
+};
+
+export interface ILensflare extends IMesh {
+    new() : this;
+    readonly isLensflare: true;
+
+    addElement(element: ILensflareElement): void;
+    dispose(): void;
+}
+
 
 export interface ILightProbeHelper extends IMesh {
 	new (lightProbe: ILightProbe, size: number): this;
@@ -5214,6 +5461,36 @@ export interface IMeshStandardMaterial extends IMaterial {
 	setValues(parameters: IMeshStandardMaterialParameters): void;
 }
 
+export interface ILineMaterialParameters extends IMaterialParameters {
+    alphaToCoverage?: boolean | undefined;
+    color?: number | undefined;
+    dashed?: boolean | undefined;
+    dashScale?: number | undefined;
+    dashSize?: number | undefined;
+    dashOffset?: number | undefined;
+    gapSize?: number | undefined;
+    linewidth?: number | undefined;
+    resolution?: IVector2 | undefined;
+    wireframe?: boolean | undefined;
+    worldUnits?: boolean | undefined;
+}
+
+export interface ILineMaterial extends IShaderMaterial {
+    new(parameters?: ILineMaterialParameters) : this;
+    color: IColor;
+    dashed: boolean;
+    dashScale: number;
+    dashSize: number;
+    dashOffset: number;
+    gapSize: number;
+    opacity: number;
+    readonly isLineMaterial: true;
+    linewidth: number;
+    resolution: IVector2;
+    alphaToCoverage: boolean;
+    worldUnits: boolean;
+}
+
 export interface IMeshPhysicalMaterialParameters extends IMeshStandardMaterialParameters {
 	clearcoat?: number | undefined;
 	clearcoatMap?: ITexture | null | undefined;
@@ -5684,6 +5961,23 @@ export interface IShaderMaterial extends IMaterial {
 }
 
 export interface IRawShaderMaterial extends IShaderMaterial {}
+
+export interface INgxRawShaderMaterial extends IRawShaderMaterial {
+	new(
+		parameters?: IShaderMaterialParameters,
+		shaderId?: string,
+		glslVersion?: TGLSLVersion
+	) : this;
+}
+
+export interface INgxShaderMaterial extends IShaderMaterial {
+	new(
+		parameters?: IShaderMaterialParameters,
+		shaderId?: string,
+		glslVersion?: TGLSLVersion
+	) : this;
+}
+
 
 export interface IShadowMaterialParameters extends IMaterialParameters {
 	color?: TColorRepresentation | undefined;
@@ -7340,7 +7634,7 @@ export interface IRoomEnvironment extends IScene {
     new() : this;
 }
 
-export interface IFlow {
+export interface INodeFlow {
     result: string;
     code: string;
     extra: object;
@@ -7358,8 +7652,8 @@ export interface INode {
     hashProperties: string[] | undefined;
 
     analyze(builder: INodeBuilder, settings?: object): void;
-    analyzeAndFlow(builder: INodeBuilder, output: string, settings?: object): IFlow;
-    flow(builder: INodeBuilder, output: string, settings?: object): IFlow;
+    analyzeAndFlow(builder: INodeBuilder, output: string, settings?: object): INodeFlow;
+    flow(builder: INodeBuilder, output: string, settings?: object): INodeFlow;
     build(builder: INodeBuilder, output: string, uuid?: string): string;
     generate(builder: INodeBuilder, output: string, uuid?: string, type?: string, ns?: string): string;
     appendDepsNode(builder: INodeBuilder, data: object, output: string): void;
@@ -7639,6 +7933,14 @@ export interface IConstNode extends ITempNode {
     parse(src: string, useDefine?: boolean): void;
     build(builder: INodeBuilder, output: string): string;
     copy(source: IConstNode): this;
+
+    PI: string;
+    PI2: string;
+    RECIPROCAL_PI: string;
+    RECIPROCAL_PI2: string;
+    LOG2: string;
+    EPSILON: string;
+	
 }
 
 export interface IVarNode extends INode {
@@ -9474,19 +9776,19 @@ export interface IParametricGeometry extends IBufferGeometry {
 	};
 }
 
-interface IParametricTubeGeometry extends IParametricGeometry {
+export interface IParametricTubeGeometry extends IParametricGeometry {
 	new (path: ICurve<IVector3>, segments?: number, radius?: number, segmentsRadius?: number, closed?: boolean): this;
 }
 
-interface IParametricTorusKnotGeometry extends IParametricTubeGeometry {
+export interface IParametricTorusKnotGeometry extends IParametricTubeGeometry {
 	new (radius?: number, tube?: number, segmentsT?: number, segmentsR?: number, p?: number, q?: number): this;
 }
 
-interface IParametricSphereGeometry extends IParametricGeometry {
+export interface IParametricSphereGeometry extends IParametricGeometry {
 	new (size: number, u: number, v: number): this;
 }
 
-interface IParametricPlaneGeometry extends IParametricGeometry {
+export interface IParametricPlaneGeometry extends IParametricGeometry {
 	new (width: number, depth: number, segmentsWidth: number, segmentsDepth: number): this;
 }
 
@@ -10524,6 +10826,152 @@ export interface IMD2CharacterComplex {
 	updateMovementModel(delta: number): void;
 }
 
+export interface IMMDAnimationHelperParameter {
+    sync?: boolean | undefined;
+    afterglow?: number | undefined;
+    resetPhysicsOnLoop?: boolean | undefined;
+}
+
+export interface IMMDAnimationHelperAddParameter {
+    animation?: IAnimationClip | IAnimationClip[] | undefined;
+    physics?: boolean | undefined;
+    warmup?: number | undefined;
+    unitStep?: number | undefined;
+    maxStepNum?: number | undefined;
+    gravity?: number | undefined;
+    delayTime?: number | undefined;
+}
+
+export interface IMMDAnimationHelperPoseParameter {
+    resetPose?: boolean | undefined;
+    ik?: boolean | undefined;
+    grant?: boolean | undefined;
+}
+
+export interface IIKS {
+    effector: number;
+    iteration: number;
+    links: {
+        enabled: boolean;
+        index: number;
+    };
+    maxAngle: number;
+    target: number;
+}
+
+export interface IMMDPhysicsParameter {
+    unitStep?: number | undefined;
+    maxStepNum?: number | undefined;
+    gravity?: IVector3 | undefined;
+}
+
+export interface IMMDPhysics {
+    new(
+        mesh: ISkinnedMesh,
+        rigidBodyParams: object[],
+        constraintParams?: object[],
+        params?: IMMDPhysicsParameter,
+    ) : this;
+    manager: any;
+    mesh: ISkinnedMesh;
+    unitStep: number;
+    maxStepNum: number;
+    gravity: IVector3;
+    world: null;
+    bodies: any[];
+    constraints: any[];
+
+    update(delta: number): this;
+    reset(): this;
+    warmup(cycles: number): this;
+    setGravity(gravity: IVector3): this;
+    createHelper(): IMMDPhysicsHelper;
+}
+
+export interface IMMDPhysicsHelper extends IObject3D {
+    new() : this;
+}
+
+export interface ICCDIKSolver {
+    new(mesh: ISkinnedMesh, iks: IIKS[]) : this;
+
+    update(): this;
+    updateOne(iks: IIKS): this;
+    createHelper(): ICCDIKHelper;
+}
+
+export interface ICCDIKHelper extends IObject3D {
+    new(mesh: ISkinnedMesh, iks: IIKS[]): this;
+}
+
+export interface IMMDAnimationHelperMixer {
+    looped: boolean;
+    mixer?: IAnimationMixer | undefined;
+    ikSolver: ICCDIKSolver;
+    grantSolver: IGrantSolver;
+    physics?: IMMDPhysics | undefined;
+    duration?: number | undefined;
+}
+
+export interface IMMDAnimationHelper {
+    new(params?: IMMDAnimationHelperParameter) : this;
+    meshes: ISkinnedMesh[];
+    camera: ICamera | null;
+    cameraTarget: IObject3D;
+    audio: IAudio;
+    audioManager: IAudioManager;
+    configuration: {
+        sync: boolean;
+        afterglow: number;
+        resetPhysicsOnLoop: boolean;
+    };
+    enabled: {
+        animation: boolean;
+        ik: boolean;
+        grant: boolean;
+        physics: boolean;
+        cameraAnimation: boolean;
+    };
+    objects: WeakMap<ISkinnedMesh | ICamera | IAudioManager, IMMDAnimationHelperMixer>;
+    onBeforePhysics: (mesh: ISkinnedMesh) => void;
+    sharedPhysics: boolean;
+    masterPhysics: null;
+
+    add(object: ISkinnedMesh | ICamera | IAudio, params?: IMMDAnimationHelperAddParameter): this;
+    remove(object: ISkinnedMesh | ICamera | IAudio): this;
+    update(delta: number): this;
+    pose(mesh: ISkinnedMesh, vpd: object, params?: IMMDAnimationHelperPoseParameter): this;
+    enable(key: string, enabled: boolean): this;
+    createGrantSolver(mesh: ISkinnedMesh): IGrantSolver;
+}
+
+export interface IAudioManagerParameter {
+    delayTime?: number | undefined;
+}
+
+export interface IAudioManager {
+    new(audio: IAudio, params?: IAudioManagerParameter) : this;
+    audio: IAudio;
+    elapsedTime: number;
+    currentTime: number;
+    delayTime: number;
+    audioDuration: number;
+    duration: number;
+
+    control(delta: number): this;
+}
+
+export interface IGrantSolver {
+    new(mesh: ISkinnedMesh, grants: object[]) : this;
+    mesh: ISkinnedMesh;
+    grants: object[];
+
+    update(): this;
+    updateOne(gran: object[]): this;
+    addGrantRotation(bone: IBone, q: IQuaternion, ratio: number): this;
+}
+
+
 export interface ICSS2DObject extends IObject3D {
 	new (element: HTMLElement): this;
 	element: HTMLElement;
@@ -10556,6 +11004,241 @@ export interface ICSS3DObject extends IObject3D {
 export interface ICSS3DSprite extends ICSS3DObject {
 	new (element: HTMLElement): this;
 }
+
+
+export interface IInteractiveGroup extends IGroup {
+    new(renderer: IWebGLRenderer, camera: ICamera) : this;
+}
+
+export interface ILineSegments2 extends IMesh {
+    geometry: ILineSegmentsGeometry;
+    material: ILineMaterial;
+
+    new(geometry?: ILineSegmentsGeometry, material?: ILineMaterial) : this;
+    readonly isLineSegments2: true;
+
+    computeLineDistances(): this;
+}
+
+export interface ILine2 extends ILineSegments2 {
+    geometry: ILineGeometry;
+    material: ILineMaterial;
+
+    new(geometry?: ILineGeometry, material?: ILineMaterial) : this;
+    readonly isLine2: true;
+}
+
+export interface IWireframe extends IMesh {
+    new(geometry?: ILineSegmentsGeometry, material?: ILineMaterial) : this;
+    readonly isWireframe: true;
+
+    computeLineDistances(): this;
+}
+
+export interface ITubePainter {
+    new() : this;
+
+    mesh: IMesh;
+
+    stroke(position1: IVector3, position2: IVector3, matrix1: IMatrix4, matrix2: IMatrix4): void;
+    updateGeometry(start: number, end: number): void;
+}
+
+export interface ISplineUniform {
+    spineTexture: IUniform;
+    pathOffset: IUniform;
+    pathSegment: IUniform;
+    spineOffset: IUniform;
+    flow: IUniform;
+}
+
+export interface IFlow {
+    new(mesh: IMesh, numberOfCurves?: number) : this;
+    curveArray: number[];
+    curveLengthArray: number[];
+    object3D: IMesh;
+    splineTexure: IDataTexture;
+    uniforms: ISplineUniform;
+    updateCurve(index: number, curve: ICurve<IVector3>): void;
+    moveAlongCurve(amount: number): void;
+}
+
+export interface IInstancedFlow extends IFlow {
+    new(count: number, curveCount: number, geometry: IBufferGeometry, material: IMaterial) : this;
+    object3D: IInstancedMesh;
+    offsets: number[];
+    whichCurve: number[];
+
+    moveIndividualAlongCurve(index: number, offset: number): void;
+    setCurve(index: number, curveNo: number): void;
+}
+
+export interface IStormParams {
+    size?: number;
+    minHeight?: number;
+    maxHeight?: number;
+    maxSlope?: number;
+
+    maxLightnings?: number;
+
+    lightningMinPeriod?: number;
+    lightningMaxPeriod?: number;
+    lightningMinDuration?: number;
+    lightningMaxDuration?: number;
+
+    lightningParameters?: IRayParameters;
+    lightningMaterial?: IMaterial;
+
+    isEternal?: boolean;
+
+    onRayPosition?: (source: IVector3, dest: IVector3) => void;
+    onLightningDown?: (lightning: ILightningStrike) => void;
+}
+
+export interface ILightningStorm {
+    new(stormParams?: IStormParams) : this;
+    update(time: number): void;
+    copy(source: ILightningStorm): ILightningStorm;
+    clone(): this;
+}
+
+export interface IMarchingCubes extends IMesh {
+    new(
+        resolution: number,
+        material: IMaterial,
+        enableUvs?: boolean,
+        enableColors?: boolean,
+        maxPolyCount?: number,
+    ) : this;
+
+    enableUvs: boolean;
+    enableColors: boolean;
+
+    resolution: number;
+
+    // parameters
+
+    isolation: number;
+
+    // size of field, 32 is pushing it in Javascript :)
+
+    size: number;
+    size2: number;
+    size3: number;
+    halfsize: number;
+
+    // deltas
+
+    delta: number;
+    yd: number;
+    zd: number;
+
+    field: Float32Array;
+    normal_cache: Float32Array;
+    palette: Float32Array;
+
+    maxCount: number;
+    count: number;
+
+    hasPositions: boolean;
+    hasNormals: boolean;
+    hasColors: boolean;
+    hasUvs: boolean;
+
+    positionArray: Float32Array;
+    normalArray: Float32Array;
+
+    uvArray: Float32Array;
+    colorArray: Float32Array;
+
+    begin(): void;
+    end(): void;
+
+    init(resolution: number): void;
+
+    addBall(ballx: number, bally: number, ballz: number, strength: number, subtract: number, colors?: IColor): void;
+
+    addPlaneX(strength: number, subtract: number): void;
+    addPlaneY(strength: number, subtract: number): void;
+    addPlaneZ(strength: number, subtract: number): void;
+
+    setCell(x: number, y: number, z: number, value: number): void;
+    getCell(x: number, y: number, z: number): number;
+
+    blur(intensity: number): void;
+
+    reset(): void;
+    render(renderCallback: any): void;
+    generateGeometry(): IBufferGeometry;
+    generateIBufferGeometry(): IBufferGeometry;
+}
+
+export interface IRefractorOptions {
+    color?: TColorRepresentation;
+    textureWidth?: number;
+    textureHeight?: number;
+    clipBias?: number;
+    shader?: object;
+    encoding?: O3JS.TextureEncoding;
+}
+
+export interface IRefractor extends IMesh {
+    new(geometry?: IBufferGeometry, options?: IRefractorOptions) : this;
+
+    getRenderTarget(): IWebGLRenderTarget;
+}
+
+export interface ISky extends IMesh {
+    new() : this;
+
+    geometry: IBoxGeometry;
+    material: IShaderMaterial;
+
+    SkyShader: object;
+}
+
+export interface IWaterOptions {
+    textureWidth?: number;
+    textureHeight?: number;
+    clipBias?: number;
+    alpha?: number;
+    time?: number;
+    waterNormals?: ITexture;
+    sunDirection?: IVector3;
+    sunColor?: TColorRepresentation;
+    waterColor?: TColorRepresentation;
+    eye?: IVector3;
+    distortionScale?: number;
+    side?: O3JS.Side;
+    fog?: boolean;
+}
+
+export interface IWater extends IMesh {
+    material: IShaderMaterial;
+    new(geometry: IBufferGeometry, options: IWaterOptions) : this;
+}
+
+export interface IWater2Options {
+    color?: TColorRepresentation;
+    textureWidth?: number;
+    textureHeight?: number;
+    clipBias?: number;
+    flowDirection?: IVector2;
+    flowSpeed?: number;
+    reflectivity?: number;
+    scale?: number;
+    shader?: object;
+    flowMap?: ITexture;
+    normalMap0?: ITexture;
+    normalMap1?: ITexture;
+    encoding?: O3JS.TextureEncoding;
+}
+
+export interface IWater2 extends IMesh {
+    material: IShaderMaterial;
+    new(geometry: IBufferGeometry, options: IWater2Options) : this;
+}
+
 
 export type TCSS3DParameters = {
 	element?: HTMLElement;

@@ -1,5 +1,5 @@
 import * as GSAP from 'gsap';
-import { ThreeUtil, CurvesParameters, I3JS, THREE } from '../../interface';
+import { ThreeUtil, CurvesParameters, I3JS, N3JS } from '../../interface';
 
 /**
  * Curves gsap
@@ -8,7 +8,7 @@ import { ThreeUtil, CurvesParameters, I3JS, THREE } from '../../interface';
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearin) page for a live curve demo.
  *
  */
-export class CurvesGsap extends THREE.Curve {
+export class CurvesGsap extends N3JS.Curve {
 	/**
 	 * Ease function of curves gsap
 	 */
@@ -61,7 +61,7 @@ export class CurvesGsap extends THREE.Curve {
 	 * @returns
 	 */
 	public getPoint(t: number, optionalTarget: I3JS.IVector3) {
-		const point = optionalTarget || new THREE.Vector3();
+		const point = optionalTarget || new N3JS.Vector3();
 		const v = Math.max(-1, Math.min(1, t * 2 - 1));
 		let y = this.easeFunction(t) * 2 - 1;
 		return point

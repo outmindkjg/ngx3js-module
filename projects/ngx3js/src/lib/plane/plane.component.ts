@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -125,7 +125,7 @@ export class PlaneComponent
 	 */
 	public getWorldPlane(matrixWorld?: I3JS.IMatrix4): I3JS.IPlane {
 		if (this.worldPlane === null) {
-			this.worldPlane = new THREE.Plane();
+			this.worldPlane = new N3JS.Plane();
 		}
 		this.worldPlane.copy(this.getPlane());
 		if (matrixWorld !== null && matrixWorld !== undefined) {
@@ -141,7 +141,7 @@ export class PlaneComponent
 	public getPlane(): I3JS.IPlane {
 		if (this.plane === null || this._needUpdate) {
 			this.needUpdate = false;
-			this.plane = new THREE.Plane(
+			this.plane = new N3JS.Plane(
 				ThreeUtil.getVector3Safe(this.x, this.y, this.z),
 				ThreeUtil.getTypeSafe(this.w, 0)
 			);

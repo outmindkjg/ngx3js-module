@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { HtmlCollection } from '../visual/visual.component';
-import { CssStyle, ThreeUtil, I3JS, THREE } from './../interface';
+import { CssStyle, ThreeUtil, I3JS, N3JS } from './../interface';
 
 /**
  * The Canvas component.
@@ -120,7 +120,7 @@ export class CanvasComponent
 	 */
 	public setSize(size: I3JS.IVector2) {
 		this.canvasSize = size;
-		this.eleSize = new THREE.Vector2(this.canvasSize.x, this.canvasSize.y);
+		this.eleSize = new N3JS.Vector2(this.canvasSize.x, this.canvasSize.y);
 		this.applyHtmlStyle();
 	}
 

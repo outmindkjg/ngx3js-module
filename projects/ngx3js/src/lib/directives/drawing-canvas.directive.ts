@@ -5,7 +5,7 @@ import {
 	OnChanges,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeColor, ThreeUtil, THREE } from '../interface';
+import { ThreeColor, ThreeUtil, N3JS } from '../interface';
 
 /**
  * Drawing Canvas Directive
@@ -115,7 +115,7 @@ export class DrawingCanvasDirective implements OnChanges {
 	/**
 	 * The drawing start position.
 	 */
-	private drawStartPos = new THREE.Vector2();
+	private drawStartPos = new N3JS.Vector2();
 
 	/**
 	 * Clear the Canvas.
@@ -149,7 +149,7 @@ export class DrawingCanvasDirective implements OnChanges {
 			this.drawingContext.restore();
 		}
 		this.drawingContext.beginPath();
-		this.drawStartPos = new THREE.Vector2();
+		this.drawStartPos = new N3JS.Vector2();
 		this.drawingCanvas.dispatchEvent(this.event);
 		this.drawingContext.globalAlpha = 1.0;
 	}

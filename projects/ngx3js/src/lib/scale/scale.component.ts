@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TagAttributes, ThreeUtil, I3JS, THREE } from '../interface';
+import { TagAttributes, ThreeUtil, I3JS, N3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -182,7 +182,7 @@ export class ScaleComponent
 				});
 			}
 			object3dList.forEach((object3d) => {
-				if (object3d instanceof THREE.Object3D) {
+				if (object3d instanceof N3JS.Object3D) {
 					if (
 						ThreeUtil.isNotNull(this.x) &&
 						ThreeUtil.isNotNull(this.y) &&
@@ -255,12 +255,12 @@ export class ScaleComponent
 		switch (this.scaleMode) {
 			case 'max':
 				const maxSize = Math.max(size.x, size.y);
-				return new THREE.Vector3(maxSize * this.x, maxSize * this.y, this.z);
+				return new N3JS.Vector3(maxSize * this.x, maxSize * this.y, this.z);
 			case 'min':
 				const minSize = Math.min(size.x, size.y);
-				return new THREE.Vector3(minSize * this.x, minSize * this.y, this.z);
+				return new N3JS.Vector3(minSize * this.x, minSize * this.y, this.z);
 			default:
-				return new THREE.Vector3(size.x * this.x, size.y * this.y, this.z);
+				return new N3JS.Vector3(size.x * this.x, size.y * this.y, this.z);
 		}
 	}
 

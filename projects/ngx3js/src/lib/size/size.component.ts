@@ -5,7 +5,7 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -215,7 +215,7 @@ export class SizeComponent
 	public getSize(): I3JS.IVector2 {
 		if (this.size === null || this._needUpdate) {
 			this.needUpdate = false;
-			this.size = new THREE.Vector2(this.getWidth(), this.getHeight());
+			this.size = new N3JS.Vector2(this.getWidth(), this.getHeight());
 			if (this.sizePixelRatio !== 1) {
 				this.size.multiplyScalar(this.sizePixelRatio);
 			}

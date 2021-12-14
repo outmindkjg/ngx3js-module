@@ -10,7 +10,7 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import { NgxGeometryUtils } from './geometry/geometryUtils';
-import { I3JS, THREE, ThreeUtil, ThreeVector } from './interface';
+import { I3JS, N3JS, ThreeUtil, ThreeVector } from './interface';
 import { PositionComponent } from './position/position.component';
 import { RotationComponent } from './rotation/rotation.component';
 import { ScaleComponent } from './scale/scale.component';
@@ -783,26 +783,26 @@ export class AbstractGeometryComponent
 		}
 		if (ThreeUtil.isNotNull(this.vertexBuffer)) {
 			let vertexBuffer: I3JS.IInterleavedBuffer = null;
-			if (this.vertexBuffer instanceof THREE.InterleavedBuffer) {
+			if (this.vertexBuffer instanceof N3JS.InterleavedBuffer) {
 				vertexBuffer = this.vertexBuffer;
 			} else if (this.vertexBuffer instanceof Float32Array) {
-				vertexBuffer = new THREE.InterleavedBuffer(
+				vertexBuffer = new N3JS.InterleavedBuffer(
 					this.vertexBuffer,
 					ThreeUtil.getTypeSafe(this.vertexBufferStride, 8)
 				);
 			} else {
-				vertexBuffer = new THREE.InterleavedBuffer(
+				vertexBuffer = new N3JS.InterleavedBuffer(
 					new Float32Array(this.vertexBuffer),
 					ThreeUtil.getTypeSafe(this.vertexBufferStride, 8)
 				);
 			}
 			attributes.push({
 				key: 'position',
-				value: new THREE.InterleavedBufferAttribute(vertexBuffer, 3, 0),
+				value: new N3JS.InterleavedBufferAttribute(vertexBuffer, 3, 0),
 			});
 			attributes.push({
 				key: 'uv',
-				value: new THREE.InterleavedBufferAttribute(vertexBuffer, 2, 4),
+				value: new N3JS.InterleavedBufferAttribute(vertexBuffer, 2, 4),
 			});
 		}
 
@@ -900,29 +900,29 @@ export class AbstractGeometryComponent
 		bufferType?: string,
 		normalized?: boolean
 	): I3JS.IBufferAttribute {
-		if (value instanceof THREE.BufferAttribute) {
+		if (value instanceof N3JS.BufferAttribute) {
 			return value;
 		}
 		const attribute = ThreeUtil.getTypeSafe(value, []);
 		let bufferAttribute: I3JS.IBufferAttribute = null;
-		if (attribute instanceof THREE.BufferAttribute) {
+		if (attribute instanceof N3JS.BufferAttribute) {
 			return attribute;
 		} else if (attribute instanceof Int8Array) {
-			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
+			bufferAttribute = new N3JS.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Int16Array) {
-			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
+			bufferAttribute = new N3JS.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Int32Array) {
-			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
+			bufferAttribute = new N3JS.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Uint8Array) {
-			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
+			bufferAttribute = new N3JS.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Uint16Array) {
-			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
+			bufferAttribute = new N3JS.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Uint32Array) {
-			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
+			bufferAttribute = new N3JS.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Float32Array) {
-			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
+			bufferAttribute = new N3JS.BufferAttribute(attribute, itemSize);
 		} else if (attribute instanceof Float64Array) {
-			bufferAttribute = new THREE.BufferAttribute(attribute, itemSize);
+			bufferAttribute = new N3JS.BufferAttribute(attribute, itemSize);
 		} else if (Array.isArray(attribute)) {
 			switch ((bufferType || 'float').toLowerCase()) {
 				case 'int':
@@ -930,21 +930,21 @@ export class AbstractGeometryComponent
 					attribute.forEach((v, i) => {
 						intArray[i] = v;
 					});
-					bufferAttribute = new THREE.Uint32BufferAttribute(intArray, itemSize);
+					bufferAttribute = new N3JS.Uint32BufferAttribute(intArray, itemSize);
 					break;
 				case 'uint':
 					const uintArray = new Uint32Array(attribute.length);
 					attribute.forEach((v, i) => {
 						uintArray[i] = v;
 					});
-					bufferAttribute = new THREE.Int32BufferAttribute(uintArray, itemSize);
+					bufferAttribute = new N3JS.Int32BufferAttribute(uintArray, itemSize);
 					break;
 				case 'instanced':
 					const instancedFloatArray = new Float32Array(attribute.length);
 					attribute.forEach((v, i) => {
 						instancedFloatArray[i] = v;
 					});
-					bufferAttribute = new THREE.InstancedBufferAttribute(
+					bufferAttribute = new N3JS.InstancedBufferAttribute(
 						instancedFloatArray,
 						itemSize
 					);
@@ -956,7 +956,7 @@ export class AbstractGeometryComponent
 						attribute.forEach((v, i) => {
 							normalizedIntArray[i] = v;
 						});
-						bufferAttribute = new THREE.Uint8BufferAttribute(
+						bufferAttribute = new N3JS.Uint8BufferAttribute(
 							normalizedIntArray,
 							itemSize
 						);
@@ -966,7 +966,7 @@ export class AbstractGeometryComponent
 						attribute.forEach((v, i) => {
 							floatArray[i] = v;
 						});
-						bufferAttribute = new THREE.Float32BufferAttribute(
+						bufferAttribute = new N3JS.Float32BufferAttribute(
 							floatArray,
 							itemSize
 						);
@@ -977,39 +977,39 @@ export class AbstractGeometryComponent
 			switch (usage.toLowerCase()) {
 				case 'staticdrawusage':
 				case 'staticdraw':
-					bufferAttribute.setUsage(THREE.StaticDrawUsage);
+					bufferAttribute.setUsage(N3JS.StaticDrawUsage);
 					break;
 				case 'dynamicdrawusage':
 				case 'dynamicdraw':
-					bufferAttribute.setUsage(THREE.DynamicDrawUsage);
+					bufferAttribute.setUsage(N3JS.DynamicDrawUsage);
 					break;
 				case 'streamdrawusage':
 				case 'streamdraw':
-					bufferAttribute.setUsage(THREE.StreamDrawUsage);
+					bufferAttribute.setUsage(N3JS.StreamDrawUsage);
 					break;
 				case 'staticreadusage':
 				case 'staticread':
-					bufferAttribute.setUsage(THREE.StaticReadUsage);
+					bufferAttribute.setUsage(N3JS.StaticReadUsage);
 					break;
 				case 'dynamicreadusage':
 				case 'dynamicread':
-					bufferAttribute.setUsage(THREE.DynamicReadUsage);
+					bufferAttribute.setUsage(N3JS.DynamicReadUsage);
 					break;
 				case 'streamreadusage':
 				case 'streamread':
-					bufferAttribute.setUsage(THREE.StreamReadUsage);
+					bufferAttribute.setUsage(N3JS.StreamReadUsage);
 					break;
 				case 'staticcopyusage':
 				case 'staticcopy':
-					bufferAttribute.setUsage(THREE.StaticCopyUsage);
+					bufferAttribute.setUsage(N3JS.StaticCopyUsage);
 					break;
 				case 'dynamiccopyusage':
 				case 'dynamiccopy':
-					bufferAttribute.setUsage(THREE.DynamicCopyUsage);
+					bufferAttribute.setUsage(N3JS.DynamicCopyUsage);
 					break;
 				case 'streamcopyusage':
 				case 'streamcopy':
-					bufferAttribute.setUsage(THREE.StreamCopyUsage);
+					bufferAttribute.setUsage(N3JS.StreamCopyUsage);
 					break;
 			}
 		}
@@ -1076,10 +1076,10 @@ export class AbstractGeometryComponent
 			if (objectList.length > 0) {
 				objectList.forEach((object) => {
 					if (
-						object instanceof THREE.Mesh ||
-						object instanceof THREE.Line ||
-						object instanceof THREE.Points ||
-						object instanceof THREE.Sprite
+						object instanceof N3JS.Mesh ||
+						object instanceof N3JS.Line ||
+						object instanceof N3JS.Points ||
+						object instanceof N3JS.Sprite
 					) {
 						meshes.push(object);
 					}
@@ -1141,31 +1141,31 @@ export class AbstractGeometryComponent
 				}
 				object3dList.forEach((info: any) => {
 					info.geometry = this.geometry;
-					if (info instanceof THREE.Mesh) {
+					if (info instanceof N3JS.Mesh) {
 						if (
 							ThreeUtil.isNotNull(this.compressPositions) &&
 							this.compressPositions
 						) {
-							THREE.GeometryCompressionUtils.compressPositions(info);
+							N3JS.GeometryCompressionUtils.compressPositions(info);
 						}
 						if (ThreeUtil.isNotNull(this.compressNormals)) {
 							switch (this.compressNormals.toLowerCase()) {
 								case 'default':
-									THREE.GeometryCompressionUtils.compressNormals(info, 'DEFAULT');
+									N3JS.GeometryCompressionUtils.compressNormals(info, 'DEFAULT');
 									break;
 								case 'oct1byte':
-									THREE.GeometryCompressionUtils.compressNormals(info, 'OCT1Byte');
+									N3JS.GeometryCompressionUtils.compressNormals(info, 'OCT1Byte');
 									break;
 								case 'oct2byte':
-									THREE.GeometryCompressionUtils.compressNormals(info, 'OCT2Byte');
+									N3JS.GeometryCompressionUtils.compressNormals(info, 'OCT2Byte');
 									break;
 								case 'angles':
-									THREE.GeometryCompressionUtils.compressNormals(info, 'ANGLES');
+									N3JS.GeometryCompressionUtils.compressNormals(info, 'ANGLES');
 									break;
 							}
 						}
 						if (this.compressUvs) {
-							THREE.GeometryCompressionUtils.compressUvs(info);
+							N3JS.GeometryCompressionUtils.compressUvs(info);
 						}
 					}
 					if (ThreeUtil.isNotNull(info['updateMorphTargets'])) {
@@ -1214,7 +1214,7 @@ export class AbstractGeometryComponent
 							switch (meshType) {
 								case 'wireframesimple':
 									const simpleParameters: any = anyGeometry['parameters'] || {};
-									lineGeometry = new THREE.WireframeGeometry(geometry);
+									lineGeometry = new N3JS.WireframeGeometry(geometry);
 									let simplePositions: Float32Array = null;
 									switch (geometry.type) {
 										case 'PlaneGeometry':
@@ -1239,7 +1239,7 @@ export class AbstractGeometryComponent
 											break;
 									}
 									if (simplePositions !== null) {
-										const positionAttribe = new THREE.Float32BufferAttribute(
+										const positionAttribe = new N3JS.Float32BufferAttribute(
 											simplePositions,
 											3
 										);
@@ -1250,7 +1250,7 @@ export class AbstractGeometryComponent
 								case 'wireframegeometry':
 								case 'wireframebuffer':
 								case 'wireframe':
-									lineGeometry = new THREE.WireframeGeometry(geometry);
+									lineGeometry = new N3JS.WireframeGeometry(geometry);
 									break;
 								case 'wireframe2buffergeometry':
 								case 'wireframe2geometry':
@@ -1272,7 +1272,7 @@ export class AbstractGeometryComponent
 									switch (geometry.type) {
 										case 'CircleGeometry':
 											{
-												lineGeometry = new THREE.LineSegmentsGeometry();
+												lineGeometry = new N3JS.LineSegmentsGeometry();
 												const segments = (parameters.segments || 1) + 2;
 												const isClosed =
 													parameters.thetaLength < Math.PI * 2 ? false : true;
@@ -1299,7 +1299,7 @@ export class AbstractGeometryComponent
 											{
 												const sideGroup = geometry.groups[2];
 												if (ThreeUtil.isNotNull(sideGroup)) {
-													lineGeometry = new THREE.LineSegmentsGeometry();
+													lineGeometry = new N3JS.LineSegmentsGeometry();
 													for (
 														let i = sideGroup.start;
 														i < sideGroup.start + sideGroup.count;
@@ -1320,7 +1320,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'BoxGeometry':
 											{
-												lineGeometry = new THREE.LineSegmentsGeometry();
+												lineGeometry = new N3JS.LineSegmentsGeometry();
 												const gridY = parameters.heightSegments + 1;
 												const gridZ = parameters.depthSegments + 1;
 												const p1 = 0;
@@ -1360,7 +1360,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'PlaneGeometry':
 											{
-												lineGeometry = new THREE.LineSegmentsGeometry();
+												lineGeometry = new N3JS.LineSegmentsGeometry();
 												const gridX = parameters.widthSegments + 1;
 												const gridY = parameters.heightSegments + 1;
 												const p1 = 0;
@@ -1387,7 +1387,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'RingGeometry':
 											{
-												lineGeometry = new THREE.LineSegmentsGeometry();
+												lineGeometry = new N3JS.LineSegmentsGeometry();
 												const gridX = parameters.thetaSegments + 1;
 												const gridY = parameters.phiSegments + 1;
 												const lineList: { start: number; end: number }[] = [];
@@ -1422,7 +1422,7 @@ export class AbstractGeometryComponent
 											break;
 										case 'StarGeometry':
 											{
-												lineGeometry = new THREE.LineSegmentsGeometry();
+												lineGeometry = new N3JS.LineSegmentsGeometry();
 												const segments = (parameters.segments || 1) + 2;
 												const isClosed =
 													parameters.thetaLength < Math.PI * 2 ? false : true;
@@ -1446,24 +1446,24 @@ export class AbstractGeometryComponent
 											break;
 									}
 									if (lineGeometry === null) {
-										lineGeometry = new THREE.WireframeGeometry2(
+										lineGeometry = new N3JS.WireframeGeometry2(
 											geometry
 										);
 									}
 									if (vertices.length > 0) {
 										const lineSegments = new Float32Array(vertices);
-										const instanceBuffer = new THREE.InstancedInterleavedBuffer(
+										const instanceBuffer = new N3JS.InstancedInterleavedBuffer(
 											lineSegments,
 											6,
 											1
 										); // xyz, xyz
 										lineGeometry.setAttribute(
 											'instanceStart',
-											new THREE.InterleavedBufferAttribute(instanceBuffer, 3, 0)
+											new N3JS.InterleavedBufferAttribute(instanceBuffer, 3, 0)
 										); // xyz
 										lineGeometry.setAttribute(
 											'instanceEnd',
-											new THREE.InterleavedBufferAttribute(instanceBuffer, 3, 3)
+											new N3JS.InterleavedBufferAttribute(instanceBuffer, 3, 3)
 										); // xyz
 										lineGeometry.computeBoundingBox();
 										lineGeometry.computeBoundingSphere();
@@ -1473,7 +1473,7 @@ export class AbstractGeometryComponent
 								case 'edgesbuffer':
 								case 'edgesgeometry':
 								case 'edges':
-									lineGeometry = new THREE.EdgesGeometry(
+									lineGeometry = new N3JS.EdgesGeometry(
 										geometry,
 										ThreeUtil.getTypeSafe(this.thresholdAngle, 0)
 									);
@@ -1592,7 +1592,7 @@ export class AbstractGeometryComponent
 					const itemSize = ThreeUtil.getTypeSafe(this.autoDisplacementSize, 3);
 					geometry.setAttribute(
 						'displacement',
-						new THREE.Float32BufferAttribute(itemCount * itemSize, itemSize)
+						new N3JS.Float32BufferAttribute(itemCount * itemSize, itemSize)
 					);
 				}
 				if (ThreeUtil.isNotNull(this.autoCustomColor) && this.autoCustomColor) {
@@ -1600,7 +1600,7 @@ export class AbstractGeometryComponent
 					const itemSize = ThreeUtil.getTypeSafe(this.autoCustomColorSize, 3);
 					geometry.setAttribute(
 						ThreeUtil.getTypeSafe(this.autoCustomColorKey, 'customColor'),
-						new THREE.Float32BufferAttribute(itemCount * itemSize, itemSize)
+						new N3JS.Float32BufferAttribute(itemCount * itemSize, itemSize)
 					);
 				}
 				if (ThreeUtil.isNotNull(this.autoSize) && this.autoSize) {
@@ -1608,14 +1608,14 @@ export class AbstractGeometryComponent
 					const itemSize = ThreeUtil.getTypeSafe(this.autoSizeSize, 1);
 					geometry.setAttribute(
 						'size',
-						new THREE.Float32BufferAttribute(itemCount * itemSize, itemSize)
+						new N3JS.Float32BufferAttribute(itemCount * itemSize, itemSize)
 					);
 				}
 				if (this.mergeVertices) {
-					geometry = THREE.GeometryUtils.mergeVertices(geometry);
+					geometry = N3JS.GeometryUtils.mergeVertices(geometry);
 				}
 				if (this.edgeSplit) {
-					const modifier = new THREE.EdgeSplitModifier();
+					const modifier = new N3JS.EdgeSplitModifier();
 					geometry = modifier.modify(
 						geometry,
 						ThreeUtil.getAngleSafe(this.cutOffAngle, 0),
@@ -1623,7 +1623,7 @@ export class AbstractGeometryComponent
 					);
 				}
 				if (this.simplify) {
-					const modifier = new THREE.SimplifyModifier();
+					const modifier = new N3JS.SimplifyModifier();
 					const count = Math.floor(
 						geometry.attributes.position.count *
 							Math.max(0, Math.min(1, ThreeUtil.getTypeSafe(this.count, 1)))
@@ -1632,7 +1632,7 @@ export class AbstractGeometryComponent
 					geometry.computeVertexNormals();
 				}
 				if (this.tessellate) {
-					const modifier = new THREE.TessellateModifier(
+					const modifier = new N3JS.TessellateModifier(
 						ThreeUtil.getTypeSafe(this.maxEdgeLength, 8),
 						ThreeUtil.getTypeSafe(this.maxIterations, 6)
 					);
@@ -1664,7 +1664,7 @@ export class AbstractGeometryComponent
 				const tmpGeometry = this.onInit(geometry);
 				if (
 					ThreeUtil.isNotNull(tmpGeometry) &&
-					tmpGeometry instanceof THREE.BufferGeometry
+					tmpGeometry instanceof N3JS.BufferGeometry
 				) {
 					geometry = tmpGeometry;
 				}

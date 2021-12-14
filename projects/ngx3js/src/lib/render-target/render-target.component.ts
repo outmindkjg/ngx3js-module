@@ -6,7 +6,7 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 import { SizeComponent } from '../size/size.component';
 import { AbstractTextureComponent } from '../texture.abstract';
 
@@ -77,7 +77,7 @@ export class RenderTargetComponent
 	 */
 	private getTargetSize(width?: number, height?: number): I3JS.IVector2 {
 		if (ThreeUtil.isNotNull(this.targetSize)) {
-			if (this.targetSize instanceof THREE.Vector2) {
+			if (this.targetSize instanceof N3JS.Vector2) {
 				return this.targetSize;
 			} else if (this.targetSize instanceof SizeComponent) {
 				return this.targetSize.getSize();
@@ -107,7 +107,7 @@ export class RenderTargetComponent
 		}
 		if (ThreeUtil.isNotNull(this.depthTexture)) {
 			const targetSize = this.getTargetSize();
-			options.depthTexture = new THREE.DepthTexture(
+			options.depthTexture = new N3JS.DepthTexture(
 				targetSize.x,
 				targetSize.y,
 				ThreeUtil.getTextureDataTypeSafe(this.depthTexture.type),
@@ -235,7 +235,7 @@ export class RenderTargetComponent
 				case 'cuberendertarget':
 				case 'webglcuberendertarget':
 					const size = Math.max(renderTargetSize.x, renderTargetSize.y);
-					this.renderTarget = new THREE.WebGLCubeRenderTarget(
+					this.renderTarget = new N3JS.WebGLCubeRenderTarget(
 						size,
 						this.getTargetTextureOptions()
 					);
@@ -244,7 +244,7 @@ export class RenderTargetComponent
 				case 'multiplerender':
 				case 'webglmultiplerender':
 				case 'webglmultiplerendertargets':
-					this.renderTarget = new THREE.WebGLMultipleRenderTargets(
+					this.renderTarget = new N3JS.WebGLMultipleRenderTargets(
 						renderTargetSize.x,
 						renderTargetSize.y,
 						ThreeUtil.getTypeSafe(this.count, 1)
@@ -256,7 +256,7 @@ export class RenderTargetComponent
 				case 'multisamplerendertarget':
 				case 'webglmultisamplerendertarget':
 					const webGLMultisampleRenderTarget =
-						new THREE.WebGLMultisampleRenderTarget(
+						new N3JS.WebGLMultisampleRenderTarget(
 							renderTargetSize.x,
 							renderTargetSize.y,
 							this.getTargetTextureOptions()
@@ -267,7 +267,7 @@ export class RenderTargetComponent
 				case 'rendertarget':
 				case 'webglrendertarget':
 				default:
-					this.renderTarget = new THREE.WebGLRenderTarget(
+					this.renderTarget = new N3JS.WebGLRenderTarget(
 						renderTargetSize.x,
 						renderTargetSize.y,
 						this.getTargetTextureOptions()
@@ -280,12 +280,12 @@ export class RenderTargetComponent
 					this.size,
 					() => {
 						const size = this.getTargetSize();
-						if (this.renderTarget instanceof THREE.WebGLCubeRenderTarget) {
+						if (this.renderTarget instanceof N3JS.WebGLCubeRenderTarget) {
 							const cubeSize = Math.max(size.x, size.y);
 							this.renderTarget.setSize(cubeSize, cubeSize);
 						} else {
 							this.renderTarget.setSize(size.x, size.y);
-							if (this.renderTarget instanceof THREE.WebGLRenderTarget) {
+							if (this.renderTarget instanceof N3JS.WebGLRenderTarget) {
 								if (ThreeUtil.isNotNull(this.renderTarget.depthTexture)) {
 									this.renderTarget.depthTexture.image.width = size.width;
 									this.renderTarget.depthTexture.image.height = size.height;

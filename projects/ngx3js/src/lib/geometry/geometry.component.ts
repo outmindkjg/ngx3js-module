@@ -14,7 +14,7 @@ import {
 	AbstractGeometryComponent,
 	GeometriesParametric,
 } from '../geometry.abstract';
-import { ThreeColor, ThreeUtil, ThreeVector, THREE, I3JS } from '../interface';
+import { ThreeColor, ThreeUtil, ThreeVector, N3JS, I3JS } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { ShapeComponent } from '../shape/shape.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
@@ -707,16 +707,16 @@ export class GeometryComponent
 			let pointsGeometry = this.pointsGeometry.getGeometry().clone();
 			pointsGeometry.deleteAttribute('normal');
 			pointsGeometry.deleteAttribute('uv');
-			pointsGeometry = THREE.GeometryUtils.mergeVertices(pointsGeometry);
+			pointsGeometry = N3JS.GeometryUtils.mergeVertices(pointsGeometry);
 			const positionAttribute = pointsGeometry.getAttribute('position');
 			for (let i = 0; i < positionAttribute.count; i++) {
-				const vertex = new THREE.Vector3();
+				const vertex = new N3JS.Vector3();
 				vertex.fromBufferAttribute(positionAttribute, i);
 				points.push(vertex);
 			}
 		} else if (ThreeUtil.isNotNull(this.text)) {
-			points.push(new THREE.Vector3(0, 0, 0));
-			points.push(new THREE.Vector3(0, 0, 0));
+			points.push(new N3JS.Vector3(0, 0, 0));
+			points.push(new N3JS.Vector3(0, 0, 0));
 			this.getFont('helvetiker', (font: I3JS.IFont) => {
 				const shapes = font.generateShapes(
 					ThreeUtil.getTypeSafe(this.text, 'test'),
@@ -742,7 +742,7 @@ export class GeometryComponent
 			});
 		} else {
 			(this.points === null ? def : this.points).forEach((p) => {
-				points.push(new THREE.Vector3(p.x, p.y, p.z));
+				points.push(new N3JS.Vector3(p.x, p.y, p.z));
 			});
 		}
 		return points;
@@ -756,7 +756,7 @@ export class GeometryComponent
 	private getPointsV2(def?: ThreeVector[]): I3JS.IVector2[] {
 		const points: I3JS.IVector2[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
-			points.push(new THREE.Vector2(p.x, p.y));
+			points.push(new N3JS.Vector2(p.x, p.y));
 		});
 		return points;
 	}
@@ -772,16 +772,16 @@ export class GeometryComponent
 		const parametric = this.parametric === null ? def : this.parametric;
 		switch (parametric) {
 			case 'mobius3d':
-				return THREE.ParametricGeometries.mobius3d as any;
+				return N3JS.ParametricGeometries.mobius3d as any;
 			case 'klein':
-				return THREE.ParametricGeometries.klein as any;
+				return N3JS.ParametricGeometries.klein as any;
 			case 'plane':
-				return THREE.ParametricGeometries.plane(
+				return N3JS.ParametricGeometries.plane(
 					ThreeUtil.getTypeSafe(this.width, this.height, 10),
 					ThreeUtil.getTypeSafe(this.height, this.width, 10)
 				) as any;
 			case 'mobius':
-				return THREE.ParametricGeometries.mobius as any;
+				return N3JS.ParametricGeometries.mobius as any;
 			default:
 				if (parametric !== null) {
 					if (typeof parametric === 'function') {
@@ -801,7 +801,7 @@ export class GeometryComponent
 					}
 				}
 		}
-		return THREE.ParametricGeometries.klein as any;
+		return N3JS.ParametricGeometries.klein as any;
 	}
 
 	/**
@@ -844,16 +844,16 @@ export class GeometryComponent
 				});
 			}, 1);
 		} else if (ThreeUtil.isNotNull(this.shapes)) {
-			if (this.shapes instanceof THREE.Shape) {
+			if (this.shapes instanceof N3JS.Shape) {
 				window.setTimeout(() => {
 					onload(this.shapes as any);
 				}, 1);
 			} else {
 				const shapes: I3JS.IShape[] = [];
-				const shape = new THREE.Shape();
+				const shape = new N3JS.Shape();
 				const vectors: I3JS.IVector2[] = [];
 				this.shapes.forEach((p) => {
-					vectors.push(new THREE.Vector2(p.x, p.y));
+					vectors.push(new N3JS.Vector2(p.x, p.y));
 				});
 				shape.setFromPoints(vectors);
 				shapes.push(shape as any);
@@ -872,7 +872,7 @@ export class GeometryComponent
 		} else {
 			const shapes: I3JS.IShape[] = [];
 			if (this.shapeList !== null && this.shapeList.length > 0) {
-				const shape = new THREE.Shape();
+				const shape = new N3JS.Shape();
 				this.shapeList.forEach((path) => {
 					path.getShape(shape as any);
 				});
@@ -896,12 +896,12 @@ export class GeometryComponent
 			const vectors: I3JS.IVector3[] = [];
 			if (ThreeUtil.isNotNull(this.extrudePath)) {
 				this.extrudePath.forEach((p) => {
-					vectors.push(new THREE.Vector3(p.x, p.y, p.z));
+					vectors.push(new N3JS.Vector3(p.x, p.y, p.z));
 				});
 			}
 			if (ThreeUtil.isNotNull(this.curvePath)) {
 				this.curvePath.forEach((p) => {
-					vectors.push(new THREE.Vector3(p.x, p.y, p.z));
+					vectors.push(new N3JS.Vector3(p.x, p.y, p.z));
 				});
 			}
 			switch (
@@ -913,7 +913,7 @@ export class GeometryComponent
 			) {
 				case 'catmullromcurve3':
 				default:
-					return new THREE.CatmullRomCurve3(
+					return new N3JS.CatmullRomCurve3(
 						vectors,
 						ThreeUtil.getTypeSafe(this.closed, false),
 						ThreeUtil.getTypeSafe(this.curveType, 'catmullrom'),
@@ -978,9 +978,9 @@ export class GeometryComponent
 				return curveLine;
 			}
 		} else {
-			return new THREE.LineCurve3(
-				new THREE.Vector3(0, 0, 0),
-				new THREE.Vector3(0, 0, 0)
+			return new N3JS.LineCurve3(
+				new N3JS.Vector3(0, 0, 0),
+				new N3JS.Vector3(0, 0, 0)
 			);
 		}
 	}
@@ -995,14 +995,14 @@ export class GeometryComponent
 		let mesh: I3JS.IObject3D = null;
 		if (ThreeUtil.isNotNull(value)) {
 			mesh = ThreeUtil.getObject3d(value);
-			while (mesh instanceof THREE.Group) {
+			while (mesh instanceof N3JS.Group) {
 				mesh = mesh.children[0];
 			}
-			if (mesh instanceof THREE.Mesh) {
+			if (mesh instanceof N3JS.Mesh) {
 				return mesh;
 			} else if (
 				mesh.children.length > 0 &&
-				mesh.children[0] instanceof THREE.Mesh
+				mesh.children[0] instanceof N3JS.Mesh
 			) {
 				return mesh.children[0] as I3JS.IMesh;
 			}
@@ -1103,7 +1103,7 @@ export class GeometryComponent
 	 */
 	private getPerlinGeometry(): I3JS.IPlanePerlinGeometry {
 		if (this.perlinGeometry === null) {
-			this.perlinGeometry = new THREE.PlanePerlinGeometry(
+			this.perlinGeometry = new N3JS.PlanePerlinGeometry(
 				ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 128),
 				ThreeUtil.getTypeSafe(this.depthSegments, this.segments, 128),
 				ThreeUtil.getTypeSafe(this.quality, 2)
@@ -1135,14 +1135,14 @@ export class GeometryComponent
 					)
 				);
 			} else if (ThreeUtil.isNotNull(this.storageName)) {
-				geometry = new THREE.BufferGeometry();
+				geometry = new N3JS.BufferGeometry();
 				this.localStorageService.getGeometry(
 					this.storageName,
 					(loadGeometry, model: I3JS.IObject3D) => {
 						if (model !== null && this.storage2Buffer) {
 							let count = 0;
 							model.traverse((child: I3JS.IObject3D) => {
-								if (child instanceof THREE.Mesh && child.isMesh) {
+								if (child instanceof N3JS.Mesh && child.isMesh) {
 									const buffer = child.geometry.attributes['position'];
 									count += buffer.array.length;
 								}
@@ -1150,14 +1150,14 @@ export class GeometryComponent
 							const combined = new Float32Array(count);
 							let offset = 0;
 							model.traverse((child: I3JS.IObject3D) => {
-								if (child instanceof THREE.Mesh && child.isMesh) {
+								if (child instanceof N3JS.Mesh && child.isMesh) {
 									const buffer = child.geometry.attributes['position'];
 									combined.set(buffer.array, offset);
 									offset += buffer.array.length;
 								}
 							});
-							const positions = new THREE.BufferAttribute(combined, 3) as any;
-							const loadGeometry = new THREE.BufferGeometry();
+							const positions = new N3JS.BufferAttribute(combined, 3) as any;
+							const loadGeometry = new N3JS.BufferGeometry();
 							loadGeometry.setAttribute('position', positions.clone());
 							this.setGeometry(loadGeometry as any);
 						} else {
@@ -1174,7 +1174,7 @@ export class GeometryComponent
 					case 'custom':
 					case 'geometry':
 					case 'buffer':
-						geometry = new THREE.BufferGeometry();
+						geometry = new N3JS.BufferGeometry();
 						const attributes = this.getAttributes();
 						if (ThreeUtil.isNotNull(attributes) && attributes.length > 0) {
 							attributes.forEach((attribute) => {
@@ -1205,13 +1205,13 @@ export class GeometryComponent
 								);
 								geometry.setAttribute(
 									'position',
-									new THREE.BufferAttribute(
+									new N3JS.BufferAttribute(
 										new Float32Array(curveSegments * 3),
 										3
 									)
 								);
 								const position = geometry.attributes.position;
-								const point = new THREE.Vector3();
+								const point = new N3JS.Vector3();
 								for (let i = 0; i < curveSegments; i++) {
 									const t = i / (curveSegments - 1);
 									curve.getPoint(t, point);
@@ -1224,7 +1224,7 @@ export class GeometryComponent
 					case 'instancedbuffergeometry':
 					case 'instancedbuffer':
 					case 'instanced':
-						const instancedBufferGeometry = new THREE.InstancedBufferGeometry();
+						const instancedBufferGeometry = new N3JS.InstancedBufferGeometry();
 						if (ThreeUtil.isNotNull(this.instanceCount)) {
 							instancedBufferGeometry.instanceCount = ThreeUtil.getTypeSafe(
 								this.instanceCount,
@@ -1258,7 +1258,7 @@ export class GeometryComponent
 					case 'teapotgeometry':
 					case 'teapotbuffer':
 					case 'teapot':
-						const teapot = new THREE.TeapotGeometry(
+						const teapot = new N3JS.TeapotGeometry(
 							ThreeUtil.getTypeSafe(this.size, this.radius),
 							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments),
 							ThreeUtil.getTypeSafe(this.bottom),
@@ -1306,7 +1306,7 @@ export class GeometryComponent
 					case 'ropegeometry':
 					case 'ropebuffer':
 					case 'rope':
-						const ropeGeometry = new THREE.RopeGeometry(
+						const ropeGeometry = new N3JS.RopeGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1)
 						);
@@ -1316,7 +1316,7 @@ export class GeometryComponent
 					case 'gridgeometry':
 					case 'gridbuffer':
 					case 'grid':
-						const gridGeometry = new THREE.GridGeometry(
+						const gridGeometry = new N3JS.GridGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, 0),
@@ -1331,7 +1331,7 @@ export class GeometryComponent
 					case 'capsulegeometry':
 					case 'capsulebuffer':
 					case 'capsule':
-						const capsuleGeometry = new THREE.CapsuleGeometry(
+						const capsuleGeometry = new N3JS.CapsuleGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(
 								this.radiusSegments,
@@ -1349,7 +1349,7 @@ export class GeometryComponent
 					case 'linegeometry':
 					case 'linebuffer':
 					case 'line':
-						const lineGeometry = new THREE.LineGeometry();
+						const lineGeometry = new N3JS.LineGeometry();
 						if (
 							this.attrPosition instanceof Float32Array ||
 							this.attrPosition instanceof Array
@@ -1368,7 +1368,7 @@ export class GeometryComponent
 					case 'roundedboxgeometry':
 					case 'roundedboxbuffer':
 					case 'roundedbox':
-						geometry = new THREE.RoundedBoxGeometry(
+						geometry = new N3JS.RoundedBoxGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, this.width, 1),
@@ -1379,7 +1379,7 @@ export class GeometryComponent
 					case 'boxlinebuffergeometry':
 					case 'boxlinegeometry':
 					case 'boxline':
-						geometry = new THREE.BoxLineGeometry(
+						geometry = new N3JS.BoxLineGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, this.width, 1),
@@ -1393,7 +1393,7 @@ export class GeometryComponent
 					case 'boxgeometry':
 					case 'boxbuffer':
 					case 'box':
-						geometry = new THREE.BoxBufferGeometry(
+						geometry = new N3JS.BoxBufferGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, this.width, 1),
@@ -1406,7 +1406,7 @@ export class GeometryComponent
 					case 'circlegeometry':
 					case 'circlebuffer':
 					case 'circle':
-						geometry = new THREE.CircleBufferGeometry(
+						geometry = new N3JS.CircleBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 8),
 							ThreeUtil.getAngleSafe(this.thetaStart, 0),
@@ -1417,7 +1417,7 @@ export class GeometryComponent
 					case 'circledepthgeometry':
 					case 'circledepthbuffer':
 					case 'circledepth':
-						geometry = new THREE.CircleDepthGeometry(
+						geometry = new N3JS.CircleDepthGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.depth, 1),
 							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 8),
@@ -1430,7 +1430,7 @@ export class GeometryComponent
 					case 'stargeometry':
 					case 'starbuffer':
 					case 'star':
-						geometry = new THREE.StarGeometry(
+						geometry = new N3JS.StarGeometry(
 							ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
 							ThreeUtil.getTypeSafe(this.outerRadius, 1),
 							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 5),
@@ -1442,7 +1442,7 @@ export class GeometryComponent
 					case 'stardepthgeometry':
 					case 'stardepthbuffer':
 					case 'stardepth':
-						geometry = new THREE.StarDepthGeometry(
+						geometry = new N3JS.StarDepthGeometry(
 							ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
 							ThreeUtil.getTypeSafe(this.outerRadius, 1),
 							ThreeUtil.getTypeSafe(this.depth, 1),
@@ -1456,7 +1456,7 @@ export class GeometryComponent
 					case 'conegeometry':
 					case 'conebuffer':
 					case 'cone':
-						geometry = new THREE.ConeBufferGeometry(
+						geometry = new N3JS.ConeBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(
@@ -1474,7 +1474,7 @@ export class GeometryComponent
 					case 'cylindergeometry':
 					case 'cylinderbuffer':
 					case 'cylinder':
-						geometry = new THREE.CylinderBufferGeometry(
+						geometry = new N3JS.CylinderBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radiusTop, this.radiusBottom, 1),
 							ThreeUtil.getTypeSafe(this.radiusBottom, this.radiusTop, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
@@ -1493,7 +1493,7 @@ export class GeometryComponent
 					case 'dodecahedrongeometry':
 					case 'dodecahedronbuffer':
 					case 'dodecahedron':
-						geometry = new THREE.DodecahedronBufferGeometry(
+						geometry = new N3JS.DodecahedronBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.detail, 0)
 						);
@@ -1509,12 +1509,12 @@ export class GeometryComponent
 								geometry.deleteAttribute('normal');
 								geometry.deleteAttribute('uv');
 								geometries.push(
-									THREE.GeometryUtils.mergeVertices(geometry)
+									N3JS.GeometryUtils.mergeVertices(geometry)
 								);
 							});
 						}
 						geometry =
-							THREE.GeometryUtils.mergeBufferGeometries(geometries);
+							N3JS.GeometryUtils.mergeBufferGeometries(geometries);
 						break;
 					case 'shapebuffergeometry':
 					case 'extrudebuffergeometry':
@@ -1524,7 +1524,7 @@ export class GeometryComponent
 					case 'shape':
 					case 'extrudebuffer':
 					case 'extrude':
-						geometry = new THREE.ShapeBufferGeometry(
+						geometry = new N3JS.ShapeBufferGeometry(
 							[],
 							ThreeUtil.getTypeSafe(this.curveSegments, this.segments)
 						);
@@ -1535,7 +1535,7 @@ export class GeometryComponent
 								case 'shapegeometry':
 								case 'shapebuffer':
 								case 'shape':
-									shapeGeometry = new THREE.ShapeBufferGeometry(
+									shapeGeometry = new N3JS.ShapeBufferGeometry(
 										shapes,
 										ThreeUtil.getTypeSafe(this.curveSegments, this.segments)
 									);
@@ -1545,7 +1545,7 @@ export class GeometryComponent
 								case 'extrudebuffer':
 								case 'extrude':
 								default:
-									shapeGeometry = new THREE.ExtrudeBufferGeometry(shapes, {
+									shapeGeometry = new N3JS.ExtrudeBufferGeometry(shapes, {
 										curveSegments: ThreeUtil.getTypeSafe(
 											this.curveSegments,
 											this.segments
@@ -1570,7 +1570,7 @@ export class GeometryComponent
 					case 'icosahedrongeometry':
 					case 'icosahedronbuffer':
 					case 'icosahedron':
-						geometry = new THREE.IcosahedronBufferGeometry(
+						geometry = new N3JS.IcosahedronBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.detail, 0)
 						);
@@ -1579,7 +1579,7 @@ export class GeometryComponent
 					case 'lathegeometry':
 					case 'lathebuffer':
 					case 'lathe':
-						geometry = new THREE.LatheBufferGeometry(
+						geometry = new N3JS.LatheBufferGeometry(
 							this.getPointsV2([]),
 							ThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 12),
 							ThreeUtil.getAngleSafe(this.phiStart, 0),
@@ -1590,7 +1590,7 @@ export class GeometryComponent
 					case 'octahedrongeometry':
 					case 'octahedronbuffer':
 					case 'octahedron':
-						geometry = new THREE.OctahedronBufferGeometry(
+						geometry = new N3JS.OctahedronBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.detail, 0)
 						);
@@ -1599,7 +1599,7 @@ export class GeometryComponent
 					case 'parametric':
 					case 'parametricbuffergeometry':
 					case 'parametricbuffer':
-						geometry = new THREE.ParametricGeometry(
+						geometry = new N3JS.ParametricGeometry(
 							this.getParametric('mobius3d'),
 							ThreeUtil.getTypeSafe(this.slices, 20),
 							ThreeUtil.getTypeSafe(this.stacks, 20)
@@ -1607,7 +1607,7 @@ export class GeometryComponent
 						break;
 					case 'parametrictorusknotgeometry':
 					case 'parametrictorusknot':
-						geometry = new THREE.ParametricGeometries.TorusKnotGeometry(
+						geometry = new N3JS.ParametricGeometries.TorusKnotGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.tube, 0.4),
 							ThreeUtil.getTypeSafe(
@@ -1622,7 +1622,7 @@ export class GeometryComponent
 						break;
 					case 'parametricspheregeometry':
 					case 'parametricsphere':
-						geometry = new THREE.ParametricGeometries.SphereGeometry(
+						geometry = new N3JS.ParametricGeometries.SphereGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 8),
 							ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 6)
@@ -1630,7 +1630,7 @@ export class GeometryComponent
 						break;
 					case 'parametrictubegeometry':
 					case 'parametrictube':
-						geometry = new THREE.ParametricGeometries.TubeGeometry(
+						geometry = new N3JS.ParametricGeometries.TubeGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.tubularSegments, 64),
 							ThreeUtil.getTypeSafe(this.radius, 1),
@@ -1646,7 +1646,7 @@ export class GeometryComponent
 					case 'parametricbuffer':
 					case 'parametricgeometry':
 					case 'parametric':
-						geometry = new THREE.ParametricGeometry(
+						geometry = new N3JS.ParametricGeometry(
 							this.getParametric('mobius3d'),
 							ThreeUtil.getTypeSafe(this.slices, 20),
 							ThreeUtil.getTypeSafe(this.stacks, 10)
@@ -1656,7 +1656,7 @@ export class GeometryComponent
 					case 'planebuffer':
 					case 'planegeometry':
 					case 'plane':
-						geometry = new THREE.PlaneBufferGeometry(
+						geometry = new N3JS.PlaneBufferGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1),
@@ -1667,7 +1667,7 @@ export class GeometryComponent
 					case 'planedepthbuffer':
 					case 'planedepthgeometry':
 					case 'planedepth':
-						geometry = new THREE.PlaneDepthGeometry(
+						geometry = new N3JS.PlaneDepthGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.depth, this.width, 1),
@@ -1680,7 +1680,7 @@ export class GeometryComponent
 					case 'polyhedrongeometry':
 					case 'polyhedronbuffer':
 					case 'polyhedron':
-						geometry = new THREE.PolyhedronBufferGeometry(
+						geometry = new N3JS.PolyhedronBufferGeometry(
 							this.getPolyVertices([]),
 							this.getPolyIndices([]),
 							ThreeUtil.getTypeSafe(this.radius, 1),
@@ -1691,7 +1691,7 @@ export class GeometryComponent
 					case 'ringgeometry':
 					case 'ringbuffer':
 					case 'ring':
-						geometry = new THREE.RingBufferGeometry(
+						geometry = new N3JS.RingBufferGeometry(
 							ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
 							ThreeUtil.getTypeSafe(this.outerRadius, 1),
 							ThreeUtil.getTypeSafe(this.thetaSegments, 8),
@@ -1704,7 +1704,7 @@ export class GeometryComponent
 					case 'ringdepthgeometry':
 					case 'ringdepthbuffer':
 					case 'ringdepth':
-						geometry = new THREE.RingDepthGeometry(
+						geometry = new N3JS.RingDepthGeometry(
 							ThreeUtil.getTypeSafe(this.innerRadius, 0.5),
 							ThreeUtil.getTypeSafe(this.outerRadius, 1),
 							ThreeUtil.getTypeSafe(this.depth, 1),
@@ -1719,7 +1719,7 @@ export class GeometryComponent
 					case 'spheregeometry':
 					case 'spherebuffer':
 					case 'sphere':
-						geometry = new THREE.SphereBufferGeometry(
+						geometry = new N3JS.SphereBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 8),
 							ThreeUtil.getTypeSafe(this.heightSegments, this.segments, 6),
@@ -1733,7 +1733,7 @@ export class GeometryComponent
 					case 'tetrahedrongeometry':
 					case 'tetrahedronbuffer':
 					case 'tetrahedron':
-						geometry = new THREE.TetrahedronBufferGeometry(
+						geometry = new N3JS.TetrahedronBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.detail, 0)
 						);
@@ -1742,7 +1742,7 @@ export class GeometryComponent
 					case 'textgeometry':
 					case 'textbuffer':
 					case 'text':
-						geometry = new THREE.BufferGeometry();
+						geometry = new N3JS.BufferGeometry();
 						this.getFont('helvetiker', (font: I3JS.IFont) => {
 							const textParameters: I3JS.ITextGeometryParameters = {
 								font: font as any,
@@ -1765,7 +1765,7 @@ export class GeometryComponent
 								case 'text':
 								default:
 									this.setGeometry(
-										new THREE.TextGeometry(
+										new N3JS.TextGeometry(
 											ThreeUtil.getTypeSafe(this.text, 'test'),
 											textParameters
 										) as any
@@ -1779,7 +1779,7 @@ export class GeometryComponent
 					case 'torusgeometry':
 					case 'torusbuffer':
 					case 'torus':
-						geometry = new THREE.TorusBufferGeometry(
+						geometry = new N3JS.TorusBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.tube, 0.4),
 							ThreeUtil.getTypeSafe(
@@ -1795,7 +1795,7 @@ export class GeometryComponent
 					case 'torusknotgeometry':
 					case 'torusknotbuffer':
 					case 'torusknot':
-						geometry = new THREE.TorusKnotBufferGeometry(
+						geometry = new N3JS.TorusKnotBufferGeometry(
 							ThreeUtil.getTypeSafe(this.radius, 1),
 							ThreeUtil.getTypeSafe(this.tube, 0.4),
 							ThreeUtil.getTypeSafe(
@@ -1812,7 +1812,7 @@ export class GeometryComponent
 					case 'tubegeometry':
 					case 'tubebuffer':
 					case 'tube':
-						geometry = new THREE.TubeBufferGeometry(
+						geometry = new N3JS.TubeBufferGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.tubularSegments, 64),
 							ThreeUtil.getTypeSafe(this.radius, 1),
@@ -1828,7 +1828,7 @@ export class GeometryComponent
 					case 'convexgeometry':
 					case 'convexbuffer':
 					case 'convex':
-						geometry = new THREE.ConvexGeometry(
+						geometry = new N3JS.ConvexGeometry(
 							this.getPointsV3([])
 						) as any;
 						break;
@@ -1836,7 +1836,7 @@ export class GeometryComponent
 					case 'decalgeometry':
 					case 'decalbuffer':
 					case 'decal':
-						geometry = new THREE.DecalGeometry(
+						geometry = new N3JS.DecalGeometry(
 							this.getMesh(),
 							this.getPositionV3(),
 							this.getOrientation(),
@@ -1845,46 +1845,46 @@ export class GeometryComponent
 						break;
 					case 'treesgeometry':
 					case 'trees':
-						geometry = new THREE.RollerCoasterTreesGeometry(
+						geometry = new N3JS.RollerCoasterTreesGeometry(
 							this.getMesh()
 						) as any;
 						break;
 					case 'skygeometry':
 					case 'sky':
-						geometry = new THREE.RollerCoasterSkyGeometry(
+						geometry = new N3JS.RollerCoasterSkyGeometry(
 							null,
 							null
 						) as any;
 						break;
 					case 'rollercoastergeometry':
 					case 'rollercoaster':
-						geometry = new THREE.RollerCoasterGeometry(
+						geometry = new N3JS.RollerCoasterGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.slices, 1500)
 						) as any;
 						break;
 					case 'rollercoasterliftersgeometry':
 					case 'rollercoasterlifters':
-						geometry = new THREE.RollerCoasterLiftersGeometry(
+						geometry = new N3JS.RollerCoasterLiftersGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.slices, 1500)
 						) as any;
 						break;
 					case 'rollercoastershadowgeometry':
 					case 'rollercoastershadow':
-						geometry = new THREE.RollerCoasterShadowGeometry(
+						geometry = new N3JS.RollerCoasterShadowGeometry(
 							this.getCurve(),
 							ThreeUtil.getTypeSafe(this.slices, 1500)
 						) as any;
 						break;
 					case 'lightning':
 					case 'lightningstrike':
-						geometry = new THREE.LightningStrike(
+						geometry = new N3JS.LightningStrike(
 							this.rayParams
 						) as any;
 						break;
 					default:
-						geometry = new THREE.PlaneBufferGeometry(
+						geometry = new N3JS.PlaneBufferGeometry(
 							ThreeUtil.getTypeSafe(this.width, this.height, 1),
 							ThreeUtil.getTypeSafe(this.height, this.width, 1),
 							ThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1),

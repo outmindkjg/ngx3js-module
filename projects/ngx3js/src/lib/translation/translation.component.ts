@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ApplyMatrix4, THREE, I3JS } from '../interface';
+import { ApplyMatrix4, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -100,7 +100,7 @@ export class TranslationComponent
 	public resetTranslation() {
 		if (this.parent !== null && this.visible) {
 			const refTranslation: ApplyMatrix4[] = [];
-			if (this.parent instanceof THREE.BufferGeometry) {
+			if (this.parent instanceof N3JS.BufferGeometry) {
 				refTranslation.push(this.parent);
 			} else if (this.parent.getGeometry) {
 				refTranslation.push(this.parent.getGeometry());
@@ -125,7 +125,7 @@ export class TranslationComponent
 	public getTranslation(): I3JS.IMatrix4 {
 		if (this.translation === null || this._needUpdate) {
 			this.needUpdate = false;
-			this.translation = new THREE.Matrix4().makeTranslation(
+			this.translation = new N3JS.Matrix4().makeTranslation(
 				this.x,
 				this.y,
 				this.z

@@ -1,4 +1,4 @@
-import { I3JS, THREE } from '../../interface';
+import { I3JS, N3JS } from '../../interface';
 
 /**
  * Plane controls
@@ -36,7 +36,7 @@ export class NgxPlaneControls {
 	/**
 	 * The Target of plane controls
 	 */
-	public target: I3JS.IVector3 = new THREE.Vector3();
+	public target: I3JS.IVector3 = new N3JS.Vector3();
 
 	/**
 	 * The Enabled of plane controls
@@ -67,7 +67,7 @@ export class NgxPlaneControls {
 		window.setTimeout(() => {
 			this.handleResize();
 			this.setActive(true);
-			this.cameraPosition = new THREE.Vector3();
+			this.cameraPosition = new N3JS.Vector3();
 			this.cameraPosition.copy(this.camera.position);
 		}, 100);
 	}
@@ -104,7 +104,7 @@ export class NgxPlaneControls {
 	/**
 	 * The Mouse of plane controls
 	 */
-	private mouse: I3JS.IVector2 = new THREE.Vector2();
+	private mouse: I3JS.IVector2 = new N3JS.Vector2();
 
 	/**
 	 * Camera position of plane controls
@@ -124,10 +124,10 @@ export class NgxPlaneControls {
 					const xDistance = this.maxDistance;
 					const yDistance = this.maxDistance;
 
-					const cameraPosition = new THREE.Vector2(xDistance, yDistance);
+					const cameraPosition = new N3JS.Vector2(xDistance, yDistance);
 					cameraPosition.multiply(this.mouse);
-					cameraPosition.add(new THREE.Vector2(this.target.x, this.target.y));
-					this.cameraPosition = new THREE.Vector3(
+					cameraPosition.add(new N3JS.Vector2(this.target.x, this.target.y));
+					this.cameraPosition = new N3JS.Vector3(
 						cameraPosition.x,
 						Math.max(0.5, cameraPosition.y),
 						this.camera.position.z

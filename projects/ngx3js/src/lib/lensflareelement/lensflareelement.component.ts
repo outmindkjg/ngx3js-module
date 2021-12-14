@@ -1,9 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import {
-	Lensflare,
-	LensflareElement,
-} from 'three/examples/jsm/objects/Lensflare';
-import { ThreeColor, ThreeUtil, I3JS } from '../interface';
+import { ThreeColor, ThreeUtil, I3JS, N3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
 
@@ -125,18 +121,18 @@ export class LensflareelementComponent
 	/**
 	 * Lensflare element of LensflareElement
 	 */
-	private lensflareElement: LensflareElement = null;
+	private lensflareElement: I3JS.ILensflareElement = null;
 
 	/**
 	 * The Lensflare of LensflareElement
 	 */
-	private lensflare: Lensflare = null;
+	private lensflare: I3JS.ILensflare = null;
 
 	/**
 	 * Sets lensflare
 	 * @param lensflare
 	 */
-	public setLensflare(lensflare: Lensflare) {
+	public setLensflare(lensflare: I3JS.ILensflare) {
 		if (this.lensflare !== lensflare) {
 			this.lensflare = lensflare;
 			this.lensflare.addElement(this.getLensflareElement());
@@ -147,10 +143,10 @@ export class LensflareelementComponent
 	 * Gets lensflare element
 	 * @returns lensflare element
 	 */
-	public getLensflareElement(): LensflareElement {
+	public getLensflareElement(): I3JS.ILensflareElement {
 		if (this.lensflareElement === null || this._needUpdate) {
 			this.needUpdate = false;
-			this.lensflareElement = new LensflareElement(
+			this.lensflareElement = new N3JS.LensflareElement(
 				this.getTexture() as any,
 				ThreeUtil.getTypeSafe(this.size, 100),
 				ThreeUtil.getTypeSafe(this.distance, 0),

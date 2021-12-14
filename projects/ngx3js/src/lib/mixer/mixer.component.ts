@@ -6,12 +6,9 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { MMDAnimationHelper } from 'three/examples/jsm/animation/MMDAnimationHelper';
-import { MD2Character } from 'three/examples/jsm/misc/MD2Character';
-import { MD2CharacterComplex } from 'three/examples/jsm/misc/MD2CharacterComplex';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { ClipComponent } from './../clip/clip.component';
-import { I3JS, RendererTimer, THREE, ThreeUtil } from './../interface';
+import { I3JS, RendererTimer, N3JS, ThreeUtil } from './../interface';
 import { PhysicsComponent } from './../physics/physics.component';
 
 /**
@@ -335,9 +332,9 @@ export class MixerComponent
 	 */
 	ngOnDestroy(): void {
 		if (this.mixer !== null) {
-			if (this.mixer instanceof THREE.AnimationMixer) {
+			if (this.mixer instanceof N3JS.AnimationMixer) {
 				this.mixer.stopAllAction();
-			} else if (this.mixer instanceof MD2Character) {
+			} else if (this.mixer instanceof N3JS.MD2Character) {
 				this.mixer.mixer.stopAllAction();
 			}
 		}
@@ -371,9 +368,9 @@ export class MixerComponent
 	 */
 	private mixer:
 		| I3JS.IAnimationMixer
-		| MD2Character
-		| MD2CharacterComplex
-		| MMDAnimationHelper = null;
+		| I3JS.IMD2Character
+		| I3JS.IMD2CharacterComplex
+		| I3JS.IMMDAnimationHelper = null;
 
 	/**
 	 * The Model of mixer component
@@ -399,11 +396,11 @@ export class MixerComponent
 	): boolean {
 		if (
 			super.setParent(parent) ||
-			(parent instanceof THREE.Object3D &&
+			(parent instanceof N3JS.Object3D &&
 				(this.oldLoaded.refTarget !== parent.userData.refTarget ||
 					this.oldLoaded.clips !== parent.userData.clips))
 		) {
-			if (parent instanceof THREE.Object3D) {
+			if (parent instanceof N3JS.Object3D) {
 				this.oldLoaded.refTarget = parent.userData.refTarget;
 				this.oldLoaded.clips = parent.userData.clips;
 			} else {
@@ -438,8 +435,8 @@ export class MixerComponent
 		let targetMesh: I3JS.IObject3D | I3JS.IAnimationObjectGroup = null;
 		if (ThreeUtil.isNotNull(target)) {
 			if (
-				target instanceof THREE.AnimationObjectGroup ||
-				target instanceof THREE.Object3D
+				target instanceof N3JS.AnimationObjectGroup ||
+				target instanceof N3JS.Object3D
 			) {
 				targetMesh = target;
 			} else {
@@ -448,7 +445,7 @@ export class MixerComponent
 		}
 		if (
 			ThreeUtil.isNotNull(targetMesh) &&
-			targetMesh instanceof THREE.Object3D &&
+			targetMesh instanceof N3JS.Object3D &&
 			ThreeUtil.isNotNull(targetMesh.userData.refTarget)
 		) {
 			targetMesh =
@@ -465,9 +462,9 @@ export class MixerComponent
 	public checkModel(parent: I3JS.IObject3D | I3JS.IAnimationObjectGroup) {
 		const model = this.getTarget(parent);
 		if (ThreeUtil.isNotNull(model)) {
-			if (model instanceof THREE.Object3D) {
+			if (model instanceof N3JS.Object3D) {
 				const clips =
-					parent instanceof THREE.Object3D ? parent.userData.clips : null;
+					parent instanceof N3JS.Object3D ? parent.userData.clips : null;
 				this.setModel(model, clips);
 			} else {
 				this.setModel(model, null);
@@ -534,7 +531,7 @@ export class MixerComponent
 		if (
 			this._physics !== null &&
 			this._physics !== undefined &&
-			this.mixer instanceof MMDAnimationHelper
+			this.mixer instanceof N3JS.MMDAnimationHelper
 		) {
 			const _physics = this._physics.getPhysics();
 			const helper = this.mixer;
@@ -571,7 +568,7 @@ export class MixerComponent
 		restoreAction?: string,
 		restoreDuration?: number
 	) {
-		if (this.mixer !== null && this.mixer instanceof THREE.AnimationMixer) {
+		if (this.mixer !== null && this.mixer instanceof N3JS.AnimationMixer) {
 			if (this.play(endAction, duration)) {
 				const mixer = this.mixer;
 				if (ThreeUtil.isNotNull(restoreAction)) {
@@ -599,8 +596,8 @@ export class MixerComponent
 	 * Gets mmd animation helper
 	 * @returns mmd animation helper
 	 */
-	public getMmdAnimationHelper(): MMDAnimationHelper {
-		if (this.mixer instanceof MMDAnimationHelper) {
+	public getMmdAnimationHelper(): I3JS.IMMDAnimationHelper {
+		if (this.mixer instanceof N3JS.MMDAnimationHelper) {
 			return this.mixer;
 		} else {
 			return null;
@@ -619,11 +616,11 @@ export class MixerComponent
 	 * Synks animation helper
 	 * @param helper
 	 */
-	public synkAnimationHelper(helper: MMDAnimationHelper) {
+	public synkAnimationHelper(helper: I3JS.IMMDAnimationHelper) {
 		if (helper !== null && !this.isAdded) {
 			if (
-				this.model instanceof THREE.SkinnedMesh ||
-				this.model instanceof THREE.Camera
+				this.model instanceof N3JS.SkinnedMesh ||
+				this.model instanceof N3JS.Camera
 			) {
 				if (
 					ThreeUtil.isNotNull(this.clips) &&
@@ -689,7 +686,7 @@ export class MixerComponent
 					super.callOnLoad();
 					this.isAdded = true;
 				}
-			} else if (this.model instanceof THREE.Audio) {
+			} else if (this.model instanceof N3JS.Audio) {
 				const audioMode = this.model;
 				if (audioMode.buffer !== null) {
 					helper.add(audioMode as any, {
@@ -745,7 +742,7 @@ export class MixerComponent
 					'angularspeed',
 				]);
 			}
-			if (this.mixer instanceof THREE.AnimationMixer) {
+			if (this.mixer instanceof N3JS.AnimationMixer) {
 				const mixer = this.mixer;
 				changes.forEach((change) => {
 					switch (change.toLowerCase()) {
@@ -769,8 +766,8 @@ export class MixerComponent
 					}
 				});
 			} else if (
-				this.mixer instanceof MD2Character ||
-				this.mixer instanceof MD2CharacterComplex
+				this.mixer instanceof N3JS.MD2Character ||
+				this.mixer instanceof N3JS.MD2CharacterComplex
 			) {
 				const character: any = this.mixer;
 				changes.forEach((change) => {
@@ -850,7 +847,7 @@ export class MixerComponent
 							}
 							break;
 						case 'controls':
-							if (character instanceof MD2CharacterComplex) {
+							if (character instanceof N3JS.MD2CharacterComplex) {
 								if (ThreeUtil.isNotNull(this.controls)) {
 									(character as any).controls = this.controls;
 								}
@@ -924,12 +921,12 @@ export class MixerComponent
 							break;
 					}
 				});
-			} else if (this.mixer instanceof MMDAnimationHelper) {
+			} else if (this.mixer instanceof N3JS.MMDAnimationHelper) {
 				const helper = this.mixer;
 				changes.forEach((change) => {
 					switch (change.toLowerCase()) {
 						case 'pose':
-							if (this.model instanceof THREE.SkinnedMesh) {
+							if (this.model instanceof N3JS.SkinnedMesh) {
 								helper.pose(this.model as any, null);
 							}
 							break;
@@ -945,23 +942,23 @@ export class MixerComponent
 	 */
 	public getMixer():
 		| I3JS.IAnimationMixer
-		| MD2Character
-		| MD2CharacterComplex
-		| MMDAnimationHelper {
+		| I3JS.IMD2Character
+		| I3JS.IMD2CharacterComplex
+		| I3JS.IMMDAnimationHelper {
 		if (this.mixer === null || this._needUpdate) {
 			this.needUpdate = false;
 			let mixer:
 				| I3JS.IAnimationMixer
-				| MD2Character
-				| MD2CharacterComplex
-				| MMDAnimationHelper = null;
+				| I3JS.IMD2Character
+				| I3JS.IMD2CharacterComplex
+				| I3JS.IMMDAnimationHelper = null;
 			this.lastPlayedClip = null;
 			switch (this.type.toLowerCase()) {
 				case 'mmd':
 				case 'mmdanimation':
 				case 'mmdanimationhelper':
 					if (this.animationHelper === null) {
-						const helper = new MMDAnimationHelper({
+						const helper = new N3JS.MMDAnimationHelper({
 							sync: this.getSync(),
 							afterglow: this.getAfterglow(),
 							resetPhysicsOnLoop: this.getResetPhysicsOnLoop(),
@@ -1003,7 +1000,7 @@ export class MixerComponent
 					}
 					break;
 				case 'mixer':
-					const animationMixer = new THREE.AnimationMixer(this.model);
+					const animationMixer = new N3JS.AnimationMixer(this.model);
 					animationMixer.timeScale = this.getTimeScale(1);
 					mixer = animationMixer;
 					break;
@@ -1011,11 +1008,11 @@ export class MixerComponent
 				default:
 					if (this.clips !== null) {
 						if (
-							this.clips instanceof MD2Character ||
-							this.clips instanceof MD2CharacterComplex
+							this.clips instanceof N3JS.MD2Character ||
+							this.clips instanceof N3JS.MD2CharacterComplex
 						) {
 							mixer = this.clips;
-							if (this.clips instanceof MD2CharacterComplex) {
+							if (this.clips instanceof N3JS.MD2CharacterComplex) {
 								(mixer as any).controls = this.controls || {};
 							}
 						}
@@ -1046,7 +1043,7 @@ export class MixerComponent
 			name !== '' &&
 			this.mixer !== null
 		) {
-			if (this.mixer instanceof THREE.AnimationMixer) {
+			if (this.mixer instanceof N3JS.AnimationMixer) {
 				if (ThreeUtil.isNotNull(this.clipList) && this.clipList.length > 0) {
 					duration = ThreeUtil.getTypeSafe(duration, this.duration);
 					let foundAction: ClipComponent = null;
@@ -1075,8 +1072,8 @@ export class MixerComponent
 					return true;
 				}
 			} else if (
-				this.mixer instanceof MD2Character ||
-				this.mixer instanceof MD2CharacterComplex
+				this.mixer instanceof N3JS.MD2Character ||
+				this.mixer instanceof N3JS.MD2CharacterComplex
 			) {
 				this.mixer.setAnimation(name);
 				return true;
@@ -1091,13 +1088,13 @@ export class MixerComponent
 	 */
 	public update(timer: RendererTimer) {
 		if (ThreeUtil.isNotNull(this.mixer)) {
-			if (this.mixer instanceof MMDAnimationHelper) {
+			if (this.mixer instanceof N3JS.MMDAnimationHelper) {
 				this.mixer.update(timer.delta);
-			} else if (this.mixer instanceof THREE.AnimationMixer) {
+			} else if (this.mixer instanceof N3JS.AnimationMixer) {
 				this.mixer.update(timer.delta);
 			} else if (
-				this.mixer instanceof MD2Character ||
-				this.mixer instanceof MD2CharacterComplex
+				this.mixer instanceof N3JS.MD2Character ||
+				this.mixer instanceof N3JS.MD2CharacterComplex
 			) {
 				this.mixer.update(timer.delta);
 			}

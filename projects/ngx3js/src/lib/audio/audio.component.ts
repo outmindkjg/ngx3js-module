@@ -5,7 +5,7 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
@@ -237,7 +237,7 @@ export class AudioComponent
 		onLoad: (audioBuffer: AudioBuffer) => void
 	) {
 		if (this.audioLoader === null) {
-			this.audioLoader = new THREE.AudioLoader(
+			this.audioLoader = new N3JS.AudioLoader(
 				ThreeUtil.getLoadingManager()
 			) as any;
 		}
@@ -272,7 +272,7 @@ export class AudioComponent
 		if (this.listener !== null) {
 			return this.listener;
 		} else {
-			return new THREE.AudioListener();
+			return new N3JS.AudioListener();
 		}
 	}
 
@@ -307,7 +307,7 @@ export class AudioComponent
 		this.getAudio();
 		if (this.video !== null) {
 			if (this.loadedVideoTexture === null) {
-				this.loadedVideoTexture = new THREE.VideoTexture(this.video);
+				this.loadedVideoTexture = new N3JS.VideoTexture(this.video);
 			}
 			return this.loadedVideoTexture;
 		} else if (ThreeUtil.isNotNull(this.url)) {
@@ -323,11 +323,11 @@ export class AudioComponent
 				fftSize = this.fftSize;
 			}
 			if (this.loadedAudioTexture === null) {
-				this.loadedAudioTexture = new THREE.DataTexture(
+				this.loadedAudioTexture = new N3JS.DataTexture(
 					data,
 					fftSize / 2,
 					1,
-					THREE.RedFormat
+					N3JS.RedFormat
 				);
 			} else {
 				(this.loadedAudioTexture.image as any) = {
@@ -340,7 +340,7 @@ export class AudioComponent
 			}
 			return this.loadedAudioTexture;
 		}
-		return new THREE.DataTexture(null, 1, 1);
+		return new N3JS.DataTexture(null, 1, 1);
 	}
 
 	/**
@@ -367,7 +367,7 @@ export class AudioComponent
 	 */
 	public getAnalyser(fftSize?: number): I3JS.IAudioAnalyser {
 		if (this.analyser === null && this.audio !== null) {
-			this.analyser = new THREE.AudioAnalyser(
+			this.analyser = new N3JS.AudioAnalyser(
 				this.audio,
 				fftSize || this.fftSize
 			);
@@ -521,7 +521,7 @@ export class AudioComponent
 						}
 						break;
 					case 'positionalaudio':
-						if (this.audio instanceof THREE.PositionalAudio) {
+						if (this.audio instanceof N3JS.PositionalAudio) {
 							if (ThreeUtil.isNotNull(this.refDistance)) {
 								this.audio.setRefDistance(this.refDistance);
 							}
@@ -591,13 +591,13 @@ export class AudioComponent
 			this.video = null;
 			switch (this.type.toLowerCase()) {
 				case 'audio':
-					this.audio = new THREE.Audio(this.getListener());
+					this.audio = new N3JS.Audio(this.getListener());
 					break;
 				case 'positionalaudio':
 				case 'positional':
 				case 'position':
 				default:
-					this.audio = new THREE.PositionalAudio(this.getListener());
+					this.audio = new N3JS.PositionalAudio(this.getListener());
 					break;
 			}
 			this.setObject3d(this.audio as any);

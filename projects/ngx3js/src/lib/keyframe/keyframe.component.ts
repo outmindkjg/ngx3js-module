@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -203,7 +203,7 @@ export class KeyframeComponent
 	 */
 	private getQuaternions(size: number): number[] {
 		const quaternions: number[] = [];
-		const tmpQuaternion = new THREE.Quaternion();
+		const tmpQuaternion = new N3JS.Quaternion();
 		this.quaternions.forEach((v) => {
 			if (typeof v === 'number') {
 				quaternions.push(v);
@@ -359,7 +359,7 @@ export class KeyframeComponent
 				ThreeUtil.getInterpolationSafe(this.interpolation);
 			switch (this.type.toLowerCase()) {
 				case 'position':
-					this.keyframe = new THREE.VectorKeyframeTrack(
+					this.keyframe = new N3JS.VectorKeyframeTrack(
 						'.position',
 						times,
 						this.getVectors(times.length),
@@ -367,7 +367,7 @@ export class KeyframeComponent
 					);
 					break;
 				case 'scale':
-					this.keyframe = new THREE.VectorKeyframeTrack(
+					this.keyframe = new N3JS.VectorKeyframeTrack(
 						'.scale',
 						times,
 						this.getVectors(times.length),
@@ -375,7 +375,7 @@ export class KeyframeComponent
 					);
 					break;
 				case 'quaternion':
-					this.keyframe = new THREE.QuaternionKeyframeTrack(
+					this.keyframe = new N3JS.QuaternionKeyframeTrack(
 						'.quaternion',
 						times,
 						this.getQuaternions(times.length),
@@ -386,7 +386,7 @@ export class KeyframeComponent
 				case 'specular':
 				case 'emissive':
 				case 'sheen':
-					this.keyframe = new THREE.ColorKeyframeTrack(
+					this.keyframe = new N3JS.ColorKeyframeTrack(
 						'.material.' + this.type.toLowerCase(),
 						times,
 						this.getColors(times.length),
@@ -396,7 +396,7 @@ export class KeyframeComponent
 				case 'shininess':
 				case 'opacity':
 				case 'reflectivity':
-					this.keyframe = new THREE.NumberKeyframeTrack(
+					this.keyframe = new N3JS.NumberKeyframeTrack(
 						'.material.' + this.type.toLowerCase(),
 						times,
 						this.getValues(times.length),
@@ -405,7 +405,7 @@ export class KeyframeComponent
 					break;
 				case 'transparent':
 				case 'wireframe':
-					this.keyframe = new THREE.BooleanKeyframeTrack(
+					this.keyframe = new N3JS.BooleanKeyframeTrack(
 						'.material.' + this.type.toLowerCase(),
 						times,
 						this.getBooleans(times.length)
@@ -417,7 +417,7 @@ export class KeyframeComponent
 				case 'vector':
 				case 'vectorkeyframe':
 				case 'vectorkeyframetrack':
-					this.keyframe = new THREE.VectorKeyframeTrack(
+					this.keyframe = new N3JS.VectorKeyframeTrack(
 						'.' + ThreeUtil.getTypeSafe(this.name, 'position'),
 						times,
 						this.getVectors(times.length),
@@ -427,7 +427,7 @@ export class KeyframeComponent
 				case 'quaternion':
 				case 'quaternionkeyframe':
 				case 'quaternionkeyframetrack':
-					this.keyframe = new THREE.QuaternionKeyframeTrack(
+					this.keyframe = new N3JS.QuaternionKeyframeTrack(
 						'.' + ThreeUtil.getTypeSafe(this.name, 'quaternion'),
 						times,
 						this.getQuaternions(times.length),
@@ -437,7 +437,7 @@ export class KeyframeComponent
 				case 'color':
 				case 'colorkeyframe':
 				case 'colorkeyframetrack':
-					this.keyframe = new THREE.ColorKeyframeTrack(
+					this.keyframe = new N3JS.ColorKeyframeTrack(
 						'.' + ThreeUtil.getTypeSafe(this.name, 'quaternion'),
 						times,
 						this.getColors(times.length),
@@ -447,7 +447,7 @@ export class KeyframeComponent
 				case 'number':
 				case 'numberkeyframe':
 				case 'numberkeyframetrack':
-					this.keyframe = new THREE.NumberKeyframeTrack(
+					this.keyframe = new N3JS.NumberKeyframeTrack(
 						'.' + ThreeUtil.getTypeSafe(this.name, 'opacity'),
 						times,
 						this.getValues(times.length),
@@ -457,7 +457,7 @@ export class KeyframeComponent
 				case 'boolean':
 				case 'booleankeyframe':
 				case 'booleankeyframetrack':
-					this.keyframe = new THREE.BooleanKeyframeTrack(
+					this.keyframe = new N3JS.BooleanKeyframeTrack(
 						'.' + ThreeUtil.getTypeSafe(this.name, 'transparent'),
 						times,
 						this.getBooleans(times.length)

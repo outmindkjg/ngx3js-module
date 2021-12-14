@@ -2,7 +2,7 @@ import { QueryList } from '@angular/core';
 import * as GSAP from 'gsap';
 import { CameraComponent } from './camera/camera.component';
 import { CanvasComponent } from './canvas/canvas.component';
-import { RendererTimer, ThreeUtil, I3JS, THREE } from './interface';
+import { RendererTimer, ThreeUtil, I3JS, N3JS } from './interface';
 import { AbstractMaterialComponent } from './material.abstract';
 import { SceneComponent } from './scene/scene.component';
 import { HtmlCollection, VisualComponent } from './visual/visual.component';
@@ -478,21 +478,21 @@ export abstract class AbstractThreeController {
 	 * Gets material
 	 */
 	protected get material(): I3JS.IMaterial {
-		if (this.refObject instanceof THREE.Mesh) {
+		if (this.refObject instanceof N3JS.Mesh) {
 			if (this.refObject.material instanceof Array) {
 				return this.refObject.material[0];
 			} else {
 				return this.refObject.material;
 			}
 		}
-		return new THREE.Material();
+		return new N3JS.Material();
 	}
 
 	/**
 	 * Gets materials
 	 */
 	protected get materials(): I3JS.IMaterial[] {
-		if (this.refObject instanceof THREE.Mesh) {
+		if (this.refObject instanceof N3JS.Mesh) {
 			if (this.refObject.material instanceof Array) {
 				return this.refObject.material;
 			} else {
@@ -506,10 +506,10 @@ export abstract class AbstractThreeController {
 	 * Gets geometry
 	 */
 	protected get geometry(): I3JS.IBufferGeometry {
-		if (this.refObject instanceof THREE.Mesh) {
+		if (this.refObject instanceof N3JS.Mesh) {
 			return this.refObject.geometry;
 		}
-		return new THREE.BufferGeometry();
+		return new N3JS.BufferGeometry();
 	}
 
 	/**
@@ -518,17 +518,17 @@ export abstract class AbstractThreeController {
 	protected get scene(): I3JS.IScene {
 		if (this._scene === null && this.refObject !== null) {
 			let lastObj: I3JS.IObject3D = this.refObject;
-			while (!(lastObj instanceof THREE.Scene) && lastObj.parent) {
+			while (!(lastObj instanceof N3JS.Scene) && lastObj.parent) {
 				lastObj = lastObj.parent;
 			}
-			if (lastObj instanceof THREE.Scene) {
+			if (lastObj instanceof N3JS.Scene) {
 				this._scene = lastObj;
 			}
 		}
 		if (this._scene !== null) {
 			return this._scene;
 		} else {
-			return new THREE.Scene();
+			return new N3JS.Scene();
 		}
 	}
 
@@ -711,12 +711,12 @@ export abstract class AbstractThreeController {
 		const object3d = refObject || this.refObject;
 		if (
 			ThreeUtil.isNotNull(object3d) &&
-			object3d instanceof THREE.Mesh &&
+			object3d instanceof N3JS.Mesh &&
 			ThreeUtil.isNotNull(object3d.material)
 		) {
 			let materialComp: any = null;
 			if (
-				object3d.material instanceof THREE.Material &&
+				object3d.material instanceof N3JS.Material &&
 				ThreeUtil.isNotNull(object3d.material.userData.component)
 			) {
 				materialComp = object3d.material.userData.component;
@@ -1101,8 +1101,8 @@ export class AutoMaterialController extends AbstractThreeController {
 			if (this.refObject !== null) {
 				const material = this.material;
 				if (
-					material instanceof THREE.MeshBasicMaterial ||
-					material instanceof THREE.MeshLambertMaterial
+					material instanceof N3JS.MeshBasicMaterial ||
+					material instanceof N3JS.MeshLambertMaterial
 				) {
 					const tweenTimer = this.tweenTimer;
 					tweenTimer.clear();
@@ -1187,7 +1187,7 @@ export class AutoUniformsController extends AbstractThreeController {
 		const refObject: any = this.refObject;
 		if (ThreeUtil.isNotNull(this.key) && refObject['material']) {
 			const material = refObject['material'];
-			if (material instanceof THREE.ShaderMaterial) {
+			if (material instanceof N3JS.ShaderMaterial) {
 				this.uniform = material.uniforms[this.key];
 			}
 		}

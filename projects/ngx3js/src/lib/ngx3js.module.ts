@@ -26,7 +26,7 @@ import { AbstractControllerComponent } from './controller.component.abstract';
 import { ControllerItemComponent } from './controller/controller-item/controller-item.component';
 import { ControllerComponent } from './controller/controller.component';
 import { CurveComponent } from './curve/curve.component';
-import { NGX3JS_DIRECTIVES } from './directives/index';
+import { N3JS_DIRECTIVES } from './directives/index';
 import { FogComponent } from './fog/fog.component';
 import { AbstractGeometryComponent } from './geometry.abstract';
 import { GeometryBirdComponent } from './geometry/bird/bird.component';
@@ -48,7 +48,7 @@ import { AbstractObject3dComponent } from './object3d.abstract';
 import { PassComponent } from './pass/pass.component';
 import { PhysicsConstraintComponent } from './physics/physics-constraint/physics-constraint.component';
 import { PhysicsComponent } from './physics/physics.component';
-import { NGX3JS_PIPES } from './pipes/index';
+import { N3JS_PIPES } from './pipes/index';
 import { PlaneComponent } from './plane/plane.component';
 import { PositionComponent } from './position/position.component';
 import { RenderTargetComponent } from './render-target/render-target.component';
@@ -75,7 +75,7 @@ import { ViewerComponent } from './viewer/viewer.component';
 import { VisualComponent } from './visual/visual.component';
 import { NgxViewportInComponent } from '.';
 
-const NGX3JS_COMPONENTS: Array<Type<any>> = [
+const N3JS_COMPONENTS: Array<Type<any>> = [
 	LookatComponent,
 	FogComponent,
 	TextureComponent,
@@ -156,10 +156,10 @@ const NGX3JS_COMPONENTS: Array<Type<any>> = [
  * @class Ngx3JsModule
  */
 @NgModule({
-	declarations: [...NGX3JS_PIPES, ...NGX3JS_DIRECTIVES, ...NGX3JS_COMPONENTS],
-	entryComponents: [...NGX3JS_COMPONENTS],
+	declarations: [...N3JS_PIPES, ...N3JS_DIRECTIVES, ...N3JS_COMPONENTS],
+	entryComponents: [...N3JS_COMPONENTS],
 	imports: [CommonModule],
-	exports: [...NGX3JS_PIPES, ...NGX3JS_DIRECTIVES, ...NGX3JS_COMPONENTS],
+	exports: [...N3JS_PIPES, ...N3JS_DIRECTIVES, ...N3JS_COMPONENTS],
 	providers: [LocalStorageService],
 })
 export class Ngx3JsModule {}

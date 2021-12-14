@@ -3,7 +3,7 @@ import { CurvesNormal, CurveUtils } from '../../curve/curveUtils';
 import {
 	I3JS,
 	RendererTimer,
-	THREE,
+	N3JS,
 	ThreeColor,
 	ThreeUtil,
 } from '../../interface';
@@ -562,34 +562,34 @@ export class ControllerItemComponent
 					break;
 			}
 			if (this.visible) {
-				this._helper = new THREE.Mesh(
-					new THREE.TubeGeometry(
+				this._helper = new N3JS.Mesh(
+					new N3JS.TubeGeometry(
 						this._curve,
 						ThreeUtil.getTypeSafe(this.tubularSegments, 64),
 						ThreeUtil.getTypeSafe(this.tubeRadius, 0.01),
 						ThreeUtil.getTypeSafe(this.tubeRadiusSegments, 8),
 						ThreeUtil.getTypeSafe(this.closed, false)
 					),
-					new THREE.MeshBasicMaterial({
+					new N3JS.MeshBasicMaterial({
 						color: ThreeUtil.getColorSafe(this.color, 0xff0000),
 						opacity: ThreeUtil.getTypeSafe(this.opacity, 0.2),
 						depthTest: true,
 						transparent: true,
-						side: THREE.DoubleSide,
+						side: N3JS.DoubleSide,
 					} as any)
 				);
-				this._helperPoint = new THREE.Mesh(
-					new THREE.SphereGeometry(
+				this._helperPoint = new N3JS.Mesh(
+					new N3JS.SphereGeometry(
 						ThreeUtil.getTypeSafe(this.tubeRadius, 0.01) * 10,
 						ThreeUtil.getTypeSafe(this.tubeRadiusSegments, 8),
 						ThreeUtil.getTypeSafe(this.tubeRadiusSegments, 4)
 					),
-					new THREE.MeshBasicMaterial({
+					new N3JS.MeshBasicMaterial({
 						color: ThreeUtil.getColorSafe(this.color, 0x0000ff),
 						opacity: ThreeUtil.getTypeSafe(this.opacity, 0.7),
 						depthTest: true,
 						transparent: true,
-						side: THREE.DoubleSide,
+						side: N3JS.DoubleSide,
 					} as any)
 				);
 				this._helperPoint.visible = false;
@@ -699,7 +699,7 @@ export class ControllerItemComponent
 	/**
 	 * Tmp color of controller item component
 	 */
-	private _tmpColor: I3JS.IColor = new THREE.Color();
+	private _tmpColor: I3JS.IColor = new N3JS.Color();
 
 	/**
 	 * Gets lerp float
@@ -743,7 +743,7 @@ export class ControllerItemComponent
 							if (this._lastLookAt === null) {
 								this._lastLookAt = this._curve.getPointV3(
 									itemTimer,
-									new THREE.Vector3()
+									new N3JS.Vector3()
 								);
 							} else {
 								this._curve.getPointV3(itemTimer, this._lastLookAt);
@@ -785,7 +785,7 @@ export class ControllerItemComponent
 						if (this._lastLookAt === null) {
 							this._lastLookAt = this._curve.getPointV3(
 								itemTimer,
-								new THREE.Vector3()
+								new N3JS.Vector3()
 							);
 						} else {
 							this._curve.getPointV3(itemTimer, this._lastLookAt);
@@ -809,12 +809,12 @@ export class ControllerItemComponent
 						) {
 							let scale: number = 1;
 							const oldValue = material[this.material];
-							if (oldValue instanceof THREE.Color) {
+							if (oldValue instanceof N3JS.Color) {
 								this._curve.getPointColor(itemTimer, this._tmpColor);
 								this.updateColor(oldValue, this._tmpColor);
-							} else if (oldValue instanceof THREE.Vector2) {
+							} else if (oldValue instanceof N3JS.Vector2) {
 								this._curve.getPointV2(itemTimer, oldValue);
-							} else if (oldValue instanceof THREE.Vector3) {
+							} else if (oldValue instanceof N3JS.Vector3) {
 								this._curve.getPointV3(itemTimer, oldValue);
 							} else if (typeof oldValue === 'number') {
 								switch (this.material.toLowerCase()) {
@@ -852,7 +852,7 @@ export class ControllerItemComponent
 							switch (this.valueType.toLowerCase()) {
 								case 'copyposition':
 									if (
-										oldValue instanceof THREE.Vector3 &&
+										oldValue instanceof N3JS.Vector3 &&
 										ThreeUtil.isNotNull(this.refValue)
 									) {
 										oldValue.copy(ThreeUtil.getPosition(this.refValue));
@@ -878,11 +878,11 @@ export class ControllerItemComponent
 									);
 									break;
 								default:
-									if (oldValue instanceof THREE.Color) {
+									if (oldValue instanceof N3JS.Color) {
 										this._curve.getPointColor(itemTimer, oldValue);
-									} else if (oldValue instanceof THREE.Vector2) {
+									} else if (oldValue instanceof N3JS.Vector2) {
 										this._curve.getPointV2(itemTimer, oldValue);
-									} else if (oldValue instanceof THREE.Vector3) {
+									} else if (oldValue instanceof N3JS.Vector3) {
 										this._curve.getPointV3(itemTimer, oldValue);
 									} else if (typeof oldValue === 'number') {
 										switch (this.uniform.toLowerCase()) {

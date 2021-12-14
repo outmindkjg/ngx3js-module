@@ -1,11 +1,4 @@
-import {
-	AfterViewInit,
-	Component,
-	Inject,
-	Injectable,
-	Input,
-	OnInit,
-} from '@angular/core';
+import { AfterViewInit, Component, Inject, Injectable, Input, OnInit } from '@angular/core';
 import * as Ammo from './threejs-library/ammo-type';
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
@@ -15,8 +8,8 @@ import { RendererComponent } from './renderer/renderer.component';
 import { SceneComponent } from './scene/scene.component';
 import { GUI } from './threejs-library/lil-gui';
 import * as I3JS from './threejs-library/three-interface';
-import * as THREE from './threejs-library/three-core';
-export { I3JS, THREE };
+import * as N3JS from './threejs-library/three-core';
+export { I3JS, N3JS };
 
 /**
  * Apply matrix4
@@ -194,9 +187,7 @@ export interface StorageExportOption {
 /**
  * ThreeUniform
  */
-export type ThreeUniform =
-	| { type: string; value: any; options?: any }
-	| I3JS.IUniform;
+export type ThreeUniform = { type: string; value: any; options?: any } | I3JS.IUniform;
 
 /**
  * ThreeUniforms
@@ -657,15 +648,8 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	 * Sets controls params
 	 * @param [controlsParams]
 	 */
-	public setControlsParams(
-		controlsParams: GuiControlParam[] = [],
-		addBaseParam: boolean = true
-	) {
-		this.controlsParams = ThreeUtil.getControlsParams(
-			controlsParams,
-			this,
-			addBaseParam
-		);
+	public setControlsParams(controlsParams: GuiControlParam[] = [], addBaseParam: boolean = true) {
+		this.controlsParams = ThreeUtil.getControlsParams(controlsParams, this, addBaseParam);
 	}
 
 	/**
@@ -691,12 +675,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	 * @param [parent]
 	 * @param [reDraw]
 	 */
-	protected replaceControlsValue(
-		newValue: any,
-		key: string,
-		parent: any = null,
-		reDraw: boolean = true
-	) {
+	protected replaceControlsValue(newValue: any, key: string, parent: any = null, reDraw: boolean = true) {
 		if (parent === null) {
 			parent = this.controls;
 		}
@@ -748,11 +727,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 	 * @param object
 	 * @param [repeat]
 	 */
-	protected consoleLogTime(
-		key: string,
-		object: any,
-		repeat: number = 300
-	): void {
+	protected consoleLogTime(key: string, object: any, repeat: number = 300): void {
 		this._logTimeSeqn++;
 		if (this._logTimeSeqn % repeat === 0) {
 			this.consoleLog(key, object, 'info');
@@ -925,10 +900,7 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 			}
 			if (this.controls.meshScale !== undefined) {
 				if (this.controls.meshScale.x !== 1) {
-					const controlsParams = ThreeUtil.getGuiControlParam(
-						this.controlsParams,
-						'Mesh Scale'
-					);
+					const controlsParams = ThreeUtil.getGuiControlParam(this.controlsParams, 'Mesh Scale');
 					const minScale = this.controls.meshScale.x * 0.01;
 					const maxScale = this.controls.meshScale.x * 1.5;
 					const stepScale = (maxScale - minScale) / 30;
@@ -946,23 +918,14 @@ export abstract class BaseComponent<T> implements OnInit, AfterViewInit {
 					});
 				}
 			}
-			const controlsParams = ThreeUtil.getGuiControlParam(
-				this.controlsParams,
-				'Mesh Visible'
-			);
-			if (
-				ThreeUtil.isNotNull(controlsParams) &&
-				ThreeUtil.isNotNull(this.controls.meshShape)
-			) {
+			const controlsParams = ThreeUtil.getGuiControlParam(this.controlsParams, 'Mesh Visible');
+			if (ThreeUtil.isNotNull(controlsParams) && ThreeUtil.isNotNull(this.controls.meshShape)) {
 				this.controls.meshShape.visible = this.mesh.getObject3d().visible;
-				const helperParams = ThreeUtil.getGuiControlParam(
-					controlsParams.children,
-					'helperVisible'
-				);
+				const helperParams = ThreeUtil.getGuiControlParam(controlsParams.children, 'helperVisible');
 				const helper = this.mesh.helperComponent;
 				if (helperParams && helperParams.controller) {
 					if (ThreeUtil.isNotNull(helper)) {
-						if (helper instanceof THREE.SkeletonHelper) {
+						if (helper instanceof N3JS.SkeletonHelper) {
 							helperParams.controller.name('Skeleton');
 						} else {
 							helperParams.controller.name('Helper');
@@ -1020,11 +983,7 @@ export class ThreeUtil {
 	 * @param [indoc]
 	 * @returns true if inject
 	 */
-	public static cssInject(
-		cssContent: string,
-		id?: string,
-		indoc?: any
-	): boolean {
+	public static cssInject(cssContent: string, id?: string, indoc?: any): boolean {
 		const doc: Document = indoc || document;
 		let cssParent: HTMLElement = doc.getElementsByTagName('head')[0];
 		if (cssParent === null || cssParent == undefined) {
@@ -1127,11 +1086,7 @@ export class ThreeUtil {
 	 * @param [isActive]
 	 * @returns true if css style
 	 */
-	public static toggleCssStyle(
-		ele: HTMLElement,
-		clazzName?: string,
-		isActive?: boolean
-	): boolean {
+	public static toggleCssStyle(ele: HTMLElement, clazzName?: string, isActive?: boolean): boolean {
 		if (this.isNotNull(clazzName)) {
 			if (!isActive) {
 				if (ele.classList.contains(clazzName)) {
@@ -1300,27 +1255,17 @@ export class ThreeUtil {
 						if (typeof value == 'number' || typeof value == 'string') {
 							if (
 								typeof value == 'string' &&
-								(value.indexOf('rgba') > -1 ||
-									value.indexOf('rgb') > -1 ||
-									value.indexOf('#') > -1)
+								(value.indexOf('rgba') > -1 || value.indexOf('rgb') > -1 || value.indexOf('#') > -1)
 							) {
 								styleList[key] = value;
 							} else {
 								styleList[key] = this.getColorSafe(value).getStyle();
 							}
-						} else if (value instanceof THREE.Color) {
+						} else if (value instanceof N3JS.Color) {
 							styleList[key] = value.getStyle();
-						} else if (value instanceof THREE.Vector4) {
+						} else if (value instanceof N3JS.Vector4) {
 							styleList[key] =
-								'rgba(' +
-								value.x * 255 +
-								',' +
-								value.y * 255 +
-								',' +
-								value.z * 255 +
-								',' +
-								value.w +
-								')';
+								'rgba(' + value.x * 255 + ',' + value.y * 255 + ',' + value.z * 255 + ',' + value.w + ')';
 						}
 						break;
 					case 'transform':
@@ -1426,12 +1371,7 @@ export class ThreeUtil {
 					cssStyleList.push(this.camelCaseToDash(key) + ': ' + value);
 				});
 				this.cssInject(
-					'.' +
-						clazzName +
-						(vertualClass ? ':' + vertualClass : '') +
-						'{' +
-						cssStyleList.join(';') +
-						'}',
+					'.' + clazzName + (vertualClass ? ':' + vertualClass : '') + '{' + cssStyleList.join(';') + '}',
 					clazzName
 				);
 				if (!ele.classList.contains(clazzName)) {
@@ -1496,7 +1436,7 @@ export class ThreeUtil {
 	 * @returns pmrem generator
 	 */
 	public static getPmremGenerator(): I3JS.IPMREMGenerator {
-		return new THREE.PMREMGenerator(this.getRenderer() as I3JS.IWebGLRenderer);
+		return new N3JS.PMREMGenerator(this.getRenderer() as I3JS.IWebGLRenderer);
 	}
 
 	/**
@@ -1507,7 +1447,7 @@ export class ThreeUtil {
 		if (this.lastRenderer !== null) {
 			return this.lastRenderer.getRenderer();
 		} else {
-			return new THREE.WebGLRenderer();
+			return new N3JS.WebGLRenderer();
 		}
 	}
 
@@ -1519,7 +1459,7 @@ export class ThreeUtil {
 		if (this.lastRenderer !== null) {
 			return this.lastRenderer.getSize();
 		} else {
-			return new THREE.Vector2(1024, 1024);
+			return new N3JS.Vector2(1024, 1024);
 		}
 	}
 
@@ -1634,11 +1574,7 @@ export class ThreeUtil {
 	 * @param [addedFindMe]
 	 * @returns true if only index of
 	 */
-	public static isOnlyIndexOf<T>(
-		data: T[],
-		findMe: T[],
-		addedFindMe?: T[]
-	): boolean {
+	public static isOnlyIndexOf<T>(data: T[], findMe: T[], addedFindMe?: T[]): boolean {
 		if (data.length === 0) {
 			return true;
 		} else {
@@ -1718,15 +1654,7 @@ export class ThreeUtil {
 	 * @param total
 	 */
 	public static setLoadingProcess(url: string, loaded: number, total: number) {
-		console.log(
-			'Loaded %c%d%c/%d => %c%s',
-			'font-weight:bold',
-			loaded,
-			'',
-			total,
-			'font-style:italic',
-			url
-		);
+		console.log('Loaded %c%d%c/%d => %c%s', 'font-weight:bold', loaded, '', total, 'font-style:italic', url);
 	}
 
 	/**
@@ -1740,7 +1668,7 @@ export class ThreeUtil {
 	 */
 	public static getLoadingManager(): I3JS.ILoadingManager {
 		if (this._manager === null) {
-			this._manager = new THREE.LoadingManager(
+			this._manager = new N3JS.LoadingManager(
 				() => {},
 				(url: string, loaded: number, total: number) => {
 					this.setLoadingProcess(url, loaded, total);
@@ -1749,7 +1677,7 @@ export class ThreeUtil {
 					console.error(url);
 				}
 			) as any;
-			this._manager.addHandler(/\.dds$/i, new THREE.DDSLoader());
+			this._manager.addHandler(/\.dds$/i, new N3JS.DDSLoader());
 		}
 		return this._manager;
 	}
@@ -1769,15 +1697,11 @@ export class ThreeUtil {
 			const key = attr.name;
 			const value = attr.value;
 			if (this.isNotNull(value)) {
-				if (value instanceof THREE.Color) {
-					tags.push(
-						preTab + '\t[' + key + ']="\'#' + value.getHexString() + '\'"'
-					);
+				if (value instanceof N3JS.Color) {
+					tags.push(preTab + '\t[' + key + ']="\'#' + value.getHexString() + '\'"');
 				} else if (typeof value == 'number') {
 					if (Math.round(value) !== value) {
-						tags.push(
-							preTab + '\t[' + key + ']="' + parseFloat(value.toFixed(4)) + '"'
-						);
+						tags.push(preTab + '\t[' + key + ']="' + parseFloat(value.toFixed(4)) + '"');
 					} else {
 						tags.push(preTab + '\t[' + key + ']="' + value + '"');
 					}
@@ -1789,9 +1713,7 @@ export class ThreeUtil {
 		tags.push(preTab + '>');
 		if (info.children && info.children.length > 0) {
 			info.children.forEach((child) => {
-				tags.push(
-					this.getHtmlCode(child.getTagAttribute(info.options), preTab + '\t')
-				);
+				tags.push(this.getHtmlCode(child.getTagAttribute(info.options), preTab + '\t'));
 			});
 		}
 		tags.push(preTab + '</' + tag + '>');
@@ -1803,24 +1725,18 @@ export class ThreeUtil {
 	 * @param color
 	 * @returns color
 	 */
-	public static getColor(
-		color: ThreeColor | { r: number; g: number; b: number }
-	): I3JS.IColor {
+	public static getColor(color: ThreeColor | { r: number; g: number; b: number }): I3JS.IColor {
 		if (this.isNotNull(color)) {
-			if (color instanceof THREE.Color) {
+			if (color instanceof N3JS.Color) {
 				return color;
 			} else if (typeof color === 'string') {
 				return this.getColorSafe(color, null);
 			} else if (typeof color === 'object') {
-				if (
-					this.isNotNull(color.r) &&
-					this.isNotNull(color.g) &&
-					this.isNotNull(color.b)
-				) {
-					return new THREE.Color(color.r, color.g, color.b);
+				if (this.isNotNull(color.r) && this.isNotNull(color.g) && this.isNotNull(color.b)) {
+					return new N3JS.Color(color.r, color.g, color.b);
 				}
 			} else {
-				return new THREE.Color(color);
+				return new N3JS.Color(color);
 			}
 		}
 		return undefined;
@@ -1834,15 +1750,8 @@ export class ThreeUtil {
 	 * @param [color]
 	 * @returns color rgb
 	 */
-	public static getColorRGB(
-		r: number,
-		g: number,
-		b: number,
-		color?: ThreeColor
-	): I3JS.IColor {
-		const colorObj = this.isNotNull(color)
-			? this.getColor(color)
-			: new THREE.Color(0x000000);
+	public static getColorRGB(r: number, g: number, b: number, color?: ThreeColor): I3JS.IColor {
+		const colorObj = this.isNotNull(color) ? this.getColor(color) : new N3JS.Color(0x000000);
 		if (this.isNotNull(colorObj)) {
 			return colorObj.setRGB(
 				this.isNotNull(r) ? r : colorObj.r,
@@ -1861,15 +1770,8 @@ export class ThreeUtil {
 	 * @param [color]
 	 * @returns color hsl
 	 */
-	public static getColorHSL(
-		h?: number,
-		s?: number,
-		l?: number,
-		color?: ThreeColor
-	): I3JS.IColor {
-		const colorObj = this.isNotNull(color)
-			? this.getColor(color)
-			: new THREE.Color(0x000000);
+	public static getColorHSL(h?: number, s?: number, l?: number, color?: ThreeColor): I3JS.IColor {
+		const colorObj = this.isNotNull(color) ? this.getColor(color) : new N3JS.Color(0x000000);
 		if (this.isNotNull(colorObj)) {
 			const hsl = colorObj.getHSL({ h: 0, s: 0, l: 0 });
 			return colorObj.setHSL(
@@ -1927,11 +1829,7 @@ export class ThreeUtil {
 	 * @param [multiply]
 	 * @returns color multiply safe
 	 */
-	public static getColorMultiplySafe(
-		color: ThreeColor,
-		altColor?: ThreeColor,
-		multiply?: number
-	): I3JS.IColor {
+	public static getColorMultiplySafe(color: ThreeColor, altColor?: ThreeColor, multiply?: number): I3JS.IColor {
 		const safeColor = this.getColorSafe(color, altColor);
 		if (this.isNotNull(safeColor) && this.isNotNull(multiply)) {
 			safeColor.multiplyScalar(multiply);
@@ -1972,7 +1870,7 @@ export class ThreeUtil {
 	 * @returns true if not null
 	 */
 	public static isColor(color: any): boolean {
-		if (color instanceof THREE.Color || typeof color === 'number') {
+		if (color instanceof N3JS.Color || typeof color === 'number') {
 			return true;
 		} else if (
 			typeof color === 'string' &&
@@ -2000,27 +1898,19 @@ export class ThreeUtil {
 	 * @param [nullColor]
 	 * @returns color safe
 	 */
-	public static getColorSafe(
-		color: ThreeColor,
-		altColor?: ThreeColor,
-		nullColor?: ThreeColor
-	): I3JS.IColor {
-		const defColor = this.isNotNull(color)
-			? color
-			: this.isNotNull(altColor)
-			? altColor
-			: nullColor;
+	public static getColorSafe(color: ThreeColor, altColor?: ThreeColor, nullColor?: ThreeColor): I3JS.IColor {
+		const defColor = this.isNotNull(color) ? color : this.isNotNull(altColor) ? altColor : nullColor;
 		if (this.isNotNull(defColor)) {
-			if (defColor instanceof THREE.Color) {
+			if (defColor instanceof N3JS.Color) {
 				return defColor;
 			} else if (typeof defColor === 'string') {
 				const colorStr: string = defColor;
 				if (colorStr.startsWith('#')) {
-					return new THREE.Color(colorStr);
+					return new N3JS.Color(colorStr);
 				} else if (colorStr === 'random') {
-					return new THREE.Color(Math.random() * 0xffffff);
+					return new N3JS.Color(Math.random() * 0xffffff);
 				} else if (colorStr.startsWith('0x')) {
-					return new THREE.Color(parseInt(colorStr, 16));
+					return new N3JS.Color(parseInt(colorStr, 16));
 				} else if (colorStr.indexOf(':') > 0 || colorStr.indexOf('(') > 0) {
 					let [type, val1, val2, val3] = (colorStr + ',,,')
 						.replace('(', ',')
@@ -2033,16 +1923,16 @@ export class ThreeUtil {
 							const h = this.getParseFloat(val1, 1);
 							const s = this.getParseFloat(val2, 1);
 							const l = this.getParseFloat(val3, 1);
-							const tmp = new THREE.Color().setHSL(h, s, l);
+							const tmp = new N3JS.Color().setHSL(h, s, l);
 							return tmp;
 						case 'rgb':
 							const r = this.getParseFloat(val1, 255);
 							const g = this.getParseFloat(val2, 255);
 							const b = this.getParseFloat(val3, 255);
-							return new THREE.Color(r / 255, g / 255, b / 255);
+							return new N3JS.Color(r / 255, g / 255, b / 255);
 						case 'color':
 						case 'rgbf':
-							return new THREE.Color(
+							return new N3JS.Color(
 								this.getParseFloat(val1, 1),
 								this.getParseFloat(val2, 1),
 								this.getParseFloat(val3, 1)
@@ -2050,7 +1940,7 @@ export class ThreeUtil {
 					}
 				}
 			}
-			return new THREE.Color(defColor);
+			return new N3JS.Color(defColor);
 		}
 		return undefined;
 	}
@@ -2070,12 +1960,12 @@ export class ThreeUtil {
 		const defColor = this.getColorSafe(color, altColor);
 		if (this.isNotNull(defColor)) {
 			if (this.isNotNull(alpha) && alpha >= 0 && alpha <= 1) {
-				return new THREE.Vector4(defColor.r, defColor.g, defColor.b, alpha);
+				return new N3JS.Vector4(defColor.r, defColor.g, defColor.b, alpha);
 			} else {
 				return defColor;
 			}
 		} else if (this.isNotNull(alpha) && alpha >= 0 && alpha <= 1) {
-			return new THREE.Vector4(0, 0, 0, alpha);
+			return new N3JS.Vector4(0, 0, 0, alpha);
 		}
 		return undefined;
 	}
@@ -2127,10 +2017,7 @@ export class ThreeUtil {
 	 * @param [altangle]
 	 * @returns angle safe
 	 */
-	public static getAngleSafe(
-		angle: number | string,
-		altangle?: number
-	): number {
+	public static getAngleSafe(angle: number | string, altangle?: number): number {
 		const defValue = this.getTypeSafe(angle, altangle);
 		if (this.isNotNull(defValue)) {
 			if (typeof angle === 'string') {
@@ -2148,10 +2035,7 @@ export class ThreeUtil {
 	 * @param [altbl]
 	 * @returns true if boolean safe
 	 */
-	public static getBooleanSafe(
-		bl: string | number | boolean,
-		altbl?: string | number | boolean
-	): boolean {
+	public static getBooleanSafe(bl: string | number | boolean, altbl?: string | number | boolean): boolean {
 		const defValue = this.getTypeSafe(bl, altbl);
 		if (typeof defValue === 'boolean') {
 			return defValue;
@@ -2217,11 +2101,8 @@ export class ThreeUtil {
 	 * @param [altValue]
 	 * @returns vector2 vsafe
 	 */
-	public static getVector2VSafe(
-		v2: number[] | I3JS.IVector2,
-		altValue?: I3JS.IVector2
-	): I3JS.IVector2 {
-		if (v2 instanceof THREE.Vector2) {
+	public static getVector2VSafe(v2: number[] | I3JS.IVector2, altValue?: I3JS.IVector2): I3JS.IVector2 {
+		if (v2 instanceof N3JS.Vector2) {
 			return v2;
 		} else if (Array.isArray(v2) && this.isNotNull(v2) && v2.length >= 2) {
 			return this.getVector2Safe(v2[0], v2[1], altValue);
@@ -2246,9 +2127,7 @@ export class ThreeUtil {
 		isRequired?: boolean
 	): I3JS.IVector2 {
 		const defValue =
-			this.isNotNull(x) || this.isNotNull(y)
-				? new THREE.Vector2(this.getTypeSafe(x, y), this.getTypeSafe(y, x))
-				: null;
+			this.isNotNull(x) || this.isNotNull(y) ? new N3JS.Vector2(this.getTypeSafe(x, y), this.getTypeSafe(y, x)) : null;
 		if (this.isNotNull(defValue)) {
 			return defValue;
 		}
@@ -2259,7 +2138,7 @@ export class ThreeUtil {
 			return altValue;
 		}
 		if (isRequired) {
-			return new THREE.Vector2();
+			return new N3JS.Vector2();
 		}
 		return undefined;
 	}
@@ -2270,11 +2149,8 @@ export class ThreeUtil {
 	 * @param [altValue]
 	 * @returns vector3 vsafe
 	 */
-	public static getVector3VSafe(
-		v3: number[] | I3JS.IVector3,
-		altValue?: I3JS.IVector3
-	): I3JS.IVector3 {
-		if (v3 instanceof THREE.Vector3) {
+	public static getVector3VSafe(v3: number[] | I3JS.IVector3, altValue?: I3JS.IVector3): I3JS.IVector3 {
+		if (v3 instanceof N3JS.Vector3) {
 			return v3;
 		} else if (Array.isArray(v3) && this.isNotNull(v3) && v3.length >= 3) {
 			return this.getVector3Safe(v3[0], v3[1], v3[2], altValue);
@@ -2302,11 +2178,7 @@ export class ThreeUtil {
 	): I3JS.IVector3 {
 		const defValue =
 			this.isNotNull(x) || this.isNotNull(y) || this.isNotNull(z)
-				? new THREE.Vector3(
-						this.getTypeSafe(x, y, z),
-						this.getTypeSafe(y, z, x),
-						this.getTypeSafe(z, x, y)
-				  )
+				? new N3JS.Vector3(this.getTypeSafe(x, y, z), this.getTypeSafe(y, z, x), this.getTypeSafe(z, x, y))
 				: null;
 		if (this.isNotNull(defValue)) {
 			return defValue;
@@ -2318,7 +2190,7 @@ export class ThreeUtil {
 			return altValue;
 		}
 		if (isRequired) {
-			return new THREE.Vector3();
+			return new N3JS.Vector3();
 		}
 		return undefined;
 	}
@@ -2329,16 +2201,13 @@ export class ThreeUtil {
 	 * @param [matrixType]
 	 * @returns matrix4 safe
 	 */
-	public static getMatrix4Safe(
-		obj: I3JS.IObject3D,
-		matrixType: string = 'maxtix'
-	): I3JS.IMatrix4 {
+	public static getMatrix4Safe(obj: I3JS.IObject3D, matrixType: string = 'maxtix'): I3JS.IMatrix4 {
 		if (this.isNotNull(obj)) {
 			const anyObj: any = obj;
 			switch (matrixType.toLowerCase()) {
 				case 'projectionmatrixinverse':
 					if (this.isNotNull(anyObj['projectionMatrixInverse'])) {
-						return new THREE.Matrix4().copy(anyObj['projectionMatrixInverse']);
+						return new N3JS.Matrix4().copy(anyObj['projectionMatrixInverse']);
 					}
 					break;
 				case 'projectionmatrix':
@@ -2358,7 +2227,7 @@ export class ThreeUtil {
 					return obj.matrix;
 			}
 		}
-		return new THREE.Matrix4();
+		return new N3JS.Matrix4();
 	}
 
 	/**
@@ -2380,7 +2249,7 @@ export class ThreeUtil {
 	): I3JS.IEuler {
 		const defValue =
 			this.isNotNull(x) || this.isNotNull(y) || this.isNotNull(z)
-				? new THREE.Euler(
+				? new N3JS.Euler(
 						this.getAngleSafe(this.getTypeSafe(x, y, z), 0),
 						this.getAngleSafe(this.getTypeSafe(y, x, z), 0),
 						this.getAngleSafe(this.getTypeSafe(z, x, y), 0)
@@ -2390,7 +2259,7 @@ export class ThreeUtil {
 			return defValue;
 		}
 		if (isRequired) {
-			return new THREE.Euler(0, 0, 0);
+			return new N3JS.Euler(0, 0, 0);
 		}
 		return undefined;
 	}
@@ -2410,23 +2279,19 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns wrapping safe
 	 */
-	public static getWrappingSafe(
-		baseWrap: string,
-		altWrap?: string,
-		def?: string
-	): I3JS.TWrapping {
+	public static getWrappingSafe(baseWrap: string, altWrap?: string, def?: string): I3JS.TWrapping {
 		const wrap = this.getTypeSafe(baseWrap, altWrap, def || '');
 		switch (wrap.toLowerCase()) {
 			case 'wraprepeat':
 			case 'repeatwrapping':
 			case 'repeat':
-				return THREE.RepeatWrapping;
+				return N3JS.RepeatWrapping;
 			case 'mirroredrepeatwrapping':
 			case 'mirroredrepeat':
-				return THREE.MirroredRepeatWrapping;
+				return N3JS.MirroredRepeatWrapping;
 			case 'clamptoedgewrapping':
 			case 'clamptoedge':
-				return THREE.ClampToEdgeWrapping;
+				return N3JS.ClampToEdgeWrapping;
 			default:
 				return undefined;
 		}
@@ -2450,31 +2315,27 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns texture filter safe
 	 */
-	public static getTextureFilterSafe(
-		baseFilter: string,
-		altFilter?: string,
-		def?: string
-	): I3JS.TTextureFilter {
+	public static getTextureFilterSafe(baseFilter: string, altFilter?: string, def?: string): I3JS.TTextureFilter {
 		const filter = this.getTypeSafe(baseFilter, altFilter, def || '');
 		switch (filter.toLowerCase()) {
 			case 'nearestfilter':
 			case 'nearest':
-				return THREE.NearestFilter;
+				return N3JS.NearestFilter;
 			case 'nearestmipmapnearestfilter':
 			case 'nearestmipmapnearest':
-				return THREE.NearestMipmapNearestFilter;
+				return N3JS.NearestMipmapNearestFilter;
 			case 'nearestmipmaplinearfilter':
 			case 'nearestmipmaplinear':
-				return THREE.NearestMipmapLinearFilter;
+				return N3JS.NearestMipmapLinearFilter;
 			case 'linearmipmapnearestfilter':
 			case 'linearmipmapnearest':
-				return THREE.LinearMipmapNearestFilter;
+				return N3JS.LinearMipmapNearestFilter;
 			case 'linearmipmaplinearfilter':
 			case 'linearmipmaplinear':
-				return THREE.LinearMipmapLinearFilter;
+				return N3JS.LinearMipmapLinearFilter;
 			case 'linearfilter':
 			case 'linear':
-				return THREE.LinearFilter;
+				return N3JS.LinearFilter;
 			default:
 				return undefined;
 		}
@@ -2493,22 +2354,18 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns side
 	 */
-	public static getSideSafe(
-		baseSide: string,
-		altSide?: string,
-		def?: string
-	): I3JS.TSide {
+	public static getSideSafe(baseSide: string, altSide?: string, def?: string): I3JS.TSide {
 		const side = this.getTypeSafe(baseSide, altSide, def || '');
 		switch (side.toLowerCase()) {
 			case 'backside':
 			case 'back':
-				return THREE.BackSide;
+				return N3JS.BackSide;
 			case 'doubleside':
 			case 'double':
-				return THREE.DoubleSide;
+				return N3JS.DoubleSide;
 			case 'frontside':
 			case 'front':
-				return THREE.FrontSide;
+				return N3JS.FrontSide;
 		}
 		return undefined;
 	}
@@ -2518,25 +2375,22 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns shadow map type
 	 */
-	public static getShadowMapTypeSafe(
-		baseShadowMapType: string,
-		def?: string
-	): I3JS.TShadowMapType {
+	public static getShadowMapTypeSafe(baseShadowMapType: string, def?: string): I3JS.TShadowMapType {
 		const shadowMapType = this.getTypeSafe(baseShadowMapType, def, '');
 		switch (shadowMapType.toLowerCase()) {
 			case 'basicshadowmap':
 			case 'basic':
-				return THREE.BasicShadowMap;
+				return N3JS.BasicShadowMap;
 			case 'pcfshadowmap':
 			case 'pcf':
-				return THREE.PCFShadowMap;
+				return N3JS.PCFShadowMap;
 			case 'vsmshadowmap':
 			case 'vsm':
-				return THREE.VSMShadowMap;
+				return N3JS.VSMShadowMap;
 			case 'pcfsoftshadowmap':
 			case 'pcfsoft':
 			default:
-				return THREE.PCFSoftShadowMap;
+				return N3JS.PCFSoftShadowMap;
 		}
 	}
 
@@ -2545,21 +2399,18 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns interpolation
 	 */
-	public static getInterpolationSafe(
-		baseInterpolation: string,
-		def?: string
-	): I3JS.TInterpolationModes {
+	public static getInterpolationSafe(baseInterpolation: string, def?: string): I3JS.TInterpolationModes {
 		const interpolation = this.getTypeSafe(baseInterpolation, def, '');
 		switch (interpolation.toLowerCase()) {
 			case 'interpolatediscrete':
 			case 'discrete':
-				return THREE.InterpolateDiscrete;
+				return N3JS.InterpolateDiscrete;
 			case 'interpolatelinear':
 			case 'linear':
-				return THREE.InterpolateLinear;
+				return N3JS.InterpolateLinear;
 			case 'interpolatesmooth':
 			case 'smooth':
-				return THREE.InterpolateSmooth;
+				return N3JS.InterpolateSmooth;
 			default:
 				return undefined;
 		}
@@ -2570,16 +2421,13 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns normal map type
 	 */
-	public static getNormalMapTypeSafe(
-		baseNormalMapType: string,
-		def?: string
-	): I3JS.TNormalMapTypes {
+	public static getNormalMapTypeSafe(baseNormalMapType: string, def?: string): I3JS.TNormalMapTypes {
 		const normalMapType = ThreeUtil.getTypeSafe(baseNormalMapType, def, '');
 		switch (normalMapType.toLowerCase()) {
 			case 'tangentspace':
-				return THREE.TangentSpaceNormalMap;
+				return N3JS.TangentSpaceNormalMap;
 			case 'objectspace':
-				return THREE.ObjectSpaceNormalMap;
+				return N3JS.ObjectSpaceNormalMap;
 		}
 		return undefined;
 	}
@@ -2588,28 +2436,25 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns stencil func
 	 */
-	public static getStencilFuncSafe(
-		baseStencilFunc: string,
-		def?: string
-	): I3JS.TStencilFunc {
+	public static getStencilFuncSafe(baseStencilFunc: string, def?: string): I3JS.TStencilFunc {
 		const stencilFunc = ThreeUtil.getTypeSafe(baseStencilFunc, def, '');
 		switch (stencilFunc.toLowerCase()) {
 			case 'never':
-				return THREE.NeverStencilFunc;
+				return N3JS.NeverStencilFunc;
 			case 'less':
-				return THREE.LessStencilFunc;
+				return N3JS.LessStencilFunc;
 			case 'equal':
-				return THREE.EqualStencilFunc;
+				return N3JS.EqualStencilFunc;
 			case 'lessequal':
-				return THREE.LessEqualStencilFunc;
+				return N3JS.LessEqualStencilFunc;
 			case 'greater':
-				return THREE.GreaterStencilFunc;
+				return N3JS.GreaterStencilFunc;
 			case 'notequal':
-				return THREE.NotEqualStencilFunc;
+				return N3JS.NotEqualStencilFunc;
 			case 'greaterequal':
-				return THREE.GreaterEqualStencilFunc;
+				return N3JS.GreaterEqualStencilFunc;
 			case 'always':
-				return THREE.AlwaysStencilFunc;
+				return N3JS.AlwaysStencilFunc;
 		}
 		return undefined;
 	}
@@ -2619,28 +2464,25 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns stencil fail
 	 */
-	public static getStencilOpSafe(
-		baseStencilFail: string,
-		def?: string
-	): I3JS.TStencilOp {
+	public static getStencilOpSafe(baseStencilFail: string, def?: string): I3JS.TStencilOp {
 		const stencilFail = this.getTypeSafe(baseStencilFail, def, '');
 		switch (stencilFail.toLowerCase()) {
 			case 'zero':
-				return THREE.ZeroStencilOp;
+				return N3JS.ZeroStencilOp;
 			case 'keep':
-				return THREE.KeepStencilOp;
+				return N3JS.KeepStencilOp;
 			case 'replace':
-				return THREE.ReplaceStencilOp;
+				return N3JS.ReplaceStencilOp;
 			case 'increment':
-				return THREE.IncrementStencilOp;
+				return N3JS.IncrementStencilOp;
 			case 'decrement':
-				return THREE.DecrementStencilOp;
+				return N3JS.DecrementStencilOp;
 			case 'incrementwrap':
-				return THREE.IncrementWrapStencilOp;
+				return N3JS.IncrementWrapStencilOp;
 			case 'decrementwrap':
-				return THREE.DecrementWrapStencilOp;
+				return N3JS.DecrementWrapStencilOp;
 			case 'invert':
-				return THREE.InvertStencilOp;
+				return N3JS.InvertStencilOp;
 		}
 		return undefined;
 	}
@@ -2664,31 +2506,27 @@ export class ThreeUtil {
 	 * @see THREE.CustomBlending - CustomBlending, Custom
 	 *
 	 */
-	public static getBlendingSafe(
-		baseBlending: string,
-		altBlending?: string,
-		def?: string
-	): I3JS.TBlending {
+	public static getBlendingSafe(baseBlending: string, altBlending?: string, def?: string): I3JS.TBlending {
 		const blending = this.getTypeSafe(baseBlending, altBlending, def || '');
 		switch (blending.toLowerCase()) {
 			case 'noblending':
 			case 'no':
-				return THREE.NoBlending;
+				return N3JS.NoBlending;
 			case 'normalblending':
 			case 'normal':
-				return THREE.NormalBlending;
+				return N3JS.NormalBlending;
 			case 'additiveblending':
 			case 'additive':
-				return THREE.AdditiveBlending;
+				return N3JS.AdditiveBlending;
 			case 'subtractiveblending':
 			case 'subtractive':
-				return THREE.SubtractiveBlending;
+				return N3JS.SubtractiveBlending;
 			case 'multiplyblending':
 			case 'multiply':
-				return THREE.MultiplyBlending;
+				return N3JS.MultiplyBlending;
 			case 'customblending':
 			case 'custom':
-				return THREE.CustomBlending;
+				return N3JS.CustomBlending;
 		}
 		return undefined;
 	}
@@ -2698,22 +2536,19 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns blend equation
 	 */
-	public static getBlendEquationSafe(
-		baseBlendEquation: string,
-		def?: string
-	): I3JS.TBlendingEquation {
+	public static getBlendEquationSafe(baseBlendEquation: string, def?: string): I3JS.TBlendingEquation {
 		const blendEquation = this.getTypeSafe(baseBlendEquation, def, '');
 		switch (blendEquation.toLowerCase()) {
 			case 'add':
-				return THREE.AddEquation;
+				return N3JS.AddEquation;
 			case 'subtract':
-				return THREE.SubtractEquation;
+				return N3JS.SubtractEquation;
 			case 'reversesubtract':
-				return THREE.ReverseSubtractEquation;
+				return N3JS.ReverseSubtractEquation;
 			case 'min':
-				return THREE.MinEquation;
+				return N3JS.MinEquation;
 			case 'max':
-				return THREE.MaxEquation;
+				return N3JS.MaxEquation;
 		}
 		return undefined;
 	}
@@ -2740,42 +2575,39 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns blend src
 	 */
-	public static getBlendDstSafe(
-		baseBlendSrc: string,
-		def?: string
-	): I3JS.TBlendingDstFactor {
+	public static getBlendDstSafe(baseBlendSrc: string, def?: string): I3JS.TBlendingDstFactor {
 		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
 		switch (blendSrc.toLowerCase()) {
 			case 'zerofactor':
 			case 'zero':
-				return THREE.ZeroFactor;
+				return N3JS.ZeroFactor;
 			case 'onefactor':
 			case 'one':
-				return THREE.OneFactor;
+				return N3JS.OneFactor;
 			case 'srccolorfactor':
 			case 'srccolor':
-				return THREE.SrcColorFactor;
+				return N3JS.SrcColorFactor;
 			case 'oneminussrccolorfactor':
 			case 'oneminussrccolor':
-				return THREE.OneMinusSrcColorFactor;
+				return N3JS.OneMinusSrcColorFactor;
 			case 'srcalphafactor':
 			case 'srcalpha':
-				return THREE.SrcAlphaFactor;
+				return N3JS.SrcAlphaFactor;
 			case 'oneminussrcalphafactor':
 			case 'oneminussrcalpha':
-				return THREE.OneMinusSrcAlphaFactor;
+				return N3JS.OneMinusSrcAlphaFactor;
 			case 'dstalphafactor':
 			case 'dstalpha':
-				return THREE.DstAlphaFactor;
+				return N3JS.DstAlphaFactor;
 			case 'oneminusdstalphafactor':
 			case 'oneminusdstalpha':
-				return THREE.OneMinusDstAlphaFactor;
+				return N3JS.OneMinusDstAlphaFactor;
 			case 'dstcolorfactor':
 			case 'dstcolor':
-				return THREE.DstColorFactor;
+				return N3JS.DstColorFactor;
 			case 'oneminusdstcolorfactor':
 			case 'oneminusdstcolor':
-				return THREE.OneMinusDstColorFactor;
+				return N3JS.OneMinusDstColorFactor;
 		}
 		return undefined;
 	}
@@ -2802,15 +2634,12 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns blend src
 	 */
-	public static getBlendSrcSafe(
-		baseBlendSrc: string,
-		def?: string
-	): I3JS.TBlendingSrcFactor {
+	public static getBlendSrcSafe(baseBlendSrc: string, def?: string): I3JS.TBlendingSrcFactor {
 		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
 		switch (blendSrc.toLowerCase()) {
 			case 'srcalphasaturatefactor':
 			case 'srcalphasaturate':
-				return THREE.SrcAlphaSaturateFactor;
+				return N3JS.SrcAlphaSaturateFactor;
 		}
 		return undefined;
 	}
@@ -2819,28 +2648,25 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns depth func
 	 */
-	public static getDepthModesSafe(
-		baseDepthFunc: string,
-		def?: string
-	): I3JS.TDepthModes {
+	public static getDepthModesSafe(baseDepthFunc: string, def?: string): I3JS.TDepthModes {
 		const depthFunc = ThreeUtil.getTypeSafe(baseDepthFunc, def, '');
 		switch (depthFunc.toLowerCase()) {
 			case 'never':
-				return THREE.NeverDepth;
+				return N3JS.NeverDepth;
 			case 'always':
-				return THREE.AlwaysDepth;
+				return N3JS.AlwaysDepth;
 			case 'less':
-				return THREE.LessDepth;
+				return N3JS.LessDepth;
 			case 'lessequal':
-				return THREE.LessEqualDepth;
+				return N3JS.LessEqualDepth;
 			case 'equal':
-				return THREE.EqualDepth;
+				return N3JS.EqualDepth;
 			case 'greaterequal':
-				return THREE.GreaterEqualDepth;
+				return N3JS.GreaterEqualDepth;
 			case 'greater':
-				return THREE.GreaterDepth;
+				return N3JS.GreaterDepth;
 			case 'notequal':
-				return THREE.NotEqualDepth;
+				return N3JS.NotEqualDepth;
 		}
 		return undefined;
 	}
@@ -2850,10 +2676,7 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns precision
 	 */
-	public static getPrecisionSafe(
-		basePrecision: string,
-		def?: string
-	): 'highp' | 'mediump' | 'lowp' | null {
+	public static getPrecisionSafe(basePrecision: string, def?: string): 'highp' | 'mediump' | 'lowp' | null {
 		const precision = this.getTypeSafe(basePrecision, def, '');
 		switch (precision.toLowerCase()) {
 			case 'highp':
@@ -2892,55 +2715,51 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns pixel format safe
 	 */
-	public static getPixelFormatSafe(
-		baseFormat: string,
-		altFormat?: string,
-		def?: string
-	): I3JS.TPixelFormat {
+	public static getPixelFormatSafe(baseFormat: string, altFormat?: string, def?: string): I3JS.TPixelFormat {
 		const format = this.getTypeSafe(baseFormat, altFormat, def || '');
 		switch (format.toLowerCase()) {
 			case 'alphaformat':
 			case 'alpha':
-				return THREE.AlphaFormat;
+				return N3JS.AlphaFormat;
 			case 'redformat':
 			case 'red':
-				return THREE.RedFormat;
+				return N3JS.RedFormat;
 			case 'redintegerformat':
 			case 'redinteger':
-				return THREE.RedIntegerFormat;
+				return N3JS.RedIntegerFormat;
 			case 'rgformat':
 			case 'rg':
-				return THREE.RGFormat;
+				return N3JS.RGFormat;
 			case 'rgintegerformat':
 			case 'rginteger':
-				return THREE.RGIntegerFormat;
+				return N3JS.RGIntegerFormat;
 			case 'rgbformat':
 			case 'rgb':
-				return THREE.RGBFormat;
+				return N3JS.RGBFormat;
 			case 'rgbintegerformat':
 			case 'rgbinteger':
-				return THREE.RGBIntegerFormat;
+				return N3JS.RGBIntegerFormat;
 			case 'rgbaintegerformat':
 			case 'rgbainteger':
-				return THREE.RGBAIntegerFormat;
+				return N3JS.RGBAIntegerFormat;
 			case 'luminanceformat':
 			case 'luminance':
-				return THREE.LuminanceFormat;
+				return N3JS.LuminanceFormat;
 			case 'luminancealphaformat':
 			case 'luminancealpha':
-				return THREE.LuminanceAlphaFormat;
+				return N3JS.LuminanceAlphaFormat;
 			case 'rgbeformat':
 			case 'rgbe':
-				return THREE.RGBEFormat;
+				return N3JS.RGBEFormat;
 			case 'depthformat':
 			case 'depth':
-				return THREE.DepthFormat;
+				return N3JS.DepthFormat;
 			case 'depthstencilformat':
 			case 'depthstencil':
-				return THREE.DepthStencilFormat;
+				return N3JS.DepthStencilFormat;
 			case 'rgbaformat':
 			case 'rgba':
-				return THREE.RGBAFormat;
+				return N3JS.RGBAFormat;
 			default:
 				break;
 		}
@@ -2952,21 +2771,18 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns combine
 	 */
-	public static getCombineSafe(
-		baseCombine: string,
-		def?: string
-	): I3JS.TCombine {
+	public static getCombineSafe(baseCombine: string, def?: string): I3JS.TCombine {
 		const combine = this.getTypeSafe(baseCombine, def, '');
 		switch (combine.toLowerCase()) {
 			case 'multiplyoperation':
 			case 'multiply':
-				return THREE.MultiplyOperation;
+				return N3JS.MultiplyOperation;
 			case 'mixoperation':
 			case 'mix':
-				return THREE.MixOperation;
+				return N3JS.MixOperation;
 			case 'addoperation':
 			case 'add':
-				return THREE.AddOperation;
+				return N3JS.AddOperation;
 		}
 		return undefined;
 	}
@@ -2976,19 +2792,16 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns depth packing
 	 */
-	public static getDepthPackingSafe(
-		baseDepthPacking: string,
-		def?: string
-	): I3JS.TDepthPackingStrategies {
+	public static getDepthPackingSafe(baseDepthPacking: string, def?: string): I3JS.TDepthPackingStrategies {
 		const depthPacking = this.getTypeSafe(baseDepthPacking, def, '');
 		switch (depthPacking.toLowerCase()) {
 			case 'rgba':
 			case 'rgbadepth':
-				return THREE.RGBADepthPacking;
+				return N3JS.RGBADepthPacking;
 			case 'basic':
 			case 'basicdepth':
 			default:
-				return THREE.BasicDepthPacking;
+				return N3JS.BasicDepthPacking;
 		}
 	}
 
@@ -2997,20 +2810,17 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns glsl version
 	 */
-	public static getGlslVersionSafe(
-		baseGlslVersion: string,
-		def?: string
-	): I3JS.TGLSLVersion {
+	public static getGlslVersionSafe(baseGlslVersion: string, def?: string): I3JS.TGLSLVersion {
 		const glslVersion = this.getTypeSafe(baseGlslVersion, def, '');
 		switch (glslVersion.toLowerCase()) {
 			case '1':
 			case 'gl1':
 			case 'glsl1':
-				return THREE.GLSL1;
+				return N3JS.GLSL1;
 			case '3':
 			case 'gl3':
 			case 'glsl3':
-				return THREE.GLSL3;
+				return N3JS.GLSL3;
 		}
 		return null;
 	}
@@ -3027,22 +2837,19 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns blend mode
 	 */
-	public static getBlendModeSafe(
-		baseBlendMode: string,
-		def?: string
-	): I3JS.TAnimationBlendMode {
+	public static getBlendModeSafe(baseBlendMode: string, def?: string): I3JS.TAnimationBlendMode {
 		const blendMode = this.getTypeSafe(baseBlendMode, def, '');
 		switch (blendMode.toLowerCase()) {
 			case 'normalanimationblendmode':
 			case 'normalanimation':
 			case 'normal':
-				return THREE.NormalAnimationBlendMode;
+				return N3JS.NormalAnimationBlendMode;
 			case 'additiveanimationblendmode':
 			case 'additiveanimation':
 			case 'additive':
-				return THREE.AdditiveAnimationBlendMode;
+				return N3JS.AdditiveAnimationBlendMode;
 		}
-		return THREE.NormalAnimationBlendMode;
+		return N3JS.NormalAnimationBlendMode;
 	}
 
 	/**
@@ -3058,22 +2865,19 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns loop
 	 */
-	public static getLoopSafe(
-		baseLoop: string,
-		def?: string
-	): I3JS.TAnimationActionLoopStyles {
+	public static getLoopSafe(baseLoop: string, def?: string): I3JS.TAnimationActionLoopStyles {
 		const loop = this.getTypeSafe(baseLoop, def, '');
 		switch (loop.toLowerCase()) {
 			case 'looponce':
 			case 'once':
-				return THREE.LoopOnce;
+				return N3JS.LoopOnce;
 			case 'looppingpong':
 			case 'pingpong':
-				return THREE.LoopPingPong;
+				return N3JS.LoopPingPong;
 			case 'looprepeat':
 			case 'repeat':
 			default:
-				return THREE.LoopRepeat;
+				return N3JS.LoopRepeat;
 		}
 	}
 
@@ -3087,32 +2891,32 @@ export class ThreeUtil {
 		switch (usage.toLowerCase()) {
 			case 'streamdrawusage':
 			case 'streamdraw':
-				return THREE.StreamDrawUsage;
+				return N3JS.StreamDrawUsage;
 			case 'staticreadusage':
 			case 'staticread':
-				return THREE.StaticReadUsage;
+				return N3JS.StaticReadUsage;
 			case 'dynamicreadusage':
 			case 'dynamicread':
-				return THREE.DynamicReadUsage;
+				return N3JS.DynamicReadUsage;
 			case 'streamreadusage':
 			case 'streamread':
-				return THREE.StreamReadUsage;
+				return N3JS.StreamReadUsage;
 			case 'staticcopyusage':
 			case 'staticcopy':
-				return THREE.StaticCopyUsage;
+				return N3JS.StaticCopyUsage;
 			case 'dynamiccopyusage':
 			case 'dynamiccopy':
-				return THREE.DynamicCopyUsage;
+				return N3JS.DynamicCopyUsage;
 			case 'streamcopyusage':
 			case 'streamcopy':
-				return THREE.StreamCopyUsage;
+				return N3JS.StreamCopyUsage;
 			case 'staticdrawusage':
 			case 'staticdraw':
-				return THREE.StaticDrawUsage;
+				return N3JS.StaticDrawUsage;
 			case 'dynamicdrawusage':
 			case 'dynamicdraw':
 			default:
-				return THREE.DynamicDrawUsage;
+				return N3JS.DynamicDrawUsage;
 		}
 	}
 
@@ -3140,49 +2944,45 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns texture data type safe
 	 */
-	public static getTextureDataTypeSafe(
-		baseFormat: string,
-		altFormat?: string,
-		def?: string
-	): I3JS.TTextureDataType {
+	public static getTextureDataTypeSafe(baseFormat: string, altFormat?: string, def?: string): I3JS.TTextureDataType {
 		const type = this.getTypeSafe(baseFormat, altFormat, def || '');
 		switch (type.toLowerCase()) {
 			case 'bytetype':
 			case 'byte':
-				return THREE.ByteType;
+				return N3JS.ByteType;
 			case 'shorttype':
 			case 'short':
-				return THREE.ShortType;
+				return N3JS.ShortType;
 			case 'unsignedshorttype':
 			case 'unsignedshort':
-				return THREE.UnsignedShortType;
+				return N3JS.UnsignedShortType;
 			case 'inttype':
 			case 'int':
-				return THREE.IntType;
+				return N3JS.IntType;
 			case 'unsignedinttype':
 			case 'unsignedint':
-				return THREE.UnsignedIntType;
+				return N3JS.UnsignedIntType;
 			case 'floattype':
 			case 'float':
-				return THREE.FloatType;
+				return N3JS.FloatType;
 			case 'halffloattype':
 			case 'halffloat':
-				return THREE.HalfFloatType;
+				return N3JS.HalfFloatType;
 			case 'unsignedshort4444type':
 			case 'unsignedshort4444':
-				return THREE.UnsignedShort4444Type;
+				return N3JS.UnsignedShort4444Type;
 			case 'unsignedshort5551type':
 			case 'unsignedshort5551':
-				return THREE.UnsignedShort5551Type;
+				return N3JS.UnsignedShort5551Type;
 			case 'unsignedshort565type':
 			case 'unsignedshort565':
-				return THREE.UnsignedShort565Type;
+				return N3JS.UnsignedShort565Type;
 			case 'unsignedint248type':
 			case 'unsignedint248':
-				return THREE.UnsignedInt248Type;
+				return N3JS.UnsignedInt248Type;
 			case 'unsignedbytetype':
 			case 'unsignedbyte':
-				return THREE.UnsignedByteType;
+				return N3JS.UnsignedByteType;
 			default:
 				return undefined;
 		}
@@ -3195,11 +2995,8 @@ export class ThreeUtil {
 	 * @param [isRequired]
 	 * @returns object3d
 	 */
-	public static getObject3d<T extends I3JS.IObject3D>(
-		object3d: any,
-		isRequired: boolean = true
-	): T {
-		if (object3d instanceof THREE.Object3D) {
+	public static getObject3d<T extends I3JS.IObject3D>(object3d: any, isRequired: boolean = true): T {
+		if (object3d instanceof N3JS.Object3D) {
 			return object3d as T;
 		} else if (this.isNotNull(object3d.getMesh)) {
 			const mesh: I3JS.IObject3D = object3d.getMesh();
@@ -3226,7 +3023,7 @@ export class ThreeUtil {
 		if (!isRequired) {
 			return null;
 		}
-		return new THREE.Object3D() as T;
+		return new N3JS.Object3D() as T;
 	}
 
 	/**
@@ -3235,7 +3032,7 @@ export class ThreeUtil {
 	 * @returns mesh find
 	 */
 	public static getMeshFind(mesh: any): I3JS.IMesh {
-		if (mesh instanceof THREE.Mesh) {
+		if (mesh instanceof N3JS.Mesh) {
 			return mesh;
 		} else if (this.isNotNull(mesh.getHelper)) {
 			mesh = mesh.getHelper();
@@ -3244,12 +3041,12 @@ export class ThreeUtil {
 		} else if (this.isNotNull(mesh)) {
 			mesh = this.getObject3d(mesh);
 		}
-		if (mesh instanceof THREE.Mesh) {
+		if (mesh instanceof N3JS.Mesh) {
 			return mesh;
-		} else if (mesh instanceof THREE.Group) {
+		} else if (mesh instanceof N3JS.Group) {
 			let childMesh: I3JS.IMesh = null;
 			mesh.children.forEach((child) => {
-				if (childMesh === null && child instanceof THREE.Mesh) {
+				if (childMesh === null && child instanceof N3JS.Mesh) {
 					childMesh = child;
 				}
 			});
@@ -3270,7 +3067,7 @@ export class ThreeUtil {
 		if (findedMesh !== null) {
 			return findedMesh;
 		}
-		return new THREE.Mesh();
+		return new N3JS.Mesh();
 	}
 
 	/**
@@ -3279,15 +3076,15 @@ export class ThreeUtil {
 	 * @returns light
 	 */
 	public static getLight(light: any): I3JS.ILight {
-		if (light instanceof THREE.Light) {
+		if (light instanceof N3JS.Light) {
 			return light;
 		} else if (this.isNotNull(light)) {
 			const mesh = this.getObject3d(light);
-			if (mesh instanceof THREE.Light) {
+			if (mesh instanceof N3JS.Light) {
 				return mesh;
 			}
 		}
-		return new THREE.Light();
+		return new N3JS.Light();
 	}
 
 	/**
@@ -3296,28 +3093,22 @@ export class ThreeUtil {
 	 * @param [materialType]
 	 * @returns material by type
 	 */
-	public static getMaterialByType(
-		material: any,
-		materialType?: string
-	): I3JS.IMaterial {
+	public static getMaterialByType(material: any, materialType?: string): I3JS.IMaterial {
 		let matchedMat: I3JS.IMaterial = null;
 		if (this.isNotNull(materialType) && materialType != '') {
 			const matList = this.getMaterial(material);
 			if (Array.isArray(matList)) {
 				matList.forEach((mat) => {
 					if (
-						(this.isNull(mat.userData.materialType) ||
-							materialType.toLowerCase() === mat.userData.materialType) &&
+						(this.isNull(mat.userData.materialType) || materialType.toLowerCase() === mat.userData.materialType) &&
 						(this.isNull(mat.userData.refName) || mat.userData.refName == '')
 					) {
 						matchedMat = mat;
 					}
 				});
 			} else if (
-				(this.isNull(matList.userData.materialType) ||
-					materialType.toLowerCase() === matList.userData.materialType) &&
-				(this.isNull(matList.userData.refName) ||
-					matList.userData.refName == '')
+				(this.isNull(matList.userData.materialType) || materialType.toLowerCase() === matList.userData.materialType) &&
+				(this.isNull(matList.userData.refName) || matList.userData.refName == '')
 			) {
 				matchedMat = matList;
 			}
@@ -3340,7 +3131,7 @@ export class ThreeUtil {
 	 * @returns material
 	 */
 	public static getMaterial(material: any): I3JS.IMaterial | I3JS.IMaterial[] {
-		if (material instanceof THREE.Material) {
+		if (material instanceof N3JS.Material) {
 			return material;
 		} else if (Array.isArray(material)) {
 			return material;
@@ -3348,13 +3139,13 @@ export class ThreeUtil {
 			return material.getMaterial() as I3JS.IMaterial;
 		} else if (this.isNotNull(material)) {
 			const mesh = this.getObject3d(material);
-			if (mesh instanceof THREE.Mesh) {
+			if (mesh instanceof N3JS.Mesh) {
 				if (this.isNotNull(material.material)) {
 					return material.material;
 				}
 			}
 		}
-		return new THREE.Material();
+		return new N3JS.Material();
 	}
 
 	/**
@@ -3371,7 +3162,7 @@ export class ThreeUtil {
 		} else {
 			return materialList;
 		}
-		return new THREE.Material();
+		return new N3JS.Material();
 	}
 
 	/**
@@ -3382,20 +3173,20 @@ export class ThreeUtil {
 	 */
 	public static getGeometry(geometry: any): I3JS.IBufferGeometry {
 		if (this.isNotNull(geometry)) {
-			if (geometry instanceof THREE.BufferGeometry) {
+			if (geometry instanceof N3JS.BufferGeometry) {
 				return geometry;
 			} else if (this.isNotNull(geometry.getGeometry)) {
 				return geometry.getGeometry();
 			} else {
 				const mesh = this.getObject3d(geometry);
-				if (mesh instanceof THREE.Mesh) {
+				if (mesh instanceof N3JS.Mesh) {
 					if (this.isNotNull(mesh.geometry)) {
 						return mesh.geometry;
 					}
 				}
 			}
 		}
-		return new THREE.BufferGeometry();
+		return new N3JS.BufferGeometry();
 	}
 
 	/**
@@ -3422,16 +3213,10 @@ export class ThreeUtil {
 	 * @param [key]
 	 * @returns true if three component
 	 */
-	public static isThreeComponent(
-		object: any,
-		key: string = 'component'
-	): boolean {
+	public static isThreeComponent(object: any, key: string = 'component'): boolean {
 		if (this.isNotNull(object.getObject3d)) {
 			return true;
-		} else if (
-			this.isNotNull(object.userData) &&
-			this.isNotNull(object.userData[key])
-		) {
+		} else if (this.isNotNull(object.userData) && this.isNotNull(object.userData[key])) {
 			return true;
 		} else {
 			return false;
@@ -3486,16 +3271,9 @@ export class ThreeUtil {
 	 */
 	public static getRigidbody(object: any): Ammo.btRigidBody {
 		const rigidbodyComponent = this.getRigidbodyComponent(object);
-		if (
-			rigidbodyComponent !== null &&
-			this.isNotNull(rigidbodyComponent.getRigidBody)
-		) {
+		if (rigidbodyComponent !== null && this.isNotNull(rigidbodyComponent.getRigidBody)) {
 			const rigidBody = rigidbodyComponent.getRigidBody();
-			if (
-				this.isNotNull(rigidBody) &&
-				this.isNotNull(rigidBody.rigidBodies) &&
-				rigidBody.rigidBodies.length > 0
-			) {
+			if (this.isNotNull(rigidBody) && this.isNotNull(rigidBody.rigidBodies) && rigidBody.rigidBodies.length > 0) {
 				return rigidBody.rigidBodies[0];
 			}
 		}
@@ -3527,103 +3305,65 @@ export class ThreeUtil {
 	 * @param nextKey
 	 * @returns subscribe
 	 */
-	public static getSubscribe(
-		object: any,
-		callBack: (key?: string) => void,
-		nextKey: string
-	): Subscription {
+	public static getSubscribe(object: any, callBack: (key?: string) => void, nextKey: string): Subscription {
 		if (this.isNull(object)) {
 			return null;
 		}
 		if (this.isThreeComponent(object)) {
 			const threeComponent = this.getThreeComponent(object);
-			if (
-				this.isNotNull(threeComponent) &&
-				this.isNotNull(threeComponent.getSubscribe)
-			) {
+			if (this.isNotNull(threeComponent) && this.isNotNull(threeComponent.getSubscribe)) {
 				object = threeComponent;
 			}
 		}
 		if (this.isNotNull(object.getSubscribe)) {
-			return (object.getSubscribe() as Observable<string[]>).subscribe(
-				(keyList: string[]) => {
-					if (this.isNull(nextKey)) {
-						callBack('anyevent');
-					} else {
-						switch (nextKey.toLowerCase()) {
-							case 'lookat':
-								if (
-									this.isIndexOf(keyList, [
-										'object3d',
-										'mesh',
-										'position',
-										'lookat',
-									])
-								) {
-									callBack('lookat');
-								}
-								break;
-							case 'position':
-								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'position'])) {
-									callBack('position');
-								}
-								break;
-							case 'rotation':
-								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'rotation'])) {
-									callBack('rotation');
-								}
-								break;
-							case 'scale':
-								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'scale'])) {
-									callBack('scale');
-								}
-								break;
-							case 'geometry':
-								if (
-									this.isIndexOf(keyList, [
-										'object3d',
-										'mesh',
-										'geometry',
-										'loaded',
-									])
-								) {
-									callBack('geometry');
-								}
-								break;
-							case 'material':
-								if (
-									this.isIndexOf(keyList, [
-										'object3d',
-										'mesh',
-										'material',
-										'loaded',
-									])
-								) {
-									callBack('material');
-								}
-								break;
-							case 'texture':
-								if (
-									this.isIndexOf(keyList, [
-										'object3d',
-										'mesh',
-										'material',
-										'texture',
-										'loaded',
-									])
-								) {
-									callBack('texture');
-								}
-								break;
-							default:
-								if (keyList.indexOf(nextKey.toLowerCase()) > -1) {
-									callBack(nextKey);
-								}
-								break;
-						}
+			return (object.getSubscribe() as Observable<string[]>).subscribe((keyList: string[]) => {
+				if (this.isNull(nextKey)) {
+					callBack('anyevent');
+				} else {
+					switch (nextKey.toLowerCase()) {
+						case 'lookat':
+							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'position', 'lookat'])) {
+								callBack('lookat');
+							}
+							break;
+						case 'position':
+							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'position'])) {
+								callBack('position');
+							}
+							break;
+						case 'rotation':
+							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'rotation'])) {
+								callBack('rotation');
+							}
+							break;
+						case 'scale':
+							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'scale'])) {
+								callBack('scale');
+							}
+							break;
+						case 'geometry':
+							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'geometry', 'loaded'])) {
+								callBack('geometry');
+							}
+							break;
+						case 'material':
+							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'material', 'loaded'])) {
+								callBack('material');
+							}
+							break;
+						case 'texture':
+							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'material', 'texture', 'loaded'])) {
+								callBack('texture');
+							}
+							break;
+						default:
+							if (keyList.indexOf(nextKey.toLowerCase()) > -1) {
+								callBack(nextKey);
+							}
+							break;
 					}
 				}
-			);
+			});
 		}
 		return null;
 	}
@@ -3635,46 +3375,30 @@ export class ThreeUtil {
 	 * @param [isRequired]
 	 * @returns texture
 	 */
-	public static getTexture(
-		texture: any,
-		refType: string = 'map',
-		isRequired: boolean = true
-	): I3JS.ITexture {
-		if (texture instanceof THREE.Texture) {
+	public static getTexture(texture: any, refType: string = 'map', isRequired: boolean = true): I3JS.ITexture {
+		if (texture instanceof N3JS.Texture) {
 			return texture;
-		} else if (
-			texture instanceof THREE.Object3D ||
-			this.isNotNull(texture.getObject3d)
-		) {
+		} else if (texture instanceof N3JS.Object3D || this.isNotNull(texture.getObject3d)) {
 			const pmremGenerator = ThreeUtil.getPmremGenerator();
 			const pmremGeneratorTexture = pmremGenerator.fromScene(
-				texture instanceof THREE.Object3D ? texture : texture.getObject3d()
+				texture instanceof N3JS.Object3D ? texture : texture.getObject3d()
 			).texture;
 			pmremGenerator.dispose();
 			return pmremGeneratorTexture;
 		} else if (this.isNotNull(texture.getTexture)) {
 			const foundTexture = texture.getTexture();
-			if (
-				!(foundTexture instanceof THREE.VideoTexture) ||
-				foundTexture.image.readyState > 0
-			) {
+			if (!(foundTexture instanceof N3JS.VideoTexture) || foundTexture.image.readyState > 0) {
 				return foundTexture;
 			}
 		} else if (this.isNotNull(texture)) {
 			const material: any = this.getMaterial(texture);
 			if (Array.isArray(material) && material.length > 0) {
 				const firstMaterial: any = material[0];
-				if (
-					this.isNotNull(firstMaterial[refType]) &&
-					firstMaterial[refType] instanceof THREE.Texture
-				) {
+				if (this.isNotNull(firstMaterial[refType]) && firstMaterial[refType] instanceof N3JS.Texture) {
 					return firstMaterial[refType];
 				}
 			} else {
-				if (
-					this.isNotNull(material[refType]) &&
-					material[refType] instanceof THREE.Texture
-				) {
+				if (this.isNotNull(material[refType]) && material[refType] instanceof N3JS.Texture) {
 					return material[refType];
 				}
 			}
@@ -3682,7 +3406,7 @@ export class ThreeUtil {
 		if (!isRequired) {
 			return null;
 		}
-		return new THREE.Texture();
+		return new N3JS.Texture();
 	}
 
 	/**
@@ -3692,40 +3416,22 @@ export class ThreeUtil {
 	 */
 	public static getPosition(position: any): I3JS.IVector3 {
 		if (this.isNotNull(position)) {
-			if (position instanceof THREE.Vector3) {
+			if (position instanceof N3JS.Vector3) {
 				return position;
 			} else if (Array.isArray(position) && position.length >= 3) {
-				return this.getVector3Safe(
-					position[0],
-					position[1],
-					position[2],
-					null,
-					null,
-					true
-				);
+				return this.getVector3Safe(position[0], position[1], position[2], null, null, true);
 			} else if (this.isNotNull(position.getPosition)) {
 				return position.getPosition();
 			} else if (this.isNotNull(position.getLookAt)) {
 				return position.getLookAt();
-			} else if (
-				this.isNotNull(position.x) &&
-				this.isNotNull(position.y) &&
-				this.isNotNull(position.z)
-			) {
-				return this.getVector3Safe(
-					position.x,
-					position.y,
-					position.z,
-					null,
-					null,
-					true
-				);
+			} else if (this.isNotNull(position.x) && this.isNotNull(position.y) && this.isNotNull(position.z)) {
+				return this.getVector3Safe(position.x, position.y, position.z, null, null, true);
 			} else {
 				const object3d = this.getObject3d(position);
 				return object3d.position;
 			}
 		}
-		return new THREE.Vector3();
+		return new N3JS.Vector3();
 	}
 
 	/**
@@ -3735,40 +3441,24 @@ export class ThreeUtil {
 	 */
 	public static getRotation(rotation: any): I3JS.IEuler {
 		if (this.isNotNull(rotation)) {
-			if (rotation instanceof THREE.Euler) {
+			if (rotation instanceof N3JS.Euler) {
 				return rotation;
 			} else if (Array.isArray(rotation) && rotation.length >= 3) {
-				return this.getEulerSafe(
-					rotation[0],
-					rotation[1],
-					rotation[2],
-					null,
-					true
-				);
+				return this.getEulerSafe(rotation[0], rotation[1], rotation[2], null, true);
 			} else if (this.isNotNull(rotation.getRotation)) {
 				return rotation.getRotation();
-			} else if (
-				this.isNotNull(rotation.x) &&
-				this.isNotNull(rotation.y) &&
-				this.isNotNull(rotation.z)
-			) {
+			} else if (this.isNotNull(rotation.x) && this.isNotNull(rotation.y) && this.isNotNull(rotation.z)) {
 				if (this.isNotNull(rotation.isEuler) && rotation.isEuler) {
-					return new THREE.Euler(rotation.x, rotation.y, rotation.z);
+					return new N3JS.Euler(rotation.x, rotation.y, rotation.z);
 				} else {
-					return this.getEulerSafe(
-						rotation.x,
-						rotation.y,
-						rotation.z,
-						null,
-						true
-					);
+					return this.getEulerSafe(rotation.x, rotation.y, rotation.z, null, true);
 				}
 			} else {
 				const object3d = this.getObject3d(rotation);
 				return object3d.rotation;
 			}
 		}
-		return new THREE.Euler();
+		return new N3JS.Euler();
 	}
 
 	/**
@@ -3778,31 +3468,20 @@ export class ThreeUtil {
 	 */
 	public static getScale(scale: any): I3JS.IVector3 {
 		if (this.isNotNull(scale)) {
-			if (scale instanceof THREE.Vector3) {
+			if (scale instanceof N3JS.Vector3) {
 				return scale;
 			} else if (Array.isArray(scale) && scale.length >= 3) {
-				return this.getVector3Safe(
-					scale[0],
-					scale[1],
-					scale[2],
-					null,
-					null,
-					true
-				);
+				return this.getVector3Safe(scale[0], scale[1], scale[2], null, null, true);
 			} else if (this.isNotNull(scale.getScale)) {
 				return scale.getScale();
-			} else if (
-				this.isNotNull(scale.x) &&
-				this.isNotNull(scale.y) &&
-				this.isNotNull(scale.z)
-			) {
+			} else if (this.isNotNull(scale.x) && this.isNotNull(scale.y) && this.isNotNull(scale.z)) {
 				return this.getVector3Safe(scale.x, scale.y, scale.z, null, null, true);
 			} else {
 				const object3d = this.getObject3d(scale);
 				return object3d.scale;
 			}
 		}
-		return new THREE.Vector3(1, 1, 1);
+		return new N3JS.Vector3(1, 1, 1);
 	}
 
 	/**
@@ -3812,39 +3491,21 @@ export class ThreeUtil {
 	 */
 	public static getLookAt(lookat: any): I3JS.IVector3 {
 		if (this.isNotNull(lookat)) {
-			if (lookat instanceof THREE.Vector3) {
+			if (lookat instanceof N3JS.Vector3) {
 				return lookat;
 			} else if (Array.isArray(lookat) && lookat.length >= 3) {
-				return this.getVector3Safe(
-					lookat[0],
-					lookat[1],
-					lookat[2],
-					null,
-					null,
-					true
-				);
+				return this.getVector3Safe(lookat[0], lookat[1], lookat[2], null, null, true);
 			} else if (this.isNotNull(lookat.getLookAt)) {
 				return lookat.getLookAt();
 			} else if (this.isNotNull(lookat.getPosition)) {
 				return lookat.getPosition();
-			} else if (
-				this.isNotNull(lookat.x) &&
-				this.isNotNull(lookat.y) &&
-				this.isNotNull(lookat.z)
-			) {
-				return this.getVector3Safe(
-					lookat.x,
-					lookat.y,
-					lookat.z,
-					null,
-					null,
-					true
-				);
+			} else if (this.isNotNull(lookat.x) && this.isNotNull(lookat.y) && this.isNotNull(lookat.z)) {
+				return this.getVector3Safe(lookat.x, lookat.y, lookat.z, null, null, true);
 			} else {
 				return this.getObject3d(lookat).position;
 			}
 		}
-		return new THREE.Vector3();
+		return new N3JS.Vector3();
 	}
 
 	/**
@@ -3853,45 +3514,25 @@ export class ThreeUtil {
 	 * @returns true if texture loaded
 	 */
 	public static isTextureLoaded(texture: I3JS.ITexture): boolean {
-		if (
-			texture instanceof THREE.CubeTexture ||
-			(texture as any)['isCubeTexture']
-		) {
+		if (texture instanceof N3JS.CubeTexture || (texture as any)['isCubeTexture']) {
 			if (this.isNotNull(texture.image) && texture.image.length >= 6) {
 				return true;
 			}
 		}
-		if (
-			texture instanceof THREE.CompressedTexture ||
-			(texture as any)['isCompressedTexture']
-		) {
+		if (texture instanceof N3JS.CompressedTexture || (texture as any)['isCompressedTexture']) {
 			return true;
 		}
-		if (
-			texture instanceof THREE.DataTexture ||
-			(texture as any)['isDataTexture']
-		) {
-			if (
-				this.isNotNull(texture.image) &&
-				this.isNotNull(texture.image.data) &&
-				texture.image.data.length > 0
-			) {
+		if (texture instanceof N3JS.DataTexture || (texture as any)['isDataTexture']) {
+			if (this.isNotNull(texture.image) && this.isNotNull(texture.image.data) && texture.image.data.length > 0) {
 				return true;
 			}
 		}
-		if (
-			texture instanceof THREE.VideoTexture ||
-			(texture as any)['isVideoTexture']
-		) {
-			if (
-				this.isNotNull(texture.image) &&
-				texture.image instanceof HTMLVideoElement &&
-				texture.image.error === null
-			) {
+		if (texture instanceof N3JS.VideoTexture || (texture as any)['isVideoTexture']) {
+			if (this.isNotNull(texture.image) && texture.image instanceof HTMLVideoElement && texture.image.error === null) {
 				return true;
 			}
 		}
-		if (texture instanceof THREE.Texture && this.isNotNull(texture.image)) {
+		if (texture instanceof N3JS.Texture && this.isNotNull(texture.image)) {
 			if (
 				texture.image instanceof HTMLImageElement ||
 				texture.image instanceof HTMLCanvasElement ||
@@ -3902,10 +3543,7 @@ export class ThreeUtil {
 			if (Array.isArray(texture.image) && texture.image.length >= 6) {
 				return true;
 			}
-			if (
-				ThreeUtil.isNotNull(texture.image.data) &&
-				texture.image.data.length > 0
-			) {
+			if (ThreeUtil.isNotNull(texture.image.data) && texture.image.data.length > 0) {
 				return true;
 			}
 		}
@@ -3941,28 +3579,28 @@ export class ThreeUtil {
 		switch (encoding.toLowerCase()) {
 			case 'srgbencoding':
 			case 'srgb':
-				return THREE.sRGBEncoding;
+				return N3JS.sRGBEncoding;
 			case 'gammaencoding':
 			case 'gamma':
-				return THREE.GammaEncoding;
+				return N3JS.GammaEncoding;
 			case 'rgbeencoding':
 			case 'rgbe':
-				return THREE.RGBEEncoding;
+				return N3JS.RGBEEncoding;
 			// case 'logluvencoding':
 			// case 'logluv':
 			//	return THREE.LogLuvEncoding;
 			case 'rgbm7encoding':
 			case 'rgbm7':
-				return THREE.RGBM7Encoding;
+				return N3JS.RGBM7Encoding;
 			case 'rgbm16encoding':
 			case 'rgbm16':
-				return THREE.RGBM16Encoding;
+				return N3JS.RGBM16Encoding;
 			case 'rgbdencoding':
 			case 'rgbd':
-				return THREE.RGBDEncoding;
+				return N3JS.RGBDEncoding;
 			case 'linearencoding':
 			case 'linear':
-				return THREE.LinearEncoding;
+				return N3JS.LinearEncoding;
 			default:
 				return undefined;
 		}
@@ -3987,36 +3625,32 @@ export class ThreeUtil {
 	 * @param [def]
 	 * @returns mapping safe
 	 */
-	public static getMappingSafe(
-		baseMapping: string,
-		altMapping?: string,
-		def?: string
-	): I3JS.TMapping {
+	public static getMappingSafe(baseMapping: string, altMapping?: string, def?: string): I3JS.TMapping {
 		const mapping = this.getTypeSafe(baseMapping, altMapping, def || '');
 		switch (mapping.toLowerCase()) {
 			case 'uvmapping':
 			case 'uv':
-				return THREE.UVMapping;
+				return N3JS.UVMapping;
 			case 'cubereflectionmapping':
 			case 'cubereflection':
-				return THREE.CubeReflectionMapping;
+				return N3JS.CubeReflectionMapping;
 			case 'cuberefractionmapping':
 			case 'cuberefraction':
-				return THREE.CubeRefractionMapping;
+				return N3JS.CubeRefractionMapping;
 			case 'equirectangularreflectionmapping':
 			case 'equirectangularreflection':
-				return THREE.EquirectangularReflectionMapping;
+				return N3JS.EquirectangularReflectionMapping;
 			case 'equirectangularrefractionmapping':
 			case 'equirectangularrefraction':
-				return THREE.EquirectangularRefractionMapping;
+				return N3JS.EquirectangularRefractionMapping;
 			case 'cubeuvreflectionmapping':
 			case 'cubeuvreflection':
-				return THREE.CubeUVReflectionMapping;
+				return N3JS.CubeUVReflectionMapping;
 			case 'cubeuvrefractionmapping':
 			case 'cubeuvrefraction':
-				return THREE.CubeUVRefractionMapping;
+				return N3JS.CubeUVRefractionMapping;
 			default:
-				return THREE.DEFAULT_MAPPING;
+				return N3JS.DEFAULT_MAPPING;
 		}
 	}
 
@@ -4026,11 +3660,7 @@ export class ThreeUtil {
 	 * @returns cube image
 	 */
 	public static getCubeImage(cubeImage: string[]): string[] {
-		if (
-			ThreeUtil.isNotNull(cubeImage) &&
-			cubeImage.length !== 6 &&
-			cubeImage.length >= 1
-		) {
+		if (ThreeUtil.isNotNull(cubeImage) && cubeImage.length !== 6 && cubeImage.length >= 1) {
 			const prefix = cubeImage[0];
 			const postfix = cubeImage[1] || 'png';
 			const prefix1 = cubeImage[2] || 'p';
@@ -4101,12 +3731,9 @@ export class ThreeUtil {
 						this.isNotNull(component.controls.meshRotate) &&
 						this.isNotNull(component.controls.meshRotateOrg)
 					) {
-						component.controls.meshRotate.x =
-							component.controls.meshRotateOrg.x;
-						component.controls.meshRotate.y =
-							component.controls.meshRotateOrg.y;
-						component.controls.meshRotate.z =
-							component.controls.meshRotateOrg.z;
+						component.controls.meshRotate.x = component.controls.meshRotateOrg.x;
+						component.controls.meshRotate.y = component.controls.meshRotateOrg.y;
+						component.controls.meshRotate.z = component.controls.meshRotateOrg.z;
 						component.controls.meshRotate.autoRotate = true;
 						component.controls.meshRotate.applyAutoRotate();
 						component.controls.meshRotate.update();
@@ -4114,46 +3741,29 @@ export class ThreeUtil {
 				},
 				applyAutoRotate: () => {
 					if (this.isNotNull(component.controlsParams)) {
-						const controlsParams = this.getGuiControlParam(
-							component.controlsParams,
-							'Mesh Rotation'
-						);
+						const controlsParams = this.getGuiControlParam(component.controlsParams, 'Mesh Rotation');
 						if (this.isNotNull(controlsParams)) {
 							if (component.controls.meshRotate.autoRotate) {
-								this.setGuiEnabled(
-									controlsParams.children[1].controller,
-									false
-								);
+								this.setGuiEnabled(controlsParams.children[1].controller, false);
 								this.setGuiEnabled(controlsParams.children[4].controller, true);
 							} else {
 								if (this.isNotNull(component.mesh)) {
 									const meshRotate = component.mesh.getRotation();
-									component.controls.meshRotate.x =
-										((meshRotate.x / Math.PI) * 180) % 360;
-									component.controls.meshRotate.y =
-										((meshRotate.y / Math.PI) * 180) % 360;
-									component.controls.meshRotate.z =
-										((meshRotate.z / Math.PI) * 180) % 360;
+									component.controls.meshRotate.x = ((meshRotate.x / Math.PI) * 180) % 360;
+									component.controls.meshRotate.y = ((meshRotate.y / Math.PI) * 180) % 360;
+									component.controls.meshRotate.z = ((meshRotate.z / Math.PI) * 180) % 360;
 								}
 								this.setGuiEnabled(controlsParams.children[1].controller, true);
-								this.setGuiEnabled(
-									controlsParams.children[4].controller,
-									false
-								);
+								this.setGuiEnabled(controlsParams.children[4].controller, false);
 							}
 						}
 					}
 				},
 				update: () => {
-					if (
-						this.isNotNull(component.mesh) &&
-						this.isNotNull(component.controls.meshRotate)
-					) {
+					if (this.isNotNull(component.mesh) && this.isNotNull(component.controls.meshRotate)) {
 						component.mesh.setRotation(
 							component.controls.meshRotate.x,
-							component.controls.meshRotate.autoRotate
-								? null
-								: component.controls.meshRotate.y,
+							component.controls.meshRotate.autoRotate ? null : component.controls.meshRotate.y,
 							component.controls.meshRotate.z
 						);
 					}
@@ -4169,20 +3779,14 @@ export class ThreeUtil {
 						this.isNotNull(component.controls.meshPosition) &&
 						this.isNotNull(component.controls.meshPositionOrg)
 					) {
-						component.controls.meshPosition.x =
-							component.controls.meshPositionOrg.x;
-						component.controls.meshPosition.y =
-							component.controls.meshPositionOrg.y;
-						component.controls.meshPosition.z =
-							component.controls.meshPositionOrg.z;
+						component.controls.meshPosition.x = component.controls.meshPositionOrg.x;
+						component.controls.meshPosition.y = component.controls.meshPositionOrg.y;
+						component.controls.meshPosition.z = component.controls.meshPositionOrg.z;
 						component.controls.meshPosition.update();
 					}
 				},
 				update: () => {
-					if (
-						this.isNotNull(component.mesh) &&
-						this.isNotNull(component.controls.meshPosition)
-					) {
+					if (this.isNotNull(component.mesh) && this.isNotNull(component.controls.meshPosition)) {
 						component.mesh.setPosition(
 							component.controls.meshPosition.x,
 							component.controls.meshPosition.y,
@@ -4208,10 +3812,7 @@ export class ThreeUtil {
 					}
 				},
 				update: () => {
-					if (
-						this.isNotNull(component.mesh) &&
-						this.isNotNull(component.controls.meshScale)
-					) {
+					if (this.isNotNull(component.mesh) && this.isNotNull(component.controls.meshScale)) {
 						component.mesh.setScale(
 							component.controls.meshScale.x,
 							component.controls.meshScale.y,
@@ -4251,10 +3852,7 @@ export class ThreeUtil {
 						listen: true,
 						change: () => {
 							if (this.isNotNull(component.mesh)) {
-								component.mesh.setVisible(
-									component.controls.meshShape.visible,
-									null
-								);
+								component.mesh.setVisible(component.controls.meshShape.visible, null);
 							}
 						},
 					},
@@ -4264,10 +3862,7 @@ export class ThreeUtil {
 						listen: true,
 						change: () => {
 							if (this.isNotNull(component.mesh)) {
-								component.mesh.setVisible(
-									null,
-									component.controls.meshShape.helperVisible
-								);
+								component.mesh.setVisible(null, component.controls.meshShape.helperVisible);
 							}
 						},
 					},
@@ -4277,9 +3872,7 @@ export class ThreeUtil {
 						listen: true,
 						change: () => {
 							if (this.isNotNull(component.mesh)) {
-								component.mesh.setWireFrame(
-									component.controls.meshShape.wireframe
-								);
+								component.mesh.setWireFrame(component.controls.meshShape.wireframe);
 							}
 						},
 					},
@@ -4452,15 +4045,8 @@ export class ThreeUtil {
 			this.isNotNull(component.mesh) &&
 			component.controls.meshRotate !== undefined
 		) {
-			if (
-				component.controls.meshRotate.autoRotate &&
-				component.controls.meshRotate.speed !== 0
-			) {
-				component.mesh.addRotation(
-					0,
-					component.controls.meshRotate.speed * timer.delta,
-					0
-				);
+			if (component.controls.meshRotate.autoRotate && component.controls.meshRotate.speed !== 0) {
+				component.mesh.addRotation(0, component.controls.meshRotate.speed * timer.delta, 0);
 			}
 		}
 	}
@@ -4502,10 +4088,7 @@ export class ThreeUtil {
 	 * @param control
 	 * @param [isEnable]
 	 */
-	public static setGuiEnabled(
-		control: ThreeGuiController,
-		isEnable: boolean = true
-	) {
+	public static setGuiEnabled(control: ThreeGuiController, isEnable: boolean = true) {
 		if (control !== null && control !== undefined && control.domElement) {
 			const domElement = control.domElement;
 			if (isEnable) {
@@ -4526,20 +4109,13 @@ export class ThreeUtil {
 	 * @param name
 	 * @returns gui control param
 	 */
-	public static getGuiControlParam(
-		children: GuiControlParam[],
-		name: string
-	): GuiControlParam {
+	public static getGuiControlParam(children: GuiControlParam[], name: string): GuiControlParam {
 		for (let i = 0; i < children.length; i++) {
 			const child = children[i];
 			if (child.name === name) {
 				return child;
 			}
-			if (
-				child.type === 'folder' &&
-				child.children &&
-				child.children.length > 0
-			) {
+			if (child.type === 'folder' && child.children && child.children.length > 0) {
 				const foundChild = this.getGuiControlParam(child.children, name);
 				if (foundChild !== null) {
 					return foundChild;
@@ -4556,11 +4132,7 @@ export class ThreeUtil {
 	 * @param params
 	 * @returns gui
 	 */
-	public static setupGui(
-		control: any,
-		gui: ThreeGuiController,
-		params: GuiControlParam[]
-	): ThreeGuiController {
+	public static setupGui(control: any, gui: ThreeGuiController, params: GuiControlParam[]): ThreeGuiController {
 		params.forEach((param) => {
 			const params = param.control ? control[param.control] : control;
 			if (this.isNotNull(params)) {
@@ -4681,17 +4253,14 @@ export interface RendererEvent {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeClock) page for details.
  *
  */
-export class ThreeClock extends THREE.Clock {
+export class ThreeClock extends N3JS.Clock {
 	/**
 	 * Gets timer
 	 * @param renderer
 	 * @param event
 	 * @returns timer
 	 */
-	public getTimer(
-		renderer: I3JS.IRenderer,
-		event: RendererEvent
-	): RendererTimer {
+	public getTimer(renderer: I3JS.IRenderer, event: RendererEvent): RendererTimer {
 		const delta = this.getDelta();
 		const elapsedTime = this.getElapsedTime();
 		return {
@@ -4735,7 +4304,7 @@ export class ThreeStats implements I3JS.IStats {
 	 * @param [style]
 	 */
 	constructor(style?: object) {
-		this.stats = (THREE.Stats as any)();
+		this.stats = (N3JS.Stats as any)();
 		this.domElement = this.dom = this.stats.dom;
 		this.REVISION = this.stats.REVISION;
 		this.setStyle(style);
@@ -4812,17 +4381,7 @@ export interface GuiControlParam {
 	/**
 	 * The type of gui control
 	 */
-	type?:
-		| 'number'
-		| 'folder'
-		| 'select'
-		| 'folder'
-		| 'button'
-		| 'color'
-		| 'checkbox'
-		| 'input'
-		| 'listen'
-		| 'auto';
+	type?: 'number' | 'folder' | 'select' | 'folder' | 'button' | 'color' | 'checkbox' | 'input' | 'listen' | 'auto';
 	/**
 	 * The min value of number type
 	 */
@@ -4892,7 +4451,7 @@ export class ThreeGeometryCustom {
 	 * @returns geometry
 	 */
 	public initGeometry(): I3JS.IBufferGeometry {
-		return new THREE.BufferGeometry();
+		return new N3JS.BufferGeometry();
 	}
 
 	/**
@@ -5014,13 +4573,7 @@ export class ThreeGui implements ThreeGuiController {
 	 * @param [options3]
 	 * @returns add
 	 */
-	public add(
-		object: any,
-		property: string,
-		option1?: any,
-		options2?: any,
-		options3?: any
-	): ThreeGuiController {
+	public add(object: any, property: string, option1?: any, options2?: any, options3?: any): ThreeGuiController {
 		return this.gui.add(object, property, option1, options2, options3);
 	}
 
@@ -5134,13 +4687,7 @@ export class ThreeGui implements ThreeGuiController {
  */
 export interface ThreeGuiController {
 	domElement?: HTMLElement;
-	add(
-		object: any,
-		property: string,
-		min?: any,
-		max?: number,
-		step?: number
-	): ThreeGuiController;
+	add(object: any, property: string, min?: any, max?: number, step?: number): ThreeGuiController;
 	addColor(object: any, property: string): ThreeGuiController;
 	remove(controller: any): this;
 	destroy(): this;

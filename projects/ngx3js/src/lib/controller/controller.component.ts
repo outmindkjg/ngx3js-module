@@ -17,7 +17,7 @@ import {
 	ThreeColor,
 	ThreeUtil,
 	I3JS,
-	THREE,
+	N3JS,
 } from '../interface';
 import { HtmlCollection } from '../visual/visual.component';
 import {
@@ -412,7 +412,7 @@ export class ControllerComponent
 	/**
 	 * Ref object3dposition of controller component
 	 */
-	private refObject3dposition: I3JS.IVector3 = new THREE.Vector3();
+	private refObject3dposition: I3JS.IVector3 = new N3JS.Vector3();
 
 	/**
 	 * The Duration of controller component
@@ -439,7 +439,7 @@ export class ControllerComponent
 			this._controlItem.position = this.refObject3d.position;
 			this._controlItem.rotation = this.refObject3d.rotation;
 			this._controlItem.scale = this.refObject3d.scale;
-			if (this.refObject3d instanceof THREE.Mesh) {
+			if (this.refObject3d instanceof N3JS.Mesh) {
 				if (Array.isArray(this.refObject3d.material)) {
 					if (this.refObject3d.material.length > 0) {
 						this._controlItem.material = this.refObject3d.material[0];
@@ -451,7 +451,7 @@ export class ControllerComponent
 				}
 				if (
 					ThreeUtil.isNotNull(this._controlItem.material) &&
-					this._controlItem.material instanceof THREE.ShaderMaterial
+					this._controlItem.material instanceof N3JS.ShaderMaterial
 				) {
 					this._controlItem.uniforms = this._controlItem.material.uniforms;
 				} else {
@@ -533,8 +533,8 @@ export class ControllerComponent
 				if (typeof controller === 'string' && this.refObject3d !== null) {
 					const controllerItemList: ControllerItemComponent[] = [];
 					if (this.pathGuide === null) {
-						this.pathGuide = new THREE.Group();
-						this.pathGuide.add(new THREE.Group());
+						this.pathGuide = new N3JS.Group();
+						this.pathGuide.add(new N3JS.Group());
 						if (this.visible) {
 							this.refObject3d.parent.add(this.pathGuide as any);
 						}

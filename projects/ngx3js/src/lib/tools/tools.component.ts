@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { I3JS, THREE, ThreeUtil } from '../interface';
+import { I3JS, N3JS, ThreeUtil } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { AbstractTextureComponent } from '../texture.abstract';
@@ -172,7 +172,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 	 */
 	public getTexture(): I3JS.ITexture {
 		const texture = this.getTool();
-		if (texture instanceof THREE.Texture) {
+		if (texture instanceof N3JS.Texture) {
 			return texture as any;
 		} else {
 			return null;
@@ -189,7 +189,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 			let tool: any = null;
 			switch (this.type.toLowerCase()) {
 				case 'pmremtexture':
-					const pmremGenerator = new THREE.PMREMGenerator(ThreeUtil.getRenderer() as any);
+					const pmremGenerator = new N3JS.PMREMGenerator(ThreeUtil.getRenderer() as any);
 					if (ThreeUtil.isNotNull(this.storageName)) {
 						this.localStorageService.getTexture(
 							this.storageName,
@@ -205,7 +205,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 						);
 						tool = {};
 					} else {
-						const envScene = new THREE.Scene();
+						const envScene = new N3JS.Scene();
 						if (ThreeUtil.isNotNull(this.background)) {
 							if (this.background instanceof AbstractTextureComponent) {
 								envScene.background = this.background.getTexture() as any;
@@ -219,7 +219,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 					break;
 				case 'audio':
 					if (this.audioLoader === null) {
-						this.audioLoader = new THREE.AudioLoader() as any;
+						this.audioLoader = new N3JS.AudioLoader() as any;
 					}
 					tool = {};
 					this.audioLoader.load(ThreeUtil.getStoreUrl(this.url), (audioBuffer: AudioBuffer) => {
@@ -232,7 +232,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 				case 'cuberender':
 				case 'webglcuberendertarget':
 				default:
-					tool = new THREE.WebGLCubeRenderTarget(this.getSize(256), {
+					tool = new N3JS.WebGLCubeRenderTarget(this.getSize(256), {
 						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, 'sRGB'),
 						format: ThreeUtil.getPixelFormatSafe(this.format, 'RGBA', ''),
 					});

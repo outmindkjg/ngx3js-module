@@ -11,7 +11,7 @@ import {
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
-import { I3JS, RendererTimer, THREE, ThreeUtil } from '../interface';
+import { I3JS, RendererTimer, N3JS, ThreeUtil } from '../interface';
 import { LookatComponent } from '../lookat/lookat.component';
 import { SceneComponent } from '../scene/scene.component';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
@@ -650,7 +650,7 @@ export class ControlComponent
 		}
 		if (ThreeUtil.isNotNull(this.control)) {
 			if (
-				this.control instanceof THREE.TransformControls &&
+				this.control instanceof N3JS.TransformControls &&
 				this.control.parent
 			) {
 				this.control.parent.remove(this.control);
@@ -841,7 +841,7 @@ export class ControlComponent
 			const domElement = this._domElement;
 			if (this.control !== null) {
 				if (
-					this.control instanceof THREE.TransformControls &&
+					this.control instanceof N3JS.TransformControls &&
 					this.control.parent
 				) {
 					this.control.parent.remove(this.control);
@@ -887,7 +887,7 @@ export class ControlComponent
 					break;
 				case 'flycontrols':
 				case 'fly':
-					const flyControls = new THREE.FlyControls(camera, domElement);
+					const flyControls = new N3JS.FlyControls(camera, domElement);
 					if (ThreeUtil.isNotNull(this.movementSpeed)) {
 						flyControls.movementSpeed = this.movementSpeed;
 					}
@@ -911,7 +911,7 @@ export class ControlComponent
 					break;
 				case 'pointerlockcontrols':
 				case 'pointerlock':
-					const pointerLockControls = new THREE.PointerLockControls(
+					const pointerLockControls = new N3JS.PointerLockControls(
 						camera
 					);
 					control = pointerLockControls;
@@ -921,7 +921,7 @@ export class ControlComponent
 					break;
 				case 'dragcontrols':
 				case 'drag':
-					const dragControls = new THREE.DragControls(
+					const dragControls = new N3JS.DragControls(
 						[],
 						camera,
 						domElement
@@ -930,7 +930,7 @@ export class ControlComponent
 					break;
 				case 'firstpersoncontrols':
 				case 'firstperson':
-					const firstPersonControls = new THREE.FirstPersonControls(
+					const firstPersonControls = new N3JS.FirstPersonControls(
 						camera,
 						domElement
 					);
@@ -977,7 +977,7 @@ export class ControlComponent
 					break;
 				case 'transformcontrols':
 				case 'transform':
-					const transformControls = new THREE.TransformControls(
+					const transformControls = new N3JS.TransformControls(
 						camera,
 						domElement
 					);
@@ -996,7 +996,7 @@ export class ControlComponent
 					break;
 				case 'trackballcontrols':
 				case 'trackball':
-					const trackballControls = new THREE.TrackballControls(
+					const trackballControls = new N3JS.TrackballControls(
 						camera,
 						domElement
 					);
@@ -1010,7 +1010,7 @@ export class ControlComponent
 					break;
 				case 'arcballcontrols':
 				case 'arcball':
-					const arcballControls = new THREE.ArcballControls(
+					const arcballControls = new N3JS.ArcballControls(
 						camera,
 						domElement,
 						this._scene.first.getScene()
@@ -1034,19 +1034,19 @@ export class ControlComponent
 					if (ThreeUtil.isNotNull(csmScene.getSceneDumpy)) {
 						csmScene = csmScene.getSceneDumpy();
 					}
-					if (!(csmScene instanceof THREE.Scene)) {
+					if (!(csmScene instanceof N3JS.Scene)) {
 						this.consoleLog('error Scene', csmScene, 'error');
-						csmScene = new THREE.Scene();
+						csmScene = new N3JS.Scene();
 					}
 					let csmCamera = ThreeUtil.getTypeSafe(this.camera, this._camera, {});
 					if (ThreeUtil.isNotNull(csmCamera.getCamera)) {
 						csmCamera = csmCamera.getObject3d();
 					}
-					if (!(csmCamera instanceof THREE.Camera)) {
+					if (!(csmCamera instanceof N3JS.Camera)) {
 						this.consoleLog('error Camera', csmCamera, 'error');
-						csmCamera = new THREE.Camera();
+						csmCamera = new N3JS.Camera();
 					}
-					const csm = new THREE.CsmControls({
+					const csm = new N3JS.CsmControls({
 						maxFar: ThreeUtil.getTypeSafe(this.maxFar, 100000),
 						cascades: ThreeUtil.getTypeSafe(this.cascades, 3),
 						mode: ThreeUtil.getTypeSafe(this.mode, 'practical'),
@@ -1056,7 +1056,7 @@ export class ControlComponent
 							this.lightDirectionX,
 							this.lightDirectionY,
 							this.lightDirectionZ,
-							new THREE.Vector3(1, 1, 1)
+							new N3JS.Vector3(1, 1, 1)
 						).normalize(),
 						camera: csmCamera,
 					});
@@ -1085,7 +1085,7 @@ export class ControlComponent
 				case 'orbitcontrols':
 				case 'orbit':
 				default:
-					const orbitControls = new THREE.OrbitControls(
+					const orbitControls = new N3JS.OrbitControls(
 						camera,
 						domElement
 					);
@@ -1165,13 +1165,13 @@ export class ControlComponent
 	public render(renderTimer: RendererTimer) {
 		if (this.control !== null && ThreeUtil.isNotNull(this.control.update)) {
 			if (
-				this.control instanceof THREE.FlyControls ||
-				this.control instanceof THREE.FirstPersonControls ||
+				this.control instanceof N3JS.FlyControls ||
+				this.control instanceof N3JS.FirstPersonControls ||
 				this.control instanceof NgxPlaneControls ||
 				this.control instanceof NgxAVRControls
 			) {
 				this.control.update(renderTimer.delta);
-			} else if (this.control instanceof THREE.TransformControls) {
+			} else if (this.control instanceof N3JS.TransformControls) {
 				// pass
 			} else {
 				this.control.update();

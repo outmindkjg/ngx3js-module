@@ -1,5 +1,5 @@
 import * as Curves from './curves/curves';
-import { RendererTimer, ThreeUtil, THREE, I3JS } from '../interface';
+import { RendererTimer, ThreeUtil, N3JS, I3JS } from '../interface';
 import { CurvesCircle } from './curves/circle';
 import * as GSAP from './curves/gsap';
 import { CurvesLine } from './curves/line';
@@ -246,7 +246,7 @@ export class CurveUtils {
 		normalOption?: CurvesNormalParameters,
 		option?: any
 	): CurvesNormal {
-		if (key instanceof THREE.Curve) {
+		if (key instanceof N3JS.Curve) {
 			return new CurvesNormal(key, normalOption);
 		} else if (typeof key === 'string') {
 			return new CurvesNormal(this.getCurve(key, option), normalOption);
@@ -274,7 +274,7 @@ export interface CurvesNormalParameters {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve) page for a live curve demo.
  *
  */
-export class CurvesNormal extends THREE.Curve {
+export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * The Scale of curves normal
 	 */
@@ -382,13 +382,13 @@ export class CurvesNormal extends THREE.Curve {
 			maxZ = Math.max(maxZ, v.z);
 		}
 		this.curve = curve;
-		this._center = new THREE.Vector3(
+		this._center = new N3JS.Vector3(
 			minX + maxX,
 			minY + maxY,
 			minZ + maxZ
 		).multiplyScalar(0.5);
 		const maxL = Math.max(maxX - minX, maxY - minY, maxZ - minZ);
-		this._scale = new THREE.Vector3(1, 1, 1);
+		this._scale = new N3JS.Vector3(1, 1, 1);
 		if (maxL > 2.5) {
 			this._scale.multiplyScalar(2 / maxL);
 		}
@@ -503,7 +503,7 @@ export class CurvesNormal extends THREE.Curve {
 	public getPointV3(timer: RendererTimer, p: I3JS.IVector3): I3JS.IVector3 {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastV3 === null) {
-			this._lastV3 = new THREE.Vector3(cp.x, cp.y, cp.z);
+			this._lastV3 = new N3JS.Vector3(cp.x, cp.y, cp.z);
 		} else {
 			this._lastV3.copy(cp);
 		}
@@ -528,7 +528,7 @@ export class CurvesNormal extends THREE.Curve {
 	public getPointV2(timer: RendererTimer, p: I3JS.IVector2): I3JS.IVector2 {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastV2 === null) {
-			this._lastV2 = new THREE.Vector2(cp.x, cp.y);
+			this._lastV2 = new N3JS.Vector2(cp.x, cp.y);
 		} else {
 			this._lastV2.set(cp.x, cp.y);
 		}
@@ -550,7 +550,7 @@ export class CurvesNormal extends THREE.Curve {
 	public getPointEuler(timer: RendererTimer, p: I3JS.IEuler): I3JS.IEuler {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastEuler === null) {
-			this._lastEuler = new THREE.Euler(cp.x, cp.y, cp.z);
+			this._lastEuler = new N3JS.Euler(cp.x, cp.y, cp.z);
 		} else {
 			this._lastEuler.set(cp.x, cp.y, cp.z);
 		}
@@ -573,7 +573,7 @@ export class CurvesNormal extends THREE.Curve {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		cp.clampScalar(0, 1);
 		if (this._lastColor === null) {
-			this._lastColor = new THREE.Color(cp.x, cp.y, cp.z);
+			this._lastColor = new N3JS.Color(cp.x, cp.y, cp.z);
 		} else {
 			this._lastColor.setRGB(cp.x, cp.y, cp.z);
 		}
@@ -599,7 +599,7 @@ export class CurvesNormal extends THREE.Curve {
 		max: number = 1
 	): number {
 		if (this._lastFloat === null) {
-			this._lastFloat = new THREE.Vector3();
+			this._lastFloat = new N3JS.Vector3();
 		}
 		this.getPointV3(timer, this._lastFloat);
 		const length = Math.max(0, Math.min(1, (this._lastFloat.y + 1) / 2));

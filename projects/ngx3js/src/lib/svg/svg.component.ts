@@ -7,7 +7,7 @@ import {
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
-import { I3JS, THREE, ThreeUtil, ThreeVector } from '../interface';
+import { I3JS, N3JS, ThreeUtil, ThreeVector } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractObject3dComponent } from '../object3d.abstract';
 import { TranslationComponent } from '../translation/translation.component';
@@ -568,12 +568,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 			const vectors: I3JS.IVector3[] = [];
 			if (ThreeUtil.isNotNull(this.extrudePath)) {
 				this.extrudePath.forEach((p) => {
-					vectors.push(new THREE.Vector3(p.x, p.y, p.z));
+					vectors.push(new N3JS.Vector3(p.x, p.y, p.z));
 				});
 			}
 			if (ThreeUtil.isNotNull(this.curvePath)) {
 				this.curvePath.forEach((p) => {
-					vectors.push(new THREE.Vector3(p.x, p.y, p.z));
+					vectors.push(new N3JS.Vector3(p.x, p.y, p.z));
 				});
 			}
 			switch (
@@ -585,7 +585,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 			) {
 				case 'catmullromcurve3':
 				default:
-					return new THREE.CatmullRomCurve3(
+					return new N3JS.CatmullRomCurve3(
 						vectors,
 						this.getClosed(false),
 						ThreeUtil.getTypeSafe(this.curveType, 'catmullrom'),
@@ -626,36 +626,36 @@ export class SvgComponent extends AbstractObject3dComponent {
 			switch (this.type.toLowerCase()) {
 				case 'sprite':
 					materials.push(
-						new THREE.SpriteMaterial({
+						new N3JS.SpriteMaterial({
 							color: this.getColor(),
 							opacity: this.getOpacity(),
 							transparent: this.getTransparent(),
-							side: THREE.DoubleSide,
+							side: N3JS.DoubleSide,
 						})
 					);
 					break;
 				case 'points':
 					materials.push(
-						new THREE.PointsMaterial({
+						new N3JS.PointsMaterial({
 							color: this.getColor(),
 							opacity: this.getOpacity(),
 							transparent: this.getTransparent(),
-							side: THREE.DoubleSide,
+							side: N3JS.DoubleSide,
 						})
 					);
 					break;
 				case 'line':
 					materials.push(
-						new THREE.MeshBasicMaterial({
+						new N3JS.MeshBasicMaterial({
 							color: this.getColor(),
 							opacity: this.getOpacity(),
-							side: THREE.DoubleSide,
+							side: N3JS.DoubleSide,
 						})
 					);
 					break;
 				default:
 					materials.push(
-						new THREE.MeshPhongMaterial({
+						new N3JS.MeshPhongMaterial({
 							color: this.getColor(0x333333),
 							shininess: this.getShininess(100),
 							opacity: this.getOpacity(),
@@ -751,7 +751,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	public resetMeshes() {
 		if (this.parent !== null && (this.svgMesh === null || this._needUpdate)) {
 			this.needUpdate = false;
-			this.svgMesh = new THREE.Group();
+			this.svgMesh = new N3JS.Group();
 			this.getPaths((result: SvgGeometry[]) => {
 				this.meshes = [];
 				this.meshPositions = [];
@@ -770,16 +770,16 @@ export class SvgComponent extends AbstractObject3dComponent {
 					const meshMaterial: I3JS.IMaterial = materialList[idx];
 					switch (this.type.toLowerCase()) {
 						case 'points':
-							mesh = new THREE.Points(geometry, meshMaterial);
+							mesh = new N3JS.Points(geometry, meshMaterial);
 							break;
 						case 'line':
-							const line = new THREE.Line(geometry, meshMaterial);
+							const line = new N3JS.Line(geometry, meshMaterial);
 							line.computeLineDistances();
 							line.castShadow = this.castShadow;
 							mesh = line;
 							break;
 						default:
-							mesh = new THREE.Mesh(geometry, meshMaterial);
+							mesh = new N3JS.Mesh(geometry, meshMaterial);
 							mesh.castShadow = this.castShadow;
 							break;
 					}
@@ -859,7 +859,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 			switch (this.geometryType.toLowerCase()) {
 				case 'extrudebuffer':
 				case 'extrude':
-					geometry = new THREE.ExtrudeGeometry(shape.shape, {
+					geometry = new N3JS.ExtrudeGeometry(shape.shape, {
 						curveSegments: this.getCurveSegments(),
 						steps: this.getSteps(),
 						depth: this.getDepth(),
@@ -890,7 +890,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 					const sumShapes: I3JS.IShape[] = shape.shape;
 					sumShapes.push.apply(shape.shape, holeShape as any);
 					if (ThreeUtil.isNotNull(this.stroke)) {
-						const AnySVGLoader = THREE.SVGLoader as any;
+						const AnySVGLoader = N3JS.SVGLoader as any;
 						const style = AnySVGLoader.getStrokeStyle(
 							this.stroke,
 							this.getColor(0x006699).getStyle()
@@ -907,7 +907,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 						});
 					} else {
 						sumShapes.forEach((shape) => {
-							let outlineGeometry = new THREE.BufferGeometry();
+							let outlineGeometry = new N3JS.BufferGeometry();
 							outlineGeometry.setFromPoints(shape.getPoints());
 							geometries.push({
 								geometry: this.applyTextAlign(outlineGeometry, boundingSphere),
@@ -919,7 +919,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 				case 'shapebuffer':
 				case 'shape':
 				default:
-					geometry = new THREE.ShapeGeometry(
+					geometry = new N3JS.ShapeGeometry(
 						shape.shape,
 						this.getCurveSegments(12)
 					);
@@ -946,7 +946,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 					this.getText('test'),
 					this.getSize(100)
 				) as any;
-				const geometry = new THREE.ShapeGeometry(
+				const geometry = new N3JS.ShapeGeometry(
 					shapes,
 					this.getCurveSegments(12)
 				);
@@ -963,7 +963,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 							shapes.push(shape as any);
 						});
 				});
-				const geometry = new THREE.ShapeGeometry(
+				const geometry = new N3JS.ShapeGeometry(
 					shapes,
 					this.getCurveSegments(12)
 				);
@@ -978,7 +978,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param onload
 	 */
 	public getSVGResult(onload: (data: I3JS.ISVGResult) => void) {
-		const loader = new THREE.SVGLoader();
+		const loader = new N3JS.SVGLoader();
 		if (ThreeUtil.isNotNull(this.url)) {
 			loader.load(this.url, (data: I3JS.ISVGResult) => {
 				onload(data);

@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Lut } from 'three/examples/jsm/math/Lut';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ThreeUtil, THREE, I3JS } from '../interface';
+import { ThreeUtil, N3JS, I3JS } from '../interface';
 import { LocalStorageService } from '../local-storage.service';
 import { AbstractTextureComponent } from '../texture.abstract';
 import { CanvasFunctionType } from './textureUtils';
@@ -445,7 +445,7 @@ export class TextureComponent
 					this.subscribeRefer(
 						'referTexture',
 						this.refer.textureSubscribe().subscribe((texture: any) => {
-							if (texture instanceof THREE.Texture) {
+							if (texture instanceof N3JS.Texture) {
 								this.setReferTexture(texture);
 							} else {
 								this.setReferTexture(this.refer.getTexture());
@@ -453,7 +453,7 @@ export class TextureComponent
 						})
 					);
 				} else {
-					this.texture = new THREE.Texture();
+					this.texture = new N3JS.Texture();
 				}
 			} else if (ThreeUtil.isNotNull(this.storageName)) {
 				const cubeType = ThreeUtil.getTypeSafe(this.cubeType, 'none');
@@ -465,23 +465,23 @@ export class TextureComponent
 					case 'cube':
 					case 'cubemap':
 					case 'fromcubemap':
-						this.texture = new THREE.CubeTexture([]);
+						this.texture = new N3JS.CubeTexture([]);
 						break;
 					default:
 						if (
 							this.storageName.endsWith('.hdr') ||
 							this.storageName.endsWith('.exr')
 						) {
-							this.texture = new THREE.DataTexture(new Uint8Array(6), 1, 1);
+							this.texture = new N3JS.DataTexture(new Uint8Array(6), 1, 1);
 						} else if (
 							this.storageName.endsWith('.pvr') ||
 							this.storageName.endsWith('.ktx') ||
 							this.storageName.endsWith('.ktx2') ||
 							this.storageName.endsWith('.dds')
 						) {
-							this.texture = new THREE.CompressedTexture(null, 1, 1);
+							this.texture = new N3JS.CompressedTexture(null, 1, 1);
 						} else {
-							this.texture = new THREE.Texture();
+							this.texture = new N3JS.Texture();
 						}
 						break;
 				}
@@ -495,7 +495,7 @@ export class TextureComponent
 			} else {
 				if (ThreeUtil.isNotNull(this.canvas)) {
 					const canvas = this.getCanvas();
-					this.texture = new THREE.CanvasTexture(canvas);
+					this.texture = new N3JS.CanvasTexture(canvas);
 					if (canvas instanceof HTMLCanvasElement) {
 						canvas.addEventListener('needupdate', () => {
 							this.texture.needsUpdate = true;
@@ -505,7 +505,7 @@ export class TextureComponent
 					ThreeUtil.isNotNull(this.perlin) &&
 					this.perlin.getPerlinGeometry
 				) {
-					this.texture = new THREE.CanvasTexture(
+					this.texture = new N3JS.CanvasTexture(
 						this.perlin
 							.getPerlinGeometry()
 							.getTexture(
@@ -513,7 +513,7 @@ export class TextureComponent
 									this.sunX,
 									this.sunY,
 									this.sunZ,
-									new THREE.Vector3(1, 1, 1)
+									new N3JS.Vector3(1, 1, 1)
 								),
 								ThreeUtil.getColorSafe(this.color, 0x602000),
 								ThreeUtil.getColorSafe(this.add, 0xe08060)

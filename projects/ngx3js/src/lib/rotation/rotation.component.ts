@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TagAttributes, ThreeUtil, THREE, I3JS } from '../interface';
+import { TagAttributes, ThreeUtil, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -185,7 +185,7 @@ export class RotationComponent
 					});
 				}
 				object3dList.forEach((object3d) => {
-					if (object3d instanceof THREE.Object3D) {
+					if (object3d instanceof N3JS.Object3D) {
 						if (
 							ThreeUtil.isNotNull(this.x) &&
 							ThreeUtil.isNotNull(this.y) &&
@@ -300,7 +300,7 @@ export class RotationComponent
 				typeof this.y === 'number' &&
 				typeof this.z === 'number'
 			) {
-				rotation = new THREE.Euler(this.x, this.y, this.z);
+				rotation = new N3JS.Euler(this.x, this.y, this.z);
 			} else {
 				rotation = ThreeUtil.getEulerSafe(this.x, this.y, this.z, null, true);
 			}

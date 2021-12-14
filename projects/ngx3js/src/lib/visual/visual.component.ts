@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { BackgroundComponent } from '../background/background.component';
 import { HtmlComponent } from '../html/html.component';
-import { CssStyle, ThreeUtil, THREE, I3JS } from '../interface';
+import { CssStyle, ThreeUtil, N3JS, I3JS } from '../interface';
 import { AbstractSubscribeComponent } from '../subscribe.abstract';
 import { TransformComponent } from '../transform/transform.component';
 
@@ -319,7 +319,7 @@ export class VisualComponent
 			this.parentCollection.children.push(this.collection);
 		}
 		this.parentSize = parentSize;
-		this.eleSize = new THREE.Vector2(this.parentSize.x, this.parentSize.y);
+		this.eleSize = new N3JS.Vector2(this.parentSize.x, this.parentSize.y);
 		this.getVisual();
 	}
 
