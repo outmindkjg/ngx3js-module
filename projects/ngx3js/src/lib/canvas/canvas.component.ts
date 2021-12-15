@@ -3,11 +3,11 @@ import {
 	ElementRef,
 	Input,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { HtmlCollection } from '../visual/visual.component';
-import { CssStyle, ThreeUtil, I3JS, N3JS } from './../interface';
+import { ICssStyle, IHtmlCollection } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 
 /**
  * The Canvas component.
@@ -21,8 +21,8 @@ import { CssStyle, ThreeUtil, I3JS, N3JS } from './../interface';
 	templateUrl: './canvas.component.html',
 	styleUrls: ['./canvas.component.scss'],
 })
-export class CanvasComponent
-	extends AbstractSubscribeComponent
+export class NgxCanvasComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -33,7 +33,7 @@ export class CanvasComponent
 	/**
 	 * The Collection of canvas component
 	 */
-	private collection: HtmlCollection = {
+	private collection: IHtmlCollection = {
 		html: null,
 		name: null,
 		component: this,
@@ -60,11 +60,11 @@ export class CanvasComponent
 	 */
 	ngOnDestroy(): void {
 		if (this.canvas !== null) {
-			if (ThreeUtil.isNotNull(this.canvas.parentNode)) {
+			if (NgxThreeUtil.isNotNull(this.canvas.parentNode)) {
 				this.canvas.parentNode.removeChild(this.canvas);
 			}
-			if (ThreeUtil.isNotNull(this.cssClazzName)) {
-				ThreeUtil.removeCssStyle(this.canvas, this.cssClazzName);
+			if (NgxThreeUtil.isNotNull(this.cssClazzName)) {
+				NgxThreeUtil.removeCssStyle(this.canvas, this.cssClazzName);
 				this.cssClazzName = null;
 			}
 			this.canvas = null;
@@ -107,18 +107,18 @@ export class CanvasComponent
 	/**
 	 * Canvas size of canvas component
 	 */
-	private canvasSize: I3JS.IVector2 = null;
+	private canvasSize: I3JS.Vector2 = null;
 
 	/**
 	 * Ele size of canvas component
 	 */
-	private eleSize: I3JS.IVector2 = null;
+	private eleSize: I3JS.Vector2 = null;
 
 	/**
 	 * Sets size
 	 * @param size
 	 */
-	public setSize(size: I3JS.IVector2) {
+	public setSize(size: I3JS.Vector2) {
 		this.canvasSize = size;
 		this.eleSize = new N3JS.Vector2(this.canvasSize.x, this.canvasSize.y);
 		this.applyHtmlStyle();
@@ -141,8 +141,8 @@ export class CanvasComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.canvas !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, []);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, []);
 			}
 			super.applyChanges(changes);
 		}
@@ -152,7 +152,7 @@ export class CanvasComponent
 	 * Gets collection
 	 * @returns collection
 	 */
-	public getCollection(): HtmlCollection {
+	public getCollection(): IHtmlCollection {
 		return this.collection;
 	}
 
@@ -160,8 +160,8 @@ export class CanvasComponent
 	 * Gets style
 	 * @returns style
 	 */
-	public getStyle(): CssStyle {
-		const style: CssStyle = {
+	public getStyle(): ICssStyle {
+		const style: ICssStyle = {
 			position: 'absolute',
 			left: 0,
 			top: 0,
@@ -180,8 +180,8 @@ export class CanvasComponent
 	 */
 	public applyHtmlStyle() {
 		if (this.canvas !== null) {
-			const style: CssStyle = this.getStyle();
-			this.cssClazzName = ThreeUtil.addCssStyle(
+			const style: ICssStyle = this.getStyle();
+			this.cssClazzName = NgxThreeUtil.addCssStyle(
 				this.canvas,
 				style,
 				this.cssClazzName,

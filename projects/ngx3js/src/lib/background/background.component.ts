@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { CssStyle, I3JS, ThreeUtil } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { I3JS, NgxThreeUtil } from '../interface';
+import { ICssStyle } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Background component.
@@ -16,8 +17,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './background.component.html',
 	styleUrls: ['./background.component.scss'],
 })
-export class BackgroundComponent
-	extends AbstractSubscribeComponent
+export class NgxBackgroundComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -318,8 +319,8 @@ export class BackgroundComponent
 	 */
 	private getBackgroundColor(
 		def?: string | number
-	): I3JS.IColor | I3JS.IVector4 {
-		return ThreeUtil.getColorAlphaSafe(
+	): I3JS.Color | I3JS.Vector4 {
+		return NgxThreeUtil.getColorAlphaSafe(
 			this.backgroundColor,
 			this.backgroundAlpha,
 			def
@@ -334,12 +335,12 @@ export class BackgroundComponent
 	 */
 	private getBackgroundRepeat(def?: string): string {
 		if (
-			ThreeUtil.isNotNull(this.backgroundRepeatX) &&
-			ThreeUtil.isNotNull(this.backgroundRepeatX)
+			NgxThreeUtil.isNotNull(this.backgroundRepeatX) &&
+			NgxThreeUtil.isNotNull(this.backgroundRepeatX)
 		) {
 			return this.backgroundRepeatX + ' ' + this.backgroundRepeatY;
 		}
-		return ThreeUtil.getTypeSafe(this.backgroundRepeat, def);
+		return NgxThreeUtil.getTypeSafe(this.backgroundRepeat, def);
 	}
 
 	/**
@@ -350,12 +351,12 @@ export class BackgroundComponent
 	 */
 	private getBackgroundPosition(def?: string): string {
 		if (
-			ThreeUtil.isNotNull(this.backgroundPositionX) &&
-			ThreeUtil.isNotNull(this.backgroundPositionY)
+			NgxThreeUtil.isNotNull(this.backgroundPositionX) &&
+			NgxThreeUtil.isNotNull(this.backgroundPositionY)
 		) {
 			return this.backgroundPositionX + ' ' + this.backgroundPositionY;
 		}
-		return ThreeUtil.getTypeSafe(this.backgroundPosition, def);
+		return NgxThreeUtil.getTypeSafe(this.backgroundPosition, def);
 	}
 
 	/**
@@ -366,12 +367,12 @@ export class BackgroundComponent
 	 */
 	private getBackgroundSize(def?: string): string {
 		if (
-			ThreeUtil.isNotNull(this.backgroundSizeX) &&
-			ThreeUtil.isNotNull(this.backgroundSizeY)
+			NgxThreeUtil.isNotNull(this.backgroundSizeX) &&
+			NgxThreeUtil.isNotNull(this.backgroundSizeY)
 		) {
 			return this.backgroundSizeX + ' ' + this.backgroundSizeY;
 		}
-		return ThreeUtil.getTypeSafe(this.backgroundSize, def);
+		return NgxThreeUtil.getTypeSafe(this.backgroundSize, def);
 	}
 
 	/**
@@ -394,8 +395,8 @@ export class BackgroundComponent
 	 */
 	ngOnDestroy(): void {
 		if (this.parentNode !== null) {
-			if (ThreeUtil.isNotNull(this.cssClazzName)) {
-				ThreeUtil.removeCssStyle(this.parentNode, this.cssClazzName);
+			if (NgxThreeUtil.isNotNull(this.cssClazzName)) {
+				NgxThreeUtil.removeCssStyle(this.parentNode, this.cssClazzName);
 				this.cssClazzName = null;
 			}
 			this.parentNode = null;
@@ -445,57 +446,57 @@ export class BackgroundComponent
 	 * Gets style
 	 * @returns style
 	 */
-	public getStyle(): CssStyle {
+	public getStyle(): ICssStyle {
 		return {
-			content: ThreeUtil.getTypeSafe(this.content),
-			transition: ThreeUtil.getTypeSafe(this.transition),
+			content: NgxThreeUtil.getTypeSafe(this.content),
+			transition: NgxThreeUtil.getTypeSafe(this.transition),
 			backgroundColor: this.getBackgroundColor(),
-			backgroundImage: ThreeUtil.getTypeSafe(this.backgroundImage),
+			backgroundImage: NgxThreeUtil.getTypeSafe(this.backgroundImage),
 			backgroundRepeat: this.getBackgroundRepeat(),
 			backgroundPosition: this.getBackgroundPosition(),
 			backgroundSize: this.getBackgroundSize(),
-			backgroundClip: ThreeUtil.getTypeSafe(this.backgroundClip),
-			padding: ThreeUtil.getTypeSafe(this.padding),
-			paddingLeft: ThreeUtil.getTypeSafe(this.paddingLeft),
-			paddingTop: ThreeUtil.getTypeSafe(this.paddingTop),
-			paddingRight: ThreeUtil.getTypeSafe(this.paddingRight),
-			paddingBottom: ThreeUtil.getTypeSafe(this.paddingBottom),
-			margin: ThreeUtil.getTypeSafe(this.margin),
-			marginLeft: ThreeUtil.getTypeSafe(this.marginLeft),
-			marginTop: ThreeUtil.getTypeSafe(this.marginTop),
-			marginRight: ThreeUtil.getTypeSafe(this.marginRight),
-			marginBottom: ThreeUtil.getTypeSafe(this.marginBottom),
-			border: ThreeUtil.getTypeSafe(this.border),
-			borderColor: ThreeUtil.getTypeSafe(this.borderColor),
-			borderStyle: ThreeUtil.getTypeSafe(this.borderStyle),
-			borderWidth: ThreeUtil.getTypeSafe(this.borderWidth),
-			borderRadius: ThreeUtil.getTypeSafe(this.borderRadius),
-			borderLeft: ThreeUtil.getTypeSafe(this.borderLeft),
-			borderTop: ThreeUtil.getTypeSafe(this.borderTop),
-			borderRight: ThreeUtil.getTypeSafe(this.borderRight),
-			borderBottom: ThreeUtil.getTypeSafe(this.borderBottom),
-			borderImage: ThreeUtil.getTypeSafe(this.borderImage),
-			borderImageSource: ThreeUtil.getTypeSafe(this.borderImageSource),
-			borderImageSlice: ThreeUtil.getTypeSafe(this.borderImageSlice),
-			borderImageOutset: ThreeUtil.getTypeSafe(this.borderImageOutset),
-			borderImageRepeat: ThreeUtil.getTypeSafe(this.borderImageRepeat),
-			borderImageWidth: ThreeUtil.getTypeSafe(this.borderImageWidth),
-			opacity: ThreeUtil.getTypeSafe(this.opacity),
-			color: ThreeUtil.getTypeSafe(this.color),
-			fontFamily: ThreeUtil.getTypeSafe(this.fontFamily),
-			fontSize: ThreeUtil.getTypeSafe(this.fontSize),
-			fontStyle: ThreeUtil.getTypeSafe(this.fontStyle),
-			fontWeight: ThreeUtil.getTypeSafe(this.fontWeight),
-			textAlign: ThreeUtil.getTypeSafe(this.textAlign),
-			textTransform: ThreeUtil.getTypeSafe(this.textTransform),
-			textDecoration: ThreeUtil.getTypeSafe(this.textDecoration),
-			letterSpacing: ThreeUtil.getTypeSafe(this.letterSpacing),
-			textIndent: ThreeUtil.getTypeSafe(this.textIndent),
-			textJustify: ThreeUtil.getTypeSafe(this.textJustify),
-			textSizeAdjust: ThreeUtil.getTypeSafe(this.textSizeAdjust),
-			whiteSpace: ThreeUtil.getTypeSafe(this.whiteSpace),
-			wordBreak: ThreeUtil.getTypeSafe(this.wordBreak),
-			wordSpacing: ThreeUtil.getTypeSafe(this.wordSpacing),
+			backgroundClip: NgxThreeUtil.getTypeSafe(this.backgroundClip),
+			padding: NgxThreeUtil.getTypeSafe(this.padding),
+			paddingLeft: NgxThreeUtil.getTypeSafe(this.paddingLeft),
+			paddingTop: NgxThreeUtil.getTypeSafe(this.paddingTop),
+			paddingRight: NgxThreeUtil.getTypeSafe(this.paddingRight),
+			paddingBottom: NgxThreeUtil.getTypeSafe(this.paddingBottom),
+			margin: NgxThreeUtil.getTypeSafe(this.margin),
+			marginLeft: NgxThreeUtil.getTypeSafe(this.marginLeft),
+			marginTop: NgxThreeUtil.getTypeSafe(this.marginTop),
+			marginRight: NgxThreeUtil.getTypeSafe(this.marginRight),
+			marginBottom: NgxThreeUtil.getTypeSafe(this.marginBottom),
+			border: NgxThreeUtil.getTypeSafe(this.border),
+			borderColor: NgxThreeUtil.getTypeSafe(this.borderColor),
+			borderStyle: NgxThreeUtil.getTypeSafe(this.borderStyle),
+			borderWidth: NgxThreeUtil.getTypeSafe(this.borderWidth),
+			borderRadius: NgxThreeUtil.getTypeSafe(this.borderRadius),
+			borderLeft: NgxThreeUtil.getTypeSafe(this.borderLeft),
+			borderTop: NgxThreeUtil.getTypeSafe(this.borderTop),
+			borderRight: NgxThreeUtil.getTypeSafe(this.borderRight),
+			borderBottom: NgxThreeUtil.getTypeSafe(this.borderBottom),
+			borderImage: NgxThreeUtil.getTypeSafe(this.borderImage),
+			borderImageSource: NgxThreeUtil.getTypeSafe(this.borderImageSource),
+			borderImageSlice: NgxThreeUtil.getTypeSafe(this.borderImageSlice),
+			borderImageOutset: NgxThreeUtil.getTypeSafe(this.borderImageOutset),
+			borderImageRepeat: NgxThreeUtil.getTypeSafe(this.borderImageRepeat),
+			borderImageWidth: NgxThreeUtil.getTypeSafe(this.borderImageWidth),
+			opacity: NgxThreeUtil.getTypeSafe(this.opacity),
+			color: NgxThreeUtil.getTypeSafe(this.color),
+			fontFamily: NgxThreeUtil.getTypeSafe(this.fontFamily),
+			fontSize: NgxThreeUtil.getTypeSafe(this.fontSize),
+			fontStyle: NgxThreeUtil.getTypeSafe(this.fontStyle),
+			fontWeight: NgxThreeUtil.getTypeSafe(this.fontWeight),
+			textAlign: NgxThreeUtil.getTypeSafe(this.textAlign),
+			textTransform: NgxThreeUtil.getTypeSafe(this.textTransform),
+			textDecoration: NgxThreeUtil.getTypeSafe(this.textDecoration),
+			letterSpacing: NgxThreeUtil.getTypeSafe(this.letterSpacing),
+			textIndent: NgxThreeUtil.getTypeSafe(this.textIndent),
+			textJustify: NgxThreeUtil.getTypeSafe(this.textJustify),
+			textSizeAdjust: NgxThreeUtil.getTypeSafe(this.textSizeAdjust),
+			whiteSpace: NgxThreeUtil.getTypeSafe(this.whiteSpace),
+			wordBreak: NgxThreeUtil.getTypeSafe(this.wordBreak),
+			wordSpacing: NgxThreeUtil.getTypeSafe(this.wordSpacing),
 		};
 	}
 
@@ -506,8 +507,8 @@ export class BackgroundComponent
 		if (this.parentNode !== null) {
 			if (this.visible && this._needUpdate) {
 				this.needUpdate = false;
-				const style: CssStyle = this.getStyle();
-				this.cssClazzName = ThreeUtil.addCssStyle(
+				const style: ICssStyle = this.getStyle();
+				this.cssClazzName = NgxThreeUtil.addCssStyle(
 					this.parentNode,
 					style,
 					this.cssClazzName,
@@ -516,7 +517,7 @@ export class BackgroundComponent
 				);
 				super.setObject(this.cssClazzName);
 			} else {
-				ThreeUtil.toggleCssStyle(this.parentNode, this.cssClazzName, false);
+				NgxThreeUtil.toggleCssStyle(this.parentNode, this.cssClazzName, false);
 			}
 		}
 	}

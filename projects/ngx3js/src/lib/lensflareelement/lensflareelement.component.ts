@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeColor, ThreeUtil, I3JS, N3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { AbstractTextureComponent } from '../texture.abstract';
+import { NgxThreeUtil, I3JS, N3JS } from '../interface';
+import { INgxColor } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractTextureComponent } from '../texture.abstract';
 
 /**
  * The Lensflareelement component.
@@ -40,8 +41,8 @@ import { AbstractTextureComponent } from '../texture.abstract';
 	templateUrl: './lensflareelement.component.html',
 	styleUrls: ['./lensflareelement.component.scss'],
 })
-export class LensflareelementComponent
-	extends AbstractSubscribeComponent
+export class NgxLensflareelementComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -62,7 +63,7 @@ export class LensflareelementComponent
 	/**
 	 * color of LensflareElement
 	 */
-	@Input() public color: ThreeColor = null;
+	@Input() public color: INgxColor = null;
 
 	/**
 	 * Creates an instance of LensflareElement.
@@ -112,27 +113,27 @@ export class LensflareelementComponent
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): I3JS.ITexture {
-		return AbstractTextureComponent.getTextureImage(
-			ThreeUtil.getTypeSafe(this.image)
+	public getTexture(): I3JS.Texture {
+		return NgxAbstractTextureComponent.getTextureImage(
+			NgxThreeUtil.getTypeSafe(this.image)
 		);
 	}
 
 	/**
 	 * Lensflare element of LensflareElement
 	 */
-	private lensflareElement: I3JS.ILensflareElement = null;
+	private lensflareElement: I3JS.LensflareElement = null;
 
 	/**
 	 * The Lensflare of LensflareElement
 	 */
-	private lensflare: I3JS.ILensflare = null;
+	private lensflare: I3JS.Lensflare = null;
 
 	/**
 	 * Sets lensflare
 	 * @param lensflare
 	 */
-	public setLensflare(lensflare: I3JS.ILensflare) {
+	public setLensflare(lensflare: I3JS.Lensflare) {
 		if (this.lensflare !== lensflare) {
 			this.lensflare = lensflare;
 			this.lensflare.addElement(this.getLensflareElement());
@@ -143,14 +144,14 @@ export class LensflareelementComponent
 	 * Gets lensflare element
 	 * @returns lensflare element
 	 */
-	public getLensflareElement(): I3JS.ILensflareElement {
+	public getLensflareElement(): I3JS.LensflareElement {
 		if (this.lensflareElement === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.lensflareElement = new N3JS.LensflareElement(
 				this.getTexture() as any,
-				ThreeUtil.getTypeSafe(this.size, 100),
-				ThreeUtil.getTypeSafe(this.distance, 0),
-				ThreeUtil.getColorSafe(this.color) as any
+				NgxThreeUtil.getTypeSafe(this.size, 100),
+				NgxThreeUtil.getTypeSafe(this.distance, 0),
+				NgxThreeUtil.getColorSafe(this.color) as any
 			);
 			super.setObject(this.lensflareElement);
 		}

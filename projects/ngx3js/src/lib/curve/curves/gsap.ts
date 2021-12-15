@@ -1,5 +1,6 @@
 import * as GSAP from 'gsap';
-import { ThreeUtil, CurvesParameters, I3JS, N3JS } from '../../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
+import { ICurvesParameters } from '../../ngx-interface';
 
 /**
  * Curves gsap
@@ -43,15 +44,15 @@ export class CurvesGsap extends N3JS.Curve {
 	constructor(
 		easeFunction: (progress: number) => number,
 		radius: number = 1,
-		options?: CurvesParameters
+		options?: ICurvesParameters
 	) {
 		super();
 		this.easeFunction = easeFunction || GSAP.Power1.easeIn;
 		options = options || {};
-		this.radius = ThreeUtil.isNotNull(radius) ? radius : 1;
-		this.rateX = ThreeUtil.isNotNull(options.rateX) ? options.rateX : 1;
-		this.rateY = ThreeUtil.isNotNull(options.rateY) ? options.rateY : 1;
-		this.rateZ = ThreeUtil.isNotNull(options.rateZ) ? options.rateZ : 1;
+		this.radius = NgxThreeUtil.isNotNull(radius) ? radius : 1;
+		this.rateX = NgxThreeUtil.isNotNull(options.rateX) ? options.rateX : 1;
+		this.rateY = NgxThreeUtil.isNotNull(options.rateY) ? options.rateY : 1;
+		this.rateZ = NgxThreeUtil.isNotNull(options.rateZ) ? options.rateZ : 1;
 	}
 
 	/**
@@ -60,7 +61,7 @@ export class CurvesGsap extends N3JS.Curve {
 	 * @param optionalTarget
 	 * @returns
 	 */
-	public getPoint(t: number, optionalTarget: I3JS.IVector3) {
+	public getPoint(t: number, optionalTarget: I3JS.Vector3) {
 		const point = optionalTarget || new N3JS.Vector3();
 		const v = Math.max(-1, Math.min(1, t * 2 - 1));
 		let y = this.easeFunction(t) * 2 - 1;
@@ -78,7 +79,7 @@ export class CurvesGsap extends N3JS.Curve {
  *
  */
 export class CurvesGsapLinearEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Linear.easeIn, radius, options);
 	}
 }
@@ -91,7 +92,7 @@ export class CurvesGsapLinearEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapLinearEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Linear.easeInOut, radius, options);
 	}
 }
@@ -104,7 +105,7 @@ export class CurvesGsapLinearEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapLinearEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Linear.easeOut, radius, options);
 	}
 }
@@ -117,7 +118,7 @@ export class CurvesGsapLinearEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapLinearEaseNone extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Linear.easeNone, radius, options);
 	}
 }
@@ -130,7 +131,7 @@ export class CurvesGsapLinearEaseNone extends CurvesGsap {
  *
  */
 export class CurvesGsapQuadEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quad.easeIn, radius, options);
 	}
 }
@@ -143,7 +144,7 @@ export class CurvesGsapQuadEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapQuadEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quad.easeInOut, radius, options);
 	}
 }
@@ -156,7 +157,7 @@ export class CurvesGsapQuadEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapQuadEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quad.easeOut, radius, options);
 	}
 }
@@ -169,7 +170,7 @@ export class CurvesGsapQuadEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapCubicEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Cubic.easeIn, radius, options);
 	}
 }
@@ -182,7 +183,7 @@ export class CurvesGsapCubicEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapCubicEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Cubic.easeInOut, radius, options);
 	}
 }
@@ -195,7 +196,7 @@ export class CurvesGsapCubicEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapCubicEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Cubic.easeOut, radius, options);
 	}
 }
@@ -208,7 +209,7 @@ export class CurvesGsapCubicEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapQuartEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quart.easeIn, radius, options);
 	}
 }
@@ -221,7 +222,7 @@ export class CurvesGsapQuartEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapQuartEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quart.easeInOut, radius, options);
 	}
 }
@@ -234,7 +235,7 @@ export class CurvesGsapQuartEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapQuartEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quart.easeOut, radius, options);
 	}
 }
@@ -247,7 +248,7 @@ export class CurvesGsapQuartEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapQuintEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quint.easeIn, radius, options);
 	}
 }
@@ -260,7 +261,7 @@ export class CurvesGsapQuintEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapQuintEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quint.easeInOut, radius, options);
 	}
 }
@@ -273,7 +274,7 @@ export class CurvesGsapQuintEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapQuintEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Quint.easeOut, radius, options);
 	}
 }
@@ -286,7 +287,7 @@ export class CurvesGsapQuintEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapStrongEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Strong.easeIn, radius, options);
 	}
 }
@@ -299,7 +300,7 @@ export class CurvesGsapStrongEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapStrongEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Strong.easeInOut, radius, options);
 	}
 }
@@ -312,7 +313,7 @@ export class CurvesGsapStrongEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapStrongEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Strong.easeOut, radius, options);
 	}
 }
@@ -325,7 +326,7 @@ export class CurvesGsapStrongEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower1EaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power1.easeIn, radius, options);
 	}
 }
@@ -338,7 +339,7 @@ export class CurvesGsapPower1EaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapPower1EaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power1.easeInOut, radius, options);
 	}
 }
@@ -351,7 +352,7 @@ export class CurvesGsapPower1EaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower1EaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power1.easeOut, radius, options);
 	}
 }
@@ -364,7 +365,7 @@ export class CurvesGsapPower1EaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower2EaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power2.easeIn, radius, options);
 	}
 }
@@ -377,7 +378,7 @@ export class CurvesGsapPower2EaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapPower2EaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power2.easeInOut, radius, options);
 	}
 }
@@ -390,7 +391,7 @@ export class CurvesGsapPower2EaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower2EaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power2.easeOut, radius, options);
 	}
 }
@@ -403,7 +404,7 @@ export class CurvesGsapPower2EaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower3EaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power3.easeIn, radius, options);
 	}
 }
@@ -416,7 +417,7 @@ export class CurvesGsapPower3EaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapPower3EaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power3.easeInOut, radius, options);
 	}
 }
@@ -429,7 +430,7 @@ export class CurvesGsapPower3EaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower3EaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power3.easeOut, radius, options);
 	}
 }
@@ -442,7 +443,7 @@ export class CurvesGsapPower3EaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower4EaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power4.easeIn, radius, options);
 	}
 }
@@ -455,7 +456,7 @@ export class CurvesGsapPower4EaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapPower4EaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power4.easeInOut, radius, options);
 	}
 }
@@ -468,7 +469,7 @@ export class CurvesGsapPower4EaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower4EaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power4.easeOut, radius, options);
 	}
 }
@@ -481,7 +482,7 @@ export class CurvesGsapPower4EaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapBackEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Back.easeIn, radius, options);
 	}
 }
@@ -494,7 +495,7 @@ export class CurvesGsapBackEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapBackEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Back.easeInOut, radius, options);
 	}
 }
@@ -507,7 +508,7 @@ export class CurvesGsapBackEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapBackEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Back.easeOut, radius, options);
 	}
 }
@@ -520,7 +521,7 @@ export class CurvesGsapBackEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapElasticEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Elastic.easeIn, radius, options);
 	}
 }
@@ -533,7 +534,7 @@ export class CurvesGsapElasticEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapElasticEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Elastic.easeInOut, radius, options);
 	}
 }
@@ -546,7 +547,7 @@ export class CurvesGsapElasticEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapElasticEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Elastic.easeOut, radius, options);
 	}
 }
@@ -559,7 +560,7 @@ export class CurvesGsapElasticEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapBounceEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Bounce.easeIn, radius, options);
 	}
 }
@@ -572,7 +573,7 @@ export class CurvesGsapBounceEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapBounceEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Bounce.easeInOut, radius, options);
 	}
 }
@@ -585,7 +586,7 @@ export class CurvesGsapBounceEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapBounceEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Bounce.easeOut, radius, options);
 	}
 }
@@ -598,7 +599,7 @@ export class CurvesGsapBounceEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapCircEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Circ.easeIn, radius, options);
 	}
 }
@@ -611,7 +612,7 @@ export class CurvesGsapCircEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapCircEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Circ.easeInOut, radius, options);
 	}
 }
@@ -624,7 +625,7 @@ export class CurvesGsapCircEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapCircEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Circ.easeOut, radius, options);
 	}
 }
@@ -637,7 +638,7 @@ export class CurvesGsapCircEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapExpoEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Expo.easeIn, radius, options);
 	}
 }
@@ -650,7 +651,7 @@ export class CurvesGsapExpoEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapExpoEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Expo.easeInOut, radius, options);
 	}
 }
@@ -663,7 +664,7 @@ export class CurvesGsapExpoEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapExpoEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Expo.easeOut, radius, options);
 	}
 }
@@ -676,7 +677,7 @@ export class CurvesGsapExpoEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapSineEaseIn extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Sine.easeIn, radius, options);
 	}
 }
@@ -689,7 +690,7 @@ export class CurvesGsapSineEaseIn extends CurvesGsap {
  *
  */
 export class CurvesGsapSineEaseInOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Sine.easeInOut, radius, options);
 	}
 }
@@ -702,7 +703,7 @@ export class CurvesGsapSineEaseInOut extends CurvesGsap {
  *
  */
 export class CurvesGsapSineEaseOut extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Sine.easeOut, radius, options);
 	}
 }
@@ -715,7 +716,7 @@ export class CurvesGsapSineEaseOut extends CurvesGsap {
  *
  */
 export class CurvesGsapPower0EaseNone extends CurvesGsap {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(GSAP.Power0.easeNone, radius, options);
 	}
 }

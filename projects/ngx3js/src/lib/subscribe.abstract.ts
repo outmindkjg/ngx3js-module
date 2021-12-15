@@ -12,7 +12,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { ThreeUtil } from './interface';
+import { NgxThreeUtil } from './interface';
 
 /**
  * The Abstract Subscribe component.
@@ -23,7 +23,7 @@ import { ThreeUtil } from './interface';
 @Component({
 	template: '',
 })
-export class AbstractSubscribeComponent
+export class NgxAbstractSubscribeComponent
 	implements OnInit, OnChanges, OnDestroy, AfterContentInit
 {
 	/**
@@ -116,7 +116,7 @@ export class AbstractSubscribeComponent
 			'_' +
 			Math.round(10000 + Math.random() * 10000);
 		this.setSubscribeType(subscribeType);
-		ThreeUtil.setThreeComponent(this.id, this);
+		NgxThreeUtil.setThreeComponent(this.id, this);
 		this._userData.component = this.id;
 	}
 
@@ -140,7 +140,7 @@ export class AbstractSubscribeComponent
 			this._subscribeList = {};
 		}
 		this.dispose();
-		ThreeUtil.setThreeComponent(this.id, null);
+		NgxThreeUtil.setThreeComponent(this.id, null);
 		this.onDestory.emit(this);
 	}
 
@@ -173,29 +173,29 @@ export class AbstractSubscribeComponent
 	 * @param tweenData
 	 */
 	public setTween(tweenData: { [key: string]: any }) {
-		if (ThreeUtil.isNotNull(tweenData)) {
+		if (NgxThreeUtil.isNotNull(tweenData)) {
 			const tween: { [key: string]: any } = {
 				elapsedTime: 0,
 				elapsedAlpha: 0,
 			};
 			let tweenLength = 0;
 			Object.entries(tweenData).forEach(([key, value]) => {
-				if (ThreeUtil.isNotNull(value)) {
+				if (NgxThreeUtil.isNotNull(value)) {
 					switch (key.toLowerCase()) {
 						case 'position':
-							tween.position = ThreeUtil.getPosition(value);
+							tween.position = NgxThreeUtil.getPosition(value);
 							tweenLength++;
 							break;
 						case 'scale':
-							tween.scale = ThreeUtil.getScale(value);
+							tween.scale = NgxThreeUtil.getScale(value);
 							tweenLength++;
 							break;
 						case 'lookat':
-							tween.lookat = ThreeUtil.getLookAt(value);
+							tween.lookat = NgxThreeUtil.getLookAt(value);
 							tweenLength++;
 							break;
 						case 'rotation':
-							tween.rotation = ThreeUtil.getRotation(value);
+							tween.rotation = NgxThreeUtil.getRotation(value);
 							tweenLength++;
 							break;
 						case 'specular':
@@ -204,7 +204,7 @@ export class AbstractSubscribeComponent
 						case 'specular':
 						case 'specular':
 						case 'color':
-							tween[key] = ThreeUtil.getColor(value);
+							tween[key] = NgxThreeUtil.getColor(value);
 							tweenLength++;
 							break;
 						default:
@@ -387,7 +387,7 @@ export class AbstractSubscribeComponent
 				changes.push(key);
 			}
 		});
-		if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+		if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 			this._needUpdate = true;
 		}
 		this._changeList = [];
@@ -407,16 +407,16 @@ export class AbstractSubscribeComponent
 	 * @returns
 	 */
 	protected applyChanges(changes: string[]) {
-		if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+		if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 			return;
 		}
-		if (ThreeUtil.isIndexOf(changes, ['init'])) {
-			changes = ThreeUtil.pushUniq(changes, ['userdata']);
+		if (NgxThreeUtil.isIndexOf(changes, ['init'])) {
+			changes = NgxThreeUtil.pushUniq(changes, ['userdata']);
 		}
 		changes.forEach((change) => {
 			switch (change.toLowerCase()) {
 				case 'userdata':
-					if (ThreeUtil.isNotNull(this.userData)) {
+					if (NgxThreeUtil.isNotNull(this.userData)) {
 						Object.entries(this.userData).forEach(([key, value]) => {
 							switch (key) {
 								case 'component':
@@ -465,9 +465,9 @@ export class AbstractSubscribeComponent
 	 * @param value
 	 */
 	public setUserData(key: string, value: any) {
-		if (ThreeUtil.isNotNull(value)) {
+		if (NgxThreeUtil.isNotNull(value)) {
 			this._userData[key] = value;
-		} else if (ThreeUtil.isNotNull(this._userData[key])) {
+		} else if (NgxThreeUtil.isNotNull(this._userData[key])) {
 			delete this._userData[key];
 		}
 	}
@@ -481,8 +481,8 @@ export class AbstractSubscribeComponent
 			let isLoaded: boolean = this._cashedObj === null ? false : true;
 			this._cashedObj = obj;
 			this.needUpdate = false;
-			if (ThreeUtil.isNotNull(this._cashedObj)) {
-				if (ThreeUtil.isNotNull(this._cashedObj.userData)) {
+			if (NgxThreeUtil.isNotNull(this._cashedObj)) {
+				if (NgxThreeUtil.isNotNull(this._cashedObj.userData)) {
 					Object.entries(this._cashedObj.userData).forEach(([key, value]) => {
 						switch (key) {
 							case 'component':
@@ -502,7 +502,7 @@ export class AbstractSubscribeComponent
 				if (isLoaded) {
 					this.setSubscribeNext('loaded');
 				}
-				if (ThreeUtil.isNotNull(this.windowExport) && this.windowExport != '') {
+				if (NgxThreeUtil.isNotNull(this.windowExport) && this.windowExport != '') {
 					(window as any)[this.windowExport] = this._cashedObj;
 				}
 			}
@@ -616,7 +616,7 @@ export class AbstractSubscribeComponent
 	 * @param key
 	 */
 	protected unSubscribeRefer(key: string) {
-		if (ThreeUtil.isNotNull(this._subscribe[key])) {
+		if (NgxThreeUtil.isNotNull(this._subscribe[key])) {
 			this._subscribe[key].unsubscribe();
 			delete this._subscribe[key];
 		}
@@ -628,10 +628,10 @@ export class AbstractSubscribeComponent
 	 * @param subscription
 	 */
 	protected subscribeRefer(key: string, subscription: Subscription) {
-		if (ThreeUtil.isNotNull(this._subscribe[key])) {
+		if (NgxThreeUtil.isNotNull(this._subscribe[key])) {
 			this.unSubscribeRefer(key);
 		}
-		if (ThreeUtil.isNotNull(subscription)) {
+		if (NgxThreeUtil.isNotNull(subscription)) {
 			this._subscribe[key] = subscription;
 		}
 	}
@@ -656,7 +656,7 @@ export class AbstractSubscribeComponent
 	 * @param key
 	 */
 	protected destroyLocalComponent(key: string) {
-		if (ThreeUtil.isNotNull(this._localComponents[key])) {
+		if (NgxThreeUtil.isNotNull(this._localComponents[key])) {
 			this._localComponents[key].ngOnDestroy();
 			delete this._localComponents[key];
 		}
@@ -673,10 +673,10 @@ export class AbstractSubscribeComponent
 		key: string,
 		component: T
 	): T {
-		if (ThreeUtil.isNotNull(this._localComponents[key])) {
+		if (NgxThreeUtil.isNotNull(this._localComponents[key])) {
 			this.destroyLocalComponent(key);
 		}
-		if (ThreeUtil.isNotNull(component)) {
+		if (NgxThreeUtil.isNotNull(component)) {
 			component.ngOnInit();
 			this._localComponents[key] = component;
 		}
@@ -696,12 +696,12 @@ export class AbstractSubscribeComponent
 		changes: SimpleChanges = {},
 		type: string = null
 	) {
-		if (ThreeUtil.isNotNull(params)) {
+		if (NgxThreeUtil.isNotNull(params)) {
 			Object.entries(params).forEach(([key, value]) => {
 				if (
 					this.selfAny[key] !== undefined &&
 					this.selfAny[key] !== value &&
-					ThreeUtil.isNotNull(value)
+					NgxThreeUtil.isNotNull(value)
 				) {
 					changes[key] = new SimpleChange(
 						this.selfAny[key],
@@ -712,7 +712,7 @@ export class AbstractSubscribeComponent
 				}
 			});
 		}
-		if (ThreeUtil.isNotNull(type)) {
+		if (NgxThreeUtil.isNotNull(type)) {
 			if (this.selfAny['type'] !== undefined) {
 				if (this.selfAny['type'] !== type) {
 					changes.type = new SimpleChange(
@@ -735,7 +735,7 @@ export class AbstractSubscribeComponent
 	 * @param key
 	 */
 	protected unSubscribeReferList(key: string) {
-		if (ThreeUtil.isNotNull(this._subscribeList[key])) {
+		if (NgxThreeUtil.isNotNull(this._subscribeList[key])) {
 			this._subscribeList[key].forEach((subscribe) => {
 				subscribe.unsubscribe();
 			});
@@ -749,10 +749,10 @@ export class AbstractSubscribeComponent
 	 * @param subscription
 	 */
 	protected subscribeReferList(key: string, subscription: Subscription) {
-		if (ThreeUtil.isNull(this._subscribeList[key])) {
+		if (NgxThreeUtil.isNull(this._subscribeList[key])) {
 			this._subscribeList[key] = [];
 		}
-		if (ThreeUtil.isNotNull(subscription)) {
+		if (NgxThreeUtil.isNotNull(subscription)) {
 			this._subscribeList[key].push(subscription);
 		}
 	}
@@ -768,7 +768,7 @@ export class AbstractSubscribeComponent
 		subscribeKey: string,
 		changeKey: string
 	) {
-		if (ThreeUtil.isNotNull(queryList)) {
+		if (NgxThreeUtil.isNotNull(queryList)) {
 			this.unSubscribeRefer(subscribeKey + 'Changes');
 			this.subscribeRefer(
 				subscribeKey,
@@ -790,12 +790,12 @@ export class AbstractSubscribeComponent
 		subscribeKey: string,
 		changeKey: string
 	) {
-		if (ThreeUtil.isNotNull(queryList)) {
+		if (NgxThreeUtil.isNotNull(queryList)) {
 			this.unSubscribeReferList(subscribeKey);
 			queryList.forEach((query) => {
 				this.subscribeReferList(
 					subscribeKey,
-					ThreeUtil.getSubscribe(
+					NgxThreeUtil.getSubscribe(
 						query,
 						(event) => {
 							this.addChanges(event);

@@ -4,7 +4,10 @@ import { ArcballControls as EX_ArcballControls } from 'three/examples/jsm/contro
 import { DragControls as EX_DragControls } from 'three/examples/jsm/controls/DragControls';
 import { FirstPersonControls as EX_FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
 import { FlyControls as EX_FlyControls } from 'three/examples/jsm/controls/FlyControls';
-import { MapControls as EX_MapControls, OrbitControls as EX_OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import {
+	MapControls as EX_MapControls,
+	OrbitControls as EX_OrbitControls,
+} from 'three/examples/jsm/controls/OrbitControls';
 import { PointerLockControls as EX_PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 import { TrackballControls as EX_TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
 import { TransformControls as EX_TransformControls } from 'three/examples/jsm/controls/TransformControls';
@@ -25,7 +28,10 @@ import { STLExporter as EX_STLExporter } from 'three/examples/jsm/exporters/STLE
 import { USDZExporter as EX_USDZExporter } from 'three/examples/jsm/exporters/USDZExporter';
 import { BoxLineGeometry as EX_BoxLineGeometry } from 'three/examples/jsm/geometries/BoxLineGeometry';
 import { ConvexGeometry as EX_ConvexGeometry } from 'three/examples/jsm/geometries/ConvexGeometry';
-import { DecalGeometry as EX_DecalGeometry, DecalVertex as EX_DecalVertex } from 'three/examples/jsm/geometries/DecalGeometry';
+import {
+	DecalGeometry as EX_DecalGeometry,
+	DecalVertex as EX_DecalVertex,
+} from 'three/examples/jsm/geometries/DecalGeometry';
 import { LightningStrike as EX_LightningStrike } from 'three/examples/jsm/geometries/LightningStrike';
 import { ParametricGeometries as EX_ParametricGeometries } from 'three/examples/jsm/geometries/ParametricGeometries';
 import { ParametricGeometry as EX_ParametricGeometry } from 'three/examples/jsm/geometries/ParametricGeometry';
@@ -83,7 +89,11 @@ import { SVGLoader as EX_SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
 import { TDSLoader as EX_TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
 import { TGALoader as EX_TGALoader } from 'three/examples/jsm/loaders/TGALoader';
 import { TTFLoader as EX_TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
-import { VOXDataTexture3D as EX_VOXDataTexture3D, VOXLoader as EX_VOXLoader, VOXMesh as EX_VOXMesh } from 'three/examples/jsm/loaders/VOXLoader';
+import {
+	VOXDataTexture3D as EX_VOXDataTexture3D,
+	VOXLoader as EX_VOXLoader,
+	VOXMesh as EX_VOXMesh,
+} from 'three/examples/jsm/loaders/VOXLoader';
 import { VRMLLoader as EX_VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoader';
 import { VRMLoader as EX_VRMLoader } from 'three/examples/jsm/loaders/VRMLoader';
 import { VTKLoader as EX_VTKLoader } from 'three/examples/jsm/loaders/VTKLoader';
@@ -130,15 +140,25 @@ import { SSRrPass as EX_SSRrPass } from 'three/examples/jsm/postprocessing/SSRrP
 import { TAARenderPass as EX_TAARenderPass } from 'three/examples/jsm/postprocessing/TAARenderPass';
 import { TexturePass as EX_TexturePass } from 'three/examples/jsm/postprocessing/TexturePass';
 import { UnrealBloomPass as EX_UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-import { CSS2DObject as EX_CSS2DObject, CSS2DRenderer as EX_CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer';
-import { CSS3DObject as EX_CSS3DObject, CSS3DSprite as EX_CSS3DSprite , CSS3DRenderer as EX_CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer';
+import {
+	CSS2DObject as EX_CSS2DObject,
+	CSS2DRenderer as EX_CSS2DRenderer,
+} from 'three/examples/jsm/renderers/CSS2DRenderer';
+import {
+	CSS3DObject as EX_CSS3DObject,
+	CSS3DSprite as EX_CSS3DSprite,
+	CSS3DRenderer as EX_CSS3DRenderer,
+} from 'three/examples/jsm/renderers/CSS3DRenderer';
 import { SVGRenderer as EX_SVGRenderer } from 'three/examples/jsm/renderers/SVGRenderer';
 import { AfterimageShader as EX_AfterimageShader } from 'three/examples/jsm/shaders/AfterimageShader';
 import { BasicShader as EX_BasicShader } from 'three/examples/jsm/shaders/BasicShader';
 import { BleachBypassShader as EX_BleachBypassShader } from 'three/examples/jsm/shaders/BleachBypassShader';
 import { BlendShader as EX_BlendShader } from 'three/examples/jsm/shaders/BlendShader';
 import { BokehShader as EX_BokehShader } from 'three/examples/jsm/shaders/BokehShader';
-import { BokehDepthShader as EX_BokehDepthShader, BokehShader as EX_BokehShader2 } from 'three/examples/jsm/shaders/BokehShader2';
+import {
+	BokehDepthShader as EX_BokehDepthShader,
+	BokehShader as EX_BokehShader2,
+} from 'three/examples/jsm/shaders/BokehShader2';
 import { BrightnessContrastShader as EX_BrightnessContrastShader } from 'three/examples/jsm/shaders/BrightnessContrastShader';
 import { ColorCorrectionShader as EX_ColorCorrectionShader } from 'three/examples/jsm/shaders/ColorCorrectionShader';
 import { ColorifyShader as EX_ColorifyShader } from 'three/examples/jsm/shaders/ColorifyShader';
@@ -154,7 +174,10 @@ import { FreiChenShader as EX_FreiChenShader } from 'three/examples/jsm/shaders/
 import { FXAAShader as EX_FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
 import { GammaCorrectionShader as EX_GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader';
 import {
-	GodRaysCombineShader as EX_GodRaysCombineShader, GodRaysDepthMaskShader as EX_GodRaysDepthMaskShader, GodRaysFakeSunShader as EX_GodRaysFakeSunShader, GodRaysGenerateShader as EX_GodRaysGenerateShader
+	GodRaysCombineShader as EX_GodRaysCombineShader,
+	GodRaysDepthMaskShader as EX_GodRaysDepthMaskShader,
+	GodRaysFakeSunShader as EX_GodRaysFakeSunShader,
+	GodRaysGenerateShader as EX_GodRaysGenerateShader,
 } from 'three/examples/jsm/shaders/GodRaysShader';
 import { HalftoneShader as EX_HalftoneShader } from 'three/examples/jsm/shaders/HalftoneShader';
 import { HorizontalBlurShader as EX_HorizontalBlurShader } from 'three/examples/jsm/shaders/HorizontalBlurShader';
@@ -170,8 +193,9 @@ import { RGBShiftShader as EX_RGBShiftShader } from 'three/examples/jsm/shaders/
 import { SAOShader as EX_SAOShader } from 'three/examples/jsm/shaders/SAOShader';
 import { SepiaShader as EX_SepiaShader } from 'three/examples/jsm/shaders/SepiaShader';
 import {
-	SMAABlendShader as EX_SMAABlendShader, SMAAEdgesShader as EX_SMAAEdgesShader,
-	SMAAWeightsShader as EX_SMAAWeightsShader
+	SMAABlendShader as EX_SMAABlendShader,
+	SMAAEdgesShader as EX_SMAAEdgesShader,
+	SMAAWeightsShader as EX_SMAAWeightsShader,
 } from 'three/examples/jsm/shaders/SMAAShader';
 import { SobelOperatorShader as EX_SobelOperatorShader } from 'three/examples/jsm/shaders/SobelOperatorShader';
 import * as EX_SSAOShader from 'three/examples/jsm/shaders/SSAOShader';
@@ -213,20 +237,20 @@ import {
 	Lensflare as EX_Lensflare,
 	LensflareElement as EX_LensflareElement,
 } from 'three/examples/jsm/objects/Lensflare';
-import { MorphAnimMesh as EX_MorphAnimMesh} from 'three/examples/jsm/misc/MorphAnimMesh';
+import { MorphAnimMesh as EX_MorphAnimMesh } from 'three/examples/jsm/misc/MorphAnimMesh';
 import { InteractiveGroup as EX_InteractiveGroup } from 'three/examples/jsm/interactive/InteractiveGroup';
 import { Line2 as EX_Line2 } from 'three/examples/jsm/lines/Line2';
 import { Wireframe as EX_Wireframe } from 'three/examples/jsm/lines/Wireframe';
 import { TubePainter as EX_TubePainter } from 'three/examples/jsm/misc/TubePainter';
 import { Flow as EX_Flow, InstancedFlow as EX_InstancedFlow } from 'three/examples/jsm/modifiers/CurveModifier';
 import { LightningStorm as EX_LightningStorm } from 'three/examples/jsm/objects/LightningStorm';
-import { MarchingCubes  as EX_MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
+import { MarchingCubes as EX_MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes';
 import { Reflector as EX_Reflector } from 'three/examples/jsm/objects/Reflector';
 import { Refractor as EX_Refractor } from 'three/examples/jsm/objects/Refractor';
 import { Sky as EX_Sky } from 'three/examples/jsm/objects/Sky';
 import { Water as EX_Water } from 'three/examples/jsm/objects/Water';
-import { Water  as EX_Water2 } from 'three/examples/jsm/objects/Water2';
-import { SVGObject  as EX_SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
+import { Water as EX_Water2 } from 'three/examples/jsm/objects/Water2';
+import { SVGObject as EX_SVGObject } from 'three/examples/jsm/renderers/SVGRenderer';
 
 import { CinematicCamera as EX_CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
 import { NURBSCurve as EX_NURBSCurve } from 'three/examples/jsm/curves/NURBSCurve';
@@ -239,144 +263,393 @@ import { Octree as EX_Octree } from 'three/examples/jsm/math/Octree';
 import { GPUComputationRenderer as EX_GPUComputationRenderer } from 'three/examples/jsm/misc/GPUComputationRenderer';
 import { UVsDebug as EX_UVsDebug } from 'three/examples/jsm/utils/UVsDebug';
 
-export const Stats: I3JS.IStats = EX_Stats.default as any;
-export const SceneUtils: I3JS.ISceneUtils = EX_SceneUtils as any;
 
-export const CSM: I3JS.ICSM = EX_CSM as any;
-export const CSMHelper: I3JS.ICSMHelper = EX_CSMHelper as any;
-export const Gyroscope: I3JS.IGyroscope = EX_Gyroscope as any;
-export const LightProbeHelper: I3JS.ILightProbeHelper = EX_LightProbeHelper as any;
-export const PositionalAudioHelper: I3JS.IPositionalAudioHelper = EX_PositionalAudioHelper as any;
-export const RectAreaLightHelper: I3JS.IRectAreaLightHelper = EX_RectAreaLightHelper as any;
-export const VertexNormalsHelper: I3JS.IVertexNormalsHelper = EX_VertexNormalsHelper as any;
-export const VertexTangentsHelper: I3JS.IVertexTangentsHelper = EX_VertexTangentsHelper as any;
-export const LightProbeGenerator: I3JS.ILightProbeGenerator = EX_LightProbeGenerator as any;
-export const Lensflare: I3JS.ILensflare = EX_Lensflare as any;
-export const LensflareElement: I3JS.ILensflareElement = EX_LensflareElement as any;
-export const MorphAnimMesh: I3JS.IMorphAnimMesh = EX_MorphAnimMesh as any;
+export type Stats = I3JS.Stats;
+export const Stats: Stats = EX_Stats.default as any;
 
-export const CinematicCamera: I3JS.ICinematicCamera = EX_CinematicCamera as any;
-export const NURBSCurve: I3JS.INURBSCurve = EX_NURBSCurve as any;
-export const NURBSSurface: I3JS.INURBSSurface = EX_NURBSSurface as any;
-export const Capsule: I3JS.ICapsule = EX_Capsule as any;
-export const Lut: I3JS.ILut = EX_Lut as any;
-export const MeshSurfaceSampler: I3JS.IMeshSurfaceSampler = EX_MeshSurfaceSampler as any;
-export const OBB: I3JS.IOBB = EX_OBB as any;
-export const Octree: I3JS.IOctree = EX_Octree as any;
-export const GPUComputationRenderer: I3JS.IGPUComputationRenderer = EX_GPUComputationRenderer as any;
-export const UVsDebug: I3JS.IUVsDebug = EX_UVsDebug as any;
+export type SceneUtils = I3JS.SceneUtils;
+export const SceneUtils: SceneUtils = EX_SceneUtils as any;
 
-export const CSS2DRenderer: I3JS.ICSS2DRenderer = EX_CSS2DRenderer as any;
-export const CSS3DRenderer: I3JS.ICSS3DRenderer = EX_CSS3DRenderer as any;
-export const SVGRenderer: I3JS.ISVGRenderer = EX_SVGRenderer as any;
 
-export const ArcballControls: I3JS.IArcballControls = EX_ArcballControls as any;
-// export const DeviceOrientationControls: I3JS.IDeviceOrientationControls = EX_DeviceOrientationControls as any;
-export const DragControls: I3JS.IDragControls = EX_DragControls as any;
-export const FirstPersonControls: I3JS.IFirstPersonControls = EX_FirstPersonControls as any;
-export const FlyControls: I3JS.IFlyControls = EX_FlyControls as any;
-export const OrbitControls: I3JS.IOrbitControls = EX_OrbitControls as any;
-export const MapControls: I3JS.IMapControls = EX_MapControls as any;
-export const CsmControls: I3JS.ICSM = EX_CSM as any;
+export type CSM = I3JS.CSM;
+export const CSM: CSM = EX_CSM as any;
 
-export const PointerLockControls: I3JS.IPointerLockControls = EX_PointerLockControls as any;
-export const TrackballControls: I3JS.ITrackballControls = EX_TrackballControls as any;
-export const TransformControls: I3JS.ITransformControls = EX_TransformControls as any;
+export type CSMHelper = I3JS.CSMHelper;
+export const CSMHelper: CSMHelper = EX_CSMHelper as any;
 
-export const AdaptiveToneMappingPass: I3JS.IAdaptiveToneMappingPass = EX_AdaptiveToneMappingPass as any;
-export const AfterimagePass: I3JS.IAfterimagePass = EX_AfterimagePass as any;
-export const BloomPass: I3JS.IBloomPass = EX_BloomPass as any;
-export const BokehPass: I3JS.IBokehPass = EX_BokehPass as any;
-export const ClearPass: I3JS.IClearPass = EX_ClearPass as any;
-export const CubeTexturePass: I3JS.ICubeTexturePass = EX_CubeTexturePass as any;
-export const DotScreenPass: I3JS.IDotScreenPass = EX_DotScreenPass as any;
-export const FilmPass: I3JS.IFilmPass = EX_FilmPass as any;
-export const GlitchPass: I3JS.IGlitchPass = EX_GlitchPass as any;
-export const HalftonePass: I3JS.IHalftonePass = EX_HalftonePass as any;
-export const LUTPass: I3JS.ILUTPass = EX_LUTPass as any;
-export const MaskPass: I3JS.IMaskPass = EX_MaskPass as any;
-export const ClearMaskPass: I3JS.IClearMaskPass = EX_ClearMaskPass as any;
-export const OutlinePass: I3JS.IOutlinePass = EX_OutlinePass as any;
-export const Pass: I3JS.IPass = EX_Pass as any;
-export const RenderPass: I3JS.IRenderPass = EX_RenderPass as any;
-export const SAOPass: I3JS.ISAOPass = EX_SAOPass as any;
-export const SavePass: I3JS.ISavePass = EX_SavePass as any;
-export const ShaderPass: I3JS.IShaderPass = EX_ShaderPass as any;
-export const SMAAPass: I3JS.ISMAAPass = EX_SMAAPass as any;
-export const SSAARenderPass: I3JS.ISSAARenderPass = EX_SSAARenderPass as any;
-export const SSAOPass: I3JS.ISSAOPass = EX_SSAOPass as any;
-export const SSRPass: I3JS.ISSRPass = EX_SSRPass as any;
-export const SSRrPass: I3JS.ISSRrPass = EX_SSRrPass as any;
-export const TAARenderPass: I3JS.ITAARenderPass = EX_TAARenderPass as any;
-export const TexturePass: I3JS.ITexturePass = EX_TexturePass as any;
-export const UnrealBloomPass: I3JS.IUnrealBloomPass = EX_UnrealBloomPass as any;
+export type Gyroscope = I3JS.Gyroscope;
+export const Gyroscope: Gyroscope = EX_Gyroscope as any;
 
-export const ShaderCopyPass: I3JS.IShaderCopyPass = NGX_PASS.NgxShaderCopyPass as any;
-export const ShaderRGBShiftPass: I3JS.IShaderRGBShiftPass = NGX_PASS.NgxShaderRGBShiftPass as any;
-export const ShaderBleachBypassPass: I3JS.IShaderBleachBypassPass = NGX_PASS.NgxShaderBleachBypassPass as any;
-export const ShaderSepiaPass: I3JS.IShaderSepiaPass = NGX_PASS.NgxShaderSepiaPass as any;
-export const ShaderVignettePass: I3JS.IShaderVignettePass = NGX_PASS.NgxShaderVignettePass as any;
-export const ShaderGammaCorrectionPass: I3JS.IShaderGammaCorrectionPass = NGX_PASS.NgxShaderGammaCorrectionPass as any;
-export const ShaderFXAAPass: I3JS.IShaderFXAAPass = NGX_PASS.NgxShaderFXAAPass as any;
-export const ShaderPixelPass: I3JS.IShaderPixelPass = NGX_PASS.NgxShaderPixelPass as any;
-export const ShaderLuminosityPass: I3JS.IShaderLuminosityPass = NGX_PASS.NgxShaderLuminosityPass as any;
-export const ShaderDotScreenPass: I3JS.IShaderDotScreenPass = NGX_PASS.NgxShaderDotScreenPass as any;
-export const SobelOperatorPass: I3JS.ISobelOperatorPass = NGX_PASS.NgxSobelOperatorPass as any;
-export const ShaderMaterialPass: I3JS.IShaderMaterialPass = NGX_PASS.NgxShaderMaterialPass as any;
+export type LightProbeHelper = I3JS.LightProbeHelper;
+export const LightProbeHelper: LightProbeHelper = EX_LightProbeHelper as any;
+
+export type PositionalAudioHelper = I3JS.PositionalAudioHelper;
+export const PositionalAudioHelper: PositionalAudioHelper = EX_PositionalAudioHelper as any;
+
+export type RectAreaLightHelper = I3JS.RectAreaLightHelper;
+export const RectAreaLightHelper: RectAreaLightHelper = EX_RectAreaLightHelper as any;
+
+export type VertexNormalsHelper = I3JS.VertexNormalsHelper;
+export const VertexNormalsHelper: VertexNormalsHelper = EX_VertexNormalsHelper as any;
+
+export type VertexTangentsHelper = I3JS.VertexTangentsHelper;
+export const VertexTangentsHelper: VertexTangentsHelper = EX_VertexTangentsHelper as any;
+
+export type LightProbeGenerator = I3JS.LightProbeGenerator;
+export const LightProbeGenerator: LightProbeGenerator = EX_LightProbeGenerator as any;
+
+export type Lensflare = I3JS.Lensflare;
+export const Lensflare: Lensflare = EX_Lensflare as any;
+
+export type LensflareElement = I3JS.LensflareElement;
+export const LensflareElement: LensflareElement = EX_LensflareElement as any;
+
+export type MorphAnimMesh = I3JS.MorphAnimMesh;
+export const MorphAnimMesh: MorphAnimMesh = EX_MorphAnimMesh as any;
+
+
+export type CinematicCamera = I3JS.CinematicCamera;
+export const CinematicCamera: CinematicCamera = EX_CinematicCamera as any;
+
+export type NURBSCurve = I3JS.NURBSCurve;
+export const NURBSCurve: NURBSCurve = EX_NURBSCurve as any;
+
+export type NURBSSurface = I3JS.NURBSSurface;
+export const NURBSSurface: NURBSSurface = EX_NURBSSurface as any;
+
+export type Capsule = I3JS.Capsule;
+export const Capsule: Capsule = EX_Capsule as any;
+
+export type Lut = I3JS.Lut;
+export const Lut: Lut = EX_Lut as any;
+
+export type MeshSurfaceSampler = I3JS.MeshSurfaceSampler;
+export const MeshSurfaceSampler: MeshSurfaceSampler = EX_MeshSurfaceSampler as any;
+
+export type OBB = I3JS.OBB;
+export const OBB: OBB = EX_OBB as any;
+
+export type Octree = I3JS.Octree;
+export const Octree: Octree = EX_Octree as any;
+
+export type GPUComputationRenderer = I3JS.GPUComputationRenderer;
+export const GPUComputationRenderer: GPUComputationRenderer = EX_GPUComputationRenderer as any;
+
+export type UVsDebug = I3JS.UVsDebug;
+export const UVsDebug: UVsDebug = EX_UVsDebug as any;
+
+
+export type CSS2DRenderer = I3JS.CSS2DRenderer;
+export const CSS2DRenderer: CSS2DRenderer = EX_CSS2DRenderer as any;
+
+export type CSS3DRenderer = I3JS.CSS3DRenderer;
+export const CSS3DRenderer: CSS3DRenderer = EX_CSS3DRenderer as any;
+
+export type SVGRenderer = I3JS.SVGRenderer;
+export const SVGRenderer: SVGRenderer = EX_SVGRenderer as any;
+
+
+export type ArcballControls = I3JS.ArcballControls;
+export const ArcballControls: ArcballControls = EX_ArcballControls as any;
+// export type DeviceOrientationControls = I3JS.DeviceOrientationControls;
+// export const DeviceOrientationControls: DeviceOrientationControls = EX_DeviceOrientationControls as any;
+
+export type DragControls = I3JS.DragControls;
+export const DragControls: DragControls = EX_DragControls as any;
+
+export type FirstPersonControls = I3JS.FirstPersonControls;
+export const FirstPersonControls: FirstPersonControls = EX_FirstPersonControls as any;
+
+export type FlyControls = I3JS.FlyControls;
+export const FlyControls: FlyControls = EX_FlyControls as any;
+
+export type OrbitControls = I3JS.OrbitControls;
+export const OrbitControls: OrbitControls = EX_OrbitControls as any;
+
+export type MapControls = I3JS.MapControls;
+export const MapControls: MapControls = EX_MapControls as any;
+
+export type CsmControls = I3JS.CSM;
+export const CsmControls: CsmControls = EX_CSM as any;
+
+
+export type PointerLockControls = I3JS.PointerLockControls;
+export const PointerLockControls: PointerLockControls = EX_PointerLockControls as any;
+
+export type TrackballControls = I3JS.TrackballControls;
+export const TrackballControls: TrackballControls = EX_TrackballControls as any;
+
+export type TransformControls = I3JS.TransformControls;
+export const TransformControls: TransformControls = EX_TransformControls as any;
+
+
+export type AdaptiveToneMappingPass = I3JS.AdaptiveToneMappingPass;
+export const AdaptiveToneMappingPass: AdaptiveToneMappingPass = EX_AdaptiveToneMappingPass as any;
+
+export type AfterimagePass = I3JS.AfterimagePass;
+export const AfterimagePass: AfterimagePass = EX_AfterimagePass as any;
+
+export type BloomPass = I3JS.BloomPass;
+export const BloomPass: BloomPass = EX_BloomPass as any;
+
+export type BokehPass = I3JS.BokehPass;
+export const BokehPass: BokehPass = EX_BokehPass as any;
+
+export type ClearPass = I3JS.ClearPass;
+export const ClearPass: ClearPass = EX_ClearPass as any;
+
+export type CubeTexturePass = I3JS.CubeTexturePass;
+export const CubeTexturePass: CubeTexturePass = EX_CubeTexturePass as any;
+
+export type DotScreenPass = I3JS.DotScreenPass;
+export const DotScreenPass: DotScreenPass = EX_DotScreenPass as any;
+
+export type FilmPass = I3JS.FilmPass;
+export const FilmPass: FilmPass = EX_FilmPass as any;
+
+export type GlitchPass = I3JS.GlitchPass;
+export const GlitchPass: GlitchPass = EX_GlitchPass as any;
+
+export type HalftonePass = I3JS.HalftonePass;
+export const HalftonePass: HalftonePass = EX_HalftonePass as any;
+
+export type LUTPass = I3JS.LUTPass;
+export const LUTPass: LUTPass = EX_LUTPass as any;
+
+export type MaskPass = I3JS.MaskPass;
+export const MaskPass: MaskPass = EX_MaskPass as any;
+
+export type ClearMaskPass = I3JS.ClearMaskPass;
+export const ClearMaskPass: ClearMaskPass = EX_ClearMaskPass as any;
+
+export type OutlinePass = I3JS.OutlinePass;
+export const OutlinePass: OutlinePass = EX_OutlinePass as any;
+
+export type Pass = I3JS.Pass;
+export const Pass: Pass = EX_Pass as any;
+
+export type RenderPass = I3JS.RenderPass;
+export const RenderPass: RenderPass = EX_RenderPass as any;
+
+export type SAOPass = I3JS.SAOPass;
+export const SAOPass: SAOPass = EX_SAOPass as any;
+
+export type SavePass = I3JS.SavePass;
+export const SavePass: SavePass = EX_SavePass as any;
+
+export type ShaderPass = I3JS.ShaderPass;
+export const ShaderPass: ShaderPass = EX_ShaderPass as any;
+
+export type SMAAPass = I3JS.SMAAPass;
+export const SMAAPass: SMAAPass = EX_SMAAPass as any;
+
+export type SSAARenderPass = I3JS.SSAARenderPass;
+export const SSAARenderPass: SSAARenderPass = EX_SSAARenderPass as any;
+
+export type SSAOPass = I3JS.SSAOPass;
+export const SSAOPass: SSAOPass = EX_SSAOPass as any;
+
+export type SSRPass = I3JS.SSRPass;
+export const SSRPass: SSRPass = EX_SSRPass as any;
+
+export type SSRrPass = I3JS.SSRrPass;
+export const SSRrPass: SSRrPass = EX_SSRrPass as any;
+
+export type TAARenderPass = I3JS.TAARenderPass;
+export const TAARenderPass: TAARenderPass = EX_TAARenderPass as any;
+
+export type TexturePass = I3JS.TexturePass;
+export const TexturePass: TexturePass = EX_TexturePass as any;
+
+export type UnrealBloomPass = I3JS.UnrealBloomPass;
+export const UnrealBloomPass: UnrealBloomPass = EX_UnrealBloomPass as any;
+
+
+export type ShaderCopyPass = I3JS.ShaderCopyPass;
+export const ShaderCopyPass: ShaderCopyPass = NGX_PASS.NgxShaderCopyPass as any;
+
+export type ShaderRGBShiftPass = I3JS.ShaderRGBShiftPass;
+export const ShaderRGBShiftPass: ShaderRGBShiftPass = NGX_PASS.NgxShaderRGBShiftPass as any;
+
+export type ShaderBleachBypassPass = I3JS.ShaderBleachBypassPass;
+export const ShaderBleachBypassPass: ShaderBleachBypassPass = NGX_PASS.NgxShaderBleachBypassPass as any;
+
+export type ShaderSepiaPass = I3JS.ShaderSepiaPass;
+export const ShaderSepiaPass: ShaderSepiaPass = NGX_PASS.NgxShaderSepiaPass as any;
+
+export type ShaderVignettePass = I3JS.ShaderVignettePass;
+export const ShaderVignettePass: ShaderVignettePass = NGX_PASS.NgxShaderVignettePass as any;
+
+export type ShaderGammaCorrectionPass = I3JS.ShaderGammaCorrectionPass;
+export const ShaderGammaCorrectionPass: ShaderGammaCorrectionPass = NGX_PASS.NgxShaderGammaCorrectionPass as any;
+
+export type ShaderFXAAPass = I3JS.ShaderFXAAPass;
+export const ShaderFXAAPass: ShaderFXAAPass = NGX_PASS.NgxShaderFXAAPass as any;
+
+export type ShaderPixelPass = I3JS.ShaderPixelPass;
+export const ShaderPixelPass: ShaderPixelPass = NGX_PASS.NgxShaderPixelPass as any;
+
+export type ShaderLuminosityPass = I3JS.ShaderLuminosityPass;
+export const ShaderLuminosityPass: ShaderLuminosityPass = NGX_PASS.NgxShaderLuminosityPass as any;
+
+export type ShaderDotScreenPass = I3JS.ShaderDotScreenPass;
+export const ShaderDotScreenPass: ShaderDotScreenPass = NGX_PASS.NgxShaderDotScreenPass as any;
+
+export type SobelOperatorPass = I3JS.SobelOperatorPass;
+export const SobelOperatorPass: SobelOperatorPass = NGX_PASS.NgxSobelOperatorPass as any;
+
+export type ShaderMaterialPass = I3JS.ShaderMaterialPass;
+export const ShaderMaterialPass: ShaderMaterialPass = NGX_PASS.NgxShaderMaterialPass as any;
 export const ReflectorForSSRPass: any = (EX_ReflectorForSSRPass as any).ReflectorForSSRPass as any;
 
-export const ReflectorRTT: I3JS.IReflectorRTT = EX_ReflectorRTT as any;
 
-export const AsciiEffect: I3JS.IAsciiEffect = EX_AsciiEffect as any;
-export const OutlineEffect: I3JS.IOutlineEffect = EX_OutlineEffect as any;
-export const ParallaxBarrierEffect: I3JS.IParallaxBarrierEffect = EX_ParallaxBarrierEffect as any;
-export const PeppersGhostEffect: I3JS.IPeppersGhostEffect = EX_PeppersGhostEffect as any;
-export const EffectComposer: I3JS.IEffectComposer = EX_EffectComposer as any;
+export type ReflectorRTT = I3JS.ReflectorRTT;
+export const ReflectorRTT: ReflectorRTT = EX_ReflectorRTT as any;
 
-export const ProgressiveLightMap: I3JS.IProgressiveLightMap = EX_ProgressiveLightMap as any;
-export const ShadowMesh: I3JS.IShadowMesh = EX_ShadowMesh as any;
-export const ShadowMapViewer: I3JS.IShadowMapViewer = EX_ShadowMapViewer as any;
 
-export const AnimationUtils: I3JS.IAnimationUtils = O3JS.AnimationUtils as any;
-export const ShaderChunk: I3JS.IShaderChunk = O3JS.ShaderChunk as any;
-export const ShaderLib: I3JS.IShaderLib = O3JS.ShaderLib as any;
-export const Box2: I3JS.IBox2 = O3JS.Box2 as any;
-export const Box3: I3JS.IBox3 = O3JS.Box3 as any;
-export const Color: I3JS.IColor = O3JS.Color as any;
-export const Cylindrical: I3JS.ICylindrical = O3JS.Cylindrical as any;
-export const Euler: I3JS.IEuler = O3JS.Euler as any;
-export const Frustum: I3JS.IFrustum = O3JS.Frustum as any;
-export const Line3: I3JS.ILine3 = O3JS.Line3 as any;
-export const Matrix3: I3JS.IMatrix3 = O3JS.Matrix3 as any;
-export const Matrix4: I3JS.IMatrix4 = O3JS.Matrix4 as any;
-export const Plane: I3JS.IPlane = O3JS.Plane as any;
-export const Quaternion: I3JS.IQuaternion = O3JS.Quaternion as any;
-export const Ray: I3JS.IRay = O3JS.Ray as any;
-export const Sphere: I3JS.ISphere = O3JS.Sphere as any;
-export const Spherical: I3JS.ISpherical = O3JS.Spherical as any;
-export const SphericalHarmonics3: I3JS.ISphericalHarmonics3 = O3JS.SphericalHarmonics3 as any;
-export const Triangle: I3JS.ITriangle = O3JS.Triangle as any;
-export const Vector2: I3JS.IVector2 = O3JS.Vector2 as any;
-export const Vector3: I3JS.IVector3 = O3JS.Vector3 as any;
-export const Vector4: I3JS.IVector4 = O3JS.Vector4 as any;
-export const MathUtils: I3JS.IMathUtils = O3JS.MathUtils as any;
-export const CubicInterpolant: I3JS.ICubicInterpolant = O3JS.CubicInterpolant as any;
-export const DiscreteInterpolant: I3JS.IDiscreteInterpolant = O3JS.DiscreteInterpolant as any;
-export const LinearInterpolant: I3JS.ILinearInterpolant = O3JS.LinearInterpolant as any;
-export const QuaternionLinearInterpolant: I3JS.IQuaternionLinearInterpolant = O3JS.QuaternionLinearInterpolant as any;
-export const BufferAttribute: I3JS.IBufferAttribute = O3JS.BufferAttribute as any;
-export const Int8BufferAttribute: I3JS.IInt8BufferAttribute = O3JS.Int8BufferAttribute as any;
-export const Uint8BufferAttribute: I3JS.IUint8BufferAttribute = O3JS.Uint8BufferAttribute as any;
-export const Uint8ClampedBufferAttribute: I3JS.IUint8ClampedBufferAttribute = O3JS.Uint8ClampedBufferAttribute as any;
-export const Int16BufferAttribute: I3JS.IInt16BufferAttribute = O3JS.Int16BufferAttribute as any;
-export const Uint16BufferAttribute: I3JS.IUint16BufferAttribute = O3JS.Uint16BufferAttribute as any;
-export const Int32BufferAttribute: I3JS.IInt32BufferAttribute = O3JS.Int32BufferAttribute as any;
-export const Uint32BufferAttribute: I3JS.IUint32BufferAttribute = O3JS.Uint32BufferAttribute as any;
-export const Float16BufferAttribute: I3JS.IFloat16BufferAttribute = O3JS.Float16BufferAttribute as any;
-export const Float32BufferAttribute: I3JS.IFloat32BufferAttribute = O3JS.Float32BufferAttribute as any;
-export const Float64BufferAttribute: I3JS.IFloat64BufferAttribute = O3JS.Float64BufferAttribute as any;
+export type AsciiEffect = I3JS.AsciiEffect;
+export const AsciiEffect: AsciiEffect = EX_AsciiEffect as any;
 
-export const GeometryUtils: I3JS.IGeometryUtils = {
+export type OutlineEffect = I3JS.OutlineEffect;
+export const OutlineEffect: OutlineEffect = EX_OutlineEffect as any;
+
+export type ParallaxBarrierEffect = I3JS.ParallaxBarrierEffect;
+export const ParallaxBarrierEffect: ParallaxBarrierEffect = EX_ParallaxBarrierEffect as any;
+
+export type PeppersGhostEffect = I3JS.PeppersGhostEffect;
+export const PeppersGhostEffect: PeppersGhostEffect = EX_PeppersGhostEffect as any;
+
+export type EffectComposer = I3JS.EffectComposer;
+export const EffectComposer: EffectComposer = EX_EffectComposer as any;
+
+
+export type ProgressiveLightMap = I3JS.ProgressiveLightMap;
+export const ProgressiveLightMap: ProgressiveLightMap = EX_ProgressiveLightMap as any;
+
+export type ShadowMesh = I3JS.ShadowMesh;
+export const ShadowMesh: ShadowMesh = EX_ShadowMesh as any;
+
+export type ShadowMapViewer = I3JS.ShadowMapViewer;
+export const ShadowMapViewer: ShadowMapViewer = EX_ShadowMapViewer as any;
+
+
+export type AnimationUtils = I3JS.AnimationUtils;
+export const AnimationUtils: AnimationUtils = O3JS.AnimationUtils as any;
+
+export type ShaderChunk = I3JS.ShaderChunk;
+export const ShaderChunk: ShaderChunk = O3JS.ShaderChunk as any;
+
+export type ShaderLib = I3JS.ShaderLib;
+export const ShaderLib: ShaderLib = O3JS.ShaderLib as any;
+
+export type Box2 = I3JS.Box2;
+export const Box2: Box2 = O3JS.Box2 as any;
+
+export type Box3 = I3JS.Box3;
+export const Box3: Box3 = O3JS.Box3 as any;
+
+export type Color = I3JS.Color;
+export const Color: Color = O3JS.Color as any;
+
+export type Cylindrical = I3JS.Cylindrical;
+export const Cylindrical: Cylindrical = O3JS.Cylindrical as any;
+
+export type Euler = I3JS.Euler;
+export const Euler: Euler = O3JS.Euler as any;
+
+export type Frustum = I3JS.Frustum;
+export const Frustum: Frustum = O3JS.Frustum as any;
+
+export type Line3 = I3JS.Line3;
+export const Line3: Line3 = O3JS.Line3 as any;
+
+export type Matrix3 = I3JS.Matrix3;
+export const Matrix3: Matrix3 = O3JS.Matrix3 as any;
+
+export type Matrix4 = I3JS.Matrix4;
+export const Matrix4: Matrix4 = O3JS.Matrix4 as any;
+
+export type Plane = I3JS.Plane;
+export const Plane: Plane = O3JS.Plane as any;
+
+export type Quaternion = I3JS.Quaternion;
+export const Quaternion: Quaternion = O3JS.Quaternion as any;
+
+export type Ray = I3JS.Ray;
+export const Ray: Ray = O3JS.Ray as any;
+
+export type Sphere = I3JS.Sphere;
+export const Sphere: Sphere = O3JS.Sphere as any;
+
+export type Spherical = I3JS.Spherical;
+export const Spherical: Spherical = O3JS.Spherical as any;
+
+export type SphericalHarmonics3 = I3JS.SphericalHarmonics3;
+export const SphericalHarmonics3: SphericalHarmonics3 = O3JS.SphericalHarmonics3 as any;
+
+export type Triangle = I3JS.Triangle;
+export const Triangle: Triangle = O3JS.Triangle as any;
+
+export type Vector2 = I3JS.Vector2;
+export const Vector2: Vector2 = O3JS.Vector2 as any;
+
+export type Vector3 = I3JS.Vector3;
+export const Vector3: Vector3 = O3JS.Vector3 as any;
+
+export type Vector4 = I3JS.Vector4;
+export const Vector4: Vector4 = O3JS.Vector4 as any;
+
+export type MathUtils = I3JS.MathUtils;
+export const MathUtils: MathUtils = O3JS.MathUtils as any;
+
+export type CubicInterpolant = I3JS.CubicInterpolant;
+export const CubicInterpolant: CubicInterpolant = O3JS.CubicInterpolant as any;
+
+export type DiscreteInterpolant = I3JS.DiscreteInterpolant;
+export const DiscreteInterpolant: DiscreteInterpolant = O3JS.DiscreteInterpolant as any;
+
+export type LinearInterpolant = I3JS.LinearInterpolant;
+export const LinearInterpolant: LinearInterpolant = O3JS.LinearInterpolant as any;
+
+export type QuaternionLinearInterpolant = I3JS.QuaternionLinearInterpolant;
+export const QuaternionLinearInterpolant: QuaternionLinearInterpolant = O3JS.QuaternionLinearInterpolant as any;
+
+export type BufferAttribute = I3JS.BufferAttribute;
+export const BufferAttribute: BufferAttribute = O3JS.BufferAttribute as any;
+
+export type Int8BufferAttribute = I3JS.Int8BufferAttribute;
+export const Int8BufferAttribute: Int8BufferAttribute = O3JS.Int8BufferAttribute as any;
+
+export type Uint8BufferAttribute = I3JS.Uint8BufferAttribute;
+export const Uint8BufferAttribute: Uint8BufferAttribute = O3JS.Uint8BufferAttribute as any;
+
+export type Uint8ClampedBufferAttribute = I3JS.Uint8ClampedBufferAttribute;
+export const Uint8ClampedBufferAttribute: Uint8ClampedBufferAttribute = O3JS.Uint8ClampedBufferAttribute as any;
+
+export type Int16BufferAttribute = I3JS.Int16BufferAttribute;
+export const Int16BufferAttribute: Int16BufferAttribute = O3JS.Int16BufferAttribute as any;
+
+export type Uint16BufferAttribute = I3JS.Uint16BufferAttribute;
+export const Uint16BufferAttribute: Uint16BufferAttribute = O3JS.Uint16BufferAttribute as any;
+
+export type Int32BufferAttribute = I3JS.Int32BufferAttribute;
+export const Int32BufferAttribute: Int32BufferAttribute = O3JS.Int32BufferAttribute as any;
+
+export type Uint32BufferAttribute = I3JS.Uint32BufferAttribute;
+export const Uint32BufferAttribute: Uint32BufferAttribute = O3JS.Uint32BufferAttribute as any;
+
+export type Float16BufferAttribute = I3JS.Float16BufferAttribute;
+export const Float16BufferAttribute: Float16BufferAttribute = O3JS.Float16BufferAttribute as any;
+
+export type Float32BufferAttribute = I3JS.Float32BufferAttribute;
+export const Float32BufferAttribute: Float32BufferAttribute = O3JS.Float32BufferAttribute as any;
+
+export type Float64BufferAttribute = I3JS.Float64BufferAttribute;
+export const Float64BufferAttribute: Float64BufferAttribute = O3JS.Float64BufferAttribute as any;
+
+
+export type GeometryUtils = I3JS.GeometryUtils;
+export const GeometryUtils: GeometryUtils = {
 	mergeBufferAttributes: E_GF_UTIL.mergeBufferAttributes as any,
 	mergeBufferGeometries: E_GF_UTIL.mergeBufferGeometries as any,
 	interleaveAttributes: E_GF_UTIL.interleaveAttributes as any,
@@ -384,524 +657,1434 @@ export const GeometryUtils: I3JS.IGeometryUtils = {
 	mergeVertices: E_GF_UTIL.mergeVertices as any,
 	toTrianglesDrawMode: E_GF_UTIL.toTrianglesDrawMode as any,
 	computeMorphedAttributes: E_GF_UTIL.computeMorphedAttributes as any,
-	 hilbert2D: (E_G_UTIL as any).hilbert2D,
-	 hilbert3D: (E_G_UTIL as any).hilbert3D,
-	 gosper: (E_G_UTIL as any).gosper
+	hilbert2D: (E_G_UTIL as any).hilbert2D,
+	hilbert3D: (E_G_UTIL as any).hilbert3D,
+	gosper: (E_G_UTIL as any).gosper,
 };
 
-export const RoomEnvironment: I3JS.IRoomEnvironment = EX_RoomEnvironment as any;
 
-export const Node: I3JS.INode = NODES.Node as any;
-export const TempNode: I3JS.ITempNode = NODES.TempNode as any;
-export const InputNode: I3JS.IInputNode = NODES.InputNode as any;
-export const ConstNode: I3JS.IConstNode = NODES.ConstNode as any;
-export const VarNode: I3JS.IVarNode = NODES.VarNode as any;
-export const StructNode: I3JS.IStructNode = NODES.StructNode as any;
-export const AttributeNode: I3JS.IAttributeNode = NODES.AttributeNode as any;
-export const FunctionNode: I3JS.IFunctionNode = NODES.FunctionNode as any;
-export const ExpressionNode: I3JS.IExpressionNode = NODES.ExpressionNode as any;
-export const FunctionCallNode: I3JS.IFunctionCallNode = NODES.FunctionCallNode as any;
-export const NodeLib: I3JS.INodeLib = NODES.NodeLib as any;
-export const NodeUtils: I3JS.INodeUtils = NODES.NodeUtils as any;
-export const NodeFrame: I3JS.INodeFrame = NODES.NodeFrame as any;
-export const NodeUniform: I3JS.INodeUniform = NODES.NodeUniform as any;
-export const NodeBuilder: I3JS.INodeBuilder = NODES.NodeBuilder as any;
+export type RoomEnvironment = I3JS.RoomEnvironment;
+export const RoomEnvironment: RoomEnvironment = EX_RoomEnvironment as any;
+
+
+export type Node = I3JS.Node;
+export const Node: Node = NODES.Node as any;
+
+export type TempNode = I3JS.TempNode;
+export const TempNode: TempNode = NODES.TempNode as any;
+
+export type InputNode = I3JS.InputNode;
+export const InputNode: InputNode = NODES.InputNode as any;
+
+export type ConstNode = I3JS.ConstNode;
+export const ConstNode: ConstNode = NODES.ConstNode as any;
+
+export type VarNode = I3JS.VarNode;
+export const VarNode: VarNode = NODES.VarNode as any;
+
+export type StructNode = I3JS.StructNode;
+export const StructNode: StructNode = NODES.StructNode as any;
+
+export type AttributeNode = I3JS.AttributeNode;
+export const AttributeNode: AttributeNode = NODES.AttributeNode as any;
+
+export type FunctionNode = I3JS.FunctionNode;
+export const FunctionNode: FunctionNode = NODES.FunctionNode as any;
+
+export type ExpressionNode = I3JS.ExpressionNode;
+export const ExpressionNode: ExpressionNode = NODES.ExpressionNode as any;
+
+export type FunctionCallNode = I3JS.FunctionCallNode;
+export const FunctionCallNode: FunctionCallNode = NODES.FunctionCallNode as any;
+
+export type NodeLib = I3JS.NodeLib;
+export const NodeLib: NodeLib = NODES.NodeLib as any;
+
+export type NodeUtils = I3JS.NodeUtils;
+export const NodeUtils: NodeUtils = NODES.NodeUtils as any;
+
+export type NodeFrame = I3JS.NodeFrame;
+export const NodeFrame: NodeFrame = NODES.NodeFrame as any;
+
+export type NodeUniform = I3JS.NodeUniform;
+export const NodeUniform: NodeUniform = NODES.NodeUniform as any;
+
+export type NodeBuilder = I3JS.NodeBuilder;
+export const NodeBuilder: NodeBuilder = NODES.NodeBuilder as any;
 
 // inputs
 
-export const BoolNode: I3JS.IBoolNode = NODES.BoolNode as any;
-export const IntNode: I3JS.IIntNode = NODES.IntNode as any;
-export const FloatNode: I3JS.IFloatNode = NODES.FloatNode as any;
-export const Vector2Node: I3JS.IVector2Node = NODES.Vector2Node as any;
-export const Vector3Node: I3JS.IVector3Node = NODES.Vector3Node as any;
-export const Vector4Node: I3JS.IVector4Node = NODES.Vector4Node as any;
-export const ColorNode: I3JS.IColorNode = NODES.ColorNode as any;
-export const Matrix3Node: I3JS.IMatrix3Node = NODES.Matrix3Node as any;
-export const Matrix4Node: I3JS.IMatrix4Node = NODES.Matrix4Node as any;
-export const TextureNode: I3JS.ITextureNode = NODES.TextureNode as any;
-export const CubeTextureNode: I3JS.ICubeTextureNode = NODES.CubeTextureNode as any;
-export const ScreenNode: I3JS.IScreenNode = NODES.ScreenNode as any;
-export const ReflectorNode: I3JS.IReflectorNode = NODES.ReflectorNode as any;
-export const PropertyNode: I3JS.IPropertyNode = NODES.PropertyNode as any;
-export const RTTNode: I3JS.IRTTNode = NODES.RTTNode as any;
+
+export type BoolNode = I3JS.BoolNode;
+export const BoolNode: BoolNode = NODES.BoolNode as any;
+
+export type IntNode = I3JS.IntNode;
+export const IntNode: IntNode = NODES.IntNode as any;
+
+export type FloatNode = I3JS.FloatNode;
+export const FloatNode: FloatNode = NODES.FloatNode as any;
+
+export type Vector2Node = I3JS.Vector2Node;
+export const Vector2Node: Vector2Node = NODES.Vector2Node as any;
+
+export type Vector3Node = I3JS.Vector3Node;
+export const Vector3Node: Vector3Node = NODES.Vector3Node as any;
+
+export type Vector4Node = I3JS.Vector4Node;
+export const Vector4Node: Vector4Node = NODES.Vector4Node as any;
+
+export type ColorNode = I3JS.ColorNode;
+export const ColorNode: ColorNode = NODES.ColorNode as any;
+
+export type Matrix3Node = I3JS.Matrix3Node;
+export const Matrix3Node: Matrix3Node = NODES.Matrix3Node as any;
+
+export type Matrix4Node = I3JS.Matrix4Node;
+export const Matrix4Node: Matrix4Node = NODES.Matrix4Node as any;
+
+export type TextureNode = I3JS.TextureNode;
+export const TextureNode: TextureNode = NODES.TextureNode as any;
+
+export type CubeTextureNode = I3JS.CubeTextureNode;
+export const CubeTextureNode: CubeTextureNode = NODES.CubeTextureNode as any;
+
+export type ScreenNode = I3JS.ScreenNode;
+export const ScreenNode: ScreenNode = NODES.ScreenNode as any;
+
+export type ReflectorNode = I3JS.ReflectorNode;
+export const ReflectorNode: ReflectorNode = NODES.ReflectorNode as any;
+
+export type PropertyNode = I3JS.PropertyNode;
+export const PropertyNode: PropertyNode = NODES.PropertyNode as any;
+
+export type RTTNode = I3JS.RTTNode;
+export const RTTNode: RTTNode = NODES.RTTNode as any;
 
 // accessors
 
-export const UVNode: I3JS.IUVNode = NODES.UVNode as any;
-export const ColorsNode: I3JS.IColorsNode = NODES.ColorsNode as any;
-export const PositionNode: I3JS.IPositionNode = NODES.PositionNode as any;
-export const NormalNode: I3JS.INormalNode = NODES.NormalNode as any;
-export const CameraNode: I3JS.ICameraNode = NODES.CameraNode as any;
-export const LightNode: I3JS.ILightNode = NODES.LightNode as any;
-export const ReflectNode: I3JS.IReflectNode = NODES.ReflectNode as any;
-export const ScreenUVNode: I3JS.IScreenUVNode = NODES.ScreenUVNode as any;
-export const ResolutionNode: I3JS.IResolutionNode = NODES.ResolutionNode as any;
+
+export type UVNode = I3JS.UVNode;
+export const UVNode: UVNode = NODES.UVNode as any;
+
+export type ColorsNode = I3JS.ColorsNode;
+export const ColorsNode: ColorsNode = NODES.ColorsNode as any;
+
+export type PositionNode = I3JS.PositionNode;
+export const PositionNode: PositionNode = NODES.PositionNode as any;
+
+export type NormalNode = I3JS.NormalNode;
+export const NormalNode: NormalNode = NODES.NormalNode as any;
+
+export type CameraNode = I3JS.CameraNode;
+export const CameraNode: CameraNode = NODES.CameraNode as any;
+
+export type LightNode = I3JS.LightNode;
+export const LightNode: LightNode = NODES.LightNode as any;
+
+export type ReflectNode = I3JS.ReflectNode;
+export const ReflectNode: ReflectNode = NODES.ReflectNode as any;
+
+export type ScreenUVNode = I3JS.ScreenUVNode;
+export const ScreenUVNode: ScreenUVNode = NODES.ScreenUVNode as any;
+
+export type ResolutionNode = I3JS.ResolutionNode;
+export const ResolutionNode: ResolutionNode = NODES.ResolutionNode as any;
 
 // math
 
-export const MathNode: I3JS.IMathNode = NODES.MathNode as any;
-export const OperatorNode: I3JS.IOperatorNode = NODES.OperatorNode as any;
-export const CondNode: I3JS.ICondNode = NODES.CondNode as any;
+
+export type MathNode = I3JS.MathNode;
+export const MathNode: MathNode = NODES.MathNode as any;
+
+export type OperatorNode = I3JS.OperatorNode;
+export const OperatorNode: OperatorNode = NODES.OperatorNode as any;
+
+export type CondNode = I3JS.CondNode;
+export const CondNode: CondNode = NODES.CondNode as any;
 
 // procedural
+// export type NoiseNode = I3JS.NoiseNode;
+// export const NoiseNode: NoiseNode = NODES.NoiseNode as any;
 
-// export const NoiseNode: I3JS.INoiseNode = NODES.NoiseNode as any;
-export const CheckerNode: I3JS.ICheckerNode = NODES.CheckerNode as any;
+export type CheckerNode = I3JS.CheckerNode;
+export const CheckerNode: CheckerNode = NODES.CheckerNode as any;
 
 // misc
 
-export const TextureCubeUVNode: I3JS.ITextureCubeUVNode = NODES.TextureCubeUVNode as any;
-export const TextureCubeNode: I3JS.ITextureCubeNode = NODES.TextureCubeNode as any;
-export const NormalMapNode: I3JS.INormalMapNode = NODES.NormalMapNode as any;
-export const BumpMapNode: I3JS.IBumpMapNode = NODES.BumpMapNode as any;
+
+export type TextureCubeUVNode = I3JS.TextureCubeUVNode;
+export const TextureCubeUVNode: TextureCubeUVNode = NODES.TextureCubeUVNode as any;
+
+export type TextureCubeNode = I3JS.TextureCubeNode;
+export const TextureCubeNode: TextureCubeNode = NODES.TextureCubeNode as any;
+
+export type NormalMapNode = I3JS.NormalMapNode;
+export const NormalMapNode: NormalMapNode = NODES.NormalMapNode as any;
+
+export type BumpMapNode = I3JS.BumpMapNode;
+export const BumpMapNode: BumpMapNode = NODES.BumpMapNode as any;
 
 // utils
 
-export const BypassNode: I3JS.IBypassNode = NODES.BypassNode as any;
-export const JoinNode: I3JS.IJoinNode = NODES.JoinNode as any;
-export const SwitchNode: I3JS.ISwitchNode = NODES.SwitchNode as any;
-export const TimerNode: I3JS.ITimerNode = NODES.TimerNode as any;
-export const VelocityNode: I3JS.IVelocityNode = NODES.VelocityNode as any;
-export const UVTransformNode: I3JS.IUVTransformNode = NODES.UVTransformNode as any;
-export const MaxMIPLevelNode: I3JS.IMaxMIPLevelNode = NODES.MaxMIPLevelNode as any;
-export const SpecularMIPLevelNode: I3JS.ISpecularMIPLevelNode = NODES.SpecularMIPLevelNode as any;
-export const ColorSpaceNode: I3JS.IColorSpaceNode = NODES.ColorSpaceNode as any;
+
+export type BypassNode = I3JS.BypassNode;
+export const BypassNode: BypassNode = NODES.BypassNode as any;
+
+export type JoinNode = I3JS.JoinNode;
+export const JoinNode: JoinNode = NODES.JoinNode as any;
+
+export type SwitchNode = I3JS.SwitchNode;
+export const SwitchNode: SwitchNode = NODES.SwitchNode as any;
+
+export type TimerNode = I3JS.TimerNode;
+export const TimerNode: TimerNode = NODES.TimerNode as any;
+
+export type VelocityNode = I3JS.VelocityNode;
+export const VelocityNode: VelocityNode = NODES.VelocityNode as any;
+
+export type UVTransformNode = I3JS.UVTransformNode;
+export const UVTransformNode: UVTransformNode = NODES.UVTransformNode as any;
+
+export type MaxMIPLevelNode = I3JS.MaxMIPLevelNode;
+export const MaxMIPLevelNode: MaxMIPLevelNode = NODES.MaxMIPLevelNode as any;
+
+export type SpecularMIPLevelNode = I3JS.SpecularMIPLevelNode;
+export const SpecularMIPLevelNode: SpecularMIPLevelNode = NODES.SpecularMIPLevelNode as any;
+
+export type ColorSpaceNode = I3JS.ColorSpaceNode;
+export const ColorSpaceNode: ColorSpaceNode = NODES.ColorSpaceNode as any;
 
 // effects
 
-export const BlurNode: I3JS.IBlurNode = NODES.BlurNode as any;
-export const ColorAdjustmentNode: I3JS.IColorAdjustmentNode = NODES.ColorAdjustmentNode as any;
-export const LuminanceNode: I3JS.ILuminanceNode = NODES.LuminanceNode as any;
+
+export type BlurNode = I3JS.BlurNode;
+export const BlurNode: BlurNode = NODES.BlurNode as any;
+
+export type ColorAdjustmentNode = I3JS.ColorAdjustmentNode;
+export const ColorAdjustmentNode: ColorAdjustmentNode = NODES.ColorAdjustmentNode as any;
+
+export type LuminanceNode = I3JS.LuminanceNode;
+export const LuminanceNode: LuminanceNode = NODES.LuminanceNode as any;
 
 // material nodes
 
-export const RawNode: I3JS.IRawNode = NODES.RawNode as any;
-export const BasicNode: I3JS.IBasicNode = NODES.BasicNode as any;
-export const SpriteNode: I3JS.ISpriteNode = NODES.SpriteNode as any;
-export const PhongNode: I3JS.IPhongNode = NODES.PhongNode as any;
-export const StandardNode: I3JS.IStandardNode = NODES.StandardNode as any;
-export const MeshStandardNode: I3JS.IMeshStandardNode = NODES.MeshStandardNode as any;
+
+export type RawNode = I3JS.RawNode;
+export const RawNode: RawNode = NODES.RawNode as any;
+
+export type BasicNode = I3JS.BasicNode;
+export const BasicNode: BasicNode = NODES.BasicNode as any;
+
+export type SpriteNode = I3JS.SpriteNode;
+export const SpriteNode: SpriteNode = NODES.SpriteNode as any;
+
+export type PhongNode = I3JS.PhongNode;
+export const PhongNode: PhongNode = NODES.PhongNode as any;
+
+export type StandardNode = I3JS.StandardNode;
+export const StandardNode: StandardNode = NODES.StandardNode as any;
+
+export type MeshStandardNode = I3JS.MeshStandardNode;
+export const MeshStandardNode: MeshStandardNode = NODES.MeshStandardNode as any;
 
 // materials
 
-export const NodeMaterial: I3JS.INodeMaterial = NODES.NodeMaterial as any;
-export const BasicNodeMaterial: I3JS.IBasicNodeMaterial = NODES.BasicNodeMaterial as any;
-export const SpriteNodeMaterial: I3JS.ISpriteNodeMaterial = NODES.SpriteNodeMaterial as any;
-export const PhongNodeMaterial: I3JS.IPhongNodeMaterial = NODES.PhongNodeMaterial as any;
-export const StandardNodeMaterial: I3JS.IStandardNodeMaterial = NODES.StandardNodeMaterial as any;
-export const MeshStandardNodeMaterial: I3JS.IMeshStandardNodeMaterial = NODES.MeshStandardNodeMaterial as any;
+
+export type NodeMaterial = I3JS.NodeMaterial;
+export const NodeMaterial: NodeMaterial = NODES.NodeMaterial as any;
+
+export type BasicNodeMaterial = I3JS.BasicNodeMaterial;
+export const BasicNodeMaterial: BasicNodeMaterial = NODES.BasicNodeMaterial as any;
+
+export type SpriteNodeMaterial = I3JS.SpriteNodeMaterial;
+export const SpriteNodeMaterial: SpriteNodeMaterial = NODES.SpriteNodeMaterial as any;
+
+export type PhongNodeMaterial = I3JS.PhongNodeMaterial;
+export const PhongNodeMaterial: PhongNodeMaterial = NODES.PhongNodeMaterial as any;
+
+export type StandardNodeMaterial = I3JS.StandardNodeMaterial;
+export const StandardNodeMaterial: StandardNodeMaterial = NODES.StandardNodeMaterial as any;
+
+export type MeshStandardNodeMaterial = I3JS.MeshStandardNodeMaterial;
+export const MeshStandardNodeMaterial: MeshStandardNodeMaterial = NODES.MeshStandardNodeMaterial as any;
 
 // postprocessing
 
-export const NodePostProcessing: I3JS.INodePostProcessing = NODES.NodePostProcessing as any;
-// export const NodePass: I3JS.INodePass = NODES.NodePass as any;
+
+export type NodePostProcessing = I3JS.NodePostProcessing;
+export const NodePostProcessing: NodePostProcessing = NODES.NodePostProcessing as any;
+// export type NodePass = I3JS.NodePass;
+// export const NodePass: NodePass = NODES.NodePass as any;
 
 
-export const BufferGeometry: I3JS.IBufferGeometry = O3JS.BufferGeometry as any;
-export const Clock: I3JS.IClock = O3JS.Clock as any;
-export const EventDispatcher: I3JS.IEventDispatcher = O3JS.EventDispatcher as any;
-export const GLBufferAttribute: I3JS.IGLBufferAttribute = O3JS.GLBufferAttribute as any;
-export const InstancedBufferAttribute: I3JS.IInstancedBufferAttribute = O3JS.InstancedBufferAttribute as any;
-export const InstancedBufferGeometry: I3JS.IInstancedBufferGeometry = O3JS.InstancedBufferGeometry as any;
-export const InstancedInterleavedBuffer: I3JS.IInstancedInterleavedBuffer = O3JS.InstancedInterleavedBuffer as any;
-export const InterleavedBuffer: I3JS.IInterleavedBuffer = O3JS.InterleavedBuffer as any;
-export const InterleavedBufferAttribute: I3JS.IInterleavedBufferAttribute = O3JS.InterleavedBufferAttribute as any;
-export const Layers: I3JS.ILayers = O3JS.Layers as any;
-export const Object3D: I3JS.IObject3D = O3JS.Object3D as any;
-export const Raycaster: I3JS.IRaycaster = O3JS.Raycaster as any;
-export const Uniform: I3JS.IUniform = O3JS.Uniform as any;
-export const UniformsUtils: I3JS.IUniformsUtils = O3JS.UniformsUtils as any;
-export const UniformsLib: I3JS.IUniformsLib = O3JS.UniformsLib as any;
-export const BoxGeometry: I3JS.IBoxGeometry = O3JS.BoxGeometry as any;
-export const BoxBufferGeometry: I3JS.IBoxGeometry = O3JS.BoxGeometry as any;
-export const CircleGeometry: I3JS.ICircleGeometry = O3JS.CircleGeometry as any;
-export const CircleBufferGeometry: I3JS.ICircleGeometry = O3JS.CircleGeometry as any;
-export const ConeGeometry: I3JS.IConeGeometry = O3JS.ConeGeometry as any;
-export const ConeBufferGeometry: I3JS.IConeGeometry = O3JS.ConeGeometry as any;
-export const CylinderGeometry: I3JS.ICylinderGeometry = O3JS.CylinderGeometry as any;
-export const CylinderBufferGeometry: I3JS.ICylinderGeometry = O3JS.CylinderGeometry as any;
-export const DodecahedronGeometry: I3JS.IDodecahedronGeometry = O3JS.DodecahedronGeometry as any;
-export const DodecahedronBufferGeometry: I3JS.IDodecahedronGeometry = O3JS.DodecahedronGeometry as any;
-export const EdgesGeometry: I3JS.IEdgesGeometry = O3JS.EdgesGeometry as any;
-export const EdgesBufferGeometry: I3JS.IEdgesGeometry = O3JS.EdgesGeometry as any;
-export const ExtrudeGeometry: I3JS.IExtrudeGeometry = O3JS.ExtrudeGeometry as any;
-export const ExtrudeBufferGeometry: I3JS.IExtrudeGeometry = O3JS.ExtrudeGeometry as any;
-export const IcosahedronGeometry: I3JS.IIcosahedronGeometry = O3JS.IcosahedronGeometry as any;
-export const IcosahedronBufferGeometry: I3JS.IIcosahedronGeometry = O3JS.IcosahedronGeometry as any;
-export const LatheGeometry: I3JS.ILatheGeometry = O3JS.LatheGeometry as any;
-export const LatheBufferGeometry: I3JS.ILatheGeometry = O3JS.LatheGeometry as any;
-export const OctahedronGeometry: I3JS.IOctahedronGeometry = O3JS.OctahedronGeometry as any;
-export const OctahedronBufferGeometry: I3JS.IOctahedronGeometry = O3JS.OctahedronGeometry as any;
-export const PlaneGeometry: I3JS.IPlaneGeometry = O3JS.PlaneGeometry as any;
-export const PlaneBufferGeometry: I3JS.IPlaneGeometry = O3JS.PlaneGeometry as any;
-export const PolyhedronGeometry: I3JS.IPolyhedronGeometry = O3JS.PolyhedronGeometry as any;
-export const PolyhedronBufferGeometry: I3JS.IPolyhedronGeometry = O3JS.PolyhedronGeometry as any;
-export const RingGeometry: I3JS.IRingGeometry = O3JS.RingGeometry as any;
-export const RingBufferGeometry: I3JS.IRingGeometry = O3JS.RingGeometry as any;
-export const ShapeGeometry: I3JS.IShapeGeometry = O3JS.ShapeGeometry as any;
-export const ShapeBufferGeometry: I3JS.IShapeGeometry = O3JS.ShapeGeometry as any;
-export const SphereGeometry: I3JS.ISphereGeometry = O3JS.SphereGeometry as any;
-export const SphereBufferGeometry: I3JS.ISphereGeometry = O3JS.SphereGeometry as any;
-export const TetrahedronGeometry: I3JS.ITetrahedronGeometry = O3JS.TetrahedronGeometry as any;
-export const TetrahedronBufferGeometry: I3JS.ITetrahedronGeometry = O3JS.TetrahedronGeometry as any;
-export const TorusGeometry: I3JS.ITorusGeometry = O3JS.TorusGeometry as any;
-export const TorusBufferGeometry: I3JS.ITorusGeometry = O3JS.TorusGeometry as any;
-export const TorusKnotGeometry: I3JS.ITorusKnotGeometry = O3JS.TorusKnotGeometry as any;
-export const TorusKnotBufferGeometry: I3JS.ITorusKnotGeometry = O3JS.TorusKnotGeometry as any;
-export const TubeGeometry: I3JS.ITubeGeometry = O3JS.TubeGeometry as any;
-export const TubeBufferGeometry: I3JS.ITubeGeometry = O3JS.TubeGeometry as any;
-export const WireframeGeometry: I3JS.IWireframeGeometry = O3JS.WireframeGeometry as any;
-export const WireframeBufferGeometry: I3JS.IWireframeGeometry = O3JS.WireframeGeometry as any;
-export const LineSegmentsGeometry: I3JS.ILineSegmentsGeometry = EX_LineSegmentsGeometry as any;
-export const WireframeGeometry2: I3JS.IWireframeGeometry2 = EX_WireframeGeometry2 as any;
-export const EdgeSplitModifier: I3JS.IEdgeSplitModifier = EX_EdgeSplitModifier as any;
-export const SimplifyModifier: I3JS.ISimplifyModifier = EX_SimplifyModifier as any;
+export type BufferGeometry = I3JS.BufferGeometry;
+export const BufferGeometry: BufferGeometry = O3JS.BufferGeometry as any;
 
-export const BoxLineGeometry: I3JS.IBoxLineGeometry = EX_BoxLineGeometry as any;
-export const ConvexGeometry: I3JS.IConvexGeometry = EX_ConvexGeometry as any;
-export const DecalGeometry: I3JS.IDecalGeometry = EX_DecalGeometry as any;
-export const DecalVertex: I3JS.IDecalVertex = EX_DecalVertex as any;
+export type Clock = I3JS.Clock;
+export const Clock: Clock = O3JS.Clock as any;
 
-export const LightningStrike: I3JS.ILightningStrike = EX_LightningStrike as any;
-export const ParametricGeometries: I3JS.IParametricGeometries = EX_ParametricGeometries as any;
-export const ParametricGeometry: I3JS.IParametricGeometry = EX_ParametricGeometry as any;
-export const RoundedBoxGeometry: I3JS.IRoundedBoxGeometry = EX_RoundedBoxGeometry as any;
-export const TeapotGeometry: I3JS.ITeapotGeometry = EX_TeapotGeometry as any;
-export const TextGeometry: I3JS.ITextGeometry = EX_TextGeometry as any;
-export const LineGeometry: I3JS.ILineGeometry = EX_LineGeometry as any;
+export type EventDispatcher = I3JS.EventDispatcher;
+export const EventDispatcher: EventDispatcher = O3JS.EventDispatcher as any;
 
-export const RollerCoasterGeometry: I3JS.IRollerCoasterGeometry = EX_RollerCoaster.RollerCoasterGeometry as any;
-export const RollerCoasterLiftersGeometry: I3JS.IRollerCoasterLiftersGeometry = EX_RollerCoaster.RollerCoasterLiftersGeometry as any;
-export const RollerCoasterShadowGeometry: I3JS.IRollerCoasterShadowGeometry = EX_RollerCoaster.RollerCoasterShadowGeometry as any;
-export const RollerCoasterSkyGeometry: I3JS.IRollerCoasterSkyGeometry = EX_RollerCoaster.SkyGeometry as any;
-export const RollerCoasterTreesGeometry: I3JS.IRollerCoasterTreesGeometry = EX_RollerCoaster.TreesGeometry as any;
+export type GLBufferAttribute = I3JS.GLBufferAttribute;
+export const GLBufferAttribute: GLBufferAttribute = O3JS.GLBufferAttribute as any;
 
-export const CapsuleGeometry: I3JS.ICapsuleGeometry = NgxCapsuleGeometry as any;
-export const CircleDepthGeometry: I3JS.ICircleDepthGeometry = NgxCircleDepthGeometry as any;
-export const GridGeometry: I3JS.IGridGeometry = NgxGridGeometry as any;
-export const PlaneDepthGeometry: I3JS.IPlaneDepthGeometry = NgxPlaneDepthGeometry as any;
-export const PlanePerlinGeometry: I3JS.IPlanePerlinGeometry = NgxPlanePerlinGeometry as any;
-export const RingDepthGeometry: I3JS.IRingDepthGeometry = NgxRingDepthGeometry as any;
-export const RopeGeometry: I3JS.IRopeGeometry = NgxRopeGeometry as any;
-export const StarGeometry: I3JS.IStarGeometry = NgxStarGeometry as any;
-export const StarDepthGeometry: I3JS.IStarDepthGeometry = NgxStarDepthGeometry as any;
-export const OutlineGeometry: I3JS.IOutlineGeometry = NgxOutlineGeometry as any;
+export type InstancedBufferAttribute = I3JS.InstancedBufferAttribute;
+export const InstancedBufferAttribute: InstancedBufferAttribute = O3JS.InstancedBufferAttribute as any;
 
-export const GeometryCompressionUtils: I3JS.IGeometryCompressionUtils = {
+export type InstancedBufferGeometry = I3JS.InstancedBufferGeometry;
+export const InstancedBufferGeometry: InstancedBufferGeometry = O3JS.InstancedBufferGeometry as any;
+
+export type InstancedInterleavedBuffer = I3JS.InstancedInterleavedBuffer;
+export const InstancedInterleavedBuffer: InstancedInterleavedBuffer = O3JS.InstancedInterleavedBuffer as any;
+
+export type InterleavedBuffer = I3JS.InterleavedBuffer;
+export const InterleavedBuffer: InterleavedBuffer = O3JS.InterleavedBuffer as any;
+
+export type InterleavedBufferAttribute = I3JS.InterleavedBufferAttribute;
+export const InterleavedBufferAttribute: InterleavedBufferAttribute = O3JS.InterleavedBufferAttribute as any;
+
+export type Layers = I3JS.Layers;
+export const Layers: Layers = O3JS.Layers as any;
+
+export type Object3D = I3JS.Object3D;
+export const Object3D: Object3D = O3JS.Object3D as any;
+
+export type Raycaster = I3JS.Raycaster;
+export const Raycaster: Raycaster = O3JS.Raycaster as any;
+
+export type Uniform = I3JS.IUniform;
+export const Uniform: Uniform = O3JS.Uniform as any;
+
+export type UniformsUtils = I3JS.UniformsUtils;
+export const UniformsUtils: UniformsUtils = O3JS.UniformsUtils as any;
+
+export type UniformsLib = I3JS.UniformsLib;
+export const UniformsLib: UniformsLib = O3JS.UniformsLib as any;
+
+export type BoxGeometry = I3JS.BoxGeometry;
+export const BoxGeometry: BoxGeometry = O3JS.BoxGeometry as any;
+
+export type BoxBufferGeometry = I3JS.BoxGeometry;
+export const BoxBufferGeometry: BoxBufferGeometry = O3JS.BoxGeometry as any;
+
+export type CircleGeometry = I3JS.CircleGeometry;
+export const CircleGeometry: CircleGeometry = O3JS.CircleGeometry as any;
+
+export type CircleBufferGeometry = I3JS.CircleGeometry;
+export const CircleBufferGeometry: CircleBufferGeometry = O3JS.CircleGeometry as any;
+
+export type ConeGeometry = I3JS.ConeGeometry;
+export const ConeGeometry: ConeGeometry = O3JS.ConeGeometry as any;
+
+export type ConeBufferGeometry = I3JS.ConeGeometry;
+export const ConeBufferGeometry: ConeBufferGeometry = O3JS.ConeGeometry as any;
+
+export type CylinderGeometry = I3JS.CylinderGeometry;
+export const CylinderGeometry: CylinderGeometry = O3JS.CylinderGeometry as any;
+
+export type CylinderBufferGeometry = I3JS.CylinderGeometry;
+export const CylinderBufferGeometry: CylinderBufferGeometry = O3JS.CylinderGeometry as any;
+
+export type DodecahedronGeometry = I3JS.DodecahedronGeometry;
+export const DodecahedronGeometry: DodecahedronGeometry = O3JS.DodecahedronGeometry as any;
+
+export type DodecahedronBufferGeometry = I3JS.DodecahedronGeometry;
+export const DodecahedronBufferGeometry: DodecahedronBufferGeometry = O3JS.DodecahedronGeometry as any;
+
+export type EdgesGeometry = I3JS.EdgesGeometry;
+export const EdgesGeometry: EdgesGeometry = O3JS.EdgesGeometry as any;
+
+export type EdgesBufferGeometry = I3JS.EdgesGeometry;
+export const EdgesBufferGeometry: EdgesBufferGeometry = O3JS.EdgesGeometry as any;
+
+export type ExtrudeGeometry = I3JS.ExtrudeGeometry;
+export const ExtrudeGeometry: ExtrudeGeometry = O3JS.ExtrudeGeometry as any;
+
+export type ExtrudeBufferGeometry = I3JS.ExtrudeGeometry;
+export const ExtrudeBufferGeometry: ExtrudeBufferGeometry = O3JS.ExtrudeGeometry as any;
+
+export type IcosahedronGeometry = I3JS.IcosahedronGeometry;
+export const IcosahedronGeometry: IcosahedronGeometry = O3JS.IcosahedronGeometry as any;
+
+export type IcosahedronBufferGeometry = I3JS.IcosahedronGeometry;
+export const IcosahedronBufferGeometry: IcosahedronBufferGeometry = O3JS.IcosahedronGeometry as any;
+
+export type LatheGeometry = I3JS.LatheGeometry;
+export const LatheGeometry: LatheGeometry = O3JS.LatheGeometry as any;
+
+export type LatheBufferGeometry = I3JS.LatheGeometry;
+export const LatheBufferGeometry: LatheBufferGeometry = O3JS.LatheGeometry as any;
+
+export type OctahedronGeometry = I3JS.OctahedronGeometry;
+export const OctahedronGeometry: OctahedronGeometry = O3JS.OctahedronGeometry as any;
+
+export type OctahedronBufferGeometry = I3JS.OctahedronGeometry;
+export const OctahedronBufferGeometry: OctahedronBufferGeometry = O3JS.OctahedronGeometry as any;
+
+export type PlaneGeometry = I3JS.PlaneGeometry;
+export const PlaneGeometry: PlaneGeometry = O3JS.PlaneGeometry as any;
+
+export type PlaneBufferGeometry = I3JS.PlaneGeometry;
+export const PlaneBufferGeometry: PlaneBufferGeometry = O3JS.PlaneGeometry as any;
+
+export type PolyhedronGeometry = I3JS.PolyhedronGeometry;
+export const PolyhedronGeometry: PolyhedronGeometry = O3JS.PolyhedronGeometry as any;
+
+export type PolyhedronBufferGeometry = I3JS.PolyhedronGeometry;
+export const PolyhedronBufferGeometry: PolyhedronBufferGeometry = O3JS.PolyhedronGeometry as any;
+
+export type RingGeometry = I3JS.RingGeometry;
+export const RingGeometry: RingGeometry = O3JS.RingGeometry as any;
+
+export type RingBufferGeometry = I3JS.RingGeometry;
+export const RingBufferGeometry: RingBufferGeometry = O3JS.RingGeometry as any;
+
+export type ShapeGeometry = I3JS.ShapeGeometry;
+export const ShapeGeometry: ShapeGeometry = O3JS.ShapeGeometry as any;
+
+export type ShapeBufferGeometry = I3JS.ShapeGeometry;
+export const ShapeBufferGeometry: ShapeBufferGeometry = O3JS.ShapeGeometry as any;
+
+export type SphereGeometry = I3JS.SphereGeometry;
+export const SphereGeometry: SphereGeometry = O3JS.SphereGeometry as any;
+
+export type SphereBufferGeometry = I3JS.SphereGeometry;
+export const SphereBufferGeometry: SphereBufferGeometry = O3JS.SphereGeometry as any;
+
+export type TetrahedronGeometry = I3JS.TetrahedronGeometry;
+export const TetrahedronGeometry: TetrahedronGeometry = O3JS.TetrahedronGeometry as any;
+
+export type TetrahedronBufferGeometry = I3JS.TetrahedronGeometry;
+export const TetrahedronBufferGeometry: TetrahedronBufferGeometry = O3JS.TetrahedronGeometry as any;
+
+export type TorusGeometry = I3JS.TorusGeometry;
+export const TorusGeometry: TorusGeometry = O3JS.TorusGeometry as any;
+
+export type TorusBufferGeometry = I3JS.TorusGeometry;
+export const TorusBufferGeometry: TorusBufferGeometry = O3JS.TorusGeometry as any;
+
+export type TorusKnotGeometry = I3JS.TorusKnotGeometry;
+export const TorusKnotGeometry: TorusKnotGeometry = O3JS.TorusKnotGeometry as any;
+
+export type TorusKnotBufferGeometry = I3JS.TorusKnotGeometry;
+export const TorusKnotBufferGeometry: TorusKnotBufferGeometry = O3JS.TorusKnotGeometry as any;
+
+export type TubeGeometry = I3JS.TubeGeometry;
+export const TubeGeometry: TubeGeometry = O3JS.TubeGeometry as any;
+
+export type TubeBufferGeometry = I3JS.TubeGeometry;
+export const TubeBufferGeometry: TubeBufferGeometry = O3JS.TubeGeometry as any;
+
+export type WireframeGeometry = I3JS.WireframeGeometry;
+export const WireframeGeometry: WireframeGeometry = O3JS.WireframeGeometry as any;
+
+export type WireframeBufferGeometry = I3JS.WireframeGeometry;
+export const WireframeBufferGeometry: WireframeBufferGeometry = O3JS.WireframeGeometry as any;
+
+export type LineSegmentsGeometry = I3JS.LineSegmentsGeometry;
+export const LineSegmentsGeometry: LineSegmentsGeometry = EX_LineSegmentsGeometry as any;
+
+export type WireframeGeometry2 = I3JS.WireframeGeometry2;
+export const WireframeGeometry2: WireframeGeometry2 = EX_WireframeGeometry2 as any;
+
+export type EdgeSplitModifier = I3JS.EdgeSplitModifier;
+export const EdgeSplitModifier: EdgeSplitModifier = EX_EdgeSplitModifier as any;
+
+export type SimplifyModifier = I3JS.SimplifyModifier;
+export const SimplifyModifier: SimplifyModifier = EX_SimplifyModifier as any;
+
+
+export type BoxLineGeometry = I3JS.BoxLineGeometry;
+export const BoxLineGeometry: BoxLineGeometry = EX_BoxLineGeometry as any;
+
+export type ConvexGeometry = I3JS.ConvexGeometry;
+export const ConvexGeometry: ConvexGeometry = EX_ConvexGeometry as any;
+
+export type DecalGeometry = I3JS.DecalGeometry;
+export const DecalGeometry: DecalGeometry = EX_DecalGeometry as any;
+
+export type DecalVertex = I3JS.DecalVertex;
+export const DecalVertex: DecalVertex = EX_DecalVertex as any;
+
+
+export type LightningStrike = I3JS.LightningStrike;
+export const LightningStrike: LightningStrike = EX_LightningStrike as any;
+
+export type ParametricGeometries = I3JS.ParametricGeometries;
+export const ParametricGeometries: ParametricGeometries = EX_ParametricGeometries as any;
+
+export type ParametricGeometry = I3JS.ParametricGeometry;
+export const ParametricGeometry: ParametricGeometry = EX_ParametricGeometry as any;
+
+export type RoundedBoxGeometry = I3JS.RoundedBoxGeometry;
+export const RoundedBoxGeometry: RoundedBoxGeometry = EX_RoundedBoxGeometry as any;
+
+export type TeapotGeometry = I3JS.TeapotGeometry;
+export const TeapotGeometry: TeapotGeometry = EX_TeapotGeometry as any;
+
+export type TextGeometry = I3JS.TextGeometry;
+export const TextGeometry: TextGeometry = EX_TextGeometry as any;
+
+export type LineGeometry = I3JS.LineGeometry;
+export const LineGeometry: LineGeometry = EX_LineGeometry as any;
+
+
+export type RollerCoasterGeometry = I3JS.RollerCoasterGeometry;
+export const RollerCoasterGeometry: RollerCoasterGeometry = EX_RollerCoaster.RollerCoasterGeometry as any;
+
+export type RollerCoasterLiftersGeometry = I3JS.RollerCoasterLiftersGeometry;
+export const RollerCoasterLiftersGeometry: RollerCoasterLiftersGeometry =
+	EX_RollerCoaster.RollerCoasterLiftersGeometry as any;
+
+export type RollerCoasterShadowGeometry = I3JS.RollerCoasterShadowGeometry;
+export const RollerCoasterShadowGeometry: RollerCoasterShadowGeometry =
+	EX_RollerCoaster.RollerCoasterShadowGeometry as any;
+
+export type RollerCoasterSkyGeometry = I3JS.RollerCoasterSkyGeometry;
+export const RollerCoasterSkyGeometry: RollerCoasterSkyGeometry = EX_RollerCoaster.SkyGeometry as any;
+
+export type RollerCoasterTreesGeometry = I3JS.RollerCoasterTreesGeometry;
+export const RollerCoasterTreesGeometry: RollerCoasterTreesGeometry = EX_RollerCoaster.TreesGeometry as any;
+
+
+export type CapsuleGeometry = I3JS.CapsuleGeometry;
+export const CapsuleGeometry: CapsuleGeometry = NgxCapsuleGeometry as any;
+
+export type CircleDepthGeometry = I3JS.CircleDepthGeometry;
+export const CircleDepthGeometry: CircleDepthGeometry = NgxCircleDepthGeometry as any;
+
+export type GridGeometry = I3JS.GridGeometry;
+export const GridGeometry: GridGeometry = NgxGridGeometry as any;
+
+export type PlaneDepthGeometry = I3JS.PlaneDepthGeometry;
+export const PlaneDepthGeometry: PlaneDepthGeometry = NgxPlaneDepthGeometry as any;
+
+export type PlanePerlinGeometry = I3JS.PlanePerlinGeometry;
+export const PlanePerlinGeometry: PlanePerlinGeometry = NgxPlanePerlinGeometry as any;
+
+export type RingDepthGeometry = I3JS.RingDepthGeometry;
+export const RingDepthGeometry: RingDepthGeometry = NgxRingDepthGeometry as any;
+
+export type RopeGeometry = I3JS.RopeGeometry;
+export const RopeGeometry: RopeGeometry = NgxRopeGeometry as any;
+
+export type StarGeometry = I3JS.StarGeometry;
+export const StarGeometry: StarGeometry = NgxStarGeometry as any;
+
+export type StarDepthGeometry = I3JS.StarDepthGeometry;
+export const StarDepthGeometry: StarDepthGeometry = NgxStarDepthGeometry as any;
+
+export type OutlineGeometry = I3JS.OutlineGeometry;
+export const OutlineGeometry: OutlineGeometry = NgxOutlineGeometry as any;
+
+
+export type GeometryCompressionUtils = I3JS.GeometryCompressionUtils;
+export const GeometryCompressionUtils: GeometryCompressionUtils = {
 	compressNormals: (EX_GeometryCompressionUtils as any).compressNormals,
 	compressPositions: (EX_GeometryCompressionUtils as any).compressPositions,
 	compressUvs: (EX_GeometryCompressionUtils as any).compressUvs,
 };
 
-export const TessellateModifier: I3JS.ITessellateModifier = EX_TessellateModifier as any;
-export const AmbientLight: I3JS.IAmbientLight = O3JS.AmbientLight as any;
-export const AmbientLightProbe: I3JS.IAmbientLightProbe = O3JS.AmbientLightProbe as any;
-export const DirectionalLight: I3JS.IDirectionalLight = O3JS.DirectionalLight as any;
-export const HemisphereLight: I3JS.IHemisphereLight = O3JS.HemisphereLight as any;
-export const HemisphereLightProbe: I3JS.IHemisphereLightProbe = O3JS.HemisphereLightProbe as any;
-export const Light: I3JS.ILight = O3JS.Light as any;
-export const LightProbe: I3JS.ILightProbe = O3JS.LightProbe as any;
-export const PointLight: I3JS.IPointLight = O3JS.PointLight as any;
-export const RectAreaLight: I3JS.IRectAreaLight = O3JS.RectAreaLight as any;
-export const SpotLight: I3JS.ISpotLight = O3JS.SpotLight as any;
-export const ArrayCamera: I3JS.IArrayCamera = O3JS.ArrayCamera as any;
-export const Camera: I3JS.ICamera = O3JS.Camera as any;
-export const CubeCamera: I3JS.ICubeCamera = O3JS.CubeCamera as any;
-export const OrthographicCamera: I3JS.IOrthographicCamera = O3JS.OrthographicCamera as any;
-export const PerspectiveCamera: I3JS.IPerspectiveCamera = O3JS.PerspectiveCamera as any;
-export const StereoCamera: I3JS.IStereoCamera = O3JS.StereoCamera as any;
-export const Audio: I3JS.IAudio = O3JS.Audio as any;
-export const AudioAnalyser: I3JS.IAudioAnalyser = O3JS.AudioAnalyser as any;
-export const AudioListener: I3JS.IAudioListener = O3JS.AudioListener as any;
-export const PositionalAudio: I3JS.IPositionalAudio = O3JS.PositionalAudio as any;
-export const AnimationClip: I3JS.IAnimationClip = O3JS.AnimationClip as any;
-export const AnimationMixer: I3JS.IAnimationMixer = O3JS.AnimationMixer as any;
-export const AnimationObjectGroup: I3JS.IAnimationObjectGroup = O3JS.AnimationObjectGroup as any;
-export const BooleanKeyframeTrack: I3JS.IBooleanKeyframeTrack = O3JS.BooleanKeyframeTrack as any;
-export const ColorKeyframeTrack: I3JS.IColorKeyframeTrack = O3JS.ColorKeyframeTrack as any;
-export const NumberKeyframeTrack: I3JS.INumberKeyframeTrack = O3JS.NumberKeyframeTrack as any;
-export const QuaternionKeyframeTrack: I3JS.IQuaternionKeyframeTrack = O3JS.QuaternionKeyframeTrack as any;
-export const StringKeyframeTrack: I3JS.IStringKeyframeTrack = O3JS.StringKeyframeTrack as any;
-export const VectorKeyframeTrack: I3JS.IVectorKeyframeTrack = O3JS.VectorKeyframeTrack as any;
-export const ArrowHelper: I3JS.IArrowHelper = O3JS.ArrowHelper as any;
-export const AxesHelper: I3JS.IAxesHelper = O3JS.AxesHelper as any;
-export const Box3Helper: I3JS.IBox3Helper = O3JS.Box3Helper as any;
-export const BoxHelper: I3JS.IBoxHelper = O3JS.BoxHelper as any;
-export const CameraHelper: I3JS.ICameraHelper = O3JS.CameraHelper as any;
-export const DirectionalLightHelper: I3JS.IDirectionalLightHelper = O3JS.DirectionalLightHelper as any;
-export const GridHelper: I3JS.IGridHelper = O3JS.GridHelper as any;
-export const HemisphereLightHelper: I3JS.IHemisphereLightHelper = O3JS.HemisphereLightHelper as any;
-export const PlaneHelper: I3JS.IPlaneHelper = O3JS.PlaneHelper as any;
-export const PointLightHelper: I3JS.IPointLightHelper = O3JS.PointLightHelper as any;
-export const PolarGridHelper: I3JS.IPolarGridHelper = O3JS.PolarGridHelper as any;
-export const SkeletonHelper: I3JS.ISkeletonHelper = O3JS.SkeletonHelper as any;
-export const SpotLightHelper: I3JS.ISpotLightHelper = O3JS.SpotLightHelper as any;
-export const LineBasicMaterial: I3JS.ILineBasicMaterial = O3JS.LineBasicMaterial as any;
-export const LineDashedMaterial: I3JS.ILineDashedMaterial = O3JS.LineDashedMaterial as any;
-export const Material: I3JS.IMaterial = O3JS.Material as any;
-export const MeshBasicMaterial: I3JS.IMeshBasicMaterial = O3JS.MeshBasicMaterial as any;
-export const MeshDepthMaterial: I3JS.IMeshDepthMaterial = O3JS.MeshDepthMaterial as any;
-export const MeshDistanceMaterial: I3JS.IMeshDistanceMaterial = O3JS.MeshDistanceMaterial as any;
-export const MeshLambertMaterial: I3JS.IMeshLambertMaterial = O3JS.MeshLambertMaterial as any;
-export const MeshMatcapMaterial: I3JS.IMeshMatcapMaterial = O3JS.MeshMatcapMaterial as any;
-export const MeshNormalMaterial: I3JS.IMeshNormalMaterial = O3JS.MeshNormalMaterial as any;
-export const MeshPhongMaterial: I3JS.IMeshPhongMaterial = O3JS.MeshPhongMaterial as any;
-export const MeshPhysicalMaterial: I3JS.IMeshPhysicalMaterial = O3JS.MeshPhysicalMaterial as any;
-export const MeshStandardMaterial: I3JS.IMeshStandardMaterial = O3JS.MeshStandardMaterial as any;
-export const MeshToonMaterial: I3JS.IMeshToonMaterial = O3JS.MeshToonMaterial as any;
-export const PointsMaterial: I3JS.IPointsMaterial = O3JS.PointsMaterial as any;
-export const RawShaderMaterial: I3JS.IRawShaderMaterial = O3JS.RawShaderMaterial as any;
-export const ShaderMaterial: I3JS.IShaderMaterial = O3JS.ShaderMaterial as any;
-export const ShadowMaterial: I3JS.IShadowMaterial = O3JS.ShadowMaterial as any;
-export const SpriteMaterial: I3JS.ISpriteMaterial = O3JS.SpriteMaterial as any;
 
-export const LineMaterial: I3JS.ILineMaterial = EX_LineMaterial as any;
+export type TessellateModifier = I3JS.TessellateModifier;
+export const TessellateModifier: TessellateModifier = EX_TessellateModifier as any;
 
-export const NgxShaderIdMaterial: I3JS.INgxShaderMaterial = THREE_MAT.NgxShaderMaterial as any;
-export const NgxRawShaderIdMaterial: I3JS.INgxRawShaderMaterial = THREE_MAT.NgxRawShaderMaterial as any;
-export const ShaderAudioVisualizerMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderAudioVisualizerMaterial as any;
-export const ShaderAttributesParticlesMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderAttributesParticlesMaterial as any;
-export const ShaderSelectiveDrawMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderSelectiveDrawMaterial as any;
-export const ShaderCustomAttributesMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderCustomAttributesMaterial as any;
-export const ShaderCustomAttributesLinesMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderCustomAttributesLinesMaterial as any;
-export const ShaderCustomAttributesPointsMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderCustomAttributesPointsMaterial as any;
-export const ShaderAttributeSizeColorMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderAttributeSizeColorMaterial as any;
-export const ShaderAttributeSizeColor1Material: I3JS.IShaderMaterial = THREE_MAT.NgxShaderAttributeSizeColor1Material as any;
-export const ShaderSkyDomeMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderSkyDomeMaterial as any;
-export const ShaderParallaxMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderParallaxMaterial as any;
-export const ShaderFresnelMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderFresnelMaterial as any;
-export const ShaderSubsurfaceScatteringMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderSubsurfaceScatteringMaterial as any;
-export const ShaderWireframeMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderWireframeMaterial as any;
-export const ShaderNoiseRandom1DMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderNoiseRandom1DMaterial as any;
-export const ShaderNoiseRandom2DMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderNoiseRandom2DMaterial as any;
-export const ShaderNoiseRandom3DMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderNoiseRandom3DMaterial as any;
-export const ShaderColorRainbowMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderColorRainbowMaterial as any;
-export const ShaderVideoKinectMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderVideoKinectMaterial as any;
-export const ShaderVolumeRenderShader1Material: I3JS.IShaderMaterial = THREE_MAT.NgxShaderVolumeRenderShader1Material as any;
-export const ShaderInstancingMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderInstancingMaterial as any;
-export const ShaderScaleColorMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderScaleColorMaterial as any;
-export const ShaderSinColorMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderSinColorMaterial as any;
-export const ShaderRaymarchingReflectMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderRaymarchingReflectMaterial as any;
-export const ShaderCloudMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderCloudMaterial as any;
-export const ShaderPerlinMaterial: I3JS.IShaderMaterial = THREE_MAT.NgxShaderPerlinMaterial as any;
+export type AmbientLight = I3JS.AmbientLight;
+export const AmbientLight: AmbientLight = O3JS.AmbientLight as any;
 
-export const AfterimageShader: I3JS.IShader = EX_AfterimageShader as any;
-export const BasicShader: I3JS.IShader = EX_BasicShader as any;
-export const BleachBypassShader: I3JS.IShader = EX_BleachBypassShader as any;
-export const BlendShader: I3JS.IShader = EX_BlendShader as any;
-export const BokehShader: I3JS.IShader = EX_BokehShader as any;
-export const BokehShader2: I3JS.IShader = EX_BokehShader2 as any;
-export const BokehDepthShader: I3JS.IShader = EX_BokehDepthShader as any;
-export const BrightnessContrastShader: I3JS.IShader = EX_BrightnessContrastShader as any;
-export const ColorCorrectionShader: I3JS.IShader = EX_ColorCorrectionShader as any;
-export const ColorifyShader: I3JS.IShader = EX_ColorifyShader as any;
-export const ConvolutionShader: I3JS.IShader = EX_ConvolutionShader as any;
-export const CopyShader: I3JS.IShader = EX_CopyShader as any;
-export const DepthLimitedBlurShader: I3JS.IShader = EX_DepthLimitedBlurShader as any;
-export const DigitalGlitch: I3JS.IShader = EX_DigitalGlitch as any;
-export const DOFMipMapShader: I3JS.IShader = EX_DOFMipMapShader as any;
-export const DotScreenShader: I3JS.IShader = EX_DotScreenShader as any;
-export const FilmShader: I3JS.IShader = EX_FilmShader as any;
-export const FocusShader: I3JS.IShader = EX_FocusShader as any;
-export const FreiChenShader: I3JS.IShader = EX_FreiChenShader as any;
-export const FXAAShader: I3JS.IShader = EX_FXAAShader as any;
-export const GammaCorrectionShader: I3JS.IShader = EX_GammaCorrectionShader as any;
-export const GodRaysDepthMaskShader: I3JS.IShader = EX_GodRaysDepthMaskShader as any;
-export const GodRaysGenerateShader: I3JS.IShader = EX_GodRaysGenerateShader as any;
-export const GodRaysCombineShader: I3JS.IShader = EX_GodRaysCombineShader as any;
-export const GodRaysFakeSunShader: I3JS.IShader = EX_GodRaysFakeSunShader as any;
+export type AmbientLightProbe = I3JS.AmbientLightProbe;
+export const AmbientLightProbe: AmbientLightProbe = O3JS.AmbientLightProbe as any;
 
-export const HalftoneShader: I3JS.IShader = EX_HalftoneShader as any;
-export const HorizontalBlurShader: I3JS.IShader = EX_HorizontalBlurShader as any;
-export const HorizontalTiltShiftShader: I3JS.IShader = EX_HorizontalTiltShiftShader as any;
-export const HueSaturationShader: I3JS.IShader = EX_HueSaturationShader as any;
-export const KaleidoShader: I3JS.IShader = EX_KaleidoShader as any;
-export const LuminosityHighPassShader: I3JS.IShader = EX_LuminosityHighPassShader as any;
-export const LuminosityShader: I3JS.IShader = EX_LuminosityShader as any;
-export const MirrorShader: I3JS.IShader = EX_MirrorShader as any;
-export const NormalMapShader: I3JS.IShader = EX_NormalMapShader as any;
-export const PixelShader: I3JS.IShader = EX_PixelShader as any;
-export const RGBShiftShader: I3JS.IShader = EX_RGBShiftShader as any;
-export const SAOShader: I3JS.IShader = EX_SAOShader as any;
-export const SepiaShader: I3JS.IShader = EX_SepiaShader as any;
-export const SMAAEdgesShader: I3JS.IShader = EX_SMAAEdgesShader as any;
-export const SMAAWeightsShader: I3JS.IShader = EX_SMAAWeightsShader as any;
-export const SMAABlendShader: I3JS.IShader = EX_SMAABlendShader as any;
-export const SobelOperatorShader: I3JS.IShader = EX_SobelOperatorShader as any;
-export const SSAOShader: I3JS.IShader = (EX_SSAOShader as any).SSAOShader;
-export const SSAODepthShader: I3JS.IShader = (EX_SSAOShader as any).SSAODepthShader;
-export const SSAOBlurShader: I3JS.IShader = (EX_SSAOShader as any).SSAOBlurShader;
+export type DirectionalLight = I3JS.DirectionalLight;
+export const DirectionalLight: DirectionalLight = O3JS.DirectionalLight as any;
 
-export const SSRrShader: I3JS.IShader = (EX_SSRrShader as any).SSRrShader;
-export const SSRrDepthShader: I3JS.IShader = (EX_SSRrShader as any).SSRrDepthShader;
+export type HemisphereLight = I3JS.HemisphereLight;
+export const HemisphereLight: HemisphereLight = O3JS.HemisphereLight as any;
 
-export const SSRShader: I3JS.IShader = (EX_SSRShader as any).SSRShader;
-export const SSRDepthShader: I3JS.IShader = (EX_SSRShader as any).SSRDepthShader;
-export const SSRBlurShader: I3JS.IShader = (EX_SSRShader as any).SSRBlurShader;
+export type HemisphereLightProbe = I3JS.HemisphereLightProbe;
+export const HemisphereLightProbe: HemisphereLightProbe = O3JS.HemisphereLightProbe as any;
 
-export const SubsurfaceScatteringShader: I3JS.IShader = EX_SubsurfaceScatteringShader as any;
-export const TechnicolorShader: I3JS.IShader = EX_TechnicolorShader as any;
-export const ToneMapShader: I3JS.IShader = EX_ToneMapShader as any;
-export const ToonShader1: I3JS.IShader = (EX_ToonShader as any).ToonShader1;
-export const ToonShader2: I3JS.IShader = (EX_ToonShader as any).ToonShader2;
-export const ToonShaderHatching: I3JS.IShader = (EX_ToonShader as any).ToonShaderHatching;
-export const ToonShaderDotted: I3JS.IShader = (EX_ToonShader as any).ToonShaderDotted;
-export const TriangleBlurShader: I3JS.IShader = EX_TriangleBlurShader as any;
-export const UnpackDepthRGBAShader: I3JS.IShader = EX_UnpackDepthRGBAShader as any;
-export const VerticalBlurShader: I3JS.IShader = EX_VerticalBlurShader as any;
-export const VerticalTiltShiftShader: I3JS.IShader = EX_VerticalTiltShiftShader as any;
-export const VignetteShader: I3JS.IShader = EX_VignetteShader as any;
-export const VolumeRenderShader1: I3JS.IShader = EX_VolumeRenderShader1 as any;
-export const WaterRefractionShader: I3JS.IShader = EX_WaterRefractionShader as any;
+export type Light = I3JS.Light;
+export const Light: Light = O3JS.Light as any;
 
-export const Bone: I3JS.IBone = O3JS.Bone as any;
-export const Group: I3JS.IGroup = O3JS.Group as any;
-export const InstancedMesh: I3JS.IInstancedMesh = O3JS.InstancedMesh as any;
-export const Line: I3JS.ILine = O3JS.Line as any;
-export const LineLoop: I3JS.ILineLoop = O3JS.LineLoop as any;
-export const LineSegments: I3JS.ILineSegments = O3JS.LineSegments as any;
-export const LOD: I3JS.ILOD = O3JS.LOD as any;
-export const Mesh: I3JS.IMesh = O3JS.Mesh as any;
-export const Points: I3JS.IPoints = O3JS.Points as any;
-export const Skeleton: I3JS.ISkeleton = O3JS.Skeleton as any;
-export const SkinnedMesh: I3JS.ISkinnedMesh = O3JS.SkinnedMesh as any;
-export const Sprite: I3JS.ISprite = O3JS.Sprite as any;
+export type LightProbe = I3JS.LightProbe;
+export const LightProbe: LightProbe = O3JS.LightProbe as any;
 
-export const PMREMGenerator: I3JS.IPMREMGenerator = O3JS.PMREMGenerator as any;
-export const WebGL1Renderer: I3JS.IWebGL1Renderer = O3JS.WebGL1Renderer as any;
-export const WebGLCubeRenderTarget: I3JS.IWebGLCubeRenderTarget = O3JS.WebGLCubeRenderTarget as any;
-export const WebGLMultipleRenderTargets: I3JS.IWebGLMultipleRenderTargets = O3JS.WebGLMultipleRenderTargets as any;
-export const WebGLMultisampleRenderTarget: I3JS.IWebGLMultisampleRenderTarget =
-	O3JS.WebGLMultisampleRenderTarget as any;
-export const WebGLRenderer: I3JS.IWebGLRenderer = O3JS.WebGLRenderer as any;
-export const WebGLRenderTarget: I3JS.IWebGLRenderTarget = O3JS.WebGLRenderTarget as any;
-export const Fog: I3JS.IFog = O3JS.Fog as any;
-export const FogExp2: I3JS.IFogExp2 = O3JS.FogExp2 as any;
-export const Scene: I3JS.IScene = O3JS.Scene as any;
-export const CanvasTexture: I3JS.ICanvasTexture = O3JS.CanvasTexture as any;
-export const CompressedTexture: I3JS.ICompressedTexture = O3JS.CompressedTexture as any;
-export const CubeTexture: I3JS.ICubeTexture = O3JS.CubeTexture as any;
-export const DataTexture: I3JS.IDataTexture = O3JS.DataTexture as any;
-export const DataTexture2DArray: I3JS.IDataTexture2DArray = O3JS.DataTexture2DArray as any;
-export const DataTexture3D: I3JS.IDataTexture3D = O3JS.DataTexture3D as any;
-export const DepthTexture: I3JS.IDepthTexture = O3JS.DepthTexture as any;
-export const Texture: I3JS.ITexture = O3JS.Texture as any;
-export const VideoTexture: I3JS.IVideoTexture = O3JS.VideoTexture as any;
-export const Loader: I3JS.ILoader = O3JS.Loader as any;
-export const LoadingManager: I3JS.ILoadingManager = O3JS.LoadingManager as any;
-export const AnimationLoader: I3JS.IAnimationLoader = O3JS.AnimationLoader as any;
-export const AudioLoader: I3JS.IAudioLoader = O3JS.AudioLoader as any;
-export const MaterialLoader: I3JS.IMaterialLoader = O3JS.MaterialLoader as any;
-export const ObjectLoader: I3JS.IObjectLoader = O3JS.ObjectLoader as any;
-export const TextureLoader: I3JS.ITextureLoader = O3JS.TextureLoader as any;
-export const BufferGeometryLoader: I3JS.IBufferGeometryLoader = O3JS.BufferGeometryLoader as any;
-export const CompressedTextureLoader: I3JS.ICompressedTextureLoader = O3JS.CompressedTextureLoader as any;
-export const CubeTextureLoader: I3JS.ICubeTextureLoader = O3JS.CubeTextureLoader as any;
-export const DataTextureLoader: I3JS.IDataTextureLoader = O3JS.DataTextureLoader as any;
-export const FileLoader: I3JS.IFileLoader = O3JS.FileLoader as any;
-export const ImageBitmapLoader: I3JS.IImageBitmapLoader = O3JS.ImageBitmapLoader as any;
-export const ImageLoader: I3JS.IImageLoader = O3JS.ImageLoader as any;
+export type PointLight = I3JS.PointLight;
+export const PointLight: PointLight = O3JS.PointLight as any;
 
-export const ColladaExporter: I3JS.IColladaExporter = EX_ColladaExporter as any;
-export const DRACOExporter: I3JS.IDRACOExporter = EX_DRACOExporter as any;
-export const GLTFExporter: I3JS.IGLTFExporter = EX_GLTFExporter as any;
-export const MMDExporter: I3JS.IMMDExporter = EX_MMDExporter as any;
-export const OBJExporter: I3JS.IOBJExporter = EX_OBJExporter as any;
-export const PLYExporter: I3JS.IPLYExporter = EX_PLYExporter as any;
-export const STLExporter: I3JS.ISTLExporter = EX_STLExporter as any;
-export const USDZExporter: I3JS.IUSDZExporter = EX_USDZExporter as any;
-export const Rhino3dmLoader: I3JS.IRhino3dmLoader = EX_Rhino3dmLoader as any;
-export const ThreeMFLoader: I3JS.IThreeMFLoader = EX_ThreeMFLoader as any;
-export const AMFLoader: I3JS.IAMFLoader = EX_AMFLoader as any;
-export const BasisTextureLoader: I3JS.IBasisTextureLoader = EX_BasisTextureLoader as any;
-export const BVHLoader: I3JS.IBVHLoader = EX_BVHLoader as any;
-export const ColladaLoader: I3JS.IColladaLoader = EX_ColladaLoader as any; 
-export const DDSLoader: I3JS.IDDSLoader = EX_DDSLoader as any;
-export const DRACOLoader: I3JS.IDRACOLoader = EX_DRACOLoader as any;
-export const EXRLoader: I3JS.IEXRLoader = EX_EXRLoader as any;
-export const FBXLoader: I3JS.IFBXLoader = EX_FBXLoader as any;
-export const Font: I3JS.IFont = EX_Font as any;
-export const FontLoader: I3JS.IFontLoader = EX_FontLoader as any;
-export const GCodeLoader: I3JS.IGCodeLoader = EX_GCodeLoader as any;
-export const GLTFLoader: I3JS.IGLTFLoader = EX_GLTFLoader as any;
-export const HDRCubeTextureLoader: I3JS.IHDRCubeTextureLoader = EX_HDRCubeTextureLoader as any;
-export const IFCLoader: I3JS.IIFCLoader = EX_IFCLoader as any;
-export const KMZLoader: I3JS.IKMZLoader = EX_KMZLoader as any;
-export const KTX2Loader: I3JS.IKTX2Loader = EX_KTX2Loader as any;
-export const KTXLoader: I3JS.IKTXLoader = EX_KTXLoader as any;
-export const LDrawLoader: I3JS.ILDrawLoader = EX_LDrawLoader as any;
-export const LottieLoader: I3JS.ILottieLoader = EX_LottieLoader as any;
-export const LUT3dlLoader: I3JS.ILUT3dlLoader = EX_LUT3dlLoader as any;
-export const LUTCubeLoader: I3JS.ILUTCubeLoader = EX_LUTCubeLoader as any;
-export const LWOLoader: I3JS.ILWOLoader = EX_LWOLoader as any;
-export const MD2Loader: I3JS.IMD2Loader = EX_MD2Loader as any;
-export const MDDLoader: I3JS.IMDDLoader = EX_MDDLoader as any;
-export const MMDLoader: I3JS.IMMDLoader = EX_MMDLoader as any;
-export const MTLLoader: I3JS.IMTLLoader = EX_MTLLoader as any;
-export const NRRDLoader: I3JS.INRRDLoader = EX_NRRDLoader as any;
-export const OBJLoader: I3JS.IOBJLoader = EX_OBJLoader as any;
-export const PCDLoader: I3JS.IPCDLoader = EX_PCDLoader as any;
-export const PDBLoader: I3JS.IPDBLoader = EX_PDBLoader as any;
-export const PLYLoader: I3JS.IPLYLoader = EX_PLYLoader as any;
-export const PRWMLoader: I3JS.IPRWMLoader = EX_PRWMLoader as any;
-export const PVRLoader: I3JS.IPVRLoader = EX_PVRLoader as any;
-export const RGBELoader: I3JS.IRGBELoader = EX_RGBELoader as any;
-export const RGBMLoader: I3JS.IRGBMLoader = EX_RGBMLoader as any;
-export const STLLoader: I3JS.ISTLLoader = EX_STLLoader as any;
-export const SVGLoader: I3JS.ISVGLoader = EX_SVGLoader as any;
-export const TDSLoader: I3JS.ITDSLoader = EX_TDSLoader as any;
-export const TGALoader: I3JS.ITGALoader = EX_TGALoader as any;
-export const TTFLoader: I3JS.ITTFLoader = EX_TTFLoader as any;
-export const VOXLoader: I3JS.IVOXLoader = EX_VOXLoader as any;
-export const VOXMesh: I3JS.IVOXMesh = EX_VOXMesh as any;
-export const VOXDataTexture3D: I3JS.IVOXDataTexture3D = EX_VOXDataTexture3D as any;
-export const VRMLLoader: I3JS.IVRMLLoader = EX_VRMLLoader as any;
-export const VRMLoader: I3JS.IVRMLoader = EX_VRMLoader as any;
-export const VTKLoader: I3JS.IVTKLoader = EX_VTKLoader as any;
-export const XYZLoader: I3JS.IXYZLoader = EX_XYZLoader as any;
-export const MD2Character: I3JS.IMD2Character = EX_MD2Character as any;
-export const MMDAnimationHelper: I3JS.IMMDAnimationHelper = EX_MMDAnimationHelper as any;
+export type RectAreaLight = I3JS.RectAreaLight;
+export const RectAreaLight: RectAreaLight = O3JS.RectAreaLight as any;
 
-export const MD2CharacterComplex: I3JS.IMD2CharacterComplex = EX_MD2CharacterComplex as any;
-export const Volume: I3JS.IVolume = EX_Volume as any;
-export const CSS2DObject: I3JS.ICSS2DObject = EX_CSS2DObject as any;
-export const CSS3DObject: I3JS.ICSS3DObject = EX_CSS3DObject as any;
-export const CSS3DSprite: I3JS.ICSS3DSprite = EX_CSS3DSprite as any;
+export type SpotLight = I3JS.SpotLight;
+export const SpotLight: SpotLight = O3JS.SpotLight as any;
 
-export const InteractiveGroup: I3JS.IInteractiveGroup = EX_InteractiveGroup as any;
-export const Line2: I3JS.ILine2 = EX_Line2 as any;
-export const Wireframe: I3JS.IWireframe = EX_Wireframe as any;
-export const TubePainter: I3JS.ITubePainter = EX_TubePainter as any;
-export const Flow: I3JS.IFlow = EX_Flow as any;
-export const InstancedFlow: I3JS.IInstancedFlow = EX_InstancedFlow as any;
-export const LightningStorm: I3JS.ILightningStorm = EX_LightningStorm as any;
-export const MarchingCubes: I3JS.IMarchingCubes = EX_MarchingCubes as any;
-export const Reflector: I3JS.IReflector = EX_Reflector as any;
-export const Refractor: I3JS.IRefractor = EX_Refractor as any;
-export const Sky: I3JS.ISky = EX_Sky as any;
-export const Water: I3JS.IWater = EX_Water as any;
-export const Water2: I3JS.IWater2 = EX_Water2 as any;
-export const SVGObject: I3JS.ISVGObject = EX_SVGObject as any;
+export type ArrayCamera = I3JS.ArrayCamera;
+export const ArrayCamera: ArrayCamera = O3JS.ArrayCamera as any;
+
+export type Camera = I3JS.Camera;
+export const Camera: Camera = O3JS.Camera as any;
+
+export type CubeCamera = I3JS.CubeCamera;
+export const CubeCamera: CubeCamera = O3JS.CubeCamera as any;
+
+export type OrthographicCamera = I3JS.OrthographicCamera;
+export const OrthographicCamera: OrthographicCamera = O3JS.OrthographicCamera as any;
+
+export type PerspectiveCamera = I3JS.PerspectiveCamera;
+export const PerspectiveCamera: PerspectiveCamera = O3JS.PerspectiveCamera as any;
+
+export type StereoCamera = I3JS.StereoCamera;
+export const StereoCamera: StereoCamera = O3JS.StereoCamera as any;
+
+export type Audio = I3JS.Audio;
+export const Audio: Audio = O3JS.Audio as any;
+
+export type AudioAnalyser = I3JS.AudioAnalyser;
+export const AudioAnalyser: AudioAnalyser = O3JS.AudioAnalyser as any;
+
+export type AudioListener = I3JS.AudioListener;
+export const AudioListener: AudioListener = O3JS.AudioListener as any;
+
+export type PositionalAudio = I3JS.PositionalAudio;
+export const PositionalAudio: PositionalAudio = O3JS.PositionalAudio as any;
+
+export type AnimationClip = I3JS.AnimationClip;
+export const AnimationClip: AnimationClip = O3JS.AnimationClip as any;
+
+export type AnimationMixer = I3JS.AnimationMixer;
+export const AnimationMixer: AnimationMixer = O3JS.AnimationMixer as any;
+
+export type AnimationObjectGroup = I3JS.AnimationObjectGroup;
+export const AnimationObjectGroup: AnimationObjectGroup = O3JS.AnimationObjectGroup as any;
+
+export type BooleanKeyframeTrack = I3JS.BooleanKeyframeTrack;
+export const BooleanKeyframeTrack: BooleanKeyframeTrack = O3JS.BooleanKeyframeTrack as any;
+
+export type ColorKeyframeTrack = I3JS.ColorKeyframeTrack;
+export const ColorKeyframeTrack: ColorKeyframeTrack = O3JS.ColorKeyframeTrack as any;
+
+export type NumberKeyframeTrack = I3JS.NumberKeyframeTrack;
+export const NumberKeyframeTrack: NumberKeyframeTrack = O3JS.NumberKeyframeTrack as any;
+
+export type QuaternionKeyframeTrack = I3JS.QuaternionKeyframeTrack;
+export const QuaternionKeyframeTrack: QuaternionKeyframeTrack = O3JS.QuaternionKeyframeTrack as any;
+
+export type StringKeyframeTrack = I3JS.StringKeyframeTrack;
+export const StringKeyframeTrack: StringKeyframeTrack = O3JS.StringKeyframeTrack as any;
+
+export type VectorKeyframeTrack = I3JS.VectorKeyframeTrack;
+export const VectorKeyframeTrack: VectorKeyframeTrack = O3JS.VectorKeyframeTrack as any;
+
+export type ArrowHelper = I3JS.ArrowHelper;
+export const ArrowHelper: ArrowHelper = O3JS.ArrowHelper as any;
+
+export type AxesHelper = I3JS.AxesHelper;
+export const AxesHelper: AxesHelper = O3JS.AxesHelper as any;
+
+export type Box3Helper = I3JS.Box3Helper;
+export const Box3Helper: Box3Helper = O3JS.Box3Helper as any;
+
+export type BoxHelper = I3JS.BoxHelper;
+export const BoxHelper: BoxHelper = O3JS.BoxHelper as any;
+
+export type CameraHelper = I3JS.CameraHelper;
+export const CameraHelper: CameraHelper = O3JS.CameraHelper as any;
+
+export type DirectionalLightHelper = I3JS.DirectionalLightHelper;
+export const DirectionalLightHelper: DirectionalLightHelper = O3JS.DirectionalLightHelper as any;
+
+export type GridHelper = I3JS.GridHelper;
+export const GridHelper: GridHelper = O3JS.GridHelper as any;
+
+export type HemisphereLightHelper = I3JS.HemisphereLightHelper;
+export const HemisphereLightHelper: HemisphereLightHelper = O3JS.HemisphereLightHelper as any;
+
+export type PlaneHelper = I3JS.PlaneHelper;
+export const PlaneHelper: PlaneHelper = O3JS.PlaneHelper as any;
+
+export type PointLightHelper = I3JS.PointLightHelper;
+export const PointLightHelper: PointLightHelper = O3JS.PointLightHelper as any;
+
+export type PolarGridHelper = I3JS.PolarGridHelper;
+export const PolarGridHelper: PolarGridHelper = O3JS.PolarGridHelper as any;
+
+export type SkeletonHelper = I3JS.SkeletonHelper;
+export const SkeletonHelper: SkeletonHelper = O3JS.SkeletonHelper as any;
+
+export type SpotLightHelper = I3JS.SpotLightHelper;
+export const SpotLightHelper: SpotLightHelper = O3JS.SpotLightHelper as any;
+
+export type LineBasicMaterial = I3JS.LineBasicMaterial;
+export const LineBasicMaterial: LineBasicMaterial = O3JS.LineBasicMaterial as any;
+
+export type LineDashedMaterial = I3JS.LineDashedMaterial;
+export const LineDashedMaterial: LineDashedMaterial = O3JS.LineDashedMaterial as any;
+
+export type Material = I3JS.Material;
+export const Material: Material = O3JS.Material as any;
+
+export type MeshBasicMaterial = I3JS.MeshBasicMaterial;
+export const MeshBasicMaterial: MeshBasicMaterial = O3JS.MeshBasicMaterial as any;
+
+export type MeshDepthMaterial = I3JS.MeshDepthMaterial;
+export const MeshDepthMaterial: MeshDepthMaterial = O3JS.MeshDepthMaterial as any;
+
+export type MeshDistanceMaterial = I3JS.MeshDistanceMaterial;
+export const MeshDistanceMaterial: MeshDistanceMaterial = O3JS.MeshDistanceMaterial as any;
+
+export type MeshLambertMaterial = I3JS.MeshLambertMaterial;
+export const MeshLambertMaterial: MeshLambertMaterial = O3JS.MeshLambertMaterial as any;
+
+export type MeshMatcapMaterial = I3JS.MeshMatcapMaterial;
+export const MeshMatcapMaterial: MeshMatcapMaterial = O3JS.MeshMatcapMaterial as any;
+
+export type MeshNormalMaterial = I3JS.MeshNormalMaterial;
+export const MeshNormalMaterial: MeshNormalMaterial = O3JS.MeshNormalMaterial as any;
+
+export type MeshPhongMaterial = I3JS.MeshPhongMaterial;
+export const MeshPhongMaterial: MeshPhongMaterial = O3JS.MeshPhongMaterial as any;
+
+export type MeshPhysicalMaterial = I3JS.MeshPhysicalMaterial;
+export const MeshPhysicalMaterial: MeshPhysicalMaterial = O3JS.MeshPhysicalMaterial as any;
+
+export type MeshStandardMaterial = I3JS.MeshStandardMaterial;
+export const MeshStandardMaterial: MeshStandardMaterial = O3JS.MeshStandardMaterial as any;
+
+export type MeshToonMaterial = I3JS.MeshToonMaterial;
+export const MeshToonMaterial: MeshToonMaterial = O3JS.MeshToonMaterial as any;
+
+export type PointsMaterial = I3JS.PointsMaterial;
+export const PointsMaterial: PointsMaterial = O3JS.PointsMaterial as any;
+
+export type RawShaderMaterial = I3JS.RawShaderMaterial;
+export const RawShaderMaterial: RawShaderMaterial = O3JS.RawShaderMaterial as any;
+
+export type ShaderMaterial = I3JS.ShaderMaterial;
+export const ShaderMaterial: ShaderMaterial = O3JS.ShaderMaterial as any;
+
+export type ShadowMaterial = I3JS.ShadowMaterial;
+export const ShadowMaterial: ShadowMaterial = O3JS.ShadowMaterial as any;
+
+export type SpriteMaterial = I3JS.SpriteMaterial;
+export const SpriteMaterial: SpriteMaterial = O3JS.SpriteMaterial as any;
+
+
+export type LineMaterial = I3JS.LineMaterial;
+export const LineMaterial: LineMaterial = EX_LineMaterial as any;
+
+
+export type NgxShaderIdMaterial = I3JS.NgxShaderMaterial;
+export const NgxShaderIdMaterial: NgxShaderIdMaterial = THREE_MAT.NgxShaderMaterial as any;
+
+export type NgxRawShaderIdMaterial = I3JS.NgxRawShaderMaterial;
+export const NgxRawShaderIdMaterial: NgxRawShaderIdMaterial = THREE_MAT.NgxRawShaderMaterial as any;
+
+export type ShaderAudioVisualizerMaterial = I3JS.ShaderMaterial;
+export const ShaderAudioVisualizerMaterial: ShaderAudioVisualizerMaterial = THREE_MAT.NgxShaderAudioVisualizerMaterial as any;
+
+export type ShaderAttributesParticlesMaterial = I3JS.ShaderMaterial;
+export const ShaderAttributesParticlesMaterial: ShaderAttributesParticlesMaterial =
+	THREE_MAT.NgxShaderAttributesParticlesMaterial as any;
+
+export type ShaderSelectiveDrawMaterial = I3JS.ShaderMaterial;
+export const ShaderSelectiveDrawMaterial: ShaderSelectiveDrawMaterial = THREE_MAT.NgxShaderSelectiveDrawMaterial as any;
+
+export type ShaderCustomAttributesMaterial = I3JS.ShaderMaterial;
+export const ShaderCustomAttributesMaterial: ShaderCustomAttributesMaterial = THREE_MAT.NgxShaderCustomAttributesMaterial as any;
+
+export type ShaderCustomAttributesLinesMaterial = I3JS.ShaderMaterial;
+export const ShaderCustomAttributesLinesMaterial: ShaderCustomAttributesLinesMaterial =
+	THREE_MAT.NgxShaderCustomAttributesLinesMaterial as any;
+
+export type ShaderCustomAttributesPointsMaterial = I3JS.ShaderMaterial;
+export const ShaderCustomAttributesPointsMaterial: ShaderCustomAttributesPointsMaterial =
+	THREE_MAT.NgxShaderCustomAttributesPointsMaterial as any;
+
+export type ShaderAttributeSizeColorMaterial = I3JS.ShaderMaterial;
+export const ShaderAttributeSizeColorMaterial: ShaderAttributeSizeColorMaterial =
+	THREE_MAT.NgxShaderAttributeSizeColorMaterial as any;
+
+export type ShaderAttributeSizeColor1Material = I3JS.ShaderMaterial;
+export const ShaderAttributeSizeColor1Material: ShaderAttributeSizeColor1Material =
+	THREE_MAT.NgxShaderAttributeSizeColor1Material as any;
+
+export type ShaderSkyDomeMaterial = I3JS.ShaderMaterial;
+export const ShaderSkyDomeMaterial: ShaderSkyDomeMaterial = THREE_MAT.NgxShaderSkyDomeMaterial as any;
+
+export type ShaderParallaxMaterial = I3JS.ShaderMaterial;
+export const ShaderParallaxMaterial: ShaderParallaxMaterial = THREE_MAT.NgxShaderParallaxMaterial as any;
+
+export type ShaderFresnelMaterial = I3JS.ShaderMaterial;
+export const ShaderFresnelMaterial: ShaderFresnelMaterial = THREE_MAT.NgxShaderFresnelMaterial as any;
+
+export type ShaderSubsurfaceScatteringMaterial = I3JS.ShaderMaterial;
+export const ShaderSubsurfaceScatteringMaterial: ShaderSubsurfaceScatteringMaterial =
+	THREE_MAT.NgxShaderSubsurfaceScatteringMaterial as any;
+
+export type ShaderWireframeMaterial = I3JS.ShaderMaterial;
+export const ShaderWireframeMaterial: ShaderWireframeMaterial = THREE_MAT.NgxShaderWireframeMaterial as any;
+
+export type ShaderNoiseRandom1DMaterial = I3JS.ShaderMaterial;
+export const ShaderNoiseRandom1DMaterial: ShaderNoiseRandom1DMaterial = THREE_MAT.NgxShaderNoiseRandom1DMaterial as any;
+
+export type ShaderNoiseRandom2DMaterial = I3JS.ShaderMaterial;
+export const ShaderNoiseRandom2DMaterial: ShaderNoiseRandom2DMaterial = THREE_MAT.NgxShaderNoiseRandom2DMaterial as any;
+
+export type ShaderNoiseRandom3DMaterial = I3JS.ShaderMaterial;
+export const ShaderNoiseRandom3DMaterial: ShaderNoiseRandom3DMaterial = THREE_MAT.NgxShaderNoiseRandom3DMaterial as any;
+
+export type ShaderColorRainbowMaterial = I3JS.ShaderMaterial;
+export const ShaderColorRainbowMaterial: ShaderColorRainbowMaterial = THREE_MAT.NgxShaderColorRainbowMaterial as any;
+
+export type ShaderVideoKinectMaterial = I3JS.ShaderMaterial;
+export const ShaderVideoKinectMaterial: ShaderVideoKinectMaterial = THREE_MAT.NgxShaderVideoKinectMaterial as any;
+
+export type ShaderVolumeRenderShader1Material = I3JS.ShaderMaterial;
+export const ShaderVolumeRenderShader1Material: ShaderVolumeRenderShader1Material =
+	THREE_MAT.NgxShaderVolumeRenderShader1Material as any;
+
+export type ShaderInstancingMaterial = I3JS.ShaderMaterial;
+export const ShaderInstancingMaterial: ShaderInstancingMaterial = THREE_MAT.NgxShaderInstancingMaterial as any;
+
+export type ShaderScaleColorMaterial = I3JS.ShaderMaterial;
+export const ShaderScaleColorMaterial: ShaderScaleColorMaterial = THREE_MAT.NgxShaderScaleColorMaterial as any;
+
+export type ShaderSinColorMaterial = I3JS.ShaderMaterial;
+export const ShaderSinColorMaterial: ShaderSinColorMaterial = THREE_MAT.NgxShaderSinColorMaterial as any;
+
+export type ShaderRaymarchingReflectMaterial = I3JS.ShaderMaterial;
+export const ShaderRaymarchingReflectMaterial: ShaderRaymarchingReflectMaterial =
+	THREE_MAT.NgxShaderRaymarchingReflectMaterial as any;
+
+export type ShaderCloudMaterial = I3JS.ShaderMaterial;
+export const ShaderCloudMaterial: ShaderCloudMaterial = THREE_MAT.NgxShaderCloudMaterial as any;
+
+export type ShaderPerlinMaterial = I3JS.ShaderMaterial;
+export const ShaderPerlinMaterial: ShaderPerlinMaterial = THREE_MAT.NgxShaderPerlinMaterial as any;
+
+
+export type AfterimageShader = I3JS.Shader;
+export const AfterimageShader: AfterimageShader = EX_AfterimageShader as any;
+
+export type BasicShader = I3JS.Shader;
+export const BasicShader: BasicShader = EX_BasicShader as any;
+
+export type BleachBypassShader = I3JS.Shader;
+export const BleachBypassShader: BleachBypassShader = EX_BleachBypassShader as any;
+
+export type BlendShader = I3JS.Shader;
+export const BlendShader: BlendShader = EX_BlendShader as any;
+
+export type BokehShader = I3JS.Shader;
+export const BokehShader: BokehShader = EX_BokehShader as any;
+
+export type BokehShader2 = I3JS.Shader;
+export const BokehShader2: BokehShader2 = EX_BokehShader2 as any;
+
+export type BokehDepthShader = I3JS.Shader;
+export const BokehDepthShader: BokehDepthShader = EX_BokehDepthShader as any;
+
+export type BrightnessContrastShader = I3JS.Shader;
+export const BrightnessContrastShader: BrightnessContrastShader = EX_BrightnessContrastShader as any;
+
+export type ColorCorrectionShader = I3JS.Shader;
+export const ColorCorrectionShader: ColorCorrectionShader = EX_ColorCorrectionShader as any;
+
+export type ColorifyShader = I3JS.Shader;
+export const ColorifyShader: ColorifyShader = EX_ColorifyShader as any;
+
+export type ConvolutionShader = I3JS.Shader;
+export const ConvolutionShader: ConvolutionShader = EX_ConvolutionShader as any;
+
+export type CopyShader = I3JS.Shader;
+export const CopyShader: CopyShader = EX_CopyShader as any;
+
+export type DepthLimitedBlurShader = I3JS.Shader;
+export const DepthLimitedBlurShader: DepthLimitedBlurShader = EX_DepthLimitedBlurShader as any;
+
+export type DigitalGlitch = I3JS.Shader;
+export const DigitalGlitch: DigitalGlitch = EX_DigitalGlitch as any;
+
+export type DOFMipMapShader = I3JS.Shader;
+export const DOFMipMapShader: DOFMipMapShader = EX_DOFMipMapShader as any;
+
+export type DotScreenShader = I3JS.Shader;
+export const DotScreenShader: DotScreenShader = EX_DotScreenShader as any;
+
+export type FilmShader = I3JS.Shader;
+export const FilmShader: FilmShader = EX_FilmShader as any;
+
+export type FocusShader = I3JS.Shader;
+export const FocusShader: FocusShader = EX_FocusShader as any;
+
+export type FreiChenShader = I3JS.Shader;
+export const FreiChenShader: FreiChenShader = EX_FreiChenShader as any;
+
+export type FXAAShader = I3JS.Shader;
+export const FXAAShader: FXAAShader = EX_FXAAShader as any;
+
+export type GammaCorrectionShader = I3JS.Shader;
+export const GammaCorrectionShader: GammaCorrectionShader = EX_GammaCorrectionShader as any;
+
+export type GodRaysDepthMaskShader = I3JS.Shader;
+export const GodRaysDepthMaskShader: GodRaysDepthMaskShader = EX_GodRaysDepthMaskShader as any;
+
+export type GodRaysGenerateShader = I3JS.Shader;
+export const GodRaysGenerateShader: GodRaysGenerateShader = EX_GodRaysGenerateShader as any;
+
+export type GodRaysCombineShader = I3JS.Shader;
+export const GodRaysCombineShader: GodRaysCombineShader = EX_GodRaysCombineShader as any;
+
+export type GodRaysFakeSunShader = I3JS.Shader;
+export const GodRaysFakeSunShader: GodRaysFakeSunShader = EX_GodRaysFakeSunShader as any;
+
+
+export type HalftoneShader = I3JS.Shader;
+export const HalftoneShader: HalftoneShader = EX_HalftoneShader as any;
+
+export type HorizontalBlurShader = I3JS.Shader;
+export const HorizontalBlurShader: HorizontalBlurShader = EX_HorizontalBlurShader as any;
+
+export type HorizontalTiltShiftShader = I3JS.Shader;
+export const HorizontalTiltShiftShader: HorizontalTiltShiftShader = EX_HorizontalTiltShiftShader as any;
+
+export type HueSaturationShader = I3JS.Shader;
+export const HueSaturationShader: HueSaturationShader = EX_HueSaturationShader as any;
+
+export type KaleidoShader = I3JS.Shader;
+export const KaleidoShader: KaleidoShader = EX_KaleidoShader as any;
+
+export type LuminosityHighPassShader = I3JS.Shader;
+export const LuminosityHighPassShader: LuminosityHighPassShader = EX_LuminosityHighPassShader as any;
+
+export type LuminosityShader = I3JS.Shader;
+export const LuminosityShader: LuminosityShader = EX_LuminosityShader as any;
+
+export type MirrorShader = I3JS.Shader;
+export const MirrorShader: MirrorShader = EX_MirrorShader as any;
+
+export type NormalMapShader = I3JS.Shader;
+export const NormalMapShader: NormalMapShader = EX_NormalMapShader as any;
+
+export type PixelShader = I3JS.Shader;
+export const PixelShader: PixelShader = EX_PixelShader as any;
+
+export type RGBShiftShader = I3JS.Shader;
+export const RGBShiftShader: RGBShiftShader = EX_RGBShiftShader as any;
+
+export type SAOShader = I3JS.Shader;
+export const SAOShader: SAOShader = EX_SAOShader as any;
+
+export type SepiaShader = I3JS.Shader;
+export const SepiaShader: SepiaShader = EX_SepiaShader as any;
+
+export type SMAAEdgesShader = I3JS.Shader;
+export const SMAAEdgesShader: SMAAEdgesShader = EX_SMAAEdgesShader as any;
+
+export type SMAAWeightsShader = I3JS.Shader;
+export const SMAAWeightsShader: SMAAWeightsShader = EX_SMAAWeightsShader as any;
+
+export type SMAABlendShader = I3JS.Shader;
+export const SMAABlendShader: SMAABlendShader = EX_SMAABlendShader as any;
+
+export type SobelOperatorShader = I3JS.Shader;
+export const SobelOperatorShader: SobelOperatorShader = EX_SobelOperatorShader as any;
+
+export type SSAOShader = I3JS.Shader;
+export const SSAOShader: SSAOShader = (EX_SSAOShader as any).SSAOShader;
+
+export type SSAODepthShader = I3JS.Shader;
+export const SSAODepthShader: SSAODepthShader = (EX_SSAOShader as any).SSAODepthShader;
+
+export type SSAOBlurShader = I3JS.Shader;
+export const SSAOBlurShader: SSAOBlurShader = (EX_SSAOShader as any).SSAOBlurShader;
+
+
+export type SSRrShader = I3JS.Shader;
+export const SSRrShader: SSRrShader = (EX_SSRrShader as any).SSRrShader;
+
+export type SSRrDepthShader = I3JS.Shader;
+export const SSRrDepthShader: SSRrDepthShader = (EX_SSRrShader as any).SSRrDepthShader;
+
+
+export type SSRShader = I3JS.Shader;
+export const SSRShader: SSRShader = (EX_SSRShader as any).SSRShader;
+
+export type SSRDepthShader = I3JS.Shader;
+export const SSRDepthShader: SSRDepthShader = (EX_SSRShader as any).SSRDepthShader;
+
+export type SSRBlurShader = I3JS.Shader;
+export const SSRBlurShader: SSRBlurShader = (EX_SSRShader as any).SSRBlurShader;
+
+
+export type SubsurfaceScatteringShader = I3JS.Shader;
+export const SubsurfaceScatteringShader: SubsurfaceScatteringShader = EX_SubsurfaceScatteringShader as any;
+
+export type TechnicolorShader = I3JS.Shader;
+export const TechnicolorShader: TechnicolorShader = EX_TechnicolorShader as any;
+
+export type ToneMapShader = I3JS.Shader;
+export const ToneMapShader: ToneMapShader = EX_ToneMapShader as any;
+
+export type ToonShader1 = I3JS.Shader;
+export const ToonShader1: ToonShader1 = (EX_ToonShader as any).ToonShader1;
+
+export type ToonShader2 = I3JS.Shader;
+export const ToonShader2: ToonShader2 = (EX_ToonShader as any).ToonShader2;
+
+export type ToonShaderHatching = I3JS.Shader;
+export const ToonShaderHatching: ToonShaderHatching = (EX_ToonShader as any).ToonShaderHatching;
+
+export type ToonShaderDotted = I3JS.Shader;
+export const ToonShaderDotted: ToonShaderDotted = (EX_ToonShader as any).ToonShaderDotted;
+
+export type TriangleBlurShader = I3JS.Shader;
+export const TriangleBlurShader: TriangleBlurShader = EX_TriangleBlurShader as any;
+
+export type UnpackDepthRGBAShader = I3JS.Shader;
+export const UnpackDepthRGBAShader: UnpackDepthRGBAShader = EX_UnpackDepthRGBAShader as any;
+
+export type VerticalBlurShader = I3JS.Shader;
+export const VerticalBlurShader: VerticalBlurShader = EX_VerticalBlurShader as any;
+
+export type VerticalTiltShiftShader = I3JS.Shader;
+export const VerticalTiltShiftShader: VerticalTiltShiftShader = EX_VerticalTiltShiftShader as any;
+
+export type VignetteShader = I3JS.Shader;
+export const VignetteShader: VignetteShader = EX_VignetteShader as any;
+
+export type VolumeRenderShader1 = I3JS.Shader;
+export const VolumeRenderShader1: VolumeRenderShader1 = EX_VolumeRenderShader1 as any;
+
+export type WaterRefractionShader = I3JS.Shader;
+export const WaterRefractionShader: WaterRefractionShader = EX_WaterRefractionShader as any;
+
+
+export type Bone = I3JS.Bone;
+export const Bone: Bone = O3JS.Bone as any;
+
+export type Group = I3JS.Group;
+export const Group: Group = O3JS.Group as any;
+
+export type InstancedMesh = I3JS.InstancedMesh;
+export const InstancedMesh: InstancedMesh = O3JS.InstancedMesh as any;
+
+export type Line = I3JS.Line;
+export const Line: Line = O3JS.Line as any;
+
+export type LineLoop = I3JS.LineLoop;
+export const LineLoop: LineLoop = O3JS.LineLoop as any;
+
+export type LineSegments = I3JS.LineSegments;
+export const LineSegments: LineSegments = O3JS.LineSegments as any;
+
+export type LOD = I3JS.LOD;
+export const LOD: LOD = O3JS.LOD as any;
+
+export type Mesh = I3JS.Mesh;
+export const Mesh: Mesh = O3JS.Mesh as any;
+
+export type Points = I3JS.Points;
+export const Points: Points = O3JS.Points as any;
+
+export type Skeleton = I3JS.Skeleton;
+export const Skeleton: Skeleton = O3JS.Skeleton as any;
+
+export type SkinnedMesh = I3JS.SkinnedMesh;
+export const SkinnedMesh: SkinnedMesh = O3JS.SkinnedMesh as any;
+
+export type Sprite = I3JS.Sprite;
+export const Sprite: Sprite = O3JS.Sprite as any;
+
+
+export type PMREMGenerator = I3JS.PMREMGenerator;
+export const PMREMGenerator: PMREMGenerator = O3JS.PMREMGenerator as any;
+
+export type WebGL1Renderer = I3JS.WebGL1Renderer;
+export const WebGL1Renderer: WebGL1Renderer = O3JS.WebGL1Renderer as any;
+
+export type WebGLCubeRenderTarget = I3JS.WebGLCubeRenderTarget;
+export const WebGLCubeRenderTarget: WebGLCubeRenderTarget = O3JS.WebGLCubeRenderTarget as any;
+
+export type WebGLMultipleRenderTargets = I3JS.WebGLMultipleRenderTargets;
+export const WebGLMultipleRenderTargets: WebGLMultipleRenderTargets = O3JS.WebGLMultipleRenderTargets as any;
+
+export type WebGLMultisampleRenderTarget = I3JS.WebGLMultisampleRenderTarget;
+export const WebGLMultisampleRenderTarget: WebGLMultisampleRenderTarget = O3JS.WebGLMultisampleRenderTarget as any;
+
+export type WebGLRenderer = I3JS.WebGLRenderer;
+export const WebGLRenderer: WebGLRenderer = O3JS.WebGLRenderer as any;
+
+export type WebGLRenderTarget = I3JS.WebGLRenderTarget;
+export const WebGLRenderTarget: WebGLRenderTarget = O3JS.WebGLRenderTarget as any;
+
+export type Fog = I3JS.Fog;
+export const Fog: Fog = O3JS.Fog as any;
+
+export type FogExp2 = I3JS.FogExp2;
+export const FogExp2: FogExp2 = O3JS.FogExp2 as any;
+
+export type Scene = I3JS.Scene;
+export const Scene: Scene = O3JS.Scene as any;
+
+export type CanvasTexture = I3JS.CanvasTexture;
+export const CanvasTexture: CanvasTexture = O3JS.CanvasTexture as any;
+
+export type CompressedTexture = I3JS.CompressedTexture;
+export const CompressedTexture: CompressedTexture = O3JS.CompressedTexture as any;
+
+export type CubeTexture = I3JS.CubeTexture;
+export const CubeTexture: CubeTexture = O3JS.CubeTexture as any;
+
+export type DataTexture = I3JS.DataTexture;
+export const DataTexture: DataTexture = O3JS.DataTexture as any;
+
+export type DataTexture2DArray = I3JS.DataTexture2DArray;
+export const DataTexture2DArray: DataTexture2DArray = O3JS.DataTexture2DArray as any;
+
+export type DataTexture3D = I3JS.DataTexture3D;
+export const DataTexture3D: DataTexture3D = O3JS.DataTexture3D as any;
+
+export type DepthTexture = I3JS.DepthTexture;
+export const DepthTexture: DepthTexture = O3JS.DepthTexture as any;
+
+export type Texture = I3JS.Texture;
+export const Texture: Texture = O3JS.Texture as any;
+
+export type VideoTexture = I3JS.VideoTexture;
+export const VideoTexture: VideoTexture = O3JS.VideoTexture as any;
+
+export type Loader = I3JS.Loader;
+export const Loader: Loader = O3JS.Loader as any;
+
+export type LoadingManager = I3JS.LoadingManager;
+export const LoadingManager: LoadingManager = O3JS.LoadingManager as any;
+
+export type AnimationLoader = I3JS.AnimationLoader;
+export const AnimationLoader: AnimationLoader = O3JS.AnimationLoader as any;
+
+export type AudioLoader = I3JS.AudioLoader;
+export const AudioLoader: AudioLoader = O3JS.AudioLoader as any;
+
+export type MaterialLoader = I3JS.MaterialLoader;
+export const MaterialLoader: MaterialLoader = O3JS.MaterialLoader as any;
+
+export type ObjectLoader = I3JS.ObjectLoader;
+export const ObjectLoader: ObjectLoader = O3JS.ObjectLoader as any;
+
+export type TextureLoader = I3JS.TextureLoader;
+export const TextureLoader: TextureLoader = O3JS.TextureLoader as any;
+
+export type BufferGeometryLoader = I3JS.BufferGeometryLoader;
+export const BufferGeometryLoader: BufferGeometryLoader = O3JS.BufferGeometryLoader as any;
+
+export type CompressedTextureLoader = I3JS.CompressedTextureLoader;
+export const CompressedTextureLoader: CompressedTextureLoader = O3JS.CompressedTextureLoader as any;
+
+export type CubeTextureLoader = I3JS.CubeTextureLoader;
+export const CubeTextureLoader: CubeTextureLoader = O3JS.CubeTextureLoader as any;
+
+export type DataTextureLoader = I3JS.DataTextureLoader;
+export const DataTextureLoader: DataTextureLoader = O3JS.DataTextureLoader as any;
+
+export type FileLoader = I3JS.FileLoader;
+export const FileLoader: FileLoader = O3JS.FileLoader as any;
+
+export type ImageBitmapLoader = I3JS.ImageBitmapLoader;
+export const ImageBitmapLoader: ImageBitmapLoader = O3JS.ImageBitmapLoader as any;
+
+export type ImageLoader = I3JS.ImageLoader;
+export const ImageLoader: ImageLoader = O3JS.ImageLoader as any;
+
+
+export type ColladaExporter = I3JS.ColladaExporter;
+export const ColladaExporter: ColladaExporter = EX_ColladaExporter as any;
+
+export type DRACOExporter = I3JS.DRACOExporter;
+export const DRACOExporter: DRACOExporter = EX_DRACOExporter as any;
+
+export type GLTFExporter = I3JS.GLTFExporter;
+export const GLTFExporter: GLTFExporter = EX_GLTFExporter as any;
+
+export type MMDExporter = I3JS.MMDExporter;
+export const MMDExporter: MMDExporter = EX_MMDExporter as any;
+
+export type OBJExporter = I3JS.OBJExporter;
+export const OBJExporter: OBJExporter = EX_OBJExporter as any;
+
+export type PLYExporter = I3JS.PLYExporter;
+export const PLYExporter: PLYExporter = EX_PLYExporter as any;
+
+export type STLExporter = I3JS.STLExporter;
+export const STLExporter: STLExporter = EX_STLExporter as any;
+
+export type USDZExporter = I3JS.USDZExporter;
+export const USDZExporter: USDZExporter = EX_USDZExporter as any;
+
+export type Rhino3dmLoader = I3JS.Rhino3dmLoader;
+export const Rhino3dmLoader: Rhino3dmLoader = EX_Rhino3dmLoader as any;
+
+export type ThreeMFLoader = I3JS.ThreeMFLoader;
+export const ThreeMFLoader: ThreeMFLoader = EX_ThreeMFLoader as any;
+
+export type AMFLoader = I3JS.AMFLoader;
+export const AMFLoader: AMFLoader = EX_AMFLoader as any;
+
+export type BasisTextureLoader = I3JS.BasisTextureLoader;
+export const BasisTextureLoader: BasisTextureLoader = EX_BasisTextureLoader as any;
+
+export type BVHLoader = I3JS.BVHLoader;
+export const BVHLoader: BVHLoader = EX_BVHLoader as any;
+
+export type ColladaLoader = I3JS.ColladaLoader;
+export const ColladaLoader: ColladaLoader = EX_ColladaLoader as any;
+
+export type DDSLoader = I3JS.DDSLoader;
+export const DDSLoader: DDSLoader = EX_DDSLoader as any;
+
+export type DRACOLoader = I3JS.DRACOLoader;
+export const DRACOLoader: DRACOLoader = EX_DRACOLoader as any;
+
+export type EXRLoader = I3JS.EXRLoader;
+export const EXRLoader: EXRLoader = EX_EXRLoader as any;
+
+export type FBXLoader = I3JS.FBXLoader;
+export const FBXLoader: FBXLoader = EX_FBXLoader as any;
+
+export type Font = I3JS.Font;
+export const Font: Font = EX_Font as any;
+
+export type FontLoader = I3JS.FontLoader;
+export const FontLoader: FontLoader = EX_FontLoader as any;
+
+export type GCodeLoader = I3JS.GCodeLoader;
+export const GCodeLoader: GCodeLoader = EX_GCodeLoader as any;
+
+export type GLTFLoader = I3JS.GLTFLoader;
+export const GLTFLoader: GLTFLoader = EX_GLTFLoader as any;
+
+export type HDRCubeTextureLoader = I3JS.HDRCubeTextureLoader;
+export const HDRCubeTextureLoader: HDRCubeTextureLoader = EX_HDRCubeTextureLoader as any;
+
+export type IFCLoader = I3JS.IFCLoader;
+export const IFCLoader: IFCLoader = EX_IFCLoader as any;
+
+export type KMZLoader = I3JS.KMZLoader;
+export const KMZLoader: KMZLoader = EX_KMZLoader as any;
+
+export type KTX2Loader = I3JS.KTX2Loader;
+export const KTX2Loader: KTX2Loader = EX_KTX2Loader as any;
+
+export type KTXLoader = I3JS.KTXLoader;
+export const KTXLoader: KTXLoader = EX_KTXLoader as any;
+
+export type LDrawLoader = I3JS.LDrawLoader;
+export const LDrawLoader: LDrawLoader = EX_LDrawLoader as any;
+
+export type LottieLoader = I3JS.LottieLoader;
+export const LottieLoader: LottieLoader = EX_LottieLoader as any;
+
+export type LUT3dlLoader = I3JS.LUT3dlLoader;
+export const LUT3dlLoader: LUT3dlLoader = EX_LUT3dlLoader as any;
+
+export type LUTCubeLoader = I3JS.LUTCubeLoader;
+export const LUTCubeLoader: LUTCubeLoader = EX_LUTCubeLoader as any;
+
+export type LWOLoader = I3JS.LWOLoader;
+export const LWOLoader: LWOLoader = EX_LWOLoader as any;
+
+export type MD2Loader = I3JS.MD2Loader;
+export const MD2Loader: MD2Loader = EX_MD2Loader as any;
+
+export type MDDLoader = I3JS.MDDLoader;
+export const MDDLoader: MDDLoader = EX_MDDLoader as any;
+
+export type MMDLoader = I3JS.MMDLoader;
+export const MMDLoader: MMDLoader = EX_MMDLoader as any;
+
+export type MTLLoader = I3JS.MTLLoader;
+export const MTLLoader: MTLLoader = EX_MTLLoader as any;
+
+export type NRRDLoader = I3JS.NRRDLoader;
+export const NRRDLoader: NRRDLoader = EX_NRRDLoader as any;
+
+export type OBJLoader = I3JS.OBJLoader;
+export const OBJLoader: OBJLoader = EX_OBJLoader as any;
+
+export type PCDLoader = I3JS.PCDLoader;
+export const PCDLoader: PCDLoader = EX_PCDLoader as any;
+
+export type PDBLoader = I3JS.PDBLoader;
+export const PDBLoader: PDBLoader = EX_PDBLoader as any;
+
+export type PLYLoader = I3JS.PLYLoader;
+export const PLYLoader: PLYLoader = EX_PLYLoader as any;
+
+export type PRWMLoader = I3JS.PRWMLoader;
+export const PRWMLoader: PRWMLoader = EX_PRWMLoader as any;
+
+export type PVRLoader = I3JS.PVRLoader;
+export const PVRLoader: PVRLoader = EX_PVRLoader as any;
+
+export type RGBELoader = I3JS.RGBELoader;
+export const RGBELoader: RGBELoader = EX_RGBELoader as any;
+
+export type RGBMLoader = I3JS.RGBMLoader;
+export const RGBMLoader: RGBMLoader = EX_RGBMLoader as any;
+
+export type STLLoader = I3JS.STLLoader;
+export const STLLoader: STLLoader = EX_STLLoader as any;
+
+export type SVGLoader = I3JS.SVGLoader;
+export const SVGLoader: SVGLoader = EX_SVGLoader as any;
+
+export type TDSLoader = I3JS.TDSLoader;
+export const TDSLoader: TDSLoader = EX_TDSLoader as any;
+
+export type TGALoader = I3JS.TGALoader;
+export const TGALoader: TGALoader = EX_TGALoader as any;
+
+export type TTFLoader = I3JS.TTFLoader;
+export const TTFLoader: TTFLoader = EX_TTFLoader as any;
+
+export type VOXLoader = I3JS.VOXLoader;
+export const VOXLoader: VOXLoader = EX_VOXLoader as any;
+
+export type VOXMesh = I3JS.VOXMesh;
+export const VOXMesh: VOXMesh = EX_VOXMesh as any;
+
+export type VOXDataTexture3D = I3JS.VOXDataTexture3D;
+export const VOXDataTexture3D: VOXDataTexture3D = EX_VOXDataTexture3D as any;
+
+export type VRMLLoader = I3JS.VRMLLoader;
+export const VRMLLoader: VRMLLoader = EX_VRMLLoader as any;
+
+export type VRMLoader = I3JS.VRMLoader;
+export const VRMLoader: VRMLoader = EX_VRMLoader as any;
+
+export type VTKLoader = I3JS.VTKLoader;
+export const VTKLoader: VTKLoader = EX_VTKLoader as any;
+
+export type XYZLoader = I3JS.XYZLoader;
+export const XYZLoader: XYZLoader = EX_XYZLoader as any;
+
+export type MD2Character = I3JS.MD2Character;
+export const MD2Character: MD2Character = EX_MD2Character as any;
+
+export type MMDAnimationHelper = I3JS.MMDAnimationHelper;
+export const MMDAnimationHelper: MMDAnimationHelper = EX_MMDAnimationHelper as any;
+
+
+export type MD2CharacterComplex = I3JS.MD2CharacterComplex;
+export const MD2CharacterComplex: MD2CharacterComplex = EX_MD2CharacterComplex as any;
+
+export type Volume = I3JS.Volume;
+export const Volume: Volume = EX_Volume as any;
+
+export type CSS2DObject = I3JS.CSS2DObject;
+export const CSS2DObject: CSS2DObject = EX_CSS2DObject as any;
+
+export type CSS3DObject = I3JS.CSS3DObject;
+export const CSS3DObject: CSS3DObject = EX_CSS3DObject as any;
+
+export type CSS3DSprite = I3JS.CSS3DSprite;
+export const CSS3DSprite: CSS3DSprite = EX_CSS3DSprite as any;
+
+
+export type InteractiveGroup = I3JS.InteractiveGroup;
+export const InteractiveGroup: InteractiveGroup = EX_InteractiveGroup as any;
+
+export type Line2 = I3JS.Line2;
+export const Line2: Line2 = EX_Line2 as any;
+
+export type Wireframe = I3JS.Wireframe;
+export const Wireframe: Wireframe = EX_Wireframe as any;
+
+export type TubePainter = I3JS.TubePainter;
+export const TubePainter: TubePainter = EX_TubePainter as any;
+
+export type Flow = I3JS.Flow;
+export const Flow: Flow = EX_Flow as any;
+
+export type InstancedFlow = I3JS.InstancedFlow;
+export const InstancedFlow: InstancedFlow = EX_InstancedFlow as any;
+
+export type LightningStorm = I3JS.LightningStorm;
+export const LightningStorm: LightningStorm = EX_LightningStorm as any;
+
+export type MarchingCubes = I3JS.MarchingCubes;
+export const MarchingCubes: MarchingCubes = EX_MarchingCubes as any;
+
+export type Reflector = I3JS.Reflector;
+export const Reflector: Reflector = EX_Reflector as any;
+
+export type Refractor = I3JS.Refractor;
+export const Refractor: Refractor = EX_Refractor as any;
+
+export type Sky = I3JS.Sky;
+export const Sky: Sky = EX_Sky as any;
+
+export type Water = I3JS.Water;
+export const Water: Water = EX_Water as any;
+
+export type Water2 = I3JS.Water2;
+export const Water2: Water2 = EX_Water2 as any;
+
+export type SVGObject = I3JS.SVGObject;
+export const SVGObject: SVGObject = EX_SVGObject as any;
 
 export const MeshoptDecoder: any = EX_MeshoptDecoder as any;
-export const TiltLoader: I3JS.ITiltLoader = EX_TiltLoader as any;
+
+export type TiltLoader = I3JS.TiltLoader;
+export const TiltLoader: TiltLoader = EX_TiltLoader as any;
 
 
-export const ArcCurve: I3JS.IArcCurve = O3JS.ArcCurve as any;
-export const CatmullRomCurve3: I3JS.ICatmullRomCurve3 = O3JS.CatmullRomCurve3 as any;
-export const CubicBezierCurve: I3JS.ICubicBezierCurve = O3JS.CubicBezierCurve as any;
-export const CubicBezierCurve3: I3JS.ICubicBezierCurve3 = O3JS.CubicBezierCurve3 as any;
-export const EllipseCurve: I3JS.IEllipseCurve = O3JS.EllipseCurve as any;
-export const LineCurve: I3JS.ILineCurve = O3JS.LineCurve as any;
-export const LineCurve3: I3JS.ILineCurve3 = O3JS.LineCurve3 as any;
-export const QuadraticBezierCurve: I3JS.IQuadraticBezierCurve = O3JS.QuadraticBezierCurve as any;
-export const QuadraticBezierCurve3: I3JS.IQuadraticBezierCurve3 = O3JS.QuadraticBezierCurve3 as any;
-export const SplineCurve: I3JS.ISplineCurve = O3JS.SplineCurve as any;
-export const Shape: I3JS.IShape = O3JS.Shape as any;
-export const ShapePath: I3JS.IShapePath = O3JS.ShapePath as any;
-export const Path: I3JS.IPath = O3JS.Path as any;
-export const Curve: I3JS.ICurve = O3JS.Curve as any;
-export const CurvePath: I3JS.ICurvePath = O3JS.CurvePath as any;
+export type ArcCurve = I3JS.ArcCurve;
+export const ArcCurve: ArcCurve = O3JS.ArcCurve as any;
+
+export type CatmullRomCurve3 = I3JS.CatmullRomCurve3;
+export const CatmullRomCurve3: CatmullRomCurve3 = O3JS.CatmullRomCurve3 as any;
+
+export type CubicBezierCurve = I3JS.CubicBezierCurve;
+export const CubicBezierCurve: CubicBezierCurve = O3JS.CubicBezierCurve as any;
+
+export type CubicBezierCurve3 = I3JS.CubicBezierCurve3;
+export const CubicBezierCurve3: CubicBezierCurve3 = O3JS.CubicBezierCurve3 as any;
+
+export type EllipseCurve = I3JS.EllipseCurve;
+export const EllipseCurve: EllipseCurve = O3JS.EllipseCurve as any;
+
+export type LineCurve = I3JS.LineCurve;
+export const LineCurve: LineCurve = O3JS.LineCurve as any;
+
+export type LineCurve3 = I3JS.LineCurve3;
+export const LineCurve3: LineCurve3 = O3JS.LineCurve3 as any;
+
+export type QuadraticBezierCurve = I3JS.QuadraticBezierCurve;
+export const QuadraticBezierCurve: QuadraticBezierCurve = O3JS.QuadraticBezierCurve as any;
+
+export type QuadraticBezierCurve3 = I3JS.QuadraticBezierCurve3;
+export const QuadraticBezierCurve3: QuadraticBezierCurve3 = O3JS.QuadraticBezierCurve3 as any;
+
+export type SplineCurve = I3JS.SplineCurve;
+export const SplineCurve: SplineCurve = O3JS.SplineCurve as any;
+
+export type Shape = I3JS.Shape;
+export const Shape: Shape = O3JS.Shape as any;
+
+export type ShapePath = I3JS.ShapePath;
+export const ShapePath: ShapePath = O3JS.ShapePath as any;
+
+export type Path = I3JS.Path;
+export const Path: Path = O3JS.Path as any;
+
+export type Curve = I3JS.Curve;
+export const Curve: Curve = O3JS.Curve as any;
+
+export type CurvePath = I3JS.CurvePath;
+export const CurvePath: CurvePath = O3JS.CurvePath as any;
 
 export const CullFaceNone: O3JS.CullFace = O3JS.CullFaceNone;
 export const CullFaceBack: O3JS.CullFace = O3JS.CullFaceBack;
@@ -1122,4 +2305,3 @@ export const StreamCopyUsage: O3JS.Usage = O3JS.StreamCopyUsage;
 
 export const GLSL1: O3JS.GLSLVersion = O3JS.GLSL1;
 export const GLSL3: O3JS.GLSLVersion = O3JS.GLSL3;
-

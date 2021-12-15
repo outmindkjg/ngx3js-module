@@ -10,34 +10,13 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import { NgxGeometryUtils } from './geometry/geometryUtils';
-import { I3JS, N3JS, ThreeUtil, ThreeVector } from './interface';
-import { PositionComponent } from './position/position.component';
-import { RotationComponent } from './rotation/rotation.component';
-import { ScaleComponent } from './scale/scale.component';
-import { AbstractSubscribeComponent } from './subscribe.abstract';
-import { TranslationComponent } from './translation/translation.component';
-
-/**
- * Attr Buffer Attribute
- */
-export type AttrBufferAttribute =
-	| number[]
-	| Int8Array
-	| Int16Array
-	| Int32Array
-	| Uint8Array
-	| Uint16Array
-	| Uint32Array
-	| Float32Array
-	| Float64Array
-	| I3JS.IBufferAttribute;
-
-/**
- * Geometries parametric
- */
-export interface GeometriesParametric {
-	(u: number, v: number, target?: any): ThreeVector;
-}
+import { I3JS, N3JS, NgxThreeUtil } from './interface';
+import { TAttrBufferAttribute } from './ngx-interface';
+import { NgxPositionComponent } from './position/position.component';
+import { NgxRotationComponent } from './rotation/rotation.component';
+import { NgxScaleComponent } from './scale/scale.component';
+import { NgxAbstractSubscribeComponent } from './subscribe.abstract';
+import { NgxTranslationComponent } from './translation/translation.component';
 
 /**
  * The Abstract Geometry component.
@@ -49,12 +28,12 @@ export interface GeometriesParametric {
  * _@Component({
  * 	providers: [
  * 		{
- * 			provide: AbstractGeometryComponent,
- * 			useExisting: forwardRef(() => XxxComponent),
+ * 			provide: NgxAbstractGeometryComponent,
+ * 			useExisting: forwardRef(() => NgxXxxComponent),
  * 		},
  * 	],
  * })
- * export class XxxComponent extends AbstractGeometryComponent implements OnInit {
+ * export class NgxXxxComponent extends NgxAbstractGeometryComponent implements OnInit {
  * 	constructor() {
  * 		super();
  * 	}
@@ -64,8 +43,8 @@ export interface GeometriesParametric {
 @Component({
 	template: '',
 })
-export class AbstractGeometryComponent
-	extends AbstractSubscribeComponent
+export class NgxAbstractGeometryComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {
 	/**
@@ -131,12 +110,12 @@ export class AbstractGeometryComponent
 	 * This hashmap has as id the name of the attribute to be set and as value the [buffer](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferAttribute) to set it to.
 	 * Rather than accessing this property directly, use [BufferGeometry.setAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferGeometry.setAttribute) and [BufferGeometry.getAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferGeometry.getAttribute) to access attributes of this geometry.
 	 */
-	@Input() public attributes: { [key: string]: AttrBufferAttribute } = null;
+	@Input() public attributes: { [key: string]: TAttrBufferAttribute } = null;
 
 	/**
 	 * Hashmap of [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferAttribute)s holding details of the geometry's morph targets.
 	 */
-	@Input() public morphAttributes: { [key: string]: AttrBufferAttribute[] } =
+	@Input() public morphAttributes: { [key: string]: TAttrBufferAttribute[] } =
 		null;
 
 	/**
@@ -177,7 +156,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrPosition of abstract geometry component
 	 */
-	@Input() public attrPosition: AttrBufferAttribute = null;
+	@Input() public attrPosition: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrPositionUsage of abstract geometry component
@@ -187,7 +166,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrUv of abstract geometry component
 	 */
-	@Input() public attrUv: AttrBufferAttribute = null;
+	@Input() public attrUv: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrUvUsage of abstract geometry component
@@ -197,7 +176,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrTextureIndex of abstract geometry component
 	 */
-	@Input() public attrTextureIndex: AttrBufferAttribute = null;
+	@Input() public attrTextureIndex: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrTextureIndexUsage of abstract geometry component
@@ -207,19 +186,19 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrVertColor of abstract geometry component
 	 */
-	@Input() public attrVertColor: AttrBufferAttribute = null;
+	@Input() public attrVertColor: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrVisible of abstract geometry component
 	 */
-	@Input() public attrVisible: AttrBufferAttribute = null;
+	@Input() public attrVisible: TAttrBufferAttribute = null;
 
 	/**
 	 * The vertexBuffer of abstract geometry component
 	 */
 	@Input() public vertexBuffer:
 		| Float32Array
-		| I3JS.IInterleavedBuffer
+		| I3JS.InterleavedBuffer
 		| number[] = null;
 
 	/**
@@ -230,7 +209,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrOffset of abstract geometry component
 	 */
-	@Input() public attrOffset: AttrBufferAttribute = null;
+	@Input() public attrOffset: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrOffsetUsage of abstract geometry component
@@ -240,7 +219,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrTranslate of abstract geometry component
 	 */
-	@Input() public attrTranslate: AttrBufferAttribute = null;
+	@Input() public attrTranslate: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrTranslateUsage of abstract geometry component
@@ -250,7 +229,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrOrientationStart of abstract geometry component
 	 */
-	@Input() public attrOrientationStart: AttrBufferAttribute = null;
+	@Input() public attrOrientationStart: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrOrientationStartUsage of abstract geometry component
@@ -260,7 +239,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrOrientationEnd of abstract geometry component
 	 */
-	@Input() public attrOrientationEnd: AttrBufferAttribute = null;
+	@Input() public attrOrientationEnd: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrOrientationEndUsage of abstract geometry component
@@ -270,7 +249,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrNormal of abstract geometry component
 	 */
-	@Input() public attrNormal: AttrBufferAttribute = null;
+	@Input() public attrNormal: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrNormalUsage of abstract geometry component
@@ -285,7 +264,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrColor of abstract geometry component
 	 */
-	@Input() public attrColor: AttrBufferAttribute = null;
+	@Input() public attrColor: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrColorUsage of abstract geometry component
@@ -310,7 +289,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrCustomColor of abstract geometry component
 	 */
-	@Input() public attrCustomColor: AttrBufferAttribute = null;
+	@Input() public attrCustomColor: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrCustomColorUsage of abstract geometry component
@@ -320,7 +299,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrSize of abstract geometry component
 	 */
-	@Input() public attrSize: AttrBufferAttribute = null;
+	@Input() public attrSize: TAttrBufferAttribute = null;
 
 	/**
 	 * Defines the intended usage pattern of the data store for optimization purposes. Corresponds to the *usage* parameter of
@@ -331,7 +310,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrScale of abstract geometry component
 	 */
-	@Input() public attrScale: AttrBufferAttribute = null;
+	@Input() public attrScale: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrScaleUsage of abstract geometry component
@@ -341,7 +320,7 @@ export class AbstractGeometryComponent
 	/**
 	 * The attrIndex of abstract geometry component
 	 */
-	@Input() public attrIndex: AttrBufferAttribute = null;
+	@Input() public attrIndex: TAttrBufferAttribute = null;
 
 	/**
 	 * The attrIndexUsage of abstract geometry component
@@ -482,32 +461,32 @@ export class AbstractGeometryComponent
 	 * The onInit of abstract geometry component
 	 */
 	@Input() public onInit: (
-		geometry: I3JS.IBufferGeometry
-	) => void | I3JS.IBufferGeometry = null;
+		geometry: I3JS.BufferGeometry
+	) => void | I3JS.BufferGeometry = null;
 
 	/**
 	 * Content children of abstract geometry component
 	 */
-	@ContentChildren(TranslationComponent, { descendants: false })
-	private translationList: QueryList<TranslationComponent>;
+	@ContentChildren(NgxTranslationComponent, { descendants: false })
+	private translationList: QueryList<NgxTranslationComponent>;
 
 	/**
 	 * Content children of abstract geometry component
 	 */
-	@ContentChildren(ScaleComponent, { descendants: false })
-	private scaleList: QueryList<ScaleComponent>;
+	@ContentChildren(NgxScaleComponent, { descendants: false })
+	private scaleList: QueryList<NgxScaleComponent>;
 
 	/**
 	 * Content children of abstract geometry component
 	 */
-	@ContentChildren(RotationComponent, { descendants: false })
-	private rotationList: QueryList<RotationComponent>;
+	@ContentChildren(NgxRotationComponent, { descendants: false })
+	private rotationList: QueryList<NgxRotationComponent>;
 
 	/**
 	 * Content children of abstract geometry component
 	 */
-	@ContentChildren(PositionComponent, { descendants: false })
-	private positionList: QueryList<PositionComponent>;
+	@ContentChildren(NgxPositionComponent, { descendants: false })
+	private positionList: QueryList<NgxPositionComponent>;
 
 	/**
 	 * Geometry attr of abstract geometry component
@@ -590,7 +569,7 @@ export class AbstractGeometryComponent
 	 */
 	public isGeometryType(): boolean {
 		return (
-			this.enabled && (ThreeUtil.isNull(this.refName) || this.refName === '*')
+			this.enabled && (NgxThreeUtil.isNull(this.refName) || this.refName === '*')
 		);
 	}
 
@@ -600,10 +579,10 @@ export class AbstractGeometryComponent
 	 */
 	protected getMorphAttributes(): {
 		key: string;
-		value: I3JS.IBufferAttribute[];
+		value: I3JS.BufferAttribute[];
 	}[] {
-		const attributes: { key: string; value: I3JS.IBufferAttribute[] }[] = [];
-		if (ThreeUtil.isNotNull(this.morphAttributes)) {
+		const attributes: { key: string; value: I3JS.BufferAttribute[] }[] = [];
+		if (NgxThreeUtil.isNotNull(this.morphAttributes)) {
 			Object.entries(this.morphAttributes).forEach(([key, value]) => {
 				switch (key) {
 					case 'position':
@@ -611,7 +590,7 @@ export class AbstractGeometryComponent
 					case 'normal':
 					case 'customColor':
 					default:
-						const valueList: I3JS.IBufferAttribute[] = [];
+						const valueList: I3JS.BufferAttribute[] = [];
 						value.forEach((val) => {
 							valueList.push(this.getAttribute(val, 3));
 						});
@@ -630,21 +609,21 @@ export class AbstractGeometryComponent
 	 */
 	protected getAttributes(
 		colorType: string = ''
-	): { key: string; value: I3JS.IBufferAttribute }[] {
+	): { key: string; value: I3JS.BufferAttribute }[] {
 		const attributes: { key: string; value: any }[] = [];
-		if (ThreeUtil.isNotNull(this.attrPosition)) {
+		if (NgxThreeUtil.isNotNull(this.attrPosition)) {
 			attributes.push({
 				key: 'position',
 				value: this.getAttribute(this.attrPosition, 3, this.attrPositionUsage),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrColor)) {
+		if (NgxThreeUtil.isNotNull(this.attrColor)) {
 			if (colorType == 'instanced') {
 				attributes.push({
-					key: ThreeUtil.getTypeSafe(this.attrColorKey, 'color'),
+					key: NgxThreeUtil.getTypeSafe(this.attrColorKey, 'color'),
 					value: this.getAttribute(
 						this.attrColor,
-						ThreeUtil.getTypeSafe(this.attrColorSize, 4),
+						NgxThreeUtil.getTypeSafe(this.attrColorSize, 4),
 						this.attrColorUsage,
 						'instanced',
 						this.attrColorNormalized
@@ -652,35 +631,35 @@ export class AbstractGeometryComponent
 				});
 			} else {
 				attributes.push({
-					key: ThreeUtil.getTypeSafe(this.attrColorKey, 'color'),
+					key: NgxThreeUtil.getTypeSafe(this.attrColorKey, 'color'),
 					value: this.getAttribute(
 						this.attrColor,
-						ThreeUtil.getTypeSafe(this.attrColorSize, 3),
+						NgxThreeUtil.getTypeSafe(this.attrColorSize, 3),
 						this.attrColorUsage,
 						'float',
 						this.attrColorNormalized
 					),
 				});
 			}
-		} else if (ThreeUtil.isNotNull(this.attrVertColor)) {
+		} else if (NgxThreeUtil.isNotNull(this.attrVertColor)) {
 			attributes.push({
 				key: 'vertColor',
 				value: this.getAttribute(
 					this.attrVertColor,
-					ThreeUtil.getTypeSafe(this.attrColorSize, 3),
+					NgxThreeUtil.getTypeSafe(this.attrColorSize, 3),
 					this.attrColorUsage,
 					'float',
 					this.attrColorNormalized
 				),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrVisible)) {
+		if (NgxThreeUtil.isNotNull(this.attrVisible)) {
 			attributes.push({
 				key: 'visible',
 				value: this.getAttribute(this.attrVisible, 1),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrOffset)) {
+		if (NgxThreeUtil.isNotNull(this.attrOffset)) {
 			attributes.push({
 				key: 'offset',
 				value: this.getAttribute(
@@ -691,7 +670,7 @@ export class AbstractGeometryComponent
 				),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrTranslate)) {
+		if (NgxThreeUtil.isNotNull(this.attrTranslate)) {
 			attributes.push({
 				key: 'translate',
 				value: this.getAttribute(
@@ -702,7 +681,7 @@ export class AbstractGeometryComponent
 				),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrOrientationStart)) {
+		if (NgxThreeUtil.isNotNull(this.attrOrientationStart)) {
 			attributes.push({
 				key: 'orientationStart',
 				value: this.getAttribute(
@@ -713,7 +692,7 @@ export class AbstractGeometryComponent
 				),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrOrientationEnd)) {
+		if (NgxThreeUtil.isNotNull(this.attrOrientationEnd)) {
 			attributes.push({
 				key: 'orientationEnd',
 				value: this.getAttribute(
@@ -724,7 +703,7 @@ export class AbstractGeometryComponent
 				),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrNormal)) {
+		if (NgxThreeUtil.isNotNull(this.attrNormal)) {
 			attributes.push({
 				key: 'normal',
 				value: this.getAttribute(
@@ -736,7 +715,7 @@ export class AbstractGeometryComponent
 				),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrCustomColor)) {
+		if (NgxThreeUtil.isNotNull(this.attrCustomColor)) {
 			attributes.push({
 				key: 'customColor',
 				value: this.getAttribute(
@@ -746,25 +725,25 @@ export class AbstractGeometryComponent
 				),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrSize)) {
+		if (NgxThreeUtil.isNotNull(this.attrSize)) {
 			attributes.push({
 				key: 'size',
 				value: this.getAttribute(this.attrSize, 1, this.attrSizeUsage),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrScale)) {
+		if (NgxThreeUtil.isNotNull(this.attrScale)) {
 			attributes.push({
 				key: 'scale',
 				value: this.getAttribute(this.attrScale, 1, this.attrScaleUsage),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrIndex)) {
+		if (NgxThreeUtil.isNotNull(this.attrIndex)) {
 			attributes.push({
 				key: 'index',
 				value: this.getAttribute(this.attrIndex, 1, this.attrIndexUsage, 'int'),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrTextureIndex)) {
+		if (NgxThreeUtil.isNotNull(this.attrTextureIndex)) {
 			attributes.push({
 				key: 'textureIndex',
 				value: this.getAttribute(
@@ -775,25 +754,25 @@ export class AbstractGeometryComponent
 				),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.attrUv)) {
+		if (NgxThreeUtil.isNotNull(this.attrUv)) {
 			attributes.push({
 				key: 'uv',
 				value: this.getAttribute(this.attrUv, 2, this.attrUvUsage),
 			});
 		}
-		if (ThreeUtil.isNotNull(this.vertexBuffer)) {
-			let vertexBuffer: I3JS.IInterleavedBuffer = null;
+		if (NgxThreeUtil.isNotNull(this.vertexBuffer)) {
+			let vertexBuffer: I3JS.InterleavedBuffer = null;
 			if (this.vertexBuffer instanceof N3JS.InterleavedBuffer) {
 				vertexBuffer = this.vertexBuffer;
 			} else if (this.vertexBuffer instanceof Float32Array) {
 				vertexBuffer = new N3JS.InterleavedBuffer(
 					this.vertexBuffer,
-					ThreeUtil.getTypeSafe(this.vertexBufferStride, 8)
+					NgxThreeUtil.getTypeSafe(this.vertexBufferStride, 8)
 				);
 			} else {
 				vertexBuffer = new N3JS.InterleavedBuffer(
 					new Float32Array(this.vertexBuffer),
-					ThreeUtil.getTypeSafe(this.vertexBufferStride, 8)
+					NgxThreeUtil.getTypeSafe(this.vertexBufferStride, 8)
 				);
 			}
 			attributes.push({
@@ -806,7 +785,7 @@ export class AbstractGeometryComponent
 			});
 		}
 
-		if (ThreeUtil.isNotNull(this.attributes)) {
+		if (NgxThreeUtil.isNotNull(this.attributes)) {
 			Object.entries(this.attributes).forEach(([key, value]) => {
 				switch (key) {
 					case 'size':
@@ -894,17 +873,17 @@ export class AbstractGeometryComponent
 	 * @returns attribute
 	 */
 	protected getAttribute(
-		value: AttrBufferAttribute,
+		value: TAttrBufferAttribute,
 		itemSize: number,
 		usage?: string,
 		bufferType?: string,
 		normalized?: boolean
-	): I3JS.IBufferAttribute {
+	): I3JS.BufferAttribute {
 		if (value instanceof N3JS.BufferAttribute) {
 			return value;
 		}
-		const attribute = ThreeUtil.getTypeSafe(value, []);
-		let bufferAttribute: I3JS.IBufferAttribute = null;
+		const attribute = NgxThreeUtil.getTypeSafe(value, []);
+		let bufferAttribute: I3JS.BufferAttribute = null;
 		if (attribute instanceof N3JS.BufferAttribute) {
 			return attribute;
 		} else if (attribute instanceof Int8Array) {
@@ -951,7 +930,7 @@ export class AbstractGeometryComponent
 					break;
 				case 'float':
 				default:
-					if (ThreeUtil.isNotNull(normalized) && normalized) {
+					if (NgxThreeUtil.isNotNull(normalized) && normalized) {
 						const normalizedIntArray = new Uint8Array(attribute.length);
 						attribute.forEach((v, i) => {
 							normalizedIntArray[i] = v;
@@ -973,7 +952,7 @@ export class AbstractGeometryComponent
 					}
 			}
 		}
-		if (bufferAttribute !== null && ThreeUtil.isNotNull(usage)) {
+		if (bufferAttribute !== null && NgxThreeUtil.isNotNull(usage)) {
 			switch (usage.toLowerCase()) {
 				case 'staticdrawusage':
 				case 'staticdraw':
@@ -1021,18 +1000,18 @@ export class AbstractGeometryComponent
 	 * Object3d of Geomerty component
 	 */
 	private _object3d: {
-		[key: string]: (I3JS.IMesh | I3JS.ILine | I3JS.IPoints | I3JS.ISprite)[];
+		[key: string]: (I3JS.Mesh | I3JS.Line | I3JS.Points | I3JS.Sprite)[];
 	} = {};
 
 	/**
 	 * unSets object3d
 	 * @param object3d
 	 */
-	public unsetObject3d(object3d: AbstractSubscribeComponent) {
+	public unsetObject3d(object3d: NgxAbstractSubscribeComponent) {
 		const key: string = object3d.getId();
 		this.unSubscribeRefer('geometry_' + key);
 		this.unSubscribeRefer('ungeometry_' + key);
-		if (ThreeUtil.isNotNull(this._object3d[key])) {
+		if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 			delete this._object3d[key];
 		}
 	}
@@ -1041,31 +1020,31 @@ export class AbstractGeometryComponent
 	 * Sets object3d
 	 * @param object3d
 	 */
-	public setObject3d(object3d: AbstractSubscribeComponent) {
-		if (ThreeUtil.isNotNull(object3d)) {
+	public setObject3d(object3d: NgxAbstractSubscribeComponent) {
+		if (NgxThreeUtil.isNotNull(object3d)) {
 			const key: string = object3d.getId();
-			let object = ThreeUtil.getObject3d(object3d);
-			const objectList: I3JS.IObject3D[] = [];
-			let meshes: (I3JS.IMesh | I3JS.ILine | I3JS.IPoints | I3JS.ISprite)[] =
+			let object = NgxThreeUtil.getObject3d(object3d);
+			const objectList: I3JS.Object3D[] = [];
+			let meshes: (I3JS.Mesh | I3JS.Line | I3JS.Points | I3JS.Sprite)[] =
 				[];
-			if (ThreeUtil.isNotNull(object)) {
-				if (ThreeUtil.isNotNull(this.refName)) {
+			if (NgxThreeUtil.isNotNull(object)) {
+				if (NgxThreeUtil.isNotNull(this.refName)) {
 					if (this.refName === '*') {
 						object.traverse((child: any) => {
-							if (ThreeUtil.isNotNull(child['geometry'])) {
+							if (NgxThreeUtil.isNotNull(child['geometry'])) {
 								objectList.push(child);
 							}
 						});
 					} else if (Array.isArray(this.refName)) {
 						this.refName.forEach((refName) => {
 							const foundObj = object.getObjectByName(refName);
-							if (ThreeUtil.isNotNull(foundObj)) {
+							if (NgxThreeUtil.isNotNull(foundObj)) {
 								objectList.push(foundObj);
 							}
 						});
 					} else {
 						const foundObj = object.getObjectByName(this.refName);
-						if (ThreeUtil.isNotNull(foundObj)) {
+						if (NgxThreeUtil.isNotNull(foundObj)) {
 							objectList.push(foundObj);
 						}
 					}
@@ -1088,7 +1067,7 @@ export class AbstractGeometryComponent
 			this._object3d[key] = meshes;
 			this.subscribeRefer(
 				'geometry_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.setObject3d(object3d);
@@ -1098,7 +1077,7 @@ export class AbstractGeometryComponent
 			);
 			this.subscribeRefer(
 				'ungeometry_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.unsetObject3d(object3d);
@@ -1115,26 +1094,26 @@ export class AbstractGeometryComponent
 	 * Synks object3d
 	 * @param [geometry]
 	 */
-	synkObject3d(geometry: I3JS.IBufferGeometry = null, key: string = null) {
-		if (ThreeUtil.isNotNull(geometry) && this.enabled) {
-			if (ThreeUtil.isNotNull(this._object3d)) {
+	synkObject3d(geometry: I3JS.BufferGeometry = null, key: string = null) {
+		if (NgxThreeUtil.isNotNull(geometry) && this.enabled) {
+			if (NgxThreeUtil.isNotNull(this._object3d)) {
 				let object3dList: (
-					| I3JS.IMesh
-					| I3JS.ILine
-					| I3JS.IPoints
-					| I3JS.ISprite
+					| I3JS.Mesh
+					| I3JS.Line
+					| I3JS.Points
+					| I3JS.Sprite
 				)[] = [];
-				if (ThreeUtil.isNotNull(key)) {
+				if (NgxThreeUtil.isNotNull(key)) {
 					if (
-						ThreeUtil.isNotNull(this._object3d[key]) &&
-						ThreeUtil.isNotNull(this._object3d[key]) &&
+						NgxThreeUtil.isNotNull(this._object3d[key]) &&
+						NgxThreeUtil.isNotNull(this._object3d[key]) &&
 						this._object3d[key].length > 0
 					) {
 						object3dList.push(...this._object3d[key]);
 					}
 				} else {
 					Object.entries(this._object3d).forEach(([_, object3d]) => {
-						if (ThreeUtil.isNotNull(object3d) && object3d.length > 0) {
+						if (NgxThreeUtil.isNotNull(object3d) && object3d.length > 0) {
 							object3dList.push(...object3d);
 						}
 					});
@@ -1143,12 +1122,12 @@ export class AbstractGeometryComponent
 					info.geometry = this.geometry;
 					if (info instanceof N3JS.Mesh) {
 						if (
-							ThreeUtil.isNotNull(this.compressPositions) &&
+							NgxThreeUtil.isNotNull(this.compressPositions) &&
 							this.compressPositions
 						) {
 							N3JS.GeometryCompressionUtils.compressPositions(info);
 						}
-						if (ThreeUtil.isNotNull(this.compressNormals)) {
+						if (NgxThreeUtil.isNotNull(this.compressNormals)) {
 							switch (this.compressNormals.toLowerCase()) {
 								case 'default':
 									N3JS.GeometryCompressionUtils.compressNormals(info, 'DEFAULT');
@@ -1168,7 +1147,7 @@ export class AbstractGeometryComponent
 							N3JS.GeometryCompressionUtils.compressUvs(info);
 						}
 					}
-					if (ThreeUtil.isNotNull(info['updateMorphTargets'])) {
+					if (NgxThreeUtil.isNotNull(info['updateMorphTargets'])) {
 						info['updateMorphTargets']();
 					}
 				});
@@ -1181,17 +1160,17 @@ export class AbstractGeometryComponent
 	/**
 	 * The Geometry of abstract geometry component
 	 */
-	protected geometry: I3JS.IBufferGeometry = null;
+	protected geometry: I3JS.BufferGeometry = null;
 
 	/**
 	 * Sets geometry
 	 * @param geometry
 	 */
-	protected setGeometry(geometry: I3JS.IBufferGeometry) {
-		if (ThreeUtil.isNotNull(geometry) && this.geometry !== geometry) {
+	protected setGeometry(geometry: I3JS.BufferGeometry) {
+		if (NgxThreeUtil.isNotNull(geometry) && this.geometry !== geometry) {
 			const anyGeometry: any = geometry;
-			if (ThreeUtil.isNotNull(geometry.getAttribute('position'))) {
-				if (ThreeUtil.isNotNull(this.meshType)) {
+			if (NgxThreeUtil.isNotNull(geometry.getAttribute('position'))) {
+				if (NgxThreeUtil.isNotNull(this.meshType)) {
 					const meshType = this.meshType.toLowerCase();
 					switch (meshType) {
 						case 'wireframesimple':
@@ -1210,7 +1189,7 @@ export class AbstractGeometryComponent
 						case 'edgesbuffer':
 						case 'edgesgeometry':
 						case 'edges':
-							let lineGeometry: I3JS.IBufferGeometry = null;
+							let lineGeometry: I3JS.BufferGeometry = null;
 							switch (meshType) {
 								case 'wireframesimple':
 									const simpleParameters: any = anyGeometry['parameters'] || {};
@@ -1298,7 +1277,7 @@ export class AbstractGeometryComponent
 										case 'StarDepthGeometry':
 											{
 												const sideGroup = geometry.groups[2];
-												if (ThreeUtil.isNotNull(sideGroup)) {
+												if (NgxThreeUtil.isNotNull(sideGroup)) {
 													lineGeometry = new N3JS.LineSegmentsGeometry();
 													for (
 														let i = sideGroup.start;
@@ -1475,7 +1454,7 @@ export class AbstractGeometryComponent
 								case 'edges':
 									lineGeometry = new N3JS.EdgesGeometry(
 										geometry,
-										ThreeUtil.getTypeSafe(this.thresholdAngle, 0)
+										NgxThreeUtil.getTypeSafe(this.thresholdAngle, 0)
 									);
 									break;
 							}
@@ -1485,7 +1464,7 @@ export class AbstractGeometryComponent
 							break;
 					}
 				}
-				if (ThreeUtil.isNotNull(this.program)) {
+				if (NgxThreeUtil.isNotNull(this.program)) {
 					NgxGeometryUtils.getGeometry(
 						this.program,
 						geometry as any,
@@ -1493,8 +1472,8 @@ export class AbstractGeometryComponent
 					);
 				}
 				if (
-					ThreeUtil.isNotNull(this.drawRangeStart) &&
-					ThreeUtil.isNotNull(this.drawRangeCount)
+					NgxThreeUtil.isNotNull(this.drawRangeStart) &&
+					NgxThreeUtil.isNotNull(this.drawRangeCount)
 				) {
 					geometry.setDrawRange(this.drawRangeStart, this.drawRangeCount);
 				}
@@ -1502,7 +1481,7 @@ export class AbstractGeometryComponent
 					geometry.center();
 				}
 				if (
-					ThreeUtil.isNotNull(this.translationList) &&
+					NgxThreeUtil.isNotNull(this.translationList) &&
 					this.translationList.length > 0
 				) {
 					this.translationList.forEach((translation) => {
@@ -1511,7 +1490,7 @@ export class AbstractGeometryComponent
 					});
 				}
 				if (
-					ThreeUtil.isNotNull(this.rotationList) &&
+					NgxThreeUtil.isNotNull(this.rotationList) &&
 					this.rotationList.length > 0
 				) {
 					this.rotationList.forEach((rotation) => {
@@ -1521,15 +1500,15 @@ export class AbstractGeometryComponent
 						geometry.rotateZ(euler.z);
 					});
 				}
-				if (ThreeUtil.isNotNull(this.scale)) {
-					const geometryScale = ThreeUtil.getTypeSafe(this.scale, 1);
-					if (ThreeUtil.isNotNull(geometryScale) && geometryScale > 0) {
+				if (NgxThreeUtil.isNotNull(this.scale)) {
+					const geometryScale = NgxThreeUtil.getTypeSafe(this.scale, 1);
+					if (NgxThreeUtil.isNotNull(geometryScale) && geometryScale > 0) {
 						geometry.scale(geometryScale, geometryScale, geometryScale);
 					}
 				}
-				if (ThreeUtil.isNotNull(this.sphereScale)) {
-					const sphereScale = ThreeUtil.getTypeSafe(this.sphereScale, 1);
-					if (ThreeUtil.isNotNull(sphereScale) && sphereScale > 0) {
+				if (NgxThreeUtil.isNotNull(this.sphereScale)) {
+					const sphereScale = NgxThreeUtil.getTypeSafe(this.sphereScale, 1);
+					if (NgxThreeUtil.isNotNull(sphereScale) && sphereScale > 0) {
 						if (geometry.boundingSphere === null) {
 							geometry.computeBoundingSphere();
 						}
@@ -1537,14 +1516,14 @@ export class AbstractGeometryComponent
 						geometry.scale(scaleFactor, scaleFactor, scaleFactor);
 					}
 				}
-				if (ThreeUtil.isNotNull(this.scaleList) && this.scaleList.length > 0) {
+				if (NgxThreeUtil.isNotNull(this.scaleList) && this.scaleList.length > 0) {
 					this.scaleList.forEach((scale) => {
 						const vector = scale.getScale();
 						geometry.scale(vector.x, vector.y, vector.z);
 					});
 				}
 				if (
-					ThreeUtil.isNotNull(this.positionList) &&
+					NgxThreeUtil.isNotNull(this.positionList) &&
 					this.positionList.length > 0
 				) {
 					this.positionList.forEach((pos) => {
@@ -1552,13 +1531,13 @@ export class AbstractGeometryComponent
 						switch (pos.type.toLowerCase()) {
 							case 'rotate':
 								if (position.x !== 0) {
-									geometry.rotateX(ThreeUtil.getAngleSafe(position.x));
+									geometry.rotateX(NgxThreeUtil.getAngleSafe(position.x));
 								}
 								if (position.y !== 0) {
-									geometry.rotateY(ThreeUtil.getAngleSafe(position.y));
+									geometry.rotateY(NgxThreeUtil.getAngleSafe(position.y));
 								}
 								if (position.z !== 0) {
-									geometry.rotateZ(ThreeUtil.getAngleSafe(position.z));
+									geometry.rotateZ(NgxThreeUtil.getAngleSafe(position.z));
 								}
 								break;
 							case 'scale':
@@ -1572,7 +1551,7 @@ export class AbstractGeometryComponent
 						}
 					});
 				}
-				if (ThreeUtil.isNotNull(this.morphAttributes)) {
+				if (NgxThreeUtil.isNotNull(this.morphAttributes)) {
 					const attributes = this.getMorphAttributes();
 					if (attributes.length > 0) {
 						attributes.forEach((attribute) => {
@@ -1585,27 +1564,27 @@ export class AbstractGeometryComponent
 					}
 				}
 				if (
-					ThreeUtil.isNotNull(this.autoDisplacement) &&
+					NgxThreeUtil.isNotNull(this.autoDisplacement) &&
 					this.autoDisplacement
 				) {
 					const itemCount = geometry.attributes.position.count;
-					const itemSize = ThreeUtil.getTypeSafe(this.autoDisplacementSize, 3);
+					const itemSize = NgxThreeUtil.getTypeSafe(this.autoDisplacementSize, 3);
 					geometry.setAttribute(
 						'displacement',
 						new N3JS.Float32BufferAttribute(itemCount * itemSize, itemSize)
 					);
 				}
-				if (ThreeUtil.isNotNull(this.autoCustomColor) && this.autoCustomColor) {
+				if (NgxThreeUtil.isNotNull(this.autoCustomColor) && this.autoCustomColor) {
 					const itemCount = geometry.attributes.position.count;
-					const itemSize = ThreeUtil.getTypeSafe(this.autoCustomColorSize, 3);
+					const itemSize = NgxThreeUtil.getTypeSafe(this.autoCustomColorSize, 3);
 					geometry.setAttribute(
-						ThreeUtil.getTypeSafe(this.autoCustomColorKey, 'customColor'),
+						NgxThreeUtil.getTypeSafe(this.autoCustomColorKey, 'customColor'),
 						new N3JS.Float32BufferAttribute(itemCount * itemSize, itemSize)
 					);
 				}
-				if (ThreeUtil.isNotNull(this.autoSize) && this.autoSize) {
+				if (NgxThreeUtil.isNotNull(this.autoSize) && this.autoSize) {
 					const itemCount = geometry.attributes.position.count;
-					const itemSize = ThreeUtil.getTypeSafe(this.autoSizeSize, 1);
+					const itemSize = NgxThreeUtil.getTypeSafe(this.autoSizeSize, 1);
 					geometry.setAttribute(
 						'size',
 						new N3JS.Float32BufferAttribute(itemCount * itemSize, itemSize)
@@ -1618,23 +1597,23 @@ export class AbstractGeometryComponent
 					const modifier = new N3JS.EdgeSplitModifier();
 					geometry = modifier.modify(
 						geometry,
-						ThreeUtil.getAngleSafe(this.cutOffAngle, 0),
-						ThreeUtil.getTypeSafe(this.tryKeepNormals, false)
+						NgxThreeUtil.getAngleSafe(this.cutOffAngle, 0),
+						NgxThreeUtil.getTypeSafe(this.tryKeepNormals, false)
 					);
 				}
 				if (this.simplify) {
 					const modifier = new N3JS.SimplifyModifier();
 					const count = Math.floor(
 						geometry.attributes.position.count *
-							Math.max(0, Math.min(1, ThreeUtil.getTypeSafe(this.count, 1)))
+							Math.max(0, Math.min(1, NgxThreeUtil.getTypeSafe(this.count, 1)))
 					);
 					geometry = modifier.modify(geometry, count);
 					geometry.computeVertexNormals();
 				}
 				if (this.tessellate) {
 					const modifier = new N3JS.TessellateModifier(
-						ThreeUtil.getTypeSafe(this.maxEdgeLength, 8),
-						ThreeUtil.getTypeSafe(this.maxIterations, 6)
+						NgxThreeUtil.getTypeSafe(this.maxEdgeLength, 8),
+						NgxThreeUtil.getTypeSafe(this.maxIterations, 6)
 					);
 					geometry = modifier.modify(geometry);
 				}
@@ -1653,24 +1632,24 @@ export class AbstractGeometryComponent
 				if (this.toNonIndexed) {
 					geometry = geometry.toNonIndexed();
 				}
-				if (this.flipY && ThreeUtil.isNotNull(geometry.getAttribute('uv'))) {
+				if (this.flipY && NgxThreeUtil.isNotNull(geometry.getAttribute('uv'))) {
 					const uv = geometry.attributes.uv;
 					for (let i = 0; i < uv.count; i++) {
 						uv.setY(i, 1 - uv.getY(i));
 					}
 				}
 			}
-			if (ThreeUtil.isNotNull(this.onInit)) {
+			if (NgxThreeUtil.isNotNull(this.onInit)) {
 				const tmpGeometry = this.onInit(geometry);
 				if (
-					ThreeUtil.isNotNull(tmpGeometry) &&
+					NgxThreeUtil.isNotNull(tmpGeometry) &&
 					tmpGeometry instanceof N3JS.BufferGeometry
 				) {
 					geometry = tmpGeometry;
 				}
 			}
 			this.geometry = geometry;
-			if (ThreeUtil.isNotNull(this.name)) {
+			if (NgxThreeUtil.isNotNull(this.name)) {
 				this.geometry.name = this.name;
 			}
 			super.setObject(this.geometry);
@@ -1683,7 +1662,7 @@ export class AbstractGeometryComponent
 	 * @template T
 	 * @returns geometry
 	 */
-	public getGeometry<T extends I3JS.IBufferGeometry>(): T {
+	public getGeometry<T extends I3JS.BufferGeometry>(): T {
 		return this.geometry as T;
 	}
 
@@ -1694,12 +1673,12 @@ export class AbstractGeometryComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.geometry !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getGeometry();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					['name', 'refgeometry', 'align'],
 					this.GEOMETRY_ATTR
@@ -1708,23 +1687,23 @@ export class AbstractGeometryComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'name',
 					'refgeometry',
 					'align',
 					'drawrange',
 				]);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['drawrangecount', 'drawrangestart'])) {
-				changes = ThreeUtil.pushUniq(changes, ['drawrange']);
+			if (NgxThreeUtil.isIndexOf(changes, ['drawrangecount', 'drawrangestart'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['drawrange']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'drawrange':
 						if (
-							ThreeUtil.isNotNull(this.drawRangeStart) &&
-							ThreeUtil.isNotNull(this.drawRangeCount)
+							NgxThreeUtil.isNotNull(this.drawRangeStart) &&
+							NgxThreeUtil.isNotNull(this.drawRangeCount)
 						) {
 							this.geometry.setDrawRange(
 								this.drawRangeStart,
@@ -1733,14 +1712,14 @@ export class AbstractGeometryComponent
 						}
 						break;
 					case 'name':
-						if (ThreeUtil.isNotNull(this.name)) {
-							this.geometry.name = ThreeUtil.getTypeSafe(this.name, 'No Name');
+						if (NgxThreeUtil.isNotNull(this.name)) {
+							this.geometry.name = NgxThreeUtil.getTypeSafe(this.name, 'No Name');
 						}
 						break;
 					case 'align':
 						if (
-							ThreeUtil.isNotNull(this.align) &&
-							ThreeUtil.isNotNull(this.geometry.getAttribute('position'))
+							NgxThreeUtil.isNotNull(this.align) &&
+							NgxThreeUtil.isNotNull(this.geometry.getAttribute('position'))
 						) {
 							this.geometry.center();
 							this.geometry.computeBoundingBox();

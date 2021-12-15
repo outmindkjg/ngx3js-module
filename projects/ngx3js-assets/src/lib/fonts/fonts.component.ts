@@ -13,7 +13,7 @@ import {
 	templateUrl: './fonts.component.html',
 	styleUrls: ['./fonts.component.scss'],
 })
-export class AsstesFontsComponent implements OnInit
+export class NgxAsstesFontsComponent implements OnInit
 {
 	/**
 	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.

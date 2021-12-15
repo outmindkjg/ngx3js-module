@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as GSAP from 'gsap';
-import { ThreeUtil } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil } from '../interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * Tween Component
@@ -24,8 +24,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './tween.component.html',
 	styleUrls: ['./tween.component.scss'],
 })
-export class TweenComponent
-	extends AbstractSubscribeComponent
+export class NgxTweenComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -107,7 +107,7 @@ export class TweenComponent
 	 * @returns duration
 	 */
 	private getDuration(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.duration, def, 3);
+		return NgxThreeUtil.getTypeSafe(this.duration, def, 3);
 	}
 
 	/**
@@ -116,7 +116,7 @@ export class TweenComponent
 	 * @returns repeat
 	 */
 	private getRepeat(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.repeat, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.repeat, def, 1);
 	}
 
 	/**
@@ -125,7 +125,7 @@ export class TweenComponent
 	 * @returns true if yoyo
 	 */
 	private getYoyo(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.yoyo, def, false);
+		return NgxThreeUtil.getTypeSafe(this.yoyo, def, false);
 	}
 
 	/**
@@ -134,7 +134,7 @@ export class TweenComponent
 	 * @returns overshoot
 	 */
 	private getOvershoot(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.overshoot, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.overshoot, def, 1);
 	}
 
 	/**
@@ -143,7 +143,7 @@ export class TweenComponent
 	 * @returns amplitude
 	 */
 	private getAmplitude(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.amplitude, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.amplitude, def, 1);
 	}
 
 	/**
@@ -152,7 +152,7 @@ export class TweenComponent
 	 * @returns period
 	 */
 	private getPeriod(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.period, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.period, def, 1);
 	}
 
 	/**
@@ -161,7 +161,7 @@ export class TweenComponent
 	 * @returns linear ratio
 	 */
 	private getLinearRatio(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.linearRatio, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.linearRatio, def, 1);
 	}
 
 	/**
@@ -170,7 +170,7 @@ export class TweenComponent
 	 * @returns power
 	 */
 	private getPower(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.power, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.power, def, 1);
 	}
 
 	/**
@@ -179,7 +179,7 @@ export class TweenComponent
 	 * @returns true if yoyo mode
 	 */
 	private getYoyoMode(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.yoyoMode, def, false);
+		return NgxThreeUtil.getTypeSafe(this.yoyoMode, def, false);
 	}
 
 	/**
@@ -188,7 +188,7 @@ export class TweenComponent
 	 * @returns steps
 	 */
 	private getSteps(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.steps, def, 12);
+		return NgxThreeUtil.getTypeSafe(this.steps, def, 12);
 	}
 
 	/**
@@ -199,8 +199,8 @@ export class TweenComponent
 	 */
 	private getEasing(def?: string, isTemplate?: boolean): any {
 		const easing = isTemplate
-			? ThreeUtil.getTypeSafe(this.template, def, '')
-			: ThreeUtil.getTypeSafe(this.easing, def, '');
+			? NgxThreeUtil.getTypeSafe(this.template, def, '')
+			: NgxThreeUtil.getTypeSafe(this.easing, def, '');
 		switch (easing.toLowerCase()) {
 			case 'power1':
 			case 'power1.easein':
@@ -335,8 +335,8 @@ export class TweenComponent
 	 * @returns targets
 	 */
 	private getTargets(target: any, def?: string): any {
-		const key = ThreeUtil.getTypeSafe(this.targets, def, null);
-		if (ThreeUtil.isNotNull(key) && ThreeUtil.isNotNull(target[key])) {
+		const key = NgxThreeUtil.getTypeSafe(this.targets, def, null);
+		if (NgxThreeUtil.isNotNull(key) && NgxThreeUtil.isNotNull(target[key])) {
 			return target[key];
 		}
 		return target;
@@ -348,7 +348,7 @@ export class TweenComponent
 	 * @returns to
 	 */
 	private getTo(def?: any): any {
-		const to = ThreeUtil.getTypeSafe(this.to, def, {});
+		const to = NgxThreeUtil.getTypeSafe(this.to, def, {});
 		const result: { [key: string]: any } = {};
 		Object.entries(to).forEach(([key, value]) => {
 			switch (key) {
@@ -426,7 +426,7 @@ export class TweenComponent
 	 * @returns tween
 	 */
 	public setTween(to: any, duration?: number): any {
-		if (ThreeUtil.isNotNull(to)) {
+		if (NgxThreeUtil.isNotNull(to)) {
 			if (this._tween !== null) {
 				this._tween.kill();
 			}
@@ -441,7 +441,7 @@ export class TweenComponent
 					fromVar,
 					{
 						...to,
-						duration: ThreeUtil.isNotNull(duration)
+						duration: NgxThreeUtil.isNotNull(duration)
 							? duration
 							: this.getDuration(),
 						ease: this.getEasing(),
@@ -468,7 +468,7 @@ export class TweenComponent
 	): any {
 		this.parentEle = parentEle;
 		this._tweenTarget = tweenTarget;
-		if (ThreeUtil.isNotNull(this.to)) {
+		if (NgxThreeUtil.isNotNull(this.to)) {
 			this.setTween(this.getTo(), this.getDuration());
 		}
 		super.callOnLoad();

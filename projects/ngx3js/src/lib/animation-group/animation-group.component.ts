@@ -9,9 +9,9 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, N3JS, I3JS } from '../interface';
-import { MixerComponent } from '../mixer/mixer.component';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { NgxMixerComponent } from '../mixer/mixer.component';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Animation Group component.
@@ -49,8 +49,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './animation-group.component.html',
 	styleUrls: ['./animation-group.component.scss'],
 })
-export class AnimationGroupComponent
-	extends AbstractSubscribeComponent
+export class NgxAnimationGroupComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, OnChanges, OnDestroy, AfterContentInit
 {
 	/**
@@ -59,10 +59,10 @@ export class AnimationGroupComponent
 	@Input() public name: string = '';
 
 	/**
-	 * The mixer List of MixerComponent
+	 * The mixer List of NgxMixerComponent
 	 */
-	@ContentChildren(MixerComponent, { descendants: false })
-	private mixerList: QueryList<MixerComponent>;
+	@ContentChildren(NgxMixerComponent, { descendants: false })
+	private mixerList: QueryList<NgxMixerComponent>;
 
 	/**
 	 * Creates an instance of animation group component.
@@ -112,7 +112,7 @@ export class AnimationGroupComponent
 	/**
 	 * Animation group of animation group component
 	 */
-	private animationGroup: I3JS.IAnimationObjectGroup = null;
+	private animationGroup: I3JS.AnimationObjectGroup = null;
 
 	/**
 	 * Applys changes
@@ -121,22 +121,22 @@ export class AnimationGroupComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.animationGroup !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getAnimationGroup();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['init'], this.OBJECT_ATTR)) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init'], this.OBJECT_ATTR)) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['mixer']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['mixer']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'mixer':
 						this.unSubscribeReferList('mixerList');
-						if (ThreeUtil.isNotNull(this.mixerList)) {
+						if (NgxThreeUtil.isNotNull(this.mixerList)) {
 							this.mixerList.forEach((mixer) => {
 								mixer.setParent(this.animationGroup);
 							});
@@ -161,7 +161,7 @@ export class AnimationGroupComponent
 	 * Gets animation group
 	 * @returns animation group
 	 */
-	public getAnimationGroup<T extends I3JS.IAnimationObjectGroup>(): T {
+	public getAnimationGroup<T extends I3JS.AnimationObjectGroup>(): T {
 		if (this.animationGroup === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.animationGroup = new N3JS.AnimationObjectGroup();

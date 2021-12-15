@@ -65,6 +65,7 @@ import { VerticalTiltShiftShader } from 'three/examples/jsm/shaders/VerticalTilt
 import { VignetteShader } from 'three/examples/jsm/shaders/VignetteShader';
 import { VolumeRenderShader1 } from 'three/examples/jsm/shaders/VolumeShader';
 import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
+import { IShaderType } from './../../ngx-interface';
 import { AttributesParticles } from './shader.attributes_particles';
 import { AttributeSizeColor } from './shader.attributes_size_color';
 import { AttributeSizeColor1 } from './shader.attributes_size_color1';
@@ -110,24 +111,11 @@ import { UnrealBloomSelective } from './shader.unreal_bloom_selective';
 import { VideoKinect } from './shader.video_kinect';
 import { WireFrame } from './shader.wireframe';
 
-/**
- * ShaderType
- */
-export interface ShaderType {
-	defines?: {
-		[key: string]: any;
-	};
-	uniforms?: {
-		[key: string]: THREE.IUniform;
-	};
-	fragmentShader: string;
-	vertexShader?: string;
-}
 export const ShaderAliasConf: {
 	[key: string]: string;
 } = {};
 export const ShaderConf: {
-	[key: string]: ShaderType | string;
+	[key: string]: IShaderType | string;
 } = {
 	horizontalblurshader: HorizontalBlurShader,
 	horizontalblur: 'horizontalblurshader',
@@ -396,7 +384,7 @@ export const ShaderConf: {
  *
  */
 export class ShaderUtils {
-	public static addShader(key: string, shader: ShaderType, alias?: string[]) {
+	public static addShader(key: string, shader: IShaderType, alias?: string[]) {
 		key = key.toLowerCase();
 		if (alias !== undefined && alias !== null) {
 			alias.forEach((aliasKey) => {
@@ -408,7 +396,7 @@ export class ShaderUtils {
 		ShaderConf[key] = shader;
 	}
 
-	public static getShader(key: string | ShaderType): ShaderType {
+	public static getShader(key: string | IShaderType): IShaderType {
 		if (typeof key === 'string') {
 			const lowKey = key.toLowerCase();
 			if (ShaderConf[lowKey] !== null && ShaderConf[lowKey] !== undefined) {
@@ -436,7 +424,7 @@ export class ShaderUtils {
 			};
 		}
 	}
-	public static getShaderClone(key: string): ShaderType {
+	public static getShaderClone(key: string): IShaderType {
 		const shader = this.getShader(key);
 		return {
 			vertexShader: shader.vertexShader,
@@ -450,7 +438,7 @@ export class ShaderUtils {
 		};
 	}
 
-	public static getFragmentShader(key: string | ShaderType): string {
+	public static getFragmentShader(key: string | IShaderType): string {
 		if (typeof key === 'string' && !/^[a-zA-Z0-9]+$/.test(key)) {
 			return key;
 		} else {
@@ -458,7 +446,7 @@ export class ShaderUtils {
 		}
 	}
 
-	public static getVertexShader(key: string | ShaderType): string {
+	public static getVertexShader(key: string | IShaderType): string {
 		if (typeof key === 'string' && !/^[a-zA-Z0-9]+$/.test(key)) {
 			return key;
 		} else {
@@ -466,7 +454,7 @@ export class ShaderUtils {
 		}
 	}
 
-	public static getUniforms(key: string | ShaderType): {
+	public static getUniforms(key: string | IShaderType): {
 		[key: string]: THREE.IUniform;
 	} {
 		if (key !== undefined && key !== null) {

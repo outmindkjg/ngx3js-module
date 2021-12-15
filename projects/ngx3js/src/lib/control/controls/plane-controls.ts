@@ -36,7 +36,7 @@ export class NgxPlaneControls {
 	/**
 	 * The Target of plane controls
 	 */
-	public target: I3JS.IVector3 = new N3JS.Vector3();
+	public target: I3JS.Vector3 = new N3JS.Vector3();
 
 	/**
 	 * The Enabled of plane controls
@@ -58,7 +58,7 @@ export class NgxPlaneControls {
 	 * @param camera
 	 * @param domElement
 	 */
-	constructor(private camera: I3JS.ICamera, private domElement: HTMLElement) {
+	constructor(private camera: I3JS.Camera, private domElement: HTMLElement) {
 		if (domElement === undefined) {
 			console.warn(
 				'THREE.PlainControls: The second parameter "domElement" is now mandatory.'
@@ -93,7 +93,7 @@ export class NgxPlaneControls {
 	 * @param pageY
 	 * @returns
 	 */
-	public getMouseOnScreen(vector: I3JS.IVector2, pageX: number, pageY: number) {
+	public getMouseOnScreen(vector: I3JS.Vector2, pageX: number, pageY: number) {
 		vector.set(
 			((pageX - this.screen.left) / this.screen.width - 0.5) * 2,
 			(0.5 - (pageY - this.screen.top) / this.screen.height) * 2
@@ -104,12 +104,12 @@ export class NgxPlaneControls {
 	/**
 	 * The Mouse of plane controls
 	 */
-	private mouse: I3JS.IVector2 = new N3JS.Vector2();
+	private mouse: I3JS.Vector2 = new N3JS.Vector2();
 
 	/**
 	 * Camera position of plane controls
 	 */
-	private cameraPosition: I3JS.IVector3 = null;
+	private cameraPosition: I3JS.Vector3 = null;
 
 	/**
 	 * Sets active

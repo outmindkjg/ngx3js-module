@@ -1,86 +1,20 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { NgxBaseComponent } from '../base.component';
 import {
-	BaseComponent,
-	GuiControlParam,
-	RendererEvent,
-	RendererTimer,
-	ThreeColor,
-	ThreeUtil,
 	I3JS,
-	N3JS,
-	ThreeVector,
+	N3JS, NgxThreeUtil
 } from '../interface';
-import { MeshComponent } from '../mesh/mesh.component';
+import { NgxMeshComponent } from '../mesh/mesh.component';
+import {
+	IBackgroundBorder,
+	IChartData, IColorOpacity, IGuiControlParam,
+	IRendererEvent,
+	IRendererTimer,
+	INgxColor,
+	INgxVector
+} from '../ngx-interface';
 
-/**
- * Color opacity
- */
-export interface ColorOpacity {
-	/**
-	 *
-	 */
-	color: ThreeColor;
-	/**
-	 *
-	 */
-	opacity: number;
-}
 
-/**
- * Background border
- */
-export interface BackgroundBorder {
-	/**
-	 *
-	 */
-	backgroundColor: ColorOpacity;
-	/**
-	 *
-	 */
-	borderColor?: ColorOpacity;
-	/**
-	 *
-	 */
-	hoverBackgroundColor?: ColorOpacity;
-	/**
-	 *
-	 */
-	hoverBorderColor?: ColorOpacity;
-}
-
-/**
- * Chart data
- */
-export interface ChartData {
-	datasets: {
-		data: (number | { x: number; y: number; r?: number })[];
-		type?: string;
-		label?: string;
-		backgroundColor?: ThreeColor[] | ThreeColor;
-		borderColor?: ThreeColor[] | ThreeColor;
-		borderWidth?: number;
-		fill?: boolean;
-		hoverBackgroundColor?: ThreeColor[] | ThreeColor;
-		hoverBorderColor?: ThreeColor[] | ThreeColor;
-		hoverBorderDash?: string;
-		hoverBorderCapStyle?: string;
-		hoverBorderDashOffset?: number;
-		hoverBorderJoinStyle?: string;
-		hoverBorderWidth?: number;
-		pointBackgroundColor?: ThreeColor;
-		pointBorderColor?: ThreeColor;
-		pointBorderWidth?: number;
-		pointHoverBackgroundColor?: ThreeColor;
-		pointHoverBorderColor?: ThreeColor;
-		pointHoverRadius?: number;
-		pointRadius?: number;
-		pointStyle?: string;
-		hoverOffset?: number;
-		tension?: number;
-	}[];
-	labels?: string[];
-	options?: any;
-}
 
 /**
  * The Chart component.
@@ -93,7 +27,7 @@ export interface ChartData {
 	templateUrl: './chart.component.html',
 	styleUrls: ['./chart.component.scss'],
 })
-export class ChartComponent extends BaseComponent<any> implements OnChanges {
+export class NgxChartComponent extends NgxBaseComponent<any> implements OnChanges {
 	/**
 	 * The Input of chart component
 	 */
@@ -102,7 +36,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * The Input of chart component
 	 */
-	@Input() guiParams: GuiControlParam[] = null;
+	@Input() guiParams: IGuiControlParam[] = null;
 
 	/**
 	 * The Input of chart component
@@ -112,7 +46,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * The Input of chart component
 	 */
-	@Input() data: ChartData = {
+	@Input() data: IChartData = {
 		labels: ['Data1', 'Data2', 'Data3', 'Data4', 'Data5', 'Data6', 'Data7'],
 		datasets: [
 			{
@@ -307,8 +241,8 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @param [def]
 	 * @returns color opacity
 	 */
-	private getColorOpacity(color: ThreeColor, def?: ThreeColor): ColorOpacity {
-		color = ThreeUtil.getTypeSafe(color, def);
+	private getColorOpacity(color: INgxColor, def?: INgxColor): IColorOpacity {
+		color = NgxThreeUtil.getTypeSafe(color, def);
 		if (typeof color === 'string' && color.indexOf('rgba') === 0) {
 			let [_, val1, val2, val3, alpha] = (color + ',,,,')
 				.replace('(', ',')
@@ -353,11 +287,11 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @returns color opacity list
 	 */
 	private getColorOpacityList(
-		colors: ThreeColor | ThreeColor[],
+		colors: INgxColor | INgxColor[],
 		idxLen: number
-	): ColorOpacity[] {
-		const colorList: ColorOpacity[] = [];
-		if (ThreeUtil.isNotNull(colors)) {
+	): IColorOpacity[] {
+		const colorList: IColorOpacity[] = [];
+		if (NgxThreeUtil.isNotNull(colors)) {
 			if (Array.isArray(colors)) {
 				colors.forEach((color) => {
 					colorList.push(this.getColorOpacity(color));
@@ -404,7 +338,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 				}
 			});
 			data.data = tmpValue;
-			const type = ThreeUtil.getTypeSafe(data.type, this.type, 'bar');
+			const type = NgxThreeUtil.getTypeSafe(data.type, this.type, 'bar');
 			switch (type.toLowerCase()) {
 				case 'bar':
 					barChartXMax = Math.max(barChartXMax, data.data.length);
@@ -481,29 +415,29 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 		let barChartCurrIdx = 0;
 		let lineChartCurrIdx = 0;
 		this.data.datasets.forEach((data, idx) => {
-			const type = ThreeUtil.getTypeSafe(data.type, this.type, 'bar');
+			const type = NgxThreeUtil.getTypeSafe(data.type, this.type, 'bar');
 			switch (type.toLowerCase()) {
 				case 'bar':
 					{
-						const backgroundColor: ColorOpacity[] = this.getColorOpacityList(
+						const backgroundColor: IColorOpacity[] = this.getColorOpacityList(
 							data.backgroundColor,
 							barChartXMax
 						);
-						const borderColor: ColorOpacity[] = this.getColorOpacityList(
+						const borderColor: IColorOpacity[] = this.getColorOpacityList(
 							data.borderColor || data.backgroundColor,
 							barChartXMax
 						);
-						const hoverBackgroundColor: ColorOpacity[] =
+						const hoverBackgroundColor: IColorOpacity[] =
 							this.getColorOpacityList(
 								data.hoverBackgroundColor || data.backgroundColor,
 								barChartXMax
 							);
-						const hoverBorderColor: ColorOpacity[] = this.getColorOpacityList(
+						const hoverBorderColor: IColorOpacity[] = this.getColorOpacityList(
 							data.hoverBorderColor || data.borderColor || data.backgroundColor,
 							barChartXMax
 						);
-						const barColorInfo: BackgroundBorder[] = [];
-						const borderWidth = ThreeUtil.getTypeSafe(data.borderWidth, 1);
+						const barColorInfo: IBackgroundBorder[] = [];
+						const borderWidth = NgxThreeUtil.getTypeSafe(data.borderWidth, 1);
 						backgroundColor.forEach((colorInfo, idx) => {
 							barColorInfo.push({
 								backgroundColor: colorInfo,
@@ -518,7 +452,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 							const z = barChartCurrIdx;
 							const position = this.getLocalPosition(x, y, z);
 							const colorInfo = barColorInfo[idx % barColorInfo.length];
-							const tooltipPosition: I3JS.IVector3 =
+							const tooltipPosition: I3JS.Vector3 =
 								this.getGlobalPosition(position);
 							this.barChart.push({
 								position: { x: position.x, y: 0, z: position.z },
@@ -540,25 +474,25 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 					break;
 				case 'line':
 					{
-						const backgroundColor: ColorOpacity[] = this.getColorOpacityList(
+						const backgroundColor: IColorOpacity[] = this.getColorOpacityList(
 							data.backgroundColor,
 							barChartXMax
 						);
-						const borderColor: ColorOpacity[] = this.getColorOpacityList(
+						const borderColor: IColorOpacity[] = this.getColorOpacityList(
 							data.borderColor || data.backgroundColor,
 							barChartXMax
 						);
-						const hoverBackgroundColor: ColorOpacity[] =
+						const hoverBackgroundColor: IColorOpacity[] =
 							this.getColorOpacityList(
 								data.hoverBackgroundColor || data.backgroundColor,
 								barChartXMax
 							);
-						const hoverBorderColor: ColorOpacity[] = this.getColorOpacityList(
+						const hoverBorderColor: IColorOpacity[] = this.getColorOpacityList(
 							data.hoverBorderColor || data.borderColor || data.backgroundColor,
 							barChartXMax
 						);
-						const lineColorInfo: BackgroundBorder[] = [];
-						const borderWidth = ThreeUtil.getTypeSafe(data.borderWidth, 1);
+						const lineColorInfo: IBackgroundBorder[] = [];
+						const borderWidth = NgxThreeUtil.getTypeSafe(data.borderWidth, 1);
 						backgroundColor.forEach((colorInfo, idx) => {
 							lineColorInfo.push({
 								backgroundColor: colorInfo,
@@ -567,7 +501,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 								hoverBorderColor: hoverBorderColor[idx],
 							});
 						});
-						const lineCurvePath: ThreeVector[] = [];
+						const lineCurvePath: INgxVector[] = [];
 
 						data.data.forEach((value, idx) => {
 							const x = lineChartXMax - idx;
@@ -575,7 +509,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 							const z = lineChartCurrIdx;
 							const position = this.getLocalPosition(x, y, z);
 							const colorInfo = lineColorInfo[idx % lineColorInfo.length];
-							const tooltipPosition: I3JS.IVector3 =
+							const tooltipPosition: I3JS.Vector3 =
 								this.getGlobalPosition(position);
 							lineCurvePath.push(position);
 							this.lineChart.push({
@@ -660,7 +594,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @param value
 	 * @returns tooltip text
 	 */
-	private getGlobalPosition(p: I3JS.IVector3): I3JS.IVector3 {
+	private getGlobalPosition(p: I3JS.Vector3): I3JS.Vector3 {
 		return p.clone().add(this.chartPosition);
 	}
 
@@ -670,7 +604,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @param value
 	 * @returns tooltip text
 	 */
-	private getLocalPosition(x: number, y: number, z: number): I3JS.IVector3 {
+	private getLocalPosition(x: number, y: number, z: number): I3JS.Vector3 {
 		return new N3JS.Vector3(x, y, z)
 			.sub(this.chartZero)
 			.multiply(this.chartScale);
@@ -679,39 +613,39 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * Axis x of chart component
 	 */
-	public chartScale: I3JS.IVector3 = new N3JS.Vector3(1, 1, 1);
+	public chartScale: I3JS.Vector3 = new N3JS.Vector3(1, 1, 1);
 
 	/**
 	 * Axis x of chart component
 	 */
-	public chartZero: I3JS.IVector3 = new N3JS.Vector3(0, 0, 0);
+	public chartZero: I3JS.Vector3 = new N3JS.Vector3(0, 0, 0);
 
 	/**
 	 * Axis x of chart component
 	 */
-	public chartPosition: I3JS.IVector3 = new N3JS.Vector3(0, 0, 0);
+	public chartPosition: I3JS.Vector3 = new N3JS.Vector3(0, 0, 0);
 
 	/**
 	 * Axis x of chart component
 	 */
-	public axisX: ThreeVector = null;
+	public axisX: INgxVector = null;
 
 	/**
 	 * Axis y of chart component
 	 */
-	public axisY: ThreeVector = null;
+	public axisY: INgxVector = null;
 
 	/**
 	 * Axis z of chart component
 	 */
-	public axisZ: ThreeVector = null;
+	public axisZ: INgxVector = null;
 
 	/**
 	 * Gride info of chart component
 	 */
 	public grideInfo: {
-		color1: ThreeColor;
-		color2: ThreeColor;
+		color1: INgxColor;
+		color2: INgxColor;
 		offset: number;
 		widthSegments: number;
 		heightSegments: number;
@@ -721,24 +655,24 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * Bar chart of chart component
 	 */
 	public barChart: {
-		position: ThreeVector;
-		scale: ThreeVector;
+		position: INgxVector;
+		scale: INgxVector;
 		userData: any;
-		color: ColorOpacity;
+		color: IColorOpacity;
 		borderWidth: number;
-		borderColor: ColorOpacity;
+		borderColor: IColorOpacity;
 	}[] = null;
 
 	/**
 	 * Line chart of chart component
 	 */
 	public lineChart: {
-		position: ThreeVector;
-		scale: ThreeVector;
+		position: INgxVector;
+		scale: INgxVector;
 		userData: any;
-		color: ColorOpacity;
+		color: IColorOpacity;
 		borderWidth: number;
-		borderColor: ColorOpacity;
+		borderColor: IColorOpacity;
 	}[] = null;
 
 	/**
@@ -760,17 +694,17 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * Line curve path of chart component
 	 */
-	public lineCurvePath: ThreeVector[][] = [];
+	public lineCurvePath: INgxVector[][] = [];
 
 	/**
 	 * Y label of chart component
 	 */
-	public yLabel: { position: ThreeVector; text: string }[] = null;
+	public yLabel: { position: INgxVector; text: string }[] = null;
 
 	/**
 	 * X label of chart component
 	 */
-	public xLabel: { position: ThreeVector; text: string }[] = null;
+	public xLabel: { position: INgxVector; text: string }[] = null;
 
 	/**
 	 * Elapsed time of chart component
@@ -780,31 +714,31 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	/**
 	 * The Tooltip of chart component
 	 */
-	tooltip: I3JS.ICSS2DObject = null;
+	tooltip: I3JS.CSS2DObject = null;
 
 	/**
 	 * Tooltip position of chart component
 	 */
-	tooltipPosition: I3JS.IVector3 = null;
+	tooltipPosition: I3JS.Vector3 = null;
 
 	/**
 	 * Sets tool tip
 	 * @param mesh
 	 */
-	public setToolTip(mesh: MeshComponent) {
+	public setToolTip(mesh: NgxMeshComponent) {
 		this.tooltip = mesh.getMesh() as any;
 	}
 
 	/**
 	 * Last intersect of chart component
 	 */
-	lastIntersect: I3JS.IMesh = null;
+	lastIntersect: I3JS.Mesh = null;
 
 	/**
 	 * Determines whether mouse move on
 	 * @param event
 	 */
-	public onMouseMove(event: RendererEvent) {
+	public onMouseMove(event: IRendererEvent) {
 		if (
 			this.camera !== null &&
 			this.mesh !== null &&
@@ -818,13 +752,13 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 			if (intersect !== null && intersect.object !== null) {
 				if (
 					this.lastIntersect !== intersect.object &&
-					ThreeUtil.isNotNull(intersect.object.userData.type)
+					NgxThreeUtil.isNotNull(intersect.object.userData.type)
 				) {
 					if (this.lastIntersect !== null) {
 						this.setMaterialColor(this.lastIntersect, false);
 						this.lastIntersect = null;
 					}
-					this.lastIntersect = intersect.object as I3JS.IMesh;
+					this.lastIntersect = intersect.object as I3JS.Mesh;
 					this.setMaterialColor(this.lastIntersect, true);
 				}
 			} else if (this.lastIntersect !== null) {
@@ -840,29 +774,29 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * @param isHover
 	 * @returns material color
 	 */
-	private setMaterialColor(mesh: I3JS.IMesh, isHover: boolean): void {
-		const material: I3JS.IMeshLambertMaterial =
-			mesh.material as I3JS.IMeshLambertMaterial;
-		const colorInfo: BackgroundBorder = mesh.userData.colorInfo;
-		if (ThreeUtil.isNull(colorInfo)) {
+	private setMaterialColor(mesh: I3JS.Mesh, isHover: boolean): void {
+		const material: I3JS.MeshLambertMaterial =
+			mesh.material as I3JS.MeshLambertMaterial;
+		const colorInfo: IBackgroundBorder = mesh.userData.colorInfo;
+		if (NgxThreeUtil.isNull(colorInfo)) {
 			return;
 		}
-		const backgroundColor: ColorOpacity = isHover
+		const backgroundColor: IColorOpacity = isHover
 			? colorInfo.hoverBackgroundColor
 			: colorInfo.backgroundColor;
-		if (ThreeUtil.isNotNull(material) && ThreeUtil.isNotNull(backgroundColor)) {
-			material.color = ThreeUtil.getColorSafe(backgroundColor.color);
-			material.opacity = ThreeUtil.getTypeSafe(backgroundColor.opacity, 1);
-			const borderColor: ColorOpacity = isHover
+		if (NgxThreeUtil.isNotNull(material) && NgxThreeUtil.isNotNull(backgroundColor)) {
+			material.color = NgxThreeUtil.getColorSafe(backgroundColor.color);
+			material.opacity = NgxThreeUtil.getTypeSafe(backgroundColor.opacity, 1);
+			const borderColor: IColorOpacity = isHover
 				? colorInfo.hoverBorderColor
 				: colorInfo.borderColor;
-			if (ThreeUtil.isNotNull(borderColor) && mesh.children.length > 0) {
+			if (NgxThreeUtil.isNotNull(borderColor) && mesh.children.length > 0) {
 				const child = mesh.children[0];
 				if (child instanceof N3JS.LineSegments) {
-					const childMaterial: I3JS.ILineBasicMaterial =
-						child.material as I3JS.ILineBasicMaterial;
-					childMaterial.color = ThreeUtil.getColorSafe(borderColor.color);
-					childMaterial.opacity = ThreeUtil.getTypeSafe(borderColor.opacity, 1);
+					const childMaterial: I3JS.LineBasicMaterial =
+						child.material as I3JS.LineBasicMaterial;
+					childMaterial.color = NgxThreeUtil.getColorSafe(borderColor.color);
+					childMaterial.opacity = NgxThreeUtil.getTypeSafe(borderColor.opacity, 1);
 				}
 			}
 			if (this.tooltip !== null) {
@@ -882,7 +816,7 @@ export class ChartComponent extends BaseComponent<any> implements OnChanges {
 	 * Determines whether render on
 	 * @param timer
 	 */
-	public onRender(timer: RendererTimer) {
+	public onRender(timer: IRendererTimer) {
 		super.onRender(timer);
 		if (this.elapsedTime !== null && this.elapsedTime < 1) {
 			this.elapsedTime = Math.min(1, this.elapsedTime + timer.delta / 10);

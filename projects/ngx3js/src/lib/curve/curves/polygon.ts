@@ -1,4 +1,5 @@
-import { ThreeUtil, CurvesParameters, I3JS, N3JS } from '../../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
+import { ICurvesParameters } from '../../ngx-interface';
 
 /**
  * Curves polygon
@@ -45,7 +46,7 @@ export class CurvesPolygon extends N3JS.Curve {
 	/**
 	 * The Points of curves polygon
 	 */
-	public points: I3JS.IVector3[] = [];
+	public points: I3JS.Vector3[] = [];
 
 	/**
 	 * Creates an instance of curves polygon.
@@ -54,28 +55,28 @@ export class CurvesPolygon extends N3JS.Curve {
 	 * @param [options]
 	 */
 	constructor(
-		points: I3JS.IVector3[] = [],
+		points: I3JS.Vector3[] = [],
 		radius: number = 1,
-		options?: CurvesParameters
+		options?: ICurvesParameters
 	) {
 		super();
 		this.points = points;
-		this.radius = ThreeUtil.isNotNull(radius) ? radius : 1;
-		this.radiusInner = ThreeUtil.isNotNull(options.radiusInner)
+		this.radius = NgxThreeUtil.isNotNull(radius) ? radius : 1;
+		this.radiusInner = NgxThreeUtil.isNotNull(options.radiusInner)
 			? options.radiusInner
 			: -0.2;
-		this.waveH = ThreeUtil.isNotNull(options.waveH) ? options.waveH : 0;
-		this.waveR = ThreeUtil.isNotNull(options.waveR) ? options.waveR : 0;
-		this.rateX = ThreeUtil.isNotNull(options.rateX) ? options.rateX : 1;
-		this.rateY = ThreeUtil.isNotNull(options.rateY) ? options.rateY : 1;
-		this.rateZ = ThreeUtil.isNotNull(options.rateZ) ? options.rateZ : 1;
+		this.waveH = NgxThreeUtil.isNotNull(options.waveH) ? options.waveH : 0;
+		this.waveR = NgxThreeUtil.isNotNull(options.waveR) ? options.waveR : 0;
+		this.rateX = NgxThreeUtil.isNotNull(options.rateX) ? options.rateX : 1;
+		this.rateY = NgxThreeUtil.isNotNull(options.rateY) ? options.rateY : 1;
+		this.rateZ = NgxThreeUtil.isNotNull(options.rateZ) ? options.rateZ : 1;
 		this._rateV = new N3JS.Vector3(this.rateX, this.rateY, this.rateZ);
 	}
 
 	/**
 	 * Rate v of curves polygon
 	 */
-	private _rateV: I3JS.IVector3 = null;
+	private _rateV: I3JS.Vector3 = null;
 
 	/**
 	 * Clears points
@@ -88,7 +89,7 @@ export class CurvesPolygon extends N3JS.Curve {
 	 * Adds point
 	 * @param p
 	 */
-	public addPoint(p: I3JS.IVector3) {
+	public addPoint(p: I3JS.Vector3) {
 		this.points.push(p);
 	}
 
@@ -98,7 +99,7 @@ export class CurvesPolygon extends N3JS.Curve {
 	 * @param optionalTarget
 	 * @returns
 	 */
-	public getPoint(t: number, optionalTarget: I3JS.IVector3) {
+	public getPoint(t: number, optionalTarget: I3JS.Vector3) {
 		const point = optionalTarget || new N3JS.Vector3();
 		const len = this.points.length;
 		if (len >= 2) {
@@ -147,7 +148,7 @@ export class CurvesRegularPolygon extends CurvesPolygon {
 	constructor(
 		vertex: number = 3,
 		radius: number = 1,
-		options: CurvesParameters = {}
+		options: ICurvesParameters = {}
 	) {
 		super([], radius, options);
 		this.setVertex(vertex);
@@ -174,7 +175,7 @@ export class CurvesRegularPolygon extends CurvesPolygon {
  *
  */
 export class CurvesRegularPolygonTriangle extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(3, radius, options || {});
 	}
 }
@@ -187,7 +188,7 @@ export class CurvesRegularPolygonTriangle extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonSquare extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(4, radius, options || {});
 	}
 }
@@ -200,7 +201,7 @@ export class CurvesRegularPolygonSquare extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonPentagon extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(5, radius, options || {});
 	}
 }
@@ -213,7 +214,7 @@ export class CurvesRegularPolygonPentagon extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonHexagon extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(6, radius, options || {});
 	}
 }
@@ -226,7 +227,7 @@ export class CurvesRegularPolygonHexagon extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonHeptagon extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(7, radius, options || {});
 	}
 }
@@ -239,7 +240,7 @@ export class CurvesRegularPolygonHeptagon extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonOctagon extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(8, radius, options || {});
 	}
 }
@@ -252,7 +253,7 @@ export class CurvesRegularPolygonOctagon extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonNonagon extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(9, radius, options || {});
 	}
 }
@@ -265,7 +266,7 @@ export class CurvesRegularPolygonNonagon extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonDecagon extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(10, radius, options || {});
 	}
 }
@@ -278,7 +279,7 @@ export class CurvesRegularPolygonDecagon extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonUndecagon extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(11, radius, options || {});
 	}
 }
@@ -291,7 +292,7 @@ export class CurvesRegularPolygonUndecagon extends CurvesRegularPolygon {
  *
  */
 export class CurvesRegularPolygonDodecagon extends CurvesRegularPolygon {
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super(12, radius, options || {});
 	}
 }

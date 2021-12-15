@@ -24,7 +24,7 @@ export class CurvesRollerCoaster extends N3JS.Curve {
 	 * @param optionalTarget
 	 * @returns
 	 */
-	public getPoint(t: number, optionalTarget: I3JS.IVector3) {
+	public getPoint(t: number, optionalTarget: I3JS.Vector3) {
 		const point = optionalTarget || new N3JS.Vector3();
 		t = t * Math.PI * 2;
 		const x = Math.sin(t * 3) * Math.cos(t * 4) * 50;

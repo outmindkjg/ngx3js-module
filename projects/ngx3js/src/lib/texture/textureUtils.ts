@@ -1,30 +1,13 @@
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
-import { ThreeUtil, N3JS, I3JS } from '../interface';
-
-/**
- * CanvasFunctionType
- */
-export type CanvasFunctionType = (
-	ctx?: CanvasRenderingContext2D,
-	text?: string,
-	width?: number,
-	height?: number,
-	options?: any
-) => void;
-
-/**
- * DataFunctionType
- */
-export type DataFunctionType = (
-	options?: any
-) => I3JS.IDataTexture | I3JS.IDataTexture3D;
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { TCanvasFunctionType, TDataFunctionType } from '../ngx-interface';
 
 function calc(v: number, scale: number): number {
 	return v * scale;
 }
 
 const CanvasConf: {
-	[key: string]: CanvasFunctionType;
+	[key: string]: TCanvasFunctionType;
 } = {};
 
 CanvasConf.pacman = (
@@ -395,7 +378,7 @@ CanvasConf.test4 = (
 	const s = TextureUtils.scale(width, height, 16, 16);
 };
 
-export const DataTextureConf: { [key: string]: DataFunctionType } = {};
+export const DataTextureConf: { [key: string]: TDataFunctionType } = {};
 DataTextureConf.cloud = (options: any) => {
 	const size = options?.size || options?.width || options?.height || 128;
 	const data = new Uint8Array(size * size * size);
@@ -509,7 +492,7 @@ export class TextureUtils {
 		h: number,
 		ow: number,
 		oh: number
-	): I3JS.IVector2 {
+	): I3JS.Vector2 {
 		return new N3JS.Vector2(w / ow, h / oh);
 	}
 
@@ -518,7 +501,7 @@ export class TextureUtils {
 	 * @param key
 	 * @param canvas
 	 */
-	public static addCanvas(key: string, canvas: CanvasFunctionType) {
+	public static addCanvas(key: string, canvas: TCanvasFunctionType) {
 		CanvasConf[key.toLowerCase()] = canvas;
 	}
 
@@ -528,12 +511,12 @@ export class TextureUtils {
 	 * @returns canvas
 	 */
 	public static getCanvas(
-		key: string | CanvasFunctionType
-	): CanvasFunctionType {
+		key: string | TCanvasFunctionType
+	): TCanvasFunctionType {
 		if (key === null || key === undefined) {
 			return () => {};
 		} else if (typeof key === 'string') {
-			if (ThreeUtil.isNotNull(CanvasConf[key.toLowerCase()])) {
+			if (NgxThreeUtil.isNotNull(CanvasConf[key.toLowerCase()])) {
 				return CanvasConf[key.toLowerCase()];
 			} else {
 				console.error('unknown canvas :' + key);
@@ -549,7 +532,7 @@ export class TextureUtils {
 	 * @param key
 	 * @param data
 	 */
-	public static addDataTexture(key: string, data: DataFunctionType) {
+	public static addDataTexture(key: string, data: TDataFunctionType) {
 		DataTextureConf[key.toLowerCase()] = data;
 	}
 
@@ -559,12 +542,12 @@ export class TextureUtils {
 	 * @returns data texture
 	 */
 	public static getDataTexture(
-		key: string | DataFunctionType
-	): DataFunctionType {
+		key: string | TDataFunctionType
+	): TDataFunctionType {
 		if (key === null || key === undefined) {
 			return null;
 		} else if (typeof key === 'string') {
-			if (ThreeUtil.isNotNull(DataTextureConf[key.toLowerCase()])) {
+			if (NgxThreeUtil.isNotNull(DataTextureConf[key.toLowerCase()])) {
 				return DataTextureConf[key.toLowerCase()];
 			} else {
 				console.error('unknown datatexture :' + key);
@@ -585,7 +568,7 @@ export class TextureUtils {
 	 * @param [programParam]
 	 */
 	public static drawCanvas(
-		program: string | CanvasFunctionType,
+		program: string | TCanvasFunctionType,
 		ctx?: CanvasRenderingContext2D,
 		text?: string,
 		width?: number,
@@ -607,7 +590,7 @@ export class TextureUtils {
 		value: any,
 		onload?: () => void,
 		options?: any
-	): I3JS.IDataTexture | I3JS.IDataTexture3D {
+	): I3JS.DataTexture | I3JS.DataTexture3D {
 		const dataProgram = this.getDataTexture(value);
 		const texture = dataProgram(options);
 		window.setTimeout(() => {

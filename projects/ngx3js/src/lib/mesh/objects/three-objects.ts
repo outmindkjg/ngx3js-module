@@ -1,5 +1,6 @@
 import { HTMLMesh } from 'three/examples/jsm/interactive/HTMLMesh';
-import { I3JS, MaterialParameters, N3JS, ThreeUtil } from '../../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
+import { IMaterialParameters } from '../../ngx-interface';
 
 /**
  * HTMLMesh mesh
@@ -13,33 +14,33 @@ export class NgxHTMLMesh extends HTMLMesh {
 	 * Creates an instance of ngx htmlmesh.
 	 * @param dom
 	 */
-	constructor(dom: HTMLElement, options?: MaterialParameters) {
+	constructor(dom: HTMLElement, options?: IMaterialParameters) {
 		super(dom);
 		if (options !== null && options !== undefined) {
 			const material = this.material as any;
-			if (ThreeUtil.isNotNull(options.fog)) {
-				material.fog = ThreeUtil.getBooleanSafe(options.fog, true);
+			if (NgxThreeUtil.isNotNull(options.fog)) {
+				material.fog = NgxThreeUtil.getBooleanSafe(options.fog, true);
 			}
-			if (ThreeUtil.isNotNull(options.side)) {
-				material.side = ThreeUtil.getSideSafe(options.side, 'front');
+			if (NgxThreeUtil.isNotNull(options.side)) {
+				material.side = NgxThreeUtil.getSideSafe(options.side, 'front');
 			}
-			if (ThreeUtil.isNotNull(options.opacity)) {
-				material.opacity = ThreeUtil.getNumberSafe(options.opacity, 1);
+			if (NgxThreeUtil.isNotNull(options.opacity)) {
+				material.opacity = NgxThreeUtil.getNumberSafe(options.opacity, 1);
 			}
-			if (ThreeUtil.isNotNull(options.shadowSide)) {
-				material.shadowSide = ThreeUtil.getSideSafe(options.shadowSide, null);
+			if (NgxThreeUtil.isNotNull(options.shadowSide)) {
+				material.shadowSide = NgxThreeUtil.getSideSafe(options.shadowSide, null);
 			}
-			if (ThreeUtil.isNotNull(options.toneMapped)) {
-				material.toneMapped = ThreeUtil.getBooleanSafe(options.toneMapped, true);
+			if (NgxThreeUtil.isNotNull(options.toneMapped)) {
+				material.toneMapped = NgxThreeUtil.getBooleanSafe(options.toneMapped, true);
 			}
-			if (ThreeUtil.isNotNull(options.transparent)) {
-				material.transparent = ThreeUtil.getBooleanSafe(options.transparent, false);
+			if (NgxThreeUtil.isNotNull(options.transparent)) {
+				material.transparent = NgxThreeUtil.getBooleanSafe(options.transparent, false);
 			}
-			if (ThreeUtil.isNotNull(options.vertexColors)) {
-				material.vertexColors = ThreeUtil.getBooleanSafe(options.transparent, false);
+			if (NgxThreeUtil.isNotNull(options.vertexColors)) {
+				material.vertexColors = NgxThreeUtil.getBooleanSafe(options.transparent, false);
 			}
-			if (ThreeUtil.isNotNull(options.visible)) {
-				material.visible = ThreeUtil.getBooleanSafe(options.visible, true);
+			if (NgxThreeUtil.isNotNull(options.visible)) {
+				material.visible = NgxThreeUtil.getBooleanSafe(options.visible, true);
 			}
 		}
 	}
@@ -63,9 +64,9 @@ export class NgxMeshText extends N3JS.Mesh {
 	constructor(
 		public message: string,
 		public height: number = 20,
-		public fontColor: I3JS.TColorRepresentation = 0xffffff,
+		public fontColor: I3JS.ColorRepresentation = 0xffffff,
 		public fontFamily: string = 'Arial',
-		public side: I3JS.TSide = N3JS.DoubleSide
+		public side: I3JS.Side = N3JS.DoubleSide
 	) {
 		super(new N3JS.BufferGeometry(), new N3JS.Material());
 		this.redraw();
@@ -91,7 +92,7 @@ export class NgxMeshText extends N3JS.Mesh {
 		const texture = new N3JS.Texture(canvas);
 		texture.needsUpdate = true;
 		this.material = new N3JS.MeshBasicMaterial({
-			color: ThreeUtil.getColorSafe(this.fontColor, 0xffffff) as any,
+			color: NgxThreeUtil.getColorSafe(this.fontColor, 0xffffff) as any,
 			side: this.side,
 			map: texture,
 			transparent: true,

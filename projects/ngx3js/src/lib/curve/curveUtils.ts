@@ -1,20 +1,15 @@
-import * as Curves from './curves/curves';
-import { RendererTimer, ThreeUtil, N3JS, I3JS } from '../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { ICurveClass, ICurvesNormalParameters, IRendererTimer } from '../ngx-interface';
 import { CurvesCircle } from './curves/circle';
+import * as Curves from './curves/curves';
 import * as GSAP from './curves/gsap';
 import { CurvesLine } from './curves/line';
 import * as POLYGON from './curves/polygon';
 import { CurvesRollerCoaster } from './curves/rollercoaster';
 
-/**
- * Curve class
- */
-export interface CurveClass {
-	new (scale?: number, options?: any): I3JS.ICurve<I3JS.IVector3>;
-}
 
 export const CurveConf: {
-	[key: string]: CurveClass | string;
+	[key: string]: ICurveClass | string;
 } = {
 	grannyknotcurve: Curves.CurvesGrannyKnot as any,
 	grannyknot: 'grannyknotcurve',
@@ -186,9 +181,9 @@ export class CurveUtils {
 	 * @param curve
 	 * @param [alias]
 	 */
-	public static addCurve(key: string, curve: CurveClass, alias?: string[]) {
+	public static addCurve(key: string, curve: ICurveClass, alias?: string[]) {
 		key = key.toLowerCase();
-		if (ThreeUtil.isNotNull(alias)) {
+		if (NgxThreeUtil.isNotNull(alias)) {
 			alias.forEach((aliasKey) => {
 				if (aliasKey !== null && aliasKey.length > 3) {
 					CurveConf[aliasKey.toLowerCase()] = key;
@@ -203,9 +198,9 @@ export class CurveUtils {
 	 * @param key
 	 * @returns curve class
 	 */
-	public static getCurveClass(key: string): CurveClass {
+	public static getCurveClass(key: string): ICurveClass {
 		key = key.toLowerCase();
-		if (ThreeUtil.isNotNull(CurveConf[key])) {
+		if (NgxThreeUtil.isNotNull(CurveConf[key])) {
 			const curve = CurveConf[key.toLowerCase()];
 			if (typeof curve === 'string') {
 				return this.getCurveClass(curve);
@@ -229,7 +224,7 @@ export class CurveUtils {
 		key: string,
 		scale?: number,
 		options?: any
-	): I3JS.ICurve<I3JS.IVector3> {
+	): I3JS.Curve<I3JS.Vector3> {
 		const curve = this.getCurveClass(key);
 		return new curve(scale, options);
 	}
@@ -242,8 +237,8 @@ export class CurveUtils {
 	 * @returns curve normal
 	 */
 	public static getCurveNormal(
-		key: string | I3JS.ICurve<I3JS.IVector3>,
-		normalOption?: CurvesNormalParameters,
+		key: string | I3JS.Curve<I3JS.Vector3>,
+		normalOption?: ICurvesNormalParameters,
 		option?: any
 	): CurvesNormal {
 		if (key instanceof N3JS.Curve) {
@@ -257,17 +252,6 @@ export class CurveUtils {
 }
 
 /**
- * Curves normal parameters
- */
-export interface CurvesNormalParameters {
-	scale?: I3JS.IVector3;
-	rotation?: I3JS.IEuler;
-	center?: I3JS.IVector3;
-	multiply?: number;
-	options?: string;
-}
-
-/**
  * Curves normal
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesNormal) page for details.
@@ -278,17 +262,17 @@ export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * The Scale of curves normal
 	 */
-	private scale: I3JS.IVector3 = null;
+	private scale: I3JS.Vector3 = null;
 
 	/**
 	 * The Rotation of curves normal
 	 */
-	private rotation: I3JS.IEuler = null;
+	private rotation: I3JS.Euler = null;
 
 	/**
 	 * The Center of curves normal
 	 */
-	private center: I3JS.IVector3 = null;
+	private center: I3JS.Vector3 = null;
 
 	/**
 	 * The Multiply of curves normal
@@ -301,24 +285,24 @@ export class CurvesNormal extends N3JS.Curve {
 	 * @param parameters
 	 */
 	constructor(
-		curve: I3JS.ICurve<I3JS.IVector3>,
-		parameters: CurvesNormalParameters
+		curve: I3JS.Curve<I3JS.Vector3>,
+		parameters: ICurvesNormalParameters
 	) {
 		super();
 		parameters = parameters || {};
-		if (ThreeUtil.isNotNull(parameters.rotation)) {
+		if (NgxThreeUtil.isNotNull(parameters.rotation)) {
 			this.rotation = parameters.rotation;
 		}
-		if (ThreeUtil.isNotNull(parameters.scale)) {
+		if (NgxThreeUtil.isNotNull(parameters.scale)) {
 			this.scale = parameters.scale;
 		}
-		if (ThreeUtil.isNotNull(parameters.center)) {
+		if (NgxThreeUtil.isNotNull(parameters.center)) {
 			this.center = parameters.center;
 		}
-		if (ThreeUtil.isNotNull(parameters.multiply)) {
+		if (NgxThreeUtil.isNotNull(parameters.multiply)) {
 			this.multiply = parameters.multiply;
 		}
-		if (ThreeUtil.isNull(this.multiply) || this.multiply === 1) {
+		if (NgxThreeUtil.isNull(this.multiply) || this.multiply === 1) {
 			this.multiply = null;
 		}
 		this.setOptions(parameters.options);
@@ -328,14 +312,14 @@ export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * The Curve of curves normal
 	 */
-	public curve: I3JS.ICurve<I3JS.IVector3> = null;
+	public curve: I3JS.Curve<I3JS.Vector3> = null;
 
 	/**
 	 * Sets options
 	 * @param options
 	 */
 	public setOptions(options: string) {
-		if (ThreeUtil.isNotNull(options)) {
+		if (NgxThreeUtil.isNotNull(options)) {
 			options.split(',').forEach((option) => {
 				switch (option.toLowerCase()) {
 					case 'absx':
@@ -365,7 +349,7 @@ export class CurvesNormal extends N3JS.Curve {
 	 * Sets curve
 	 * @param curve
 	 */
-	public setCurve(curve: I3JS.ICurve<I3JS.IVector3>) {
+	public setCurve(curve: I3JS.Curve<I3JS.Vector3>) {
 		let minX = +Infinity;
 		let minY = +Infinity;
 		let minZ = +Infinity;
@@ -397,12 +381,12 @@ export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * The Center of curves normal
 	 */
-	private _center: I3JS.IVector3 = null;
+	private _center: I3JS.Vector3 = null;
 
 	/**
 	 * The Scale of curves normal
 	 */
-	private _scale: I3JS.IVector3 = null;
+	private _scale: I3JS.Vector3 = null;
 
 	/**
 	 * Abs x of curves normal
@@ -430,7 +414,7 @@ export class CurvesNormal extends N3JS.Curve {
 	 * @param [optionalTarget]
 	 * @returns point
 	 */
-	public getPoint(t: number, optionalTarget?: I3JS.IVector3): I3JS.IVector3 {
+	public getPoint(t: number, optionalTarget?: I3JS.Vector3): I3JS.Vector3 {
 		optionalTarget = this.curve.getPoint(t, optionalTarget);
 		optionalTarget.sub(this._center);
 		if (this._scale !== null) {
@@ -454,7 +438,7 @@ export class CurvesNormal extends N3JS.Curve {
 		if (this._absZ) {
 			optionalTarget.z = Math.abs(optionalTarget.z);
 		}
-		if (ThreeUtil.isNotNull(this.center)) {
+		if (NgxThreeUtil.isNotNull(this.center)) {
 			optionalTarget.add(this.center);
 		}
 		return optionalTarget;
@@ -465,7 +449,7 @@ export class CurvesNormal extends N3JS.Curve {
 	 * @param timer
 	 * @returns elapsed time
 	 */
-	private getElapsedTime(timer: RendererTimer): number {
+	private getElapsedTime(timer: IRendererTimer): number {
 		let t: number = timer.elapsedTime;
 		switch (this._repeatType.toLowerCase()) {
 			case 'yoyo':
@@ -487,12 +471,12 @@ export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * Last v3 of curves normal
 	 */
-	private _lastV3: I3JS.IVector3 = null;
+	private _lastV3: I3JS.Vector3 = null;
 
 	/**
 	 * Refer center of curves normal
 	 */
-	public referCenter: I3JS.IVector3 = null;
+	public referCenter: I3JS.Vector3 = null;
 
 	/**
 	 * Gets point v3
@@ -500,7 +484,7 @@ export class CurvesNormal extends N3JS.Curve {
 	 * @param p
 	 * @returns point v3
 	 */
-	public getPointV3(timer: RendererTimer, p: I3JS.IVector3): I3JS.IVector3 {
+	public getPointV3(timer: IRendererTimer, p: I3JS.Vector3): I3JS.Vector3 {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastV3 === null) {
 			this._lastV3 = new N3JS.Vector3(cp.x, cp.y, cp.z);
@@ -517,7 +501,7 @@ export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * Last v2 of curves normal
 	 */
-	private _lastV2: I3JS.IVector2 = null;
+	private _lastV2: I3JS.Vector2 = null;
 
 	/**
 	 * Gets point v2
@@ -525,7 +509,7 @@ export class CurvesNormal extends N3JS.Curve {
 	 * @param p
 	 * @returns point v2
 	 */
-	public getPointV2(timer: RendererTimer, p: I3JS.IVector2): I3JS.IVector2 {
+	public getPointV2(timer: IRendererTimer, p: I3JS.Vector2): I3JS.Vector2 {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastV2 === null) {
 			this._lastV2 = new N3JS.Vector2(cp.x, cp.y);
@@ -539,7 +523,7 @@ export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * Last euler of curves normal
 	 */
-	private _lastEuler: I3JS.IEuler = null;
+	private _lastEuler: I3JS.Euler = null;
 
 	/**
 	 * Gets point euler
@@ -547,7 +531,7 @@ export class CurvesNormal extends N3JS.Curve {
 	 * @param p
 	 * @returns point euler
 	 */
-	public getPointEuler(timer: RendererTimer, p: I3JS.IEuler): I3JS.IEuler {
+	public getPointEuler(timer: IRendererTimer, p: I3JS.Euler): I3JS.Euler {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		if (this._lastEuler === null) {
 			this._lastEuler = new N3JS.Euler(cp.x, cp.y, cp.z);
@@ -561,7 +545,7 @@ export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * Last color of curves normal
 	 */
-	private _lastColor: I3JS.IColor = null;
+	private _lastColor: I3JS.Color = null;
 
 	/**
 	 * Gets point color
@@ -569,7 +553,7 @@ export class CurvesNormal extends N3JS.Curve {
 	 * @param p
 	 * @returns point color
 	 */
-	public getPointColor(timer: RendererTimer, p: I3JS.IColor): I3JS.IColor {
+	public getPointColor(timer: IRendererTimer, p: I3JS.Color): I3JS.Color {
 		const cp = this.getPoint(this.getElapsedTime(timer));
 		cp.clampScalar(0, 1);
 		if (this._lastColor === null) {
@@ -584,7 +568,7 @@ export class CurvesNormal extends N3JS.Curve {
 	/**
 	 * Last float of curves normal
 	 */
-	private _lastFloat: I3JS.IVector3 = null;
+	private _lastFloat: I3JS.Vector3 = null;
 
 	/**
 	 * Gets point float
@@ -594,7 +578,7 @@ export class CurvesNormal extends N3JS.Curve {
 	 * @returns point float
 	 */
 	public getPointFloat(
-		timer: RendererTimer,
+		timer: IRendererTimer,
 		min: number = 0,
 		max: number = 1
 	): number {

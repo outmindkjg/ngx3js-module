@@ -1,26 +1,24 @@
-import { forwardRef } from '@angular/core';
 import {
 	Component,
-	ContentChildren,
-	Input,
+	ContentChildren, forwardRef, Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { AbstractControllerComponent } from '../controller.component.abstract';
-import { FogComponent } from '../fog/fog.component';
-import { ThreeColor, ThreeTexture, ThreeUtil } from '../interface';
-import { AbstractObject3dComponent } from '../object3d.abstract';
-import { PhysicsComponent } from '../physics/physics.component';
-import { RendererComponent } from '../renderer/renderer.component';
-import { AbstractTextureComponent } from '../texture.abstract';
-import { TextureComponent } from '../texture/texture.component';
-import { ViewerComponent } from '../viewer/viewer.component';
-import { RendererTimer, N3JS, I3JS } from './../interface';
-import { LocalStorageService } from './../local-storage.service';
-import { MixerComponent } from './../mixer/mixer.component';
-import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
+import { NgxAbstractControllerComponent } from '../controller.component.abstract';
+import { NgxFogComponent } from '../fog/fog.component';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxPhysicsComponent } from '../physics/physics.component';
+import { NgxRendererComponent } from '../renderer/renderer.component';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractTextureComponent } from '../texture.abstract';
+import { NgxTextureComponent } from '../texture/texture.component';
+import { NgxViewerComponent } from '../viewer/viewer.component';
+import { NgxLocalStorageService } from './../local-storage.service';
+import { NgxMixerComponent } from './../mixer/mixer.component';
+import { IRendererTimer, INgxColor, INgxTexture } from './../ngx-interface';
+import { NgxRigidbodyComponent } from './../rigidbody/rigidbody.component';
 
 /**
  * The Scene component.
@@ -35,17 +33,17 @@ import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
 	styleUrls: ['./scene.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => SceneComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxSceneComponent),
 		},
 		{
-			provide: AbstractSubscribeComponent,
-			useExisting: forwardRef(() => SceneComponent),
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxSceneComponent),
 		},
 	],
 })
-export class SceneComponent
-	extends AbstractObject3dComponent
+export class NgxSceneComponent
+	extends NgxAbstractObject3dComponent
 	implements OnInit
 {
 	/**
@@ -57,61 +55,61 @@ export class SceneComponent
 	 * If not null, sets the background used when rendering the scene, and is always rendered first.
 	 * Can be set to a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color) which sets the clear color, a [Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture) covering the canvas, a cubemap as a [CubeTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/CubeTexture) or an equirectangular as a [Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture) . Default is null.
 	 */
-	@Input() public background: ThreeTexture | ThreeColor = null;
+	@Input() public background: INgxTexture | INgxColor = null;
 
 	/**
 	 * If not null, this texture is set as the environment map for all physical materials in the scene.
 	 * However, it's not possible to overwrite an existing texture assigned to [MeshStandardMaterial.envMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshStandardMaterial.envMap). Default is null.
 	 */
-	@Input() public environment: ThreeTexture = null;
+	@Input() public environment: INgxTexture = null;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(PhysicsComponent, { descendants: false })
-	private physicsList: QueryList<PhysicsComponent>;
+	@ContentChildren(NgxPhysicsComponent, { descendants: false })
+	private physicsList: QueryList<NgxPhysicsComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(RigidbodyComponent, { descendants: true })
-	private sceneRigidbodyList: QueryList<RigidbodyComponent>;
+	@ContentChildren(NgxRigidbodyComponent, { descendants: true })
+	private sceneRigidbodyList: QueryList<NgxRigidbodyComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(FogComponent, { descendants: false })
-	private fogList: QueryList<FogComponent>;
+	@ContentChildren(NgxFogComponent, { descendants: false })
+	private fogList: QueryList<NgxFogComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(AbstractControllerComponent, { descendants: true })
-	private sceneControllerList: QueryList<AbstractControllerComponent>;
+	@ContentChildren(NgxAbstractControllerComponent, { descendants: true })
+	private sceneControllerList: QueryList<NgxAbstractControllerComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(MixerComponent, { descendants: true })
-	private sceneMixerList: QueryList<MixerComponent>;
+	@ContentChildren(NgxMixerComponent, { descendants: true })
+	private sceneMixerList: QueryList<NgxMixerComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(ViewerComponent, { descendants: true })
-	private viewerList: QueryList<ViewerComponent>;
+	@ContentChildren(NgxViewerComponent, { descendants: true })
+	private viewerList: QueryList<NgxViewerComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(TextureComponent, { descendants: false })
-	private textureList: QueryList<TextureComponent>;
+	@ContentChildren(NgxTextureComponent, { descendants: false })
+	private textureList: QueryList<NgxTextureComponent>;
 
 	/**
 	 * Creates an instance of scene component.
 	 * @param localStorageService
 	 */
-	constructor(private localStorageService: LocalStorageService) {
+	constructor(private localStorageService: NgxLocalStorageService) {
 		super();
 	}
 
@@ -174,18 +172,18 @@ export class SceneComponent
 	/**
 	 * The Scene of scene component
 	 */
-	private scene: I3JS.IScene = null;
+	private scene: I3JS.Scene = null;
 
 	/**
 	 * The Renderer of scene component
 	 */
-	private renderer: RendererComponent = null;
+	private renderer: NgxRendererComponent = null;
 
 	/**
 	 * Sets renderer
 	 * @param renderer
 	 */
-	public setRenderer(renderer: RendererComponent) {
+	public setRenderer(renderer: NgxRendererComponent) {
 		this.renderer = renderer;
 	}
 
@@ -193,7 +191,7 @@ export class SceneComponent
 	 * Gets renderer
 	 * @returns renderer
 	 */
-	public getRenderer(): RendererComponent {
+	public getRenderer(): NgxRendererComponent {
 		return this.renderer;
 	}
 
@@ -201,11 +199,11 @@ export class SceneComponent
 	 * Gets three renderer
 	 * @returns three renderer
 	 */
-	public getThreeRenderer(): I3JS.IRenderer {
-		if (ThreeUtil.isNotNull(this.renderer)) {
+	public getThreeRenderer(): I3JS.Renderer {
+		if (NgxThreeUtil.isNotNull(this.renderer)) {
 			return this.renderer.getRenderer();
 		} else {
-			return ThreeUtil.getRenderer();
+			return NgxThreeUtil.getRenderer();
 		}
 	}
 
@@ -214,7 +212,7 @@ export class SceneComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends I3JS.IObject3D>(): T {
+	public getObject3d<T extends I3JS.Object3D>(): T {
 		return this.getScene() as any;
 	}
 
@@ -250,7 +248,7 @@ export class SceneComponent
 	/**
 	 * The Physics of scene component
 	 */
-	private _physics: PhysicsComponent = null;
+	private _physics: NgxPhysicsComponent = null;
 
 	/**
 	 * Gets texture option
@@ -258,10 +256,10 @@ export class SceneComponent
 	 * @param name
 	 * @returns texture option
 	 */
-	private getTextureOption(map: ThreeTexture, name: string): I3JS.ITexture {
-		if (ThreeUtil.isNotNull(map)) {
+	private getTextureOption(map: INgxTexture, name: string): I3JS.Texture {
+		if (NgxThreeUtil.isNotNull(map)) {
 			if (typeof map === 'string') {
-				const texture = AbstractTextureComponent.getTextureImageOption(
+				const texture = NgxAbstractTextureComponent.getTextureImageOption(
 					map,
 					null,
 					'texture',
@@ -271,8 +269,8 @@ export class SceneComponent
 					}
 				);
 				return texture;
-			} else if (ThreeUtil.isNotNull(map['value'])) {
-				const texture = AbstractTextureComponent.getTextureImageOption(
+			} else if (NgxThreeUtil.isNotNull(map['value'])) {
+				const texture = NgxAbstractTextureComponent.getTextureImageOption(
 					map['value'],
 					map['options'],
 					map['type'] as string,
@@ -284,10 +282,10 @@ export class SceneComponent
 				return texture;
 			} else {
 				this.unSubscribeRefer(name);
-				const texture = ThreeUtil.getTexture(map, name);
+				const texture = NgxThreeUtil.getTexture(map, name);
 				this.subscribeRefer(
 					name,
-					ThreeUtil.getSubscribe(
+					NgxThreeUtil.getSubscribe(
 						map,
 						() => {
 							this.addChanges(name);
@@ -301,7 +299,7 @@ export class SceneComponent
 		return null;
 	}
 
-	private _cachedTextureList: AbstractTextureComponent[] = [];
+	private _cachedTextureList: NgxAbstractTextureComponent[] = [];
 
 	/**
 	 * Applys changes3d
@@ -309,8 +307,8 @@ export class SceneComponent
 	 */
 	public applyChanges3d(changes: string[]) {
 		if (this.scene !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'material',
 					'background',
 					'environment',
@@ -324,14 +322,14 @@ export class SceneComponent
 					'scenecontroller',
 				]);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['background', 'environment'])) {
-				changes = ThreeUtil.pushUniq(changes, ['texture']);
+			if (NgxThreeUtil.isIndexOf(changes, ['background', 'environment'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['texture']);
 			}
 			changes.forEach((change) => {
 				switch (change) {
 					case 'viewer':
 						this.unSubscribeReferList('viewerList');
-						if (ThreeUtil.isNotNull(this.viewerList)) {
+						if (NgxThreeUtil.isNotNull(this.viewerList)) {
 							this.viewerList.forEach((viewer) => {
 								viewer.setParent(this.scene);
 							});
@@ -345,8 +343,8 @@ export class SceneComponent
 						this.unSubscribeReferList('rigidbodyList');
 						this.unSubscribeReferList('mixerList');
 						if (
-							ThreeUtil.isNotNull(this.sceneRigidbodyList) &&
-							ThreeUtil.isNotNull(this.physicsList) &&
+							NgxThreeUtil.isNotNull(this.sceneRigidbodyList) &&
+							NgxThreeUtil.isNotNull(this.physicsList) &&
 							this.physicsList.length > 0
 						) {
 							this._physics = this.physicsList.first;
@@ -365,8 +363,8 @@ export class SceneComponent
 							);
 						}
 						if (
-							ThreeUtil.isNotNull(this._physics) &&
-							ThreeUtil.isNotNull(this.sceneMixerList)
+							NgxThreeUtil.isNotNull(this._physics) &&
+							NgxThreeUtil.isNotNull(this.sceneMixerList)
 						) {
 							this.sceneMixerList.forEach((mixer) => {
 								mixer.setPhysics(this._physics);
@@ -380,7 +378,7 @@ export class SceneComponent
 						break;
 					case 'fog':
 						this.unSubscribeReferList('fogList');
-						if (ThreeUtil.isNotNull(this.fogList)) {
+						if (NgxThreeUtil.isNotNull(this.fogList)) {
 							this.fogList.forEach((fog) => {
 								fog.setScene(this.scene);
 							});
@@ -390,7 +388,7 @@ export class SceneComponent
 					case 'controller':
 					case 'scenecontroller':
 						this.unSubscribeReferList('sceneControllerList');
-						if (ThreeUtil.isNotNull(this.sceneControllerList)) {
+						if (NgxThreeUtil.isNotNull(this.sceneControllerList)) {
 							this.sceneControllerList.forEach((controller) => {
 								controller.setScene(this.scene);
 							});
@@ -407,17 +405,17 @@ export class SceneComponent
 					case 'texture':
 						const newTextureList: {
 							type: string;
-							component: AbstractTextureComponent;
+							component: NgxAbstractTextureComponent;
 						}[] = [];
-						let backgroundTexture: AbstractTextureComponent = null;
-						let environmentTexture: AbstractTextureComponent = null;
-						if (ThreeUtil.isNotNull(this.background)) {
-							if (ThreeUtil.isColor(this.background)) {
-								this.scene.background = ThreeUtil.getColorSafe(
+						let backgroundTexture: NgxAbstractTextureComponent = null;
+						let environmentTexture: NgxAbstractTextureComponent = null;
+						if (NgxThreeUtil.isNotNull(this.background)) {
+							if (NgxThreeUtil.isColor(this.background)) {
+								this.scene.background = NgxThreeUtil.getColorSafe(
 									this.background,
 									0x000000
 								);
-							} else if (this.background instanceof AbstractTextureComponent) {
+							} else if (this.background instanceof NgxAbstractTextureComponent) {
 								backgroundTexture = this.background;
 							} else {
 								this.scene.background = this.getTextureOption(
@@ -426,8 +424,8 @@ export class SceneComponent
 								);
 							}
 						}
-						if (ThreeUtil.isNotNull(this.environment)) {
-							if (this.environment instanceof AbstractTextureComponent) {
+						if (NgxThreeUtil.isNotNull(this.environment)) {
+							if (this.environment instanceof NgxAbstractTextureComponent) {
 								environmentTexture = this.environment;
 							} else {
 								this.scene.environment = this.getTextureOption(
@@ -457,7 +455,7 @@ export class SceneComponent
 								}
 							}
 						}
-						if (ThreeUtil.isNotNull(this.textureList)) {
+						if (NgxThreeUtil.isNotNull(this.textureList)) {
 							this.textureList.forEach((texture) => {
 								newTextureList.push({
 									type: 'auto',
@@ -465,7 +463,7 @@ export class SceneComponent
 								});
 							});
 						}
-						const cachedTextureList: AbstractTextureComponent[] = [];
+						const cachedTextureList: NgxAbstractTextureComponent[] = [];
 						newTextureList.forEach((texture) => {
 							cachedTextureList.push(texture.component);
 						});
@@ -491,7 +489,7 @@ export class SceneComponent
 	 * Updates scene component
 	 * @param timer
 	 */
-	public update(timer: RendererTimer) {
+	public update(timer: IRendererTimer) {
 		this.viewerList.forEach((viewer) => {
 			viewer.update(timer);
 		});
@@ -515,17 +513,17 @@ export class SceneComponent
 	 * Gets scene
 	 * @returns scene
 	 */
-	public getScene(): I3JS.IScene {
+	public getScene(): I3JS.Scene {
 		if (this.scene === null || this._needUpdate) {
 			this.getSceneDumpy();
 		}
 		if (!this._sceneSynked) {
 			this._sceneSynked = true;
-			if (ThreeUtil.isNotNull(this.storageName)) {
+			if (NgxThreeUtil.isNotNull(this.storageName)) {
 				this.scene = new N3JS.Scene();
 				this.localStorageService.getScene(
 					this.storageName,
-					(scene: I3JS.IScene) => {
+					(scene: I3JS.Scene) => {
 						this.scene = scene;
 						this.setObject3d(scene as any);
 					}
@@ -541,7 +539,7 @@ export class SceneComponent
 	 * Gets scene dumpy
 	 * @returns scene dumpy
 	 */
-	public getSceneDumpy(): I3JS.IScene {
+	public getSceneDumpy(): I3JS.Scene {
 		if (this.scene === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.scene = new N3JS.Scene();

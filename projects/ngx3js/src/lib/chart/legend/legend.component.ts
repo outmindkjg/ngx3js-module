@@ -5,8 +5,8 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractChartComponent } from '../../chart.abstract';
-import { AbstractObject3dComponent } from '../../object3d.abstract';
+import { NgxAbstractChartComponent } from '../../chart.abstract';
+import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
  * The Chart Legend component.
@@ -20,13 +20,13 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	styleUrls: ['./legend.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ChartLegendComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxChartLegendComponent),
 		},
 	],
 })
-export class ChartLegendComponent
-	extends AbstractChartComponent
+export class NgxChartLegendComponent
+	extends NgxAbstractChartComponent
 	implements OnInit
 {
 	/**

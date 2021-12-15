@@ -1,18 +1,12 @@
-import {
-	Component,
-	ContentChildren,
-	Input,
-	OnInit,
-	QueryList,
-	SimpleChanges,
-} from '@angular/core';
-import { ThreeColor, ThreeUtil, N3JS, I3JS } from '../interface';
-import { MeshComponent } from '../mesh/mesh.component';
-import { ShaderComponent } from '../shader/shader.component';
+import { Component, ContentChildren, Input, OnInit, QueryList, SimpleChanges } from '@angular/core';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { NgxMeshComponent } from '../mesh/mesh.component';
+import { INgxColor } from '../ngx-interface';
+import { NgxShaderComponent } from '../shader/shader.component';
 import { ShaderUtils } from '../shader/shaders/shaderUtils';
-import { SizeComponent } from '../size/size.component';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { TextureComponent } from '../texture/texture.component';
+import { NgxSizeComponent } from '../size/size.component';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxTextureComponent } from '../texture/texture.component';
 
 /**
  * The Pass component.
@@ -143,10 +137,7 @@ import { TextureComponent } from '../texture/texture.component';
 	templateUrl: './pass.component.html',
 	styleUrls: ['./pass.component.scss'],
 })
-export class PassComponent
-	extends AbstractSubscribeComponent
-	implements OnInit
-{
+export class NgxPassComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
 	 * The Input of pass component
 	 *
@@ -156,7 +147,7 @@ export class PassComponent
 	/**
 	 * The refer of pass component
 	 */
-	@Input() public refer: PassComponent = null;
+	@Input() public refer: NgxPassComponent = null;
 
 	/**
 	 * The needsSwap of pass component
@@ -216,7 +207,7 @@ export class PassComponent
 	/**
 	 * The params of pass component
 	 */
-	@Input() public params: I3JS.IBokehPassParamters = null;
+	@Input() public params: I3JS.BokehPassParamters = null;
 
 	/**
 	 * The intensity of pass component
@@ -226,7 +217,7 @@ export class PassComponent
 	/**
 	 * The clearColor of pass component
 	 */
-	@Input() public clearColor: ThreeColor = null;
+	@Input() public clearColor: INgxColor = null;
 
 	/**
 	 * The clearAlpha of pass component
@@ -236,7 +227,7 @@ export class PassComponent
 	/**
 	 * The envMap of pass component
 	 */
-	@Input() public envMap: I3JS.ICubeTexture | TextureComponent = null;
+	@Input() public envMap: I3JS.CubeTexture | NgxTextureComponent = null;
 
 	/**
 	 * The opacity of pass component
@@ -315,7 +306,7 @@ export class PassComponent
 	/**
 	 * The size of pass component
 	 */
-	@Input() public size: I3JS.IVector2 | SizeComponent = null;
+	@Input() public size: I3JS.Vector2 | NgxSizeComponent = null;
 
 	/**
 	 * [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) is the default.
@@ -340,7 +331,7 @@ export class PassComponent
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
 	 */
-	@Input() public selects: I3JS.IMesh[] = null;
+	@Input() public selects: I3JS.Mesh[] = null;
 
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
@@ -350,17 +341,17 @@ export class PassComponent
 	/**
 	 * The selectedObjects of pass component
 	 */
-	@Input() public selectedObjects: (I3JS.IObject3D | any)[] = null;
+	@Input() public selectedObjects: (I3JS.Object3D | any)[] = null;
 
 	/**
 	 * The overrideMaterial of pass component
 	 */
-	@Input() public overrideMaterial: I3JS.IMaterial = null;
+	@Input() public overrideMaterial: I3JS.Material = null;
 
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
 	 */
-	@Input() public mesh: I3JS.IMesh | MeshComponent | any = null;
+	@Input() public mesh: I3JS.Mesh | NgxMeshComponent | any = null;
 
 	/**
 	 * The depthTexture of pass component
@@ -375,7 +366,7 @@ export class PassComponent
 	/**
 	 * The renderTarget of pass component
 	 */
-	@Input() public renderTarget: I3JS.IWebGLRenderTarget = null;
+	@Input() public renderTarget: I3JS.WebGLRenderTarget = null;
 
 	/**
 	 * The Input of pass component
@@ -401,17 +392,17 @@ export class PassComponent
 	/**
 	 * The map of pass component
 	 */
-	@Input() public map: I3JS.ITexture | TextureComponent | any = null;
+	@Input() public map: I3JS.Texture | NgxTextureComponent | any = null;
 
 	/**
 	 * The texture of pass component
 	 */
-	@Input() public texture: I3JS.ITexture | TextureComponent = null;
+	@Input() public texture: I3JS.Texture | NgxTextureComponent = null;
 
 	/**
 	 * The patternTexture of pass component
 	 */
-	@Input() public patternTexture: I3JS.ITexture | TextureComponent = null;
+	@Input() public patternTexture: I3JS.Texture | NgxTextureComponent = null;
 
 	/**
 	 * The radius of pass component
@@ -489,12 +480,12 @@ export class PassComponent
 	/**
 	 * The visibleEdgeColor of pass component
 	 */
-	@Input() public visibleEdgeColor: ThreeColor = null;
+	@Input() public visibleEdgeColor: INgxColor = null;
 
 	/**
 	 * The hiddenEdgeColor of pass component
 	 */
-	@Input() public hiddenEdgeColor: ThreeColor = null;
+	@Input() public hiddenEdgeColor: INgxColor = null;
 
 	/**
 	 * The edgeGlow of pass component
@@ -612,8 +603,8 @@ export class PassComponent
 	/**
 	 * Content children of pass component
 	 */
-	@ContentChildren(ShaderComponent)
-	private shaderList: QueryList<ShaderComponent>;
+	@ContentChildren(NgxShaderComponent)
+	private shaderList: QueryList<NgxShaderComponent>;
 
 	/**
 	 * Creates an instance of pass component.
@@ -668,18 +659,15 @@ export class PassComponent
 	/**
 	 * Lut cube loader of pass component
 	 */
-	private lutCubeLoader: I3JS.ILUTCubeLoader = null;
+	private lutCubeLoader: I3JS.LUTCubeLoader = null;
 
 	/**
 	 * Gets lut
 	 * @param callBack
 	 * @param [def]
 	 */
-	private getLut(
-		callBack: (result: I3JS.ILUTCubeResult) => void,
-		def?: string
-	): void {
-		const lut = ThreeUtil.getTypeSafe(this.lut, def, 'remy24');
+	private getLut(callBack: (result: I3JS.LUTCubeResult) => void, def?: string): void {
+		const lut = NgxThreeUtil.getTypeSafe(this.lut, def, 'remy24');
 		let lutPath = '';
 		switch (lut.toLowerCase()) {
 			case 'bourbon 64.cube':
@@ -707,14 +695,11 @@ export class PassComponent
 				break;
 		}
 		if (this.lutCubeLoader === null) {
-			this.lutCubeLoader = new N3JS.LUTCubeLoader(ThreeUtil.getLoadingManager());
+			this.lutCubeLoader = new N3JS.LUTCubeLoader(NgxThreeUtil.getLoadingManager());
 		}
-		this.lutCubeLoader.load(
-			ThreeUtil.getStoreUrl(lutPath),
-			(result: I3JS.ILUTCubeResult) => {
-				callBack(result);
-			}
-		);
+		this.lutCubeLoader.load(NgxThreeUtil.getStoreUrl(lutPath), (result: I3JS.LUTCubeResult) => {
+			callBack(result);
+		});
 	}
 
 	/**
@@ -723,7 +708,7 @@ export class PassComponent
 	 * @returns true if enabled
 	 */
 	private getEnabled(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.enabled, def);
+		return NgxThreeUtil.getTypeSafe(this.enabled, def);
 	}
 
 	/**
@@ -732,7 +717,7 @@ export class PassComponent
 	 * @returns true if needs swap
 	 */
 	private getNeedsSwap(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.needsSwap, def);
+		return NgxThreeUtil.getTypeSafe(this.needsSwap, def);
 	}
 
 	/**
@@ -741,7 +726,7 @@ export class PassComponent
 	 * @returns true if clear
 	 */
 	private getClear(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.clear, def);
+		return NgxThreeUtil.getTypeSafe(this.clear, def);
 	}
 
 	/**
@@ -750,7 +735,7 @@ export class PassComponent
 	 * @returns true if render to screen
 	 */
 	private getRenderToScreen(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.renderToScreen, def);
+		return NgxThreeUtil.getTypeSafe(this.renderToScreen, def);
 	}
 
 	/**
@@ -759,7 +744,7 @@ export class PassComponent
 	 * @returns true if adaptive
 	 */
 	private getAdaptive(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.adaptive, def);
+		return NgxThreeUtil.getTypeSafe(this.adaptive, def);
 	}
 
 	/**
@@ -768,7 +753,7 @@ export class PassComponent
 	 * @returns resolution
 	 */
 	private getResolution(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.resolution, def);
+		return NgxThreeUtil.getTypeSafe(this.resolution, def);
 	}
 
 	/**
@@ -777,7 +762,7 @@ export class PassComponent
 	 * @returns damp
 	 */
 	private getDamp(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.damp, def);
+		return NgxThreeUtil.getTypeSafe(this.damp, def);
 	}
 
 	/**
@@ -786,7 +771,7 @@ export class PassComponent
 	 * @returns strength
 	 */
 	private getStrength(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.strength, def);
+		return NgxThreeUtil.getTypeSafe(this.strength, def);
 	}
 
 	/**
@@ -795,7 +780,7 @@ export class PassComponent
 	 * @returns kernel size
 	 */
 	private getKernelSize(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.kernelSize, def);
+		return NgxThreeUtil.getTypeSafe(this.kernelSize, def);
 	}
 
 	/**
@@ -804,7 +789,7 @@ export class PassComponent
 	 * @returns sigma
 	 */
 	private getSigma(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.sigma, def);
+		return NgxThreeUtil.getTypeSafe(this.sigma, def);
 	}
 
 	/**
@@ -812,9 +797,9 @@ export class PassComponent
 	 * @param [def]
 	 * @returns scene
 	 */
-	private getScene(def?: any): I3JS.IScene {
-		const scene = ThreeUtil.getTypeSafe(this.scene, def);
-		if (ThreeUtil.isNotNull(scene)) {
+	private getScene(def?: any): I3JS.Scene {
+		const scene = NgxThreeUtil.getTypeSafe(this.scene, def);
+		if (NgxThreeUtil.isNotNull(scene)) {
 			if (scene instanceof N3JS.Scene) {
 				return scene;
 			} else {
@@ -830,9 +815,9 @@ export class PassComponent
 	 * @param [def]
 	 * @returns camera
 	 */
-	private getCamera(def?: any): I3JS.ICamera {
-		const camera = ThreeUtil.getTypeSafe(this.camera, def);
-		if (ThreeUtil.isNotNull(camera)) {
+	private getCamera(def?: any): I3JS.Camera {
+		const camera = NgxThreeUtil.getTypeSafe(this.camera, def);
+		if (NgxThreeUtil.isNotNull(camera)) {
 			if (camera instanceof N3JS.Camera) {
 				return camera;
 			} else {
@@ -848,10 +833,8 @@ export class PassComponent
 	 * @param [def]
 	 * @returns params
 	 */
-	private getParams(
-		def?: I3JS.IBokehPassParamters
-	): I3JS.IBokehPassParamters {
-		return ThreeUtil.getTypeSafe(this.params, def);
+	private getParams(def?: I3JS.BokehPassParamters): I3JS.BokehPassParamters {
+		return NgxThreeUtil.getTypeSafe(this.params, def);
 	}
 
 	/**
@@ -860,7 +843,7 @@ export class PassComponent
 	 * @returns intensity
 	 */
 	private getIntensity(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.intensity, def);
+		return NgxThreeUtil.getTypeSafe(this.intensity, def);
 	}
 
 	/**
@@ -868,8 +851,8 @@ export class PassComponent
 	 * @param [def]
 	 * @returns clear color
 	 */
-	private getClearColor(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.clearColor, def);
+	private getClearColor(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.clearColor, def);
 	}
 
 	/**
@@ -878,7 +861,7 @@ export class PassComponent
 	 * @returns clear alpha
 	 */
 	private getClearAlpha(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.clearAlpha, def);
+		return NgxThreeUtil.getTypeSafe(this.clearAlpha, def);
 	}
 
 	/**
@@ -886,7 +869,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns env map
 	 */
-	private getEnvMap(def?: I3JS.ICubeTexture): I3JS.ICubeTexture {
+	private getEnvMap(def?: I3JS.CubeTexture): I3JS.CubeTexture {
 		const cubeTexture = this.getTexture(this.envMap, def);
 		if (cubeTexture instanceof N3JS.CubeTexture) {
 			return cubeTexture;
@@ -899,7 +882,7 @@ export class PassComponent
 	 * @param [def]
 	 * @returns pattern texture
 	 */
-	private getPatternTexture(def?: I3JS.ITexture): I3JS.ITexture {
+	private getPatternTexture(def?: I3JS.Texture): I3JS.Texture {
 		return this.getTexture(this.patternTexture, def);
 	}
 
@@ -910,17 +893,13 @@ export class PassComponent
 	 * @returns texture
 	 */
 	private getTexture(
-		baseTexture: I3JS.ITexture | TextureComponent | any,
-		def?: I3JS.ITexture | TextureComponent | any
-	): I3JS.ITexture {
-		const texture = ThreeUtil.getTypeSafe(
-			baseTexture,
-			ThreeUtil.getTypeSafe(this.texture, this.map, def),
-			def
-		);
+		baseTexture: I3JS.Texture | NgxTextureComponent | any,
+		def?: I3JS.Texture | NgxTextureComponent | any
+	): I3JS.Texture {
+		const texture = NgxThreeUtil.getTypeSafe(baseTexture, NgxThreeUtil.getTypeSafe(this.texture, this.map, def), def);
 		if (texture instanceof N3JS.Texture) {
 			return texture;
-		} else if (texture instanceof TextureComponent) {
+		} else if (texture instanceof NgxTextureComponent) {
 			return texture.getTexture();
 		}
 		return undefined;
@@ -932,7 +911,7 @@ export class PassComponent
 	 * @returns opacity
 	 */
 	private getOpacity(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.opacity, def);
+		return NgxThreeUtil.getTypeSafe(this.opacity, def);
 	}
 
 	/**
@@ -940,8 +919,8 @@ export class PassComponent
 	 * @param [def]
 	 * @returns center
 	 */
-	private getCenter(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(this.centerX, this.centerY, def);
+	private getCenter(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(this.centerX, this.centerY, def);
 	}
 
 	/**
@@ -950,7 +929,7 @@ export class PassComponent
 	 * @returns angle
 	 */
 	private getAngle(def?: number): number {
-		return ThreeUtil.getAngleSafe(this.angle, def);
+		return NgxThreeUtil.getAngleSafe(this.angle, def);
 	}
 
 	/**
@@ -959,7 +938,7 @@ export class PassComponent
 	 * @returns scale
 	 */
 	private getScale(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.scale, def);
+		return NgxThreeUtil.getTypeSafe(this.scale, def);
 	}
 
 	/**
@@ -968,7 +947,7 @@ export class PassComponent
 	 * @returns noise intensity
 	 */
 	private getNoiseIntensity(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.noiseIntensity, def);
+		return NgxThreeUtil.getTypeSafe(this.noiseIntensity, def);
 	}
 
 	/**
@@ -977,7 +956,7 @@ export class PassComponent
 	 * @returns scanlines intensity
 	 */
 	private getScanlinesIntensity(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.scanlinesIntensity, def);
+		return NgxThreeUtil.getTypeSafe(this.scanlinesIntensity, def);
 	}
 
 	/**
@@ -986,7 +965,7 @@ export class PassComponent
 	 * @returns scanlines count
 	 */
 	private getScanlinesCount(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.scanlinesCount, def);
+		return NgxThreeUtil.getTypeSafe(this.scanlinesCount, def);
 	}
 
 	/**
@@ -995,7 +974,7 @@ export class PassComponent
 	 * @returns grayscale
 	 */
 	private getGrayscale(def?: boolean): number {
-		if (ThreeUtil.getTypeSafe(this.grayscale, def)) {
+		if (NgxThreeUtil.getTypeSafe(this.grayscale, def)) {
 			return 1;
 		} else {
 			return 0;
@@ -1008,7 +987,7 @@ export class PassComponent
 	 * @returns dt size
 	 */
 	private getDtSize(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.dtSize, def);
+		return NgxThreeUtil.getTypeSafe(this.dtSize, def);
 	}
 
 	/**
@@ -1016,17 +995,17 @@ export class PassComponent
 	 * @param [def]
 	 * @returns height
 	 */
-	private getSize(width?: number, height?: number): I3JS.IVector2 {
-		if (ThreeUtil.isNotNull(this.size)) {
+	private getSize(width?: number, height?: number): I3JS.Vector2 {
+		if (NgxThreeUtil.isNotNull(this.size)) {
 			if (this.size instanceof N3JS.Vector2) {
 				return this.size;
-			} else if (this.size instanceof SizeComponent) {
+			} else if (this.size instanceof NgxSizeComponent) {
 				return this.size.getSize();
 			}
 		}
-		return ThreeUtil.getVector2Safe(
-			ThreeUtil.getTypeSafe(this.width, width, 1024),
-			ThreeUtil.getTypeSafe(this.height, height, 1024),
+		return NgxThreeUtil.getVector2Safe(
+			NgxThreeUtil.getTypeSafe(this.width, width, 1024),
+			NgxThreeUtil.getTypeSafe(this.height, height, 1024),
 			null,
 			null,
 			true
@@ -1038,9 +1017,9 @@ export class PassComponent
 	 * @param [def]
 	 * @returns selected objects
 	 */
-	private getSelectedObjects(def?: I3JS.IObject3D[]): I3JS.IObject3D[] {
-		const selectedObjects = ThreeUtil.getTypeSafe(this.selectedObjects, def);
-		const safeObject3d: I3JS.IObject3D[] = [];
+	private getSelectedObjects(def?: I3JS.Object3D[]): I3JS.Object3D[] {
+		const selectedObjects = NgxThreeUtil.getTypeSafe(this.selectedObjects, def);
+		const safeObject3d: I3JS.Object3D[] = [];
 		selectedObjects.forEach((child) => {
 			if (child instanceof N3JS.Object3D) {
 				safeObject3d.push(child);
@@ -1060,8 +1039,8 @@ export class PassComponent
 	 * @param [def]
 	 * @returns override material
 	 */
-	private getOverrideMaterial(def?: I3JS.IMaterial): I3JS.IMaterial {
-		return ThreeUtil.getTypeSafe(this.overrideMaterial, def);
+	private getOverrideMaterial(def?: I3JS.Material): I3JS.Material {
+		return NgxThreeUtil.getTypeSafe(this.overrideMaterial, def);
 	}
 
 	/**
@@ -1070,7 +1049,7 @@ export class PassComponent
 	 * @returns true if depth texture
 	 */
 	private getDepthTexture(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.depthTexture, def);
+		return NgxThreeUtil.getTypeSafe(this.depthTexture, def);
 	}
 
 	/**
@@ -1079,7 +1058,7 @@ export class PassComponent
 	 * @returns true if use normals
 	 */
 	private getUseNormals(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.useNormals, def);
+		return NgxThreeUtil.getTypeSafe(this.useNormals, def);
 	}
 
 	/**
@@ -1088,7 +1067,7 @@ export class PassComponent
 	 * @returns sao output
 	 */
 	private getSaoOutput(def?: string): number {
-		const output = ThreeUtil.getTypeSafe(this.output, def, '');
+		const output = NgxThreeUtil.getTypeSafe(this.output, def, '');
 		switch (output.toLowerCase()) {
 			case 'beauty':
 				return 1;
@@ -1110,7 +1089,7 @@ export class PassComponent
 	 * @returns ssao output
 	 */
 	private getSsaoOutput(def?: string): number {
-		const output = ThreeUtil.getTypeSafe(this.output, def, '');
+		const output = NgxThreeUtil.getTypeSafe(this.output, def, '');
 		switch (output.toLowerCase()) {
 			case 'ssao':
 				return 1;
@@ -1133,10 +1112,8 @@ export class PassComponent
 	 * @param [def]
 	 * @returns render target
 	 */
-	private getRenderTarget(
-		def?: I3JS.IWebGLRenderTarget
-	): I3JS.IWebGLRenderTarget {
-		return ThreeUtil.getTypeSafe(this.renderTarget, def);
+	private getRenderTarget(def?: I3JS.WebGLRenderTarget): I3JS.WebGLRenderTarget {
+		return NgxThreeUtil.getTypeSafe(this.renderTarget, def);
 	}
 
 	/**
@@ -1149,7 +1126,7 @@ export class PassComponent
 		vertexShader?: any;
 		fragmentShader?: any;
 	} {
-		const shader = ThreeUtil.getTypeSafe(this.shader, def, '');
+		const shader = NgxThreeUtil.getTypeSafe(this.shader, def, '');
 		let shaderUniforms: {
 			uniforms?: any;
 			vertexShader?: any;
@@ -1158,18 +1135,16 @@ export class PassComponent
 		switch (shader.toLowerCase()) {
 			case 'shadermaterial':
 			case 'material':
-				const shaderMaterialParameters: I3JS.IShaderMaterialParameters = {
+				const shaderMaterialParameters: I3JS.ShaderMaterialParameters = {
 					vertexShader: this.getMaterialShader('x-shader/x-vertex'),
 					fragmentShader: this.getMaterialShader('x-shader/x-fragment'),
-					uniforms: this.getUniforms(
-						ShaderUtils.getUniforms(this.materialShader)
-					),
+					uniforms: this.getUniforms(ShaderUtils.getUniforms(this.materialShader)),
 				};
 				shaderUniforms = new N3JS.ShaderMaterial(shaderMaterialParameters);
 				break;
 			default:
 				shaderUniforms = ShaderUtils.getShaderClone(shader);
-				if (ThreeUtil.isNotNull(shaderUniforms.uniforms)) {
+				if (NgxThreeUtil.isNotNull(shaderUniforms.uniforms)) {
 					this.getUniforms(shaderUniforms.uniforms);
 				}
 				break;
@@ -1190,13 +1165,9 @@ export class PassComponent
 	} {
 		const uniforms: {
 			[key: string]: any;
-		} = ThreeUtil.getTypeSafe(this.uniforms, {});
+		} = NgxThreeUtil.getTypeSafe(this.uniforms, {});
 		Object.entries(uniforms).forEach(([key, value]) => {
-			if (
-				ThreeUtil.isNotNull(value) &&
-				ThreeUtil.isNotNull(value['type']) &&
-				ThreeUtil.isNotNull(value['value'])
-			) {
+			if (NgxThreeUtil.isNotNull(value) && NgxThreeUtil.isNotNull(value['type']) && NgxThreeUtil.isNotNull(value['value'])) {
 				const valueType: string = value['type'];
 				const valueValue: any = value['value'];
 				switch (valueType.toLowerCase()) {
@@ -1205,20 +1176,17 @@ export class PassComponent
 					case 'matrixworldinverse':
 					case 'matrixworld':
 					case 'matrix':
-						if (ThreeUtil.isNotNull(valueValue.getObject3d)) {
+						if (NgxThreeUtil.isNotNull(valueValue.getObject3d)) {
 							this.unSubscribeRefer('unforms_' + key);
-							const object3d: I3JS.IObject3D = valueValue.getObject3d();
+							const object3d: I3JS.Object3D = valueValue.getObject3d();
 							resultUniforms[key] = {
-								value: ThreeUtil.getMatrix4Safe(object3d, valueType),
+								value: NgxThreeUtil.getMatrix4Safe(object3d, valueType),
 							};
-							if (ThreeUtil.isNotNull(valueValue.getSubscribe)) {
+							if (NgxThreeUtil.isNotNull(valueValue.getSubscribe)) {
 								this.subscribeRefer(
 									'unforms_' + key,
 									valueValue.getSubscribe().subscribe((e: any) => {
-										resultUniforms[key].value = ThreeUtil.getMatrix4Safe(
-											e,
-											valueType
-										);
+										resultUniforms[key].value = NgxThreeUtil.getMatrix4Safe(e, valueType);
 									})
 								);
 							}
@@ -1230,12 +1198,12 @@ export class PassComponent
 						break;
 					case 'vector2':
 					case 'v2':
-						if (ThreeUtil.isNotNull(valueValue.getSize)) {
+						if (NgxThreeUtil.isNotNull(valueValue.getSize)) {
 							this.unSubscribeRefer('unforms_' + key);
 							resultUniforms[key] = {
 								value: valueValue.getSize(),
 							};
-							if (ThreeUtil.isNotNull(valueValue.sizeSubscribe)) {
+							if (NgxThreeUtil.isNotNull(valueValue.sizeSubscribe)) {
 								this.subscribeRefer(
 									'unforms_' + key,
 									valueValue.sizeSubscribe().subscribe((e: any) => {
@@ -1245,11 +1213,7 @@ export class PassComponent
 							}
 						} else {
 							resultUniforms[key] = {
-								value: ThreeUtil.getVector2Safe(
-									valueValue[0],
-									valueValue[1],
-									new N3JS.Vector2()
-								),
+								value: NgxThreeUtil.getVector2Safe(valueValue[0], valueValue[1], new N3JS.Vector2()),
 							};
 						}
 						break;
@@ -1257,17 +1221,12 @@ export class PassComponent
 					case 'vector':
 					case 'v3':
 						resultUniforms[key] = {
-							value: ThreeUtil.getVector3Safe(
-								valueValue[0],
-								valueValue[1],
-								valueValue[2],
-								new N3JS.Vector3()
-							),
+							value: NgxThreeUtil.getVector3Safe(valueValue[0], valueValue[1], valueValue[2], new N3JS.Vector3()),
 						};
 						break;
 					case 'color':
 						resultUniforms[key] = {
-							value: ThreeUtil.getColorSafe(valueValue, 0xffffff),
+							value: NgxThreeUtil.getColorSafe(valueValue, 0xffffff),
 						};
 						break;
 					case 'image':
@@ -1280,18 +1239,14 @@ export class PassComponent
 					case 'video':
 					case 'videotexture':
 						resultUniforms[key] = {
-							value: TextureComponent.getTextureImageOption(
-								valueValue,
-								value['options'],
-								valueType.toLowerCase()
-							),
+							value: NgxTextureComponent.getTextureImageOption(valueValue, value['options'], valueType.toLowerCase()),
 						};
 						break;
 					case 'imagelist':
 					case 'texturelist':
 					case 'imagearray':
 					case 'texturearray':
-						const textureList: I3JS.ITexture[] = [];
+						const textureList: I3JS.Texture[] = [];
 						const texturePathList: string[] = [];
 						const textureOption = value['options'];
 						if (typeof valueValue === 'string') {
@@ -1300,7 +1255,7 @@ export class PassComponent
 									texturePathList.push(path);
 								}
 							});
-						} else if (ThreeUtil.isNotNull(valueValue.forEach)) {
+						} else if (NgxThreeUtil.isNotNull(valueValue.forEach)) {
 							valueValue.forEach((path: any) => {
 								if (path !== '' && path.length > 3) {
 									texturePathList.push(path);
@@ -1308,13 +1263,7 @@ export class PassComponent
 							});
 						}
 						texturePathList.forEach((texturePath) => {
-							textureList.push(
-								TextureComponent.getTextureImageOption(
-									texturePath,
-									textureOption,
-									'texture'
-								)
-							);
+							textureList.push(NgxTextureComponent.getTextureImageOption(texturePath, textureOption, 'texture'));
 						});
 						resultUniforms[key] = {
 							value: textureList,
@@ -1337,25 +1286,22 @@ export class PassComponent
 						resultUniforms[key] = { value: valueValue };
 						break;
 				}
-			} else if (ThreeUtil.isNotNull(value) && value['value'] !== undefined) {
+			} else if (NgxThreeUtil.isNotNull(value) && value['value'] !== undefined) {
 				resultUniforms[key] = value;
 			} else {
 				switch (key) {
 					case 'color':
-						resultUniforms.color.value = ThreeUtil.getColorSafe(
-							value,
-							resultUniforms.color.value
-						);
+						resultUniforms.color.value = NgxThreeUtil.getColorSafe(value, resultUniforms.color.value);
 						break;
 					case 'deltaX':
-						resultUniforms.delta.value = ThreeUtil.getVector2Safe(
+						resultUniforms.delta.value = NgxThreeUtil.getVector2Safe(
 							uniforms.deltaX,
 							uniforms.deltaY,
 							resultUniforms.delta.value
 						);
 						break;
 					case 'powRGBx':
-						resultUniforms.powRGB.value = ThreeUtil.getVector3Safe(
+						resultUniforms.powRGB.value = NgxThreeUtil.getVector3Safe(
 							uniforms.powRGBx,
 							uniforms.powRGBy,
 							uniforms.powRGBz,
@@ -1363,7 +1309,7 @@ export class PassComponent
 						);
 						break;
 					case 'mulRGBx':
-						resultUniforms.mulRGB.value = ThreeUtil.getVector3Safe(
+						resultUniforms.mulRGB.value = NgxThreeUtil.getVector3Safe(
 							uniforms.mulRGBx,
 							uniforms.mulRGBy,
 							uniforms.mulRGBz,
@@ -1371,7 +1317,7 @@ export class PassComponent
 						);
 						break;
 					case 'addRGBx':
-						resultUniforms.addRGB.value = ThreeUtil.getVector3Safe(
+						resultUniforms.addRGB.value = NgxThreeUtil.getVector3Safe(
 							uniforms.addRGBx,
 							uniforms.addRGBy,
 							uniforms.addRGBz,
@@ -1387,19 +1333,15 @@ export class PassComponent
 		Object.entries(resultUniforms).forEach(([key, value]) => {
 			switch (key) {
 				case 'resolution':
-					resultUniforms.resolution.value = ThreeUtil.getVector2Safe(
+					resultUniforms.resolution.value = NgxThreeUtil.getVector2Safe(
 						uniforms.resolutionX || this.width || 1024,
 						uniforms.resolutionY || this.height || 1024,
 						value.value
 					);
 					break;
 				case 'bloomTexture':
-					if (
-						ThreeUtil.isNotNull(this.bloomTexture) &&
-						ThreeUtil.isNotNull(this.bloomTexture.getRenderTarget2)
-					) {
-						resultUniforms.bloomTexture.value =
-							this.bloomTexture.getRenderTarget2().texture;
+					if (NgxThreeUtil.isNotNull(this.bloomTexture) && NgxThreeUtil.isNotNull(this.bloomTexture.getRenderTarget2)) {
+						resultUniforms.bloomTexture.value = this.bloomTexture.getRenderTarget2().texture;
 					}
 					break;
 			}
@@ -1415,7 +1357,7 @@ export class PassComponent
 	 * @param resultUniforms
 	 */
 	private setAssignUniforms(resultUniforms: { [key: string]: I3JS.IUniform }) {
-		if (ThreeUtil.isNotNull(this.uniforms)) {
+		if (NgxThreeUtil.isNotNull(this.uniforms)) {
 			Object.entries(resultUniforms).forEach(([key, value]) => {
 				this.uniforms[key] = value;
 			});
@@ -1429,22 +1371,12 @@ export class PassComponent
 	 */
 	private getMaterialShader(type: string) {
 		if (type === 'x-shader/x-vertex') {
-			if (
-				ThreeUtil.isNotNull(this.vertexShader) ||
-				ThreeUtil.isNotNull(this.materialShader)
-			) {
-				return ShaderUtils.getVertexShader(
-					ThreeUtil.getTypeSafe(this.vertexShader, this.materialShader)
-				);
+			if (NgxThreeUtil.isNotNull(this.vertexShader) || NgxThreeUtil.isNotNull(this.materialShader)) {
+				return ShaderUtils.getVertexShader(NgxThreeUtil.getTypeSafe(this.vertexShader, this.materialShader));
 			}
 		} else if (type === 'x-shader/x-fragment') {
-			if (
-				ThreeUtil.isNotNull(this.fragmentShader) ||
-				ThreeUtil.isNotNull(this.materialShader)
-			) {
-				return ShaderUtils.getFragmentShader(
-					ThreeUtil.getTypeSafe(this.fragmentShader, this.materialShader)
-				);
+			if (NgxThreeUtil.isNotNull(this.fragmentShader) || NgxThreeUtil.isNotNull(this.materialShader)) {
+				return ShaderUtils.getFragmentShader(NgxThreeUtil.getTypeSafe(this.fragmentShader, this.materialShader));
 			}
 		}
 		if (this.shaderList !== null && this.shaderList.length > 0) {
@@ -1464,7 +1396,7 @@ export class PassComponent
 	 * @returns texture id
 	 */
 	private getTextureId(def?: string): string {
-		return ThreeUtil.getTypeSafe(this.textureId, def);
+		return NgxThreeUtil.getTypeSafe(this.textureId, def);
 	}
 
 	/**
@@ -1476,16 +1408,16 @@ export class PassComponent
 	 * @returns map
 	 */
 	private getMap(
-		effectComposer?: I3JS.IEffectComposer,
-		camera?: I3JS.ICamera,
-		scene?: I3JS.IScene,
+		effectComposer?: I3JS.EffectComposer,
+		camera?: I3JS.Camera,
+		scene?: I3JS.Scene,
 		mapType?: string
-	): I3JS.ITexture {
+	): I3JS.Texture {
 		const map = this.getTexture(this.map, this.texture);
-		if (ThreeUtil.isNotNull(map)) {
+		if (NgxThreeUtil.isNotNull(map)) {
 			return map;
 		}
-		if (ThreeUtil.isNotNull(effectComposer)) {
+		if (NgxThreeUtil.isNotNull(effectComposer)) {
 			switch ((mapType || '').toLowerCase()) {
 				case 'target1':
 					return effectComposer.renderTarget1.texture as any;
@@ -1500,7 +1432,7 @@ export class PassComponent
 		}
 		const refMap = this.map;
 		if (
-			ThreeUtil.isNotNull(refMap) &&
+			NgxThreeUtil.isNotNull(refMap) &&
 			refMap.getRenderTarget2 &&
 			refMap.getRenderTarget1 &&
 			refMap.getWriteBuffer &&
@@ -1508,18 +1440,14 @@ export class PassComponent
 		) {
 			switch ((mapType || '').toLowerCase()) {
 				case 'target1':
-					return refMap.getRenderTarget1(effectComposer.renderer, camera, scene)
-						.texture;
+					return refMap.getRenderTarget1(effectComposer.renderer, camera, scene).texture;
 				case 'write':
-					return refMap.getWriteBuffer(effectComposer.renderer, camera, scene)
-						.texture;
+					return refMap.getWriteBuffer(effectComposer.renderer, camera, scene).texture;
 				case 'read':
-					return refMap.getReadBuffer(effectComposer.renderer, camera, scene)
-						.texture;
+					return refMap.getReadBuffer(effectComposer.renderer, camera, scene).texture;
 				case 'target2':
 				default:
-					return refMap.getRenderTarget2(effectComposer.renderer, camera, scene)
-						.texture;
+					return refMap.getRenderTarget2(effectComposer.renderer, camera, scene).texture;
 			}
 		}
 		return undefined;
@@ -1531,7 +1459,7 @@ export class PassComponent
 	 * @returns radius
 	 */
 	private getRadius(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.radius, def);
+		return NgxThreeUtil.getTypeSafe(this.radius, def);
 	}
 
 	/**
@@ -1540,7 +1468,7 @@ export class PassComponent
 	 * @returns threshold
 	 */
 	private getThreshold(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.threshold, def);
+		return NgxThreeUtil.getTypeSafe(this.threshold, def);
 	}
 
 	/**
@@ -1549,39 +1477,39 @@ export class PassComponent
 	 * @returns true if go wild
 	 */
 	private getGoWild(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.goWild, def);
+		return NgxThreeUtil.getTypeSafe(this.goWild, def);
 	}
 
 	/**
 	 * Effect composer of pass component
 	 */
-	private effectComposer: I3JS.IEffectComposer = null;
+	private effectComposer: I3JS.EffectComposer = null;
 
 	/**
 	 * Effect scene of pass component
 	 */
-	private effectScene: I3JS.IScene = null;
+	private effectScene: I3JS.Scene = null;
 
 	/**
 	 * Effect camera of pass component
 	 */
-	private effectCamera: I3JS.ICamera = null;
+	private effectCamera: I3JS.Camera = null;
 
 	/**
 	 * Effect camera of pass component
 	 */
-	private effectRenderer: I3JS.IWebGLRenderer = null;
+	private effectRenderer: I3JS.WebGLRenderer = null;
 
 	/**
 	 * The Pass of pass component
 	 */
-	private pass: I3JS.IPass = null;
+	private pass: I3JS.Pass = null;
 
 	/**
 	 * Sets scene
 	 * @param [scene]
 	 */
-	public setScene(scene?: I3JS.IScene) {
+	public setScene(scene?: I3JS.Scene) {
 		if (this.effectScene !== scene) {
 			this.effectScene = scene;
 			const anyPass: any = this.pass;
@@ -1598,10 +1526,10 @@ export class PassComponent
 	 * @param [effectComposer]
 	 */
 	public setEffectComposer(
-		scene?: I3JS.IScene,
-		camera?: I3JS.ICamera,
-		effectComposer?: I3JS.IEffectComposer,
-		renderer?: I3JS.IWebGLRenderer
+		scene?: I3JS.Scene,
+		camera?: I3JS.Camera,
+		effectComposer?: I3JS.EffectComposer,
+		renderer?: I3JS.WebGLRenderer
 	) {
 		if (
 			this.effectComposer !== effectComposer ||
@@ -1636,48 +1564,39 @@ export class PassComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.pass !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getPass();
 				return;
 			}
 
 			if (
-				!ThreeUtil.isOnlyIndexOf(
-					changes,
-					['init', 'enabled', 'needsswap', 'clear', 'rendertoscreen'],
-					this.OBJECT_ATTR
-				)
+				!NgxThreeUtil.isOnlyIndexOf(changes, ['init', 'enabled', 'needsswap', 'clear', 'rendertoscreen'], this.OBJECT_ATTR)
 			) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
-					'enabled',
-					'needsswap',
-					'clear',
-					'rendertoscreen',
-				]);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['enabled', 'needsswap', 'clear', 'rendertoscreen']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'enabled':
-						if (ThreeUtil.isNotNull(this.enabled)) {
+						if (NgxThreeUtil.isNotNull(this.enabled)) {
 							this.pass.enabled = this.getEnabled(true);
 						}
 						break;
 					case 'needsswap':
-						if (ThreeUtil.isNotNull(this.needsSwap)) {
+						if (NgxThreeUtil.isNotNull(this.needsSwap)) {
 							this.pass.needsSwap = this.getNeedsSwap(true);
 						}
 						break;
 					case 'clear':
-						if (ThreeUtil.isNotNull(this.clear)) {
+						if (NgxThreeUtil.isNotNull(this.clear)) {
 							this.pass.clear = this.getClear(false);
 						}
 						break;
 					case 'rendertoscreen':
-						if (ThreeUtil.isNotNull(this.renderToScreen)) {
+						if (NgxThreeUtil.isNotNull(this.renderToScreen)) {
 							this.pass.renderToScreen = this.getRenderToScreen(false);
 						}
 						break;
@@ -1691,19 +1610,19 @@ export class PassComponent
 	 * Gets pass
 	 * @returns pass
 	 */
-	public getPass<T extends I3JS.IPass>(): T {
+	public getPass<T extends I3JS.Pass>(): T {
 		if (this.pass === null || this._needUpdate) {
 			this.needUpdate = false;
-			let pass: I3JS.IPass = null;
+			let pass: I3JS.Pass = null;
 			this.unSubscribeRefer('passSize');
-			if (ThreeUtil.isNotNull(this.refer)) {
+			if (NgxThreeUtil.isNotNull(this.refer)) {
 				this.unSubscribeRefer('referPass');
-				if (ThreeUtil.isNotNull(this.refer.getPass)) {
+				if (NgxThreeUtil.isNotNull(this.refer.getPass)) {
 					pass = this.refer.getPass();
 				}
 				this.subscribeRefer(
 					'referPass',
-					ThreeUtil.getSubscribe(
+					NgxThreeUtil.getSubscribe(
 						this.refer,
 						() => {
 							this.needUpdate = true;
@@ -1716,10 +1635,7 @@ export class PassComponent
 				switch (this.type.toLowerCase()) {
 					case 'adaptivetonemappingpass':
 					case 'adaptivetonemapping':
-						pass = new N3JS.AdaptiveToneMappingPass(
-							this.getAdaptive(),
-							this.getResolution()
-						);
+						pass = new N3JS.AdaptiveToneMappingPass(this.getAdaptive(), this.getResolution());
 						break;
 					case 'afterimagepass':
 					case 'afterimage':
@@ -1736,34 +1652,26 @@ export class PassComponent
 						break;
 					case 'bokehpass':
 					case 'bokeh':
-						pass = new N3JS.BokehPass(
-							this.getScene(this.effectScene),
-							this.getCamera(this.effectCamera),
-							{
-								focus: ThreeUtil.getTypeSafe(this.focus, 1.0),
-								aspect: ThreeUtil.getTypeSafe(this.aspect, null),
-								aperture: ThreeUtil.getTypeSafe(this.aperture, null),
-								maxblur: ThreeUtil.getTypeSafe(this.maxblur, null),
-								width: ThreeUtil.getTypeSafe(this.width, null),
-								height: ThreeUtil.getTypeSafe(this.height, null),
-							}
-						);
+						pass = new N3JS.BokehPass(this.getScene(this.effectScene), this.getCamera(this.effectCamera), {
+							focus: NgxThreeUtil.getTypeSafe(this.focus, 1.0),
+							aspect: NgxThreeUtil.getTypeSafe(this.aspect, null),
+							aperture: NgxThreeUtil.getTypeSafe(this.aperture, null),
+							maxblur: NgxThreeUtil.getTypeSafe(this.maxblur, null),
+							width: NgxThreeUtil.getTypeSafe(this.width, null),
+							height: NgxThreeUtil.getTypeSafe(this.height, null),
+						});
 						break;
 					case 'cubetexturepass':
 					case 'cubetexture':
 						pass = new N3JS.CubeTexturePass(
-							this.getCamera(this.effectCamera) as I3JS.IPerspectiveCamera,
+							this.getCamera(this.effectCamera) as I3JS.PerspectiveCamera,
 							this.getEnvMap(),
 							this.getOpacity()
 						);
 						break;
 					case 'dotscreenpass':
 					case 'dotscreen':
-						pass = new N3JS.DotScreenPass(
-							this.getCenter(),
-							this.getAngle(),
-							this.getScale()
-						);
+						pass = new N3JS.DotScreenPass(this.getCenter(), this.getAngle(), this.getScale());
 						break;
 					case 'filmpass':
 					case 'film':
@@ -1790,7 +1698,7 @@ export class PassComponent
 						);
 						this.subscribeRefer(
 							'passSize',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.size,
 								() => {
 									const size = this.getSize();
@@ -1808,12 +1716,9 @@ export class PassComponent
 						break;
 					case 'maskpass':
 					case 'mask':
-						const maskpass = new N3JS.MaskPass(
-							this.getScene(this.effectScene),
-							this.getCamera(this.effectCamera)
-						);
-						if (ThreeUtil.isNotNull(this.inverse)) {
-							maskpass.inverse = ThreeUtil.getTypeSafe(this.inverse, false);
+						const maskpass = new N3JS.MaskPass(this.getScene(this.effectScene), this.getCamera(this.effectCamera));
+						if (NgxThreeUtil.isNotNull(this.inverse)) {
+							maskpass.inverse = NgxThreeUtil.getTypeSafe(this.inverse, false);
 						}
 						pass = maskpass;
 						break;
@@ -1825,60 +1730,39 @@ export class PassComponent
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera)
 						);
-						if (ThreeUtil.isNotNull(this.patternTexture)) {
+						if (NgxThreeUtil.isNotNull(this.patternTexture)) {
 							outlinePass.patternTexture = this.getPatternTexture() as any;
 						}
-						if (ThreeUtil.isNotNull(this.selectedObjects)) {
+						if (NgxThreeUtil.isNotNull(this.selectedObjects)) {
 							outlinePass.selectedObjects = this.getSelectedObjects() as any;
 						}
-						if (ThreeUtil.isNotNull(this.visibleEdgeColor)) {
-							outlinePass.visibleEdgeColor = ThreeUtil.getColorSafe(
-								this.visibleEdgeColor,
-								0xffffff
-							) as any;
+						if (NgxThreeUtil.isNotNull(this.visibleEdgeColor)) {
+							outlinePass.visibleEdgeColor = NgxThreeUtil.getColorSafe(this.visibleEdgeColor, 0xffffff) as any;
 						}
-						if (ThreeUtil.isNotNull(this.hiddenEdgeColor)) {
-							outlinePass.hiddenEdgeColor = ThreeUtil.getColorSafe(
-								this.hiddenEdgeColor,
-								0xffffff
-							) as any;
+						if (NgxThreeUtil.isNotNull(this.hiddenEdgeColor)) {
+							outlinePass.hiddenEdgeColor = NgxThreeUtil.getColorSafe(this.hiddenEdgeColor, 0xffffff) as any;
 						}
-						if (ThreeUtil.isNotNull(this.edgeGlow)) {
-							outlinePass.edgeGlow = ThreeUtil.getTypeSafe(this.edgeGlow, 0);
+						if (NgxThreeUtil.isNotNull(this.edgeGlow)) {
+							outlinePass.edgeGlow = NgxThreeUtil.getTypeSafe(this.edgeGlow, 0);
 						}
-						if (ThreeUtil.isNotNull(this.usePatternTexture)) {
-							outlinePass.usePatternTexture = ThreeUtil.getTypeSafe(
-								this.usePatternTexture,
-								false
-							);
+						if (NgxThreeUtil.isNotNull(this.usePatternTexture)) {
+							outlinePass.usePatternTexture = NgxThreeUtil.getTypeSafe(this.usePatternTexture, false);
 						}
-						if (ThreeUtil.isNotNull(this.edgeThickness)) {
-							outlinePass.edgeThickness = ThreeUtil.getTypeSafe(
-								this.edgeThickness,
-								1.0
-							);
+						if (NgxThreeUtil.isNotNull(this.edgeThickness)) {
+							outlinePass.edgeThickness = NgxThreeUtil.getTypeSafe(this.edgeThickness, 1.0);
 						}
-						if (ThreeUtil.isNotNull(this.edgeStrength)) {
-							outlinePass.edgeStrength = ThreeUtil.getTypeSafe(
-								this.edgeStrength,
-								3.0
-							);
+						if (NgxThreeUtil.isNotNull(this.edgeStrength)) {
+							outlinePass.edgeStrength = NgxThreeUtil.getTypeSafe(this.edgeStrength, 3.0);
 						}
-						if (ThreeUtil.isNotNull(this.downSampleRatio)) {
-							outlinePass.downSampleRatio = ThreeUtil.getTypeSafe(
-								this.downSampleRatio,
-								2.0
-							);
+						if (NgxThreeUtil.isNotNull(this.downSampleRatio)) {
+							outlinePass.downSampleRatio = NgxThreeUtil.getTypeSafe(this.downSampleRatio, 2.0);
 						}
-						if (ThreeUtil.isNotNull(this.pulsePeriod)) {
-							outlinePass.pulsePeriod = ThreeUtil.getTypeSafe(
-								this.pulsePeriod,
-								0.0
-							);
+						if (NgxThreeUtil.isNotNull(this.pulsePeriod)) {
+							outlinePass.pulsePeriod = NgxThreeUtil.getTypeSafe(this.pulsePeriod, 0.0);
 						}
 						this.subscribeRefer(
 							'passSize',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.size,
 								() => {
 									const size = this.getSize();
@@ -1906,26 +1790,19 @@ export class PassComponent
 							this.getCamera(this.effectCamera),
 							this.getDepthTexture(),
 							this.getUseNormals(),
-							ThreeUtil.getVector2Safe(this.width, this.height)
+							NgxThreeUtil.getVector2Safe(this.width, this.height)
 						);
 						saoPass.params = {
 							output: this.getSaoOutput('Default'),
-							saoBias: ThreeUtil.getTypeSafe(this.saoBias, 0.5),
-							saoIntensity: ThreeUtil.getTypeSafe(this.saoIntensity, 0.18),
-							saoScale: ThreeUtil.getTypeSafe(this.saoScale, 1),
-							saoKernelRadius: ThreeUtil.getTypeSafe(
-								this.saoKernelRadius,
-								this.kernelRadius,
-								100
-							),
-							saoMinResolution: ThreeUtil.getTypeSafe(this.saoMinResolution, 0),
-							saoBlur: ThreeUtil.getTypeSafe(this.saoBlur, true),
-							saoBlurRadius: ThreeUtil.getTypeSafe(this.saoBlurRadius, 8),
-							saoBlurStdDev: ThreeUtil.getTypeSafe(this.saoBlurStdDev, 4),
-							saoBlurDepthCutoff: ThreeUtil.getTypeSafe(
-								this.saoBlurDepthCutoff,
-								0.01
-							),
+							saoBias: NgxThreeUtil.getTypeSafe(this.saoBias, 0.5),
+							saoIntensity: NgxThreeUtil.getTypeSafe(this.saoIntensity, 0.18),
+							saoScale: NgxThreeUtil.getTypeSafe(this.saoScale, 1),
+							saoKernelRadius: NgxThreeUtil.getTypeSafe(this.saoKernelRadius, this.kernelRadius, 100),
+							saoMinResolution: NgxThreeUtil.getTypeSafe(this.saoMinResolution, 0),
+							saoBlur: NgxThreeUtil.getTypeSafe(this.saoBlur, true),
+							saoBlurRadius: NgxThreeUtil.getTypeSafe(this.saoBlurRadius, 8),
+							saoBlurStdDev: NgxThreeUtil.getTypeSafe(this.saoBlurStdDev, 4),
+							saoBlurDepthCutoff: NgxThreeUtil.getTypeSafe(this.saoBlurDepthCutoff, 0.01),
 						};
 						pass = saoPass;
 						break;
@@ -1939,97 +1816,73 @@ export class PassComponent
 						break;
 					case 'rgbshiftpass':
 					case 'rgbshift':
-						const rgbshiftpass = new N3JS.ShaderRGBShiftPass(
-							this.getTextureId()
-						);
+						const rgbshiftpass = new N3JS.ShaderRGBShiftPass(this.getTextureId());
 						this.getUniforms(rgbshiftpass.uniforms);
 						pass = rgbshiftpass;
 						break;
 					case 'bleachbypasspass':
 					case 'bleachbypass':
-						const bleachbypass = new N3JS.ShaderBleachBypassPass(
-							this.getTextureId()
-						);
+						const bleachbypass = new N3JS.ShaderBleachBypassPass(this.getTextureId());
 						this.getUniforms(bleachbypass.uniforms);
 						pass = bleachbypass;
 						break;
 					case 'sepiapass':
 					case 'sepia':
-						const sepiapass = new N3JS.ShaderSepiaPass(
-							this.getTextureId()
-						);
+						const sepiapass = new N3JS.ShaderSepiaPass(this.getTextureId());
 						this.getUniforms(sepiapass.uniforms);
 						pass = sepiapass;
 						break;
 					case 'vignettepass':
 					case 'vignette':
-						const vignettepass = new N3JS.ShaderVignettePass(
-							this.getTextureId()
-						);
+						const vignettepass = new N3JS.ShaderVignettePass(this.getTextureId());
 						this.getUniforms(vignettepass.uniforms);
 						pass = vignettepass;
 						break;
 					case 'gammacorrectionpass':
 					case 'gammacorrection':
-						const gammacorrectionpass =
-							new N3JS.ShaderGammaCorrectionPass(this.getTextureId());
+						const gammacorrectionpass = new N3JS.ShaderGammaCorrectionPass(this.getTextureId());
 						this.getUniforms(gammacorrectionpass.uniforms);
 						pass = gammacorrectionpass;
 						break;
 					case 'fxaapass':
 					case 'fxaa':
-						const fxaapass = new N3JS.ShaderFXAAPass(
-							this.getTextureId()
-						);
+						const fxaapass = new N3JS.ShaderFXAAPass(this.getTextureId());
 						this.getUniforms(fxaapass.uniforms);
 						pass = fxaapass;
 						break;
 					case 'pixelpass':
 					case 'pixel':
-						const pixelpass = new N3JS.ShaderPixelPass(
-							this.getTextureId()
-						);
+						const pixelpass = new N3JS.ShaderPixelPass(this.getTextureId());
 						this.getUniforms(pixelpass.uniforms);
 						pass = pixelpass;
 						break;
 					case 'luminositypass':
 					case 'luminosity':
-						const luminositypass = new N3JS.ShaderLuminosityPass(
-							this.getTextureId()
-						);
+						const luminositypass = new N3JS.ShaderLuminosityPass(this.getTextureId());
 						this.getUniforms(luminositypass.uniforms);
 						pass = luminositypass;
 						break;
 					case 'shaderdotscreenpass':
 					case 'shaderdotscreen':
-						const dotscreenpass = new N3JS.ShaderDotScreenPass(
-							this.getTextureId()
-						);
+						const dotscreenpass = new N3JS.ShaderDotScreenPass(this.getTextureId());
 						this.getUniforms(dotscreenpass.uniforms);
 						pass = dotscreenpass;
 						break;
 					case 'sobeloperatorpass':
 					case 'sobeloperator':
-						const sobeloperatorpass = new N3JS.SobelOperatorPass(
-							this.getTextureId()
-						);
+						const sobeloperatorpass = new N3JS.SobelOperatorPass(this.getTextureId());
 						this.getUniforms(sobeloperatorpass.uniforms);
 						pass = sobeloperatorpass;
 						break;
 					case 'materialpass':
 					case 'material':
-						const materialpass = new N3JS.ShaderMaterialPass(
-							this.getTextureId()
-						);
+						const materialpass = new N3JS.ShaderMaterialPass(this.getTextureId());
 						this.getUniforms(materialpass.uniforms);
 						pass = materialpass;
 						break;
 					case 'shaderpass':
 					case 'shader':
-						const shaderPass = new N3JS.ShaderPass(
-							this.getShader(),
-							this.getTextureId()
-						);
+						const shaderPass = new N3JS.ShaderPass(this.getShader(), this.getTextureId());
 						pass = shaderPass;
 						break;
 					case 'smaapass':
@@ -2038,7 +1891,7 @@ export class PassComponent
 						const smaaPass = new N3JS.SMAAPass(smaaSize.x, smaaSize.y);
 						this.subscribeRefer(
 							'passSize',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.size,
 								() => {
 									const size = this.getSize();
@@ -2057,17 +1910,11 @@ export class PassComponent
 							this.getClearColor(),
 							this.getClearAlpha()
 						);
-						if (ThreeUtil.isNotNull(this.sampleLevel)) {
-							ssaaRenderPass.sampleLevel = ThreeUtil.getTypeSafe(
-								this.sampleLevel,
-								4
-							);
+						if (NgxThreeUtil.isNotNull(this.sampleLevel)) {
+							ssaaRenderPass.sampleLevel = NgxThreeUtil.getTypeSafe(this.sampleLevel, 4);
 						}
-						if (ThreeUtil.isNotNull(this.unbiased)) {
-							ssaaRenderPass.unbiased = ThreeUtil.getTypeSafe(
-								this.unbiased,
-								true
-							);
+						if (NgxThreeUtil.isNotNull(this.unbiased)) {
+							ssaaRenderPass.unbiased = NgxThreeUtil.getTypeSafe(this.unbiased, true);
 						}
 						pass = ssaaRenderPass;
 						break;
@@ -2081,19 +1928,12 @@ export class PassComponent
 							ssaoSize.y
 						);
 						ssaoPass.output = this.getSsaoOutput('Default');
-						ssaoPass.kernelRadius = ThreeUtil.getTypeSafe(
-							this.kernelRadius,
-							this.saoKernelRadius,
-							8
-						);
-						ssaoPass.minDistance = ThreeUtil.getTypeSafe(
-							this.minDistance,
-							0.005
-						);
-						ssaoPass.maxDistance = ThreeUtil.getTypeSafe(this.maxDistance, 0.1);
+						ssaoPass.kernelRadius = NgxThreeUtil.getTypeSafe(this.kernelRadius, this.saoKernelRadius, 8);
+						ssaoPass.minDistance = NgxThreeUtil.getTypeSafe(this.minDistance, 0.005);
+						ssaoPass.maxDistance = NgxThreeUtil.getTypeSafe(this.maxDistance, 0.1);
 						this.subscribeRefer(
 							'passSize',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.size,
 								() => {
 									const size = this.getSize();
@@ -2112,45 +1952,28 @@ export class PassComponent
 							this.getClearColor(),
 							this.getClearAlpha()
 						);
-						if (ThreeUtil.isNotNull(this.sampleLevel)) {
-							taaRenderPass.sampleLevel = ThreeUtil.getTypeSafe(
-								this.sampleLevel,
-								4
-							);
+						if (NgxThreeUtil.isNotNull(this.sampleLevel)) {
+							taaRenderPass.sampleLevel = NgxThreeUtil.getTypeSafe(this.sampleLevel, 4);
 						}
-						if (ThreeUtil.isNotNull(this.unbiased)) {
-							taaRenderPass.unbiased = ThreeUtil.getTypeSafe(
-								this.unbiased,
-								true
-							);
+						if (NgxThreeUtil.isNotNull(this.unbiased)) {
+							taaRenderPass.unbiased = NgxThreeUtil.getTypeSafe(this.unbiased, true);
 						}
-						if (ThreeUtil.isNotNull(this.accumulate)) {
-							taaRenderPass.accumulate = ThreeUtil.getTypeSafe(
-								this.accumulate,
-								false
-							);
+						if (NgxThreeUtil.isNotNull(this.accumulate)) {
+							taaRenderPass.accumulate = NgxThreeUtil.getTypeSafe(this.accumulate, false);
 						}
 						pass = taaRenderPass;
 						break;
 					case 'texturepass':
 					case 'texture':
 						pass = new N3JS.TexturePass(
-							this.getMap(
-								this.effectComposer,
-								this.effectCamera,
-								this.effectScene
-							),
+							this.getMap(this.effectComposer, this.effectCamera, this.effectScene),
 							this.getOpacity()
 						);
 						break;
 					case 'unrealbloompass':
 					case 'unrealbloom':
 						pass = new N3JS.UnrealBloomPass(
-							ThreeUtil.getVector2Safe(
-								this.width | 512,
-								this.height | 512,
-								new N3JS.Vector2(512, 512) as any
-							),
+							NgxThreeUtil.getVector2Safe(this.width | 512, this.height | 512, new N3JS.Vector2(512, 512) as any),
 							this.getStrength(1.5),
 							this.getRadius(0.4),
 							this.getThreshold(0.85)
@@ -2159,8 +1982,8 @@ export class PassComponent
 					case 'ssrpass':
 					case 'ssr':
 						let groundReflector: any = null;
-						if (ThreeUtil.isNotNull(this.mesh)) {
-							const object3d = ThreeUtil.getObject3d(this.mesh);
+						if (NgxThreeUtil.isNotNull(this.mesh)) {
+							const object3d = NgxThreeUtil.getObject3d(this.mesh);
 							if (object3d instanceof N3JS.ReflectorForSSRPass) {
 								groundReflector = object3d;
 								groundReflector.material.depthWrite = false;
@@ -2173,14 +1996,14 @@ export class PassComponent
 							camera: this.getCamera(this.effectCamera) as any,
 							width: ssrSize.x,
 							height: ssrSize.y,
-							selects: ThreeUtil.getTypeSafe(this.selects, []) as any,
+							selects: NgxThreeUtil.getTypeSafe(this.selects, []) as any,
 							isPerspectiveCamera: undefined,
 							isBouncing: undefined,
 							groundReflector: groundReflector,
 						});
 						this.subscribeRefer(
 							'passSize',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.size,
 								() => {
 									const size = this.getSize();
@@ -2200,11 +2023,11 @@ export class PassComponent
 							camera: this.getCamera(this.effectCamera) as any,
 							width: ssrrSize.x,
 							height: ssrrSize.y,
-							selects: ThreeUtil.getTypeSafe(this.selects, []) as any,
+							selects: NgxThreeUtil.getTypeSafe(this.selects, []) as any,
 						});
 						this.subscribeRefer(
 							'passSize',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.size,
 								() => {
 									const size = this.getSize();
@@ -2224,19 +2047,14 @@ export class PassComponent
 						lutPass.enabled = false;
 						this.getLut((result) => {
 							const anyPass: any = this.pass;
-							anyPass['lut'] = this.use2DLut
-								? result.texture
-								: result.texture3D;
+							anyPass['lut'] = this.use2DLut ? result.texture : result.texture3D;
 							this.pass.enabled = this.enabled;
 						});
 						pass = lutPass;
 						break;
 					case 'clearpass':
 					case 'clear':
-						pass = new N3JS.ClearPass(
-							this.getClearColor(),
-							this.getClearAlpha()
-						);
+						pass = new N3JS.ClearPass(this.getClearColor(), this.getClearAlpha());
 						break;
 					default:
 						pass = null;
@@ -2256,10 +2074,7 @@ export class PassComponent
 				}
 			}
 			const anyPass: any = pass;
-			if (
-				ThreeUtil.isNotNull(anyPass['uniforms']) &&
-				ThreeUtil.isNotNull(this.uniforms)
-			) {
+			if (NgxThreeUtil.isNotNull(anyPass['uniforms']) && NgxThreeUtil.isNotNull(this.uniforms)) {
 				this.setAssignUniforms(anyPass['uniforms']);
 			}
 			this.pass = pass;

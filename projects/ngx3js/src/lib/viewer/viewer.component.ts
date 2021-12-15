@@ -5,11 +5,12 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { HelperComponent } from '../helper/helper.component';
-import { RendererTimer, ThreeUtil, N3JS, I3JS } from '../interface';
-import { LightComponent } from '../light/light.component';
-import { MeshComponent } from '../mesh/mesh.component';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxHelperComponent } from '../helper/helper.component';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { NgxLightComponent } from '../light/light.component';
+import { NgxMeshComponent } from '../mesh/mesh.component';
+import { IRendererTimer } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { ViewerCanvas } from './viewer-canvas';
 
 /**
@@ -51,8 +52,8 @@ import { ViewerCanvas } from './viewer-canvas';
 	templateUrl: './viewer.component.html',
 	styleUrls: ['./viewer.component.scss'],
 })
-export class ViewerComponent
-	extends AbstractSubscribeComponent
+export class NgxViewerComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -70,21 +71,21 @@ export class ViewerComponent
 	/**
 	 * The Light of Viewer
 	 */
-	@Input() public light: LightComponent | MeshComponent | I3JS.ILight = null;
+	@Input() public light: NgxLightComponent | NgxMeshComponent | I3JS.Light = null;
 
 	/**
 	 * The Mesh of Viewer
 	 */
-	@Input() public mesh: MeshComponent | HelperComponent | I3JS.IMesh = null;
+	@Input() public mesh: NgxMeshComponent | NgxHelperComponent | I3JS.Mesh = null;
 
 	/**
 	 * The Plane of Viewer
 	 */
 	@Input() public plane:
-		| MeshComponent
-		| HelperComponent
-		| I3JS.IObject3D
-		| I3JS.IPlane = null;
+		| NgxMeshComponent
+		| NgxHelperComponent
+		| I3JS.Object3D
+		| I3JS.Plane = null;
 
 	/**
 	 * The x of position
@@ -149,13 +150,13 @@ export class ViewerComponent
 	 * Gets light
 	 * @returns light
 	 */
-	private getLight(): I3JS.ILight {
+	private getLight(): I3JS.Light {
 		this.unSubscribeRefer('light');
-		if (ThreeUtil.isNotNull(this.light)) {
-			const light = ThreeUtil.getLight(this.light);
+		if (NgxThreeUtil.isNotNull(this.light)) {
+			const light = NgxThreeUtil.getLight(this.light);
 			this.subscribeRefer(
 				'light',
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					this.light,
 					() => {
 						this.needUpdate = true;
@@ -172,13 +173,13 @@ export class ViewerComponent
 	 * Gets mesh
 	 * @returns mesh
 	 */
-	private getMesh(): I3JS.IMesh {
+	private getMesh(): I3JS.Mesh {
 		this.unSubscribeRefer('mesh');
-		if (ThreeUtil.isNotNull(this.mesh)) {
-			const mesh = ThreeUtil.getMesh(this.mesh);
+		if (NgxThreeUtil.isNotNull(this.mesh)) {
+			const mesh = NgxThreeUtil.getMesh(this.mesh);
 			this.subscribeRefer(
 				'mesh',
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					this.mesh,
 					() => {
 						this.needUpdate = true;
@@ -195,19 +196,19 @@ export class ViewerComponent
 	 * Gets plane
 	 * @returns plane
 	 */
-	private getPlane(): I3JS.IPlane {
+	private getPlane(): I3JS.Plane {
 		const plane = new N3JS.Plane(new N3JS.Vector3(0, 1, 0), 0.01);
-		if (ThreeUtil.isNotNull(this.plane)) {
-			let mesh: I3JS.IObject3D = null;
+		if (NgxThreeUtil.isNotNull(this.plane)) {
+			let mesh: I3JS.Object3D = null;
 			if (this.plane instanceof N3JS.Plane) {
 				plane.copy(this.plane);
 			} else if (this.plane instanceof N3JS.Mesh) {
 				mesh = this.plane;
-			} else if (this.plane instanceof MeshComponent) {
+			} else if (this.plane instanceof NgxMeshComponent) {
 				mesh = this.plane.getObject3d();
 				this.subscribeRefer(
 					'referTarget',
-					ThreeUtil.getSubscribe(
+					NgxThreeUtil.getSubscribe(
 						this.plane,
 						() => {
 							this.needUpdate = true;
@@ -289,8 +290,8 @@ export class ViewerComponent
 		cameraSize: number,
 		def?: number | string
 	): number {
-		const baseSize = ThreeUtil.getTypeSafe(size, def);
-		if (ThreeUtil.isNotNull(baseSize)) {
+		const baseSize = NgxThreeUtil.getTypeSafe(size, def);
+		if (NgxThreeUtil.isNotNull(baseSize)) {
 			let resultSize: number = 0;
 			if (typeof baseSize == 'string') {
 				if (baseSize.endsWith('%')) {
@@ -343,7 +344,7 @@ export class ViewerComponent
 	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
-		if (this.viewer !== null && ThreeUtil.isNotNull(this.viewer.dispose)) {
+		if (this.viewer !== null && NgxThreeUtil.isNotNull(this.viewer.dispose)) {
 			this.viewer.dispose();
 		}
 		this.viewer = null;
@@ -375,13 +376,13 @@ export class ViewerComponent
 	/**
 	 * The Renderer of viewer component
 	 */
-	private renderer: I3JS.IRenderer = null;
+	private renderer: I3JS.Renderer = null;
 
 	/**
 	 * Sets renderer
 	 * @param renderer
 	 */
-	public setRenderer(renderer: I3JS.IRenderer) {
+	public setRenderer(renderer: I3JS.Renderer) {
 		this.renderer = renderer;
 		this.getViewer();
 	}
@@ -390,7 +391,7 @@ export class ViewerComponent
 	 * Gets renderer
 	 * @returns renderer
 	 */
-	public getRenderer(): I3JS.IRenderer {
+	public getRenderer(): I3JS.Renderer {
 		return this.renderer;
 	}
 
@@ -473,12 +474,12 @@ export class ViewerComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.viewer !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getViewer();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					['x', 'y', 'width', 'height', 'canvasoptions'],
 					this.OBJECT_ATTR
@@ -487,8 +488,8 @@ export class ViewerComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['x', 'y', 'width', 'height'])) {
-				changes = ThreeUtil.pushUniq(changes, ['reset']);
+			if (NgxThreeUtil.isIndexOf(changes, ['x', 'y', 'width', 'height'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['reset']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -513,10 +514,10 @@ export class ViewerComponent
 	public getViewer() {
 		if (this.viewer === null || this._needUpdate) {
 			if (this.viewer !== null) {
-				if (ThreeUtil.isNotNull(this.viewer.parent)) {
+				if (NgxThreeUtil.isNotNull(this.viewer.parent)) {
 					this.viewer.parent.remove(this.viewer);
 				}
-				if (ThreeUtil.isNotNull(this.viewer.dispose)) {
+				if (NgxThreeUtil.isNotNull(this.viewer.dispose)) {
 					this.viewer.dispose();
 				}
 			}
@@ -549,7 +550,7 @@ export class ViewerComponent
 				case 'progressivelight':
 					const progressiveSurfacemap = new N3JS.ProgressiveLightMap(
 						this.getRenderer() as any,
-						ThreeUtil.getTypeSafe(this.lightMapRes, 1024)
+						NgxThreeUtil.getTypeSafe(this.lightMapRes, 1024)
 					);
 					const lightmapObjects: any = [];
 					progressiveSurfacemap.addObjectsToLightMap(lightmapObjects);
@@ -566,23 +567,23 @@ export class ViewerComponent
 	/**
 	 * Ref light of viewer component
 	 */
-	private _refLight: I3JS.ILight = null;
+	private _refLight: I3JS.Light = null;
 
 	/**
 	 * Ref plane of viewer component
 	 */
-	private _refPlane: I3JS.IPlane = null;
+	private _refPlane: I3JS.Plane = null;
 
 	/**
 	 * Ref light position of viewer component
 	 */
-	private _refLightPosition: I3JS.IVector4 = null;
+	private _refLightPosition: I3JS.Vector4 = null;
 
 	/**
 	 * Updates viewer component
 	 * @param _
 	 */
-	public update(_: RendererTimer) {
+	public update(_: IRendererTimer) {
 		if (this.viewer !== null) {
 			switch (this.type.toLowerCase()) {
 				case 'shadowmesh':
@@ -603,13 +604,13 @@ export class ViewerComponent
 	 * @param [scenes]
 	 * @returns scene
 	 */
-	public getScene(scenes?: QueryList<any> | any): I3JS.IScene {
-		if (ThreeUtil.isNotNull(scenes)) {
+	public getScene(scenes?: QueryList<any> | any): I3JS.Scene {
+		if (NgxThreeUtil.isNotNull(scenes)) {
 			if (scenes instanceof QueryList && scenes.length > 0) {
 				return scenes.first.getScene();
 			} else if (scenes instanceof N3JS.Scene) {
 				return scenes;
-			} else if (ThreeUtil.isNotNull(scenes.getScene)) {
+			} else if (NgxThreeUtil.isNotNull(scenes.getScene)) {
 				return scenes.getScene();
 			}
 		}
@@ -621,13 +622,13 @@ export class ViewerComponent
 	 * @param [cameras]
 	 * @returns camera
 	 */
-	public getCamera(cameras?: QueryList<any> | any): I3JS.ICamera {
-		if (ThreeUtil.isNotNull(cameras)) {
+	public getCamera(cameras?: QueryList<any> | any): I3JS.Camera {
+		if (NgxThreeUtil.isNotNull(cameras)) {
 			if (cameras instanceof QueryList && cameras.length > 0) {
 				return cameras.first.getCamera();
 			} else if (cameras instanceof N3JS.Camera) {
 				return cameras;
-			} else if (ThreeUtil.isNotNull(cameras.getCamera)) {
+			} else if (NgxThreeUtil.isNotNull(cameras.getCamera)) {
 				return cameras.getCamera();
 			}
 		}
@@ -642,10 +643,10 @@ export class ViewerComponent
 	 * @param [renderTimer]
 	 */
 	public render(
-		renderer: I3JS.IRenderer,
+		renderer: I3JS.Renderer,
 		scenes: QueryList<any> | any,
 		cameras: QueryList<any> | any,
-		renderTimer?: RendererTimer
+		renderTimer?: IRendererTimer
 	) {
 		if (this.viewer !== null && this.enabled) {
 			switch (this.type.toLowerCase()) {
@@ -666,12 +667,12 @@ export class ViewerComponent
 						const camera = this.getCamera(cameras);
 						this.viewer.update(
 							camera,
-							ThreeUtil.getTypeSafe(this.blendWindow, 200),
-							ThreeUtil.getTypeSafe(this.blurEdges, true)
+							NgxThreeUtil.getTypeSafe(this.blendWindow, 200),
+							NgxThreeUtil.getTypeSafe(this.blurEdges, true)
 						);
 						if (!this.viewer.firstUpdate) {
 							this.viewer.showDebugLightmap(
-								ThreeUtil.getTypeSafe(this.debugLightmap, false)
+								NgxThreeUtil.getTypeSafe(this.debugLightmap, false)
 							);
 						}
 					}

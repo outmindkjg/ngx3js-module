@@ -1,24 +1,25 @@
 import { QueryList } from '@angular/core';
 import * as GSAP from 'gsap';
-import { CameraComponent } from './camera/camera.component';
-import { CanvasComponent } from './canvas/canvas.component';
-import { RendererTimer, ThreeUtil, I3JS, N3JS } from './interface';
-import { AbstractMaterialComponent } from './material.abstract';
-import { SceneComponent } from './scene/scene.component';
-import { HtmlCollection, VisualComponent } from './visual/visual.component';
+import { NgxCameraComponent } from './camera/camera.component';
+import { NgxCanvasComponent } from './canvas/canvas.component';
+import { I3JS, N3JS, NgxThreeUtil } from './interface';
+import { NgxAbstractMaterialComponent } from './material.abstract';
+import { IHtmlCollection, IRendererTimer } from './ngx-interface';
+import { NgxSceneComponent } from './scene/scene.component';
+import { NgxVisualComponent } from './visual/visual.component';
 
 /**
  * Abstract three controller
  *
  * ```ts
- * export class XxxControllerComponent extends AbstractControllerComponent implements OnInit {
+ * export class NgxXxxControllerComponent extends NgxAbstractControllerComponent implements OnInit {
  * 	constructor() {
  * 		super();
  * 	}
  * }
  * ```
  */
-export abstract class AbstractThreeController {
+export abstract class NgxAbstractThreeController {
 	/**
 	 * Enable This Controller
 	 */
@@ -84,12 +85,12 @@ export abstract class AbstractThreeController {
 	/**
 	 * Ref object of abstract three controller
 	 */
-	protected refObject: I3JS.IObject3D = null;
+	protected refObject: I3JS.Object3D = null;
 
 	/**
 	 * Ref object2d of abstract three controller
 	 */
-	protected refObject2d: HtmlCollection = null;
+	protected refObject2d: IHtmlCollection = null;
 
 	/**
 	 * Tween timer of abstract three controller
@@ -102,7 +103,7 @@ export abstract class AbstractThreeController {
 	 * @param refObject3D
 	 * @param refObject2D
 	 */
-	constructor(refObject3D: I3JS.IObject3D, refObject2D: HtmlCollection) {
+	constructor(refObject3D: I3JS.Object3D, refObject2D: IHtmlCollection) {
 		this.setObject3d(refObject3D);
 		this.setObject2d(refObject2D);
 	}
@@ -114,7 +115,7 @@ export abstract class AbstractThreeController {
 	 * @returns duration
 	 */
 	protected getDuration(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.duration, def, 3);
+		return NgxThreeUtil.getTypeSafe(this.duration, def, 3);
 	}
 
 	/**
@@ -124,7 +125,7 @@ export abstract class AbstractThreeController {
 	 * @returns repeat
 	 */
 	protected getRepeat(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.repeat, def, 0);
+		return NgxThreeUtil.getTypeSafe(this.repeat, def, 0);
 	}
 
 	/**
@@ -134,7 +135,7 @@ export abstract class AbstractThreeController {
 	 * @returns true if yoyo
 	 */
 	protected getYoyo(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.yoyo, def, false);
+		return NgxThreeUtil.getTypeSafe(this.yoyo, def, false);
 	}
 
 	/**
@@ -144,7 +145,7 @@ export abstract class AbstractThreeController {
 	 * @returns overshoot
 	 */
 	private getOvershoot(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.overshoot, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.overshoot, def, 1);
 	}
 
 	/**
@@ -154,7 +155,7 @@ export abstract class AbstractThreeController {
 	 * @returns amplitude
 	 */
 	protected getAmplitude(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.amplitude, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.amplitude, def, 1);
 	}
 
 	/**
@@ -164,7 +165,7 @@ export abstract class AbstractThreeController {
 	 * @returns period
 	 */
 	protected getPeriod(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.period, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.period, def, 1);
 	}
 
 	/**
@@ -174,7 +175,7 @@ export abstract class AbstractThreeController {
 	 * @returns linear ratio
 	 */
 	protected getLinearRatio(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.linearRatio, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.linearRatio, def, 1);
 	}
 
 	/**
@@ -184,7 +185,7 @@ export abstract class AbstractThreeController {
 	 * @returns power
 	 */
 	protected getPower(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.power, def, 1);
+		return NgxThreeUtil.getTypeSafe(this.power, def, 1);
 	}
 
 	/**
@@ -194,7 +195,7 @@ export abstract class AbstractThreeController {
 	 * @returns true if yoyo mode
 	 */
 	protected getYoyoMode(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.yoyoMode, def, false);
+		return NgxThreeUtil.getTypeSafe(this.yoyoMode, def, false);
 	}
 
 	/**
@@ -204,7 +205,7 @@ export abstract class AbstractThreeController {
 	 * @returns steps
 	 */
 	protected getSteps(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.steps, def, 12);
+		return NgxThreeUtil.getTypeSafe(this.steps, def, 12);
 	}
 
 	/**
@@ -216,8 +217,8 @@ export abstract class AbstractThreeController {
 	 */
 	protected getEasing(def?: string, isTemplate?: boolean): any {
 		const easing = isTemplate
-			? ThreeUtil.getTypeSafe(this.template, def, '')
-			: ThreeUtil.getTypeSafe(this.easing, def, '');
+			? NgxThreeUtil.getTypeSafe(this.template, def, '')
+			: NgxThreeUtil.getTypeSafe(this.easing, def, '');
 		switch (easing.toLowerCase()) {
 			case 'power1':
 			case 'power1.easein':
@@ -348,22 +349,22 @@ export abstract class AbstractThreeController {
 	/**
 	 * The Renderer of abstract three controller
 	 */
-	_renderer: I3JS.IRenderer = null;
+	_renderer: I3JS.Renderer = null;
 
 	/**
 	 * The Scenes of abstract three controller
 	 */
-	_scenes: QueryList<SceneComponent> = null;
+	_scenes: QueryList<NgxSceneComponent> = null;
 
 	/**
 	 * The Cameras of abstract three controller
 	 */
-	_cameras: QueryList<CameraComponent> = null;
+	_cameras: QueryList<NgxCameraComponent> = null;
 
 	/**
 	 * The Canvases of abstract three controller
 	 */
-	_canvases: QueryList<CanvasComponent> = null;
+	_canvases: QueryList<NgxCanvasComponent> = null;
 
 	/**
 	 * Sets renderer
@@ -373,10 +374,10 @@ export abstract class AbstractThreeController {
 	 * @param canvases
 	 */
 	public setRenderer(
-		renderer: I3JS.IRenderer,
-		scenes: QueryList<SceneComponent>,
-		cameras: QueryList<CameraComponent>,
-		canvases: QueryList<CanvasComponent>
+		renderer: I3JS.Renderer,
+		scenes: QueryList<NgxSceneComponent>,
+		cameras: QueryList<NgxCameraComponent>,
+		canvases: QueryList<NgxCanvasComponent>
 	) {
 		this._renderer = renderer;
 		this._scenes = scenes;
@@ -408,24 +409,24 @@ export abstract class AbstractThreeController {
 	/**
 	 * The Scene of abstract three controller
 	 */
-	private _scene: I3JS.IScene = null;
+	private _scene: I3JS.Scene = null;
 
 	/**
 	 * The Camera of abstract three controller
 	 */
-	private _camera: I3JS.ICamera = null;
+	private _camera: I3JS.Camera = null;
 
 	/**
 	 * The Canvas of abstract three controller
 	 */
-	private _canvas: HtmlCollection = null;
+	private _canvas: IHtmlCollection = null;
 
 	/**
 	 * Sets scene
 	 *
 	 * @param scene
 	 */
-	public setScene(scene: I3JS.IScene) {
+	public setScene(scene: I3JS.Scene) {
 		this._scene = scene;
 	}
 
@@ -433,7 +434,7 @@ export abstract class AbstractThreeController {
 	 * Sets canvas
 	 * @param canvas
 	 */
-	public setCanvas(canvas: HtmlCollection) {
+	public setCanvas(canvas: IHtmlCollection) {
 		this._canvas = canvas;
 	}
 
@@ -441,7 +442,7 @@ export abstract class AbstractThreeController {
 	 * Sets object3d
 	 * @param refObject
 	 */
-	public setObject3d(refObject: I3JS.IObject3D) {
+	public setObject3d(refObject: I3JS.Object3D) {
 		this.refObject = refObject;
 	}
 
@@ -449,35 +450,35 @@ export abstract class AbstractThreeController {
 	 * Sets object2d
 	 * @param refObject
 	 */
-	public setObject2d(refObject: HtmlCollection) {
+	public setObject2d(refObject: IHtmlCollection) {
 		this.refObject2d = refObject;
 	}
 
 	/**
 	 * Gets position
 	 */
-	protected get position(): I3JS.IVector3 {
+	protected get position(): I3JS.Vector3 {
 		return this.refObject.position;
 	}
 
 	/**
 	 * Gets scale
 	 */
-	protected get scale(): I3JS.IVector3 {
+	protected get scale(): I3JS.Vector3 {
 		return this.refObject.scale;
 	}
 
 	/**
 	 * Gets rotation
 	 */
-	protected get rotation(): I3JS.IEuler {
+	protected get rotation(): I3JS.Euler {
 		return this.refObject.rotation;
 	}
 
 	/**
 	 * Gets material
 	 */
-	protected get material(): I3JS.IMaterial {
+	protected get material(): I3JS.Material {
 		if (this.refObject instanceof N3JS.Mesh) {
 			if (this.refObject.material instanceof Array) {
 				return this.refObject.material[0];
@@ -491,7 +492,7 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets materials
 	 */
-	protected get materials(): I3JS.IMaterial[] {
+	protected get materials(): I3JS.Material[] {
 		if (this.refObject instanceof N3JS.Mesh) {
 			if (this.refObject.material instanceof Array) {
 				return this.refObject.material;
@@ -505,7 +506,7 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets geometry
 	 */
-	protected get geometry(): I3JS.IBufferGeometry {
+	protected get geometry(): I3JS.BufferGeometry {
 		if (this.refObject instanceof N3JS.Mesh) {
 			return this.refObject.geometry;
 		}
@@ -515,9 +516,9 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets scene
 	 */
-	protected get scene(): I3JS.IScene {
+	protected get scene(): I3JS.Scene {
 		if (this._scene === null && this.refObject !== null) {
-			let lastObj: I3JS.IObject3D = this.refObject;
+			let lastObj: I3JS.Object3D = this.refObject;
 			while (!(lastObj instanceof N3JS.Scene) && lastObj.parent) {
 				lastObj = lastObj.parent;
 			}
@@ -535,7 +536,7 @@ export abstract class AbstractThreeController {
 	/**
 	 * Gets camera
 	 */
-	protected get camera(): I3JS.ICamera {
+	protected get camera(): I3JS.Camera {
 		if (
 			this._camera === null &&
 			this._cameras !== null &&
@@ -551,12 +552,12 @@ export abstract class AbstractThreeController {
 	 * @param name  The name of the object (doesn't need to be unique). Default is an empty string.
 	 * @returns camera by name
 	 */
-	protected getCameraByName(name: string): I3JS.ICamera {
+	protected getCameraByName(name: string): I3JS.Camera {
 		if (this._cameras !== null) {
 			const camara = this._cameras.find((camera) => {
 				return camera.name == name;
 			});
-			if (ThreeUtil.isNotNull(camara)) {
+			if (NgxThreeUtil.isNotNull(camara)) {
 				return camara.getObject3d();
 			}
 		}
@@ -572,7 +573,7 @@ export abstract class AbstractThreeController {
 	protected getObjectByName(
 		name: string,
 		fromTop: boolean = false
-	): I3JS.IObject3D {
+	): I3JS.Object3D {
 		if (fromTop) {
 			return this.scene.getObjectByName(name);
 		} else {
@@ -591,7 +592,7 @@ export abstract class AbstractThreeController {
 		name: string,
 		value: string,
 		fromTop: boolean = false
-	): I3JS.IObject3D {
+	): I3JS.Object3D {
 		if (fromTop) {
 			return this.scene.getObjectByProperty(name, value);
 		} else {
@@ -609,8 +610,8 @@ export abstract class AbstractThreeController {
 	protected getObjectByFunction(
 		fn: (arg: any) => boolean,
 		fromTop: boolean = false,
-		obj3d: I3JS.IObject3D = null
-	): I3JS.IObject3D {
+		obj3d: I3JS.Object3D = null
+	): I3JS.Object3D {
 		if (obj3d === null) {
 			obj3d = fromTop ? this.scene : this.refObject;
 		}
@@ -636,9 +637,9 @@ export abstract class AbstractThreeController {
 	protected getObjectsByFunction(
 		fn: (arg: any) => boolean,
 		fromTop: boolean = false,
-		obj3d: I3JS.IObject3D = null,
-		result: I3JS.IObject3D[] = []
-	): I3JS.IObject3D[] {
+		obj3d: I3JS.Object3D = null,
+		result: I3JS.Object3D[] = []
+	): I3JS.Object3D[] {
 		if (obj3d === null) {
 			obj3d = fromTop ? this.scene : this.refObject;
 		}
@@ -655,11 +656,11 @@ export abstract class AbstractThreeController {
 	 * @param [refObject]
 	 * @returns component
 	 */
-	protected getComponent(refObject?: I3JS.IObject3D): any {
+	protected getComponent(refObject?: I3JS.Object3D): any {
 		const object3d = refObject || this.refObject;
 		if (
-			ThreeUtil.isNotNull(object3d) &&
-			ThreeUtil.isNotNull(object3d.userData.component)
+			NgxThreeUtil.isNotNull(object3d) &&
+			NgxThreeUtil.isNotNull(object3d.userData.component)
 		) {
 			return object3d.userData.component;
 		}
@@ -671,12 +672,12 @@ export abstract class AbstractThreeController {
 	 * @param [refObject]
 	 * @returns component2 d
 	 */
-	protected getComponent2D(refObject?: HtmlCollection): VisualComponent {
+	protected getComponent2D(refObject?: IHtmlCollection): NgxVisualComponent {
 		const object2d = refObject || this.refObject2d;
 		if (
-			ThreeUtil.isNotNull(object2d) &&
-			ThreeUtil.isNotNull(object2d.component) &&
-			object2d.component instanceof VisualComponent
+			NgxThreeUtil.isNotNull(object2d) &&
+			NgxThreeUtil.isNotNull(object2d.component) &&
+			object2d.component instanceof NgxVisualComponent
 		) {
 			return object2d.component;
 		}
@@ -688,11 +689,11 @@ export abstract class AbstractThreeController {
 	 * @param [refObject]
 	 * @returns html element
 	 */
-	protected getHtmlElement(refObject?: HtmlCollection): HTMLElement {
+	protected getHtmlElement(refObject?: IHtmlCollection): HTMLElement {
 		const object2d = refObject || this.refObject2d;
 		if (
-			ThreeUtil.isNotNull(object2d) &&
-			ThreeUtil.isNotNull(object2d.html) &&
+			NgxThreeUtil.isNotNull(object2d) &&
+			NgxThreeUtil.isNotNull(object2d.html) &&
 			object2d.html instanceof HTMLElement
 		) {
 			return object2d.html;
@@ -706,18 +707,18 @@ export abstract class AbstractThreeController {
 	 * @returns abstract material component
 	 */
 	protected getAbstractMaterialComponent(
-		refObject?: I3JS.IObject3D
-	): AbstractMaterialComponent {
+		refObject?: I3JS.Object3D
+	): NgxAbstractMaterialComponent {
 		const object3d = refObject || this.refObject;
 		if (
-			ThreeUtil.isNotNull(object3d) &&
+			NgxThreeUtil.isNotNull(object3d) &&
 			object3d instanceof N3JS.Mesh &&
-			ThreeUtil.isNotNull(object3d.material)
+			NgxThreeUtil.isNotNull(object3d.material)
 		) {
 			let materialComp: any = null;
 			if (
 				object3d.material instanceof N3JS.Material &&
-				ThreeUtil.isNotNull(object3d.material.userData.component)
+				NgxThreeUtil.isNotNull(object3d.material.userData.component)
 			) {
 				materialComp = object3d.material.userData.component;
 			} else if (
@@ -727,8 +728,8 @@ export abstract class AbstractThreeController {
 				materialComp = object3d.material[0].userData.component;
 			}
 			if (
-				ThreeUtil.isNotNull(materialComp) &&
-				materialComp instanceof AbstractMaterialComponent
+				NgxThreeUtil.isNotNull(materialComp) &&
+				materialComp instanceof NgxAbstractMaterialComponent
 			) {
 				return materialComp;
 			}
@@ -743,16 +744,16 @@ export abstract class AbstractThreeController {
 	 * @param [refObject]
 	 * @returns controller
 	 */
-	protected getController<T extends AbstractThreeController>(
+	protected getController<T extends NgxAbstractThreeController>(
 		type: { new (obj: any): T },
-		refObject?: I3JS.IObject3D
+		refObject?: I3JS.Object3D
 	): T {
 		const component = this.getComponent(refObject);
-		if (ThreeUtil.isNotNull(component.controllerList)) {
+		if (NgxThreeUtil.isNotNull(component.controllerList)) {
 			const controller = component.controllerList.find((controller: any) => {
 				return controller.getController() instanceof type;
 			});
-			if (ThreeUtil.isNotNull(controller)) {
+			if (NgxThreeUtil.isNotNull(controller)) {
 				return controller.getController() as T;
 			}
 		}
@@ -766,13 +767,13 @@ export abstract class AbstractThreeController {
 	 * @param [refObject]
 	 * @returns controllers
 	 */
-	protected getControllers<T extends AbstractThreeController>(
+	protected getControllers<T extends NgxAbstractThreeController>(
 		type: { new (obj: any): T } = null,
-		refObject?: I3JS.IObject3D
+		refObject?: I3JS.Object3D
 	): T[] {
 		const controllers: T[] = [];
 		const component = this.getComponent(refObject);
-		if (ThreeUtil.isNotNull(component.controllerList)) {
+		if (NgxThreeUtil.isNotNull(component.controllerList)) {
 			const controller = component.controllerList.filter((controller: any) => {
 				if (type === null) {
 					return true;
@@ -780,7 +781,7 @@ export abstract class AbstractThreeController {
 					return controller.getController() instanceof type;
 				}
 			});
-			if (ThreeUtil.isNotNull(controller) && controller.length > 0) {
+			if (NgxThreeUtil.isNotNull(controller) && controller.length > 0) {
 				controller.forEach((controller: any) => {
 					controllers.push(controller.getController() as T);
 				});
@@ -852,7 +853,7 @@ export abstract class AbstractThreeController {
 	 * Updates abstract three controller
 	 * @param rendererTimer
 	 */
-	public update(rendererTimer: RendererTimer): void {}
+	public update(rendererTimer: IRendererTimer): void {}
 
 	/**
 	 * Lates update
@@ -880,10 +881,10 @@ export abstract class AbstractThreeController {
 /**
  * Auto rotation controller
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoRotationController) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAutoRotationController) page for details.
  *
  */
-export class AutoRotationController extends AbstractThreeController {
+export class NgxAutoRotationController extends NgxAbstractThreeController {
 	/**
 	 * The X of auto rotation controller
 	 */
@@ -913,7 +914,7 @@ export class AutoRotationController extends AbstractThreeController {
 				}
 				const rotation = this.rotation.clone();
 				tweenTimer.to(rotation, {
-					...ThreeUtil.getEulerSafe(this.x, this.y, this.z),
+					...NgxThreeUtil.getEulerSafe(this.x, this.y, this.z),
 					duration: this.getDuration(),
 					ease: this.getEasing(),
 					repeat: this.getRepeat(),
@@ -928,7 +929,7 @@ export class AutoRotationController extends AbstractThreeController {
 				if (tweenTimer !== null) {
 					tweenTimer.clear();
 				}
-				const target = ThreeUtil.getVector3Safe(this.x, this.y, this.z);
+				const target = NgxThreeUtil.getVector3Safe(this.x, this.y, this.z);
 				tweenTimer.to(this.refObject2d.html, {
 					...{ rotateX: target.x, rotateY: target.y, rotateZ: target.z },
 					duration: this.getDuration(),
@@ -947,10 +948,10 @@ export class AutoRotationController extends AbstractThreeController {
 /**
  * Auto scale controller
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoScaleController) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAutoScaleController) page for details.
  *
  */
-export class AutoScaleController extends AbstractThreeController {
+export class NgxAutoScaleController extends NgxAbstractThreeController {
 	/**
 	 * The X of auto scale controller
 	 */
@@ -980,7 +981,7 @@ export class AutoScaleController extends AbstractThreeController {
 				}
 				const scale = this.scale.clone();
 				tweenTimer.to(scale, {
-					...ThreeUtil.getVector3Safe(this.x, this.y, this.z),
+					...NgxThreeUtil.getVector3Safe(this.x, this.y, this.z),
 					duration: this.getDuration(),
 					ease: this.getEasing(),
 					repeat: this.getRepeat(),
@@ -995,7 +996,7 @@ export class AutoScaleController extends AbstractThreeController {
 				if (tweenTimer !== null) {
 					tweenTimer.clear();
 				}
-				const target = ThreeUtil.getVector3Safe(this.x, this.y, this.z);
+				const target = NgxThreeUtil.getVector3Safe(this.x, this.y, this.z);
 				tweenTimer.to(this.refObject2d.html, {
 					...{ scaleX: target.x, scaleY: target.y },
 					duration: this.getDuration(),
@@ -1014,10 +1015,10 @@ export class AutoScaleController extends AbstractThreeController {
 /**
  * Auto position controller
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoPositionController) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAutoPositionController) page for details.
  *
  */
-export class AutoPositionController extends AbstractThreeController {
+export class NgxAutoPositionController extends NgxAbstractThreeController {
 	/**
 	 * The X of auto position controller
 	 */
@@ -1045,7 +1046,7 @@ export class AutoPositionController extends AbstractThreeController {
 				tweenTimer.clear();
 				const position = this.position.clone();
 				tweenTimer.to(position, {
-					...ThreeUtil.getVector3Safe(this.x, this.y, this.z),
+					...NgxThreeUtil.getVector3Safe(this.x, this.y, this.z),
 					duration: this.getDuration(),
 					ease: this.getEasing(),
 					repeat: this.getRepeat(),
@@ -1058,7 +1059,7 @@ export class AutoPositionController extends AbstractThreeController {
 			} else if (this.refObject2d !== null) {
 				const tweenTimer = this.tweenTimer;
 				tweenTimer.clear();
-				const target = ThreeUtil.getVector3Safe(this.x, this.y, this.z);
+				const target = NgxThreeUtil.getVector3Safe(this.x, this.y, this.z);
 				tweenTimer.to(this.refObject2d.html, {
 					...{ left: target.x, top: target.y },
 					duration: this.getDuration(),
@@ -1077,14 +1078,14 @@ export class AutoPositionController extends AbstractThreeController {
 /**
  * Auto material controller
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoMaterialController) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAutoMaterialController) page for details.
  *
  */
-export class AutoMaterialController extends AbstractThreeController {
+export class NgxAutoMaterialController extends NgxAbstractThreeController {
 	/**
 	 * The Color of auto material controller
 	 */
-	protected color: number | string | I3JS.IColor = null;
+	protected color: number | string | I3JS.Color = null;
 
 	/**
 	 * The Opacity of auto material controller
@@ -1111,7 +1112,7 @@ export class AutoMaterialController extends AbstractThreeController {
 						materialOpacity: material.opacity,
 					};
 					tweenTimer.to(colorOpacity, {
-						...ThreeUtil.getColorSafe(this.color),
+						...NgxThreeUtil.getColorSafe(this.color),
 						materialOpacity: this.opacity,
 						duration: this.getDuration(),
 						ease: this.getEasing(),
@@ -1132,7 +1133,7 @@ export class AutoMaterialController extends AbstractThreeController {
 				const tweenTimer = this.tweenTimer;
 				tweenTimer.clear();
 				tweenTimer.to(this.refObject2d.html, {
-					backgroundColor: ThreeUtil.getColorSafe(this.color).getStyle(),
+					backgroundColor: NgxThreeUtil.getColorSafe(this.color).getStyle(),
 					opacity: this.opacity,
 					duration: this.getDuration(),
 					ease: this.getEasing(),
@@ -1150,10 +1151,10 @@ export class AutoMaterialController extends AbstractThreeController {
 /**
  * Auto uniforms controller
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AutoUniformsController) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAutoUniformsController) page for details.
  *
  */
-export class AutoUniformsController extends AbstractThreeController {
+export class NgxAutoUniformsController extends NgxAbstractThreeController {
 	/**
 	 * The Key of auto uniforms controller
 	 */
@@ -1173,7 +1174,7 @@ export class AutoUniformsController extends AbstractThreeController {
 	 * Sets object3d
 	 * @param refObject
 	 */
-	public setObject3d(refObject: I3JS.IObject3D) {
+	public setObject3d(refObject: I3JS.Object3D) {
 		super.setObject3d(refObject);
 	}
 
@@ -1185,7 +1186,7 @@ export class AutoUniformsController extends AbstractThreeController {
 		super.setVariables(variables);
 		this.uniform = null;
 		const refObject: any = this.refObject;
-		if (ThreeUtil.isNotNull(this.key) && refObject['material']) {
+		if (NgxThreeUtil.isNotNull(this.key) && refObject['material']) {
 			const material = refObject['material'];
 			if (material instanceof N3JS.ShaderMaterial) {
 				this.uniform = material.uniforms[this.key];
@@ -1202,7 +1203,7 @@ export class AutoUniformsController extends AbstractThreeController {
 	 * Updates auto uniforms controller
 	 * @param rendererTimer
 	 */
-	public update(rendererTimer: RendererTimer): void {
+	public update(rendererTimer: IRendererTimer): void {
 		if (this.uniform !== null) {
 			switch (this.valueType.toLowerCase()) {
 				default:

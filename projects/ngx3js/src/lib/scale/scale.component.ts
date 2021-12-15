@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TagAttributes, ThreeUtil, I3JS, N3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, I3JS, N3JS } from '../interface';
+import { ITagAttributes } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Scale component.
@@ -14,8 +15,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './scale.component.html',
 	styleUrls: ['./scale.component.scss'],
 })
-export class ScaleComponent
-	extends AbstractSubscribeComponent
+export class NgxScaleComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -103,24 +104,24 @@ export class ScaleComponent
 	/**
 	 * The Scale of scale component
 	 */
-	private scale: I3JS.IVector3 = null;
+	private scale: I3JS.Vector3 = null;
 
 	/**
 	 * The Object3d of scale component
 	 */
 	private _object3d: {
-		[key: string]: I3JS.IObject3D;
+		[key: string]: I3JS.Object3D;
 	} = {};
 
 	/**
 	 * unSets object3d
 	 * @param object3d
 	 */
-	public unsetObject3d(object3d: AbstractSubscribeComponent) {
+	public unsetObject3d(object3d: NgxAbstractSubscribeComponent) {
 		const key: string = object3d.getId();
 		this.unSubscribeRefer('scale_' + key);
 		this.unSubscribeRefer('unscale_' + key);
-		if (ThreeUtil.isNotNull(this._object3d[key])) {
+		if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 			delete this._object3d[key];
 		}
 	}
@@ -129,18 +130,18 @@ export class ScaleComponent
 	 * Sets object3d
 	 * @param object3d
 	 */
-	public setObject3d(object3d: AbstractSubscribeComponent) {
-		if (ThreeUtil.isNotNull(object3d)) {
+	public setObject3d(object3d: NgxAbstractSubscribeComponent) {
+		if (NgxThreeUtil.isNotNull(object3d)) {
 			const key: string = object3d.getId();
-			const object = ThreeUtil.getObject3d(object3d);
-			if (ThreeUtil.isNotNull(this.refName) && ThreeUtil.isNotNull(object)) {
+			const object = NgxThreeUtil.getObject3d(object3d);
+			if (NgxThreeUtil.isNotNull(this.refName) && NgxThreeUtil.isNotNull(object)) {
 				this._object3d[key] = object.getObjectByName(this.refName);
 			} else {
 				this._object3d[key] = object;
 			}
 			this.subscribeRefer(
 				'scale_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.setObject3d(object3d);
@@ -150,7 +151,7 @@ export class ScaleComponent
 			);
 			this.subscribeRefer(
 				'unscale_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.unsetObject3d(object3d);
@@ -167,16 +168,16 @@ export class ScaleComponent
 	 * Synks object3d
 	 * @param [scale]
 	 */
-	public synkObject3d(scale: I3JS.IVector3 = null, key: string = null) {
-		if (ThreeUtil.isNotNull(scale) && this.enabled) {
-			const object3dList: I3JS.IObject3D[] = [];
-			if (ThreeUtil.isNotNull(key)) {
-				if (ThreeUtil.isNotNull(this._object3d[key])) {
+	public synkObject3d(scale: I3JS.Vector3 = null, key: string = null) {
+		if (NgxThreeUtil.isNotNull(scale) && this.enabled) {
+			const object3dList: I3JS.Object3D[] = [];
+			if (NgxThreeUtil.isNotNull(key)) {
+				if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 					object3dList.push(this._object3d[key]);
 				}
 			} else {
 				Object.entries(this._object3d).forEach(([_, object3d]) => {
-					if (ThreeUtil.isNotNull(object3d)) {
+					if (NgxThreeUtil.isNotNull(object3d)) {
 						object3dList.push(object3d);
 					}
 				});
@@ -184,19 +185,19 @@ export class ScaleComponent
 			object3dList.forEach((object3d) => {
 				if (object3d instanceof N3JS.Object3D) {
 					if (
-						ThreeUtil.isNotNull(this.x) &&
-						ThreeUtil.isNotNull(this.y) &&
-						ThreeUtil.isNotNull(this.z)
+						NgxThreeUtil.isNotNull(this.x) &&
+						NgxThreeUtil.isNotNull(this.y) &&
+						NgxThreeUtil.isNotNull(this.z)
 					) {
 						object3d.scale.copy(scale);
 					} else {
-						if (ThreeUtil.isNotNull(this.x)) {
+						if (NgxThreeUtil.isNotNull(this.x)) {
 							object3d.scale.x = scale.x;
 						}
-						if (ThreeUtil.isNotNull(this.y)) {
+						if (NgxThreeUtil.isNotNull(this.y)) {
 							object3d.scale.y = scale.y;
 						}
-						if (ThreeUtil.isNotNull(this.z)) {
+						if (NgxThreeUtil.isNotNull(this.z)) {
 							object3d.scale.z = scale.z;
 						}
 					}
@@ -213,13 +214,13 @@ export class ScaleComponent
 	 */
 	public setScale(x?: number, y?: number, z?: number) {
 		if (this.scale !== null) {
-			this.x = ThreeUtil.getTypeSafe(x, this.scale.x);
-			this.y = ThreeUtil.getTypeSafe(y, this.scale.y);
-			this.z = ThreeUtil.getTypeSafe(z, this.scale.z);
+			this.x = NgxThreeUtil.getTypeSafe(x, this.scale.x);
+			this.y = NgxThreeUtil.getTypeSafe(y, this.scale.y);
+			this.z = NgxThreeUtil.getTypeSafe(z, this.scale.z);
 		} else {
-			this.x = ThreeUtil.getTypeSafe(x, 0);
-			this.y = ThreeUtil.getTypeSafe(y, 0);
-			this.z = ThreeUtil.getTypeSafe(z, 0);
+			this.x = NgxThreeUtil.getTypeSafe(x, 0);
+			this.y = NgxThreeUtil.getTypeSafe(y, 0);
+			this.z = NgxThreeUtil.getTypeSafe(z, 0);
 		}
 		this.needUpdate = true;
 	}
@@ -229,12 +230,12 @@ export class ScaleComponent
 	 * @param [options]
 	 * @returns tag attribute
 	 */
-	public getTagAttribute(options?: any): TagAttributes {
-		const tagAttributes: TagAttributes = {
+	public getTagAttribute(options?: any): ITagAttributes {
+		const tagAttributes: ITagAttributes = {
 			tag: 'ngx3js-scale',
 			attributes: [],
 		};
-		if (ThreeUtil.isNotNull(options.scale)) {
+		if (NgxThreeUtil.isNotNull(options.scale)) {
 			tagAttributes.attributes.push({ name: 'x', value: options.scale.x });
 			tagAttributes.attributes.push({ name: 'y', value: options.scale.y });
 			tagAttributes.attributes.push({ name: 'z', value: options.scale.z });
@@ -251,7 +252,7 @@ export class ScaleComponent
 	 * @param size
 	 * @returns scale from size
 	 */
-	private getScaleFromSize(size: I3JS.IVector2): I3JS.IVector3 {
+	private getScaleFromSize(size: I3JS.Vector2): I3JS.Vector3 {
 		switch (this.scaleMode) {
 			case 'max':
 				const maxSize = Math.max(size.x, size.y);
@@ -271,11 +272,11 @@ export class ScaleComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.scale !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getScale();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
 				this.needUpdate = true;
 				return;
 			}
@@ -287,17 +288,17 @@ export class ScaleComponent
 	 * Gets scale
 	 * @returns scale
 	 */
-	private _getScale(): I3JS.IVector3 {
-		let scale: I3JS.IVector3 = null;
+	private _getScale(): I3JS.Vector3 {
+		let scale: I3JS.Vector3 = null;
 		if (this.refer !== null && this.refer !== undefined) {
 			if (this.refer.getSize) {
 				scale = this.getScaleFromSize(this.refer.getSize());
 			} else {
-				scale = ThreeUtil.getScale(this.refer);
+				scale = NgxThreeUtil.getScale(this.refer);
 			}
 		}
 		if (scale === null) {
-			scale = ThreeUtil.getVector3Safe(
+			scale = NgxThreeUtil.getVector3Safe(
 				this.x,
 				this.y,
 				this.z,
@@ -306,7 +307,7 @@ export class ScaleComponent
 				true
 			);
 		}
-		if (ThreeUtil.isNotNull(this.multiply)) {
+		if (NgxThreeUtil.isNotNull(this.multiply)) {
 			scale.multiplyScalar(this.multiply);
 		}
 		return scale;
@@ -316,7 +317,7 @@ export class ScaleComponent
 	 * Gets scale
 	 * @returns scale
 	 */
-	public getScale(): I3JS.IVector3 {
+	public getScale(): I3JS.Vector3 {
 		if (this.scale === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.scale = this._getScale();

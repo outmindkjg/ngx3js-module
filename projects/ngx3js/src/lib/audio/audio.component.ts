@@ -5,9 +5,9 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, N3JS, I3JS } from '../interface';
-import { AbstractObject3dComponent } from '../object3d.abstract';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Audio component.
@@ -47,17 +47,17 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	styleUrls: ['./audio.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => AudioComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxAudioComponent),
 		},
 		{
-			provide: AbstractSubscribeComponent,
-			useExisting: forwardRef(() => AudioComponent),
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxAudioComponent),
 		},
 	],
 })
-export class AudioComponent
-	extends AbstractObject3dComponent
+export class NgxAudioComponent
+	extends NgxAbstractObject3dComponent
 	implements OnInit
 {
 	/**
@@ -196,7 +196,7 @@ export class AudioComponent
 	/**
 	 * The Audio of audio component
 	 */
-	private audio: I3JS.IAudio<any> = null;
+	private audio: I3JS.Audio<any> = null;
 
 	/**
 	 * The Video of audio component
@@ -206,17 +206,17 @@ export class AudioComponent
 	/**
 	 * The Listener of audio component
 	 */
-	private listener: I3JS.IAudioListener = null;
+	private listener: I3JS.AudioListener = null;
 
 	/**
 	 * The Analyser of audio component
 	 */
-	private analyser: I3JS.IAudioAnalyser = null;
+	private analyser: I3JS.AudioAnalyser = null;
 
 	/**
 	 * Audio loader of audio component
 	 */
-	private static audioLoader: I3JS.IAudioLoader = null;
+	private static audioLoader: I3JS.AudioLoader = null;
 
 	/**
 	 * Loads audio
@@ -224,7 +224,7 @@ export class AudioComponent
 	 * @param onLoad
 	 */
 	private loadAudio(url: string, onLoad: (audioBuffer: AudioBuffer) => void) {
-		AudioComponent.loadAudio(url, onLoad);
+		NgxAudioComponent.loadAudio(url, onLoad);
 	}
 
 	/**
@@ -238,7 +238,7 @@ export class AudioComponent
 	) {
 		if (this.audioLoader === null) {
 			this.audioLoader = new N3JS.AudioLoader(
-				ThreeUtil.getLoadingManager()
+				NgxThreeUtil.getLoadingManager()
 			) as any;
 		}
 		this.audioLoader.load(url, (audioBuffer: AudioBuffer): void => {
@@ -256,7 +256,7 @@ export class AudioComponent
 	 * @param listener
 	 * @param renderer
 	 */
-	public setListener(listener: I3JS.IAudioListener, renderer: any) {
+	public setListener(listener: I3JS.AudioListener, renderer: any) {
 		if (this.listener !== listener) {
 			this.listener = listener;
 			this._renderer = renderer;
@@ -268,7 +268,7 @@ export class AudioComponent
 	 * Gets listener
 	 * @returns listener
 	 */
-	private getListener(): I3JS.IAudioListener {
+	private getListener(): I3JS.AudioListener {
 		if (this.listener !== null) {
 			return this.listener;
 		} else {
@@ -281,7 +281,7 @@ export class AudioComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D): boolean {
+	public setParent(parent: I3JS.Object3D): boolean {
 		if (super.setParent(parent)) {
 			this.getAudio();
 			return true;
@@ -292,25 +292,25 @@ export class AudioComponent
 	/**
 	 * Loaded video texture of audio component
 	 */
-	private loadedVideoTexture: I3JS.IVideoTexture = null;
+	private loadedVideoTexture: I3JS.VideoTexture = null;
 
 	/**
 	 * Loaded audio texture of audio component
 	 */
-	private loadedAudioTexture: I3JS.IDataTexture = null;
+	private loadedAudioTexture: I3JS.DataTexture = null;
 
 	/**
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): I3JS.ITexture {
+	public getTexture(): I3JS.Texture {
 		this.getAudio();
 		if (this.video !== null) {
 			if (this.loadedVideoTexture === null) {
 				this.loadedVideoTexture = new N3JS.VideoTexture(this.video);
 			}
 			return this.loadedVideoTexture;
-		} else if (ThreeUtil.isNotNull(this.url)) {
+		} else if (NgxThreeUtil.isNotNull(this.url)) {
 			this.getAudio();
 			const analyser = this.getAnalyser();
 			let data: Uint8Array = null;
@@ -365,7 +365,7 @@ export class AudioComponent
 	 *                  See [this page](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize) for details.
 	 * @returns analyser
 	 */
-	public getAnalyser(fftSize?: number): I3JS.IAudioAnalyser {
+	public getAnalyser(fftSize?: number): I3JS.AudioAnalyser {
 		if (this.analyser === null && this.audio !== null) {
 			this.analyser = new N3JS.AudioAnalyser(
 				this.audio,
@@ -400,8 +400,8 @@ export class AudioComponent
 	 */
 	public applyChanges3d(changes: string[]) {
 		if (this.audio !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'volume',
 					'loop',
 					'url',
@@ -462,7 +462,7 @@ export class AudioComponent
 								switch (urlType.toLowerCase()) {
 									case 'audio':
 										this.loadAudio(
-											ThreeUtil.getStoreUrl(audioUrl),
+											NgxThreeUtil.getStoreUrl(audioUrl),
 											(buffer: AudioBuffer) => {
 												this.audio.setBuffer(buffer);
 												this.addChanges('loaded');
@@ -511,43 +511,43 @@ export class AudioComponent
 						}
 						break;
 					case 'loop':
-						if (ThreeUtil.isNotNull(this.loop)) {
+						if (NgxThreeUtil.isNotNull(this.loop)) {
 							this.audio.loop = this.loop;
 						}
 						break;
 					case 'volume':
-						if (ThreeUtil.isNotNull(this.volume)) {
+						if (NgxThreeUtil.isNotNull(this.volume)) {
 							this.audio.setVolume(this.volume);
 						}
 						break;
 					case 'positionalaudio':
 						if (this.audio instanceof N3JS.PositionalAudio) {
-							if (ThreeUtil.isNotNull(this.refDistance)) {
+							if (NgxThreeUtil.isNotNull(this.refDistance)) {
 								this.audio.setRefDistance(this.refDistance);
 							}
-							if (ThreeUtil.isNotNull(this.rolloffFactor)) {
+							if (NgxThreeUtil.isNotNull(this.rolloffFactor)) {
 								this.audio.setRolloffFactor(this.rolloffFactor);
 							}
-							if (ThreeUtil.isNotNull(this.distanceModel)) {
+							if (NgxThreeUtil.isNotNull(this.distanceModel)) {
 								this.audio.setDistanceModel(this.distanceModel);
 							}
-							if (ThreeUtil.isNotNull(this.maxDistance)) {
+							if (NgxThreeUtil.isNotNull(this.maxDistance)) {
 								this.audio.setMaxDistance(this.maxDistance);
 							}
 							if (
-								ThreeUtil.isNotNull(this.coneInnerAngle) &&
-								ThreeUtil.isNotNull(this.coneOuterAngle)
+								NgxThreeUtil.isNotNull(this.coneInnerAngle) &&
+								NgxThreeUtil.isNotNull(this.coneOuterAngle)
 							) {
 								this.audio.setDirectionalCone(
-									ThreeUtil.getTypeSafe(this.coneInnerAngle, 0),
-									ThreeUtil.getTypeSafe(this.coneOuterAngle, 360),
-									ThreeUtil.getTypeSafe(this.coneOuterGain, 1)
+									NgxThreeUtil.getTypeSafe(this.coneInnerAngle, 0),
+									NgxThreeUtil.getTypeSafe(this.coneOuterAngle, 360),
+									NgxThreeUtil.getTypeSafe(this.coneOuterGain, 1)
 								);
 							}
 						}
 						break;
 					case 'play':
-						if (ThreeUtil.isNotNull(this.play) && this.audio.buffer !== null) {
+						if (NgxThreeUtil.isNotNull(this.play) && this.audio.buffer !== null) {
 							if (this.play) {
 								if (!this.audio.isPlaying) {
 									this.audio.play();
@@ -560,7 +560,7 @@ export class AudioComponent
 						}
 						break;
 					case 'autoplay':
-						if (ThreeUtil.isNotNull(this.autoplay)) {
+						if (NgxThreeUtil.isNotNull(this.autoplay)) {
 							this.audio.autoplay = this.autoplay;
 						}
 						break;
@@ -584,7 +584,7 @@ export class AudioComponent
 	 * @template T
 	 * @returns audio
 	 */
-	public getAudio<T extends I3JS.IAudio>(): T {
+	public getAudio<T extends I3JS.Audio>(): T {
 		if (this.audio === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.loadedVideoTexture = null;

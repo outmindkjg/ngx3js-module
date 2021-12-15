@@ -1,4 +1,5 @@
-import { ThreeUtil, CurvesParameters, N3JS, I3JS } from '../../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
+import { ICurvesParameters } from '../../ngx-interface';
 
 /**
  * Curves line
@@ -45,18 +46,18 @@ export class CurvesLine extends N3JS.Curve {
 	 * @param [radius]
 	 * @param [options]
 	 */
-	constructor(radius: number = 1, options?: CurvesParameters) {
+	constructor(radius: number = 1, options?: ICurvesParameters) {
 		super();
 		options = options || {};
-		this.radius = ThreeUtil.isNotNull(radius) ? radius : 1;
-		this.radiusInner = ThreeUtil.isNotNull(options.radiusInner)
+		this.radius = NgxThreeUtil.isNotNull(radius) ? radius : 1;
+		this.radiusInner = NgxThreeUtil.isNotNull(options.radiusInner)
 			? options.radiusInner
 			: 0;
-		this.waveH = ThreeUtil.isNotNull(options.waveH) ? options.waveH : 0;
-		this.waveR = ThreeUtil.isNotNull(options.waveR) ? options.waveR : 0;
-		this.rateX = ThreeUtil.isNotNull(options.rateX) ? options.rateX : 1;
-		this.rateY = ThreeUtil.isNotNull(options.rateY) ? options.rateY : 1;
-		this.rateZ = ThreeUtil.isNotNull(options.rateZ) ? options.rateZ : 1;
+		this.waveH = NgxThreeUtil.isNotNull(options.waveH) ? options.waveH : 0;
+		this.waveR = NgxThreeUtil.isNotNull(options.waveR) ? options.waveR : 0;
+		this.rateX = NgxThreeUtil.isNotNull(options.rateX) ? options.rateX : 1;
+		this.rateY = NgxThreeUtil.isNotNull(options.rateY) ? options.rateY : 1;
+		this.rateZ = NgxThreeUtil.isNotNull(options.rateZ) ? options.rateZ : 1;
 	}
 
 	/**
@@ -65,7 +66,7 @@ export class CurvesLine extends N3JS.Curve {
 	 * @param optionalTarget
 	 * @returns
 	 */
-	public getPoint(t: number, optionalTarget: I3JS.IVector3) {
+	public getPoint(t: number, optionalTarget: I3JS.Vector3) {
 		const point = optionalTarget || new N3JS.Vector3();
 		const v = Math.max(-1, Math.min(1, t * 2 - 1));
 		const y = this.waveH != 0 ? Math.sin(2 * Math.PI * t * this.waveH) : v;

@@ -10,14 +10,15 @@ import * as Ammo from '../threejs-library/ammo';
 import * as AmmoType from '../threejs-library/ammo-type';
 
 import { ConvexObjectBreaker } from 'three/examples/jsm/misc/ConvexObjectBreaker';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { RendererTimer, ThreeUtil, N3JS, I3JS } from './../interface';
-import { PhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from './../interface';
+import { NgxPhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
 import { AmmoPhysics } from '../threejs-library/AmmoPhysics';
 import { OimoPhysics } from '../threejs-library/OimoPhysics';
+import { IRendererTimer } from '../ngx-interface';
 
 /**
- * PhysicsComponent
+ * NgxPhysicsComponent
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PhysicsComponent) page for details.
  * See the [ngx physics](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_physics) page for a live demo.
@@ -41,8 +42,8 @@ import { OimoPhysics } from '../threejs-library/OimoPhysics';
 	templateUrl: './physics.component.html',
 	styleUrls: ['./physics.component.scss'],
 })
-export class PhysicsComponent
-	extends AbstractSubscribeComponent
+export class NgxPhysicsComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -81,8 +82,8 @@ export class PhysicsComponent
 	/**
 	 * Content children of physics component
 	 */
-	@ContentChildren(PhysicsConstraintComponent, { descendants: false })
-	private constraintList: QueryList<PhysicsConstraintComponent>;
+	@ContentChildren(NgxPhysicsConstraintComponent, { descendants: false })
+	private constraintList: QueryList<NgxPhysicsConstraintComponent>;
 
 	/**
 	 * Gets gravity
@@ -90,10 +91,10 @@ export class PhysicsComponent
 	 * @returns gravity
 	 */
 	private getGravity(def?: number): AmmoType.btVector3 {
-		const gravity = ThreeUtil.getTypeSafe(this.gravity, def);
-		const gravityX = ThreeUtil.getTypeSafe(this.gravityX, 0);
-		const gravityY = ThreeUtil.getTypeSafe(this.gravityY, gravity);
-		const gravityZ = ThreeUtil.getTypeSafe(this.gravityZ, 0);
+		const gravity = NgxThreeUtil.getTypeSafe(this.gravity, def);
+		const gravityX = NgxThreeUtil.getTypeSafe(this.gravityX, 0);
+		const gravityY = NgxThreeUtil.getTypeSafe(this.gravityY, gravity);
+		const gravityZ = NgxThreeUtil.getTypeSafe(this.gravityZ, 0);
 		return new this.ammo.btVector3(gravityX, gravityY, gravityZ);
 	}
 
@@ -113,7 +114,7 @@ export class PhysicsComponent
 			Ammo.AmmoInit({
 				Ammo: null,
 				locateFile: (ammoFile: string) => {
-					return ThreeUtil.getStoreUrl(ammoFile);
+					return NgxThreeUtil.getStoreUrl(ammoFile);
 				},
 			}).then((ammoLib: any) => {
 				this.ammo = ammoLib;
@@ -216,12 +217,12 @@ export class PhysicsComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.physics !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getPhysics();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					[
 						'constraint',
@@ -237,15 +238,15 @@ export class PhysicsComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['gravityx', 'gravityy', 'gravityz'])) {
-				changes = ThreeUtil.pushUniq(changes, ['gravity']);
+			if (NgxThreeUtil.isIndexOf(changes, ['gravityx', 'gravityy', 'gravityz'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['gravity']);
 			}
 			if (this.physics instanceof this.ammo.btSoftRigidDynamicsWorld) {
 				changes.forEach((change) => {
 					switch (change.toLowerCase()) {
 						case 'constraint':
 							this.unSubscribeReferList('constraintList');
-							if (ThreeUtil.isNotNull(this.constraintList)) {
+							if (NgxThreeUtil.isNotNull(this.constraintList)) {
 								this.constraintList.forEach((constraint) => {
 									constraint.setPhysics(this.physics, this.ammo);
 								});
@@ -345,11 +346,11 @@ export class PhysicsComponent
 	 * @param body
 	 * @returns collision object
 	 */
-	public getCollisionObject(body: AmmoType.btCollisionObject): I3JS.IObject3D {
+	public getCollisionObject(body: AmmoType.btCollisionObject): I3JS.Object3D {
 		const rigidBody: any = this.getRigidBody(body);
 		if (
-			ThreeUtil.isNotNull(rigidBody) &&
-			ThreeUtil.isNotNull(rigidBody['object3d'])
+			NgxThreeUtil.isNotNull(rigidBody) &&
+			NgxThreeUtil.isNotNull(rigidBody['object3d'])
 		) {
 			return rigidBody['object3d'];
 		}
@@ -379,7 +380,7 @@ export class PhysicsComponent
 	 * Updates physics component
 	 * @param timer
 	 */
-	public update(timer: RendererTimer) {
+	public update(timer: IRendererTimer) {
 		if (
 			this.ammo !== null &&
 			this.physics instanceof this.ammo.btSoftRigidDynamicsWorld &&
@@ -459,7 +460,7 @@ export class PhysicsComponent
 
 					const fractureImpulse = 250;
 					if (breakable0 && !collided0 && maxImpulse > fractureImpulse) {
-						const fragments: I3JS.IObject3D[] = [];
+						const fragments: I3JS.Object3D[] = [];
 						const debris = convexBreaker.subdivideByImpact(
 							threeObject0,
 							this.impactPoint as any,
@@ -489,7 +490,7 @@ export class PhysicsComponent
 						});
 					}
 					if (breakable1 && !collided1 && maxImpulse > fractureImpulse) {
-						const fragments: I3JS.IObject3D[] = [];
+						const fragments: I3JS.Object3D[] = [];
 						const debris = convexBreaker.subdivideByImpact(
 							threeObject1,
 							this.impactPoint as any,

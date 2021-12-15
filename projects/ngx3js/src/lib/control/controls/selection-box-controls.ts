@@ -1,6 +1,7 @@
 import { SelectionBox } from 'three/examples/jsm/interactive/SelectionBox';
 import { SelectionHelper } from 'three/examples/jsm/interactive/SelectionHelper';
-import { ThreeColor, ThreeUtil, N3JS, I3JS } from '../../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
+import { INgxColor } from '../../ngx-interface';
 
 /**
  * Select Box Controls
@@ -22,12 +23,12 @@ export class NgxSelectBoxControls {
 	/**
 	 * The Pointerup of select box controls
 	 */
-	pointerup: ThreeColor = 0xffffff;
+	pointerup: INgxColor = 0xffffff;
 
 	/**
 	 * The Pointerdown of select box controls
 	 */
-	pointerdown: ThreeColor = 0x000000;
+	pointerdown: INgxColor = 0x000000;
 
 	/**
 	 * Offset top of renderer component
@@ -50,9 +51,9 @@ export class NgxSelectBoxControls {
 	 * @param domElement
 	 */
 	constructor(
-		camera: I3JS.ICamera,
-		scene: I3JS.IScene,
-		renderer: I3JS.IWebGLRenderer
+		camera: I3JS.Camera,
+		scene: I3JS.Scene,
+		renderer: I3JS.WebGLRenderer
 	) {
 		this.selectionBox = new SelectionBox(camera as any, scene as any);
 		this.helper = new SelectionHelper(
@@ -75,8 +76,8 @@ export class NgxSelectBoxControls {
 			(event) => {
 				for (const item of this.selectionBox.collection) {
 					const material: any = item.material;
-					if (ThreeUtil.isNotNull(material['emissive'])) {
-						material['emissive'].set(ThreeUtil.getColorSafe(this.pointerdown));
+					if (NgxThreeUtil.isNotNull(material['emissive'])) {
+						material['emissive'].set(NgxThreeUtil.getColorSafe(this.pointerdown));
 					}
 				}
 				const mouse = this.getMouse(event);
@@ -91,8 +92,8 @@ export class NgxSelectBoxControls {
 				if (this.helper.isDown) {
 					for (let i = 0; i < this.selectionBox.collection.length; i++) {
 						const item: any = this.selectionBox.collection[i].material;
-						if (ThreeUtil.isNotNull(item['emissive'])) {
-							item['emissive'].set(ThreeUtil.getColorSafe(this.pointerdown));
+						if (NgxThreeUtil.isNotNull(item['emissive'])) {
+							item['emissive'].set(NgxThreeUtil.getColorSafe(this.pointerdown));
 						}
 					}
 					const mouse = this.getMouse(event);
@@ -100,8 +101,8 @@ export class NgxSelectBoxControls {
 					const allSelected = this.selectionBox.select();
 					allSelected.forEach((item) => {
 						const material: any = item.material;
-						if (ThreeUtil.isNotNull(material['emissive'])) {
-							material['emissive'].set(ThreeUtil.getColorSafe(this.pointerup));
+						if (NgxThreeUtil.isNotNull(material['emissive'])) {
+							material['emissive'].set(NgxThreeUtil.getColorSafe(this.pointerup));
 						}
 					});
 				}
@@ -115,8 +116,8 @@ export class NgxSelectBoxControls {
 			const allSelected = this.selectionBox.select();
 			allSelected.forEach((item) => {
 				const material: any = item.material;
-				if (ThreeUtil.isNotNull(material['emissive'])) {
-					material['emissive'].set(ThreeUtil.getColorSafe(this.pointerup));
+				if (NgxThreeUtil.isNotNull(material['emissive'])) {
+					material['emissive'].set(NgxThreeUtil.getColorSafe(this.pointerup));
 				}
 			});
 		}),
@@ -126,14 +127,14 @@ export class NgxSelectBoxControls {
 	/**
 	 * The Mouse of select box controls
 	 */
-	private mouse: I3JS.IVector2 = new N3JS.Vector2();
+	private mouse: I3JS.Vector2 = new N3JS.Vector2();
 
 	/**
 	 * Gets mouse
 	 * @param event
 	 * @returns mouse
 	 */
-	private getMouse(event: any): I3JS.IVector2 {
+	private getMouse(event: any): I3JS.Vector2 {
 		const clientX = event.clientX;
 		const clientY = event.clientY;
 		const offsetX = clientX - this.offsetLeft;

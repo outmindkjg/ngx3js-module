@@ -5,8 +5,8 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractChartComponent } from '../../chart.abstract';
-import { AbstractObject3dComponent } from '../../object3d.abstract';
+import { NgxAbstractChartComponent } from '../../chart.abstract';
+import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
  * The Chart Bubble component.
@@ -20,13 +20,13 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	styleUrls: ['./bubble.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ChartBubbleComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxChartBubbleComponent),
 		},
 	],
 })
-export class ChartBubbleComponent
-	extends AbstractChartComponent
+export class NgxChartBubbleComponent
+	extends NgxAbstractChartComponent
 	implements OnInit
 {
 	/**

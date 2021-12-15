@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { AsstesFontsComponent } from './fonts/fonts.component';
+import { NgxAsstesFontsComponent } from './fonts/fonts.component';
 
 @NgModule({
   declarations: [
-    AsstesFontsComponent
+    NgxAsstesFontsComponent
   ],
   imports: [
   ],
   exports: [
-    AsstesFontsComponent
+    NgxAsstesFontsComponent
   ]
 })
 export class Ngx3jsAssetsModule { }

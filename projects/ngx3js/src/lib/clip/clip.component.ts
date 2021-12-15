@@ -6,9 +6,9 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { KeyframeComponent } from '../keyframe/keyframe.component';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ThreeUtil, N3JS, I3JS } from './../interface';
+import { NgxKeyframeComponent } from '../keyframe/keyframe.component';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from './../interface';
 
 /**
  * The Clip component.
@@ -33,8 +33,8 @@ import { ThreeUtil, N3JS, I3JS } from './../interface';
 	templateUrl: './clip.component.html',
 	styleUrls: ['./clip.component.scss'],
 })
-export class ClipComponent
-	extends AbstractSubscribeComponent
+export class NgxClipComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -127,10 +127,10 @@ export class ClipComponent
 	@Input() public loop: string = null;
 
 	/**
-	 * The keyframe list of KeyframeComponent
+	 * The keyframe list of NgxKeyframeComponent
 	 */
-	@ContentChildren(KeyframeComponent, { descendants: false })
-	private keyframeList: QueryList<KeyframeComponent>;
+	@ContentChildren(NgxKeyframeComponent, { descendants: false })
+	private keyframeList: QueryList<NgxKeyframeComponent>;
 
 	/**
 	 * Gets fps
@@ -138,7 +138,7 @@ export class ClipComponent
 	 * @returns fps
 	 */
 	private getFps(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.fps, def);
+		return NgxThreeUtil.getTypeSafe(this.fps, def);
 	}
 
 	/**
@@ -147,7 +147,7 @@ export class ClipComponent
 	 * @returns true if clamp when finished
 	 */
 	private getClampWhenFinished(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.clampWhenFinished, def);
+		return NgxThreeUtil.getTypeSafe(this.clampWhenFinished, def);
 	}
 
 	/**
@@ -202,24 +202,24 @@ export class ClipComponent
 	/**
 	 * The Mixer of clip component
 	 */
-	private mixer: I3JS.IAnimationMixer = null;
+	private mixer: I3JS.AnimationMixer = null;
 
 	private model: any = null;
 
 	/**
 	 * The Clips of clip component
 	 */
-	private clips: I3JS.IAnimationClip[] = null;
+	private clips: I3JS.AnimationClip[] = null;
 
 	/**
 	 * The Clip of clip component
 	 */
-	private clip: I3JS.IAnimationClip = null;
+	private clip: I3JS.AnimationClip = null;
 
 	/**
 	 * The Action of clip component
 	 */
-	public action: I3JS.IAnimationAction = null;
+	public action: I3JS.AnimationAction = null;
 
 	/**
 	 * Sets mixer
@@ -228,8 +228,8 @@ export class ClipComponent
 	 * @param [fps]
 	 */
 	public setMixer(
-		mixer: I3JS.IAnimationMixer,
-		clips: I3JS.IAnimationClip[],
+		mixer: I3JS.AnimationMixer,
+		clips: I3JS.AnimationClip[],
 		model: any
 	) {
 		if (this.mixer !== mixer) {
@@ -249,7 +249,7 @@ export class ClipComponent
 	public setFps(fps: number) {
 		if (this.action !== null && this.clip !== null) {
 			const clipFps = this.getFps(fps);
-			if (ThreeUtil.isNotNull(clipFps)) {
+			if (NgxThreeUtil.isNotNull(clipFps)) {
 				this.action.timeScale =
 					(this.clip.tracks.length * clipFps) / this.clip.duration;
 			}
@@ -270,7 +270,7 @@ export class ClipComponent
 	 * @param [endAction]
 	 * @param [duration]
 	 */
-	public crossFadeTo(endAction?: ClipComponent, duration?: number) {
+	public crossFadeTo(endAction?: NgxClipComponent, duration?: number) {
 		if (this.isPlayable()) {
 			if (
 				endAction !== null &&
@@ -342,16 +342,16 @@ export class ClipComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.clip !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getClip();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['init'], this.OBJECT_ATTR)) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init'], this.OBJECT_ATTR)) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, []);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, []);
 			}
 			super.applyChanges(changes);
 		}
@@ -369,12 +369,12 @@ export class ClipComponent
 	 * Gets clip
 	 * @returns
 	 */
-	public getClip(): I3JS.IAnimationClip {
+	public getClip(): I3JS.AnimationClip {
 		if (this.clip === null || this._needUpdate) {
 			this.needUpdate = false;
-			let clip: I3JS.IAnimationClip = null;
+			let clip: I3JS.AnimationClip = null;
 			if (this.clips !== null) {
-				if (this.index > -1 || ThreeUtil.isNotNull(this.name)) {
+				if (this.index > -1 || NgxThreeUtil.isNotNull(this.name)) {
 					clip =
 						this.index > -1
 							? this.clips[this.index]
@@ -384,10 +384,10 @@ export class ClipComponent
 				}
 			} else {
 				clip = new N3JS.AnimationClip(
-					ThreeUtil.getTypeSafe(this.name, 'default'),
+					NgxThreeUtil.getTypeSafe(this.name, 'default'),
 					this.duration,
 					[],
-					ThreeUtil.getBlendModeSafe(this.blendMode)
+					NgxThreeUtil.getBlendModeSafe(this.blendMode)
 				);
 			}
 			if (clip !== null) {
@@ -407,14 +407,14 @@ export class ClipComponent
 						this.action = this.mixer.clipAction(
 							subClip,
 							null,
-							ThreeUtil.getBlendModeSafe(this.blendMode)
+							NgxThreeUtil.getBlendModeSafe(this.blendMode)
 						);
 						this.clip = subClip;
 					} else {
 						this.action = this.mixer.clipAction(
 							clip,
 							null,
-							ThreeUtil.getBlendModeSafe(this.blendMode)
+							NgxThreeUtil.getBlendModeSafe(this.blendMode)
 						);
 						this.clip = clip;
 					}
@@ -424,7 +424,7 @@ export class ClipComponent
 					this.action.play();
 				} else {
 					this.clip = clip;
-					if (ThreeUtil.isNotNull(this.keyframeList)) {
+					if (NgxThreeUtil.isNotNull(this.keyframeList)) {
 						this.keyframeList.forEach((keyframe) => {
 							keyframe.setClip(this.clip);
 						});
@@ -436,20 +436,20 @@ export class ClipComponent
 						this.action = this.mixer.clipAction(
 							clip,
 							this.model,
-							ThreeUtil.getBlendModeSafe(this.blendMode)
+							NgxThreeUtil.getBlendModeSafe(this.blendMode)
 						);
 					} else {
 						this.action = this.mixer.clipAction(
 							clip,
 							null,
-							ThreeUtil.getBlendModeSafe(this.blendMode)
+							NgxThreeUtil.getBlendModeSafe(this.blendMode)
 						);
 					}
 				}
 				if (this.getClampWhenFinished(false)) {
 					this.action.clampWhenFinished = true;
 				}
-				this.action.loop = ThreeUtil.getLoopSafe(this.loop, 'repeat');
+				this.action.loop = NgxThreeUtil.getLoopSafe(this.loop, 'repeat');
 			} else {
 				this.action = null;
 			}

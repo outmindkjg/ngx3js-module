@@ -5,9 +5,10 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractChartComponent } from '../../chart.abstract';
-import { ThreeColor, ThreeUtil, I3JS, N3JS } from '../../interface';
-import { AbstractObject3dComponent } from '../../object3d.abstract';
+import { NgxAbstractChartComponent } from '../../chart.abstract';
+import { NgxThreeUtil, I3JS, N3JS } from '../../interface';
+import { INgxColor } from '../../ngx-interface';
+import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
  * The Chart Title component.
@@ -21,13 +22,13 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	styleUrls: ['./title.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ChartTitleComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxChartTitleComponent),
 		},
 	],
 })
-export class ChartTitleComponent
-	extends AbstractChartComponent
+export class NgxChartTitleComponent
+	extends NgxAbstractChartComponent
 	implements OnInit
 {
 	/**
@@ -43,7 +44,7 @@ export class ChartTitleComponent
 	/**
 	 * The color of chart title component
 	 */
-	@Input() public color: ThreeColor = null;
+	@Input() public color: INgxColor = null;
 
 	/**
 	 * The align of chart title component
@@ -102,17 +103,17 @@ export class ChartTitleComponent
 	/**
 	 * The Title of chart title component
 	 */
-	private _title: I3JS.IObject3D = null;
+	private _title: I3JS.Object3D = null;
 
 	/**
 	 * The Material of chart title component
 	 */
-	private _material: I3JS.IMeshBasicMaterial = null;
+	private _material: I3JS.MeshBasicMaterial = null;
 
 	/**
 	 * The Geometry of chart title component
 	 */
-	private _geometry: I3JS.IPlaneGeometry = null;
+	private _geometry: I3JS.PlaneGeometry = null;
 
 	/**
 	 * Applys changes3d
@@ -121,35 +122,35 @@ export class ChartTitleComponent
 	 */
 	protected applyChanges3d(changes: string[]) {
 		if (this._title !== null) {
-			if (ThreeUtil.isIndexOf(changes, ['clearinit'])) {
+			if (NgxThreeUtil.isIndexOf(changes, ['clearinit'])) {
 				this.getTitle();
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(changes, ['opacity', 'align'], this.CHART_ATTR)
+				!NgxThreeUtil.isOnlyIndexOf(changes, ['opacity', 'align'], this.CHART_ATTR)
 			) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['init'])) {
-				changes = ThreeUtil.pushUniq(changes, ['opacity', 'align']);
+			if (NgxThreeUtil.isIndexOf(changes, ['init'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['opacity', 'align']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'options':
-						if (ThreeUtil.isNotNull(this.options)) {
-							this._material.opacity = ThreeUtil.getTypeSafe(
+						if (NgxThreeUtil.isNotNull(this.options)) {
+							this._material.opacity = NgxThreeUtil.getTypeSafe(
 								this.options.opacity,
 								1
 							);
 						}
 						break;
 					case 'align':
-						if (ThreeUtil.isNotNull(this.align)) {
+						if (NgxThreeUtil.isNotNull(this.align)) {
 							const geometry = this._geometry;
 							const width = geometry.parameters.width;
 							const height = geometry.parameters.height;
 							geometry.center();
-							ThreeUtil.getTypeSafe(this.align, 'center')
+							NgxThreeUtil.getTypeSafe(this.align, 'center')
 								.split('-')
 								.forEach((align) => {
 									switch (align.toLowerCase()) {
@@ -180,7 +181,7 @@ export class ChartTitleComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getChart<T extends I3JS.IObject3D>(): T {
+	public getChart<T extends I3JS.Object3D>(): T {
 		return this.getTitle();
 	}
 
@@ -189,22 +190,22 @@ export class ChartTitleComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getTitle<T extends I3JS.IObject3D>(): T {
+	public getTitle<T extends I3JS.Object3D>(): T {
 		if (this._title === null || this._needUpdate) {
 			this.needUpdate = false;
 			const canvas = document.createElement('canvas');
 			const context = canvas.getContext('2d');
-			const message = ThreeUtil.getTypeSafe(this.message, 'no title');
-			const height = ThreeUtil.getTypeSafe(this.height, 1);
+			const message = NgxThreeUtil.getTypeSafe(this.message, 'no title');
+			const height = NgxThreeUtil.getTypeSafe(this.height, 1);
 			const font =
-				'normal 100px ' + ThreeUtil.getTypeSafe(this.fontFamily, 'Arial');
+				'normal 100px ' + NgxThreeUtil.getTypeSafe(this.fontFamily, 'Arial');
 			context.font = font;
 			let textWidth = 500;
 			const textHeight = 110;
 			switch (this.type.toLowerCase()) {
 				case 'label':
 					textWidth =
-						(ThreeUtil.getTypeSafe(this.width, 1) * textHeight) / height;
+						(NgxThreeUtil.getTypeSafe(this.width, 1) * textHeight) / height;
 					break;
 				case 'title':
 				case 'subtitle':
@@ -215,11 +216,11 @@ export class ChartTitleComponent
 			}
 			canvas.width = textWidth;
 			canvas.height = textHeight;
-			const options = ThreeUtil.getTypeSafe(this.options, {});
-			if (ThreeUtil.isNotNull(options.backgroundColor)) {
+			const options = NgxThreeUtil.getTypeSafe(this.options, {});
+			if (NgxThreeUtil.isNotNull(options.backgroundColor)) {
 				context.fillStyle =
 					'#' +
-					ThreeUtil.getColorSafe(
+					NgxThreeUtil.getColorSafe(
 						options.backgroundColor,
 						'0x000000'
 					).getHexString();
@@ -228,7 +229,7 @@ export class ChartTitleComponent
 			context.font = font;
 			context.textBaseline = 'middle';
 			context.fillStyle =
-				'#' + ThreeUtil.getColorSafe(this.color, '0xffffff').getHexString();
+				'#' + NgxThreeUtil.getColorSafe(this.color, '0xffffff').getHexString();
 			switch (this.type.toLowerCase()) {
 				case 'label':
 					context.textAlign = 'left';

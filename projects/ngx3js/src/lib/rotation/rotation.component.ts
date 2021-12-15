@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TagAttributes, ThreeUtil, N3JS, I3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { ITagAttributes } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Rotation component.
@@ -19,8 +20,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './rotation.component.html',
 	styleUrls: ['./rotation.component.scss'],
 })
-export class RotationComponent
-	extends AbstractSubscribeComponent
+export class NgxRotationComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -105,24 +106,24 @@ export class RotationComponent
 	/**
 	 * The Rotation of rotation component
 	 */
-	private rotation: I3JS.IEuler = null;
+	private rotation: I3JS.Euler = null;
 
 	/**
 	 * The Object3d of rotation component
 	 */
 	private _object3d: {
-		[key: string]: I3JS.IObject3D;
+		[key: string]: I3JS.Object3D;
 	} = {};
 
 	/**
 	 * unSets object3d
 	 * @param object3d
 	 */
-	public unsetObject3d(object3d: AbstractSubscribeComponent) {
+	public unsetObject3d(object3d: NgxAbstractSubscribeComponent) {
 		const key: string = object3d.getId();
 		this.unSubscribeRefer('rotation_' + key);
 		this.unSubscribeRefer('unrotation_' + key);
-		if (ThreeUtil.isNotNull(this._object3d[key])) {
+		if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 			delete this._object3d[key];
 		}
 	}
@@ -131,18 +132,18 @@ export class RotationComponent
 	 * Sets object3d
 	 * @param object3d
 	 */
-	public setObject3d(object3d: AbstractSubscribeComponent) {
-		if (ThreeUtil.isNotNull(object3d)) {
+	public setObject3d(object3d: NgxAbstractSubscribeComponent) {
+		if (NgxThreeUtil.isNotNull(object3d)) {
 			const key: string = object3d.getId();
-			const object = ThreeUtil.getObject3d(object3d);
-			if (ThreeUtil.isNotNull(this.refName) && ThreeUtil.isNotNull(object)) {
+			const object = NgxThreeUtil.getObject3d(object3d);
+			if (NgxThreeUtil.isNotNull(this.refName) && NgxThreeUtil.isNotNull(object)) {
 				this._object3d[key] = object.getObjectByName(this.refName);
 			} else {
 				this._object3d[key] = object;
 			}
 			this.subscribeRefer(
 				'rotation_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.setObject3d(object3d);
@@ -152,7 +153,7 @@ export class RotationComponent
 			);
 			this.subscribeRefer(
 				'unrotation_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.unsetObject3d(object3d);
@@ -169,17 +170,17 @@ export class RotationComponent
 	 * Synks object3d
 	 * @param [rotation]
 	 */
-	public synkObject3d(rotation: I3JS.IEuler = null, key: string = null) {
-		if (ThreeUtil.isNotNull(rotation) && this.enabled) {
-			if (ThreeUtil.isNotNull(this._object3d)) {
-				const object3dList: I3JS.IObject3D[] = [];
-				if (ThreeUtil.isNotNull(key)) {
-					if (ThreeUtil.isNotNull(this._object3d[key])) {
+	public synkObject3d(rotation: I3JS.Euler = null, key: string = null) {
+		if (NgxThreeUtil.isNotNull(rotation) && this.enabled) {
+			if (NgxThreeUtil.isNotNull(this._object3d)) {
+				const object3dList: I3JS.Object3D[] = [];
+				if (NgxThreeUtil.isNotNull(key)) {
+					if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 						object3dList.push(this._object3d[key]);
 					}
 				} else {
 					Object.entries(this._object3d).forEach(([_, object3d]) => {
-						if (ThreeUtil.isNotNull(object3d)) {
+						if (NgxThreeUtil.isNotNull(object3d)) {
 							object3dList.push(object3d);
 						}
 					});
@@ -187,22 +188,22 @@ export class RotationComponent
 				object3dList.forEach((object3d) => {
 					if (object3d instanceof N3JS.Object3D) {
 						if (
-							ThreeUtil.isNotNull(this.x) &&
-							ThreeUtil.isNotNull(this.y) &&
-							ThreeUtil.isNotNull(this.z)
+							NgxThreeUtil.isNotNull(this.x) &&
+							NgxThreeUtil.isNotNull(this.y) &&
+							NgxThreeUtil.isNotNull(this.z)
 						) {
 							object3d.rotation.copy(rotation);
 						} else {
-							if (ThreeUtil.isNotNull(this.x)) {
+							if (NgxThreeUtil.isNotNull(this.x)) {
 								object3d.rotation.x = rotation.x;
 							}
-							if (ThreeUtil.isNotNull(this.y)) {
+							if (NgxThreeUtil.isNotNull(this.y)) {
 								object3d.rotation.y = rotation.y;
 							}
-							if (ThreeUtil.isNotNull(this.z)) {
+							if (NgxThreeUtil.isNotNull(this.z)) {
 								object3d.rotation.z = rotation.z;
 							}
-							if (ThreeUtil.isNotNull(this.order)) {
+							if (NgxThreeUtil.isNotNull(this.order)) {
 								object3d.rotation.order = rotation.order;
 							}
 						}
@@ -222,13 +223,13 @@ export class RotationComponent
 	 */
 	public setRotation(x?: number, y?: number, z?: number) {
 		if (this.rotation !== null) {
-			this.x = ThreeUtil.getTypeSafe(x, this.rotation.x);
-			this.y = ThreeUtil.getTypeSafe(y, this.rotation.y);
-			this.z = ThreeUtil.getTypeSafe(z, this.rotation.z);
+			this.x = NgxThreeUtil.getTypeSafe(x, this.rotation.x);
+			this.y = NgxThreeUtil.getTypeSafe(y, this.rotation.y);
+			this.z = NgxThreeUtil.getTypeSafe(z, this.rotation.z);
 		} else {
-			this.x = ThreeUtil.getTypeSafe(x, 0);
-			this.y = ThreeUtil.getTypeSafe(y, 0);
-			this.z = ThreeUtil.getTypeSafe(z, 0);
+			this.x = NgxThreeUtil.getTypeSafe(x, 0);
+			this.y = NgxThreeUtil.getTypeSafe(y, 0);
+			this.z = NgxThreeUtil.getTypeSafe(z, 0);
 		}
 		this.isRadian = false;
 		this.needUpdate = true;
@@ -239,23 +240,23 @@ export class RotationComponent
 	 * @param [options]
 	 * @returns tag attribute
 	 */
-	public getTagAttribute(options?: any): TagAttributes {
-		const tagAttributes: TagAttributes = {
+	public getTagAttribute(options?: any): ITagAttributes {
+		const tagAttributes: ITagAttributes = {
 			tag: 'ngx3js-rotation',
 			attributes: [],
 		};
-		if (ThreeUtil.isNotNull(options.rotation)) {
+		if (NgxThreeUtil.isNotNull(options.rotation)) {
 			tagAttributes.attributes.push({
 				name: 'x',
-				value: ThreeUtil.getRadian2AngleSafe(options.rotation.x),
+				value: NgxThreeUtil.getRadian2AngleSafe(options.rotation.x),
 			});
 			tagAttributes.attributes.push({
 				name: 'y',
-				value: ThreeUtil.getRadian2AngleSafe(options.rotation.y),
+				value: NgxThreeUtil.getRadian2AngleSafe(options.rotation.y),
 			});
 			tagAttributes.attributes.push({
 				name: 'z',
-				value: ThreeUtil.getRadian2AngleSafe(options.rotation.z),
+				value: NgxThreeUtil.getRadian2AngleSafe(options.rotation.z),
 			});
 		} else {
 			tagAttributes.attributes.push({ name: 'x', value: this.x });
@@ -272,11 +273,11 @@ export class RotationComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.rotation !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getRotation();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
 				this.needUpdate = true;
 				return;
 			}
@@ -288,10 +289,10 @@ export class RotationComponent
 	 * Gets rotation
 	 * @returns rotation
 	 */
-	private _getRotation(): I3JS.IEuler {
-		let rotation: I3JS.IEuler = null;
-		if (ThreeUtil.isNotNull(this.refer)) {
-			rotation = ThreeUtil.getRotation(this.refer);
+	private _getRotation(): I3JS.Euler {
+		let rotation: I3JS.Euler = null;
+		if (NgxThreeUtil.isNotNull(this.refer)) {
+			rotation = NgxThreeUtil.getRotation(this.refer);
 		}
 		if (rotation === null) {
 			if (
@@ -302,9 +303,9 @@ export class RotationComponent
 			) {
 				rotation = new N3JS.Euler(this.x, this.y, this.z);
 			} else {
-				rotation = ThreeUtil.getEulerSafe(this.x, this.y, this.z, null, true);
+				rotation = NgxThreeUtil.getEulerSafe(this.x, this.y, this.z, null, true);
 			}
-			if (ThreeUtil.isNotNull(this.order)) {
+			if (NgxThreeUtil.isNotNull(this.order)) {
 				rotation.order = this.order;
 			}
 		}
@@ -315,7 +316,7 @@ export class RotationComponent
 	 * Gets rotation
 	 * @returns rotation
 	 */
-	public getRotation(): I3JS.IEuler {
+	public getRotation(): I3JS.Euler {
 		if (this.rotation === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.rotation = this._getRotation();

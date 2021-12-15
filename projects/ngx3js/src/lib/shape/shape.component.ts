@@ -3,11 +3,12 @@ import {
 	ContentChildren,
 	Input,
 	OnInit,
-	QueryList,
+	QueryList
 } from '@angular/core';
-import { AbstractGeometryComponent } from '../geometry.abstract';
-import { ThreeUtil, ThreeVector, I3JS, N3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractGeometryComponent } from '../geometry.abstract';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { INgxVector } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Shape component.
@@ -20,8 +21,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './shape.component.html',
 	styleUrls: ['./shape.component.scss'],
 })
-export class ShapeComponent
-	extends AbstractSubscribeComponent
+export class NgxShapeComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -35,7 +36,7 @@ export class ShapeComponent
 	/**
 	 * The points of shape component
 	 */
-	@Input() public points: ThreeVector[] = null;
+	@Input() public points: INgxVector[] = null;
 
 	/**
 	 * The x of shape component
@@ -125,8 +126,8 @@ export class ShapeComponent
 	/**
 	 * Content children of shape component
 	 */
-	@ContentChildren(ShapeComponent, { descendants: false })
-	private holes: QueryList<ShapeComponent>;
+	@ContentChildren(NgxShapeComponent, { descendants: false })
+	private holes: QueryList<NgxShapeComponent>;
 
 	/**
 	 * Creates an instance of shape component.
@@ -163,8 +164,8 @@ export class ShapeComponent
 	 * @param def
 	 * @returns points
 	 */
-	private getPoints(def: ThreeVector[]): I3JS.IVector2[] {
-		const points: I3JS.IVector2[] = [];
+	private getPoints(def: INgxVector[]): I3JS.Vector2[] {
+		const points: I3JS.Vector2[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
 			points.push(new N3JS.Vector2(p.x, p.y));
 		});
@@ -175,7 +176,7 @@ export class ShapeComponent
 	 * Gets holes
 	 * @returns holes
 	 */
-	private getHoles(): I3JS.IPath {
+	private getHoles(): I3JS.Path {
 		const holes = new N3JS.Path();
 		if (this.holes !== null && this.holes.length > 0) {
 			this.holes.forEach((hole) => {
@@ -190,7 +191,7 @@ export class ShapeComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: AbstractGeometryComponent): boolean {
+	public setParent(parent: NgxAbstractGeometryComponent): boolean {
 		if (super.setParent(parent)) {
 			return true;
 		} else {
@@ -203,39 +204,39 @@ export class ShapeComponent
 	 * @param shape
 	 * @returns shape
 	 */
-	public getShape(shape: I3JS.IShape | I3JS.IPath): I3JS.IShape | I3JS.IPath {
+	public getShape(shape: I3JS.Shape | I3JS.Path): I3JS.Shape | I3JS.Path {
 		switch (this.type.toLowerCase()) {
 			case 'frompoints':
 				shape.setFromPoints(this.getPoints([]));
 				break;
 			case 'moveto':
 				shape.moveTo(
-					ThreeUtil.getTypeSafe(this.x, 0),
-					ThreeUtil.getTypeSafe(this.y, 0)
+					NgxThreeUtil.getTypeSafe(this.x, 0),
+					NgxThreeUtil.getTypeSafe(this.y, 0)
 				);
 				break;
 			case 'lineto':
 				shape.lineTo(
-					ThreeUtil.getTypeSafe(this.x, 0),
-					ThreeUtil.getTypeSafe(this.y, 0)
+					NgxThreeUtil.getTypeSafe(this.x, 0),
+					NgxThreeUtil.getTypeSafe(this.y, 0)
 				);
 				break;
 			case 'quadraticcurveto':
 				shape.quadraticCurveTo(
-					ThreeUtil.getTypeSafe(this.aCPx, 0),
-					ThreeUtil.getTypeSafe(this.aCPy, 0),
-					ThreeUtil.getTypeSafe(this.aX, 0),
-					ThreeUtil.getTypeSafe(this.aY, 0)
+					NgxThreeUtil.getTypeSafe(this.aCPx, 0),
+					NgxThreeUtil.getTypeSafe(this.aCPy, 0),
+					NgxThreeUtil.getTypeSafe(this.aX, 0),
+					NgxThreeUtil.getTypeSafe(this.aY, 0)
 				);
 				break;
 			case 'beziercurveto':
 				shape.bezierCurveTo(
-					ThreeUtil.getTypeSafe(this.aCPy, 0),
-					ThreeUtil.getTypeSafe(this.aCP1y, 0),
-					ThreeUtil.getTypeSafe(this.aCP2x, 0),
-					ThreeUtil.getTypeSafe(this.aCP2y, 0),
-					ThreeUtil.getTypeSafe(this.aX, 0),
-					ThreeUtil.getTypeSafe(this.aY, 0)
+					NgxThreeUtil.getTypeSafe(this.aCPy, 0),
+					NgxThreeUtil.getTypeSafe(this.aCP1y, 0),
+					NgxThreeUtil.getTypeSafe(this.aCP2x, 0),
+					NgxThreeUtil.getTypeSafe(this.aCP2y, 0),
+					NgxThreeUtil.getTypeSafe(this.aX, 0),
+					NgxThreeUtil.getTypeSafe(this.aY, 0)
 				);
 				break;
 			case 'splinethru':
@@ -243,46 +244,46 @@ export class ShapeComponent
 				break;
 			case 'arc':
 				shape.arc(
-					ThreeUtil.getTypeSafe(this.aX, 0),
-					ThreeUtil.getTypeSafe(this.aY, 0),
-					ThreeUtil.getTypeSafe(this.aRadius, 0),
-					ThreeUtil.getAngleSafe(this.aStartAngle, 0),
-					ThreeUtil.getAngleSafe(this.aEndAngle, 0),
-					ThreeUtil.getTypeSafe(this.aClockwise, false)
+					NgxThreeUtil.getTypeSafe(this.aX, 0),
+					NgxThreeUtil.getTypeSafe(this.aY, 0),
+					NgxThreeUtil.getTypeSafe(this.aRadius, 0),
+					NgxThreeUtil.getAngleSafe(this.aStartAngle, 0),
+					NgxThreeUtil.getAngleSafe(this.aEndAngle, 0),
+					NgxThreeUtil.getTypeSafe(this.aClockwise, false)
 				);
 				break;
 			case 'absarc':
 				shape.absarc(
-					ThreeUtil.getTypeSafe(this.aX, 0),
-					ThreeUtil.getTypeSafe(this.aY, 0),
-					ThreeUtil.getTypeSafe(this.aRadius, 0),
-					ThreeUtil.getAngleSafe(this.aStartAngle, 0),
-					ThreeUtil.getAngleSafe(this.aEndAngle, 0),
-					ThreeUtil.getTypeSafe(this.aClockwise, false)
+					NgxThreeUtil.getTypeSafe(this.aX, 0),
+					NgxThreeUtil.getTypeSafe(this.aY, 0),
+					NgxThreeUtil.getTypeSafe(this.aRadius, 0),
+					NgxThreeUtil.getAngleSafe(this.aStartAngle, 0),
+					NgxThreeUtil.getAngleSafe(this.aEndAngle, 0),
+					NgxThreeUtil.getTypeSafe(this.aClockwise, false)
 				);
 				break;
 			case 'ellipse':
 				shape.ellipse(
-					ThreeUtil.getTypeSafe(this.aX, 0),
-					ThreeUtil.getTypeSafe(this.aY, 0),
-					ThreeUtil.getTypeSafe(this.xRadius, 0),
-					ThreeUtil.getTypeSafe(this.yRadius, 0),
-					ThreeUtil.getAngleSafe(this.aStartAngle, 0),
-					ThreeUtil.getAngleSafe(this.aEndAngle, 0),
-					ThreeUtil.getTypeSafe(this.aClockwise, false),
-					ThreeUtil.getTypeSafe(this.aRotation, 0)
+					NgxThreeUtil.getTypeSafe(this.aX, 0),
+					NgxThreeUtil.getTypeSafe(this.aY, 0),
+					NgxThreeUtil.getTypeSafe(this.xRadius, 0),
+					NgxThreeUtil.getTypeSafe(this.yRadius, 0),
+					NgxThreeUtil.getAngleSafe(this.aStartAngle, 0),
+					NgxThreeUtil.getAngleSafe(this.aEndAngle, 0),
+					NgxThreeUtil.getTypeSafe(this.aClockwise, false),
+					NgxThreeUtil.getTypeSafe(this.aRotation, 0)
 				);
 				break;
 			case 'absellipse':
 				shape.absellipse(
-					ThreeUtil.getTypeSafe(this.aX, 0),
-					ThreeUtil.getTypeSafe(this.aY, 0),
-					ThreeUtil.getTypeSafe(this.xRadius, 0),
-					ThreeUtil.getTypeSafe(this.yRadius, 0),
-					ThreeUtil.getAngleSafe(this.aStartAngle, 0),
-					ThreeUtil.getAngleSafe(this.aEndAngle, 0),
-					ThreeUtil.getTypeSafe(this.aClockwise, false),
-					ThreeUtil.getTypeSafe(this.aRotation, 0)
+					NgxThreeUtil.getTypeSafe(this.aX, 0),
+					NgxThreeUtil.getTypeSafe(this.aY, 0),
+					NgxThreeUtil.getTypeSafe(this.xRadius, 0),
+					NgxThreeUtil.getTypeSafe(this.yRadius, 0),
+					NgxThreeUtil.getAngleSafe(this.aStartAngle, 0),
+					NgxThreeUtil.getAngleSafe(this.aEndAngle, 0),
+					NgxThreeUtil.getTypeSafe(this.aClockwise, false),
+					NgxThreeUtil.getTypeSafe(this.aRotation, 0)
 				);
 				break;
 			case 'holes':

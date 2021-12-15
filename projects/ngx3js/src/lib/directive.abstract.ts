@@ -1,53 +1,10 @@
 import { Directive, Inject } from '@angular/core';
 import * as GSAP from 'gsap';
 import { Subscription } from 'rxjs';
-import { I3JS, RendererTimer, ThreeUtil } from './interface';
-import { AbstractObject3dComponent } from './object3d.abstract';
+import { I3JS, NgxThreeUtil } from './interface';
+import { IRendererTimer, IEaseFunction, TObjectFunction, TObject3dFunction, IDirectiveOptions } from './ngx-interface';
+import { NgxAbstractObject3dComponent } from './object3d.abstract';
 
-export interface EaseFunction {
-	(progress: number): number;
-}
-
-/**
- * ObjectFunction
- */
-export type ObjectFunction = (
-	object: any,
-	elapsedTime?: number,
-	timer?: RendererTimer
-) => void;
-
-/**
- * Object3dFunction
- */
-export type Object3dFunction = (
-	object3d: I3JS.IObject3D,
-	elapsedTime?: number,
-	timer?: RendererTimer
-) => void;
-
-/**
- * Direc options
- */
-export interface DirectiveOptions {
-	/** type */
-	type?: 'none' | string;
-
-	/** easing */
-	easing?: string;
-
-	/** repeat */
-	repeat?: string;
-
-	/** start */
-	start?: number;
-
-	/** end */
-	end?: number;
-
-	/** speed */
-	speed?: number;
-}
 
 /**
  * AbstractObject3dDirective Abstract
@@ -88,7 +45,7 @@ export abstract class AbstractThreeDirective {
 	 * @param key
 	 */
 	protected unSubscribeRefer(key: string) {
-		if (ThreeUtil.isNotNull(this._subscribe[key])) {
+		if (NgxThreeUtil.isNotNull(this._subscribe[key])) {
 			this._subscribe[key].unsubscribe();
 			delete this._subscribe[key];
 		}
@@ -100,10 +57,10 @@ export abstract class AbstractThreeDirective {
 	 * @param subscription
 	 */
 	protected subscribeRefer(key: string, subscription: Subscription) {
-		if (ThreeUtil.isNotNull(this._subscribe[key])) {
+		if (NgxThreeUtil.isNotNull(this._subscribe[key])) {
 			this.unSubscribeRefer(key);
 		}
-		if (ThreeUtil.isNotNull(subscription)) {
+		if (NgxThreeUtil.isNotNull(subscription)) {
 			this._subscribe[key] = subscription;
 		}
 	}
@@ -130,7 +87,7 @@ export abstract class AbstractThreeDirective {
 	ngOnInit(): void {
 		this.subscribeRefer(
 			'object_directive',
-			ThreeUtil.getSubscribe(
+			NgxThreeUtil.getSubscribe(
 				this.objectCom,
 				() => {
 					this._cachedObject = null;
@@ -148,7 +105,7 @@ export abstract class AbstractThreeDirective {
 	/**
 	 * Gets object3d
 	 */
-	protected get object(): I3JS.IObject3D {
+	protected get object(): I3JS.Object3D {
 		if (this._cachedObject === null) {
 			this._cachedObject = this.objectCom.getObject();
 		}
@@ -185,8 +142,8 @@ export abstract class AbstractThreeDirective {
 		repeat: string = 'yoyo',
 		start: number,
 		end: number
-	): EaseFunction {
-		let easing: EaseFunction = null;
+	): IEaseFunction {
+		let easing: IEaseFunction = null;
 		switch (type.toLowerCase()) {
 			case 'linearinout':
 				easing = GSAP.Linear.easeInOut;
@@ -393,9 +350,9 @@ export abstract class AbstractThreeDirective {
 	/**
 	 * Object3d function of abstract object3d directive
 	 */
-	protected objectFunction: ObjectFunction = null;
+	protected objectFunction: TObjectFunction = null;
 
-	setObjectFunction(func: ObjectFunction) {
+	setObjectFunction(func: TObjectFunction) {
 		this.objectFunction = func;
 		this.enabled = this.objectFunction !== null;
 	}
@@ -404,7 +361,7 @@ export abstract class AbstractThreeDirective {
 	 * Updates abstract directive
 	 * @param timer
 	 */
-	public update(timer: RendererTimer) {
+	public update(timer: IRendererTimer) {
 		if (this.enabled) {
 			this.elapsedTime += timer.delta;
 			if (this.objectFunction !== null) {
@@ -426,19 +383,19 @@ export abstract class AbstractObject3dDirective extends AbstractThreeDirective {
 	 *
 	 * @constructor
 	 */
-	constructor(protected object3dCom: AbstractObject3dComponent) {
+	constructor(protected object3dCom: NgxAbstractObject3dComponent) {
 		super(object3dCom);
 	}
 
 	/**
 	 * Cached object3d of abstract object3d directive
 	 */
-	private _cachedObject3d: I3JS.IObject3D = null;
+	private _cachedObject3d: I3JS.Object3D = null;
 
 	/**
 	 * Gets object3d
 	 */
-	protected get object3d(): I3JS.IObject3D {
+	protected get object3d(): I3JS.Object3D {
 		if (this._cachedObject3d === null) {
 			this._cachedObject3d = this.object3dCom.getObject3d();
 		}
@@ -455,7 +412,7 @@ export abstract class AbstractObject3dDirective extends AbstractThreeDirective {
 	ngOnInit(): void {
 		this.subscribeRefer(
 			'object3d_directive',
-			ThreeUtil.getSubscribe(
+			NgxThreeUtil.getSubscribe(
 				this.object3dCom,
 				() => {
 					this._cachedObject3d = null;
@@ -476,9 +433,9 @@ export abstract class AbstractObject3dDirective extends AbstractThreeDirective {
 	/**
 	 * Object3d function of abstract object3d directive
 	 */
-	protected object3dFunction: Object3dFunction = null;
+	protected object3dFunction: TObject3dFunction = null;
 
-	setObject3dFunction(func: Object3dFunction) {
+	setObject3dFunction(func: TObject3dFunction) {
 		this.object3dFunction = func;
 		this.enabled = this.object3dFunction !== null;
 	}
@@ -488,7 +445,7 @@ export abstract class AbstractObject3dDirective extends AbstractThreeDirective {
 	 *
 	 * @param timer
 	 */
-	public update(timer: RendererTimer) {
+	public update(timer: IRendererTimer) {
 		if (this.enabled && this.object3dFunction !== null) {
 			super.update(timer);
 			this.object3dFunction(this.object3d, this.elapsedTime, timer);

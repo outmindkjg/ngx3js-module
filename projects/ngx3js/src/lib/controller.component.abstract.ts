@@ -7,12 +7,12 @@ import {
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
-import { CameraComponent } from './camera/camera.component';
-import { CanvasComponent } from './canvas/canvas.component';
-import { I3JS, RendererEvent, RendererTimer, ThreeUtil } from './interface';
-import { SceneComponent } from './scene/scene.component';
-import { AbstractSubscribeComponent } from './subscribe.abstract';
-import { HtmlCollection } from './visual/visual.component';
+import { NgxCameraComponent } from './camera/camera.component';
+import { NgxCanvasComponent } from './canvas/canvas.component';
+import { I3JS, NgxThreeUtil } from './interface';
+import { IHtmlCollection, IRendererEvent, IRendererTimer } from './ngx-interface';
+import { NgxSceneComponent } from './scene/scene.component';
+import { NgxAbstractSubscribeComponent } from './subscribe.abstract';
 
 /**
  * The Abstract Controller component.
@@ -24,12 +24,12 @@ import { HtmlCollection } from './visual/visual.component';
  * _@Component({
  * 	providers: [
  * 		{
- * 			provide: AbstractControllerComponent,
- * 			useExisting: forwardRef(() => XxxComponent),
+ * 			provide: NgxAbstractControllerComponent,
+ * 			useExisting: forwardRef(() => NgxXxxComponent),
  * 		},
  * 	],
  * })
- * export class XxxComponent extends AbstractControllerComponent implements OnInit {
+ * export class NgxXxxComponent extends NgxAbstractControllerComponent implements OnInit {
  * 	constructor() {
  * 		super();
  * 	}
@@ -39,8 +39,8 @@ import { HtmlCollection } from './visual/visual.component';
 @Component({
 	template: '',
 })
-export class AbstractControllerComponent
-	extends AbstractSubscribeComponent
+export class NgxAbstractControllerComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {
 	/**
@@ -96,18 +96,18 @@ export class AbstractControllerComponent
 	/**
 	 * Ref object3d of controller component
 	 */
-	protected refObject3d: I3JS.IObject3D = null;
+	protected refObject3d: I3JS.Object3D = null;
 
 	/**
 	 * Ref object2d of controller component
 	 */
-	protected refObject2d: HtmlCollection = null;
+	protected refObject2d: IHtmlCollection = null;
 
 	/**
 	 * Sets object3d
 	 * @param refObject3d
 	 */
-	public setObject3d(refObject3d: I3JS.IObject3D) {
+	public setObject3d(refObject3d: I3JS.Object3D) {
 		if (this.refObject3d !== refObject3d) {
 			this.refObject3d = refObject3d;
 			if (this.refObject3d !== null) {
@@ -115,7 +115,7 @@ export class AbstractControllerComponent
 				this.addChanges('position');
 				this.subscribeRefer(
 					'position',
-					ThreeUtil.getSubscribe(
+					NgxThreeUtil.getSubscribe(
 						this.refObject3d,
 						() => {
 							this.unSubscribeRefer('position');
@@ -135,7 +135,7 @@ export class AbstractControllerComponent
 	 * Sets object2d
 	 * @param refObject2d
 	 */
-	public setObject2d(refObject2d: HtmlCollection) {
+	public setObject2d(refObject2d: IHtmlCollection) {
 		if (this.refObject2d !== refObject2d) {
 			this.refObject2d = refObject2d;
 			if (this.checkController()) {
@@ -147,37 +147,37 @@ export class AbstractControllerComponent
 	/**
 	 * The Renderer of controller component
 	 */
-	protected _renderer: I3JS.IRenderer = null;
+	protected _renderer: I3JS.Renderer = null;
 
 	/**
 	 * The Scenes of controller component
 	 */
-	protected _scenes: QueryList<SceneComponent> = null;
+	protected _scenes: QueryList<NgxSceneComponent> = null;
 
 	/**
 	 * The Cameras of controller component
 	 */
-	protected _cameras: QueryList<CameraComponent> = null;
+	protected _cameras: QueryList<NgxCameraComponent> = null;
 
 	/**
 	 * The Canvas2ds of controller component
 	 */
-	protected _canvas2ds: QueryList<CanvasComponent> = null;
+	protected _canvas2ds: QueryList<NgxCanvasComponent> = null;
 
 	/**
 	 * The Scene of controller component
 	 */
-	protected _scene: I3JS.IScene = null;
+	protected _scene: I3JS.Scene = null;
 
 	/**
 	 * The Canvas of controller component
 	 */
-	protected _canvas: HtmlCollection = null;
+	protected _canvas: IHtmlCollection = null;
 
 	/**
 	 * The Event of controller component
 	 */
-	protected _event: RendererEvent = null;
+	protected _event: IRendererEvent = null;
 
 	/**
 	 * Sets renderer
@@ -187,13 +187,13 @@ export class AbstractControllerComponent
 	 * @param canvas2ds
 	 */
 	public setRenderer(
-		renderer: I3JS.IRenderer,
-		scenes: QueryList<SceneComponent>,
-		cameras: QueryList<CameraComponent>,
-		canvas2ds: QueryList<CanvasComponent>
+		renderer: I3JS.Renderer,
+		scenes: QueryList<NgxSceneComponent>,
+		cameras: QueryList<NgxCameraComponent>,
+		canvas2ds: QueryList<NgxCanvasComponent>
 	) {
 		this._renderer = renderer;
-		this._event = ThreeUtil.getThreeComponent(renderer)?.events;
+		this._event = NgxThreeUtil.getThreeComponent(renderer)?.events;
 		this._scenes = scenes;
 		this._cameras = cameras;
 		this._canvas2ds = canvas2ds;
@@ -206,7 +206,7 @@ export class AbstractControllerComponent
 	 * Sets scene
 	 * @param scene
 	 */
-	public setScene(scene: I3JS.IScene) {
+	public setScene(scene: I3JS.Scene) {
 		this._scene = scene;
 		if (this.checkController()) {
 			this.addChanges('scene');
@@ -217,7 +217,7 @@ export class AbstractControllerComponent
 	 * Sets canvas
 	 * @param canvas
 	 */
-	public setCanvas(canvas: HtmlCollection) {
+	public setCanvas(canvas: IHtmlCollection) {
 		this._canvas = canvas;
 		if (this.checkController()) {
 			this.addChanges('canvas');
@@ -249,5 +249,5 @@ export class AbstractControllerComponent
 	 * Updates controller component
 	 * @param rendererTimer
 	 */
-	public update(rendererTimer: RendererTimer) {}
+	public update(rendererTimer: IRendererTimer) {}
 }

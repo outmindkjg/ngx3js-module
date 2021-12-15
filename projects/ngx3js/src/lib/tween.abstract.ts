@@ -10,9 +10,9 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import * as GSAP from 'gsap';
-import { I3JS, ThreeUtil } from './interface';
-import { AbstractSubscribeComponent } from './subscribe.abstract';
-import { TweenComponent } from './tween/tween.component';
+import { I3JS, NgxThreeUtil } from './interface';
+import { NgxAbstractSubscribeComponent } from './subscribe.abstract';
+import { NgxTweenComponent } from './tween/tween.component';
 
 /**
  * The Abstract Tween component.
@@ -23,8 +23,8 @@ import { TweenComponent } from './tween/tween.component';
 @Component({
 	template: '',
 })
-export class AbstractTweenComponent
-	extends AbstractSubscribeComponent
+export class NgxAbstractTweenComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {
 	/**
@@ -35,8 +35,8 @@ export class AbstractTweenComponent
 	/**
 	 * Content children of abstract tween component
 	 */
-	@ContentChildren(TweenComponent, { descendants: false })
-	private tweenList: QueryList<TweenComponent>;
+	@ContentChildren(NgxTweenComponent, { descendants: false })
+	private tweenList: QueryList<NgxTweenComponent>;
 
 	/**
 	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
@@ -93,7 +93,7 @@ export class AbstractTweenComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D | any): boolean {
+	public setParent(parent: I3JS.Object3D | any): boolean {
 		return super.setParent(parent);
 	}
 
@@ -113,8 +113,8 @@ export class AbstractTweenComponent
 	 */
 	public resetTween() {
 		if (
-			ThreeUtil.isNotNull(this.tweenTarget) &&
-			ThreeUtil.isNotNull(this.tweenList) &&
+			NgxThreeUtil.isNotNull(this.tweenTarget) &&
+			NgxThreeUtil.isNotNull(this.tweenList) &&
 			this.tweenList.length > 0 &&
 			this.tweenStart
 		) {

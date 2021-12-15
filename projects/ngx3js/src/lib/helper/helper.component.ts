@@ -3,216 +3,12 @@ import {
 	forwardRef,
 	Input,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { AbstractObject3dComponent } from '../object3d.abstract';
-import { ThreeColor, ThreeUtil, N3JS, I3JS } from './../interface';
-
-/**
- * Helper options
- */
-export interface HelperOptions {
-	/**
-	 * the type of helper
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see Gyroscope - Gyroscope
-	 * @see CSM - CSM
-	 * @see THREE.ArrowHelper - ArrowHelper, Arrow
-	 * @see THREE.BoxHelper - BoxHelper, Box
-	 * @see THREE.Box3Helper - Box3Helper, Box3
-	 * @see THREE.GridHelper - GridHelper, Grid
-	 * @see THREE.PolarGridHelper - PolarGridHelper, PolarGrid
-	 * @see PositionalAudioHelper - PositionalAudioHelper, PositionalAudio
-	 * @see THREE.CameraHelper - CameraHelper, Camera
-	 * @see THREE.DirectionalLightHelper - DirectionalLightHelper, DirectionalLight, Directional, Light
-	 * @see THREE.HemisphereLightHelper - HemisphereLightHelper, HemisphereLight, Hemisphere, Light
-	 * @see THREE.PointLightHelper - PointLightHelper, PointLightHelper, PointLight, Light
-	 * @see THREE.SpotLightHelper - SpotLightHelper, SpotLight, Light
-	 * @see RectAreaLightHelper - RectAreaLightHelper, RectAreaLight, Light
-	 * @see LightProbeHelper - LightProbeHelper, LightProbe, Light
-	 * @see THREE.PlaneHelper - PlaneHelper, Plane
-	 * @see VertexTangentsHelper - VertexTangentsHelper, VertexTangents
-	 * @see VertexNormalsHelper - VertexNormalsHelper, VertexNormals
-	 * @see THREE.SkeletonHelper - SkeletonHelper, Skeleton
-	 * @see THREE.AxesHelper - AxesHelper, Axes
-	 */
-	type?: string;
-
-	/**
-	 * color -- The desired color.
-	 */
-	color?: string | number;
-
-	/**
-	 * The target object of helper
-	 */
-	target?: any;
-
-	/**
-	 * size of the lines representing the axes. Default is *1*.
-	 */
-	size?: number;
-
-	/**
-	 * The radius of the polar grid. This can be any positive number. Default is 10.
-	 */
-	radius?: number;
-
-	/**
-	 * The number of radial lines. This can be any positive integer. Default is 16.
-	 */
-	radials?: number;
-
-	/**
-	 * The number of circles. This can be any positive integer. Default is 8.
-	 */
-	circles?: number;
-
-	/**
-	 * The number of line segments used for each circle. This can be any positive integer that is 3 or greater. Default is 64.
-	 */
-	divisions?: number;
-
-	/**
-	 * The first color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444
-	 */
-	color1?: ThreeColor;
-
-	/**
-	 * The second color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
-	 */
-	color2?: ThreeColor;
-
-	/**
-	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
-	 */
-	opacity?: number;
-
-	/**
-	 * Whether rendering this material has any effect on the depth buffer. Default is *true*.
-	 */
-	depthWrite?: boolean;
-
-	/**
-	 * The color of material
-	 */
-	materialColor?: ThreeColor;
-
-	/**
-	 * The Input of helper component
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
-	 *
-	 * @default THREE.NormalBlending
-	 *
-	 * @see THREE.NoBlending - NoBlending, No
-	 * @see THREE.NormalBlending - NormalBlending, Normal
-	 * @see THREE.AdditiveBlending - AdditiveBlending, Additive
-	 * @see THREE.SubtractiveBlending - SubtractiveBlending, Subtractive
-	 * @see THREE.MultiplyBlending - MultiplyBlending, Multiply
-	 * @see THREE.CustomBlending - CustomBlending, Custom
-	 */
-	materialBlending?: string;
-
-	/**
-	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects.
-	 * When set to true, the extent to which the material is transparent is controlled by setting it's .opacity property.
-	 * Default is false.
-	 * @default false
-	 */
-	materialTransparent?: boolean;
-
-	/**
-	 * X Direction from origin. Must be a unit vector.
-	 *
-	 */
-	dirX?: number;
-
-	/**
-	 * Y Direction from origin. Must be a unit vector.
-	 */
-	dirY?: number;
-
-	/**
-	 * Z Direction from origin. Must be a unit vector.
-	 */
-	dirZ?: number;
-
-	/**
-	 * X Point at which the arrow starts.
-	 */
-	originX?: number;
-
-	/**
-	 * Y Point at which the arrow starts.
-	 */
-	originY?: number;
-
-	/**
-	 * Z Point at which the arrow starts.
-	 */
-	originZ?: number;
-
-	/**
-	 * Point at which the arrow starts.
-	 */
-	arrowFrom?: any;
-
-	/**
-	 * Point at which the arrow end.
-	 */
-	arrowTo?: any;
-
-	/**
-	 * length of the arrow. Default is *1*.
-	 */
-	length?: number;
-
-	/**
-	 * The length of the head of the arrow. Default is 0.2 * length.
-	 */
-	headLength?: number;
-
-	/**
-	 * The width of the head of the arrow. Default is 0.2 * headLength.
-	 */
-	headWidth?: number;
-
-	/**
-	 * Update matrix for this helper
-	 */
-	matrix?: I3JS.IMatrix4;
-
-	/**
-	 * this children of Gyroscope
-	 */
-	children?: any[];
-
-	/**
-	 * The cms control of CSMHelper
-	 */
-	control?: any;
-
-	/**
-	 * the range of PositionalAudioHelper
-	 */
-	range?: number;
-
-	/**
-	 * the divisionsInnerAngle of PositionalAudioHelper
-	 */
-	divisionsInnerAngle?: number;
-
-	/**
-	 * the divisionsOuterAngle of PositionalAudioHelper
-	 */
-	divisionsOuterAngle?: number;
-}
+import { INgxColor } from '../ngx-interface';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 
 /**
  * The Helper component.
@@ -246,17 +42,17 @@ export interface HelperOptions {
 	styleUrls: ['./helper.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => HelperComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxHelperComponent),
 		},
 		{
-			provide: AbstractSubscribeComponent,
-			useExisting: forwardRef(() => HelperComponent),
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxHelperComponent),
 		},
 	],
 })
-export class HelperComponent
-	extends AbstractObject3dComponent
+export class NgxHelperComponent
+	extends NgxAbstractObject3dComponent
 	implements OnInit
 {
 	/**
@@ -325,12 +121,12 @@ export class HelperComponent
 	/**
 	 * The first color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444
 	 */
-	@Input() public color1: ThreeColor = null;
+	@Input() public color1: INgxColor = null;
 
 	/**
 	 * The second color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
 	 */
-	@Input() public color2: ThreeColor = null;
+	@Input() public color2: INgxColor = null;
 
 	/**
 	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
@@ -345,7 +141,7 @@ export class HelperComponent
 	/**
 	 * The color of material
 	 */
-	@Input() public materialColor: ThreeColor = null;
+	@Input() public materialColor: INgxColor = null;
 
 	/**
 	 * The Input of helper component
@@ -432,7 +228,7 @@ export class HelperComponent
 	/**
 	 * Update matrix for this helper
 	 */
-	@Input() public matrix: I3JS.IMatrix4 = null;
+	@Input() public matrix: I3JS.Matrix4 = null;
 
 	/**
 	 * this children of Gyroscope
@@ -465,14 +261,14 @@ export class HelperComponent
 	 * @param [target]
 	 * @returns target
 	 */
-	private getTarget(target?: I3JS.IObject3D): I3JS.IObject3D {
+	private getTarget(target?: I3JS.Object3D): I3JS.Object3D {
 		this.unSubscribeRefer('target');
-		let targetMesh: I3JS.IObject3D = null;
-		if (ThreeUtil.isNotNull(this.target)) {
-			targetMesh = ThreeUtil.getObject3d(this.target, false);
+		let targetMesh: I3JS.Object3D = null;
+		if (NgxThreeUtil.isNotNull(this.target)) {
+			targetMesh = NgxThreeUtil.getObject3d(this.target, false);
 			this.subscribeRefer(
 				'target',
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					this.target,
 					() => {
 						this.needUpdate = true;
@@ -481,16 +277,16 @@ export class HelperComponent
 				)
 			);
 		}
-		if (targetMesh === null && ThreeUtil.isNotNull(target)) {
-			targetMesh = ThreeUtil.getObject3d(target, false);
+		if (targetMesh === null && NgxThreeUtil.isNotNull(target)) {
+			targetMesh = NgxThreeUtil.getObject3d(target, false);
 		}
 		if (
-			ThreeUtil.isNotNull(targetMesh) &&
+			NgxThreeUtil.isNotNull(targetMesh) &&
 			targetMesh instanceof N3JS.Object3D &&
-			ThreeUtil.isNotNull(targetMesh.userData.refTarget)
+			NgxThreeUtil.isNotNull(targetMesh.userData.refTarget)
 		) {
 			targetMesh =
-				ThreeUtil.getObject3d(targetMesh.userData.refTarget, false) ||
+				NgxThreeUtil.getObject3d(targetMesh.userData.refTarget, false) ||
 				targetMesh;
 		}
 		return targetMesh;
@@ -503,7 +299,7 @@ export class HelperComponent
 	 * @returns size
 	 */
 	private getSize(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.size, def);
+		return NgxThreeUtil.getTypeSafe(this.size, def);
 	}
 
 	/**
@@ -511,8 +307,8 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color
 	 */
-	private getColor(def?: number | string): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.color, def);
+	private getColor(def?: number | string): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.color, def);
 	}
 
 	/**
@@ -522,7 +318,7 @@ export class HelperComponent
 	 */
 	private getColorHex(def?: number | string): number {
 		const color = this.getColor(def);
-		if (ThreeUtil.isNotNull(color)) {
+		if (NgxThreeUtil.isNotNull(color)) {
 			return color.getHex();
 		} else {
 			return undefined;
@@ -535,7 +331,7 @@ export class HelperComponent
 	 * @returns radius
 	 */
 	private getRadius(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.radius, def);
+		return NgxThreeUtil.getTypeSafe(this.radius, def);
 	}
 
 	/**
@@ -544,7 +340,7 @@ export class HelperComponent
 	 * @returns radials
 	 */
 	private getRadials(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.radials, def);
+		return NgxThreeUtil.getTypeSafe(this.radials, def);
 	}
 
 	/**
@@ -553,7 +349,7 @@ export class HelperComponent
 	 * @returns circles
 	 */
 	private getCircles(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.circles, def);
+		return NgxThreeUtil.getTypeSafe(this.circles, def);
 	}
 
 	/**
@@ -562,7 +358,7 @@ export class HelperComponent
 	 * @returns divisions
 	 */
 	private getDivisions(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.divisions, def);
+		return NgxThreeUtil.getTypeSafe(this.divisions, def);
 	}
 
 	/**
@@ -570,8 +366,8 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color1
 	 */
-	private getColor1(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.color1, this.color, def);
+	private getColor1(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.color1, this.color, def);
 	}
 
 	/**
@@ -579,8 +375,8 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns color2
 	 */
-	private getColor2(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.color2, this.color1 || this.color, def);
+	private getColor2(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.color2, this.color1 || this.color, def);
 	}
 
 	/**
@@ -589,7 +385,7 @@ export class HelperComponent
 	 * @returns opacity
 	 */
 	private getOpacity(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.opacity, def);
+		return NgxThreeUtil.getTypeSafe(this.opacity, def);
 	}
 
 	/**
@@ -598,7 +394,7 @@ export class HelperComponent
 	 * @returns true if depth write
 	 */
 	private getDepthWrite(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.depthWrite, def);
+		return NgxThreeUtil.getTypeSafe(this.depthWrite, def);
 	}
 
 	/**
@@ -607,19 +403,19 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns dir
 	 */
-	private getDirection(def?: I3JS.IVector3): I3JS.IVector3 {
+	private getDirection(def?: I3JS.Vector3): I3JS.Vector3 {
 		if (
-			ThreeUtil.isNotNull(this.arrowFrom) &&
-			ThreeUtil.isNotNull(this.arrowTo)
+			NgxThreeUtil.isNotNull(this.arrowFrom) &&
+			NgxThreeUtil.isNotNull(this.arrowTo)
 		) {
-			const arrowFrom: I3JS.IVector3 = this.getObjectPosition(this.arrowFrom);
-			const arrowTo: I3JS.IVector3 = this.getObjectPosition(this.arrowTo);
+			const arrowFrom: I3JS.Vector3 = this.getObjectPosition(this.arrowFrom);
+			const arrowTo: I3JS.Vector3 = this.getObjectPosition(this.arrowTo);
 			const arrowDirection = new N3JS.Vector3();
 			arrowDirection.subVectors(arrowTo, arrowFrom).normalize();
 			return arrowDirection;
 		} else {
-			return ThreeUtil.getTypeSafe(
-				ThreeUtil.getVector3Safe(this.dirX, this.dirY, this.dirZ),
+			return NgxThreeUtil.getTypeSafe(
+				NgxThreeUtil.getVector3Safe(this.dirX, this.dirY, this.dirZ),
 				def
 			);
 		}
@@ -630,20 +426,20 @@ export class HelperComponent
 	 * @param [def]
 	 * @returns origin
 	 */
-	private getOrigin(def?: I3JS.IVector3): I3JS.IVector3 {
-		let origin: I3JS.IVector3 = def;
-		if (ThreeUtil.isNotNull(this.arrowFrom)) {
+	private getOrigin(def?: I3JS.Vector3): I3JS.Vector3 {
+		let origin: I3JS.Vector3 = def;
+		if (NgxThreeUtil.isNotNull(this.arrowFrom)) {
 			origin = this.getObjectPosition(this.arrowFrom);
 		}
 		if (
-			ThreeUtil.isNotNull(this.originX) &&
-			ThreeUtil.isNotNull(this.originY) &&
-			ThreeUtil.isNotNull(this.originZ)
+			NgxThreeUtil.isNotNull(this.originX) &&
+			NgxThreeUtil.isNotNull(this.originY) &&
+			NgxThreeUtil.isNotNull(this.originZ)
 		) {
 			origin = origin.clone();
 			origin.add(
-				ThreeUtil.getTypeSafe(
-					ThreeUtil.getVector3Safe(this.originX, this.originY, this.originZ),
+				NgxThreeUtil.getTypeSafe(
+					NgxThreeUtil.getVector3Safe(this.originX, this.originY, this.originZ),
 					def
 				)
 			);
@@ -657,13 +453,13 @@ export class HelperComponent
 	 * @param obj
 	 * @returns object position
 	 */
-	private getObjectPosition(obj: any): I3JS.IVector3 {
-		if (ThreeUtil.isNotNull(obj)) {
+	private getObjectPosition(obj: any): I3JS.Vector3 {
+		if (NgxThreeUtil.isNotNull(obj)) {
 			if (obj instanceof N3JS.Vector3) {
 				return obj;
-			} else if (ThreeUtil.isNotNull(obj.getPosition)) {
+			} else if (NgxThreeUtil.isNotNull(obj.getPosition)) {
 				return obj.getPosition();
-			} else if (ThreeUtil.isNotNull(obj.position)) {
+			} else if (NgxThreeUtil.isNotNull(obj.position)) {
 				return obj.position;
 			}
 		}
@@ -676,7 +472,7 @@ export class HelperComponent
 	 * @returns length
 	 */
 	private getLength(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.length, def);
+		return NgxThreeUtil.getTypeSafe(this.length, def);
 	}
 
 	/**
@@ -685,7 +481,7 @@ export class HelperComponent
 	 * @returns head length
 	 */
 	private getHeadLength(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.headLength, def);
+		return NgxThreeUtil.getTypeSafe(this.headLength, def);
 	}
 
 	/**
@@ -694,7 +490,7 @@ export class HelperComponent
 	 * @returns head width
 	 */
 	private getHeadWidth(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.headWidth, def);
+		return NgxThreeUtil.getTypeSafe(this.headWidth, def);
 	}
 
 	/**
@@ -745,9 +541,9 @@ export class HelperComponent
 	 * Sets update
 	 */
 	public setUpdate() {
-		if (ThreeUtil.isNotNull(this.helper)) {
+		if (NgxThreeUtil.isNotNull(this.helper)) {
 			const helper: any = this.helper;
-			if (ThreeUtil.isNotNull(helper.update)) {
+			if (NgxThreeUtil.isNotNull(helper.update)) {
 				if (helper instanceof N3JS.SkeletonHelper) {
 				} else {
 					window.setTimeout(() => {
@@ -761,20 +557,20 @@ export class HelperComponent
 	/**
 	 * The Helper of helper component
 	 */
-	private helper: I3JS.IObject3D = null;
+	private helper: I3JS.Object3D = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D): boolean {
+	public setParent(parent: I3JS.Object3D): boolean {
 		if (super.setParent(parent)) {
 			this.getHelper();
 			this.unSubscribeRefer('helperReset');
 			this.subscribeRefer(
 				'helperReset',
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					this.parentObject3d,
 					() => {
 						this.needUpdate = true;
@@ -794,16 +590,16 @@ export class HelperComponent
 	 */
 	public applyChanges3d(changes: string[]) {
 		if (this.helper !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getObject3d();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, [], this.OBJECT3D_ATTR)) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, [], this.OBJECT3D_ATTR)) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['update']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['update']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -823,7 +619,7 @@ export class HelperComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends I3JS.IObject3D>(): T {
+	public getObject3d<T extends I3JS.Object3D>(): T {
 		return this.getHelper();
 	}
 
@@ -832,7 +628,7 @@ export class HelperComponent
 	 * @template T
 	 * @returns helper
 	 */
-	public getHelper<T extends I3JS.IObject3D>(): T {
+	public getHelper<T extends I3JS.Object3D>(): T {
 		if (this.helper === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.removeObject3d(this.helper);
@@ -846,7 +642,7 @@ export class HelperComponent
 				case 'gyroscopehelper':
 				case 'gyroscope':
 					const gyroscope = new N3JS.Gyroscope();
-					if (ThreeUtil.isNotNull(this.children)) {
+					if (NgxThreeUtil.isNotNull(this.children)) {
 						this.children.forEach((child) => {
 							if (child.getMesh) {
 								gyroscope.add(child.getObject3d());
@@ -862,7 +658,7 @@ export class HelperComponent
 				case 'csmhelper':
 				case 'csm':
 					let csm = this.control || {};
-					if (ThreeUtil.isNotNull(csm.getControl)) {
+					if (NgxThreeUtil.isNotNull(csm.getControl)) {
 						csm = csm.getControl();
 					}
 					if (!(csm instanceof N3JS.CSM)) {
@@ -922,15 +718,15 @@ export class HelperComponent
 					if (audioTarget instanceof N3JS.PositionalAudio) {
 						const positionalAudioHelper: any = new N3JS.PositionalAudioHelper(
 							audioTarget as any,
-							ThreeUtil.getTypeSafe(this.range, 1),
-							ThreeUtil.getTypeSafe(this.divisionsInnerAngle, 16),
-							ThreeUtil.getTypeSafe(this.divisionsOuterAngle, 2)
+							NgxThreeUtil.getTypeSafe(this.range, 1),
+							NgxThreeUtil.getTypeSafe(this.divisionsInnerAngle, 16),
+							NgxThreeUtil.getTypeSafe(this.divisionsOuterAngle, 2)
 						);
 						parentAdd = false;
 						if (positionalAudioHelper.audio.buffer === null) {
 							this.subscribeRefer(
 								'audioload',
-								ThreeUtil.getSubscribe(
+								NgxThreeUtil.getSubscribe(
 									audioTarget,
 									() => {
 										positionalAudioHelper.material[0].visible = true;
@@ -1013,7 +809,7 @@ export class HelperComponent
 						this.parent.material instanceof N3JS.Material
 					) {
 						basemesh = new N3JS.Group();
-						const clippingPlanes: I3JS.IPlane[] =
+						const clippingPlanes: I3JS.Plane[] =
 							this.parent.material.clippingPlanes;
 						if (clippingPlanes !== null && clippingPlanes !== undefined) {
 							clippingPlanes.forEach((clippingPlane) => {
@@ -1042,7 +838,7 @@ export class HelperComponent
 					) {
 						vertexMesh.geometry.computeTangents();
 						// this.parent.updateMatrixWorld( true );
-						if (ThreeUtil.isNotNull(vertexMesh.parent)) {
+						if (NgxThreeUtil.isNotNull(vertexMesh.parent)) {
 							vertexMesh.parent.updateMatrixWorld(true);
 						}
 						switch (this.type.toLowerCase()) {
@@ -1082,7 +878,7 @@ export class HelperComponent
 			if (basemesh !== null) {
 				if (
 					basemesh instanceof N3JS.Line &&
-					ThreeUtil.isNotNull(basemesh.material) &&
+					NgxThreeUtil.isNotNull(basemesh.material) &&
 					basemesh.material instanceof N3JS.Material
 				) {
 					const opacity = this.getOpacity(1);
@@ -1090,28 +886,28 @@ export class HelperComponent
 					if (opacity >= 0 && opacity < 1) {
 						basemeshMaterial.opacity = opacity;
 						basemeshMaterial.transparent = true;
-					} else if (ThreeUtil.isNotNull(this.materialTransparent)) {
+					} else if (NgxThreeUtil.isNotNull(this.materialTransparent)) {
 						basemeshMaterial.transparent = this.materialTransparent;
 					}
 					if (
-						ThreeUtil.isNotNull(this.materialColor) &&
+						NgxThreeUtil.isNotNull(this.materialColor) &&
 						basemeshMaterial['color'] !== undefined
 					) {
-						basemeshMaterial['color'] = ThreeUtil.getColorSafe(
+						basemeshMaterial['color'] = NgxThreeUtil.getColorSafe(
 							this.materialColor
 						);
 					}
-					if (ThreeUtil.isNotNull(this.materialBlending)) {
-						basemeshMaterial.blending = ThreeUtil.getBlendingSafe(
+					if (NgxThreeUtil.isNotNull(this.materialBlending)) {
+						basemeshMaterial.blending = NgxThreeUtil.getBlendingSafe(
 							this.materialBlending,
 							'NormalBlending'
 						);
 					}
-					if (ThreeUtil.isNotNull(this.depthWrite)) {
+					if (NgxThreeUtil.isNotNull(this.depthWrite)) {
 						basemeshMaterial.depthWrite = this.getDepthWrite(false);
 					}
 				}
-				if (ThreeUtil.isNotNull(this.matrix)) {
+				if (NgxThreeUtil.isNotNull(this.matrix)) {
 					basemesh.applyMatrix4(this.matrix);
 				}
 			} else {

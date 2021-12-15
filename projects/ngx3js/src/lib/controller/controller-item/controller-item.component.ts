@@ -2,74 +2,11 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CurvesNormal, CurveUtils } from '../../curve/curveUtils';
 import {
 	I3JS,
-	RendererTimer,
 	N3JS,
-	ThreeColor,
-	ThreeUtil,
+	NgxThreeUtil
 } from '../../interface';
-import { AbstractSubscribeComponent } from '../../subscribe.abstract';
-
-/**
- * Control object item
- */
-export interface ControlObjectItem {
-	/**
-	 *
-	 */
-	object3d?: I3JS.IObject3D;
-
-	/**
-	 *
-	 */
-	component?: any;
-
-	/**
-	 *
-	 */
-	position?: I3JS.IVector3;
-
-	/**
-	 *
-	 */
-	rotation?: I3JS.IEuler;
-
-	/**
-	 *
-	 */
-	scale?: I3JS.IVector3;
-
-	/**
-	 *
-	 */
-	material?: I3JS.IMaterial;
-
-	/**
-	 *
-	 */
-	uniforms?: { [uniform: string]: I3JS.IUniform };
-
-	/**
-	 *
-	 */
-	geometry?: I3JS.IBufferGeometry;
-
-	/**
-	 *
-	 */
-	attributes?: {
-		[name: string]: I3JS.IBufferAttribute | I3JS.IInterleavedBufferAttribute;
-	};
-
-	/**
-	 *
-	 */
-	morphAttributes?: {
-		[name: string]: (
-			| I3JS.IBufferAttribute
-			| I3JS.IInterleavedBufferAttribute
-		)[];
-	};
-}
+import { IControlObjectItem, IRendererTimer, INgxColor } from '../../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../../subscribe.abstract';
 
 /**
  * The Controller Item component.
@@ -103,8 +40,8 @@ export interface ControlObjectItem {
 	templateUrl: './controller-item.component.html',
 	styleUrls: ['./controller-item.component.scss'],
 })
-export class ControllerItemComponent
-	extends AbstractSubscribeComponent
+export class NgxControllerItemComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -226,7 +163,7 @@ export class ControllerItemComponent
 	/**
 	 * The color of controller item component
 	 */
-	@Input() public color: ThreeColor = null;
+	@Input() public color: INgxColor = null;
 
 	/**
 	 * The opacity of controller item component
@@ -338,24 +275,24 @@ export class ControllerItemComponent
 	 * Gets curve
 	 * @returns curve
 	 */
-	private getCurve(): I3JS.ICurve<I3JS.IVector3> {
+	private getCurve(): I3JS.Curve<I3JS.Vector3> {
 		let curve: string = 'line';
 		switch (this.type.toLowerCase()) {
 			case 'tween':
-				curve = ThreeUtil.getTypeSafe(this.curve, 'linearinout');
+				curve = NgxThreeUtil.getTypeSafe(this.curve, 'linearinout');
 				break;
 			case 'position':
 			default:
-				curve = ThreeUtil.getTypeSafe(this.curve, 'line');
+				curve = NgxThreeUtil.getTypeSafe(this.curve, 'line');
 				break;
 		}
 		return CurveUtils.getCurve(curve, 1, {
-			radiusInner: ThreeUtil.getTypeSafe(this.radiusInner, 0),
-			waveH: ThreeUtil.getTypeSafe(this.waveH, this.wave, 0),
-			waveR: ThreeUtil.getTypeSafe(this.waveR, this.wave, 0),
-			rateX: ThreeUtil.getTypeSafe(this.rateX, this.rate, 1),
-			rateY: ThreeUtil.getTypeSafe(this.rateY, this.rate, 1),
-			rateZ: ThreeUtil.getTypeSafe(this.rateZ, this.rate, 1),
+			radiusInner: NgxThreeUtil.getTypeSafe(this.radiusInner, 0),
+			waveH: NgxThreeUtil.getTypeSafe(this.waveH, this.wave, 0),
+			waveR: NgxThreeUtil.getTypeSafe(this.waveR, this.wave, 0),
+			rateX: NgxThreeUtil.getTypeSafe(this.rateX, this.rate, 1),
+			rateY: NgxThreeUtil.getTypeSafe(this.rateY, this.rate, 1),
+			rateZ: NgxThreeUtil.getTypeSafe(this.rateZ, this.rate, 1),
 		});
 	}
 
@@ -406,12 +343,12 @@ export class ControllerItemComponent
 	/**
 	 * The Helper of controller item component
 	 */
-	private _helper: I3JS.IObject3D = null;
+	private _helper: I3JS.Object3D = null;
 
 	/**
 	 * Helper point of controller item component
 	 */
-	private _helperPoint: I3JS.IObject3D = null;
+	private _helperPoint: I3JS.Object3D = null;
 
 	/**
 	 * The Curve of controller item component
@@ -436,7 +373,7 @@ export class ControllerItemComponent
 	/**
 	 * The Parent of controller item component
 	 */
-	private _parent: I3JS.IObject3D = null;
+	private _parent: I3JS.Object3D = null;
 
 	/**
 	 * The Lookathead of controller item component
@@ -450,9 +387,9 @@ export class ControllerItemComponent
 	private getOptions(): string {
 		switch (this.type.toLowerCase()) {
 			case 'tween':
-				return ThreeUtil.getTypeSafe(this.options, '') + ',once';
+				return NgxThreeUtil.getTypeSafe(this.options, '') + ',once';
 			default:
-				return ThreeUtil.getTypeSafe(this.options, 'yoyo');
+				return NgxThreeUtil.getTypeSafe(this.options, 'yoyo');
 		}
 	}
 
@@ -463,11 +400,11 @@ export class ControllerItemComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this._curve !== null && this._parent !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getController(this._controlItem, this._parent);
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
 				this.needUpdate = true;
 				return;
 			}
@@ -486,12 +423,12 @@ export class ControllerItemComponent
 	/**
 	 * Control item of controller item component
 	 */
-	private _controlItem: ControlObjectItem = {};
+	private _controlItem: IControlObjectItem = {};
 
 	/**
 	 * Rate call back of controller item component
 	 */
-	private _rateCallBack: (timer?: RendererTimer) => number = null;
+	private _rateCallBack: (timer?: IRendererTimer) => number = null;
 
 	/**
 	 * Gets controller
@@ -500,8 +437,8 @@ export class ControllerItemComponent
 	 * @returns controller
 	 */
 	public getController(
-		controlItem: ControlObjectItem,
-		parent: I3JS.IObject3D
+		controlItem: IControlObjectItem,
+		parent: I3JS.Object3D
 	): this {
 		if (this._curve === null || this._needUpdate) {
 			this._needUpdate = false;
@@ -515,42 +452,42 @@ export class ControllerItemComponent
 			this._helper = null;
 			this._helperPoint = null;
 			this._rateCallBack = null;
-			if (ThreeUtil.isNotNull(this.refRate)) {
+			if (NgxThreeUtil.isNotNull(this.refRate)) {
 				if (typeof this.refRate === 'function') {
 					this._rateCallBack = this.refRate;
-				} else if (ThreeUtil.isNotNull(this.refRate.getNumber)) {
+				} else if (NgxThreeUtil.isNotNull(this.refRate.getNumber)) {
 					this._rateCallBack = this.refRate.getNumber();
 				}
 			}
 			const curve = this.getCurve();
-			let scale: I3JS.IVector3 = ThreeUtil.getVector3Safe(
-				ThreeUtil.getTypeSafe(this.radiusX, this.radius, 1),
-				ThreeUtil.getTypeSafe(this.radiusY, this.radius, 1),
-				ThreeUtil.getTypeSafe(this.radiusZ, this.radius, 1)
+			let scale: I3JS.Vector3 = NgxThreeUtil.getVector3Safe(
+				NgxThreeUtil.getTypeSafe(this.radiusX, this.radius, 1),
+				NgxThreeUtil.getTypeSafe(this.radiusY, this.radius, 1),
+				NgxThreeUtil.getTypeSafe(this.radiusZ, this.radius, 1)
 			);
-			let rotation: I3JS.IEuler = ThreeUtil.getEulerSafe(
-				ThreeUtil.getTypeSafe(this.rotationX, this.rotation, 0),
-				ThreeUtil.getTypeSafe(this.rotationY, this.rotation, 0),
-				ThreeUtil.getTypeSafe(this.rotationZ, this.rotation, 0)
+			let rotation: I3JS.Euler = NgxThreeUtil.getEulerSafe(
+				NgxThreeUtil.getTypeSafe(this.rotationX, this.rotation, 0),
+				NgxThreeUtil.getTypeSafe(this.rotationY, this.rotation, 0),
+				NgxThreeUtil.getTypeSafe(this.rotationZ, this.rotation, 0)
 			);
-			let center: I3JS.IVector3 = ThreeUtil.getVector3Safe(
-				ThreeUtil.getTypeSafe(this.centerX, this.center, 0),
-				ThreeUtil.getTypeSafe(this.centerY, this.center, 0),
-				ThreeUtil.getTypeSafe(this.centerZ, this.center, 0)
+			let center: I3JS.Vector3 = NgxThreeUtil.getVector3Safe(
+				NgxThreeUtil.getTypeSafe(this.centerX, this.center, 0),
+				NgxThreeUtil.getTypeSafe(this.centerY, this.center, 0),
+				NgxThreeUtil.getTypeSafe(this.centerZ, this.center, 0)
 			);
 			this._lookathead = Math.min(
 				1,
-				Math.max(0.001, ThreeUtil.getTypeSafe(this.lookathead, 0.05))
+				Math.max(0.001, NgxThreeUtil.getTypeSafe(this.lookathead, 0.05))
 			);
 			this._curve = new CurvesNormal(curve, {
 				scale: scale,
 				rotation: rotation,
 				center: center,
-				multiply: ThreeUtil.getTypeSafe(this.multiply, 1),
+				multiply: NgxThreeUtil.getTypeSafe(this.multiply, 1),
 				options: this.getOptions(),
 			});
-			this._duration = ThreeUtil.getTypeSafe(this.duration, 60);
-			this._delta = ThreeUtil.getTypeSafe(this.delta, 0);
+			this._duration = NgxThreeUtil.getTypeSafe(this.duration, 60);
+			this._delta = NgxThreeUtil.getTypeSafe(this.delta, 0);
 			switch (this.type.toLowerCase()) {
 				case 'position':
 					this._curve.referCenter = parent.position;
@@ -565,14 +502,14 @@ export class ControllerItemComponent
 				this._helper = new N3JS.Mesh(
 					new N3JS.TubeGeometry(
 						this._curve,
-						ThreeUtil.getTypeSafe(this.tubularSegments, 64),
-						ThreeUtil.getTypeSafe(this.tubeRadius, 0.01),
-						ThreeUtil.getTypeSafe(this.tubeRadiusSegments, 8),
-						ThreeUtil.getTypeSafe(this.closed, false)
+						NgxThreeUtil.getTypeSafe(this.tubularSegments, 64),
+						NgxThreeUtil.getTypeSafe(this.tubeRadius, 0.01),
+						NgxThreeUtil.getTypeSafe(this.tubeRadiusSegments, 8),
+						NgxThreeUtil.getTypeSafe(this.closed, false)
 					),
 					new N3JS.MeshBasicMaterial({
-						color: ThreeUtil.getColorSafe(this.color, 0xff0000),
-						opacity: ThreeUtil.getTypeSafe(this.opacity, 0.2),
+						color: NgxThreeUtil.getColorSafe(this.color, 0xff0000),
+						opacity: NgxThreeUtil.getTypeSafe(this.opacity, 0.2),
 						depthTest: true,
 						transparent: true,
 						side: N3JS.DoubleSide,
@@ -580,13 +517,13 @@ export class ControllerItemComponent
 				);
 				this._helperPoint = new N3JS.Mesh(
 					new N3JS.SphereGeometry(
-						ThreeUtil.getTypeSafe(this.tubeRadius, 0.01) * 10,
-						ThreeUtil.getTypeSafe(this.tubeRadiusSegments, 8),
-						ThreeUtil.getTypeSafe(this.tubeRadiusSegments, 4)
+						NgxThreeUtil.getTypeSafe(this.tubeRadius, 0.01) * 10,
+						NgxThreeUtil.getTypeSafe(this.tubeRadiusSegments, 8),
+						NgxThreeUtil.getTypeSafe(this.tubeRadiusSegments, 4)
 					),
 					new N3JS.MeshBasicMaterial({
-						color: ThreeUtil.getColorSafe(this.color, 0x0000ff),
-						opacity: ThreeUtil.getTypeSafe(this.opacity, 0.7),
+						color: NgxThreeUtil.getColorSafe(this.color, 0x0000ff),
+						opacity: NgxThreeUtil.getTypeSafe(this.opacity, 0.7),
 						depthTest: true,
 						transparent: true,
 						side: N3JS.DoubleSide,
@@ -605,10 +542,10 @@ export class ControllerItemComponent
 					default:
 						this._helper.scale
 							.set(1, 1, 1)
-							.multiplyScalar(ThreeUtil.getTypeSafe(this.scale, 1));
+							.multiplyScalar(NgxThreeUtil.getTypeSafe(this.scale, 1));
 						this._helperPoint.scale
 							.set(1, 1, 1)
-							.multiplyScalar(ThreeUtil.getTypeSafe(this.scale, 1));
+							.multiplyScalar(NgxThreeUtil.getTypeSafe(this.scale, 1));
 						this._helperPoint.visible = true;
 						break;
 				}
@@ -637,14 +574,14 @@ export class ControllerItemComponent
 	/**
 	 * Last look at of controller item component
 	 */
-	private _lastLookAt: I3JS.IVector3 = null;
+	private _lastLookAt: I3JS.Vector3 = null;
 
 	/**
 	 * Updates helper point
 	 * @param itemTimer
 	 * @param [scale]
 	 */
-	public updateHelperPoint(itemTimer: RendererTimer, scale: number = null) {
+	public updateHelperPoint(itemTimer: IRendererTimer, scale: number = null) {
 		if (this._helperPoint !== null) {
 			this._curve.getPointV3(itemTimer, this._helperPoint.position);
 			switch (this.type.toLowerCase()) {
@@ -653,7 +590,7 @@ export class ControllerItemComponent
 					break;
 				default:
 					this._helperPoint.position.multiplyScalar(
-						ThreeUtil.getTypeSafe(this.scale, 1)
+						NgxThreeUtil.getTypeSafe(this.scale, 1)
 					);
 					if (scale !== null) {
 						this._helperPoint.scale.set(scale, scale, scale);
@@ -668,7 +605,7 @@ export class ControllerItemComponent
 	 * @param targetColor
 	 * @param srcColor
 	 */
-	private updateColor(targetColor: I3JS.IColor, srcColor: I3JS.IColor) {
+	private updateColor(targetColor: I3JS.Color, srcColor: I3JS.Color) {
 		switch (this.colorType) {
 			case 'rate':
 				if (this._rateCallBack !== null) {
@@ -699,7 +636,7 @@ export class ControllerItemComponent
 	/**
 	 * Tmp color of controller item component
 	 */
-	private _tmpColor: I3JS.IColor = new N3JS.Color();
+	private _tmpColor: I3JS.Color = new N3JS.Color();
 
 	/**
 	 * Gets lerp float
@@ -718,13 +655,13 @@ export class ControllerItemComponent
 	 * @param events
 	 * @returns true if update
 	 */
-	public update(timer: RendererTimer, events: string[]): boolean {
+	public update(timer: IRendererTimer, events: string[]): boolean {
 		if (
 			this._curve !== null &&
 			this._controlItem.object3d !== null &&
 			this._controlItem.object3d.userData.initPosition
 		) {
-			const itemTimer: RendererTimer = {
+			const itemTimer: IRendererTimer = {
 				elapsedTime: timer.elapsedTime / this._duration + this._delta,
 				delta: timer.delta / this._duration,
 			};
@@ -799,13 +736,13 @@ export class ControllerItemComponent
 					}
 				case 'material':
 					if (
-						ThreeUtil.isNotNull(this.material) &&
+						NgxThreeUtil.isNotNull(this.material) &&
 						this._controlItem.material !== null
 					) {
 						const material: any = this._controlItem.material;
 						if (
-							ThreeUtil.isNotNull(material) &&
-							ThreeUtil.isNotNull(material[this.material])
+							NgxThreeUtil.isNotNull(material) &&
+							NgxThreeUtil.isNotNull(material[this.material])
 						) {
 							let scale: number = 1;
 							const oldValue = material[this.material];
@@ -842,20 +779,20 @@ export class ControllerItemComponent
 				case 'uniform':
 				case 'uniforms':
 					if (
-						ThreeUtil.isNotNull(this.uniform) &&
+						NgxThreeUtil.isNotNull(this.uniform) &&
 						this._controlItem.uniforms !== null
 					) {
 						const uniforms = this._controlItem.uniforms;
-						if (ThreeUtil.isNotNull(uniforms[this.uniform])) {
+						if (NgxThreeUtil.isNotNull(uniforms[this.uniform])) {
 							const uniform: I3JS.IUniform = uniforms[this.uniform];
 							const oldValue = uniform.value;
 							switch (this.valueType.toLowerCase()) {
 								case 'copyposition':
 									if (
 										oldValue instanceof N3JS.Vector3 &&
-										ThreeUtil.isNotNull(this.refValue)
+										NgxThreeUtil.isNotNull(this.refValue)
 									) {
-										oldValue.copy(ThreeUtil.getPosition(this.refValue));
+										oldValue.copy(NgxThreeUtil.getPosition(this.refValue));
 									}
 									break;
 								case 'int':
@@ -903,14 +840,14 @@ export class ControllerItemComponent
 				case 'update':
 				case 'autoupdate':
 					if (this._controlItem.component !== null) {
-						if (ThreeUtil.isNotNull(this._controlItem.component.update)) {
+						if (NgxThreeUtil.isNotNull(this._controlItem.component.update)) {
 							this._controlItem.component.update();
 						}
 					}
 					break;
 				case 'tween':
 					const tween = this._controlItem.object3d.userData.tween;
-					if (ThreeUtil.isNotNull(tween) && tween.elapsedTime < 1) {
+					if (NgxThreeUtil.isNotNull(tween) && tween.elapsedTime < 1) {
 						tween.elapsedTime = Math.min(
 							1,
 							tween.elapsedTime + timer.delta / this._duration
@@ -930,17 +867,17 @@ export class ControllerItemComponent
 						);
 						this.updateHelperPoint(tweenTimer);
 						Object.entries(tween).forEach(([key, value]) => {
-							if (ThreeUtil.isNotNull(value)) {
+							if (NgxThreeUtil.isNotNull(value)) {
 								switch (key) {
 									case 'position':
 										this._controlItem.position.lerp(
-											value as I3JS.IVector3,
+											value as I3JS.Vector3,
 											elapsedAlpha
 										);
 										break;
 									case 'scale':
 										this._controlItem.scale.lerp(
-											value as I3JS.IVector3,
+											value as I3JS.Vector3,
 											elapsedAlpha
 										);
 										break;

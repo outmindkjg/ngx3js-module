@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ThreeColor, ThreeUtil, N3JS, I3JS } from './../interface';
+import { INgxColor } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from './../interface';
 
 /**
  * The Fog component.
@@ -21,7 +22,7 @@ import { ThreeColor, ThreeUtil, N3JS, I3JS } from './../interface';
 	templateUrl: './fog.component.html',
 	styleUrls: ['./fog.component.scss'],
 })
-export class FogComponent extends AbstractSubscribeComponent implements OnInit {
+export class NgxFogComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
 	 * The Fog type.
 	 *
@@ -33,7 +34,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	/**
 	 * Fog color.  Example: If set to black, far away objects will be rendered black.
 	 */
-	@Input() public color: ThreeColor = null;
+	@Input() public color: INgxColor = null;
 
 	/**
 	 * Defines how fast the fog will grow dense.
@@ -103,18 +104,18 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	/**
 	 * The Fog of fog component
 	 */
-	private fog: I3JS.IFogBase = null;
+	private fog: I3JS.FogBase = null;
 
 	/**
 	 * Ref scene of fog component
 	 */
-	private refScene: I3JS.IScene = null;
+	private refScene: I3JS.Scene = null;
 
 	/**
 	 * Sets scene
 	 * @param refScene
 	 */
-	public setScene(refScene: I3JS.IScene) {
+	public setScene(refScene: I3JS.Scene) {
 		if (this.refScene !== refScene) {
 			this.refScene = refScene;
 			this.refScene.fog = this.getFog();
@@ -125,7 +126,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	 * Sets object
 	 * @param fog
 	 */
-	setObject(fog: I3JS.IFogBase) {
+	setObject(fog: I3JS.FogBase) {
 		super.setObject(fog);
 		if (this.refScene !== null) {
 			this.refScene.fog = fog;
@@ -138,15 +139,15 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.fog !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getFog();
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, []);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, []);
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					['color', 'density', 'near', 'far'],
 					this.OBJECT_ATTR
@@ -158,32 +159,32 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'color':
-						if (ThreeUtil.isNotNull(this.color)) {
-							this.fog.color = ThreeUtil.getColorSafe(this.color, 0xffffff);
+						if (NgxThreeUtil.isNotNull(this.color)) {
+							this.fog.color = NgxThreeUtil.getColorSafe(this.color, 0xffffff);
 						}
 						break;
 					case 'density':
 						if (
-							ThreeUtil.isNotNull(this.density) &&
+							NgxThreeUtil.isNotNull(this.density) &&
 							this.fog instanceof N3JS.FogExp2
 						) {
-							this.fog.density = ThreeUtil.getTypeSafe(this.density, 0.00025);
+							this.fog.density = NgxThreeUtil.getTypeSafe(this.density, 0.00025);
 						}
 						break;
 					case 'near':
 						if (
-							ThreeUtil.isNotNull(this.near) &&
+							NgxThreeUtil.isNotNull(this.near) &&
 							this.fog instanceof N3JS.Fog
 						) {
-							this.fog.near = ThreeUtil.getTypeSafe(this.near);
+							this.fog.near = NgxThreeUtil.getTypeSafe(this.near);
 						}
 						break;
 					case 'far':
 						if (
-							ThreeUtil.isNotNull(this.far) &&
+							NgxThreeUtil.isNotNull(this.far) &&
 							this.fog instanceof N3JS.Fog
 						) {
-							this.fog.far = ThreeUtil.getTypeSafe(this.far);
+							this.fog.far = NgxThreeUtil.getTypeSafe(this.far);
 						}
 						break;
 				}
@@ -196,7 +197,7 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 	 * Gets fog
 	 * @returns fog
 	 */
-	public getFog(): I3JS.IFogBase {
+	public getFog(): I3JS.FogBase {
 		if (this.fog === null || this._needUpdate) {
 			this.needUpdate = false;
 			switch (this.type.toLowerCase()) {
@@ -204,16 +205,16 @@ export class FogComponent extends AbstractSubscribeComponent implements OnInit {
 				case 'exp2':
 				case 'fogexp2':
 					this.fog = new N3JS.FogExp2(
-						ThreeUtil.getColorSafe(this.color, 0xffffff).getHex(),
-						ThreeUtil.getTypeSafe(this.density, 0.00025)
+						NgxThreeUtil.getColorSafe(this.color, 0xffffff).getHex(),
+						NgxThreeUtil.getTypeSafe(this.density, 0.00025)
 					);
 					break;
 				case 'fog':
 				default:
 					this.fog = new N3JS.Fog(
-						ThreeUtil.getColorSafe(this.color, 0xffffff),
-						ThreeUtil.getTypeSafe(this.near),
-						ThreeUtil.getTypeSafe(this.far)
+						NgxThreeUtil.getColorSafe(this.color, 0xffffff),
+						NgxThreeUtil.getTypeSafe(this.near),
+						NgxThreeUtil.getTypeSafe(this.far)
 					);
 					break;
 			}

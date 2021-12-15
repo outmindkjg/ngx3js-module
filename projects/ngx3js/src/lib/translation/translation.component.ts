@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ApplyMatrix4, N3JS, I3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { N3JS, I3JS } from '../interface';
+import { IApplyMatrix4 } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * Translation Component
@@ -21,8 +22,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './translation.component.html',
 	styleUrls: ['./translation.component.scss'],
 })
-export class TranslationComponent
-	extends AbstractSubscribeComponent
+export class NgxTranslationComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -78,14 +79,14 @@ export class TranslationComponent
 	/**
 	 * The Translation of translation component
 	 */
-	private translation: I3JS.IMatrix4 = null;
+	private translation: I3JS.Matrix4 = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D | any): boolean {
+	public setParent(parent: I3JS.Object3D | any): boolean {
 		if (super.setParent(parent)) {
 			this.resetTranslation();
 			return true;
@@ -99,7 +100,7 @@ export class TranslationComponent
 	 */
 	public resetTranslation() {
 		if (this.parent !== null && this.visible) {
-			const refTranslation: ApplyMatrix4[] = [];
+			const refTranslation: IApplyMatrix4[] = [];
 			if (this.parent instanceof N3JS.BufferGeometry) {
 				refTranslation.push(this.parent);
 			} else if (this.parent.getGeometry) {
@@ -110,7 +111,7 @@ export class TranslationComponent
 				});
 			}
 			if (refTranslation.length > 0) {
-				const translation: I3JS.IMatrix4 = this.getTranslation();
+				const translation: I3JS.Matrix4 = this.getTranslation();
 				refTranslation.forEach((refTranslation) => {
 					refTranslation.applyMatrix4(translation);
 				});
@@ -122,7 +123,7 @@ export class TranslationComponent
 	 * Gets translation
 	 * @returns translation
 	 */
-	public getTranslation(): I3JS.IMatrix4 {
+	public getTranslation(): I3JS.Matrix4 {
 		if (this.translation === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.translation = new N3JS.Matrix4().makeTranslation(

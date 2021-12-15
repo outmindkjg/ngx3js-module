@@ -13,7 +13,7 @@ export class NgxArrayCamera extends N3JS.ArrayCamera {
 	 * Creates an instance of ngx array camera.
 	 * @param [cameras]
 	 */
-	constructor(cameras?: I3JS.IPerspectiveCamera[]) {
+	constructor(cameras?: I3JS.PerspectiveCamera[]) {
 		super(cameras);
 	}
 }
@@ -52,7 +52,7 @@ export class NgxCubeCamera extends N3JS.CubeCamera {
 	constructor(
 		near: number,
 		far: number,
-		renderTarget: I3JS.IWebGLCubeRenderTarget
+		renderTarget: I3JS.WebGLCubeRenderTarget
 	) {
 		super(near, far, renderTarget as any);
 	}

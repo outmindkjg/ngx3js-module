@@ -4,14 +4,15 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { NgxGeometryUtils } from '../geometry/geometryUtils';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { IRendererTimer } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import * as AmmoType from '../threejs-library/ammo-type';
-import { I3JS, RendererTimer, N3JS, ThreeUtil } from './../interface';
-import { PhysicsComponent } from './../physics/physics.component';
-import { RigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
+import { NgxPhysicsComponent } from './../physics/physics.component';
+import { NgxRigidbodyNodeComponent } from './rigidbody-node/rigidbody-node.component';
 
 /**
  * Rigidbody type
@@ -35,7 +36,7 @@ export interface RigidbodyType {
 	/**
 	 *
 	 */
-	debris: RigidbodyComponent[];
+	debris: NgxRigidbodyComponent[];
 
 	/**
 	 *
@@ -45,7 +46,7 @@ export interface RigidbodyType {
 	/**
 	 *
 	 */
-	mesh?: I3JS.IObject3D;
+	mesh?: I3JS.Object3D;
 }
 
 /**
@@ -60,8 +61,8 @@ export interface RigidbodyType {
 	templateUrl: './rigidbody.component.html',
 	styleUrls: ['./rigidbody.component.scss'],
 })
-export class RigidbodyComponent
-	extends AbstractSubscribeComponent
+export class NgxRigidbodyComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -243,8 +244,8 @@ export class RigidbodyComponent
 	/**
 	 * Content children of rigidbody component
 	 */
-	@ContentChildren(RigidbodyNodeComponent, { descendants: false })
-	private rigidbodyNodeList: QueryList<RigidbodyNodeComponent>;
+	@ContentChildren(NgxRigidbodyNodeComponent, { descendants: false })
+	private rigidbodyNodeList: QueryList<NgxRigidbodyNodeComponent>;
 
 	/**
 	 * Gets box half extents
@@ -253,15 +254,15 @@ export class RigidbodyComponent
 	 * @returns box half extents
 	 */
 	private getBoxHalfExtents(
-		geometry: I3JS.IBufferGeometry,
-		def?: I3JS.IVector3
+		geometry: I3JS.BufferGeometry,
+		def?: I3JS.Vector3
 	): AmmoType.btVector3 {
-		let boxHalfExtents = ThreeUtil.getVector3Safe(
+		let boxHalfExtents = NgxThreeUtil.getVector3Safe(
 			this.width,
 			this.height,
 			this.depth
 		);
-		if (ThreeUtil.isNull(boxHalfExtents)) {
+		if (NgxThreeUtil.isNull(boxHalfExtents)) {
 			boxHalfExtents = this.getGeometrySize(geometry, def);
 		}
 		return new this._ammo.btVector3(
@@ -277,9 +278,9 @@ export class RigidbodyComponent
 	 * @param [def]
 	 * @returns radius
 	 */
-	private getRadius(geometry: I3JS.IBufferGeometry, def?: number): number {
+	private getRadius(geometry: I3JS.BufferGeometry, def?: number): number {
 		let radius = this.radius;
-		if (ThreeUtil.isNull(radius)) {
+		if (NgxThreeUtil.isNull(radius)) {
 			const geometrySize = this.getGeometrySize(geometry, def);
 			radius = Math.max(geometrySize.x, geometrySize.y, geometrySize.z) / 2;
 		}
@@ -292,9 +293,9 @@ export class RigidbodyComponent
 	 * @param [def]
 	 * @returns height
 	 */
-	private getHeight(geometry: I3JS.IBufferGeometry, def?: number): number {
+	private getHeight(geometry: I3JS.BufferGeometry, def?: number): number {
 		let height = this.height;
-		if (ThreeUtil.isNull(height)) {
+		if (NgxThreeUtil.isNull(height)) {
 			height = this.getGeometrySize(geometry, def).y;
 		}
 		return height;
@@ -306,7 +307,7 @@ export class RigidbodyComponent
 	 * @returns mass
 	 */
 	private getMass(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.mass, def);
+		return NgxThreeUtil.getTypeSafe(this.mass, def);
 	}
 
 	/**
@@ -315,7 +316,7 @@ export class RigidbodyComponent
 	 * @returns margin
 	 */
 	private getMargin(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.margin, def);
+		return NgxThreeUtil.getTypeSafe(this.margin, def);
 	}
 
 	/**
@@ -324,7 +325,7 @@ export class RigidbodyComponent
 	 * @returns friction
 	 */
 	private getFriction(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.friction, def);
+		return NgxThreeUtil.getTypeSafe(this.friction, def);
 	}
 
 	/**
@@ -333,7 +334,7 @@ export class RigidbodyComponent
 	 * @returns rolling friction
 	 */
 	private getRollingFriction(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.rollingFriction, def);
+		return NgxThreeUtil.getTypeSafe(this.rollingFriction, def);
 	}
 
 	/**
@@ -342,7 +343,7 @@ export class RigidbodyComponent
 	 * @returns restitution
 	 */
 	private getRestitution(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.restitution, def);
+		return NgxThreeUtil.getTypeSafe(this.restitution, def);
 	}
 
 	/**
@@ -351,10 +352,10 @@ export class RigidbodyComponent
 	 * @returns inertia
 	 */
 	private getInertia(def?: number): AmmoType.btVector3 {
-		const inertia = ThreeUtil.getTypeSafe(this.inertia, def);
-		const inertiaX = ThreeUtil.getTypeSafe(this.inertiaX, 0);
-		const inertiaY = ThreeUtil.getTypeSafe(this.inertiaY, inertia);
-		const inertiaZ = ThreeUtil.getTypeSafe(this.inertiaZ, 0);
+		const inertia = NgxThreeUtil.getTypeSafe(this.inertia, def);
+		const inertiaX = NgxThreeUtil.getTypeSafe(this.inertiaX, 0);
+		const inertiaY = NgxThreeUtil.getTypeSafe(this.inertiaY, inertia);
+		const inertiaZ = NgxThreeUtil.getTypeSafe(this.inertiaZ, 0);
 		return new this._ammo.btVector3(inertiaX, inertiaY, inertiaZ);
 	}
 
@@ -364,7 +365,7 @@ export class RigidbodyComponent
 	 * @returns lin damping
 	 */
 	private getLinDamping(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.linDamping, this.damping, def);
+		return NgxThreeUtil.getTypeSafe(this.linDamping, this.damping, def);
 	}
 
 	/**
@@ -373,7 +374,7 @@ export class RigidbodyComponent
 	 * @returns ang damping
 	 */
 	private getAngDamping(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.angDamping, this.damping, def);
+		return NgxThreeUtil.getTypeSafe(this.angDamping, this.damping, def);
 	}
 
 	/**
@@ -383,10 +384,10 @@ export class RigidbodyComponent
 	 * @returns geometry size
 	 */
 	private getGeometrySize(
-		geometry: I3JS.IBufferGeometry,
-		def?: I3JS.IVector3 | number
-	): I3JS.IVector3 {
-		if (ThreeUtil.isNotNull(geometry)) {
+		geometry: I3JS.BufferGeometry,
+		def?: I3JS.Vector3 | number
+	): I3JS.Vector3 {
+		if (NgxThreeUtil.isNotNull(geometry)) {
 			const anyGeometry: any = geometry;
 			const parameters = anyGeometry['parameters'];
 			switch (geometry.type.toLowerCase()) {
@@ -418,7 +419,7 @@ export class RigidbodyComponent
 					);
 			}
 		}
-		if (ThreeUtil.isNotNull(def)) {
+		if (NgxThreeUtil.isNotNull(def)) {
 			if (def instanceof N3JS.Vector3) {
 				return def;
 			} else if (typeof def === 'number') {
@@ -435,10 +436,10 @@ export class RigidbodyComponent
 	 * @returns geometry segments
 	 */
 	private getGeometrySegments(
-		geometry: I3JS.IBufferGeometry,
-		def?: I3JS.IVector3 | number
-	): I3JS.IVector3 {
-		if (ThreeUtil.isNotNull(geometry)) {
+		geometry: I3JS.BufferGeometry,
+		def?: I3JS.Vector3 | number
+	): I3JS.Vector3 {
+		if (NgxThreeUtil.isNotNull(geometry)) {
 			if (geometry instanceof N3JS.BoxGeometry) {
 				return new N3JS.Vector3(
 					geometry.parameters.widthSegments,
@@ -459,7 +460,7 @@ export class RigidbodyComponent
 				);
 			}
 		}
-		if (ThreeUtil.isNotNull(def)) {
+		if (NgxThreeUtil.isNotNull(def)) {
 			if (def instanceof N3JS.Vector3) {
 				return def;
 			} else if (typeof def === 'number') {
@@ -489,8 +490,8 @@ export class RigidbodyComponent
 	 */
 	ngOnDestroy(): void {
 		if (
-			ThreeUtil.isNotNull(this._physics) &&
-			ThreeUtil.isNotNull(this.rigidBody)
+			NgxThreeUtil.isNotNull(this._physics) &&
+			NgxThreeUtil.isNotNull(this.rigidBody)
 		) {
 			if (this.rigidBody.rigidBodies !== null) {
 				this.rigidBody.rigidBodies.forEach((rigidBody) => {
@@ -498,7 +499,7 @@ export class RigidbodyComponent
 				});
 			}
 			if (this.rigidBody.softBody !== null) {
-				if (ThreeUtil.isNotNull(this.rigidBody.softBody)) {
+				if (NgxThreeUtil.isNotNull(this.rigidBody.softBody)) {
 					this._physics.removeSoftBody(this.rigidBody.softBody);
 				}
 			}
@@ -546,9 +547,9 @@ export class RigidbodyComponent
 	 * @returns absolute geometry
 	 */
 	private getAbsoluteGeometry(
-		bufGeometry: I3JS.IBufferGeometry,
-		object3d: I3JS.IObject3D
-	): I3JS.IBufferGeometry {
+		bufGeometry: I3JS.BufferGeometry,
+		object3d: I3JS.Object3D
+	): I3JS.BufferGeometry {
 		const absBufGeometry = bufGeometry.clone();
 		const positions = absBufGeometry.getAttribute('position');
 		const tmp = new N3JS.Vector3();
@@ -564,14 +565,14 @@ export class RigidbodyComponent
 	/**
 	 * The Object3d of rigidbody component
 	 */
-	private object3d: I3JS.IObject3D = null;
+	private object3d: I3JS.Object3D = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D): boolean {
+	public setParent(parent: I3JS.Object3D): boolean {
 		if (super.setParent(parent)) {
 			this.object3d = parent;
 			this.getRigidBody();
@@ -584,7 +585,7 @@ export class RigidbodyComponent
 	/**
 	 * The Physics of rigidbody component
 	 */
-	private physics: PhysicsComponent = null;
+	private physics: NgxPhysicsComponent = null;
 
 	/**
 	 * The Ammo of rigidbody component
@@ -600,7 +601,7 @@ export class RigidbodyComponent
 	 * Sets physics
 	 * @param physics
 	 */
-	public setPhysics(physics: PhysicsComponent) {
+	public setPhysics(physics: NgxPhysicsComponent) {
 		this.physics = physics;
 		this._physics = this.physics.getPhysics();
 		if (this._physics !== null) {
@@ -610,7 +611,7 @@ export class RigidbodyComponent
 			this.unSubscribeRefer('physics');
 			this.subscribeRefer(
 				'physics',
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					this.physics,
 					() => {
 						this._physics = this.physics.getPhysics();
@@ -643,11 +644,11 @@ export class RigidbodyComponent
 					});
 					break;
 				case 'instanced':
-					if (ThreeUtil.isNull(index)) {
+					if (NgxThreeUtil.isNull(index)) {
 						this.rigidBody.rigidBodies.forEach((rigidBody) => {
 							rigidBodies.push(rigidBody);
 						});
-					} else if (ThreeUtil.isNotNull(this.rigidBody.rigidBodies[index])) {
+					} else if (NgxThreeUtil.isNotNull(this.rigidBody.rigidBodies[index])) {
 						rigidBodies.push(this.rigidBody.rigidBodies[index]);
 					}
 					break;
@@ -698,7 +699,7 @@ export class RigidbodyComponent
 	public getVelocity(
 		type: string = 'linear',
 		index: number = null
-	): I3JS.IVector3 {
+	): I3JS.Vector3 {
 		if (this.rigidBody !== null) {
 			let velocity: AmmoType.btVector3 = null;
 			this._getRigidBodies(index).forEach((rigidBody) => {
@@ -759,7 +760,7 @@ export class RigidbodyComponent
 	public getFactor(
 		type: string = 'linear',
 		index: number = null
-	): I3JS.IVector3 {
+	): I3JS.Vector3 {
 		if (this.rigidBody !== null) {
 			let factor: AmmoType.btVector3 = null;
 			this._getRigidBodies(index).forEach((rigidBody) => {
@@ -877,8 +878,8 @@ export class RigidbodyComponent
 			const transform = new this._ammo.btTransform();
 			transform.setIdentity();
 			const quaternion = this.object3d.quaternion;
-			const relRotation = ThreeUtil.getEulerSafe(rx, ry, rz);
-			if (ThreeUtil.isNotNull(relRotation)) {
+			const relRotation = NgxThreeUtil.getEulerSafe(rx, ry, rz);
+			if (NgxThreeUtil.isNotNull(relRotation)) {
 				quaternion.setFromEuler(relRotation);
 			}
 			transform.setRotation(
@@ -890,8 +891,8 @@ export class RigidbodyComponent
 				)
 			);
 			const position = this.object3d.position;
-			const relPosition = ThreeUtil.getVector3Safe(x, y, z);
-			if (ThreeUtil.isNotNull(relPosition)) {
+			const relPosition = NgxThreeUtil.getVector3Safe(x, y, z);
+			if (NgxThreeUtil.isNotNull(relPosition)) {
 				position.copy(relPosition);
 			}
 			transform.setOrigin(
@@ -918,8 +919,8 @@ export class RigidbodyComponent
 		if (this.rigidBody !== null) {
 			const transform = new this._ammo.btTransform();
 			transform.setIdentity();
-			const quaternion: I3JS.IQuaternion = new N3JS.Quaternion();
-			quaternion.setFromEuler(ThreeUtil.getEulerSafe(x, y, z));
+			const quaternion: I3JS.Quaternion = new N3JS.Quaternion();
+			quaternion.setFromEuler(NgxThreeUtil.getEulerSafe(x, y, z));
 			transform.setRotation(
 				new this._ammo.btQuaternion(
 					quaternion.x,
@@ -954,14 +955,14 @@ export class RigidbodyComponent
 					}
 					break;
 				case 'softbody':
-					if (ThreeUtil.isNotNull(this.rigidBody.softBody)) {
+					if (NgxThreeUtil.isNotNull(this.rigidBody.softBody)) {
 						rigidBody = this.rigidBody.softBody;
 					}
 					break;
 				case 'instanced':
 					if (
-						ThreeUtil.isNotNull(index) &&
-						ThreeUtil.isNotNull(this.rigidBody.rigidBodies[index])
+						NgxThreeUtil.isNotNull(index) &&
+						NgxThreeUtil.isNotNull(this.rigidBody.rigidBodies[index])
 					) {
 						rigidBody = this.rigidBody.rigidBodies[index];
 					}
@@ -978,9 +979,9 @@ export class RigidbodyComponent
 				transform.setIdentity();
 				transform.setOrigin(new this._ammo.btVector3(x, y, z));
 				rigidBody.setWorldTransform(transform);
-			} else if (ThreeUtil.isNotNull(this.rigidBody.mesh)) {
+			} else if (NgxThreeUtil.isNotNull(this.rigidBody.mesh)) {
 				const physics = this._physics as any;
-				if (ThreeUtil.isNotNull(physics.setMeshPosition)) {
+				if (NgxThreeUtil.isNotNull(physics.setMeshPosition)) {
 					physics.setMeshPosition(
 						this.rigidBody.mesh,
 						new N3JS.Vector3(x, y, z),
@@ -1043,12 +1044,12 @@ export class RigidbodyComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.rigidBody !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getRigidBody();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					[
 						'physics',
@@ -1068,57 +1069,57 @@ export class RigidbodyComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['init'])) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, ['init'])) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'rigidbodynode',
 					'physics',
 					'velocity',
 				]);
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'velocityx',
 					'velocityy',
 					'velocityz',
 					'velocitytype',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['velocity']);
+				changes = NgxThreeUtil.pushUniq(changes, ['velocity']);
 			}
 			if (this._physics instanceof this._ammo.btSoftRigidDynamicsWorld) {
 				changes.forEach((change) => {
 					switch (change.toLowerCase()) {
 						case 'velocity':
 							if (
-								ThreeUtil.isNotNull(this.velocityX) ||
-								ThreeUtil.isNotNull(this.velocityY) ||
-								ThreeUtil.isNotNull(this.velocityZ)
+								NgxThreeUtil.isNotNull(this.velocityX) ||
+								NgxThreeUtil.isNotNull(this.velocityY) ||
+								NgxThreeUtil.isNotNull(this.velocityZ)
 							) {
 								this.setVelocity(
-									ThreeUtil.getTypeSafe(this.velocityX, 0),
-									ThreeUtil.getTypeSafe(this.velocityY, 0),
-									ThreeUtil.getTypeSafe(this.velocityZ, 0),
-									ThreeUtil.getTypeSafe(this.velocityType, 'linear')
+									NgxThreeUtil.getTypeSafe(this.velocityX, 0),
+									NgxThreeUtil.getTypeSafe(this.velocityY, 0),
+									NgxThreeUtil.getTypeSafe(this.velocityZ, 0),
+									NgxThreeUtil.getTypeSafe(this.velocityType, 'linear')
 								);
 							}
 							if (
-								ThreeUtil.isNotNull(this.angularVelocityX) ||
-								ThreeUtil.isNotNull(this.angularVelocityY) ||
-								ThreeUtil.isNotNull(this.angularVelocityZ)
+								NgxThreeUtil.isNotNull(this.angularVelocityX) ||
+								NgxThreeUtil.isNotNull(this.angularVelocityY) ||
+								NgxThreeUtil.isNotNull(this.angularVelocityZ)
 							) {
 								this.setVelocity(
-									ThreeUtil.getTypeSafe(this.angularVelocityX, 0),
-									ThreeUtil.getTypeSafe(this.angularVelocityY, 0),
-									ThreeUtil.getTypeSafe(this.angularVelocityZ, 0),
-									ThreeUtil.getTypeSafe(this.velocityType, 'angular')
+									NgxThreeUtil.getTypeSafe(this.angularVelocityX, 0),
+									NgxThreeUtil.getTypeSafe(this.angularVelocityY, 0),
+									NgxThreeUtil.getTypeSafe(this.angularVelocityZ, 0),
+									NgxThreeUtil.getTypeSafe(this.velocityType, 'angular')
 								);
 							}
 							break;
 						case 'rigidbodynode':
 							this.unSubscribeReferList('rigidbodyNodeList');
 							if (
-								ThreeUtil.isNotNull(this.rigidbodyNodeList) &&
-								ThreeUtil.isNotNull(this.rigidBody.softBody)
+								NgxThreeUtil.isNotNull(this.rigidbodyNodeList) &&
+								NgxThreeUtil.isNotNull(this.rigidBody.softBody)
 							) {
 								const softBody = this.rigidBody.softBody;
 								this.rigidbodyNodeList.forEach((rigidbodyNode) => {
@@ -1148,7 +1149,7 @@ export class RigidbodyComponent
 									});
 									break;
 								case 'softbody':
-									if (ThreeUtil.isNotNull(this.rigidBody.softBody)) {
+									if (NgxThreeUtil.isNotNull(this.rigidBody.softBody)) {
 										this.rigidBody.softBody.setTotalMass(mass, false);
 										if (mass > 0) {
 											this.rigidBody.softBody.setActivationState(4);
@@ -1191,7 +1192,7 @@ export class RigidbodyComponent
 	 * Creates debris from breakable object
 	 * @param objects
 	 */
-	private _createDebrisFromBreakableObject(objects: I3JS.IObject3D[]) {
+	private _createDebrisFromBreakableObject(objects: I3JS.Object3D[]) {
 		this.rigidBody.debris = [];
 		const castShadow = this.object3d.castShadow;
 		const receiveShadow = this.object3d.receiveShadow;
@@ -1199,7 +1200,7 @@ export class RigidbodyComponent
 			object.castShadow = castShadow;
 			object.receiveShadow = receiveShadow;
 			this.object3d.parent.add(object);
-			const rigidBody = new RigidbodyComponent();
+			const rigidBody = new NgxRigidbodyComponent();
 			this.initLocalComponent('debris_' + idx, rigidBody);
 			const velocity = object.userData.velocity;
 			const angularVelocity = object.userData.angularVelocity;
@@ -1228,7 +1229,7 @@ export class RigidbodyComponent
 		this.rigidBody.rigidBodies.forEach((rigidBody) => {
 			this._physics.removeRigidBody(rigidBody);
 		});
-		if (ThreeUtil.isNotNull(this.rigidBody.softBody)) {
+		if (NgxThreeUtil.isNotNull(this.rigidBody.softBody)) {
 			this._physics.removeSoftBody(this.rigidBody.softBody);
 		}
 		this.rigidBody.type = 'debris';
@@ -1240,7 +1241,7 @@ export class RigidbodyComponent
 	 * @param bufGeometry
 	 * @returns geometry
 	 */
-	private _processGeometry(bufGeometry: I3JS.IBufferGeometry): {
+	private _processGeometry(bufGeometry: I3JS.BufferGeometry): {
 		ammoVertices: number[];
 		ammoIndices: number[];
 		ammoIndexAssociation: number[][];
@@ -1292,8 +1293,8 @@ export class RigidbodyComponent
 	 * @returns indices
 	 */
 	private _mapIndices(
-		bufGeometry: I3JS.IBufferGeometry,
-		indexedBufferGeom: I3JS.IBufferGeometry
+		bufGeometry: I3JS.BufferGeometry,
+		indexedBufferGeom: I3JS.BufferGeometry
 	): {
 		ammoVertices: number[];
 		ammoIndices: number[];
@@ -1355,8 +1356,8 @@ export class RigidbodyComponent
 	public getRigidBody(): RigidbodyType {
 		if (
 			this.object3d !== null &&
-			ThreeUtil.isNotNull(this._ammo) &&
-			ThreeUtil.isNotNull(this._physics) &&
+			NgxThreeUtil.isNotNull(this._ammo) &&
+			NgxThreeUtil.isNotNull(this._physics) &&
 			(this.rigidBody === null || this._needUpdate)
 		) {
 			this.needUpdate = false;
@@ -1365,7 +1366,7 @@ export class RigidbodyComponent
 					this.rigidBody.rigidBodies.forEach((rigidBody) => {
 						this._physics.removeRigidBody(rigidBody);
 					});
-					if (ThreeUtil.isNotNull(this.rigidBody.softBody)) {
+					if (NgxThreeUtil.isNotNull(this.rigidBody.softBody)) {
 						this._physics.removeSoftBody(this.rigidBody.softBody);
 					}
 					this.rigidBody.debris.forEach((debris) => {
@@ -1377,17 +1378,17 @@ export class RigidbodyComponent
 				let shape: AmmoType.btCollisionShape = null;
 				let softBody: AmmoType.btSoftBody = null;
 				let type: string = this.type;
-				let geometry: I3JS.IBufferGeometry = null;
+				let geometry: I3JS.BufferGeometry = null;
 				let ammoIndexAssociation: number[][] = null;
 				const localScaling = new N3JS.Vector3(1, 1, 1);
 				const anyObject3d: any = this.object3d;
-				if (ThreeUtil.isNotNull(anyObject3d['geometry'])) {
+				if (NgxThreeUtil.isNotNull(anyObject3d['geometry'])) {
 					geometry = anyObject3d['geometry'];
 				} else {
 					type = 'empty';
 				}
 				if (type.toLowerCase() === 'auto') {
-					if (ThreeUtil.isNotNull(geometry)) {
+					if (NgxThreeUtil.isNotNull(geometry)) {
 						switch (geometry.type.toLowerCase()) {
 							case 'boxgeometry':
 								type = 'box';
@@ -1560,7 +1561,7 @@ export class RigidbodyComponent
 							const segments = this.getGeometrySegments(geometry);
 							const meshPositions = geometry.getAttribute(
 								'position'
-							) as I3JS.IBufferAttribute;
+							) as I3JS.BufferAttribute;
 							const heightStickWidth: number = segments.x + 1;
 							const heightStickLength: number = segments.y + 1;
 							const heightfieldData = this._ammo._malloc(
@@ -1611,7 +1612,7 @@ export class RigidbodyComponent
 								);
 								const attrPos = absGeometry.getAttribute(
 									'position'
-								) as I3JS.IBufferAttribute;
+								) as I3JS.BufferAttribute;
 								let index = 0;
 								const ropeStart = new this._ammo.btVector3(
 									attrPos.getX(index),
@@ -1634,7 +1635,7 @@ export class RigidbodyComponent
 										0
 									);
 								(
-									geometry.getAttribute('position') as I3JS.IBufferAttribute
+									geometry.getAttribute('position') as I3JS.BufferAttribute
 								).setUsage(N3JS.DynamicDrawUsage);
 								break;
 							default:
@@ -1657,10 +1658,10 @@ export class RigidbodyComponent
 									processGeometryInfo.ammoVertices,
 									processGeometryInfo.ammoIndices,
 									processGeometryInfo.ammoIndices.length / 3,
-									ThreeUtil.getTypeSafe(this.randomizeConstraints, true)
+									NgxThreeUtil.getTypeSafe(this.randomizeConstraints, true)
 								);
 							(
-								geometry.getAttribute('position') as I3JS.IBufferAttribute
+								geometry.getAttribute('position') as I3JS.BufferAttribute
 							).setUsage(N3JS.DynamicDrawUsage);
 						}
 						break;
@@ -1702,7 +1703,7 @@ export class RigidbodyComponent
 									);
 									const attrPos = absGeometry.getAttribute(
 										'position'
-									) as I3JS.IBufferAttribute;
+									) as I3JS.BufferAttribute;
 									const attrCount = attrPos.count;
 									let index = 0;
 									const clothCorner00 = new this._ammo.btVector3(
@@ -1757,58 +1758,58 @@ export class RigidbodyComponent
 				}
 				if (softBody !== null) {
 					const sbConfig = softBody.get_m_cfg();
-					if (ThreeUtil.isNotNull(this.viterations)) {
+					if (NgxThreeUtil.isNotNull(this.viterations)) {
 						sbConfig.set_viterations(
-							ThreeUtil.getNumberSafe(this.viterations, 10)
+							NgxThreeUtil.getNumberSafe(this.viterations, 10)
 						);
 					}
-					if (ThreeUtil.isNotNull(this.piterations)) {
+					if (NgxThreeUtil.isNotNull(this.piterations)) {
 						sbConfig.set_piterations(
-							ThreeUtil.getNumberSafe(this.piterations, 10)
+							NgxThreeUtil.getNumberSafe(this.piterations, 10)
 						);
 					}
-					if (ThreeUtil.isNotNull(this.collisions)) {
+					if (NgxThreeUtil.isNotNull(this.collisions)) {
 						// Soft-soft and soft-rigid collisions
 						sbConfig.set_collisions(
-							ThreeUtil.getNumberSafe(this.collisions, 0)
+							NgxThreeUtil.getNumberSafe(this.collisions, 0)
 						);
 					}
-					if (ThreeUtil.isNotNull(this.friction)) {
+					if (NgxThreeUtil.isNotNull(this.friction)) {
 						// Friction
 						sbConfig.set_kDF(this.getFriction(0));
 					}
 					if (
-						ThreeUtil.isNotNull(this.damping) ||
-						ThreeUtil.isNotNull(this.linDamping)
+						NgxThreeUtil.isNotNull(this.damping) ||
+						NgxThreeUtil.isNotNull(this.linDamping)
 					) {
 						// Damping
 						sbConfig.set_kDP(this.getLinDamping(0));
 					}
-					if (ThreeUtil.isNotNull(this.pressure)) {
+					if (NgxThreeUtil.isNotNull(this.pressure)) {
 						sbConfig.set_kPR(this.pressure);
 					}
 					if (
-						ThreeUtil.isNotNull(this.stiffness) ||
-						ThreeUtil.isNotNull(this.linStiffness)
+						NgxThreeUtil.isNotNull(this.stiffness) ||
+						NgxThreeUtil.isNotNull(this.linStiffness)
 					) {
 						// Line Stiffness
 						softBody
 							.get_m_materials()
 							.at(0)
 							.set_m_kLST(
-								ThreeUtil.getTypeSafe(this.linStiffness, this.stiffness)
+								NgxThreeUtil.getTypeSafe(this.linStiffness, this.stiffness)
 							);
 					}
 					if (
-						ThreeUtil.isNotNull(this.stiffness) ||
-						ThreeUtil.isNotNull(this.angStiffness)
+						NgxThreeUtil.isNotNull(this.stiffness) ||
+						NgxThreeUtil.isNotNull(this.angStiffness)
 					) {
 						// Angular Stiffness
 						softBody
 							.get_m_materials()
 							.at(0)
 							.set_m_kAST(
-								ThreeUtil.getTypeSafe(this.angStiffness, this.stiffness)
+								NgxThreeUtil.getTypeSafe(this.angStiffness, this.stiffness)
 							);
 					}
 					softBody.setActivationState(0);
@@ -1852,16 +1853,16 @@ export class RigidbodyComponent
 								localInertia
 							);
 							const body = new this._ammo.btRigidBody(rbInfo);
-							if (ThreeUtil.isNotNull(this.friction)) {
+							if (NgxThreeUtil.isNotNull(this.friction)) {
 								body.setFriction(this.getFriction(0));
 							}
-							if (ThreeUtil.isNotNull(this.rollingFriction)) {
+							if (NgxThreeUtil.isNotNull(this.rollingFriction)) {
 								body.setRollingFriction(this.getRollingFriction(0));
 							}
-							if (ThreeUtil.isNotNull(this.restitution)) {
+							if (NgxThreeUtil.isNotNull(this.restitution)) {
 								body.setRestitution(this.getRestitution(0));
 							}
-							if (ThreeUtil.isNotNull(this.linDamping)) {
+							if (NgxThreeUtil.isNotNull(this.linDamping)) {
 								body.setDamping(this.getLinDamping(0), this.getAngDamping(0));
 							}
 							body.setActivationState(0);
@@ -1904,16 +1905,16 @@ export class RigidbodyComponent
 							localInertia
 						);
 						const body: any = new this._ammo.btRigidBody(rbInfo);
-						if (ThreeUtil.isNotNull(this.friction)) {
+						if (NgxThreeUtil.isNotNull(this.friction)) {
 							body.setFriction(this.getFriction(0));
 						}
-						if (ThreeUtil.isNotNull(this.rollingFriction)) {
+						if (NgxThreeUtil.isNotNull(this.rollingFriction)) {
 							body.setRollingFriction(this.getRollingFriction(0));
 						}
-						if (ThreeUtil.isNotNull(this.restitution)) {
+						if (NgxThreeUtil.isNotNull(this.restitution)) {
 							body.setRestitution(this.getRestitution(0));
 						}
-						if (ThreeUtil.isNotNull(this.linDamping)) {
+						if (NgxThreeUtil.isNotNull(this.linDamping)) {
 							body.setDamping(this.getLinDamping(0), this.getAngDamping(0));
 						}
 						body.setActivationState(0);
@@ -1958,7 +1959,7 @@ export class RigidbodyComponent
 			}
 			this.object3d.userData.rigidBody = this.id;
 			super.setObject(this.rigidBody);
-			ThreeUtil.setSubscribeNext(this.object3d, this.subscribeType);
+			NgxThreeUtil.setSubscribeNext(this.object3d, this.subscribeType);
 		}
 		return this.rigidBody;
 	}
@@ -1971,7 +1972,7 @@ export class RigidbodyComponent
 	/**
 	 * Position aux of rigidbody component
 	 */
-	private positionAux: I3JS.IVector3 = null;
+	private positionAux: I3JS.Vector3 = null;
 
 	/**
 	 * Instanced mesh compose
@@ -2024,24 +2025,24 @@ export class RigidbodyComponent
 	 * Updates rigidbody component
 	 * @param timer
 	 */
-	public update(timer: RendererTimer) {
+	public update(timer: IRendererTimer) {
 		if (this.rigidBody !== null) {
 			this.object3d.updateMatrixWorld(true);
 			switch (this.rigidBody.type) {
 				case 'softbody':
 					const object3dAny: any = this.object3d;
 					if (
-						ThreeUtil.isNotNull(object3dAny['geometry']) &&
-						ThreeUtil.isNotNull(this.rigidBody.softBody)
+						NgxThreeUtil.isNotNull(object3dAny['geometry']) &&
+						NgxThreeUtil.isNotNull(this.rigidBody.softBody)
 					) {
 						const softBody = this.rigidBody.softBody;
-						const geometry: I3JS.IBufferGeometry = object3dAny['geometry'];
+						const geometry: I3JS.BufferGeometry = object3dAny['geometry'];
 						const meshPositions = geometry.getAttribute(
 							'position'
-						) as I3JS.IBufferAttribute;
+						) as I3JS.BufferAttribute;
 						const nodes = softBody.get_m_nodes();
 						const position = this.positionAux;
-						if (ThreeUtil.isNotNull(this.rigidBody.ammoIndexAssociation)) {
+						if (NgxThreeUtil.isNotNull(this.rigidBody.ammoIndexAssociation)) {
 							const association = this.rigidBody.ammoIndexAssociation;
 							const numVerts = association.length;
 							for (let j = 0; j < numVerts; j++) {

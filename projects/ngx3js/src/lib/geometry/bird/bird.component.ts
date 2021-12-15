@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeGeometryCustom, I3JS, N3JS } from '../../interface';
+import { I3JS, N3JS } from '../../interface';
+import { NgxThreeGeometryCustom } from '../../three-geometry-custom';
 
 /**
  * The Geometry Bird component.
@@ -12,8 +13,8 @@ import { ThreeGeometryCustom, I3JS, N3JS } from '../../interface';
 	templateUrl: './bird.component.html',
 	styleUrls: ['./bird.component.scss'],
 })
-export class GeometryBirdComponent
-	extends ThreeGeometryCustom
+export class NgxGeometryBirdComponent
+	extends NgxThreeGeometryCustom
 	implements OnInit
 {
 	/**
@@ -52,7 +53,7 @@ export class GeometryBirdComponent
 	 *
 	 * @returns geometry
 	 */
-	initGeometry(): I3JS.IBufferGeometry {
+	initGeometry(): I3JS.BufferGeometry {
 		const birds: number = this.width * this.width;
 		const triangles = birds * 3;
 		const points = triangles * 3;

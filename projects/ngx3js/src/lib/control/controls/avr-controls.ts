@@ -23,7 +23,7 @@ export class NgxAVRControls {
 	/**
 	 * The Target of avrcontrols
 	 */
-	public target: I3JS.IVector3 = new N3JS.Vector3() as any;
+	public target: I3JS.Vector3 = new N3JS.Vector3() as any;
 
 	/**
 	 * Creates an instance of plane controls.
@@ -32,9 +32,9 @@ export class NgxAVRControls {
 	 */
 	constructor(
 		private type: string,
-		private camera: I3JS.ICamera,
-		private scene: I3JS.IScene,
-		private renderer: I3JS.IWebGLRenderer,
+		private camera: I3JS.Camera,
+		private scene: I3JS.Scene,
+		private renderer: I3JS.WebGLRenderer,
 		private sessionInit: any,
 		private domElement: HTMLElement,
 		private renderCaller: any,

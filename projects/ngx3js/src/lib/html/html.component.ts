@@ -7,8 +7,9 @@ import {
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
-import { CssStyle, I3JS, N3JS, ThreeUtil } from '../interface';
-import { AbstractTweenComponent } from '../tween.abstract';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { ICssStyle } from '../ngx-interface';
+import { NgxAbstractTweenComponent } from '../tween.abstract';
 
 /**
  * The Html component.
@@ -21,7 +22,7 @@ import { AbstractTweenComponent } from '../tween.abstract';
 	templateUrl: './html.component.html',
 	styleUrls: ['./html.component.scss'],
 })
-export class HtmlComponent extends AbstractTweenComponent implements OnInit {
+export class NgxHtmlComponent extends NgxAbstractTweenComponent implements OnInit {
 	/**
 	 * The html tag.
 	 *
@@ -48,41 +49,41 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * The Style
 	 */
-	@Input() public style: string | CssStyle = null;
+	@Input() public style: string | ICssStyle = null;
 
 	/**
 	 * The list of html component
 	 */
-	@Input() public list: (string | CssStyle)[] = null;
+	@Input() public list: (string | ICssStyle)[] = null;
 
 	/**
 	 * The table of html component
 	 */
-	@Input() public table: (string | CssStyle)[][] = null;
+	@Input() public table: (string | ICssStyle)[][] = null;
 
 	/**
 	 * The tableHead of html component
 	 */
-	@Input() public tableHead: (string | CssStyle)[] = null;
+	@Input() public tableHead: (string | ICssStyle)[] = null;
 
 	/**
 	 * The tableFoot of html component
 	 */
-	@Input() public tableFoot: (string | CssStyle)[] = null;
+	@Input() public tableFoot: (string | ICssStyle)[] = null;
 
 	/**
 	 * The dlList of html component
 	 */
 	@Input() public dlList: {
-		dt?: string | CssStyle;
-		dd?: string | CssStyle;
+		dt?: string | ICssStyle;
+		dd?: string | ICssStyle;
 	}[] = null;
 
 	/**
 	 * Content children of html component
 	 */
-	@ContentChildren(HtmlComponent, { descendants: false })
-	private childrenList: QueryList<HtmlComponent>;
+	@ContentChildren(NgxHtmlComponent, { descendants: false })
+	private childrenList: QueryList<NgxHtmlComponent>;
 
 	/**
 	 * Creates an instance of html component.
@@ -136,14 +137,14 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 	 */
 	public applyChanges2d(changes: string[]) {
 		if (this.html !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['html', 'tween']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['html', 'tween']);
 			}
 			changes.forEach((change) => {
 				switch (change) {
 					case 'html':
 						this.unSubscribeReferList('childrenList');
-						if (ThreeUtil.isNotNull(this.childrenList)) {
+						if (NgxThreeUtil.isNotNull(this.childrenList)) {
 							this.childrenList.forEach((child) => {
 								child.setParent(this.html);
 							});
@@ -173,7 +174,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 	 * @param refObject3d
 	 * @returns true if parent
 	 */
-	public setParent(refObject3d: I3JS.IObject3D | HTMLElement): boolean {
+	public setParent(refObject3d: I3JS.Object3D | HTMLElement): boolean {
 		if (super.setParent(refObject3d)) {
 			let parentElement: HTMLElement = null;
 			if (
@@ -213,8 +214,8 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 	 * @param ele
 	 * @param style
 	 */
-	private applyHtmlStyle(ele: HTMLElement, style: string | CssStyle): void {
-		this.cssClazzName = ThreeUtil.addCssStyle(
+	private applyHtmlStyle(ele: HTMLElement, style: string | ICssStyle): void {
+		this.cssClazzName = NgxThreeUtil.addCssStyle(
 			ele,
 			style,
 			this.cssClazzName,
@@ -245,7 +246,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 				case 'ul':
 				case 'ol':
 					html = document.createElement(this.type);
-					if (ThreeUtil.isNotNull(this.list) && this.list.length > 0) {
+					if (NgxThreeUtil.isNotNull(this.list) && this.list.length > 0) {
 						this.list.forEach((list) => {
 							const li = document.createElement('li');
 							this.applyHtmlStyle(li, list);
@@ -255,15 +256,15 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 					break;
 				case 'dl':
 					html = document.createElement(this.type);
-					if (ThreeUtil.isNotNull(this.dlList) && this.dlList.length > 0) {
+					if (NgxThreeUtil.isNotNull(this.dlList) && this.dlList.length > 0) {
 						this.dlList.forEach((dlList) => {
 							const dl = document.createElement('dl');
-							if (ThreeUtil.isNotNull(dlList.dt)) {
+							if (NgxThreeUtil.isNotNull(dlList.dt)) {
 								const dt = document.createElement('dt');
 								this.applyHtmlStyle(dt, dlList.dt);
 								dl.appendChild(dt);
 							}
-							if (ThreeUtil.isNotNull(dlList.dd)) {
+							if (NgxThreeUtil.isNotNull(dlList.dd)) {
 								const dt = document.createElement('dd');
 								this.applyHtmlStyle(dt, dlList.dd);
 								dl.appendChild(dt);
@@ -280,7 +281,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 				case 'table':
 					html = document.createElement(this.type);
 					if (
-						ThreeUtil.isNotNull(this.tableHead) &&
+						NgxThreeUtil.isNotNull(this.tableHead) &&
 						this.tableHead.length > 0
 					) {
 						const tableHead = document.createElement('thead');
@@ -293,10 +294,10 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 						});
 						html.appendChild(tableHead);
 					}
-					if (ThreeUtil.isNotNull(this.table) && this.table.length > 0) {
+					if (NgxThreeUtil.isNotNull(this.table) && this.table.length > 0) {
 						const tableBody = document.createElement('tbody');
 						this.table.forEach((rowData) => {
-							if (ThreeUtil.isNotNull(rowData) && rowData.length > 0) {
+							if (NgxThreeUtil.isNotNull(rowData) && rowData.length > 0) {
 								const tableBodyTr = document.createElement('tr');
 								rowData.forEach((tdHtml) => {
 									const td = document.createElement('td');
@@ -309,7 +310,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 						html.appendChild(tableBody);
 					}
 					if (
-						ThreeUtil.isNotNull(this.tableFoot) &&
+						NgxThreeUtil.isNotNull(this.tableFoot) &&
 						this.tableFoot.length > 0
 					) {
 						const tableFoot = document.createElement('tfoot');
@@ -327,7 +328,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 					html = document.createElement(this.type);
 					break;
 			}
-			if (ThreeUtil.isNotNull(this.style)) {
+			if (NgxThreeUtil.isNotNull(this.style)) {
 				this.applyHtmlStyle(html, this.style);
 			}
 			if (
@@ -338,7 +339,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 				switch (this.childType.toLowerCase()) {
 					case 'innerhtml':
 						{
-							const ele: HTMLElement = ThreeUtil.getChildElementSave(
+							const ele: HTMLElement = NgxThreeUtil.getChildElementSave(
 								this.ele.nativeElement
 							);
 							html.innerHTML = ele.innerHTML;
@@ -346,7 +347,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 						break;
 					case 'innertext':
 						{
-							const ele: HTMLElement = ThreeUtil.getChildElementSave(
+							const ele: HTMLElement = NgxThreeUtil.getChildElementSave(
 								this.ele.nativeElement
 							);
 							html.innerText = ele.innerText;
@@ -374,7 +375,7 @@ export class HtmlComponent extends AbstractTweenComponent implements OnInit {
 		}
 		if (this.html !== null && this.parentElement !== null) {
 			if (
-				ThreeUtil.isNotNull(this.html.parentNode) ||
+				NgxThreeUtil.isNotNull(this.html.parentNode) ||
 				this.html.parentNode !== this.parentElement
 			) {
 				this.parentElement.appendChild(this.html);

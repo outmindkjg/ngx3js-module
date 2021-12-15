@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { CssStyle, ThreeUtil, N3JS, I3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { ICssStyle } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * Transform Component
@@ -13,8 +14,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './transform.component.html',
 	styleUrls: ['./transform.component.scss'],
 })
-export class TransformComponent
-	extends AbstractSubscribeComponent
+export class NgxTransformComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -138,7 +139,7 @@ export class TransformComponent
 	 * @returns left
 	 */
 	private getLeft(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.left, def);
+		return NgxThreeUtil.getTypeSafe(this.left, def);
 	}
 
 	/**
@@ -147,7 +148,7 @@ export class TransformComponent
 	 * @returns top
 	 */
 	private getTop(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.top, def);
+		return NgxThreeUtil.getTypeSafe(this.top, def);
 	}
 
 	/**
@@ -156,7 +157,7 @@ export class TransformComponent
 	 * @returns right
 	 */
 	private getRight(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.right, def);
+		return NgxThreeUtil.getTypeSafe(this.right, def);
 	}
 
 	/**
@@ -165,7 +166,7 @@ export class TransformComponent
 	 * @returns bottom
 	 */
 	private getBottom(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.bottom, def);
+		return NgxThreeUtil.getTypeSafe(this.bottom, def);
 	}
 
 	/**
@@ -173,8 +174,8 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns position
 	 */
-	private getPosition(def?: I3JS.IVector3): I3JS.IVector3 {
-		return ThreeUtil.getVector3Safe(this.x, this.y, this.z, def);
+	private getPosition(def?: I3JS.Vector3): I3JS.Vector3 {
+		return NgxThreeUtil.getVector3Safe(this.x, this.y, this.z, def);
 	}
 
 	/**
@@ -182,8 +183,8 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns size
 	 */
-	private getSize(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(this.width, this.height, def);
+	private getSize(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(this.width, this.height, def);
 	}
 
 	/**
@@ -191,8 +192,8 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns anchor min
 	 */
-	private getAnchorMin(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(this.anchorMinX, this.anchorMinY, def);
+	private getAnchorMin(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(this.anchorMinX, this.anchorMinY, def);
 	}
 
 	/**
@@ -200,8 +201,8 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns anchor max
 	 */
-	private getAnchorMax(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(this.anchorMaxX, this.anchorMaxY, def);
+	private getAnchorMax(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(this.anchorMaxX, this.anchorMaxY, def);
 	}
 
 	/**
@@ -209,8 +210,8 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns pivot
 	 */
-	private getPivot(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(this.pivotX, this.pivotY, def);
+	private getPivot(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(this.pivotX, this.pivotY, def);
 	}
 
 	/**
@@ -218,8 +219,8 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns rotation
 	 */
-	private getRotation(def?: I3JS.IEuler): I3JS.IEuler {
-		return ThreeUtil.getEulerSafe(
+	private getRotation(def?: I3JS.Euler): I3JS.Euler {
+		return NgxThreeUtil.getEulerSafe(
 			this.rotationX,
 			this.rotationY,
 			this.rotationZ,
@@ -232,8 +233,8 @@ export class TransformComponent
 	 * @param [def]
 	 * @returns scale
 	 */
-	private getScale(def?: I3JS.IVector3): I3JS.IVector3 {
-		return ThreeUtil.getVector3Safe(this.scaleX, this.scaleY, this.scaleZ, def);
+	private getScale(def?: I3JS.Vector3): I3JS.Vector3 {
+		return NgxThreeUtil.getVector3Safe(this.scaleX, this.scaleY, this.scaleZ, def);
 	}
 
 	/**
@@ -256,8 +257,8 @@ export class TransformComponent
 	 */
 	ngOnDestroy(): void {
 		if (this.parentNode !== null) {
-			if (ThreeUtil.isNotNull(this.cssClazzName)) {
-				ThreeUtil.removeCssStyle(this.parentNode, this.cssClazzName);
+			if (NgxThreeUtil.isNotNull(this.cssClazzName)) {
+				NgxThreeUtil.removeCssStyle(this.parentNode, this.cssClazzName);
 				this.cssClazzName = null;
 			}
 			this.parentNode = null;
@@ -296,12 +297,12 @@ export class TransformComponent
 	/**
 	 * Parent size of transform component
 	 */
-	private parentSize: I3JS.IVector2 = null;
+	private parentSize: I3JS.Vector2 = null;
 
 	/**
 	 * Ele size of transform component
 	 */
-	private eleSize: I3JS.IVector2 = null;
+	private eleSize: I3JS.Vector2 = null;
 
 	/**
 	 * Sets parent node
@@ -311,8 +312,8 @@ export class TransformComponent
 	 */
 	public setParentNode(
 		parentNode: HTMLElement,
-		parentSize: I3JS.IVector2,
-		eleSize: I3JS.IVector2
+		parentSize: I3JS.Vector2,
+		eleSize: I3JS.Vector2
 	) {
 		if (this.parentNode !== parentNode) {
 			this.parentNode = parentNode;
@@ -326,8 +327,8 @@ export class TransformComponent
 	 * Gets style
 	 * @returns style
 	 */
-	public getStyle(): CssStyle {
-		let style: CssStyle = {};
+	public getStyle(): ICssStyle {
+		let style: ICssStyle = {};
 		if (this.parentSize !== null) {
 			const anchorMin = this.getAnchorMin(new N3JS.Vector2(0, 0)).multiply(
 				this.parentSize
@@ -365,7 +366,7 @@ export class TransformComponent
 			}
 			const rotation = this.getRotation(new N3JS.Euler(0, 0, 0));
 			if (rotation.x !== 0 || rotation.y !== 0 || rotation.z !== 0) {
-				const quaternion: I3JS.IQuaternion = new N3JS.Quaternion();
+				const quaternion: I3JS.Quaternion = new N3JS.Quaternion();
 				quaternion.setFromEuler(rotation);
 				transform.push(
 					'rotate3d(' +
@@ -396,8 +397,8 @@ export class TransformComponent
 	public applyHtmlStyle() {
 		if (this.parentNode !== null && this.parentSize !== null) {
 			if (this.visible) {
-				const style: CssStyle = this.getStyle();
-				this.cssClazzName = ThreeUtil.addCssStyle(
+				const style: ICssStyle = this.getStyle();
+				this.cssClazzName = NgxThreeUtil.addCssStyle(
 					this.parentNode,
 					style,
 					this.cssClazzName,
@@ -405,7 +406,7 @@ export class TransformComponent
 					'inline'
 				);
 			} else {
-				ThreeUtil.toggleCssStyle(this.parentNode, this.cssClazzName, false);
+				NgxThreeUtil.toggleCssStyle(this.parentNode, this.cssClazzName, false);
 			}
 		}
 	}

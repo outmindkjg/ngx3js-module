@@ -7,26 +7,11 @@ import {
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
-import { I3JS, N3JS, ThreeUtil, ThreeVector } from '../interface';
-import { LocalStorageService } from '../local-storage.service';
-import { AbstractObject3dComponent } from '../object3d.abstract';
-import { TranslationComponent } from '../translation/translation.component';
-
-/**
- * Svg geometry
- */
-export interface SvgGeometry {
-	geometry: I3JS.IBufferGeometry;
-	style?: {
-		fill?: string;
-		fillOpacity?: number;
-		strokeLineCap?: string;
-		strokeLineJoin?: string;
-		strokeMiterLimit?: number;
-		strokeOpacity?: number;
-		strokeWidth?: number;
-	};
-}
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { NgxLocalStorageService } from '../local-storage.service';
+import { INgxVector, ISvgGeometry } from '../ngx-interface';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxTranslationComponent } from '../translation/translation.component';
 
 /**
  * The Svg component.
@@ -65,12 +50,12 @@ export interface SvgGeometry {
 	styleUrls: ['./svg.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => SvgComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxSvgComponent),
 		},
 	],
 })
-export class SvgComponent extends AbstractObject3dComponent {
+export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 	/**
 	 * The type of svg component
 	 *
@@ -160,7 +145,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * The translation of svg component
 	 */
-	@Input() public translation: TranslationComponent = null;
+	@Input() public translation: NgxTranslationComponent = null;
 
 	/**
 	 * The text of svg component
@@ -244,7 +229,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * The extrudePath of svg component
 	 */
-	@Input() public extrudePath: ThreeVector[] = null;
+	@Input() public extrudePath: INgxVector[] = null;
 
 	/**
 	 * The extrudePathType of svg component
@@ -257,7 +242,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * The curvePath of svg component
 	 */
-	@Input() public curvePath: ThreeVector[] = null;
+	@Input() public curvePath: INgxVector[] = null;
 
 	/**
 	 * The curvePathType of svg component
@@ -291,33 +276,33 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * Content children of svg component
 	 */
-	@ContentChildren(TranslationComponent, { descendants: false })
-	private translationList: QueryList<TranslationComponent>;
+	@ContentChildren(NgxTranslationComponent, { descendants: false })
+	private translationList: QueryList<NgxTranslationComponent>;
 
 	/**
 	 * Mesh positions of svg component
 	 */
-	private meshPositions: I3JS.IVector3[] = [];
+	private meshPositions: I3JS.Vector3[] = [];
 
 	/**
 	 * Mesh rotations of svg component
 	 */
-	private meshRotations: I3JS.IEuler[] = [];
+	private meshRotations: I3JS.Euler[] = [];
 
 	/**
 	 * Mesh scales of svg component
 	 */
-	private meshScales: I3JS.IVector3[] = [];
+	private meshScales: I3JS.Vector3[] = [];
 
 	/**
 	 * Mesh translations of svg component
 	 */
-	private meshTranslations: I3JS.IBufferGeometry[] = [];
+	private meshTranslations: I3JS.BufferGeometry[] = [];
 
 	/**
 	 * Mesh materials of svg component
 	 */
-	private meshMaterials: I3JS.IMaterial[] = [];
+	private meshMaterials: I3JS.Material[] = [];
 
 	/**
 	 * Creates an instance of svg component.
@@ -326,7 +311,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 */
 	constructor(
 		private ele: ElementRef,
-		private localStorageService: LocalStorageService
+		private localStorageService: NgxLocalStorageService
 	) {
 		super();
 	}
@@ -380,7 +365,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns curve segments
 	 */
 	private getCurveSegments(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.curveSegments, def);
+		return NgxThreeUtil.getTypeSafe(this.curveSegments, def);
 	}
 
 	/**
@@ -389,7 +374,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns depth
 	 */
 	private getDepth(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.depth, def);
+		return NgxThreeUtil.getTypeSafe(this.depth, def);
 	}
 
 	/**
@@ -398,7 +383,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns steps
 	 */
 	private getSteps(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.steps, def);
+		return NgxThreeUtil.getTypeSafe(this.steps, def);
 	}
 
 	/**
@@ -407,7 +392,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns true if bevel enabled
 	 */
 	private getBevelEnabled(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.bevelEnabled, def);
+		return NgxThreeUtil.getTypeSafe(this.bevelEnabled, def);
 	}
 
 	/**
@@ -416,7 +401,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns bevel thickness
 	 */
 	private getBevelThickness(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.bevelThickness, def);
+		return NgxThreeUtil.getTypeSafe(this.bevelThickness, def);
 	}
 
 	/**
@@ -425,7 +410,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns bevel size
 	 */
 	private getBevelSize(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.bevelSize, def);
+		return NgxThreeUtil.getTypeSafe(this.bevelSize, def);
 	}
 
 	/**
@@ -434,7 +419,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns bevel offset
 	 */
 	private getBevelOffset(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.bevelOffset, def);
+		return NgxThreeUtil.getTypeSafe(this.bevelOffset, def);
 	}
 
 	/**
@@ -443,7 +428,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns bevel segments
 	 */
 	private getBevelSegments(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.bevelSegments, def);
+		return NgxThreeUtil.getTypeSafe(this.bevelSegments, def);
 	}
 
 	/**
@@ -452,7 +437,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns true if is ccw
 	 */
 	private getIsCCW(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.isCCW, def);
+		return NgxThreeUtil.getTypeSafe(this.isCCW, def);
 	}
 
 	/**
@@ -461,7 +446,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns true if no holes
 	 */
 	private getNoHoles(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.noHoles, def);
+		return NgxThreeUtil.getTypeSafe(this.noHoles, def);
 	}
 
 	/**
@@ -470,7 +455,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns text
 	 */
 	private getText(def?: string): string {
-		return ThreeUtil.getTypeSafe(this.text, def);
+		return NgxThreeUtil.getTypeSafe(this.text, def);
 	}
 
 	/**
@@ -479,7 +464,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns text align
 	 */
 	private getTextAlign(def?: string): string {
-		return ThreeUtil.getTypeSafe(this.textAlign, this.align, def);
+		return NgxThreeUtil.getTypeSafe(this.textAlign, this.align, def);
 	}
 
 	/**
@@ -487,9 +472,9 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @param [callBack]
 	 */
-	private getFont(def?: string, callBack?: (font: I3JS.IFont) => void) {
-		const font = ThreeUtil.getTypeSafe(this.font, def, 'helvetiker');
-		const weight = ThreeUtil.getTypeSafe(this.weight, '');
+	private getFont(def?: string, callBack?: (font: I3JS.Font) => void) {
+		const font = NgxThreeUtil.getTypeSafe(this.font, def, 'helvetiker');
+		const weight = NgxThreeUtil.getTypeSafe(this.weight, '');
 		this.localStorageService.getFont(callBack, font, weight);
 	}
 
@@ -499,7 +484,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns size
 	 */
 	private getSize(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.size, def);
+		return NgxThreeUtil.getTypeSafe(this.size, def);
 	}
 
 	/**
@@ -508,7 +493,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns true if closed
 	 */
 	private getClosed(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.closed, def);
+		return NgxThreeUtil.getTypeSafe(this.closed, def);
 	}
 
 	/**
@@ -517,7 +502,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns shininess
 	 */
 	private getShininess(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.shininess, def);
+		return NgxThreeUtil.getTypeSafe(this.shininess, def);
 	}
 
 	/**
@@ -525,8 +510,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @returns color
 	 */
-	private getColor(def?: string | number): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.color, def);
+	private getColor(def?: string | number): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.color, def);
 	}
 
 	/**
@@ -535,7 +520,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns opacity
 	 */
 	private getOpacity(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.opacity, def);
+		return NgxThreeUtil.getTypeSafe(this.opacity, def);
 	}
 
 	/**
@@ -544,7 +529,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns true if transparent
 	 */
 	private getTransparent(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.transparent, def);
+		return NgxThreeUtil.getTypeSafe(this.transparent, def);
 	}
 
 	/**
@@ -553,31 +538,31 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns true if wireframe
 	 */
 	private getWireframe(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.wireframe, def);
+		return NgxThreeUtil.getTypeSafe(this.wireframe, def);
 	}
 
 	/**
 	 * Gets extrude path
 	 * @returns extrude path
 	 */
-	private getExtrudePath(): I3JS.ICurve<I3JS.IVector3> {
+	private getExtrudePath(): I3JS.Curve<I3JS.Vector3> {
 		if (
-			ThreeUtil.isNotNull(this.extrudePath) ||
-			ThreeUtil.isNotNull(this.curvePath)
+			NgxThreeUtil.isNotNull(this.extrudePath) ||
+			NgxThreeUtil.isNotNull(this.curvePath)
 		) {
-			const vectors: I3JS.IVector3[] = [];
-			if (ThreeUtil.isNotNull(this.extrudePath)) {
+			const vectors: I3JS.Vector3[] = [];
+			if (NgxThreeUtil.isNotNull(this.extrudePath)) {
 				this.extrudePath.forEach((p) => {
 					vectors.push(new N3JS.Vector3(p.x, p.y, p.z));
 				});
 			}
-			if (ThreeUtil.isNotNull(this.curvePath)) {
+			if (NgxThreeUtil.isNotNull(this.curvePath)) {
 				this.curvePath.forEach((p) => {
 					vectors.push(new N3JS.Vector3(p.x, p.y, p.z));
 				});
 			}
 			switch (
-				ThreeUtil.getTypeSafe(
+				NgxThreeUtil.getTypeSafe(
 					this.extrudePathType,
 					this.curvePathType,
 					'catmullromcurve3'
@@ -588,8 +573,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 					return new N3JS.CatmullRomCurve3(
 						vectors,
 						this.getClosed(false),
-						ThreeUtil.getTypeSafe(this.curveType, 'catmullrom'),
-						ThreeUtil.getTypeSafe(this.tension, 0.5)
+						NgxThreeUtil.getTypeSafe(this.curveType, 'catmullrom'),
+						NgxThreeUtil.getTypeSafe(this.tension, 0.5)
 					);
 			}
 		}
@@ -601,8 +586,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @param [def]
 	 * @returns uvgenerator
 	 */
-	private getUVGenerator(def?: string): I3JS.IUVGenerator {
-		const uVGenerator = ThreeUtil.getTypeSafe(this.uVGenerator, def, '');
+	private getUVGenerator(def?: string): I3JS.UVGenerator {
+		const uVGenerator = NgxThreeUtil.getTypeSafe(this.uVGenerator, def, '');
 		switch (uVGenerator.toLowerCase()) {
 			case 'world':
 				// return THREE.WorldUVGenerator;
@@ -615,8 +600,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets materials
 	 * @returns materials
 	 */
-	private getSvgMaterials(): I3JS.IMaterial[] {
-		const materials: I3JS.IMaterial[] = [];
+	private getSvgMaterials(): I3JS.Material[] {
+		const materials: I3JS.Material[] = [];
 		if (this.materialList !== null && this.materialList.length > 0) {
 			this.materialList.forEach((material) => {
 				materials.push(material.getMaterial());
@@ -674,15 +659,15 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.meshes !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['translation', 'material']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['translation', 'material']);
 			}
 			changes.forEach((change) => {
 				switch (change) {
 					case 'material':
 						const mainMaterials = this.meshMaterials;
 						if (this.material !== null && this.material.visible) {
-							const materialClone = ThreeUtil.getMaterialOne(this.material);
+							const materialClone = NgxThreeUtil.getMaterialOne(this.material);
 							mainMaterials.forEach((material) => {
 								if (material !== materialClone) {
 									material.copy(materialClone);
@@ -723,14 +708,14 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * The Meshes of svg component
 	 */
-	private meshes: I3JS.IObject3D[] = null;
+	private meshes: I3JS.Object3D[] = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D): boolean {
+	public setParent(parent: I3JS.Object3D): boolean {
 		if (super.setParent(parent)) {
 			this.meshes = null;
 			this.resetMeshes();
@@ -743,7 +728,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 	/**
 	 * Svg mesh of svg component
 	 */
-	private svgMesh: I3JS.IGroup = null;
+	private svgMesh: I3JS.Group = null;
 
 	/**
 	 * Resets meshes
@@ -752,7 +737,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 		if (this.parent !== null && (this.svgMesh === null || this._needUpdate)) {
 			this.needUpdate = false;
 			this.svgMesh = new N3JS.Group();
-			this.getPaths((result: SvgGeometry[]) => {
+			this.getPaths((result: ISvgGeometry[]) => {
 				this.meshes = [];
 				this.meshPositions = [];
 				this.meshRotations = [];
@@ -760,14 +745,14 @@ export class SvgComponent extends AbstractObject3dComponent {
 				this.meshTranslations = [];
 				this.meshMaterials = [];
 				const materials = this.getSvgMaterials();
-				const materialList: I3JS.IMaterial[] = [];
+				const materialList: I3JS.Material[] = [];
 				for (let i = 0; i < result.length; i++) {
 					materialList.push(materials[i % materials.length]);
 				}
 				result.forEach((data, idx) => {
 					const geometry = data.geometry;
-					let mesh: I3JS.IObject3D = null;
-					const meshMaterial: I3JS.IMaterial = materialList[idx];
+					let mesh: I3JS.Object3D = null;
+					const meshMaterial: I3JS.Material = materialList[idx];
 					switch (this.type.toLowerCase()) {
 						case 'points':
 							mesh = new N3JS.Points(geometry, meshMaterial);
@@ -804,10 +789,10 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns text align
 	 */
 	public applyTextAlign(
-		geometry: I3JS.IBufferGeometry,
-		boundingSphere: I3JS.ISphere,
+		geometry: I3JS.BufferGeometry,
+		boundingSphere: I3JS.Sphere,
 		def: string = 'left'
-	): I3JS.IBufferGeometry {
+	): I3JS.BufferGeometry {
 		if (geometry !== null && boundingSphere !== null) {
 			switch (this.getTextAlign(def)) {
 				case 'left':
@@ -830,12 +815,12 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * @returns geometries
 	 */
 	private getGeometries(
-		data: I3JS.ISVGResult | I3JS.IShape[],
-		boundingSphere: I3JS.ISphere
-	): SvgGeometry[] {
-		const geometries: SvgGeometry[] = [];
+		data: I3JS.SVGResult | I3JS.Shape[],
+		boundingSphere: I3JS.Sphere
+	): ISvgGeometry[] {
+		const geometries: ISvgGeometry[] = [];
 		const shapes: {
-			shape: I3JS.IShape[];
+			shape: I3JS.Shape[];
 			userData: any;
 		}[] = [];
 		if (data instanceof Array) {
@@ -855,7 +840,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 			});
 		}
 		shapes.forEach((shape) => {
-			let geometry: I3JS.IBufferGeometry = null;
+			let geometry: I3JS.BufferGeometry = null;
 			switch (this.geometryType.toLowerCase()) {
 				case 'extrudebuffer':
 				case 'extrude':
@@ -875,8 +860,8 @@ export class SvgComponent extends AbstractObject3dComponent {
 				case 'custom':
 				case 'geometry':
 				case 'buffer':
-					const holeShape: I3JS.IPath[] = [];
-					const bufferShapes: I3JS.IShape[] = [];
+					const holeShape: I3JS.Path[] = [];
+					const bufferShapes: I3JS.Shape[] = [];
 					shape.shape.forEach((sh) => {
 						bufferShapes.push(sh);
 					});
@@ -887,9 +872,9 @@ export class SvgComponent extends AbstractObject3dComponent {
 							});
 						}
 					});
-					const sumShapes: I3JS.IShape[] = shape.shape;
+					const sumShapes: I3JS.Shape[] = shape.shape;
 					sumShapes.push.apply(shape.shape, holeShape as any);
-					if (ThreeUtil.isNotNull(this.stroke)) {
+					if (NgxThreeUtil.isNotNull(this.stroke)) {
 						const AnySVGLoader = N3JS.SVGLoader as any;
 						const style = AnySVGLoader.getStrokeStyle(
 							this.stroke,
@@ -939,9 +924,9 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets paths
 	 * @param onload
 	 */
-	public getPaths(onload: (geometry: SvgGeometry[]) => void) {
-		if (ThreeUtil.isNotNull(this.text) && this.text != '') {
-			this.getFont('helvetiker', (font: I3JS.IFont) => {
+	public getPaths(onload: (geometry: ISvgGeometry[]) => void) {
+		if (NgxThreeUtil.isNotNull(this.text) && this.text != '') {
+			this.getFont('helvetiker', (font: I3JS.Font) => {
 				const shapes = font.generateShapes(
 					this.getText('test'),
 					this.getSize(100)
@@ -955,7 +940,7 @@ export class SvgComponent extends AbstractObject3dComponent {
 			});
 		} else {
 			this.getSVGResult((data) => {
-				const shapes: I3JS.IShape[] = [];
+				const shapes: I3JS.Shape[] = [];
 				data.paths.forEach((path : any) => {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))
@@ -977,13 +962,13 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets svgresult
 	 * @param onload
 	 */
-	public getSVGResult(onload: (data: I3JS.ISVGResult) => void) {
+	public getSVGResult(onload: (data: I3JS.SVGResult) => void) {
 		const loader = new N3JS.SVGLoader();
-		if (ThreeUtil.isNotNull(this.url)) {
-			loader.load(this.url, (data: I3JS.ISVGResult) => {
+		if (NgxThreeUtil.isNotNull(this.url)) {
+			loader.load(this.url, (data: I3JS.SVGResult) => {
 				onload(data);
 			});
-		} else if (ThreeUtil.isNotNull(this.path) && this.path != '') {
+		} else if (NgxThreeUtil.isNotNull(this.path) && this.path != '') {
 			const svgContents: string[] = [];
 			svgContents.push(
 				'<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1152px" height="1152px" xml:space="preserve">'
@@ -1005,10 +990,10 @@ export class SvgComponent extends AbstractObject3dComponent {
 	 * Gets shapes
 	 * @param onload
 	 */
-	public getShapes(onload: (data: I3JS.IShape[]) => void) {
-		this.getSVGResult((data: I3JS.ISVGResult) => {
+	public getShapes(onload: (data: I3JS.Shape[]) => void) {
+		this.getSVGResult((data: I3JS.SVGResult) => {
 			if (data.paths.length > 0) {
-				const shapes: I3JS.IShape[] = [];
+				const shapes: I3JS.Shape[] = [];
 				data.paths.forEach((path) => {
 					path
 						.toShapes(this.getIsCCW(true), this.getNoHoles(false))

@@ -5,28 +5,19 @@ import {
 	Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import {
-	AbstractThreeController,
-	AutoUniformsController,
+	NgxAbstractThreeController,
+	NgxAutoUniformsController
 } from '../controller.abstract';
-import { AbstractControllerComponent } from '../controller.component.abstract';
-import {
-	RendererTimer,
-	ThreeColor,
-	ThreeUtil,
-	I3JS,
-	N3JS,
-} from '../interface';
-import { HtmlCollection } from '../visual/visual.component';
-import {
-	ControllerItemComponent,
-	ControlObjectItem,
-} from './controller-item/controller-item.component';
+import { NgxAbstractControllerComponent } from '../controller.component.abstract';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { IControlObjectItem, IHtmlCollection, IRendererTimer, INgxColor } from '../ngx-interface';
+import { NgxControllerItemComponent } from './controller-item/controller-item.component';
 
 /**
- * ControllerComponent
+ * NgxControllerComponent
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ControllerComponent) page for details.
  *
@@ -68,13 +59,13 @@ import {
 	styleUrls: ['./controller.component.scss'],
 	providers: [
 		{
-			provide: AbstractControllerComponent,
-			useExisting: forwardRef(() => ControllerComponent),
+			provide: NgxAbstractControllerComponent,
+			useExisting: forwardRef(() => NgxControllerComponent),
 		},
 	],
 })
-export class ControllerComponent
-	extends AbstractControllerComponent
+export class NgxControllerComponent
+	extends NgxAbstractControllerComponent
 	implements OnInit
 {
 	/**
@@ -89,7 +80,7 @@ export class ControllerComponent
 	 * The controlComponent of controller component
 	 */
 	@Input() public controlComponent: {
-		new (ref3d: I3JS.IObject3D, ref2d: HtmlCollection): AbstractThreeController;
+		new (ref3d: I3JS.Object3D, ref2d: IHtmlCollection): NgxAbstractThreeController;
 	} = null;
 
 	/**
@@ -191,7 +182,7 @@ export class ControllerComponent
 	/**
 	 * The color of controller component
 	 */
-	@Input() public color: ThreeColor = null;
+	@Input() public color: INgxColor = null;
 
 	/**
 	 * The opacity of controller component
@@ -244,8 +235,8 @@ export class ControllerComponent
 	/**
 	 * Content children of controller component
 	 */
-	@ContentChildren(ControllerItemComponent, { descendants: false })
-	controllerItemList: QueryList<ControllerItemComponent>;
+	@ContentChildren(NgxControllerItemComponent, { descendants: false })
+	controllerItemList: QueryList<NgxControllerItemComponent>;
 
 	/**
 	 * Creates an instance of controller component.
@@ -303,23 +294,23 @@ export class ControllerComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this._controller !== null || this._controllerItems !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getController();
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['type', 'object3d', 'object2d'])) {
+			if (NgxThreeUtil.isIndexOf(changes, ['type', 'object3d', 'object2d'])) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'controlparams',
 					'render',
 					'position',
 				]);
 			}
-			if (ThreeUtil.isIndexOf(changes, 'render')) {
-				changes = ThreeUtil.pushUniq(changes, ['scene', 'canvas']);
+			if (NgxThreeUtil.isIndexOf(changes, 'render')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['scene', 'canvas']);
 			}
 			if (this._controller !== null && this._renderer !== null) {
 				changes.forEach((change) => {
@@ -349,7 +340,7 @@ export class ControllerComponent
 				});
 			} else if (this._controllerItems !== null) {
 				if (
-					ThreeUtil.isIndexOf(changes, [
+					NgxThreeUtil.isIndexOf(changes, [
 						'controlleritem',
 						'scale',
 						'radius',
@@ -383,7 +374,7 @@ export class ControllerComponent
 					switch (change.toLowerCase()) {
 						case 'visible':
 							if (this.pathGuide !== null) {
-								this.pathGuide.visible = ThreeUtil.getTypeSafe(
+								this.pathGuide.visible = NgxThreeUtil.getTypeSafe(
 									this.visible,
 									false
 								);
@@ -402,17 +393,17 @@ export class ControllerComponent
 	/**
 	 * The Controller of controller component
 	 */
-	private _controller: AbstractThreeController = null;
+	private _controller: NgxAbstractThreeController = null;
 
 	/**
 	 * Path guide of controller component
 	 */
-	private pathGuide: I3JS.IObject3D = null;
+	private pathGuide: I3JS.Object3D = null;
 
 	/**
 	 * Ref object3dposition of controller component
 	 */
-	private refObject3dposition: I3JS.IVector3 = new N3JS.Vector3();
+	private refObject3dposition: I3JS.Vector3 = new N3JS.Vector3();
 
 	/**
 	 * The Duration of controller component
@@ -423,8 +414,8 @@ export class ControllerComponent
 	 * Refreshs ref object3d position
 	 */
 	public refreshRefObject3dPosition() {
-		if (ThreeUtil.isNotNull(this.refObject3d)) {
-			if (ThreeUtil.isNotNull(this.refObject3d.userData.initPosition)) {
+		if (NgxThreeUtil.isNotNull(this.refObject3d)) {
+			if (NgxThreeUtil.isNotNull(this.refObject3d.userData.initPosition)) {
 				this.refObject3dposition.copy(this.refObject3d.userData.initPosition);
 			} else {
 				this.refObject3dposition.copy(this.refObject3d.position);
@@ -433,7 +424,7 @@ export class ControllerComponent
 				this.pathGuide.children[0].position.copy(this.refObject3dposition);
 			}
 			this._controlItem.object3d = this.refObject3d;
-			this._controlItem.component = ThreeUtil.getThreeComponent(
+			this._controlItem.component = NgxThreeUtil.getThreeComponent(
 				this.refObject3d
 			);
 			this._controlItem.position = this.refObject3d.position;
@@ -450,7 +441,7 @@ export class ControllerComponent
 					this._controlItem.material = this.refObject3d.material;
 				}
 				if (
-					ThreeUtil.isNotNull(this._controlItem.material) &&
+					NgxThreeUtil.isNotNull(this._controlItem.material) &&
 					this._controlItem.material instanceof N3JS.ShaderMaterial
 				) {
 					this._controlItem.uniforms = this._controlItem.material.uniforms;
@@ -474,7 +465,7 @@ export class ControllerComponent
 	/**
 	 * Control item of controller component
 	 */
-	private _controlItem: ControlObjectItem = {
+	private _controlItem: IControlObjectItem = {
 		object3d: null,
 		component: null,
 		position: null,
@@ -490,7 +481,7 @@ export class ControllerComponent
 	/**
 	 * Controller items of controller component
 	 */
-	private _controllerItems: ControllerItemComponent[] = null;
+	private _controllerItems: NgxControllerItemComponent[] = null;
 
 	/**
 	 * Gets controller
@@ -499,13 +490,13 @@ export class ControllerComponent
 		if (
 			(this.refObject3d !== null || this.refObject2d !== null) &&
 			this._needUpdate &&
-			ThreeUtil.isNotNull(this.controllerItemList)
+			NgxThreeUtil.isNotNull(this.controllerItemList)
 		) {
 			this.needUpdate = false;
 			this._controllerItems = null;
 			this._controller = null;
 			let controller: any = null;
-			this._duration = ThreeUtil.getTypeSafe(this.mstDuration, 1);
+			this._duration = NgxThreeUtil.getTypeSafe(this.mstDuration, 1);
 			if (this.pathGuide !== null) {
 				this.pathGuide.parent.remove(this.pathGuide);
 				this.pathGuide = null;
@@ -513,10 +504,10 @@ export class ControllerComponent
 			if (typeof this.type === 'string') {
 				switch (this.type.toLowerCase()) {
 					case 'uniforms':
-						controller = AutoUniformsController;
+						controller = NgxAutoUniformsController;
 						break;
 					case 'auto':
-						if (ThreeUtil.isNotNull(this.controlComponent)) {
+						if (NgxThreeUtil.isNotNull(this.controlComponent)) {
 							controller = this.controlComponent;
 						} else {
 							controller = 'auto';
@@ -529,9 +520,9 @@ export class ControllerComponent
 			} else {
 				controller = this.type;
 			}
-			if (ThreeUtil.isNotNull(controller)) {
+			if (NgxThreeUtil.isNotNull(controller)) {
 				if (typeof controller === 'string' && this.refObject3d !== null) {
-					const controllerItemList: ControllerItemComponent[] = [];
+					const controllerItemList: NgxControllerItemComponent[] = [];
 					if (this.pathGuide === null) {
 						this.pathGuide = new N3JS.Group();
 						this.pathGuide.add(new N3JS.Group());
@@ -555,7 +546,7 @@ export class ControllerComponent
 						case 'uniforms':
 							const controllerItem = this.initLocalComponent(
 								'controllerItem',
-								new ControllerItemComponent()
+								new NgxControllerItemComponent()
 							);
 							controllerItem.updateInputParams({
 								type: controller,
@@ -590,7 +581,7 @@ export class ControllerComponent
 							break;
 					}
 					if (
-						ThreeUtil.isNotNull(this.controllerItemList) &&
+						NgxThreeUtil.isNotNull(this.controllerItemList) &&
 						this.controllerItemList.length > 0
 					) {
 						this.controllerItemList.forEach((controllerItem) => {
@@ -625,7 +616,7 @@ export class ControllerComponent
 	 * Updates controller component
 	 * @param rendererTimer
 	 */
-	public update(rendererTimer: RendererTimer) {
+	public update(rendererTimer: IRendererTimer) {
 		if (this._controller !== null) {
 			this._controller.update(rendererTimer);
 		} else if (this.refObject3d !== null && this._controllerItems !== null) {
@@ -636,18 +627,18 @@ export class ControllerComponent
 			} else {
 				this.renderTime += rendererTimer.delta / this._duration;
 			}
-			const dirRendererTimer: RendererTimer = {
+			const dirIRendererTimer: IRendererTimer = {
 				elapsedTime: this.renderTime,
 				delta: rendererTimer.delta / this._duration,
 			};
 			this._controllerItems.forEach((item) => {
-				item.update(dirRendererTimer, events);
+				item.update(dirIRendererTimer, events);
 			});
 			if (this.useEvent && events.length > 0) {
 				if (
 					this._logSeqn % this.eventSeqn === 0 &&
-					ThreeUtil.isNotNull(this.refObject3d.userData.component) &&
-					ThreeUtil.isNotNull(
+					NgxThreeUtil.isNotNull(this.refObject3d.userData.component) &&
+					NgxThreeUtil.isNotNull(
 						this.refObject3d.userData.component.setSubscribeNext
 					)
 				) {

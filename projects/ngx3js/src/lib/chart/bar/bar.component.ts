@@ -3,14 +3,15 @@ import {
 	forwardRef,
 	Input,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import {
-	AbstractChartComponent,
-	AttributeUpdateInfo,
+	NgxAbstractChartComponent
 } from '../../chart.abstract';
-import { ThreeUtil, I3JS, N3JS } from '../../interface';
-import { AbstractObject3dComponent } from '../../object3d.abstract';
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
+import { IAttributeUpdateInfo } from '../../ngx-interface';
+import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
+
 
 /**
  * The Chart Bar component.
@@ -24,14 +25,12 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	styleUrls: ['./bar.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ChartBarComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxChartBarComponent),
 		},
 	],
 })
-export class ChartBarComponent
-	extends AbstractChartComponent
-	implements OnInit
+export class NgxChartBarComponent extends NgxAbstractChartComponent implements OnInit
 {
 	/**
 	 * The type of chart bar component
@@ -100,47 +99,47 @@ export class ChartBarComponent
 	/**
 	 * The Line of chart bar component
 	 */
-	private _line: I3JS.IObject3D = null;
+	private _line: I3JS.Object3D = null;
 
 	/**
 	 * The Material of chart bar component
 	 */
-	private _material: I3JS.IMaterial = null;
+	private _material: I3JS.Material = null;
 
 	/**
 	 * The Geometry of chart bar component
 	 */
-	private _geometry: I3JS.IBufferGeometry = null;
+	private _geometry: I3JS.BufferGeometry = null;
 
 	/**
 	 * Material border of chart bar component
 	 */
-	private _materialBorder: I3JS.ILineBasicMaterial = null;
+	private _materialBorder: I3JS.LineBasicMaterial = null;
 
 	/**
 	 * Geometry border of chart bar component
 	 */
-	private _geometryBorder: I3JS.IBufferGeometry = null;
+	private _geometryBorder: I3JS.BufferGeometry = null;
 
 	/**
 	 * Material point of chart bar component
 	 */
-	private _materialPoint: I3JS.IMaterial = null;
+	private _materialPoint: I3JS.Material = null;
 
 	/**
 	 * Geometry point of chart bar component
 	 */
-	private _geometryPoint: I3JS.IBufferGeometry = null;
+	private _geometryPoint: I3JS.BufferGeometry = null;
 
 	/**
 	 * Material point border of chart bar component
 	 */
-	private _materialPointBorder: I3JS.ILineBasicMaterial = null;
+	private _materialPointBorder: I3JS.LineBasicMaterial = null;
 
 	/**
 	 * Geometry point border of chart bar component
 	 */
-	private _geometryPointBorder: I3JS.IBufferGeometry = null;
+	private _geometryPointBorder: I3JS.BufferGeometry = null;
 
 	/**
 	 * Applys changes3d
@@ -149,21 +148,21 @@ export class ChartBarComponent
 	 */
 	protected applyChanges3d(changes: string[]) {
 		if (this._line !== null) {
-			if (ThreeUtil.isIndexOf(changes, ['clearinit'])) {
+			if (NgxThreeUtil.isIndexOf(changes, ['clearinit'])) {
 				this.getLine();
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['options'], this.CHART_ATTR)) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['options'], this.CHART_ATTR)) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['init'])) {
-				changes = ThreeUtil.pushUniq(changes, ['options']);
+			if (NgxThreeUtil.isIndexOf(changes, ['init'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['options']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'options':
-						if (ThreeUtil.isNotNull(this.options)) {
-							this._material.opacity = ThreeUtil.getTypeSafe(
+						if (NgxThreeUtil.isNotNull(this.options)) {
+							this._material.opacity = NgxThreeUtil.getTypeSafe(
 								this.options.opacity,
 								1
 							);
@@ -180,7 +179,7 @@ export class ChartBarComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getChart<T extends I3JS.IObject3D>(): T {
+	public getChart<T extends I3JS.Object3D>(): T {
 		return this.getLine();
 	}
 
@@ -189,14 +188,14 @@ export class ChartBarComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getLine<T extends I3JS.IObject3D>(): T {
+	public getLine<T extends I3JS.Object3D>(): T {
 		if (this._line === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.clearChart();
 			this._line = new N3JS.Group();
-			const width = ThreeUtil.getTypeSafe(this.width, 1);
-			const height = ThreeUtil.getTypeSafe(this.height, 1);
-			const data: number[] = ThreeUtil.getTypeSafe(this.data, []);
+			const width = NgxThreeUtil.getTypeSafe(this.width, 1);
+			const height = NgxThreeUtil.getTypeSafe(this.height, 1);
+			const data: number[] = NgxThreeUtil.getTypeSafe(this.data, []);
 			this.getTestData(data);
 			const baseZ = this.getDepthCenter();
 			const [scaleMax, scaleMin] = this.getScaleMinMax(data);
@@ -211,8 +210,8 @@ export class ChartBarComponent
 			let attributePosition: Float32Array = null;
 			let attributeLine: Float32Array = null;
 			let attributeIndex: number[] = [];
-			let areaUpdateAttributes: AttributeUpdateInfo[] = [];
-			let lineUpdateAttributes: AttributeUpdateInfo[] = [];
+			let areaUpdateAttributes: IAttributeUpdateInfo[] = [];
+			let lineUpdateAttributes: IAttributeUpdateInfo[] = [];
 			const lineStepX = width / upPoints.length;
 			const lineBaseX = -width / 2 + lineStepX / 2;
 			const lineLen = upPoints.length;
@@ -273,11 +272,11 @@ export class ChartBarComponent
 			);
 			this._geometry.setIndex(attributeIndex);
 			this._geometry.computeVertexNormals();
-			const options = ThreeUtil.getTypeSafe(this.options, {});
+			const options = NgxThreeUtil.getTypeSafe(this.options, {});
 			this._material = new N3JS.MeshPhongMaterial({
-				color: ThreeUtil.getColorSafe(options.backgroundColor, 0xff0000),
-				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
-				side: ThreeUtil.getSideSafe('double'),
+				color: NgxThreeUtil.getColorSafe(options.backgroundColor, 0xff0000),
+				opacity: NgxThreeUtil.getTypeSafe(options.opacity, 1),
+				side: NgxThreeUtil.getSideSafe('double'),
 				transparent: true,
 			} as any);
 			const wallMesh = new N3JS.Mesh(this._geometry, this._material);
@@ -292,7 +291,7 @@ export class ChartBarComponent
 				new N3JS.BufferAttribute(attributeLine, 3)
 			);
 			this._materialBorder = new N3JS.LineBasicMaterial({
-				color: ThreeUtil.getColorSafe(options.borderColor, 0x00ff00),
+				color: NgxThreeUtil.getColorSafe(options.borderColor, 0x00ff00),
 				transparent: true,
 			} as any);
 			const borderMesh = new N3JS.LineSegments(
@@ -303,14 +302,14 @@ export class ChartBarComponent
 			this._line.add(borderMesh);
 			this.addUpdateAttributes(this._geometryBorder, lineUpdateAttributes);
 			let pointerInfo = this.getPointShape();
-			let pointer: I3JS.IObject3D = pointerInfo.mesh;
+			let pointer: I3JS.Object3D = pointerInfo.mesh;
 			this._geometryPoint = pointerInfo.geometry;
 			this._materialPoint = pointerInfo.material;
 			this._geometryPointBorder = pointerInfo.geometryBorder;
 			this._materialPointBorder = pointerInfo.materialBorder;
 			upPoints.forEach((p, i) => {
 				const x = i * lineStepX + lineBaseX;
-				const position: I3JS.IVector3 = new N3JS.Vector3(x, middleY, baseZ);
+				const position: I3JS.Vector3 = new N3JS.Vector3(x, middleY, baseZ);
 				const point = pointer.clone(true);
 				point.position.copy(position);
 				point.castShadow = true;

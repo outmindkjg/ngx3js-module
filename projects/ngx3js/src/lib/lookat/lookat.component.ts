@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TagAttributes, ThreeUtil, N3JS, I3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { ITagAttributes } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Lookat component.
@@ -26,8 +27,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './lookat.component.html',
 	styleUrls: ['./lookat.component.scss'],
 })
-export class LookatComponent
-	extends AbstractSubscribeComponent
+export class NgxLookatComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -102,24 +103,24 @@ export class LookatComponent
 	/**
 	 * The Lookat of lookat component
 	 */
-	private lookat: I3JS.IVector3 = null;
+	private lookat: I3JS.Vector3 = null;
 
 	/**
 	 * The Object3d of lookat component
 	 */
 	private _object3d: {
-		[key: string]: I3JS.IObject3D | { target: I3JS.IVector3 };
+		[key: string]: I3JS.Object3D | { target: I3JS.Vector3 };
 	} = {};
 
 	/**
 	 * unSets object3d
 	 * @param object3d
 	 */
-	public unsetObject3d(object3d: AbstractSubscribeComponent) {
+	public unsetObject3d(object3d: NgxAbstractSubscribeComponent) {
 		const key: string = object3d.getId();
 		this.unSubscribeRefer('lookat_' + key);
 		this.unSubscribeRefer('unlookat_' + key);
-		if (ThreeUtil.isNotNull(this._object3d[key])) {
+		if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 			delete this._object3d[key];
 		}
 	}
@@ -128,22 +129,22 @@ export class LookatComponent
 	 * Sets object3d
 	 * @param object3d
 	 */
-	public setObject3d(object3d: AbstractSubscribeComponent) {
-		if (ThreeUtil.isNotNull(object3d)) {
+	public setObject3d(object3d: NgxAbstractSubscribeComponent) {
+		if (NgxThreeUtil.isNotNull(object3d)) {
 			const key: string = object3d.getId();
 			const object: any = object3d.getObject();
 			if (object instanceof N3JS.Object3D) {
-				if (ThreeUtil.isNotNull(this.refName) && ThreeUtil.isNotNull(object)) {
+				if (NgxThreeUtil.isNotNull(this.refName) && NgxThreeUtil.isNotNull(object)) {
 					this._object3d[key] = object.getObjectByName(this.refName);
 				} else {
 					this._object3d[key] = object;
 				}
-			} else if (ThreeUtil.isNotNull(object.target)) {
+			} else if (NgxThreeUtil.isNotNull(object.target)) {
 				this._object3d[key] = object;
 			}
 			this.subscribeRefer(
 				'lookat_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.setObject3d(object3d);
@@ -153,7 +154,7 @@ export class LookatComponent
 			);
 			this.subscribeRefer(
 				'unlookat_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.unsetObject3d(object3d);
@@ -170,26 +171,26 @@ export class LookatComponent
 	 * Synks object3d
 	 * @param [lookat]
 	 */
-	public synkObject3d(lookat: I3JS.IVector3 = null, key: string = null) {
-		if (ThreeUtil.isNotNull(lookat) && this.enabled) {
-			if (ThreeUtil.isNotNull(this._object3d)) {
-				const object3dList: (I3JS.IObject3D | { target: I3JS.IVector3 })[] = [];
-				if (ThreeUtil.isNotNull(key)) {
-					if (ThreeUtil.isNotNull(this._object3d[key])) {
+	public synkObject3d(lookat: I3JS.Vector3 = null, key: string = null) {
+		if (NgxThreeUtil.isNotNull(lookat) && this.enabled) {
+			if (NgxThreeUtil.isNotNull(this._object3d)) {
+				const object3dList: (I3JS.Object3D | { target: I3JS.Vector3 })[] = [];
+				if (NgxThreeUtil.isNotNull(key)) {
+					if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 						object3dList.push(this._object3d[key]);
 					}
 				} else {
 					Object.entries(this._object3d).forEach(([_, object3d]) => {
-						if (ThreeUtil.isNotNull(object3d)) {
+						if (NgxThreeUtil.isNotNull(object3d)) {
 							object3dList.push(object3d);
 						}
 					});
 				}
 				object3dList.forEach((object3d) => {
 					if (
-						ThreeUtil.isNotNull(this.x) &&
-						ThreeUtil.isNotNull(this.y) &&
-						ThreeUtil.isNotNull(this.z)
+						NgxThreeUtil.isNotNull(this.x) &&
+						NgxThreeUtil.isNotNull(this.y) &&
+						NgxThreeUtil.isNotNull(this.z)
 					) {
 						if (object3d instanceof N3JS.Object3D) {
 							object3d.lookAt(lookat);
@@ -197,7 +198,7 @@ export class LookatComponent
 							const objectTraget: any = object3d;
 							objectTraget.target.set(lookat.x, lookat.y, lookat.z);
 							const object3dAny: any = object3d;
-							if (ThreeUtil.isNotNull(object3dAny['update'])) {
+							if (NgxThreeUtil.isNotNull(object3dAny['update'])) {
 								object3dAny['update']();
 							}
 						}
@@ -217,13 +218,13 @@ export class LookatComponent
 	 */
 	public setLookat(x?: number, y?: number, z?: number) {
 		if (this.lookat !== null) {
-			this.x = ThreeUtil.getTypeSafe(x, this.lookat.x);
-			this.y = ThreeUtil.getTypeSafe(y, this.lookat.y);
-			this.z = ThreeUtil.getTypeSafe(z, this.lookat.z);
+			this.x = NgxThreeUtil.getTypeSafe(x, this.lookat.x);
+			this.y = NgxThreeUtil.getTypeSafe(y, this.lookat.y);
+			this.z = NgxThreeUtil.getTypeSafe(z, this.lookat.z);
 		} else {
-			this.x = ThreeUtil.getTypeSafe(x, 0);
-			this.y = ThreeUtil.getTypeSafe(y, 0);
-			this.z = ThreeUtil.getTypeSafe(z, 0);
+			this.x = NgxThreeUtil.getTypeSafe(x, 0);
+			this.y = NgxThreeUtil.getTypeSafe(y, 0);
+			this.z = NgxThreeUtil.getTypeSafe(z, 0);
 		}
 		this.needUpdate = true;
 	}
@@ -233,12 +234,12 @@ export class LookatComponent
 	 * @param [options]
 	 * @returns tag attribute
 	 */
-	public getTagAttribute(options?: any): TagAttributes {
-		const tagAttributes: TagAttributes = {
+	public getTagAttribute(options?: any): ITagAttributes {
+		const tagAttributes: ITagAttributes = {
 			tag: 'ngx3js-lookat',
 			attributes: [],
 		};
-		if (ThreeUtil.isNotNull(options.lookat)) {
+		if (NgxThreeUtil.isNotNull(options.lookat)) {
 			tagAttributes.attributes.push({ name: 'x', value: options.lookat.x });
 			tagAttributes.attributes.push({ name: 'y', value: options.lookat.y });
 			tagAttributes.attributes.push({ name: 'z', value: options.lookat.z });
@@ -257,11 +258,11 @@ export class LookatComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.lookat !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getLookAt();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
 				this.needUpdate = true;
 				return;
 			}
@@ -273,14 +274,14 @@ export class LookatComponent
 	 * Gets look at
 	 * @returns look at
 	 */
-	private _getLookAt(): I3JS.IVector3 {
-		let lookat: I3JS.IVector3 = null;
+	private _getLookAt(): I3JS.Vector3 {
+		let lookat: I3JS.Vector3 = null;
 		if (this.refer !== null) {
 			this.unSubscribeRefer('refer');
-			lookat = ThreeUtil.getLookAt(this.refer);
+			lookat = NgxThreeUtil.getLookAt(this.refer);
 			this.subscribeRefer(
 				'refer',
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					this.refer,
 					() => {
 						this.needUpdate = true;
@@ -290,7 +291,7 @@ export class LookatComponent
 			);
 		}
 		if (lookat === null) {
-			lookat = ThreeUtil.getVector3Safe(
+			lookat = NgxThreeUtil.getVector3Safe(
 				this.x,
 				this.y,
 				this.z,
@@ -306,7 +307,7 @@ export class LookatComponent
 	 * Gets look at
 	 * @returns look at
 	 */
-	public getLookAt(): I3JS.IVector3 {
+	public getLookAt(): I3JS.Vector3 {
 		if (this._needUpdate) {
 			this.needUpdate = false;
 			this.lookat = this._getLookAt();

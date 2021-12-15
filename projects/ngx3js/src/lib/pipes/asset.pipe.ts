@@ -1,7 +1,7 @@
 /** @format */
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { ThreeUtil } from '../interface';
+import { NgxThreeUtil } from '../interface';
 
 /**
  * Assets Pipe
@@ -37,8 +37,8 @@ export class AssetsPipe implements PipeTransform {
 	 * @returns transform
 	 */
 	transform(image: string): string {
-		if (ThreeUtil.isNotNull(image)) {
-			return ThreeUtil.getStoreUrl(image);
+		if (NgxThreeUtil.isNotNull(image)) {
+			return NgxThreeUtil.getStoreUrl(image);
 		}
 		return null;
 	}

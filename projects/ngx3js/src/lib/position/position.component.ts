@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TagAttributes, ThreeUtil, I3JS, N3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { AbstractTweenComponent } from '../tween.abstract';
+import { NgxThreeUtil, I3JS, N3JS } from '../interface';
+import { ITagAttributes } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractTweenComponent } from '../tween.abstract';
 
 /**
  * The Position component.
@@ -25,8 +26,8 @@ import { AbstractTweenComponent } from '../tween.abstract';
 	templateUrl: './position.component.html',
 	styleUrls: ['./position.component.scss'],
 })
-export class PositionComponent
-	extends AbstractTweenComponent
+export class NgxPositionComponent
+	extends NgxAbstractTweenComponent
 	implements OnInit
 {
 	/**
@@ -148,24 +149,24 @@ export class PositionComponent
 	/**
 	 * The Position of position component
 	 */
-	private position: I3JS.IVector3 = null;
+	private position: I3JS.Vector3 = null;
 
 	/**
 	 * The Object3d of position component
 	 */
 	private _object3d: {
-		[key: string]: I3JS.IObject3D;
+		[key: string]: I3JS.Object3D;
 	} = {};
 
 	/**
 	 * unSets object3d
 	 * @param object3d
 	 */
-	public unsetObject3d(object3d: AbstractSubscribeComponent) {
+	public unsetObject3d(object3d: NgxAbstractSubscribeComponent) {
 		const key: string = object3d.getId();
 		this.unSubscribeRefer('position_' + key);
 		this.unSubscribeRefer('unposition_' + key);
-		if (ThreeUtil.isNotNull(this._object3d[key])) {
+		if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 			delete this._object3d[key];
 		}
 	}
@@ -174,18 +175,18 @@ export class PositionComponent
 	 * Sets object3d
 	 * @param object3d
 	 */
-	public setObject3d(object3d: AbstractSubscribeComponent) {
-		if (ThreeUtil.isNotNull(object3d)) {
+	public setObject3d(object3d: NgxAbstractSubscribeComponent) {
+		if (NgxThreeUtil.isNotNull(object3d)) {
 			const key: string = object3d.getId();
-			const object = ThreeUtil.getObject3d(object3d);
-			if (ThreeUtil.isNotNull(this.refName) && ThreeUtil.isNotNull(object)) {
+			const object = NgxThreeUtil.getObject3d(object3d);
+			if (NgxThreeUtil.isNotNull(this.refName) && NgxThreeUtil.isNotNull(object)) {
 				this._object3d[key] = object.getObjectByName(this.refName);
 			} else {
 				this._object3d[key] = object;
 			}
 			this.subscribeRefer(
 				'position_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.setObject3d(object3d);
@@ -195,7 +196,7 @@ export class PositionComponent
 			);
 			this.subscribeRefer(
 				'unposition_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					object3d,
 					() => {
 						this.unsetObject3d(object3d);
@@ -206,12 +207,12 @@ export class PositionComponent
 			this.getPosition();
 			this.synkObject3d(this.position, key);
 			if (object instanceof N3JS.Object3D) {
-				if (ThreeUtil.isNotNull(object) && ThreeUtil.isNull(object.userData)) {
+				if (NgxThreeUtil.isNotNull(object) && NgxThreeUtil.isNull(object.userData)) {
 					object.userData = {};
 				}
 				if (
-					ThreeUtil.isNotNull(object) &&
-					ThreeUtil.isNull(object.userData.initPosition)
+					NgxThreeUtil.isNotNull(object) &&
+					NgxThreeUtil.isNull(object.userData.initPosition)
 				) {
 					object.userData.initPosition = object.position.clone();
 				}
@@ -223,17 +224,17 @@ export class PositionComponent
 	 * Synks object3d
 	 * @param [position]
 	 */
-	synkObject3d(position: I3JS.IVector3 = null, key: string = null) {
-		if (ThreeUtil.isNotNull(position) && this.enabled) {
-			if (ThreeUtil.isNotNull(this._object3d)) {
-				const object3dList: I3JS.IObject3D[] = [];
-				if (ThreeUtil.isNotNull(key)) {
-					if (ThreeUtil.isNotNull(this._object3d[key])) {
+	synkObject3d(position: I3JS.Vector3 = null, key: string = null) {
+		if (NgxThreeUtil.isNotNull(position) && this.enabled) {
+			if (NgxThreeUtil.isNotNull(this._object3d)) {
+				const object3dList: I3JS.Object3D[] = [];
+				if (NgxThreeUtil.isNotNull(key)) {
+					if (NgxThreeUtil.isNotNull(this._object3d[key])) {
 						object3dList.push(this._object3d[key]);
 					}
 				} else {
 					Object.entries(this._object3d).forEach(([_, object3d]) => {
-						if (ThreeUtil.isNotNull(object3d)) {
+						if (NgxThreeUtil.isNotNull(object3d)) {
 							object3dList.push(object3d);
 						}
 					});
@@ -243,14 +244,14 @@ export class PositionComponent
 						const anyObject3d: any = object3d;
 						switch (this.type.toLowerCase()) {
 							case 'up':
-								if (ThreeUtil.isNull(object3d.up)) {
+								if (NgxThreeUtil.isNull(object3d.up)) {
 									object3d.up = new N3JS.Vector3(0, 1, 0);
 								}
 								object3d.up.copy(position);
 								break;
 							case 'target':
-								if (ThreeUtil.isNotNull(anyObject3d['target'])) {
-									const target: I3JS.IObject3D = anyObject3d['target'];
+								if (NgxThreeUtil.isNotNull(anyObject3d['target'])) {
+									const target: I3JS.Object3D = anyObject3d['target'];
 									target.position.copy(position);
 								}
 								break;
@@ -259,27 +260,27 @@ export class PositionComponent
 								break;
 							default:
 								if (
-									ThreeUtil.isNotNull(this.x) &&
-									ThreeUtil.isNotNull(this.y) &&
-									ThreeUtil.isNotNull(this.z)
+									NgxThreeUtil.isNotNull(this.x) &&
+									NgxThreeUtil.isNotNull(this.y) &&
+									NgxThreeUtil.isNotNull(this.z)
 								) {
 									object3d.position.copy(position);
 								} else if (
-									ThreeUtil.isNotNull(this.x) ||
-									ThreeUtil.isNotNull(this.y) ||
-									ThreeUtil.isNotNull(this.z)
+									NgxThreeUtil.isNotNull(this.x) ||
+									NgxThreeUtil.isNotNull(this.y) ||
+									NgxThreeUtil.isNotNull(this.z)
 								) {
-									if (ThreeUtil.isNotNull(this.x)) {
+									if (NgxThreeUtil.isNotNull(this.x)) {
 										object3d.position.x = position.x;
 									}
-									if (ThreeUtil.isNotNull(this.y)) {
+									if (NgxThreeUtil.isNotNull(this.y)) {
 										object3d.position.y = position.y;
 									}
-									if (ThreeUtil.isNotNull(this.z)) {
+									if (NgxThreeUtil.isNotNull(this.z)) {
 										object3d.position.z = position.z;
 									}
 								} else {
-									if (ThreeUtil.isNotNull(this.multiply)) {
+									if (NgxThreeUtil.isNotNull(this.multiply)) {
 										object3d.position.multiplyScalar(this.multiply);
 									}
 								}
@@ -301,13 +302,13 @@ export class PositionComponent
 	 */
 	public setPosition(x?: number, y?: number, z?: number) {
 		if (this.position !== null) {
-			this.x = ThreeUtil.getTypeSafe(x, this.position.x);
-			this.y = ThreeUtil.getTypeSafe(y, this.position.y);
-			this.z = ThreeUtil.getTypeSafe(z, this.position.z);
+			this.x = NgxThreeUtil.getTypeSafe(x, this.position.x);
+			this.y = NgxThreeUtil.getTypeSafe(y, this.position.y);
+			this.z = NgxThreeUtil.getTypeSafe(z, this.position.z);
 		} else {
-			this.x = ThreeUtil.getTypeSafe(x, 0);
-			this.y = ThreeUtil.getTypeSafe(y, 0);
-			this.z = ThreeUtil.getTypeSafe(z, 0);
+			this.x = NgxThreeUtil.getTypeSafe(x, 0);
+			this.y = NgxThreeUtil.getTypeSafe(y, 0);
+			this.z = NgxThreeUtil.getTypeSafe(z, 0);
 		}
 		this.needUpdate = true;
 	}
@@ -317,12 +318,12 @@ export class PositionComponent
 	 * @param [options]
 	 * @returns tag attribute
 	 */
-	public getTagAttribute(options?: any): TagAttributes {
-		const tagAttributes: TagAttributes = {
+	public getTagAttribute(options?: any): ITagAttributes {
+		const tagAttributes: ITagAttributes = {
 			tag: 'ngx3js-position',
 			attributes: [],
 		};
-		if (ThreeUtil.isNotNull(options.position)) {
+		if (NgxThreeUtil.isNotNull(options.position)) {
 			tagAttributes.attributes.push({ name: 'x', value: options.position.x });
 			tagAttributes.attributes.push({ name: 'y', value: options.position.y });
 			tagAttributes.attributes.push({ name: 'z', value: options.position.z });
@@ -337,7 +338,7 @@ export class PositionComponent
 	/**
 	 * Last ref camera of position component
 	 */
-	private _lastRefCamera: I3JS.ICamera = null;
+	private _lastRefCamera: I3JS.Camera = null;
 
 	/**
 	 * Last ref camera bind of position component
@@ -351,11 +352,11 @@ export class PositionComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.position !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getPosition();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init', 'type', 'enabled'])) {
 				this.needUpdate = true;
 				return;
 			}
@@ -367,34 +368,34 @@ export class PositionComponent
 	 * Gets position
 	 * @returns position
 	 */
-	private _getPosition(): I3JS.IVector3 {
-		let position: I3JS.IVector3 = null;
+	private _getPosition(): I3JS.Vector3 {
+		let position: I3JS.Vector3 = null;
 		if (this.refer !== null && this.refer !== undefined) {
-			position = ThreeUtil.getPosition(this.refer);
+			position = NgxThreeUtil.getPosition(this.refer);
 		}
 		if (position === null) {
-			position = ThreeUtil.getVector3Safe(
+			position = NgxThreeUtil.getVector3Safe(
 				this.x,
 				this.y,
 				this.z,
 				new N3JS.Vector3(0, 0, 0)
 			);
-			if (ThreeUtil.isNotNull(this.setfrom)) {
+			if (NgxThreeUtil.isNotNull(this.setfrom)) {
 				switch (this.setfrom.toLowerCase()) {
 					case 'spherical':
 					case 'sphericalcoords':
 						position.setFromSphericalCoords(
-							ThreeUtil.getTypeSafe(this.radius, 1),
-							ThreeUtil.getAngleSafe(this.phi, 0),
-							ThreeUtil.getAngleSafe(this.theta, 0)
+							NgxThreeUtil.getTypeSafe(this.radius, 1),
+							NgxThreeUtil.getAngleSafe(this.phi, 0),
+							NgxThreeUtil.getAngleSafe(this.theta, 0)
 						);
 						break;
 					case 'cylindrical':
 					case 'cylindricalcoords':
 						position.setFromCylindricalCoords(
-							ThreeUtil.getTypeSafe(this.radius, 1),
-							ThreeUtil.getAngleSafe(this.phi, 0),
-							ThreeUtil.getTypeSafe(this.y, 0)
+							NgxThreeUtil.getTypeSafe(this.radius, 1),
+							NgxThreeUtil.getAngleSafe(this.phi, 0),
+							NgxThreeUtil.getTypeSafe(this.y, 0)
 						);
 						break;
 				}
@@ -406,7 +407,7 @@ export class PositionComponent
 				position.multiplyScalar(this.multiply);
 			}
 			if (this.camera !== null) {
-				const camera: I3JS.ICamera = ThreeUtil.isNotNull(this.camera.getCamera)
+				const camera: I3JS.Camera = NgxThreeUtil.isNotNull(this.camera.getCamera)
 					? this.camera.getObject3d()
 					: this.camera;
 				if (camera !== null) {
@@ -447,7 +448,7 @@ export class PositionComponent
 	 * Gets position
 	 * @returns position
 	 */
-	public getPosition(): I3JS.IVector3 {
+	public getPosition(): I3JS.Vector3 {
 		if (this.position === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.position = this._getPosition();

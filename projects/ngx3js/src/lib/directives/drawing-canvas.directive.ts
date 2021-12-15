@@ -5,7 +5,8 @@ import {
 	OnChanges,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeColor, ThreeUtil, N3JS } from '../interface';
+import { NgxThreeUtil, N3JS } from '../interface';
+import { INgxColor } from '../ngx-interface';
 
 /**
  * Drawing Canvas Directive
@@ -28,12 +29,12 @@ export class DrawingCanvasDirective implements OnChanges {
 	/**
 	 * The canvas background color
 	 */
-	@Input() public clearColor: ThreeColor = 0xffffff;
+	@Input() public clearColor: INgxColor = 0xffffff;
 
 	/**
 	 * The drawing line color
 	 */
-	@Input() public lineColor: ThreeColor = 0x000000;
+	@Input() public lineColor: INgxColor = 0x000000;
 
 	/**
 	 * The drawing line dash
@@ -128,7 +129,7 @@ export class DrawingCanvasDirective implements OnChanges {
 				this._backgroundColor = '#ffffff';
 			} else {
 				this._backgroundColor =
-					'#' + ThreeUtil.getColorSafe(this.clearColor).getHexString();
+					'#' + NgxThreeUtil.getColorSafe(this.clearColor).getHexString();
 			}
 		}
 		if (this.clearColor === 'transparent' || this.clearColor === '') {
@@ -199,10 +200,10 @@ export class DrawingCanvasDirective implements OnChanges {
 	): void {
 		if (this._lineColor === null) {
 			this._lineColor =
-				'#' + ThreeUtil.getColorSafe(this.lineColor).getHexString();
+				'#' + NgxThreeUtil.getColorSafe(this.lineColor).getHexString();
 			drawContext.beginPath();
 		}
-		if (ThreeUtil.isNotNull(this.lineDash)) {
+		if (NgxThreeUtil.isNotNull(this.lineDash)) {
 			switch (this.lineDash) {
 				case 'dashed':
 					drawContext.setLineDash([4, 8]);
@@ -218,7 +219,7 @@ export class DrawingCanvasDirective implements OnChanges {
 		drawContext.moveTo(this.drawStartPos.x, this.drawStartPos.y);
 		drawContext.strokeStyle = this._lineColor;
 		drawContext.lineTo(x, y);
-		if (ThreeUtil.isNotNull(this.lineWidth)) {
+		if (NgxThreeUtil.isNotNull(this.lineWidth)) {
 			drawContext.lineWidth = this.lineWidth;
 		}
 		drawContext.stroke();

@@ -5,8 +5,8 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractChartComponent } from '../../chart.abstract';
-import { AbstractObject3dComponent } from '../../object3d.abstract';
+import { NgxAbstractChartComponent } from '../../chart.abstract';
+import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
  * The Chart Scatter component.
@@ -20,13 +20,13 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	styleUrls: ['./scatter.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ChartScatterComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxChartScatterComponent),
 		},
 	],
 })
-export class ChartScatterComponent
-	extends AbstractChartComponent
+export class NgxChartScatterComponent
+	extends NgxAbstractChartComponent
 	implements OnInit
 {
 	/**

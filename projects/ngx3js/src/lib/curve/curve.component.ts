@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeUtil, ThreeVector, N3JS, I3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { INgxVector } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Curve component.
@@ -23,8 +24,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './curve.component.html',
 	styleUrls: ['./curve.component.scss'],
 })
-export class CurveComponent
-	extends AbstractSubscribeComponent
+export class NgxCurveComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -81,7 +82,7 @@ export class CurveComponent
 	 * Creates a Path from the points. The first point defines the offset, then successive points are added to the [curves](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/CurvePath.curves) array as [LineCurves](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/LineCurve).
 	 * If no points are specified, an empty path is created and the [LineCurve.currentPoint](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/LineCurve.currentPoint) is set to the origin.
 	 */
-	@Input() public points: ThreeVector[] = null;
+	@Input() public points: INgxVector[] = null;
 
 	/**
 	 * Whether the curve is closed. Default is *false*.
@@ -122,8 +123,8 @@ export class CurveComponent
 	 * @param min
 	 * @returns points v3
 	 */
-	private getPointsV3(def: ThreeVector[], min: number): I3JS.IVector3[] {
-		const points: I3JS.IVector3[] = [];
+	private getPointsV3(def: INgxVector[], min: number): I3JS.Vector3[] {
+		const points: I3JS.Vector3[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
 			points.push(new N3JS.Vector3(p.x, p.y, p.z));
 		});
@@ -141,8 +142,8 @@ export class CurveComponent
 	 * @param min
 	 * @returns points v2
 	 */
-	private getPointsV2(def: ThreeVector[], min: number): I3JS.IVector2[] {
-		const points: I3JS.IVector2[] = [];
+	private getPointsV2(def: INgxVector[], min: number): I3JS.Vector2[] {
+		const points: I3JS.Vector2[] = [];
 		(this.points === null ? def : this.points).forEach((p) => {
 			points.push(new N3JS.Vector2(p.x, p.y));
 		});
@@ -201,7 +202,7 @@ export class CurveComponent
 	/**
 	 * The Curve of curve component
 	 */
-	private curve: I3JS.ICurve<I3JS.IVector> = null;
+	private curve: I3JS.Curve<I3JS.Vector> = null;
 
 	/**
 	 * Applys changes
@@ -210,16 +211,16 @@ export class CurveComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.curve !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getCurve();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, [], this.OBJECT_ATTR)) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, [], this.OBJECT_ATTR)) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, []);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, []);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -235,19 +236,19 @@ export class CurveComponent
 	 * Gets curve
 	 * @returns curve
 	 */
-	public getCurve(): I3JS.ICurve<I3JS.IVector> {
+	public getCurve(): I3JS.Curve<I3JS.Vector> {
 		if (this.curve === null || this._needUpdate) {
 			this.needUpdate = false;
 			switch (this.type.toLowerCase()) {
 				case 'arccurve':
 				case 'arc':
 					this.curve = new N3JS.ArcCurve(
-						ThreeUtil.getTypeSafe(this.aX, 1),
-						ThreeUtil.getTypeSafe(this.aY, 1),
-						ThreeUtil.getTypeSafe(this.aRadius, 1),
-						ThreeUtil.getTypeSafe(this.aStartAngle, 1),
-						ThreeUtil.getTypeSafe(this.aEndAngle, 1),
-						ThreeUtil.getTypeSafe(this.aClockwise, false)
+						NgxThreeUtil.getTypeSafe(this.aX, 1),
+						NgxThreeUtil.getTypeSafe(this.aY, 1),
+						NgxThreeUtil.getTypeSafe(this.aRadius, 1),
+						NgxThreeUtil.getTypeSafe(this.aStartAngle, 1),
+						NgxThreeUtil.getTypeSafe(this.aEndAngle, 1),
+						NgxThreeUtil.getTypeSafe(this.aClockwise, false)
 					);
 					break;
 				case 'catmullromcurve3':
@@ -255,9 +256,9 @@ export class CurveComponent
 				case 'catmullrom':
 					this.curve = new N3JS.CatmullRomCurve3(
 						this.getPointsV3([], 3),
-						ThreeUtil.getTypeSafe(this.closed, false),
-						ThreeUtil.getTypeSafe(this.curveType, 'centripetal'),
-						ThreeUtil.getTypeSafe(this.tension, 0.5)
+						NgxThreeUtil.getTypeSafe(this.closed, false),
+						NgxThreeUtil.getTypeSafe(this.curveType, 'centripetal'),
+						NgxThreeUtil.getTypeSafe(this.tension, 0.5)
 					);
 					break;
 				case 'cubicbeziercurve':
@@ -283,14 +284,14 @@ export class CurveComponent
 				case 'ellipsecurve':
 				case 'ellipse':
 					this.curve = new N3JS.EllipseCurve(
-						ThreeUtil.getTypeSafe(this.aX, 0),
-						ThreeUtil.getTypeSafe(this.aY, 0),
-						ThreeUtil.getTypeSafe(this.xRadius, 1),
-						ThreeUtil.getTypeSafe(this.yRadius, 1),
-						ThreeUtil.getTypeSafe(this.aStartAngle, 0),
-						ThreeUtil.getTypeSafe(this.aEndAngle, 360),
-						ThreeUtil.getTypeSafe(this.aClockwise, false),
-						ThreeUtil.getTypeSafe(this.aRotation, 0)
+						NgxThreeUtil.getTypeSafe(this.aX, 0),
+						NgxThreeUtil.getTypeSafe(this.aY, 0),
+						NgxThreeUtil.getTypeSafe(this.xRadius, 1),
+						NgxThreeUtil.getTypeSafe(this.yRadius, 1),
+						NgxThreeUtil.getTypeSafe(this.aStartAngle, 0),
+						NgxThreeUtil.getTypeSafe(this.aEndAngle, 360),
+						NgxThreeUtil.getTypeSafe(this.aClockwise, false),
+						NgxThreeUtil.getTypeSafe(this.aRotation, 0)
 					);
 					break;
 				case 'linecurve':

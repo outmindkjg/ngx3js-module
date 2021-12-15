@@ -1,76 +1,18 @@
-import {
-	Component,
-	ContentChildren,
-	forwardRef,
-	Input,
-	OnInit,
-	QueryList,
-	SimpleChanges,
-} from '@angular/core';
-import { CurveComponent } from '../curve/curve.component';
-import { HtmlComponent } from '../html/html.component';
-import {
-	CssStyle,
-	MaterialParameters,
-	ThreeColor,
-	ThreeUtil,
-	N3JS,
-	I3JS,
-} from '../interface';
-import { LensflareelementComponent } from '../lensflareelement/lensflareelement.component';
-import { MaterialComponent } from '../material/material.component';
-import { AbstractObject3dComponent } from '../object3d.abstract';
-import { SizeComponent } from '../size/size.component';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { AbstractTextureComponent } from '../texture.abstract';
-import { HelperComponent, HelperOptions } from './../helper/helper.component';
-import { LightComponent, LightOptions } from './../light/light.component';
-import { LocalStorageService } from './../local-storage.service';
+import { Component, ContentChildren, forwardRef, Input, OnInit, QueryList, SimpleChanges } from '@angular/core';
+import { NgxCurveComponent } from '../curve/curve.component';
+import { NgxHtmlComponent } from '../html/html.component';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { NgxLensflareelementComponent } from '../lensflareelement/lensflareelement.component';
+import { NgxMaterialComponent } from '../material/material.component';
+import { ICssStyle, IHelperOptions, ILightOptions, IMaterialParameters, INgxColor, IVolumeOptions } from '../ngx-interface';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxSizeComponent } from '../size/size.component';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractTextureComponent } from '../texture.abstract';
+import { NgxHelperComponent } from './../helper/helper.component';
+import { NgxLightComponent } from './../light/light.component';
+import { NgxLocalStorageService } from './../local-storage.service';
 import * as THREE_OBJ from './objects/three-objects';
-
-/**
- * Volume Options
- */
-export interface VolumeOptions {
-	/** x */
-	x?: number;
-
-	/** y */
-	y?: number;
-
-	/** z */
-	z?: number;
-
-	/** helperVisible */
-	helperVisible?: boolean;
-
-	/** helperColor */
-	helperColor?: ThreeColor;
-
-	/** boxVisible */
-	boxVisible?: boolean;
-
-	/** xVisible */
-	xVisible?: boolean;
-
-	/** yVisible */
-	yVisible?: boolean;
-
-	/** zVisible */
-	zVisible?: boolean;
-
-	/** lowerThreshold */
-	lowerThreshold?: number;
-
-	/** upperThreshold */
-	upperThreshold?: number;
-
-	/** windowLow */
-	windowLow?: number;
-
-	/** windowHigh */
-	windowHigh?: number;
-}
 
 /**
  * The Mesh component.
@@ -154,16 +96,16 @@ export interface VolumeOptions {
 	styleUrls: ['./mesh.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => MeshComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxMeshComponent),
 		},
 		{
-			provide: AbstractSubscribeComponent,
-			useExisting: forwardRef(() => MeshComponent),
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxMeshComponent),
 		},
 	],
 })
-export class MeshComponent extends AbstractObject3dComponent implements OnInit {
+export class NgxMeshComponent extends NgxAbstractObject3dComponent implements OnInit {
 	/**
 	 * The type of mesh
 	 *
@@ -208,7 +150,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 *
 	 * @see LightOptions
 	 */
-	@Input() public lightOptions: LightOptions = null;
+	@Input() public lightOptions: ILightOptions = null;
 
 	/**
 	 * The css tag of CSS2DObject, CSS3DObject
@@ -229,7 +171,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 *
 	 * @see CssStyle
 	 */
-	@Input() public cssStyle: string | CssStyle = null;
+	@Input() public cssStyle: string | ICssStyle = null;
 
 	/**
 	 * The type of skybox
@@ -285,7 +227,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * The options of helper
 	 *
 	 */
-	@Input() public helperOptions: HelperOptions = null;
+	@Input() public helperOptions: IHelperOptions = null;
 
 	/**
 	 * The scale step of MultiMaterialObject
@@ -310,12 +252,12 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The volume Option
 	 */
-	@Input() public volumeOption: VolumeOptions = null;
+	@Input() public volumeOption: IVolumeOptions = null;
 
 	/**
 	 * The color of sun etc
 	 */
-	@Input() public color: ThreeColor = null;
+	@Input() public color: INgxColor = null;
 
 	/**
 	 * The texture Width
@@ -330,7 +272,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The texture size
 	 */
-	@Input() public textureSize: I3JS.IVector2 | SizeComponent = null;
+	@Input() public textureSize: I3JS.Vector2 | NgxSizeComponent = null;
 
 	/**
 	 * The clip bias of Reflector
@@ -345,25 +287,23 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The color of sun
 	 */
-	@Input() public sunColor: ThreeColor = null;
+	@Input() public sunColor: INgxColor = null;
 
 	/**
 	 * The direction of sun
 	 */
-	@Input() public sunDirection: number[] | I3JS.IVector3 = null;
+	@Input() public sunDirection: number[] | I3JS.Vector3 = null;
 
 	/**
 	 * The position of sun
 	 */
-	@Input() public sunPosition: number[] | I3JS.IVector3 = null;
+	@Input() public sunPosition: number[] | I3JS.Vector3 = null;
 
 	/**
 	 * The uniform of sun, sky water etc
 	 */
 	@Input() public uniforms: {
-		[uniform: string]:
-			| { type: string; value: any; options?: any }
-			| I3JS.IUniform;
+		[uniform: string]: { type: string; value: any; options?: any } | I3JS.IUniform;
 	} = null;
 
 	/**
@@ -497,24 +437,17 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The flowMap of mesh component
 	 */
-	@Input() public flowMap: string | I3JS.ITexture | AbstractTextureComponent =
-		null;
+	@Input() public flowMap: string | I3JS.Texture | NgxAbstractTextureComponent = null;
 
 	/**
 	 * The normalMap0 of mesh component
 	 */
-	@Input() public normalMap0:
-		| string
-		| I3JS.ITexture
-		| AbstractTextureComponent = null;
+	@Input() public normalMap0: string | I3JS.Texture | NgxAbstractTextureComponent = null;
 
 	/**
 	 * The normalMap1 of mesh component
 	 */
-	@Input() public normalMap1:
-		| string
-		| I3JS.ITexture
-		| AbstractTextureComponent = null;
+	@Input() public normalMap1: string | I3JS.Texture | NgxAbstractTextureComponent = null;
 
 	/**
 	 * The planeInfos of mesh component
@@ -540,24 +473,22 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The makeMatrix of mesh component
 	 */
-	@Input() public makeMatrix: (matrix4: I3JS.IMatrix4, index?: number) => void =
-		null;
+	@Input() public makeMatrix: (matrix4: I3JS.Matrix4, index?: number) => void = null;
 
 	/**
 	 * The makeColor of mesh component
 	 */
-	@Input() public makeColor: (color: I3JS.IColor, index?: number) => void =
-		null;
+	@Input() public makeColor: (color: I3JS.Color, index?: number) => void = null;
 
 	/**
 	 * The refer texture
 	 */
-	@Input() public texture: AbstractTextureComponent | I3JS.ITexture = null;
+	@Input() public texture: NgxAbstractTextureComponent | I3JS.Texture = null;
 
 	/**
 	 * The curve
 	 */
-	@Input() public curve: CurveComponent | I3JS.ICurve<I3JS.IVector3> = null;
+	@Input() public curve: NgxCurveComponent | I3JS.Curve<I3JS.Vector3> = null;
 
 	/**
 	 * Define whether the material uses morphTargets. Default is false.
@@ -602,17 +533,17 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * Input  of mesh component
 	 */
-	@Input() public materialOption: MaterialParameters = null;
+	@Input() public materialOption: IMaterialParameters = null;
 
 	/**
 	 * The shareParts of mesh component
 	 */
-	@Input() public shareParts: MeshComponent = null;
+	@Input() public shareParts: NgxMeshComponent = null;
 
 	/**
 	 * The sharedMesh of mesh component
 	 */
-	@Input() public sharedMesh: MeshComponent = null;
+	@Input() public sharedMesh: NgxMeshComponent = null;
 
 	/**
 	 * The sharedCamera of mesh component
@@ -637,44 +568,44 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The stormParams  of mesh component
 	 */
-	@Input() public stormParams: I3JS.IStormParams = {
+	@Input() public stormParams: I3JS.StormParams = {
 		size: 1024,
 	};
 
 	/**
 	 * The rayParams of geometry component
 	 */
-	@Input() public rayParams: I3JS.IRayParameters = null;
+	@Input() public rayParams: I3JS.RayParameters = null;
 
 	/**
 	 * Content children of mesh component
 	 */
-	@ContentChildren(AbstractTextureComponent, { descendants: false })
-	private textureList: QueryList<AbstractTextureComponent>;
+	@ContentChildren(NgxAbstractTextureComponent, { descendants: false })
+	private textureList: QueryList<NgxAbstractTextureComponent>;
 
 	/**
 	 * Content children of mesh component
 	 */
-	@ContentChildren(LensflareelementComponent, { descendants: false })
-	private lensflareElementList: QueryList<LensflareelementComponent>;
+	@ContentChildren(NgxLensflareelementComponent, { descendants: false })
+	private lensflareElementList: QueryList<NgxLensflareelementComponent>;
 
 	/**
 	 * Content children of mesh component
 	 */
-	@ContentChildren(HtmlComponent, { descendants: false })
-	private cssChildrenList: QueryList<HtmlComponent>;
+	@ContentChildren(NgxHtmlComponent, { descendants: false })
+	private cssChildrenList: QueryList<NgxHtmlComponent>;
 
 	/**
 	 * Content children of mesh component
 	 */
-	@ContentChildren(CurveComponent, { descendants: false })
-	private curveList: QueryList<CurveComponent>;
+	@ContentChildren(NgxCurveComponent, { descendants: false })
+	private curveList: QueryList<NgxCurveComponent>;
 
 	/**
 	 * Creates an instance of mesh component.
 	 * @param localStorageService
 	 */
-	constructor(private localStorageService: LocalStorageService) {
+	constructor(private localStorageService: NgxLocalStorageService) {
 		super();
 	}
 
@@ -713,16 +644,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 */
 	ngAfterContentInit(): void {
 		this.subscribeListQueryChange(this.textureList, 'textureList', 'texture');
-		this.subscribeListQueryChange(
-			this.lensflareElementList,
-			'lensflareElementList',
-			'lensflareElement'
-		);
-		this.subscribeListQueryChange(
-			this.cssChildrenList,
-			'cssChildrenList',
-			'cssChildren'
-		);
+		this.subscribeListQueryChange(this.lensflareElementList, 'lensflareElementList', 'lensflareElement');
+		this.subscribeListQueryChange(this.cssChildrenList, 'cssChildrenList', 'cssChildren');
 		this.subscribeListQueryChange(this.curveList, 'curveList', 'curve');
 		super.ngAfterContentInit();
 	}
@@ -733,8 +656,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns skybox size
 	 */
 	private getSkyboxSize(def?: number): number {
-		const skyboxSize = ThreeUtil.getTypeSafe(this.distance, def, 10000);
-		if (ThreeUtil.isNotNull(skyboxSize)) {
+		const skyboxSize = NgxThreeUtil.getTypeSafe(this.distance, def, 10000);
+		if (NgxThreeUtil.isNotNull(skyboxSize)) {
 			return (skyboxSize * this.skyboxRate) / 100;
 		} else {
 			return 10000;
@@ -746,10 +669,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns css tag
 	 */
 	private getCssTag(): any {
-		if (ThreeUtil.isNotNull(this.domElement)) {
+		if (NgxThreeUtil.isNotNull(this.domElement)) {
 			return this.domElement;
 		}
-		const cssTag = ThreeUtil.getTypeSafe(this.cssTag, 'div');
+		const cssTag = NgxThreeUtil.getTypeSafe(this.cssTag, 'div');
 		if (typeof cssTag === 'string') {
 			return document.createElement(cssTag);
 		} else if (cssTag instanceof Element) {
@@ -762,11 +685,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets sky sun position
 	 * @returns sky sun position
 	 */
-	private getSkySunPosition(): I3JS.IEuler {
-		return ThreeUtil.getEulerSafe(
-			ThreeUtil.getAngleSafe(this.skyboxSunX, 0),
-			ThreeUtil.getAngleSafe(this.skyboxSunY, 0),
-			ThreeUtil.getAngleSafe(this.skyboxSunZ, 0)
+	private getSkySunPosition(): I3JS.Euler {
+		return NgxThreeUtil.getEulerSafe(
+			NgxThreeUtil.getAngleSafe(this.skyboxSunX, 0),
+			NgxThreeUtil.getAngleSafe(this.skyboxSunY, 0),
+			NgxThreeUtil.getAngleSafe(this.skyboxSunZ, 0)
 		);
 	}
 
@@ -776,7 +699,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns metalness
 	 */
 	private getMetalness(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.metalness, def);
+		return NgxThreeUtil.getTypeSafe(this.metalness, def);
 	}
 
 	/**
@@ -785,7 +708,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns roughness
 	 */
 	private getRoughness(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.roughness, def);
+		return NgxThreeUtil.getTypeSafe(this.roughness, def);
 	}
 
 	/**
@@ -794,7 +717,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns count
 	 */
 	private getCount(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.count, def);
+		return NgxThreeUtil.getTypeSafe(this.count, def);
 	}
 
 	/**
@@ -803,7 +726,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns axis
 	 */
 	private getAxis(def?: string): string {
-		return ThreeUtil.getTypeSafe(this.axis, def);
+		return NgxThreeUtil.getTypeSafe(this.axis, def);
 	}
 
 	/**
@@ -813,7 +736,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns index
 	 */
 	private getIndex(baseSize: number, def: number): number {
-		const index = ThreeUtil.getTypeSafe(this.index, def);
+		const index = NgxThreeUtil.getTypeSafe(this.index, def);
 		return Math.floor(baseSize * index);
 	}
 
@@ -822,8 +745,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns color
 	 */
-	private getColor(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.color, this.waterColor, def);
+	private getColor(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.color, this.waterColor, def);
 	}
 
 	/**
@@ -831,17 +754,17 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns height
 	 */
-	private getTextureSize(width?: number, height?: number): I3JS.IVector2 {
-		if (ThreeUtil.isNotNull(this.textureSize)) {
+	private getTextureSize(width?: number, height?: number): I3JS.Vector2 {
+		if (NgxThreeUtil.isNotNull(this.textureSize)) {
 			if (this.textureSize instanceof N3JS.Vector2) {
 				return this.textureSize;
-			} else if (this.textureSize instanceof SizeComponent) {
+			} else if (this.textureSize instanceof NgxSizeComponent) {
 				return this.textureSize.getSize();
 			}
 		}
-		return ThreeUtil.getVector2Safe(
-			ThreeUtil.getTypeSafe(this.textureWidth, width, 1024),
-			ThreeUtil.getTypeSafe(this.textureHeight, height, 1024),
+		return NgxThreeUtil.getVector2Safe(
+			NgxThreeUtil.getTypeSafe(this.textureWidth, width, 1024),
+			NgxThreeUtil.getTypeSafe(this.textureHeight, height, 1024),
 			null,
 			null,
 			true
@@ -854,7 +777,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns clip bias
 	 */
 	private getClipBias(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.clipBias, def);
+		return NgxThreeUtil.getTypeSafe(this.clipBias, def);
 	}
 
 	/**
@@ -862,54 +785,37 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns sun color
 	 */
-	private getSunColor(def?: string | number): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.sunColor, def);
+	private getSunColor(def?: string | number): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.sunColor, def);
 	}
 
 	/**
 	 * Gets undate uniforms
 	 * @param [orgUniforms]
 	 */
-	private getUndateUniforms(orgUniforms?: {
-		[uniform: string]: I3JS.IUniform;
-	}): void {
-		const uniforms = ThreeUtil.getTypeSafe(this.uniforms, {});
+	private getUndateUniforms(orgUniforms?: { [uniform: string]: I3JS.IUniform }): void {
+		const uniforms = NgxThreeUtil.getTypeSafe(this.uniforms, {});
 		Object.entries(uniforms).forEach(([key, value]) => {
-			if (ThreeUtil.isNotNull(orgUniforms[key])) {
+			if (NgxThreeUtil.isNotNull(orgUniforms[key])) {
 				const anyValue: any = value;
 				const uniformsValue = orgUniforms[key];
-				if (
-					ThreeUtil.isNotNull(anyValue['type']) &&
-					ThreeUtil.isNotNull(anyValue['value'])
-				) {
+				if (NgxThreeUtil.isNotNull(anyValue['type']) && NgxThreeUtil.isNotNull(anyValue['value'])) {
 					switch (anyValue['type'].toLowerCase()) {
 						case 'vector2':
 						case 'v2':
-							uniformsValue.value = ThreeUtil.getVector2Safe(
-								value['value'][0],
-								value['value'][1]
-							);
+							uniformsValue.value = NgxThreeUtil.getVector2Safe(value['value'][0], value['value'][1]);
 							break;
 						case 'vector3':
 						case 'vector':
 						case 'v3':
-							uniformsValue.value = ThreeUtil.getVector3Safe(
-								value['value'][0],
-								value['value'][1],
-								value['value'][2]
-							);
+							uniformsValue.value = NgxThreeUtil.getVector3Safe(value['value'][0], value['value'][1], value['value'][2]);
 							break;
 						case 'color':
-							uniformsValue.value = ThreeUtil.getColorSafe(
-								value['value'],
-								0xffffff
-							);
+							uniformsValue.value = NgxThreeUtil.getColorSafe(value['value'], 0xffffff);
 							break;
 						case 'texture':
-							const texture = AbstractTextureComponent.getTextureImage(
-								value['value']
-							);
-							if (ThreeUtil.isNotNull(anyValue['options'])) {
+							const texture = NgxAbstractTextureComponent.getTextureImage(value['value']);
+							if (NgxThreeUtil.isNotNull(anyValue['options'])) {
 								switch (anyValue['options']) {
 									case 'wrapRepeat':
 										texture.wrapS = texture.wrapT = N3JS.RepeatWrapping;
@@ -934,14 +840,14 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns sun direction
 	 */
-	private getSunDirection(def?: I3JS.IVector3): I3JS.IVector3 {
-		let sunDirection: I3JS.IVector3 = null;
-		if (ThreeUtil.isNotNull(this.sunDirection)) {
-			sunDirection = ThreeUtil.getVector3VSafe(this.sunDirection, def);
+	private getSunDirection(def?: I3JS.Vector3): I3JS.Vector3 {
+		let sunDirection: I3JS.Vector3 = null;
+		if (NgxThreeUtil.isNotNull(this.sunDirection)) {
+			sunDirection = NgxThreeUtil.getVector3VSafe(this.sunDirection, def);
 		} else {
-			sunDirection = ThreeUtil.getVector3VSafe(this.sunPosition, def);
+			sunDirection = NgxThreeUtil.getVector3VSafe(this.sunPosition, def);
 		}
-		if (ThreeUtil.isNotNull(sunDirection)) {
+		if (NgxThreeUtil.isNotNull(sunDirection)) {
 			return sunDirection.normalize();
 		} else {
 			return undefined;
@@ -954,7 +860,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns alpha
 	 */
 	private getAlpha(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.alpha, def);
+		return NgxThreeUtil.getTypeSafe(this.alpha, def);
 	}
 
 	/**
@@ -963,7 +869,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns distortion scale
 	 */
 	private getDistortionScale(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.distortionScale, def);
+		return NgxThreeUtil.getTypeSafe(this.distortionScale, def);
 	}
 
 	/**
@@ -971,8 +877,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns sky color
 	 */
-	private getSkyColor(def?: string | number): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.skyColor, def);
+	private getSkyColor(def?: string | number): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.skyColor, def);
 	}
 
 	/**
@@ -980,8 +886,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns water color
 	 */
-	private getWaterColor(def?: string | number): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.waterColor, def);
+	private getWaterColor(def?: string | number): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.waterColor, def);
 	}
 
 	/**
@@ -990,7 +896,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns size
 	 */
 	private getSize(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.size, def);
+		return NgxThreeUtil.getTypeSafe(this.size, def);
 	}
 
 	/**
@@ -999,7 +905,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns divisions
 	 */
 	private getDivisions(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.divisions, def);
+		return NgxThreeUtil.getTypeSafe(this.divisions, def);
 	}
 
 	/**
@@ -1008,7 +914,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns true if enable colors
 	 */
 	private getEnableColors(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.enableColors, def);
+		return NgxThreeUtil.getTypeSafe(this.enableColors, def);
 	}
 
 	/**
@@ -1017,7 +923,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns true if enable uvs
 	 */
 	private getEnableUvs(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.enableUvs, def);
+		return NgxThreeUtil.getTypeSafe(this.enableUvs, def);
 	}
 
 	/**
@@ -1026,7 +932,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns resolution
 	 */
 	private getResolution(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.resolution, def);
+		return NgxThreeUtil.getTypeSafe(this.resolution, def);
 	}
 
 	/**
@@ -1035,7 +941,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns isolation
 	 */
 	private getIsolation(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.isolation, def);
+		return NgxThreeUtil.getTypeSafe(this.isolation, def);
 	}
 
 	/**
@@ -1043,12 +949,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns flow direction
 	 */
-	private getFlowDirection(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(
-			this.flowDirectionX,
-			this.flowDirectionY,
-			def
-		);
+	private getFlowDirection(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(this.flowDirectionX, this.flowDirectionY, def);
 	}
 
 	/**
@@ -1057,7 +959,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns flow speed
 	 */
 	private getFlowSpeed(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.flowSpeed, def);
+		return NgxThreeUtil.getTypeSafe(this.flowSpeed, def);
 	}
 
 	/**
@@ -1066,7 +968,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns reflectivity
 	 */
 	private getReflectivity(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.reflectivity, def);
+		return NgxThreeUtil.getTypeSafe(this.reflectivity, def);
 	}
 
 	/**
@@ -1075,7 +977,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @returns water scale
 	 */
 	private getWaterScale(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.waterScale, def);
+		return NgxThreeUtil.getTypeSafe(this.waterScale, def);
 	}
 
 	/**
@@ -1083,8 +985,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param [def]
 	 * @returns
 	 */
-	private getShader(def?: string) : I3JS.IShader {
-		const shader = ThreeUtil.getTypeSafe(this.shader, def, '');
+	private getShader(def?: string): I3JS.Shader {
+		const shader = NgxThreeUtil.getTypeSafe(this.shader, def, '');
 		switch (shader.toLowerCase()) {
 			case 'waterrefractionshader':
 			case 'waterrefraction':
@@ -1098,12 +1000,12 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * The Clips of mesh component
 	 */
-	private clips: I3JS.IAnimationClip[] | any = null;
+	private clips: I3JS.AnimationClip[] | any = null;
 
 	/**
 	 * Clip mesh of mesh component
 	 */
-	private clipMesh: I3JS.IObject3D = null;
+	private clipMesh: I3JS.Object3D = null;
 
 	/**
 	 * Storage source of mesh component
@@ -1122,7 +1024,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets material
 	 * @returns material
 	 */
-	public getMaterial(): I3JS.IMaterial {
+	public getMaterial(): I3JS.Material {
 		if (this.mesh !== null && this.object3d instanceof N3JS.Mesh) {
 			if (Array.isArray(this.object3d.material)) {
 				return this.object3d.material[0];
@@ -1137,17 +1039,17 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets curve
 	 * @returns curve
 	 */
-	public getCurve(): I3JS.ICurve<I3JS.IVector3> {
+	public getCurve(): I3JS.Curve<I3JS.Vector3> {
 		if (this.curve !== null) {
 			this.unSubscribeRefer('curve');
 			if (this.curve instanceof N3JS.Curve) {
 				N3JS.CurvePath;
 				return this.curve;
-			} else if (this.curve instanceof CurveComponent) {
-				const curve = this.curve.getCurve() as I3JS.ICurve<I3JS.IVector3>;
+			} else if (this.curve instanceof NgxCurveComponent) {
+				const curve = this.curve.getCurve() as I3JS.Curve<I3JS.Vector3>;
 				this.subscribeRefer(
 					'curve',
-					ThreeUtil.getSubscribe(
+					NgxThreeUtil.getSubscribe(
 						this.curve,
 						() => {
 							this.needUpdate = true;
@@ -1159,7 +1061,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 			}
 		}
 		if (this.curveList !== null && this.curveList.length > 0) {
-			return this.curveList.first.getCurve() as I3JS.ICurve<I3JS.IVector3>;
+			return this.curveList.first.getCurve() as I3JS.Curve<I3JS.Vector3>;
 		}
 		return null;
 	}
@@ -1173,12 +1075,12 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 */
 	private getTexture(
 		type: string,
-		alterTexture?: string | I3JS.ITexture | AbstractTextureComponent,
+		alterTexture?: string | I3JS.Texture | NgxAbstractTextureComponent,
 		defImage?: string
-	): I3JS.ITexture {
+	): I3JS.Texture {
 		if (this.texture !== null && this.texture !== undefined) {
-			const texture = ThreeUtil.getTexture(this.texture, type, false);
-			if (ThreeUtil.isNotNull(texture)) {
+			const texture = NgxThreeUtil.getTexture(this.texture, type, false);
+			if (NgxThreeUtil.isNotNull(texture)) {
 				return texture;
 			}
 		}
@@ -1186,21 +1088,21 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 			const foundTexture = this.textureList.find((texture) => {
 				return texture.isTexture(type);
 			});
-			if (ThreeUtil.isNotNull(foundTexture)) {
+			if (NgxThreeUtil.isNotNull(foundTexture)) {
 				return foundTexture.getTexture();
 			}
 		}
-		if (ThreeUtil.isNotNull(alterTexture)) {
+		if (NgxThreeUtil.isNotNull(alterTexture)) {
 			if (alterTexture instanceof N3JS.Texture) {
 				return alterTexture;
-			} else if (alterTexture instanceof AbstractTextureComponent) {
+			} else if (alterTexture instanceof NgxAbstractTextureComponent) {
 				return alterTexture.getTexture();
 			} else if (typeof alterTexture === 'string') {
-				return AbstractTextureComponent.getTextureImage(alterTexture);
+				return NgxAbstractTextureComponent.getTextureImage(alterTexture);
 			}
 		}
-		if (ThreeUtil.isNotNull(defImage)) {
-			return AbstractTextureComponent.getTextureImage(defImage);
+		if (NgxThreeUtil.isNotNull(defImage)) {
+			return NgxAbstractTextureComponent.getTextureImage(defImage);
 		}
 		return undefined;
 	}
@@ -1210,7 +1112,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D): boolean {
+	public setParent(parent: I3JS.Object3D): boolean {
 		if (super.setParent(parent)) {
 			this.getMesh();
 			return true;
@@ -1223,16 +1125,13 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @param wireframe
 	 * @param [child]
 	 */
-	public setWireFrame(wireframe: boolean, child: I3JS.IObject3D = null) {
+	public setWireFrame(wireframe: boolean, child: I3JS.Object3D = null) {
 		if (child === null) {
 			child = this.object3d;
 		}
 		if (child instanceof N3JS.Mesh) {
-			const anyMaterial: any = child.material as I3JS.IMaterial;
-			if (
-				child.material instanceof N3JS.Material &&
-				anyMaterial['wireframe'] !== undefined
-			) {
+			const anyMaterial: any = child.material as I3JS.Material;
+			if (child.material instanceof N3JS.Material && anyMaterial['wireframe'] !== undefined) {
 				anyMaterial['wireframe'] = wireframe;
 			} else if (child.material instanceof Array) {
 				child.material.forEach((material: any) => {
@@ -1254,11 +1153,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 */
 	public setVisible(visible: boolean, helperVisible: boolean = null) {
 		super.setVisible(visible);
-		if (
-			this.helperComponent !== null &&
-			helperVisible !== null &&
-			helperVisible !== undefined
-		) {
+		if (this.helperComponent !== null && helperVisible !== null && helperVisible !== undefined) {
 			this.helperComponent.updateInputParams({ visible: helperVisible });
 		}
 	}
@@ -1270,34 +1165,21 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 */
 	public applyChanges3d(changes: string[]) {
 		if (this.mesh !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getObject3d();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
-					[
-						'geometry',
-						'svg',
-						'listener',
-						'audio',
-						'csschildren',
-						'controller',
-						'material',
-						'mixer',
-						'volumeoption',
-					],
+					['geometry', 'svg', 'listener', 'audio', 'csschildren', 'controller', 'material', 'mixer', 'volumeoption'],
 					this.OBJECT3D_ATTR
 				)
 			) {
 				this.needUpdate = true;
 				return;
 			}
-			if (
-				!ThreeUtil.isIndexOf(changes, 'init') &&
-				ThreeUtil.isIndexOf(changes, ['geometry', 'material'])
-			) {
+			if (!NgxThreeUtil.isIndexOf(changes, 'init') && NgxThreeUtil.isIndexOf(changes, ['geometry', 'material'])) {
 				switch (this.type.toLowerCase()) {
 					case 'merged':
 					case 'naive':
@@ -1311,8 +1193,8 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						return;
 				}
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'geometry',
 					'svg',
 					'listener',
@@ -1323,11 +1205,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					'mixer',
 				]);
 			}
-			if (ThreeUtil.isIndexOf(changes, 'html')) {
-				changes = ThreeUtil.pushUniq(changes, ['csschildren']);
+			if (NgxThreeUtil.isIndexOf(changes, 'html')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['csschildren']);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['helpertype', 'helperoption'])) {
-				changes = ThreeUtil.pushUniq(changes, ['helper']);
+			if (NgxThreeUtil.isIndexOf(changes, ['helpertype', 'helperoption'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['helper']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -1335,56 +1217,50 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						this.resetHelper();
 						break;
 					case 'volumeoption':
-						if (ThreeUtil.isNotNull(this.volumeOption)) {
-							const volume: I3JS.IVolume = this.getUserData()['storageSource'];
-							if (ThreeUtil.isNotNull(volume) && volume instanceof N3JS.Volume) {
+						if (NgxThreeUtil.isNotNull(this.volumeOption)) {
+							const volume: I3JS.Volume = this.getUserData()['storageSource'];
+							if (NgxThreeUtil.isNotNull(volume) && volume instanceof N3JS.Volume) {
 								const mesh = this.mesh;
 								const rasDimensions = (volume as any).RASDimensions;
 								const volumeMax: number = (volume as any).max;
 								const volumeMin: number = (volume as any).min;
 								Object.entries(this.volumeOption).forEach(([key, value]) => {
-									let sliceMesh: I3JS.IObject3D = null;
+									let sliceMesh: I3JS.Object3D = null;
 									let rasDimensionsSize: number = 0;
 									switch (key.toLowerCase()) {
 										case 'helpervisible':
 											const helper = mesh.getObjectByName('helper');
-											if (ThreeUtil.isNotNull(helper)) {
+											if (NgxThreeUtil.isNotNull(helper)) {
 												helper.visible = value as boolean;
 											}
 											break;
 										case 'helpercolor':
 											const helperMat: any = mesh.getObjectByName('helper');
-											if (
-												ThreeUtil.isNotNull(helperMat) &&
-												ThreeUtil.isNotNull(helperMat['material'])
-											) {
-												helperMat['material'].color = ThreeUtil.getColorSafe(
-													value as any,
-													0xffff00
-												);
+											if (NgxThreeUtil.isNotNull(helperMat) && NgxThreeUtil.isNotNull(helperMat['material'])) {
+												helperMat['material'].color = NgxThreeUtil.getColorSafe(value as any, 0xffff00);
 											}
 											break;
 										case 'boxvisible':
 											const box = mesh.getObjectByName('box');
-											if (ThreeUtil.isNotNull(box)) {
+											if (NgxThreeUtil.isNotNull(box)) {
 												box.visible = value as boolean;
 											}
 											break;
 										case 'xvisible':
 											const sliceMeshx = mesh.getObjectByName('x');
-											if (ThreeUtil.isNotNull(sliceMeshx)) {
+											if (NgxThreeUtil.isNotNull(sliceMeshx)) {
 												sliceMeshx.visible = value as boolean;
 											}
 											break;
 										case 'yvisible':
 											const sliceMeshy = mesh.getObjectByName('y');
-											if (ThreeUtil.isNotNull(sliceMeshy)) {
+											if (NgxThreeUtil.isNotNull(sliceMeshy)) {
 												sliceMeshy.visible = value as boolean;
 											}
 											break;
 										case 'zvisible':
 											const sliceMeshz = mesh.getObjectByName('z');
-											if (ThreeUtil.isNotNull(sliceMeshz)) {
+											if (NgxThreeUtil.isNotNull(sliceMeshz)) {
 												sliceMeshz.visible = value as boolean;
 											}
 											break;
@@ -1407,60 +1283,37 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 										case 'lower':
 											volume.lowerThreshold = Math.min(
 												volumeMax,
-												Math.max(
-													volumeMin,
-													(volumeMax - volumeMin) * (value as number) +
-														volumeMin
-												)
+												Math.max(volumeMin, (volumeMax - volumeMin) * (value as number) + volumeMin)
 											);
 											break;
 										case 'upperthreshold':
 										case 'upper':
 											volume.upperThreshold = Math.min(
 												volumeMax,
-												Math.max(
-													volumeMin,
-													(volumeMax - volumeMin) * (value as number) +
-														volumeMin
-												)
+												Math.max(volumeMin, (volumeMax - volumeMin) * (value as number) + volumeMin)
 											);
 											break;
 										case 'windowlow':
 										case 'low':
 											(volume as any).windowLow = Math.min(
 												volumeMax,
-												Math.max(
-													volumeMin,
-													(volumeMax - volumeMin) * (value as number) +
-														volumeMin
-												)
+												Math.max(volumeMin, (volumeMax - volumeMin) * (value as number) + volumeMin)
 											);
 											break;
 										case 'windowhigh':
 										case 'high':
 											(volume as any).windowHigh = Math.min(
 												volumeMax,
-												Math.max(
-													volumeMin,
-													(volumeMax - volumeMin) * (value as number) +
-														volumeMin
-												)
+												Math.max(volumeMin, (volumeMax - volumeMin) * (value as number) + volumeMin)
 											);
 											break;
 									}
-									if (
-										ThreeUtil.isNotNull(sliceMesh) &&
-										ThreeUtil.isNotNull(sliceMesh.userData.volumeSlice)
-									) {
+									if (NgxThreeUtil.isNotNull(sliceMesh) && NgxThreeUtil.isNotNull(sliceMesh.userData.volumeSlice)) {
 										const valueNum: number = value as number;
-										const volumeSlice: I3JS.IVolumeSlice =
-											sliceMesh.userData.volumeSlice;
+										const volumeSlice: I3JS.VolumeSlice = sliceMesh.userData.volumeSlice;
 										volumeSlice.index = Math.max(
 											0,
-											Math.min(
-												rasDimensionsSize - 1,
-												Math.round(rasDimensionsSize * valueNum)
-											)
+											Math.min(rasDimensionsSize - 1, Math.round(rasDimensionsSize * valueNum))
 										);
 										volumeSlice.repaint.call(volumeSlice);
 									}
@@ -1471,15 +1324,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						break;
 					case 'csschildren':
 						this.unSubscribeReferList('cssChildrenList');
-						if (ThreeUtil.isNotNull(this.cssChildrenList)) {
+						if (NgxThreeUtil.isNotNull(this.cssChildrenList)) {
 							this.cssChildrenList.forEach((cssChild) => {
 								cssChild.setParent(this.mesh as any);
 							});
-							this.subscribeListQuery(
-								this.cssChildrenList,
-								'cssChildrenList',
-								'html'
-							);
+							this.subscribeListQuery(this.cssChildrenList, 'cssChildrenList', 'html');
 						}
 						break;
 				}
@@ -1509,17 +1358,13 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Css clazz name of mesh component
 	 */
 	private cssClazzName: string = null;
-	private mesh: I3JS.IObject3D = null;
+	private mesh: I3JS.Object3D = null;
 
 	/**
 	 * Gets real mesh
 	 * @returns real mesh
 	 */
-	public getRealMesh():
-		| I3JS.IMesh
-		| I3JS.ILineSegments
-		| I3JS.ILine
-		| I3JS.IPoints {
+	public getRealMesh(): I3JS.Mesh | I3JS.LineSegments | I3JS.Line | I3JS.Points {
 		if (
 			this.mesh instanceof N3JS.Mesh ||
 			this.mesh instanceof N3JS.LineSegments ||
@@ -1529,7 +1374,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 			return this.mesh as any;
 		}
 		if (
-			ThreeUtil.isNotNull(this.mesh.userData.refTarget) &&
+			NgxThreeUtil.isNotNull(this.mesh.userData.refTarget) &&
 			(this.mesh.userData.refTarget instanceof N3JS.Mesh ||
 				this.mesh.userData.refTarget instanceof N3JS.LineSegments ||
 				this.mesh.userData.refTarget instanceof N3JS.Line ||
@@ -1537,7 +1382,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 		) {
 			return this.mesh.userData.refTarget as any;
 		}
-		let mesh: I3JS.IObject3D = this.mesh;
+		let mesh: I3JS.Object3D = this.mesh;
 		while (mesh.children && mesh.children.length > 0) {
 			mesh = mesh.children[0];
 			if (
@@ -1556,7 +1401,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Gets clips
 	 * @returns clips
 	 */
-	public getClips(): I3JS.IAnimationClip[] | any {
+	public getClips(): I3JS.AnimationClip[] | any {
 		return this.clips;
 	}
 
@@ -1566,10 +1411,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 */
 	public getUniforms(): { [uniform: string]: I3JS.IUniform } {
 		const material: any = this.getMaterial();
-		if (
-			ThreeUtil.isNotNull(material) &&
-			ThreeUtil.isNotNull(material['uniforms'])
-		) {
+		if (NgxThreeUtil.isNotNull(material) && NgxThreeUtil.isNotNull(material['uniforms'])) {
 			return material['uniforms'];
 		}
 		return null;
@@ -1580,7 +1422,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends I3JS.IObject3D>(): T {
+	public getObject3d<T extends I3JS.Object3D>(): T {
 		return this.getMesh();
 	}
 
@@ -1589,7 +1431,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * @template T
 	 * @returns mesh
 	 */
-	public getMesh<T extends I3JS.IObject3D>(): T {
+	public getMesh<T extends I3JS.Object3D>(): T {
 		if (this.mesh === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.setUserData('refTarget', null);
@@ -1602,14 +1444,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 			}
 			this.unSubscribeRefer('customGeometry');
 			this.unSubscribeRefer('textureSize');
-			let geometry: I3JS.IBufferGeometry = null;
-			if (
-				(this.geometryList !== null && this.geometryList.length > 0) ||
-				this.geometry !== null
-			) {
+			let geometry: I3JS.BufferGeometry = null;
+			if ((this.geometryList !== null && this.geometryList.length > 0) || this.geometry !== null) {
 				geometry = this.getGeometry();
 			}
-			let basemesh: I3JS.IObject3D = null;
+			let basemesh: I3JS.Object3D = null;
 			switch (this.type.toLowerCase()) {
 				case 'skybox':
 					const skyboxSize = this.getSkyboxSize(1500);
@@ -1618,9 +1457,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							const lensflare = new N3JS.Lensflare();
 							lensflare.addElement(
 								new N3JS.LensflareElement(
-									AbstractTextureComponent.getTextureImage(
-										this.skyboxSunImage
-									) as any,
+									NgxAbstractTextureComponent.getTextureImage(this.skyboxSunImage) as any,
 									this.getSize(100),
 									0,
 									this.getColor(null) as any
@@ -1633,29 +1470,19 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						case 'box':
 						case 'sphere':
 						default:
-							let skyGeometry: I3JS.IBufferGeometry = null;
-							let skyMaterial: I3JS.IMaterial = null;
+							let skyGeometry: I3JS.BufferGeometry = null;
+							let skyMaterial: I3JS.Material = null;
 							switch (this.skyboxType.toLowerCase()) {
 								case 'box':
-									skyGeometry = new N3JS.BoxGeometry(
-										skyboxSize,
-										skyboxSize,
-										skyboxSize
-									);
+									skyGeometry = new N3JS.BoxGeometry(skyboxSize, skyboxSize, skyboxSize);
 									break;
 								case 'sphere':
 								default:
 									skyGeometry = new N3JS.SphereGeometry(skyboxSize, 8, 6);
 									break;
 							}
-							if (
-								ThreeUtil.isNotNull(this.skyboxImage) ||
-								ThreeUtil.isNotNull(this.skyboxCubeImage)
-							) {
-								const envMap = AbstractTextureComponent.getTextureImage(
-									this.skyboxImage,
-									this.skyboxCubeImage
-								);
+							if (NgxThreeUtil.isNotNull(this.skyboxImage) || NgxThreeUtil.isNotNull(this.skyboxCubeImage)) {
+								const envMap = NgxAbstractTextureComponent.getTextureImage(this.skyboxImage, this.skyboxCubeImage);
 								skyMaterial = new N3JS.MeshBasicMaterial({
 									depthTest: false,
 									envMap: envMap,
@@ -1677,10 +1504,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'html':
 				case 'htmlmesh':
-					basemesh = new THREE_OBJ.NgxHTMLMesh(
-						this.getCssTag(),
-						this.materialOption
-					) as any;
+					basemesh = new THREE_OBJ.NgxHTMLMesh(this.getCssTag(), this.materialOption) as any;
 					break;
 				case 'svg':
 				case 'svgobject':
@@ -1691,21 +1515,13 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 				case 'css3dobject':
 				case 'css3dsprite':
 					const cssElement: any = this.getCssTag();
-					if (ThreeUtil.isNotNull(this.cssStyle)) {
-						this.cssClazzName = ThreeUtil.addCssStyle(
-							cssElement,
-							this.cssStyle,
-							this.cssClazzName,
-							'mesh',
-							'inline'
-						);
+					if (NgxThreeUtil.isNotNull(this.cssStyle)) {
+						this.cssClazzName = NgxThreeUtil.addCssStyle(cssElement, this.cssStyle, this.cssClazzName, 'mesh', 'inline');
 					}
 					switch (this.type.toLowerCase()) {
 						case 'svg':
 						case 'svgobject':
-							basemesh = new N3JS.SVGObject(
-								cssElement as SVGElement
-							) as any;
+							basemesh = new N3JS.SVGObject(cssElement as SVGElement) as any;
 							break;
 						case 'css2d':
 						case 'css2dobject':
@@ -1730,11 +1546,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						textureHeight: reflectorSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
-						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
+						encoding: NgxThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					this.subscribeRefer(
 						'textureSize',
-						ThreeUtil.getSubscribe(
+						NgxThreeUtil.getSubscribe(
 							this.textureSize,
 							() => {
 								const size = this.getTextureSize();
@@ -1753,11 +1569,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						textureHeight: reflectorRTTSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
-						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
+						encoding: NgxThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					this.subscribeRefer(
 						'textureSize',
-						ThreeUtil.getSubscribe(
+						NgxThreeUtil.getSubscribe(
 							this.textureSize,
 							() => {
 								const size = this.getTextureSize();
@@ -1776,7 +1592,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						textureHeight: refractorSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
-						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
+						encoding: NgxThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					const refractorMaterial = refractor.material as any;
 					Object.entries(refractorMaterial.uniforms).forEach(([key, value]) => {
@@ -1789,7 +1605,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					});
 					this.subscribeRefer(
 						'textureSize',
-						ThreeUtil.getSubscribe(
+						NgxThreeUtil.getSubscribe(
 							this.textureSize,
 							() => {
 								const size = this.getTextureSize();
@@ -1804,22 +1620,16 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 				case 'reflectorforssrpass':
 				case 'reflectorforssr':
 					const reflectorForSSRPassSize = this.getTextureSize();
-					const reflectorForSSRPass = new N3JS.ReflectorForSSRPass(
-						geometry,
-						{
-							textureWidth: reflectorForSSRPassSize.x,
-							textureHeight: reflectorForSSRPassSize.y,
-							clipBias: this.getClipBias(0.003),
-							color: this.getColor(0x7f7f7f).getHex(),
-							useDepthTexture: ThreeUtil.getTypeSafe(
-								this.useDepthTexture,
-								true
-							),
-						}
-					);
+					const reflectorForSSRPass = new N3JS.ReflectorForSSRPass(geometry, {
+						textureWidth: reflectorForSSRPassSize.x,
+						textureHeight: reflectorForSSRPassSize.y,
+						clipBias: this.getClipBias(0.003),
+						color: this.getColor(0x7f7f7f).getHex(),
+						useDepthTexture: NgxThreeUtil.getTypeSafe(this.useDepthTexture, true),
+					});
 					this.subscribeRefer(
 						'textureSize',
-						ThreeUtil.getSubscribe(
+						NgxThreeUtil.getSubscribe(
 							this.textureSize,
 							() => {
 								const size = this.getTextureSize();
@@ -1848,7 +1658,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					this.getUndateUniforms(water.material['uniforms']);
 					this.subscribeRefer(
 						'textureSize',
-						ThreeUtil.getSubscribe(
+						NgxThreeUtil.getSubscribe(
 							this.textureSize,
 							() => {
 								// const size = this.getTextureSize();
@@ -1872,22 +1682,14 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						scale: this.getWaterScale(),
 						shader: this.getShader(),
 						flowMap: this.getTexture('flowMap', this.flowMap) as any,
-						normalMap0: this.getTexture(
-							'normalMap0',
-							this.normalMap0,
-							'textures/water/Water_1_M_Normal.jpg'
-						) as any,
-						normalMap1: this.getTexture(
-							'normalMap1',
-							this.normalMap1,
-							'textures/water/Water_2_M_Normal.jpg'
-						) as any,
-						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
+						normalMap0: this.getTexture('normalMap0', this.normalMap0, 'textures/water/Water_1_M_Normal.jpg') as any,
+						normalMap1: this.getTexture('normalMap1', this.normalMap1, 'textures/water/Water_2_M_Normal.jpg') as any,
+						encoding: NgxThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					this.getUndateUniforms(water2.material['uniforms']);
 					this.subscribeRefer(
 						'textureSize',
-						ThreeUtil.getSubscribe(
+						NgxThreeUtil.getSubscribe(
 							this.textureSize,
 							() => {
 								// const size = this.getTextureSize();
@@ -1908,38 +1710,28 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					const objectToCurve = new N3JS.Mesh(geometry, flowMaterial);
 					const flow = new N3JS.Flow(objectToCurve) as any;
 					const flowCurve = this.getCurve();
-					if (ThreeUtil.isNotNull(flowCurve)) {
+					if (NgxThreeUtil.isNotNull(flowCurve)) {
 						flow.updateCurve(0, flowCurve);
 					}
 					this.setUserData('storageSource', flow);
 					basemesh = new N3JS.Group();
 					basemesh.add(flow.object3D);
-					if (ThreeUtil.isNotNull(this.moveAlongCurve)) {
+					if (NgxThreeUtil.isNotNull(this.moveAlongCurve)) {
 						flow.object3D.onBeforeRender = () => {
-							flow.moveAlongCurve(
-								ThreeUtil.getTypeSafe(this.moveAlongCurve, 0.001)
-							);
+							flow.moveAlongCurve(NgxThreeUtil.getTypeSafe(this.moveAlongCurve, 0.001));
 						};
 					}
 					break;
 				case 'instancedflow':
 					const instancedFlowMaterial = this.getMaterialOne();
 					const instancedFlowCount = this.getCount(1);
-					const instancedFlow = new N3JS.InstancedFlow(
-						instancedFlowCount,
-						1,
-						geometry,
-						instancedFlowMaterial
-					) as any;
+					const instancedFlow = new N3JS.InstancedFlow(instancedFlowCount, 1, geometry, instancedFlowMaterial) as any;
 					const instancedFlowCurve = this.getCurve();
-					if (ThreeUtil.isNotNull(instancedFlowCurve)) {
+					if (NgxThreeUtil.isNotNull(instancedFlowCurve)) {
 						instancedFlow.updateCurve(0, instancedFlowCurve);
 						instancedFlow.setCurve(0, 0);
-						const instancedFlowColor = ThreeUtil.getTypeSafe(
-							this.colors,
-							'rand'
-						);
-						const instancedFlowColors: I3JS.IColor[] = [];
+						const instancedFlowColor = NgxThreeUtil.getTypeSafe(this.colors, 'rand');
+						const instancedFlowColors: I3JS.Color[] = [];
 						if (typeof instancedFlowColor === 'string') {
 							switch (instancedFlowColor.toLowerCase()) {
 								case 'null':
@@ -1950,18 +1742,14 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 								case 'rand':
 								case 'random':
 									for (let i = 0; i < instancedFlowCount; i++) {
-										instancedFlowColors.push(
-											new N3JS.Color(0xffffff * Math.random())
-										);
+										instancedFlowColors.push(new N3JS.Color(0xffffff * Math.random()));
 									}
 									break;
 								default:
 									const colorList = instancedFlowColor.split(',');
 									for (let i = 0; i < instancedFlowCount; i++) {
 										if (colorList.length > i) {
-											instancedFlowColors.push(
-												ThreeUtil.getColorSafe(colorList[i])
-											);
+											instancedFlowColors.push(NgxThreeUtil.getColorSafe(colorList[i]));
 										} else {
 											instancedFlowColors.push(null);
 										}
@@ -1972,9 +1760,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							const colorList = instancedFlowColor;
 							for (let i = 0; i < instancedFlowCount; i++) {
 								if (colorList.length > i) {
-									instancedFlowColors.push(
-										ThreeUtil.getColorSafe(colorList[i])
-									);
+									instancedFlowColors.push(NgxThreeUtil.getColorSafe(colorList[i]));
 								} else {
 									instancedFlowColors.push(null);
 								}
@@ -1984,10 +1770,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 								instancedFlowColors.push(null);
 							}
 						}
-						const instancedFlowOffset = ThreeUtil.getTypeSafe(
-							this.moveIndividualAlongCurve,
-							'equals'
-						);
+						const instancedFlowOffset = NgxThreeUtil.getTypeSafe(this.moveIndividualAlongCurve, 'equals');
 						const instancedFlowOffsets: number[] = [];
 						if (typeof instancedFlowOffset === 'string') {
 							switch (instancedFlowOffset.toLowerCase()) {
@@ -2006,9 +1789,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 									const offsetList = instancedFlowOffset.split(',');
 									for (let i = 0; i < instancedFlowCount; i++) {
 										if (offsetList.length > i) {
-											instancedFlowOffsets.push(
-												Math.min(1, Math.max(0, parseFloat(offsetList[0])))
-											);
+											instancedFlowOffsets.push(Math.min(1, Math.max(0, parseFloat(offsetList[0]))));
 										} else {
 											instancedFlowOffsets.push(null);
 										}
@@ -2030,13 +1811,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							}
 						}
 						for (let i = 0; i < instancedFlowCount; i++) {
-							if (ThreeUtil.isNotNull(instancedFlowOffsets[i])) {
-								instancedFlow.moveIndividualAlongCurve(
-									i,
-									instancedFlowOffsets[i]
-								);
+							if (NgxThreeUtil.isNotNull(instancedFlowOffsets[i])) {
+								instancedFlow.moveIndividualAlongCurve(i, instancedFlowOffsets[i]);
 							}
-							if (ThreeUtil.isNotNull(instancedFlowColors[i])) {
+							if (NgxThreeUtil.isNotNull(instancedFlowColors[i])) {
 								instancedFlow.object3D.setColorAt(i, instancedFlowColors[i]);
 							}
 						}
@@ -2044,28 +1822,23 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					this.setUserData('storageSource', instancedFlow);
 					basemesh = new N3JS.Group();
 					basemesh.add(instancedFlow.object3D);
-					if (ThreeUtil.isNotNull(this.moveAlongCurve)) {
+					if (NgxThreeUtil.isNotNull(this.moveAlongCurve)) {
 						instancedFlow.object3D.onBeforeRender = () => {
-							instancedFlow.moveAlongCurve(
-								ThreeUtil.getTypeSafe(this.moveAlongCurve, 0.001)
-							);
+							instancedFlow.moveAlongCurve(NgxThreeUtil.getTypeSafe(this.moveAlongCurve, 0.001));
 						};
 					}
 					break;
 				case 'lineloop':
 					let points: any[] = [];
 					const lineloopCurve = this.getCurve();
-					if (ThreeUtil.isNotNull(lineloopCurve)) {
+					if (NgxThreeUtil.isNotNull(lineloopCurve)) {
 						points = lineloopCurve.getPoints(this.getDivisions(50));
 					}
-					const lineLoop = new N3JS.LineLoop(
-						new N3JS.BufferGeometry().setFromPoints(points),
-						this.getMaterials()
-					);
+					const lineLoop = new N3JS.LineLoop(new N3JS.BufferGeometry().setFromPoints(points), this.getMaterials());
 					basemesh = lineLoop as any;
 					break;
 				case 'light':
-					const light = this.initLocalComponent('light', new LightComponent());
+					const light = this.initLocalComponent('light', new NgxLightComponent());
 					light.updateInputParams(this.lightOptions);
 					basemesh = light.getObject3d();
 					break;
@@ -2079,24 +1852,18 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'instancedmesh':
 				case 'instanced':
-					const instanced = new N3JS.InstancedMesh(
-						geometry,
-						this.getMaterialOne(),
-						this.getCount(1)
-					);
-					if (ThreeUtil.isNotNull(this.usage)) {
-						instanced.instanceMatrix.setUsage(
-							ThreeUtil.getUsageSafe(this.usage, 'dynamicdraw')
-						);
+					const instanced = new N3JS.InstancedMesh(geometry, this.getMaterialOne(), this.getCount(1));
+					if (NgxThreeUtil.isNotNull(this.usage)) {
+						instanced.instanceMatrix.setUsage(NgxThreeUtil.getUsageSafe(this.usage, 'dynamicdraw'));
 					}
-					if (ThreeUtil.isNotNull(this.makeMatrix)) {
+					if (NgxThreeUtil.isNotNull(this.makeMatrix)) {
 						const matrix = new N3JS.Matrix4();
 						for (let i = 0; i < instanced.count; i++) {
 							this.makeMatrix(matrix, i);
 							instanced.setMatrixAt(i, matrix as any);
 						}
 					}
-					if (ThreeUtil.isNotNull(this.makeColor)) {
+					if (NgxThreeUtil.isNotNull(this.makeColor)) {
 						const color = new N3JS.Color();
 						for (let i = 0; i < instanced.count; i++) {
 							this.makeColor(color, i);
@@ -2111,7 +1878,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						const count = this.getCount(1);
 						for (let i = 0; i < count; i++) {
 							const instanceGeometry = geometry.clone();
-							if (ThreeUtil.isNotNull(this.makeMatrix)) {
+							if (NgxThreeUtil.isNotNull(this.makeMatrix)) {
 								const matrix = new N3JS.Matrix4();
 								this.makeMatrix(matrix);
 								instanceGeometry.applyMatrix4(matrix);
@@ -2119,10 +1886,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							geometries.push(instanceGeometry);
 						}
 						const materials = this.getMaterials();
-						const mergedGeometry =
-							N3JS.GeometryUtils.mergeBufferGeometries(
-								geometries as any
-							);
+						const mergedGeometry = N3JS.GeometryUtils.mergeBufferGeometries(geometries as any);
 						basemesh = new N3JS.Mesh(mergedGeometry, materials) as any;
 					}
 					break;
@@ -2133,7 +1897,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						const material = this.getMaterials();
 						const count = this.getCount(1);
 						for (let i = 0; i < count; i++) {
-							if (ThreeUtil.isNotNull(this.makeMatrix)) {
+							if (NgxThreeUtil.isNotNull(this.makeMatrix)) {
 								this.makeMatrix(matrix);
 							}
 							const mesh = new N3JS.Mesh(geometry, material);
@@ -2144,10 +1908,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'multi':
 				case 'multimaterial':
-					basemesh = N3JS.SceneUtils.createMultiMaterialObject(
-						geometry,
-						this.getMaterialsMulti()
-					);
+					basemesh = N3JS.SceneUtils.createMultiMaterialObject(geometry, this.getMaterialsMulti());
 					basemesh.children.forEach((e: any) => {
 						e.castShadow = true;
 					});
@@ -2162,28 +1923,14 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					}
 					break;
 				case 'sprite':
-					const sprite = new N3JS.Sprite(
-						this.getMaterialOne() as I3JS.ISpriteMaterial
-					);
-					if (
-						ThreeUtil.isNotNull(this.centerX) &&
-						ThreeUtil.isNotNull(this.centerY)
-					) {
-						sprite.center.copy(
-							ThreeUtil.getVector2Safe(
-								this.centerX,
-								this.centerY,
-								new N3JS.Vector2()
-							)
-						);
+					const sprite = new N3JS.Sprite(this.getMaterialOne() as I3JS.SpriteMaterial);
+					if (NgxThreeUtil.isNotNull(this.centerX) && NgxThreeUtil.isNotNull(this.centerY)) {
+						sprite.center.copy(NgxThreeUtil.getVector2Safe(this.centerX, this.centerY, new N3JS.Vector2()));
 					}
 					basemesh = sprite;
 					break;
 				case 'wireframe':
-					basemesh = new N3JS.Wireframe(
-						geometry as any,
-						this.getMaterialOne() as any
-					) as any;
+					basemesh = new N3JS.Wireframe(geometry as any, this.getMaterialOne() as any) as any;
 					break;
 				case 'lod':
 					basemesh = new N3JS.LOD();
@@ -2195,13 +1942,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						this.getEnableUvs(false),
 						this.getEnableColors(false)
 					);
-					if (ThreeUtil.isNotNull(this.isolation)) {
+					if (NgxThreeUtil.isNotNull(this.isolation)) {
 						effect.isolation = this.getIsolation(80.0);
 					}
-					if (
-						ThreeUtil.isNotNull(this.blobInfos) &&
-						this.blobInfos.length > 0
-					) {
+					if (NgxThreeUtil.isNotNull(this.blobInfos) && this.blobInfos.length > 0) {
 						this.blobInfos.forEach((blobInfo) => {
 							effect.addBall(
 								blobInfo.x,
@@ -2209,14 +1953,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 								blobInfo.z,
 								blobInfo.strength,
 								blobInfo.subtract,
-								ThreeUtil.getColorSafe(blobInfo.colors) as any
+								NgxThreeUtil.getColorSafe(blobInfo.colors) as any
 							);
 						});
 					}
-					if (
-						ThreeUtil.isNotNull(this.planeInfos) &&
-						this.planeInfos.length > 0
-					) {
+					if (NgxThreeUtil.isNotNull(this.planeInfos) && this.planeInfos.length > 0) {
 						this.planeInfos.forEach((plane) => {
 							switch (plane.type.toLowerCase()) {
 								case 'x':
@@ -2243,7 +1984,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'tubepainter':
 					const tubePainter: any = new N3JS.TubePainter();
-					if (ThreeUtil.isNotNull(this.size)) {
+					if (NgxThreeUtil.isNotNull(this.size)) {
 						tubePainter['setSize'](this.size);
 					}
 					tubePainter.mesh.material['side'] = N3JS.DoubleSide;
@@ -2256,17 +1997,14 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 				case 'meshtext':
 				case 'text':
 					basemesh = new THREE_OBJ.NgxMeshText(
-						ThreeUtil.getTypeSafe(this.text, 'test'),
-						ThreeUtil.getTypeSafe(this.size, 1),
-						ThreeUtil.getColorSafe(this.color, 0xffffff)
+						NgxThreeUtil.getTypeSafe(this.text, 'test'),
+						NgxThreeUtil.getTypeSafe(this.size, 1),
+						NgxThreeUtil.getColorSafe(this.color, 0xffffff)
 					) as any;
 					break;
 				case 'line2':
 					const lineMaterial = this.getMaterialOne();
-					if (
-						geometry instanceof N3JS.LineGeometry &&
-						lineMaterial instanceof N3JS.LineMaterial
-					) {
+					if (geometry instanceof N3JS.LineGeometry && lineMaterial instanceof N3JS.LineMaterial) {
 						const line2 = new N3JS.Line2(geometry, lineMaterial);
 						line2.computeLineDistances();
 						line2.scale.set(1, 1, 1);
@@ -2279,10 +2017,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					}
 					break;
 				case 'linesegments':
-					const lineSegments = new N3JS.LineSegments(
-						geometry,
-						this.getMaterials()
-					);
+					const lineSegments = new N3JS.LineSegments(geometry, this.getMaterials());
 					if (geometry.index === null) {
 						// lineSegments.computeLineDistances();
 					}
@@ -2293,8 +2028,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					basemesh = new N3JS.Group();
 					if (this.shareParts !== null) {
 						const loadShareParts = () => {
-							const shareParts = ThreeUtil.getObject3d(this.shareParts).userData
-								.clips;
+							const shareParts = NgxThreeUtil.getObject3d(this.shareParts).userData.clips;
 							if (shareParts instanceof N3JS.MD2CharacterComplex) {
 								const character = new N3JS.MD2CharacterComplex();
 								character.shareParts(shareParts);
@@ -2317,7 +2051,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						this.unSubscribeReferList('shareParts');
 						this.subscribeReferList(
 							'shareParts',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.shareParts,
 								() => {
 									loadShareParts();
@@ -2330,9 +2064,9 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'interactive':
 				case 'interactivegroup':
-					const renderer = ThreeUtil.getRenderer() as I3JS.IWebGL1Renderer;
-					let camera: I3JS.ICamera = null;
-					if (ThreeUtil.isNotNull(this.sharedCamera)) {
+					const renderer = NgxThreeUtil.getRenderer() as I3JS.WebGL1Renderer;
+					let camera: I3JS.Camera = null;
+					if (NgxThreeUtil.isNotNull(this.sharedCamera)) {
 						if (this.sharedCamera.getCamera) {
 							camera = this.sharedCamera.getCamera();
 						} else if (this.sharedCamera instanceof N3JS.Camera) {
@@ -2348,21 +2082,12 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'lightning':
 				case 'lightningstorm':
-					const stormParams: I3JS.IStormParams = ThreeUtil.getTypeSafe(
-						this.stormParams,
-						{}
-					);
-					if (ThreeUtil.isNotNull(this.rayParams)) {
-						stormParams.lightningParameters = Object.assign(
-							this.rayParams,
-							stormParams.lightningParameters || {}
-						);
+					const stormParams: I3JS.StormParams = NgxThreeUtil.getTypeSafe(this.stormParams, {});
+					if (NgxThreeUtil.isNotNull(this.rayParams)) {
+						stormParams.lightningParameters = Object.assign(this.rayParams, stormParams.lightningParameters || {});
 					}
-					const lightningMaterial = this.getMaterialOne(
-						{ color: 0xffffff },
-						false
-					);
-					if (ThreeUtil.isNotNull(lightningMaterial)) {
+					const lightningMaterial = this.getMaterialOne({ color: 0xffffff }, false);
+					if (NgxThreeUtil.isNotNull(lightningMaterial)) {
 						stormParams.lightningMaterial = lightningMaterial as any;
 					}
 					basemesh = new N3JS.LightningStorm(stormParams) as any;
@@ -2372,19 +2097,19 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					break;
 				case 'mesh':
 				default:
-					if (ThreeUtil.isNotNull(this.storageName)) {
+					if (NgxThreeUtil.isNotNull(this.storageName)) {
 						basemesh = new N3JS.Group();
 						this.localStorageService.getObject(
 							this.storageName,
 							(
-								loadedMesh: I3JS.IObject3D,
-								clips?: I3JS.IAnimationClip[] | any,
-								geometry?: I3JS.IBufferGeometry,
-								morphTargets?: I3JS.IBufferAttribute[],
+								loadedMesh: I3JS.Object3D,
+								clips?: I3JS.AnimationClip[] | any,
+								geometry?: I3JS.BufferGeometry,
+								morphTargets?: I3JS.BufferAttribute[],
 								source?: any
 							) => {
-								if (ThreeUtil.isNull(loadedMesh)) {
-									if (ThreeUtil.isNotNull(geometry)) {
+								if (NgxThreeUtil.isNull(loadedMesh)) {
+									if (NgxThreeUtil.isNotNull(geometry)) {
 										geometry.computeVertexNormals();
 										const anyGeometry: any = geometry;
 										if (
@@ -2392,27 +2117,18 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 											anyGeometry['animations'] !== undefined &&
 											anyGeometry['animations'].length > 0
 										) {
-											const morphAnim = new N3JS.MorphAnimMesh(
-												geometry as any,
-												this.getMaterialOne() as any
-											);
+											const morphAnim = new N3JS.MorphAnimMesh(geometry as any, this.getMaterialOne() as any);
 											loadedMesh = morphAnim as any;
 											if (anyGeometry['animations'] !== null) {
 												clips = anyGeometry['animations'];
 											}
 										} else {
-											loadedMesh = new N3JS.Mesh(
-												geometry,
-												this.getMaterialOne()
-											);
+											loadedMesh = new N3JS.Mesh(geometry, this.getMaterialOne());
 										}
-									} else if (ThreeUtil.isNotNull(morphTargets)) {
+									} else if (NgxThreeUtil.isNotNull(morphTargets)) {
 										const baseGeometry = this.getGeometry();
 										baseGeometry.morphAttributes.position = morphTargets;
-										loadedMesh = new N3JS.Mesh(
-											baseGeometry,
-											this.getMaterialOne()
-										);
+										loadedMesh = new N3JS.Mesh(baseGeometry, this.getMaterialOne());
 									}
 								}
 								if (this.castShadow && loadedMesh) {
@@ -2423,32 +2139,28 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 										}
 									});
 								}
-								if (
-									ThreeUtil.isNotNull(this.morphTargets) &&
-									loadedMesh instanceof N3JS.Mesh
-								) {
+								if (NgxThreeUtil.isNotNull(this.morphTargets) && loadedMesh instanceof N3JS.Mesh) {
 									if (loadedMesh.material instanceof N3JS.Material) {
-										(loadedMesh.material as any)['morphTargets'] =
-											this.morphTargets;
+										(loadedMesh.material as any)['morphTargets'] = this.morphTargets;
 									}
 								}
 								this.setUserData('refTarget', loadedMesh);
 								this.setUserData('clips', clips);
 								this.setUserData('storageSource', source);
 								this.clips = clips;
-								if (ThreeUtil.isNull(loadedMesh)) {
+								if (NgxThreeUtil.isNull(loadedMesh)) {
 									loadedMesh = new N3JS.Group();
 								}
-								if (ThreeUtil.isNotNull(loadedMesh)) {
+								if (NgxThreeUtil.isNotNull(loadedMesh)) {
 									if (source instanceof N3JS.Volume) {
 										this.addChanges(['volumeoption']);
 									}
 									loadedMesh.parent = null;
 									this.setMesh(loadedMesh as any);
 									if (
-										ThreeUtil.isNotNull(source) &&
-										ThreeUtil.isNotNull(source.skeleton) &&
-										ThreeUtil.isNotNull(source.skeleton.bones) &&
+										NgxThreeUtil.isNotNull(source) &&
+										NgxThreeUtil.isNotNull(source.skeleton) &&
+										NgxThreeUtil.isNotNull(source.skeleton.bones) &&
 										source.skeleton.bones.length > 0
 									) {
 										this.addParentObject3d(source.skeleton.bones[0]);
@@ -2457,15 +2169,15 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							},
 							this.storageOption
 						);
-					} else if (ThreeUtil.isNotNull(this.sharedMesh)) {
+					} else if (NgxThreeUtil.isNotNull(this.sharedMesh)) {
 						this.unSubscribeRefer('sharedMesh');
 						const mesh = this.sharedMesh.getObject3d();
 						const clips = mesh.userData.clips;
 						const clipMesh = mesh.userData.refTarget || mesh;
-						let clipMeshClone: I3JS.IObject3D = null;
+						let clipMeshClone: I3JS.Object3D = null;
 						this.setUserData('clips', clips);
 						this.setUserData('storageSource', clipMesh.userData.storageSource);
-						if (ThreeUtil.isNotNull(clipMesh)) {
+						if (NgxThreeUtil.isNotNull(clipMesh)) {
 							const oldUserData = clipMesh.userData;
 							clipMesh.userData = {};
 							clipMeshClone = clipMesh.clone(true);
@@ -2482,7 +2194,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 						}
 						this.subscribeRefer(
 							'sharedMesh',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.sharedMesh,
 								() => {
 									this.needUpdate = true;
@@ -2508,15 +2220,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	 * Sets mesh
 	 * @param mesh
 	 */
-	private setMesh(mesh: I3JS.IObject3D) {
+	private setMesh(mesh: I3JS.Object3D) {
 		if (mesh !== null && this.mesh !== mesh) {
-			if (
-				mesh instanceof N3JS.Mesh ||
-				mesh instanceof N3JS.Points ||
-				mesh instanceof N3JS.Sprite
-			) {
+			if (mesh instanceof N3JS.Mesh || mesh instanceof N3JS.Points || mesh instanceof N3JS.Sprite) {
 				if (mesh instanceof N3JS.Mesh || mesh instanceof N3JS.Points) {
-					if (this.geometry instanceof MeshComponent) {
+					if (this.geometry instanceof NgxMeshComponent) {
 						const realMesh = this.geometry.getRealMesh();
 						if (realMesh !== null && realMesh instanceof N3JS.Mesh) {
 							mesh.morphTargetInfluences = realMesh.morphTargetInfluences;
@@ -2529,8 +2237,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 					mesh.receiveShadow = this.receiveShadow;
 					if (this.usePlaneStencil && mesh.material instanceof N3JS.Material) {
 						const clippingMaterial: any = mesh.material;
-						const clippingPlanes =
-							clippingMaterial.clippingPlanes as I3JS.IPlane[];
+						const clippingPlanes = clippingMaterial.clippingPlanes as I3JS.Plane[];
 						if (clippingPlanes !== null && clippingPlanes.length > 0) {
 							const planeGeom = new N3JS.PlaneGeometry(4, 4);
 							const poGroup = new N3JS.Group();
@@ -2548,30 +2255,20 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 								stencilZPass: 'replace',
 							};
 							if (clippingMaterial['color'] !== undefined) {
-								meshStandardMaterialParameters.color = this.getColor(
-									clippingMaterial['color']
-								);
+								meshStandardMaterialParameters.color = this.getColor(clippingMaterial['color']);
 							}
 							if (clippingMaterial['metalness'] !== undefined) {
-								meshStandardMaterialParameters.metalness = this.getMetalness(
-									clippingMaterial['metalness']
-								);
+								meshStandardMaterialParameters.metalness = this.getMetalness(clippingMaterial['metalness']);
 							}
 							if (clippingMaterial['roughness'] !== undefined) {
-								meshStandardMaterialParameters.roughness = this.getRoughness(
-									clippingMaterial['roughness']
-								);
+								meshStandardMaterialParameters.roughness = this.getRoughness(clippingMaterial['roughness']);
 							}
 							clippingPlanes.forEach((plane, idx) => {
-								const group = this.createPlaneStencilGroup(
-									mesh.geometry,
-									plane,
-									idx + 1
-								);
+								const group = this.createPlaneStencilGroup(mesh.geometry, plane, idx + 1);
 								object.add(group);
 								const materialComponent = this.initLocalComponent(
 									'clippingPlanes_' + idx,
-									new MaterialComponent(null)
+									new NgxMaterialComponent(null)
 								);
 								materialComponent.updateInputParams(
 									Object.assign(meshStandardMaterialParameters, {
@@ -2583,11 +2280,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 								po.onBeforeRender = () => {
 									plane.coplanarPoint(po.position);
 									const position = po.position;
-									po.lookAt(
-										position.x - plane.normal.x,
-										position.y - plane.normal.y,
-										position.z - plane.normal.z
-									);
+									po.lookAt(position.x - plane.normal.x, position.y - plane.normal.y, position.z - plane.normal.z);
 								};
 								po.onAfterRender = (renderer) => {
 									renderer.clearStencil();
@@ -2619,10 +2312,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 				case 'reflectorrtt':
 				case 'flow':
 				case 'instancedflow':
-					if (ThreeUtil.isNotNull(this.geometry)) {
+					if (NgxThreeUtil.isNotNull(this.geometry)) {
 						this.subscribeRefer(
 							'geomeryChange',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.geometry,
 								() => {
 									this.needUpdate = true;
@@ -2631,11 +2324,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							)
 						);
 					}
-					if (ThreeUtil.isNotNull(this.geometryList)) {
+					if (NgxThreeUtil.isNotNull(this.geometryList)) {
 						this.geometryList.forEach((geometry) => {
 							this.subscribeReferList(
 								'geomeryListChange',
-								ThreeUtil.getSubscribe(
+								NgxThreeUtil.getSubscribe(
 									geometry,
 									() => {
 										this.needUpdate = true;
@@ -2645,10 +2338,10 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							);
 						});
 					}
-					if (ThreeUtil.isNotNull(this.material)) {
+					if (NgxThreeUtil.isNotNull(this.material)) {
 						this.subscribeRefer(
 							'materialChange',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.material,
 								() => {
 									this.needUpdate = true;
@@ -2657,11 +2350,11 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 							)
 						);
 					}
-					if (ThreeUtil.isNotNull(this.materialList)) {
+					if (NgxThreeUtil.isNotNull(this.materialList)) {
 						this.materialList.forEach((material) => {
 							this.subscribeReferList(
 								'materialListChange',
-								ThreeUtil.getSubscribe(
+								NgxThreeUtil.getSubscribe(
 									material,
 									() => {
 										this.needUpdate = true;
@@ -2676,11 +2369,7 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 		}
 	}
 
-	private createPlaneStencilGroup(
-		geometry: I3JS.IBufferGeometry,
-		plane: I3JS.IPlane,
-		renderOrder: number
-	): I3JS.IGroup {
+	private createPlaneStencilGroup(geometry: I3JS.BufferGeometry, plane: I3JS.Plane, renderOrder: number): I3JS.Group {
 		const group = new N3JS.Group();
 		const baseMat = new N3JS.MeshBasicMaterial();
 		baseMat.depthWrite = false;
@@ -2712,26 +2401,18 @@ export class MeshComponent extends AbstractObject3dComponent implements OnInit {
 	/**
 	 * Helper component of mesh component
 	 */
-	public helperComponent: HelperComponent = null;
+	public helperComponent: NgxHelperComponent = null;
 
 	/**
 	 * Resets helper
 	 */
 	public resetHelper() {
 		if (this.mesh !== null) {
-			if (ThreeUtil.isNotNull(this.helperType)) {
+			if (NgxThreeUtil.isNotNull(this.helperType)) {
 				if (this.helperComponent === null) {
-					this.helperComponent = this.initLocalComponent(
-						'helper',
-						new HelperComponent()
-					);
+					this.helperComponent = this.initLocalComponent('helper', new NgxHelperComponent());
 				}
-				this.helperComponent.updateInputParams(
-					this.helperOptions,
-					true,
-					{},
-					this.helperType
-				);
+				this.helperComponent.updateInputParams(this.helperOptions, true, {}, this.helperType);
 				this.helperComponent.setParent(this.mesh);
 			} else if (this.helperComponent !== null) {
 				this.helperComponent.ngOnDestroy();

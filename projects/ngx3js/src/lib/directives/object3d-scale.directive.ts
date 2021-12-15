@@ -7,16 +7,12 @@ import {
 } from '@angular/core';
 import {
 	AbstractObject3dDirective,
-	AbstractThreeDirective,
-	DirectiveOptions, Object3dFunction
+	AbstractThreeDirective
 } from '../directive.abstract';
-import { I3JS, RendererTimer, ThreeUtil } from '../interface';
-import { AbstractObject3dComponent } from '../object3d.abstract';
+import { I3JS, NgxThreeUtil } from '../interface';
+import { TObject3dFunction, IRendererTimer, IScaleOptions } from '../ngx-interface';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 
-/**
- * Scale options
- */
-export interface ScaleOptions extends DirectiveOptions {}
 /**
  * Scale Directive
  *
@@ -53,15 +49,15 @@ export class ScaleDirective
 	 * Input  of scale directive
 	 */
 	@Input('ngx3jsScale') public ngx3jsScale:
-		| ScaleOptions
-		| Object3dFunction
+		| IScaleOptions
+		| TObject3dFunction
 		| string = 'xyz';
 
 	/**
 	 * Creates an instance of scale directive.
 	 * @param object3d
 	 */
-	constructor(object3d: AbstractObject3dComponent) {
+	constructor(object3d: NgxAbstractObject3dComponent) {
 		super(object3d);
 	}
 
@@ -73,8 +69,8 @@ export class ScaleDirective
 	 * @param changes The changed properties.
 	 */
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes.ngx3jsScale && ThreeUtil.isNotNull(this.ngx3jsScale)) {
-			const options: ScaleOptions = {
+		if (changes.ngx3jsScale && NgxThreeUtil.isNotNull(this.ngx3jsScale)) {
+			const options: IScaleOptions = {
 				type: null,
 				easing: 'linearin',
 				repeat: 'yoyo',
@@ -112,22 +108,22 @@ export class ScaleDirective
 			} else if (typeof this.ngx3jsScale === 'function') {
 				this.setObject3dFunction(this.ngx3jsScale);
 			} else {
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.type)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsScale.type)) {
 					options.type = this.ngx3jsScale.type;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.speed)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsScale.speed)) {
 					options.speed = this.ngx3jsScale.speed;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.easing)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsScale.easing)) {
 					options.easing = this.ngx3jsScale.easing;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.repeat)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsScale.repeat)) {
 					options.repeat = this.ngx3jsScale.repeat;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.start)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsScale.start)) {
 					options.start = this.ngx3jsScale.start;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsScale.end)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsScale.end)) {
 					options.end = this.ngx3jsScale.end;
 				}
 			}
@@ -150,7 +146,7 @@ export class ScaleDirective
 						break;
 					case 'x':
 						this.setObject3dFunction(
-							(object3d: I3JS.IObject3D, _: number, timer: RendererTimer) => {
+							(object3d: I3JS.Object3D, _: number, timer: IRendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.scale.x = deltaValue;
 							}
@@ -158,7 +154,7 @@ export class ScaleDirective
 						break;
 					case 'y':
 						this.setObject3dFunction(
-							(object3d: I3JS.IObject3D, _: number, timer: RendererTimer) => {
+							(object3d: I3JS.Object3D, _: number, timer: IRendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.scale.y = deltaValue;
 							}
@@ -166,7 +162,7 @@ export class ScaleDirective
 						break;
 					case 'z':
 						this.setObject3dFunction(
-							(object3d: I3JS.IObject3D, _: number, timer: RendererTimer) => {
+							(object3d: I3JS.Object3D, _: number, timer: IRendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.scale.z = deltaValue;
 							}
@@ -174,7 +170,7 @@ export class ScaleDirective
 						break;
 					case 'xy':
 						this.setObject3dFunction(
-							(object3d: I3JS.IObject3D, _: number, timer: RendererTimer) => {
+							(object3d: I3JS.Object3D, _: number, timer: IRendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.scale.x = deltaValue;
 								object3d.scale.y = deltaValue;
@@ -183,7 +179,7 @@ export class ScaleDirective
 						break;
 					case 'xz':
 						this.setObject3dFunction(
-							(object3d: I3JS.IObject3D, _: number, timer: RendererTimer) => {
+							(object3d: I3JS.Object3D, _: number, timer: IRendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.scale.x = deltaValue;
 								object3d.scale.z = deltaValue;
@@ -192,7 +188,7 @@ export class ScaleDirective
 						break;
 					case 'yz':
 						this.setObject3dFunction(
-							(object3d: I3JS.IObject3D, _: number, timer: RendererTimer) => {
+							(object3d: I3JS.Object3D, _: number, timer: IRendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.scale.y = deltaValue;
 								object3d.scale.z = deltaValue;
@@ -201,7 +197,7 @@ export class ScaleDirective
 						break;
 					case 'xyz':
 						this.setObject3dFunction(
-							(object3d: I3JS.IObject3D, _: number, timer: RendererTimer) => {
+							(object3d: I3JS.Object3D, _: number, timer: IRendererTimer) => {
 								const deltaValue = easing(timer.delta);
 								object3d.scale.x = deltaValue;
 								object3d.scale.y = deltaValue;

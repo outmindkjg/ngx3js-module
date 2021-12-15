@@ -6,18 +6,17 @@ import {
 	OnInit,
 	Output,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { AbstractObject3dComponent } from '../object3d.abstract';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { IRendererTimer, INgxColor } from '../ngx-interface';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import {
 	I3JS,
-	RendererTimer,
 	N3JS,
-	ThreeColor,
-	ThreeUtil,
+	NgxThreeUtil
 } from './../interface';
-import { LocalStorageService } from './../local-storage.service';
+import { NgxLocalStorageService } from './../local-storage.service';
 import * as THREE_CAMERA from './cameras/three-cameras';
 
 /**
@@ -54,17 +53,17 @@ import * as THREE_CAMERA from './cameras/three-cameras';
 	styleUrls: ['./camera.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => CameraComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxCameraComponent),
 		},
 		{
-			provide: AbstractSubscribeComponent,
-			useExisting: forwardRef(() => CameraComponent),
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxCameraComponent),
 		},
 	],
 })
-export class CameraComponent
-	extends AbstractObject3dComponent
+export class NgxCameraComponent
+	extends NgxAbstractObject3dComponent
 	implements OnInit
 {
 	/**
@@ -243,7 +242,7 @@ export class CameraComponent
 	/**
 	 * Clear the color buffer. Equivalent to calling [.clear](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.clear)( true, false, false ).
 	 */
-	@Input() public clearColor: ThreeColor = null;
+	@Input() public clearColor: INgxColor = null;
 
 	/**
 	 * The clearAlpha of camera component
@@ -294,20 +293,20 @@ export class CameraComponent
 	/**
 	 * The referObject3d of camera component
 	 */
-	@Input() public referObject3d: AbstractObject3dComponent | I3JS.IObject3D =
+	@Input() public referObject3d: NgxAbstractObject3dComponent | I3JS.Object3D =
 		null;
 
 	/**
 	 * The Output of renderer component
 	 */
-	@Output() private onRender: EventEmitter<RendererTimer> =
-		new EventEmitter<RendererTimer>();
+	@Output() private onRender: EventEmitter<IRendererTimer> =
+		new EventEmitter<IRendererTimer>();
 
 	/**
 	 * Creates an instance of camera component.
 	 * @param localStorageService
 	 */
-	constructor(private localStorageService: LocalStorageService) {
+	constructor(private localStorageService: NgxLocalStorageService) {
 		super();
 	}
 
@@ -355,7 +354,7 @@ export class CameraComponent
 	 * @returns fov
 	 */
 	private getFov(def?: number | string): number {
-		const fov = ThreeUtil.getTypeSafe(this.fov, def);
+		const fov = NgxThreeUtil.getTypeSafe(this.fov, def);
 		if (typeof fov === 'string') {
 			return parseFloat(fov);
 		} else {
@@ -373,7 +372,7 @@ export class CameraComponent
 	 * @returns near
 	 */
 	private getNear(def?: number | string): number {
-		const near = ThreeUtil.getTypeSafe(this.near, def);
+		const near = NgxThreeUtil.getTypeSafe(this.near, def);
 		if (typeof near === 'string') {
 			return parseFloat(near);
 		} else {
@@ -389,7 +388,7 @@ export class CameraComponent
 	 * @returns far
 	 */
 	private getFar(def?: number | string): number {
-		const far = ThreeUtil.getTypeSafe(this.far, def);
+		const far = NgxThreeUtil.getTypeSafe(this.far, def);
 		if (typeof far === 'string') {
 			return parseFloat(far);
 		} else {
@@ -403,7 +402,7 @@ export class CameraComponent
 	 * @returns left
 	 */
 	private getLeft(aspect: number): number {
-		return (this.orthoSize / 2) * aspect * ThreeUtil.getTypeSafe(this.left, -1);
+		return (this.orthoSize / 2) * aspect * NgxThreeUtil.getTypeSafe(this.left, -1);
 	}
 
 	/**
@@ -412,7 +411,7 @@ export class CameraComponent
 	 * @returns right
 	 */
 	private getRight(aspect?: number): number {
-		return (this.orthoSize / 2) * aspect * ThreeUtil.getTypeSafe(this.right, 1);
+		return (this.orthoSize / 2) * aspect * NgxThreeUtil.getTypeSafe(this.right, 1);
 	}
 
 	/**
@@ -421,7 +420,7 @@ export class CameraComponent
 	 * @returns top
 	 */
 	private getTop(): number {
-		return (this.orthoSize / 2) * ThreeUtil.getTypeSafe(this.top, 1);
+		return (this.orthoSize / 2) * NgxThreeUtil.getTypeSafe(this.top, 1);
 	}
 
 	/**
@@ -430,7 +429,7 @@ export class CameraComponent
 	 * @returns bottom
 	 */
 	private getBottom(): number {
-		return (this.orthoSize / 2) * ThreeUtil.getTypeSafe(this.bottom, -1);
+		return (this.orthoSize / 2) * NgxThreeUtil.getTypeSafe(this.bottom, -1);
 	}
 
 	/**
@@ -439,7 +438,7 @@ export class CameraComponent
 	 * @returns zoom
 	 */
 	private getZoom(def?: number | string): number {
-		const zoom = ThreeUtil.getTypeSafe(this.zoom, def, 1);
+		const zoom = NgxThreeUtil.getTypeSafe(this.zoom, def, 1);
 		if (typeof zoom === 'number') {
 			return zoom;
 		} else {
@@ -593,8 +592,8 @@ export class CameraComponent
 		cameraSize: number,
 		def?: number | string
 	): number {
-		const baseSize = ThreeUtil.getTypeSafe(size, def);
-		if (ThreeUtil.isNotNull(baseSize)) {
+		const baseSize = NgxThreeUtil.getTypeSafe(size, def);
+		if (NgxThreeUtil.isNotNull(baseSize)) {
 			if (typeof baseSize == 'string') {
 				if (baseSize.indexOf('%') > 0) {
 					const [percent, extra] = baseSize.split('%');
@@ -642,8 +641,8 @@ export class CameraComponent
 	 * @param [def]
 	 * @returns clear color
 	 */
-	private getClearColor(def?: string | number): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.clearColor, def);
+	private getClearColor(def?: string | number): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.clearColor, def);
 	}
 
 	/**
@@ -652,31 +651,31 @@ export class CameraComponent
 	 * @returns clear alpha
 	 */
 	private getClearAlpha(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.clearAlpha, def);
+		return NgxThreeUtil.getTypeSafe(this.clearAlpha, def);
 	}
 
 	/**
 	 * The Camera of camera component
 	 */
-	private camera: I3JS.ICamera | I3JS.IObject3D = null;
+	private camera: I3JS.Camera | I3JS.Object3D = null;
 
 	/**
 	 * The Camera of camera component
 	 */
-	private cameraExtra: I3JS.ICubeCamera[] = null;
+	private cameraExtra: I3JS.CubeCamera[] = null;
 
 	/**
 	 * The Renderer of camera component
 	 */
-	private renderer: I3JS.IRenderer = null;
+	private renderer: I3JS.Renderer = null;
 
 	/**
 	 * Css renderer of camera component
 	 */
 	private cssRenderer:
-		| I3JS.ICSS3DRenderer
-		| I3JS.ICSS2DRenderer
-		| (I3JS.ICSS3DRenderer | I3JS.ICSS2DRenderer)[] = null;
+		| I3JS.CSS3DRenderer
+		| I3JS.CSS2DRenderer
+		| (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[] = null;
 
 	/**
 	 * Renderer scenes of camera component
@@ -687,7 +686,7 @@ export class CameraComponent
 	 * Gets renderer
 	 * @returns renderer
 	 */
-	public getRenderer(): I3JS.IRenderer {
+	public getRenderer(): I3JS.Renderer {
 		return this.renderer;
 	}
 
@@ -698,11 +697,11 @@ export class CameraComponent
 	 * @param rendererScenes
 	 */
 	public setRenderer(
-		renderer: I3JS.IRenderer,
+		renderer: I3JS.Renderer,
 		cssRenderer:
-			| I3JS.ICSS3DRenderer
-			| I3JS.ICSS2DRenderer
-			| (I3JS.ICSS3DRenderer | I3JS.ICSS2DRenderer)[],
+			| I3JS.CSS3DRenderer
+			| I3JS.CSS2DRenderer
+			| (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[],
 		rendererScenes: QueryList<any>
 	) {
 		if (this.cssRenderer !== cssRenderer) {
@@ -720,7 +719,7 @@ export class CameraComponent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D): boolean {
+	public setParent(parent: I3JS.Object3D): boolean {
 		if (super.setParent(parent)) {
 			this.getCamera();
 			return true;
@@ -735,12 +734,12 @@ export class CameraComponent
 	 */
 	public applyChanges3d(changes: string[]) {
 		if (this.camera !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getObject3d();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					[
 						'rigidbody',
@@ -779,11 +778,11 @@ export class CameraComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['viewport']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['viewport']);
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'x',
 					'y',
 					'width',
@@ -791,10 +790,10 @@ export class CameraComponent
 					'viewporttype',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['viewport']);
+				changes = NgxThreeUtil.pushUniq(changes, ['viewport']);
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'near',
 					'far',
 					'aspect',
@@ -806,7 +805,7 @@ export class CameraComponent
 					'bottom',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['changesize']);
+				changes = NgxThreeUtil.pushUniq(changes, ['changesize']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -915,21 +914,21 @@ export class CameraComponent
 	 * Gets size
 	 * @returns size
 	 */
-	public getSize(): I3JS.IVector2 {
+	public getSize(): I3JS.Vector2 {
 		return new N3JS.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
 	/**
 	 * The Raycaster of camera component
 	 */
-	private raycaster: I3JS.IRaycaster = null;
+	private raycaster: I3JS.Raycaster = null;
 
 	/**
 	 * Gets raycaster
 	 * @param [mouse]
 	 * @returns raycaster
 	 */
-	public getRaycaster(mouse: I3JS.IVector2 = null): I3JS.IRaycaster {
+	public getRaycaster(mouse: I3JS.Vector2 = null): I3JS.Raycaster {
 		if (this.raycaster === null) {
 			this.raycaster = new N3JS.Raycaster();
 		}
@@ -947,10 +946,10 @@ export class CameraComponent
 	 * @returns intersections
 	 */
 	public getIntersections(
-		mouse: I3JS.IVector2,
-		mesh: I3JS.IObject3D | I3JS.IObject3D[],
+		mouse: I3JS.Vector2,
+		mesh: I3JS.Object3D | I3JS.Object3D[],
 		recursive: boolean = false
-	): I3JS.IIntersection[] {
+	): I3JS.Intersection[] {
 		const raycaster = this.getRaycaster(mouse);
 		if (mesh instanceof N3JS.Object3D) {
 			return raycaster.intersectObject(mesh, recursive);
@@ -969,10 +968,10 @@ export class CameraComponent
 	 * @returns intersection
 	 */
 	public getIntersection(
-		mouse: I3JS.IVector2,
-		mesh: I3JS.IObject3D | I3JS.IObject3D[],
+		mouse: I3JS.Vector2,
+		mesh: I3JS.Object3D | I3JS.Object3D[],
 		recursive: boolean = false
-	): I3JS.IIntersection {
+	): I3JS.Intersection {
 		const intersects = this.getIntersections(mouse, mesh, recursive);
 		if (intersects !== null && intersects.length > 0) {
 			return intersects[0];
@@ -1043,7 +1042,7 @@ export class CameraComponent
 	 * Gets cube render target
 	 * @returns cube render target
 	 */
-	public getCubeRenderTarget(): I3JS.IWebGLCubeRenderTarget {
+	public getCubeRenderTarget(): I3JS.WebGLCubeRenderTarget {
 		if (this.camera === null) {
 			this.getObject3d();
 		}
@@ -1057,7 +1056,7 @@ export class CameraComponent
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): I3JS.IWebGLCubeRenderTarget {
+	public getTexture(): I3JS.WebGLCubeRenderTarget {
 		return this.getCubeRenderTarget();
 	}
 
@@ -1066,7 +1065,7 @@ export class CameraComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends I3JS.ICamera | I3JS.IObject3D>(): T {
+	public getObject3d<T extends I3JS.Camera | I3JS.Object3D>(): T {
 		return this.getCamera() as any;
 	}
 
@@ -1075,7 +1074,7 @@ export class CameraComponent
 	 * @template T
 	 * @returns camera
 	 */
-	public getCamera<T extends I3JS.ICamera | I3JS.IObject3D>(): T {
+	public getCamera<T extends I3JS.Camera | I3JS.Object3D>(): T {
 		if (this.camera === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.cameraExtra = null;
@@ -1154,7 +1153,7 @@ export class CameraComponent
 						this.getNear(0.1),
 						this.getFar(2000)
 					);
-					if (ThreeUtil.isNotNull(this.zoom)) {
+					if (NgxThreeUtil.isNotNull(this.zoom)) {
 						orthographicCamera.zoom = this.getZoom(1);
 					}
 					this.camera = orthographicCamera;
@@ -1168,9 +1167,9 @@ export class CameraComponent
 						this.getNear(0.1),
 						this.getFar(2000)
 					);
-					if (ThreeUtil.isNotNull(this.focalLength)) {
+					if (NgxThreeUtil.isNotNull(this.focalLength)) {
 						perspectiveCamera.setFocalLength(
-							ThreeUtil.getTypeSafe(this.focalLength, 35)
+							NgxThreeUtil.getTypeSafe(this.focalLength, 35)
 						);
 					}
 					if (this.viewport) {
@@ -1192,7 +1191,7 @@ export class CameraComponent
 			if (this.parentObject3d instanceof N3JS.ArrayCamera) {
 				this.isCameraChild = true;
 				this.parentObject3d.cameras.push(
-					this.camera as I3JS.IPerspectiveCamera
+					this.camera as I3JS.PerspectiveCamera
 				);
 				this.object3d = this.camera as any;
 				this.setObject(this.camera);
@@ -1201,10 +1200,10 @@ export class CameraComponent
 				this.setObject3d(this.camera as any);
 			}
 			this.setUserData('clips', null);
-			if (ThreeUtil.isNotNull(this.storageName)) {
+			if (NgxThreeUtil.isNotNull(this.storageName)) {
 				this.localStorageService.getObject(
 					this.storageName,
-					(_: I3JS.IObject3D, clips?: I3JS.IAnimationClip[]) => {
+					(_: I3JS.Object3D, clips?: I3JS.AnimationClip[]) => {
 						this.setUserData('clips', clips);
 						this.setSubscribeNext('loaded');
 					},
@@ -1221,21 +1220,21 @@ export class CameraComponent
 	 * @param [scenes]
 	 * @returns scene
 	 */
-	public getScene(scenes?: QueryList<any> | any): I3JS.IScene {
+	public getScene(scenes?: QueryList<any> | any): I3JS.Scene {
 		if (
-			ThreeUtil.isNotNull(this.scene) &&
-			ThreeUtil.isNotNull(this.scene.getScene)
+			NgxThreeUtil.isNotNull(this.scene) &&
+			NgxThreeUtil.isNotNull(this.scene.getScene)
 		) {
 			return this.scene.getScene();
 		}
-		if (ThreeUtil.isNotNull(scenes)) {
+		if (NgxThreeUtil.isNotNull(scenes)) {
 			if (scenes instanceof QueryList && scenes.length > 0) {
 				return scenes.first.getScene();
-			} else if (ThreeUtil.isNotNull(scenes.getScene)) {
+			} else if (NgxThreeUtil.isNotNull(scenes.getScene)) {
 				return scenes.getScene();
 			}
 		}
-		if (ThreeUtil.isNotNull(this.rendererScenes)) {
+		if (NgxThreeUtil.isNotNull(this.rendererScenes)) {
 			if (this.rendererScenes.length > 0) {
 				return this.rendererScenes.first.getScene();
 			}
@@ -1254,13 +1253,13 @@ export class CameraComponent
 	 * @returns
 	 */
 	public render(
-		renderer: I3JS.IRenderer,
+		renderer: I3JS.Renderer,
 		cssRenderer:
-			| I3JS.ICSS3DRenderer
-			| I3JS.ICSS2DRenderer
-			| (I3JS.ICSS3DRenderer | I3JS.ICSS2DRenderer)[],
+			| I3JS.CSS3DRenderer
+			| I3JS.CSS2DRenderer
+			| (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[],
 		scenes: QueryList<any> | any,
-		renderTimer: RendererTimer
+		renderTimer: IRendererTimer
 	) {
 		if (
 			!this.active ||
@@ -1271,12 +1270,12 @@ export class CameraComponent
 			return;
 		}
 		const camera = this.getCamera();
-		if (ThreeUtil.isNotNull(this.referObject3d)) {
+		if (NgxThreeUtil.isNotNull(this.referObject3d)) {
 			const object3d =
-				this.referObject3d instanceof AbstractObject3dComponent
+				this.referObject3d instanceof NgxAbstractObject3dComponent
 					? this.referObject3d.getObject3d()
 					: this.referObject3d;
-			if (ThreeUtil.isNotNull(this.object3d)) {
+			if (NgxThreeUtil.isNotNull(this.object3d)) {
 				camera.position.copy(object3d.position);
 				camera.quaternion.copy(object3d.quaternion);
 			}
@@ -1286,7 +1285,7 @@ export class CameraComponent
 				this.camera instanceof N3JS.CubeCamera ||
 				this.camera instanceof N3JS.Group
 			) {
-				let cubeCamera: I3JS.ICubeCamera = null;
+				let cubeCamera: I3JS.CubeCamera = null;
 				if (
 					this.cameraExtra !== null &&
 					this.cameraExtra !== null &&
@@ -1299,10 +1298,10 @@ export class CameraComponent
 				}
 				if (cubeCamera !== null) {
 					cubeCamera.update(renderer, this.getScene(scenes));
-					if (ThreeUtil.isNotNull(this.material)) {
-						const material: any = ThreeUtil.getMaterial(this.material);
+					if (NgxThreeUtil.isNotNull(this.material)) {
+						const material: any = NgxThreeUtil.getMaterial(this.material);
 						if (
-							ThreeUtil.isNotNull(material) &&
+							NgxThreeUtil.isNotNull(material) &&
 							material['envMap'] !== undefined
 						) {
 							material['envMap'] = cubeCamera.renderTarget.texture;
@@ -1311,10 +1310,10 @@ export class CameraComponent
 				}
 				return;
 			}
-			if (ThreeUtil.isNotNull(this.autoClear)) {
+			if (NgxThreeUtil.isNotNull(this.autoClear)) {
 				renderer.autoClear = this.autoClear;
 			}
-			if (ThreeUtil.isNotNull(this.clearColor)) {
+			if (NgxThreeUtil.isNotNull(this.clearColor)) {
 				renderer.setClearColor(this.getClearColor(), this.getClearAlpha(1));
 			}
 		}
@@ -1372,9 +1371,9 @@ export class CameraComponent
 	 * @param scene
 	 */
 	private renderWithScene(
-		renderer: I3JS.IRenderer,
-		camera: I3JS.ICamera,
-		scene: I3JS.IScene
+		renderer: I3JS.Renderer,
+		camera: I3JS.Camera,
+		scene: I3JS.Scene
 	) {
 		if (scene !== null) {
 			try {
@@ -1402,10 +1401,10 @@ export class CameraComponent
 					}
 				}
 				if (renderer instanceof N3JS.WebGLRenderer) {
-					if (ThreeUtil.isNotNull(this.clear) && this.clear) {
+					if (NgxThreeUtil.isNotNull(this.clear) && this.clear) {
 						renderer.clear();
 					}
-					if (ThreeUtil.isNotNull(this.clearDepth) && this.clearDepth) {
+					if (NgxThreeUtil.isNotNull(this.clearDepth) && this.clearDepth) {
 						renderer.clearDepth();
 					}
 				}

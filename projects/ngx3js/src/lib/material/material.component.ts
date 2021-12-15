@@ -7,24 +7,24 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import {
-	RendererTimer,
-	ThreeColor,
-	ThreeTexture,
-	ThreeUniforms,
-	ThreeUtil,
-	N3JS,
-	I3JS,
+	I3JS, N3JS, NgxThreeUtil
 } from '../interface';
-import { LocalStorageService } from '../local-storage.service';
-import { AbstractMaterialComponent } from '../material.abstract';
-import { ShaderComponent } from '../shader/shader.component';
-import { ShaderType, ShaderUtils } from '../shader/shaders/shaderUtils';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { AbstractTextureComponent } from '../texture.abstract';
+import { NgxLocalStorageService } from '../local-storage.service';
+import { NgxAbstractMaterialComponent } from '../material.abstract';
+import {
+	IRendererTimer, IShaderType, INgxColor,
+	INgxTexture,
+	INgxUniforms
+} from '../ngx-interface';
+import { NgxShaderComponent } from '../shader/shader.component';
+import { ShaderUtils } from '../shader/shaders/shaderUtils';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractTextureComponent } from '../texture.abstract';
 import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
+
 
 /**
  * The Material component.
@@ -135,19 +135,16 @@ import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
 	styleUrls: ['./material.component.scss'],
 	providers: [
 		{
-			provide: AbstractMaterialComponent,
-			useExisting: forwardRef(() => MaterialComponent),
+			provide: NgxAbstractMaterialComponent,
+			useExisting: forwardRef(() => NgxMaterialComponent),
 		},
 		{
-			provide: AbstractSubscribeComponent,
-			useExisting: forwardRef(() => MaterialComponent),
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxMaterialComponent),
 		},
 	],
 })
-export class MaterialComponent
-	extends AbstractMaterialComponent
-	implements OnInit, OnDestroy, OnChanges
-{
+export class NgxMaterialComponent extends NgxAbstractMaterialComponent implements OnInit, OnDestroy, OnChanges{
 	/**
 	 * The type if matrial.
 	 *
@@ -192,7 +189,7 @@ export class MaterialComponent
 	/**
 	 * Color of the material, by default set to white (0xffffff).
 	 */
-	@Input() public color: ThreeColor = null;
+	@Input() public color: INgxColor = null;
 
 	/**
 	 * Color of the material multiply (1)
@@ -202,7 +199,7 @@ export class MaterialComponent
 	/**
 	 * Color of the material, by default set to white (0xffffff).
 	 */
-	@Input() public diffuseColor: ThreeColor = null;
+	@Input() public diffuseColor: INgxColor = null;
 
 	/**
 	 * Color of the material multiply (1)
@@ -215,7 +212,7 @@ export class MaterialComponent
 	 * Notice - case insensitive.
 	 *
 	 */
-	@Input() public shader: string | ShaderType = null;
+	@Input() public shader: string | IShaderType = null;
 
 	/**
 	 * An object of the form:
@@ -228,7 +225,7 @@ export class MaterialComponent
 	 * ```
 	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 */
-	@Input() public uniforms: ThreeUniforms = null;
+	@Input() public uniforms: INgxUniforms = null;
 
 	/**
 	 * Vertex shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
@@ -259,7 +256,7 @@ export class MaterialComponent
 	 * Specular color of the material. Default is a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color) set to *0x111111* (very dark grey).
 	 * This defines how shiny the material is and the color of its shine.
 	 */
-	@Input() public specular: ThreeColor = null;
+	@Input() public specular: INgxColor = null;
 
 	/**
 	 * The specularMultiply of material component
@@ -286,7 +283,7 @@ export class MaterialComponent
 	 * Default is black.
 	 *
 	 */
-	@Input() public emissive: ThreeColor = null;
+	@Input() public emissive: INgxColor = null;
 
 	/**
 	 * Emissive (light) color multiply of the material, essentially a solid color unaffected by other lighting.
@@ -501,7 +498,7 @@ export class MaterialComponent
 	 * If a color is assigned to this property, the material will use a special sheen BRDF intended for rendering cloth materials such as velvet.
 	 * The sheen color provides the ability to create two-tone specular materials. *null* by default.
 	 */
-	@Input() public sheen: ThreeColor = null;
+	@Input() public sheen: INgxColor = null;
 
 	/**
 	 * The sheenMultiply of material component
@@ -611,73 +608,73 @@ export class MaterialComponent
 	/**
 	 * The environment map. Default is null.
 	 */
-	@Input() public envMap: ThreeTexture = null;
+	@Input() public envMap: INgxTexture = null;
 
 	/**
 	 * The color map. Default is  null.
 	 */
-	@Input() public map: ThreeTexture = null;
+	@Input() public map: INgxTexture = null;
 
 	/**
 	 * The matcap map. Default is null.
 	 */
-	@Input() public matcap: ThreeTexture = null;
+	@Input() public matcap: INgxTexture = null;
 
 	/**
 	 * Specular map used by the material. Default is null.
 	 */
-	@Input() public specularMap: ThreeTexture = null;
+	@Input() public specularMap: INgxTexture = null;
 
 	/**
 	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
 	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
 	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
-	@Input() public alphaMap: ThreeTexture = null;
+	@Input() public alphaMap: INgxTexture = null;
 
 	/**
 	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
 	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 */
-	@Input() public bumpMap: ThreeTexture = null;
+	@Input() public bumpMap: INgxTexture = null;
 
 	/**
 	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.
 	 * In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 */
-	@Input() public normalMap: ThreeTexture = null;
+	@Input() public normalMap: INgxTexture = null;
 
 	/**
 	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows, block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
-	@Input() public displacementMap: ThreeTexture = null;
+	@Input() public displacementMap: INgxTexture = null;
 
 	/**
 	 * Can be used to enable independent normals for the clear coat layer. Default is *null*.
 	 */
-	@Input() public clearcoatNormalMap: ThreeTexture = null;
+	@Input() public clearcoatNormalMap: INgxTexture = null;
 
 	/**
 	 * The green channel of this texture is used to alter the roughness of the material.
 	 */
-	@Input() public roughnessMap: ThreeTexture = null;
+	@Input() public roughnessMap: INgxTexture = null;
 
 	/**
 	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 */
-	@Input() public lightMap: ThreeTexture = null;
+	@Input() public lightMap: INgxTexture = null;
 
 	/**
 	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
 	 * The aoMap requires a second set of UVs.
 	 */
-	@Input() public aoMap: ThreeTexture = null;
+	@Input() public aoMap: INgxTexture = null;
 
 	/**
 	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
 	 * The aoMap requires a second set of UVs.
 	 */
-	@Input() public diffuseMap: ThreeTexture = null;
+	@Input() public diffuseMap: INgxTexture = null;
 
 	/**
 	 * The environmentType of material component
@@ -697,20 +694,20 @@ export class MaterialComponent
 	/**
 	 * Content children of material component
 	 */
-	@ContentChildren(AbstractTextureComponent)
-	protected textureList: QueryList<AbstractTextureComponent>;
+	@ContentChildren(NgxAbstractTextureComponent)
+	protected textureList: QueryList<NgxAbstractTextureComponent>;
 
 	/**
 	 * Content children of material component
 	 */
-	@ContentChildren(ShaderComponent)
-	private shaderList: QueryList<ShaderComponent>;
+	@ContentChildren(NgxShaderComponent)
+	private shaderList: QueryList<NgxShaderComponent>;
 
 	/**
 	 * Creates an instance of material component.
 	 * @param localStorageService
 	 */
-	constructor(private localStorageService: LocalStorageService) {
+	constructor(private localStorageService: NgxLocalStorageService) {
 		super();
 	}
 
@@ -758,8 +755,8 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns emissive
 	 */
-	private getEmissive(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorMultiplySafe(
+	private getEmissive(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorMultiplySafe(
 			this.emissive,
 			def,
 			this.emissiveMultiply
@@ -772,10 +769,10 @@ export class MaterialComponent
 	 * @param def
 	 * @returns
 	 */
-	private getNormalScale(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(
-			ThreeUtil.getTypeSafe(this.normalScaleX, this.normalScale, 1),
-			ThreeUtil.getTypeSafe(this.normalScaleY, this.normalScale, 1),
+	private getNormalScale(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(
+			NgxThreeUtil.getTypeSafe(this.normalScaleX, this.normalScale, 1),
+			NgxThreeUtil.getTypeSafe(this.normalScaleY, this.normalScale, 1),
 			def
 		);
 	}
@@ -785,8 +782,8 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns reference position
 	 */
-	private getReferencePosition(def?: I3JS.IVector3): I3JS.IVector3 {
-		return ThreeUtil.getVector3Safe(
+	private getReferencePosition(def?: I3JS.Vector3): I3JS.Vector3 {
+		return NgxThreeUtil.getVector3Safe(
 			this.referencePositionX,
 			this.referencePositionY,
 			this.referencePositionZ,
@@ -799,13 +796,13 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns clearcoat normal scale
 	 */
-	private getClearcoatNormalScale(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(
-			ThreeUtil.getTypeSafe(
+	private getClearcoatNormalScale(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(
+			NgxThreeUtil.getTypeSafe(
 				this.clearcoatNormalScaleX,
 				this.clearcoatNormalScale
 			),
-			ThreeUtil.getTypeSafe(
+			NgxThreeUtil.getTypeSafe(
 				this.clearcoatNormalScaleY,
 				this.clearcoatNormalScale
 			),
@@ -819,8 +816,8 @@ export class MaterialComponent
 	 * @param def
 	 * @returns
 	 */
-	private getColor(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorMultiplySafe(this.color, def, this.colorMultiply);
+	private getColor(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorMultiplySafe(this.color, def, this.colorMultiply);
 	}
 
 	/**
@@ -829,8 +826,8 @@ export class MaterialComponent
 	 * @param def
 	 * @returns
 	 */
-	private getDiffuseColor(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorMultiplySafe(
+	private getDiffuseColor(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorMultiplySafe(
 			this.diffuseColor,
 			def,
 			this.diffuseColorMultiply
@@ -842,8 +839,8 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns sheen
 	 */
-	private getSheen(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorMultiplySafe(this.sheen, def, this.sheenMultiply);
+	private getSheen(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorMultiplySafe(this.sheen, def, this.sheenMultiply);
 	}
 
 	/**
@@ -851,8 +848,8 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns specular
 	 */
-	private getSpecular(def?: ThreeColor): I3JS.IColor {
-		return ThreeUtil.getColorMultiplySafe(
+	private getSpecular(def?: INgxColor): I3JS.Color {
+		return NgxThreeUtil.getColorMultiplySafe(
 			this.specular,
 			def,
 			this.specularMultiply
@@ -865,7 +862,7 @@ export class MaterialComponent
 	 * @param color
 	 * @returns
 	 */
-	private getColorNode(color?: I3JS.IColor): any {
+	private getColorNode(color?: I3JS.Color): any {
 		return new N3JS.ColorNode(color as any);
 	}
 
@@ -875,7 +872,7 @@ export class MaterialComponent
 	 * @param value
 	 * @returns
 	 */
-	private getFloatNode(value?: number): I3JS.IFloatNode {
+	private getFloatNode(value?: number): I3JS.FloatNode {
 		return new N3JS.FloatNode(value);
 	}
 
@@ -885,7 +882,7 @@ export class MaterialComponent
 	 * @param value
 	 * @returns
 	 */
-	private getIntNode(value?: number): I3JS.IIntNode {
+	private getIntNode(value?: number): I3JS.IntNode {
 		return new N3JS.IntNode(value);
 	}
 
@@ -895,7 +892,7 @@ export class MaterialComponent
 	 * @param value
 	 * @returns
 	 */
-	private getBoolNode(value?: boolean): I3JS.IBoolNode {
+	private getBoolNode(value?: boolean): I3JS.BoolNode {
 		return new N3JS.BoolNode(value);
 	}
 
@@ -905,7 +902,7 @@ export class MaterialComponent
 	 * @param matrix
 	 * @returns
 	 */
-	private getMatrix3Node(matrix?: I3JS.IMatrix3): I3JS.IMatrix3Node {
+	private getMatrix3Node(matrix?: I3JS.Matrix3): I3JS.Matrix3Node {
 		return new N3JS.Matrix3Node(matrix as any);
 	}
 
@@ -915,7 +912,7 @@ export class MaterialComponent
 	 * @param matrix
 	 * @returns
 	 */
-	private getMatrix4Node(matrix?: I3JS.IMatrix4): I3JS.IMatrix4Node {
+	private getMatrix4Node(matrix?: I3JS.Matrix4): I3JS.Matrix4Node {
 		return new N3JS.Matrix4Node(matrix as any);
 	}
 
@@ -931,7 +928,7 @@ export class MaterialComponent
 		object: object,
 		property: string,
 		type: string
-	): I3JS.IPropertyNode {
+	): I3JS.PropertyNode {
 		return new N3JS.PropertyNode(object, property, type);
 	}
 
@@ -942,8 +939,8 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getScreenNode(
-		uv?: I3JS.IUVNode
-	): I3JS.IScreenNode {
+		uv?: I3JS.UVNode
+	): I3JS.ScreenNode {
 		return new N3JS.ScreenNode(uv);
 	}
 
@@ -957,11 +954,11 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getTextureNode(
-		value: I3JS.ITexture,
-		uv?: I3JS.IUVNode,
-		bias?: I3JS.INode,
+		value: I3JS.Texture,
+		uv?: I3JS.UVNode,
+		bias?: I3JS.Node,
 		project?: boolean
-	): I3JS.ITextureNode {
+	): I3JS.TextureNode {
 		return new N3JS.TextureNode(value as any, uv, bias, project);
 	}
 
@@ -974,10 +971,10 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getCubeTextureNode(
-		value: I3JS.ICubeTexture,
-		uv?: I3JS.IUVNode,
-		bias?: I3JS.INode
-	): I3JS.ICubeTextureNode {
+		value: I3JS.CubeTexture,
+		uv?: I3JS.UVNode,
+		bias?: I3JS.Node
+	): I3JS.CubeTextureNode {
 		return new N3JS.CubeTextureNode(value as any, uv, bias);
 	}
 
@@ -988,8 +985,8 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getReflectorNode(
-		mirror: I3JS.IReflectorRTT
-	): I3JS.IReflectorNode {
+		mirror: I3JS.ReflectorRTT
+	): I3JS.ReflectorNode {
 		return new N3JS.ReflectorNode(mirror);
 	}
 
@@ -1001,9 +998,9 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getSwitchNode(
-		node: I3JS.INode,
+		node: I3JS.Node,
 		components?: string
-	): I3JS.ISwitchNode {
+	): I3JS.SwitchNode {
 		return new N3JS.SwitchNode(node, components);
 	}
 
@@ -1015,9 +1012,9 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getReflectorRTT(
-		geometry: I3JS.IBufferGeometry,
-		options?: I3JS.IReflectorOptions
-	): I3JS.IReflectorRTT {
+		geometry: I3JS.BufferGeometry,
+		options?: I3JS.ReflectorOptions
+	): I3JS.ReflectorRTT {
 		return new N3JS.ReflectorRTT(geometry as any, options);
 	}
 
@@ -1027,7 +1024,7 @@ export class MaterialComponent
 	 * @param time
 	 * @returns
 	 */
-	private getNodeFrame(time: number = 0): I3JS.INodeFrame {
+	private getNodeFrame(time: number = 0): I3JS.NodeFrame {
 		return new N3JS.NodeFrame(time);
 	}
 
@@ -1042,12 +1039,12 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getCondNode(
-		a: I3JS.INode,
-		b: I3JS.INode,
+		a: I3JS.Node,
+		b: I3JS.Node,
 		op: string,
-		ifNode?: I3JS.INode,
-		elseNode?: I3JS.INode
-	): I3JS.ICondNode {
+		ifNode?: I3JS.Node,
+		elseNode?: I3JS.Node
+	): I3JS.CondNode {
 		return new N3JS.CondNode(a, b, op, ifNode, elseNode);
 	}
 
@@ -1061,11 +1058,11 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getMathNode(
-		a: I3JS.INode,
-		bOrMethod: I3JS.INode | string,
-		cOrMethod?: I3JS.INode | string,
+		a: I3JS.Node,
+		bOrMethod: I3JS.Node | string,
+		cOrMethod?: I3JS.Node | string,
 		method?: string
-	): I3JS.IMathNode {
+	): I3JS.MathNode {
 		return new N3JS.MathNode(a, bOrMethod, cOrMethod, method);
 	}
 
@@ -1078,10 +1075,10 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getOperatorNode(
-		a: I3JS.INode,
-		b: I3JS.INode,
+		a: I3JS.Node,
+		b: I3JS.Node,
 		op: string
-	): I3JS.IOperatorNode {
+	): I3JS.OperatorNode {
 		return new N3JS.OperatorNode(a, b, op);
 	}
 
@@ -1097,7 +1094,7 @@ export class MaterialComponent
 		scale?: number,
 		scope?: string,
 		timeScale?: boolean
-	): I3JS.ITimerNode {
+	): I3JS.TimerNode {
 		return new N3JS.TimerNode(scale, scope, timeScale);
 	}
 
@@ -1115,7 +1112,7 @@ export class MaterialComponent
 		extensions?: object,
 		keywords?: object,
 		type?: string
-	): I3JS.IFunctionNode {
+	): I3JS.FunctionNode {
 		return new N3JS.FunctionNode(
 			src,
 			includes,
@@ -1133,9 +1130,9 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getFunctionCallNode(
-		func: I3JS.IFunctionNode,
-		inputs?: I3JS.INode[]
-	): I3JS.IFunctionCallNode {
+		func: I3JS.FunctionNode,
+		inputs?: I3JS.Node[]
+	): I3JS.FunctionCallNode {
 		return new N3JS.FunctionCallNode(func, inputs);
 	}
 
@@ -1145,7 +1142,7 @@ export class MaterialComponent
 	 * @param scope
 	 * @returns
 	 */
-	private getPositionNode(scope?: string): I3JS.IPositionNode {
+	private getPositionNode(scope?: string): I3JS.PositionNode {
 		return new N3JS.PositionNode(scope);
 	}
 
@@ -1155,7 +1152,7 @@ export class MaterialComponent
 	 * @param index
 	 * @returns
 	 */
-	private getUVNode(index?: number): I3JS.IUVNode {
+	private getUVNode(index?: number): I3JS.UVNode {
 		return new N3JS.UVNode(index);
 	}
 
@@ -1171,9 +1168,9 @@ export class MaterialComponent
 	private getRTTNode(
 		width: number,
 		height: number,
-		input: I3JS.ITextureNode,
-		options?: I3JS.IRTTNodeOptions
-	): I3JS.IRTTNode {
+		input: I3JS.TextureNode,
+		options?: I3JS.RTTNodeOptions
+	): I3JS.RTTNode {
 		return new N3JS.RTTNode(width, height, input, options);
 	}
 
@@ -1185,9 +1182,9 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getVector2Node(
-		x: number | I3JS.IVector2,
+		x: number | I3JS.Vector2,
 		y?: number
-	): I3JS.IVector2Node {
+	): I3JS.Vector2Node {
 		return new N3JS.Vector2Node(x as any, y);
 	}
 
@@ -1200,10 +1197,10 @@ export class MaterialComponent
 	 * @returns
 	 */
 	private getVector3Node(
-		x: number | I3JS.IVector3 | I3JS.IColor,
+		x: number | I3JS.Vector3 | I3JS.Color,
 		y?: number,
 		z?: number
-	): I3JS.IVector3Node {
+	): I3JS.Vector3Node {
 		if (x instanceof N3JS.Color) {
 			return new N3JS.Vector3Node(x.r, x.g, x.b);
 		} else {
@@ -1223,28 +1220,28 @@ export class MaterialComponent
 		y: number,
 		z: number,
 		w: number
-	): I3JS.IVector4Node {
+	): I3JS.Vector4Node {
 		return new N3JS.Vector4Node(x, y, z, w);
 	}
 
 	/**
 	 * Blur mirror of material component
 	 */
-	private _blurMirror: I3JS.IBlurNode = null;
+	private _blurMirror: I3JS.BlurNode = null;
 
 	/**
 	 * Gets environment
 	 * @returns environment
 	 */
-	private getEnvironment(): I3JS.INode {
+	private getEnvironment(): I3JS.Node {
 		this._blurMirror = null;
 		this.unSubscribeRefer('mirrorSize');
 		switch (this.environmentType.toLowerCase()) {
 			case 'mirror':
-				const size = ThreeUtil.getRendererSize()
+				const size = NgxThreeUtil.getRendererSize()
 					.clone()
 					.multiplyScalar(window.devicePixelRatio);
-				const groundMirror: I3JS.IReflectorRTT = ThreeUtil.getMesh(
+				const groundMirror: I3JS.ReflectorRTT = NgxThreeUtil.getMesh(
 					this.reflector
 				) as any;
 				const mirror: any = this.getReflectorNode(groundMirror);
@@ -1280,7 +1277,7 @@ export class MaterialComponent
 				blurMirror.radius = this.getVector2Node(0, 0); // .x = blurMirror.radius.y = 0;
 				this.subscribeRefer(
 					'mirrorSize',
-					ThreeUtil.getSizeSubscribe().subscribe((v2) => {
+					NgxThreeUtil.getSizeSubscribe().subscribe((v2) => {
 						if (this._blurMirror !== null) {
 							const size = v2.clone().multiplyScalar(window.devicePixelRatio);
 							this._blurMirror.size.set(size.x, size.y);
@@ -1298,7 +1295,7 @@ export class MaterialComponent
 	 * Gets environment alpha
 	 * @returns environment alpha
 	 */
-	private getEnvironmentAlpha(): I3JS.INode {
+	private getEnvironmentAlpha(): I3JS.Node {
 		switch (this.environmentType.toLowerCase()) {
 			case 'mirror':
 				return this.getSwitchNode(
@@ -1320,7 +1317,7 @@ export class MaterialComponent
 		drawBuffers?: boolean;
 		shaderTextureLOD?: boolean;
 	}): any {
-		const extensionsList = ThreeUtil.getTypeSafe(this.extensions, '').split(
+		const extensionsList = NgxThreeUtil.getTypeSafe(this.extensions, '').split(
 			','
 		);
 		extensionsList.forEach((txt) => {
@@ -1364,16 +1361,16 @@ export class MaterialComponent
 	} {
 		const uniforms: {
 			[key: string]: I3JS.IUniform;
-		} = ThreeUtil.getTypeSafe(this.uniforms, def);
+		} = NgxThreeUtil.getTypeSafe(this.uniforms, def);
 		const resultUniforms = targetUniforms
 			? targetUniforms
 			: ShaderUtils.getUniforms(this.shader);
 		Object.entries(uniforms).forEach(([key, value]) => {
 			const anyValue: any = value;
 			if (
-				ThreeUtil.isNotNull(value) &&
-				ThreeUtil.isNotNull(anyValue['type']) &&
-				ThreeUtil.isNotNull(anyValue['value'])
+				NgxThreeUtil.isNotNull(value) &&
+				NgxThreeUtil.isNotNull(anyValue['type']) &&
+				NgxThreeUtil.isNotNull(anyValue['value'])
 			) {
 				const valueType: string = anyValue['type'];
 				const valueValue: any = anyValue['value'];
@@ -1383,17 +1380,17 @@ export class MaterialComponent
 					case 'matrixworldinverse':
 					case 'matrixworld':
 					case 'matrix':
-						if (ThreeUtil.isNotNull(valueValue.getObject3d)) {
+						if (NgxThreeUtil.isNotNull(valueValue.getObject3d)) {
 							this.unSubscribeRefer('unforms_' + key);
-							const object3d: I3JS.IObject3D = valueValue.getObject3d();
+							const object3d: I3JS.Object3D = valueValue.getObject3d();
 							resultUniforms[key] = {
-								value: ThreeUtil.getMatrix4Safe(object3d, valueType),
+								value: NgxThreeUtil.getMatrix4Safe(object3d, valueType),
 							};
-							if (ThreeUtil.isNotNull(valueValue.getSubscribe)) {
+							if (NgxThreeUtil.isNotNull(valueValue.getSubscribe)) {
 								this.subscribeRefer(
 									'unforms_' + key,
 									valueValue.getSubscribe().subscribe((e: any) => {
-										resultUniforms[key].value = ThreeUtil.getMatrix4Safe(
+										resultUniforms[key].value = NgxThreeUtil.getMatrix4Safe(
 											e,
 											valueType
 										);
@@ -1408,12 +1405,12 @@ export class MaterialComponent
 						break;
 					case 'vector2':
 					case 'v2':
-						if (ThreeUtil.isNotNull(valueValue.getSize)) {
+						if (NgxThreeUtil.isNotNull(valueValue.getSize)) {
 							this.unSubscribeRefer('unforms_' + key);
 							resultUniforms[key] = {
 								value: valueValue.getSize(),
 							};
-							if (ThreeUtil.isNotNull(valueValue.sizeSubscribe)) {
+							if (NgxThreeUtil.isNotNull(valueValue.sizeSubscribe)) {
 								this.subscribeRefer(
 									'unforms_' + key,
 									valueValue.sizeSubscribe().subscribe((e: any) => {
@@ -1423,7 +1420,7 @@ export class MaterialComponent
 							}
 						} else {
 							resultUniforms[key] = {
-								value: ThreeUtil.getVector2Safe(
+								value: NgxThreeUtil.getVector2Safe(
 									valueValue[0],
 									valueValue[1],
 									new N3JS.Vector2()
@@ -1435,7 +1432,7 @@ export class MaterialComponent
 					case 'vector':
 					case 'v3':
 						resultUniforms[key] = {
-							value: ThreeUtil.getVector3Safe(
+							value: NgxThreeUtil.getVector3Safe(
 								valueValue[0],
 								valueValue[1],
 								valueValue[2],
@@ -1445,7 +1442,7 @@ export class MaterialComponent
 						break;
 					case 'color':
 						resultUniforms[key] = {
-							value: ThreeUtil.getColorSafe(valueValue, 0xffffff),
+							value: NgxThreeUtil.getColorSafe(valueValue, 0xffffff),
 						};
 						break;
 					case 'image':
@@ -1458,7 +1455,7 @@ export class MaterialComponent
 					case 'video':
 					case 'videotexture':
 						resultUniforms[key] = {
-							value: AbstractTextureComponent.getTextureImageOption(
+							value: NgxAbstractTextureComponent.getTextureImageOption(
 								valueValue,
 								anyValue['options'],
 								valueType.toLowerCase()
@@ -1469,7 +1466,7 @@ export class MaterialComponent
 					case 'texturelist':
 					case 'imagearray':
 					case 'texturearray':
-						const textureList: I3JS.ITexture[] = [];
+						const textureList: I3JS.Texture[] = [];
 						const texturePathList: string[] = [];
 						const textureOption = anyValue['options'];
 						if (typeof valueValue === 'string') {
@@ -1478,7 +1475,7 @@ export class MaterialComponent
 									texturePathList.push(path);
 								}
 							});
-						} else if (ThreeUtil.isNotNull(valueValue.forEach)) {
+						} else if (NgxThreeUtil.isNotNull(valueValue.forEach)) {
 							valueValue.forEach((path: any) => {
 								if (path !== '' && path.length > 3) {
 									texturePathList.push(path);
@@ -1487,7 +1484,7 @@ export class MaterialComponent
 						}
 						texturePathList.forEach((texturePath) => {
 							textureList.push(
-								AbstractTextureComponent.getTextureImageOption(
+								NgxAbstractTextureComponent.getTextureImageOption(
 									texturePath,
 									textureOption,
 									'texture'
@@ -1515,8 +1512,8 @@ export class MaterialComponent
 						resultUniforms[key] = { value: valueValue };
 						break;
 				}
-			} else if (ThreeUtil.isNotNull(value) && value['value'] !== undefined) {
-				if (value['value'] instanceof AbstractTextureComponent) {
+			} else if (NgxThreeUtil.isNotNull(value) && value['value'] !== undefined) {
+				if (value['value'] instanceof NgxAbstractTextureComponent) {
 					resultUniforms[key] = {
 						value: value['value'].getTexture(),
 					};
@@ -1524,14 +1521,14 @@ export class MaterialComponent
 					resultUniforms[key] = value;
 				}
 			} else {
-				if (value instanceof AbstractTextureComponent) {
+				if (value instanceof NgxAbstractTextureComponent) {
 					resultUniforms[key] = { value: value.getTexture() };
 				} else {
 					resultUniforms[key] = { value: value };
 				}
 			}
 		});
-		if (ThreeUtil.isNotNull(this.textureList)) {
+		if (NgxThreeUtil.isNotNull(this.textureList)) {
 			this.textureList.forEach((texture) => {
 				const textureType = (texture.type + '..').split('.');
 				switch (textureType[0].toLowerCase()) {
@@ -1566,16 +1563,16 @@ export class MaterialComponent
 	 *
 	 * @returns shader material parameters
 	 */
-	private getShaderMaterialParameters(): I3JS.IShaderMaterialParameters {
+	private getShaderMaterialParameters(): I3JS.ShaderMaterialParameters {
 		return this.getMaterialParameters({
-			linewidth: ThreeUtil.getTypeSafe(this.linewidth),
-			wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-			wireframeLinewidth: ThreeUtil.getTypeSafe(this.wireframeLinewidth),
-			lights: ThreeUtil.getTypeSafe(this.lights),
-			clipping: ThreeUtil.getTypeSafe(this.clipping),
+			linewidth: NgxThreeUtil.getTypeSafe(this.linewidth),
+			wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+			wireframeLinewidth: NgxThreeUtil.getTypeSafe(this.wireframeLinewidth),
+			lights: NgxThreeUtil.getTypeSafe(this.lights),
+			clipping: NgxThreeUtil.getTypeSafe(this.clipping),
 			// skinning: this.getSkinning(),
-			// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-			// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+			// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+			// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
 		});
 	}
 
@@ -1585,15 +1582,15 @@ export class MaterialComponent
 	 * @returns shader material update
 	 */
 	private getShaderMaterialUpdate(
-		shaderMaterial: I3JS.IShaderMaterial
-	): I3JS.IShaderMaterial {
+		shaderMaterial: I3JS.ShaderMaterial
+	): I3JS.ShaderMaterial {
 		this.getUniforms({}, shaderMaterial.uniforms);
-		if (ThreeUtil.isNotNull(this.glslVersion)) {
-			shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(
+		if (NgxThreeUtil.isNotNull(this.glslVersion)) {
+			shaderMaterial.glslVersion = NgxThreeUtil.getGlslVersionSafe(
 				this.glslVersion
 			);
 		}
-		if (ThreeUtil.isNotNull(this.extensions)) {
+		if (NgxThreeUtil.isNotNull(this.extensions)) {
 			this.getExtensions(shaderMaterial.extensions);
 		}
 		this.setAssignUniforms(shaderMaterial.uniforms);
@@ -1605,7 +1602,7 @@ export class MaterialComponent
 	 * @param resultUniforms
 	 */
 	private setAssignUniforms(resultUniforms: { [key: string]: I3JS.IUniform }) {
-		if (ThreeUtil.isNotNull(this.uniforms)) {
+		if (NgxThreeUtil.isNotNull(this.uniforms)) {
 			Object.entries(resultUniforms).forEach(([key, value]) => {
 				this.uniforms[key] = value;
 			});
@@ -1617,8 +1614,8 @@ export class MaterialComponent
 	 * @param [def]
 	 * @returns resolution
 	 */
-	private getResolution(def?: I3JS.IVector2): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(this.resolutionX, this.resolutionY, def);
+	private getResolution(def?: I3JS.Vector2): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(this.resolutionX, this.resolutionY, def);
 	}
 
 	/**
@@ -1629,20 +1626,20 @@ export class MaterialComponent
 	private getShader(type: string) {
 		if (type === 'x-shader/x-vertex') {
 			if (
-				ThreeUtil.isNotNull(this.vertexShader) ||
-				ThreeUtil.isNotNull(this.shader)
+				NgxThreeUtil.isNotNull(this.vertexShader) ||
+				NgxThreeUtil.isNotNull(this.shader)
 			) {
 				return ShaderUtils.getVertexShader(
-					ThreeUtil.getTypeSafe(this.vertexShader, this.shader)
+					NgxThreeUtil.getTypeSafe(this.vertexShader, this.shader)
 				);
 			}
 		} else if (type === 'x-shader/x-fragment') {
 			if (
-				ThreeUtil.isNotNull(this.fragmentShader) ||
-				ThreeUtil.isNotNull(this.shader)
+				NgxThreeUtil.isNotNull(this.fragmentShader) ||
+				NgxThreeUtil.isNotNull(this.shader)
 			) {
 				return ShaderUtils.getFragmentShader(
-					ThreeUtil.getTypeSafe(this.fragmentShader, this.shader)
+					NgxThreeUtil.getTypeSafe(this.fragmentShader, this.shader)
 				);
 			}
 		}
@@ -1662,51 +1659,51 @@ export class MaterialComponent
 	 * @param type
 	 * @returns texture
 	 */
-	protected getTexture(type: string): I3JS.ITexture {
-		let texture: I3JS.ITexture = null;
+	protected getTexture(type: string): I3JS.Texture {
+		let texture: I3JS.Texture = null;
 		switch (type.toLowerCase()) {
 			case 'envmap':
-				if (ThreeUtil.isNotNull(this.envMap)) {
+				if (NgxThreeUtil.isNotNull(this.envMap)) {
 					texture = this.getTextureOption(this.envMap, 'envMap');
 				}
 				break;
 			case 'diffusemap':
-				if (ThreeUtil.isNotNull(this.diffuseMap)) {
+				if (NgxThreeUtil.isNotNull(this.diffuseMap)) {
 					texture = this.getTextureOption(this.diffuseMap, 'diffuseMap');
 				}
 				break;
 			case 'map':
-				if (ThreeUtil.isNotNull(this.map)) {
+				if (NgxThreeUtil.isNotNull(this.map)) {
 					texture = this.getTextureOption(this.map, 'map');
 				}
 				break;
 			case 'specularmap':
-				if (ThreeUtil.isNotNull(this.specularMap)) {
+				if (NgxThreeUtil.isNotNull(this.specularMap)) {
 					texture = this.getTextureOption(this.specularMap, 'specularMap');
 				}
 				break;
 			case 'alphamap':
-				if (ThreeUtil.isNotNull(this.alphaMap)) {
+				if (NgxThreeUtil.isNotNull(this.alphaMap)) {
 					texture = this.getTextureOption(this.alphaMap, 'alphaMap');
 				}
 				break;
 			case 'bumpmap':
-				if (ThreeUtil.isNotNull(this.bumpMap)) {
+				if (NgxThreeUtil.isNotNull(this.bumpMap)) {
 					texture = this.getTextureOption(this.bumpMap, 'bumpMap');
 				}
 				break;
 			case 'normalmap':
-				if (ThreeUtil.isNotNull(this.normalMap)) {
+				if (NgxThreeUtil.isNotNull(this.normalMap)) {
 					texture = this.getTextureOption(this.normalMap, 'normalMap');
 				}
 				break;
 			case 'aomap':
-				if (ThreeUtil.isNotNull(this.aoMap)) {
+				if (NgxThreeUtil.isNotNull(this.aoMap)) {
 					texture = this.getTextureOption(this.aoMap, 'aoMap');
 				}
 				break;
 			case 'displacementmap':
-				if (ThreeUtil.isNotNull(this.displacementMap)) {
+				if (NgxThreeUtil.isNotNull(this.displacementMap)) {
 					texture = this.getTextureOption(
 						this.displacementMap,
 						'displacementMap'
@@ -1714,7 +1711,7 @@ export class MaterialComponent
 				}
 				break;
 			case 'clearcoatnormalmap':
-				if (ThreeUtil.isNotNull(this.clearcoatNormalMap)) {
+				if (NgxThreeUtil.isNotNull(this.clearcoatNormalMap)) {
 					texture = this.getTextureOption(
 						this.clearcoatNormalMap,
 						'clearcoatNormalMap'
@@ -1722,29 +1719,29 @@ export class MaterialComponent
 				}
 				break;
 			case 'roughnessmap':
-				if (ThreeUtil.isNotNull(this.roughnessMap)) {
+				if (NgxThreeUtil.isNotNull(this.roughnessMap)) {
 					texture = this.getTextureOption(this.roughnessMap, 'roughnessMap');
 				}
 				break;
 			case 'lightmap':
-				if (ThreeUtil.isNotNull(this.lightMap)) {
+				if (NgxThreeUtil.isNotNull(this.lightMap)) {
 					texture = this.getTextureOption(this.lightMap, 'lightMap');
 				}
 				break;
 		}
 		if (
-			ThreeUtil.isNull(texture) &&
-			ThreeUtil.isNotNull(this.textureList) &&
+			NgxThreeUtil.isNull(texture) &&
+			NgxThreeUtil.isNotNull(this.textureList) &&
 			this.textureList.length > 0
 		) {
 			const foundTexture = this.textureList.find((texture) => {
 				return texture.isTexture(type);
 			});
-			if (ThreeUtil.isNotNull(foundTexture)) {
+			if (NgxThreeUtil.isNotNull(foundTexture)) {
 				texture = foundTexture.getTexture();
 			}
 		}
-		if (ThreeUtil.isNotNull(texture)) {
+		if (NgxThreeUtil.isNotNull(texture)) {
 			if (texture instanceof N3JS.VideoTexture) {
 				if (texture.image.readyState === 0) {
 					return undefined;
@@ -1765,20 +1762,20 @@ export class MaterialComponent
 		textureType: string,
 		textureList: {
 			type: string;
-			component: AbstractTextureComponent;
+			component: NgxAbstractTextureComponent;
 		}[]
 	) {
-		if (ThreeUtil.isNotNull(texture) && this.material !== null) {
-			if (texture instanceof AbstractTextureComponent) {
+		if (NgxThreeUtil.isNotNull(texture) && this.material !== null) {
+			if (texture instanceof NgxAbstractTextureComponent) {
 				textureList.push({
 					type: textureType,
 					component: texture,
 				});
 			} else {
-				const foundTexture = ThreeUtil.getTexture(texture, textureType, false);
+				const foundTexture = NgxThreeUtil.getTexture(texture, textureType, false);
 				const anyMaterial: any = this.material;
 				if (anyMaterial[textureType] !== undefined) {
-					if (ThreeUtil.isNotNull(foundTexture)) {
+					if (NgxThreeUtil.isNotNull(foundTexture)) {
 						if (this.material instanceof N3JS.NodeMaterial) {
 							if (
 								anyMaterial[textureType] instanceof N3JS.TextureNode
@@ -1806,8 +1803,8 @@ export class MaterialComponent
 		}
 	}
 
-	private _cachedTextureList: AbstractTextureComponent[] = [];
-	private _cachedUniformTextureList: AbstractTextureComponent[] = [];
+	private _cachedTextureList: NgxAbstractTextureComponent[] = [];
+	private _cachedUniformTextureList: NgxAbstractTextureComponent[] = [];
 
 	/**
 	 * Apply changes to material
@@ -1817,12 +1814,12 @@ export class MaterialComponent
 	 */
 	protected applyChanges(changes: string[]): void {
 		if (this.material !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getMaterial();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					[
 						'color',
@@ -1902,11 +1899,11 @@ export class MaterialComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['texture']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['texture']);
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'map',
 					'envmap',
 					'matcap',
@@ -1918,50 +1915,50 @@ export class MaterialComponent
 					'displacementmap',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['texture']);
+				changes = NgxThreeUtil.pushUniq(changes, ['texture']);
 			}
-			if (ThreeUtil.isIndexOf(changes, 'colormultiply')) {
-				changes = ThreeUtil.pushUniq(changes, ['color']);
+			if (NgxThreeUtil.isIndexOf(changes, 'colormultiply')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['color']);
 			}
-			if (ThreeUtil.isIndexOf(changes, 'emissivemultiply')) {
-				changes = ThreeUtil.pushUniq(changes, ['emissive']);
+			if (NgxThreeUtil.isIndexOf(changes, 'emissivemultiply')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['emissive']);
 			}
-			if (ThreeUtil.isIndexOf(changes, 'specularmultiply')) {
-				changes = ThreeUtil.pushUniq(changes, ['specular']);
+			if (NgxThreeUtil.isIndexOf(changes, 'specularmultiply')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['specular']);
 			}
-			if (ThreeUtil.isIndexOf(changes, 'sheenmultiply')) {
-				changes = ThreeUtil.pushUniq(changes, ['sheen']);
+			if (NgxThreeUtil.isIndexOf(changes, 'sheenmultiply')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['sheen']);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['normalscalex', 'normalscaley'])) {
-				changes = ThreeUtil.pushUniq(changes, ['normalscale']);
+			if (NgxThreeUtil.isIndexOf(changes, ['normalscalex', 'normalscaley'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['normalscale']);
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'referencepositionx',
 					'referencepositiony',
 					'referencepositionz',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['referenceposition']);
+				changes = NgxThreeUtil.pushUniq(changes, ['referenceposition']);
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'clearcoatnormalscalex',
 					'clearcoatnormalscaley',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['clearcoatnormalscale']);
+				changes = NgxThreeUtil.pushUniq(changes, ['clearcoatnormalscale']);
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'clearcoatnormalscalex',
 					'clearcoatnormalscaley',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['clearcoatnormalscale']);
+				changes = NgxThreeUtil.pushUniq(changes, ['clearcoatnormalscale']);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['resolutionx', 'resolutiony'])) {
-				changes = ThreeUtil.pushUniq(changes, ['resolution']);
+			if (NgxThreeUtil.isIndexOf(changes, ['resolutionx', 'resolutiony'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['resolution']);
 			}
 			const anyMaterial: any = this.material;
 			changes.forEach((change) => {
@@ -1969,16 +1966,16 @@ export class MaterialComponent
 					case 'uniforms':
 						const newUniformTextureList: {
 							type: string;
-							component: AbstractTextureComponent;
+							component: NgxAbstractTextureComponent;
 						}[] = [];
-						if (ThreeUtil.isNotNull(this.uniforms)) {
+						if (NgxThreeUtil.isNotNull(this.uniforms)) {
 							const uniforms = this.uniforms;
 							Object.entries(uniforms).forEach(([key, value]) => {
 								const anyValue: any = value;
 								if (
-									ThreeUtil.isNotNull(value) &&
-									ThreeUtil.isNotNull(anyValue['type']) &&
-									ThreeUtil.isNotNull(anyValue['value'])
+									NgxThreeUtil.isNotNull(value) &&
+									NgxThreeUtil.isNotNull(anyValue['type']) &&
+									NgxThreeUtil.isNotNull(anyValue['value'])
 								) {
 									const valueType: string = anyValue['type'];
 									const valueValue: any = anyValue['value'];
@@ -1992,7 +1989,7 @@ export class MaterialComponent
 										case 'datatexture':
 										case 'video':
 										case 'videotexture':
-											if (valueValue instanceof AbstractTextureComponent) {
+											if (valueValue instanceof NgxAbstractTextureComponent) {
 												newUniformTextureList.push({
 													type: 'uniforms.' + key,
 													component: valueValue,
@@ -2009,17 +2006,17 @@ export class MaterialComponent
 											break;
 									}
 								} else if (
-									ThreeUtil.isNotNull(value) &&
+									NgxThreeUtil.isNotNull(value) &&
 									value['value'] !== undefined
 								) {
-									if (value['value'] instanceof AbstractTextureComponent) {
+									if (value['value'] instanceof NgxAbstractTextureComponent) {
 										newUniformTextureList.push({
 											type: 'uniforms.' + key,
 											component: value['value'],
 										});
 									}
 								} else {
-									if (value instanceof AbstractTextureComponent) {
+									if (value instanceof NgxAbstractTextureComponent) {
 										newUniformTextureList.push({
 											type: 'uniforms.' + key,
 											component: value['value'],
@@ -2028,7 +2025,7 @@ export class MaterialComponent
 								}
 							});
 						}
-						const cachedUniformTextureList: AbstractTextureComponent[] = [];
+						const cachedUniformTextureList: NgxAbstractTextureComponent[] = [];
 						newUniformTextureList.forEach((texture) => {
 							cachedUniformTextureList.push(texture.component);
 						});
@@ -2050,7 +2047,7 @@ export class MaterialComponent
 					case 'texture':
 						const newTextureList: {
 							type: string;
-							component: AbstractTextureComponent;
+							component: NgxAbstractTextureComponent;
 						}[] = [];
 						this.synkTexture(this.envMap, 'envMap', newTextureList);
 						this.synkTexture(this.matcap, 'matcap', newTextureList);
@@ -2065,7 +2062,7 @@ export class MaterialComponent
 							'displacementMap',
 							newTextureList
 						);
-						if (ThreeUtil.isNotNull(this.textureList)) {
+						if (NgxThreeUtil.isNotNull(this.textureList)) {
 							this.textureList.forEach((texture) => {
 								newTextureList.push({
 									type: 'auto',
@@ -2073,7 +2070,7 @@ export class MaterialComponent
 								});
 							});
 						}
-						const cachedTextureList: AbstractTextureComponent[] = [];
+						const cachedTextureList: NgxAbstractTextureComponent[] = [];
 						newTextureList.forEach((texture) => {
 							cachedTextureList.push(texture.component);
 						});
@@ -2091,7 +2088,7 @@ export class MaterialComponent
 						break;
 					case 'color':
 						if (
-							ThreeUtil.isNotNull(this.color) &&
+							NgxThreeUtil.isNotNull(this.color) &&
 							anyMaterial['color'] !== undefined
 						) {
 							if (anyMaterial['color'] instanceof N3JS.ColorNode) {
@@ -2103,16 +2100,16 @@ export class MaterialComponent
 						break;
 					case 'lights':
 						if (
-							ThreeUtil.isNotNull(this.lights) &&
+							NgxThreeUtil.isNotNull(this.lights) &&
 							anyMaterial['lights'] !== undefined
 						) {
 							if (anyMaterial['lights'] instanceof N3JS.BoolNode) {
-								anyMaterial['lights'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['lights'].value = NgxThreeUtil.getTypeSafe(
 									this.lights,
 									true
 								);
 							} else {
-								anyMaterial['lights'] = ThreeUtil.getTypeSafe(
+								anyMaterial['lights'] = NgxThreeUtil.getTypeSafe(
 									this.lights,
 									true
 								);
@@ -2121,16 +2118,16 @@ export class MaterialComponent
 						break;
 					case 'clipping':
 						if (
-							ThreeUtil.isNotNull(this.clipping) &&
+							NgxThreeUtil.isNotNull(this.clipping) &&
 							anyMaterial['clipping'] !== undefined
 						) {
 							if (anyMaterial['clipping'] instanceof N3JS.BoolNode) {
-								anyMaterial['clipping'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['clipping'].value = NgxThreeUtil.getTypeSafe(
 									this.clipping,
 									true
 								);
 							} else {
-								anyMaterial['clipping'] = ThreeUtil.getTypeSafe(
+								anyMaterial['clipping'] = NgxThreeUtil.getTypeSafe(
 									this.clipping,
 									true
 								);
@@ -2139,18 +2136,18 @@ export class MaterialComponent
 						break;
 					case 'wireframe':
 						if (
-							ThreeUtil.isNotNull(this.wireframe) &&
+							NgxThreeUtil.isNotNull(this.wireframe) &&
 							anyMaterial['wireframe'] !== undefined
 						) {
 							if (
 								anyMaterial['wireframe'] instanceof N3JS.BoolNode
 							) {
-								anyMaterial['wireframe'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['wireframe'].value = NgxThreeUtil.getTypeSafe(
 									this.wireframe,
 									false
 								);
 							} else {
-								anyMaterial['wireframe'] = ThreeUtil.getTypeSafe(
+								anyMaterial['wireframe'] = NgxThreeUtil.getTypeSafe(
 									this.wireframe,
 									false
 								);
@@ -2159,7 +2156,7 @@ export class MaterialComponent
 						break;
 					case 'specular':
 						if (
-							ThreeUtil.isNotNull(this.specular) &&
+							NgxThreeUtil.isNotNull(this.specular) &&
 							anyMaterial['specular'] !== undefined
 						) {
 							if (
@@ -2173,18 +2170,18 @@ export class MaterialComponent
 						break;
 					case 'shininess':
 						if (
-							ThreeUtil.isNotNull(this.shininess) &&
+							NgxThreeUtil.isNotNull(this.shininess) &&
 							anyMaterial['shininess'] !== undefined
 						) {
 							if (
 								anyMaterial['shininess'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['shininess'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['shininess'].value = NgxThreeUtil.getTypeSafe(
 									this.shininess,
 									1
 								);
 							} else {
-								anyMaterial['shininess'] = ThreeUtil.getTypeSafe(
+								anyMaterial['shininess'] = NgxThreeUtil.getTypeSafe(
 									this.shininess,
 									1
 								);
@@ -2193,19 +2190,19 @@ export class MaterialComponent
 						break;
 					case 'lightmapintensity':
 						if (
-							ThreeUtil.isNotNull(this.lightMapIntensity) &&
+							NgxThreeUtil.isNotNull(this.lightMapIntensity) &&
 							anyMaterial['lightMapIntensity'] !== undefined
 						) {
 							if (
 								anyMaterial['lightMapIntensity'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['lightMapIntensity'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['lightMapIntensity'].value = NgxThreeUtil.getTypeSafe(
 									this.lightMapIntensity,
 									1
 								);
 							} else {
-								anyMaterial['lightMapIntensity'] = ThreeUtil.getTypeSafe(
+								anyMaterial['lightMapIntensity'] = NgxThreeUtil.getTypeSafe(
 									this.lightMapIntensity,
 									1
 								);
@@ -2214,19 +2211,19 @@ export class MaterialComponent
 						break;
 					case 'aomapintensity':
 						if (
-							ThreeUtil.isNotNull(this.aoMapIntensity) &&
+							NgxThreeUtil.isNotNull(this.aoMapIntensity) &&
 							anyMaterial['aoMapIntensity'] !== undefined
 						) {
 							if (
 								anyMaterial['aoMapIntensity'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['aoMapIntensity'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['aoMapIntensity'].value = NgxThreeUtil.getTypeSafe(
 									this.aoMapIntensity,
 									1
 								);
 							} else {
-								anyMaterial['aoMapIntensity'] = ThreeUtil.getTypeSafe(
+								anyMaterial['aoMapIntensity'] = NgxThreeUtil.getTypeSafe(
 									this.aoMapIntensity,
 									1
 								);
@@ -2235,7 +2232,7 @@ export class MaterialComponent
 						break;
 					case 'emissive':
 						if (
-							ThreeUtil.isNotNull(this.emissive) &&
+							NgxThreeUtil.isNotNull(this.emissive) &&
 							anyMaterial['emissive'] !== undefined
 						) {
 							if (
@@ -2249,19 +2246,19 @@ export class MaterialComponent
 						break;
 					case 'emissiveintensity':
 						if (
-							ThreeUtil.isNotNull(this.emissiveIntensity) &&
+							NgxThreeUtil.isNotNull(this.emissiveIntensity) &&
 							anyMaterial['emissiveIntensity'] !== undefined
 						) {
 							if (
 								anyMaterial['emissiveIntensity'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['emissiveIntensity'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['emissiveIntensity'].value = NgxThreeUtil.getTypeSafe(
 									this.emissiveIntensity,
 									1
 								);
 							} else {
-								anyMaterial['emissiveIntensity'] = ThreeUtil.getTypeSafe(
+								anyMaterial['emissiveIntensity'] = NgxThreeUtil.getTypeSafe(
 									this.emissiveIntensity,
 									1
 								);
@@ -2270,18 +2267,18 @@ export class MaterialComponent
 						break;
 					case 'bumpscale':
 						if (
-							ThreeUtil.isNotNull(this.bumpScale) &&
+							NgxThreeUtil.isNotNull(this.bumpScale) &&
 							anyMaterial['bumpScale'] !== undefined
 						) {
 							if (
 								anyMaterial['bumpScale'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['bumpScale'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['bumpScale'].value = NgxThreeUtil.getTypeSafe(
 									this.bumpScale,
 									1
 								);
 							} else {
-								anyMaterial['bumpScale'] = ThreeUtil.getTypeSafe(
+								anyMaterial['bumpScale'] = NgxThreeUtil.getTypeSafe(
 									this.bumpScale,
 									1
 								);
@@ -2290,17 +2287,17 @@ export class MaterialComponent
 						break;
 					case 'normalmaptype':
 						if (
-							ThreeUtil.isNotNull(this.normalMapType) &&
+							NgxThreeUtil.isNotNull(this.normalMapType) &&
 							anyMaterial['normalMapType'] !== undefined
 						) {
-							anyMaterial['normalMapType'] = ThreeUtil.getNormalMapTypeSafe(
+							anyMaterial['normalMapType'] = NgxThreeUtil.getNormalMapTypeSafe(
 								this.normalMapType
 							);
 						}
 						break;
 					case 'normalscale':
 						if (
-							ThreeUtil.isNotNull(this.roughness) &&
+							NgxThreeUtil.isNotNull(this.roughness) &&
 							anyMaterial['normalScale'] !== undefined
 						) {
 							if (
@@ -2315,19 +2312,19 @@ export class MaterialComponent
 						break;
 					case 'displacementscale':
 						if (
-							ThreeUtil.isNotNull(this.displacementScale) &&
+							NgxThreeUtil.isNotNull(this.displacementScale) &&
 							anyMaterial['displacementScale'] !== undefined
 						) {
 							if (
 								anyMaterial['displacementScale'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['displacementScale'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['displacementScale'].value = NgxThreeUtil.getTypeSafe(
 									this.displacementScale,
 									1
 								);
 							} else {
-								anyMaterial['displacementScale'] = ThreeUtil.getTypeSafe(
+								anyMaterial['displacementScale'] = NgxThreeUtil.getTypeSafe(
 									this.displacementScale,
 									1
 								);
@@ -2336,19 +2333,19 @@ export class MaterialComponent
 						break;
 					case 'displacementbias':
 						if (
-							ThreeUtil.isNotNull(this.displacementBias) &&
+							NgxThreeUtil.isNotNull(this.displacementBias) &&
 							anyMaterial['displacementBias'] !== undefined
 						) {
 							if (
 								anyMaterial['displacementBias'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['displacementBias'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['displacementBias'].value = NgxThreeUtil.getTypeSafe(
 									this.displacementBias,
 									1
 								);
 							} else {
-								anyMaterial['displacementBias'] = ThreeUtil.getTypeSafe(
+								anyMaterial['displacementBias'] = NgxThreeUtil.getTypeSafe(
 									this.displacementBias,
 									1
 								);
@@ -2357,26 +2354,26 @@ export class MaterialComponent
 						break;
 					case 'combine':
 						if (
-							ThreeUtil.isNotNull(this.combine) &&
+							NgxThreeUtil.isNotNull(this.combine) &&
 							anyMaterial['combine'] !== undefined
 						) {
-							anyMaterial['combine'] = ThreeUtil.getCombineSafe(this.combine);
+							anyMaterial['combine'] = NgxThreeUtil.getCombineSafe(this.combine);
 						}
 						break;
 					case 'reflectivity':
 						if (
-							ThreeUtil.isNotNull(this.reflectivity) &&
+							NgxThreeUtil.isNotNull(this.reflectivity) &&
 							anyMaterial['reflectivity'] !== undefined
 						) {
 							if (
 								anyMaterial['reflectivity'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['reflectivity'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['reflectivity'].value = NgxThreeUtil.getTypeSafe(
 									this.reflectivity,
 									1
 								);
 							} else {
-								anyMaterial['reflectivity'] = ThreeUtil.getTypeSafe(
+								anyMaterial['reflectivity'] = NgxThreeUtil.getTypeSafe(
 									this.reflectivity,
 									1
 								);
@@ -2385,19 +2382,19 @@ export class MaterialComponent
 						break;
 					case 'refractionratio':
 						if (
-							ThreeUtil.isNotNull(this.refractionRatio) &&
+							NgxThreeUtil.isNotNull(this.refractionRatio) &&
 							anyMaterial['refractionRatio'] !== undefined
 						) {
 							if (
 								anyMaterial['refractionRatio'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['refractionRatio'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['refractionRatio'].value = NgxThreeUtil.getTypeSafe(
 									this.refractionRatio,
 									1
 								);
 							} else {
-								anyMaterial['refractionRatio'] = ThreeUtil.getTypeSafe(
+								anyMaterial['refractionRatio'] = NgxThreeUtil.getTypeSafe(
 									this.refractionRatio,
 									1
 								);
@@ -2406,19 +2403,19 @@ export class MaterialComponent
 						break;
 					case 'wireframelinewidth':
 						if (
-							ThreeUtil.isNotNull(this.wireframeLinewidth) &&
+							NgxThreeUtil.isNotNull(this.wireframeLinewidth) &&
 							anyMaterial['wireframeLinewidth'] !== undefined
 						) {
 							if (
 								anyMaterial['wireframeLinewidth'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['wireframeLinewidth'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['wireframeLinewidth'].value = NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth,
 									1
 								);
 							} else {
-								anyMaterial['wireframeLinewidth'] = ThreeUtil.getTypeSafe(
+								anyMaterial['wireframeLinewidth'] = NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth,
 									1
 								);
@@ -2427,10 +2424,10 @@ export class MaterialComponent
 						break;
 					case 'wireframelinecap':
 						if (
-							ThreeUtil.isNotNull(this.wireframeLinecap) &&
+							NgxThreeUtil.isNotNull(this.wireframeLinecap) &&
 							anyMaterial['wireframeLinecap'] !== undefined
 						) {
-							anyMaterial['wireframeLinecap'] = ThreeUtil.getTypeSafe(
+							anyMaterial['wireframeLinecap'] = NgxThreeUtil.getTypeSafe(
 								this.wireframeLinecap,
 								'round'
 							);
@@ -2438,10 +2435,10 @@ export class MaterialComponent
 						break;
 					case 'wireframelinejoin':
 						if (
-							ThreeUtil.isNotNull(this.wireframeLinejoin) &&
+							NgxThreeUtil.isNotNull(this.wireframeLinejoin) &&
 							anyMaterial['wireframeLinejoin'] !== undefined
 						) {
-							anyMaterial['wireframeLinejoin'] = ThreeUtil.getTypeSafe(
+							anyMaterial['wireframeLinejoin'] = NgxThreeUtil.getTypeSafe(
 								this.wireframeLinejoin,
 								'round'
 							);
@@ -2449,18 +2446,18 @@ export class MaterialComponent
 						break;
 					case 'morphtargets':
 						if (
-							ThreeUtil.isNotNull(this.morphTargets) &&
+							NgxThreeUtil.isNotNull(this.morphTargets) &&
 							anyMaterial['morphTargets'] !== undefined
 						) {
 							if (
 								anyMaterial['morphTargets'] instanceof N3JS.BoolNode
 							) {
-								anyMaterial['morphTargets'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['morphTargets'].value = NgxThreeUtil.getTypeSafe(
 									this.morphTargets,
 									false
 								);
 							} else {
-								anyMaterial['morphTargets'] = ThreeUtil.getTypeSafe(
+								anyMaterial['morphTargets'] = NgxThreeUtil.getTypeSafe(
 									this.morphTargets,
 									false
 								);
@@ -2469,18 +2466,18 @@ export class MaterialComponent
 						break;
 					case 'morphNormals':
 						if (
-							ThreeUtil.isNotNull(this.morphNormals) &&
+							NgxThreeUtil.isNotNull(this.morphNormals) &&
 							anyMaterial['morphNormals'] !== undefined
 						) {
 							if (
 								anyMaterial['morphNormals'] instanceof N3JS.BoolNode
 							) {
-								anyMaterial['morphNormals'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['morphNormals'].value = NgxThreeUtil.getTypeSafe(
 									this.morphNormals,
 									false
 								);
 							} else {
-								anyMaterial['morphNormals'] = ThreeUtil.getTypeSafe(
+								anyMaterial['morphNormals'] = NgxThreeUtil.getTypeSafe(
 									this.morphNormals,
 									false
 								);
@@ -2489,18 +2486,18 @@ export class MaterialComponent
 						break;
 					case 'linewidth':
 						if (
-							ThreeUtil.isNotNull(this.linewidth) &&
+							NgxThreeUtil.isNotNull(this.linewidth) &&
 							anyMaterial['linewidth'] !== undefined
 						) {
 							if (
 								anyMaterial['linewidth'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['linewidth'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['linewidth'].value = NgxThreeUtil.getTypeSafe(
 									this.linewidth,
 									1
 								);
 							} else {
-								anyMaterial['linewidth'] = ThreeUtil.getTypeSafe(
+								anyMaterial['linewidth'] = NgxThreeUtil.getTypeSafe(
 									this.linewidth,
 									1
 								);
@@ -2509,50 +2506,50 @@ export class MaterialComponent
 						break;
 					case 'linecap':
 						if (
-							ThreeUtil.isNotNull(this.linecap) &&
+							NgxThreeUtil.isNotNull(this.linecap) &&
 							anyMaterial['linecap'] !== undefined
 						) {
-							anyMaterial['linecap'] = ThreeUtil.getTypeSafe(this.linecap);
+							anyMaterial['linecap'] = NgxThreeUtil.getTypeSafe(this.linecap);
 						}
 						break;
 					case 'linejoin':
 						if (
-							ThreeUtil.isNotNull(this.linejoin) &&
+							NgxThreeUtil.isNotNull(this.linejoin) &&
 							anyMaterial['linejoin'] !== undefined
 						) {
-							anyMaterial['linejoin'] = ThreeUtil.getTypeSafe(this.linejoin);
+							anyMaterial['linejoin'] = NgxThreeUtil.getTypeSafe(this.linejoin);
 						}
 
 						break;
 					case 'scale':
 						if (
-							ThreeUtil.isNotNull(this.scale) &&
+							NgxThreeUtil.isNotNull(this.scale) &&
 							anyMaterial['scale'] !== undefined
 						) {
 							if (anyMaterial['scale'] instanceof N3JS.FloatNode) {
-								anyMaterial['scale'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['scale'].value = NgxThreeUtil.getTypeSafe(
 									this.scale,
 									1
 								);
 							} else {
-								anyMaterial['scale'] = ThreeUtil.getTypeSafe(this.scale, 1);
+								anyMaterial['scale'] = NgxThreeUtil.getTypeSafe(this.scale, 1);
 							}
 						}
 						break;
 					case 'dashsize':
 						if (
-							ThreeUtil.isNotNull(this.dashSize) &&
+							NgxThreeUtil.isNotNull(this.dashSize) &&
 							anyMaterial['dashSize'] !== undefined
 						) {
 							if (
 								anyMaterial['dashSize'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['dashSize'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['dashSize'].value = NgxThreeUtil.getTypeSafe(
 									this.dashSize,
 									1
 								);
 							} else {
-								anyMaterial['dashSize'] = ThreeUtil.getTypeSafe(
+								anyMaterial['dashSize'] = NgxThreeUtil.getTypeSafe(
 									this.dashSize,
 									1
 								);
@@ -2561,43 +2558,43 @@ export class MaterialComponent
 						break;
 					case 'gapsize':
 						if (
-							ThreeUtil.isNotNull(this.gapSize) &&
+							NgxThreeUtil.isNotNull(this.gapSize) &&
 							anyMaterial['gapSize'] !== undefined
 						) {
 							if (anyMaterial['gapSize'] instanceof N3JS.FloatNode) {
-								anyMaterial['gapSize'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['gapSize'].value = NgxThreeUtil.getTypeSafe(
 									this.gapSize,
 									1
 								);
 							} else {
-								anyMaterial['gapSize'] = ThreeUtil.getTypeSafe(this.gapSize, 1);
+								anyMaterial['gapSize'] = NgxThreeUtil.getTypeSafe(this.gapSize, 1);
 							}
 						}
 						break;
 					case 'depthpacking':
 						if (
-							ThreeUtil.isNotNull(this.depthPacking) &&
+							NgxThreeUtil.isNotNull(this.depthPacking) &&
 							anyMaterial['depthPacking'] !== undefined
 						) {
-							anyMaterial['depthPacking'] = ThreeUtil.getDepthPackingSafe(
+							anyMaterial['depthPacking'] = NgxThreeUtil.getDepthPackingSafe(
 								this.depthPacking
 							);
 						}
 						break;
 					case 'fardistance':
 						if (
-							ThreeUtil.isNotNull(this.farDistance) &&
+							NgxThreeUtil.isNotNull(this.farDistance) &&
 							anyMaterial['farDistance'] !== undefined
 						) {
 							if (
 								anyMaterial['farDistance'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['farDistance'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['farDistance'].value = NgxThreeUtil.getTypeSafe(
 									this.farDistance,
 									1
 								);
 							} else {
-								anyMaterial['farDistance'] = ThreeUtil.getTypeSafe(
+								anyMaterial['farDistance'] = NgxThreeUtil.getTypeSafe(
 									this.farDistance,
 									1
 								);
@@ -2606,18 +2603,18 @@ export class MaterialComponent
 						break;
 					case 'neardistance':
 						if (
-							ThreeUtil.isNotNull(this.nearDistance) &&
+							NgxThreeUtil.isNotNull(this.nearDistance) &&
 							anyMaterial['nearDistance'] !== undefined
 						) {
 							if (
 								anyMaterial['nearDistance'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['nearDistance'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['nearDistance'].value = NgxThreeUtil.getTypeSafe(
 									this.nearDistance,
 									1
 								);
 							} else {
-								anyMaterial['nearDistance'] = ThreeUtil.getTypeSafe(
+								anyMaterial['nearDistance'] = NgxThreeUtil.getTypeSafe(
 									this.nearDistance,
 									1
 								);
@@ -2626,9 +2623,9 @@ export class MaterialComponent
 						break;
 					case 'referenceposition':
 						if (
-							ThreeUtil.isNotNull(this.referencePositionX) &&
-							ThreeUtil.isNotNull(this.referencePositionY) &&
-							ThreeUtil.isNotNull(this.referencePositionZ) &&
+							NgxThreeUtil.isNotNull(this.referencePositionX) &&
+							NgxThreeUtil.isNotNull(this.referencePositionY) &&
+							NgxThreeUtil.isNotNull(this.referencePositionZ) &&
 							anyMaterial['referencePosition'] !== undefined
 						) {
 							if (
@@ -2643,18 +2640,18 @@ export class MaterialComponent
 						break;
 					case 'clearcoat':
 						if (
-							ThreeUtil.isNotNull(this.clearcoat) &&
+							NgxThreeUtil.isNotNull(this.clearcoat) &&
 							anyMaterial['clearcoat'] !== undefined
 						) {
 							if (
 								anyMaterial['clearcoat'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['clearcoat'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['clearcoat'].value = NgxThreeUtil.getTypeSafe(
 									this.clearcoat,
 									1
 								);
 							} else {
-								anyMaterial['clearcoat'] = ThreeUtil.getTypeSafe(
+								anyMaterial['clearcoat'] = NgxThreeUtil.getTypeSafe(
 									this.clearcoat,
 									1
 								);
@@ -2663,19 +2660,19 @@ export class MaterialComponent
 						break;
 					case 'clearcoatroughness':
 						if (
-							ThreeUtil.isNotNull(this.clearcoatRoughness) &&
+							NgxThreeUtil.isNotNull(this.clearcoatRoughness) &&
 							anyMaterial['clearcoatRoughness'] !== undefined
 						) {
 							if (
 								anyMaterial['clearcoatRoughness'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['clearcoatRoughness'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['clearcoatRoughness'].value = NgxThreeUtil.getTypeSafe(
 									this.clearcoatRoughness,
 									1
 								);
 							} else {
-								anyMaterial['clearcoatRoughness'] = ThreeUtil.getTypeSafe(
+								anyMaterial['clearcoatRoughness'] = NgxThreeUtil.getTypeSafe(
 									this.clearcoatRoughness,
 									1
 								);
@@ -2684,9 +2681,9 @@ export class MaterialComponent
 						break;
 					case 'clearcoatNormalScale':
 						if (
-							ThreeUtil.isNotNull(this.clearcoatNormalScale) &&
-							ThreeUtil.isNotNull(this.clearcoatNormalScaleX) &&
-							ThreeUtil.isNotNull(this.clearcoatNormalScaleY) &&
+							NgxThreeUtil.isNotNull(this.clearcoatNormalScale) &&
+							NgxThreeUtil.isNotNull(this.clearcoatNormalScaleX) &&
+							NgxThreeUtil.isNotNull(this.clearcoatNormalScaleY) &&
 							anyMaterial['clearcoatNormalScale'] !== undefined
 						) {
 							if (
@@ -2703,7 +2700,7 @@ export class MaterialComponent
 						break;
 					case 'sheen':
 						if (
-							ThreeUtil.isNotNull(this.sheen) &&
+							NgxThreeUtil.isNotNull(this.sheen) &&
 							anyMaterial['sheen'] !== undefined
 						) {
 							if (anyMaterial['sheen'] instanceof N3JS.ColorNode) {
@@ -2715,18 +2712,18 @@ export class MaterialComponent
 						break;
 					case 'transmission':
 						if (
-							ThreeUtil.isNotNull(this.transmission) &&
+							NgxThreeUtil.isNotNull(this.transmission) &&
 							anyMaterial['transmission'] !== undefined
 						) {
 							if (
 								anyMaterial['transmission'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['transmission'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['transmission'].value = NgxThreeUtil.getTypeSafe(
 									this.transmission,
 									1
 								);
 							} else {
-								anyMaterial['transmission'] = ThreeUtil.getTypeSafe(
+								anyMaterial['transmission'] = NgxThreeUtil.getTypeSafe(
 									this.transmission,
 									1
 								);
@@ -2735,18 +2732,18 @@ export class MaterialComponent
 						break;
 					case 'roughness':
 						if (
-							ThreeUtil.isNotNull(this.roughness) &&
+							NgxThreeUtil.isNotNull(this.roughness) &&
 							anyMaterial['roughness'] !== undefined
 						) {
 							if (
 								anyMaterial['roughness'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['roughness'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['roughness'].value = NgxThreeUtil.getTypeSafe(
 									this.roughness,
 									1
 								);
 							} else {
-								anyMaterial['roughness'] = ThreeUtil.getTypeSafe(
+								anyMaterial['roughness'] = NgxThreeUtil.getTypeSafe(
 									this.roughness,
 									1
 								);
@@ -2755,18 +2752,18 @@ export class MaterialComponent
 						break;
 					case 'metalness':
 						if (
-							ThreeUtil.isNotNull(this.metalness) &&
+							NgxThreeUtil.isNotNull(this.metalness) &&
 							anyMaterial['metalness'] !== undefined
 						) {
 							if (
 								anyMaterial['metalness'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['metalness'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['metalness'].value = NgxThreeUtil.getTypeSafe(
 									this.metalness,
 									1
 								);
 							} else {
-								anyMaterial['metalness'] = ThreeUtil.getTypeSafe(
+								anyMaterial['metalness'] = NgxThreeUtil.getTypeSafe(
 									this.metalness,
 									1
 								);
@@ -2776,19 +2773,19 @@ export class MaterialComponent
 						break;
 					case 'envmapintensity':
 						if (
-							ThreeUtil.isNotNull(this.envMapIntensity) &&
+							NgxThreeUtil.isNotNull(this.envMapIntensity) &&
 							anyMaterial['envMapIntensity'] !== undefined
 						) {
 							if (
 								anyMaterial['envMapIntensity'] instanceof
 								N3JS.FloatNode
 							) {
-								anyMaterial['envMapIntensity'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['envMapIntensity'].value = NgxThreeUtil.getTypeSafe(
 									this.envMapIntensity,
 									1
 								);
 							} else {
-								anyMaterial['envMapIntensity'] = ThreeUtil.getTypeSafe(
+								anyMaterial['envMapIntensity'] = NgxThreeUtil.getTypeSafe(
 									this.envMapIntensity,
 									1
 								);
@@ -2797,18 +2794,18 @@ export class MaterialComponent
 						break;
 					case 'vertextangents':
 						if (
-							ThreeUtil.isNotNull(this.vertexTangents) &&
+							NgxThreeUtil.isNotNull(this.vertexTangents) &&
 							anyMaterial['vertexTangents'] !== undefined
 						) {
 							if (
 								anyMaterial['vertexTangents'] instanceof
 								N3JS.BoolNode
 							) {
-								anyMaterial['vertexTangents'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['vertexTangents'].value = NgxThreeUtil.getTypeSafe(
 									this.vertexTangents
 								);
 							} else {
-								anyMaterial['vertexTangents'] = ThreeUtil.getTypeSafe(
+								anyMaterial['vertexTangents'] = NgxThreeUtil.getTypeSafe(
 									this.vertexTangents
 								);
 							}
@@ -2816,46 +2813,46 @@ export class MaterialComponent
 						break;
 					case 'rotation':
 						if (
-							ThreeUtil.isNotNull(this.rotation) &&
+							NgxThreeUtil.isNotNull(this.rotation) &&
 							anyMaterial['rotation'] !== undefined
 						) {
 							if (
 								anyMaterial['rotation'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['rotation'].value = ThreeUtil.getAngleSafe(
+								anyMaterial['rotation'].value = NgxThreeUtil.getAngleSafe(
 									this.rotation
 								);
 							} else {
-								anyMaterial['rotation'] = ThreeUtil.getAngleSafe(this.rotation);
+								anyMaterial['rotation'] = NgxThreeUtil.getAngleSafe(this.rotation);
 							}
 						}
 						break;
 					case 'size':
 						if (
-							ThreeUtil.isNotNull(this.size) &&
+							NgxThreeUtil.isNotNull(this.size) &&
 							anyMaterial['size'] !== undefined
 						) {
 							if (anyMaterial['size'] instanceof N3JS.FloatNode) {
-								anyMaterial['size'].value = ThreeUtil.getTypeSafe(this.size, 1);
+								anyMaterial['size'].value = NgxThreeUtil.getTypeSafe(this.size, 1);
 							} else {
-								anyMaterial['size'] = ThreeUtil.getTypeSafe(this.size, 1);
+								anyMaterial['size'] = NgxThreeUtil.getTypeSafe(this.size, 1);
 							}
 						}
 						break;
 					case 'sizeattenuation':
 						if (
-							ThreeUtil.isNotNull(this.sizeAttenuation) &&
+							NgxThreeUtil.isNotNull(this.sizeAttenuation) &&
 							anyMaterial['sizeAttenuation'] !== undefined
 						) {
 							if (
 								anyMaterial['sizeAttenuation'] instanceof
 								N3JS.BoolNode
 							) {
-								anyMaterial['sizeAttenuation'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['sizeAttenuation'].value = NgxThreeUtil.getTypeSafe(
 									this.sizeAttenuation
 								);
 							} else {
-								anyMaterial['sizeAttenuation'] = ThreeUtil.getTypeSafe(
+								anyMaterial['sizeAttenuation'] = NgxThreeUtil.getTypeSafe(
 									this.sizeAttenuation
 								);
 							}
@@ -2863,32 +2860,32 @@ export class MaterialComponent
 						break;
 					case 'dashed':
 						if (
-							ThreeUtil.isNotNull(this.dashed) &&
+							NgxThreeUtil.isNotNull(this.dashed) &&
 							anyMaterial['dashed'] !== undefined
 						) {
 							if (anyMaterial['dashed'] instanceof N3JS.BoolNode) {
-								anyMaterial['dashed'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['dashed'].value = NgxThreeUtil.getTypeSafe(
 									this.dashed
 								);
 							} else {
-								anyMaterial['dashed'] = ThreeUtil.getTypeSafe(this.dashed);
+								anyMaterial['dashed'] = NgxThreeUtil.getTypeSafe(this.dashed);
 							}
 						}
 						break;
 					case 'dashscale':
 						if (
-							ThreeUtil.isNotNull(this.dashScale) &&
+							NgxThreeUtil.isNotNull(this.dashScale) &&
 							anyMaterial['dashScale'] !== undefined
 						) {
 							if (
 								anyMaterial['dashScale'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['dashScale'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['dashScale'].value = NgxThreeUtil.getTypeSafe(
 									this.dashScale,
 									1
 								);
 							} else {
-								anyMaterial['dashScale'] = ThreeUtil.getTypeSafe(
+								anyMaterial['dashScale'] = NgxThreeUtil.getTypeSafe(
 									this.dashScale,
 									1
 								);
@@ -2897,18 +2894,18 @@ export class MaterialComponent
 						break;
 					case 'dashoffset':
 						if (
-							ThreeUtil.isNotNull(this.dashOffset) &&
+							NgxThreeUtil.isNotNull(this.dashOffset) &&
 							anyMaterial['dashOffset'] !== undefined
 						) {
 							if (
 								anyMaterial['dashOffset'] instanceof N3JS.FloatNode
 							) {
-								anyMaterial['dashOffset'].value = ThreeUtil.getTypeSafe(
+								anyMaterial['dashOffset'].value = NgxThreeUtil.getTypeSafe(
 									this.dashOffset,
 									1
 								);
 							} else {
-								anyMaterial['dashOffset'] = ThreeUtil.getTypeSafe(
+								anyMaterial['dashOffset'] = NgxThreeUtil.getTypeSafe(
 									this.dashOffset,
 									1
 								);
@@ -2917,8 +2914,8 @@ export class MaterialComponent
 						break;
 					case 'resolution':
 						if (
-							ThreeUtil.isNotNull(this.resolutionX) &&
-							ThreeUtil.isNotNull(this.resolutionY) &&
+							NgxThreeUtil.isNotNull(this.resolutionX) &&
+							NgxThreeUtil.isNotNull(this.resolutionY) &&
 							anyMaterial['resolutionX'] !== undefined
 						) {
 							if (
@@ -2933,7 +2930,7 @@ export class MaterialComponent
 						break;
 					case 'extensions':
 						if (
-							ThreeUtil.isNotNull(this.extensions) &&
+							NgxThreeUtil.isNotNull(this.extensions) &&
 							anyMaterial['extensions'] !== undefined
 						) {
 							anyMaterial['extensions'] = this.getExtensions(
@@ -2954,12 +2951,12 @@ export class MaterialComponent
 	 * @template T
 	 * @returns material
 	 */
-	public getMaterial<T extends I3JS.IMaterial>(): T {
+	public getMaterial<T extends I3JS.Material>(): T {
 		if (this.material === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.setUserData('storageSource', null);
-			let material: I3JS.IMaterial = null;
-			if (ThreeUtil.isNotNull(this.storageName)) {
+			let material: I3JS.Material = null;
+			if (NgxThreeUtil.isNotNull(this.storageName)) {
 				material = new N3JS.MeshLambertMaterial(
 					this.getMaterialParameters({})
 				);
@@ -2967,17 +2964,17 @@ export class MaterialComponent
 					case 'nodematerial':
 					case 'node':
 						const modeMateriallibrary: any = {};
-						if (ThreeUtil.isNotNull(this.storageOption)) {
+						if (NgxThreeUtil.isNotNull(this.storageOption)) {
 							Object.entries(this.storageOption).forEach(([key, value]) => {
 								const anyValue: any = value;
 								if (
-									ThreeUtil.isNotNull(anyValue['type']) &&
-									ThreeUtil.isNotNull(anyValue['value'])
+									NgxThreeUtil.isNotNull(anyValue['type']) &&
+									NgxThreeUtil.isNotNull(anyValue['value'])
 								) {
 									switch (anyValue['type'].toLowerCase()) {
 										case 'texture':
 											const texture =
-												AbstractTextureComponent.getTextureImageOption(
+												NgxAbstractTextureComponent.getTextureImageOption(
 													anyValue['value'],
 													anyValue['options']
 												);
@@ -2993,8 +2990,8 @@ export class MaterialComponent
 							modeMateriallibrary
 						);
 						nodeMaterialLoader.load(
-							ThreeUtil.getStoreUrl(this.storageName),
-							(material: I3JS.IMaterial) => {
+							NgxThreeUtil.getStoreUrl(this.storageName),
+							(material: I3JS.Material) => {
 								this.setUserData('storageSource', nodeMaterialLoader);
 								this.setMaterial(material);
 							}
@@ -3003,7 +3000,7 @@ export class MaterialComponent
 					default:
 						this.localStorageService.getMaterial(
 							this.storageName,
-							(material: I3JS.IMaterial, storageSource: any) => {
+							(material: I3JS.Material, storageSource: any) => {
 								this.setUserData('storageSource', storageSource);
 								this.setMaterial(material);
 							},
@@ -3011,15 +3008,15 @@ export class MaterialComponent
 						);
 						break;
 				}
-			} else if (ThreeUtil.isNotNull(this.refer)) {
+			} else if (NgxThreeUtil.isNotNull(this.refer)) {
 				this.unSubscribeRefer('refer');
-				const refMaterial = ThreeUtil.getMaterialOne(this.refer);
+				const refMaterial = NgxThreeUtil.getMaterialOne(this.refer);
 				if (refMaterial !== null) {
 					material = refMaterial.clone();
 				}
 				this.subscribeRefer(
 					'refer',
-					ThreeUtil.getSubscribe(
+					NgxThreeUtil.getSubscribe(
 						this.refer,
 						() => {
 							this.needUpdate = true;
@@ -3032,13 +3029,13 @@ export class MaterialComponent
 				switch (this.type.toLowerCase()) {
 					case 'linebasicmaterial':
 					case 'linebasic':
-						const parametersLineBasicMaterial: I3JS.ILineBasicMaterialParameters =
+						const parametersLineBasicMaterial: I3JS.LineBasicMaterialParameters =
 							{
 								color: this.getColor(),
-								linewidth: ThreeUtil.getTypeSafe(this.linewidth),
-								linecap: ThreeUtil.getTypeSafe(this.linecap),
-								linejoin: ThreeUtil.getTypeSafe(this.linejoin),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+								linewidth: NgxThreeUtil.getTypeSafe(this.linewidth),
+								linecap: NgxThreeUtil.getTypeSafe(this.linecap),
+								linejoin: NgxThreeUtil.getTypeSafe(this.linejoin),
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
 							};
 						material = new N3JS.LineBasicMaterial(
 							this.getMaterialParameters(parametersLineBasicMaterial)
@@ -3046,16 +3043,16 @@ export class MaterialComponent
 						break;
 					case 'linedashedmaterial':
 					case 'linedashed':
-						const parametersLineDashedMaterial: I3JS.ILineDashedMaterialParameters =
+						const parametersLineDashedMaterial: I3JS.LineDashedMaterialParameters =
 							{
 								color: this.getColor(),
-								linewidth: ThreeUtil.getTypeSafe(this.linewidth),
-								linecap: ThreeUtil.getTypeSafe(this.linecap),
-								linejoin: ThreeUtil.getTypeSafe(this.linejoin),
+								linewidth: NgxThreeUtil.getTypeSafe(this.linewidth),
+								linecap: NgxThreeUtil.getTypeSafe(this.linecap),
+								linejoin: NgxThreeUtil.getTypeSafe(this.linejoin),
 								vertexColors: this.getVertexColors(),
-								dashSize: ThreeUtil.getTypeSafe(this.dashSize),
-								gapSize: ThreeUtil.getTypeSafe(this.gapSize),
-								scale: ThreeUtil.getTypeSafe(this.scale),
+								dashSize: NgxThreeUtil.getTypeSafe(this.dashSize),
+								gapSize: NgxThreeUtil.getTypeSafe(this.gapSize),
+								scale: NgxThreeUtil.getTypeSafe(this.scale),
 							};
 						material = new N3JS.LineDashedMaterial(
 							this.getMaterialParameters(parametersLineDashedMaterial)
@@ -3063,21 +3060,21 @@ export class MaterialComponent
 						break;
 					case 'meshbasicmaterial':
 					case 'meshbasic':
-						const parametersMeshBasicMaterial: I3JS.IMeshBasicMaterialParameters =
+						const parametersMeshBasicMaterial: I3JS.MeshBasicMaterialParameters =
 							{
 								color: this.getColor(),
-								aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
-								refractionRatio: ThreeUtil.getTypeSafe(this.refractionRatio),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
+								aoMapIntensity: NgxThreeUtil.getTypeSafe(this.aoMapIntensity),
+								refractionRatio: NgxThreeUtil.getTypeSafe(this.refractionRatio),
+								wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+								wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
 								// skinning: this.getSkinning(),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
-								combine: ThreeUtil.getCombineSafe(this.combine),
-								wireframeLinecap: ThreeUtil.getTypeSafe(this.wireframeLinecap),
-								wireframeLinejoin: ThreeUtil.getTypeSafe(
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+								reflectivity: NgxThreeUtil.getTypeSafe(this.reflectivity),
+								combine: NgxThreeUtil.getCombineSafe(this.combine),
+								wireframeLinecap: NgxThreeUtil.getTypeSafe(this.wireframeLinecap),
+								wireframeLinejoin: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinejoin
 								),
 								map: this.getTexture('map'),
@@ -3092,18 +3089,18 @@ export class MaterialComponent
 						break;
 					case 'meshdepthmaterial':
 					case 'meshdepth':
-						const parametersMeshDepthMaterial: I3JS.IMeshDepthMaterialParameters =
+						const parametersMeshDepthMaterial: I3JS.MeshDepthMaterialParameters =
 							{
 								map: this.getTexture('map'),
 								alphaMap: this.getTexture('alphaMap'),
-								depthPacking: ThreeUtil.getDepthPackingSafe(this.depthPacking),
+								depthPacking: NgxThreeUtil.getDepthPackingSafe(this.depthPacking),
 								displacementMap: this.getTexture('displacementMap'),
-								displacementScale: ThreeUtil.getTypeSafe(
+								displacementScale: NgxThreeUtil.getTypeSafe(
 									this.displacementScale
 								),
-								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
+								displacementBias: NgxThreeUtil.getTypeSafe(this.displacementBias),
+								wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+								wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
 							};
@@ -3113,17 +3110,17 @@ export class MaterialComponent
 						break;
 					case 'meshdistancematerial':
 					case 'meshdistance':
-						const parametersMeshDistanceMaterial: I3JS.IMeshDistanceMaterialParameters =
+						const parametersMeshDistanceMaterial: I3JS.MeshDistanceMaterialParameters =
 							{
 								map: this.getTexture('map'),
 								alphaMap: this.getTexture('alphaMap'),
 								displacementMap: this.getTexture('displacementMap'),
-								displacementScale: ThreeUtil.getTypeSafe(
+								displacementScale: NgxThreeUtil.getTypeSafe(
 									this.displacementScale
 								),
-								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
-								farDistance: ThreeUtil.getTypeSafe(this.farDistance),
-								nearDistance: ThreeUtil.getTypeSafe(this.nearDistance),
+								displacementBias: NgxThreeUtil.getTypeSafe(this.displacementBias),
+								farDistance: NgxThreeUtil.getTypeSafe(this.farDistance),
+								nearDistance: NgxThreeUtil.getTypeSafe(this.nearDistance),
 								referencePosition: this.getReferencePosition(),
 							};
 						material = new N3JS.MeshDistanceMaterial(
@@ -3132,28 +3129,28 @@ export class MaterialComponent
 						break;
 					case 'meshmatcapmaterial':
 					case 'meshmatcap':
-						const parametersMeshMatcapMaterial: I3JS.IMeshMatcapMaterialParameters =
+						const parametersMeshMatcapMaterial: I3JS.MeshMatcapMaterialParameters =
 							{
 								color: this.getColor(),
 								matcap: this.getTexture('matcap'),
 								map: this.getTexture('map'),
 								alphaMap: this.getTexture('alphaMap'),
 								bumpMap: this.getTexture('bumpMap'),
-								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
+								bumpScale: NgxThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+								normalMapType: NgxThreeUtil.getNormalMapTypeSafe(
 									this.normalMapType
 								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
-								displacementScale: ThreeUtil.getTypeSafe(
+								displacementScale: NgxThreeUtil.getTypeSafe(
 									this.displacementScale
 								),
-								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
-								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
+								displacementBias: NgxThreeUtil.getTypeSafe(this.displacementBias),
+								flatShading: NgxThreeUtil.getTypeSafe(this.flatShading),
 								// skinning: this.getSkinning(),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+								// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
 							};
 						material = new N3JS.MeshMatcapMaterial(
 							this.getMaterialParameters(parametersMeshMatcapMaterial)
@@ -3163,28 +3160,28 @@ export class MaterialComponent
 					case 'meshnormal':
 					case 'normalmaterial':
 					case 'normal':
-						const parametersMeshNormalMaterial: I3JS.IMeshNormalMaterialParameters =
+						const parametersMeshNormalMaterial: I3JS.MeshNormalMaterialParameters =
 							{
 								bumpMap: this.getTexture('bumpMap'),
-								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
+								bumpScale: NgxThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+								normalMapType: NgxThreeUtil.getNormalMapTypeSafe(
 									this.normalMapType
 								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
-								displacementScale: ThreeUtil.getTypeSafe(
+								displacementScale: NgxThreeUtil.getTypeSafe(
 									this.displacementScale
 								),
-								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
+								displacementBias: NgxThreeUtil.getTypeSafe(this.displacementBias),
+								wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+								wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
-								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
+								flatShading: NgxThreeUtil.getTypeSafe(this.flatShading),
 								// skinning: this.getSkinning(),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+								// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
 							};
 						material = new N3JS.MeshNormalMaterial(
 							this.getMaterialParameters(parametersMeshNormalMaterial)
@@ -3194,53 +3191,53 @@ export class MaterialComponent
 					case 'meshphong':
 					case 'phongmaterial':
 					case 'phong':
-						const parametersMeshPhongMaterial: I3JS.IMeshPhongMaterialParameters =
+						const parametersMeshPhongMaterial: I3JS.MeshPhongMaterialParameters =
 							{
 								color: this.getColor(),
 								map: this.getTexture('map'),
 								lightMap: this.getTexture('lightMap'),
-								lightMapIntensity: ThreeUtil.getTypeSafe(
+								lightMapIntensity: NgxThreeUtil.getTypeSafe(
 									this.lightMapIntensity
 								),
 								aoMap: this.getTexture('aoMap'),
-								aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
+								aoMapIntensity: NgxThreeUtil.getTypeSafe(this.aoMapIntensity),
 								emissive: this.getEmissive(),
-								emissiveIntensity: ThreeUtil.getTypeSafe(
+								emissiveIntensity: NgxThreeUtil.getTypeSafe(
 									this.emissiveIntensity
 								),
 								emissiveMap: this.getTexture('emissiveMap'),
 								bumpMap: this.getTexture('bumpMap'),
-								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
+								bumpScale: NgxThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+								normalMapType: NgxThreeUtil.getNormalMapTypeSafe(
 									this.normalMapType
 								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
-								displacementScale: ThreeUtil.getTypeSafe(
+								displacementScale: NgxThreeUtil.getTypeSafe(
 									this.displacementScale
 								),
-								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
+								displacementBias: NgxThreeUtil.getTypeSafe(this.displacementBias),
 								alphaMap: this.getTexture('alphaMap'),
 								envMap: this.getTexture('envMap'),
-								refractionRatio: ThreeUtil.getTypeSafe(this.refractionRatio),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
+								refractionRatio: NgxThreeUtil.getTypeSafe(this.refractionRatio),
+								wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+								wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
 								// skinning: this.getSkinning(),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
-								reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+								// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
+								reflectivity: NgxThreeUtil.getTypeSafe(this.reflectivity),
 								specular: this.getSpecular(),
-								shininess: ThreeUtil.getTypeSafe(this.shininess),
+								shininess: NgxThreeUtil.getTypeSafe(this.shininess),
 								specularMap: this.getTexture('specularMap'),
-								combine: ThreeUtil.getCombineSafe(this.combine),
-								wireframeLinecap: ThreeUtil.getTypeSafe(this.wireframeLinecap),
-								wireframeLinejoin: ThreeUtil.getTypeSafe(
+								combine: NgxThreeUtil.getCombineSafe(this.combine),
+								wireframeLinecap: NgxThreeUtil.getTypeSafe(this.wireframeLinecap),
+								wireframeLinejoin: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinejoin
 								),
-								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
+								flatShading: NgxThreeUtil.getTypeSafe(this.flatShading),
 							};
 						material = new N3JS.MeshPhongMaterial(
 							this.getMaterialParameters(parametersMeshPhongMaterial)
@@ -3253,54 +3250,54 @@ export class MaterialComponent
 						// const parametersMeshPhysicalMaterial: (THREE.MeshPhysicalMaterialParameters extends { thickness? : number }) =
 						const parametersMeshPhysicalMaterial: any = {
 							color: this.getColor(),
-							roughness: ThreeUtil.getTypeSafe(this.roughness),
-							metalness: ThreeUtil.getTypeSafe(this.metalness),
+							roughness: NgxThreeUtil.getTypeSafe(this.roughness),
+							metalness: NgxThreeUtil.getTypeSafe(this.metalness),
 							map: this.getTexture('map'),
 							lightMap: this.getTexture('lightMap'),
-							lightMapIntensity: ThreeUtil.getTypeSafe(this.lightMapIntensity),
+							lightMapIntensity: NgxThreeUtil.getTypeSafe(this.lightMapIntensity),
 							aoMap: this.getTexture('aoMap'),
-							aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
+							aoMapIntensity: NgxThreeUtil.getTypeSafe(this.aoMapIntensity),
 							emissive: this.getEmissive(),
-							emissiveIntensity: ThreeUtil.getTypeSafe(this.emissiveIntensity),
+							emissiveIntensity: NgxThreeUtil.getTypeSafe(this.emissiveIntensity),
 							emissiveMap: this.getTexture('emissiveMap'),
 							bumpMap: this.getTexture('bumpMap'),
-							bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
+							bumpScale: NgxThreeUtil.getTypeSafe(this.bumpScale),
 							normalMap: this.getTexture('normalMap'),
-							normalMapType: ThreeUtil.getNormalMapTypeSafe(
+							normalMapType: NgxThreeUtil.getNormalMapTypeSafe(
 								this.normalMapType,
 								'tangentspace'
 							),
 							normalScale: this.getNormalScale(),
 							displacementMap: this.getTexture('displacementMap'),
-							displacementScale: ThreeUtil.getTypeSafe(this.displacementScale),
-							displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
+							displacementScale: NgxThreeUtil.getTypeSafe(this.displacementScale),
+							displacementBias: NgxThreeUtil.getTypeSafe(this.displacementBias),
 							roughnessMap: this.getTexture('roughnessMap'),
 							metalnessMap: this.getTexture('metalnessMap'),
 							alphaMap: this.getTexture('alphaMap'),
 							envMap: this.getTexture('envMap'),
-							envMapIntensity: ThreeUtil.getTypeSafe(this.envMapIntensity),
-							refractionRatio: ThreeUtil.getTypeSafe(this.refractionRatio),
-							wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-							wireframeLinewidth: ThreeUtil.getTypeSafe(
+							envMapIntensity: NgxThreeUtil.getTypeSafe(this.envMapIntensity),
+							refractionRatio: NgxThreeUtil.getTypeSafe(this.refractionRatio),
+							wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+							wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 								this.wireframeLinewidth
 							),
 							// skinning: this.getSkinning(),
-							// vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
-							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
-							clearcoat: ThreeUtil.getTypeSafe(this.clearcoat),
+							// vertexTangents: NgxThreeUtil.getTypeSafe(this.vertexTangents),
+							// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
+							clearcoat: NgxThreeUtil.getTypeSafe(this.clearcoat),
 							// clearcoatMap: this.getTexture('clearcoatMap'),
-							clearcoatRoughness: ThreeUtil.getTypeSafe(
+							clearcoatRoughness: NgxThreeUtil.getTypeSafe(
 								this.clearcoatRoughness
 							),
 							// clearcoatRoughnessMap: this.getTexture('clearcoatRoughnessMap'),
 							clearcoatNormalScale: this.getClearcoatNormalScale(),
 							clearcoatNormalMap: this.getTexture('clearcoatNormalMap'),
-							reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
+							reflectivity: NgxThreeUtil.getTypeSafe(this.reflectivity),
 							// ior: this.getIor(),
 							// sheen: this.getSheen(),
-							transmission: ThreeUtil.getTypeSafe(this.transmission),
-							thickness: ThreeUtil.getTypeSafe(this.thickness),
+							transmission: NgxThreeUtil.getTypeSafe(this.transmission),
+							thickness: NgxThreeUtil.getTypeSafe(this.thickness),
 							// transmissionMap: this.getTexture('transmissionMap')
 						};
 						material = new N3JS.MeshPhysicalMaterial(
@@ -3311,51 +3308,51 @@ export class MaterialComponent
 					case 'meshstandard':
 					case 'standardmaterial':
 					case 'standard':
-						const parametersMeshStandardMaterial: I3JS.IMeshStandardMaterialParameters =
+						const parametersMeshStandardMaterial: I3JS.MeshStandardMaterialParameters =
 							{
 								color: this.getColor(),
-								roughness: ThreeUtil.getTypeSafe(this.roughness),
-								metalness: ThreeUtil.getTypeSafe(this.metalness),
+								roughness: NgxThreeUtil.getTypeSafe(this.roughness),
+								metalness: NgxThreeUtil.getTypeSafe(this.metalness),
 								map: this.getTexture('map'),
 								lightMap: this.getTexture('lightMap'),
-								lightMapIntensity: ThreeUtil.getTypeSafe(
+								lightMapIntensity: NgxThreeUtil.getTypeSafe(
 									this.lightMapIntensity
 								),
 								aoMap: this.getTexture('aoMap'),
-								aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
+								aoMapIntensity: NgxThreeUtil.getTypeSafe(this.aoMapIntensity),
 								emissive: this.getEmissive(),
-								emissiveIntensity: ThreeUtil.getTypeSafe(
+								emissiveIntensity: NgxThreeUtil.getTypeSafe(
 									this.emissiveIntensity
 								),
 								emissiveMap: this.getTexture('emissiveMap'),
 								bumpMap: this.getTexture('bumpMap'),
-								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
+								bumpScale: NgxThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+								normalMapType: NgxThreeUtil.getNormalMapTypeSafe(
 									this.normalMapType,
 									'tangentspace'
 								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
-								displacementScale: ThreeUtil.getTypeSafe(
+								displacementScale: NgxThreeUtil.getTypeSafe(
 									this.displacementScale
 								),
-								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
+								displacementBias: NgxThreeUtil.getTypeSafe(this.displacementBias),
 								roughnessMap: this.getTexture('roughnessMap'),
 								metalnessMap: this.getTexture('metalnessMap'),
 								alphaMap: this.getTexture('alphaMap'),
 								envMap: this.getTexture('envMap'),
-								envMapIntensity: ThreeUtil.getTypeSafe(this.envMapIntensity),
-								refractionRatio: ThreeUtil.getTypeSafe(this.refractionRatio),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
+								envMapIntensity: NgxThreeUtil.getTypeSafe(this.envMapIntensity),
+								refractionRatio: NgxThreeUtil.getTypeSafe(this.refractionRatio),
+								wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+								wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
-								flatShading: ThreeUtil.getTypeSafe(this.flatShading),
+								flatShading: NgxThreeUtil.getTypeSafe(this.flatShading),
 								// skinning: this.getSkinning(),
-								// vertexTangents: ThreeUtil.getTypeSafe(this.vertexTangents),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+								// vertexTangents: NgxThreeUtil.getTypeSafe(this.vertexTangents),
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+								// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
 							};
 						const meshStandardMaterial = new N3JS.MeshStandardMaterial(
 							this.getMaterialParameters(parametersMeshStandardMaterial)
@@ -3366,51 +3363,51 @@ export class MaterialComponent
 					case 'meshtoon':
 					case 'toonmaterial':
 					case 'toon':
-						const parametersMeshToonMaterial: I3JS.IMeshToonMaterialParameters =
+						const parametersMeshToonMaterial: I3JS.MeshToonMaterialParameters =
 							{
 								color: this.getColor(),
 								gradientMap: this.getTexture('gradientMap'),
 								map: this.getTexture('map'),
 								lightMap: this.getTexture('lightMap'),
-								lightMapIntensity: ThreeUtil.getTypeSafe(
+								lightMapIntensity: NgxThreeUtil.getTypeSafe(
 									this.lightMapIntensity
 								),
 								aoMap: this.getTexture('aoMap'),
-								aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
+								aoMapIntensity: NgxThreeUtil.getTypeSafe(this.aoMapIntensity),
 								emissive: this.getEmissive(),
-								emissiveIntensity: ThreeUtil.getTypeSafe(
+								emissiveIntensity: NgxThreeUtil.getTypeSafe(
 									this.emissiveIntensity
 								),
 								emissiveMap: this.getTexture('emissiveMap'),
 								bumpMap: this.getTexture('bumpMap'),
-								bumpScale: ThreeUtil.getTypeSafe(this.bumpScale),
+								bumpScale: NgxThreeUtil.getTypeSafe(this.bumpScale),
 								normalMap: this.getTexture('normalMap'),
-								normalMapType: ThreeUtil.getNormalMapTypeSafe(
+								normalMapType: NgxThreeUtil.getNormalMapTypeSafe(
 									this.normalMapType,
 									'tangentspace'
 								),
 								normalScale: this.getNormalScale(),
 								displacementMap: this.getTexture('displacementMap'),
-								displacementScale: ThreeUtil.getTypeSafe(
+								displacementScale: NgxThreeUtil.getTypeSafe(
 									this.displacementScale
 								),
-								displacementBias: ThreeUtil.getTypeSafe(this.displacementBias),
+								displacementBias: NgxThreeUtil.getTypeSafe(this.displacementBias),
 								alphaMap: this.getTexture('alphaMap'),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
+								wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+								wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
-								wireframeLinecap: ThreeUtil.getTypeSafe(
+								wireframeLinecap: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinecap,
 									'round'
 								),
-								wireframeLinejoin: ThreeUtil.getTypeSafe(
+								wireframeLinejoin: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinejoin,
 									'round'
 								),
 								// skinning: this.getSkinning(),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+								// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
 							};
 						material = new N3JS.MeshToonMaterial(
 							this.getMaterialParameters(parametersMeshToonMaterial)
@@ -3418,13 +3415,13 @@ export class MaterialComponent
 						break;
 					case 'pointsmaterial':
 					case 'points':
-						const parametersPointsMaterial: I3JS.IPointsMaterialParameters = {
+						const parametersPointsMaterial: I3JS.PointsMaterialParameters = {
 							color: this.getColor(),
 							map: this.getTexture('map'),
 							alphaMap: this.getTexture('alphaMap'),
-							size: ThreeUtil.getTypeSafe(this.size),
-							sizeAttenuation: ThreeUtil.getTypeSafe(this.sizeAttenuation),
-							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
+							size: NgxThreeUtil.getTypeSafe(this.size),
+							sizeAttenuation: NgxThreeUtil.getTypeSafe(this.sizeAttenuation),
+							// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
 						};
 						material = new N3JS.PointsMaterial(
 							this.getMaterialParameters(parametersPointsMaterial)
@@ -3432,31 +3429,31 @@ export class MaterialComponent
 						break;
 					case 'rawshadermaterial':
 					case 'rawshader':
-						const parametersRawShaderMaterial: I3JS.IShaderMaterialParameters =
+						const parametersRawShaderMaterial: I3JS.ShaderMaterialParameters =
 							{
 								uniforms: this.getUniforms({}),
 								vertexShader: this.getShader('x-shader/x-vertex'),
 								fragmentShader: this.getShader('x-shader/x-fragment'),
-								linewidth: ThreeUtil.getTypeSafe(this.linewidth),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
+								linewidth: NgxThreeUtil.getTypeSafe(this.linewidth),
+								wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+								wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
-								lights: ThreeUtil.getTypeSafe(this.lights),
-								clipping: ThreeUtil.getTypeSafe(this.clipping),
+								lights: NgxThreeUtil.getTypeSafe(this.lights),
+								clipping: NgxThreeUtil.getTypeSafe(this.clipping),
 								// skinning: this.getSkinning(),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+								// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
 							};
 						const rawShaderMaterial = new N3JS.RawShaderMaterial(
 							this.getMaterialParameters(parametersRawShaderMaterial)
 						);
-						if (ThreeUtil.isNotNull(this.glslVersion)) {
-							rawShaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(
+						if (NgxThreeUtil.isNotNull(this.glslVersion)) {
+							rawShaderMaterial.glslVersion = NgxThreeUtil.getGlslVersionSafe(
 								this.glslVersion
 							);
 						}
-						if (ThreeUtil.isNotNull(this.extensions)) {
+						if (NgxThreeUtil.isNotNull(this.extensions)) {
 							this.getExtensions(rawShaderMaterial.extensions);
 						}
 						material = rawShaderMaterial;
@@ -3655,30 +3652,30 @@ export class MaterialComponent
 						break;
 					case 'shadermaterial':
 					case 'shader':
-						const parametersShaderMaterial: I3JS.IShaderMaterialParameters = {
+						const parametersShaderMaterial: I3JS.ShaderMaterialParameters = {
 							uniforms: this.getUniforms({}),
 							vertexShader: this.getShader('x-shader/x-vertex'),
 							fragmentShader: this.getShader('x-shader/x-fragment'),
-							linewidth: ThreeUtil.getTypeSafe(this.linewidth),
-							wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-							wireframeLinewidth: ThreeUtil.getTypeSafe(
+							linewidth: NgxThreeUtil.getTypeSafe(this.linewidth),
+							wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+							wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 								this.wireframeLinewidth
 							),
-							lights: ThreeUtil.getTypeSafe(this.lights),
-							clipping: ThreeUtil.getTypeSafe(this.clipping),
+							lights: NgxThreeUtil.getTypeSafe(this.lights),
+							clipping: NgxThreeUtil.getTypeSafe(this.clipping),
 							// skinning: this.getSkinning(),
-							// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-							// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+							// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+							// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
 						};
 						const shaderMaterial = new N3JS.ShaderMaterial(
 							this.getMaterialParameters(parametersShaderMaterial)
 						);
-						if (ThreeUtil.isNotNull(this.glslVersion)) {
-							shaderMaterial.glslVersion = ThreeUtil.getGlslVersionSafe(
+						if (NgxThreeUtil.isNotNull(this.glslVersion)) {
+							shaderMaterial.glslVersion = NgxThreeUtil.getGlslVersionSafe(
 								this.glslVersion
 							);
 						}
-						if (ThreeUtil.isNotNull(this.extensions)) {
+						if (NgxThreeUtil.isNotNull(this.extensions)) {
 							this.getExtensions(shaderMaterial.extensions);
 						}
 						material = shaderMaterial;
@@ -3696,24 +3693,24 @@ export class MaterialComponent
 						material = new N3JS.LineMaterial(
 							this.getMaterialParameters({
 								color: this.getColor(),
-								dashed: ThreeUtil.getTypeSafe(this.dashed),
-								dashScale: ThreeUtil.getTypeSafe(this.dashScale),
-								dashSize: ThreeUtil.getTypeSafe(this.dashSize),
-								dashOffset: ThreeUtil.getTypeSafe(this.dashOffset),
-								gapSize: ThreeUtil.getTypeSafe(this.gapSize),
-								linewidth: ThreeUtil.getTypeSafe(this.linewidth),
+								dashed: NgxThreeUtil.getTypeSafe(this.dashed),
+								dashScale: NgxThreeUtil.getTypeSafe(this.dashScale),
+								dashSize: NgxThreeUtil.getTypeSafe(this.dashSize),
+								dashOffset: NgxThreeUtil.getTypeSafe(this.dashOffset),
+								gapSize: NgxThreeUtil.getTypeSafe(this.gapSize),
+								linewidth: NgxThreeUtil.getTypeSafe(this.linewidth),
 								resolution: this.getResolution(),
 							}) as any
 						) as any;
 						break;
 					case 'spritematerial':
 					case 'sprite':
-						const parametersSpriteMaterial: I3JS.ISpriteMaterialParameters = {
+						const parametersSpriteMaterial: I3JS.SpriteMaterialParameters = {
 							color: this.getColor(),
 							map: this.getTexture('map'),
 							alphaMap: this.getTexture('alphaMap'),
-							rotation: ThreeUtil.getAngleSafe(this.rotation),
-							sizeAttenuation: ThreeUtil.getTypeSafe(this.sizeAttenuation),
+							rotation: NgxThreeUtil.getAngleSafe(this.rotation),
+							sizeAttenuation: NgxThreeUtil.getTypeSafe(this.sizeAttenuation),
 						};
 						material = new N3JS.SpriteMaterial(
 							this.getMaterialParameters(parametersSpriteMaterial)
@@ -3723,40 +3720,40 @@ export class MaterialComponent
 					case 'standardnode':
 						const standardNodeMaterial =
 							new N3JS.StandardNodeMaterial() as any;
-						if (ThreeUtil.isNotNull(this.side)) {
-							standardNodeMaterial.side = ThreeUtil.getSideSafe(this.side);
+						if (NgxThreeUtil.isNotNull(this.side)) {
+							standardNodeMaterial.side = NgxThreeUtil.getSideSafe(this.side);
 						}
-						if (ThreeUtil.isNotNull(this.metalness)) {
+						if (NgxThreeUtil.isNotNull(this.metalness)) {
 							standardNodeMaterial.metalness = this.getFloatNode(
-								ThreeUtil.getTypeSafe(this.metalness)
+								NgxThreeUtil.getTypeSafe(this.metalness)
 							);
 						}
-						if (ThreeUtil.isNotNull(this.reflectivity)) {
+						if (NgxThreeUtil.isNotNull(this.reflectivity)) {
 							standardNodeMaterial.reflectivity = this.getFloatNode(
-								ThreeUtil.getTypeSafe(this.reflectivity)
+								NgxThreeUtil.getTypeSafe(this.reflectivity)
 							);
 						}
-						if (ThreeUtil.isNotNull(this.clearcoat)) {
+						if (NgxThreeUtil.isNotNull(this.clearcoat)) {
 							standardNodeMaterial.clearcoat = this.getFloatNode(
-								ThreeUtil.getTypeSafe(this.clearcoat)
+								NgxThreeUtil.getTypeSafe(this.clearcoat)
 							);
 						}
-						if (ThreeUtil.isNotNull(this.clearcoatRoughness)) {
+						if (NgxThreeUtil.isNotNull(this.clearcoatRoughness)) {
 							standardNodeMaterial.clearcoatRoughness = this.getFloatNode(
-								ThreeUtil.getTypeSafe(this.clearcoatRoughness)
+								NgxThreeUtil.getTypeSafe(this.clearcoatRoughness)
 							);
 						}
-						if (ThreeUtil.isNotNull(this.emissive)) {
+						if (NgxThreeUtil.isNotNull(this.emissive)) {
 							standardNodeMaterial.emissive = this.getColorNode(
 								this.getEmissive()
 							);
 						}
-						if (ThreeUtil.isNotNull(this.roughness)) {
+						if (NgxThreeUtil.isNotNull(this.roughness)) {
 							standardNodeMaterial.roughness = this.getFloatNode(
-								ThreeUtil.getTypeSafe(this.roughness)
+								NgxThreeUtil.getTypeSafe(this.roughness)
 							);
 						}
-						if (ThreeUtil.isNotNull(this.color)) {
+						if (NgxThreeUtil.isNotNull(this.color)) {
 							standardNodeMaterial.color = this.getColorNode(this.getColor());
 						}
 						material = standardNodeMaterial;
@@ -3771,33 +3768,33 @@ export class MaterialComponent
 						const meshStandardNodeMaterial =
 							new N3JS.MeshStandardNodeMaterial();
 						const diffuseMap = this.getTexture('diffuseMap');
-						if (ThreeUtil.isNotNull(diffuseMap)) {
+						if (NgxThreeUtil.isNotNull(diffuseMap)) {
 							meshStandardNodeMaterial.color = this.getOperatorNode(
 								this.getTextureNode(diffuseMap),
 								this.getVector3Node(this.getDiffuseColor(0xffffff)),
 								'*'
 							);
 						} else {
-							if (ThreeUtil.isNotNull(this.color)) {
+							if (NgxThreeUtil.isNotNull(this.color)) {
 								meshStandardNodeMaterial.color = this.getColorNode(
 									this.getColor()
 								);
 							}
 						}
-						if (ThreeUtil.isNotNull(this.roughness)) {
+						if (NgxThreeUtil.isNotNull(this.roughness)) {
 							meshStandardNodeMaterial.roughness = this.getFloatNode(
-								ThreeUtil.getTypeSafe(this.roughness)
+								NgxThreeUtil.getTypeSafe(this.roughness)
 							);
 						}
-						if (ThreeUtil.isNotNull(this.metalness)) {
+						if (NgxThreeUtil.isNotNull(this.metalness)) {
 							meshStandardNodeMaterial.metalness = this.getFloatNode(
-								ThreeUtil.getTypeSafe(this.metalness)
+								NgxThreeUtil.getTypeSafe(this.metalness)
 							);
 						}
 						if (
-							ThreeUtil.isNotNull(this.normalScale) ||
-							ThreeUtil.isNotNull(this.normalScaleX) ||
-							ThreeUtil.isNotNull(this.normalScaleY)
+							NgxThreeUtil.isNotNull(this.normalScale) ||
+							NgxThreeUtil.isNotNull(this.normalScaleX) ||
+							NgxThreeUtil.isNotNull(this.normalScaleY)
 						) {
 							meshStandardNodeMaterial.normalScale = this.getVector2Node(
 								this.getNormalScale()
@@ -3808,14 +3805,14 @@ export class MaterialComponent
 					case 'phongnodematerial':
 					case 'phongnode':
 						const phongNodeMaterial = new N3JS.PhongNodeMaterial();
-						if (ThreeUtil.isNotNull(this.color)) {
+						if (NgxThreeUtil.isNotNull(this.color)) {
 							phongNodeMaterial.color = this.getColorNode(this.getColor());
 						}
 						// phongNodeMaterial.alpha: Node;
 						// phongNodeMaterial.specular: Node;
 						// phongNodeMaterial.shininess: Node;
 						const normalMapPhongNodeMaterial = this.getTexture('normalMap');
-						if (ThreeUtil.isNotNull(normalMapPhongNodeMaterial)) {
+						if (NgxThreeUtil.isNotNull(normalMapPhongNodeMaterial)) {
 							phongNodeMaterial.normal = new N3JS.NormalMapNode(
 								this.getTextureNode(normalMapPhongNodeMaterial)
 							);
@@ -3832,8 +3829,8 @@ export class MaterialComponent
 						const nodeFrame = this.getNodeFrame(0);
 						this.subscribeRefer(
 							'phongnodeUpdate',
-							ThreeUtil.getUpdateSubscribe().subscribe(
-								(timer: RendererTimer) => {
+							NgxThreeUtil.getUpdateSubscribe().subscribe(
+								(timer: IRendererTimer) => {
 									nodeFrame
 										.update(timer.delta)
 										.updateNode(phongNodeMaterial as any);
@@ -3852,42 +3849,42 @@ export class MaterialComponent
 					case 'lambertmaterial':
 					case 'lambert':
 					default:
-						const parametersMeshLambertMaterial: I3JS.IMeshLambertMaterialParameters =
+						const parametersMeshLambertMaterial: I3JS.MeshLambertMaterialParameters =
 							{
 								color: this.getColor(),
 								emissive: this.getEmissive(),
-								emissiveIntensity: ThreeUtil.getTypeSafe(
+								emissiveIntensity: NgxThreeUtil.getTypeSafe(
 									this.emissiveIntensity
 								),
 								emissiveMap: this.getTexture('emissiveMap'),
 								map: this.getTexture('map'),
 								lightMap: this.getTexture('lightMap'),
-								lightMapIntensity: ThreeUtil.getTypeSafe(
+								lightMapIntensity: NgxThreeUtil.getTypeSafe(
 									this.lightMapIntensity
 								),
 								aoMap: this.getTexture('aoMap'),
-								aoMapIntensity: ThreeUtil.getTypeSafe(this.aoMapIntensity),
+								aoMapIntensity: NgxThreeUtil.getTypeSafe(this.aoMapIntensity),
 								specularMap: this.getTexture('specularMap'),
 								alphaMap: this.getTexture('alphaMap'),
 								envMap: this.getTexture('envMap'),
-								combine: ThreeUtil.getCombineSafe(this.combine, 'multiply'),
-								reflectivity: ThreeUtil.getTypeSafe(this.reflectivity),
-								refractionRatio: ThreeUtil.getTypeSafe(this.refractionRatio),
-								wireframe: ThreeUtil.getTypeSafe(this.wireframe),
-								wireframeLinewidth: ThreeUtil.getTypeSafe(
+								combine: NgxThreeUtil.getCombineSafe(this.combine, 'multiply'),
+								reflectivity: NgxThreeUtil.getTypeSafe(this.reflectivity),
+								refractionRatio: NgxThreeUtil.getTypeSafe(this.refractionRatio),
+								wireframe: NgxThreeUtil.getTypeSafe(this.wireframe),
+								wireframeLinewidth: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinewidth
 								),
-								wireframeLinecap: ThreeUtil.getTypeSafe(
+								wireframeLinecap: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinecap,
 									'round'
 								),
-								wireframeLinejoin: ThreeUtil.getTypeSafe(
+								wireframeLinejoin: NgxThreeUtil.getTypeSafe(
 									this.wireframeLinejoin,
 									'round'
 								),
 								// skinning: this.getSkinning(),
-								// morphTargets: ThreeUtil.getTypeSafe(this.morphTargets),
-								// morphNormals: ThreeUtil.getTypeSafe(this.morphNormals),
+								// morphTargets: NgxThreeUtil.getTypeSafe(this.morphTargets),
+								// morphNormals: NgxThreeUtil.getTypeSafe(this.morphNormals),
 							};
 						const meshLambertMaterial = new N3JS.MeshLambertMaterial(
 							this.getMaterialParameters(parametersMeshLambertMaterial)

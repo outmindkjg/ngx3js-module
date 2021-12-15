@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeUtil, N3JS, I3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Plane component.
@@ -13,8 +13,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './plane.component.html',
 	styleUrls: ['./plane.component.scss'],
 })
-export class PlaneComponent
-	extends AbstractSubscribeComponent
+export class NgxPlaneComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -84,12 +84,12 @@ export class PlaneComponent
 	/**
 	 * The Plane of plane component
 	 */
-	private plane: I3JS.IPlane = null;
+	private plane: I3JS.Plane = null;
 
 	/**
 	 * World plane of plane component
 	 */
-	private worldPlane: I3JS.IPlane = null;
+	private worldPlane: I3JS.Plane = null;
 
 	/**
 	 * Sets plane
@@ -99,16 +99,16 @@ export class PlaneComponent
 	 * @param w
 	 */
 	public setPlane(x: number, y: number, z: number, w: number) {
-		if (ThreeUtil.isNotNull(x)) {
+		if (NgxThreeUtil.isNotNull(x)) {
 			this.x = x;
 		}
-		if (ThreeUtil.isNotNull(y)) {
+		if (NgxThreeUtil.isNotNull(y)) {
 			this.y = y;
 		}
-		if (ThreeUtil.isNotNull(z)) {
+		if (NgxThreeUtil.isNotNull(z)) {
 			this.z = z;
 		}
-		if (ThreeUtil.isNotNull(w)) {
+		if (NgxThreeUtil.isNotNull(w)) {
 			this.w = w;
 		}
 		this.needUpdate = true;
@@ -123,7 +123,7 @@ export class PlaneComponent
 	 * @param [matrixWorld]
 	 * @returns world plane
 	 */
-	public getWorldPlane(matrixWorld?: I3JS.IMatrix4): I3JS.IPlane {
+	public getWorldPlane(matrixWorld?: I3JS.Matrix4): I3JS.Plane {
 		if (this.worldPlane === null) {
 			this.worldPlane = new N3JS.Plane();
 		}
@@ -138,18 +138,18 @@ export class PlaneComponent
 	 * Gets plane
 	 * @returns plane
 	 */
-	public getPlane(): I3JS.IPlane {
+	public getPlane(): I3JS.Plane {
 		if (this.plane === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.plane = new N3JS.Plane(
-				ThreeUtil.getVector3Safe(this.x, this.y, this.z),
-				ThreeUtil.getTypeSafe(this.w, 0)
+				NgxThreeUtil.getVector3Safe(this.x, this.y, this.z),
+				NgxThreeUtil.getTypeSafe(this.w, 0)
 			);
 			this.setObject(this.plane);
 		}
 		this.plane.set(
-			ThreeUtil.getVector3Safe(this.x, this.y, this.z),
-			ThreeUtil.getTypeSafe(this.w, 0)
+			NgxThreeUtil.getVector3Safe(this.x, this.y, this.z),
+			NgxThreeUtil.getTypeSafe(this.w, 0)
 		);
 		return this.plane;
 	}

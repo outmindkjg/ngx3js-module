@@ -5,8 +5,8 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, N3JS, I3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Size component.
@@ -23,8 +23,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './size.component.html',
 	styleUrls: ['./size.component.scss'],
 })
-export class SizeComponent
-	extends AbstractSubscribeComponent
+export class NgxSizeComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, AfterContentInit
 {
 	/**
@@ -125,8 +125,8 @@ export class SizeComponent
 		cameraSize: number,
 		def?: number | string
 	): number {
-		const baseSize = ThreeUtil.getTypeSafe(size, def);
-		if (ThreeUtil.isNotNull(baseSize)) {
+		const baseSize = NgxThreeUtil.getTypeSafe(size, def);
+		if (NgxThreeUtil.isNotNull(baseSize)) {
 			if (typeof baseSize == 'string') {
 				if (baseSize.indexOf('%') > 0) {
 					const [percent, extra] = baseSize.split('%');
@@ -184,7 +184,7 @@ export class SizeComponent
 		this.needUpdate = true;
 	}
 
-	private size: I3JS.IVector2 = null;
+	private size: I3JS.Vector2 = null;
 
 	/**
 	 * Applys changes3d
@@ -192,11 +192,11 @@ export class SizeComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.size !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getSize();
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['width', 'height'])) {
+			if (NgxThreeUtil.isIndexOf(changes, ['width', 'height'])) {
 				this.needUpdate = true;
 				return;
 			}
@@ -212,7 +212,7 @@ export class SizeComponent
 		return this.getSize() as any;
 	}
 
-	public getSize(): I3JS.IVector2 {
+	public getSize(): I3JS.Vector2 {
 		if (this.size === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.size = new N3JS.Vector2(this.getWidth(), this.getHeight());

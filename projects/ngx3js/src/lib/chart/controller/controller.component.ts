@@ -5,9 +5,10 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractChartComponent } from '../../chart.abstract';
-import { AbstractControllerComponent } from '../../controller.component.abstract';
-import { RendererTimer, ThreeUtil } from '../../interface';
+import { NgxAbstractChartComponent } from '../../chart.abstract';
+import { NgxAbstractControllerComponent } from '../../controller.component.abstract';
+import { NgxThreeUtil } from '../../interface';
+import { IRendererTimer } from '../../ngx-interface';
 
 /**
  * The Chart Controller component.
@@ -21,13 +22,13 @@ import { RendererTimer, ThreeUtil } from '../../interface';
 	styleUrls: ['./controller.component.scss'],
 	providers: [
 		{
-			provide: AbstractControllerComponent,
-			useExisting: forwardRef(() => ChartControllerComponent),
+			provide: NgxAbstractControllerComponent,
+			useExisting: forwardRef(() => NgxChartControllerComponent),
 		},
 	],
 })
-export class ChartControllerComponent
-	extends AbstractControllerComponent
+export class NgxChartControllerComponent
+	extends NgxAbstractControllerComponent
 	implements OnInit
 {
 	/**
@@ -97,16 +98,16 @@ export class ChartControllerComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.refObject3d !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getController();
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['type', 'object3d', 'object2d'])) {
+			if (NgxThreeUtil.isIndexOf(changes, ['type', 'object3d', 'object2d'])) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, []);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, []);
 			}
 			super.applyChanges(changes);
 		}
@@ -120,7 +121,7 @@ export class ChartControllerComponent
 	/**
 	 * The Duration of controller component
 	 */
-	private _chartComponent: AbstractChartComponent = null;
+	private _chartComponent: NgxAbstractChartComponent = null;
 
 	/**
 	 * Gets controller
@@ -131,10 +132,10 @@ export class ChartControllerComponent
 			(this._chartComponent === null || this._needUpdate)
 		) {
 			this.needUpdate = false;
-			const component = ThreeUtil.getThreeComponent(this.refObject3d);
-			this._duration = ThreeUtil.getTypeSafe(this.duration, 1);
+			const component = NgxThreeUtil.getThreeComponent(this.refObject3d);
+			this._duration = NgxThreeUtil.getTypeSafe(this.duration, 1);
 			this.elapsedTime = 0;
-			if (component instanceof AbstractChartComponent) {
+			if (component instanceof NgxAbstractChartComponent) {
 				this._chartComponent = component;
 			}
 			super.setObject({
@@ -152,7 +153,7 @@ export class ChartControllerComponent
 	 * Updates controller component
 	 * @param rendererTimer
 	 */
-	public update(rendererTimer: RendererTimer) {
+	public update(rendererTimer: IRendererTimer) {
 		if (this._chartComponent !== null) {
 			const delta = rendererTimer.delta / this._duration;
 			this.elapsedTime += delta;

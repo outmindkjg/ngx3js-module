@@ -5,8 +5,8 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractChartComponent } from '../../chart.abstract';
-import { AbstractObject3dComponent } from '../../object3d.abstract';
+import { NgxAbstractChartComponent } from '../../chart.abstract';
+import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
  * The Chart Polar Area component.
@@ -20,13 +20,13 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	styleUrls: ['./polar-area.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ChartPolarAreaComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxChartPolarAreaComponent),
 		},
 	],
 })
-export class ChartPolarAreaComponent
-	extends AbstractChartComponent
+export class NgxChartPolarAreaComponent
+	extends NgxAbstractChartComponent
 	implements OnInit
 {
 	/**

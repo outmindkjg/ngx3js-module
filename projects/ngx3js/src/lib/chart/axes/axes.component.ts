@@ -5,9 +5,10 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractChartComponent } from '../../chart.abstract';
-import { ThreeUtil, I3JS, N3JS, ThreeColor } from '../../interface';
-import { AbstractObject3dComponent } from '../../object3d.abstract';
+import { NgxAbstractChartComponent } from '../../chart.abstract';
+import { NgxThreeUtil, I3JS, N3JS } from '../../interface';
+import { INgxColor } from '../../ngx-interface';
+import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
  * The Chart Axes component.
@@ -21,13 +22,13 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	styleUrls: ['./axes.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ChartAxesComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxChartAxesComponent),
 		},
 	],
 })
-export class ChartAxesComponent
-	extends AbstractChartComponent
+export class NgxChartAxesComponent
+	extends NgxAbstractChartComponent
 	implements OnInit
 {
 	@Input() public type: string = '';
@@ -44,17 +45,17 @@ export class ChartAxesComponent
 	/**
 	 * The gridColor of chart axes component
 	 */
-	@Input() public gridColor: ThreeColor = null;
+	@Input() public gridColor: INgxColor = null;
 
 	/**
 	 * The xGridColor of chart axes component
 	 */
-	@Input() public xGridColor: ThreeColor = null;
+	@Input() public xGridColor: INgxColor = null;
 
 	/**
 	 * The yGridColor of chart axes component
 	 */
-	@Input() public yGridColor: ThreeColor = null;
+	@Input() public yGridColor: INgxColor = null;
 
 	/**
 	 * The xGridStep of chart axes component
@@ -127,47 +128,47 @@ export class ChartAxesComponent
 	/**
 	 * The Axes of chart axes component
 	 */
-	private _axes: I3JS.IObject3D = null;
+	private _axes: I3JS.Object3D = null;
 
 	/**
 	 * Material wall of chart axes component
 	 */
-	private _materialWall: I3JS.IMeshBasicMaterial = null;
+	private _materialWall: I3JS.MeshBasicMaterial = null;
 
 	/**
 	 * Geometry wall of chart axes component
 	 */
-	private _geometryWall: I3JS.IPlaneGeometry | I3JS.ICircleGeometry = null;
+	private _geometryWall: I3JS.PlaneGeometry | I3JS.CircleGeometry = null;
 
 	/**
 	 * Material wall border of chart axes component
 	 */
-	private _materialWallBorder: I3JS.ILineBasicMaterial = null;
+	private _materialWallBorder: I3JS.LineBasicMaterial = null;
 
 	/**
 	 * Geometry wall border of chart axes component
 	 */
-	private _geometryWallBorder: I3JS.IBufferGeometry = null;
+	private _geometryWallBorder: I3JS.BufferGeometry = null;
 
 	/**
 	 * Material grid x of chart axes component
 	 */
-	private _materialGridX: I3JS.ILineBasicMaterial = null;
+	private _materialGridX: I3JS.LineBasicMaterial = null;
 
 	/**
 	 * Geometry grid x of chart axes component
 	 */
-	private _geometryGridX: I3JS.IBufferGeometry = null;
+	private _geometryGridX: I3JS.BufferGeometry = null;
 
 	/**
 	 * Material grid y of chart axes component
 	 */
-	private _materialGridY: I3JS.ILineBasicMaterial = null;
+	private _materialGridY: I3JS.LineBasicMaterial = null;
 
 	/**
 	 * Geometry grid y of chart axes component
 	 */
-	private _geometryGridY: I3JS.IBufferGeometry = null;
+	private _geometryGridY: I3JS.BufferGeometry = null;
 
 	/**
 	 * Applys changes3d
@@ -176,21 +177,21 @@ export class ChartAxesComponent
 	 */
 	protected applyChanges3d(changes: string[]) {
 		if (this._axes !== null) {
-			if (ThreeUtil.isIndexOf(changes, ['clearinit'])) {
+			if (NgxThreeUtil.isIndexOf(changes, ['clearinit'])) {
 				this.getTitle();
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['options'], this.CHART_ATTR)) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['options'], this.CHART_ATTR)) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['init'])) {
-				changes = ThreeUtil.pushUniq(changes, ['options']);
+			if (NgxThreeUtil.isIndexOf(changes, ['init'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['options']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'options':
-						if (ThreeUtil.isNotNull(this.options)) {
-							this._materialWall.opacity = ThreeUtil.getTypeSafe(
+						if (NgxThreeUtil.isNotNull(this.options)) {
+							this._materialWall.opacity = NgxThreeUtil.getTypeSafe(
 								this.options.opacity,
 								1
 							);
@@ -207,7 +208,7 @@ export class ChartAxesComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getChart<T extends I3JS.IObject3D>(): T {
+	public getChart<T extends I3JS.Object3D>(): T {
 		return this.getTitle();
 	}
 
@@ -216,15 +217,15 @@ export class ChartAxesComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getTitle<T extends I3JS.IObject3D>(): T {
+	public getTitle<T extends I3JS.Object3D>(): T {
 		if (this._axes === null || this._needUpdate) {
 			this.needUpdate = false;
 			this._axes = new N3JS.Group();
-			const width = ThreeUtil.getTypeSafe(this.width, 1);
-			const height = ThreeUtil.getTypeSafe(this.height, 1);
-			const depth = ThreeUtil.getTypeSafe(this.depth, 1);
-			const radiusSegments = ThreeUtil.getTypeSafe(this.radiusSegments, 32);
-			const radius = ThreeUtil.getTypeSafe(
+			const width = NgxThreeUtil.getTypeSafe(this.width, 1);
+			const height = NgxThreeUtil.getTypeSafe(this.height, 1);
+			const depth = NgxThreeUtil.getTypeSafe(this.depth, 1);
+			const radiusSegments = NgxThreeUtil.getTypeSafe(this.radiusSegments, 32);
+			const radius = NgxThreeUtil.getTypeSafe(
 				this.radius,
 				Math.min(width, height) / 2
 			);
@@ -280,11 +281,11 @@ export class ChartAxesComponent
 					this._geometryWall.translate(0, -height / 2, 0);
 					break;
 			}
-			const options = ThreeUtil.getTypeSafe(this.options, {});
+			const options = NgxThreeUtil.getTypeSafe(this.options, {});
 			this._materialWall = new N3JS.MeshPhongMaterial({
-				color: ThreeUtil.getColorSafe(options.backgroundColor, 0xd0d0d0),
-				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
-				side: ThreeUtil.getSideSafe(this.side, 'front'),
+				color: NgxThreeUtil.getColorSafe(options.backgroundColor, 0xd0d0d0),
+				opacity: NgxThreeUtil.getTypeSafe(options.opacity, 1),
+				side: NgxThreeUtil.getSideSafe(this.side, 'front'),
 				transparent: true,
 			} as any);
 			const wallMesh = new N3JS.Mesh(this._geometryWall, this._materialWall);
@@ -316,9 +317,9 @@ export class ChartAxesComponent
 				new N3JS.BufferAttribute(attributeBorder, 3)
 			);
 			this._materialWallBorder = new N3JS.LineBasicMaterial({
-				color: ThreeUtil.getColorSafe(options.borderColor, 0x909090),
+				color: NgxThreeUtil.getColorSafe(options.borderColor, 0x909090),
 				linewidth: 1,
-				opacity: ThreeUtil.getTypeSafe(options.opacity, 1),
+				opacity: NgxThreeUtil.getTypeSafe(options.opacity, 1),
 			} as any);
 			const borderMesh = new N3JS.LineSegments(
 				this._geometryWallBorder,
@@ -326,8 +327,8 @@ export class ChartAxesComponent
 			);
 			borderMesh.name = 'border';
 			this._axes.add(borderMesh);
-			if (ThreeUtil.isNotNull(this.xGridStep)) {
-				const xGridStep = ThreeUtil.getTypeSafe(this.xGridStep, 5);
+			if (NgxThreeUtil.isNotNull(this.xGridStep)) {
+				const xGridStep = NgxThreeUtil.getTypeSafe(this.xGridStep, 5);
 				const xGridSteps = Array.isArray(xGridStep)
 					? xGridStep
 					: this.getGridStep(xGridStep, this.type);
@@ -437,7 +438,7 @@ export class ChartAxesComponent
 					new N3JS.BufferAttribute(gridLine, 3)
 				);
 				this._materialGridX = new N3JS.LineBasicMaterial({
-					color: ThreeUtil.getColorSafe(
+					color: NgxThreeUtil.getColorSafe(
 						this.xGridColor,
 						this.gridColor,
 						0xf0f0f0
@@ -451,8 +452,8 @@ export class ChartAxesComponent
 				gridXMesh.name = 'gridx';
 				this._axes.add(gridXMesh);
 			}
-			if (ThreeUtil.isNotNull(this.yGridStep)) {
-				const yGridStep = ThreeUtil.getTypeSafe(this.yGridStep, 5);
+			if (NgxThreeUtil.isNotNull(this.yGridStep)) {
+				const yGridStep = NgxThreeUtil.getTypeSafe(this.yGridStep, 5);
 				const yGridSteps = Array.isArray(yGridStep)
 					? yGridStep
 					: this.getGridStep(yGridStep, this.type);
@@ -561,7 +562,7 @@ export class ChartAxesComponent
 					new N3JS.BufferAttribute(gridLine, 3)
 				);
 				this._materialGridY = new N3JS.LineDashedMaterial({
-					color: ThreeUtil.getColorSafe(
+					color: NgxThreeUtil.getColorSafe(
 						this.yGridColor,
 						this.gridColor,
 						0xf0f0f0

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { RendererTimer, ThreeUtil } from '../../interface';
-import { AbstractSubscribeComponent } from '../../subscribe.abstract';
+import { NgxThreeUtil } from '../../interface';
+import { IRendererTimer } from '../../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../../subscribe.abstract';
 import * as AmmoType from '../../threejs-library/ammo-type';
 
 /**
@@ -15,8 +16,8 @@ import * as AmmoType from '../../threejs-library/ammo-type';
 	templateUrl: './physics-constraint.component.html',
 	styleUrls: ['./physics-constraint.component.scss'],
 })
-export class PhysicsConstraintComponent
-	extends AbstractSubscribeComponent
+export class NgxPhysicsConstraintComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -179,12 +180,12 @@ export class PhysicsConstraintComponent
 	 * @returns
 	 */
 	private getRigidBody(obj: any, key: string) {
-		if (ThreeUtil.isNotNull(obj)) {
+		if (NgxThreeUtil.isNotNull(obj)) {
 			this.unSubscribeRefer(key);
-			const body = ThreeUtil.getRigidbody(obj);
+			const body = NgxThreeUtil.getRigidbody(obj);
 			this.subscribeRefer(
 				key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					obj,
 					(event) => {
 						if (this.constraint !== null) {
@@ -210,9 +211,9 @@ export class PhysicsConstraintComponent
 	 */
 	private getBtVector3(x: number, y: number, z: number): AmmoType.btVector3 {
 		return new this.ammo.btVector3(
-			ThreeUtil.getTypeSafe(x, 0),
-			ThreeUtil.getTypeSafe(y, 0),
-			ThreeUtil.getTypeSafe(z, 0)
+			NgxThreeUtil.getTypeSafe(x, 0),
+			NgxThreeUtil.getTypeSafe(y, 0),
+			NgxThreeUtil.getTypeSafe(z, 0)
 		);
 	}
 
@@ -223,13 +224,13 @@ export class PhysicsConstraintComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.constraint !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getConstraint();
 				return;
 			}
 
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					['angularmotor', 'enablemotor', 'targetvelocity', 'maxMotorimpulse'],
 					this.OBJECT_ATTR
@@ -238,18 +239,18 @@ export class PhysicsConstraintComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, ['init'])) {
-				changes = ThreeUtil.pushUniq(changes, ['angularmotor']);
+			if (NgxThreeUtil.isIndexOf(changes, ['init'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['angularmotor']);
 				return;
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'enableMotor',
 					'targetVelocity',
 					'maxMotorImpulse',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['angularmotor']);
+				changes = NgxThreeUtil.pushUniq(changes, ['angularmotor']);
 				return;
 			}
 			changes.forEach((change) => {
@@ -268,8 +269,8 @@ export class PhysicsConstraintComponent
 	 */
 	public getConstraint(): AmmoType.btTypedConstraint {
 		if (
-			ThreeUtil.isNotNull(this.ammo) &&
-			ThreeUtil.isNotNull(this.physics) &&
+			NgxThreeUtil.isNotNull(this.ammo) &&
+			NgxThreeUtil.isNotNull(this.physics) &&
 			(this.constraint === null || this._needUpdate)
 		) {
 			this.needUpdate = false;
@@ -281,7 +282,7 @@ export class PhysicsConstraintComponent
 				case 'hinge':
 					const source1: any = this.getRigidBody(this.source1, 'source1');
 					const source2: any = this.getRigidBody(this.source2, 'source2');
-					if (ThreeUtil.isNotNull(source1) && ThreeUtil.isNotNull(source2)) {
+					if (NgxThreeUtil.isNotNull(source1) && NgxThreeUtil.isNotNull(source2)) {
 						const pivotA = this.getBtVector3(
 							this.pivot1x,
 							this.pivot1y,
@@ -321,7 +322,7 @@ export class PhysicsConstraintComponent
 	 * Updates physics constraint component
 	 * @param timer
 	 */
-	update(timer: RendererTimer) {
+	update(timer: IRendererTimer) {
 		if (this.constraint !== null) {
 			if (
 				this.constraint instanceof this.ammo.btHingeConstraint &&
@@ -329,8 +330,8 @@ export class PhysicsConstraintComponent
 			) {
 				this.constraint.enableAngularMotor(
 					this.enableMotor,
-					ThreeUtil.getTypeSafe(this.targetVelocity, 0) * timer.delta,
-					ThreeUtil.getTypeSafe(this.maxMotorImpulse, 50)
+					NgxThreeUtil.getTypeSafe(this.targetVelocity, 0) * timer.delta,
+					NgxThreeUtil.getTypeSafe(this.maxMotorImpulse, 50)
 				);
 			}
 		}

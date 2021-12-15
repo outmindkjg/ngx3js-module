@@ -6,30 +6,30 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { AnimationGroupComponent } from '../animation-group/animation-group.component';
-import { AbstractGeometryComponent } from '../geometry.abstract';
-import { HtmlComponent } from '../html/html.component';
-import { ThreeUtil } from '../interface';
-import { LensflareelementComponent } from '../lensflareelement/lensflareelement.component';
-import { AbstractMaterialComponent } from '../material.abstract';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { SvgComponent } from '../svg/svg.component';
-import { AbstractTextureComponent } from '../texture.abstract';
-import { AudioComponent } from './../audio/audio.component';
-import { CameraComponent } from './../camera/camera.component';
-import { AbstractControllerComponent } from './../controller.component.abstract';
-import { HelperComponent } from './../helper/helper.component';
-import { LightComponent } from './../light/light.component';
-import { ListenerComponent } from './../listener/listener.component';
-import { LookatComponent } from './../lookat/lookat.component';
-import { MeshComponent } from './../mesh/mesh.component';
-import { PositionComponent } from './../position/position.component';
-import { RigidbodyComponent } from './../rigidbody/rigidbody.component';
-import { RotationComponent } from './../rotation/rotation.component';
-import { ScaleComponent } from './../scale/scale.component';
+import { NgxAnimationGroupComponent } from '../animation-group/animation-group.component';
+import { NgxAbstractGeometryComponent } from '../geometry.abstract';
+import { NgxHtmlComponent } from '../html/html.component';
+import { NgxThreeUtil } from '../interface';
+import { NgxLensflareelementComponent } from '../lensflareelement/lensflareelement.component';
+import { NgxAbstractMaterialComponent } from '../material.abstract';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxSvgComponent } from '../svg/svg.component';
+import { NgxAbstractTextureComponent } from '../texture.abstract';
+import { NgxAudioComponent } from './../audio/audio.component';
+import { NgxCameraComponent } from './../camera/camera.component';
+import { NgxAbstractControllerComponent } from './../controller.component.abstract';
+import { NgxHelperComponent } from './../helper/helper.component';
+import { NgxLightComponent } from './../light/light.component';
+import { NgxListenerComponent } from './../listener/listener.component';
+import { NgxLookatComponent } from './../lookat/lookat.component';
+import { NgxMeshComponent } from './../mesh/mesh.component';
+import { NgxPositionComponent } from './../position/position.component';
+import { NgxRigidbodyComponent } from './../rigidbody/rigidbody.component';
+import { NgxRotationComponent } from './../rotation/rotation.component';
+import { NgxScaleComponent } from './../scale/scale.component';
 
 /**
- * SharedComponent
+ * NgxSharedComponent
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SharedComponent) page for details.
  *
@@ -43,123 +43,123 @@ import { ScaleComponent } from './../scale/scale.component';
 	templateUrl: './shared.component.html',
 	styleUrls: ['./shared.component.scss'],
 })
-export class SharedComponent
-	extends AbstractSubscribeComponent
+export class NgxSharedComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, AfterContentInit
 {
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(AbstractGeometryComponent, { descendants: false })
-	private geometryList: QueryList<AbstractGeometryComponent>;
+	@ContentChildren(NgxAbstractGeometryComponent, { descendants: false })
+	private geometryList: QueryList<NgxAbstractGeometryComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(AbstractMaterialComponent, { descendants: false })
-	private materialList: QueryList<AbstractMaterialComponent>;
+	@ContentChildren(NgxAbstractMaterialComponent, { descendants: false })
+	private materialList: QueryList<NgxAbstractMaterialComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(AbstractTextureComponent, { descendants: false })
-	private textureList: QueryList<AbstractTextureComponent>;
+	@ContentChildren(NgxAbstractTextureComponent, { descendants: false })
+	private textureList: QueryList<NgxAbstractTextureComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(LensflareelementComponent, { descendants: false })
-	private lensflareElementList: QueryList<LensflareelementComponent>;
+	@ContentChildren(NgxLensflareelementComponent, { descendants: false })
+	private lensflareElementList: QueryList<NgxLensflareelementComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(SvgComponent, { descendants: false })
-	private svgList: QueryList<SvgComponent>;
+	@ContentChildren(NgxSvgComponent, { descendants: false })
+	private svgList: QueryList<NgxSvgComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(ListenerComponent, { descendants: false })
-	private listnerList: QueryList<ListenerComponent>;
+	@ContentChildren(NgxListenerComponent, { descendants: false })
+	private listnerList: QueryList<NgxListenerComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(AudioComponent, { descendants: false })
-	private audioList: QueryList<AudioComponent>;
+	@ContentChildren(NgxAudioComponent, { descendants: false })
+	private audioList: QueryList<NgxAudioComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(HtmlComponent, { descendants: false })
-	private cssChildrenList: QueryList<HtmlComponent>;
+	@ContentChildren(NgxHtmlComponent, { descendants: false })
+	private cssChildrenList: QueryList<NgxHtmlComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(RigidbodyComponent, { descendants: false })
-	private rigidbodyList: QueryList<RigidbodyComponent>;
+	@ContentChildren(NgxRigidbodyComponent, { descendants: false })
+	private rigidbodyList: QueryList<NgxRigidbodyComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(MeshComponent, { descendants: false })
-	private meshList: QueryList<MeshComponent>;
+	@ContentChildren(NgxMeshComponent, { descendants: false })
+	private meshList: QueryList<NgxMeshComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(CameraComponent, { descendants: false })
-	private cameraList: QueryList<CameraComponent>;
+	@ContentChildren(NgxCameraComponent, { descendants: false })
+	private cameraList: QueryList<NgxCameraComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(HelperComponent, { descendants: false })
-	private helperList: QueryList<HelperComponent>;
+	@ContentChildren(NgxHelperComponent, { descendants: false })
+	private helperList: QueryList<NgxHelperComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(LightComponent, { descendants: false })
-	private lightList: QueryList<LightComponent>;
+	@ContentChildren(NgxLightComponent, { descendants: false })
+	private lightList: QueryList<NgxLightComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(AbstractControllerComponent, { descendants: false })
-	public controllerList: QueryList<AbstractControllerComponent>;
+	@ContentChildren(NgxAbstractControllerComponent, { descendants: false })
+	public controllerList: QueryList<NgxAbstractControllerComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(PositionComponent, { descendants: false })
-	private positionList: QueryList<PositionComponent>;
+	@ContentChildren(NgxPositionComponent, { descendants: false })
+	private positionList: QueryList<NgxPositionComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(RotationComponent, { descendants: false })
-	private rotationList: QueryList<RotationComponent>;
+	@ContentChildren(NgxRotationComponent, { descendants: false })
+	private rotationList: QueryList<NgxRotationComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(ScaleComponent, { descendants: false })
-	private scaleList: QueryList<ScaleComponent>;
+	@ContentChildren(NgxScaleComponent, { descendants: false })
+	private scaleList: QueryList<NgxScaleComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(LookatComponent, { descendants: false })
-	private lookatList: QueryList<LookatComponent>;
+	@ContentChildren(NgxLookatComponent, { descendants: false })
+	private lookatList: QueryList<NgxLookatComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(AnimationGroupComponent, { descendants: false })
-	private animationGroupList: QueryList<AnimationGroupComponent>;
+	@ContentChildren(NgxAnimationGroupComponent, { descendants: false })
+	private animationGroupList: QueryList<NgxAnimationGroupComponent>;
 
 	/**
 	 * Creates an instance of shared component.
@@ -272,8 +272,8 @@ export class SharedComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.sharedObj !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'geometry',
 					'material',
 					'texture',
@@ -295,7 +295,7 @@ export class SharedComponent
 					'lookat',
 				]);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['type'])) {
+			if (NgxThreeUtil.isIndexOf(changes, ['type'])) {
 				return;
 			}
 			changes.forEach((change) => {
@@ -413,7 +413,7 @@ export class SharedComponent
 	 * Gets geometry components
 	 * @returns geometry components
 	 */
-	public getGeometryComponents(): AbstractGeometryComponent[] {
+	public getGeometryComponents(): NgxAbstractGeometryComponent[] {
 		return this.getComponents(this.geometryList);
 	}
 
@@ -421,7 +421,7 @@ export class SharedComponent
 	 * Gets material components
 	 * @returns material components
 	 */
-	public getMaterialComponents(): AbstractMaterialComponent[] {
+	public getMaterialComponents(): NgxAbstractMaterialComponent[] {
 		return this.getComponents(this.materialList);
 	}
 
@@ -429,7 +429,7 @@ export class SharedComponent
 	 * Gets texture components
 	 * @returns texture components
 	 */
-	public getTextureComponents(): AbstractTextureComponent[] {
+	public getTextureComponents(): NgxAbstractTextureComponent[] {
 		return this.getComponents(this.textureList);
 	}
 
@@ -437,7 +437,7 @@ export class SharedComponent
 	 * Gets animation group components
 	 * @returns animation group components
 	 */
-	public getAnimationGroupComponents(): AnimationGroupComponent[] {
+	public getAnimationGroupComponents(): NgxAnimationGroupComponent[] {
 		return this.getComponents(this.animationGroupList);
 	}
 

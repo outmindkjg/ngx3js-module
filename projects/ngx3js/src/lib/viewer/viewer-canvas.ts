@@ -1,4 +1,4 @@
-import { ThreeUtil, N3JS, I3JS } from '../interface';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
 
 /**
  * Viewer canvas
@@ -25,34 +25,34 @@ export class ViewerCanvas {
 	/**
 	 * The Camera of viewer canvas
 	 */
-	camera: I3JS.IPerspectiveCamera = null;
+	camera: I3JS.PerspectiveCamera = null;
 
 	/**
 	 * The Scene of viewer canvas
 	 */
-	scene: I3JS.IScene = null;
+	scene: I3JS.Scene = null;
 
 	/**
 	 * The Renderer of viewer canvas
 	 */
-	private renderer: I3JS.IRenderer = null;
+	private renderer: I3JS.Renderer = null;
 
 	/**
 	 * The Target of viewer canvas
 	 */
-	target: I3JS.IVector3 = null;
+	target: I3JS.Vector3 = null;
 
 	/**
 	 * Virtual camera of viewer canvas
 	 */
-	virtualCamera: I3JS.IGroup = null;
+	virtualCamera: I3JS.Group = null;
 
 	/**
 	 * Creates an instance of viewer canvas.
 	 * @param renderer
 	 * @param [options]
 	 */
-	constructor(renderer: I3JS.IRenderer, options: any = {}) {
+	constructor(renderer: I3JS.Renderer, options: any = {}) {
 		this.target = new N3JS.Vector3();
 		this.position = { x: 0, y: 0 };
 		this.size = { width: 100, height: 100 };
@@ -101,10 +101,10 @@ export class ViewerCanvas {
 				this.viewList = [];
 				const views: any[] = options.views || [];
 				views.forEach((view) => {
-					const left = parseFloat(ThreeUtil.getTypeSafe(view.left, 0));
-					const top = parseFloat(ThreeUtil.getTypeSafe(view.top, 0));
-					const width = parseFloat(ThreeUtil.getTypeSafe(view.width, 0));
-					const height = parseFloat(ThreeUtil.getTypeSafe(view.height, 0));
+					const left = parseFloat(NgxThreeUtil.getTypeSafe(view.left, 0));
+					const top = parseFloat(NgxThreeUtil.getTypeSafe(view.top, 0));
+					const width = parseFloat(NgxThreeUtil.getTypeSafe(view.width, 0));
+					const height = parseFloat(NgxThreeUtil.getTypeSafe(view.height, 0));
 					this.viewList.push({
 						_left: left,
 						_top: top,
@@ -114,7 +114,7 @@ export class ViewerCanvas {
 						top: 0,
 						width: 100,
 						height: 100,
-						background: ThreeUtil.getColorSafe(view.background),
+						background: NgxThreeUtil.getColorSafe(view.background),
 					});
 				});
 				this.changeMultiView();
@@ -122,26 +122,26 @@ export class ViewerCanvas {
 			case 'circlescreen':
 				this.scene.add(this.virtualCamera);
 				this.virtualCamera.add(this.camera);
-				const screenWidth = ThreeUtil.getTypeSafe(this.options.width, 175);
-				const screenHeight = ThreeUtil.getTypeSafe(
+				const screenWidth = NgxThreeUtil.getTypeSafe(this.options.width, 175);
+				const screenHeight = NgxThreeUtil.getTypeSafe(
 					this.options.height,
 					screenWidth * 1.7
 				);
-				this.options.useClear = ThreeUtil.getTypeSafe(
+				this.options.useClear = NgxThreeUtil.getTypeSafe(
 					this.options.useClear,
 					true
 				);
-				this.options.clearColor = ThreeUtil.getColorSafe(
+				this.options.clearColor = NgxThreeUtil.getColorSafe(
 					this.options.clearColor,
 					0x555555
 				);
 				this.options.width = screenWidth;
 				this.options.height = screenHeight;
-				const frameColor = ThreeUtil.getColorSafe(
+				const frameColor = NgxThreeUtil.getColorSafe(
 					this.options.frameColor,
 					0x666666
 				);
-				const wireframeLinewidth = ThreeUtil.getTypeSafe(
+				const wireframeLinewidth = NgxThreeUtil.getTypeSafe(
 					this.options.frameLinewidth,
 					3
 				);
@@ -161,15 +161,15 @@ export class ViewerCanvas {
 					wireframeLinewidth: wireframeLinewidth,
 				});
 				this.canvasList = [];
-				const screenCnt = ThreeUtil.getTypeSafe(this.options.cnt, 5);
-				const screenAngle = -ThreeUtil.getAngleSafe(this.options.angle, 100);
-				const screenRadius = ThreeUtil.getTypeSafe(this.options.radius, 400);
-				this.camera.position.y = ThreeUtil.getTypeSafe(
+				const screenCnt = NgxThreeUtil.getTypeSafe(this.options.cnt, 5);
+				const screenAngle = -NgxThreeUtil.getAngleSafe(this.options.angle, 100);
+				const screenRadius = NgxThreeUtil.getTypeSafe(this.options.radius, 400);
+				this.camera.position.y = NgxThreeUtil.getTypeSafe(
 					this.options.cameraY,
 					-100
 				);
 				this.virtualCamera.position.z = -screenRadius * 1.2;
-				const screenZ = ThreeUtil.getTypeSafe(this.options.screenZ, 200);
+				const screenZ = NgxThreeUtil.getTypeSafe(this.options.screenZ, 200);
 				for (let i = 0; i < screenCnt; i++) {
 					const planeTarget = new N3JS.WebGLRenderTarget(1024, 1024, {
 						minFilter: N3JS.LinearFilter,
@@ -214,7 +214,7 @@ export class ViewerCanvas {
 	 * Sets renderer
 	 * @param renderer
 	 */
-	public setRenderer(renderer: I3JS.IRenderer) {
+	public setRenderer(renderer: I3JS.Renderer) {
 		if (this.renderer !== renderer) {
 			this.renderer = renderer;
 			this.updateForWindowResize();
@@ -269,7 +269,7 @@ export class ViewerCanvas {
 	 * @param scene
 	 * @param camera
 	 */
-	render(renderer: I3JS.IRenderer, scene: I3JS.IScene, camera: I3JS.ICamera) {
+	render(renderer: I3JS.Renderer, scene: I3JS.Scene, camera: I3JS.Camera) {
 		if (this.enabled && renderer instanceof N3JS.WebGLRenderer) {
 			this._autoClear = renderer.autoClear;
 			renderer.getClearColor(this._clearColor);
@@ -298,7 +298,7 @@ export class ViewerCanvas {
 					renderer.setRenderTarget(null);
 					if (
 						this.options.useClear &&
-						ThreeUtil.isNotNull(this.options.clearColor)
+						NgxThreeUtil.isNotNull(this.options.clearColor)
 					) {
 						renderer.setClearColor(this.options.clearColor);
 						renderer.clear();
@@ -316,7 +316,7 @@ export class ViewerCanvas {
 						renderer.setViewport(view.left, view.top, view.width, view.height);
 						renderer.setScissor(view.left, view.top, view.width, view.height);
 						renderer.setScissorTest(true);
-						if (ThreeUtil.isNotNull(view.background)) {
+						if (NgxThreeUtil.isNotNull(view.background)) {
 							renderer.setClearColor(view.background);
 							renderer.clear();
 						}

@@ -1,7 +1,6 @@
-/** @format */
-
 import { Pipe, PipeTransform } from '@angular/core';
-import { ThreeColor, ThreeUtil } from '../interface';
+import { NgxThreeUtil } from '../interface';
+import { INgxColor } from '../ngx-interface';
 
 type ReturnType =
 	| 'string'
@@ -77,16 +76,16 @@ export class ColorPipe implements PipeTransform {
 	 * @returns transform
 	 */
 	transform(
-		color1: ThreeColor,
+		color1: INgxColor,
 		returnType: ReturnType = 'color',
-		color2: ThreeColor = null,
+		color2: INgxColor = null,
 		operator: OperatorType = 'plus',
 		alpha: number = 0.5
-	): ThreeColor {
-		if (ThreeUtil.isNotNull(color1)) {
-			let convColor = ThreeUtil.getColorSafe(color1, 0xffffff);
-			if (ThreeUtil.isNotNull(color2)) {
-				const optionColorConv = ThreeUtil.getColorSafe(color2, 0xffffff);
+	): INgxColor {
+		if (NgxThreeUtil.isNotNull(color1)) {
+			let convColor = NgxThreeUtil.getColorSafe(color1, 0xffffff);
+			if (NgxThreeUtil.isNotNull(color2)) {
+				const optionColorConv = NgxThreeUtil.getColorSafe(color2, 0xffffff);
 				switch (operator) {
 					case '-':
 					case 'minus':

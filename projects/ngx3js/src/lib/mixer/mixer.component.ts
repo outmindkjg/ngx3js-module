@@ -6,23 +6,12 @@ import {
 	QueryList,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ClipComponent } from './../clip/clip.component';
-import { I3JS, RendererTimer, N3JS, ThreeUtil } from './../interface';
-import { PhysicsComponent } from './../physics/physics.component';
+import { IRendererTimer, ICharacterControl } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxClipComponent } from './../clip/clip.component';
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
+import { NgxPhysicsComponent } from './../physics/physics.component';
 
-/**
- * Character Control
- */
-export interface CharacterControl {
-	crouch?: boolean;
-	jump?: boolean;
-	attack?: boolean;
-	moveForward?: boolean;
-	moveBackward?: boolean;
-	moveLeft?: boolean;
-	moveRight?: boolean;
-}
 
 /**
  * The Mixer component.
@@ -62,8 +51,8 @@ export interface CharacterControl {
 	templateUrl: './mixer.component.html',
 	styleUrls: ['./mixer.component.scss'],
 })
-export class MixerComponent
-	extends AbstractSubscribeComponent
+export class NgxMixerComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -146,7 +135,7 @@ export class MixerComponent
 	/**
 	 * The animationHelper of mixer component
 	 */
-	@Input() public animationHelper: MixerComponent = null;
+	@Input() public animationHelper: NgxMixerComponent = null;
 
 	/**
 	 * The skin of mixer component
@@ -161,7 +150,7 @@ export class MixerComponent
 	/**
 	 * The controls of mixer component
 	 */
-	@Input() public controls: CharacterControl = null;
+	@Input() public controls: ICharacterControl = null;
 
 	/**
 	 * The wireframe of mixer component
@@ -246,8 +235,8 @@ export class MixerComponent
 	/**
 	 * Content children of mixer component
 	 */
-	@ContentChildren(ClipComponent, { descendants: false })
-	private clipList: QueryList<ClipComponent>;
+	@ContentChildren(NgxClipComponent, { descendants: false })
+	private clipList: QueryList<NgxClipComponent>;
 
 	/**
 	 * Gets fps
@@ -255,7 +244,7 @@ export class MixerComponent
 	 * @returns fps
 	 */
 	private getFps(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.fps, def);
+		return NgxThreeUtil.getTypeSafe(this.fps, def);
 	}
 
 	/**
@@ -264,7 +253,7 @@ export class MixerComponent
 	 * @returns time scale
 	 */
 	private getTimeScale(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.timeScale, def);
+		return NgxThreeUtil.getTypeSafe(this.timeScale, def);
 	}
 
 	/**
@@ -273,7 +262,7 @@ export class MixerComponent
 	 * @returns true if sync
 	 */
 	private getSync(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.sync, def);
+		return NgxThreeUtil.getTypeSafe(this.sync, def);
 	}
 
 	/**
@@ -282,7 +271,7 @@ export class MixerComponent
 	 * @returns afterglow
 	 */
 	private getAfterglow(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.afterglow, def);
+		return NgxThreeUtil.getTypeSafe(this.afterglow, def);
 	}
 
 	/**
@@ -291,7 +280,7 @@ export class MixerComponent
 	 * @returns true if reset physics on loop
 	 */
 	private getResetPhysicsOnLoop(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.resetPhysicsOnLoop, def);
+		return NgxThreeUtil.getTypeSafe(this.resetPhysicsOnLoop, def);
 	}
 
 	/**
@@ -300,7 +289,7 @@ export class MixerComponent
 	 * @returns true if physics
 	 */
 	private getPhysics(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.physics, def);
+		return NgxThreeUtil.getTypeSafe(this.physics, def);
 	}
 
 	/**
@@ -309,7 +298,7 @@ export class MixerComponent
 	 * @returns delay time
 	 */
 	private getDelayTime(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.delayTime, def);
+		return NgxThreeUtil.getTypeSafe(this.delayTime, def);
 	}
 
 	/**
@@ -367,20 +356,20 @@ export class MixerComponent
 	 * The Mixer of mixer component
 	 */
 	private mixer:
-		| I3JS.IAnimationMixer
-		| I3JS.IMD2Character
-		| I3JS.IMD2CharacterComplex
-		| I3JS.IMMDAnimationHelper = null;
+		| I3JS.AnimationMixer
+		| I3JS.MD2Character
+		| I3JS.MD2CharacterComplex
+		| I3JS.MMDAnimationHelper = null;
 
 	/**
 	 * The Model of mixer component
 	 */
-	private model: I3JS.IObject3D | I3JS.IAnimationObjectGroup = null;
+	private model: I3JS.Object3D | I3JS.AnimationObjectGroup = null;
 
 	/**
 	 * The Clips of mixer component
 	 */
-	private clips: I3JS.IAnimationClip[] | any = null;
+	private clips: I3JS.AnimationClip[] | any = null;
 
 	private oldLoaded: {
 		refTarget: any;
@@ -392,7 +381,7 @@ export class MixerComponent
 	 * @returns true if parent
 	 */
 	public setParent(
-		parent: I3JS.IObject3D | I3JS.IAnimationObjectGroup
+		parent: I3JS.Object3D | I3JS.AnimationObjectGroup
 	): boolean {
 		if (
 			super.setParent(parent) ||
@@ -410,7 +399,7 @@ export class MixerComponent
 			this.unSubscribeRefer('mixerReset');
 			this.subscribeRefer(
 				'mixerReset',
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					this.parent,
 					() => {
 						this.checkModel(parent);
@@ -430,26 +419,26 @@ export class MixerComponent
 	 * @returns target
 	 */
 	private getTarget(
-		target?: I3JS.IObject3D | I3JS.IAnimationObjectGroup
-	): I3JS.IObject3D | I3JS.IAnimationObjectGroup {
-		let targetMesh: I3JS.IObject3D | I3JS.IAnimationObjectGroup = null;
-		if (ThreeUtil.isNotNull(target)) {
+		target?: I3JS.Object3D | I3JS.AnimationObjectGroup
+	): I3JS.Object3D | I3JS.AnimationObjectGroup {
+		let targetMesh: I3JS.Object3D | I3JS.AnimationObjectGroup = null;
+		if (NgxThreeUtil.isNotNull(target)) {
 			if (
 				target instanceof N3JS.AnimationObjectGroup ||
 				target instanceof N3JS.Object3D
 			) {
 				targetMesh = target;
 			} else {
-				targetMesh = ThreeUtil.getObject3d(target, false);
+				targetMesh = NgxThreeUtil.getObject3d(target, false);
 			}
 		}
 		if (
-			ThreeUtil.isNotNull(targetMesh) &&
+			NgxThreeUtil.isNotNull(targetMesh) &&
 			targetMesh instanceof N3JS.Object3D &&
-			ThreeUtil.isNotNull(targetMesh.userData.refTarget)
+			NgxThreeUtil.isNotNull(targetMesh.userData.refTarget)
 		) {
 			targetMesh =
-				ThreeUtil.getObject3d(targetMesh.userData.refTarget, false) ||
+				NgxThreeUtil.getObject3d(targetMesh.userData.refTarget, false) ||
 				targetMesh;
 		}
 		return targetMesh;
@@ -459,9 +448,9 @@ export class MixerComponent
 	 * Checks model
 	 * @param parent
 	 */
-	public checkModel(parent: I3JS.IObject3D | I3JS.IAnimationObjectGroup) {
+	public checkModel(parent: I3JS.Object3D | I3JS.AnimationObjectGroup) {
 		const model = this.getTarget(parent);
-		if (ThreeUtil.isNotNull(model)) {
+		if (NgxThreeUtil.isNotNull(model)) {
 			if (model instanceof N3JS.Object3D) {
 				const clips =
 					parent instanceof N3JS.Object3D ? parent.userData.clips : null;
@@ -478,8 +467,8 @@ export class MixerComponent
 	 * @param clips
 	 */
 	private setModel(
-		model: I3JS.IObject3D | I3JS.IAnimationObjectGroup,
-		clips: I3JS.IAnimationClip[] | any
+		model: I3JS.Object3D | I3JS.AnimationObjectGroup,
+		clips: I3JS.AnimationClip[] | any
 	) {
 		if (this.model !== model || this.clips !== clips) {
 			this.model = model;
@@ -515,7 +504,7 @@ export class MixerComponent
 	/**
 	 * The Physics of mixer component
 	 */
-	private _physics: PhysicsComponent = null;
+	private _physics: NgxPhysicsComponent = null;
 
 	/**
 	 * The Ammo of mixer component
@@ -526,7 +515,7 @@ export class MixerComponent
 	 * Sets physics
 	 * @param physics
 	 */
-	public setPhysics(physics: PhysicsComponent) {
+	public setPhysics(physics: NgxPhysicsComponent) {
 		this._physics = physics;
 		if (
 			this._physics !== null &&
@@ -542,7 +531,7 @@ export class MixerComponent
 				this.unSubscribeRefer('physics');
 				this.subscribeRefer(
 					'physics',
-					ThreeUtil.getSubscribe(
+					NgxThreeUtil.getSubscribe(
 						this._physics,
 						() => {
 							this._ammo = this._physics.getAmmo();
@@ -571,7 +560,7 @@ export class MixerComponent
 		if (this.mixer !== null && this.mixer instanceof N3JS.AnimationMixer) {
 			if (this.play(endAction, duration)) {
 				const mixer = this.mixer;
-				if (ThreeUtil.isNotNull(restoreAction)) {
+				if (NgxThreeUtil.isNotNull(restoreAction)) {
 					const listener = () => {
 						mixer.removeEventListener('finished', listener);
 						this.play(restoreAction, restoreDuration);
@@ -590,13 +579,13 @@ export class MixerComponent
 	/**
 	 * Mmd animation helpers of mixer component
 	 */
-	private mmdAnimationHelpers: I3JS.IObject3D[] = [];
+	private mmdAnimationHelpers: I3JS.Object3D[] = [];
 
 	/**
 	 * Gets mmd animation helper
 	 * @returns mmd animation helper
 	 */
-	public getMmdAnimationHelper(): I3JS.IMMDAnimationHelper {
+	public getMmdAnimationHelper(): I3JS.MMDAnimationHelper {
 		if (this.mixer instanceof N3JS.MMDAnimationHelper) {
 			return this.mixer;
 		} else {
@@ -608,7 +597,7 @@ export class MixerComponent
 	 * Gets mmd animation helper object3 d
 	 * @returns mmd animation helper object3 d
 	 */
-	public getMmdAnimationHelperObject3D(): I3JS.IObject3D[] {
+	public getMmdAnimationHelperObject3D(): I3JS.Object3D[] {
 		return this.mmdAnimationHelpers;
 	}
 
@@ -616,20 +605,20 @@ export class MixerComponent
 	 * Synks animation helper
 	 * @param helper
 	 */
-	public synkAnimationHelper(helper: I3JS.IMMDAnimationHelper) {
+	public synkAnimationHelper(helper: I3JS.MMDAnimationHelper) {
 		if (helper !== null && !this.isAdded) {
 			if (
 				this.model instanceof N3JS.SkinnedMesh ||
 				this.model instanceof N3JS.Camera
 			) {
 				if (
-					ThreeUtil.isNotNull(this.clips) &&
+					NgxThreeUtil.isNotNull(this.clips) &&
 					Array.isArray(this.clips) &&
 					(this._ammo || this.getPhysics(false) == false)
 				) {
 					const skinnedMesh = this.model;
 					const oldParent = skinnedMesh.parent;
-					if (ThreeUtil.isNotNull(oldParent)) {
+					if (NgxThreeUtil.isNotNull(oldParent)) {
 						skinnedMesh.parent.remove(skinnedMesh);
 						skinnedMesh.parent = null;
 					}
@@ -646,7 +635,7 @@ export class MixerComponent
 							// delayTime: this.getDelayTime()
 						});
 					});
-					if (ThreeUtil.isNotNull(oldParent)) {
+					if (NgxThreeUtil.isNotNull(oldParent)) {
 						oldParent.add(skinnedMesh);
 					}
 					this.mmdAnimationHelpers.forEach((mmdHelper) => {
@@ -655,8 +644,8 @@ export class MixerComponent
 						}
 					});
 					this.mmdAnimationHelpers = [];
-					if (ThreeUtil.isNotNull(this.mmdHelpers)) {
-						let rootObject3d: I3JS.IObject3D = skinnedMesh as any;
+					if (NgxThreeUtil.isNotNull(this.mmdHelpers)) {
+						let rootObject3d: I3JS.Object3D = skinnedMesh as any;
 						while (rootObject3d.parent) {
 							rootObject3d = rootObject3d.parent;
 						}
@@ -695,7 +684,7 @@ export class MixerComponent
 				} else {
 					this.subscribeRefer(
 						'audioLoad',
-						ThreeUtil.getSubscribe(
+						NgxThreeUtil.getSubscribe(
 							audioMode,
 							() => {
 								helper.add(audioMode as any, {
@@ -716,12 +705,12 @@ export class MixerComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.mixer !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getMixer();
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'timescale',
 					'fps',
 					'clip',
@@ -785,8 +774,8 @@ export class MixerComponent
 							break;
 						case 'weapon':
 							if (
-								ThreeUtil.isNotNull(this.weapon) &&
-								ThreeUtil.isNotNull(character.weapons) &&
+								NgxThreeUtil.isNotNull(this.weapon) &&
+								NgxThreeUtil.isNotNull(character.weapons) &&
 								character.weapons.length > 0
 							) {
 								let weapon: number = -1;
@@ -810,20 +799,20 @@ export class MixerComponent
 							}
 							break;
 						case 'wireframe':
-							if (ThreeUtil.isNotNull(this.wireframe)) {
+							if (NgxThreeUtil.isNotNull(this.wireframe)) {
 								character.setWireframe(
-									ThreeUtil.getTypeSafe(this.wireframe, false)
+									NgxThreeUtil.getTypeSafe(this.wireframe, false)
 								);
 							}
 							break;
 						case 'rate':
-							if (ThreeUtil.isNotNull(this.rate)) {
-								character.setPlaybackRate(ThreeUtil.getTypeSafe(this.rate, 1));
+							if (NgxThreeUtil.isNotNull(this.rate)) {
+								character.setPlaybackRate(NgxThreeUtil.getTypeSafe(this.rate, 1));
 							}
 							break;
 						case 'skin':
 							if (
-								ThreeUtil.isNotNull(this.skin) &&
+								NgxThreeUtil.isNotNull(this.skin) &&
 								character.skinsBody.length > 0
 							) {
 								let skin: number = -1;
@@ -848,73 +837,73 @@ export class MixerComponent
 							break;
 						case 'controls':
 							if (character instanceof N3JS.MD2CharacterComplex) {
-								if (ThreeUtil.isNotNull(this.controls)) {
+								if (NgxThreeUtil.isNotNull(this.controls)) {
 									(character as any).controls = this.controls;
 								}
 							}
 							break;
 						case 'scale':
-							if (ThreeUtil.isNotNull(this.scale)) {
+							if (NgxThreeUtil.isNotNull(this.scale)) {
 								character.scale = this.scale;
 							}
 							break;
 						case 'animationfps':
-							if (ThreeUtil.isNotNull(this.animationFPS)) {
+							if (NgxThreeUtil.isNotNull(this.animationFPS)) {
 								character.animationFPS = this.animationFPS;
 							}
 							break;
 						case 'transitionframes':
 							if (
-								ThreeUtil.isNotNull(this.maxSpeed) &&
-								ThreeUtil.isNotNull(character['transitionFrames'])
+								NgxThreeUtil.isNotNull(this.maxSpeed) &&
+								NgxThreeUtil.isNotNull(character['transitionFrames'])
 							) {
 								character['transitionFrames'] = this.transitionFrames;
 							}
 							break;
 						case 'maxspeed':
 							if (
-								ThreeUtil.isNotNull(this.maxSpeed) &&
-								ThreeUtil.isNotNull(character['maxSpeed'])
+								NgxThreeUtil.isNotNull(this.maxSpeed) &&
+								NgxThreeUtil.isNotNull(character['maxSpeed'])
 							) {
 								character['maxSpeed'] = this.maxSpeed;
 							}
 							break;
 						case 'maxreversespeed':
 							if (
-								ThreeUtil.isNotNull(this.maxReverseSpeed) &&
-								ThreeUtil.isNotNull(character['maxReverseSpeed'])
+								NgxThreeUtil.isNotNull(this.maxReverseSpeed) &&
+								NgxThreeUtil.isNotNull(character['maxReverseSpeed'])
 							) {
 								character['maxReverseSpeed'] = this.maxReverseSpeed;
 							}
 							break;
 						case 'frontacceleration':
 							if (
-								ThreeUtil.isNotNull(this.frontAcceleration) &&
-								ThreeUtil.isNotNull(character['frontAcceleration'])
+								NgxThreeUtil.isNotNull(this.frontAcceleration) &&
+								NgxThreeUtil.isNotNull(character['frontAcceleration'])
 							) {
 								character['frontAcceleration'] = this.frontAcceleration;
 							}
 							break;
 						case 'backacceleration':
 							if (
-								ThreeUtil.isNotNull(this.backAcceleration) &&
-								ThreeUtil.isNotNull(character['backAcceleration'])
+								NgxThreeUtil.isNotNull(this.backAcceleration) &&
+								NgxThreeUtil.isNotNull(character['backAcceleration'])
 							) {
 								character['backAcceleration'] = this.backAcceleration;
 							}
 							break;
 						case 'frontdecceleration':
 							if (
-								ThreeUtil.isNotNull(this.frontDecceleration) &&
-								ThreeUtil.isNotNull(character['frontDecceleration'])
+								NgxThreeUtil.isNotNull(this.frontDecceleration) &&
+								NgxThreeUtil.isNotNull(character['frontDecceleration'])
 							) {
 								character['frontDecceleration'] = this.frontDecceleration;
 							}
 							break;
 						case 'angularspeed':
 							if (
-								ThreeUtil.isNotNull(this.angularSpeed) &&
-								ThreeUtil.isNotNull(character['angularSpeed'])
+								NgxThreeUtil.isNotNull(this.angularSpeed) &&
+								NgxThreeUtil.isNotNull(character['angularSpeed'])
 							) {
 								character['angularSpeed'] = this.angularSpeed;
 							}
@@ -941,17 +930,17 @@ export class MixerComponent
 	 * Resets mixer
 	 */
 	public getMixer():
-		| I3JS.IAnimationMixer
-		| I3JS.IMD2Character
-		| I3JS.IMD2CharacterComplex
-		| I3JS.IMMDAnimationHelper {
+		| I3JS.AnimationMixer
+		| I3JS.MD2Character
+		| I3JS.MD2CharacterComplex
+		| I3JS.MMDAnimationHelper {
 		if (this.mixer === null || this._needUpdate) {
 			this.needUpdate = false;
 			let mixer:
-				| I3JS.IAnimationMixer
-				| I3JS.IMD2Character
-				| I3JS.IMD2CharacterComplex
-				| I3JS.IMMDAnimationHelper = null;
+				| I3JS.AnimationMixer
+				| I3JS.MD2Character
+				| I3JS.MD2CharacterComplex
+				| I3JS.MMDAnimationHelper = null;
 			this.lastPlayedClip = null;
 			switch (this.type.toLowerCase()) {
 				case 'mmd':
@@ -963,13 +952,13 @@ export class MixerComponent
 							afterglow: this.getAfterglow(),
 							resetPhysicsOnLoop: this.getResetPhysicsOnLoop(),
 						});
-						if (ThreeUtil.isNotNull(this.clips)) {
+						if (NgxThreeUtil.isNotNull(this.clips)) {
 							this.synkAnimationHelper(helper);
 							this.setSubscribeNext('animation');
 						} else {
 							this.subscribeRefer(
 								'mmdLoad',
-								ThreeUtil.getSubscribe(
+								NgxThreeUtil.getSubscribe(
 									this.model,
 									() => {
 										this.synkAnimationHelper(helper);
@@ -984,7 +973,7 @@ export class MixerComponent
 						this.unSubscribeRefer('animation');
 						this.subscribeRefer(
 							'animation',
-							ThreeUtil.getSubscribe(
+							NgxThreeUtil.getSubscribe(
 								this.animationHelper,
 								() => {
 									this.synkAnimationHelper(
@@ -1028,7 +1017,7 @@ export class MixerComponent
 	/**
 	 * Last played clip of mixer component
 	 */
-	private lastPlayedClip: ClipComponent = null;
+	private lastPlayedClip: NgxClipComponent = null;
 
 	/**
 	 * Plays mixer component
@@ -1039,14 +1028,14 @@ export class MixerComponent
 	public play(name: string, duration: number = this.duration): boolean {
 		if (
 			this.mixer !== null &&
-			ThreeUtil.isNotNull(name) &&
+			NgxThreeUtil.isNotNull(name) &&
 			name !== '' &&
 			this.mixer !== null
 		) {
 			if (this.mixer instanceof N3JS.AnimationMixer) {
-				if (ThreeUtil.isNotNull(this.clipList) && this.clipList.length > 0) {
-					duration = ThreeUtil.getTypeSafe(duration, this.duration);
-					let foundAction: ClipComponent = null;
+				if (NgxThreeUtil.isNotNull(this.clipList) && this.clipList.length > 0) {
+					duration = NgxThreeUtil.getTypeSafe(duration, this.duration);
+					let foundAction: NgxClipComponent = null;
 					this.clipList.forEach((clip) => {
 						if (clip.isPlayable()) {
 							clip.action.paused = false;
@@ -1086,8 +1075,8 @@ export class MixerComponent
 	 * Updates mixer component
 	 * @param timer
 	 */
-	public update(timer: RendererTimer) {
-		if (ThreeUtil.isNotNull(this.mixer)) {
+	public update(timer: IRendererTimer) {
+		if (NgxThreeUtil.isNotNull(this.mixer)) {
 			if (this.mixer instanceof N3JS.MMDAnimationHelper) {
 				this.mixer.update(timer.delta);
 			} else if (this.mixer instanceof N3JS.AnimationMixer) {
@@ -1098,10 +1087,10 @@ export class MixerComponent
 			) {
 				this.mixer.update(timer.delta);
 			}
-		} else if (ThreeUtil.isNotNull(this.clips)) {
-			if (ThreeUtil.isNotNull(this.clips.setTime)) {
+		} else if (NgxThreeUtil.isNotNull(this.clips)) {
+			if (NgxThreeUtil.isNotNull(this.clips.setTime)) {
 				this.clips.setTime(timer.elapsedTime * this.timeScale);
-			} else if (ThreeUtil.isNotNull(this.clips.update)) {
+			} else if (NgxThreeUtil.isNotNull(this.clips.update)) {
 				try {
 					this.clips.update(timer.delta * this.timeScale);
 				} catch (ex) {}

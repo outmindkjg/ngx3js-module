@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { AbstractSubscribeComponent } from '../../subscribe.abstract';
+import { NgxAbstractSubscribeComponent } from '../../subscribe.abstract';
 import * as AmmoType from '../../threejs-library/ammo-type';
-import { ThreeUtil } from '../../interface';
+import { NgxThreeUtil } from '../../interface';
 
 /**
  * The Rigidbody Node component.
@@ -14,8 +14,8 @@ import { ThreeUtil } from '../../interface';
 	templateUrl: './rigidbody-node.component.html',
 	styleUrls: ['./rigidbody-node.component.scss'],
 })
-export class RigidbodyNodeComponent
-	extends AbstractSubscribeComponent
+export class NgxRigidbodyNodeComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -126,12 +126,12 @@ export class RigidbodyNodeComponent
 	 * @returns
 	 */
 	private getRigidBody(obj: any, key: string) {
-		if (ThreeUtil.isNotNull(obj)) {
+		if (NgxThreeUtil.isNotNull(obj)) {
 			this.unSubscribeRefer(key);
-			const body = ThreeUtil.getRigidbody(obj);
+			const body = NgxThreeUtil.getRigidbody(obj);
 			this.subscribeRefer(
 				key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					obj,
 					(event) => {
 						if (this.rigidbodyNode !== null) {
@@ -159,24 +159,24 @@ export class RigidbodyNodeComponent
 	 */
 	public getRigidbodyNode(): AmmoType.btTypedConstraint {
 		if (
-			ThreeUtil.isNotNull(this.ammo) &&
-			ThreeUtil.isNotNull(this.rigidBody) &&
-			ThreeUtil.isNotNull(this.physics) &&
+			NgxThreeUtil.isNotNull(this.ammo) &&
+			NgxThreeUtil.isNotNull(this.rigidBody) &&
+			NgxThreeUtil.isNotNull(this.physics) &&
 			(this.rigidbodyNode === null || this._needUpdate)
 		) {
 			this.needUpdate = false;
 			switch (this.type.toLowerCase()) {
 				case 'anchor':
 					const body = this.getRigidBody(this.body, 'body');
-					if (ThreeUtil.isNotNull(body)) {
+					if (NgxThreeUtil.isNotNull(body)) {
 						this.rigidBody.appendAnchor(
-							ThreeUtil.getTypeSafe(this.node, 0),
+							NgxThreeUtil.getTypeSafe(this.node, 0),
 							body,
-							ThreeUtil.getTypeSafe(
+							NgxThreeUtil.getTypeSafe(
 								this.disableCollisionBetweenLinkedBodies,
 								false
 							),
-							ThreeUtil.getTypeSafe(this.influence, 0.5)
+							NgxThreeUtil.getTypeSafe(this.influence, 0.5)
 						);
 						this.rigidbodyNode = {
 							type: this.type,

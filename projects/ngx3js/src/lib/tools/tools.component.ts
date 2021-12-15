@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { I3JS, N3JS, ThreeUtil } from '../interface';
-import { LocalStorageService } from '../local-storage.service';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { AbstractTextureComponent } from '../texture.abstract';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { NgxLocalStorageService } from '../local-storage.service';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractTextureComponent } from '../texture.abstract';
 
 /**
  * Tools Component
@@ -28,7 +28,7 @@ import { AbstractTextureComponent } from '../texture.abstract';
 	templateUrl: './tools.component.html',
 	styleUrls: ['./tools.component.scss'],
 })
-export class ToolsComponent extends AbstractSubscribeComponent implements OnInit {
+export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
 	 * The Input of tools component
 	 *
@@ -94,7 +94,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 	/**
 	 * The background of tools component
 	 */
-	@Input() public background: string | number | AbstractTextureComponent = null;
+	@Input() public background: string | number | NgxAbstractTextureComponent = null;
 
 	/**
 	 * The storageName of tools component
@@ -112,14 +112,14 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 	 * @returns size
 	 */
 	private getSize(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.size, def);
+		return NgxThreeUtil.getTypeSafe(this.size, def);
 	}
 
 	/**
 	 * Creates an instance of tools component.
 	 * @param localStorageService
 	 */
-	constructor(private localStorageService: LocalStorageService) {
+	constructor(private localStorageService: NgxLocalStorageService) {
 		super();
 	}
 
@@ -151,7 +151,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 	/**
 	 * Audio loader of tools component
 	 */
-	private audioLoader: I3JS.IAudioLoader = null;
+	private audioLoader: I3JS.AudioLoader = null;
 
 	/**
 	 * Gets audio
@@ -170,7 +170,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 	 * Gets texture
 	 * @returns texture
 	 */
-	public getTexture(): I3JS.ITexture {
+	public getTexture(): I3JS.Texture {
 		const texture = this.getTool();
 		if (texture instanceof N3JS.Texture) {
 			return texture as any;
@@ -189,8 +189,8 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 			let tool: any = null;
 			switch (this.type.toLowerCase()) {
 				case 'pmremtexture':
-					const pmremGenerator = new N3JS.PMREMGenerator(ThreeUtil.getRenderer() as any);
-					if (ThreeUtil.isNotNull(this.storageName)) {
+					const pmremGenerator = new N3JS.PMREMGenerator(NgxThreeUtil.getRenderer() as any);
+					if (NgxThreeUtil.isNotNull(this.storageName)) {
 						this.localStorageService.getTexture(
 							this.storageName,
 							(texture) => {
@@ -206,11 +206,11 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 						tool = {};
 					} else {
 						const envScene = new N3JS.Scene();
-						if (ThreeUtil.isNotNull(this.background)) {
-							if (this.background instanceof AbstractTextureComponent) {
+						if (NgxThreeUtil.isNotNull(this.background)) {
+							if (this.background instanceof NgxAbstractTextureComponent) {
 								envScene.background = this.background.getTexture() as any;
 							} else {
-								envScene.background = ThreeUtil.getColorSafe(this.background) as any;
+								envScene.background = NgxThreeUtil.getColorSafe(this.background) as any;
 							}
 						}
 						tool = pmremGenerator.fromScene(envScene).texture;
@@ -222,7 +222,7 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 						this.audioLoader = new N3JS.AudioLoader() as any;
 					}
 					tool = {};
-					this.audioLoader.load(ThreeUtil.getStoreUrl(this.url), (audioBuffer: AudioBuffer) => {
+					this.audioLoader.load(NgxThreeUtil.getStoreUrl(this.url), (audioBuffer: AudioBuffer) => {
 						this.tool = audioBuffer;
 						this.setObject(this.tool);
 						this.setSubscribeNext('audio');
@@ -233,8 +233,8 @@ export class ToolsComponent extends AbstractSubscribeComponent implements OnInit
 				case 'webglcuberendertarget':
 				default:
 					tool = new N3JS.WebGLCubeRenderTarget(this.getSize(256), {
-						encoding: ThreeUtil.getTextureEncodingSafe(this.encoding, 'sRGB'),
-						format: ThreeUtil.getPixelFormatSafe(this.format, 'RGBA', ''),
+						encoding: NgxThreeUtil.getTextureEncodingSafe(this.encoding, 'sRGB'),
+						format: NgxThreeUtil.getPixelFormatSafe(this.format, 'RGBA', ''),
 					});
 					break;
 			}

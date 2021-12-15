@@ -1,15 +1,8 @@
-import {
-	AfterContentInit,
-	Component,
-	Input,
-	OnChanges,
-	OnDestroy,
-	OnInit,
-	SimpleChanges,
-} from '@angular/core';
-import { I3JS, N3JS, ThreeUtil } from './interface';
-import { AbstractSubscribeComponent } from './subscribe.abstract';
-import { CanvasFunctionType, TextureUtils } from './texture/textureUtils';
+import { AfterContentInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { I3JS, N3JS, NgxThreeUtil } from './interface';
+import { TCanvasFunctionType } from './ngx-interface';
+import { NgxAbstractSubscribeComponent } from './subscribe.abstract';
+import { TextureUtils } from './texture/textureUtils';
 import { unzipSync } from './threejs-library/fflate.module';
 
 /**
@@ -21,12 +14,12 @@ import { unzipSync } from './threejs-library/fflate.module';
  * _@Component({
  * 	providers: [
  * 		{
- * 			provide: AbstractTextureComponent,
- * 			useExisting: forwardRef(() => XxxComponent),
+ * 			provide: NgxAbstractTextureComponent,
+ * 			useExisting: forwardRef(() => NgxXxxComponent),
  * 		},
  * 	],
  * })
- * export class XxxComponent extends AbstractTextureComponent implements OnInit {
+ * export class NgxXxxComponent extends NgxAbstractTextureComponent implements OnInit {
  * 	constructor() {
  * 		super();
  * 	}
@@ -38,8 +31,8 @@ import { unzipSync } from './threejs-library/fflate.module';
 @Component({
 	template: '',
 })
-export class AbstractTextureComponent
-	extends AbstractSubscribeComponent
+export class NgxAbstractTextureComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {
 	/**
@@ -438,11 +431,7 @@ export class AbstractTextureComponent
 			if (this._material !== null) {
 				Object.entries(this._material).forEach(([_, info]) => {
 					let textureType = info.refType;
-					if (
-						textureType === 'auto' ||
-						textureType === 'texture' ||
-						textureType === ''
-					) {
+					if (textureType === 'auto' || textureType === 'texture' || textureType === '') {
 						textureType = this.type;
 					}
 					info.materials.forEach((material) => {
@@ -475,11 +464,11 @@ export class AbstractTextureComponent
 					});
 				});
 			}
-			if (ThreeUtil.isNotNull(this.texture.image)) {
+			if (NgxThreeUtil.isNotNull(this.texture.image)) {
 				if (
 					this.texture instanceof N3JS.VideoTexture &&
-					ThreeUtil.isNotNull(this.texture.image.srcObject) &&
-					ThreeUtil.isNotNull(this.texture.image.srcObject.getTracks)
+					NgxThreeUtil.isNotNull(this.texture.image.srcObject) &&
+					NgxThreeUtil.isNotNull(this.texture.image.srcObject.getTracks)
 				) {
 					this.texture.image.srcObject.getTracks().forEach((track: any) => {
 						track.stop();
@@ -525,10 +514,10 @@ export class AbstractTextureComponent
 	 * @param defY
 	 * @returns repeat
 	 */
-	protected getRepeat(defX: number, defY: number): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(
-			ThreeUtil.getTypeSafe(this.repeatX, this.repeat),
-			ThreeUtil.getTypeSafe(this.repeatY, this.repeat),
+	protected getRepeat(defX: number, defY: number): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(
+			NgxThreeUtil.getTypeSafe(this.repeatX, this.repeat),
+			NgxThreeUtil.getTypeSafe(this.repeatY, this.repeat),
 			new N3JS.Vector2(defX, defY)
 		);
 	}
@@ -539,10 +528,10 @@ export class AbstractTextureComponent
 	 * @param defY
 	 * @returns offset
 	 */
-	protected getOffset(defX: number, defY: number): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(
-			ThreeUtil.getTypeSafe(this.offsetX, this.offset),
-			ThreeUtil.getTypeSafe(this.offsetY, this.offset),
+	protected getOffset(defX: number, defY: number): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(
+			NgxThreeUtil.getTypeSafe(this.offsetX, this.offset),
+			NgxThreeUtil.getTypeSafe(this.offsetY, this.offset),
 			new N3JS.Vector2(defX, defY)
 		);
 	}
@@ -553,10 +542,10 @@ export class AbstractTextureComponent
 	 * @param defY
 	 * @returns center
 	 */
-	private getCenter(defX: number, defY: number): I3JS.IVector2 {
-		return ThreeUtil.getVector2Safe(
-			ThreeUtil.getTypeSafe(this.centerX, this.center),
-			ThreeUtil.getTypeSafe(this.centerY, this.center),
+	private getCenter(defX: number, defY: number): I3JS.Vector2 {
+		return NgxThreeUtil.getVector2Safe(
+			NgxThreeUtil.getTypeSafe(this.centerX, this.center),
+			NgxThreeUtil.getTypeSafe(this.centerY, this.center),
 			new N3JS.Vector2(defX, defY)
 		);
 	}
@@ -564,47 +553,47 @@ export class AbstractTextureComponent
 	/**
 	 * Ref texture of abstract texture component
 	 */
-	private refTexture: I3JS.ITexture = null;
+	private refTexture: I3JS.Texture = null;
 
 	/**
 	 * The Texture of abstract texture component
 	 */
-	protected texture: I3JS.ITexture = null;
+	protected texture: I3JS.Texture = null;
 
 	/**
 	 * Texture loader of abstract texture component
 	 */
-	public static textureLoader: I3JS.ITextureLoader = null;
+	public static textureLoader: I3JS.TextureLoader = null;
 
 	/**
 	 * Nrrd loader of abstract texture component
 	 */
-	public static nrrdLoader: I3JS.INRRDLoader = null;
+	public static nrrdLoader: I3JS.NRRDLoader = null;
 
 	/**
 	 * File loader of abstract texture component
 	 */
-	public static fileLoader: I3JS.IFileLoader = null;
+	public static fileLoader: I3JS.FileLoader = null;
 
 	/**
 	 * Cube texture loader of abstract texture component
 	 */
-	public static cubeTextureLoader: I3JS.ICubeTextureLoader = null;
+	public static cubeTextureLoader: I3JS.CubeTextureLoader = null;
 
 	/**
 	 * Image bitmap loader of abstract texture component
 	 */
-	public static imageBitmapLoader: I3JS.IImageBitmapLoader = null;
+	public static imageBitmapLoader: I3JS.ImageBitmapLoader = null;
 
 	/**
 	 * Hdr cube map loader of abstract texture component
 	 */
-	public static hdrCubeMapLoader: I3JS.IHDRCubeTextureLoader = null;
+	public static hdrCubeMapLoader: I3JS.HDRCubeTextureLoader = null;
 
 	/**
 	 * Rgbm loader of abstract texture component
 	 */
-	public static rgbmLoader: I3JS.IRGBMLoader = null;
+	public static rgbmLoader: I3JS.RGBMLoader = null;
 
 	/**
 	 * Gets texture image
@@ -617,10 +606,10 @@ export class AbstractTextureComponent
 	public getTextureImage(
 		image: string,
 		cubeImage?: string[],
-		program?: CanvasFunctionType | string,
+		program?: TCanvasFunctionType | string,
 		onLoad?: () => void
-	): I3JS.ITexture {
-		return AbstractTextureComponent.getTextureImage(
+	): I3JS.Texture {
+		return NgxAbstractTextureComponent.getTextureImage(
 			image,
 			cubeImage,
 			program,
@@ -655,7 +644,7 @@ export class AbstractTextureComponent
 		loaderType?: string,
 		cubeImage?: string[],
 		onLoad?: () => void
-	): I3JS.ITexture {
+	): I3JS.Texture {
 		const loadOption: { [key: string]: any } = {
 			size: null,
 			width: null,
@@ -665,7 +654,7 @@ export class AbstractTextureComponent
 			type: loaderType,
 		};
 		const textureOption: { [key: string]: any } = {};
-		if (ThreeUtil.isNotNull(optionsTxt)) {
+		if (NgxThreeUtil.isNotNull(optionsTxt)) {
 			const optionsList = optionsTxt.split(',');
 			optionsList.forEach((option) => {
 				switch (option.toLowerCase()) {
@@ -681,8 +670,10 @@ export class AbstractTextureComponent
 					case 'linearmipmaplinear':
 					case 'linearfilter':
 					case 'linear':
-						textureOption.minFilter = textureOption.magFilter =
-							ThreeUtil.getTypeSafe(option, 'LinearMipmapLinearFilter');
+						textureOption.minFilter = textureOption.magFilter = NgxThreeUtil.getTypeSafe(
+							option,
+							'LinearMipmapLinearFilter'
+						);
 						break;
 					case 'minnearestfilter':
 					case 'minnearest':
@@ -696,10 +687,7 @@ export class AbstractTextureComponent
 					case 'minlinearmipmaplinear':
 					case 'minlinearfilter':
 					case 'minlinear':
-						textureOption.minFilter = ThreeUtil.getTypeSafe(
-							option.substr(3),
-							'LinearMipmapLinearFilter'
-						);
+						textureOption.minFilter = NgxThreeUtil.getTypeSafe(option.substr(3), 'LinearMipmapLinearFilter');
 						break;
 					case 'magnearestfilter':
 					case 'magnearest':
@@ -713,10 +701,7 @@ export class AbstractTextureComponent
 					case 'maglinearmipmaplinear':
 					case 'maglinearfilter':
 					case 'maglinear':
-						textureOption.magFilter = ThreeUtil.getTypeSafe(
-							option.substr(3),
-							'LinearFilter'
-						);
+						textureOption.magFilter = NgxThreeUtil.getTypeSafe(option.substr(3), 'LinearFilter');
 						break;
 					case 'repeatwrapping':
 					case 'repeat':
@@ -725,10 +710,7 @@ export class AbstractTextureComponent
 					case 'clamptoedgewrapping':
 					case 'clamptoedge':
 					case 'wraprepeat':
-						textureOption.wrapS = textureOption.wrapT = ThreeUtil.getTypeSafe(
-							option,
-							'repeat'
-						);
+						textureOption.wrapS = textureOption.wrapT = NgxThreeUtil.getTypeSafe(option, 'repeat');
 						break;
 					case 'wrapsrepeatwrapping':
 					case 'wrapsrepeat':
@@ -736,10 +718,7 @@ export class AbstractTextureComponent
 					case 'wrapsmirroredrepeat':
 					case 'wrapsclamptoedgewrapping':
 					case 'wrapsclamptoedge':
-						textureOption.wrapS = ThreeUtil.getTypeSafe(
-							option.substr(5),
-							'repeat'
-						);
+						textureOption.wrapS = NgxThreeUtil.getTypeSafe(option.substr(5), 'repeat');
 						break;
 					case 'wraptrepeatwrapping':
 					case 'wraptrepeat':
@@ -747,10 +726,7 @@ export class AbstractTextureComponent
 					case 'wraptmirroredrepeat':
 					case 'wraptclamptoedgewrapping':
 					case 'wraptclamptoedge':
-						textureOption.wrapT = ThreeUtil.getTypeSafe(
-							option.substr(5),
-							'repeat'
-						);
+						textureOption.wrapT = NgxThreeUtil.getTypeSafe(option.substr(5), 'repeat');
 						break;
 					case 'alphaformat':
 					case 'alpha':
@@ -780,7 +756,7 @@ export class AbstractTextureComponent
 					case 'depthstencil':
 					case 'rgbaformat':
 					case 'rgba':
-						textureOption.format = ThreeUtil.getTypeSafe(option, 'rgba');
+						textureOption.format = NgxThreeUtil.getTypeSafe(option, 'rgba');
 						break;
 					case 'bytetype':
 					case 'byte':
@@ -806,7 +782,7 @@ export class AbstractTextureComponent
 					case 'unsignedint248':
 					case 'unsignedbytetype':
 					case 'unsignedbyte':
-						textureOption.type = ThreeUtil.getTypeSafe(option, 'unsignedbyte');
+						textureOption.type = NgxThreeUtil.getTypeSafe(option, 'unsignedbyte');
 						break;
 					case 'srgbencoding':
 					case 'srgb':
@@ -823,10 +799,7 @@ export class AbstractTextureComponent
 					case 'rgbdencoding':
 					case 'rgbd':
 					case 'linearencoding':
-						textureOption.encoding = ThreeUtil.getTypeSafe(
-							option,
-							'linearencoding'
-						);
+						textureOption.encoding = NgxThreeUtil.getTypeSafe(option, 'linearencoding');
 						break;
 					case 'uvmapping':
 					case 'uv':
@@ -842,7 +815,7 @@ export class AbstractTextureComponent
 					case 'cubeuvreflection':
 					case 'cubeuvrefractionmapping':
 					case 'cubeuvrefraction':
-						textureOption.mapping = ThreeUtil.getTypeSafe(option, 'default');
+						textureOption.mapping = NgxThreeUtil.getTypeSafe(option, 'default');
 						break;
 					case 'image':
 					case 'texture2d':
@@ -901,10 +874,7 @@ export class AbstractTextureComponent
 								case 'premultiplyalpha':
 								case 'generatemipmaps':
 								case 'flipy':
-									textureOption[key.toLowerCase()] = ThreeUtil.getBooleanSafe(
-										value,
-										false
-									);
+									textureOption[key.toLowerCase()] = NgxThreeUtil.getBooleanSafe(value, false);
 									break;
 								case 'repeat':
 								case 'offset':
@@ -912,7 +882,7 @@ export class AbstractTextureComponent
 									if (y === '') {
 										y = x;
 									}
-									textureOption[key.toLowerCase()] = ThreeUtil.getVector2Safe(
+									textureOption[key.toLowerCase()] = NgxThreeUtil.getVector2Safe(
 										parseFloat(x),
 										parseFloat(y),
 										null,
@@ -928,10 +898,10 @@ export class AbstractTextureComponent
 				}
 			});
 		}
-		let texture: I3JS.ITexture = null;
-		if (ThreeUtil.isNotNull(image.getTexture)) {
+		let texture: I3JS.Texture = null;
+		if (NgxThreeUtil.isNotNull(image.getTexture)) {
 			texture = image.getTexture();
-			ThreeUtil.getSubscribe(
+			NgxThreeUtil.getSubscribe(
 				image,
 				() => {
 					const loadedTexture = image.getTexture();
@@ -942,7 +912,7 @@ export class AbstractTextureComponent
 				},
 				'loaded'
 			);
-			ThreeUtil.getSubscribe(
+			NgxThreeUtil.getSubscribe(
 				image,
 				() => {
 					texture.needsUpdate = true;
@@ -954,7 +924,7 @@ export class AbstractTextureComponent
 		} else {
 			texture = this.getTextureImage(image, cubeImage, null, loadOption, () => {
 				this.setTextureOptions(texture, textureOption);
-				if (ThreeUtil.isNotNull(onLoad)) {
+				if (NgxThreeUtil.isNotNull(onLoad)) {
 					onLoad();
 				}
 			});
@@ -975,25 +945,23 @@ export class AbstractTextureComponent
 	public static getTextureImage(
 		image: string,
 		cubeImage?: string[],
-		program?: CanvasFunctionType | string,
+		program?: TCanvasFunctionType | string,
 		options?: any,
 		onLoad?: () => void
-	): I3JS.ITexture {
+	): I3JS.Texture {
 		options = options || {};
 		onLoad = onLoad || (() => {});
 		let loaderType = (options.type || 'auto').toLowerCase();
-		if (ThreeUtil.isNotNull(cubeImage) && cubeImage.length > 0) {
-			cubeImage = ThreeUtil.getCubeImage(cubeImage);
+		if (NgxThreeUtil.isNotNull(cubeImage) && cubeImage.length > 0) {
+			cubeImage = NgxThreeUtil.getCubeImage(cubeImage);
 			switch (loaderType || 'cubetexture') {
 				case 'hdrcube':
 				case 'hdrcubetexture':
 					if (this.hdrCubeMapLoader === null) {
-						this.hdrCubeMapLoader = new N3JS.HDRCubeTextureLoader(
-							ThreeUtil.getLoadingManager()
-						);
+						this.hdrCubeMapLoader = new N3JS.HDRCubeTextureLoader(NgxThreeUtil.getLoadingManager());
 					}
-					if (ThreeUtil.isNotNull(image) && image !== '') {
-						this.hdrCubeMapLoader.setPath(ThreeUtil.getStoreUrl(image));
+					if (NgxThreeUtil.isNotNull(image) && image !== '') {
+						this.hdrCubeMapLoader.setPath(NgxThreeUtil.getStoreUrl(image));
 					}
 					const cubeTexture = new N3JS.CubeTexture();
 					this.hdrCubeMapLoader.setDataType(N3JS.UnsignedByteType);
@@ -1006,10 +974,10 @@ export class AbstractTextureComponent
 				case 'rgbm':
 				case 'rgbmtexture':
 					if (this.rgbmLoader === null) {
-						this.rgbmLoader = new N3JS.RGBMLoader(ThreeUtil.getLoadingManager());
+						this.rgbmLoader = new N3JS.RGBMLoader(NgxThreeUtil.getLoadingManager());
 					}
-					if (ThreeUtil.isNotNull(image) && image !== '') {
-						this.rgbmLoader.setPath(ThreeUtil.getStoreUrl(image));
+					if (NgxThreeUtil.isNotNull(image) && image !== '') {
+						this.rgbmLoader.setPath(NgxThreeUtil.getStoreUrl(image));
 					}
 					const rgbmTexture = new N3JS.CubeTexture();
 					this.rgbmLoader.loadCubemap(cubeImage, (rgbmCube) => {
@@ -1020,18 +988,16 @@ export class AbstractTextureComponent
 					return rgbmTexture;
 				default:
 					if (this.cubeTextureLoader === null) {
-						this.cubeTextureLoader = new N3JS.CubeTextureLoader(
-							ThreeUtil.getLoadingManager()
-						);
+						this.cubeTextureLoader = new N3JS.CubeTextureLoader(NgxThreeUtil.getLoadingManager());
 					}
-					if (ThreeUtil.isNotNull(image) && image !== '') {
-						this.cubeTextureLoader.setPath(ThreeUtil.getStoreUrl(image));
+					if (NgxThreeUtil.isNotNull(image) && image !== '') {
+						this.cubeTextureLoader.setPath(NgxThreeUtil.getStoreUrl(image));
 					}
 					return this.cubeTextureLoader.load(cubeImage, () => {
 						onLoad();
 					});
 			}
-		} else if (ThreeUtil.isNotNull(image) && image !== '') {
+		} else if (NgxThreeUtil.isNotNull(image) && image !== '') {
 			const fileName = image.toLowerCase();
 			if (loaderType === 'auto') {
 				if (
@@ -1086,7 +1052,7 @@ export class AbstractTextureComponent
 							},
 							{ passive: true }
 						);
-						video.src = ThreeUtil.getStoreUrl(image);
+						video.src = NgxThreeUtil.getStoreUrl(image);
 						video.play();
 					}
 					const videoTexture = new N3JS.VideoTexture(video);
@@ -1102,24 +1068,17 @@ export class AbstractTextureComponent
 				default:
 					if (image.endsWith('.zip')) {
 						if (this.fileLoader === null) {
-							this.fileLoader = new N3JS.FileLoader(
-								ThreeUtil.getLoadingManager()
-							);
+							this.fileLoader = new N3JS.FileLoader(NgxThreeUtil.getLoadingManager());
 							this.fileLoader.setResponseType('arraybuffer');
 						}
-						let texture: I3JS.ITexture = null;
+						let texture: I3JS.Texture = null;
 						const width = options.width || 1;
 						const height = options.height || 1;
 						const depth = options.depth || 1;
 						switch ((loaderType || 'texture').toLowerCase()) {
 							case 'datatexture2d':
 							case 'texture2d':
-								texture = new N3JS.DataTexture2DArray(
-									null,
-									width,
-									height,
-									depth
-								);
+								texture = new N3JS.DataTexture2DArray(null, width, height, depth);
 								break;
 							case 'datatexture3d':
 							case 'texture3d':
@@ -1131,7 +1090,7 @@ export class AbstractTextureComponent
 								texture = new N3JS.DataTexture(null, width, height);
 								break;
 						}
-						this.fileLoader.load(ThreeUtil.getStoreUrl(image), (data) => {
+						this.fileLoader.load(NgxThreeUtil.getStoreUrl(image), (data) => {
 							const zip = unzipSync(new Uint8Array(data as ArrayBuffer));
 							let fileName = (options.fileName || '').toLowerCase();
 							let fileObject: any = null;
@@ -1146,21 +1105,21 @@ export class AbstractTextureComponent
 						});
 						return texture;
 					} else if (image.endsWith('.room')) {
-						const pmremGenerator = ThreeUtil.getPmremGenerator();
+						const pmremGenerator = NgxThreeUtil.getPmremGenerator();
 						const renderTarget = pmremGenerator.fromScene(
 							new N3JS.RoomEnvironment() as any,
-							ThreeUtil.getTypeSafe(options.sigma, 0),
-							ThreeUtil.getTypeSafe(options.near, 0.1),
-							ThreeUtil.getTypeSafe(options.far, 100)
+							NgxThreeUtil.getTypeSafe(options.sigma, 0),
+							NgxThreeUtil.getTypeSafe(options.near, 0.1),
+							NgxThreeUtil.getTypeSafe(options.far, 100)
 						);
 						pmremGenerator.dispose();
 						return renderTarget.texture;
 					} else if (image.endsWith('.nrrd')) {
 						if (this.nrrdLoader === null) {
-							this.nrrdLoader = new N3JS.NRRDLoader(ThreeUtil.getLoadingManager());
+							this.nrrdLoader = new N3JS.NRRDLoader(NgxThreeUtil.getLoadingManager());
 						}
 						const texture = new N3JS.DataTexture3D(null, 1, 1, 1);
-						this.nrrdLoader.load(ThreeUtil.getStoreUrl(image), (volume) => {
+						this.nrrdLoader.load(NgxThreeUtil.getStoreUrl(image), (volume) => {
 							texture.image = {
 								data: volume.data,
 								width: volume.xLength,
@@ -1185,24 +1144,19 @@ export class AbstractTextureComponent
 								);
 							default:
 								if (this.textureLoader === null) {
-									this.textureLoader = new N3JS.TextureLoader(
-										ThreeUtil.getLoadingManager()
-									);
+									this.textureLoader = new N3JS.TextureLoader(NgxThreeUtil.getLoadingManager());
 								}
-								const texture = this.textureLoader.load(
-									ThreeUtil.getStoreUrl(image),
-									() => {
-										texture.needsUpdate = true;
-										onLoad();
-									}
-								);
+								const texture = this.textureLoader.load(NgxThreeUtil.getStoreUrl(image), () => {
+									texture.needsUpdate = true;
+									onLoad();
+								});
 								return texture;
 						}
 					}
 			}
-		} else if (ThreeUtil.isNotNull(options.data)) {
-			const dataWidth: number = ThreeUtil.getTypeSafe(options.width, 32);
-			const dataHeight: number = ThreeUtil.getTypeSafe(options.height, 32);
+		} else if (NgxThreeUtil.isNotNull(options.data)) {
+			const dataWidth: number = NgxThreeUtil.getTypeSafe(options.width, 32);
+			const dataHeight: number = NgxThreeUtil.getTypeSafe(options.height, 32);
 			const data = options.data;
 			let textureData: any = null;
 			if (
@@ -1226,29 +1180,19 @@ export class AbstractTextureComponent
 			return new N3JS.DataTexture(data, dataWidth, dataHeight);
 		} else {
 			const canvas: HTMLCanvasElement = document.createElement('canvas');
-			const canvasWidth: number = ThreeUtil.getTypeSafe(options.width, 32);
-			const canvasHeight: number = ThreeUtil.getTypeSafe(options.height, 32);
-			const text: string = ThreeUtil.getTypeSafe(options.text, '');
+			const canvasWidth: number = NgxThreeUtil.getTypeSafe(options.width, 32);
+			const canvasHeight: number = NgxThreeUtil.getTypeSafe(options.height, 32);
+			const text: string = NgxThreeUtil.getTypeSafe(options.text, '');
 			canvas.width = canvasWidth;
 			canvas.height = canvasHeight;
-			if (ThreeUtil.isNotNull(program)) {
+			if (NgxThreeUtil.isNotNull(program)) {
 				const _context = canvas.getContext('2d', {
 					alpha: true,
 				});
-				TextureUtils.drawCanvas(
-					program,
-					_context,
-					text,
-					canvasWidth,
-					canvasHeight,
-					options.programParam
-				);
+				TextureUtils.drawCanvas(program, _context, text, canvasWidth, canvasHeight, options.programParam);
 			}
 			const canvasTexture = new N3JS.CanvasTexture(canvas);
-			if (
-				ThreeUtil.isNotNull(program) &&
-				ThreeUtil.isNotNull(options.programMipmaps)
-			) {
+			if (NgxThreeUtil.isNotNull(program) && NgxThreeUtil.isNotNull(options.programMipmaps)) {
 				canvasTexture.generateMipmaps = false;
 				canvasTexture.mipmaps.length = 0;
 				canvasTexture.mipmaps[0] = canvas;
@@ -1261,21 +1205,13 @@ export class AbstractTextureComponent
 					if (mipmapWidth < 1 || mipmapHeight < 1) {
 						break;
 					}
-					const mipmapCanvas: HTMLCanvasElement =
-						document.createElement('canvas');
+					const mipmapCanvas: HTMLCanvasElement = document.createElement('canvas');
 					mipmapCanvas.width = mipmapWidth;
 					mipmapCanvas.height = mipmapHeight;
 					const mipmapContext = mipmapCanvas.getContext('2d', {
 						alpha: true,
 					});
-					TextureUtils.drawCanvas(
-						program,
-						mipmapContext,
-						text,
-						mipmapWidth,
-						mipmapHeight,
-						programMipmaps[i]
-					);
+					TextureUtils.drawCanvas(program, mipmapContext, text, mipmapWidth, mipmapHeight, programMipmaps[i]);
 					canvasTexture.mipmaps[i + 1] = mipmapCanvas;
 				}
 			}
@@ -1288,7 +1224,7 @@ export class AbstractTextureComponent
 	 * Sets texture
 	 * @param refTexture
 	 */
-	public setTexture(refTexture: I3JS.ITexture) {
+	public setTexture(refTexture: I3JS.Texture) {
 		if (this.refTexture !== refTexture) {
 			this.refTexture = refTexture;
 			this.refTexture.copy(this.getTexture());
@@ -1318,86 +1254,55 @@ export class AbstractTextureComponent
 	public getTextureOptions(options: { [key: string]: any } = {}): {
 		[key: string]: any;
 	} {
-		if (ThreeUtil.isNotNull(this.mapping)) {
+		if (NgxThreeUtil.isNotNull(this.mapping)) {
 			options.mapping = this.mapping;
 		}
-		if (ThreeUtil.isNotNull(this.wrapS) || ThreeUtil.isNotNull(this.wrap)) {
-			options.wrapS = ThreeUtil.getTypeSafe(
-				this.wrapS,
-				this.wrap,
-				'clamptoedge'
-			);
+		if (NgxThreeUtil.isNotNull(this.wrapS) || NgxThreeUtil.isNotNull(this.wrap)) {
+			options.wrapS = NgxThreeUtil.getTypeSafe(this.wrapS, this.wrap, 'clamptoedge');
 		}
-		if (ThreeUtil.isNotNull(this.wrapT) || ThreeUtil.isNotNull(this.wrap)) {
-			options.wrapT = ThreeUtil.getTypeSafe(
-				this.wrapS,
-				this.wrap,
-				'clamptoedge'
-			);
+		if (NgxThreeUtil.isNotNull(this.wrapT) || NgxThreeUtil.isNotNull(this.wrap)) {
+			options.wrapT = NgxThreeUtil.getTypeSafe(this.wrapS, this.wrap, 'clamptoedge');
 		}
-		if (ThreeUtil.isNotNull(this.flipY)) {
-			options.flipY = ThreeUtil.getTypeSafe(this.flipY, true);
+		if (NgxThreeUtil.isNotNull(this.flipY)) {
+			options.flipY = NgxThreeUtil.getTypeSafe(this.flipY, true);
 		}
-		if (ThreeUtil.isNotNull(this.rotation)) {
+		if (NgxThreeUtil.isNotNull(this.rotation)) {
 			options.rotation = this.rotation;
 		}
-		if (ThreeUtil.isNotNull(this.premultiplyAlpha)) {
+		if (NgxThreeUtil.isNotNull(this.premultiplyAlpha)) {
 			options.premultiplyAlpha = this.premultiplyAlpha;
 		}
-		if (ThreeUtil.isNotNull(this.magFilter)) {
-			options.magFilter = ThreeUtil.getTypeSafe(
-				this.magFilter,
-				this.filter,
-				'linearmipmaplinear'
-			);
+		if (NgxThreeUtil.isNotNull(this.magFilter)) {
+			options.magFilter = NgxThreeUtil.getTypeSafe(this.magFilter, this.filter, 'linearmipmaplinear');
 		}
-		if (
-			ThreeUtil.isNotNull(this.minFilter) ||
-			ThreeUtil.isNotNull(this.filter)
-		) {
-			options.minFilter = ThreeUtil.getTypeSafe(
-				this.minFilter,
-				this.filter,
-				'linearmipmaplinear'
-			);
+		if (NgxThreeUtil.isNotNull(this.minFilter) || NgxThreeUtil.isNotNull(this.filter)) {
+			options.minFilter = NgxThreeUtil.getTypeSafe(this.minFilter, this.filter, 'linearmipmaplinear');
 		}
-		if (ThreeUtil.isNotNull(this.format)) {
+		if (NgxThreeUtil.isNotNull(this.format)) {
 			options.format = this.format;
 		}
-		if (ThreeUtil.isNotNull(this.dataType)) {
+		if (NgxThreeUtil.isNotNull(this.dataType)) {
 			options.type = this.dataType;
 		}
-		if (ThreeUtil.isNotNull(this.anisotropy)) {
+		if (NgxThreeUtil.isNotNull(this.anisotropy)) {
 			options.anisotropy = this.anisotropy;
 		}
-		if (ThreeUtil.isNotNull(this.unpackAlignment)) {
+		if (NgxThreeUtil.isNotNull(this.unpackAlignment)) {
 			options.unpackAlignment = this.unpackAlignment;
 		}
-		if (ThreeUtil.isNotNull(this.generateMipmaps)) {
+		if (NgxThreeUtil.isNotNull(this.generateMipmaps)) {
 			options.generateMipmaps = this.generateMipmaps;
 		}
-		if (ThreeUtil.isNotNull(this.encoding)) {
+		if (NgxThreeUtil.isNotNull(this.encoding)) {
 			options.encoding = this.encoding;
 		}
-		if (
-			(ThreeUtil.isNotNull(this.repeatX) &&
-				ThreeUtil.isNotNull(this.repeatY)) ||
-			ThreeUtil.isNotNull(this.repeat)
-		) {
+		if ((NgxThreeUtil.isNotNull(this.repeatX) && NgxThreeUtil.isNotNull(this.repeatY)) || NgxThreeUtil.isNotNull(this.repeat)) {
 			options.repeat = this.getRepeat(1, 1);
 		}
-		if (
-			(ThreeUtil.isNotNull(this.offsetX) &&
-				ThreeUtil.isNotNull(this.offsetY)) ||
-			ThreeUtil.isNotNull(this.offset)
-		) {
+		if ((NgxThreeUtil.isNotNull(this.offsetX) && NgxThreeUtil.isNotNull(this.offsetY)) || NgxThreeUtil.isNotNull(this.offset)) {
 			options.offset = this.getOffset(0, 0);
 		}
-		if (
-			(ThreeUtil.isNotNull(this.centerX) &&
-				ThreeUtil.isNotNull(this.centerY)) ||
-			ThreeUtil.isNotNull(this.center)
-		) {
+		if ((NgxThreeUtil.isNotNull(this.centerX) && NgxThreeUtil.isNotNull(this.centerY)) || NgxThreeUtil.isNotNull(this.center)) {
 			options.center = this.getCenter(0, 0);
 		}
 		if (this.debug) {
@@ -1412,69 +1317,57 @@ export class AbstractTextureComponent
 	 * @param [options]
 	 * @returns texture options
 	 */
-	public static setTextureOptions(
-		texture: { [key: string]: any },
-		options: { [key: string]: any } = {}
-	): any {
+	public static setTextureOptions(texture: { [key: string]: any }, options: { [key: string]: any } = {}): any {
 		if (options == {}) {
 			return;
 		}
 		Object.entries(options).forEach(([key, value]) => {
-			if (ThreeUtil.isNotNull(value)) {
+			if (NgxThreeUtil.isNotNull(value)) {
 				switch (key.toLowerCase()) {
 					case 'mapping':
-						texture.mapping = ThreeUtil.getMappingSafe(value);
+						texture.mapping = NgxThreeUtil.getMappingSafe(value);
 						break;
 					case 'wraps':
-						texture.wrapS = ThreeUtil.getWrappingSafe(value, 'clamptoedge');
+						texture.wrapS = NgxThreeUtil.getWrappingSafe(value, 'clamptoedge');
 						break;
 					case 'wrapt':
-						texture.wrapT = ThreeUtil.getWrappingSafe(value, 'clamptoedge');
+						texture.wrapT = NgxThreeUtil.getWrappingSafe(value, 'clamptoedge');
 						break;
 					case 'flipy':
-						texture.flipY = ThreeUtil.getTypeSafe(value, true);
+						texture.flipY = NgxThreeUtil.getTypeSafe(value, true);
 						break;
 					case 'rotation':
-						texture.rotation = ThreeUtil.getAngleSafe(value, 0);
+						texture.rotation = NgxThreeUtil.getAngleSafe(value, 0);
 						break;
 					case 'premultiplyalpha':
-						texture.premultiplyAlpha = ThreeUtil.getTypeSafe(value, true);
+						texture.premultiplyAlpha = NgxThreeUtil.getTypeSafe(value, true);
 						break;
 					case 'magfilter':
-						texture.magFilter = ThreeUtil.getTextureFilterSafe(value, 'linear');
+						texture.magFilter = NgxThreeUtil.getTextureFilterSafe(value, 'linear');
 						break;
 					case 'minfilter':
-						texture.minFilter = ThreeUtil.getTextureFilterSafe(
-							value,
-							'linearmipmaplinear'
-						);
+						texture.minFilter = NgxThreeUtil.getTextureFilterSafe(value, 'linearmipmaplinear');
 						break;
 					case 'format':
-						texture.format = ThreeUtil.getPixelFormatSafe(value, 'rgba');
+						texture.format = NgxThreeUtil.getPixelFormatSafe(value, 'rgba');
 						break;
 					case 'type':
-						texture.type = ThreeUtil.getTextureDataTypeSafe(
-							value,
-							'unsignedbyte'
-						);
+						texture.type = NgxThreeUtil.getTextureDataTypeSafe(value, 'unsignedbyte');
 						break;
 					case 'anisotropy':
-						texture.anisotropy = ThreeUtil.getTypeSafe(value, 1);
+						texture.anisotropy = NgxThreeUtil.getTypeSafe(value, 1);
 						break;
 					case 'unpackalignment':
-						texture.unpackAlignment = ThreeUtil.getTypeSafe(value, 4);
+						texture.unpackAlignment = NgxThreeUtil.getTypeSafe(value, 4);
 						break;
 					case 'generatemipmaps':
-						texture.generateMipmaps = ThreeUtil.getTypeSafe(value, true);
+						texture.generateMipmaps = NgxThreeUtil.getTypeSafe(value, true);
 						if (texture.generateMipmaps) {
 							texture.mipmaps.length = 0;
 						}
 						break;
 					case 'encoding':
-						texture.encoding = ThreeUtil.getTextureEncodingSafe(
-							value,
-							'linear'
-						);
+						texture.encoding = NgxThreeUtil.getTextureEncodingSafe(value, 'linear');
 						break;
 					case 'repeat':
 						texture.repeat.copy(value);
@@ -1498,10 +1391,7 @@ export class AbstractTextureComponent
 	 */
 	public isTexture(type: String): boolean {
 		type = type.toLowerCase();
-		return (
-			this.type.toLowerCase() === type ||
-			(this.type + 'map').toLowerCase() === type
-		);
+		return this.type.toLowerCase() === type || (this.type + 'map').toLowerCase() === type;
 	}
 
 	/**
@@ -1510,12 +1400,7 @@ export class AbstractTextureComponent
 	private _material: {
 		[key: string]: {
 			refType: string;
-			materials: (
-				| I3JS.IMaterial
-				| I3JS.IWebGLRenderTarget
-				| I3JS.IScene
-				| { [uniform: string]: I3JS.IUniform }
-			)[];
+			materials: (I3JS.Material | I3JS.WebGLRenderTarget | I3JS.Scene | { [uniform: string]: I3JS.IUniform })[];
 		};
 	} = {};
 
@@ -1523,11 +1408,11 @@ export class AbstractTextureComponent
 	 * unSets object3d
 	 * @param object3d
 	 */
-	public unsetMaterial(material: AbstractSubscribeComponent) {
+	public unsetMaterial(material: NgxAbstractSubscribeComponent) {
 		const key: string = material.getId();
 		this.unSubscribeRefer('texture_' + key);
 		this.unSubscribeRefer('untexture_' + key);
-		if (ThreeUtil.isNotNull(this._material[key])) {
+		if (NgxThreeUtil.isNotNull(this._material[key])) {
 			delete this._material[key];
 		}
 	}
@@ -1536,36 +1421,30 @@ export class AbstractTextureComponent
 	 * Sets material
 	 * @param material
 	 */
-	public setMaterial(
-		material: AbstractSubscribeComponent,
-		refType: string = 'auto'
-	) {
-		if (ThreeUtil.isNotNull(material)) {
+	public setMaterial(material: NgxAbstractSubscribeComponent, refType: string = 'auto') {
+		if (NgxThreeUtil.isNotNull(material)) {
 			const key: string = material.getId();
 			let object = material.getObject();
 			let objectList: any[] = [];
-			if (ThreeUtil.isNotNull(object)) {
-				if (
-					ThreeUtil.isNotNull(this.refName) &&
-					object instanceof N3JS.Object3D
-				) {
-					const object3d: I3JS.IObject3D = object;
+			if (NgxThreeUtil.isNotNull(object)) {
+				if (NgxThreeUtil.isNotNull(this.refName) && object instanceof N3JS.Object3D) {
+					const object3d: I3JS.Object3D = object;
 					if (this.refName === '*') {
 						object3d.traverse((child: any) => {
-							if (ThreeUtil.isNotNull(child['material'])) {
+							if (NgxThreeUtil.isNotNull(child['material'])) {
 								objectList.push(child);
 							}
 						});
 					} else if (Array.isArray(this.refName)) {
 						this.refName.forEach((refName) => {
 							const foundObj = object3d.getObjectByName(refName);
-							if (ThreeUtil.isNotNull(foundObj)) {
+							if (NgxThreeUtil.isNotNull(foundObj)) {
 								objectList.push(foundObj);
 							}
 						});
 					} else {
 						const foundObj = object3d.getObjectByName(this.refName);
-						if (ThreeUtil.isNotNull(foundObj)) {
+						if (NgxThreeUtil.isNotNull(foundObj)) {
 							objectList.push(foundObj);
 						}
 					}
@@ -1573,12 +1452,7 @@ export class AbstractTextureComponent
 					objectList.push(object);
 				}
 			}
-			let materials: (
-				| I3JS.IMaterial
-				| I3JS.IScene
-				| I3JS.IWebGLRenderTarget
-				| { [uniform: string]: I3JS.IUniform }
-			)[] = [];
+			let materials: (I3JS.Material | I3JS.Scene | I3JS.WebGLRenderTarget | { [uniform: string]: I3JS.IUniform })[] = [];
 			if (objectList.length > 0) {
 				objectList.forEach((object) => {
 					if (object instanceof N3JS.Scene) {
@@ -1606,7 +1480,7 @@ export class AbstractTextureComponent
 			};
 			this.subscribeRefer(
 				'texture_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					material,
 					() => {
 						this.setMaterial(material);
@@ -1616,7 +1490,7 @@ export class AbstractTextureComponent
 			);
 			this.subscribeRefer(
 				'untexture_' + key,
-				ThreeUtil.getSubscribe(
+				NgxThreeUtil.getSubscribe(
 					material,
 					() => {
 						this.unsetMaterial(material);
@@ -1633,43 +1507,31 @@ export class AbstractTextureComponent
 	 * Synks object3d
 	 * @param [geometry]
 	 */
-	synkMaterial(texture: I3JS.ITexture = null, key: string = null) {
-		if (ThreeUtil.isNotNull(texture) && this.enabled) {
-			if (ThreeUtil.isNotNull(this._material)) {
+	synkMaterial(texture: I3JS.Texture = null, key: string = null) {
+		if (NgxThreeUtil.isNotNull(texture) && this.enabled) {
+			if (NgxThreeUtil.isNotNull(this._material)) {
 				const materialList: {
 					refType: string;
-					materials: (
-						| I3JS.IMaterial
-						| I3JS.IWebGLRenderTarget
-						| I3JS.IScene
-						| { [uniform: string]: I3JS.IUniform }
-					)[];
+					materials: (I3JS.Material | I3JS.WebGLRenderTarget | I3JS.Scene | { [uniform: string]: I3JS.IUniform })[];
 				}[] = [];
-				if (ThreeUtil.isNotNull(key)) {
+				if (NgxThreeUtil.isNotNull(key)) {
 					if (
-						ThreeUtil.isNotNull(this._material[key]) &&
-						ThreeUtil.isNotNull(this._material[key]) &&
+						NgxThreeUtil.isNotNull(this._material[key]) &&
+						NgxThreeUtil.isNotNull(this._material[key]) &&
 						this._material[key].materials.length > 0
 					) {
 						materialList.push(this._material[key]);
 					}
 				} else {
 					Object.entries(this._material).forEach(([_, material]) => {
-						if (
-							ThreeUtil.isNotNull(material) &&
-							material.materials.length > 0
-						) {
+						if (NgxThreeUtil.isNotNull(material) && material.materials.length > 0) {
 							materialList.push(material);
 						}
 					});
 				}
 				materialList.forEach((info) => {
 					let textureType = info.refType;
-					if (
-						textureType === 'auto' ||
-						textureType === 'texture' ||
-						textureType === ''
-					) {
+					if (textureType === 'auto' || textureType === 'texture' || textureType === '') {
 						textureType = this.type;
 					}
 					info.materials.forEach((material) => {
@@ -1709,19 +1571,11 @@ export class AbstractTextureComponent
 								case 'displace':
 								case 'displacement':
 								case 'displacementmap':
-									this.applyTexture2Material(
-										material,
-										'displacementMap',
-										texture
-									);
+									this.applyTexture2Material(material, 'displacementMap', texture);
 									break;
 								case 'clearcoatnormal':
 								case 'clearcoatnormalmap':
-									this.applyTexture2Material(
-										material,
-										'clearcoatNormalMap',
-										texture
-									);
+									this.applyTexture2Material(material, 'clearcoatNormalMap', texture);
 									break;
 								case 'metalness':
 								case 'metalnessmap':
@@ -1768,8 +1622,7 @@ export class AbstractTextureComponent
 							material.setTexture(texture);
 						} else if (typeof material === 'object') {
 							const textureTypeInfo = (textureType + '..').split('.');
-							const materialUniform: { [key: string]: I3JS.IUniform } =
-								material as any;
+							const materialUniform: { [key: string]: I3JS.IUniform } = material as any;
 							switch (textureTypeInfo[0].toLowerCase()) {
 								case 'uniforms':
 									const uniformKey = textureTypeInfo[1];
@@ -1799,17 +1652,13 @@ export class AbstractTextureComponent
 	 * @param key
 	 * @param texture
 	 */
-	protected applyTexture2Material(
-		material: I3JS.IMaterial,
-		key: string,
-		texture: I3JS.ITexture
-	): void {
+	protected applyTexture2Material(material: I3JS.Material, key: string, texture: I3JS.Texture): void {
 		const materialAny: any = material;
 		if (material instanceof N3JS.NodeMaterial) {
 			switch (key) {
 				case 'diffuseMap':
 					if (materialAny['color'] instanceof N3JS.OperatorNode) {
-						const color: I3JS.IOperatorNode = materialAny['color'];
+						const color: I3JS.OperatorNode = materialAny['color'];
 						if (color.a instanceof N3JS.TextureNode) {
 							color.a.value = texture as any;
 						}
@@ -1817,16 +1666,14 @@ export class AbstractTextureComponent
 					break;
 				case 'normalMap':
 					if (materialAny['normal'] instanceof N3JS.NormalMapNode) {
-						const normal: I3JS.INormalMapNode = materialAny['normal'];
+						const normal: I3JS.NormalMapNode = materialAny['normal'];
 						if (normal.value instanceof N3JS.TextureNode) {
 							normal.value.value = texture as any;
 						} else {
 							normal.value = new N3JS.TextureNode(texture as any);
 						}
 					} else {
-						materialAny['normal'] = new N3JS.NormalMapNode(
-							new N3JS.TextureNode(texture as any)
-						);
+						materialAny['normal'] = new N3JS.NormalMapNode(new N3JS.TextureNode(texture as any));
 					}
 					break;
 				default:
@@ -1849,15 +1696,12 @@ export class AbstractTextureComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.texture !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getTexture();
 				return;
 			}
-			AbstractTextureComponent.setTextureOptions(
-				this.texture,
-				this.getTextureOptions()
-			);
-			if (ThreeUtil.isTextureLoaded(this.texture)) {
+			NgxAbstractTextureComponent.setTextureOptions(this.texture, this.getTextureOptions());
+			if (NgxThreeUtil.isTextureLoaded(this.texture)) {
 				this.texture.needsUpdate = true;
 			}
 			super.applyChanges(changes);
@@ -1868,22 +1712,18 @@ export class AbstractTextureComponent
 	 * Sets texture loaded
 	 * @param texture
 	 */
-	protected setTextureLoaded(texture: I3JS.ITexture) {
+	protected setTextureLoaded(texture: I3JS.Texture) {
 		if (texture !== null) {
-			if (ThreeUtil.isNotNull(this.cubeType)) {
+			if (NgxThreeUtil.isNotNull(this.cubeType)) {
 				switch (this.cubeType.toLowerCase()) {
 					case 'angular':
 					case 'equirect':
 					case 'equirectangular':
 					case 'fromequirectangular':
 						{
-							AbstractTextureComponent.setTextureOptions(
-								texture,
-								this.getTextureOptions()
-							);
-							const pmremGenerator = ThreeUtil.getPmremGenerator();
-							const equirectangular =
-								pmremGenerator.fromEquirectangular(texture).texture;
+							NgxAbstractTextureComponent.setTextureOptions(texture, this.getTextureOptions());
+							const pmremGenerator = NgxThreeUtil.getPmremGenerator();
+							const equirectangular = pmremGenerator.fromEquirectangular(texture).texture;
 							pmremGenerator.dispose();
 							texture.dispose();
 							texture = equirectangular;
@@ -1893,11 +1733,8 @@ export class AbstractTextureComponent
 					case 'cubemap':
 					case 'fromcubemap':
 						if (texture instanceof N3JS.CubeTexture) {
-							AbstractTextureComponent.setTextureOptions(
-								texture,
-								this.getTextureOptions()
-							);
-							const pmremGenerator = ThreeUtil.getPmremGenerator();
+							NgxAbstractTextureComponent.setTextureOptions(texture, this.getTextureOptions());
+							const pmremGenerator = NgxThreeUtil.getPmremGenerator();
 							const cubemap = pmremGenerator.fromCubemap(texture).texture;
 							texture.dispose();
 							pmremGenerator.dispose();
@@ -1910,12 +1747,9 @@ export class AbstractTextureComponent
 				this.texture = texture;
 				super.setObject(this.texture);
 			}
-			AbstractTextureComponent.setTextureOptions(
-				this.texture,
-				this.getTextureOptions()
-			);
+			NgxAbstractTextureComponent.setTextureOptions(this.texture, this.getTextureOptions());
 			this.synkMaterial(this.texture);
-			if (ThreeUtil.isTextureLoaded(this.texture)) {
+			if (NgxThreeUtil.isTextureLoaded(this.texture)) {
 				this.texture.needsUpdate = true;
 			}
 			this.setSubscribeNext(['texture', 'loaded']);
@@ -1927,7 +1761,7 @@ export class AbstractTextureComponent
 	 * @template T
 	 * @returns texture
 	 */
-	public getTexture<T extends I3JS.ITexture>(): T {
+	public getTexture<T extends I3JS.Texture>(): T {
 		return this.texture as T;
 	}
 }

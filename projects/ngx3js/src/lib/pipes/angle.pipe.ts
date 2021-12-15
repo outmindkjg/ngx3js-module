@@ -1,7 +1,7 @@
 /** @format */
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { ThreeUtil } from '../interface';
+import { NgxThreeUtil } from '../interface';
 
 type AngleType =
 	| 'degree'
@@ -60,27 +60,27 @@ export class AnglePipe implements PipeTransform {
 		returnType: AngleType = 'degree',
 		inType: AngleType = 'radian'
 	): number {
-		if (ThreeUtil.isNotNull(angle)) {
+		if (NgxThreeUtil.isNotNull(angle)) {
 			let angleDegree: number = 0;
 			switch (inType) {
 				case 'deg':
 				case 'degree':
 				case 'DEG':
 				case 'DEGREE':
-					angleDegree = ThreeUtil.getTypeSafe(angle, 0);
+					angleDegree = NgxThreeUtil.getTypeSafe(angle, 0);
 					break;
 				case 'gra':
 				case 'gradian':
 				case 'GRA':
 				case 'GRADIAN':
-					angleDegree = (ThreeUtil.getTypeSafe(angle, 0) / 400) * 360;
+					angleDegree = (NgxThreeUtil.getTypeSafe(angle, 0) / 400) * 360;
 					break;
 				case 'rad':
 				case 'radian':
 				case 'RAD':
 				case 'RADIAN':
 				default:
-					angleDegree = ThreeUtil.getRadian2AngleSafe(angle, 0);
+					angleDegree = NgxThreeUtil.getRadian2AngleSafe(angle, 0);
 					break;
 			}
 			switch (returnType) {
@@ -93,7 +93,7 @@ export class AnglePipe implements PipeTransform {
 				case 'radian':
 				case 'RAD':
 				case 'RADIAN':
-					return ThreeUtil.getAngle2RadianSafe(angleDegree, 0);
+					return NgxThreeUtil.getAngle2RadianSafe(angleDegree, 0);
 				case 'deg':
 				case 'degree':
 				case 'DEG':

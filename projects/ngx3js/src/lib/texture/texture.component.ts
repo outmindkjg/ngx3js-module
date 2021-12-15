@@ -4,14 +4,14 @@ import {
 	Input,
 	OnDestroy,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { Lut } from 'three/examples/jsm/math/Lut';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ThreeUtil, N3JS, I3JS } from '../interface';
-import { LocalStorageService } from '../local-storage.service';
-import { AbstractTextureComponent } from '../texture.abstract';
-import { CanvasFunctionType } from './textureUtils';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { NgxLocalStorageService } from '../local-storage.service';
+import { TCanvasFunctionType } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractTextureComponent } from '../texture.abstract';
 
 /**
  * Texture Component
@@ -94,17 +94,17 @@ import { CanvasFunctionType } from './textureUtils';
 	styleUrls: ['./texture.component.scss'],
 	providers: [
 		{
-			provide: AbstractTextureComponent,
-			useExisting: forwardRef(() => TextureComponent),
+			provide: NgxAbstractTextureComponent,
+			useExisting: forwardRef(() => NgxTextureComponent),
 		},
 		{
-			provide: AbstractSubscribeComponent,
-			useExisting: forwardRef(() => TextureComponent),
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxTextureComponent),
 		},
 	],
 })
-export class TextureComponent
-	extends AbstractTextureComponent
+export class NgxTextureComponent
+	extends NgxAbstractTextureComponent
 	implements OnInit, OnDestroy
 {
 	/**
@@ -135,7 +135,7 @@ export class TextureComponent
 	/**
 	 * The program of texture component
 	 */
-	@Input() public program: CanvasFunctionType | string = null;
+	@Input() public program: TCanvasFunctionType | string = null;
 
 	/**
 	 * The canvas of texture component
@@ -191,7 +191,7 @@ export class TextureComponent
 	 * @returns image
 	 */
 	private getImage(def?: string): string {
-		return ThreeUtil.getTypeSafe(this.image, def);
+		return NgxThreeUtil.getTypeSafe(this.image, def);
 	}
 
 	/**
@@ -200,7 +200,7 @@ export class TextureComponent
 	 * @returns cube image
 	 */
 	private getCubeImage(def?: string[]): string[] {
-		return ThreeUtil.getTypeSafe(this.cubeImage, def);
+		return NgxThreeUtil.getTypeSafe(this.cubeImage, def);
 	}
 
 	/**
@@ -209,9 +209,9 @@ export class TextureComponent
 	 * @returns program
 	 */
 	private getProgram(
-		def?: CanvasFunctionType | string
-	): CanvasFunctionType | string {
-		return ThreeUtil.getTypeSafe(this.program, def);
+		def?: TCanvasFunctionType | string
+	): TCanvasFunctionType | string {
+		return NgxThreeUtil.getTypeSafe(this.program, def);
 	}
 
 	/**
@@ -222,8 +222,8 @@ export class TextureComponent
 	private getCanvas(
 		def?: string
 	): HTMLVideoElement | HTMLImageElement | HTMLCanvasElement | ImageBitmap {
-		if (ThreeUtil.isNull(this.canvas) || typeof this.canvas === 'string') {
-			const canvas = (ThreeUtil.getTypeSafe(this.canvas, def, '') as string)
+		if (NgxThreeUtil.isNull(this.canvas) || typeof this.canvas === 'string') {
+			const canvas = (NgxThreeUtil.getTypeSafe(this.canvas, def, '') as string)
 				.toLowerCase()
 				.replace(/[^a-z0-9]/gi, '');
 			switch (canvas) {
@@ -247,7 +247,7 @@ export class TextureComponent
 	 * Creates an instance of texture component.
 	 * @param localStorageService
 	 */
-	constructor(private localStorageService: LocalStorageService) {
+	constructor(private localStorageService: NgxLocalStorageService) {
 		super();
 	}
 
@@ -391,12 +391,12 @@ export class TextureComponent
 	 */
 	protected applyChanges(changes: string[]) {
 		if (this.texture !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getTexture();
 				return;
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'image',
 					'storagename',
 					'storageoption',
@@ -411,11 +411,11 @@ export class TextureComponent
 				this.needUpdate = true;
 				return;
 			}
-			AbstractTextureComponent.setTextureOptions(
+			NgxAbstractTextureComponent.setTextureOptions(
 				this.texture,
 				this.getTextureOptions()
 			);
-			if (ThreeUtil.isTextureLoaded(this.texture)) {
+			if (NgxThreeUtil.isTextureLoaded(this.texture)) {
 				this.texture.needsUpdate = true;
 			}
 			super.applyChanges(changes);
@@ -427,12 +427,12 @@ export class TextureComponent
 	 * @template T
 	 * @returns texture
 	 */
-	public getTexture<T extends I3JS.ITexture>(): T {
+	public getTexture<T extends I3JS.Texture>(): T {
 		if (this.texture === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.unSubscribeRefer('referTexture');
 			if (this.refer !== null) {
-				if (this.refer instanceof TextureComponent) {
+				if (this.refer instanceof NgxTextureComponent) {
 					this.texture = this.getTextureImage(
 						this.refer.getImage(null),
 						this.refer.getCubeImage(null),
@@ -455,8 +455,8 @@ export class TextureComponent
 				} else {
 					this.texture = new N3JS.Texture();
 				}
-			} else if (ThreeUtil.isNotNull(this.storageName)) {
-				const cubeType = ThreeUtil.getTypeSafe(this.cubeType, 'none');
+			} else if (NgxThreeUtil.isNotNull(this.storageName)) {
+				const cubeType = NgxThreeUtil.getTypeSafe(this.cubeType, 'none');
 				switch (cubeType.toLowerCase()) {
 					case 'angular':
 					case 'equirect':
@@ -493,7 +493,7 @@ export class TextureComponent
 					this.storageOption
 				);
 			} else {
-				if (ThreeUtil.isNotNull(this.canvas)) {
+				if (NgxThreeUtil.isNotNull(this.canvas)) {
 					const canvas = this.getCanvas();
 					this.texture = new N3JS.CanvasTexture(canvas);
 					if (canvas instanceof HTMLCanvasElement) {
@@ -502,21 +502,21 @@ export class TextureComponent
 						});
 					}
 				} else if (
-					ThreeUtil.isNotNull(this.perlin) &&
+					NgxThreeUtil.isNotNull(this.perlin) &&
 					this.perlin.getPerlinGeometry
 				) {
 					this.texture = new N3JS.CanvasTexture(
 						this.perlin
 							.getPerlinGeometry()
 							.getTexture(
-								ThreeUtil.getVector3Safe(
+								NgxThreeUtil.getVector3Safe(
 									this.sunX,
 									this.sunY,
 									this.sunZ,
 									new N3JS.Vector3(1, 1, 1)
 								),
-								ThreeUtil.getColorSafe(this.color, 0x602000),
-								ThreeUtil.getColorSafe(this.add, 0xe08060)
+								NgxThreeUtil.getColorSafe(this.color, 0x602000),
+								NgxThreeUtil.getColorSafe(this.add, 0xe08060)
 							)
 					);
 				} else {
@@ -529,8 +529,8 @@ export class TextureComponent
 						}
 					);
 				}
-				if (ThreeUtil.isNotNull(this.mapping)) {
-					this.texture.mapping = ThreeUtil.getMappingSafe(this.mapping);
+				if (NgxThreeUtil.isNotNull(this.mapping)) {
+					this.texture.mapping = NgxThreeUtil.getMappingSafe(this.mapping);
 				}
 			}
 			this.synkMaterial(this.texture);

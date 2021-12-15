@@ -5,8 +5,8 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { AbstractChartComponent } from '../../chart.abstract';
-import { AbstractObject3dComponent } from '../../object3d.abstract';
+import { NgxAbstractChartComponent } from '../../chart.abstract';
+import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 
 /**
  * The Chart Pie component.
@@ -20,13 +20,13 @@ import { AbstractObject3dComponent } from '../../object3d.abstract';
 	styleUrls: ['./pie.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ChartPieComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxChartPieComponent),
 		},
 	],
 })
-export class ChartPieComponent
-	extends AbstractChartComponent
+export class NgxChartPieComponent
+	extends NgxAbstractChartComponent
 	implements OnInit
 {
 	/**

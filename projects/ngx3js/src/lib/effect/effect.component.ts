@@ -6,12 +6,13 @@ import {
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
-import { CameraComponent } from '../camera/camera.component';
-import { I3JS, RendererTimer, N3JS, ThreeUtil } from '../interface';
-import { PassComponent } from '../pass/pass.component';
-import { RenderTargetComponent } from '../render-target/render-target.component';
-import { SceneComponent } from '../scene/scene.component';
-import { AbstractTweenComponent } from '../tween.abstract';
+import { NgxCameraComponent } from '../camera/camera.component';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { IRendererTimer } from '../ngx-interface';
+import { NgxPassComponent } from '../pass/pass.component';
+import { NgxRenderTargetComponent } from '../render-target/render-target.component';
+import { NgxSceneComponent } from '../scene/scene.component';
+import { NgxAbstractTweenComponent } from '../tween.abstract';
 
 /**
  * The Effect component.
@@ -33,7 +34,7 @@ import { AbstractTweenComponent } from '../tween.abstract';
 	templateUrl: './effect.component.html',
 	styleUrls: ['./effect.component.scss'],
 })
-export class EffectComponent extends AbstractTweenComponent implements OnInit {
+export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnInit {
 	/**
 	 * The type of effect
 	 *
@@ -45,12 +46,12 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * The scene of effect
 	 */
-	@Input() public scene: I3JS.IScene | SceneComponent = null;
+	@Input() public scene: I3JS.Scene | NgxSceneComponent = null;
 
 	/**
 	 * The camera of effect
 	 */
-	@Input() public camera: I3JS.ICamera | CameraComponent = null;
+	@Input() public camera: I3JS.Camera | NgxCameraComponent = null;
 
 	/**
 	 * The clear of effect component
@@ -209,14 +210,14 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * Content children of effect component
 	 */
-	@ContentChildren(PassComponent, { descendants: false })
-	private passList: QueryList<PassComponent>;
+	@ContentChildren(NgxPassComponent, { descendants: false })
+	private passList: QueryList<NgxPassComponent>;
 
 	/**
 	 * Content children of effect component
 	 */
-	@ContentChildren(RenderTargetComponent, { descendants: false })
-	private renderTargetList: QueryList<RenderTargetComponent>;
+	@ContentChildren(NgxRenderTargetComponent, { descendants: false })
+	private renderTargetList: QueryList<NgxRenderTargetComponent>;
 
 	/**
 	 * Gets render target
@@ -225,7 +226,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 */
 	private getRenderTarget<T>(): T {
 		if (
-			ThreeUtil.isNotNull(this.renderTargetList) &&
+			NgxThreeUtil.isNotNull(this.renderTargetList) &&
 			this.renderTargetList.length > 0
 		) {
 			return this.renderTargetList.first.getRenderTarget();
@@ -239,7 +240,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @returns true if reflect from above
 	 */
 	private getReflectFromAbove(def?: boolean): boolean {
-		return ThreeUtil.getTypeSafe(this.reflectFromAbove, def);
+		return NgxThreeUtil.getTypeSafe(this.reflectFromAbove, def);
 	}
 
 	/**
@@ -248,7 +249,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @returns camera distance
 	 */
 	private getCameraDistance(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.cameraDistance, def);
+		return NgxThreeUtil.getTypeSafe(this.cameraDistance, def);
 	}
 
 	/**
@@ -263,9 +264,9 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @param [def]
 	 * @returns scene
 	 */
-	private getScene(def?: I3JS.IScene): I3JS.IScene {
-		if (ThreeUtil.isNotNull(this.scene)) {
-			if (this.scene instanceof SceneComponent) {
+	private getScene(def?: I3JS.Scene): I3JS.Scene {
+		if (NgxThreeUtil.isNotNull(this.scene)) {
+			if (this.scene instanceof NgxSceneComponent) {
 				return this.scene.getScene();
 			} else {
 				return this.scene;
@@ -279,9 +280,9 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @param [def]
 	 * @returns camera
 	 */
-	private getCamera(def?: I3JS.ICamera): I3JS.ICamera {
-		if (ThreeUtil.isNotNull(this.camera)) {
-			if (this.camera instanceof CameraComponent) {
+	private getCamera(def?: I3JS.Camera): I3JS.Camera {
+		if (NgxThreeUtil.isNotNull(this.camera)) {
+			if (this.camera instanceof NgxCameraComponent) {
 				return this.camera.getObject3d();
 			} else {
 				return this.camera;
@@ -384,8 +385,8 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 		cameraSize: number,
 		def?: number | string
 	): number {
-		const baseSize = ThreeUtil.getTypeSafe(size, def);
-		if (ThreeUtil.isNotNull(baseSize)) {
+		const baseSize = NgxThreeUtil.getTypeSafe(size, def);
+		if (NgxThreeUtil.isNotNull(baseSize)) {
 			if (typeof baseSize == 'string') {
 				if (baseSize.indexOf('%') > 0) {
 					const [percent, extra] = baseSize.split('%');
@@ -537,7 +538,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @param renderer
 	 * @param renderTimer
 	 */
-	public render(renderer: I3JS.IWebGLRenderer, renderTimer: RendererTimer) {
+	public render(renderer: I3JS.WebGLRenderer, renderTimer: IRendererTimer) {
 		if (this.effectEffect !== null) {
 			if (this.viewport) {
 				renderer.setViewport(
@@ -556,7 +557,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 					this.getScissorHeight()
 				);
 			}
-			if (this.viewportAspect && ThreeUtil.isNotNull(this._effectCamera)) {
+			if (this.viewportAspect && NgxThreeUtil.isNotNull(this._effectCamera)) {
 				if (this._effectCamera instanceof N3JS.PerspectiveCamera) {
 					this._effectCamera.aspect = this.getAspect();
 					this._effectCamera.updateProjectionMatrix();
@@ -582,13 +583,13 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * Effect effect of effect component
 	 */
-	private effectEffect: I3JS.IEffectComposer | any = null;
+	private effectEffect: I3JS.EffectComposer | any = null;
 
 	/**
 	 * Gets write buffer
 	 * @returns write buffer
 	 */
-	public getWriteBuffer(): I3JS.IWebGLRenderTarget {
+	public getWriteBuffer(): I3JS.WebGLRenderTarget {
 		return this.getEffect()?.writeBuffer;
 	}
 
@@ -596,7 +597,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets read buffer
 	 * @returns read buffer
 	 */
-	public getReadBuffer(): I3JS.IWebGLRenderTarget {
+	public getReadBuffer(): I3JS.WebGLRenderTarget {
 		return this.getEffect()?.readBuffer;
 	}
 
@@ -604,7 +605,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets render target1
 	 * @returns render target1
 	 */
-	public getRenderTarget1(): I3JS.IWebGLRenderTarget {
+	public getRenderTarget1(): I3JS.WebGLRenderTarget {
 		return this.getEffect()?.renderTarget1;
 	}
 
@@ -612,7 +613,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets render target2
 	 * @returns render target2
 	 */
-	public getRenderTarget2(): I3JS.IWebGLRenderTarget {
+	public getRenderTarget2(): I3JS.WebGLRenderTarget {
 		return this.getEffect()?.renderTarget2;
 	}
 
@@ -623,12 +624,12 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.effectEffect !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getEffect();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					[
 						'pass',
@@ -652,8 +653,8 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['pass', 'rendertarget']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['pass', 'rendertarget']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -672,7 +673,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 						}
 						break;
 					case 'rendertarget':
-						if (ThreeUtil.isNotNull(this.renderTargetList)) {
+						if (NgxThreeUtil.isNotNull(this.renderTargetList)) {
 							this.renderTargetList.forEach((renderTarget) => {
 								renderTarget.setMaterial(this.selfAny, 'effecteffect');
 							});
@@ -687,17 +688,17 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	/**
 	 * Effect renderer of effect component
 	 */
-	private _effectRenderer: I3JS.IWebGLRenderer = null;
+	private _effectRenderer: I3JS.WebGLRenderer = null;
 
 	/**
 	 * Effect camera of effect component
 	 */
-	private _effectCamera: I3JS.ICamera = null;
+	private _effectCamera: I3JS.Camera = null;
 
 	/**
 	 * Effect scene of effect component
 	 */
-	private _effectScene: I3JS.IScene = null;
+	private _effectScene: I3JS.Scene = null;
 
 	/**
 	 * Sets renderer
@@ -706,9 +707,9 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * @param scene
 	 */
 	public setRenderer(
-		webGLRenderer: I3JS.IWebGLRenderer,
-		camera: I3JS.ICamera,
-		scene: I3JS.IScene
+		webGLRenderer: I3JS.WebGLRenderer,
+		camera: I3JS.Camera,
+		scene: I3JS.Scene
 	) {
 		if (
 			this._effectRenderer !== webGLRenderer ||
@@ -738,7 +739,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 	 * Gets effect
 	 * @returns effect
 	 */
-	public getEffect(): I3JS.IEffectComposer | any {
+	public getEffect(): I3JS.EffectComposer | any {
 		if (
 			this._effectRenderer !== null &&
 			this._effectCamera &&
@@ -759,14 +760,14 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 				case 'ascii':
 					const asciiEffect = new N3JS.AsciiEffect(
 						this._effectRenderer,
-						ThreeUtil.getTypeSafe(this.charSet, ' .:-+*=%@#'),
+						NgxThreeUtil.getTypeSafe(this.charSet, ' .:-+*=%@#'),
 						{
-							resolution: ThreeUtil.getTypeSafe(this.resolution),
-							scale: ThreeUtil.getTypeSafe(this.scale),
-							color: ThreeUtil.getTypeSafe(this.color),
-							alpha: ThreeUtil.getTypeSafe(this.alpha),
-							block: ThreeUtil.getTypeSafe(this.block),
-							invert: ThreeUtil.getTypeSafe(this.invert),
+							resolution: NgxThreeUtil.getTypeSafe(this.resolution),
+							scale: NgxThreeUtil.getTypeSafe(this.scale),
+							color: NgxThreeUtil.getTypeSafe(this.color),
+							alpha: NgxThreeUtil.getTypeSafe(this.alpha),
+							block: NgxThreeUtil.getTypeSafe(this.block),
+							invert: NgxThreeUtil.getTypeSafe(this.invert),
 						}
 					);
 					asciiEffect.domElement.style.position = 'absolute';
@@ -810,7 +811,7 @@ export class EffectComponent extends AbstractTweenComponent implements OnInit {
 					);
 					effectEffect.setPixelRatio(this.pixelRatio);
 					this.effectEffect = effectEffect;
-					if (ThreeUtil.isNotNull(this.renderToScreen)) {
+					if (NgxThreeUtil.isNotNull(this.renderToScreen)) {
 						this.effectEffect.renderToScreen = this.renderToScreen;
 					}
 					break;

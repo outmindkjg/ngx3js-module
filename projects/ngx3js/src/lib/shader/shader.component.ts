@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Shader component.
@@ -12,8 +12,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './shader.component.html',
 	styleUrls: ['./shader.component.scss'],
 })
-export class ShaderComponent
-	extends AbstractSubscribeComponent
+export class NgxShaderComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -27,7 +27,7 @@ export class ShaderComponent
 	/**
 	 * The refShader of shader component
 	 */
-	@Input() public refShader: ShaderComponent = null;
+	@Input() public refShader: NgxShaderComponent = null;
 
 	/**
 	 * Creates an instance of shader component.

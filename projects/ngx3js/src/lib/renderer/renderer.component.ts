@@ -12,37 +12,30 @@ import {
 	Output,
 	QueryList,
 	SimpleChanges,
-	ViewChild,
+	ViewChild
 } from '@angular/core';
 import * as GSAP from 'gsap';
 import { Observable, Subject } from 'rxjs';
-import { CanvasComponent } from '../canvas/canvas.component';
-import { EffectComponent } from '../effect/effect.component';
-import { ControlComponent, ControlOptions } from '../control/control.component';
-import { AbstractControllerComponent } from '../controller.component.abstract';
+import { NgxCanvasComponent } from '../canvas/canvas.component';
+import { NgxControlComponent } from '../control/control.component';
+import { NgxAbstractControllerComponent } from '../controller.component.abstract';
 import { AbstractThreeDirective } from '../directive.abstract';
-import {
-	GuiControlParam,
-	RendererEvent,
-	RendererInfo,
-	RendererTimer,
-	ThreeClock,
-	ThreeGui,
-	ThreeStats,
-	ThreeUtil,
-	N3JS,
-	I3JS,
-} from '../interface';
-import { PlaneComponent } from '../plane/plane.component';
-import { SharedComponent } from '../shared/shared.component';
-import { SizeComponent } from '../size/size.component';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-import { ViewerComponent } from '../viewer/viewer.component';
-import { AudioComponent } from './../audio/audio.component';
-import { CameraComponent } from './../camera/camera.component';
-import { ListenerComponent } from './../listener/listener.component';
-import { LookatComponent } from './../lookat/lookat.component';
-import { SceneComponent } from './../scene/scene.component';
+import { NgxEffectComponent } from '../effect/effect.component';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
+import { IControlOptions, IGuiControlParam, IRendererEvent, IRendererInfo, IRendererTimer } from '../ngx-interface';
+import { NgxPlaneComponent } from '../plane/plane.component';
+import { NgxSharedComponent } from '../shared/shared.component';
+import { NgxSizeComponent } from '../size/size.component';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeClock } from '../three-clock';
+import { NgxThreeGui } from '../three-gui';
+import { NgxThreeStats } from '../three-stats';
+import { NgxViewerComponent } from '../viewer/viewer.component';
+import { NgxAudioComponent } from './../audio/audio.component';
+import { NgxCameraComponent } from './../camera/camera.component';
+import { NgxListenerComponent } from './../listener/listener.component';
+import { NgxLookatComponent } from './../lookat/lookat.component';
+import { NgxSceneComponent } from './../scene/scene.component';
 
 /**
  * The Renderer component.
@@ -71,8 +64,8 @@ import { SceneComponent } from './../scene/scene.component';
 	templateUrl: './renderer.component.html',
 	styleUrls: ['./renderer.component.scss'],
 })
-export class RendererComponent
-	extends AbstractSubscribeComponent
+export class NgxRendererComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, AfterContentInit, AfterViewInit, OnChanges
 {
 	/**
@@ -122,14 +115,14 @@ export class RendererComponent
 	 * @see CSM - CSM
 	 * @see PlaneControls - PlaneControls, Plane
 	 * @see OrbitControls - OrbitControls, Orbit
-	 * @see ControlComponent
+	 * @see NgxControlComponent
 	 */
 	@Input() public controlType: string = 'none';
 
 	/**
 	 * The options of control
 	 */
-	@Input() public controlOptions: ControlOptions = null;
+	@Input() public controlOptions: IControlOptions = null;
 
 	/**
 	 * If set, use shadow maps in the scene. Default is *true*.
@@ -301,7 +294,7 @@ export class RendererComponent
 	/**
 	 * The guiParams of GUI
 	 */
-	@Input() public guiParams: GuiControlParam[] = [];
+	@Input() public guiParams: IGuiControlParam[] = [];
 
 	/**
 	 * The guiOpen of GUI
@@ -354,12 +347,12 @@ export class RendererComponent
 	/**
 	 * The camera of renderer component
 	 */
-	@Input() public camera: CameraComponent = null;
+	@Input() public camera: NgxCameraComponent = null;
 
 	/**
 	 * The scene of renderer component
 	 */
-	@Input() public scene: SceneComponent = null;
+	@Input() public scene: NgxSceneComponent = null;
 
 	/**
 	 * The requiredExtensions of renderer component
@@ -369,102 +362,97 @@ export class RendererComponent
 	/**
 	 * The beforeRender of renderer component
 	 */
-	@Input() public beforeRender: (info: RendererInfo) => boolean = null;
+	@Input() public beforeRender: (info: IRendererInfo) => boolean = null;
 
 	/**
 	 * The afterRender of renderer component
 	 */
-	@Input() public afterRender: (info: RendererInfo) => any = null;
+	@Input() public afterRender: (info: IRendererInfo) => any = null;
 
 	/**
 	 * The Output of renderer component
 	 */
-	@Output() private eventListener: EventEmitter<RendererEvent> =
-		new EventEmitter<RendererEvent>();
+	@Output() private eventListener: EventEmitter<IRendererEvent> = new EventEmitter<IRendererEvent>();
 
 	/**
 	 * The Output of renderer component
 	 */
-	@Output() private onRender: EventEmitter<RendererTimer> =
-		new EventEmitter<RendererTimer>();
+	@Output() private onRender: EventEmitter<IRendererTimer> = new EventEmitter<IRendererTimer>();
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(SceneComponent, { descendants: false })
-	private sceneList: QueryList<SceneComponent>;
+	@ContentChildren(NgxSceneComponent, { descendants: false })
+	private sceneList: QueryList<NgxSceneComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(CameraComponent, { descendants: true })
-	private cameraList: QueryList<CameraComponent>;
+	@ContentChildren(NgxCameraComponent, { descendants: true })
+	private cameraList: QueryList<NgxCameraComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(EffectComponent, { descendants: true })
-	private effectList: QueryList<EffectComponent>;
+	@ContentChildren(NgxEffectComponent, { descendants: true })
+	private effectList: QueryList<NgxEffectComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(ViewerComponent, { descendants: true })
-	private viewerList: QueryList<ViewerComponent>;
+	@ContentChildren(NgxViewerComponent, { descendants: true })
+	private viewerList: QueryList<NgxViewerComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(ListenerComponent, { descendants: true })
-	private listenerList: QueryList<ListenerComponent>;
+	@ContentChildren(NgxListenerComponent, { descendants: true })
+	private listenerList: QueryList<NgxListenerComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(AudioComponent, { descendants: true })
-	private audioList: QueryList<AudioComponent>;
+	@ContentChildren(NgxAudioComponent, { descendants: true })
+	private audioList: QueryList<NgxAudioComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(AbstractControllerComponent, { descendants: true })
-	private controllerList: QueryList<AbstractControllerComponent>;
+	@ContentChildren(NgxAbstractControllerComponent, { descendants: true })
+	private controllerList: QueryList<NgxAbstractControllerComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(LookatComponent, { descendants: false })
-	private lookatList: QueryList<LookatComponent>;
+	@ContentChildren(NgxLookatComponent, { descendants: false })
+	private lookatList: QueryList<NgxLookatComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(ControlComponent, { descendants: false })
-	private controlList: QueryList<ControlComponent>;
+	@ContentChildren(NgxControlComponent, { descendants: false })
+	private controlList: QueryList<NgxControlComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(PlaneComponent)
-	private clippingPlanesList: QueryList<PlaneComponent>;
+	@ContentChildren(NgxPlaneComponent) private clippingPlanesList: QueryList<NgxPlaneComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(CanvasComponent)
-	private canvas2dList: QueryList<CanvasComponent>;
+	@ContentChildren(NgxCanvasComponent) private canvas2dList: QueryList<NgxCanvasComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(SharedComponent, { descendants: true })
-	private sharedList: QueryList<SharedComponent>;
+	@ContentChildren(NgxSharedComponent, { descendants: true }) private sharedList: QueryList<NgxSharedComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(SizeComponent, { descendants: true })
-	private sizeList: QueryList<SizeComponent>;
+	@ContentChildren(NgxSizeComponent, { descendants: true })
+	private sizeList: QueryList<NgxSizeComponent>;
 
 	/**
 	 * Content children of renderer component
@@ -497,12 +485,9 @@ export class RendererComponent
 	 * @param [def]
 	 * @returns clipping planes
 	 */
-	private getClippingPlanes(def?: I3JS.IPlane[]): I3JS.IPlane[] {
-		if (
-			this.clippingPlanesList !== null &&
-			this.clippingPlanesList !== undefined
-		) {
-			const clippingPlanes: I3JS.IPlane[] = [];
+	private getClippingPlanes(def?: I3JS.Plane[]): I3JS.Plane[] {
+		if (this.clippingPlanesList !== null && this.clippingPlanesList !== undefined) {
+			const clippingPlanes: I3JS.Plane[] = [];
 			this.clippingPlanesList.forEach((plane) => {
 				clippingPlanes.push(plane.getWorldPlane());
 			});
@@ -583,29 +568,13 @@ export class RendererComponent
 		this.subscribeListQueryChange(this.cameraList, 'cameraList', 'camera');
 		this.subscribeListQueryChange(this.effectList, 'effectList', 'effect');
 		this.subscribeListQueryChange(this.viewerList, 'viewerList', 'viewer');
-		this.subscribeListQueryChange(
-			this.listenerList,
-			'listenerList',
-			'listener'
-		);
+		this.subscribeListQueryChange(this.listenerList, 'listenerList', 'listener');
 		this.subscribeListQueryChange(this.audioList, 'audioList', 'audio');
-		this.subscribeListQueryChange(
-			this.controllerList,
-			'controllerList',
-			'controller'
-		);
+		this.subscribeListQueryChange(this.controllerList, 'controllerList', 'controller');
 		this.subscribeListQueryChange(this.lookatList, 'lookatList', 'lookat');
 		this.subscribeListQueryChange(this.controlList, 'controlList', 'control');
-		this.subscribeListQueryChange(
-			this.clippingPlanesList,
-			'clippingPlanesList',
-			'clippingPlanes'
-		);
-		this.subscribeListQueryChange(
-			this.canvas2dList,
-			'canvas2dList',
-			'canvas2d'
-		);
+		this.subscribeListQueryChange(this.clippingPlanesList, 'clippingPlanesList', 'clippingPlanes');
+		this.subscribeListQueryChange(this.canvas2dList, 'canvas2dList', 'canvas2d');
 		this.subscribeListQueryChange(this.sharedList, 'sharedList', 'shared');
 		this.subscribeListQueryChange(this.sizeList, 'sizeList', 'size');
 		super.ngAfterContentInit();
@@ -625,7 +594,7 @@ export class RendererComponent
 					errorCode = 'gl2';
 				}
 		}
-		if (ThreeUtil.isNotNull(this.requiredExtensions)) {
+		if (NgxThreeUtil.isNotNull(this.requiredExtensions)) {
 			this.requiredExtensions.forEach((extension) => {
 				if (!this.isAvailable(extension)) {
 					switch (extension) {
@@ -666,7 +635,7 @@ export class RendererComponent
 			});
 			return;
 		}
-		this.clock = ThreeUtil.getClock(true);
+		this.clock = NgxThreeUtil.getClock(true);
 		this.renderer = this.getRenderer();
 	}
 
@@ -685,8 +654,7 @@ export class RendererComponent
 					const canvas = document.createElement('canvas');
 					return !!(
 						window.WebGLRenderingContext &&
-						(canvas.getContext('webgl') ||
-							canvas.getContext('experimental-webgl'))
+						(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
 					);
 				} catch (e) {
 					return false;
@@ -695,9 +663,7 @@ export class RendererComponent
 			case 'gl2': {
 				try {
 					const canvas = document.createElement('canvas');
-					return !!(
-						window.WebGL2RenderingContext && canvas.getContext('webgl2')
-					);
+					return !!(window.WebGL2RenderingContext && canvas.getContext('webgl2'));
 				} catch (e) {
 					return false;
 				}
@@ -724,11 +690,9 @@ export class RendererComponent
 	private isHasExtension(name: string): boolean {
 		if (this._checkGl === null) {
 			let domElement = document.createElement('canvas');
-			this._checkGl =
-				domElement.getContext('webgl') ||
-				domElement.getContext('experimental-webgl');
+			this._checkGl = domElement.getContext('webgl') || domElement.getContext('experimental-webgl');
 		}
-		if (ThreeUtil.isNotNull(this._checkGl.getExtension)) {
+		if (NgxThreeUtil.isNotNull(this._checkGl.getExtension)) {
 			return this._checkGl.getExtension(name) !== null;
 		} else {
 			return false;
@@ -739,14 +703,9 @@ export class RendererComponent
 	 * Disposes renderer component
 	 */
 	dispose() {
-		if (
-			this.renderer !== null &&
-			this.renderer instanceof N3JS.WebGLRenderer
-		) {
+		if (this.renderer !== null && this.renderer instanceof N3JS.WebGLRenderer) {
 			if (this.renderer.domElement && this.renderer.domElement.parentNode) {
-				this.renderer.domElement.parentNode.removeChild(
-					this.renderer.domElement
-				);
+				this.renderer.domElement.parentNode.removeChild(this.renderer.domElement);
 			}
 			this.renderer.forceContextLoss();
 			this.renderer.dispose();
@@ -756,19 +715,12 @@ export class RendererComponent
 			if (Array.isArray(this.cssRenderer)) {
 				this.cssRenderer.forEach((cssRenderer) => {
 					if (cssRenderer.domElement && cssRenderer.domElement.parentNode) {
-						cssRenderer.domElement.parentNode.removeChild(
-							cssRenderer.domElement
-						);
+						cssRenderer.domElement.parentNode.removeChild(cssRenderer.domElement);
 					}
 				});
 			} else {
-				if (
-					this.cssRenderer.domElement &&
-					this.cssRenderer.domElement.parentNode
-				) {
-					this.cssRenderer.domElement.parentNode.removeChild(
-						this.cssRenderer.domElement
-					);
+				if (this.cssRenderer.domElement && this.cssRenderer.domElement.parentNode) {
+					this.cssRenderer.domElement.parentNode.removeChild(this.cssRenderer.domElement);
 				}
 			}
 			this.cssRenderer = null;
@@ -782,7 +734,7 @@ export class RendererComponent
 	 * @returns
 	 */
 	removeEvent(type: string, listener: any): any {
-		if (ThreeUtil.isNotNull(listener)) {
+		if (NgxThreeUtil.isNotNull(listener)) {
 			switch (type) {
 				case 'keydown':
 				case 'keyup':
@@ -800,7 +752,7 @@ export class RendererComponent
 	/**
 	 * The Events of renderer component
 	 */
-	private events: RendererEvent = {
+	private events: IRendererEvent = {
 		type: 'none',
 		nativeElement: null,
 		client: new N3JS.Vector2(),
@@ -913,10 +865,7 @@ export class RendererComponent
 		this.events.rateX = offsetX / this.rendererWidth;
 		this.events.rateY = offsetY / this.rendererHeight;
 		this.events.rate.set(this.events.rateX, this.events.rateY);
-		this.events.mouse.set(
-			(offsetX / this.rendererWidth) * 2 - 1,
-			-(offsetY / this.rendererHeight) * 2 + 1
-		);
+		this.events.mouse.set((offsetX / this.rendererWidth) * 2 - 1, -(offsetY / this.rendererHeight) * 2 + 1);
 		this.events.event = event;
 		this.eventListener.emit(this.events);
 	}
@@ -928,7 +877,7 @@ export class RendererComponent
 	 * @returns
 	 */
 	public addEvent(type: string, listener: any) {
-		if (ThreeUtil.isNull(listener)) {
+		if (NgxThreeUtil.isNull(listener)) {
 			listener = (event: TouchInit | KeyboardEvent) => {
 				this.setEvents(type, event);
 			};
@@ -960,8 +909,8 @@ export class RendererComponent
 	 * @param [def]
 	 * @returns clear color
 	 */
-	private getClearColor(def?: string | number): I3JS.IColor {
-		return ThreeUtil.getColorSafe(this.clearColor, def);
+	private getClearColor(def?: string | number): I3JS.Color {
+		return NgxThreeUtil.getColorSafe(this.clearColor, def);
 	}
 
 	/**
@@ -970,7 +919,7 @@ export class RendererComponent
 	 * @returns clear alpha
 	 */
 	private getClearAlpha(def?: number): number {
-		return ThreeUtil.getTypeSafe(this.clearAlpha, def);
+		return NgxThreeUtil.getTypeSafe(this.clearAlpha, def);
 	}
 
 	/**
@@ -988,8 +937,8 @@ export class RendererComponent
 	 * @param [def]
 	 * @returns tone mapping
 	 */
-	private getToneMapping(def?: string): I3JS.TToneMapping {
-		const toneMapping = ThreeUtil.getTypeSafe(this.toneMapping, def, '');
+	private getToneMapping(def?: string): I3JS.ToneMapping {
+		const toneMapping = NgxThreeUtil.getTypeSafe(this.toneMapping, def, '');
 		switch (toneMapping.toLowerCase()) {
 			case 'lineartonemapping':
 			case 'linear':
@@ -1017,13 +966,9 @@ export class RendererComponent
 	 * @param [def]
 	 * @returns render size
 	 */
-	private getRenderSize(
-		size: number | string,
-		renderSize: number,
-		def?: number | string
-	): number {
-		const baseSize = ThreeUtil.getTypeSafe(size, def);
-		if (ThreeUtil.isNotNull(baseSize)) {
+	private getRenderSize(size: number | string, renderSize: number, def?: number | string): number {
+		const baseSize = NgxThreeUtil.getTypeSafe(size, def);
+		if (NgxThreeUtil.isNotNull(baseSize)) {
 			if (typeof baseSize == 'string') {
 				if (baseSize.indexOf('%') > 0) {
 					const [percent, extra] = baseSize.split('%');
@@ -1085,34 +1030,16 @@ export class RendererComponent
 			this.events.size.set(this.rendererWidth, this.rendererHeight);
 			this.renderer.setSize(this.rendererWidth, this.rendererHeight);
 			this.effectList.forEach((composer) => {
-				composer.setRendererSize(
-					this.rendererWidth,
-					this.rendererHeight,
-					pixelRatio
-				);
+				composer.setRendererSize(this.rendererWidth, this.rendererHeight, pixelRatio);
 			});
 			this.cameraList.forEach((camera) => {
-				camera.setRendererSize(
-					this.rendererWidth,
-					this.rendererHeight,
-					width,
-					height,
-					pixelRatio
-				);
+				camera.setRendererSize(this.rendererWidth, this.rendererHeight, width, height, pixelRatio);
 			});
 			this.viewerList.forEach((viewer) => {
-				viewer.setRendererSize(
-					this.rendererWidth,
-					this.rendererHeight,
-					pixelRatio
-				);
+				viewer.setRendererSize(this.rendererWidth, this.rendererHeight, pixelRatio);
 			});
 			this.sizeList.forEach((size) => {
-				size.setRendererSize(
-					this.rendererWidth,
-					this.rendererHeight,
-					pixelRatio
-				);
+				size.setRendererSize(this.rendererWidth, this.rendererHeight, pixelRatio);
 			});
 			if (this.cssRenderer !== null) {
 				if (Array.isArray(this.cssRenderer)) {
@@ -1135,19 +1062,18 @@ export class RendererComponent
 	/**
 	 * Size subject of renderer component
 	 */
-	protected _sizeSubject: Subject<I3JS.IVector2> = new Subject<I3JS.IVector2>();
+	protected _sizeSubject: Subject<I3JS.Vector2> = new Subject<I3JS.Vector2>();
 
 	/**
 	 * Update subject of renderer component
 	 */
-	protected _updateSubject: Subject<RendererTimer> =
-		new Subject<RendererTimer>();
+	protected _updateSubject: Subject<IRendererTimer> = new Subject<IRendererTimer>();
 
 	/**
 	 * Sizes subscribe
 	 * @returns subscribe
 	 */
-	public sizeSubscribe(): Observable<I3JS.IVector2> {
+	public sizeSubscribe(): Observable<I3JS.Vector2> {
 		return this._sizeSubject.asObservable();
 	}
 
@@ -1155,7 +1081,7 @@ export class RendererComponent
 	 * Updates subscribe
 	 * @returns subscribe
 	 */
-	public updateSubscribe(): Observable<RendererTimer> {
+	public updateSubscribe(): Observable<IRendererTimer> {
 		return this._updateSubject.asObservable();
 	}
 
@@ -1215,7 +1141,7 @@ export class RendererComponent
 			},
 			{ passive: true }
 		);
-		if (ThreeUtil.isNotNull(ele)) {
+		if (NgxThreeUtil.isNotNull(ele)) {
 			const message = document.createElement('div');
 			message.className = 'message';
 			message.append(ele);
@@ -1231,14 +1157,14 @@ export class RendererComponent
 	 * Gets size
 	 * @returns size
 	 */
-	public getSize(): I3JS.IVector2 {
+	public getSize(): I3JS.Vector2 {
 		return new N3JS.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
 	/**
 	 * The Renderlistener of renderer component
 	 */
-	private renderlistener: I3JS.IAudioListener = null;
+	private renderlistener: I3JS.AudioListener = null;
 
 	/**
 	 * Applys changes
@@ -1247,12 +1173,12 @@ export class RendererComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.renderer !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getRenderer();
 				return;
 			}
 			if (
-				!ThreeUtil.isOnlyIndexOf(
+				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					[
 						'useevent',
@@ -1300,8 +1226,8 @@ export class RendererComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, [
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, [
 					'useevent',
 					'shared',
 					'resize',
@@ -1322,14 +1248,14 @@ export class RendererComponent
 					'webglrenderer',
 				]);
 			}
-			if (ThreeUtil.isIndexOf(changes, ['width', 'height', 'x', 'y', 'size'])) {
-				changes = ThreeUtil.pushUniq(changes, ['resize']);
+			if (NgxThreeUtil.isIndexOf(changes, ['width', 'height', 'x', 'y', 'size'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['resize']);
 			}
-			if (ThreeUtil.isIndexOf(changes, 'guiparams')) {
-				changes = ThreeUtil.pushUniq(changes, ['guicontrol']);
+			if (NgxThreeUtil.isIndexOf(changes, 'guiparams')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['guicontrol']);
 			}
 			if (
-				ThreeUtil.isIndexOf(changes, [
+				NgxThreeUtil.isIndexOf(changes, [
 					'localclippingenabled',
 					'globalclippingenabled',
 					'statsmode',
@@ -1346,16 +1272,10 @@ export class RendererComponent
 					'clippingplanes',
 				])
 			) {
-				changes = ThreeUtil.pushUniq(changes, ['webglrenderer']);
+				changes = NgxThreeUtil.pushUniq(changes, ['webglrenderer']);
 			}
-			if (
-				ThreeUtil.isIndexOf(changes, [
-					'camera',
-					'controltype',
-					'controloptions',
-				])
-			) {
-				changes = ThreeUtil.pushUniq(changes, ['control']);
+			if (NgxThreeUtil.isIndexOf(changes, ['camera', 'controltype', 'controloptions'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['control']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -1366,15 +1286,11 @@ export class RendererComponent
 						}
 						if (
 							this.gui == null &&
-							ThreeUtil.isNotNull(this.guiControl) &&
-							ThreeUtil.isNotNull(this.guiParams) &&
+							NgxThreeUtil.isNotNull(this.guiControl) &&
+							NgxThreeUtil.isNotNull(this.guiParams) &&
 							this.guiParams.length > 0
 						) {
-							const gui = ThreeUtil.setupGui(
-								this.guiControl,
-								this.getGui(),
-								this.guiParams
-							);
+							const gui = NgxThreeUtil.setupGui(this.guiControl, this.getGui(), this.guiParams);
 							if (this.guiOpen) {
 								gui.open();
 							} else {
@@ -1383,139 +1299,68 @@ export class RendererComponent
 						}
 						break;
 					case 'useevent':
-						const useEvents = ThreeUtil.isNotNull(this.useEvent)
-							? this.useEvent.toLowerCase().split(',')
-							: [];
+						const useEvents = NgxThreeUtil.isNotNull(this.useEvent) ? this.useEvent.toLowerCase().split(',') : [];
 						if (useEvents.indexOf('change') > -1) {
-							this._eventListener.change = this.addEvent(
-								'change',
-								this._eventListener.change
-							);
+							this._eventListener.change = this.addEvent('change', this._eventListener.change);
 						} else {
-							this._eventListener.change = this.removeEvent(
-								'change',
-								this._eventListener.change
-							);
+							this._eventListener.change = this.removeEvent('change', this._eventListener.change);
 						}
 						if (
 							useEvents.indexOf('pointerdown') > -1 ||
 							useEvents.indexOf('mousedown') > -1 ||
 							useEvents.indexOf('down') > -1
 						) {
-							this._eventListener.pointerdown = this.addEvent(
-								'pointerdown',
-								this._eventListener.pointerdown
-							);
+							this._eventListener.pointerdown = this.addEvent('pointerdown', this._eventListener.pointerdown);
 						} else {
-							this._eventListener.pointerdown = this.removeEvent(
-								'pointerdown',
-								this._eventListener.pointerdown
-							);
+							this._eventListener.pointerdown = this.removeEvent('pointerdown', this._eventListener.pointerdown);
 						}
 						if (
 							useEvents.indexOf('pointerup') > -1 ||
 							useEvents.indexOf('mouseup') > -1 ||
 							useEvents.indexOf('up') > -1
 						) {
-							this._eventListener.pointerup = this.addEvent(
-								'pointerup',
-								this._eventListener.pointerup
-							);
+							this._eventListener.pointerup = this.addEvent('pointerup', this._eventListener.pointerup);
 						} else {
-							this._eventListener.pointerup = this.removeEvent(
-								'pointerup',
-								this._eventListener.pointerup
-							);
+							this._eventListener.pointerup = this.removeEvent('pointerup', this._eventListener.pointerup);
 						}
 						if (
 							useEvents.indexOf('pointermove') > -1 ||
 							useEvents.indexOf('mousemove') > -1 ||
 							useEvents.indexOf('move') > -1
 						) {
-							this._eventListener.pointermove = this.addEvent(
-								'pointermove',
-								this._eventListener.pointermove
-							);
+							this._eventListener.pointermove = this.addEvent('pointermove', this._eventListener.pointermove);
 						} else {
-							this._eventListener.pointermove = this.removeEvent(
-								'pointermove',
-								this._eventListener.pointermove
-							);
+							this._eventListener.pointermove = this.removeEvent('pointermove', this._eventListener.pointermove);
 						}
 						if (useEvents.indexOf('keydown') > -1) {
-							this._eventListener.keydown = this.addEvent(
-								'keydown',
-								this._eventListener.keydown
-							);
+							this._eventListener.keydown = this.addEvent('keydown', this._eventListener.keydown);
 						} else {
-							this._eventListener.keydown = this.removeEvent(
-								'keydown',
-								this._eventListener.keydown
-							);
+							this._eventListener.keydown = this.removeEvent('keydown', this._eventListener.keydown);
 						}
 						if (useEvents.indexOf('keyup') > -1) {
-							this._eventListener.keyup = this.addEvent(
-								'keyup',
-								this._eventListener.keyup
-							);
+							this._eventListener.keyup = this.addEvent('keyup', this._eventListener.keyup);
 						} else {
-							this._eventListener.keyup = this.removeEvent(
-								'keyup',
-								this._eventListener.keyup
-							);
+							this._eventListener.keyup = this.removeEvent('keyup', this._eventListener.keyup);
 						}
-						if (
-							useEvents.indexOf('keypress') > -1 ||
-							useEvents.indexOf('press') > -1
-						) {
-							this._eventListener.keypress = this.addEvent(
-								'keypress',
-								this._eventListener.keypress
-							);
+						if (useEvents.indexOf('keypress') > -1 || useEvents.indexOf('press') > -1) {
+							this._eventListener.keypress = this.addEvent('keypress', this._eventListener.keypress);
 						} else {
-							this._eventListener.keypress = this.removeEvent(
-								'keypress',
-								this._eventListener.keypress
-							);
+							this._eventListener.keypress = this.removeEvent('keypress', this._eventListener.keypress);
 						}
 						if (useEvents.indexOf('click') > -1) {
-							this._eventListener.click = this.addEvent(
-								'click',
-								this._eventListener.click
-							);
+							this._eventListener.click = this.addEvent('click', this._eventListener.click);
 						} else {
-							this._eventListener.click = this.removeEvent(
-								'click',
-								this._eventListener.click
-							);
+							this._eventListener.click = this.removeEvent('click', this._eventListener.click);
 						}
-						if (
-							useEvents.indexOf('mouseover') > -1 ||
-							useEvents.indexOf('over') > -1
-						) {
-							this._eventListener.mouseover = this.addEvent(
-								'mouseover',
-								this._eventListener.mouseover
-							);
+						if (useEvents.indexOf('mouseover') > -1 || useEvents.indexOf('over') > -1) {
+							this._eventListener.mouseover = this.addEvent('mouseover', this._eventListener.mouseover);
 						} else {
-							this._eventListener.mouseover = this.removeEvent(
-								'mouseover',
-								this._eventListener.mouseover
-							);
+							this._eventListener.mouseover = this.removeEvent('mouseover', this._eventListener.mouseover);
 						}
-						if (
-							useEvents.indexOf('mouseout') > -1 ||
-							useEvents.indexOf('out') > -1
-						) {
-							this._eventListener.mouseout = this.addEvent(
-								'mouseout',
-								this._eventListener.mouseout
-							);
+						if (useEvents.indexOf('mouseout') > -1 || useEvents.indexOf('out') > -1) {
+							this._eventListener.mouseout = this.addEvent('mouseout', this._eventListener.mouseout);
 						} else {
-							this._eventListener.mouseout = this.removeEvent(
-								'mouseout',
-								this._eventListener.mouseout
-							);
+							this._eventListener.mouseout = this.removeEvent('mouseout', this._eventListener.mouseout);
 						}
 						break;
 					case 'resize':
@@ -1523,57 +1368,45 @@ export class RendererComponent
 						break;
 					case 'webglrenderer':
 						if (this.renderer instanceof N3JS.WebGLRenderer) {
-							if (ThreeUtil.isNotNull(this.clearColor)) {
+							if (NgxThreeUtil.isNotNull(this.clearColor)) {
 								this.renderer.setClearColor(this.getClearColor());
 							}
-							if (ThreeUtil.isNotNull(this.clearAlpha)) {
+							if (NgxThreeUtil.isNotNull(this.clearAlpha)) {
 								this.renderer.setClearAlpha(this.getClearAlpha());
 							}
-							if (ThreeUtil.isNotNull(this.toneMapping)) {
+							if (NgxThreeUtil.isNotNull(this.toneMapping)) {
 								this.renderer.toneMapping = this.getToneMapping();
 							}
-							if (ThreeUtil.isNotNull(this.toneMappingExposure)) {
+							if (NgxThreeUtil.isNotNull(this.toneMappingExposure)) {
 								this.renderer.toneMappingExposure = this.toneMappingExposure;
 							}
 							this.renderer.setPixelRatio(window.devicePixelRatio);
-							if (ThreeUtil.isNotNull(this.shadowMapEnabled)) {
+							if (NgxThreeUtil.isNotNull(this.shadowMapEnabled)) {
 								this.renderer.shadowMap.enabled = this.shadowMapEnabled;
 							}
-							if (ThreeUtil.isNotNull(this.physicallyCorrectLights)) {
-								this.renderer.physicallyCorrectLights =
-									this.physicallyCorrectLights;
+							if (NgxThreeUtil.isNotNull(this.physicallyCorrectLights)) {
+								this.renderer.physicallyCorrectLights = this.physicallyCorrectLights;
 							}
-							if (ThreeUtil.isNotNull(this.gammaFactor)) {
+							if (NgxThreeUtil.isNotNull(this.gammaFactor)) {
 								this.renderer.gammaFactor = this.gammaFactor;
 							}
-							if (
-								this.renderer.shadowMap.enabled &&
-								ThreeUtil.isNotNull(this.shadowMapType)
-							) {
-								this.renderer.shadowMap.type = ThreeUtil.getShadowMapTypeSafe(
-									this.shadowMapType,
-									'pcfsoft'
-								);
+							if (this.renderer.shadowMap.enabled && NgxThreeUtil.isNotNull(this.shadowMapType)) {
+								this.renderer.shadowMap.type = NgxThreeUtil.getShadowMapTypeSafe(this.shadowMapType, 'pcfsoft');
 							}
-							if (ThreeUtil.isNotNull(this.autoClear)) {
+							if (NgxThreeUtil.isNotNull(this.autoClear)) {
 								this.renderer.autoClear = this.autoClear;
 							}
-							if (ThreeUtil.isNotNull(this.autoClearColor)) {
+							if (NgxThreeUtil.isNotNull(this.autoClearColor)) {
 								this.renderer.autoClearColor = this.autoClearColor;
 							}
-							if (ThreeUtil.isNotNull(this.outputEncoding)) {
-								this.renderer.outputEncoding = ThreeUtil.getTextureEncodingSafe(
-									this.outputEncoding,
-									'linear'
-								);
+							if (NgxThreeUtil.isNotNull(this.outputEncoding)) {
+								this.renderer.outputEncoding = NgxThreeUtil.getTextureEncodingSafe(this.outputEncoding, 'linear');
 							}
-							if (ThreeUtil.isNotNull(this.localClippingEnabled)) {
+							if (NgxThreeUtil.isNotNull(this.localClippingEnabled)) {
 								this.renderer.localClippingEnabled = this.localClippingEnabled;
 							}
-							if (ThreeUtil.isNotNull(this.globalClippingEnabled)) {
-								this.renderer.clippingPlanes = !this.globalClippingEnabled
-									? []
-									: this.getClippingPlanes();
+							if (NgxThreeUtil.isNotNull(this.globalClippingEnabled)) {
+								this.renderer.clippingPlanes = !this.globalClippingEnabled ? [] : this.getClippingPlanes();
 							}
 						}
 						break;
@@ -1591,15 +1424,11 @@ export class RendererComponent
 						}
 						break;
 					case 'control':
-						this.controls = this.getControls(
-							this.cameraList,
-							this.sceneList,
-							this.canvasEle.nativeElement
-						);
+						this.controls = this.getControls(this.cameraList, this.sceneList, this.canvasEle.nativeElement);
 						break;
 					case 'scene':
 						this.unSubscribeReferList('sceneList');
-						if (ThreeUtil.isNotNull(this.sceneList)) {
+						if (NgxThreeUtil.isNotNull(this.sceneList)) {
 							this.sceneList.forEach((scene) => {
 								scene.setRenderer(this);
 							});
@@ -1608,23 +1437,16 @@ export class RendererComponent
 						break;
 					case 'camera':
 						this.unSubscribeReferList('cameraList');
-						if (ThreeUtil.isNotNull(this.cameraList)) {
+						if (NgxThreeUtil.isNotNull(this.cameraList)) {
 							this.cameraList.forEach((camera) => {
-								camera.setRenderer(
-									this.renderer,
-									this.cssRenderer,
-									this.sceneList
-								);
+								camera.setRenderer(this.renderer, this.cssRenderer, this.sceneList);
 							});
 							this.subscribeListQuery(this.cameraList, 'cameraList', 'camera');
 						}
 						break;
 					case 'composer':
 						this.unSubscribeReferList('effectList');
-						if (
-							ThreeUtil.isNotNull(this.effectList) &&
-							this.renderer instanceof N3JS.WebGLRenderer
-						) {
+						if (NgxThreeUtil.isNotNull(this.effectList) && this.renderer instanceof N3JS.WebGLRenderer) {
 							const renderer = this.renderer;
 							if (
 								this.effectList.length > 0 &&
@@ -1632,7 +1454,7 @@ export class RendererComponent
 								this.sceneList.length > 0 &&
 								this.renderer instanceof N3JS.WebGLRenderer
 							) {
-								let camera: I3JS.ICamera = null;
+								let camera: I3JS.Camera = null;
 								this.cameraList.forEach((cameraCom) => {
 									if (camera === null) {
 										const tmpCamera = cameraCom.getCamera();
@@ -1646,16 +1468,12 @@ export class RendererComponent
 									composer.setRenderer(renderer, camera, scene);
 								});
 							}
-							this.subscribeListQuery(
-								this.effectList,
-								'effectList',
-								'composer'
-							);
+							this.subscribeListQuery(this.effectList, 'effectList', 'composer');
 						}
 						break;
 					case 'viewer':
 						this.unSubscribeReferList('viewerList');
-						if (ThreeUtil.isNotNull(this.viewerList)) {
+						if (NgxThreeUtil.isNotNull(this.viewerList)) {
 							this.viewerList.forEach((viewer) => {
 								viewer.setRenderer(this.renderer);
 							});
@@ -1664,20 +1482,16 @@ export class RendererComponent
 						break;
 					case 'listener':
 						this.unSubscribeReferList('listenerList');
-						if (ThreeUtil.isNotNull(this.listenerList)) {
+						if (NgxThreeUtil.isNotNull(this.listenerList)) {
 							this.listenerList.forEach((listener) => {
 								this.renderlistener = listener.getListener();
 							});
-							this.subscribeListQuery(
-								this.listenerList,
-								'listenerList',
-								'listener'
-							);
+							this.subscribeListQuery(this.listenerList, 'listenerList', 'listener');
 						}
 						break;
 					case 'audio':
 						this.unSubscribeReferList('audioList');
-						if (ThreeUtil.isNotNull(this.audioList)) {
+						if (NgxThreeUtil.isNotNull(this.audioList)) {
 							this.audioList.forEach((audio) => {
 								audio.setListener(this.renderlistener, this);
 							});
@@ -1686,38 +1500,25 @@ export class RendererComponent
 						break;
 					case 'controller':
 						this.unSubscribeReferList('controllerList');
-						if (ThreeUtil.isNotNull(this.controllerList)) {
+						if (NgxThreeUtil.isNotNull(this.controllerList)) {
 							this.controllerList.forEach((controller) => {
-								controller.setRenderer(
-									this.renderer,
-									this.sceneList,
-									this.cameraList,
-									this.canvas2dList
-								);
+								controller.setRenderer(this.renderer, this.sceneList, this.cameraList, this.canvas2dList);
 							});
-							this.subscribeListQuery(
-								this.controllerList,
-								'controllerList',
-								'controller'
-							);
+							this.subscribeListQuery(this.controllerList, 'controllerList', 'controller');
 						}
 						break;
 					case 'canvas2d':
 						this.unSubscribeReferList('canvas2dList');
-						if (ThreeUtil.isNotNull(this.canvas2dList)) {
+						if (NgxThreeUtil.isNotNull(this.canvas2dList)) {
 							this.canvas2dList.forEach((canvas2d) => {
 								canvas2d.setParentNode(this.canvasEle.nativeElement);
 							});
-							this.subscribeListQuery(
-								this.canvas2dList,
-								'canvas2dList',
-								'canvas2d'
-							);
+							this.subscribeListQuery(this.canvas2dList, 'canvas2dList', 'canvas2d');
 						}
 						break;
 					case 'shared':
 						this.unSubscribeReferList('sharedList');
-						if (ThreeUtil.isNotNull(this.sharedList)) {
+						if (NgxThreeUtil.isNotNull(this.sharedList)) {
 							this.sharedList.forEach((shared) => {
 								shared.getShared();
 							});
@@ -1733,15 +1534,12 @@ export class RendererComponent
 	/**
 	 * The Renderer of renderer component
 	 */
-	public renderer: I3JS.IRenderer = null;
+	public renderer: I3JS.Renderer = null;
 
 	/**
 	 * Css renderer of renderer component
 	 */
-	private cssRenderer:
-		| I3JS.ICSS3DRenderer
-		| I3JS.ICSS2DRenderer
-		| (I3JS.ICSS3DRenderer | I3JS.ICSS2DRenderer)[] = null;
+	private cssRenderer: I3JS.CSS3DRenderer | I3JS.CSS2DRenderer | (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[] = null;
 
 	/**
 	 * Renderer width of renderer component
@@ -1756,33 +1554,33 @@ export class RendererComponent
 	/**
 	 * The Stats of renderer component
 	 */
-	private stats: ThreeStats = null;
+	private stats: NgxThreeStats = null;
 
 	/**
 	 * The Gui of renderer component
 	 */
-	public gui: ThreeGui = null;
+	public gui: NgxThreeGui = null;
 
 	/**
 	 * The Clock of renderer component
 	 */
-	private clock: ThreeClock = null;
+	private clock: NgxThreeClock = null;
 
 	/**
 	 * The Controls of renderer component
 	 */
-	private controls: ControlComponent[] = null;
+	private controls: NgxControlComponent[] = null;
 
 	/**
 	 * Render control of renderer component
 	 */
-	private renderControl: ControlComponent = null;
+	private renderControl: NgxControlComponent = null;
 
 	/**
 	 * Gets Render controls
 	 * @returns controls
 	 */
-	public getRenderControl(): ControlComponent {
+	public getRenderControl(): NgxControlComponent {
 		return this.renderControl;
 	}
 
@@ -1794,11 +1592,11 @@ export class RendererComponent
 	 * @returns controls
 	 */
 	private getControls(
-		cameras: QueryList<CameraComponent>,
-		scenes: QueryList<SceneComponent>,
+		cameras: QueryList<NgxCameraComponent>,
+		scenes: QueryList<NgxSceneComponent>,
 		domElement: HTMLElement
-	): ControlComponent[] {
-		let cameraComp: CameraComponent = null;
+	): NgxControlComponent[] {
+		let cameraComp: NgxCameraComponent = null;
 		let controlType: string = this.controlType.toLowerCase();
 		if (this.renderControl !== null) {
 			this.renderControl.ngOnDestroy();
@@ -1818,28 +1616,19 @@ export class RendererComponent
 				return false;
 			});
 		}
-		let controls: ControlComponent[] = [];
+		let controls: NgxControlComponent[] = [];
 		if (cameraComp !== null && cameraComp !== undefined) {
-			const camera: I3JS.ICamera = cameraComp.getCamera();
+			const camera: I3JS.Camera = cameraComp.getCamera();
 			switch (controlType.toLowerCase()) {
 				case 'none':
 					break;
 				default:
 					if (controlType.length > 1) {
-						const control = this.initLocalComponent(
-							'control',
-							new ControlComponent()
-						);
+						const control = this.initLocalComponent('control', new NgxControlComponent());
 						const controlOptions = this.controlOptions || {};
 						controlOptions.lookatList = this.lookatList;
 						control.updateInputParams(controlOptions, false, {}, controlType);
-						control.setCameraDomElement(
-							camera,
-							domElement,
-							scenes,
-							this.renderer,
-							this._renderCaller
-						);
+						control.setCameraDomElement(camera, domElement, scenes, this.renderer, this._renderCaller);
 						controls.push(control);
 						this.renderControl = control;
 					}
@@ -1847,13 +1636,7 @@ export class RendererComponent
 			}
 			if (this.controlList !== null && this.controlList !== undefined) {
 				this.controlList.forEach((control) => {
-					control.setCameraDomElement(
-						camera,
-						domElement,
-						scenes,
-						this.renderer,
-						this._renderCaller
-					);
+					control.setCameraDomElement(camera, domElement, scenes, this.renderer, this._renderCaller);
 					controls.push(control);
 				});
 			}
@@ -1865,10 +1648,10 @@ export class RendererComponent
 	 * Gets stats
 	 * @returns stats
 	 */
-	private getStats(): ThreeStats {
+	private getStats(): NgxThreeStats {
 		if (this.stats === null) {
-			this.stats = ThreeUtil.getStats(
-				ThreeUtil.getTypeSafe(this.statsStyle, {
+			this.stats = NgxThreeUtil.getStats(
+				NgxThreeUtil.getTypeSafe(this.statsStyle, {
 					position: 'absolute',
 					left: '0px',
 					top: '0px',
@@ -1883,10 +1666,10 @@ export class RendererComponent
 	 * Gets gui
 	 * @returns gui
 	 */
-	private getGui(): ThreeGui {
+	private getGui(): NgxThreeGui {
 		if (this.gui === null) {
-			this.gui = new ThreeGui(
-				ThreeUtil.getTypeSafe(this.guiStyle, {
+			this.gui = new NgxThreeGui(
+				NgxThreeUtil.getTypeSafe(this.guiStyle, {
 					position: 'absolute',
 					marginRight: '0px',
 					right: '0px',
@@ -1916,7 +1699,7 @@ export class RendererComponent
 	 * Gets Renderer
 	 * @returns Renderer
 	 */
-	public getRenderer(): I3JS.IRenderer {
+	public getRenderer(): I3JS.Renderer {
 		if (this.renderer === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.dispose();
@@ -1962,10 +1745,8 @@ export class RendererComponent
 				case 'svg':
 				case 'svgrenderer':
 					const svgRenderer = new N3JS.SVGRenderer();
-					if (ThreeUtil.isNotNull(this.quality)) {
-						svgRenderer.setQuality(
-							ThreeUtil.getTypeSafe(this.quality, 'high').toLowerCase()
-						);
+					if (NgxThreeUtil.isNotNull(this.quality)) {
+						svgRenderer.setQuality(NgxThreeUtil.getTypeSafe(this.quality, 'high').toLowerCase());
 					}
 					this.renderer = svgRenderer as any;
 					break;
@@ -2005,7 +1786,7 @@ export class RendererComponent
 			}
 			this.renderer.domElement.style.position = 'relative';
 			this.canvasEle.nativeElement.appendChild(this.renderer.domElement);
-			ThreeUtil.setRenderer(this);
+			NgxThreeUtil.setRenderer(this);
 			(this.renderer as any)['userData'] = {};
 			super.setObject(this.renderer);
 			this.resizeRender();
@@ -2022,19 +1803,19 @@ export class RendererComponent
 	/**
 	 * The Cameras of renderer component
 	 */
-	private _cameras: I3JS.ICamera[] = null;
+	private _cameras: I3JS.Camera[] = null;
 
 	/**
 	 * The Scenes of renderer component
 	 */
-	private _scenes: I3JS.IScene[] = null;
+	private _scenes: I3JS.Scene[] = null;
 
 	/**
 	 * Gets render info
 	 * @param timer
 	 * @returns render info
 	 */
-	private getRenderInfo(timer: RendererTimer): RendererInfo {
+	private getRenderInfo(timer: IRendererTimer): IRendererInfo {
 		if (this._cameras === null) {
 			this._cameras = [];
 			this.cameraList.forEach((camera) => {
@@ -2086,53 +1867,31 @@ export class RendererComponent
 		this.sceneList.forEach((scene) => {
 			scene.update(renderTimer);
 		});
-		ThreeUtil.render(renderTimer);
+		NgxThreeUtil.render(renderTimer);
 		if (this.controls !== null) {
 			this.controls.forEach((control) => {
 				control.render(renderTimer);
 			});
 		}
-		if (
-			ThreeUtil.isNull(this.beforeRender) ||
-			!this.beforeRender(this.getRenderInfo(renderTimer))
-		) {
+		if (NgxThreeUtil.isNull(this.beforeRender) || !this.beforeRender(this.getRenderInfo(renderTimer))) {
 			// if (this.effectList.length > 0 && this.renderer instanceof THREE.WebGLRenderer && this.panSpeed ) {
 			this._updateSubject.next(renderTimer);
-			if (
-				this.composerEnable &&
-				this.effectList.length > 0 &&
-				this.renderer instanceof N3JS.WebGLRenderer
-			) {
+			if (this.composerEnable && this.effectList.length > 0 && this.renderer instanceof N3JS.WebGLRenderer) {
 				this.effectList.forEach((composer) => {
-					composer.render(this.renderer as I3JS.IWebGLRenderer, renderTimer);
+					composer.render(this.renderer as I3JS.WebGLRenderer, renderTimer);
 				});
 			} else if (this.cameraList && this.cameraList.length > 0) {
 				this.cameraList.forEach((camera) => {
-					camera.render(
-						this.renderer,
-						this.cssRenderer,
-						this.scene || this.sceneList,
-						renderTimer
-					);
+					camera.render(this.renderer, this.cssRenderer, this.scene || this.sceneList, renderTimer);
 				});
-			} else if (ThreeUtil.isNotNull(this.camera)) {
-				this.camera.render(
-					this.renderer,
-					this.cssRenderer,
-					this.scene || this.sceneList,
-					renderTimer
-				);
+			} else if (NgxThreeUtil.isNotNull(this.camera)) {
+				this.camera.render(this.renderer, this.cssRenderer, this.scene || this.sceneList, renderTimer);
 			}
 			this.viewerList.forEach((viewer) => {
-				viewer.render(
-					this.renderer,
-					this.scene || this.sceneList,
-					this.camera || this.cameraList,
-					renderTimer
-				);
+				viewer.render(this.renderer, this.scene || this.sceneList, this.camera || this.cameraList, renderTimer);
 			});
 		}
-		if (ThreeUtil.isNotNull(this.afterRender)) {
+		if (NgxThreeUtil.isNotNull(this.afterRender)) {
 			this.afterRender(this.getRenderInfo(renderTimer));
 		}
 		if (this.stats !== null) {
@@ -2159,17 +1918,9 @@ export class RendererComponent
 	 */
 	@HostListener('window:resize')
 	public resizeRender() {
-		if (
-			typeof this.width === 'string' ||
-			typeof this.height === 'string' ||
-			this.width <= 0 ||
-			this.height <= 0
-		) {
+		if (typeof this.width === 'string' || typeof this.height === 'string' || this.width <= 0 || this.height <= 0) {
 			if (this.sizeType === 'auto') {
-				this.setSize(
-					this.rendererEle.nativeElement.clientWidth,
-					this.rendererEle.nativeElement.clientHeight
-				);
+				this.setSize(this.rendererEle.nativeElement.clientWidth, this.rendererEle.nativeElement.clientHeight);
 			} else {
 				this.setSize(window.innerWidth, window.innerHeight);
 			}
@@ -2190,12 +1941,12 @@ export class RendererComponent
 		if (
 			this.renderer !== null &&
 			this.renderer.domElement !== null &&
-			ThreeUtil.isNotNull(this.renderer.domElement.toDataURL)
+			NgxThreeUtil.isNotNull(this.renderer.domElement.toDataURL)
 		) {
 			this._isPaused = true;
 			this._renderOnce();
 			options = options || {};
-			let imageType = ThreeUtil.getTypeSafe(options.type, 'png');
+			let imageType = NgxThreeUtil.getTypeSafe(options.type, 'png');
 			let contentType = 'image/png';
 			switch (imageType.toLowerCase()) {
 				case 'jpg':
@@ -2208,11 +1959,9 @@ export class RendererComponent
 					contentType = 'image/png';
 					break;
 			}
-			let imageName = ThreeUtil.getTypeSafe(options.name, 'auto');
+			let imageName = NgxThreeUtil.getTypeSafe(options.name, 'auto');
 			if (imageName == '' || imageName == 'auto') {
-				imageName = window.location.hash.substr(
-					window.location.hash.lastIndexOf('/') + 1
-				);
+				imageName = window.location.hash.substr(window.location.hash.lastIndexOf('/') + 1);
 			}
 			const resultJson = {
 				content: '',
@@ -2221,8 +1970,8 @@ export class RendererComponent
 				name: imageName + '.' + imageType,
 			};
 			if (
-				ThreeUtil.isNotNull(options.width) &&
-				ThreeUtil.isNotNull(options.height) &&
+				NgxThreeUtil.isNotNull(options.width) &&
+				NgxThreeUtil.isNotNull(options.height) &&
 				options.width > 0 &&
 				options.height > 0
 			) {
@@ -2241,8 +1990,7 @@ export class RendererComponent
 						let sy: number = 0;
 						let sw: number = 0;
 						let sh: number = 0;
-						const canvasImageRate =
-							canvasImage.naturalWidth / canvasImage.naturalHeight;
+						const canvasImageRate = canvasImage.naturalWidth / canvasImage.naturalHeight;
 						const thumbRate = options.width / options.height;
 						if (canvasImageRate > thumbRate) {
 							sw = canvasImage.naturalHeight * thumbRate;
@@ -2259,7 +2007,7 @@ export class RendererComponent
 						let dh: number = options.height;
 						context.drawImage(canvasImage, sx, sy, sw, sh, dx, dy, dw, dh);
 						resultJson.content = canvas.toDataURL(imageType);
-						if (ThreeUtil.isNotNull(options.name)) {
+						if (NgxThreeUtil.isNotNull(options.name)) {
 							this.getDownloadFile(resultJson);
 						} else {
 							const blob = this.dataURLtoBlob(resultJson.content);
@@ -2279,7 +2027,7 @@ export class RendererComponent
 				);
 			} else {
 				resultJson.content = this.renderer.domElement.toDataURL(imageType);
-				if (ThreeUtil.isNotNull(options.name)) {
+				if (NgxThreeUtil.isNotNull(options.name)) {
 					this.getDownloadFile(resultJson);
 				} else {
 					const blob = this.dataURLtoBlob(resultJson.content);

@@ -5,8 +5,8 @@ import {
 	OnInit,
 	SimpleChanges,
 } from '@angular/core';
-import { ThreeUtil, I3JS, N3JS } from '../interface';
-import { AbstractObject3dComponent } from '../object3d.abstract';
+import { NgxThreeUtil, I3JS, N3JS } from '../interface';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 
 /**
  * The Listener component.
@@ -30,13 +30,13 @@ import { AbstractObject3dComponent } from '../object3d.abstract';
 	styleUrls: ['./listener.component.scss'],
 	providers: [
 		{
-			provide: AbstractObject3dComponent,
-			useExisting: forwardRef(() => ListenerComponent),
+			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxListenerComponent),
 		},
 	],
 })
-export class ListenerComponent
-	extends AbstractObject3dComponent
+export class NgxListenerComponent
+	extends NgxAbstractObject3dComponent
 	implements OnInit
 {
 	/**
@@ -94,14 +94,14 @@ export class ListenerComponent
 	/**
 	 * The Listener of listener component
 	 */
-	private listener: I3JS.IAudioListener = null;
+	private listener: I3JS.AudioListener = null;
 
 	/**
 	 * Sets parent
 	 * @param parent
 	 * @returns true if parent
 	 */
-	public setParent(parent: I3JS.IObject3D): boolean {
+	public setParent(parent: I3JS.Object3D): boolean {
 		if (super.setParent(parent)) {
 			this.getListener();
 			return true;
@@ -116,8 +116,8 @@ export class ListenerComponent
 	 */
 	public applyChanges3d(changes: string[]) {
 		if (this.listener !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['volume', 'visible']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['volume', 'visible']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -146,7 +146,7 @@ export class ListenerComponent
 	 * @template T
 	 * @returns object3d
 	 */
-	public getObject3d<T extends I3JS.IObject3D>(): T {
+	public getObject3d<T extends I3JS.Object3D>(): T {
 		return this.getListener() as any;
 	}
 
@@ -154,7 +154,7 @@ export class ListenerComponent
 	 * Gets listener
 	 * @returns listener
 	 */
-	public getListener(): I3JS.IAudioListener {
+	public getListener(): I3JS.AudioListener {
 		if (this.listener === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.listener = new N3JS.AudioListener();

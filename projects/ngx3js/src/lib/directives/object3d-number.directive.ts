@@ -3,20 +3,14 @@ import {
 	forwardRef,
 	Input,
 	OnChanges,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import {
-	AbstractThreeDirective,
-	ObjectFunction,
-	DirectiveOptions,
+	AbstractThreeDirective
 } from '../directive.abstract';
-import { RendererTimer, ThreeUtil } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
-
-/**
- * Number options
- */
-export interface NumberOptions extends DirectiveOptions {}
+import { NgxThreeUtil } from '../interface';
+import { IDirectiveOptions, TObjectFunction, IRendererTimer, INumberOptions } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * Number Directive
@@ -54,8 +48,8 @@ export class NumberDirective
 	 * Input  of number directive
 	 */
 	@Input('ngx3jsNumber') public ngx3jsNumber:
-		| NumberOptions
-		| ObjectFunction
+		| INumberOptions
+		| TObjectFunction
 		| string = 'none';
 
 	/**
@@ -63,7 +57,7 @@ export class NumberDirective
 	 *
 	 * @param object3d
 	 */
-	constructor(object: AbstractSubscribeComponent) {
+	constructor(object: NgxAbstractSubscribeComponent) {
 		super(object);
 	}
 
@@ -75,8 +69,8 @@ export class NumberDirective
 	 * @param changes The changed properties.
 	 */
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes.ngx3jsNumber && ThreeUtil.isNotNull(this.ngx3jsNumber)) {
-			const options: NumberOptions = {
+		if (changes.ngx3jsNumber && NgxThreeUtil.isNotNull(this.ngx3jsNumber)) {
+			const options: INumberOptions = {
 				type: null,
 				easing: 'linearin',
 				repeat: 'yoyo',
@@ -107,22 +101,22 @@ export class NumberDirective
 			} else if (typeof this.ngx3jsNumber === 'function') {
 				this.setObjectFunction(this.ngx3jsNumber);
 			} else {
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.type)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsNumber.type)) {
 					options.type = this.ngx3jsNumber.type;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.speed)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsNumber.speed)) {
 					options.speed = this.ngx3jsNumber.speed;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.easing)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsNumber.easing)) {
 					options.easing = this.ngx3jsNumber.easing;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.repeat)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsNumber.repeat)) {
 					options.repeat = this.ngx3jsNumber.repeat;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.start)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsNumber.start)) {
 					options.start = this.ngx3jsNumber.start;
 				}
-				if (ThreeUtil.isNotNull(this.ngx3jsNumber.end)) {
+				if (NgxThreeUtil.isNotNull(this.ngx3jsNumber.end)) {
 					options.end = this.ngx3jsNumber.end;
 				}
 			}
@@ -146,7 +140,7 @@ export class NumberDirective
 							options.end
 						);
 						this.setObjectFunction(
-							(object: any, _: number, timer: RendererTimer) => {
+							(object: any, _: number, timer: IRendererTimer) => {
 								if (
 									object[property] !== undefined &&
 									typeof object[property] === 'number'

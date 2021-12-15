@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ThreeUtil, N3JS, I3JS } from '../interface';
-import { AbstractSubscribeComponent } from '../subscribe.abstract';
+import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Keyframe component.
@@ -58,8 +58,8 @@ import { AbstractSubscribeComponent } from '../subscribe.abstract';
 	templateUrl: './keyframe.component.html',
 	styleUrls: ['./keyframe.component.scss'],
 })
-export class KeyframeComponent
-	extends AbstractSubscribeComponent
+export class NgxKeyframeComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**
@@ -207,10 +207,10 @@ export class KeyframeComponent
 		this.quaternions.forEach((v) => {
 			if (typeof v === 'number') {
 				quaternions.push(v);
-			} else if (ThreeUtil.isNotNull(v.w)) {
+			} else if (NgxThreeUtil.isNotNull(v.w)) {
 				quaternions.push(v.x, v.y, v.z, v.w);
 			} else {
-				tmpQuaternion.setFromEuler(ThreeUtil.getEulerSafe(v.x, v.y, v.z));
+				tmpQuaternion.setFromEuler(NgxThreeUtil.getEulerSafe(v.x, v.y, v.z));
 				quaternions.push(
 					tmpQuaternion.x,
 					tmpQuaternion.y,
@@ -231,7 +231,7 @@ export class KeyframeComponent
 		const colors: number[] = [];
 		this.colors.forEach((v) => {
 			if (typeof v === 'number' || typeof v === 'string') {
-				const tmp = ThreeUtil.getColorSafe(v, 0x000000);
+				const tmp = NgxThreeUtil.getColorSafe(v, 0x000000);
 				colors.push(tmp.r, tmp.g, tmp.b);
 			} else {
 				colors.push(v.r, v.g, v.b);
@@ -295,13 +295,13 @@ export class KeyframeComponent
 	/**
 	 * The Clip of keyframe component
 	 */
-	private clip: I3JS.IAnimationClip = null;
+	private clip: I3JS.AnimationClip = null;
 
 	/**
 	 * Sets clip
 	 * @param clip
 	 */
-	public setClip(clip: I3JS.IAnimationClip) {
+	public setClip(clip: I3JS.AnimationClip) {
 		if (this.clip !== clip) {
 			this.clip = clip;
 			this.getKeyframe();
@@ -315,16 +315,16 @@ export class KeyframeComponent
 	 */
 	public applyChanges(changes: string[]) {
 		if (this.keyframe !== null) {
-			if (ThreeUtil.isIndexOf(changes, 'clearinit')) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getKeyframe();
 				return;
 			}
-			if (!ThreeUtil.isOnlyIndexOf(changes, ['init'], this.OBJECT_ATTR)) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init'], this.OBJECT_ATTR)) {
 				this.needUpdate = true;
 				return;
 			}
-			if (ThreeUtil.isIndexOf(changes, 'init')) {
-				changes = ThreeUtil.pushUniq(changes, ['mixer']);
+			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
+				changes = NgxThreeUtil.pushUniq(changes, ['mixer']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -339,13 +339,13 @@ export class KeyframeComponent
 	/**
 	 * The Keyframe of keyframe component
 	 */
-	private keyframe: I3JS.IKeyframeTrack = null;
+	private keyframe: I3JS.KeyframeTrack = null;
 
 	/**
 	 * Gets keyframe
 	 * @returns keyframe
 	 */
-	public getKeyframe(): I3JS.IKeyframeTrack {
+	public getKeyframe(): I3JS.KeyframeTrack {
 		if (this.clip !== null && (this.keyframe === null || this._needUpdate)) {
 			this.needUpdate = false;
 			if (this.keyframe !== null) {
@@ -354,9 +354,9 @@ export class KeyframeComponent
 					this.clip.tracks.splice(idx, 1);
 				}
 			}
-			const times: number[] = ThreeUtil.getTypeSafe(this.times, [0, 1, 2]);
-			const interpolation: I3JS.TInterpolationModes =
-				ThreeUtil.getInterpolationSafe(this.interpolation);
+			const times: number[] = NgxThreeUtil.getTypeSafe(this.times, [0, 1, 2]);
+			const interpolation: I3JS.InterpolationModes =
+				NgxThreeUtil.getInterpolationSafe(this.interpolation);
 			switch (this.type.toLowerCase()) {
 				case 'position':
 					this.keyframe = new N3JS.VectorKeyframeTrack(
@@ -418,7 +418,7 @@ export class KeyframeComponent
 				case 'vectorkeyframe':
 				case 'vectorkeyframetrack':
 					this.keyframe = new N3JS.VectorKeyframeTrack(
-						'.' + ThreeUtil.getTypeSafe(this.name, 'position'),
+						'.' + NgxThreeUtil.getTypeSafe(this.name, 'position'),
 						times,
 						this.getVectors(times.length),
 						interpolation
@@ -428,7 +428,7 @@ export class KeyframeComponent
 				case 'quaternionkeyframe':
 				case 'quaternionkeyframetrack':
 					this.keyframe = new N3JS.QuaternionKeyframeTrack(
-						'.' + ThreeUtil.getTypeSafe(this.name, 'quaternion'),
+						'.' + NgxThreeUtil.getTypeSafe(this.name, 'quaternion'),
 						times,
 						this.getQuaternions(times.length),
 						interpolation
@@ -438,7 +438,7 @@ export class KeyframeComponent
 				case 'colorkeyframe':
 				case 'colorkeyframetrack':
 					this.keyframe = new N3JS.ColorKeyframeTrack(
-						'.' + ThreeUtil.getTypeSafe(this.name, 'quaternion'),
+						'.' + NgxThreeUtil.getTypeSafe(this.name, 'quaternion'),
 						times,
 						this.getColors(times.length),
 						interpolation
@@ -448,7 +448,7 @@ export class KeyframeComponent
 				case 'numberkeyframe':
 				case 'numberkeyframetrack':
 					this.keyframe = new N3JS.NumberKeyframeTrack(
-						'.' + ThreeUtil.getTypeSafe(this.name, 'opacity'),
+						'.' + NgxThreeUtil.getTypeSafe(this.name, 'opacity'),
 						times,
 						this.getValues(times.length),
 						interpolation
@@ -458,7 +458,7 @@ export class KeyframeComponent
 				case 'booleankeyframe':
 				case 'booleankeyframetrack':
 					this.keyframe = new N3JS.BooleanKeyframeTrack(
-						'.' + ThreeUtil.getTypeSafe(this.name, 'transparent'),
+						'.' + NgxThreeUtil.getTypeSafe(this.name, 'transparent'),
 						times,
 						this.getBooleans(times.length)
 					);
