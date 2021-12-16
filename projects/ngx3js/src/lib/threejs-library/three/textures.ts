@@ -1,10 +1,6 @@
-import {
-    CompressedPixelFormat, Mapping, PixelFormat,
-    PixelFormatGPU, TextureDataType, TextureEncoding, TextureFilter, Wrapping
-} from './constants';
+import { CompressedPixelFormat, Mapping, PixelFormat, PixelFormatGPU, TextureDataType, TextureEncoding, TextureFilter, Wrapping } from './constants';
 import { EventDispatcher } from './core';
 import { Matrix3, Vector2 } from './math';
-
 
 export interface CanvasTexture extends Texture {
     /**
@@ -19,7 +15,7 @@ export interface CanvasTexture extends Texture {
      * @param [anisotropy=1]
      * @param [encoding=THREE.LinearEncoding]
      */
-    new(
+    new( 
         canvas: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
         mapping?: Mapping,
         wrapS?: Wrapping,
@@ -33,7 +29,6 @@ export interface CanvasTexture extends Texture {
 
     readonly isCanvasTexture: true;
 }
-
 
 export interface CompressedTexture extends Texture {
     /**
@@ -50,7 +45,7 @@ export interface CompressedTexture extends Texture {
      * @param [anisotropy=1]
      * @param [encoding=THREE.LinearEncoding]
      */
-    new(
+    new( 
         mipmaps: ImageData[],
         width: number,
         height: number,
@@ -95,7 +90,7 @@ export interface CubeTexture extends Texture {
      * @param [anisotropy=1]
      * @param [encoding=THREE.LinearEncoding]
      */
-    new(
+    new( 
         images?: any[], // HTMLImageElement or HTMLCanvasElement
         mapping?: Mapping,
         wrapS?: Wrapping,
@@ -133,7 +128,7 @@ export interface DataTexture extends Texture {
      * @param [anisotropy=1]
      * @param [encoding=THREE.LinearEncoding]
      */
-    new(
+    new( 
         data?: BufferSource | null,
         width?: number,
         height?: number,
@@ -174,7 +169,7 @@ export interface DataTexture extends Texture {
 }
 
 export interface DataTexture2DArray extends Texture {
-    new(data?: BufferSource, width?: number, height?: number, depth?: number) : this;
+    new( data?: BufferSource, width?: number, height?: number, depth?: number) : this;
 
     /**
      * @default THREE.NearestFilter
@@ -205,7 +200,7 @@ export interface DataTexture2DArray extends Texture {
 }
 
 export interface DataTexture3D extends Texture {
-    new(data: BufferSource, width: number, height: number, depth: number) : this;
+    new( data: BufferSource, width: number, height: number, depth: number) : this;
 
     /**
      * @default THREE.NearestFilter
@@ -247,7 +242,7 @@ export interface DepthTexture extends Texture {
      * @param [minFilter=THREE.NearestFilter]
      * @param [anisotropy=1]
      */
-    new(
+    new( 
         width: number,
         height: number,
         type?: TextureDataType,
@@ -287,7 +282,7 @@ export interface Texture extends EventDispatcher {
      * @param [anisotropy=1]
      * @param [encoding=THREE.LinearEncoding]
      */
-    new(
+    new( 
         image?: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
         mapping?: Mapping,
         wrapS?: Wrapping,
@@ -446,7 +441,6 @@ export interface Texture extends EventDispatcher {
     updateMatrix(): void;
 }
 
-
 export interface VideoTexture extends Texture {
     /**
      * @param video
@@ -459,7 +453,7 @@ export interface VideoTexture extends Texture {
      * @param [type=THREE.UnsignedByteType]
      * @param [anisotropy=1]
      */
-    new(
+    new( 
         video: HTMLVideoElement,
         mapping?: Mapping,
         wrapS?: Wrapping,
@@ -478,4 +472,3 @@ export interface VideoTexture extends Texture {
      */
     generateMipmaps: boolean;
 }
-

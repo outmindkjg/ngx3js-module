@@ -5,7 +5,7 @@ import { ICurvesParameters } from '../../ngx-interface';
  * Curves line
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearin) page for a live curve demo.
  */
-export class CurvesLine extends N3JS.Curve {
+export class CurvesLine extends N3JS.CurveVector3 {
 	/**
 	 * The Radius of curves line
 	 */

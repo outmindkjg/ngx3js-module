@@ -258,7 +258,7 @@ export class CurveUtils {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve) page for a live curve demo.
  *
  */
-export class CurvesNormal extends N3JS.Curve {
+export class CurvesNormal extends N3JS.CurveVector3 {
 	/**
 	 * The Scale of curves normal
 	 */

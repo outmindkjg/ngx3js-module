@@ -121,7 +121,6 @@ export * from './threejs-library/ammo';
 export * as AMMO from './threejs-library/ammo-type';
 export * from './threejs-library/three-core';
 export * as THREE from './threejs-library/three-core';
-export * as XR from './threejs-library/three-xr';
 export * from './tools/tools.component';
 export * from './transform/transform.component';
 export * from './translation/translation.component';

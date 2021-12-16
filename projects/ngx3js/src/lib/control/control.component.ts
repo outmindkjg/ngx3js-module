@@ -795,7 +795,7 @@ export class NgxControlComponent
 					const csm = new N3JS.CsmControls({
 						maxFar: NgxThreeUtil.getTypeSafe(this.maxFar, 100000),
 						cascades: NgxThreeUtil.getTypeSafe(this.cascades, 3),
-						mode: NgxThreeUtil.getTypeSafe(this.mode, 'practical'),
+						mode: NgxThreeUtil.getTypeSafe(this.mode, 'practical') as any,
 						parent: csmScene,
 						shadowMapSize: NgxThreeUtil.getTypeSafe(this.shadowMapSize, 2048),
 						lightDirection: NgxThreeUtil.getVector3Safe(

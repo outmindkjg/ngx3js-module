@@ -1,5 +1,7 @@
 import { Object3D } from './core';
 
+// Extras / Audio /////////////////////////////////////////////////////////////////////
+
 export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
 	new (listener: AudioListener): this;
 	type: 'Audio';
@@ -119,13 +121,21 @@ export interface AudioAnalyser {
 	 */
 	getData(file: any): any;
 }
-
 /**
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/audio/AudioContext.js|src/audio/AudioContext.js}
  */
 export interface AudioContext {
 	getContext(): AudioContext;
+
 	setContext(): void;
+
+	createOscillator(): OscillatorNode;
+
+	readonly currentTime: number;
+	readonly destination: AudioDestinationNode;
+	readonly listener: AudioListener;
+	readonly sampleRate: number;
+	readonly state: any;
 }
 
 export interface AudioListener extends Object3D {

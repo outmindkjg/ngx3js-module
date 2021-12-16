@@ -7,7 +7,7 @@ import { ICurvesParameters } from '../../ngx-interface';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvesPolygon) page for details.
  *
  */
-export class CurvesPolygon extends N3JS.Curve {
+export class CurvesPolygon extends N3JS.CurveVector3 {
 	/**
 	 * The Radius of curves polygon
 	 */

@@ -4,14 +4,16 @@ import { Material, SpriteMaterial } from './materials';
 import { Color, Matrix4, Vector2, Vector3 } from './math';
 import { DataTexture } from './textures';
 
+// Objects //////////////////////////////////////////////////////////////////////////////////
+
 export interface Bone extends Object3D {
-    new() : this;
+    new( ) : this;
     readonly isBone: true;
     type: 'Bone';
 }
 
 export interface Group extends Object3D {
-    new() : this;
+    new( ) : this;
     type: 'Group';
     readonly isGroup: true;
 }
@@ -20,7 +22,7 @@ export interface InstancedMesh<
     TGeometry extends BufferGeometry = BufferGeometry,
     TMaterial extends Material | Material[] = Material | Material[],
 > extends Mesh<TGeometry, TMaterial> {
-    new(geometry: TGeometry | undefined, material: TMaterial | undefined, count: number) : this;
+    new( geometry: TGeometry | undefined, material: TMaterial | undefined, count: number) : this;
 
     count: number;
     instanceColor: null | InstancedBufferAttribute;
@@ -34,51 +36,8 @@ export interface InstancedMesh<
     dispose(): void;
 }
 
-export interface Line<
-    TGeometry extends BufferGeometry = BufferGeometry,
-    TMaterial extends Material | Material[] = Material | Material[],
-> extends Object3D {
-    new(geometry?: TGeometry, material?: TMaterial) : this;
-
-    geometry: TGeometry;
-    material: TMaterial;
-
-    type: 'Line' | 'LineLoop' | 'LineSegments' | string;
-    readonly isLine: true;
-
-    morphTargetInfluences?: number[] | undefined;
-    morphTargetDictionary?: { [key: string]: number } | undefined;
-
-    computeLineDistances(): this;
-    raycast(raycaster: Raycaster, intersects: Intersection[]): void;
-    updateMorphTargets(): void;
-}
-
-export interface LineLoop<
-    TGeometry extends BufferGeometry = BufferGeometry,
-    TMaterial extends Material | Material[] = Material | Material[],
-> extends Line<TGeometry, TMaterial> {
-    new(geometry?: TGeometry, material?: TMaterial) : this;
-
-    type: 'LineLoop';
-    readonly isLineLoop: true;
-}
- 
-export interface LineSegments<
-     TGeometry extends BufferGeometry = BufferGeometry,
-     TMaterial extends Material | Material[] = Material | Material[],
- > extends Line<TGeometry, TMaterial> {
-     new(geometry?: TGeometry, material?: TMaterial) : this;
- 
-     /**
-      * @default 'LineSegments'
-      */
-     type: 'LineSegments' | string;
-     readonly isLineSegments: true;
- }
-
- export interface LOD extends Object3D {
-    new() : this;
+export interface LOD extends Object3D {
+    new( ) : this;
 
     type: 'LOD';
 
@@ -99,11 +58,54 @@ export interface LineSegments<
     objects: any[];
 }
 
+export interface Line<
+    TGeometry extends BufferGeometry = BufferGeometry,
+    TMaterial extends Material | Material[] = Material | Material[],
+> extends Object3D {
+    new( geometry?: TGeometry, material?: TMaterial) : this;
+
+    geometry: TGeometry;
+    material: TMaterial;
+
+    type: 'Line' | 'LineLoop' | 'LineSegments' | string;
+    readonly isLine: true;
+
+    morphTargetInfluences?: number[] | undefined;
+    morphTargetDictionary?: { [key: string]: number } | undefined;
+
+    computeLineDistances(): this;
+    raycast(raycaster: Raycaster, intersects: Intersection[]): void;
+    updateMorphTargets(): void;
+}
+
+export interface LineLoop<
+    TGeometry extends BufferGeometry = BufferGeometry,
+    TMaterial extends Material | Material[] = Material | Material[],
+> extends Line<TGeometry, TMaterial> {
+    new( geometry?: TGeometry, material?: TMaterial) : this;
+
+    type: 'LineLoop';
+    readonly isLineLoop: true;
+}
+
+export interface LineSegments<
+    TGeometry extends BufferGeometry = BufferGeometry,
+    TMaterial extends Material | Material[] = Material | Material[],
+> extends Line<TGeometry, TMaterial> {
+    new( geometry?: TGeometry, material?: TMaterial) : this;
+
+    /**
+     * @default 'LineSegments'
+     */
+    type: 'LineSegments' | string;
+    readonly isLineSegments: true;
+}
+
 export interface Mesh<
     TGeometry extends BufferGeometry = BufferGeometry,
     TMaterial extends Material | Material[] = Material | Material[],
 > extends Object3D {
-    new(geometry?: TGeometry, material?: TMaterial) : this;
+    new( geometry?: TGeometry, material?: TMaterial) : this;
 
     geometry: TGeometry;
     material: TMaterial;
@@ -119,38 +121,37 @@ export interface Mesh<
 /**
  * A class for displaying points. The points are rendered by the WebGLRenderer using gl.POINTS.
  */
- export interface Points<
- TGeometry extends BufferGeometry = BufferGeometry,
- TMaterial extends Material | Material[] = Material | Material[],
+export interface Points<
+    TGeometry extends BufferGeometry = BufferGeometry,
+    TMaterial extends Material | Material[] = Material | Material[],
 > extends Object3D {
- /**
-  * @param geometry An instance of BufferGeometry.
-  * @param material An instance of Material (optional).
-  */
- new(geometry?: TGeometry, material?: TMaterial) : this;
+    /**
+     * @param geometry An instance of BufferGeometry.
+     * @param material An instance of Material (optional).
+     */
+    new( geometry?: TGeometry, material?: TMaterial) : this;
 
- type: 'Points';
- morphTargetInfluences?: number[] | undefined;
- morphTargetDictionary?: { [key: string]: number } | undefined;
- readonly isPoints: true;
+    type: 'Points';
+    morphTargetInfluences?: number[] | undefined;
+    morphTargetDictionary?: { [key: string]: number } | undefined;
+    readonly isPoints: true;
 
- /**
-  * An instance of BufferGeometry, where each vertex designates the position of a particle in the system.
-  */
- geometry: TGeometry;
+    /**
+     * An instance of BufferGeometry, where each vertex designates the position of a particle in the system.
+     */
+    geometry: TGeometry;
 
- /**
-  * An instance of Material, defining the object's appearance. Default is a PointsMaterial with randomised colour.
-  */
- material: TMaterial;
+    /**
+     * An instance of Material, defining the object's appearance. Default is a PointsMaterial with randomised colour.
+     */
+    material: TMaterial;
 
- raycast(raycaster: Raycaster, intersects: Intersection[]): void;
- updateMorphTargets(): void;
+    raycast(raycaster: Raycaster, intersects: Intersection[]): void;
+    updateMorphTargets(): void;
 }
 
-
 export interface Skeleton {
-    new(bones: Bone[], boneInverses?: Matrix4[]) : this;
+    new( bones: Bone[], boneInverses?: Matrix4[]) : this;
 
     uuid: string;
     bones: Bone[];
@@ -179,7 +180,7 @@ export interface SkinnedMesh<
     TGeometry extends BufferGeometry = BufferGeometry,
     TMaterial extends Material | Material[] = Material | Material[],
 > extends Mesh<TGeometry, TMaterial> {
-    new(geometry?: TGeometry, material?: TMaterial, useVertexTexture?: boolean) : this;
+    new( geometry?: TGeometry, material?: TMaterial, useVertexTexture?: boolean) : this;
 
     bindMode: string;
     bindMatrix: Matrix4;
@@ -195,7 +196,7 @@ export interface SkinnedMesh<
 }
 
 export interface Sprite extends Object3D {
-    new(material?: SpriteMaterial) : this;
+    new( material?: SpriteMaterial) : this;
 
     type: 'Sprite';
     readonly isSprite: true;
@@ -207,4 +208,3 @@ export interface Sprite extends Object3D {
     raycast(raycaster: Raycaster, intersects: Intersection[]): void;
     copy(source: this): this;
 }
-

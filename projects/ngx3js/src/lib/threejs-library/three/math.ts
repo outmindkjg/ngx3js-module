@@ -2,6 +2,9 @@ import { Camera } from './cameras';
 import { BufferAttribute, InterleavedBufferAttribute, Object3D } from './core';
 import { Sprite } from './objects';
 
+// Math //////////////////////////////////////////////////////////////////////////////////
+export type ColorRepresentation = Color | string | number;
+
 export interface Box2 {
 	new (min?: Vector2, max?: Vector2): this;
 
@@ -112,15 +115,13 @@ export interface HSL {
 	l: number;
 }
 
-export type ColorRepresentation = Color | string | number;
-
 /**
  * Represents a color. See also {@link ColorUtils}.
  *
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/math/Color.js|src/math/Color.js}
  *
  * @example
- * const color = new THREE.Color( 0xff0000 );
+ * const color = new THREE.Color( 0xff0000 ) : this;
  */
 export interface Color {
 	new (color?: ColorRepresentation): this;
@@ -387,7 +388,6 @@ export interface Frustum {
 	intersectsBox(box: Box3): boolean;
 	containsPoint(point: Vector3): boolean;
 }
-
 export interface Interpolant {
 	new (parameterPositions: any, sampleValues: any, sampleSize: number, resultBuffer?: any): this;
 
@@ -397,30 +397,6 @@ export interface Interpolant {
 	resultBuffer: any;
 
 	evaluate(time: number): any;
-}
-
-export interface CubicInterpolant extends Interpolant {
-	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
-
-	interpolate_(i1: number, t0: number, t: number, t1: number): any;
-}
-
-export interface DiscreteInterpolant extends Interpolant {
-	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
-
-	interpolate_(i1: number, t0: number, t: number, t1: number): any;
-}
-
-export interface LinearInterpolant extends Interpolant {
-	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
-
-	interpolate_(i1: number, t0: number, t: number, t1: number): any;
-}
-
-export interface QuaternionLinearInterpolant extends Interpolant {
-	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
-
-	interpolate_(i1: number, t0: number, t: number, t1: number): any;
 }
 
 export interface Line3 {
@@ -450,14 +426,10 @@ export interface Line3 {
 	equals(line: Line3): boolean;
 }
 
+/**
+ * @see {@link https://github.com/mrdoob/three.js/blob/master/src/math/MathUtils.js|src/math/MathUtils.js}
+ */
 export interface MathUtils {
-	/**
-	 * @see {@link https://github.com/mrdoob/three.js/blob/master/src/math/MathUtils.js|src/math/MathUtils.js}
-	 */
-
-	DEG2RAD: number;
-	RAD2DEG: number;
-
 	generateUUID(): string;
 
 	/**
@@ -546,7 +518,7 @@ export interface MathUtils {
 	 * Returns a value that alternates between 0 and length.
 	 *
 	 * @param x The value to pingpong.
-	 * @param length The positive value the will pingpong to. Default is 1.
+	 * @param length The positive value the export will pingpong to. Default is 1.
 	 */
 	pingpong(x: number, length?: number): number;
 
@@ -753,18 +725,18 @@ export type Matrix4Tuple = [
  *
  * @example
  * // Simple rig for rotating around 3 axes
- * const m = new THREE.Matrix4();
- * const m1 = new THREE.Matrix4();
- * const m2 = new THREE.Matrix4();
- * const m3 = new THREE.Matrix4();
+ * const m = new THREE.Matrix4() : this;
+ * const m1 = new THREE.Matrix4() : this;
+ * const m2 = new THREE.Matrix4() : this;
+ * const m3 = new THREE.Matrix4() : this;
  * const alpha = 0;
  * const beta = Math.PI;
  * const gamma = Math.PI/2;
- * m1.makeRotationX( alpha );
- * m2.makeRotationY( beta );
- * m3.makeRotationZ( gamma );
- * m.multiplyMatrices( m1, m2 );
- * m.multiply( m3 );
+ * m1.makeRotationX( alpha ) : this;
+ * m2.makeRotationY( beta ) : this;
+ * m3.makeRotationZ( gamma ) : this;
+ * m.multiplyMatrices( m1, m2 ) : this;
+ * m.multiply( m3 ) : this;
  */
 export interface Matrix4 extends Matrix {
 	new (): this;
@@ -1062,10 +1034,10 @@ export interface Plane {
  * Implementation of a quaternion. This is used for rotating things without incurring in the dreaded gimbal lock issue, amongst other advantages.
  *
  * @example
- * const quaternion = new THREE.Quaternion();
- * quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
- * const vector = new THREE.Vector3( 1, 0, 0 );
- * vector.applyQuaternion( quaternion );
+ * const quaternion = new THREE.Quaternion() : this;
+ * quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 ) : this;
+ * const vector = new THREE.Vector3( 1, 0, 0 ) : this;
+ * vector.applyQuaternion( quaternion ) : this;
  */
 export interface Quaternion {
 	/**
@@ -1465,8 +1437,8 @@ export type Vector2Tuple = [number, number];
  * Those definitions will be changed when TypeScript innovates Generics to be type safe.
  *
  * @example
- * const v:THREE.Vector = new THREE.Vector3();
- * v.addVectors(new THREE.Vector2(0, 1), new THREE.Vector2(2, 3)); // invalid but compiled successfully
+ * const v:THREE.Vector = new THREE.Vector3() : this;
+ * v.addVectors(new THREE.Vector2(0, 1), new THREE.Vector2(2, 3)) : this; // invalid but compiled successfully
  */
 export interface Vector {
 	setComponent(index: number, value: number): this;
@@ -1903,10 +1875,10 @@ export type Vector3Tuple = [number, number, number];
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/math/Vector3.js}
  *
  * @example
- * const a = new THREE.Vector3( 1, 0, 0 );
- * const b = new THREE.Vector3( 0, 1, 0 );
- * const c = new THREE.Vector3();
- * c.crossVectors( a, b );
+ * const a = new THREE.Vector3( 1, 0, 0 ) : this;
+ * const b = new THREE.Vector3( 0, 1, 0 ) : this;
+ * const c = new THREE.Vector3() : this;
+ * c.crossVectors( a, b ) : this;
  */
 export interface Vector3 extends Vector {
 	new (x?: number, y?: number, z?: number): this;
@@ -2394,4 +2366,28 @@ export interface Vector4 extends Vector {
 	 * Sets this vector's x, y, z and w from Math.random
 	 */
 	random(): this;
+}
+
+export interface CubicInterpolant extends Interpolant {
+	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
+
+	interpolate_(i1: number, t0: number, t: number, t1: number): any;
+}
+
+export interface DiscreteInterpolant extends Interpolant {
+	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
+
+	interpolate_(i1: number, t0: number, t: number, t1: number): any;
+}
+
+export interface LinearInterpolant extends Interpolant {
+	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
+
+	interpolate_(i1: number, t0: number, t: number, t1: number): any;
+}
+
+export interface QuaternionLinearInterpolant extends Interpolant {
+	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
+
+	interpolate_(i1: number, t0: number, t: number, t1: number): any;
 }

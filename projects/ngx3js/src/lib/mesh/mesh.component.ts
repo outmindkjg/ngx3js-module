@@ -1043,7 +1043,6 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 		if (this.curve !== null) {
 			this.unSubscribeRefer('curve');
 			if (this.curve instanceof N3JS.Curve) {
-				N3JS.CurvePath;
 				return this.curve;
 			} else if (this.curve instanceof NgxCurveComponent) {
 				const curve = this.curve.getCurve() as I3JS.Curve<I3JS.Vector3>;
@@ -2064,7 +2063,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 					break;
 				case 'interactive':
 				case 'interactivegroup':
-					const renderer = NgxThreeUtil.getRenderer() as I3JS.WebGL1Renderer;
+					const renderer = NgxThreeUtil.getRenderer() as I3JS.WebGLRenderer;
 					let camera: I3JS.Camera = null;
 					if (NgxThreeUtil.isNotNull(this.sharedCamera)) {
 						if (this.sharedCamera.getCamera) {

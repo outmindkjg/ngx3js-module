@@ -2080,29 +2080,53 @@ export const ShapePath: ShapePath = O3JS.ShapePath as any;
 export type Path = I3JS.Path;
 export const Path: Path = O3JS.Path as any;
 
-export type Curve = I3JS.Curve;
+export type Curve = I3JS.Curve<any>;
 export const Curve: Curve = O3JS.Curve as any;
 
-export type CurvePath = I3JS.CurvePath;
+class CurveVector2Class extends O3JS.Curve<O3JS.Vector2> { }
+export type CurveVector2 = I3JS.CurveVector2;
+export const CurveVector2: CurveVector2 = CurveVector2Class as any;
+
+class CurveVector3Class extends O3JS.Curve<O3JS.Vector3> { }
+export type CurveVector3 = I3JS.CurveVector3;
+export const CurveVector3: CurveVector3 = CurveVector3Class as any;
+
+export type CurvePath = I3JS.CurvePath<any>;
 export const CurvePath: CurvePath = O3JS.CurvePath as any;
 
+class CurvePathVector2Class extends O3JS.CurvePath<O3JS.Vector2> { }
+export type CurvePathVector2 = I3JS.CurvePathVector2;
+export const CurvePathVector2: CurvePathVector2 = CurvePathVector2Class as any;
+
+class CurvePathVector3Class extends O3JS.CurvePath<O3JS.Vector3> { }
+export type CurvePathVector3 = I3JS.CurvePathVector3;
+export const CurvePathVector3: CurvePathVector3 = CurvePathVector3Class as any;
+
+
+// GL STATE CONSTANTS
 export const CullFaceNone: O3JS.CullFace = O3JS.CullFaceNone;
 export const CullFaceBack: O3JS.CullFace = O3JS.CullFaceBack;
 export const CullFaceFront: O3JS.CullFace = O3JS.CullFaceFront;
 export const CullFaceFrontBack: O3JS.CullFace = O3JS.CullFaceFrontBack;
 
+// Shadowing Type
 export const BasicShadowMap: O3JS.ShadowMapType = O3JS.BasicShadowMap;
 export const PCFShadowMap: O3JS.ShadowMapType = O3JS.PCFShadowMap;
 export const PCFSoftShadowMap: O3JS.ShadowMapType = O3JS.PCFSoftShadowMap;
 export const VSMShadowMap: O3JS.ShadowMapType = O3JS.VSMShadowMap;
 
+// MATERIAL CONSTANTS
+
+// side
 export const FrontSide: O3JS.Side = O3JS.FrontSide;
 export const BackSide: O3JS.Side = O3JS.BackSide;
 export const DoubleSide: O3JS.Side = O3JS.DoubleSide;
 
+// shading
 export const FlatShading: O3JS.Shading = O3JS.FlatShading;
 export const SmoothShading: O3JS.Shading = O3JS.SmoothShading;
 
+// blending modes
 export const NoBlending: O3JS.Blending = O3JS.NoBlending;
 export const NormalBlending: O3JS.Blending = O3JS.NormalBlending;
 export const AdditiveBlending: O3JS.Blending = O3JS.AdditiveBlending;
@@ -2110,12 +2134,16 @@ export const SubtractiveBlending: O3JS.Blending = O3JS.SubtractiveBlending;
 export const MultiplyBlending: O3JS.Blending = O3JS.MultiplyBlending;
 export const CustomBlending: O3JS.Blending = O3JS.CustomBlending;
 
+// custom blending equations
+// (numbers start from 100 not to clash with other
+// mappings to OpenGL constants defined in Texture.js)
 export const AddEquation: O3JS.BlendingEquation = O3JS.AddEquation;
 export const SubtractEquation: O3JS.BlendingEquation = O3JS.SubtractEquation;
 export const ReverseSubtractEquation: O3JS.BlendingEquation = O3JS.ReverseSubtractEquation;
 export const MinEquation: O3JS.BlendingEquation = O3JS.MinEquation;
 export const MaxEquation: O3JS.BlendingEquation = O3JS.MaxEquation;
 
+// custom blending destination factors
 export const ZeroFactor: O3JS.BlendingDstFactor = O3JS.ZeroFactor;
 export const OneFactor: O3JS.BlendingDstFactor = O3JS.OneFactor;
 export const SrcColorFactor: O3JS.BlendingDstFactor = O3JS.SrcColorFactor;
@@ -2127,8 +2155,10 @@ export const OneMinusDstAlphaFactor: O3JS.BlendingDstFactor = O3JS.OneMinusDstAl
 export const DstColorFactor: O3JS.BlendingDstFactor = O3JS.DstColorFactor;
 export const OneMinusDstColorFactor: O3JS.BlendingDstFactor = O3JS.OneMinusDstColorFactor;
 
+// custom blending src factors
 export const SrcAlphaSaturateFactor: O3JS.BlendingSrcFactor = O3JS.SrcAlphaSaturateFactor;
 
+// depth modes
 export const NeverDepth: O3JS.DepthModes = O3JS.NeverDepth;
 export const AlwaysDepth: O3JS.DepthModes = O3JS.AlwaysDepth;
 export const LessDepth: O3JS.DepthModes = O3JS.LessDepth;
@@ -2138,16 +2168,21 @@ export const GreaterEqualDepth: O3JS.DepthModes = O3JS.GreaterEqualDepth;
 export const GreaterDepth: O3JS.DepthModes = O3JS.GreaterDepth;
 export const NotEqualDepth: O3JS.DepthModes = O3JS.NotEqualDepth;
 
+// TEXTURE CONSTANTS
+// Operations
 export const MultiplyOperation: O3JS.Combine = O3JS.MultiplyOperation;
 export const MixOperation: O3JS.Combine = O3JS.MixOperation;
 export const AddOperation: O3JS.Combine = O3JS.AddOperation;
 
+// Tone Mapping modes
 export const NoToneMapping: O3JS.ToneMapping = O3JS.NoToneMapping;
 export const LinearToneMapping: O3JS.ToneMapping = O3JS.LinearToneMapping;
 export const ReinhardToneMapping: O3JS.ToneMapping = O3JS.ReinhardToneMapping;
 export const CineonToneMapping: O3JS.ToneMapping = O3JS.CineonToneMapping;
 export const ACESFilmicToneMapping: O3JS.ToneMapping = O3JS.ACESFilmicToneMapping;
 
+
+// Mapping modes
 export const UVMapping: O3JS.Mapping = O3JS.UVMapping;
 export const CubeReflectionMapping: O3JS.Mapping = O3JS.CubeReflectionMapping;
 export const CubeRefractionMapping: O3JS.Mapping = O3JS.CubeRefractionMapping;
@@ -2157,10 +2192,12 @@ export const CubeUVReflectionMapping: O3JS.Mapping = O3JS.CubeUVReflectionMappin
 export const CubeUVRefractionMapping: O3JS.Mapping = O3JS.CubeUVRefractionMapping;
 export const DEFAULT_MAPPING: O3JS.Mapping = O3JS.Texture.DEFAULT_MAPPING;
 
+// Wrapping modes
 export const RepeatWrapping: O3JS.Wrapping = O3JS.RepeatWrapping;
 export const ClampToEdgeWrapping: O3JS.Wrapping = O3JS.ClampToEdgeWrapping;
 export const MirroredRepeatWrapping: O3JS.Wrapping = O3JS.MirroredRepeatWrapping;
 
+// Filters
 export const NearestFilter: O3JS.TextureFilter = O3JS.NearestFilter;
 export const NearestMipmapNearestFilter: O3JS.TextureFilter = O3JS.NearestMipmapNearestFilter;
 export const NearestMipMapNearestFilter: O3JS.TextureFilter = O3JS.NearestMipMapNearestFilter;
@@ -2172,6 +2209,7 @@ export const LinearMipMapNearestFilter: O3JS.TextureFilter = O3JS.LinearMipMapNe
 export const LinearMipmapLinearFilter: O3JS.TextureFilter = O3JS.LinearMipmapLinearFilter;
 export const LinearMipMapLinearFilter: O3JS.TextureFilter = O3JS.LinearMipMapLinearFilter;
 
+// Data types
 export const UnsignedByteType: O3JS.TextureDataType = O3JS.UnsignedByteType;
 export const ByteType: O3JS.TextureDataType = O3JS.ByteType;
 export const ShortType: O3JS.TextureDataType = O3JS.ShortType;
@@ -2185,6 +2223,7 @@ export const UnsignedShort5551Type: O3JS.TextureDataType = O3JS.UnsignedShort555
 export const UnsignedShort565Type: O3JS.TextureDataType = O3JS.UnsignedShort565Type;
 export const UnsignedInt248Type: O3JS.TextureDataType = O3JS.UnsignedInt248Type;
 
+// Pixel formats
 export const AlphaFormat: O3JS.PixelFormat = O3JS.AlphaFormat;
 export const RGBFormat: O3JS.PixelFormat = O3JS.RGBFormat;
 export const RGBAFormat: O3JS.PixelFormat = O3JS.RGBAFormat;
@@ -2200,17 +2239,25 @@ export const RGIntegerFormat: O3JS.PixelFormat = O3JS.RGIntegerFormat;
 export const RGBIntegerFormat: O3JS.PixelFormat = O3JS.RGBIntegerFormat;
 export const RGBAIntegerFormat: O3JS.PixelFormat = O3JS.RGBAIntegerFormat;
 
+// Compressed texture formats
+// DDS / ST3C Compressed texture formats
 export const RGB_S3TC_DXT1_Format: O3JS.CompressedPixelFormat = O3JS.RGB_S3TC_DXT1_Format;
 export const RGBA_S3TC_DXT1_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_S3TC_DXT1_Format;
 export const RGBA_S3TC_DXT3_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_S3TC_DXT3_Format;
 export const RGBA_S3TC_DXT5_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_S3TC_DXT5_Format;
+
+// PVRTC compressed './texture formats
 export const RGB_PVRTC_4BPPV1_Format: O3JS.CompressedPixelFormat = O3JS.RGB_PVRTC_4BPPV1_Format;
 export const RGB_PVRTC_2BPPV1_Format: O3JS.CompressedPixelFormat = O3JS.RGB_PVRTC_2BPPV1_Format;
 export const RGBA_PVRTC_4BPPV1_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_PVRTC_4BPPV1_Format;
 export const RGBA_PVRTC_2BPPV1_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_PVRTC_2BPPV1_Format;
+
+// ETC compressed texture formats
 export const RGB_ETC1_Format: O3JS.CompressedPixelFormat = O3JS.RGB_ETC1_Format;
 export const RGB_ETC2_Format: O3JS.CompressedPixelFormat = O3JS.RGB_ETC2_Format;
 export const RGBA_ETC2_EAC_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_ETC2_EAC_Format;
+
+// ASTC compressed texture formats
 export const RGBA_ASTC_4x4_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_ASTC_4x4_Format;
 export const RGBA_ASTC_5x4_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_ASTC_5x4_Format;
 export const RGBA_ASTC_5x5_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_ASTC_5x5_Format;
@@ -2239,42 +2286,53 @@ export const SRGB8_ALPHA8_ASTC_10x8_Format: O3JS.CompressedPixelFormat = O3JS.SR
 export const SRGB8_ALPHA8_ASTC_10x10_Format: O3JS.CompressedPixelFormat = O3JS.SRGB8_ALPHA8_ASTC_10x10_Format;
 export const SRGB8_ALPHA8_ASTC_12x10_Format: O3JS.CompressedPixelFormat = O3JS.SRGB8_ALPHA8_ASTC_12x10_Format;
 export const SRGB8_ALPHA8_ASTC_12x12_Format: O3JS.CompressedPixelFormat = O3JS.SRGB8_ALPHA8_ASTC_12x12_Format;
+
+// BPTC compressed texture formats
 export const RGBA_BPTC_Format: O3JS.CompressedPixelFormat = O3JS.RGBA_BPTC_Format;
 
+// Loop styles for AnimationAction
 export const LoopOnce: O3JS.AnimationActionLoopStyles = O3JS.LoopOnce;
 export const LoopRepeat: O3JS.AnimationActionLoopStyles = O3JS.LoopRepeat;
 export const LoopPingPong: O3JS.AnimationActionLoopStyles = O3JS.LoopPingPong;
 
+// Interpolation
 export const InterpolateDiscrete: O3JS.InterpolationModes = O3JS.InterpolateDiscrete;
 export const InterpolateLinear: O3JS.InterpolationModes = O3JS.InterpolateLinear;
 export const InterpolateSmooth: O3JS.InterpolationModes = O3JS.InterpolateSmooth;
 
+// Interpolant ending modes
 export const ZeroCurvatureEnding: O3JS.InterpolationEndingModes = O3JS.ZeroCurvatureEnding;
 export const ZeroSlopeEnding: O3JS.InterpolationEndingModes = O3JS.ZeroSlopeEnding;
 export const WrapAroundEnding: O3JS.InterpolationEndingModes = O3JS.WrapAroundEnding;
 
+// Animation blending modes
 export const NormalAnimationBlendMode: O3JS.AnimationBlendMode = O3JS.NormalAnimationBlendMode;
 export const AdditiveAnimationBlendMode: O3JS.AnimationBlendMode = O3JS.AdditiveAnimationBlendMode;
 
+// Triangle Draw modes
 export const TrianglesDrawMode: O3JS.TrianglesDrawModes = O3JS.TrianglesDrawMode;
 export const TriangleStripDrawMode: O3JS.TrianglesDrawModes = O3JS.TriangleStripDrawMode;
 export const TriangleFanDrawMode: O3JS.TrianglesDrawModes = O3JS.TriangleFanDrawMode;
 
+// Texture Encodings
 export const LinearEncoding: O3JS.TextureEncoding = O3JS.LinearEncoding;
 export const sRGBEncoding: O3JS.TextureEncoding = O3JS.sRGBEncoding;
 export const GammaEncoding: O3JS.TextureEncoding = O3JS.GammaEncoding;
 export const RGBEEncoding: O3JS.TextureEncoding = O3JS.RGBEEncoding;
-// export const LogLuvEncoding: O3JS.TextureEncoding = O3JS.LogLuvEncoding;
+export const LogLuvEncoding: O3JS.TextureEncoding = O3JS.LogLuvEncoding;
 export const RGBM7Encoding: O3JS.TextureEncoding = O3JS.RGBM7Encoding;
 export const RGBM16Encoding: O3JS.TextureEncoding = O3JS.RGBM16Encoding;
 export const RGBDEncoding: O3JS.TextureEncoding = O3JS.RGBDEncoding;
 
+// Depth packing strategies
 export const BasicDepthPacking: O3JS.DepthPackingStrategies = O3JS.BasicDepthPacking;
 export const RGBADepthPacking: O3JS.DepthPackingStrategies = O3JS.RGBADepthPacking;
 
+// Normal Map types
 export const TangentSpaceNormalMap: O3JS.NormalMapTypes = O3JS.TangentSpaceNormalMap;
 export const ObjectSpaceNormalMap: O3JS.NormalMapTypes = O3JS.ObjectSpaceNormalMap;
 
+// Stencil Op types
 export const ZeroStencilOp: O3JS.StencilOp = O3JS.ZeroStencilOp;
 export const KeepStencilOp: O3JS.StencilOp = O3JS.KeepStencilOp;
 export const ReplaceStencilOp: O3JS.StencilOp = O3JS.ReplaceStencilOp;
@@ -2284,6 +2342,7 @@ export const IncrementWrapStencilOp: O3JS.StencilOp = O3JS.IncrementWrapStencilO
 export const DecrementWrapStencilOp: O3JS.StencilOp = O3JS.DecrementWrapStencilOp;
 export const InvertStencilOp: O3JS.StencilOp = O3JS.InvertStencilOp;
 
+// Stencil Func types
 export const NeverStencilFunc: O3JS.StencilFunc = O3JS.NeverStencilFunc;
 export const LessStencilFunc: O3JS.StencilFunc = O3JS.LessStencilFunc;
 export const EqualStencilFunc: O3JS.StencilFunc = O3JS.EqualStencilFunc;
@@ -2293,6 +2352,7 @@ export const NotEqualStencilFunc: O3JS.StencilFunc = O3JS.NotEqualStencilFunc;
 export const GreaterEqualStencilFunc: O3JS.StencilFunc = O3JS.GreaterEqualStencilFunc;
 export const AlwaysStencilFunc: O3JS.StencilFunc = O3JS.AlwaysStencilFunc;
 
+// usage types
 export const StaticDrawUsage: O3JS.Usage = O3JS.StaticDrawUsage;
 export const DynamicDrawUsage: O3JS.Usage = O3JS.DynamicDrawUsage;
 export const StreamDrawUsage: O3JS.Usage = O3JS.StreamDrawUsage;
@@ -2305,3 +2365,5 @@ export const StreamCopyUsage: O3JS.Usage = O3JS.StreamCopyUsage;
 
 export const GLSL1: O3JS.GLSLVersion = O3JS.GLSL1;
 export const GLSL3: O3JS.GLSLVersion = O3JS.GLSL3;
+
+

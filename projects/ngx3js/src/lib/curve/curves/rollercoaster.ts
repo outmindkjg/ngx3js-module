@@ -8,7 +8,7 @@ import { N3JS, I3JS } from '../../interface';
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/rollercoaster) page for a live curve demo.
  *
  */
-export class CurvesRollerCoaster extends N3JS.Curve {
+export class CurvesRollerCoaster extends N3JS.CurveVector3 {
 	/**
 	 * Creates an instance of curves line.
 	 * @param [radius]

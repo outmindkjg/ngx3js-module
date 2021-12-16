@@ -16,7 +16,7 @@ export interface ArrowHelper extends Object3D {
      * @param [headLength] The length of the head of the arrow.
      * @param [headWidth] The width of the head of the arrow.
      */
-    new(
+    new( 
         dir?: Vector3,
         origin?: Vector3,
         length?: number,
@@ -62,7 +62,7 @@ export interface AxesHelper extends LineSegments {
     /**
      * @param [size=1]
      */
-    new(size?: number) : this;
+    new( size?: number) : this;
 
     /**
      * @default 'AxesHelper'
@@ -79,7 +79,7 @@ export interface Box3Helper extends LineSegments {
      * @param box
      * @param [color=0xffff00]
      */
-    new(box: Box3, color?: Color) : this;
+    new( box: Box3, color?: Color) : this;
 
     /**
      * @default 'Box3Helper'
@@ -94,7 +94,7 @@ export interface BoxHelper extends LineSegments {
      * @param object
      * @param [color=0xffff00]
      */
-    new(object: Object3D, color?: ColorRepresentation) : this;
+    new( object: Object3D, color?: ColorRepresentation) : this;
 
     /**
      * @default 'BoxHelper'
@@ -107,7 +107,7 @@ export interface BoxHelper extends LineSegments {
 }
 
 export interface CameraHelper extends LineSegments {
-    new(camera: Camera) : this;
+    new( camera: Camera) : this;
 
     camera: Camera;
     pointMap: { [id: string]: number[] };
@@ -128,7 +128,7 @@ export interface DirectionalLightHelper extends Object3D {
      * @param [size=1]
      * @param color
      */
-    new(light: DirectionalLight, size?: number, color?: ColorRepresentation) : this;
+    new( light: DirectionalLight, size?: number, color?: ColorRepresentation) : this;
 
     light: DirectionalLight;
     lightPlane: Line;
@@ -156,7 +156,7 @@ export interface GridHelper extends LineSegments {
      * @param [color1=0x444444]
      * @param [color2=0x888888]
      */
-    new(size?: number, divisions?: number, color1?: ColorRepresentation, color2?: ColorRepresentation) : this;
+    new( size?: number, divisions?: number, color1?: ColorRepresentation, color2?: ColorRepresentation) : this;
 
     /**
      * @default 'GridHelper'
@@ -169,9 +169,8 @@ export interface GridHelper extends LineSegments {
     setColors(color1?: ColorRepresentation, color2?: ColorRepresentation): void;
 }
 
-
 export interface HemisphereLightHelper extends Object3D {
-    new(light: HemisphereLight, size: number, color?: ColorRepresentation) : this;
+    new( light: HemisphereLight, size: number, color?: ColorRepresentation) : this;
 
     light: HemisphereLight;
     matrix: Matrix4;
@@ -190,7 +189,7 @@ export interface PlaneHelper extends LineSegments {
      * @param [size=1]
      * @param [hex=0xffff00]
      */
-    new(plane: Plane, size?: number, hex?: number) : this;
+    new( plane: Plane, size?: number, hex?: number) : this;
 
     /**
      * @default 'PlaneHelper'
@@ -207,9 +206,8 @@ export interface PlaneHelper extends LineSegments {
     updateMatrixWorld(force?: boolean): void;
 }
 
-
 export interface PointLightHelper extends Object3D {
-    new(light: PointLight, sphereSize?: number, color?: ColorRepresentation) : this;
+    new( light: PointLight, sphereSize?: number, color?: ColorRepresentation) : this;
 
     /**
      * @default 'PointLightHelper'
@@ -238,7 +236,7 @@ export interface PolarGridHelper extends LineSegments {
      * @param [color1=0x444444]
      * @param [color2=0x888888]
      */
-    new(
+    new( 
         radius?: number,
         radials?: number,
         circles?: number,
@@ -254,7 +252,7 @@ export interface PolarGridHelper extends LineSegments {
 }
 
 export interface SkeletonHelper extends LineSegments {
-    new(object: Object3D) : this;
+    new( object: Object3D) : this;
 
     /**
      * @default 'SkeletonHelper'
@@ -278,7 +276,7 @@ export interface SkeletonHelper extends LineSegments {
 }
 
 export interface SpotLightHelper extends Object3D {
-    new(light: Light, color?: ColorRepresentation) : this;
+    new( light: Light, color?: ColorRepresentation) : this;
 
     light: Light;
     matrix: Matrix4;
@@ -293,5 +291,3 @@ export interface SpotLightHelper extends Object3D {
     dispose(): void;
     update(): void;
 }
-
-

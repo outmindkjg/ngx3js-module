@@ -9,7 +9,7 @@ import { ICurvesParameters } from '../../ngx-interface';
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/linearin) page for a live curve demo.
  *
  */
-export class CurvesGsap extends N3JS.Curve {
+export class CurvesGsap extends N3JS.CurveVector3 {
 	/**
 	 * Ease function of curves gsap
 	 */

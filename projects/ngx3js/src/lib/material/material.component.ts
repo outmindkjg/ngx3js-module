@@ -956,7 +956,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	private getTextureNode(
 		value: I3JS.Texture,
 		uv?: I3JS.UVNode,
-		bias?: I3JS.Node,
+		bias?: I3JS.NodeNode,
 		project?: boolean
 	): I3JS.TextureNode {
 		return new N3JS.TextureNode(value as any, uv, bias, project);
@@ -973,7 +973,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	private getCubeTextureNode(
 		value: I3JS.CubeTexture,
 		uv?: I3JS.UVNode,
-		bias?: I3JS.Node
+		bias?: I3JS.NodeNode
 	): I3JS.CubeTextureNode {
 		return new N3JS.CubeTextureNode(value as any, uv, bias);
 	}
@@ -998,7 +998,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * @returns
 	 */
 	private getSwitchNode(
-		node: I3JS.Node,
+		node: I3JS.NodeNode,
 		components?: string
 	): I3JS.SwitchNode {
 		return new N3JS.SwitchNode(node, components);
@@ -1039,11 +1039,11 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * @returns
 	 */
 	private getCondNode(
-		a: I3JS.Node,
-		b: I3JS.Node,
+		a: I3JS.NodeNode,
+		b: I3JS.NodeNode,
 		op: string,
-		ifNode?: I3JS.Node,
-		elseNode?: I3JS.Node
+		ifNode?: I3JS.NodeNode,
+		elseNode?: I3JS.NodeNode
 	): I3JS.CondNode {
 		return new N3JS.CondNode(a, b, op, ifNode, elseNode);
 	}
@@ -1058,9 +1058,9 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * @returns
 	 */
 	private getMathNode(
-		a: I3JS.Node,
-		bOrMethod: I3JS.Node | string,
-		cOrMethod?: I3JS.Node | string,
+		a: I3JS.NodeNode,
+		bOrMethod: I3JS.NodeNode | string,
+		cOrMethod?: I3JS.NodeNode | string,
 		method?: string
 	): I3JS.MathNode {
 		return new N3JS.MathNode(a, bOrMethod, cOrMethod, method);
@@ -1075,8 +1075,8 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * @returns
 	 */
 	private getOperatorNode(
-		a: I3JS.Node,
-		b: I3JS.Node,
+		a: I3JS.NodeNode,
+		b: I3JS.NodeNode,
 		op: string
 	): I3JS.OperatorNode {
 		return new N3JS.OperatorNode(a, b, op);
@@ -1131,7 +1131,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 */
 	private getFunctionCallNode(
 		func: I3JS.FunctionNode,
-		inputs?: I3JS.Node[]
+		inputs?: I3JS.NodeNode[]
 	): I3JS.FunctionCallNode {
 		return new N3JS.FunctionCallNode(func, inputs);
 	}
@@ -1233,7 +1233,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * Gets environment
 	 * @returns environment
 	 */
-	private getEnvironment(): I3JS.Node {
+	private getEnvironment(): I3JS.NodeNode {
 		this._blurMirror = null;
 		this.unSubscribeRefer('mirrorSize');
 		switch (this.environmentType.toLowerCase()) {
@@ -1295,7 +1295,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * Gets environment alpha
 	 * @returns environment alpha
 	 */
-	private getEnvironmentAlpha(): I3JS.Node {
+	private getEnvironmentAlpha(): I3JS.NodeNode {
 		switch (this.environmentType.toLowerCase()) {
 			case 'mirror':
 				return this.getSwitchNode(

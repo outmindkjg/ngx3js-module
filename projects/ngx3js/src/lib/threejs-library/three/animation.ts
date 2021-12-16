@@ -2,6 +2,7 @@ import { AnimationActionLoopStyles, AnimationBlendMode, InterpolationModes } fro
 import { EventDispatcher, Object3D } from './core';
 import { CubicInterpolant, DiscreteInterpolant, LinearInterpolant, Vector3 } from './math';
 import { Bone } from './objects';
+// Animation ////////////////////////////////////////////////////////////////////////////////////////
 
 export interface AnimationAction {
 	new (mixer: AnimationMixer, clip: AnimationClip, localRoot?: Object3D, blendMode?: AnimationBlendMode): this;
@@ -154,7 +155,6 @@ export interface AnimationMixer extends EventDispatcher {
 	uncacheRoot(root: Object3D | AnimationObjectGroup): void;
 	uncacheAction(clip: AnimationClip, root?: Object3D | AnimationObjectGroup): void;
 }
-
 export interface AnimationObjectGroup {
 	new (...args: any[]): this;
 
@@ -244,7 +244,6 @@ export interface KeyframeTrack {
 
 	toJSON(track: KeyframeTrack): any;
 }
-
 export interface ParseTrackNameResults {
 	nodeName: string;
 	objectName: string;
@@ -272,20 +271,21 @@ export interface PropertyBinding {
 	GetterByBindingType: Array<() => void>;
 	SetterByBindingTypeAndVersioning: Array<Array<() => void>>;
 
-	create(root: any, path: any, parsedPath?: any): PropertyBinding | PropertyBindingComposite;
+	create(root: any, path: any, parsedPath?: any): PropertyBinding | PropertyBinding.Composite;
 	sanitizeNodeName(name: string): string;
 	parseTrackName(trackName: string): ParseTrackNameResults;
 	findNode(root: any, nodeName: string): any;
 }
 
-export interface PropertyBindingComposite {
-    new(targetGroup: any, path: any, parsedPath?: any): this;
-    getValue(array: any, offset: number): any;
-    setValue(array: any, offset: number): void;
-    bind(): void;
-    unbind(): void;
+export namespace PropertyBinding {
+	export interface Composite {
+		new (targetGroup: any, path: any, parsedPath?: any): this;
+		getValue(array: any, offset: number): any;
+		setValue(array: any, offset: number): void;
+		bind(): void;
+		unbind(): void;
+	}
 }
-
 export interface PropertyMixer {
 	new (binding: any, typeName: string, valueSize: number): this;
 

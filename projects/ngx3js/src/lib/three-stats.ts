@@ -7,7 +7,7 @@ import * as I3JS from './threejs-library/three-interface';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxThreeStats) page for details.
  *
  */
- export class NgxThreeStats implements I3JS.Stats {
+ export class NgxThreeStats {
 	/**
 	 * The Revision of three stats
 	 */
@@ -33,7 +33,7 @@ import * as I3JS from './threejs-library/three-interface';
 	 * @param [style]
 	 */
 	constructor(style?: object) {
-		this.stats = (N3JS.Stats as any)();
+		this.stats = N3JS.Stats();
 		this.domElement = this.dom = this.stats.dom;
 		this.REVISION = this.stats.REVISION;
 		this.setStyle(style);
