@@ -1,5 +1,6 @@
 export * from './geometries/capsule';
 export * from './geometries/circle-depth';
+export * from './geometries/outline';
 export * from './geometries/grid';
 export * from './geometries/plane-depth';
 export * from './geometries/plane-perlin';

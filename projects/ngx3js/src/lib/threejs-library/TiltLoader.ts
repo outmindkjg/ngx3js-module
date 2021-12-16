@@ -1,7 +1,6 @@
 import { BufferAttribute, BufferGeometry, DoubleSide, FileLoader, Group, Loader, LoadingManager, Mesh, MeshBasicMaterial, Quaternion, RawShaderMaterial, TextureLoader, Vector3 } from 'three';
 import * as fflate from './fflate.module';
 
-
 let _storePath: string = '';
 class TiltLoader extends Loader {
 	constructor(manager?: LoadingManager, storePath?: string) {

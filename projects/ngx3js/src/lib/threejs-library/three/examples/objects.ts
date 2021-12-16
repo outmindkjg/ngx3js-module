@@ -130,6 +130,21 @@ export interface ReflectorShader {
 }
 
 export interface ReflectorOptions {
+    color?: ColorRepresentation;
+    textureWidth?: number;
+    textureHeight?: number;
+    clipBias?: number;
+    shader?: object;
+    encoding?: TextureEncoding;
+}
+
+export interface Reflector extends Mesh {
+    new(geometry?: BufferGeometry, options?: ReflectorOptions) : this;
+    getRenderTarget(): WebGLRenderTarget;
+}
+
+
+export interface ReflectorForSSRPassOptions {
     clipBias?: number | undefined;
     textureWidth?: number | undefined;
     textureHeight?: number | undefined;
@@ -139,7 +154,7 @@ export interface ReflectorOptions {
     encoding?: TextureEncoding;
 }
 
-export interface Reflector<TGeometry extends BufferGeometry = BufferGeometry> extends Mesh<TGeometry> {
+export interface ReflectorForSSRPass extends Mesh<BufferGeometry> {
     type: 'ReflectorForSSRPass';
     options: ReflectorOptions;
 
@@ -158,15 +173,15 @@ export interface Reflector<TGeometry extends BufferGeometry = BufferGeometry> ex
 
     renderTarget: WebGLRenderTarget;
 
-    new(geometry: TGeometry, options: ReflectorOptions) : this;
+    new(geometry: BufferGeometry, options: ReflectorForSSRPassOptions) : this;
 
     doRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera) => void;
 
     getRenderTarget: () => WebGLRenderTarget;
 }
 
-export interface ReflectorRTT extends Reflector {
-    new(geometry?: BufferGeometry, options?: ReflectorOptions) : this;
+export interface ReflectorRTT extends ReflectorForSSRPass {
+    new(geometry?: BufferGeometry, options?: ReflectorForSSRPassOptions) : this;
 }
 
 export interface RefractorOptions {

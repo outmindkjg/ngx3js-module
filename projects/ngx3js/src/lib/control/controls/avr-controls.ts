@@ -1,4 +1,3 @@
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { I3JS, N3JS } from '../../interface';
 
 /**
@@ -12,7 +11,7 @@ export class NgxAVRControls {
 	/**
 	 * The Control of avrcontrols
 	 */
-	control: OrbitControls = null;
+	control: I3JS.OrbitControls = null;
 
 	/**
 	 * The Button of avrcontrols
@@ -98,7 +97,7 @@ export class NgxAVRControls {
 			this.buttonVirtualClick();
 		};
 		if (this.control === null && this.altControl) {
-			this.control = new OrbitControls(this.camera as any, this.domElement);
+			this.control = new N3JS.OrbitControls(this.camera as any, this.domElement);
 			this.control.enablePan = true;
 			this.control.enableDamping = true;
 			if (

@@ -1,4 +1,4 @@
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import { N3JS } from '../../interface';
 import { ShaderUtils } from '../../shader/shaders/shaderUtils';
 
 /**
@@ -8,7 +8,7 @@ import { ShaderUtils } from '../../shader/shaders/shaderUtils';
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/CopyPass) page for a live demo.
  *
  */
-export class NgxShaderCopyPass extends ShaderPass {
+export class NgxShaderCopyPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx copy pass.
 	 *
@@ -26,7 +26,7 @@ export class NgxShaderCopyPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/RGBShiftPass) page for a live demo.
  *
  */
-export class NgxShaderRGBShiftPass extends ShaderPass {
+export class NgxShaderRGBShiftPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx RGBShift pass.
 	 *
@@ -44,7 +44,7 @@ export class NgxShaderRGBShiftPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/BleachBypassPass) page for a live demo.
  *
  */
-export class NgxShaderBleachBypassPass extends ShaderPass {
+export class NgxShaderBleachBypassPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx BleachBypass pass.
 	 *
@@ -62,7 +62,7 @@ export class NgxShaderBleachBypassPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SepiaPass) page for a live demo.
  *
  */
-export class NgxShaderSepiaPass extends ShaderPass {
+export class NgxShaderSepiaPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx Sepia pass.
 	 *
@@ -80,7 +80,7 @@ export class NgxShaderSepiaPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/VignettePass) page for a live demo.
  *
  */
-export class NgxShaderVignettePass extends ShaderPass {
+export class NgxShaderVignettePass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx Vignette pass.
 	 *
@@ -98,7 +98,7 @@ export class NgxShaderVignettePass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/GammaCorrectionPass) page for a live demo.
  *
  */
-export class NgxShaderGammaCorrectionPass extends ShaderPass {
+export class NgxShaderGammaCorrectionPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx GammaCorrection pass.
 	 *
@@ -116,7 +116,7 @@ export class NgxShaderGammaCorrectionPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/FXAAPass) page for a live demo.
  *
  */
-export class NgxShaderFXAAPass extends ShaderPass {
+export class NgxShaderFXAAPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx FXAA pass.
 	 *
@@ -134,7 +134,7 @@ export class NgxShaderFXAAPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/PixelPass) page for a live demo.
  *
  */
-export class NgxShaderPixelPass extends ShaderPass {
+export class NgxShaderPixelPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx Pixel pass.
 	 *
@@ -152,7 +152,7 @@ export class NgxShaderPixelPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/LuminosityPass) page for a live demo.
  *
  */
-export class NgxShaderLuminosityPass extends ShaderPass {
+export class NgxShaderLuminosityPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx Luminosity pass.
 	 *
@@ -170,7 +170,7 @@ export class NgxShaderLuminosityPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/DotScreenPass) page for a live demo.
  *
  */
-export class NgxShaderDotScreenPass extends ShaderPass {
+export class NgxShaderDotScreenPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx Luminosity pass.
 	 *
@@ -188,7 +188,7 @@ export class NgxShaderDotScreenPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/SobelOperatorPass) page for a live demo.
  *
  */
- export class NgxSobelOperatorPass extends ShaderPass {
+ export class NgxSobelOperatorPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx SobelOperator pass.
 	 *
@@ -206,7 +206,7 @@ export class NgxShaderDotScreenPass extends ShaderPass {
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect/ShaderMaterialPass) page for a live demo.
  *
  */
-export class NgxShaderMaterialPass extends ShaderPass {
+export class NgxShaderMaterialPass extends N3JS.ShaderPass {
 	/**
 	 * Creates an instance of ngx ShaderMaterial pass.
 	 *

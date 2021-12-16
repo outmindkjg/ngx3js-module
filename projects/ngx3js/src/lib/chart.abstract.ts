@@ -2,6 +2,7 @@ import { AfterContentInit, Component, Input, OnChanges, OnDestroy, OnInit, Simpl
 import { I3JS, N3JS, NgxThreeUtil } from './interface';
 import { IAttributeUpdateInfo, IChartShape, IRendererTimer, IShapeInfo } from './ngx-interface';
 import { NgxAbstractObject3dComponent } from './object3d.abstract';
+import * as NGX_GEOMETRY from './geometry/index';
 
 
 /**
@@ -427,7 +428,7 @@ export class NgxAbstractChartComponent
 				side = 'double';
 				break;
 			case 'star':
-				geometry = new N3JS.StarGeometry(options.radius * 0.5, options.radius, 5) as any;
+				geometry = new NGX_GEOMETRY.NgxStarGeometry(options.radius * 0.5, options.radius, 5) as any;
 				side = 'double';
 				break;
 			case 'ring':
@@ -454,7 +455,7 @@ export class NgxAbstractChartComponent
 		});
 		const mesh: I3JS.Mesh = new N3JS.Mesh(geometry, material);
 		mesh.castShadow = true;
-		const geometryBorder = new N3JS.OutlineGeometry(geometry, 1.2) as any;
+		const geometryBorder = new NGX_GEOMETRY.NgxOutlineGeometry(geometry, 1.2) as any;
 		const materialBorder = new N3JS.LineDashedMaterial({
 			color: NgxThreeUtil.getColorSafe(options.borderColor, 0x000000),
 			linewidth: 3,

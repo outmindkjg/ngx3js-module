@@ -1,4 +1,5 @@
-import { Curves } from 'three/examples/jsm/curves/CurveExtras';
+
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
 
 /**
  * Curves GrannyKnot
@@ -7,7 +8,7 @@ import { Curves } from 'three/examples/jsm/curves/CurveExtras';
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/grannyknot) page for a live curve demo.
  *
  */
-export class CurvesGrannyKnot extends Curves.GrannyKnot {
+export class CurvesGrannyKnot extends N3JS.Curves.GrannyKnot {
 	constructor() {
 		super();
 	}
@@ -20,7 +21,7 @@ export class CurvesGrannyKnot extends Curves.GrannyKnot {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/heart) page for a live curve demo.
  *
  */
-export class CurvesHeartCurve extends Curves.HeartCurve {
+export class CurvesHeartCurve extends N3JS.Curves.HeartCurve {
 	constructor() {
 		super();
 	}
@@ -33,7 +34,7 @@ export class CurvesHeartCurve extends Curves.HeartCurve {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/viviani) page for a live curve demo.
  *
  */
-export class CurvesVivianiCurve extends Curves.VivianiCurve {
+export class CurvesVivianiCurve extends N3JS.Curves.VivianiCurve {
 	constructor() {
 		super();
 	}
@@ -46,7 +47,7 @@ export class CurvesVivianiCurve extends Curves.VivianiCurve {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/knot) page for a live curve demo.
  *
  */
-export class CurvesKnotCurve extends Curves.KnotCurve {
+export class CurvesKnotCurve extends N3JS.Curves.KnotCurve {
 	constructor() {
 		super();
 	}
@@ -59,7 +60,7 @@ export class CurvesKnotCurve extends Curves.KnotCurve {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/helix) page for a live curve demo.
  *
  */
-export class CurvesHelixCurve extends Curves.HelixCurve {
+export class CurvesHelixCurve extends N3JS.Curves.HelixCurve {
 	constructor() {
 		super();
 	}
@@ -72,7 +73,7 @@ export class CurvesHelixCurve extends Curves.HelixCurve {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/trefoilknot) page for a live curve demo.
  *
  */
-export class CurvesTrefoilKnot extends Curves.TrefoilKnot {
+export class CurvesTrefoilKnot extends N3JS.Curves.TrefoilKnot {
 	constructor() {
 		super();
 	}
@@ -85,7 +86,7 @@ export class CurvesTrefoilKnot extends Curves.TrefoilKnot {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/torusknot) page for a live curve demo.
  *
  */
-export class CurvesTorusKnot extends Curves.TorusKnot {
+export class CurvesTorusKnot extends N3JS.Curves.TorusKnot {
 	constructor() {
 		super();
 	}
@@ -98,7 +99,7 @@ export class CurvesTorusKnot extends Curves.TorusKnot {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/cinquefoilknot) page for a live curve demo.
  *
  */
-export class CurvesCinquefoilKnot extends Curves.CinquefoilKnot {
+export class CurvesCinquefoilKnot extends N3JS.Curves.CinquefoilKnot {
 	constructor() {
 		super();
 	}
@@ -111,7 +112,7 @@ export class CurvesCinquefoilKnot extends Curves.CinquefoilKnot {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/trefoilpolynomialknot) page for a live curve demo.
  *
  */
-export class CurvesTrefoilPolynomialKnot extends Curves.TrefoilPolynomialKnot {
+export class CurvesTrefoilPolynomialKnot extends N3JS.Curves.TrefoilPolynomialKnot {
 	constructor() {
 		super();
 	}
@@ -124,7 +125,7 @@ export class CurvesTrefoilPolynomialKnot extends Curves.TrefoilPolynomialKnot {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/figureeightpolynomialknot) page for a live curve demo.
  *
  */
-export class CurvesFigureEightPolynomialKnot extends Curves.FigureEightPolynomialKnot {
+export class CurvesFigureEightPolynomialKnot extends N3JS.Curves.FigureEightPolynomialKnot {
 	constructor() {
 		super();
 	}
@@ -137,7 +138,7 @@ export class CurvesFigureEightPolynomialKnot extends Curves.FigureEightPolynomia
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/decoratedtorusknot4a) page for a live curve demo.
  *
  */
-export class CurvesDecoratedTorusKnot4a extends Curves.DecoratedTorusKnot4a {
+export class CurvesDecoratedTorusKnot4a extends N3JS.Curves.DecoratedTorusKnot4a {
 	constructor() {
 		super();
 	}
@@ -150,7 +151,7 @@ export class CurvesDecoratedTorusKnot4a extends Curves.DecoratedTorusKnot4a {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/decoratedtorusknot4b) page for a live curve demo.
  *
  */
-export class CurvesDecoratedTorusKnot4b extends Curves.DecoratedTorusKnot4b {
+export class CurvesDecoratedTorusKnot4b extends N3JS.Curves.DecoratedTorusKnot4b {
 	constructor() {
 		super();
 	}
@@ -163,7 +164,7 @@ export class CurvesDecoratedTorusKnot4b extends Curves.DecoratedTorusKnot4b {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/decoratedtorusknot5a) page for a live curve demo.
  *
  */
-export class CurvesDecoratedTorusKnot5a extends Curves.DecoratedTorusKnot5a {
+export class CurvesDecoratedTorusKnot5a extends N3JS.Curves.DecoratedTorusKnot5a {
 	constructor() {
 		super();
 	}
@@ -176,7 +177,7 @@ export class CurvesDecoratedTorusKnot5a extends Curves.DecoratedTorusKnot5a {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve/decoratedtorusknot5c) page for a live curve demo.
  *
  */
-export class CurvesDecoratedTorusKnot5c extends Curves.DecoratedTorusKnot5c {
+export class CurvesDecoratedTorusKnot5c extends N3JS.Curves.DecoratedTorusKnot5c {
 	constructor() {
 		super();
 	}

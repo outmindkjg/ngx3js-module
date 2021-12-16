@@ -1,71 +1,5 @@
-import * as THREE from 'three';
-import { AfterimageShader } from 'three/examples/jsm/shaders/AfterimageShader';
-import { BasicShader } from 'three/examples/jsm/shaders/BasicShader';
-import { BleachBypassShader } from 'three/examples/jsm/shaders/BleachBypassShader';
-import { BlendShader } from 'three/examples/jsm/shaders/BlendShader';
-import { BokehShader } from 'three/examples/jsm/shaders/BokehShader';
-import {
-	BokehDepthShader,
-	BokehShader as BokehShader2
-} from 'three/examples/jsm/shaders/BokehShader2';
-import { BrightnessContrastShader } from 'three/examples/jsm/shaders/BrightnessContrastShader';
-import { ColorCorrectionShader } from 'three/examples/jsm/shaders/ColorCorrectionShader';
-import { ColorifyShader } from 'three/examples/jsm/shaders/ColorifyShader';
-import { ConvolutionShader } from 'three/examples/jsm/shaders/ConvolutionShader';
-import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
-import { DepthLimitedBlurShader } from 'three/examples/jsm/shaders/DepthLimitedBlurShader';
-import { DigitalGlitch } from 'three/examples/jsm/shaders/DigitalGlitch';
-import { DOFMipMapShader } from 'three/examples/jsm/shaders/DOFMipMapShader';
-import { DotScreenShader } from 'three/examples/jsm/shaders/DotScreenShader';
-import { FilmShader } from 'three/examples/jsm/shaders/FilmShader';
-import { FocusShader } from 'three/examples/jsm/shaders/FocusShader';
-import { FreiChenShader } from 'three/examples/jsm/shaders/FreiChenShader';
-// import { FresnelShader } from 'three/examples/jsm/shaders/FresnelShader';
-import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader';
-import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader';
-import {
-	GodRaysCombineShader,
-	GodRaysDepthMaskShader,
-	GodRaysFakeSunShader,
-	GodRaysGenerateShader
-} from 'three/examples/jsm/shaders/GodRaysShader';
-import { HalftoneShader } from 'three/examples/jsm/shaders/HalftoneShader';
-import { HorizontalBlurShader } from 'three/examples/jsm/shaders/HorizontalBlurShader';
-import { HorizontalTiltShiftShader } from 'three/examples/jsm/shaders/HorizontalTiltShiftShader';
-import { HueSaturationShader } from 'three/examples/jsm/shaders/HueSaturationShader';
-import { KaleidoShader } from 'three/examples/jsm/shaders/KaleidoShader';
-import { LuminosityHighPassShader } from 'three/examples/jsm/shaders/LuminosityHighPassShader';
-import { LuminosityShader } from 'three/examples/jsm/shaders/LuminosityShader';
-import { MirrorShader } from 'three/examples/jsm/shaders/MirrorShader';
-import { NormalMapShader } from 'three/examples/jsm/shaders/NormalMapShader';
-// import { OceanShaders } from 'three/examples/jsm/shaders/OceanShaders';
-// import { ParallaxShader } from 'three/examples/jsm/shaders/ParallaxShader';
-import { PixelShader } from 'three/examples/jsm/shaders/PixelShader';
-import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader';
-import { SAOShader } from 'three/examples/jsm/shaders/SAOShader';
-import { SepiaShader } from 'three/examples/jsm/shaders/SepiaShader';
-import {
-	SMAABlendShader,
-	SMAAEdgesShader,
-	SMAAWeightsShader
-} from 'three/examples/jsm/shaders/SMAAShader';
-import { SobelOperatorShader } from 'three/examples/jsm/shaders/SobelOperatorShader';
-import { SSAOShader } from 'three/examples/jsm/shaders/SSAOShader';
-import { SubsurfaceScatteringShader } from 'three/examples/jsm/shaders/SubsurfaceScatteringShader';
-import { TechnicolorShader } from 'three/examples/jsm/shaders/TechnicolorShader';
-import { ToneMapShader } from 'three/examples/jsm/shaders/ToneMapShader';
-import {
-	ToonShader1,
-	ToonShader2
-} from 'three/examples/jsm/shaders/ToonShader';
-import { TriangleBlurShader } from 'three/examples/jsm/shaders/TriangleBlurShader';
-import { UnpackDepthRGBAShader } from 'three/examples/jsm/shaders/UnpackDepthRGBAShader';
-import { VerticalBlurShader } from 'three/examples/jsm/shaders/VerticalBlurShader';
-import { VerticalTiltShiftShader } from 'three/examples/jsm/shaders/VerticalTiltShiftShader';
-import { VignetteShader } from 'three/examples/jsm/shaders/VignetteShader';
-import { VolumeRenderShader1 } from 'three/examples/jsm/shaders/VolumeShader';
-import { WaterRefractionShader } from 'three/examples/jsm/shaders/WaterRefractionShader';
 import { IShaderType } from './../../ngx-interface';
+import * as N3JS from './../../threejs-library/three-core';
 import { AttributesParticles } from './shader.attributes_particles';
 import { AttributeSizeColor } from './shader.attributes_size_color';
 import { AttributeSizeColor1 } from './shader.attributes_size_color1';
@@ -117,123 +51,123 @@ export const ShaderAliasConf: {
 export const ShaderConf: {
 	[key: string]: IShaderType | string;
 } = {
-	horizontalblurshader: HorizontalBlurShader,
+	horizontalblurshader: N3JS.HorizontalBlurShader,
 	horizontalblur: 'horizontalblurshader',
-	smaaedgesshader: SMAAEdgesShader,
+	smaaedgesshader: N3JS.SMAAEdgesShader,
 	smaaedges: 'smaaedgesshader',
-	smaaweightsshader: SMAAWeightsShader,
+	smaaweightsshader: N3JS.SMAAWeightsShader,
 	smaaweights: 'smaaweightsshader',
-	smaablendshader: SMAABlendShader,
+	smaablendshader: N3JS.SMAABlendShader,
 	smaablend: 'smaablendshader',
-	focusshader: FocusShader,
+	focusshader: N3JS.FocusShader,
 	focus: 'focusshader',
-	verticalblurshader: VerticalBlurShader,
+	verticalblurshader: N3JS.VerticalBlurShader,
 	verticalblur: 'verticalblurshader',
-	godraysdepthmaskshader: GodRaysDepthMaskShader,
+	godraysdepthmaskshader: N3JS.GodRaysDepthMaskShader,
 	godraysdepthmask: 'godraysdepthmaskshader',
-	godraysgenerateshader: GodRaysGenerateShader,
+	godraysgenerateshader: N3JS.GodRaysGenerateShader,
 	godraysgenerate: 'godraysgenerateshader',
-	godrayscombineshader: GodRaysCombineShader,
+	godrayscombineshader: N3JS.GodRaysCombineShader,
 	godrayscombine: 'godrayscombineshader',
-	godraysfakesunshader: GodRaysFakeSunShader,
+	godraysfakesunshader: N3JS.GodRaysFakeSunShader,
 	godraysfakesun: 'godraysfakesunshader',
-	// fresnelshader: FresnelShader,
+	// fresnelshader: N3JS.FresnelShader,
 	// fresnel: 'fresnelshader',
-	depthlimitedblurshader: DepthLimitedBlurShader,
+	depthlimitedblurshader: N3JS.DepthLimitedBlurShader,
 	depthlimitedblur: 'depthlimitedblurshader',
-	convolutionshader: ConvolutionShader,
+	convolutionshader: N3JS.ConvolutionShader,
 	convolution: 'convolutionshader',
-	basicshader: BasicShader,
+	basicshader: N3JS.BasicShader,
 	basic: 'basicshader',
-	sepiashader: SepiaShader,
+	sepiashader: N3JS.SepiaShader,
 	sepia: 'sepiashader',
-	rgbshiftshader: RGBShiftShader,
+	rgbshiftshader: N3JS.RGBShiftShader,
 	rgbshift: 'rgbshiftshader',
-	mirrorshader: MirrorShader,
+	mirrorshader: N3JS.MirrorShader,
 	mirror: 'mirrorshader',
-	bleachbypassshader: BleachBypassShader,
+	bleachbypassshader: N3JS.BleachBypassShader,
 	bleachbypass: 'bleachbypassshader',
-	toonshader: ToonShader1,
+	toonshader: N3JS.ToonShader1,
 	toon: 'toonshader',
-	toon1shader: ToonShader1,
+	toon1shader: N3JS.ToonShader1,
 	toon1: 'toon1shader',
-	toon2shader: ToonShader2,
+	toon2shader: N3JS.ToonShader2,
 	toon2: 'toon2shader',
-	colorcorrectionshader: ColorCorrectionShader,
+	colorcorrectionshader: N3JS.ColorCorrectionShader,
 	colorcorrection: 'colorcorrectionshader',
-	blendshader: BlendShader,
+	blendshader: N3JS.BlendShader,
 	blend: 'blendshader',
-	halftoneshader: HalftoneShader,
+	halftoneshader: N3JS.HalftoneShader,
 	halftone: 'halftoneshader',
-	technicolorshader: TechnicolorShader,
+	technicolorshader: N3JS.TechnicolorShader,
 	technicolor: 'technicolorshader',
-	gammacorrectionshader: GammaCorrectionShader,
+	gammacorrectionshader: N3JS.GammaCorrectionShader,
 	gammacorrection: 'gammacorrectionshader',
-	tonemapshader: ToneMapShader,
+	tonemapshader: N3JS.ToneMapShader,
 	tonemap: 'tonemapshader',
-	dotscreenshader: DotScreenShader,
+	dotscreenshader: N3JS.DotScreenShader,
 	dotscreen: 'dotscreenshader',
-	unpackdepthrgbashader: UnpackDepthRGBAShader,
+	unpackdepthrgbashader: N3JS.UnpackDepthRGBAShader,
 	unpackdepthrgba: 'unpackdepthrgbashader',
-	subsurfacescatteringshader: SubsurfaceScatteringShader,
+	subsurfacescatteringshader: N3JS.SubsurfaceScatteringShader,
 	subsurfacescattering: 'subsurfacescatteringshader',
-	digitalglitchshader: DigitalGlitch,
+	digitalglitchshader: N3JS.DigitalGlitch,
 	digitalglitch: 'digitalglitchshader',
-	fxaashader: FXAAShader,
+	fxaashader: N3JS.FXAAShader,
 	fxaa: 'fxaashader',
-	dofmipmapshader: DOFMipMapShader,
+	dofmipmapshader: N3JS.DOFMipMapShader,
 	dofmipmap: 'dofmipmapshader',
-	freichenshader: FreiChenShader,
+	freichenshader: N3JS.FreiChenShader,
 	freichen: 'freichenshader',
-	brightnesscontrastshader: BrightnessContrastShader,
+	brightnesscontrastshader: N3JS.BrightnessContrastShader,
 	brightnesscontrast: 'brightnesscontrastshader',
-	pixelshader: PixelShader,
+	pixelshader: N3JS.PixelShader,
 	pixel: 'pixelshader',
-	copyshader: CopyShader,
+	copyshader: N3JS.CopyShader,
 	copy: 'copyshader',
-	saoshader: SAOShader,
+	saoshader: N3JS.SAOShader,
 	sao: 'saoshader',
-	horizontaltiltshiftshader: HorizontalTiltShiftShader,
+	horizontaltiltshiftshader: N3JS.HorizontalTiltShiftShader,
 	horizontaltiltshift: 'horizontaltiltshiftshader',
 	// parallaxshader: ParallaxShader,
 	// parallax: 'parallaxshader',
-	luminosityshader: LuminosityShader,
+	luminosityshader: N3JS.LuminosityShader,
 	luminosity: 'luminosityshader',
-	huesaturationshader: HueSaturationShader,
+	huesaturationshader: N3JS.HueSaturationShader,
 	huesaturation: 'huesaturationshader',
-	luminosityhighpassshader: LuminosityHighPassShader,
+	luminosityhighpassshader: N3JS.LuminosityHighPassShader,
 	luminosityhighpass: 'luminosityhighpassshader',
-	bokehshader: BokehShader,
+	bokehshader: N3JS.BokehShader,
 	bokeh: 'bokehshader',
-	filmshader: FilmShader,
+	filmshader: N3JS.FilmShader,
 	film: 'filmshader',
-	volumerender1shader: VolumeRenderShader1,
+	volumerender1shader: N3JS.VolumeRenderShader1,
 	volumerendershader1: 'volumerender1shader',
 	volumerender1: 'volumerender1shader',
-	verticaltiltshiftshader: VerticalTiltShiftShader,
+	verticaltiltshiftshader: N3JS.VerticalTiltShiftShader,
 	verticaltiltshift: 'verticaltiltshiftshader',
-	kaleidoshader: KaleidoShader,
+	kaleidoshader: N3JS.KaleidoShader,
 	kaleido: 'kaleidoshader',
-	colorifyshader: ColorifyShader,
+	colorifyshader: N3JS.ColorifyShader,
 	colorify: 'colorifyshader',
-	ssaoshader: SSAOShader,
+	ssaoshader: N3JS.SSAOShader,
 	ssao: 'ssaoshader',
-	waterrefractionshader: WaterRefractionShader,
+	waterrefractionshader: N3JS.WaterRefractionShader,
 	waterrefraction: 'waterrefractionshader',
-	bokeh2shader: BokehShader2 as any,
+	bokeh2shader: N3JS.BokehShader2 as any,
 	bokehshader2: 'bokeh2shader',
 	bokeh2: 'bokeh2shader',
-	bokehdepthshader: BokehDepthShader,
+	bokehdepthshader: N3JS.BokehDepthShader,
 	bokehdepth: 'bokehdepthshader',
-	normalmapshader: NormalMapShader,
+	normalmapshader: N3JS.NormalMapShader,
 	normalmap: 'normalmapshader',
-	afterimageshader: AfterimageShader,
+	afterimageshader: N3JS.AfterimageShader,
 	afterimage: 'afterimageshader',
-	vignetteshader: VignetteShader,
+	vignetteshader: N3JS.VignetteShader,
 	vignette: 'vignetteshader',
-	triangleblurshader: TriangleBlurShader,
+	triangleblurshader: N3JS.TriangleBlurShader,
 	triangleblur: 'triangleblurshader',
-	sobeloperatorshader: SobelOperatorShader,
+	sobeloperatorshader: N3JS.SobelOperatorShader,
 	sobeloperator: 'sobeloperatorshader',
 	cloudshader: CloudShader,
 	cloud: 'cloudshader',
@@ -406,8 +340,8 @@ export class ShaderUtils {
 				} else {
 					return shader;
 				}
-			} else if (THREE.ShaderLib[key] !== undefined) {
-				return THREE.ShaderLib[key];
+			} else if (N3JS.ShaderLib[key] !== undefined) {
+				return N3JS.ShaderLib[key];
 			} else {
 				console.error('unknown shader :' + key);
 				return {
@@ -430,10 +364,10 @@ export class ShaderUtils {
 			vertexShader: shader.vertexShader,
 			fragmentShader: shader.fragmentShader,
 			uniforms: shader.uniforms !== undefined && shader.uniforms !== null
-				? THREE.UniformsUtils.clone(shader.uniforms)
+				? N3JS.UniformsUtils.clone(shader.uniforms)
 				: undefined,
 			defines: shader.defines !== undefined && shader.defines !== null
-				? THREE.UniformsUtils.clone(shader.defines)
+				? N3JS.UniformsUtils.clone(shader.defines)
 				: undefined,
 		};
 	}
@@ -460,10 +394,10 @@ export class ShaderUtils {
 		if (key !== undefined && key !== null) {
 			if (typeof key === 'string') {
 				if (key !== undefined && key !== null && key !== '') {
-					return THREE.UniformsUtils.clone(this.getShader(key).uniforms);
+					return N3JS.UniformsUtils.clone(this.getShader(key).uniforms);
 				}
 			} else if (key.uniforms !== undefined && key.uniforms !== null) {
-				return THREE.UniformsUtils.clone(key.uniforms);
+				return N3JS.UniformsUtils.clone(key.uniforms);
 			}
 		}
 		return {};

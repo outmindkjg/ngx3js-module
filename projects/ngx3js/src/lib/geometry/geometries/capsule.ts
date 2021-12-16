@@ -1,4 +1,4 @@
-import { BufferGeometry, Float32BufferAttribute, Vector3 } from 'three';
+import { N3JS, I3JS, NgxThreeUtil } from '../../interface';
 
 /**
  * The Capsule geometry.
@@ -7,7 +7,7 @@ import { BufferGeometry, Float32BufferAttribute, Vector3 } from 'three';
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/CapsuleGeometry) page for a live demo.
  *
  */
-export class NgxCapsuleGeometry extends BufferGeometry {
+export class NgxCapsuleGeometry extends N3JS.BufferGeometry {
 	/**
 	 * The Parameters of capsule geometry
 	 */
@@ -51,8 +51,8 @@ export class NgxCapsuleGeometry extends BufferGeometry {
 		};
 		let index = 0;
 		const grid = [];
-		const vertex = new Vector3();
-		const normal = new Vector3();
+		const vertex = new N3JS.Vector3();
+		const normal = new N3JS.Vector3();
 		const indices = [];
 		const vertices = [];
 		const normals = [];
@@ -143,8 +143,8 @@ export class NgxCapsuleGeometry extends BufferGeometry {
 			}
 		}
 		this.setIndex(indices);
-		this.setAttribute('position', new Float32BufferAttribute(vertices, 3));
-		this.setAttribute('normal', new Float32BufferAttribute(normals, 3));
-		this.setAttribute('uv', new Float32BufferAttribute(uvs, 2));
+		this.setAttribute('position', new N3JS.Float32BufferAttribute(vertices, 3));
+		this.setAttribute('normal', new N3JS.Float32BufferAttribute(normals, 3));
+		this.setAttribute('uv', new N3JS.Float32BufferAttribute(uvs, 2));
 	}
 }

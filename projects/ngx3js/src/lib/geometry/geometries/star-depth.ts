@@ -1,6 +1,6 @@
-import { BufferGeometry, Vector2, Vector3, Float32BufferAttribute } from 'three';
-import { NgxStarGeometry } from './star';
+import { N3JS } from '../../interface';
 import { NgxGeometryUtils } from './../geometryUtils';
+import { NgxStarGeometry } from './star';
 
 /**
  * The Star Depth geometry.
@@ -9,7 +9,7 @@ import { NgxGeometryUtils } from './../geometryUtils';
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/StarDepthGeometry) page for a live demo.
  *
  */
-export class NgxStarDepthGeometry extends BufferGeometry {
+export class NgxStarDepthGeometry extends N3JS.BufferGeometry {
 	/**
 	 * @default 'StarDepthGeometry'
 	 */
@@ -94,7 +94,7 @@ export class NgxStarDepthGeometry extends BufferGeometry {
 			let x = 0;
 			let y = 0;
 			let z = 0;
-			let vector2 = new Vector2();
+			let vector2 = new N3JS.Vector2();
 			for (let i = 0; i < vertices.length; i += 3) {
 				x = vertices[i];
 				y = vertices[i + 1];
@@ -122,7 +122,7 @@ export class NgxStarDepthGeometry extends BufferGeometry {
 			uvs.push(attribute[i]);
 		}
 		const attrPosition = frontGeometry.getAttribute('position');
-		const vertex = new Vector3(0, 0, 0);
+		const vertex = new N3JS.Vector3(0, 0, 0);
 		const sideNormals = [];
 		const sideUvsFront = [];
 		const sideUvsBack = [];
@@ -174,10 +174,10 @@ export class NgxStarDepthGeometry extends BufferGeometry {
 		this.setIndex(indices);
 		this.setAttribute(
 			'position',
-			new Float32BufferAttribute(vertices, 3)
+			new N3JS.Float32BufferAttribute(vertices, 3)
 		);
-		this.setAttribute('normal', new Float32BufferAttribute(normals, 3));
-		this.setAttribute('uv', new Float32BufferAttribute(uvs, 2));
+		this.setAttribute('normal', new N3JS.Float32BufferAttribute(normals, 3));
+		this.setAttribute('uv', new N3JS.Float32BufferAttribute(uvs, 2));
 		this.computeVertexNormals();
 	}
 }

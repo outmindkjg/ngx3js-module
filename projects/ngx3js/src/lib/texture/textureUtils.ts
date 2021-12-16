@@ -1,4 +1,3 @@
-import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { TCanvasFunctionType, TDataFunctionType } from '../ngx-interface';
 
@@ -384,7 +383,7 @@ DataTextureConf.cloud = (options: any) => {
 	const data = new Uint8Array(size * size * size);
 	let i = 0;
 	const scale = options?.scale || 0.05;
-	const perlin = new ImprovedNoise();
+	const perlin = new N3JS.ImprovedNoise();
 	const vector = new N3JS.Vector3();
 	for (let z = 0; z < size; z++) {
 		for (let y = 0; y < size; y++) {
@@ -418,7 +417,7 @@ DataTextureConf.perlin = (options: any) => {
 	const size = options?.size || 128;
 	const data = new Uint8Array(size * size * size);
 	let i = 0;
-	const perlin = new ImprovedNoise();
+	const perlin = new N3JS.ImprovedNoise();
 	const vector = new N3JS.Vector3();
 	for (let z = 0; z < size; z++) {
 		for (let y = 0; y < size; y++) {

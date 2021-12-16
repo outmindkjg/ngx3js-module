@@ -17,6 +17,7 @@ import { IGeometriesParametric, INgxColor, INgxVector } from '../ngx-interface';
 import { NgxShapeComponent } from '../shape/shape.component';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxSvgComponent } from '../svg/svg.component';
+import * as NGX_GEOMETRY from './index';
 
 /**
  * The Geometry component.
@@ -1093,15 +1094,15 @@ export class NgxGeometryComponent
 	/**
 	 * Perlin geometry of geometry component
 	 */
-	private perlinGeometry: I3JS.PlanePerlinGeometry = null;
+	private perlinGeometry: NGX_GEOMETRY.NgxPlanePerlinGeometry = null;
 
 	/**
 	 * Gets perlin geometry
 	 * @returns perlin geometry
 	 */
-	private getPerlinGeometry(): I3JS.PlanePerlinGeometry {
+	private getPerlinGeometry(): NGX_GEOMETRY.NgxPlanePerlinGeometry {
 		if (this.perlinGeometry === null) {
-			this.perlinGeometry = new N3JS.PlanePerlinGeometry(
+			this.perlinGeometry = new NGX_GEOMETRY.NgxPlanePerlinGeometry(
 				NgxThreeUtil.getTypeSafe(this.widthSegments, this.segments, 128),
 				NgxThreeUtil.getTypeSafe(this.depthSegments, this.segments, 128),
 				NgxThreeUtil.getTypeSafe(this.quality, 2)
@@ -1304,7 +1305,7 @@ export class NgxGeometryComponent
 					case 'ropegeometry':
 					case 'ropebuffer':
 					case 'rope':
-						const ropeGeometry = new N3JS.RopeGeometry(
+						const ropeGeometry = new NGX_GEOMETRY.NgxRopeGeometry(
 							NgxThreeUtil.getTypeSafe(this.width, this.height, 1),
 							NgxThreeUtil.getTypeSafe(this.widthSegments, this.segments, 1)
 						);
@@ -1314,7 +1315,7 @@ export class NgxGeometryComponent
 					case 'gridgeometry':
 					case 'gridbuffer':
 					case 'grid':
-						const gridGeometry = new N3JS.GridGeometry(
+						const gridGeometry = new NGX_GEOMETRY.NgxGridGeometry(
 							NgxThreeUtil.getTypeSafe(this.width, this.height, 1),
 							NgxThreeUtil.getTypeSafe(this.height, this.width, 1),
 							NgxThreeUtil.getTypeSafe(this.depth, 0),
@@ -1329,7 +1330,7 @@ export class NgxGeometryComponent
 					case 'capsulegeometry':
 					case 'capsulebuffer':
 					case 'capsule':
-						const capsuleGeometry = new N3JS.CapsuleGeometry(
+						const capsuleGeometry = new NGX_GEOMETRY.NgxCapsuleGeometry(
 							NgxThreeUtil.getTypeSafe(this.radius, 1),
 							NgxThreeUtil.getTypeSafe(
 								this.radiusSegments,
@@ -1415,7 +1416,7 @@ export class NgxGeometryComponent
 					case 'circledepthgeometry':
 					case 'circledepthbuffer':
 					case 'circledepth':
-						geometry = new N3JS.CircleDepthGeometry(
+						geometry = new NGX_GEOMETRY.NgxCircleDepthGeometry(
 							NgxThreeUtil.getTypeSafe(this.radius, 1),
 							NgxThreeUtil.getTypeSafe(this.depth, 1),
 							NgxThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 8),
@@ -1428,7 +1429,7 @@ export class NgxGeometryComponent
 					case 'stargeometry':
 					case 'starbuffer':
 					case 'star':
-						geometry = new N3JS.StarGeometry(
+						geometry = new NGX_GEOMETRY.NgxStarGeometry(
 							NgxThreeUtil.getTypeSafe(this.innerRadius, 0.5),
 							NgxThreeUtil.getTypeSafe(this.outerRadius, 1),
 							NgxThreeUtil.getTypeSafe(this.segments, this.radiusSegments, 5),
@@ -1440,7 +1441,7 @@ export class NgxGeometryComponent
 					case 'stardepthgeometry':
 					case 'stardepthbuffer':
 					case 'stardepth':
-						geometry = new N3JS.StarDepthGeometry(
+						geometry = new NGX_GEOMETRY.NgxStarDepthGeometry(
 							NgxThreeUtil.getTypeSafe(this.innerRadius, 0.5),
 							NgxThreeUtil.getTypeSafe(this.outerRadius, 1),
 							NgxThreeUtil.getTypeSafe(this.depth, 1),
@@ -1665,7 +1666,7 @@ export class NgxGeometryComponent
 					case 'planedepthbuffer':
 					case 'planedepthgeometry':
 					case 'planedepth':
-						geometry = new N3JS.PlaneDepthGeometry(
+						geometry = new NGX_GEOMETRY.NgxPlaneDepthGeometry(
 							NgxThreeUtil.getTypeSafe(this.width, this.height, 1),
 							NgxThreeUtil.getTypeSafe(this.height, this.width, 1),
 							NgxThreeUtil.getTypeSafe(this.depth, this.width, 1),
@@ -1702,7 +1703,7 @@ export class NgxGeometryComponent
 					case 'ringdepthgeometry':
 					case 'ringdepthbuffer':
 					case 'ringdepth':
-						geometry = new N3JS.RingDepthGeometry(
+						geometry = new NGX_GEOMETRY.NgxRingDepthGeometry(
 							NgxThreeUtil.getTypeSafe(this.innerRadius, 0.5),
 							NgxThreeUtil.getTypeSafe(this.outerRadius, 1),
 							NgxThreeUtil.getTypeSafe(this.depth, 1),

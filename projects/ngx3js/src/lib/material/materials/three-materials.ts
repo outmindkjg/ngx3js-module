@@ -1,6 +1,7 @@
-import { GLSL3, GLSLVersion, RawShaderMaterial, ShaderMaterial, ShaderMaterialParameters } from 'three';
-
 import { ShaderUtils } from '../../shader/shaders/shaderUtils';
+import * as N3JS from './../../threejs-library/three-core';
+import * as I3JS from './../../threejs-library/three-interface';
+
 
 /**
  * RawShader material
@@ -9,7 +10,7 @@ import { ShaderUtils } from '../../shader/shaders/shaderUtils';
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/RawShaderMaterial) page for a live demo.
  *
  */
-export class NgxRawShaderMaterial extends RawShaderMaterial {
+export class NgxRawShaderMaterial extends N3JS.RawShaderMaterial {
 	/**
 	 * Creates an instance of ngx raw shader material.
 	 *
@@ -17,9 +18,9 @@ export class NgxRawShaderMaterial extends RawShaderMaterial {
 	 * @param [shaderId]
 	 */
 	constructor(
-		parameters?: ShaderMaterialParameters,
+		parameters?: I3JS.ShaderMaterialParameters,
 		shaderId?: string,
-		glslVersion?: GLSLVersion
+		glslVersion?: I3JS.GLSLVersion
 	) {
 		if (shaderId !== null && shaderId !== undefined) {
 			const shader = ShaderUtils.getShaderClone(shaderId);
@@ -42,14 +43,14 @@ export class NgxRawShaderMaterial extends RawShaderMaterial {
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShaderMaterial) page for a live demo.
  *
  */
-export class NgxShaderMaterial extends ShaderMaterial {
+export class NgxShaderMaterial extends N3JS.ShaderMaterial {
 	/**
 	 * Creates an instance of ngx shader material.
 	 *
 	 * @param [parameters]
 	 * @param [shaderId]
 	 */
-	constructor(parameters?: ShaderMaterialParameters, shaderId?: string) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters, shaderId?: string) {
 		if (shaderId !== null && shaderId !== undefined) {
 			const shader = ShaderUtils.getShaderClone(shaderId);
 			parameters.vertexShader = shader.vertexShader;
@@ -74,7 +75,7 @@ export class NgxShaderAudioVisualizerMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'AudioVisualizer');
 	}
 }
@@ -92,7 +93,7 @@ export class NgxShaderAttributesParticlesMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'AttributesParticles');
 	}
 }
@@ -110,7 +111,7 @@ export class NgxShaderSelectiveDrawMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'SelectiveDraw');
 	}
 }
@@ -128,7 +129,7 @@ export class NgxShaderCustomAttributesMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'CustomAttributes');
 	}
 }
@@ -146,7 +147,7 @@ export class NgxShaderCustomAttributesLinesMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'CustomAttributesLines');
 	}
 }
@@ -164,7 +165,7 @@ export class NgxShaderCustomAttributesPointsMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'CustomAttributesPoints');
 	}
 }
@@ -182,7 +183,7 @@ export class NgxShaderAttributeSizeColorMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'AttributeSizeColor');
 	}
 }
@@ -200,7 +201,7 @@ export class NgxShaderAttributeSizeColor1Material extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'AttributeSizeColor1');
 	}
 }
@@ -218,7 +219,7 @@ export class NgxShaderSkyDomeMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'SkyDome');
 	}
 }
@@ -236,7 +237,7 @@ export class NgxShaderParallaxMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'Parallax');
 	}
 }
@@ -254,7 +255,7 @@ export class NgxShaderFresnelMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'Fresnel');
 	}
 }
@@ -272,7 +273,7 @@ export class NgxShaderSubsurfaceScatteringMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'SubsurfaceScattering');
 	}
 }
@@ -290,7 +291,7 @@ export class NgxShaderWireframeMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'Wireframe');
 	}
 }
@@ -308,7 +309,7 @@ export class NgxShaderNoiseRandom1DMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'NoiseRandom1D');
 	}
 }
@@ -326,7 +327,7 @@ export class NgxShaderNoiseRandom2DMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'NoiseRandom2D');
 	}
 }
@@ -344,7 +345,7 @@ export class NgxShaderNoiseRandom3DMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'NoiseRandom3D');
 	}
 }
@@ -362,7 +363,7 @@ export class NgxShaderColorRainbowMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'ColorRainbow');
 	}
 }
@@ -380,7 +381,7 @@ export class NgxShaderVideoKinectMaterial extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'VideoKinect');
 	}
 }
@@ -398,7 +399,7 @@ export class NgxShaderVolumeRenderShader1Material extends NgxShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'VolumeRenderShader1');
 	}
 }
@@ -416,7 +417,7 @@ export class NgxShaderInstancingMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'Instancing');
 	}
 }
@@ -434,7 +435,7 @@ export class NgxShaderScaleColorMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'ScaleColor');
 	}
 }
@@ -452,7 +453,7 @@ export class NgxShaderSinColorMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'SinColor');
 	}
 }
@@ -470,7 +471,7 @@ export class NgxShaderRaymarchingReflectMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
 		super(parameters, 'RaymarchingReflect');
 	}
 }
@@ -488,8 +489,8 @@ export class NgxShaderCloudMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
-		super(parameters, 'Cloud', GLSL3);
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
+		super(parameters, 'Cloud', N3JS.GLSL3);
 	}
 }
 
@@ -506,8 +507,8 @@ export class NgxShaderPerlinMaterial extends NgxRawShaderMaterial {
 	 *
 	 * @param [parameters]
 	 */
-	constructor(parameters?: ShaderMaterialParameters) {
-		super(parameters, 'Perlin', GLSL3);
+	constructor(parameters?: I3JS.ShaderMaterialParameters) {
+		super(parameters, 'Perlin', N3JS.GLSL3);
 	}
 }
 

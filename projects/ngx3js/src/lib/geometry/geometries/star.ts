@@ -1,4 +1,4 @@
-import { CircleGeometry } from 'three';
+import { N3JS, I3JS, NgxThreeUtil } from '../../interface';
 
 /**
  * The Star geometry.
@@ -7,7 +7,7 @@ import { CircleGeometry } from 'three';
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/StarGeometry) page for a live demo.
  *
  */
-export class NgxStarGeometry extends CircleGeometry {
+export class NgxStarGeometry extends N3JS.CircleGeometry {
 	/**
 	 * @param [innerRadius=0.5]
 	 * @param [outerRadius=1]

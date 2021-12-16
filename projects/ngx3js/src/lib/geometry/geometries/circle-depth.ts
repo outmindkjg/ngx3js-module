@@ -1,4 +1,4 @@
-import { BufferGeometry, CircleBufferGeometry, Float32BufferAttribute, Vector2, Vector3 } from 'three';
+import { N3JS, I3JS, NgxThreeUtil } from '../../interface';
 import { NgxGeometryUtils } from '../geometryUtils';
 
 /**
@@ -8,7 +8,7 @@ import { NgxGeometryUtils } from '../geometryUtils';
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/CircleDepthGeometry) page for a live demo.
  *
  */
-export class NgxCircleDepthGeometry extends BufferGeometry {
+export class NgxCircleDepthGeometry extends N3JS.BufferGeometry {
 	/**
 	 * @default 'CircleDepthGeometry'
 	 */
@@ -53,7 +53,7 @@ export class NgxCircleDepthGeometry extends BufferGeometry {
 			depthRate: depthRate,
 		};
 		const halfDepth = depth / 2;
-		const frontGeometry = new CircleBufferGeometry(
+		const frontGeometry = new N3JS.CircleBufferGeometry(
 			radius,
 			segments,
 			thetaStart,
@@ -101,7 +101,7 @@ export class NgxCircleDepthGeometry extends BufferGeometry {
 			uvs.push(attribute[i]);
 		}
 		const attrPosition = frontGeometry.getAttribute('position');
-		const vertex = new Vector3(0, 0, 0);
+		const vertex = new N3JS.Vector3(0, 0, 0);
 		const sideNormals = [];
 		const sideUvsFront = [];
 		const sideUvsBack = [];
@@ -120,7 +120,7 @@ export class NgxCircleDepthGeometry extends BufferGeometry {
 			let x = 0;
 			let y = 0;
 			let z = 0;
-			let vector2 = new Vector2();
+			let vector2 = new N3JS.Vector2();
 			for (let i = 0; i < vertices.length; i += 3) {
 				x = vertices[i];
 				y = vertices[i + 1];
@@ -168,10 +168,10 @@ export class NgxCircleDepthGeometry extends BufferGeometry {
 		this.setIndex(indices);
 		this.setAttribute(
 			'position',
-			new Float32BufferAttribute(vertices, 3)
+			new N3JS.Float32BufferAttribute(vertices, 3)
 		);
-		this.setAttribute('normal', new Float32BufferAttribute(normals, 3));
-		this.setAttribute('uv', new Float32BufferAttribute(uvs, 2));
+		this.setAttribute('normal', new N3JS.Float32BufferAttribute(normals, 3));
+		this.setAttribute('uv', new N3JS.Float32BufferAttribute(uvs, 2));
 		this.computeVertexNormals();
 	}
 }

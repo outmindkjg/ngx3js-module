@@ -7,6 +7,7 @@ import { ShaderUtils } from '../shader/shaders/shaderUtils';
 import { NgxSizeComponent } from '../size/size.component';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxTextureComponent } from '../texture/texture.component';
+import * as NGX_PASS from './index';
 
 /**
  * The Pass component.
@@ -1812,71 +1813,71 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 						break;
 					case 'copypass':
 					case 'copy':
-						pass = new N3JS.ShaderCopyPass(this.getTextureId());
+						pass = new NGX_PASS.NgxShaderCopyPass(this.getTextureId());
 						break;
 					case 'rgbshiftpass':
 					case 'rgbshift':
-						const rgbshiftpass = new N3JS.ShaderRGBShiftPass(this.getTextureId());
+						const rgbshiftpass = new NGX_PASS.NgxShaderRGBShiftPass(this.getTextureId());
 						this.getUniforms(rgbshiftpass.uniforms);
 						pass = rgbshiftpass;
 						break;
 					case 'bleachbypasspass':
 					case 'bleachbypass':
-						const bleachbypass = new N3JS.ShaderBleachBypassPass(this.getTextureId());
+						const bleachbypass = new NGX_PASS.NgxShaderBleachBypassPass(this.getTextureId());
 						this.getUniforms(bleachbypass.uniforms);
 						pass = bleachbypass;
 						break;
 					case 'sepiapass':
 					case 'sepia':
-						const sepiapass = new N3JS.ShaderSepiaPass(this.getTextureId());
+						const sepiapass = new NGX_PASS.NgxShaderSepiaPass(this.getTextureId());
 						this.getUniforms(sepiapass.uniforms);
 						pass = sepiapass;
 						break;
 					case 'vignettepass':
 					case 'vignette':
-						const vignettepass = new N3JS.ShaderVignettePass(this.getTextureId());
+						const vignettepass = new NGX_PASS.NgxShaderVignettePass(this.getTextureId());
 						this.getUniforms(vignettepass.uniforms);
 						pass = vignettepass;
 						break;
 					case 'gammacorrectionpass':
 					case 'gammacorrection':
-						const gammacorrectionpass = new N3JS.ShaderGammaCorrectionPass(this.getTextureId());
+						const gammacorrectionpass = new NGX_PASS.NgxShaderGammaCorrectionPass(this.getTextureId());
 						this.getUniforms(gammacorrectionpass.uniforms);
 						pass = gammacorrectionpass;
 						break;
 					case 'fxaapass':
 					case 'fxaa':
-						const fxaapass = new N3JS.ShaderFXAAPass(this.getTextureId());
+						const fxaapass = new NGX_PASS.NgxShaderFXAAPass(this.getTextureId());
 						this.getUniforms(fxaapass.uniforms);
 						pass = fxaapass;
 						break;
 					case 'pixelpass':
 					case 'pixel':
-						const pixelpass = new N3JS.ShaderPixelPass(this.getTextureId());
+						const pixelpass = new NGX_PASS.NgxShaderPixelPass(this.getTextureId());
 						this.getUniforms(pixelpass.uniforms);
 						pass = pixelpass;
 						break;
 					case 'luminositypass':
 					case 'luminosity':
-						const luminositypass = new N3JS.ShaderLuminosityPass(this.getTextureId());
+						const luminositypass = new NGX_PASS.NgxShaderLuminosityPass(this.getTextureId());
 						this.getUniforms(luminositypass.uniforms);
 						pass = luminositypass;
 						break;
 					case 'shaderdotscreenpass':
 					case 'shaderdotscreen':
-						const dotscreenpass = new N3JS.ShaderDotScreenPass(this.getTextureId());
+						const dotscreenpass = new NGX_PASS.NgxShaderDotScreenPass(this.getTextureId());
 						this.getUniforms(dotscreenpass.uniforms);
 						pass = dotscreenpass;
 						break;
 					case 'sobeloperatorpass':
 					case 'sobeloperator':
-						const sobeloperatorpass = new N3JS.SobelOperatorPass(this.getTextureId());
+						const sobeloperatorpass = new NGX_PASS.NgxSobelOperatorPass(this.getTextureId());
 						this.getUniforms(sobeloperatorpass.uniforms);
 						pass = sobeloperatorpass;
 						break;
 					case 'materialpass':
 					case 'material':
-						const materialpass = new N3JS.ShaderMaterialPass(this.getTextureId());
+						const materialpass = new NGX_PASS.NgxShaderMaterialPass(this.getTextureId());
 						this.getUniforms(materialpass.uniforms);
 						pass = materialpass;
 						break;

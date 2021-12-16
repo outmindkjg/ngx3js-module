@@ -1,72 +1,25 @@
 import { Curve, Vector2, Vector3, Vector4 } from '../index';
 
-export namespace Curves {
-    interface GrannyKnot extends Curve<Vector3> {
-        new() : this;
-    }
+interface ExampleCustomCurves extends Curve<Vector3> {
+    new(scale?: number) : this;
+    scale: number;
+}
 
-    interface HeartCurve extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface VivianiCurve extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface KnotCurve extends Curve<Vector3> {
-        new() : this;
-    }
-
-    interface HelixCurve extends Curve<Vector3> {
-        new() : this;
-    }
-
-    interface TrefoilKnot extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface TorusKnot extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface CinquefoilKnot extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface TrefoilPolynomialKnot extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface FigureEightPolynomialKnot extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface DecoratedTorusKnot4a extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface DecoratedTorusKnot4b extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface DecoratedTorusKnot5a extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
-
-    interface DecoratedTorusKnot5c extends Curve<Vector3> {
-        new(scale?: number) : this;
-        scale: number;
-    }
+export interface Curves {
+    GrannyKnot : ExampleCustomCurves;
+    HeartCurve : ExampleCustomCurves ;
+    VivianiCurve : ExampleCustomCurves;
+    KnotCurve : ExampleCustomCurves;
+    HelixCurve : ExampleCustomCurves;
+    TrefoilKnot : ExampleCustomCurves;
+    TorusKnot : ExampleCustomCurves;
+    CinquefoilKnot : ExampleCustomCurves;
+    TrefoilPolynomialKnot : ExampleCustomCurves;
+    FigureEightPolynomialKnot : ExampleCustomCurves;
+    DecoratedTorusKnot4a : ExampleCustomCurves;
+    DecoratedTorusKnot4b : ExampleCustomCurves;
+    DecoratedTorusKnot5a : ExampleCustomCurves;
+    DecoratedTorusKnot5c : ExampleCustomCurves;
 }
 
 export interface NURBSCurve extends Curve<Vector3> {

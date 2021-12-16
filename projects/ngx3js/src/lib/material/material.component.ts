@@ -25,6 +25,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAbstractTextureComponent } from '../texture.abstract';
 import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
 
+import * as NGX_MATERIAL from './index';
 
 /**
  * The Material component.
@@ -3461,7 +3462,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderattributesparticlesmaterial':
 					case 'shaderattributesparticles':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderAttributesParticlesMaterial(
+							new NGX_MATERIAL.NgxShaderAttributesParticlesMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3469,7 +3470,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderselectivedrawmaterial':
 					case 'shaderselectivedraw':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderSelectiveDrawMaterial(
+							new NGX_MATERIAL.NgxShaderSelectiveDrawMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3477,7 +3478,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadercustomattributesmaterial':
 					case 'shadercustomattributes':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderCustomAttributesMaterial(
+							new NGX_MATERIAL.NgxShaderCustomAttributesMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3485,7 +3486,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadercustomattributeslinesmaterial':
 					case 'shadercustomattributeslines':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderCustomAttributesLinesMaterial(
+							new NGX_MATERIAL.NgxShaderCustomAttributesLinesMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3493,7 +3494,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadercustomattributespointsmaterial':
 					case 'shadercustomattributespoints':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderCustomAttributesPointsMaterial(
+							new NGX_MATERIAL.NgxShaderCustomAttributesPointsMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3501,7 +3502,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderattributesizecolormaterial':
 					case 'shaderattributesizecolor':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderAttributeSizeColorMaterial(
+							new NGX_MATERIAL.NgxShaderAttributeSizeColorMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3509,7 +3510,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderattributesizecolor1material':
 					case 'shaderattributesizecolor1':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderAttributeSizeColor1Material(
+							new NGX_MATERIAL.NgxShaderAttributeSizeColor1Material(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3517,7 +3518,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderskydomematerial':
 					case 'shaderskydome':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderSkyDomeMaterial(
+							new NGX_MATERIAL.NgxShaderSkyDomeMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3525,7 +3526,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderparallaxmaterial':
 					case 'shaderparallax':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderParallaxMaterial(
+							new NGX_MATERIAL.NgxShaderParallaxMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3533,7 +3534,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderfresnelmaterial':
 					case 'shaderfresnel':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderFresnelMaterial(
+							new NGX_MATERIAL.NgxShaderFresnelMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3541,7 +3542,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadersubsurfacescatteringmaterial':
 					case 'shadersubsurfacescattering':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderSubsurfaceScatteringMaterial(
+							new NGX_MATERIAL.NgxShaderSubsurfaceScatteringMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3549,7 +3550,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderwireframematerial':
 					case 'shaderwireframe':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderWireframeMaterial(
+							new NGX_MATERIAL.NgxShaderWireframeMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3557,7 +3558,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadernoiserandom1dmaterial':
 					case 'shadernoiserandom1d':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderNoiseRandom1DMaterial(
+							new NGX_MATERIAL.NgxShaderNoiseRandom1DMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3565,7 +3566,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadernoiserandom2dmaterial':
 					case 'shadernoiserandom2d':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderNoiseRandom2DMaterial(
+							new NGX_MATERIAL.NgxShaderNoiseRandom2DMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3573,7 +3574,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadernoiserandom3dmaterial':
 					case 'shadernoiserandom3d':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderNoiseRandom3DMaterial(
+							new NGX_MATERIAL.NgxShaderNoiseRandom3DMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3581,7 +3582,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadercolorrainbowmaterial':
 					case 'shadercolorrainbow':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderColorRainbowMaterial(
+							new NGX_MATERIAL.NgxShaderColorRainbowMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3589,7 +3590,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadervideokinectmaterial':
 					case 'shadervideokinect':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderVideoKinectMaterial(
+							new NGX_MATERIAL.NgxShaderVideoKinectMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3597,7 +3598,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadervolumerendershader1material':
 					case 'shadervolumerendershader1':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderVolumeRenderShader1Material(
+							new NGX_MATERIAL.NgxShaderVolumeRenderShader1Material(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3605,7 +3606,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderinstancingmaterial':
 					case 'shaderinstancing':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderInstancingMaterial(
+							new NGX_MATERIAL.NgxShaderInstancingMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3613,7 +3614,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderscalecolormaterial':
 					case 'shaderscalecolor':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderScaleColorMaterial(
+							new NGX_MATERIAL.NgxShaderScaleColorMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3621,7 +3622,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadersincolormaterial':
 					case 'shadersincolor':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderSinColorMaterial(
+							new NGX_MATERIAL.NgxShaderSinColorMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3629,7 +3630,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderraymarchingreflectmaterial':
 					case 'shaderraymarchingreflect':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderRaymarchingReflectMaterial(
+							new NGX_MATERIAL.NgxShaderRaymarchingReflectMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3637,7 +3638,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shadercloudmaterial':
 					case 'shadercloud':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderCloudMaterial(
+							new NGX_MATERIAL.NgxShaderCloudMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);
@@ -3645,7 +3646,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderperlinmaterial':
 					case 'shaderperlin':
 						material = this.getShaderMaterialUpdate(
-							new N3JS.ShaderPerlinMaterial(
+							new NGX_MATERIAL.NgxShaderPerlinMaterial(
 								this.getShaderMaterialParameters() as any
 							) as any
 						);

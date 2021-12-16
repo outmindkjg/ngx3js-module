@@ -6,7 +6,6 @@ import {
 	OnInit,
 	SimpleChanges
 } from '@angular/core';
-import { Lut } from 'three/examples/jsm/math/Lut';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxLocalStorageService } from '../local-storage.service';
 import { TCanvasFunctionType } from '../ngx-interface';
@@ -233,10 +232,10 @@ export class NgxTextureComponent
 				case 'lutcooltowarm':
 				case 'lutblackbody':
 				case 'lutgrayscale':
-					return new Lut(canvas.toLowerCase().substr(3)).createCanvas();
+					return new N3JS.Lut(canvas.toLowerCase().substr(3)).createCanvas();
 				case 'lut':
 				default:
-					return new Lut().createCanvas();
+					return new N3JS.Lut().createCanvas();
 			}
 		} else {
 			return this.canvas;

@@ -1,4 +1,4 @@
-import { BufferGeometry, Color, Float32BufferAttribute } from 'three';
+import { N3JS, I3JS, NgxThreeUtil } from '../../interface';
 
 /**
  * The Grid geometry.
@@ -7,7 +7,7 @@ import { BufferGeometry, Color, Float32BufferAttribute } from 'three';
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/GridGeometry) page for a live demo.
  *
  */
-export class NgxGridGeometry extends BufferGeometry {
+export class NgxGridGeometry extends N3JS.BufferGeometry {
 	/**
 	 * The Parameters of grid geometry
 	 */
@@ -31,8 +31,8 @@ export class NgxGridGeometry extends BufferGeometry {
 		depth: number = 0,
 		widthSegments: number = 1,
 		heightSegments: number = 1,
-		colorW: Color = null,
-		colorH: Color = null
+		colorW: I3JS.Color = null,
+		colorH: I3JS.Color = null
 	) {
 		super();
 		this.type = 'GridGeometry';
@@ -41,11 +41,11 @@ export class NgxGridGeometry extends BufferGeometry {
 		heightSegments = Math.max(1, heightSegments);
 		height = Math.max(1, height);
 		depth = Math.max(0, depth);
-		if (colorW === undefined || colorW === null) {
-			colorW = new Color(0x444444);
+		if (NgxThreeUtil.isNull(colorW)) {
+			colorW = new N3JS.Color(0x444444);
 		}
-		if (colorH === undefined || colorH === null) {
-			colorH = new Color(0x888888);
+		if (NgxThreeUtil.isNull(colorH)) {
+			colorH = new N3JS.Color(0x888888);
 		}
 		this.parameters = {
 			width: width,
@@ -93,8 +93,8 @@ export class NgxGridGeometry extends BufferGeometry {
 		}
 		this.setAttribute(
 			'position',
-			new Float32BufferAttribute(vertices, 3)
+			new N3JS.Float32BufferAttribute(vertices, 3)
 		);
-		this.setAttribute('color', new Float32BufferAttribute(colors, 3));
+		this.setAttribute('color', new N3JS.Float32BufferAttribute(colors, 3));
 	}
 }

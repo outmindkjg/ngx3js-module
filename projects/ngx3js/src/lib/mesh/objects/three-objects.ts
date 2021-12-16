@@ -1,4 +1,3 @@
-import { HTMLMesh } from 'three/examples/jsm/interactive/HTMLMesh';
 import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
 import { IMaterialParameters } from '../../ngx-interface';
 
@@ -9,7 +8,7 @@ import { IMaterialParameters } from '../../ngx-interface';
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/HTMLMesh) page for a live demo.
  *
  */
-export class NgxHTMLMesh extends HTMLMesh {
+export class NgxHTMLMesh extends N3JS.HTMLMesh {
 	/**
 	 * Creates an instance of ngx htmlmesh.
 	 * @param dom

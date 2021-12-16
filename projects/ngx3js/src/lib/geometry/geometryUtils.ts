@@ -1,25 +1,25 @@
-import { BufferAttribute, BufferGeometry, Color } from 'three';
+import { N3JS, I3JS } from '../interface';
 
 export type GeometryFunctionType = (
-	geometry: BufferGeometry,
+	geometry: I3JS.BufferGeometry,
 	options?: any
-) => BufferGeometry;
+) => I3JS.BufferGeometry;
 
 const GeometryConf: {
 	[key: string]: GeometryFunctionType | string;
 } = {};
 
 GeometryConf.rainbowcolor1 = (
-	geometry: BufferGeometry,
+	geometry: I3JS.BufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.setAttribute(
 		'color',
-		new BufferAttribute(new Float32Array(count * 3), 3)
+		new N3JS.BufferAttribute(new Float32Array(count * 3), 3)
 	);
-	const color = new Color();
+	const color = new N3JS.Color();
 	const positions = geometry.attributes.position;
 	const colors = geometry.attributes.color;
 	for (let i = 0; i < count; i++) {
@@ -31,16 +31,16 @@ GeometryConf.rainbowcolor1 = (
 GeometryConf.rainbow = 'rainbowcolor1';
 GeometryConf.rainbow1 = 'rainbowcolor1';
 GeometryConf.rainbowcolor2 = (
-	geometry: BufferGeometry,
+	geometry: I3JS.BufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.setAttribute(
 		'color',
-		new BufferAttribute(new Float32Array(count * 3), 3)
+		new N3JS.BufferAttribute(new Float32Array(count * 3), 3)
 	);
-	const color = new Color();
+	const color = new N3JS.Color();
 	const positions = geometry.attributes.position;
 	const colors = geometry.attributes.color;
 	for (let i = 0; i < count; i++) {
@@ -51,16 +51,16 @@ GeometryConf.rainbowcolor2 = (
 };
 GeometryConf.rainbow2 = 'rainbowcolor2';
 GeometryConf.rainbowcolor3 = (
-	geometry: BufferGeometry,
+	geometry: I3JS.BufferGeometry,
 	options?: any
 ) => {
 	const count = geometry.attributes.position.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.setAttribute(
 		'color',
-		new BufferAttribute(new Float32Array(count * 3), 3)
+		new N3JS.BufferAttribute(new Float32Array(count * 3), 3)
 	);
-	const color = new Color();
+	const color = new N3JS.Color();
 	const positions = geometry.attributes.position;
 	const colors = geometry.attributes.color;
 	for (let i = 0; i < count; i++) {
@@ -71,13 +71,13 @@ GeometryConf.rainbowcolor3 = (
 };
 GeometryConf.rainbow3 = 'rainbowcolor3';
 
-GeometryConf.terrainsin = (geometry: BufferGeometry, options?: any) => {
+GeometryConf.terrainsin = (geometry: I3JS.BufferGeometry, options?: any) => {
 	switch (geometry.type) {
 		case 'PlaneGeometry':
 			geometry.rotateX(-Math.PI / 2);
 			break;
 	}
-	const positions = geometry.getAttribute('position') as BufferAttribute;
+	const positions = geometry.getAttribute('position') as I3JS.BufferAttribute;
 	const count = positions.count;
 	const radius = NgxGeometryUtils.getGeometryRadius(geometry, options);
 	geometry.computeBoundingBox();
@@ -117,7 +117,7 @@ export class NgxGeometryUtils {
 	 * @returns geometry radius
 	 */
 	public static getGeometryRadius(
-		geometry: BufferGeometry,
+		geometry: I3JS.BufferGeometry,
 		options: any
 	): number {
 		let radius = options.radius || 0;
@@ -136,9 +136,9 @@ export class NgxGeometryUtils {
 	 * @returns flip geometry
 	 */
 	public static getFlipGeometry(
-		geometry: BufferGeometry,
+		geometry: I3JS.BufferGeometry,
 		plane: string = 'Z'
-	): BufferGeometry {
+	): I3JS.BufferGeometry {
 		geometry = geometry.clone();
 		const attrVertices = geometry.getAttribute('position');
 		const attrUvs = geometry.getAttribute('uv');
@@ -219,9 +219,9 @@ export class NgxGeometryUtils {
 	 */
 	public static getGeometry(
 		key: string,
-		geometry: BufferGeometry,
+		geometry: I3JS.BufferGeometry,
 		options?: any
-	): BufferGeometry {
+	): I3JS.BufferGeometry {
 		const keyList = key.split(',');
 		keyList.forEach((funcName) => {
 			const func = this.getGeometryFunction(funcName);
@@ -237,7 +237,7 @@ export class NgxGeometryUtils {
 	 * @return {BufferGeometry>}
 	 */
 	static mergeVertices(
-		geometry: BufferGeometry,
+		geometry: I3JS.BufferGeometry,
 		tolerance: number = 1e-4
 	) {
 		switch (geometry.type.toLowerCase()) {
@@ -313,7 +313,7 @@ export class NgxGeometryUtils {
 			const oldAttribute = geometry.getAttribute(name);
 			const constructor = oldAttribute.array.constructor as any;
 			const buffer = new constructor(attrArrays[name]);
-			const attribute = new BufferAttribute(
+			const attribute = new N3JS.BufferAttribute(
 				buffer,
 				oldAttribute.itemSize,
 				oldAttribute.normalized

@@ -1,6 +1,4 @@
-import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise';
-import { BufferGeometry, PlaneGeometry, Matrix4, Color, Vector3 } from 'three';
-import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
+import { N3JS, I3JS, NgxThreeUtil } from '../../interface';
 
 /**
  * The Plane Perlin geometry.
@@ -56,7 +54,7 @@ export class NgxPlanePerlinGeometry {
 		quality: number = 2
 	): number[] {
 		const data: number[] = [],
-			perlin = new ImprovedNoise(),
+			perlin = new N3JS.ImprovedNoise(),
 			size = width * height,
 			z = Math.random() * 100;
 		for (let j = 0; j < 4; j++) {
@@ -82,8 +80,8 @@ export class NgxPlanePerlinGeometry {
 		planeWidth: number,
 		planeHeight: number,
 		planeDepth: number
-	): BufferGeometry {
-		const geometry = new PlaneGeometry(
+	): I3JS.BufferGeometry {
+		const geometry = new N3JS.PlaneGeometry(
 			planeWidth,
 			planeDepth,
 			this.worldWidth - 1,
@@ -113,14 +111,14 @@ export class NgxPlanePerlinGeometry {
 		planeWidth: number,
 		planeHeight: number,
 		planeDepth: number
-	): BufferGeometry {
-		const planeGeometry = new PlaneGeometry(planeWidth, planeDepth);
+	): I3JS.BufferGeometry {
+		const planeGeometry = new N3JS.PlaneGeometry(planeWidth, planeDepth);
 		const geometry: {
-			px: BufferGeometry;
-			nx: BufferGeometry;
-			py: BufferGeometry;
-			pz: BufferGeometry;
-			nz: BufferGeometry;
+			px: I3JS.BufferGeometry;
+			nx: I3JS.BufferGeometry;
+			py: I3JS.BufferGeometry;
+			pz: I3JS.BufferGeometry;
+			nz: I3JS.BufferGeometry;
 		} = {
 			px: this.getGeometry(
 				planeGeometry,
@@ -153,12 +151,12 @@ export class NgxPlanePerlinGeometry {
 				{ x: 0, y: 0, z: -50 }
 			),
 		};
-		const geometries: BufferGeometry[] = [];
+		const geometries: I3JS.BufferGeometry[] = [];
 		const worldDepth = this.worldDepth;
 		const worldWidth = this.worldWidth;
 		const worldHalfWidth = worldWidth / 2;
 		const worldHalfDepth = worldDepth / 2;
-		const matrix = new Matrix4();
+		const matrix = new N3JS.Matrix4();
 		for (let z = 0; z < worldDepth; z++) {
 			for (let x = 0; x < worldWidth; x++) {
 				const h = this.getY(x, z);
@@ -186,7 +184,7 @@ export class NgxPlanePerlinGeometry {
 				}
 			}
 		}
-		return BufferGeometryUtils.mergeBufferGeometries(geometries);
+		return N3JS.GeometryUtils.mergeBufferGeometries(geometries);
 	}
 
 	/**
@@ -202,10 +200,10 @@ export class NgxPlanePerlinGeometry {
 		planeWidth: number,
 		planeHeight: number,
 		planeDepth: number,
-		light: Color,
-		shadow: Color
-	): BufferGeometry {
-		const planeGeometry = new PlaneGeometry(
+		light: I3JS.Color,
+		shadow: I3JS.Color
+	): I3JS.BufferGeometry {
+		const planeGeometry = new N3JS.PlaneGeometry(
 			planeWidth,
 			planeDepth
 		).toNonIndexed();
@@ -214,12 +212,12 @@ export class NgxPlanePerlinGeometry {
 			planeGeometry.attributes.position.clone()
 		);
 		const geometry: {
-			px: BufferGeometry;
-			nx: BufferGeometry;
-			py: BufferGeometry;
-			py2: BufferGeometry;
-			pz: BufferGeometry;
-			nz: BufferGeometry;
+			px: I3JS.BufferGeometry;
+			nx: I3JS.BufferGeometry;
+			py: I3JS.BufferGeometry;
+			py2: I3JS.BufferGeometry;
+			pz: I3JS.BufferGeometry;
+			nz: I3JS.BufferGeometry;
 		} = {
 			px: this.getGeometry(
 				planeGeometry,
@@ -264,12 +262,12 @@ export class NgxPlanePerlinGeometry {
 				[light, shadow, light, shadow, shadow, light]
 			),
 		};
-		const geometries: BufferGeometry[] = [];
+		const geometries: I3JS.BufferGeometry[] = [];
 		const worldDepth = this.worldDepth;
 		const worldWidth = this.worldWidth;
 		const worldHalfWidth = worldWidth / 2;
 		const worldHalfDepth = worldDepth / 2;
-		const matrix: Matrix4 = new Matrix4();
+		const matrix: I3JS.Matrix4 = new N3JS.Matrix4();
 		for (let z = 0; z < worldDepth; z++) {
 			for (let x = 0; x < worldWidth; x++) {
 				const h = this.getY(x, z);
@@ -363,7 +361,7 @@ export class NgxPlanePerlinGeometry {
 				}
 			}
 		}
-		return BufferGeometryUtils.mergeBufferGeometries(geometries);
+		return N3JS.GeometryUtils.mergeBufferGeometries(geometries);
 	}
 
 	/**
@@ -376,12 +374,12 @@ export class NgxPlanePerlinGeometry {
 	 * @returns geometry
 	 */
 	public getGeometry(
-		planeGeometry: BufferGeometry,
+		planeGeometry: I3JS.BufferGeometry,
 		uv: number[],
 		rotate: { x: number; y: number; z: number },
 		translate: { x: number; y: number; z: number },
-		colors?: Color[]
-	): BufferGeometry {
+		colors?: I3JS.Color[]
+	): I3JS.BufferGeometry {
 		const geometry = planeGeometry.clone() as any;
 		if (colors !== null && colors !== undefined && colors.length > 0) {
 			geometry.setAttribute('color', planeGeometry.attributes.position.clone());
@@ -413,12 +411,12 @@ export class NgxPlanePerlinGeometry {
 	 * @returns texture
 	 */
 	public getTexture(
-		sun: Vector3,
-		color: Color,
-		add: Color
+		sun: I3JS.Vector3,
+		color: I3JS.Color,
+		add: I3JS.Color
 	): HTMLCanvasElement {
 		let context, image, imageData, shade;
-		const vector3 = new Vector3(0, 0, 0);
+		const vector3 = new N3JS.Vector3(0, 0, 0);
 		sun.normalize();
 		const canvas = document.createElement('canvas');
 		canvas.width = this.worldWidth;

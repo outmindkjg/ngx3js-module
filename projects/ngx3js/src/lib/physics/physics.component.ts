@@ -8,13 +8,9 @@ import {
 } from '@angular/core';
 import * as Ammo from '../threejs-library/ammo';
 import * as AmmoType from '../threejs-library/ammo-type';
-
-import { ConvexObjectBreaker } from 'three/examples/jsm/misc/ConvexObjectBreaker';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxThreeUtil, N3JS, I3JS } from './../interface';
 import { NgxPhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
-import { AmmoPhysics } from '../threejs-library/AmmoPhysics';
-import { OimoPhysics } from '../threejs-library/OimoPhysics';
 import { IRendererTimer } from '../ngx-interface';
 
 /**
@@ -181,15 +177,15 @@ export class NgxPhysicsComponent
 	/**
 	 * Convex breaker of physics component
 	 */
-	private convexBreaker: ConvexObjectBreaker = null;
+	private convexBreaker: I3JS.ConvexObjectBreaker = null;
 
 	/**
 	 * Gets convex object breaker
 	 * @returns convex object breaker
 	 */
-	public getConvexObjectBreaker(): ConvexObjectBreaker {
+	public getConvexObjectBreaker(): I3JS.ConvexObjectBreaker {
 		if (this.convexBreaker === null) {
-			this.convexBreaker = new ConvexObjectBreaker();
+			this.convexBreaker = new N3JS.ConvexObjectBreaker();
 		}
 		return this.convexBreaker;
 	}
@@ -284,7 +280,7 @@ export class NgxPhysicsComponent
 			switch (this.type.toLowerCase()) {
 				case 'oimophysics':
 				case 'oimo':
-					OimoPhysics().then((physics: any) => {
+					N3JS.OimoPhysics().then((physics: any) => {
 						this.dispatcher = null;
 						this.physics = physics;
 						super.setObject(this.physics);
@@ -294,7 +290,7 @@ export class NgxPhysicsComponent
 					break;
 				case 'ammophysics':
 				case 'ammo':
-					AmmoPhysics().then((physics: any) => {
+					N3JS.AmmoPhysics().then((physics: any) => {
 						this.dispatcher = null;
 						this.physics = physics;
 						super.setObject(this.physics);

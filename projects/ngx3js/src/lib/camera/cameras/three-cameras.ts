@@ -1,4 +1,3 @@
-import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera';
 import { I3JS, N3JS } from '../../interface';
 
 /**
@@ -65,7 +64,7 @@ export class NgxCubeCamera extends N3JS.CubeCamera {
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/CinematicCamera) page for a live demo.
  *
  */
-export class NgxCinematicCamera extends CinematicCamera {
+export class NgxCinematicCamera extends N3JS.CinematicCamera {
 	/**
 	 * Creates an instance of ngx cinematic camera.
 	 *

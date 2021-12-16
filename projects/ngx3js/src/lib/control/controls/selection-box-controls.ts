@@ -1,5 +1,3 @@
-import { SelectionBox } from 'three/examples/jsm/interactive/SelectionBox';
-import { SelectionHelper } from 'three/examples/jsm/interactive/SelectionHelper';
 import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
 import { INgxColor } from '../../ngx-interface';
 
@@ -13,12 +11,12 @@ export class NgxSelectBoxControls {
 	/**
 	 * Selection box of select box controls
 	 */
-	public selectionBox: SelectionBox = null;
+	public selectionBox: I3JS.SelectionBox = null;
 
 	/**
 	 * The Helper of select box controls
 	 */
-	public helper: SelectionHelper = null;
+	public helper: I3JS.SelectionHelper = null;
 
 	/**
 	 * The Pointerup of select box controls
@@ -55,8 +53,8 @@ export class NgxSelectBoxControls {
 		scene: I3JS.Scene,
 		renderer: I3JS.WebGLRenderer
 	) {
-		this.selectionBox = new SelectionBox(camera as any, scene as any);
-		this.helper = new SelectionHelper(
+		this.selectionBox = new N3JS.SelectionBox(camera as any, scene as any);
+		this.helper = new N3JS.SelectionHelper(
 			this.selectionBox,
 			renderer as any,
 			'selectBox'

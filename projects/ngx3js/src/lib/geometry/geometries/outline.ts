@@ -1,4 +1,4 @@
-import { WireframeGeometry,BufferGeometry, Vector3, Plane, Float32BufferAttribute  } from 'three';
+import { N3JS, I3JS, NgxThreeUtil } from '../../interface';
 
 /**
  * The Outline geometry.
@@ -7,7 +7,7 @@ import { WireframeGeometry,BufferGeometry, Vector3, Plane, Float32BufferAttribut
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/OutlineGeometry) page for a live demo.
  *
  */
-export class NgxOutlineGeometry extends WireframeGeometry {
+export class NgxOutlineGeometry extends N3JS.WireframeGeometry {
 	/**
 	 * @param [innerRadius=0.5]
 	 * @param [outerRadius=1]
@@ -15,7 +15,7 @@ export class NgxOutlineGeometry extends WireframeGeometry {
 	 * @param [thetaStart=0]
 	 * @param [thetaLength=Math.PI * 2]
 	 */
-	constructor(geometry: BufferGeometry, scale: number = 1) {
+	constructor(geometry: I3JS.BufferGeometry, scale: number = 1) {
 		super(geometry as any);
 		this.type = 'OutlineGeometry';
 		if (scale !== 1) {
@@ -49,7 +49,7 @@ export class NgxOutlineGeometry extends WireframeGeometry {
 					const innerRadius = (parameters.innerRadius * 1) / scale;
 					const thetaStart = parameters.thetaStart;
 					const thetaLength = parameters.thetaLength;
-					const vertex = new Vector3();
+					const vertex = new N3JS.Vector3();
 					for (let i = 0; i < thetaSegments; i++) {
 						const segmentStart = thetaStart + (i / thetaSegments) * thetaLength;
 						vertex.x = outerRadius * Math.cos(segmentStart);
@@ -85,14 +85,14 @@ export class NgxOutlineGeometry extends WireframeGeometry {
 					const width_half = (parameters.width / 2) * scale;
 					const height_half = (parameters.height / 2) * scale;
 					const depth_half = (parameters.depth / 2) * scale;
-					const p1 = new Vector3(-width_half, height_half, -depth_half);
-					const p2 = new Vector3(-width_half, -height_half, -depth_half);
-					const p3 = new Vector3(width_half, -height_half, -depth_half);
-					const p4 = new Vector3(width_half, height_half, -depth_half);
-					const p5 = new Vector3(-width_half, height_half, depth_half);
-					const p6 = new Vector3(-width_half, -height_half, depth_half);
-					const p7 = new Vector3(width_half, -height_half, depth_half);
-					const p8 = new Vector3(width_half, height_half, depth_half);
+					const p1 = new N3JS.Vector3(-width_half, height_half, -depth_half);
+					const p2 = new N3JS.Vector3(-width_half, -height_half, -depth_half);
+					const p3 = new N3JS.Vector3(width_half, -height_half, -depth_half);
+					const p4 = new N3JS.Vector3(width_half, height_half, -depth_half);
+					const p5 = new N3JS.Vector3(-width_half, height_half, depth_half);
+					const p6 = new N3JS.Vector3(-width_half, -height_half, depth_half);
+					const p7 = new N3JS.Vector3(width_half, -height_half, depth_half);
+					const p8 = new N3JS.Vector3(width_half, height_half, depth_half);
 					vertices.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
 					vertices.push(p2.x, p2.y, p2.z, p3.x, p3.y, p3.z);
 					vertices.push(p3.x, p3.y, p3.z, p4.x, p4.y, p4.z);
@@ -111,10 +111,10 @@ export class NgxOutlineGeometry extends WireframeGeometry {
 				{
 					const width_half = (parameters.width / 2) * scale;
 					const height_half = (parameters.height / 2) * scale;
-					const p1 = new Vector3(-width_half, height_half, 0);
-					const p2 = new Vector3(-width_half, -height_half, 0);
-					const p3 = new Vector3(width_half, -height_half, 0);
-					const p4 = new Vector3(width_half, height_half, 0);
+					const p1 = new N3JS.Vector3(-width_half, height_half, 0);
+					const p2 = new N3JS.Vector3(-width_half, -height_half, 0);
+					const p3 = new N3JS.Vector3(width_half, -height_half, 0);
+					const p4 = new N3JS.Vector3(width_half, height_half, 0);
 					vertices.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
 					vertices.push(p2.x, p2.y, p2.z, p3.x, p3.y, p3.z);
 					vertices.push(p3.x, p3.y, p3.z, p4.x, p4.y, p4.z);
@@ -123,10 +123,10 @@ export class NgxOutlineGeometry extends WireframeGeometry {
 				break;
 			case 'SphereGeometry':
 				{
-					const p1 = new Vector3();
-					const p2 = new Vector3();
-					const zero = new Vector3(0, 0, 0);
-					const plane = new Plane();
+					const p1 = new N3JS.Vector3();
+					const p2 = new N3JS.Vector3();
+					const zero = new N3JS.Vector3(0, 0, 0);
+					const plane = new N3JS.Plane();
 					for (let i = 0; i < attrPosition.count; i += 2) {
 						p1.set(attrPosition.getX(i), attrPosition.getY(i), attrPosition.getZ(i));
 						p2.set(attrPosition.getX(i + 1), attrPosition.getY(i + 1), attrPosition.getZ(i + 1));
@@ -150,7 +150,7 @@ export class NgxOutlineGeometry extends WireframeGeometry {
 				break;
 		}
 		if (vertices.length > 0) {
-			this.setAttribute('position', new Float32BufferAttribute(vertices, 3));
+			this.setAttribute('position', new N3JS.Float32BufferAttribute(vertices, 3));
 		}
 	}
 
