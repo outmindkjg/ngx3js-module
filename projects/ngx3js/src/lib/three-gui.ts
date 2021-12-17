@@ -1,6 +1,6 @@
 import { INgxThreeGuiController } from "./ngx-interface";
 import { NgxThreeUtil } from "./three-util";
-import { GUI } from "./threejs-library/lil-gui";
+import { GUI } from "./threejs-library/three-core";
 
 /**
  * Three gui

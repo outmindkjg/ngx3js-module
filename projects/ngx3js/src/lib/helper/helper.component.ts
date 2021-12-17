@@ -661,8 +661,8 @@ export class NgxHelperComponent
 					if (NgxThreeUtil.isNotNull(csm.getControl)) {
 						csm = csm.getControl();
 					}
-					if (!(csm instanceof N3JS.CSM)) {
-						// csm = new CSM({ parent: new THREE.Scene() });
+					if (!(csm instanceof N3JS.CsmControls)) {
+						csm = new N3JS.CsmControls({ parent: new N3JS.Scene() });
 					}
 					const csmHelper = new N3JS.CSMHelper(csm);
 					basemesh = csmHelper as any;

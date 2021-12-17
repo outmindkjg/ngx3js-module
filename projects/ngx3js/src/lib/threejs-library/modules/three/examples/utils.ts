@@ -1,13 +1,11 @@
-import { CameraUtils as O3JS_CameraUtils } from 'three/examples/jsm/utils/CameraUtils';
-import { GeometryCompressionUtils as O3JS_GeometryCompressionUtils } from 'three/examples/jsm/utils/GeometryCompressionUtils';
-import { GeometryUtils as O3JS_GeometryUtils } from 'three/examples/jsm/utils/GeometryUtils';
 import * as O3JS_BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils';
-
-
+import * as O3JS_CameraUtils from 'three/examples/jsm/utils/CameraUtils';
+import * as O3JS_GeometryCompressionUtils from 'three/examples/jsm/utils/GeometryCompressionUtils';
+import * as O3JS_GeometryUtils from 'three/examples/jsm/utils/GeometryUtils';
 import { RoughnessMipmapper as O3JS_RoughnessMipmapper } from 'three/examples/jsm/utils/RoughnessMipmapper';
-import { SceneUtils as O3JS_SceneUtils } from 'three/examples/jsm/utils/SceneUtils';
+import * as O3JS_SceneUtils from 'three/examples/jsm/utils/SceneUtils';
 import { ShadowMapViewer as O3JS_ShadowMapViewer } from 'three/examples/jsm/utils/ShadowMapViewer';
-import { SkeletonUtils as O3JS_SkeletonUtils } from 'three/examples/jsm/utils/SkeletonUtils';
+import * as O3JS_SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils';
 import { UVsDebug as O3JS_UVsDebug } from 'three/examples/jsm/utils/UVsDebug';
 import * as I3JS from '../../../types/three/examples/utils';
 

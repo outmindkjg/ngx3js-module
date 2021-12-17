@@ -3,7 +3,6 @@ import { I3JS, N3JS, NgxThreeUtil } from './interface';
 import { TCanvasFunctionType } from './ngx-interface';
 import { NgxAbstractSubscribeComponent } from './subscribe.abstract';
 import { TextureUtils } from './texture/textureUtils';
-import { unzipSync } from './threejs-library/fflate.module';
 
 /**
  * The Abstract Texture component.
@@ -1091,7 +1090,7 @@ export class NgxAbstractTextureComponent
 								break;
 						}
 						this.fileLoader.load(NgxThreeUtil.getStoreUrl(image), (data) => {
-							const zip = unzipSync(new Uint8Array(data as ArrayBuffer));
+							const zip = N3JS.unzipSync(new Uint8Array(data as ArrayBuffer));
 							let fileName = (options.fileName || '').toLowerCase();
 							let fileObject: any = null;
 							Object.entries(zip).forEach(([key, value]) => {

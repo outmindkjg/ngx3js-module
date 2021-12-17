@@ -190,8 +190,8 @@ export const NodePostProcessing: NodePostProcessing = NODES.NodePostProcessing a
 export type CheckerNode = I3JS.CheckerNode;
 export const CheckerNode: CheckerNode = NODES.CheckerNode as any;
 
-export type NoiseNode = I3JS.NoiseNode;
-export const NoiseNode: NoiseNode = NODES.NoiseNode as any;
+// export type NoiseNode = I3JS.NoiseNode;
+// export const NoiseNode: NoiseNode = NODES.NoiseNode as any;
 
 export type BypassNode = I3JS.BypassNode;
 export const BypassNode: BypassNode = NODES.BypassNode as any;

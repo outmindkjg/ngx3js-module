@@ -1,5 +1,6 @@
 import { IShaderType } from './../../ngx-interface';
 import * as N3JS from './../../threejs-library/three-core';
+import * as I3JS from './../../threejs-library/three-interface';
 import { AttributesParticles } from './shader.attributes_particles';
 import { AttributeSizeColor } from './shader.attributes_size_color';
 import { AttributeSizeColor1 } from './shader.attributes_size_color1';
@@ -389,7 +390,7 @@ export class ShaderUtils {
 	}
 
 	public static getUniforms(key: string | IShaderType): {
-		[key: string]: THREE.IUniform;
+		[key: string]: I3JS.IUniform;
 	} {
 		if (key !== undefined && key !== null) {
 			if (typeof key === 'string') {

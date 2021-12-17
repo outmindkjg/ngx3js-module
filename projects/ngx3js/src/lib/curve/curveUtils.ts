@@ -174,7 +174,7 @@ export const CurveConf: {
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve) page for a live curve demo.
  *
  */
-export class CurveUtils {
+export class NgxCurveUtils {
 	/**
 	 * Adds curve
 	 * @param key

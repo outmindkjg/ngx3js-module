@@ -5,7 +5,7 @@ import {
 	CubicBezierCurve3 as O3JS_CubicBezierCurve3,
 	Curve as O3JS_Curve,
 	CurvePath as O3JS_CurvePath,
-	CurveUtils as O3JS_CurveUtils,
+	// CurveUtils as O3JS_CurveUtils,
 	DataUtils as O3JS_DataUtils,
 	EllipseCurve as O3JS_EllipseCurve,
 	ImageUtils as O3JS_ImageUtils,
@@ -20,7 +20,7 @@ import {
 	ShapeUtils as O3JS_ShapeUtils,
 	SplineCurve as O3JS_SplineCurve,
 	Vector2 as O3JS_Vector2,
-	Vector3 as O3JS_Vector3,
+	Vector3 as O3JS_Vector3
 } from 'three';
 import * as I3JS from '../../types/three/extras';
 
@@ -70,8 +70,8 @@ export const ShapePath: ShapePath = O3JS_ShapePath as any;
 export type ArcCurve = I3JS.ArcCurve;
 export const ArcCurve: ArcCurve = O3JS_ArcCurve as any;
 
-export type CurveUtils = I3JS.CurveUtils;
-export const CurveUtils: CurveUtils = O3JS_CurveUtils as any;
+// export type CurveUtils = I3JS.CurveUtils;
+// export const CurveUtils: CurveUtils = O3JS_CurveUtils as any;
 
 export type CatmullRomCurve3 = I3JS.CatmullRomCurve3;
 export const CatmullRomCurve3: CatmullRomCurve3 = O3JS_CatmullRomCurve3 as any;

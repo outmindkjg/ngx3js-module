@@ -9,7 +9,7 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import { NgxCurveComponent } from '../curve/curve.component';
-import { CurveUtils } from '../curve/curveUtils';
+import { NgxCurveUtils } from '../curve/curveUtils';
 import { NgxAbstractGeometryComponent } from '../geometry.abstract';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxLocalStorageService } from '../local-storage.service';
@@ -948,7 +948,7 @@ export class NgxGeometryComponent
 		let curveLine: I3JS.Curve<I3JS.Vector3> = null;
 		if (NgxThreeUtil.isNotNull(curve) && curve !== '') {
 			if (typeof curve === 'string') {
-				curveLine = CurveUtils.getCurve(
+				curveLine = NgxCurveUtils.getCurve(
 					curve,
 					NgxThreeUtil.getTypeSafe(this.scale, 1),
 					this.curveOption
@@ -970,7 +970,7 @@ export class NgxGeometryComponent
 		}
 		if (curveLine !== null) {
 			if (NgxThreeUtil.isNotNull(this.curveNormal) && this.curveNormal) {
-				return CurveUtils.getCurveNormal(curveLine, {
+				return NgxCurveUtils.getCurveNormal(curveLine, {
 					options: this.curveNormalOption,
 				});
 			} else {

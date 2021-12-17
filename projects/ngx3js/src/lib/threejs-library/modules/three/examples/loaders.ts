@@ -12,12 +12,14 @@ import { Font as O3JS_Font, FontLoader as O3JS_FontLoader } from 'three/examples
 import { GCodeLoader as O3JS_GCodeLoader } from 'three/examples/jsm/loaders/GCodeLoader';
 import { GLTFLoader as O3JS_GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { HDRCubeTextureLoader as O3JS_HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader';
-import { IFCLoader as O3JS_IFCLoader, IFCManager as O3JS_IFCManager, IFCModel as O3JS_IFCModel } from 'three/examples/jsm/loaders/IFCLoader';
+import {
+	IFCLoader as O3JS_IFCLoader
+} from 'three/examples/jsm/loaders/IFCLoader';
 import { KMZLoader as O3JS_KMZLoader } from 'three/examples/jsm/loaders/KMZLoader';
 import { KTX2Loader as O3JS_KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
 import { KTXLoader as O3JS_KTXLoader } from 'three/examples/jsm/loaders/KTXLoader';
 import { LDrawLoader as O3JS_LDrawLoader } from 'three/examples/jsm/loaders/LDrawLoader';
-import { LogLuvLoader as O3JS_LogLuvLoader } from 'three/examples/jsm/loaders/LogLuvLoader';
+// import { LogLuvLoader as O3JS_LogLuvLoader } from 'three/examples/jsm/loaders/LogLuvLoader';
 import { LottieLoader as O3JS_LottieLoader } from 'three/examples/jsm/loaders/LottieLoader';
 import { LUT3dlLoader as O3JS_LUT3dlLoader } from 'three/examples/jsm/loaders/LUT3dlLoader';
 import { LUTCubeLoader as O3JS_LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader';
@@ -39,14 +41,15 @@ import { STLLoader as O3JS_STLLoader } from 'three/examples/jsm/loaders/STLLoade
 import { SVGLoader as O3JS_SVGLoader } from 'three/examples/jsm/loaders/SVGLoader';
 import { TDSLoader as O3JS_TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
 import { TGALoader as O3JS_TGALoader } from 'three/examples/jsm/loaders/TGALoader';
-import { TiltLoader as O3JS_TiltLoader } from 'three/examples/jsm/loaders/TiltLoader';
 import { TTFLoader as O3JS_TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
-import { VOXLoader as O3JS_VOXLoader } from 'three/examples/jsm/loaders/VOXLoader';
+import { VOXLoader as O3JS_VOXLoader, VOXMesh as O3JS_VOXMesh } from 'three/examples/jsm/loaders/VOXLoader';
 import { VRMLLoader as O3JS_VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoader';
 import { VRMLoader as O3JS_VRMLoader } from 'three/examples/jsm/loaders/VRMLoader';
 import { VTKLoader as O3JS_VTKLoader } from 'three/examples/jsm/loaders/VTKLoader';
 import { XYZLoader as O3JS_XYZLoader } from 'three/examples/jsm/loaders/XYZLoader';
 import * as I3JS from '../../../types/three/examples/loaders';
+import { NodeMaterialLoader as O3JS_NodeMaterialLoader } from './NodeMaterialLoader';
+import { TiltLoader as O3JS_TiltLoader } from './TiltLoader';
 
 export type Rhino3dmLoader = I3JS.Rhino3dmLoader;
 export const Rhino3dmLoader: Rhino3dmLoader = O3JS_Rhino3dmLoader as any;
@@ -96,11 +99,11 @@ export const HDRCubeTextureLoader: HDRCubeTextureLoader = O3JS_HDRCubeTextureLoa
 export type IFCLoader = I3JS.IFCLoader;
 export const IFCLoader: IFCLoader = O3JS_IFCLoader as any;
 
-export type IFCManager = I3JS.IFCManager;
-export const IFCManager: IFCManager = O3JS_IFCManager as any;
+// export type IFCManager = I3JS.IFCManager;
+// export const IFCManager: IFCManager = O3JS_IFCManager as any;
 
-export type IFCModel = I3JS.IFCModel;
-export const IFCModel: IFCModel = O3JS_IFCModel as any;
+// export type IFCModel = I3JS.IFCModel;
+// export const IFCModel: IFCModel = O3JS_IFCModel as any;
 
 export type KMZLoader = I3JS.KMZLoader;
 export const KMZLoader: KMZLoader = O3JS_KMZLoader as any;
@@ -123,8 +126,8 @@ export const LUTCubeLoader: LUTCubeLoader = O3JS_LUTCubeLoader as any;
 export type LWOLoader = I3JS.LWOLoader;
 export const LWOLoader: LWOLoader = O3JS_LWOLoader as any;
 
-export type LogLuvLoader = I3JS.LogLuvLoader;
-export const LogLuvLoader: LogLuvLoader = O3JS_LogLuvLoader as any;
+// export type LogLuvLoader = I3JS.LogLuvLoader;
+// export const LogLuvLoader: LogLuvLoader = O3JS_LogLuvLoader as any;
 
 export type LottieLoader = I3JS.LottieLoader;
 export const LottieLoader: LottieLoader = O3JS_LottieLoader as any;
@@ -186,6 +189,9 @@ export const TTFLoader: TTFLoader = O3JS_TTFLoader as any;
 export type TiltLoader = I3JS.TiltLoader;
 export const TiltLoader: TiltLoader = O3JS_TiltLoader as any;
 
+export type VOXMesh = I3JS.VOXMesh;
+export const VOXMesh: VOXMesh = O3JS_VOXMesh as any;
+
 export type VOXLoader = I3JS.VOXLoader;
 export const VOXLoader: VOXLoader = O3JS_VOXLoader as any;
 
@@ -201,3 +207,5 @@ export const VTKLoader: VTKLoader = O3JS_VTKLoader as any;
 export type XYZLoader = I3JS.XYZLoader;
 export const XYZLoader: XYZLoader = O3JS_XYZLoader as any;
 
+export type NodeMaterialLoader = I3JS.NodeMaterialLoader;
+export const NodeMaterialLoader: NodeMaterialLoader = O3JS_NodeMaterialLoader as any;

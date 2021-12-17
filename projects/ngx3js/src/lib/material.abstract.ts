@@ -970,7 +970,7 @@ export class NgxAbstractMaterialComponent
 				if (NgxThreeUtil.isNotNull(control.getControl)) {
 					control = control.getControl();
 				}
-				if (control instanceof N3JS.CSM) {
+				if (control instanceof N3JS.CsmControls) {
 					control.setupMaterial(material);
 				}
 			}

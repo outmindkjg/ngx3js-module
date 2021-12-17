@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { CurvesNormal, CurveUtils } from '../../curve/curveUtils';
+import { CurvesNormal, NgxCurveUtils } from '../../curve/curveUtils';
 import {
 	I3JS,
 	N3JS,
@@ -286,7 +286,7 @@ export class NgxControllerItemComponent
 				curve = NgxThreeUtil.getTypeSafe(this.curve, 'line');
 				break;
 		}
-		return CurveUtils.getCurve(curve, 1, {
+		return NgxCurveUtils.getCurve(curve, 1, {
 			radiusInner: NgxThreeUtil.getTypeSafe(this.radiusInner, 0),
 			waveH: NgxThreeUtil.getTypeSafe(this.waveH, this.wave, 0),
 			waveR: NgxThreeUtil.getTypeSafe(this.waveR, this.wave, 0),

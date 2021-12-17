@@ -1,7 +1,7 @@
 import { Curves as O3JS_Curves } from 'three/examples/jsm/curves/CurveExtras';
 import { NURBSCurve as O3JS_NURBSCurve } from 'three/examples/jsm/curves/NURBSCurve';
 import { NURBSSurface as O3JS_NURBSSurface } from 'three/examples/jsm/curves/NURBSSurface';
-import { NURBSUtils as O3JS_NURBSUtils } from 'three/examples/jsm/curves/NURBSUtils';
+import * as O3JS_NURBSUtils from 'three/examples/jsm/curves/NURBSUtils';
 import * as I3JS from '../../../types/three/examples/curves';
 
 export type Curves = I3JS.Curves;

@@ -1,5 +1,4 @@
 import {
-	AnimationAction as O3JS_AnimationAction,
 	AnimationClip as O3JS_AnimationClip,
 	AnimationMixer as O3JS_AnimationMixer,
 	AnimationObjectGroup as O3JS_AnimationObjectGroup,
@@ -12,12 +11,12 @@ import {
 	PropertyMixer as O3JS_PropertyMixer,
 	QuaternionKeyframeTrack as O3JS_QuaternionKeyframeTrack,
 	StringKeyframeTrack as O3JS_StringKeyframeTrack,
-	VectorKeyframeTrack as O3JS_VectorKeyframeTrack,
+	VectorKeyframeTrack as O3JS_VectorKeyframeTrack
 } from 'three';
 import * as I3JS from '../../types/three/animation';
 
-export type AnimationAction = I3JS.AnimationAction;
-export const AnimationAction: AnimationAction = O3JS_AnimationAction as any;
+// export type AnimationAction = I3JS.AnimationAction;
+// export const AnimationAction: AnimationAction = O3JS_AnimationAction as any;
 
 export type AnimationClip = I3JS.AnimationClip;
 export const AnimationClip: AnimationClip = O3JS_AnimationClip as any;

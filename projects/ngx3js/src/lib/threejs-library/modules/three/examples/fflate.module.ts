@@ -14,6 +14,7 @@ version 0.6.9
 // However, the vast majority of the codebase has diverged from UZIP.js to increase performance and reduce bundle size.
 // Sometimes 0 will appear where -1 would be more appropriate. This is because using a uint
 // is better for memory in most engines (I *think*).
+// @ts-nocheck
 
 export {
     unzip,
@@ -43,4 +44,4 @@ export {
 	ZipDeflate,
 	ZipPassThrough,
 	Zlib,
-} from 'three/examples/jsm/libs/fflate.module.min';
+} from 'three/examples/jsm/libs/fflate.module';

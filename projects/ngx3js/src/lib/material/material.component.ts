@@ -23,7 +23,6 @@ import { NgxShaderComponent } from '../shader/shader.component';
 import { ShaderUtils } from '../shader/shaders/shaderUtils';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAbstractTextureComponent } from '../texture.abstract';
-import { NodeMaterialLoader } from '../threejs-library/NodeMaterialLoader';
 
 import * as NGX_MATERIAL from './index';
 
@@ -2985,8 +2984,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								}
 							});
 						}
-						const NodeMaterialLoaderAlias: any = NodeMaterialLoader;
-						const nodeMaterialLoader = new NodeMaterialLoaderAlias(
+						const nodeMaterialLoader = new N3JS.NodeMaterialLoader(
 							undefined,
 							modeMateriallibrary
 						);

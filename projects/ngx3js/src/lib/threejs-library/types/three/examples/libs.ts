@@ -1207,6 +1207,11 @@ export interface Stats {
 	setMode(id: number): void;
 }
 
+export interface GUI {
+	new(param : any) : this;
+}
+
+
 export interface Panel {
 	(name?: string, fg?: string, bg?: string): Panel;
 	dom: HTMLCanvasElement;
