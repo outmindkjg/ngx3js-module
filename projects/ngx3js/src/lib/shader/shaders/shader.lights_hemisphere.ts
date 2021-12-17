@@ -1,5 +1,7 @@
-import { Color } from 'three';
-export const LightsHemisphere = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const LightsHemisphere: IShaderType = {
 	vertexShader: `
   varying vec3 vWorldPosition;
   void main() {
@@ -20,8 +22,8 @@ export const LightsHemisphere = {
   }  
   `,
 	uniforms: {
-		topColor: { value: new Color(0x3284ff) },
-		bottomColor: { value: new Color(0xffffff) },
+		topColor: { value: NgxThreeUtil.getColorSafe(0x3284ff) },
+		bottomColor: { value: NgxThreeUtil.getColorSafe(0xffffff) },
 		offset: { value: 33 },
 		exponent: { value: 0.6 },
 	},

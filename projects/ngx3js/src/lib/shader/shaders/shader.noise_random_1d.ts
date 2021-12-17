@@ -1,4 +1,6 @@
-export const ShaderNoiseRandom1D = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderNoiseRandom1D: IShaderType = {
 	vertexShader: `
   varying vec2 vUv;
   void main() {

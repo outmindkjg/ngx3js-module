@@ -1,4 +1,6 @@
-export const ShaderDemo8 = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderDemo8: IShaderType = {
 	vertexShader: `
   void main() {
     vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );

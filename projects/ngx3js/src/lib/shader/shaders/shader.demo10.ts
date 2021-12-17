@@ -1,5 +1,7 @@
-import { Vector2 } from 'three';
-export const ShaderDemo10 = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderDemo10: IShaderType = {
 	vertexShader: `
 	uniform vec2 size;
 	out vec2 vUv;
@@ -27,6 +29,6 @@ export const ShaderDemo10 = {
 	uniforms: {
 		diffuse: { value: null } as any,
 		depth: { value: 55 },
-		size: { value: new Vector2(50, 50) },
+		size: { value: NgxThreeUtil.getVector2Safe(50, 50) },
 	},
 };

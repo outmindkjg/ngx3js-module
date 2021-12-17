@@ -1,6 +1,7 @@
-import { Color } from 'three';
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
 
-export const CustomAttributesLines = {
+export const CustomAttributesLines:IShaderType = {
 	vertexShader: `
   uniform float amplitude;
   attribute vec3 displacement;
@@ -23,6 +24,6 @@ export const CustomAttributesLines = {
 	uniforms: {
 		amplitude: { value: 5.0 },
 		opacity: { value: 0.3 },
-		color: { value: new Color(0xffffff) },
+		color: { value: NgxThreeUtil.getColorSafe(0xffffff) },
 	},
 };

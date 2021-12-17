@@ -1,5 +1,7 @@
-import { Vector3 } from 'three';
-export const PerlinShader = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const PerlinShader: IShaderType = {
 	vertexShader: `
   in vec3 position;
   uniform mat4 modelMatrix;
@@ -78,7 +80,7 @@ export const PerlinShader = {
   `,
 	uniforms: {
 		map: { value: null } as any,
-		cameraPos: { value: new Vector3() },
+		cameraPos: { value: NgxThreeUtil.getVector3Safe(0, 0, 0) },
 		threshold: { value: 0.6 },
 		steps: { value: 200 },
 	},

@@ -1,4 +1,6 @@
-export const ColorRandom = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ColorRandom:IShaderType = {
 	vertexShader: `
   varying vec2 vUv;
   void main() {

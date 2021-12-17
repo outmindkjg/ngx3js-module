@@ -1,5 +1,7 @@
-import { Vector2, Vector3 } from 'three';
-export const ShaderLava = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderLava: IShaderType = {
 	vertexShader: `
   uniform vec2 uvScale;
   varying vec2 vUv;
@@ -42,9 +44,9 @@ export const ShaderLava = {
   `,
 	uniforms: {
 		fogDensity: { value: 0.45 },
-		fogColor: { value: new Vector3(0, 0, 0) },
+		fogColor: { value: NgxThreeUtil.getVector3Safe(0, 0, 0) },
 		time: { value: 1 },
-		uvScale: { value: new Vector2(3.0, 1.0) },
+		uvScale: { value: NgxThreeUtil.getVector2Safe(3.0, 1.0) },
 		texture1: { value: null } as any,
 		texture2: { value: null } as any,
 	},

@@ -1,5 +1,6 @@
-import { Color } from 'three';
-export const AttributeSizeColor1 = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+export const AttributeSizeColor1: IShaderType = {
 	vertexShader: `
   attribute float size;
   attribute vec4 ca;
@@ -27,7 +28,7 @@ export const AttributeSizeColor1 = {
   `,
 	uniforms: {
 		amplitude: { value: 1.0 },
-		color: { value: new Color(0xffffff) },
+		color: { value: NgxThreeUtil.getColorSafe(0xffffff) },
 		pointTexture: { value: null } as any,
 	},
 };

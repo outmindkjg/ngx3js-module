@@ -541,3 +541,8 @@ export interface SplineCurve extends Curve<Vector2> {
 	 */
 	points: Vector2[];
 }
+
+export interface CurveVector2 extends Curve<Vector2> {}
+export interface CurveVector3 extends Curve<Vector3> {}
+export interface CurvePathVector2 extends CurvePath<Vector2> {}
+export interface CurvePathVector3 extends CurvePath<Vector3> {}

@@ -1,17 +1,12 @@
-import { ShaderPass } from './three/examples/index';
 import {
 	BufferAttribute,
-	BufferGeometry, CircleGeometry, Color, Curve, CurvePath, GLSLVersion,
-	InterleavedBufferAttribute,
+	BufferGeometry, Curve, CurvePath, InterleavedBufferAttribute,
 	Line,
 	Mesh,
-	Points,
-	RawShaderMaterial,
-	ShaderMaterial,
-	ShaderMaterialParameters, TrianglesDrawModes, Vector2, Vector3, WireframeGeometry
-} from './three/index';
-export * from './three/examples/index';
-export * from './three/index';
+	Points, TrianglesDrawModes, Vector2, Vector3
+} from './types/three/index';
+export * from './types/three/examples/index';
+export * from './types/three/index';
 
 export interface GeometryUtils {
 	mergeBufferAttributes(attributes: BufferAttribute[]): BufferAttribute;
@@ -46,7 +41,3 @@ export interface GeometryUtils {
 	gosper(size?: number): number[];
 }
 
-export interface CurveVector2 extends Curve<Vector2> {}
-export interface CurveVector3 extends Curve<Vector3> {}
-export interface CurvePathVector2 extends CurvePath<Vector2> {}
-export interface CurvePathVector3 extends CurvePath<Vector3> {}

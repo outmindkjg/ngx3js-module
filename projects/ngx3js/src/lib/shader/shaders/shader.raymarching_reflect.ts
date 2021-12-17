@@ -1,5 +1,7 @@
-import { Vector2, Matrix4 } from 'three';
-export const RaymarchingReflect = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const RaymarchingReflect: IShaderType = {
 	vertexShader: `
   attribute vec3 position;
   void main(void) {
@@ -128,8 +130,8 @@ export const RaymarchingReflect = {
   }
   `,
 	uniforms: {
-		resolution: { value: new Vector2() },
-		cameraWorldMatrix: { value: new Matrix4() },
-		cameraProjectionMatrixInverse: { value: new Matrix4() },
+		resolution: { value: NgxThreeUtil.getVector2Safe(0, 0) },
+		cameraWorldMatrix: { value: NgxThreeUtil.getMatrix4Safe(null) },
+		cameraProjectionMatrixInverse: { value: NgxThreeUtil.getMatrix4Safe(null) },
 	},
 };

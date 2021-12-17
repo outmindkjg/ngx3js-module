@@ -1,4 +1,6 @@
-export const ModifierTessellation = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ModifierTessellation: IShaderType = {
 	vertexShader: `
   uniform float amplitude;
   attribute vec3 customColor;

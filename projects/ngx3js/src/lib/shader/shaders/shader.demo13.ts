@@ -1,5 +1,7 @@
-import { Vector2 } from 'three';
-export const ShaderDemo13 = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderDemo13: IShaderType = {
 	vertexShader: `
   in vec3 position;
   in vec3 normal;
@@ -36,6 +38,6 @@ export const ShaderDemo13 = {
   `,
 	uniforms: {
 		tDiffuse: { value: null } as any,
-		repeat: { value: new Vector2(5, 0.5) },
+		repeat: { value: NgxThreeUtil.getVector2Safe(5, 0.5) },
 	},
 };

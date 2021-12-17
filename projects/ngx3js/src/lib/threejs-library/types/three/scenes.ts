@@ -6,6 +6,7 @@ import { WebGLRenderer } from './renderers';
 import { Texture } from './textures';
 
 export interface FogBase {
+    new() : this;
     name: string;
     color: Color;
     clone(): FogBase;

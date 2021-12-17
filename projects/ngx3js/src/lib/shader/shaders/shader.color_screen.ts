@@ -1,4 +1,6 @@
-export const ColorScreen = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ColorScreen:IShaderType = {
 	vertexShader: `
   varying vec2 vUv;
   void main() {

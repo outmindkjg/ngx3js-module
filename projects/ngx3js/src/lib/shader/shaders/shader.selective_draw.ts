@@ -1,4 +1,6 @@
-export const SelectiveDraw = {
+import { IShaderType } from '../../ngx-interface';
+
+export const SelectiveDraw: IShaderType = {
 	vertexShader: `
   attribute float visible;
   varying float vVisible;

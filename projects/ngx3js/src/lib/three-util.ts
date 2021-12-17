@@ -1,13 +1,20 @@
 import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
 import { NgxMeshComponent } from './mesh/mesh.component';
-import { ICssStyle, IGuiBaseControl, IGuiControlParam, IRendererTimer, ITagAttributes, INgxColor, INgxThreeGuiController } from "./ngx-interface";
-import { NgxThreeClock } from "./three-clock";
-import { NgxThreeStats } from "./three-stats";
+import {
+	ICssStyle,
+	IGuiBaseControl,
+	IGuiControlParam,
+	IRendererTimer,
+	ITagAttributes,
+	INgxColor,
+	INgxThreeGuiController,
+} from './ngx-interface';
+import { NgxThreeClock } from './three-clock';
+import { NgxThreeStats } from './three-stats';
 import * as Ammo from './threejs-library/ammo-type';
 import * as N3JS from './threejs-library/three-core';
 import * as I3JS from './threejs-library/three-interface';
-
 
 /**
  * Three util
@@ -15,7 +22,7 @@ import * as I3JS from './threejs-library/three-interface';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxThreeUtil) page for details.
  *
  */
- export class NgxThreeUtil {
+export class NgxThreeUtil {
 	/**
 	 * Css inject
 	 *
@@ -993,11 +1000,7 @@ import * as I3JS from './threejs-library/three-interface';
 	 * @param [altColor]
 	 * @returns color alpha safe
 	 */
-	public static getColorAlphaSafe(
-		color: INgxColor,
-		alpha: number,
-		altColor?: INgxColor
-	): I3JS.Color | I3JS.Vector4 {
+	public static getColorAlphaSafe(color: INgxColor, alpha: number, altColor?: INgxColor): I3JS.Color | I3JS.Vector4 {
 		const defColor = this.getColorSafe(color, altColor);
 		if (this.isNotNull(defColor)) {
 			if (this.isNotNull(alpha) && alpha >= 0 && alpha <= 1) {
@@ -1303,730 +1306,6 @@ import * as I3JS from './threejs-library/three-interface';
 			return new N3JS.Euler(0, 0, 0);
 		}
 		return undefined;
-	}
-
-	/**
-	 * Gets wrapping safe
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Wrapping
-	 * @see THREE.RepeatWrapping - RepeatWrapping, Repeat
-	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, MirroredRepeat
-	 * @see THREE.ClampToEdgeWrapping - ClampToEdgeWrapping, ClampToEdge
-	 *
-	 * @param baseWrap
-	 * @param [altWrap]
-	 * @param [def]
-	 * @returns wrapping safe
-	 */
-	public static getWrappingSafe(baseWrap: string, altWrap?: string, def?: string): I3JS.Wrapping {
-		const wrap = this.getTypeSafe(baseWrap, altWrap, def || '');
-		switch (wrap.toLowerCase()) {
-			case 'wraprepeat':
-			case 'repeatwrapping':
-			case 'repeat':
-				return N3JS.RepeatWrapping;
-			case 'mirroredrepeatwrapping':
-			case 'mirroredrepeat':
-				return N3JS.MirroredRepeatWrapping;
-			case 'clamptoedgewrapping':
-			case 'clamptoedge':
-				return N3JS.ClampToEdgeWrapping;
-			default:
-				return undefined;
-		}
-	}
-
-	/**
-	 * Gets texture filter safe
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureFilter
-	 * @see THREE.NearestFilter               - NearestFilter, Nearest
-	 * @see THREE.NearestMipmapNearestFilter  - NearestMipmapNearestFilter, nearestmipmapnearest
-	 * @see THREE.NearestMipmapLinearFilter   - NearestMipmapLinearFilter, nearestmipmaplinear
-	 * @see THREE.LinearMipmapNearestFilter   - LinearMipmapNearestFilter, linearmipmapnearest
-	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
-	 * @see THREE.LinearFilter                - Linearfilter, linear
-	 *
-	 * @param baseFilter
-	 * @param [altFilter]
-	 * @param [def]
-	 * @returns texture filter safe
-	 */
-	public static getTextureFilterSafe(baseFilter: string, altFilter?: string, def?: string): I3JS.TextureFilter {
-		const filter = this.getTypeSafe(baseFilter, altFilter, def || '');
-		switch (filter.toLowerCase()) {
-			case 'nearestfilter':
-			case 'nearest':
-				return N3JS.NearestFilter;
-			case 'nearestmipmapnearestfilter':
-			case 'nearestmipmapnearest':
-				return N3JS.NearestMipmapNearestFilter;
-			case 'nearestmipmaplinearfilter':
-			case 'nearestmipmaplinear':
-				return N3JS.NearestMipmapLinearFilter;
-			case 'linearmipmapnearestfilter':
-			case 'linearmipmapnearest':
-				return N3JS.LinearMipmapNearestFilter;
-			case 'linearmipmaplinearfilter':
-			case 'linearmipmaplinear':
-				return N3JS.LinearMipmapLinearFilter;
-			case 'linearfilter':
-			case 'linear':
-				return N3JS.LinearFilter;
-			default:
-				return undefined;
-		}
-	}
-
-	/**
-	 * Gets side
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Side
-	 * @see THREE.FrontSide - FrontSide , Front
-	 * @see THREE.BackSide - BackSide , Back
-	 * @see THREE.DoubleSide - DoubleSide , Double
-	 *
-	 * @param [def]
-	 * @returns side
-	 */
-	public static getSideSafe(baseSide: string, altSide?: string, def?: string): I3JS.Side {
-		const side = this.getTypeSafe(baseSide, altSide, def || '');
-		switch (side.toLowerCase()) {
-			case 'backside':
-			case 'back':
-				return N3JS.BackSide;
-			case 'doubleside':
-			case 'double':
-				return N3JS.DoubleSide;
-			case 'frontside':
-			case 'front':
-				return N3JS.FrontSide;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets shadow map type
-	 * @param [def]
-	 * @returns shadow map type
-	 */
-	public static getShadowMapTypeSafe(baseShadowMapType: string, def?: string): I3JS.ShadowMapType {
-		const shadowMapType = this.getTypeSafe(baseShadowMapType, def, '');
-		switch (shadowMapType.toLowerCase()) {
-			case 'basicshadowmap':
-			case 'basic':
-				return N3JS.BasicShadowMap;
-			case 'pcfshadowmap':
-			case 'pcf':
-				return N3JS.PCFShadowMap;
-			case 'vsmshadowmap':
-			case 'vsm':
-				return N3JS.VSMShadowMap;
-			case 'pcfsoftshadowmap':
-			case 'pcfsoft':
-			default:
-				return N3JS.PCFSoftShadowMap;
-		}
-	}
-
-	/**
-	 * Gets interpolation
-	 * @param [def]
-	 * @returns interpolation
-	 */
-	public static getInterpolationSafe(baseInterpolation: string, def?: string): I3JS.InterpolationModes {
-		const interpolation = this.getTypeSafe(baseInterpolation, def, '');
-		switch (interpolation.toLowerCase()) {
-			case 'interpolatediscrete':
-			case 'discrete':
-				return N3JS.InterpolateDiscrete;
-			case 'interpolatelinear':
-			case 'linear':
-				return N3JS.InterpolateLinear;
-			case 'interpolatesmooth':
-			case 'smooth':
-				return N3JS.InterpolateSmooth;
-			default:
-				return undefined;
-		}
-	}
-
-	/**
-	 * Gets normal map type
-	 * @param [def]
-	 * @returns normal map type
-	 */
-	public static getNormalMapTypeSafe(baseNormalMapType: string, def?: string): I3JS.NormalMapTypes {
-		const normalMapType = NgxThreeUtil.getTypeSafe(baseNormalMapType, def, '');
-		switch (normalMapType.toLowerCase()) {
-			case 'tangentspace':
-				return N3JS.TangentSpaceNormalMap;
-			case 'objectspace':
-				return N3JS.ObjectSpaceNormalMap;
-		}
-		return undefined;
-	}
-	/**
-	 * Gets stencil func
-	 * @param [def]
-	 * @returns stencil func
-	 */
-	public static getStencilFuncSafe(baseStencilFunc: string, def?: string): I3JS.StencilFunc {
-		const stencilFunc = NgxThreeUtil.getTypeSafe(baseStencilFunc, def, '');
-		switch (stencilFunc.toLowerCase()) {
-			case 'never':
-				return N3JS.NeverStencilFunc;
-			case 'less':
-				return N3JS.LessStencilFunc;
-			case 'equal':
-				return N3JS.EqualStencilFunc;
-			case 'lessequal':
-				return N3JS.LessEqualStencilFunc;
-			case 'greater':
-				return N3JS.GreaterStencilFunc;
-			case 'notequal':
-				return N3JS.NotEqualStencilFunc;
-			case 'greaterequal':
-				return N3JS.GreaterEqualStencilFunc;
-			case 'always':
-				return N3JS.AlwaysStencilFunc;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets stencil fail
-	 * @param [def]
-	 * @returns stencil fail
-	 */
-	public static getStencilOpSafe(baseStencilFail: string, def?: string): I3JS.StencilOp {
-		const stencilFail = this.getTypeSafe(baseStencilFail, def, '');
-		switch (stencilFail.toLowerCase()) {
-			case 'zero':
-				return N3JS.ZeroStencilOp;
-			case 'keep':
-				return N3JS.KeepStencilOp;
-			case 'replace':
-				return N3JS.ReplaceStencilOp;
-			case 'increment':
-				return N3JS.IncrementStencilOp;
-			case 'decrement':
-				return N3JS.DecrementStencilOp;
-			case 'incrementwrap':
-				return N3JS.IncrementWrapStencilOp;
-			case 'decrementwrap':
-				return N3JS.DecrementWrapStencilOp;
-			case 'invert':
-				return N3JS.InvertStencilOp;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
-	 * @default THREE.NormalBlending
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @param baseBlending
-	 * @param [altBlending]
-	 * @param [def]
-	 * @returns blending safe
-	 *
-	 * @see THREE.NoBlending - NoBlending, No
-	 * @see THREE.NormalBlending - NormalBlending, Normal
-	 * @see THREE.AdditiveBlending - AdditiveBlending, Additive
-	 * @see THREE.SubtractiveBlending - SubtractiveBlending, Subtractive
-	 * @see THREE.MultiplyBlending - MultiplyBlending, Multiply
-	 * @see THREE.CustomBlending - CustomBlending, Custom
-	 *
-	 */
-	public static getBlendingSafe(baseBlending: string, altBlending?: string, def?: string): I3JS.Blending {
-		const blending = this.getTypeSafe(baseBlending, altBlending, def || '');
-		switch (blending.toLowerCase()) {
-			case 'noblending':
-			case 'no':
-				return N3JS.NoBlending;
-			case 'normalblending':
-			case 'normal':
-				return N3JS.NormalBlending;
-			case 'additiveblending':
-			case 'additive':
-				return N3JS.AdditiveBlending;
-			case 'subtractiveblending':
-			case 'subtractive':
-				return N3JS.SubtractiveBlending;
-			case 'multiplyblending':
-			case 'multiply':
-				return N3JS.MultiplyBlending;
-			case 'customblending':
-			case 'custom':
-				return N3JS.CustomBlending;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets blend equation
-	 * @param [def]
-	 * @returns blend equation
-	 */
-	public static getBlendEquationSafe(baseBlendEquation: string, def?: string): I3JS.BlendingEquation {
-		const blendEquation = this.getTypeSafe(baseBlendEquation, def, '');
-		switch (blendEquation.toLowerCase()) {
-			case 'add':
-				return N3JS.AddEquation;
-			case 'subtract':
-				return N3JS.SubtractEquation;
-			case 'reversesubtract':
-				return N3JS.ReverseSubtractEquation;
-			case 'min':
-				return N3JS.MinEquation;
-			case 'max':
-				return N3JS.MaxEquation;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Which blending to use when displaying objects with this material.
-	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
-	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BlendingDstFactor
-	 * @see THREE.ZeroFactor - ZeroFactor , Zero
-	 * @see THREE.OneFactor - OneFactor , One
-	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
-	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
-	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
-	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
-	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
-	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
-	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
-	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
-	 *
-	 * @param [def]
-	 * @returns blend src
-	 */
-	public static getBlendDstSafe(baseBlendSrc: string, def?: string): I3JS.BlendingDstFactor {
-		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
-		switch (blendSrc.toLowerCase()) {
-			case 'zerofactor':
-			case 'zero':
-				return N3JS.ZeroFactor;
-			case 'onefactor':
-			case 'one':
-				return N3JS.OneFactor;
-			case 'srccolorfactor':
-			case 'srccolor':
-				return N3JS.SrcColorFactor;
-			case 'oneminussrccolorfactor':
-			case 'oneminussrccolor':
-				return N3JS.OneMinusSrcColorFactor;
-			case 'srcalphafactor':
-			case 'srcalpha':
-				return N3JS.SrcAlphaFactor;
-			case 'oneminussrcalphafactor':
-			case 'oneminussrcalpha':
-				return N3JS.OneMinusSrcAlphaFactor;
-			case 'dstalphafactor':
-			case 'dstalpha':
-				return N3JS.DstAlphaFactor;
-			case 'oneminusdstalphafactor':
-			case 'oneminusdstalpha':
-				return N3JS.OneMinusDstAlphaFactor;
-			case 'dstcolorfactor':
-			case 'dstcolor':
-				return N3JS.DstColorFactor;
-			case 'oneminusdstcolorfactor':
-			case 'oneminusdstcolor':
-				return N3JS.OneMinusDstColorFactor;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Which blending to use when displaying objects with this material.
-	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
-	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BlendingDstFactor
-	 * @see THREE.ZeroFactor - ZeroFactor , Zero
-	 * @see THREE.OneFactor - OneFactor , One
-	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
-	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
-	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
-	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
-	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
-	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
-	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
-	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
-	 *
-	 * @param [def]
-	 * @returns blend src
-	 */
-	public static getBlendSrcSafe(baseBlendSrc: string, def?: string): I3JS.BlendingSrcFactor {
-		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
-		switch (blendSrc.toLowerCase()) {
-			case 'srcalphasaturatefactor':
-			case 'srcalphasaturate':
-				return N3JS.SrcAlphaSaturateFactor;
-		}
-		return undefined;
-	}
-	/**
-	 * Gets depth func
-	 * @param [def]
-	 * @returns depth func
-	 */
-	public static getDepthModesSafe(baseDepthFunc: string, def?: string): I3JS.DepthModes {
-		const depthFunc = NgxThreeUtil.getTypeSafe(baseDepthFunc, def, '');
-		switch (depthFunc.toLowerCase()) {
-			case 'never':
-				return N3JS.NeverDepth;
-			case 'always':
-				return N3JS.AlwaysDepth;
-			case 'less':
-				return N3JS.LessDepth;
-			case 'lessequal':
-				return N3JS.LessEqualDepth;
-			case 'equal':
-				return N3JS.EqualDepth;
-			case 'greaterequal':
-				return N3JS.GreaterEqualDepth;
-			case 'greater':
-				return N3JS.GreaterDepth;
-			case 'notequal':
-				return N3JS.NotEqualDepth;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets precision
-	 * @param [def]
-	 * @returns precision
-	 */
-	public static getPrecisionSafe(basePrecision: string, def?: string): 'highp' | 'mediump' | 'lowp' | null {
-		const precision = this.getTypeSafe(basePrecision, def, '');
-		switch (precision.toLowerCase()) {
-			case 'highp':
-				return 'highp';
-			case 'mediump':
-				return 'mediump';
-			case 'lowp':
-				return 'lowp';
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets pixel format safe
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.PixelFormat
-	 * @see THREE.AlphaFormat - AlphaFormat, Alpha
-	 * @see THREE.RedFormat - RedFormat, Red
-	 * @see THREE.RedIntegerFormat - RedIntegerFormat, RedInteger
-	 * @see THREE.RGFormat - RGFormat, RG
-	 * @see THREE.RGIntegerFormat - RGIntegerFormat, RGInteger
-	 * @see THREE.RGBFormat - RGBFormat, RGB
-	 * @see THREE.RGBIntegerFormat - RGBIntegerFormat, RGBInteger
-	 * @see THREE.RGBAIntegerFormat - RGBAIntegerFormat, RGBAInteger
-	 * @see THREE.LuminanceFormat - LuminanceFormat, Luminance
-	 * @see THREE.LuminanceAlphaFormat - LuminanceAlphaFormat, LuminanceAlpha
-	 * @see THREE.RGBEFormat - RGBEFormat, RGBE
-	 * @see THREE.DepthFormat - DepthFormat, Depth
-	 * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
-	 * @see THREE.RGBAFormat - RGBAFormat, RGBA
-	 *
-	 * @param baseFormat
-	 * @param [altFormat]
-	 * @param [def]
-	 * @returns pixel format safe
-	 */
-	public static getPixelFormatSafe(baseFormat: string, altFormat?: string, def?: string): I3JS.PixelFormat {
-		const format = this.getTypeSafe(baseFormat, altFormat, def || '');
-		switch (format.toLowerCase()) {
-			case 'alphaformat':
-			case 'alpha':
-				return N3JS.AlphaFormat;
-			case 'redformat':
-			case 'red':
-				return N3JS.RedFormat;
-			case 'redintegerformat':
-			case 'redinteger':
-				return N3JS.RedIntegerFormat;
-			case 'rgformat':
-			case 'rg':
-				return N3JS.RGFormat;
-			case 'rgintegerformat':
-			case 'rginteger':
-				return N3JS.RGIntegerFormat;
-			case 'rgbformat':
-			case 'rgb':
-				return N3JS.RGBFormat;
-			case 'rgbintegerformat':
-			case 'rgbinteger':
-				return N3JS.RGBIntegerFormat;
-			case 'rgbaintegerformat':
-			case 'rgbainteger':
-				return N3JS.RGBAIntegerFormat;
-			case 'luminanceformat':
-			case 'luminance':
-				return N3JS.LuminanceFormat;
-			case 'luminancealphaformat':
-			case 'luminancealpha':
-				return N3JS.LuminanceAlphaFormat;
-			case 'rgbeformat':
-			case 'rgbe':
-				return N3JS.RGBEFormat;
-			case 'depthformat':
-			case 'depth':
-				return N3JS.DepthFormat;
-			case 'depthstencilformat':
-			case 'depthstencil':
-				return N3JS.DepthStencilFormat;
-			case 'rgbaformat':
-			case 'rgba':
-				return N3JS.RGBAFormat;
-			default:
-				break;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets combine
-	 * @param [def]
-	 * @returns combine
-	 */
-	public static getCombineSafe(baseCombine: string, def?: string): I3JS.Combine {
-		const combine = this.getTypeSafe(baseCombine, def, '');
-		switch (combine.toLowerCase()) {
-			case 'multiplyoperation':
-			case 'multiply':
-				return N3JS.MultiplyOperation;
-			case 'mixoperation':
-			case 'mix':
-				return N3JS.MixOperation;
-			case 'addoperation':
-			case 'add':
-				return N3JS.AddOperation;
-		}
-		return undefined;
-	}
-
-	/**
-	 * Gets depth packing
-	 * @param [def]
-	 * @returns depth packing
-	 */
-	public static getDepthPackingSafe(baseDepthPacking: string, def?: string): I3JS.DepthPackingStrategies {
-		const depthPacking = this.getTypeSafe(baseDepthPacking, def, '');
-		switch (depthPacking.toLowerCase()) {
-			case 'rgba':
-			case 'rgbadepth':
-				return N3JS.RGBADepthPacking;
-			case 'basic':
-			case 'basicdepth':
-			default:
-				return N3JS.BasicDepthPacking;
-		}
-	}
-
-	/**
-	 * Gets glsl version
-	 * @param [def]
-	 * @returns glsl version
-	 */
-	public static getGlslVersionSafe(baseGlslVersion: string, def?: string): I3JS.GLSLVersion {
-		const glslVersion = this.getTypeSafe(baseGlslVersion, def, '');
-		switch (glslVersion.toLowerCase()) {
-			case '1':
-			case 'gl1':
-			case 'glsl1':
-				return N3JS.GLSL1;
-			case '3':
-			case 'gl3':
-			case 'glsl3':
-				return N3JS.GLSL3;
-		}
-		return null;
-	}
-
-	/**
-	 * Gets blend mode
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AnimationBlendMode
-	 * @see THREE.NormalAnimationBlendMode - NormalAnimationBlendMode, NormalAnimation, Normal
-	 * @see THREE.AdditiveAnimationBlendMode - AdditiveAnimationBlendMode, AdditiveAnimation, Additive
-	 *
-	 * @param [def]
-	 * @returns blend mode
-	 */
-	public static getBlendModeSafe(baseBlendMode: string, def?: string): I3JS.AnimationBlendMode {
-		const blendMode = this.getTypeSafe(baseBlendMode, def, '');
-		switch (blendMode.toLowerCase()) {
-			case 'normalanimationblendmode':
-			case 'normalanimation':
-			case 'normal':
-				return N3JS.NormalAnimationBlendMode;
-			case 'additiveanimationblendmode':
-			case 'additiveanimation':
-			case 'additive':
-				return N3JS.AdditiveAnimationBlendMode;
-		}
-		return N3JS.NormalAnimationBlendMode;
-	}
-
-	/**
-	 * Gets loop
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AnimationActionLoopStyles
-	 * @see THREE.LoopOnce - LoopOnce, Once
-	 * @see THREE.LoopRepeat - LoopRepeat, Repeat
-	 * @see THREE.LoopPingPong - LoopPingPong, PingPong
-	 *
-	 * @param [def]
-	 * @returns loop
-	 */
-	public static getLoopSafe(baseLoop: string, def?: string): I3JS.AnimationActionLoopStyles {
-		const loop = this.getTypeSafe(baseLoop, def, '');
-		switch (loop.toLowerCase()) {
-			case 'looponce':
-			case 'once':
-				return N3JS.LoopOnce;
-			case 'looppingpong':
-			case 'pingpong':
-				return N3JS.LoopPingPong;
-			case 'looprepeat':
-			case 'repeat':
-			default:
-				return N3JS.LoopRepeat;
-		}
-	}
-
-	/**
-	 * Gets usage
-	 * @param [def]
-	 * @returns usage
-	 */
-	public static getUsageSafe(baseUsage: string, def?: string): I3JS.Usage {
-		const usage = NgxThreeUtil.getTypeSafe(baseUsage, def, '');
-		switch (usage.toLowerCase()) {
-			case 'streamdrawusage':
-			case 'streamdraw':
-				return N3JS.StreamDrawUsage;
-			case 'staticreadusage':
-			case 'staticread':
-				return N3JS.StaticReadUsage;
-			case 'dynamicreadusage':
-			case 'dynamicread':
-				return N3JS.DynamicReadUsage;
-			case 'streamreadusage':
-			case 'streamread':
-				return N3JS.StreamReadUsage;
-			case 'staticcopyusage':
-			case 'staticcopy':
-				return N3JS.StaticCopyUsage;
-			case 'dynamiccopyusage':
-			case 'dynamiccopy':
-				return N3JS.DynamicCopyUsage;
-			case 'streamcopyusage':
-			case 'streamcopy':
-				return N3JS.StreamCopyUsage;
-			case 'staticdrawusage':
-			case 'staticdraw':
-				return N3JS.StaticDrawUsage;
-			case 'dynamicdrawusage':
-			case 'dynamicdraw':
-			default:
-				return N3JS.DynamicDrawUsage;
-		}
-	}
-
-	/**
-	 * Gets texture data type safe
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureDataType
-	 * @see THREE.ByteType - ByteType, Byte
-	 * @see THREE.ShortType - ShortType, Short
-	 * @see THREE.UnsignedShortType - UnsignedShortType, UnsignedShort
-	 * @see THREE.IntType - IntType, Int
-	 * @see THREE.UnsignedIntType - UnsignedIntType, UnsignedInt
-	 * @see THREE.FloatType - FloatType, Float
-	 * @see THREE.HalfFloatType - HalfFloatType, HalfFloat
-	 * @see THREE.UnsignedShort4444Type - UnsignedShort4444Type, UnsignedShort4444
-	 * @see THREE.UnsignedShort5551Type - UnsignedShort5551Type, UnsignedShort5551
-	 * @see THREE.UnsignedShort565Type - UnsignedShort565Type, UnsignedShort565
-	 * @see THREE.UnsignedInt248Type - UnsignedInt248Type, UnsignedInt248
-	 * @see THREE.UnsignedByteType - UnsignedByteType, UnsignedByte
-	 *
-	 * @param baseFormat
-	 * @param [altFormat]
-	 * @param [def]
-	 * @returns texture data type safe
-	 */
-	public static getTextureDataTypeSafe(baseFormat: string, altFormat?: string, def?: string): I3JS.TextureDataType {
-		const type = this.getTypeSafe(baseFormat, altFormat, def || '');
-		switch (type.toLowerCase()) {
-			case 'bytetype':
-			case 'byte':
-				return N3JS.ByteType;
-			case 'shorttype':
-			case 'short':
-				return N3JS.ShortType;
-			case 'unsignedshorttype':
-			case 'unsignedshort':
-				return N3JS.UnsignedShortType;
-			case 'inttype':
-			case 'int':
-				return N3JS.IntType;
-			case 'unsignedinttype':
-			case 'unsignedint':
-				return N3JS.UnsignedIntType;
-			case 'floattype':
-			case 'float':
-				return N3JS.FloatType;
-			case 'halffloattype':
-			case 'halffloat':
-				return N3JS.HalfFloatType;
-			case 'unsignedshort4444type':
-			case 'unsignedshort4444':
-				return N3JS.UnsignedShort4444Type;
-			case 'unsignedshort5551type':
-			case 'unsignedshort5551':
-				return N3JS.UnsignedShort5551Type;
-			case 'unsignedshort565type':
-			case 'unsignedshort565':
-				return N3JS.UnsignedShort565Type;
-			case 'unsignedint248type':
-			case 'unsignedint248':
-				return N3JS.UnsignedInt248Type;
-			case 'unsignedbytetype':
-			case 'unsignedbyte':
-				return N3JS.UnsignedByteType;
-			default:
-				return undefined;
-		}
 	}
 
 	/**
@@ -2592,110 +1871,6 @@ import * as I3JS from './threejs-library/three-interface';
 	}
 
 	/**
-	 * Gets texture encoding safe
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureEncoding
-	 * @see THREE.sRGBEncoding - sRGBEncoding, sRGB
-	 * @see THREE.GammaEncoding - GammaEncoding, Gamma
-	 * @see THREE.RGBEEncoding - RGBEEncoding, RGBE
-	 * @see THREE.LogLuvEncoding - LogLuvEncoding, LogLuv
-	 * @see THREE.RGBM7Encoding - RGBM7Encoding, RGBM7
-	 * @see THREE.RGBM16Encoding - RGBM16Encoding, RGBM16
-	 * @see THREE.RGBDEncoding - RGBDEncoding, RGBD
-	 * @see THREE.LinearEncoding - LinearEncoding, Linear
-	 *
-	 * @param baseEncoding
-	 * @param [altEncoding]
-	 * @param [def]
-	 * @returns texture encoding safe
-	 */
-	public static getTextureEncodingSafe(
-		baseEncoding: string,
-		altEncoding?: string,
-		def?: string
-	): I3JS.TextureEncoding {
-		const encoding = this.getTypeSafe(baseEncoding, altEncoding, def || '');
-		switch (encoding.toLowerCase()) {
-			case 'srgbencoding':
-			case 'srgb':
-				return N3JS.sRGBEncoding;
-			case 'gammaencoding':
-			case 'gamma':
-				return N3JS.GammaEncoding;
-			case 'rgbeencoding':
-			case 'rgbe':
-				return N3JS.RGBEEncoding;
-			// case 'logluvencoding':
-			// case 'logluv':
-			//	return THREE.LogLuvEncoding;
-			case 'rgbm7encoding':
-			case 'rgbm7':
-				return N3JS.RGBM7Encoding;
-			case 'rgbm16encoding':
-			case 'rgbm16':
-				return N3JS.RGBM16Encoding;
-			case 'rgbdencoding':
-			case 'rgbd':
-				return N3JS.RGBDEncoding;
-			case 'linearencoding':
-			case 'linear':
-				return N3JS.LinearEncoding;
-			default:
-				return undefined;
-		}
-	}
-
-	/**
-	 * Gets mapping safe
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Mapping
-	 * @see THREE.UVMapping - UVMapping, UV
-	 * @see THREE.CubeReflectionMapping - CubeReflectionMapping, CubeReflection
-	 * @see THREE.CubeRefractionMapping - CubeRefractionMapping, CubeRefraction
-	 * @see THREE.EquirectangularReflectionMapping - EquirectangularReflectionMapping, EquirectangularReflection
-	 * @see THREE.EquirectangularRefractionMapping - EquirectangularRefractionMapping, EquirectangularRefraction
-	 * @see THREE.CubeUVReflectionMapping - CubeUVReflectionMapping, CubeUVReflection
-	 * @see THREE.CubeUVRefractionMapping - CubeUVRefractionMapping, CubeUVRefraction
-	 *
-	 * @param baseMapping
-	 * @param [altMapping]
-	 * @param [def]
-	 * @returns mapping safe
-	 */
-	public static getMappingSafe(baseMapping: string, altMapping?: string, def?: string): I3JS.Mapping {
-		const mapping = this.getTypeSafe(baseMapping, altMapping, def || '');
-		switch (mapping.toLowerCase()) {
-			case 'uvmapping':
-			case 'uv':
-				return N3JS.UVMapping;
-			case 'cubereflectionmapping':
-			case 'cubereflection':
-				return N3JS.CubeReflectionMapping;
-			case 'cuberefractionmapping':
-			case 'cuberefraction':
-				return N3JS.CubeRefractionMapping;
-			case 'equirectangularreflectionmapping':
-			case 'equirectangularreflection':
-				return N3JS.EquirectangularReflectionMapping;
-			case 'equirectangularrefractionmapping':
-			case 'equirectangularrefraction':
-				return N3JS.EquirectangularRefractionMapping;
-			case 'cubeuvreflectionmapping':
-			case 'cubeuvreflection':
-				return N3JS.CubeUVReflectionMapping;
-			case 'cubeuvrefractionmapping':
-			case 'cubeuvrefraction':
-				return N3JS.CubeUVRefractionMapping;
-			default:
-				return N3JS.DEFAULT_MAPPING;
-		}
-	}
-
-	/**
 	 * Gets cube image
 	 * @param cubeImage
 	 * @returns cube image
@@ -3173,7 +2348,11 @@ import * as I3JS from './threejs-library/three-interface';
 	 * @param params
 	 * @returns gui
 	 */
-	public static setupGui(control: any, gui: INgxThreeGuiController, params: IGuiControlParam[]): INgxThreeGuiController {
+	public static setupGui(
+		control: any,
+		gui: INgxThreeGuiController,
+		params: IGuiControlParam[]
+	): INgxThreeGuiController {
 		params.forEach((param) => {
 			const params = param.control ? control[param.control] : control;
 			if (this.isNotNull(params)) {
@@ -3230,5 +2409,1394 @@ import * as I3JS from './threejs-library/three-interface';
 		});
 		return gui;
 	}
-}
 
+	/**
+	 * Gets mouse safe
+	 * https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.button
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.MOUSE
+	 * @see THREE.MOUSE.LEFT - left
+	 * @see THREE.MOUSE.MIDDLE - middle
+	 * @see THREE.MOUSE.RIGHT - right
+	 * @see THREE.MOUSE.ROTATE - rotate
+	 * @see THREE.MOUSE.DOLLY - dolly
+	 * @see THREE.MOUSE.PAN - pan
+	 *
+	 * @param baseMouse
+	 * @param [altMouse]
+	 * @param [def]
+	 * @returns mouse safe
+	 */
+	public static getMouseSafe(baseMouse: string, altMouse?: string, def?: string): I3JS.MOUSE {
+		const mouse = this.getTypeSafe(baseMouse, altMouse, def || '');
+		switch (mouse.toLowerCase()) {
+			case 'left':
+				return I3JS.MOUSE.LEFT;
+			case 'middle':
+				return I3JS.MOUSE.MIDDLE;
+			case 'right':
+				return I3JS.MOUSE.RIGHT;
+			case 'rotate':
+				return I3JS.MOUSE.ROTATE;
+			case 'dolly':
+				return I3JS.MOUSE.DOLLY;
+			case 'pan':
+				return I3JS.MOUSE.PAN;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets touch safe
+	 * https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.button
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.TOUCH
+	 * @see THREE.TOUCH.ROTATE - rotate
+	 * @see THREE.TOUCH.PAN - pan
+	 * @see THREE.TOUCH.DOLLY_PAN - dollypan, dolly_pan
+	 * @see THREE.TOUCH.DOLLY_ROTATE - dollyrotate, dolly_rotate
+	 *
+	 * @param baseTouch
+	 * @param [altTouch]
+	 * @param [def]
+	 * @returns touch safe
+	 */
+	public static getTouchSafe(baseTouch: string, altTouch?: string, def?: string): I3JS.TOUCH {
+		const touch = this.getTypeSafe(baseTouch, altTouch, def || '');
+		switch (touch.toLowerCase()) {
+			case 'rotate':
+				return I3JS.TOUCH.ROTATE;
+			case 'pan':
+				return I3JS.TOUCH.PAN;
+			case 'dolly_pan':
+			case 'dollypan':
+				return I3JS.TOUCH.DOLLY_PAN;
+			case 'dolly_rotate':
+			case 'dollyrotate':
+				return I3JS.TOUCH.DOLLY_ROTATE;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets CullFace safe
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.CullFace
+	 * @see THREE.CullFaceNone - none
+	 * @see THREE.CullFaceBack - back
+	 * @see THREE.CullFaceFront - front
+	 * @see THREE.CullFaceFrontBack - frontback
+	 *
+	 * @param baseTouch
+	 * @param [altTouch]
+	 * @param [def]
+	 * @returns CullFace safe
+	 */
+	public static getCullFaceSafe(baseCullFace: string, altCullFace?: string, def?: string): I3JS.CullFace {
+		const cullFace = this.getTypeSafe(baseCullFace, altCullFace, def || '');
+		switch (cullFace.toLowerCase()) {
+			case 'none':
+				return I3JS.CullFace.CullFaceNone;
+			case 'back':
+				return I3JS.CullFace.CullFaceBack;
+			case 'front':
+				return I3JS.CullFace.CullFaceFront;
+			case 'frontback':
+				return I3JS.CullFace.CullFaceFrontBack;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets Shadowing Type
+	 *
+	 * @param baseShadowMapType
+	 * @param [def]
+	 * @returns shadow map type safe
+	 */
+	public static getShadowMapTypeSafe(baseShadowMapType: string, def?: string): I3JS.ShadowMapType {
+		const shadowMapType = this.getTypeSafe(baseShadowMapType, def, '');
+		switch (shadowMapType.toLowerCase()) {
+			case 'basicshadowmap':
+			case 'basic':
+				return I3JS.ShadowMapType.BasicShadowMap;
+			case 'pcfshadowmap':
+			case 'pcf':
+				return I3JS.ShadowMapType.PCFShadowMap;
+			case 'vsmshadowmap':
+			case 'vsm':
+				return I3JS.ShadowMapType.VSMShadowMap;
+			case 'pcfsoftshadowmap':
+			case 'pcfsoft':
+			default:
+				return I3JS.ShadowMapType.PCFSoftShadowMap;
+		}
+	}
+
+	/**
+	 * Gets side
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.Side
+	 * @see THREE.FrontSide - FrontSide , Front
+	 * @see THREE.BackSide - BackSide , Back
+	 * @see THREE.DoubleSide - DoubleSide , Double
+	 *
+	 * @param [def]
+	 * @returns side
+	 */
+	public static getSideSafe(baseSide: string, altSide?: string, def?: string): I3JS.Side {
+		const side = this.getTypeSafe(baseSide, altSide, def || '');
+		switch (side.toLowerCase()) {
+			case 'backside':
+			case 'back':
+				return I3JS.Side.BackSide;
+			case 'doubleside':
+			case 'double':
+				return I3JS.Side.DoubleSide;
+			case 'frontside':
+			case 'front':
+				return I3JS.Side.FrontSide;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets Shading
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.Shading
+	 * @see THREE.FlatShading - Flat
+	 * @see THREE.SmoothShading - Smooth
+	 *
+	 * @param [def]
+	 * @returns Shading
+	 */
+	public static getShadingSafe(baseSide: string, altSide?: string, def?: string): I3JS.Shading {
+		const side = this.getTypeSafe(baseSide, altSide, def || '');
+		switch (side.toLowerCase()) {
+			case 'flat':
+				return I3JS.Shading.FlatShading;
+			case 'smooth':
+				return I3JS.Shading.SmoothShading;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
+	 *
+	 * @default THREE.NormalBlending
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.NoBlending - NoBlending, No
+	 * @see THREE.NormalBlending - NormalBlending, Normal
+	 * @see THREE.AdditiveBlending - AdditiveBlending, Additive
+	 * @see THREE.SubtractiveBlending - SubtractiveBlending, Subtractive
+	 * @see THREE.MultiplyBlending - MultiplyBlending, Multiply
+	 * @see THREE.CustomBlending - CustomBlending, Custom
+	 *
+	 * @param baseBlending
+	 * @param [altBlending]
+	 * @param [def]
+	 * @returns blending safe
+	 *
+	 *
+	 */
+	public static getBlendingSafe(baseBlending: string, altBlending?: string, def?: string): I3JS.Blending {
+		const blending = this.getTypeSafe(baseBlending, altBlending, def || '');
+		switch (blending.toLowerCase()) {
+			case 'noblending':
+			case 'no':
+				return I3JS.Blending.NoBlending;
+			case 'normalblending':
+			case 'normal':
+				return I3JS.Blending.NormalBlending;
+			case 'additiveblending':
+			case 'additive':
+				return I3JS.Blending.AdditiveBlending;
+			case 'subtractiveblending':
+			case 'subtractive':
+				return I3JS.Blending.SubtractiveBlending;
+			case 'multiplyblending':
+			case 'multiply':
+				return I3JS.Blending.MultiplyBlending;
+			case 'customblending':
+			case 'custom':
+				return I3JS.Blending.CustomBlending;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets blend equation
+	 * custom blending equations (numbers start from 100 not to clash with other mappings to OpenGL constants defined in Texture.js)
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.AddEquation - Add
+	 * @see THREE.SubtractEquation - Subtract
+	 * @see THREE.ReverseSubtractEquation - ReverseSubtract, Reverse
+	 * @see THREE.MinEquation - Nin
+	 * @see THREE.MaxEquation - Max
+	 *
+	 * @param [def]
+	 * @returns blend equation
+	 */
+	public static getBlendEquationSafe(baseBlendEquation: string, def?: string): I3JS.BlendingEquation {
+		const blendEquation = this.getTypeSafe(baseBlendEquation, def, '');
+		switch (blendEquation.toLowerCase()) {
+			case 'add':
+				return I3JS.BlendingEquation.AddEquation;
+			case 'subtract':
+				return I3JS.BlendingEquation.SubtractEquation;
+			case 'reverse':
+			case 'reversesubtract':
+				return I3JS.BlendingEquation.ReverseSubtractEquation;
+			case 'min':
+				return I3JS.BlendingEquation.MinEquation;
+			case 'max':
+				return I3JS.BlendingEquation.MaxEquation;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Which blending to use when displaying objects with this material.
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.BlendingDstFactor
+	 * @see THREE.ZeroFactor - ZeroFactor , Zero
+	 * @see THREE.OneFactor - OneFactor , One
+	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
+	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
+	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
+	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
+	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
+	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
+	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
+	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
+	 *
+	 * @param [def]
+	 * @returns blend src
+	 */
+	public static getBlendDstSafe(baseBlendSrc: string, def?: string): I3JS.BlendingDstFactor {
+		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
+		switch (blendSrc.toLowerCase()) {
+			case 'zerofactor':
+			case 'zero':
+				return I3JS.BlendingDstFactor.ZeroFactor;
+			case 'onefactor':
+			case 'one':
+				return I3JS.BlendingDstFactor.OneFactor;
+			case 'srccolorfactor':
+			case 'srccolor':
+				return I3JS.BlendingDstFactor.SrcColorFactor;
+			case 'oneminussrccolorfactor':
+			case 'oneminussrccolor':
+				return I3JS.BlendingDstFactor.OneMinusSrcColorFactor;
+			case 'srcalphafactor':
+			case 'srcalpha':
+				return I3JS.BlendingDstFactor.SrcAlphaFactor;
+			case 'oneminussrcalphafactor':
+			case 'oneminussrcalpha':
+				return I3JS.BlendingDstFactor.OneMinusSrcAlphaFactor;
+			case 'dstalphafactor':
+			case 'dstalpha':
+				return I3JS.BlendingDstFactor.DstAlphaFactor;
+			case 'oneminusdstalphafactor':
+			case 'oneminusdstalpha':
+				return I3JS.BlendingDstFactor.OneMinusDstAlphaFactor;
+			case 'dstcolorfactor':
+			case 'dstcolor':
+				return I3JS.BlendingDstFactor.DstColorFactor;
+			case 'oneminusdstcolorfactor':
+			case 'oneminusdstcolor':
+				return I3JS.BlendingDstFactor.OneMinusDstColorFactor;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Which blending to use when displaying objects with this material.
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.BlendingSrcFactor
+	 * @see THREE.SrcAlphaSaturateFactor - SrcAlphaSaturateFactor , SrcAlphaSaturate, SrcAlpha
+	 *
+	 * @param [def]
+	 * @returns blend src
+	 */
+	public static getBlendSrcSafe(baseBlendSrc: string, def?: string): I3JS.BlendingSrcFactor {
+		const blendSrc = this.getTypeSafe(baseBlendSrc, def, '');
+		switch (blendSrc.toLowerCase()) {
+			case 'srcalphasaturatefactor':
+			case 'srcalphasaturate':
+				return I3JS.BlendingSrcFactor.SrcAlphaSaturateFactor;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets depth func
+	 *
+	 * @param [def]
+	 * @returns depth func
+	 */
+	public static getDepthModesSafe(baseDepthFunc: string, def?: string): I3JS.DepthModes {
+		const depthFunc = NgxThreeUtil.getTypeSafe(baseDepthFunc, def, '');
+		switch (depthFunc.toLowerCase()) {
+			case 'never':
+				return I3JS.DepthModes.NeverDepth;
+			case 'always':
+				return I3JS.DepthModes.AlwaysDepth;
+			case 'less':
+				return I3JS.DepthModes.LessDepth;
+			case 'lessequal':
+				return I3JS.DepthModes.LessEqualDepth;
+			case 'equal':
+				return I3JS.DepthModes.EqualDepth;
+			case 'greaterequal':
+				return I3JS.DepthModes.GreaterEqualDepth;
+			case 'greater':
+				return I3JS.DepthModes.GreaterDepth;
+			case 'notequal':
+				return I3JS.DepthModes.NotEqualDepth;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets combine
+	 * @param [def]
+	 * @returns combine
+	 */
+	public static getCombineSafe(baseCombine: string, def?: string): I3JS.Combine {
+		const combine = this.getTypeSafe(baseCombine, def, '');
+		switch (combine.toLowerCase()) {
+			case 'multiplyoperation':
+			case 'multiply':
+				return N3JS.MultiplyOperation;
+			case 'mixoperation':
+			case 'mix':
+				return N3JS.MixOperation;
+			case 'addoperation':
+			case 'add':
+				return N3JS.AddOperation;
+		}
+		return undefined;
+	}
+
+	/**
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.ToneMapping
+	 * @see THREE.NoToneMapping - No
+	 * @see THREE.LinearToneMapping - Linear
+	 * @see THREE.ReinhardToneMapping - Reinhard
+	 * @see THREE.CineonToneMapping - Cineon
+	 * @see THREE.ACESFilmicToneMapping - ACESFilmic
+	 * @see THREE.CustomToneMapping - Custom
+	 *
+	 * @param [def]
+	 * @returns toneMapping
+	 */
+	public static getToneMappingSafe(baseToneMapping: string, def?: string): I3JS.ToneMapping {
+		const toneMapping = this.getTypeSafe(baseToneMapping, def, '');
+		switch (toneMapping.toLowerCase()) {
+			case 'no':
+				return I3JS.ToneMapping.NoToneMapping;
+			case 'linear':
+				return I3JS.ToneMapping.LinearToneMapping;
+			case 'reinhard':
+				return I3JS.ToneMapping.ReinhardToneMapping;
+			case 'cineon':
+				return I3JS.ToneMapping.CineonToneMapping;
+			case 'acesfilmic':
+				return I3JS.ToneMapping.ACESFilmicToneMapping;
+			case 'custom':
+				return I3JS.ToneMapping.CustomToneMapping;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets mapping safe
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.Mapping
+	 * @see THREE.UVMapping - UVMapping, UV
+	 * @see THREE.CubeReflectionMapping - CubeReflectionMapping, CubeReflection
+	 * @see THREE.CubeRefractionMapping - CubeRefractionMapping, CubeRefraction
+	 * @see THREE.EquirectangularReflectionMapping - EquirectangularReflectionMapping, EquirectangularReflection
+	 * @see THREE.EquirectangularRefractionMapping - EquirectangularRefractionMapping, EquirectangularRefraction
+	 * @see THREE.CubeUVReflectionMapping - CubeUVReflectionMapping, CubeUVReflection
+	 * @see THREE.CubeUVRefractionMapping - CubeUVRefractionMapping, CubeUVRefraction
+	 *
+	 * @param baseMapping
+	 * @param [altMapping]
+	 * @param [def]
+	 * @returns mapping safe
+	 */
+	public static getMappingSafe(baseMapping: string, altMapping?: string, def?: string): I3JS.Mapping {
+		const mapping = this.getTypeSafe(baseMapping, altMapping, def || '');
+		switch (mapping.toLowerCase()) {
+			case 'uvmapping':
+			case 'uv':
+				return I3JS.Mapping.UVMapping;
+			case 'cubereflectionmapping':
+			case 'cubereflection':
+				return I3JS.Mapping.CubeReflectionMapping;
+			case 'cuberefractionmapping':
+			case 'cuberefraction':
+				return I3JS.Mapping.CubeRefractionMapping;
+			case 'equirectangularreflectionmapping':
+			case 'equirectangularreflection':
+				return I3JS.Mapping.EquirectangularReflectionMapping;
+			case 'equirectangularrefractionmapping':
+			case 'equirectangularrefraction':
+				return I3JS.Mapping.EquirectangularRefractionMapping;
+			case 'cubeuvreflectionmapping':
+			case 'cubeuvreflection':
+				return I3JS.Mapping.CubeUVReflectionMapping;
+			case 'cubeuvrefractionmapping':
+			case 'cubeuvrefraction':
+				return I3JS.Mapping.CubeUVRefractionMapping;
+			default:
+				return N3JS.DEFAULT_MAPPING;
+		}
+	}
+
+	/**
+	 * Gets wrapping safe
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.Wrapping
+	 * @see THREE.RepeatWrapping - RepeatWrapping, Repeat
+	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, MirroredRepeat
+	 * @see THREE.ClampToEdgeWrapping - ClampToEdgeWrapping, ClampToEdge
+	 *
+	 * @param baseWrap
+	 * @param [altWrap]
+	 * @param [def]
+	 * @returns wrapping safe
+	 */
+	public static getWrappingSafe(baseWrap: string, altWrap?: string, def?: string): I3JS.Wrapping {
+		const wrap = this.getTypeSafe(baseWrap, altWrap, def || '');
+		switch (wrap.toLowerCase()) {
+			case 'wraprepeat':
+			case 'repeatwrapping':
+			case 'repeat':
+				return I3JS.Wrapping.RepeatWrapping;
+			case 'mirroredrepeatwrapping':
+			case 'mirroredrepeat':
+				return I3JS.Wrapping.MirroredRepeatWrapping;
+			case 'clamptoedgewrapping':
+			case 'clamptoedge':
+				return I3JS.Wrapping.ClampToEdgeWrapping;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets texture filter safe
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.TextureFilter
+	 * @see THREE.NearestFilter               - NearestFilter, Nearest
+	 * @see THREE.NearestMipmapNearestFilter  - NearestMipmapNearestFilter, nearestmipmapnearest
+	 * @see THREE.NearestMipmapLinearFilter   - NearestMipmapLinearFilter, nearestmipmaplinear
+	 * @see THREE.LinearMipmapNearestFilter   - LinearMipmapNearestFilter, linearmipmapnearest
+	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
+	 * @see THREE.LinearFilter                - Linearfilter, linear
+	 *
+	 * @param baseFilter
+	 * @param [altFilter]
+	 * @param [def]
+	 * @returns texture filter safe
+	 */
+	public static getTextureFilterSafe(baseFilter: string, altFilter?: string, def?: string): I3JS.TextureFilter {
+		const filter = this.getTypeSafe(baseFilter, altFilter, def || '');
+		switch (filter.toLowerCase()) {
+			case 'nearestfilter':
+			case 'nearest':
+				return I3JS.TextureFilter.NearestFilter;
+			case 'nearestmipmapnearestfilter':
+			case 'nearestmipmapnearest':
+				return I3JS.TextureFilter.NearestMipmapNearestFilter;
+			case 'nearestmipmaplinearfilter':
+			case 'nearestmipmaplinear':
+				return I3JS.TextureFilter.NearestMipmapLinearFilter;
+			case 'linearmipmapnearestfilter':
+			case 'linearmipmapnearest':
+				return I3JS.TextureFilter.LinearMipmapNearestFilter;
+			case 'linearmipmaplinearfilter':
+			case 'linearmipmaplinear':
+				return I3JS.TextureFilter.LinearMipmapLinearFilter;
+			case 'linearfilter':
+			case 'linear':
+				return I3JS.TextureFilter.LinearFilter;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets texture data type safe
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.TextureDataType
+	 * @see THREE.ByteType - ByteType, Byte
+	 * @see THREE.ShortType - ShortType, Short
+	 * @see THREE.UnsignedShortType - UnsignedShortType, UnsignedShort
+	 * @see THREE.IntType - IntType, Int
+	 * @see THREE.UnsignedIntType - UnsignedIntType, UnsignedInt
+	 * @see THREE.FloatType - FloatType, Float
+	 * @see THREE.HalfFloatType - HalfFloatType, HalfFloat
+	 * @see THREE.UnsignedShort4444Type - UnsignedShort4444Type, UnsignedShort4444
+	 * @see THREE.UnsignedShort5551Type - UnsignedShort5551Type, UnsignedShort5551
+	 * @see THREE.UnsignedShort565Type - UnsignedShort565Type, UnsignedShort565
+	 * @see THREE.UnsignedInt248Type - UnsignedInt248Type, UnsignedInt248
+	 * @see THREE.UnsignedByteType - UnsignedByteType, UnsignedByte
+	 *
+	 * @param baseFormat
+	 * @param [altFormat]
+	 * @param [def]
+	 * @returns texture data type safe
+	 */
+	public static getTextureDataTypeSafe(baseFormat: string, altFormat?: string, def?: string): I3JS.TextureDataType {
+		const type = this.getTypeSafe(baseFormat, altFormat, def || '');
+		switch (type.toLowerCase()) {
+			case 'bytetype':
+			case 'byte':
+				return I3JS.TextureDataType.ByteType;
+			case 'shorttype':
+			case 'short':
+				return I3JS.TextureDataType.ShortType;
+			case 'unsignedshorttype':
+			case 'unsignedshort':
+				return I3JS.TextureDataType.UnsignedShortType;
+			case 'inttype':
+			case 'int':
+				return I3JS.TextureDataType.IntType;
+			case 'unsignedinttype':
+			case 'unsignedint':
+				return I3JS.TextureDataType.UnsignedIntType;
+			case 'floattype':
+			case 'float':
+				return I3JS.TextureDataType.FloatType;
+			case 'halffloattype':
+			case 'halffloat':
+				return I3JS.TextureDataType.HalfFloatType;
+			case 'unsignedshort4444type':
+			case 'unsignedshort4444':
+				return I3JS.TextureDataType.UnsignedShort4444Type;
+			case 'unsignedshort5551type':
+			case 'unsignedshort5551':
+				return I3JS.TextureDataType.UnsignedShort5551Type;
+			case 'unsignedshort565type':
+			case 'unsignedshort565':
+				return I3JS.TextureDataType.UnsignedShort565Type;
+			case 'unsignedint248type':
+			case 'unsignedint248':
+				return I3JS.TextureDataType.UnsignedInt248Type;
+			case 'unsignedbytetype':
+			case 'unsignedbyte':
+				return I3JS.TextureDataType.UnsignedByteType;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets pixel format safe
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.PixelFormat
+	 * @see THREE.AlphaFormat - AlphaFormat, Alpha
+	 * @see THREE.RedFormat - RedFormat, Red
+	 * @see THREE.RedIntegerFormat - RedIntegerFormat, RedInteger
+	 * @see THREE.RGFormat - RGFormat, RG
+	 * @see THREE.RGIntegerFormat - RGIntegerFormat, RGInteger
+	 * @see THREE.RGBFormat - RGBFormat, RGB
+	 * @see THREE.RGBIntegerFormat - RGBIntegerFormat, RGBInteger
+	 * @see THREE.RGBAIntegerFormat - RGBAIntegerFormat, RGBAInteger
+	 * @see THREE.LuminanceFormat - LuminanceFormat, Luminance
+	 * @see THREE.LuminanceAlphaFormat - LuminanceAlphaFormat, LuminanceAlpha
+	 * @see THREE.RGBEFormat - RGBEFormat, RGBE
+	 * @see THREE.DepthFormat - DepthFormat, Depth
+	 * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
+	 * @see THREE.RGBAFormat - RGBAFormat, RGBA
+	 *
+	 * @param baseFormat
+	 * @param [altFormat]
+	 * @param [def]
+	 * @returns pixel format safe
+	 */
+	public static getPixelFormatSafe(baseFormat: string, altFormat?: string, def?: string): I3JS.PixelFormat {
+		const format = this.getTypeSafe(baseFormat, altFormat, def || '');
+		switch (format.toLowerCase()) {
+			case 'alphaformat':
+			case 'alpha':
+				return I3JS.PixelFormat.AlphaFormat;
+			case 'redformat':
+			case 'red':
+				return I3JS.PixelFormat.RedFormat;
+			case 'redintegerformat':
+			case 'redinteger':
+				return I3JS.PixelFormat.RedIntegerFormat;
+			case 'rgformat':
+			case 'rg':
+				return I3JS.PixelFormat.RGFormat;
+			case 'rgintegerformat':
+			case 'rginteger':
+				return I3JS.PixelFormat.RGIntegerFormat;
+			case 'rgbformat':
+			case 'rgb':
+				return I3JS.PixelFormat.RGBFormat;
+			case 'rgbintegerformat':
+			case 'rgbinteger':
+				return I3JS.PixelFormat.RGBIntegerFormat;
+			case 'rgbaintegerformat':
+			case 'rgbainteger':
+				return I3JS.PixelFormat.RGBAIntegerFormat;
+			case 'luminanceformat':
+			case 'luminance':
+				return I3JS.PixelFormat.LuminanceFormat;
+			case 'luminancealphaformat':
+			case 'luminancealpha':
+				return I3JS.PixelFormat.LuminanceAlphaFormat;
+			case 'rgbeformat':
+			case 'rgbe':
+				return I3JS.PixelFormat.RGBEFormat;
+			case 'depthformat':
+			case 'depth':
+				return I3JS.PixelFormat.DepthFormat;
+			case 'depthstencilformat':
+			case 'depthstencil':
+				return I3JS.PixelFormat.DepthStencilFormat;
+			case 'rgbaformat':
+			case 'rgba':
+				return I3JS.PixelFormat.RGBAFormat;
+			default:
+				break;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets pixel format gpusafe, Internal Pixel Formats
+	 *
+	 * @param baseFormat
+	 * @param [altFormat]
+	 * @param [def]
+	 * @returns pixel format gpusafe
+	 */
+	public static getPixelFormatGPUSafe(baseFormat: string, altFormat?: string, def?: string): I3JS.PixelFormatGPU {
+		const format = this.getTypeSafe(baseFormat, altFormat, def || '');
+		switch (format.toLowerCase()) {
+			case 'alpha':
+				return 'ALPHA';
+			case 'rgb':
+				return 'RGB';
+			case 'rgba':
+				return 'RGBA';
+			case 'luminance':
+				return 'LUMINANCE';
+			case 'luminance_alpha':
+				return 'LUMINANCE_ALPHA';
+			case 'red_integer':
+				return 'RED_INTEGER';
+			case 'r8':
+				return 'R8';
+			case 'r8_snorm':
+				return 'R8_SNORM';
+			case 'r8i':
+				return 'R8I';
+			case 'r8ui':
+				return 'R8UI';
+			case 'r16i':
+				return 'R16I';
+			case 'r16ui':
+				return 'R16UI';
+			case 'r16f':
+				return 'R16F';
+			case 'r32i':
+				return 'R32I';
+			case 'r32ui':
+				return 'R32UI';
+			case 'r32f':
+				return 'R32F';
+			case 'rg8':
+				return 'RG8';
+			case 'rg8_snorm':
+				return 'RG8_SNORM';
+			case 'rg8i':
+				return 'RG8I';
+			case 'rg8ui':
+				return 'RG8UI';
+			case 'rg16i':
+				return 'RG16I';
+			case 'rg16ui':
+				return 'RG16UI';
+			case 'rg16f':
+				return 'RG16F';
+			case 'rg32i':
+				return 'RG32I';
+			case 'rg32ui':
+				return 'RG32UI';
+			case 'rg32f':
+				return 'RG32F';
+			case 'rgb565':
+				return 'RGB565';
+			case 'rgb8':
+				return 'RGB8';
+			case 'rgb8_snorm':
+				return 'RGB8_SNORM';
+			case 'rgb8i':
+				return 'RGB8I';
+			case 'rgb8ui':
+				return 'RGB8UI';
+			case 'rgb16i':
+				return 'RGB16I';
+			case 'rgb16ui':
+				return 'RGB16UI';
+			case 'rgb16f':
+				return 'RGB16F';
+			case 'rgb32i':
+				return 'RGB32I';
+			case 'rgb32ui':
+				return 'RGB32UI';
+			case 'rgb32f':
+				return 'RGB32F';
+			case 'rgb9_e5':
+				return 'RGB9_E5';
+			case 'srgb8':
+				return 'SRGB8';
+			case 'r11f_g11f_b10f':
+				return 'R11F_G11F_B10F';
+			case 'rgba4':
+				return 'RGBA4';
+			case 'rgba8':
+				return 'RGBA8';
+			case 'rgba8_snorm':
+				return 'RGBA8_SNORM';
+			case 'rgba8i':
+				return 'RGBA8I';
+			case 'rgba8ui':
+				return 'RGBA8UI';
+			case 'rgba16i':
+				return 'RGBA16I';
+			case 'rgba16ui':
+				return 'RGBA16UI';
+			case 'rgba16f':
+				return 'RGBA16F';
+			case 'rgba32i':
+				return 'RGBA32I';
+			case 'rgba32ui':
+				return 'RGBA32UI';
+			case 'rgba32f':
+				return 'RGBA32F';
+			case 'rgb5_a1':
+				return 'RGB5_A1';
+			case 'rgb10_a2':
+				return 'RGB10_A2';
+			case 'rgb10_a2ui':
+				return 'RGB10_A2UI';
+			case 'srgb8_alpha8':
+				return 'SRGB8_ALPHA8';
+			case 'depth_component16':
+				return 'DEPTH_COMPONENT16';
+			case 'depth_component24':
+				return 'DEPTH_COMPONENT24';
+			case 'depth_component32f':
+				return 'DEPTH_COMPONENT32F';
+			case 'depth24_stencil8':
+				return 'DEPTH24_STENCIL8';
+			case 'depth32f_stencil8':
+				return 'DEPTH32F_STENCIL8';
+			default:
+				break;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets pixel format safe
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.PixelFormat
+	 * @see THREE.AlphaFormat - AlphaFormat, Alpha
+	 * @see THREE.RedFormat - RedFormat, Red
+	 * @see THREE.RedIntegerFormat - RedIntegerFormat, RedInteger
+	 * @see THREE.RGFormat - RGFormat, RG
+	 * @see THREE.RGIntegerFormat - RGIntegerFormat, RGInteger
+	 * @see THREE.RGBFormat - RGBFormat, RGB
+	 * @see THREE.RGBIntegerFormat - RGBIntegerFormat, RGBInteger
+	 * @see THREE.RGBAIntegerFormat - RGBAIntegerFormat, RGBAInteger
+	 * @see THREE.LuminanceFormat - LuminanceFormat, Luminance
+	 * @see THREE.LuminanceAlphaFormat - LuminanceAlphaFormat, LuminanceAlpha
+	 * @see THREE.RGBEFormat - RGBEFormat, RGBE
+	 * @see THREE.DepthFormat - DepthFormat, Depth
+	 * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
+	 * @see THREE.RGBAFormat - RGBAFormat, RGBA
+	 *
+	 * @param baseFormat
+	 * @param [altFormat]
+	 * @param [def]
+	 * @returns pixel format safe
+	 */
+	public static getCompressedPixelFormatSafe(
+		baseFormat: string,
+		altFormat?: string,
+		def?: string
+	): I3JS.CompressedPixelFormat {
+		const format = this.getTypeSafe(baseFormat, altFormat, def || '');
+		switch (format.toLowerCase()) {
+			case 'rgb_s3tc_dxt1':
+				return I3JS.CompressedPixelFormat.RGB_S3TC_DXT1_Format;
+			case 'rgba_s3tc_dxt1':
+				return I3JS.CompressedPixelFormat.RGBA_S3TC_DXT1_Format;
+			case 'rgba_s3tc_dxt3':
+				return I3JS.CompressedPixelFormat.RGBA_S3TC_DXT3_Format;
+			case 'rgba_s3tc_dxt5':
+				return I3JS.CompressedPixelFormat.RGBA_S3TC_DXT5_Format;
+			case 'rgb_pvrtc_4bppv1':
+				return I3JS.CompressedPixelFormat.RGB_PVRTC_4BPPV1_Format;
+			case 'rgb_pvrtc_2bppv1':
+				return I3JS.CompressedPixelFormat.RGB_PVRTC_2BPPV1_Format;
+			case 'rgba_pvrtc_4bppv1':
+				return I3JS.CompressedPixelFormat.RGBA_PVRTC_4BPPV1_Format;
+			case 'rgba_pvrtc_2bppv1':
+				return I3JS.CompressedPixelFormat.RGBA_PVRTC_2BPPV1_Format;
+			case 'rgb_etc1':
+				return I3JS.CompressedPixelFormat.RGB_ETC1_Format;
+			case 'rgb_etc2':
+				return I3JS.CompressedPixelFormat.RGB_ETC2_Format;
+			case 'rgba_etc2_eac':
+				return I3JS.CompressedPixelFormat.RGBA_ETC2_EAC_Format;
+			case 'rgba_astc_4x4':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_4x4_Format;
+			case 'rgba_astc_5x4':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_5x4_Format;
+			case 'rgba_astc_5x5':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_5x5_Format;
+			case 'rgba_astc_6x5':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_6x5_Format;
+			case 'rgba_astc_6x6':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_6x6_Format;
+			case 'rgba_astc_8x5':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_8x5_Format;
+			case 'rgba_astc_8x6':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_8x6_Format;
+			case 'rgba_astc_8x8':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_8x8_Format;
+			case 'rgba_astc_10x5':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_10x5_Format;
+			case 'rgba_astc_10x6':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_10x6_Format;
+			case 'rgba_astc_10x8':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_10x8_Format;
+			case 'rgba_astc_10x10':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_10x10_Format;
+			case 'rgba_astc_12x10':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_12x10_Format;
+			case 'rgba_astc_12x12':
+				return I3JS.CompressedPixelFormat.RGBA_ASTC_12x12_Format;
+			case 'rgba_bptc':
+				return I3JS.CompressedPixelFormat.RGBA_BPTC_Format;
+			case 'srgb8_alpha8_astc_4x4':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_4x4_Format;
+			case 'srgb8_alpha8_astc_5x4':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_5x4_Format;
+			case 'srgb8_alpha8_astc_5x5':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_5x5_Format;
+			case 'srgb8_alpha8_astc_6x5':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_6x5_Format;
+			case 'srgb8_alpha8_astc_6x6':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_6x6_Format;
+			case 'srgb8_alpha8_astc_8x5':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_8x5_Format;
+			case 'srgb8_alpha8_astc_8x6':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_8x6_Format;
+			case 'srgb8_alpha8_astc_8x8':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_8x8_Format;
+			case 'srgb8_alpha8_astc_10x5':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_10x5_Format;
+			case 'srgb8_alpha8_astc_10x6':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_10x6_Format;
+			case 'srgb8_alpha8_astc_10x8':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_10x8_Format;
+			case 'srgb8_alpha8_astc_10x10':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_10x10_Format;
+			case 'srgb8_alpha8_astc_12x10':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_12x10_Format;
+			case 'srgb8_alpha8_astc_12x12':
+				return I3JS.CompressedPixelFormat.SRGB8_ALPHA8_ASTC_12x12_Format;
+			default:
+				break;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets pixel format or compressed pixel format safe
+	 *
+	 * @param baseFormat
+	 * @param [altFormat]
+	 * @param [def]
+	 * @returns pixel format or compressed pixel format safe
+	 */
+	public static getPixelFormatOrCompressedPixelFormatSafe(
+		baseFormat: string,
+		altFormat?: string,
+		def?: string
+	): I3JS.PixelFormat | I3JS.CompressedPixelFormat {
+		const pixelFormat = this.getPixelFormatSafe(baseFormat, altFormat, def);
+		if (this.isNull(pixelFormat)) {
+			return this.getCompressedPixelFormatSafe(baseFormat, altFormat, def);
+		} else {
+			return pixelFormat;
+		}
+	}
+
+	/**
+	 * Gets loop
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.AnimationActionLoopStyles
+	 * @see THREE.LoopOnce - LoopOnce, Once
+	 * @see THREE.LoopRepeat - LoopRepeat, Repeat
+	 * @see THREE.LoopPingPong - LoopPingPong, PingPong
+	 *
+	 * @param [def]
+	 * @returns loop
+	 */
+	public static getLoopSafe(baseLoop: string, def?: string): I3JS.AnimationActionLoopStyles {
+		const loop = this.getTypeSafe(baseLoop, def, '');
+		switch (loop.toLowerCase()) {
+			case 'looponce':
+			case 'once':
+				return I3JS.AnimationActionLoopStyles.LoopOnce;
+			case 'looppingpong':
+			case 'pingpong':
+				return I3JS.AnimationActionLoopStyles.LoopPingPong;
+			case 'looprepeat':
+			case 'repeat':
+			default:
+				return I3JS.AnimationActionLoopStyles.LoopRepeat;
+		}
+	}
+
+	/**
+	 * Gets interpolation
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @param [def]
+	 * @returns interpolation
+	 */
+	public static getInterpolationSafe(baseInterpolation: string, def?: string): I3JS.InterpolationModes {
+		const interpolation = this.getTypeSafe(baseInterpolation, def, '');
+		switch (interpolation.toLowerCase()) {
+			case 'interpolatediscrete':
+			case 'discrete':
+				return I3JS.InterpolationModes.InterpolateDiscrete;
+			case 'interpolatelinear':
+			case 'linear':
+				return I3JS.InterpolationModes.InterpolateLinear;
+			case 'interpolatesmooth':
+			case 'smooth':
+				return I3JS.InterpolationModes.InterpolateSmooth;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets interpolation ending
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @param [def]
+	 * @returns interpolation ending
+	 */
+	public static getInterpolationEndingSafe(baseInterpolation: string, def?: string): I3JS.InterpolationEndingModes {
+		const interpolation = this.getTypeSafe(baseInterpolation, def, '');
+		switch (interpolation.toLowerCase()) {
+			case 'zerocurvature':
+			case 'zerocurvatureending':
+				return I3JS.InterpolationEndingModes.ZeroCurvatureEnding;
+			case 'zeroslope':
+			case 'zeroslopeending':
+				return I3JS.InterpolationEndingModes.ZeroSlopeEnding;
+			case 'wraparound':
+			case 'wraparoundending':
+				return I3JS.InterpolationEndingModes.WrapAroundEnding;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets blend mode
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.AnimationBlendMode
+	 * @see THREE.NormalAnimationBlendMode - NormalAnimationBlendMode, NormalAnimation, Normal
+	 * @see THREE.AdditiveAnimationBlendMode - AdditiveAnimationBlendMode, AdditiveAnimation, Additive
+	 *
+	 * @param [def]
+	 * @returns blend mode
+	 */
+	public static getBlendModeSafe(baseBlendMode: string, def?: string): I3JS.AnimationBlendMode {
+		const blendMode = this.getTypeSafe(baseBlendMode, def, '');
+		switch (blendMode.toLowerCase()) {
+			case 'normalanimationblendmode':
+			case 'normalanimation':
+			case 'normal':
+				return I3JS.AnimationBlendMode.NormalAnimationBlendMode;
+			case 'additiveanimationblendmode':
+			case 'additiveanimation':
+			case 'additive':
+				return I3JS.AnimationBlendMode.AdditiveAnimationBlendMode;
+		}
+		return N3JS.NormalAnimationBlendMode;
+	}
+
+	/**
+	 * Gets TrianglesDraw mode
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.TrianglesDrawModes
+	 * @see THREE.TrianglesDrawMode - TrianglesDrawMode, DrawMode
+	 * @see THREE.TriangleStripDrawMode - TriangleStripDrawMode, StripDrawMode, Strip
+	 * @see THREE.TriangleFanDrawMode - TriangleFanDrawMode, FanDrawMode, Fan
+	 *
+	 * @param [def]
+	 * @returns TrianglesDraw mode
+	 */
+	public static getTrianglesDrawModesSafe(baseBlendMode: string, def?: string): I3JS.TrianglesDrawModes {
+		const blendMode = this.getTypeSafe(baseBlendMode, def, '');
+		switch (blendMode.toLowerCase()) {
+			case 'drawmode':
+			case 'trianglesdrawmode':
+				return I3JS.TrianglesDrawModes.TrianglesDrawMode;
+			case 'strip':
+			case 'stripdrawmode':
+			case 'trianglestripdrawmode':
+				return I3JS.TrianglesDrawModes.TriangleStripDrawMode;
+			case 'fan':
+			case 'fandrawmode':
+			case 'trianglefandrawmode':
+				return I3JS.TrianglesDrawModes.TriangleFanDrawMode;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets texture encoding safe
+	 *
+	 * Notice - case insensitive.
+	 *
+	 * @see THREE.TextureEncoding
+	 * @see THREE.sRGBEncoding - sRGBEncoding, sRGB
+	 * @see THREE.GammaEncoding - GammaEncoding, Gamma
+	 * @see THREE.RGBEEncoding - RGBEEncoding, RGBE
+	 * @see THREE.LogLuvEncoding - LogLuvEncoding, LogLuv
+	 * @see THREE.RGBM7Encoding - RGBM7Encoding, RGBM7
+	 * @see THREE.RGBM16Encoding - RGBM16Encoding, RGBM16
+	 * @see THREE.RGBDEncoding - RGBDEncoding, RGBD
+	 * @see THREE.LinearEncoding - LinearEncoding, Linear
+	 *
+	 * @param baseEncoding
+	 * @param [altEncoding]
+	 * @param [def]
+	 * @returns texture encoding safe
+	 */
+	public static getTextureEncodingSafe(baseEncoding: string, altEncoding?: string, def?: string): I3JS.TextureEncoding {
+		const encoding = this.getTypeSafe(baseEncoding, altEncoding, def || '');
+		switch (encoding.toLowerCase()) {
+			case 'srgbencoding':
+			case 'srgb':
+				return I3JS.TextureEncoding.sRGBEncoding;
+			case 'gammaencoding':
+			case 'gamma':
+				return I3JS.TextureEncoding.GammaEncoding;
+			case 'rgbeencoding':
+			case 'rgbe':
+				return I3JS.TextureEncoding.RGBEEncoding;
+			// case 'logluvencoding':
+			// case 'logluv':
+			//	return THREE.LogLuvEncoding;
+			case 'rgbm7encoding':
+			case 'rgbm7':
+				return I3JS.TextureEncoding.RGBM7Encoding;
+			case 'rgbm16encoding':
+			case 'rgbm16':
+				return I3JS.TextureEncoding.RGBM16Encoding;
+			case 'rgbdencoding':
+			case 'rgbd':
+				return I3JS.TextureEncoding.RGBDEncoding;
+			case 'linearencoding':
+			case 'linear':
+				return I3JS.TextureEncoding.LinearEncoding;
+			default:
+				return undefined;
+		}
+	}
+
+	/**
+	 * Gets depth packing, Depth packing strategies
+	 *
+	 * @param [def]
+	 * @returns depth packing
+	 */
+	public static getDepthPackingSafe(baseDepthPacking: string, def?: string): I3JS.DepthPackingStrategies {
+		const depthPacking = this.getTypeSafe(baseDepthPacking, def, '');
+		switch (depthPacking.toLowerCase()) {
+			case 'rgba':
+			case 'rgbadepth':
+				return I3JS.DepthPackingStrategies.RGBADepthPacking;
+			case 'basic':
+			case 'basicdepth':
+			default:
+				return I3JS.DepthPackingStrategies.BasicDepthPacking;
+		}
+	}
+
+	/**
+	 * Gets normal map type
+	 * @param [def]
+	 * @returns normal map type
+	 */
+	public static getNormalMapTypeSafe(baseNormalMapType: string, def?: string): I3JS.NormalMapTypes {
+		const normalMapType = NgxThreeUtil.getTypeSafe(baseNormalMapType, def, '');
+		switch (normalMapType.toLowerCase()) {
+			case 'tangentspace':
+				return I3JS.NormalMapTypes.TangentSpaceNormalMap;
+			case 'objectspace':
+				return I3JS.NormalMapTypes.ObjectSpaceNormalMap;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets stencil fail
+	 * @param [def]
+	 * @returns stencil fail
+	 */
+	public static getStencilOpSafe(baseStencilFail: string, def?: string): I3JS.StencilOp {
+		const stencilFail = this.getTypeSafe(baseStencilFail, def, '');
+		switch (stencilFail.toLowerCase()) {
+			case 'zero':
+				return I3JS.StencilOp.ZeroStencilOp;
+			case 'keep':
+				return I3JS.StencilOp.KeepStencilOp;
+			case 'replace':
+				return I3JS.StencilOp.ReplaceStencilOp;
+			case 'increment':
+				return I3JS.StencilOp.IncrementStencilOp;
+			case 'decrement':
+				return I3JS.StencilOp.DecrementStencilOp;
+			case 'incrementwrap':
+				return I3JS.StencilOp.IncrementWrapStencilOp;
+			case 'decrementwrap':
+				return I3JS.StencilOp.DecrementWrapStencilOp;
+			case 'invert':
+				return I3JS.StencilOp.InvertStencilOp;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets stencil func
+	 * @param [def]
+	 * @returns stencil func
+	 */
+	public static getStencilFuncSafe(baseStencilFunc: string, def?: string): I3JS.StencilFunc {
+		const stencilFunc = NgxThreeUtil.getTypeSafe(baseStencilFunc, def, '');
+		switch (stencilFunc.toLowerCase()) {
+			case 'never':
+				return I3JS.StencilFunc.NeverStencilFunc;
+			case 'less':
+				return I3JS.StencilFunc.LessStencilFunc;
+			case 'equal':
+				return I3JS.StencilFunc.EqualStencilFunc;
+			case 'lessequal':
+				return I3JS.StencilFunc.LessEqualStencilFunc;
+			case 'greater':
+				return I3JS.StencilFunc.GreaterStencilFunc;
+			case 'notequal':
+				return I3JS.StencilFunc.NotEqualStencilFunc;
+			case 'greaterequal':
+				return I3JS.StencilFunc.GreaterEqualStencilFunc;
+			case 'always':
+				return I3JS.StencilFunc.AlwaysStencilFunc;
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets usage
+	 * @param [def]
+	 * @returns usage
+	 */
+	public static getUsageSafe(baseUsage: string, def?: string): I3JS.Usage {
+		const usage = NgxThreeUtil.getTypeSafe(baseUsage, def, '');
+		switch (usage.toLowerCase()) {
+			case 'streamdrawusage':
+			case 'streamdraw':
+				return I3JS.Usage.StreamDrawUsage;
+			case 'staticreadusage':
+			case 'staticread':
+				return I3JS.Usage.StaticReadUsage;
+			case 'dynamicreadusage':
+			case 'dynamicread':
+				return I3JS.Usage.DynamicReadUsage;
+			case 'streamreadusage':
+			case 'streamread':
+				return I3JS.Usage.StreamReadUsage;
+			case 'staticcopyusage':
+			case 'staticcopy':
+				return I3JS.Usage.StaticCopyUsage;
+			case 'dynamiccopyusage':
+			case 'dynamiccopy':
+				return I3JS.Usage.DynamicCopyUsage;
+			case 'streamcopyusage':
+			case 'streamcopy':
+				return I3JS.Usage.StreamCopyUsage;
+			case 'staticdrawusage':
+			case 'staticdraw':
+				return I3JS.Usage.StaticDrawUsage;
+			case 'dynamicdrawusage':
+			case 'dynamicdraw':
+			default:
+				return I3JS.Usage.DynamicDrawUsage;
+		}
+	}
+
+	/**
+	 * Gets glsl version
+	 * @param [def]
+	 * @returns glsl version
+	 */
+	public static getGlslVersionSafe(baseGlslVersion: string, def?: string): I3JS.GLSLVersion {
+		const glslVersion = this.getTypeSafe(baseGlslVersion, def, '');
+		switch (glslVersion.toLowerCase()) {
+			case '1':
+			case 'gl1':
+			case 'glsl1':
+				return I3JS.GLSLVersion.GLSL1;
+			case '3':
+			case 'gl3':
+			case 'glsl3':
+				return I3JS.GLSLVersion.GLSL3;
+		}
+		return null;
+	}
+
+	/**
+	 * Gets builtin shader attribute name safe
+	 *
+	 * @param baseShaderAttributeName
+	 * @param [def]
+	 * @returns builtin shader attribute name safe
+	 */
+	public static getBuiltinShaderAttributeNameSafe(
+		baseShaderAttributeName: string,
+		def?: string
+	): I3JS.BuiltinShaderAttributeName {
+		const shaderAttributeName = this.getTypeSafe(baseShaderAttributeName, def, '');
+		switch (shaderAttributeName.toLowerCase()) {
+			case 'position':
+				return 'position';
+			case 'normal':
+				return 'normal';
+			case 'uv':
+				return 'uv';
+			case 'color':
+				return 'color';
+			case 'skinindex':
+				return 'skinIndex';
+			case 'skinweight':
+				return 'skinWeight';
+			case 'instancematrix':
+				return 'instanceMatrix';
+			case 'morphtarget0':
+				return 'morphTarget0';
+			case 'morphtarget1':
+				return 'morphTarget1';
+			case 'morphtarget2':
+				return 'morphTarget2';
+			case 'morphtarget3':
+				return 'morphTarget3';
+			case 'morphtarget4':
+				return 'morphTarget4';
+			case 'morphtarget5':
+				return 'morphTarget5';
+			case 'morphtarget6':
+				return 'morphTarget6';
+			case 'morphtarget7':
+				return 'morphTarget7';
+			case 'morphnormal0':
+				return 'morphNormal0';
+			case 'morphnormal1':
+				return 'morphNormal1';
+			case 'morphnormal2':
+				return 'morphNormal2';
+			case 'morphnormal3':
+				return 'morphNormal3';
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets precision safe
+	 *
+	 * @param basePrecision
+	 * @param [def]
+	 * @returns precision safe
+	 */
+	public static getPrecisionSafe(basePrecision: string, def?: string): 'highp' | 'mediump' | 'lowp' | null {
+		const precision = this.getTypeSafe(basePrecision, def, '');
+		switch (precision.toLowerCase()) {
+			case 'highp':
+				return 'highp';
+			case 'mediump':
+				return 'mediump';
+			case 'lowp':
+				return 'lowp';
+		}
+		return undefined;
+	}
+}

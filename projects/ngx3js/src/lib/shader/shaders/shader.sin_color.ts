@@ -1,4 +1,6 @@
-export const SinColor = {
+import { IShaderType } from '../../ngx-interface';
+
+export const SinColor: IShaderType = {
 	vertexShader: `
   precision mediump float;
   precision mediump int;

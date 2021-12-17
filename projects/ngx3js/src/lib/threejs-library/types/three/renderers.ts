@@ -153,6 +153,7 @@ export interface WebGLRenderTarget extends EventDispatcher {
 }
 
 export interface Renderer {
+    new() : this;
     domElement: HTMLCanvasElement;
 
     render(scene: Object3D, camera: Camera): void;

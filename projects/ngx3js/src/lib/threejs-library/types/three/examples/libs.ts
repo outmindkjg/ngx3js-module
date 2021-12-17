@@ -1195,7 +1195,7 @@ export interface unzipSync {
 	(data: Uint8Array): Unzipped;
 }
 export interface Stats {
-	() : Stats;
+	(): Stats;
 	REVISION: number;
 	dom: HTMLDivElement;
 	addPanel(panel: Panel): Panel;

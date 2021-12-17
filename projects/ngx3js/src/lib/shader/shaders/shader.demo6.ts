@@ -1,4 +1,6 @@
-export const ShaderDemo6 = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderDemo6: IShaderType = {
 	vertexShader: `
   varying vec2 vUv;
   attribute float invert;

@@ -363,12 +363,12 @@ export class ShaderUtils {
 		return {
 			vertexShader: shader.vertexShader,
 			fragmentShader: shader.fragmentShader,
-			uniforms: shader.uniforms !== undefined && shader.uniforms !== null
-				? N3JS.UniformsUtils.clone(shader.uniforms)
-				: undefined,
-			defines: shader.defines !== undefined && shader.defines !== null
-				? N3JS.UniformsUtils.clone(shader.defines)
-				: undefined,
+			uniforms:
+				shader.uniforms !== undefined && shader.uniforms !== null
+					? N3JS.UniformsUtils.clone(shader.uniforms)
+					: undefined,
+			defines:
+				shader.defines !== undefined && shader.defines !== null ? N3JS.UniformsUtils.clone(shader.defines) : undefined,
 		};
 	}
 

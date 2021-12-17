@@ -1,4 +1,6 @@
-export const VideoKinect = {
+import { IShaderType } from '../../ngx-interface';
+
+export const VideoKinect: IShaderType = {
 	vertexShader: `
   uniform sampler2D map;
   uniform float width;

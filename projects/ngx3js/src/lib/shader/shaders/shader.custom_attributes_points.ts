@@ -1,6 +1,7 @@
-import { Color } from 'three';
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
 
-export const CustomAttributesPoints = {
+export const CustomAttributesPoints:IShaderType = {
 	vertexShader: `
   attribute float size;
   attribute vec3 customColor;
@@ -22,7 +23,7 @@ export const CustomAttributesPoints = {
   }
   `,
 	uniforms: {
-		color: { value: new Color(0xffffff) },
+		color: { value: NgxThreeUtil.getColorSafe(0xffffff) },
 		pointTexture: { value: null } as any,
 	},
 };

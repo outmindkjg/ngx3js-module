@@ -1,4 +1,6 @@
-export const ColorRainbow = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ColorRainbow:IShaderType = {
 	vertexShader: `
   varying vec2 vUV;
   varying vec3 vNormal;

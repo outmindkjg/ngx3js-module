@@ -1,5 +1,7 @@
-import { Color } from 'three';
-export const PointsWaves = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const PointsWaves: IShaderType = {
 	vertexShader: `
   attribute float scale;
   void main() {
@@ -16,6 +18,6 @@ export const PointsWaves = {
   }
   `,
 	uniforms: {
-		color: { value: new Color(0xffffff) },
+		color: { value: NgxThreeUtil.getColorSafe(0xffffff) },
 	},
 };

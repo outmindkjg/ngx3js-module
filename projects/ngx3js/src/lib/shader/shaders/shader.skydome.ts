@@ -1,5 +1,7 @@
-import { Color } from 'three';
-export const ShaderSkyDome = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderSkyDome: IShaderType = {
 	vertexShader: `
   varying vec3 vWorldPosition;
   void main() {
@@ -20,8 +22,8 @@ export const ShaderSkyDome = {
   }
   `,
 	uniforms: {
-		topColor: { value: new Color(0x0077ff) },
-		bottomColor: { value: new Color(0xffffff) },
+		topColor: { value: NgxThreeUtil.getColorSafe(0x0077ff) },
+		bottomColor: { value: NgxThreeUtil.getColorSafe(0xffffff) },
 		offset: { value: 400 },
 		exponent: { value: 0.6 },
 	},

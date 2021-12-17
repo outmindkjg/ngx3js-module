@@ -1,4 +1,6 @@
-export const BufferGeometryInstancing = {
+import { IShaderType } from '../../ngx-interface';
+
+export const BufferGeometryInstancing: IShaderType = {
 	vertexShader: `
   precision highp float;
   uniform float sineTime;

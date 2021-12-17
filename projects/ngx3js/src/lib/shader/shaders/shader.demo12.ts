@@ -1,5 +1,7 @@
-import { Vector3 } from 'three';
-export const ShaderDemo12 = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderDemo12: IShaderType = {
 	vertexShader: `
   in vec3 position;
   in mat4 instanceMatrix;
@@ -79,6 +81,6 @@ export const ShaderDemo12 = {
   `,
 	uniforms: {
 		map: { value: null } as any,
-		cameraPos: { value: new Vector3() },
+		cameraPos: { value: NgxThreeUtil.getVector3Safe(0, 0, 0) },
 	},
 };

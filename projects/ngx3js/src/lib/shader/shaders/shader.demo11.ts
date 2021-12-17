@@ -1,5 +1,7 @@
-import { Color } from 'three';
-export const ShaderDemo11 = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderDemo11: IShaderType = {
 	vertexShader: `
   attribute vec2 reference;
   attribute float birdVertex;
@@ -58,7 +60,7 @@ export const ShaderDemo11 = {
   }
 	`,
 	uniforms: {
-		color: { value: new Color(0xff2200) },
+		color: { value: NgxThreeUtil.getColorSafe(0xff2200) },
 		texturePosition: { value: null } as any,
 		textureVelocity: { value: null } as any,
 		time: { value: 1.0 },

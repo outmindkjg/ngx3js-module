@@ -1,4 +1,6 @@
-export const AttributesParticles = {
+import { IShaderType } from '../../ngx-interface';
+
+export const AttributesParticles: IShaderType = {
 	vertexShader: `
   attribute float size;
   varying vec3 vColor;

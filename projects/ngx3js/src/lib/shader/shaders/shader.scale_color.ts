@@ -1,4 +1,6 @@
-export const ScaleColor = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ScaleColor: IShaderType = {
 	vertexShader: `
   precision highp float;
   uniform mat4 modelViewMatrix;

@@ -1,4 +1,6 @@
-export const WireFrame = {
+import { IShaderType } from '../../ngx-interface';
+
+export const WireFrame: IShaderType = {
 	vertexShader: `
   attribute vec3 center;
   varying vec3 vCenter;

@@ -1,4 +1,6 @@
-export const UnrealBloomSelective = {
+import { IShaderType } from '../../ngx-interface';
+
+export const UnrealBloomSelective: IShaderType = {
 	vertexShader: `
   varying vec2 vUv;
   void main() {

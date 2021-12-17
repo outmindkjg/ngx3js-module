@@ -1,4 +1,6 @@
-export const AudioVisualizer = {
+import { IShaderType } from '../../ngx-interface';
+
+export const AudioVisualizer: IShaderType = {
 	vertexShader: `
   varying vec2 vUv;
   void main() {

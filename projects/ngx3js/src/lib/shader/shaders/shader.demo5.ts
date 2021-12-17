@@ -1,4 +1,6 @@
-export const ShaderDemo5 = {
+import { IShaderType } from '../../ngx-interface';
+
+export const ShaderDemo5: IShaderType = {
 	vertexShader: `
   in int textureIndex;
   flat out int vIndex; // "flat" indicates that the value will not be interpolated (required for integer attributes)

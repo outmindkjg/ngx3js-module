@@ -1,5 +1,6 @@
-import { Color, Vector3 } from 'three';
-export const CloudShader = {
+import { NgxThreeUtil } from '../../interface';
+import { IShaderType } from '../../ngx-interface';
+export const CloudShader: IShaderType = {
 	vertexShader: `
   in vec3 position;
   uniform mat4 modelMatrix;
@@ -94,9 +95,9 @@ export const CloudShader = {
   }
   `,
 	uniforms: {
-		base: { value: new Color(0x798aa0) },
+		base: { value: NgxThreeUtil.getColorSafe(0x798aa0) },
 		map: { value: null } as any,
-		cameraPos: { value: new Vector3() },
+		cameraPos: { value: NgxThreeUtil.getVector3Safe(0, 0, 0) },
 		threshold: { value: 0.25 },
 		opacity: { value: 0.25 },
 		range: { value: 0.1 },
