@@ -5,104 +5,449 @@ import { Sprite } from './objects';
 // Math //////////////////////////////////////////////////////////////////////////////////
 export type ColorRepresentation = Color | string | number;
 
+/**
+ * Box2Represents an axis-aligned bounding box (AABB) in 2D space.
+ */
 export interface Box2 {
 	new (min?: Vector2, max?: Vector2): this;
 
 	/**
+	 * Vector2 representing the lower (x, y) boundary of the box. Default is ( + Infinity, + Infinity ).
 	 * @default new THREE.Vector2( + Infinity, + Infinity )
 	 */
 	min: Vector2;
 
 	/**
+	 * Vector2 representing the lower upper (x, y) boundary of the box. Default is ( - Infinity, - Infinity ).
 	 * @default new THREE.Vector2( - Infinity, - Infinity )
 	 */
 	max: Vector2;
 
+	/**
+	 * Sets the lower and upper (x, y) boundaries of this box. Please note that this method only copies the values from the given objects.
+	 *
+	 * @param min - (required ) Vector2 representing the lower (x, y) boundary of the box.
+	 * @param max - (required) Vector2 representing the upper (x, y) boundary of the box.
+	 * @returns set
+	 */
 	set(min: Vector2, max: Vector2): Box2;
+
+	/**
+	 * Sets the upper and lower bounds of this box to include all of the points in points.
+	 *
+	 * @param points - Array of Vector2s that the resulting box will contain.
+	 * @returns from points
+	 */
 	setFromPoints(points: Vector2[]): Box2;
+
+	/**
+	 * Centers this box on center and sets this box's width and height to the values specified in size.
+	 *
+	 * @param center  - Desired center position of the box (Vector2).
+	 * @param size -Desired x and y dimensions of the box (Vector2).
+	 * @returns from center and size
+	 */
 	setFromCenterAndSize(center: Vector2, size: Vector2): Box2;
+
+	/**
+	 * Returns a new Box2 with the same min and max as this one.
+	 *
+	 * @returns clone
+	 */
 	clone(): this;
+
+	/**
+	 * Copies the min and max from box to this box.
+	 *
+	 * @param box
+	 * @returns copy
+	 */
 	copy(box: Box2): this;
 	makeEmpty(): Box2;
 	isEmpty(): boolean;
 	getCenter(target: Vector2): Vector2;
 	getSize(target: Vector2): Vector2;
+
+	/**
+	 * Expands the boundaries of this box to include point.
+	 *
+	 * @param point
+	 * @returns by point
+	 */
 	expandByPoint(point: Vector2): Box2;
+
+	/**
+	 * Expands this box equilaterally by vector. The width of this box will be expanded by the x component of vector in both directions. The height of this box will be expanded by the y component of vector in both directions.
+	 *
+	 * @param vector
+	 * @returns by vector
+	 */
 	expandByVector(vector: Vector2): Box2;
+
+	/**
+	 * Expands each dimension of the box by scalar. If negative, the dimensions of the box will be contracted.
+	 *
+	 * @param scalar
+	 * @returns by scalar
+	 */
 	expandByScalar(scalar: number): Box2;
+
+	/**
+	 * Returns true if the specified point lies within or on the boundaries of this box.
+	 *
+	 * @param point
+	 * @returns true if point
+	 */
 	containsPoint(point: Vector2): boolean;
+
+	/**
+	 * Returns true if this box includes the entirety of box. If this and box are identical, this function also returns true.
+	 *
+	 * @param box
+	 * @returns true if box
+	 */
 	containsBox(box: Box2): boolean;
+
+	/**
+	 * Returns a point as a proportion of this box's width and height.
+	 *
+	 * @param point
+	 * @param target - the result will be copied into this Vector2.
+	 * @returns parameter
+	 */
 	getParameter(point: Vector2, target: Vector2): Vector2;
+
+	/**
+	 * Determines whether or not this box intersects box.
+	 *
+	 * @param box - Box to check for intersection against.
+	 *
+	 * @returns true if box
+	 */
 	intersectsBox(box: Box2): boolean;
+
+	/**
+	 * Clamps the point within the bounds of this box.
+	 *
+	 * @param point
+	 * @param target - the result will be copied into this Vector2.
+	 * @returns point
+	 */
 	clampPoint(point: Vector2, target: Vector2): Vector2;
+
+	/**
+	 * Returns the distance from any edge of this box to the specified point. If the point lies inside of this box, the distance will be 0.
+	 *
+	 * @param point
+	 * @returns to point
+	 */
 	distanceToPoint(point: Vector2): number;
+
+	/**
+	 * Returns the intersection of this and box, setting the upper bound of this box to the lesser of the two boxes' upper bounds and the lower bound of this box to the greater of the two boxes' lower bounds.
+	 *
+	 * @param box
+	 * @returns intersect
+	 */
 	intersect(box: Box2): Box2;
+
+	/**
+	 * Unions this box with box, setting the upper bound of this box to the greater of the two boxes' upper bounds and the lower bound of this box to the lesser of the two boxes' lower bounds.
+	 *
+	 * @param box
+	 * @returns union
+	 */
 	union(box: Box2): Box2;
+
+	/**
+	 * Adds offset to both the upper and lower bounds of this box, effectively moving this box offset units in 2D space.
+	 *
+	 * @param offset
+	 * @returns translate
+	 */
 	translate(offset: Vector2): Box2;
+
+	/**
+	 * Returns true if this box and box share the same lower and upper bounds.
+	 *
+	 * @param box
+	 * @returns true if equals
+	 */
 	equals(box: Box2): boolean;
+
 	/**
 	 * @deprecated Use {@link Box2#isEmpty .isEmpty()} instead.
 	 */
 	empty(): any;
+
 	/**
 	 * @deprecated Use {@link Box2#intersectsBox .intersectsBox()} instead.
 	 */
 	isIntersectionBox(b: any): any;
 }
 
+/**
+ * Box3
+ * Represents an axis-aligned bounding box (AABB) in 3D space.
+ * 
+ * ```javascript
+ * const box = new THREE.Box3();
+ * const mesh = new THREE.Mesh( new THREE.SphereGeometry(), new THREE.MeshBasicMaterial());
+ * // ensure the bounding box is computed for its geometry
+ * // this should be done only once (assuming static geometries)
+ * mesh.geometry.computeBoundingBox();
+ * // ...
+ * // in the animation loop, compute the current bounding box with the world matrix
+ * box.copy( mesh.geometry.boundingBox ).applyMatrix4( mesh.matrixWorld );
+ * ```
+ */
 export interface Box3 {
 	new (min?: Vector3, max?: Vector3): this;
 
 	/**
+	 * Vector3 representing the lower (x, y, z) boundary of the box. Default is ( + Infinity, + Infinity, + Infinity ).
+	 * 
 	 * @default new THREE.Vector3( + Infinity, + Infinity, + Infinity )
 	 */
 	min: Vector3;
 
 	/**
+	 * Vector3 representing the upper (x, y, z) boundary of the box. Default is ( - Infinity, - Infinity, - Infinity ).
 	 * @default new THREE.Vector3( - Infinity, - Infinity, - Infinity )
 	 */
 	max: Vector3;
+
 	readonly isBox3: true;
 
+	/**
+	 * 
+	 * @param min 
+	 * @param max 
+	 * @returns set 
+	 */
 	set(min: Vector3, max: Vector3): this;
+	
+	/**
+	 * 
+	 * @param array 
+	 * @returns from array 
+	 */
 	setFromArray(array: ArrayLike<number>): this;
+	
+	/**
+	 * 
+	 * @param bufferAttribute 
+	 * @returns from buffer attribute 
+	 */
 	setFromBufferAttribute(bufferAttribute: BufferAttribute): this;
+	
+	/**
+	 * 
+	 * @param points 
+	 * @returns from points 
+	 */
 	setFromPoints(points: Vector3[]): this;
+	
+	/**
+	 * 
+	 * @param center 
+	 * @param size 
+	 * @returns from center and size 
+	 */
 	setFromCenterAndSize(center: Vector3, size: Vector3): this;
+	
+	/**
+	 * 
+	 * @param object 
+	 * @returns from object 
+	 */
 	setFromObject(object: Object3D): this;
+	
+	/**
+	 * 
+	 * @returns clone 
+	 */
 	clone(): this;
+	
+	/**
+	 * 
+	 * @param box 
+	 * @returns copy 
+	 */
 	copy(box: Box3): this;
+	
+	/**
+	 * 
+	 * @returns empty 
+	 */
 	makeEmpty(): this;
+	
+	/**
+	 * 
+	 * @returns true if empty 
+	 */
 	isEmpty(): boolean;
+	
+	/**
+	 * 
+	 * @param target 
+	 * @returns center 
+	 */
 	getCenter(target: Vector3): Vector3;
+	
+	/**
+	 * 
+	 * @param target 
+	 * @returns size 
+	 */
 	getSize(target: Vector3): Vector3;
+	
+	/**
+	 * 
+	 * @param point 
+	 * @returns by point 
+	 */
 	expandByPoint(point: Vector3): this;
+	
+	/**
+	 * 
+	 * @param vector 
+	 * @returns by vector 
+	 */
 	expandByVector(vector: Vector3): this;
+	
+	/**
+	 * 
+	 * @param scalar 
+	 * @returns by scalar 
+	 */
 	expandByScalar(scalar: number): this;
+	
+	/**
+	 * 
+	 * @param object 
+	 * @returns by object 
+	 */
 	expandByObject(object: Object3D): this;
+	
+	/**
+	 * 
+	 * @param point 
+	 * @returns true if point 
+	 */
 	containsPoint(point: Vector3): boolean;
+	
+	/**
+	 * 
+	 * @param box 
+	 * @returns true if box 
+	 */
 	containsBox(box: Box3): boolean;
+	
+	/**
+	 * 
+	 * @param point 
+	 * @param target 
+	 * @returns parameter 
+	 */
 	getParameter(point: Vector3, target: Vector3): Vector3;
+	
+	/**
+	 * 
+	 * @param box 
+	 * @returns true if box 
+	 */
 	intersectsBox(box: Box3): boolean;
+	
+	/**
+	 * 
+	 * @param sphere 
+	 * @returns true if sphere 
+	 */
 	intersectsSphere(sphere: Sphere): boolean;
+	
+	/**
+	 * 
+	 * @param plane 
+	 * @returns true if plane 
+	 */
 	intersectsPlane(plane: Plane): boolean;
+	
+	/**
+	 * 
+	 * @param triangle 
+	 * @returns true if triangle 
+	 */
 	intersectsTriangle(triangle: Triangle): boolean;
+	
+	/**
+	 * 
+	 * @param point 
+	 * @param target 
+	 * @returns point 
+	 */
 	clampPoint(point: Vector3, target: Vector3): Vector3;
+	
+	/**
+	 * 
+	 * @param point 
+	 * @returns to point 
+	 */
 	distanceToPoint(point: Vector3): number;
+	
+	/**
+	 * 
+	 * @param target 
+	 * @returns bounding sphere 
+	 */
 	getBoundingSphere(target: Sphere): Sphere;
+	
+	/**
+	 * 
+	 * @param box 
+	 * @returns intersect 
+	 */
 	intersect(box: Box3): this;
+
+	/**
+	 * 
+	 * @param box 
+	 * @returns union 
+	 */
 	union(box: Box3): this;
+	
+	/**
+	 * Transforms this Box3 with the supplied matrix.
+	 * 
+	 * @param matrix - The Matrix4 to apply
+	 * @returns matrix4 
+	 */
 	applyMatrix4(matrix: Matrix4): this;
+	
+	/**
+	 * 
+	 * @param offset 
+	 * @returns translate 
+	 */
 	translate(offset: Vector3): this;
+	
+	/**
+	 * 
+	 * @param box 
+	 * @returns true if equals 
+	 */
 	equals(box: Box3): boolean;
+
 	/**
 	 * @deprecated Use {@link Box3#isEmpty .isEmpty()} instead.
 	 */
 	empty(): any;
+
 	/**
 	 * @deprecated Use {@link Box3#intersectsBox .intersectsBox()} instead.
 	 */
 	isIntersectionBox(b: any): any;
+
 	/**
 	 * @deprecated Use {@link Box3#intersectsSphere .intersectsSphere()} instead.
 	 */
@@ -118,12 +463,29 @@ export interface HSL {
 /**
  * Represents a color. See also {@link ColorUtils}.
  *
+ * ```javascript
+ * //empty constructor - will default white
+ * const color1 = new THREE.Color();
+ * //Hexadecimal color (recommended)
+ * const color2 = new THREE.Color( 0xff0000 );
+ * //RGB string
+ * const color3 = new THREE.Color("rgb(255, 0, 0)");
+ * const color4 = new THREE.Color("rgb(100%, 0%, 0%)");
+ * //X11 color name - all 140 color names are supported.
+ * //Note the lack of CamelCase in the name
+ * const color5 = new THREE.Color( 'skyblue' );
+ * //HSL string
+ * const color6 = new THREE.Color("hsl(0, 100%, 50%)");
+ * //Separate RGB values between 0 and 1
+ * const color7 = new THREE.Color( 1, 0, 0 );
+ * ```
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/math/Color.js|src/math/Color.js}
  *
  * @example
- * const color = new THREE.Color( 0xff0000 ) : this;
+ * const color = new THREE.Color( 0xff0000 );
  */
 export interface Color {
+	
 	new (color?: ColorRepresentation): this;
 	new (r: number, g: number, b: number): this;
 
@@ -147,8 +509,25 @@ export interface Color {
 	 */
 	b: number;
 
+	/**
+	 * 
+	 * @param color 
+	 * @returns set 
+	 */
 	set(color: ColorRepresentation): Color;
+	
+	/**
+	 * 
+	 * @param scalar 
+	 * @returns scalar 
+	 */
 	setScalar(scalar: number): Color;
+	
+	/**
+	 * 
+	 * @param hex 
+	 * @returns hex 
+	 */
 	setHex(hex: number): Color;
 
 	/**
@@ -247,6 +626,11 @@ export interface Color {
 	 */
 	getHexString(): string;
 
+	/**
+	 * 
+	 * @param target 
+	 * @returns hsl 
+	 */
 	getHSL(target: HSL): HSL;
 
 	/**
@@ -255,17 +639,88 @@ export interface Color {
 	 */
 	getStyle(): string;
 
+	/**
+	 * 
+	 * @param h 
+	 * @param s 
+	 * @param l 
+	 * @returns hsl 
+	 */
 	offsetHSL(h: number, s: number, l: number): this;
 
+	/**
+	 * 
+	 * @param color 
+	 * @returns add 
+	 */
 	add(color: Color): this;
+	
+	/**
+	 * 
+	 * @param color1 
+	 * @param color2 
+	 * @returns colors 
+	 */
 	addColors(color1: Color, color2: Color): this;
+	
+	/**
+	 * 
+	 * @param s 
+	 * @returns scalar 
+	 */
 	addScalar(s: number): this;
+	
+	/**
+	 * 
+	 * @param color 
+	 * @returns sub 
+	 */
 	sub(color: Color): this;
+	
+	/**
+	 * 
+	 * @param color 
+	 * @returns multiply 
+	 */
 	multiply(color: Color): this;
+	
+	/**
+	 * 
+	 * @param s 
+	 * @returns scalar 
+	 */
 	multiplyScalar(s: number): this;
+	
+	/**
+	 * 
+	 * @param color 
+	 * @param alpha 
+	 * @returns lerp 
+	 */
 	lerp(color: Color, alpha: number): this;
+	
+	/**
+	 * 
+	 * @param color1 
+	 * @param color2 
+	 * @param alpha 
+	 * @returns colors 
+	 */
 	lerpColors(color1: Color, color2: Color, alpha: number): this;
+	
+	/**
+	 * 
+	 * @param color 
+	 * @param alpha 
+	 * @returns hsl 
+	 */
 	lerpHSL(color: Color, alpha: number): this;
+	
+	/**
+	 * 
+	 * @param color asadsa
+	 * @returns true if equals 
+	 */
 	equals(color: Color): boolean;
 
 	/**
@@ -291,6 +746,12 @@ export interface Color {
 	 */
 	toArray(xyz: ArrayLike<number>, offset?: number): ArrayLike<number>;
 
+	/**
+	 * 
+	 * @param attribute 
+	 * @param index 
+	 * @returns buffer attribute 
+	 */
 	fromBufferAttribute(attribute: BufferAttribute, index: number): this;
 
 	/**
@@ -299,6 +760,9 @@ export interface Color {
 	NAMES: Record<string, number>;
 }
 
+/**
+ * Cylindrical
+ */
 export interface Cylindrical {
 	new (radius?: number, theta?: number, y?: number): this;
 
@@ -725,18 +1189,18 @@ export type Matrix4Tuple = [
  *
  * @example
  * // Simple rig for rotating around 3 axes
- * const m = new THREE.Matrix4() : this;
- * const m1 = new THREE.Matrix4() : this;
- * const m2 = new THREE.Matrix4() : this;
- * const m3 = new THREE.Matrix4() : this;
+ * const m = new THREE.Matrix4();
+ * const m1 = new THREE.Matrix4();
+ * const m2 = new THREE.Matrix4();
+ * const m3 = new THREE.Matrix4();
  * const alpha = 0;
  * const beta = Math.PI;
  * const gamma = Math.PI/2;
- * m1.makeRotationX( alpha ) : this;
- * m2.makeRotationY( beta ) : this;
- * m3.makeRotationZ( gamma ) : this;
- * m.multiplyMatrices( m1, m2 ) : this;
- * m.multiply( m3 ) : this;
+ * m1.makeRotationX( alpha );
+ * m2.makeRotationY( beta );
+ * m3.makeRotationZ( gamma );
+ * m.multiplyMatrices( m1, m2 );
+ * m.multiply( m3 );
  */
 export interface Matrix4 extends Matrix {
 	new (): this;
@@ -1034,10 +1498,10 @@ export interface Plane {
  * Implementation of a quaternion. This is used for rotating things without incurring in the dreaded gimbal lock issue, amongst other advantages.
  *
  * @example
- * const quaternion = new THREE.Quaternion() : this;
- * quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 ) : this;
- * const vector = new THREE.Vector3( 1, 0, 0 ) : this;
- * vector.applyQuaternion( quaternion ) : this;
+ * const quaternion = new THREE.Quaternion();
+ * quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
+ * const vector = new THREE.Vector3( 1, 0, 0 );
+ * vector.applyQuaternion( quaternion );
  */
 export interface Quaternion {
 	/**
@@ -1437,8 +1901,8 @@ export type Vector2Tuple = [number, number];
  * Those definitions will be changed when TypeScript innovates Generics to be type safe.
  *
  * @example
- * const v:THREE.Vector = new THREE.Vector3() : this;
- * v.addVectors(new THREE.Vector2(0, 1), new THREE.Vector2(2, 3)) : this; // invalid but compiled successfully
+ * const v:THREE.Vector = new THREE.Vector3();
+ * v.addVectors(new THREE.Vector2(0, 1), new THREE.Vector2(2, 3)); // invalid but compiled successfully
  */
 export interface Vector {
 	setComponent(index: number, value: number): this;
@@ -1557,35 +2021,70 @@ export interface Vector {
  * 2D vector.
  *
  * ( class Vector2 extends Vector<Vector2> )
+ *
+ * Class representing a 2D vector. A 2D vector is an ordered pair of numbers (labeled x and y), which can be used to represent a number of things, such as: A point in 2D space (i.e. a position on a plane).
+ * A direction and length across a plane. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0) to (x, y) and the direction is also measured from (0, 0) towards (x, y). Any arbitrary ordered pair of numbers.
+ * There are other things a 2D vector can be used to represent, such as momentum vectors, complex numbers and so on, however these are the most common uses in three.js.
+ * Iterating through a Vector2 instance will yield its components (x, y) in the corresponding order.
+ *
+ * ```javascript
+ * const a = new THREE.Vector2( 0, 1 );
+ * //no arguments; will be initialised to (0, 0)
+ * const b = new THREE.Vector2( );
+ * const d = a.distanceTo( b );
+ * ```
  */
 export interface Vector2 extends Vector {
+	/**
+	 * @param [x] the x value of this vector. Default is *0*.
+	 * @param [y] the y value of this vector. Default is *0*.
+	 */
 	new (x?: number, y?: number): this;
 
 	/**
+	 * the x value of this vector. Default is *0*
 	 * @default 0
 	 */
 	x: number;
 
 	/**
+	 * the y value of this vector. Default is *0*.
 	 * @default 0
 	 */
 	y: number;
+
+	/**
+	 * Alias for x
+	 */
 	width: number;
+
+	/**
+	 * Alias for y
+	 */
 	height: number;
 	readonly isVector2: true;
 
 	/**
 	 * Sets value of this vector.
+	 * @param x
+	 * @param y
+	 * @returns set
 	 */
 	set(x: number, y: number): this;
 
 	/**
 	 * Sets the x and y values of this vector both equal to scalar.
+	 *
+	 * @param scalar
+	 * @returns scalar
 	 */
 	setScalar(scalar: number): this;
 
 	/**
 	 * Sets X component of this vector.
+	 *
+	 * @param x
+	 * @returns x
 	 */
 	setX(x: number): this;
 
@@ -1875,10 +2374,10 @@ export type Vector3Tuple = [number, number, number];
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/math/Vector3.js}
  *
  * @example
- * const a = new THREE.Vector3( 1, 0, 0 ) : this;
- * const b = new THREE.Vector3( 0, 1, 0 ) : this;
- * const c = new THREE.Vector3() : this;
- * c.crossVectors( a, b ) : this;
+ * const a = new THREE.Vector3( 1, 0, 0 );
+ * const b = new THREE.Vector3( 0, 1, 0 );
+ * const c = new THREE.Vector3();
+ * c.crossVectors( a, b );
  */
 export interface Vector3 extends Vector {
 	new (x?: number, y?: number, z?: number): this;

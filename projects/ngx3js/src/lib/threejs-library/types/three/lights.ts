@@ -35,9 +35,9 @@ export interface AmbientLightProbe extends LightProbe {
  *
  * @example
  * // White directional light at half intensity shining from the top.
- * const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 ) : this;
- * directionalLight.position.set( 0, 1, 0 ) : this;
- * scene.add( directionalLight ) : this;
+ * const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+ * directionalLight.position.set( 0, 1, 0 );
+ * scene.add( directionalLight );
  */
 export interface DirectionalLight extends Light {
     new( color?: ColorRepresentation, intensity?: number) : this;
@@ -256,9 +256,9 @@ export interface LightShadow {
 
 /**
  * @example
- * const light = new THREE.PointLight( 0xff0000, 1, 100 ) : this;
- * light.position.set( 50, 50, 50 ) : this;
- * scene.add( light ) : this;
+ * const light = new THREE.PointLight( 0xff0000, 1, 100 );
+ * light.position.set( 50, 50, 50 );
+ * scene.add( light );
  */
 export interface PointLight extends Light {
     new( color?: ColorRepresentation, intensity?: number, distance?: number, decay?: number) : this;

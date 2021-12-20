@@ -65,8 +65,8 @@ export interface CubeCamera extends Object3D {
  * see {@link https://github.com/mrdoob/three.js/blob/master/src/cameras/OrthographicCamera.js|src/cameras/OrthographicCamera.js}
  *
  * @example
- * const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 ) : this;
- * scene.add( camera ) : this;
+ * const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+ * scene.add( camera );
  */
 export interface OrthographicCamera extends Camera {
     /**
