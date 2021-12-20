@@ -1197,16 +1197,13 @@ export interface LogLuv {
 	type: TextureDataType;
 	flipY: boolean;
 }
-/*
 export interface LogLuvLoader extends DataTextureLoader {
     type: TextureDataType;
     new(manager: LoadingManager) : this;
-
     parse(buffer: Iterable<number>): LogLuv;
-
     setDataType(value: TextureDataType) : this;
 }
-*/
+
 export interface LottieLoader extends Loader {
 	new (manager?: LoadingManager): this;
 

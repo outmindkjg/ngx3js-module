@@ -185,6 +185,11 @@ export class NgxLocalStorageService {
 	private hdrCubeTextureLoader: I3JS.HDRCubeTextureLoader = null;
 
 	/**
+	 * Log luv loader of ngx local storage service
+	 */
+	private logLuvLoader: I3JS.LogLuvLoader = null;
+
+	/**
 	 * Kmz loader of local storage service
 	 */
 	private kmzLoader: I3JS.KMZLoader = null;
@@ -306,7 +311,7 @@ export class NgxLocalStorageService {
 	 */
 	private getStoreUrlList(url: string | string[]) {
 		if (typeof url === 'string') {
-			return NgxThreeUtil.getStoreUrl(url);
+			return [NgxThreeUtil.getStoreUrl(url)] ;
 		} else {
 			const modUrl: any[] = [];
 			url.forEach((path) => {
@@ -1205,7 +1210,6 @@ export class NgxLocalStorageService {
 			if (this.gltfLoader === null) {
 				this.gltfLoader = new N3JS.GLTFLoader(NgxThreeUtil.getLoadingManager());
 			}
-			this.setLoaderWithOption(this.gltfLoader as any, options);
 			if (options) {
 				if (options.useDraco) {
 					if (this.dracoLoader === null) {
@@ -1227,6 +1231,7 @@ export class NgxLocalStorageService {
 					this.gltfLoader.setKTX2Loader(this.ktx2Loader);
 					this.gltfLoader.setMeshoptDecoder(N3JS.MeshoptDecoder);
 				}
+				this.setLoaderWithOption(this.gltfLoader as any, options);
 			}
 			this.gltfLoader.load(
 				key,
@@ -1246,7 +1251,7 @@ export class NgxLocalStorageService {
 			key.endsWith('.vpd')
 		) {
 			if (this.mmdLoader === null) {
-				this.mmdLoader = new N3JS.MMDLoader(NgxThreeUtil.getLoadingManager());
+				this.mmdLoader = new N3JS.MMDLoader();
 			}
 			this.setLoaderWithOption(this.mmdLoader as any, options);
 			const vmdUrl = options && options.vmdUrl ? options.vmdUrl : null;
@@ -1769,6 +1774,24 @@ export class NgxLocalStorageService {
 			}
 			this.setLoaderWithOption(this.rgbmLoader as any, options);
 			this.rgbmLoader.load(
+				key,
+				(dataTexture) => {
+					callBack({
+						texture: dataTexture as any,
+						source: dataTexture,
+					});
+				},
+				this.onProgress,
+				this.onError
+			);
+		} else if (
+			key.endsWith('.tif')
+		) {
+			if (this.logLuvLoader === null) {
+				this.logLuvLoader = new N3JS.LogLuvLoader(NgxThreeUtil.getLoadingManager());
+			}
+			this.setLoaderWithOption(this.logLuvLoader as any, options);
+			this.logLuvLoader.load(
 				key,
 				(dataTexture) => {
 					callBack({

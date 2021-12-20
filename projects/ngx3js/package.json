@@ -34,13 +34,18 @@
 		"patch": "./bin/patch.js"
 	},
 	"homepage": "https://outmindkjg.github.io/ngx3js-doc/",
+	"browser": {
+		"fs": false,
+		"path": false
+	},
 	"dependencies": {
 		"gsap": "^3.8.0",
 		"three": "0.135.0",
 		"tslib": "^2.3.0"
 	},
 	"devDependencies": {
-		"@types/three": "0.135.0"
+		"@types/three": "0.135.0",
+		"rollup-plugin-polyfill-node": "^0.8.0"
 	},
 	"peerDependencies": {
 		"@angular/common": ">=12.2.10",

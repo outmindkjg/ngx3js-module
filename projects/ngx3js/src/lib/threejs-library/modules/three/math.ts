@@ -1,5 +1,6 @@
 import {
 	Box2 as O3JS_Box2,
+	Box3 as O3JS_Box3,
 	Color as O3JS_Color,
 	CubicInterpolant as O3JS_CubicInterpolant,
 	Cylindrical as O3JS_Cylindrical,
@@ -32,7 +33,7 @@ export type Box2 = I3JS.Box2;
 export const Box2: Box2 = O3JS_Box2 as any;
 
 export type Box3 = I3JS.Box3;
-export const Box3: Box3 = O3JS_Box2 as any;
+export const Box3: Box3 = O3JS_Box3 as any;
 
 export type Color = I3JS.Color;
 export const Color: Color = O3JS_Color as any;

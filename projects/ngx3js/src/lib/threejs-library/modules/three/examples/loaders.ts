@@ -19,7 +19,7 @@ import { KMZLoader as O3JS_KMZLoader } from 'three/examples/jsm/loaders/KMZLoade
 import { KTX2Loader as O3JS_KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
 import { KTXLoader as O3JS_KTXLoader } from 'three/examples/jsm/loaders/KTXLoader';
 import { LDrawLoader as O3JS_LDrawLoader } from 'three/examples/jsm/loaders/LDrawLoader';
-// import { LogLuvLoader as O3JS_LogLuvLoader } from 'three/examples/jsm/loaders/LogLuvLoader';
+import { LogLuvLoader as O3JS_LogLuvLoader } from 'three/examples/jsm/loaders/LogLuvLoader';
 import { LottieLoader as O3JS_LottieLoader } from 'three/examples/jsm/loaders/LottieLoader';
 import { LUT3dlLoader as O3JS_LUT3dlLoader } from 'three/examples/jsm/loaders/LUT3dlLoader';
 import { LUTCubeLoader as O3JS_LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader';
@@ -126,8 +126,8 @@ export const LUTCubeLoader: LUTCubeLoader = O3JS_LUTCubeLoader as any;
 export type LWOLoader = I3JS.LWOLoader;
 export const LWOLoader: LWOLoader = O3JS_LWOLoader as any;
 
-// export type LogLuvLoader = I3JS.LogLuvLoader;
-// export const LogLuvLoader: LogLuvLoader = O3JS_LogLuvLoader as any;
+export type LogLuvLoader = I3JS.LogLuvLoader;
+export const LogLuvLoader: LogLuvLoader = O3JS_LogLuvLoader as any;
 
 export type LottieLoader = I3JS.LottieLoader;
 export const LottieLoader: LottieLoader = O3JS_LottieLoader as any;
