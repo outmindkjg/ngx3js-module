@@ -67,7 +67,7 @@ export type AsyncFlateStreamHandler = (err: Error, data: Uint8Array, final: bool
  * @param data The resulting data. Only present if `err` is null
  */
 export type FlateCallback = (err: Error | string, data: Uint8Array) => void;
-interface AsyncOptions {
+export interface AsyncOptions {
 	/**
 	 * Whether or not to "consume" the source data. This will make the typed array/buffer you pass in
 	 * unusable but will increase performance and reduce memory usage.

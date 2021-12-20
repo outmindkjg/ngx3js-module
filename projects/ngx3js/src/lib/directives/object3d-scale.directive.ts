@@ -6,8 +6,8 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import {
-	AbstractObject3dDirective,
-	AbstractThreeDirective
+	NgxAbstractObject3dDirective,
+	NgxAbstractThreeDirective
 } from '../directive.abstract';
 import { I3JS, NgxThreeUtil } from '../interface';
 import { TObject3dFunction, IRendererTimer, IScaleOptions } from '../ngx-interface';
@@ -35,14 +35,14 @@ import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 	selector: '[ngx3jsScale]',
 	providers: [
 		{
-			provide: AbstractThreeDirective,
+			provide: NgxAbstractThreeDirective,
 			multi: true,
 			useExisting: forwardRef(() => ScaleDirective),
 		},
 	],
 })
 export class ScaleDirective
-	extends AbstractObject3dDirective
+	extends NgxAbstractObject3dDirective
 	implements OnChanges
 {
 	/**

@@ -19,7 +19,7 @@ import { Observable, Subject } from 'rxjs';
 import { NgxCanvasComponent } from '../canvas/canvas.component';
 import { NgxControlComponent } from '../control/control.component';
 import { NgxAbstractControllerComponent } from '../controller.component.abstract';
-import { AbstractThreeDirective } from '../directive.abstract';
+import { NgxAbstractThreeDirective } from '../directive.abstract';
 import { NgxEffectComponent } from '../effect/effect.component';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { IControlOptions, IGuiControlParam, IRendererEvent, IRendererInfo, IRendererTimer } from '../ngx-interface';
@@ -457,8 +457,8 @@ export class NgxRendererComponent
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(AbstractThreeDirective, { descendants: true })
-	private threeDirectiveList: QueryList<AbstractThreeDirective>;
+	@ContentChildren(NgxAbstractThreeDirective, { descendants: true })
+	private threeDirectiveList: QueryList<NgxAbstractThreeDirective>;
 
 	/**
 	 * View child of renderer component

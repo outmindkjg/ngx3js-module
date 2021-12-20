@@ -1,6 +1,6 @@
 import { Curve, Vector2, Vector3, Vector4 } from '../index';
 
-interface ExampleCustomCurves extends Curve<Vector3> {
+export interface ExampleCustomCurves extends Curve<Vector3> {
     new(scale?: number) : this;
     scale: number;
 }

@@ -21,22 +21,22 @@ type AngleType =
 /**
  * Angle Pipe
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnglePipe) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAnglePipe) page for details.
  * See the [ngx pipes](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_pipes) page for a live demo.
  *
  * ```html
  * {{ 120 | ngx3jsAngle : 'rad' }}
  * ```
  * @export
- * @class AnglePipe
+ * @class NgxAnglePipe
  * @implements {PipeTransform}
  */
 @Pipe({
 	name: 'ngx3jsAngle',
 })
-export class AnglePipe implements PipeTransform {
+export class NgxAnglePipe implements PipeTransform {
 	/**
-	 * Creates an instance of AnglePipe.
+	 * Creates an instance of NgxAnglePipe.
 	 *
 	 * @constructor
 	 */

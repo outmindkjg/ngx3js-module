@@ -7,15 +7,15 @@ import { NgxAbstractObject3dComponent } from './object3d.abstract';
 
 
 /**
- * AbstractObject3dDirective Abstract
+ * NgxAbstractObject3dDirective Abstract
  *
  * @export
  * @abstract
  */
 @Directive()
-export abstract class AbstractThreeDirective {
+export abstract class NgxAbstractThreeDirective {
 	/**
-	 * Creates an instance of AbstractObject3dDirective.
+	 * Creates an instance of NgxAbstractObject3dDirective.
 	 *
 	 * @constructor
 	 */
@@ -371,15 +371,15 @@ export abstract class AbstractThreeDirective {
 	}
 }
 /**
- * AbstractObject3dDirective Abstract
+ * NgxAbstractObject3dDirective Abstract
  *
  * @export
  * @abstract
  */
 @Directive()
-export abstract class AbstractObject3dDirective extends AbstractThreeDirective {
+export abstract class NgxAbstractObject3dDirective extends NgxAbstractThreeDirective {
 	/**
-	 * Creates an instance of AbstractObject3dDirective.
+	 * Creates an instance of NgxAbstractObject3dDirective.
 	 *
 	 * @constructor
 	 */

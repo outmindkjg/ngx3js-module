@@ -6,7 +6,7 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import {
-	AbstractThreeDirective
+	NgxAbstractThreeDirective
 } from '../directive.abstract';
 import { NgxThreeUtil } from '../interface';
 import { IDirectiveOptions, TObjectFunction, IRendererTimer, INumberOptions } from '../ngx-interface';
@@ -34,14 +34,14 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: '[ngx3jsNumber]',
 	providers: [
 		{
-			provide: AbstractThreeDirective,
+			provide: NgxAbstractThreeDirective,
 			multi: true,
 			useExisting: forwardRef(() => NumberDirective),
 		},
 	],
 })
 export class NumberDirective
-	extends AbstractThreeDirective
+	extends NgxAbstractThreeDirective
 	implements OnChanges
 {
 	/**

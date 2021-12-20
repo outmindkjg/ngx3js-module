@@ -1,5 +1,5 @@
 import { Directive, forwardRef, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AbstractObject3dDirective, AbstractThreeDirective } from '../directive.abstract';
+import { NgxAbstractObject3dDirective, NgxAbstractThreeDirective } from '../directive.abstract';
 import { I3JS, NgxThreeUtil } from '../interface';
 import { TObject3dFunction, IPositionOptions, IRendererTimer } from '../ngx-interface';
 import { NgxAbstractObject3dComponent } from '../object3d.abstract';
@@ -26,13 +26,13 @@ import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 	selector: '[ngx3jsPosition]',
 	providers: [
 		{
-			provide: AbstractThreeDirective,
+			provide: NgxAbstractThreeDirective,
 			multi: true,
 			useExisting: forwardRef(() => PositionDirective),
 		},
 	],
 })
-export class PositionDirective extends AbstractObject3dDirective implements OnChanges {
+export class PositionDirective extends NgxAbstractObject3dDirective implements OnChanges {
 	/**
 	 * Input  of position directive
 	 */

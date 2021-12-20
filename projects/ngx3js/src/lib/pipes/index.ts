@@ -1,9 +1,9 @@
 /** @format */
 
-import { AnglePipe } from './angle.pipe';
-import { AssetsPipe } from './asset.pipe';
-import { ColorPipe } from './color.pipe';
+import { NgxAnglePipe } from './angle.pipe';
+import { NgxAssetsPipe } from './asset.pipe';
+import { NgxColorPipe } from './color.pipe';
 
-export const N3JS_PIPES = [ColorPipe, AnglePipe, AssetsPipe];
+export const N3JS_PIPES = [NgxColorPipe, NgxAnglePipe, NgxAssetsPipe];
 
-export { ColorPipe, AnglePipe, AssetsPipe };
+export { NgxColorPipe, NgxAnglePipe, NgxAssetsPipe };

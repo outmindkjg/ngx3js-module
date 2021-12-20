@@ -1,7 +1,7 @@
 import { Directive, forwardRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {
-	AbstractObject3dDirective,
-	AbstractThreeDirective
+	NgxAbstractObject3dDirective,
+	NgxAbstractThreeDirective
 } from '../directive.abstract';
 import { I3JS, NgxThreeUtil } from '../interface';
 import { TObject3dFunction, IRendererTimer, IRotateOptions } from '../ngx-interface';
@@ -29,13 +29,13 @@ import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 	selector: '[ngx3jsRotate]',
 	providers: [
 		{
-			provide: AbstractThreeDirective,
+			provide: NgxAbstractThreeDirective,
 			multi: true,
 			useExisting: forwardRef(() => RotateDirective),
 		},
 	],
 })
-export class RotateDirective extends AbstractObject3dDirective implements OnChanges {
+export class RotateDirective extends NgxAbstractObject3dDirective implements OnChanges {
 	/**
 	 * Input  of rotate directive
 	 */
