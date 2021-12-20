@@ -37,18 +37,15 @@
 	"dependencies": {
 		"gsap": "^3.8.0",
 		"three": "0.135.0",
-		"chroma-js": "^2.1.2",
 		"tslib": "^2.3.0"
 	},
 	"devDependencies": {
-		"@types/three": "0.135.0",
-		"@types/chroma-js": "^2.1.2"
+		"@types/three": "0.135.0"
 	},
 	"peerDependencies": {
 		"@angular/common": ">=12.2.10",
 		"@angular/core": ">=12.2.10",
 		"rxjs": ">=6.6.7",
-		"zone.js": ">=0.11.4",
-		"lil-gui": "^0.12.0"
+		"zone.js": ">=0.11.4"
 	}
 }

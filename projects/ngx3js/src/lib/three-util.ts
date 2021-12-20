@@ -1,4 +1,3 @@
-import * as CHROMA from 'chroma-js';
 import { Observable, Subscription } from 'rxjs';
 import { NgxMeshComponent } from './mesh/mesh.component';
 import {
@@ -456,15 +455,6 @@ export class NgxThreeUtil {
 	 * Element events of three util
 	 */
 	private static _elementEvents: { [key: string]: { [key: string]: any } } = {};
-
-	/**
-	 * Gets chroma scale
-	 * @param scales
-	 * @returns chroma scale
-	 */
-	public static getChromaScale(...scales: any[]): CHROMA.Scale {
-		return CHROMA.scale(scales);
-	}
 
 	/**
 	 * Last renderer of three util

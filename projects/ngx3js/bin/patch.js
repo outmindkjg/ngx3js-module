@@ -65,11 +65,9 @@ rl.question(question, function (agree) {
 				packageJson['dependencies'] = {};
 			}
 			const dependencies = packageJson['dependencies'];
-			dependencies['chroma-js'] = '^2.1.2';
 			dependencies['fs'] = '0.0.1-security';
 			dependencies['fs-web'] = '^1.0.1';
 			dependencies['gsap'] = '^3.8.0';
-			dependencies['lil-gui'] = '^0.12.0';
 			dependencies['three'] = '0.135.0';
 
 			if (packageJson['devDependencies'] === undefined) {
@@ -77,8 +75,6 @@ rl.question(question, function (agree) {
 			}
 			const devDependencies = packageJson['devDependencies'];
 			devDependencies['@types/three'] = '0.135.0';
-			devDependencies['@types/chroma-js'] = '^2.1.2';
-
 			const tsconfigJson = readJson('tsconfig');
 			if (tsconfigJson['compilerOptions'] === undefined) {
 				tsconfigJson['compilerOptions'] = {};
