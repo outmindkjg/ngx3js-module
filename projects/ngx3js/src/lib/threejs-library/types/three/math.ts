@@ -3053,7 +3053,6 @@ export type Vector2Tuple = [number, number];
 export interface Vector {
 	/**
 	 *
-	 * @returns aaa
 	 */
 	new (): this;
 

@@ -1059,7 +1059,6 @@ export interface InstancedBufferAttribute extends BufferAttribute {
 	 * @param itemSize
 	 * @param [normalized]
 	 * @param [meshPerAttribute]
-	 * @returns aaa
 	 */
 	new (array: ArrayLike<number>, itemSize: number, normalized?: boolean, meshPerAttribute?: number): this;
 
@@ -1106,7 +1105,6 @@ export interface InstancedInterleavedBuffer extends InterleavedBuffer {
 	 * @param array
 	 * @param stride
 	 * @param [meshPerAttribute]
-	 * @returns aaa
 	 */
 	new (array: ArrayLike<number>, stride: number, meshPerAttribute?: number): this;
 
@@ -1229,7 +1227,6 @@ export interface InterleavedBufferAttribute {
 	 * @param itemSize
 	 * @param offset
 	 * @param [normalized]
-	 * @returns aaa
 	 */
 	new (interleavedBuffer: InterleavedBuffer, itemSize: number, offset: number, normalized?: boolean): this;
 
