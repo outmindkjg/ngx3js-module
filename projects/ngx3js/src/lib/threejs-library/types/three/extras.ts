@@ -4,11 +4,19 @@ import { Color, Vector, Vector2, Vector3 } from './math';
 import { WebGLRenderer, WebGLRenderTarget } from './renderers';
 import { CubeTexture, Texture } from './textures';
 
+/**
+ */
 export interface DataUtils {
+	/**
+	 */
 	toHalfFloat(val: number): number;
 }
 
+/**
+ */
 export interface ImageUtils {
+	/**
+	 */
 	getDataURL(image: any): string;
 
 	/**
@@ -37,23 +45,58 @@ export interface ImageUtils {
 	): Texture;
 }
 
+/**
+ */
 export interface PMREMGenerator {
+	/**
+	 */
 	new (renderer: WebGLRenderer): this;
+
+	/**
+	 */
 	fromScene(scene: Scene, sigma?: number, near?: number, far?: number): WebGLRenderTarget;
+
+	/**
+	 */
 	fromEquirectangular(equirectangular: Texture): WebGLRenderTarget;
+
+	/**
+	 */
 	fromCubemap(cubemap: CubeTexture): WebGLRenderTarget;
+
+	/**
+	 */
 	compileCubemapShader(): void;
+
+	/**
+	 */
 	compileEquirectangularShader(): void;
+
+	/**
+	 */
 	dispose(): void;
 }
+
+/**
+ */
 export interface Vec2 {
 	x: number;
 	y: number;
 }
 
+/**
+ */
 export interface ShapeUtils {
+	/**
+	 */
 	area(contour: Vec2[]): number;
+
+	/**
+	 */
 	triangulateShape(contour: Vec2[], holes: Vec2[][]): number[][];
+
+	/**
+	 */
 	isClockWise(pts: Vec2[]): boolean;
 }
 
@@ -64,9 +107,10 @@ export interface ShapeUtils {
  * class Curve<T extends Vector>
  */
 export interface Curve<T extends Vector> {
+	/**
+	 */
+	new (): this;
 
-	new() : this;
-	
 	/**
 	 * @default 'Curve'
 	 */
@@ -148,9 +192,20 @@ export interface Curve<T extends Vector> {
 		binormals: Vector3[];
 	};
 
+	/**
+	 */
 	clone(): this;
+
+	/**
+	 */
 	copy(source: Curve<T>): this;
+
+	/**
+	 */
 	toJSON(): object;
+
+	/**
+	 */
 	fromJSON(json: object): this;
 
 	/**
@@ -159,7 +214,11 @@ export interface Curve<T extends Vector> {
 	create(constructorFunc: () => void, getPointFunc: () => void): () => void;
 }
 
+/**
+ */
 export interface CurvePath<T extends Vector> extends Curve<T> {
+	/**
+	 */
 	new (): this;
 
 	/**
@@ -177,9 +236,20 @@ export interface CurvePath<T extends Vector> extends Curve<T> {
 	 */
 	autoClose: boolean;
 
+	/**
+	 */
 	add(curve: Curve<T>): void;
+
+	/**
+	 */
 	closePath(): void;
+
+	/**
+	 */
 	getPoint(t: number, optionalTarget?: T): T;
+
+	/**
+	 */
 	getCurveLengths(): number[];
 }
 
@@ -187,6 +257,8 @@ export interface CurvePath<T extends Vector> extends Curve<T> {
  * a 2d path representation, comprising of points, lines, and cubes, similar to the html5 2d canvas api. It extends CurvePath.
  */
 export interface Path extends CurvePath<Vector2> {
+	/**
+	 */
 	new (points?: Vector2[]): this;
 
 	/**
@@ -203,14 +275,41 @@ export interface Path extends CurvePath<Vector2> {
 	 * @deprecated Use {@link Path#setFromPoints .setFromPoints()} instead.
 	 */
 	fromPoints(vectors: Vector2[]): this;
+
+	/**
+	 */
 	setFromPoints(vectors: Vector2[]): this;
+
+	/**
+	 */
 	moveTo(x: number, y: number): this;
+
+	/**
+	 */
 	lineTo(x: number, y: number): this;
+
+	/**
+	 */
 	quadraticCurveTo(aCPx: number, aCPy: number, aX: number, aY: number): this;
+
+	/**
+	 */
 	bezierCurveTo(aCP1x: number, aCP1y: number, aCP2x: number, aCP2y: number, aX: number, aY: number): this;
+
+	/**
+	 */
 	splineThru(pts: Vector2[]): this;
+
+	/**
+	 */
 	arc(aX: number, aY: number, aRadius: number, aStartAngle: number, aEndAngle: number, aClockwise: boolean): this;
+
+	/**
+	 */
 	absarc(aX: number, aY: number, aRadius: number, aStartAngle: number, aEndAngle: number, aClockwise: boolean): this;
+
+	/**
+	 */
 	ellipse(
 		aX: number,
 		aY: number,
@@ -221,6 +320,9 @@ export interface Path extends CurvePath<Vector2> {
 		aClockwise: boolean,
 		aRotation: number
 	): this;
+
+	/**
+	 */
 	absellipse(
 		aX: number,
 		aY: number,
@@ -237,6 +339,8 @@ export interface Path extends CurvePath<Vector2> {
  * Defines a 2d shape plane using paths.
  */
 export interface Shape extends Path {
+	/**
+	 */
 	new (points?: Vector2[]): this;
 
 	/**
@@ -244,6 +348,8 @@ export interface Shape extends Path {
 	 */
 	type: string;
 
+	/**
+	 */
 	uuid: string;
 
 	/**
@@ -251,15 +357,23 @@ export interface Shape extends Path {
 	 */
 	holes: Path[];
 
+	/**
+	 */
 	getPointsHoles(divisions: number): Vector2[][];
 
+	/**
+	 */
 	extractPoints(divisions: number): {
 		shape: Vector2[];
 		holes: Vector2[][];
 	};
 }
 
+/**
+ */
 export interface ShapePath {
+	/**
+	 */
 	new (): this;
 
 	/**
@@ -282,14 +396,36 @@ export interface ShapePath {
 	 */
 	currentPath: any;
 
+	/**
+	 */
 	moveTo(x: number, y: number): this;
+
+	/**
+	 */
 	lineTo(x: number, y: number): this;
+
+	/**
+	 */
 	quadraticCurveTo(aCPx: number, aCPy: number, aX: number, aY: number): this;
+
+	/**
+	 */
 	bezierCurveTo(aCP1x: number, aCP1y: number, aCP2x: number, aCP2y: number, aX: number, aY: number): this;
+
+	/**
+	 */
 	splineThru(pts: Vector2[]): this;
+
+	/**
+	 */
 	toShapes(isCCW: boolean, noHoles?: boolean): Shape[];
 }
+
+/**
+ */
 export interface ArcCurve extends EllipseCurve {
+	/**
+	 */
 	new (aX: number, aY: number, aRadius: number, aStartAngle: number, aEndAngle: number, aClockwise: boolean): this;
 
 	/**
@@ -299,13 +435,29 @@ export interface ArcCurve extends EllipseCurve {
 }
 
 // Extras / Curves /////////////////////////////////////////////////////////////////////
+
+/**
+ */
 export interface CurveUtils {
+	/**
+	 */
 	tangentQuadraticBezier(t: number, p0: number, p1: number, p2: number): number;
+
+	/**
+	 */
 	tangentCubicBezier(t: number, p0: number, p1: number, p2: number, p3: number): number;
+
+	/**
+	 */
 	tangentSpline(t: number, p0: number, p1: number, p2: number, p3: number): number;
+
+	/**
+	 */
 	interpolate(p0: number, p1: number, p2: number, p3: number, t: number): number;
 }
 
+/**
+ */
 export interface CatmullRomCurve3 extends Curve<Vector3> {
 	/**
 	 * @param [points=[]]
@@ -326,7 +478,11 @@ export interface CatmullRomCurve3 extends Curve<Vector3> {
 	points: Vector3[];
 }
 
+/**
+ */
 export interface CubicBezierCurve extends Curve<Vector2> {
+	/**
+	 */
 	new (v0: Vector2, v1: Vector2, v2: Vector2, v3: Vector2): this;
 
 	/**
@@ -355,7 +511,11 @@ export interface CubicBezierCurve extends Curve<Vector2> {
 	v3: Vector2;
 }
 
+/**
+ */
 export interface CubicBezierCurve3 extends Curve<Vector3> {
+	/**
+	 */
 	new (v0: Vector3, v1: Vector3, v2: Vector3, v3: Vector3): this;
 
 	/**
@@ -384,7 +544,11 @@ export interface CubicBezierCurve3 extends Curve<Vector3> {
 	v3: Vector3;
 }
 
+/**
+ */
 export interface EllipseCurve extends Curve<Vector2> {
+	/**
+	 */
 	new (
 		aX: number,
 		aY: number,
@@ -442,7 +606,11 @@ export interface EllipseCurve extends Curve<Vector2> {
 	aRotation: number;
 }
 
+/**
+ */
 export interface LineCurve extends Curve<Vector2> {
+	/**
+	 */
 	new (v1: Vector2, v2: Vector2): this;
 
 	/**
@@ -461,7 +629,11 @@ export interface LineCurve extends Curve<Vector2> {
 	v2: Vector2;
 }
 
+/**
+ */
 export interface LineCurve3 extends Curve<Vector3> {
+	/**
+	 */
 	new (v1: Vector3, v2: Vector3): this;
 
 	/**
@@ -480,7 +652,11 @@ export interface LineCurve3 extends Curve<Vector3> {
 	v2: Vector3;
 }
 
+/**
+ */
 export interface QuadraticBezierCurve extends Curve<Vector2> {
+	/**
+	 */
 	new (v0: Vector2, v1: Vector2, v2: Vector2): this;
 
 	/**
@@ -504,7 +680,11 @@ export interface QuadraticBezierCurve extends Curve<Vector2> {
 	v2: Vector2;
 }
 
+/**
+ */
 export interface QuadraticBezierCurve3 extends Curve<Vector3> {
+	/**
+	 */
 	new (v0: Vector3, v1: Vector3, v2: Vector3): this;
 
 	/**
@@ -528,7 +708,11 @@ export interface QuadraticBezierCurve3 extends Curve<Vector3> {
 	v2: Vector3;
 }
 
+/**
+ */
 export interface SplineCurve extends Curve<Vector2> {
+	/**
+	 */
 	new (points?: Vector2[]): this;
 
 	/**
@@ -542,7 +726,18 @@ export interface SplineCurve extends Curve<Vector2> {
 	points: Vector2[];
 }
 
+/**
+ */
 export interface CurveVector2 extends Curve<Vector2> {}
+
+/**
+ */
 export interface CurveVector3 extends Curve<Vector3> {}
+
+/**
+ */
 export interface CurvePathVector2 extends CurvePath<Vector2> {}
+
+/**
+ */
 export interface CurvePathVector3 extends CurvePath<Vector3> {}

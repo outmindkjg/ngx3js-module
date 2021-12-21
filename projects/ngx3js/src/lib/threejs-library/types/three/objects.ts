@@ -433,61 +433,248 @@ export interface Points<
 	updateMorphTargets(): void;
 }
 
+/**
+ * Use an array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) to create a skeleton that can be used by a [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
+ * See the [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh) page for an example of usage with standard [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+ *
+ * ```javascript
+ * //  Create a simple "arm"
+ * const bones = [];
+ * const shoulder = new THREE.Bone();
+ * const elbow = new THREE.Bone();
+ * const hand = new THREE.Bone();
+ * shoulder.add( elbow );
+ * elbow.add( hand );
+ * bones.push( shoulder );
+ * bones.push( elbow );
+ * bones.push( hand );
+ * shoulder.position.y = -5;
+ * elbow.position.y = 0;
+ * hand.position.y = 5;
+ * const armSkeleton = new THREE.Skeleton( bones );
+ * ```
+ */
 export interface Skeleton {
+	/**
+	 * Creates a new Skeleton.
+	 * @param bones - The array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone). Default is an empty array.
+	 * @param boneInverses - An array of [Matrix4s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
+	 */
 	new (bones: Bone[], boneInverses?: Matrix4[]): this;
 
+	/**
+	 */
 	uuid: string;
-	bones: Bone[];
-	boneInverses: Matrix4[];
-	boneMatrices: Float32Array;
-	boneTexture: null | DataTexture;
-	boneTextureSize: number;
-	frame: number;
-
-	init(): void;
-	calculateInverses(): void;
-	computeBoneTexture(): this;
-	pose(): void;
-	update(): void;
-	clone(): Skeleton;
-	getBoneByName(name: string): undefined | Bone;
-	dispose(): void;
 
 	/**
-	 * @deprecated This property has been removed completely.
+	 * The array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/bone). Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.
 	 */
-	useVertexTexture: boolean;
+	bones: Bone[];
+
+	/**
+	 * An array of [Matrix4s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) that represent the inverse of the [matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of the individual bones.
+	 */
+	boneInverses: Matrix4[];
+
+	/**
+	 * The array buffer holding the bone data when using a vertex texture.
+	 */
+	boneMatrices: Float32Array;
+
+	/**
+	 * The [DataTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DataTexture) holding the bone data when using a vertex texture.
+	 */
+	boneTexture: null | DataTexture;
+
+	/**
+	 * The size of the *.boneTexture*.
+	 */
+	boneTextureSize: number;
+
+	/**
+	 */
+	frame: number;
+
+	/**
+	 */
+	init(): void;
+
+	/**
+	 * Generates the *.boneInverses* array if not provided in the constructor.
+	 */
+	calculateInverses(): void;
+
+	/**
+	 * Computes an instance of [DataTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DataTexture) in order to pass the bone data more efficiently to the shader. The texture is assigned to *.boneTexture*.
+	 */
+	computeBoneTexture(): this;
+
+	/**
+	 * @returns Returns the skeleton to the base pose.
+	 */
+	pose(): void;
+
+	/**
+	 * Updates the [boneMatrices](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) and [boneTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DataTexture) after changing the bones.
+	 * This is called automatically by the [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) if the skeleton is used with a [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
+	 */
+	update(): void;
+
+	/**
+	 * @returns Returns a clone of this Skeleton object.
+	 */
+	clone(): Skeleton;
+
+	/**
+	 * Searches through the skeleton's bone array and returns the first with a matching name.
+	 * @param name - String to match to the Bone's .name property.
+	 */
+	getBoneByName(name: string): undefined | Bone;
+
+	/**
+	 * Can be used if an instance of [name] becomes obsolete in an application. The method will free internal resources.
+	 */
+	dispose(): void;
 }
 
+/**
+ * A mesh that has a [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton) with [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) that can then be used to animate the vertices of the geometry.
+ * ```javascript
+ * const geometry = new THREE.CylinderGeometry( 5, 5, 5, 5, 15, 5, 30 );
+ * //  create the skin indices and skin weights
+ * const position = geometry.attributes.position;
+ * const vertex = new THREE.Vector3();
+ * const skinIndices = [];
+ * const skinWeights = [];
+ * for ( let i = 0; i < position.count; i ++ ) {
+ * 	vertex.fromBufferAttribute( position, i );
+ * 	//  compute skinIndex and skinWeight based on some configuration data const y = ( vertex.y + sizing.halfHeight );
+ * 	const skinIndex = Math.floor( y / sizing.segmentHeight );
+ * 	const skinWeight = ( y % sizing.segmentHeight ) / sizing.segmentHeight;
+ * 	skinIndices.push( skinIndex, skinIndex + 1, 0, 0 );
+ * 	skinWeights.push( 1 - skinWeight, skinWeight, 0, 0 );
+ * }
+ * geometry.setAttribute( 'skinIndex', new THREE.Uint16BufferAttribute( skinIndices, 4 ) );
+ * geometry.setAttribute( 'skinWeight', new THREE.Float32BufferAttribute( skinWeights, 4 ) );
+ * //  create skinned mesh and skeleton
+ * const mesh = new THREE.SkinnedMesh( geometry, material );
+ * const skeleton = new THREE.Skeleton( bones );
+ * //  see example from THREE.Skeleton
+ * const rootBone = skeleton.bones[ 0 ];
+ * mesh.add( rootBone );
+ * //  bind the skeleton to the mesh mesh.bind( skeleton );
+ * //  move the bones and manipulate the model
+ * skeleton.bones[ 0 ].rotation.x = -0.1;
+ * skeleton.bones[ 1 ].rotation.x = 0.2;
+ * ```
+ * @template TGeometry
+ * @template TMaterial
+ */
 export interface SkinnedMesh<
 	TGeometry extends BufferGeometry = BufferGeometry,
 	TMaterial extends Material | Material[] = Material | Material[]
 > extends Mesh<TGeometry, TMaterial> {
+	/**
+	 * @param geometry - an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+	 * @param material - an instance of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial).
+	 */
 	new (geometry?: TGeometry, material?: TMaterial, useVertexTexture?: boolean): this;
 
+	/**
+	 * Either "attached" or "detached". "attached" uses the [SkinnedMesh.matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh.matrixWorld)
+	 * property for the base transform	matrix of the bones. "detached" uses the [SkinnedMesh.bindMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh.bindMatrix). Default is "attached".
+	 */
 	bindMode: string;
+
+	/**
+	 * The base matrix that is used for the bound bone transforms.
+	 */
 	bindMatrix: Matrix4;
+
+	/**
+	 * The base matrix that is used for resetting the bound bone transforms.
+	 */
 	bindMatrixInverse: Matrix4;
+
+	/**
+	 * [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton) representing the bone hierarchy of the skinned mesh.
+	 */
 	skeleton: Skeleton;
+
 	readonly isSkinnedMesh: true;
 
+	/**
+	 * Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
+	 * @param skeleton - [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton) created from a [Bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) tree.
+	 * @param bindMatrix - [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) that represents the base transform of the skeleton.
+	 */
 	bind(skeleton: Skeleton, bindMatrix?: Matrix4): void;
+
+	/**
+	 * This method sets the skinned mesh in the rest pose (resets the pose).
+	 */
 	pose(): void;
+
+	/**
+	 * Normalizes the skin weights.
+	 */
 	normalizeSkinWeights(): void;
+
+	/**
+	 * Updates the [MatrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
+	 */
 	updateMatrixWorld(force?: boolean): void;
+
+	/**
+	 * Calculates the position of the vertex at the given index relative to the current bone transformations.
+	 */
 	boneTransform(index: number, target: Vector3): Vector3;
 }
 
+/**
+ * A sprite is a plane that always faces towards the camera, generally with a partially transparent texture applied.
+ * Sprites do not cast shadows, setting
+ * castShadow = true will have no effect.
+ * ```javascript
+ * const map = new THREE.TextureLoader().load( 'sprite.png' );
+ * const material = new THREE.SpriteMaterial( { map: map } );
+ * const sprite = new THREE.Sprite( material );
+ * scene.add( sprite );
+ * ```
+ */
 export interface Sprite extends Object3D {
+	/**
+	 * Creates a new Sprite.
+	 * @param material - an instance of [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial). Default is a white [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial).
+	 */
 	new (material?: SpriteMaterial): this;
 
+	/**
+	 */
 	type: 'Sprite';
+
 	readonly isSprite: true;
 
-	geometry: BufferGeometry;
+	/**
+	 * An instance of [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial), defining the object's appearance.
+	 * Default is a white [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial).
+	 */
 	material: SpriteMaterial;
+
+	/**
+	 * The sprite's anchor point, and the point around which the sprite rotates. A value of (0.5, 0.5) corresponds to the midpoint of the sprite.
+	 * A value of (0, 0) corresponds to the lower left corner of the sprite. The default is (0.5, 0.5).
+	 */
 	center: Vector2;
 
+	/**
+	 * Get intersections between a casted ray and this sprite. [Raycaster.intersectObject](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Raycaster.intersectObject)() will call this method.
+	 * The raycaster must be initialized by calling [Raycaster.setFromCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Raycaster.setFromCamera)() before raycasting against sprites.
+	 */
 	raycast(raycaster: Raycaster, intersects: Intersection[]): void;
+
+	/**
+	 * Copies the properties of the passed sprite to this one.
+	 */
 	copy(source: this): this;
 }
