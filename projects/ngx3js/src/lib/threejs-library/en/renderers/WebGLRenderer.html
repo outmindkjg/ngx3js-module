@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * The WebGL renderer displays your beautifully crafted scenes using [WebGL](https://en.wikipedia.org/wiki/WebGL).
+
+<h2>Constructor</h2>
+<h3>[name]( [param:Object parameters] )</h3>
+	 * @param parameters - object with properties defining the renderer's behaviour.
+	 * The constructor also accepts no parameters at all. In all cases, it will assume sane defaults when parameters are missing. The following are valid parameters:
+	 * @param canvas - A [canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas)
+	 * where the renderer draws its output.
+	 * This corresponds to the [domElement](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.domElement) property below.
+	 * If not passed in here, a new canvas element will be created.
+
+	 * @param context - This can be used to attach the renderer to an existing   [RenderingContext](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext).
+	 * Default is null.
+	 * @param precision - Shader precision. Can be *"highp"*, *"mediump"* or *"lowp"*.
+	 * Defaults to *"highp"* if supported by the device. See the note in "Things to Avoid"
+	 * [here](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/WebGL_best_practices).
+	 * @param alpha - whether the canvas contains an alpha (transparency) buffer or not.
+	  Default is *false*.
+	 * @param premultipliedAlpha - whether the renderer will assume that colors have [premultiplied alpha](https://en.wikipedia.org/wiki/Glossary_of_computer_graphics#Premultiplied_alpha).
+	 * Default is *true*.
+	 * @param antialias - whether to perform antialiasing. Default is *false*.
+	 * @param stencil - whether the drawing buffer has a [stencil buffer](https://en.wikipedia.org/wiki/Stencil_buffer) of at least 8 bits.
+	 * Default is *true*.
+	 * @param preserveDrawingBuffer - whether to preserve the buffers until manually cleared or overwritten. Default is *false*.
+	 * @param powerPreference - Provides a hint to the user agent indicating what configuration of GPU is suitable for this WebGL context. Can be *"high-performance"*, *"low-power"* or *"default"*. Default is *"default"*.
+	 * See [WebGL spec](https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.2) for details.
+	 * @param failIfMajorPerformanceCaveat - whether the renderer creation will fail upon low performance is detected. Default is *false*.
+	 * See [WebGL spec](https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.2) for details.
+	 * @param depth - whether the drawing buffer has a [depth buffer](https://en.wikipedia.org/wiki/Z-buffering) of at least 16 bits.
+	 * Default is *true*.
+	 * @param logarithmicDepthBuffer -  whether to use a logarithmic depth buffer. It may be necessary to use this if dealing with huge differences in scale in a single scene. Note that this setting uses gl_FragDepth if available which disables the [Early Fragment Test](https://www.khronos.org/opengl/wiki/Early_Fragment_Test)
+	 * optimization and can cause a decrease in performance.
+	 * Default is *false*. See the [camera / logarithmicdepthbuffer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera_logarithmicdepthbuffer) example.
+
+<h2>Properties</h2>
+<h3>[property:Boolean autoClear]</h3>
+	 * Defines whether the renderer should automatically clear its output before rendering a frame.
+
+<h3>[property:Boolean autoClearColor]</h3>
+	 * If *.autoClear* is true, defines whether the renderer should clear the color buffer.
+	 * Default is *true*.
+
+<h3>[property:Boolean autoClearDepth]</h3>
+	 * If *.autoClear* is true, defines whether the renderer should clear the depth buffer.
+	 * Default is *true*.
+
+<h3>[property:Boolean autoClearStencil]</h3>
+	 * If *.autoClear* is true, defines whether the renderer should clear the stencil buffer.
+	 * Default is *true*.
+
+<h3>[property:Boolean debug.checkShaderErrors]</h3>
+	 * If *.checkShaderErrors* is true, defines whether material shader programs are checked for errors during compilation and linkage process. It may be useful to disable this check in production for performance gain.
+	 * It is strongly recommended to keep these checks enabled during development.
+	 * If the shader does not compile and link - it will not work and associated material will not render.
+	 * Default is *true*.
+
+<h3>[property:Object capabilities]</h3>
+	 * An object containing details about the capabilities of the current [RenderingContext](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext).
+- [floatFragmentTextures](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean): whether the context supports the [OES_texture_float](https://developer.mozilla.org/en-US/docs/Web/API/OES_texture_float) extension.
+- [floatVertexTextures](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean): *true* if [floatFragmentTextures](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) and [vertexTextures](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) are both true.
+- [getMaxAnisotropy](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Method)(): Returns the maximum available anisotropy.
+- [getMaxPrecision](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Method)(): Returns the maximum available precision for vertex and fragment shaders. 
+- [isWebGL2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean): *true* if the context in use is a WebGL2RenderingContext object.
+- [logarithmicDepthBuffer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean): *true* if the [logarithmicDepthBuffer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/parameter) was set to true in the constructor and the context supports the [EXT_frag_depth](https://developer.mozilla.org/en-US/docs/Web/API/EXT_frag_depth) extension.
+- [maxAttributes](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The value of *gl.MAX_VERTEX_ATTRIBS*.
+- [maxCubemapSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The value of *gl.MAX_CUBE_MAP_TEXTURE_SIZE*.
+	 * Maximum height * width of cube map textures that a shader can use.
+- [maxFragmentUniforms](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The value of *gl.MAX_FRAGMENT_UNIFORM_VECTORS*.
+  The number of uniforms that can be used by a fragment shader.
+- [maxTextureSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The value of *gl.MAX_TEXTURE_SIZE*.
+	 * Maximum height * width of a texture that a shader use.
+- [maxTextures](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The value of *gl.MAX_TEXTURE_IMAGE_UNITS*.
+  The maximum number of textures that can be used by a shader.
+- [maxVaryings](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The value of *gl.MAX_VARYING_VECTORS*.
+  The number of varying vectors that can used by shaders.
+- [maxVertexTextures](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The value of *gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS*.
+   The number of textures that can be used in a vertex shader.
+- [maxVertexUniforms](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The value of *gl.MAX_VERTEX_UNIFORM_VECTORS*.
+   The maximum number of uniforms that can be used in a vertex shader.
+- [precision](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String): The shader precision currently being used by the renderer.
+- [vertexTextures](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean): *true* if [property:Integer maxVertexTextures] is greater than 0 (i.e. vertext textures can be used).
+
+<h3>[property:Array clippingPlanes]</h3>
+	 * User-defined clipping planes specified as THREE.Plane objects in world space.
+	 * These planes apply globally. Points in space whose dot product with the plane is negative are cut away.
+ Default is [].
+
+<h3>[property:DOMElement domElement]</h3>
+	 * A [canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) where the renderer draws its output.
+	 * This is automatically created by the renderer in the constructor (if not provided already);
+	 * you just need to add it to your page like so:
+
+	 * document.body.appendChild( renderer.domElement );
+
+	  
+<h3>[property:Object extensions]</h3>
+	 * A wrapper for the [.extensions.get](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.extensions.get) method, used to check whether various WebGL extensions are supported.
+
+<h3>[property:Float gammaFactor]</h3>
+	 * Default is *2*. 
+<h3>[property:number outputEncoding]</h3>
+	 * Defines the output encoding of the renderer. Default is [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * If a render target has been set using [.setRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.setRenderTarget) then renderTarget.texture.encoding will be used instead.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details of other formats.
+<h3>[property:Object info]</h3>
+	 * An object with a series of statistical information about the graphics board memory and the rendering process. Useful for debugging or just for the sake of curiosity. The object contains the following fields:
+
+	 * memory:
+	
+	 * geometries textures
+	</ul>
+
+	 * render:
+	
+	 * calls triangles points lines frame
+	</ul>
+
+	 * programs 
+</ul>
+	 * By default these data are reset at each render call but when having multiple render passes per frame (e.g. when using post processing) it can be preferred to reset with a custom pattern.
+	 * First, set *autoReset* to *false*.
+
+	 * renderer.info.autoReset = false;
+
+	 * Call *reset()* whenever you have finished to render a single frame.
+
+	 * renderer.info.reset();
+
+
+<h3>[property:Boolean localClippingEnabled]</h3>
+	 * Defines whether the renderer respects object-level clipping planes. Default is *false*.
+<h3>[property:Boolean physicallyCorrectLights]</h3>
+	 * Whether to use physically correct lighting mode. Default is *false*.
+	 * See the [lights / physical](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_physical) example.
+
+<h3>[property:Object properties]</h3>
+	 * Used internally by the renderer to keep track of various sub object properties.
+
+<h3>[property:WebGLRenderLists renderLists]</h3>
+	 * Used internally to handle ordering of scene object rendering.
+
+<h3>[property:WebGLShadowMap shadowMap]</h3>
+	 * This contains the reference to the shadow map, if used.
+
+<h3>[property:Boolean shadowMap.enabled]</h3>
+	 * If set, use shadow maps in the scene. Default is *false*.
+<h3>[property:Boolean shadowMap.autoUpdate]</h3>
+	 * Enables automatic updates to the shadows in the scene. Default is *true*.
+	 * If you do not require dynamic lighting / shadows, you may set this to *false* when the renderer is instantiated.
+<h3>[property:Boolean shadowMap.needsUpdate]</h3>
+	 * When set to *true*, shadow maps in the scene will be updated in the next *render* call. Default is *false*. 
+	 * If you have disabled automatic updates to shadow maps (*shadowMap.autoUpdate = false*), you will need to set this to *true* and then make a render call to update the shadows in your scene.
+<h3>[property:Integer shadowMap.type]</h3>
+	 * Defines shadow map type (unfiltered, percentage close filtering, percentage close filtering with bilinear filtering in shader)
+	 * Options are THREE.BasicShadowMap, THREE.PCFShadowMap (default), THREE.PCFSoftShadowMap and THREE.VSMShadowMap. See [Renderer constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Renderer) for details.
+<h3>[property:Boolean sortObjects]</h3>
+	 * Defines whether the renderer should sort objects. Default is *true*.
+	 * Note: Sorting is used to attempt to properly render objects that have some degree of transparency.
+	 * By definition, sorting objects may not work in all cases.  Depending on the needs of application, it may be necessary to turn off sorting and use other methods to deal with transparency rendering e.g. manually determining each object's rendering order.
+
+<h3>[property:Object state]</h3>
+	 * Contains functions for setting various properties of the [WebGLRenderer.context](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.context) state.
+
+<h3>[property:Constant toneMapping]</h3>
+	 * Default is [NoToneMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Renderer). See the [Renderer constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Renderer) for other choices.
+
+<h3>[property:Number toneMappingExposure]</h3>
+	 * Exposure level of tone mapping. Default is *1*.
+
+<h3>[property:WebXRManager xr]</h3>
+	 * Provides access to the WebXR related [interface](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebXRManager) of the renderer.
+
+<h2>Methods</h2>
+<h3>[method:undefined clear]( [param:Boolean color], [param:Boolean depth], [param:Boolean stencil] )</h3>
+	 * Tells the renderer to clear its color, depth or stencil drawing buffer(s).
+	 * This method initializes the color buffer to the current clear color value.
+	 * Arguments default to *true*.
+
+<h3>[method:undefined clearColor]( )</h3>
+	 * Clear the color buffer. Equivalent to calling [.clear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.clear)( true, false, false ).
+<h3>[method:undefined clearDepth]( )</h3>
+	 * Clear the depth buffer. Equivalent to calling [.clear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.clear)( false, true, false ).
+<h3>[method:undefined clearStencil]( )</h3>
+	 * Clear the stencil buffers. Equivalent to calling [.clear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.clear)( false, false, true ).
+<h3>[method:undefined compile]( [param:Object3D scene], [param:Camera camera] )</h3>
+	 * Compiles all materials in the scene with the camera. This is useful to precompile shaders before the first rendering.
+<h3>[method:undefined copyFramebufferToTexture]( [param:Vector2 position], [param:FramebufferTexture texture], [param:Number level] )</h3>
+	 * Copies pixels from the current WebGLFramebuffer into a 2D texture. Enables access to [WebGLRenderingContext.copyTexImage2D](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/copyTexImage2D).
+<h3>[method:undefined copyTextureToTexture]( [param:Vector2 position], [param:Texture srcTexture], [param:Texture dstTexture], [param:Number level] )</h3>
+	 * Copies all pixels of a texture to an existing texture starting from the given position. Enables access to [WebGLRenderingContext.texSubImage2D](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/texSubImage2D).
+<h3>[method:undefined copyTextureToTexture3D]( [param:Box3 sourceBox], [param:Vector3 position], [param:Texture srcTexture], [param:Texture dstTexture], [param:Number level] )</h3>
+	 * Copies the pixels of a texture in the bounds '[sourceBox](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3)' in the destination texture starting from the given position. Enables access to [WebGL2RenderingContext.texSubImage3D](https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext/texSubImage3D).
+<h3>[method:undefined dispose]( )</h3>
+	 * Dispose of the current rendering context.
+<h3>[method:Object extensions.get]( [param:String extensionName] )</h3>
+	 * Used to check whether various extensions are supported and returns an object with details of the extension if available.
+	 * This method can check for the following extensions:
+- *WEBGL_depth_texture* - *EXT_texture_filter_anisotropic* - *WEBGL_compressed_texture_s3tc* - *WEBGL_compressed_texture_pvrtc* - *WEBGL_compressed_texture_etc1* <h3>[method:undefined forceContextLoss]()</h3>
+	 * Simulate loss of the WebGL context. This requires support for the [WEBGL_lose_context](https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_lose_context) extensions.
+
+<h3>[method:undefined forceContextRestore]( )</h3>
+	 * Simulate restore of the WebGL context. This requires support for the [WEBGL_lose_context](https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_lose_context) extensions.
+
+<h3>[method:Float getClearAlpha]()</h3>
+	 * @returns Returns a [float](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) with the current clear alpha. Ranges from 0 to 1.
+<h3>[method:Color getClearColor]( [param:Color target] )</h3>
+	 * @returns Returns a [THREE.Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) instance with the current clear color.
+<h3>[method:WebGLRenderingContext getContext]()</h3>
+	 * @returns Return the current WebGL context.
+<h3>[method:WebGLContextAttributes getContextAttributes]()</h3>
+	 * @returns Returns an object that describes the attributes set on the WebGL context when it was created.
+<h3>[method:Integer getActiveCubeFace]()</h3>
+	 * @returns Returns the current active cube face.
+<h3>[method:Integer getActiveMipmapLevel]()</h3>
+	 * @returns Returns the current active mipmap level.
+<h3>[method:RenderTarget getRenderTarget]()</h3>
+	 * @returns Returns the current [RenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RenderTarget) if there are; returns *null* otherwise.
+<h3>[method:Vector4 getCurrentViewport]( [param:Vector4 target] )</h3>
+	 * @param target - the result will be copied into this Vector4.
+	 * @returns Returns the current viewport.
+
+<h3>[method:Vector2 getDrawingBufferSize]( [param:Vector2 target] )</h3>
+	 * @param target - the result will be copied into this Vector2.
+	 * @returns Returns the width and height of the renderer's drawing buffer, in pixels.
+
+<h3>[method:number getPixelRatio]()</h3>
+	 * @returns Returns current device pixel ratio used.
+<h3>[method:Vector4 getScissor]( [param:Vector4 target] )</h3>
+	 * @param target - the result will be copied into this Vector4.
+	 * @returns Returns the scissor region.
+
+<h3>[method:Boolean getScissorTest]()</h3>
+	 * @returns Returns *true* if scissor test is enabled; returns *false* otherwise.
+<h3>[method:Vector2 getSize]( [param:Vector2 target] )</h3>
+	 * @param target - the result will be copied into this Vector2.
+	 * @returns Returns the width and height of the renderer's output canvas, in pixels.
+
+<h3>[method:Vector4 getViewport]( [param:Vector4 target] )</h3>
+	 * @param target - the result will be copied into this Vector4.
+	 * @returns Returns the viewport.
+
+<h3>[method:undefined initTexture]( [param:Texture texture] )</h3>
+ Initializes the given texture. Useful for preloading a texture rather than waiting until first render (which can cause noticeable lags due to decode and GPU upload overhead).
+<h3>[method:undefined resetGLState]( )</h3>
+	 * Reset the GL state to default. Called internally if the WebGL context is lost.
+<h3>[method:undefined readRenderTargetPixels]( [param:WebGLRenderTarget renderTarget], [param:Float x], [param:Float y], [param:Float width], [param:Float height], [param:TypedArray buffer], [param:Integer activeCubeFaceIndex] )</h3>
+	 * buffer - Uint8Array is the only destination type supported in all cases, other types are renderTarget and platform dependent. See [WebGL spec](https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14.12) for details.
+	 * Reads the pixel data from the renderTarget into the buffer you pass in. This is a wrapper around [WebGLRenderingContext.readPixels](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/readPixels)().
+	 * See the [interactive / cubes / gpu](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_cubes_gpu) example.
+	 * For reading out a [WebGLCubeRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLCubeRenderTarget) use the optional parameter activeCubeFaceIndex to determine which face should be read.
+
+<h3>[method:undefined render]( [param:Object3D scene], [param:Camera camera] )</h3>
+	 * Render a [scene](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Scene) or another type of [object](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) using a [camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera).
+	 * The render is done to a previously specified [renderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget) set by calling [.setRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.setRenderTarget) or to the canvas as usual.
+	 * By default render buffers are cleared before rendering but you can prevent this by setting the property [autoClear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.autoClear) to false.
+	 * If you want to prevent only certain buffers being cleared you can set either the [autoClearColor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.autoClearColor), [autoClearStencil](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.autoClearStencil) or [autoClearDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.autoClearDepth) properties to false. To forcibly clear one ore more buffers call [.clear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.clear).
+
+<h3>[method:undefined resetState]()</h3>
+	 * Can be used to reset the internal WebGL state. This method is mostly relevant for applications which share a single WebGL context across multiple WebGL libraries.
+<h3>[method:undefined setAnimationLoop]( [param:Function callback] )</h3>
+	 * @param callback - The function will be called every available frame. If `null` is passed it will stop any already ongoing animation.
+	 * A built in function that can be used instead of [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame). For WebXR projects this function must be used.
+<h3>[method:undefined setClearAlpha]( [param:Float alpha] )</h3>
+	 * Sets the clear alpha. Valid input is a float between *0.0* and *1.0*.
+<h3>[method:undefined setClearColor]( [param:Color color], [param:Float alpha] )</h3>
+	 * Sets the clear color and opacity.
+<h3>[method:undefined setPixelRatio]( [param:number value] )</h3>
+	 * Sets device pixel ratio. This is usually used for HiDPI device to prevent bluring output canvas.
+<h3>[method:undefined setRenderTarget]( [param:WebGLRenderTarget renderTarget], [param:Integer activeCubeFace], [param:Integer activeMipmapLevel] )</h3>
+	 * renderTarget -- The [renderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget) that needs to be activated. When *null* is given, the canvas is set as the active render target instead.
+	 * activeCubeFace -- Specifies the active cube side (PX 0, NX 1, PY 2, NY 3, PZ 4, NZ 5) of [WebGLCubeRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLCubeRenderTarget) (optional).
+	 * activeMipmapLevel -- Specifies the active mipmap level (optional).
+	 * This method sets the active rendertarget.
+
+<h3>[method:undefined setScissor]( [param:Integer x], [param:Integer y], [param:Integer width], [param:Integer height] )
+	 * [method:undefined setScissor]( [param:Vector4 vector] )</h3>
+
+	 * The x, y, width, and height parameters of the scissor region.
+	 * Optionally, a 4-component vector specifying the parameters of the region.
+	 * Sets the scissor region from (x, y) to (x + width, y + height).
+	 * (x, y) is the lower-left corner of the scissor region.
+
+<h3>[method:undefined setScissorTest]( [param:Boolean boolean] )</h3>
+	 * Enable or disable the scissor test. When this is enabled, only the pixels within the defined scissor area will be affected by further renderer actions.
+
+<h3>[method:undefined setOpaqueSort]( [param:Function method] )</h3>
+	 * Sets the custom opaque sort function for the WebGLRenderLists. Pass null to use the default painterSortStable function.
+
+<h3>[method:undefined setTransparentSort]( [param:Function method] )</h3>
+	 * Sets the custom transparent sort function for the WebGLRenderLists. Pass null to use the default reversePainterSortStable function.
+
+<h3>[method:undefined setSize]( [param:Integer width], [param:Integer height], [param:Boolean updateStyle] )</h3>
+	 * Resizes the output canvas to (width, height) with device pixel ratio taken into account, and also sets the viewport to fit that size, starting in (0, 0).
+	 * Setting [updateStyle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) to false prevents any style changes to the output canvas.
+
+<h3>[method:undefined setViewport]( [param:Integer x], [param:Integer y], [param:Integer width], [param:Integer height] )
+	 * [method:undefined setViewport]( [param:Vector4 vector] )</h3>
+
+	 * The x, y, width, and height parameters of the viewport.
+	 * Optionally, a 4-component vector specifying the parameters of a viewport.
+	 * Sets the viewport to render from (x, y) to (x + width, y + height).
+	 * (x, y) is the lower-left corner of the region.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

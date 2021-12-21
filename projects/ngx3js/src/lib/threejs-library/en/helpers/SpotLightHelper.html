@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr;
+<h1>[name]</h1>
+	 * This displays a cone shaped helper object for a [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight).
+<h2>Code Example</h2>
+
+	 * const spotLight = new THREE.SpotLight( 0xffffff );
+	 * spotLight.position.set( 10, 10, 10 );
+	 * scene.add( spotLight );
+	 * const spotLightHelper = new THREE.SpotLightHelper( spotLight );
+	 * scene.add( spotLightHelper );
+
+<h2>Examples</h2>
+	 * [WebGL/ lights / spotlights ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlights)
+
+<h2>Constructor</h2>
+<h3>[name]( [param:SpotLight light], [param:Hex color] )</h3>
+	 * [light](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) -- The [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) to be visualized. 
+	 * [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hex) -- if this is not the set the helper will take the color of the light.
+
+<h2>Properties</h2>
+	 * See the base [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) class for common properties.
+<h3>[property:LineSegments cone]</h3>
+	 * [LineSegments](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineSegments) used to visualize the light.
+<h3>[property:SpotLight light]</h3>
+	 * Reference to the [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) being visualized.
+<h3>[property:Object matrix]</h3>
+	 * Reference to the spotLight's [matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.matrixWorld).
+<h3>[property:Object matrixAutoUpdate]</h3>
+	 * See [Object3D.matrixAutoUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.matrixAutoUpdate). Set to *false* here as the helper is using the spotLight's [matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.matrixWorld).
+
+<h3>[property:hex color]</h3>
+ The color parameter passed in the constructor. Default is *undefined*. If this is changed, the helper's color will update the next time *.update* is called.
+
+<h2>Methods</h2>
+	 * See the base [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) class for common methods.
+<h3>[method:undefined dispose]()</h3>
+	 * Disposes of the light helper.
+<h3>[method:undefined update]()</h3>
+	 * Updates the light helper.
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

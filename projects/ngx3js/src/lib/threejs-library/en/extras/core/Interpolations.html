@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * [name] contains spline and Bézier functions internally used by concrete curve classes.
+
+<h2>Methods</h2>
+<h3>[method:Float CatmullRom]( [param:Float t], [param:Float p0], [param:Float p1], [param:Float p2], [param:Float p3] )</h3>
+	 * t -- interpolation weight.
+	 * p0, p1, p2, p3 -- the points defining the spline curve.
+	 * Used internally by [SplineCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SplineCurve).
+
+<h3>[method:Float QuadraticBezier]( [param:Float t], [param:Float p0], [param:Float p1], [param:Float p2] )</h3>
+	 * t -- interpolation weight.
+	 * p0, p1, p2 -- the starting, control and end points defining the curve.
+	 * Used internally by [QuadraticBezierCurve3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/QuadraticBezierCurve3) and [QuadraticBezierCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/QuadraticBezierCurve).
+
+<h3>[method:Float CubicBezier]( [param:Float t], [param:Float p0], [param:Float p1], [param:Float p2], [param:Float p3] )</h3>
+	 * t -- interpolation weight.
+	 * p0, p1, p2, p3 -- the starting, control(twice) and end points defining the curve.
+	 * Used internally by [CubicBezierCurve3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubicBezierCurve3) and [CubicBezierCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubicBezierCurve).
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

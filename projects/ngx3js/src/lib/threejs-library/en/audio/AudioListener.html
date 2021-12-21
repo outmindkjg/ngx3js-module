@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr;
+<h1>[name]</h1>
+
+	 * The [name] represents a virtual [listener](https://developer.mozilla.org/en-US/docs/Web/API/AudioListener) of the all positional and non-positional audio effects in the scene.
+	 * A three.js application usually creates a single instance of [name]. It is a mandatory construtor parameter for audios entities like [Audio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio) and [PositionalAudio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PositionalAudio).
+	 * In most cases, the listener object is a child of the camera. So the 3D transformation of the camera represents the 3D transformation of the listener.
+
+<h2>Code Example</h2>
+
+	 * //  create an AudioListener and add it to the camera const listener = new THREE.AudioListener();
+	 * camera.add( listener );
+	 * //  create a global audio source const sound = new THREE.Audio( listener );
+	 * //  load a sound and set it as the Audio object's buffer const audioLoader = new THREE.AudioLoader();
+	 * audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
+	 * sound.setBuffer( buffer );
+	 * sound.setLoop(true);
+	 * sound.setVolume(0.5);
+	 * sound.play();
+});
+
+<h2>Examples</h2>
+
+	 * [webaudio / sandbox ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox)
+	 * [webaudio / timing ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_timing)
+	 * [webaudio / visualizer ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
+
+<h2>Constructor</h2>
+
+<h3>[name](  )</h3>
+	 * Create a new AudioListener.
+
+<h2>Properties</h2>
+<h3>[property:AudioContext context]</h3>
+	 * The [AudioContext](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext) of the [listener](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener) given in the constructor.
+<h3>[property:GainNode gain]</h3>
+	 * A [GainNode](https://developer.mozilla.org/en-US/docs/Web/API/GainNode) created using [AudioContext.createGain](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createGain)().
+<h3>[property:AudioNode filter]</h3>
+	 * Default is *null*.
+<h3>[property:Number timeDelta]</h3>
+	 * Time delta value for audio entities. Use in context of [AudioParam.linearRampToValueAtTimeDefault](https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/linearRampToValueAtTime)(). Default is *0*.
+<h2>Methods</h2>
+
+<h3>[method:GainNode getInput]()</h3>
+	 * @returns Return the [gainNode](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener.gain).
+
+<h3>[method:this removeFilter]()</h3>
+	 * Set the [filter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener.filter) property to *null*.
+
+<h3>[method:AudioNode getFilter]()</h3>
+	 * @returns Returns the value of the [filter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener.filter) property.
+
+<h3>[method:this setFilter]( [param:AudioNode value] )</h3>
+	 * Set the [filter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener.filter) property to *value*.
+
+<h3>[method:Float getMasterVolume]()</h3>
+	 * @returns Return the volume.
+
+<h3>[method:this setMasterVolume]( [param:Number value] )</h3>
+	 * Set the volume.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr; [Audio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio) &rarr;
+<h1>[name]</h1>
+
+	 * Create a positional audio object.
+	 * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
+
+<h2>Code Example</h2>
+
+	 * //  create an AudioListener and add it to the camera const listener = new THREE.AudioListener();
+	 * camera.add( listener );
+	 * //  create the PositionalAudio object (passing in the listener)
+	 * const sound = new THREE.PositionalAudio( listener );
+	 * //  load a sound and set it as the PositionalAudio object's buffer const audioLoader = new THREE.AudioLoader();
+	 * audioLoader.load( 'sounds/song.ogg', function( buffer ) {
+	 * sound.setBuffer( buffer );
+	 * sound.setRefDistance( 20 );
+	 * sound.play();
+});
+	 * //  create an object for the sound to play from const sphere = new THREE.SphereGeometry( 20, 32, 16 );
+	 * const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
+	 * const mesh = new THREE.Mesh( sphere, material );
+	 * scene.add( mesh );
+	 * //  finally add the sound to the mesh mesh.add( sound );
+
+<h2>Examples</h2>
+
+	 * [webaudio / orientation ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_orientation)
+	 * [webaudio / sandbox ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox)
+	 * [webaudio / timing ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_timing)
+
+<h2>Constructor</h2>
+<h3>[name]( [param:AudioListener listener] )</h3>
+	 * listener - [AudioListener](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener) instance.
+
+<h2>Properties</h2>
+
+	 * See the [Audio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio) class for inherited properties.
+
+<h3>[property:PannerNode panner]</h3>
+	 * The PositionalAudio's [PannerNode](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode).
+
+<h2>Methods</h2>
+
+	 * See the [Audio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio) class for inherited methods.
+
+<h3>[method:PannerNode getOutput]()</h3>
+	 * @returns Returns the [panner](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PositionalAudio.panner).
+
+<h3>[method:Float getRefDistance]()</h3>
+	 * @returns Returns the value of [panner.refDistance](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance).
+
+<h3>[method:this setRefDistance]( [param:Float value] )</h3>
+	 * Sets the value of [panner.refDistance](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/refDistance).
+
+<h3>[method:Float getRolloffFactor]()</h3>
+	 * @returns Returns the value of [panner.rolloffFactor](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor).
+
+<h3>[method:this setRolloffFactor]( [param:Float value] )</h3>
+	 * Sets the value of [panner.rolloffFactor](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/rolloffFactor).
+
+<h3>[method:String getDistanceModel]()</h3>
+	 * @returns Returns the value of [panner.distanceModel](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel).
+
+<h3>[method:this setDistanceModel]( [param:String value] )</h3>
+	 * Sets the value of [panner.distanceModel](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/distanceModel).
+
+<h3>[method:Float getMaxDistance]()</h3>
+	 * @returns Returns the value of [panner.maxDistance](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance).
+
+<h3>[method:this setMaxDistance]( [param:Float value] )</h3>
+	 * Sets the value of [panner.maxDistance](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode/maxDistance).
+
+<h3>[method:this setDirectionalCone]( [param:Float coneInnerAngle], [param:Float coneOuterAngle], [param:Float coneOuterGain] )</h3>
+	 * This method can be used in order to transform an omnidirectional sound into a [directional sound](https://developer.mozilla.org/en-US/docs/Web/API/PannerNode).
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

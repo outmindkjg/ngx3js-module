@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr; [Light](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Light) &rarr;
+<h1>[name]</h1>
+
+	 * A light that gets emitted from a single point in all directions. A common use case for this is to replicate the light emitted from a bare lightbulb.
+ This light can cast shadows - see [PointLightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLightShadow) page for details.
+
+<h2>Code Example</h2>
+
+	 * const light = new THREE.PointLight( 0xff0000, 1, 100 );
+	 * light.position.set( 50, 50, 50 );
+	 * scene.add( light );
+
+<h2>Examples</h2>
+
+	 * [lights / pointlights ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_pointlights)
+	 * [effects / anaglyph ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph)
+	 * [geometry / text ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text)
+	 * [lensflares ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lensflares)
+
+<h2>Constructor</h2>
+<h3>[name]( [param:Integer color], [param:Float intensity], [param:Number distance], [param:Float decay] )</h3>
+	 * @param color - hexadecimal color of the light. Default is 0xffffff (white).
+	 * @param intensity - numeric value of the light's strength/intensity. Default is 1.
+	 * @param distance - Maximum range of the light. Default is 0 (no limit).
+	 * @param decay - The amount the light dims along the distance of the light. Default is 1.
+	 * For [physically correct](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.physicallyCorrectLights) lighting, set this to 2.
+	 * Creates a new [name].
+
+<h2>Properties</h2>
+	 * See the base [Light](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Light) class for common properties.
+
+<h3>[property:Float decay]</h3>
+	 * The amount the light dims along the distance of the light In [physically correct](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.physicallyCorrectLights) mode, decay = 2 leads to physically realistic light falloff.
+	 * Default is *1*.
+
+<h3>[property:Float distance]</h3>
+<em>Default mode</em> - When distance is zero, light does not attenuate. When distance is non-zero, light will attenuate linearly from maximum intensity at the light's position down to zero at this distance from the light.
+
+<em>[Physically correct](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.physicallyCorrectLights) mode</em> - When distance is zero, light will attenuate according to inverse-square law to infinite distance. When distance is non-zero, light will attenuate according to inverse-square law until near the distance cutoff, where it will then attenuate quickly and smoothly to 0. Inherently, cutoffs are not physically correct.
+
+	 * Default is *0.0*.
+
+<h3>[property:Float intensity]</h3>
+	 * The light's intensity. Default is *1*. 
+	 * In [physically correct](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.physicallyCorrectLights) mode, intensity is the luminous intensity of the light measured in candela (cd).
+	 * Changing the intensity will also change the light's power.
+
+<h3>[property:Float power]</h3>
+	 * The light's power.
+	 * In [physically correct](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.physicallyCorrectLights) mode, power is the luminous power of the light measured in lumens (lm). 
+	 * Changing the power will also change the light's intensity.
+
+<h3>[property:PointLightShadow shadow]</h3>
+	 * A [PointLightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLightShadow) used to calculate shadows for this light.
+ The lightShadow's [camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow.camera)
+	 * is set to a  [PerspectiveCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera) with [fov](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.fov) of 90,
+	 * [aspect](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.aspect) of 1, [near](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.near)
+	 * clipping plane at 0.5 and	[far](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.far) clipping plane at 500.
+
+<h2>Methods</h2>
+	 * See the base [Light](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Light) class for common methods.
+
+<h3>[method:undefined dispose]()</h3>
+	 * Override of base class's [dispose](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Light.dispose).
+	 * Disposes of this light's [shadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLightShadow).
+
+<h3>[method:this copy]( [param:PointLight source] )</h3>
+	 * Copies value of all the properties from the [source](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight) to this PointLight.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

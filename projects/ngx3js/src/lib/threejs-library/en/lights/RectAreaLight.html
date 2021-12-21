@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr; [Light](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Light) &rarr;
+<h1>[name]</h1>
+
+	 * RectAreaLight emits light uniformly across the face a rectangular plane. This light type can be used to simulate light sources such as bright windows or strip lighting.
+	 * Important Notes:
+
+	There is no shadow support.
+	Only [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) and [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial) are supported.
+	You have to include [RectAreaLightUniformsLib](https://threejs.org/examples/jsm/lights/RectAreaLightUniformsLib.js) into your scene and call *init()*.
+</ul>
+
+<h2>Code Example</h2>
+
+	 * const width = 10;
+	 * const height = 10;
+	 * const intensity = 1;
+	 * const rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height );
+	 * rectLight.position.set( 5, 5, 0 );
+	 * rectLight.lookAt( 0, 0, 0 );
+	 * scene.add( rectLight )
+	 * const rectLightHelper = new THREE.RectAreaLightHelper( rectLight );
+	 * rectLight.add( rectLightHelper );
+
+<h2>Examples</h2>
+
+	 * [WebGL / rectarealight ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_rectarealight)
+
+<h2>Constructor</h2>
+
+<h3>[name]( [param:Integer color], [param:Float intensity], [param:Float width], [param:Float height] )</h3>
+	 * @param color - hexadecimal color of the light. Default is 0xffffff (white).
+	 * @param intensity - the light's intensity, or brightness. Default is 1.
+	 * @param width - width of the light. Default is 10.
+	 * @param height - height of the light. Default is 10.
+	 * Creates a new [name].
+
+<h2>Properties</h2>
+	 * See the base [Light](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Light) class for common properties.
+
+<h3>[property:Float intensity]</h3>
+	 * The light's intensity. Default is *1*. 
+	 * In [physically correct](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.physicallyCorrectLights) mode, intensity is the luminance (brightness) of the light measured in nits (cd/m^2).
+	 * Changing the intensity will also change the light's power.
+
+<h3>[property:Float power]</h3>
+	 * The light's power.
+	 * In [physically correct](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.physicallyCorrectLights) mode, power is the luminous power of the light measured in lumens (lm). 
+	 * Changing the power will also change the light's intensity.
+
+<h2>Methods</h2>
+	 * See the base [Light](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Light) class for common methods.
+
+<h3>[method:this copy]( [param:RectAreaLight source] )</h3>
+	 * Copies value of all the properties from the [source](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RectAreaLight) to this RectAreaLight.
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

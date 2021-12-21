@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.
+	 * Note that this can be used for grouping objects via the *.add*( object ) method which adds the object as a child, however it is better to use [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Group) for this.
+
+<h2>Constructor</h2>
+
+<h3>[name]()</h3>
+	 * The constructor takes no arguments.
+
+<h2>Properties</h2>
+<h3>[property:AnimationClip animations]</h3>
+	 * Array with object's animation clips.
+<h3>[property:Boolean castShadow]</h3>
+	 * Whether the object gets rendered into shadow map. Default is *false*.
+<h3>[property:Array children]</h3>
+	 * Array with object's children. See [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Group) for info on manually grouping objects.
+<h3>[property:Material customDepthMaterial]</h3>
+	 * Custom depth material to be used when rendering to the depth map. Can only be used in context of meshes.
+	 * When shadow-casting with a [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DirectionalLight) or [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight), if you are modifying vertex positions in the vertex shader you must specify a customDepthMaterial for proper shadows. Default is *undefined*.
+
+<h3>[property:Material customDistanceMaterial]</h3>
+	 * Same as *.customDepthMaterial*, but used with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight). Default is *undefined*.
+
+<h3>[property:Boolean frustumCulled]</h3>
+	 * When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. If set to `false` the object gets rendered every frame even if it is not in the frustum of the camera. Default is `true`.
+
+<h3>[property:Integer id]</h3>
+	 * readonly – Unique number for this object instance.
+<h3>[property:Layers layers]</h3>
+	 * The layer membership of the object. The object is only visible if it has at least one layer in common with the [Camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera) in use. This property can also be used to filter out unwanted objects in ray-intersection tests when using [Raycaster](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Raycaster).
+
+<h3>[property:Matrix4 matrix]</h3>
+	 * The local transform matrix.
+<h3>[property:Boolean matrixAutoUpdate]</h3>
+	 * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property. Default is [Object3D.DefaultMatrixAutoUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.DefaultMatrixAutoUpdate) (true).
+
+<h3>[property:Matrix4 matrixWorld]</h3>
+	 * The global transform of the object. If the Object3D has no parent, then it's identical to the local transform *.matrix*.
+
+<h3>[property:Boolean matrixWorldNeedsUpdate]</h3>
+	 * When this is set, it calculates the matrixWorld in that frame and resets this property  to false. Default is *false*.
+
+<h3>[property:Matrix4 modelViewMatrix]</h3>
+	 * This is passed to the shader and used to calculate the position of the object.
+<h3>[property:String name]</h3>
+	 * Optional name of the object (doesn't need to be unique). Default is an empty string.
+<h3>[property:Matrix3 normalMatrix]</h3>
+	 * This is passed to the shader and used to calculate lighting for the object. It is the transpose of the inverse of the upper left 3x3 sub-matrix of this object's modelViewMatrix.
+	 * The reason for this special matrix is that simply using the modelViewMatrix could result in a non-unit length of normals (on scaling) or in a non-perpendicular direction (on non-uniform scaling).
+	 * On the other hand the translation part of the modelViewMatrix is not relevant for the calculation of normals. Thus a Matrix3 is sufficient.
+
+<h3>[property:Function onAfterRender]</h3>
+	 * An optional callback that is executed immediately after a 3D object is rendered.
+	 * This function is called with the following parameters: renderer, scene, camera, geometry, material, group.
+	 * Please notice that this callback is only executed for *renderable* 3D objects. Meaning 3D objects which define their visual appearance with geometries and materials like instances of [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh), [Line](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line), [Points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points) or [Sprite](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite).
+	 * Instances of [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D), [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Group) or [Bone](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) are not renderable and thus this callback is not executed for such objects.
+
+<h3>[property:Function onBeforeRender]</h3>
+	 * An optional callback that is executed immediately before a 3D object is rendered.
+	 * This function is called with the following parameters: renderer, scene, camera, geometry, material, group.
+	 * Please notice that this callback is only executed for *renderable* 3D objects. Meaning 3D objects which define their visual appearance with geometries and materials like instances of [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh), [Line](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line), [Points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points) or [Sprite](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite).
+	 * Instances of [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D), [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Group) or [Bone](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) are not renderable and thus this callback is not executed for such objects.
+
+<h3>[property:Object3D parent]</h3>
+	 * Object's parent in the [scene graph](https://en.wikipedia.org/wiki/Scene_graph). An object can have at most one parent.
+<h3>[property:Vector3 position]</h3>
+	 * A [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) representing the object's local position. Default is (0, 0, 0).
+<h3>[property:Quaternion quaternion]</h3>
+	 * Object's local rotation as a [Quaternion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion).
+<h3>[property:Boolean receiveShadow]</h3>
+	 * Whether the material receives shadows. Default is *false*.
+<h3>[property:Number renderOrder]</h3>
+	 * This value allows the default rendering order of [scene graph](https://en.wikipedia.org/wiki/Scene_graph)
+	 * objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Group), all descendants objects will be sorted and rendered together.
+	 * Sorting is from lowest to highest renderOrder. Default value is *0*.
+
+<h3>[property:Euler rotation]</h3>
+	 * Object's local rotation (see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)), in radians.
+
+<h3>[property:Vector3 scale]</h3>
+	 * The object's local scale. Default is [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)( 1, 1, 1 ).
+
+<h3>[property:Vector3 up]</h3>
+	 * This is used by the *.lookAt* method, for example, to determine the orientation of the result.
+	 * Default is [Object3D.DefaultUp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.DefaultUp) - that is, ( 0, 1, 0 ).
+
+<h3>[property:Object userData]</h3>
+	 * An object that can be used to store custom data about the Object3D. It should not hold references to functions as these will not be cloned.
+
+<h3>[property:String uuid]</h3>
+	 * [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) of this object instance.
+	 * This gets automatically assigned, so this shouldn't be edited.
+
+<h3>[property:Boolean visible]</h3>
+	 * Object gets rendered if *true*. Default is *true*.
+
+
+<h2>Static Properties</h2>
+	 * Static properties and methods are defined per class rather than per instance of that class.
+	 * This means that changing [Object3D.DefaultUp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.DefaultUp) or [Object3D.DefaultMatrixAutoUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.DefaultMatrixAutoUpdate)
+	 * will change the values of *.up* and *.matrixAutoUpdate* for <em>every</em>	instance of Object3D (or derived classes)	created after the change has been made (already created Object3Ds will not be affected).
+
+<h3>[property:Vector3 DefaultUp]</h3>
+	 * The default *.up* direction for objects, also used as the default position for [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DirectionalLight),
+	 * [HemisphereLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HemisphereLight) and [Spotlight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Spotlight) (which creates lights shining from the top down).
+	 * Set to ( 0, 1, 0 ) by default.
+
+<h3>[property:Boolean DefaultMatrixAutoUpdate]</h3>
+	 * The default setting for *.matrixAutoUpdate* for newly created Object3Ds.
+
+
+<h2>Methods</h2>
+<h3>[EventDispatcher](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EventDispatcher) methods are available on this class.</h3>
+<h3>[method:this add]( [param:Object3D object], ... )</h3>
+	 * Adds *object* as child of this object. An arbitrary number of objects may be added. Any current parent on an object passed in here will be removed, since an object can have at most one parent.
+	 * See [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Group) for info on manually grouping objects.
+
+<h3>[method:undefined applyMatrix4]( [param:Matrix4 matrix] )</h3>
+	 * Applies the matrix transform to the object and updates the object's position, rotation and scale.
+<h3>[method:this applyQuaternion]( [param:Quaternion quaternion] )</h3>
+	 * Applies the rotation represented by the quaternion to the object.
+<h3>[method:this attach]( [param:Object3D object] )</h3>
+	 * Adds *object* as a child of this, while maintaining the object's world transform.
+	 * Note: This method does not support scene graphs having non-uniformly-scaled nodes(s).
+
+<h3>[method:Object3D clone]( [param:Boolean recursive] )</h3>
+	 * recursive -- if true, descendants of the object are also cloned. Default is true.
+	 * @returns Returns a clone of this object and optionally all descendants.
+
+<h3>[method:this copy]( [param:Object3D object], [param:Boolean recursive] )</h3>
+	 * recursive -- if true, descendants of the object are also copied. Default is true.
+	 * Copy the given object into this object.
+	 * Note: event listeners and user-defined callbacks (*.onAfterRender* and *.onBeforeRender*) are not copied.
+
+<h3>[method:Object3D getObjectById]( [param:Integer id] )</h3>
+	 * id -- Unique number of the object instance Searches through an object and its children, starting with the object itself, and returns the first with a matching id.
+	 * Note that ids are assigned in chronological order: 1, 2, 3, ..., incrementing by one for each new object.
+
+<h3>[method:Object3D getObjectByName]( [param:String name] )</h3>
+	 * name -- String to match to the children's Object3D.name property. 
+	 * Searches through an object and its children, starting with the object itself, and returns the first with a matching name.
+	 * Note that for most objects the name is an empty string by default. You will have to set it manually to make use of this method.
+
+<h3>[method:Object3D getObjectByProperty]( [param:String name], [param:Any value] )</h3>
+	 * name -- the property name to search for. 
+	 * value -- value of the given property. 
+	 * Searches through an object and its children, starting with the object itself, and returns the first with a property that matches the value given.
+
+<h3>[method:Vector3 getWorldPosition]( [param:Vector3 target] )</h3>
+	 * @param target - the result will be copied into this Vector3. 
+	 * @returns Returns a vector representing the position of the object in world space.
+
+<h3>[method:Quaternion getWorldQuaternion]( [param:Quaternion target] )</h3>
+	 * @param target - the result will be copied into this Quaternion. 
+	 * @returns Returns a quaternion representing the rotation of the object in world space.
+
+<h3>[method:Vector3 getWorldScale]( [param:Vector3 target] )</h3>
+	 * @param target - the result will be copied into this Vector3. 
+	 * @returns Returns a vector of the scaling factors applied to the object for each axis in world space.
+
+<h3>[method:Vector3 getWorldDirection]( [param:Vector3 target] )</h3>
+	 * @param target - the result will be copied into this Vector3. 
+	 * @returns Returns a vector representing the direction of object's positive z-axis in world space.
+
+<h3>[method:Vector3 localToWorld]( [param:Vector3 vector] )</h3>
+	 * vector - A vector representing a position in this object's local space.
+	 * Converts the vector from this object's local space to world space.
+
+<h3>[method:undefined lookAt]( [param:Vector3 vector] )
+	 * [method:undefined lookAt]( [param:Float x], [param:Float y], [param:Float z] )</h3>
+	 * vector - A vector representing a position in world space.
+	 * Optionally, the *.x*, *.y* and *.z* components of the world space position.
+	 * Rotates the object to face a point in world space.
+	 * This method does not support objects having non-uniformly-scaled parent(s).
+
+<h3>[method:Array raycast]( [param:Raycaster raycaster], [param:Array intersects] )</h3>
+	 * Abstract (empty) method to get intersections between a casted ray and this object.
+	 * Subclasses such as [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh), [Line](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line), and [Points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points) implement this method in order to use raycasting.
+
+<h3>[method:this remove]( [param:Object3D object], ... )</h3>
+	 * Removes *object* as child of this object. An arbitrary number of objects may be removed.
+
+<h3>[method:this removeFromParent]()</h3>
+	 * Removes this object from its current parent.
+
+<h3>[method:this clear]()</h3>
+	 * Removes all child objects.
+
+<h3>[method:this rotateOnAxis]( [param:Vector3 axis], [param:Float angle] )</h3>
+	 * axis -- A normalized vector in object space. 
+	 * angle -- The angle in radians.
+	 * Rotate an object along an axis in object space. The axis is assumed to be normalized.
+
+<h3>[method:this rotateOnWorldAxis]( [param:Vector3 axis], [param:Float angle] )</h3>
+	 * axis -- A normalized vector in world space. 
+	 * angle -- The angle in radians.
+	 * Rotate an object along an axis in world space. The axis is assumed to be normalized.
+	 * Method Assumes no rotated parent.
+
+<h3>[method:this rotateX]( [param:Float rad] )</h3>
+	 * rad - the angle to rotate in radians.
+	 * Rotates the object around x axis in local space.
+
+<h3>[method:this rotateY]( [param:Float rad] )</h3>
+	 * rad - the angle to rotate in radians.
+	 * Rotates the object around y axis in local space.
+
+<h3>[method:this rotateZ]( [param:Float rad] )</h3>
+	 * rad - the angle to rotate in radians.
+	 * Rotates the object around z axis in local space.
+
+<h3>[method:undefined setRotationFromAxisAngle]( [param:Vector3 axis], [param:Float angle] )</h3>
+	 * axis -- A normalized vector in object space. 
+	 * angle -- angle in radians Calls [setFromAxisAngle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion.setFromAxisAngle)( [axis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [angle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) ) on the *.quaternion*.
+
+<h3>[method:undefined setRotationFromEuler]( [param:Euler euler] )</h3>
+	 * euler -- Euler angle specifying rotation amount.
+	 * Calls [setRotationFromEuler](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion.setRotationFromEuler)( [euler](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler)) on the *.quaternion*.
+
+<h3>[method:undefined setRotationFromMatrix]( [param:Matrix4 m] )</h3>
+	 * m -- rotate the quaternion by the rotation component of the matrix.
+	 * Calls [setFromRotationMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion.setFromRotationMatrix)( [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4))
+	 * on the *.quaternion*.
+	 * Note that this assumes that the upper 3x3 of m is a pure rotation matrix (i.e, unscaled).
+
+<h3>[method:undefined setRotationFromQuaternion]( [param:Quaternion q] )</h3>
+	 * q -- normalized Quaternion.
+	 * Copy the given quaternion into *.quaternion*.
+
+<h3>[method:Object toJSON]( [param:Object meta] )</h3>
+	 * meta -- object containing metadata such as materials, textures or images for the object.
+	 * Convert the object to three.js [JSON Object/Scene format](https://github.com/mrdoob/three.js/wiki/JSON-Object-Scene-format-4).
+
+<h3>[method:this translateOnAxis]( [param:Vector3 axis], [param:Float distance] )</h3>
+	 * axis -- A normalized vector in object space.
+	 * distance -- The distance to translate.
+	 * Translate an object by distance along an axis in object space. The axis is assumed to be normalized.
+
+<h3>[method:this translateX]( [param:Float distance] )</h3>
+	 * Translates object along x axis in object space by *distance* units.
+<h3>[method:this translateY]( [param:Float distance] )</h3>
+	 * Translates object along y axis in object space by *distance* units.
+<h3>[method:this translateZ]( [param:Float distance] )</h3>
+	 * Translates object along z axis in object space by *distance* units.
+<h3>[method:undefined traverse]( [param:Function callback] )</h3>
+	 * Executes the callback on this object and all descendants.
+	 * Note: Modifying the scene graph inside the callback is discouraged.
+	 * @param callback - A function with as first argument an object3D object.
+
+<h3>[method:undefined traverseVisible]( [param:Function callback] )</h3>
+	 * Like traverse, but the callback will only be executed for visible objects.
+	 * Descendants of invisible objects are not traversed.
+	 * Note: Modifying the scene graph inside the callback is discouraged.
+	 * @param callback - A function with as first argument an object3D object.
+
+<h3>[method:undefined traverseAncestors]( [param:Function callback] )</h3>
+	 * Executes the callback on all ancestors.
+	 * Note: Modifying the scene graph inside the callback is discouraged.
+	 * @param callback - A function with as first argument an object3D object.
+
+<h3>[method:undefined updateMatrix]()</h3>
+	 * Updates the local transform.
+<h3>[method:undefined updateMatrixWorld]( [param:Boolean force] )</h3>
+	 * Updates the global transform of the object and its descendants.
+<h3>[method:undefined updateWorldMatrix]( [param:Boolean updateParents], [param:Boolean updateChildren] )</h3>
+	 * updateParents - recursively updates global transform of ancestors.
+	 * updateChildren - recursively updates global transform of descendants.
+	 * Updates the global transform of the object.
+
+<h3>[method:Vector3 worldToLocal]( [param:Vector3 vector] )</h3>
+	 * vector - A vector representing a position in world space.
+	 * Converts the vector from world space to this object's local space.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

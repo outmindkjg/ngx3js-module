@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * A simple caching system, used internally by [FileLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FileLoader).
+
+<h2>Code Example</h2>
+	 * To enable caching across all loaders	that use [FileLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FileLoader), set THREE.Cache.enabled = true.
+
+
+<h2>Examples</h2>
+
+	 * [WebGL / geometry / text ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text)
+	 * [WebGL / interactive / instances / gpu](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_instances_gpu)
+	 * [WebGL / loader / ttf](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_ttf)
+
+<h2>Properties</h2>
+<h3>[property:Boolean enabled]</h3>
+	 * Whether caching is enabled. Default is *false*.
+<h3>[property:Object files]</h3>
+	 * An [object](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object) that holds cached files.
+
+<h2>Methods</h2>
+<h3>[method:undefined add]( [param:String key], [param:Object file] )</h3>
+	 * @param key - the [key](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String) to reference the cached file by.
+	 * @param file - The file to be cached.
+	 * Adds a cache entry with a key to reference the file. If this key already holds a file, it is overwritten.
+
+<h3>[method:Any get]( [param:String key] )</h3>
+	 * @param key - A string key 
+	 * Get the value of [key](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String). If the key does not exist *undefined* is returned.
+
+<h3>[method:undefined remove]( [param:String key] )</h3>
+	 * @param key - A string key that references a cached file.
+	 * Remove the cached file associated with the key.
+
+<h3>[method:undefined clear]()</h3>
+	 * Remove all values from the cache.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

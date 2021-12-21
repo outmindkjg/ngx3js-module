@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * Create a texture to apply to a surface or as a reflection or refraction map.
+
+	 * Note: After the initial use of a texture, its dimensions, format, and type cannot be changed. Instead, call *.dispose*() on the texture and instantiate a new one.
+
+<h2>Code Example</h2>
+
+	 * //  load a texture, set wrap mode to repeat const texture = new THREE.TextureLoader().load( "textures/water.jpg" );
+	 * texture.wrapS = THREE.RepeatWrapping;
+	 * texture.wrapT = THREE.RepeatWrapping;
+	 * texture.repeat.set( 4, 4 );
+
+<h2>Constructor</h2>
+<h3>[name]( image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding )</h3>
+<h2>Properties</h2>
+<h3>[property:Integer id]</h3>
+	 * Readonly - unique number for this texture instance.
+
+<h3>[property:String uuid]</h3>
+	 * [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) of this object instance.
+	 * This gets automatically assigned, so this shouldn't be edited.
+
+<h3>[property:String name]</h3>
+	 * Optional name of the object (doesn't need to be unique). Default is an empty string.
+
+<h3>[property:Image image]</h3>
+	 * An image object, typically created using the [TextureLoader.load](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TextureLoader.load) method.
+	 * This can be any image (e.g., PNG, JPG, GIF, DDS) or video (e.g., MP4, OGG/OGV) type supported by three.js.
+	 * To use video as a texture you need to have a playing HTML5
+	 * video element as a source for your texture image and continuously update this texture as long as video is playing - the [VideoTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VideoTexture) class handles this automatically.
+
+<h3>[property:Array mipmaps]</h3>
+	 * Array of user-specified mipmaps (optional).
+
+<h3>[property:number mapping]</h3>
+	 * How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) is the default, where the U,V coordinates are used to apply the map.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for other mapping types.
+
+<h3>[property:number wrapS]</h3>
+	 * This defines how the texture is wrapped horizontally and corresponds to *U* in UV mapping.
+	 * The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), where the edge is clamped to the outer edge texels.
+	 * The other two choices are [THREE.RepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.MirroredRepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details.
+
+<h3>[property:number wrapT]</h3>
+	 * This defines how the texture is wrapped vertically and corresponds to *V* in UV mapping.
+	 * The same choices are available as for [property:number wrapS].
+	 * NOTE: tiling of images in textures only functions if image dimensions are powers of two  (2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, ...) in terms of pixels.
+ Individual dimensions need not be equal, but each must be a power of two.
+ This is a limitation of WebGL, not three.js.
+
+<h3>[property:number magFilter]</h3>
+	 * How the texture is sampled when a texel covers more than one pixel. The default is  [THREE.LinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), which takes the four closest texels and bilinearly interpolates among them.
+ The other option is [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), which uses the value of the closest texel.
+ See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details.
+
+<h3>[property:number minFilter]</h3>
+	 * How the texture is sampled when a texel covers less than one pixel. The default is [THREE.LinearMipmapLinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), which uses mipmapping and a trilinear filter. 
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for all possible choices.
+
+<h3>[property:number anisotropy]</h3>
+	 * The number of samples taken along the axis through the pixel that has the highest density of texels.
+	 * By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used. Use [renderer.getMaxAnisotropy](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.getMaxAnisotropy)() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
+
+<h3>[property:number format]</h3>
+	 * The default is [THREE.RGBAFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), although the [TextureLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TextureLoader) will automatically set this to [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for JPG images. 
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details of other formats.
+
+<h3>[property:String internalFormat]</h3>
+	 * The default value is obtained using a combination of [.format](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.format) and [.type](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.type).
+	 * The GPU format allows the developer to specify how the data is going to be stored on the GPU.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details regarding all supported internal formats.
+
+<h3>[property:number type]</h3>
+	 * This must correspond to the [.format](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.format). The default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), which will be used for most texture formats.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details of other formats.
+
+<h3>[property:Vector2 offset]</h3>
+	 * How much a single repetition of the texture is offset from the beginning, in each direction U and V.
+	 * Typical range is *0.0* to *1.0*.
+
+	 * The below texture types share the *first* uv channel in the engine. The offset (and repeat) setting is evaluated according to the following priorities and then shared by those textures:
+<ol>
+	color map
+	specular map
+	displacement map
+	normal map
+	bump map
+	roughness map
+	metalness map
+	alpha map
+	emissive map
+	clearcoat map
+	clearcoat normal map
+	clearcoat roughnessMap map
+</ol>
+
+	 * The below texture types share the *second* uv channel in the engine. The offset (and repeat) setting is evaluated according to the following priorities and then shared by those textures:
+<ol>
+	ao map
+	light map
+</ol>
+
+<h3>[property:Vector2 repeat]</h3>
+	 * How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to [THREE.RepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) or [THREE.MirroredRepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) to achieve the desired tiling effect. Setting different repeat values for textures is restricted in the same way like *.offset*.
+
+<h3>[property:number rotation]</h3>
+	 * How much the texture is rotated around the center point, in radians. Positive values are counter-clockwise. Default is *0*.
+
+<h3>[property:Vector2 center]</h3>
+	 * The point around which rotation occurs. A value of (0.5, 0.5) corresponds to the center of the texture. Default is (0, 0), the lower left.
+
+<h3>[property:Boolean matrixAutoUpdate]</h3>
+	 * Whether to update the texture's uv-transform [.matrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.matrix) from the texture properties [.offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.offset), [.repeat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.repeat),
+	 * [.rotation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.rotation), and [.center](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.center). True by default.
+	 * Set this to false if you are specifying the uv-transform matrix directly.
+
+<h3>[property:Matrix3 matrix]</h3>
+	 * The uv-transform matrix for the texture. Updated by the renderer from the texture properties [.offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.offset), [.repeat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.repeat),
+	 * [.rotation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.rotation), and [.center](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.center) when the texture's [.matrixAutoUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.matrixAutoUpdate) property is true.
+	 * When [.matrixAutoUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.matrixAutoUpdate) property is false, this matrix may be set manually.
+	 * Default is the identity matrix.
+
+<h3>[property:Boolean generateMipmaps]</h3>
+	 * Whether to generate mipmaps (if possible) for a texture. True by default. Set this to false if you are creating mipmaps manually.
+
+<h3>[property:Boolean premultiplyAlpha]</h3>
+	 * If set to *true*, the alpha channel, if present, is multiplied into the color channels when the texture is uploaded to the GPU. Default is *false*.
+	 * Note that this property has no effect for [ImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap).
+	 * You need to configure on bitmap creation instead. See [ImageBitmapLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ImageBitmapLoader).
+
+<h3>[property:Boolean flipY]</h3>
+	 * If set to *true*, the texture is flipped along the vertical axis when uploaded to the GPU. Default is *true*.
+	 * Note that this property has no effect for [ImageBitmap](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmap).
+	 * You need to configure on bitmap creation instead. See [ImageBitmapLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ImageBitmapLoader).
+
+<h3>[property:number unpackAlignment]</h3>
+	 * 4 by default. Specifies the alignment requirements for the start of each pixel row in memory.
+	 * The allowable values are 1 (byte-alignment), 2 (rows aligned to even-numbered bytes),
+	 * 4 (word-alignment), and 8 (rows start on double-word boundaries).
+	 * See [glPixelStorei](http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)
+	 * for more information.
+
+<h3>[property:number encoding]</h3>
+	 * [THREE.LinearEncoding](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) is the default.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details of other formats.
+	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
+
+<h3>[property:Integer version]</h3>
+	 * This starts at *0* and counts how many times [property:Boolean needsUpdate] is set to *true*.
+
+<h3>[property:Function onUpdate]</h3>
+	 * A callback function, called when the texture is updated (e.g., when needsUpdate has been set to true and then the texture is used).
+
+<h3>[property:Boolean needsUpdate]</h3>
+	 * Set this to *true* to trigger an update next time the texture is used. Particularly important for setting the wrap mode.
+
+<h3>[property:Object userData]</h3>
+	 * An object that can be used to store custom data about the texture. It should not hold references to functions as these will not be cloned.
+
+<h2>Methods</h2>
+<h3>[EventDispatcher](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EventDispatcher) methods are available on this class.</h3>
+<h3>[method:undefined updateMatrix]()</h3>
+	 * Update the texture's uv-transform [.matrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.matrix) from the texture properties [.offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.offset), [.repeat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.repeat),
+	 * [.rotation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.rotation), and [.center](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.center).
+
+<h3>[method:Texture clone]()</h3>
+	 * Make copy of the texture. Note this is not a "deep copy", the image is shared.
+	 * Besides, cloning a texture does not automatically mark it for a texture upload. You have to set [Texture.needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.needsUpdate) to true as soon as its image property (the data source) is fully loaded or ready.
+
+<h3>[method:Object toJSON]( [param:Object meta] )</h3>
+	 * meta -- optional object containing metadata.
+	 * Convert the texture to three.js [JSON Object/Scene format](https://github.com/mrdoob/three.js/wiki/JSON-Object-Scene-format-4).
+
+<h3>[method:undefined dispose]()</h3>
+	 * Frees the GPU related resources allocated by a texture. Call this method whenever a texture is no longer used in your app.
+
+<h3>[method:Vector2 transformUv]( [param:Vector2 uv] )</h3>
+	 * Transform the uv based on the value of this texture's [.offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.offset), [.repeat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.repeat),
+	 * [.wrapS](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.wrapS), [.wrapT](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.wrapT) and [.flipY](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.flipY) properties.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

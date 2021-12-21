@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+	 * Class representing a 4D [vector](https://en.wikipedia.org/wiki/Vector_space).
+	 * A 4D vector is an ordered quadruplet of numbers (labeled x, y, z, and w), which can be used to represent a number of things, such as:
+	 * A point in 4D space.
+	 * A direction and length in 4D space. In three.js the length will always be the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance)e (straight-line distance) from (0, 0, 0, 0) to (x, y, z, w) and the direction is also measured from (0, 0, 0, 0) towards (x, y, z, w).
+	 * Any arbitrary ordered quadruplet of numbers.
+	 * There are other things a 4D vector can be used to represent, however these are the most common uses in three.js.
+	 * Iterating through a Vector4 instance will yield its components (x, y, z, w) in the corresponding order.
+
+	 * const a = new THREE.Vector4( 0, 1, 0, 0 );
+	 * // no arguments; will be initialised to (0, 0, 0, 1)
+	 * const b = new THREE.Vector4( );
+	 * const d = a.dot( b );
+
+
+<h2>Constructor</h2>
+<h3>[name]( [param:Float x], [param:Float y], [param:Float z], [param:Float w] )</h3>
+	 * @param x - the x value of this vector. Default is *0*.
+	 * @param y -  the y value of this vector. Default is *0*.
+	 * @param z - the z value of this vector. Default is *0*.
+	 * @param w - the w value of this vector. Default is *1*.
+	 * Creates a new [name].
+
+<h2>Properties</h2>
+<h3>[property:Float x]</h3>
+<h3>[property:Float y]</h3>
+<h3>[property:Float z]</h3>
+<h3>[property:Float w]</h3>
+<h3>[property:Float width]</h3>
+	 * Alias for *.z*.
+<h3>[property:Float height]</h3>
+	 * Alias for *.w*.
+
+<h2>Methods</h2>
+<h3>[method:this add]( [param:Vector4 v] )</h3>
+	 * Adds [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) to this vector.
+<h3>[method:this addScalar]( [param:Float s] )</h3>
+	 * Adds the scalar value s to this vector's *.x*, *.y*, *.z* and *.w* values.
+<h3>[method:this addScaledVector]( [param:Vector4 v], [param:Float s] )</h3>
+	 * Adds the multiple of [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) and [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) to this vector.
+<h3>[method:this addVectors]( [param:Vector4 a], [param:Vector4 b] )</h3>
+	 * Sets this vector to [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) + [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
+<h3>[method:this applyMatrix4]( [param:Matrix4 m] )</h3>
+	 * Multiplies this vector by 4 x 4 [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
+
+<h3>[method:this ceil]()</h3>
+	 * The *.x*, *.y*, *.z* and *.w* components of this vector are rounded up to the nearest integer value.
+
+<h3>[method:this clamp]( [param:Vector4 min], [param:Vector4 max] )</h3>
+	 * @param min - the minimum *.x*, *.y*, *.z* and *.w* values.
+	 * @param max - the maximum *.x*, *.y*, *.z* and *.w* values in the desired range If this vector's x, y, z or w value is greater than the max vector's x, y, z or w value, it is replaced by the corresponding value. 
+	 * If this vector's x, y, z or w value is less than the min vector's x, y, z or w value, it is replaced by the corresponding value.
+
+<h3>[method:this clampLength]( [param:Float min], [param:Float max] )</h3>
+	 * @param min - the minimum value the length will be clamped to 
+	 * @param max - the maximum value the length will be clamped to If this vector's length is greater than the max value, it is replaced by the max value. 
+	 * If this vector's length is less than the min value, it is replaced by the min value.
+
+<h3>[method:this clampScalar]( [param:Float min], [param:Float max] )</h3>
+	 * @param min - the minimum value the components will be clamped to 
+	 * @param max - the maximum value the components will be clamped to If this vector's x, y, z or w values are greater than the max value, they are replaced by the max value. 
+	 * If this vector's x, y, z or w values are less than the min value, they are replaced by the min value.
+
+<h3>[method:Vector4 clone]()</h3>
+	 * @returns Returns a new Vector4 with the same *.x*, *.y*, *.z* and *.w* values as this one.
+
+<h3>[method:this copy]( [param:Vector4 v] )</h3>
+	 * Copies the values of the passed Vector4's *.x*, *.y*, *.z* and *.w*
+	 * properties to this Vector4.
+
+<h3>[method:this divideScalar]( [param:Float s] )</h3>
+	 * Divides this vector by scalar [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+	 * Sets vector to *( 0, 0, 0, 0 )* if *[s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) = 0*.
+
+<h3>[method:Float dot]( [param:Vector4 v] )</h3>
+	 * Calculates the [dot product](https://en.wikipedia.org/wiki/Dot_product) of this vector and [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
+
+<h3>[method:Boolean equals]( [param:Vector4 v] )</h3>
+	 * @returns Returns *true* if the components of this vector and [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) are strictly equal; *false* otherwise.
+<h3>[method:this floor]()</h3>
+	 * The components of this vector are rounded down to the nearest integer value.
+<h3>[method:this fromArray]( [param:Array array], [param:Integer offset] )</h3>
+	 * @param array - the source array.
+	 * @param offset - offset into the array. Default is 0.
+	 * Sets this vector's *.x* value to be array[ offset + 0 ], *.y* value to be array[ offset + 1 ]
+*.z* value to be array[ offset + 2 ] and *.w* value to be array[ offset + 3 ].
+
+<h3>[method:this fromBufferAttribute]( [param:BufferAttribute attribute], [param:Integer index] )</h3>
+	 * @param attribute - the source attribute.
+	 * @param index - index in the attribute.
+	 * Sets this vector's *.x*, *.y*, *.z* and *.w* values from the [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
+
+<h3>[method:Float getComponent]( [param:Integer index] )</h3>
+	 * @param index - 0, 1, 2 or 3.
+	 * If index equals 0 returns the *.x* value. 
+	 * If index equals 1 returns the *.y* value. 
+	 * If index equals 2 returns the *.z* value.
+	 * If index equals 3 returns the *.w* value.
+
+<h3>[method:Float length]()</h3>
+	 * Computes the [Euclidean length](https://en.wikipedia.org/wiki/Euclidean_distance)
+	 * (straight-line length) from (0, 0, 0, 0) to (x, y, z, w).
+<h3>[method:Float manhattanLength]()</h3>
+	 * Computes the [Manhattan length](http://en.wikipedia.org/wiki/Taxicab_geometry) of this vector.
+
+<h3>[method:Float lengthSq]()</h3>
+	 * Computes the square of the [Euclidean length](https://en.wikipedia.org/wiki/Euclidean_distance)
+	 * (straight-line length) from (0, 0, 0, 0) to (x, y, z, w). If you are 	comparing the lengths of vectors, you should compare the length squared instead as it is slightly more efficient to calculate.
+
+<h3>[method:this lerp]( [param:Vector4 v], [param:Float alpha] )</h3>
+	 * @param v - [Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) to interpolate towards.
+	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * Linearly interpolates between this vector and [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4), where alpha is the percent distance along the line - alpha = 0 will be this vector, and alpha = 1 will be [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
+
+<h3>[method:this lerpVectors]( [param:Vector4 v1], [param:Vector4 v2], [param:Float alpha] )</h3>
+	 * @param v1 - the starting [Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
+	 * @param v2 - [Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) to interpolate towards.
+	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * Sets this vector to be the vector linearly interpolated between [v1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) and [v2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) where alpha is the percent distance along the line connecting the two vectors - alpha = 0 will be [v1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4), and alpha = 1 will be [v2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
+
+<h3>[method:this negate]()</h3>
+	 * Inverts this vector - i.e. sets x = -x, y = -y, z = -z and w = -w.
+<h3>[method:this normalize]()</h3>
+	 * Converts this vector to a [unit vector](https://en.wikipedia.org/wiki/Unit_vector) - that is, sets it equal to a vector with the same direction as this one, but *.length* 1.
+
+<h3>[method:this max]( [param:Vector4 v] )</h3>
+	 * If this vector's x, y, z or w value is less than [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4)'s x, y, z or w value, replace that value with the corresponding max value.
+
+<h3>[method:this min]( [param:Vector4 v] )</h3>
+	 * If this vector's x, y, z or w value is greater than [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4)'s x, y, z or w value, replace that value with the corresponding min value.
+
+<h3>[method:this multiply]( [param:Vector4 v] )</h3>
+	 * Multiplies this vector by [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
+<h3>[method:this multiplyScalar]( [param:Float s] )</h3>
+	 * Multiplies this vector by scalar [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+<h3>[method:this round]()</h3>
+	 * The components of this vector are rounded to the nearest integer value.
+<h3>[method:this roundToZero]()</h3>
+	 * The components of this vector are rounded towards zero (up if negative, down if positive) to an integer value.
+
+<h3>[method:this set]( [param:Float x], [param:Float y], [param:Float z], [param:Float w] )</h3>
+	 * Sets the *.x*, *.y*, *.z* and *.w* components of this vector.
+<h3>[method:this setAxisAngleFromQuaternion]( [param:Quaterion q] )</h3>
+	 * @param q - a normalized [Quaterion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaterion)
+	 * Sets the *.x*, *.y* and *.z* components of this vector to the quaternion's axis and *.w* to the angle.
+
+<h3>[method:this setAxisAngleFromRotationMatrix]( [param:Matrix4 m] )</h3>
+ [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) - a [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper left 3x3 matrix is a pure rotation matrix.
+	 * Sets the *.x*, *.y* and *.z* to the axis of rotation and *.w* to the angle.
+
+<h3>[method:this setComponent]( [param:Integer index], [param:Float value] )</h3>
+	 * @param index - 0, 1 or 2.
+	 * @param value - [Float](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
+	 * If index equals 0 set *.x* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+	 * If index equals 1 set *.y* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+	 * If index equals 2 set *.z* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+	 * If index equals 3 set *.w* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+
+<h3>[method:this setLength]( [param:Float l] )</h3>
+	 * Sets this vector to a vector with the same direction as this one, but *.length*
+	 * [l](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+
+<h3>[method:this setScalar]( [param:Float scalar] )</h3>
+	 * Sets the *.x*, *.y*, *.z* and *.w* values of this vector both equal to [scalar](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+
+<h3>[method:this setX]( [param:Float x] )</h3>
+	 * Replaces this vector's *.x* value with [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+<h3>[method:this setY]( [param:Float y] )</h3>
+	 * Replaces this vector's *.y* value with [y](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+<h3>[method:this setZ]( [param:Float z] )</h3>
+	 * Replaces this vector's *.z* value with [z](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+<h3>[method:this setW]( [param:Float w] )</h3>
+	 * Replaces this vector's *.w* value with [w](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+<h3>[method:this sub]( [param:Vector4 v] )</h3>
+	 * Subtracts [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) from this vector.
+<h3>[method:this subScalar]( [param:Float s] )</h3>
+	 * Subtracts [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)  from this vector's *.x*, *.y*, *.z* and *.w* compnents.
+<h3>[method:this subVectors]( [param:Vector4 a], [param:Vector4 b] )</h3>
+	 * Sets this vector to [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) - [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
+<h3>[method:Array toArray]( [param:Array array], [param:Integer offset] )</h3>
+	 * @param array - array to store this vector to. If this is not provided, a new array will be created.
+	 * @param offset - optional offset into the array.
+	 * @returns Returns an array [x, y, z, w], or copies x, y, z and w into the provided [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array).
+
+<h3>[method:this random]()</h3>
+	 * Sets each component of this vector to a pseudo-random value between 0 and 1, excluding 1.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

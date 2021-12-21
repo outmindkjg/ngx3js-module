@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * This class is used to convert a series of shapes to an array of [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path)s, for example an SVG shape to a path (see the example below).
+
+<h2>Examples</h2>
+	 * [geometry / extrude / shapes2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_shapes2)
+
+<h2>Constructor</h2>
+
+<h3>[name](  )</h3>
+	 * Creates a new ShapePath. Unlike a [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path), no points are passed in as the ShapePath is designed to be generated after creation.
+
+<h2>Properties</h2>
+<h3>[property:Array subPaths]</h3>
+	 * Array of [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path)s.
+
+<h3>[property:Array currentPath]</h3>
+	 * The current [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path) that is being generated.
+
+<h3>[property:Color color]</h3>
+	 * [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) of the shape, by default set to white (0xffffff).
+<h2>Methods</h2>
+<h3>[method:this moveTo]( [param:Float x], [param:Float y] )</h3>
+	 * Starts a new [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path) and calls [Path.moveTo](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path.moveTo)( x, y ) on that [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path).
+	 * Also points [currentPath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.currentPath) to that [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path).
+
+<h3>[method:this lineTo]( [param:Float x], [param:Float y] )</h3>
+	 * This creates a line from the [currentPath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.currentPath)'s offset to X and Y and updates the offset to X and Y.
+<h3>[method:this quadraticCurveTo]( [param:Float cpX], [param:Float cpY], [param:Float x], [param:Float y] )</h3>
+	 * This creates a quadratic curve from the [currentPath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.currentPath)'s offset to x and y with cpX and cpY as control point and updates the [currentPath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.currentPath)'s offset to x and y.
+<h3>[method:this bezierCurveTo]( [param:Float cp1X], [param:Float cp1Y], [param:Float cp2X], [param:Float cp2Y], [param:Float x], [param:Float y] )</h3>
+	 * This creates a bezier curve from the [currentPath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.currentPath)'s  offset to x and y with cp1X, cp1Y and cp2X, cp2Y as control points and updates the  [currentPath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.currentPath)'s offset to x and y.
+<h3>[method:this splineThru] ( [param:Array points] ) </h3>
+	 * points - An array of [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)s Connects a new [SplineCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SplineCurve) onto the [currentPath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.currentPath).
+
+<h3>[method:Array toShapes]( [param:Boolean isCCW], [param:Boolean noHoles] )</h3>
+	 * isCCW -- Changes how solids and holes are generated noHoles -- Whether or not to generate holes Converts the [subPaths](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.subPaths) array into an array of Shapes. By default solid shapes are defined clockwise (CW) and holes are defined counterclockwise (CCW). If isCCW is set to true, then those are flipped. If the parameter noHoles is set to true then all paths are set as solid shapes and isCCW is ignored.
+
+
+<h2>Source</h2>
+
+	 * [src/extras/core/ShapePath.js](https://github.com/mrdoob/three.js/blob/master/src/extras/core/ShapePath.js)
+	</body>
+</html>

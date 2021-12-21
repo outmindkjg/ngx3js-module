@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) &rarr;
+<h1>[name]</h1>
+
+	 * A polyhedron is a solid in three dimensions with flat faces. This class will take an array of vertices, project them onto a sphere, and then divide them up to the desired level of detail. This class is used by [DodecahedronGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DodecahedronGeometry), [IcosahedronGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/IcosahedronGeometry), [OctahedronGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OctahedronGeometry), and [TetrahedronGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TetrahedronGeometry) to generate their respective geometries.
+
+<h2>Code Example</h2>
+
+	 * const verticesOfCube = [
+    -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
+    -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
+];
+	 * const indicesOfFaces = [
+    2,1,0,    0,3,2,
+    0,4,7,    7,3,0,
+    0,1,5,    5,4,0,
+    1,2,6,    6,5,1,
+    2,3,7,    7,6,2,
+    4,5,6,    6,7,4
+];
+	 * const geometry = new THREE.PolyhedronGeometry( verticesOfCube, indicesOfFaces, 6, 2 );
+
+<h2>Constructor</h2>
+
+<h3>[name]([param:Array vertices], [param:Array indices], [param:Float radius], [param:Integer detail])</h3>
+	 * vertices - [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of points of the form [1,1,1, -1,-1,-1, ... ] 
+	 * indices - [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of indices that make up the faces of the form [0,1,2, 2,3,0, ... ] 
+	 * radius - [Float](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) - The radius of the final shape 
+	 * detail - [Integer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) - How many levels to subdivide the geometry. The more detail, the smoother the shape.
+
+<h2>Properties</h2>
+	 * See the base [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) class for common properties.
+<h3>[property:Object parameters]</h3>
+	 * An object with a property for each of the constructor parameters. Any modification after instantiation does not change the geometry.
+
+<h2>Methods</h2>
+	 * See the base [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) class for common methods.
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

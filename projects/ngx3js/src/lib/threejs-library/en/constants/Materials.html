@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>Material Constants</h1>
+
+	 * These constants define properties common to all material types, with the exception of Texture Combine Operations which only apply to [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial.combine), [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial.combine) and [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial.combine).
+
+<h2>Side</h2>
+
+	 * THREE.FrontSide THREE.BackSide THREE.DoubleSide 
+	 * Defines which side of faces will be rendered - front, back or both.
+	 * Default is [FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant).
+
+<h2>Blending Mode</h2>
+
+	 * THREE.NoBlending THREE.NormalBlending THREE.AdditiveBlending THREE.SubtractiveBlending THREE.MultiplyBlending THREE.CustomBlending 
+
+	 * These control the source and destination blending equations for the material's RGB and Alpha sent to the WebGLRenderer for use by WebGL.
+	 * [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) is the default.
+	 * Note that [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) must be set to use [Custom Blending Equations](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation).
+	 * See the [materials / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_blending) example.
+
+<h2>Depth Mode</h2>
+
+	 * THREE.NeverDepth THREE.AlwaysDepth THREE.EqualDepth THREE.LessDepth THREE.LessEqualDepth THREE.GreaterEqualDepth THREE.GreaterDepth THREE.NotEqualDepth 
+	 * Which depth function the material uses to compare incoming pixels Z-depth against the current Z-depth buffer value. If the result of the comparison is true, the pixel will be drawn.
+	 * [NeverDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will never return true.
+	 * [AlwaysDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will always return true.
+	 * [EqualDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the incoming pixel Z-depth is equal to the current buffer Z-depth.
+	 * [LessDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the incoming pixel Z-depth is less than the current buffer Z-depth.
+	 * [LessEqualDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) is the default and will return true if the incoming pixel Z-depth is less than or equal to the current buffer Z-depth.
+	 * [GreaterEqualDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the incoming pixel Z-depth is greater than or equal to the current buffer Z-depth.
+	 * [GreaterDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the incoming pixel Z-depth is greater than the current buffer Z-depth.
+	 * [NotEqualDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the incoming pixel Z-depth is not equal to the current buffer Z-depth.
+
+<h2>Texture Combine Operations</h2>
+
+	 * THREE.MultiplyOperation THREE.MixOperation THREE.AddOperation 
+	 * These define how the result of the surface's color is combined with the environment map (if present), for [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial.combine), [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial.combine) and [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial.combine). 
+	 * [MultiplyOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) is the default and multiplies the environment map color with the surface color.
+	 * [MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) uses reflectivity to blend between the two colors.
+	 * [AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) adds the two colors.
+
+<h2>Stencil Functions</h2>
+
+	 * THREE.NeverStencilFunc THREE.LessStencilFunc THREE.EqualStencilFunc THREE.LessEqualStencilFunc THREE.GreaterStencilFunc THREE.NotEqualStencilFunc THREE.GreaterEqualStencilFunc THREE.AlwaysStencilFunc 
+	 * Which stencil function the material uses to determine whether or not to perform a stencil operation.
+	 * [NeverStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will never return true.
+	 * [LessStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the stencil reference value is less than the current stencil value.
+	 * [EqualStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the stencil reference value is equal to the current stencil value.
+	 * [LessEqualStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the stencil reference value is less than or equal to the current stencil value.
+	 * [GreaterStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the stencil reference value is greater than the current stencil value.
+	 * [NotEqualStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the stencil reference value is not equal to the current stencil value.
+	 * [GreaterEqualStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will return true if the stencil reference value is greater than or equal to the current stencil value.
+	 * [AlwaysStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will always return true.
+
+<h2>Stencil Operations</h2>
+
+	 * THREE.ZeroStencilOp THREE.KeepStencilOp THREE.ReplaceStencilOp THREE.IncrementStencilOp THREE.DecrementStencilOp THREE.IncrementWrapStencilOp THREE.DecrementWrapStencilOp THREE.InvertStencilOp 
+	 * Which stencil operation the material will perform on the stencil buffer pixel if the provided stencil function passes.
+	 * [ZeroStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will set the stencil value to 0.
+	 * [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will not change the current stencil value.
+	 * [ReplaceStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will replace the stencil value with the specified stencil reference value.
+	 * [IncrementStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will increment the current stencil value by 1.
+	 * [DecrementStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will decrement the current stencil value by 1.
+	 * [IncrementWrapStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will increment the current stencil value by 1. If the value increments past 255 it will be set to 0.
+	 * [DecrementWrapStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will increment the current stencil value by 1. If the value decrements below 0 it will be set to 255.
+	 * [InvertStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) will perform a bitwise iversion of the current stencil value.
+
+<h2>Source</h2>
+
+	 * [src/constants.js](https://github.com/mrdoob/three.js/blob/master/src/constants.js)
+	</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * Implementation of a [quaternion](http://en.wikipedia.org/wiki/Quaternion).
+	 * Quaternions are used in three.js to represent [rotations](https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation).
+
+<h2>Code Example</h2>
+
+	 * const quaternion = new THREE.Quaternion();
+	 * quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
+	 * const vector = new THREE.Vector3( 1, 0, 0 );
+	 * vector.applyQuaternion( quaternion );
+
+
+<h2>Constructor</h2>
+
+<h3>[name]( [param:Float x], [param:Float y], [param:Float z], [param:Float w] )</h3>
+	 * @param x - w coordinate <h2>Properties</h2>
+<h3>[property:Float x]</h3>
+<h3>[property:Float y]</h3>
+<h3>[property:Float z]</h3>
+<h3>[property:Float w]</h3>
+
+<h2>Methods</h2>
+<h3>[method:Float angleTo]( [param:Quaternion q] )</h3>
+	 * @returns Returns the angle between this quaternion and quaternion [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) in radians.
+
+<h3>[method:Quaternion clone]()</h3>
+	 * Creates a new Quaternion with identical *.x*, *.y*, *.z* and *.w* properties to this one.
+
+<h3>[method:this conjugate]()</h3>
+	 * @returns Returns the rotational conjugate of this quaternion. The conjugate of a quaternion represents the same rotation in the opposite direction about the rotational axis.
+
+<h3>[method:this copy]( [param:Quaternion q] )</h3>
+	 * Copies the *.x*, *.y*,	*.z* and *.w* properties of [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) into this quaternion.
+
+<h3>[method:Boolean equals]( [param:Quaternion v] )</h3>
+	 * @param v - Quaternion that this quaternion will be compared to.
+	 * Compares the *.x*, *.y*,	*.z* and *.w* properties of [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) to the equivalent properties of this quaternion to determine if they represent the same rotation.
+
+<h3>[method:Float dot]( [param:Quaternion v] )</h3>
+	 * Calculates the [dot product](https://en.wikipedia.org/wiki/Dot_product) of quaternions [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) and this one.
+
+<h3>[method:this fromArray]( [param:Array array], [param:Integer offset] )</h3>
+	 * @param array - array of format (x, y, z, w) used to construct the quaternion.
+	 * @param offset - an offset into the array.
+	 * Sets this quaternion's *.x*, *.y*,	*.z* and *.w* properties from an array.
+
+<h3>[method:this identity]()</h3>
+	 * Sets this quaternion to the identity quaternion; that is, to the quaternion that represents "no rotation".
+
+<h3>[method:this invert]()</h3>
+	 * Inverts this quaternion - calculates the *.conjugate*. The quaternion is assumed to have unit length.
+
+<h3>[method:Float length]()</h3>
+	 * Computes the [Euclidean length](https://en.wikipedia.org/wiki/Euclidean_distance)
+	 * (straight-line length) of this quaternion, considered as a 4 dimensional vector.
+<h3>[method:Float lengthSq]()</h3>
+	 * Computes the squared [Euclidean length](https://en.wikipedia.org/wiki/Euclidean_distance)
+	 * (straight-line length) of this quaternion, considered as a 4 dimensional vector. This can be useful if you are comparing the lengths of two quaternions, as this is a slightly more efficient calculation than *.length*().
+
+<h3>[method:this normalize]()</h3>
+	 * [Normalizes](https://en.wikipedia.org/wiki/Normalized_vector) this quaternion - that is, calculated the quaternion that performs the same rotation as this one, but has  *.length*
+	 * equal to *1*.
+
+<h3>[method:this multiply]( [param:Quaternion q] )</h3>
+	 * Multiplies this quaternion by [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion).
+<h3>[method:this multiplyQuaternions]( [param:Quaternion a], [param:Quaternion b] )</h3>
+	 * Sets this quaternion to [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) x [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion).
+	 * Adapted from the method outlined [here](http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm).
+
+<h3>[method:this premultiply]( [param:Quaternion q] )</h3>
+	 * Pre-multiplies this quaternion by [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion).
+<h3>[method:this random]()</h3>
+	 * Sets this quaternion to a uniformly random, normalized quaternion.
+
+<h3>[method:this rotateTowards]( [param:Quaternion q], [param:Float step] )</h3>
+	 * @param q - The target quaternion.
+	 * @param step - The angular step in radians.
+	 * Rotates this quaternion by a given angular step to the defined quaternion *q*.
+	 * The method ensures that the final quaternion will not overshoot *q*.
+
+<h3>[method:this slerp]( [param:Quaternion qb], [param:Float t] )</h3>
+	 * @param qb - interpolation factor in the closed interval [0, 1].
+	 * Handles the spherical linear interpolation between quaternions. [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) represents the amount of rotation between this quaternion (where [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) is 0) and [qb](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) (where [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) is 1). This quaternion is set to the result. Also see the static version of the *slerp* below.
+
+	 * //  rotate a mesh towards a target quaternion mesh.quaternion.slerp( endQuaternion, 0.01 );
+
+
+<h3>[method:this slerpQuaternions]( [param:Quaternion qa], [param:Quaternion qb], [param:Float t] )</h3>
+	 * Performs a spherical linear interpolation between the given quaternions and stores the result in this quaternion.
+<h3>[method:this set]( [param:Float x], [param:Float y], [param:Float z], [param:Float w] )</h3>
+	 * Sets *.x*, *.y*, *.z*, *.w* properties of this quaternion.
+<h3>[method:this setFromAxisAngle]( [param:Vector3 axis], [param:Float angle] )</h3>
+	 * Sets this quaternion from rotation specified by [axis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) and [angle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+	 * Adapted from the method [here](http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm).
+*Axis* is assumed to be normalized, *angle* is in radians.
+
+<h3>[method:this setFromEuler]( [param:Euler euler] )</h3>
+	 * Sets this quaternion from the rotation specified by [Euler](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler) angle.
+<h3>[method:this setFromRotationMatrix]( [param:Matrix4 m] )</h3>
+	 * @param m - a [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper 3x3 of matrix is a pure [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix) (i.e. unscaled).
+	 * Sets this quaternion from rotation component of [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
+	 * Adapted from the method [here](http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm).
+
+<h3>[method:this setFromUnitVectors]( [param:Vector3 vFrom], [param:Vector3 vTo] )</h3>
+	 * Sets this quaternion to the rotation required to rotate direction vector [vFrom](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to direction vector [vTo](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
+	 * Adapted from the method [here](http://lolengine.net/blog/2013/09/18/beautiful-maths-quaternion-from-vectors).
+	 * [vFrom](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) and [vTo](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) are assumed to be normalized.
+
+<h3>[method:Array toArray]( [param:Array array], [param:Integer offset] )</h3>
+	 * @param array - An optional array to store the quaternion. If not specified, a new array will be created.
+	 * @param offset - if specified, the result will be copied into this [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array).
+	 * @returns Returns the numerical elements of this quaternion in an array of format [x, y, z, w].
+
+<h3>[method:this fromBufferAttribute]( [param:BufferAttribute attribute], [param:Integer index] )</h3>
+	 * @param attribute - the source attribute.
+	 * @param index - index in the attribute.
+	 * Sets *.x*, *.y*, *.z*, *.w* properties of this quaternion from the [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
+
+<h2>Static Methods</h2>
+<h3>[method:undefined slerpFlat]( [param:Array dst], [param:Integer dstOffset], [param:Array src0], [param:Integer srcOffset0], [param:Array src1], [param:Integer srcOffset1], [param:Float t] )</h3>
+	 * @param dst - The output array.
+	 * @param dstOffset - An offset into the output array.
+	 * @param src0 - The source array of the starting quaternion.
+	 * @param srcOffset0 - An offset into the array *src0*.
+	 * @param src1 - The source array of the target quatnerion.
+	 * @param srcOffset1 - An offset into the array *src1*.
+	 * @param t - Normalized interpolation factor (between 0 and 1).
+
+	 * Like the static *slerp* method above, but operates directly on flat arrays of numbers.
+
+<!-- Note: Do not add non-static methods to the bottom of this page. Put them above the <h2>Static Methods</h2> -->
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

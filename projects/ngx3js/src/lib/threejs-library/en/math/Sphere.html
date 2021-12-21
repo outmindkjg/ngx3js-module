@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+	 * A sphere defined by a center and radius.
+<h2>Constructor</h2>
+<h3>[name]( [param:Vector3 center], [param:Float radius] )</h3>
+	 * @param center - center of the sphere. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0). 
+	 * @param radius - radius of the sphere. Default is -1.
+	 * Creates a new [name].
+
+
+<h2>Properties</h2>
+
+<h3>[property:Vector3 center]</h3>
+	 * A [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the center of the sphere. Default is (0, 0, 0).
+<h3>[property:Float radius]</h3>
+	 * The radius of the sphere. Default is -1.
+<h2>Methods</h2>
+<h3>[method:this applyMatrix4]( [param:Matrix4 matrix] )</h3>
+	 * @param matrix - the [Page:Matrix4] to apply 
+	 * Transforms this sphere with the provided [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
+
+<h3>[method:Vector3 clampPoint]( [param:Vector3 point], [param:Vector3 target] )</h3>
+	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) The point to clamp.
+	 * @param target - the result will be copied into this Vector3.
+	 * Clamps a point within the sphere. If the point is outside the sphere, it will clamp it to the closest point on the edge of the sphere. Points already inside the sphere will not be affected.
+
+<h3>[method:Sphere clone]()</h3>
+	 * @returns Returns a new sphere with the same *.center* and *.radius* as this one.
+<h3>[method:Boolean containsPoint]( [param:Vector3 point] )</h3>
+	 * @param point - the [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to be checked Checks to see if the sphere contains the provided [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) inclusive of the surface of the sphere.
+
+<h3>[method:this copy]( [param:Sphere sphere] )</h3>
+	 * Copies the values of the passed sphere's *.center* and *.radius*
+	 * properties to this sphere.
+
+<h3>[method:Float distanceToPoint]( [param:Vector3 point] )</h3>
+	 * @returns Returns the closest distance from the boundary of the sphere to the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3). If the sphere contains the point, the distance will be negative.
+
+<h3>[method:this expandByPoint]( [param:Vector3 point] )</h3>
+	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) that should be included in the sphere.
+	 * Expands the boundaries of this sphere to include [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
+
+<h3>[method:Boolean isEmpty]()</h3>
+	 * Checks to see if the sphere is empty (the radius set to a negative number).</br>
+	 * Spheres with a radius of 0 contain only their center point and are not considered to be empty.
+
+<h3>[method:this makeEmpty]()</h3>
+	 * Makes the sphere empty by setting *.center* to (0, 0, 0) and *.radius* to -1.
+<h3>[method:Boolean equals]( [param:Sphere sphere] )</h3>
+	 * Checks to see if the two spheres' centers and radii are equal.
+
+<h3>[method:Box3 getBoundingBox]( [param:Box3 target] )</h3>
+	 * @param target - the result will be copied into this Box3.
+	 * @returns Returns a[Minimum Bounding Box](https://en.wikipedia.org/wiki/Minimum_bounding_box) for the sphere.
+
+<h3>[method:Boolean intersectsBox]( [param:Box3 box] )</h3>
+	 * @param box - [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to check for intersection against.
+	 * Determines whether or not this sphere intersects a given [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3).
+
+<h3>[method:Boolean intersectsPlane]( [param:Plane plane] )</h3>
+	 * @param plane - Plane to check for intersection against.
+	 * Determines whether or not this sphere intersects a given [plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+
+<h3>[method:Boolean intersectsSphere]( [param:Sphere sphere] )</h3>
+	 * @param sphere - Sphere to check for intersection against.
+	 * Checks to see if two spheres intersect.
+
+<h3>[method:this set]( [param:Vector3 center], [param:Float radius] )</h3>
+	 * @param center - center of the sphere.
+	 * @param radius - radius of the sphere.
+	 * Sets the *.center* and *.radius* properties of this sphere.
+	 * Please note that this method only copies the values from the given center.
+
+<h3>[method:this setFromPoints]( [param:Array points], [param:Vector3 optionalCenter] )</h3>
+	 * @param points - an [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) positions.
+	 * @param optionalCenter - Optional [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) position for the sphere's center.
+	 * Computes the minimum bounding sphere for an array of [points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array). If  [optionalCenter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)is given, it is used as the sphere's center. Otherwise, the center of the axis-aligned bounding box encompassing [points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) is calculated.
+
+<h3>[method:this translate]( [param:Vector3 offset] )</h3>
+	 * Translate the sphere's center by the provided offset [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
+
+<h3>[method:this union]( [param:Sphere sphere] )</h3>
+	 * @param sphere - Bounding sphere that will be unioned with this sphere.
+	 * Expands this sphere to enclose both the original sphere and the given sphere.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

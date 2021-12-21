@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) &rarr;
+<h1>[name]</h1>
+
+	 * A special version of [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) with instanced rendering support. Use [name] if you have to render a large number of objects with the same geometry and material but with different world transformations. The usage of [name] will help you to reduce the number of draw calls and thus improve the overall rendering performance in your application.
+
+<h2>Examples</h2>
+
+	 * [WebGL / instancing / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_dynamic)
+	 * [WebGL / instancing / modified](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_modified)
+	 * [WebGL / instancing / performance](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_performance)
+	 * [WebGL / instancing / scatter](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_scatter)
+	 * [WebGL / instancing / raycast](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_raycast)
+
+<h2>Constructor</h2>
+<h3>[name]( [param:BufferGeometry geometry], [param:Material material], [param:Integer count] )</h3>
+	 * @param geometry - an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+	 * @param material - an instance of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial).
+	 * @param count - the number of instances.
+
+<h2>Properties</h2>
+	 * See the base [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) class for common properties.
+<h3>[property:Integer count]</h3>
+	 * The number of instances. The *count* value passed into the constructor represents the maximum number of instances of this mesh. You can change the number of instances at runtime to an integer value in the range [0, count].
+
+	 * If you need more instances than the original count value, you have to create a new [name].
+
+<h3>[property:InstancedBufferAttribute instanceColor]</h3>
+	 * Represents the colors of all instances. *null* by default.
+	 * You have to set its [needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.needsUpdate) flag to true if you modify instanced data via *.setColorAt*().
+
+<h3>[property:InstancedBufferAttribute instanceMatrix]</h3>
+	 * Represents the local transformation of all instances.
+	 * You have to set its [needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.needsUpdate) flag to true if you modify instanced data via *.setMatrixAt*().
+
+<h2>Methods</h2>
+	 * See the base [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) class for common methods.
+<h3>[method:undefined dispose]()</h3>
+	 * Frees the internal resources of this instance.
+
+<h3>[method:undefined getColorAt]( [param:Integer index], [param:Color color] )</h3>
+	 * [index](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The index of an instance. Values have to be in the range [0, count].
+	 * [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color): This color object will be set to the color of the defined instance.
+	 * Get the color of the defined instance.
+
+<h3>[method:undefined getMatrixAt]( [param:Integer index], [param:Matrix4 matrix] )</h3>
+	 * [index](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The index of an instance. Values have to be in the range [0, count].
+	 * [matrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4): This 4x4 matrix will be set to the local transformation matrix of the defined instance.
+	 * Get the local transformation matrix of the defined instance.
+
+<h3>[method:undefined setColorAt]( [param:Integer index], [param:Color color] )</h3>
+	 * [index](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The index of an instance. Values have to be in the range [0, count].
+	 * [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color): The color of a single instance.
+	 * Sets the given color to the defined instance.
+	 * Make sure you set *.instanceColor*[.needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.needsUpdate) to true after updating all the colors.
+
+<h3>[method:undefined setMatrixAt]( [param:Integer index], [param:Matrix4 matrix] )</h3>
+	 * [index](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The index of an instance. Values have to be in the range [0, count].
+	 * [matrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4): A 4x4 matrix representing the local transformation of a single instance.
+	 * Sets the given local transformation matrix to the defined instance.
+	 * Make sure you set *.instanceMatrix*[.needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.needsUpdate) to true after updating all the matrices.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

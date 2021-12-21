@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * A class representing a 3x3 [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics)).
+
+<h2>Code Example</h2>
+
+	 * const m = new Matrix3();
+
+<h2>A Note on Row-Major and Column-Major Ordering</h2>
+	 * The [set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/set)() method takes arguments in [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order)
+	 * order, while internally they are stored in the *.elements* array in column-major order.
+	 * This means that calling m.set( 11, 12, 13,
+       21, 22, 23,
+       31, 32, 33 );
+
+	 * will result in the *.elements* array containing:
+
+	 * m.elements = [ 11, 21, 31,
+              12, 22, 32,
+              13, 23, 33 ];
+
+	 * and internally all calculations are performed using column-major ordering. However, as the actual ordering makes no difference mathematically and most people are used to thinking about matrices in row-major order,g the three.js documentation shows matrices in row-major order. Just bear in mind that if you are reading the source code, you'll have to take the [transpose](https://en.wikipedia.org/wiki/Transpose) of any matrices outlined here to make sense of the calculations.
+
+<h2>Constructor</h2>
+
+<h3>[name]()</h3>
+	 * Creates and initializes the [name] to the 3x3
+	 * [identity matrix](https://en.wikipedia.org/wiki/Identity_matrix).
+
+
+<h2>Properties</h2>
+<h3>[property:Array elements]</h3>
+	 * A [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) list of matrix values.
+
+
+<h2>Methods</h2>
+<h3>[method:Matrix3 clone]()</h3>
+	 * Creates a new Matrix3 and with identical elements to this one.
+<h3>[method:this copy]( [param:Matrix3 m] )</h3>
+	 * Copies the elements of matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3) into this matrix.
+<h3>[method:Float determinant]()</h3>
+	 * Computes and returns the [determinant](https://en.wikipedia.org/wiki/Determinant) of this matrix.
+
+<h3>[method:Boolean equals]( [param:Matrix3 m] )</h3>
+	 * @returns Return true if this matrix and [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3) are equal.
+<h3>[method:this extractBasis]( [param:Vector3 xAxis], [param:Vector3 yAxis], [param:Vector3 zAxis] )</h3>
+	 * Extracts the [basis](https://en.wikipedia.org/wiki/Basis_(linear_algebra)) of this matrix into the three axis vectors provided. If this matrix is:
+	 * a, b, c, d, e, f, g, h, i 
+	 * then the [xAxis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3), [yAxis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3), [zAxis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) will be set to:
+	 * xAxis = (a, d, g)
+	 * yAxis = (b, e, h)
+	 * zAxis = (c, f, i)
+
+
+<h3>[method:this fromArray]( [param:Array array], [param:Integer offset] )</h3>
+	 * @param array - the array to read the elements from.
+	 * @param offset - index of first element in the array. Default is 0.
+	 * Sets the elements of this matrix based on an array in [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order) format.
+
+<h3>[method:this invert]()</h3>
+	 * Inverts this matrix, using the [analytic method](https://en.wikipedia.org/wiki/Invertible_matrix#Analytic_solution).
+	 * You can not invert with a determinant of zero. If you attempt this, the method produces a zero matrix instead.
+
+<h3>[method:this getNormalMatrix]( [param:Matrix4 m] )</h3>
+	 * @param m - [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4)
+	 * Sets this matrix as the upper left 3x3 of the [normal matrix](https://en.wikipedia.org/wiki/Normal_matrix)
+	 * of the passed [matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4). The normal matrix is the [inverse](https://en.wikipedia.org/wiki/Invertible_matrix) [transpose](https://en.wikipedia.org/wiki/Transpose)
+	  of the matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
+
+<h3>[method:this identity]()</h3>
+	 * Resets this matrix to the 3x3 identity matrix:
+
+	 * 1, 0, 0
+	 * 0, 1, 0
+	 * 0, 0, 1
+
+
+<h3>[method:this multiply]( [param:Matrix3 m] )</h3>
+	 * Post-multiplies this matrix by [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3).
+<h3>[method:this multiplyMatrices]( [param:Matrix3 a], [param:Matrix3 b] )</h3>
+	 * Sets this matrix to [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3) x [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3).
+<h3>[method:this multiplyScalar]( [param:Float s] )</h3>
+	 * Multiplies every component of the matrix by the scalar value *s*.
+<h3>[method:this set]( [param:Float n11], [param:Float n12], [param:Float n13], [param:Float n21], [param:Float n22], [param:Float n23], [param:Float n31], [param:Float n32], [param:Float n33] )</h3>
+	 * @param n11 - value to put in row 1, col 1.
+	 * @param n12 - value to put in row 1, col 2.
+...
+...
+	 * @param n32 - value to put in row 3, col 2.
+	 * @param n33 - value to put in row 3, col 3.
+	 * Sets the 3x3 matrix values to the given [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order)
+	 * sequence of values.
+
+<h3>[method:this premultiply]( [param:Matrix3 m] )</h3>
+	 * Pre-multiplies this matrix by [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3).
+<h3>[method:this setFromMatrix4]( [param:Matrix4 m] )</h3>
+	 * Set this matrix to the upper 3x3 matrix of the Matrix4 [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
+<h3>[method:this setUvTransform]( [param:Float tx], [param:Float ty], [param:Float sx], [param:Float sy], [param:Float rotation], [param:Float cx], [param:Float cy] )</h3>
+	 * @param tx - center x of rotation 
+	 * Sets the UV transform matrix from offset, repeat, rotation, and center.
+
+<h3>[method:Array toArray]( [param:Array array], [param:Integer offset] )</h3>
+	 * @param array - array to store the resulting vector in. If not given a new array will be created.
+	 * @param offset - offset in the array at which to put the result.
+	 * Writes the elements of this matrix to an array in [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order) format.
+
+<h3>[method:this transpose]()</h3>
+	 * [Transposes](https://en.wikipedia.org/wiki/Transpose) this matrix in place.
+<h3>[method:this transposeIntoArray]( [param:Array array] )</h3>
+	 * @param array -  array to store the resulting vector in.
+	 * [Transposes](https://en.wikipedia.org/wiki/Transpose) this matrix into the supplied array, and returns itself unchanged.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

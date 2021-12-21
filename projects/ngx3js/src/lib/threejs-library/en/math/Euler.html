@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * A class representing [Euler Angles](http://en.wikipedia.org/wiki/Euler_angles).
+	 * Euler angles describe a rotational transformation by rotating an object on its various axes in specified amounts per axis, and a specified axis order.
+
+<h2>Code Example</h2>
+
+	 * const a = new THREE.Euler( 0, 1, 1.57, 'XYZ' );
+	 * const b = new THREE.Vector3( 1, 0, 1 );
+	 * b.applyEuler(a);
+
+
+<h2>Constructor</h2>
+
+<h3>[name]( [param:Float x], [param:Float y], [param:Float z], [param:String order] )</h3>
+	 * @param x - the angle of the x axis in radians. Default is *0*.
+	 * @param y - the angle of the y axis in radians. Default is *0*.
+	 * @param z - the angle of the z axis in radians. Default is *0*.
+	 * @param order - a string representing the order that the rotations are applied, defaults to 'XYZ' (must be upper case).
+
+
+<h2>Properties</h2>
+<h3>[property:String order]</h3>
+	 * The order in which to apply rotations. Default is 'XYZ', which means that the object will first be rotated around its X axis, then its Y axis and finally its Z axis. Other possibilities are:
+	 * 'YZX', 'ZXY', 'XZY', 'YXZ' and 'ZYX'. These must be in upper case.
+	 * Three.js uses <em>intrinsic</em> Tait-Bryan angles. This means that rotations are performed with respect to the <em>local</em> coordinate system. That is, for order 'XYZ', the rotation is first around the local-Xt axis (which is the same as the world-X axis), then around local-Y (which may now be different from the world Y-axis), then local-Z (which may be different from the world Z-axis).
+
+<h3>[property:Float x]</h3>
+	 * The current value of the x component.
+
+<h3>[property:Float y]</h3>
+	 * The current value of the y component.
+
+<h3>[property:Float z]</h3>
+	 * The current value of the z component.
+
+<h2>Methods</h2>
+<h3>[method:this copy]( [param:Euler euler] )</h3>
+	 * Copies value of [euler](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler) to this euler.
+<h3>[method:Euler clone]()</h3>
+	 * @returns Returns a new Euler with the same parameters as this one.
+<h3>[method:Boolean equals]( [param:Euler euler] )</h3>
+	 * Checks for strict equality of this euler and [euler](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler).
+<h3>[method:this fromArray]( [param:Array array] )</h3>
+	 * [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of length 3 or 4. The optional 4th argument corresponds to the *.order*.
+	 * Assigns this euler's *.x* angle to array[0]. 
+	 * Assigns this euler's *.y* angle to array[1]. 
+	 * Assigns this euler's *.z* angle to array[2]. 
+	 * Optionally assigns this euler's *.order* to array[3].
+
+<h3>[method:this reorder]( [param:String newOrder] )</h3>
+	 * Resets the euler angle with a new order by creating a quaternion from this euler angle and then setting this euler angle with the quaternion and the new order. 
+<em>WARNING</em>: this discards revolution information.
+
+<h3>[method:this set]( [param:Float x], [param:Float y], [param:Float z], [param:String order] )</h3>
+*.x* - the angle of the x axis in radians.
+*.y* - the angle of the y axis in radians.
+*.z* - the angle of the z axis in radians.
+*.order* - a string representing the order that the rotations are applied.
+	 * Sets the angles of this euler transform and optionally the *.order*.
+
+<h3>[method:this setFromRotationMatrix]( [param:Matrix4 m], [param:String order] )</h3>
+	 * @param m - a [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper 3x3 of matrix is a pure [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix) (i.e. unscaled).
+*.order* - a string representing the order that the rotations are applied.
+	 * Sets the angles of this euler transform from a pure rotation matrix based on the orientation specified by order.
+
+<h3>[method:this setFromQuaternion]( [param:Quaternion q], [param:String order] )</h3>
+	 * @param q - a normalized quaternion.
+*.order* - a string representing the order that the rotations are applied.
+	 * Sets the angles of this euler transform from a normalized quaternion based on the orientation specified by *.order*.
+
+<h3>[method:this setFromVector3]( [param:Vector3 vector], [param:String order] )</h3>
+	 * @param vector - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
+*.order* - a string representing the order that the rotations are applied.
+	 * Set the *.x*, *.y* and *.z*, and optionally update the *.order*.
+
+<h3>[method:Array toArray]( [param:Array array], [param:Integer offset] )</h3>
+	 * @param array - array to store the euler in.
+	 * [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) offset in the array.
+	 * @returns Returns an array of the form [*.x*, *.y*, *.z*, *.order*].
+
+<h3>[method:Vector3 toVector3]( [param:Vector3 optionalResult] )</h3>
+	 * @param optionalResult - If specified, the result will be copied into this Vector, otherwise a new one will be created. 
+	 * @returns Returns the Euler's *.x*, *.y* and *.z* properties as a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

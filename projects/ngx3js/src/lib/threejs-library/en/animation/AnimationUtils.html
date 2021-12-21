@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * An object with various functions to assist with animations, used internally.
+
+<h2>Methods</h2>
+
+<h3>[method:Array arraySlice]( array, from, to )</h3>
+	 * This is the same as  Array.prototype.slice, but also works on typed arrays.
+
+<h3>[method:Array convertArray]( array, type, forceClone )</h3>
+	 * Converts an array to a specific type.
+
+<h3>[method:Array flattenJSON]( jsonKeys, times, values, valuePropertyName  )</h3>
+	 * Used for parsing AOS keyframe formats.
+
+<h3>[method:Array getKeyframeOrder]( times )</h3>
+	 * @returns Returns an array by which times and values can be sorted.
+
+<h3>[method:Boolean isTypedArray]( object )</h3>
+	 * @returns Returns *true* if the object is a typed array.
+
+<h3>[method:AnimationClip makeClipAdditive]( [param:AnimationClip targetClip], [param:Number referenceFrame], [param:AnimationClip referenceClip], [param:Number fps] )</h3>
+	 * Converts the keyframes of the given animation clip to an additive format.
+
+<h3>[method:Array sortedArray]( values, stride, order )</h3>
+	 * Sorts the array previously returned by [getKeyframeOrder](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationUtils.getKeyframeOrder).
+
+<h3>[method:AnimationClip subclip]( [param:AnimationClip clip], [param:String name], [param:Number startFrame], [param:Number endFrame], [param:Number fps] )</h3>
+	 * Creates a new clip, containing only the segment of the original clip between the given frames.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

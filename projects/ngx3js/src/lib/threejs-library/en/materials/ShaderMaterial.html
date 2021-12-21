@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) &rarr;
+<h1>[name]</h1>
+
+	 * A material rendered with custom shaders. A shader is a small program written in [GLSL](https://www.khronos.org/files/opengles_shading_language.pdf) that runs on the GPU.
+	 * You may want to use a custom shader if you need to:
+
+	 * implement an effect not included with any of the built-in [materials](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)
+	 * combine many objects into a single [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) in order to improve performance
+</ul>
+	 * There are the following notes to bear in mind when using a *ShaderMaterial*:
+
+
+	A *ShaderMaterial* will only be rendered properly by [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer),
+	since the GLSL code in the [vertexShader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders)
+	and [fragmentShader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders) properties must be compiled and run on the GPU using WebGL.
+
+
+	As of THREE r72, directly assigning attributes in a ShaderMaterial is no longer supported.
+	A [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) instance  must be used instead, using [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) instances to define custom attributes.
+
+
+	As of THREE r77, [WebGLRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget) or [WebGLCubeRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLCubeRenderTarget) instances are no longer supposed to be used as uniforms. Their [texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture) property must be used instead.
+
+
+	Built in attributes and uniforms are passed to the shaders along with your code.
+	If you don't want the [WebGLProgram](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLProgram) to add anything to your shader code, you can use [RawShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RawShaderMaterial) instead of this class.
+
+
+	You can use the directive #pragma unroll_loop_start and #pragma unroll_loop_end in order to unroll a *for* loop in GLSL by the shader preprocessor.
+	The directive has to be placed right above the loop. The loop formatting has to correspond to a defined standard.
+	
+
+	 * The loop has to be [normalized](https://en.wikipedia.org/wiki/Normalized_loop).
+
+
+	 * The loop variable has to be *i*.
+
+
+	 * The value *UNROLLED_LOOP_INDEX* will be replaced with the explicitly value of *i* for the given iteration and can be used in preprocessor statements.
+
+	</ul>
+	
+#pragma unroll_loop_start for ( int i = 0; i < 10; i ++ ) {
+	 * //  ...
+}
+#pragma unroll_loop_end 
+
+</ul>
+
+<h2>Code Example</h2>
+
+	 * const material = new THREE.ShaderMaterial( {
+	 * uniforms: {
+	time: { value: 1.0 },
+	resolution: { value: new THREE.Vector2() }
+}, vertexShader: document.getElementById( 'vertexShader' ).textContent, fragmentShader: document.getElementById( 'fragmentShader' ).textContent } );
+
+<h2>Examples</h2>
+
+	 * [webgl / buffergeometry / custom / attributes / particles](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_custom_attributes_particles)
+	 * [webgl / buffergeometry / selective / draw](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_selective_draw)
+	 * [webgl / custom / attributes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes)
+	 * [webgl / custom / attributes / lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_lines)
+	 * [webgl / custom / attributes / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points)
+	 * [webgl / custom / attributes / points2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points2)
+	 * [webgl / custom / attributes / points3](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points3)
+	 * [webgl / depth / texture](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_depth_texture)
+	 * [webgl / gpgpu / birds](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_gpgpu_birds)
+	 * [webgl / gpgpu / protoplanet](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_gpgpu_protoplanet)
+	 * [webgl / gpgpu / water](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_gpgpu_water)
+	 * [webgl / interactive / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_points)
+	 * [webgl / video / kinect](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_video_kinect)
+	 * [webgl / lights / hemisphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_hemisphere)
+	 * [webgl / marchingcubes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_marchingcubes)
+	 * [webgl / materials / envmaps](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_envmaps)
+	 * [webgl / materials / lightmap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_lightmap)
+	 * [webgl / materials / wireframe](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_wireframe)
+	 * [webgl / modifier / tessellation](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_modifier_tessellation)
+	 * [webgl / postprocessing / dof2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_dof2)
+	 * [webgl / postprocessing / godrays](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_godrays)
+
+<h2>Vertex shaders and fragment shaders</h2>
+<div>
+	You can specify two different types of shaders for each material:
+
+	
+	 * The vertex shader runs first; it receives *attributes*, calculates / manipulates the position of each individual vertex, and passes additional data (*varying*s) to the fragment shader.
+	
+	
+	 * The fragment ( or pixel ) shader runs second; it sets the color of each individual "fragment"
+	 * (pixel) rendered to the screen.
+	
+</ul>
+	There are three types of variables in shaders: uniforms, attributes, and varyings:
+
+	
+*Uniforms* are variables that have the same value for all vertices - lighting, fog, and shadow maps are examples of data that would be stored in uniforms.
+	 * Uniforms can be accessed by both the vertex shader and the fragment shader.
+	
+	
+*Attributes* are variables associated with each vertex---for instance, the vertex position, face normal, and vertex color are all examples of data that would be stored in attributes.
+	 * Attributes can <em>only</em> be accessed within the vertex shader.
+	
+	
+*Varyings* are variables that are passed from the vertex shader to the fragment shader.
+	 * For each fragment, the value of each varying will be smoothly interpolated from the values of adjacent vertices.
+	
+</ul>
+	
+	Note that <em>within</em> the shader itself, uniforms and attributes act like constants;
+	you can only modify their values by passing different values to the buffers from your JavaScript code.
+	
+</div>
+
+	<h2>Built-in attributes and uniforms</h2>
+	<div>
+	
+	 * The [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) provides many attributes and uniforms to shaders by default;
+	 * definitions of these variables are prepended to your *fragmentShader* and *vertexShader* code by the [WebGLProgram](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLProgram) when the shader is compiled; you don't need to declare them yourself.
+	 * See [WebGLProgram](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLProgram) for details of these variables.
+	
+	
+	 * Some of these uniforms or attributes (e.g. those pertaining lighting, fog, etc.)
+	 * require properties to be set on the material in order for [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) to copy the appropriate values to the GPU - make sure to set these flags if you want to use these features in your own shader.
+	
+	
+	 * If you don't want [WebGLProgram](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLProgram) to add anything to your shader code, you can use [RawShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RawShaderMaterial) instead of this class.
+	
+</div>
+
+<h2>Custom attributes and uniforms</h2>
+<div>
+	
+	Both custom attributes and uniforms must be declared in your GLSL shader code (within *vertexShader* and/or *fragmentShader*). Custom uniforms must be defined in <em>both</em>e the *uniforms* property of your *ShaderMaterial*, whereas any custom attributee defined via [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) instances. Note that *varying*s only need to be declared within the shader code (not within the material).
+	
+	
+	To declare a custom attribute, please reference the [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) page for an overview,
+	and the [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) page for a detailed look at the *BufferAttribute* API.
+	
+	
+	When creating your attributes, each typed array that you create to hold your attribute's data must be a multiple of your data type's size. For example, if your attribute is a [THREE.Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) type, and you have 3000 vertices in your [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry), your typed array value must be created with a length of 3000 * 3,
+	or 9000 (one value per-component). A table of each data type's size is shown below for reference:
+	
+<table>
+	<caption><a id="attribute-sizes">Attribute sizes</a></caption>
+	<thead>
+<tr>
+<th>GLSL type</th>
+<th>JavaScript type</th>
+<th>Size</th>
+</tr>
+	</thead>
+	<tbody>
+<tr>
+<td>float</td>
+<td>[Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>vec2</td>
+<td>[THREE.Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>vec3</td>
+<td>[THREE.Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>vec3</td>
+<td>[THREE.Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>vec4</td>
+<td>[THREE.Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4)</td>
+<td>4</td>
+</tr>
+	</tbody>
+</table>
+	
+	Note that attribute buffers are <em>not</em> refreshed automatically when their values change. To update custom attributes,
+	set the *needsUpdate* flag to true on the [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) of the geometry (see [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry)
+	for further details).
+	
+	
+	 * To declare a custom [Uniform](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Uniform), use the *uniforms* property:
+
+	 * uniforms: {
+	time: { value: 1.0 },
+	resolution: { value: new THREE.Vector2() }
+}
+
+	
+	
+	 * You're recommended to update custom [Uniform](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Uniform) values depending on [object](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) and [camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera)
+	 * in [Object3D.onBeforeRender](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.onBeforeRender) because [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) can be shared among [meshes](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh), [matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4)
+	 * of [Scene](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Scene) and [Camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera) are updated in [WebGLRenderer.render](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.render), and some effects render a [scene](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Scene)
+	 * with their own private [cameras](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera).
+	
+</div>
+<h2>Constructor</h2>
+<h3>[name]( [param:Object parameters] )</h3>
+	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+
+<h2>Properties</h2>
+	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) class for common properties.
+<h3>[property:Boolean clipping]</h3>
+	 * Defines whether this material supports clipping; true to let the renderer pass the clippingPlanes uniform. Default is false.
+
+<h3>[property:Object defaultAttributeValues]</h3>
+	 * When the rendered geometry doesn't include these attributes but the material does,
+ these default values will be passed to the shaders. This avoids errors when buffer data is missing.
+
+	 * this.defaultAttributeValues = {
+	'color': [ 1, 1, 1 ],
+	'uv': [ 0, 0 ],
+	'uv2': [ 0, 0 ]
+};
+
+
+
+<h3>[property:Object defines]</h3>
+	 * Defines custom constants using *#define* directives within the GLSL code for both the vertex shader and the fragment shader; each key/value pair yields another directive:
+
+	 * defines: {
+	 * FOO: 15,
+	 * BAR: true }
+
+	 * yields the lines #define FOO 15s #define BAR true 
+	 * in the GLSL code.
+
+<h3>[property:Object extensions]</h3>
+	 * An object with the following properties:
+
+	 * this.extensions = {
+	derivatives: false, // set to use derivatives fragDepth: false, // set to use fragment depth values drawBuffers: false, // set to use draw buffers shaderTextureLOD: false // set to use shader texture LOD
+};
+
+
+<h3>[property:Boolean fog]</h3>
+	 * Define whether the material color is affected by global fog settings; true to pass fog uniforms to the shader. Default is false.
+
+<h3>[property:String fragmentShader]</h3>
+	 * Fragment shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
+
+<h3>[property:String glslVersion]</h3>
+	 * Defines the GLSL version of custom shader code. Only relevant for WebGL 2 in order to define whether to specify GLSL 3.0 or not. Valid values are *THREE.GLSL1* or *THREE.GLSL3*. Default is *null*.
+
+<h3>[property:String index0AttributeName]</h3>
+	 * If set, this calls [gl.bindAttribLocation](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bindAttribLocation)
+	 * to bind a generic vertex index to an attribute variable.
+	 * Default is undefined.
+
+<h3>[property:Boolean lights]</h3>
+	 * Defines whether this material uses lighting; true to pass uniform data related to lighting to this shader. Default is false.
+
+<h3>[property:Float linewidth]</h3>
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+
+<h3>[property:Boolean flatShading]</h3>
+	 * Define whether the material is rendered with flat shading. Default is false.
+
+<h3>[property:Object uniforms]</h3>
+	 * An object of the form:
+
+{ "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }
+
+	 * specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form { value: 1.0 }
+
+	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
+
+<h3>[property:Boolean uniformsNeedUpdate]</h3>
+	 * Can be used to force a uniform update while changing uniforms in [Object3D.onBeforeRender](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.onBeforeRender)(). Default is *false*.
+
+<h3>[property:Boolean vertexColors]</h3>
+	 * Defines whether vertex coloring is used. Default is *false*.
+
+<h3>[property:String vertexShader]</h3>
+	 * Vertex shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
+
+<h3>[property:Boolean wireframe]</h3>
+	 * Render geometry as wireframe (using GL_LINES instead of GL_TRIANGLES). Default is false (i.e. render as flat polygons).
+
+<h3>[property:Float wireframeLinewidth]</h3>
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+
+
+<h2>Methods</h2>
+	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) class for common methods.
+<h3>[method:ShaderMaterial clone]() [param:ShaderMaterial this]</h3>
+	 * Generates a shallow copy of this material. Note that the vertexShader and fragmentShader are copied <em>by reference</em>, as are the definitions of the *attributes*; this means that clones of the material will share the same compiled [WebGLProgram](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLProgram). However, the *uniforms* are copied <em>by value</em>, which allows you to have different sets of uniforms for different copies of the material.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

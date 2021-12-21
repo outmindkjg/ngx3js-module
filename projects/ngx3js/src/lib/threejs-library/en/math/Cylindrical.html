@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * A point's [cylindrical coordinates](https://en.wikipedia.org/wiki/Cylindrical_coordinate_system).
+
+<h2>Constructor</h2>
+<h3>[name]( [param:Float radius], [param:Float theta], [param:Float y] )</h3>
+	 * @param radius - distance from the origin to a point in the x-z plane.
+	 * Default is *1.0*.
+	 * @param theta - counterclockwise angle in the x-z plane measured in radians from the positive z-axis. Default is *0*.
+	 * @param y - height above the x-z plane. Default is *0*.
+
+<h2>Properties</h2>
+<h3>[property:Float radius]</h3>
+<h3>[property:Float theta]</h3>
+<h3>[property:Float y]</h3>
+
+<h2>Methods</h2>
+<h3>[method:Cylindrical clone]()</h3>
+	 * @returns Returns a new cylindrical with the same *.radius*, *.theta*
+	 * and *.y* properties as this one.
+
+<h3>[method:this copy]( [param:Cylindrical other] )</h3>
+	 * Copies the values of the passed Cylindrical's *.radius*, *.theta*
+	 * and *.y* properties to this cylindrical.
+
+<h3>[method:this set]( [param:Float radius], [param:Float theta], [param:Float y] )</h3>
+	 * Sets values of this cylindrical's *.radius*, *.theta*
+	 * and *.y* properties.
+<h3>[method:this setFromVector3]( [param:Vector3 vec3] )</h3>
+	 * Sets values of this cylindrical's *.radius*, *.theta*
+	 * and *.y* properties from the [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
+
+<h3>[method:this setFromCartesianCoords]( [param:Float x], [param:Float y], [param:Float z] )</h3>
+	 * Sets values of this cylindrical's *.radius*, *.theta*
+	 * and *.y* properties from Cartesian coordinates.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

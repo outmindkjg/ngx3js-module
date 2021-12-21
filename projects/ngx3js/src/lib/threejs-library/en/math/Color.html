@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * Class representing a color.
+
+<h2>Code Examples</h2>
+
+	 * A Color can be initialised in any of the following ways:
+
+	 * // empty constructor - will default white const color1 = new THREE.Color();
+	 * // Hexadecimal color (recommended)
+	 * const color2 = new THREE.Color( 0xff0000 );
+	 * // RGB string const color3 = new THREE.Color("rgb(255, 0, 0)");
+	 * const color4 = new THREE.Color("rgb(100%, 0%, 0%)");
+	 * // X11 color name - all 140 color names are supported.
+	 * // Note the lack of CamelCase in the name const color5 = new THREE.Color( 'skyblue' );
+	 * // HSL string const color6 = new THREE.Color("hsl(0, 100%, 50%)");
+	 * // Separate RGB values between 0 and 1
+	 * const color7 = new THREE.Color( 1, 0, 0 );
+
+<h2>Constructor</h2>
+
+<h3>[name]( [param:Color_Hex_or_String r], [param:Float g], [param:Float b] )</h3>
+	 * [r](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color_Hex_or_String) - If arguments [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) and [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) are defined, the red component of the color.
+	 * If they are not defined, it can be a [hexadecimal triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) (recommended), a CSS-style string, or another Color instance.
+	 * @param g - If it is defined, the green component of the color.
+	 * @param b - If it is defined, the blue component of the color.
+	 * Note that standard method of specifying color in three.js is with a [hexadecimal triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), and that method is used throughout the rest of the documentation.
+	 * When all arguments are defined then [r](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color_Hex_or_String) is the red component, [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) is the green component and [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) is the blue component of the color.
+	 * When only [r](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color_Hex_or_String) is defined:
+
+	 * It can be a [hexadecimal triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) representing the color (recommended).
+	 * It can be an another Color instance.
+	 * It can be a CSS-style string. For example:
+	
+	 * 'rgb(250, 0,0)'
+	 * 'rgb(100%,0%,0%)'
+	 * 'hsl(0, 100%, 50%)'
+	 * '#ff0000'
+	 * '#f00'
+	 * 'red'
+	</ul>
+
+</ul>
+
+<h2>Properties</h2>
+<h3>[property:Float r]</h3>
+	 * Red channel value between 0 and 1. Default is 1.
+
+<h3>[property:Float g]</h3>
+	 * Green channel value between 0 and 1. Default is 1.
+
+<h3>[property:Float b]</h3>
+	 * Blue channel value between 0 and 1. Default is 1.
+
+
+
+<h2>Methods</h2>
+<h3>[method:this add]( [param:Color color] ) </h3>
+	 * Adds the RGB values of [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) to the RGB values of this color.
+<h3>[method:this addColors]( [param:Color color1], [param:Color color2] ) </h3>
+	 * Sets this color's RGB values to the sum of the RGB values of [color1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) and [color2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color).
+<h3>[method:this addScalar]( [param:Number s] ) </h3>
+	 * Adds [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) to the RGB values of this color.
+<h3>[method:Color clone]() </h3>
+	 * @returns Returns a new Color with the same *.r*, *.g* and *.b* values as this one.
+<h3>[method:this copy]( [param:Color color] ) </h3>
+	 * Copies the *.r*, *.g* and *.b* parameters from [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) in to this color.
+
+<h3>[method:this convertGammaToLinear]( [param:Float gammaFactor] ) </h3>
+	 * @param gammaFactor - Default is *2.0*.
+	 * Converts this color from gamma space to linear space by taking *.r*, *.g* and *.b* to the power of [gammaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+
+<h3>[method:this convertLinearToGamma]( [param:Float gammaFactor] ) </h3>
+	 * @param gammaFactor - Default is *2.0*.
+	 * Converts this color from linear space to gamma space by taking *.r*, *.g* and *.b* to the power of 1 / [gammaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+
+<h3>[method:this convertLinearToSRGB]() </h3>
+	 * Converts this color from linear space to sRGB space.
+
+<h3>[method:this convertSRGBToLinear]() </h3>
+	 * Converts this color from sRGB space to linear space.
+
+<h3>[method:this copyGammaToLinear]( [param:Color color], [param:Float gammaFactor] ) </h3>
+	 * @param color - Color to copy.
+	 * @param gammaFactor - Default is *2.0*.
+	 * Copies the given color into this color, and then converts this color from gamma space to linear space by taking *.r*, *.g* and *.b* to the power of [gammaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+
+<h3>[method:this copyLinearToGamma]( [param:Color color], [param:Float gammaFactor] ) </h3>
+	 * @param color - Color to copy.
+	 * @param gammaFactor - Default is *2.0*.
+	 * Copies the given color into this color, and then converts this color from linear space to gamma space by taking *.r*, *.g* and *.b* to the power of 1 / [gammaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+
+<h3>[method:this copyLinearToSRGB]( [param:Color color]] ) </h3>
+	 * @param color - Color to copy.
+	 * Copies the given color into this color, and then converts this color from linear space to sRGB space.
+
+<h3>[method:this copySRGBToLinear]( [param:Color color] ) </h3>
+	 * @param color - Color to copy.
+	 * Copies the given color into this color, and then converts this color from sRGB space to linear space.
+
+<h3>[method:Boolean equals]( [param:Color color] ) </h3>
+	 * Compares the RGB values of [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) with those of this object. Returns true if they are the same, false otherwise.
+<h3>[method:this fromArray]( [param:Array array], [param:Integer offset] ) </h3>
+	 * @param array - [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of floats in the form [ [r](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) ].
+	 * @param offset - An optional offset into the array.
+	 * Sets this color's components based on an array formatted like [ [r](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) ].
+
+<h3>[method:this fromBufferAttribute]( [param:BufferAttribute attribute], [param:Integer index] )</h3>
+	 * @param attribute - the source attribute.
+	 * @param index - index in the attribute.
+	 * Sets this color's components from the [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
+
+<h3>[method:Integer getHex]()</h3>
+	 * @returns Returns the hexadecimal value of this color.
+<h3>[method:String getHexString]()</h3>
+	 * @returns Returns the hexadecimal value of this color as a string (for example, 'FFFFFF').
+<h3>[method:Object getHSL]( [param:Object target] )</h3>
+	 * @param target - the result will be copied into this Object. Adds h, s and l keys to the object (if not already present).
+	 * Convert this Color's *.r*, *.g* and *.b* values to [HSL](https://en.wikipedia.org/wiki/HSL_and_HSV)
+	 * format and returns an object of the form:
+
+	{ h: 0, s: 0, l: 0 }
+
+
+<h3>[method:String getStyle]()</h3>
+	 * @returns Returns the value of this color as a CSS style string. Example: 'rgb(255,0,0)'.
+<h3>[method:this lerp]( [param:Color color], [param:Float alpha] ) </h3>
+	 * @param color - color to converge on.
+	 * @param alpha - interpolation factor in the closed interval [0, 1].
+	 * Linearly interpolates this color's RGB values toward the RGB values of the passed argument.
+	 * The alpha argument can be thought of as the ratio between the two colors, where 0.0 is this color and 1.0 is the first argument.
+
+<h3>[method:this lerpColors]( [param:Color color1], [param:Color color2], [param:Float alpha] )</h3>
+	 * @param color1 - the starting [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color).
+	 * @param color2 - [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) to interpolate towards.
+	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * Sets this color to be the color linearly interpolated between [color1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) and [color2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) where alpha is the percent distance along the line connecting the two colors - alpha = 0 will be [color1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), and alpha = 1 will be [color2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color).
+
+<h3>[method:this lerpHSL]( [param:Color color], [param:Float alpha] ) </h3>
+	 * @param color - color to converge on.
+	 * @param alpha - interpolation factor in the closed interval [0, 1].
+	 * Linearly interpolates this color's HSL values toward the HSL values of the passed argument.
+	 * It differs from the classic *.lerp* by not interpolating straight from one color to the other, but instead going through all the hues in between those two colors.
+	 * The alpha argument can be thought of as the ratio between the two colors, where 0.0 is this color and 1.0 is the first argument.
+
+<h3>[method:this multiply]( [param:Color color] ) </h3>
+	 * Multiplies this color's RGB values by the given [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color)'s RGB values.
+<h3>[method:this multiplyScalar]( [param:Number s] ) </h3>
+	 * Multiplies this color's RGB values by [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number).
+<h3>[method:this offsetHSL]( [param:Float h], [param:Float s], [param:Float l] ) </h3>
+	 * Adds the given [h](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and [l](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) to this color's values.
+	 * Internally, this converts the color's *.r*, *.g* and *.b* values to HSL, adds [h](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and [l](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and then converts the color back to RGB.
+
+<h3>[method:this set]( [param:Color_Hex_or_String value] ) </h3>
+	 * [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color_Hex_or_String) - Value to set this color to.
+	 * See the Constructor above for full details of what [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color_Hex_or_String) can be.
+	 * Delegates to *.copy*, *.setStyle*, or *.setHex* depending on input type.
+
+<h3>[method:this setHex]( [param:Integer hex] ) </h3>
+	 * @param hex - [hexadecimal triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) format.
+	 * Sets this color from a hexadecimal value.
+
+<h3>[method:this setHSL]( [param:Float h], [param:Float s], [param:Float l] ) </h3>
+	 * @param h - hue value between 0.0 and 1.0 
+	 * @param s - saturation value between 0.0 and 1.0 
+	 * @param l - lightness value between 0.0 and 1.0
+	 * Sets color from HSL values.
+
+<h3>[method:this setRGB]( [param:Float r], [param:Float g], [param:Float b] ) </h3>
+	 * @param r - Red channel value between 0.0 and 1.0.
+	 * @param g - Green channel value between 0.0 and 1.0.
+	 * @param b - Blue channel value between 0.0 and 1.0.
+	 * Sets this color from RGB values.
+
+<h3>[method:this setScalar]( [param:Float scalar] ) </h3>
+	 * @param scalar - a value between 0.0 and 1.0.
+	 * Sets all three color components to the value [scalar](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+
+<h3>[method:this setStyle]( [param:String style] ) </h3>
+	 * @param style - color as a CSS-style string.
+	 * Sets this color from a CSS-style string. For example,
+"rgb(250, 0,0)",
+"rgb(100%, 0%, 0%)",
+"hsl(0, 100%, 50%)",
+"#ff0000",
+"#f00", or "red" ( or any [X11 color name](https://en.wikipedia.org/wiki/X11_color_names#Color_name_chart) - all 140 color names are supported ).
+	 * Translucent colors such as "rgba(255, 0, 0, 0.5)" and "hsla(0, 100%, 50%, 0.5)" are also accepted, but the alpha-channel coordinate will be discarded.
+	 * Note that for X11 color names, multiple words such as Dark Orange become the string 'darkorange'.
+
+<h3>[method:this setColorName]( [param:String style] ) </h3>
+	 * @param style - color name ( from [X11 color names](https://en.wikipedia.org/wiki/X11_color_names#Color_name_chart) ).
+	 * Sets this color from a color name. Faster than *.setStyle* method if you don't need the other CSS-style formats.
+	 * For convenience, the list of names is exposed in Color.NAMES as a hash: 
+	 * Color.NAMES.aliceblue // returns 0xF0F8FF
+
+<h3>[method:this sub]( [param:Color color] ) </h3>
+	 * Subtracts the RGB components of the given color from the RGB components of this color.
+	 * If this results in a negative component, that component is set to zero.
+
+<h3>[method:Array toArray]( [param:Array array], [param:Integer offset] ) </h3>
+	 * @param array - An optional array to store the color to. 
+	 * @param offset - An optional offset into the array.
+	 * @returns Returns an array of the form [ r, g, b ].
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

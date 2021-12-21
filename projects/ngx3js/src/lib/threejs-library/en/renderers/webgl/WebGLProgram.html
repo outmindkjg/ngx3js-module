@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+	 * Constructor for the GLSL program sent to vertex and fragment shaders, including default uniforms and attributes.
+<h2>Built-in uniforms and attributes</h2>
+<h3>Vertex shader (unconditional):</h3>
+<div>
+
+	 * //  = object.matrixWorld uniform mat4 modelMatrix;
+	 * //  = camera.matrixWorldInverse * object.matrixWorld uniform mat4 modelViewMatrix;
+	 * //  = camera.projectionMatrix uniform mat4 projectionMatrix;
+	 * //  = camera.matrixWorldInverse uniform mat4 viewMatrix;
+	 * //  = inverse transpose of modelViewMatrix uniform mat3 normalMatrix;
+	 * //  = camera position in world space uniform vec3 cameraPosition;
+
+
+	 * //  default vertex attributes provided by Geometry and BufferGeometry attribute vec3 position;
+	 * attribute vec3 normal;
+	 * attribute vec2 uv;
+
+	 * Note that you can therefore calculate the position of a vertex in the vertex shader by:
+
+	 * gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+	 * or alternatively gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4( position, 1.0 );
+
+</div>
+<h3>Vertex shader (conditional):</h3>
+<div>
+
+#if defined( USE_COLOR_ALPHA )
+	 * //  vertex color attribute with alpha attribute vec4 color;
+#elif defined( USE_COLOR )
+	 * //  vertex color attribute attribute vec3 color;e #endif 
+
+#ifdef USE_MORPHTARGETS
+	 * attribute vec3 morphTarget0;
+	 * attribute vec3 morphTarget1;
+	 * attribute vec3 morphTarget2;
+	 * attribute vec3 morphTarget3;
+#ifdef USE_MORPHNORMALS
+	attribute vec3 morphNormal0;
+	attribute vec3 morphNormal1;
+	attribute vec3 morphNormal2;
+	attribute vec3 morphNormal3;
+#else attribute vec3 morphTarget4;
+	attribute vec3 morphTarget5;
+	attribute vec3 morphTarget6;
+	attribute vec3 morphTarget7;
+#endif #endif 
+
+#ifdef USE_SKINNING
+	 * attribute vec4 skinIndex;
+	 * attribute vec4 skinWeight;
+#endif 
+
+#ifdef USE_INSTANCING
+	 * //  Note that modelViewMatrix is not set when rendering an instanced model,
+	 * //  but can be calculated from viewMatrix * modelMatrix.
+	 * // 
+	 * //  Basic Usage:
+	 * //    gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(position, 1.0);
+	 * attribute mat4 instanceMatrix;
+#endif 
+</div>
+<h3>Fragment shader:</h3>
+<div>
+
+	 * uniform mat4 viewMatrix;
+	 * uniform vec3 cameraPosition;
+
+</div>
+
+<h2>Constructor</h2>
+<h3>[name]( [param:WebGLRenderer renderer], [param:String cacheKey], [param:Object parameters] )</h3>
+	 * For parameters see [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer).
+<h2>Properties</h2>
+<h3>[property:String name]</h3>
+	 * The name of the respective shader program.
+<h3>[property:String id]</h3>
+	 * The identifier of this instance.
+<h3>[property:String cacheKey]</h3>
+	 * This key enables the reusability of a single [name] for different materials.
+<h3>[property:Integer usedTimes]</h3>
+	 * How many times this instance is used for rendering render items.
+<h3>[property:Object program]</h3>
+	 * The actual shader program.
+<h3>[property:WebGLShader vertexShader]</h3>
+	 * The vertex shader.
+<h3>[property:WebGLShader fragmentShader]</h3>
+	 * The frament shader.
+<h2>Methods</h2>
+<h3>[method:Object getUniforms]()</h3>
+	 * @returns Returns a name-value mapping of all active uniform locations.
+
+<h3>[method:Object getAttributes]()</h3>
+	 * @returns Returns a name-value mapping of all active vertex attribute locations.
+
+<h3>[method:undefined destroy]()</h3>
+	 * Destroys an instance of [name].
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

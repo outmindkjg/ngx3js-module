@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr;
+<h1>[name]</h1>
+
+	 * A sprite is a plane that always faces towards the camera, generally with a partially transparent texture applied.
+	 * Sprites do not cast shadows, setting 
+	 * castShadow = true will have no effect.
+
+<h2>Code Example</h2>
+
+	 * const map = new THREE.TextureLoader().load( 'sprite.png' );
+	 * const material = new THREE.SpriteMaterial( { map: map } );
+	 * const sprite = new THREE.Sprite( material );
+	 * scene.add( sprite );
+
+<h2>Constructor</h2>
+<h3>[name]( [param:Material material] )</h3>
+    [material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) - an instance of [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial). Default is a white [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial).
+	 * Creates a new [name].
+
+<h2>Properties</h2>
+	 * See the base [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) class for common properties.
+
+<h3>[property:SpriteMaterial material]</h3>
+	 * An instance of [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial), defining the object's appearance.
+	 * Default is a white [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial).
+
+<h3>[property:Vector2 center]</h3>
+	 * The sprite's anchor point, and the point around which the sprite rotates. A value of (0.5, 0.5) corresponds to the midpoint of the sprite.
+	 * A value of (0, 0) corresponds to the lower left corner of the sprite. The default is (0.5, 0.5).
+
+<h2>Methods</h2>
+	 * See the base [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) class for common methods.
+<h3>[method:Sprite clone]()</h3>
+	 * @returns Returns a clone of this Sprite object and any descendants.
+
+<h3>[method:this copy]( [param:Sprite sprite] )</h3>
+	 * Copies the properties of the passed sprite to this one.
+
+<h3>[method:undefined raycast]( [param:Raycaster raycaster], [param:Array intersects] )</h3>
+	 * Get intersections between a casted ray and this sprite. [Raycaster.intersectObject](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Raycaster.intersectObject)() will call this method.
+	 * The raycaster must be initialized by calling [Raycaster.setFromCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Raycaster.setFromCamera)() before raycasting against sprites.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

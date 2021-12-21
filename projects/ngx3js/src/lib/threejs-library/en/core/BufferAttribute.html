@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * This class stores data for an attribute (such as vertex positions, face indices, normals, colors, UVs, and any custom attributes ) associated with a [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry), which allows for more efficient passing of data to the GPU. See that page for details and a usage example., cata is stored as vectors of any length (defined by [itemSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.itemSize)),
+	 * and in general in the methods outlined below if passing in an index, this is automatically multiplied by the vector length.
+
+<h2>Constructor</h2>
+<h3>[name]( [param:TypedArray array], [param:Integer itemSize], [param:Boolean normalized] )</h3>
+	 * [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) -- Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray).
+	 * Used to instantiate the buffer. 
+	 * This array should have  	
+	 * itemSize * numVertices
+	 * elements, where numVertices is the number of vertices in the associated [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+	 * [itemSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) --  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) -- Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+
+<h2>Properties</h2>
+<h3>[property:TypedArray array]</h3>
+	 * The [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) holding data stored in the buffer.
+
+<h3>[property:Integer count]</h3>
+	 * Stores the [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array)'s length divided by the [itemSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.itemSize).
+	 * If the buffer is storing a 3-component vector (such as a position, normal, or color), then this will count the number of such vectors stored.
+
+<h3>[property:Integer itemSize]</h3>
+	 * The length of vectors that are being stored in the [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
+<h3>[property:String name]</h3>
+	 * Optional name for this attribute instance. Default is an empty string.
+
+<h3>[property:Boolean needsUpdate]</h3>
+	 * Flag to indicate that this attribute has changed and should be re-sent to the GPU.
+	 * Set this to true when you modify the value of the array.
+	 * Setting this to true also increments the [version](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.version).
+
+<h3>[property:Boolean normalized]</h3>
+	 * Indicates how the underlying data in the buffer maps to the values in the GLSL shader code.
+	 * See the constructor above for details.
+
+<h3>[property:Function onUploadCallback]</h3>
+	 * A callback function that is executed after the Renderer has transferred the attribute array data to the GPU.
+
+<h3>[property:Object updateRange]</h3>
+	 * Object containing:
+	 * [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): Default is *0*. Position at which to start update.
+	 * [count](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): Default is *-1*, which means don't use update ranges. 
+	 * This can be used to only update some components of stored vectors (for example, just the component related to color).
+
+<h3>[property:Usage usage]</h3>
+	 * Defines the intended usage pattern of the data store for optimization purposes. Corresponds to the *usage* parameter of [WebGLRenderingContext.bufferData](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData)().
+	 * Default is [StaticDrawUsage](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttributeUsage). See usage [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttributeUsage) for all possible values.
+
+<h3>[property:Integer version]</h3>
+	 * A version number, incremented every time the [needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.needsUpdate) property is set to true.
+<h2>Methods</h2>
+<h3>[method:this applyMatrix3]( [param:Matrix3 m] )</h3>
+	 * Applies matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3) to every Vector3 element of this BufferAttribute.
+<h3>[method:this applyMatrix4]( [param:Matrix4 m] )</h3>
+	 * Applies matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) to every Vector3 element of this BufferAttribute.
+<h3>[method:this applyNormalMatrix]( [param:Matrix3 m] )</h3>
+	 * Applies normal matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3) to every Vector3 element of this BufferAttribute.
+<h3>[method:this transformDirection]( [param:Matrix4 m] )</h3>
+	 * Applies matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) to every Vector3 element of this BufferAttribute, interpreting the elements as a direction vectors.
+<h3>[method:BufferAttribute clone]() </h3>
+	 * @returns Return a copy of this bufferAttribute.
+<h3>[method:this copy]( [param:BufferAttribute bufferAttribute] )</h3>
+	 * Copies another BufferAttribute to this BufferAttribute.
+<h3>[method:this copyArray]( array ) </h3>
+	 * Copy the array given here (which can be a normal array or TypedArray) into [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
+	 * See [TypedArray.set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set)
+	 * for notes on requirements if copying a TypedArray.
+
+<h3>[method:this copyAt] ( [param:Integer index1], [param:BufferAttribute bufferAttribute], [param:Integer index2] ) </h3>
+	 * Copy a vector from bufferAttribute[index2] to [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array)[index1].
+<h3>[method:this copyColorsArray]( [param:Array colors] ) </h3>
+	 * Copy an array representing RGB color values into [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
+<h3>[method:this copyVector2sArray]( [param:Array vectors] ) </h3>
+	 * Copy an array representing [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)s into [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
+<h3>[method:this copyVector3sArray]( [param:Array vectors] ) </h3>
+	 * Copy an array representing [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)s into [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
+<h3>[method:this copyVector4sArray]( [param:Array vectors] ) </h3>
+	 * Copy an array representing [Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4)s into [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
+<h3>[method:Number getX]( [param:Integer index] ) </h3>
+	 * @returns Returns the x component of the vector at the given index.
+<h3>[method:Number getY]( [param:Integer index] ) </h3>
+	 * @returns Returns the y component of the vector at the given index.
+<h3>[method:Number getZ]( [param:Integer index] ) </h3>
+	 * @returns Returns the z component of the vector at the given index.
+<h3>[method:Number getW]( [param:Integer index] ) </h3>
+	 * @returns Returns the w component of the vector at the given index.
+<h3>[method:this onUpload]( [param:Function callback] ) </h3>
+	 * Sets the value of the onUploadCallback property.
+	 * In the [WebGL / Buffergeometry](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry) this is used to free memory after the buffer has been	transferred to the GPU.
+
+<h3>[method:this set] ( [param:Array value], [param:Integer offset] ) </h3>
+	 * value -- an [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) or [TypedArray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) from which to copy values. 
+	 * offset -- index of the [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array) at which to start copying.
+	 * Calls	[TypedArray.set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set)( [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array), [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) )
+	 * on the [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
+	 * In particular, see that page for requirements on [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array)
+	 * being a [TypedArray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray).
+
+<h3>[method:this setUsage] ( [param:Usage value] ) </h3>
+	 * Set [usage](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.usage) to value. See usage [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttributeUsage) for all possible input values.
+<h3>[method:this setX]( [param:Integer index], [param:Float x] ) </h3>
+	 * Sets the x component of the vector at the given index.
+<h3>[method:this setY]( [param:Integer index], [param:Float y] ) </h3>
+	 * Sets the y component of the vector at the given index.
+<h3>[method:this setZ]( [param:Integer index], [param:Float z] ) </h3>
+	 * Sets the z component of the vector at the given index.
+<h3>[method:this setW]( [param:Integer index], [param:Float w] ) </h3>
+	 * Sets the w component of the vector at the given index.
+<h3>[method:this setXY]( [param:Integer index], [param:Float x], [param:Float y] ) </h3>
+	 * Sets the x and y components of the vector at the given index.
+<h3>[method:this setXYZ]( [param:Integer index], [param:Float x], [param:Float y], [param:Float z] ) </h3>
+	 * Sets the x, y and z components of the vector at the given index.
+<h3>[method:this setXYZW]( [param:Integer index], [param:Float x], [param:Float y], [param:Float z], [param:Float w] ) </h3>
+	 * Sets the x, y, z and w components of the vector at the given index.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

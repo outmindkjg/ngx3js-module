@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+
+	 * A KeyframeTrack is a timed sequence of [keyframes](https://en.wikipedia.org/wiki/Key_frame), which are composed of lists of times and related values, and which are used to animate a specific property of an object.
+
+	 * For an overview of the different elements of the three.js animation system see the "Animation System" article in the "Next Steps" section of the manual.
+
+	 * In contrast to the animation hierarchy of the [JSON model format](https://github.com/mrdoob/three.js/wiki/JSON-Model-format-3) a *KeyframeTrack* doesn't store its single keyframes as objects in a "keys" array (holding the times and the values for each frame together in one place).
+
+	 * Instead of this there are always two arrays in a *KeyframeTrack*: the *.times* array stores the time values for all keyframes of this track in sequential order, and the *.values* array contains the corresponding changing values of the animated property.
+
+	 * A single value, belonging to a certain point of time, can not only be a simple number, but (for example) a vector (if a position is animated) or a quaternion (if a rotation is animated). For this reason the values array (which is a flat array, too) might be three or four times as long as the times array.
+
+	 * Corresponding to the different possible types of animated values there are several subclasses of *KeyframeTrack*, inheriting the most properties and methods:
+
+
+	 * [BooleanKeyframeTrack](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BooleanKeyframeTrack)
+	 * [ColorKeyframeTrack](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ColorKeyframeTrack)
+	 * [NumberKeyframeTrack](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NumberKeyframeTrack)
+	 * [QuaternionKeyframeTrack](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/QuaternionKeyframeTrack)
+	 * [StringKeyframeTrack](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/StringKeyframeTrack)
+	 * [VectorKeyframeTrack](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VectorKeyframeTrack)
+</ul>
+
+	 * Some examples of how to manually create [AnimationClips](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationClip) with different sorts of KeyframeTracks can be found in the [AnimationClipCreator](https://threejs.org/examples/jsm/animation/AnimationClipCreator.js)
+	 * file.
+
+	 * Since explicit values are only specified for the discrete points of time stored in the times array, all values in between have to be interpolated.
+
+	 * The track's name is important for the connection of this track with a specific property of the animated node (done by [PropertyBinding](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PropertyBinding)).
+
+<h2>Constructor</h2>
+
+<h3>[name]( [param:String name], [param:Array times], [param:Array values], [param:Constant interpolation] )</h3>
+	 * @param name - the identifier for the *KeyframeTrack*.
+	 * @param times - an array with the values related to the times array, converted internally to aa [Float32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array).
+	 * @param interpolation - the type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
+
+<h2>Properties</h2>
+
+<h3>[property:String name]</h3>
+	 * The track's name can refer to  morph targets or [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh) or possibly other values within an animated object. See [PropertyBinding.parseTrackName](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PropertyBinding.parseTrackName) for the forms of strings that can be parsed for property binding:
+
+	 * The name can specify the node either using its name or its uuid (although it needs to be in the subtree of the scene graph node passed into the mixer). Or, if the track name starts with a dot, the track applies to the root node that was passed into the mixer.
+
+	 * Usually after the node a property will be specified directly. But you can also specify a subproperty, such as .rotation[x], if you just want to drive the X component of the rotation via a float track.
+
+	 * You can also specify bones or multimaterials by using an object name, for example:
+.bones[R_hand].scale; the red channel of the diffuse color of the fourth material in a materials array - as a further example - can be accessed with .materials[3].diffuse[r].
+
+	 * PropertyBinding will also resolve morph target names, for example: .morphTargetInfluences[run].
+
+	 * Note: The track's name does not necessarily have to be unique. Multiple tracks can drive the same property. The result should be based on a weighted blend between the multiple tracks according to the weights of their respective actions.
+
+<h3>[property:Float32Array times]</h3>
+	 * A [Float32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array), converted from the times array which is passed in the constructor.
+
+<h3>[property:Float32Array values]</h3>
+	 * A [Float32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array), converted from the values array which is passed in the constructor.
+
+<h3>[property:Constant DefaultInterpolation]</h3>
+	 * The default interpolation type: [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
+
+<h3>[property:Constant TimeBufferType ]</h3>
+	 * [Float32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array), the type of the buffer internally used for the times.
+
+<h3>[property:Constant ValueBufferType ]</h3>
+	 * [Float32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array), the type of the buffer internally used for the values.
+
+<h2>Methods</h2>
+
+<h3>[method:KeyframeTrack clone]()</h3>
+	 * @returns Returns a copy of this track.
+
+<h3>[method:Interpolant createInterpolant]()</h3>
+	 * Creates a [LinearInterpolant](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LinearInterpolant), [CubicInterpolant](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubicInterpolant)
+	 * or [DiscreteInterpolant](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DiscreteInterpolant), depending on the value of the interpolation parameter passed in the constructor.
+
+<h3>[method:Interpolant getInterpolation]()</h3>
+	 * @returns Returns the interpolation type.
+
+<h3>[method:Number getValueSize]()</h3>
+	 * @returns Returns the size of each value (that is the length of the *.values* array divided by the length of the *.times* array).
+
+<h3>[method:DiscreteInterpolant InterpolantFactoryMethodDiscrete]( [result](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array) )</h3>
+	 * Creates a new [DiscreteInterpolant](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DiscreteInterpolant) from the [times](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack.times) and [values](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack.times). A Float32Array can be passed which will receive the results. Otherwise a new array with the appropriate size will be created automatically.
+
+<h3>[method:LinearInterpolant InterpolantFactoryMethodLinear]( [result](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array) )</h3>
+	 * Creates a new [LinearInterpolant](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LinearInterpolant) from the [times](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack.times) and [values](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack.times). A Float32Array can be passed which will receive the results. Otherwise a new array with the appropriate size will be created automatically.
+
+<h3>[method:CubicInterpolant InterpolantFactoryMethodSmooth]( [result](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array) )</h3>
+	 * Create a new [CubicInterpolant](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubicInterpolant) from the [times](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack.times) and [values](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack.times). A Float32Array can be passed which will receive the results. Otherwise a new array with the appropriate size will be created automatically.
+
+<h3>[method:this optimize]()</h3>
+	 * Removes equivalent sequential keys, which are common in morph target sequences.
+
+<h3>[method:this scale]()</h3>
+	 * Scales all keyframe times by a factor.
+	 * Note: This is useful, for example, for conversions to a certain rate of frames per seconds (as it is done internally by [animationClip.CreateFromMorphTargetSequence](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationClip.CreateFromMorphTargetSequence)).
+
+<h3>[method:this setInterpolation]( [param:Constant interpolationType] )</h3>
+	 * Sets the interpolation type. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for choices.
+
+<h3>[method:this shift]( [param:Number timeOffsetInSeconds] )</h3>
+	 * Moves all keyframes either forward or backward in time.
+
+<h3>[method:this trim]( [param:Number startTimeInSeconds], [param:Number endTimeInSeconds] )</h3>
+	 * Removes keyframes before *startTime* and after *endTime*, without changing any values within the range [*startTime*, *endTime*].
+
+<h3>[method:Boolean validate]()</h3>
+	 * Performs minimal validation on the tracks. Returns true if valid.
+
+	 * This method logs errors to the console, if a track is empty, if the *.valueSize* is not valid, if an item in the *.times* or *.values* array is not a valid number or if the items in the *times* array are out of order.
+
+<h2>Static Methods</h2>
+<h3>[method:JSON toJSON]( [param:KeyframeTrack track] )</h3>
+	 * Converts the track to JSON.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

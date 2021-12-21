@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+	 * [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) &rarr;
+<h1>[name]</h1>
+	 * A material that maps the normal vectors to RGB colors.
+<iframe id="scene" src="scenes/material-browser.html#MeshNormalMaterial"></iframe>
+<script>
+	 * //  iOS iframe auto-resize workaround if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+	 * const scene = document.getElementById( 'scene' );
+	 * scene.style.width = getComputedStyle( scene ).width;
+	 * scene.style.height = getComputedStyle( scene ).height;
+	 * scene.setAttribute( 'scrolling', 'no' );
+}
+</script>
+<h2>Constructor</h2>
+<h3>[name]( [param:Object parameters] )</h3>
+	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+
+<h2>Properties</h2>
+	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) class for common properties.
+<h3>[property:Texture bumpMap]</h3>
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
+
+<h3>[property:Float bumpScale]</h3>
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
+<h3>[property:Texture displacementMap]</h3>
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
+
+<h3>[property:Float displacementScale]</h3>
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
+ Default is 1.
+
+<h3>[property:Float displacementBias]</h3>
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
+
+<h3>[property:Boolean flatShading]</h3>
+	 * Define whether the material is rendered with flat shading. Default is false.
+
+<h3>[property:Boolean fog]</h3>
+	 * Whether the material is affected by fog. Default is *false*.
+<h3>[property:Texture normalMap]</h3>
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
+
+<h3>[property:Integer normalMapType]</h3>
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
+
+<h3>[property:Vector2 normalScale]</h3>
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
+
+<h3>[property:Boolean wireframe]</h3>
+	 * Render geometry as wireframe. Default is false (i.e. render as smooth shaded).
+
+<h3>[property:Float wireframeLinewidth]</h3>
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+
+<h2>Methods</h2>
+	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) class for common methods.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>

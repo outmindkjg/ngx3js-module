@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8" />
+<base href="../../../" />
+<script src="page.js"></script>
+<link type="text/css" rel="stylesheet" href="page.css" />
+	</head>
+	<body>
+<h1>[name]</h1>
+	 * Uniforms are global GLSL variables. They are passed to shader programs.
+
+<h2>Code Example</h2>
+	 * When declaring a uniform of a [ShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderMaterial), it is declared by value or by object.
+
+	 * uniforms: {
+	 * time: { value: 1.0 }, resolution: new Uniform( new Vector2() )
+};
+
+<h2>Uniform types</h2>
+
+	 * Each uniform must have a *value* property. The type of the value must correspond to the type of the uniform variable in the GLSL code as specified for the primitive GLSL types in the table below. Uniform structures and arrays are also supported. GLSL arrays of primitive type must either be specified as an array of the corresponding THREE objects or as a flat array containing the data of all the objects. In other words; GLSL primitives in arrays must not be represented by arrays. This rule does not apply transitively.
+	 * An array of *vec2* arrays, each with a length of five vectors, must be an array of arrays, of either five [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) objects or ten *number*s.
+<table>
+<caption><a id="uniform-types">Uniform types</a></caption>
+<thead>
+	<tr>
+<th>GLSL type</th>
+<th>JavaScript type</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+<td>int</td>
+<td>[Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)</td>
+	</tr>
+	<tr>
+<td>uint (WebGL 2)</td>
+<td>[Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)</td>
+	</tr>
+	<tr>
+<td>float</td>
+<td>[Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)</td>
+	</tr>
+	<tr>
+<td>bool</td>
+<td>[Boolean](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean)</td>
+	</tr>
+	<tr>
+<td>bool</td>
+<td>[Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)</td>
+	</tr>
+	<tr>
+<td>vec2</td>
+<td>[THREE.Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)</td>
+	</tr>
+	<tr>
+<td>vec2</td>
+<td>[Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*)</td>
+	</tr>
+	<tr>
+<td>vec2</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>vec3</td>
+<td>[THREE.Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)</td>
+	</tr>
+	<tr>
+<td>vec3</td>
+<td>[THREE.Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color)</td>
+	</tr>
+	<tr>
+<td>vec3</td>
+<td>[Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*)</td>
+	</tr>
+	<tr>
+<td>vec3</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>vec4</td>
+<td>[THREE.Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4)</td>
+	</tr>
+	<tr>
+<td>vec4</td>
+<td>[THREE.Quaternion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion)</td>
+	</tr>
+	<tr>
+<td>vec4</td>
+<td>[Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*)</td>
+	</tr>
+	<tr>
+<td>vec4</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>mat2</td>
+<td>[Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*)</td>
+	</tr>
+	<tr>
+<td>mat2</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>mat3</td>
+<td>[THREE.Matrix3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3)</td>
+	</tr>
+	<tr>
+<td>mat3</td>
+<td>[Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*)</td>
+	</tr>
+	<tr>
+<td>mat3</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>mat4</td>
+<td>[THREE.Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4)</td>
+	</tr>
+	<tr>
+<td>mat4</td>
+<td>[Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*)</td>
+	</tr>
+	<tr>
+<td>mat4</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>ivec2, bvec2</td>
+<td>[Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*)</td>
+	</tr>
+	<tr>
+<td>ivec2, bvec2</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>ivec3, bvec3</td>
+<td>[Int32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Int32Array) (*)</td>
+	</tr>
+	<tr>
+<td>ivec3, bvec3</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>ivec4, bvec4</td>
+<td>[Int32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Int32Array) (*)</td>
+	</tr>
+	<tr>
+<td>ivec4, bvec4</td>
+<td>[Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)</td>
+	</tr>
+	<tr>
+<td>sampler2D</td>
+<td>[THREE.Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture)</td>
+	</tr>
+	<tr>
+<td>samplerCube</td>
+<td>[THREE.CubeTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubeTexture)</td>
+	</tr>
+</tbody>
+</table>
+
+	 * (*) Same for an (innermost) array (dimension) of the same GLSL type, containing the components of all vectors or matrices in the array.
+
+<h2>Structured Uniforms</h2>
+
+	 * Sometimes you want to organize uniforms as *structs* in your shader code. The following style must be used so *three.js* is able to process structured uniform data.
+
+	 * uniforms = {
+	 * data: {
+	value: {
+	 * position: new Vector3(), direction: new Vector3( 0, 0, 1 )
+	 }
+}
+};
+
+	 * This definition can be mapped on the following GLSL code:
+
+	 * struct Data {
+	 * vec3 position;
+	 * vec3 direction;
+};
+	 * uniform Data data;
+
+<h2>Structured Uniforms with Arrays</h2>
+
+	 * It's also possible to manage *structs* in arrays. The syntax for this use case looks like so:
+
+	 * const entry1 = {
+	 * position: new Vector3(), direction: new Vector3( 0, 0, 1 )
+};
+	 * const entry2 = {
+	 * position: new Vector3( 1, 1, 1 ), direction: new Vector3( 0, 1, 0 )
+};
+	 * uniforms = {
+	 * data: {
+	value: [ entry1, entry2 ]
+}
+};
+
+	 * This definition can be mapped on the following GLSL code:
+
+	 * struct Data {
+	 * vec3 position;
+	 * vec3 direction;
+};
+	 * uniform Data data[ 2 ];
+
+<h2>Constructor</h2>
+<h3>[name]( [param:Object value] )</h3>
+	 * value -- An object containing the value to set up the uniform. It's type must be one of the Uniform Types described above.
+
+<h2>Properties</h2>
+<h3>[property:Object value]</h3>
+	 * Current value of the uniform.
+
+<h2>Methods</h2>
+<h3>[method:Uniform clone]()</h3>
+	 * @returns Returns a clone of this uniform.
+	 * If the uniform's value property is an [Object](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object) with a clone() method, this is used, otherwise the value is copied by assignment.
+	 * Array values are shared between cloned [Uniform](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Uniform)s.
+
+<h2>Source</h2>
+
+	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
+	</body>
+</html>
