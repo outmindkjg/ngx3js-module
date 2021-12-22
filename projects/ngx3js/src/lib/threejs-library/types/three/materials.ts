@@ -121,8 +121,8 @@ export interface LineBasicMaterial extends Material {
 	linejoin: string;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: LineBasicMaterialParameters): void;
 }
@@ -195,8 +195,8 @@ export interface LineDashedMaterial extends LineBasicMaterial {
 	readonly isLineDashedMaterial: true;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: LineDashedMaterialParameters): void;
 }
@@ -1048,8 +1048,8 @@ export interface MeshBasicMaterial extends Material {
 	wireframeLinejoin: string | undefined;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshBasicMaterialParameters): void;
 }
@@ -1179,8 +1179,8 @@ export interface MeshDepthMaterial extends Material {
 	fog: boolean;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshDepthMaterialParameters): void;
 }
@@ -1228,6 +1228,7 @@ export interface MeshDistanceMaterialParameters extends MaterialParameters {
 	nearDistance?: number | undefined;
 
 	/**
+	 * The position of the point light in world space.
 	 */
 	referencePosition?: Vector3 | undefined;
 }
@@ -1236,7 +1237,7 @@ export interface MeshDistanceMaterialParameters extends MaterialParameters {
  * MeshDistanceMaterial is internally used for implementing shadow mapping with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight)s.
  * Can also be used to customize the shadow casting of an object by assigning an instance of [name] to [Object3D.customDistanceMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.customDistanceMaterial).
  * The following examples demonstrates this approach in order to ensure transparent parts of objects do no cast shadows.
- * 
+ *
  * ### Examples
  * [WebGL / shadowmap / pointlight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmap_pointlight)
  */
@@ -1298,6 +1299,7 @@ export interface MeshDistanceMaterial extends Material {
 	nearDistance: number;
 
 	/**
+	 * The position of the point light in world space.
 	 * @default new THREE.Vector3()
 	 */
 	referencePosition: Vector3;
@@ -1309,13 +1311,14 @@ export interface MeshDistanceMaterial extends Material {
 	fog: boolean;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshDistanceMaterialParameters): void;
 }
 
 /**
+ * Mesh lambert material parameters
  */
 export interface MeshLambertMaterialParameters extends MaterialParameters {
 	/**
@@ -1430,9 +1433,19 @@ export interface MeshLambertMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * A material for non-shiny surfaces, without specular highlights.
+ * The material uses a non-physically based [Lambertian](https://en.wikipedia.org/wiki/Lambertian_reflectance)
+ * model for calculating reflectance. This can simulate some surfaces (such as untreated wood or stone) well, but cannot simulate shiny surfaces with specular highlights (such as varnished wood).
+ * Shading is calculated using a [Gouraud](https://en.wikipedia.org/wiki/Gouraud_shading) shading model.
+ * This calculates shading per vertex (i.e. in the [vertex shader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders))
+ * and interpolates the results over the polygon's faces.
+ * Due to the simplicity of the reflectance and illumination models, performance will be greater when using this material over the [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial),	[MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) or [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial), at the cost of some graphical accuracy.
  */
 export interface MeshLambertMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshLambertMaterialParameters): this;
 
@@ -1571,13 +1584,14 @@ export interface MeshLambertMaterial extends Material {
 	wireframeLinejoin: string;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshLambertMaterialParameters): void;
 }
 
 /**
+ * Mesh matcap material parameters
  */
 export interface MeshMatcapMaterialParameters extends MaterialParameters {
 	/**
@@ -1653,9 +1667,15 @@ export interface MeshMatcapMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * MeshMatcapMaterial is defined by a MatCap (or Lit Sphere) texture, which encodes the material color and shading.
+ * MeshMatcapMaterial does not respond to lights since the matcap image file encodes baked lighting.
+ * It will cast a shadow onto an object that receives shadows (and shadow clipping works), but it will not self-shadow or receive shadows.
  */
 export interface MeshMatcapMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshMatcapMaterialParameters): this;
 
@@ -1665,6 +1685,7 @@ export interface MeshMatcapMaterial extends Material {
 	type: string;
 
 	/**
+	 * Defines custom constants using *#define* directives within the GLSL code for both the vertex shader and the fragment shader; each key/value pair yields another directive:
 	 * @default { 'MATCAP': '' }
 	 */
 	defines: { [key: string]: any };
@@ -1754,13 +1775,14 @@ export interface MeshMatcapMaterial extends Material {
 	flatShading: boolean;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshMatcapMaterialParameters): void;
 }
 
 /**
+ * Mesh normal material parameters
  */
 export interface MeshNormalMaterialParameters extends MaterialParameters {
 	/**
@@ -1826,9 +1848,12 @@ export interface MeshNormalMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * A material that maps the normal vectors to RGB colors.
  */
 export interface MeshNormalMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshNormalMaterialParameters): this;
 
@@ -1910,13 +1935,14 @@ export interface MeshNormalMaterial extends Material {
 	flatShading: boolean;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshNormalMaterialParameters): void;
 }
 
 /**
+ * Mesh phong material parameters
  */
 export interface MeshPhongMaterialParameters extends MaterialParameters {
 	/**
@@ -1938,7 +1964,7 @@ export interface MeshPhongMaterialParameters extends MaterialParameters {
 	/**
 	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
 	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.
-	 * If the material's [transparent](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) property is not set to *true*, the material will remain fully opaque and this value will only affect its color. 
+	 * If the material's [transparent](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) property is not set to *true*, the material will remain fully opaque and this value will only affect its color.
 	 * Default is *1.0*.
 	 */
 	opacity?: number | undefined;
@@ -2099,9 +2125,22 @@ export interface MeshPhongMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * A material for shiny surfaces with specular highlights.
+ * The material uses a non-physically based [Blinn-Phong](https://en.wikipedia.org/wiki/Blinn-Phong_shading_model)
+ * model for calculating reflectance. Unlike the Lambertian model used in the [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial)
+ * this can simulate shiny surfaces with specular highlights (such as varnished wood).
+ * Shading is calculated using a [Phong](https://en.wikipedia.org/wiki/Phong_shading) shading model.
+ * This calculates shading per pixel (i.e. in the [fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders),
+ * AKA pixel shader)	which gives more accurate results than the Gouraud model used by [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial), at the cost of some performance. The [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) and [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial)
+ * also use this shading model.
+ * Performance will generally be greater when using this material over the	[MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial)
+ * or [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial), at the cost of some graphical accuracy.
  */
 export interface MeshPhongMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshPhongMaterialParameters): this;
 
@@ -2316,13 +2355,14 @@ export interface MeshPhongMaterial extends Material {
 	metal: boolean;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshPhongMaterialParameters): void;
 }
 
 /**
+ * Mesh physical material parameters
  */
 export interface MeshPhysicalMaterialParameters extends MeshStandardMaterialParameters {
 	/**
@@ -2366,8 +2406,6 @@ export interface MeshPhysicalMaterialParameters extends MeshStandardMaterialPara
 	 */
 	ior?: number | undefined;
 
-	/**
-	 */
 	sheen?: number | undefined;
 
 	/**
@@ -2393,35 +2431,39 @@ export interface MeshPhysicalMaterialParameters extends MeshStandardMaterialPara
 	 */
 	transmissionMap?: Texture | null | undefined;
 
-	/**
-	 */
 	attenuationDistance?: number | undefined;
 
-	/**
-	 */
 	attenuationColor?: Color | undefined;
 
-	/**
-	 */
 	specularIntensity?: number | undefined;
 
-	/**
-	 */
 	specularColor?: Color | undefined;
 
-	/**
-	 */
 	specularIntensityMap?: Texture | null | undefined;
 
-	/**
-	 */
 	specularColorMap?: Texture | null | undefined;
 }
 
 /**
+ * An extension of the [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial), providing more advanced physically-based rendering properties:
+ * 	Clearcoat: Some materials - like car paints, carbon fiber, and wet surfaces - require a clear, reflective layer on top of another layer that may be irregular or rough. Clearcoat approximates this effect, without the need for a separate transparent surface.
+ * Physically-based transparency: One limitation of [.opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.opacity) is that highly transparent materials are less reflective. Physically-based *.transmission*
+ * provides a more realistic option for thin, transparent surfaces like glass.
+ * Advanced reflectivity: More flexible reflectivity for non-metallic materials.
+ * As a result of these complex shading features, MeshPhysicalMaterial has a higher performance cost, per pixel, than other three.js materials. Most effects are disabled by default, and add cost as they are enabled. For best results, always specify an *.envMap*
+ * when using this material.
+ *
+ * ### Examples
+ * [materials / variations / physical](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_physical) |
+ * [materials / physical / clearcoat](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_physical_clearcoat) |
+ * [materials / physical / reflectivity](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_physical_reflectivity) |
+ * [materials / physical / transmission](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_physical_transmission)
  */
 export interface MeshPhysicalMaterial extends MeshStandardMaterial {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) and [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshPhysicalMaterialParameters): this;
 
@@ -2431,6 +2473,7 @@ export interface MeshPhysicalMaterial extends MeshStandardMaterial {
 	type: string;
 
 	/**
+	 * Defines custom constants using *#define* directives within the GLSL code for both the vertex shader and the fragment shader; each key/value pair yields another directive:
 	 * @default { 'STANDARD': '', 'PHYSICAL': '' }
 	 */
 	defines: { [key: string]: any };
@@ -2569,6 +2612,7 @@ export interface MeshPhysicalMaterial extends MeshStandardMaterial {
 }
 
 /**
+ * Mesh standard material parameters
  */
 export interface MeshStandardMaterialParameters extends MaterialParameters {
 	/**
@@ -2726,9 +2770,23 @@ export interface MeshStandardMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * A standard physically based material, using Metallic-Roughness workflow.
+ * Physically based rendering (PBR) has recently become the standard in many 3D applications, such as [Unity](https://blogs.unity3d.com/2014/10/29/physically-based-shading-in-unity-5-a-primer/),s [Unreal](https://docs.unrealengine.com/latest/INT/Engine/Rendering/Materials/PhysicallyBased/) and [3D Studio Max](http://area.autodesk.com/blogs/the-3ds-max-blog/what039s-new-for-rendering-in-3ds-max-2017).
+ * This approach differs from older approaches in that instead of using approximations for the way in which light	interacts with a surface, a physically correct model is used. The idea is that, instead of tweaking materials to look good under specific lighting, a material can	be created that will react 'correctly' under all lighting scenarios.
+ * In practice this gives a more	accurate and realistic looking result than the [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial)
+ * or [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial), at the cost of being somewhat more computationally expensive.
+ * Shading is calculated in the same way as for the [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial), using a [Phong](https://en.wikipedia.org/wiki/Phong_shading) shading model.	This calculates shading per pixel (i.e. in the [fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders),a AKA pixel shader) which gives more accurate results than the Gouraud model used by [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial), at the cost of some performance.
+ * Note that for best results you should always specify an *.envMap* when using this material.
+ * For a non-technical introduction to the concept of PBR and how to set up a PBR material, check out these articles by the people at [marmoset](https://www.marmoset.co):
+ * [Basic Theory of Physically Based Rendering](https://www.marmoset.co/posts/basic-theory-of-physically-based-rendering/)
+ * [Physically Based Rendering and You Can Too](https://www.marmoset.co/posts/physically-based-rendering-and-you-can-too/)
+ * Technical details of the approach used in three.js (and most other PBR systems) can be found is this [paper from Disney](https://media.disneyanimation.com/uploads/production/publication_asset/48/asset/s2012_pbs_disney_brdf_notes_v3.pdf) (pdf), by Brent Burley.
  */
 export interface MeshStandardMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshStandardMaterialParameters): this;
 
@@ -2738,6 +2796,7 @@ export interface MeshStandardMaterial extends Material {
 	type: string;
 
 	/**
+	 * Defines custom constants using *#define* directives within the GLSL code for both the vertex shader and the fragment shader; each key/value pair yields another directive:
 	 * @default { 'STANDARD': '' }
 	 */
 	defines: { [key: string]: any };
@@ -2939,19 +2998,20 @@ export interface MeshStandardMaterial extends Material {
 	 */
 	flatShading: boolean;
 
-	/**
-	 */
 	isMeshStandardMaterial: boolean;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshStandardMaterialParameters): void;
 }
 
+/**
+ * Mesh toon material parameters
+ */
 export interface MeshToonMaterialParameters extends MaterialParameters {
-	/** 
+	/**
 	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
@@ -2959,7 +3019,7 @@ export interface MeshToonMaterialParameters extends MaterialParameters {
 	/**
 	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
 	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.
-	 * If the material's [transparent](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) property is not set to *true*, the material will remain fully opaque and this value will only affect its color. 
+	 * If the material's [transparent](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) property is not set to *true*, the material will remain fully opaque and this value will only affect its color.
 	 * Default is *1.0*.
 	 */
 	opacity?: number | undefined;
@@ -3090,9 +3150,15 @@ export interface MeshToonMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * A material implementing toon shading.
+ * ### Examples
+ * [materials / variations / toon](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_toon)
  */
 export interface MeshToonMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshToonMaterialParameters): this;
 
@@ -3102,6 +3168,7 @@ export interface MeshToonMaterial extends Material {
 	type: string;
 
 	/**
+	 * Defines custom constants using *#define* directives within the GLSL code for both the vertex shader and the fragment shader; each key/value pair yields another directive:
 	 * @default { 'TOON': '' }
 	 */
 	defines: { [key: string]: any };
@@ -3259,16 +3326,18 @@ export interface MeshToonMaterial extends Material {
 	wireframeLinejoin: string;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: MeshToonMaterialParameters): void;
 }
 
 /**
+ * Points material parameters
  */
 export interface PointsMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 
@@ -3297,9 +3366,44 @@ export interface PointsMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * The default material used by [Points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points).
+ *
+ * ### Code Example
+ * ```javascript
+ * const vertices = [];
+ * for ( let i = 0; i < 10000; i ++ ) {
+ *      const x = THREE.MathUtils.randFloatSpread( 2000 );
+ *      const y = THREE.MathUtils.randFloatSpread( 2000 );
+ *      const z = THREE.MathUtils.randFloatSpread( 2000 );
+ *      vertices.push( x, y, z );
+ * }
+ * const geometry = new THREE.BufferGeometry();
+ * geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+ * const material = new THREE.PointsMaterial( { color: 0x888888 } );
+ * const points = new THREE.Points( geometry, material );
+ * scene.add( points );
+ * ```
+ *
+ * ### Examples
+ * [misc / controls / fly](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_fly) |
+ * [WebGL / BufferGeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange) |
+ * [WebGL / BufferGeometry / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_points) |
+ * [WebGL / BufferGeometry / points / interleaved](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_points_interleaved) |
+ * [WebGL / camera ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera) |
+ * [WebGL / geometry / convex](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_convex) |
+ * [WebGL / geometry / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_shapes) |
+ * [WebGL / interactive / raycasting / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_raycasting_points) |
+ * [WebGL / multiple / elements / text](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_multiple_elements_text) |
+ * [WebGL / points / billboards](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_billboards) |
+ * [WebGL / points / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_dynamic) |
+ * [WebGL / points / sprites](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_sprites) |
+ * [WebGL / trails](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_trails)
  */
 export interface PointsMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: PointsMaterialParameters): this;
 
@@ -3342,24 +3446,50 @@ export interface PointsMaterial extends Material {
 	sizeAttenuation: boolean;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: PointsMaterialParameters): void;
 }
 
 /**
+ * This class works just like [ShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderMaterial), except that definitions of built-in uniforms and attributes are not automatically prepended to the GLSL shader code.
+ * ### Code Example
+ * ```javascript
+ * const material = new THREE.RawShaderMaterial( {
+ *      uniforms: {
+ *          time: { value: 1.0 }
+ *      },
+ *      vertexShader: document.getElementById( 'vertexShader' ).textContent,
+ *      fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+ * } );
+ * ```
+ *
+ * ### Examples
+ * [WebGL / buffergeometry / rawshader](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_rawshader) |
+ * [WebGL / buffergeometry / instancing / billboards](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_instancing_billboards) |
+ * [WebGL / buffergeometry / instancing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_instancing) |
+ * [WebGL / raymarching / reflect](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_raymarching_reflect) |
+ * [WebGL 2 / volume / cloud](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_volume_cloud) |
+ * [WebGL 2 / volume / instancing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_volume_instancing) |
+ * [WebGL 2 / volume / perlin](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_volume_perlin)
  */
 export interface RawShaderMaterial extends ShaderMaterial {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) and [ShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderMaterial)) can be passed in here.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: ShaderMaterialParameters): this;
 }
 
 /**
+ * Shader material parameters
  */
 export interface ShaderMaterialParameters extends MaterialParameters {
 	/**
+	 * An object of the form: { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }
+	 * specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form { value: 1.0 }
+	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 */
 	uniforms?: { [uniform: string]: IUniform } | undefined;
 
@@ -3403,6 +3533,7 @@ export interface ShaderMaterialParameters extends MaterialParameters {
 	clipping?: boolean | undefined;
 
 	/**
+	 * An object with the following properties:
 	 */
 	extensions?:
 		| {
@@ -3420,9 +3551,52 @@ export interface ShaderMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * A material rendered with custom shaders. A shader is a small program written in [GLSL](https://www.khronos.org/files/opengles_shading_language.pdf) that runs on the GPU.
+ * You may want to use a custom shader if you need to:
+ * implement an effect not included with any of the built-in [materials](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)
+ * combine many objects into a single [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) in order to improve performance
+ * There are the following notes to bear in mind when using a *ShaderMaterial*:
+ * A *ShaderMaterial* will only be rendered properly by [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer),
+ * since the GLSL code in the [vertexShader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders)
+ * and [fragmentShader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders) properties must be compiled and run on the GPU using WebGL.
+ * As of THREE r72, directly assigning attributes in a ShaderMaterial is no longer supported.
+ * A [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) instance  must be used instead, using [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) instances to define custom attributes.
+ * As of THREE r77, [WebGLRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget) or [WebGLCubeRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLCubeRenderTarget) instances are no longer supposed to be used as uniforms. Their [texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture) property must be used instead.
+ * Built in attributes and uniforms are passed to the shaders along with your code.
+ * If you don't want the [WebGLProgram](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLProgram) to add anything to your shader code, you can use [RawShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RawShaderMaterial) instead of this class.
+ * You can use the directive #pragma unroll_loop_start and #pragma unroll_loop_end in order to unroll a *for* loop in GLSL by the shader preprocessor.
+ * The directive has to be placed right above the loop. The loop formatting has to correspond to a defined standard.
+ * The loop has to be [normalized](https://en.wikipedia.org/wiki/Normalized_loop).
+ * The loop variable has to be *i*.
+ * The value *UNROLLED_LOOP_INDEX* will be replaced with the explicitly value of *i* for the given iteration and can be used in preprocessor statements.
+ *
+ * ### Examples
+ * [webgl / buffergeometry / custom / attributes / particles](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_custom_attributes_particles) |
+ * [webgl / buffergeometry / selective / draw](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_selective_draw) |
+ * [webgl / custom / attributes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes) |
+ * [webgl / custom / attributes / lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_lines) |
+ * [webgl / custom / attributes / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points) |
+ * [webgl / custom / attributes / points2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points2) |
+ * [webgl / custom / attributes / points3](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points3) |
+ * [webgl / depth / texture](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_depth_texture) |
+ * [webgl / gpgpu / birds](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_gpgpu_birds) |
+ * [webgl / gpgpu / protoplanet](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_gpgpu_protoplanet) |
+ * [webgl / gpgpu / water](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_gpgpu_water) |
+ * [webgl / interactive / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_points) |
+ * [webgl / video / kinect](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_video_kinect) |
+ * [webgl / lights / hemisphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_hemisphere) |
+ * [webgl / marchingcubes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_marchingcubes) |
+ * [webgl / materials / envmaps](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_envmaps) |
+ * [webgl / materials / lightmap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_lightmap) |
+ * [webgl / materials / wireframe](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_wireframe) |
+ * [webgl / modifier / tessellation](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_modifier_tessellation) |
+ * [webgl / postprocessing / dof2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_dof2) |
+ * [webgl / postprocessing / godrays](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_godrays)
  */
 export interface ShaderMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: ShaderMaterialParameters): this;
 
@@ -3432,11 +3606,15 @@ export interface ShaderMaterial extends Material {
 	type: string;
 
 	/**
+	 * Defines custom constants using *#define* directives within the GLSL code for both the vertex shader and the fragment shader; each key/value pair yields another directive:
 	 * @default {}
 	 */
 	defines: { [key: string]: any };
 
 	/**
+	 * An object of the form: { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }
+	 * specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form { value: 1.0 }
+	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 * @default {}
 	 */
 	uniforms: { [uniform: string]: IUniform };
@@ -3444,8 +3622,8 @@ export interface ShaderMaterial extends Material {
 	/**
 	 * Vertex shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
 	 */
-	 vertexShader: string;
-	
+	vertexShader: string;
+
 	/**
 	 * Fragment shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
 	 */
@@ -3497,6 +3675,7 @@ export interface ShaderMaterial extends Material {
 	derivatives: any;
 
 	/**
+	 * An object with the following properties:
 	 * @default { derivatives: false, fragDepth: false, drawBuffers: false, shaderTextureLOD: false }
 	 */
 	extensions: {
@@ -3528,22 +3707,19 @@ export interface ShaderMaterial extends Material {
 	 */
 	glslVersion: GLSLVersion | null;
 
-	/**
-	 */
 	isShaderMaterial: boolean;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: ShaderMaterialParameters): void;
 
-	/**
-	 */
 	toJSON(meta: any): any;
 }
 
 /**
+ * Shadow material parameters
  */
 export interface ShadowMaterialParameters extends MaterialParameters {
 	/**
@@ -3553,9 +3729,27 @@ export interface ShadowMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * This material can receive shadows, but otherwise is completely transparent.
+ *
+ * ### Code Example
+ * ```javascript
+ * const geometry = new THREE.PlaneGeometry( 2000, 2000 );
+ * geometry.rotateX( - Math.PI / 2 );
+ * const material = new THREE.ShadowMaterial();
+ * material.opacity = 0.2;
+ * const plane = new THREE.Mesh( geometry, material );
+ * plane.position.y = -200;
+ * plane.receiveShadow = true;
+ * scene.add( plane );
+ * ```
+ *
+ * ### Examples
+ * [geometry / spline / editor](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_spline_editor)
  */
 export interface ShadowMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: ShadowMaterialParameters): this;
 
@@ -3571,7 +3765,7 @@ export interface ShadowMaterial extends Material {
 	color: Color;
 
 	/**
-	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. g When set to true, the extent to which the material is transparent is controlled by setting its [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) property. 
+	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. g When set to true, the extent to which the material is transparent is controlled by setting its [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) property.
 	 * Default is *true*.
 	 * @default true
 	 */
@@ -3579,6 +3773,7 @@ export interface ShadowMaterial extends Material {
 }
 
 /**
+ * Sprite material parameters
  */
 export interface SpriteMaterialParameters extends MaterialParameters {
 	/**
@@ -3610,9 +3805,28 @@ export interface SpriteMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * A material for a use with a [Sprite](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite).
+ *
+ * ### Code Example
+ * ```javascript
+ * const map = new THREE.TextureLoader().load( 'textures/sprite.png' );
+ * const material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
+ * const sprite = new THREE.Sprite( material );
+ * sprite.scale.set(200, 200, 1)
+ * scene.add( sprite );
+ * ```
+ *
+ * ### Examples
+ * [WebGL / raycast / sprite](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_raycast_sprite) |
+ * [WebGL / sprites](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_sprites) |
+ * [SVG / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/svg_sandbox)
  */
 export interface SpriteMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * SpriteMaterials are not clipped by using [Material.clippingPlanes](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.clippingPlanes).
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: SpriteMaterialParameters): this;
 
@@ -3654,7 +3868,7 @@ export interface SpriteMaterial extends Material {
 	sizeAttenuation: boolean;
 
 	/**
-	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. g When set to true, the extent to which the material is transparent is controlled by setting its [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) property. 
+	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. g When set to true, the extent to which the material is transparent is controlled by setting its [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) property.
 	 * Default is *true*.
 	 * @default true
 	 */
@@ -3663,12 +3877,10 @@ export interface SpriteMaterial extends Material {
 	readonly isSpriteMaterial: true;
 
 	/**
-	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * Sets the properties based on the *parameters*.
+	 * @param parameters - a container with parameters.
 	 */
 	setValues(parameters: SpriteMaterialParameters): void;
 
-	/**
-	 */
 	copy(source: SpriteMaterial): this;
 }

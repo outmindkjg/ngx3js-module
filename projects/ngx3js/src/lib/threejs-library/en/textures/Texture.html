@@ -45,12 +45,12 @@
 	 * This defines how the texture is wrapped vertically and corresponds to *V* in UV mapping.
 	 * The same choices are available as for [property:number wrapS].
 	 * NOTE: tiling of images in textures only functions if image dimensions are powers of two  (2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, ...) in terms of pixels.
- Individual dimensions need not be equal, but each must be a power of two.
- This is a limitation of WebGL, not three.js.
+	 * Individual dimensions need not be equal, but each must be a power of two.
+	 * This is a limitation of WebGL, not three.js.
 <h3>[property:number magFilter]</h3>
 	 * How the texture is sampled when a texel covers more than one pixel. The default is  [THREE.LinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), which takes the four closest texels and bilinearly interpolates among them.
- The other option is [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), which uses the value of the closest texel.
- See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details.
+	 * The other option is [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), which uses the value of the closest texel.
+	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for details.
 <h3>[property:number minFilter]</h3>
 	 * How the texture is sampled when a texel covers less than one pixel. The default is [THREE.LinearMipmapLinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), which uses mipmapping and a trilinear filter. 
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) page for all possible choices.

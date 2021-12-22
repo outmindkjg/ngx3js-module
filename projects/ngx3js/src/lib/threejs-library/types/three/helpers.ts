@@ -5,8 +5,6 @@ import { MeshBasicMaterial } from './materials';
 import { Box3, Color, ColorRepresentation, Matrix4, Plane, Vector3 } from './math';
 import { Bone, Line, LineSegments, Mesh } from './objects';
 
-// Extras / Helpers /////////////////////////////////////////////////////////////////////
-
 /**
  * An 3D arrow object for visualizing directions.
  *
