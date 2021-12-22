@@ -121,8 +121,8 @@ export interface LineBasicMaterial extends Material {
 	linejoin: string;
 
 	/**
-	 *
-	 * @param parameters
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: LineBasicMaterialParameters): void;
 }
@@ -195,8 +195,8 @@ export interface LineDashedMaterial extends LineBasicMaterial {
 	readonly isLineDashedMaterial: true;
 
 	/**
-	 *
-	 * @param parameters
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: LineDashedMaterialParameters): void;
 }
@@ -587,7 +587,7 @@ export interface Material extends EventDispatcher {
 
 	/**
 	 * Whether the material is affected by fog. Default is *true*.
-	 * @default fog
+	 * @default true
 	 */
 	fog: boolean;
 
@@ -1048,50 +1048,69 @@ export interface MeshBasicMaterial extends Material {
 	wireframeLinejoin: string | undefined;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshBasicMaterialParameters): void;
 }
 
 /**
+ * Mesh depth material parameters
  */
 export interface MeshDepthMaterialParameters extends MaterialParameters {
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * Encoding for depth packing. Default is [BasicDepthPacking](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 */
 	depthPacking?: DepthPackingStrategies | undefined;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
 	displacementMap?: Texture | null | undefined;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 */
 	displacementScale?: number | undefined;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 */
 	displacementBias?: number | undefined;
 
 	/**
+	 * Render geometry as wireframe. Default is false (i.e. render as smooth shaded).
 	 */
 	wireframe?: boolean | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 }
 
 /**
+ * A material for drawing geometry by depth. Depth is based off of the camera near and far plane. White is nearest, black is farthest.
  */
 export interface MeshDepthMaterial extends Material {
 	/**
+	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 */
 	new (parameters?: MeshDepthMaterialParameters): this;
 
@@ -1101,83 +1120,110 @@ export interface MeshDepthMaterial extends Material {
 	type: string;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
 
 	/**
+	 * Encoding for depth packing. Default is [BasicDepthPacking](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * @default THREE.BasicDepthPacking
 	 */
 	depthPacking: DepthPackingStrategies;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 * @default null
 	 */
 	displacementMap: Texture | null;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * @default 1
 	 */
 	displacementScale: number;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 * @default 0
 	 */
 	displacementBias: number;
 
 	/**
+	 * Render geometry as wireframe. Default is false (i.e. render as smooth shaded).
 	 * @default false
 	 */
 	wireframe: boolean;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
+	 * Whether the material is affected by fog. Default is *false*.
 	 * @default false
 	 */
 	fog: boolean;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshDepthMaterialParameters): void;
 }
 
 /**
+ * Mesh distance material parameters
  */
 export interface MeshDistanceMaterialParameters extends MaterialParameters {
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
 	displacementMap?: Texture | null | undefined;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 */
 	displacementScale?: number | undefined;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 */
 	displacementBias?: number | undefined;
 
 	/**
+	 * The far value of the point light's internal shadow camera.
 	 */
 	farDistance?: number | undefined;
 
 	/**
+	 * The near value of the point light's internal shadow camera.
 	 */
 	nearDistance?: number | undefined;
 
@@ -1187,9 +1233,17 @@ export interface MeshDistanceMaterialParameters extends MaterialParameters {
 }
 
 /**
+ * MeshDistanceMaterial is internally used for implementing shadow mapping with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight)s.
+ * Can also be used to customize the shadow casting of an object by assigning an instance of [name] to [Object3D.customDistanceMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.customDistanceMaterial).
+ * The following examples demonstrates this approach in order to ensure transparent parts of objects do no cast shadows.
+ * 
+ * ### Examples
+ * [WebGL / shadowmap / pointlight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmap_pointlight)
  */
 export interface MeshDistanceMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshDistanceMaterialParameters): this;
 
@@ -1199,36 +1253,46 @@ export interface MeshDistanceMaterial extends Material {
 	type: string;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 * @default null
 	 */
 	displacementMap: Texture | null;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * @default 1
 	 */
 	displacementScale: number;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 * @default 0
 	 */
 	displacementBias: number;
 
 	/**
+	 * The far value of the point light's internal shadow camera.
 	 * @default 1000
 	 */
 	farDistance: number;
 
 	/**
+	 * The near value of the point light's internal shadow camera.
 	 * @default 1
 	 */
 	nearDistance: number;
@@ -1239,11 +1303,14 @@ export interface MeshDistanceMaterial extends Material {
 	referencePosition: Vector3;
 
 	/**
+	 * Whether the material is affected by fog. Default is *false*.
 	 * @default false
 	 */
 	fog: boolean;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshDistanceMaterialParameters): void;
 }
@@ -1252,78 +1319,112 @@ export interface MeshDistanceMaterial extends Material {
  */
 export interface MeshLambertMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 
 	/**
+	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
+	 * Default is black.
 	 */
 	emissive?: ColorRepresentation | undefined;
 
 	/**
+	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 */
 	emissiveIntensity?: number | undefined;
 
 	/**
+	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
 	 */
 	emissiveMap?: Texture | null | undefined;
 
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 */
 	lightMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 */
 	lightMapIntensity?: number | undefined;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 */
 	aoMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 */
 	aoMapIntensity?: number | undefined;
 
 	/**
+	 * Specular map used by the material. Default is null.
 	 */
 	specularMap?: Texture | null | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * The environment map. Default is null.
 	 */
 	envMap?: Texture | null | undefined;
 
 	/**
+	 * How to combine the result of the surface's color with the environment map, if any.
+	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials),
+	 * [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). If mix is chosen, the *.reflectivity* is used to blend between the two colors.
 	 */
 	combine?: Combine | undefined;
 
 	/**
+	 * How much the environment map affects the surface; also see *.combine*.
+	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 */
 	reflectivity?: number | undefined;
 
 	/**
+	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 */
 	refractionRatio?: number | undefined;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
 	wireframe?: boolean | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap?: string | undefined;
 
 	/**
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin?: string | undefined;
 }
@@ -1341,101 +1442,137 @@ export interface MeshLambertMaterial extends Material {
 	type: string;
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default new THREE.Color( 0xffffff )
 	 */
 	color: Color;
 
 	/**
+	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
+	 * Default is black.
 	 * @default new THREE.Color( 0x000000 )
 	 */
 	emissive: Color;
 
 	/**
+	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 * @default 1
 	 */
 	emissiveIntensity: number;
 
 	/**
+	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
 	 * @default null
 	 */
 	emissiveMap: Texture | null;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 * @default null
 	 */
 	lightMap: Texture | null;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 * @default 1
 	 */
 	lightMapIntensity: number;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 * @default null
 	 */
 	aoMap: Texture | null;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 * @default 1
 	 */
 	aoMapIntensity: number;
 
 	/**
+	 * Specular map used by the material. Default is null.
 	 * @default null
 	 */
 	specularMap: Texture | null;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
 
 	/**
+	 * The environment map. Default is null.
 	 * @default null
 	 */
 	envMap: Texture | null;
 
 	/**
+	 * How to combine the result of the surface's color with the environment map, if any.
+	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials),
+	 * [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). If mix is chosen, the *.reflectivity* is used to blend between the two colors.
 	 * @default THREE.MultiplyOperation
 	 */
 	combine: Combine;
 
 	/**
+	 * How much the environment map affects the surface; also see *.combine*.
+	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 * @default 1
 	 */
 	reflectivity: number;
 
 	/**
+	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 * @default 0.98
 	 */
 	refractionRatio: number;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 * @default false
 	 */
 	wireframe: boolean;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinecap: string;
 
 	/**
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinejoin: string;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshLambertMaterialParameters): void;
 }
@@ -1444,54 +1581,73 @@ export interface MeshLambertMaterial extends Material {
  */
 export interface MeshMatcapMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 
 	/**
+	 * The matcap map. Default is null.
 	 */
 	matcap?: Texture | null | undefined;
 
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 */
 	bumpMap?: Texture | null | undefined;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 */
 	bumpScale?: number | undefined;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 */
 	normalMap?: Texture | null | undefined;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 */
 	normalMapType?: NormalMapTypes | undefined;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 */
 	normalScale?: Vector2 | undefined;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
 	displacementMap?: Texture | null | undefined;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 */
 	displacementScale?: number | undefined;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 */
 	displacementBias?: number | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
 	 */
 	flatShading?: boolean | undefined;
 }
@@ -1514,61 +1670,79 @@ export interface MeshMatcapMaterial extends Material {
 	defines: { [key: string]: any };
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default new THREE.Color( 0xffffff )
 	 */
 	color: Color;
 
 	/**
+	 * The matcap map. Default is null.
 	 * @default null
 	 */
 	matcap: Texture | null;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 * @default null
 	 */
 	bumpMap: Texture | null;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 * @default 1
 	 */
 	bumpScale: number;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 * @default null
 	 */
 	normalMap: Texture | null;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 * @default THREE.TangentSpaceNormalMap
 	 */
 	normalMapType: NormalMapTypes;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 * @default new Vector2( 1, 1 )
 	 */
 	normalScale: Vector2;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 * @default null
 	 */
 	displacementMap: Texture | null;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * @default 1
 	 */
 	displacementScale: number;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 * @default 0
 	 */
 	displacementBias: number;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
@@ -1580,6 +1754,8 @@ export interface MeshMatcapMaterial extends Material {
 	flatShading: boolean;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshMatcapMaterialParameters): void;
 }
@@ -1588,46 +1764,63 @@ export interface MeshMatcapMaterial extends Material {
  */
 export interface MeshNormalMaterialParameters extends MaterialParameters {
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 */
 	bumpMap?: Texture | null | undefined;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 */
 	bumpScale?: number | undefined;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 */
 	normalMap?: Texture | null | undefined;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 */
 	normalMapType?: NormalMapTypes | undefined;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 */
 	normalScale?: Vector2 | undefined;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
 	displacementMap?: Texture | null | undefined;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 */
 	displacementScale?: number | undefined;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 */
 	displacementBias?: number | undefined;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
 	wireframe?: boolean | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
 	 */
 	flatShading?: boolean | undefined;
 }
@@ -1645,51 +1838,67 @@ export interface MeshNormalMaterial extends Material {
 	type: string;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 * @default null
 	 */
 	bumpMap: Texture | null;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 * @default 1
 	 */
 	bumpScale: number;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 * @default null
 	 */
 	normalMap: Texture | null;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 * @default THREE.TangentSpaceNormalMap
 	 */
 	normalMapType: NormalMapTypes;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 * @default new THREE.Vector2( 1, 1 )
 	 */
 	normalScale: Vector2;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 * @default null
 	 */
 	displacementMap: Texture | null;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * @default 1
 	 */
 	displacementScale: number;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 * @default 0
 	 */
 	displacementBias: number;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 * @default false
 	 */
 	wireframe: boolean;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
@@ -1701,6 +1910,8 @@ export interface MeshNormalMaterial extends Material {
 	flatShading: boolean;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshNormalMaterialParameters): void;
 }
@@ -1709,126 +1920,180 @@ export interface MeshNormalMaterial extends Material {
  */
 export interface MeshPhongMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 
 	/**
+	 * Specular color of the material. Default is a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) set to *0x111111* (very dark grey).
+	 * This defines how shiny the material is and the color of its shine.
 	 */
 	specular?: ColorRepresentation | undefined;
 
 	/**
+	 * How shiny the *.specular* highlight is; a higher value gives a sharper highlight. Default is *30*.
 	 */
 	shininess?: number | undefined;
 
 	/**
+	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
+	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.
+	 * If the material's [transparent](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) property is not set to *true*, the material will remain fully opaque and this value will only affect its color. 
+	 * Default is *1.0*.
 	 */
 	opacity?: number | undefined;
 
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 */
 	lightMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 */
 	lightMapIntensity?: number | undefined;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 */
 	aoMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 */
 	aoMapIntensity?: number | undefined;
 
 	/**
+	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
+	 * Default is black.
 	 */
 	emissive?: ColorRepresentation | undefined;
 
 	/**
+	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 */
 	emissiveIntensity?: number | undefined;
 
 	/**
+	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
 	 */
 	emissiveMap?: Texture | null | undefined;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 */
 	bumpMap?: Texture | null | undefined;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 */
 	bumpScale?: number | undefined;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 */
 	normalMap?: Texture | null | undefined;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 */
 	normalMapType?: NormalMapTypes | undefined;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 */
 	normalScale?: Vector2 | undefined;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
 	displacementMap?: Texture | null | undefined;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 */
 	displacementScale?: number | undefined;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 */
 	displacementBias?: number | undefined;
 
 	/**
+	 * Specular map used by the material. Default is null.
 	 */
 	specularMap?: Texture | null | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * The environment map. Default is null.
 	 */
 	envMap?: Texture | null | undefined;
 
 	/**
+	 * How to combine the result of the surface's color with the environment map, if any.
+	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials),
+	 * [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). If mix is chosen, the *.reflectivity* is used to blend between the two colors.
 	 */
 	combine?: Combine | undefined;
 
 	/**
+	 * How much the environment map affects the surface; also see *.combine*.
+	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 */
 	reflectivity?: number | undefined;
 
 	/**
+	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 */
 	refractionRatio?: number | undefined;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
 	wireframe?: boolean | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap?: string | undefined;
 
 	/**
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin?: string | undefined;
 
 	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
 	 */
 	flatShading?: boolean | undefined;
 }
@@ -1846,146 +2111,195 @@ export interface MeshPhongMaterial extends Material {
 	type: string;
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default new THREE.Color( 0xffffff )
 	 */
 	color: Color;
 
 	/**
+	 * Specular color of the material. Default is a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) set to *0x111111* (very dark grey).
+	 * This defines how shiny the material is and the color of its shine.
 	 * @default new THREE.Color( 0x111111 )
 	 */
 	specular: Color;
 
 	/**
+	 * How shiny the *.specular* highlight is; a higher value gives a sharper highlight. Default is *30*.
 	 * @default 30
 	 */
 	shininess: number;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 * @default null
 	 */
 	lightMap: Texture | null;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 * @default null
 	 */
 	lightMapIntensity: number;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 * @default null
 	 */
 	aoMap: Texture | null;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 * @default null
 	 */
 	aoMapIntensity: number;
 
 	/**
+	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
+	 * Default is black.
 	 * @default new THREE.Color( 0x000000 )
 	 */
 	emissive: Color;
 
 	/**
+	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 * @default 1
 	 */
 	emissiveIntensity: number;
 
 	/**
+	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
 	 * @default null
 	 */
 	emissiveMap: Texture | null;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 * @default null
 	 */
 	bumpMap: Texture | null;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 * @default 1
 	 */
 	bumpScale: number;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 * @default null
 	 */
 	normalMap: Texture | null;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 * @default THREE.TangentSpaceNormalMap
 	 */
 	normalMapType: NormalMapTypes;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 * @default new Vector2( 1, 1 )
 	 */
 	normalScale: Vector2;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 * @default null
 	 */
 	displacementMap: Texture | null;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * @default 1
 	 */
 	displacementScale: number;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 * @default 0
 	 */
 	displacementBias: number;
 
 	/**
+	 * Specular map used by the material. Default is null.
 	 * @default null
 	 */
 	specularMap: Texture | null;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
 
 	/**
+	 * The environment map. Default is null.
 	 * @default null
 	 */
 	envMap: Texture | null;
 
 	/**
+	 * How to combine the result of the surface's color with the environment map, if any.
+	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials),
+	 * [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). If mix is chosen, the *.reflectivity* is used to blend between the two colors.
 	 * @default THREE.MultiplyOperation
 	 */
 	combine: Combine;
 
 	/**
+	 * How much the environment map affects the surface; also see *.combine*.
+	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 * @default 1
 	 */
 	reflectivity: number;
 
 	/**
+	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 * @default 0.98
 	 */
 	refractionRatio: number;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 * @default false
 	 */
 	wireframe: boolean;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinecap: string;
 
 	/**
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinejoin: string;
@@ -2002,6 +2316,8 @@ export interface MeshPhongMaterial extends Material {
 	metal: boolean;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshPhongMaterialParameters): void;
 }
@@ -2010,34 +2326,43 @@ export interface MeshPhongMaterial extends Material {
  */
 export interface MeshPhysicalMaterialParameters extends MeshStandardMaterialParameters {
 	/**
+	 * Represents the intensity of the clear coat layer, from *0.0* to *1.0*. Use clear coat related properties to enable multilayer materials that have a thin translucent layer over the base layer. Default is *0.0*.
 	 */
 	clearcoat?: number | undefined;
 
 	/**
+	 * The red channel of this texture is multiplied against *.clearcoat*, for per-pixel control over a coating's intensity. Default is *null*.
 	 */
 	clearcoatMap?: Texture | null | undefined;
 
 	/**
+	 * Roughness of the clear coat layer, from *0.0* to *1.0*. Default is *0.0*.
 	 */
 	clearcoatRoughness?: number | undefined;
 
 	/**
+	 * The green channel of this texture is multiplied against *.clearcoatRoughness*, for per-pixel control over a coating's roughness. Default is *null*.
 	 */
 	clearcoatRoughnessMap?: Texture | null | undefined;
 
 	/**
+	 * How much *.clearcoatNormalMap* affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
 	 */
 	clearcoatNormalScale?: Vector2 | undefined;
 
 	/**
+	 * Can be used to enable independent normals for the clear coat layer. Default is *null*.
 	 */
 	clearcoatNormalMap?: Texture | null | undefined;
 
 	/**
+	 * How much the environment map affects the surface; also see *.combine*.
+	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 */
 	reflectivity?: number | undefined;
 
 	/**
+	 * Index-of-refraction for non-metallic materials, from *1.0* to *2.333*. Default is *1.5*.
 	 */
 	ior?: number | undefined;
 
@@ -2046,18 +2371,25 @@ export interface MeshPhysicalMaterialParameters extends MeshStandardMaterialPara
 	sheen?: number | undefined;
 
 	/**
+	 * The sheen tint. Default is *0xffffff*, white.
 	 */
 	sheenColor?: Color | undefined;
 
 	/**
+	 * Roughness of the sheen layer, from *0.0* to *1.0*. Default is *1.0*.
 	 */
 	sheenRoughness?: number | undefined;
 
 	/**
+	 * Degree of transmission (or optical transparency), from *0.0* to *1.0*. Default is *0.0*.
+	 * Thin, transparent or semitransparent, plastic or glass materials remain largely reflective even if they are fully transmissive.
+	 * The transmission property can be used to model these materials.
+	 * When transmission is non-zero, [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.opacity) should be set to *1*.
 	 */
 	transmission?: number | undefined;
 
 	/**
+	 * The red channel of this texture is multiplied against *.transmission*, for per-pixel control over optical transparency. Default is *null*.
 	 */
 	transmissionMap?: Texture | null | undefined;
 
@@ -2104,41 +2436,50 @@ export interface MeshPhysicalMaterial extends MeshStandardMaterial {
 	defines: { [key: string]: any };
 
 	/**
+	 * Represents the intensity of the clear coat layer, from *0.0* to *1.0*. Use clear coat related properties to enable multilayer materials that have a thin translucent layer over the base layer. Default is *0.0*.
 	 * @default 0
 	 */
 	clearcoat: number;
 
 	/**
+	 * The red channel of this texture is multiplied against *.clearcoat*, for per-pixel control over a coating's intensity. Default is *null*.
 	 * @default null
 	 */
 	clearcoatMap: Texture | null;
 
 	/**
+	 * Roughness of the clear coat layer, from *0.0* to *1.0*. Default is *0.0*.
 	 * @default 0
 	 */
 	clearcoatRoughness: number;
 
 	/**
+	 * The green channel of this texture is multiplied against *.clearcoatRoughness*, for per-pixel control over a coating's roughness. Default is *null*.
 	 * @default null
 	 */
 	clearcoatRoughnessMap: Texture | null;
 
 	/**
+	 * How much *.clearcoatNormalMap* affects the clear coat layer, from *(0,0)* to *(1,1)*. Default is *(1,1)*.
 	 * @default new THREE.Vector2( 1, 1 )
 	 */
 	clearcoatNormalScale: Vector2;
 
 	/**
+	 * Can be used to enable independent normals for the clear coat layer. Default is *null*.
 	 * @default null
 	 */
 	clearcoatNormalMap: Texture | null;
 
 	/**
+	 * How much the environment map affects the surface; also see *.combine*.
+	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 * @default 0.5
 	 */
 	reflectivity: number;
 
 	/**
+	 * Index-of-refraction for non-metallic materials, from *1.0* to *2.333*. Default is *1.5*.
 	 * @default 1.5
 	 */
 	ior: number;
@@ -2149,16 +2490,19 @@ export interface MeshPhysicalMaterial extends MeshStandardMaterial {
 	sheen: number;
 
 	/**
+	 * The sheen tint. Default is *0xffffff*, white.
 	 * @default Color( 0x000000 )
 	 */
 	sheenColor: Color;
 
 	/**
+	 * The RGB channels of this texture are multiplied against *.sheenColor*, for per-pixel control over sheen tint. Default is *null*.
 	 * @default null
 	 */
 	sheenColorMap: Texture | null;
 
 	/**
+	 * Roughness of the sheen layer, from *0.0* to *1.0*. Default is *1.0*.
 	 * @default 1.0
 	 */
 	sheenRoughness: number;
@@ -2169,11 +2513,16 @@ export interface MeshPhysicalMaterial extends MeshStandardMaterial {
 	sheenRoughnessMap: Texture | null;
 
 	/**
+	 * Degree of transmission (or optical transparency), from *0.0* to *1.0*. Default is *0.0*.
+	 * Thin, transparent or semitransparent, plastic or glass materials remain largely reflective even if they are fully transmissive.
+	 * The transmission property can be used to model these materials.
+	 * When transmission is non-zero, [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.opacity) should be set to *1*.
 	 * @default 0
 	 */
 	transmission: number;
 
 	/**
+	 * The red channel of this texture is multiplied against *.transmission*, for per-pixel control over optical transparency. Default is *null*.
 	 * @default null
 	 */
 	transmissionMap: Texture | null;
@@ -2223,114 +2572,155 @@ export interface MeshPhysicalMaterial extends MeshStandardMaterial {
  */
 export interface MeshStandardMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 
 	/**
+	 * How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse. Default is 1.0.
+	 * If roughnessMap is also provided, both values are multiplied.
 	 */
 	roughness?: number | undefined;
 
 	/**
+	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is also provided, both values are multiplied.
 	 */
 	metalness?: number | undefined;
 
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 */
 	lightMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 */
 	lightMapIntensity?: number | undefined;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 */
 	aoMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 */
 	aoMapIntensity?: number | undefined;
 
 	/**
+	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
+	 * Default is black.
 	 */
 	emissive?: ColorRepresentation | undefined;
 
 	/**
+	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 */
 	emissiveIntensity?: number | undefined;
 
 	/**
+	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
 	 */
 	emissiveMap?: Texture | null | undefined;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 */
 	bumpMap?: Texture | null | undefined;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 */
 	bumpScale?: number | undefined;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 */
 	normalMap?: Texture | null | undefined;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 */
 	normalMapType?: NormalMapTypes | undefined;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 */
 	normalScale?: Vector2 | undefined;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
 	displacementMap?: Texture | null | undefined;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 */
 	displacementScale?: number | undefined;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 */
 	displacementBias?: number | undefined;
 
 	/**
+	 * The green channel of this texture is used to alter the roughness of the material.
 	 */
 	roughnessMap?: Texture | null | undefined;
 
 	/**
+	 * The blue channel of this texture is used to alter the metalness of the material.
 	 */
 	metalnessMap?: Texture | null | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * The environment map. Default is null.
 	 */
 	envMap?: Texture | null | undefined;
 
 	/**
+	 * Scales the effect of the environment map by multiplying its color.
 	 */
 	envMapIntensity?: number | undefined;
 
 	/**
+	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 */
 	refractionRatio?: number | undefined;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
 	wireframe?: boolean | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
+	 * Define whether the material is rendered with flat shading. Default is false.
 	 */
 	flatShading?: boolean | undefined;
 }
@@ -2353,146 +2743,192 @@ export interface MeshStandardMaterial extends Material {
 	defines: { [key: string]: any };
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default new THREE.Color( 0xffffff )
 	 */
 	color: Color;
 
 	/**
+	 * How rough the material appears. 0.0 means a smooth mirror reflection, 1.0 means fully diffuse. Default is 1.0.
+	 * If roughnessMap is also provided, both values are multiplied.
 	 * @default 1
 	 */
 	roughness: number;
 
 	/**
+	 * How much the material is like a metal. Non-metallic materials such as wood or stone use 0.0, metallic use 1.0, with nothing (usually) in between. Default is 0.0. A value between 0.0 and 1.0 could be used for a rusty metal look. If metalnessMap is also provided, both values are multiplied.
 	 * @default 0
 	 */
 	metalness: number;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 * @default null
 	 */
 	lightMap: Texture | null;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 * @default 1
 	 */
 	lightMapIntensity: number;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 * @default null
 	 */
 	aoMap: Texture | null;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 * @default 1
 	 */
 	aoMapIntensity: number;
 
 	/**
+	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
+	 * Default is black.
 	 * @default new THREE.Color( 0x000000 )
 	 */
 	emissive: Color;
 
 	/**
+	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 * @default 1
 	 */
 	emissiveIntensity: number;
 
 	/**
+	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
 	 * @default null
 	 */
 	emissiveMap: Texture | null;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 * @default null
 	 */
 	bumpMap: Texture | null;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 * @default 1
 	 */
 	bumpScale: number;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 * @default null
 	 */
 	normalMap: Texture | null;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 * @default THREE.TangentSpaceNormalMap
 	 */
 	normalMapType: NormalMapTypes;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 * @default new THREE.Vector2( 1, 1 )
 	 */
 	normalScale: Vector2;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 * @default null
 	 */
 	displacementMap: Texture | null;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * @default 1
 	 */
 	displacementScale: number;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 * @default 0
 	 */
 	displacementBias: number;
 
 	/**
+	 * The green channel of this texture is used to alter the roughness of the material.
 	 * @default null
 	 */
 	roughnessMap: Texture | null;
 
 	/**
+	 * The blue channel of this texture is used to alter the metalness of the material.
 	 * @default null
 	 */
 	metalnessMap: Texture | null;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
 
 	/**
+	 * The environment map. Default is null.
 	 * @default null
 	 */
 	envMap: Texture | null;
 
 	/**
+	 * Scales the effect of the environment map by multiplying its color.
 	 * @default 1
 	 */
 	envMapIntensity: number;
 
 	/**
+	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 * @default 0.98
 	 */
 	refractionRatio: number;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 * @default false
 	 */
 	wireframe: boolean;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinecap: string;
 
 	/**
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinejoin: string;
@@ -2508,103 +2944,147 @@ export interface MeshStandardMaterial extends Material {
 	isMeshStandardMaterial: boolean;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshStandardMaterialParameters): void;
 }
 
 export interface MeshToonMaterialParameters extends MaterialParameters {
-	/** geometry color in hexadecimal. Default is 0xffffff. */
+	/** 
+	 * Color of the material, by default set to white (0xffffff).
+	 */
 	color?: ColorRepresentation | undefined;
 
 	/**
+	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
+	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.
+	 * If the material's [transparent](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) property is not set to *true*, the material will remain fully opaque and this value will only affect its color. 
+	 * Default is *1.0*.
 	 */
 	opacity?: number | undefined;
 
 	/**
+	 * Gradient map for toon shading. It's required to set [Texture.minFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.minFilter) and [Texture.magFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.magFilter) to [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) when using this type of texture. Default is *null*.
 	 */
 	gradientMap?: Texture | null | undefined;
 
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 */
 	lightMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 */
 	lightMapIntensity?: number | undefined;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 */
 	aoMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 */
 	aoMapIntensity?: number | undefined;
 
 	/**
+	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
+	 * Default is black.
 	 */
 	emissive?: ColorRepresentation | undefined;
 
 	/**
+	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 */
 	emissiveIntensity?: number | undefined;
 
 	/**
+	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
 	 */
 	emissiveMap?: Texture | null | undefined;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 */
 	bumpMap?: Texture | null | undefined;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 */
 	bumpScale?: number | undefined;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 */
 	normalMap?: Texture | null | undefined;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 */
 	normalMapType?: NormalMapTypes | undefined;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 */
 	normalScale?: Vector2 | undefined;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 */
 	displacementMap?: Texture | null | undefined;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 */
 	displacementScale?: number | undefined;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 */
 	displacementBias?: number | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
 	wireframe?: boolean | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap?: string | undefined;
 
 	/**
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin?: string | undefined;
 }
@@ -2627,121 +3107,160 @@ export interface MeshToonMaterial extends Material {
 	defines: { [key: string]: any };
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default new THREE.Color( 0xffffff )
 	 */
 	color: Color;
 
 	/**
+	 * Gradient map for toon shading. It's required to set [Texture.minFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.minFilter) and [Texture.magFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.magFilter) to [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) when using this type of texture. Default is *null*.
 	 * @default null
 	 */
 	gradientMap: Texture | null;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 * @default null
 	 */
 	lightMap: Texture | null;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 * @default 1
 	 */
 	lightMapIntensity: number;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 * @default null
 	 */
 	aoMap: Texture | null;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 * @default 1
 	 */
 	aoMapIntensity: number;
 
 	/**
+	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
+	 * Default is black.
 	 * @default new THREE.Color( 0x000000 )
 	 */
 	emissive: Color;
 
 	/**
+	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 	 * @default 1
 	 */
 	emissiveIntensity: number;
 
 	/**
+	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
 	 * @default null
 	 */
 	emissiveMap: Texture | null;
 
 	/**
+	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
+	 * Bump doesn't actually affect the geometry of the object, only the lighting. If a normal map is defined this will be ignored.
 	 * @default null
 	 */
 	bumpMap: Texture | null;
 
 	/**
+	 * How much the bump map affects the material. Typical ranges are 0-1. Default is 1.
 	 * @default 1
 	 */
 	bumpScale: number;
 
 	/**
+	 * The texture to create a normal map. The RGB values affect the surface normal for each pixel fragment and change the way the color is lit. Normal maps do not change the actual shape of the surface, only the lighting.e In case the material has a normal map authored using the left handed convention, the y component of normalScale should be negated to compensate for the different handedness.
 	 * @default null
 	 */
 	normalMap: Texture | null;
 
 	/**
+	 * The type of normal map.
+	 * Options are [THREE.TangentSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant) (default), and [THREE.ObjectSpaceNormalMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/constant).
 	 * @default THREE.TangentSpaceNormalMap
 	 */
 	normalMapType: NormalMapTypes;
 
 	/**
+	 * How much the normal map affects the material. Typical ranges are 0-1.
+	 * Default is a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) set to (1,1).
 	 * @default new THREE.Vector2( 1, 1 )
 	 */
 	normalScale: Vector2;
 
 	/**
+	 * The displacement map affects the position of the mesh's vertices. Unlike other maps which only affect the light and shade of the material the displaced vertices can cast shadows,s block other objects, and otherwise act as real geometry. The displacement texture is an image where the value of each pixel (white being the highest) is mapped against, and repositions, the vertices of the mesh.
 	 * @default null
 	 */
 	displacementMap: Texture | null;
 
 	/**
+	 * How much the displacement map affects the mesh (where black is no displacement, and white is maximum displacement). Without a displacement map set, this value is not applied.
 	 * @default 1
 	 */
 	displacementScale: number;
 
 	/**
+	 * The offset of the displacement map's values on the mesh's vertices.
+	 * Without a displacement map set, this value is not applied. Default is 0.
 	 * @default 0
 	 */
 	displacementBias: number;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 * @default false
 	 */
 	wireframe: boolean;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinecap: string;
 
 	/**
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinejoin: string;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: MeshToonMaterialParameters): void;
 }
@@ -2754,18 +3273,25 @@ export interface PointsMaterialParameters extends MaterialParameters {
 	color?: ColorRepresentation | undefined;
 
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * Sets the size of the points. Default is 1.0.
+	 * Will be capped if it exceeds the hardware dependent parameter [gl.ALIASED_POINT_SIZE_RANGE](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getParameter).
 	 */
 	size?: number | undefined;
 
 	/**
+	 * Specify whether points' size is attenuated by the camera depth. (Perspective camera only.) Default is true.
 	 */
 	sizeAttenuation?: boolean | undefined;
 }
@@ -2783,31 +3309,41 @@ export interface PointsMaterial extends Material {
 	type: string;
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default new THREE.Color( 0xffffff )
 	 */
 	color: Color;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
 
 	/**
+	 * Sets the size of the points. Default is 1.0.
+	 * Will be capped if it exceeds the hardware dependent parameter [gl.ALIASED_POINT_SIZE_RANGE](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getParameter).
 	 * @default 1
 	 */
 	size: number;
 
 	/**
+	 * Specify whether points' size is attenuated by the camera depth. (Perspective camera only.) Default is true.
 	 * @default true
 	 */
 	sizeAttenuation: boolean;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: PointsMaterialParameters): void;
 }
@@ -2828,30 +3364,41 @@ export interface ShaderMaterialParameters extends MaterialParameters {
 	uniforms?: { [uniform: string]: IUniform } | undefined;
 
 	/**
+	 * Vertex shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
 	 */
 	vertexShader?: string | undefined;
 
 	/**
+	 * Fragment shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
 	 */
 	fragmentShader?: string | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	linewidth?: number | undefined;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
 	wireframe?: boolean | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
+	 * Defines whether this material uses lighting; true to pass uniform data related to lighting to this shader. Default is false.
 	 */
 	lights?: boolean | undefined;
 
 	/**
+	 * Defines whether this material supports clipping; true to let the renderer pass the clippingPlanes uniform. Default is false.
 	 */
 	clipping?: boolean | undefined;
 
@@ -2867,6 +3414,7 @@ export interface ShaderMaterialParameters extends MaterialParameters {
 		| undefined;
 
 	/**
+	 * Defines the GLSL version of custom shader code. Only relevant for WebGL 2 in order to define whether to specify GLSL 3.0 or not. Valid values are *THREE.GLSL1* or *THREE.GLSL3*. Default is *null*.
 	 */
 	glslVersion?: GLSLVersion | undefined;
 }
@@ -2892,35 +3440,53 @@ export interface ShaderMaterial extends Material {
 	 * @default {}
 	 */
 	uniforms: { [uniform: string]: IUniform };
-	vertexShader: string;
+
+	/**
+	 * Vertex shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
+	 */
+	 vertexShader: string;
+	
+	/**
+	 * Fragment shader GLSL code.  This is the actual code for the shader. In the example above, the *vertexShader* and *fragmentShader* code is extracted from the DOM; it could be passed as a string directly or loaded via AJAX instead.
+	 */
 	fragmentShader: string;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	linewidth: number;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 * @default false
 	 */
 	wireframe: boolean;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
+	 * Whether the material is affected by fog. Default is *false*.
 	 * @default false
 	 */
 	fog: boolean;
 
 	/**
+	 * Defines whether this material uses lighting; true to pass uniform data related to lighting to this shader. Default is false.
 	 * @default false
 	 */
 	lights: boolean;
 
 	/**
+	 * Defines whether this material supports clipping; true to let the renderer pass the clippingPlanes uniform. Default is false.
 	 * @default false
 	 */
 	clipping: boolean;
@@ -2951,11 +3517,13 @@ export interface ShaderMaterial extends Material {
 	index0AttributeName: string | undefined;
 
 	/**
+	 * Can be used to force a uniform update while changing uniforms in [Object3D.onBeforeRender](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.onBeforeRender)(). Default is *false*.
 	 * @default false
 	 */
 	uniformsNeedUpdate: boolean;
 
 	/**
+	 * Defines the GLSL version of custom shader code. Only relevant for WebGL 2 in order to define whether to specify GLSL 3.0 or not. Valid values are *THREE.GLSL1* or *THREE.GLSL3*. Default is *null*.
 	 * @default null
 	 */
 	glslVersion: GLSLVersion | null;
@@ -2965,6 +3533,8 @@ export interface ShaderMaterial extends Material {
 	isShaderMaterial: boolean;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: ShaderMaterialParameters): void;
 
@@ -2977,6 +3547,7 @@ export interface ShaderMaterial extends Material {
  */
 export interface ShadowMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 }
@@ -2994,11 +3565,14 @@ export interface ShadowMaterial extends Material {
 	type: string;
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default new THREE.Color( 0x000000 )
 	 */
 	color: Color;
 
 	/**
+	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. g When set to true, the extent to which the material is transparent is controlled by setting its [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) property. 
+	 * Default is *true*.
 	 * @default true
 	 */
 	transparent: boolean;
@@ -3008,22 +3582,29 @@ export interface ShadowMaterial extends Material {
  */
 export interface SpriteMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 
 	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * The rotation of the sprite in radians. Default is 0.
 	 */
 	rotation?: number | undefined;
 
 	/**
+	 * Specify whether points' size is attenuated by the camera depth. (Perspective camera only.) Default is true.
 	 */
 	sizeAttenuation?: boolean | undefined;
 }
@@ -3041,31 +3622,40 @@ export interface SpriteMaterial extends Material {
 	type: string;
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default new THREE.Color( 0xffffff )
 	 */
 	color: Color;
 
 	/**
+	 * The color map. Default is  null.
 	 * @default null
 	 */
 	map: Texture | null;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 * @default null
 	 */
 	alphaMap: Texture | null;
 
 	/**
+	 * The rotation of the sprite in radians. Default is 0.
 	 * @default 0
 	 */
 	rotation: number;
 
 	/**
+	 * Specify whether points' size is attenuated by the camera depth. (Perspective camera only.) Default is true.
 	 * @default true
 	 */
 	sizeAttenuation: boolean;
 
 	/**
+	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. g When set to true, the extent to which the material is transparent is controlled by setting its [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) property. 
+	 * Default is *true*.
 	 * @default true
 	 */
 	transparent: boolean;
@@ -3073,6 +3663,8 @@ export interface SpriteMaterial extends Material {
 	readonly isSpriteMaterial: true;
 
 	/**
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(parameters: SpriteMaterialParameters): void;
 
