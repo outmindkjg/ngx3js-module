@@ -530,6 +530,11 @@ export interface BufferGeometry extends EventDispatcher {
 	index: BufferAttribute | null;
 
 	/**
+	 * An object with a property for each of the constructor parameters. Any modification after instantiation does not change the geometry.
+	 */
+	parameters? : any;
+
+	/**
 	 * This hashmap has as id the name of the attribute to be set and as value the [buffer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) to set it to.
 	 * Rather than accessing this property directly, use *.setAttribute* and *.getAttribute* to access attributes of this geometry.
 	 * @default {}

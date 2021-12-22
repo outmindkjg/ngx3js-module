@@ -3,20 +3,19 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [LightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow) &rarr;
 <h1>[name]</h1>
-
 	 * This is used internally by [SpotLights](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) for calculating shadows.
-
-<h2>Code Example</h2>
-
-	 * // Create a WebGLRenderer and turn on shadows in the renderer const renderer = new THREE.WebGLRenderer();
+	 * ### Code Example
+	 * ```javascript
+	 * // Create a WebGLRenderer and turn on shadows in the renderer
+	 * const renderer = new THREE.WebGLRenderer();
 	 * renderer.shadowMap.enabled = true;
-	 * renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap //Create a SpotLight and turn on shadows for the light const light = new THREE.SpotLight( 0xffffff );p light.castShadow = true; // default false scene.add( light );
+	 * renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap //Create a SpotLight and turn on shadows for the light
+	 * const light = new THREE.SpotLight( 0xffffff );p light.castShadow = true; // default false scene.add( light );
 	 * // Set up shadow properties for the light light.shadow.mapSize.width = 512; // default light.shadow.mapSize.height = 512; // default light.shadow.camera.near = 0.5; // default light.shadow.camera.far = 500; // default light.shadow.focus = 1; // default //Create a sphere that cast shadows (but does not receive them)
 	 * const sphereGeometry = new THREE.SphereGeometry( 5, 32, 32 );
 	 * const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
@@ -31,24 +30,19 @@
 	 * // Create a helper for the shadow camera (optional)
 	 * const helper = new THREE.CameraHelper( light.shadow.camera );
 	 * scene.add( helper );
-
 <h2>Constructor</h2>
 	 * The constructor creates a [param:PerspectiveCamera PerspectiveCamera] to manage the shadow's view of the world.
 <h2>Properties</h2>
 	 * See the base [LightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow) class for common properties.
-
 <h3>[property:Camera camera]</h3>
 	 * The light's view of the world. This is used to generate a depth map of the scene; objects behind other objects from the light's perspective will be in shadow.
 	 * The default is a  [PerspectiveCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera) with [near](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.near) clipping plane at 0.5.
 	 * The [fov](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.fov) will track the [angle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight.angle) property of the owning [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) via the [update](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLightShadow.update) method. Similarly, the [aspect](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.aspect) property will track the aspect of the [mapSize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow.mapSize). If the [distance](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight.distance) property of the light is set, the [far](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.far) clipping plane will track that, otherwise it defaults to 500.
-
 <h3>[property:Number focus]</h3>
 	 * Used to focus the shadow camera. The camera's field of view is set as a percentage of the spotlight's field-of-view. Range is [0, 1]. Default is 1.0.
-
 <h2>Methods</h2>
 	 * See the base [LightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow) class for common methods.
 <h2>Source</h2>
-
 	 * [src/lights/[name](https://github.com/mrdoob/three.js/blob/master/src/lights/[name].js).js]
 	</body>
 </html>

@@ -3,33 +3,26 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 <h1>Custom Blending Equation Constants</h1>
-
 	 * These work with all material types. First set the material's blending mode to THREE.CustomBlending, then set the desired Blending Equation, Source Factor and Destination Factor.
-
-<h2>Code Example</h2>
-
+	 * ### Code Example
+	 * ```javascript
 	 * const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 	 * material.blending = THREE.CustomBlending;
 	 * material.blendEquation = THREE.AddEquation; //default material.blendSrc = THREE.SrcAlphaFactor; //default material.blendDst = THREE.OneMinusSrcAlphaFactor; //default 
-<h2>Examples</h2>
+ * ### Examples
 	 * [materials / blending / custom ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_blending_custom)
 <h2>Blending Equations</h2>
-
 	 * THREE.AddEquation THREE.SubtractEquation THREE.ReverseSubtractEquation THREE.MinEquation THREE.MaxEquation 
 <h2>Source Factors</h2>
-
 	 * THREE.ZeroFactor THREE.OneFactor THREE.SrcColorFactor THREE.OneMinusSrcColorFactor THREE.SrcAlphaFactor THREE.OneMinusSrcAlphaFactor THREE.DstAlphaFactor THREE.OneMinusDstAlphaFactor THREE.DstColorFactor THREE.OneMinusDstColorFactor THREE.SrcAlphaSaturateFactor 
 <h2>Destination Factors</h2>
 	 * All of the Source Factors are valid as Destination Factors, except for 
 	 * THREE.SrcAlphaSaturateFactor
-
 <h2>Source</h2>
-
 	 * [src/constants.js](https://github.com/mrdoob/three.js/blob/master/src/constants.js)
 	</body>
 </html>

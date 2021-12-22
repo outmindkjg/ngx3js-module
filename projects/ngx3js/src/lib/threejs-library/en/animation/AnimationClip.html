@@ -3,82 +3,57 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 <h1>[name]</h1>
-
 	 * An AnimationClip is a reusable set of keyframe tracks which represent an animation.
 	 * For an overview of the different elements of the three.js animation system see the "Animation System" article in the "Next Steps" section of the manual.
-
 <h2>Constructor</h2>
-
 <h3>[name]( [param:String name], [param:Number duration], [param:Array tracks] )</h3>
 	 * @param name - a name for this clip.
 	 * @param duration - the duration of this clip (in seconds). If a negative value is passed, the duration will be calculated from the passed *tracks* array.
 	 * @param tracks - an array of [KeyframeTracks](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack).
 	 * Note: Instead of instantiating an AnimationClip directly with the constructor, you can use one of its static methods to create AnimationClips: from JSON (*.parse*), from morph target sequences (*.CreateFromMorphTargetSequence*,e *.CreateClipsFromMorphTargetSequences*) or frome animation hierarchies (*.parseAnimation*) - if your model doesn't already hold AnimationClips in its geometry's animations array.
-
 <h2>Properties</h2>
-
 <h3>[property:Number duration]</h3>
 	 * The duration of this clip (in seconds). This can be calculated from the *.tracks*
 	 * array via *.resetDuration*.
-
 <h3>[property:String name]</h3>
 	 * A name for this clip. A certain clip can be searched via *.findByName*.
-
 <h3>[property:Array tracks]</h3>
 	 * An array containing a [KeyframeTrack](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack) for each property that are animated by this clip.
-
 <h3>[property:String uuid]</h3>
 	 * The [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) of this clip instance.
 	 * It gets automatically assigned and shouldn't be edited.
-
 <h2>Methods</h2>
-
 <h3>[method:AnimationClip clone]()</h3>
 	 * @returns Returns a copy of this clip.
-
 <h3>[method:this optimize]()</h3>
 	 * Optimizes each track by removing equivalent sequential keys (which are common in morph target sequences).
-
 <h3>[method:this resetDuration]()</h3>
 	 * Sets the *.duration* of the clip to the duration of its longest [KeyframeTrack](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack).
-
 <h3>[method:Object toJSON]()</h3>
 	 * @returns Returns a JSON object representing the serialized animation clip.
-
 <h3>[method:this trim]()</h3>
 	 * Trims all tracks to the clip's duration.
-
 <h3>[method:Boolean validate]()</h3>
 	 * Performs minimal validation on each track in the clip. Returns true if all tracks are valid.
-
 <h2>Static Methods</h2>
-
 <h3>[method:Array CreateClipsFromMorphTargetSequences]( [param:String name], [param:Array morphTargetSequence], [param:Number fps], [param:Boolean noLoop] )</h3>
 	 * @returns Returns an array of new AnimationClips created from the morph target sequences of a geometry, trying to sort morph target names into animation-group-based patterns like "Walk_001, Walk_002, Run_001, Run_002 ...".
-
 <h3>[method:AnimationClip CreateFromMorphTargetSequence]( [param:String name], [param:Array morphTargetSequence], [param:Number fps], [param:Boolean noLoop] )</h3>
 	 * @returns Returns a new AnimationClip from the passed morph targets array of a geometry, taking a name and the number of frames per second.
 	 * Note: The fps parameter is required, but the animation speed can be overridden in an *AnimationAction* via [animationAction.setDuration](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationAction.setDuration).
-
 <h3>[method:AnimationClip findByName]( [param:Object objectOrClipArray], [param:String name] )</h3>
 	 * Searches for an AnimationClip by name, taking as its first parameter either an array of AnimationClips, or a mesh or geometry that contains an array named "animations".
-
 <h3>[method:AnimationClip parse]( [param:Object json] )</h3>
 	 * Parses a JSON representation of a clip and returns an AnimationClip.
-
 <h3>[method:AnimationClip parseAnimation]( [param:Object animation], [param:Array bones] )</h3>
 	 * Parses the animation.hierarchy format and returns an AnimationClip.
-
 <h3>[method:Object toJSON]( [param:AnimationClip clip] )</h3>
 	 * Takes an AnimationClip and returns a JSON object.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

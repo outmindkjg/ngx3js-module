@@ -3,48 +3,41 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Loader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Loader) &rarr;
 <h1>[name]</h1>
-
 	 * Class for loading a [texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture).
 	 * This uses the [ImageLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ImageLoader) internally for loading files.
-
-<h2>Code Example</h2>
-
+	 * ### Code Example
+	 * ```javascript
 	 * const texture = new THREE.TextureLoader().load( 'textures/land_ocean_ice_cloud_2048.jpg' );
-	 * //  immediately use the texture for material creation const material = new THREE.MeshBasicMaterial( { map: texture } );
-
+	 * // immediately use the texture for material creation
+	 * const material = new THREE.MeshBasicMaterial( { map: texture } );
 <h2>Code Example with Callbacks</h2>
-
-	 * //  instantiate a loader const loader = new THREE.TextureLoader();
-	 * //  load a resource loader.load(
-	 * //  resource URL
+	 * // instantiate a loader
+	 * const loader = new THREE.TextureLoader();
+	 * // load a resource
+	 * loader.load(
+	 * // resource URL
 	 * 'textures/land_ocean_ice_cloud_2048.jpg',
-	 * //  onLoad callback function ( texture ) {k // in this example we create the material when the texture is lod const material = new THREE.MeshBasicMaterial( {
+	 * function ( texture ) {k // in this example we create the material when the texture is lod // onLoad callback 
+	 * const material = new THREE.MeshBasicMaterial( {
 	 * map: texture  } );
-},
-	 * //  onProgress callback currently not supported undefined,
-	 * //  onError callback function ( err ) {
+	 * },
+	 * // onProgress callback currently not supported undefined,
+	 * function ( err ) { // onError callback
 	console.error( 'An error happened.' );
-}
-);
-
-
+	 * }
+	 * );
 	 * Please note three.js r84 dropped support for TextureLoader progress events. For a TextureLoader that supports progress events, see [this thread](https://github.com/mrdoob/three.js/issues/10439#issuecomment-293260145).
-
-<h2>Examples</h2>
-
+	 * ### Examples
 	 * [geometry / cube](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_cube)
-
 <h2>Constructor</h2>
 <h3>[name]( [param:LoadingManager manager] )</h3>
 	 * @param manager - The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
 	 * Creates a new [name].
-
 <h2>Properties</h2>
 	 * See the base [Loader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Loader) class for common properties.
 <h2>Methods</h2>
@@ -56,9 +49,7 @@
 	 * @param onError - Will be called when load errors.
 	 * Begin loading from the given URL and pass the fully loaded [texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture) to onLoad. The method also returns a new texture object which can directly be used for material creation.
 	 * If you do it this way, the texture may pop up in your scene once the respective loading process is finished.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

@@ -3,20 +3,17 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) &rarr;
 <h1>[name]</h1>
 	 * A material for drawing wireframe-style geometries.
-<h2>Code Example</h2>
-
+	 * ### Code Example
+	 * ```javascript
 	 * const material = new THREE.LineBasicMaterial( {
 	 * color: 0xffffff, linewidth: 1, linecap: 'round', //ignored by WebGLRenderer linejoin:  'round' //ignored by WebGLRenderer } );
-
-<h2>Examples</h2>
-
+	 * ### Examples
 	 * [WebGL / buffergeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange)
 	 * [WebGL / buffergeometry / lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines)
 	 * [WebGL / buffergeometry / lines / indexed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines_indexed)
@@ -31,14 +28,11 @@
 	 * [WebGL / lines / sphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_sphere)
 	 * [WebGL / materials](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials)
 	 * [physics / ammo / rope](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_rope)
-
 <h2>Constructor</h2>
 <h3>[name]( [param:Object parameters] )</h3>
-
 	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-
 <h2>Properties</h2>
 	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) class for common properties.
 <h3>[property:Color color]</h3>
@@ -47,22 +41,18 @@
 	 * Controls line thickness. Default is *1*.
 	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
 	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
-
 <h3>[property:String linecap]</h3>
 	 * Define appearance of line ends. Possible values are 'butt', 'round' and 'square'.
 	 * Default is 'round'.
 	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
 	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
-
 <h3>[property:String linejoin]</h3>
 	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'. 
 	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
 	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
-
 <h2>Methods</h2>
 	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) class for common methods.
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

@@ -3,60 +3,42 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) &rarr; [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) &rarr;
 <h1>[name]</h1>
-
 	 * An extension of the [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial), providing more advanced physically-based rendering properties:
-
-
-
 	<b>Clearcoat:</b> Some materials - like car paints, carbon fiber, and wet surfaces - require a clear, reflective layer on top of another layer that may be irregular or rough. Clearcoat approximates this effect, without the need for a separate transparent surface.
-
-
 	<b>Physically-based transparency:</b> One limitation of [.opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.opacity) is that highly transparent materials are less reflective. Physically-based *.transmission*
 	provides a more realistic option for thin, transparent surfaces like glass.
-
-
 	<b>Advanced reflectivity:</b> More flexible reflectivity for non-metallic materials.
-
 </ul>
-
 	 * As a result of these complex shading features, MeshPhysicalMaterial has a higher performance cost, per pixel, than other three.js materials. Most effects are disabled by default, and add cost as they are enabled. For best results, always specify an *.envMap*
 	 * when using this material.
-
 <iframe id="scene" src="scenes/material-browser.html#MeshPhysicalMaterial"></iframe>
-<script>
-	 * //  iOS iframe auto-resize workaround if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+	 * // iOS iframe auto-resize workaround if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
 	 * const scene = document.getElementById( 'scene' );
 	 * scene.style.width = getComputedStyle( scene ).width;
 	 * scene.style.height = getComputedStyle( scene ).height;
 	 * scene.setAttribute( 'scrolling', 'no' );
-}
-</script>
-<h2>Examples</h2>
+	 * }
+ * ### Examples
 	 * [materials / variations / physical](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_physical)
 	 * [materials / physical / clearcoat](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_physical_clearcoat)
 	 * [materials / physical / reflectivity](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_physical_reflectivity)
 	 * [materials / physical / transmission](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_physical_transmission)
-
 <h2>Constructor</h2>
 <h3>[name]( [param:Object parameters] )</h3>
 	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) and [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-
 <h2>Properties</h2>
 	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) and [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) classes for common properties.
 <h3>[property:Float clearcoat]</h3>
 	 * Represents the intensity of the clear coat layer, from *0.0* to *1.0*. Use clear coat related properties to enable multilayer materials that have a thin translucent layer over the base layer. Default is *0.0*.
-
 <h3>[property:Texture clearcoatMap]</h3>
 	 * The red channel of this texture is multiplied against *.clearcoat*, for per-pixel control over a coating's intensity. Default is *null*.
-
 <h3>[property:Texture clearcoatNormalMap]</h3>
 	 * Can be used to enable independent normals for the clear coat layer. Default is *null*.
 <h3>[property:Vector2 clearcoatNormalScale]</h3>
@@ -65,50 +47,36 @@
 	 * Roughness of the clear coat layer, from *0.0* to *1.0*. Default is *0.0*.
 <h3>[property:Texture clearcoatRoughnessMap]</h3>
 	 * The green channel of this texture is multiplied against *.clearcoatRoughness*, for per-pixel control over a coating's roughness. Default is *null*.
-
 <h3>[property:Object defines]</h3>
 	 * An object of the form:
-
 	{
 	 * 'STANDARD': '' 'PHYSICAL': '',
 	};
-
 	 * This is used by the [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) for selecting shaders.
-
 <h3>[property:Float ior]</h3>
 	 * Index-of-refraction for non-metallic materials, from *1.0* to *2.333*. Default is *1.5*.
-
 <h3>[property:Float reflectivity]</h3>
 	 * Degree of reflectivity, from *0.0* to *1.0*. Default is *0.5*, which corresponds to an index-of-refraction of 1.5.
 	 * This models the reflectivity of non-metallic materials. It has no effect when [metalness](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial.metalness) is *1.0* <h3>[property:Float sheen]</h3>
 	 * The intensity of the sheen layer, from *0.0* to *1.0*. Default is *0.0*.
-
 <h3>[property:Float sheenRoughness]</h3>
 	 * Roughness of the sheen layer, from *0.0* to *1.0*. Default is *1.0*.
-
 <h3>[property:Texture sheenRoughnessMap]</h3>
 	 * The alpha channel of this texture is multiplied against *.sheenRoughness*, for per-pixel control over sheen roughness. Default is *null*.
-
 <h3>[property:Color sheenColor]</h3>
 	 * The sheen tint. Default is *0xffffff*, white.
-
 <h3>[property:Texture sheenColorMap]</h3>
 	 * The RGB channels of this texture are multiplied against *.sheenColor*, for per-pixel control over sheen tint. Default is *null*.
-
 <h3>[property:Float transmission]</h3>
 	 * Degree of transmission (or optical transparency), from *0.0* to *1.0*. Default is *0.0*.
 	 * Thin, transparent or semitransparent, plastic or glass materials remain largely reflective even if they are fully transmissive.
 	 * The transmission property can be used to model these materials.
 	 * When transmission is non-zero, [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.opacity) should be set to *1*.
-
 <h3>[property:Texture transmissionMap]</h3>
 	 * The red channel of this texture is multiplied against *.transmission*, for per-pixel control over optical transparency. Default is *null*.
-
 <h2>Methods</h2>
 	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) and [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) classes for common methods.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

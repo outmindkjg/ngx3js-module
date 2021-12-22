@@ -3,39 +3,32 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr; [Line](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line) &rarr;
 <h1>[name]</h1>
 	 * The PolarGridHelper is an object to define polar grids. Grids are two-dimensional arrays of lines.
-<h2>Code Example</h2>
-
+	 * ### Code Example
+	 * ```javascript
 	 * const radius = 10;
 	 * const radials = 16;
 	 * const circles = 8;
 	 * const divisions = 64;
 	 * const helper = new THREE.PolarGridHelper( radius, radials, circles, divisions );
 	 * scene.add( helper );
-
-<h2>Examples</h2>
-
+	 * ### Examples
 	 * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
-
 <h2>Constructor</h2>
 <h3>[name]( [param:Number radius], [param:Number radials], [param:Number circles], [param:Number divisions], [param:Color color1], [param:Color color2] )</h3>
-	 * radius -- The radius of the polar grid. This can be any positive number. Default is 10.
-	 * radials -- The number of radial lines. This can be any positive integer. Default is 16.
-	 * circles -- The number of circles. This can be any positive integer. Default is 8.
-	 * divisions -- The number of line segments used for each circle. This can be any positive integer that is 3 or greater. Default is 64.
-	 * color1 -- The first color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444 
-	 * color2 -- The second color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
-
+	 * @param radiu - The radius of the polar grid. This can be any positive number. Default is 10.
+	 * @param radial - The number of radial lines. This can be any positive integer. Default is 16.
+	 * @param circle - The number of circles. This can be any positive integer. Default is 8.
+	 * @param division - The number of line segments used for each circle. This can be any positive integer that is 3 or greater. Default is 64.
+	 * @param color - The first color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444 
+	 * @param color - The second color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
 	 * Creates a new [name] of radius 'radius' with 'radials' number of radials and 'circles' number of circles, where each circle is smoothed into 'divisions' number of line segments. Colors are optional.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

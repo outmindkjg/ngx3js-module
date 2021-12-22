@@ -3,77 +3,55 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 <h1>[name]</h1>
 	 * Base class for implementing loaders.
-
 <h2>Constructor</h2>
-
 <h3>[name]( [param:LoadingManager manager] )</h3>
 	 * @param manager - The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
-
 	 * Creates a new [name].
-
 <h2>Properties</h2>
 <h3>[property:String crossOrigin]</h3>
 	 * The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
 	 * Default is *anonymous*.
-
 <h3>[property:Boolean withCredentials]</h3>
 	 * Whether the XMLHttpRequest uses credentials. See *.setWithCredentials*.
 	 * Default is *false*.
-
 <h3>[property:LoadingManager manager]</h3>
 	 * The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager)  the loader is using. Default is [DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DefaultLoadingManager).
-
 <h3>[property:String path]</h3>
 	 * The base path from which the asset will be loaded.
 	 * Default is the empty string.
-
 <h3>[property:String resourcePath]</h3>
 	 * The base path from which additional resources like textures will be loaded.
 	 * Default is the empty string.
-
 <h3>[property:Object requestHeader]</h3>
 	 * The [request header](https://developer.mozilla.org/en-US/docs/Glossary/Request_header) used in HTTP request. See *.setRequestHeader*. Default is empty object.
-
 <h2>Methods</h2>
 <h3>[method:undefined load]()</h3>
 	 * This method needs to be implement by all concrete loaders. It holds the logic for loading the asset from the backend.
-
 <h3>[method:Promise loadAsync]( [param:String url], [param:Function onProgress] )</h3>
 	 * @param url - A string containing the path/URL of the file to be loaded.
 	 * @param onProgress - A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, that contains .[total](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) and .[loaded](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) bytes. If the server does not set the Content-Length header; .[total](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) will be 0.
-
 	 * This method is equivalent to *.load*, but returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
-
 	 * [onLoad](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Function) is handled by [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve) and [onError](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Function) is handled by [Promise.reject](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject).
-
 <h3>[method:undefined parse]()</h3>
 	 * This method needs to be implement by all concrete loaders. It holds the logic for parsing the asset into three.js entities.
-
 <h3>[method:this setCrossOrigin]( [param:String crossOrigin] )</h3>
 	 * @param crossOrigin - The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.
-
 <h3>[method:this setWithCredentials]( [param:Boolean value] )</h3>
 	 * Whether the XMLHttpRequest uses credentials such as cookies, authorization headers or TLS client certificates. See [XMLHttpRequest.withCredentials](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials).
 	 * Note that this has no effect if you are loading files locally or from the same domain.
-
 <h3>[method:this setPath]( [param:String path] )</h3>
 	 * @param path - Set the base path for the asset.
-
 <h3>[method:this setResourcePath]( [param:String resourcePath] )</h3>
 	 * @param resourcePath - Set the base path for dependent resources like textures.
-
 <h3>[method:this setRequestHeader]( [param:Object requestHeader] )</h3>
 	 * @param requestHeader - key: The name of the header whose value is to be set. value: The value to set as the body of the header.
 	 * Set the [request header](https://developer.mozilla.org/en-US/docs/Glossary/Request_header) used in HTTP request.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

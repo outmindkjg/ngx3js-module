@@ -3,18 +3,15 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 <h1>[name]</h1>
-
 	 * A class representing a 4x4 [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics)).
 	 * The most common use of a 4x4 matrix in 3D computer graphics is as a [Transformation Matrix](https://en.wikipedia.org/wiki/Transformation_matrix).a For an introduction to transformation matrices as used in WebGL, check out [this tutorial](http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices).
 	 * This allows a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) representing a point in 3D space to undergo transformations such as translation, rotation, shear, scale, reflection, orthogonal or perspective projection and so on, by being multiplied by the matrix. This is known as	<em>applying</em>
 	 * the matrix to the vector.
 	 * Every [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) has three associated Matrix4s:
-
 	
 	 * [Object3D.matrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.matrix): This stores the local transform of the object. This is the object's transformation relative to its parent.
 	
@@ -27,7 +24,6 @@
 	
 </ul>
 	 * [Cameras](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera) have three additional Matrix4s:
-
 	
 	 * [Camera.matrixWorldInverse](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera.matrixWorldInverse): The view matrix - the inverse of the Camera's [matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.matrixWorld).
 	
@@ -39,28 +35,23 @@
 	
 </ul>
 	 * Note: [Object3D.normalMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.normalMatrix) is not a Matrix4, but a [Matrix3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3).
-
 <h2>A Note on Row-Major and Column-Major Ordering</h2>
 	 * The [set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/set)() method takes arguments in [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order)
 	 * order, while internally they are stored in the *.elements* array in column-major order.
-	 * This means that calling const m = new THREE.Matrix4();
+	 * This means that calling
+	 * const m = new THREE.Matrix4();
 	 * m.set( 11, 12, 13, 14,
        21, 22, 23, 24,
        31, 32, 33, 34,
        41, 42, 43, 44 );
-
 	 * will result in the *.elements* array containing:
-
 	 * m.elements = [ 11, 21, 31, 41,
                12, 22, 32, 42,
                13, 23, 33, 43,
                14, 24, 34, 44 ];
-
 	 * and internally all calculations are performed using column-major ordering. However, as the actual ordering makes no difference mathematically and most people are used to thinking about matrices in row-major order,g the three.js documentation shows matrices in row-major order. Just bear in mind that if you are reading the source code, you'll have to take the [transpose](https://en.wikipedia.org/wiki/Transpose) of any matrices outlined here to make sense of the calculations.
-
 <h2>Extracting position, rotation and scale</h2>
 	 * There are several options available for extracting position, rotation and scale from a Matrix4.
-
 	
 	 * [Vector3.setFromMatrixPosition](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3.setFromMatrixPosition): can be used to extract the translation component.
 	
@@ -74,11 +65,8 @@
 *.decompose* can be used to extract position, rotation and scale all at once.
 	
 </ul>
-
 <h2>Constructor</h2>
-
 <h3>[name]()</h3>
-
 	 * Creates and initializes the [name] to the 4x4
 	 * [identity matrix](https://en.wikipedia.org/wiki/Identity_matrix).
 	
@@ -86,53 +74,40 @@
 <h3>[property:Array elements]</h3>
 	 * A [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order)
  list of matrix values.
-
-
 <h2>Methods</h2>
 <h3>[method:Matrix4 clone]()</h3>
 	 * Creates a new Matrix4 with identical *.elements* to this one.
 <h3>[method:this compose]( [param:Vector3 position], [param:Quaternion quaternion], [param:Vector3 scale] )</h3>
 	 * Sets this matrix to the transformation composed of [position](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3),
 	 * [quaternion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) and [scale](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-
 <h3>[method:this copy]( [param:Matrix4 m] )</h3>
 	 * Copies the *.elements* of matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) into this matrix.
 <h3>[method:this copyPosition]( [param:Matrix4 m] )</h3>
 	 * Copies the translation component of the supplied matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) into this matrix's translation component.
-
 <h3>[method:this decompose]( [param:Vector3 position], [param:Quaternion quaternion], [param:Vector3 scale] )</h3>
 	 * Decomposes this matrix into its [position](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3), [quaternion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) and [scale](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) components.
 	 * Note: Not all matrices are decomposable in this way. For example, if an object has a non-uniformly scaled parent, then the object's world matrix may not be decomposable, and this method may not be appropriate.
-
 <h3>[method:Float determinant]()</h3>
 	 * Computes and returns the [determinant](https://en.wikipedia.org/wiki/Determinant) of this matrix.
 	 * Based on the method outlined [here](http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm).
-
 <h3>[method:Boolean equals]( [param:Matrix4 m] )</h3>
 	 * @returns Return true if this matrix and [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) are equal.
 <h3>[method:this extractBasis]( [param:Vector3 xAxis], [param:Vector3 yAxis], [param:Vector3 zAxis] )</h3>
 	 * Extracts the [basis](https://en.wikipedia.org/wiki/Basis_(linear_algebra)) of this matrix into the three axis vectors provided. If this matrix is:
-
 	 * a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p 
 	 * then the [xAxis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3), [yAxis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3), [zAxis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) will be set to:
-
 	 * xAxis = (a, e, i)
 	 * yAxis = (b, f, j)
 	 * zAxis = (c, g, k)
-
-
 <h3>[method:this extractRotation]( [param:Matrix4 m] )</h3>
 	 * Extracts the rotation component of the supplied matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) into this matrix's rotation component.
-
 <h3>[method:this fromArray]( [param:Array array], [param:Integer offset] )</h3>
 	 * @param array - the array to read the elements from.
 	 * @param offset - ( optional ) offset into the array. Default is 0.
 	 * Sets the elements of this matrix based on an [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) in [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order) format.
-
 <h3>[method:this invert]()</h3>
 	 * Inverts this matrix, using the [analytic method](https://en.wikipedia.org/wiki/Invertible_matrix#Analytic_solution).
 	 * You can not invert with a determinant of zero. If you attempt this, the method produces a zero matrix instead.
-
 <h3>[method:Float getMaxScaleOnAxis]()</h3>
 	 * Gets the maximum scale value of the 3 axes.
 <h3>[method:this identity]()</h3>
@@ -140,89 +115,66 @@
 <h3>[method:this lookAt]( [param:Vector3 eye], [param:Vector3 target], [param:Vector3 up], )</h3>
 	 * Constructs a rotation matrix, looking from [eye](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) towards [target](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)
 	 * oriented by the [up](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) vector.
-
 <h3>[method:this makeRotationAxis]( [param:Vector3 axis], [param:Float theta] )</h3>
 	 * @param axis - Rotation axis, should be normalized.
 	 * @param theta - Rotation angle in radians.
 	 * Sets this matrix as rotation transform around [axis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) by [theta](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) radians.
 	 * This is a somewhat controversial but mathematically sound alternative to rotating via [Quaternions](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternions).
 	 * See the discussion [here](https://www.gamedev.net/articles/programming/math-and-physics/do-we-really-need-quaternions-r1199).
-
 <h3>[method:this makeBasis]( [param:Vector3 xAxis], [param:Vector3 yAxis], [param:Vector3 zAxis] )</h3>
 	 * Set this to the [basis](https://en.wikipedia.org/wiki/Basis_(linear_algebra)) matrix consisting of the three provided basis vectors:
-
 	 * xAxis.x, yAxis.x, zAxis.x, 0, xAxis.y, yAxis.y, zAxis.y, 0, xAxis.z, yAxis.z, zAxis.z, 0,
 	 * 0,       0,       0,       1
-
-
 <h3>[method:this makePerspective]( [param:Float left], [param:Float right], [param:Float top], [param:Float bottom], [param:Float near], [param:Float far] )</h3>
 	 * Creates a [perspective projection](https://en.wikipedia.org/wiki/3D_projection#Perspective_projection) matrix.
 	 * This is used internally by [PerspectiveCamera.updateProjectionMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera.updateProjectionMatrix)()
-
 <h3>[method:this makeOrthographic]( [param:Float left], [param:Float right], [param:Float top], [param:Float bottom], [param:Float near], [param:Float far] )</h3>
 	 * Creates an [orthographic projection](https://en.wikipedia.org/wiki/Orthographic_projection) matrix.
 	 * This is used internally by [OrthographicCamera.updateProjectionMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera.updateProjectionMatrix)().
-
 <h3>[method:this makeRotationFromEuler]( [param:Euler euler] )</h3>
 	 * Sets the rotation component (the upper left 3x3 matrix) of this matrix to the rotation specified by the given [Euler Angle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler).
 	 * The rest of the matrix is set to the identity. Depending on the [order](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler.order) of the [euler](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler), there are six possible outcomes.
 	 * See [this page](https://en.wikipedia.org/wiki/Euler_angles#Rotation_matrix) for a complete list.
-
 <h3>[method:this makeRotationFromQuaternion]( [param:Quaternion q] )</h3>
 	 * Sets the rotation component of this matrix to the rotation specified by [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion), as outlined [here](https://en.wikipedia.org/wiki/Rotation_matrix#Quaternion).
 	 * The rest of the matrix is set to the identity. So, given [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) = w + xi + yj + zk, the resulting matrix will be:
-
 	 * 1-2y²-2z²    2xy-2zw    2xz+2yw    0
 	 * 2xy+2zw      1-2x²-2z²  2yz-2xw    0
 	 * 2xz-2yw      2yz+2xw    1-2x²-2y²  0
 	 * 0            0          0          1
-
-
 <h3>[method:this makeRotationX]( [param:Float theta] )</h3>
 	 * @param theta - Rotation angle in radians.
 	 * Sets this matrix as a rotational transformation around the X axis by [theta](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) (&theta;) radians.
 	 * The resulting matrix will be:
-
 	 * 1 0      0        0
 	 * 0 cos(&theta;) -sin(&theta;)  0
 	 * 0 sin(&theta;) cos(&theta;)   0
 	 * 0 0      0        1
-
-
 <h3>[method:this makeRotationY]( [param:Float theta] )</h3>
 	 * @param theta - Rotation angle in radians.
 	 * Sets this matrix as a rotational transformation around the Y axis by [theta](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) (&theta;) radians.
 	 * The resulting matrix will be:
-
 	 * cos(&theta;)  0 sin(&theta;) 0
 	 * 0       1 0      0
 -sin(&theta;) 0 cos(&theta;) 0
 	 * 0       0 0      1
-
-
 <h3>[method:this makeRotationZ]( [param:Float theta] )</h3>
 	 * @param theta - Rotation angle in radians.
 	 * Sets this matrix as a rotational transformation around the Z axis by [theta](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) (&theta;) radians.
 	 * The resulting matrix will be:
-
-	 * cos(&theta;) -sin(&theta;) 0 0
+	 * @param cos -sin(&theta;) 0 0
 	 * sin(&theta;) cos(&theta;)  0 0
 	 * 0      0       1 0
 	 * 0      0       0 1
-
-
 <h3>[method:this makeScale]( [param:Float x], [param:Float y], [param:Float z] )</h3>
 	 * @param x - the amount to scale in the X axis.
 	 * @param y - the amount to scale in the Y axis.
 	 * @param z - the amount to scale in the Z axis.
 	 * Sets this matrix as scale transform:
-
 	 * x, 0, 0, 0,
 	 * 0, y, 0, 0,
 	 * 0, 0, z, 0,
 	 * 0, 0, 0, 1
-
-
 <h3>[method:this makeShear]( [param:Float xy], [param:Float xz], [param:Float yx], [param:Float yz], [param:Float zx], [param:Float zy] )</h3>
 	 * @param xy - the amount to shear X by Y.
 	 * @param xz - the amount to shear X by Z.
@@ -231,23 +183,17 @@
 	 * @param zx - the amount to shear Z by X.
 	 * @param zy - the amount to shear Z by Y.
 	 * Sets this matrix as a shear transform:
-
 	 * 1,   yx,  zx,  0, xy,   1,  zy,  0, xz,  yz,   1,  0,
 	 * 0,    0,   0,  1
-
-
 <h3>[method:this makeTranslation]( [param:Float x], [param:Float y], [param:Float z] )</h3>
 	 * @param x - the amount to translate in the X axis.
 	 * @param y - the amount to translate in the Y axis.
 	 * @param z - the amount to translate in the Z axis.
 	 * Sets this matrix as a translation transform:
-
 	 * 1, 0, 0, x,
 	 * 0, 1, 0, y,
 	 * 0, 0, 1, z,
 	 * 0, 0, 0, 1
-
-
 <h3>[method:this multiply]( [param:Matrix4 m] )</h3>
 	 * Post-multiplies this matrix by [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
 <h3>[method:this multiplyMatrices]( [param:Matrix4 a], [param:Matrix4 b] )</h3>
@@ -261,27 +207,21 @@
 <h3>[method:this set]( [param:Float n11], [param:Float n12], [param:Float n13], [param:Float n14], [param:Float n21], [param:Float n22], [param:Float n23], [param:Float n24], [param:Float n31], [param:Float n32], [param:Float n33], [param:Float n34], [param:Float n41], [param:Float n42], [param:Float n43], [param:Float n44] )</h3>
 	 * Set the *.elements* of this matrix to the supplied row-major values [n11](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float),
 	 * [n12](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), ... [n44](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-
 <h3>[method:this setFromMatrix3]( [param:Matrix3 m] )</h3>
 	 * Set the upper 3x3 elements of this matrix to the values of the Matrix3 [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3).
 <h3>[method:this setPosition]( [param:Vector3 v] )</h3>
 <h3>[method:this setPosition]( [param:Float x], [param:Float y], [param:Float z] ) // optional API</h3>
 	 * Sets the position component for this matrix from vector [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3), without affecting the rest of the matrix - i.e. if the matrix is currently:
-
 	 * a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p 
 	 * This becomes:
-
 	 * a, b, c, v.x, e, f, g, v.y, i, j, k, v.z, m, n, o, p 
-
 <h3>[method:Array toArray]( [param:Array array], [param:Integer offset] )</h3>
 	 * @param array - array to store the resulting vector in.
 	 * @param offset - offset in the array at which to put the result.
 	 * Writes the elements of this matrix to an array in [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order) format.
-
 <h3>[method:this transpose]()</h3>
 	 * [Transposes](https://en.wikipedia.org/wiki/Transpose) this matrix.
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

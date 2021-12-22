@@ -3,7 +3,6 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
@@ -15,17 +14,14 @@
 	 * @param min - Minimum value.
 	 * @param max - Maximum value.
 	 * Clamps the [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) to be between [min](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) and [max](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-
 <h3>[method:Float degToRad]( [param:Float degrees] )</h3>
 	 * Converts degrees to radians.
 <h3>[method:Integer euclideanModulo]( [param:Integer n], [param:Integer m] )</h3>
 	 * @param n - Integers Computes the Euclidean modulo of [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) % [n](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer), that is: ( ( n % m ) + m ) % m
 	
-
 <h3>[method:UUID generateUUID]( )</h3>
 	 * Generate a [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 	 * (universally unique identifier).
-
 <h3>[method:Boolean isPowerOfTwo]( [param:Number n] )</h3>
 	 * @returns Return *true* if [n](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) is a power of 2.
 <h3>[method:Float inverseLerp]( [param:Float x], [param:Float y], [param:Float value] )</h3>
@@ -33,7 +29,6 @@
 	 * @param y - End point.
 	 * @param value - A value between start and end.
 	 * @returns Returns the percentage in the closed interval [0, 1] of the given value between the start and end point.
-
 <h3>[method:Float lerp]( [param:Float x], [param:Float y], [param:Float t] )</h3>
 	 * @param x - Start point. 
 	 * @param y - End point. 
@@ -41,7 +36,6 @@
 	 * @returns Returns a value [linearly interpolated](https://en.wikipedia.org/wiki/Linear_interpolation)
 	 * from two known points based on the given interval - [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) = 0 will return [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
 	 * and [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) = 1 will return [y](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-
 <h3>[method:Float damp]( [param:Float x], [param:Float y], [param:Float lambda], [param:Float dt] )</h3>
 	 * @param x - Current point. 
 	 * @param y - Target point. 
@@ -49,7 +43,6 @@
 	 * @param dt - Delta time in seconds.
 	 * Smoothly interpolate a number from [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) toward [y](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) in a spring-like manner using the [dt](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) to maintain frame rate independent movement.
 	 * For details, see [Frame rate independent damping using lerp](http://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/).
-
 <h3>[method:Float mapLinear]( [param:Float x], [param:Float a1], [param:Float a2], [param:Float b1], [param:Float b2] )</h3>
 	 * @param x - Value to be mapped.
 	 * @param a1 - Minimum value for range A.
@@ -57,7 +50,6 @@
 	 * @param b1 - Minimum value for range B.
 	 * @param b2 - Maximum value for range B.
 	 * Linear mapping of [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) from range [[a1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [a2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)] to range [[b1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)].
-
 <h3>[method:Float pingpong]( [param:Float x], [param:Float length] )</h3>
 	 * @param x - The value to pingpong.
 	 * @param length - The positive value the function will pingpong to. Default is 1.
@@ -82,23 +74,19 @@
 	 * @param max - Any x value above max will be 1.
 	 * @returns Returns a value between 0-1 that represents the percentage that x has moved between min and max, but smoothed or slowed down the closer X is to the min and max.
 	 * See [Smoothstep](http://en.wikipedia.org/wiki/Smoothstep) for details.
-
 <h3>[method:Float smootherstep]( [param:Float x], [param:Float min], [param:Float max] )</h3>
 	 * @param x - The value to evaluate based on its position between min and max. 
 	 * @param min - Any x value below min will be 0.
 	 * @param max - Any x value above max will be 1.
 	 * @returns Returns a value between 0-1. A [variation on smoothstep](https://en.wikipedia.org/wiki/Smoothstep#Variations)
 	 * that has zero 1st and 2nd order derivatives at x=0 and x=1.
-
 <h3>[method:undefined setQuaternionFromProperEuler]( [param:Quaternion q], [param:Float a], [param:Float b], [param:Float c], [param:String order] )</h3>
 	 * @param q - the rotation applied to the first axis, in radians 
 	 * @param b - the rotation applied to the second axis, in radians 
 	 * @param c - the rotation applied to the third axis, in radians 
 	 * @param order - a string specifying the axes order: 'XYX', 'XZX', 'YXY', 'YZY', 'ZXZ', or 'ZYZ' Sets quaternion [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) from the [intrinsic Proper Euler Angles](http://en.wikipedia.org/wiki/Euler_angles) defined by angles [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and [c](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and order [order](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String).
 	 * Rotations are applied to the axes in the order specified by [order](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String): rotation by angle [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) is applied first, then by angle [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), then by angle [c](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float). Angles are in radians.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

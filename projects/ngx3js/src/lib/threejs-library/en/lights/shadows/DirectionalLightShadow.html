@@ -3,22 +3,21 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [LightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow) &rarr;
 <h1>[name]</h1>
-
 	 * This is used internally by [DirectionalLights](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DirectionalLight) for calculating shadows.
 	 * Unlike the other shadow classes, this uses an [OrthographicCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera) to calculate the shadows, rather than a [PerspectiveCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera). This is because light rays from a [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DirectionalLight)
 	 * are parallel.
-
-<h2>Code Example</h2>
-
-	 * // Create a WebGLRenderer and turn on shadows in the renderer const renderer = new THREE.WebGLRenderer();
+	 * ### Code Example
+	 * ```javascript
+	 * // Create a WebGLRenderer and turn on shadows in the renderer
+	 * const renderer = new THREE.WebGLRenderer();
 	 * renderer.shadowMap.enabled = true;
-	 * renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap //Create a DirectionalLight and turn on shadows for the light const light = new THREE.DirectionalLight( 0xffffff, 1, 100 );p light.position.set( 0, 1, 0 ); //defaultp light.castShadow = true; // default false scene.add( light );
+	 * renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap //Create a DirectionalLight and turn on shadows for the light
+	 * const light = new THREE.DirectionalLight( 0xffffff, 1, 100 );p light.position.set( 0, 1, 0 ); //defaultp light.castShadow = true; // default false scene.add( light );
 	 * // Set up shadow properties for the light light.shadow.mapSize.width = 512; // default light.shadow.mapSize.height = 512; // default light.shadow.camera.near = 0.5; // default light.shadow.camera.far = 500; // default //Create a sphere that cast shadows (but does not receive them)
 	 * const sphereGeometry = new THREE.SphereGeometry( 5, 32, 32 );
 	 * const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
@@ -33,25 +32,19 @@
 	 * // Create a helper for the shadow camera (optional)
 	 * const helper = new THREE.CameraHelper( light.shadow.camera );
 	 * scene.add( helper );
-
 <h2>Constructor</h2>
 <h3>[name]( )</h3>
 	 * Creates a new [name]. This is not intended to be called directly - it is called internally by [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DirectionalLight).
-
 <h2>Properties</h2>
 	 * See the base [LightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow) class for common properties.
-
 <h3>[property:Camera camera]</h3>
 	 * The light's view of the world. This is used to generate a depth map of the scene; objects behind other objects from the light's perspective will be in shadow.
 	 * The default is an [OrthographicCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera) with [left](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera.left) and [bottom](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera.bottom) set to -5,  [right](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera.right)
 	 * and  [top](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera.top) set to 5, the [near](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera.near)
 	 * clipping plane at 0.5 and the [far](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera.far) clipping plane at 500.
-
 <h2>Methods</h2>
 	 * See the base [LightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow) class for common methods.
-
 <h2>Source</h2>
-
 	 * [src/lights/[name](https://github.com/mrdoob/three.js/blob/master/src/lights/[name].js).js]
 	</body>
 </html>

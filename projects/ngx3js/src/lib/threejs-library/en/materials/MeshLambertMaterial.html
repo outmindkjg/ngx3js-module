@@ -3,44 +3,36 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) &rarr;
 <h1>[name]</h1>
-
 	 * A material for non-shiny surfaces, without specular highlights.
 	 * The material uses a non-physically based [Lambertian](https://en.wikipedia.org/wiki/Lambertian_reflectance)
 	 * model for calculating reflectance. This can simulate some surfaces (such as untreated wood or stone) well, but cannot simulate shiny surfaces with specular highlights (such as varnished wood).
-
 	 * Shading is calculated using a [Gouraud](https://en.wikipedia.org/wiki/Gouraud_shading) shading model.
 	 * This calculates shading per vertex (i.e. in the [vertex shader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders))
 	 * and interpolates the results over the polygon's faces.
 	 * Due to the simplicity of the reflectance and illumination models, performance will be greater when using this material over the [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial),	[MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) or [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial), at the cost of some graphical accuracy.
-
 <iframe id="scene" src="scenes/material-browser.html#MeshLambertMaterial"></iframe>
-<script>
-	 * //  iOS iframe auto-resize workaround if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+	 * // iOS iframe auto-resize workaround if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
 	 * const scene = document.getElementById( 'scene' );
 	 * scene.style.width = getComputedStyle( scene ).width;
 	 * scene.style.height = getComputedStyle( scene ).height;
 	 * scene.setAttribute( 'scrolling', 'no' );
-}
-</script>
+	 * }
 <h2>Constructor</h2>
 <h3>[name]( [param:Object parameters] )</h3>
 	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-
 <h2>Properties</h2>
 	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) class for common properties.
 <h3>[property:Texture alphaMap]</h3>
 	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
 	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
 	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
-
 <h3>[property:Texture aoMap]</h3>
 	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
 	 * The aoMap requires a second set of UVs.
@@ -52,14 +44,11 @@
 	 * How to combine the result of the surface's color with the environment map, if any.
 	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials),
 	 * [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). If mix is chosen, the *.reflectivity* is used to blend between the two colors.
-
 <h3>[property:Color emissive]</h3>
 	 * Emissive (light) color of the material, essentially a solid color unaffected by other lighting.
 	 * Default is black.
-
 <h3>[property:Texture emissiveMap]</h3>
 	 * Set emissive (glow) map. Default is null. The emissive map color is modulated by the emissive color and the emissive intensity. If you have an emissive map, be sure to set the emissive color to something other than black.
-
 <h3>[property:Float emissiveIntensity]</h3>
 	 * Intensity of the emissive light. Modulates the emissive color. Default is 1.
 <h3>[property:Texture envMap]</h3>
@@ -76,7 +65,6 @@
 	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
 	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * The refraction ratio should not exceed 1. Default is *0.98*.
-
 <h3>[property:Texture specularMap]</h3>
 	 * Specular map used by the material. Default is null.
 <h3>[property:Boolean wireframe]</h3>
@@ -85,21 +73,17 @@
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
 	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
 	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
-
 <h3>[property:String wireframeLinejoin]</h3>
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
 	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
 	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
-
 <h3>[property:Float wireframeLinewidth]</h3>
 	 * Controls wireframe thickness. Default is 1.
 	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
 	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
-
 <h2>Methods</h2>
 	 * See the base [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) class for common methods.
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

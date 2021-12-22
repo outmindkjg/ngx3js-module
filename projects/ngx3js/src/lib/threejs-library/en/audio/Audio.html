@@ -3,39 +3,34 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr;
 <h1>[name]</h1>
-
 	 * Create a non-positional ( global ) audio object.
 	 * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
-
-<h2>Code Example</h2>
-
-	 * //  create an AudioListener and add it to the camera const listener = new THREE.AudioListener();
+	 * ### Code Example
+	 * ```javascript
+	 * // create an AudioListener and add it to the camera
+	 * const listener = new THREE.AudioListener();
 	 * camera.add( listener );
-	 * //  create a global audio source const sound = new THREE.Audio( listener );
-	 * //  load a sound and set it as the Audio object's buffer const audioLoader = new THREE.AudioLoader();
+	 * // create a global audio source
+	 * const sound = new THREE.Audio( listener );
+	 * // load a sound and set it as the Audio object's buffer
+	 * const audioLoader = new THREE.AudioLoader();
 	 * audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
 	 * sound.setBuffer( buffer );
 	 * sound.setLoop( true );
 	 * sound.setVolume( 0.5 );
 	 * sound.play();
 });
-
-<h2>Examples</h2>
-
+	 * ### Examples
 	 * [webaudio / sandbox ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox)
 	 * [webaudio / visualizer ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
-
 <h2>Constructor</h2>
-
 <h3>[name]( [param:AudioListener listener] )</h3>
-	 * listener - [AudioListener](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener) instance.
-
+	  * @param listener -[AudioListener](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener) instance.
 <h2>Properties</h2>
 <h3>[property:Boolean autoplay]</h3>
 	 * Whether to start playback automatically. Default is *false*.
@@ -67,84 +62,59 @@
 	 * Type of the audio source. Default is string 'empty'.
 <h3>[property:String type]</h3>
 	 * String denoting the type, set to 'Audio'.
-
 <h2>Methods</h2>
 <h3>[method:this connect]()</h3>
 	 * Connect to the [Audio.source](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.source). This is used internally on initialisation and when setting / removing filters.
-
 <h3>[method:this disconnect]()</h3>
 	 * Disconnect from the [Audio.source](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.source). This is used internally when setting / removing filters.
-
 <h3>[method:BiquadFilterNode getFilter]()</h3>
 	 * @returns Returns the first element of the [filters](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.filters) array.
-
 <h3>[method:Array getFilters]()</h3>
 	 * @returns Returns the [filters](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.filters) array.
-
 <h3>[method:Boolean getLoop]()</h3>
 	 * @returns Return the value of [source.loop](https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loop) (whether playback should loop).
-
 <h3>[method:GainNode getOutput]()</h3>
 	 * @returns Return the [gainNode](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.gain).
-
 <h3>[method:Float getPlaybackRate]()</h3>
 	 * @returns Return the value of [playbackRate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.playbackRate).
-
 <h3>[method:Float getVolume]( value )</h3>
 	 * @returns Return the current volume.
-
 <h3>[method:this play]( delay )</h3>
 	 * If [hasPlaybackControl](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.hasPlaybackControl) is true, starts playback.
-
 <h3>[method:this pause]()</h3>
 	 * If [hasPlaybackControl](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.hasPlaybackControl) is true, pauses playback.
-
 <h3>[method:undefined onEnded]()</h3>
 	 * Called automatically when playback finished.
-
 <h3>[method:this setBuffer]( audioBuffer )</h3>
 	 * Setup the [source](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.source) to the audioBuffer, and sets [sourceType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.sourceType) to 'buffer'.
 	 * If [autoplay](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.autoplay), also starts playback.
-
 <h3>[method:this setFilter]( filter )</h3>
 	 * Applies a single filter node to the audio.
-
 <h3>[method:this setFilters]( [param:Array value] )</h3>
-	 * value - arrays of filters.
+	 * @param value - arrays of filters.
 	 * Applies an array of filter nodes to the audio.
-
 <h3>[method:this setLoop]( [param:Boolean value] )</h3>
 	 * Set [source.loop](https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loop) to *value* (whether playback should loop).
-
 <h3>[method:this setLoopStart]( [param:Float value] )</h3>
 	 * Set [source.loopStart](https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loopStart) to *value*.
-
 <h3>[method:this setLoopEnd]( [param:Float value] )</h3>
 	 * Set [source.loopEnd](https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/loopEnd) to *value*.
-
 <h3>[method:this setMediaElementSource]( mediaElement )</h3>
 	 * Applies the given object of type [HTMLMediaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) as the source of this audio.
 	 * Also sets [hasPlaybackControl](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.hasPlaybackControl) to false.
-
 <h3>[method:this setMediaStreamSource]( mediaStream )</h3>
 	 * Applies the given object of type [MediaStream](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream) as the source of this audio.
 	 * Also sets [hasPlaybackControl](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.hasPlaybackControl) to false.
-
 <h3>[method:this setNodeSource]( audioNode )</h3>
 	 * Setup the [source](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.source) to the audioBuffer, and sets [sourceType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.sourceType) to 'audioNode'.
 	 * Also sets [hasPlaybackControl](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.hasPlaybackControl) to false.
-
 <h3>[method:this setPlaybackRate]( [param:Float value] )</h3>
 	 * If [hasPlaybackControl](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.hasPlaybackControl) is enabled, set the [playbackRate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.playbackRate) to *value*.
-
 <h3>[method:this setVolume]( [param:Float value] )</h3>
 	 * Set the volume.
-
 <h3>[method:this stop]()</h3>
 	 * If [hasPlaybackControl](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.hasPlaybackControl) is enabled, stops playback.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

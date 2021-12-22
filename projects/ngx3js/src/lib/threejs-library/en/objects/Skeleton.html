@@ -3,17 +3,14 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 <h1>[name]</h1>
-
 	 * Use an array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) to create a skeleton that can be used by a [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
-
-<h2>Code Example</h2>
-
-	 * //  Create a simple "arm"
+	 * ### Code Example
+	 * ```javascript
+	 * // Create a simple "arm"
 	 * const bones = [];
 	 * const shoulder = new THREE.Bone();
 	 * const elbow = new THREE.Bone();
@@ -27,38 +24,28 @@
 	 * elbow.position.y = 0;
 	 * hand.position.y = 5;
 	 * const armSkeleton = new THREE.Skeleton( bones );
-
-
 	 * See the [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh) page for an example of usage with standard [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
  
 <h2>Constructor</h2>
-
 <h3>[name]( [param:Array bones], [param:Array boneInverses] )</h3>
 	 * @param bones - The array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone). Default is an empty array.
 	 * @param boneInverses - An array of [Matrix4s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
 	 * Creates a new [name].
-
 <h2>Properties</h2>
 <h3>[property:Array bones]</h3>
 	 * The array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/bone). Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.
-
 <h3>[property:Array boneInverses]</h3>
 	 * An array of [Matrix4s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) that represent the inverse of the [matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4)
 	 * of the individual bones.
-
 <h3>[property:Float32Array boneMatrices]</h3>
 	 * The array buffer holding the bone data when using a vertex texture.
-
 <h3>[property:DataTexture boneTexture]</h3>
 	 * The [DataTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DataTexture) holding the bone data when using a vertex texture.
-
 <h3>[property:Integer boneTextureSize]</h3>
 	 * The size of the *.boneTexture*.
-
 <h2>Methods</h2>
 <h3>[method:Skeleton clone]()</h3>
 	 * @returns Returns a clone of this Skeleton object.
-
 <h3>[method:undefined calculateInverses]()</h3>
 	 * Generates the *.boneInverses* array if not provided in the constructor.
 <h3>[method:this computeBoneTexture]()</h3>
@@ -68,16 +55,12 @@
 <h3>[method:undefined update]()</h3>
 	 * Updates the [boneMatrices](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) and [boneTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DataTexture) after changing the bones.
 	 * This is called automatically by the [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) if the skeleton is used with a [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
-
 <h3>[method:Bone getBoneByName]( [param:String name] )</h3>
-	 * name -- String to match to the Bone's .name property. 
+	 * @param nam - String to match to the Bone's .name property. 
 	 * Searches through the skeleton's bone array and returns the first with a matching name.
-
 <h3>[method:undefined dispose]()</h3>
 	 * Can be used if an instance of [name] becomes obsolete in an application. The method will free internal resources.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

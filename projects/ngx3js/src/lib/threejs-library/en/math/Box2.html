@@ -3,125 +3,93 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 <h1>[name]</h1>
-
 	 * Represents an axis-aligned bounding box (AABB) in 2D space.
-
 <h2>Constructor</h2>
-
 <h3>[name]( [param:Vector2 min], [param:Vector2 max] )</h3>
 	 * @param min - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the lower (x, y) boundary of the box. Default is ( + Infinity, + Infinity ).
 	 * @param max - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the upper (x, y) boundary of the box. Default is ( - Infinity, - Infinity ).
 	 * Creates a [name] bounded by min and max.
-
 <h2>Properties</h2>
-
 <h3>[property:Vector2 min]</h3>
 	 * [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the lower (x, y) boundary of the box.
 	 * Default is ( + Infinity, + Infinity ).
-
 <h3>[property:Vector2 max]</h3>
 	 * [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the lower upper (x, y) boundary of the box.
 	 * Default is ( - Infinity, - Infinity ).
-
-
 <h2>Methods</h2>
 <h3>[method:Vector2 clampPoint]( [param:Vector2 point], [param:Vector2 target] )</h3>
 	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to clamp. 
 	 * @param target - the result will be copied into this Vector2.
 	 * [Clamps](https://en.wikipedia.org/wiki/Clamping_(graphics)) the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) within the bounds of this box.
-
 <h3>[method:Box2 clone]()</h3>
 	 * @returns Returns a new [Box2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2) with the same *.min* and *.max* as this one.
 <h3>[method:Boolean containsBox]( [param:Box2 box] )</h3>
 	 * @param box - [Box2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2) to test for inclusion.
 	 * @returns Returns true if this box includes the entirety of [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2). If this and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2) are identical, 
 	 * this function also returns true.
-
 <h3>[method:Boolean containsPoint]( [param:Vector2 point] )</h3>
 	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to check for inclusion.
 	 * @returns Returns true if the specified [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) lies within or on the boundaries of this box.
-
 <h3>[method:this copy]( [param:Box2 box] )</h3>
 	 * Copies the *.min* and *.max* from [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2) to this box.
-
 <h3>[method:Float distanceToPoint]( [param:Vector2 point] )</h3>
 	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to measure distance to.
 	 * @returns Returns the distance from any edge of this box to the specified point.
 	 * If the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) lies inside of this box, the distance will be 0.
-
 <h3>[method:Boolean equals]( [param:Box2 box] )</h3>
 	 * @param box - Box to compare with this one.
 	 * @returns Returns true if this box and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2) share the same lower and upper bounds.
-
 <h3>[method:this expandByPoint]( [param:Vector2 point] )</h3>
 	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) that should be included in the box.
 	 * Expands the boundaries of this box to include [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
-
 <h3>[method:this expandByScalar]( [param:Float scalar] )</h3>
 	 * @param scalar - Distance to expand the box by.
 	 * Expands each dimension of the box by [scalar](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float). If negative, the dimensions of the box will be contracted.
-
 <h3>[method:this expandByVector]( [param:Vector2 vector] )</h3>
 	 * @param vector - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to expand the box by.
 	 * Expands this box equilaterally by [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2). The width of this box will be expanded by the x component of [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) in both directions. The height of this box will be expanded by the y component of [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) in both directions.
-
 <h3>[method:Vector2 getCenter]( [param:Vector2 target] )</h3>
 	 * @param target - the result will be copied into this Vector2.
 	 * @returns Returns the center point of the box as a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
-
 <h3>[method:Vector2 getParameter]( [param:Vector2 point], [param:Vector2 target] ) </h3>
 	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
 	 * @param target - the result will be copied into this Vector2.
 	 * @returns Returns a point as a proportion of this box's width and height.
-
 <h3>[method:Vector2 getSize]( [param:Vector2 target] )</h3>
 	 * @param target - the result will be copied into this Vector2.
 	 * @returns Returns the width and height of this box.
-
 <h3>[method:this intersect]( [param:Box2 box] )</h3>
 	 * @param box - Box to intersect with.
 	 * @returns Returns the intersection of this and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2), setting the upper bound of this box to the lesser of the two boxes' upper bounds and the lower bound of this box to the greater of the two boxes' lower bounds.
-
 <h3>[method:Boolean intersectsBox]( [param:Box2 box] )</h3>
 	 * @param box - Box to check for intersection against.
 	 * Determines whether or not this box intersects [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2).
-
 <h3>[method:Boolean isEmpty]()</h3>
-
 <h3>[method:this makeEmpty]()</h3>
 	 * Makes this box empty.
-
 <h3>[method:this set]( [param:Vector2 min], [param:Vector2 max] )</h3>
 	 * @param min - (required ) [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the lower (x, y) boundary of the box. 
 	 * @param max - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the upper (x, y) boundary of the box. 
 	 * Sets the lower and upper (x, y) boundaries of this box.
 	 * Please note that this method only copies the values from the given objects.
-
 <h3>[method:this setFromCenterAndSize]( [param:Vector2 center], [param:Vector2 size] )</h3>
 	 * @param center - Desired center position of the box ([Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)). 
 	 * @param size - Desired x and y dimensions of the box ([Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)).
 	 * Centers this box on [center](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) and sets this box's width and height to the values specified in [size](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
-
 <h3>[method:this setFromPoints]( [param:Array points] )</h3>
 	 * @param points - Array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) that the resulting box will contain.
 	 * Sets the upper and lower bounds of this box to include all of the points in [points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array).
-
 <h3>[method:this translate]( [param:Vector2 offset] )</h3>
 	 * @param offset - Direction and distance of offset.
 	 * Adds [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to both the upper and lower bounds of this box, effectively moving this box [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) units in 2D space.
-
 <h3>[method:this union]( [param:Box2 box] )</h3>
 	 * @param box - Box that will be unioned with this box.
 	 * Unions this box with [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2), setting the upper bound of this box to the greater of the two boxes' upper bounds and the lower bound of this box to the lesser of the two boxes' lower bounds.
-
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

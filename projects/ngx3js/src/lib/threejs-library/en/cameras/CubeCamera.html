@@ -3,53 +3,46 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr;
 <h1>[name]</h1>
 	 * Creates 6 cameras that render to a [WebGLCubeRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLCubeRenderTarget).
-<h2>Code Example</h2>
-
-	 * //  Create cube render target const cubeRenderTarget = new THREE.WebGLCubeRenderTarget( 128, { format: THREE.RGBFormat, generateMipmaps: true, minFilter: THREE.LinearMipmapLinearFilter } );
-	 * //  Create cube camera const cubeCamera = new THREE.CubeCamera( 1, 100000, cubeRenderTarget );
+	 * ### Code Example
+	 * ```javascript
+	 * // Create cube render target
+	 * const cubeRenderTarget = new THREE.WebGLCubeRenderTarget( 128, { format: THREE.RGBFormat, generateMipmaps: true, minFilter: THREE.LinearMipmapLinearFilter } );
+	 * // Create cube camera
+	 * const cubeCamera = new THREE.CubeCamera( 1, 100000, cubeRenderTarget );
 	 * scene.add( cubeCamera );
-	 * //  Create car const chromeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: cubeRenderTarget.texture } );
+	 * // Create car
+	 * const chromeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: cubeRenderTarget.texture } );
 	 * const car = new Mesh( carGeometry, chromeMaterial );
 	 * scene.add( car );
-	 * //  Update the render target cube car.visible = false;
+	 * // Update the render target cube car.visible = false;
 	 * cubeCamera.position.copy( car.position );
 	 * cubeCamera.update( renderer, scene );
-	 * //  Render the scene car.visible = true;
+	 * // Render the scene car.visible = true;
 	 * renderer.render( scene, camera );
-
-<h2>Examples</h2>
-
+	 * ### Examples
 	 * [materials / cubemap / dynamic ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_cubemap_dynamic)
-
 <h2>Constructor</h2>
-
 <h3>[name]( [param:Number near], [param:Number far], [param:WebGLCubeRenderTarget renderTarget] )</h3>
-	 * near -- The near clipping distance. 
-	 * far -- The far clipping distance. 
-	 * renderTarget -- The destination cube render target.
-
+	 * @param nea - The near clipping distance. 
+	 * @param fa - The far clipping distance. 
+	 * @param renderTarge - The destination cube render target.
 	 * Constructs a CubeCamera that contains 6 [PerspectiveCameras](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera) that render to a [WebGLCubeRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLCubeRenderTarget).
-
 <h2>Properties</h2>
 	 * See the base [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) class for common properties.
 <h3>[property:WebGLCubeRenderTarget renderTarget]</h3>
 	 * The destination cube render target.
-
 <h2>Methods</h2>
 	 * See the base [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) class for common methods.
 <h3>[method:undefined update]( [param:WebGLRenderer renderer], [param:Scene scene] )</h3>
-	 * renderer -- The current WebGL renderer 
-	 * scene -- The current scene Call this to update the [renderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubeCamera.renderTarget).
-
+	 * @param rendere - The current WebGL renderer 
+	 * @param scen - The current scene Call this to update the [renderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubeCamera.renderTarget).
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

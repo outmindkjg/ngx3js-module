@@ -3,52 +3,40 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) &rarr; [Line](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line) &rarr; [LineSegments](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineSegments) &rarr;
 <h1>[name]</h1>
-
 	 * Helper object to graphically show the world-axis-aligned bounding box around an object. The actual bounding box is handled with [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3), this is just a visual helper for debugging.
 	 * It can be automatically resized with the [BoxHelper.update](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BoxHelper.update) method when the object it's created from is transformed.
 	 * Note that the object must have a [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) for this to work, so it won't work with [Sprites](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite).
-
-<h2>Code Example</h2>
-
+	 * ### Code Example
+	 * ```javascript
 	 * const sphere = new THREE.SphereGeometry();
 	 * const object = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( 0xff0000 ) );
 	 * const box = new THREE.BoxHelper( object, 0xffff00 );
 	 * scene.add( box );
-
-<h2>Examples</h2>
-
+	 * ### Examples
 	 * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
 	 * [WebGL / loader / nrrd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nrrd)
 	 * [WebGL / buffergeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange)
-
 <h2>Constructor</h2>
-
 <h3>[name]( [param:Object3D object], [param:Color color] )</h3>
-	 * [object](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D)  -- the object3D to show the world-axis-aligned boundingbox.
-	 * [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) --  hexadecimal value that defines the box's color. Default is 0xffff00.
+	 * @param object - the object3D to show the world-axis-aligned boundingbox.
+	 * @param color -  hexadecimal value that defines the box's color. Default is 0xffff00.
 	 * Creates a new wireframe box that bounds the passed object. Internally this uses [Box3.setFromObject](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3.setFromObject)
 	 * to calculate the dimensions. Note that this includes any children.
-
 <h2>Properties</h2>
 	 * See the base [LineSegments](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineSegments) class for common properties.
-
 <h2>Methods</h2>
 	 * See the base [LineSegments](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineSegments) class for common methods.
 <h3>[method:undefined update]()</h3>
 	 * Updates the helper's geometry to match the dimensions of the object, including any children. See [Box3.setFromObject](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3.setFromObject).
-
 <h3>[method:this setFromObject]( [param:Object3D object] )</h3>
 	 * @param object - [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) to create the helper of.
 	 * Updates the wireframe box for the passed object.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

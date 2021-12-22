@@ -3,60 +3,46 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 <h1>[name]</h1>
-
 	 * JavaScript events for custom objects.
 	 * [Eventdispatcher on GitHub](https://github.com/mrdoob/eventdispatcher.js)
-
-<h2>Code Example</h2>
-
-	 * //  Adding events to a custom object 
+	 * ### Code Example
+	 * ```javascript
+	 * // Adding events to a custom object 
 	 * class Car extends EventDispatcher {
 	 * 	start() {
 	 * 		this.dispatchEvent( { type: 'start', message: 'vroom vroom!' } );
 	 * 	}
 	 * };
-	 * //  Using events with the custom object 
+	 * // Using events with the custom object 
 	 * const car = new Car();
 	 * car.addEventListener( 'start', function ( event ) {
 	 * 	alert( event.message );
 	 * });
 	 * car.start();
-
 <h2>Constructor</h2>
 <h3>[name]()</h3>
 	 * Creates EventDispatcher object.
-
 <h2>Methods</h2>
 <h3>[method:undefined addEventListener]( [param:String type], [param:Function listener] )</h3>
-	 * type - The type of event to listen to.
-	 * listener - The function that gets called when the event is fired.
-
+	 * @param type - The type of event to listen to.
+	 * @param listener - The function that gets called when the event is fired.
 	 * Adds a listener to an event type.
-
 <h3>[method:Boolean hasEventListener]( [param:String type], [param:Function listener] )</h3>
-	 * type - The type of event to listen to.
-	 * listener - The function that gets called when the event is fired.
-
+	 * @param type - The type of event to listen to.
+	 * @param listener - The function that gets called when the event is fired.
 	 * Checks if listener is added to an event type.
-
 <h3>[method:undefined removeEventListener]( [param:String type], [param:Function listener] )</h3>
-	 * type - The type of the listener that gets removed.
-	 * listener - The listener function that gets removed.
-
+	 * @param type - The type of the listener that gets removed.
+	 * @param listener - The listener function that gets removed.
 	 * Removes a listener from an event type.
-
 <h3>[method:undefined dispatchEvent]( [param:Object event] )</h3>
-	 * event - The event that gets fired.
-
+	 * @param event - The event that gets fired.
 	 * Fire an event type.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

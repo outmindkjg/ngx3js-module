@@ -3,19 +3,18 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 <h1>[name]</h1>
-
 	 * This is used internally by [PointLights](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight) for calculating shadows.
-
-<h2>Code Example</h2>
-
-	 * // Create a WebGLRenderer and turn on shadows in the renderer const renderer = new THREE.WebGLRenderer();
+	 * ### Code Example
+	 * ```javascript
+	 * // Create a WebGLRenderer and turn on shadows in the renderer
+	 * const renderer = new THREE.WebGLRenderer();
 	 * renderer.shadowMap.enabled = true;
-	 * renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap //Create a PointLight and turn on shadows for the light const light = new THREE.PointLight( 0xffffff, 1, 100 );
+	 * renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap //Create a PointLight and turn on shadows for the light
+	 * const light = new THREE.PointLight( 0xffffff, 1, 100 );
 	 * light.position.set( 0, 10, 4 );
 	 * light.castShadow = true; // default false scene.add( light );
 	 * // Set up shadow properties for the light light.shadow.mapSize.width = 512; // default light.shadow.mapSize.height = 512; // default light.shadow.camera.near = 0.5; // default light.shadow.camera.far = 500; // default //Create a sphere that cast shadows (but does not receive them)
@@ -32,23 +31,17 @@
 	 * // Create a helper for the shadow camera (optional)
 	 * const helper = new THREE.CameraHelper( light.shadow.camera );
 	 * scene.add( helper );
-
 <h2>Constructor</h2>
 <h3>[name]( )</h3>
 	 * Creates a new [name]. This is not intended to be called directly - it is called internally by [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight).
-
 <h2>Properties</h2>
 	 * See the base [LightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow) class for common properties.
-
 <h2>Methods</h2>
-
 	 * See the base [LightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow) class for common methods.
-
 <h3>[method:undefined updateMatrices]( [param:Light light], [param:number viewportIndex])</h3>
 	 * Update the matrices for the camera and shadow, used internally by the renderer.
-	 * light -- the light for which the shadow is being rendered.
-	 * viewportIndex -- calculates the matrix for this viewport <h2>Source</h2>
-
+	 * @param ligh - the light for which the shadow is being rendered.
+	 * @param viewportInde - calculates the matrix for this viewport <h2>Source</h2>
 	 * [src/lights/[name](https://github.com/mrdoob/three.js/blob/master/src/lights/[name].js).js]
 	</body>
 </html>

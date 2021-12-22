@@ -3,52 +3,32 @@
 	<head>
 <meta charset="utf-8" />
 <base href="../../../../" />
-<script src="page.js"></script>
 <link type="text/css" rel="stylesheet" href="page.css" />
 	</head>
 	<body>
 	 * [Interpolant](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Interpolant) &rarr;
 <h1>[name]</h1>
-
-
-<h2>Code Example</h2>
-
+	 * ### Code Example
+	 * ```javascript
 	 * const interpolant = new THREE.[name](
 	 * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );
 	 * interpolant.evaluate( 0.5 );
-
-
 <h2>Constructor</h2>
 <h3>[name]( parameterPositions, sampleValues, sampleSize, resultBuffer )</h3>
-	 * parameterPositions -- array of positions 
+	 * @param parameterPosition - array of positions 
 	 sampleValues  - array of samples 
 	 sampleSize  - number of samples 
 	 resultBuffer  - buffer to store the interpolation results.
-
-
 <h2>Properties</h2>
-
 <h3>[property:null parameterPositions]</h3>
-
-
 <h3>[property:null resultBuffer]</h3>
-
-
 <h3>[property:null sampleValues]</h3>
-
-
 <h3>[property:Object settings]</h3>
-
-
 <h3>[property:null valueSize]</h3>
-
-
 <h2>Methods</h2>
 <h3>[method:Array evaluate]( [param:Number t] )</h3>
 	 * Evaluate the interpolant at position *t*.
-
 <h2>Source</h2>
-
 	 * [src/[path](https://github.com/mrdoob/three.js/blob/master/src/[path].js).js]
 	</body>
 </html>

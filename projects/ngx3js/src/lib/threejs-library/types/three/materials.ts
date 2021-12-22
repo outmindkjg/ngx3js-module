@@ -18,30 +18,69 @@ import { Color, ColorRepresentation, Plane, Vector2, Vector3 } from './math';
 import { IUniform, Shader, WebGLRenderer } from './renderers';
 import { Texture } from './textures';
 
-/**
- */
 export interface LineBasicMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 
 	/**
+	 * Controls line thickness. Default is *1*.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	linewidth?: number | undefined;
 
 	/**
+	 * Define appearance of line ends. Possible values are 'butt', 'round' and 'square'.
+	 * Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	linecap?: string | undefined;
 
 	/**
+	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	linejoin?: string | undefined;
 }
 
 /**
+ * A material for drawing wireframe-style geometries.
+ *
+ * ### Code Example
+ * ```javascript
+ * const material = new THREE.LineBasicMaterial( {
+ * 	color: 0xffffff,
+ * 	linewidth: 1,
+ * 	linecap: 'round', //ignored by WebGLRenderer
+ * 	linejoin:  'round' //ignored by WebGLRenderer
+ * });
+ * ```
+ *
+ * ### Examples
+ * [WebGL / buffergeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange) |
+ * [WebGL / buffergeometry / lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines) |
+ * [WebGL / buffergeometry / lines / indexed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines_indexed) |
+ * [WebGL / decals](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_decals) |
+ * [WebGL / geometry / nurbs](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_nurbs) |
+ * [WebGL / geometry / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_shapes) |
+ * [WebGL / geometry / spline / editor](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_spline_editor) |
+ * [WebGL / interactive / buffergeometry](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_buffergeometry) |
+ * [WebGL / interactive / voxelpainter](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_voxelpainter) |
+ * [WebGL / lines / colors](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_colors) |
+ * [WebGL / lines / dashed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_dashed) |
+ * [WebGL / lines / sphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_sphere) |
+ * [WebGL / materials](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials) |
+ * [physics / ammo / rope](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_rope)
  */
 export interface LineBasicMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: LineBasicMaterialParameters): this;
 
@@ -51,50 +90,82 @@ export interface LineBasicMaterial extends Material {
 	type: string;
 
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 * @default 0xffffff
 	 */
 	color: Color;
 
 	/**
+	 * Controls line thickness. Default is *1*.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	linewidth: number;
 
 	/**
+	 * Define appearance of line ends. Possible values are 'butt', 'round' and 'square'.
+	 * Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	linecap: string;
 
 	/**
+	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	linejoin: string;
 
 	/**
+	 *
+	 * @param parameters
 	 */
 	setValues(parameters: LineBasicMaterialParameters): void;
 }
 
 /**
+ * Line dashed material parameters
  */
 export interface LineDashedMaterialParameters extends LineBasicMaterialParameters {
 	/**
+	 * The scale of the dashed part of a line. Default is *1*.
 	 */
 	scale?: number | undefined;
 
 	/**
+	 * The size of the dash. This is both the gap with the stroke. Default is *3*.
 	 */
 	dashSize?: number | undefined;
 
 	/**
+	 * The size of the gap. Default is *1*.
 	 */
 	gapSize?: number | undefined;
 }
 
 /**
+ * A material for drawing wireframe-style geometries with dashed lines.
+ * ### Code Example
+ * ```javascript
+ * const material = new THREE.LineDashedMaterial( {
+ * 	color: 0xffffff,
+ * 	linewidth: 1,
+ * 	scale: 1,
+ * 	dashSize: 3,
+ * 	gapSize: 1,
+ * } );
+ * ```
+ * ### Examples
+ * [WebGL / lines / dashed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_dashed)
  */
 export interface LineDashedMaterial extends LineBasicMaterial {
 	/**
+	 * Any property of the material (including any property inherited from [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial)) can be passed in here.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: LineDashedMaterialParameters): this;
 
@@ -104,265 +175,363 @@ export interface LineDashedMaterial extends LineBasicMaterial {
 	type: string;
 
 	/**
+	 * The scale of the dashed part of a line. Default is *1*.
 	 * @default 1
 	 */
 	scale: number;
 
 	/**
+	 * The size of the dash. This is both the gap with the stroke. Default is *3*.
 	 * @default 1
 	 */
 	dashSize: number;
 
 	/**
+	 * The size of the gap. Default is *1*.
 	 * @default 1
 	 */
 	gapSize: number;
 
-	/**
-	 */
 	readonly isLineDashedMaterial: true;
 
 	/**
+	 *
+	 * @param parameters
 	 */
 	setValues(parameters: LineDashedMaterialParameters): void;
 }
 
 /**
+ * Abstract base parameters for materials.
  */
 export interface MaterialParameters {
 	/**
+	 * Sets the alpha value to be used when running an alpha test.
+	 * The material will not be rendered if the opacity is lower than this value.
+	 * Default is *0*.
 	 */
 	alphaTest?: number | undefined;
 
 	/**
+	 * Enables alpha to coverage. Can only be used with MSAA-enabled contexts (meaning when the renderer was created with *antialias* parameter set to *true*).
+	 * Default is *false*.
 	 */
 	alphaToCoverage?: boolean | undefined;
 
 	/**
+	 * Blending destination. Default is [OneMinusSrcAlphaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation).
+	 * See the destination factors [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation) for all possible values.
+	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for this to have any effect.
 	 */
 	blendDst?: BlendingDstFactor | undefined;
 
 	/**
+	 * The transparency of the *.blendDst*. Uses *.blendDst* value if null. Default is *null*.
 	 */
 	blendDstAlpha?: number | undefined;
 
 	/**
+	 * Blending equation to use when applying blending. Default is [AddEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation).
+	 * See the blending equation [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation) for all possible values.
+	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for this to have any effect.
 	 */
 	blendEquation?: BlendingEquation | undefined;
 
 	/**
+	 * The transparency of the *.blendEquation*. Uses *.blendEquation* value if null. Default is *null*.
 	 */
 	blendEquationAlpha?: number | undefined;
 
 	/**
+	 * Which blending to use when displaying objects with this material.
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials).
 	 */
 	blending?: Blending | undefined;
 
 	/**
+	 * Blending source. Default is [SrcAlphaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation).
+	 * See the source factors [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation) for all possible values.
+	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for this to have any effect.
 	 */
 	blendSrc?: BlendingSrcFactor | BlendingDstFactor | undefined;
 
 	/**
+	 * The transparency of the *.blendSrc*. Uses *.blendSrc* value if null. Default is *null*.
 	 */
 	blendSrcAlpha?: number | undefined;
 
 	/**
+	 * Changes the behavior of clipping planes so that only their intersection is clipped, rather than their union.
+	 * Default is *false*.
 	 */
 	clipIntersection?: boolean | undefined;
 
 	/**
+	 * User-defined clipping planes specified as THREE.Plane objects in world space.
+	 * These planes apply to the objects this material is attached to.
+	 * Points in space whose signed distance to the plane is negative are clipped (not rendered).
+	 * This requires [WebGLRenderer.localClippingEnabled](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.localClippingEnabled) to be *true*.
+	 * See the [WebGL / clipping /intersection](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_intersection) example.
+	 * Default is *null*.
 	 */
 	clippingPlanes?: Plane[] | undefined;
 
 	/**
+	 * Defines whether to clip shadows according to the clipping planes specified on this material. Default is *false*.
 	 */
 	clipShadows?: boolean | undefined;
 
 	/**
+	 * Whether to render the material's color.
+	 * This can be used in conjunction with a mesh's [renderOrder](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) property to create invisible objects that occlude other objects. Default is *true*.
 	 */
 	colorWrite?: boolean | undefined;
 
 	/**
+	 * Custom defines to be injected into the shader. These are passed in form of an object literal, with key/value pairs. { MY_CUSTOM_DEFINE: '' , PI2: Math.PI * 2 }. The pairs are defined in both vertex and fragment shaders.  Default is *undefined*.
 	 */
 	defines?: any;
 
 	/**
+	 * Which depth function to use. Default is [LessEqualDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See the depth mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 */
 	depthFunc?: DepthModes | undefined;
 
 	/**
+	 * Whether to have depth test enabled when rendering this material. Default is *true*.
 	 */
 	depthTest?: boolean | undefined;
 
 	/**
+	 * Whether rendering this material has any effect on the depth buffer. Default is *true*.
+	 * When drawing 2D overlays it can be useful to disable the depth writing in order to layer several things together without creating z-index artifacts.
 	 */
 	depthWrite?: boolean | undefined;
 
 	/**
+	 * Whether the material is affected by fog. Default is *true*.
 	 */
 	fog?: boolean | undefined;
 
 	/**
+	 * Optional name of the object (doesn't need to be unique). Default is an empty string.
 	 */
 	name?: string | undefined;
 
 	/**
+	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
+	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.
+	 * If the material's [transparent](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) property is not set to *true*, the material will remain fully opaque and this value will only affect its color.
+	 * Default is *1.0*.
 	 */
 	opacity?: number | undefined;
 
 	/**
+	 * Whether to use polygon offset. Default is *false*. This corresponds to the *GL_POLYGON_OFFSET_FILL* WebGL feature.
 	 */
 	polygonOffset?: boolean | undefined;
 
 	/**
+	 * Sets the polygon offset factor. Default is *0*.
 	 */
 	polygonOffsetFactor?: number | undefined;
 
 	/**
+	 * Sets the polygon offset units. Default is *0*.
 	 */
 	polygonOffsetUnits?: number | undefined;
 
 	/**
+	 * Override the renderer's default precision for this material. Can be "*highp*", "*mediump*" or "*lowp*".
+	 * Default is *null*.
 	 */
 	precision?: 'highp' | 'mediump' | 'lowp' | null | undefined;
 
 	/**
+	 * Whether to premultiply the alpha (transparency) value.
+	 * See [Example:webgl_materials_physical_transmission WebGL / Materials / Physical / Transmission] for an example of the difference.
+	 * Default is *false*.
 	 */
 	premultipliedAlpha?: boolean | undefined;
 
 	/**
+	 * Whether to apply dithering to the color to remove the appearance of banding.
+	 * Default is *false*.
 	 */
 	dithering?: boolean | undefined;
 
 	/**
+	 * Defines which side of faces will be rendered - front, back or both.
+	 * Default is [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials).
+	 * Other options are [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) and [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials).
 	 */
 	side?: Side | undefined;
 
 	/**
+	 * Defines which side of faces cast shadows.
+	 * When set, can be [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials), [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials), or [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). Default is *null*.
+	 * If *null*, the side casting shadows is determined as follows:
 	 */
 	shadowSide?: Side | undefined;
 
 	/**
+	 * Defines whether this material is tone mapped according to the renderer's [toneMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.toneMapping) setting. Default is *true*.
 	 */
 	toneMapped?: boolean | undefined;
 
 	/**
+	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. g When set to true, the extent to which the material is transparent is controlled by setting its [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) property.
+	 * Default is *false*.
 	 */
 	transparent?: boolean | undefined;
 
 	/**
+	 * Defines whether vertex coloring is used. Default is *false*.
 	 */
 	vertexColors?: boolean | undefined;
 
 	/**
+	 * Defines whether this material is visible. Default is *true*.
 	 */
 	visible?: boolean | undefined;
 
 	/**
+	 * When this property is set to [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), the material is considered to be opaque and alpha values are ignored. Default is [THREE.RGBAFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 */
 	format?: PixelFormat | undefined;
 
 	/**
+	 * Whether stencil operations are performed against the stencil buffer. In order to perform writes or comparisons against the stencil buffer this value must be *true*. Default is *false*.
 	 */
 	stencilWrite?: boolean | undefined;
 
 	/**
+	 * The stencil comparison function to use. Default is [AlwaysStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See stencil function [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 */
 	stencilFunc?: StencilFunc | undefined;
 
 	/**
+	 * The value to use when performing stencil comparisons or stencil operations. Default is *0*.
 	 */
 	stencilRef?: number | undefined;
 
 	/**
+	 * The bit mask to use when writing to the stencil buffer. Default is *0xFF*.
 	 */
 	stencilWriteMask?: number | undefined;
 
 	/**
+	 * The bit mask to use when comparing against the stencil buffer. Default is *0xFF*.
 	 */
 	stencilFuncMask?: number | undefined;
 
 	/**
+	 * Which stencil operation to perform when the comparison function returns false. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 */
 	stencilFail?: StencilOp | undefined;
 
 	/**
+	 * Which stencil operation to perform when the comparison function returns true but the depth test fails. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 */
 	stencilZFail?: StencilOp | undefined;
 
 	/**
+	 * Which stencil operation to perform when the comparison function returns true and the depth test passes. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 */
 	stencilZPass?: StencilOp | undefined;
 
 	/**
+	 * An object that can be used to store custom data about the Material. It should not hold references to functions as these will not be cloned.
 	 */
 	userData?: any;
 }
 
 /**
- * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
+ * Abstract base class for materials.
+ * Materials describe the appearance of [objects](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object).
+ * They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
+ * The following properties and methods are inherited by all other material types (although they may have different defaults).
  */
 export interface Material extends EventDispatcher {
 	/**
+	 * This creates a generic material.
 	 */
 	new (): this;
 
 	/**
-	 * Sets the alpha value to be used when running an alpha test. Default is 0.
+	 * Color of the material, by default set to white (0xffffff).
+	 */
+	color: Color | any;
+
+	/**
+	 * Sets the alpha value to be used when running an alpha test.
+	 * The material will not be rendered if the opacity is lower than this value.
+	 * Default is *0*.
 	 * @default 0
 	 */
 	alphaTest: number;
 
 	/**
-	 * Enables alpha to coverage. Can only be used with MSAA-enabled rendering contexts.
+	 * Enables alpha to coverage. Can only be used with MSAA-enabled contexts (meaning when the renderer was created with *antialias* parameter set to *true*).
+	 * Default is *false*.
 	 * @default false
 	 */
 	alphaToCoverage: boolean;
 
 	/**
-	 * Blending destination. It's one of the blending mode constants defined in Three.js. Default is {@link OneMinusSrcAlphaFactor}.
+	 * Blending destination. Default is [OneMinusSrcAlphaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation).
+	 * See the destination factors [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation) for all possible values.
+	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for this to have any effect.
 	 * @default THREE.OneMinusSrcAlphaFactor
 	 */
 	blendDst: BlendingDstFactor;
 
 	/**
-	 * The tranparency of the .blendDst. Default is null.
+	 * The transparency of the *.blendDst*. Uses *.blendDst* value if null. Default is *null*.
 	 * @default null
 	 */
 	blendDstAlpha: number | null;
 
 	/**
-	 * Blending equation to use when applying blending. It's one of the constants defined in Three.js. Default is {@link AddEquation}.
+	 * Blending equation to use when applying blending. Default is [AddEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation).
+	 * See the blending equation [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation) for all possible values.
+	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for this to have any effect.
 	 * @default THREE.AddEquation
 	 */
 	blendEquation: BlendingEquation;
 
 	/**
-	 * The tranparency of the .blendEquation. Default is null.
+	 * The transparency of the *.blendEquation*. Uses *.blendEquation* value if null. Default is *null*.
 	 * @default null
 	 */
 	blendEquationAlpha: number | null;
 
 	/**
-	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
+	 * Which blending to use when displaying objects with this material.
+	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant).
+	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials).
 	 * @default THREE.NormalBlending
 	 */
 	blending: Blending;
 
 	/**
-	 * Blending source. It's one of the blending mode constants defined in Three.js. Default is {@link SrcAlphaFactor}.
+	 * Blending source. Default is [SrcAlphaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation).
+	 * See the source factors [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CustomBlendingEquation) for all possible values.
+	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Constant) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for this to have any effect.
 	 * @default THREE.SrcAlphaFactor
 	 */
 	blendSrc: BlendingSrcFactor | BlendingDstFactor;
 
 	/**
-	 * The tranparency of the .blendSrc. Default is null.
+	 * The transparency of the *.blendSrc*. Uses *.blendSrc* value if null. Default is *null*.
 	 * @default null
 	 */
 	blendSrcAlpha: number | null;
 
 	/**
-	 * Changes the behavior of clipping planes so that only their intersection is clipped, rather than their union. Default is false.
+	 * Changes the behavior of clipping planes so that only their intersection is clipped, rather than their union.
+	 * Default is *false*.
 	 * @default false
 	 */
 	clipIntersection: boolean;
@@ -371,74 +540,76 @@ export interface Material extends EventDispatcher {
 	 * User-defined clipping planes specified as THREE.Plane objects in world space.
 	 * These planes apply to the objects this material is attached to.
 	 * Points in space whose signed distance to the plane is negative are clipped (not rendered).
-	 * See the WebGL / clipping /intersection example. Default is null.
+	 * This requires [WebGLRenderer.localClippingEnabled](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.localClippingEnabled) to be *true*.
+	 * See the [WebGL / clipping /intersection](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_intersection) example.
+	 * Default is *null*.
 	 * @default null
 	 */
 	clippingPlanes: any;
 
 	/**
-	 * Defines whether to clip shadows according to the clipping planes specified on this material. Default is false.
+	 * Defines whether to clip shadows according to the clipping planes specified on this material. Default is *false*.
 	 * @default false
 	 */
 	clipShadows: boolean;
 
 	/**
-	 * Whether to render the material's color. This can be used in conjunction with a mesh's .renderOrder property to create invisible objects that occlude other objects. Default is true.
+	 * Whether to render the material's color.
+	 * This can be used in conjunction with a mesh's [renderOrder](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) property to create invisible objects that occlude other objects. Default is *true*.
 	 * @default true
 	 */
 	colorWrite: boolean;
 
 	/**
-	 * Custom defines to be injected into the shader. These are passed in form of an object literal, with key/value pairs. { MY_CUSTOM_DEFINE: '' , PI2: Math.PI * 2 }.
-	 * The pairs are defined in both vertex and fragment shaders. Default is undefined.
+	 * Custom defines to be injected into the shader. These are passed in form of an object literal, with key/value pairs. { MY_CUSTOM_DEFINE: '' , PI2: Math.PI * 2 }. The pairs are defined in both vertex and fragment shaders.  Default is *undefined*.
 	 * @default undefined
 	 */
 	defines: undefined | { [key: string]: any };
 
 	/**
-	 * Which depth to use. Default is {@link LessEqualDepth}. See the depth mode constants for all possible values.
+	 * Which depth function to use. Default is [LessEqualDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See the depth mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 * @default THREE.LessEqualDepth
 	 */
 	depthFunc: DepthModes;
 
 	/**
-	 * Whether to have depth test enabled when rendering this material. Default is true.
+	 * Whether to have depth test enabled when rendering this material. Default is *true*.
 	 * @default true
 	 */
 	depthTest: boolean;
 
 	/**
-	 * Whether rendering this material has any effect on the depth buffer. Default is true.
+	 * Whether rendering this material has any effect on the depth buffer. Default is *true*.
 	 * When drawing 2D overlays it can be useful to disable the depth writing in order to layer several things together without creating z-index artifacts.
 	 * @default true
 	 */
 	depthWrite: boolean;
 
 	/**
-	 * Whether the material is affected by fog. Default is true.
+	 * Whether the material is affected by fog. Default is *true*.
 	 * @default fog
 	 */
 	fog: boolean;
 
 	/**
-	 * When this property is set to THREE.RGBFormat, the material is considered to be opaque and alpha values are ignored.
+	 * When this property is set to [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures), the material is considered to be opaque and alpha values are ignored. Default is [THREE.RGBAFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * @default THREE.RGBAFormat
 	 */
 	format: PixelFormat;
 
 	/**
-	 * Unique number of this material instance.
+	 * Unique number for this material instance.
 	 */
 	id: number;
 
 	/**
-	 * Whether rendering this material has any effect on the stencil buffer. Default is *false*.
+	 * Whether stencil operations are performed against the stencil buffer. In order to perform writes or comparisons against the stencil buffer this value must be *true*. Default is *false*.
 	 * @default false
 	 */
 	stencilWrite: boolean;
 
 	/**
-	 * The stencil comparison to use. Default is {@link AlwaysStencilFunc}. See stencil operation constants for all possible values.
+	 * The stencil comparison function to use. Default is [AlwaysStencilFunc](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See stencil function [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 * @default THREE.AlwaysStencilFunc
 	 */
 	stencilFunc: StencilFunc;
@@ -462,23 +633,19 @@ export interface Material extends EventDispatcher {
 	stencilFuncMask: number;
 
 	/**
-	 * Which stencil operation to perform when the comparison returns false. Default is {@link KeepStencilOp}. See the stencil operation constants for all possible values.
+	 * Which stencil operation to perform when the comparison function returns false. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 * @default THREE.KeepStencilOp
 	 */
 	stencilFail: StencilOp;
 
 	/**
-	 * Which stencil operation to perform when the comparison returns true but the depth test fails.
-	 * Default is {@link KeepStencilOp}.
-	 * See the stencil operation constants for all possible values.
+	 * Which stencil operation to perform when the comparison function returns true but the depth test fails. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 * @default THREE.KeepStencilOp
 	 */
 	stencilZFail: StencilOp;
 
 	/**
-	 * Which stencil operation to perform when the comparison returns true and the depth test passes.
-	 * Default is {@link KeepStencilOp}.
-	 * See the stencil operation constants for all possible values.
+	 * Which stencil operation to perform when the comparison function returns true and the depth test passes. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) for all possible values.
 	 * @default THREE.KeepStencilOp
 	 */
 	stencilZPass: StencilOp;
@@ -490,85 +657,91 @@ export interface Material extends EventDispatcher {
 	readonly isMaterial: true;
 
 	/**
-	 * Material name. Default is an empty string.
+	 * Optional name of the object (doesn't need to be unique). Default is an empty string.
 	 * @default ''
 	 */
 	name: string;
 
 	/**
-	 * Specifies that the material needs to be updated, WebGL wise. Set it to true if you made changes that need to be reflected in WebGL.
-	 * This property is automatically set to true when instancing a new material.
+	 * Specifies that the material needs to be recompiled.
 	 * @default false
 	 */
 	needsUpdate: boolean;
 
 	/**
-	 * Opacity. Default is 1.
+	 * Float in the range of *0.0* - *1.0* indicating how transparent the material is.
+	 * A value of *0.0* indicates fully transparent, *1.0* is fully opaque.
+	 * If the material's [transparent](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) property is not set to *true*, the material will remain fully opaque and this value will only affect its color.
+	 * Default is *1.0*.
 	 * @default 1
 	 */
 	opacity: number;
 
 	/**
-	 * Whether to use polygon offset. Default is false. This corresponds to the POLYGON_OFFSET_FILL WebGL feature.
+	 * Whether to use polygon offset. Default is *false*. This corresponds to the *GL_POLYGON_OFFSET_FILL* WebGL feature.
 	 * @default false
 	 */
 	polygonOffset: boolean;
 
 	/**
-	 * Sets the polygon offset factor. Default is 0.
+	 * Sets the polygon offset factor. Default is *0*.
 	 * @default 0
 	 */
 	polygonOffsetFactor: number;
 
 	/**
-	 * Sets the polygon offset units. Default is 0.
+	 * Sets the polygon offset units. Default is *0*.
 	 * @default 0
 	 */
 	polygonOffsetUnits: number;
 
 	/**
-	 * Override the renderer's default precision for this material. Can be "highp", "mediump" or "lowp". Defaults is null.
+	 * Override the renderer's default precision for this material. Can be "*highp*", "*mediump*" or "*lowp*".
+	 * Default is *null*.
 	 * @default null
 	 */
 	precision: 'highp' | 'mediump' | 'lowp' | null;
 
 	/**
-	 * Whether to premultiply the alpha (transparency) value. See WebGL / Materials / Transparency for an example of the difference. Default is false.
+	 * Whether to premultiply the alpha (transparency) value.
+	 * See [Example:webgl_materials_physical_transmission WebGL / Materials / Physical / Transmission] for an example of the difference.
+	 * Default is *false*.
 	 * @default false
 	 */
 	premultipliedAlpha: boolean;
 
 	/**
-	 * Whether to apply dithering to the color to remove the appearance of banding. Default is false.
+	 * Whether to apply dithering to the color to remove the appearance of banding.
+	 * Default is *false*.
 	 * @default false
 	 */
 	dithering: boolean;
 
 	/**
-	 * Defines which of the face sides will be rendered - front, back or both.
-	 * Default is THREE.FrontSide. Other options are THREE.BackSide and THREE.DoubleSide.
+	 * Defines which side of faces will be rendered - front, back or both.
+	 * Default is [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials).
+	 * Other options are [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) and [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials).
 	 * @default THREE.FrontSide
 	 */
 	side: Side;
 
 	/**
-	 * Defines which of the face sides will cast shadows. Default is *null*.
-	 * If *null*, the value is opposite that of side, above.
+	 * Defines which side of faces cast shadows.
+	 * When set, can be [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials), [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials), or [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). Default is *null*.
+	 * If *null*, the side casting shadows is determined as follows:
 	 * @default null
 	 */
 	shadowSide: Side | null;
 
 	/**
-	 * Defines whether this material is tone mapped according to the renderer's toneMapping setting.
-	 * Default is true.
+	 * Defines whether this material is tone mapped according to the renderer's [toneMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.toneMapping) setting. Default is *true*.
 	 * @default true
 	 */
 	toneMapped: boolean;
 
 	/**
-	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects.
-	 * When set to true, the extent to which the material is transparent is controlled by setting it's .opacity property.
-	 * Default is false.
+	 * Defines whether this material is transparent. This has an effect on rendering as transparent objects need special treatment and are rendered after non-transparent objects. g When set to true, the extent to which the material is transparent is controlled by setting its [opacity](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) property.
+	 * Default is *false*.
 	 * @default false
 	 */
 	transparent: boolean;
@@ -580,18 +753,19 @@ export interface Material extends EventDispatcher {
 	type: string;
 
 	/**
-	 * UUID of this material instance. This gets automatically assigned, so this shouldn't be edited.
+	 * [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) of this material instance.
+	 * This gets automatically assigned, so this shouldn't be edited.
 	 */
 	uuid: string;
 
 	/**
-	 * Defines whether vertex coloring is used. Default is false.
+	 * Defines whether vertex coloring is used. Default is *false*.
 	 * @default false
 	 */
 	vertexColors: boolean;
 
 	/**
-	 * Defines whether this material is visible. Default is true.
+	 * Defines whether this material is visible. Default is *true*.
 	 * @default true
 	 */
 	visible: boolean;
@@ -603,13 +777,13 @@ export interface Material extends EventDispatcher {
 	userData: any;
 
 	/**
-	 * This starts at 0 and counts how many times .needsUpdate is set to true.
+	 * This starts at *0* and counts how many times [property:Boolean needsUpdate] is set to *true*.
 	 * @default 0
 	 */
 	version: number;
 
 	/**
-	 * Return a new material with the same parameters as this material.
+	 * @returns Return a new material with the same parameters as this material.
 	 */
 	clone(): this;
 
@@ -620,114 +794,157 @@ export interface Material extends EventDispatcher {
 	copy(material: Material): this;
 
 	/**
-	 * This disposes the material. Textures of a material don't get disposed. These needs to be disposed by {@link Texture}.
+	 * This disposes the material. Textures of a material don't get disposed.
+	 * These needs to be disposed by [Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture).
 	 */
 	dispose(): void;
 
 	/**
 	 * An optional callback that is executed immediately before the shader program is compiled.
-	 * This is called with the shader source code as a parameter.
-	 * Useful for the modification of built-in materials.
+	 * This function is called with the shader source code as a parameter. Useful for the modification of built-in materials.
+	 * Unlike properties, the callback is not supported by [.clone](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.clone)(), [.copy](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.copy)() and [.toJSON](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.toJSON)().
 	 * @param shader Source code of the shader
 	 * @param renderer WebGLRenderer Context that is initializing the material
 	 */
 	onBeforeCompile(shader: Shader, renderer: WebGLRenderer): void;
 
 	/**
-	 * In case onBeforeCompile is used, this callback can be used to identify values of settings used in onBeforeCompile, so three.js can reuse a cached shader or recompile the shader as needed.
+	 * In case onBeforeCompile is used, this callback can be used to identify values of settings used in onBeforeCompile, so three.js can reuse a cached shader or recompile the shader for this material as needed.
+	 * For example, if onBeforeCompile contains a conditional statement like:
+	 * ```javascript
+	 * if ( black ) {
+	 * 	shader.fragmentShader = shader.fragmentShader.replace('gl_FragColor = vec4(1)', 'gl_FragColor = vec4(0)')
+	 * }
+	 * // then customProgramCacheKey should be set like this:
+	 * material.customProgramCacheKey = function() {
+	 * 	return black ? '1' : '0';
+	 * }
+	 * ```
+	 * Unlike properties, the callback is not supported by [.clone](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.clone)(), [.copy](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.copy)() and [.toJSON](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.toJSON)().
 	 */
 	customProgramCacheKey(): string;
 
 	/**
-	 * Sets the properties based on the values.
-	 * @param values A container with parameters.
+	 * Sets the properties based on the *values*.
+	 * @param value - a container with parameters.
 	 */
 	setValues(values: MaterialParameters): void;
 
 	/**
-	 * Convert the material to three.js JSON format.
-	 * @param meta Object containing metadata such as textures or images for the material.
+	 * Convert the material to three.js [JSON Object/Scene format](https://github.com/mrdoob/three.js/wiki/JSON-Object-Scene-format-4).
+	 * @param met - object containing metadata such as textures or images for the material.
 	 */
 	toJSON(meta?: any): any;
 }
 
 /**
- * parameters is an object with one or more properties defining the material's appearance.
+ * Mesh basic material parameters
  */
 export interface MeshBasicMaterialParameters extends MaterialParameters {
 	/**
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color?: ColorRepresentation | undefined;
 
 	/**
-	 */
-	opacity?: number | undefined;
-
-	/**
+	 * The color map. Default is  null.
 	 */
 	map?: Texture | null | undefined;
 
 	/**
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 */
 	lightMap?: Texture | null;
 
 	/**
+	 * Intensity of the baked light. Default is 1.
 	 */
 	lightMapIntensity?: number | undefined;
 
 	/**
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 */
 	aoMap?: Texture | null | undefined;
 
 	/**
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 */
 	aoMapIntensity?: number | undefined;
 
 	/**
+	 * Specular map used by the material. Default is null.
 	 */
 	specularMap?: Texture | null | undefined;
 
 	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	alphaMap?: Texture | null | undefined;
 
 	/**
+	 * The environment map. Default is null.
 	 */
 	envMap?: Texture | null | undefined;
 
 	/**
+	 * How to combine the result of the surface's color with the environment map, if any.
+	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials),
+	 * [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). If mix is chosen, the *.reflectivity* is used to blend between the two colors.
 	 */
 	combine?: Combine | undefined;
 
 	/**
+	 * How much the environment map affects the surface; also see *.combine*.
+	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 */
 	reflectivity?: number | undefined;
 
 	/**
+	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 */
 	refractionRatio?: number | undefined;
 
 	/**
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
 	wireframe?: boolean | undefined;
 
 	/**
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap?: string | undefined;
 
 	/**
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin?: string | undefined;
 }
 
 /**
+ * A material for drawing geometries in a simple shaded (flat or wireframe) way.
+ * This material is not affected by lights.
  */
 export interface MeshBasicMaterial extends Material {
 	/**
+	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
+	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
+	 * @param parameters - an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshBasicMaterialParameters): this;
 
@@ -737,84 +954,98 @@ export interface MeshBasicMaterial extends Material {
 	type: string;
 
 	/**
-	 * @default new THREE.Color( 0xffffff )
+	 * Color of the material, by default set to white (0xffffff).
 	 */
 	color: Color;
 
 	/**
-	 * @default null
+	 * The color map. Default is  null.
 	 */
-	map: Texture | null;
+	map: Texture | null | undefined;
 
 	/**
-	 * @default null
+	 * The light map. Default is null. The lightMap requires a second set of UVs.
 	 */
 	lightMap: Texture | null;
 
 	/**
-	 * @default 1
+	 * Intensity of the baked light. Default is 1.
 	 */
-	lightMapIntensity: number;
+	lightMapIntensity: number | undefined;
 
 	/**
-	 * @default null
+	 * The red channel of this texture is used as the ambient occlusion map. Default is null.
+	 * The aoMap requires a second set of UVs.
 	 */
-	aoMap: Texture | null;
+	aoMap: Texture | null | undefined;
 
 	/**
-	 * @default 1
+	 * Intensity of the ambient occlusion effect. Default is 1. Zero is no occlusion effect.
 	 */
-	aoMapIntensity: number;
+	aoMapIntensity: number | undefined;
 
 	/**
-	 * @default null
+	 * Specular map used by the material. Default is null.
 	 */
-	specularMap: Texture | null;
+	specularMap: Texture | null | undefined;
 
 	/**
-	 * @default null
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
-	alphaMap: Texture | null;
+	alphaMap: Texture | null | undefined;
 
 	/**
-	 * @default null
+	 * The environment map. Default is null.
 	 */
-	envMap: Texture | null;
+	envMap: Texture | null | undefined;
 
 	/**
-	 * @default THREE.MultiplyOperation
+	 * How to combine the result of the surface's color with the environment map, if any.
+	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials),
+	 * [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Materials). If mix is chosen, the *.reflectivity* is used to blend between the two colors.
 	 */
-	combine: Combine;
+	combine: Combine | undefined;
 
 	/**
-	 * @default 1
+	 * How much the environment map affects the surface; also see *.combine*.
+	 * The default value is 1 and the valid range is between 0 (no reflections) and 1 (full reflections).
 	 */
-	reflectivity: number;
+	reflectivity: number | undefined;
 
 	/**
-	 * @default 0.98
+	 * The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material.
+	 * It is used with environment mapping modes [THREE.CubeRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.EquirectangularRefractionMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * The refraction ratio should not exceed 1. Default is *0.98*.
 	 */
-	refractionRatio: number;
+	refractionRatio: number | undefined;
 
 	/**
-	 * @default false
+	 * Render geometry as wireframe. Default is *false* (i.e. render as flat polygons).
 	 */
-	wireframe: boolean;
+	wireframe: boolean | undefined;
 
 	/**
-	 * @default 1
+	 * Controls wireframe thickness. Default is 1.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
+	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
-	wireframeLinewidth: number;
+	wireframeLinewidth: number | undefined;
 
 	/**
-	 * @default 'round'
+	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
-	wireframeLinecap: string;
+	wireframeLinecap: string | undefined;
 
 	/**
-	 * @default 'round'
+	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
-	wireframeLinejoin: string;
+	wireframeLinejoin: string | undefined;
 
 	/**
 	 */
