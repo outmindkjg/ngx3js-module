@@ -9,7 +9,8 @@
   <h3>Angular &amp; Javascript 3D library</h3>
 </a>
 <p>The aim of the project is to create an easy to use, lightweight, cross-browser, general purpose 3D library in angular. The current builds only include a WebGL renderer but WebGPU (experimental), SVG and CSS3D renderers are also available in the examples.</p>
-<p><a href="https://outmindkjg.github.io/ngx3js-doc/#/examples/">Examples</a> &mdash;
+<p><a href="https://outmindkjg.github.io/ngx3js-doc/#">Home</a> &mdash;
+<a href="https://outmindkjg.github.io/ngx3js-doc/#/examples/">Examples</a> &mdash;
 <a href="https://outmindkjg.github.io/ngx3js-doc/#/docs">Documentation</a> &mdash;
 <a href="https://outmindkjg.github.io/ngx3js-doc/docs">API Documentation</a></p>
 
@@ -60,8 +61,8 @@ the assets url can be changed by your site. </p>
 <pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-8">&quot;projects&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-8">&quot;your-project-name&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">      </span><span class="hl-8">&quot;architect&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">        </span><span class="hl-8">&quot;build&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">          </span><span class="hl-8">&quot;options&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">            </span><span class="hl-8">&quot;assets&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">                {</span><br/><span class="hl-1">                    </span><span class="hl-8">&quot;glob&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;**/*&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">                    </span><span class="hl-8">&quot;input&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;./node_modules/ngx3js/assets&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">                    </span><span class="hl-8">&quot;output&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;/assets/examples/&quot;</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            ],</span><br/><span class="hl-1">            </span><span class="hl-8">&quot;scripts&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">              </span><span class="hl-4">&quot;node_modules/ngx3js/assets/js/libs/lottie_canvas.js&quot;</span><br/><span class="hl-1">            ] </span><br/><span class="hl-1">          },</span><br/><span class="hl-1">        },</span><br/><span class="hl-1">      }</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">  },</span><br/><span class="hl-1">}</span>
 </code></pre>
 
-<a href="#change-tsconfigjson-for-fs" id="change-tsconfigjson-for-fs" style="color: inherit; text-decoration: none;">
-  <h3>Change tsconfig.json for fs</h3>
+<a href="#change-tsconfigjson-for-fs---optional" id="change-tsconfigjson-for-fs---optional" style="color: inherit; text-decoration: none;">
+  <h3>Change tsconfig.json for fs - optional####</h3>
 </a>
 <p>// tsconfig.json</p>
 <pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-8">&quot;compilerOptions&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-8">&quot;paths&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">      </span><span class="hl-8">&quot;fs&quot;</span><span class="hl-1">: [</span><span class="hl-4">&quot;./node_modules/fs-web&quot;</span><span class="hl-1">]</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
