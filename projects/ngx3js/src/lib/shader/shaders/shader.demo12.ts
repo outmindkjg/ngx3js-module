@@ -80,7 +80,7 @@ export const ShaderDemo12: IShaderType = {
   }
   `,
 	uniforms: {
-		map: { value: null } as any,
+		map: { value: null },
 		cameraPos: { value: NgxThreeUtil.getVector3Safe(0, 0, 0) },
 	},
 };

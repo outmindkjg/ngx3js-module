@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxLocalStorageService } from '../local-storage.service';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
@@ -27,6 +27,12 @@ import { NgxAbstractTextureComponent } from '../texture.abstract';
 	selector: 'ngx3js-tools',
 	templateUrl: './tools.component.html',
 	styleUrls: ['./tools.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxToolsComponent),
+		},
+	],
 })
 export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
@@ -173,7 +179,7 @@ export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements 
 	public getTexture(): I3JS.Texture {
 		const texture = this.getTool();
 		if (texture instanceof N3JS.Texture) {
-			return texture as any;
+			return texture;
 		} else {
 			return null;
 		}
@@ -189,13 +195,13 @@ export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements 
 			let tool: any = null;
 			switch (this.type.toLowerCase()) {
 				case 'pmremtexture':
-					const pmremGenerator = new N3JS.PMREMGenerator(NgxThreeUtil.getRenderer() as any);
+					const pmremGenerator = new N3JS.PMREMGenerator(NgxThreeUtil.getRenderer() as I3JS.WebGLRenderer);
 					if (NgxThreeUtil.isNotNull(this.storageName)) {
 						this.localStorageService.getTexture(
 							this.storageName,
 							(texture) => {
 								if (texture !== null) {
-									this.tool = pmremGenerator.fromEquirectangular(texture as any).texture;
+									this.tool = pmremGenerator.fromEquirectangular(texture).texture;
 									super.setObject(this.tool);
 									this.setSubscribeNext(['texture', 'loaded']);
 									pmremGenerator.dispose();
@@ -208,9 +214,9 @@ export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements 
 						const envScene = new N3JS.Scene();
 						if (NgxThreeUtil.isNotNull(this.background)) {
 							if (this.background instanceof NgxAbstractTextureComponent) {
-								envScene.background = this.background.getTexture() as any;
+								envScene.background = this.background.getTexture();
 							} else {
-								envScene.background = NgxThreeUtil.getColorSafe(this.background) as any;
+								envScene.background = NgxThreeUtil.getColorSafe(this.background);
 							}
 						}
 						tool = pmremGenerator.fromScene(envScene).texture;
@@ -219,7 +225,7 @@ export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements 
 					break;
 				case 'audio':
 					if (this.audioLoader === null) {
-						this.audioLoader = new N3JS.AudioLoader() as any;
+						this.audioLoader = new N3JS.AudioLoader();
 					}
 					tool = {};
 					this.audioLoader.load(NgxThreeUtil.getStoreUrl(this.url), (audioBuffer: AudioBuffer) => {

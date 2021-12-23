@@ -1,4 +1,4 @@
-import { Component, ContentChildren, Input, OnInit, QueryList, SimpleChanges } from '@angular/core';
+import { Component, ContentChildren, forwardRef, Input, OnInit, QueryList, SimpleChanges } from '@angular/core';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxMeshComponent } from '../mesh/mesh.component';
 import { INgxColor } from '../ngx-interface';
@@ -137,6 +137,12 @@ import * as NGX_PASS from './index';
 	selector: 'ngx3js-pass',
 	templateUrl: './pass.component.html',
 	styleUrls: ['./pass.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxPassComponent),
+		},
+	],
 })
 export class NgxPassComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
@@ -604,8 +610,7 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	/**
 	 * Content children of pass component
 	 */
-	@ContentChildren(NgxShaderComponent)
-	private shaderList: QueryList<NgxShaderComponent>;
+	@ContentChildren(NgxShaderComponent) private shaderList: QueryList<NgxShaderComponent>;
 
 	/**
 	 * Creates an instance of pass component.
@@ -1421,14 +1426,14 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 		if (NgxThreeUtil.isNotNull(effectComposer)) {
 			switch ((mapType || '').toLowerCase()) {
 				case 'target1':
-					return effectComposer.renderTarget1.texture as any;
+					return effectComposer.renderTarget1.texture;
 				case 'write':
-					return effectComposer.writeBuffer.texture as any;
+					return effectComposer.writeBuffer.texture;
 				case 'read':
-					return effectComposer.readBuffer.texture as any;
+					return effectComposer.readBuffer.texture;
 				case 'target2':
 				default:
-					return effectComposer.renderTarget2.texture as any;
+					return effectComposer.renderTarget2.texture;
 			}
 		}
 		const refMap = this.map;
@@ -1732,16 +1737,16 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 							this.getCamera(this.effectCamera)
 						);
 						if (NgxThreeUtil.isNotNull(this.patternTexture)) {
-							outlinePass.patternTexture = this.getPatternTexture() as any;
+							outlinePass.patternTexture = this.getPatternTexture();
 						}
 						if (NgxThreeUtil.isNotNull(this.selectedObjects)) {
-							outlinePass.selectedObjects = this.getSelectedObjects() as any;
+							outlinePass.selectedObjects = this.getSelectedObjects();
 						}
 						if (NgxThreeUtil.isNotNull(this.visibleEdgeColor)) {
-							outlinePass.visibleEdgeColor = NgxThreeUtil.getColorSafe(this.visibleEdgeColor, 0xffffff) as any;
+							outlinePass.visibleEdgeColor = NgxThreeUtil.getColorSafe(this.visibleEdgeColor, 0xffffff);
 						}
 						if (NgxThreeUtil.isNotNull(this.hiddenEdgeColor)) {
-							outlinePass.hiddenEdgeColor = NgxThreeUtil.getColorSafe(this.hiddenEdgeColor, 0xffffff) as any;
+							outlinePass.hiddenEdgeColor = NgxThreeUtil.getColorSafe(this.hiddenEdgeColor, 0xffffff);
 						}
 						if (NgxThreeUtil.isNotNull(this.edgeGlow)) {
 							outlinePass.edgeGlow = NgxThreeUtil.getTypeSafe(this.edgeGlow, 0);
@@ -1974,7 +1979,7 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 					case 'unrealbloompass':
 					case 'unrealbloom':
 						pass = new N3JS.UnrealBloomPass(
-							NgxThreeUtil.getVector2Safe(this.width | 512, this.height | 512, new N3JS.Vector2(512, 512) as any),
+							NgxThreeUtil.getVector2Safe(this.width | 512, this.height | 512, new N3JS.Vector2(512, 512)),
 							this.getStrength(1.5),
 							this.getRadius(0.4),
 							this.getThreshold(0.85)
@@ -1992,12 +1997,12 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 						}
 						const ssrSize = this.getSize();
 						const ssrPass = new N3JS.SSRPass({
-							renderer: this.effectRenderer as any,
-							scene: this.getScene(this.effectScene) as any,
-							camera: this.getCamera(this.effectCamera) as any,
+							renderer: this.effectRenderer,
+							scene: this.getScene(this.effectScene),
+							camera: this.getCamera(this.effectCamera),
 							width: ssrSize.x,
 							height: ssrSize.y,
-							selects: NgxThreeUtil.getTypeSafe(this.selects, []) as any,
+							selects: NgxThreeUtil.getTypeSafe(this.selects, []),
 							isPerspectiveCamera: undefined,
 							isBouncing: undefined,
 							groundReflector: groundReflector,
@@ -2019,12 +2024,12 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 					case 'ssrr':
 						const ssrrSize = this.getSize();
 						const ssrrPass = new N3JS.SSRrPass({
-							renderer: this.effectRenderer as any,
-							scene: this.getScene(this.effectScene) as any,
-							camera: this.getCamera(this.effectCamera) as any,
+							renderer: this.effectRenderer,
+							scene: this.getScene(this.effectScene),
+							camera: this.getCamera(this.effectCamera),
 							width: ssrrSize.x,
 							height: ssrrSize.y,
-							selects: NgxThreeUtil.getTypeSafe(this.selects, []) as any,
+							selects: NgxThreeUtil.getTypeSafe(this.selects, []),
 						});
 						this.subscribeRefer(
 							'passSize',

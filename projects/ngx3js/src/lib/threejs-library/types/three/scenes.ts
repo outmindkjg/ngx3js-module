@@ -5,11 +5,33 @@ import { Color, ColorRepresentation } from './math';
 import { WebGLRenderer } from './renderers';
 import { Texture } from './textures';
 
+/**
+ * Abstract Fog base Class
+ */
 export interface FogBase {
+	/**
+	 */
 	new (): this;
+
+	/**
+	 * Optional name of the object (doesn't need to be unique). Default is an empty string.
+	 * @default ''
+	 */
 	name: string;
+
+	/**
+	 * Fog color.  Example: If set to black, far away objects will be rendered black.
+	 */
 	color: Color;
+
+	/**
+	 * @returns Returns a new fog instance with the same parameters as this one.
+	 */
 	clone(): FogBase;
+
+	/**
+	 * @returns Return fog data in JSON format.
+	 */
 	toJSON(): any;
 }
 
@@ -106,7 +128,7 @@ export interface Scene extends Object3D {
 	/**
 	 * Create a new scene object.
 	 */
-     new (): this;
+	new (): this;
 
 	type: 'Scene';
 
@@ -162,7 +184,7 @@ export interface Scene extends Object3D {
 
 	/**
 	 * Convert the scene to three.js [JSON Object/Scene format](https://github.com/mrdoob/three.js/wiki/JSON-Object-Scene-format-4).
-	 * @param met - object containing metadata such as textures or images for the scene.
-     */
-    toJSON(meta?: any): any;
+	 * @param met object containing metadata such as textures or images for the scene.
+	 */
+	toJSON(meta?: any): any;
 }

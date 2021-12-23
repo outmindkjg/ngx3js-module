@@ -6,10 +6,12 @@ import { Object3D } from './core';
  * Create a non-positional ( global ) audio object.
  * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
  *
- * [webaudio / sandbox ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox)
- * [webaudio / visualizer ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
+ * ### Examples
+ * [webaudio / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox) |
+ * [webaudio / visualizer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * //  create an AudioListener and add it to the camera
  * const listener = new THREE.AudioListener();
  * camera.add( listener );
@@ -17,18 +19,21 @@ import { Object3D } from './core';
  * const sound = new THREE.Audio( listener );
  * //  load a sound and set it as the Audio object's buffer
  * const audioLoader = new THREE.AudioLoader();
- * audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
- * 	sound.setBuffer( buffer );
- * 	sound.setLoop( true );
- * 	sound.setVolume( 0.5 );
- * 	sound.play();
- * });
+ * audioLoader.load(
+ * 	'sounds/ambient.ogg',
+ * 	function( buffer ) {
+ * 		sound.setBuffer( buffer );
+ * 		sound.setLoop( true );
+ * 		sound.setVolume( 0.5 );
+ * 		sound.play();
+ * 	}
+ * );
  * ```
  * @template NodeType
  */
 export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
 	/**
-	 * listener - [AudioListener](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener) instance.
+	 * @param listener  AudioListener instance.
 	 */
 	new (listener: AudioListener): this;
 
@@ -141,7 +146,7 @@ export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
 	 * Setup the [source](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.source) to the audioBuffer, and sets [sourceType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.sourceType) to 'audioNode'.
 	 * Also sets [hasPlaybackControl](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio.hasPlaybackControl) to false.
 	 */
-	setNodeSource(audioNode: AudioBufferSourceNode): this;
+	setNodeSource(audioNode: AudioBufferSourceNode | OscillatorNode): this;
 
 	/**
 	 * Applies the given object of type [HTMLMediaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) as the source of this audio.
@@ -206,7 +211,7 @@ export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
 
 	/**
 	 * Applies an array of filter nodes to the audio.
-	 * @param value - arrays of filters.
+	 * @param value arrays of filters.
 	 */
 	setFilters(value: AudioNode[]): this;
 
@@ -259,21 +264,20 @@ export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
 	 * Set the volume.
 	 */
 	setVolume(value: number): this;
-
-	/**
-	 * @deprecated Use {@link AudioLoader} instead.
-	 */
-	load(file: string): Audio;
 }
 
 /**
  * Create a AudioAnalyser object, which uses an [AnalyserNode](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode)
  * to analyse audio data.
- * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
- * [webaudio / sandbox ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox)
- * [webaudio / visualizer ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
  *
- * ```javascript
+ * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
+ *
+ * ### Examples
+ * [webaudio / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox) |
+ * [webaudio / visualizer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
+ *
+ * ### Code Example
+ * ```js
  * //  create an AudioListener and add it to the camera
  * const listener = new THREE.AudioListener();
  * camera.add( listener );
@@ -281,12 +285,15 @@ export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
  * const sound = new THREE.Audio( listener );
  * //  load a sound and set it as the Audio object's buffer
  * const audioLoader = new THREE.AudioLoader();
- * audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
- * 	sound.setBuffer( buffer );
- * 	sound.setLoop(true);
- * 	sound.setVolume(0.5);
- * 	sound.play();
- * });
+ * audioLoader.load(
+ * 	'sounds/ambient.ogg',
+ * 	function( buffer ) {
+ * 		sound.setBuffer( buffer );
+ * 		sound.setLoop(true);
+ * 		sound.setVolume(0.5);
+ * 		sound.play();
+ * 	}
+ * );
  * //  create an AudioAnalyser, passing in the sound and desired fftSize
  * const analyser = new THREE.AudioAnalyser( sound, 32 );
  * //  get the average frequency of the sound
@@ -313,8 +320,7 @@ export interface AudioAnalyser {
 	fftSize: number;
 
 	/**
-	 * A Uint8Array with size determined by [analyser.frequencyBinCount](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/frequencyBinCount)
-	 * used to hold analysis data.
+	 * A Uint8Array with size determined by [analyser.frequencyBinCount](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/frequencyBinCount) used to hold analysis data.
 	 */
 	data: Uint8Array;
 
@@ -328,11 +334,6 @@ export interface AudioAnalyser {
 	 * Get the average of the frequencies returned by the [getFrequencyData](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioAnalyser.getFrequencyData) method.
 	 */
 	getAverageFrequency(): number;
-
-	/**
-	 * @deprecated Use {@link AudioAnalyser#getFrequencyData .getFrequencyData()} instead.
-	 */
-	getData(file: any): any;
 }
 
 /**
@@ -381,23 +382,29 @@ export interface AudioContext {
  * A three.js application usually creates a single instance of AudioListener. It is a mandatory construtor parameter for audios entities like [Audio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio) and [PositionalAudio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PositionalAudio).
  * In most cases, the listener object is a child of the camera. So the 3D transformation of the camera represents the 3D transformation of the listener.
  *
- * [webaudio / sandbox ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox)
- * [webaudio / timing ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_timing)
- * [webaudio / visualizer ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
+ * ### Examples
+ * [webaudio / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox) |
+ * [webaudio / timing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_timing) |
+ * [webaudio / visualizer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * //  create an AudioListener and add it to the camera
  * const listener = new THREE.AudioListener();
  * camera.add( listener );
- * //  create a global audio source const sound = new THREE.Audio( listener );
+ * //  create a global audio source
+ * const sound = new THREE.Audio( listener );
  * //  load a sound and set it as the Audio object's buffer
  * const audioLoader = new THREE.AudioLoader();
- * audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
- * 	sound.setBuffer( buffer );
- * 	sound.setLoop(true);
- * 	sound.setVolume(0.5);
- * 	sound.play();
- * });
+ * audioLoader.load(
+ * 	'sounds/ambient.ogg',
+ * 	function( buffer ) {
+ * 		sound.setBuffer( buffer );
+ * 		sound.setLoop(true);
+ * 		sound.setVolume(0.5);
+ * 		sound.play();
+ * 	}
+ * );
  * ```
  *
  */
@@ -470,12 +477,14 @@ export interface AudioListener extends Object3D {
 /**
  * Create a positional audio object.
  * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
- * 
- * [webaudio / orientation ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_orientation)
- * [webaudio / sandbox ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox)
- * [webaudio / timing ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_timing)
  *
- * ```javascript
+ * ### Examples
+ * [webaudio / orientation](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_orientation) |
+ * [webaudio / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox) |
+ * [webaudio / timing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_timing)
+ *
+ * ### Code Example
+ * ```js
  * //  create an AudioListener and add it to the camera
  * const listener = new THREE.AudioListener();
  * camera.add( listener );
@@ -483,11 +492,14 @@ export interface AudioListener extends Object3D {
  * const sound = new THREE.PositionalAudio( listener );
  * //  load a sound and set it as the PositionalAudio object's buffer
  * const audioLoader = new THREE.AudioLoader();
- * audioLoader.load( 'sounds/song.ogg', function( buffer ) {
- * 	sound.setBuffer( buffer );
- * 	sound.setRefDistance( 20 );
- * 	sound.play();
- * });
+ * audioLoader.load(
+ * 	'sounds/song.ogg',
+ * 	function( buffer ) {
+ * 		sound.setBuffer( buffer );
+ * 		sound.setRefDistance( 20 );
+ * 		sound.play();
+ * 	}
+ * );
  * //  create an object for the sound to play from
  * const sphere = new THREE.SphereGeometry( 20, 32, 16 );
  * const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
@@ -499,7 +511,7 @@ export interface AudioListener extends Object3D {
  */
 export interface PositionalAudio extends Audio<PannerNode> {
 	/**
-	 * listener - [AudioListener](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener) instance.
+	 * @param listener AudioListener instance.
 	 */
 	new (listener: AudioListener): this;
 

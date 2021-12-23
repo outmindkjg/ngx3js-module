@@ -215,26 +215,22 @@ export class NgxAbstractObject3dComponent
 	/**
 	 * Content children of abstract object3d component
 	 */
-	@ContentChildren(NgxPositionComponent, { descendants: false })
-	private positionList: QueryList<NgxPositionComponent>;
+	@ContentChildren(NgxPositionComponent, { descendants: false }) private positionList: QueryList<NgxPositionComponent>;
 
 	/**
 	 * Content children of abstract object3d component
 	 */
-	@ContentChildren(NgxRotationComponent, { descendants: false })
-	private rotationList: QueryList<NgxRotationComponent>;
+	@ContentChildren(NgxRotationComponent, { descendants: false }) private rotationList: QueryList<NgxRotationComponent>;
 
 	/**
 	 * Content children of abstract object3d component
 	 */
-	@ContentChildren(NgxScaleComponent, { descendants: false })
-	private scaleList: QueryList<NgxScaleComponent>;
+	@ContentChildren(NgxScaleComponent, { descendants: false }) private scaleList: QueryList<NgxScaleComponent>;
 
 	/**
 	 * Content children of abstract object3d component
 	 */
-	@ContentChildren(NgxLookatComponent, { descendants: false })
-	private lookatList: QueryList<NgxLookatComponent>;
+	@ContentChildren(NgxLookatComponent, { descendants: false }) private lookatList: QueryList<NgxLookatComponent>;
 
 	/**
 	 * Content children of abstract object3d component
@@ -251,14 +247,12 @@ export class NgxAbstractObject3dComponent
 	/**
 	 * Content children of abstract object3d component
 	 */
-	@ContentChildren(NgxRigidbodyComponent, { descendants: false })
-	private rigidbodyList: QueryList<NgxRigidbodyComponent>;
+	@ContentChildren(NgxRigidbodyComponent, { descendants: false }) private rigidbodyList: QueryList<NgxRigidbodyComponent>;
 
 	/**
 	 * Content children of abstract object3d component
 	 */
-	@ContentChildren(NgxMixerComponent, { descendants: false })
-	private mixerList: QueryList<NgxMixerComponent>;
+	@ContentChildren(NgxMixerComponent, { descendants: false }) private mixerList: QueryList<NgxMixerComponent>;
 
 	/**
 	 * Object3 d attr of abstract object3d component

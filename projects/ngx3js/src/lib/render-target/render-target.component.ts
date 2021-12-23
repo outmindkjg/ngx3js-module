@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxSizeComponent } from '../size/size.component';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAbstractTextureComponent } from '../texture.abstract';
 
 /**
@@ -17,6 +18,10 @@ import { NgxAbstractTextureComponent } from '../texture.abstract';
 	providers: [
 		{
 			provide: NgxAbstractTextureComponent,
+			useExisting: forwardRef(() => NgxRenderTargetComponent),
+		},
+		{
+			provide: NgxAbstractSubscribeComponent,
 			useExisting: forwardRef(() => NgxRenderTargetComponent),
 		},
 	],

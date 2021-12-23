@@ -91,7 +91,7 @@ export class NgxMeshText extends N3JS.Mesh {
 		const texture = new N3JS.Texture(canvas);
 		texture.needsUpdate = true;
 		this.material = new N3JS.MeshBasicMaterial({
-			color: NgxThreeUtil.getColorSafe(this.fontColor, 0xffffff) as any,
+			color: NgxThreeUtil.getColorSafe(this.fontColor, 0xffffff),
 			side: this.side,
 			map: texture,
 			transparent: true,

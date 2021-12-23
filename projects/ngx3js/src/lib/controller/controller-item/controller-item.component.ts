@@ -513,7 +513,7 @@ export class NgxControllerItemComponent
 						depthTest: true,
 						transparent: true,
 						side: N3JS.DoubleSide,
-					} as any)
+					})
 				);
 				this._helperPoint = new N3JS.Mesh(
 					new N3JS.SphereGeometry(
@@ -527,7 +527,7 @@ export class NgxControllerItemComponent
 						depthTest: true,
 						transparent: true,
 						side: N3JS.DoubleSide,
-					} as any)
+					})
 				);
 				this._helperPoint.visible = false;
 				switch (this.type.toLowerCase()) {

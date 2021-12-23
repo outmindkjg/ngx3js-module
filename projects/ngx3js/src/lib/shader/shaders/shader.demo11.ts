@@ -61,8 +61,8 @@ export const ShaderDemo11: IShaderType = {
 	`,
 	uniforms: {
 		color: { value: NgxThreeUtil.getColorSafe(0xff2200) },
-		texturePosition: { value: null } as any,
-		textureVelocity: { value: null } as any,
+		texturePosition: { value: null },
+		textureVelocity: { value: null },
 		time: { value: 1.0 },
 		delta: { value: 0.0 },
 	},

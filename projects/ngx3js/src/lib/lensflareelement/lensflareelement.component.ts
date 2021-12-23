@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { NgxThreeUtil, I3JS, N3JS } from '../interface';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { INgxColor } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAbstractTextureComponent } from '../texture.abstract';
@@ -40,6 +40,12 @@ import { NgxAbstractTextureComponent } from '../texture.abstract';
 	selector: 'ngx3js-lensflareelement',
 	templateUrl: './lensflareelement.component.html',
 	styleUrls: ['./lensflareelement.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxLensflareelementComponent),
+		},
+	],
 })
 export class NgxLensflareelementComponent
 	extends NgxAbstractSubscribeComponent
@@ -148,10 +154,10 @@ export class NgxLensflareelementComponent
 		if (this.lensflareElement === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.lensflareElement = new N3JS.LensflareElement(
-				this.getTexture() as any,
+				this.getTexture(),
 				NgxThreeUtil.getTypeSafe(this.size, 100),
 				NgxThreeUtil.getTypeSafe(this.distance, 0),
-				NgxThreeUtil.getColorSafe(this.color) as any
+				NgxThreeUtil.getColorSafe(this.color)
 			);
 			super.setObject(this.lensflareElement);
 		}

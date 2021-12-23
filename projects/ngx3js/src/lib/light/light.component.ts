@@ -5,7 +5,7 @@ import {
 	OnInit,
 	SimpleChanges
 } from '@angular/core';
-import { ITagAttributes, INgxColor } from '../ngx-interface';
+import { INgxColor, ITagAttributes } from '../ngx-interface';
 import {
 	NgxAbstractObject3dComponent
 } from '../object3d.abstract';
@@ -840,7 +840,7 @@ export class NgxLightComponent
 							texture instanceof N3JS.CubeTexture
 						) {
 							basemesh.copy(
-								N3JS.LightProbeGenerator.fromCubeTexture(texture as any) as any
+								N3JS.LightProbeGenerator.fromCubeTexture(texture)
 							);
 						}
 						this.subscribeRefer(
@@ -853,7 +853,7 @@ export class NgxLightComponent
 										texture instanceof N3JS.CubeTexture
 									) {
 										basemesh.copy(
-											N3JS.LightProbeGenerator.fromCubeTexture(texture as any) as any
+											N3JS.LightProbeGenerator.fromCubeTexture(texture)
 										);
 									}
 								},
@@ -879,9 +879,9 @@ export class NgxLightComponent
 							try {
 								basemesh.copy(
 									N3JS.LightProbeGenerator.fromCubeRenderTarget(
-										renderer as any,
-										renderTarget as any
-									) as any
+										renderer,
+										renderTarget
+									)
 								);
 							} catch (ex) {}
 							// todo
@@ -1051,7 +1051,7 @@ export class NgxLightComponent
 				}
 				// this.light.shadow.updateMatrices(this.light);
 			}
-			this.setObject3d(this.light as any);
+			this.setObject3d(this.light);
 		}
 		return this.light as T;
 	}

@@ -428,7 +428,7 @@ export class NgxAbstractChartComponent
 				side = 'double';
 				break;
 			case 'star':
-				geometry = new NGX_GEOMETRY.NgxStarGeometry(options.radius * 0.5, options.radius, 5) as any;
+				geometry = new NGX_GEOMETRY.NgxStarGeometry(options.radius * 0.5, options.radius, 5);
 				side = 'double';
 				break;
 			case 'ring':
@@ -455,7 +455,7 @@ export class NgxAbstractChartComponent
 		});
 		const mesh: I3JS.Mesh = new N3JS.Mesh(geometry, material);
 		mesh.castShadow = true;
-		const geometryBorder = new NGX_GEOMETRY.NgxOutlineGeometry(geometry, 1.2) as any;
+		const geometryBorder = new NGX_GEOMETRY.NgxOutlineGeometry(geometry, 1.2);
 		const materialBorder = new N3JS.LineDashedMaterial({
 			color: NgxThreeUtil.getColorSafe(options.borderColor, 0x000000),
 			linewidth: 3,
@@ -465,7 +465,7 @@ export class NgxAbstractChartComponent
 			gapSize: 1,
 			scale: 500,
 		});
-		let border: I3JS.LineSegments = new N3JS.LineSegments(geometryBorder as any, materialBorder);
+		let border: I3JS.LineSegments = new N3JS.LineSegments(geometryBorder, materialBorder);
 		border.computeLineDistances();
 		mesh.add(border);
 		return {

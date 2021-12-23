@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, OnInit } from '@angular/core';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -11,6 +11,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-shader',
 	templateUrl: './shader.component.html',
 	styleUrls: ['./shader.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxShaderComponent),
+		},
+	],
 })
 export class NgxShaderComponent
 	extends NgxAbstractSubscribeComponent

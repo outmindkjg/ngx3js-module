@@ -23,7 +23,7 @@ export const ShaderDemo14: IShaderType = {
 	}
   `,
 	uniforms: {
-		uTexture: { value: null } as any,
+		uTexture: { value: null },
 		uDepth: { value: 55 },
 		uIntensity: { value: 1.0 },
 	},

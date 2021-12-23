@@ -155,7 +155,7 @@ export const ShaderConf: {
 	ssao: 'ssaoshader',
 	waterrefractionshader: N3JS.WaterRefractionShader,
 	waterrefraction: 'waterrefractionshader',
-	bokeh2shader: N3JS.BokehShader2 as any,
+	bokeh2shader: N3JS.BokehShader2,
 	bokehshader2: 'bokeh2shader',
 	bokeh2: 'bokeh2shader',
 	bokehdepthshader: N3JS.BokehDepthShader,

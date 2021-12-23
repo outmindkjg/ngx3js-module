@@ -307,7 +307,7 @@ export class NgxGeometryUtils {
 		}
 		const result: any = geometry.clone();
 		result.type = geometry.type;
-		result['parameters'] = (geometry as any)['parameters'];
+		result['parameters'] = geometry.parameters;
 		for (let i = 0, l = attributeNames.length; i < l; i++) {
 			const name = attributeNames[i];
 			const oldAttribute = geometry.getAttribute(name);

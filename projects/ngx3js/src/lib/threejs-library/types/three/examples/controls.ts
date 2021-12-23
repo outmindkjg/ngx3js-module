@@ -163,12 +163,8 @@ export interface DragControls extends EventDispatcher {
     new(objects: Object3D[], camera: Camera, domElement?: HTMLElement) : this;
 
     object: Camera;
-
-    // API
-
     enabled: boolean;
     transformGroup: boolean;
-
     activate(): void;
     deactivate(): void;
     dispose(): void;
@@ -281,7 +277,6 @@ export interface OrbitControls {
 
     getDistance(): number;
 
-    // EventDispatcher mixins
     addEventListener(type: string, listener: (event: any) => void): void;
 
     hasEventListener(type: string, listener: (event: any) => void): boolean;
@@ -324,7 +319,6 @@ export interface TrackballControls extends EventDispatcher {
     object: Camera;
     domElement: HTMLElement;
 
-    // API
     enabled: boolean;
     screen: { left: number; top: number; width: number; height: number };
     rotateSpeed: number;

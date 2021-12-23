@@ -12,9 +12,9 @@ import { Scene } from './scenes';
  */
 export interface BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 
@@ -43,8 +43,8 @@ export interface BufferAttribute {
 
 	/**
 	 * Object containing:
-	 * [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): Default is *0*. Position at which to start update.
-	 * [count](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): Default is *-1*, which means don't use update ranges.
+	 * @param offset Default is *0*. Position at which to start update.
+	 * @param count Default is *-1*, which means don't use update ranges.
 	 * This can be used to only update some components of stored vectors (for example, just the component related to color).
 	 * @default { offset: number; count: number }
 	 */
@@ -112,8 +112,7 @@ export interface BufferAttribute {
 
 	/**
 	 * Copy the array given here (which can be a normal array or TypedArray) into [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
-	 * See [TypedArray.set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set)
-	 * for notes on requirements if copying a TypedArray.
+	 * See [TypedArray.set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set) for notes on requirements if copying a TypedArray.
 	 */
 	copyArray(array: ArrayLike<number>): this;
 
@@ -158,13 +157,11 @@ export interface BufferAttribute {
 	transformDirection(m: Matrix4): this;
 
 	/**
-	 * Calls [TypedArray.set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set)( [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array), [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) )
-	 * on the [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
-	 * In particular, see that page for requirements on [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array)
-	 * being a [TypedArray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray).
+	 * Calls [TypedArray.set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set)( [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array), [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) ) on the [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array).
+	 * In particular, see that page for requirements on [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) being a [TypedArray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray).
 	 *
-	 * @param value - an [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) or [TypedArray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) from which to copy values.
-	 * @param offset - index of the [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array) at which to start copying.
+	 * @param value An [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) or [TypedArray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) from which to copy values.
+	 * @param offset index of the [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.array) at which to start copying.
 	 */
 	set(value: ArrayLike<number> | ArrayBufferView, offset?: number): this;
 
@@ -234,121 +231,13 @@ export interface BufferAttribute {
 }
 
 /**
- * @deprecated THREE.Int8Attribute has been removed. Use new THREE.Int8BufferAttribute() instead.
- */
-export interface Int8Attribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
- * @deprecated THREE.Uint8Attribute has been removed. Use new THREE.Uint8BufferAttribute() instead.
- */
-export interface Uint8Attribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
- * @deprecated THREE.Uint8ClampedAttribute has been removed. Use new THREE.Uint8ClampedBufferAttribute() instead.
- */
-export interface Uint8ClampedAttribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
- * @deprecated THREE.Int16Attribute has been removed. Use new THREE.Int16BufferAttribute() instead.
- */
-export interface Int16Attribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
- * @deprecated THREE.Uint16Attribute has been removed. Use new THREE.Uint16BufferAttribute() instead.
- */
-export interface Uint16Attribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
- * @deprecated THREE.Int32Attribute has been removed. Use new THREE.Int32BufferAttribute() instead.
- */
-export interface Int32Attribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
- * @deprecated THREE.Uint32Attribute has been removed. Use new THREE.Uint32BufferAttribute() instead.
- */
-export interface Uint32Attribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
- * @deprecated THREE.Float32Attribute has been removed. Use new THREE.Float32BufferAttribute() instead.
- */
-export interface Float32Attribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
- * @deprecated THREE.Float64Attribute has been removed. Use new THREE.Float64BufferAttribute() instead.
- */
-export interface Float64Attribute extends BufferAttribute {
-	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
-	 */
-	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
-}
-
-/**
  * Int8 buffer attribute
  */
 export interface Int8BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -358,9 +247,9 @@ export interface Int8BufferAttribute extends BufferAttribute {
  */
 export interface Uint8BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -370,9 +259,9 @@ export interface Uint8BufferAttribute extends BufferAttribute {
  */
 export interface Uint8ClampedBufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -382,9 +271,9 @@ export interface Uint8ClampedBufferAttribute extends BufferAttribute {
  */
 export interface Int16BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -394,9 +283,9 @@ export interface Int16BufferAttribute extends BufferAttribute {
  */
 export interface Uint16BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -406,9 +295,9 @@ export interface Uint16BufferAttribute extends BufferAttribute {
  */
 export interface Int32BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -418,9 +307,9 @@ export interface Int32BufferAttribute extends BufferAttribute {
  */
 export interface Uint32BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -430,9 +319,9 @@ export interface Uint32BufferAttribute extends BufferAttribute {
  */
 export interface Float16BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -442,9 +331,9 @@ export interface Float16BufferAttribute extends BufferAttribute {
  */
 export interface Float32BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -454,9 +343,9 @@ export interface Float32BufferAttribute extends BufferAttribute {
  */
 export interface Float64BufferAttribute extends BufferAttribute {
 	/**
-	 * @param array - Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
-	 * @param itemSize -  the number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param [normalized] - Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
+	 * @param array Must be a [TypedArray](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/TypedArray). Used to instantiate the buffer. This array should have itemSize * numVertices
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param normalized Applies to integer data only. Indicates how the underlying data in the buffer maps to the values in the GLSL code. For instance, if [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TypedArray) is an instance of UInt16Array, and [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, the values 0 - +65535 in the array  data will be mapped to 0.0f - +1.0f in the GLSL attribute. An Int16Array (signed) would map  from -32767 - +32767  to -1.0f - +1.0f. If [normalized](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is false, the values  will be converted to floats unmodified, i.e. 32767 becomes 32767.0f.
 	 */
 	new (array: Iterable<number> | ArrayLike<number> | number, itemSize: number, normalized?: boolean): this; // array parameter should be TypedArray.
 }
@@ -465,21 +354,23 @@ export interface Float64BufferAttribute extends BufferAttribute {
  * A representation of mesh, line, or point geometry. Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU.
  * To read and edit data in BufferGeometry attributes, see [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) documentation.
  *
- * [Mesh with non-indexed faces](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry)
- * [Mesh with indexed faces](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_indexed)
- * [Lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines)
- * [Indexed Lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines_indexed)
- * [Particles](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_custom_attributes_particles)
+ * ### Examples
+ * [Mesh with non-indexed faces](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry) |
+ * [Mesh with indexed faces](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_indexed) |
+ * [Lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines) |
+ * [Indexed Lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines_indexed) |
+ * [Particles](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_custom_attributes_particles) |
  * [Raw Shaders](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_rawshader)
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const geometry = new THREE.BufferGeometry();
  * //  create a simple square shape. We duplicate the top left and bottom right // vertices because each vertex needs to appear once per triangle.
  * const vertices = new Float32Array( [
  *  -1.0, -1.0,  1.0,
- *  1.0, -1.0,  1.0,
- *  1.0,  1.0,  1.0,
- *  1.0,  1.0,  1.0,
+ *   1.0, -1.0,  1.0,
+ *   1.0,  1.0,  1.0,
+ *   1.0,  1.0,  1.0,
  *  -1.0,  1.0,  1.0,
  *  -1.0, -1.0,  1.0
  * ] );
@@ -532,7 +423,7 @@ export interface BufferGeometry extends EventDispatcher {
 	/**
 	 * An object with a property for each of the constructor parameters. Any modification after instantiation does not change the geometry.
 	 */
-	parameters? : any;
+	parameters?: any;
 
 	/**
 	 * This hashmap has as id the name of the attribute to be set and as value the [buffer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) to set it to.
@@ -561,8 +452,7 @@ export interface BufferGeometry extends EventDispatcher {
 	/**
 	 * Split the geometry into groups, each of which will be rendered in a separate WebGL draw call.
 	 * This allows an array of materials to be used with the bufferGeometry.
-	 * Each group is an object of the form: { start: Integer, count: Integer, materialIndex: Integer }
-	 * where start specifies the first element in this draw call – the first vertex for non-indexed geometry, otherwise the first triangle index. Count specifies how many vertices (or indices) are included, and materialIndex specifies the material array index to use.
+	 * Each group is an object of the form: { start: Integer, count: Integer, materialIndex: Integer } where start specifies the first element in this draw call – the first vertex for non-indexed geometry, otherwise the first triangle index. Count specifies how many vertices (or indices) are included, and materialIndex specifies the material array index to use.
 	 * Use *.addGroup* to add groups, rather than modifying this array directly.
 	 * @default []
 	 */
@@ -631,8 +521,7 @@ export interface BufferGeometry extends EventDispatcher {
 	hasAttribute(name: BuiltinShaderAttributeName | (string & {})): boolean;
 
 	/**
-	 * Adds a group to this geometry; see the [groups](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry.groups)
-	 * property for details.
+	 * Adds a group to this geometry; see the [groups](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry.groups) property for details.
 	 */
 	addGroup(start: number, count: number, materialIndex?: number): void;
 
@@ -688,9 +577,9 @@ export interface BufferGeometry extends EventDispatcher {
 	scale(x: number, y: number, z: number): BufferGeometry;
 
 	/**
-	 * vector - A world vector to look at.
 	 * Rotates the geometry to face a point in space. This is typically done as a one time operation, and not during a loop.
 	 * Use [Object3D.lookAt](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.lookAt) for typical real-time mesh usage.
+	 * @param vector A world vector to look at.
 	 */
 	lookAt(v: Vector3): void;
 
@@ -766,36 +655,6 @@ export interface BufferGeometry extends EventDispatcher {
 	dispose(): void;
 
 	/**
-	 * @deprecated Use {@link BufferGeometry#groups .groups} instead.
-	 */
-	drawcalls: any;
-
-	/**
-	 * @deprecated Use {@link BufferGeometry#groups .groups} instead.
-	 */
-	offsets: any;
-
-	/**
-	 * @deprecated Use {@link BufferGeometry#setIndex .setIndex()} instead.
-	 */
-	addIndex(index: any): void;
-
-	/**
-	 * @deprecated Use {@link BufferGeometry#addGroup .addGroup()} instead.
-	 */
-	addDrawCall(start: any, count: any, indexOffset?: any): void;
-
-	/**
-	 * @deprecated Use {@link BufferGeometry#clearGroups .clearGroups()} instead.
-	 */
-	clearDrawCalls(): void;
-
-	/**
-	 * @deprecated Use {@link BufferGeometry#setAttribute .setAttribute()} instead.
-	 */
-	addAttribute(name: string, attribute: BufferAttribute | InterleavedBufferAttribute): BufferGeometry;
-
-	/**
 	 *
 	 * @param name
 	 * @param array
@@ -803,11 +662,6 @@ export interface BufferGeometry extends EventDispatcher {
 	 * @returns attribute
 	 */
 	addAttribute(name: any, array: any, itemSize: any): any;
-
-	/**
-	 * @deprecated Use {@link BufferGeometry#deleteAttribute .deleteAttribute()} instead.
-	 */
-	removeAttribute(name: string): BufferGeometry;
 }
 
 /**
@@ -816,7 +670,7 @@ export interface BufferGeometry extends EventDispatcher {
  */
 export interface Clock {
 	/**
-	 * autoStart - whether to automatically start the clock. Default is true.
+	 * @param autoStart whether to automatically start the clock. Default is true.
 	 */
 	new (autoStart?: boolean): this;
 
@@ -851,8 +705,7 @@ export interface Clock {
 	running: boolean;
 
 	/**
-	 * Starts clock. Also sets the [startTime](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Clock.startTime) and [oldTime](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Clock.oldTime)
-	 * to the current time, sets [elapsedTime](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Clock.elapsedTime) to *0* and [running](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Clock.running) to *true*.
+	 * Starts clock. Also sets the [startTime](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Clock.startTime) and [oldTime](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Clock.oldTime) to the current time, sets [elapsedTime](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Clock.elapsedTime) to *0* and [running](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Clock.running) to *true*.
 	 */
 	start(): void;
 
@@ -890,7 +743,9 @@ export type EventListener<E, T, U> = (event: E & { type: T } & { target: U }) =>
 /**
  * JavaScript events for custom objects.
  * [Eventdispatcher on GitHub](https://github.com/mrdoob/eventdispatcher.js)
- * ```javascript
+ *
+ * ### Code Example
+ * ```js
  * //  Adding events to a custom object
  * class Car extends EventDispatcher {
  * 	start() {
@@ -957,22 +812,21 @@ export interface GLBufferAttribute {
 	 * gl.BYTE: 1
 	 * gl.UNSIGNED_BYTE: 1
 	 *
-	 * @param buffer - Must be a <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLBuffer" target="_blank">WebGLBuffer</a>.
-	 * @param type* - One of <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants#Data_types" target="_blank">WebGL Data Types</a>.
-	 * @param itemSize - The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
-	 * @param elementSize - 1, 2 or 4. The corresponding size (in bytes) for the given "type" param.
-	 * @param count - The expected number of vertices in VBO.
+	 * @param buffer Must be a [WebGLBuffer](https://developer.mozilla.org/en-US/docs/Web/API/WebGLBuffer).
+	 * @param type* - One of [WebGL Data Types](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants#Data_types).
+	 * @param itemSize The number of values of the array that should be associated with a particular vertex. For instance, if this attribute is storing a 3-component vector (such as a position, normal, or color), then itemSize should be 3.
+	 * @param elementSize 1, 2 or 4. The corresponding size (in bytes) for the given "type" param.
+	 * @param count The expected number of vertices in VBO.
 	 */
 	new (buffer: WebGLBuffer, type: number, itemSize: number, elementSize: 1 | 2 | 4, count: number): this;
 
 	/**
-	 * The current <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGLBuffer" target="_blank">WebGLBuffer</a> instance.
+	 * The current [WebGLBuffer](https://developer.mozilla.org/en-US/docs/Web/API/WebGLBuffer) instance.
 	 */
 	buffer: WebGLBuffer;
 
 	/**
-	 * A <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants#Data_types" target="_blank">WebGL Data Type</a>
-	 * describing the underlying VBO contents.
+	 * A [WebGL Data Type](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants#Data_types) describing the underlying VBO contents.
 	 * Set this property together with *elementSize*. The recommended way is using the *setType* method.
 	 */
 	type: number;
@@ -1031,7 +885,7 @@ export interface GLBufferAttribute {
 }
 
 /**
- * see {@link https://github.com/mrdoob/three.js/blob/master/examples/jsm/utils/BufferGeometryUtils.js|examples/jsm/utils/BufferGeometryUtils.js}
+ * see [examples/jsm/utils/BufferGeometryUtils.js](https://github.com/mrdoob/three.js/blob/master/examples/jsm/utils/BufferGeometryUtils.js)
  */
 export interface BufferGeometryUtils {
 	/**
@@ -1062,8 +916,8 @@ export interface InstancedBufferAttribute extends BufferAttribute {
 	 *
 	 * @param array
 	 * @param itemSize
-	 * @param [normalized]
-	 * @param [meshPerAttribute]
+	 * @param normalized
+	 * @param meshPerAttribute
 	 */
 	new (array: ArrayLike<number>, itemSize: number, normalized?: boolean, meshPerAttribute?: number): this;
 
@@ -1109,7 +963,7 @@ export interface InstancedInterleavedBuffer extends InterleavedBuffer {
 	 *
 	 * @param array
 	 * @param stride
-	 * @param [meshPerAttribute]
+	 * @param meshPerAttribute
 	 */
 	new (array: ArrayLike<number>, stride: number, meshPerAttribute?: number): this;
 
@@ -1124,12 +978,13 @@ export interface InstancedInterleavedBuffer extends InterleavedBuffer {
  * "Interleaved" means that multiple attributes, possibly of different types, (e.g., position, normal, uv, color) are packed into a single array buffer.
  * An introduction into interleaved arrays can be found here: [Interleaved array basics](https://blog.tojicode.com/2011/05/interleaved-array-basics.html)
  *
+ * ### Examples
  * [webgl / buffergeometry / points / interleaved](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_points_interleaved)
  */
 export interface InterleavedBuffer {
 	/**
-	 * @param array - A typed array with a shared buffer. Stores the geometry data.
-	 * @param stride - The number of typed-array elements per vertex.
+	 * @param array A typed array with a shared buffer. Stores the geometry data.
+	 * @param stride The number of typed-array elements per vertex.
 	 */
 	new (array: ArrayLike<number>, stride: number): this;
 
@@ -1189,13 +1044,13 @@ export interface InterleavedBuffer {
 	setUsage(usage: Usage): InterleavedBuffer;
 
 	/**
-	 * data - This object holds shared array buffers required for properly cloning geometries with interleaved attributes.
-	 * Creates a clone of this [name].
+	 * @param data This object holds shared array buffers required for properly cloning geometries with interleaved attributes.
+	 * Creates a clone of this InterleavedBuffer.
 	 */
 	clone(data: object): InterleavedBuffer;
 
 	/**
-	 * Copies another [name] to this [name].
+	 * Copies another InterleavedBuffer to this InterleavedBuffer.
 	 */
 	copy(source: InterleavedBuffer): this;
 
@@ -1205,15 +1060,15 @@ export interface InterleavedBuffer {
 	copyAt(index1: number, attribute: InterleavedBufferAttribute, index2: number): InterleavedBuffer;
 
 	/**
-	 * value - The source (typed) array.
-	 * offset - The offset into the target array at which to begin writing values from the source array. Default is *0*.
 	 * Stores multiple values in the buffer, reading input values from a specified array.
+	 * @param value The source (typed) array.
+	 * @param offset The offset into the target array at which to begin writing values from the source array. Default is *0*.
 	 */
 	set(value: ArrayLike<number>, index: number): InterleavedBuffer;
 
 	/**
-	 * data - This object holds shared array buffers required for properly serializing geometries with interleaved attributes.
-	 * Serializes this [name].
+	 * Serializes this InterleavedBuffer.
+	 * @param data  This object holds shared array buffers required for properly serializing geometries with interleaved attributes.
 	 */
 	toJSON(data: object): {
 		uuid: string;
@@ -1223,7 +1078,7 @@ export interface InterleavedBuffer {
 	};
 }
 /**
- * see {@link https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBufferAttribute.js|src/core/InterleavedBufferAttribute.js}
+ * see [src/core/InterleavedBufferAttribute.js](https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBufferAttribute.js)
  */
 export interface InterleavedBufferAttribute {
 	/**
@@ -1231,7 +1086,7 @@ export interface InterleavedBufferAttribute {
 	 * @param interleavedBuffer
 	 * @param itemSize
 	 * @param offset
-	 * @param [normalized]
+	 * @param normalized
 	 */
 	new (interleavedBuffer: InterleavedBuffer, itemSize: number, offset: number, normalized?: boolean): this;
 
@@ -1375,6 +1230,7 @@ export interface InterleavedBufferAttribute {
  * This can be used to control visibility - an object must share a layer with a [camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera) to be visible when that camera's view is rendered.
  * All classes that inherit from [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) have an [Object3D.layers](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.layers) property which is an instance of this class.
  *
+ * ### Examples
  * [WebGL / layers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_layers)
  */
 export interface Layers {
@@ -1390,13 +1246,13 @@ export interface Layers {
 
 	/**
 	 * Set membership to *layer*, and remove membership all other layers.
-	 * @param channel - an integer from 0 to 31.
+	 * @param channel an integer from 0 to 31.
 	 */
 	set(channel: number): void;
 
 	/**
 	 * Add membership of this *layer*.
-	 * @param channel - an integer from 0 to 31.
+	 * @param channel an integer from 0 to 31.
 	 */
 	enable(channel: number): void;
 
@@ -1407,13 +1263,13 @@ export interface Layers {
 
 	/**
 	 * Toggle membership of *layer*.
-	 * @param channel - an integer from 0 to 31.
+	 * @param channel an integer from 0 to 31.
 	 */
 	toggle(channel: number): void;
 
 	/**
 	 * Remove membership of this *layer*.
-	 * @param channel - an integer from 0 to 31.
+	 * @param channel an integer from 0 to 31.
 	 */
 	disable(channel: number): void;
 
@@ -1423,12 +1279,12 @@ export interface Layers {
 	disableAll(): void;
 
 	/**
-	 * @param layers - a Layers object Returns true if this and the passed *layers* object have at least one layer in common.
+	 * @param layers A Layers object Returns true if this and the passed *layers* object have at least one layer in common.
 	 */
 	test(layers: Layers): boolean;
 
 	/**
-	 * @param channel - an integer from 0 to 31.
+	 * @param channel an integer from 0 to 31.
 	 * @returns Returns true if the given layer is enabled.
 	 */
 	isEnabled(channel: number): boolean;
@@ -1455,7 +1311,8 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 	material?: Material | Material[];
 
 	/**
-	 * readonly – Unique number for this object instance.
+	 * Unique number for this object instance.
+	 * @readonly 
 	 */
 	id: number;
 
@@ -1588,8 +1445,7 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 	frustumCulled: boolean;
 
 	/**
-	 * This value allows the default rendering order of [scene graph](https://en.wikipedia.org/wiki/Scene_graph)
-	 * objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Group), all descendants objects will be sorted and rendered together.
+	 * This value allows the default rendering order of [scene graph](https://en.wikipedia.org/wiki/Scene_graph) objects to be overridden although opaque and transparent objects remain sorted independently. When this property is set for an instance of [Group](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Group), all descendants objects will be sorted and rendered together.
 	 * Sorting is from lowest to highest renderOrder. Default value is *0*.
 	 * @default 0
 	 */
@@ -1721,19 +1577,19 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 
 	/**
 	 * Rotates the object around x axis in local space.
-	 * @param angle the angle to rotate in radians.
+	 * @param angle The angle to rotate in radians.
 	 */
 	rotateX(angle: number): this;
 
 	/**
 	 * Rotates the object around y axis in local space.
-	 * @param angle the angle to rotate in radians.
+	 * @param angle The angle to rotate in radians.
 	 */
 	rotateY(angle: number): this;
 
 	/**
 	 * Rotates the object around z axis in local space.
-	 * @param angle the angle to rotate in radians.
+	 * @param angle The angle to rotate in radians.
 	 */
 	rotateZ(angle: number): this;
 
@@ -1763,15 +1619,15 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 	translateZ(distance: number): this;
 
 	/**
-	 * vector - A vector representing a position in this object's local space.
 	 * Converts the vector from this object's local space to world space.
+	 * @param vector A vector representing a position in this object's local space.
 	 * @param vector A local vector.
 	 */
 	localToWorld(vector: Vector3): Vector3;
 
 	/**
 	 * Converts the vector from world space to this object's local space.
-	 * @param vector - A vector representing a position in world space.
+	 * @param vector A vector representing a position in world space.
 	 */
 	worldToLocal(vector: Vector3): Vector3;
 
@@ -1780,7 +1636,7 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 	 * Rotates the object to face a point in world space.
 	 * This method does not support objects having non-uniformly-scaled parent(s).
 	 *
-	 * @param vector - A vector representing a position in world space.
+	 * @param vector A vector representing a position in world space.
 	 */
 	lookAt(vector: Vector3 | number, y?: number, z?: number): void;
 
@@ -1812,47 +1668,45 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 	attach(object: Object3D): this;
 
 	/**
-	 * id -- Unique number of the object instance Searches through an object and its children, starting with the object itself, and returns the first with a matching id.
 	 * Note that ids are assigned in chronological order: 1, 2, 3, ..., incrementing by one for each new object.
-	 * @param id	Unique number of the object instance
+	 * @param id  Unique number of the object instance Searches through an object and its children, starting with the object itself, and returns the first with a matching id.
 	 */
 	getObjectById(id: number): Object3D | undefined;
 
 	/**
-	 * name -- String to match to the children's Object3D.name property.
 	 * Searches through an object and its children, starting with the object itself, and returns the first with a matching name.
 	 * Note that for most objects the name is an empty string by default. You will have to set it manually to make use of this method.
-	 * @param name	String to match to the children's Object3d.name property.
+	 * @param name String to match to the children's Object3D.name property.
 	 */
 	getObjectByName(name: string): Object3D | undefined;
 
 	/**
-	 * name -- the property name to search for.
-	 * value -- value of the given property.
 	 * Searches through an object and its children, starting with the object itself, and returns the first with a property that matches the value given.
+	 * @param name The property name to search for.
+	 * @param value Value of the given property.
 	 */
 	getObjectByProperty(name: string, value: string): Object3D | undefined;
 
 	/**
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns a vector representing the position of the object in world space.
 	 */
 	getWorldPosition(target: Vector3): Vector3;
 
 	/**
-	 * @param target - the result will be copied into this Quaternion.
+	 * @param target The result will be copied into this Quaternion.
 	 * @returns Returns a quaternion representing the rotation of the object in world space.
 	 */
 	getWorldQuaternion(target: Quaternion): Quaternion;
 
 	/**
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns a vector of the scaling factors applied to the object for each axis in world space.
 	 */
 	getWorldScale(target: Vector3): Vector3;
 
 	/**
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns a vector representing the direction of object's positive z-axis in world space.
 	 */
 	getWorldDirection(target: Vector3): Vector3;
@@ -1866,7 +1720,7 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 	/**
 	 * Executes the callback on this object and all descendants.
 	 * Note: Modifying the scene graph inside the callback is discouraged.
-	 * @param callback - A function with as first argument an object3D object.
+	 * @param callback A function with as first argument an object3D object.
 	 */
 	traverse(callback: (object: Object3D) => any): void;
 
@@ -1874,14 +1728,14 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 	 * Like traverse, but the callback will only be executed for visible objects.
 	 * Descendants of invisible objects are not traversed.
 	 * Note: Modifying the scene graph inside the callback is discouraged.
-	 * @param callback - A function with as first argument an object3D object.
+	 * @param callback A function with as first argument an object3D object.
 	 */
 	traverseVisible(callback: (object: Object3D) => any): void;
 
 	/**
 	 * Executes the callback on all ancestors.
 	 * Note: Modifying the scene graph inside the callback is discouraged.
-	 * @param callback - A function with as first argument an object3D object.
+	 * @param callback A function with as first argument an object3D object.
 	 */
 	traverseAncestors(callback: (object: Object3D) => any): void;
 
@@ -1907,15 +1761,15 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 	toJSON(meta?: { geometries: any; materials: any; textures: any; images: any }): any;
 
 	/**
-	 * recursive -- if true, descendants of the object are also cloned. Default is true.
+	 * @param recursive if true, descendants of the object are also cloned. Default is true.
 	 * @returns Returns a clone of this object and optionally all descendants.
 	 */
 	clone(recursive?: boolean): this;
 
 	/**
-	 * recursive -- if true, descendants of the object are also copied. Default is true.
 	 * Copy the given object into this object.
 	 * Note: event listeners and user-defined callbacks (*.onAfterRender* and *.onBeforeRender*) are not copied.
+	 * @param recursive if true, descendants of the object are also copied. Default is true.
 	 */
 	copy(source: this, recursive?: boolean): this;
 }
@@ -1962,17 +1816,19 @@ export interface RaycasterParameters {
  * This class is designed to assist with [raycasting](https://en.wikipedia.org/wiki/Ray_casting).
  * Raycasting is used for mouse picking (working out what objects in the 3d space the mouse is over) amongst other things.
  *
- * [Raycasting to a Mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_cubes)
- * [Raycasting to a Mesh in using an OrthographicCamera](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_cubes_ortho)
- * [Raycasting to a Mesh with BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_buffergeometry)
- * [Raycasting to a InstancedMesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_raycast)
- * [Raycasting to a Line](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_lines)
- * [Raycasting to Points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_raycasting_points)
- * [Terrain raycasting](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_terrain_raycast)
- * [Raycasting to paint voxels](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_voxelpainter)
+ * ### Examples
+ * [Raycasting to a Mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_cubes) |
+ * [Raycasting to a Mesh in using an OrthographicCamera](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_cubes_ortho) |
+ * [Raycasting to a Mesh with BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_buffergeometry) |
+ * [Raycasting to a InstancedMesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_raycast) |
+ * [Raycasting to a Line](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_lines) |
+ * [Raycasting to Points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_raycasting_points) |
+ * [Terrain raycasting](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_terrain_raycast) |
+ * [Raycasting to paint voxels](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_voxelpainter) |
  * [Raycast to a Texture](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_raycast_texture)
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const raycaster = new THREE.Raycaster();
  * const mouse = new THREE.Vector2();
  * function onMouseMove( event ) {
@@ -1982,7 +1838,8 @@ export interface RaycasterParameters {
  * }
  * function render() {
  *  //  update the picking ray with the camera and mouse position raycaster.setFromCamera( mouse, camera );
- *  //  calculate objects intersecting the picking ray const intersects = raycaster.intersectObjects( scene.children );
+ *  //  calculate objects intersecting the picking ray 
+ * 	const intersects = raycaster.intersectObjects( scene.children );
  *  for ( let i = 0; i < intersects.length; i ++ ) {
  *      intersects[ i ].object.material.color.set( 0xff0000 );
  *  }
@@ -2051,20 +1908,19 @@ export interface Raycaster {
 
 	/**
 	 * Updates the ray with a new origin and direction.
-	 * @param coords - 2D coordinates of the mouse, in normalized device coordinates (NDC)---X and Y components should be between -1 and 1.
-	 * @param camera - camera from which the ray should originate Updates the ray with a new origin and direction.
+	 * @param coords 2D coordinates of the mouse, in normalized device coordinates (NDC)---X and Y components should be between -1 and 1.
+	 * @param camer A camera from which the ray should originate Updates the ray with a new origin and direction.
 	 */
 	setFromCamera(coords: { x: number; y: number }, camera: Camera): void;
 
 	/**
 	 * Checks all intersection between the ray and the object with or without the descendants. Intersections are returned sorted by distance, closest first.
-	 * An array of intersections is returned... [ { distance, point, face, faceIndex, object }, ... ]
-	 * distance - Second set of U,V coordinates at point of intersection [instanceId](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) – The index number of the instance where the ray intersects the InstancedMesh *Raycaster* delegates to the [raycast](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.raycast) method of the passed object, when evaluating whether the ray intersects the object or not. This allows [meshes](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) to respond differently to ray casting than [lines](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line) and [pointclouds](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points).
+	 * An array of intersections is returned... [ { distance, point, face, faceIndex, object }, ... ] distance - Second set of U,V coordinates at point of intersection [instanceId](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) – The index number of the instance where the ray intersects the InstancedMesh *Raycaster* delegates to the [raycast](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.raycast) method of the passed object, when evaluating whether the ray intersects the object or not. This allows [meshes](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) to respond differently to ray casting than [lines](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line) and [pointclouds](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points).
 	 * *Note* that for meshes, faces must be pointed towards the origin of the *.ray* in order to be detected; intersections of the ray passing through the back of a face will not be detected. To raycast against both faces of an object, you'll want to set the [material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh.material)'s [side](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.side) property to *THREE.DoubleSide*.
 	 *
-	 * @param object - The object to check for intersection with the ray.
-	 * @param recursive - If true, it also checks all descendants. Otherwise it only checks intersection with the object. Default is true.
-	 * @param optionalTarget - target to set the result. Otherwise a new [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) is instantiated. If set, you must clear this array prior to each call (i.e., array.length = 0;).
+	 * @param object The object to check for intersection with the ray.
+	 * @param recursive If true, it also checks all descendants. Otherwise it only checks intersection with the object. Default is true.
+	 * @param optionalTarget target to set the result. Otherwise a new [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) is instantiated. If set, you must clear this array prior to each call (i.e., array.length = 0;).
 	 */
 	intersectObject<TIntersected extends Object3D>(
 		object: Object3D,
@@ -2075,9 +1931,9 @@ export interface Raycaster {
 	/**
 	 * Checks all intersection between the ray and the objects with or without the descendants. Intersections are returned sorted by distance, closest first. Intersections are of the same form as those returned by *.intersectObject*.
 	 *
-	 * @param objects - The objects to check for intersection with the ray.
-	 * @param recursive - If true, it also checks all descendants of the objects. Otherwise it only checks intersection with the objects. Default is true.
-	 * @param optionalTarget - target to set the result. Otherwise a new [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) is instantiated. If set, you must clear this array prior to each call (i.e., array.length = 0;).
+	 * @param objects The objects to check for intersection with the ray.
+	 * @param recursive If true, it also checks all descendants of the objects. Otherwise it only checks intersection with the objects. Default is true.
+	 * @param optionalTarget target to set the result. Otherwise a new [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) is instantiated. If set, you must clear this array prior to each call (i.e., array.length = 0;).
 	 */
 	intersectObjects<TIntersected extends Object3D>(
 		objects: Object3D[],
@@ -2089,61 +1945,50 @@ export interface Raycaster {
 /**
  * Uniforms are global GLSL variables. They are passed to shader programs.
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * uniforms: {
  *  time: { value: 1.0 }, resolution: new Uniform( new Vector2() )
  * };
  * ```
  * Each uniform must have a *value* property. The type of the value must correspond to the type of the uniform variable in the GLSL code as specified for the primitive GLSL types in the table below. Uniform structures and arrays are also supported. GLSL arrays of primitive type must either be specified as an array of the corresponding THREE objects or as a flat array containing the data of all the objects. In other words; GLSL primitives in arrays must not be represented by arrays. This rule does not apply transitively.
  * An array of *vec2* arrays, each with a length of five vectors, must be an array of arrays, of either five [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) objects or ten *number*s.
- * 
+ *
  * |    GLSL type   |      JavaScript type      |
- * |:--------------:|--------------------------:|
- * | int            | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) |
- * | uint (WebGL 2) | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)|
- * | float          | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) |
- * | bool           | [Boolean](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) |
- * | bool           | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) |
- * | vec2           | [THREE.Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) |
- * | vec2           | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | vec2           | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
- * | vec3           | [THREE.Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) |
- * | vec3           | [THREE.Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) |
- * | vec3           | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | vec3           | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
- * | vec4           | [THREE.Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) |
- * | vec4           | [THREE.Quaternion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) |
- * | vec4           | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | vec4           | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
- * | mat2           | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | mat2           | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
- * | mat3           | [THREE.Matrix3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3) |
- * | mat3           | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | mat3           | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
- * | mat4           | [THREE.Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) |
- * | mat4           | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | mat4           | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * |:----------------:|---------------------------:|
+ * | int                  | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)                       |
+ * | uint (WebGL 2) | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)                   | 
+ * | float               | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)                       |
+ * | bool               | [Boolean](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean)                       |
+ * | bool               | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)                       |
+ * | vec2               | [THREE.Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)            |
+ * | vec2               | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | vec2               | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
+ * | vec3               | [THREE.Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)            |
+ * | vec3               | [THREE.Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color)                    |
+ * | vec3               | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | vec3               | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
+ * | vec4               | [THREE.Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4)            |
+ * | vec4               | [THREE.Quaternion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion)|
+ * | vec4               | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | vec4               | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
+ * | mat2              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | mat2              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
+ * | mat3              | [THREE.Matrix3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3)            |
+ * | mat3              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | mat3              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
+ * | mat4              | [THREE.Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4)            |
+ * | mat4              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | mat4              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
  *
  */
 export interface Uniform {
 	new (value: any): this;
 	/**
-	 * @deprecated
 	 */
 	new (type: string, value: any): this;
-	/**
-	 * @deprecated
-	 */
-	type: string;
-	value: any;
-	/**
-	 * @deprecated Use {@link Object3D#onBeforeRender object.onBeforeRender()} instead.
-	 */
-	dynamic: boolean;
-	onUpdateCallback: () => void;
 
-	/**
-	 * @deprecated Use {@link Object3D#onBeforeRender object.onBeforeRender()} instead.
-	 */
-	onUpdate(callback: () => void): Uniform;
+	value: any;
+
+	onUpdateCallback: () => void;
 }

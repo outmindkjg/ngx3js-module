@@ -17,7 +17,7 @@ export const UnrealBloomSelective: IShaderType = {
   }
   `,
 	uniforms: {
-		baseTexture: { value: null } as any,
-		bloomTexture: { value: null } as any,
+		baseTexture: { value: null },
+		bloomTexture: { value: null },
 	},
 };

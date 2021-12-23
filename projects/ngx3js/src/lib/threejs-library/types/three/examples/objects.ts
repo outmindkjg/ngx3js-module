@@ -39,10 +39,9 @@ export interface StormParams {
     onLightningDown?: (lightning: LightningStrike) => void;
 }
 
-export interface LightningStorm {
+export interface LightningStorm extends Mesh{
     new(stormParams?: StormParams) : this;
     update(time: number): void;
-    copy(source: LightningStorm): LightningStorm;
     clone() : this;
 }
 

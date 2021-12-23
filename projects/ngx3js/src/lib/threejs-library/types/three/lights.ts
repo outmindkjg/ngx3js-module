@@ -7,19 +7,19 @@ import { WebGLRenderTarget } from './renderers';
  * This light globally illuminates all objects in the scene equally.
  * This light cannot be used to cast shadows as it does not have a direction.
  *
+ * ### Examples
+ * [animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const light = new THREE.AmbientLight( 0x404040 ); // soft white light scene.add( light );
  * ```
- *
- * ### Examples
- * [animation / skinning / blending ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending)
  */
 export interface AmbientLight extends Light {
 	/**
 	 * Creates a new AmbientLight.
-	 * @param color - Numeric value of the RGB component of the color. Default is 0xffffff.
-	 * @param intensity - Numeric value of the light's strength/intensity. Default is 1.
+	 * @param color Numeric value of the RGB component of the color. Default is 0xffffff.
+	 * @param intensity Numeric value of the light's strength/intensity. Default is 1.
 	 */
 	new (color?: ColorRepresentation, intensity?: number): this;
 
@@ -37,8 +37,8 @@ export interface AmbientLight extends Light {
 export interface AmbientLightProbe extends LightProbe {
 	/**
 	 * Creates a new AmbientLightProbe.
-	 * @param color - An instance of Color, string representing a color or a number representing a color.
-	 * @param intensity - Numeric value of the light probe's intensity. Default is 1.
+	 * @param color An instance of Color, string representing a color or a number representing a color.
+	 * @param intensity Numeric value of the light probe's intensity. Default is 1.
 	 */
 	new (color?: ColorRepresentation, intensity?: number): this;
 
@@ -56,25 +56,25 @@ export interface AmbientLightProbe extends LightProbe {
  * The reason for this is to allow the light to cast shadows - the *.shadow* camera needs a position to calculate shadows from.
  * See the *.target* property below for details on updating the target.
  *
+ * ### Examples
+ * [controls / fly](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_fly) |
+ * [effects / parallaxbarrier](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_parallaxbarrier) |
+ * [effects / stereo](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_stereo) |
+ * [geometry / extrude / splines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_splines) |
+ * [materials / bumpmap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_bumpmap)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * //  White directional light at half intensity shining from the top.
  * const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
  * scene.add( directionalLight );
  * ```
- *
- * ### Examples
- * [controls / fly ](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_fly) |
- * [effects / parallaxbarrier ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_parallaxbarrier) |
- * [effects / stereo ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_stereo) |
- * [geometry / extrude / splines ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_splines) |
- * [materials / bumpmap ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_bumpmap)
  */
 export interface DirectionalLight extends Light {
 	/**
 	 * Creates a new DirectionalLight.
-	 * @param color - hexadecimal color of the light. Default is 0xffffff (white).
-	 * @param intensity - numeric value of the light's strength/intensity. Default is 1.
+	 * @param color hexadecimal color of the light. Default is 0xffffff (white).
+	 * @param intensity numeric value of the light's strength/intensity. Default is 1.
 	 */
 	new (color?: ColorRepresentation, intensity?: number): this;
 
@@ -95,7 +95,9 @@ export interface DirectionalLight extends Light {
 	 *
 	 * This is so that the target's [matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.matrixWorld) gets automatically updated each frame.
 	 * It is also possible to set the target to be another object in the scene (anything with a [position](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.position) property), like so:
-	 * ```javascript
+	 *
+	 * ### Code Example
+	 * ```js
 	 * const targetObject = new THREE.Object3D();
 	 * scene.add(targetObject);
 	 * light.target = targetObject;
@@ -144,25 +146,25 @@ export interface DirectionalLightShadow extends LightShadow {
  * A light source positioned directly above the scene, with color fading from the sky color to the ground color.
  * This light cannot be used to cast shadows.
  *
+ * ### Examples
+ * [animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending) |
+ * [lights / hemisphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_hemisphere) |
+ * [controls / pointerlock](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_pointerlock) |
+ * [loader / collada / kinematics](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_collada_kinematics) |
+ * [loader / stl](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_stl)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
  * scene.add( light );
  * ```
- *
- * ### Examples
- * [animation / skinning / blending ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending) |
- * [lights / hemisphere ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_hemisphere) |
- * [controls / pointerlock ](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_pointerlock) |
- * [loader / collada / kinematics ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_collada_kinematics) |
- * [loader / stl ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_stl)
  */
 export interface HemisphereLight extends Light {
 	/**
 	 * Creates a new HemisphereLight.
-	 * @param skyColor - hexadecimal color of the sky. Default is 0xffffff.
-	 * @param groundColor - hexadecimal color of the ground. Default is 0xffffff.
-	 * @param intensity - numeric value of the light's strength/intensity. Default is 1.
+	 * @param skyColor hexadecimal color of the sky. Default is 0xffffff.
+	 * @param groundColor hexadecimal color of the ground. Default is 0xffffff.
+	 * @param intensity numeric value of the light's strength/intensity. Default is 1.
 	 */
 	new (skyColor?: ColorRepresentation, groundColor?: ColorRepresentation, intensity?: number): this;
 
@@ -198,9 +200,8 @@ export interface HemisphereLight extends Light {
 export interface HemisphereLightProbe extends LightProbe {
 	/**
 	 * Creates a new HemisphereLightProbe.
-	 * @param skyColor - An instance of Color, string representing a color or a number representing a color.
-	 * @param groundColor - An instance of Color, string representing a color or a number representing a color.
-	 * Creates a new [name].
+	 * @param skyColor An instance of Color, string representing a color or a number representing a color.
+	 * @param groundColor An instance of Color, string representing a color or a number representing a color.
 	 */
 	new (skyColor?: ColorRepresentation, groundColor?: ColorRepresentation, intensity?: number): this;
 
@@ -216,8 +217,8 @@ export interface Light extends Object3D {
 	/**
 	 * Creates a new Light. Note that this is not intended to be called directly (use one of derived classes instead).
 	 *
-	 * @param color - hexadecimal color of the light. Default is 0xffffff (white).
-	 * @param intensity - numeric value of the light's strength/intensity. Default is 1.
+	 * @param color hexadecimal color of the light. Default is 0xffffff (white).
+	 * @param intensity numeric value of the light's strength/intensity. Default is 1.
 	 */
 	new (hex?: number | string, intensity?: number): this;
 
@@ -254,14 +255,14 @@ export interface Light extends Object3D {
  * The current probe implementation in three.js supports so-called diffuse light probes. This type of light probe is functionally equivalent to an irradiance environment map.
  *
  * ### Examples
- * [WebGL / light probe ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lightprobe) |
- * [WebGL / light probe / cube camera ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lightprobe_cubecamera)
+ * [WebGL / light probe](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lightprobe) |
+ * [WebGL / light probe / cube camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lightprobe_cubecamera)
  */
 export interface LightProbe extends Light {
 	/**
 	 * Creates a new LightProbe.
-	 * @param sh - An instance of [SphericalHarmonics3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SphericalHarmonics3).
-	 * @param intensity - Numeric value of the light probe's intensity. Default is 1.
+	 * @param sh An instance of [SphericalHarmonics3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SphericalHarmonics3).
+	 * @param intensity Numeric value of the light probe's intensity. Default is 1.
 	 */
 	new (sh?: SphericalHarmonics3, intensity?: number): this;
 
@@ -289,7 +290,7 @@ export interface LightProbe extends Light {
 export interface LightShadow {
 	/**
 	 * Create a new LightShadow. This is not intended to be called directly - it is used as a base class by other light shadows.
-	 * @param camera - the light's view of the world.
+	 * @param camer A The light's view of the world.
 	 */
 	new (camera: Camera): this;
 
@@ -315,8 +316,7 @@ export interface LightShadow {
 
 	/**
 	 * Setting this to values greater than 1 will blur the edges of the shadow.
-	 * High values will cause unwanted banding effects in the shadows - a greater *.mapSize*
-	 * will allow for a higher value to be used here before these effects become visible.
+	 * High values will cause unwanted banding effects in the shadows - a greater *.mapSize* will allow for a higher value to be used here before these effects become visible.
 	 * If [WebGLRenderer.shadowMap.type](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.shadowMap.type) is set to [PCFSoftShadowMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Renderer), radius has no effect and it is recommended to increase softness by decreasing *.mapSize* instead.
 	 * Note that this has no effect if the [WebGLRenderer.shadowMap.type](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.shadowMap.type) is set to [BasicShadowMap](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Renderer).
 	 * @default 1
@@ -417,27 +417,27 @@ export interface LightShadow {
  * A light that gets emitted from a single point in all directions. A common use case for this is to replicate the light emitted from a bare lightbulb.
  * This light can cast shadows - see [PointLightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLightShadow) page for details.
  *
+ * ### Examples
+ * [lights / pointlights](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_pointlights) |
+ * [effects / anaglyph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph) |
+ * [geometry / text](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text) |
+ * [lensflares](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lensflares)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const light = new THREE.PointLight( 0xff0000, 1, 100 );
  * light.position.set( 50, 50, 50 );
  * scene.add( light );
  * ```
- *
- * ### Examples
- * [lights / pointlights ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_pointlights)
- * [effects / anaglyph ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph)
- * [geometry / text ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text)
- * [lensflares ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lensflares)
  */
 export interface PointLight extends Light {
 	/**
 	 * For [physically correct](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.physicallyCorrectLights) lighting, set this to 2.
 	 * Creates a new PointLight.
-	 * @param color - hexadecimal color of the light. Default is 0xffffff (white).
-	 * @param intensity - numeric value of the light's strength/intensity. Default is 1.
-	 * @param distance - Maximum range of the light. Default is 0 (no limit).
-	 * @param decay - The amount the light dims along the distance of the light. Default is 1.
+	 * @param color hexadecimal color of the light. Default is 0xffffff (white).
+	 * @param intensity numeric value of the light's strength/intensity. Default is 1.
+	 * @param distance Maximum range of the light. Default is 0 (no limit).
+	 * @param decay The amount the light dims along the distance of the light. Default is 1.
 	 */
 	new (color?: ColorRepresentation, intensity?: number, distance?: number, decay?: number): this;
 
@@ -488,7 +488,7 @@ export interface PointLight extends Light {
  * This is used internally by [PointLights](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight) for calculating shadows.
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * // Create a WebGLRenderer and turn on shadows in the renderer
  * const renderer = new THREE.WebGLRenderer();
  * renderer.shadowMap.enabled = true;
@@ -541,7 +541,7 @@ export interface PointLightShadow extends LightShadow {
  * You have to include [RectAreaLightUniformsLib](https://threejs.org/examples/jsm/lights/RectAreaLightUniformsLib.js) into your scene and call *init()*.
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const width = 10;
  * const height = 10;
  * const intensity = 1;
@@ -554,15 +554,15 @@ export interface PointLightShadow extends LightShadow {
  * ```
  *
  * ### Examples
- * [WebGL / rectarealight ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_rectarealight)
+ * [WebGL / rectarealight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_rectarealight)
  */
 export interface RectAreaLight extends Light {
 	/**
 	 * Creates a new RectAreaLight.
-	 * @param color - hexadecimal color of the light. Default is 0xffffff (white).
-	 * @param intensity - the light's intensity, or brightness. Default is 1.
-	 * @param width - width of the light. Default is 10.
-	 * @param height - height of the light. Default is 10.
+	 * @param color hexadecimal color of the light. Default is 0xffffff (white).
+	 * @param intensity The light's intensity, or brightness. Default is 1.
+	 * @param width width of the light. Default is 10.
+	 * @param height height of the light. Default is 10.
 	 */
 	new (color?: ColorRepresentation, intensity?: number, width?: number, height?: number): this;
 
@@ -607,8 +607,12 @@ export interface RectAreaLight extends Light {
  * This light gets emitted from a single point in one direction, along a cone that increases in size the further from the light it gets.
  * This light can cast shadows - see the [SpotLightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLightShadow) page for details.
  *
+ * ### Examples
+ * [lights / spotlight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlight) |
+ * [lights / spotlights](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlights)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * //  white spotlight shining from the side, casting a shadow
  * const spotLight = new THREE.SpotLight( 0xffffff );
  * spotLight.position.set( 100, 1000, 100 );
@@ -620,20 +624,16 @@ export interface RectAreaLight extends Light {
  * spotLight.shadow.camera.fov = 30;
  * scene.add( spotLight );
  * ```
- *
- * ### Examples
- * [lights / spotlight ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlight) |
- * [lights / spotlights ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlights)
  */
 export interface SpotLight extends Light {
 	/**
 	 * Creates a new SpotLight.
-	 * @param color - hexadecimal color of the light. Default is 0xffffff (white).
-	 * @param intensity - numeric value of the light's strength/intensity. Default is 1.
-	 * @param distance - Maximum range of the light. Default is 0 (no limit).
-	 * @param angle - Maximum angle of light dispersion from its direction whose upper bound is Math.PI/2.
-	 * @param penumbra - Percent of the spotlight cone that is attenuated due to penumbra. Takes values between zero and 1. Default is zero.
-	 * @param decay - The amount the light dims along the distance of the light.
+	 * @param color hexadecimal color of the light. Default is 0xffffff (white).
+	 * @param intensity numeric value of the light's strength/intensity. Default is 1.
+	 * @param distance Maximum range of the light. Default is 0 (no limit).
+	 * @param angle Maximum angle of light dispersion from its direction whose upper bound is Math.PI/2.
+	 * @param penumbr A Percent of the spotlight cone that is attenuated due to penumbra. Takes values between zero and 1. Default is zero.
+	 * @param decay The amount the light dims along the distance of the light.
 	 */
 	new (
 		color?: ColorRepresentation,
@@ -660,7 +660,9 @@ export interface SpotLight extends Light {
 	 * *Note*: For the target's position to be changed to anything other than the default, it must be added to the [scene](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Scene) using scene.add( light.target );
 	 * This is so that the target's [matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.matrixWorld) gets automatically updated each frame.
 	 * It is also possible to set the target to be another object in the scene (anything with a [position](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.position) property), like so:
-	 * ```javascript
+	 *
+	 * ### Code Example
+	 * ```js
 	 * const targetObject = new THREE.Object3D();
 	 * scene.add(targetObject);
 	 * light.target = targetObject;
@@ -732,30 +734,30 @@ export interface SpotLight extends Light {
 
 /**
  * This is used internally by [SpotLights](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) for calculating shadows.
- * 
+ *
  * ### Code Example
- * ```javascript
- * // Create a WebGLRenderer and turn on shadows in the renderer 
+ * ```js
+ * // Create a WebGLRenderer and turn on shadows in the renderer
  * const renderer = new THREE.WebGLRenderer();
  * renderer.shadowMap.enabled = true;
- * renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
- * // default THREE.PCFShadowMap 
- * // Create a SpotLight and turn on shadows for the light 
+ * renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+ * // default THREE.PCFShadowMap
+ * // Create a SpotLight and turn on shadows for the light
  * const light = new THREE.SpotLight( 0xffffff );
- * light.castShadow = true; // default false 
+ * light.castShadow = true; // default false
  * scene.add( light );
- * // Set up shadow properties for the light 
- * light.shadow.mapSize.width = 512; // default 
- * light.shadow.mapSize.height = 512; // default 
- * light.shadow.camera.near = 0.5; // default 
- * light.shadow.camera.far = 500; // default 
- * light.shadow.focus = 1; // default 
+ * // Set up shadow properties for the light
+ * light.shadow.mapSize.width = 512; // default
+ * light.shadow.mapSize.height = 512; // default
+ * light.shadow.camera.near = 0.5; // default
+ * light.shadow.camera.far = 500; // default
+ * light.shadow.focus = 1; // default
  * // Create a sphere that cast shadows (but does not receive them)
  * const sphereGeometry = new THREE.SphereGeometry( 5, 32, 32 );
  * const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
  * const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
- * sphere.castShadow = true; //default is false 
- * sphere.receiveShadow = false; //default 
+ * sphere.castShadow = true; //default is false
+ * sphere.receiveShadow = false; //default
  * scene.add( sphere );
  * // Create a plane that receives shadows (but does not cast them)
  * const planeGeometry = new THREE.PlaneGeometry( 20, 20, 32, 32 );

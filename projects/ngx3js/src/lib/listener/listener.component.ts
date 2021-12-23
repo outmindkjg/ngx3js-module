@@ -3,10 +3,11 @@ import {
 	forwardRef,
 	Input,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { NgxThreeUtil, I3JS, N3JS } from '../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
  * The Listener component.
@@ -31,6 +32,10 @@ import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 	providers: [
 		{
 			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxListenerComponent),
+		},
+		{
+			provide: NgxAbstractSubscribeComponent,
 			useExisting: forwardRef(() => NgxListenerComponent),
 		},
 	],
@@ -158,7 +163,7 @@ export class NgxListenerComponent
 		if (this.listener === null || this._needUpdate) {
 			this.needUpdate = false;
 			this.listener = new N3JS.AudioListener();
-			super.setObject3d(this.listener as any);
+			super.setObject3d(this.listener);
 		}
 		return this.listener;
 	}

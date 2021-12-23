@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { I3JS, NgxThreeUtil } from '../interface';
 import { ICssStyle } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
@@ -16,6 +16,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-background',
 	templateUrl: './background.component.html',
 	styleUrls: ['./background.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxBackgroundComponent),
+		},
+	],
 })
 export class NgxBackgroundComponent
 	extends NgxAbstractSubscribeComponent

@@ -20,6 +20,6 @@ export const AttributesParticles: IShaderType = {
   }
   `,
 	uniforms: {
-		pointTexture: { value: [] } as any,
+		pointTexture: { value: [] },
 	},
 };

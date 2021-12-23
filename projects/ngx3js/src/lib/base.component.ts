@@ -26,9 +26,12 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 	public controlsParams: IGuiControlParam[];
 
 	/**
-	 * Creates an instance of base component.
-	 * @param controls
-	 * @param [controlsParams]
+	 * Creates an instance of ngx base component.
+	 * 
+	 * @param controls 
+	 * @param [controlsParams] 
+	 * @param [clearConsole] 
+	 * @param [addBaseParam] 
 	 */
 	constructor(
 		@Inject('') controls: T,
@@ -350,7 +353,7 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 	public setMesh(mesh: NgxMeshComponent) {
 		this.mesh = mesh;
 		if (this.mesh !== null) {
-			this.meshObject3d = this.mesh.getObject3d() as any;
+			this.meshObject3d = this.mesh.getObject3d();
 			this.meshChildren = this.meshObject3d.children;
 			window.setTimeout(() => {
 				this.updateGuiController();

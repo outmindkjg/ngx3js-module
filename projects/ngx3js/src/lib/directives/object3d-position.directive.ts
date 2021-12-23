@@ -28,11 +28,11 @@ import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 		{
 			provide: NgxAbstractThreeDirective,
 			multi: true,
-			useExisting: forwardRef(() => PositionDirective),
+			useExisting: forwardRef(() => NgxPositionDirective),
 		},
 	],
 })
-export class PositionDirective extends NgxAbstractObject3dDirective implements OnChanges {
+export class NgxPositionDirective extends NgxAbstractObject3dDirective implements OnChanges {
 	/**
 	 * Input  of position directive
 	 */

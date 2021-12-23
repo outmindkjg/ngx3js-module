@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { INgxColor } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
-import { NgxThreeUtil, N3JS, I3JS } from './../interface';
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 
 /**
  * The Fog component.
@@ -21,6 +21,12 @@ import { NgxThreeUtil, N3JS, I3JS } from './../interface';
 	selector: 'ngx3js-fog',
 	templateUrl: './fog.component.html',
 	styleUrls: ['./fog.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxFogComponent),
+		},
+	],
 })
 export class NgxFogComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**

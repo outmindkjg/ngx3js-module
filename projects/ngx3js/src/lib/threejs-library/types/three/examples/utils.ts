@@ -82,14 +82,6 @@ export interface RoughnessMipmapper {
 export interface SceneUtils {
     createMeshesFromInstancedMesh(instancedMesh: InstancedMesh): Group;
     createMultiMaterialObject(geometry: BufferGeometry, materials: Material[]): Group;
-    /**
-     * @deprecated Use scene.attach( child ) instead.
-     */
-    detach(child: Object3D, parent: Object3D, scene: Scene): void;
-    /**
-     * @deprecated Use parent.attach( child ) instead.
-     */
-    attach(child: Object3D, scene: Scene, parent: Object3D): void;
 }
 
 export interface Size {

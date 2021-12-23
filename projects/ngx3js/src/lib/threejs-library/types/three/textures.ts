@@ -17,22 +17,22 @@ import { Matrix3, Vector2 } from './math';
  */
 export interface CanvasTexture extends Texture {
 	/**
-	 * @param canvas - The HTML canvas element from which to load the texture.
-	 * @param mapping -  How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param canvas The HTML canvas element from which to load the texture.
+	 * @param mapping How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [mapping constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param wrapS - The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param wrapS The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param wrapT - The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param wrapT The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param magFilter - How the texture is sampled when a texel covers more than one pixel.
+	 * @param magFilter How the texture is sampled when a texel covers more than one pixel.
 	 * The default is [THREE.LinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures). See [magnification filter constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param minFilter - How the texture is sampled when a texel covers less than one pixel.
+	 * @param minFilter How the texture is sampled when a texel covers less than one pixel.
 	 * The default is [THREE.LinearMipmapLinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures). See [minification filter constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param format - The format used in the texture.
+	 * @param format The format used in the texture.
 	 * See [format constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param type - Default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param type Default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [type constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param anisotropy - The number of samples taken along the axis through the pixel that has the highest density of texels. By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used. Use [renderer.getMaxAnisotropy](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLrenderer.getMaxAnisotropy)() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
+	 * @param anisotropy The number of samples taken along the axis through the pixel that has the highest density of texels. By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used. Use [renderer.getMaxAnisotropy](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLrenderer.getMaxAnisotropy)() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
 	 */
 	new (
 		canvas: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | ImageBitmap,
@@ -55,25 +55,25 @@ export interface CanvasTexture extends Texture {
  */
 export interface CompressedTexture extends Texture {
 	/**
-	 * @param mipmaps - The mipmaps array should contain objects with data, width and height. The mipmaps should be of the correct format and type.
-	 * @param width - The width of the biggest mipmap.
-	 * @param height - The height of the biggest mipmap.
-	 * @param format - The format used in the mipmaps.
+	 * @param mipmaps The mipmaps array should contain objects with data, width and height. The mipmaps should be of the correct format and type.
+	 * @param width The width of the biggest mipmap.
+	 * @param height The height of the biggest mipmap.
+	 * @param format The format used in the mipmaps.
 	 * See [ST3C Compressed Texture Formats](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures),
 	 * [PVRTC Compressed Texture Formats](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [ETC Compressed Texture Format](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param type - Default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param type Default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [type constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param mapping -  How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param mapping How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [mapping constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param wrapS - The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param wrapS The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param wrapT - The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param wrapT The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param magFilter - How the texture is sampled when a texel covers more than one pixel.
+	 * @param magFilter How the texture is sampled when a texel covers more than one pixel.
 	 * The default is [THREE.LinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures). See [magnification filter constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param minFilter - How the texture is sampled when a texel covers less than one pixel.
+	 * @param minFilter How the texture is sampled when a texel covers less than one pixel.
 	 * The default is [THREE.LinearMipmapLinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures). See [minification filter constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param anisotropy - The number of samples taken along the axis through the pixel that has the highest density of texels.
+	 * @param anisotropy The number of samples taken along the axis through the pixel that has the highest density of texels.
 	 * By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used.
 	 * Use renderer.getMaxAnisotropy() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
 	 */
@@ -117,8 +117,9 @@ export interface CompressedTexture extends Texture {
 
 /**
  * Creates a cube texture made up of six images.
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const loader = new THREE.CubeTextureLoader();
  * loader.setPath( 'textures/cube/pisa/' );
  * const textureCube = loader.load( [
@@ -168,8 +169,9 @@ export interface CubeTexture extends Texture {
 
 /**
  * Creates a texture directly from raw data, width and height.
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * // create a buffer with color data
  * const width = 512;
  * const height = 512;
@@ -180,12 +182,12 @@ export interface CubeTexture extends Texture {
  * const g = Math.floor( color.g * 255 );
  * const b = Math.floor( color.b * 255 );
  * for ( let i = 0; i < size; i ++ ) {
- * const stride = i * 3;
- * data[ stride ] = r;
- * data[ stride + 1 ] = g;
- * data[ stride + 2 ] = b;
+ * 	const stride = i * 3;
+ * 	data[ stride ] = r;
+ * 	data[ stride + 1 ] = g;
+ * 	data[ stride + 2 ] = b;
  * }
- * // used the buffer to create a [name]
+ * // used the buffer to create a DataTexture
  * const texture = new THREE.DataTexture( data, width, height, THREE.RGBFormat );
  * texture.needsUpdate = true;
  * ```
@@ -237,8 +239,7 @@ export interface DataTexture extends Texture {
 	 * 4 by default. Specifies the alignment requirements for the start of each pixel row in memory.
 	 * The allowable values are 1 (byte-alignment), 2 (rows aligned to even-numbered bytes),
 	 * 4 (word-alignment), and 8 (rows start on double-word boundaries).
-	 * See [glPixelStorei](http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)
-	 * for more information.
+	 * See [glPixelStorei](http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml) for more information.
 	 * @default 1
 	 */
 	unpackAlignment: number;
@@ -262,9 +263,12 @@ export interface DataTexture extends Texture {
  * For the packed types, THREE.UnsignedShort4444Type, THREE.UnsignedShort5551Type or THREE.UnsignedShort565Type, all color components of one texel can be addressed as bitfields within an integer element of a Uint16Array.
  * In order to use the types THREE.FloatType and THREE.HalfFloatType, the WebGL implementation must support the respective extensions OES_texture_float and OES_texture_half_float. In order to use THREE.LinearFilter for component-wise, bilinear interpolation of the texels based on these types, the WebGL extensions OES_texture_float_linear or OES_texture_half_float_linear must also be present.
  *
+ * ### Examples
+ * [WebGL2 / materials / texture2darray](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_materials_texture2darray)
+ * 
  * ### Code Example
- * ```javascript
- * This creates a [name] where each texture has a different color.
+ * ```js
+ * This creates a DataTexture2DArray where each texture has a different color.
  * // create a buffer with color data
  * const width = 512;
  * const height = 512;
@@ -272,26 +276,22 @@ export interface DataTexture extends Texture {
  * const size = width * height;
  * const data = new Uint8Array( 3 * size * depth );
  * for ( let i = 0; i < depth; i ++ ) {
- *  const color = new THREE.Color( Math.random(), Math.random(), Math.random() );
- *  const r = Math.floor( color.r * 255 );
- *  const g = Math.floor( color.g * 255 );
- *  const b = Math.floor( color.b * 255 );
- *  for ( let j = 0; j < size; j ++ ) {
- *      const stride = ( i * size + j ) * 3;
- *      data[ stride ] = r;
- *      data[ stride + 1 ] = g;
- *      data[ stride + 2 ] = b;
- *  }
+ * 	const color = new THREE.Color( Math.random(), Math.random(), Math.random() );
+ * 	const r = Math.floor( color.r * 255 );
+ * 	const g = Math.floor( color.g * 255 );
+ * 	const b = Math.floor( color.b * 255 );
+ * 	for ( let j = 0; j < size; j ++ ) {
+ * 		const stride = ( i * size + j ) * 3;
+ * 		data[ stride ] = r;
+ * 		data[ stride + 1 ] = g;
+ * 		data[ stride + 2 ] = b;
+ * 	}
  * }
- * // used the buffer to create a [name]
+ * // used the buffer to create a DataTexture2DArray
  * const texture = new THREE.DataTexture2DArray( data, width, height, depth );
  * texture.format = THREE.RGBFormat;
  * texture.needsUpdate = true;
  * ```
- *
- * ### Examples
- * [WebGL2 / materials / texture2darray](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_materials_texture2darray)
- *
  */
 export interface DataTexture2DArray extends Texture {
 	new (data?: BufferSource, width?: number, height?: number, depth?: number): this;
@@ -340,10 +340,10 @@ export interface DataTexture2DArray extends Texture {
  */
 export interface DataTexture3D extends Texture {
 	/**
-	 * @param data - data of the texture.
-	 * @param width - width of the texture.
-	 * @param height - height of the texture.
-	 * @param depth - depth of the texture.
+	 * @param dat A data of the texture.
+	 * @param width width of the texture.
+	 * @param height height of the texture.
+	 * @param depth depth of the texture.
 	 */
 	new (data: BufferSource, width: number, height: number, depth: number): this;
 
@@ -389,31 +389,31 @@ export interface DataTexture3D extends Texture {
 
 /**
  * This class can be used to automatically save the depth information of a rendering into a texture.
- * When using a WebGL 1 rendering context, [name] requires support for the [WEBGL_depth_texture](https://www.khronos.org/registry/webgl/extensions/WEBGL_depth_texture/) extension.
+ * When using a WebGL 1 rendering context, DepthTexture requires support for the [WEBGL_depth_texture](https://www.khronos.org/registry/webgl/extensions/WEBGL_depth_texture/) extension.
  *
  * ### Examples
  * [depth / texture](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_depth_texture)
  */
 export interface DepthTexture extends Texture {
 	/**
-	 * @param width - width of the texture.
-	 * @param height - height of the texture.
-	 * @param type - Default is [THREE.UnsignedShortType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) when unsing [DepthFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.UnsignedInt248Type](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) when using  [DepthStencilFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param width width of the texture.
+	 * @param height height of the texture.
+	 * @param type Default is [THREE.UnsignedShortType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) when unsing [DepthFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.UnsignedInt248Type](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) when using  [DepthStencilFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [type constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param mapping -
+	 * @param mapping 
 	 * See [mapping mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for details.
-	 * @param wrapS - The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param wrapS The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param wrapT - The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param wrapT The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param magFilter - How the texture is sampled when a texel covers more than one pixel.
+	 * @param magFilter How the texture is sampled when a texel covers more than one pixel.
 	 * The default is [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures). See [magnification filter constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param minFilter - How the texture is sampled when a texel covers less than one pixel.
+	 * @param minFilter How the texture is sampled when a texel covers less than one pixel.
 	 * The default is [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures). See [minification filter constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param anisotropy - The number of samples taken along the axis through the pixel that has the highest density of texels.
+	 * @param anisotropy The number of samples taken along the axis through the pixel that has the highest density of texels.
 	 * By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used.
 	 * Use [renderer.getMaxAnisotropy](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLrenderer.getMaxAnisotropy)() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
-	 * @param format - must be either [DepthFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) (default) or [DepthStencilFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param format must be either [DepthFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) (default) or [DepthStencilFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [format constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for details.
 	 */
 	new (
@@ -451,7 +451,7 @@ export interface DepthTexture extends Texture {
  * Note: After the initial use of a texture, its dimensions, format, and type cannot be changed. Instead, call *.dispose*() on the texture and instantiate a new one.
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * // load a texture, set wrap mode to repeat
  * const texture = new THREE.TextureLoader().load( "textures/water.jpg" );
  * texture.wrapS = THREE.RepeatWrapping;
@@ -461,7 +461,7 @@ export interface DepthTexture extends Texture {
  */
 export interface Texture extends EventDispatcher {
 	/**
-	 * @param [image]
+	 * @param image
 	 * @param [mapping=THREE.Texture.DEFAULT_MAPPING]
 	 * @param [wrapS=THREE.ClampToEdgeWrapping]
 	 * @param [wrapT=THREE.ClampToEdgeWrapping]
@@ -486,7 +486,7 @@ export interface Texture extends EventDispatcher {
 	): this;
 
 	/**
-	 * @param Readonly - unique number for this texture instance.
+	 * @param Readonly unique number for this texture instance.
 	 */
 	id: number;
 
@@ -652,8 +652,7 @@ export interface Texture extends EventDispatcher {
 	 * 4 by default. Specifies the alignment requirements for the start of each pixel row in memory.
 	 * The allowable values are 1 (byte-alignment), 2 (rows aligned to even-numbered bytes),
 	 * 4 (word-alignment), and 8 (rows start on double-word boundaries).
-	 * See [glPixelStorei](http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)
-	 * for more information.
+	 * See [glPixelStorei](http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml) for more information.
 	 * @default 4
 	 */
 	unpackAlignment: number;
@@ -713,7 +712,7 @@ export interface Texture extends EventDispatcher {
 
 	/**
 	 * Convert the texture to three.js [JSON Object/Scene format](https://github.com/mrdoob/three.js/wiki/JSON-Object-Scene-format-4).
-	 * @param met - optional object containing metadata.
+	 * @param met optional object containing metadata.
 	 */
 	toJSON(meta: any): any;
 
@@ -738,35 +737,36 @@ export interface Texture extends EventDispatcher {
 /**
  * Creates a texture for use with a video texture.
  * This is almost the same as the base [Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture) class, except that it continuously sets [needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.needsUpdate) to *true* so that the texture is updated as the video plays. Automatic creation of [mipmaps](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture.mipmaps) is also disabled.
+ *
+ * ### Examples
+ * [materials / video](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_video)
+ * 
  * ### Code Example
- * ```javascript
+ * ```js
  * // assuming you have created a HTML video element with id="video"
  * const video = document.getElementById( 'video' );
  * const texture = new THREE.VideoTexture( video );
  * ```
- *
- * ### Examples
- * [materials / video ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_video)
  */
 export interface VideoTexture extends Texture {
 	/**
-	 * @param video - The video element to use as the texture.
-	 * @param mapping -	How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param video The video element to use as the texture.
+	 * @param mapping 	How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [mapping constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param wrapS - The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param wrapS The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param wrapT - The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param wrapT The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param magFilter - How the texture is sampled when a texel covers more than one pixel.
+	 * @param magFilter How the texture is sampled when a texel covers more than one pixel.
 	 * The default is [THREE.LinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures). See [magnification filter constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param minFilter - How the texture is sampled when a texel covers less than one pixel.
+	 * @param minFilter How the texture is sampled when a texel covers less than one pixel.
 	 * The default is [THREE.LinearMipmapLinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures). See [minification filter constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param format - The default is [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param format The default is [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [format constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
 	 * Note that a bug has been reported with Firefox's WebGL implementation where use of [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) on a VideoTexture can result in a significant performance penalty, if you encounter this issue it is recommended to pass in [THREE.RGBAFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) instead.
-	 * @param type - Default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
+	 * @param type Default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [type constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param anisotropy - The number of samples taken along the axis through the pixel that has the highest density of texels.
+	 * @param anisotropy The number of samples taken along the axis through the pixel that has the highest density of texels.
 	 * By default, this value is 1. A higher value gives a less blurry result than a basic mipmap, at the cost of more texture samples being used.
 	 * Use [renderer.getMaxAnisotropy](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLrenderer.getMaxAnisotropy)() to find the maximum valid anisotropy value for the GPU; this value is usually a power of 2.
 	 */

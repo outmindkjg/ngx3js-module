@@ -15,16 +15,16 @@ import {
 import { NgxLocalStorageService } from '../local-storage.service';
 import { NgxAbstractMaterialComponent } from '../material.abstract';
 import {
-	IRendererTimer, IShaderType, INgxColor,
+	INgxColor,
 	INgxTexture,
-	INgxUniforms
+	INgxUniforms, IRendererTimer, IShaderType
 } from '../ngx-interface';
 import { NgxShaderComponent } from '../shader/shader.component';
 import { ShaderUtils } from '../shader/shaders/shaderUtils';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAbstractTextureComponent } from '../texture.abstract';
-
 import * as NGX_MATERIAL from './index';
+
 
 /**
  * The Material component.
@@ -700,8 +700,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	/**
 	 * Content children of material component
 	 */
-	@ContentChildren(NgxShaderComponent)
-	private shaderList: QueryList<NgxShaderComponent>;
+	@ContentChildren(NgxShaderComponent) private shaderList: QueryList<NgxShaderComponent>;
 
 	/**
 	 * Creates an instance of material component.
@@ -863,7 +862,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * @returns
 	 */
 	private getColorNode(color?: I3JS.Color): any {
-		return new N3JS.ColorNode(color as any);
+		return new N3JS.ColorNode(color);
 	}
 
 	/**
@@ -903,7 +902,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * @returns
 	 */
 	private getMatrix3Node(matrix?: I3JS.Matrix3): I3JS.Matrix3Node {
-		return new N3JS.Matrix3Node(matrix as any);
+		return new N3JS.Matrix3Node(matrix);
 	}
 
 	/**
@@ -913,7 +912,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * @returns
 	 */
 	private getMatrix4Node(matrix?: I3JS.Matrix4): I3JS.Matrix4Node {
-		return new N3JS.Matrix4Node(matrix as any);
+		return new N3JS.Matrix4Node(matrix);
 	}
 
 	/**
@@ -959,7 +958,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 		bias?: I3JS.NodeNode,
 		project?: boolean
 	): I3JS.TextureNode {
-		return new N3JS.TextureNode(value as any, uv, bias, project);
+		return new N3JS.TextureNode(value, uv, bias, project);
 	}
 
 	/**
@@ -975,7 +974,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 		uv?: I3JS.UVNode,
 		bias?: I3JS.NodeNode
 	): I3JS.CubeTextureNode {
-		return new N3JS.CubeTextureNode(value as any, uv, bias);
+		return new N3JS.CubeTextureNode(value, uv, bias);
 	}
 
 	/**
@@ -1015,7 +1014,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 		geometry: I3JS.BufferGeometry,
 		options?: I3JS.ReflectorOptions
 	): I3JS.ReflectorRTT {
-		return new N3JS.ReflectorRTT(geometry as any, options);
+		return new N3JS.ReflectorRTT(geometry, options);
 	}
 
 	/**
@@ -1185,7 +1184,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 		x: number | I3JS.Vector2,
 		y?: number
 	): I3JS.Vector2Node {
-		return new N3JS.Vector2Node(x as any, y);
+		return new N3JS.Vector2Node(x, y);
 	}
 
 	/**
@@ -1204,7 +1203,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 		if (x instanceof N3JS.Color) {
 			return new N3JS.Vector3Node(x.r, x.g, x.b);
 		} else {
-			return new N3JS.Vector3Node(x as any, y, z);
+			return new N3JS.Vector3Node(x, y, z);
 		}
 	}
 
@@ -1263,7 +1262,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					N3JS.OperatorNode.MUL
 				);
 				const blurMirror = new N3JS.BlurNode(mirror);
-				blurMirror.size = size as any;
+				blurMirror.size = size;
 				const blurMirrorUv: any = new N3JS.ExpressionNode(
 					'projCoord.xyz / projCoord.q',
 					'vec3'
@@ -2092,7 +2091,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 							anyMaterial['color'] !== undefined
 						) {
 							if (anyMaterial['color'] instanceof N3JS.ColorNode) {
-								anyMaterial['color'].value = this.getColor() as any;
+								anyMaterial['color'].value = this.getColor();
 							} else {
 								anyMaterial['color'] = this.getColor();
 							}
@@ -2162,7 +2161,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 							if (
 								anyMaterial['specular'] instanceof N3JS.ColorNode
 							) {
-								anyMaterial['specular'].value = this.getSpecular() as any;
+								anyMaterial['specular'].value = this.getSpecular();
 							} else {
 								anyMaterial['specular'] = this.getSpecular();
 							}
@@ -2238,7 +2237,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 							if (
 								anyMaterial['emissive'] instanceof N3JS.ColorNode
 							) {
-								anyMaterial['emissive'].value = this.getEmissive() as any;
+								anyMaterial['emissive'].value = this.getEmissive();
 							} else {
 								anyMaterial['emissive'] = this.getEmissive();
 							}
@@ -2304,7 +2303,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								anyMaterial['normalScale'] instanceof
 								N3JS.Vector2Node
 							) {
-								anyMaterial['normalScale'].value = this.getNormalScale() as any;
+								anyMaterial['normalScale'].value = this.getNormalScale();
 							} else {
 								anyMaterial['normalScale'] = this.getNormalScale();
 							}
@@ -2632,7 +2631,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								anyMaterial['referencePosition'] instanceof N3JS.Vector3Node
 							) {
 								anyMaterial['referencePosition'].value =
-									this.getReferencePosition() as any;
+									this.getReferencePosition();
 							} else {
 								anyMaterial['referencePosition'] = this.getReferencePosition();
 							}
@@ -2691,7 +2690,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								N3JS.Vector2Node
 							) {
 								anyMaterial['clearcoatNormalScale'].value =
-									this.getClearcoatNormalScale() as any;
+									this.getClearcoatNormalScale();
 							} else {
 								anyMaterial['clearcoatNormalScale'] =
 									this.getClearcoatNormalScale();
@@ -2704,7 +2703,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 							anyMaterial['sheen'] !== undefined
 						) {
 							if (anyMaterial['sheen'] instanceof N3JS.ColorNode) {
-								anyMaterial['sheen'].value = this.getSheen() as any;
+								anyMaterial['sheen'].value = this.getSheen();
 							} else {
 								anyMaterial['sheen'] = this.getSheen();
 							}
@@ -2922,7 +2921,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								anyMaterial['resolutionX'] instanceof
 								N3JS.Vector2Node
 							) {
-								anyMaterial['resolutionX'].value = this.getResolution() as any;
+								anyMaterial['resolutionX'].value = this.getResolution();
 							} else {
 								anyMaterial['resolutionX'] = this.getResolution();
 							}
@@ -3461,192 +3460,192 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'shaderattributesparticles':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderAttributesParticlesMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderselectivedrawmaterial':
 					case 'shaderselectivedraw':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderSelectiveDrawMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadercustomattributesmaterial':
 					case 'shadercustomattributes':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderCustomAttributesMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadercustomattributeslinesmaterial':
 					case 'shadercustomattributeslines':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderCustomAttributesLinesMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadercustomattributespointsmaterial':
 					case 'shadercustomattributespoints':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderCustomAttributesPointsMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderattributesizecolormaterial':
 					case 'shaderattributesizecolor':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderAttributeSizeColorMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderattributesizecolor1material':
 					case 'shaderattributesizecolor1':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderAttributeSizeColor1Material(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderskydomematerial':
 					case 'shaderskydome':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderSkyDomeMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderparallaxmaterial':
 					case 'shaderparallax':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderParallaxMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderfresnelmaterial':
 					case 'shaderfresnel':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderFresnelMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadersubsurfacescatteringmaterial':
 					case 'shadersubsurfacescattering':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderSubsurfaceScatteringMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderwireframematerial':
 					case 'shaderwireframe':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderWireframeMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadernoiserandom1dmaterial':
 					case 'shadernoiserandom1d':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderNoiseRandom1DMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadernoiserandom2dmaterial':
 					case 'shadernoiserandom2d':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderNoiseRandom2DMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadernoiserandom3dmaterial':
 					case 'shadernoiserandom3d':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderNoiseRandom3DMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadercolorrainbowmaterial':
 					case 'shadercolorrainbow':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderColorRainbowMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadervideokinectmaterial':
 					case 'shadervideokinect':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderVideoKinectMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadervolumerendershader1material':
 					case 'shadervolumerendershader1':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderVolumeRenderShader1Material(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderinstancingmaterial':
 					case 'shaderinstancing':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderInstancingMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderscalecolormaterial':
 					case 'shaderscalecolor':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderScaleColorMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadersincolormaterial':
 					case 'shadersincolor':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderSinColorMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderraymarchingreflectmaterial':
 					case 'shaderraymarchingreflect':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderRaymarchingReflectMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadercloudmaterial':
 					case 'shadercloud':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderCloudMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shaderperlinmaterial':
 					case 'shaderperlin':
 						material = this.getShaderMaterialUpdate(
 							new NGX_MATERIAL.NgxShaderPerlinMaterial(
-								this.getShaderMaterialParameters() as any
-							) as any
+								this.getShaderMaterialParameters()
+							)
 						);
 						break;
 					case 'shadermaterial':
@@ -3699,8 +3698,8 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								gapSize: NgxThreeUtil.getTypeSafe(this.gapSize),
 								linewidth: NgxThreeUtil.getTypeSafe(this.linewidth),
 								resolution: this.getResolution(),
-							}) as any
-						) as any;
+							})
+						);
 						break;
 					case 'spritematerial':
 					case 'sprite':
@@ -3718,7 +3717,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'standardnodematerial':
 					case 'standardnode':
 						const standardNodeMaterial =
-							new N3JS.StandardNodeMaterial() as any;
+							new N3JS.StandardNodeMaterial();
 						if (NgxThreeUtil.isNotNull(this.side)) {
 							standardNodeMaterial.side = NgxThreeUtil.getSideSafe(this.side);
 						}
@@ -3760,7 +3759,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					case 'basicnode':
 					case 'basicnodematerial':
 						const basicNodeMaterial = new N3JS.BasicNodeMaterial();
-						material = basicNodeMaterial as any;
+						material = basicNodeMaterial;
 						break;
 					case 'meshstandardnode':
 					case 'meshstandardnodematerial':
@@ -3799,7 +3798,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								this.getNormalScale()
 							);
 						}
-						material = meshStandardNodeMaterial as any;
+						material = meshStandardNodeMaterial;
 						break;
 					case 'phongnodematerial':
 					case 'phongnode':
@@ -3832,16 +3831,16 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								(timer: IRendererTimer) => {
 									nodeFrame
 										.update(timer.delta)
-										.updateNode(phongNodeMaterial as any);
+										.updateNode(phongNodeMaterial);
 								}
 							)
 						);
-						material = phongNodeMaterial as any;
+						material = phongNodeMaterial;
 						break;
 					case 'spritenodematerial':
 					case 'spritenode':
 						const spriteNodeMaterial = new N3JS.SpriteNodeMaterial();
-						material = spriteNodeMaterial as any;
+						material = spriteNodeMaterial;
 						break;
 					case 'meshlambertmaterial':
 					case 'meshlambert':

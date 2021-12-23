@@ -96,7 +96,7 @@ export const CloudShader: IShaderType = {
   `,
 	uniforms: {
 		base: { value: NgxThreeUtil.getColorSafe(0x798aa0) },
-		map: { value: null } as any,
+		map: { value: null },
 		cameraPos: { value: NgxThreeUtil.getVector3Safe(0, 0, 0) },
 		threshold: { value: 0.25 },
 		opacity: { value: 0.25 },

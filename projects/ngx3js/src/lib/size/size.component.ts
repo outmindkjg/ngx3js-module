@@ -1,11 +1,10 @@
 import {
 	AfterContentInit,
-	Component,
-	Input,
+	Component, forwardRef, Input,
 	OnInit,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -22,6 +21,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-size',
 	templateUrl: './size.component.html',
 	styleUrls: ['./size.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxSizeComponent),
+		},
+	],
 })
 export class NgxSizeComponent
 	extends NgxAbstractSubscribeComponent

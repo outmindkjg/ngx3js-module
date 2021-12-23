@@ -47,7 +47,7 @@ export const ShaderLava: IShaderType = {
 		fogColor: { value: NgxThreeUtil.getVector3Safe(0, 0, 0) },
 		time: { value: 1 },
 		uvScale: { value: NgxThreeUtil.getVector2Safe(3.0, 1.0) },
-		texture1: { value: null } as any,
-		texture2: { value: null } as any,
+		texture1: { value: null },
+		texture2: { value: null },
 	},
 };

@@ -1066,7 +1066,7 @@ export class NgxCameraComponent
 	 * @returns object3d
 	 */
 	public getObject3d<T extends I3JS.Camera | I3JS.Object3D>(): T {
-		return this.getCamera() as any;
+		return this.getCamera();
 	}
 
 	/**
@@ -1139,7 +1139,7 @@ export class NgxCameraComponent
 						this.getAspect(width, height),
 						this.getNear(0.1),
 						this.getFar(2000)
-					) as any;
+					);
 					break;
 				case 'orthographiccamera':
 				case 'orthographic':
@@ -1193,11 +1193,11 @@ export class NgxCameraComponent
 				this.parentObject3d.cameras.push(
 					this.camera as I3JS.PerspectiveCamera
 				);
-				this.object3d = this.camera as any;
+				this.object3d = this.camera;
 				this.setObject(this.camera);
 			} else {
 				this.isCameraChild = false;
-				this.setObject3d(this.camera as any);
+				this.setObject3d(this.camera);
 			}
 			this.setUserData('clips', null);
 			if (NgxThreeUtil.isNotNull(this.storageName)) {
@@ -1334,7 +1334,7 @@ export class NgxCameraComponent
 						const scene = sceneCom.getScene();
 						if (scene !== null) {
 							cssRenderer.forEach((child) => {
-								child.render(scene, this.getObject3d() as any);
+								child.render(scene, this.getObject3d());
 							});
 						}
 					});
@@ -1342,7 +1342,7 @@ export class NgxCameraComponent
 					const scene = this.getScene(scenes);
 					if (scene !== null) {
 						cssRenderer.forEach((child) => {
-							child.render(scene as any, this.getObject3d() as any);
+							child.render(scene, this.getObject3d());
 						});
 					}
 				}
@@ -1351,13 +1351,13 @@ export class NgxCameraComponent
 					this.scenes.forEach((sceneCom) => {
 						const scene = sceneCom.getScene();
 						if (scene !== null) {
-							cssRenderer.render(scene, this.getObject3d() as any);
+							cssRenderer.render(scene, this.getObject3d());
 						}
 					});
 				} else {
 					const scene = this.getScene(scenes);
 					if (scene !== null) {
-						cssRenderer.render(scene as any, this.getObject3d() as any);
+						cssRenderer.render(scene, this.getObject3d());
 					}
 				}
 			}

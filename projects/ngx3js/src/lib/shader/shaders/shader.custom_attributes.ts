@@ -31,6 +31,6 @@ export const CustomAttributes:IShaderType = {
 	uniforms: {
 		amplitude: { value: 1.0 },
 		color: { value: NgxThreeUtil.getColorSafe(0xff2200) },
-		colorTexture: { value: null } as any,
+		colorTexture: { value: null },
 	},
 };

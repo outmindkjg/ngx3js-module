@@ -50,80 +50,67 @@ export class NgxSharedComponent
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxAbstractGeometryComponent, { descendants: false })
-	private geometryList: QueryList<NgxAbstractGeometryComponent>;
+	@ContentChildren(NgxAbstractGeometryComponent, { descendants: false }) private geometryList: QueryList<NgxAbstractGeometryComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxAbstractMaterialComponent, { descendants: false })
-	private materialList: QueryList<NgxAbstractMaterialComponent>;
+	@ContentChildren(NgxAbstractMaterialComponent, { descendants: false }) private materialList: QueryList<NgxAbstractMaterialComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxAbstractTextureComponent, { descendants: false })
-	private textureList: QueryList<NgxAbstractTextureComponent>;
+	@ContentChildren(NgxAbstractTextureComponent, { descendants: false }) private textureList: QueryList<NgxAbstractTextureComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxLensflareelementComponent, { descendants: false })
-	private lensflareElementList: QueryList<NgxLensflareelementComponent>;
+	@ContentChildren(NgxLensflareelementComponent, { descendants: false }) private lensflareElementList: QueryList<NgxLensflareelementComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxSvgComponent, { descendants: false })
-	private svgList: QueryList<NgxSvgComponent>;
+	@ContentChildren(NgxSvgComponent, { descendants: false }) private svgList: QueryList<NgxSvgComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxListenerComponent, { descendants: false })
-	private listnerList: QueryList<NgxListenerComponent>;
+	@ContentChildren(NgxListenerComponent, { descendants: false }) private listnerList: QueryList<NgxListenerComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxAudioComponent, { descendants: false })
-	private audioList: QueryList<NgxAudioComponent>;
+	@ContentChildren(NgxAudioComponent, { descendants: false }) private audioList: QueryList<NgxAudioComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxHtmlComponent, { descendants: false })
-	private cssChildrenList: QueryList<NgxHtmlComponent>;
+	@ContentChildren(NgxHtmlComponent, { descendants: false }) private cssChildrenList: QueryList<NgxHtmlComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxRigidbodyComponent, { descendants: false })
-	private rigidbodyList: QueryList<NgxRigidbodyComponent>;
+	@ContentChildren(NgxRigidbodyComponent, { descendants: false }) private rigidbodyList: QueryList<NgxRigidbodyComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxMeshComponent, { descendants: false })
-	private meshList: QueryList<NgxMeshComponent>;
+	@ContentChildren(NgxMeshComponent, { descendants: false }) private meshList: QueryList<NgxMeshComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxCameraComponent, { descendants: false })
-	private cameraList: QueryList<NgxCameraComponent>;
+	@ContentChildren(NgxCameraComponent, { descendants: false }) private cameraList: QueryList<NgxCameraComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxHelperComponent, { descendants: false })
-	private helperList: QueryList<NgxHelperComponent>;
+	@ContentChildren(NgxHelperComponent, { descendants: false }) private helperList: QueryList<NgxHelperComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxLightComponent, { descendants: false })
-	private lightList: QueryList<NgxLightComponent>;
+	@ContentChildren(NgxLightComponent, { descendants: false }) private lightList: QueryList<NgxLightComponent>;
 
 	/**
 	 * Content children of shared component
@@ -134,32 +121,27 @@ export class NgxSharedComponent
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxPositionComponent, { descendants: false })
-	private positionList: QueryList<NgxPositionComponent>;
+	@ContentChildren(NgxPositionComponent, { descendants: false }) private positionList: QueryList<NgxPositionComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxRotationComponent, { descendants: false })
-	private rotationList: QueryList<NgxRotationComponent>;
+	@ContentChildren(NgxRotationComponent, { descendants: false }) private rotationList: QueryList<NgxRotationComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxScaleComponent, { descendants: false })
-	private scaleList: QueryList<NgxScaleComponent>;
+	@ContentChildren(NgxScaleComponent, { descendants: false }) private scaleList: QueryList<NgxScaleComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxLookatComponent, { descendants: false })
-	private lookatList: QueryList<NgxLookatComponent>;
+	@ContentChildren(NgxLookatComponent, { descendants: false }) private lookatList: QueryList<NgxLookatComponent>;
 
 	/**
 	 * Content children of shared component
 	 */
-	@ContentChildren(NgxAnimationGroupComponent, { descendants: false })
-	private animationGroupList: QueryList<NgxAnimationGroupComponent>;
+	@ContentChildren(NgxAnimationGroupComponent, { descendants: false }) private animationGroupList: QueryList<NgxAnimationGroupComponent>;
 
 	/**
 	 * Creates an instance of shared component.

@@ -1,15 +1,14 @@
 import {
 	AfterContentInit,
 	Component,
-	ContentChildren,
-	Input,
+	ContentChildren, forwardRef, Input,
 	OnChanges,
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxMixerComponent } from '../mixer/mixer.component';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
@@ -48,6 +47,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-animation-group',
 	templateUrl: './animation-group.component.html',
 	styleUrls: ['./animation-group.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxAnimationGroupComponent),
+		},
+	],
 })
 export class NgxAnimationGroupComponent
 	extends NgxAbstractSubscribeComponent
@@ -61,8 +66,7 @@ export class NgxAnimationGroupComponent
 	/**
 	 * The mixer List of NgxMixerComponent
 	 */
-	@ContentChildren(NgxMixerComponent, { descendants: false })
-	private mixerList: QueryList<NgxMixerComponent>;
+	@ContentChildren(NgxMixerComponent, { descendants: false }) private mixerList: QueryList<NgxMixerComponent>;
 
 	/**
 	 * Creates an instance of animation group component.

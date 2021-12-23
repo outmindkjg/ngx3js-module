@@ -9,7 +9,7 @@ import { CubeTexture, Texture } from './textures';
  */
 export interface DataUtils {
 	/**
-	 * @param va - A single precision floating point value.
+	 * @param va A single precision floating point value.
 	 * @returns Returns a half precision floating point value represented as an uint16 value.
 	 */
 	toHalfFloat(val: number): number;
@@ -20,35 +20,10 @@ export interface DataUtils {
  */
 export interface ImageUtils {
 	/**
-	 * @param imag - The image object.
+	 * @param imag The image object.
 	 * @returns Returns a data URI containing a representation of the given image.
 	 */
 	getDataURL(image: any): string;
-
-	/**
-	 * @deprecated
-	 */
-	crossOrigin: string;
-
-	/**
-	 * @deprecated Use {@link TextureLoader THREE.TextureLoader()} instead.
-	 */
-	loadTexture(
-		url: string,
-		mapping?: Mapping,
-		onLoad?: (texture: Texture) => void,
-		onError?: (message: string) => void
-	): Texture;
-
-	/**
-	 * @deprecated Use {@link CubeTextureLoader THREE.CubeTextureLoader()} instead.
-	 */
-	loadTextureCube(
-		array: string[],
-		mapping?: Mapping,
-		onLoad?: (texture: Texture) => void,
-		onError?: (message: string) => void
-	): Texture;
 }
 
 /**
@@ -57,31 +32,31 @@ export interface ImageUtils {
  */
 export interface PMREMGenerator {
 	/**
-	 * This constructor creates a new [name].
+	 * This constructor creates a new PMREMGenerator.
 	 */
 	new (renderer: WebGLRenderer): this;
 
 	/**
 	 * Generates a PMREM from a supplied Scene, which can be faster than using an image if networking bandwidth is low.
 	 * Optional near and far planes ensure the scene is rendered in its entirety (the cubeCamera is placed at the origin).
-	 * @param scene - The given scene.
-	 * @param sigma - Specifies a blur radius in radians to be applied to the scene before PMREM generation. Default is *0*.
-	 * @param near - The near plane value. Default is *0.1*.
-	 * @param far - The far plane value. Default is *100*.
+	 * @param scene The given scene.
+	 * @param sigm A Specifies a blur radius in radians to be applied to the scene before PMREM generation. Default is *0*.
+	 * @param near The near plane value. Default is *0.1*.
+	 * @param far The far plane value. Default is *100*.
 	 */
 	fromScene(scene: Scene, sigma?: number, near?: number, far?: number): WebGLRenderTarget;
 
 	/**
 	 * Generates a PMREM from an equirectangular texture, which can be either LDR (RGBFormat) or HDR (RGBEFormat).
 	 * The ideal input image size is 1k (1024 x 512), as this matches best with the 256 x 256 cubemap output.
-	 * @param equirectangular - The equirectangular texture.
+	 * @param equirectangular The equirectangular texture.
 	 */
 	fromEquirectangular(equirectangular: Texture): WebGLRenderTarget;
 
 	/**
 	 * Generates a PMREM from an cubemap texture, which can be either LDR (RGBFormat) or HDR (RGBEFormat).
 	 * The ideal input cube size is 256 x 256, as this matches best with the 256 x 256 cubemap output.
-	 * @param cubemap - The cubemap texture.
+	 * @param cubemap The cubemap texture.
 	 */
 	fromCubemap(cubemap: CubeTexture): WebGLRenderTarget;
 
@@ -104,7 +79,7 @@ export interface PMREMGenerator {
 /**
  * Vec2
  */
-export interface Vec2 {
+export interface ShapeVec2 {
 	x: number;
 	y: number;
 }
@@ -116,30 +91,28 @@ export interface Vec2 {
 export interface ShapeUtils {
 	/**
 	 * Calculate area of a ( 2D ) contour polygon.
-	 * @param contou - 2D polygon. An array of THREE.Vector2()
+	 * @param contou 2D polygon. An array of THREE.Vector2()
 	 */
-	area(contour: Vec2[]): number;
+	area(contour: ShapeVec2[]): number;
 
 	/**
 	 * Used internally by [ExtrudeGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ExtrudeGeometry) and [ShapeGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapeGeometry) to calculate faces in shapes with holes.
-	 * @param contou - 2D polygon. An array of [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
-	 * @param hole - An array that holds arrays of [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)s. Each array represents a single hole definition.
+	 * @param contou 2D polygon. An array of [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
+	 * @param hole An array that holds arrays of [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)s. Each array represents a single hole definition.
 	 */
-	triangulateShape(contour: Vec2[], holes: Vec2[][]): number[][];
+	triangulateShape(contour: ShapeVec2[], holes: ShapeVec2[][]): number[][];
 
 	/**
 	 * Used internally by [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path),
 	 * [ExtrudeGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ExtrudeGeometry) and [ShapeGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapeGeometry).
-	 * @param pt - points defining a 2D polygon Note that this is a linear function so it is necessary to calculate separately for x, y  components of a polygon.
+	 * @param pt points defining a 2D polygon Note that this is a linear function so it is necessary to calculate separately for x, y  components of a polygon.
 	 */
-	isClockWise(pts: Vec2[]): boolean;
+	isClockWise(pts: ShapeVec2[]): boolean;
 }
 
-// Extras / Core /////////////////////////////////////////////////////////////////////
-
 /**
- * An abstract base class for creating a [name] object that contains methods for interpolation.
- * For an array of [name]s see [CurvePath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvePath).
+ * An abstract base class for creating a Curve object that contains methods for interpolation.
+ * For an array of Curves see [CurvePath](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvePath).
  */
 export interface Curve<T extends Vector> {
 	/**
@@ -160,27 +133,27 @@ export interface Curve<T extends Vector> {
 	arcLengthDivisions: number;
 
 	/**
-	 * @param t - A position on the curve. Must be in the range [ 0, 1 ].
-	 * @param optionalTarget - If specified, the result will be copied into this Vector, otherwise a new Vector will be created.
+	 * @param t A position on the curve. Must be in the range [ 0, 1 ].
+	 * @param optionalTarget If specified, the result will be copied into this Vector, otherwise a new Vector will be created.
 	 * @returns Returns a vector for a given position on the curve.
 	 */
 	getPoint(t: number, optionalTarget?: T): T;
 
 	/**
-	 * @param u - A position on the curve according to the arc length. Must be in the range [ 0, 1 ].
-	 * @param optionalTarget - If specified, the result will be copied into this Vector, otherwise a new Vector will be created.
+	 * @param u A position on the curve according to the arc length. Must be in the range [ 0, 1 ].
+	 * @param optionalTarget If specified, the result will be copied into this Vector, otherwise a new Vector will be created.
 	 * @returns Returns a vector for a given position on the curve according to the arc length.
 	 */
 	getPointAt(u: number, optionalTarget?: T): T;
 
 	/**
-	 * @param division - number of pieces to divide the curve into. Default is *5*.
+	 * @param division number of pieces to divide the curve into. Default is *5*.
 	 * @returns Returns a set of divisions + 1 points using getPoint( t ).
 	 */
 	getPoints(divisions?: number): T[];
 
 	/**
-	 * @param division - number of pieces to divide the curve into. Default is *5*.
+	 * @param division number of pieces to divide the curve into. Default is *5*.
 	 * @returns Returns a set of divisions + 1 equi-spaced points using getPointAt( u ).
 	 */
 	getSpacedPoints(divisions?: number): T[];
@@ -202,21 +175,20 @@ export interface Curve<T extends Vector> {
 	updateArcLengths(): void;
 
 	/**
-	 * Given u in the range ( 0 .. 1 ), returns [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) also in the range ( 0 .. 1 ).
-	 * u and t can then be used to give you points which are equidistant from the ends of the curve, using *.getPoint*.
+	 * Given u in the range ( 0 .. 1 ), returns [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) also in the range ( 0 .. 1 ). u and t can then be used to give you points which are equidistant from the ends of the curve, using *.getPoint*.
 	 */
 	getUtoTmapping(u: number, distance: number): number;
 
 	/**
-	 * @param t - A position on the curve. Must be in the range [ 0, 1 ].
-	 * @param optionalTarget - If specified, the result will be copied into this Vector, otherwise a new Vector will be created.
+	 * @param t A position on the curve. Must be in the range [ 0, 1 ].
+	 * @param optionalTarget If specified, the result will be copied into this Vector, otherwise a new Vector will be created.
 	 * @returns Returns a unit vector tangent at t. If the derived curve does not implement its tangent derivation, two points a small delta apart will be used to find its gradient which seems to give a reasonable approximation.
 	 */
 	getTangent(t: number, optionalTarget?: T): T;
 
 	/**
-	 * @param u - A position on the curve according to the arc length. Must be in the range [ 0, 1 ].
-	 * @param optionalTarget - If specified, the result will be copied into this Vector, otherwise a new Vector will be created.
+	 * @param u A position on the curve according to the arc length. Must be in the range [ 0, 1 ].
+	 * @param optionalTarget If specified, the result will be copied into this Vector, otherwise a new Vector will be created.
 	 * @returns Returns tangent at a point which is equidistant to the ends of the curve from the point given in *.getTangent*.
 	 */
 	getTangentAt(u: number, optionalTarget?: T): T;
@@ -239,7 +211,7 @@ export interface Curve<T extends Vector> {
 	clone(): this;
 
 	/**
-	 * Copies another [name] object to this instance.
+	 * Copies another Curve object to this instance.
 	 */
 	copy(source: Curve<T>): this;
 
@@ -252,11 +224,6 @@ export interface Curve<T extends Vector> {
 	 * Copies the data from the given JSON object to this instance.
 	 */
 	fromJSON(json: object): this;
-
-	/**
-	 * @deprecated since r84.
-	 */
-	create(constructorFunc: () => void, getPointFunc: () => void): () => void;
 }
 
 /**
@@ -296,7 +263,7 @@ export interface CurvePath<T extends Vector> extends Curve<T> {
 	closePath(): void;
 
 	/**
-	 * @param division - number of pieces to divide the curve into. Default is *12*.
+	 * @param division number of pieces to divide the curve into. Default is *12*.
 	 * @returns Returns an array of points representing a sequence of curves. The *division* parameter defines the number of pieces each curve is divided into. However, for optimization and quality purposes, the actual sampling resolution for each curve depends on its type. For example, for a [LineCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineCurve), the returned number of points is always just 2.
 	 */
 	getPoint(t: number, optionalTarget?: T): T;
@@ -309,8 +276,9 @@ export interface CurvePath<T extends Vector> extends Curve<T> {
 
 /**
  * A 2D path representation. The class provides methods for creating paths and contours of 2D shapes similar to the 2D Canvas API.
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const path = new THREE.Path();
  * path.lineTo( 0, 0.8 );
  * path.quadraticCurveTo( 0, 1, 0.2, 1 );
@@ -326,7 +294,7 @@ export interface Path extends CurvePath<Vector2> {
 	/**
 	 * Creates a Path from the points. The first point defines the offset, then successive points are added to the [curves](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvePath.curves) array as [LineCurves](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineCurve).
 	 * If no points are specified, an empty path is created and the *.currentPoint* is set to the origin.
-	 * @param point - array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
+	 * @param point array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
 	 */
 	new (points?: Vector2[]): this;
 
@@ -342,14 +310,8 @@ export interface Path extends CurvePath<Vector2> {
 	currentPoint: Vector2;
 
 	/**
-	 * @deprecated Use {@link Path#setFromPoints .setFromPoints()} instead.
-	 */
-	fromPoints(vectors: Vector2[]): this;
-
-	/**
-	 * Points are added to the [curves](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvePath.curves)
-	 * array as [LineCurves](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineCurve).
-	 * @param point -  array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
+	 * Points are added to the [curves](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvePath.curves) array as [LineCurves](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineCurve).
+	 * @param point array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
 	 */
 	setFromPoints(vectors: Vector2[]): this;
 
@@ -375,40 +337,40 @@ export interface Path extends CurvePath<Vector2> {
 
 	/**
 	 * Connects a new [SplineCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SplineCurve) onto the path.
-	 * @param points - An array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)
+	 * @param points An array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)
 	 */
 	splineThru(pts: Vector2[]): this;
 
 	/**
-	 * @param x - The center of the arc offset from the last call.
-	 * @param radiu - The radius of the arc.
-	 * @param startAngl - The start angle in radians.
-	 * @param endAngl - The end angle in radians.
-	 * @param clockwis - Sweep the arc clockwise. Defaults to *false*.
+	 * @param x The center of the arc offset from the last call.
+	 * @param radiu The radius of the arc.
+	 * @param startAngl The start angle in radians.
+	 * @param endAngl The end angle in radians.
+	 * @param clockwis Sweep the arc clockwise. Defaults to *false*.
 	 * Adds an [EllipseCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EllipseCurve) to the path, positioned relative to *.currentPoint*.
 	 */
 	arc(aX: number, aY: number, aRadius: number, aStartAngle: number, aEndAngle: number, aClockwise: boolean): this;
 
 	/**
 	 * Adds an absolutely positioned [EllipseCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EllipseCurve) to the path.
-	 * @param aX - The absolute center of the arc.
-	 * @param aY - The absolute center of the arc.
-	 * @param xRadius - The radius of the arc.
-	 * @param yRadius - The radius of the arc.
-	 * @param aStartAngle - The start angle in radians.
-	 * @param aEndAngle - The end angle in radians.
-	 * @param aClockwise - Sweep the arc clockwise. Defaults to *false*.
+	 * @param aX The absolute center of the arc.
+	 * @param aY The absolute center of the arc.
+	 * @param xRadius The radius of the arc.
+	 * @param yRadius The radius of the arc.
+	 * @param aStartAngle The start angle in radians.
+	 * @param aEndAngle The end angle in radians.
+	 * @param aClockwise Sweep the arc clockwise. Defaults to *false*.
 	 */
 	absarc(aX: number, aY: number, aRadius: number, aStartAngle: number, aEndAngle: number, aClockwise: boolean): this;
 
 	/**
-	 * @param x - The center of the ellipse offset from the last call.
-	 * @param xRadiu - The radius of the ellipse in the x axis.
-	 * @param yRadiu - The radius of the ellipse in the y axis.
-	 * @param startAngl - The start angle in radians.
-	 * @param endAngl - The end angle in radians.
-	 * @param clockwis - Sweep the ellipse clockwise. Defaults to *false*.
-	 * @param rotatio - The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to *0*.
+	 * @param x The center of the ellipse offset from the last call.
+	 * @param xRadiu The radius of the ellipse in the x axis.
+	 * @param yRadiu The radius of the ellipse in the y axis.
+	 * @param startAngl The start angle in radians.
+	 * @param endAngl The end angle in radians.
+	 * @param clockwis Sweep the ellipse clockwise. Defaults to *false*.
+	 * @param rotatio The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to *0*.
 	 * Adds an [EllipseCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EllipseCurve) to the path, positioned relative to *.currentPoint*.
 	 */
 	ellipse(
@@ -423,13 +385,13 @@ export interface Path extends CurvePath<Vector2> {
 	): this;
 
 	/**
-	 * @param x - The absolute center of the ellipse.
-	 * @param xRadiu - The radius of the ellipse in the x axis.
-	 * @param yRadiu - The radius of the ellipse in the y axis.
-	 * @param startAngl - The start angle in radians.
-	 * @param endAngl - The end angle in radians.
-	 * @param clockwis - Sweep the ellipse clockwise. Defaults to false.
-	 * @param rotatio - The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to 0.
+	 * @param x The absolute center of the ellipse.
+	 * @param xRadiu The radius of the ellipse in the x axis.
+	 * @param yRadiu The radius of the ellipse in the y axis.
+	 * @param startAngl The start angle in radians.
+	 * @param endAngl The end angle in radians.
+	 * @param clockwis Sweep the ellipse clockwise. Defaults to false.
+	 * @param rotatio The rotation angle of the ellipse in radians, counterclockwise from the positive X axis. Optional, defaults to 0.
 	 * Adds an absolutely positioned [EllipseCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EllipseCurve) to the path.
 	 */
 	absellipse(
@@ -445,10 +407,41 @@ export interface Path extends CurvePath<Vector2> {
 }
 
 /**
- * Defines a 2d shape plane using paths.
+ * Defines an arbitrary 2d shape plane using paths with optional holes. It can be used with [ExtrudeGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ExtrudeGeometry),
+ * [ShapeGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapeGeometry), to get points, or to get triangulated faces.
+ *
+ * ### Code Example
+ * ```js
+ * const heartShape = new THREE.Shape();
+ * heartShape.moveTo( 25, 25 );
+ * heartShape.bezierCurveTo( 25, 25, 20, 0, 0, 0 );
+ * heartShape.bezierCurveTo( - 30, 0, - 30, 35, - 30, 35 );
+ * heartShape.bezierCurveTo( - 30, 55, - 10, 77, 25, 95 );
+ * heartShape.bezierCurveTo( 60, 77, 80, 55, 80, 35 );
+ * heartShape.bezierCurveTo( 80, 35, 80, 0, 50, 0 );
+ * heartShape.bezierCurveTo( 35, 0, 25, 25, 25, 25 );
+ * const extrudeSettings = { 
+ * 	depth: 8, 
+ * 	bevelEnabled: true, 
+ * 	bevelSegments: 2, 
+ * 	steps: 2, 
+ * 	bevelSize: 1, 
+ * 	bevelThickness: 1 
+ * };
+ * const geometry = new THREE.ExtrudeGeometry( heartShape, extrudeSettings );
+ * const mesh = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
+ * ```
+ *
+ * ### Examples
+ * [geometry / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_shapes) |
+ * [geometry / extrude / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_shapes) |
+ * [geometry / extrude / shapes2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_shapes2)
  */
 export interface Shape extends Path {
 	/**
+	 * Creates a Shape from the points. The first point defines the offset, then successive points are added to the [curves](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CurvePath.curves) array as [LineCurves](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineCurve).
+	 * If no points are specified, an empty shape is created and the *.currentPoint* is set to the origin.
+	 * @param point array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
 	 */
 	new (points?: Vector2[]): this;
 
@@ -458,19 +451,25 @@ export interface Shape extends Path {
 	type: string;
 
 	/**
+	 * [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) of this instance. This gets automatically assigned, so this shouldn't be edited.
 	 */
 	uuid: string;
 
 	/**
+	 * An array of [paths](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path) that define the holes in the shape.
 	 * @default []
 	 */
 	holes: Path[];
 
 	/**
+	 * Get an array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) that represent the holes in the shape.
+	 * @param division The fineness of the result.
 	 */
 	getPointsHoles(divisions: number): Vector2[][];
 
 	/**
+	 * Call [getPoints](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Curve.getPoints) on the shape and the *.holes* array, and return an object of the form:  { shape holes } where shape and holes are arrays of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
+	 * @param division The fineness of the result.
 	 */
 	extractPoints(divisions: number): {
 		shape: Vector2[];
@@ -479,9 +478,14 @@ export interface Shape extends Path {
 }
 
 /**
+ * This class is used to convert a series of shapes to an array of [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path)s, for example an SVG shape to a path (see the example below).
+ *
+ * ### Examples
+ * [geometry / extrude / shapes2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_shapes2)
  */
 export interface ShapePath {
 	/**
+	 * Creates a new ShapePath. Unlike a [Path](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Path), no points are passed in as the ShapePath is designed to be generated after creation.
 	 */
 	new (): this;
 
@@ -529,17 +533,18 @@ export interface ShapePath {
 
 	/**
 	 * Connects a new [SplineCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SplineCurve) onto the path.
-	 * @param points - An array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)
+	 * @param points An array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)
 	 */
 	splineThru(pts: Vector2[]): this;
 
 	/**
-	 * @param isCC - Changes how solids and holes are generated noHoles -- Whether or not to generate holes Converts the [subPaths](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.subPaths) array into an array of Shapes. By default solid shapes are defined clockwise (CW) and holes are defined counterclockwise (CCW). If isCCW is set to true, then those are flipped. If the parameter noHoles is set to true then all paths are set as solid shapes and isCCW is ignored.
+	 * @param isCC Changes how solids and holes are generated noHoles -- Whether or not to generate holes Converts the [subPaths](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapePath.subPaths) array into an array of Shapes. By default solid shapes are defined clockwise (CW) and holes are defined counterclockwise (CCW). If isCCW is set to true, then those are flipped. If the parameter noHoles is set to true then all paths are set as solid shapes and isCCW is ignored.
 	 */
 	toShapes(isCCW: boolean, noHoles?: boolean): Shape[];
 }
 
 /**
+ * Alias for [EllipseCurve](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EllipseCurve).
  */
 export interface ArcCurve extends EllipseCurve {
 	/**
@@ -551,8 +556,6 @@ export interface ArcCurve extends EllipseCurve {
 	 */
 	type: string;
 }
-
-// Extras / Curves /////////////////////////////////////////////////////////////////////
 
 /**
  */
@@ -575,13 +578,34 @@ export interface CurveUtils {
 }
 
 /**
+ * Create a smooth 3d spline curve from a series of points using the [Catmull-Rom](https://en.wikipedia.org/wiki/Centripetal_Catmull-Rom_spline) algorithm.
+ *
+ * ### Examples
+ * [WebGL / geometry / extrude / splines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_splines)
+ *
+ * ### Code Example
+ * ```js
+ * // Create a closed wavey loop
+ * const curve = new THREE.CatmullRomCurve3( [
+ * 	new THREE.Vector3( -10, 0, 10 ), 
+ * 	new THREE.Vector3( -5, 5, 5 ), 
+ * 	new THREE.Vector3( 0, 0, 0 ), 
+ * 	new THREE.Vector3( 5, -5, 5 ), 
+ * 	new THREE.Vector3( 10, 0, 10 ) 
+ * ] );
+ * const points = curve.getPoints( 50 );
+ * const geometry = new THREE.BufferGeometry().setFromPoints( points );
+ * const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+ * // Create the final object to add to the scene
+ * const curveObject = new THREE.Line( geometry, material );
+ * ```
  */
 export interface CatmullRomCurve3 extends Curve<Vector3> {
 	/**
-	 * @param [points=[]]
-	 * @param [closed=false]
-	 * @param [curveType='centripetal']
-	 * @param [tension=0.5]
+	 * @param points – An array of [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) points
+	 * @param closed – Whether the curve is closed. Default is *false*.
+	 * @param curveType – Type of the curve. Default is *centripetal*.
+	 * @param tension – Tension of the curve. Default is *0.5*.
 	 */
 	new (points?: Vector3[], closed?: boolean, curveType?: string, tension?: number): this;
 
@@ -591,15 +615,36 @@ export interface CatmullRomCurve3 extends Curve<Vector3> {
 	type: string;
 
 	/**
+	 * The array of [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) points that define the curve. It needs at least two entries.
 	 * @default []
 	 */
 	points: Vector3[];
 }
 
 /**
+ * Create a smooth 2d [cubic bezier curve](http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg), defined by a start point, endpoint and two control points.
+ *
+ * ### Code Example
+ * ```js
+ * const curve = new THREE.CubicBezierCurve(
+ * 	new THREE.Vector2( -10, 0 ), 
+ * 	new THREE.Vector2( -5, 15 ), 
+ * 	new THREE.Vector2( 20, 15 ), 
+ * 	new THREE.Vector2( 10, 0 ) 
+ * );
+ * const points = curve.getPoints( 50 );
+ * const geometry = new THREE.BufferGeometry().setFromPoints( points );
+ * const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+ * // Create the final object to add to the scene
+ * const curveObject = new THREE.Line( geometry, material );
+ * ```
  */
 export interface CubicBezierCurve extends Curve<Vector2> {
 	/**
+	 * @param v0 – The starting point.
+	 * @param v1 – The first control point.
+	 * @param v2 – The second control point.
+	 * @param v3 – The ending point.
 	 */
 	new (v0: Vector2, v1: Vector2, v2: Vector2, v3: Vector2): this;
 
@@ -609,30 +654,54 @@ export interface CubicBezierCurve extends Curve<Vector2> {
 	type: string;
 
 	/**
+	 * The starting point.
 	 * @default new THREE.Vector2()
 	 */
 	v0: Vector2;
 
 	/**
+	 * The first control point.
 	 * @default new THREE.Vector2()
 	 */
 	v1: Vector2;
 
 	/**
+	 * The second control point.
 	 * @default new THREE.Vector2()
 	 */
 	v2: Vector2;
 
 	/**
+	 * The ending point.
 	 * @default new THREE.Vector2()
 	 */
 	v3: Vector2;
 }
 
 /**
+ * Create a smooth 3d [cubic bezier curve](http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg), defined by a start point, endpoint and two control points.
+ *
+ * ### Code Example
+ * ```js
+ * const curve = new THREE.CubicBezierCurve3(
+ * 	new THREE.Vector3( -10, 0, 0 ), 
+ * 	new THREE.Vector3( -5, 15, 0 ), 
+ * 	new THREE.Vector3( 20, 15, 0 ), 
+ * 	new THREE.Vector3( 10, 0, 0 ) 
+ * );
+ * const points = curve.getPoints( 50 );
+ * const geometry = new THREE.BufferGeometry().setFromPoints( points );
+ * const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+ * // Create the final object to add to the scene
+ * const curveObject = new THREE.Line( geometry, material );
+ * ```
  */
 export interface CubicBezierCurve3 extends Curve<Vector3> {
 	/**
+	 * @param v0 – The starting point.
+	 * @param v1 – The first control point.
+	 * @param v2 – The second control point.
+	 * @param v3 – The ending point.
 	 */
 	new (v0: Vector3, v1: Vector3, v2: Vector3, v3: Vector3): this;
 
@@ -642,30 +711,59 @@ export interface CubicBezierCurve3 extends Curve<Vector3> {
 	type: string;
 
 	/**
+	 * The starting point.
 	 * @default new THREE.Vector3()
 	 */
 	v0: Vector3;
 
 	/**
+	 * The first control point.
 	 * @default new THREE.Vector3()
 	 */
 	v1: Vector3;
 
 	/**
+	 * The second control point.
 	 * @default new THREE.Vector3()
 	 */
 	v2: Vector3;
 
 	/**
+	 * The ending point.
 	 * @default new THREE.Vector3()
 	 */
 	v3: Vector3;
 }
 
 /**
+ * Creates a 2d curve in the shape of an ellipse. Setting the [xRadius](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) equal to the [yRadius](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) will result in a circle.
+ *
+ * ### Code Example
+ * ```js
+ * const curve = new THREE.EllipseCurve(
+ * 	  0,   0, // ax, aY
+ * 	10, 10, // xRadius, yRadius
+ * 	  0,  2 * Math.PI,  // aStartAngle, aEndAngle
+ * 	false,  // aClockwise
+ * 	0 // aRotation
+ * );
+ * const points = curve.getPoints( 50 );
+ * const geometry = new THREE.BufferGeometry().setFromPoints( points );
+ * const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+ * // Create the final object to add to the scene
+ * const ellipse = new THREE.Line( geometry, material );
+ * ```
  */
 export interface EllipseCurve extends Curve<Vector2> {
 	/**
+	 * @param aX – The X center of the ellipse. Default is *0*.
+	 * @param aY – The Y center of the ellipse. Default is *0*.
+	 * @param xRadius – The radius of the ellipse in the x direction. Default is *1*.
+	 * @param yRadius – The radius of the ellipse in the y direction. Default is *1*.
+	 * @param aStartAngle – The start angle of the curve in radians starting from the positive X axis.  Default is *0*.
+	 * @param aEndAngle – The end angle of the curve in radians starting from the positive X axis. Default is *2 x Math.PI*.
+	 * @param aClockwise – Whether the ellipse is drawn clockwise. Default is *false*.
+	 * @param aRotation  – The rotation angle of the ellipse in radians, counterclockwise from the positive X axis Default is *0*.
 	 */
 	new (
 		aX: number,
@@ -684,50 +782,61 @@ export interface EllipseCurve extends Curve<Vector2> {
 	type: string;
 
 	/**
+	 * The X center of the ellipse.
 	 * @default 0
 	 */
 	aX: number;
 
 	/**
+	 * The Y center of the ellipse.
 	 * @default 0
 	 */
 	aY: number;
 
 	/**
+	 * The radius of the ellipse in the x direction.
 	 * @default 1
 	 */
 	xRadius: number;
 
 	/**
+	 * The radius of the ellipse in the y direction.
 	 * @default 1
 	 */
 	yRadius: number;
 
 	/**
+	 * The start angle of the curve in radians starting from the middle right side.
 	 * @default 0
 	 */
 	aStartAngle: number;
 
 	/**
+	 * The end angle of the curve in radians starting from the middle right side.
 	 * @default 2 * Math.PI
 	 */
 	aEndAngle: number;
 
 	/**
+	 * Whether the ellipse is drawn clockwise.
 	 * @default false
 	 */
 	aClockwise: boolean;
 
 	/**
+	 * The rotation angle of the ellipse in radians, counterclockwise from the positive X axis Default is *0*.
 	 * @default 0
 	 */
 	aRotation: number;
 }
 
 /**
+ * A curve representing a 2d line segment.
  */
 export interface LineCurve extends Curve<Vector2> {
 	/**
+	 * @param v1 – The start point.
+	 * @param v2 The end point.
 	 */
 	new (v1: Vector2, v2: Vector2): this;
 
@@ -737,20 +846,25 @@ export interface LineCurve extends Curve<Vector2> {
 	type: string;
 
 	/**
+	 * The start point.
 	 * @default new THREE.Vector2()
 	 */
 	v1: Vector2;
 
 	/**
+	 * The end point
 	 * @default new THREE.Vector2()
 	 */
 	v2: Vector2;
 }
 
 /**
+ * A curve representing a 3d line segment.
  */
 export interface LineCurve3 extends Curve<Vector3> {
 	/**
+	 * @param v1 – The start point.
+	 * @param v2 The end point.
 	 */
 	new (v1: Vector3, v2: Vector3): this;
 
@@ -760,20 +874,40 @@ export interface LineCurve3 extends Curve<Vector3> {
 	type: string;
 
 	/**
+	 * The start point.
 	 * @default new THREE.Vector3()
 	 */
 	v1: Vector3;
 
 	/**
+	 * The end point.
 	 * @default new THREE.Vector3()
 	 */
 	v2: Vector3;
 }
 
 /**
+ * Create a smooth 2d [quadratic bezier curve](http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif), defined by a startpoint, endpoint and a single control point.
+ *
+ * ### Code Example
+ * ```js
+ * const curve = new THREE.QuadraticBezierCurve(
+ * 	new THREE.Vector2( -10, 0 ),
+ * 	new THREE.Vector2( 20, 15 ),
+ * 	new THREE.Vector2( 10, 0 )
+ * );
+ * const points = curve.getPoints( 50 );
+ * const geometry = new THREE.BufferGeometry().setFromPoints( points );
+ * const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+ * // Create the final object to add to the scene
+ * const curveObject = new THREE.Line( geometry, material );
+ * ```
  */
 export interface QuadraticBezierCurve extends Curve<Vector2> {
 	/**
+	 * @param  v0 – The startpoint.
+	 * @param  v1 – The control point.
+	 * @param  v2 – The endpoint.
 	 */
 	new (v0: Vector2, v1: Vector2, v2: Vector2): this;
 
@@ -783,25 +917,46 @@ export interface QuadraticBezierCurve extends Curve<Vector2> {
 	type: string;
 
 	/**
+	 * The startpoint.
 	 * @default new THREE.Vector2()
 	 */
 	v0: Vector2;
 
 	/**
+	 * The control point.
 	 * @default new THREE.Vector2()
 	 */
 	v1: Vector2;
 
 	/**
+	 * The endpoint.
 	 * @default new THREE.Vector2()
 	 */
 	v2: Vector2;
 }
 
 /**
+ * Create a smooth 3d [quadratic bezier curve](http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif), defined by a startpoint, endpoint and a single control point.
+ *
+ * ### Code Example
+ * ```js
+ * const curve = new THREE.QuadraticBezierCurve3(
+ * 	new THREE.Vector3( -10, 0, 0 ),
+ * 	new THREE.Vector3( 20, 15, 0 ),
+ * 	new THREE.Vector3( 10, 0, 0 )
+ * );
+ * const points = curve.getPoints( 50 );
+ * const geometry = new THREE.BufferGeometry().setFromPoints( points );
+ * const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+ * // Create the final object to add to the scene
+ * const curveObject = new THREE.Line( geometry, material );
+ * ```
  */
 export interface QuadraticBezierCurve3 extends Curve<Vector3> {
 	/**
+	 * @param v0 – The starting point
+	 * @param v1 – The middle control point
+	 * @param v2 – The ending point
 	 */
 	new (v0: Vector3, v1: Vector3, v2: Vector3): this;
 
@@ -811,25 +966,47 @@ export interface QuadraticBezierCurve3 extends Curve<Vector3> {
 	type: string;
 
 	/**
+	 * The startpoint.
 	 * @default new THREE.Vector3()
 	 */
 	v0: Vector3;
 
 	/**
+	 * The control point.
 	 * @default new THREE.Vector3()
 	 */
 	v1: Vector3;
 
 	/**
+	 * The endpoint.
 	 * @default new THREE.Vector3()
 	 */
 	v2: Vector3;
 }
 
 /**
+ * Create a smooth 2d spline curve from a series of points. Internally this uses [Interpolations.CatmullRom](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Interpolations.CatmullRom) to create the curve.
+ *
+ * ### Code Example
+ * ```js
+ * // Create a sine-like wave
+ * const curve = new THREE.SplineCurve( [
+ * 	new THREE.Vector2( -10, 0 ),
+ * 	new THREE.Vector2( -5, 5 ),
+ * 	new THREE.Vector2( 0, 0 ),
+ * 	new THREE.Vector2( 5, -5 ),
+ * 	new THREE.Vector2( 10, 0 )
+ * ] );
+ * const points = curve.getPoints( 50 );
+ * const geometry = new THREE.BufferGeometry().setFromPoints( points );
+ * const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+ * // Create the final object to add to the scene
+ * const splineObject = new THREE.Line( geometry, material );
+ * ```
  */
 export interface SplineCurve extends Curve<Vector2> {
 	/**
+	 * @param points An array of [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) points that define the curve.
 	 */
 	new (points?: Vector2[]): this;
 
@@ -839,23 +1016,28 @@ export interface SplineCurve extends Curve<Vector2> {
 	type: string;
 
 	/**
+	 * The array of [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) points that define the curve.
 	 * @default []
 	 */
 	points: Vector2[];
 }
 
 /**
+ * Alias Class for Curve<Vector2>
  */
 export interface CurveVector2 extends Curve<Vector2> {}
 
 /**
+ * Alias Class for Curve<Vector3>
  */
 export interface CurveVector3 extends Curve<Vector3> {}
 
 /**
+ * Alias Class for CurvePath<Vector2>
  */
 export interface CurvePathVector2 extends CurvePath<Vector2> {}
 
 /**
+ * Alias Class for CurvePath<Vector3>
  */
 export interface CurvePathVector3 extends CurvePath<Vector3> {}

@@ -1,12 +1,11 @@
 import {
-	Component,
-	Input,
+	Component, forwardRef, Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { NgxHelperComponent } from '../helper/helper.component';
-import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxLightComponent } from '../light/light.component';
 import { NgxMeshComponent } from '../mesh/mesh.component';
 import { IRendererTimer } from '../ngx-interface';
@@ -51,6 +50,12 @@ import { ViewerCanvas } from './viewer-canvas';
 	selector: 'ngx3js-viewer',
 	templateUrl: './viewer.component.html',
 	styleUrls: ['./viewer.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxViewerComponent),
+		},
+	],
 })
 export class NgxViewerComponent
 	extends NgxAbstractSubscribeComponent
@@ -532,7 +537,7 @@ export class NgxViewerComponent
 					break;
 				case 'shadowmapviewer':
 				case 'shadowmap':
-					this.viewer = new N3JS.ShadowMapViewer(this.getLight() as any);
+					this.viewer = new N3JS.ShadowMapViewer(this.getLight());
 					this.resizeViewer();
 					break;
 				case 'shadowmesh':
@@ -549,7 +554,7 @@ export class NgxViewerComponent
 				case 'progressivelightmap':
 				case 'progressivelight':
 					const progressiveSurfacemap = new N3JS.ProgressiveLightMap(
-						this.getRenderer() as any,
+						this.getRenderer() as I3JS.WebGLRenderer,
 						NgxThreeUtil.getTypeSafe(this.lightMapRes, 1024)
 					);
 					const lightmapObjects: any = [];

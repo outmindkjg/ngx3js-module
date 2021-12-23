@@ -112,7 +112,7 @@ export interface RayParameters {
 	) => void;
 }
 
-export interface LightningStrike {
+export interface LightningStrike extends BufferGeometry {
 	new (rayParameters?: RayParameters): this;
 	copyParameters(dest?: RayParameters, source?: RayParameters): RayParameters;
 
@@ -128,7 +128,6 @@ export interface LightningStrike {
 
 	update(time: number): void;
 
-	copy(source: LightningStrike): LightningStrike;
 	clone(): this;
 }
 

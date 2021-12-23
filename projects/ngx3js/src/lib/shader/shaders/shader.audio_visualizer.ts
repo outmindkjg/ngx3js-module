@@ -20,6 +20,6 @@ export const AudioVisualizer: IShaderType = {
   }
   `,
 	uniforms: {
-		tAudioData: { value: null } as any,
+		tAudioData: { value: null },
 	},
 };

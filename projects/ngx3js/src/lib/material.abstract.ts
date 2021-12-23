@@ -28,6 +28,10 @@ import { NgxAbstractTextureComponent } from './texture.abstract';
  * 			provide: NgxAbstractMaterialComponent,
  * 			useExisting: forwardRef(() => NgxXxxComponent),
  * 		},
+ * 		{
+ * 			provide: NgxAbstractSubscribeComponent,
+ * 			useExisting: forwardRef(() => NgxXxxComponent),
+ * 		}
  * 	],
  * })
  * export class NgxXxxComponent extends NgxAbstractMaterialComponent implements OnInit {

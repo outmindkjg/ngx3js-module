@@ -26,39 +26,26 @@ export interface LineBasicMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls line thickness. Default is *1*.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	linewidth?: number | undefined;
 
 	/**
 	 * Define appearance of line ends. Possible values are 'butt', 'round' and 'square'.
 	 * Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	linecap?: string | undefined;
 
 	/**
 	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	linejoin?: string | undefined;
 }
 
 /**
  * A material for drawing wireframe-style geometries.
- *
- * ### Code Example
- * ```javascript
- * const material = new THREE.LineBasicMaterial( {
- * 	color: 0xffffff,
- * 	linewidth: 1,
- * 	linecap: 'round', //ignored by WebGLRenderer
- * 	linejoin:  'round' //ignored by WebGLRenderer
- * });
- * ```
  *
  * ### Examples
  * [WebGL / buffergeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange) |
@@ -75,12 +62,22 @@ export interface LineBasicMaterialParameters extends MaterialParameters {
  * [WebGL / lines / sphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_sphere) |
  * [WebGL / materials](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials) |
  * [physics / ammo / rope](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_rope)
+ *
+ * ### Code Example
+ * ```js
+ * const material = new THREE.LineBasicMaterial( {
+ * 	color: 0xffffff,
+ * 	linewidth: 1,
+ * 	linecap: 'round', //ignored by WebGLRenderer
+ * 	linejoin:  'round' //ignored by WebGLRenderer
+ * });
+ * ```
  */
 export interface LineBasicMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: LineBasicMaterialParameters): this;
 
@@ -97,8 +94,7 @@ export interface LineBasicMaterial extends Material {
 
 	/**
 	 * Controls line thickness. Default is *1*.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	linewidth: number;
@@ -106,23 +102,21 @@ export interface LineBasicMaterial extends Material {
 	/**
 	 * Define appearance of line ends. Possible values are 'butt', 'round' and 'square'.
 	 * Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	linecap: string;
 
 	/**
 	 * Define appearance of line joints. Possible values are 'round', 'bevel' and 'miter'. Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	linejoin: string;
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: LineBasicMaterialParameters): void;
 }
@@ -149,8 +143,12 @@ export interface LineDashedMaterialParameters extends LineBasicMaterialParameter
 
 /**
  * A material for drawing wireframe-style geometries with dashed lines.
+ *
+ * ### Examples
+ * [WebGL / lines / dashed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_dashed)
+ * 
  * ### Code Example
- * ```javascript
+ * ```js
  * const material = new THREE.LineDashedMaterial( {
  * 	color: 0xffffff,
  * 	linewidth: 1,
@@ -159,13 +157,11 @@ export interface LineDashedMaterialParameters extends LineBasicMaterialParameter
  * 	gapSize: 1,
  * } );
  * ```
- * ### Examples
- * [WebGL / lines / dashed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_dashed)
  */
 export interface LineDashedMaterial extends LineBasicMaterial {
 	/**
 	 * Any property of the material (including any property inherited from [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial)) can be passed in here.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: LineDashedMaterialParameters): this;
 
@@ -196,7 +192,7 @@ export interface LineDashedMaterial extends LineBasicMaterial {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: LineDashedMaterialParameters): void;
 }
@@ -811,7 +807,8 @@ export interface Material extends EventDispatcher {
 	/**
 	 * In case onBeforeCompile is used, this callback can be used to identify values of settings used in onBeforeCompile, so three.js can reuse a cached shader or recompile the shader for this material as needed.
 	 * For example, if onBeforeCompile contains a conditional statement like:
-	 * ```javascript
+	 *
+	 * ```js
 	 * if ( black ) {
 	 * 	shader.fragmentShader = shader.fragmentShader.replace('gl_FragColor = vec4(1)', 'gl_FragColor = vec4(0)')
 	 * }
@@ -826,13 +823,13 @@ export interface Material extends EventDispatcher {
 
 	/**
 	 * Sets the properties based on the *values*.
-	 * @param value - a container with parameters.
+	 * @param value A container with parameters.
 	 */
 	setValues(values: MaterialParameters): void;
 
 	/**
 	 * Convert the material to three.js [JSON Object/Scene format](https://github.com/mrdoob/three.js/wiki/JSON-Object-Scene-format-4).
-	 * @param met - object containing metadata such as textures or images for the material.
+	 * @param met object containing metadata such as textures or images for the material.
 	 */
 	toJSON(meta?: any): any;
 }
@@ -916,22 +913,19 @@ export interface MeshBasicMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap?: string | undefined;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin?: string | undefined;
 }
@@ -944,7 +938,7 @@ export interface MeshBasicMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshBasicMaterialParameters): this;
 
@@ -1028,28 +1022,25 @@ export interface MeshBasicMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth: number | undefined;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap: string | undefined;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin: string | undefined;
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshBasicMaterialParameters): void;
 }
@@ -1098,8 +1089,7 @@ export interface MeshDepthMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 }
@@ -1109,7 +1099,7 @@ export interface MeshDepthMaterialParameters extends MaterialParameters {
  */
 export interface MeshDepthMaterial extends Material {
 	/**
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 */
 	new (parameters?: MeshDepthMaterialParameters): this;
@@ -1166,8 +1156,7 @@ export interface MeshDepthMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
@@ -1180,7 +1169,7 @@ export interface MeshDepthMaterial extends Material {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshDepthMaterialParameters): void;
 }
@@ -1235,7 +1224,7 @@ export interface MeshDistanceMaterialParameters extends MaterialParameters {
 
 /**
  * MeshDistanceMaterial is internally used for implementing shadow mapping with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight)s.
- * Can also be used to customize the shadow casting of an object by assigning an instance of [name] to [Object3D.customDistanceMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.customDistanceMaterial).
+ * Can also be used to customize the shadow casting of an object by assigning an instance of MeshDistanceMaterial to [Object3D.customDistanceMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.customDistanceMaterial).
  * The following examples demonstrates this approach in order to ensure transparent parts of objects do no cast shadows.
  *
  * ### Examples
@@ -1244,7 +1233,7 @@ export interface MeshDistanceMaterialParameters extends MaterialParameters {
 export interface MeshDistanceMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshDistanceMaterialParameters): this;
 
@@ -1312,7 +1301,7 @@ export interface MeshDistanceMaterial extends Material {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshDistanceMaterialParameters): void;
 }
@@ -1412,22 +1401,19 @@ export interface MeshLambertMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap?: string | undefined;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin?: string | undefined;
 }
@@ -1445,7 +1431,7 @@ export interface MeshLambertMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshLambertMaterialParameters): this;
 
@@ -1561,31 +1547,28 @@ export interface MeshLambertMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinecap: string;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinejoin: string;
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshLambertMaterialParameters): void;
 }
@@ -1675,7 +1658,7 @@ export interface MeshMatcapMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshMatcapMaterialParameters): this;
 
@@ -1776,7 +1759,7 @@ export interface MeshMatcapMaterial extends Material {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshMatcapMaterialParameters): void;
 }
@@ -1836,8 +1819,7 @@ export interface MeshNormalMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
@@ -1853,7 +1835,7 @@ export interface MeshNormalMaterialParameters extends MaterialParameters {
 export interface MeshNormalMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshNormalMaterialParameters): this;
 
@@ -1922,8 +1904,7 @@ export interface MeshNormalMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
@@ -1936,7 +1917,7 @@ export interface MeshNormalMaterial extends Material {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshNormalMaterialParameters): void;
 }
@@ -2099,22 +2080,19 @@ export interface MeshPhongMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap?: string | undefined;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin?: string | undefined;
 
@@ -2140,7 +2118,7 @@ export interface MeshPhongMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshPhongMaterialParameters): this;
 
@@ -2321,24 +2299,21 @@ export interface MeshPhongMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinecap: string;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinejoin: string;
@@ -2350,13 +2325,8 @@ export interface MeshPhongMaterial extends Material {
 	flatShading: boolean;
 
 	/**
-	 * @deprecated Use {@link MeshStandardMaterial THREE.MeshStandardMaterial} instead.
-	 */
-	metal: boolean;
-
-	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshPhongMaterialParameters): void;
 }
@@ -2463,7 +2433,7 @@ export interface MeshPhysicalMaterial extends MeshStandardMaterial {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) and [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshPhysicalMaterialParameters): this;
 
@@ -2758,8 +2728,7 @@ export interface MeshStandardMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
@@ -2786,7 +2755,7 @@ export interface MeshStandardMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshStandardMaterialParameters): this;
 
@@ -2970,24 +2939,21 @@ export interface MeshStandardMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinecap: string;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinejoin: string;
@@ -3002,7 +2968,7 @@ export interface MeshStandardMaterial extends Material {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshStandardMaterialParameters): void;
 }
@@ -3129,22 +3095,19 @@ export interface MeshToonMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinecap?: string | undefined;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 */
 	wireframeLinejoin?: string | undefined;
 }
@@ -3158,7 +3121,7 @@ export interface MeshToonMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: MeshToonMaterialParameters): this;
 
@@ -3303,31 +3266,28 @@ export interface MeshToonMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
 
 	/**
 	 * Define appearance of line ends. Possible values are "butt", "round" and "square". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineCap](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineCap) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinecap: string;
 
 	/**
 	 * Define appearance of line joints. Possible values are "round", "bevel" and "miter". Default is 'round'.
-	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin)
-	 * property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
+	 * This corresponds to the [2D Canvas lineJoin](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/lineJoin) property and it is ignored by the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer.
 	 * @default 'round'
 	 */
 	wireframeLinejoin: string;
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: MeshToonMaterialParameters): void;
 }
@@ -3368,8 +3328,23 @@ export interface PointsMaterialParameters extends MaterialParameters {
 /**
  * The default material used by [Points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points).
  *
+ * ### Examples
+ * [misc / controls / fly](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_fly) |
+ * [WebGL / BufferGeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange) |
+ * [WebGL / BufferGeometry / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_points) |
+ * [WebGL / BufferGeometry / points / interleaved](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_points_interleaved) |
+ * [WebGL / camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera) |
+ * [WebGL / geometry / convex](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_convex) |
+ * [WebGL / geometry / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_shapes) |
+ * [WebGL / interactive / raycasting / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_raycasting_points) |
+ * [WebGL / multiple / elements / text](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_multiple_elements_text) |
+ * [WebGL / points / billboards](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_billboards) |
+ * [WebGL / points / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_dynamic) |
+ * [WebGL / points / sprites](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_sprites) |
+ * [WebGL / trails](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_trails)
+ * 
  * ### Code Example
- * ```javascript
+ * ```js
  * const vertices = [];
  * for ( let i = 0; i < 10000; i ++ ) {
  *      const x = THREE.MathUtils.randFloatSpread( 2000 );
@@ -3383,27 +3358,12 @@ export interface PointsMaterialParameters extends MaterialParameters {
  * const points = new THREE.Points( geometry, material );
  * scene.add( points );
  * ```
- *
- * ### Examples
- * [misc / controls / fly](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_fly) |
- * [WebGL / BufferGeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange) |
- * [WebGL / BufferGeometry / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_points) |
- * [WebGL / BufferGeometry / points / interleaved](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_points_interleaved) |
- * [WebGL / camera ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera) |
- * [WebGL / geometry / convex](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_convex) |
- * [WebGL / geometry / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_shapes) |
- * [WebGL / interactive / raycasting / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_raycasting_points) |
- * [WebGL / multiple / elements / text](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_multiple_elements_text) |
- * [WebGL / points / billboards](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_billboards) |
- * [WebGL / points / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_dynamic) |
- * [WebGL / points / sprites](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_sprites) |
- * [WebGL / trails](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_trails)
  */
 export interface PointsMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: PointsMaterialParameters): this;
 
@@ -3447,23 +3407,13 @@ export interface PointsMaterial extends Material {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: PointsMaterialParameters): void;
 }
 
 /**
  * This class works just like [ShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderMaterial), except that definitions of built-in uniforms and attributes are not automatically prepended to the GLSL shader code.
- * ### Code Example
- * ```javascript
- * const material = new THREE.RawShaderMaterial( {
- *      uniforms: {
- *          time: { value: 1.0 }
- *      },
- *      vertexShader: document.getElementById( 'vertexShader' ).textContent,
- *      fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
- * } );
- * ```
  *
  * ### Examples
  * [WebGL / buffergeometry / rawshader](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_rawshader) |
@@ -3473,11 +3423,22 @@ export interface PointsMaterial extends Material {
  * [WebGL 2 / volume / cloud](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_volume_cloud) |
  * [WebGL 2 / volume / instancing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_volume_instancing) |
  * [WebGL 2 / volume / perlin](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_volume_perlin)
+ *
+ * ### Code Example
+ * ```js
+ * const material = new THREE.RawShaderMaterial( {
+ *      uniforms: {
+ *          time: { value: 1.0 }
+ *      },
+ *      vertexShader: document.getElementById( 'vertexShader' ).textContent,
+ *      fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+ * } );
+ * ```
  */
 export interface RawShaderMaterial extends ShaderMaterial {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) and [ShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderMaterial)) can be passed in here.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: ShaderMaterialParameters): this;
 }
@@ -3487,9 +3448,7 @@ export interface RawShaderMaterial extends ShaderMaterial {
  */
 export interface ShaderMaterialParameters extends MaterialParameters {
 	/**
-	 * An object of the form: { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }
-	 * specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form { value: 1.0 }
-	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
+	 * An object of the form: { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } } specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form { value: 1.0 } where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 */
 	uniforms?: { [uniform: string]: IUniform } | undefined;
 
@@ -3505,8 +3464,7 @@ export interface ShaderMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	linewidth?: number | undefined;
 
@@ -3517,8 +3475,7 @@ export interface ShaderMaterialParameters extends MaterialParameters {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 */
 	wireframeLinewidth?: number | undefined;
 
@@ -3596,7 +3553,7 @@ export interface ShaderMaterialParameters extends MaterialParameters {
 export interface ShaderMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: ShaderMaterialParameters): this;
 
@@ -3612,9 +3569,7 @@ export interface ShaderMaterial extends Material {
 	defines: { [key: string]: any };
 
 	/**
-	 * An object of the form: { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }
-	 * specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form { value: 1.0 }
-	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
+	 * An object of the form: { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } } specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form { value: 1.0 } where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 * @default {}
 	 */
 	uniforms: { [uniform: string]: IUniform };
@@ -3631,8 +3586,7 @@ export interface ShaderMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	linewidth: number;
@@ -3645,8 +3599,7 @@ export interface ShaderMaterial extends Material {
 
 	/**
 	 * Controls wireframe thickness. Default is 1.
-	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf)
-	 * with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
+	 * Due to limitations of the [OpenGL Core Profile](https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf) with the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) renderer on most platforms linewidth will always be 1 regardless of the set value.
 	 * @default 1
 	 */
 	wireframeLinewidth: number;
@@ -3668,11 +3621,6 @@ export interface ShaderMaterial extends Material {
 	 * @default false
 	 */
 	clipping: boolean;
-
-	/**
-	 * @deprecated Use {@link ShaderMaterial#extensions.derivatives extensions.derivatives} instead.
-	 */
-	derivatives: any;
 
 	/**
 	 * An object with the following properties:
@@ -3711,7 +3659,7 @@ export interface ShaderMaterial extends Material {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: ShaderMaterialParameters): void;
 
@@ -3732,7 +3680,7 @@ export interface ShadowMaterialParameters extends MaterialParameters {
  * This material can receive shadows, but otherwise is completely transparent.
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const geometry = new THREE.PlaneGeometry( 2000, 2000 );
  * geometry.rotateX( - Math.PI / 2 );
  * const material = new THREE.ShadowMaterial();
@@ -3749,7 +3697,7 @@ export interface ShadowMaterialParameters extends MaterialParameters {
 export interface ShadowMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: ShadowMaterialParameters): this;
 
@@ -3807,26 +3755,26 @@ export interface SpriteMaterialParameters extends MaterialParameters {
 /**
  * A material for a use with a [Sprite](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite).
  *
+ * ### Examples
+ * [WebGL / raycast / sprite](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_raycast_sprite) |
+ * [WebGL / sprites](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_sprites) |
+ * [SVG / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/svg_sandbox)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const map = new THREE.TextureLoader().load( 'textures/sprite.png' );
  * const material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
  * const sprite = new THREE.Sprite( material );
  * sprite.scale.set(200, 200, 1)
  * scene.add( sprite );
  * ```
- *
- * ### Examples
- * [WebGL / raycast / sprite](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_raycast_sprite) |
- * [WebGL / sprites](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_sprites) |
- * [SVG / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/svg_sandbox)
  */
 export interface SpriteMaterial extends Material {
 	/**
 	 * Any property of the material (including any property inherited from [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material)) can be passed in here.
 	 * The exception is the property [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Hexadecimal), which can be passed in as a hexadecimal string and is *0xffffff* (white) by default. [Color.set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color.set)( color ) is called internally.
 	 * SpriteMaterials are not clipped by using [Material.clippingPlanes](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material.clippingPlanes).
-	 * @param parameters - an object with one or more properties defining the material's appearance.
+	 * @param parameters an object with one or more properties defining the material's appearance.
 	 */
 	new (parameters?: SpriteMaterialParameters): this;
 
@@ -3878,7 +3826,7 @@ export interface SpriteMaterial extends Material {
 
 	/**
 	 * Sets the properties based on the *parameters*.
-	 * @param parameters - a container with parameters.
+	 * @param parameters A container with parameters.
 	 */
 	setValues(parameters: SpriteMaterialParameters): void;
 

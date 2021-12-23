@@ -47,7 +47,7 @@ export const ScaleColor: IShaderType = {
   }
   `,
 	uniforms: {
-		map: { value: null } as any,
+		map: { value: null },
 		time: { value: 0.0 },
 	},
 };

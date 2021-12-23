@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -12,6 +12,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-plane',
 	templateUrl: './plane.component.html',
 	styleUrls: ['./plane.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxPlaneComponent),
+		},
+	],
 })
 export class NgxPlaneComponent
 	extends NgxAbstractSubscribeComponent

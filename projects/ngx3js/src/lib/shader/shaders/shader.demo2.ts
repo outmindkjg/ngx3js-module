@@ -29,6 +29,6 @@ export const ShaderDemo2:IShaderType = {
   `,
 	uniforms: {
 		time: { value: 1.0 },
-		colorTexture: { value: null } as any,
+		colorTexture: { value: null },
 	},
 };

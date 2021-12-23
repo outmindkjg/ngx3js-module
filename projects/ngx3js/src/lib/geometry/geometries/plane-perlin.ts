@@ -380,7 +380,7 @@ export class NgxPlanePerlinGeometry {
 		translate: { x: number; y: number; z: number },
 		colors?: I3JS.Color[]
 	): I3JS.BufferGeometry {
-		const geometry = planeGeometry.clone() as any;
+		const geometry = planeGeometry.clone();
 		if (colors !== null && colors !== undefined && colors.length > 0) {
 			geometry.setAttribute('color', planeGeometry.attributes.position.clone());
 			const color = geometry.attributes.color as any;

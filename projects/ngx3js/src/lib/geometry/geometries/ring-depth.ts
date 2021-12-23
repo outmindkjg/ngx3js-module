@@ -70,7 +70,7 @@ export class NgxRingDepthGeometry extends N3JS.BufferGeometry {
 			thetaLength
 		);
 		frontGeometry.translate(0, 0, halfDepth);
-		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry as any);
+		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry);
 		const vertices = [];
 		const normals = [];
 		const uvs = [];

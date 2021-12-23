@@ -965,7 +965,7 @@ export class NgxAbstractTextureComponent
 					const cubeTexture = new N3JS.CubeTexture();
 					this.hdrCubeMapLoader.setDataType(N3JS.UnsignedByteType);
 					this.hdrCubeMapLoader.load(cubeImage, (hdrCubeMap) => {
-						cubeTexture.copy(hdrCubeMap as any);
+						cubeTexture.copy(hdrCubeMap);
 						cubeTexture.needsUpdate = true;
 						onLoad();
 					});
@@ -980,7 +980,7 @@ export class NgxAbstractTextureComponent
 					}
 					const rgbmTexture = new N3JS.CubeTexture();
 					this.rgbmLoader.loadCubemap(cubeImage, (rgbmCube) => {
-						rgbmTexture.copy(rgbmCube as any);
+						rgbmTexture.copy(rgbmCube);
 						rgbmTexture.needsUpdate = true;
 						onLoad();
 					});
@@ -1021,7 +1021,7 @@ export class NgxAbstractTextureComponent
 					const video = document.createElement('video');
 					video.loop = true;
 					video.crossOrigin = 'anonymous';
-					(video as any).playsInline = true;
+					video.playsInline = true;
 					if (fileName.endsWith('.webcam')) {
 						if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 							navigator.mediaDevices
@@ -1106,7 +1106,7 @@ export class NgxAbstractTextureComponent
 					} else if (image.endsWith('.room')) {
 						const pmremGenerator = NgxThreeUtil.getPmremGenerator();
 						const renderTarget = pmremGenerator.fromScene(
-							new N3JS.RoomEnvironment() as any,
+							new N3JS.RoomEnvironment(),
 							NgxThreeUtil.getTypeSafe(options.sigma, 0),
 							NgxThreeUtil.getTypeSafe(options.near, 0.1),
 							NgxThreeUtil.getTypeSafe(options.far, 100)
@@ -1469,7 +1469,7 @@ export class NgxAbstractTextureComponent
 					} else if (object instanceof N3JS.ShaderPass) {
 						materials.push(object.material.uniforms);
 					} else if (object instanceof N3JS.EffectComposer) {
-						materials.push(object.renderTarget1 as any);
+						materials.push(object.renderTarget1);
 					}
 				});
 			}
@@ -1621,7 +1621,7 @@ export class NgxAbstractTextureComponent
 							material.setTexture(texture);
 						} else if (typeof material === 'object') {
 							const textureTypeInfo = (textureType + '..').split('.');
-							const materialUniform: { [key: string]: I3JS.IUniform } = material as any;
+							const materialUniform: { [key: string]: I3JS.IUniform } = material;
 							switch (textureTypeInfo[0].toLowerCase()) {
 								case 'uniforms':
 									const uniformKey = textureTypeInfo[1];
@@ -1659,7 +1659,7 @@ export class NgxAbstractTextureComponent
 					if (materialAny['color'] instanceof N3JS.OperatorNode) {
 						const color: I3JS.OperatorNode = materialAny['color'];
 						if (color.a instanceof N3JS.TextureNode) {
-							color.a.value = texture as any;
+							color.a.value = texture;
 						}
 					}
 					break;
@@ -1667,19 +1667,19 @@ export class NgxAbstractTextureComponent
 					if (materialAny['normal'] instanceof N3JS.NormalMapNode) {
 						const normal: I3JS.NormalMapNode = materialAny['normal'];
 						if (normal.value instanceof N3JS.TextureNode) {
-							normal.value.value = texture as any;
+							normal.value.value = texture;
 						} else {
-							normal.value = new N3JS.TextureNode(texture as any);
+							normal.value = new N3JS.TextureNode(texture);
 						}
 					} else {
-						materialAny['normal'] = new N3JS.NormalMapNode(new N3JS.TextureNode(texture as any));
+						materialAny['normal'] = new N3JS.NormalMapNode(new N3JS.TextureNode(texture));
 					}
 					break;
 				default:
 					if (materialAny[key] instanceof N3JS.TextureNode) {
 						materialAny[key].value = texture;
 					} else {
-						materialAny[key] = new N3JS.TextureNode(texture as any);
+						materialAny[key] = new N3JS.TextureNode(texture);
 					}
 					break;
 			}

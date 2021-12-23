@@ -8,7 +8,8 @@ import { DataTexture } from './textures';
  * A bone which is part of a [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton). The skeleton in turn is used by the [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
  * Bones are almost identical to a blank [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D).
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const root = new THREE.Bone();
  * const child = new THREE.Bone();
  * root.add( child );
@@ -20,6 +21,7 @@ export interface Bone extends Object3D {
 	 * Creates a new Bone.
 	 */
 	new (): this;
+
 	readonly isBone: true;
 
 	/**
@@ -30,14 +32,17 @@ export interface Bone extends Object3D {
 
 /**
  * This is almost identical to an [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D). Its purpose is to make working with groups of objects syntactically clearer.
- * ```javascript
+ *
+ * ### Code Example
+ * ```js
  * const geometry = new THREE.BoxGeometry( 1, 1, 1 );
  * const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
  * const cubeA = new THREE.Mesh( geometry, material );
  * cubeA.position.set( 100, 100, 0 );
  * const cubeB = new THREE.Mesh( geometry, material );
  * cubeB.position.set( -100, -100, 0 );
- * // create a group and add the two cubes //These cubes can now be rotated / scaled etc as a group const group = new THREE.Group();
+ * // create a group and add the two cubes //These cubes can now be rotated / scaled etc as a group 
+ * const group = new THREE.Group();
  * group.add( cubeA );
  * group.add( cubeB );
  * scene.add( group );
@@ -54,12 +59,13 @@ export interface Group extends Object3D {
 }
 
 /**
- * A special version of [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) with instanced rendering support. Use [name] if you have to render a large number of objects with the same geometry and material but with different world transformations. The usage of [name] will help you to reduce the number of draw calls and thus improve the overall rendering performance in your application.
+ * A special version of [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) with instanced rendering support. Use InstancedMesh if you have to render a large number of objects with the same geometry and material but with different world transformations. The usage of InstancedMesh will help you to reduce the number of draw calls and thus improve the overall rendering performance in your application.
  *
- * [WebGL / instancing / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_dynamic)
- * [WebGL / instancing / modified](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_modified)
- * [WebGL / instancing / performance](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_performance)
- * [WebGL / instancing / scatter](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_scatter)
+ * ### Examples
+ * [WebGL / instancing / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_dynamic) |
+ * [WebGL / instancing / modified](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_modified) |
+ * [WebGL / instancing / performance](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_performance) |
+ * [WebGL / instancing / scatter](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_scatter) |
  * [WebGL / instancing / raycast](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_raycast)
  *
  * @template TGeometry
@@ -70,12 +76,16 @@ export interface InstancedMesh<
 	TMaterial extends Material | Material[] = Material | Material[]
 > extends Mesh<TGeometry, TMaterial> {
 	/**
-	 * @param geometry - an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
-	 * @param material - an instance of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial).
-	 * @param count - the number of instances.
+	 * @param geometry an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+	 * @param material an instance of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial).
+	 * @param count The number of instances.
 	 */
 	new (geometry: TGeometry | undefined, material: TMaterial | undefined, count: number): this;
 
+	/**
+	 * The number of instances. The *count* value passed into the constructor represents the maximum number of instances of this mesh. You can change the number of instances at runtime to an integer value in the range [0, count].
+	 * If you need more instances than the original count value, you have to create a new InstancedMesh.
+	 */
 	count: number;
 
 	/**
@@ -94,31 +104,31 @@ export interface InstancedMesh<
 
 	/**
 	 * Get the color of the defined instance.
-	 * [index](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The index of an instance. Values have to be in the range [0, count].
-	 * [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color): This color object will be set to the color of the defined instance.
+	 * @param index The index of an instance. Values have to be in the range [0, count].
+	 * @param color This color object will be set to the color of the defined instance.
 	 */
 	getColorAt(index: number, color: Color): void;
 
 	/**
 	 * Get the local transformation matrix of the defined instance.
-	 * [index](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The index of an instance. Values have to be in the range [0, count].
-	 * [matrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4): This 4x4 matrix will be set to the local transformation matrix of the defined instance.
+	 * @param index The index of an instance. Values have to be in the range [0, count].
+	 * @param matrix This 4x4 matrix will be set to the local transformation matrix of the defined instance.
 	 */
 	getMatrixAt(index: number, matrix: Matrix4): void;
 
 	/**
 	 * Sets the given color to the defined instance.
 	 * Make sure you set *.instanceColor*[.needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.needsUpdate) to true after updating all the colors.
-	 * [index](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The index of an instance. Values have to be in the range [0, count].
-	 * [color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color): The color of a single instance.
+	 * @param index The index of an instance. Values have to be in the range [0, count].
+	 * @param color The color of a single instance.
 	 */
 	setColorAt(index: number, color: Color): void;
 
 	/**
 	 * Sets the given local transformation matrix to the defined instance.
 	 * Make sure you set *.instanceMatrix*[.needsUpdate](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute.needsUpdate) to true after updating all the matrices.
-	 * [index](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): The index of an instance. Values have to be in the range [0, count].
-	 * [matrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4): A 4x4 matrix representing the local transformation of a single instance.
+	 * @param index The index of an instance. Values have to be in the range [0, count].
+	 * @param matrix A 4x4 matrix representing the local transformation of a single instance.
 	 */
 	setMatrixAt(index: number, matrix: Matrix4): void;
 
@@ -132,9 +142,11 @@ export interface InstancedMesh<
  * Level of Detail - show meshes with more or less geometry based on distance from the camera.
  * Every level is associated with an object, and rendering can be switched between them at the distances specified. Typically you would create, say, three meshes, one for far away (low detail), one for mid range (medium detail) and one for close up (high detail).
  *
+ * ### Examples
  * [webgl / lod](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lod)
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const lod = new THREE.LOD();
  * // Create spheres with 3 levels of detail and create new LOD levels for them
  * for( let i = 0; i < 3; i++ ) {
@@ -155,8 +167,8 @@ export interface LOD extends Object3D {
 
 	/**
 	 * An array of [level](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object) objects Each level is an object with two properties:
-	 * @param object - The [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) to display at this level.
-	 * @param distance - The distance at which to display this level of detail.
+	 * @param object The [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) to display at this level.
+	 * @param distance The distance at which to display this level of detail.
 	 */
 	levels: Array<{ distance: number; object: Object3D }>;
 
@@ -170,8 +182,8 @@ export interface LOD extends Object3D {
 	readonly isLOD: true;
 
 	/**
-	 * @param object - The [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) to display at this level.
-	 * @param distance - The distance at which to display this level of detail.
+	 * @param object The [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) to display at this level.
+	 * @param distance The distance at which to display this level of detail.
 	 * Adds a mesh that will display at a certain distance and greater. Typically the further away the distance, the lower the detail on the mesh.
 	 */
 	addLevel(object: Object3D, distance?: number): this;
@@ -208,7 +220,8 @@ export interface LOD extends Object3D {
  * This is nearly the same as [LineSegments](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineSegments); the only difference is that it is rendered using [gl.LINE_STRIP](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements)
  * instead of [gl.LINES](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements)
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
  * const points = [];
  * points.push( new THREE.Vector3( - 10, 0, 0 ) );
@@ -226,8 +239,8 @@ export interface Line<
 	TMaterial extends Material | Material[] = Material | Material[]
 > extends Object3D {
 	/**
-	 * @param geometry - vertices representing the line segment(s). Default is a new [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
-	 * @param material - material for the line. Default is a new [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial).
+	 * @param geometry vertices representing the line segment(s). Default is a new [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+	 * @param material material for the line. Default is a new [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial).
 	 */
 	new (geometry?: TGeometry, material?: TMaterial): this;
 
@@ -284,8 +297,8 @@ export interface LineLoop<
 	TMaterial extends Material | Material[] = Material | Material[]
 > extends Line<TGeometry, TMaterial> {
 	/**
-	 * @param geometry - List of vertices representing points on the line loop.
-	 * @param material - Material for the line. Default is [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial).
+	 * @param geometry List of vertices representing points on the line loop.
+	 * @param material Material for the line. Default is [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial).
 	 */
 	new (geometry?: TGeometry, material?: TMaterial): this;
 
@@ -306,8 +319,8 @@ export interface LineSegments<
 	TMaterial extends Material | Material[] = Material | Material[]
 > extends Line<TGeometry, TMaterial> {
 	/**
-	 * @param geometry - Pair(s) of vertices representing each line segment(s).
-	 * @param material - Material for the line. Default is [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial).
+	 * @param geometry Pair(s) of vertices representing each line segment(s).
+	 * @param material Material for the line. Default is [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial).
 	 */
 	new (geometry?: TGeometry, material?: TMaterial): this;
 
@@ -321,7 +334,9 @@ export interface LineSegments<
 /**
  * Class representing triangular [polygon mesh](https://en.wikipedia.org/wiki/Polygon_mesh) based objects.
  * Also serves as a base for other classes such as [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
- * ```javascript
+ *
+ * ### Code Example
+ * ```js
  * const geometry = new THREE.BoxGeometry( 1, 1, 1 );
  * const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
  * const mesh = new THREE.Mesh( geometry, material );
@@ -335,8 +350,8 @@ export interface Mesh<
 	TMaterial extends Material | Material[] = Material | Material[]
 > extends Object3D {
 	/**
-	 * @param geometry - an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry). Default is a new [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
-	 * @param material - a single or an array of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial)
+	 * @param geometry an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry). Default is a new [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+	 * @param material A single or an array of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial)
 	 */
 	new (geometry?: TGeometry, material?: TMaterial): this;
 
@@ -390,8 +405,8 @@ export interface Points<
 	TMaterial extends Material | Material[] = Material | Material[]
 > extends Object3D {
 	/**
-	 * @param geometry - an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).	Default is a new [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
-	 * @param material - a [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [PointsMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointsMaterial).
+	 * @param geometry an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).	Default is a new [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+	 * @param material A [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [PointsMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointsMaterial).
 	 */
 	new (geometry?: TGeometry, material?: TMaterial): this;
 
@@ -437,7 +452,8 @@ export interface Points<
  * Use an array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) to create a skeleton that can be used by a [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
  * See the [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh) page for an example of usage with standard [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * //  Create a simple "arm"
  * const bones = [];
  * const shoulder = new THREE.Bone();
@@ -457,8 +473,8 @@ export interface Points<
 export interface Skeleton {
 	/**
 	 * Creates a new Skeleton.
-	 * @param bones - The array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone). Default is an empty array.
-	 * @param boneInverses - An array of [Matrix4s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
+	 * @param bones The array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone). Default is an empty array.
+	 * @param boneInverses An array of [Matrix4s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
 	 */
 	new (bones: Bone[], boneInverses?: Matrix4[]): this;
 
@@ -527,19 +543,21 @@ export interface Skeleton {
 
 	/**
 	 * Searches through the skeleton's bone array and returns the first with a matching name.
-	 * @param name - String to match to the Bone's .name property.
+	 * @param name String to match to the Bone's .name property.
 	 */
 	getBoneByName(name: string): undefined | Bone;
 
 	/**
-	 * Can be used if an instance of [name] becomes obsolete in an application. The method will free internal resources.
+	 * Can be used if an instance of Skeleton becomes obsolete in an application. The method will free internal resources.
 	 */
 	dispose(): void;
 }
 
 /**
  * A mesh that has a [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton) with [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) that can then be used to animate the vertices of the geometry.
- * ```javascript
+ *
+ * ### Code Example
+ * ```js
  * const geometry = new THREE.CylinderGeometry( 5, 5, 5, 5, 15, 5, 30 );
  * //  create the skin indices and skin weights
  * const position = geometry.attributes.position;
@@ -548,7 +566,8 @@ export interface Skeleton {
  * const skinWeights = [];
  * for ( let i = 0; i < position.count; i ++ ) {
  * 	vertex.fromBufferAttribute( position, i );
- * 	//  compute skinIndex and skinWeight based on some configuration data const y = ( vertex.y + sizing.halfHeight );
+ * 	//  compute skinIndex and skinWeight based on some configuration data 
+ * 	const y = ( vertex.y + sizing.halfHeight );
  * 	const skinIndex = Math.floor( y / sizing.segmentHeight );
  * 	const skinWeight = ( y % sizing.segmentHeight ) / sizing.segmentHeight;
  * 	skinIndices.push( skinIndex, skinIndex + 1, 0, 0 );
@@ -575,14 +594,13 @@ export interface SkinnedMesh<
 	TMaterial extends Material | Material[] = Material | Material[]
 > extends Mesh<TGeometry, TMaterial> {
 	/**
-	 * @param geometry - an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
-	 * @param material - an instance of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial).
+	 * @param geometry an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+	 * @param material an instance of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial).
 	 */
 	new (geometry?: TGeometry, material?: TMaterial, useVertexTexture?: boolean): this;
 
 	/**
-	 * Either "attached" or "detached". "attached" uses the [SkinnedMesh.matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh.matrixWorld)
-	 * property for the base transform	matrix of the bones. "detached" uses the [SkinnedMesh.bindMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh.bindMatrix). Default is "attached".
+	 * Either "attached" or "detached". "attached" uses the [SkinnedMesh.matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh.matrixWorld) property for the base transform matrix of the bones. "detached" uses the [SkinnedMesh.bindMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh.bindMatrix). Default is "attached".
 	 */
 	bindMode: string;
 
@@ -605,8 +623,8 @@ export interface SkinnedMesh<
 
 	/**
 	 * Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
-	 * @param skeleton - [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton) created from a [Bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) tree.
-	 * @param bindMatrix - [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) that represents the base transform of the skeleton.
+	 * @param skeleton Skeleton created from a [Bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) tree.
+	 * @param bindMatrix Matrix4 that represents the base transform of the skeleton.
 	 */
 	bind(skeleton: Skeleton, bindMatrix?: Matrix4): void;
 
@@ -633,9 +651,10 @@ export interface SkinnedMesh<
 
 /**
  * A sprite is a plane that always faces towards the camera, generally with a partially transparent texture applied.
- * Sprites do not cast shadows, setting
- * castShadow = true will have no effect.
- * ```javascript
+ * Sprites do not cast shadows, setting castShadow = true will have no effect.
+ *
+ * ### Code Example
+ * ```js
  * const map = new THREE.TextureLoader().load( 'sprite.png' );
  * const material = new THREE.SpriteMaterial( { map: map } );
  * const sprite = new THREE.Sprite( material );
@@ -645,7 +664,7 @@ export interface SkinnedMesh<
 export interface Sprite extends Object3D {
 	/**
 	 * Creates a new Sprite.
-	 * @param material - an instance of [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial). Default is a white [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial).
+	 * @param material an instance of [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial). Default is a white [SpriteMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial).
 	 */
 	new (material?: SpriteMaterial): this;
 

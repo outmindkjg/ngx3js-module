@@ -92,7 +92,7 @@ export interface MD2Character {
     activeAnimation: string | null;
     mixer: AnimationMixer | null;
     loadCounter: number;
-
+    controls : any;
     onLoadComplete(): void;
     loadParts(config: MD2PartsConfig): void;
     setPlaybackRate(rate: number): void;
@@ -118,7 +118,7 @@ export interface MD2CharacterComplex {
     root: Object3D;
     meshBody: Mesh | null;
     meshWeapon: Mesh | null;
-    controls: null;
+    controls: any;
     skinsBody: Texture[];
     skinsWeapon: Texture[];
     weapons: Mesh[];
@@ -264,6 +264,9 @@ export interface Volume {
     yLength: number;
     zLength: number;
 
+    windowLow : number;
+    windowHigh : number;
+
     axisOrder: Array<'x' | 'y' | 'z'>;
 
     data: ArrayLike<number>;
@@ -271,10 +274,16 @@ export interface Volume {
     spacing: number[];
     offset: number[];
 
-    matrix: Matrix3;
+    matrix: Matrix3 | Matrix4;
 
     lowerThreshold: number;
     upperThreshold: number;
+
+    RASDimensions : any;
+
+    min? : number;
+
+    max? : number;
 
     sliceList: VolumeSlice[];
 

@@ -1,16 +1,9 @@
-import {
-	Component,
-	ContentChildren,
-	ElementRef,
-	forwardRef,
-	Input,
-	QueryList,
-	SimpleChanges
-} from '@angular/core';
+import { Component, ContentChildren, ElementRef, forwardRef, Input, QueryList, SimpleChanges } from '@angular/core';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxLocalStorageService } from '../local-storage.service';
 import { INgxVector, ISvgGeometry } from '../ngx-interface';
 import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxTranslationComponent } from '../translation/translation.component';
 
 /**
@@ -51,6 +44,10 @@ import { NgxTranslationComponent } from '../translation/translation.component';
 	providers: [
 		{
 			provide: NgxAbstractObject3dComponent,
+			useExisting: forwardRef(() => NgxSvgComponent),
+		},
+		{
+			provide: NgxAbstractSubscribeComponent,
 			useExisting: forwardRef(() => NgxSvgComponent),
 		},
 	],
@@ -276,8 +273,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 	/**
 	 * Content children of svg component
 	 */
-	@ContentChildren(NgxTranslationComponent, { descendants: false })
-	private translationList: QueryList<NgxTranslationComponent>;
+	@ContentChildren(NgxTranslationComponent, { descendants: false }) private translationList: QueryList<NgxTranslationComponent>;
 
 	/**
 	 * Mesh positions of svg component
@@ -309,10 +305,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 	 * @param ele
 	 * @param localStorageService
 	 */
-	constructor(
-		private ele: ElementRef,
-		private localStorageService: NgxLocalStorageService
-	) {
+	constructor(private ele: ElementRef, private localStorageService: NgxLocalStorageService) {
 		super();
 	}
 
@@ -351,11 +344,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 	 * It is invoked only once when the directive is instantiated.
 	 */
 	ngAfterContentInit(): void {
-		this.subscribeListQueryChange(
-			this.translationList,
-			'translationList',
-			'translation'
-		);
+		this.subscribeListQueryChange(this.translationList, 'translationList', 'translation');
 		super.ngAfterContentInit();
 	}
 
@@ -546,10 +535,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 	 * @returns extrude path
 	 */
 	private getExtrudePath(): I3JS.Curve<I3JS.Vector3> {
-		if (
-			NgxThreeUtil.isNotNull(this.extrudePath) ||
-			NgxThreeUtil.isNotNull(this.curvePath)
-		) {
+		if (NgxThreeUtil.isNotNull(this.extrudePath) || NgxThreeUtil.isNotNull(this.curvePath)) {
 			const vectors: I3JS.Vector3[] = [];
 			if (NgxThreeUtil.isNotNull(this.extrudePath)) {
 				this.extrudePath.forEach((p) => {
@@ -561,13 +547,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 					vectors.push(new N3JS.Vector3(p.x, p.y, p.z));
 				});
 			}
-			switch (
-				NgxThreeUtil.getTypeSafe(
-					this.extrudePathType,
-					this.curvePathType,
-					'catmullromcurve3'
-				).toLowerCase()
-			) {
+			switch (NgxThreeUtil.getTypeSafe(this.extrudePathType, this.curvePathType, 'catmullromcurve3').toLowerCase()) {
 				case 'catmullromcurve3':
 				default:
 					return new N3JS.CatmullRomCurve3(
@@ -692,9 +672,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 						} else {
 							this.translationList.forEach((translation, idx) => {
 								if (this.meshTranslations.length > idx) {
-									this.meshTranslations[idx].applyMatrix4(
-										translation.getTranslation()
-									);
+									this.meshTranslations[idx].applyMatrix4(translation.getTranslation());
 								}
 							});
 						}
@@ -777,7 +755,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 					this.svgMesh.add(mesh);
 				});
 			});
-			this.setObject3d(this.svgMesh as any);
+			this.setObject3d(this.svgMesh);
 		}
 	}
 
@@ -814,10 +792,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 	 * @param boundingSphere
 	 * @returns geometries
 	 */
-	private getGeometries(
-		data: I3JS.SVGResult | I3JS.Shape[],
-		boundingSphere: I3JS.Sphere
-	): ISvgGeometry[] {
+	private getGeometries(data: I3JS.SVGResult | I3JS.Shape[], boundingSphere: I3JS.Sphere): ISvgGeometry[] {
 		const geometries: ISvgGeometry[] = [];
 		const shapes: {
 			shape: I3JS.Shape[];
@@ -831,10 +806,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 		} else if (data.paths) {
 			data.paths.forEach((path) => {
 				shapes.push({
-					shape: path.toShapes(
-						this.getIsCCW(true),
-						this.getNoHoles(false)
-					) as any,
+					shape: path.toShapes(this.getIsCCW(true), this.getNoHoles(false)),
 					userData: path['userData'] ? path['userData'] : null,
 				});
 			});
@@ -875,16 +847,10 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 					const sumShapes: I3JS.Shape[] = shape.shape;
 					sumShapes.push.apply(shape.shape, holeShape as any);
 					if (NgxThreeUtil.isNotNull(this.stroke)) {
-						const AnySVGLoader = N3JS.SVGLoader as any;
-						const style = AnySVGLoader.getStrokeStyle(
-							this.stroke,
-							this.getColor(0x006699).getStyle()
-						);
+						const AnySVGLoader = N3JS.SVGLoader;
+						const style = AnySVGLoader.getStrokeStyle(this.stroke, this.getColor(0x006699).getStyle());
 						sumShapes.forEach((shape) => {
-							const outlineGeometry = AnySVGLoader.pointsToStroke(
-								shape.getPoints(),
-								style
-							);
+							const outlineGeometry = AnySVGLoader.pointsToStroke(shape.getPoints() as any, style);
 							geometries.push({
 								geometry: this.applyTextAlign(outlineGeometry, boundingSphere),
 								style: null,
@@ -904,10 +870,7 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 				case 'shapebuffer':
 				case 'shape':
 				default:
-					geometry = new N3JS.ShapeGeometry(
-						shape.shape,
-						this.getCurveSegments(12)
-					);
+					geometry = new N3JS.ShapeGeometry(shape.shape, this.getCurveSegments(12));
 					break;
 			}
 			if (geometry !== null) {
@@ -927,31 +890,20 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 	public getPaths(onload: (geometry: ISvgGeometry[]) => void) {
 		if (NgxThreeUtil.isNotNull(this.text) && this.text != '') {
 			this.getFont('helvetiker', (font: I3JS.Font) => {
-				const shapes = font.generateShapes(
-					this.getText('test'),
-					this.getSize(100)
-				) as any;
-				const geometry = new N3JS.ShapeGeometry(
-					shapes,
-					this.getCurveSegments(12)
-				);
+				const shapes = font.generateShapes(this.getText('test'), this.getSize(100));
+				const geometry = new N3JS.ShapeGeometry(shapes, this.getCurveSegments(12));
 				geometry.computeBoundingSphere();
-				onload(this.getGeometries(shapes as any, geometry.boundingSphere));
+				onload(this.getGeometries(shapes, geometry.boundingSphere));
 			});
 		} else {
 			this.getSVGResult((data) => {
 				const shapes: I3JS.Shape[] = [];
-				data.paths.forEach((path : any) => {
-					path
-						.toShapes(this.getIsCCW(true), this.getNoHoles(false))
-						.forEach((shape : any) => {
-							shapes.push(shape as any);
-						});
+				data.paths.forEach((path: any) => {
+					path.toShapes(this.getIsCCW(true), this.getNoHoles(false)).forEach((shape: any) => {
+						shapes.push(shape);
+					});
 				});
-				const geometry = new N3JS.ShapeGeometry(
-					shapes,
-					this.getCurveSegments(12)
-				);
+				const geometry = new N3JS.ShapeGeometry(shapes, this.getCurveSegments(12));
 				geometry.computeBoundingSphere();
 				onload(this.getGeometries(data, null));
 			});
@@ -995,11 +947,9 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 			if (data.paths.length > 0) {
 				const shapes: I3JS.Shape[] = [];
 				data.paths.forEach((path) => {
-					path
-						.toShapes(this.getIsCCW(true), this.getNoHoles(false))
-						.forEach((shape) => {
-							shapes.push(shape as any);
-						});
+					path.toShapes(this.getIsCCW(true), this.getNoHoles(false)).forEach((shape) => {
+						shapes.push(shape);
+					});
 				});
 				onload(shapes);
 			}

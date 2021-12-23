@@ -1,11 +1,11 @@
 import {
 	Component,
-	ContentChildren,
-	Input,
+	ContentChildren, forwardRef, Input,
 	OnInit,
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxCameraComponent } from '../camera/camera.component';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { IRendererTimer } from '../ngx-interface';
@@ -33,6 +33,12 @@ import { NgxAbstractTweenComponent } from '../tween.abstract';
 	selector: 'ngx3js-effect',
 	templateUrl: './effect.component.html',
 	styleUrls: ['./effect.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxEffectComponent),
+		},
+	],
 })
 export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnInit {
 	/**
@@ -210,14 +216,12 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 	/**
 	 * Content children of effect component
 	 */
-	@ContentChildren(NgxPassComponent, { descendants: false })
-	private passList: QueryList<NgxPassComponent>;
+	@ContentChildren(NgxPassComponent, { descendants: false }) private passList: QueryList<NgxPassComponent>;
 
 	/**
 	 * Content children of effect component
 	 */
-	@ContentChildren(NgxRenderTargetComponent, { descendants: false })
-	private renderTargetList: QueryList<NgxRenderTargetComponent>;
+	@ContentChildren(NgxRenderTargetComponent, { descendants: false }) private renderTargetList: QueryList<NgxRenderTargetComponent>;
 
 	/**
 	 * Gets render target

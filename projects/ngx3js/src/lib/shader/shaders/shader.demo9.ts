@@ -26,7 +26,7 @@ export const ShaderDemo9: IShaderType = {
   `,
 	uniforms: {
 		color: { value: NgxThreeUtil.getColorSafe(0xffffff) },
-		pointTexture: { value: null } as any,
+		pointTexture: { value: null },
 		alphaTest: { value: 0.9 },
 	},
 };

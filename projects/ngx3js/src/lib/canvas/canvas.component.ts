@@ -1,7 +1,6 @@
 import {
 	Component,
-	ElementRef,
-	Input,
+	ElementRef, forwardRef, Input,
 	OnInit,
 	SimpleChanges
 } from '@angular/core';
@@ -20,6 +19,12 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 	selector: 'ngx3js-canvas',
 	templateUrl: './canvas.component.html',
 	styleUrls: ['./canvas.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxCanvasComponent),
+		},
+	],
 })
 export class NgxCanvasComponent
 	extends NgxAbstractSubscribeComponent

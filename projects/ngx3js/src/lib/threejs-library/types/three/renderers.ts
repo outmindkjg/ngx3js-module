@@ -36,16 +36,14 @@ export interface WebGL1Renderer extends WebGLRenderer {
 
 /**
  * Used by the [CubeCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubeCamera) as its [WebGLRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget).
- *
- * ### Examples
  * See [CubeCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubeCamera) for examples.
  */
 export interface WebGLCubeRenderTarget extends WebGLRenderTarget {
 	/**
 	 * Creates a new WebGLCubeRenderTarget
 	 *
-	 * @param size - the size, in pixels.
-	 * @param options - object that holds texture parameters for an auto-generated target texture and depthBuffer/stencilBuffer booleans. For an explanation of the texture parameters see [Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture). The following are valid options:
+	 * @param size The size, in pixels.
+	 * @param options object that holds texture parameters for an auto-generated target texture and depthBuffer/stencilBuffer booleans. For an explanation of the texture parameters see [Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture). The following are valid options:
 	 */
 	new (size: number, options?: WebGLRenderTargetOptions): this;
 
@@ -55,8 +53,8 @@ export interface WebGLCubeRenderTarget extends WebGLRenderTarget {
 
 	/**
 	 * Use this method if you want to convert an equirectangular panorama to the cubemap format.
-	 * @param renderer - the renderer.
-	 * @param texture - the equirectangular texture.
+	 * @param renderer The renderer.
+	 * @param texture The equirectangular texture.
 	 */
 	fromEquirectangularTexture(renderer: WebGLRenderer, texture: Texture): this;
 
@@ -73,19 +71,18 @@ export interface WebGLCubeRenderTarget extends WebGLRenderTarget {
  * Heads up: WebGLMultipleRenderTargets can only be used with a WebGL 2 rendering context.
  *
  * ### Examples
- * [webgl2 / multiple / rendertargets ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_multiple_rendertargets)
+ * [webgl2 / multiple / rendertargets](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_multiple_rendertargets)
  */
 export interface WebGLMultipleRenderTargets extends EventDispatcher {
 	/**
-	 * @param width - The width of the render target.
-	 * @param height - The height of the render target.
-	 * @param count - The number of render targets.
+	 * @param width The width of the render target.
+	 * @param height The height of the render target.
+	 * @param count The number of render targets.
 	 */
 	new (width: number, height: number, count: number): this;
 
 	/**
-	 * The texture property is overwritten in [name] and replaced with an array. This array holds the [texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget.texture)
-	 * references of the respective render targets.
+	 * The texture property is overwritten in WebGLMultipleRenderTargets and replaced with an array. This array holds the [texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget.texture) references of the respective render targets.
 	 * [WebGLRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget) properties are available on this class.
 	 */
 	texture: Texture[];
@@ -115,15 +112,16 @@ export interface WebGLMultipleRenderTargets extends EventDispatcher {
 
 /**
  * A special render target that can be used to utilize multi-sampled renderbuffers.
- * Heads up: [name] can only be used with a WebGL 2 rendering context.
+ * Heads up: WebGLMultisampleRenderTarget can only be used with a WebGL 2 rendering context.
+ *
  * ### Examples
- * [webgl2 / multisampled / renderbuffers ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_multisampled_renderbuffers)
+ * [webgl2 / multisampled / renderbuffers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_multisampled_renderbuffers)
  */
 export interface WebGLMultisampleRenderTarget extends WebGLRenderTarget {
 	/**
-	 * @param width - The width of the render target.
-	 * @param height - The height of the render target.
-	 * @param options - object that holds texture parameters for an auto-generated target texture and depthBuffer/stencilBuffer booleans.
+	 * @param width The width of the render target.
+	 * @param height The height of the render target.
+	 * @param options object that holds texture parameters for an auto-generated target texture and depthBuffer/stencilBuffer booleans.
 	 */
 	new (width: number, height: number, options?: WebGLRenderTargetOptions): this;
 
@@ -206,9 +204,9 @@ export interface WebGLRenderTargetOptions {
  */
 export interface WebGLRenderTarget extends EventDispatcher {
 	/**
-	 * @param width - The width of the renderTarget.
-	 * @param height - The height of the renderTarget.
-	 * @param options -(optional object that holds texture parameters for an auto-generated target texture and depthBuffer/stencilBuffer booleans.
+	 * @param width The width of the renderTarget.
+	 * @param height The height of the renderTarget.
+	 * @param options (optional object that holds texture parameters for an auto-generated target texture and depthBuffer/stencilBuffer booleans.
 	 */
 	new (width: number, height: number, options?: WebGLRenderTargetOptions): this;
 
@@ -328,14 +326,13 @@ export interface WebGLRendererParameters {
 	canvas?: HTMLCanvasElement | OffscreenCanvas | undefined;
 
 	/**
-	 * A WebGL Rendering Context.
-	 * (https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext)
+	 * A WebGL Rendering [Context](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext)
 	 * Default is null
 	 */
 	context?: WebGLRenderingContext | undefined;
 
 	/**
-	 * shader precision. Can be "highp", "mediump" or "lowp".
+	 * The shader precision. Can be "highp", "mediump" or "lowp".
 	 */
 	precision?: string | undefined;
 
@@ -398,11 +395,11 @@ export interface WebGLDebug {
  * The WebGL renderer displays your beautifully crafted scenes using WebGL, if your device supports it.
  * This renderer has way better performance than CanvasRenderer.
  *
- * see {@link https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js|src/renderers/WebGLRenderer.js}
+ * see [src/renderers/WebGLRenderer.js](https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js)
  */
 export interface WebGLRenderer extends Renderer {
 	/**
-	 * parameters is an optional object with properties defining the renderer's behaviour.
+	 * The parameters is an optional object with properties defining the renderer's behaviour.
 	 * The constructor also accepts no parameters at all.
 	 * In all cases, it will assume sane defaults when parameters are missing.
 	 */
@@ -675,14 +672,14 @@ export interface WebGLRenderer extends Renderer {
 
 	/**
 	 * Render a scene or an object using a camera.
-	 * The render is done to a previously specified {@link WebGLRenderTarget#renderTarget .renderTarget} set by calling
-	 * {@link WebGLRenderer#setRenderTarget .setRenderTarget} or to the canvas as usual.
+	 * The render is done to a previously specified [.renderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderTarget.renderTarget). set by calling
+	 * [.setRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.setRenderTarget). or to the canvas as usual.
 	 *
 	 * By default render buffers are cleared before rendering but you can prevent this by setting the property
-	 * {@link WebGLRenderer#autoClear autoClear} to false. If you want to prevent only certain buffers being cleared
-	 * you can set either the {@link WebGLRenderer#autoClearColor autoClearColor},
-	 * {@link WebGLRenderer#autoClearStencil autoClearStencil} or {@link WebGLRenderer#autoClearDepth autoClearDepth}
-	 * properties to false. To forcibly clear one ore more buffers call {@link WebGLRenderer#clear .clear}.
+	 * [autoClear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.autoClear). to false. If you want to prevent only certain buffers being cleared
+	 * you can set either the [autoClearColor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.autoClearColor).,
+	 * [autoClearStencil](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.autoClearStencil). or [autoClearDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.autoClearDepth).
+	 * properties to false. To forcibly clear one ore more buffers call [.clear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer.clear)..
 	 */
 	render(scene: Object3D, camera: Camera): void;
 
@@ -773,76 +770,6 @@ export interface WebGLRenderer extends Renderer {
 	 * Can be used to reset the internal WebGL state.
 	 */
 	resetState(): void;
-
-	/**
-	 * @deprecated
-	 */
-	gammaFactor: number;
-
-	/**
-	 * @deprecated Use {@link WebGLRenderer#xr .xr} instead.
-	 */
-	vr: boolean;
-
-	/**
-	 * @deprecated Use {@link WebGLShadowMap#enabled .shadowMap.enabled} instead.
-	 */
-	shadowMapEnabled: boolean;
-
-	/**
-	 * @deprecated Use {@link WebGLShadowMap#type .shadowMap.type} instead.
-	 */
-	shadowMapType: ShadowMapType;
-
-	/**
-	 * @deprecated Use {@link WebGLShadowMap#cullFace .shadowMap.cullFace} instead.
-	 */
-	shadowMapCullFace: CullFace;
-
-	/**
-	 * @deprecated Use {@link WebGLExtensions#get .extensions.get( 'OES_texture_float' )} instead.
-	 */
-	supportsFloatTextures(): any;
-
-	/**
-	 * @deprecated Use {@link WebGLExtensions#get .extensions.get( 'OES_texture_half_float' )} instead.
-	 */
-	supportsHalfFloatTextures(): any;
-
-	/**
-	 * @deprecated Use {@link WebGLExtensions#get .extensions.get( 'OES_standard_derivatives' )} instead.
-	 */
-	supportsStandardDerivatives(): any;
-
-	/**
-	 * @deprecated Use {@link WebGLExtensions#get .extensions.get( 'WEBGL_compressed_texture_s3tc' )} instead.
-	 */
-	supportsCompressedTextureS3TC(): any;
-
-	/**
-	 * @deprecated Use {@link WebGLExtensions#get .extensions.get( 'WEBGL_compressed_texture_pvrtc' )} instead.
-	 */
-	supportsCompressedTexturePVRTC(): any;
-
-	/**
-	 * @deprecated Use {@link WebGLExtensions#get .extensions.get( 'EXT_blend_minmax' )} instead.
-	 */
-	supportsBlendMinMax(): any;
-
-	/**
-	 * @deprecated Use {@link WebGLCapabilities#vertexTextures .capabilities.vertexTextures} instead.
-	 */
-	supportsVertexTextures(): any;
-
-	/**
-	 * @deprecated Use {@link WebGLExtensions#get .extensions.get( 'ANGLE_instanced_arrays' )} instead.
-	 */
-	supportsInstancedArrays(): any;
-
-	/**
-	 * @deprecated Use {@link WebGLRenderer#setScissorTest .setScissorTest()} instead.
-	 */
-	enableScissorTest(boolean: any): any;
 }
 // Renderers / Shaders /////////////////////////////////////////////////////////////////////
 export interface ShaderChunk {
@@ -2086,16 +2013,6 @@ export interface WebGLProgram {
 	fragmentShader: WebGLShader;
 
 	/**
-	 * @deprecated Use {@link WebGLProgram#getUniforms getUniforms()} instead.
-	 */
-	uniforms: any;
-
-	/**
-	 * @deprecated Use {@link WebGLProgram#getAttributes getAttributes()} instead.
-	 */
-	attributes: any;
-
-	/**
 	 */
 	getUniforms(): WebGLUniforms;
 
@@ -2320,11 +2237,6 @@ export interface WebGLShadowMap {
 	/**
 	 */
 	render(shadowsArray: Light[], scene: Scene, camera: Camera): void;
-
-	/**
-	 * @deprecated Use {@link Material#shadowSide} instead.
-	 */
-	cullFace: any;
 }
 
 /**

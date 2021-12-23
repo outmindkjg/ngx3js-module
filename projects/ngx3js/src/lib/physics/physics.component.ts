@@ -1,17 +1,16 @@
 import {
 	Component,
-	ContentChildren,
-	Input,
+	ContentChildren, forwardRef, Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
+import { IRendererTimer } from '../ngx-interface';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import * as Ammo from '../threejs-library/ammo';
 import * as AmmoType from '../threejs-library/ammo-type';
-import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
-import { NgxThreeUtil, N3JS, I3JS } from './../interface';
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 import { NgxPhysicsConstraintComponent } from './physics-constraint/physics-constraint.component';
-import { IRendererTimer } from '../ngx-interface';
 
 /**
  * NgxPhysicsComponent
@@ -37,6 +36,12 @@ import { IRendererTimer } from '../ngx-interface';
 	selector: 'ngx3js-physics',
 	templateUrl: './physics.component.html',
 	styleUrls: ['./physics.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxPhysicsComponent),
+		},
+	],
 })
 export class NgxPhysicsComponent
 	extends NgxAbstractSubscribeComponent
@@ -78,8 +83,7 @@ export class NgxPhysicsComponent
 	/**
 	 * Content children of physics component
 	 */
-	@ContentChildren(NgxPhysicsConstraintComponent, { descendants: false })
-	private constraintList: QueryList<NgxPhysicsConstraintComponent>;
+	@ContentChildren(NgxPhysicsConstraintComponent, { descendants: false }) private constraintList: QueryList<NgxPhysicsConstraintComponent>;
 
 	/**
 	 * Gets gravity
@@ -334,7 +338,7 @@ export class NgxPhysicsComponent
 	 * @returns rigid body
 	 */
 	public getRigidBody(body: AmmoType.btCollisionObject): AmmoType.btRigidBody {
-		return (this.ammo as any).castObject(body, this.ammo.btRigidBody);
+		return (this.ammo).castObject(body, this.ammo.btRigidBody);
 	}
 
 	/**
@@ -359,7 +363,7 @@ export class NgxPhysicsComponent
 	 * @returns bt vector3
 	 */
 	public getBtVector3(pointer: any): any {
-		return (this.ammo as any).castObject(pointer, this.ammo.btVector3);
+		return (this.ammo).castObject(pointer, this.ammo.btVector3);
 	}
 
 	/**
@@ -459,8 +463,8 @@ export class NgxPhysicsComponent
 						const fragments: I3JS.Object3D[] = [];
 						const debris = convexBreaker.subdivideByImpact(
 							threeObject0,
-							this.impactPoint as any,
-							this.impactNormal as any,
+							this.impactPoint,
+							this.impactNormal,
 							1,
 							2
 						);
@@ -475,7 +479,7 @@ export class NgxPhysicsComponent
 								angVel.y(),
 								angVel.z()
 							);
-							fragments.push(fragment as any);
+							fragments.push(fragment);
 						}
 						userData0.collided = true;
 						threeObject0.dispatchEvent({
@@ -489,8 +493,8 @@ export class NgxPhysicsComponent
 						const fragments: I3JS.Object3D[] = [];
 						const debris = convexBreaker.subdivideByImpact(
 							threeObject1,
-							this.impactPoint as any,
-							this.impactNormal as any,
+							this.impactPoint,
+							this.impactNormal,
 							1,
 							2
 						);
@@ -505,7 +509,7 @@ export class NgxPhysicsComponent
 								angVel.y(),
 								angVel.z()
 							);
-							fragments.push(fragment as any);
+							fragments.push(fragment);
 						}
 						threeObject1.dispatchEvent({
 							type: 'debris',

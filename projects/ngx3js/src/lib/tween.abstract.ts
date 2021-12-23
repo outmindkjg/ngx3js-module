@@ -35,8 +35,7 @@ export class NgxAbstractTweenComponent
 	/**
 	 * Content children of abstract tween component
 	 */
-	@ContentChildren(NgxTweenComponent, { descendants: false })
-	private tweenList: QueryList<NgxTweenComponent>;
+	@ContentChildren(NgxTweenComponent, { descendants: false }) private tweenList: QueryList<NgxTweenComponent>;
 
 	/**
 	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.

@@ -39,8 +39,7 @@ export interface GzipOptions extends DeflateOptions {
 	 */
 	mtime?: Date | string | number | undefined;
 	/**
-	 * The filename of the data. If the `gunzip` command is used to decompress the data, it will output a file
-	 * with this name instead of the name of the compressed file.
+	 * The filename of the data. If the `gunzip` command is used to decompress the data, it will output a file with this name instead of the name of the compressed file.
 	 */
 	filename?: string | undefined;
 }
@@ -50,27 +49,26 @@ export interface GzipOptions extends DeflateOptions {
 export type ZlibOptions = DeflateOptions;
 /**
  * Handler for data (de)compression streams
- * @param data The data output from the stream processor
+ * @param dat A The data output from the stream processor
  * @param final Whether this is the final block
  */
 export type FlateStreamHandler = (data: Uint8Array, final: boolean) => void;
 /**
  * Handler for asynchronous data (de)compression streams
  * @param err Any error that occurred
- * @param data The data output from the stream processor
+ * @param dat A The data output from the stream processor
  * @param final Whether this is the final block
  */
 export type AsyncFlateStreamHandler = (err: Error, data: Uint8Array, final: boolean) => void;
 /**
  * Callback for asynchronous (de)compression methods
  * @param err Any error that occurred
- * @param data The resulting data. Only present if `err` is null
+ * @param dat A The resulting data. Only present if `err` is null
  */
 export type FlateCallback = (err: Error | string, data: Uint8Array) => void;
 export interface AsyncOptions {
 	/**
-	 * Whether or not to "consume" the source data. This will make the typed array/buffer you pass in
-	 * unusable but will increase performance and reduce memory usage.
+	 * Whether or not to "consume" the source data. This will make the typed array/buffer you pass in unusable but will increase performance and reduce memory usage.
 	 */
 	consume?: boolean | undefined;
 }
@@ -83,9 +81,7 @@ export interface AsyncDeflateOptions extends DeflateOptions, AsyncOptions {}
  */
 export interface AsyncInflateOptions extends AsyncOptions {
 	/**
-	 * The original size of the data. Currently, the asynchronous API disallows
-	 * writing into a buffer you provide; the best you can do is provide the
-	 * size in bytes and be given back a new typed array.
+	 * The original size of the data. Currently, the asynchronous API disallows writing into a buffer you provide; the best you can do is provide the size in bytes and be given back a new typed array.
 	 */
 	size?: number | undefined;
 }
@@ -162,14 +158,13 @@ export interface AsyncDeflate {
 	 */
 	push(chunk: Uint8Array, final?: boolean): void;
 	/**
-	 * A method to terminate the stream's internal worker. Subsequent calls to
-	 * push() will silently fail.
+	 * A method to terminate the stream's internal worker. Subsequent calls to push() will silently fail.
 	 */
 	terminate: AsyncTerminable;
 }
 /**
  * Asynchronously compresses data with DEFLATE without any wrapper
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param opts The compression options
  * @param cb The function to be called upon compression completion
  * @returns A function that can be used to immediately terminate the compression
@@ -179,7 +174,7 @@ export interface deflate {
 }
 /**
  * Asynchronously compresses data with DEFLATE without any wrapper
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param cb The function to be called upon compression completion
  */
 export interface deflate {
@@ -187,7 +182,7 @@ export interface deflate {
 }
 /**
  * Compresses data with DEFLATE without any wrapper
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param opts The compression options
  * @returns The deflated version of the data
  */
@@ -234,14 +229,13 @@ export interface AsyncInflate {
 	 */
 	push(chunk: Uint8Array, final?: boolean): void;
 	/**
-	 * A method to terminate the stream's internal worker. Subsequent calls to
-	 * push() will silently fail.
+	 * A method to terminate the stream's internal worker. Subsequent calls to push() will silently fail.
 	 */
 	terminate: AsyncTerminable;
 }
 /**
  * Asynchronously expands DEFLATE data with no wrapper
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param opts The decompression options
  * @param cb The function to be called upon decompression completion
  * @returns A function that can be used to immediately terminate the decompression
@@ -251,7 +245,7 @@ export interface inflate {
 }
 /**
  * Asynchronously expands DEFLATE data with no wrapper
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param cb The function to be called upon decompression completion
  * @returns A function that can be used to immediately terminate the decompression
  */
@@ -260,7 +254,7 @@ export interface inflate {
 }
 /**
  * Expands DEFLATE data with no wrapper
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param out Where to write the data. Saves memory if you know the decompressed size and provide an output buffer of that length.
  * @returns The decompressed version of the data
  */
@@ -319,14 +313,13 @@ export interface AsyncGzip {
 	 */
 	push(chunk: Uint8Array, final?: boolean): void;
 	/**
-	 * A method to terminate the stream's internal worker. Subsequent calls to
-	 * push() will silently fail.
+	 * A method to terminate the stream's internal worker. Subsequent calls to push() will silently fail.
 	 */
 	terminate: AsyncTerminable;
 }
 /**
  * Asynchronously compresses data with GZIP
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param opts The compression options
  * @param cb The function to be called upon compression completion
  * @returns A function that can be used to immediately terminate the compression
@@ -336,7 +329,7 @@ export interface gzip {
 }
 /**
  * Asynchronously compresses data with GZIP
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param cb The function to be called upon compression completion
  * @returns A function that can be used to immediately terminate the decompression
  */
@@ -345,7 +338,7 @@ export interface gzip {
 }
 /**
  * Compresses data with GZIP
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param opts The compression options
  * @returns The gzipped version of the data
  */
@@ -380,26 +373,28 @@ export interface AsyncGunzip {
 	 * The handler to call whenever data is available
 	 */
 	ondata: AsyncFlateStreamHandler;
+
 	/**
 	 * Creates an asynchronous GUNZIP stream
 	 * @param cb The callback to call whenever data is deflated
 	 */
 	new (cb: AsyncFlateStreamHandler): this;
+
 	/**
 	 * Pushes a chunk to be GUNZIPped
 	 * @param chunk The chunk to push
 	 * @param final Whether this is the last chunk
 	 */
 	push(chunk: Uint8Array, final?: boolean): void;
+
 	/**
-	 * A method to terminate the stream's internal worker. Subsequent calls to
-	 * push() will silently fail.
+	 * A method to terminate the stream's internal worker. Subsequent calls to push() will silently fail.
 	 */
 	terminate: AsyncTerminable;
 }
 /**
  * Asynchronously expands GZIP data
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param opts The decompression options
  * @param cb The function to be called upon decompression completion
  * @returns A function that can be used to immediately terminate the decompression
@@ -409,7 +404,7 @@ export interface gunzip {
 }
 /**
  * Asynchronously expands GZIP data
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param cb The function to be called upon decompression completion
  * @returns A function that can be used to immediately terminate the decompression
  */
@@ -418,7 +413,7 @@ export interface gunzip {
 }
 /**
  * Expands GZIP data
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param out Where to write the data. GZIP already encodes the output size, so providing this doesn't save memory.
  * @returns The decompressed version of the data
  */
@@ -477,14 +472,13 @@ export interface AsyncZlib {
 	 */
 	push(chunk: Uint8Array, final?: boolean): void;
 	/**
-	 * A method to terminate the stream's internal worker. Subsequent calls to
-	 * push() will silently fail.
+	 * A method to terminate the stream's internal worker. Subsequent calls to push() will silently fail.
 	 */
 	terminate: AsyncTerminable;
 }
 /**
  * Asynchronously compresses data with Zlib
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param opts The compression options
  * @param cb The function to be called upon compression completion
  */
@@ -493,7 +487,7 @@ export interface zlib {
 }
 /**
  * Asynchronously compresses data with Zlib
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param cb The function to be called upon compression completion
  * @returns A function that can be used to immediately terminate the compression
  */
@@ -502,7 +496,7 @@ export interface zlib {
 }
 /**
  * Compress data with Zlib
- * @param data The data to compress
+ * @param dat A The data to compress
  * @param opts The compression options
  * @returns The zlib-compressed version of the data
  */
@@ -549,14 +543,13 @@ export interface AsyncUnzlib {
 	 */
 	push(chunk: Uint8Array, final?: boolean): void;
 	/**
-	 * A method to terminate the stream's internal worker. Subsequent calls to
-	 * push() will silently fail.
+	 * A method to terminate the stream's internal worker. Subsequent calls to push() will silently fail.
 	 */
 	terminate: AsyncTerminable;
 }
 /**
  * Asynchronously expands Zlib data
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param opts The decompression options
  * @param cb The function to be called upon decompression completion
  * @returns A function that can be used to immediately terminate the decompression
@@ -566,7 +559,7 @@ export interface unzlib {
 }
 /**
  * Asynchronously expands Zlib data
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param cb The function to be called upon decompression completion
  * @returns A function that can be used to immediately terminate the decompression
  */
@@ -575,7 +568,7 @@ export interface unzlib {
 }
 /**
  * Expands Zlib data
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param out Where to write the data. Saves memory if you know the decompressed size and provide an output buffer of that length.
  * @returns The decompressed version of the data
  */
@@ -626,7 +619,7 @@ export interface AsyncDecompress {
 }
 /**
  * Asynchrononously expands compressed GZIP, Zlib, or raw DEFLATE data, automatically detecting the format
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param opts The decompression options
  * @param cb The function to be called upon decompression completion
  * @returns A function that can be used to immediately terminate the decompression
@@ -636,7 +629,7 @@ export interface decompress {
 }
 /**
  * Asynchrononously expands compressed GZIP, Zlib, or raw DEFLATE data, automatically detecting the format
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param cb The function to be called upon decompression completion
  * @returns A function that can be used to immediately terminate the decompression
  */
@@ -645,7 +638,7 @@ export interface decompress {
 }
 /**
  * Expands compressed GZIP, Zlib, or raw DEFLATE data, automatically detecting the format
- * @param data The data to decompress
+ * @param dat A The data to decompress
  * @param out Where to write the data. Saves memory if you know the decompressed size and provide an output buffer of that length.
  * @returns The decompressed version of the data
  */
@@ -657,44 +650,31 @@ export interface decompressSync {
  */
 export interface ZipAttributes {
 	/**
-	 * The operating system of origin for this file. The value is defined
-	 * by PKZIP's APPNOTE.txt, section 4.4.2.2. For example, 0 (the default)
-	 * is MS/DOS, 3 is UNIX, 19 is macOS.
+	 * The operating system of origin for this file. The value is defined by PKZIP's APPNOTE.txt, section 4.4.2.2. For example, 0 (the default) is MS/DOS, 3 is UNIX, 19 is macOS.
 	 */
 	os?: number | undefined;
 	/**
-	 * The file's attributes. These are traditionally somewhat complicated
-	 * and platform-dependent, so using them is scarcely necessary. However,
-	 * here is a representation of what this is, bit by bit:
+	 * The file's attributes. These are traditionally somewhat complicated and platform-dependent, so using them is scarcely necessary. However, here is a representation of what this is, bit by bit:
 	 *
 	 * `TTTTugtrwxrwxrwx0000000000ADVSHR`
-	 *
 	 * TTTT = file type (rarely useful)
-	 *
 	 * u = setuid, g = setgid, t = sticky
-	 *
 	 * rwx = user permissions, rwx = group permissions, rwx = other permissions
-	 *
 	 * 0000000000 = unused
-	 *
 	 * A = archive, D = directory, V = volume label, S = system file, H = hidden, R = read-only
-	 *
 	 * If you want to set the Unix permissions, for instance, just bit shift by 16, e.g. 0644 << 16
 	 */
 	attrs?: number | undefined;
+
 	/**
-	 * Extra metadata to add to the file. This field is defined by PKZIP's APPNOTE.txt,
-	 * section 4.4.28. At most 65,535 bytes may be used in each ID. The ID must be an
-	 * integer between 0 and 65,535, inclusive.
+	 * Extra metadata to add to the file. This field is defined by PKZIP's APPNOTE.txt, section 4.4.28. At most 65,535 bytes may be used in each ID. The ID must be an integer between 0 and 65,535, inclusive.
 	 *
-	 * This field is incredibly rare and almost never needed except for compliance with
-	 * proprietary standards and software.
+	 * This field is incredibly rare and almost never needed except for compliance with proprietary standards and software.
 	 */
 	extra?: Record<number, Uint8Array> | undefined;
+
 	/**
-	 * The comment to attach to the file. This field is defined by PKZIP's APPNOTE.txt,
-	 * section 4.4.26. The comment must be at most 65,535 bytes long UTF-8 encoded. This
-	 * field is not read by consumer software.
+	 * The comment to attach to the file. This field is defined by PKZIP's APPNOTE.txt, section 4.4.26. The comment must be at most 65,535 bytes long UTF-8 encoded. This field is not read by consumer software.
 	 */
 	comment?: string | undefined;
 	/**
@@ -743,14 +723,14 @@ export interface Unzipped {
 }
 /**
  * Handler for string generation streams
- * @param data The string output from the stream processor
+ * @param dat A The string output from the stream processor
  * @param final Whether this is the final block
  */
 export type StringStreamHandler = (data: string, final: boolean) => void;
 /**
  * Callback for asynchronous ZIP decompression
  * @param err Any error that occurred
- * @param data The decompressed ZIP archive
+ * @param dat A The decompressed ZIP archive
  */
 export type UnzipCallback = (err: Error | string, data: Unzipped) => void;
 /**
@@ -823,46 +803,31 @@ export interface strFromU8 {
  */
 export interface ZipInputFile extends ZipAttributes {
 	/**
-	 * The filename to associate with the data provided to this stream. If you
-	 * want a file in a subdirectory, use forward slashes as a separator (e.g.
-	 * `directory/filename.ext`). This will still work on Windows.
+	 * The filename to associate with the data provided to this stream. If you want a file in a subdirectory, use forward slashes as a separator (e.g. `directory/filename.ext`). This will still work on Windows.
 	 */
 	filename: string;
 	/**
-	 * The size of the file in bytes. This attribute may be invalid after
-	 * the file is added to the ZIP archive; it must be correct only before the
-	 * stream completes.
+	 * The size of the file in bytes. This attribute may be invalid after the file is added to the ZIP archive; it must be correct only before the stream completes.
 	 *
-	 * If you don't want to have to compute this yourself, consider extending the
-	 * ZipPassThrough class and overriding its process() method, or using one of
-	 * ZipDeflate or AsyncZipDeflate.
+	 * If you don't want to have to compute this yourself, consider extending the ZipPassThrough class and overriding its process() method, or using one of ZipDeflate or AsyncZipDeflate.
 	 */
 	size: number;
 	/**
-	 * A CRC of the original file contents. This attribute may be invalid after
-	 * the file is added to the ZIP archive; it must be correct only before the
-	 * stream completes.
+	 * A CRC of the original file contents. This attribute may be invalid after the file is added to the ZIP archive; it must be correct only before the stream completes.
 	 *
-	 * If you don't want to have to generate this yourself, consider extending the
-	 * ZipPassThrough class and overriding its process() method, or using one of
-	 * ZipDeflate or AsyncZipDeflate.
+	 * If you don't want to have to generate this yourself, consider extending the ZipPassThrough class and overriding its process() method, or using one of ZipDeflate or AsyncZipDeflate.
 	 */
 	crc: number;
 	/**
-	 * The compression format for the data stream. This number is determined by
-	 * the spec in PKZIP's APPNOTE.txt, section 4.4.5. For example, 0 = no
-	 * compression, 8 = deflate, 14 = LZMA
+	 * The compression format for the data stream. This number is determined by the spec in PKZIP's APPNOTE.txt, section 4.4.5. For example, 0 = no compression, 8 = deflate, 14 = LZMA
 	 */
 	compression: number;
 	/**
-	 * Bits 1 and 2 of the general purpose bit flag, specified in PKZIP's
-	 * APPNOTE.txt, section 4.4.4. Should be between 0 and 3. This is unlikely
-	 * to be necessary.
+	 * Bits 1 and 2 of the general purpose bit flag, specified in PKZIP's APPNOTE.txt, section 4.4.4. Should be between 0 and 3. This is unlikely to be necessary.
 	 */
 	flag?: number | undefined;
 	/**
-	 * The handler to be called when data is added. After passing this stream to
-	 * the ZIP file object, this handler will always be defined. To call it:
+	 * The handler to be called when data is added. After passing this stream to the ZIP file object, this handler will always be defined. To call it:
 	 *
 	 * `stream.ondata(error, chunk, final)`
 	 *
@@ -875,10 +840,7 @@ export interface ZipInputFile extends ZipAttributes {
 	 */
 	ondata?: AsyncFlateStreamHandler | undefined;
 	/**
-	 * A method called when the stream is no longer needed, for clean-up
-	 * purposes. This will not always be called after the stream completes,
-	 * so you may wish to call this.terminate() after the final chunk is
-	 * processed if you have clean-up logic.
+	 * A method called when the stream is no longer needed, for clean-up purposes. This will not always be called after the stream completes, so you may wish to call this.terminate() after the final chunk is processed if you have clean-up logic.
 	 */
 	terminate?: AsyncTerminable | undefined;
 }
@@ -902,26 +864,20 @@ export interface ZipPassThrough {
 	 */
 	new (filename: string): this;
 	/**
-	 * Processes a chunk and pushes to the output stream. You can override this
-	 * method in a subclass for custom behavior, but by default this passes
-	 * the data through. You must call this.ondata(err, chunk, final) at some
-	 * point in this method.
+	 * Processes a chunk and pushes to the output stream. You can override this method in a subclass for custom behavior, but by default this passes the data through. You must call this.ondata(err, chunk, final) at some point in this method.
 	 * @param chunk The chunk to process
 	 * @param final Whether this is the last chunk
 	 */
 	process(chunk: Uint8Array, final: boolean): void;
 	/**
-	 * Pushes a chunk to be added. If you are subclassing this with a custom
-	 * compression algorithm, note that you must push data from the source
-	 * file only, pre-compression.
+	 * Pushes a chunk to be added. If you are subclassing this with a custom compression algorithm, note that you must push data from the source file only, pre-compression.
 	 * @param chunk The chunk to push
 	 * @param final Whether this is the last chunk
 	 */
 	push(chunk: Uint8Array, final?: boolean): void;
 }
 /**
- * Streaming DEFLATE compression for ZIP archives. Prefer using AsyncZipDeflate
- * for better performance
+ * Streaming DEFLATE compression for ZIP archives. Prefer using AsyncZipDeflate for better performance
  */
 export interface ZipDeflate {
 	filename: string;
@@ -941,6 +897,7 @@ export interface ZipDeflate {
 	 * @param opts The compression options
 	 */
 	new (filename: string, opts?: DeflateOptions): this;
+
 	process(chunk: Uint8Array, final: boolean): void;
 	/**
 	 * Pushes a chunk to be deflated
@@ -1001,8 +958,7 @@ export interface Zip {
 	 */
 	end(): void;
 	/**
-	 * A method to terminate any internal workers used by the stream. Subsequent
-	 * calls to add() will fail.
+	 * A method to terminate any internal workers used by the stream. Subsequent calls to add() will fail.
 	 */
 	terminate(): void;
 	/**
@@ -1012,7 +968,7 @@ export interface Zip {
 }
 /**
  * Asynchronously creates a ZIP file
- * @param data The directory structure for the ZIP archive
+ * @param dat A The directory structure for the ZIP archive
  * @param opts The main options, merged with per-file options
  * @param cb The callback to call with the generated ZIP archive
  * @returns A function that can be used to immediately terminate the compression
@@ -1022,7 +978,7 @@ export interface zip {
 }
 /**
  * Asynchronously creates a ZIP file
- * @param data The directory structure for the ZIP archive
+ * @param dat A The directory structure for the ZIP archive
  * @param cb The callback to call with the generated ZIP archive
  * @returns A function that can be used to immediately terminate the compression
  */
@@ -1032,7 +988,7 @@ export interface zip {
 /**
  * Synchronously creates a ZIP file. Prefer using `zip` for better performance
  * with more than one file.
- * @param data The directory structure for the ZIP archive
+ * @param dat A The directory structure for the ZIP archive
  * @param opts The main options, merged with per-file options
  * @returns The generated ZIP archive
  */
@@ -1049,13 +1005,12 @@ export interface UnzipDecoder {
 	ondata: AsyncFlateStreamHandler;
 	/**
 	 * Pushes a chunk to be decompressed
-	 * @param data The data in this chunk. Do not consume (detach) this data.
+	 * @param dat A The data in this chunk. Do not consume (detach) this data.
 	 * @param final Whether this is the last chunk in the data stream
 	 */
 	push(data: Uint8Array, final: boolean): void;
 	/**
-	 * A method to terminate any internal workers used by the stream. Subsequent
-	 * calls to push() should silently fail.
+	 * A method to terminate any internal workers used by the stream. Subsequent calls to push() should silently fail.
 	 */
 	terminate?: AsyncTerminable | undefined;
 }
@@ -1071,8 +1026,7 @@ export interface UnzipDecoderConstructor {
 	 */
 	new (filename: string, size?: number, originalSize?: number): UnzipDecoder;
 	/**
-	 * The compression format for the data stream. This number is determined by
-	 * the spec in PKZIP's APPNOTE.txt, section 4.4.5. For example, 0 = no
+	 * The compression format for the data stream. This number is determined by the spec in PKZIP's APPNOTE.txt, section 4.4.5. For example, 0 = no
 	 * compression, 8 = deflate, 14 = LZMA
 	 */
 	compression: number;
@@ -1090,10 +1044,7 @@ export interface UnzipFile {
 	 */
 	name: string;
 	/**
-	 * The compression format for the data stream. This number is determined by
-	 * the spec in PKZIP's APPNOTE.txt, section 4.4.5. For example, 0 = no
-	 * compression, 8 = deflate, 14 = LZMA. If start() is called but there is no
-	 * decompression stream available for this method, start() will throw.
+	 * The compression format for the data stream. This number is determined by the spec in PKZIP's APPNOTE.txt, section 4.4.5. For example, 0 = no compression, 8 = deflate, 14 = LZMA. If start() is called but there is no decompression stream available for this method, start() will throw.
 	 */
 	compression: number;
 	/**
@@ -1105,14 +1056,11 @@ export interface UnzipFile {
 	 */
 	originalSize?: number | undefined;
 	/**
-	 * Starts reading from the stream. Calling this function will always enable
-	 * this stream, but ocassionally the stream will be enabled even without
-	 * this being called.
+	 * Starts reading from the stream. Calling this function will always enable this stream, but ocassionally the stream will be enabled even without this being called.
 	 */
 	start(): void;
 	/**
-	 * A method to terminate any internal workers used by the stream. ondata
-	 * will not be called any further.
+	 * A method to terminate any internal workers used by the stream. ondata will not be called any further.
 	 */
 	terminate: AsyncTerminable;
 }
@@ -1166,8 +1114,7 @@ export interface Unzip {
 	 */
 	push(chunk: Uint8Array, final?: boolean): any;
 	/**
-	 * Registers a decoder with the stream, allowing for files compressed with
-	 * the compression type provided to be expanded correctly
+	 * Registers a decoder with the stream, allowing for files compressed with the compression type provided to be expanded correctly
 	 * @param decoder The decoder constructor
 	 */
 	register(decoder: UnzipDecoderConstructor): void;
@@ -1178,7 +1125,7 @@ export interface Unzip {
 }
 /**
  * Asynchronously decompresses a ZIP archive
- * @param data The raw compressed ZIP file
+ * @param dat A The raw compressed ZIP file
  * @param cb The callback to call with the decompressed files
  * @returns A function that can be used to immediately terminate the unzipping
  */
@@ -1188,7 +1135,7 @@ export interface unzip {
 /**
  * Synchronously decompresses a ZIP archive. Prefer using `unzip` for better
  * performance with more than one file.
- * @param data The raw compressed ZIP file
+ * @param dat A The raw compressed ZIP file
  * @returns The decompressed files
  */
 export interface unzipSync {
@@ -1208,9 +1155,8 @@ export interface Stats {
 }
 
 export interface GUI {
-	new(param : any) : this;
+	new (param: any): this;
 }
-
 
 export interface Panel {
 	(name?: string, fg?: string, bg?: string): Panel;

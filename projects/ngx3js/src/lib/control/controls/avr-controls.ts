@@ -21,7 +21,7 @@ export class NgxAVRControls {
 	/**
 	 * The Target of avrcontrols
 	 */
-	public target: I3JS.Vector3 = new N3JS.Vector3() as any;
+	public target: I3JS.Vector3 = new N3JS.Vector3();
 
 	/**
 	 * Creates an instance of plane controls.
@@ -97,15 +97,15 @@ export class NgxAVRControls {
 			this.buttonVirtualClick();
 		};
 		if (this.control === null && this.altControl) {
-			this.control = new N3JS.OrbitControls(this.camera as any, this.domElement);
+			this.control = new N3JS.OrbitControls(this.camera, this.domElement);
 			this.control.enablePan = true;
 			this.control.enableDamping = true;
 			if (
 				this.target !== null &&
-				this.control.target !== (this.target as any)
+				this.control.target !== (this.target)
 			) {
-				this.control.target.copy(this.target as any);
-				this.target = this.control.target as any;
+				this.control.target.copy(this.target);
+				this.target = this.control.target;
 			}
 		}
 	}

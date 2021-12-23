@@ -13,7 +13,7 @@ import {
 } from '../controller.abstract';
 import { NgxAbstractControllerComponent } from '../controller.component.abstract';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
-import { IControlObjectItem, IHtmlCollection, IRendererTimer, INgxColor } from '../ngx-interface';
+import { IControlObjectItem, IHtmlCollection, INgxColor, IRendererTimer } from '../ngx-interface';
 import { NgxControllerItemComponent } from './controller-item/controller-item.component';
 
 /**
@@ -527,13 +527,13 @@ export class NgxControllerComponent
 						this.pathGuide = new N3JS.Group();
 						this.pathGuide.add(new N3JS.Group());
 						if (this.visible) {
-							this.refObject3d.parent.add(this.pathGuide as any);
+							this.refObject3d.parent.add(this.pathGuide);
 						}
 					} else if (
 						this.visible &&
 						this.refObject3d.parent !== this.pathGuide.parent
 					) {
-						this.refObject3d.parent.add(this.pathGuide as any);
+						this.refObject3d.parent.add(this.pathGuide);
 					}
 					switch (controller.toLowerCase()) {
 						case 'positionlookat':

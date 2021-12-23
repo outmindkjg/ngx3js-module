@@ -60,7 +60,7 @@ export class NgxPlaneDepthGeometry extends N3JS.BufferGeometry {
 			heightSegments
 		);
 		frontGeometry.translate(0, 0, halfDepth);
-		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry as any);
+		const backGeometry = NgxGeometryUtils.getFlipGeometry(frontGeometry);
 		const vertices = [];
 		const normals = [];
 		const uvs = [];

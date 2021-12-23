@@ -580,26 +580,22 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	/**
 	 * Content children of mesh component
 	 */
-	@ContentChildren(NgxAbstractTextureComponent, { descendants: false })
-	private textureList: QueryList<NgxAbstractTextureComponent>;
+	@ContentChildren(NgxAbstractTextureComponent, { descendants: false }) private textureList: QueryList<NgxAbstractTextureComponent>;
 
 	/**
 	 * Content children of mesh component
 	 */
-	@ContentChildren(NgxLensflareelementComponent, { descendants: false })
-	private lensflareElementList: QueryList<NgxLensflareelementComponent>;
+	@ContentChildren(NgxLensflareelementComponent, { descendants: false }) private lensflareElementList: QueryList<NgxLensflareelementComponent>;
 
 	/**
 	 * Content children of mesh component
 	 */
-	@ContentChildren(NgxHtmlComponent, { descendants: false })
-	private cssChildrenList: QueryList<NgxHtmlComponent>;
+	@ContentChildren(NgxHtmlComponent, { descendants: false }) private cssChildrenList: QueryList<NgxHtmlComponent>;
 
 	/**
 	 * Content children of mesh component
 	 */
-	@ContentChildren(NgxCurveComponent, { descendants: false })
-	private curveList: QueryList<NgxCurveComponent>;
+	@ContentChildren(NgxCurveComponent, { descendants: false }) private curveList: QueryList<NgxCurveComponent>;
 
 	/**
 	 * Creates an instance of mesh component.
@@ -1220,9 +1216,9 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							const volume: I3JS.Volume = this.getUserData()['storageSource'];
 							if (NgxThreeUtil.isNotNull(volume) && volume instanceof N3JS.Volume) {
 								const mesh = this.mesh;
-								const rasDimensions = (volume as any).RASDimensions;
-								const volumeMax: number = (volume as any).max;
-								const volumeMin: number = (volume as any).min;
+								const rasDimensions = volume.RASDimensions;
+								const volumeMax: number = volume.max;
+								const volumeMin: number = volume.min;
 								Object.entries(this.volumeOption).forEach(([key, value]) => {
 									let sliceMesh: I3JS.Object3D = null;
 									let rasDimensionsSize: number = 0;
@@ -1236,7 +1232,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 										case 'helpercolor':
 											const helperMat: any = mesh.getObjectByName('helper');
 											if (NgxThreeUtil.isNotNull(helperMat) && NgxThreeUtil.isNotNull(helperMat['material'])) {
-												helperMat['material'].color = NgxThreeUtil.getColorSafe(value as any, 0xffff00);
+												helperMat['material'].color = NgxThreeUtil.getColorSafe(value, 0xffff00);
 											}
 											break;
 										case 'boxvisible':
@@ -1294,14 +1290,14 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 											break;
 										case 'windowlow':
 										case 'low':
-											(volume as any).windowLow = Math.min(
+											(volume).windowLow = Math.min(
 												volumeMax,
 												Math.max(volumeMin, (volumeMax - volumeMin) * (value as number) + volumeMin)
 											);
 											break;
 										case 'windowhigh':
 										case 'high':
-											(volume as any).windowHigh = Math.min(
+											(volume).windowHigh = Math.min(
 												volumeMax,
 												Math.max(volumeMin, (volumeMax - volumeMin) * (value as number) + volumeMin)
 											);
@@ -1325,7 +1321,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 						this.unSubscribeReferList('cssChildrenList');
 						if (NgxThreeUtil.isNotNull(this.cssChildrenList)) {
 							this.cssChildrenList.forEach((cssChild) => {
-								cssChild.setParent(this.mesh as any);
+								cssChild.setParent(this.mesh);
 							});
 							this.subscribeListQuery(this.cssChildrenList, 'cssChildrenList', 'html');
 						}
@@ -1370,7 +1366,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 			this.mesh instanceof N3JS.Line ||
 			this.mesh instanceof N3JS.Points
 		) {
-			return this.mesh as any;
+			return this.mesh;
 		}
 		if (
 			NgxThreeUtil.isNotNull(this.mesh.userData.refTarget) &&
@@ -1379,7 +1375,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 				this.mesh.userData.refTarget instanceof N3JS.Line ||
 				this.mesh.userData.refTarget instanceof N3JS.Points)
 		) {
-			return this.mesh.userData.refTarget as any;
+			return this.mesh.userData.refTarget;
 		}
 		let mesh: I3JS.Object3D = this.mesh;
 		while (mesh.children && mesh.children.length > 0) {
@@ -1390,7 +1386,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 				mesh instanceof N3JS.Line ||
 				mesh instanceof N3JS.Points
 			) {
-				return mesh as any;
+				return mesh;
 			}
 		}
 		return null;
@@ -1456,15 +1452,15 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							const lensflare = new N3JS.Lensflare();
 							lensflare.addElement(
 								new N3JS.LensflareElement(
-									NgxAbstractTextureComponent.getTextureImage(this.skyboxSunImage) as any,
+									NgxAbstractTextureComponent.getTextureImage(this.skyboxSunImage),
 									this.getSize(100),
 									0,
-									this.getColor(null) as any
+									this.getColor(null)
 								)
 							);
 							lensflare.position.set(0, 0, skyboxSize * 0.99);
-							lensflare.position.applyEuler(this.getSkySunPosition() as any);
-							basemesh = lensflare as any;
+							lensflare.position.applyEuler(this.getSkySunPosition());
+							basemesh = lensflare;
 							break;
 						case 'box':
 						case 'sphere':
@@ -1503,7 +1499,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 					break;
 				case 'html':
 				case 'htmlmesh':
-					basemesh = new THREE_OBJ.NgxHTMLMesh(this.getCssTag(), this.materialOption) as any;
+					basemesh = new THREE_OBJ.NgxHTMLMesh(this.getCssTag(), this.materialOption);
 					break;
 				case 'svg':
 				case 'svgobject':
@@ -1520,27 +1516,27 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 					switch (this.type.toLowerCase()) {
 						case 'svg':
 						case 'svgobject':
-							basemesh = new N3JS.SVGObject(cssElement as SVGElement) as any;
+							basemesh = new N3JS.SVGObject(cssElement as SVGElement);
 							break;
 						case 'css2d':
 						case 'css2dobject':
-							basemesh = new N3JS.CSS2DObject(cssElement) as any;
+							basemesh = new N3JS.CSS2DObject(cssElement);
 							break;
 						case 'css3dsprite':
-							basemesh = new N3JS.CSS3DSprite(cssElement) as any;
+							basemesh = new N3JS.CSS3DSprite(cssElement);
 							break;
 						case 'css3dobject':
 						case 'css3d':
 						case 'css':
 						default:
-							basemesh = new N3JS.CSS3DObject(cssElement) as any;
+							basemesh = new N3JS.CSS3DObject(cssElement);
 							break;
 					}
 					break;
 				case 'reflector':
 					const reflectorSize = this.getTextureSize();
 					const reflector = new N3JS.Reflector(geometry, {
-						color: this.getColor() as any,
+						color: this.getColor(),
 						textureWidth: reflectorSize.x,
 						textureHeight: reflectorSize.y,
 						clipBias: this.getClipBias(0.003),
@@ -1558,12 +1554,12 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							'loaded'
 						)
 					);
-					basemesh = reflector as any;
+					basemesh = reflector;
 					break;
 				case 'reflectorrtt':
 					const reflectorRTTSize = this.getTextureSize();
 					const reflectorRTT = new N3JS.ReflectorRTT(geometry, {
-						color: this.getColor() as any,
+						color: this.getColor(),
 						textureWidth: reflectorRTTSize.x,
 						textureHeight: reflectorRTTSize.y,
 						clipBias: this.getClipBias(0.003),
@@ -1581,19 +1577,19 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							'loaded'
 						)
 					);
-					basemesh = reflectorRTT as any;
+					basemesh = reflectorRTT;
 					break;
 				case 'refractor':
 					const refractorSize = this.getTextureSize();
 					const refractor = new N3JS.Refractor(geometry, {
-						color: this.getColor() as any,
+						color: this.getColor(),
 						textureWidth: refractorSize.x,
 						textureHeight: refractorSize.y,
 						clipBias: this.getClipBias(0.003),
 						shader: this.getShader(),
 						encoding: NgxThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
-					const refractorMaterial = refractor.material as any;
+					const refractorMaterial : any = refractor.material;
 					Object.entries(refractorMaterial.uniforms).forEach(([key, value]) => {
 						const uniform: { value: any } = value as any;
 						switch (key.toLowerCase()) {
@@ -1613,7 +1609,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							'loaded'
 						)
 					);
-					basemesh = refractor as any;
+					basemesh = refractor;
 					break;
 				case 'reflectorforssrmesh':
 				case 'reflectorforssrpass':
@@ -1637,7 +1633,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							'loaded'
 						)
 					);
-					basemesh = reflectorForSSRPass as any;
+					basemesh = reflectorForSSRPass;
 					break;
 				case 'water':
 					const waterSize = this.getTextureSize();
@@ -1647,10 +1643,10 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 						clipBias: this.getClipBias(0.003),
 						alpha: this.getAlpha(),
 						time: 0,
-						waterNormals: this.getTexture('waterNormals') as any,
-						sunDirection: this.getSunDirection() as any,
-						sunColor: this.getSunColor() as any,
-						waterColor: this.getWaterColor() as any,
+						waterNormals: this.getTexture('waterNormals'),
+						sunDirection: this.getSunDirection(),
+						sunColor: this.getSunColor(),
+						waterColor: this.getWaterColor(),
 						distortionScale: this.getDistortionScale(),
 						fog: false,
 					});
@@ -1666,7 +1662,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							'loaded'
 						)
 					);
-					basemesh = water as any;
+					basemesh = water;
 					break;
 				case 'water2':
 					const water2Size = this.getTextureSize();
@@ -1674,15 +1670,15 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 						textureWidth: water2Size.x,
 						textureHeight: water2Size.y,
 						clipBias: this.getClipBias(0.003),
-						color: this.getColor() as any,
-						flowDirection: this.getFlowDirection() as any,
+						color: this.getColor(),
+						flowDirection: this.getFlowDirection(),
 						flowSpeed: this.getFlowSpeed(),
 						reflectivity: this.getReflectivity(),
 						scale: this.getWaterScale(),
 						shader: this.getShader(),
-						flowMap: this.getTexture('flowMap', this.flowMap) as any,
-						normalMap0: this.getTexture('normalMap0', this.normalMap0, 'textures/water/Water_1_M_Normal.jpg') as any,
-						normalMap1: this.getTexture('normalMap1', this.normalMap1, 'textures/water/Water_2_M_Normal.jpg') as any,
+						flowMap: this.getTexture('flowMap', this.flowMap),
+						normalMap0: this.getTexture('normalMap0', this.normalMap0, 'textures/water/Water_1_M_Normal.jpg'),
+						normalMap1: this.getTexture('normalMap1', this.normalMap1, 'textures/water/Water_2_M_Normal.jpg'),
 						encoding: NgxThreeUtil.getTextureEncodingSafe(this.encoding, null, ''),
 					});
 					this.getUndateUniforms(water2.material['uniforms']);
@@ -1697,17 +1693,17 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							'loaded'
 						)
 					);
-					basemesh = water2 as any;
+					basemesh = water2;
 					break;
 				case 'sky':
 					const sky = new N3JS.Sky();
 					this.getUndateUniforms(sky.material.uniforms);
-					basemesh = sky as any;
+					basemesh = sky;
 					break;
 				case 'flow':
 					const flowMaterial = this.getMaterialOne();
 					const objectToCurve = new N3JS.Mesh(geometry, flowMaterial);
-					const flow = new N3JS.Flow(objectToCurve) as any;
+					const flow = new N3JS.Flow(objectToCurve);
 					const flowCurve = this.getCurve();
 					if (NgxThreeUtil.isNotNull(flowCurve)) {
 						flow.updateCurve(0, flowCurve);
@@ -1724,7 +1720,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 				case 'instancedflow':
 					const instancedFlowMaterial = this.getMaterialOne();
 					const instancedFlowCount = this.getCount(1);
-					const instancedFlow = new N3JS.InstancedFlow(instancedFlowCount, 1, geometry, instancedFlowMaterial) as any;
+					const instancedFlow = new N3JS.InstancedFlow(instancedFlowCount, 1, geometry, instancedFlowMaterial);
 					const instancedFlowCurve = this.getCurve();
 					if (NgxThreeUtil.isNotNull(instancedFlowCurve)) {
 						instancedFlow.updateCurve(0, instancedFlowCurve);
@@ -1834,7 +1830,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 						points = lineloopCurve.getPoints(this.getDivisions(50));
 					}
 					const lineLoop = new N3JS.LineLoop(new N3JS.BufferGeometry().setFromPoints(points), this.getMaterials());
-					basemesh = lineLoop as any;
+					basemesh = lineLoop;
 					break;
 				case 'light':
 					const light = this.initLocalComponent('light', new NgxLightComponent());
@@ -1845,9 +1841,9 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 				case 'lensflare':
 					const lensflare = new N3JS.Lensflare();
 					this.lensflareElementList.forEach((lensflareElement) => {
-						lensflareElement.setLensflare(lensflare as any);
+						lensflareElement.setLensflare(lensflare);
 					});
-					basemesh = lensflare as any;
+					basemesh = lensflare;
 					break;
 				case 'instancedmesh':
 				case 'instanced':
@@ -1859,17 +1855,17 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 						const matrix = new N3JS.Matrix4();
 						for (let i = 0; i < instanced.count; i++) {
 							this.makeMatrix(matrix, i);
-							instanced.setMatrixAt(i, matrix as any);
+							instanced.setMatrixAt(i, matrix);
 						}
 					}
 					if (NgxThreeUtil.isNotNull(this.makeColor)) {
 						const color = new N3JS.Color();
 						for (let i = 0; i < instanced.count; i++) {
 							this.makeColor(color, i);
-							instanced.setColorAt(i, color as any);
+							instanced.setColorAt(i, color);
 						}
 					}
-					basemesh = instanced as any;
+					basemesh = instanced;
 					break;
 				case 'merged':
 					{
@@ -1885,8 +1881,8 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							geometries.push(instanceGeometry);
 						}
 						const materials = this.getMaterials();
-						const mergedGeometry = N3JS.GeometryUtils.mergeBufferGeometries(geometries as any);
-						basemesh = new N3JS.Mesh(mergedGeometry, materials) as any;
+						const mergedGeometry = N3JS.GeometryUtils.mergeBufferGeometries(geometries);
+						basemesh = new N3JS.Mesh(mergedGeometry, materials);
 					}
 					break;
 				case 'naive':
@@ -1900,8 +1896,8 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 								this.makeMatrix(matrix);
 							}
 							const mesh = new N3JS.Mesh(geometry, material);
-							mesh.applyMatrix4(matrix as any);
-							basemesh.add(mesh as any);
+							mesh.applyMatrix4(matrix);
+							basemesh.add(mesh);
 						}
 					}
 					break;
@@ -1929,7 +1925,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 					basemesh = sprite;
 					break;
 				case 'wireframe':
-					basemesh = new N3JS.Wireframe(geometry as any, this.getMaterialOne() as any) as any;
+					basemesh = new N3JS.Wireframe(geometry, this.getMaterialOne());
 					break;
 				case 'lod':
 					basemesh = new N3JS.LOD();
@@ -1952,7 +1948,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 								blobInfo.z,
 								blobInfo.strength,
 								blobInfo.subtract,
-								NgxThreeUtil.getColorSafe(blobInfo.colors) as any
+								NgxThreeUtil.getColorSafe(blobInfo.colors)
 							);
 						});
 					}
@@ -1971,7 +1967,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 							}
 						});
 					}
-					basemesh = effect as any;
+					basemesh = effect;
 					break;
 				case 'points':
 					basemesh = new N3JS.Points(geometry, this.getMaterials());
@@ -1999,7 +1995,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 						NgxThreeUtil.getTypeSafe(this.text, 'test'),
 						NgxThreeUtil.getTypeSafe(this.size, 1),
 						NgxThreeUtil.getColorSafe(this.color, 0xffffff)
-					) as any;
+					);
 					break;
 				case 'line2':
 					const lineMaterial = this.getMaterialOne();
@@ -2007,12 +2003,12 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 						const line2 = new N3JS.Line2(geometry, lineMaterial);
 						line2.computeLineDistances();
 						line2.scale.set(1, 1, 1);
-						basemesh = line2 as any;
+						basemesh = line2;
 					} else {
 						const line = new N3JS.Line(geometry, this.getMaterials());
 						line.computeLineDistances();
 						line.castShadow = this.castShadow;
-						basemesh = line as any;
+						basemesh = line;
 					}
 					break;
 				case 'linesegments':
@@ -2021,7 +2017,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 						// lineSegments.computeLineDistances();
 					}
 					lineSegments.castShadow = this.castShadow;
-					basemesh = lineSegments as any;
+					basemesh = lineSegments;
 					break;
 				case 'md2charactercomplex':
 					basemesh = new N3JS.Group();
@@ -2037,8 +2033,8 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 								basemesh.children.forEach((child: any) => {
 									child.parent.remove(child);
 								});
-								basemesh.add(character.root as any);
-								this.clipMesh = character.root as any;
+								basemesh.add(character.root);
+								this.clipMesh = character.root;
 								this.clips = character;
 								this.setUserData('refTarget', character);
 								this.setUserData('clips', this.clips);
@@ -2077,7 +2073,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 					}
 					renderer.domElement.style.pointerEvents = 'all';
 					renderer.domElement.style.touchAction = 'auto';
-					basemesh = new N3JS.InteractiveGroup(renderer, camera) as any;
+					basemesh = new N3JS.InteractiveGroup(renderer, camera);
 					break;
 				case 'lightning':
 				case 'lightningstorm':
@@ -2087,9 +2083,9 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 					}
 					const lightningMaterial = this.getMaterialOne({ color: 0xffffff }, false);
 					if (NgxThreeUtil.isNotNull(lightningMaterial)) {
-						stormParams.lightningMaterial = lightningMaterial as any;
+						stormParams.lightningMaterial = lightningMaterial;
 					}
-					basemesh = new N3JS.LightningStorm(stormParams) as any;
+					basemesh = new N3JS.LightningStorm(stormParams);
 					break;
 				case 'group':
 					basemesh = new N3JS.Group();
@@ -2116,8 +2112,8 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 											anyGeometry['animations'] !== undefined &&
 											anyGeometry['animations'].length > 0
 										) {
-											const morphAnim = new N3JS.MorphAnimMesh(geometry as any, this.getMaterialOne() as any);
-											loadedMesh = morphAnim as any;
+											const morphAnim = new N3JS.MorphAnimMesh(geometry, this.getMaterialOne());
+											loadedMesh = morphAnim;
 											if (anyGeometry['animations'] !== null) {
 												clips = anyGeometry['animations'];
 											}
@@ -2155,7 +2151,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 										this.addChanges(['volumeoption']);
 									}
 									loadedMesh.parent = null;
-									this.setMesh(loadedMesh as any);
+									this.setMesh(loadedMesh);
 									if (
 										NgxThreeUtil.isNotNull(source) &&
 										NgxThreeUtil.isNotNull(source.skeleton) &&
@@ -2275,7 +2271,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 									})
 								);
 								const planeMat = materialComponent.getMaterial();
-								const po = new N3JS.Mesh(planeGeom, planeMat as any);
+								const po = new N3JS.Mesh(planeGeom, planeMat);
 								po.onBeforeRender = () => {
 									plane.coplanarPoint(po.position);
 									const position = po.position;

@@ -12,7 +12,7 @@ import { Bone, Line, LineSegments, Mesh } from './objects';
  * [WebGL / shadowmesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmesh)
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const dir = new THREE.Vector3( 1, 2, 0 );
  * // normalize the direction vector (convert to vector of length 1)
  * dir.normalize();
@@ -25,12 +25,12 @@ import { Bone, Line, LineSegments, Mesh } from './objects';
  */
 export interface ArrowHelper extends Object3D {
 	/**
-	 * @param dir - direction from origin. Must be a unit vector.
-	 * @param origin - Point at which the arrow starts.
-	 * @param length - length of the arrow. Default is *1*.
-	 * @param hex - hexadecimal value to define color. Default is 0xffff00.
-	 * @param headLength - The length of the head of the arrow. Default is 0.2 * length.
-	 * @param headWidth - The width of the head of the arrow. Default is 0.2 * headLength.
+	 * @param dir direction from origin. Must be a unit vector.
+	 * @param origin Point at which the arrow starts.
+	 * @param length length of the arrow. Default is *1*.
+	 * @param hex hexadecimal value to define color. Default is 0xffff00.
+	 * @param headLength The length of the head of the arrow. Default is 0.2 * length.
+	 * @param headWidth The width of the head of the arrow. Default is 0.2 * headLength.
 	 */
 	new (
 		dir?: Vector3,
@@ -63,14 +63,14 @@ export interface ArrowHelper extends Object3D {
 
 	/**
 	 * @param length The desired length.
-	 * @param [headLength] The length of the head of the arrow.
-	 * @param [headWidth] The width of the head of the arrow.
+	 * @param headLength The length of the head of the arrow.
+	 * @param headWidth The width of the head of the arrow.
 	 */
 	setLength(length: number, headLength?: number, headWidth?: number): void;
 
 	/**
 	 * Sets the color of the arrowHelper.
-	 * @param color - The desired color.
+	 * @param color The desired color.
 	 */
 	setColor(color: ColorRepresentation): void;
 }
@@ -78,20 +78,21 @@ export interface ArrowHelper extends Object3D {
 /**
  * An axis object to visualize the 3 axes in a simple way.
  * The X axis is red. The Y axis is green. The Z axis is blue.
- * ### Code Example
- * ```javascript
- * const axesHelper = new THREE.AxesHelper( 5 );
- * scene.add( axesHelper );
- * ```
  *
  * ### Examples
  * [WebGL / buffergeometry / compression](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_compression) |
  * [WebGL / geometry / convex](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_convex) |
  * [WebGL / loader / nrrd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nrrd)
+ *
+ * ### Code Example
+ * ```js
+ * const axesHelper = new THREE.AxesHelper( 5 );
+ * scene.add( axesHelper );
+ * ```
  */
 export interface AxesHelper extends LineSegments {
 	/**
-	 * @param size - size of the lines representing the axes. Default is *1*.
+	 * @param size size of the lines representing the axes. Default is *1*.
 	 */
 	new (size?: number): this;
 
@@ -119,7 +120,7 @@ export interface AxesHelper extends LineSegments {
  * Helper object to visualize a [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3).
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const box = new THREE.Box3();
  * box.setFromCenterAndSize( new THREE.Vector3( 1, 1, 1 ), new THREE.Vector3( 2, 1, 3 ) );
  * const helper = new THREE.Box3Helper( box, 0xffff00 );
@@ -129,8 +130,8 @@ export interface AxesHelper extends LineSegments {
 export interface Box3Helper extends LineSegments {
 	/**
 	 * Creates a new wireframe box that represents the passed Box3.
-	 * @param box - the Box3 to show.
-	 * @param color -  the box's color. Default is 0xffff00.
+	 * @param box The Box3 to show.
+	 * @param color The box's color. Default is 0xffff00.
 	 */
 	new (box: Box3, color?: Color): this;
 
@@ -150,24 +151,24 @@ export interface Box3Helper extends LineSegments {
  * It can be automatically resized with the [BoxHelper.update](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BoxHelper.update) method when the object it's created from is transformed.
  * Note that the object must have a [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) for this to work, so it won't work with [Sprites](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite).
  *
+ * ### Examples
+ * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers) |
+ * [WebGL / loader / nrrd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nrrd) |
+ * [WebGL / buffergeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const sphere = new THREE.SphereGeometry();
  * const object = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( 0xff0000 ) );
  * const box = new THREE.BoxHelper( object, 0xffff00 );
  * scene.add( box );
  * ```
- *
- * ### Examples
- * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers) |
- * [WebGL / loader / nrrd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nrrd) |
- * [WebGL / buffergeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange)
  */
 export interface BoxHelper extends LineSegments {
 	/**
 	 * Creates a new wireframe box that bounds the passed object. Internally this uses [Box3.setFromObject](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3.setFromObject) to calculate the dimensions. Note that this includes any children.
-	 * @param object - the object3D to show the world-axis-aligned boundingbox.
-	 * @param color -  hexadecimal value that defines the box's color. Default is 0xffff00.
+	 * @param object The object3D to show the world-axis-aligned boundingbox.
+	 * @param color hexadecimal value that defines the box's color. Default is 0xffff00.
 	 */
 	new (object: Object3D, color?: ColorRepresentation): this;
 
@@ -183,7 +184,7 @@ export interface BoxHelper extends LineSegments {
 
 	/**
 	 * Updates the wireframe box for the passed object.
-	 * @param object - Object3D to create the helper of.
+	 * @param object Object3D to create the helper of.
 	 */
 	setFromObject(object: Object3D): this;
 }
@@ -193,7 +194,7 @@ export interface BoxHelper extends LineSegments {
  * It visualizes the frustum of a camera using a [LineSegments](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineSegments).
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
  * const helper = new THREE.CameraHelper( camera );
  * scene.add( helper );
@@ -205,8 +206,8 @@ export interface BoxHelper extends LineSegments {
  */
 export interface CameraHelper extends LineSegments {
 	/**
-	 * This create a new [Name] for the specified camera.
-	 * @param camera - The camera to visualize.
+	 * This create a new CameraHelper for the specified camera.
+	 * @param camer A The camera to visualize.
 	 */
 	new (camera: Camera): this;
 
@@ -240,7 +241,7 @@ export interface CameraHelper extends LineSegments {
  * This consists of plane and a line representing the light's position and direction.
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const light = new THREE.DirectionalLight( 0xFFFFFF );
  * const helper = new THREE.DirectionalLightHelper( light, 5 );
  * scene.add( helper );
@@ -248,9 +249,9 @@ export interface CameraHelper extends LineSegments {
  */
 export interface DirectionalLightHelper extends Object3D {
 	/**
-	 * @param light - The light to be visualized.
-	 * @param size - dimensions of the plane. Default is *1*.
-	 * @param color - if this is not the set the helper will take the color of the light.
+	 * @param light The light to be visualized.
+	 * @param size dimensions of the plane. Default is *1*.
+	 * @param color if this is not the set the helper will take the color of the light.
 	 */
 	new (light: DirectionalLight, size?: number, color?: ColorRepresentation): this;
 
@@ -298,7 +299,7 @@ export interface DirectionalLightHelper extends Object3D {
  * The GridHelper is an object to define grids. Grids are two-dimensional arrays of lines.
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const size = 10;
  * const divisions = 10;
  * const gridHelper = new THREE.GridHelper( size, divisions );
@@ -310,10 +311,10 @@ export interface DirectionalLightHelper extends Object3D {
  */
 export interface GridHelper extends LineSegments {
 	/**
-	 * @param size - The size of the grid. Default is 10.
-	 * @param divisions - The number of divisions across the grid. Default is 10.
-	 * @param color1 - The color of the centerline. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444
-	 * @param color2 - The color of the lines of the grid. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
+	 * @param size The size of the grid. Default is 10.
+	 * @param divisions The number of divisions across the grid. Default is 10.
+	 * @param color1 The color of the centerline. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444
+	 * @param color2 The color of the lines of the grid. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
 	 */
 	new (size?: number, divisions?: number, color1?: ColorRepresentation, color2?: ColorRepresentation): this;
 
@@ -321,18 +322,13 @@ export interface GridHelper extends LineSegments {
 	 * @default 'GridHelper'
 	 */
 	type: string;
-
-	/**
-	 * @deprecated Colors should be specified in the constructor.
-	 */
-	setColors(color1?: ColorRepresentation, color2?: ColorRepresentation): void;
 }
 
 /**
  * Creates a visual aid consisting of a spherical [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) for a [HemisphereLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HemisphereLight).
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
  * const helper = new THREE.HemisphereLightHelper( light, 5 );
  * scene.add( helper );
@@ -340,9 +336,9 @@ export interface GridHelper extends LineSegments {
  */
 export interface HemisphereLightHelper extends Object3D {
 	/**
-	 * @param light - The light being visualized.
-	 * @param size - The size of the mesh used to visualize the light.
-	 * @param color - if this is not the set the helper will take the color of the light.
+	 * @param light The light being visualized.
+	 * @param size The size of the mesh used to visualize the light.
+	 * @param color if this is not the set the helper will take the color of the light.
 	 */
 	new (light: HemisphereLight, size: number, color?: ColorRepresentation): this;
 
@@ -385,7 +381,7 @@ export interface HemisphereLightHelper extends Object3D {
  * Helper object to visualize a [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const plane = new THREE.Plane( new THREE.Vector3( 1, 1, 0.2 ), 3 );
  * const helper = new THREE.PlaneHelper( plane, 1, 0xffff00 );
  * scene.add( helper );
@@ -395,9 +391,9 @@ export interface PlaneHelper extends LineSegments {
 	/**
 	 * Creates a new wireframe representation of the passed plane.
 	 *
-	 * @param plane -  the plane to visualize.
-	 * @param size - side length of plane helper. Default is 1.
-	 * @param color -  the color of the helper. Default is 0xffff00.
+	 * @param plane The plane to visualize.
+	 * @param size side length of plane helper. Default is 1.
+	 * @param color The color of the helper. Default is 0xffff00.
 	 */
 	new (plane: Plane, size?: number, hex?: number): this;
 
@@ -426,8 +422,11 @@ export interface PlaneHelper extends LineSegments {
 /**
  * This displays a helper object consisting of a spherical [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) for visualizing  a [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight).
  *
+ * ### Examples
+ * [WebGL /  helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const pointLight = new THREE.PointLight( 0xff0000, 1, 100 );
  * pointLight.position.set( 10, 10, 10 );
  * scene.add( pointLight );
@@ -435,15 +434,12 @@ export interface PlaneHelper extends LineSegments {
  * const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
  * scene.add( pointLightHelper );
  * ```
- *
- * ### Examples
- * [WebGL /  helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
  */
 export interface PointLightHelper extends Object3D {
 	/**
-	 * @param light - The light to be visualized.
-	 * @param sphereSize - The size of the sphere helper. Default is *1*.
-	 * @param color - if this is not the set the helper will take the color of the light.
+	 * @param light The light to be visualized.
+	 * @param sphereSize The size of the sphere helper. Default is *1*.
+	 * @param color if this is not the set the helper will take the color of the light.
 	 */
 	new (light: PointLight, sphereSize?: number, color?: ColorRepresentation): this;
 
@@ -489,7 +485,7 @@ export interface PointLightHelper extends Object3D {
  * The PolarGridHelper is an object to define polar grids. Grids are two-dimensional arrays of lines.
  *
  * ### Code Example
- * ```javascript
+ * ```js
  * const radius = 10;
  * const radials = 16;
  * const circles = 8;
@@ -503,12 +499,12 @@ export interface PointLightHelper extends Object3D {
  */
 export interface PolarGridHelper extends LineSegments {
 	/**
-	 * @param radius - The radius of the polar grid. This can be any positive number. Default is 10.
-	 * @param radials - The number of radial lines. This can be any positive integer. Default is 16.
-	 * @param circles - The number of circles. This can be any positive integer. Default is 8.
-	 * @param divisions - The number of line segments used for each circle. This can be any positive integer that is 3 or greater. Default is 64.
-	 * @param color1 - The first color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444
-	 * @param color2 - The second color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
+	 * @param radius The radius of the polar grid. This can be any positive number. Default is 10.
+	 * @param radials The number of radial lines. This can be any positive integer. Default is 16.
+	 * @param circles The number of circles. This can be any positive integer. Default is 8.
+	 * @param divisions The number of line segments used for each circle. This can be any positive integer that is 3 or greater. Default is 64.
+	 * @param color1 The first color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x444444
+	 * @param color2 The second color used for grid elements. This can be a [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), a hexadecimal value and an CSS-Color name. Default is 0x888888
 	 */
 	new (
 		radius?: number,
@@ -529,20 +525,20 @@ export interface PolarGridHelper extends LineSegments {
  * A helper object to assist with visualizing a [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton).
  * The helper is rendered using a [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial).
  *
- * ### Code Example
- * ```javascript
- * const helper = new THREE.SkeletonHelper( skinnedMesh );
- * scene.add( helper );
- * ```
- *
  * ### Examples
  * [WebGL / animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending) |
  * [WebGL / animation / skinning / morph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_morph) |
- * [WebGL / loader / bvh ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_bvh)
+ * [WebGL / loader / bvh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_bvh)
+ *
+ * ### Code Example
+ * ```js
+ * const helper = new THREE.SkeletonHelper( skinnedMesh );
+ * scene.add( helper );
+ * ```
  */
 export interface SkeletonHelper extends LineSegments {
 	/**
-	 * @param object - Usually an instance of [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh). However, any instance of [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) can be used if it represents a hierarchy of [Bone](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone)s (via [Object3D.children](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.children)).
+	 * @param object Usually an instance of [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh). However, any instance of [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) can be used if it represents a hierarchy of [Bone](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone)s (via [Object3D.children](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.children)).
 	 */
 	new (object: Object3D): this;
 
@@ -586,22 +582,22 @@ export interface SkeletonHelper extends LineSegments {
 /**
  * This displays a cone shaped helper object for a [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight).
  *
+ * ### Examples
+ * [WebGL/ lights / spotlights](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlights)
+ *
  * ### Code Example
- * ```javascript
+ * ```js
  * const spotLight = new THREE.SpotLight( 0xffffff );
  * spotLight.position.set( 10, 10, 10 );
  * scene.add( spotLight );
  * const spotLightHelper = new THREE.SpotLightHelper( spotLight );
  * scene.add( spotLightHelper );
  * ```
- * 
- * ### Examples
- * [WebGL/ lights / spotlights ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlights)
  */
 export interface SpotLightHelper extends Object3D {
 	/**
-	 * @param light - The [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) to be visualized. 
-	 * @param color - if this is not the set the helper will take the color of the light.
+	 * @param light The [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) to be visualized.
+	 * @param color if this is not the set the helper will take the color of the light.
 	 */
 	new (light: Light, color?: ColorRepresentation): this;
 

@@ -53,7 +53,7 @@ export class NgxCubeCamera extends N3JS.CubeCamera {
 		far: number,
 		renderTarget: I3JS.WebGLCubeRenderTarget
 	) {
-		super(near, far, renderTarget as any);
+		super(near, far, renderTarget);
 	}
 }
 

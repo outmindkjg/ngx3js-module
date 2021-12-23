@@ -14,9 +14,9 @@ import { Bone } from './objects';
 export interface AnimationAction {
 	/**
 	 * Note: Instead of calling this constructor directly you should instantiate an AnimationAction with [AnimationMixer.clipAction](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationMixer.clipAction) since this method provides caching for better performance.
-	 * @param mixer - the *AnimationMixer* that is controlled by this action.
-	 * @param clip - the *AnimationClip* that holds the animation data for this action.
-	 * @param localRoot - the root object on which this action is performed.
+	 * @param mixer The *AnimationMixer* that is controlled by this action.
+	 * @param clip The *AnimationClip* that holds the animation data for this action.
+	 * @param localRoot The root object on which this action is performed.
 	 */
 	new (mixer: AnimationMixer, clip: AnimationClip, localRoot?: Object3D, blendMode?: AnimationBlendMode): this;
 
@@ -49,8 +49,7 @@ export interface AnimationAction {
 	timeScale: number;
 
 	/**
-	 * The degree of influence of this action (in the interval [0, 1]). Values between 0 (no impact)
-	 * and 1 (full impact) can be used to blend between several actions. Default is 1.
+	 * The degree of influence of this action (in the interval [0, 1]). Values between 0 (no impact) and 1 (full impact) can be used to blend between several actions. Default is 1.
 	 * Properties/methods concerning  *weight* are: *.crossFadeFrom*, *.crossFadeTo*, *.enabled*, *.fadeIn*, *.fadeOut*, *.getEffectiveWeight*, *.setEffectiveWeight*, *.stopFading*.
 	 * @default 1
 	 */
@@ -137,8 +136,7 @@ export interface AnimationAction {
 	isScheduled(): boolean;
 
 	/**
-	 * Defines the time for a delayed start (usually passed as [AnimationMixer.time](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationMixer.time) +
-	 * deltaTimeInSeconds). This method can be chained.
+	 * Defines the time for a delayed start (usually passed as [AnimationMixer.time](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationMixer.time) + deltaTimeInSeconds). This method can be chained.
 	 * Note: The animation will only start at the given time, if .*startAt* is chained with *.play*, or if the action has already been activated in the mixer (by a previous call of .*play*, without stopping or resetting it in the meantime).
 	 */
 	startAt(time: number): AnimationAction;
@@ -150,8 +148,7 @@ export interface AnimationAction {
 
 	/**
 	 * Sets the *.weight* and stops any scheduled fading. This method can be chained.
-	 * If *.enabled* is true, the effective weight (an internal property) will also be set to this value; otherwise the effective weight (directly affecting the animation at this moment)
-	 * will be set to 0.
+	 * If *.enabled* is true, the effective weight (an internal property) will also be set to this value; otherwise the effective weight (directly affecting the animation at this moment) will be set to 0.
 	 * Note: .*enabled* will not be switched to *false* automatically, if .*weight* is set to 0 by this method.
 	 */
 	setEffectiveWeight(weight: number): AnimationAction;
@@ -203,8 +200,7 @@ export interface AnimationAction {
 	getEffectiveTimeScale(): number;
 
 	/**
-	 * Sets the duration for a single loop of this action (by adjusting *.timeScale*
-	 * and stopping any scheduled warping). This method can be chained.
+	 * Sets the duration for a single loop of this action (by adjusting *.timeScale* and stopping any scheduled warping). This method can be chained.
 	 */
 	setDuration(duration: number): AnimationAction;
 
@@ -260,9 +256,9 @@ export interface MorphTarget {
 export interface AnimationClip {
 	/**
 	 * Note: Instead of instantiating an AnimationClip directly with the constructor, you can use one of its static methods to create AnimationClips: from JSON (*.parse*), from morph target sequences (*.CreateFromMorphTargetSequence*,e *.CreateClipsFromMorphTargetSequences*) or frome animation hierarchies (*.parseAnimation*) - if your model doesn't already hold AnimationClips in its geometry's animations array.
-	 * @param name - a name for this clip.
-	 * @param duration - the duration of this clip (in seconds). If a negative value is passed, the duration will be calculated from the passed *tracks* array.
-	 * @param tracks - an array of [KeyframeTracks](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack).
+	 * @param name A name for this clip.
+	 * @param duration The duration of this clip (in seconds). If a negative value is passed, the duration will be calculated from the passed *tracks* array.
+	 * @param tracks an array of [KeyframeTracks](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeTrack).
 	 */
 	new (name?: string, duration?: number, tracks?: KeyframeTrack[], blendMode?: AnimationBlendMode): this;
 
@@ -374,7 +370,7 @@ export interface AnimationClip {
  */
 export interface AnimationMixer extends EventDispatcher {
 	/**
-	 * @param rootObject - the object whose animations shall be played by this mixer.
+	 * @param rootObject The object whose animations shall be played by this mixer.
 	 */
 	new (root: Object3D | AnimationObjectGroup): this;
 
@@ -460,7 +456,7 @@ export interface AnimationMixer extends EventDispatcher {
  */
 export interface AnimationObjectGroup {
 	/**
-	 * @param args - an abitrary number of meshes that share the same animation state.
+	 * @param args an abitrary number of meshes that share the same animation state.
 	 */
 	new (...args: any[]): this;
 
@@ -569,9 +565,9 @@ export interface AnimationUtils {
  */
 export interface KeyframeTrack {
 	/**
-	 * @param name - the identifier for the *KeyframeTrack*.
-	 * @param times - an array with the values related to the times array, converted internally to aa [Float32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array).
-	 * @param interpolation - the type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
+	 * @param name The identifier for the *KeyframeTrack*.
+	 * @param times an array with the values related to the times array, converted internally to aa [Float32Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array).
+	 * @param interpolation The type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
 	 */
 	new (name: string, times: ArrayLike<any>, values: ArrayLike<any>, interpolation?: InterpolationModes): this;
 
@@ -899,9 +895,9 @@ export interface PropertyMixer {
  */
 export interface BooleanKeyframeTrack extends KeyframeTrack {
 	/**
-	 * @param name - identifier for the KeyframeTrack.
-	 * @param times - array of keyframe times.
-	 * @param values - values for the keyframes at the times specified.
+	 * @param name identifier for the KeyframeTrack.
+	 * @param times array of keyframe times.
+	 * @param values values for the keyframes at the times specified.
 	 */
 	new (name: string, times: any[], values: any[]): this;
 
@@ -917,10 +913,10 @@ export interface BooleanKeyframeTrack extends KeyframeTrack {
  */
 export interface ColorKeyframeTrack extends KeyframeTrack {
 	/**
-	 * @param name - identifier for the KeyframeTrack.
-	 * @param times - array of keyframe times.
-	 * @param values - values for the keyframes at the times specified, a flat array of color components between 0 and 1.
-	 * @param interpolation - the type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
+	 * @param name identifier for the KeyframeTrack.
+	 * @param times array of keyframe times.
+	 * @param values values for the keyframes at the times specified, a flat array of color components between 0 and 1.
+	 * @param interpolation The type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
 	 */
 	new (name: string, times: any[], values: any[], interpolation?: InterpolationModes): this;
 
@@ -935,10 +931,10 @@ export interface ColorKeyframeTrack extends KeyframeTrack {
  */
 export interface NumberKeyframeTrack extends KeyframeTrack {
 	/**
-	 * @param name - identifier for the KeyframeTrack.
-	 * @param times - array of keyframe times.
-	 * @param values - values for the keyframes at the times specified.
-	 * @param interpolation - the type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
+	 * @param name identifier for the KeyframeTrack.
+	 * @param times array of keyframe times.
+	 * @param values values for the keyframes at the times specified.
+	 * @param interpolation The type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
 	 */
 	new (name: string, times: any[], values: any[], interpolation?: InterpolationModes): this;
 
@@ -953,10 +949,10 @@ export interface NumberKeyframeTrack extends KeyframeTrack {
  */
 export interface QuaternionKeyframeTrack extends KeyframeTrack {
 	/**
-	 * @param name - identifier for the KeyframeTrack.
-	 * @param times - array of keyframe times.
-	 * @param values - values for the keyframes at the times specified, a flat array of quaternion components.
-	 * @param interpolation - the type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
+	 * @param name identifier for the KeyframeTrack.
+	 * @param times array of keyframe times.
+	 * @param values values for the keyframes at the times specified, a flat array of quaternion components.
+	 * @param interpolation The type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
 	 */
 	new (name: string, times: any[], values: any[], interpolation?: InterpolationModes): this;
 
@@ -971,10 +967,10 @@ export interface QuaternionKeyframeTrack extends KeyframeTrack {
  */
 export interface StringKeyframeTrack extends KeyframeTrack {
 	/**
-	 * @param name - identifier for the KeyframeTrack.
-	 * @param times - array of keyframe times.
-	 * @param values - values for the keyframes at the times specified.
-	 * @param interpolation - the type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateDiscrete](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
+	 * @param name identifier for the KeyframeTrack.
+	 * @param times array of keyframe times.
+	 * @param values values for the keyframes at the times specified.
+	 * @param interpolation The type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateDiscrete](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
 	 */
 	new (name: string, times: any[], values: any[], interpolation?: InterpolationModes): this;
 
@@ -989,10 +985,10 @@ export interface StringKeyframeTrack extends KeyframeTrack {
  */
 export interface VectorKeyframeTrack extends KeyframeTrack {
 	/**
-	 * @param name - identifier for the KeyframeTrack.
-	 * @param times - array of keyframe times.
-	 * @param values - values for the keyframes at the times specified, a flat array of vector components.
-	 * @param interpolation - the type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
+	 * @param name identifier for the KeyframeTrack.
+	 * @param times array of keyframe times.
+	 * @param values values for the keyframes at the times specified, a flat array of vector components.
+	 * @param interpolation The type of interpolation to use. See [Animation Constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation) for possible values. Default is [InterpolateLinear](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Animation).
 	 */
 	new (name: string, times: any[], values: any[], interpolation?: InterpolationModes): this;
 

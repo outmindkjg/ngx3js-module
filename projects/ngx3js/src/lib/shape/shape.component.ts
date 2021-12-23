@@ -1,7 +1,6 @@
 import {
 	Component,
-	ContentChildren,
-	Input,
+	ContentChildren, forwardRef, Input,
 	OnInit,
 	QueryList
 } from '@angular/core';
@@ -20,6 +19,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-shape',
 	templateUrl: './shape.component.html',
 	styleUrls: ['./shape.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxShapeComponent),
+		},
+	],
 })
 export class NgxShapeComponent
 	extends NgxAbstractSubscribeComponent
@@ -126,8 +131,7 @@ export class NgxShapeComponent
 	/**
 	 * Content children of shape component
 	 */
-	@ContentChildren(NgxShapeComponent, { descendants: false })
-	private holes: QueryList<NgxShapeComponent>;
+	@ContentChildren(NgxShapeComponent, { descendants: false }) private holes: QueryList<NgxShapeComponent>;
 
 	/**
 	 * Creates an instance of shape component.
@@ -180,10 +184,10 @@ export class NgxShapeComponent
 		const holes = new N3JS.Path();
 		if (this.holes !== null && this.holes.length > 0) {
 			this.holes.forEach((hole) => {
-				hole.getShape(holes as any);
+				hole.getShape(holes);
 			});
 		}
-		return holes as any;
+		return holes;
 	}
 
 	/**

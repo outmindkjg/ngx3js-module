@@ -66,44 +66,37 @@ export class NgxSceneComponent
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxPhysicsComponent, { descendants: false })
-	private physicsList: QueryList<NgxPhysicsComponent>;
+	@ContentChildren(NgxPhysicsComponent, { descendants: false }) private physicsList: QueryList<NgxPhysicsComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxRigidbodyComponent, { descendants: true })
-	private sceneRigidbodyList: QueryList<NgxRigidbodyComponent>;
+	@ContentChildren(NgxRigidbodyComponent, { descendants: true }) private sceneRigidbodyList: QueryList<NgxRigidbodyComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxFogComponent, { descendants: false })
-	private fogList: QueryList<NgxFogComponent>;
+	@ContentChildren(NgxFogComponent, { descendants: false }) private fogList: QueryList<NgxFogComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxAbstractControllerComponent, { descendants: true })
-	private sceneControllerList: QueryList<NgxAbstractControllerComponent>;
+	@ContentChildren(NgxAbstractControllerComponent, { descendants: true }) private sceneControllerList: QueryList<NgxAbstractControllerComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxMixerComponent, { descendants: true })
-	private sceneMixerList: QueryList<NgxMixerComponent>;
+	@ContentChildren(NgxMixerComponent, { descendants: true }) private sceneMixerList: QueryList<NgxMixerComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxViewerComponent, { descendants: true })
-	private viewerList: QueryList<NgxViewerComponent>;
+	@ContentChildren(NgxViewerComponent, { descendants: true }) private viewerList: QueryList<NgxViewerComponent>;
 
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxTextureComponent, { descendants: false })
-	private textureList: QueryList<NgxTextureComponent>;
+	@ContentChildren(NgxTextureComponent, { descendants: false }) private textureList: QueryList<NgxTextureComponent>;
 
 	/**
 	 * Creates an instance of scene component.
@@ -525,11 +518,11 @@ export class NgxSceneComponent
 					this.storageName,
 					(scene: I3JS.Scene) => {
 						this.scene = scene;
-						this.setObject3d(scene as any);
+						this.setObject3d(scene);
 					}
 				);
 			} else {
-				this.setObject3d(this.scene as any);
+				this.setObject3d(this.scene);
 			}
 		}
 		return this.scene;

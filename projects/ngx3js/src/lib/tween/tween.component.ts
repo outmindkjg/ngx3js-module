@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import * as GSAP from 'gsap';
 import { NgxThreeUtil } from '../interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
@@ -23,6 +23,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-tween',
 	templateUrl: './tween.component.html',
 	styleUrls: ['./tween.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxTweenComponent),
+		},
+	],
 })
 export class NgxTweenComponent
 	extends NgxAbstractSubscribeComponent

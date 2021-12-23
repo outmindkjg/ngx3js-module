@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { NgxThreeUtil, I3JS, N3JS } from '../interface';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { ITagAttributes } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAbstractTweenComponent } from '../tween.abstract';
@@ -25,6 +25,13 @@ import { NgxAbstractTweenComponent } from '../tween.abstract';
 	selector: 'ngx3js-position',
 	templateUrl: './position.component.html',
 	styleUrls: ['./position.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxPositionComponent),
+		},
+	],
+
 })
 export class NgxPositionComponent
 	extends NgxAbstractTweenComponent

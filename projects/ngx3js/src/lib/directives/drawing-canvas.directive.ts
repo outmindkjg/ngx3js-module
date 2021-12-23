@@ -25,7 +25,7 @@ import { INgxColor } from '../ngx-interface';
 @Directive({
 	selector: '[ngx3jsDrawingCanvas]',
 })
-export class DrawingCanvasDirective implements OnChanges {
+export class NgxDrawingCanvasDirective implements OnChanges {
 	/**
 	 * The canvas background color
 	 */

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { NgxThreeUtil, N3JS, I3JS } from '../interface';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
+import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { ICssStyle } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
@@ -13,6 +13,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-transform',
 	templateUrl: './transform.component.html',
 	styleUrls: ['./transform.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxTransformComponent),
+		},
+	],
 })
 export class NgxTransformComponent
 	extends NgxAbstractSubscribeComponent

@@ -12,8 +12,8 @@ export interface Box2 {
 	/**
 	 * Creates a Box2 bounded by min and max.
 	 *
-	 * @param min - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the lower (x, y) boundary of the box. Default is ( + Infinity, + Infinity ).
-	 * @param max - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the upper (x, y) boundary of the box. Default is ( - Infinity, - Infinity ).
+	 * @param min Vector2 representing the lower (x, y) boundary of the box. Default is ( + Infinity, + Infinity ).
+	 * @param max Vector2 representing the upper (x, y) boundary of the box. Default is ( - Infinity, - Infinity ).
 	 */
 	new (min?: Vector2, max?: Vector2): this;
 
@@ -33,23 +33,23 @@ export interface Box2 {
 	 * Sets the lower and upper (x, y) boundaries of this box.
 	 * Please note that this method only copies the values from the given objects.
 	 *
-	 * @param min - (required ) [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the lower (x, y) boundary of the box.
-	 * @param max - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) representing the upper (x, y) boundary of the box.
+	 * @param min Vector2 representing the lower (x, y) boundary of the box.
+	 * @param max Vector2 representing the upper (x, y) boundary of the box.
 	 */
 	set(min: Vector2, max: Vector2): Box2;
 
 	/**
 	 * Sets the upper and lower bounds of this box to include all of the points in [points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array).
 	 *
-	 * @param points - Array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) that the resulting box will contain.
+	 * @param points Array of [Vector2s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) that the resulting box will contain.
 	 */
 	setFromPoints(points: Vector2[]): Box2;
 
 	/**
 	 * Centers this box on [center](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) and sets this box's width and height to the values specified in [size](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
 	 *
-	 * @param center - Desired center position of the box ([Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)).
-	 * @param size - Desired x and y dimensions of the box ([Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)).
+	 * @param center Desired center position of the box ([Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)).
+	 * @param size Desired x and y dimensions of the box ([Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)).
 	 */
 	setFromCenterAndSize(center: Vector2, size: Vector2): Box2;
 
@@ -75,13 +75,13 @@ export interface Box2 {
 	isEmpty(): boolean;
 
 	/**
-	 * @param target - the result will be copied into this Vector2.
+	 * @param target The result will be copied into this Vector2.
 	 * @returns Returns the center point of the box as a [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
 	 */
 	getCenter(target: Vector2): Vector2;
 
 	/**
-	 * @param target - the result will be copied into this Vector2.
+	 * @param target The result will be copied into this Vector2.
 	 * @returns Returns the width and height of this box.
 	 */
 	getSize(target: Vector2): Vector2;
@@ -89,69 +89,69 @@ export interface Box2 {
 	/**
 	 * Expands the boundaries of this box to include [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
 	 *
-	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) that should be included in the box.
+	 * @param point Vector2 that should be included in the box.
 	 */
 	expandByPoint(point: Vector2): Box2;
 
 	/**
 	 * Expands this box equilaterally by [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2). The width of this box will be expanded by the x component of [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) in both directions. The height of this box will be expanded by the y component of [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) in both directions.
 	 *
-	 * @param vector - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to expand the box by.
+	 * @param vector Vector2 to expand the box by.
 	 */
 	expandByVector(vector: Vector2): Box2;
 
 	/**
 	 * Expands each dimension of the box by [scalar](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float). If negative, the dimensions of the box will be contracted.
 	 *
-	 * @param scalar - Distance to expand the box by.
+	 * @param scalar Distance to expand the box by.
 	 */
 	expandByScalar(scalar: number): Box2;
 
 	/**
 	 * Returns true if the specified point lies within or on the boundaries of this box.
 	 *
-	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to check for inclusion.
+	 * @param point Vector2 to check for inclusion.
 	 * @returns Returns true if the specified [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) lies within or on the boundaries of this box.
 	 */
 	containsPoint(point: Vector2): boolean;
 
 	/**
-	 * @param box - [Box2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2) to test for inclusion.
+	 * @param box Box2 to test for inclusion.
 	 * @returns Returns true if this box includes the entirety of [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2). If this and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2) are identical,  this function also returns true.
 	 */
 	containsBox(box: Box2): boolean;
 
 	/**
-	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
-	 * @param target - the result will be copied into this Vector2.
+	 * @param point Vector2.
+	 * @param target The result will be copied into this Vector2.
 	 * @returns Returns a point as a proportion of this box's width and height.
 	 */
 	getParameter(point: Vector2, target: Vector2): Vector2;
 
 	/**
 	 * Determines whether or not this box intersects [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2).
-	 * @param box - Box to check for intersection against.
+	 * @param box Box to check for intersection against.
 	 */
 	intersectsBox(box: Box2): boolean;
 
 	/**
 	 * [Clamps](https://en.wikipedia.org/wiki/Clamping_(graphics)) the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) within the bounds of this box.
 	 *
-	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to clamp.
-	 * @param target - the result will be copied into this Vector2.
+	 * @param point Vector2 to clamp.
+	 * @param target The result will be copied into this Vector2.
 	 */
 	clampPoint(point: Vector2, target: Vector2): Vector2;
 
 	/**
 	 * If the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) lies inside of this box, the distance will be 0.
 	 *
-	 * @param point - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to measure distance to.
+	 * @param point Vector2 to measure distance to.
 	 * @returns Returns the distance from any edge of this box to the specified point.
 	 */
 	distanceToPoint(point: Vector2): number;
 
 	/**
-	 * @param box - Box to intersect with.
+	 * @param box Box to intersect with.
 	 * @returns Returns the intersection of this and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2), setting the upper bound of this box to the lesser of the two boxes' upper bounds and the lower bound of this box to the greater of the two boxes' lower bounds.
 	 */
 	intersect(box: Box2): Box2;
@@ -159,41 +159,35 @@ export interface Box2 {
 	/**
 	 * Unions this box with [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2), setting the upper bound of this box to the greater of the two boxes' upper bounds and the lower bound of this box to the lesser of the two boxes' lower bounds.
 	 *
-	 * @param box - Box that will be unioned with this box.
+	 * @param box Box that will be unioned with this box.
 	 */
 	union(box: Box2): Box2;
 
 	/**
 	 * Adds [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to both the upper and lower bounds of this box, effectively moving this box [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) units in 2D space.
 	 *
-	 * @param offset - Direction and distance of offset.
+	 * @param offset Direction and distance of offset.
 	 */
 	translate(offset: Vector2): Box2;
 
 	/**
-	 * @param box - Box to compare with this one.
+	 * @param box Box to compare with this one.
 	 * @returns Returns true if this box and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box2) share the same lower and upper bounds.
 	 */
 	equals(box: Box2): boolean;
-
-	/**
-	 * @deprecated Use {@link Box2#isEmpty .isEmpty()} instead.
-	 */
-	empty(): any;
-
-	/**
-	 * @deprecated Use {@link Box2#intersectsBox .intersectsBox()} instead.
-	 */
-	isIntersectionBox(b: any): any;
 }
 
 /**
  * Represents an axis-aligned bounding box (AABB) in 3D space.
  *
- * ```javascript
+ * ```js
  * const box = new THREE.Box3();
- * const mesh = new THREE.Mesh( new THREE.SphereGeometry(), new THREE.MeshBasicMaterial() );
- * //  ensure the bounding box is computed for its geometry // this should be done only once (assuming static geometries)
+ * const mesh = new THREE.Mesh( 
+ * 	new THREE.SphereGeometry(), 
+ * 	new THREE.MeshBasicMaterial() 
+ * );
+ * //  ensure the bounding box is computed for its geometry 
+ * // this should be done only once (assuming static geometries)
  * mesh.geometry.computeBoundingBox();
  * //  ...
  * //  in the animation loop, compute the current bounding box with the world matrix
@@ -203,8 +197,8 @@ export interface Box2 {
 export interface Box3 {
 	/**
 	 * Creates a Box3 bounded by min and max.
-	 * @param min - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) representing the lower (x, y, z) boundary of the box. Default is ( + Infinity, + Infinity, + Infinity ).
-	 * @param max - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) representing the upper (x, y, z) boundary of the box. Default is ( - Infinity, - Infinity, - Infinity ).
+	 * @param min Vector3 representing the lower (x, y, z) boundary of the box. Default is ( + Infinity, + Infinity, + Infinity ).
+	 * @param max Vector3 representing the upper (x, y, z) boundary of the box. Default is ( - Infinity, - Infinity, - Infinity ).
 	 */
 	new (min?: Vector3, max?: Vector3): this;
 
@@ -225,40 +219,40 @@ export interface Box3 {
 	/**
 	 * Sets the lower and upper (x, y, z) boundaries of this box.
 	 * Please note that this method only copies the values from the given objects.
-	 * @param min - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) representing the lower (x, y, z) boundary of the box.
-	 * @param max - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) representing the lower upper (x, y, z) boundary of the box.
+	 * @param min Vector3 representing the lower (x, y, z) boundary of the box.
+	 * @param max Vector3 representing the lower upper (x, y, z) boundary of the box.
 	 */
 	set(min: Vector3, max: Vector3): this;
 
 	/**
 	 * Sets the upper and lower bounds of this box to include all of the data in *array*.
-	 * @param array - An array of position data that the resulting box will envelop.
+	 * @param array An array of position data that the resulting box will envelop.
 	 */
 	setFromArray(array: ArrayLike<number>): this;
 
 	/**
 	 * Sets the upper and lower bounds of this box to include all of the data in [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
-	 * @param attribute - A buffer attribute of position data that the resulting box will envelop.
+	 * @param attribute A buffer attribute of position data that the resulting box will envelop.
 	 */
 	setFromBufferAttribute(bufferAttribute: BufferAttribute): this;
 
 	/**
 	 * Sets the upper and lower bounds of this box to include all of the points in [points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array).
-	 * @param points - Array of [Vector3s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) that the resulting box will contain.
+	 * @param points Array of [Vector3s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) that the resulting box will contain.
 	 */
 	setFromPoints(points: Vector3[]): this;
 
 	/**
 	 * Centers this box on [center](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) and sets this box's width, height and depth to the values specified  in [size](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)
-	 * @param center - Desired center position of the box.
-	 * @param size - Desired x, y and z dimensions of the box.
+	 * @param center Desired center position of the box.
+	 * @param size Desired x, y and z dimensions of the box.
 	 */
 	setFromCenterAndSize(center: Vector3, size: Vector3): this;
 
 	/**
 	 * Computes the world-axis-aligned bounding box of an [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) (including its children), accounting for the object's, and children's, world transforms.
 	 * The function may result in a larger box than strictly necessary.
-	 * @param object - [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) to compute the bounding box of.
+	 * @param object Object3D to compute the bounding box of.
 	 */
 	setFromObject(object: Object3D): this;
 
@@ -269,7 +263,7 @@ export interface Box3 {
 
 	/**
 	 * Copies the *.min* and *.max* from [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to this box.
-	 * @param box - [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to copy.
+	 * @param box Box3 to copy.
 	 */
 	copy(box: Box3): this;
 
@@ -285,13 +279,13 @@ export interface Box3 {
 	isEmpty(): boolean;
 
 	/**
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns the center point of the box as a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
 	 */
 	getCenter(target: Vector3): Vector3;
 
 	/**
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns the width, height and depth of this box.
 	 */
 	getSize(target: Vector3): Vector3;
@@ -306,129 +300,114 @@ export interface Box3 {
 	/**
 	 * Expands this box equilaterally by [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3). The width of this box will be expanded by the x component of [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) in both directions. The height of this box will be expanded by the y component of [vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) in both directions.
 	 * The depth of this box will be expanded by the z component of *vector* in both directions.
-	 * @param vector - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to expand the box by.
+	 * @param vector Vector3 to expand the box by.
 	 */
 	expandByVector(vector: Vector3): this;
 
 	/**
 	 * Expands each dimension of the box by [scalar](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float). If negative, the dimensions of the box will be contracted.
-	 * @param scalar - Distance to expand the box by.
+	 * @param scalar Distance to expand the box by.
 	 */
 	expandByScalar(scalar: number): this;
 
 	/**
 	 * Expands the boundaries of this box to include [object](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) and its children, accounting for the object's, and children's, world transforms.
 	 * The function may result in a larger box than strictly necessary.
-	 * @param object - [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D) to expand the box by.
+	 * @param object Object3D to expand the box by.
 	 */
 	expandByObject(object: Object3D): this;
 
 	/**
 	 * Expands the boundaries of this box to include [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) that should be included in the box.
+	 * @param point Vector3 that should be included in the box.
 	 */
 	containsPoint(point: Vector3): boolean;
 
 	/**
-	 * @param box - [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to test for inclusion.
+	 * @param box Box3 to test for inclusion.
 	 * @returns Returns true if this box includes the entirety of [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3). If this and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) are identical,  this function also returns true.
 	 */
 	containsBox(box: Box3): boolean;
 
 	/**
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param target - the result will be copied into this Vector3.
+	 * @param point Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns a point as a proportion of this box's width, height and depth.
 	 */
 	getParameter(point: Vector3, target: Vector3): Vector3;
 
 	/**
 	 * Determines whether or not this box intersects [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3).
-	 * @param box - Box to check for intersection against.
+	 * @param box Box to check for intersection against.
 	 */
 	intersectsBox(box: Box3): boolean;
 
 	/**
 	 * Determines whether or not this box intersects [sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere).
-	 * @param sphere - [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) to check for intersection against.
+	 * @param sphere Sphere to check for intersection against.
 	 */
 	intersectsSphere(sphere: Sphere): boolean;
 
 	/**
 	 * Determines whether or not this box intersects [plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param plane - [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) to check for intersection against.
+	 * @param plane Plane to check for intersection against.
 	 */
 	intersectsPlane(plane: Plane): boolean;
 
 	/**
 	 * Determines whether or not this box intersects [triangle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Triangle).
-	 * @param triangle - [Triangle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Triangle) to check for intersection against.
+	 * @param triangle Triangle to check for intersection against.
 	 */
 	intersectsTriangle(triangle: Triangle): boolean;
 
 	/**
 	 * [Clamps](https://en.wikipedia.org/wiki/Clamping_(graphics)) the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) within the bounds of this box.
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to clamp.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param point Vector3 to clamp.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	clampPoint(point: Vector3, target: Vector3): Vector3;
 
 	/**
 	 * If the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) lies inside of this box, the distance will be 0.
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to measure distance to.
+	 * @param point Vector3 to measure distance to.
 	 * @returns Returns the distance from any edge of this box to the specified point.
 	 */
 	distanceToPoint(point: Vector3): number;
 
 	/**
 	 * Gets a [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) that bounds the box.
-	 * @param target - the result will be copied into this Sphere.
+	 * @param target The result will be copied into this Sphere.
 	 */
 	getBoundingSphere(target: Sphere): Sphere;
 
 	/**
 	 * Computes the intersection of this and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3), setting the upper bound of this box to the lesser of the two boxes' upper bounds and the lower bound of this box to the greater of the two boxes' lower bounds. If there's no overlap, makes this box empty.
-	 * @param box - Box to intersect with.
+	 * @param box Box to intersect with.
 	 */
 	intersect(box: Box3): this;
 
 	/**
 	 * Computes the union of this box and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3), setting the upper bound of this box to the greater of the two boxes' upper bounds and the lower bound of this box to the lesser of the two boxes' lower bounds.
-	 * @param box - Box that will be unioned with this box.
+	 * @param box Box that will be unioned with this box.
 	 */
 	union(box: Box3): this;
 
 	/**
-	 * @param matrix - The [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) to apply Transforms this Box3 with the supplied matrix.
+	 * @param matrix The [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) to apply Transforms this Box3 with the supplied matrix.
 	 */
 	applyMatrix4(matrix: Matrix4): this;
 
 	/**
 	 * Adds [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to both the upper and lower bounds of this box, effectively moving this box [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) units in 3D space.
-	 * @param offset - Direction and distance of offset.
+	 * @param offset Direction and distance of offset.
 	 */
 	translate(offset: Vector3): this;
 
 	/**
-	 * @param box - Box to compare with this one.
+	 * @param box Box to compare with this one.
 	 * @returns Returns true if this box and [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) share the same lower and upper bounds.
 	 */
 	equals(box: Box3): boolean;
-
-	/**
-	 * @deprecated Use {@link Box3#isEmpty .isEmpty()} instead.
-	 */
-	empty(): any;
-
-	/**
-	 * @deprecated Use {@link Box3#intersectsBox .intersectsBox()} instead.
-	 */
-	isIntersectionBox(b: any): any;
-
-	/**
-	 * @deprecated Use {@link Box3#intersectsSphere .intersectsSphere()} instead.
-	 */
-	isIntersectionSphere(s: any): any;
 }
 
 export interface HSL {
@@ -441,7 +420,9 @@ export interface HSL {
  * Class representing a color.
  *
  * A Color can be initialised in any of the following ways:
- * ```javascript
+ *
+ * ### Code Example
+ * ```js
  * // empty constructor - will default white
  * const color1 = new THREE.Color();
  * // Hexadecimal color (recommended)
@@ -472,9 +453,9 @@ export interface Color {
 	
 	 * 'rgb(250, 0,0)', 'rgb(100%,0%,0%)', 'hsl(0, 100%, 50%)', '#ff0000', '#f00', 'red'
 
-	 * @param r - If arguments [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) and [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) are defined, the red component of the color. If they are not defined, it can be a [hexadecimal triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) (recommended), a CSS-style string, or another Color instance.
-	 * @param g - If it is defined, the green component of the color.
-	 * @param b - If it is defined, the blue component of the color.
+	 * @param r If arguments [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) and [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) are defined, the red component of the color. If they are not defined, it can be a [hexadecimal triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) (recommended), a CSS-style string, or another Color instance.
+	 * @param g If it is defined, the green component of the color.
+	 * @param b If it is defined, the blue component of the color.
 	*/
 	new (r?: number | ColorRepresentation, g?: number, b?: number): this;
 
@@ -498,36 +479,36 @@ export interface Color {
 	/**
 	 * See the Constructor above for full details of what [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color_Hex_or_String) can be.
 	 * Delegates to *.copy*, *.setStyle*, or *.setHex* depending on input type.
-	 * @param color - Value to set this color to.
+	 * @param color Value to set this color to.
 	 */
 	set(color: ColorRepresentation): Color;
 
 	/**
 	 * Sets all three color components to the value [scalar](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-	 * @param scalar - a value between 0.0 and 1.0.
+	 * @param scalar A value between 0.0 and 1.0.
 	 */
 	setScalar(scalar: number): Color;
 
 	/**
 	 * Sets this color from a hexadecimal value.
-	 * @param hex - [hexadecimal triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) format.
+	 * @param hex [hexadecimal triplet](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) format.
 	 */
 	setHex(hex: number): Color;
 
 	/**
 	 * Sets this color from RGB values.
-	 * @param r - Red channel value between 0.0 and 1.0.
-	 * @param g - Green channel value between 0.0 and 1.0.
-	 * @param b - Blue channel value between 0.0 and 1.0.
+	 * @param r Red channel value between 0.0 and 1.0.
+	 * @param g Green channel value between 0.0 and 1.0.
+	 * @param b Blue channel value between 0.0 and 1.0.
 	 */
 	setRGB(r: number, g: number, b: number): Color;
 
 	/**
 	 * Sets color from HSL values.
 	 *
-	 * @param h - hue value between 0.0 and 1.0
-	 * @param s - saturation value between 0.0 and 1.0
-	 * @param l - lightness value between 0.0 and 1.0
+	 * @param h hue value between 0.0 and 1.0
+	 * @param s saturation value between 0.0 and 1.0
+	 * @param l lightness value between 0.0 and 1.0
 	 */
 	setHSL(h: number, s: number, l: number): Color;
 
@@ -535,7 +516,7 @@ export interface Color {
 	 * Sets this color from a CSS-style string. For example,  "rgb(250, 0,0)", "rgb(100%, 0%, 0%)", "hsl(0, 100%, 50%)", "#ff0000", "#f00", or "red" ( or any [X11 color name](https://en.wikipedia.org/wiki/X11_color_names#Color_name_chart) - all 140 color names are supported ).
 	 * Translucent colors such as "rgba(255, 0, 0, 0.5)" and "hsla(0, 100%, 50%, 0.5)" are also accepted, but the alpha-channel coordinate will be discarded.
 	 * Note that for X11 color names, multiple words such as Dark Orange become the string 'darkorange'.
-	 * @param style - color as a CSS-style string.
+	 * @param style color as a CSS-style string.
 	 */
 	setStyle(style: string): Color;
 
@@ -543,7 +524,7 @@ export interface Color {
 	 * Sets this color from a color name. Faster than *.setStyle* method if you don't need the other CSS-style formats.
 	 * For convenience, the list of names is exposed in Color.NAMES as a hash:
 	 * Color.NAMES.aliceblue // returns 0xF0F8FF
-	 * @param style - color name ( from [X11 color names](https://en.wikipedia.org/wiki/X11_color_names#Color_name_chart) ).
+	 * @param style color name ( from [X11 color names](https://en.wikipedia.org/wiki/X11_color_names#Color_name_chart) ).
 	 */
 	setColorName(style: string): Color;
 
@@ -559,27 +540,27 @@ export interface Color {
 
 	/**
 	 * Copies the given color into this color, and then converts this color from gamma space to linear space by taking *.r*, *.g* and *.b* to the power of [gammaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-	 * @param color - Color to copy.
-	 * @param gammaFactor - Default is *2.0*.
+	 * @param color Color to copy.
+	 * @param gammaFactor Default is *2.0*.
 	 */
 	copyGammaToLinear(color: Color, gammaFactor?: number): Color;
 
 	/**
 	 * Copies the given color into this color, and then converts this color from linear space to gamma space by taking *.r*, *.g* and *.b* to the power of 1 / [gammaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-	 * @param color - Color to copy.
-	 * @param gammaFactor - Default is *2.0*.
+	 * @param color Color to copy.
+	 * @param gammaFactor Default is *2.0*.
 	 */
 	copyLinearToGamma(color: Color, gammaFactor?: number): Color;
 
 	/**
 	 * Converts this color from gamma space to linear space by taking *.r*, *.g* and *.b* to the power of [gammaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-	 * @param gammaFactor - Default is *2.0*.
+	 * @param gammaFactor Default is *2.0*.
 	 */
 	convertGammaToLinear(gammaFactor?: number): Color;
 
 	/**
 	 * Converts this color from linear space to gamma space by taking *.r*, *.g* and *.b* to the power of 1 / [gammaFactor](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-	 * @param gammaFactor - Default is *2.0*.
+	 * @param gammaFactor Default is *2.0*.
 	 */
 	convertLinearToGamma(gammaFactor?: number): Color;
 
@@ -590,13 +571,13 @@ export interface Color {
 
 	/**
 	 * Copies the given color into this color, and then converts this color from linear space to sRGB space.
-	 * @param color - Color to copy.
+	 * @param color Color to copy.
 	 */
 	copyLinearToSRGB(color: Color): Color;
 
 	/**
 	 * Copies the given color into this color, and then converts this color from sRGB space to linear space.
-	 * @param color - Color to copy.
+	 * @param color Color to copy.
 	 */
 	convertSRGBToLinear(): Color;
 
@@ -617,7 +598,7 @@ export interface Color {
 
 	/**
 	 * Convert this Color's *.r*, *.g* and *.b* values to [HSL](https://en.wikipedia.org/wiki/HSL_and_HSV) format and returns an object of the form: { h: 0, s: 0, l: 0 }
-	 * @param target - the result will be copied into this Object. Adds h, s and l keys to the object (if not already present).
+	 * @param target The result will be copied into this Object. Adds h, s and l keys to the object (if not already present).
 	 */
 	getHSL(target: HSL): HSL;
 
@@ -666,16 +647,16 @@ export interface Color {
 	/**
 	 * Linearly interpolates this color's RGB values toward the RGB values of the passed argument.
 	 * The alpha argument can be thought of as the ratio between the two colors, where 0.0 is this color and 1.0 is the first argument.
-	 * @param color - color to converge on.
-	 * @param alpha - interpolation factor in the closed interval [0, 1].
+	 * @param color color to converge on.
+	 * @param alph A interpolation factor in the closed interval [0, 1].
 	 */
 	lerp(color: Color, alpha: number): this;
 
 	/**
 	 * Sets this color to be the color linearly interpolated between [color1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) and [color2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) where alpha is the percent distance along the line connecting the two colors - alpha = 0 will be [color1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color), and alpha = 1 will be [color2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color).
-	 * @param color1 - the starting [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color).
-	 * @param color2 - [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) to interpolate towards.
-	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * @param color1 The starting [Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color).
+	 * @param color2 Color to interpolate towards.
+	 * @param alph A interpolation factor, typically in the closed interval [0, 1].
 	 */
 	lerpColors(color1: Color, color2: Color, alpha: number): this;
 
@@ -683,8 +664,8 @@ export interface Color {
 	 * Linearly interpolates this color's HSL values toward the HSL values of the passed argument.
 	 * It differs from the classic *.lerp* by not interpolating straight from one color to the other, but instead going through all the hues in between those two colors.
 	 * The alpha argument can be thought of as the ratio between the two colors, where 0.0 is this color and 1.0 is the first argument.
-	 * @param color - color to converge on.
-	 * @param alpha - interpolation factor in the closed interval [0, 1].
+	 * @param color color to converge on.
+	 * @param alph A interpolation factor in the closed interval [0, 1].
 	 */
 	lerpHSL(color: Color, alpha: number): this;
 
@@ -695,23 +676,23 @@ export interface Color {
 
 	/**
 	 * Sets this color's components based on an array formatted like [ [r](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) ].
-	 * @param array - [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of floats in the form [ [r](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) ].
-	 * @param offset - An optional offset into the array.
+	 * @param array Array of floats in the form [ [r](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [g](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) ].
+	 * @param offset An optional offset into the array.
 	 */
 	fromArray(array: number[] | ArrayLike<number>, offset?: number): this;
 
 	/**
 	 * Returns an array [red, green, blue], or copies red, green and blue into the provided array.
-	 * @param array - An optional array to store the color to.
-	 * @param offset - An optional offset into the array.
+	 * @param array An optional array to store the color to.
+	 * @param offset An optional offset into the array.
 	 * @returns Returns an array of the form [ r, g, b ].
 	 */
 	toArray(array?: number[] | ArrayLike<number>, offset?: number): number[];
 
 	/**
 	 * Sets this color's components from the [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
-	 * @param attribute - the source attribute.
-	 * @param index - index in the attribute.
+	 * @param attribute The source attribute.
+	 * @param index index in the attribute.
 	 */
 	fromBufferAttribute(attribute: BufferAttribute, index: number): this;
 
@@ -726,24 +707,24 @@ export interface Color {
  */
 export interface Cylindrical {
 	/**
-	 * @param radius - distance from the origin to a point in the x-z plane. Default is *1.0*.
-	 * @param theta - counterclockwise angle in the x-z plane measured in radians from the positive z-axis. Default is *0*.
-	 * @param y - height above the x-z plane. Default is *0*.
+	 * @param radius distance from the origin to a point in the x-z plane. Default is *1.0*.
+	 * @param thet A counterclockwise angle in the x-z plane measured in radians from the positive z-axis. Default is *0*.
+	 * @param y height above the x-z plane. Default is *0*.
 	 */
 	new (radius?: number, theta?: number, y?: number): this;
 
 	/**
-	 * distance from the origin to a point in the x-z plane. Default is *1.0*.
+	 * Distance from the origin to a point in the x-z plane. Default is *1.0*.
 	 */
 	radius: number;
 
 	/**
-	 * counterclockwise angle in the x-z plane measured in radians from the positive z-axis. Default is *0*.
+	 * Counterclockwise angle in the x-z plane measured in radians from the positive z-axis. Default is *0*.
 	 */
 	theta: number;
 
 	/**
-	 * height above the x-z plane. Default is *0*.
+	 * Height above the x-z plane. Default is *0*.
 	 */
 	y: number;
 
@@ -776,7 +757,9 @@ export interface Cylindrical {
 /**
  * A class representing [Euler Angles](http://en.wikipedia.org/wiki/Euler_angles).
  * Euler angles describe a rotational transformation by rotating an object on its various axes in specified amounts per axis, and a specified axis order.
- * ```javascript
+ *
+ * ### Code Example
+ * ```js
  * const a = new THREE.Euler( 0, 1, 1.57, 'XYZ' );
  * const b = new THREE.Vector3( 1, 0, 1 );
  * b.applyEuler(a);
@@ -784,25 +767,25 @@ export interface Cylindrical {
  */
 export interface Euler {
 	/**
-	 * @param x - the angle of the x axis in radians. Default is *0*.
-	 * @param y - the angle of the y axis in radians. Default is *0*.
-	 * @param z - the angle of the z axis in radians. Default is *0*.
-	 * @param order - a string representing the order that the rotations are applied, defaults to 'XYZ' (must be upper case).
+	 * @param x The angle of the x axis in radians. Default is *0*.
+	 * @param y The angle of the y axis in radians. Default is *0*.
+	 * @param z The angle of the z axis in radians. Default is *0*.
+	 * @param order A string representing the order that the rotations are applied, defaults to 'XYZ' (must be upper case).
 	 */
 	new (x?: number, y?: number, z?: number, order?: string): this;
 
 	/**
-	 * the angle of the x axis in radians. Default is *0*.
+	 * The angle of the x axis in radians. Default is *0*.
 	 */
 	x: number;
 
 	/**
-	 * the angle of the y axis in radians. Default is *0*.
+	 * The angle of the y axis in radians. Default is *0*.
 	 */
 	y: number;
 
 	/**
-	 * the angle of the z axis in radians. Default is *0*.
+	 * The angle of the z axis in radians. Default is *0*.
 	 */
 	z: number;
 
@@ -820,10 +803,10 @@ export interface Euler {
 	/**
 	 * Sets the angles of this euler transform and optionally the *.order*.
 	 *
-	 * @param x - the angle of the x axis in radians.
-	 * @param y - the angle of the y axis in radians.
-	 * @param z - the angle of the z axis in radians.
-	 * @param [order] - a string representing the order that the rotations are applied.
+	 * @param x The angle of the x axis in radians.
+	 * @param y The angle of the y axis in radians.
+	 * @param z The angle of the z axis in radians.
+	 * @param order A string representing the order that the rotations are applied.
 	 */
 	set(x: number, y: number, z: number, order?: string): Euler;
 
@@ -840,26 +823,26 @@ export interface Euler {
 	/**
 	 * Sets the angles of this euler transform from a pure rotation matrix based on the orientation specified by order.
 	 *
-	 * @param m - a [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper 3x3 of matrix is a pure [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix) (i.e. unscaled).
-	 * @param [order] - a string representing the order that the rotations are applied.
-	 * @param [update]
+	 * @param m A [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper 3x3 of matrix is a pure [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix) (i.e. unscaled).
+	 * @param order A string representing the order that the rotations are applied.
+	 * @param update
 	 */
 	setFromRotationMatrix(m: Matrix4, order?: string, update?: boolean): Euler;
 
 	/**
 	 * Sets the angles of this euler transform from a normalized quaternion based on the orientation specified by *.order*.
 	 *
-	 * @param q - a normalized quaternion.
-	 * @param [order] - a string representing the order that the rotations are applied.
-	 * @param [update]
+	 * @param q A normalized quaternion.
+	 * @param order A string representing the order that the rotations are applied.
+	 * @param update
 	 */
 	setFromQuaternion(q: Quaternion, order?: string, update?: boolean): Euler;
 
 	/**
 	 * Set the *.x*, *.y* and *.z*, and optionally update the *.order*.
 	 *
-	 * @param v - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param [order] - a string representing the order that the rotations are applied.
+	 * @param v Vector3.
+	 * @param order A string representing the order that the rotations are applied.
 	 */
 	setFromVector3(v: Vector3, order?: string): Euler;
 
@@ -879,20 +862,20 @@ export interface Euler {
 	 * Assigns this euler's *.y* angle to array[1].
 	 * Assigns this euler's *.z* angle to array[2].
 	 * Optionally assigns this euler's *.order* to array[3].
-	 * @param array - of length 3 or 4. The optional 4th argument corresponds to the *.order*.
+	 * @param array of length 3 or 4. The optional 4th argument corresponds to the *.order*.
 	 */
 	fromArray(xyzo: any[]): Euler;
 
 	/**
 	 *
-	 * @param array - array to store the euler in.
-	 * @param [offset] - offset in the array.
+	 * @param array array to store the euler in.
+	 * @param offset offset in the array.
 	 * @returns Returns an array of the form [*.x*, *.y*, *.z*, *.order*].
 	 */
 	toArray(array?: number[], offset?: number): number[];
 
 	/**
-	 * @param optionalResult - If specified, the result will be copied into this Vector, otherwise a new one will be created.
+	 * @param optionalResult If specified, the result will be copied into this Vector, otherwise a new one will be created.
 	 * @returns Returns the Euler's *.x*, *.y* and *.z* properties as a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
 	 */
 	toVector3(optionalResult?: Vector3): Vector3;
@@ -911,12 +894,12 @@ export interface Frustum {
 	/**
 	 * Creates a new Frustum.
 	 *
-	 * @param p0 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p1 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p2 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p3 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p4 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p5 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p0 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p1 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p2 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p3 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p4 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p5 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
 	 */
 	new (p0?: Plane, p1?: Plane, p2?: Plane, p3?: Plane, p4?: Plane, p5?: Plane): this;
 
@@ -929,12 +912,12 @@ export interface Frustum {
 	 * Sets the frustum from the passed planes. No plane order is implied.
 	 * Note that this method only copies the values from the given objects.
 	 *
-	 * @param p0 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p1 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p2 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p3 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p4 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param p5 - defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p0 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p1 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p2 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p3 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p4 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+	 * @param p5 defaults to a new [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
 	 */
 	set(p0: Plane, p1: Plane, p2: Plane, p3: Plane, p4: Plane, p5: Plane): Frustum;
 
@@ -944,13 +927,13 @@ export interface Frustum {
 	clone(): this;
 
 	/**
-	 * @param frustum - The frustum to copy Copies the properties of the passed [frustum](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Frustum) into this one.
+	 * @param frustum The frustum to copy Copies the properties of the passed [frustum](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Frustum) into this one.
 	 */
 	copy(frustum: Frustum): this;
 
 	/**
 	 * Sets the frustum planes from the projection matrix.
-	 * @param matrix - Projection [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) used to set the *.planes*
+	 * @param matrix Projection [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) used to set the *.planes*
 	 */
 	setFromProjectionMatrix(m: Matrix4): this;
 
@@ -968,20 +951,20 @@ export interface Frustum {
 	intersectsSprite(sprite: Sprite): boolean;
 
 	/**
-	 * @param sphere - [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) to check for intersection.
+	 * @param sphere Sphere to check for intersection.
 	 * @returns Return true if [sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) intersects with this frustum.
 	 */
 	intersectsSphere(sphere: Sphere): boolean;
 
 	/**
-	 * @param box - [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to check for intersection.
+	 * @param box Box3 to check for intersection.
 	 * @returns Return true if [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) intersects with this frustum.
 	 */
 	intersectsBox(box: Box3): boolean;
 
 	/**
 	 * Checks to see if the frustum contains the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to test.
+	 * @param point Vector3 to test.
 	 */
 	containsPoint(point: Vector3): boolean;
 }
@@ -998,30 +981,30 @@ export interface Interpolant {
 	/**
 	 * Note: This is not designed to be called directly.
 	 *
-	 * @param parameterPositions -- array of positions
-	 * @param sampleValues -- array of samples
-	 * @param sampleSize -- number of samples
-	 * @param resultBuffer -- buffer to store the interpolation results.
+	 * @param parameterPositions - array of positions
+	 * @param sampleValues - array of samples
+	 * @param sampleSize - number of samples
+	 * @param resultBuffer - buffer to store the interpolation results.
 	 */
 	new (parameterPositions: any, sampleValues: any, sampleSize: number, resultBuffer?: any): this;
 
 	/**
-	 * array of positions
+	 * Array of positions
 	 */
 	parameterPositions: any;
 
 	/**
-	 * array of samples
+	 * Array of samples
 	 */
 	sampleValues: any;
 
 	/**
-	 * number of samples
+	 * Number of samples
 	 */
 	valueSize: number;
 
 	/**
-	 * buffer to store the interpolation results.
+	 * Buffer to store the interpolation results.
 	 */
 	resultBuffer: any;
 
@@ -1040,8 +1023,8 @@ export interface Line3 {
 	/**
 	 * Creates a new Line3.
 	 *
-	 * @param start - Start of the line segment. Default is (0, 0, 0).
-	 * @param end - End of the line segment. Default is (0, 0, 0).
+	 * @param start Start of the line segment. Default is (0, 0, 0).
+	 * @param end End of the line segment. Default is (0, 0, 0).
 	 */
 	new (start?: Vector3, end?: Vector3): this;
 
@@ -1057,8 +1040,8 @@ export interface Line3 {
 
 	/**
 	 * Sets the start and end values by copying the provided vectors.
-	 * @param start - set the *.start* of the line.
-	 * @param end - set the *.end* of the line.
+	 * @param start set the *.start* of the line.
+	 * @param end set the *.end* of the line.
 	 */
 	set(start?: Vector3, end?: Vector3): Line3;
 
@@ -1073,13 +1056,13 @@ export interface Line3 {
 	copy(line: Line3): this;
 
 	/**
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns the center of the line segment.
 	 */
 	getCenter(target: Vector3): Vector3;
 
 	/**
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns the delta vector of the line segment ( *.end* vector minus the *.start* vector).
 	 */
 	delta(target: Vector3): Vector3;
@@ -1096,8 +1079,8 @@ export interface Line3 {
 	distance(): number;
 
 	/**
-	 * @param t - Use values 0-1 to return a position along the line segment.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param t Use values 0-1 to return a position along the line segment.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns a vector at a certain position along the line. When [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) = 0, it returns the start vector, and when [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) = 1 it returns the end vector.
 	 */
 	at(t: number, target: Vector3): Vector3;
@@ -1105,16 +1088,16 @@ export interface Line3 {
 	/**
 	 * If [clampToLine](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, then the returned value will be between 0 and 1.
 	 *
-	 * @param point - the point for which to return a point parameter.
-	 * @param clampToLine - Whether to clamp the result to the range [0, 1].
+	 * @param point The point for which to return a point parameter.
+	 * @param clampToLine Whether to clamp the result to the range [0, 1].
 	 * @returns Returns a point parameter based on the closest point as projected on the line segement.
 	 */
 	closestPointToPointParameter(point: Vector3, clampToLine?: boolean): number;
 
 	/**
-	 * @param point - return the closest point on the line to this point.
-	 * @param clampToLine - whether to clamp the returned value to the line segment.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param point return the closest point on the line to this point.
+	 * @param clampToLine whether to clamp the returned value to the line segment.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns the closets point on the line. If [clampToLine](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) is true, then the returned value will be clamped to the line segment.
 	 */
 	closestPointToPoint(point: Vector3, clampToLine: boolean, target: Vector3): Vector3;
@@ -1125,7 +1108,7 @@ export interface Line3 {
 	applyMatrix4(matrix: Matrix4): Line3;
 
 	/**
-	 * @param line - [Line3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line3) to compare with this one.
+	 * @param line Line3 to compare with this one.
 	 * @returns Returns true if both line's *.start* and *.end* points are equal.
 	 */
 	equals(line: Line3): boolean;
@@ -1133,7 +1116,7 @@ export interface Line3 {
 
 /**
  * An object with several math utility functions.
- * @see {@link https://github.com/mrdoob/three.js/blob/master/src/math/MathUtils.js|src/math/MathUtils.js}
+ * @see [src/math/MathUtils.js](https://github.com/mrdoob/three.js/blob/master/src/math/MathUtils.js)
  */
 export interface MathUtils {
 	/**
@@ -1143,52 +1126,44 @@ export interface MathUtils {
 
 	/**
 	 * Clamps the [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) to be between [min](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) and [max](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-	 * @param value - Value to be clamped.
-	 * @param min - Minimum value.
-	 * @param max - Maximum value.
+	 * @param value Value to be clamped.
+	 * @param min Minimum value.
+	 * @param max Maximum value.
 	 */
 	clamp(value: number, min: number, max: number): number;
 
 	/**
-	 * @param n - Integers Computes the Euclidean modulo of [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) % [n](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer), that is: ( ( n % m ) + m ) % m
+	 * @param n Integers Computes the Euclidean modulo of [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) % [n](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer), that is: ( ( n % m ) + m ) % m
 	 */
 	euclideanModulo(n: number, m: number): number;
 
 	/**
 	 * Linear mapping of [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) from range [[a1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [a2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)] to range [[b1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)].
-	 * @param x - Value to be mapped.
-	 * @param a1 - Minimum value for range A.
-	 * @param a2 - Maximum value for range A.
-	 * @param b1 - Minimum value for range B.
-	 * @param b2 - Maximum value for range B.
+	 * @param x Value to be mapped.
+	 * @param a1 Minimum value for range A.
+	 * @param a2 Maximum value for range A.
+	 * @param b1 Minimum value for range B.
+	 * @param b2 Maximum value for range B.
 	 */
 	mapLinear(x: number, a1: number, a2: number, b1: number, b2: number): number;
 
 	/**
 	 * See [Smoothstep](http://en.wikipedia.org/wiki/Smoothstep) for details.
 	 *
-	 * @param x - The value to evaluate based on its position between min and max.
-	 * @param min - Any x value below min will be 0.
-	 * @param max - Any x value above max will be 1.
+	 * @param x The value to evaluate based on its position between min and max.
+	 * @param min Any x value below min will be 0.
+	 * @param max Any x value above max will be 1.
 	 * @returns Returns a value between 0-1 that represents the percentage that x has moved between min and max, but smoothed or slowed down the closer X is to the min and max.
 	 */
 	smoothstep(x: number, min: number, max: number): number;
 
 	/**
-	 * @param x - The value to evaluate based on its position between min and max.
-	 * @param min - Any x value below min will be 0.
-	 * @param max - Any x value above max will be 1.
+	 * @param x The value to evaluate based on its position between min and max.
+	 * @param min Any x value below min will be 0.
+	 * @param max Any x value above max will be 1.
 	 * @returns Returns a value between 0-1. A [variation on smoothstep](https://en.wikipedia.org/wiki/Smoothstep#Variations) that has zero 1st and 2nd order derivatives at x=0 and x=1.
 	 */
 	smootherstep(x: number, min: number, max: number): number;
-
-	/**
-	 * Random float from 0 to 1 with 16 bits of randomness.
-	 * Standard Math.random() creates repetitive patterns when applied over larger space.
-	 *
-	 * @deprecated Use {@link Math#random Math.random()}
-	 */
-	random16(): number;
 
 	/**
 	 * Random integer from low to high interval.
@@ -1230,17 +1205,17 @@ export interface MathUtils {
 	isPowerOfTwo(value: number): boolean;
 
 	/**
-	 * @param x - Start point.
-	 * @param y - End point.
-	 * @param t - A value between start and end.
+	 * @param x Start point.
+	 * @param y End point.
+	 * @param t A value between start and end.
 	 * @returns Returns the percentage in the closed interval [0, 1] of the given value between the start and end point.
 	 */
 	inverseLerp(x: number, y: number, t: number): number;
 
 	/**
-	 * @param x - Start point.
-	 * @param y - End point.
-	 * @param t - interpolation factor in the closed interval [0, 1].
+	 * @param x Start point.
+	 * @param y End point.
+	 * @param t interpolation factor in the closed interval [0, 1].
 	 * @returns Returns a value [linearly interpolated](https://en.wikipedia.org/wiki/Linear_interpolation) from two known points based on the given interval - [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) = 0 will return [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) and [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) = 1 will return [y](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
 	 */
 	lerp(x: number, y: number, t: number): number;
@@ -1248,29 +1223,19 @@ export interface MathUtils {
 	/**
 	 * Smoothly interpolate a number from [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) toward [y](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) in a spring-like manner using the [dt](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) to maintain frame rate independent movement.
 	 * For details, see [Frame rate independent damping using lerp](http://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/).
-	 * @param x - Current point.
-	 * @param y - Target point.
-	 * @param lambda - A higher lambda value will make the movement more sudden, and a lower value will make the movement more gradual.
-	 * @param dt - Delta time in seconds.
+	 * @param x Current point.
+	 * @param y Target point.
+	 * @param lambda A higher lambda value will make the movement more sudden, and a lower value will make the movement more gradual.
+	 * @param dt Delta time in seconds.
 	 */
 	damp(x: number, y: number, lambda: number, dt: number): number;
 
 	/**
-	 * @param x - The value to pingpong.
-	 * @param length - The positive value the function will pingpong to. Default is 1.
+	 * @param x The value to pingpong.
+	 * @param length The positive value the function will pingpong to. Default is 1.
 	 * @returns Returns a value that alternates between 0 and [param:Float length].
 	 */
 	pingpong(x: number, length?: number): number;
-
-	/**
-	 * @deprecated Use {@link Math#floorPowerOfTwo .floorPowerOfTwo()}
-	 */
-	nearestPowerOfTwo(value: number): number;
-
-	/**
-	 * @deprecated Use {@link Math#ceilPowerOfTwo .ceilPowerOfTwo()}
-	 */
-	nextPowerOfTwo(value: number): number;
 
 	/**
 	 * @returns Returns the largest power of 2 that is less than or equal to [n](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number).
@@ -1286,10 +1251,10 @@ export interface MathUtils {
 	 * Rotations are applied to the axes in the order specified by [order](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String): rotation by angle [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) is applied first, then by angle [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), then by angle [c](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float). Angles are in radians.
 	 *
 	 * @param q
-	 * @param a - the rotation applied to the first axis, in radians
-	 * @param b - the rotation applied to the second axis, in radians
-	 * @param c - the rotation applied to the third axis, in radians
-	 * @param order - a string specifying the axes order: 'XYX', 'XZX', 'YXY', 'YZY', 'ZXZ', or 'ZYZ' Sets quaternion [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) from the [intrinsic Proper Euler Angles](http://en.wikipedia.org/wiki/Euler_angles) defined by angles [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and [c](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and order [order](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String).
+	 * @param a The rotation applied to the first axis, in radians
+	 * @param b The rotation applied to the second axis, in radians
+	 * @param c The rotation applied to the third axis, in radians
+	 * @param order A string specifying the axes order: 'XYX', 'XZX', 'YXY', 'YZY', 'ZXZ', or 'ZYZ' Sets quaternion [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) from the [intrinsic Proper Euler Angles](http://en.wikipedia.org/wiki/Euler_angles) defined by angles [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and [c](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and order [order](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String).
 	 */
 	setQuaternionFromProperEuler(q: Quaternion, a: number, b: number, c: number, order: string): void;
 }
@@ -1344,7 +1309,9 @@ export interface Matrix {
 
 /**
  * A class representing a 3x3 [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics)).
- * ```javascript
+ *
+ * ### Code Example
+ * ```js
  * const m = new Matrix3();
  * ```
  * A Note on Row-Major and Column-Major Ordering
@@ -1371,15 +1338,15 @@ export interface Matrix3 extends Matrix {
 
 	/**
 	 * Sets the 3x3 matrix values to the given [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) sequence of values.
-	 * @param n11 - value to put in row 1, col 1.
-	 * @param n12 - value to put in row 1, col 2.
-	 * @param n13 - value to put in row 1, col 3.
-	 * @param n21 - value to put in row 2, col 1.
-	 * @param n22 - value to put in row 2, col 2.
-	 * @param n23 - value to put in row 2, col 3.
-	 * @param n31 - value to put in row 3, col 1.
-	 * @param n32 - value to put in row 3, col 2.
-	 * @param n33 - value to put in row 3, col 3.
+	 * @param n11 value to put in row 1, col 1.
+	 * @param n12 value to put in row 1, col 2.
+	 * @param n13 value to put in row 1, col 3.
+	 * @param n21 value to put in row 2, col 1.
+	 * @param n22 value to put in row 2, col 2.
+	 * @param n23 value to put in row 2, col 3.
+	 * @param n31 value to put in row 3, col 1.
+	 * @param n32 value to put in row 3, col 2.
+	 * @param n33 value to put in row 3, col 3.
 	 */
 	set(
 		n11: number,
@@ -1450,20 +1417,20 @@ export interface Matrix3 extends Matrix {
 	/**
 	 * Sets this matrix as the upper left 3x3 of the [normal matrix](https://en.wikipedia.org/wiki/Normal_matrix) of the passed [matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4). The normal matrix is the [inverse](https://en.wikipedia.org/wiki/Invertible_matrix) [transpose](https://en.wikipedia.org/wiki/Transpose) of the matrix [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
 	 *
-	 * @param m - [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4)
+	 * @param m Matrix4
 	 */
 	getNormalMatrix(matrix4: Matrix4): Matrix3;
 
 	/**
 	 * [Transposes](https://en.wikipedia.org/wiki/Transpose) this matrix into the supplied array, and returns itself unchanged.
-	 * @param array -  array to store the resulting vector in.
+	 * @param array array to store the resulting vector in.
 	 */
 	transposeIntoArray(r: number[]): Matrix3;
 
 	/**
 	 * Sets the UV transform matrix from offset, repeat, rotation, and center.
-	 * @param tx - center x of rotation
-	 * @param ty
+	 * @param tx center x of rotation
+	 * @param ty center y of rotation
 	 * @param sx
 	 * @param sy
 	 * @param rotation
@@ -1487,15 +1454,15 @@ export interface Matrix3 extends Matrix {
 	/**
 	 * Sets the elements of this matrix based on an array in [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order) format.
 	 *
-	 * @param array - the array to read the elements from.
-	 * @param offset - index of first element in the array. Default is 0.
+	 * @param array The array to read the elements from.
+	 * @param offset index of first element in the array. Default is 0.
 	 */
 	fromArray(array: number[] | ArrayLike<number>, offset?: number): Matrix3;
 
 	/**
 	 * Writes the elements of this matrix to an array in [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order) format.
-	 * @param array - array to store the resulting vector in. If not given a new array will be created.
-	 * @param offset - offset in the array at which to put the result.
+	 * @param array array to store the resulting vector in. If not given a new array will be created.
+	 * @param offset offset in the array at which to put the result.
 	 */
 	toArray(array?: number[], offset?: number): number[];
 
@@ -1518,27 +1485,6 @@ export interface Matrix3 extends Matrix {
 	 * Multiplies every component of the matrix by the scalar value *s*.
 	 */
 	multiplyScalar(s: number): Matrix3;
-
-	/**
-	 * @deprecated Use {@link Vector3.applyMatrix3 vector.applyMatrix3( matrix )} instead.
-	 */
-	multiplyVector3(vector: Vector3): any;
-
-	/**
-	 * @deprecated This method has been removed completely.
-	 */
-	multiplyVector3Array(a: any): any;
-
-	/**
-	 * @deprecated Use {@link Matrix3#invert .invert()} instead.
-	 */
-	getInverse(matrix: Matrix4, throwOnDegenerate?: boolean): Matrix3;
-	getInverse(matrix: Matrix): Matrix;
-
-	/**
-	 * @deprecated Use {@link Matrix3#toArray .toArray()} instead.
-	 */
-	flattenToArrayOffset(array: number[], offset: number): number[];
 }
 
 export type Matrix4Tuple = [
@@ -1579,7 +1525,8 @@ export type Matrix4Tuple = [
  * A Note on Row-Major and Column-Major Ordering
  * The [set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/set)() method takes arguments in [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order)
  * order, while internally they are stored in the *.elements* array in column-major order.
- * This means that calling const m = new THREE.Matrix4();
+ * This means that calling 
+ * const m = new THREE.Matrix4();
  * m.set( 11, 12, 13, 14, 21, 22, 23, 24, 31, 32, 33, 34, 41, 42, 43, 44 );
  * will result in the *.elements* array containing:
  * m.elements = [ 11, 21, 31, 41, 12, 22, 32, 42, 13, 23, 33, 43, 14, 24, 34, 44 ];
@@ -1595,7 +1542,7 @@ export type Matrix4Tuple = [
  */
 export interface Matrix4 extends Matrix {
 	/**
-	 * Creates and initializes the [name] to the 4x4
+	 * Creates and initializes the Matrix4 to the 4x4
 	 * [identity matrix](https://en.wikipedia.org/wiki/Identity_matrix).
 	 */
 	new (): this;
@@ -1713,14 +1660,6 @@ export interface Matrix4 extends Matrix {
 	multiplyMatrices(a: Matrix4, b: Matrix4): Matrix4;
 
 	/**
-	 * Sets this matrix to a x b and stores the result into the flat array r.
-	 * r can be either a regular Array or a TypedArray.
-	 *
-	 * @deprecated This method has been removed completely.
-	 */
-	multiplyToArray(a: Matrix4, b: Matrix4, r: number[]): Matrix4;
-
-	/**
 	 * Multiplies every component of the matrix by a scalar value [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
 	 */
 	multiplyScalar(s: number): Matrix4;
@@ -1767,9 +1706,9 @@ export interface Matrix4 extends Matrix {
 	 * 0, 1, 0, y,
 	 * 0, 0, 1, z,
 	 * 0, 0, 0, 1
-	 * @param x - the amount to translate in the X axis.
-	 * @param y - the amount to translate in the Y axis.
-	 * @param z - the amount to translate in the Z axis.
+	 * @param x The amount to translate in the X axis.
+	 * @param y The amount to translate in the Y axis.
+	 * @param z The amount to translate in the Z axis.
 	 */
 	makeTranslation(x: number, y: number, z: number): Matrix4;
 
@@ -1781,7 +1720,7 @@ export interface Matrix4 extends Matrix {
 	 * 0 cos(&theta;) -sin(&theta;)  0
 	 * 0 sin(&theta;) cos(&theta;)   0
 	 * 0 0      0        1
-	 * @param theta - Rotation angle in radians.
+	 * @param thet A Rotation angle in radians.
 	 */
 	makeRotationX(theta: number): Matrix4;
 
@@ -1794,7 +1733,7 @@ export interface Matrix4 extends Matrix {
 	 * -sin(&theta;) 0 cos(&theta;) 0
 	 * 0       0 0      1
 	 *
-	 * @param theta - Rotation angle in radians.
+	 * @param thet A Rotation angle in radians.
 	 */
 	makeRotationY(theta: number): Matrix4;
 
@@ -1805,7 +1744,7 @@ export interface Matrix4 extends Matrix {
 	 * sin(&theta;) cos(&theta;)  0 0
 	 * 0      0       1 0
 	 * 0      0       0 1
-	 * @param theta - Rotation angle in radians.
+	 * @param thet A Rotation angle in radians.
 	 */
 	makeRotationZ(theta: number): Matrix4;
 
@@ -1813,15 +1752,15 @@ export interface Matrix4 extends Matrix {
 	 * Sets this matrix as rotation transform around [axis](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) by [theta](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) radians.
 	 * This is a somewhat controversial but mathematically sound alternative to rotating via [Quaternions](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternions).
 	 * See the discussion [here](https://www.gamedev.net/articles/programming/math-and-physics/do-we-really-need-quaternions-r1199).
-	 * @param axis - Rotation axis, should be normalized.
-	 * @param theta - Rotation angle in radians.
+	 * @param axis Rotation axis, should be normalized.
+	 * @param thet A Rotation angle in radians.
 	 */
 	makeRotationAxis(axis: Vector3, angle: number): Matrix4;
 
 	/**
-	 * @param x - the amount to scale in the X axis.
-	 * @param y - the amount to scale in the Y axis.
-	 * @param z - the amount to scale in the Z axis.
+	 * @param x The amount to scale in the X axis.
+	 * @param y The amount to scale in the Y axis.
+	 * @param z The amount to scale in the Z axis.
 	 * Sets this matrix as scale transform:
 	 * x, 0, 0, 0,
 	 * 0, y, 0, 0,
@@ -1834,12 +1773,12 @@ export interface Matrix4 extends Matrix {
 	 * Sets this matrix as a shear transform:
 	 * 1,   yx,  zx,  0, xy,   1,  zy,  0, xz,  yz,   1,  0,
 	 * 0,    0,   0,  1
-	 * @param xy - the amount to shear X by Y.
-	 * @param xz - the amount to shear X by Z.
-	 * @param yx - the amount to shear Y by X.
-	 * @param yz - the amount to shear Y by Z.
-	 * @param zx - the amount to shear Z by X.
-	 * @param zy - the amount to shear Z by Y.
+	 * @param xy The amount to shear X by Y.
+	 * @param xz The amount to shear X by Z.
+	 * @param yx The amount to shear Y by X.
+	 * @param yz The amount to shear Y by Z.
+	 * @param zx The amount to shear Z by X.
+	 * @param zy The amount to shear Z by Y.
 	 */
 	makeShear(xy: number, xz: number, yx: number, yz: number, zx: number, zy: number): Matrix4;
 
@@ -1880,14 +1819,14 @@ export interface Matrix4 extends Matrix {
 
 	/**
 	 * Sets the elements of this matrix based on an [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) in [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order) format.
-	 * @param array - the array to read the elements from.
-	 * @param offset - ( optional ) offset into the array. Default is 0.
+	 * @param array The array to read the elements from.
+	 * @param offset ( optional ) offset into the array. Default is 0.
 	 */
 	fromArray(array: number[] | ArrayLike<number>, offset?: number): Matrix4;
 
 	/**
-	 * @param array - array to store the resulting vector in.
-	 * @param offset - offset in the array at which to put the result.
+	 * @param array array to store the resulting vector in.
+	 * @param offset offset in the array at which to put the result.
 	 * Writes the elements of this matrix to an array in [column-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order) format.
 	 */
 	toArray(array?: number[], offset?: number): number[];
@@ -1897,50 +1836,6 @@ export interface Matrix4 extends Matrix {
 	 */
 	setFromMatrix3(m: Matrix3): Matrix4;
 
-	/**
-	 * @deprecated Use {@link Matrix4#copyPosition .copyPosition()} instead.
-	 */
-	extractPosition(m: Matrix4): Matrix4;
-
-	/**
-	 * @deprecated Use {@link Matrix4#makeRotationFromQuaternion .makeRotationFromQuaternion()} instead.
-	 */
-	setRotationFromQuaternion(q: Quaternion): Matrix4;
-
-	/**
-	 * @deprecated Use {@link Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
-	 */
-	multiplyVector3(v: any): any;
-
-	/**
-	 * @deprecated Use {@link Vector4#applyMatrix4 vector.applyMatrix4( matrix )} instead.
-	 */
-	multiplyVector4(v: any): any;
-
-	/**
-	 * @deprecated This method has been removed completely.
-	 */
-	multiplyVector3Array(array: number[]): number[];
-
-	/**
-	 * @deprecated Use {@link Vector3#transformDirection Vector3.transformDirection( matrix )} instead.
-	 */
-	rotateAxis(v: any): void;
-
-	/**
-	 * @deprecated Use {@link Vector3#applyMatrix4 vector.applyMatrix4( matrix )} instead.
-	 */
-	crossVector(v: any): void;
-
-	/**
-	 * @deprecated Use {@link Matrix4#toArray .toArray()} instead.
-	 */
-	flattenToArrayOffset(array: number[], offset: number): number[];
-
-	/**
-	 * @deprecated Use {@link Matrix4#invert .invert()} instead.
-	 */
-	getInverse(matrix: Matrix): Matrix;
 }
 
 /**
@@ -1949,19 +1844,19 @@ export interface Matrix4 extends Matrix {
  */
 export interface Plane {
 	/**
-	 * @param normal - a unit length [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the normal of the plane. Default is *(1, 0, 0)*.
-	 * @param constant - the signed distance from the origin to the plane. Default is *0*.
+	 * @param normal A unit length [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the normal of the plane. Default is *(1, 0, 0)*.
+	 * @param constant The signed distance from the origin to the plane. Default is *0*.
 	 */
 	new (normal?: Vector3, constant?: number): this;
 
 	/**
-	 * a unit length [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the normal of the plane. Default is *(1, 0, 0)*.
+	 * A unit length [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the normal of the plane. Default is *(1, 0, 0)*.
 	 * @default new THREE.Vector3( 1, 0, 0 )
 	 */
 	normal: Vector3;
 
 	/**
-	 * the signed distance from the origin to the plane. Default is *0*.
+	 * The signed distance from the origin to the plane. Default is *0*.
 	 *
 	 * @default 0
 	 */
@@ -1971,33 +1866,33 @@ export interface Plane {
 
 	/**
 	 * Sets this plane's *.normal* and *.constant* properties by copying the values from the given normal.
-	 * @param normal - a unit length [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the normal of the plane.
-	 * @param constant - the signed distance from the origin to the plane. Default is *0*.
+	 * @param normal A unit length [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the normal of the plane.
+	 * @param constant The signed distance from the origin to the plane. Default is *0*.
 	 */
 	set(normal: Vector3, constant: number): Plane;
 
 	/**
 	 * Set the individual components that define the plane.
-	 * @param x - x value of the unit length normal vector.
-	 * @param y - y value of the unit length normal vector.
-	 * @param z - z value of the unit length normal vector.
-	 * @param w - the value of the plane's *.constant* property.
+	 * @param x x value of the unit length normal vector.
+	 * @param y y value of the unit length normal vector.
+	 * @param z z value of the unit length normal vector.
+	 * @param w The value of the plane's *.constant* property.
 	 */
 	setComponents(x: number, y: number, z: number, w: number): Plane;
 
 	/**
 	 * Sets the plane's properties as defined by a [normal](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) and an arbitrary coplanar [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param normal - a unit length [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the normal of the plane.
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)
+	 * @param normal A unit length [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) defining the normal of the plane.
+	 * @param point Vector3
 	 */
 	setFromNormalAndCoplanarPoint(normal: Vector3, point: Vector3): Plane;
 
 	/**
 	 * Defines the plane based on the 3 provided points. The winding order is assumed to be counter-clockwise, and determines the direction of the *.normal*.
 	 *
-	 * @param a - first point on the plane.
-	 * @param b - second point on the plane.
-	 * @param c - third point on the plane.
+	 * @param a first point on the plane.
+	 * @param b second point on the plane.
+	 * @param c third point on the plane.
 	 */
 	setFromCoplanarPoints(a: Vector3, b: Vector3, c: Vector3): Plane;
 
@@ -2007,14 +1902,12 @@ export interface Plane {
 	clone(): this;
 
 	/**
-	 * Copies the values of the passed plane's *.normal* and *.constant*
-	 * properties to this plane.
+	 * Copies the values of the passed plane's *.normal* and *.constant* properties to this plane.
 	 */
 	copy(plane: Plane): this;
 
 	/**
-	 * Normalizes the *.normal* vector, and adjusts the *.constant*
-	 * value accordingly.
+	 * Normalizes the *.normal* vector, and adjusts the *.constant* value accordingly.
 	 */
 	normalize(): Plane;
 
@@ -2035,8 +1928,8 @@ export interface Plane {
 
 	/**
 	 * Projects a [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) onto the plane.
-	 * @param point - the [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to project onto the plane.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param point The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to project onto the plane.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	projectPoint(point: Vector3, target: Vector3): Vector3;
 
@@ -2049,49 +1942,49 @@ export interface Plane {
 	orthoPoint(point: Vector3, target: Vector3): Vector3;
 
 	/**
-	 * @param line - the [Line3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line3) to check for intersection.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param line The [Line3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line3) to check for intersection.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns the intersection point of the passed line and the plane. Returns null  if the line does not intersect. Returns the line's starting point if the line is  coplanar with the plane.
 	 */
 	intersectLine(line: Line3, target: Vector3): Vector3 | null;
 
 	/**
-	 * @param line - the [Line3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line3) to check for intersection.
 	 * Tests whether a line segment intersects with (passes through) the plane.
+	 * @param line The [Line3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line3) to check for intersection.
 	 */
 	intersectsLine(line: Line3): boolean;
 
 	/**
-	 * @param box - the [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to check for intersection.
 	 * Determines whether or not this plane intersects [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3).
+	 * @param box The [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to check for intersection.
 	 */
 	intersectsBox(box: Box3): boolean;
 
 	/**
-	 * @param sphere - the [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) to check for intersection.
 	 * Determines whether or not this plane intersects [sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere).
+	 * @param sphere The [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) to check for intersection.
 	 */
 	intersectsSphere(sphere: Sphere): boolean;
 
 	/**
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) coplanar to the plane, by calculating the projection of the normal vector at the origin onto the plane.
 	 */
 	coplanarPoint(target: Vector3): Vector3;
 
 	/**
-	 * @param matrix - the [Page:Matrix4] to apply.
-	 * @param optionalNormalMatrix - pre-computed normal [Page:Matrix3] of the Matrix4 being applied.
 	 * Apply a Matrix4 to the plane. The matrix must be an affine, homogeneous transform.
 	 * If supplying an [optionalNormalMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3), it can be created like so:
 	 * const optionalNormalMatrix = new THREE.Matrix3().getNormalMatrix( matrix );
+	 * @param matrix The [Page:Matrix4] to apply.
+	 * @param optionalNormalMatrix pre-computed normal [Page:Matrix3] of the Matrix4 being applied.
 	 */
 	applyMatrix4(matrix: Matrix4, optionalNormalMatrix?: Matrix3): Plane;
 
 	/**
 	 * Translates the plane by the distance defined by the [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) vector.
 	 * Note that this only affects the plane constant and will not affect the normal vector.
-	 * @param offset - the amount to move the plane by.
+	 * @param offset The amount to move the plane by.
 	 */
 	translate(offset: Vector3): Plane;
 
@@ -2099,18 +1992,14 @@ export interface Plane {
 	 * Checks to see if two planes are equal (their *.normal* and *.constant* properties match).
 	 */
 	equals(plane: Plane): boolean;
-
-	/**
-	 * @deprecated Use {@link Plane#intersectsLine .intersectsLine()} instead.
-	 */
-	isIntersectionLine(l: any): any;
 }
 
 /**
  * Implementation of a [quaternion](http://en.wikipedia.org/wiki/Quaternion).
  * Quaternions are used in three.js to represent [rotations](https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation).
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const quaternion = new THREE.Quaternion();
  * quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
  * const vector = new THREE.Vector3( 1, 0, 0 );
@@ -2119,10 +2008,10 @@ export interface Plane {
  */
 export interface Quaternion {
 	/**
-	 * @param x - x coordinate
-	 * @param y - y coordinate
-	 * @param z - z coordinate
-	 * @param w - w coordinate
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @param z z coordinate
+	 * @param w w coordinate
 	 */
 	new (x?: number, y?: number, z?: number, w?: number): this;
 
@@ -2182,7 +2071,7 @@ export interface Quaternion {
 	/**
 	 * Sets this quaternion from rotation component of [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
 	 * Adapted from the method [here](http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm).
-	 * @param m - a [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper 3x3 of matrix is a pure [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix) (i.e. unscaled).
+	 * @param m A [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper 3x3 of matrix is a pure [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix) (i.e. unscaled).
 	 */
 	setFromRotationMatrix(m: Matrix4): Quaternion;
 
@@ -2199,8 +2088,8 @@ export interface Quaternion {
 	angleTo(q: Quaternion): number;
 
 	/**
-	 * @param q - The target quaternion.
-	 * @param step - The angular step in radians.
+	 * @param q The target quaternion.
+	 * @param step The angular step in radians.
 	 * Rotates this quaternion by a given angular step to the defined quaternion *q*.
 	 * The method ensures that the final quaternion will not overshoot *q*.
 	 */
@@ -2258,7 +2147,7 @@ export interface Quaternion {
 	multiplyQuaternions(a: Quaternion, b: Quaternion): Quaternion;
 
 	/**
-	 * @param qb - interpolation factor in the closed interval [0, 1].
+	 * @param qb interpolation factor in the closed interval [0, 1].
 	 * Handles the spherical linear interpolation between quaternions. [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) represents the amount of rotation between this quaternion (where [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) is 0) and [qb](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) (where [t](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) is 1). This quaternion is set to the result. Also see the static version of the *slerp* below.
 	 * // rotate a mesh towards a target quaternion
 	 * mesh.quaternion.slerp( endQuaternion, 0.01 );
@@ -2272,21 +2161,21 @@ export interface Quaternion {
 
 	/**
 	 * Compares the *.x*, *.y*,	*.z* and *.w* properties of [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) to the equivalent properties of this quaternion to determine if they represent the same rotation.
-	 * @param v - Quaternion that this quaternion will be compared to.
+	 * @param v Quaternion that this quaternion will be compared to.
 	 */
 	equals(v: Quaternion): boolean;
 
 	/**
 	 * Sets this quaternion's *.x*, *.y*,	*.z* and *.w* properties from an array.
-	 * @param array - array of format (x, y, z, w) used to construct the quaternion.
-	 * @param offset - an offset into the array.
+	 * @param array array of format (x, y, z, w) used to construct the quaternion.
+	 * @param offset an offset into the array.
 	 */
 	toArray(array?: number[], offset?: number): number[];
 
 	/**
 	 * Sets *.x*, *.y*, *.z*, *.w* properties of this quaternion from the [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
-	 * @param attribute - the source attribute.
-	 * @param index - index in the attribute.
+	 * @param attribute The source attribute.
+	 * @param index index in the attribute.
 	 */
 	fromBufferAttribute(attribute: BufferAttribute, index?: number): this;
 
@@ -2302,13 +2191,13 @@ export interface Quaternion {
 	_onChangeCallback: () => void;
 
 	/**
-	 * @param dst - The output array.
-	 * @param dstOffset - An offset into the output array.
-	 * @param src0 - The source array of the starting quaternion.
-	 * @param srcOffset0 - An offset into the array *src0*.
-	 * @param src1 - The source array of the target quatnerion.
-	 * @param srcOffset1 - An offset into the array *src1*.
-	 * @param t - Normalized interpolation factor (between 0 and 1).
+	 * @param dst The output array.
+	 * @param dstOffset An offset into the output array.
+	 * @param src0 The source array of the starting quaternion.
+	 * @param srcOffset0 An offset into the array *src0*.
+	 * @param src1 The source array of the target quatnerion.
+	 * @param srcOffset1 An offset into the array *src1*.
+	 * @param t Normalized interpolation factor (between 0 and 1).
 	 * Like the static *slerp* method above, but operates directly on flat arrays of numbers.
 	 */
 	slerpFlat(
@@ -2331,21 +2220,6 @@ export interface Quaternion {
 	): number[];
 
 	/**
-	 * @deprecated Use qm.slerpQuaternions( qa, qb, t ) instead..
-	 */
-	slerp(qa: Quaternion, qb: Quaternion, qm: Quaternion, t: number): number;
-
-	/**
-	 * @deprecated Use {@link Vector#applyQuaternion vector.applyQuaternion( quaternion )} instead.
-	 */
-	multiplyVector3(v: any): any;
-
-	/**
-	 * @deprecated Use {@link Quaternion#invert .invert()} instead.
-	 */
-	inverse(): Quaternion;
-
-	/**
 	 * Sets this quaternion to a uniformly random, normalized quaternion.
 	 */
 	random(): Quaternion;
@@ -2357,8 +2231,8 @@ export interface Quaternion {
 export interface Ray {
 	/**
 	 * Creates a new Ray.
-	 * @param origin - the origin of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray). Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
-	 * @param direction - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) The direction of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray). This must be normalized  (with [Vector3.normalize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3.normalize)) for the methods to operate properly.  Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, -1).
+	 * @param origin The origin of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray). Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
+	 * @param direction Vector3 The direction of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray). This must be normalized  (with [Vector3.normalize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3.normalize)) for the methods to operate properly.  Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, -1).
 	 */
 	new (origin?: Vector3, direction?: Vector3): this;
 
@@ -2369,8 +2243,7 @@ export interface Ray {
 	origin: Vector3;
 
 	/**
-	 * The direction of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray). This must be normalized (with [Vector3.normalize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3.normalize))
-	 * for the methods to operate properly. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, -1).
+	 * The direction of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray). This must be normalized (with [Vector3.normalize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3.normalize)) for the methods to operate properly. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, -1).
 	 * @default new THREE.Vector3( 0, 0, - 1 )
 	 */
 	direction: Vector3;
@@ -2378,8 +2251,8 @@ export interface Ray {
 	/**
 	 * This must be normalized (with [Vector3.normalize](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3.normalize)) for the methods to operate properly.
 	 * Sets this ray's *.origin* and *.direction* properties by copying the values from the given objects.
-	 * @param origin - the *.origin* of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
-	 * @param origin - the *.direction* of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
+	 * @param origin The *.origin* of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
+	 * @param origin The *.direction* of the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
 	 */
 	set(origin: Vector3, direction: Vector3): Ray;
 
@@ -2395,129 +2268,115 @@ export interface Ray {
 
 	/**
 	 * Get a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) that is a given distance along this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
-	 * @param t - the distance along the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) to retrieve a position for.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param t The distance along the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) to retrieve a position for.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	at(t: number, target: Vector3): Vector3;
 
 	/**
 	 * Adjusts the direction of the ray to point at the vector in world coordinates.
-	 * @param v - The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to look at.
+	 * @param v The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to look at.
 	 */
 	lookAt(v: Vector3): Ray;
 
 	/**
-	 * @param t - The distance along the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) to interpolate.
+	 * @param t The distance along the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) to interpolate.
 	 * Shift the origin of this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) along its direction by the distance given.
 	 */
 	recast(t: number): Ray;
 
 	/**
 	 * Get the point along this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) that is closest to the [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) provided.
-	 * @param point - the point to get the closest approach to.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param point The point to get the closest approach to.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	closestPointToPoint(point: Vector3, target: Vector3): Vector3;
 
 	/**
 	 * Get the distance of the closest approach between the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) and the [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to compute a distance to.
+	 * @param point Vector3 The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to compute a distance to.
 	 */
 	distanceToPoint(point: Vector3): number;
 
 	/**
 	 * Get the squared distance of the closest approach between the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) and the [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param point - the [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to compute a distance to.
+	 * @param point The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to compute a distance to.
 	 */
 	distanceSqToPoint(point: Vector3): number;
 
 	/**
-	 * optionalPointOnRay - if this is provided, it receives the point on this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) that is closest to the segment.s ptionalPointOnSegment - if this is provided, it receives the point on the line segment that is closest to this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
 	 * Get the squared distance between this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) and a line segment.
-	 * @param v0 - the start of the line segment.
-	 * @param v1 - the end of the line segment.
+	 * @param v0 The start of the line segment.
+	 * @param v1 The end of the line segment.
+	 * @param optionalPointOnRay  if this is provided, it receives the point on this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) that is closest to the segment. 
+	 * @param optionalPointOnSegment  if this is provided, it receives the point on the line segment that is closest to this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
 	 */
 	distanceSqToSegment(v0: Vector3, v1: Vector3, optionalPointOnRay?: Vector3, optionalPointOnSegment?: Vector3): number;
 
 	/**
-	 * @param sphere - the [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) to intersect with.
-	 * @param target - the result will be copied into this Vector3.
 	 * Intersect this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) with a [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere), returning the intersection point or *null* if there is no intersection.
+	 * @param sphere The [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) to intersect with.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	intersectSphere(sphere: Sphere, target: Vector3): Vector3 | null;
 
 	/**
-	 * @param sphere - the [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) to intersect with.
+	 * @param sphere The [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) to intersect with.
 	 * @returns Return true if this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) intersects with the [Sphere](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere).
 	 */
 	intersectsSphere(sphere: Sphere): boolean;
 
 	/**
 	 * Get the distance from *.origin* to the [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane), or *null* if the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) doesn't intersect the [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
-	 * @param plane - the [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) to get the distance to.
+	 * @param plane The [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) to get the distance to.
 	 */
 	distanceToPlane(plane: Plane): number;
 
 	/**
 	 * Intersect this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) with a [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane), returning the intersection point or *null* if there is no intersection.
-	 * @param plane - the [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) to intersect with.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param plane The [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) to intersect with.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	intersectPlane(plane: Plane, target: Vector3): Vector3 | null;
 
 	/**
-	 * @param plane - the [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) to intersect with.
+	 * @param plane The [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) to intersect with.
 	 * @returns Return true if this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) intersects with the [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
 	 */
 	intersectsPlane(plane: Plane): boolean;
 
 	/**
 	 * Intersect this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) with a [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3), returning the intersection point or *null* if there is no intersection.
-	 * @param box - the [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to intersect with.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param box The [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to intersect with.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	intersectBox(box: Box3, target: Vector3): Vector3 | null;
 
 	/**
-	 * @param box - the [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to intersect with.
+	 * @param box The [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to intersect with.
 	 * @returns Return true if this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) intersects with the [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3).
 	 */
 	intersectsBox(box: Box3): boolean;
 
 	/**
 	 * Intersect this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) with a triangle, returning the intersection point or *null* if there is no intersection.
-	 * @param a - The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) points making up the triangle.
-	 * @param backfaceCulling - whether to use backface culling.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param a The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) points making up the triangle.
+	 * @param backfaceCulling whether to use backface culling.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	intersectTriangle(a: Vector3, b: Vector3, c: Vector3, backfaceCulling: boolean, target: Vector3): Vector3 | null;
 
 	/**
 	 * Transform this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) by the [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
-	 * @param matrix4 - the [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) to apply to this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
+	 * @param matrix4 The [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) to apply to this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
 	 */
 	applyMatrix4(matrix4: Matrix4): Ray;
 
 	/**
-	 * @param ray - the [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) to compare to.
+	 * @param ray The [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) to compare to.
 	 * @returns Returns true if this and the other [ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) have equal *.origin*
 	 */
 	equals(ray: Ray): boolean;
-
-	/**
-	 * @deprecated Use {@link Ray#intersectsBox .intersectsBox()} instead.
-	 */
-	isIntersectionBox(b: any): any;
-
-	/**
-	 * @deprecated Use {@link Ray#intersectsPlane .intersectsPlane()} instead.
-	 */
-	isIntersectionPlane(p: any): any;
-
-	/**
-	 * @deprecated Use {@link Ray#intersectsSphere .intersectsSphere()} instead.
-	 */
-	isIntersectionSphere(s: any): any;
 }
 
 /**
@@ -2527,8 +2386,8 @@ export interface Sphere {
 	/**
 	 * Creates a new Sphere.
 	 *
-	 * @param center - center of the sphere. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
-	 * @param radius - radius of the sphere. Default is -1.
+	 * @param center center of the sphere. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
+	 * @param radius radius of the sphere. Default is -1.
 	 */
 	new (center?: Vector3, radius?: number): this;
 
@@ -2547,16 +2406,16 @@ export interface Sphere {
 	/**
 	 * Sets the *.center* and *.radius* properties of this sphere.
 	 * Please note that this method only copies the values from the given center.
-	 * @param center - center of the sphere.
-	 * @param radius - radius of the sphere.
+	 * @param center center of the sphere.
+	 * @param radius radius of the sphere.
 	 */
 	set(center: Vector3, radius: number): Sphere;
 
 	/**
 	 *
 	 * Computes the minimum bounding sphere for an array of [points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array). If  [optionalCenter](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)is given, it is used as the sphere's center. Otherwise, the center of the axis-aligned bounding box encompassing [points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) is calculated.
-	 * @param points - an [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) positions.
-	 * @param optionalCenter - Optional [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) position for the sphere's center.
+	 * @param points an [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) positions.
+	 * @param optionalCenter Optional [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) position for the sphere's center.
 	 */
 	setFromPoints(points: Vector3[], optionalCenter?: Vector3): Sphere;
 
@@ -2566,15 +2425,14 @@ export interface Sphere {
 	clone(): this;
 
 	/**
-	 * Copies the values of the passed sphere's *.center* and *.radius*
-	 * properties to this sphere.
+	 * Copies the values of the passed sphere's *.center* and *.radius* properties to this sphere.
 	 */
 	copy(sphere: Sphere): this;
 
 	/**
 	 * Expands the boundaries of this sphere to include [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
 	 *
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) that should be included in the sphere.
+	 * @param point Vector3 that should be included in the sphere.
 	 */
 	expandByPoint(point: Vector3): this;
 
@@ -2590,7 +2448,7 @@ export interface Sphere {
 	makeEmpty(): this;
 
 	/**
-	 * @param point - the [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to be checked Checks to see if the sphere contains the provided [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) inclusive of the surface of the sphere.
+	 * @param point The [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to be checked Checks to see if the sphere contains the provided [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) inclusive of the surface of the sphere.
 	 */
 	containsPoint(point: Vector3): boolean;
 
@@ -2601,37 +2459,37 @@ export interface Sphere {
 
 	/**
 	 * Checks to see if two spheres intersect.
-	 * @param sphere - Sphere to check for intersection against.
+	 * @param sphere Sphere to check for intersection against.
 	 */
 	intersectsSphere(sphere: Sphere): boolean;
 
 	/**
 	 * Determines whether or not this sphere intersects a given [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3).
-	 * @param box - [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) to check for intersection against.
+	 * @param box Box3 to check for intersection against.
 	 */
 	intersectsBox(box: Box3): boolean;
 
 	/**
-	 * @param plane - Plane to check for intersection against.
+	 * @param plane Plane to check for intersection against.
 	 * Determines whether or not this sphere intersects a given [plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
 	 */
 	intersectsPlane(plane: Plane): boolean;
 
 	/**
 	 * Clamps a point within the sphere. If the point is outside the sphere, it will clamp it to the closest point on the edge of the sphere. Points already inside the sphere will not be affected.
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) The point to clamp.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param point Vector3 The point to clamp.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	clampPoint(point: Vector3, target: Vector3): Vector3;
 
 	/**
-	 * @param target - the result will be copied into this Box3.
+	 * @param target The result will be copied into this Box3.
 	 * @returns Returns a[Minimum Bounding Box](https://en.wikipedia.org/wiki/Minimum_bounding_box) for the sphere.
 	 */
 	getBoundingBox(target: Box3): Box3;
 
 	/**
-	 * @param matrix - the [Page:Matrix4] to apply
+	 * @param matrix The [Page:Matrix4] to apply
 	 * Transforms this sphere with the provided [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4).
 	 */
 	applyMatrix4(matrix: Matrix4): Sphere;
@@ -2644,14 +2502,9 @@ export interface Sphere {
 
 	/**
 	 * Expands this sphere to enclose both the original sphere and the given sphere.
-	 * @param sphere - Bounding sphere that will be unioned with this sphere.
+	 * @param sphere Bounding sphere that will be unioned with this sphere.
 	 */
 	union(sphere: Sphere): this;
-
-	/**
-	 * @deprecated Use {@link Sphere#isEmpty .isEmpty()} instead.
-	 */
-	empty(): any;
 }
 
 /**
@@ -2660,26 +2513,26 @@ export interface Sphere {
 export interface Spherical {
 	/**
 	 * The poles (phi) are at the positive and negative y axis. The equator (theta) starts at positive z.
-	 * @param radius - the radius, or the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) (straight-line distance) from the point to the origin. Default is *1.0*.
-	 * @param phi - polar angle in radians from the y (up) axis. Default is *0*.
-	 * @param theta - equator angle in radians around the y (up) axis. Default is *0*.
+	 * @param radius The radius, or the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) (straight-line distance) from the point to the origin. Default is *1.0*.
+	 * @param phi polar angle in radians from the y (up) axis. Default is *0*.
+	 * @param thet A equator angle in radians around the y (up) axis. Default is *0*.
 	 */
 	new (radius?: number, phi?: number, theta?: number): this;
 
 	/**
-	 * the radius, or the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) (straight-line distance) from the point to the origin. Default is *1.0*.
+	 * The radius, or the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) (straight-line distance) from the point to the origin. Default is *1.0*.
 	 * @default 1
 	 */
 	radius: number;
 
 	/**
-	 * polar angle in radians from the y (up) axis. Default is *0*.
+	 * Polar angle in radians from the y (up) axis. Default is *0*.
 	 * @default 0
 	 */
 	phi: number;
 
 	/**
-	 * equator angle in radians around the y (up) axis. Default is *0*.
+	 * Equator angle in radians around the y (up) axis. Default is *0*.
 	 * @default 0
 	 */
 	theta: number;
@@ -2722,7 +2575,7 @@ export interface SphericalHarmonics3 {
 	/**
 	 * Creates a new instance of SphericalHarmonics3.
 	 */
-	new(): this;
+	new (): this;
 
 	/**
 	 * An array holding the (9) SH coefficients. A single coefficient is represented as an instance of [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
@@ -2733,7 +2586,7 @@ export interface SphericalHarmonics3 {
 
 	/**
 	 * Sets the given SH coefficients to this instance.
-	 * @param coefficients - An array of SH coefficients.
+	 * @param coefficients An array of SH coefficients.
 	 */
 	set(coefficients: Vector3[]): SphericalHarmonics3;
 
@@ -2744,58 +2597,58 @@ export interface SphericalHarmonics3 {
 
 	/**
 	 * Adds the given SH to this instance.
-	 * @param sh - The SH to add.
+	 * @param sh The SH to add.
 	 */
 	add(sh: SphericalHarmonics3): SphericalHarmonics3;
 
 	/**
 	 * A convenience method for performing *.add*() and *.scale*() at once.
-	 * @param sh - The SH to add.
-	 * @param scale - The scale factor.
+	 * @param sh The SH to add.
+	 * @param scale The scale factor.
 	 */
 	addScaledSH(sh: SphericalHarmonics3, s: number): SphericalHarmonics3;
 
 	/**
 	 * Scales this SH by the given scale factor.
 	 *
-	 * @param scale - The scale factor.
+	 * @param scale The scale factor.
 	 */
 	scale(s: number): SphericalHarmonics3;
 
 	/**
 	 * Linear interpolates between the given SH and this instance by the given alpha factor.
-	 * @param sh - The SH to interpolate with.
-	 * @param alpha - The alpha factor.
+	 * @param sh The SH to interpolate with.
+	 * @param alph A The alpha factor.
 	 */
 	lerp(sh: SphericalHarmonics3, alpha: number): SphericalHarmonics3;
 
 	/**
-	 * @param sh - The SH to compare with.
+	 * @param sh The SH to compare with.
 	 * @returns Returns true if the given SH and this instance have equal coefficients.
 	 */
 	equals(sh: SphericalHarmonics3): boolean;
 
 	/**
 	 * Copies the given SH to this instance.
-	 * @param sh - The SH to copy.
+	 * @param sh The SH to copy.
 	 */
 	copy(sh: SphericalHarmonics3): SphericalHarmonics3;
 
 	/**
-	 * @returns Returns a new instance of [name] with equal coefficients.
+	 * @returns Returns a new instance of SphericalHarmonics3 with equal coefficients.
 	 */
 	clone(): this;
 
 	/**
 	 * Sets the coefficients of this instance from the given array.
-	 * @param array - The array holding the numbers of the SH coefficients.
-	 * @param offset - The array offset.
+	 * @param array The array holding the numbers of the SH coefficients.
+	 * @param offset The array offset.
 	 */
 	fromArray(array: number[] | ArrayLike<number>, offset?: number): this;
 
 	/**
-	 * @param array - The target array.
-	 * @param offset - The array offset.
+	 * @param array The target array.
+	 * @param offset The array offset.
 	 * @returns Returns an array with the coefficients, or copies them into the provided array. The coefficients are represented as numbers.
 	 */
 	toArray(array?: number[], offset?: number): number[];
@@ -2809,23 +2662,23 @@ export interface SphericalHarmonics3 {
 	toArray(array: ArrayLike<number>, offset?: number): ArrayLike<number>;
 
 	/**
-	 * @param normal - The normal vector (assumed to be unit length).
-	 * @param target - The result vector.
+	 * @param normal The normal vector (assumed to be unit length).
+	 * @param target The result vector.
 	 * @returns Returns the radiance in the direction of the given normal.
 	 */
 	getAt(normal: Vector3, target: Vector3): Vector3;
 
 	/**
-	 * @param normal - The normal vector (assumed to be unit length).
-	 * @param target - The result vector.
+	 * @param normal The normal vector (assumed to be unit length).
+	 * @param target The result vector.
 	 * @returns Returns the irradiance (radiance convolved with cosine lobe) in the direction of the given normal.
 	 */
 	getIrradianceAt(normal: Vector3, target: Vector3): Vector3;
 
 	/**
 	 * Computes the SH basis for the given normal vector.
-	 * @param normal - The normal vector (assumed to be unit length).
-	 * @param shBasis - The resulting SH basis.
+	 * @param normal The normal vector (assumed to be unit length).
+	 * @param shBasis The resulting SH basis.
 	 * @static
 	 */
 	getBasisAt(normal: Vector3, shBasis: number[]): void;
@@ -2837,9 +2690,9 @@ export interface SphericalHarmonics3 {
 export interface Triangle {
 	/**
 	 * Creates a new Triangle.
-	 * @param a - the first corner of the triangle. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
-	 * @param b - the second corner of the triangle. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
-	 * @param c - the final corner of the triangle. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
+	 * @param a The first corner of the triangle. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
+	 * @param b The second corner of the triangle. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
+	 * @param c The final corner of the triangle. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0).
 	 */
 	new (a?: Vector3, b?: Vector3, c?: Vector3): this;
 
@@ -2856,7 +2709,7 @@ export interface Triangle {
 	b: Vector3;
 
 	/**
-	 * the final corner of the triangle. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0)
+	 * The final corner of the triangle. Default is a [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) at (0, 0, 0)
 	 * @default new THREE.Vector3()
 	 */
 	c: Vector3;
@@ -2868,18 +2721,18 @@ export interface Triangle {
 	set(a: Vector3, b: Vector3, c: Vector3): Triangle;
 
 	/**
-	 * points - [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) of [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)s
-	 * i0 - [Integer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) index
-	 * i1 - [Integer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) index
-	 * i2 - [Integer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) index Sets the triangle's vectors to the vectors in the array.
+	 * @param points  Array of [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)s
+	 * @param i0 Integer index
+	 * @param i1 Integer index
+	 * @param i2 Integer index Sets the triangle's vectors to the vectors in the array.
 	 */
 	setFromPointsAndIndices(points: Vector3[], i0: number, i1: number, i2: number): this;
 
 	/**
-	 * attribute - [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute) of vertex data
-	 * i0 - [Integer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) index
-	 * i1 - [Integer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) index
-	 * i2 - [Integer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer) index Sets the triangle's vertices from the buffer attribute vertex data.
+	 * @param attribute BufferAttribute of vertex data
+	 * @param i0 Integer index
+	 * @param i1 Integer index
+	 * @param i2 Integer index Sets the triangle's vertices from the buffer attribute vertex data.
 	 */
 	setFromAttributeAndIndices(
 		attribute: BufferAttribute | InterleavedBufferAttribute,
@@ -2905,26 +2758,26 @@ export interface Triangle {
 
 	/**
 	 * Calculate the midpoint of the triangle.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	getMidpoint(target: Vector3): Vector3;
 
 	/**
 	 * Calculate the [normal vector](https://en.wikipedia.org/wiki/Normal_(geometry)) of the triangle.
-	 * @param target - the result will be copied into this Vector3.
+	 * @param target The result will be copied into this Vector3.
 	 */
 	getNormal(target: Vector3): Vector3;
 
 	/**
 	 * Calculate a [plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) based on the triangle. .
-	 * @param target - the result will be copied into this Plane.
+	 * @param target The result will be copied into this Plane.
 	 */
 	getPlane(target: Plane): Plane;
 
 	/**
 	 * [Picture of barycentric coordinates](http://commons.wikimedia.org/wiki/File:Barycentric_coordinates_1.png)
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)
-	 * @param target - the result will be copied into this Vector3.
+	 * @param point Vector3
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Return a [barycentric coordinate](https://en.wikipedia.org/wiki/Barycentric_coordinate_system) from the given vector.
 	 */
 	getBarycoord(point: Vector3, target: Vector3): Vector3;
@@ -2949,7 +2802,7 @@ export interface Triangle {
 
 	/**
 	 * Determines whether or not this triangle intersects [box](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3).
-	 * @param box - Box to check for intersection against.
+	 * @param box Box to check for intersection against.
 	 */
 	intersectsBox(box: Box3): boolean;
 
@@ -2961,8 +2814,8 @@ export interface Triangle {
 	isFrontFacing(direction: Vector3): boolean;
 
 	/**
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)
-	 * @param target - the result will be copied into this Vector3.
+	 * @param point Vector3
+	 * @param target The result will be copied into this Vector3.
 	 * @returns Returns the closest point on the triangle to [point](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
 	 */
 	closestPointToPoint(point: Vector3, target: Vector3): Vector3;
@@ -2994,7 +2847,7 @@ export interface Triangle {
 	getBarycoord(point: Vector3, a: Vector3, b: Vector3, c: Vector3, target: Vector3): Vector3;
 
 	/**
-	 * @param point - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to check.
+	 * @param point Vector3 to check.
 	 * @returns Returns true if the passed point, when projected onto the plane of the triangle, lies within the triangle.
 	 */
 	containsPoint(point: Vector3, a: Vector3, b: Vector3, c: Vector3): boolean;
@@ -3038,9 +2891,9 @@ export type Vector2Tuple = [number, number];
 /**
  * ( interface Vector<T> )
  *
- * Abstract interface of {@link https://github.com/mrdoob/three.js/blob/master/src/math/Vector2.js|Vector2},
- * {@link https://github.com/mrdoob/three.js/blob/master/src/math/Vector3.js|Vector3}
- * and {@link https://github.com/mrdoob/three.js/blob/master/src/math/Vector4.js|Vector4}.
+ * Abstract interface of [Vector2](https://github.com/mrdoob/three.js/blob/master/src/math/Vector2.js),
+ * [Vector3](https://github.com/mrdoob/three.js/blob/master/src/math/Vector3.js)
+ * and [Vector4](https://github.com/mrdoob/three.js/blob/master/src/math/Vector4.js).
  *
  * Currently the members of Vector is NOT type safe because it accepts different typed vectors.
  *
@@ -3057,15 +2910,15 @@ export interface Vector {
 	new (): this;
 
 	/**
-	 * @param index - 0 or 1.
-	 * @param value - [Float](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
+	 * @param index 0 or 1.
+	 * @param value Float
 	 * If index equals 0 set *.x* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
 	 * If index equals 1 set *.y* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
 	 */
 	setComponent(index: number, value: number): this;
 
 	/**
-	 * @param index - 0 or 1.
+	 * @param index 0 or 1.
 	 * If index equals 0 returns the *.x* value.
 	 * If index equals 1 returns the *.y* value.
 	 */
@@ -3166,14 +3019,14 @@ export interface Vector {
 
 	/**
 	 * Sets this vector to a vector with the same direction as this one, but *.length*
-	 * [l](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+	 * @param l 
 	 */
 	setLength(l: number): this;
 
 	/**
 	 * Linearly interpolates between this vector and [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector), where alpha is the percent distance along the line - alpha = 0 will be this vector, and alpha = 1 will be [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector).
-	 * @param v - [Vector](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector) to interpolate towards.
-	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * @param v Vector to interpolate towards.
+	 * @param alph A interpolation factor, typically in the closed interval [0, 1].
 	 */
 	lerp(v: Vector, alpha: number): this;
 
@@ -3196,7 +3049,9 @@ export interface Vector {
  * Any arbitrary ordered pair of numbers.
  * There are other things a 2D vector can be used to represent, such as momentum vectors, complex numbers and so on,	however these are the most common uses in three.js.
  * Iterating through a Vector2 instance will yield its components (x, y) in the corresponding order.
- * ```javascript
+ *
+ * ### Code Example
+ * ```js
  * const a = new THREE.Vector2( 0, 1 );
  * // no arguments; will be initialised to (0, 0)
  * const b = new THREE.Vector2( );
@@ -3206,8 +3061,8 @@ export interface Vector {
 export interface Vector2 extends Vector {
 	/**
 	 * Creates a new Vector2.
-	 * @param x - the x value of this vector. Default is *0*.
-	 * @param y -  the y value of this vector. Default is *0*.
+	 * @param x The x value of this vector. Default is *0*.
+	 * @param y The y value of this vector. Default is *0*.
 	 */
 	new (x?: number, y?: number): this;
 
@@ -3258,15 +3113,15 @@ export interface Vector2 extends Vector {
 	/**
 	 * If index equals 0 set *.x* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
 	 * If index equals 1 set *.y* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
-	 * @param index - 0 or 1.
-	 * @param value - [Float](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
+	 * @param index 0 or 1.
+	 * @param value Float
 	 */
 	setComponent(index: number, value: number): this;
 
 	/**
 	 * If index equals 0 returns the *.x* value.
 	 * If index equals 1 returns the *.y* value.
-	 * @param index - 0 or 1.
+	 * @param index 0 or 1.
 	 */
 	getComponent(index: number): number;
 
@@ -3353,22 +3208,22 @@ export interface Vector2 extends Vector {
 
 	/**
 	 * If this vector's x or y value is less than the min vector's x or y value, it is replaced by the corresponding value.
-	 * @param min - the minimum x and y values.
-	 * @param max - the maximum x and y values in the desired range If this vector's x or y value is greater than the max vector's x or y value, it is replaced by the corresponding value.
+	 * @param min The minimum x and y values.
+	 * @param max The maximum x and y values in the desired range If this vector's x or y value is greater than the max vector's x or y value, it is replaced by the corresponding value.
 	 */
 	clamp(min: Vector2, max: Vector2): this;
 
 	/**
 	 * If this vector's x or y values are less than the min value, they are replaced by the min value.
-	 * @param min - the minimum value the components will be clamped to
-	 * @param max - the maximum value the components will be clamped to If this vector's x or y values are greater than the max value, they are replaced by the max value.
+	 * @param min The minimum value the components will be clamped to
+	 * @param max The maximum value the components will be clamped to If this vector's x or y values are greater than the max value, they are replaced by the max value.
 	 */
 	clampScalar(min: number, max: number): this;
 
 	/**
 	 * If this vector's length is less than the min value, it is replaced by the min value.
-	 * @param min - the minimum value the length will be clamped to
-	 * @param max - the maximum value the length will be clamped to If this vector's length is greater than the max value, it is replaced by the max value.
+	 * @param min The minimum value the length will be clamped to
+	 * @param max The maximum value the length will be clamped to If this vector's length is greater than the max value, it is replaced by the max value.
 	 */
 	clampLength(min: number, max: number): this;
 
@@ -3420,11 +3275,6 @@ export interface Vector2 extends Vector {
 	length(): number;
 
 	/**
-	 * @deprecated Use {@link Vector2#manhattanLength .manhattanLength()} instead.
-	 */
-	lengthManhattan(): number;
-
-	/**
 	 * Computes the [Manhattan length](http://en.wikipedia.org/wiki/Taxicab_geometry) of this vector.
 	 */
 	manhattanLength(): number;
@@ -3450,11 +3300,6 @@ export interface Vector2 extends Vector {
 	distanceToSquared(v: Vector2): number;
 
 	/**
-	 * @deprecated Use {@link Vector2#manhattanDistanceTo .manhattanDistanceTo()} instead.
-	 */
-	distanceToManhattan(v: Vector2): number;
-
-	/**
 	 * Computes the [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) from this vector to [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
 	 */
 	manhattanDistanceTo(v: Vector2): number;
@@ -3467,16 +3312,16 @@ export interface Vector2 extends Vector {
 
 	/**
 	 * Linearly interpolates between this vector and [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2), where alpha is the percent distance along the line - alpha = 0 will be this vector, and alpha = 1 will be [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
-	 * @param v - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to interpolate towards.
-	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * @param v Vector2 to interpolate towards.
+	 * @param alph A interpolation factor, typically in the closed interval [0, 1].
 	 */
 	lerp(v: Vector2, alpha: number): this;
 
 	/**
 	 * Sets this vector to be the vector linearly interpolated between [v1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) and [v2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) where alpha is the percent distance along the line connecting the two vectors - alpha = 0 will be [v1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2), and alpha = 1 will be [v2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
-	 * @param v1 - the starting [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
-	 * @param v2 - [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) to interpolate towards.
-	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * @param v1 The starting [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2).
+	 * @param v2 Vector2 to interpolate towards.
+	 * @param alph A interpolation factor, typically in the closed interval [0, 1].
 	 */
 	lerpVectors(v1: Vector2, v2: Vector2, alpha: number): this;
 
@@ -3486,23 +3331,23 @@ export interface Vector2 extends Vector {
 	equals(v: Vector2): boolean;
 
 	/**
-	 * @param array - array to store this vector to. If this is not provided, a new array will be created.
-	 * @param offset - optional offset into the array.
+	 * @param array array to store this vector to. If this is not provided, a new array will be created.
+	 * @param offset optional offset into the array.
 	 * @returns Returns an array [x, y], or copies x and y into the provided [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array).
 	 */
 	fromArray(array: number[] | ArrayLike<number>, offset?: number): this;
 
 	/**
 	 * Sets this vector's *.x* and *.y* values from the [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
-	 * @param attribute - the source attribute.
-	 * @param index - index in the attribute.
+	 * @param attribute The source attribute.
+	 * @param index index in the attribute.
 	 */
 	fromBufferAttribute(attribute: BufferAttribute, index: number): this;
 
 	/**
 	 * Rotates this vector around [center](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) by [angle](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float) radians.
-	 * @param center - the point around which to rotate.
-	 * @param angle - the angle to rotate, in radians.
+	 * @param center The point around which to rotate.
+	 * @param angle The angle to rotate, in radians.
 	 */
 	rotateAround(center: Vector2, angle: number): this;
 
@@ -3523,7 +3368,8 @@ export type Vector3Tuple = [number, number, number];
  * There are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.
  * Iterating through a Vector3 instance will yield its components (x, y, z) in the corresponding order.
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const a = new THREE.Vector3( 0, 1, 0 );
  * // no arguments; will be initialised to (0, 0, 0)
  * const b = new THREE.Vector3( );
@@ -3532,9 +3378,9 @@ export type Vector3Tuple = [number, number, number];
  */
 export interface Vector3 extends Vector {
 	/**
-	 * @param x - the x value of this vector. Default is *0*.
-	 * @param y -  the y value of this vector. Default is *0*.
-	 * @param z - the z value of this vector. Default is *0*.
+	 * @param x The x value of this vector. Default is *0*.
+	 * @param y The y value of this vector. Default is *0*.
+	 * @param z The z value of this vector. Default is *0*.
 	 * Creates a new Vector3.
 	 */
 	new (x?: number, y?: number, z?: number): this;
@@ -3588,8 +3434,8 @@ export interface Vector3 extends Vector {
 	 * If index equals 0 set *.x* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
 	 * If index equals 1 set *.y* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
 	 * If index equals 2 set *.z* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
-	 * @param index - 0, 1 or 2.
-	 * @param value - [Float](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
+	 * @param index 0, 1 or 2.
+	 * @param value Float
 	 */
 	setComponent(index: number, value: number): this;
 
@@ -3597,7 +3443,7 @@ export interface Vector3 extends Vector {
 	 * If index equals 0 returns the *.x* value.
 	 * If index equals 1 returns the *.y* value.
 	 * If index equals 2 returns the *.z* value.
-	 * @param index - 0, 1 or 2.
+	 * @param index 0, 1 or 2.
 	 */
 	getComponent(index: number): number;
 
@@ -3668,8 +3514,8 @@ export interface Vector3 extends Vector {
 
 	/**
 	 * Applies a rotation specified by an axis and an angle to this vector.
-	 * @param axis - A normalized [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param angle - An angle in radians.
+	 * @param axis A normalized [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
+	 * @param angle An angle in radians.
 	 */
 	applyAxisAngle(axis: Vector3, angle: number): this;
 
@@ -3695,13 +3541,13 @@ export interface Vector3 extends Vector {
 
 	/**
 	 * Projects this vector from world space into the camera's normalized device coordinate (NDC) space.
-	 * @param camera - camera to use in the projection.
+	 * @param camer A camera to use in the projection.
 	 */
 	project(camera: Camera): this;
 
 	/**
 	 * Projects this vector from the camera's normalized device coordinate (NDC) space into world space.
-	 * @param camera - camera to use in the projection.
+	 * @param camer A camera to use in the projection.
 	 */
 	unproject(camera: Camera): this;
 
@@ -3733,22 +3579,22 @@ export interface Vector3 extends Vector {
 
 	/**
 	 * If this vector's x, y or z value is less than the min vector's x, y or z value, it is replaced by the corresponding value.
-	 * @param min - the minimum *.x*, *.y* and *.z* values.
-	 * @param max - the maximum *.x*, *.y* and *.z* values in the desired range If this vector's x, y or z value is greater than the max vector's x, y or z value, it is replaced by the corresponding value.
+	 * @param min The minimum *.x*, *.y* and *.z* values.
+	 * @param max The maximum *.x*, *.y* and *.z* values in the desired range If this vector's x, y or z value is greater than the max vector's x, y or z value, it is replaced by the corresponding value.
 	 */
 	clamp(min: Vector3, max: Vector3): this;
 
 	/**
 	 * If this vector's x, y or z values are less than the min value, they are replaced by the min value.
-	 * @param min - the minimum value the components will be clamped to
-	 * @param max - the maximum value the components will be clamped to If this vector's x, y or z values are greater than the max value, they are replaced by the max value.
+	 * @param min The minimum value the components will be clamped to
+	 * @param max The maximum value the components will be clamped to If this vector's x, y or z values are greater than the max value, they are replaced by the max value.
 	 */
 	clampScalar(min: number, max: number): this;
 
 	/**
 	 * If this vector's length is less than the min value, the vector will be scaled up so its length is the min value.
-	 * @param min - the minimum value the length will be clamped to
-	 * @param max - the maximum value the length will be clamped to If this vector's length is greater than the max value, the vector will be scaled down so its length is the max value.
+	 * @param min The minimum value the length will be clamped to
+	 * @param max The maximum value the length will be clamped to If this vector's length is greater than the max value, the vector will be scaled down so its length is the max value.
 	 */
 	clampLength(min: number, max: number): this;
 
@@ -3794,14 +3640,6 @@ export interface Vector3 extends Vector {
 	length(): number;
 
 	/**
-	 * Computes Manhattan length of this vector.
-	 * http://en.wikipedia.org/wiki/Taxicab_geometry
-	 *
-	 * @deprecated Use {@link Vector3#manhattanLength .manhattanLength()} instead.
-	 */
-	lengthManhattan(): number;
-
-	/**
 	 * Computes the [Manhattan length](http://en.wikipedia.org/wiki/Taxicab_geometry) of this vector.
 	 */
 	manhattanLength(): number;
@@ -3818,22 +3656,22 @@ export interface Vector3 extends Vector {
 
 	/**
 	 * Set this vector to a vector with the same direction as this one, but *.length*
-	 * [l](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
+	 * @param l 
 	 */
 	setLength(l: number): this;
 
 	/**
 	 * Linearly interpolate between this vector and [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3), where alpha is the percent distance along the line - alpha = 0 will be this vector, and alpha = 1 will be [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param v - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to interpolate towards.
-	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * @param v Vector3 to interpolate towards.
+	 * @param alph A interpolation factor, typically in the closed interval [0, 1].
 	 */
 	lerp(v: Vector3, alpha: number): this;
 
 	/**
 	 * Sets this vector to be the vector linearly interpolated between [v1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) and [v2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) where alpha is the percent distance along the line connecting the two vectors - alpha = 0 will be [v1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3), and alpha = 1 will be [v2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param v1 - the starting [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
-	 * @param v2 - [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) to interpolate towards.
-	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * @param v1 The starting [Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3).
+	 * @param v2 Vector3 to interpolate towards.
+	 * @param alph A interpolation factor, typically in the closed interval [0, 1].
 	 */
 	lerpVectors(v1: Vector3, v2: Vector3, alpha: number): this;
 
@@ -3854,12 +3692,12 @@ export interface Vector3 extends Vector {
 
 	/**
 	 * [Projects](https://en.wikipedia.org/wiki/Vector_projection) this vector onto a plane by subtracting this vector projected onto the plane's normal from this vector.
-	 * @param planeNormal - A vector representing a plane normal.
+	 * @param planeNormal A vector representing a plane normal.
 	 */
 	projectOnPlane(planeNormal: Vector3): this;
 
 	/**
-	 * @param normal - the normal to the reflecting plane Reflect this vector off of plane orthogonal to [normal](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3). Normal is assumed to have unit length.
+	 * @param normal The normal to the reflecting plane Reflect this vector off of plane orthogonal to [normal](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3). Normal is assumed to have unit length.
 	 */
 	reflect(vector: Vector3): this;
 
@@ -3877,11 +3715,6 @@ export interface Vector3 extends Vector {
 	 * Computes the squared distance from this vector to [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3). If you are just comparing the distance with another distance, you should compare the distance squared instead as it is slightly more efficient to calculate.
 	 */
 	distanceToSquared(v: Vector3): number;
-
-	/**
-	 * @deprecated Use {@link Vector3#manhattanDistanceTo .manhattanDistanceTo()} instead.
-	 */
-	distanceToManhattan(v: Vector3): number;
 
 	/**
 	 * Sets this vector from the spherical coordinates [s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Spherical).
@@ -3930,22 +3763,22 @@ export interface Vector3 extends Vector {
 
 	/**
 	 * Sets this vector's *.x* value to be array[ offset + 0 ], *.y* value to be array[ offset + 1 ] and *.z* value to be array[ offset + 2 ].
-	 * @param array - the source array.
-	 * @param offset - ( optional) offset into the array. Default is 0.
+	 * @param array The source array.
+	 * @param offset ( optional) offset into the array. Default is 0.
 	 */
 	fromArray(array: number[] | ArrayLike<number>, offset?: number): this;
 
 	/**
-	 * @param array - array to store this vector to. If this is not provided a new array will be created.
-	 * @param offset - optional offset into the array.
+	 * @param array array to store this vector to. If this is not provided a new array will be created.
+	 * @param offset optional offset into the array.
 	 * @returns Returns an array [x, y, z], or copies x, y and z into the provided [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array).
 	 */
 	toArray(array?: number[] | ArrayLike<number>, offset?: number): number[];
 
 	/**
 	 * Sets this vector's *.x*, *.y* and *.z* values from the [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
-	 * @param attribute - the source attribute.
-	 * @param index - index in the attribute.
+	 * @param attribute The source attribute.
+	 * @param index index in the attribute.
 	 */
 	fromBufferAttribute(attribute: BufferAttribute | InterleavedBufferAttribute, index: number): this;
 
@@ -3971,7 +3804,8 @@ export type Vector4Tuple = [number, number, number, number];
  * There are other things a 4D vector can be used to represent, however these are the most common uses in three.js.
  * Iterating through a Vector4 instance will yield its components (x, y, z, w) in the corresponding order.
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const a = new THREE.Vector4( 0, 1, 0, 0 );
  * // no arguments; will be initialised to (0, 0, 0, 1)
  * const b = new THREE.Vector4( );
@@ -3981,10 +3815,10 @@ export type Vector4Tuple = [number, number, number, number];
 export interface Vector4 extends Vector {
 	/**
 	 * Creates a new Vector4.
-	 * @param x - the x value of this vector. Default is *0*.
-	 * @param y -  the y value of this vector. Default is *0*.
-	 * @param z - the z value of this vector. Default is *0*.
-	 * @param w - the w value of this vector. Default is *1*.
+	 * @param x The x value of this vector. Default is *0*.
+	 * @param y The y value of this vector. Default is *0*.
+	 * @param z The z value of this vector. Default is *0*.
+	 * @param w The w value of this vector. Default is *1*.
 	 */
 	new (x?: number, y?: number, z?: number, w?: number): this;
 
@@ -4059,8 +3893,8 @@ export interface Vector4 extends Vector {
 	 * If index equals 1 set *.y* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
 	 * If index equals 2 set *.z* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
 	 * If index equals 3 set *.w* to [value](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float).
-	 * @param index - 0, 1 or 2, 3.
-	 * @param value - [Float](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float)
+	 * @param index 0, 1 or 2, 3.
+	 * @param value Float
 	 */
 	setComponent(index: number, value: number): this;
 
@@ -4069,7 +3903,7 @@ export interface Vector4 extends Vector {
 	 * If index equals 1 returns the *.y* value.
 	 * If index equals 2 returns the *.z* value.
 	 * If index equals 3 returns the *.w* value.
-	 * @param index - 0, 1, 2 or 3.
+	 * @param index 0, 1, 2 or 3.
 	 */
 	getComponent(index: number): number;
 
@@ -4141,13 +3975,13 @@ export interface Vector4 extends Vector {
 
 	/**
 	 * Sets the *.x*, *.y* and *.z* components of this vector to the quaternion's axis and *.w* to the angle.
-	 * @param q - a normalized [Quaterion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaterion)
+	 * @param q A normalized [Quaterion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaterion)
 	 */
 	setAxisAngleFromQuaternion(q: Quaternion): this;
 
 	/**
 	 * Sets the *.x*, *.y* and *.z* to the axis of rotation and *.w* to the angle.
-	 * @param m - (https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) - a [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper left 3x3 matrix is a pure rotation matrix.
+	 * @param m (https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) - a [Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) of which the upper left 3x3 matrix is a pure rotation matrix.
 	 */
 	setAxisAngleFromRotationMatrix(m: Matrix4): this;
 
@@ -4163,22 +3997,22 @@ export interface Vector4 extends Vector {
 
 	/**
 	 * If this vector's x, y, z or w value is less than the min vector's x, y, z or w value, it is replaced by the corresponding value.
-	 * @param min - the minimum *.x*, *.y*, *.z* and *.w* values.
-	 * @param max - the maximum *.x*, *.y*, *.z* and *.w* values in the desired range If this vector's x, y, z or w value is greater than the max vector's x, y, z or w value, it is replaced by the corresponding value.
+	 * @param min The minimum *.x*, *.y*, *.z* and *.w* values.
+	 * @param max The maximum *.x*, *.y*, *.z* and *.w* values in the desired range If this vector's x, y, z or w value is greater than the max vector's x, y, z or w value, it is replaced by the corresponding value.
 	 */
 	clamp(min: Vector4, max: Vector4): this;
 
 	/**
 	 * If this vector's length is less than the min value, it is replaced by the min value.
-	 * @param min - the minimum value the length will be clamped to
-	 * @param max - the maximum value the length will be clamped to If this vector's length is greater than the max value, it is replaced by the max value.
+	 * @param min The minimum value the length will be clamped to
+	 * @param max The maximum value the length will be clamped to If this vector's length is greater than the max value, it is replaced by the max value.
 	 */
 	clampLength(min: number, max: number): this;
 
 	/**
 	 * If this vector's x, y, z or w values are less than the min value, they are replaced by the min value.
-	 * @param min - the minimum value the components will be clamped to
-	 * @param max - the maximum value the components will be clamped to If this vector's x, y, z or w values are greater than the max value, they are replaced by the max value.
+	 * @param min The minimum value the components will be clamped to
+	 * @param max The maximum value the components will be clamped to If this vector's x, y, z or w values are greater than the max value, they are replaced by the max value.
 	 */
 	clampScalar(min: number, max: number): this;
 
@@ -4240,16 +4074,16 @@ export interface Vector4 extends Vector {
 
 	/**
 	 * Linearly interpolates between this vector and [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4), where alpha is the percent distance along the line - alpha = 0 will be this vector, and alpha = 1 will be [v](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
-	 * @param v - [Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) to interpolate towards.
-	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * @param v Vector4 to interpolate towards.
+	 * @param alph A interpolation factor, typically in the closed interval [0, 1].
 	 */
 	lerp(v: Vector4, alpha: number): this;
 
 	/**
 	 * Sets this vector to be the vector linearly interpolated between [v1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) and [v2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) where alpha is the percent distance along the line connecting the two vectors - alpha = 0 will be [v1](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4), and alpha = 1 will be [v2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
-	 * @param v1 - the starting [Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
-	 * @param v2 - [Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) to interpolate towards.
-	 * @param alpha - interpolation factor, typically in the closed interval [0, 1].
+	 * @param v1 The starting [Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4).
+	 * @param v2 Vector4 to interpolate towards.
+	 * @param alph A interpolation factor, typically in the closed interval [0, 1].
 	 */
 	lerpVectors(v1: Vector4, v2: Vector4, alpha: number): this;
 
@@ -4260,22 +4094,22 @@ export interface Vector4 extends Vector {
 
 	/**
 	 * Sets this vector's *.x* value to be array[ offset + 0 ], *.y* value to be array[ offset + 1 ] *.z* value to be array[ offset + 2 ] and *.w* value to be array[ offset + 3 ].
-	 * @param array - the source array.
-	 * @param offset - offset into the array. Default is 0.
+	 * @param array The source array.
+	 * @param offset offset into the array. Default is 0.
 	 */
 	fromArray(array: number[], offset?: number): this;
 
 	/**
-	 * @param array - array to store this vector to. If this is not provided, a new array will be created.
-	 * @param offset - optional offset into the array.
+	 * @param array array to store this vector to. If this is not provided, a new array will be created.
+	 * @param offset optional offset into the array.
 	 * @returns Returns an array [x, y, z, w], or copies x, y, z and w into the provided [array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array).
 	 */
 	toArray(array?: number[], offset?: number): number[];
 
 	/**
 	 * Sets this vector's *.x*, *.y*, *.z* and *.w* values from the [attribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferAttribute).
-	 * @param attribute - the source attribute.
-	 * @param index - index in the attribute.
+	 * @param attribute The source attribute.
+	 * @param index index in the attribute.
 	 */
 	fromBufferAttribute(attribute: BufferAttribute, index: number): this;
 
@@ -4288,7 +4122,8 @@ export interface Vector4 extends Vector {
 /**
  * Cubic interpolant
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const interpolant = new THREE.CubicInterpolant(
  * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );
  * interpolant.evaluate( 0.5 );
@@ -4296,10 +4131,10 @@ export interface Vector4 extends Vector {
  */
 export interface CubicInterpolant extends Interpolant {
 	/**
-	 * @param parameterPositions - array of positions
-	 * @param samplesValues - array of samples
-	 * @param sampleSize - number of samples
-	 * @param [resultBuffer] - buffer to store the interpolation results.
+	 * @param parameterPositions array of positions
+	 * @param samplesValues array of samples
+	 * @param sampleSize number of samples
+	 * @param resultBuffer buffer to store the interpolation results.
 	 */
 	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
 
@@ -4322,7 +4157,8 @@ export interface CubicInterpolant extends Interpolant {
 /**
  * Discrete Interpolant
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const interpolant = new THREE.DiscreteInterpolant(
  * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );
  * interpolant.evaluate( 0.5 );
@@ -4330,10 +4166,10 @@ export interface CubicInterpolant extends Interpolant {
  */
 export interface DiscreteInterpolant extends Interpolant {
 	/**
-	 * @param parameterPositions - array of positions
-	 * @param samplesValues - array of samples
-	 * @param sampleSize - number of samples
-	 * @param [resultBuffer] - buffer to store the interpolation results.
+	 * @param parameterPositions array of positions
+	 * @param samplesValues array of samples
+	 * @param sampleSize number of samples
+	 * @param resultBuffer buffer to store the interpolation results.
 	 */
 	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
 
@@ -4356,7 +4192,8 @@ export interface DiscreteInterpolant extends Interpolant {
 /**
  * Linear interpolant
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const interpolant = new THREE.LinearInterpolant(
  * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );
  * interpolant.evaluate( 0.5 );
@@ -4364,10 +4201,10 @@ export interface DiscreteInterpolant extends Interpolant {
  */
 export interface LinearInterpolant extends Interpolant {
 	/**
-	 * @param parameterPositions - array of positions
-	 * @param samplesValues - array of samples
-	 * @param sampleSize - number of samples
-	 * @param [resultBuffer] - buffer to store the interpolation results.
+	 * @param parameterPositions array of positions
+	 * @param samplesValues array of samples
+	 * @param sampleSize number of samples
+	 * @param resultBuffer buffer to store the interpolation results.
 	 */
 	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
 
@@ -4390,7 +4227,8 @@ export interface LinearInterpolant extends Interpolant {
 /**
  * Quaternion linear interpolant
  *
- * ```javascript
+ * ### Code Example
+ * ```js
  * const interpolant = new THREE.QuaternionLinearInterpolant(
  * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );
  * interpolant.evaluate( 0.5 );
@@ -4398,10 +4236,10 @@ export interface LinearInterpolant extends Interpolant {
  */
 export interface QuaternionLinearInterpolant extends Interpolant {
 	/**
-	 * @param parameterPositions - array of positions
-	 * @param samplesValues - array of samples
-	 * @param sampleSize - number of samples
-	 * @param [resultBuffer] - buffer to store the interpolation results.
+	 * @param parameterPositions array of positions
+	 * @param samplesValues array of samples
+	 * @param sampleSize number of samples
+	 * @param resultBuffer buffer to store the interpolation results.
 	 */
 	new (parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
 

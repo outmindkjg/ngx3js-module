@@ -16,6 +16,6 @@ export const ColorScreen:IShaderType = {
   }
   `,
 	uniforms: {
-		tDiffuse: { value: null } as any,
+		tDiffuse: { value: null },
 	},
 };

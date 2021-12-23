@@ -2,8 +2,7 @@ import {
 	Component,
 	ContentChildren,
 	ElementRef,
-	EventEmitter,
-	Input,
+	EventEmitter, forwardRef, Input,
 	OnInit,
 	Output,
 	QueryList,
@@ -16,7 +15,6 @@ import { ICssStyle, IHtmlCollection } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxTransformComponent } from '../transform/transform.component';
 
-
 /**
  * The Visual component.
  *
@@ -27,6 +25,12 @@ import { NgxTransformComponent } from '../transform/transform.component';
 	selector: 'ngx3js-visual',
 	templateUrl: './visual.component.html',
 	styleUrls: ['./visual.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxVisualComponent),
+		},
+	],
 })
 export class NgxVisualComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
@@ -154,8 +158,7 @@ export class NgxVisualComponent extends NgxAbstractSubscribeComponent implements
 	/**
 	 * Content children of visual component
 	 */
-	@ContentChildren(NgxVisualComponent)
-	private childrenList: QueryList<NgxVisualComponent>;
+	@ContentChildren(NgxVisualComponent) private childrenList: QueryList<NgxVisualComponent>;
 
 	/**
 	 * Content children of visual component
@@ -165,14 +168,12 @@ export class NgxVisualComponent extends NgxAbstractSubscribeComponent implements
 	/**
 	 * Content children of visual component
 	 */
-	@ContentChildren(NgxTransformComponent)
-	private transformList: QueryList<NgxTransformComponent>;
+	@ContentChildren(NgxTransformComponent) private transformList: QueryList<NgxTransformComponent>;
 
 	/**
 	 * Content children of visual component
 	 */
-	@ContentChildren(NgxBackgroundComponent)
-	private backgroundList: QueryList<NgxBackgroundComponent>;
+	@ContentChildren(NgxBackgroundComponent) private backgroundList: QueryList<NgxBackgroundComponent>;
 
 	/**
 	 * Content children of visual component

@@ -37,33 +37,6 @@ import * as I3JS from '../../types/three/core';
 export type BufferAttribute = I3JS.BufferAttribute;
 export const BufferAttribute: BufferAttribute = O3JS_BufferAttribute as any;
 
-export type Int8Attribute = I3JS.Int8Attribute;
-export const Int8Attribute: Int8Attribute = O3JS_Int8Attribute as any;
-
-export type Uint8Attribute = I3JS.Uint8Attribute;
-export const Uint8Attribute: Uint8Attribute = O3JS_Uint8Attribute as any;
-
-export type Uint8ClampedAttribute = I3JS.Uint8ClampedAttribute;
-export const Uint8ClampedAttribute: Uint8ClampedAttribute = O3JS_Uint8ClampedAttribute as any;
-
-export type Int16Attribute = I3JS.Int16Attribute;
-export const Int16Attribute: Int16Attribute = O3JS_Int16Attribute as any;
-
-export type Uint16Attribute = I3JS.Uint16Attribute;
-export const Uint16Attribute: Uint16Attribute = O3JS_Uint16Attribute as any;
-
-export type Int32Attribute = I3JS.Int32Attribute;
-export const Int32Attribute: Int32Attribute = O3JS_Int32Attribute as any;
-
-export type Uint32Attribute = I3JS.Uint32Attribute;
-export const Uint32Attribute: Uint32Attribute = O3JS_Uint32Attribute as any;
-
-export type Float32Attribute = I3JS.Float32Attribute;
-export const Float32Attribute: Float32Attribute = O3JS_Float32Attribute as any;
-
-export type Float64Attribute = I3JS.Float64Attribute;
-export const Float64Attribute: Float64Attribute = O3JS_Float64Attribute as any;
-
 export type Int8BufferAttribute = I3JS.Int8BufferAttribute;
 export const Int8BufferAttribute: Int8BufferAttribute = O3JS_Int8BufferAttribute as any;
 

@@ -31,11 +31,11 @@ import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 		{
 			provide: NgxAbstractThreeDirective,
 			multi: true,
-			useExisting: forwardRef(() => RotateDirective),
+			useExisting: forwardRef(() => NgxRotateDirective),
 		},
 	],
 })
-export class RotateDirective extends NgxAbstractObject3dDirective implements OnChanges {
+export class NgxRotateDirective extends NgxAbstractObject3dDirective implements OnChanges {
 	/**
 	 * Input  of rotate directive
 	 */

@@ -436,12 +436,9 @@ export interface IFCManager {
 
 	/**
 	 * Sets the relative path of web-ifc.wasm file in the project.
-	 * Beware: you **must** serve this file in your page; this means
-	 * that you have to copy this files from *node_modules/web-ifc*
-	 * to your deployment directory.
+	 * Beware: you **must** serve this file in your page; this means that you have to copy this files from *node_modules/web-ifc* to your deployment directory.
 	 *
-	 * If you don't use this methods,
-	 * IFC.js assumes that you are serving it in the root directory.
+	 * If you don't use this methods, IFC.js assumes that you are serving it in the root directory.
 	 *
 	 * Example if web-ifc.wasm is in dist/wasmDir:
 	 * `ifcLoader.setWasmPath("dist/wasmDir/") : this;`
@@ -506,8 +503,7 @@ export interface IFCManager {
 	getExpressId(geometry: BufferGeometry, faceIndex: number): number | undefined;
 
 	/**
-	 * Returns all items of the specified type. You can import
-	 * the types from *web-ifc*.
+	 * Returns all items of the specified type. You can import the types from *web-ifc*.
 	 *
 	 * Example to get all the standard walls of a project:
 	 * ```js
@@ -529,8 +525,7 @@ export interface IFCManager {
 	getItemProperties(modelID: number, id: number, recursive?: boolean): any;
 
 	/**
-	 * Gets the [property sets](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifckernel/lexical/ifcpropertyset.htm)
-	 * assigned to the given element.
+	 * Gets the [property sets](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifckernel/lexical/ifcpropertyset.htm) assigned to the given element.
 	 * @modelID ID of the IFC model.
 	 * @id Express ID of the element.
 	 * @recursive If true, this gets the native properties of the referenced elements recursively.
@@ -539,8 +534,7 @@ export interface IFCManager {
 
 	/**
 	 * Gets the properties of the type assigned to the element.
-	 * For example, if applied to a wall (IfcWall), this would get back the information
-	 * contained in the IfcWallType assigned to it, if any.
+	 * For example, if applied to a wall (IfcWall), this would get back the information contained in the IfcWallType assigned to it, if any.
 	 * @modelID ID of the IFC model.
 	 * @id Express ID of the element.
 	 * @recursive If true, this gets the native properties of the referenced elements recursively.
@@ -564,12 +558,7 @@ export interface IFCManager {
 
 	/**
 	 * Gets the spatial structure of the project. The
-	 * [spatial structure](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifcproductextension/lexical/ifcspatialstructureelement.htm)
-	 * is the hierarchical structure that organizes every IFC project (all physical items
-	 * are referenced to an element of the spatial structure). It is formed by
-	 * one IfcProject that contains one or more IfcSites, that contain one or more
-	 * IfcBuildings, that contain one or more IfcBuildingStoreys, that contain
-	 * one or more IfcSpaces.
+	 * [spatial structure](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifcproductextension/lexical/ifcspatialstructureelement.htm) is the hierarchical structure that organizes every IFC project (all physical items are referenced to an element of the spatial structure). It is formed by one IfcProject that contains one or more IfcSites, that contain one or more IfcBuildings, that contain one or more IfcBuildingStoreys, that contain one or more IfcSpaces.
 	 * @modelID ID of the IFC model.
 	 */
 	getSpatialStructure(modelID: number): {
@@ -642,173 +631,6 @@ export interface IFCModel extends Mesh {
 	modelID: number;
 	ifcManager: IFCManager | null;
 	setIFCManager(manager: IFCManager): void;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.setWasmPath` instead.
-	 *
-	 * Sets the relative path of web-ifc.wasm file in the project.
-	 * Beware: you **must** serve this file in your page; this means
-	 * that you have to copy this files from *node_modules/web-ifc*
-	 * to your deployment directory.
-	 *
-	 * If you don't use this methods,
-	 * IFC.js assumes that you are serving it in the root directory.
-	 *
-	 * Example if web-ifc.wasm is in dist/wasmDir:
-	 * `ifcLoader.setWasmPath("dist/wasmDir/") : this;`
-	 *
-	 * @path Relative path to web-ifc.wasm.
-	 */
-	setWasmPath(path: string): void;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.close` instead.
-	 *
-	 * Closes the specified model and deletes it from the [scene](https://threejs.org/docs/#api/en/scenes/Scene).
-	 * @scene Scene where the model is (if it's located in a scene).
-	 */
-	close(scene?: Scene): void;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.getExpressId` instead.
-	 *
-	 * Gets the **Express ID** to which the given face belongs.
-	 * This ID uniquely identifies this entity within this IFC file.
-	 * @geometry The geometry of the IFC model.
-	 * @faceIndex The index of the face of a geometry.You can easily get this index using the [Raycaster](https://threejs.org/docs/#api/en/core/Raycaster).
-	 */
-	getExpressId(geometry: BufferGeometry, faceIndex: number): number | undefined;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.getAllItemsOfType` instead.
-	 *
-	 * Returns all items of the specified type. You can import
-	 * the types from *web-ifc*.
-	 *
-	 * Example to get all the standard walls of a project:
-	 * ```js
-	 * import { IFCWALLSTANDARDCASE } from 'web-ifc';
-	 * const walls = ifcLoader.getAllItemsOfType(IFCWALLSTANDARDCASE) : this;
-	 * ```
-	 * @ifcType The type of IFC items to get.
-	 * @verbose If false (default), this only gets IDs. If true, this also gets the native properties of all the fetched items.
-	 */
-	getAllItemsOfType(type: number, verbose: boolean): any[];
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.getItemProperties` instead.
-	 *
-	 * Gets the native properties of the given element.
-	 * @id Express ID of the element.
-	 * @recursive Wether you want to get the information of the referenced elements recursively.
-	 */
-	getItemProperties(id: number, recursive?: boolean): any;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.getPropertySets` instead.
-	 *
-	 * Gets the [property sets](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifckernel/lexical/ifcpropertyset.htm)
-	 * assigned to the given element.
-	 * @id Express ID of the element.
-	 * @recursive If true, this gets the native properties of the referenced elements recursively.
-	 */
-	getPropertySets(id: number, recursive?: boolean): any[];
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.getTypeProperties` instead.
-	 *
-	 * Gets the properties of the type assigned to the element.
-	 * For example, if applied to a wall (IfcWall), this would get back the information
-	 * contained in the IfcWallType assigned to it, if any.
-	 * @id Express ID of the element.
-	 * @recursive If true, this gets the native properties of the referenced elements recursively.
-	 */
-	getTypeProperties(id: number, recursive?: boolean): any[];
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.getIfcType` instead.
-	 *
-	 * Gets the ifc type of the specified item.
-	 * @id Express ID of the element.
-	 */
-	getIfcType(id: number): string;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.getSpatialStructure` instead.
-	 *
-	 * Gets the spatial structure of the project. The
-	 * [spatial structure](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/schema/ifcproductextension/lexical/ifcspatialstructureelement.htm)
-	 * is the hierarchical structure that organizes every IFC project (all physical items
-	 * are referenced to an element of the spatial structure). It is formed by
-	 * one IfcProject that contains one or more IfcSites, that contain one or more
-	 * IfcBuildings, that contain one or more IfcBuildingStoreys, that contain
-	 * one or more IfcSpaces.
-	 */
-	getSpatialStructure(): {
-		expressID: number;
-		type: string;
-		children: never[];
-	};
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.getSubset` instead.
-	 *
-	 * Gets the mesh of the subset with the specified [material](https://threejs.org/docs/#api/en/materials/Material).
-	 * If no material is given, this returns the subset with the original materials.
-	 * @material Material assigned to the subset, if any.
-	 */
-	getSubset(material?: Material): Mesh | null;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.removeSubset` instead.
-	 *
-	 * Removes the specified subset.
-	 * @parent The parent where the subset is (can be any `THREE.Object3D`).
-	 * @material Material assigned to the subset, if any.
-	 */
-	removeSubset(parent?: Object3D, material?: Material): void;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.createSubset` instead.
-	 *
-	 * Creates a new geometric subset.
-	 * @config A configuration object with the following options:
-	 * - **scene**: `THREE.Object3D` where the model is located.
-	 * - **ids**: Express IDs of the items of the model that will conform the subset.
-	 * - **removePrevious**: Wether to remove the previous subset of this model with this material.
-	 * - **material**: (optional) Wether to apply a material to the subset
-	 */
-	createSubset(config: HighlightConfig): void | Mesh;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.hideItems` instead.
-	 *
-	 * Hides the selected items in the specified model
-	 * @ids Express ID of the elements.
-	 */
-	hideItems(ids: number[]): void;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.hideAllItems` instead.
-	 *
-	 * Hides all the items of the specified model
-	 */
-	hideAllItems(): void;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.showItems` instead.
-	 *
-	 * Hides all the items of the specified model
-	 * @ids Express ID of the elements.
-	 */
-	showItems(ids: number[]): void;
-
-	/**
-	 * @deprecated Use `IfcModel.ifcManager.showAllItems` instead.
-	 *
-	 * Shows all the items of the specified model
-	 */
-	showAllItems(): void;
 }
 
 export interface IdAttributeByMaterial {
@@ -1333,8 +1155,7 @@ export interface MaterialCreatorOptions {
 	 */
 	ignoreZeroRGBs?: boolean | undefined;
 	/*
-	 * invertTrProperty: Use values 1 of Tr field for fully opaque. This option is useful for obj
-	 * exported from 3ds MAX, vcglib or meshlab.
+	 * invertTrProperty: Use values 1 of Tr field for fully opaque. This option is useful for obj exported from 3ds MAX, vcglib or meshlab.
 	 * Default: false
 	 */
 	invertTrProperty?: boolean | undefined;

@@ -30,7 +30,7 @@ export const ShaderDemo16: IShaderType = {
 	uniforms: {
 		cameraNear: { value: 0.01 },
 		cameraFar: { value: 50 },
-		tDiffuse: { value: null } as any,
-		tDepth: { value: null } as any,
+		tDiffuse: { value: null },
+		tDepth: { value: null },
 	},
 };

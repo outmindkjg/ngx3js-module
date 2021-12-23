@@ -4,8 +4,7 @@ import {
 	Component,
 	ContentChildren,
 	ElementRef,
-	EventEmitter,
-	HostListener,
+	EventEmitter, forwardRef, HostListener,
 	Input,
 	OnChanges,
 	OnInit,
@@ -63,6 +62,12 @@ import { NgxSceneComponent } from './../scene/scene.component';
 	selector: 'ngx3js-renderer',
 	templateUrl: './renderer.component.html',
 	styleUrls: ['./renderer.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxRendererComponent),
+		},
+	],
 })
 export class NgxRendererComponent
 	extends NgxAbstractSubscribeComponent
@@ -134,11 +139,6 @@ export class NgxRendererComponent
 	 * See the [example:webgl_lights_physical lights / physical] example.
 	 */
 	@Input() public physicallyCorrectLights: boolean = null;
-
-	/**
-	 * Converts this color from gamma space to linear space by taking [Color.r](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color.r), [Color.g](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color.g) and [Color.b](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Color.b) to the power of gammaFactor.
-	 */
-	@Input() public gammaFactor: number = null;
 
 	/**
 	 * Defines shadow map type (unfiltered, percentage close filtering, percentage close filtering with bilinear filtering in shader)
@@ -382,56 +382,47 @@ export class NgxRendererComponent
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxSceneComponent, { descendants: false })
-	private sceneList: QueryList<NgxSceneComponent>;
+	@ContentChildren(NgxSceneComponent, { descendants: false }) private sceneList: QueryList<NgxSceneComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxCameraComponent, { descendants: true })
-	private cameraList: QueryList<NgxCameraComponent>;
+	@ContentChildren(NgxCameraComponent, { descendants: true }) private cameraList: QueryList<NgxCameraComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxEffectComponent, { descendants: true })
-	private effectList: QueryList<NgxEffectComponent>;
+	@ContentChildren(NgxEffectComponent, { descendants: true }) private effectList: QueryList<NgxEffectComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxViewerComponent, { descendants: true })
-	private viewerList: QueryList<NgxViewerComponent>;
+	@ContentChildren(NgxViewerComponent, { descendants: true }) private viewerList: QueryList<NgxViewerComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxListenerComponent, { descendants: true })
-	private listenerList: QueryList<NgxListenerComponent>;
+	@ContentChildren(NgxListenerComponent, { descendants: true }) private listenerList: QueryList<NgxListenerComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxAudioComponent, { descendants: true })
-	private audioList: QueryList<NgxAudioComponent>;
+	@ContentChildren(NgxAudioComponent, { descendants: true }) private audioList: QueryList<NgxAudioComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxAbstractControllerComponent, { descendants: true })
-	private controllerList: QueryList<NgxAbstractControllerComponent>;
+	@ContentChildren(NgxAbstractControllerComponent, { descendants: true }) private controllerList: QueryList<NgxAbstractControllerComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxLookatComponent, { descendants: false })
-	private lookatList: QueryList<NgxLookatComponent>;
+	@ContentChildren(NgxLookatComponent, { descendants: false }) private lookatList: QueryList<NgxLookatComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxControlComponent, { descendants: false })
-	private controlList: QueryList<NgxControlComponent>;
+	@ContentChildren(NgxControlComponent, { descendants: false }) private controlList: QueryList<NgxControlComponent>;
 
 	/**
 	 * Content children of renderer component
@@ -451,14 +442,12 @@ export class NgxRendererComponent
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxSizeComponent, { descendants: true })
-	private sizeList: QueryList<NgxSizeComponent>;
+	@ContentChildren(NgxSizeComponent, { descendants: true }) private sizeList: QueryList<NgxSizeComponent>;
 
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxAbstractThreeDirective, { descendants: true })
-	private threeDirectiveList: QueryList<NgxAbstractThreeDirective>;
+	@ContentChildren(NgxAbstractThreeDirective, { descendants: true }) private threeDirectiveList: QueryList<NgxAbstractThreeDirective>;
 
 	/**
 	 * View child of renderer component
@@ -1386,9 +1375,6 @@ export class NgxRendererComponent
 							}
 							if (NgxThreeUtil.isNotNull(this.physicallyCorrectLights)) {
 								this.renderer.physicallyCorrectLights = this.physicallyCorrectLights;
-							}
-							if (NgxThreeUtil.isNotNull(this.gammaFactor)) {
-								this.renderer.gammaFactor = this.gammaFactor;
 							}
 							if (this.renderer.shadowMap.enabled && NgxThreeUtil.isNotNull(this.shadowMapType)) {
 								this.renderer.shadowMap.type = NgxThreeUtil.getShadowMapTypeSafe(this.shadowMapType, 'pcfsoft');

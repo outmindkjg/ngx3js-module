@@ -35,7 +35,7 @@ export const VideoKinect: IShaderType = {
   }
   `,
 	uniforms: {
-		map: { value: null } as any,
+		map: { value: null },
 		width: { value: 640 },
 		height: { value: 480 },
 		nearClipping: { value: 850 },

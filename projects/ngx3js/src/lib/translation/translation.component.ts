@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { N3JS, I3JS } from '../interface';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { I3JS, N3JS } from '../interface';
 import { IApplyMatrix4 } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
@@ -21,6 +21,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-translation',
 	templateUrl: './translation.component.html',
 	styleUrls: ['./translation.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxTranslationComponent),
+		},
+	],
 })
 export class NgxTranslationComponent
 	extends NgxAbstractSubscribeComponent

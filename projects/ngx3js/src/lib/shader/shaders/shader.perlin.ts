@@ -79,7 +79,7 @@ export const PerlinShader: IShaderType = {
   }  
   `,
 	uniforms: {
-		map: { value: null } as any,
+		map: { value: null },
 		cameraPos: { value: NgxThreeUtil.getVector3Safe(0, 0, 0) },
 		threshold: { value: 0.6 },
 		steps: { value: 200 },

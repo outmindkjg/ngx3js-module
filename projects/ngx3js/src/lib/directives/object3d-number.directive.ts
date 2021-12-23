@@ -36,11 +36,11 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 		{
 			provide: NgxAbstractThreeDirective,
 			multi: true,
-			useExisting: forwardRef(() => NumberDirective),
+			useExisting: forwardRef(() => NgxNumberDirective),
 		},
 	],
 })
-export class NumberDirective
+export class NgxNumberDirective
 	extends NgxAbstractThreeDirective
 	implements OnChanges
 {

@@ -39,8 +39,8 @@
 	 * A callback function that is executed after the Renderer has transferred the attribute array data to the GPU.
 <h3>[property:Object updateRange]</h3>
 	 * Object containing:
-	 * [offset](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): Default is *0*. Position at which to start update.
-	 * [count](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Integer): Default is *-1*, which means don't use update ranges. 
+	 * @param offset - Default is *0*. Position at which to start update.
+	 * @param count - Default is *-1*, which means don't use update ranges. 
 	 * This can be used to only update some components of stored vectors (for example, just the component related to color).
 <h3>[property:Usage usage]</h3>
 	 * Defines the intended usage pattern of the data store for optimization purposes. Corresponds to the *usage* parameter of [WebGLRenderingContext.bufferData](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData)().

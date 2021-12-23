@@ -53,10 +53,10 @@ export class NgxSelectBoxControls {
 		scene: I3JS.Scene,
 		renderer: I3JS.WebGLRenderer
 	) {
-		this.selectionBox = new N3JS.SelectionBox(camera as any, scene as any);
+		this.selectionBox = new N3JS.SelectionBox(camera, scene);
 		this.helper = new N3JS.SelectionHelper(
 			this.selectionBox,
-			renderer as any,
+			renderer,
 			'selectBox'
 		);
 		const docElement = renderer.domElement.parentElement;

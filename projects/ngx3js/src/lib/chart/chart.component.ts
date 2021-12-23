@@ -726,7 +726,7 @@ export class NgxChartComponent extends NgxBaseComponent<any> implements OnChange
 	 * @param mesh
 	 */
 	public setToolTip(mesh: NgxMeshComponent) {
-		this.tooltip = mesh.getMesh() as any;
+		this.tooltip = mesh.getMesh();
 	}
 
 	/**
@@ -845,7 +845,7 @@ export class NgxChartComponent extends NgxBaseComponent<any> implements OnChange
 			});
 		}
 		if (this.tooltip !== null && this.tooltipPosition !== null) {
-			this.tooltip.position.lerp(this.tooltipPosition as any, timer.delta * 3);
+			this.tooltip.position.lerp(this.tooltipPosition, timer.delta * 3);
 		}
 	}
 }

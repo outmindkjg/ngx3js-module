@@ -1,12 +1,12 @@
 import {
 	Component,
 	ContentChildren,
-	ElementRef,
-	Input,
+	ElementRef, forwardRef, Input,
 	OnInit,
 	QueryList,
 	SimpleChanges
 } from '@angular/core';
+import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { ICssStyle } from '../ngx-interface';
 import { NgxAbstractTweenComponent } from '../tween.abstract';
@@ -21,6 +21,12 @@ import { NgxAbstractTweenComponent } from '../tween.abstract';
 	selector: 'ngx3js-html',
 	templateUrl: './html.component.html',
 	styleUrls: ['./html.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxHtmlComponent),
+		},
+	],
 })
 export class NgxHtmlComponent extends NgxAbstractTweenComponent implements OnInit {
 	/**
@@ -82,8 +88,7 @@ export class NgxHtmlComponent extends NgxAbstractTweenComponent implements OnIni
 	/**
 	 * Content children of html component
 	 */
-	@ContentChildren(NgxHtmlComponent, { descendants: false })
-	private childrenList: QueryList<NgxHtmlComponent>;
+	@ContentChildren(NgxHtmlComponent, { descendants: false }) private childrenList: QueryList<NgxHtmlComponent>;
 
 	/**
 	 * Creates an instance of html component.

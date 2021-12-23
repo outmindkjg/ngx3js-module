@@ -278,7 +278,7 @@ export class NgxChartBarComponent extends NgxAbstractChartComponent implements O
 				opacity: NgxThreeUtil.getTypeSafe(options.opacity, 1),
 				side: NgxThreeUtil.getSideSafe('double'),
 				transparent: true,
-			} as any);
+			});
 			const wallMesh = new N3JS.Mesh(this._geometry, this._material);
 			wallMesh.name = 'wall';
 			wallMesh.receiveShadow = true;
@@ -293,7 +293,7 @@ export class NgxChartBarComponent extends NgxAbstractChartComponent implements O
 			this._materialBorder = new N3JS.LineBasicMaterial({
 				color: NgxThreeUtil.getColorSafe(options.borderColor, 0x00ff00),
 				transparent: true,
-			} as any);
+			});
 			const borderMesh = new N3JS.LineSegments(
 				this._geometryBorder,
 				this._materialBorder
@@ -324,7 +324,7 @@ export class NgxChartBarComponent extends NgxAbstractChartComponent implements O
 					true
 				);
 			});
-			this.setChart(this._line as any);
+			this.setChart(this._line);
 		}
 		return this._line as T;
 	}

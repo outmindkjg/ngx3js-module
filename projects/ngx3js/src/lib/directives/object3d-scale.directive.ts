@@ -37,11 +37,11 @@ import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 		{
 			provide: NgxAbstractThreeDirective,
 			multi: true,
-			useExisting: forwardRef(() => ScaleDirective),
+			useExisting: forwardRef(() => NgxScaleDirective),
 		},
 	],
 })
-export class ScaleDirective
+export class NgxScaleDirective
 	extends NgxAbstractObject3dDirective
 	implements OnChanges
 {

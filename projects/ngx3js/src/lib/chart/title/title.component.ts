@@ -252,9 +252,9 @@ export class NgxChartTitleComponent
 				transparent: true,
 			});
 			const width = (height * textWidth) / textHeight;
-			this._geometry = new N3JS.PlaneGeometry(width, height) as any;
+			this._geometry = new N3JS.PlaneGeometry(width, height);
 			this._title = new N3JS.Mesh(this._geometry, this._material);
-			this.setChart(this._title as any);
+			this.setChart(this._title);
 		}
 		return this._title as T;
 	}

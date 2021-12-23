@@ -29,6 +29,6 @@ export const AttributeSizeColor1: IShaderType = {
 	uniforms: {
 		amplitude: { value: 1.0 },
 		color: { value: NgxThreeUtil.getColorSafe(0xffffff) },
-		pointTexture: { value: null } as any,
+		pointTexture: { value: null },
 	},
 };

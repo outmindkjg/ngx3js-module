@@ -235,7 +235,7 @@ export class NgxChartAxesComponent
 					this._geometryWall = new N3JS.CircleGeometry(
 						radius,
 						radiusSegments
-					) as any;
+					);
 					this._geometryWall.translate(0, 0, -depth / 2);
 					for (let i = 1; i < radiusSegments + 1; i++) {
 						borderIndex.push(i);
@@ -243,32 +243,32 @@ export class NgxChartAxesComponent
 					break;
 				case 'front':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new N3JS.PlaneGeometry(width, height) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(width, height);
 					this._geometryWall.rotateY(Math.PI);
 					this._geometryWall.translate(0, 0, depth / 2);
 					break;
 				case 'back':
 				case 'z':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new N3JS.PlaneGeometry(width, height) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(width, height);
 					this._geometryWall.translate(0, 0, -depth / 2);
 					break;
 				case 'right':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new N3JS.PlaneGeometry(depth, height) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(depth, height);
 					this._geometryWall.rotateY(-Math.PI / 2);
 					this._geometryWall.translate(width / 2, 0, 0);
 					break;
 				case 'left':
 				case 'y':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new N3JS.PlaneGeometry(depth, height) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(depth, height);
 					this._geometryWall.rotateY(Math.PI / 2);
 					this._geometryWall.translate(-width / 2, 0, 0);
 					break;
 				case 'top':
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new N3JS.PlaneGeometry(width, depth) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(width, depth);
 					this._geometryWall.rotateX(Math.PI / 2);
 					this._geometryWall.translate(0, height / 2, 0);
 					break;
@@ -276,7 +276,7 @@ export class NgxChartAxesComponent
 				case 'x':
 				default:
 					borderIndex.push(0, 1, 3, 2);
-					this._geometryWall = new N3JS.PlaneGeometry(width, depth) as any;
+					this._geometryWall = new N3JS.PlaneGeometry(width, depth);
 					this._geometryWall.rotateX(-Math.PI / 2);
 					this._geometryWall.translate(0, -height / 2, 0);
 					break;
@@ -287,7 +287,7 @@ export class NgxChartAxesComponent
 				opacity: NgxThreeUtil.getTypeSafe(options.opacity, 1),
 				side: NgxThreeUtil.getSideSafe(this.side, 'front'),
 				transparent: true,
-			} as any);
+			});
 			const wallMesh = new N3JS.Mesh(this._geometryWall, this._materialWall);
 			wallMesh.name = 'wall';
 			wallMesh.receiveShadow = true;
@@ -320,7 +320,7 @@ export class NgxChartAxesComponent
 				color: NgxThreeUtil.getColorSafe(options.borderColor, 0x909090),
 				linewidth: 1,
 				opacity: NgxThreeUtil.getTypeSafe(options.opacity, 1),
-			} as any);
+			});
 			const borderMesh = new N3JS.LineSegments(
 				this._geometryWallBorder,
 				this._materialWallBorder
@@ -444,7 +444,7 @@ export class NgxChartAxesComponent
 						0xf0f0f0
 					),
 					linewidth: 1,
-				} as any);
+				});
 				const gridXMesh = new N3JS.LineSegments(
 					this._geometryGridX,
 					this._materialGridX
@@ -568,7 +568,7 @@ export class NgxChartAxesComponent
 						0xf0f0f0
 					),
 					linewidth: 1,
-				} as any);
+				});
 				const gridYMesh = new N3JS.LineSegments(
 					this._geometryGridY,
 					this._materialGridY
@@ -576,7 +576,7 @@ export class NgxChartAxesComponent
 				gridYMesh.name = 'gridy';
 				this._axes.add(gridYMesh);
 			}
-			this.setChart(this._axes as any);
+			this.setChart(this._axes);
 		}
 		return this._axes as T;
 	}

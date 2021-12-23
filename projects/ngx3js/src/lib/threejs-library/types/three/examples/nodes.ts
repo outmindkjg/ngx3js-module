@@ -384,7 +384,7 @@ export interface NodeFrame {
     update(delta: number): this;
     setRenderer(renderer: WebGLRenderer): this;
     setRenderTexture(renderTexture: Texture): this;
-    updateNode(node: NodeNode): this;
+    updateNode(node: NodeNode | NodeMaterial): this;
 }
 
 export interface NodeLibKeyword {

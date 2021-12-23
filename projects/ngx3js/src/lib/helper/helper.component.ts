@@ -665,7 +665,7 @@ export class NgxHelperComponent
 						csm = new N3JS.CsmControls({ parent: new N3JS.Scene() });
 					}
 					const csmHelper = new N3JS.CSMHelper(csm);
-					basemesh = csmHelper as any;
+					basemesh = csmHelper;
 					break;
 				case 'arrowhelper':
 				case 'arrow':
@@ -717,7 +717,7 @@ export class NgxHelperComponent
 					let audioTarget = this.getTarget(this.parent);
 					if (audioTarget instanceof N3JS.PositionalAudio) {
 						const positionalAudioHelper: any = new N3JS.PositionalAudioHelper(
-							audioTarget as any,
+							audioTarget,
 							NgxThreeUtil.getTypeSafe(this.range, 1),
 							NgxThreeUtil.getTypeSafe(this.divisionsInnerAngle, 16),
 							NgxThreeUtil.getTypeSafe(this.divisionsOuterAngle, 2)
@@ -792,12 +792,12 @@ export class NgxHelperComponent
 						basemesh = new N3JS.SpotLightHelper(lightTarget, this.getColor());
 					} else if (lightTarget instanceof N3JS.RectAreaLight) {
 						basemesh = new N3JS.RectAreaLightHelper(
-							lightTarget as any,
-							this.getColor() as any
+							lightTarget,
+							this.getColor()
 						);
 					} else if (lightTarget instanceof N3JS.LightProbe) {
 						basemesh = new N3JS.LightProbeHelper(
-							lightTarget as any,
+							lightTarget,
 							this.getSize(10)
 						);
 					}
@@ -845,7 +845,7 @@ export class NgxHelperComponent
 							case 'vertextangentshelper':
 							case 'vertextangents':
 								basemesh = new N3JS.VertexTangentsHelper(
-									vertexMesh as any,
+									vertexMesh,
 									this.getSize(),
 									this.getColorHex()
 								);
@@ -854,7 +854,7 @@ export class NgxHelperComponent
 							case 'vertexnormals':
 							default:
 								basemesh = new N3JS.VertexNormalsHelper(
-									vertexMesh as any,
+									vertexMesh,
 									this.getSize(),
 									this.getColorHex()
 								);

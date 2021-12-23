@@ -1,12 +1,11 @@
 import {
 	Component,
-	ContentChildren,
-	Input,
+	ContentChildren, forwardRef, Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
-import { IRendererTimer, ICharacterControl } from '../ngx-interface';
+import { ICharacterControl, IRendererTimer } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxClipComponent } from './../clip/clip.component';
 import { I3JS, N3JS, NgxThreeUtil } from './../interface';
@@ -50,6 +49,12 @@ import { NgxPhysicsComponent } from './../physics/physics.component';
 	selector: 'ngx3js-mixer',
 	templateUrl: './mixer.component.html',
 	styleUrls: ['./mixer.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxMixerComponent),
+		},
+	],
 })
 export class NgxMixerComponent
 	extends NgxAbstractSubscribeComponent
@@ -235,8 +240,7 @@ export class NgxMixerComponent
 	/**
 	 * Content children of mixer component
 	 */
-	@ContentChildren(NgxClipComponent, { descendants: false })
-	private clipList: QueryList<NgxClipComponent>;
+	@ContentChildren(NgxClipComponent, { descendants: false }) private clipList: QueryList<NgxClipComponent>;
 
 	/**
 	 * Gets fps
@@ -623,7 +627,7 @@ export class NgxMixerComponent
 						skinnedMesh.parent = null;
 					}
 					this.clips.forEach((clip) => {
-						helper.add(skinnedMesh as any, {
+						helper.add(skinnedMesh, {
 							animation: clip,
 							physics: this.getPhysics(),
 							// warmup: this.getWarmup(),
@@ -645,11 +649,11 @@ export class NgxMixerComponent
 					});
 					this.mmdAnimationHelpers = [];
 					if (NgxThreeUtil.isNotNull(this.mmdHelpers)) {
-						let rootObject3d: I3JS.Object3D = skinnedMesh as any;
+						let rootObject3d: I3JS.Object3D = skinnedMesh;
 						while (rootObject3d.parent) {
 							rootObject3d = rootObject3d.parent;
 						}
-						let objectsHelper: any = helper['objects'].get(skinnedMesh as any);
+						let objectsHelper: any = helper['objects'].get(skinnedMesh);
 						this.mmdHelpers.forEach((mmdHelper) => {
 							switch (mmdHelper.toLowerCase()) {
 								case 'iksolver':
@@ -678,7 +682,7 @@ export class NgxMixerComponent
 			} else if (this.model instanceof N3JS.Audio) {
 				const audioMode = this.model;
 				if (audioMode.buffer !== null) {
-					helper.add(audioMode as any, {
+					helper.add(audioMode, {
 						delayTime: this.getDelayTime(),
 					});
 				} else {
@@ -687,7 +691,7 @@ export class NgxMixerComponent
 						NgxThreeUtil.getSubscribe(
 							audioMode,
 							() => {
-								helper.add(audioMode as any, {
+								helper.add(audioMode, {
 									delayTime: this.getDelayTime(),
 								});
 							},
@@ -749,7 +753,7 @@ export class NgxMixerComponent
 							break;
 						case 'clip':
 							this.clipList.forEach((clip) => {
-								clip.setMixer(mixer as any, this.clips, this.model);
+								clip.setMixer(mixer, this.clips, this.model);
 							});
 							break;
 					}
@@ -838,7 +842,7 @@ export class NgxMixerComponent
 						case 'controls':
 							if (character instanceof N3JS.MD2CharacterComplex) {
 								if (NgxThreeUtil.isNotNull(this.controls)) {
-									(character as any).controls = this.controls;
+									character.controls = this.controls;
 								}
 							}
 							break;
@@ -916,7 +920,7 @@ export class NgxMixerComponent
 					switch (change.toLowerCase()) {
 						case 'pose':
 							if (this.model instanceof N3JS.SkinnedMesh) {
-								helper.pose(this.model as any, null);
+								helper.pose(this.model, null);
 							}
 							break;
 					}
@@ -1002,7 +1006,7 @@ export class NgxMixerComponent
 						) {
 							mixer = this.clips;
 							if (this.clips instanceof N3JS.MD2CharacterComplex) {
-								(mixer as any).controls = this.controls || {};
+								mixer.controls = this.controls || {};
 							}
 						}
 					}

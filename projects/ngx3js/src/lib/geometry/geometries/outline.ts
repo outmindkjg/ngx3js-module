@@ -16,14 +16,14 @@ export class NgxOutlineGeometry extends N3JS.WireframeGeometry {
 	 * @param [thetaLength=Math.PI * 2]
 	 */
 	constructor(geometry: I3JS.BufferGeometry, scale: number = 1) {
-		super(geometry as any);
+		super(geometry);
 		this.type = 'OutlineGeometry';
 		if (scale !== 1) {
 			this.scale(scale, scale, scale);
 		}
 		const vertices: number[] = [];
 		const attrPosition = this.getAttribute('position');
-		const parameters: any = (geometry as any)['parameters'] || {};
+		const parameters: any = geometry.parameters || {};
 		switch (geometry.type) {
 			case 'StarGeometry':
 			case 'CircleGeometry':

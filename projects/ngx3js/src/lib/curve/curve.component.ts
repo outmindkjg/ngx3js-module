@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { INgxVector } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
@@ -23,6 +23,12 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-curve',
 	templateUrl: './curve.component.html',
 	styleUrls: ['./curve.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxCurveComponent),
+		},
+	],
 })
 export class NgxCurveComponent
 	extends NgxAbstractSubscribeComponent

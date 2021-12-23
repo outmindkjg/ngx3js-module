@@ -714,7 +714,7 @@ export class NgxThreeUtil {
 				(url: string) => {
 					console.error(url);
 				}
-			) as any;
+			);
 			this._manager.addHandler(/\.dds$/i, new N3JS.DDSLoader());
 		}
 		return this._manager;

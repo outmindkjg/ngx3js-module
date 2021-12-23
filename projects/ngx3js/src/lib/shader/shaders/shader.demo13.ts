@@ -37,7 +37,7 @@ export const ShaderDemo13: IShaderType = {
   }
   `,
 	uniforms: {
-		tDiffuse: { value: null } as any,
+		tDiffuse: { value: null },
 		repeat: { value: NgxThreeUtil.getVector2Safe(5, 0.5) },
 	},
 };

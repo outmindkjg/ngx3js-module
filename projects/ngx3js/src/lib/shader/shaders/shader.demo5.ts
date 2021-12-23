@@ -23,6 +23,6 @@ export const ShaderDemo5: IShaderType = {
   }
   `,
 	uniforms: {
-		uTextures: { value: [] } as any,
+		uTextures: { value: [] },
 	},
 };

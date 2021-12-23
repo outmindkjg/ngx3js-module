@@ -27,7 +27,7 @@ export const ShaderDemo10: IShaderType = {
 	}
   `,
 	uniforms: {
-		diffuse: { value: null } as any,
+		diffuse: { value: null },
 		depth: { value: 55 },
 		size: { value: NgxThreeUtil.getVector2Safe(50, 50) },
 	},

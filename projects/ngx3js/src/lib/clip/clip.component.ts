@@ -1,14 +1,13 @@
 import {
 	Component,
-	ContentChildren,
-	Input,
+	ContentChildren, forwardRef, Input,
 	OnInit,
 	QueryList,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { NgxKeyframeComponent } from '../keyframe/keyframe.component';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
-import { NgxThreeUtil, N3JS, I3JS } from './../interface';
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 
 /**
  * The Clip component.
@@ -32,6 +31,12 @@ import { NgxThreeUtil, N3JS, I3JS } from './../interface';
 	selector: 'ngx3js-clip',
 	templateUrl: './clip.component.html',
 	styleUrls: ['./clip.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxClipComponent),
+		},
+	],
 })
 export class NgxClipComponent
 	extends NgxAbstractSubscribeComponent
@@ -129,8 +134,7 @@ export class NgxClipComponent
 	/**
 	 * The keyframe list of NgxKeyframeComponent
 	 */
-	@ContentChildren(NgxKeyframeComponent, { descendants: false })
-	private keyframeList: QueryList<NgxKeyframeComponent>;
+	@ContentChildren(NgxKeyframeComponent, { descendants: false }) private keyframeList: QueryList<NgxKeyframeComponent>;
 
 	/**
 	 * Gets fps

@@ -467,26 +467,22 @@ export class NgxAbstractGeometryComponent
 	/**
 	 * Content children of abstract geometry component
 	 */
-	@ContentChildren(NgxTranslationComponent, { descendants: false })
-	private translationList: QueryList<NgxTranslationComponent>;
+	@ContentChildren(NgxTranslationComponent, { descendants: false }) private translationList: QueryList<NgxTranslationComponent>;
 
 	/**
 	 * Content children of abstract geometry component
 	 */
-	@ContentChildren(NgxScaleComponent, { descendants: false })
-	private scaleList: QueryList<NgxScaleComponent>;
+	@ContentChildren(NgxScaleComponent, { descendants: false }) private scaleList: QueryList<NgxScaleComponent>;
 
 	/**
 	 * Content children of abstract geometry component
 	 */
-	@ContentChildren(NgxRotationComponent, { descendants: false })
-	private rotationList: QueryList<NgxRotationComponent>;
+	@ContentChildren(NgxRotationComponent, { descendants: false }) private rotationList: QueryList<NgxRotationComponent>;
 
 	/**
 	 * Content children of abstract geometry component
 	 */
-	@ContentChildren(NgxPositionComponent, { descendants: false })
-	private positionList: QueryList<NgxPositionComponent>;
+	@ContentChildren(NgxPositionComponent, { descendants: false }) private positionList: QueryList<NgxPositionComponent>;
 
 	/**
 	 * Geometry attr of abstract geometry component
@@ -1467,7 +1463,7 @@ export class NgxAbstractGeometryComponent
 				if (NgxThreeUtil.isNotNull(this.program)) {
 					NgxGeometryUtils.getGeometry(
 						this.program,
-						geometry as any,
+						geometry,
 						this.programParam
 					);
 				}

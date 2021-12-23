@@ -239,7 +239,7 @@ export class NgxAudioComponent
 		if (this.audioLoader === null) {
 			this.audioLoader = new N3JS.AudioLoader(
 				NgxThreeUtil.getLoadingManager()
-			) as any;
+			);
 		}
 		this.audioLoader.load(url, (audioBuffer: AudioBuffer): void => {
 			onLoad(audioBuffer);
@@ -330,8 +330,8 @@ export class NgxAudioComponent
 					N3JS.RedFormat
 				);
 			} else {
-				(this.loadedAudioTexture.image as any) = {
-					data: data,
+				(this.loadedAudioTexture.image) = {
+					data: data as any,
 					width: fftSize / 2,
 					height: 1,
 				};
@@ -472,7 +472,7 @@ export class NgxAudioComponent
 									case 'video':
 										if (this.video !== null) {
 											this.video = document.createElement('video');
-											(this.video as any).playsInline = true;
+											this.video.playsInline = true;
 										}
 										this.audio.setMediaElementSource(this.video);
 										break;
@@ -490,7 +490,7 @@ export class NgxAudioComponent
 									switch (urlType.toLowerCase()) {
 										case 'listener':
 											const oscillator =
-												this.listener.context.createOscillator() as any;
+												this.listener.context.createOscillator();
 											oscillator.type = 'sine';
 											oscillator.frequency.setValueAtTime(
 												144,
@@ -600,7 +600,7 @@ export class NgxAudioComponent
 					this.audio = new N3JS.PositionalAudio(this.getListener());
 					break;
 			}
-			this.setObject3d(this.audio as any);
+			this.setObject3d(this.audio);
 		}
 		return this.audio as T;
 	}

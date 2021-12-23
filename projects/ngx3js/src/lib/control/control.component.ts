@@ -2,8 +2,7 @@ import {
 	AfterContentInit,
 	Component,
 	ContentChildren,
-	EventEmitter,
-	Input,
+	EventEmitter, forwardRef, Input,
 	OnChanges,
 	OnDestroy,
 	OnInit,
@@ -13,7 +12,7 @@ import {
 } from '@angular/core';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { NgxLookatComponent } from '../lookat/lookat.component';
-import { IRendererTimer, IControlOptions } from '../ngx-interface';
+import { IRendererTimer } from '../ngx-interface';
 import { NgxSceneComponent } from '../scene/scene.component';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAVRControls } from './controls/avr-controls';
@@ -93,6 +92,12 @@ import { NgxSelectBoxControls } from './controls/selection-box-controls';
 	selector: 'ngx3js-control',
 	templateUrl: './control.component.html',
 	styleUrls: ['./control.component.scss'],
+	providers: [
+		{
+			provide: NgxAbstractSubscribeComponent,
+			useExisting: forwardRef(() => NgxControlComponent),
+		},
+	],
 })
 export class NgxControlComponent
 	extends NgxAbstractSubscribeComponent
@@ -366,8 +371,7 @@ export class NgxControlComponent
 	/**
 	 * The lookat list of control
 	 */
-	@ContentChildren(NgxLookatComponent, { descendants: false })
-	private lookatList: QueryList<NgxLookatComponent> = null;
+	@ContentChildren(NgxLookatComponent, { descendants: false }) private lookatList: QueryList<NgxLookatComponent> = null;
 
 	/**
 	 * Creates an instance of control.
@@ -663,7 +667,7 @@ export class NgxControlComponent
 					control = pointerLockControls;
 					this._scene.first
 						.getScene()
-						.add(pointerLockControls.getObject() as any);
+						.add(pointerLockControls.getObject());
 					break;
 				case 'dragcontrols':
 				case 'drag':
@@ -762,7 +766,7 @@ export class NgxControlComponent
 						this._scene.first.getScene()
 					);
 					if (NgxThreeUtil.isNotNull(this.gizmoVisible)) {
-						(arcballControls as any).setGizmosVisible(this.gizmoVisible);
+						(arcballControls).setGizmosVisible(this.gizmoVisible);
 					}
 					control = arcballControls;
 					break;

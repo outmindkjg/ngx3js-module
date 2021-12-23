@@ -1730,6 +1730,7 @@ export interface btSoftBodyHelpers {
  */
 export interface AmmoType {
 	destroy(obj: any): void;
+	castObject(obj : any, body : any) : any;
 	_malloc(size: number): number;
 	_free(ptr: number): void;
 	HEAP8: Int8Array;
