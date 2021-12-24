@@ -79,25 +79,25 @@ export class NgxKeyframeComponent
 	/**
 	 * identifier for the KeyframeTrack
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.VectorKeyframeTrack  - position - The position of object3d
-	 * @see THREE.VectorKeyframeTrack  - scale - The scale of object3d
-	 * @see THREE.QuaternionKeyframeTrack  - quaternion - The quaternion of object3d
-	 * @see THREE.ColorKeyframeTrack  - color - The color of material
-	 * @see THREE.ColorKeyframeTrack  - specular - The specular of material
-	 * @see THREE.ColorKeyframeTrack  - emissive - The emissive of material
-	 * @see THREE.ColorKeyframeTrack  - sheen - The sheen of material
-	 * @see THREE.NumberKeyframeTrack  - shininess - The shininess of material
-	 * @see THREE.NumberKeyframeTrack  - opacity - The opacity of material
-	 * @see THREE.NumberKeyframeTrack  - reflectivity - The reflectivity of material
-	 * @see THREE.BooleanKeyframeTrack  - transparent - The transparent of material
-	 * @see THREE.BooleanKeyframeTrack  - wireframe - The wireframe of material
-	 * @see THREE.VectorKeyframeTrack  - Vector, VectorKeyframe, VectorKeyframeTrack - The Vector of object3d
-	 * @see THREE.QuaternionKeyframeTrack  - Quaternion, QuaternionKeyframe, QuaternionKeyframeTrack  - The quaternion of object3d
-	 * @see THREE.ColorKeyframeTrack  - Color, ColorKeyframe, ColorKeyframeTrack - The Color of object3d
-	 * @see THREE.NumberKeyframeTrack  - Number, NumberKeyframe, NumberKeyframeTrack - The Number of object3d
-	 * @see THREE.BooleanKeyframeTrack  - Boolean, BooleanKeyframe, BooleanKeyframeTrack - The Boolean of object3d
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.VectorKeyframeTrack | position - The position of object3d |
+	 * | THREE.VectorKeyframeTrack | scale - The scale of object3d |
+	 * | THREE.QuaternionKeyframeTrack | quaternion - The quaternion of object3d |
+	 * | THREE.ColorKeyframeTrack | color - The color of material |
+	 * | THREE.ColorKeyframeTrack | specular - The specular of material |
+	 * | THREE.ColorKeyframeTrack | emissive - The emissive of material |
+	 * | THREE.ColorKeyframeTrack | sheen - The sheen of material |
+	 * | THREE.NumberKeyframeTrack | shininess - The shininess of material |
+	 * | THREE.NumberKeyframeTrack | opacity - The opacity of material |
+	 * | THREE.NumberKeyframeTrack | reflectivity - The reflectivity of material |
+	 * | THREE.BooleanKeyframeTrack | transparent - The transparent of material |
+	 * | THREE.BooleanKeyframeTrack | wireframe - The wireframe of material |
+	 * | THREE.VectorKeyframeTrack | Vector, VectorKeyframe, VectorKeyframeTrack - The Vector of object3d |
+	 * | THREE.QuaternionKeyframeTrack | Quaternion, QuaternionKeyframe, QuaternionKeyframeTrack  - The quaternion of object3d |
+	 * | THREE.ColorKeyframeTrack | Color, ColorKeyframe, ColorKeyframeTrack - The Color of object3d |
+	 * | THREE.NumberKeyframeTrack | Number, NumberKeyframe, NumberKeyframeTrack - The Number of object3d |
+	 * | THREE.BooleanKeyframeTrack | Boolean, BooleanKeyframe, BooleanKeyframeTrack - The Boolean of object3d |
 	 */
 	@Input() public type: string = '';
 
@@ -140,9 +140,11 @@ export class NgxKeyframeComponent
 	/**
 	 * the type of interpolation to use. See
 	 *
-	 * @see THREE.InterpolateDiscrete - InterpolateDiscrete, Discrete
-	 * @see THREE.InterpolateLinear - InterpolateLinear, Linear
-	 * @see THREE.InterpolateSmooth - InterpolateSmooth, Smooth
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.InterpolateDiscrete | InterpolateDiscrete, Discrete |
+	 * | THREE.InterpolateLinear | InterpolateLinear, Linear |
+	 * | THREE.InterpolateSmooth | InterpolateSmooth, Smooth |
 	 *
 	 */
 	@Input() public interpolation: string = '';

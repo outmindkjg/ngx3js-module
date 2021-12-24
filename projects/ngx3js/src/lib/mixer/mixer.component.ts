@@ -165,7 +165,7 @@ export class NgxMixerComponent
 	/**
 	 * The rate of MD2Character
 	 *
-	 * @see {MD2Character#setPlaybackRate}
+	 * @see I3JS.MD2Character.setPlaybackRate
 	 */
 	@Input() public rate: number = null;
 

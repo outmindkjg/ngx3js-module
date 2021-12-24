@@ -1,10 +1,4 @@
-import {
-	Component,
-	forwardRef,
-	Input,
-	OnInit,
-	SimpleChanges,
-} from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { NgxThreeUtil, N3JS, I3JS } from '../interface';
 import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
@@ -38,8 +32,11 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
  * 	[refDistance]="20"
  * ></ngx3js-audio>
  * ```
- * @see THREE.PositionalAudio - PositionalAudio, Positional, Position
- * @see THREE.Audio - Audio
+ * 
+ * |   Three Type               | Value String(case insensitive) |
+ * |:--------------------------:|--------------------------:|
+ * | THREE.PositionalAudio | PositionalAudio, Positional, Position |
+ * | THREE.Audio | Audio |
  */
 @Component({
 	selector: 'ngx3js-audio',
@@ -56,17 +53,14 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 		},
 	],
 })
-export class NgxAudioComponent
-	extends NgxAbstractObject3dComponent
-	implements OnInit
-{
+export class NgxAudioComponent extends NgxAbstractObject3dComponent implements OnInit {
 	/**
 	 * The type  of audio component
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.PositionalAudio - PositionalAudio, Positional, Position
-	 * @see THREE.Audio - Audio
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.PositionalAudio | PositionalAudio, Positional, Position |
+	 * | THREE.Audio | Audio |
 	 *
 	 */
 	@Input() public type: string = 'position';
@@ -232,14 +226,9 @@ export class NgxAudioComponent
 	 * @param url
 	 * @param onLoad
 	 */
-	public static loadAudio(
-		url: string,
-		onLoad: (audioBuffer: AudioBuffer) => void
-	) {
+	public static loadAudio(url: string, onLoad: (audioBuffer: AudioBuffer) => void) {
 		if (this.audioLoader === null) {
-			this.audioLoader = new N3JS.AudioLoader(
-				NgxThreeUtil.getLoadingManager()
-			);
+			this.audioLoader = new N3JS.AudioLoader(NgxThreeUtil.getLoadingManager());
 		}
 		this.audioLoader.load(url, (audioBuffer: AudioBuffer): void => {
 			onLoad(audioBuffer);
@@ -323,14 +312,9 @@ export class NgxAudioComponent
 				fftSize = this.fftSize;
 			}
 			if (this.loadedAudioTexture === null) {
-				this.loadedAudioTexture = new N3JS.DataTexture(
-					data,
-					fftSize / 2,
-					1,
-					N3JS.RedFormat
-				);
+				this.loadedAudioTexture = new N3JS.DataTexture(data, fftSize / 2, 1, N3JS.RedFormat);
 			} else {
-				(this.loadedAudioTexture.image) = {
+				this.loadedAudioTexture.image = {
 					data: data as any,
 					width: fftSize / 2,
 					height: 1,
@@ -367,10 +351,7 @@ export class NgxAudioComponent
 	 */
 	public getAnalyser(fftSize?: number): I3JS.AudioAnalyser {
 		if (this.analyser === null && this.audio !== null) {
-			this.analyser = new N3JS.AudioAnalyser(
-				this.audio,
-				fftSize || this.fftSize
-			);
+			this.analyser = new N3JS.AudioAnalyser(this.audio, fftSize || this.fftSize);
 		}
 		return this.analyser;
 	}
@@ -401,14 +382,7 @@ export class NgxAudioComponent
 	public applyChanges3d(changes: string[]) {
 		if (this.audio !== null) {
 			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
-				changes = NgxThreeUtil.pushUniq(changes, [
-					'volume',
-					'loop',
-					'url',
-					'positionalaudio',
-					'play',
-					'autoplay',
-				]);
+				changes = NgxThreeUtil.pushUniq(changes, ['volume', 'loop', 'url', 'positionalaudio', 'play', 'autoplay']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
@@ -461,13 +435,10 @@ export class NgxAudioComponent
 							if (audioUrl !== null) {
 								switch (urlType.toLowerCase()) {
 									case 'audio':
-										this.loadAudio(
-											NgxThreeUtil.getStoreUrl(audioUrl),
-											(buffer: AudioBuffer) => {
-												this.audio.setBuffer(buffer);
-												this.addChanges('loaded');
-											}
-										);
+										this.loadAudio(NgxThreeUtil.getStoreUrl(audioUrl), (buffer: AudioBuffer) => {
+											this.audio.setBuffer(buffer);
+											this.addChanges('loaded');
+										});
 										break;
 									case 'video':
 										if (this.video !== null) {
@@ -489,13 +460,9 @@ export class NgxAudioComponent
 								} else {
 									switch (urlType.toLowerCase()) {
 										case 'listener':
-											const oscillator =
-												this.listener.context.createOscillator();
+											const oscillator = this.listener.context.createOscillator();
 											oscillator.type = 'sine';
-											oscillator.frequency.setValueAtTime(
-												144,
-												this.audio.context.currentTime
-											);
+											oscillator.frequency.setValueAtTime(144, this.audio.context.currentTime);
 											oscillator.start(0);
 											this.audio.setNodeSource(oscillator);
 											break;
@@ -534,10 +501,7 @@ export class NgxAudioComponent
 							if (NgxThreeUtil.isNotNull(this.maxDistance)) {
 								this.audio.setMaxDistance(this.maxDistance);
 							}
-							if (
-								NgxThreeUtil.isNotNull(this.coneInnerAngle) &&
-								NgxThreeUtil.isNotNull(this.coneOuterAngle)
-							) {
+							if (NgxThreeUtil.isNotNull(this.coneInnerAngle) && NgxThreeUtil.isNotNull(this.coneOuterAngle)) {
 								this.audio.setDirectionalCone(
 									NgxThreeUtil.getTypeSafe(this.coneInnerAngle, 0),
 									NgxThreeUtil.getTypeSafe(this.coneOuterAngle, 360),

@@ -6,6 +6,9 @@ import { Vector2, Vector3 } from './math';
  * BoxGeometry is a geometry class for a rectangular cuboid with a given 'width', 'height', and 'depth'.
  * On creation, the cuboid is centred on the origin, with each edge parallel to one of the axes.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BoxGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/BoxGeometry) page for a live demo.
+ * 
  * ### Code Example
  * ```js
  * const geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -81,6 +84,9 @@ export { TubeGeometry as TubeBufferGeometry };
  * It is built counter-clockwise from a start angle and a given central angle.
  * It can also be used to create regular polygons, where the number of segments determines the number of sides.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CircleGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/CircleGeometry) page for a live demo.
+ * 
  * ### Code Example
  * ```js
  * const geometry = new THREE.CircleGeometry( 5, 32 );
@@ -121,6 +127,9 @@ export interface CircleGeometry extends BufferGeometry {
 /**
  * A class for generating cone geometries.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ConeGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/ConeGeometry) page for a live demo.
+ * 
  * ### Code Example
  * ```js
  * const geometry = new THREE.ConeGeometry( 5, 20, 32 );
@@ -162,6 +171,9 @@ export interface ConeGeometry extends CylinderGeometry {
 /**
  * A class for generating cylinder geometries.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CylinderGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/CylinderGeometry) page for a live demo.
+ * 
  * ### Code Example
  * ```js
  * const geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
@@ -218,6 +230,9 @@ export interface CylinderGeometry extends BufferGeometry {
 
 /**
  * A class for generating a dodecahedron geometries.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DodecahedronGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/DodecahedronGeometry) page for a live demo.
  */
 export interface DodecahedronGeometry extends PolyhedronGeometry {
 	/**
@@ -238,6 +253,9 @@ export interface DodecahedronGeometry extends PolyhedronGeometry {
 
 /**
  * This can be used as a helper object to view the edges of a [geometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EdgesGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/EdgesGeometry) page for a live demo.
  *
  * ### Examples
  * [helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
@@ -360,6 +378,9 @@ export interface UVGenerator {
 
 /**
  * Creates extruded geometry from a path shape.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ExtrudeGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/ExtrudeGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -415,6 +436,10 @@ export interface ExtrudeGeometry extends BufferGeometry {
 
 /**
  * A class for generating an icosahedron geometry.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/IcosahedronGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/IcosahedronGeometry) page for a live demo.
+ *
  */
 export interface IcosahedronGeometry extends PolyhedronGeometry {
 	/**
@@ -435,6 +460,9 @@ export interface IcosahedronGeometry extends PolyhedronGeometry {
 
 /**
  * Creates meshes with axial symmetry like vases. The lathe rotates around the Y axis.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LatheGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/LatheGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -480,6 +508,9 @@ export interface LatheGeometry extends BufferGeometry {
 
 /**
  * A class for generating an octahedron geometry.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OctahedronGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/OctahedronGeometry) page for a live demo.
  *
  */
 export interface OctahedronGeometry extends PolyhedronGeometry {
@@ -501,6 +532,9 @@ export interface OctahedronGeometry extends PolyhedronGeometry {
 
 /**
  * A class for generating plane geometries.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PlaneGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/PlaneGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -541,6 +575,9 @@ export interface PlaneGeometry extends BufferGeometry {
 
 /**
  * A polyhedron is a solid in three dimensions with flat faces. This class will take an array of vertices, project them onto a sphere, and then divide them up to the desired level of detail. This class is used by [DodecahedronGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DodecahedronGeometry), [IcosahedronGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/IcosahedronGeometry), [OctahedronGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OctahedronGeometry), and [TetrahedronGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TetrahedronGeometry) to generate their respective geometries.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PolyhedronGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/PolyhedronGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -590,6 +627,9 @@ export interface PolyhedronGeometry extends BufferGeometry {
 
 /**
  * A class for generating a two-dimensional ring geometry.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RingGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/RingGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -641,6 +681,9 @@ export interface RingGeometry extends BufferGeometry {
 
 /**
  * Creates an one-sided polygonal geometry from one or more path shapes.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapeGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/ShapeGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -678,6 +721,9 @@ export interface ShapeGeometry extends BufferGeometry {
 
 /**
  * A class for generating sphere geometries.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SphereGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/SphereGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -733,6 +779,10 @@ export interface SphereGeometry extends BufferGeometry {
 
 /**
  * A class for generating a tetrahedron geometries.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TetrahedronGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/TetrahedronGeometry) page for a live demo.
+ *
  */
 export interface TetrahedronGeometry extends PolyhedronGeometry {
 	/**
@@ -753,6 +803,9 @@ export interface TetrahedronGeometry extends PolyhedronGeometry {
 
 /**
  * A class for generating torus geometries.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TorusGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/TorusGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -795,6 +848,9 @@ export interface TorusGeometry extends BufferGeometry {
 
 /**
  * Creates a torus knot, the particular shape of which is defined by a pair of coprime integers, p and q. If p and q are not coprime, the result will be a torus link.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TorusKnotGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/TorusKnotGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -839,6 +895,9 @@ export interface TorusKnotGeometry extends BufferGeometry {
 
 /**
  * Creates a tube that extrudes along a 3d curve.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TubeGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/TubeGeometry) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -915,6 +974,9 @@ export interface TubeGeometry extends BufferGeometry {
 
 /**
  * This can be used as a helper object to view a [geometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) as a wireframe.
+ * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WireframeGeometry) page for details.
+ * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/WireframeGeometry) page for a live demo.
  *
  * ### Examples
  * [helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)

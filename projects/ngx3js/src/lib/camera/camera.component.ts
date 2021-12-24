@@ -71,14 +71,14 @@ export class NgxCameraComponent
 	 *
 	 * PingPong - When use "PingPongCamera", the camera muse be located in scene
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.PerspectiveCamera - PerspectiveCamera, Perspective
-	 * @see THREE.ArrayCamera       - ArrayCamera, Array
-	 * @see THREE.CubeCamera        - CubeCamera, Cube, CubePingPong
-	 * @see THREE.CubeCamera        - PingPong, CubePingPong, CubePingPongCamera, PingPongCamera
-	 * @see THREE.OrthographicCamera - OrthographicCamera, Orthographic
-	 * @see THREE.StereoCamera      - StereoCamera, Stereo
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.PerspectiveCamera | PerspectiveCamera, Perspective |
+	 * | THREE.ArrayCamera | ArrayCamera, Array |
+	 * | THREE.CubeCamera | CubeCamera, Cube, CubePingPong |
+	 * | THREE.CubeCamera | PingPong, CubePingPong, CubePingPongCamera, PingPongCamera |
+	 * | THREE.OrthographicCamera | OrthographicCamera, Orthographic |
+	 * | THREE.StereoCamera | StereoCamera, Stereo |
 	 */
 	@Input() public type: string = 'perspective';
 
@@ -188,12 +188,12 @@ export class NgxCameraComponent
 	/**
 	 * The viewport of this render target.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.WebGLRenderer#setViewport - renderer
-	 * @see THREE.PerspectiveCamera#setViewOffset - viewoffset, offset
-	 * @see THREE.OrthographicCamera#setViewOffset - viewoffset, offset
-	 * @see THREE.PerspectiveCamera - #viewport - camera
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.WebGLRenderer#setViewport | renderer |
+	 * | THREE.PerspectiveCamera#setViewOffset | viewoffset, offset |
+	 * | THREE.OrthographicCamera#setViewOffset | viewoffset, offset |
+	 * | THREE.PerspectiveCamera | #viewport - camera |
 	 *
 	 */
 

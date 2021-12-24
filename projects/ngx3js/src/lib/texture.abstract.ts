@@ -105,16 +105,16 @@ export class NgxAbstractTextureComponent
 	 * How the image is applied to the object. An object type of [THREE.UVMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) is the default, where the U,V coordinates are used to apply the map.
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for other mapping types.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.UVMapping               - UVMapping, uv
-	 * @see THREE.CubeReflectionMapping   - CubeReflectionMapping, cubereflection
-	 * @see THREE.CubeRefractionMapping   - CubeRefractionMapping, cuberefraction
-	 * @see THREE.EquirectangularReflectionMapping   - EquirectangularReflectionMapping, equirectangularreflection
-	 * @see THREE.EquirectangularRefractionMapping   - EquirectangularRefractionMapping, equirectangularrefraction
-	 * @see THREE.CubeUVReflectionMapping   - CubeUVReflectionMapping, cubeuvreflection
-	 * @see THREE.CubeUVRefractionMapping   - CubeUVRefractionMapping, cubeuvrefraction
-	 * @see THREE.Texture.DEFAULT_MAPPING   - default
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.UVMapping | UVMapping, uv |
+	 * | THREE.CubeReflectionMapping | CubeReflectionMapping, cubereflection |
+	 * | THREE.CubeRefractionMapping | CubeRefractionMapping, cuberefraction |
+	 * | THREE.EquirectangularReflectionMapping | EquirectangularReflectionMapping, equirectangularreflection |
+	 * | THREE.EquirectangularRefractionMapping | EquirectangularRefractionMapping, equirectangularrefraction |
+	 * | THREE.CubeUVReflectionMapping | CubeUVReflectionMapping, cubeuvreflection |
+	 * | THREE.CubeUVRefractionMapping | CubeUVRefractionMapping, cubeuvrefraction |
+	 * | THREE.Texture.DEFAULT_MAPPING | default |
 	 */
 	@Input() public mapping: string = null;
 
@@ -126,11 +126,11 @@ export class NgxAbstractTextureComponent
 	 *
 	 * The Default Value of wrapS, wrapT.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.RepeatWrapping         - RepeatWrapping, wraprepeat, repeat
-	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, mirroredrepeat
-	 * @see THREE.ClampToEdgeWrapping    - ClampToEdgeWrapping, clamptoedge
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.RepeatWrapping | RepeatWrapping, wraprepeat, repeat |
+	 * | THREE.MirroredRepeatWrapping | MirroredRepeatWrapping, mirroredrepeat |
+	 * | THREE.ClampToEdgeWrapping | ClampToEdgeWrapping, clamptoedge |
 	 */
 	@Input() public wrap: string = null;
 
@@ -140,11 +140,11 @@ export class NgxAbstractTextureComponent
 	 * The other two choices are [THREE.RepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) and [THREE.MirroredRepeatWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures).
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.RepeatWrapping         - RepeatWrapping, wraprepeat, repeat
-	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, mirroredrepeat
-	 * @see THREE.ClampToEdgeWrapping    - ClampToEdgeWrapping, clamptoedge
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.RepeatWrapping | RepeatWrapping, wraprepeat, repeat |
+	 * | THREE.MirroredRepeatWrapping | MirroredRepeatWrapping, mirroredrepeat |
+	 * | THREE.ClampToEdgeWrapping | ClampToEdgeWrapping, clamptoedge |
 	 */
 	@Input() public wrapS: string = null;
 
@@ -156,26 +156,25 @@ export class NgxAbstractTextureComponent
 	 * Individual dimensions need not be equal, but each must be a power of two.
 	 * This is a limitation of WebGL, not three.js.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.RepeatWrapping         - RepeatWrapping, wraprepeat, repeat
-	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, mirroredrepeat
-	 * @see THREE.ClampToEdgeWrapping    - ClampToEdgeWrapping, clamptoedge
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.RepeatWrapping | RepeatWrapping, wraprepeat, repeat |
+	 * | THREE.MirroredRepeatWrapping | MirroredRepeatWrapping, mirroredrepeat |
+	 * | THREE.ClampToEdgeWrapping | ClampToEdgeWrapping, clamptoedge |
 	 */
 	@Input() public wrapT: string = null;
 
 	/**
 	 * The Default Value of magFilter, minFilter
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureFilter
-	 * @see THREE.NearestFilter               - NearestFilter, Nearest
-	 * @see THREE.NearestMipmapNearestFilter  - NearestMipmapNearestFilter, nearestmipmapnearest
-	 * @see THREE.NearestMipmapLinearFilter   - NearestMipmapLinearFilter, nearestmipmaplinear
-	 * @see THREE.LinearMipmapNearestFilter   - LinearMipmapNearestFilter, linearmipmapnearest
-	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
-	 * @see THREE.LinearFilter                - Linearfilter, linear
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NearestFilter | NearestFilter, Nearest |
+	 * | THREE.NearestMipmapNearestFilter | NearestMipmapNearestFilter, nearestmipmapnearest |
+	 * | THREE.NearestMipmapLinearFilter | NearestMipmapLinearFilter, nearestmipmaplinear |
+	 * | THREE.LinearMipmapNearestFilter | LinearMipmapNearestFilter, linearmipmapnearest |
+	 * | THREE.LinearMipmapLinearFilter | LinearMipmapLinearFilter, linearmipmaplinear |
+	 * | THREE.LinearFilter | Linearfilter, linear |
 	 */
 	@Input() public filter: string = null;
 
@@ -185,15 +184,14 @@ export class NgxAbstractTextureComponent
 	 * The other option is [THREE.NearestFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), which uses the value of the closest texel.
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureFilter
-	 * @see THREE.NearestFilter               - NearestFilter, Nearest
-	 * @see THREE.NearestMipmapNearestFilter  - NearestMipmapNearestFilter, nearestmipmapnearest
-	 * @see THREE.NearestMipmapLinearFilter   - NearestMipmapLinearFilter, nearestmipmaplinear
-	 * @see THREE.LinearMipmapNearestFilter   - LinearMipmapNearestFilter, linearmipmapnearest
-	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
-	 * @see THREE.LinearFilter                - Linearfilter, linear
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NearestFilter | NearestFilter, Nearest |
+	 * | THREE.NearestMipmapNearestFilter | NearestMipmapNearestFilter, nearestmipmapnearest |
+	 * | THREE.NearestMipmapLinearFilter | NearestMipmapLinearFilter, nearestmipmaplinear |
+	 * | THREE.LinearMipmapNearestFilter | LinearMipmapNearestFilter, linearmipmapnearest |
+	 * | THREE.LinearMipmapLinearFilter | LinearMipmapLinearFilter, linearmipmaplinear |
+	 * | THREE.LinearFilter | Linearfilter, linear |
 	 */
 	@Input() public magFilter: string = null;
 
@@ -202,15 +200,14 @@ export class NgxAbstractTextureComponent
 	 * [THREE.LinearMipmapLinearFilter](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), which uses mipmapping and a trilinear filter.
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for all possible choices.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureFilter
-	 * @see THREE.NearestFilter               - NearestFilter, Nearest
-	 * @see THREE.NearestMipmapNearestFilter  - NearestMipmapNearestFilter, nearestmipmapnearest
-	 * @see THREE.NearestMipmapLinearFilter   - NearestMipmapLinearFilter, nearestmipmaplinear
-	 * @see THREE.LinearMipmapNearestFilter   - LinearMipmapNearestFilter, linearmipmapnearest
-	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
-	 * @see THREE.LinearFilter                - Linearfilter, linear
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NearestFilter | NearestFilter, Nearest |
+	 * | THREE.NearestMipmapNearestFilter | NearestMipmapNearestFilter, nearestmipmapnearest |
+	 * | THREE.NearestMipmapLinearFilter | NearestMipmapLinearFilter, nearestmipmaplinear |
+	 * | THREE.LinearMipmapNearestFilter | LinearMipmapNearestFilter, linearmipmapnearest |
+	 * | THREE.LinearMipmapLinearFilter | LinearMipmapLinearFilter, linearmipmaplinear |
+	 * | THREE.LinearFilter | Linearfilter, linear |
 	 */
 	@Input() public minFilter: string = null;
 
@@ -218,23 +215,22 @@ export class NgxAbstractTextureComponent
 	 * The default is [THREE.RGBAFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), although the [TextureLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/TextureLoader) will automatically set this to [THREE.RGBFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) for JPG images.
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.PixelFormat
-	 * @see THREE.AlphaFormat - AlphaFormat, Alpha
-	 * @see THREE.RedFormat - RedFormat, Red
-	 * @see THREE.RedIntegerFormat - RedIntegerFormat, RedInteger
-	 * @see THREE.RGFormat - RGFormat, RG
-	 * @see THREE.RGIntegerFormat - RGIntegerFormat, RGInteger
-	 * @see THREE.RGBFormat - RGBFormat, RGB
-	 * @see THREE.RGBIntegerFormat - RGBIntegerFormat, RGBInteger
-	 * @see THREE.RGBAIntegerFormat - RGBAIntegerFormat, RGBAInteger
-	 * @see THREE.LuminanceFormat - LuminanceFormat, Luminance
-	 * @see THREE.LuminanceAlphaFormat - LuminanceAlphaFormat, LuminanceAlpha
-	 * @see THREE.RGBEFormat - RGBEFormat, RGBE
-	 * @see THREE.DepthFormat - DepthFormat, Depth
-	 * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
-	 * @see THREE.RGBAFormat - RGBAFormat, RGBA
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.AlphaFormat | AlphaFormat, Alpha |
+	 * | THREE.RedFormat | RedFormat, Red |
+	 * | THREE.RedIntegerFormat | RedIntegerFormat, RedInteger |
+	 * | THREE.RGFormat | RGFormat, RG |
+	 * | THREE.RGIntegerFormat | RGIntegerFormat, RGInteger |
+	 * | THREE.RGBFormat | RGBFormat, RGB |
+	 * | THREE.RGBIntegerFormat | RGBIntegerFormat, RGBInteger |
+	 * | THREE.RGBAIntegerFormat | RGBAIntegerFormat, RGBAInteger |
+	 * | THREE.LuminanceFormat | LuminanceFormat, Luminance |
+	 * | THREE.LuminanceAlphaFormat | LuminanceAlphaFormat, LuminanceAlpha |
+	 * | THREE.RGBEFormat | RGBEFormat, RGBE |
+	 * | THREE.DepthFormat | DepthFormat, Depth |
+	 * | THREE.DepthStencilFormat | DepthStencilFormat, DepthStencil |
+	 * | THREE.RGBAFormat | RGBAFormat, RGBA |
 	 */
 	@Input() public format: string = null;
 
@@ -242,21 +238,21 @@ export class NgxAbstractTextureComponent
 	 * This must correspond to the [.format](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/textures/Texture.format). The default is [THREE.UnsignedByteType](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures), which will be used for most texture formats.
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
-	 * Notice - case insensitive.
 	 *
-	 * @see THREE.TextureDataType ,
-	 * @see THREE.UnsignedByteType - UnsignedByteType , UnsignedByte,
-	 * @see THREE.ByteType - ByteType , Byte
-	 * @see THREE.ShortType - ShortType , Short
-	 * @see THREE.UnsignedShortType - UnsignedShortType , UnsignedShort
-	 * @see THREE.IntType - IntType , Int
-	 * @see THREE.UnsignedIntType - UnsignedIntType , UnsignedInt
-	 * @see THREE.FloatType - FloatType , Float
-	 * @see THREE.HalfFloatType - HalfFloatType , HalfFloat
-	 * @see THREE.UnsignedShort4444Type - UnsignedShort4444Type , UnsignedShort4444
-	 * @see THREE.UnsignedShort5551Type - UnsignedShort5551Type , UnsignedShort5551
-	 * @see THREE.UnsignedShort565Type - UnsignedShort565Type , UnsignedShort565
-	 * @see THREE.UnsignedInt248Type - UnsignedInt248Type , UnsignedInt248
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.UnsignedByteType | UnsignedByteType , UnsignedByte, |
+	 * | THREE.ByteType | ByteType , Byte |
+	 * | THREE.ShortType | ShortType , Short |
+	 * | THREE.UnsignedShortType | UnsignedShortType , UnsignedShort |
+	 * | THREE.IntType | IntType , Int |
+	 * | THREE.UnsignedIntType | UnsignedIntType , UnsignedInt |
+	 * | THREE.FloatType | FloatType , Float |
+	 * | THREE.HalfFloatType | HalfFloatType , HalfFloat |
+	 * | THREE.UnsignedShort4444Type | UnsignedShort4444Type , UnsignedShort4444 |
+	 * | THREE.UnsignedShort5551Type | UnsignedShort5551Type , UnsignedShort5551 |
+	 * | THREE.UnsignedShort565Type | UnsignedShort565Type , UnsignedShort565 |
+	 * | THREE.UnsignedInt248Type | UnsignedInt248Type , UnsignedInt248 |
 	 */
 	@Input() public dataType: string = null;
 
@@ -278,18 +274,16 @@ export class NgxAbstractTextureComponent
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureEncoding
-	 *
-	 * @see THREE.LinearEncoding - LinearEncoding ,
-	 * @see THREE.sRGBEncoding - sRGBEncoding ,
-	 * @see THREE.GammaEncoding - GammaEncoding ,
-	 * @see THREE.RGBEEncoding - RGBEEncoding ,
-	 * @see THREE.LogLuvEncoding - LogLuvEncoding ,
-	 * @see THREE.RGBM7Encoding - RGBM7Encoding ,
-	 * @see THREE.RGBM16Encoding - RGBM16Encoding ,
-	 * @see THREE.RGBDEncoding - RGBDEncoding ,
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.LinearEncoding | LinearEncoding , |
+	 * | THREE.sRGBEncoding | sRGBEncoding , |
+	 * | THREE.GammaEncoding | GammaEncoding , |
+	 * | THREE.RGBEEncoding | RGBEEncoding , |
+	 * | THREE.LogLuvEncoding | LogLuvEncoding , |
+	 * | THREE.RGBM7Encoding | RGBM7Encoding , |
+	 * | THREE.RGBM16Encoding | RGBM16Encoding , |
+	 * | THREE.RGBDEncoding | RGBDEncoding , |
 	 */
 	@Input() public encoding: string = null;
 

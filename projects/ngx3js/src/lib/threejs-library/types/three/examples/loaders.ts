@@ -41,6 +41,13 @@ import {
 } from '../index';
 import { Volume } from './misc';
 
+/**
+ * Rhino3dm loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [webgl_loader_3dm](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface Rhino3dmLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -57,6 +64,14 @@ export interface Rhino3dmLoader extends Loader {
 	dispose(): Rhino3dmLoader;
 }
 
+/**
+ * Three mfloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeMFLoader) page for details.
+ * 
+ * ### Examples
+ * [webgl_loader_3mf_materials](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
+ * [webgl_loader_3mf](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface ThreeMFLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	availableExtensions: object[];
@@ -72,6 +87,13 @@ export interface ThreeMFLoader extends Loader {
 	addExtension(extension: object): void;
 }
 
+/**
+ * Amfloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AMFLoader) page for details.
+ * 
+ * ### Examples
+ * [webgl_loader_amf](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface AMFLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -85,11 +107,21 @@ export interface AMFLoader extends Loader {
 	parse(data: ArrayBuffer): Group;
 }
 
+/**
+ * Bvh
+ */
 export interface BVH {
 	clip: AnimationClip;
 	skeleton: Skeleton;
 }
 
+/**
+ * Bvhloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BVHLoader) page for details.
+ * 
+ * ### Examples
+ * [webgl_loader_bvh](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface BVHLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	animateBonePositions: boolean;
@@ -105,6 +137,13 @@ export interface BVHLoader extends Loader {
 	parse(text: string): BVH;
 }
 
+/**
+ * Basis texture loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BasisTextureLoader) page for details.
+ * 
+ * ### Examples
+ * [webgl_loader_texture_basis](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface BasisTextureLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	transcoderBinary: ArrayBuffer | null;
@@ -136,12 +175,24 @@ export interface BasisTextureLoader extends Loader {
 	dispose(): void;
 }
 
+/**
+ * Collada
+ */
 export interface Collada {
 	kinematics: object;
 	library: object;
 	scene: Scene;
 }
 
+/**
+ * Collada loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ColladaLoader) page for details.
+ * 
+ * ### Examples
+ * [webgl_loader_collada_kinematics](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
+ * [webgl_loader_collada_skinning](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
+ * [webgl_loader_collada](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface ColladaLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -155,6 +206,9 @@ export interface ColladaLoader extends Loader {
 	parse(text: string, path: string): Collada;
 }
 
+/**
+ * Dds
+ */
 export interface DDS {
 	mipmaps: object[];
 	width: number;
@@ -164,12 +218,28 @@ export interface DDS {
 	isCubemap: boolean;
 }
 
+/**
+ * Ddsloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DDSLoader) page for details.
+ * 
+ * ### Examples
+ * [webgl_loader_obj_mtl](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
+ * [webgl_loader_texture_dds](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
+ * [webgpu_sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface DDSLoader extends CompressedTextureLoader {
 	new (manager?: LoadingManager): this;
 
 	parse(buffer: ArrayBuffer, loadMipmaps: boolean): DDS;
 }
 
+/**
+ * Dracoloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DRACOLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface DRACOLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -187,6 +257,9 @@ export interface DRACOLoader extends Loader {
 	dispose(): DRACOLoader;
 }
 
+/**
+ * Exr
+ */
 export interface EXR {
 	header: object;
 	width: number;
@@ -196,6 +269,13 @@ export interface EXR {
 	type: TextureDataType;
 }
 
+/**
+ * Exrloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface EXRLoader extends DataTextureLoader {
 	new (manager?: LoadingManager): this;
 	type: TextureDataType;
@@ -204,6 +284,13 @@ export interface EXRLoader extends DataTextureLoader {
 	setDataType(type: TextureDataType): this;
 }
 
+/**
+ * Fbxloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface FBXLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -217,6 +304,13 @@ export interface FBXLoader extends Loader {
 	parse(FBXBuffer: ArrayBuffer | string, path: string): Group;
 }
 
+/**
+ * Font loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface FontLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -230,6 +324,9 @@ export interface FontLoader extends Loader {
 	parse(json: any): Font;
 }
 
+/**
+ * Font
+ */
 export interface Font {
 	new (jsondata: any): this;
 
@@ -243,6 +340,13 @@ export interface Font {
 	generateShapes(text: string, size: number): Shape[];
 }
 
+/**
+ * Gcode loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface GCodeLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	splitLayer: boolean;
@@ -257,6 +361,9 @@ export interface GCodeLoader extends Loader {
 	parse(data: string): Group;
 }
 
+/**
+ * Gltf
+ */
 export interface GLTF {
 	animations: AnimationClip[];
 	scene: Group;
@@ -274,6 +381,13 @@ export interface GLTF {
 	userData: any;
 }
 
+/**
+ * Gltfloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface GLTFLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	dracoLoader: DRACOLoader | null;
@@ -306,6 +420,9 @@ export interface GLTFLoader extends Loader {
 
 export type GLTFReferenceType = 'materials' | 'nodes' | 'textures' | 'meshes';
 
+/**
+ * Gltfreference
+ */
 export interface GLTFReference {
 	materials?: number;
 	nodes?: number;
@@ -313,6 +430,9 @@ export interface GLTFReference {
 	meshes?: number;
 }
 
+/**
+ * Gltfparser
+ */
 export interface GLTFParser {
 	json: any;
 
@@ -378,6 +498,9 @@ export interface GLTFParser {
 	loadScene: () => Promise<Group>;
 }
 
+/**
+ * Gltfloader plugin
+ */
 export interface GLTFLoaderPlugin {
 	beforeRoot?: (() => Promise<void> | null) | undefined;
 	afterRoot?: ((result: GLTF) => Promise<void> | null) | undefined;
@@ -393,6 +516,13 @@ export interface GLTFLoaderPlugin {
 	createNodeAttachment?: ((nodeIndex: number) => Promise<Object3D> | null) | undefined;
 }
 
+/**
+ * Hdrcube texture loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface HDRCubeTextureLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	hdrLoader: RGBELoader;
@@ -408,6 +538,9 @@ export interface HDRCubeTextureLoader extends Loader {
 	setDataType(type: TextureDataType): this;
 }
 
+/**
+ * Ifcloader
+ */
 interface IFCLoader extends Loader {
 	ifcManager: IFCManager;
 
@@ -423,6 +556,9 @@ interface IFCLoader extends Loader {
 	parse(buffer: ArrayBuffer): Promise<IFCModel>;
 }
 
+/**
+ * Loader settings
+ */
 export interface LoaderSettings {
 	COORDINATE_TO_ORIGIN: boolean;
 	USE_FAST_BOOLS: boolean;
@@ -431,6 +567,9 @@ export interface LoaderSettings {
 	CIRCLE_SEGMENTS_HIGH?: number;
 }
 
+/**
+ * Ifcmanager
+ */
 export interface IFCManager {
 	parse(buffer: ArrayBuffer): Promise<IFCModel>;
 
@@ -633,22 +772,44 @@ export interface IFCModel extends Mesh {
 	setIFCManager(manager: IFCManager): void;
 }
 
+/**
+ * Id attribute by material
+ */
 export interface IdAttributeByMaterial {
 	[id: number]: number;
 }
+
+/**
+ * Id attributes by materials
+ */
 export interface IdAttributesByMaterials {
 	[materialID: string]: IdAttributeByMaterial;
 }
+
+/**
+ * Merge
+ */
 export interface merge {
 	(geoms: BufferGeometry[], createGroups?: boolean): BufferGeometry;
 }
+
+/**
+ * New float attr
+ */
 export interface newFloatAttr {
 	(data: any[], size: number): BufferAttribute;
 }
+
+/**
+ * New int attr
+ */
 export interface newIntAttr {
 	(data: any[], size: number): BufferAttribute;
 }
 
+/**
+ * Highlight config
+ */
 export interface HighlightConfig {
 	scene: Object3D;
 	ids: number[];
@@ -656,35 +817,62 @@ export interface HighlightConfig {
 	material?: Material;
 }
 
+/**
+ * Highlight config of model
+ */
 export interface HighlightConfigOfModel extends HighlightConfig {
 	modelID: number;
 }
 
+/**
+ * Selected items
+ */
 export interface SelectedItems {
 	[matID: string]: {
 		ids: Set<number>;
 		mesh: Mesh;
 	};
 }
+
+/**
+ * Map faceindex id
+ */
 export interface MapFaceindexID {
 	[key: number]: number;
 }
+
+/**
+ * Id geometries
+ */
 export interface IdGeometries {
 	[expressID: number]: BufferGeometry;
 }
+
+/**
+ * Geometries by material
+ */
 export interface GeometriesByMaterial {
 	material: Material;
 	geometries: IdGeometries;
 }
 
+/**
+ * Geometries by materials
+ */
 export interface GeometriesByMaterials {
 	[materialID: string]: GeometriesByMaterial;
 }
 
+/**
+ * Types map
+ */
 export interface TypesMap {
 	[key: number]: number;
 }
 
+/**
+ * Ifc model
+ */
 export interface IfcModel {
 	modelID: number;
 	mesh: IfcMesh;
@@ -695,6 +883,9 @@ export interface IfcModel {
 	};
 }
 
+/**
+ * Jsonobject
+ */
 export interface JSONObject {
 	expressID: number;
 	type: string;
@@ -702,6 +893,9 @@ export interface JSONObject {
 	[key: string]: any;
 }
 
+/**
+ * Ifc state
+ */
 export interface IfcState {
 	models: {
 		[modelID: number]: IfcModel;
@@ -711,16 +905,25 @@ export interface IfcState {
 	webIfcSettings?: LoaderSettings;
 }
 
+/**
+ * Ifc mesh
+ */
 export interface IfcMesh extends Mesh {
 	modelID: number;
 }
 
+/**
+ * Node
+ */
 export interface Node {
 	expressID: number;
 	type: string;
 	children: Node[];
 }
 
+/**
+ * P name
+ */
 export interface pName {
 	name: number;
 	relating: string;
@@ -728,6 +931,9 @@ export interface pName {
 	key: string;
 }
 
+/**
+ * Props names
+ */
 export interface PropsNames {
 	aggregates: {
 		name: number;
@@ -761,6 +967,9 @@ export interface PropsNames {
 	};
 }
 
+/**
+ * Ifc geometry
+ */
 export interface IfcGeometry {
 	GetVertexData(): number;
 
@@ -771,23 +980,36 @@ export interface IfcGeometry {
 	GetIndexDataSize(): number;
 }
 
+/**
+ * Raw line data
+ */
 export interface RawLineData {
 	ID: number;
 	type: number;
 	arguments: any[];
 }
 
+/**
+ * Vector ex
+ * @template T 
+ */
 export interface VectorEx<T> {
 	get(index: number): T;
 
 	size(): number;
 }
 
+/**
+ * Flat mesh
+ */
 export interface FlatMesh {
 	geometries: VectorEx<PlacedGeometry>;
 	expressID: number;
 }
 
+/**
+ * Placed geometry
+ */
 export interface PlacedGeometry {
 	color: {
 		x: number;
@@ -799,6 +1021,9 @@ export interface PlacedGeometry {
 	flatTransformation: number[];
 }
 
+/**
+ * Ifc api
+ */
 export interface IfcAPI {
 	wasmModule: any;
 	fs: any;
@@ -883,6 +1108,13 @@ export interface IfcAPI {
 
 export { IFCLoader };
 
+/**
+ * Kmzloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface KMZLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -896,6 +1128,13 @@ export interface KMZLoader extends Loader {
 	parse(data: ArrayBuffer): Collada;
 }
 
+/**
+ * Ktx2 loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface KTX2Loader extends CompressedTextureLoader {
 	new (manager?: LoadingManager): this;
 
@@ -911,6 +1150,9 @@ export interface KTX2Loader extends CompressedTextureLoader {
 	): KTX2Loader;
 }
 
+/**
+ * Ktx
+ */
 export interface KTX {
 	mipmaps: object[];
 	width: number;
@@ -920,12 +1162,26 @@ export interface KTX {
 	isCubemap: boolean;
 }
 
+/**
+ * Ktxloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface KTXLoader extends CompressedTextureLoader {
 	new (manager?: LoadingManager): this;
 
 	parse(buffer: ArrayBuffer, loadMipmaps: boolean): KTX;
 }
 
+/**
+ * Ldraw loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface LDrawLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -945,12 +1201,22 @@ export interface LDrawLoader extends Loader {
 	getMaterial(colourCode: string): Material | null;
 }
 
+/**
+ * Lut3dl result
+ */
 export interface LUT3dlResult {
 	size: number;
 	texture: DataTexture;
 	texture3D: DataTexture3D;
 }
 
+/**
+ * Lut3dl loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface LUT3dlLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -964,6 +1230,9 @@ export interface LUT3dlLoader extends Loader {
 	parse(data: string): LUT3dlResult;
 }
 
+/**
+ * Lutcube result
+ */
 export interface LUTCubeResult {
 	title: string;
 	size: number;
@@ -973,6 +1242,13 @@ export interface LUTCubeResult {
 	texture3D: DataTexture3D;
 }
 
+/**
+ * Lutcube loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface LUTCubeLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -986,11 +1262,21 @@ export interface LUTCubeLoader extends Loader {
 	parse(data: string): LUTCubeResult;
 }
 
+/**
+ * Lwo
+ */
 export interface LWO {
 	materials: Material[];
 	meshes: Object3D[];
 }
 
+/**
+ * Lwoloader parameters
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface LWOLoaderParameters {
 	/**
 	 * Base content delivery folder path, use when it differs from Lightwave default structure
@@ -998,6 +1284,13 @@ export interface LWOLoaderParameters {
 	resourcePath?: string;
 }
 
+/**
+ * Lwoloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface LWOLoader extends Loader {
 	new (manager?: LoadingManager, parameters?: LWOLoaderParameters): this;
 
@@ -1011,6 +1304,9 @@ export interface LWOLoader extends Loader {
 	parse(data: ArrayBuffer, path: string, modelName: string): LWO;
 }
 
+/**
+ * Log luv
+ */
 export interface LogLuv {
 	width: number;
 	height: number;
@@ -1019,6 +1315,14 @@ export interface LogLuv {
 	type: TextureDataType;
 	flipY: boolean;
 }
+
+/**
+ * Log luv loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface LogLuvLoader extends DataTextureLoader {
     type: TextureDataType;
     new(manager: LoadingManager) : this;
@@ -1026,6 +1330,13 @@ export interface LogLuvLoader extends DataTextureLoader {
     setDataType(value: TextureDataType) : this;
 }
 
+/**
+ * Lottie loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface LottieLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1040,6 +1351,13 @@ export interface LottieLoader extends Loader {
 	setQuality(value: number): void;
 }
 
+/**
+ * Md2 loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface MD2Loader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1053,11 +1371,21 @@ export interface MD2Loader extends Loader {
 	parse(data: ArrayBuffer): BufferGeometry;
 }
 
+/**
+ * Mdd
+ */
 export interface MDD {
 	morphTargets: BufferAttribute[];
 	clip: AnimationClip;
 }
 
+/**
+ * Mddloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface MDDLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1071,11 +1399,22 @@ export interface MDDLoader extends Loader {
 	parse(data: ArrayBuffer): MDD;
 }
 
+/**
+ * Mmdloader animation object
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ */
 export interface MMDLoaderAnimationObject {
 	animation: AnimationClip;
 	mesh: SkinnedMesh;
 }
 
+/**
+ * Mmdloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface MMDLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	animationBuilder: object;
@@ -1133,6 +1472,9 @@ export interface MMDLoader extends Loader {
 	setAnimationPath(animationPath: string): this;
 }
 
+/**
+ * Material creator options
+ */
 export interface MaterialCreatorOptions {
 	/**
 	 * side: Which side to apply the material
@@ -1161,6 +1503,13 @@ export interface MaterialCreatorOptions {
 	invertTrProperty?: boolean | undefined;
 }
 
+/**
+ * Mtlloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface MTLLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	materialOptions: MaterialCreatorOptions;
@@ -1177,6 +1526,9 @@ export interface MTLLoader extends Loader {
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<MTLLoader.MaterialCreator>;
 }
 
+/**
+ * Material info
+ */
 export interface MaterialInfo {
 	ks?: number[] | undefined;
 	kd?: number[] | undefined;
@@ -1193,6 +1545,9 @@ export interface MaterialInfo {
 	tr?: number | undefined;
 }
 
+/**
+ * Tex params
+ */
 export interface TexParams {
 	scale: Vector2;
 	offset: Vector2;
@@ -1200,6 +1555,9 @@ export interface TexParams {
 }
 
 export namespace MTLLoader {
+	/**
+	 * Material creator
+	 */
 	export interface MaterialCreator {
 		new (baseUrl?: string, options?: MaterialCreatorOptions): this;
 
@@ -1232,7 +1590,14 @@ export namespace MTLLoader {
 	}
 }
 
-export interface NRRDLoader {
+/**
+ * Nrrdloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
+export interface NRRDLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	manager: LoadingManager;
 	path: string;
@@ -1250,6 +1615,13 @@ export interface NRRDLoader {
 	setPath(value: string): this;
 }
 
+/**
+ * Objloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface OBJLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	materials: MTLLoader.MaterialCreator;
@@ -1265,6 +1637,13 @@ export interface OBJLoader extends Loader {
 	setMaterials(materials: MTLLoader.MaterialCreator): this;
 }
 
+/**
+ * Pcdloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface PCDLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	littleEndian: boolean;
@@ -1279,6 +1658,9 @@ export interface PCDLoader extends Loader {
 	parse(data: ArrayBuffer | string, url: string): Points;
 }
 
+/**
+ * Pdb
+ */
 export interface PDB {
 	geometryAtoms: BufferGeometry;
 	geometryBonds: BufferGeometry;
@@ -1287,6 +1669,13 @@ export interface PDB {
 	};
 }
 
+/**
+ * Pdbloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface PDBLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1300,6 +1689,13 @@ export interface PDBLoader extends Loader {
 	parse(text: string): PDB;
 }
 
+/**
+ * Plyloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface PLYLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	propertyNameMapping: object;
@@ -1315,6 +1711,13 @@ export interface PLYLoader extends Loader {
 	parse(data: ArrayBuffer | string): BufferGeometry;
 }
 
+/**
+ * Prwmloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface PRWMLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1330,6 +1733,9 @@ export interface PRWMLoader extends Loader {
 	isBigEndianPlatform(): boolean;
 }
 
+/**
+ * Pvr
+ */
 export interface PVR {
 	mipmaps: object[];
 	width: number;
@@ -1339,12 +1745,22 @@ export interface PVR {
 	isCubemap: boolean;
 }
 
+/**
+ * Pvrloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface PVRLoader extends CompressedTextureLoader {
 	new (manager?: LoadingManager): this;
 
 	parse(buffer: ArrayBuffer, loadMipmaps: boolean): PVR;
 }
 
+/**
+ * Rgbe
+ */
 export interface RGBE {
 	width: number;
 	height: number;
@@ -1356,6 +1772,13 @@ export interface RGBE {
 	type: TextureDataType;
 }
 
+/**
+ * Rgbeloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface RGBELoader extends DataTextureLoader {
 	new (manager?: LoadingManager): this;
 	type: TextureDataType;
@@ -1364,6 +1787,9 @@ export interface RGBELoader extends DataTextureLoader {
 	setDataType(type: TextureDataType): this;
 }
 
+/**
+ * Rgbm
+ */
 export interface RGBM {
 	width: number;
 	height: number;
@@ -1375,6 +1801,13 @@ export interface RGBM {
 	encoding: TextureEncoding;
 }
 
+/**
+ * Rgbmloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface RGBMLoader extends DataTextureLoader {
 	new (manager?: LoadingManager): this;
 
@@ -1388,6 +1821,13 @@ export interface RGBMLoader extends DataTextureLoader {
 	parse(buffer: ArrayBuffer): RGBM;
 }
 
+/**
+ * Stlloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface STLLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1401,6 +1841,9 @@ export interface STLLoader extends Loader {
 	parse(data: ArrayBuffer | string): BufferGeometry;
 }
 
+/**
+ * Svgresult paths
+ */
 export interface SVGResultPaths extends ShapePath {
 	userData?:
 		| {
@@ -1409,11 +1852,17 @@ export interface SVGResultPaths extends ShapePath {
 		| undefined;
 }
 
+/**
+ * Svgresult
+ */
 export interface SVGResult {
 	paths: SVGResultPaths[];
 	xml: XMLDocument;
 }
 
+/**
+ * Stroke style
+ */
 export interface StrokeStyle {
 	strokeColor: string;
 	strokeWidth: number;
@@ -1422,6 +1871,13 @@ export interface StrokeStyle {
 	strokeMiterLimit: number;
 }
 
+/**
+ * Svgloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface SVGLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1452,6 +1908,13 @@ export interface SVGLoader extends Loader {
 	createShapes(shapePath: ShapePath): Shape[];
 }
 
+/**
+ * Tdsloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface TDSLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	debug: boolean;
@@ -1493,6 +1956,13 @@ export interface TDSLoader extends Loader {
 	resetPosition(): void;
 }
 
+/**
+ * Tgaloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface TGALoader extends DataTextureLoader {
 	new (manager?: LoadingManager): this;
 
@@ -1506,6 +1976,13 @@ export interface TGALoader extends DataTextureLoader {
 	parse(data: ArrayBuffer): DataTexture;
 }
 
+/**
+ * Ttfloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface TTFLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	reversed: boolean;
@@ -1520,6 +1997,13 @@ export interface TTFLoader extends Loader {
 	parse(arraybuffer: ArrayBuffer): object;
 }
 
+/**
+ * Tilt loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface TiltLoader extends Loader {
 	new (manager?: LoadingManager, assetUrl?: string): this;
 
@@ -1533,12 +2017,22 @@ export interface TiltLoader extends Loader {
 	parse(data: ArrayBuffer): Group;
 }
 
+/**
+ * Chunk
+ */
 export interface Chunk {
 	palette: number[];
 	size: { x: number; y: number; z: number };
 	data: Uint8Array;
 }
 
+/**
+ * Voxloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface VOXLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1552,14 +2046,27 @@ export interface VOXLoader extends Loader {
 	parse(data: ArrayBuffer): object[];
 }
 
+/**
+ * Voxmesh
+ */
 export interface VOXMesh extends Mesh {
 	new (chunk: Chunk): this;
 }
 
+/**
+ * Voxdata texture3 d
+ */
 export interface VOXDataTexture3D extends DataTexture3D {
 	new (chunk: Chunk): this;
 }
 
+/**
+ * Vrmlloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface VRMLLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1573,6 +2080,13 @@ export interface VRMLLoader extends Loader {
 	parse(data: string, path: string): Scene;
 }
 
+/**
+ * Vrmloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface VRMLoader extends Loader {
 	new (manager?: LoadingManager): this;
 	gltfLoader: GLTFLoader;
@@ -1588,6 +2102,13 @@ export interface VRMLoader extends Loader {
 	setDRACOLoader(dracoLoader: DRACOLoader): this;
 }
 
+/**
+ * Vtkloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface VTKLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1601,6 +2122,13 @@ export interface VTKLoader extends Loader {
 	parse(data: ArrayBuffer | string, path: string): BufferGeometry;
 }
 
+/**
+ * Xyzloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface XYZLoader extends Loader {
 	new (manager?: LoadingManager): this;
 
@@ -1614,6 +2142,13 @@ export interface XYZLoader extends Loader {
 	parse(data: string, onLoad: (geometry: BufferGeometry) => void): object;
 }
 
+/**
+ * Node material loader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
+ * 
+ * ### Examples
+ * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ */
 export interface NodeMaterialLoader extends Loader {
 	new (manager?: LoadingManager, library?: any): this;
 	load(

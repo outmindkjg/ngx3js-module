@@ -49,9 +49,6 @@ export class NgxAbstractGeometryComponent
 {
 	/**
 	 * The name of the object (doesn't need to be unique). Default is an empty string.
-	 *
-	 * Notice - case insensitive.
-	 *
 	 */
 	@Input() public name: string = null;
 
@@ -391,10 +388,12 @@ export class NgxAbstractGeometryComponent
 
 	/**
 	 * The meshType of abstract geometry component
-	 *
-	 * @see THREE.EdgesGeometry - EdgesGeometry, Edges,
-	 * @see THREE.WireframeGeometry - WireframeGeometry, Wireframe,
-	 * @see WireframeGeometry2 - WireframeGeometry2, Wireframe2,
+	 * 
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.EdgesGeometry | EdgesGeometry, Edges |
+	 * | THREE.WireframeGeometry | WireframeGeometry, Wireframe |
+	 * | WireframeGeometry2 | WireframeGeometry2, Wireframe2 |
 	 */
 	@Input() public meshType: string = null;
 

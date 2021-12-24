@@ -1954,32 +1954,40 @@ export interface Raycaster {
  * Each uniform must have a *value* property. The type of the value must correspond to the type of the uniform variable in the GLSL code as specified for the primitive GLSL types in the table below. Uniform structures and arrays are also supported. GLSL arrays of primitive type must either be specified as an array of the corresponding THREE objects or as a flat array containing the data of all the objects. In other words; GLSL primitives in arrays must not be represented by arrays. This rule does not apply transitively.
  * An array of *vec2* arrays, each with a length of five vectors, must be an array of arrays, of either five [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) objects or ten *number*s.
  *
- * |    GLSL type   |      JavaScript type      |
- * |:----------------:|---------------------------:|
- * | int                  | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)                       |
- * | uint (WebGL 2) | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)                   | 
- * | float               | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)                       |
- * | bool               | [Boolean](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean)                       |
- * | bool               | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number)                       |
- * | vec2               | [THREE.Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2)            |
- * | vec2               | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | vec2               | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
- * | vec3               | [THREE.Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3)            |
- * | vec3               | [THREE.Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color)                    |
- * | vec3               | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | vec3               | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
- * | vec4               | [THREE.Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4)            |
- * | vec4               | [THREE.Quaternion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion)|
- * | vec4               | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | vec4               | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
+ * |    GLSL type      |      JavaScript type      |
+ * |:-----------------:|--------------------------:|
+ * | int               | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) |
+ * | uint (WebGL 2)    | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) |
+ * | float             | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) |
+ * | bool              | [Boolean](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Boolean) |
+ * | bool              | [Number](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) |
+ * | vec2              | [THREE.Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) |
+ * | vec2              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | vec2              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * | vec3              | [THREE.Vector3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) |
+ * | vec3              | [THREE.Color](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) |
+ * | vec3              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | vec3              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * | vec4              | [THREE.Vector4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) |
+ * | vec4              | [THREE.Quaternion](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) |
+ * | vec4              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | vec4              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
  * | mat2              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | mat2              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
- * | mat3              | [THREE.Matrix3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3)            |
+ * | mat2              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * | mat3              | [THREE.Matrix3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3) |
  * | mat3              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | mat3              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
- * | mat4              | [THREE.Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4)            |
+ * | mat3              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * | mat4              | [THREE.Matrix4](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) |
  * | mat4              | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
- * | mat4              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*)                          |
+ * | mat4              | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * | ivec2, bvec2      | [Float32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float32Array) (*) |
+ * | ivec2, bvec2      | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * | ivec3, bvec3      | [Int32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Int32Array) (*) |
+ * | ivec3, bvec3      | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * | ivec4, bvec4      | [Int32Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Int32Array) (*) |
+ * | ivec4, bvec4      | [Array](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Array) (*) |
+ * | sampler2D         | [THREE.Texture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Texture) |
+ * | samplerCube       | [THREE.CubeTexture](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubeTexture) |
  *
  */
 export interface Uniform {

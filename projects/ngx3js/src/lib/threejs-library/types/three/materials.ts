@@ -47,6 +47,9 @@ export interface LineBasicMaterialParameters extends MaterialParameters {
 /**
  * A material for drawing wireframe-style geometries.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/LineBasicMaterial) page for a live demo.
+ *
  * ### Examples
  * [WebGL / buffergeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange) |
  * [WebGL / buffergeometry / lines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_lines) |
@@ -143,6 +146,9 @@ export interface LineDashedMaterialParameters extends LineBasicMaterialParameter
 
 /**
  * A material for drawing wireframe-style geometries with dashed lines.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineDashedMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/LineDashedMaterial) page for a live demo.
  *
  * ### Examples
  * [WebGL / lines / dashed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_dashed)
@@ -448,6 +454,10 @@ export interface MaterialParameters {
  * Materials describe the appearance of [objects](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object).
  * They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
  * The following properties and methods are inherited by all other material types (although they may have different defaults).
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/Material) page for a live demo.
+ *
  */
 export interface Material extends EventDispatcher {
 	/**
@@ -933,6 +943,10 @@ export interface MeshBasicMaterialParameters extends MaterialParameters {
 /**
  * A material for drawing geometries in a simple shaded (flat or wireframe) way.
  * This material is not affected by lights.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshBasicMaterial) page for a live demo.
+ *
  */
 export interface MeshBasicMaterial extends Material {
 	/**
@@ -1096,6 +1110,10 @@ export interface MeshDepthMaterialParameters extends MaterialParameters {
 
 /**
  * A material for drawing geometry by depth. Depth is based off of the camera near and far plane. White is nearest, black is farthest.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshDepthMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshDepthMaterial) page for a live demo.
+ *
  */
 export interface MeshDepthMaterial extends Material {
 	/**
@@ -1226,6 +1244,9 @@ export interface MeshDistanceMaterialParameters extends MaterialParameters {
  * MeshDistanceMaterial is internally used for implementing shadow mapping with [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight)s.
  * Can also be used to customize the shadow casting of an object by assigning an instance of MeshDistanceMaterial to [Object3D.customDistanceMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.customDistanceMaterial).
  * The following examples demonstrates this approach in order to ensure transparent parts of objects do no cast shadows.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshDistanceMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshDistanceMaterial) page for a live demo.
  *
  * ### Examples
  * [WebGL / shadowmap / pointlight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmap_pointlight)
@@ -1426,6 +1447,10 @@ export interface MeshLambertMaterialParameters extends MaterialParameters {
  * This calculates shading per vertex (i.e. in the [vertex shader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders))
  * and interpolates the results over the polygon's faces.
  * Due to the simplicity of the reflectance and illumination models, performance will be greater when using this material over the [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial),	[MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) or [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial), at the cost of some graphical accuracy.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshLambertMaterial) page for a live demo.
+ *
  */
 export interface MeshLambertMaterial extends Material {
 	/**
@@ -1653,6 +1678,10 @@ export interface MeshMatcapMaterialParameters extends MaterialParameters {
  * MeshMatcapMaterial is defined by a MatCap (or Lit Sphere) texture, which encodes the material color and shading.
  * MeshMatcapMaterial does not respond to lights since the matcap image file encodes baked lighting.
  * It will cast a shadow onto an object that receives shadows (and shadow clipping works), but it will not self-shadow or receive shadows.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshMatcapMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshMatcapMaterial) page for a live demo.
+ *
  */
 export interface MeshMatcapMaterial extends Material {
 	/**
@@ -1831,6 +1860,10 @@ export interface MeshNormalMaterialParameters extends MaterialParameters {
 
 /**
  * A material that maps the normal vectors to RGB colors.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshNormalMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshNormalMaterial) page for a live demo.
+ *
  */
 export interface MeshNormalMaterial extends Material {
 	/**
@@ -2104,15 +2137,14 @@ export interface MeshPhongMaterialParameters extends MaterialParameters {
 
 /**
  * A material for shiny surfaces with specular highlights.
- * The material uses a non-physically based [Blinn-Phong](https://en.wikipedia.org/wiki/Blinn-Phong_shading_model)
- * model for calculating reflectance. Unlike the Lambertian model used in the [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial)
- * this can simulate shiny surfaces with specular highlights (such as varnished wood).
+ * The material uses a non-physically based [Blinn-Phong](https://en.wikipedia.org/wiki/Blinn-Phong_shading_model) model for calculating reflectance. Unlike the Lambertian model used in the [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial) this can simulate shiny surfaces with specular highlights (such as varnished wood).
  * Shading is calculated using a [Phong](https://en.wikipedia.org/wiki/Phong_shading) shading model.
- * This calculates shading per pixel (i.e. in the [fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders),
- * AKA pixel shader)	which gives more accurate results than the Gouraud model used by [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial), at the cost of some performance. The [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) and [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial)
- * also use this shading model.
- * Performance will generally be greater when using this material over the	[MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial)
- * or [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial), at the cost of some graphical accuracy.
+ * This calculates shading per pixel (i.e. in the [fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders), AKA pixel shader)	which gives more accurate results than the Gouraud model used by [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial), at the cost of some performance. The [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) and [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial) also use this shading model.
+ * Performance will generally be greater when using this material over the	[MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) or [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial), at the cost of some graphical accuracy.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshPhongMaterial) page for a live demo.
+ *
  */
 export interface MeshPhongMaterial extends Material {
 	/**
@@ -2422,6 +2454,9 @@ export interface MeshPhysicalMaterialParameters extends MeshStandardMaterialPara
  * Advanced reflectivity: More flexible reflectivity for non-metallic materials.
  * As a result of these complex shading features, MeshPhysicalMaterial has a higher performance cost, per pixel, than other three.js materials. Most effects are disabled by default, and add cost as they are enabled. For best results, always specify an *.envMap*
  * when using this material.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshPhysicalMaterial) page for a live demo.
  *
  * ### Examples
  * [materials / variations / physical](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_physical) |
@@ -2742,14 +2777,17 @@ export interface MeshStandardMaterialParameters extends MaterialParameters {
  * A standard physically based material, using Metallic-Roughness workflow.
  * Physically based rendering (PBR) has recently become the standard in many 3D applications, such as [Unity](https://blogs.unity3d.com/2014/10/29/physically-based-shading-in-unity-5-a-primer/),s [Unreal](https://docs.unrealengine.com/latest/INT/Engine/Rendering/Materials/PhysicallyBased/) and [3D Studio Max](http://area.autodesk.com/blogs/the-3ds-max-blog/what039s-new-for-rendering-in-3ds-max-2017).
  * This approach differs from older approaches in that instead of using approximations for the way in which light	interacts with a surface, a physically correct model is used. The idea is that, instead of tweaking materials to look good under specific lighting, a material can	be created that will react 'correctly' under all lighting scenarios.
- * In practice this gives a more	accurate and realistic looking result than the [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial)
- * or [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial), at the cost of being somewhat more computationally expensive.
+ * In practice this gives a more	accurate and realistic looking result than the [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial) or [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial), at the cost of being somewhat more computationally expensive.
  * Shading is calculated in the same way as for the [MeshPhongMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhongMaterial), using a [Phong](https://en.wikipedia.org/wiki/Phong_shading) shading model.	This calculates shading per pixel (i.e. in the [fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders),a AKA pixel shader) which gives more accurate results than the Gouraud model used by [MeshLambertMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshLambertMaterial), at the cost of some performance.
  * Note that for best results you should always specify an *.envMap* when using this material.
  * For a non-technical introduction to the concept of PBR and how to set up a PBR material, check out these articles by the people at [marmoset](https://www.marmoset.co):
  * [Basic Theory of Physically Based Rendering](https://www.marmoset.co/posts/basic-theory-of-physically-based-rendering/)
  * [Physically Based Rendering and You Can Too](https://www.marmoset.co/posts/physically-based-rendering-and-you-can-too/)
  * Technical details of the approach used in three.js (and most other PBR systems) can be found is this [paper from Disney](https://media.disneyanimation.com/uploads/production/publication_asset/48/asset/s2012_pbs_disney_brdf_notes_v3.pdf) (pdf), by Brent Burley.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshStandardMaterial) page for a live demo.
+ *
  */
 export interface MeshStandardMaterial extends Material {
 	/**
@@ -3114,6 +3152,10 @@ export interface MeshToonMaterialParameters extends MaterialParameters {
 
 /**
  * A material implementing toon shading.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshToonMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/MeshToonMaterial) page for a live demo.
+ *
  * ### Examples
  * [materials / variations / toon](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_toon)
  */
@@ -3328,6 +3370,9 @@ export interface PointsMaterialParameters extends MaterialParameters {
 /**
  * The default material used by [Points](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points).
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointsMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/PointsMaterial) page for a live demo.
+ *
  * ### Examples
  * [misc / controls / fly](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_fly) |
  * [WebGL / BufferGeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange) |
@@ -3414,6 +3459,9 @@ export interface PointsMaterial extends Material {
 
 /**
  * This class works just like [ShaderMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderMaterial), except that definitions of built-in uniforms and attributes are not automatically prepended to the GLSL shader code.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RawShaderMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/RawShaderMaterial) page for a live demo.
  *
  * ### Examples
  * [WebGL / buffergeometry / rawshader](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_rawshader) |
@@ -3526,6 +3574,9 @@ export interface ShaderMaterialParameters extends MaterialParameters {
  * The loop has to be [normalized](https://en.wikipedia.org/wiki/Normalized_loop).
  * The loop variable has to be *i*.
  * The value *UNROLLED_LOOP_INDEX* will be replaced with the explicitly value of *i* for the given iteration and can be used in preprocessor statements.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShaderMaterial) page for a live demo.
  *
  * ### Examples
  * [webgl / buffergeometry / custom / attributes / particles](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_custom_attributes_particles) |
@@ -3679,6 +3730,9 @@ export interface ShadowMaterialParameters extends MaterialParameters {
 /**
  * This material can receive shadows, but otherwise is completely transparent.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShadowMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShadowMaterial) page for a live demo.
+ *
  * ### Code Example
  * ```js
  * const geometry = new THREE.PlaneGeometry( 2000, 2000 );
@@ -3754,6 +3808,9 @@ export interface SpriteMaterialParameters extends MaterialParameters {
 
 /**
  * A material for a use with a [Sprite](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite).
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpriteMaterial) page for details.
+ * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/SpriteMaterial) page for a live demo.
  *
  * ### Examples
  * [WebGL / raycast / sprite](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_raycast_sprite) |

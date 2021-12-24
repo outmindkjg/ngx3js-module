@@ -148,31 +148,30 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	/**
 	 * The type if matrial.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Material
-	 * @see THREE.LineBasicMaterial - LineBasicMaterial, LineBasic
-	 * @see THREE.LineDashedMaterial - LineDashedMaterial, LineDashed
-	 * @see THREE.MeshBasicMaterial - MeshBasicMaterial, MeshBasic
-	 * @see THREE.MeshDepthMaterial - MeshDepthMaterial, MeshDepth,
-	 * @see THREE.MeshDistanceMaterial - MeshDistanceMaterial, MeshDistance,
-	 * @see THREE.MeshMatcapMaterial - MeshMatcapMaterial, MeshMatcap,
-	 * @see THREE.MeshNormalMaterial - MeshNormalMaterial, MeshNormal,
-	 * @see THREE.MeshPhongMaterial - MeshPhongMaterial, MeshPhong,
-	 * @see THREE.MeshPhysicalMaterial - MeshPhysicalMaterial, MeshPhysical,
-	 * @see THREE.MeshStandardMaterial - MeshStandardMaterial, MeshStandard,
-	 * @see THREE.MeshToonMaterial - MeshToonMaterial, MeshToon,
-	 * @see THREE.PointsMaterial - PointsMaterial, Points,
-	 * @see THREE.RawShaderMaterial - RawShaderMaterial, RawShader,
-	 * @see THREE.ShaderMaterial - ShaderMaterial, Shader,
-	 * @see THREE.ShadowMaterial - ShadowMaterial, Shadow,
-	 * @see THREE.SpriteMaterial - SpriteMaterial, Sprite,
-	 * @see THREE.StandardNodeMaterial - StandardNodeMaterial, StandardNode,
-	 * @see THREE.BasicNodeMaterial - BasicNodeMaterial, BasicNode,
-	 * @see THREE.MeshStandardNodeMaterial - MeshStandardNodeMaterial, MeshStandardNode,
-	 * @see THREE.PhongNodeMaterial - PhongNodeMaterial, PhongNode,
-	 * @see THREE.SpriteNodeMaterial - SpriteNodeMaterial, SpriteNode,
-	 * @see THREE.MeshLambertMaterial - MeshLambertMaterial, MeshLambert
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.LineBasicMaterial | LineBasicMaterial, LineBasic |
+	 * | THREE.LineDashedMaterial | LineDashedMaterial, LineDashed |
+	 * | THREE.MeshBasicMaterial | MeshBasicMaterial, MeshBasic |
+	 * | THREE.MeshDepthMaterial | MeshDepthMaterial, MeshDepth, |
+	 * | THREE.MeshDistanceMaterial | MeshDistanceMaterial, MeshDistance, |
+	 * | THREE.MeshMatcapMaterial | MeshMatcapMaterial, MeshMatcap, |
+	 * | THREE.MeshNormalMaterial | MeshNormalMaterial, MeshNormal, |
+	 * | THREE.MeshPhongMaterial | MeshPhongMaterial, MeshPhong, |
+	 * | THREE.MeshPhysicalMaterial | MeshPhysicalMaterial, MeshPhysical, |
+	 * | THREE.MeshStandardMaterial | MeshStandardMaterial, MeshStandard, |
+	 * | THREE.MeshToonMaterial | MeshToonMaterial, MeshToon, |
+	 * | THREE.PointsMaterial | PointsMaterial, Points, |
+	 * | THREE.RawShaderMaterial | RawShaderMaterial, RawShader, |
+	 * | THREE.ShaderMaterial | ShaderMaterial, Shader, |
+	 * | THREE.ShadowMaterial | ShadowMaterial, Shadow, |
+	 * | THREE.SpriteMaterial | SpriteMaterial, Sprite, |
+	 * | THREE.StandardNodeMaterial | StandardNodeMaterial, StandardNode, |
+	 * | THREE.BasicNodeMaterial | BasicNodeMaterial, BasicNode, |
+	 * | THREE.MeshStandardNodeMaterial | MeshStandardNodeMaterial, MeshStandardNode, |
+	 * | THREE.PhongNodeMaterial | PhongNodeMaterial, PhongNode, |
+	 * | THREE.SpriteNodeMaterial | SpriteNodeMaterial, SpriteNode, |
+	 * | THREE.MeshLambertMaterial | MeshLambertMaterial, MeshLambert |
 	 */
 	@Input() public type: string = 'lambert';
 
@@ -343,11 +342,11 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * How to combine the result of the surface's color with the environment map, if any.
 	 * Options are [THREE.Multiply](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) (default), [THREE.MixOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials), [THREE.AddOperation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). If mix is chosen, the [MeshBasicMaterial.reflectivity](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/materials/MeshBasicMaterial.reflectivity) is used to blend between the two colors.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.MultiplyOperation - MultiplyOperation, Multiply
-	 * @see THREE.MixOperation - MixOperation, Mix
-	 * @see THREE.AddOperation - AddOperation, Add
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.MultiplyOperation | MultiplyOperation, Multiply |
+	 * | THREE.MixOperation | MixOperation, Mix |
+	 * | THREE.AddOperation | AddOperation, Add |
 	 */
 	@Input() public combine: string = null;
 

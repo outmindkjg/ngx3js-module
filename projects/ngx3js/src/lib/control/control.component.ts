@@ -106,21 +106,22 @@ export class NgxControlComponent
 	/**
 	 * The type of control
 	 *
-	 * Notice - case insensitive.
 	 * See the [ngx TransformControls control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control/TransformControls) page for a live demo.
 	 * See the [ngx DragControls control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control/DragControls) page for a live demo.
 	 * See the [ngx OrbitControls control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control/OrbitControls) page for a live demo.
 	 *
-	 * @see FlyControls - FlyControls, Fly
-	 * @see FirstPersonControls - FirstPersonControls, FirstPerson
-	 * @see DeviceOrientationControls - DeviceOrientationControls, DeviceOrientation
-	 * @see DragControls - DragControls, Drag
-	 * @see TransformControls - TransformControls, Transform
-	 * @see TrackballControls - TrackballControls, Trackball
-	 * @see ArcballControls - ArcballControls, Arcball
-	 * @see CSM - CSM
-	 * @see PlaneControls - PlaneControls, Plane
-	 * @see OrbitControls - OrbitControls, Orbit
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | FlyControls | FlyControls, Fly |
+	 * | FirstPersonControls | FirstPersonControls, FirstPerson |
+	 * | DeviceOrientationControls | DeviceOrientationControls, DeviceOrientation |
+	 * | DragControls | DragControls, Drag |
+	 * | TransformControls | TransformControls, Transform |
+	 * | TrackballControls | TrackballControls, Trackball |
+	 * | ArcballControls | ArcballControls, Arcball |
+	 * | CSM | CSM |
+	 * | PlaneControls | PlaneControls, Plane |
+	 * | OrbitControls | OrbitControls, Orbit |
 	 */
 	@Input() type: string = 'orbit';
 

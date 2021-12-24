@@ -7,6 +7,9 @@ import { WebGLRenderTarget } from './renderers';
  * This light globally illuminates all objects in the scene equally.
  * This light cannot be used to cast shadows as it does not have a direction.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AmbientLight) page for details.
+ * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light/AmbientLight) page for a live demo.
+ *
  * ### Examples
  * [animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending)
  *
@@ -55,6 +58,9 @@ export interface AmbientLightProbe extends LightProbe {
  * This means that its direction is calculated as pointing from the light's [position](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.position) to	the *.target*'s position (as opposed to a 'Free Direct Light' that just has a rotation component).
  * The reason for this is to allow the light to cast shadows - the *.shadow* camera needs a position to calculate shadows from.
  * See the *.target* property below for details on updating the target.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DirectionalLight) page for details.
+ * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light/DirectionalLight) page for a live demo.
  *
  * ### Examples
  * [controls / fly](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_fly) |
@@ -146,6 +152,9 @@ export interface DirectionalLightShadow extends LightShadow {
  * A light source positioned directly above the scene, with color fading from the sky color to the ground color.
  * This light cannot be used to cast shadows.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HemisphereLight) page for details.
+ * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light/HemisphereLight) page for a live demo.
+ *
  * ### Examples
  * [animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending) |
  * [lights / hemisphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_hemisphere) |
@@ -212,6 +221,10 @@ export interface HemisphereLightProbe extends LightProbe {
 
 /**
  * Abstract base class for lights - all other light types inherit the properties and methods described here.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Light) page for details.
+ * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light/Light) page for a live demo.
+ *
  */
 export interface Light extends Object3D {
 	/**
@@ -417,6 +430,9 @@ export interface LightShadow {
  * A light that gets emitted from a single point in all directions. A common use case for this is to replicate the light emitted from a bare lightbulb.
  * This light can cast shadows - see [PointLightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLightShadow) page for details.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight) page for details.
+ * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light/PointLight) page for a live demo.
+ *
  * ### Examples
  * [lights / pointlights](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_pointlights) |
  * [effects / anaglyph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph) |
@@ -540,6 +556,9 @@ export interface PointLightShadow extends LightShadow {
  * Only [MeshStandardMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshStandardMaterial) and [MeshPhysicalMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshPhysicalMaterial) are supported.
  * You have to include [RectAreaLightUniformsLib](https://threejs.org/examples/jsm/lights/RectAreaLightUniformsLib.js) into your scene and call *init()*.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RectAreaLight) page for details.
+ * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light/RectAreaLight) page for a live demo.
+ *
  * ### Code Example
  * ```js
  * const width = 10;
@@ -606,6 +625,9 @@ export interface RectAreaLight extends Light {
 /**
  * This light gets emitted from a single point in one direction, along a cone that increases in size the further from the light it gets.
  * This light can cast shadows - see the [SpotLightShadow](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLightShadow) page for details.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) page for details.
+ * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light/SpotLight) page for a live demo.
  *
  * ### Examples
  * [lights / spotlight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlight) |

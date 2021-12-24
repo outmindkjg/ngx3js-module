@@ -7,6 +7,9 @@ import { Scene } from './scenes';
  * ArrayCamera can be used in order to efficiently render a scene with a predefined set of cameras. This is an important performance aspect for rendering VR scenes.
  * An instance of ArrayCamera always has an array of sub cameras. It's mandatory to define for each sub camera the *viewport* property which determines the part of the viewport that is rendered with this camera.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ArrayCamera) page for details.
+ * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/ArrayCamera) page for a live demo.
+ *
  * ### Examples
  * [camera / array](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera_array)
  */
@@ -26,6 +29,10 @@ export interface ArrayCamera extends PerspectiveCamera {
 
 /**
  * Abstract base class for cameras. This class should always be inherited when you build a new camera.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera) page for details.
+ * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/Camera) page for a live demo.
+ *
  */
 export interface Camera extends Object3D {
 	/**
@@ -69,6 +76,9 @@ export interface Camera extends Object3D {
 
 /**
  * Creates 6 cameras that render to a [WebGLCubeRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLCubeRenderTarget).
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubeCamera) page for details.
+ * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/CubeCamera) page for a live demo.
  *
  * ### Examples
  * [materials / cubemap / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_cubemap_dynamic)
@@ -130,6 +140,9 @@ export interface CubeCamera extends Object3D {
  * Camera that uses [orthographic projection](https://en.wikipedia.org/wiki/Orthographic_projection).
  * In this projection mode, an object's size in the rendered image stays constant regardless of its distance from the camera.
  * This can be useful for rendering 2D scenes and UI elements, amongst other things.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OrthographicCamera) page for details.
+ * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/OrthographicCamera) page for a live demo.
  *
  * ### Examples
  * [camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera) |
@@ -273,6 +286,9 @@ export interface OrthographicCamera extends Camera {
 /**
  * Camera that uses [perspective projection](https://en.wikipedia.org/wiki/Perspective_(graphical)).
  * This projection mode is designed to mimic the way the human eye sees. It is the most common projection mode used for rendering a 3D scene.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera) page for details.
+ * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/PerspectiveCamera) page for a live demo.
  *
  * ### Examples
  * [animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending) |
@@ -461,6 +477,10 @@ export interface PerspectiveCamera extends Camera {
 
 /**
  * Dual [PerspectiveCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera)s used for effects such as [3D Anaglyph](https://en.wikipedia.org/wiki/Anaglyph_3D) or [Parallax Barrier](https://en.wikipedia.org/wiki/parallax_barrier).
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/StereoCamera) page for details.
+ * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/StereoCamera) page for a live demo.
+ *
  * ### Examples
  * [effects / anaglyph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph) |
  * [effects / parallaxbarrier](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_parallaxbarrier) |

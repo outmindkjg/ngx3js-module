@@ -320,18 +320,16 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureEncoding
-	 *
-	 * @see THREE.LinearEncoding - LinearEncoding ,
-	 * @see THREE.sRGBEncoding - sRGBEncoding ,
-	 * @see THREE.GammaEncoding - GammaEncoding ,
-	 * @see THREE.RGBEEncoding - RGBEEncoding ,
-	 * @see THREE.LogLuvEncoding - LogLuvEncoding ,
-	 * @see THREE.RGBM7Encoding - RGBM7Encoding ,
-	 * @see THREE.RGBM16Encoding - RGBM16Encoding ,
-	 * @see THREE.RGBDEncoding - RGBDEncoding ,
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.LinearEncoding | LinearEncoding , |
+	 * | THREE.sRGBEncoding | sRGBEncoding , |
+	 * | THREE.GammaEncoding | GammaEncoding , |
+	 * | THREE.RGBEEncoding | RGBEEncoding , |
+	 * | THREE.LogLuvEncoding | LogLuvEncoding , |
+	 * | THREE.RGBM7Encoding | RGBM7Encoding , |
+	 * | THREE.RGBM16Encoding | RGBM16Encoding , |
+	 * | THREE.RGBDEncoding | RGBDEncoding , |
 	 */
 	@Input() public encoding: string = null;
 

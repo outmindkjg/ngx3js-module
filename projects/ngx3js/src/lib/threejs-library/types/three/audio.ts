@@ -1,7 +1,5 @@
 import { Object3D } from './core';
 
-// Extras / Audio /////////////////////////////////////////////////////////////////////
-
 /**
  * Create a non-positional ( global ) audio object.
  * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
@@ -29,6 +27,15 @@ import { Object3D } from './core';
  * 	}
  * );
  * ```
+ * 
+ * ### Ngx3Js Code Example
+ * ```ts
+ * <ngx3js-camera [type]="''">
+ * 	<ngx3js-listener></ngx3js-listener>
+ * </ngx3js-camera>
+ * <ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true"></ngx3js-audio>
+ * ```
+ * 
  * @template NodeType
  */
 export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {

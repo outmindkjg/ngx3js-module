@@ -1,6 +1,13 @@
 import { BoxGeometry, BufferGeometry, Camera, Color, ColorRepresentation, IUniform, Material, Mesh, Plane, Scene, ShaderMaterial, Side, Texture, TextureEncoding, Vector2, Vector3, Vector4, WebGLRenderer, WebGLRenderTarget } from '../index';
 import { LightningStrike, RayParameters } from './geometries';
 
+/**
+ * Lensflare element
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LensflareElement) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LensflareElement) page for a live demo.
+ *
+ */
 export interface LensflareElement {
     new(texture: Texture, size?: number, distance?: number, color?: Color) : this;
     texture: Texture;
@@ -9,6 +16,13 @@ export interface LensflareElement {
     color: Color;
 }
 
+/**
+ * Lensflare
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Lensflare) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Lensflare) page for a live demo.
+ *
+ */
 export interface Lensflare extends Mesh {
     new() : this;
     readonly isLensflare: true;
@@ -17,6 +31,9 @@ export interface Lensflare extends Mesh {
     dispose(): void;
 }
 
+/**
+ * Storm params
+ */
 export interface StormParams {
     size?: number;
     minHeight?: number;
@@ -39,12 +56,26 @@ export interface StormParams {
     onLightningDown?: (lightning: LightningStrike) => void;
 }
 
+/**
+ * Lightning storm
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightningStorm) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LightningStorm) page for a live demo.
+ *
+ */
 export interface LightningStorm extends Mesh{
     new(stormParams?: StormParams) : this;
     update(time: number): void;
     clone() : this;
 }
 
+/**
+ * Marching cubes
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MarchingCubes) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/MarchingCubes) page for a live demo.
+ *
+ */
 export interface MarchingCubes extends Mesh {
     new(
         resolution: number,
@@ -116,6 +147,9 @@ export interface MarchingCubes extends Mesh {
     generateBufferGeometry(): BufferGeometry;
 }
 
+/**
+ * Reflector shader
+ */
 export interface ReflectorShader {
     defines: {
         DISTANCE_ATTENUATION: boolean;
@@ -128,6 +162,9 @@ export interface ReflectorShader {
     fragmentShader: string;
 }
 
+/**
+ * Reflector options
+ */
 export interface ReflectorOptions {
     color?: ColorRepresentation;
     textureWidth?: number;
@@ -137,12 +174,21 @@ export interface ReflectorOptions {
     encoding?: TextureEncoding;
 }
 
+/**
+ * Reflector
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Reflector) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Reflector) page for a live demo.
+ *
+ */
 export interface Reflector extends Mesh {
     new(geometry?: BufferGeometry, options?: ReflectorOptions) : this;
     getRenderTarget(): WebGLRenderTarget;
 }
 
-
+/**
+ * Reflector for ssrpass options
+ */
 export interface ReflectorForSSRPassOptions {
     clipBias?: number | undefined;
     textureWidth?: number | undefined;
@@ -153,6 +199,13 @@ export interface ReflectorForSSRPassOptions {
     encoding?: TextureEncoding;
 }
 
+/**
+ * Reflector for ssrpass
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ReflectorForSSRPass) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorForSSRPass) page for a live demo.
+ *
+ */
 export interface ReflectorForSSRPass extends Mesh<BufferGeometry> {
     type: 'ReflectorForSSRPass';
     options: ReflectorOptions;
@@ -179,10 +232,20 @@ export interface ReflectorForSSRPass extends Mesh<BufferGeometry> {
     getRenderTarget: () => WebGLRenderTarget;
 }
 
+/**
+ * Reflector rtt
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ReflectorRTT) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorRTT) page for a live demo.
+ *
+ */
 export interface ReflectorRTT extends ReflectorForSSRPass {
     new(geometry?: BufferGeometry, options?: ReflectorForSSRPassOptions) : this;
 }
 
+/**
+ * Refractor options
+ */
 export interface RefractorOptions {
     color?: ColorRepresentation;
     textureWidth?: number;
@@ -192,18 +255,39 @@ export interface RefractorOptions {
     encoding?: TextureEncoding;
 }
 
+/**
+ * Refractor
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Refractor) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Refractor) page for a live demo.
+ *
+ */
 export interface Refractor extends Mesh {
     new(geometry?: BufferGeometry, options?: RefractorOptions) : this;
 
     getRenderTarget(): WebGLRenderTarget;
 }
 
+/**
+ * Shadow mesh
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShadowMesh) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ShadowMesh) page for a live demo.
+ *
+ */
 export interface ShadowMesh extends Mesh {
     new( mesh : Mesh ) : this;
 
     update(plane: Plane, lightPosition4D: Vector4): void;
 }
 
+/**
+ * Sky
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sky) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Sky) page for a live demo.
+ *
+ */
 export interface Sky extends Mesh {
     new() : this;
 
@@ -213,6 +297,9 @@ export interface Sky extends Mesh {
     SkyShader: object;
 }
 
+/**
+ * Water options
+ */
 export interface WaterOptions {
     textureWidth?: number;
     textureHeight?: number;
@@ -229,11 +316,21 @@ export interface WaterOptions {
     fog?: boolean;
 }
 
+/**
+ * Water
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Water) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Water) page for a live demo.
+ *
+ */
 export interface Water extends Mesh {
     material: ShaderMaterial;
     new(geometry: BufferGeometry, options: WaterOptions) : this;
 }
 
+/**
+ * Water2 options
+ */
 export interface Water2Options {
     color?: ColorRepresentation;
     textureWidth?: number;
@@ -250,6 +347,13 @@ export interface Water2Options {
     encoding?: TextureEncoding;
 }
 
+/**
+ * Water2
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Water2) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Water2) page for a live demo.
+ *
+ */
 export interface Water2 extends Mesh {
     material: ShaderMaterial;
     new(geometry: BufferGeometry, options: Water2Options) : this;

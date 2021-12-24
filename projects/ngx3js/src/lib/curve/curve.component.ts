@@ -37,19 +37,18 @@ export class NgxCurveComponent
 	/**
 	 * The curve type
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Curve<THREE.Vector>
-	 * @see THREE.ArcCurve - ArcCurve, Arc
-	 * @see THREE.CatmullRomCurve3 - CatmullRomCurve3, Spline3, Catmullrom
-	 * @see THREE.CubicBezierCurve - CubicBezierCurve, CubicBezier
-	 * @see THREE.CubicBezierCurve3 - CubicBezierCurve3, CubicBezier3
-	 * @see THREE.EllipseCurve - EllipseCurve, Ellipse
-	 * @see THREE.LineCurve - LineCurve, Line
-	 * @see THREE.LineCurve3 - LineCurve3, Line3
-	 * @see THREE.QuadraticBezierCurve - QuadraticBezierCurve, QuadraticBezier
-	 * @see THREE.QuadraticBezierCurve3 - QuadraticBezierCurve3, QuadraticBezier3
-	 * @see THREE.SplineCurve - SplineCurve, Spline
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.ArcCurve | ArcCurve, Arc |
+	 * | THREE.CatmullRomCurve3 | CatmullRomCurve3, Spline3, Catmullrom |
+	 * | THREE.CubicBezierCurve | CubicBezierCurve, CubicBezier |
+	 * | THREE.CubicBezierCurve3 | CubicBezierCurve3, CubicBezier3 |
+	 * | THREE.EllipseCurve | EllipseCurve, Ellipse |
+	 * | THREE.LineCurve | LineCurve, Line |
+	 * | THREE.LineCurve3 | LineCurve3, Line3 |
+	 * | THREE.QuadraticBezierCurve | QuadraticBezierCurve, QuadraticBezier |
+	 * | THREE.QuadraticBezierCurve3 | QuadraticBezierCurve3, QuadraticBezier3 |
+	 * | THREE.SplineCurve | SplineCurve, Spline |
 	 */
 	@Input() public type: string = 'spline';
 

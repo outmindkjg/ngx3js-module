@@ -1,5 +1,12 @@
 import { IUniform, Material, Matrix4, Texture, Uniform, Vector2 } from '../index';
 
+/**
+ * Afterimage shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AfterimageShader) page for details.
+ * See the [webgl / postprocessing / afterimage](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_afterimage) page for a live demo.
+ *
+ */
 export interface AfterimageShader{
     uniforms : {
         damp: Uniform;
@@ -9,12 +16,26 @@ export interface AfterimageShader{
     vertexShader: string;
     fragmentShader: string;
 };
+
+/**
+ * Basic shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BasicShader) page for details.
+ *
+ */
 export interface BasicShader{
     uniforms : {};
     vertexShader: string;
     fragmentShader: string;
 };
 
+/**
+ * Bleach bypass shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BleachBypassShader) page for details.
+ * See the [webgl / postprocessing / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_advanced) page for a live demo.
+ *
+ */
 export interface BleachBypassShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -24,6 +45,12 @@ export interface BleachBypassShader{
     fragmentShader: string;
 };
 
+/**
+ * Blend shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BlendShader) page for details.
+ *
+ */
 export interface BlendShader{
     uniforms : {
         tDiffuse1: Uniform;
@@ -35,6 +62,13 @@ export interface BlendShader{
     fragmentShader: string;
 };
 
+/**
+ * Bokeh shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BokehShader) page for details.
+ * See the [webgl / postprocessing / dof](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_dof) page for a live demo.
+ *
+ */
 export interface BokehShader{
     defines : {
         DEPTH_PACKING: number;
@@ -74,6 +108,12 @@ export interface BokehShader{
     fragmentShader: string;
 };
 
+/**
+ * Bokeh depth shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BokehDepthShader) page for details.
+ *
+ */
 export interface BokehDepthShader{
     uniforms : {
         mNear: Uniform;
@@ -83,6 +123,12 @@ export interface BokehDepthShader{
     fragmentShader: string;
 };
 
+/**
+ * Brightness contrast shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BrightnessContrastShader) page for details.
+ *
+ */
 export interface BrightnessContrastShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -93,6 +139,12 @@ export interface BrightnessContrastShader{
     fragmentShader: string;
 };
 
+/**
+ * Color correction shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ColorCorrectionShader) page for details.
+ *
+ */
 export interface ColorCorrectionShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -104,6 +156,13 @@ export interface ColorCorrectionShader{
     fragmentShader: string;
 };
 
+/**
+ * Colorify shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ColorifyShader) page for details.
+ * See the [webgl / postprocessing / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_advanced) page for a live demo.
+ *
+ */
 export interface ColorifyShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -113,6 +172,12 @@ export interface ColorifyShader{
     fragmentShader: string;
 };
 
+/**
+ * Convolution shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ConvolutionShader) page for details.
+ *
+ */
 export interface ConvolutionShader{
     defines : {
         KERNEL_SIZE_FLOAT: string;
@@ -129,6 +194,13 @@ export interface ConvolutionShader{
     buildKernel(sigma: number): number[];
 };
 
+/**
+ * Copy shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CopyShader) page for details.
+ * See the [webgl / postprocessing / masking](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_masking) page for a live demo.
+ *
+ */
 export interface CopyShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -149,6 +221,12 @@ export interface DOFMipMapShader{
     fragmentShader: string;
 };
 
+/**
+ * Depth limited blur shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DepthLimitedBlurShader) page for details.
+ *
+ */
 export interface DepthLimitedBlurShader{
     defines : {
         KERNEL_RADIUS: number;
@@ -175,6 +253,13 @@ export interface BlurShaderUtils{
     configure(configure: Material, kernelRadius: number, stdDev: number, uvIncrement: Vector2): void;
 };
 
+/**
+ * Digital glitch
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DigitalGlitch) page for details.
+ * See the [webgl / postprocessing / glitch](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_glitch) page for a live demo.
+ *
+ */
 export interface DigitalGlitch{
     uniforms : {
         tDiffuse: Uniform;
@@ -193,6 +278,13 @@ export interface DigitalGlitch{
     fragmentShader: string;
 };
 
+/**
+ * Dot screen shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DotScreenShader) page for details.
+ * See the [webgl / postprocessing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing) page for a live demo.
+ *
+ */
 export interface DotScreenShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -205,6 +297,13 @@ export interface DotScreenShader{
     fragmentShader: string;
 };
 
+/**
+ * Fxaashader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FXAAShader) page for details.
+ * See the [webgl / postprocessing / fxaa](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_fxaa) page for a live demo.
+ *
+ */
 export interface FXAAShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -214,6 +313,13 @@ export interface FXAAShader{
     fragmentShader: string;
 };
 
+/**
+ * Film shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FilmShader) page for details.
+ * See the [webgl / points / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_dynamic) page for a live demo.
+ *
+ */
 export interface FilmShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -227,6 +333,12 @@ export interface FilmShader{
     fragmentShader: string;
 };
 
+/**
+ * Focus shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FocusShader) page for details.
+ *
+ */
 export interface FocusShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -239,6 +351,12 @@ export interface FocusShader{
     fragmentShader: string;
 };
 
+/**
+ * Frei chen shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FreiChenShader) page for details.
+ *
+ */
 export interface FreiChenShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -248,6 +366,13 @@ export interface FreiChenShader{
     fragmentShader: string;
 };
 
+/**
+ * Gamma correction shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GammaCorrectionShader) page for details.
+ * See the [webgl / postprocessing / 3dlut](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_3dlut) page for a live demo.
+ *
+ */
 export interface GammaCorrectionShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -256,6 +381,13 @@ export interface GammaCorrectionShader{
     fragmentShader: string;
 };
 
+/**
+ * God rays depth mask shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GodRaysDepthMaskShader) page for details.
+ * See the [webgl / postprocessing / godrays](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_godrays) page for a live demo.
+ *
+ */
 export interface GodRaysDepthMaskShader{
     uniforms : {
         tInput: Uniform;
@@ -264,6 +396,13 @@ export interface GodRaysDepthMaskShader{
     fragmentShader: string;
 };
 
+/**
+ * God rays generate shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GodRaysGenerateShader) page for details.
+ * See the [webgl / postprocessing / godrays](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_godrays) page for a live demo.
+ *
+ */
 export interface GodRaysGenerateShader{
     uniforms : {
         tInput: Uniform;
@@ -274,6 +413,13 @@ export interface GodRaysGenerateShader{
     fragmentShader: string;
 };
 
+/**
+ * God rays combine shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GodRaysCombineShader) page for details.
+ * See the [webgl / postprocessing / godrays](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_godrays) page for a live demo.
+ *
+ */
 export interface GodRaysCombineShader{
     uniforms : {
         tColors: Uniform;
@@ -284,6 +430,13 @@ export interface GodRaysCombineShader{
     fragmentShader: string;
 };
 
+/**
+ * God rays fake sun shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GodRaysFakeSunShader) page for details.
+ * See the [webgl / postprocessing / godrays](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_godrays) page for a live demo.
+ *
+ */
 export interface GodRaysFakeSunShader{
     uniforms : {
         vSunPositionScreenSpace: Uniform;
@@ -295,6 +448,13 @@ export interface GodRaysFakeSunShader{
     fragmentShader: string;
 };
 
+/**
+ * Halftone shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HalftoneShader) page for details.
+ * See the [webgl / postprocessing / rgb / halftone](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_rgb_halftone) page for a live demo.
+ *
+ */
 export interface HalftoneShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -315,6 +475,13 @@ export interface HalftoneShader{
     fragmentShader: string;
 };
 
+/**
+ * Horizontal blur shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HorizontalBlurShader) page for details.
+ * See the [webgl / postprocessing / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_advanced) page for a live demo.
+ *
+ */
 export interface HorizontalBlurShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -324,6 +491,12 @@ export interface HorizontalBlurShader{
     fragmentShader: string;
 };
 
+/**
+ * Horizontal tilt shift shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HorizontalTiltShiftShader) page for details.
+ *
+ */
 export interface HorizontalTiltShiftShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -334,6 +507,12 @@ export interface HorizontalTiltShiftShader{
     fragmentShader: string;
 };
 
+/**
+ * Hue saturation shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HueSaturationShader) page for details.
+ *
+ */
 export interface HueSaturationShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -344,6 +523,12 @@ export interface HueSaturationShader{
     fragmentShader: string;
 };
 
+/**
+ * Kaleido shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KaleidoShader) page for details.
+ *
+ */
 export interface KaleidoShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -354,6 +539,13 @@ export interface KaleidoShader{
     fragmentShader: string;
 };
 
+/**
+ * Luminosity high pass shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LuminosityHighPassShader) page for details.
+ * See the [webgl / postprocessing / sobel](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_sobel) page for a live demo.
+ *
+ */
 export interface LuminosityHighPassShader{
     shaderID: string;
     uniforms : {
@@ -367,6 +559,13 @@ export interface LuminosityHighPassShader{
     fragmentShader: string;
 };
 
+/**
+ * Luminosity shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LuminosityShader) page for details.
+ * See the [webgl / postprocessing / sobel](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_sobel) page for a live demo.
+ *
+ */
 export interface LuminosityShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -375,6 +574,12 @@ export interface LuminosityShader{
     fragmentShader: string;
 };
 
+/**
+ * Mirror shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MirrorShader) page for details.
+ *
+ */
 export interface MirrorShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -384,6 +589,12 @@ export interface MirrorShader{
     fragmentShader: string;
 };
 
+/**
+ * Normal map shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NormalMapShader) page for details.
+ *
+ */
 export interface NormalMapShader{
     uniforms : {
         heightMap: Uniform;
@@ -395,6 +606,13 @@ export interface NormalMapShader{
     fragmentShader: string;
 };
 
+/**
+ * Pixel shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PixelShader) page for details.
+ * See the [webgl / postprocessing / pixel](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_pixel) page for a live demo.
+ *
+ */
 export interface PixelShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -405,6 +623,13 @@ export interface PixelShader{
     fragmentShader: string;
 };
 
+/**
+ * Rgbshift shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RGBShiftShader) page for details.
+ * See the [webgl / postprocessing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing) page for a live demo.
+ *
+ */
 export interface RGBShiftShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -415,6 +640,13 @@ export interface RGBShiftShader{
     fragmentShader: string;
 };
 
+/**
+ * Saoshader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SAOShader) page for details.
+ * See the [webgl / postprocessing / sao](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_sao) page for a live demo.
+ *
+ */
 export interface SAOShader{
     defines : {
         NUM_SAMPLES: number;
@@ -444,6 +676,13 @@ export interface SAOShader{
     fragmentShader: string;
 };
 
+/**
+ * Smaaedges shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SMAAEdgesShader) page for details.
+ * See the [webgl / postprocessing / smaa](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_smaa) page for a live demo.
+ *
+ */
 export interface SMAAEdgesShader{
     defines : {
         SMAA_THRESHOLD: string;
@@ -456,6 +695,13 @@ export interface SMAAEdgesShader{
     fragmentShader: string;
 };
 
+/**
+ * Smaaweights shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SMAAWeightsShader) page for details.
+ * See the [webgl / postprocessing / smaa](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_smaa) page for a live demo.
+ *
+ */
 export interface SMAAWeightsShader{
     defines : {
         SMAA_MAX_SEARCH_STEPS: string;
@@ -473,6 +719,13 @@ export interface SMAAWeightsShader{
     fragmentShader: string;
 };
 
+/**
+ * Smaablend shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SMAABlendShader) page for details.
+ * See the [webgl / postprocessing / smaa](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_smaa) page for a live demo.
+ *
+ */
 export interface SMAABlendShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -483,6 +736,13 @@ export interface SMAABlendShader{
     fragmentShader: string;
 };
 
+/**
+ * Ssaoshader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SSAOShader) page for details.
+ * See the [webgl / postprocessing / ssao](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssao) page for a live demo.
+ *
+ */
 export interface SSAOShader{
     defines : {
         PERSPECTIVE_CAMERA: number;
@@ -507,6 +767,13 @@ export interface SSAOShader{
     fragmentShader: string;
 };
 
+/**
+ * Ssaodepth shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SSAODepthShader) page for details.
+ * See the [webgl / postprocessing / ssao](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssao) page for a live demo.
+ *
+ */
 export interface SSAODepthShader{
     defines : {
         PERSPECTIVE_CAMERA: number;
@@ -520,6 +787,13 @@ export interface SSAODepthShader{
     fragmentShader: string;
 };
 
+/**
+ * Ssaoblur shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SSAOBlurShader) page for details.
+ * See the [webgl / postprocessing / ssao](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssao) page for a live demo.
+ *
+ */
 export interface SSAOBlurShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -528,11 +802,14 @@ export interface SSAOBlurShader{
     vertexShader: string;
     fragmentShader: string;
 };
-/**
- * References:
- * https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html
- */
 
+/**
+ * Ssrshader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SSRShader) page for details.
+ * See the [webgl / postprocessing / ssr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssr) page for a live demo.
+ *
+ */
 export interface SSRShader {
     defines : {
         MAX_STEP: number;
@@ -561,6 +838,13 @@ export interface SSRShader {
     fragmentShader: string;
 }
 
+/**
+ * Ssrdepth shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SSRDepthShader) page for details.
+ * See the [webgl / postprocessing / ssr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssr) page for a live demo.
+ *
+ */
 export interface SSRDepthShader {
     defines : {
         PERSPECTIVE_CAMERA: number;
@@ -574,6 +858,13 @@ export interface SSRDepthShader {
     fragmentShader: string;
 }
 
+/**
+ * Ssrblur shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SSRBlurShader) page for details.
+ * See the [webgl / postprocessing / ssr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssr) page for a live demo.
+ *
+ */
 export interface SSRBlurShader {
     uniforms : {
         tDiffuse: IUniform<Texture | null>;
@@ -584,6 +875,13 @@ export interface SSRBlurShader {
     fragmentShader: string;
 }
 
+/**
+ * Ssrr shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SSRrShader) page for details.
+ * See the [webgl / postprocessing / ssrr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssrr) page for a live demo.
+ *
+ */
 export interface SSRrShader {
     defines : {
         MAX_STEP: number;
@@ -615,6 +913,13 @@ export interface SSRrShader {
     fragmentShader: string;
 }
 
+/**
+ * Ssrr depth shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SSRrDepthShader) page for details.
+ * See the [webgl / postprocessing / ssrr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssrr) page for a live demo.
+ *
+ */
 export interface SSRrDepthShader {
     defines : {
         PERSPECTIVE_CAMERA: number;
@@ -631,6 +936,13 @@ export interface SSRrDepthShader {
     fragmentShader: string;
 }
 
+/**
+ * Sepia shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SepiaShader) page for details.
+ * See the [webgl / postprocessing / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_advanced) page for a live demo.
+ *
+ */
 export interface SepiaShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -640,6 +952,13 @@ export interface SepiaShader{
     fragmentShader: string;
 };
 
+/**
+ * Sobel operator shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SobelOperatorShader) page for details.
+ * See the [webgl / postprocessing / sobel](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_sobel) page for a live demo.
+ *
+ */
 export interface SobelOperatorShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -649,6 +968,13 @@ export interface SobelOperatorShader{
     fragmentShader: string;
 };
 
+/**
+ * Subsurface scattering shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SubsurfaceScatteringShader) page for details.
+ * See the [webgl / materials / subsurface / scattering](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_subsurface_scattering) page for a live demo.
+ *
+ */
 export interface SubsurfaceScatteringShader{
     uniforms : {
         alphaMap: Uniform;
@@ -685,6 +1011,12 @@ export interface SubsurfaceScatteringShader{
     fragmentShader: string;
 };
 
+/**
+ * Technicolor shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TechnicolorShader) page for details.
+ *
+ */
 export interface TechnicolorShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -693,6 +1025,12 @@ export interface TechnicolorShader{
     fragmentShader: string;
 };
 
+/**
+ * Tone map shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ToneMapShader) page for details.
+ *
+ */
 export interface ToneMapShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -706,6 +1044,12 @@ export interface ToneMapShader{
     fragmentShader: string;
 };
 
+/**
+ * Toon shader1
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FilmShader) page for details.
+ *
+ */
 export interface ToonShader1{
     uniforms : {
         uDirLightPos: Uniform;
@@ -717,6 +1061,12 @@ export interface ToonShader1{
     fragmentShader: string;
 };
 
+/**
+ * Toon shader2
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ToonShader2) page for details.
+ *
+ */
 export interface ToonShader2{
     uniforms : {
         uDirLightPos: Uniform;
@@ -732,6 +1082,12 @@ export interface ToonShader2{
     fragmentShader: string;
 };
 
+/**
+ * Toon shader hatching
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ToonShaderHatching) page for details.
+ *
+ */
 export interface ToonShaderHatching{
     uniforms : {
         uDirLightPos: Uniform;
@@ -747,6 +1103,12 @@ export interface ToonShaderHatching{
     fragmentShader: string;
 };
 
+/**
+ * Toon shader dotted
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ToonShaderDotted) page for details.
+ *
+ */
 export interface ToonShaderDotted{
     uniforms : {
         uDirLightPos: Uniform;
@@ -759,6 +1121,12 @@ export interface ToonShaderDotted{
     fragmentShader: string;
 };
 
+/**
+ * Triangle blur shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TriangleBlurShader) page for details.
+ *
+ */
 export interface TriangleBlurShader{
     uniforms : {
         texture: Uniform;
@@ -768,6 +1136,12 @@ export interface TriangleBlurShader{
     fragmentShader: string;
 };
 
+/**
+ * Unpack depth rgbashader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/UnpackDepthRGBAShader) page for details.
+ *
+ */
 export interface UnpackDepthRGBAShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -777,6 +1151,13 @@ export interface UnpackDepthRGBAShader{
     fragmentShader: string;
 };
 
+/**
+ * Vertical blur shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VerticalBlurShader) page for details.
+ * See the [webgl / postprocessing / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_advanced) page for a live demo.
+ *
+ */
 export interface VerticalBlurShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -786,6 +1167,12 @@ export interface VerticalBlurShader{
     fragmentShader: string;
 };
 
+/**
+ * Vertical tilt shift shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VerticalTiltShiftShader) page for details.
+ *
+ */
 export interface VerticalTiltShiftShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -796,6 +1183,13 @@ export interface VerticalTiltShiftShader{
     fragmentShader: string;
 };
 
+/**
+ * Vignette shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VignetteShader) page for details.
+ * See the [webgl / postprocessing / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_advanced) page for a live demo.
+ *
+ */
 export interface VignetteShader{
     uniforms : {
         tDiffuse: Uniform;
@@ -806,6 +1200,13 @@ export interface VignetteShader{
     fragmentShader: string;
 };
 
+/**
+ * Volume render shader1
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VolumeRenderShader1) page for details.
+ * See the [webgl2 / materials / texture3d](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_materials_texture3d) page for a live demo.
+ *
+ */
 export interface VolumeRenderShader1{
     uniforms : {
         u_size: Uniform;
@@ -819,6 +1220,13 @@ export interface VolumeRenderShader1{
     fragmentShader: string;
 };
 
+/**
+ * Water refraction shader
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WaterRefractionShader) page for details.
+ * See the [webgl / refraction](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_refraction) page for a live demo.
+ *
+ */
 export interface WaterRefractionShader{
     uniforms : {
         color: Uniform;

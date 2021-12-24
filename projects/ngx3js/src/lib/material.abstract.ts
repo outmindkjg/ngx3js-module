@@ -105,19 +105,18 @@ export class NgxAbstractMaterialComponent
 	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
 	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BlendingDstFactor
-	 * @see THREE.ZeroFactor - ZeroFactor , Zero
-	 * @see THREE.OneFactor - OneFactor , One
-	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
-	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
-	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
-	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
-	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
-	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
-	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
-	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.ZeroFactor | ZeroFactor , Zero |
+	 * | THREE.OneFactor | OneFactor , One |
+	 * | THREE.SrcColorFactor | SrcColorFactor , SrcColor |
+	 * | THREE.OneMinusSrcColorFactor | OneMinusSrcColorFactor , OneMinusSrcColor |
+	 * | THREE.SrcAlphaFactor | SrcAlphaFactor , SrcAlpha |
+	 * | THREE.OneMinusSrcAlphaFactor | OneMinusSrcAlphaFactor , OneMinusSrcAlpha |
+	 * | THREE.DstAlphaFactor | DstAlphaFactor , DstAlpha |
+	 * | THREE.OneMinusDstAlphaFactor | OneMinusDstAlphaFactor , OneMinusDstAlpha |
+	 * | THREE.DstColorFactor | DstColorFactor , DstColor |
+	 * | THREE.OneMinusDstColorFactor | OneMinusDstColorFactor , OneMinusDstColor |
 	 */
 	@Input() public blendDst: string = null;
 
@@ -131,14 +130,13 @@ export class NgxAbstractMaterialComponent
 	 * See the blending equation [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.CustomBlendingEquation) for all possible values.
 	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blending) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for this to have any effect.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BlendingEquation
-	 * @see THREE.AddEquation - AddEquation , Add
-	 * @see THREE.SubtractEquation - SubtractEquation , Subtract
-	 * @see THREE.ReverseSubtractEquation - ReverseSubtractEquation , ReverseSubtract
-	 * @see THREE.MinEquation - MinEquation , Min
-	 * @see THREE.MaxEquation - MaxEquation , Max
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.AddEquation | AddEquation , Add |
+	 * | THREE.SubtractEquation | SubtractEquation , Subtract |
+	 * | THREE.ReverseSubtractEquation | ReverseSubtractEquation , ReverseSubtract |
+	 * | THREE.MinEquation | MinEquation , Min |
+	 * | THREE.MaxEquation | MaxEquation , Max |
 	 *
 	 */
 	@Input() public blendEquation: string = null;
@@ -153,14 +151,14 @@ export class NgxAbstractMaterialComponent
 	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
 	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.NoBlending - NoBlending, No
-	 * @see THREE.NormalBlending - NormalBlending, Normal
-	 * @see THREE.AdditiveBlending - AdditiveBlending, Additive
-	 * @see THREE.SubtractiveBlending - SubtractiveBlending, Subtractive
-	 * @see THREE.MultiplyBlending - MultiplyBlending, Multiply
-	 * @see THREE.CustomBlending - CustomBlending, Custom
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NoBlending | NoBlending, No |
+	 * | THREE.NormalBlending | NormalBlending, Normal |
+	 * | THREE.AdditiveBlending | AdditiveBlending, Additive |
+	 * | THREE.SubtractiveBlending | SubtractiveBlending, Subtractive |
+	 * | THREE.MultiplyBlending | MultiplyBlending, Multiply |
+	 * | THREE.CustomBlending | CustomBlending, Custom |
 	 */
 	@Input() public blending: string = null;
 
@@ -169,15 +167,14 @@ export class NgxAbstractMaterialComponent
 	 * See the source factors [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.CustomBlendingEquation) for all possible values.
 	 * The material's [blending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blending) must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for this to have any effect.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Blending
-	 * @see THREE.NoBlending - NoBlending , No
-	 * @see THREE.NormalBlending - NormalBlending , Normal
-	 * @see THREE.AdditiveBlending - AdditiveBlending , Additive
-	 * @see THREE.SubtractiveBlending - SubtractiveBlending , Subtractive
-	 * @see THREE.MultiplyBlending - MultiplyBlending , Multiply
-	 * @see THREE.CustomBlending - CustomBlending , Custom
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NoBlending | NoBlending , No |
+	 * | THREE.NormalBlending | NormalBlending , Normal |
+	 * | THREE.AdditiveBlending | AdditiveBlending , Additive |
+	 * | THREE.SubtractiveBlending | SubtractiveBlending , Subtractive |
+	 * | THREE.MultiplyBlending | MultiplyBlending , Multiply |
+	 * | THREE.CustomBlending | CustomBlending , Custom |
 	 */
 	@Input() public blendSrc: string = null;
 
@@ -221,17 +218,16 @@ export class NgxAbstractMaterialComponent
 	/**
 	 * Which depth function to use. Default is [LessEqualDepth](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See the depth mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.DepthModes
-	 * @see THREE.NeverDepth - NeverDepth , Never
-	 * @see THREE.AlwaysDepth - AlwaysDepth , Always
-	 * @see THREE.LessDepth - LessDepth , Less
-	 * @see THREE.LessEqualDepth - LessEqualDepth , LessEqual
-	 * @see THREE.EqualDepth - EqualDepth , Equal
-	 * @see THREE.GreaterEqualDepth - GreaterEqualDepth , GreaterEqual
-	 * @see THREE.GreaterDepth - GreaterDepth , Greater
-	 * @see THREE.NotEqualDepth - NotEqualDepth , NotEqual
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NeverDepth | NeverDepth , Never |
+	 * | THREE.AlwaysDepth | AlwaysDepth , Always |
+	 * | THREE.LessDepth | LessDepth , Less |
+	 * | THREE.LessEqualDepth | LessEqualDepth , LessEqual |
+	 * | THREE.EqualDepth | EqualDepth , Equal |
+	 * | THREE.GreaterEqualDepth | GreaterEqualDepth , GreaterEqual |
+	 * | THREE.GreaterDepth | GreaterDepth , Greater |
+	 * | THREE.NotEqualDepth | NotEqualDepth , NotEqual |
 	 *
 	 */
 	@Input() public depthFunc: string = null;
@@ -296,12 +292,11 @@ export class NgxAbstractMaterialComponent
 	 * Default is [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 * Other options are [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) and [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Side
-	 * @see THREE.FrontSide - FrontSide , Front
-	 * @see THREE.BackSide - BackSide , Back
-	 * @see THREE.DoubleSide - DoubleSide , Double
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.FrontSide | FrontSide , Front |
+	 * | THREE.BackSide | BackSide , Back |
+	 * | THREE.DoubleSide | DoubleSide , Double |
 	 */
 	@Input() public side: string = null;
 
@@ -310,12 +305,11 @@ export class NgxAbstractMaterialComponent
 	 * When set, can be [THREE.FrontSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials), [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials), or [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). Default is *null*.
 	 * If *null*, the side casting shadows is determined as follows:
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Side
-	 * @see THREE.FrontSide - FrontSide , Front
-	 * @see THREE.BackSide - BackSide , Back
-	 * @see THREE.DoubleSide - DoubleSide , Double
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.FrontSide | FrontSide , Front |
+	 * | THREE.BackSide | BackSide , Back |
+	 * | THREE.DoubleSide | DoubleSide , Double |
 	 */
 	@Input() public shadowSide: string = null;
 
@@ -345,15 +339,16 @@ export class NgxAbstractMaterialComponent
 	/**
 	 * The value to use when performing stencil comparisons or stencil operations. Default is *0*.
 	 *
-	 * @see THREE.StencilFunc
-	 * @see THREE.NeverStencilFunc - NeverStencilFunc , NeverStencil
-	 * @see THREE.LessStencilFunc - LessStencilFunc , LessStencil
-	 * @see THREE.EqualStencilFunc - EqualStencilFunc , EqualStencil
-	 * @see THREE.LessEqualStencilFunc - LessEqualStencilFunc , LessEqualStencil
-	 * @see THREE.GreaterStencilFunc - GreaterStencilFunc , GreaterStencil
-	 * @see THREE.NotEqualStencilFunc - NotEqualStencilFunc , NotEqualStencil
-	 * @see THREE.GreaterEqualStencilFunc - GreaterEqualStencilFunc , GreaterEqualStencil
-	 * @see THREE.AlwaysStencilFunc - AlwaysStencilFunc , AlwaysStencil
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NeverStencilFunc | NeverStencilFunc , NeverStencil |
+	 * | THREE.LessStencilFunc | LessStencilFunc , LessStencil |
+	 * | THREE.EqualStencilFunc | EqualStencilFunc , EqualStencil |
+	 * | THREE.LessEqualStencilFunc | LessEqualStencilFunc , LessEqualStencil |
+	 * | THREE.GreaterStencilFunc | GreaterStencilFunc , GreaterStencil |
+	 * | THREE.NotEqualStencilFunc | NotEqualStencilFunc , NotEqualStencil |
+	 * | THREE.GreaterEqualStencilFunc | GreaterEqualStencilFunc , GreaterEqualStencil |
+	 * | THREE.AlwaysStencilFunc | AlwaysStencilFunc , AlwaysStencil |
 	 */
 	@Input() public stencilRef: number = null;
 
@@ -370,51 +365,48 @@ export class NgxAbstractMaterialComponent
 	/**
 	 * Which stencil operation to perform when the comparison function returns false. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.StencilOp
-	 * @see THREE.ZeroStencilOp - ZeroStencilOp , ZeroStencil
-	 * @see THREE.KeepStencilOp - KeepStencilOp , KeepStencil
-	 * @see THREE.ReplaceStencilOp - ReplaceStencilOp , ReplaceStencil
-	 * @see THREE.IncrementStencilOp - IncrementStencilOp , IncrementStencil
-	 * @see THREE.DecrementStencilOp - DecrementStencilOp , DecrementStencil
-	 * @see THREE.IncrementWrapStencilOp - IncrementWrapStencilOp , IncrementWrapStencil
-	 * @see THREE.DecrementWrapStencilOp - DecrementWrapStencilOp , DecrementWrapStencil
-	 * @see THREE.InvertStencilOp - InvertStencilOp , InvertStencil
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.ZeroStencilOp | ZeroStencilOp , ZeroStencil |
+	 * | THREE.KeepStencilOp | KeepStencilOp , KeepStencil |
+	 * | THREE.ReplaceStencilOp | ReplaceStencilOp , ReplaceStencil |
+	 * | THREE.IncrementStencilOp | IncrementStencilOp , IncrementStencil |
+	 * | THREE.DecrementStencilOp | DecrementStencilOp , DecrementStencil |
+	 * | THREE.IncrementWrapStencilOp | IncrementWrapStencilOp , IncrementWrapStencil |
+	 * | THREE.DecrementWrapStencilOp | DecrementWrapStencilOp , DecrementWrapStencil |
+	 * | THREE.InvertStencilOp | InvertStencilOp , InvertStencil |
 	 */
 	@Input() public stencilFail: string = null;
 
 	/**
 	 * Which stencil operation to perform when the comparison function returns true but the depth test fails. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.StencilOp
-	 * @see THREE.ZeroStencilOp - ZeroStencilOp , ZeroStencil
-	 * @see THREE.KeepStencilOp - KeepStencilOp , KeepStencil
-	 * @see THREE.ReplaceStencilOp - ReplaceStencilOp , ReplaceStencil
-	 * @see THREE.IncrementStencilOp - IncrementStencilOp , IncrementStencil
-	 * @see THREE.DecrementStencilOp - DecrementStencilOp , DecrementStencil
-	 * @see THREE.IncrementWrapStencilOp - IncrementWrapStencilOp , IncrementWrapStencil
-	 * @see THREE.DecrementWrapStencilOp - DecrementWrapStencilOp , DecrementWrapStencil
-	 * @see THREE.InvertStencilOp - InvertStencilOp , InvertStencil
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.ZeroStencilOp | ZeroStencilOp , ZeroStencil |
+	 * | THREE.KeepStencilOp | KeepStencilOp , KeepStencil |
+	 * | THREE.ReplaceStencilOp | ReplaceStencilOp , ReplaceStencil |
+	 * | THREE.IncrementStencilOp | IncrementStencilOp , IncrementStencil |
+	 * | THREE.DecrementStencilOp | DecrementStencilOp , DecrementStencil |
+	 * | THREE.IncrementWrapStencilOp | IncrementWrapStencilOp , IncrementWrapStencil |
+	 * | THREE.DecrementWrapStencilOp | DecrementWrapStencilOp , DecrementWrapStencil |
+	 * | THREE.InvertStencilOp | InvertStencilOp , InvertStencil |
 	 */
 	@Input() public stencilZFail: string = null;
 
 	/**
 	 * Which stencil operation to perform when the comparison function returns true and the depth test passes. Default is [KeepStencilOp](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials). See the stencil operations [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.StencilOp
-	 * @see THREE.ZeroStencilOp - ZeroStencilOp , ZeroStencil
-	 * @see THREE.KeepStencilOp - KeepStencilOp , KeepStencil
-	 * @see THREE.ReplaceStencilOp - ReplaceStencilOp , ReplaceStencil
-	 * @see THREE.IncrementStencilOp - IncrementStencilOp , IncrementStencil
-	 * @see THREE.DecrementStencilOp - DecrementStencilOp , DecrementStencil
-	 * @see THREE.IncrementWrapStencilOp - IncrementWrapStencilOp , IncrementWrapStencil
-	 * @see THREE.DecrementWrapStencilOp - DecrementWrapStencilOp , DecrementWrapStencil
-	 * @see THREE.InvertStencilOp - InvertStencilOp , InvertStencil
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.ZeroStencilOp | ZeroStencilOp , ZeroStencil |
+	 * | THREE.KeepStencilOp | KeepStencilOp , KeepStencil |
+	 * | THREE.ReplaceStencilOp | ReplaceStencilOp , ReplaceStencil |
+	 * | THREE.IncrementStencilOp | IncrementStencilOp , IncrementStencil |
+	 * | THREE.DecrementStencilOp | DecrementStencilOp , DecrementStencil |
+	 * | THREE.IncrementWrapStencilOp | IncrementWrapStencilOp , IncrementWrapStencil |
+	 * | THREE.DecrementWrapStencilOp | DecrementWrapStencilOp , DecrementWrapStencil |
+	 * | THREE.InvertStencilOp | InvertStencilOp , InvertStencil |
 	 */
 	@Input() public stencilZPass: string = null;
 

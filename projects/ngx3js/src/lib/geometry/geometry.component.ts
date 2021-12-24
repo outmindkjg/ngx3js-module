@@ -151,41 +151,40 @@ export class NgxGeometryComponent
 	/**
 	 * The type  of geometry
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BufferGeometry
-	 * @see THREE.BufferGeometry - BufferGeometry, CustomGeometry,  Custom, Buffer
-	 * @see THREE.InstancedBufferGeometry - InstancedBufferGeometry, InstancedBuffer, Instanced,
-	 * @see TeapotGeometry - TeapotGeometry, Teapot,
-	 * @see PerlinGeometry - PerlinBufferGeometry, PerlinGeometry, Perlin, PerlinBuffer
-	 * @see RopeGeometry - RopeBufferGeometry, RopeGeometry, Rope, RopeBuffer
-	 * @see CapsuleGeometry - CapsuleGeometry, Capsule,
-	 * @see LineGeometry - LineGeometry, Line,
-	 * @see THREE.BoxGeometry - BoxGeometry, Box,
-	 * @see THREE.CircleGeometry - CircleGeometry, Circle,
-	 * @see THREE.ConeGeometry - ConeGeometry, Cone,
-	 * @see THREE.CylinderGeometry - CylinderGeometry, Cylinder,
-	 * @see THREE.DodecahedronGeometry - DodecahedronGeometry, Dodecahedron,
-	 * @see MergeGeometry - mergebuffergeometries,  mergebuffergeometry, mergebuffer, merge
-	 * @see THREE.ShapeGeometry - ShapeGeometry, Shape,
-	 * @see THREE.IcosahedronGeometry - IcosahedronGeometry, Icosahedron,
-	 * @see THREE.LatheGeometry - LatheGeometry, Lathe,
-	 * @see THREE.OctahedronGeometry - OctahedronGeometry, Octahedron,
-	 * @see THREE.ParametricBufferGeometry - ParametricBufferGeometry, ParametricBuffer, ParametricBuffer
-	 * @see ParametricGeometries.TorusKnotGeometry - ,
-	 * @see ParametricGeometries.SphereGeometry - ,
-	 * @see ParametricGeometries.TubeGeometry - ,
-	 * @see THREE.ParametricGeometry - ParametricGeometry , Parametric,
-	 * @see THREE.PlaneGeometry - PlaneGeometry, Plane,
-	 * @see THREE.RingGeometry - RingGeometry, Ring,
-	 * @see THREE.SphereGeometry - SphereGeometry, Sphere,
-	 * @see THREE.TetrahedronGeometry - TetrahedronGeometry, Tetrahedron,
-	 * @see THREE.TextBufferGeometry - TextBufferGeometry, TextGeometry, TextBuffer, Text
-	 * @see THREE.TorusGeometry - TorusGeometry, Torus,
-	 * @see THREE.TorusKnotGeometry - TorusKnotGeometry, TorusKnot
-	 * @see THREE.TubeGeometry - TubeGeometry, Tube,
-	 * @see ConvexGeometry - ConvexGeometry, Convex,
-	 * @see DecalGeometry - DecalGeometry, Decal,
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.BufferGeometry | BufferGeometry, CustomGeometry,  Custom, Buffer |
+	 * | THREE.InstancedBufferGeometry | InstancedBufferGeometry, InstancedBuffer, Instanced, |
+	 * | TeapotGeometry | TeapotGeometry, Teapot, |
+	 * | PerlinGeometry | PerlinBufferGeometry, PerlinGeometry, Perlin, PerlinBuffer |
+	 * | RopeGeometry | RopeBufferGeometry, RopeGeometry, Rope, RopeBuffer |
+	 * | CapsuleGeometry | CapsuleGeometry, Capsule, |
+	 * | LineGeometry | LineGeometry, Line, |
+	 * | THREE.BoxGeometry | BoxGeometry, Box, |
+	 * | THREE.CircleGeometry | CircleGeometry, Circle, |
+	 * | THREE.ConeGeometry | ConeGeometry, Cone, |
+	 * | THREE.CylinderGeometry | CylinderGeometry, Cylinder, |
+	 * | THREE.DodecahedronGeometry | DodecahedronGeometry, Dodecahedron, |
+	 * | MergeGeometry | mergebuffergeometries,  mergebuffergeometry, mergebuffer, merge |
+	 * | THREE.ShapeGeometry | ShapeGeometry, Shape, |
+	 * | THREE.IcosahedronGeometry | IcosahedronGeometry, Icosahedron, |
+	 * | THREE.LatheGeometry | LatheGeometry, Lathe, |
+	 * | THREE.OctahedronGeometry | OctahedronGeometry, Octahedron, |
+	 * | THREE.ParametricBufferGeometry | ParametricBufferGeometry, ParametricBuffer, ParametricBuffer |
+	 * | ParametricGeometries.TorusKnotGeometry | , |
+	 * | ParametricGeometries.SphereGeometry | , |
+	 * | ParametricGeometries.TubeGeometry | , |
+	 * | THREE.ParametricGeometry | ParametricGeometry , Parametric, |
+	 * | THREE.PlaneGeometry | PlaneGeometry, Plane, |
+	 * | THREE.RingGeometry | RingGeometry, Ring, |
+	 * | THREE.SphereGeometry | SphereGeometry, Sphere, |
+	 * | THREE.TetrahedronGeometry | TetrahedronGeometry, Tetrahedron, |
+	 * | THREE.TextBufferGeometry | TextBufferGeometry, TextGeometry, TextBuffer, Text |
+	 * | THREE.TorusGeometry | TorusGeometry, Torus, |
+	 * | THREE.TorusKnotGeometry | TorusKnotGeometry, TorusKnot |
+	 * | THREE.TubeGeometry | TubeGeometry, Tube, |
+	 * | ConvexGeometry | ConvexGeometry, Convex, |
+	 * | DecalGeometry | DecalGeometry, Decal, |
 	 */
 	@Input() public type: string = 'sphere';
 

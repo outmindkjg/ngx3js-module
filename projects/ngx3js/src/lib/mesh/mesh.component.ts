@@ -109,39 +109,39 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	/**
 	 * The type of mesh
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see Lensflare - type : skybox, skyboxType : sun
-	 * @see SVGObject - SVGObject, SVG
-	 * @see CSS2DObject - CSS2DObject, CSS2D
-	 * @see CSS3DSprite - CSS3DSprite
-	 * @see CSS3DObject - CSS3DObject, CSS3D, CSS
-	 * @see Reflector - Reflector
-	 * @see ReflectorRTT - ReflectorRTT
-	 * @see Refractor - Refractor
-	 * @see ReflectorForSSRPass - RefractorForSSRPass
-	 * @see Water - Water
-	 * @see Water2 - Water2
-	 * @see Sky - Sky
-	 * @see Flow - Flow
-	 * @see InstancedFlow - InstancedFlow
-	 * @see THREE.Light - light
-	 * @see THREE.LineLoop - LineLoop
-	 * @see Lensflare - Lensflare, lensflareelement
-	 * @see THREE.InstancedMesh - InstancedMesh, Instanced
-	 * @see BufferGeometryUtils.mergeBufferGeometries - merged
-	 * @see SceneUtils.createMultiMaterialObject - multimaterial, multi
-	 * @see THREE.Sprite - Sprite
-	 * @see Wireframe - wireframe
-	 * @see THREE.LOD - lod
-	 * @see MarchingCubes - marchingcubes
-	 * @see THREE.Points - points
-	 * @see THREE.Line - Line
-	 * @see Line2 - line2
-	 * @see THREE.LineSegments - linesegments
-	 * @see MD2CharacterComplex - md2charactercomplex
-	 * @see THREE.Group - group
-	 * @see THREE.Mesh - mesh
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | Lensflare | type : skybox, skyboxType : sun |
+	 * | SVGObject | SVGObject, SVG |
+	 * | CSS2DObject | CSS2DObject, CSS2D |
+	 * | CSS3DSprite | CSS3DSprite |
+	 * | CSS3DObject | CSS3DObject, CSS3D, CSS |
+	 * | Reflector | Reflector |
+	 * | ReflectorRTT | ReflectorRTT |
+	 * | Refractor | Refractor |
+	 * | ReflectorForSSRPass | RefractorForSSRPass |
+	 * | Water | Water |
+	 * | Water2 | Water2 |
+	 * | Sky | Sky |
+	 * | Flow | Flow |
+	 * | InstancedFlow | InstancedFlow |
+	 * | THREE.Light | light |
+	 * | THREE.LineLoop | LineLoop |
+	 * | Lensflare | Lensflare, lensflareelement |
+	 * | THREE.InstancedMesh | InstancedMesh, Instanced |
+	 * | BufferGeometryUtils.mergeBufferGeometries | merged |
+	 * | SceneUtils.createMultiMaterialObject | multimaterial, multi |
+	 * | THREE.Sprite | Sprite |
+	 * | Wireframe | wireframe |
+	 * | THREE.LOD | lod |
+	 * | MarchingCubes | marchingcubes |
+	 * | THREE.Points | points |
+	 * | THREE.Line | Line |
+	 * | Line2 | line2 |
+	 * | THREE.LineSegments | linesegments |
+	 * | MD2CharacterComplex | md2charactercomplex |
+	 * | THREE.Group | group |
+	 * | THREE.Mesh | mesh |
 	 */
 	@Input() public type: string = 'mesh';
 
@@ -155,8 +155,8 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	/**
 	 * The css tag of CSS2DObject, CSS3DObject
 	 *
-	 * @see HTMLDivElement - div
-	 * @see HTMLSpanElement - span
+	 * | HTMLDivElement | div |
+	 * | HTMLSpanElement | span |
 	 */
 	@Input() public cssTag: string | any = null;
 
@@ -176,9 +176,11 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	/**
 	 * The type of skybox
 	 *
-	 * @see Lensflare - sun
-	 * @see THREE.BoxGeometry - box
-	 * @see THREE.SphereGeometry - sphere
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | Lensflare | sun |
+	 * | THREE.BoxGeometry | box |
+	 * | THREE.SphereGeometry | sphere |
 	 *
 	 */
 	@Input() public skyboxType: string = 'auto';
@@ -374,18 +376,18 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 
 	/**
 	 * The usage of InstancedMesh
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.StaticDrawUsage - StaticDrawUsage, StaticDraw
-	 * @see THREE.DynamicDrawUsage - DynamicDrawUsage, DynamicDraw
-	 * @see THREE.StreamDrawUsage - StreamDrawUsage, StreamDraw
-	 * @see THREE.StaticReadUsage - StaticReadUsage, StaticRead
-	 * @see THREE.DynamicReadUsage - DynamicReadUsage, DynamicRead
-	 * @see THREE.StreamReadUsage - StreamReadUsage, StreamRead
-	 * @see THREE.StaticCopyUsage - StaticCopyUsage, StaticCopy
-	 * @see THREE.DynamicCopyUsage - DynamicCopyUsage, DynamicCopy
-	 * @see THREE.StreamCopyUsage - StreamCopyUsage, StreamCopy
+	 * 
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.StaticDrawUsage | StaticDrawUsage, StaticDraw |
+	 * | THREE.DynamicDrawUsage | DynamicDrawUsage, DynamicDraw |
+	 * | THREE.StreamDrawUsage | StreamDrawUsage, StreamDraw |
+	 * | THREE.StaticReadUsage | StaticReadUsage, StaticRead |
+	 * | THREE.DynamicReadUsage | DynamicReadUsage, DynamicRead |
+	 * | THREE.StreamReadUsage | StreamReadUsage, StreamRead |
+	 * | THREE.StaticCopyUsage | StaticCopyUsage, StaticCopy |
+	 * | THREE.DynamicCopyUsage | DynamicCopyUsage, DynamicCopy |
+	 * | THREE.StreamCopyUsage | StreamCopyUsage, StreamCopy |
 	 */
 	@Input() public usage: string = null;
 
@@ -515,18 +517,16 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureEncoding
-	 *
-	 * @see THREE.LinearEncoding - LinearEncoding ,
-	 * @see THREE.sRGBEncoding - sRGBEncoding ,
-	 * @see THREE.GammaEncoding - GammaEncoding ,
-	 * @see THREE.RGBEEncoding - RGBEEncoding ,
-	 * @see THREE.LogLuvEncoding - LogLuvEncoding ,
-	 * @see THREE.RGBM7Encoding - RGBM7Encoding ,
-	 * @see THREE.RGBM16Encoding - RGBM16Encoding ,
-	 * @see THREE.RGBDEncoding - RGBDEncoding ,
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.LinearEncoding | LinearEncoding , |
+	 * | THREE.sRGBEncoding | sRGBEncoding , |
+	 * | THREE.GammaEncoding | GammaEncoding , |
+	 * | THREE.RGBEEncoding | RGBEEncoding , |
+	 * | THREE.LogLuvEncoding | LogLuvEncoding , |
+	 * | THREE.RGBM7Encoding | RGBM7Encoding , |
+	 * | THREE.RGBM16Encoding | RGBM16Encoding , |
+	 * | THREE.RGBDEncoding | RGBDEncoding , |
 	 */
 	@Input() public encoding: string = null;
 

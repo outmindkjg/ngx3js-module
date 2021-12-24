@@ -58,28 +58,28 @@ export class NgxHelperComponent
 	/**
 	 * the type of helper
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see Gyroscope - Gyroscope
-	 * @see CSM - CSM
-	 * @see THREE.ArrowHelper - ArrowHelper, Arrow
-	 * @see THREE.BoxHelper - BoxHelper, Box
-	 * @see THREE.Box3Helper - Box3Helper, Box3
-	 * @see THREE.GridHelper - GridHelper, Grid
-	 * @see THREE.PolarGridHelper - PolarGridHelper, PolarGrid
-	 * @see PositionalAudioHelper - PositionalAudioHelper, PositionalAudio
-	 * @see THREE.CameraHelper - CameraHelper, Camera
-	 * @see THREE.DirectionalLightHelper - DirectionalLightHelper, DirectionalLight, Directional, Light
-	 * @see THREE.HemisphereLightHelper - HemisphereLightHelper, HemisphereLight, Hemisphere, Light
-	 * @see THREE.PointLightHelper - PointLightHelper, PointLightHelper, PointLight, Light
-	 * @see THREE.SpotLightHelper - SpotLightHelper, SpotLight, Light
-	 * @see RectAreaLightHelper - RectAreaLightHelper, RectAreaLight, Light
-	 * @see LightProbeHelper - LightProbeHelper, LightProbe, Light
-	 * @see THREE.PlaneHelper - PlaneHelper, Plane
-	 * @see VertexTangentsHelper - VertexTangentsHelper, VertexTangents
-	 * @see VertexNormalsHelper - VertexNormalsHelper, VertexNormals
-	 * @see THREE.SkeletonHelper - SkeletonHelper, Skeleton
-	 * @see THREE.AxesHelper - AxesHelper, Axes
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | Gyroscope | Gyroscope |
+	 * | CSM | CSM |
+	 * | THREE.ArrowHelper | ArrowHelper, Arrow |
+	 * | THREE.BoxHelper | BoxHelper, Box |
+	 * | THREE.Box3Helper | Box3Helper, Box3 |
+	 * | THREE.GridHelper | GridHelper, Grid |
+	 * | THREE.PolarGridHelper | PolarGridHelper, PolarGrid |
+	 * | PositionalAudioHelper | PositionalAudioHelper, PositionalAudio |
+	 * | THREE.CameraHelper | CameraHelper, Camera |
+	 * | THREE.DirectionalLightHelper | DirectionalLightHelper, DirectionalLight, Directional, Light |
+	 * | THREE.HemisphereLightHelper | HemisphereLightHelper, HemisphereLight, Hemisphere, Light |
+	 * | THREE.PointLightHelper | PointLightHelper, PointLightHelper, PointLight, Light |
+	 * | THREE.SpotLightHelper | SpotLightHelper, SpotLight, Light |
+	 * | RectAreaLightHelper | RectAreaLightHelper, RectAreaLight, Light |
+	 * | LightProbeHelper | LightProbeHelper, LightProbe, Light |
+	 * | THREE.PlaneHelper | PlaneHelper, Plane |
+	 * | VertexTangentsHelper | VertexTangentsHelper, VertexTangents |
+	 * | VertexNormalsHelper | VertexNormalsHelper, VertexNormals |
+	 * | THREE.SkeletonHelper | SkeletonHelper, Skeleton |
+	 * | THREE.AxesHelper | AxesHelper, Axes |
 	 */
 	@Input() public type: string = 'axes';
 
@@ -145,19 +145,17 @@ export class NgxHelperComponent
 
 	/**
 	 * The Input of helper component
-	 *
-	 * Notice - case insensitive.
-	 *
 	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
 	 *
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NoBlending | NoBlending, No |
+	 * | THREE.NormalBlending | NormalBlending, Normal |
+	 * | THREE.AdditiveBlending | AdditiveBlending, Additive |
+	 * | THREE.SubtractiveBlending | SubtractiveBlending, Subtractive |
+	 * | THREE.MultiplyBlending | MultiplyBlending, Multiply |
+	 * | THREE.CustomBlending | CustomBlending, Custom |
 	 * @default THREE.NormalBlending
-	 *
-	 * @see THREE.NoBlending - NoBlending, No
-	 * @see THREE.NormalBlending - NormalBlending, Normal
-	 * @see THREE.AdditiveBlending - AdditiveBlending, Additive
-	 * @see THREE.SubtractiveBlending - SubtractiveBlending, Subtractive
-	 * @see THREE.MultiplyBlending - MultiplyBlending, Multiply
-	 * @see THREE.CustomBlending - CustomBlending, Custom
 	 */
 	@Input() public materialBlending: string = null;
 

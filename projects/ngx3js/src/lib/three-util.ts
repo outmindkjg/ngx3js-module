@@ -2404,15 +2404,14 @@ export class NgxThreeUtil {
 	 * Gets mouse safe
 	 * https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.button
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.MOUSE
-	 * @see THREE.MOUSE.LEFT - left
-	 * @see THREE.MOUSE.MIDDLE - middle
-	 * @see THREE.MOUSE.RIGHT - right
-	 * @see THREE.MOUSE.ROTATE - rotate
-	 * @see THREE.MOUSE.DOLLY - dolly
-	 * @see THREE.MOUSE.PAN - pan
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.MOUSE.LEFT | left |
+	 * | THREE.MOUSE.MIDDLE | middle |
+	 * | THREE.MOUSE.RIGHT | right |
+	 * | THREE.MOUSE.ROTATE | rotate |
+	 * | THREE.MOUSE.DOLLY | dolly |
+	 * | THREE.MOUSE.PAN | pan |
 	 *
 	 * @param baseMouse
 	 * @param [altMouse]
@@ -2443,13 +2442,12 @@ export class NgxThreeUtil {
 	 * Gets touch safe
 	 * https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.button
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TOUCH
-	 * @see THREE.TOUCH.ROTATE - rotate
-	 * @see THREE.TOUCH.PAN - pan
-	 * @see THREE.TOUCH.DOLLY_PAN - dollypan, dolly_pan
-	 * @see THREE.TOUCH.DOLLY_ROTATE - dollyrotate, dolly_rotate
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.TOUCH.ROTATE | rotate |
+	 * | THREE.TOUCH.PAN | pan |
+	 * | THREE.TOUCH.DOLLY_PAN | dollypan, dolly_pan |
+	 * | THREE.TOUCH.DOLLY_ROTATE | dollyrotate, dolly_rotate |
 	 *
 	 * @param baseTouch
 	 * @param [altTouch]
@@ -2477,13 +2475,12 @@ export class NgxThreeUtil {
 	/**
 	 * Gets CullFace safe
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.CullFace
-	 * @see THREE.CullFaceNone - none
-	 * @see THREE.CullFaceBack - back
-	 * @see THREE.CullFaceFront - front
-	 * @see THREE.CullFaceFrontBack - frontback
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.CullFaceNone | none |
+	 * | THREE.CullFaceBack | back |
+	 * | THREE.CullFaceFront | front |
+	 * | THREE.CullFaceFrontBack | frontback |
 	 *
 	 * @param baseTouch
 	 * @param [altTouch]
@@ -2535,12 +2532,11 @@ export class NgxThreeUtil {
 	/**
 	 * Gets side
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Side
-	 * @see THREE.FrontSide - FrontSide , Front
-	 * @see THREE.BackSide - BackSide , Back
-	 * @see THREE.DoubleSide - DoubleSide , Double
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.FrontSide | FrontSide , Front |
+	 * | THREE.BackSide | BackSide , Back |
+	 * | THREE.DoubleSide | DoubleSide , Double |
 	 *
 	 * @param [def]
 	 * @returns side
@@ -2564,11 +2560,10 @@ export class NgxThreeUtil {
 	/**
 	 * Gets Shading
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Shading
-	 * @see THREE.FlatShading - Flat
-	 * @see THREE.SmoothShading - Smooth
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.FlatShading | Flat |
+	 * | THREE.SmoothShading | Smooth |
 	 *
 	 * @param [def]
 	 * @returns Shading
@@ -2587,16 +2582,14 @@ export class NgxThreeUtil {
 	/**
 	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
 	 *
-	 * @default THREE.NormalBlending
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.NoBlending - NoBlending, No
-	 * @see THREE.NormalBlending - NormalBlending, Normal
-	 * @see THREE.AdditiveBlending - AdditiveBlending, Additive
-	 * @see THREE.SubtractiveBlending - SubtractiveBlending, Subtractive
-	 * @see THREE.MultiplyBlending - MultiplyBlending, Multiply
-	 * @see THREE.CustomBlending - CustomBlending, Custom
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NoBlending | NoBlending, No |
+	 * | THREE.NormalBlending | NormalBlending, Normal |
+	 * | THREE.AdditiveBlending | AdditiveBlending, Additive |
+	 * | THREE.SubtractiveBlending | SubtractiveBlending, Subtractive |
+	 * | THREE.MultiplyBlending | MultiplyBlending, Multiply |
+	 * | THREE.CustomBlending | CustomBlending, Custom |
 	 *
 	 * @param baseBlending
 	 * @param [altBlending]
@@ -2634,13 +2627,13 @@ export class NgxThreeUtil {
 	 * Gets blend equation
 	 * custom blending equations (numbers start from 100 not to clash with other mappings to OpenGL constants defined in Texture.js)
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AddEquation - Add
-	 * @see THREE.SubtractEquation - Subtract
-	 * @see THREE.ReverseSubtractEquation - ReverseSubtract, Reverse
-	 * @see THREE.MinEquation - Nin
-	 * @see THREE.MaxEquation - Max
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.AddEquation | Add |
+	 * | THREE.SubtractEquation | Subtract |
+	 * | THREE.ReverseSubtractEquation | ReverseSubtract, Reverse |
+	 * | THREE.MinEquation | Nin |
+	 * | THREE.MaxEquation | Max |
 	 *
 	 * @param [def]
 	 * @returns blend equation
@@ -2668,19 +2661,18 @@ export class NgxThreeUtil {
 	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
 	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BlendingDstFactor
-	 * @see THREE.ZeroFactor - ZeroFactor , Zero
-	 * @see THREE.OneFactor - OneFactor , One
-	 * @see THREE.SrcColorFactor - SrcColorFactor , SrcColor
-	 * @see THREE.OneMinusSrcColorFactor - OneMinusSrcColorFactor , OneMinusSrcColor
-	 * @see THREE.SrcAlphaFactor - SrcAlphaFactor , SrcAlpha
-	 * @see THREE.OneMinusSrcAlphaFactor - OneMinusSrcAlphaFactor , OneMinusSrcAlpha
-	 * @see THREE.DstAlphaFactor - DstAlphaFactor , DstAlpha
-	 * @see THREE.OneMinusDstAlphaFactor - OneMinusDstAlphaFactor , OneMinusDstAlpha
-	 * @see THREE.DstColorFactor - DstColorFactor , DstColor
-	 * @see THREE.OneMinusDstColorFactor - OneMinusDstColorFactor , OneMinusDstColor
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.ZeroFactor | ZeroFactor , Zero |
+	 * | THREE.OneFactor | OneFactor , One |
+	 * | THREE.SrcColorFactor | SrcColorFactor , SrcColor |
+	 * | THREE.OneMinusSrcColorFactor | OneMinusSrcColorFactor , OneMinusSrcColor |
+	 * | THREE.SrcAlphaFactor | SrcAlphaFactor , SrcAlpha |
+	 * | THREE.OneMinusSrcAlphaFactor | OneMinusSrcAlphaFactor , OneMinusSrcAlpha |
+	 * | THREE.DstAlphaFactor | DstAlphaFactor , DstAlpha |
+	 * | THREE.OneMinusDstAlphaFactor | OneMinusDstAlphaFactor , OneMinusDstAlpha |
+	 * | THREE.DstColorFactor | DstColorFactor , DstColor |
+	 * | THREE.OneMinusDstColorFactor | OneMinusDstColorFactor , OneMinusDstColor |
 	 *
 	 * @param [def]
 	 * @returns blend src
@@ -2727,10 +2719,9 @@ export class NgxThreeUtil {
 	 * This must be set to [CustomBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) to use custom [blendSrc](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendSrc), [blendDst](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendDst) or [blendEquation](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials.blendEquation).
 	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.BlendingSrcFactor
-	 * @see THREE.SrcAlphaSaturateFactor - SrcAlphaSaturateFactor , SrcAlphaSaturate, SrcAlpha
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.SrcAlphaSaturateFactor | SrcAlphaSaturateFactor , SrcAlphaSaturate, SrcAlpha |
 	 *
 	 * @param [def]
 	 * @returns blend src
@@ -2796,16 +2787,16 @@ export class NgxThreeUtil {
 	}
 
 	/**
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.ToneMapping
-	 * @see THREE.NoToneMapping - No
-	 * @see THREE.LinearToneMapping - Linear
-	 * @see THREE.ReinhardToneMapping - Reinhard
-	 * @see THREE.CineonToneMapping - Cineon
-	 * @see THREE.ACESFilmicToneMapping - ACESFilmic
-	 * @see THREE.CustomToneMapping - Custom
+	 * Get The ToneMapping
+	 * 
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NoToneMapping | No |
+	 * | THREE.LinearToneMapping | Linear |
+	 * | THREE.ReinhardToneMapping | Reinhard |
+	 * | THREE.CineonToneMapping | Cineon |
+	 * | THREE.ACESFilmicToneMapping | ACESFilmic |
+	 * | THREE.CustomToneMapping | Custom |
 	 *
 	 * @param [def]
 	 * @returns toneMapping
@@ -2832,16 +2823,15 @@ export class NgxThreeUtil {
 	/**
 	 * Gets mapping safe
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Mapping
-	 * @see THREE.UVMapping - UVMapping, UV
-	 * @see THREE.CubeReflectionMapping - CubeReflectionMapping, CubeReflection
-	 * @see THREE.CubeRefractionMapping - CubeRefractionMapping, CubeRefraction
-	 * @see THREE.EquirectangularReflectionMapping - EquirectangularReflectionMapping, EquirectangularReflection
-	 * @see THREE.EquirectangularRefractionMapping - EquirectangularRefractionMapping, EquirectangularRefraction
-	 * @see THREE.CubeUVReflectionMapping - CubeUVReflectionMapping, CubeUVReflection
-	 * @see THREE.CubeUVRefractionMapping - CubeUVRefractionMapping, CubeUVRefraction
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.UVMapping | UVMapping, UV |
+	 * | THREE.CubeReflectionMapping | CubeReflectionMapping, CubeReflection |
+	 * | THREE.CubeRefractionMapping | CubeRefractionMapping, CubeRefraction |
+	 * | THREE.EquirectangularReflectionMapping | EquirectangularReflectionMapping, EquirectangularReflection |
+	 * | THREE.EquirectangularRefractionMapping | EquirectangularRefractionMapping, EquirectangularRefraction |
+	 * | THREE.CubeUVReflectionMapping | CubeUVReflectionMapping, CubeUVReflection |
+	 * | THREE.CubeUVRefractionMapping | CubeUVRefractionMapping, CubeUVRefraction |
 	 *
 	 * @param baseMapping
 	 * @param [altMapping]
@@ -2880,12 +2870,11 @@ export class NgxThreeUtil {
 	/**
 	 * Gets wrapping safe
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.Wrapping
-	 * @see THREE.RepeatWrapping - RepeatWrapping, Repeat
-	 * @see THREE.MirroredRepeatWrapping - MirroredRepeatWrapping, MirroredRepeat
-	 * @see THREE.ClampToEdgeWrapping - ClampToEdgeWrapping, ClampToEdge
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.RepeatWrapping | RepeatWrapping, Repeat |
+	 * | THREE.MirroredRepeatWrapping | MirroredRepeatWrapping, MirroredRepeat |
+	 * | THREE.ClampToEdgeWrapping | ClampToEdgeWrapping, ClampToEdge |
 	 *
 	 * @param baseWrap
 	 * @param [altWrap]
@@ -2913,15 +2902,14 @@ export class NgxThreeUtil {
 	/**
 	 * Gets texture filter safe
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureFilter
-	 * @see THREE.NearestFilter               - NearestFilter, Nearest
-	 * @see THREE.NearestMipmapNearestFilter  - NearestMipmapNearestFilter, nearestmipmapnearest
-	 * @see THREE.NearestMipmapLinearFilter   - NearestMipmapLinearFilter, nearestmipmaplinear
-	 * @see THREE.LinearMipmapNearestFilter   - LinearMipmapNearestFilter, linearmipmapnearest
-	 * @see THREE.LinearMipmapLinearFilter    - LinearMipmapLinearFilter, linearmipmaplinear
-	 * @see THREE.LinearFilter                - Linearfilter, linear
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NearestFilter | NearestFilter, Nearest |
+	 * | THREE.NearestMipmapNearestFilter | NearestMipmapNearestFilter, nearestmipmapnearest |
+	 * | THREE.NearestMipmapLinearFilter | NearestMipmapLinearFilter, nearestmipmaplinear |
+	 * | THREE.LinearMipmapNearestFilter | LinearMipmapNearestFilter, linearmipmapnearest |
+	 * | THREE.LinearMipmapLinearFilter | LinearMipmapLinearFilter, linearmipmaplinear |
+	 * | THREE.LinearFilter | Linearfilter, linear |
 	 *
 	 * @param baseFilter
 	 * @param [altFilter]
@@ -2957,21 +2945,20 @@ export class NgxThreeUtil {
 	/**
 	 * Gets texture data type safe
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureDataType
-	 * @see THREE.ByteType - ByteType, Byte
-	 * @see THREE.ShortType - ShortType, Short
-	 * @see THREE.UnsignedShortType - UnsignedShortType, UnsignedShort
-	 * @see THREE.IntType - IntType, Int
-	 * @see THREE.UnsignedIntType - UnsignedIntType, UnsignedInt
-	 * @see THREE.FloatType - FloatType, Float
-	 * @see THREE.HalfFloatType - HalfFloatType, HalfFloat
-	 * @see THREE.UnsignedShort4444Type - UnsignedShort4444Type, UnsignedShort4444
-	 * @see THREE.UnsignedShort5551Type - UnsignedShort5551Type, UnsignedShort5551
-	 * @see THREE.UnsignedShort565Type - UnsignedShort565Type, UnsignedShort565
-	 * @see THREE.UnsignedInt248Type - UnsignedInt248Type, UnsignedInt248
-	 * @see THREE.UnsignedByteType - UnsignedByteType, UnsignedByte
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.ByteType | ByteType, Byte |
+	 * | THREE.ShortType | ShortType, Short |
+	 * | THREE.UnsignedShortType | UnsignedShortType, UnsignedShort |
+	 * | THREE.IntType | IntType, Int |
+	 * | THREE.UnsignedIntType | UnsignedIntType, UnsignedInt |
+	 * | THREE.FloatType | FloatType, Float |
+	 * | THREE.HalfFloatType | HalfFloatType, HalfFloat |
+	 * | THREE.UnsignedShort4444Type | UnsignedShort4444Type, UnsignedShort4444 |
+	 * | THREE.UnsignedShort5551Type | UnsignedShort5551Type, UnsignedShort5551 |
+	 * | THREE.UnsignedShort565Type | UnsignedShort565Type, UnsignedShort565 |
+	 * | THREE.UnsignedInt248Type | UnsignedInt248Type, UnsignedInt248 |
+	 * | THREE.UnsignedByteType | UnsignedByteType, UnsignedByte |
 	 *
 	 * @param baseFormat
 	 * @param [altFormat]
@@ -3025,23 +3012,22 @@ export class NgxThreeUtil {
 	/**
 	 * Gets pixel format safe
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.PixelFormat
-	 * @see THREE.AlphaFormat - AlphaFormat, Alpha
-	 * @see THREE.RedFormat - RedFormat, Red
-	 * @see THREE.RedIntegerFormat - RedIntegerFormat, RedInteger
-	 * @see THREE.RGFormat - RGFormat, RG
-	 * @see THREE.RGIntegerFormat - RGIntegerFormat, RGInteger
-	 * @see THREE.RGBFormat - RGBFormat, RGB
-	 * @see THREE.RGBIntegerFormat - RGBIntegerFormat, RGBInteger
-	 * @see THREE.RGBAIntegerFormat - RGBAIntegerFormat, RGBAInteger
-	 * @see THREE.LuminanceFormat - LuminanceFormat, Luminance
-	 * @see THREE.LuminanceAlphaFormat - LuminanceAlphaFormat, LuminanceAlpha
-	 * @see THREE.RGBEFormat - RGBEFormat, RGBE
-	 * @see THREE.DepthFormat - DepthFormat, Depth
-	 * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
-	 * @see THREE.RGBAFormat - RGBAFormat, RGBA
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.AlphaFormat | AlphaFormat, Alpha |
+	 * | THREE.RedFormat | RedFormat, Red |
+	 * | THREE.RedIntegerFormat | RedIntegerFormat, RedInteger |
+	 * | THREE.RGFormat | RGFormat, RG |
+	 * | THREE.RGIntegerFormat | RGIntegerFormat, RGInteger |
+	 * | THREE.RGBFormat | RGBFormat, RGB |
+	 * | THREE.RGBIntegerFormat | RGBIntegerFormat, RGBInteger |
+	 * | THREE.RGBAIntegerFormat | RGBAIntegerFormat, RGBAInteger |
+	 * | THREE.LuminanceFormat | LuminanceFormat, Luminance |
+	 * | THREE.LuminanceAlphaFormat | LuminanceAlphaFormat, LuminanceAlpha |
+	 * | THREE.RGBEFormat | RGBEFormat, RGBE |
+	 * | THREE.DepthFormat | DepthFormat, Depth |
+	 * | THREE.DepthStencilFormat | DepthStencilFormat, DepthStencil |
+	 * | THREE.RGBAFormat | RGBAFormat, RGBA |
 	 *
 	 * @param baseFormat
 	 * @param [altFormat]
@@ -3239,23 +3225,22 @@ export class NgxThreeUtil {
 	/**
 	 * Gets pixel format safe
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.PixelFormat
-	 * @see THREE.AlphaFormat - AlphaFormat, Alpha
-	 * @see THREE.RedFormat - RedFormat, Red
-	 * @see THREE.RedIntegerFormat - RedIntegerFormat, RedInteger
-	 * @see THREE.RGFormat - RGFormat, RG
-	 * @see THREE.RGIntegerFormat - RGIntegerFormat, RGInteger
-	 * @see THREE.RGBFormat - RGBFormat, RGB
-	 * @see THREE.RGBIntegerFormat - RGBIntegerFormat, RGBInteger
-	 * @see THREE.RGBAIntegerFormat - RGBAIntegerFormat, RGBAInteger
-	 * @see THREE.LuminanceFormat - LuminanceFormat, Luminance
-	 * @see THREE.LuminanceAlphaFormat - LuminanceAlphaFormat, LuminanceAlpha
-	 * @see THREE.RGBEFormat - RGBEFormat, RGBE
-	 * @see THREE.DepthFormat - DepthFormat, Depth
-	 * @see THREE.DepthStencilFormat - DepthStencilFormat, DepthStencil
-	 * @see THREE.RGBAFormat - RGBAFormat, RGBA
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.AlphaFormat | AlphaFormat, Alpha |
+	 * | THREE.RedFormat | RedFormat, Red |
+	 * | THREE.RedIntegerFormat | RedIntegerFormat, RedInteger |
+	 * | THREE.RGFormat | RGFormat, RG |
+	 * | THREE.RGIntegerFormat | RGIntegerFormat, RGInteger |
+	 * | THREE.RGBFormat | RGBFormat, RGB |
+	 * | THREE.RGBIntegerFormat | RGBIntegerFormat, RGBInteger |
+	 * | THREE.RGBAIntegerFormat | RGBAIntegerFormat, RGBAInteger |
+	 * | THREE.LuminanceFormat | LuminanceFormat, Luminance |
+	 * | THREE.LuminanceAlphaFormat | LuminanceAlphaFormat, LuminanceAlpha |
+	 * | THREE.RGBEFormat | RGBEFormat, RGBE |
+	 * | THREE.DepthFormat | DepthFormat, Depth |
+	 * | THREE.DepthStencilFormat | DepthStencilFormat, DepthStencil |
+	 * | THREE.RGBAFormat | RGBAFormat, RGBA |
 	 *
 	 * @param baseFormat
 	 * @param [altFormat]
@@ -3378,13 +3363,12 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets loop
-	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AnimationActionLoopStyles
-	 * @see THREE.LoopOnce - LoopOnce, Once
-	 * @see THREE.LoopRepeat - LoopRepeat, Repeat
-	 * @see THREE.LoopPingPong - LoopPingPong, PingPong
+	 * 
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.LoopOnce | LoopOnce, Once |
+	 * | THREE.LoopRepeat | LoopRepeat, Repeat |
+	 * | THREE.LoopPingPong | LoopPingPong, PingPong |
 	 *
 	 * @param [def]
 	 * @returns loop
@@ -3408,7 +3392,11 @@ export class NgxThreeUtil {
 	/**
 	 * Gets interpolation
 	 *
-	 * Notice - case insensitive.
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.InterpolateDiscrete | InterpolateDiscrete, Discrete |
+	 * | THREE.InterpolateLinear | InterpolateLinear, Linear |
+	 * | THREE.InterpolateSmooth | InterpolateSmooth, Smooth |
 	 *
 	 * @param [def]
 	 * @returns interpolation
@@ -3433,7 +3421,11 @@ export class NgxThreeUtil {
 	/**
 	 * Gets interpolation ending
 	 *
-	 * Notice - case insensitive.
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.ZeroCurvatureEnding | ZeroCurvatureEnding, ZeroCurvature |
+	 * | THREE.ZeroSlopeEnding | ZeroSlopeEnding, ZeroSlope |
+	 * | THREE.WrapAroundEnding | WrapAroundEnding, WrapAround |
 	 *
 	 * @param [def]
 	 * @returns interpolation ending
@@ -3458,11 +3450,10 @@ export class NgxThreeUtil {
 	/**
 	 * Gets blend mode
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AnimationBlendMode
-	 * @see THREE.NormalAnimationBlendMode - NormalAnimationBlendMode, NormalAnimation, Normal
-	 * @see THREE.AdditiveAnimationBlendMode - AdditiveAnimationBlendMode, AdditiveAnimation, Additive
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NormalAnimationBlendMode | NormalAnimationBlendMode, NormalAnimation, Normal |
+	 * | THREE.AdditiveAnimationBlendMode | AdditiveAnimationBlendMode, AdditiveAnimation, Additive |
 	 *
 	 * @param [def]
 	 * @returns blend mode
@@ -3485,12 +3476,11 @@ export class NgxThreeUtil {
 	/**
 	 * Gets TrianglesDraw mode
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TrianglesDrawModes
-	 * @see THREE.TrianglesDrawMode - TrianglesDrawMode, DrawMode
-	 * @see THREE.TriangleStripDrawMode - TriangleStripDrawMode, StripDrawMode, Strip
-	 * @see THREE.TriangleFanDrawMode - TriangleFanDrawMode, FanDrawMode, Fan
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.TrianglesDrawMode | TrianglesDrawMode, DrawMode |
+	 * | THREE.TriangleStripDrawMode | TriangleStripDrawMode, StripDrawMode, Strip |
+	 * | THREE.TriangleFanDrawMode | TriangleFanDrawMode, FanDrawMode, Fan |
 	 *
 	 * @param [def]
 	 * @returns TrianglesDraw mode
@@ -3516,17 +3506,16 @@ export class NgxThreeUtil {
 	/**
 	 * Gets texture encoding safe
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureEncoding
-	 * @see THREE.sRGBEncoding - sRGBEncoding, sRGB
-	 * @see THREE.GammaEncoding - GammaEncoding, Gamma
-	 * @see THREE.RGBEEncoding - RGBEEncoding, RGBE
-	 * @see THREE.LogLuvEncoding - LogLuvEncoding, LogLuv
-	 * @see THREE.RGBM7Encoding - RGBM7Encoding, RGBM7
-	 * @see THREE.RGBM16Encoding - RGBM16Encoding, RGBM16
-	 * @see THREE.RGBDEncoding - RGBDEncoding, RGBD
-	 * @see THREE.LinearEncoding - LinearEncoding, Linear
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.sRGBEncoding | sRGBEncoding, sRGB |
+	 * | THREE.GammaEncoding | GammaEncoding, Gamma |
+	 * | THREE.RGBEEncoding | RGBEEncoding, RGBE |
+	 * | THREE.LogLuvEncoding | LogLuvEncoding, LogLuv |
+	 * | THREE.RGBM7Encoding | RGBM7Encoding, RGBM7 |
+	 * | THREE.RGBM16Encoding | RGBM16Encoding, RGBM16 |
+	 * | THREE.RGBDEncoding | RGBDEncoding, RGBD |
+	 * | THREE.LinearEncoding | LinearEncoding, Linear |
 	 *
 	 * @param baseEncoding
 	 * @param [altEncoding]

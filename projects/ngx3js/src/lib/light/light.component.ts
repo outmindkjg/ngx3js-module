@@ -80,15 +80,15 @@ export class NgxLightComponent
 	/**
 	 * The type of light
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.PointLight - PointLight, Point
-	 * @see THREE.RectAreaLight - RectAreaLight, RectArea
-	 * @see THREE.SpotLight - SpotLight, Spot
-	 * @see THREE.DirectionalLight - DirectionalLight, Directional
-	 * @see THREE.HemisphereLight - HemisphereLight, Hemisphere
-	 * @see THREE.LightProbe - LightProbe, Probe
-	 * @see THREE.AmbientLight - AmbientLight, Ambient
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.PointLight | PointLight, Point |
+	 * | THREE.RectAreaLight | RectAreaLight, RectArea |
+	 * | THREE.SpotLight | SpotLight, Spot |
+	 * | THREE.DirectionalLight | DirectionalLight, Directional |
+	 * | THREE.HemisphereLight | HemisphereLight, Hemisphere |
+	 * | THREE.LightProbe | LightProbe, Probe |
+	 * | THREE.AmbientLight | AmbientLight, Ambient |
 	 */
 	@Input() public type: string = 'spot';
 

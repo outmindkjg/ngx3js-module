@@ -25,6 +25,10 @@ import { CubeTexture, DataTexture2DArray, DataTexture3D, DepthTexture, Texture }
  * Since r118 [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) automatically uses a WebGL 2 rendering context. When upgrading an existing project to => r118, applications might break because of two reasons:
  * Custom shader code needs to be GLSL 3.0 conform.
  * WebGL 1 extension checks have to be changed.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGL1Renderer) page for details.
+ * See the [ngx renderer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_renderer) page for a live demo.
+ *
  */
 export interface WebGL1Renderer extends WebGLRenderer {
 	/**
@@ -291,6 +295,11 @@ export interface WebGLRenderTarget extends EventDispatcher {
 }
 
 /**
+ * Renderer
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Renderer) page for details.
+ * See the [ngx renderer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_renderer) page for a live demo.
+ *
  */
 export interface Renderer {
 	/**
@@ -394,6 +403,9 @@ export interface WebGLDebug {
 /**
  * The WebGL renderer displays your beautifully crafted scenes using WebGL, if your device supports it.
  * This renderer has way better performance than CanvasRenderer.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) page for details.
+ * See the [ngx renderer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_renderer) page for a live demo.
  *
  * see [src/renderers/WebGLRenderer.js](https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js)
  */

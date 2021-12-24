@@ -31,9 +31,11 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 export class NgxFogComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
 	 * The Fog type.
-	 *
-	 * @see THREE.Fog - fog (default),
-	 * @see THREE.FogExp2 - fogexp2, exp, exp2
+	 * 
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.Fog | fog (default), |
+	 * | THREE.FogExp2 | fogexp2, exp, exp2 |
 	 */
 	@Input() public type: string = 'fog';
 

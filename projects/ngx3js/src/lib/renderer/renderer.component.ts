@@ -76,10 +76,10 @@ export class NgxRendererComponent
 	/**
 	 * The type of renderer
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see SVGRenderer - SVGRenderer, SVG
-	 * @see THREE.WebGLRenderer - WebGLRenderer, WebGL, GL, WebGL2
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | SVGRenderer | SVGRenderer, SVG |
+	 * | THREE.WebGLRenderer | WebGLRenderer, WebGL, GL, WebGL2 |
 	 */
 	@Input() public type: string = 'webgl';
 
@@ -91,10 +91,10 @@ export class NgxRendererComponent
 	/**
 	 * The type of css renderer
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see CSS2DRenderer - CSS2DRenderer, CSS2D, 2D
-	 * @see CSS3DRenderer - CSS3DRenderer, CSS3D, 3D
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | CSS2DRenderer | CSS2DRenderer, CSS2D, 2D |
+	 * | CSS3DRenderer | CSS3DRenderer, CSS3D, 3D |
 	 *
 	 * mixed - "css3d,css2d", "css2d,css3d"
 	 */
@@ -109,17 +109,18 @@ export class NgxRendererComponent
 	/**
 	 * The type of control
 	 *
-	 * Notice - case insensitive.
-	 * @see FlyControls - FlyControls, Fly
-	 * @see FirstPersonControls - FirstPersonControls, FirstPerson
-	 * @see DeviceOrientationControls - DeviceOrientationControls, DeviceOrientation
-	 * @see DragControls - DragControls, Drag
-	 * @see TransformControls - TransformControls, Transform
-	 * @see TrackballControls - TrackballControls, Trackball
-	 * @see ArcballControls - ArcballControls, Arcball
-	 * @see CSM - CSM
-	 * @see PlaneControls - PlaneControls, Plane
-	 * @see OrbitControls - OrbitControls, Orbit
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | FlyControls | FlyControls, Fly |
+	 * | FirstPersonControls | FirstPersonControls, FirstPerson |
+	 * | DeviceOrientationControls | DeviceOrientationControls, DeviceOrientation |
+	 * | DragControls | DragControls, Drag |
+	 * | TransformControls | TransformControls, Transform |
+	 * | TrackballControls | TrackballControls, Trackball |
+	 * | ArcballControls | ArcballControls, Arcball |
+	 * | CSM | CSM |
+	 * | PlaneControls | PlaneControls, Plane |
+	 * | OrbitControls | OrbitControls, Orbit |
 	 * @see NgxControlComponent
 	 */
 	@Input() public controlType: string = 'none';
@@ -162,14 +163,13 @@ export class NgxRendererComponent
 	/**
 	 * Default is [NoToneMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer). See the [Renderer constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer) for other choices.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.ToneMapping
-	 * @see THREE.LinearToneMapping - LinearToneMapping, Linear
-	 * @see THREE.ReinhardToneMapping - ReinhardToneMapping, Reinhard
-	 * @see THREE.CineonToneMapping - CineonToneMapping, CineonTone
-	 * @see THREE.ACESFilmicToneMapping - ACESFilmicToneMapping, ACESFilmic
-	 * @see THREE.NoToneMapping - NoToneMapping, No
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.LinearToneMapping | LinearToneMapping, Linear |
+	 * | THREE.ReinhardToneMapping | ReinhardToneMapping, Reinhard |
+	 * | THREE.CineonToneMapping | CineonToneMapping, CineonTone |
+	 * | THREE.ACESFilmicToneMapping | ACESFilmicToneMapping, ACESFilmic |
+	 * | THREE.NoToneMapping | NoToneMapping, No |
 	 */
 	@Input() public toneMapping: string = null;
 
@@ -272,17 +272,16 @@ export class NgxRendererComponent
 	 * If a render target has been set using [.setRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.setRenderTarget) then renderTarget.texture.encoding will be used instead.
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.TextureEncoding
-	 * @see THREE.sRGBEncoding - sRGBEncoding, sRGB
-	 * @see THREE.GammaEncoding - GammaEncoding, Gamma
-	 * @see THREE.RGBEEncoding - RGBEEncoding, RGBE
-	 * @see THREE.LogLuvEncoding - LogLuvEncoding, LogLuv
-	 * @see THREE.RGBM7Encoding - RGBM7Encoding, RGBM7
-	 * @see THREE.RGBM16Encoding - RGBM16Encoding, RGBM16
-	 * @see THREE.RGBDEncoding - RGBDEncoding, RGBD
-	 * @see THREE.LinearEncoding - LinearEncoding, Linear
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.sRGBEncoding | sRGBEncoding, sRGB |
+	 * | THREE.GammaEncoding | GammaEncoding, Gamma |
+	 * | THREE.RGBEEncoding | RGBEEncoding, RGBE |
+	 * | THREE.LogLuvEncoding | LogLuvEncoding, LogLuv |
+	 * | THREE.RGBM7Encoding | RGBM7Encoding, RGBM7 |
+	 * | THREE.RGBM16Encoding | RGBM16Encoding, RGBM16 |
+	 * | THREE.RGBDEncoding | RGBDEncoding, RGBD |
+	 * | THREE.LinearEncoding | LinearEncoding, Linear |
 	 */
 	@Input() public outputEncoding: string = null;
 
@@ -914,14 +913,13 @@ export class NgxRendererComponent
 	/**
 	 * Gets tone mapping
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.ToneMapping
-	 * @see THREE.LinearToneMapping - LinearToneMapping, Linear
-	 * @see THREE.ReinhardToneMapping - ReinhardToneMapping, Reinhard
-	 * @see THREE.CineonToneMapping - CineonToneMapping, CineonTone
-	 * @see THREE.ACESFilmicToneMapping - ACESFilmicToneMapping, ACESFilmic
-	 * @see THREE.NoToneMapping - NoToneMapping, No
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.LinearToneMapping | LinearToneMapping, Linear |
+	 * | THREE.ReinhardToneMapping | ReinhardToneMapping, Reinhard |
+	 * | THREE.CineonToneMapping | CineonToneMapping, CineonTone |
+	 * | THREE.ACESFilmicToneMapping | ACESFilmicToneMapping, ACESFilmic |
+	 * | THREE.NoToneMapping | NoToneMapping, No |
 	 *
 	 * @param [def]
 	 * @returns tone mapping

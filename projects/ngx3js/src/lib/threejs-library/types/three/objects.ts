@@ -220,6 +220,9 @@ export interface LOD extends Object3D {
  * This is nearly the same as [LineSegments](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineSegments); the only difference is that it is rendered using [gl.LINE_STRIP](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements)
  * instead of [gl.LINES](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements)
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Line) page for a live demo.
+ *
  * ### Code Example
  * ```js
  * const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
@@ -291,6 +294,10 @@ export interface Line<
  * A continuous line that connects back to the start.
  * This is nearly the same	as [Line](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line); the only difference is that it is rendered using [gl.LINE_LOOP](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements)
  * instead of [gl.LINE_STRIP](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements), which draws a straight line to the next vertex, and connects the last vertex back to the first.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineLoop) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LineLoop) page for a live demo.
+ *
  */
 export interface LineLoop<
 	TGeometry extends BufferGeometry = BufferGeometry,
@@ -334,6 +341,9 @@ export interface LineSegments<
 /**
  * Class representing triangular [polygon mesh](https://en.wikipedia.org/wiki/Polygon_mesh) based objects.
  * Also serves as a base for other classes such as [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Mesh) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -399,6 +409,10 @@ export interface Mesh<
 /**
  * A class for displaying points.
  * The points are rendered by the [WebGLRenderer](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLRenderer) using [gl.POINTS](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawElements).
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Points) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Points) page for a live demo.
+ *
  */
 export interface Points<
 	TGeometry extends BufferGeometry = BufferGeometry,
@@ -451,6 +465,9 @@ export interface Points<
 /**
  * Use an array of [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) to create a skeleton that can be used by a [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh).
  * See the [SkinnedMesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh) page for an example of usage with standard [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Skeleton) page for a live demo.
  *
  * ### Code Example
  * ```js
@@ -556,6 +573,9 @@ export interface Skeleton {
 /**
  * A mesh that has a [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton) with [bones](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Bone) that can then be used to animate the vertices of the geometry.
  *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/SkinnedMesh) page for a live demo.
+ *
  * ### Code Example
  * ```js
  * const geometry = new THREE.CylinderGeometry( 5, 5, 5, 5, 15, 5, 30 );
@@ -652,6 +672,9 @@ export interface SkinnedMesh<
 /**
  * A sprite is a plane that always faces towards the camera, generally with a partially transparent texture applied.
  * Sprites do not cast shadows, setting castShadow = true will have no effect.
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Sprite) page for a live demo.
  *
  * ### Code Example
  * ```js

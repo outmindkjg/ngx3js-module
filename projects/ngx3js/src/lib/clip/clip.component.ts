@@ -55,11 +55,10 @@ export class NgxClipComponent
 	/**
 	 * The blendMode of clip component
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AnimationBlendMode
-	 * @see THREE.NormalAnimationBlendMode - NormalAnimationBlendMode, NormalAnimation, Normal
-	 * @see THREE.AdditiveAnimationBlendMode - AdditiveAnimationBlendMode, AdditiveAnimation, Additive
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.NormalAnimationBlendMode | NormalAnimationBlendMode, NormalAnimation, Normal |
+	 * | THREE.AdditiveAnimationBlendMode | AdditiveAnimationBlendMode, AdditiveAnimation, Additive |
 	 *
 	 */
 	@Input() public blendMode: string = '';
@@ -122,12 +121,11 @@ export class NgxClipComponent
 	/**
 	 * The looping mode (can be changed with [AnimationClip.setLoop](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.setLoop)). Default is [THREE.LoopRepeat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/Animation) (with an infinite number of [AnimationClip.repetitions](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.repetitions))
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see THREE.AnimationActionLoopStyles
-	 * @see THREE.LoopOnce - LoopOnce, Once
-	 * @see THREE.LoopRepeat - LoopRepeat, Repeat
-	 * @see THREE.LoopPingPong - LoopPingPong, PingPong
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | THREE.LoopOnce | LoopOnce, Once |
+	 * | THREE.LoopRepeat | LoopRepeat, Repeat |
+	 * | THREE.LoopPingPong | LoopPingPong, PingPong |
 	 */
 	@Input() public loop: string = null;
 

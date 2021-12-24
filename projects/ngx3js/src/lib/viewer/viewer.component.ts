@@ -64,12 +64,12 @@ export class NgxViewerComponent
 	/**
 	 * The type of viewer
 	 *
-	 * Notice - case insensitive.
-	 *
-	 * @see ViewerCanvas -  canvas
-	 * @see ShadowMapViewer - shadowmapviewer, shadowmap
-	 * @see  ShadowMesh - shadowmesh, shadow
-	 * @see  ProgressiveLightMap - progressivelightmap, progressivelight
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------:|--------------------------:|
+	 * | ViewerCanvas | canvas |
+	 * | ShadowMapViewer | shadowmapviewer, shadowmap |
+	 * | ShadowMesh | shadowmesh, shadow |
+	 * | ProgressiveLightMap | progressivelightmap, progressivelight |
 	 */
 	@Input() public type: string = 'shadowmap';
 
