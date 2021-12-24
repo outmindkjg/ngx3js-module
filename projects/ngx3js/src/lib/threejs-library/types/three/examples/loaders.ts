@@ -44,19 +44,36 @@ import { Volume } from './misc';
 /**
  * Rhino3dm loader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ *
  * ### Examples
- * [webgl_loader_3dm](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / 3dm](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_3dm)
  */
 export interface Rhino3dmLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (object: Object3D) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Object3D>;
 	parse(data: ArrayBufferLike, onLoad: (object: Object3D) => void, onError?: (event: ErrorEvent) => void): void;
 	setLibraryPath(path: string): Rhino3dmLoader;
@@ -67,21 +84,38 @@ export interface Rhino3dmLoader extends Loader {
 /**
  * Three mfloader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ThreeMFLoader) page for details.
- * 
+ *
  * ### Examples
- * [webgl_loader_3mf_materials](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
- * [webgl_loader_3mf](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / 3mf / materials](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_3mf_materials) |
+ * [webgl / loader / 3mf](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_3mf)
  */
 export interface ThreeMFLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	availableExtensions: object[];
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (object: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(data: ArrayBuffer): Group;
 	addExtension(extension: object): void;
@@ -90,19 +124,36 @@ export interface ThreeMFLoader extends Loader {
 /**
  * Amfloader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AMFLoader) page for details.
- * 
+ *
  * ### Examples
- * [webgl_loader_amf](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / amf](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_amf)
  */
 export interface AMFLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (object: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(data: ArrayBuffer): Group;
 }
@@ -118,21 +169,38 @@ export interface BVH {
 /**
  * Bvhloader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BVHLoader) page for details.
- * 
+ *
  * ### Examples
- * [webgl_loader_bvh](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / bvh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_bvh)
  */
 export interface BVHLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	animateBonePositions: boolean;
 	animateBoneRotations: boolean;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (bvh: BVH) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BVH>;
 	parse(text: string): BVH;
 }
@@ -140,11 +208,15 @@ export interface BVHLoader extends Loader {
 /**
  * Basis texture loader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BasisTextureLoader) page for details.
- * 
+ *
  * ### Examples
- * [webgl_loader_texture_basis](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / texture / basis](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_basis)
  */
 export interface BasisTextureLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	transcoderBinary: ArrayBuffer | null;
 	transcoderPath: string;
@@ -163,12 +235,26 @@ export interface BasisTextureLoader extends Loader {
 	workerSourceURL: string;
 
 	detectSupport(renderer: WebGLRenderer): this;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (texture: CompressedTexture) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<CompressedTexture>;
 	setTranscoderPath(path: string): this;
 	setWorkerLimit(workerLimit: number): this;
@@ -187,21 +273,38 @@ export interface Collada {
 /**
  * Collada loader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ColladaLoader) page for details.
- * 
+ *
  * ### Examples
- * [webgl_loader_collada_kinematics](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
- * [webgl_loader_collada_skinning](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
- * [webgl_loader_collada](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / collada / kinematics](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_collada_kinematics) |
+ * [webgl / loader / collada / skinning](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_collada_skinning) |
+ * [webgl / loader / collada](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_collada)
  */
 export interface ColladaLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (collada: Collada) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Collada>;
 	parse(text: string, path: string): Collada;
 }
@@ -221,13 +324,17 @@ export interface DDS {
 /**
  * Ddsloader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DDSLoader) page for details.
- * 
+ *
  * ### Examples
- * [webgl_loader_obj_mtl](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
- * [webgl_loader_texture_dds](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto) |
- * [webgpu_sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / obj / mtl](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_obj_mtl) |
+ * [webgl / loader / texture / dds](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_dds) |
+ * [webgpu / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgpu_sandbox)
  */
 export interface DDSLoader extends CompressedTextureLoader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
 	parse(buffer: ArrayBuffer, loadMipmaps: boolean): DDS;
@@ -236,19 +343,41 @@ export interface DDSLoader extends CompressedTextureLoader {
 /**
  * Dracoloader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DRACOLoader) page for details.
- * 
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / animation / keyframes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_keyframes) |
+ * [webgl / loader / draco](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_draco) |
+ * [webgl / loader / gltf / transmission](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_gltf_transmission) |
+ * [webgl / materials / car](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_car) |
+ * [webgl / postprocessing / ssr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssr) |
+ * [webgl / postprocessing / ssrr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssrr)
  */
 export interface DRACOLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (geometry: BufferGeometry) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	setDecoderPath(path: string): DRACOLoader;
 	setDecoderConfig(config: object): DRACOLoader;
@@ -271,12 +400,18 @@ export interface EXR {
 
 /**
  * Exrloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EXRLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / texture / exr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_exr) |
+ * [webgl / materials / envmaps / exr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_envmaps_exr) |
+ * [webgl / materials / matcap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_matcap)
  */
 export interface EXRLoader extends DataTextureLoader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	type: TextureDataType;
 
@@ -286,40 +421,84 @@ export interface EXRLoader extends DataTextureLoader {
 
 /**
  * Fbxloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FBXLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / fbx / nurbs](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_fbx_nurbs) |
+ * [webgl / loader / fbx](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_fbx) |
+ * [webgl / materials / nodes / playground](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_nodes_playground) |
+ * [webgl / materials / subsurface / scattering](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_subsurface_scattering) |
+ * [webgpu / nodes / playground](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgpu_nodes_playground) |
+ * [webgpu / skinning / points](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgpu_skinning_points) |
+ * [webgpu / skinning](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgpu_skinning)
  */
 export interface FBXLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (object: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(FBXBuffer: ArrayBuffer | string, path: string): Group;
 }
 
 /**
  * Font loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FontLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / geometry / text / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text_shapes) |
+ * [webgl / geometry / text / stroke](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text_stroke) |
+ * [webgl / geometry / text](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text) |
+ * [webgl / loader / ttf](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_ttf) |
+ * [webgl / materials / variations / basic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_basic)
  */
 export interface FontLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad?: (responseFont: Font) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Font>;
 	parse(json: any): Font;
 }
@@ -342,21 +521,38 @@ export interface Font {
 
 /**
  * Gcode loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GCodeLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / gcode](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_gcode)
  */
 export interface GCodeLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	splitLayer: boolean;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (object: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(data: string): Group;
 }
@@ -383,21 +579,41 @@ export interface GLTF {
 
 /**
  * Gltfloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GLTFLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending) |
+ * [webgl / animation / skinning / morph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_morph) |
+ * [webgl / decals](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_decals) |
+ * [webgl / instancing / scatter](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_scatter)
  */
 export interface GLTFLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	dracoLoader: DRACOLoader | null;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (gltf: GLTF) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<GLTF>;
 
 	setDRACOLoader(dracoLoader: DRACOLoader): GLTFLoader;
@@ -518,34 +734,65 @@ export interface GLTFLoaderPlugin {
 
 /**
  * Hdrcube texture loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HDRCubeTextureLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / materials / envmaps / hdr / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_envmaps_hdr_nodes) |
+ * [webgl / materials / envmaps / hdr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_envmaps_hdr) |
+ * [webgl / materials / envmaps / pmrem / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_envmaps_pmrem_nodes) |
+ * [webgl / materials / physical / clearcoat](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_physical_clearcoat)
  */
 export interface HDRCubeTextureLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	hdrLoader: RGBELoader;
 	type: TextureDataType;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		urls: string[],
 		onLoad: (texture: CubeTexture) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): CubeTexture;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<CubeTexture>;
 	setDataType(type: TextureDataType): this;
 }
 
 /**
  * Ifcloader
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/IFCLoader) page for details.
+ *
+ * ### Examples
+ * [webgl / loader / ifc](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_ifc)
  */
 interface IFCLoader extends Loader {
 	ifcManager: IFCManager;
 
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: any,
 		onLoad: (ifc: IFCModel) => void,
@@ -991,7 +1238,7 @@ export interface RawLineData {
 
 /**
  * Vector ex
- * @template T 
+ * @template T
  */
 export interface VectorEx<T> {
 	get(index: number): T;
@@ -1110,32 +1357,55 @@ export { IFCLoader };
 
 /**
  * Kmzloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KMZLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / kmz](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_kmz)
  */
 export interface KMZLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (kmz: Collada) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Collada>;
 	parse(data: ArrayBuffer): Collada;
 }
 
 /**
  * Ktx2 loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KTX2Loader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / gltf / compressed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_gltf_compressed) |
+ * [webgl / loader / texture / ktx2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_ktx2) |
+ * [webgl / morphtargets / face](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_morphtargets_face)
  */
 export interface KTX2Loader extends CompressedTextureLoader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
 	setTranscoderPath(path: string): KTX2Loader;
@@ -1164,12 +1434,16 @@ export interface KTX {
 
 /**
  * Ktxloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KTXLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / texture / ktx](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_ktx)
  */
 export interface KTXLoader extends CompressedTextureLoader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
 	parse(buffer: ArrayBuffer, loadMipmaps: boolean): KTX;
@@ -1177,20 +1451,37 @@ export interface KTXLoader extends CompressedTextureLoader {
 
 /**
  * Ldraw loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LDrawLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / ldraw](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_ldraw)
  */
 export interface LDrawLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (data: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	setFileMap(fileMap: Record<string, string>): void;
 	setMaterials(materials: Material[]): void;
@@ -1212,20 +1503,34 @@ export interface LUT3dlResult {
 
 /**
  * Lut3dl loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
- * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LUT3dlLoader) page for details.
  */
 export interface LUT3dlLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (result: LUT3dlResult) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: Error) => void
 	): any;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<LUT3dlResult>;
 	parse(data: string): LUT3dlResult;
 }
@@ -1244,20 +1549,37 @@ export interface LUTCubeResult {
 
 /**
  * Lutcube loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LUTCubeLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / postprocessing / 3dlut](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_3dlut)
  */
 export interface LUTCubeLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (result: LUTCubeResult) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: Error) => void
 	): any;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<LUTCubeResult>;
 	parse(data: string): LUTCubeResult;
 }
@@ -1272,10 +1594,6 @@ export interface LWO {
 
 /**
  * Lwoloader parameters
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
- * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
  */
 export interface LWOLoaderParameters {
 	/**
@@ -1286,20 +1604,37 @@ export interface LWOLoaderParameters {
 
 /**
  * Lwoloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LWOLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / lwo](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_lwo)
  */
 export interface LWOLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager, parameters?: LWOLoaderParameters): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (lwo: LWO) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<LWO>;
 	parse(data: ArrayBuffer, path: string, modelName: string): LWO;
 }
@@ -1318,34 +1653,51 @@ export interface LogLuv {
 
 /**
  * Log luv loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LogLuvLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / texture / logluv](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_logluv)
  */
 export interface LogLuvLoader extends DataTextureLoader {
-    type: TextureDataType;
-    new(manager: LoadingManager) : this;
-    parse(buffer: Iterable<number>): LogLuv;
-    setDataType(value: TextureDataType) : this;
+	type: TextureDataType;
+	new (manager: LoadingManager): this;
+	parse(buffer: Iterable<number>): LogLuv;
+	setDataType(value: TextureDataType): this;
 }
 
 /**
  * Lottie loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LottieLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / texture / lottie](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_lottie)
  */
 export interface LottieLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (texture: CanvasTexture) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<CanvasTexture>;
 
 	setQuality(value: number): void;
@@ -1353,20 +1705,34 @@ export interface LottieLoader extends Loader {
 
 /**
  * Md2 loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
- * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MD2Loader) page for details.
  */
 export interface MD2Loader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (geometry: BufferGeometry) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: ArrayBuffer): BufferGeometry;
 }
@@ -1381,27 +1747,43 @@ export interface MDD {
 
 /**
  * Mddloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MDDLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / mdd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mdd)
  */
 export interface MDDLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (result: MDD) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<MDD>;
 	parse(data: ArrayBuffer): MDD;
 }
 
 /**
  * Mmdloader animation object
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
  */
 export interface MMDLoaderAnimationObject {
 	animation: AnimationClip;
@@ -1410,12 +1792,18 @@ export interface MMDLoaderAnimationObject {
 
 /**
  * Mmdloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MMDLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / mmd / audio](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mmd_audio) |
+ * [webgl / loader / mmd / pose](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mmd_pose) |
+ * [webgl / loader / mmd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mmd)
  */
 export interface MMDLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	animationBuilder: object;
 	animationPath: string;
@@ -1423,12 +1811,25 @@ export interface MMDLoader extends Loader {
 	meshBuilder: object;
 	parser: object | null;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (mesh: SkinnedMesh) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<SkinnedMesh>;
 	loadAnimation(
 		url: string,
@@ -1505,15 +1906,26 @@ export interface MaterialCreatorOptions {
 
 /**
  * Mtlloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MTLLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / obj / mtl](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_obj_mtl)
  */
 export interface MTLLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	materialOptions: MaterialCreatorOptions;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (materialCreator: MTLLoader.MaterialCreator) => void,
@@ -1523,6 +1935,11 @@ export interface MTLLoader extends Loader {
 	parse(text: string, path: string): MTLLoader.MaterialCreator;
 	setMaterialOptions(value: MaterialCreatorOptions): void;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
 	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<MTLLoader.MaterialCreator>;
 }
 
@@ -1592,18 +2009,30 @@ export namespace MTLLoader {
 
 /**
  * Nrrdloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NRRDLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / nrrd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nrrd) |
+ * [webgl2 / materials / texture3d](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_materials_texture3d)
  */
 export interface NRRDLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	manager: LoadingManager;
 	path: string;
 
 	fieldFunctions: object;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (group: Volume) => void,
@@ -1617,44 +2046,83 @@ export interface NRRDLoader extends Loader {
 
 /**
  * Objloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OBJLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [misc / controls / arcball](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_arcball) |
+ * [misc / exporter / gltf](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_exporter_gltf) |
+ * [webgl / lights / pointlights](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_pointlights) |
+ * [webgl / loader / obj / mtl](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_obj_mtl) |
+ * [webgl / loader / obj](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_obj) |
+ * [webgl / materials / channels](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_channels)
  */
 export interface OBJLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	materials: MTLLoader.MaterialCreator;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (group: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(data: string): Group;
 	setMaterials(materials: MTLLoader.MaterialCreator): this;
 }
 
 /**
  * Pcdloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PCDLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / pcd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_pcd)
  */
 export interface PCDLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	littleEndian: boolean;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (points: Points) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Points>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Points>;
 	parse(data: ArrayBuffer | string, url: string): Points;
 }
 
@@ -1671,63 +2139,116 @@ export interface PDB {
 
 /**
  * Pdbloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PDBLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [css3d / molecules](https://outmindkjg.github.io/ngx3js-doc/#/examples/css3d_molecules) |
+ * [webgl / loader / pdb](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_pdb)
  */
 export interface PDBLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (pdb: PDB) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<PDB>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<PDB>;
 	parse(text: string): PDB;
 }
 
 /**
  * Plyloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PLYLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / ply](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_ply) |
+ * [webgl / materials / cubemap / refraction](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_cubemap_refraction)
  */
 export interface PLYLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	propertyNameMapping: object;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (geometry: BufferGeometry) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	setPropertyNameMapping(mapping: object): void;
 	parse(data: ArrayBuffer | string): BufferGeometry;
 }
 
 /**
  * Prwmloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PRWMLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / prwm](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_prwm)
  */
 export interface PRWMLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (geometry: BufferGeometry) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: ArrayBuffer): BufferGeometry;
 
 	isBigEndianPlatform(): boolean;
@@ -1747,12 +2268,16 @@ export interface PVR {
 
 /**
  * Pvrloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PVRLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / texture / pvrtc](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_pvrtc)
  */
 export interface PVRLoader extends CompressedTextureLoader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
 	parse(buffer: ArrayBuffer, loadMipmaps: boolean): PVR;
@@ -1774,12 +2299,20 @@ export interface RGBE {
 
 /**
  * Rgbeloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RGBELoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / tonemapping](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_tonemapping) |
+ * [webgl / postprocessing / 3dlut](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_3dlut) |
+ * [webgl / pmrem / test](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_pmrem_test) |
+ * [webgl / materials / variations / standard](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_standard) |
+ * [webgl / materials / variations / physical](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_physical)
  */
 export interface RGBELoader extends DataTextureLoader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	type: TextureDataType;
 
@@ -1803,12 +2336,18 @@ export interface RGBM {
 
 /**
  * Rgbmloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RGBMLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / texture / rgbm](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_rgbm) |
+ * [webgl / materials / envmaps / hdr / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_envmaps_hdr_nodes) |
+ * [webgl / materials / envmaps / hdr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_envmaps_hdr)
  */
 export interface RGBMLoader extends DataTextureLoader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
 	loadCubemap(
@@ -1823,21 +2362,38 @@ export interface RGBMLoader extends DataTextureLoader {
 
 /**
  * Stlloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/STLLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / stl](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_stl)
  */
 export interface STLLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (geometry: BufferGeometry) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: ArrayBuffer | string): BufferGeometry;
 }
 
@@ -1873,24 +2429,42 @@ export interface StrokeStyle {
 
 /**
  * Svgloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SVGLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / geometry / text / stroke](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text_stroke) |
+ * [webgl / loader / svg](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_svg)
  */
 export interface SVGLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
 	defaultDPI: number;
 	defaultUnit: string;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (data: SVGResult) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<SVGResult>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<SVGResult>;
 	parse(text: string): SVGResult;
 
 	getStrokeStyle(width?: number, color?: string, lineJoin?: string, lineCap?: string, miterLimit?: number): StrokeStyle;
@@ -1910,12 +2484,16 @@ export interface SVGLoader extends Loader {
 
 /**
  * Tdsloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TDSLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / 3ds](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_3ds)
  */
 export interface TDSLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	debug: boolean;
 	group: Group;
@@ -1924,13 +2502,26 @@ export interface TDSLoader extends Loader {
 	meshes: Mesh[];
 	position: number;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (object: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(arraybuffer: ArrayBuffer, path: string): Group;
 
 	debugMessage(message: object): void;
@@ -1958,62 +2549,114 @@ export interface TDSLoader extends Loader {
 
 /**
  * Tgaloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TGALoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / obj / mtl](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_obj_mtl) |
+ * [webgl / loader / texture / tga](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_tga)
  */
 export interface TGALoader extends DataTextureLoader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad?: (texture: DataTexture, texData: object) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): DataTexture;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<DataTexture>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<DataTexture>;
 	parse(data: ArrayBuffer): DataTexture;
 }
 
 /**
  * Ttfloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TTFLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / ttf](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_ttf)
  */
 export interface TTFLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	reversed: boolean;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (json: object) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object>;
 	parse(arraybuffer: ArrayBuffer): object;
 }
 
 /**
  * Tilt loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TiltLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / tilt](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_tilt)
  */
 export interface TiltLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager, assetUrl?: string): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (object: Group) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(data: ArrayBuffer): Group;
 }
 
@@ -2028,21 +2671,39 @@ export interface Chunk {
 
 /**
  * Voxloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VOXLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / vox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_vox) |
+ * [webgl2 / volume / instancing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_volume_instancing)
  */
 export interface VOXLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (chunks: Chunk[]) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object[]>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object[]>;
 	parse(data: ArrayBuffer): object[];
 }
 
@@ -2062,95 +2723,181 @@ export interface VOXDataTexture3D extends DataTexture3D {
 
 /**
  * Vrmlloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VRMLLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / vrml](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_vrml)
  */
 export interface VRMLLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (scene: Scene) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Scene>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Scene>;
 	parse(data: string, path: string): Scene;
 }
 
 /**
  * Vrmloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VRMLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / vrm](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_vrm)
  */
 export interface VRMLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 	gltfLoader: GLTFLoader;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (scene: GLTF) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<GLTF>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<GLTF>;
 	parse(gltf: GLTF, onLoad: (scene: GLTF) => void): void;
 	setDRACOLoader(dracoLoader: DRACOLoader): this;
 }
 
 /**
  * Vtkloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VTKLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / nrrd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nrrd) |
+ * [webgl / loader / vtk](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_vtk)
  */
 export interface VTKLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (geometry: BufferGeometry) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: ArrayBuffer | string, path: string): BufferGeometry;
 }
 
 /**
  * Xyzloader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/XYZLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / xyz](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_xyz)
  */
 export interface XYZLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager): this;
 
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (geometry: BufferGeometry) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onProgress Will be called while load progresses.
+	 */
+	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: string, onLoad: (geometry: BufferGeometry) => void): object;
 }
 
 /**
  * Node material loader
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Rhino3dmLoader) page for details.
- * 
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NodeMaterialLoader) page for details.
+ *
  * ### Examples
- * [](https://outmindkjg.github.io/ngx3js-doc/#/examples/toto)
+ * [webgl / loader / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nodes) |
+ * [webgl / materials / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_nodes) |
+ * [webgl / mirror / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_mirror_nodes) |
+ * [webgl / postprocessing / nodes / pass](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_nodes_pass) |
+ * [webgl / postprocessing / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_nodes) |
+ * [webgl / sprites / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_sprites_nodes)
  */
 export interface NodeMaterialLoader extends Loader {
+	/**
+	 * Creates a new Loader.
+	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
+	 */
 	new (manager?: LoadingManager, library?: any): this;
+
+	/**
+	 * Begin loading from url.
+	 * @param url The path or URL to the file.
+	 * @param onLoad Will be called when load completes.
+	 * @param onProgress Will be called while load progresses.
+	 * @param onError Will be called when load errors.
+	 */
 	load(
 		url: string,
 		onLoad: (geometry: Material) => void,
