@@ -37,7 +37,7 @@ export interface FogBase {
 
 /**
  * This class contains the parameters that define linear fog, i.e., that grows linearly denser with the distance.
- * 
+ *
  * See the [ngx3js scene](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SceneComponent) page for details.
  * See the [ngx scene](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_scene) page for a live demo.
  */
@@ -86,7 +86,7 @@ export interface Fog extends FogBase {
 }
 /**
  * This class contains the parameters that define exponential squared fog, which gives a clear view near the camera and a faster than exponentially densening fog farther from the camera.
- * 
+ *
  * See the [ngx3js scene](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SceneComponent) page for details.
  * See the [ngx scene](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_scene) page for a live demo.
  */
@@ -129,7 +129,7 @@ export interface FogExp2 extends FogBase {
 
 /**
  * Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
- * 
+ *
  * See the [ngx3js scene](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SceneComponent) page for details.
  * See the [ngx scene](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_scene) page for a live demo.
  */

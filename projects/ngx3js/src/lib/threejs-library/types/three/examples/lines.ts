@@ -3,6 +3,9 @@ import {
     InstancedBufferGeometry, Line, LineSegments, MaterialParameters, Matrix4, Mesh, ShaderMaterial, Vector2, WireframeGeometry
 } from '../index';
 
+/**
+ * Line2
+ */
 export interface Line2 extends LineSegments2 {
     geometry: LineGeometry;
     material: LineMaterial;
@@ -11,6 +14,9 @@ export interface Line2 extends LineSegments2 {
     readonly isLine2: true;
 }
 
+/**
+ * Line geometry
+ */
 export interface LineGeometry extends LineSegmentsGeometry {
     new() : this;
     readonly isLineGeometry: true;
@@ -18,6 +24,9 @@ export interface LineGeometry extends LineSegmentsGeometry {
     fromLine(line: Line) : this;
 }
 
+/**
+ * Line material parameters
+ */
 export interface LineMaterialParameters extends MaterialParameters {
     alphaToCoverage?: boolean | undefined;
     color?: number | undefined;
@@ -32,6 +41,9 @@ export interface LineMaterialParameters extends MaterialParameters {
     worldUnits?: boolean | undefined;
 }
 
+/**
+ * Line material
+ */
 export interface LineMaterial extends ShaderMaterial {
     new(parameters?: LineMaterialParameters) : this;
     color: Color;
@@ -48,6 +60,9 @@ export interface LineMaterial extends ShaderMaterial {
     worldUnits: boolean;
 }
 
+/**
+ * Line segments2
+ */
 export interface LineSegments2 extends Mesh {
     geometry: LineSegmentsGeometry;
     material: LineMaterial;
@@ -58,6 +73,9 @@ export interface LineSegments2 extends Mesh {
     computeLineDistances() : this;
 }
 
+/**
+ * Line segments geometry
+ */
 export interface LineSegmentsGeometry extends InstancedBufferGeometry {
     new() : this;
     readonly isLineSegmentsGeometry: true;
@@ -73,6 +91,9 @@ export interface LineSegmentsGeometry extends InstancedBufferGeometry {
     setPositions(array: number[] | Float32Array) : this;
 }
 
+/**
+ * Wireframe
+ */
 export interface Wireframe extends Mesh {
     new(geometry?: LineSegmentsGeometry, material?: LineMaterial) : this;
     readonly isWireframe: true;
@@ -80,6 +101,9 @@ export interface Wireframe extends Mesh {
     computeLineDistances() : this;
 }
 
+/**
+ * Wireframe geometry2
+ */
 export interface WireframeGeometry2 extends LineSegmentsGeometry {
     new(geometry: BufferGeometry) : this;
     readonly sWireframeGeometry2: boolean;

@@ -17,6 +17,11 @@ import { WebGLRenderTarget } from './renderers';
  * ```js
  * const light = new THREE.AmbientLight( 0x404040 ); // soft white light scene.add( light );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'AmbientLight'" [color]="'0x404040'"></ngx3js-light>
+ * ```
  */
 export interface AmbientLight extends Light {
 	/**
@@ -74,6 +79,11 @@ export interface AmbientLightProbe extends LightProbe {
  * //  White directional light at half intensity shining from the top.
  * const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
  * scene.add( directionalLight );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'DirectionalLight'" [color]="'0xffffff'" [intensity]="0.5"></ngx3js-light>
  * ```
  */
 export interface DirectionalLight extends Light {
@@ -166,6 +176,11 @@ export interface DirectionalLightShadow extends LightShadow {
  * ```js
  * const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
  * scene.add( light );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'HemisphereLight'" [skyColor]="'0xffffbb'" [groundColor]="'0x080820'" [intensity]="0.5"></ngx3js-light>
  * ```
  */
 export interface HemisphereLight extends Light {
@@ -445,6 +460,13 @@ export interface LightShadow {
  * light.position.set( 50, 50, 50 );
  * scene.add( light );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'PointLight'" [color]="'0xff0000'" [intensity]="0.5" [distance]="100">
+ * 	<ngx3js-position [x]="50" [y]="50" [z]="50" ></ngx3js-position>
+ * </ngx3js-light>
+ * ```
  */
 export interface PointLight extends Light {
 	/**
@@ -572,6 +594,15 @@ export interface PointLightShadow extends LightShadow {
  * rectLight.add( rectLightHelper );
  * ```
  *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'RectAreaLight'" [color]="'0xffffff'" [intensity]="1" [width]="10" [height]="10">
+ * 	<ngx3js-position [x]="5" [y]="5" [z]="0" ></ngx3js-position>
+ * 	<ngx3js-lookat [x]="0" [y]="0" [z]="0" ></ngx3js-lookat>
+ * 	<ngx3js-helper [type]="'RectAreaLightHelper'"></ngx3js-helper>
+ * </ngx3js-light>
+ * ```
+ *
  * ### Examples
  * [WebGL / rectarealight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_rectarealight)
  */
@@ -645,6 +676,14 @@ export interface RectAreaLight extends Light {
  * spotLight.shadow.camera.far = 4000;
  * spotLight.shadow.camera.fov = 30;
  * scene.add( spotLight );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * 
+ * ```html
+ * <ngx3js-light [type]="'SpotLight'" [color]="'0xffffff'" [intensity]="1.5" [castShadow]="true"
+ * 	[shadowCameraNear]="500" [shadowCameraFar]="4000" [shadowCameraFov]="30" [shadowMapSize]="1024"
+ * ><ngx3js-position [x]="100" [y]="1000" [z]="100"></ngx3js-position></ngx3js-light>
  * ```
  */
 export interface SpotLight extends Light {

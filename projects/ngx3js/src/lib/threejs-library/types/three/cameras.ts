@@ -1,4 +1,4 @@
-import { Object3D, Layers } from './core';
+import { Layers, Object3D } from './core';
 import { Matrix4, Vector3 } from './math';
 import { WebGLCubeRenderTarget, WebGLRenderer } from './renderers';
 import { Scene } from './scenes';
@@ -86,20 +86,20 @@ export interface Camera extends Object3D {
  * ### Code Example
  * ```js
  * //  Create cube render target
- * const cubeRenderTarget = new THREE.WebGLCubeRenderTarget( 
- * 	128, 
- * 	{ 
- * 		format: THREE.RGBFormat, 
- * 		generateMipmaps: true, 
- * 		minFilter: THREE.LinearMipmapLinearFilter 
- * 	} 
+ * const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(
+ * 	128,
+ * 	{
+ * 		format: THREE.RGBFormat,
+ * 		generateMipmaps: true,
+ * 		minFilter: THREE.LinearMipmapLinearFilter
+ * 	}
  * );
  * //  Create cube camera
  * const cubeCamera = new THREE.CubeCamera( 1, 100000, cubeRenderTarget );
  * scene.add( cubeCamera );
  * //  Create car
- * const chromeMaterial = new THREE.MeshLambertMaterial( 
- * 	{ color: 0xffffff, envMap: cubeRenderTarget.texture } 
+ * const chromeMaterial = new THREE.MeshLambertMaterial(
+ * 	{ color: 0xffffff, envMap: cubeRenderTarget.texture }
  * );
  * const car = new Mesh( carGeometry, chromeMaterial );
  * scene.add( car );
@@ -110,6 +110,14 @@ export interface Camera extends Object3D {
  * //  Render the scene
  * car.visible = true;
  * renderer.render( scene, camera );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh>
+ * 	<ngx3js-camera #cubeCamera [type]="'cubeCamera'" [near]="1" [far]="100000"></ngx3js-camera>
+ * 	<ngx3js-matrial [type]="'MeshLambertMaterial'" [envMap]="cubeCamera"></ngx3js-matrial>
+ * </ngx3js-mesh>
  * ```
  */
 export interface CubeCamera extends Object3D {
@@ -157,15 +165,20 @@ export interface CubeCamera extends Object3D {
  *
  * ### Code Example
  * ```js
- * const camera = new THREE.OrthographicCamera( 
- * 		width / - 2, 
- * 		width / 2, 
- * 		height / 2, 
- * 		height / - 2, 
- * 		1, 
- * 		1000 
+ * const camera = new THREE.OrthographicCamera(
+ * 		width / - 2,
+ * 		width / 2,
+ * 		height / 2,
+ * 		height / - 2,
+ * 		1,
+ * 		1000
  * );
  * scene.add( camera );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-camera [type]="'OrthographicCamera'" [left]="-1" [right]="1" [top]="1" [bottom]="-1" [near]="1" [far]="1000"></ngx3js-camera>
  * ```
  */
 export interface OrthographicCamera extends Camera {
@@ -295,17 +308,22 @@ export interface OrthographicCamera extends Camera {
  * [animation / skinning / morph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_morph) |
  * [effects / stereo](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_stereo) |
  * [interactive / cubes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_cubes) |
- * [loader / collada / skinning](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_collada_skinning) |
+ * [loader / collada / skinning](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_collada_skinning)
  *
  * ### Code Example
  * ```js
- * const camera = new THREE.PerspectiveCamera( 
- * 	45, 
- * 	width / height, 
- * 	1, 
- * 	1000 
+ * const camera = new THREE.PerspectiveCamera(
+ * 	45,
+ * 	width / height,
+ * 	1,
+ * 	1000
  * );
  * scene.add( camera );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-camera [type]="'PerspectiveCamera'" [fov]="45" [near]="1" [far]="1000"></ngx3js-camera>
  * ```
  */
 export interface PerspectiveCamera extends Camera {
@@ -484,7 +502,7 @@ export interface PerspectiveCamera extends Camera {
  * ### Examples
  * [effects / anaglyph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph) |
  * [effects / parallaxbarrier](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_parallaxbarrier) |
- * [effects / stereo](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_stereo) |
+ * [effects / stereo](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_stereo)
  */
 export interface StereoCamera extends Camera {
 	/**

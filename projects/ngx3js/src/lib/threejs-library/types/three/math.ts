@@ -179,14 +179,21 @@ export interface Box2 {
 
 /**
  * Represents an axis-aligned bounding box (AABB) in 3D space.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3) page for details.
+ *
+ * ### Examples
+ * [webgl / loader / 3mf](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_3mf) |
+ * [webgl / loader / ldraw](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_ldraw) |
+ * [webgl / materials / normalmap / object / space](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_normalmap_object_space) |
+ * [webxr / vr / haptics](https://outmindkjg.github.io/ngx3js-doc/#/examples/webxr_vr_haptics)
  *
  * ```js
  * const box = new THREE.Box3();
- * const mesh = new THREE.Mesh( 
- * 	new THREE.SphereGeometry(), 
- * 	new THREE.MeshBasicMaterial() 
+ * const mesh = new THREE.Mesh(
+ * 	new THREE.SphereGeometry(),
+ * 	new THREE.MeshBasicMaterial()
  * );
- * //  ensure the bounding box is computed for its geometry 
+ * //  ensure the bounding box is computed for its geometry
  * // this should be done only once (assuming static geometries)
  * mesh.geometry.computeBoundingBox();
  * //  ...
@@ -410,6 +417,10 @@ export interface Box3 {
 	equals(box: Box3): boolean;
 }
 
+/**
+ * Hsl
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HSL) page for details.
+ */
 export interface HSL {
 	h: number;
 	s: number;
@@ -420,6 +431,14 @@ export interface HSL {
  * Class representing a color.
  *
  * A Color can be initialised in any of the following ways:
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Color) page for details.
+ *
+ * ### Examples
+ * [misc / exporter / collada](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_exporter_collada) |
+ * [webgl / camera / logarithmicdepthbuffer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera_logarithmicdepthbuffer) |
+ * [webgl / clipping / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_advanced) |
+ * [webgl / framebuffer / texture](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_framebuffer_texture) |
+ * [webgl / geometry / colors](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_colors)
  *
  * ### Code Example
  * ```js
@@ -438,7 +457,6 @@ export interface HSL {
  * // Separate RGB values between 0 and 1
  * const color7 = new THREE.Color( 1, 0, 0 );
  * ```
- *
  * @example const color = new THREE.Color( 0xff0000 );
  */
 export interface Color {
@@ -704,6 +722,7 @@ export interface Color {
 
 /**
  * A point's [cylindrical coordinates](https://en.wikipedia.org/wiki/Cylindrical_coordinate_system).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Cylindrical) page for details.
  */
 export interface Cylindrical {
 	/**
@@ -757,6 +776,14 @@ export interface Cylindrical {
 /**
  * A class representing [Euler Angles](http://en.wikipedia.org/wiki/Euler_angles).
  * Euler angles describe a rotational transformation by rotating an object on its various axes in specified amounts per axis, and a specified axis order.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler) page for details.
+ *
+ * ### Examples
+ * [css3d / orthographic](https://outmindkjg.github.io/ngx3js-doc/#/examples/css3d_orthographic)
+ * [webgl / custom / attributes / points3](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points3)
+ * [webgl / decals](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_decals)
+ * [webgl / instancing / performance](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_instancing_performance)
+ * [webgl / interactive / cubes / gpu](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_cubes_gpu)
  *
  * ### Code Example
  * ```js
@@ -889,6 +916,11 @@ export interface Euler {
 /**
  * [Frustums](http://en.wikipedia.org/wiki/Frustum) are used to determine what is inside the camera's field of view. They help speed up the rendering process - objects which lie outside a camera's frustum can safely be excluded from rendering.
  * This class is mainly intended for use internally by a renderer for calculating a [camera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Camera) or [shadowCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightShadow.camera)'s frustum.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Frustum) page for details.
+ *
+ * ### Examples
+ * [webgl / performance / shader](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_performance_shader)
+ *
  */
 export interface Frustum {
 	/**
@@ -976,6 +1008,7 @@ export interface Frustum {
  * This class provides the interval seek in a Template Method, deferring the actual interpolation to derived classes.
  * Time complexity is *O(1)* for linear access crossing at most two points and *O(log N)* for random access, where *N* is the number of positions.
  * References:	[http://www.oodesign.com/template-method-pattern.html](http://www.oodesign.com/template-method-pattern.html)
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Interpolant) page for details.
  */
 export interface Interpolant {
 	/**
@@ -1018,6 +1051,7 @@ export interface Interpolant {
 
 /**
  * A geometric line segment represented by a start and end point.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Line3) page for details.
  */
 export interface Line3 {
 	/**
@@ -1116,7 +1150,15 @@ export interface Line3 {
 
 /**
  * An object with several math utility functions.
- * @see [src/math/MathUtils.js](https://github.com/mrdoob/three.js/blob/master/src/math/MathUtils.js)
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MathUtils) page for details.
+ *
+ * ### Examples
+ * [css3d / orthographic](https://outmindkjg.github.io/ngx3js-doc/#/examples/css3d_orthographic)
+ * [misc / controls / transform](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_transform)
+ * [webgl / camera / logarithmicdepthbuffer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera_logarithmicdepthbuffer)
+ * [webgl / camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera)
+ * [webgl / geometry / extrude / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_shapes)
+ *
  */
 export interface MathUtils {
 	/**
@@ -1263,6 +1305,7 @@ export type Matrix3Tuple = [number, number, number, number, number, number, numb
 
 /**
  * A class representing a [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics)).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix) page for details.
  */
 export interface Matrix {
 	/**
@@ -1309,6 +1352,11 @@ export interface Matrix {
 
 /**
  * A class representing a 3x3 [matrix](https://en.wikipedia.org/wiki/Matrix_(mathematics)).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3) page for details.
+ *
+ * ### Examples
+ * [webgl / simple / gi](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_simple_gi)
+ *
  *
  * ### Code Example
  * ```js
@@ -1525,7 +1573,7 @@ export type Matrix4Tuple = [
  * A Note on Row-Major and Column-Major Ordering
  * The [set](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/set)() method takes arguments in [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order#Column-major_order)
  * order, while internally they are stored in the *.elements* array in column-major order.
- * This means that calling 
+ * This means that calling
  * const m = new THREE.Matrix4();
  * m.set( 11, 12, 13, 14, 21, 22, 23, 24, 31, 32, 33, 34, 41, 42, 43, 44 );
  * will result in the *.elements* array containing:
@@ -1538,6 +1586,14 @@ export type Matrix4Tuple = [
  * [Vector3.setFromMatrixScale](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3.setFromMatrixScale): can be used to extract the scale component.
  * [Quaternion.setFromRotationMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion.setFromRotationMatrix), [Euler.setFromRotationMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Euler.setFromRotationMatrix) or *.extractRotation* can be used to extract the rotation component from a pure (unscaled) matrix.
  * *.decompose* can be used to extract position, rotation and scale all at once.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix4) page for details.
+ *
+ * ### Examples
+ * [css3d / molecules](https://outmindkjg.github.io/ngx3js-doc/#/examples/css3d_molecules)
+ * [physics / ammo / instancing](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_instancing)
+ * [webgl / custom / attributes / points2](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points2)
+ * [webgl / clipping / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_advanced)
+ * [webgl / geometry / minecraft](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_minecraft)
  *
  */
 export interface Matrix4 extends Matrix {
@@ -1835,12 +1891,20 @@ export interface Matrix4 extends Matrix {
 	 * Set the upper 3x3 elements of this matrix to the values of the Matrix3 [m](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Matrix3).
 	 */
 	setFromMatrix3(m: Matrix3): Matrix4;
-
 }
 
 /**
  * A two dimensional surface that extends infinitely in 3d space, represented in [Hessian normal form](http://mathworld.wolfram.com/HessianNormalForm.html)
  * by a unit length normal vector and a constant.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane) page for details.
+ *
+ * ### Examples
+ * [webgl / clipping / advanced](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_advanced) |
+ * [webgl / clipping / intersection](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_intersection) |
+ * [webgl / clipping / stencil](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_stencil) |
+ * [webgl / clipping](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping) |
+ * [webgl / portal](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_portal)
+ *
  */
 export interface Plane {
 	/**
@@ -1997,6 +2061,14 @@ export interface Plane {
 /**
  * Implementation of a [quaternion](http://en.wikipedia.org/wiki/Quaternion).
  * Quaternions are used in three.js to represent [rotations](https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) page for details.
+ *
+ * ### Examples
+ * [misc / animation / groups](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_animation_groups)
+ * [misc / animation / keys](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_animation_keys)
+ * [physics / ammo / break](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_break)
+ * [webgl / buffergeometry / instancing / interleaved](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_instancing_interleaved)
+ * [webgl / custom / attributes / points3](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points3)
  *
  * ### Code Example
  * ```js
@@ -2227,6 +2299,7 @@ export interface Quaternion {
 
 /**
  * A ray that emits from an origin in a certain direction. This is used by the [Raycaster](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Raycaster) to assist with [raycasting](https://en.wikipedia.org/wiki/Ray_casting).e Raycasting is used for mouse picking (working out what objects in the 3D space the mouse is over) amongst other things.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) page for details.
  */
 export interface Ray {
 	/**
@@ -2308,7 +2381,7 @@ export interface Ray {
 	 * Get the squared distance between this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) and a line segment.
 	 * @param v0 The start of the line segment.
 	 * @param v1 The end of the line segment.
-	 * @param optionalPointOnRay  if this is provided, it receives the point on this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) that is closest to the segment. 
+	 * @param optionalPointOnRay  if this is provided, it receives the point on this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray) that is closest to the segment.
 	 * @param optionalPointOnSegment  if this is provided, it receives the point on the line segment that is closest to this [Ray](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Ray).
 	 */
 	distanceSqToSegment(v0: Vector3, v1: Vector3, optionalPointOnRay?: Vector3, optionalPointOnSegment?: Vector3): number;
@@ -2381,6 +2454,10 @@ export interface Ray {
 
 /**
  * A sphere defined by a center and radius.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sphere) page for details.
+ *
+ * ### Examples
+ * [games / fps](https://outmindkjg.github.io/ngx3js-doc/#/examples/games_fps)
  */
 export interface Sphere {
 	/**
@@ -2509,6 +2586,11 @@ export interface Sphere {
 
 /**
  * A point's [spherical coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Spherical) page for details.
+ *
+ * ### Examples
+ * [webgl / math / orientation / transform](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_math_orientation_transform)
+ *
  */
 export interface Spherical {
 	/**
@@ -2570,6 +2652,7 @@ export interface Spherical {
 
 /**
  * Represents a third-order spherical harmonics (SH). Light probes use this class to encode lighting information.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SphericalHarmonics3) page for details.
  */
 export interface SphericalHarmonics3 {
 	/**
@@ -2686,6 +2769,7 @@ export interface SphericalHarmonics3 {
 
 /**
  * A geometric triangle as defined by three [Vector3s](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) representing its three corners.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Triangle) page for details.
  */
 export interface Triangle {
 	/**
@@ -2898,6 +2982,7 @@ export type Vector2Tuple = [number, number];
  * Currently the members of Vector is NOT type safe because it accepts different typed vectors.
  *
  * Those definitions will be changed when TypeScript innovates Generics to be type safe.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector) page for details.
  *
  * @example
  * const v:THREE.Vector = new THREE.Vector3();
@@ -3019,7 +3104,7 @@ export interface Vector {
 
 	/**
 	 * Sets this vector to a vector with the same direction as this one, but *.length*
-	 * @param l 
+	 * @param l
 	 */
 	setLength(l: number): this;
 
@@ -3049,6 +3134,15 @@ export interface Vector {
  * Any arbitrary ordered pair of numbers.
  * There are other things a 2D vector can be used to represent, such as momentum vectors, complex numbers and so on,	however these are the most common uses in three.js.
  * Iterating through a Vector2 instance will yield its components (x, y) in the corresponding order.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) page for details.
+ *
+ * ### Examples
+ * [css2d / label](https://outmindkjg.github.io/ngx3js-doc/#/examples/css2d_label) |
+ * [misc / controls / drag](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_drag) |
+ * [misc / controls / fly](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_fly) |
+ * [misc / uv / tests](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_uv_tests) |
+ * [physics / ammo / break](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_break)
+ *
  *
  * ### Code Example
  * ```js
@@ -3367,6 +3461,14 @@ export type Vector3Tuple = [number, number, number];
  * Any arbitrary ordered triplet of numbers.
  * There are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.
  * Iterating through a Vector3 instance will yield its components (x, y, z) in the corresponding order.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector3) page for details.
+ *
+ * ### Examples
+ * [css3d / molecules](https://outmindkjg.github.io/ngx3js-doc/#/examples/css3d_molecules) |
+ * [css3d / orthographic](https://outmindkjg.github.io/ngx3js-doc/#/examples/css3d_orthographic) |
+ * [games / fps](https://outmindkjg.github.io/ngx3js-doc/#/examples/games_fps) |
+ * [misc / animation / keys](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_animation_keys) |
+ * [physics / ammo / break](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_break)
  *
  * ### Code Example
  * ```js
@@ -3656,7 +3758,7 @@ export interface Vector3 extends Vector {
 
 	/**
 	 * Set this vector to a vector with the same direction as this one, but *.length*
-	 * @param l 
+	 * @param l
 	 */
 	setLength(l: number): this;
 
@@ -3803,6 +3905,14 @@ export type Vector4Tuple = [number, number, number, number];
  * Any arbitrary ordered quadruplet of numbers.
  * There are other things a 4D vector can be used to represent, however these are the most common uses in three.js.
  * Iterating through a Vector4 instance will yield its components (x, y, z, w) in the corresponding order.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector4) page for details.
+ *
+ * ### Examples
+ * [webgl / buffergeometry / instancing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_instancing) |
+ * [webgl / camera / array](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera_array) |
+ * [webgl / geometry / nurbs](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_nurbs) |
+ * [webgl / postprocessing / godrays](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_godrays) |
+ * [webgl / shadowmesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmesh)
  *
  * ### Code Example
  * ```js
@@ -4121,6 +4231,7 @@ export interface Vector4 extends Vector {
 
 /**
  * Cubic interpolant
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubicInterpolant) page for details.
  *
  * ### Code Example
  * ```js
@@ -4156,6 +4267,7 @@ export interface CubicInterpolant extends Interpolant {
 
 /**
  * Discrete Interpolant
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DiscreteInterpolant) page for details.
  *
  * ### Code Example
  * ```js
@@ -4191,6 +4303,7 @@ export interface DiscreteInterpolant extends Interpolant {
 
 /**
  * Linear interpolant
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LinearInterpolant) page for details.
  *
  * ### Code Example
  * ```js
@@ -4226,6 +4339,7 @@ export interface LinearInterpolant extends Interpolant {
 
 /**
  * Quaternion linear interpolant
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/QuaternionLinearInterpolant) page for details.
  *
  * ### Code Example
  * ```js

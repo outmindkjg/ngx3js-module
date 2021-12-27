@@ -129,6 +129,12 @@ export interface CompressedTexture extends Texture {
  * );
  * const material = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube } );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-texture [type]="'map'" [image]="'textures/cube/pisa/'" [cubeImage]="['px.png','nx.png','py.png','ny.png','pz.png','nz.png']"></ngx3js-texture>
+ * ```
+ *
  */
 export interface CubeTexture extends Texture {
 	/**
@@ -191,6 +197,12 @@ export interface CubeTexture extends Texture {
  * const texture = new THREE.DataTexture( data, width, height, THREE.RGBFormat );
  * texture.needsUpdate = true;
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-texture [data]="data" [width]="512" [height]="512" [format]="'RGBFormat'"></ngx3js-texture>
+ * ```
+ *
  */
 export interface DataTexture extends Texture {
 	/**
@@ -265,7 +277,7 @@ export interface DataTexture extends Texture {
  *
  * ### Examples
  * [WebGL2 / materials / texture2darray](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_materials_texture2darray)
- * 
+ *
  * ### Code Example
  * ```js
  * This creates a DataTexture2DArray where each texture has a different color.
@@ -292,6 +304,12 @@ export interface DataTexture extends Texture {
  * texture.format = THREE.RGBFormat;
  * texture.needsUpdate = true;
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-texture [data]="data" [width]="512" [height]="512" [depth]="100" [format]="'RGBFormat'"></ngx3js-texture>
+ * ```
+ *
  */
 export interface DataTexture2DArray extends Texture {
 	new (data?: BufferSource, width?: number, height?: number, depth?: number): this;
@@ -400,7 +418,7 @@ export interface DepthTexture extends Texture {
 	 * @param height height of the texture.
 	 * @param type Default is [THREE.UnsignedShortType](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) when unsing [DepthFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) and [THREE.UnsignedInt248Type](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) when using  [DepthStencilFormat](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [type constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
-	 * @param mapping 
+	 * @param mapping
 	 * See [mapping mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for details.
 	 * @param wrapS The default is [THREE.ClampToEdgeWrapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures).
 	 * See [wrap mode constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Textures) for other choices.
@@ -458,6 +476,12 @@ export interface DepthTexture extends Texture {
  * texture.wrapT = THREE.RepeatWrapping;
  * texture.repeat.set( 4, 4 );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-texture [image]="'textures/water.jpg'" [wrapS]="'RepeatWrapping'" [wrapT]="'RepeatWrapping'" [repeatX]="4" [repeatY]="4"></ngx3js-texture>
+ * ```
+ *
  */
 export interface Texture extends EventDispatcher {
 	/**
@@ -740,13 +764,19 @@ export interface Texture extends EventDispatcher {
  *
  * ### Examples
  * [materials / video](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_video)
- * 
+ *
  * ### Code Example
  * ```js
  * // assuming you have created a HTML video element with id="video"
  * const video = document.getElementById( 'video' );
  * const texture = new THREE.VideoTexture( video );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-texture [image]="video url"></ngx3js-texture>
+ * ```
+ *
  */
 export interface VideoTexture extends Texture {
 	/**

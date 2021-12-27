@@ -378,7 +378,6 @@ export interface Float64BufferAttribute extends BufferAttribute {
  * geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
  * const material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
  * const mesh = new THREE.Mesh( geometry, material );
- *
  * ```
  */
 export interface BufferGeometry extends EventDispatcher {
@@ -1312,7 +1311,7 @@ export interface Object3D<E extends BaseEvent = Event> extends EventDispatcher<E
 
 	/**
 	 * Unique number for this object instance.
-	 * @readonly 
+	 * @readonly
 	 */
 	id: number;
 
@@ -1838,7 +1837,7 @@ export interface RaycasterParameters {
  * }
  * function render() {
  *  //  update the picking ray with the camera and mouse position raycaster.setFromCamera( mouse, camera );
- *  //  calculate objects intersecting the picking ray 
+ *  //  calculate objects intersecting the picking ray
  * 	const intersects = raycaster.intersectObjects( scene.children );
  *  for ( let i = 0; i < intersects.length; i ++ ) {
  *      intersects[ i ].object.material.color.set( 0xff0000 );
@@ -1951,6 +1950,7 @@ export interface Raycaster {
  *  time: { value: 1.0 }, resolution: new Uniform( new Vector2() )
  * };
  * ```
+ * 
  * Each uniform must have a *value* property. The type of the value must correspond to the type of the uniform variable in the GLSL code as specified for the primitive GLSL types in the table below. Uniform structures and arrays are also supported. GLSL arrays of primitive type must either be specified as an array of the corresponding THREE objects or as a flat array containing the data of all the objects. In other words; GLSL primitives in arrays must not be represented by arrays. This rule does not apply transitively.
  * An array of *vec2* arrays, each with a length of five vectors, must be an array of arrays, of either five [Vector2](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Vector2) objects or ten *number*s.
  *

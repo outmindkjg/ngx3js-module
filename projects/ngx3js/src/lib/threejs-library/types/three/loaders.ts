@@ -197,11 +197,8 @@ export interface BufferGeometryLoader extends Loader {
  * [WebGL / geometry / text](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_text) |
  * [WebGL / interactive / instances / gpu](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_instances_gpu) |
  * [WebGL / loader / ttf](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_ttf)
- * 
- * ### Code Example
- * ```js
- * To enable caching across all loaders	that use [FileLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FileLoader), set THREE.Cache.enabled = true.
- * ```
+ *
+ * To enable caching across all loaders	that use [FileLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FileLoader) THREE.Cache.enabled = true.
  */
 export interface Cache {
 	/**
@@ -473,7 +470,7 @@ export interface FileLoader extends Loader {
  *
  * ### Examples
  * [WebGL / loader / ImageBitmap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_imagebitmap)
- * 
+ *
  * ### Code Example
  * ```js
  * // instantiate a loader
@@ -493,6 +490,7 @@ export interface FileLoader extends Loader {
  * 	}
  * );
  * ```
+ *
  */
 export interface ImageBitmapLoader extends Loader {
 	/**
@@ -543,7 +541,7 @@ export interface ImageBitmapLoader extends Loader {
  * ### Examples
  * [WebGL / loader / obj](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_obj) |
  * [WebGL / shaders / ocean](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shaders_ocean)
- * 
+ *
  * ### Code Example
  * ```js
  * // instantiate a loader
@@ -563,6 +561,7 @@ export interface ImageBitmapLoader extends Loader {
  * 	}
  * );
  * ```
+ *
  * Please note three.js r84 dropped support for ImageLoader progress events. For an ImageLoader that supports progress events, see [this thread](https://github.com/mrdoob/three.js/issues/10439#issuecomment-275785639).
  */
 export interface ImageLoader extends Loader {
@@ -872,6 +871,7 @@ export interface LoadingManager {
  * 	}
  * );
  * ```
+ *
  */
 export interface MaterialLoader extends Loader {
 	/**
@@ -947,6 +947,9 @@ export interface MaterialLoader extends Loader {
  * const object = loader.parse( a_json_object );
  * scene.add( object );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ *
  */
 export interface ObjectLoader extends Loader {
 	/**
@@ -1068,6 +1071,7 @@ export interface ObjectLoader extends Loader {
  * 	}
  * );
  * ```
+ *
  * Please note three.js r84 dropped support for TextureLoader progress events. For a TextureLoader that supports progress events, see [this thread](https://github.com/mrdoob/three.js/issues/10439#issuecomment-293260145).
  */
 export interface TextureLoader extends Loader {

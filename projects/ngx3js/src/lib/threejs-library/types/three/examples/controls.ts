@@ -1,5 +1,8 @@
 import { Camera, EventDispatcher, MOUSE, Object3D, Raycaster, Scene, TOUCH, Vector3 } from '../index';
 
+/**
+ * Arcball controls mouse action operations
+ */
 export enum ArcballControlsMouseActionOperations {
     PAN = 'PAN',
     ROTATE = 'ROTATE',
@@ -14,6 +17,9 @@ export enum ArcballControlsMouseActionKeys {
     CTRL = 'CTRL',
 }
 
+/**
+ * Arcball controls
+ */
 export interface ArcballControls extends EventDispatcher {
     camera: Camera | null;
     domElement: HTMLElement;
@@ -159,6 +165,9 @@ export interface ArcballControls extends EventDispatcher {
     dispose(): void;
 }
 
+/**
+ * Drag controls
+ */
 export interface DragControls extends EventDispatcher {
     new(objects: Object3D[], camera: Camera, domElement?: HTMLElement) : this;
 
@@ -172,6 +181,9 @@ export interface DragControls extends EventDispatcher {
     getRaycaster(): Raycaster;
 }
 
+/**
+ * First person controls
+ */
 export interface FirstPersonControls {
     new(object: Camera, domElement?: HTMLElement) : this;
 
@@ -199,6 +211,9 @@ export interface FirstPersonControls {
     dispose(): void;
 }
 
+/**
+ * Fly controls
+ */
 export interface FlyControls extends EventDispatcher {
     new(object: Camera, domElement?: HTMLElement) : this;
 
@@ -214,6 +229,9 @@ export interface FlyControls extends EventDispatcher {
     dispose(): void;
 }
 
+/**
+ * Orbit controls
+ */
 export interface OrbitControls {
     new(object: Camera, domElement?: HTMLElement) : this;
 
@@ -286,10 +304,16 @@ export interface OrbitControls {
     dispatchEvent(event: { type: string; target: any }): void;
 }
 
+/**
+ * Map controls
+ */
 export interface MapControls extends OrbitControls {
     new(object: Camera, domElement?: HTMLElement) : this;
 }
 
+/**
+ * Pointer lock controls
+ */
 export interface PointerLockControls extends EventDispatcher {
     new(camera: Camera, domElement?: HTMLElement) : this;
 
@@ -313,6 +337,9 @@ export interface PointerLockControls extends EventDispatcher {
     unlock(): void;
 }
 
+/**
+ * Trackball controls
+ */
 export interface TrackballControls extends EventDispatcher {
     new(object: Camera, domElement?: HTMLElement) : this;
 
@@ -357,6 +384,9 @@ export interface TrackballControls extends EventDispatcher {
     handleResize(): void;
 }
 
+/**
+ * Transform controls
+ */
 export interface TransformControls extends Object3D {
     new(object: Camera, domElement?: HTMLElement) : this;
 

@@ -41,12 +41,29 @@ export interface Bone extends Object3D {
  * cubeA.position.set( 100, 100, 0 );
  * const cubeB = new THREE.Mesh( geometry, material );
  * cubeB.position.set( -100, -100, 0 );
- * // create a group and add the two cubes //These cubes can now be rotated / scaled etc as a group 
+ * // create a group and add the two cubes //These cubes can now be rotated / scaled etc as a group
  * const group = new THREE.Group();
  * group.add( cubeA );
  * group.add( cubeB );
  * scene.add( group );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-shared>
+ * 	<ngx3js-geometry #geometry [type]="'BoxGeometry'" [width]="1" [height]="1" [depth]="1"></ngx3js-geometry>
+ * 	<ngx3js-material #material [type]="'MeshBasicMaterial'" [color]="'0x00ff00'"></ngx3js-material>
+ * </ngx3js-shared>
+ * <ngx3js-mesh [type]="'group'">
+ * 	<ngx3js-mesh [geometry]="geometry" [material]="material">
+ * 		<ngx3js-position [x]="100" [y]="100" [z]="0"></ngx3js-position>
+ * 	</ngx3js-mesh>
+ * 	<ngx3js-mesh [geometry]="geometry" [material]="material">
+ * 		<ngx3js-position [x]="-100" [y]="-100" [z]="0"></ngx3js-position>
+ * 	</ngx3js-mesh>
+ * </ngx3js-mesh>
+ * ```
+ *
  */
 export interface Group extends Object3D {
 	new (): this;
@@ -156,6 +173,16 @@ export interface InstancedMesh<
  * }
  * scene.add( lod );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh [type]="'LOD'">
+ * 	<ngx3js-mesh [loDistance]="10"></ngx3js-mesh>
+ * 	<ngx3js-mesh [loDistance]="8"></ngx3js-mesh>
+ * 	<ngx3js-mesh [loDistance]="7"></ngx3js-mesh>
+ * </ngx3js-mesh>
+ * ```
+ *
  */
 export interface LOD extends Object3D {
 	/**
@@ -234,6 +261,15 @@ export interface LOD extends Object3D {
  * const line = new THREE.Line( geometry, material );
  * scene.add( line );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh [type]="'Line'">
+ * 	<ngx3js-geometry [type]="'BufferGeometry'" [points]="[[- 10, 0, 0],[0, 10, 0],[10, 0, 0]]"></ngx3js-geometry>
+ * 	<ngx3js-material [type]="'LineBasicMaterial'" [color]="'0x0000ff'"></ngx3js-material>
+ * </ngx3js-mesh>
+ * ```
+ *
  * @template TGeometry
  * @template TMaterial
  */
@@ -352,6 +388,15 @@ export interface LineSegments<
  * const mesh = new THREE.Mesh( geometry, material );
  * scene.add( mesh );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh>
+ * 	<ngx3js-geometry [type]="'BoxGeometry'" [width]="1" [height]="1" [depth]="1"></ngx3js-geometry>
+ * 	<ngx3js-material [type]="'LineBasicMaterial'" [color]="'0xffff00'"></ngx3js-material>
+ * </ngx3js-mesh>
+ * ```
+ *
  * @template TGeometry
  * @template TMaterial
  */
@@ -586,7 +631,7 @@ export interface Skeleton {
  * const skinWeights = [];
  * for ( let i = 0; i < position.count; i ++ ) {
  * 	vertex.fromBufferAttribute( position, i );
- * 	//  compute skinIndex and skinWeight based on some configuration data 
+ * 	//  compute skinIndex and skinWeight based on some configuration data
  * 	const y = ( vertex.y + sizing.halfHeight );
  * 	const skinIndex = Math.floor( y / sizing.segmentHeight );
  * 	const skinWeight = ( y % sizing.segmentHeight ) / sizing.segmentHeight;
@@ -606,6 +651,7 @@ export interface Skeleton {
  * skeleton.bones[ 0 ].rotation.x = -0.1;
  * skeleton.bones[ 1 ].rotation.x = 0.2;
  * ```
+ *
  * @template TGeometry
  * @template TMaterial
  */
@@ -683,6 +729,16 @@ export interface SkinnedMesh<
  * const sprite = new THREE.Sprite( material );
  * scene.add( sprite );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh [type]="'Sprite'">
+ * 	<ngx3js-material [type]="'SpriteMaterial'">
+ * 		<ngx3js-texture [type]="'map'" [image]="'sprite.png'"></ngx3js-texture>
+ * 	</ngx3js-material>
+ * </ngx3js-mesh>
+ * ```
+ *
  */
 export interface Sprite extends Object3D {
 	/**

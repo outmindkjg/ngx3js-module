@@ -773,7 +773,7 @@ export interface PropertyBinding {
 	/**
 	 * Create a new Composite PropertyBinding (if root is an [AnimationObjectGroup](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationObjectGroup)) or PropertyBinding.
 	 */
-	create(root: any, path: any, parsedPath?: any): PropertyBinding | PropertyBinding.Composite;
+	create(root: any, path: any, parsedPath?: any): PropertyBinding | PropertyBindingComposite;
 
 	/**
 	 */
@@ -791,34 +791,30 @@ export interface PropertyBinding {
 }
 
 /**
+ * Create a new Composite PropertyBinding.
  */
-export namespace PropertyBinding {
+export interface PropertyBindingComposite {
 	/**
-	 * Create a new Composite PropertyBinding.
 	 */
-	export interface Composite {
-		/**
-		 */
-		new (targetGroup: any, path: any, parsedPath?: any): this;
+	new (targetGroup: any, path: any, parsedPath?: any): this;
 
-		/**
-		 */
-		getValue(array: any, offset: number): any;
+	/**
+	 */
+	getValue(array: any, offset: number): any;
 
-		/**
-		 */
-		setValue(array: any, offset: number): void;
+	/**
+	 */
+	setValue(array: any, offset: number): void;
 
-		/**
-		 * Create getter / setter pair for a property in the scene graph. Used internally by [getValue](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PropertyBinding.getValue) and [setValue](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PropertyBinding.setValue).
-		 */
-		bind(): void;
+	/**
+	 * Create getter / setter pair for a property in the scene graph. Used internally by [getValue](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PropertyBinding.getValue) and [setValue](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PropertyBinding.setValue).
+	 */
+	bind(): void;
 
-		/**
-		 * Unbind getter / setter pair for a property in the scene graph.
-		 */
-		unbind(): void;
-	}
+	/**
+	 * Unbind getter / setter pair for a property in the scene graph.
+	 */
+	unbind(): void;
 }
 
 /**

@@ -7,6 +7,7 @@ import { Bone, Line, LineSegments, Mesh } from './objects';
 
 /**
  * An 3D arrow object for visualizing directions.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ArrowHelper) page for details.
  *
  * ### Examples
  * [WebGL / shadowmesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmesh)
@@ -21,6 +22,11 @@ import { Bone, Line, LineSegments, Mesh } from './objects';
  * const hex = 0xffff00;
  * const arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
  * scene.add( arrowHelper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-helper [type]="'ArrowHelper'" [dirX]="1" [dirY]="2" [dirZ]="0" [originX]="0" [originY]="0" [originZ]="0" [color]="'0xffff00'" [length]="1"></ngx3js-helper>
  * ```
  */
 export interface ArrowHelper extends Object3D {
@@ -78,16 +84,24 @@ export interface ArrowHelper extends Object3D {
 /**
  * An axis object to visualize the 3 axes in a simple way.
  * The X axis is red. The Y axis is green. The Z axis is blue.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AxesHelper) page for details.
  *
  * ### Examples
  * [WebGL / buffergeometry / compression](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_compression) |
  * [WebGL / geometry / convex](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_convex) |
- * [WebGL / loader / nrrd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nrrd)
+ * [WebGL / loader / nrrd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_nrrd) |
+ * [misc / animation / keys](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_animation_keys) |
+ * [webgl / loader / pcd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_pcd)
  *
  * ### Code Example
  * ```js
  * const axesHelper = new THREE.AxesHelper( 5 );
  * scene.add( axesHelper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-helper [type]="'AxesHelper'" [size]="5"></ngx3js-helper>
  * ```
  */
 export interface AxesHelper extends LineSegments {
@@ -118,6 +132,7 @@ export interface AxesHelper extends LineSegments {
 
 /**
  * Helper object to visualize a [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3Helper) page for details.
  *
  * ### Code Example
  * ```js
@@ -125,6 +140,11 @@ export interface AxesHelper extends LineSegments {
  * box.setFromCenterAndSize( new THREE.Vector3( 1, 1, 1 ), new THREE.Vector3( 2, 1, 3 ) );
  * const helper = new THREE.Box3Helper( box, 0xffff00 );
  * scene.add( helper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-helper [type]="'Box3Helper'"></ngx3js-helper>
  * ```
  */
 export interface Box3Helper extends LineSegments {
@@ -150,6 +170,7 @@ export interface Box3Helper extends LineSegments {
  * Helper object to graphically show the world-axis-aligned bounding box around an object. The actual bounding box is handled with [Box3](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3), this is just a visual helper for debugging.
  * It can be automatically resized with the [BoxHelper.update](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BoxHelper.update) method when the object it's created from is transformed.
  * Note that the object must have a [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry) for this to work, so it won't work with [Sprites](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Sprite).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BoxHelper) page for details.
  *
  * ### Examples
  * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers) |
@@ -162,6 +183,15 @@ export interface Box3Helper extends LineSegments {
  * const object = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( 0xff0000 ) );
  * const box = new THREE.BoxHelper( object, 0xffff00 );
  * scene.add( box );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh>
+ * 	<ngx3js-geometry [type]="'SphereGeometry'"></ngx3js-geometry>
+ * 	<ngx3js-material [type]="'MeshBasicMaterial'" [color]="'0xff0000'"></ngx3js-material>
+ * 	<ngx3js-helper [type]="'BoxHelper'" [color]="'0xffff00'"></ngx3js-helper>
+ * </ngx3js-mesh>
  * ```
  */
 export interface BoxHelper extends LineSegments {
@@ -192,6 +222,14 @@ export interface BoxHelper extends LineSegments {
 /**
  * This helps with visualizing what a camera contains in its frustum.
  * It visualizes the frustum of a camera using a [LineSegments](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineSegments).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CameraHelper) page for details.
+ *
+ * ### Examples
+ * [WebGL / camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera) |
+ * [WebGL / extrude / splines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_splines)
+ * [webaudio / orientation](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_orientation)
+ * [webgl / animation / multiple](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_multiple)
+ * [webgl / animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending)
  *
  * ### Code Example
  * ```js
@@ -200,9 +238,12 @@ export interface BoxHelper extends LineSegments {
  * scene.add( helper );
  * ```
  *
- * ### Examples
- * [WebGL / camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera) |
- * [WebGL / extrude / splines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_splines)
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-camera [type]="'perspective'" [fov]="75" [near]="0.1" [far]="1000">
+ * 	<ngx3js-helper [type]="'CameraHelper'"></ngx3js-helper>
+ * </ngx3js-camera>
+ * ```
  */
 export interface CameraHelper extends LineSegments {
 	/**
@@ -239,12 +280,25 @@ export interface CameraHelper extends LineSegments {
 /**
  * Helper object to assist with visualizing a [DirectionalLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DirectionalLight)'s effect on the scene.
  * This consists of plane and a line representing the light's position and direction.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DirectionalLightHelper) page for details.
+ *
+ * ### Examples
+ * [webgl / lights / hemisphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_hemisphere)
+ * [webgl / pmrem / test](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_pmrem_test)
+ * [webgl / shadowmap / pcss](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmap_pcss)
  *
  * ### Code Example
  * ```js
  * const light = new THREE.DirectionalLight( 0xFFFFFF );
  * const helper = new THREE.DirectionalLightHelper( light, 5 );
  * scene.add( helper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'DirectionalLight'" [color]="'0xffffff'">
+ * 	<ngx3js-helper [type]="'DirectionalLightHelper'" [size]="5"></ngx3js-helper>
+ * </ngx3js-light>
  * ```
  */
 export interface DirectionalLightHelper extends Object3D {
@@ -297,6 +351,14 @@ export interface DirectionalLightHelper extends Object3D {
 
 /**
  * The GridHelper is an object to define grids. Grids are two-dimensional arrays of lines.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GridHelper) page for details.
+ *
+ * ### Examples
+ * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
+ * [misc / controls / transform](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_controls_transform)
+ * [webaudio / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox)
+ * [webgl / animation / skinning / morph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_morph)
+ * [webgl / interactive / voxelpainter](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_voxelpainter)
  *
  * ### Code Example
  * ```js
@@ -306,8 +368,10 @@ export interface DirectionalLightHelper extends Object3D {
  * scene.add( gridHelper );
  * ```
  *
- * ### Examples
- * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-helper [type]="'GridHelper'" [size]="10" [divisions]="10"></ngx3js-helper>
+ * ```
  */
 export interface GridHelper extends LineSegments {
 	/**
@@ -326,12 +390,23 @@ export interface GridHelper extends LineSegments {
 
 /**
  * Creates a visual aid consisting of a spherical [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) for a [HemisphereLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HemisphereLight).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HemisphereLightHelper) page for details.
+ *
+ * ### Examples
+ * [webgl / lights / hemisphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_hemisphere)
  *
  * ### Code Example
  * ```js
  * const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
  * const helper = new THREE.HemisphereLightHelper( light, 5 );
  * scene.add( helper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'HemisphereLight'" [skyColor]="'0xffffbb'" [groundColor]="'0x080820'" [intensity]="1">
+ * 	<ngx3js-helper [type]="'HemisphereLightHelper'"></ngx3js-helper>
+ * </ngx3js-light>
  * ```
  */
 export interface HemisphereLightHelper extends Object3D {
@@ -379,12 +454,22 @@ export interface HemisphereLightHelper extends Object3D {
 
 /**
  * Helper object to visualize a [Plane](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Plane).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PlaneHelper) page for details.
+ *
+ * ### Examples
+ * [webgl / clipping / intersection](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_intersection) |
+ * [webgl / clipping / stencil](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_stencil)
  *
  * ### Code Example
  * ```js
  * const plane = new THREE.Plane( new THREE.Vector3( 1, 1, 0.2 ), 3 );
  * const helper = new THREE.PlaneHelper( plane, 1, 0xffff00 );
  * scene.add( helper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-helper [type]="'PlaneHelper'"></ngx3js-helper>
  * ```
  */
 export interface PlaneHelper extends LineSegments {
@@ -421,6 +506,7 @@ export interface PlaneHelper extends LineSegments {
 
 /**
  * This displays a helper object consisting of a spherical [Mesh](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Mesh) for visualizing  a [PointLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLightHelper) page for details.
  *
  * ### Examples
  * [WebGL /  helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
@@ -433,6 +519,13 @@ export interface PlaneHelper extends LineSegments {
  * const sphereSize = 1;
  * const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
  * scene.add( pointLightHelper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'PointLight'" [color]="'0xffffff'" [intensity]="1" [distance]="100">
+ * 	<ngx3js-helper [type]="'PointLightHelper'"></ngx3js-helper>
+ * </ngx3js-light>
  * ```
  */
 export interface PointLightHelper extends Object3D {
@@ -483,6 +576,7 @@ export interface PointLightHelper extends Object3D {
 
 /**
  * The PolarGridHelper is an object to define polar grids. Grids are two-dimensional arrays of lines.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PolarGridHelper) page for details.
  *
  * ### Code Example
  * ```js
@@ -494,8 +588,15 @@ export interface PointLightHelper extends Object3D {
  * scene.add( helper );
  * ```
  *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-helper [type]="'PolarGridHelper'" [radius]="10" [radials]="16" [circles]="8" [divisions]="64"></ngx3js-helper>
+ * ```
+ *
  * ### Examples
- * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
+ * [WebGL / helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers) |
+ * [webgl / loader / mmd / audio](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mmd_audio) |
+ * [webgl / loader / mmd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mmd)
  */
 export interface PolarGridHelper extends LineSegments {
 	/**
@@ -524,6 +625,7 @@ export interface PolarGridHelper extends LineSegments {
 /**
  * A helper object to assist with visualizing a [Skeleton](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Skeleton).
  * The helper is rendered using a [LineBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LineBasicMaterial).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkeletonHelper) page for details.
  *
  * ### Examples
  * [WebGL / animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending) |
@@ -534,6 +636,11 @@ export interface PolarGridHelper extends LineSegments {
  * ```js
  * const helper = new THREE.SkeletonHelper( skinnedMesh );
  * scene.add( helper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-helper [type]="'SkeletonHelper'"></ngx3js-helper>
  * ```
  */
 export interface SkeletonHelper extends LineSegments {
@@ -581,9 +688,11 @@ export interface SkeletonHelper extends LineSegments {
 
 /**
  * This displays a cone shaped helper object for a [SpotLight](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLightHelper) page for details.
  *
  * ### Examples
- * [WebGL/ lights / spotlights](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlights)
+ * [WebGL / lights / spotlights](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlights)
+ * [webgl / lights / spotlight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlight)
  *
  * ### Code Example
  * ```js
@@ -592,6 +701,14 @@ export interface SkeletonHelper extends LineSegments {
  * scene.add( spotLight );
  * const spotLightHelper = new THREE.SpotLightHelper( spotLight );
  * scene.add( spotLightHelper );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-light [type]="'SpotLight'" [color]="'0xffffff'">
+ * 	<ngx3js-position [x]="10" [y]="10" [z]="10"></ngx3js-position>
+ * 	<ngx3js-helper [type]="'SpotLightHelper'"></ngx3js-helper>
+ * </ngx3js-light>
  * ```
  */
 export interface SpotLightHelper extends Object3D {

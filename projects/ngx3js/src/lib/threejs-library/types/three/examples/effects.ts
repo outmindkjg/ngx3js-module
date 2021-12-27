@@ -1,5 +1,8 @@
 import { Camera, Matrix3, Scene, Vector2, Vector4, WebGLRenderer, WebGLRenderTarget, WebGLShadowMap } from '../index';
 
+/**
+ * Anaglyph effect
+ */
 export interface AnaglyphEffect {
     new(renderer: WebGLRenderer, width?: number, height?: number) : this;
     colorMatrixLeft: Matrix3;
@@ -10,6 +13,9 @@ export interface AnaglyphEffect {
     setSize(width: number, height: number): void;
 }
 
+/**
+ * Ascii effect options
+ */
 export interface AsciiEffectOptions {
     resolution?: number;
     scale?: number;
@@ -19,6 +25,9 @@ export interface AsciiEffectOptions {
     invert?: boolean;
 }
 
+/**
+ * Ascii effect
+ */
 export interface AsciiEffect {
     new(renderer: WebGLRenderer, charSet?: string, options?: AsciiEffectOptions) : this;
     domElement: HTMLElement;
@@ -27,6 +36,9 @@ export interface AsciiEffect {
     setSize(width: number, height: number): void;
 }
 
+/**
+ * Outline effect parameters
+ */
 export interface OutlineEffectParameters {
     defaultThickness?: number | undefined;
     defaultColor?: number[] | undefined;
@@ -34,6 +46,9 @@ export interface OutlineEffectParameters {
     defaultKeepAlive?: boolean | undefined;
 }
 
+/**
+ * Outline effect
+ */
 export interface OutlineEffect {
     new(renderer: WebGLRenderer, parameters?: OutlineEffectParameters) : this;
     enabled: boolean;
@@ -54,6 +69,9 @@ export interface OutlineEffect {
     setViewport(x: Vector4 | number, y?: number, width?: number, height?: number): void;
 }
 
+/**
+ * Parallax barrier effect
+ */
 export interface ParallaxBarrierEffect {
     new(renderer: WebGLRenderer) : this;
 
@@ -61,6 +79,9 @@ export interface ParallaxBarrierEffect {
     setSize(width: number, height: number): void;
 }
 
+/**
+ * Peppers ghost effect
+ */
 export interface PeppersGhostEffect {
     new(renderer: WebGLRenderer) : this;
     cameraDistance: number;
@@ -70,6 +91,9 @@ export interface PeppersGhostEffect {
     setSize(width: number, height: number): void;
 }
 
+/**
+ * Stereo effect
+ */
 export interface StereoEffect {
     new(renderer: WebGLRenderer) : this;
 

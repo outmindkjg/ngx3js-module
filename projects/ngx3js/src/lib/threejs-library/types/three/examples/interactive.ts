@@ -1,13 +1,22 @@
 import { Frustum, Object3D, Scene, Vector2, Vector3, Camera, Group, Mesh, WebGLRenderer } from '../index';
 
+/**
+ * Htmlmesh
+ */
 export interface HTMLMesh extends Mesh {
     new(dom: HTMLElement) : this;
 }
 
+/**
+ * Interactive group
+ */
 export interface InteractiveGroup extends Group {
     new(renderer: WebGLRenderer, camera: Camera) : this;
 }
 
+/**
+ * Selection box
+ */
 export interface SelectionBox {
     new(camera: Camera, scene: Scene, deep?: number) : this;
     camera: Camera;
@@ -22,6 +31,9 @@ export interface SelectionBox {
     searchChildInFrustum(frustum: Frustum, object: Object3D): void;
 }
 
+/**
+ * Selection helper
+ */
 export interface SelectionHelper {
     new(selectionBox: SelectionBox, renderer: WebGLRenderer, cssClassName: string) : this;
     element: HTMLElement;

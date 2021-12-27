@@ -4,10 +4,16 @@ import {
 } from '../index';
 import { GLTFLoader } from './loaders';
 
+/**
+ * Arbutton
+ */
 export interface ARButton {
     createButton(renderer: WebGLRenderer, sessionInit?: any): HTMLElement;
 }
 
+/**
+ * Oculus hand model
+ */
 export interface OculusHandModel extends Object3D {
     controller: Object3D;
     motionController: Object3D | null;
@@ -26,6 +32,9 @@ export interface OculusHandModel extends Object3D {
     checkButton(button: Object3D): void;
 }
 
+/**
+ * Oculus hand pointer model
+ */
 export interface OculusHandPointerModel extends Object3D {
     hand: Object3D;
     controller: Object3D;
@@ -72,14 +81,23 @@ export interface OculusHandPointerModel extends Object3D {
     setCursor(distance: number): void;
 }
 
+/**
+ * Create text
+ */
 export interface createText {
     (message: string, height: number): Mesh;
 }
 
+/**
+ * Vrbutton
+ */
 export interface VRButton {
     createButton(renderer: WebGLRenderer): HTMLElement;
 }
 
+/**
+ * Xrcontroller model
+ */
 export interface XRControllerModel extends Object3D {
     new() : this;
 
@@ -88,6 +106,9 @@ export interface XRControllerModel extends Object3D {
     setEnvironmentMap(envMap: Texture): XRControllerModel;
 }
 
+/**
+ * Xrcontroller model factory
+ */
 export interface XRControllerModelFactory {
     new(gltfLoader?: GLTFLoader) : this;
     gltfLoader: GLTFLoader | null;
@@ -96,6 +117,9 @@ export interface XRControllerModelFactory {
     createControllerModel(controller: Group): XRControllerModel;
 }
 
+/**
+ * Session light probe
+ */
 export interface SessionLightProbe {
     xrLight: XREstimatedLight;
     renderer: WebGLRenderer;
@@ -119,6 +143,9 @@ export interface SessionLightProbe {
     dispose: () => void;
 }
 
+/**
+ * Xrestimated light
+ */
 export interface XREstimatedLight extends Group {
     lightProbe: LightProbe;
     directionalLight: DirectionalLight;
@@ -127,6 +154,9 @@ export interface XREstimatedLight extends Group {
     new(renderer: WebGLRenderer, environmentEstimation?: boolean) : this;
 }
 
+/**
+ * Xrhand mesh model
+ */
 export interface XRHandMeshModel {
     controller: Object3D;
     handModel: Object3D;
@@ -139,12 +169,18 @@ export interface XRHandMeshModel {
 
 export type XRHandModelHandedness = 'left' | 'right';
 
+/**
+ * Xrhand model
+ */
 export interface XRHandModel extends Object3D {
     new() : this;
 
     motionController: XRHandPrimitiveModel | XRHandMeshModel;
 }
 
+/**
+ * Xrhand model factory
+ */
 export interface XRHandModelFactory {
     new() : this;
     path: string;
@@ -158,10 +194,16 @@ export interface XRHandModelFactory {
     ): XRHandModel;
 }
 
+/**
+ * Xrhand primitive model options
+ */
 export interface XRHandPrimitiveModelOptions {
     primitive?: 'sphere' | 'box' | undefined;
 }
 
+/**
+ * Xrhand primitive model
+ */
 export interface XRHandPrimitiveModel {
     controller: Group;
     handModel: XRHandModel;

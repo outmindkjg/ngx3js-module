@@ -1,10 +1,16 @@
 import { Curve, Vector2, Vector3, Vector4 } from '../index';
 
+/**
+ * Example custom curves
+ */
 export interface ExampleCustomCurves extends Curve<Vector3> {
     new(scale?: number) : this;
     scale: number;
 }
 
+/**
+ * Curves
+ */
 export interface Curves {
     GrannyKnot : ExampleCustomCurves;
     HeartCurve : ExampleCustomCurves ;
@@ -22,6 +28,9 @@ export interface Curves {
     DecoratedTorusKnot5c : ExampleCustomCurves;
 }
 
+/**
+ * Nurbscurve
+ */
 export interface NURBSCurve extends Curve<Vector3> {
     new(
         degree: number,
@@ -32,6 +41,9 @@ export interface NURBSCurve extends Curve<Vector3> {
     ) : this;
 }
 
+/**
+ * Nurbssurface
+ */
 export interface NURBSSurface {
     new(
         degree1: number,
@@ -44,6 +56,9 @@ export interface NURBSSurface {
     getPoint(t1: number, t2: number, target: Vector3): void;
 }
 
+/**
+ * Nurbsutils
+ */
 export interface NURBSUtils {
     findSpan(p: number, u: number, U: number[]): number;
     calcBasisFunctions(span: number, u: number, p: number, U: number[]): number[];

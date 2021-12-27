@@ -1,7 +1,6 @@
-import { Scene } from './scenes';
-import { Mapping } from './constants';
 import { Color, Vector, Vector2, Vector3 } from './math';
 import { WebGLRenderer, WebGLRenderTarget } from './renderers';
+import { Scene } from './scenes';
 import { CubeTexture, Texture } from './textures';
 
 /**
@@ -420,13 +419,13 @@ export interface Path extends CurvePath<Vector2> {
  * heartShape.bezierCurveTo( 60, 77, 80, 55, 80, 35 );
  * heartShape.bezierCurveTo( 80, 35, 80, 0, 50, 0 );
  * heartShape.bezierCurveTo( 35, 0, 25, 25, 25, 25 );
- * const extrudeSettings = { 
- * 	depth: 8, 
- * 	bevelEnabled: true, 
- * 	bevelSegments: 2, 
- * 	steps: 2, 
- * 	bevelSize: 1, 
- * 	bevelThickness: 1 
+ * const extrudeSettings = {
+ * 	depth: 8,
+ * 	bevelEnabled: true,
+ * 	bevelSegments: 2,
+ * 	steps: 2,
+ * 	bevelSize: 1,
+ * 	bevelThickness: 1
  * };
  * const geometry = new THREE.ExtrudeGeometry( heartShape, extrudeSettings );
  * const mesh = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial() );
@@ -587,11 +586,11 @@ export interface CurveUtils {
  * ```js
  * // Create a closed wavey loop
  * const curve = new THREE.CatmullRomCurve3( [
- * 	new THREE.Vector3( -10, 0, 10 ), 
- * 	new THREE.Vector3( -5, 5, 5 ), 
- * 	new THREE.Vector3( 0, 0, 0 ), 
- * 	new THREE.Vector3( 5, -5, 5 ), 
- * 	new THREE.Vector3( 10, 0, 10 ) 
+ * 	new THREE.Vector3( -10, 0, 10 ),
+ * 	new THREE.Vector3( -5, 5, 5 ),
+ * 	new THREE.Vector3( 0, 0, 0 ),
+ * 	new THREE.Vector3( 5, -5, 5 ),
+ * 	new THREE.Vector3( 10, 0, 10 )
  * ] );
  * const points = curve.getPoints( 50 );
  * const geometry = new THREE.BufferGeometry().setFromPoints( points );
@@ -627,10 +626,10 @@ export interface CatmullRomCurve3 extends Curve<Vector3> {
  * ### Code Example
  * ```js
  * const curve = new THREE.CubicBezierCurve(
- * 	new THREE.Vector2( -10, 0 ), 
- * 	new THREE.Vector2( -5, 15 ), 
- * 	new THREE.Vector2( 20, 15 ), 
- * 	new THREE.Vector2( 10, 0 ) 
+ * 	new THREE.Vector2( -10, 0 ),
+ * 	new THREE.Vector2( -5, 15 ),
+ * 	new THREE.Vector2( 20, 15 ),
+ * 	new THREE.Vector2( 10, 0 )
  * );
  * const points = curve.getPoints( 50 );
  * const geometry = new THREE.BufferGeometry().setFromPoints( points );
@@ -684,10 +683,10 @@ export interface CubicBezierCurve extends Curve<Vector2> {
  * ### Code Example
  * ```js
  * const curve = new THREE.CubicBezierCurve3(
- * 	new THREE.Vector3( -10, 0, 0 ), 
- * 	new THREE.Vector3( -5, 15, 0 ), 
- * 	new THREE.Vector3( 20, 15, 0 ), 
- * 	new THREE.Vector3( 10, 0, 0 ) 
+ * 	new THREE.Vector3( -10, 0, 0 ),
+ * 	new THREE.Vector3( -5, 15, 0 ),
+ * 	new THREE.Vector3( 20, 15, 0 ),
+ * 	new THREE.Vector3( 10, 0, 0 )
  * );
  * const points = curve.getPoints( 50 );
  * const geometry = new THREE.BufferGeometry().setFromPoints( points );

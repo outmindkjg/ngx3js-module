@@ -3,6 +3,7 @@ import { Object3D } from './core';
 /**
  * Create a non-positional ( global ) audio object.
  * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio) page for details.
  *
  * ### Examples
  * [webaudio / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox) |
@@ -27,15 +28,15 @@ import { Object3D } from './core';
  * 	}
  * );
  * ```
- * 
+ *
  * ### Ngx3Js Code Example
- * ```ts
- * <ngx3js-camera [type]="''">
+ * ```html
+ * <ngx3js-camera>
  * 	<ngx3js-listener></ngx3js-listener>
  * </ngx3js-camera>
- * <ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true"></ngx3js-audio>
+ * <ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true" [play]="true"></ngx3js-audio>
  * ```
- * 
+ *
  * @template NodeType
  */
 export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
@@ -278,6 +279,7 @@ export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
  * to analyse audio data.
  *
  * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioAnalyser) page for details.
  *
  * ### Examples
  * [webaudio / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox) |
@@ -305,6 +307,14 @@ export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
  * const analyser = new THREE.AudioAnalyser( sound, 32 );
  * //  get the average frequency of the sound
  * const data = analyser.getAverageFrequency();
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-camera>
+ * 	<ngx3js-listener></ngx3js-listener>
+ * </ngx3js-camera>
+ * <ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true" [play]="true"></ngx3js-audio>
  * ```
  */
 export interface AudioAnalyser {
@@ -347,6 +357,8 @@ export interface AudioAnalyser {
  * This contains methods for setting up an [AudioContext](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext).
  * Used internally by the [AudioListener](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener) and [AudioLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioLoader) classes.
  * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioContext) page for details.
+ * 
  */
 export interface AudioContext {
 	/**
@@ -388,6 +400,7 @@ export interface AudioContext {
  * The AudioListener represents a virtual [listener](https://developer.mozilla.org/en-US/docs/Web/API/AudioListener) of the all positional and non-positional audio effects in the scene.
  * A three.js application usually creates a single instance of AudioListener. It is a mandatory construtor parameter for audios entities like [Audio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Audio) and [PositionalAudio](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PositionalAudio).
  * In most cases, the listener object is a child of the camera. So the 3D transformation of the camera represents the 3D transformation of the listener.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioListener) page for details.
  *
  * ### Examples
  * [webaudio / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_sandbox) |
@@ -414,6 +427,12 @@ export interface AudioContext {
  * );
  * ```
  *
+ * ### Ngx3Js Code Example
+ * <ngx3js-camera>
+ * 	<ngx3js-listener></ngx3js-listener>
+ * </ngx3js-camera>
+ * <ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true"></ngx3js-audio>
+ * ```
  */
 export interface AudioListener extends Object3D {
 	/**
@@ -484,6 +503,7 @@ export interface AudioListener extends Object3D {
 /**
  * Create a positional audio object.
  * This uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PositionalAudio) page for details.
  *
  * ### Examples
  * [webaudio / orientation](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_orientation) |
@@ -514,6 +534,18 @@ export interface AudioListener extends Object3D {
  * scene.add( mesh );
  * //  finally add the sound to the mesh
  * mesh.add( sound );
+ * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-camera>
+ * 	<ngx3js-listener></ngx3js-listener>
+ * </ngx3js-camera>
+ * <ngx3js-mesh>
+ * 	<ngx3js-geometry [type]="'SphereGeometry'" [radius]="20" [widthSegments]="32" [heightSegments]="16"></ngx3js-geometry>
+ * 	<ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true"></ngx3js-audio>
+ * </ngx3js-mesh>
+ * 
  * ```
  */
 export interface PositionalAudio extends Audio<PannerNode> {

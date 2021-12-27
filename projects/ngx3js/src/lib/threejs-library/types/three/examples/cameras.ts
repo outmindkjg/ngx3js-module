@@ -2,6 +2,9 @@ import {
     OrthographicCamera, PerspectiveCamera, Scene, ShaderMaterial, WebGLRenderer, WebGLRenderTarget
 } from '../index';
 
+/**
+ * Cinematic camera
+ */
 export interface CinematicCamera extends PerspectiveCamera {
     new(fov: number, aspect: number, near: number, far: number) : this;
 

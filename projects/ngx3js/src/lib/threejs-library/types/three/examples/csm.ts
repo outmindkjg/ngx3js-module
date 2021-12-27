@@ -6,6 +6,9 @@ import {
     MeshBasicMaterial, Object3D, PlaneGeometry, Vector2, Vector3
 } from '../index';
 
+/**
+ * Cmsmode
+ */
 export enum CMSMode {
     practical = 'practical',
     uniform = 'uniform',
@@ -13,6 +16,9 @@ export enum CMSMode {
     custom = 'custom',
 }
 
+/**
+ * Cmsparameters
+ */
 export interface CMSParameters {
     camera?: Camera;
     parent?: Object3D;
@@ -29,6 +35,9 @@ export interface CMSParameters {
     customSplitsCallback?: (cascades: number, cameraNear: number, cameraFar: number, breaks: number[]) => void;
 }
 
+/**
+ * Csm
+ */
 export interface CSM {
     new(data?: CMSParameters) : this;
     camera: Camera;
@@ -64,16 +73,25 @@ export interface CSM {
     dispose(): void;
 }
 
+/**
+ * Csmfrustum verticies
+ */
 export interface CSMFrustumVerticies {
     near: Vector3[];
     far: Vector3[];
 }
 
+/**
+ * Csmfrustum parameters
+ */
 export interface CSMFrustumParameters {
     projectionMatrix?: Matrix4;
     maxFar?: number;
 }
 
+/**
+ * Csmfrustum
+ */
 export interface CSMFrustum {
     new(data?: CSMFrustumParameters) : this;
     vertices: CSMFrustumVerticies;
@@ -82,6 +100,10 @@ export interface CSMFrustum {
     toSpace(cameraMatrix: Matrix4, target: CSMFrustum): void;
 }
 
+/**
+ * Csmhelper
+ * @template TCSM 
+ */
 export interface CSMHelper<TCSM extends CSM = CSM> extends Group {
     new(csm: TCSM) : this;
     csm: TCSM;
@@ -95,6 +117,10 @@ export interface CSMHelper<TCSM extends CSM = CSM> extends Group {
     updateVisibility(): void;
     update(): void;
 }
+
+/**
+ * Csmshader
+ */
 export interface CSMShader {
     lights_fragment_begin: string;
     lights_pars_begin: string;

@@ -1928,11 +1928,11 @@ export interface MTLLoader extends Loader {
 	 */
 	load(
 		url: string,
-		onLoad: (materialCreator: MTLLoader.MaterialCreator) => void,
+		onLoad: (materialCreator: MTLLoaderMaterialCreator) => void,
 		onProgress?: (event: ProgressEvent) => void,
 		onError?: (event: ErrorEvent) => void
 	): void;
-	parse(text: string, path: string): MTLLoader.MaterialCreator;
+	parse(text: string, path: string): MTLLoaderMaterialCreator;
 	setMaterialOptions(value: MaterialCreatorOptions): void;
 
 	/**
@@ -1940,7 +1940,7 @@ export interface MTLLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<MTLLoader.MaterialCreator>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<MTLLoaderMaterialCreator>;
 }
 
 /**
@@ -1971,40 +1971,38 @@ export interface TexParams {
 	url: string;
 }
 
-export namespace MTLLoader {
-	/**
-	 * Material creator
-	 */
-	export interface MaterialCreator {
-		new (baseUrl?: string, options?: MaterialCreatorOptions): this;
+/**
+ * Material creator
+ */
+export interface MTLLoaderMaterialCreator {
+	new (baseUrl?: string, options?: MaterialCreatorOptions): this;
 
-		baseUrl: string;
-		options: MaterialCreatorOptions;
-		materialsInfo: { [key: string]: MaterialInfo };
-		materials: { [key: string]: Material };
-		nameLookup: { [key: string]: number };
-		side: Side;
-		wrap: Wrapping;
-		crossOrigin: string;
+	baseUrl: string;
+	options: MaterialCreatorOptions;
+	materialsInfo: { [key: string]: MaterialInfo };
+	materials: { [key: string]: Material };
+	nameLookup: { [key: string]: number };
+	side: Side;
+	wrap: Wrapping;
+	crossOrigin: string;
 
-		setCrossOrigin(value: string): this;
-		setManager(value: LoadingManager): void;
-		setMaterials(materialsInfo: { [key: string]: MaterialInfo }): void;
-		convert(materialsInfo: { [key: string]: MaterialInfo }): { [key: string]: MaterialInfo };
-		preload(): void;
-		getIndex(materialName: string): number;
-		getAsArray(): Material[];
-		create(materialName: string): Material;
-		createMaterial_(materialName: string): Material;
-		getTextureParams(value: string, matParams: any): TexParams;
-		loadTexture(
-			url: string,
-			mapping?: Mapping,
-			onLoad?: (bufferGeometry: BufferGeometry) => void,
-			onProgress?: (event: ProgressEvent) => void,
-			onError?: (event: ErrorEvent) => void
-		): Texture;
-	}
+	setCrossOrigin(value: string): this;
+	setManager(value: LoadingManager): void;
+	setMaterials(materialsInfo: { [key: string]: MaterialInfo }): void;
+	convert(materialsInfo: { [key: string]: MaterialInfo }): { [key: string]: MaterialInfo };
+	preload(): void;
+	getIndex(materialName: string): number;
+	getAsArray(): Material[];
+	create(materialName: string): Material;
+	createMaterial_(materialName: string): Material;
+	getTextureParams(value: string, matParams: any): TexParams;
+	loadTexture(
+		url: string,
+		mapping?: Mapping,
+		onLoad?: (bufferGeometry: BufferGeometry) => void,
+		onProgress?: (event: ProgressEvent) => void,
+		onError?: (event: ErrorEvent) => void
+	): Texture;
 }
 
 /**
@@ -2062,7 +2060,7 @@ export interface OBJLoader extends Loader {
 	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
 	 */
 	new (manager?: LoadingManager): this;
-	materials: MTLLoader.MaterialCreator;
+	materials: MTLLoaderMaterialCreator;
 
 	/**
 	 * Begin loading from url.
@@ -2083,9 +2081,9 @@ export interface OBJLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(data: string): Group;
-	setMaterials(materials: MTLLoader.MaterialCreator): this;
+	setMaterials(materials: MTLLoaderMaterialCreator): this;
 }
 
 /**
@@ -2122,7 +2120,7 @@ export interface PCDLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Points>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Points>;
 	parse(data: ArrayBuffer | string, url: string): Points;
 }
 
@@ -2171,7 +2169,7 @@ export interface PDBLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<PDB>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<PDB>;
 	parse(text: string): PDB;
 }
 
@@ -2210,7 +2208,7 @@ export interface PLYLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	setPropertyNameMapping(mapping: object): void;
 	parse(data: ArrayBuffer | string): BufferGeometry;
 }
@@ -2248,7 +2246,7 @@ export interface PRWMLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: ArrayBuffer): BufferGeometry;
 
 	isBigEndianPlatform(): boolean;
@@ -2393,7 +2391,7 @@ export interface STLLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: ArrayBuffer | string): BufferGeometry;
 }
 
@@ -2464,7 +2462,7 @@ export interface SVGLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<SVGResult>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<SVGResult>;
 	parse(text: string): SVGResult;
 
 	getStrokeStyle(width?: number, color?: string, lineJoin?: string, lineCap?: string, miterLimit?: number): StrokeStyle;
@@ -2521,7 +2519,7 @@ export interface TDSLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(arraybuffer: ArrayBuffer, path: string): Group;
 
 	debugMessage(message: object): void;
@@ -2581,7 +2579,7 @@ export interface TGALoader extends DataTextureLoader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<DataTexture>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<DataTexture>;
 	parse(data: ArrayBuffer): DataTexture;
 }
 
@@ -2619,7 +2617,7 @@ export interface TTFLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object>;
 	parse(arraybuffer: ArrayBuffer): object;
 }
 
@@ -2656,7 +2654,7 @@ export interface TiltLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Group>;
 	parse(data: ArrayBuffer): Group;
 }
 
@@ -2703,7 +2701,7 @@ export interface VOXLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object[]>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<object[]>;
 	parse(data: ArrayBuffer): object[];
 }
 
@@ -2754,7 +2752,7 @@ export interface VRMLLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Scene>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<Scene>;
 	parse(data: string, path: string): Scene;
 }
 
@@ -2792,7 +2790,7 @@ export interface VRMLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<GLTF>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<GLTF>;
 	parse(gltf: GLTF, onLoad: (scene: GLTF) => void): void;
 	setDRACOLoader(dracoLoader: DRACOLoader): this;
 }
@@ -2831,7 +2829,7 @@ export interface VTKLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: ArrayBuffer | string, path: string): BufferGeometry;
 }
 
@@ -2868,7 +2866,7 @@ export interface XYZLoader extends Loader {
 	 * @param url The path or URL to the file.
 	 * @param onProgress Will be called while load progresses.
 	 */
-	 loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
+	loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
 	parse(data: string, onLoad: (geometry: BufferGeometry) => void): object;
 }
 

@@ -75,6 +75,12 @@ export interface LineBasicMaterialParameters extends MaterialParameters {
  * 	linejoin:  'round' //ignored by WebGLRenderer
  * });
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-material [type]="'LineBasicMaterial'" [color]="'0xffffff'" [linewidth]="1" [linecap]="'round'" [linejoin]="'round'"></ngx3js-material>
+ * ```
+ *
  */
 export interface LineBasicMaterial extends Material {
 	/**
@@ -152,7 +158,7 @@ export interface LineDashedMaterialParameters extends LineBasicMaterialParameter
  *
  * ### Examples
  * [WebGL / lines / dashed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_dashed)
- * 
+ *
  * ### Code Example
  * ```js
  * const material = new THREE.LineDashedMaterial( {
@@ -163,6 +169,12 @@ export interface LineDashedMaterialParameters extends LineBasicMaterialParameter
  * 	gapSize: 1,
  * } );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-material [type]="'LineDashedMaterial'" [color]="'0xffffff'" [linewidth]="1" [scale]="1" [dashSize]="3" [gapSize]="1"></ngx3js-material>
+ * ```
+ *
  */
 export interface LineDashedMaterial extends LineBasicMaterial {
 	/**
@@ -3387,7 +3399,7 @@ export interface PointsMaterialParameters extends MaterialParameters {
  * [WebGL / points / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_dynamic) |
  * [WebGL / points / sprites](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_points_sprites) |
  * [WebGL / trails](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_trails)
- * 
+ *
  * ### Code Example
  * ```js
  * const vertices = [];
@@ -3403,6 +3415,15 @@ export interface PointsMaterialParameters extends MaterialParameters {
  * const points = new THREE.Points( geometry, material );
  * scene.add( points );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh [type]="'Points'">
+ * 	<ngx3js-geometry [type]="'BufferGeometry'" [attrPosition]="vertices"></ngx3js-geometry>
+ * 	<ngx3js-material [type]="'PointsMaterial'" [color]="'0x888888'"></ngx3js-material>
+ * </ngx3js-mesh>
+ * ```
+ *
  */
 export interface PointsMaterial extends Material {
 	/**
@@ -3482,6 +3503,12 @@ export interface PointsMaterial extends Material {
  *      fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
  * } );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-material [type]="'RawShaderMaterial'" [uniforms]="{ time : { value : 1.0 } }" [vertexShader]="..." [fragmentShader]="..."></ngx3js-material>
+ * ```
+ *
  */
 export interface RawShaderMaterial extends ShaderMaterial {
 	/**
@@ -3745,6 +3772,15 @@ export interface ShadowMaterialParameters extends MaterialParameters {
  * scene.add( plane );
  * ```
  *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh [receiveShadow]="true">
+ * 	<ngx3js-position [y]="-200" ></ngx3js-position>
+ * 	<ngx3js-geometry [type]="'PlaneGeometry'" [width]="2000" [height]="2000" [rotateX]="-90"></ngx3js-geometry>
+ * 	<ngx3js-material [type]="'ShadowMaterial'" [color]="'0x888888' [opacity]="0.2" ></ngx3js-material>
+ * </ngx3js-mesh>
+ * ```
+ *
  * ### Examples
  * [geometry / spline / editor](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_spline_editor)
  */
@@ -3825,6 +3861,17 @@ export interface SpriteMaterialParameters extends MaterialParameters {
  * sprite.scale.set(200, 200, 1)
  * scene.add( sprite );
  * ```
+ *
+ * ### Ngx3Js Code Example
+ * ```html
+ * <ngx3js-mesh [type]="'Sprite'" [receiveShadow]="true">
+ * 	<ngx3js-scale [x]="200" [y]="200" [z]="1" ></ngx3js-scale>
+ * 	<ngx3js-material [type]="'SpriteMaterial'" [color]="'0xffffff'>
+ * 		<ngx3js-texture [type]="'map'" [image]="'textures/sprite.png'"></ngx3js-texture>
+ * 	</ngx3js-material>
+ * </ngx3js-mesh>
+ * ```
+ *
  */
 export interface SpriteMaterial extends Material {
 	/**

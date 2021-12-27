@@ -389,7 +389,6 @@ export enum GLSLVersion {
 	GLSL3 = '300 es',
 }
 
-
 export type BuiltinShaderAttributeName =
 	| 'position'
 	| 'normal'

@@ -52,4 +52,3 @@ node_modules/@types/three/src/constants
 // cat ../../../../node_modules/@types/three/src/scenes/**/*.d.ts > scenes.ts
 // cat ../../../../node_modules/@types/three/src/textures/**/*.d.ts > textures.ts
 // cat ../../../../node_modules/@types/three/src/constants.d.ts > constants.ts
-
