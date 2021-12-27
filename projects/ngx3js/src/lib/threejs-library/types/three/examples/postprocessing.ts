@@ -758,7 +758,7 @@ export interface SSRrPassParams {
 	selects: Mesh[] | null;
 }
 
-enum SSRrPassOUTPUT {
+export enum SSRrPassOUTPUT {
 	Default= 0,
 	SSRr = 1,
 	Beauty = 3,

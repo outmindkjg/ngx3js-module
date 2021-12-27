@@ -1,6 +1,6 @@
 {
 	"name": "ngx3js",
-	"version": "0.135.0-2021122423",
+	"version": "0.136.0-2021122717",
 	"keywords": [
 		"three",
 		"three.js",
@@ -40,11 +40,11 @@
 	},
 	"dependencies": {
 		"gsap": "^3.8.0",
-		"three": "0.135.0",
+		"three": "0.136.0",
 		"tslib": "^2.3.0"
 	},
 	"devDependencies": {
-		"@types/three": "0.135.0",
+		"@types/three": "0.136.0",
 		"rollup-plugin-polyfill-node": "^0.8.0"
 	},
 	"peerDependencies": {
