@@ -454,6 +454,8 @@ export class NgxLocalStorageService {
 			if (this.dracoExporter === null) {
 				this.dracoExporter = new N3JS.DRACOExporter();
 			}
+			// todo DRACOExporter
+			// js/libs/draco/draco_encoder.js
 			if (object instanceof N3JS.Mesh || object instanceof N3JS.Points) {
 				const result = this.dracoExporter.parse(object, {});
 				this.saveArrayBuffer(result, fileName);
