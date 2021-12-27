@@ -1668,7 +1668,8 @@ export interface LogLuvLoader extends DataTextureLoader {
 /**
  * Lottie loader
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LottieLoader) page for details.
- *
+ * LottieLoader require "node_modules/ngx3js/assets/js/libs/lottie_canvas.js" in angular.json file. 
+ * 
  * ### Examples
  * [webgl / loader / texture / lottie](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_texture_lottie)
  */

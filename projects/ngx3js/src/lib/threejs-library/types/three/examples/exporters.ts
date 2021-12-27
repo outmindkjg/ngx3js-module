@@ -58,7 +58,8 @@ export interface DRACOExporterOptions {
 /**
  * Dracoexporter
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DRACOExporter) page for details.
- *
+ * DRACOExporter require "node_modules/ngx3js/assets/js/libs/draco/draco_encoder.js" in angular.json file. 
+ * 
  * ### Examples
  * [misc / exporter / draco](https://outmindkjg.github.io/ngx3js-doc/#/examples/misc_exporter_draco)
  */
