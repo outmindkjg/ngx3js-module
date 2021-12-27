@@ -428,6 +428,7 @@ export interface AudioContext {
  * ```
  *
  * ### Ngx3Js Code Example
+ * ```html
  * <ngx3js-camera>
  * 	<ngx3js-listener></ngx3js-listener>
  * </ngx3js-camera>
@@ -545,7 +546,6 @@ export interface AudioListener extends Object3D {
  * 	<ngx3js-geometry [type]="'SphereGeometry'" [radius]="20" [widthSegments]="32" [heightSegments]="16"></ngx3js-geometry>
  * 	<ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true"></ngx3js-audio>
  * </ngx3js-mesh>
- * 
  * ```
  */
 export interface PositionalAudio extends Audio<PannerNode> {

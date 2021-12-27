@@ -119,11 +119,11 @@ export { TubeGeometry as TubeBufferGeometry };
  * ```
  *
  * ### Ngx3Js Code Example
+ * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'CircleGeometry'" [radius]="5" [radialSegments]="32"></ngx3js-geometry>
  * 	<ngx3js-material [type]="'MeshBasicMaterial'" [color]="'0xffff00'"></ngx3js-material>
  * </ngx3js-mesh>
- * ```html
  * ```
  */
 export interface CircleGeometry extends BufferGeometry {
