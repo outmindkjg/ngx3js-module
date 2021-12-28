@@ -821,3 +821,14 @@ export interface VideoTexture extends Texture {
 	 */
 	generateMipmaps: boolean;
 }
+
+
+export interface FramebufferTexture extends Texture {
+	new (
+		width?: number,
+		height?: number,
+		format?: PixelFormat,
+	): this;
+
+	readonly isFramebufferTexture: true;
+}

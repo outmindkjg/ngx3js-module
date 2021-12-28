@@ -957,7 +957,6 @@ export class NgxAbstractTextureComponent
 						this.hdrCubeMapLoader.setPath(NgxThreeUtil.getStoreUrl(image));
 					}
 					const cubeTexture = new N3JS.CubeTexture();
-					this.hdrCubeMapLoader.setDataType(N3JS.UnsignedByteType);
 					this.hdrCubeMapLoader.load(cubeImage, (hdrCubeMap) => {
 						cubeTexture.copy(hdrCubeMap);
 						cubeTexture.needsUpdate = true;
@@ -1171,6 +1170,10 @@ export class NgxAbstractTextureComponent
 				});
 			}
 			return new N3JS.DataTexture(data, dataWidth, dataHeight);
+		} else if (loaderType === 'framebuffertexture' || loaderType === 'framebuffer') {
+			const dataWidth: number = NgxThreeUtil.getTypeSafe(options.width, 32);
+			const dataHeight: number = NgxThreeUtil.getTypeSafe(options.height, 32);
+			return new N3JS.FramebufferTexture(dataWidth, dataHeight, I3JS.PixelFormat.RGBFormat);
 		} else {
 			const canvas: HTMLCanvasElement = document.createElement('canvas');
 			const canvasWidth: number = NgxThreeUtil.getTypeSafe(options.width, 32);

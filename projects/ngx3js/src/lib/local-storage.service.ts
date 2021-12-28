@@ -848,7 +848,6 @@ export class NgxLocalStorageService {
 		} else if (key.endsWith('.exr')) {
 			if (this.exrLoader === null) {
 				this.exrLoader = new N3JS.EXRLoader(NgxThreeUtil.getLoadingManager());
-				this.exrLoader.setDataType(N3JS.UnsignedByteType);
 			}
 			this.setLoaderWithOption(this.exrLoader, options);
 			this.exrLoader.load(
@@ -881,7 +880,6 @@ export class NgxLocalStorageService {
 		} else if (key.endsWith('.hdr')) {
 			if (this.rgbeLoader === null) {
 				this.rgbeLoader = new N3JS.RGBELoader(NgxThreeUtil.getLoadingManager());
-				this.rgbeLoader.setDataType(N3JS.UnsignedByteType);
 			}
 			this.setLoaderWithOption(this.rgbeLoader, options);
 			this.rgbeLoader.load(
@@ -935,16 +933,12 @@ export class NgxLocalStorageService {
 				this.ktx2Loader.detectSupport(NgxThreeUtil.getRenderer() as I3JS.WebGL1Renderer);
 			}
 			this.setLoaderWithOption(this.ktx2Loader, options);
-			try {
-				this.ktx2Loader.loadAsync(key, this.onProgress).then((texture) => {
-					callBack({
-						texture: texture,
-						source: texture,
-					});
+			this.ktx2Loader.loadAsync(key, this.onProgress).then((texture) => {
+				callBack({
+					texture: texture,
+					source: texture,
 				});
-			} catch (ex) {
-				this.onError(ex);
-			}
+			});
 		} else if (key.endsWith('.dds')) {
 			if (this.ddsLoader === null) {
 				this.ddsLoader = new N3JS.DDSLoader(NgxThreeUtil.getLoadingManager());
