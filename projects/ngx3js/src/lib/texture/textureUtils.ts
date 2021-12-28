@@ -396,8 +396,8 @@ DataTextureConf.cloud = (options: any) => {
 						.divideScalar(size)
 						.length();
 				data[i] =
-					(128 +
-						128 *
+					(size +
+						size *
 							perlin.noise((x * scale) / 1.5, y * scale, (z * scale) / 1.5)) *
 					d *
 					d;
@@ -424,7 +424,7 @@ DataTextureConf.perlin = (options: any) => {
 			for (let x = 0; x < size; x++) {
 				vector.set(x, y, z).divideScalar(size);
 				const d = perlin.noise(vector.x * 6.5, vector.y * 6.5, vector.z * 6.5);
-				data[i++] = d * 128 + 128;
+				data[i++] = d * size + size;
 			}
 		}
 	}
@@ -593,6 +593,7 @@ export class TextureUtils {
 		const dataProgram = this.getDataTexture(value);
 		const texture = dataProgram(options);
 		window.setTimeout(() => {
+			texture.needsUpdate = true;
 			if (onload) {
 				onload();
 			}
