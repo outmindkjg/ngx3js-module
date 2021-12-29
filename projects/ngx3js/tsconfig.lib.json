@@ -1,11 +1,11 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "../../tsconfig.json",
-  "buildOptimizer": false,
+  "buildOptimizer": true,
   "optimization": {
-    "scripts": false,
+    "scripts": true,
     "styles": {
-      "minify": false,
+      "minify": true,
       "inlineCritical": false
     },
     "fonts": {
@@ -14,7 +14,7 @@
   },
   "vendorChunk": false,
   "extractLicenses": false,
-  "sourceMap": true,
+  "sourceMap": false,
   "namedChunks": false,
   "aot": true,
   "inlineStyleLanguage": "scss",
