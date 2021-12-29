@@ -77,7 +77,7 @@ export class NgxRendererComponent
 	 * The type of renderer
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | SVGRenderer | SVGRenderer, SVG |
 	 * | THREE.WebGLRenderer | WebGLRenderer, WebGL, GL, WebGL2 |
 	 */
@@ -92,7 +92,7 @@ export class NgxRendererComponent
 	 * The type of css renderer
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | CSS2DRenderer | CSS2DRenderer, CSS2D, 2D |
 	 * | CSS3DRenderer | CSS3DRenderer, CSS3D, 3D |
 	 *
@@ -110,7 +110,7 @@ export class NgxRendererComponent
 	 * The type of control
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | FlyControls | FlyControls, Fly |
 	 * | FirstPersonControls | FirstPersonControls, FirstPerson |
 	 * | DeviceOrientationControls | DeviceOrientationControls, DeviceOrientation |
@@ -164,7 +164,7 @@ export class NgxRendererComponent
 	 * Default is [NoToneMapping](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer). See the [Renderer constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Renderer) for other choices.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.LinearToneMapping | LinearToneMapping, Linear |
 	 * | THREE.ReinhardToneMapping | ReinhardToneMapping, Reinhard |
 	 * | THREE.CineonToneMapping | CineonToneMapping, CineonTone |
@@ -273,7 +273,7 @@ export class NgxRendererComponent
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.sRGBEncoding | sRGBEncoding, sRGB |
 	 * | THREE.GammaEncoding | GammaEncoding, Gamma |
 	 * | THREE.RGBEEncoding | RGBEEncoding, RGBE |
@@ -914,7 +914,7 @@ export class NgxRendererComponent
 	 * Gets tone mapping
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.LinearToneMapping | LinearToneMapping, Linear |
 	 * | THREE.ReinhardToneMapping | ReinhardToneMapping, Reinhard |
 	 * | THREE.CineonToneMapping | CineonToneMapping, CineonTone |

@@ -34,7 +34,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
  * ```
  * 
  * |   Three Type               | Value String(case insensitive) |
- * |:--------------------------:|--------------------------:|
+ * |:--------------------------|--------------------------:|
  * | THREE.PositionalAudio | PositionalAudio, Positional, Position |
  * | THREE.Audio | Audio |
  */
@@ -58,7 +58,7 @@ export class NgxAudioComponent extends NgxAbstractObject3dComponent implements O
 	 * The type  of audio component
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.PositionalAudio | PositionalAudio, Positional, Position |
 	 * | THREE.Audio | Audio |
 	 *

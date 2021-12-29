@@ -73,7 +73,7 @@ export class NgxChartAxesComponent
 	 * Other options are [THREE.BackSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) and [THREE.DoubleSide](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.FrontSide | FrontSide , Front |
 	 * | THREE.BackSide | BackSide , Back |
 	 * | THREE.DoubleSide | DoubleSide , Double |

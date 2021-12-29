@@ -30,6 +30,56 @@ import * as NGX_GEOMETRY from './index';
  * A representation of mesh, line, or point geometry. Includes vertex positions, face indices, normals, colors, UVs, and custom attributes within buffers, reducing the cost of passing all this data to the GPU.
  * To read and edit data in BufferGeometry attributes, see [BufferAttribute](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/core/BufferAttribute) documentation.
  *
+ * |  Three Type        | Type Key           | Acceptable Input          |
+ * |:--------------------------|:--------------------------|:--------------------------|
+ * | BufferGeometry | BufferGeometry, Buffer | attribute, points, curve, curveSegments  |
+ * | InstancedBufferGeometry | InstancedBufferGeometry, Instanced | instanceCount, instanced   |
+ * | TeapotGeometry | TeapotGeometry, Teapot | size, segments, bottom, lid, body, fitLid, blinn  |
+ * | PerlinGeometry | PerlinGeometry, Perlin | perlinType, width, height, depth, light, shadow  |
+ * | NgxRopeGeometry | RopeGeometry, Rope | width, widthSegments  |
+ * | NgxGridGeometry | GridGeometry, Grid | width, height, depth, widthSegments, heightSegments, color1, color2  |
+ * | NgxCapsuleGeometry | CapsuleGeometry, Capsule | radius, radiusSegments, height, heightSegments, phiStart, phiLength  |
+ * | LineGeometry | LineGeometry, Line | attrPosition, attrColor  |
+ * | RoundedBoxGeometry | RoundedBoxGeometry, RoundedBox | width, height, depth, segments, radius  |
+ * | BoxLineGeometry | BoxLineGeometry, BoxLine | width, height, depth, widthSegments, heightSegments, depthSegments  |
+ * | BoxBufferGeometry | BoxBufferGeometry, BoxGeometry, Box | width, height, depth, widthSegments, heightSegments, depthSegments  |
+ * | CircleBufferGeometry | CircleBufferGeometry, CircleGeometry, Circle | radius, segments, thetaStart, thetaLength  |
+ * | NgxCircleDepthGeometry | CircleDepthGeometry, CircleDepth | radius, depth, segments, thetaStart, thetaLength, depthRate  |
+ * | NgxStarGeometry | StarGeometry, Star | innerRadius, outerRadius, segments, thetaStart, thetaLength |
+ * | NgxStarDepthGeometry | StarDepthGeometry, StarDepth | innerRadius, outerRadius, segments, thetaStart, thetaLength, depthRate |
+ * | ConeBufferGeometry | ConeBufferGeometry, ConeGeometry, Cone | radius, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength |
+ * | CylinderBufferGeometry | CylinderBufferGeometry, CylinderGeometry, Cylinder | radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength |
+ * | DodecahedronBufferGeometry | DodecahedronBufferGeometry, DodecahedronGeometry, Dodecahedron | radius, detail |
+ * | mergeBufferGeometries | mergeBufferGeometries, merge | geometries |
+ * | ShapeBufferGeometry | ShapeBufferGeometry, ShapeGeometry, Shape | shapes, curveSegments |
+ * | ExtrudeBufferGeometry | ExtrudeBufferGeometry, ExtrudeGeometry, Extrude | shapes, curveSegments, steps, depth, bevelEnabled, bevelThickness, bevelSize, bevelOffset, bevelSegments, extrudePath |
+ * | IcosahedronBufferGeometry | IcosahedronBufferGeometry, IcosahedronGeometry, Icosahedron | radius, detail |
+ * | LatheBufferGeometry | LatheBufferGeometry, LatheGeometry, Lathe | points , segments, phiStart, phiLength |
+ * | OctahedronBufferGeometry | OctahedronBufferGeometry, OctahedronGeometry, Octahedron | radius, detail |
+ * | ParametricGeometry | ParametricGeometry, Parametric | slices, stacks |
+ * | ParametricGeometries.TorusKnotGeometry | ParametrictorusKnotGeometry, ParametrictorusKnot | radius, tube, radialSegments, tubularSegments, p, q |
+ * | ParametricGeometries.SphereGeometry | ParametrictorusSphereGeometry, ParametrictorusSphere | radius, widthSegments, heightSegments |
+ * | ParametricGeometries.TubeGeometry | ParametrictorusTubeGeometry, ParametrictorusTube | curve, tubularSegments, radius, radiusSegments, closed |
+ * | PlaneBufferGeometry | PlaneBufferGeometry, PlaneGeometry, Plane | width, height, widthSegments, heightSegments |
+ * | NgxPlaneDepthGeometry | PlaneDepthBufferGeometry, PlaneDepthGeometry, PlaneDepth | width, height, depth, widthSegments, heightSegments, depthRate |
+ * | PolyhedronBufferGeometry | PolyhedronBufferGeometry, PolyhedronGeometry, Polyhedron | radius, detail |
+ * | RingBufferGeometry | RingBufferGeometry, RingGeometry, Ring | innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength |
+ * | NgxRingDepthGeometry | RingDepthGeometry, RingDepth | innerRadius, outerRadius, depth, thetaSegments, phiSegments, thetaStart, thetaLength, depthRate |
+ * | SphereBufferGeometry | SphereBufferGeometry, SphereGeometry, Sphere | radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength |
+ * | TetrahedronBufferGeometry | TetrahedronBufferGeometry, TetrahedronGeometry, Tetrahedron | radius, detail |
+ * | TextBufferGeometry | TextBufferGeometry, TextGeometry, Text | text, font, size, height, curveSegments, bevelEnabled, bevelThickness, bevelSize, bevelOffset, bevelSegments |
+ * | TorusBufferGeometry | TorusBufferGeometry, TorusGeometry, Torus | radius, tube, radialSegments, tubularSegments, arc |
+ * | TorusKnotBufferGeometry | TorusKnotBufferGeometry, TorusKnotGeometry, TorusKnot | radius, tube, radialSegments, tubularSegments, p, q |
+ * | TubeBufferGeometry | TubeBufferGeometry, TubeGeometry, Tube | curve, tubularSegments, radius, radiusSegments, closed |
+ * | ConvexGeometry | ConvexGeometry, Convex | points |
+ * | DecalGeometry | DecalGeometry, Decal | mesh, ... |
+ * | RollerCoasterTreesGeometry | TreesGeometry, Trees | mesh, ... |
+ * | RollerCoasterSkyGeometry | SkyGeometry, Sky |  |
+ * | RollerCoasterGeometry | RollerCoasterGeometry, RollerCoaster |  |
+ * | RollerCoasterLiftersGeometry | RollerCoasterLiftersGeometry, RollerCoasterLifters | curves, slices |
+ * | RollerCoasterShadowGeometry | RollerCoasterShadowGeometry, RollerCoasterShadow | curves, slices |
+ * | LightningStrike | LightningStrike, Lightning | rayParams |
+ * 
  * ```html
  * <ngx3js-geometry
  * 	[type]="'BoxGeometry'" [width]="16" [height]="16" [depth]="16 "
@@ -152,7 +202,7 @@ export class NgxGeometryComponent
 	 * The type  of geometry
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.BufferGeometry | BufferGeometry, CustomGeometry,  Custom, Buffer |
 	 * | THREE.InstancedBufferGeometry | InstancedBufferGeometry, InstancedBuffer, Instanced, |
 	 * | TeapotGeometry | TeapotGeometry, Teapot, |

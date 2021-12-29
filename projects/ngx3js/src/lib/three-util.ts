@@ -1518,6 +1518,13 @@ export class NgxThreeUtil {
 	}
 
 	/**
+	 * Clears three component
+	 */
+	public static clearThreeComponent() {
+		this.loadedComponent = {}
+	}
+
+	/**
 	 * Determines whether three component is
 	 * @param object
 	 * @param [key]
@@ -2405,7 +2412,7 @@ export class NgxThreeUtil {
 	 * https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.button
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.MOUSE.LEFT | left |
 	 * | THREE.MOUSE.MIDDLE | middle |
 	 * | THREE.MOUSE.RIGHT | right |
@@ -2443,7 +2450,7 @@ export class NgxThreeUtil {
 	 * https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.button
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.TOUCH.ROTATE | rotate |
 	 * | THREE.TOUCH.PAN | pan |
 	 * | THREE.TOUCH.DOLLY_PAN | dollypan, dolly_pan |
@@ -2476,7 +2483,7 @@ export class NgxThreeUtil {
 	 * Gets CullFace safe
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.CullFaceNone | none |
 	 * | THREE.CullFaceBack | back |
 	 * | THREE.CullFaceFront | front |
@@ -2533,7 +2540,7 @@ export class NgxThreeUtil {
 	 * Gets side
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.FrontSide | FrontSide , Front |
 	 * | THREE.BackSide | BackSide , Back |
 	 * | THREE.DoubleSide | DoubleSide , Double |
@@ -2561,7 +2568,7 @@ export class NgxThreeUtil {
 	 * Gets Shading
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.FlatShading | Flat |
 	 * | THREE.SmoothShading | Smooth |
 	 *
@@ -2583,7 +2590,7 @@ export class NgxThreeUtil {
 	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NoBlending | NoBlending, No |
 	 * | THREE.NormalBlending | NormalBlending, Normal |
 	 * | THREE.AdditiveBlending | AdditiveBlending, Additive |
@@ -2628,12 +2635,12 @@ export class NgxThreeUtil {
 	 * custom blending equations (numbers start from 100 not to clash with other mappings to OpenGL constants defined in Texture.js)
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
-	 * | THREE.AddEquation | Add |
-	 * | THREE.SubtractEquation | Subtract |
-	 * | THREE.ReverseSubtractEquation | ReverseSubtract, Reverse |
-	 * | THREE.MinEquation | Nin |
-	 * | THREE.MaxEquation | Max |
+	 * |:--------------------------|--------------------------:|
+	 * | THREE.AddEquation | AddEquation, Add |
+	 * | THREE.SubtractEquation | SubtractEquation, Subtract |
+	 * | THREE.ReverseSubtractEquation | ReverseSubtractEquation, ReverseSubtract, Reverse |
+	 * | THREE.MinEquation | MinEquation, Min |
+	 * | THREE.MaxEquation | MaxEquation, Max |
 	 *
 	 * @param [def]
 	 * @returns blend equation
@@ -2641,15 +2648,20 @@ export class NgxThreeUtil {
 	public static getBlendEquationSafe(baseBlendEquation: string, def?: string): I3JS.BlendingEquation {
 		const blendEquation = this.getTypeSafe(baseBlendEquation, def, '');
 		switch (blendEquation.toLowerCase()) {
+			case 'addequation':
 			case 'add':
 				return I3JS.BlendingEquation.AddEquation;
+			case 'subtractequation':
 			case 'subtract':
 				return I3JS.BlendingEquation.SubtractEquation;
+			case 'reversesubtractequation':
 			case 'reverse':
 			case 'reversesubtract':
 				return I3JS.BlendingEquation.ReverseSubtractEquation;
+			case 'minequation':
 			case 'min':
 				return I3JS.BlendingEquation.MinEquation;
+			case 'maxequation':
 			case 'max':
 				return I3JS.BlendingEquation.MaxEquation;
 		}
@@ -2662,7 +2674,7 @@ export class NgxThreeUtil {
 	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.ZeroFactor | ZeroFactor , Zero |
 	 * | THREE.OneFactor | OneFactor , One |
 	 * | THREE.SrcColorFactor | SrcColorFactor , SrcColor |
@@ -2720,7 +2732,7 @@ export class NgxThreeUtil {
 	 * See the blending mode [constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials) for all possible values. Default is [NormalBlending](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Materials).
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.SrcAlphaSaturateFactor | SrcAlphaSaturateFactor , SrcAlphaSaturate, SrcAlpha |
 	 *
 	 * @param [def]
@@ -2739,26 +2751,45 @@ export class NgxThreeUtil {
 	/**
 	 * Gets depth func
 	 *
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------|--------------------------:|
+	 * | THREE.NeverDepth | NeverDepth, Never |
+	 * | THREE.AlwaysDepth | AlwaysDepth, Always |
+	 * | THREE.LessDepth | LessDepth, Less |
+	 * | THREE.LessEqualDepth | LessEqualDepth, LessEqual |
+	 * | THREE.EqualDepth | EqualDepth, Equal |
+	 * | THREE.GreaterEqualDepth | GreaterEqualDepth, GreaterEqual |
+	 * | THREE.GreaterDepth | GreaterDepth, Greater |
+	 * | THREE.NotEqualDepth | NotEqualDepth, NotEqual |
+	 *
 	 * @param [def]
 	 * @returns depth func
 	 */
 	public static getDepthModesSafe(baseDepthFunc: string, def?: string): I3JS.DepthModes {
 		const depthFunc = NgxThreeUtil.getTypeSafe(baseDepthFunc, def, '');
 		switch (depthFunc.toLowerCase()) {
+			case 'neverdepth':
 			case 'never':
 				return I3JS.DepthModes.NeverDepth;
+			case 'alwaysdepth':
 			case 'always':
 				return I3JS.DepthModes.AlwaysDepth;
+			case 'lessdepth':
 			case 'less':
 				return I3JS.DepthModes.LessDepth;
+			case 'lessequaldepth':
 			case 'lessequal':
 				return I3JS.DepthModes.LessEqualDepth;
+			case 'equaldepth':
 			case 'equal':
 				return I3JS.DepthModes.EqualDepth;
+			case 'greaterequaldepth':
 			case 'greaterequal':
 				return I3JS.DepthModes.GreaterEqualDepth;
+			case 'greaterdepth':
 			case 'greater':
 				return I3JS.DepthModes.GreaterDepth;
+			case 'notequaldepth':
 			case 'notequal':
 				return I3JS.DepthModes.NotEqualDepth;
 		}
@@ -2788,9 +2819,9 @@ export class NgxThreeUtil {
 
 	/**
 	 * Get The ToneMapping
-	 * 
+	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NoToneMapping | No |
 	 * | THREE.LinearToneMapping | Linear |
 	 * | THREE.ReinhardToneMapping | Reinhard |
@@ -2824,7 +2855,7 @@ export class NgxThreeUtil {
 	 * Gets mapping safe
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.UVMapping | UVMapping, UV |
 	 * | THREE.CubeReflectionMapping | CubeReflectionMapping, CubeReflection |
 	 * | THREE.CubeRefractionMapping | CubeRefractionMapping, CubeRefraction |
@@ -2871,7 +2902,7 @@ export class NgxThreeUtil {
 	 * Gets wrapping safe
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.RepeatWrapping | RepeatWrapping, Repeat |
 	 * | THREE.MirroredRepeatWrapping | MirroredRepeatWrapping, MirroredRepeat |
 	 * | THREE.ClampToEdgeWrapping | ClampToEdgeWrapping, ClampToEdge |
@@ -2903,7 +2934,7 @@ export class NgxThreeUtil {
 	 * Gets texture filter safe
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NearestFilter | NearestFilter, Nearest |
 	 * | THREE.NearestMipmapNearestFilter | NearestMipmapNearestFilter, nearestmipmapnearest |
 	 * | THREE.NearestMipmapLinearFilter | NearestMipmapLinearFilter, nearestmipmaplinear |
@@ -2946,7 +2977,7 @@ export class NgxThreeUtil {
 	 * Gets texture data type safe
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.ByteType | ByteType, Byte |
 	 * | THREE.ShortType | ShortType, Short |
 	 * | THREE.UnsignedShortType | UnsignedShortType, UnsignedShort |
@@ -3013,7 +3044,7 @@ export class NgxThreeUtil {
 	 * Gets pixel format safe
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.AlphaFormat | AlphaFormat, Alpha |
 	 * | THREE.RedFormat | RedFormat, Red |
 	 * | THREE.RedIntegerFormat | RedIntegerFormat, RedInteger |
@@ -3226,7 +3257,7 @@ export class NgxThreeUtil {
 	 * Gets pixel format safe
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.AlphaFormat | AlphaFormat, Alpha |
 	 * | THREE.RedFormat | RedFormat, Red |
 	 * | THREE.RedIntegerFormat | RedIntegerFormat, RedInteger |
@@ -3363,9 +3394,9 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets loop
-	 * 
+	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.LoopOnce | LoopOnce, Once |
 	 * | THREE.LoopRepeat | LoopRepeat, Repeat |
 	 * | THREE.LoopPingPong | LoopPingPong, PingPong |
@@ -3393,7 +3424,7 @@ export class NgxThreeUtil {
 	 * Gets interpolation
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.InterpolateDiscrete | InterpolateDiscrete, Discrete |
 	 * | THREE.InterpolateLinear | InterpolateLinear, Linear |
 	 * | THREE.InterpolateSmooth | InterpolateSmooth, Smooth |
@@ -3422,7 +3453,7 @@ export class NgxThreeUtil {
 	 * Gets interpolation ending
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.ZeroCurvatureEnding | ZeroCurvatureEnding, ZeroCurvature |
 	 * | THREE.ZeroSlopeEnding | ZeroSlopeEnding, ZeroSlope |
 	 * | THREE.WrapAroundEnding | WrapAroundEnding, WrapAround |
@@ -3451,7 +3482,7 @@ export class NgxThreeUtil {
 	 * Gets blend mode
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NormalAnimationBlendMode | NormalAnimationBlendMode, NormalAnimation, Normal |
 	 * | THREE.AdditiveAnimationBlendMode | AdditiveAnimationBlendMode, AdditiveAnimation, Additive |
 	 *
@@ -3477,7 +3508,7 @@ export class NgxThreeUtil {
 	 * Gets TrianglesDraw mode
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.TrianglesDrawMode | TrianglesDrawMode, DrawMode |
 	 * | THREE.TriangleStripDrawMode | TriangleStripDrawMode, StripDrawMode, Strip |
 	 * | THREE.TriangleFanDrawMode | TriangleFanDrawMode, FanDrawMode, Fan |
@@ -3507,7 +3538,7 @@ export class NgxThreeUtil {
 	 * Gets texture encoding safe
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.sRGBEncoding | sRGBEncoding, sRGB |
 	 * | THREE.GammaEncoding | GammaEncoding, Gamma |
 	 * | THREE.RGBEEncoding | RGBEEncoding, RGBE |
@@ -3557,6 +3588,11 @@ export class NgxThreeUtil {
 	/**
 	 * Gets depth packing, Depth packing strategies
 	 *
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------|--------------------------:|
+	 * | THREE.RGBADepthPacking | RGBADepthPacking, RGBADepth, RGBA |
+	 * | THREE.BasicDepthPacking | BasicDepthPacking, BasicDepth, Basic |
+	 *
 	 * @param [def]
 	 * @returns depth packing
 	 */
@@ -3564,9 +3600,11 @@ export class NgxThreeUtil {
 		const depthPacking = this.getTypeSafe(baseDepthPacking, def, '');
 		switch (depthPacking.toLowerCase()) {
 			case 'rgba':
+			case 'rgbadepthpacking':
 			case 'rgbadepth':
 				return I3JS.DepthPackingStrategies.RGBADepthPacking;
 			case 'basic':
+			case 'basicdepthpacking':
 			case 'basicdepth':
 			default:
 				return I3JS.DepthPackingStrategies.BasicDepthPacking;
@@ -3575,14 +3613,22 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets normal map type
+	 *
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------|--------------------------:|
+	 * | THREE.TangentSpaceNormalMap | TangentSpaceNormalMap, TangentSpace |
+	 * | THREE.ObjectSpaceNormalMap | ObjectSpaceNormalMap, ObjectSpace |
+	 *
 	 * @param [def]
 	 * @returns normal map type
 	 */
 	public static getNormalMapTypeSafe(baseNormalMapType: string, def?: string): I3JS.NormalMapTypes {
 		const normalMapType = NgxThreeUtil.getTypeSafe(baseNormalMapType, def, '');
 		switch (normalMapType.toLowerCase()) {
+			case 'tangentspacenormalmap':
 			case 'tangentspace':
 				return I3JS.NormalMapTypes.TangentSpaceNormalMap;
+			case 'objectspacenormalmap':
 			case 'objectspace':
 				return I3JS.NormalMapTypes.ObjectSpaceNormalMap;
 		}
@@ -3591,26 +3637,46 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets stencil fail
+	 *
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------|--------------------------:|
+	 * | THREE.ZeroStencilOp | ZeroStencilOp, Zero |
+	 * | THREE.KeepStencilOp | KeepStencilOp, Keep |
+	 * | THREE.ReplaceStencilOp | ReplaceStencilOp, Replace |
+	 * | THREE.IncrementStencilOp | IncrementStencilOp, Increment |
+	 * | THREE.DecrementStencilOp | DecrementStencilOp, Decrement |
+	 * | THREE.IncrementWrapStencilOp | IncrementWrapStencilOp, IncrementWrap |
+	 * | THREE.DecrementWrapStencilOp | DecrementWrapStencilOp, DecrementWrap |
+	 * | THREE.InvertStencilOp | InvertStencilOp, Invert |
+	 *
 	 * @param [def]
 	 * @returns stencil fail
 	 */
 	public static getStencilOpSafe(baseStencilFail: string, def?: string): I3JS.StencilOp {
 		const stencilFail = this.getTypeSafe(baseStencilFail, def, '');
 		switch (stencilFail.toLowerCase()) {
+			case 'zerostencilop':
 			case 'zero':
 				return I3JS.StencilOp.ZeroStencilOp;
+			case 'keepstencilop':
 			case 'keep':
 				return I3JS.StencilOp.KeepStencilOp;
+			case 'replacestencilop':
 			case 'replace':
 				return I3JS.StencilOp.ReplaceStencilOp;
+			case 'incrementstencilop':
 			case 'increment':
 				return I3JS.StencilOp.IncrementStencilOp;
+			case 'decrementstencilop':
 			case 'decrement':
 				return I3JS.StencilOp.DecrementStencilOp;
+			case 'incrementwrapstencilop':
 			case 'incrementwrap':
 				return I3JS.StencilOp.IncrementWrapStencilOp;
+			case 'decrementwrapstencilop':
 			case 'decrementwrap':
 				return I3JS.StencilOp.DecrementWrapStencilOp;
+			case 'invertstencilop':
 			case 'invert':
 				return I3JS.StencilOp.InvertStencilOp;
 		}
@@ -3619,26 +3685,46 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets stencil func
+	 *
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------|--------------------------:|
+	 * | THREE.NeverStencilFunc | NeverStencilFunc, Never |
+	 * | THREE.LessStencilFunc | LessStencilFunc, Less |
+	 * | THREE.EqualStencilFunc | EqualStencilFunc, Equal |
+	 * | THREE.LessEqualStencilFunc | LessEqualStencilFunc, LessEqual |
+	 * | THREE.GreaterStencilFunc | GreaterStencilFunc, Greater |
+	 * | THREE.NotEqualStencilFunc | NotEqualStencilFunc, NotEqual |
+	 * | THREE.GreaterEqualStencilFunc | GreaterEqualStencilFunc, GreaterEqual |
+	 * | THREE.AlwaysStencilFunc | AlwaysStencilFunc, Always |
+	 *
 	 * @param [def]
 	 * @returns stencil func
 	 */
 	public static getStencilFuncSafe(baseStencilFunc: string, def?: string): I3JS.StencilFunc {
 		const stencilFunc = NgxThreeUtil.getTypeSafe(baseStencilFunc, def, '');
 		switch (stencilFunc.toLowerCase()) {
+			case 'neverstencilfunc':
 			case 'never':
 				return I3JS.StencilFunc.NeverStencilFunc;
+			case 'lessstencilfunc':
 			case 'less':
 				return I3JS.StencilFunc.LessStencilFunc;
+			case 'equalstencilfunc':
 			case 'equal':
 				return I3JS.StencilFunc.EqualStencilFunc;
+			case 'lessequalstencilfunc':
 			case 'lessequal':
 				return I3JS.StencilFunc.LessEqualStencilFunc;
+			case 'greaterstencilfunc':
 			case 'greater':
 				return I3JS.StencilFunc.GreaterStencilFunc;
+			case 'notequalstencilfunc':
 			case 'notequal':
 				return I3JS.StencilFunc.NotEqualStencilFunc;
+			case 'greaterequalstencilfunc':
 			case 'greaterequal':
 				return I3JS.StencilFunc.GreaterEqualStencilFunc;
+			case 'alwaysstencilfunc':
 			case 'always':
 				return I3JS.StencilFunc.AlwaysStencilFunc;
 		}
@@ -3647,6 +3733,19 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets usage
+	 *
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------|--------------------------:|
+	 * | THREE.StreamDrawUsage | StreamDrawUsage, StreamDraw |
+	 * | THREE.StaticReadUsage | StaticReadUsage, StaticRead |
+	 * | THREE.DynamicReadUsage | DynamicReadUsage, DynamicRead |
+	 * | THREE.StreamReadUsage | StreamReadUsage, StreamRead |
+	 * | THREE.StaticCopyUsage | StaticCopyUsage, StaticCopy |
+	 * | THREE.DynamicCopyUsage | DynamicCopyUsage, DynamicCopy |
+	 * | THREE.StreamCopyUsage | StreamCopyUsage, StreamCopy |
+	 * | THREE.StaticDrawUsage | StaticDrawUsage, StaticDraw |
+	 * | THREE.DynamicDrawUsage | DynamicDrawUsage, DynamicDraw |
+	 *
 	 * @param [def]
 	 * @returns usage
 	 */
@@ -3686,6 +3785,12 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets glsl version
+	 * 
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------|--------------------------:|
+	 * | THREE.GLSLVersion.GLSL1 | GLSL1, GL1, 1 |
+	 * | THREE.GLSLVersion.GLSL3 | GLSL3, GL3, 3 |
+	 * 
 	 * @param [def]
 	 * @returns glsl version
 	 */
@@ -3761,7 +3866,13 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets precision safe
-	 *
+	 * 
+	 * |   Three Type               | Value String(case insensitive) |
+	 * |:--------------------------|--------------------------:|
+	 * | String | highp |
+	 * | String | mediump |
+	 * | String | lowp |
+	 * 
 	 * @param basePrecision
 	 * @param [def]
 	 * @returns precision safe

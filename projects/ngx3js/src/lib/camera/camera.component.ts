@@ -1,23 +1,12 @@
-import {
-	Component,
-	EventEmitter,
-	forwardRef,
-	Input,
-	OnInit,
-	Output,
-	QueryList,
-	SimpleChanges
-} from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output, QueryList, SimpleChanges } from '@angular/core';
 import { IRendererTimer, INgxColor } from '../ngx-interface';
 import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
-import {
-	I3JS,
-	N3JS,
-	NgxThreeUtil
-} from './../interface';
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 import { NgxLocalStorageService } from './../local-storage.service';
 import * as THREE_CAMERA from './cameras/three-cameras';
+import { NgxPingPongCamera } from './cameras/ngx-pingpong-camera';
+
 
 /**
  * The Camera component.
@@ -25,7 +14,14 @@ import * as THREE_CAMERA from './cameras/three-cameras';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CameraComponent) page for details.
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera) page for a live demo.
  *
- * Abstract base class for cameras. This class should always be inherited when you build a new camera.
+ * |  Three Type        | Type Key           | Acceptable Input          |
+ * |:--------------------------|:--------------------------|:--------------------------|
+ * | OrthographicCamera | OrthographicCamera, Orthographic | left, right, top, bottom, near, far |
+ * | PerspectiveCamera | PerspectiveCamera, Perspective | fov, aspect , near, far |
+ * | NgxPingPongCamera | PingPong, CubePingPong, CubePingPongCamera, PingPongCamera | near, far |
+ * | ArrayCamera | ArrayCamera, Array | |
+ * | StereoCamera | StereoCamera, Stereo | |
+ * | CubeCamera | CubeCamera, Cube | near, far |
  *
  * ```html
  * <ngx3js-camera
@@ -62,21 +58,18 @@ import * as THREE_CAMERA from './cameras/three-cameras';
 		},
 	],
 })
-export class NgxCameraComponent
-	extends NgxAbstractObject3dComponent
-	implements OnInit
-{
+export class NgxCameraComponent extends NgxAbstractObject3dComponent implements OnInit {
 	/**
 	 * The type of camera
 	 *
 	 * PingPong - When use "PingPongCamera", the camera muse be located in scene
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.PerspectiveCamera | PerspectiveCamera, Perspective |
 	 * | THREE.ArrayCamera | ArrayCamera, Array |
 	 * | THREE.CubeCamera | CubeCamera, Cube, CubePingPong |
-	 * | THREE.CubeCamera | PingPong, CubePingPong, CubePingPongCamera, PingPongCamera |
+	 * | NgxPingPongCamera | PingPong, CubePingPong, CubePingPongCamera, PingPongCamera |
 	 * | THREE.OrthographicCamera | OrthographicCamera, Orthographic |
 	 * | THREE.StereoCamera | StereoCamera, Stereo |
 	 */
@@ -189,7 +182,7 @@ export class NgxCameraComponent
 	 * The viewport of this render target.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.WebGLRenderer#setViewport | renderer |
 	 * | THREE.PerspectiveCamera#setViewOffset | viewoffset, offset |
 	 * | THREE.OrthographicCamera#setViewOffset | viewoffset, offset |
@@ -293,14 +286,12 @@ export class NgxCameraComponent
 	/**
 	 * The referObject3d of camera component
 	 */
-	@Input() public referObject3d: NgxAbstractObject3dComponent | I3JS.Object3D =
-		null;
+	@Input() public referObject3d: NgxAbstractObject3dComponent | I3JS.Object3D = null;
 
 	/**
 	 * The Output of renderer component
 	 */
-	@Output() private onRender: EventEmitter<IRendererTimer> =
-		new EventEmitter<IRendererTimer>();
+	@Output() private onRender: EventEmitter<IRendererTimer> = new EventEmitter<IRendererTimer>();
 
 	/**
 	 * Creates an instance of camera component.
@@ -587,11 +578,7 @@ export class NgxCameraComponent
 	 * @param [def]
 	 * @returns view port size
 	 */
-	private getViewPortSize(
-		size: number | string,
-		cameraSize: number,
-		def?: number | string
-	): number {
+	private getViewPortSize(size: number | string, cameraSize: number, def?: number | string): number {
 		const baseSize = NgxThreeUtil.getTypeSafe(size, def);
 		if (NgxThreeUtil.isNotNull(baseSize)) {
 			if (typeof baseSize == 'string') {
@@ -660,11 +647,6 @@ export class NgxCameraComponent
 	private camera: I3JS.Camera | I3JS.Object3D = null;
 
 	/**
-	 * The Camera of camera component
-	 */
-	private cameraExtra: I3JS.CubeCamera[] = null;
-
-	/**
 	 * The Renderer of camera component
 	 */
 	private renderer: I3JS.Renderer = null;
@@ -672,10 +654,7 @@ export class NgxCameraComponent
 	/**
 	 * Css renderer of camera component
 	 */
-	private cssRenderer:
-		| I3JS.CSS3DRenderer
-		| I3JS.CSS2DRenderer
-		| (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[] = null;
+	private cssRenderer: I3JS.CSS3DRenderer | I3JS.CSS2DRenderer | (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[] = null;
 
 	/**
 	 * Renderer scenes of camera component
@@ -698,10 +677,7 @@ export class NgxCameraComponent
 	 */
 	public setRenderer(
 		renderer: I3JS.Renderer,
-		cssRenderer:
-			| I3JS.CSS3DRenderer
-			| I3JS.CSS2DRenderer
-			| (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[],
+		cssRenderer: I3JS.CSS3DRenderer | I3JS.CSS2DRenderer | (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[],
 		rendererScenes: QueryList<any>
 	) {
 		if (this.cssRenderer !== cssRenderer) {
@@ -781,29 +757,11 @@ export class NgxCameraComponent
 			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
 				changes = NgxThreeUtil.pushUniq(changes, ['viewport']);
 			}
-			if (
-				NgxThreeUtil.isIndexOf(changes, [
-					'x',
-					'y',
-					'width',
-					'height',
-					'viewporttype',
-				])
-			) {
+			if (NgxThreeUtil.isIndexOf(changes, ['x', 'y', 'width', 'height', 'viewporttype'])) {
 				changes = NgxThreeUtil.pushUniq(changes, ['viewport']);
 			}
 			if (
-				NgxThreeUtil.isIndexOf(changes, [
-					'near',
-					'far',
-					'aspect',
-					'fov',
-					'orthosize',
-					'left',
-					'right',
-					'top',
-					'bottom',
-				])
+				NgxThreeUtil.isIndexOf(changes, ['near', 'far', 'aspect', 'fov', 'orthosize', 'left', 'right', 'top', 'bottom'])
 			) {
 				changes = NgxThreeUtil.pushUniq(changes, ['changesize']);
 			}
@@ -814,10 +772,7 @@ export class NgxCameraComponent
 							switch (this.viewportType.toLowerCase()) {
 								case 'viewoffset':
 								case 'offset':
-									if (
-										this.camera instanceof N3JS.PerspectiveCamera ||
-										this.camera instanceof N3JS.OrthographicCamera
-									) {
+									if (this.camera instanceof N3JS.PerspectiveCamera || this.camera instanceof N3JS.OrthographicCamera) {
 										this.camera.setViewOffset(
 											this.fullWidth,
 											this.fullHeight,
@@ -832,41 +787,22 @@ export class NgxCameraComponent
 								case 'camera':
 									if (this.camera instanceof N3JS.PerspectiveCamera) {
 										(this.camera as any)['viewport']
-											.set(
-												this.getX(),
-												this.getY(),
-												this.getWidth(),
-												this.getHeight()
-											)
+											.set(this.getX(), this.getY(), this.getWidth(), this.getHeight())
 											.multiplyScalar(this.pixelRatio);
 									}
 									break;
 								default:
-									if (
-										this.camera instanceof N3JS.PerspectiveCamera ||
-										this.camera instanceof N3JS.OrthographicCamera
-									) {
+									if (this.camera instanceof N3JS.PerspectiveCamera || this.camera instanceof N3JS.OrthographicCamera) {
 										this.camera.clearViewOffset();
 									}
 									break;
 							}
 						} else {
-							if (
-								this.camera instanceof N3JS.PerspectiveCamera ||
-								this.camera instanceof N3JS.OrthographicCamera
-							) {
+							if (this.camera instanceof N3JS.PerspectiveCamera || this.camera instanceof N3JS.OrthographicCamera) {
 								this.camera.clearViewOffset();
 							}
-							if (
-								this.renderer !== null &&
-								this.renderer instanceof N3JS.WebGLRenderer
-							) {
-								this.renderer.setViewport(
-									0,
-									0,
-									this.rendererWidth,
-									this.rendererHeight
-								);
+							if (this.renderer !== null && this.renderer instanceof N3JS.WebGLRenderer) {
+								this.renderer.setViewport(0, 0, this.rendererWidth, this.rendererHeight);
 							}
 						}
 						break;
@@ -987,13 +923,7 @@ export class NgxCameraComponent
 	 * @param fullWidth
 	 * @param fullHeight
 	 */
-	public setRendererSize(
-		width: number,
-		height: number,
-		fullWidth: number,
-		fullHeight: number,
-		pixelRatio: number = 1
-	) {
+	public setRendererSize(width: number, height: number, fullWidth: number, fullHeight: number, pixelRatio: number = 1) {
 		this.fullWidth = fullWidth;
 		this.fullHeight = fullHeight;
 		this.pixelRatio = pixelRatio;
@@ -1005,10 +935,7 @@ export class NgxCameraComponent
 			this.rendererHeight = height;
 		}
 		if (this.camera !== null) {
-			if (
-				this.camera instanceof N3JS.OrthographicCamera ||
-				this.camera instanceof N3JS.PerspectiveCamera
-			) {
+			if (this.camera instanceof N3JS.OrthographicCamera || this.camera instanceof N3JS.PerspectiveCamera) {
 				this.camera.near = this.getNear(0.1);
 				this.camera.far = this.getFar(2000);
 				if (this.camera instanceof N3JS.OrthographicCamera) {
@@ -1077,7 +1004,6 @@ export class NgxCameraComponent
 	public getCamera<T extends I3JS.Camera | I3JS.Object3D>(): T {
 		if (this.camera === null || this._needUpdate) {
 			this.needUpdate = false;
-			this.cameraExtra = null;
 			const width = this.rendererWidth;
 			const height = this.rendererHeight;
 			switch (this.type.toLowerCase()) {
@@ -1106,32 +1032,7 @@ export class NgxCameraComponent
 				case 'cubepingpong':
 				case 'pingpongcamera':
 				case 'pingpong':
-					const webGLCubeRenderTarget1 = new N3JS.WebGLCubeRenderTarget(512, {
-						encoding: N3JS.sRGBEncoding,
-						format: N3JS.RGBFormat,
-						generateMipmaps: true,
-						minFilter: N3JS.LinearMipmapLinearFilter,
-					});
-					const cubeCamera1 = new N3JS.CubeCamera(
-						this.getNear(0.1),
-						this.getFar(2000),
-						webGLCubeRenderTarget1
-					);
-					const webGLCubeRenderTarget2 = new N3JS.WebGLCubeRenderTarget(512, {
-						encoding: N3JS.sRGBEncoding,
-						format: N3JS.RGBFormat,
-						generateMipmaps: true,
-						minFilter: N3JS.LinearMipmapLinearFilter,
-					});
-					const cubeCamera2 = new N3JS.CubeCamera(
-						this.getNear(0.1),
-						this.getFar(2000),
-						webGLCubeRenderTarget2
-					);
-					this.camera = new N3JS.Group();
-					this.camera.add(cubeCamera1, cubeCamera2);
-					this.cameraExtra = [];
-					this.cameraExtra.push(cubeCamera1, cubeCamera2);
+					this.camera = new NgxPingPongCamera(this.getNear(0.1), this.getFar(2000));
 					break;
 				case 'cinematic':
 					this.camera = new THREE_CAMERA.NgxCinematicCamera(
@@ -1161,22 +1062,20 @@ export class NgxCameraComponent
 				case 'perspectivecamera':
 				case 'perspective':
 				default:
-					const perspectiveCamera: any = new THREE_CAMERA.NgxPerspectiveCamera(
+					const perspectiveCamera = new N3JS.PerspectiveCamera(
 						this.getFov(50),
 						this.getAspect(width, height),
 						this.getNear(0.1),
 						this.getFar(2000)
 					);
 					if (NgxThreeUtil.isNotNull(this.focalLength)) {
-						perspectiveCamera.setFocalLength(
-							NgxThreeUtil.getTypeSafe(this.focalLength, 35)
-						);
+						perspectiveCamera.setFocalLength(NgxThreeUtil.getTypeSafe(this.focalLength, 35));
 					}
 					if (this.viewport) {
 						switch (this.viewportType.toLowerCase()) {
 							case 'viewport':
 							case 'camera':
-								perspectiveCamera['viewport'] = new N3JS.Vector4(
+								(perspectiveCamera as any)['viewport'] = new N3JS.Vector4(
 									this.getX(),
 									this.getY(),
 									this.getWidth(),
@@ -1190,9 +1089,7 @@ export class NgxCameraComponent
 			}
 			if (this.parentObject3d instanceof N3JS.ArrayCamera) {
 				this.isCameraChild = true;
-				this.parentObject3d.cameras.push(
-					this.camera as I3JS.PerspectiveCamera
-				);
+				this.parentObject3d.cameras.push(this.camera as I3JS.PerspectiveCamera);
 				this.object3d = this.camera;
 				this.setObject(this.camera);
 			} else {
@@ -1221,10 +1118,7 @@ export class NgxCameraComponent
 	 * @returns scene
 	 */
 	public getScene(scenes?: QueryList<any> | any): I3JS.Scene {
-		if (
-			NgxThreeUtil.isNotNull(this.scene) &&
-			NgxThreeUtil.isNotNull(this.scene.getScene)
-		) {
+		if (NgxThreeUtil.isNotNull(this.scene) && NgxThreeUtil.isNotNull(this.scene.getScene)) {
 			return this.scene.getScene();
 		}
 		if (NgxThreeUtil.isNotNull(scenes)) {
@@ -1242,8 +1136,6 @@ export class NgxCameraComponent
 		return new N3JS.Scene();
 	}
 
-	private cubePingPong: number = 0;
-
 	/**
 	 * Renders camera component
 	 * @param renderer
@@ -1254,19 +1146,11 @@ export class NgxCameraComponent
 	 */
 	public render(
 		renderer: I3JS.Renderer,
-		cssRenderer:
-			| I3JS.CSS3DRenderer
-			| I3JS.CSS2DRenderer
-			| (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[],
+		cssRenderer: I3JS.CSS3DRenderer | I3JS.CSS2DRenderer | (I3JS.CSS3DRenderer | I3JS.CSS2DRenderer)[],
 		scenes: QueryList<any> | any,
 		renderTimer: IRendererTimer
 	) {
-		if (
-			!this.active ||
-			this.isCameraChild ||
-			this.camera === null ||
-			!this.camera.visible
-		) {
+		if (!this.active || this.isCameraChild || this.camera === null || !this.camera.visible) {
 			return;
 		}
 		const camera = this.getCamera();
@@ -1281,29 +1165,13 @@ export class NgxCameraComponent
 			}
 		}
 		if (renderer instanceof N3JS.WebGLRenderer) {
-			if (
-				this.camera instanceof N3JS.CubeCamera ||
-				this.camera instanceof N3JS.Group
-			) {
-				let cubeCamera: I3JS.CubeCamera = null;
-				if (
-					this.cameraExtra !== null &&
-					this.cameraExtra !== null &&
-					this.cameraExtra.length > 0
-				) {
-					this.cubePingPong = (this.cubePingPong + 1) % this.cameraExtra.length;
-					cubeCamera = this.cameraExtra[this.cubePingPong];
-				} else if (this.camera instanceof N3JS.CubeCamera) {
-					cubeCamera = this.camera;
-				}
+			if (this.camera instanceof N3JS.CubeCamera || this.camera instanceof NgxPingPongCamera) {
+				let cubeCamera: I3JS.CubeCamera | NgxPingPongCamera = this.camera;
 				if (cubeCamera !== null) {
 					cubeCamera.update(renderer, this.getScene(scenes));
 					if (NgxThreeUtil.isNotNull(this.material)) {
 						const material: any = NgxThreeUtil.getMaterial(this.material);
-						if (
-							NgxThreeUtil.isNotNull(material) &&
-							material['envMap'] !== undefined
-						) {
+						if (NgxThreeUtil.isNotNull(material) && material['envMap'] !== undefined) {
 							material['envMap'] = cubeCamera.renderTarget.texture;
 						}
 					}
@@ -1370,11 +1238,7 @@ export class NgxCameraComponent
 	 * @param camera
 	 * @param scene
 	 */
-	private renderWithScene(
-		renderer: I3JS.Renderer,
-		camera: I3JS.Camera,
-		scene: I3JS.Scene
-	) {
+	private renderWithScene(renderer: I3JS.Renderer, camera: I3JS.Camera, scene: I3JS.Scene) {
 		if (scene !== null) {
 			try {
 				if (renderer instanceof N3JS.WebGLRenderer) {
@@ -1390,12 +1254,7 @@ export class NgxCameraComponent
 					if (this.viewport) {
 						switch (this.viewportType.toLowerCase()) {
 							case 'renderer':
-								renderer.setViewport(
-									this.getX(),
-									this.getY(),
-									this.getWidth(),
-									this.getHeight()
-								);
+								renderer.setViewport(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 								break;
 						}
 					}

@@ -390,7 +390,7 @@ export class NgxAbstractGeometryComponent
 	 * The meshType of abstract geometry component
 	 * 
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.EdgesGeometry | EdgesGeometry, Edges |
 	 * | THREE.WireframeGeometry | WireframeGeometry, Wireframe |
 	 * | WireframeGeometry2 | WireframeGeometry2, Wireframe2 |

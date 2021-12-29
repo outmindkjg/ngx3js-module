@@ -14,6 +14,30 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
  * The Helper component.
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HelperComponent) page for details.
+ * 
+ * |  Three Type        | Type Key           | Acceptable Input          |
+ * |:--------------------------|:--------------------------|:--------------------------|
+ * | Gyroscope | GyroscopeHelper, Gyroscope |  |
+ * | CSMHelper | CSMHelper, CSM | control |
+ * | ArrowHelper | ArrowHelper, Arrow | arrowTo, arrowFrom, dirX, dirY, dirZ , originX, originY, originZ, length, color, headLength, headWidth |
+ * | BoxHelper | BoxHelper, Box | target, color |
+ * | Box3Helper | Box3Helper, Box3 |  |
+ * | GridHelper | GridHelper, Grid | size, divisions, color1, color2 |
+ * | PolarGridHelper | PolarGridHelper, PolarGrid | radius, radials, circles, divisions, color1, color2  |
+ * | PositionalAudioHelper | PositionalAudioHelper, PositionalAudio | range, divisionsInnerAngle, divisionsOuterAngle |
+ * | CameraHelper | CameraHelper, Camera |  |
+ * | DirectionalLightHelper | DirectionalLightHelper, DirectionalLight | size, color |
+ * | HemisphereLightHelper | HemisphereLightHelper, HemisphereLight | size, color |
+ * | PointLightHelper | PointLightHelper, PointLight | size, color |
+ * | HemisphereLightHelper | HemisphereLightHelper, HemisphereLight | size, color |
+ * | SpotLightHelper | SpotLightHelper, SpotLight | color |
+ * | RectAreaLightHelper | RectAreaLightHelper, RectAreaLight | color |
+ * | LightProbeHelper | LightProbeHelper, LightProbe | size |
+ * | PlaneHelper | PlaneHelper, Plane | size, color |
+ * | VertexTangentsHelper | VertexTangentsHelper, VertexTangents | size, color |
+ * | VertexNormalsHelper | VertexNormalsHelper, VertexNormals | size, color |
+ * | SkeletonHelper | SkeletonHelper, Skeleton |  |
+ * | AxesHelper | AxesHelper, Axes | size |
  *
  * ```html
  * <ngx3js-helper
@@ -59,7 +83,7 @@ export class NgxHelperComponent
 	 * the type of helper
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | Gyroscope | Gyroscope |
 	 * | CSM | CSM |
 	 * | THREE.ArrowHelper | ArrowHelper, Arrow |
@@ -148,7 +172,7 @@ export class NgxHelperComponent
 	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NoBlending | NoBlending, No |
 	 * | THREE.NormalBlending | NormalBlending, Normal |
 	 * | THREE.AdditiveBlending | AdditiveBlending, Additive |
@@ -291,16 +315,6 @@ export class NgxHelperComponent
 	}
 
 	/**
-	 * Gets size
-	 *
-	 * @param [def]
-	 * @returns size
-	 */
-	private getSize(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.size, def);
-	}
-
-	/**
 	 * Gets color
 	 * @param [def]
 	 * @returns color
@@ -321,60 +335,6 @@ export class NgxHelperComponent
 		} else {
 			return undefined;
 		}
-	}
-
-	/**
-	 * Gets radius
-	 * @param [def]
-	 * @returns radius
-	 */
-	private getRadius(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.radius, def);
-	}
-
-	/**
-	 * Gets radials
-	 * @param [def]
-	 * @returns radials
-	 */
-	private getRadials(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.radials, def);
-	}
-
-	/**
-	 * Gets circles
-	 * @param [def]
-	 * @returns circles
-	 */
-	private getCircles(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.circles, def);
-	}
-
-	/**
-	 * Gets divisions
-	 * @param [def]
-	 * @returns divisions
-	 */
-	private getDivisions(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.divisions, def);
-	}
-
-	/**
-	 * Gets color1
-	 * @param [def]
-	 * @returns color1
-	 */
-	private getColor1(def?: INgxColor): I3JS.Color {
-		return NgxThreeUtil.getColorSafe(this.color1, this.color, def);
-	}
-
-	/**
-	 * Gets color2
-	 * @param [def]
-	 * @returns color2
-	 */
-	private getColor2(def?: INgxColor): I3JS.Color {
-		return NgxThreeUtil.getColorSafe(this.color2, this.color1 || this.color, def);
 	}
 
 	/**
@@ -462,33 +422,6 @@ export class NgxHelperComponent
 			}
 		}
 		return new N3JS.Vector3(0, 0, 0);
-	}
-
-	/**
-	 * Gets length
-	 * @param [def]
-	 * @returns length
-	 */
-	private getLength(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.length, def);
-	}
-
-	/**
-	 * Gets head length
-	 * @param [def]
-	 * @returns head length
-	 */
-	private getHeadLength(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.headLength, def);
-	}
-
-	/**
-	 * Gets head width
-	 * @param [def]
-	 * @returns head width
-	 */
-	private getHeadWidth(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.headWidth, def);
 	}
 
 	/**
@@ -670,17 +603,17 @@ export class NgxHelperComponent
 					basemesh = new N3JS.ArrowHelper(
 						this.getDirection(new N3JS.Vector3(0, 0, 1)),
 						this.getOrigin(new N3JS.Vector3(0, 0, 0)),
-						this.getLength(1),
-						this.getColor(0xffff00),
-						this.getHeadLength(),
-						this.getHeadWidth()
+						NgxThreeUtil.getTypeSafe(this.length, 1),
+						NgxThreeUtil.getColorSafe(this.color, 0xffff00),
+						NgxThreeUtil.getTypeSafe(this.headLength),
+						NgxThreeUtil.getTypeSafe(this.headWidth)
 					);
 					break;
 				case 'boxhelper':
 				case 'box':
 					const boxHelper = new N3JS.BoxHelper(
 						this.getTarget(this.parent),
-						this.getColor(0xffff00)
+						NgxThreeUtil.getColorSafe(this.color, 0xffff00)
 					);
 					basemesh = boxHelper;
 					break;
@@ -691,22 +624,22 @@ export class NgxHelperComponent
 				case 'gridhelper':
 				case 'grid':
 					basemesh = new N3JS.GridHelper(
-						this.getSize(10),
-						this.getDivisions(10),
-						this.getColor1(0x444444),
-						this.getColor2(0x888888)
+						NgxThreeUtil.getTypeSafe(this.size, 10),
+						NgxThreeUtil.getTypeSafe(this.divisions, 10),
+						NgxThreeUtil.getColorSafe(this.color1, this.color, 0x444444),
+						NgxThreeUtil.getColorSafe(this.color2, this.color, 0x888888)
 					);
 					parentAdd = false;
 					break;
 				case 'polargridhelper':
 				case 'polargrid':
 					basemesh = new N3JS.PolarGridHelper(
-						this.getRadius(10),
-						this.getRadials(16),
-						this.getCircles(8),
-						this.getDivisions(64),
-						this.getColor1(0x444444),
-						this.getColor2(0x888888)
+						NgxThreeUtil.getTypeSafe(this.radius, 10),
+						NgxThreeUtil.getTypeSafe(this.radials, 16),
+						NgxThreeUtil.getTypeSafe(this.circles, 8),
+						NgxThreeUtil.getTypeSafe(this.divisions, 64),
+						NgxThreeUtil.getColorSafe(this.color1, this.color, 0x444444),
+						NgxThreeUtil.getColorSafe(this.color2, this.color, 0x888888)
 					);
 					basemesh.receiveShadow = true;
 					break;
@@ -736,7 +669,7 @@ export class NgxHelperComponent
 						}
 						basemesh = positionalAudioHelper;
 					} else {
-						basemesh = new N3JS.AxesHelper(this.getSize(10));
+						basemesh = new N3JS.AxesHelper(NgxThreeUtil.getTypeSafe(this.size, 10));
 					}
 					break;
 				case 'camerahelper':
@@ -750,7 +683,7 @@ export class NgxHelperComponent
 					} else if (cameraTarget instanceof N3JS.Camera) {
 						basemesh = new N3JS.CameraHelper(cameraTarget);
 					} else {
-						basemesh = new N3JS.AxesHelper(this.getSize(10));
+						basemesh = new N3JS.AxesHelper(NgxThreeUtil.getTypeSafe(this.size, 10));
 					}
 					break;
 				case 'directionallighthelper':
@@ -771,32 +704,32 @@ export class NgxHelperComponent
 					if (lightTarget instanceof N3JS.DirectionalLight) {
 						basemesh = new N3JS.DirectionalLightHelper(
 							lightTarget,
-							this.getSize(10),
-							this.getColor()
+							NgxThreeUtil.getTypeSafe(this.size, 10),
+							NgxThreeUtil.getColorSafe(this.color, 0xffff00)
 						);
 					} else if (lightTarget instanceof N3JS.HemisphereLight) {
 						basemesh = new N3JS.HemisphereLightHelper(
 							lightTarget,
-							this.getSize(10),
-							this.getColor()
+							NgxThreeUtil.getTypeSafe(this.size, 10),
+							NgxThreeUtil.getColorSafe(this.color, 0xffff00)
 						);
 					} else if (lightTarget instanceof N3JS.PointLight) {
 						basemesh = new N3JS.PointLightHelper(
 							lightTarget,
-							this.getSize(10),
-							this.getColor()
+							NgxThreeUtil.getTypeSafe(this.size, 10),
+							NgxThreeUtil.getColorSafe(this.color, 0xffff00),
 						);
 					} else if (lightTarget instanceof N3JS.SpotLight) {
-						basemesh = new N3JS.SpotLightHelper(lightTarget, this.getColor());
+						basemesh = new N3JS.SpotLightHelper(lightTarget, NgxThreeUtil.getColorSafe(this.color));
 					} else if (lightTarget instanceof N3JS.RectAreaLight) {
 						basemesh = new N3JS.RectAreaLightHelper(
 							lightTarget,
-							this.getColor()
+							NgxThreeUtil.getColorSafe(this.color)
 						);
 					} else if (lightTarget instanceof N3JS.LightProbe) {
 						basemesh = new N3JS.LightProbeHelper(
 							lightTarget,
-							this.getSize(10)
+							NgxThreeUtil.getTypeSafe(this.size, 10)
 						);
 					}
 					break;
@@ -814,7 +747,7 @@ export class NgxHelperComponent
 								basemesh.add(
 									new N3JS.PlaneHelper(
 										clippingPlane,
-										this.getSize(10),
+										NgxThreeUtil.getTypeSafe(this.size, 10),
 										this.getColorHex()
 									)
 								);
@@ -844,7 +777,7 @@ export class NgxHelperComponent
 							case 'vertextangents':
 								basemesh = new N3JS.VertexTangentsHelper(
 									vertexMesh,
-									this.getSize(),
+									NgxThreeUtil.getTypeSafe(this.size, 10),
 									this.getColorHex()
 								);
 								break;
@@ -853,13 +786,13 @@ export class NgxHelperComponent
 							default:
 								basemesh = new N3JS.VertexNormalsHelper(
 									vertexMesh,
-									this.getSize(),
+									NgxThreeUtil.getTypeSafe(this.size, 10),
 									this.getColorHex()
 								);
 								break;
 						}
 					} else {
-						basemesh = new N3JS.AxesHelper(this.getSize(10));
+						basemesh = new N3JS.AxesHelper(NgxThreeUtil.getTypeSafe(this.size, 10));
 					}
 					break;
 				case 'skeletonhelper':
@@ -869,7 +802,7 @@ export class NgxHelperComponent
 				case 'axeshelper':
 				case 'axes':
 				default:
-					basemesh = new N3JS.AxesHelper(this.getSize(10));
+					basemesh = new N3JS.AxesHelper(NgxThreeUtil.getTypeSafe(this.size, 10));
 					parentAdd = false;
 					break;
 			}

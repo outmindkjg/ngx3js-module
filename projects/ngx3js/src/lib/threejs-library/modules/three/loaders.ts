@@ -8,6 +8,7 @@ import {
 	FileLoader as O3JS_FileLoader,
 	ImageBitmapLoader as O3JS_ImageBitmapLoader,
 	ImageLoader as O3JS_ImageLoader,
+	Cache as  O3JS_Cache,
 	Loader as O3JS_Loader,
 	LoaderUtils as O3JS_LoaderUtils,
 	LoadingManager as O3JS_LoadingManager,
@@ -46,6 +47,9 @@ export const ImageLoader: ImageLoader = O3JS_ImageLoader as any;
 
 export type Loader = I3JS.Loader;
 export const Loader: Loader = O3JS_Loader as any;
+
+export type Cache = I3JS.Cache;
+export const Cache: Cache = O3JS_Cache as any;
 
 export type LoaderUtils = I3JS.LoaderUtils;
 export const LoaderUtils: LoaderUtils = O3JS_LoaderUtils as any;

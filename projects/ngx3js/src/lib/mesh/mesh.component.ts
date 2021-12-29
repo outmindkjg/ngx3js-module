@@ -110,7 +110,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	 * The type of mesh
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | Lensflare | type : skybox, skyboxType : sun |
 	 * | SVGObject | SVGObject, SVG |
 	 * | CSS2DObject | CSS2DObject, CSS2D |
@@ -177,7 +177,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	 * The type of skybox
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | Lensflare | sun |
 	 * | THREE.BoxGeometry | box |
 	 * | THREE.SphereGeometry | sphere |
@@ -378,7 +378,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	 * The usage of InstancedMesh
 	 * 
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.StaticDrawUsage | StaticDrawUsage, StaticDraw |
 	 * | THREE.DynamicDrawUsage | DynamicDrawUsage, DynamicDraw |
 	 * | THREE.StreamDrawUsage | StreamDrawUsage, StreamDraw |
@@ -518,7 +518,7 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.LinearEncoding | LinearEncoding , |
 	 * | THREE.sRGBEncoding | sRGBEncoding , |
 	 * | THREE.GammaEncoding | GammaEncoding , |

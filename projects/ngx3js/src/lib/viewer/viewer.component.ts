@@ -65,7 +65,7 @@ export class NgxViewerComponent
 	 * The type of viewer
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | ViewerCanvas | canvas |
 	 * | ShadowMapViewer | shadowmapviewer, shadowmap |
 	 * | ShadowMesh | shadowmesh, shadow |

@@ -33,7 +33,7 @@ export class NgxFogComponent extends NgxAbstractSubscribeComponent implements On
 	 * The Fog type.
 	 * 
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.Fog | fog (default), |
 	 * | THREE.FogExp2 | fogexp2, exp, exp2 |
 	 */

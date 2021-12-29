@@ -59,7 +59,7 @@ export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements 
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.LinearEncoding | LinearEncoding , |
 	 * | THREE.sRGBEncoding | sRGBEncoding , |
 	 * | THREE.GammaEncoding | GammaEncoding , |
@@ -76,7 +76,7 @@ export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements 
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 * 
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.AlphaFormat | AlphaFormat, Alpha |
 	 * | THREE.RedFormat | RedFormat, Red |
 	 * | THREE.RedIntegerFormat | RedIntegerFormat, RedInteger |

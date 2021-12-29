@@ -106,7 +106,7 @@ export class NgxAbstractTextureComponent
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for other mapping types.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.UVMapping | UVMapping, uv |
 	 * | THREE.CubeReflectionMapping | CubeReflectionMapping, cubereflection |
 	 * | THREE.CubeRefractionMapping | CubeRefractionMapping, cuberefraction |
@@ -127,7 +127,7 @@ export class NgxAbstractTextureComponent
 	 * The Default Value of wrapS, wrapT.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.RepeatWrapping | RepeatWrapping, wraprepeat, repeat |
 	 * | THREE.MirroredRepeatWrapping | MirroredRepeatWrapping, mirroredrepeat |
 	 * | THREE.ClampToEdgeWrapping | ClampToEdgeWrapping, clamptoedge |
@@ -141,7 +141,7 @@ export class NgxAbstractTextureComponent
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.RepeatWrapping | RepeatWrapping, wraprepeat, repeat |
 	 * | THREE.MirroredRepeatWrapping | MirroredRepeatWrapping, mirroredrepeat |
 	 * | THREE.ClampToEdgeWrapping | ClampToEdgeWrapping, clamptoedge |
@@ -157,7 +157,7 @@ export class NgxAbstractTextureComponent
 	 * This is a limitation of WebGL, not three.js.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.RepeatWrapping | RepeatWrapping, wraprepeat, repeat |
 	 * | THREE.MirroredRepeatWrapping | MirroredRepeatWrapping, mirroredrepeat |
 	 * | THREE.ClampToEdgeWrapping | ClampToEdgeWrapping, clamptoedge |
@@ -168,7 +168,7 @@ export class NgxAbstractTextureComponent
 	 * The Default Value of magFilter, minFilter
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NearestFilter | NearestFilter, Nearest |
 	 * | THREE.NearestMipmapNearestFilter | NearestMipmapNearestFilter, nearestmipmapnearest |
 	 * | THREE.NearestMipmapLinearFilter | NearestMipmapLinearFilter, nearestmipmaplinear |
@@ -185,7 +185,7 @@ export class NgxAbstractTextureComponent
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NearestFilter | NearestFilter, Nearest |
 	 * | THREE.NearestMipmapNearestFilter | NearestMipmapNearestFilter, nearestmipmapnearest |
 	 * | THREE.NearestMipmapLinearFilter | NearestMipmapLinearFilter, nearestmipmaplinear |
@@ -201,7 +201,7 @@ export class NgxAbstractTextureComponent
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for all possible choices.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NearestFilter | NearestFilter, Nearest |
 	 * | THREE.NearestMipmapNearestFilter | NearestMipmapNearestFilter, nearestmipmapnearest |
 	 * | THREE.NearestMipmapLinearFilter | NearestMipmapLinearFilter, nearestmipmaplinear |
@@ -216,7 +216,7 @@ export class NgxAbstractTextureComponent
 	 * See the [texture constants](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/constants/Textures) page for details of other formats.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.AlphaFormat | AlphaFormat, Alpha |
 	 * | THREE.RedFormat | RedFormat, Red |
 	 * | THREE.RedIntegerFormat | RedIntegerFormat, RedInteger |
@@ -240,7 +240,7 @@ export class NgxAbstractTextureComponent
 	 *
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.UnsignedByteType | UnsignedByteType , UnsignedByte, |
 	 * | THREE.ByteType | ByteType , Byte |
 	 * | THREE.ShortType | ShortType , Short |
@@ -275,7 +275,7 @@ export class NgxAbstractTextureComponent
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.LinearEncoding | LinearEncoding , |
 	 * | THREE.sRGBEncoding | sRGBEncoding , |
 	 * | THREE.GammaEncoding | GammaEncoding , |

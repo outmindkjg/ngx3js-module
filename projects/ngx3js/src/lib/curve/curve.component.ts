@@ -38,7 +38,7 @@ export class NgxCurveComponent
 	 * The curve type
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.ArcCurve | ArcCurve, Arc |
 	 * | THREE.CatmullRomCurve3 | CatmullRomCurve3, Spline3, Catmullrom |
 	 * | THREE.CubicBezierCurve | CubicBezierCurve, CubicBezier |

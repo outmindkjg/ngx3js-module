@@ -1,10 +1,4 @@
-import {
-	Component,
-	ContentChildren, forwardRef, Input,
-	OnInit,
-	QueryList,
-	SimpleChanges
-} from '@angular/core';
+import { Component, ContentChildren, forwardRef, Input, OnInit, QueryList, SimpleChanges } from '@angular/core';
 import { NgxAbstractControllerComponent } from '../controller.component.abstract';
 import { NgxFogComponent } from '../fog/fog.component';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
@@ -26,6 +20,9 @@ import { NgxRigidbodyComponent } from './../rigidbody/rigidbody.component';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SceneComponent) page for details.
  * See the [ngx scene](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_scene) page for a live demo.
  *
+ * ```html
+ * <ngx3js-scene [background]="'0xf0f0f0'"></ngx3js-scene>
+ * ```
  */
 @Component({
 	selector: 'ngx3js-scene',
@@ -42,10 +39,7 @@ import { NgxRigidbodyComponent } from './../rigidbody/rigidbody.component';
 		},
 	],
 })
-export class NgxSceneComponent
-	extends NgxAbstractObject3dComponent
-	implements OnInit
-{
+export class NgxSceneComponent extends NgxAbstractObject3dComponent implements OnInit {
 	/**
 	 * The storageName of scene component
 	 */
@@ -71,7 +65,8 @@ export class NgxSceneComponent
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxRigidbodyComponent, { descendants: true }) private sceneRigidbodyList: QueryList<NgxRigidbodyComponent>;
+	@ContentChildren(NgxRigidbodyComponent, { descendants: true })
+	private sceneRigidbodyList: QueryList<NgxRigidbodyComponent>;
 
 	/**
 	 * Content children of scene component
@@ -81,7 +76,8 @@ export class NgxSceneComponent
 	/**
 	 * Content children of scene component
 	 */
-	@ContentChildren(NgxAbstractControllerComponent, { descendants: true }) private sceneControllerList: QueryList<NgxAbstractControllerComponent>;
+	@ContentChildren(NgxAbstractControllerComponent, { descendants: true })
+	private sceneControllerList: QueryList<NgxAbstractControllerComponent>;
 
 	/**
 	 * Content children of scene component
@@ -141,23 +137,11 @@ export class NgxSceneComponent
 	 */
 	ngAfterContentInit(): void {
 		this.subscribeListQueryChange(this.physicsList, 'physicsList', 'physics');
-		this.subscribeListQueryChange(
-			this.sceneRigidbodyList,
-			'sceenrigidbodyList',
-			'rigidbody'
-		);
+		this.subscribeListQueryChange(this.sceneRigidbodyList, 'sceenrigidbodyList', 'rigidbody');
 		this.subscribeListQueryChange(this.fogList, 'fogList', 'fog');
 		this.subscribeListQueryChange(this.textureList, 'textureList', 'texture');
-		this.subscribeListQueryChange(
-			this.sceneControllerList,
-			'sceneControllerList',
-			'sceneController'
-		);
-		this.subscribeListQueryChange(
-			this.sceneMixerList,
-			'sceneMixerList',
-			'mixer'
-		);
+		this.subscribeListQueryChange(this.sceneControllerList, 'sceneControllerList', 'sceneController');
+		this.subscribeListQueryChange(this.sceneMixerList, 'sceneMixerList', 'mixer');
 		this.subscribeListQueryChange(this.viewerList, 'viewerList', 'viewer');
 		super.ngAfterContentInit();
 	}
@@ -252,15 +236,9 @@ export class NgxSceneComponent
 	private getTextureOption(map: INgxTexture, name: string): I3JS.Texture {
 		if (NgxThreeUtil.isNotNull(map)) {
 			if (typeof map === 'string') {
-				const texture = NgxAbstractTextureComponent.getTextureImageOption(
-					map,
-					null,
-					'texture',
-					null,
-					() => {
-						this.addChanges(name);
-					}
-				);
+				const texture = NgxAbstractTextureComponent.getTextureImageOption(map, null, 'texture', null, () => {
+					this.addChanges(name);
+				});
 				return texture;
 			} else if (NgxThreeUtil.isNotNull(map['value'])) {
 				const texture = NgxAbstractTextureComponent.getTextureImageOption(
@@ -344,29 +322,14 @@ export class NgxSceneComponent
 							this.sceneRigidbodyList.forEach((rigidbody) => {
 								rigidbody.setPhysics(this._physics);
 							});
-							this.subscribeListQuery(
-								this.physicsList,
-								'physicsList',
-								'physics'
-							);
-							this.subscribeListQuery(
-								this.sceneRigidbodyList,
-								'rigidbodyList',
-								'rigidbody'
-							);
+							this.subscribeListQuery(this.physicsList, 'physicsList', 'physics');
+							this.subscribeListQuery(this.sceneRigidbodyList, 'rigidbodyList', 'rigidbody');
 						}
-						if (
-							NgxThreeUtil.isNotNull(this._physics) &&
-							NgxThreeUtil.isNotNull(this.sceneMixerList)
-						) {
+						if (NgxThreeUtil.isNotNull(this._physics) && NgxThreeUtil.isNotNull(this.sceneMixerList)) {
 							this.sceneMixerList.forEach((mixer) => {
 								mixer.setPhysics(this._physics);
 							});
-							this.subscribeListQuery(
-								this.sceneMixerList,
-								'sceneMixerList',
-								'mixer'
-							);
+							this.subscribeListQuery(this.sceneMixerList, 'sceneMixerList', 'mixer');
 						}
 						break;
 					case 'fog':
@@ -385,11 +348,7 @@ export class NgxSceneComponent
 							this.sceneControllerList.forEach((controller) => {
 								controller.setScene(this.scene);
 							});
-							this.subscribeListQuery(
-								this.sceneControllerList,
-								'sceneControllerList',
-								'controller'
-							);
+							this.subscribeListQuery(this.sceneControllerList, 'sceneControllerList', 'controller');
 						}
 						break;
 					case 'background':
@@ -404,27 +363,18 @@ export class NgxSceneComponent
 						let environmentTexture: NgxAbstractTextureComponent = null;
 						if (NgxThreeUtil.isNotNull(this.background)) {
 							if (NgxThreeUtil.isColor(this.background)) {
-								this.scene.background = NgxThreeUtil.getColorSafe(
-									this.background,
-									0x000000
-								);
+								this.scene.background = NgxThreeUtil.getColorSafe(this.background, 0x000000);
 							} else if (this.background instanceof NgxAbstractTextureComponent) {
 								backgroundTexture = this.background;
 							} else {
-								this.scene.background = this.getTextureOption(
-									this.background,
-									'background'
-								);
+								this.scene.background = this.getTextureOption(this.background, 'background');
 							}
 						}
 						if (NgxThreeUtil.isNotNull(this.environment)) {
 							if (this.environment instanceof NgxAbstractTextureComponent) {
 								environmentTexture = this.environment;
 							} else {
-								this.scene.environment = this.getTextureOption(
-									this.environment,
-									'environment'
-								);
+								this.scene.environment = this.getTextureOption(this.environment, 'environment');
 							}
 						}
 						if (backgroundTexture !== null || environmentTexture !== null) {
@@ -514,13 +464,10 @@ export class NgxSceneComponent
 			this._sceneSynked = true;
 			if (NgxThreeUtil.isNotNull(this.storageName)) {
 				this.scene = new N3JS.Scene();
-				this.localStorageService.getScene(
-					this.storageName,
-					(scene: I3JS.Scene) => {
-						this.scene = scene;
-						this.setObject3d(scene);
-					}
-				);
+				this.localStorageService.getScene(this.storageName, (scene: I3JS.Scene) => {
+					this.scene = scene;
+					this.setObject3d(scene);
+				});
 			} else {
 				this.setObject3d(this.scene);
 			}

@@ -20,6 +20,14 @@ import { NgxAbstractTweenComponent } from '../tween.abstract';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/EffectComponent) page for details.
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect) page for a live demo.
  *
+ * |  Three Type        | Type Key           | Acceptable Input          |
+ * |:--------------------------|:--------------------------|:--------------------------|
+ * | AsciiEffect | AsciiEffect, Ascii | resolution, scale, color, alpha, block, invert  |
+ * | PeppersGhostEffect | PeppersGhostEffect, PeppersGhost | cameraDistance, reflectFromAbove  |
+ * | OutlineEffect | OutlineEffect, Outline |  |
+ * | ParallaxBarrierEffect | ParallaxBarrierEffect, ParallaxBarrier |  |
+ * | EffectComposer | EffectComposer, Effect | renderToScreen |
+ *
  * ```html
  * <ngx3js-effect>
  * 	<ngx3js-pass [type]="'RenderPass'"></ngx3js-pass>

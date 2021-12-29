@@ -80,7 +80,7 @@ export class NgxKeyframeComponent
 	 * identifier for the KeyframeTrack
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.VectorKeyframeTrack | position - The position of object3d |
 	 * | THREE.VectorKeyframeTrack | scale - The scale of object3d |
 	 * | THREE.QuaternionKeyframeTrack | quaternion - The quaternion of object3d |
@@ -141,7 +141,7 @@ export class NgxKeyframeComponent
 	 * the type of interpolation to use. See
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.InterpolateDiscrete | InterpolateDiscrete, Discrete |
 	 * | THREE.InterpolateLinear | InterpolateLinear, Linear |
 	 * | THREE.InterpolateSmooth | InterpolateSmooth, Smooth |

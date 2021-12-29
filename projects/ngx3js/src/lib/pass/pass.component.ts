@@ -15,6 +15,47 @@ import * as NGX_PASS from './index';
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PassComponent) page for details.
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect) page for a live demo.
  *
+ * |  Three Type        | Type Key           | Acceptable Input          |
+ * |:--------------------------|:--------------------------|:--------------------------|
+ * | AdaptiveToneMappingPass | AdaptiveToneMappingPass, AdaptiveToneMapping | adaptive, resolution  |
+ * | AfterimagePass | AfterimagePass, Afterimage | damp  |
+ * | BloomPass | BloomPass, Bloom | strength, kernelSize, sigma, resolution |
+ * | BokehPass | BokehPass, Bokeh | focus, aspect, aperture, maxblur, width, height |
+ * | CubeTexturePass | CubeTexturePass, CubeTexture | effectCamera, envMap, opacity |
+ * | DotScreenPass | DotScreenPass, DotScreen | centerX, centerY, angle, scale |
+ * | FilmPass | FilmPass, Film | noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale |
+ * | GlitchPass | GlitchPass, Glitch | dtSize, goWild |
+ * | HalftonePass | HalftonePass, Halftone | size |
+ * | ClearMaskPass | ClearMaskPass, ClearMask |  |
+ * | MaskPass | MaskPass, Mask | effectScene, effectCamera, inverse |
+ * | OutlinePass | OutlinePass, Outline | effectScene, effectCamera, patternTexture, selectedObjects, visibleEdgeColor, hiddenEdgeColor, edgeGlow, usePatternTexture, edgeThickness, edgeStrength, downSampleRatio, pulsePeriod |
+ * | RenderPass | RenderPass, Render | effectScene, effectCamera |
+ * | SAOPass | SAOPass, SAO | effectScene, effectCamera, depthTexture, useNormals, width, height, output, saoBias, saoIntensity, saoScale, saoKernelRadius, saoMinResolution, saoBlur, saoBlurRadius, saoBlurStdDev, saoBlurDepthCutoff |
+ * | SavePass | SavePass, Save | renderTarget |
+ * | NgxShaderCopyPass | CopyPass, Copy | textureId |
+ * | NgxShaderRGBShiftPass | ShaderRGBShiftPass, RGBShift | textureId, uniforms |
+ * | NgxShaderBleachBypassPass | BleachBypassPass, BleachBypass | textureId, uniforms |
+ * | NgxShaderSepiaPass | SepiaPass, Sepia | textureId, uniforms |
+ * | NgxShaderVignettePass | VignettePass, Vignette | textureId, uniforms |
+ * | NgxShaderGammaCorrectionPass | GammaCorrectionPass, GammaCorrection | textureId, uniforms |
+ * | NgxShaderFXAAPass | FXAAPass, FXAA | textureId, uniforms |
+ * | NgxShaderPixelPass | PixelPass, Pixel | textureId, uniforms |
+ * | NgxShaderLuminosityPass | LuminosityPass, Luminosity | textureId, uniforms |
+ * | NgxShaderDotScreenPass | DotScreenPass, DotScreen | textureId, uniforms |
+ * | NgxShaderSobelOperatorPass | SobelOperatorPass, SobelOperator | textureId, uniforms |
+ * | NgxShaderMaterialPass | MaterialPass, Material | textureId, uniforms |
+ * | ShaderPass | ShaderPass, Shader | textureId, shader, uniforms |
+ * | SMAAPass | SMAAPass, SMAA | textureId, uniforms |
+ * | SSAARenderPass | SSAARenderPass, SSAARender | effectScene, effectCamera, clearColor, clearAlpha, sampleLevel, unbiased |
+ * | SSAOPass | SSAOPass, SSAO | effectScene, effectCamera, kernelRadius, minDistance, maxDistance |
+ * | TAARenderPass | TAARenderPass, TAARender | effectScene, effectCamera, clearColor, clearAlpha, sampleLevel, unbiased, accumulate |
+ * | TexturePass | TexturePass, Texture | effectCamera, effectScene, opacity |
+ * | UnrealBloomPass | UnrealBloomPass, UnrealBloom | width, height, strength, radius, threshold |
+ * | SSRPass | SSRPass, SSR | mesh, effectScene, effectCamera, selects,  |
+ * | SSRrPass | SSRrPass, SSRr | effectScene, effectCamera, selects |
+ * | LUTPass | LUTPass, LUT | intensity |
+ * | ClearPass | ClearPass, Clear | clearColor, clearAlpha |
+ *
  * ```html
  * <ngx3js-composer>
  * 	<ngx3js-pass [type]="'RenderPass'"></ngx3js-pass>
@@ -321,7 +362,7 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	 * Note that if this value is changed on a texture after the material has been used, it is necessary to trigger a Material.needsUpdate for this value to be realized in the shader.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.LinearEncoding | LinearEncoding , |
 	 * | THREE.sRGBEncoding | sRGBEncoding , |
 	 * | THREE.GammaEncoding | GammaEncoding , |
@@ -707,24 +748,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	}
 
 	/**
-	 * Gets enabled
-	 * @param [def]
-	 * @returns true if enabled
-	 */
-	private getEnabled(def?: boolean): boolean {
-		return NgxThreeUtil.getTypeSafe(this.enabled, def);
-	}
-
-	/**
-	 * Gets needs swap
-	 * @param [def]
-	 * @returns true if needs swap
-	 */
-	private getNeedsSwap(def?: boolean): boolean {
-		return NgxThreeUtil.getTypeSafe(this.needsSwap, def);
-	}
-
-	/**
 	 * Gets clear
 	 * @param [def]
 	 * @returns true if clear
@@ -740,60 +763,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	 */
 	private getRenderToScreen(def?: boolean): boolean {
 		return NgxThreeUtil.getTypeSafe(this.renderToScreen, def);
-	}
-
-	/**
-	 * Gets adaptive
-	 * @param [def]
-	 * @returns true if adaptive
-	 */
-	private getAdaptive(def?: boolean): boolean {
-		return NgxThreeUtil.getTypeSafe(this.adaptive, def);
-	}
-
-	/**
-	 * Gets resolution
-	 * @param [def]
-	 * @returns resolution
-	 */
-	private getResolution(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.resolution, def);
-	}
-
-	/**
-	 * Gets damp
-	 * @param [def]
-	 * @returns damp
-	 */
-	private getDamp(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.damp, def);
-	}
-
-	/**
-	 * Gets strength
-	 * @param [def]
-	 * @returns strength
-	 */
-	private getStrength(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.strength, def);
-	}
-
-	/**
-	 * Gets kernel size
-	 * @param [def]
-	 * @returns kernel size
-	 */
-	private getKernelSize(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.kernelSize, def);
-	}
-
-	/**
-	 * Gets sigma
-	 * @param [def]
-	 * @returns sigma
-	 */
-	private getSigma(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.sigma, def);
 	}
 
 	/**
@@ -842,33 +811,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	}
 
 	/**
-	 * Gets intensity
-	 * @param [def]
-	 * @returns intensity
-	 */
-	private getIntensity(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.intensity, def);
-	}
-
-	/**
-	 * Gets clear color
-	 * @param [def]
-	 * @returns clear color
-	 */
-	private getClearColor(def?: INgxColor): I3JS.Color {
-		return NgxThreeUtil.getColorSafe(this.clearColor, def);
-	}
-
-	/**
-	 * Gets clear alpha
-	 * @param [def]
-	 * @returns clear alpha
-	 */
-	private getClearAlpha(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.clearAlpha, def);
-	}
-
-	/**
 	 * Gets env map
 	 * @param [def]
 	 * @returns env map
@@ -907,91 +849,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 			return texture.getTexture();
 		}
 		return undefined;
-	}
-
-	/**
-	 * Gets opacity
-	 * @param [def]
-	 * @returns opacity
-	 */
-	private getOpacity(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.opacity, def);
-	}
-
-	/**
-	 * Gets center
-	 * @param [def]
-	 * @returns center
-	 */
-	private getCenter(def?: I3JS.Vector2): I3JS.Vector2 {
-		return NgxThreeUtil.getVector2Safe(this.centerX, this.centerY, def);
-	}
-
-	/**
-	 * Gets angle
-	 * @param [def]
-	 * @returns angle
-	 */
-	private getAngle(def?: number): number {
-		return NgxThreeUtil.getAngleSafe(this.angle, def);
-	}
-
-	/**
-	 * Gets scale
-	 * @param [def]
-	 * @returns scale
-	 */
-	private getScale(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.scale, def);
-	}
-
-	/**
-	 * Gets noise intensity
-	 * @param [def]
-	 * @returns noise intensity
-	 */
-	private getNoiseIntensity(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.noiseIntensity, def);
-	}
-
-	/**
-	 * Gets scanlines intensity
-	 * @param [def]
-	 * @returns scanlines intensity
-	 */
-	private getScanlinesIntensity(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.scanlinesIntensity, def);
-	}
-
-	/**
-	 * Gets scanlines count
-	 * @param [def]
-	 * @returns scanlines count
-	 */
-	private getScanlinesCount(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.scanlinesCount, def);
-	}
-
-	/**
-	 * Gets grayscale
-	 * @param [def]
-	 * @returns grayscale
-	 */
-	private getGrayscale(def?: boolean): number {
-		if (NgxThreeUtil.getTypeSafe(this.grayscale, def)) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
-
-	/**
-	 * Gets dt size
-	 * @param [def]
-	 * @returns dt size
-	 */
-	private getDtSize(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.dtSize, def);
 	}
 
 	/**
@@ -1048,24 +905,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	}
 
 	/**
-	 * Gets depth texture
-	 * @param [def]
-	 * @returns true if depth texture
-	 */
-	private getDepthTexture(def?: boolean): boolean {
-		return NgxThreeUtil.getTypeSafe(this.depthTexture, def);
-	}
-
-	/**
-	 * Gets use normals
-	 * @param [def]
-	 * @returns true if use normals
-	 */
-	private getUseNormals(def?: boolean): boolean {
-		return NgxThreeUtil.getTypeSafe(this.useNormals, def);
-	}
-
-	/**
 	 * Gets sao output
 	 * @param [def]
 	 * @returns sao output
@@ -1109,15 +948,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 			default:
 				return 0;
 		}
-	}
-
-	/**
-	 * Gets render target
-	 * @param [def]
-	 * @returns render target
-	 */
-	private getRenderTarget(def?: I3JS.WebGLRenderTarget): I3JS.WebGLRenderTarget {
-		return NgxThreeUtil.getTypeSafe(this.renderTarget, def);
 	}
 
 	/**
@@ -1395,15 +1225,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	}
 
 	/**
-	 * Gets texture id
-	 * @param [def]
-	 * @returns texture id
-	 */
-	private getTextureId(def?: string): string {
-		return NgxThreeUtil.getTypeSafe(this.textureId, def);
-	}
-
-	/**
 	 * Gets map
 	 * @param [effectComposer]
 	 * @param [camera]
@@ -1455,33 +1276,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 			}
 		}
 		return undefined;
-	}
-
-	/**
-	 * Gets radius
-	 * @param [def]
-	 * @returns radius
-	 */
-	private getRadius(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.radius, def);
-	}
-
-	/**
-	 * Gets threshold
-	 * @param [def]
-	 * @returns threshold
-	 */
-	private getThreshold(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(this.threshold, def);
-	}
-
-	/**
-	 * Gets go wild
-	 * @param [def]
-	 * @returns true if go wild
-	 */
-	private getGoWild(def?: boolean): boolean {
-		return NgxThreeUtil.getTypeSafe(this.goWild, def);
 	}
 
 	/**
@@ -1586,12 +1380,12 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 				switch (change.toLowerCase()) {
 					case 'enabled':
 						if (NgxThreeUtil.isNotNull(this.enabled)) {
-							this.pass.enabled = this.getEnabled(true);
+							this.pass.enabled = NgxThreeUtil.getTypeSafe(this.enabled, true);
 						}
 						break;
 					case 'needsswap':
 						if (NgxThreeUtil.isNotNull(this.needsSwap)) {
-							this.pass.needsSwap = this.getNeedsSwap(true);
+							this.pass.needsSwap = NgxThreeUtil.getTypeSafe(this.needsSwap, true);
 						}
 						break;
 					case 'clear':
@@ -1639,19 +1433,19 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 				switch (this.type.toLowerCase()) {
 					case 'adaptivetonemappingpass':
 					case 'adaptivetonemapping':
-						pass = new N3JS.AdaptiveToneMappingPass(this.getAdaptive(), this.getResolution());
+						pass = new N3JS.AdaptiveToneMappingPass(NgxThreeUtil.getTypeSafe(this.adaptive), NgxThreeUtil.getTypeSafe(this.resolution));
 						break;
 					case 'afterimagepass':
 					case 'afterimage':
-						pass = new N3JS.AfterimagePass(this.getDamp());
+						pass = new N3JS.AfterimagePass(NgxThreeUtil.getTypeSafe(this.damp));
 						break;
 					case 'bloompass':
 					case 'bloom':
 						pass = new N3JS.BloomPass(
-							this.getStrength(1),
-							this.getKernelSize(25),
-							this.getSigma(4),
-							this.getResolution(255)
+							NgxThreeUtil.getTypeSafe(this.strength, 1),
+							NgxThreeUtil.getTypeSafe(this.kernelSize, 25),
+							NgxThreeUtil.getTypeSafe(this.sigma, 4),
+							NgxThreeUtil.getTypeSafe(this.resolution, 255)
 						);
 						break;
 					case 'bokehpass':
@@ -1670,26 +1464,26 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 						pass = new N3JS.CubeTexturePass(
 							this.getCamera(this.effectCamera) as I3JS.PerspectiveCamera,
 							this.getEnvMap(),
-							this.getOpacity()
+							NgxThreeUtil.getTypeSafe(this.opacity)
 						);
 						break;
 					case 'dotscreenpass':
 					case 'dotscreen':
-						pass = new N3JS.DotScreenPass(this.getCenter(), this.getAngle(), this.getScale());
+						pass = new N3JS.DotScreenPass(NgxThreeUtil.getVector2Safe(this.centerX, this.centerY), NgxThreeUtil.getAngleSafe(this.angle), NgxThreeUtil.getTypeSafe(this.scale));
 						break;
 					case 'filmpass':
 					case 'film':
 						pass = new N3JS.FilmPass(
-							this.getNoiseIntensity(),
-							this.getScanlinesIntensity(),
-							this.getScanlinesCount(),
-							this.getGrayscale()
+							NgxThreeUtil.getTypeSafe(this.noiseIntensity),
+							NgxThreeUtil.getTypeSafe(this.scanlinesIntensity),
+							NgxThreeUtil.getTypeSafe(this.scanlinesCount),
+							NgxThreeUtil.getTypeSafe(this.grayscale) ? 1 : 0
 						);
 						break;
 					case 'glitchpass':
 					case 'glitch':
-						const glitchpass = new N3JS.GlitchPass(this.getDtSize());
-						glitchpass.goWild = this.getGoWild(false);
+						const glitchpass = new N3JS.GlitchPass(NgxThreeUtil.getTypeSafe(this.dtSize));
+						glitchpass.goWild = NgxThreeUtil.getTypeSafe(this.goWild, false);
 						pass = glitchpass;
 						break;
 					case 'halftonepass':
@@ -1784,7 +1578,7 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 							this.getCamera(this.effectCamera)
 							//this.getOverrideMaterial(null),
 							//new THREE.Color(this.getClearColor()),
-							// this.getClearAlpha()
+							// NgxThreeUtil.getTypeSafe(this.clearAlpha)
 						);
 						break;
 					case 'saopass':
@@ -1792,8 +1586,8 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 						const saoPass = new N3JS.SAOPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera),
-							this.getDepthTexture(),
-							this.getUseNormals(),
+							NgxThreeUtil.getTypeSafe(this.depthTexture),
+							NgxThreeUtil.getTypeSafe(this.useNormals),
 							NgxThreeUtil.getVector2Safe(this.width, this.height)
 						);
 						saoPass.params = {
@@ -1812,81 +1606,81 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 						break;
 					case 'savepass':
 					case 'save':
-						pass = new N3JS.SavePass(this.getRenderTarget());
+						pass = new N3JS.SavePass(NgxThreeUtil.getTypeSafe(this.renderTarget));
 						break;
 					case 'copypass':
 					case 'copy':
-						pass = new NGX_PASS.NgxShaderCopyPass(this.getTextureId());
+						pass = new NGX_PASS.NgxShaderCopyPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						break;
 					case 'rgbshiftpass':
 					case 'rgbshift':
-						const rgbshiftpass = new NGX_PASS.NgxShaderRGBShiftPass(this.getTextureId());
+						const rgbshiftpass = new NGX_PASS.NgxShaderRGBShiftPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(rgbshiftpass.uniforms);
 						pass = rgbshiftpass;
 						break;
 					case 'bleachbypasspass':
 					case 'bleachbypass':
-						const bleachbypass = new NGX_PASS.NgxShaderBleachBypassPass(this.getTextureId());
+						const bleachbypass = new NGX_PASS.NgxShaderBleachBypassPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(bleachbypass.uniforms);
 						pass = bleachbypass;
 						break;
 					case 'sepiapass':
 					case 'sepia':
-						const sepiapass = new NGX_PASS.NgxShaderSepiaPass(this.getTextureId());
+						const sepiapass = new NGX_PASS.NgxShaderSepiaPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(sepiapass.uniforms);
 						pass = sepiapass;
 						break;
 					case 'vignettepass':
 					case 'vignette':
-						const vignettepass = new NGX_PASS.NgxShaderVignettePass(this.getTextureId());
+						const vignettepass = new NGX_PASS.NgxShaderVignettePass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(vignettepass.uniforms);
 						pass = vignettepass;
 						break;
 					case 'gammacorrectionpass':
 					case 'gammacorrection':
-						const gammacorrectionpass = new NGX_PASS.NgxShaderGammaCorrectionPass(this.getTextureId());
+						const gammacorrectionpass = new NGX_PASS.NgxShaderGammaCorrectionPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(gammacorrectionpass.uniforms);
 						pass = gammacorrectionpass;
 						break;
 					case 'fxaapass':
 					case 'fxaa':
-						const fxaapass = new NGX_PASS.NgxShaderFXAAPass(this.getTextureId());
+						const fxaapass = new NGX_PASS.NgxShaderFXAAPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(fxaapass.uniforms);
 						pass = fxaapass;
 						break;
 					case 'pixelpass':
 					case 'pixel':
-						const pixelpass = new NGX_PASS.NgxShaderPixelPass(this.getTextureId());
+						const pixelpass = new NGX_PASS.NgxShaderPixelPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(pixelpass.uniforms);
 						pass = pixelpass;
 						break;
 					case 'luminositypass':
 					case 'luminosity':
-						const luminositypass = new NGX_PASS.NgxShaderLuminosityPass(this.getTextureId());
+						const luminositypass = new NGX_PASS.NgxShaderLuminosityPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(luminositypass.uniforms);
 						pass = luminositypass;
 						break;
 					case 'shaderdotscreenpass':
 					case 'shaderdotscreen':
-						const dotscreenpass = new NGX_PASS.NgxShaderDotScreenPass(this.getTextureId());
+						const dotscreenpass = new NGX_PASS.NgxShaderDotScreenPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(dotscreenpass.uniforms);
 						pass = dotscreenpass;
 						break;
 					case 'sobeloperatorpass':
 					case 'sobeloperator':
-						const sobeloperatorpass = new NGX_PASS.NgxSobelOperatorPass(this.getTextureId());
+						const sobeloperatorpass = new NGX_PASS.NgxSobelOperatorPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(sobeloperatorpass.uniforms);
 						pass = sobeloperatorpass;
 						break;
 					case 'materialpass':
 					case 'material':
-						const materialpass = new NGX_PASS.NgxShaderMaterialPass(this.getTextureId());
+						const materialpass = new NGX_PASS.NgxShaderMaterialPass(NgxThreeUtil.getTypeSafe(this.textureId));
 						this.getUniforms(materialpass.uniforms);
 						pass = materialpass;
 						break;
 					case 'shaderpass':
 					case 'shader':
-						const shaderPass = new N3JS.ShaderPass(this.getShader(), this.getTextureId());
+						const shaderPass = new N3JS.ShaderPass(this.getShader(), NgxThreeUtil.getTypeSafe(this.textureId));
 						pass = shaderPass;
 						break;
 					case 'smaapass':
@@ -1911,8 +1705,8 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 						const ssaaRenderPass = new N3JS.SSAARenderPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera),
-							this.getClearColor(),
-							this.getClearAlpha()
+							NgxThreeUtil.getColorSafe(this.clearColor),
+							NgxThreeUtil.getTypeSafe(this.clearAlpha)
 						);
 						if (NgxThreeUtil.isNotNull(this.sampleLevel)) {
 							ssaaRenderPass.sampleLevel = NgxThreeUtil.getTypeSafe(this.sampleLevel, 4);
@@ -1953,8 +1747,8 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 						const taaRenderPass = new N3JS.TAARenderPass(
 							this.getScene(this.effectScene),
 							this.getCamera(this.effectCamera),
-							this.getClearColor(),
-							this.getClearAlpha()
+							NgxThreeUtil.getColorSafe(this.clearColor),
+							NgxThreeUtil.getTypeSafe(this.clearAlpha)
 						);
 						if (NgxThreeUtil.isNotNull(this.sampleLevel)) {
 							taaRenderPass.sampleLevel = NgxThreeUtil.getTypeSafe(this.sampleLevel, 4);
@@ -1971,16 +1765,16 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 					case 'texture':
 						pass = new N3JS.TexturePass(
 							this.getMap(this.effectComposer, this.effectCamera, this.effectScene),
-							this.getOpacity()
+							NgxThreeUtil.getTypeSafe(this.opacity)
 						);
 						break;
 					case 'unrealbloompass':
 					case 'unrealbloom':
 						pass = new N3JS.UnrealBloomPass(
 							NgxThreeUtil.getVector2Safe(this.width | 512, this.height | 512, new N3JS.Vector2(512, 512)),
-							this.getStrength(1.5),
-							this.getRadius(0.4),
-							this.getThreshold(0.85)
+							NgxThreeUtil.getTypeSafe(this.strength, 1.5),
+							NgxThreeUtil.getTypeSafe(this.radius, 0.4),
+							NgxThreeUtil.getTypeSafe(this.threshold, 0.85)
 						);
 						break;
 					case 'ssrpass':
@@ -2046,7 +1840,7 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 					case 'lut':
 						const lutPass = new N3JS.LUTPass({
 							lut: null,
-							intensity: this.getIntensity(),
+							intensity: NgxThreeUtil.getTypeSafe(this.intensity),
 						});
 						lutPass.enabled = false;
 						this.getLut((result) => {
@@ -2058,7 +1852,7 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 						break;
 					case 'clearpass':
 					case 'clear':
-						pass = new N3JS.ClearPass(this.getClearColor(), this.getClearAlpha());
+						pass = new N3JS.ClearPass(NgxThreeUtil.getColorSafe(this.clearColor), NgxThreeUtil.getTypeSafe(this.clearAlpha));
 						break;
 					default:
 						pass = null;

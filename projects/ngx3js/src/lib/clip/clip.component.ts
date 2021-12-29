@@ -56,7 +56,7 @@ export class NgxClipComponent
 	 * The blendMode of clip component
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.NormalAnimationBlendMode | NormalAnimationBlendMode, NormalAnimation, Normal |
 	 * | THREE.AdditiveAnimationBlendMode | AdditiveAnimationBlendMode, AdditiveAnimation, Additive |
 	 *
@@ -122,7 +122,7 @@ export class NgxClipComponent
 	 * The looping mode (can be changed with [AnimationClip.setLoop](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.setLoop)). Default is [THREE.LoopRepeat](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/Animation) (with an infinite number of [AnimationClip.repetitions](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/animation/AnimationClip.repetitions))
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.LoopOnce | LoopOnce, Once |
 	 * | THREE.LoopRepeat | LoopRepeat, Repeat |
 	 * | THREE.LoopPingPong | LoopPingPong, PingPong |

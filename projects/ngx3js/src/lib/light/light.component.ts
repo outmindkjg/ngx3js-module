@@ -22,6 +22,17 @@ import {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightComponent) page for details.
  * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light) page for a live demo.
  *
+ * |  Three Type        | Type Key           | Acceptable Input          |
+ * |:--------------------------|:--------------------------|:--------------------------|
+ * | DirectionalLight | DirectionalLight, Directional | color, intensity |
+ * | HemisphereLight | HemisphereLight, Hemisphere | skyColor, groundColor, intensity |
+ * | LightProbe | LightProbe, Probe | sh, intensity, texture |
+ * | PointLight | PointLight, Point | color, intensity, distance, decay |
+ * | RectAreaLight | RectAreaLight, RectArea | color, intensity, width, height |
+ * | SpotLight | SpotLight, Spot | color, intensity, distance, angle, penumbra, decay, shadowFocus |
+ * | AmbientLight | AmbientLight, Ambient | color, intensity |
+ *
+ *
  * ```html
  * <ngx3js-light
  * 	[type]="'Hemisphere'" [skyColor]="'0xffffff'"
@@ -81,7 +92,7 @@ export class NgxLightComponent
 	 * The type of light
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.PointLight | PointLight, Point |
 	 * | THREE.RectAreaLight | RectAreaLight, RectArea |
 	 * | THREE.SpotLight | SpotLight, Spot |

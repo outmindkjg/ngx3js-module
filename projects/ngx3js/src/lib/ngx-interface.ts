@@ -1035,7 +1035,7 @@ export interface IHelperOptions {
 	 * the type of helper
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | Gyroscope | Gyroscope |
 	 * | CSM | CSM |
 	 * | THREE.ArrowHelper | ArrowHelper, Arrow |
@@ -1124,7 +1124,7 @@ export interface IHelperOptions {
 	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * @default THREE.NormalBlending
 	 * | THREE.NoBlending | NoBlending, No |
 	 * | THREE.NormalBlending | NormalBlending, Normal |
@@ -1420,7 +1420,7 @@ export interface ICharacterControl {
 	 * The type of light
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | THREE.PointLight | PointLight, Point |
 	 * | THREE.RectAreaLight | RectAreaLight, RectArea |
 	 * | THREE.SpotLight | SpotLight, Spot |
@@ -1617,7 +1617,7 @@ export interface ICharacterControl {
 	 * The type of control
 	 *
 	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------:|--------------------------:|
+	 * |:--------------------------|--------------------------:|
 	 * | FlyControls | FlyControls, Fly |
 	 * | FirstPersonControls | FirstPersonControls, FirstPerson |
 	 * | DeviceOrientationControls | DeviceOrientationControls, DeviceOrientation |
