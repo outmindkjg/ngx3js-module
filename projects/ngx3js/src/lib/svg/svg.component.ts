@@ -915,9 +915,9 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 	 * @param onload
 	 */
 	public getSVGResult(onload: (data: I3JS.SVGResult) => void) {
-		const loader = new N3JS.SVGLoader();
+		const svgLoader : I3JS.SVGLoader = NgxThreeUtil.getLoader('svgLoader', N3JS.SVGLoader);
 		if (NgxThreeUtil.isNotNull(this.url)) {
-			loader.load(this.url, (data: I3JS.SVGResult) => {
+			svgLoader.load(this.url, (data: I3JS.SVGResult) => {
 				onload(data);
 			});
 		} else if (NgxThreeUtil.isNotNull(this.path) && this.path != '') {
@@ -929,11 +929,11 @@ export class NgxSvgComponent extends NgxAbstractObject3dComponent {
 			svgContents.push('<path d="' + this.path + '"/>');
 			svgContents.push('</g>');
 			svgContents.push('</svg>');
-			onload(loader.parse(svgContents.join('')));
+			onload(svgLoader.parse(svgContents.join('')));
 		} else {
 			const svgs = this.ele.nativeElement.getElementsByTagName('svg');
 			if (svgs.length > 0) {
-				onload(loader.parse(svgs[0].innerHTML.trim()));
+				onload(svgLoader.parse(svgs[0].innerHTML.trim()));
 			}
 		}
 	}

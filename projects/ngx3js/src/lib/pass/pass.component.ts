@@ -702,11 +702,6 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 	}
 
 	/**
-	 * Lut cube loader of pass component
-	 */
-	private lutCubeLoader: I3JS.LUTCubeLoader = null;
-
-	/**
 	 * Gets lut
 	 * @param callBack
 	 * @param [def]
@@ -739,10 +734,8 @@ export class NgxPassComponent extends NgxAbstractSubscribeComponent implements O
 				lutPath = lut;
 				break;
 		}
-		if (this.lutCubeLoader === null) {
-			this.lutCubeLoader = new N3JS.LUTCubeLoader(NgxThreeUtil.getLoadingManager());
-		}
-		this.lutCubeLoader.load(NgxThreeUtil.getStoreUrl(lutPath), (result: I3JS.LUTCubeResult) => {
+		const lutCubeLoader : I3JS.LUTCubeLoader = NgxThreeUtil.getLoader('lutCubeLoader', N3JS.LUTCubeLoader);
+		lutCubeLoader.load(NgxThreeUtil.getStoreUrl(lutPath), (result: I3JS.LUTCubeResult) => {
 			callBack(result);
 		});
 	}

@@ -2,6 +2,12 @@ import { Camera, Matrix3, Scene, Vector2, Vector4, WebGLRenderer, WebGLRenderTar
 
 /**
  * Anaglyph effect
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnaglyphEffect) page for details.
+ * See the [webgl / effects / anaglyph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph) page for a live demo.
+ *
+ * ### Examples
+ * [webgl / effects / anaglyph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph)
  */
 export interface AnaglyphEffect {
     new(renderer: WebGLRenderer, width?: number, height?: number) : this;
@@ -27,6 +33,12 @@ export interface AsciiEffectOptions {
 
 /**
  * Ascii effect
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AsciiEffect) page for details.
+ * See the [webgl / effects / ascii](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_ascii) page for a live demo.
+ *
+ * ### Examples
+ * [webgl / effects / ascii](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_ascii)
  */
 export interface AsciiEffect {
     new(renderer: WebGLRenderer, charSet?: string, options?: AsciiEffectOptions) : this;
@@ -48,6 +60,15 @@ export interface OutlineEffectParameters {
 
 /**
  * Outline effect
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OutlineEffect) page for details.
+ * See the [webgl / materials / variations / toon](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_ascii) page for a live demo.
+ *
+ * ### Examples
+ * [webgl / materials / variations / toon](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_variations_toon) |
+ * [webgl / loader / mmd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mmd) |
+ * [webgl / loader / mmd / pose](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mmd_pose) |
+ * [webgl / loader / mmd / audio](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_mmd_audio)
  */
 export interface OutlineEffect {
     new(renderer: WebGLRenderer, parameters?: OutlineEffectParameters) : this;
@@ -71,6 +92,12 @@ export interface OutlineEffect {
 
 /**
  * Parallax barrier effect
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ParallaxBarrierEffect) page for details.
+ * See the [webgl / effects / parallaxbarrier](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_parallaxbarrier) page for a live demo.
+ *
+ * ### Examples
+ * [webgl / effects / parallaxbarrier](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_parallaxbarrier)
  */
 export interface ParallaxBarrierEffect {
     new(renderer: WebGLRenderer) : this;
@@ -81,6 +108,12 @@ export interface ParallaxBarrierEffect {
 
 /**
  * Peppers ghost effect
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PeppersGhostEffect) page for details.
+ * See the [webgl / effects / peppersghost](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_peppersghost) page for a live demo.
+ *
+ * ### Examples
+ * [webgl / effects / peppersghost](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_peppersghost)
  */
 export interface PeppersGhostEffect {
     new(renderer: WebGLRenderer) : this;
@@ -93,6 +126,12 @@ export interface PeppersGhostEffect {
 
 /**
  * Stereo effect
+ *
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/StereoEffect) page for details.
+ * See the [webgl / effects / stereo](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_stereo) page for a live demo.
+ *
+ * ### Examples
+ * [webgl / effects / stereo](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_stereo)
  */
 export interface StereoEffect {
     new(renderer: WebGLRenderer) : this;

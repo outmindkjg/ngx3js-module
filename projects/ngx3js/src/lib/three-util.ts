@@ -474,7 +474,9 @@ export class NgxThreeUtil {
 	 * @returns pmrem generator
 	 */
 	public static getPmremGenerator(): I3JS.PMREMGenerator {
-		return new N3JS.PMREMGenerator(this.getRenderer() as I3JS.WebGLRenderer);
+		const pmremGenerator = new N3JS.PMREMGenerator(this.getRenderer() as I3JS.WebGLRenderer);
+		pmremGenerator.compileCubemapShader();
+		return pmremGenerator;
 	}
 
 	/**
@@ -700,6 +702,54 @@ export class NgxThreeUtil {
 	 */
 	private static _manager: I3JS.LoadingManager = null;
 
+	private static _loader: { [key: string]: I3JS.Loader } = {};
+
+	/**
+	 * Gets loader
+	 *
+	 * @param key
+	 * @param loader
+	 * @returns
+	 */
+	public static getLoader<T>(key: string, loader: N3JS.Loader, options?: any): T {
+		if (this._loader[key] === undefined) {
+			this._loader[key] = new loader(this.getLoadingManager(), options);
+			switch (key) {
+				case 'ifcLoader':
+					(this._loader[key] as any).ifcManager.setWasmPath(this.getStoreUrl('jsm/loaders/ifc/'));
+					break;
+				case 'ktx2Loader':
+					(this._loader[key] as any).setTranscoderPath(this.getStoreUrl('js/libs/basis/'));
+					(this._loader[key] as any).detectSupport(new N3JS.WebGL1Renderer());
+					break;
+				case 'rhino3dmLoader':
+					(this._loader[key] as any).setLibraryPath(this.getStoreUrl('jsm/libs/rhino3dm/'));
+					break;
+				case 'basisTextureLoader':
+					(this._loader[key] as any).setTranscoderPath(this.getStoreUrl('js/libs/basis/'));
+					(this._loader[key] as any).detectSupport(new N3JS.WebGL1Renderer());
+					break;
+				case 'dracoLoader':
+					(this._loader[key] as any).setDecoderPath(NgxThreeUtil.getStoreUrl('js/libs/draco/'));
+					(this._loader[key] as any).setDecoderConfig({ type: 'js' });
+					break;
+				case 'basisTextureLoader':
+					break;
+			}
+		}
+		return this._loader[key] as any;
+	}
+
+	/**
+	 * Clears loading manager
+	 */
+	 public static clearLoadingManager() {
+		if (this._manager !== null) {
+			this._manager = null;
+		}
+		this._loader = {};
+	}
+
 	/**
 	 * Gets loading manager
 	 * @returns loading manager
@@ -715,7 +765,11 @@ export class NgxThreeUtil {
 					console.error(url);
 				}
 			);
-			this._manager.addHandler(/\.dds$/i, new N3JS.DDSLoader());
+			const cache:I3JS.Cache = N3JS.Cache;
+			if (cache !== null && cache !== undefined) {
+				cache.enabled = true;
+			}
+			this._manager.addHandler(/\.dds$/i, this.getLoader('ddsLoader',N3JS.DDSLoader));
 		}
 		return this._manager;
 	}
@@ -1500,6 +1554,20 @@ export class NgxThreeUtil {
 	}
 
 	/**
+	 * Clears ngx three util
+	 */
+	public static clear(clearCache : boolean = false) {
+		this.clearThreeComponent();
+		this.clearLoadingManager();
+		if (clearCache) {
+			const cache:I3JS.Cache = N3JS.Cache;
+			if (cache !== null && cache !== undefined) {
+				cache.clear();
+			}
+		}
+	}
+
+	/**
 	 * Loaded component of three util
 	 */
 	private static loadedComponent: { [key: string]: any } = {};
@@ -1521,7 +1589,7 @@ export class NgxThreeUtil {
 	 * Clears three component
 	 */
 	public static clearThreeComponent() {
-		this.loadedComponent = {}
+		this.loadedComponent = {};
 	}
 
 	/**
@@ -3785,12 +3853,12 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets glsl version
-	 * 
+	 *
 	 * |   Three Type               | Value String(case insensitive) |
 	 * |:--------------------------|--------------------------:|
 	 * | THREE.GLSLVersion.GLSL1 | GLSL1, GL1, 1 |
 	 * | THREE.GLSLVersion.GLSL3 | GLSL3, GL3, 3 |
-	 * 
+	 *
 	 * @param [def]
 	 * @returns glsl version
 	 */
@@ -3866,13 +3934,13 @@ export class NgxThreeUtil {
 
 	/**
 	 * Gets precision safe
-	 * 
+	 *
 	 * |   Three Type               | Value String(case insensitive) |
 	 * |:--------------------------|--------------------------:|
 	 * | String | highp |
 	 * | String | mediump |
 	 * | String | lowp |
-	 * 
+	 *
 	 * @param basePrecision
 	 * @param [def]
 	 * @returns precision safe

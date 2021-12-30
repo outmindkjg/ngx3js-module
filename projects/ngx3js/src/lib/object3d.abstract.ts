@@ -36,6 +36,10 @@ import { NgxAbstractTweenComponent } from './tween.abstract';
  * 			provide: NgxAbstractObject3dComponent,
  * 			useExisting: forwardRef(() => NgxXxxComponent),
  * 		},
+ * 		{
+ * 			provide: NgxAbstractSubscribeComponent,
+ * 			useExisting: forwardRef(() => NgxXxxComponent),
+ * 		},
  * 	],
  * })
  * export class NgxXxxComponent extends NgxAbstractObject3dComponent implements OnInit {

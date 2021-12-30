@@ -601,7 +601,7 @@ export interface Loader {
 	 * Creates a new Loader.
 	 * @param manager The [loadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager) for the loader to use. Default is [THREE.DefaultLoadingManager](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LoadingManager).
 	 */
-	new (manager?: LoadingManager): this;
+	new (manager?: LoadingManager, options? : any): this;
 
 	/**
 	 * The crossOrigin string to implement CORS for loading the url from a different domain that allows CORS.

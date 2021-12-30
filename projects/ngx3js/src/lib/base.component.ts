@@ -36,7 +36,7 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 	constructor(
 		@Inject('') controls: T,
 		@Inject('') controlsParams: IGuiControlParam[] = [],
-		@Inject('') clearConsole: boolean = true,
+		@Inject('') clearConsole: boolean = false,
 		@Inject('') addBaseParam: boolean = true
 	) {
 		this.controls = NgxThreeUtil.getControls(controls, this, addBaseParam);

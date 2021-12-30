@@ -114,7 +114,47 @@ export class NgxSceneComponent extends NgxAbstractObject3dComponent implements O
 	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
+		if (this.scene !== null) {
+			this.scene.traverse(child => {
+				if (child.customDepthMaterial) {
+					child.customDepthMaterial.dispose();
+				}
+				if (child.customDistanceMaterial) {
+					child.customDistanceMaterial.dispose();
+				}
+				if (child.geometry) {
+					child.geometry.dispose();
+				}
+				if (child.material) {
+					if (Array.isArray(child.material)) {
+						child.material.forEach(material => {
+							this.disposeMaterial(material);
+						})
+					} else {
+						this.disposeMaterial(child.material);
+					}
+				}
+			});
+			if (this.scene.background instanceof N3JS.Texture) {
+				this.scene.background.dispose();
+			}
+			if (this.scene.environment) {
+				this.scene.environment.dispose();
+			}
+		}
 		super.ngOnDestroy();
+	}
+
+	private disposeMaterial(material : I3JS.Material) {
+		material.dispose();
+		const anyMaterial:any = material;
+		const checkTexture = ['map','matcap', 'envMap', 'specularMap', 'alphaMap', 'emissiveMap', 'bumpMap', 'normalMap', 'aoMap', 'displacementMap', 'clearcoatNormalMap', 'metalnessMap', 'roughnessMap' ,'lightMap', 'gradientMap'];
+		checkTexture.forEach(name => {
+			const texture = anyMaterial[name];
+			if (texture && texture instanceof N3JS.Texture) {
+				texture.dispose();
+			}
+		})
 	}
 
 	/**

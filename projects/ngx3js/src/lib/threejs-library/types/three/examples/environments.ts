@@ -6,3 +6,10 @@ import { Scene } from '../index';
 export interface RoomEnvironment extends Scene {
     new() : this;
 }
+
+ /**
+  * Debug environment
+  */
+ export interface DebugEnvironment extends Scene {
+    new() : this;
+}

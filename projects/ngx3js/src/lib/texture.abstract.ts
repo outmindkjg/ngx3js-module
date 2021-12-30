@@ -554,41 +554,6 @@ export class NgxAbstractTextureComponent
 	protected texture: I3JS.Texture = null;
 
 	/**
-	 * Texture loader of abstract texture component
-	 */
-	public static textureLoader: I3JS.TextureLoader = null;
-
-	/**
-	 * Nrrd loader of abstract texture component
-	 */
-	public static nrrdLoader: I3JS.NRRDLoader = null;
-
-	/**
-	 * File loader of abstract texture component
-	 */
-	public static fileLoader: I3JS.FileLoader = null;
-
-	/**
-	 * Cube texture loader of abstract texture component
-	 */
-	public static cubeTextureLoader: I3JS.CubeTextureLoader = null;
-
-	/**
-	 * Image bitmap loader of abstract texture component
-	 */
-	public static imageBitmapLoader: I3JS.ImageBitmapLoader = null;
-
-	/**
-	 * Hdr cube map loader of abstract texture component
-	 */
-	public static hdrCubeMapLoader: I3JS.HDRCubeTextureLoader = null;
-
-	/**
-	 * Rgbm loader of abstract texture component
-	 */
-	public static rgbmLoader: I3JS.RGBMLoader = null;
-
-	/**
 	 * Gets texture image
 	 * @param image
 	 * @param [cubeImage]
@@ -950,14 +915,12 @@ export class NgxAbstractTextureComponent
 			switch (loaderType || 'cubetexture') {
 				case 'hdrcube':
 				case 'hdrcubetexture':
-					if (this.hdrCubeMapLoader === null) {
-						this.hdrCubeMapLoader = new N3JS.HDRCubeTextureLoader(NgxThreeUtil.getLoadingManager());
-					}
+					const hdrCubeMapLoader : I3JS.HDRCubeTextureLoader = NgxThreeUtil.getLoader('hdrCubeMapLoader', N3JS.HDRCubeTextureLoader);
 					if (NgxThreeUtil.isNotNull(image) && image !== '') {
-						this.hdrCubeMapLoader.setPath(NgxThreeUtil.getStoreUrl(image));
+						hdrCubeMapLoader.setPath(NgxThreeUtil.getStoreUrl(image));
 					}
 					const cubeTexture = new N3JS.CubeTexture();
-					this.hdrCubeMapLoader.load(cubeImage, (hdrCubeMap) => {
+					hdrCubeMapLoader.load(cubeImage, (hdrCubeMap) => {
 						cubeTexture.copy(hdrCubeMap);
 						cubeTexture.needsUpdate = true;
 						onLoad();
@@ -965,27 +928,23 @@ export class NgxAbstractTextureComponent
 					return cubeTexture;
 				case 'rgbm':
 				case 'rgbmtexture':
-					if (this.rgbmLoader === null) {
-						this.rgbmLoader = new N3JS.RGBMLoader(NgxThreeUtil.getLoadingManager());
-					}
+					const rgbmLoader : I3JS.RGBMLoader = NgxThreeUtil.getLoader('rgbmLoader', N3JS.RGBMLoader);
 					if (NgxThreeUtil.isNotNull(image) && image !== '') {
-						this.rgbmLoader.setPath(NgxThreeUtil.getStoreUrl(image));
+						rgbmLoader.setPath(NgxThreeUtil.getStoreUrl(image));
 					}
 					const rgbmTexture = new N3JS.CubeTexture();
-					this.rgbmLoader.loadCubemap(cubeImage, (rgbmCube) => {
+					rgbmLoader.loadCubemap(cubeImage, (rgbmCube) => {
 						rgbmTexture.copy(rgbmCube);
 						rgbmTexture.needsUpdate = true;
 						onLoad();
 					});
 					return rgbmTexture;
 				default:
-					if (this.cubeTextureLoader === null) {
-						this.cubeTextureLoader = new N3JS.CubeTextureLoader(NgxThreeUtil.getLoadingManager());
-					}
+					const cubeTextureLoader : I3JS.CubeTextureLoader = NgxThreeUtil.getLoader('cubeTextureLoader', N3JS.CubeTextureLoader);
 					if (NgxThreeUtil.isNotNull(image) && image !== '') {
-						this.cubeTextureLoader.setPath(NgxThreeUtil.getStoreUrl(image));
+						cubeTextureLoader.setPath(NgxThreeUtil.getStoreUrl(image));
 					}
-					return this.cubeTextureLoader.load(cubeImage, () => {
+					return cubeTextureLoader.load(cubeImage, () => {
 						onLoad();
 					});
 			}
@@ -1059,10 +1018,8 @@ export class NgxAbstractTextureComponent
 				case 'datatexture3d':
 				default:
 					if (image.endsWith('.zip')) {
-						if (this.fileLoader === null) {
-							this.fileLoader = new N3JS.FileLoader(NgxThreeUtil.getLoadingManager());
-							this.fileLoader.setResponseType('arraybuffer');
-						}
+						const fileLoader : I3JS.FileLoader = NgxThreeUtil.getLoader('fileLoader', N3JS.FileLoader);
+						fileLoader.setResponseType('arraybuffer');
 						let texture: I3JS.Texture = null;
 						const width = options.width || 1;
 						const height = options.height || 1;
@@ -1082,7 +1039,7 @@ export class NgxAbstractTextureComponent
 								texture = new N3JS.DataTexture(null, width, height);
 								break;
 						}
-						this.fileLoader.load(NgxThreeUtil.getStoreUrl(image), (data) => {
+						fileLoader.load(NgxThreeUtil.getStoreUrl(image), (data) => {
 							const zip = N3JS.unzipSync(new Uint8Array(data as ArrayBuffer));
 							let fileName = (options.fileName || '').toLowerCase();
 							let fileObject: any = null;
@@ -1107,11 +1064,9 @@ export class NgxAbstractTextureComponent
 						pmremGenerator.dispose();
 						return renderTarget.texture;
 					} else if (image.endsWith('.nrrd')) {
-						if (this.nrrdLoader === null) {
-							this.nrrdLoader = new N3JS.NRRDLoader(NgxThreeUtil.getLoadingManager());
-						}
+						const nrrdLoader : I3JS.NRRDLoader = NgxThreeUtil.getLoader('nrrdLoader', N3JS.NRRDLoader);
 						const texture = new N3JS.DataTexture3D(null, 1, 1, 1);
-						this.nrrdLoader.load(NgxThreeUtil.getStoreUrl(image), (volume) => {
+						nrrdLoader.load(NgxThreeUtil.getStoreUrl(image), (volume) => {
 							texture.image = {
 								data: volume.data,
 								width: volume.xLength,
@@ -1135,10 +1090,8 @@ export class NgxAbstractTextureComponent
 									options
 								);
 							default:
-								if (this.textureLoader === null) {
-									this.textureLoader = new N3JS.TextureLoader(NgxThreeUtil.getLoadingManager());
-								}
-								const texture = this.textureLoader.load(NgxThreeUtil.getStoreUrl(image), () => {
+								const textureLoader : I3JS.TextureLoader = NgxThreeUtil.getLoader('textureLoader', N3JS.TextureLoader);
+								const texture = textureLoader.load(NgxThreeUtil.getStoreUrl(image), () => {
 									texture.needsUpdate = true;
 									onLoad();
 								});

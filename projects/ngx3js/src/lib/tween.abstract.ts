@@ -7,7 +7,7 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import * as GSAP from 'gsap';
 import { I3JS, NgxThreeUtil } from './interface';
@@ -19,6 +19,21 @@ import { NgxTweenComponent } from './tween/tween.component';
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractTweenComponent) page for details.
  *
+ * ```ts
+ * _@Component({
+ * 	providers: [
+ * 		{
+ * 			provide: NgxAbstractSubscribeComponent,
+ * 			useExisting: forwardRef(() => NgxXxxComponent),
+ * 		},
+ * 	],
+ * })
+ * export class NgxXxxComponent extends NgxAbstractTweenComponent implements OnInit {
+ * 	constructor() {
+ * 		super();
+ * 	}
+ * }
+ * ```
  */
 @Component({
 	template: '',

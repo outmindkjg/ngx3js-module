@@ -8,7 +8,7 @@ import { Scene } from './scenes';
  * An instance of ArrayCamera always has an array of sub cameras. It's mandatory to define for each sub camera the *viewport* property which determines the part of the viewport that is rendered with this camera.
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ArrayCamera) page for details.
- * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/ArrayCamera) page for a live demo.
+ * See the [camera / array](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera_array) page for a live demo.
  *
  * ### Examples
  * [camera / array](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera_array)
@@ -78,7 +78,7 @@ export interface Camera extends Object3D {
  * Creates 6 cameras that render to a [WebGLCubeRenderTarget](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/WebGLCubeRenderTarget).
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubeCamera) page for details.
- * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/CubeCamera) page for a live demo.
+ * See the [materials / cubemap / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_cubemap_dynamic) page for a live demo.
  *
  * ### Examples
  * [materials / cubemap / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_cubemap_dynamic)
@@ -497,7 +497,7 @@ export interface PerspectiveCamera extends Camera {
  * Dual [PerspectiveCamera](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PerspectiveCamera)s used for effects such as [3D Anaglyph](https://en.wikipedia.org/wiki/Anaglyph_3D) or [Parallax Barrier](https://en.wikipedia.org/wiki/parallax_barrier).
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/StereoCamera) page for details.
- * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera/StereoCamera) page for a live demo.
+ * See the [effects / stereo](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_stereo) page for a live demo.
  *
  * ### Examples
  * [effects / anaglyph](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_effects_anaglyph) |

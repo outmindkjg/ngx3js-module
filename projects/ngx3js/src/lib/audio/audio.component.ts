@@ -208,11 +208,6 @@ export class NgxAudioComponent extends NgxAbstractObject3dComponent implements O
 	private analyser: I3JS.AudioAnalyser = null;
 
 	/**
-	 * Audio loader of audio component
-	 */
-	private static audioLoader: I3JS.AudioLoader = null;
-
-	/**
 	 * Loads audio
 	 * @param url
 	 * @param onLoad
@@ -227,10 +222,8 @@ export class NgxAudioComponent extends NgxAbstractObject3dComponent implements O
 	 * @param onLoad
 	 */
 	public static loadAudio(url: string, onLoad: (audioBuffer: AudioBuffer) => void) {
-		if (this.audioLoader === null) {
-			this.audioLoader = new N3JS.AudioLoader(NgxThreeUtil.getLoadingManager());
-		}
-		this.audioLoader.load(url, (audioBuffer: AudioBuffer): void => {
+		const audioLoader : I3JS.AudioLoader = NgxThreeUtil.getLoader('audioLoader', N3JS.AudioLoader);
+		audioLoader.load(url, (audioBuffer: AudioBuffer): void => {
 			onLoad(audioBuffer);
 		});
 	}

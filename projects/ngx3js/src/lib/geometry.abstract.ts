@@ -31,6 +31,10 @@ import { NgxTranslationComponent } from './translation/translation.component';
  * 			provide: NgxAbstractGeometryComponent,
  * 			useExisting: forwardRef(() => NgxXxxComponent),
  * 		},
+ * 		{
+ * 			provide: NgxAbstractSubscribeComponent,
+ * 			useExisting: forwardRef(() => NgxXxxComponent),
+ * 		}
  * 	],
  * })
  * export class NgxXxxComponent extends NgxAbstractGeometryComponent implements OnInit {

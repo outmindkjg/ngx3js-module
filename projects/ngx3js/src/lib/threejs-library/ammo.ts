@@ -1,9 +1,10 @@
 // @ts-nocheck
-// @ignore
 
 import * as _AMMO from './ammo.wasm';
 
 import * as Ammo from './ammo-type';
+
+let _loadedAmmo : Ammo.AmmoType = null;
 
 /**
  * Ammos init
@@ -12,6 +13,11 @@ import * as Ammo from './ammo-type';
  * @returns init
  */
 export function AmmoInit<T>(target?: T): Promise<T & Ammo.AmmoType> {
-	return _AMMO.default(target);
+	if (_loadedAmmo !== null) {
+		return _loadedAmmo;
+	} else {
+		_loadedAmmo = _AMMO.default(target);
+		return _loadedAmmo;
+	}
 }
 

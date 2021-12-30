@@ -152,11 +152,6 @@ export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements 
 	private tool: any = null;
 
 	/**
-	 * Audio loader of tools component
-	 */
-	private audioLoader: I3JS.AudioLoader = null;
-
-	/**
 	 * Gets audio
 	 * @returns audio
 	 */
@@ -221,11 +216,9 @@ export class NgxToolsComponent extends NgxAbstractSubscribeComponent implements 
 					}
 					break;
 				case 'audio':
-					if (this.audioLoader === null) {
-						this.audioLoader = new N3JS.AudioLoader();
-					}
+					const audioLoader : I3JS.AudioLoader = NgxThreeUtil.getLoader('audioLoader', N3JS.AudioLoader);
 					tool = {};
-					this.audioLoader.load(NgxThreeUtil.getStoreUrl(this.url), (audioBuffer: AudioBuffer) => {
+					audioLoader.load(NgxThreeUtil.getStoreUrl(this.url), (audioBuffer: AudioBuffer) => {
 						this.tool = audioBuffer;
 						this.setObject(this.tool);
 						this.setSubscribeNext('audio');

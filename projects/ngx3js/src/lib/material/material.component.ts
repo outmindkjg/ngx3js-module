@@ -2477,7 +2477,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								}
 							});
 						}
-						const nodeMaterialLoader = new N3JS.NodeMaterialLoader(undefined, modeMateriallibrary);
+						const nodeMaterialLoader : I3JS.NodeMaterialLoader = NgxThreeUtil.getLoader('nodeMaterialLoader', N3JS.NodeMaterialLoader, modeMateriallibrary);
 						nodeMaterialLoader.load(NgxThreeUtil.getStoreUrl(this.storageName), (material: I3JS.Material) => {
 							this.setUserData('storageSource', nodeMaterialLoader);
 							this.setMaterial(material);

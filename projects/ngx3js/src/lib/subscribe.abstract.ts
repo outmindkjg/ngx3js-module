@@ -19,6 +19,21 @@ import { NgxThreeUtil } from './interface';
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractSubscribeComponent) page for details.
  *
+ * ```ts
+ * _@Component({
+ * 	providers: [
+ * 		{
+ * 			provide: NgxAbstractSubscribeComponent,
+ * 			useExisting: forwardRef(() => NgxXxxComponent),
+ * 		},
+ * 	],
+ * })
+ * export class NgxXxxComponent extends NgxAbstractSubscribeComponent implements OnInit {
+ * 	constructor() {
+ * 		super();
+ * 	}
+ * }
+ * ```
  */
 @Component({
 	template: '',
