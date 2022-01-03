@@ -1,10 +1,4 @@
-import {
-	Component,
-	ContentChildren, forwardRef, Input,
-	OnInit,
-	QueryList,
-	SimpleChanges
-} from '@angular/core';
+import { Component, ContentChildren, forwardRef, Input, OnInit, QueryList, SimpleChanges } from '@angular/core';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxCameraComponent } from '../camera/camera.component';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
@@ -229,7 +223,8 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 	/**
 	 * Content children of effect component
 	 */
-	@ContentChildren(NgxRenderTargetComponent, { descendants: false }) private renderTargetList: QueryList<NgxRenderTargetComponent>;
+	@ContentChildren(NgxRenderTargetComponent, { descendants: false })
+	private renderTargetList: QueryList<NgxRenderTargetComponent>;
 
 	/**
 	 * Gets render target
@@ -237,10 +232,7 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 	 * @returns render target
 	 */
 	private getRenderTarget<T>(): T {
-		if (
-			NgxThreeUtil.isNotNull(this.renderTargetList) &&
-			this.renderTargetList.length > 0
-		) {
+		if (NgxThreeUtil.isNotNull(this.renderTargetList) && this.renderTargetList.length > 0) {
 			return this.renderTargetList.first.getRenderTarget();
 		}
 		return undefined;
@@ -392,11 +384,7 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 	 * @param [def]
 	 * @returns view port size
 	 */
-	private getViewPortSize(
-		size: number | string,
-		cameraSize: number,
-		def?: number | string
-	): number {
+	private getViewPortSize(size: number | string, cameraSize: number, def?: number | string): number {
 		const baseSize = NgxThreeUtil.getTypeSafe(size, def);
 		if (NgxThreeUtil.isNotNull(baseSize)) {
 			if (typeof baseSize == 'string') {
@@ -451,9 +439,7 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 			const cHeight = this.getHeight();
 			return cWidth / cHeight;
 		} else {
-			return this.rendererWidth > 0 && this.rendererHeight > 0
-				? this.rendererWidth / this.rendererHeight
-				: 1;
+			return this.rendererWidth > 0 && this.rendererHeight > 0 ? this.rendererWidth / this.rendererHeight : 1;
 		}
 	}
 
@@ -469,13 +455,8 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
-		if (
-			this.effectEffect !== null &&
-			this.effectEffect instanceof N3JS.AsciiEffect
-		) {
-			this.effectEffect.domElement.parentNode.removeChild(
-				this.effectEffect.domElement
-			);
+		if (this.effectEffect !== null && this.effectEffect instanceof N3JS.AsciiEffect) {
+			this.effectEffect.domElement.parentNode.removeChild(this.effectEffect.domElement);
 		}
 		super.ngOnDestroy();
 	}
@@ -500,11 +481,7 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 	 */
 	ngAfterContentInit(): void {
 		this.subscribeListQueryChange(this.passList, 'passList', 'pass');
-		this.subscribeListQueryChange(
-			this.renderTargetList,
-			'renderTargetList',
-			'rendertarget'
-		);
+		this.subscribeListQueryChange(this.renderTargetList, 'renderTargetList', 'rendertarget');
 		super.ngAfterContentInit();
 	}
 
@@ -533,14 +510,11 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 		this.rendererHeight = height;
 		this.pixelRatio = pixelRatio;
 		if (this.effectEffect !== null) {
-			if (
-				this.effectEffect instanceof N3JS.AsciiEffect ||
-				this.effectEffect instanceof N3JS.PeppersGhostEffect
-			) {
-				this.effectEffect.setSize(this.rendererWidth, this.rendererHeight);
-			} else if (this.effectEffect instanceof N3JS.EffectComposer) {
+			if (this.effectEffect instanceof N3JS.EffectComposer) {
 				this.effectEffect.setSize(this.rendererWidth, this.rendererHeight);
 				this.effectEffect.setPixelRatio(this.pixelRatio);
+			} else if (this.effectEffect.setSize !== undefined) {
+				this.effectEffect.setSize(this.rendererWidth, this.rendererHeight);
 			}
 		}
 	}
@@ -553,21 +527,11 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 	public render(renderer: I3JS.WebGLRenderer, renderTimer: IRendererTimer) {
 		if (this.effectEffect !== null) {
 			if (this.viewport) {
-				renderer.setViewport(
-					this.getX(),
-					this.getY(),
-					this.getWidth(),
-					this.getHeight()
-				);
+				renderer.setViewport(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 			}
 			if (this.scissorTest) {
 				renderer.setScissorTest(true);
-				renderer.setScissor(
-					this.getScissorX(),
-					this.getScissorY(),
-					this.getScissorWidth(),
-					this.getScissorHeight()
-				);
+				renderer.setScissor(this.getScissorX(), this.getScissorY(), this.getScissorWidth(), this.getScissorHeight());
 			}
 			if (this.viewportAspect && NgxThreeUtil.isNotNull(this._effectCamera)) {
 				if (this._effectCamera instanceof N3JS.PerspectiveCamera) {
@@ -675,12 +639,7 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 							const scene = this.getScene(this._effectScene);
 							const camera = this.getCamera(this._effectCamera);
 							this.passList.forEach((pass) => {
-								pass.setEffectComposer(
-									scene,
-									camera,
-									this.effectEffect,
-									this._effectRenderer
-								);
+								pass.setEffectComposer(scene, camera, this.effectEffect, this._effectRenderer);
 							});
 						}
 						break;
@@ -718,16 +677,8 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 	 * @param camera
 	 * @param scene
 	 */
-	public setRenderer(
-		webGLRenderer: I3JS.WebGLRenderer,
-		camera: I3JS.Camera,
-		scene: I3JS.Scene
-	) {
-		if (
-			this._effectRenderer !== webGLRenderer ||
-			this._effectCamera !== camera ||
-			this._effectScene !== scene
-		) {
+	public setRenderer(webGLRenderer: I3JS.WebGLRenderer, camera: I3JS.Camera, scene: I3JS.Scene) {
+		if (this._effectRenderer !== webGLRenderer || this._effectCamera !== camera || this._effectScene !== scene) {
 			this._effectRenderer = webGLRenderer;
 			this._effectCamera = camera;
 			this._effectScene = scene;
@@ -759,13 +710,8 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 			(this.effectEffect === null || this._needUpdate)
 		) {
 			this.needUpdate = false;
-			if (
-				this.effectEffect !== null &&
-				this.effectEffect instanceof N3JS.AsciiEffect
-			) {
-				this.effectEffect.domElement.parentNode.removeChild(
-					this.effectEffect.domElement
-				);
+			if (this.effectEffect !== null && this.effectEffect instanceof N3JS.AsciiEffect) {
+				this.effectEffect.domElement.parentNode.removeChild(this.effectEffect.domElement);
 			}
 			switch (this.type.toLowerCase()) {
 				case 'asciieffect':
@@ -787,40 +733,36 @@ export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnI
 					asciiEffect.domElement.style.top = '0px';
 					asciiEffect.domElement.style.color = 'white';
 					asciiEffect.domElement.style.backgroundColor = 'black';
-					this._effectRenderer.domElement.parentNode.appendChild(
-						asciiEffect.domElement
-					);
+					this._effectRenderer.domElement.parentNode.appendChild(asciiEffect.domElement);
 					this.effectEffect = asciiEffect;
 					asciiEffect.setSize(this.rendererWidth, this.rendererHeight);
 					break;
 				case 'peppersghosteffect':
 				case 'peppersghost':
-					const peppersGhostEffect = new N3JS.PeppersGhostEffect(
-						this._effectRenderer
-					);
+					const peppersGhostEffect = new N3JS.PeppersGhostEffect(this._effectRenderer);
 					peppersGhostEffect.cameraDistance = this.getCameraDistance(15);
 					peppersGhostEffect.reflectFromAbove = this.getReflectFromAbove(false);
 					this.effectEffect = peppersGhostEffect;
 					break;
 				case 'outlineeffect':
 				case 'outline':
-					const outlineEffect = new N3JS.OutlineEffect(
-						this._effectRenderer,
-						{}
-					);
+					const outlineEffect = new N3JS.OutlineEffect(this._effectRenderer, {});
 					this.effectEffect = outlineEffect;
 					break;
 				case 'parallaxbarriereffect':
 				case 'parallaxbarrier':
-					this.effectEffect = new N3JS.ParallaxBarrierEffect(
-						this._effectRenderer
-					);
+					this.effectEffect = new N3JS.ParallaxBarrierEffect(this._effectRenderer);
+					break;
+				case 'anaglypheffect':
+				case 'anaglyph':
+					this.effectEffect = new N3JS.AnaglyphEffect(this._effectRenderer);
+					break;
+				case 'stereoeffect':
+				case 'Stereo':
+					this.effectEffect = new N3JS.StereoEffect(this._effectRenderer);
 					break;
 				default:
-					const effectEffect = new N3JS.EffectComposer(
-						this._effectRenderer,
-						this.getRenderTarget()
-					);
+					const effectEffect = new N3JS.EffectComposer(this._effectRenderer, this.getRenderTarget());
 					effectEffect.setPixelRatio(this.pixelRatio);
 					this.effectEffect = effectEffect;
 					if (NgxThreeUtil.isNotNull(this.renderToScreen)) {

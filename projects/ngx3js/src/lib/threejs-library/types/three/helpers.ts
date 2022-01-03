@@ -480,7 +480,7 @@ export interface PlaneHelper extends LineSegments {
 	 * @param size side length of plane helper. Default is 1.
 	 * @param color The color of the helper. Default is 0xffff00.
 	 */
-	new (plane: Plane, size?: number, hex?: number): this;
+	new (plane: Plane, size?: number, hex?: ColorRepresentation): this;
 
 	/**
 	 * @default 'PlaneHelper'

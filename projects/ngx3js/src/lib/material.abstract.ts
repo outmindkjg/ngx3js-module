@@ -509,7 +509,7 @@ export class NgxAbstractMaterialComponent
 			const clippingPlanes: I3JS.Plane[] = [];
 			this.clippingPlanes.forEach((plane) => {
 				if (plane instanceof NgxPlaneComponent) {
-					clippingPlanes.push(plane.getWorldPlane());
+					clippingPlanes.push(plane.getPlane());
 				} else {
 					clippingPlanes.push(plane);
 				}

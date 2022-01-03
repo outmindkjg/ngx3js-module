@@ -19,10 +19,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 		},
 	],
 })
-export class NgxPlaneComponent
-	extends NgxAbstractSubscribeComponent
-	implements OnInit
-{
+export class NgxPlaneComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
 	 * The x of plane component
 	 */
@@ -42,6 +39,11 @@ export class NgxPlaneComponent
 	 * The w of plane component
 	 */
 	@Input() public w: number = null;
+
+	/**
+	 * The negate of plane component
+	 */
+	@Input() public negate: boolean = null;
 
 	/**
 	 * Creates an instance of plane component.
@@ -140,6 +142,42 @@ export class NgxPlaneComponent
 		return this.worldPlane;
 	}
 
+	protected applyChanges(changes: string[]): void {
+		if (this.plane !== null) {
+			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
+				this.getPlane();
+				return;
+			}
+			if (NgxThreeUtil.isIndexOf(changes, ['init'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['x', 'y', 'z', 'w', 'negate']);
+			}
+			if (NgxThreeUtil.isIndexOf(changes, ['negate'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['x', 'y', 'z', 'w']);
+			}
+
+			changes.forEach((change) => {
+				switch (change.toLowerCase()) {
+					case 'x':
+						this.plane.normal.x = NgxThreeUtil.getTypeSafe(this.x, 0);
+						break;
+					case 'y':
+						this.plane.normal.y = NgxThreeUtil.getTypeSafe(this.y, 0);
+						break;
+					case 'z':
+						this.plane.normal.z = NgxThreeUtil.getTypeSafe(this.z, 0);
+						break;
+					case 'w':
+						this.plane.constant = NgxThreeUtil.getTypeSafe(this.w, 0);
+						break;
+				}
+			});
+			if (NgxThreeUtil.isIndexOf(changes, ['negate']) && NgxThreeUtil.isNotNull(this.negate) && this.negate) {
+				this.plane.negate();
+			}
+			super.applyChanges(changes);
+		}
+	}
+
 	/**
 	 * Gets plane
 	 * @returns plane
@@ -153,10 +191,7 @@ export class NgxPlaneComponent
 			);
 			this.setObject(this.plane);
 		}
-		this.plane.set(
-			NgxThreeUtil.getVector3Safe(this.x, this.y, this.z),
-			NgxThreeUtil.getTypeSafe(this.w, 0)
-		);
+		this.plane.set(NgxThreeUtil.getVector3Safe(this.x, this.y, this.z), NgxThreeUtil.getTypeSafe(this.w, 0));
 		return this.plane;
 	}
 }

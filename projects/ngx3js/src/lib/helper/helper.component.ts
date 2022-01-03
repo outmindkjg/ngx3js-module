@@ -1,12 +1,7 @@
-import {
-	Component,
-	forwardRef,
-	Input,
-	OnInit,
-	SimpleChanges
-} from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { INgxColor } from '../ngx-interface';
 import { NgxAbstractObject3dComponent } from '../object3d.abstract';
+import { NgxPlaneComponent } from '../plane/plane.component';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 
@@ -14,7 +9,7 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
  * The Helper component.
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HelperComponent) page for details.
- * 
+ *
  * |  Three Type        | Type Key           | Acceptable Input          |
  * |:--------------------------|:--------------------------|:--------------------------|
  * | Gyroscope | GyroscopeHelper, Gyroscope |  |
@@ -75,10 +70,7 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 		},
 	],
 })
-export class NgxHelperComponent
-	extends NgxAbstractObject3dComponent
-	implements OnInit
-{
+export class NgxHelperComponent extends NgxAbstractObject3dComponent implements OnInit {
 	/**
 	 * the type of helper
 	 *
@@ -253,6 +245,11 @@ export class NgxHelperComponent
 	@Input() public matrix: I3JS.Matrix4 = null;
 
 	/**
+	 * Input  of ngx helper component
+	 */
+	@Input() public plane: I3JS.Plane | NgxPlaneComponent = null;
+
+	/**
 	 * this children of Gyroscope
 	 */
 	@Input() public children: any[] = null;
@@ -307,9 +304,7 @@ export class NgxHelperComponent
 			targetMesh instanceof N3JS.Object3D &&
 			NgxThreeUtil.isNotNull(targetMesh.userData.refTarget)
 		) {
-			targetMesh =
-				NgxThreeUtil.getObject3d(targetMesh.userData.refTarget, false) ||
-				targetMesh;
+			targetMesh = NgxThreeUtil.getObject3d(targetMesh.userData.refTarget, false) || targetMesh;
 		}
 		return targetMesh;
 	}
@@ -362,20 +357,14 @@ export class NgxHelperComponent
 	 * @returns dir
 	 */
 	private getDirection(def?: I3JS.Vector3): I3JS.Vector3 {
-		if (
-			NgxThreeUtil.isNotNull(this.arrowFrom) &&
-			NgxThreeUtil.isNotNull(this.arrowTo)
-		) {
+		if (NgxThreeUtil.isNotNull(this.arrowFrom) && NgxThreeUtil.isNotNull(this.arrowTo)) {
 			const arrowFrom: I3JS.Vector3 = this.getObjectPosition(this.arrowFrom);
 			const arrowTo: I3JS.Vector3 = this.getObjectPosition(this.arrowTo);
 			const arrowDirection = new N3JS.Vector3();
 			arrowDirection.subVectors(arrowTo, arrowFrom).normalize();
 			return arrowDirection;
 		} else {
-			return NgxThreeUtil.getTypeSafe(
-				NgxThreeUtil.getVector3Safe(this.dirX, this.dirY, this.dirZ),
-				def
-			);
+			return NgxThreeUtil.getTypeSafe(NgxThreeUtil.getVector3Safe(this.dirX, this.dirY, this.dirZ), def);
 		}
 	}
 
@@ -395,12 +384,7 @@ export class NgxHelperComponent
 			NgxThreeUtil.isNotNull(this.originZ)
 		) {
 			origin = origin.clone();
-			origin.add(
-				NgxThreeUtil.getTypeSafe(
-					NgxThreeUtil.getVector3Safe(this.originX, this.originY, this.originZ),
-					def
-				)
-			);
+			origin.add(NgxThreeUtil.getTypeSafe(NgxThreeUtil.getVector3Safe(this.originX, this.originY, this.originZ), def));
 		}
 		return origin;
 	}
@@ -675,10 +659,7 @@ export class NgxHelperComponent
 				case 'camerahelper':
 				case 'camera':
 					let cameraTarget = this.getTarget(this.parent);
-					if (
-						cameraTarget instanceof N3JS.Light &&
-						cameraTarget.shadow.camera
-					) {
+					if (cameraTarget instanceof N3JS.Light && cameraTarget.shadow.camera) {
 						basemesh = new N3JS.CameraHelper(cameraTarget.shadow.camera);
 					} else if (cameraTarget instanceof N3JS.Camera) {
 						basemesh = new N3JS.CameraHelper(cameraTarget);
@@ -717,39 +698,28 @@ export class NgxHelperComponent
 						basemesh = new N3JS.PointLightHelper(
 							lightTarget,
 							NgxThreeUtil.getTypeSafe(this.size, 10),
-							NgxThreeUtil.getColorSafe(this.color, 0xffff00),
+							NgxThreeUtil.getColorSafe(this.color, 0xffff00)
 						);
 					} else if (lightTarget instanceof N3JS.SpotLight) {
 						basemesh = new N3JS.SpotLightHelper(lightTarget, NgxThreeUtil.getColorSafe(this.color));
 					} else if (lightTarget instanceof N3JS.RectAreaLight) {
-						basemesh = new N3JS.RectAreaLightHelper(
-							lightTarget,
-							NgxThreeUtil.getColorSafe(this.color)
-						);
+						basemesh = new N3JS.RectAreaLightHelper(lightTarget, NgxThreeUtil.getColorSafe(this.color));
 					} else if (lightTarget instanceof N3JS.LightProbe) {
-						basemesh = new N3JS.LightProbeHelper(
-							lightTarget,
-							NgxThreeUtil.getTypeSafe(this.size, 10)
-						);
+						basemesh = new N3JS.LightProbeHelper(lightTarget, NgxThreeUtil.getTypeSafe(this.size, 10));
 					}
 					break;
 				case 'planehelper':
 				case 'plane':
-					if (
-						this.parent instanceof N3JS.Mesh &&
-						this.parent.material instanceof N3JS.Material
-					) {
+					if (NgxThreeUtil.isNotNull(this.plane)) {
+						const clippingPlane = this.plane instanceof N3JS.Plane ? this.plane : this.plane.getPlane();
+						basemesh = new N3JS.PlaneHelper(clippingPlane, NgxThreeUtil.getTypeSafe(this.size, 10), this.getColor());
+					} else if (this.parent instanceof N3JS.Mesh && this.parent.material instanceof N3JS.Material) {
 						basemesh = new N3JS.Group();
-						const clippingPlanes: I3JS.Plane[] =
-							this.parent.material.clippingPlanes;
+						const clippingPlanes: I3JS.Plane[] = this.parent.material.clippingPlanes;
 						if (clippingPlanes !== null && clippingPlanes !== undefined) {
 							clippingPlanes.forEach((clippingPlane) => {
 								basemesh.add(
-									new N3JS.PlaneHelper(
-										clippingPlane,
-										NgxThreeUtil.getTypeSafe(this.size, 10),
-										this.getColorHex()
-									)
+									new N3JS.PlaneHelper(clippingPlane, NgxThreeUtil.getTypeSafe(this.size, 10), this.getColor())
 								);
 							});
 						}
@@ -820,19 +790,11 @@ export class NgxHelperComponent
 					} else if (NgxThreeUtil.isNotNull(this.materialTransparent)) {
 						basemeshMaterial.transparent = this.materialTransparent;
 					}
-					if (
-						NgxThreeUtil.isNotNull(this.materialColor) &&
-						basemeshMaterial['color'] !== undefined
-					) {
-						basemeshMaterial['color'] = NgxThreeUtil.getColorSafe(
-							this.materialColor
-						);
+					if (NgxThreeUtil.isNotNull(this.materialColor) && basemeshMaterial['color'] !== undefined) {
+						basemeshMaterial['color'] = NgxThreeUtil.getColorSafe(this.materialColor);
 					}
 					if (NgxThreeUtil.isNotNull(this.materialBlending)) {
-						basemeshMaterial.blending = NgxThreeUtil.getBlendingSafe(
-							this.materialBlending,
-							'NormalBlending'
-						);
+						basemeshMaterial.blending = NgxThreeUtil.getBlendingSafe(this.materialBlending, 'NormalBlending');
 					}
 					if (NgxThreeUtil.isNotNull(this.depthWrite)) {
 						basemeshMaterial.depthWrite = this.getDepthWrite(false);

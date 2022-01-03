@@ -591,9 +591,11 @@ export class NgxRendererComponent
 			this.requiredExtensions.forEach((extension) => {
 				if (!this.isAvailable(extension)) {
 					switch (extension) {
+						case 'compressed_texture_pvrtc':
 						case 'compressed':
 							errorCode = 'WEBGL_compressed_texture_pvrtc';
 							break;
+						case 'depth_texture':
 						case 'depth':
 							errorCode = 'WEBGL_depth_texture';
 							break;
@@ -913,42 +915,6 @@ export class NgxRendererComponent
 	 */
 	private getClearAlpha(def?: number): number {
 		return NgxThreeUtil.getTypeSafe(this.clearAlpha, def);
-	}
-
-	/**
-	 * Gets tone mapping
-	 *
-	 * |   Three Type               | Value String(case insensitive) |
-	 * |:--------------------------|--------------------------:|
-	 * | THREE.LinearToneMapping | LinearToneMapping, Linear |
-	 * | THREE.ReinhardToneMapping | ReinhardToneMapping, Reinhard |
-	 * | THREE.CineonToneMapping | CineonToneMapping, CineonTone |
-	 * | THREE.ACESFilmicToneMapping | ACESFilmicToneMapping, ACESFilmic |
-	 * | THREE.NoToneMapping | NoToneMapping, No |
-	 *
-	 * @param [def]
-	 * @returns tone mapping
-	 */
-	private getToneMapping(def?: string): I3JS.ToneMapping {
-		const toneMapping = NgxThreeUtil.getTypeSafe(this.toneMapping, def, '');
-		switch (toneMapping.toLowerCase()) {
-			case 'lineartonemapping':
-			case 'linear':
-				return N3JS.LinearToneMapping;
-			case 'reinhardtonemapping':
-			case 'reinhard':
-				return N3JS.ReinhardToneMapping;
-			case 'cineontonemapping':
-			case 'cineon':
-				return N3JS.CineonToneMapping;
-			case 'acesfilmictonemapping':
-			case 'acesfilmic':
-				return N3JS.ACESFilmicToneMapping;
-			case 'notonemapping':
-			case 'no':
-			default:
-				return N3JS.NoToneMapping;
-		}
 	}
 
 	/**
@@ -1367,7 +1333,7 @@ export class NgxRendererComponent
 								this.renderer.setClearAlpha(this.getClearAlpha());
 							}
 							if (NgxThreeUtil.isNotNull(this.toneMapping)) {
-								this.renderer.toneMapping = this.getToneMapping();
+								this.renderer.toneMapping = NgxThreeUtil.getToneMappingSafe(this.toneMapping);
 							}
 							if (NgxThreeUtil.isNotNull(this.toneMappingExposure)) {
 								this.renderer.toneMappingExposure = this.toneMappingExposure;

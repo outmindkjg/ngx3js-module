@@ -88,10 +88,15 @@ export class NgxLocalStorageService {
 	 * @returns store object
 	 */
 	private getStoreObject(object: I3JS.Object3D, options: any = null): I3JS.Object3D {
-		if (object !== null && options !== null && options.onLoad !== null && typeof options.onLoad === 'function') {
-			const result = options.onLoad(object);
-			if (result !== null && result instanceof N3JS.Object3D) {
-				return result;
+		if (options !== null && object !== null) {
+			if (options.firstChild && object.children.length > 0) {
+				object = object.children[0];
+			}
+			if (options.onLoad !== null && typeof options.onLoad === 'function') {
+				const result = options.onLoad(object);
+				if (result !== null && result instanceof N3JS.Object3D) {
+					return result;
+				}
 			}
 		}
 		return object;

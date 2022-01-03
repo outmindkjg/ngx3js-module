@@ -672,6 +672,12 @@ export class NgxGeometryComponent
 	@Input() public curveOption: any = null;
 
 	/**
+	 * The curveOption of geometry component
+	 */
+	 @Input() public curveScale: number = null;
+	 
+
+	/**
 	 * The curveNormal of geometry component
 	 */
 	@Input() public curveNormal: boolean = null;
@@ -995,7 +1001,7 @@ export class NgxGeometryComponent
 			if (typeof curve === 'string') {
 				curveLine = NgxCurveUtils.getCurve(
 					curve,
-					NgxThreeUtil.getTypeSafe(this.scale, 1),
+					NgxThreeUtil.getTypeSafe(this.curveScale, 1),
 					this.curveOption
 				);
 			} else {
