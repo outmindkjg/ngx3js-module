@@ -1149,6 +1149,7 @@ export class NgxAbstractGeometryComponent
 					if (NgxThreeUtil.isNotNull(info['updateMorphTargets'])) {
 						info['updateMorphTargets']();
 					}
+					NgxThreeUtil.setSubscribeNext(info, 'loaded');
 				});
 			} else if (this.geometry !== geometry) {
 				this.geometry = geometry;

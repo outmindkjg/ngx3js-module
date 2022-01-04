@@ -1771,7 +1771,7 @@ export class NgxThreeUtil {
 			pmremGenerator.dispose();
 			return pmremGeneratorTexture;
 		} else if (this.isNotNull(texture.getTexture)) {
-			const foundTexture = texture.getTexture();
+			const foundTexture = texture.getTexture(refType);
 			if (!(foundTexture instanceof N3JS.VideoTexture) || foundTexture.image.readyState > 0) {
 				return foundTexture;
 			}

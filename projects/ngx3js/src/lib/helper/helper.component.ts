@@ -100,6 +100,11 @@ export class NgxHelperComponent extends NgxAbstractObject3dComponent implements 
 	@Input() public type: string = 'axes';
 
 	/**
+	 * Input  of ngx helper component
+	 */
+	@Input() public parentAdd: boolean = true;
+
+	/**
 	 * color -- The desired color.
 	 */
 	@Input() public color: string | number = null;
@@ -551,7 +556,7 @@ export class NgxHelperComponent extends NgxAbstractObject3dComponent implements 
 				this.parentObject3d.updateMatrixWorld(true);
 			}
 			this.helper = null;
-			let parentAdd: boolean = true;
+			let parentAdd: boolean = this.parentAdd;
 			let basemesh: any = null;
 			switch (this.type.toLowerCase()) {
 				case 'gyroscopehelper':

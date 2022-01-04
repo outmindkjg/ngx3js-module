@@ -131,6 +131,9 @@ export interface IStorageOption {
 
 	/** dataType */
 	dataType?: any;
+
+	/** auto select first child */
+	firstChild? : boolean;
 }
 
 /**
