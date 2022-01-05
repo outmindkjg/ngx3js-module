@@ -1705,47 +1705,66 @@ export class NgxThreeUtil {
 				if (this.isNull(nextKey)) {
 					callBack('anyevent');
 				} else {
-					switch (nextKey.toLowerCase()) {
-						case 'lookat':
-							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'position', 'lookat'])) {
-								callBack('lookat');
-							}
+					const nextKeyList = nextKey.split(',');
+					let isCalled : boolean = false;
+					for(let i = 0; i < nextKeyList.length; i++) {
+						const key = nextKeyList[i];
+						if (isCalled) {
 							break;
-						case 'position':
-							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'position'])) {
-								callBack('position');
-							}
-							break;
-						case 'rotation':
-							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'rotation'])) {
-								callBack('rotation');
-							}
-							break;
-						case 'scale':
-							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'scale'])) {
-								callBack('scale');
-							}
-							break;
-						case 'geometry':
-							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'geometry', 'loaded'])) {
-								callBack('geometry');
-							}
-							break;
-						case 'material':
-							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'material', 'loaded'])) {
-								callBack('material');
-							}
-							break;
-						case 'texture':
-							if (this.isIndexOf(keyList, ['object3d', 'mesh', 'material', 'texture', 'loaded'])) {
-								callBack('texture');
-							}
-							break;
-						default:
-							if (keyList.indexOf(nextKey.toLowerCase()) > -1) {
-								callBack(nextKey);
-							}
-							break;
+						}
+						if (this.isNull(key)) {
+							continue;
+						}
+						switch (key.toLowerCase()) {
+							case 'lookat':
+								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'position', 'lookat'])) {
+									callBack('lookat');
+									isCalled = true;
+								}
+								break;
+							case 'position':
+								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'position'])) {
+									callBack('position');
+									isCalled = true;
+								}
+								break;
+							case 'rotation':
+								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'rotation'])) {
+									callBack('rotation');
+									isCalled = true;
+								}
+								break;
+							case 'scale':
+								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'scale'])) {
+									callBack('scale');
+									isCalled = true;
+								}
+								break;
+							case 'geometry':
+								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'geometry', 'loaded'])) {
+									callBack('geometry');
+									isCalled = true;
+								}
+								break;
+							case 'material':
+								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'material', 'loaded'])) {
+									callBack('material');
+									isCalled = true;
+								}
+								break;
+							case 'texture':
+								if (this.isIndexOf(keyList, ['object3d', 'mesh', 'material', 'texture', 'loaded'])) {
+									callBack('texture');
+									isCalled = true;
+								}
+								break;
+							default:
+								if (keyList.includes(key.toLowerCase())) {
+									callBack(key);
+									isCalled = true;
+								}
+								break;
+						}
 					}
 				}
 			});

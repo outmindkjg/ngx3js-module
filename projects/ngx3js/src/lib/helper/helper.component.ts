@@ -290,16 +290,6 @@ export class NgxHelperComponent extends NgxAbstractObject3dComponent implements 
 		let targetMesh: I3JS.Object3D = null;
 		if (NgxThreeUtil.isNotNull(this.target)) {
 			targetMesh = NgxThreeUtil.getObject3d(this.target, false);
-			this.subscribeRefer(
-				'target',
-				NgxThreeUtil.getSubscribe(
-					this.target,
-					() => {
-						this.needUpdate = true;
-					},
-					'loaded'
-				)
-			);
 		}
 		if (targetMesh === null && NgxThreeUtil.isNotNull(target)) {
 			targetMesh = NgxThreeUtil.getObject3d(target, false);
@@ -310,6 +300,18 @@ export class NgxHelperComponent extends NgxAbstractObject3dComponent implements 
 			NgxThreeUtil.isNotNull(targetMesh.userData.refTarget)
 		) {
 			targetMesh = NgxThreeUtil.getObject3d(targetMesh.userData.refTarget, false) || targetMesh;
+		}
+		if (targetMesh !== null) {
+			this.subscribeRefer(
+				'target',
+				NgxThreeUtil.getSubscribe(
+					targetMesh,
+					() => {
+						this.needUpdate = true;
+					},
+					'loaded,geometry'
+				)
+			);
 		}
 		return targetMesh;
 	}

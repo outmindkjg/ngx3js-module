@@ -1,7 +1,6 @@
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { ICurveClass, ICurvesNormalParameters, IRendererTimer } from '../ngx-interface';
 import { CurvesCircle } from './curves/circle';
-import * as Curves from './curves/curves';
 import * as GSAP from './curves/gsap';
 import { CurvesLine } from './curves/line';
 import * as POLYGON from './curves/polygon';
@@ -11,33 +10,33 @@ import { CurvesRollerCoaster } from './curves/rollercoaster';
 export const CurveConf: {
 	[key: string]: ICurveClass | string;
 } = {
-	grannyknotcurve: Curves.CurvesGrannyKnot,
+	grannyknotcurve: N3JS.Curves.GrannyKnot,
 	grannyknot: 'grannyknotcurve',
-	heartcurve: Curves.CurvesHeartCurve,
+	heartcurve: N3JS.Curves.HeartCurve,
 	heart: 'heartcurve',
-	vivianicurve: Curves.CurvesVivianiCurve,
+	vivianicurve: N3JS.Curves.VivianiCurve,
 	viviani: 'vivianicurve',
-	knotcurve: Curves.CurvesKnotCurve,
+	knotcurve: N3JS.Curves.KnotCurve,
 	knot: 'knotcurve',
-	helixcurve: Curves.CurvesHelixCurve,
+	helixcurve: N3JS.Curves.HelixCurve,
 	helix: 'helixcurve',
-	trefoilknotcurve: Curves.CurvesTrefoilKnot,
+	trefoilknotcurve: N3JS.Curves.TrefoilKnot,
 	trefoilknot: 'trefoilknotcurve',
-	torusknotcurve: Curves.CurvesTorusKnot,
+	torusknotcurve: N3JS.Curves.TorusKnot,
 	torusknot: 'torusknotcurve',
-	cinquefoilknotcurve: Curves.CurvesCinquefoilKnot,
+	cinquefoilknotcurve: N3JS.Curves.CinquefoilKnot,
 	cinquefoilknot: 'cinquefoilknotcurve',
-	trefoilpolynomialknotcurve: Curves.CurvesTrefoilPolynomialKnot,
+	trefoilpolynomialknotcurve: N3JS.Curves.TrefoilPolynomialKnot,
 	trefoilpolynomialknot: 'trefoilpolynomialknotcurve',
-	decoratedtorusknot4bcurve: Curves.CurvesDecoratedTorusKnot4b,
+	decoratedtorusknot4bcurve: N3JS.Curves.DecoratedTorusKnot4b,
 	decoratedtorusknot4b: 'decoratedtorusknot4bcurve',
-	decoratedtorusknot4acurve: Curves.CurvesDecoratedTorusKnot4a,
+	decoratedtorusknot4acurve: N3JS.Curves.DecoratedTorusKnot4a,
 	decoratedtorusknot4a: 'decoratedtorusknot4acurve',
-	figureeightpolynomialknotcurve: Curves.CurvesFigureEightPolynomialKnot,
+	figureeightpolynomialknotcurve: N3JS.Curves.FigureEightPolynomialKnot,
 	figureeightpolynomialknot: 'figureeightpolynomialknotcurve',
-	decoratedtorusknot5acurve: Curves.CurvesDecoratedTorusKnot5a,
+	decoratedtorusknot5acurve: N3JS.Curves.DecoratedTorusKnot5a,
 	decoratedtorusknot5a: 'decoratedtorusknot5acurve',
-	decoratedtorusknot5ccurve: Curves.CurvesDecoratedTorusKnot5c,
+	decoratedtorusknot5ccurve: N3JS.Curves.DecoratedTorusKnot5c,
 	decoratedtorusknot5c: 'decoratedtorusknot5ccurve',
 	circlecurve: CurvesCircle,
 	circle: 'circlecurve',
