@@ -207,7 +207,7 @@ export class NgxChartComponent extends NgxBaseComponent<any> implements OnChange
 	 * Creates an instance of chart component.
 	 */
 	constructor() {
-		super({}, []);
+		super({}, [], false, false);
 	}
 
 	/**
