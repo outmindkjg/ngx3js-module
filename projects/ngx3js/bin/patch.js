@@ -74,7 +74,7 @@ rl.question(question, function (agree) {
 				packageJson['devDependencies'] = {};
 			}
 			const devDependencies = packageJson['devDependencies'];
-			devDependencies['@types/three'] = '0.135.0';
+			devDependencies['@types/three'] = '0.136.1';
 			const tsconfigJson = readJson('tsconfig');
 			if (tsconfigJson['compilerOptions'] === undefined) {
 				tsconfigJson['compilerOptions'] = {};

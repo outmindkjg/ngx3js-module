@@ -62,6 +62,7 @@ function changePackage(orgPackage, tarPackage, callBack) {
 	const packageJson1 = readJson(orgPackage + 'package');
 	let readMe = readMd(orgPackage + 'README');
 	const dependenciesThree = packageJson1['dependencies']['three'];
+	const dependenciesThreeType = packageJson1['devDependencies']['@types/three'];
 	const packageJson2 = readJson(tarPackage + 'package');
 	packageJson2['version'] = packageJson1['version'];
 	packageJson2['keywords'] = packageJson1['keywords'];
@@ -71,7 +72,8 @@ function changePackage(orgPackage, tarPackage, callBack) {
 	packageJson2['author'] = packageJson1['author'];
 	packageJson2['bugs'] = packageJson1['bugs'];
 	packageJson2['homepage'] = packageJson1['homepage'];
-	readMe = readMe.replace(/three@[0-9\.]+/g,'three@'+ dependenciesThree);
+	readMe = readMe.replace(/ three@[0-9\.]+/g,' three@'+ dependenciesThree);
+	readMe = readMe.replace(/ @types\/three@[0-9\.]+/g,' @types/three@'+ dependenciesThreeType);
 	if (orgPackage == tarPackage) {
 		writeMd(tarPackage + 'README', readMe, callBack);
 	} else {
