@@ -382,7 +382,7 @@ DataTextureConf.cloud = (options: any) => {
 	const size = options?.size || options?.width || options?.height || 128;
 	const data = new Uint8Array(size * size * size);
 	let i = 0;
-	const scale = (options?.scale || 0.05) * 10.0 / size;
+	const scale = options?.scale || 0.05;
 	const perlin = new N3JS.ImprovedNoise();
 	const vector = new N3JS.Vector3();
 	for (let z = 0; z < size; z++) {
