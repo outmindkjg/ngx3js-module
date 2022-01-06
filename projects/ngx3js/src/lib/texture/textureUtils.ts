@@ -592,12 +592,12 @@ export class TextureUtils {
 	): I3JS.DataTexture | I3JS.DataTexture3D {
 		const dataProgram = this.getDataTexture(value);
 		const texture = dataProgram(options);
+		texture.needsUpdate = true;
 		window.setTimeout(() => {
-			texture.needsUpdate = true;
 			if (onload) {
 				onload();
 			}
-		}, 1);
+		}, 100);
 		return texture;
 	}
 }

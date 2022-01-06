@@ -1514,7 +1514,7 @@ export class NgxLocalStorageService {
 				} else if (result.material instanceof N3JS.Material && resultMaterial['map'] instanceof N3JS.Texture) {
 					callBack(resultMaterial['map'], result.source);
 				} else {
-					callBack(new N3JS.Texture());
+					callBack(new N3JS.Texture(), result.source);
 				}
 			},
 			Object.assign(options || {}, { texture: true })

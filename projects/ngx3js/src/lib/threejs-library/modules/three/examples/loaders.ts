@@ -42,7 +42,7 @@ import { SVGLoader as O3JS_SVGLoader } from 'three/examples/jsm/loaders/SVGLoade
 import { TDSLoader as O3JS_TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
 import { TGALoader as O3JS_TGALoader } from 'three/examples/jsm/loaders/TGALoader';
 import { TTFLoader as O3JS_TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
-import { VOXLoader as O3JS_VOXLoader, VOXMesh as O3JS_VOXMesh } from 'three/examples/jsm/loaders/VOXLoader';
+import { VOXLoader as O3JS_VOXLoader, VOXMesh as O3JS_VOXMesh, VOXDataTexture3D as O3JS_VOXDataTexture3D  } from 'three/examples/jsm/loaders/VOXLoader';
 import { VRMLLoader as O3JS_VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoader';
 import { VRMLoader as O3JS_VRMLoader } from 'three/examples/jsm/loaders/VRMLoader';
 import { VTKLoader as O3JS_VTKLoader } from 'three/examples/jsm/loaders/VTKLoader';
@@ -191,6 +191,9 @@ export const TiltLoader: TiltLoader = O3JS_TiltLoader as any;
 
 export type VOXMesh = I3JS.VOXMesh;
 export const VOXMesh: VOXMesh = O3JS_VOXMesh as any;
+
+export type VOXDataTexture3D = I3JS.VOXDataTexture3D;
+export const VOXDataTexture3D: VOXDataTexture3D = O3JS_VOXDataTexture3D as any;
 
 export type VOXLoader = I3JS.VOXLoader;
 export const VOXLoader: VOXLoader = O3JS_VOXLoader as any;
