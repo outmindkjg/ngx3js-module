@@ -26,7 +26,6 @@ import { LightningStrike, RayParameters } from './geometries';
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LensflareElement) page for details.
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LensflareElement) page for a live demo.
- *
  */
 export interface LensflareElement {
 	new (texture: Texture, size?: number, distance?: number, color?: Color): this;
@@ -80,9 +79,13 @@ export interface StormParams {
  * Lightning storm
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightningStorm) page for details.
- * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/LightningStorm) page for a live demo.
+ * See the [webgl / lightningstrike](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lightningstrike) page for a live demo.
+ * 
+ * ### Examples
+ * [webgl / lightningstrike ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lightningstrike)
  *
  */
+ 
 export interface LightningStorm extends Mesh {
 	new (stormParams?: StormParams): this;
 	update(time: number): void;
@@ -93,8 +96,10 @@ export interface LightningStorm extends Mesh {
  * Marching cubes
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MarchingCubes) page for details.
- * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/MarchingCubes) page for a live demo.
+ * See the [webgl / marchingcubes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_marchingcubes) page for a live demo.
  *
+ * ### Examples
+ * [webgl / marchingcubes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_marchingcubes)
  */
 export interface MarchingCubes extends Mesh {
 	new (
@@ -223,8 +228,10 @@ export interface ReflectorForSSRPassOptions {
  * Reflector for ssrpass
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ReflectorForSSRPass) page for details.
- * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorForSSRPass) page for a live demo.
+ * See the [webgl / postprocessing / ssr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssr) page for a live demo.
  *
+ * ### Examples
+ * [webgl / postprocessing / ssr](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_ssr)
  */
 export interface ReflectorForSSRPass extends Mesh<BufferGeometry> {
 	type: 'ReflectorForSSRPass';
@@ -257,7 +264,9 @@ export interface ReflectorForSSRPass extends Mesh<BufferGeometry> {
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ReflectorRTT) page for details.
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/ReflectorRTT) page for a live demo.
- *
+ * 
+ * ### Examples
+ * [webgl / mirror / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_mirror_nodes) |
  */
 export interface ReflectorRTT extends ReflectorForSSRPass {
 	new (geometry?: BufferGeometry, options?: ReflectorForSSRPassOptions): this;
