@@ -362,10 +362,11 @@ export class NgxLightComponent
 	 * @returns sh
 	 */
 	private getSh(def?: string): I3JS.SphericalHarmonics3 {
-		const sh = NgxThreeUtil.getTypeSafe(this.sh, def, '');
+		const sh = NgxThreeUtil.getTypeSafe(this.sh, def, 'harmonics3');
 		if (NgxThreeUtil.isNotNull(sh) && sh != '') {
 			switch (sh.toLowerCase()) {
 				case 'harmonics3':
+				default :
 					return new N3JS.SphericalHarmonics3();
 			}
 		}
@@ -894,8 +895,9 @@ export class NgxLightComponent
 										renderTarget
 									)
 								);
-							} catch (ex) {}
-							// todo
+							} catch (ex) {
+								console.log(ex);
+							}
 						}
 					}
 					break;
