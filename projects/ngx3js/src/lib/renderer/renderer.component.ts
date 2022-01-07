@@ -525,10 +525,10 @@ export class NgxRendererComponent
 	 */
 	ngOnDestroy(): void {
 		this.dispose();
-		if (this.stats !== null) {
+		if (NgxThreeUtil.isNotNull(this.stats)) {
 			this.stats.dom.parentNode.removeChild(this.stats.dom);
 		}
-		if (this.renderControl !== null) {
+		if (NgxThreeUtil.isNotNull(this.renderControl)) {
 			this.renderControl.ngOnDestroy();
 		}
 		Object.entries(this._eventListener).forEach(([key, value]) => {
@@ -698,7 +698,7 @@ export class NgxRendererComponent
 	 * Disposes renderer component
 	 */
 	dispose() {
-		if (this.renderer !== null && this.renderer instanceof N3JS.WebGLRenderer) {
+		if (NgxThreeUtil.isNotNull(this.renderer) && this.renderer instanceof N3JS.WebGLRenderer) {
 			if (this.renderer.domElement && this.renderer.domElement.parentNode) {
 				this.renderer.domElement.parentNode.removeChild(this.renderer.domElement);
 			}
@@ -1658,7 +1658,7 @@ export class NgxRendererComponent
 	 * @returns Renderer
 	 */
 	public getRenderer(): I3JS.Renderer {
-		if (this.renderer === null || this._needUpdate) {
+		if (NgxThreeUtil.isNull(this.renderer) || this._needUpdate) {
 			this.needUpdate = false;
 			this.dispose();
 			if (this.renderer !== null) {
