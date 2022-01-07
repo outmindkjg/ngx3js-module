@@ -72,7 +72,7 @@ export class NgxCanvasComponent
 				NgxThreeUtil.removeCssStyle(this.canvas, this.cssClazzName);
 				this.cssClazzName = null;
 			}
-			this.canvas = null;
+			this.canvas = undefined;
 		}
 		super.ngOnDestroy();
 	}

@@ -313,6 +313,9 @@ export class NgxCameraComponent extends NgxAbstractObject3dComponent implements 
 	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
+		if (this.camera !== null) {
+			this.camera = undefined;
+		}
 		super.ngOnDestroy();
 	}
 

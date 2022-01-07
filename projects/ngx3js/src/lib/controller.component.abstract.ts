@@ -62,6 +62,12 @@ export class NgxAbstractControllerComponent
 	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
+		if (this.refObject3d !== null) {
+			this.refObject3d = undefined;
+		}
+		if (this.refObject2d !== null) {
+			this.refObject2d = undefined;
+		}
 		super.ngOnDestroy();
 	}
 

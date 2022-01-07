@@ -648,6 +648,7 @@ export class NgxAbstractMaterialComponent
 	ngOnDestroy(): void {
 		if (this.material !== null) {
 			this.material.dispose();
+			this.material = undefined;
 		}
 		super.ngOnDestroy();
 	}

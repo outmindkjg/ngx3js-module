@@ -1295,7 +1295,7 @@ export class NgxThreeUtil {
 			switch (matrixType.toLowerCase()) {
 				case 'projectionmatrixinverse':
 					if (this.isNotNull(anyObj['projectionMatrixInverse'])) {
-						return new N3JS.Matrix4().copy(anyObj['projectionMatrixInverse']);
+						return anyObj['projectionMatrixInverse'].clone();
 					}
 					break;
 				case 'projectionmatrix':
@@ -1309,10 +1309,16 @@ export class NgxThreeUtil {
 					}
 					break;
 				case 'matrixworld':
-					return obj.matrixWorld;
+					if (obj.matrixWorld) {
+						return obj.matrixWorld;
+					}
+					break;
 				case 'matrix':
 				default:
-					return obj.matrix;
+					if (obj.matrix) {
+						return obj.matrix;
+					}
+					break;
 			}
 		}
 		return new N3JS.Matrix4();

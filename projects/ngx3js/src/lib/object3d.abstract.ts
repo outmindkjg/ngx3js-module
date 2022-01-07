@@ -336,8 +336,11 @@ export class NgxAbstractObject3dComponent
 			if (this.object3d.parent !== null) {
 				this.removeObject3d(this.object3d);
 				this.object3d.parent = null;
-				this.object3d = null;
 			}
+			this.object3d = undefined;
+		}
+		if (this.parentObject3d !== null) {
+			this.parentObject3d = undefined;
 		}
 		if (this._addedReferChild !== null && this._addedReferChild.length > 0) {
 			this._addedReferChild.forEach((child) => {
@@ -345,6 +348,7 @@ export class NgxAbstractObject3dComponent
 			});
 			this._addedReferChild = [];
 		}
+
 		super.ngOnDestroy();
 	}
 

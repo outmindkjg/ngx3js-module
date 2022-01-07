@@ -66,6 +66,12 @@ export class NgxAbstractTweenComponent
 	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
+		if (this.tweenTarget !== null) {
+			this.tweenTarget = undefined;
+		}
+		if (this.tweenTimer !== null) {
+			this.tweenTimer = undefined;
+		}
 		super.ngOnDestroy();
 	}
 

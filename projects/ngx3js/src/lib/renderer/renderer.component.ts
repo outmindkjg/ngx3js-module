@@ -181,12 +181,12 @@ export class NgxRendererComponent
 	/**
 	 * Defines whether the renderer respects object-level clipping planes. Default is *false*.
 	 */
-	@Input() public localClippingEnabled: boolean = false;
+	@Input() public localClippingEnabled: boolean = null;
 
 	/**
 	 * User-defined clipping planes specified as THREE.Plane objects in world space.
 	 */
-	@Input() public globalClippingEnabled: boolean = true;
+	@Input() public globalClippingEnabled: boolean = null;
 
 	/**
 	 * whether to perform antialiasing. Default is *false*.
@@ -259,7 +259,7 @@ export class NgxRendererComponent
 	/**
 	 * Defines whether the renderer should automatically clear its output before rendering a frame.
 	 */
-	@Input() public autoClear: boolean = true;
+	@Input() public autoClear: boolean = null;
 
 	/**
 	 * If [WebGLRenderer.autoClear](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer.autoClear) is true, defines whether the renderer should clear the color buffer.
@@ -704,7 +704,7 @@ export class NgxRendererComponent
 			}
 			this.renderer.forceContextLoss();
 			this.renderer.dispose();
-			this.renderer = null;
+			this.renderer = undefined;
 		}
 		if (this.cssRenderer !== null) {
 			if (Array.isArray(this.cssRenderer)) {
@@ -719,6 +719,9 @@ export class NgxRendererComponent
 				}
 			}
 			this.cssRenderer = null;
+		}
+		if (this.stats !== null) {
+			this.stats = undefined;
 		}
 	}
 
@@ -970,7 +973,7 @@ export class NgxRendererComponent
 		}
 		this.rendererWidth = rendererWidth;
 		this.rendererHeight = rendererHeight;
-		if (this.renderer !== null) {
+		if (this.renderer !== null && this.renderer !== undefined) {
 			this.events.width = this.rendererWidth;
 			this.events.height = this.rendererHeight;
 			this.events.nativeElement = this.rendererEle.nativeElement;
@@ -1130,7 +1133,7 @@ export class NgxRendererComponent
 	 * @returns
 	 */
 	public applyChanges(changes: string[]) {
-		if (this.renderer !== null) {
+		if (this.renderer !== null && this.renderer !== undefined) {
 			if (NgxThreeUtil.isIndexOf(changes, 'clearinit')) {
 				this.getRenderer();
 				return;
@@ -1804,7 +1807,7 @@ export class NgxRendererComponent
 	 * @returns
 	 */
 	private _renderOnce() {
-		if (this.renderer === null) {
+		if (this.renderer === null || this.renderer === undefined) {
 			return;
 		}
 		if (this.stats !== null) {
