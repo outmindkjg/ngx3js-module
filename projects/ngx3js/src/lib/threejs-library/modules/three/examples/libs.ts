@@ -1,8 +1,10 @@
 import * as O3JS_Stats from 'three/examples/jsm/libs/stats.module';
+import { TWEEN as O3JS_TWEEN } from './tween.module';
 import * as O3JS_Fflate from './fflate.module';
 import { GUI as O3JS_GUI } from './lil-gui';
 
 import * as I3JS from '../../../types/three/examples/libs';
+
 import { MeshoptDecoder as O3JS_MeshoptDecoder } from './meshopt_decoder.module';
 
 export type Stats = I3JS.Stats;
@@ -65,5 +67,11 @@ export type ZipPassThrough = I3JS.ZipPassThrough;
 export const ZipPassThrough: ZipPassThrough = O3JS_Fflate.ZipPassThrough as any;
 export type Zlib = I3JS.Zlib;
 export const Zlib: Zlib = O3JS_Fflate.Zlib as any;
+
+export type TWEEN = I3JS.TWEEN;
+export const TWEEN: TWEEN = O3JS_TWEEN as any;
+
+export type Tween = I3JS.Tween;
+export const Tween: Tween = O3JS_TWEEN.Tween as any;
 
 export const MeshoptDecoder: any = O3JS_MeshoptDecoder as any;

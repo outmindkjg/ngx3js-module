@@ -1163,3 +1163,23 @@ export interface Panel {
 	dom: HTMLCanvasElement;
 	update(value: number, maxValue: number): void;
 }
+
+
+export interface Tween {
+	new(options? : any): this;
+	to(option? : any, duration? : number) : this;
+	repeat(option? : any) : this;
+	easing(option? : any) : this;
+	delay(option? : any) : this;
+	yoyo(option? : any) : this;
+	start(option? : any) : this;
+	onUpdate(option? : any) : this;
+	onComplete(option? : any) : this;
+}
+
+export interface TWEEN {
+	update(option? : any) : this;	
+	removeAll():this;
+	Easing : any;
+	Tween : Tween;
+}
