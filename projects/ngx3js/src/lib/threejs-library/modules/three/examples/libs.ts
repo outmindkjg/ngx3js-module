@@ -71,6 +71,15 @@ export const Zlib: Zlib = O3JS_Fflate.Zlib as any;
 export type TWEEN = I3JS.TWEEN;
 export const TWEEN: TWEEN = O3JS_TWEEN as any;
 
+export type Easing = I3JS.Easing;
+export const Easing: Easing = O3JS_TWEEN.Easing as any;
+
+export type Interpolation = I3JS.Interpolation;
+export const Interpolation: Interpolation = O3JS_TWEEN.Interpolation as any;
+
+export type TweenGroup = I3JS.TweenGroup;
+export const TweenGroup: TweenGroup = O3JS_TWEEN.Group as any;
+
 export type Tween = I3JS.Tween;
 export const Tween: Tween = O3JS_TWEEN.Tween as any;
 
