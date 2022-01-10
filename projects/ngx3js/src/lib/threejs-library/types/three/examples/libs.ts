@@ -1167,19 +1167,117 @@ export interface Panel {
 
 export interface Tween {
 	new(options? : any): this;
+	getId() : number;
+	isPlaying() : boolean;
 	to(option? : any, duration? : number) : this;
+	duration(t? : any) : this;
+	start(t? : any) : this;
+	stop() : this;
+	end() : this ;
+	stopChainedTweens() : this ;
+	group(t? : any) : this ;
+	delay(t? : any) : this ;
 	repeat(option? : any) : this;
-	easing(option? : any) : this;
-	delay(option? : any) : this;
+	repeatDelay(t? : any) : this ;
 	yoyo(option? : any) : this;
-	start(option? : any) : this;
-	onUpdate(option? : any) : this;
+	delay(option? : any) : this;
+	easing(option? : any) : this;
+	interpolation(t? : any) : this ;
+	chain(t? : any) : this ;
+	onStart(t? : any) : this ;
+	onUpdate(t? : any) : this ;
 	onComplete(option? : any) : this;
+	onStop(t? : any) : this ;
+	update(t? : any) : this ;
+}
+export type EasingFunc = (t : number) => number;
+
+export interface Easing {
+	Linear : {
+		None : EasingFunc
+	};
+	Quadratic : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};	
+	Cubic : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+	Quartic : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+	Quintic : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+	Sinusoidal : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+	Exponential : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+	Circular : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+	Elastic : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+	Back : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+	Bounce : {
+		In : EasingFunc
+		Out : EasingFunc
+		InOut : EasingFunc
+	};
+}
+
+export type InterpolationFunc = (t : number, n : any, e? : any) => number;
+
+export interface TweenInterpolation {
+	Linear : InterpolationFunc;
+	Bezier : InterpolationFunc;
+	CatmullRom : InterpolationFunc;
+	Utils : {
+		Linear : InterpolationFunc;
+		Bernstein : InterpolationFunc;
+		Factorial : InterpolationFunc;
+		CatmullRom : InterpolationFunc;
+	}
+}
+
+export interface TweenGroup {
+	new(): this;
+	getAll() : any;
+	removeAll() : void;
+	add(t : any) : this;
+	remove(t? : any) : this;
+	update(t? : any, n? : any ) : this;
 }
 
 export interface TWEEN {
 	update(option? : any) : this;	
 	removeAll():this;
-	Easing : any;
+	nextId() : number;
+	now() : number;
+	Easing : Easing;
+	Interpolation : TweenInterpolation;
 	Tween : Tween;
+	Group : TweenGroup;
 }
