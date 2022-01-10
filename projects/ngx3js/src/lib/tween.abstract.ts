@@ -67,10 +67,10 @@ export class NgxAbstractTweenComponent
 	 */
 	ngOnDestroy(): void {
 		if (this.tweenTarget !== null) {
-			this.tweenTarget = undefined;
+			this.tweenTarget = null;
 		}
 		if (this.tweenTimer !== null) {
-			this.tweenTimer = undefined;
+			this.tweenTimer = null;
 		}
 		super.ngOnDestroy();
 	}

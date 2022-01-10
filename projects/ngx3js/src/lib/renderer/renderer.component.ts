@@ -704,7 +704,7 @@ export class NgxRendererComponent
 			}
 			this.renderer.forceContextLoss();
 			this.renderer.dispose();
-			this.renderer = undefined;
+			this.renderer = null;
 		}
 		if (this.cssRenderer !== null) {
 			if (Array.isArray(this.cssRenderer)) {
@@ -721,7 +721,7 @@ export class NgxRendererComponent
 			this.cssRenderer = null;
 		}
 		if (this.stats !== null) {
-			this.stats = undefined;
+			this.stats = null;
 		}
 	}
 
@@ -1373,10 +1373,10 @@ export class NgxRendererComponent
 							if (this.stats === null) {
 								this.getStats();
 							}
-							this.stats.showPanel(this.statsMode);
+							this.stats?.showPanel(this.statsMode);
 						} else {
 							if (this.stats !== null) {
-								this.stats.dom.parentNode.removeChild(this.stats.dom);
+								this.stats?.dom.parentNode.removeChild(this.stats.dom);
 							}
 							this.stats = null;
 						}
@@ -1811,7 +1811,7 @@ export class NgxRendererComponent
 			return;
 		}
 		if (this.stats !== null) {
-			this.stats.begin();
+			this.stats?.begin();
 		}
 		const renderTimer = this.clock.getTimer(this.renderer, this.events);
 		this.events.direction.lerp(this.events.keyInfo.xy, renderTimer.delta / 3);

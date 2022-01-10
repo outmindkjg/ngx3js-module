@@ -337,10 +337,10 @@ export class NgxAbstractObject3dComponent
 				this.removeObject3d(this.object3d);
 				this.object3d.parent = null;
 			}
-			this.object3d = undefined;
+			this.object3d = null;
 		}
 		if (this.parentObject3d !== null) {
-			this.parentObject3d = undefined;
+			this.parentObject3d = null;
 		}
 		if (this._addedReferChild !== null && this._addedReferChild.length > 0) {
 			this._addedReferChild.forEach((child) => {

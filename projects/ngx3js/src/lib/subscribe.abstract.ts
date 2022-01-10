@@ -157,9 +157,8 @@ export class NgxAbstractSubscribeComponent
 		this.dispose();
 		NgxThreeUtil.setThreeComponent(this.id, null);
 		this.onDestory.emit(this);
-		this.parent = undefined;
-		this._cashedObj = undefined;
-		undefined
+		this.parent = null;
+		this._cashedObj = null;
 	}
 
 	/**

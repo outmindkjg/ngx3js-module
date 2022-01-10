@@ -63,10 +63,10 @@ export class NgxAbstractControllerComponent
 	 */
 	ngOnDestroy(): void {
 		if (this.refObject3d !== null) {
-			this.refObject3d = undefined;
+			this.refObject3d = null;
 		}
 		if (this.refObject2d !== null) {
-			this.refObject2d = undefined;
+			this.refObject2d = null;
 		}
 		super.ngOnDestroy();
 	}

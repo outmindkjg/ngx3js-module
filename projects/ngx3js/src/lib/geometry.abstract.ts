@@ -521,7 +521,7 @@ export class NgxAbstractGeometryComponent
 	ngOnDestroy(): void {
 		if (this.geometry !== null) {
 			this.geometry.dispose();
-			this.geometry = undefined;
+			this.geometry = null;
 		}
 		super.ngOnDestroy();
 	}

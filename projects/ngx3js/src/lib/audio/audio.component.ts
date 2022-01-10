@@ -163,7 +163,7 @@ export class NgxAudioComponent extends NgxAbstractObject3dComponent implements O
 			if (this.video !== null) {
 				this.video.pause();
 			}
-			this.audio = undefined;
+			this.audio = null;
 		}
 		super.ngOnDestroy();
 	}

@@ -471,11 +471,11 @@ export class NgxAbstractTextureComponent
 				}
 			}
 			this.texture.dispose();
-			this.texture = undefined;
+			this.texture = null;
 		}
 		if (this.refTexture !== null) {
 			this.refTexture.dispose();
-			this.refTexture = undefined;
+			this.refTexture = null;
 		}
 		super.ngOnDestroy();
 	}

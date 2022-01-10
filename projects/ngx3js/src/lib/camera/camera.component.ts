@@ -314,7 +314,7 @@ export class NgxCameraComponent extends NgxAbstractObject3dComponent implements 
 	 */
 	ngOnDestroy(): void {
 		if (this.camera !== null) {
-			this.camera = undefined;
+			this.camera = null;
 		}
 		super.ngOnDestroy();
 	}
