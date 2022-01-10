@@ -1164,120 +1164,145 @@ export interface Panel {
 	update(value: number, maxValue: number): void;
 }
 
+export interface TweenUnknownProps {
+	[key: string]: any;
+}
 
 export interface Tween {
-	new(options? : any): this;
-	getId() : number;
-	isPlaying() : boolean;
-	to(option? : any, duration? : number) : this;
-	duration(t? : any) : this;
-	start(t? : any) : this;
-	stop() : this;
-	end() : this ;
-	stopChainedTweens() : this ;
-	group(t? : any) : this ;
-	delay(t? : any) : this ;
-	repeat(option? : any) : this;
-	repeatDelay(t? : any) : this ;
-	yoyo(option? : any) : this;
-	delay(option? : any) : this;
-	easing(option? : any) : this;
-	interpolation(t? : any) : this ;
-	chain(t? : any) : this ;
-	onStart(t? : any) : this ;
-	onUpdate(t? : any) : this ;
-	onComplete(option? : any) : this;
-	onStop(t? : any) : this ;
-	update(t? : any) : this ;
+	new (object: TweenUnknownProps, group?: TweenGroup | false): this;
+	getId(): number;
+	isPlaying(): boolean;
+	isPaused(): boolean;
+	to(properties: TweenUnknownProps, duration?: number): this;
+	duration(d?: number): this;
+	start(time?: number): this;
+	stop(): this;
+	end(): this;
+	pause(time?: number): this;
+	resume(time?: number): this;
+	stopChainedTweens(): this;
+	group(group?: TweenGroup): this;
+	delay(amount?: number): this;
+	repeat(times?: number): this;
+	repeatDelay(amount?: number): this;
+	yoyo(yoyo?: boolean): this;
+	easing(easingFunction?: EasingFunction): this;
+	interpolation(interpolationFunction?: InterpolationFunction): this;
+	chain(...tweens: Array<Tween>): this;
+	onStart(callback?: (object: TweenUnknownProps) => void): this;
+	onEveryStart(callback?: (object: TweenUnknownProps) => void): this;
+	onUpdate(callback?: (object: TweenUnknownProps, elapsed: number) => void): this;
+	onRepeat(callback?: (object: TweenUnknownProps) => void): this;
+	onComplete(callback?: (object: TweenUnknownProps) => void): this;
+	onStop(callback?: (object: TweenUnknownProps) => void): this;
+	/**
+	 * @returns true if the tween is still playing after the update, false
+	 * otherwise (calling update on a paused tween still returns true because
+	 * it is still playing, just paused).
+	 */
+	update(time?: number, autoStart?: boolean): boolean;
 }
-export type EasingFunc = (t : number) => number;
 
+export type EasingFunction = (amount: number) => number;
+
+/**
+ * The Ease class provides a collection of easing functions for use with tween.js.
+ */
 export interface Easing {
-	Linear : {
-		None : EasingFunc
+	Linear: {
+		None: EasingFunction;
 	};
-	Quadratic : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
-	};	
-	Cubic : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Quadratic: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
-	Quartic : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Cubic: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
-	Quintic : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Quartic: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
-	Sinusoidal : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Quintic: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
-	Exponential : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Sinusoidal: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
-	Circular : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Exponential: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
-	Elastic : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Circular: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
-	Back : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Elastic: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
-	Bounce : {
-		In : EasingFunc
-		Out : EasingFunc
-		InOut : EasingFunc
+	Back: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
+	};
+	Bounce: {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
+	};
+	generatePow(power?: number): {
+		In: EasingFunction;
+		Out: EasingFunction;
+		InOut: EasingFunction;
 	};
 }
 
-export type InterpolationFunc = (t : number, n : any, e? : any) => number;
+export type InterpolationFunction = (v: number[], k: number) => number;
 
-export interface TweenInterpolation {
-	Linear : InterpolationFunc;
-	Bezier : InterpolationFunc;
-	CatmullRom : InterpolationFunc;
-	Utils : {
-		Linear : InterpolationFunc;
-		Bernstein : InterpolationFunc;
-		Factorial : InterpolationFunc;
-		CatmullRom : InterpolationFunc;
-	}
+/**
+ *
+ */
+export interface Interpolation {
+	Linear: InterpolationFunction;
+	Bezier: InterpolationFunction;
+	CatmullRom: InterpolationFunction;
+	Utils: {
+		Linear: (p0: number, p1: number, t: number) => number;
+		Bernstein: (n: number, i: number) => number;
+		Factorial: (n: number) => number;
+		CatmullRom: (p0: number, p1: number, p2: number, p3: number, t: number) => number;
+	};
 }
 
 export interface TweenGroup {
-	new(): this;
-	getAll() : any;
-	removeAll() : void;
-	add(t : any) : this;
-	remove(t? : any) : this;
-	update(t? : any, n? : any ) : this;
+	new (): this;
+	getAll(): Array<Tween>;
+	removeAll(): void;
+	add(tween: Tween): void;
+	remove(tween: Tween): void;
+	update(time?: number, preserve?: boolean): boolean;
 }
 
 export interface TWEEN {
-	update(option? : any) : this;	
-	removeAll():this;
-	nextId() : number;
-	now() : number;
-	Easing : Easing;
-	Interpolation : TweenInterpolation;
-	Tween : Tween;
-	Group : TweenGroup;
+	update(time?: number, preserve?: boolean): boolean;
+	getAll(): Array<Tween>;
+	removeAll(): void;
+	nextId(): number;
+	now(): number;
+	Easing: Easing;
+	Interpolation: InterpolationFunction;
+	Tween: Tween;
+	Group: TweenGroup;
 }
