@@ -133,7 +133,7 @@ export interface IStorageOption {
 	dataType?: any;
 
 	/** auto select first child */
-	firstChild? : boolean;
+	firstChild?: boolean;
 }
 
 /**
@@ -726,7 +726,7 @@ export interface INgxThreeGuiController {
 	destroy(): this;
 	addFolder(name: string): INgxThreeGuiController;
 	removeFolder(folder: any): this;
-	listen(): this;
+	listen(obj?: any): this;
 	onFinishChange(callBack: (e: any) => void): this;
 	onChange(callBack: (e: any) => void): this;
 	name(name: string): this;
@@ -1323,7 +1323,7 @@ export interface ICharacterControl {
 /**
  * Object3d options
  */
- export interface IObject3dOptions {
+export interface IObject3dOptions {
 	/**
 	 * Object gets rendered if *true*. Default is *true*.
 	 */
@@ -1418,7 +1418,7 @@ export interface ICharacterControl {
 /**
  * Light options
  */
- export interface ILightOptions extends IObject3dOptions {
+export interface ILightOptions extends IObject3dOptions {
 	/**
 	 * The type of light
 	 *
@@ -1605,7 +1605,7 @@ export interface ICharacterControl {
 /**
  * Html collection
  */
- export interface IHtmlCollection {
+export interface IHtmlCollection {
 	html: HTMLElement;
 	name: string;
 	component: any;
@@ -1615,7 +1615,7 @@ export interface ICharacterControl {
 /**
  * Control options
  */
- export interface IControlOptions {
+export interface IControlOptions {
 	/**
 	 * The type of control
 	 *
@@ -1708,6 +1708,16 @@ export interface ICharacterControl {
 	 * The minPolarAngle of control
 	 */
 	minPolarAngle?: number;
+
+	/**
+	 * The minAzimuthAngle of control
+	 */
+	minAzimuthAngle?: number;
+
+	/**
+	 * The maxAzimuthAngle of control
+	 */
+	maxAzimuthAngle?: number;
 
 	/**
 	 * The maxPolarAngle of control

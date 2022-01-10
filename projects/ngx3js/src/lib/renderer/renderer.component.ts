@@ -1773,7 +1773,7 @@ export class NgxRendererComponent
 	 * @param timer
 	 * @returns render info
 	 */
-	private getRenderInfo(timer: IRendererTimer): IRendererInfo {
+	public getRenderInfo(timer?: IRendererTimer): IRendererInfo {
 		if (this._cameras === null) {
 			this._cameras = [];
 			this.cameraList.forEach((camera) => {

@@ -226,6 +226,16 @@ export class NgxControlComponent
 	@Input() public minPolarAngle: number = null;
 
 	/**
+	 * Input  of ngx control component
+	 */
+	@Input() public minAzimuthAngle: number = null;
+
+	/**
+	 * Input  of ngx control component
+	 */
+	@Input() public maxAzimuthAngle: number = null;
+
+	/**
 	 * The maxPolarAngle of control
 	 */
 	@Input() public maxPolarAngle: number = null;
@@ -867,6 +877,12 @@ export class NgxControlComponent
 					}
 					if (NgxThreeUtil.isNotNull(this.minPolarAngle)) {
 						orbitControls.minPolarAngle = NgxThreeUtil.getAngleSafe(this.minPolarAngle, 180);
+					}
+					if (NgxThreeUtil.isNotNull(this.minAzimuthAngle)) {
+						orbitControls.minAzimuthAngle = NgxThreeUtil.getAngleSafe(this.minAzimuthAngle, 0);
+					}
+					if (NgxThreeUtil.isNotNull(this.maxAzimuthAngle)) {
+						orbitControls.maxAzimuthAngle = NgxThreeUtil.getAngleSafe(this.maxAzimuthAngle, 0);
 					}
 					if (NgxThreeUtil.isNotNull(this.maxPolarAngle)) {
 						orbitControls.maxPolarAngle = NgxThreeUtil.getAngleSafe(this.maxPolarAngle, 180);

@@ -852,6 +852,7 @@ export class NgxLocalStorageService {
 					callBack({
 						object: this.getStoreObject(result.scene, options),
 						clips: result.animations,
+						source : result
 					});
 				},
 				this.onProgress,
