@@ -1153,9 +1153,463 @@ export interface Stats {
 	domElement: HTMLDivElement;
 	setMode(id: number): void;
 }
+export interface GUIParameters {
+	/**
+	 *  Adds this GUI as a child in another GUI. Usually this is done for you by addFolder
+	 */
+	parent?: GUI;
 
+	/**
+	 * Adds the GUI to document.body and fixes it to the top right of the page
+	 */
+	autoPlace?: boolean;
+
+	/**
+	 * Makes controllers larger on touch devices. Pass false to disable touch styles
+	 */
+	touchStyles?: boolean;
+
+	/**
+	 * Adds the GUI to this DOM element. Overrides autoPlace
+	 */
+	container?: HTMLElement;
+
+	/**
+	 * Injects the default stylesheet into the page if this is the first GUI. Pass false to use your own stylesheet.
+	 */
+	injectStyles?: boolean;
+
+	/**
+	 * Name to display in the title bar
+	 */
+	title?: string;
+
+	/**
+	 * Width of the GUI in pixels, usually set when name labels become too long. Note that you can make name labels wider in CSS with .lil‑gui { ‑‑name‑width: 55% }
+	 */
+	width?: number;
+}
+
+export type GUICallBack = (event: {
+	/**
+	 * object that was modified
+	 */
+	object: object;
+
+	/**
+	 * string, name of property
+	 */
+	property: string;
+
+	/**
+	 * new value of controller
+	 */
+	value: any;
+
+	/**
+	 * controller that was modified
+	 */
+	controller: GUIController;
+}) => void;
+
+export interface GUIController {
+	/**
+	 * Sets the name of the controller and its label in the GUI.
+	 *
+	 * @param name
+	 * @returns name
+	 */
+	name(name: string): this;
+
+	/**
+	 * Pass a function to be called whenever a controller in this GUI changes.
+	 *
+	 * @param callback
+	 * @returns change
+	 */
+	onChange(callback: GUICallBack): this;
+
+	/**
+	 * Pass a function to be called whenever a controller in this GUI has finished changing.
+	 *
+	 * @param callback
+	 * @returns finish change
+	 */
+	onFinishChange(callback: GUICallBack): this;
+
+	/**
+	 * Resets all controllers to their initial values.
+	 *
+	 * @param [recursive] Pass false to exclude folders descending from this GUI. default **true**
+	 * @returns reset
+	 */
+	reset(recursive?: boolean): this;
+
+	/**
+	 * Enables this controller.
+	 * ```js
+	 * controller.enable();
+	 * controller.enable( false ); // disable
+	 * controller.enable( controller._disabled ); // toggle
+	 * ```
+	 * @param [enabled]
+	 * @returns enable
+	 */
+	enable(enabled?: boolean): this;
+
+	/**
+	 * Disables this controller.
+	 * ```js
+	 * controller.disable();
+	 * controller.disable( false ); // enable
+	 * controller.disable( !controller._disabled ); // toggle
+	 * ```
+	 * @param [disabled]
+	 * @returns disable
+	 */
+	disable(disabled?: boolean): this;
+
+	/**
+	 * Destroys this controller and replaces it with a new option controller. Provided as a more descriptive syntax for gui.add, but primarily for compatibility with dat.gui.
+	 * Use caution, as this method will destroy old references to this controller. It will also change controller order if called out of sequence, moving the option controller to the end of the GUI.
+	 * ```js
+	 * // safe usage
+	 * gui.add( object1, 'property' ).options( [ 'a', 'b', 'c' ] );
+	 * gui.add( object2, 'property' );
+	 *
+	 * // danger
+	 * const c = gui.add( object1, 'property' );
+	 * gui.add( object2, 'property' );
+	 * c.options( [ 'a', 'b', 'c' ] );
+	 * // controller is now at the end of the GUI even though it was added first
+	 *
+	 * assert( c.parent.children.indexOf( c ) === -1 )
+	 * // c references a controller that no longer exists
+	 *
+	 * ```
+	 * @param options
+	 * @returns options
+	 */
+	options(options: object | any[]): GUIController;
+
+	/**
+	 * Sets the minimum value. Only works on number controllers.
+	 *
+	 * @param min
+	 * @returns min
+	 */
+	min(min: number): this;
+
+	/**
+	 * Sets the maximum value. Only works on number controllers.
+	 *
+	 * @param max
+	 * @returns max
+	 */
+	max(max: number): this;
+
+	/**
+	 * Sets the step. Only works on number controllers.
+	 *
+	 * @param step
+	 * @returns step
+	 */
+	step(step: number): this;
+
+	/**
+	 * Calls updateDisplay() every animation frame. Pass false to stop listening.
+	 *
+	 * @param [listen]
+	 * @returns listen
+	 */
+	listen(listen?: boolean): this;
+
+	/**
+	 * Returns object[ property ].
+	 * @returns value
+	 */
+	getValue(): any;
+
+	/**
+	 * Sets the value of object[ property ], invokes any onChange handlers and updates the display.
+	 *
+	 * @param value
+	 * @returns value
+	 */
+	setValue(value: any): this;
+
+	/**
+	 * Updates the display to keep it in sync with the current value. Useful for updating your controllers when their values have been modified outside of the GUI.
+	 *
+	 * @returns display
+	 */
+	updateDisplay(): this;
+
+	/**
+	 * Destroys this controller and removes it from the parent GUI.
+	 */
+	destroy(): void;
+
+	/**
+	 * The outermost container DOM element for this controller.
+	 */
+	domElement: HTMLElement;
+
+	/**
+	 * The value of object[ property ] when the controller was created.
+	 */
+	initialValue: any;
+
+	/**
+	 * The object this controller will modify.
+	 */
+	object: object;
+
+	/**
+	 * The GUI that contains this controller.
+	 */
+	parent: GUI;
+
+	/**
+	 * The name of the property to control.
+	 */
+	property: string;
+
+	/**
+	 * Used to determine if the controller is disabled. Use controller.disable( true|false ) to modify this value
+	 */
+	_disabled: boolean;
+
+	/**
+	 * Used to determine if the controller is currently listening. Don't modify this value directly. Use the controller.listen( true|false ) method instead.
+	 */
+	_listening: boolean;
+
+	/**
+	 * The controller's name. Use controller.name( 'Name' ) to modify this value.
+	 */
+	_name: string;
+
+	/**
+	 * Used to access the function bound to onChange events. Don't modify this value directly. Use the controller.onChange( callback ) method instead.
+	 */
+	_onChange: GUICallBack;
+
+	/**
+	 * Used to access the function bound to onFinishChange events. Don't modify this value directly. Use the controller.onFinishChange( callback ) method instead.
+	 */
+	_onFinishChange: GUICallBack;
+}
+
+/**
+ * Gui
+ * ```js
+ * const gui = new GUI();
+ * gui.add( document, 'title' );
+ *
+ * obj = {
+ * 	myBoolean: true,
+ * 	myString: 'lil-gui',
+ * 	myNumber: 1,
+ * 	myFunction: function() { alert( 'hi' ) }
+ * }
+ * gui.add( obj, 'myBoolean' ); 	// checkbox
+ * gui.add( obj, 'myString' ); 	// text field
+ * gui.add( obj, 'myNumber' ); 	// number field
+ * gui.add( obj, 'myFunction' ); 	// button
+ * ```
+ */
 export interface GUI {
-	new (param: any): this;
+	/**
+	 * Creates a panel that holds controllers.
+	 * ```ts
+	 * new GUI();
+	 * new GUI( { container: document.getElementById( 'custom' ) } );
+	 * ```
+	 * @param param
+	 */
+	new (param?: GUIParameters): this;
+
+	/**
+	 * Adds a controller to the GUI, inferring controller type using the typeof operator.
+	 * ```js
+	 * gui.add( object, 'property' );
+	 * gui.add( object, 'number', 0, 100, 1 );
+	 * gui.add( object, 'options', [ 1, 2, 3 ] );
+	 * ```
+	 * @param object The object the controller will modify.
+	 * @param property Name of the property to control.
+	 * @param min Minimum value for number controllers, or the set of selectable values for a dropdown.
+	 * @param max Maximum value for number controllers.
+	 * @param step Step value for number controllers.
+	 * @returns add
+	 */
+	add(object: object, property: string, min?: number | object | any[], max?: number, step?: number): GUIController;
+
+	/**
+	 * Adds a color controller to the GUI.
+	 *
+	 * ```js
+	 * params = {
+	 * 	cssColor: '#ff00ff',
+	 * 	rgbColor: { r: 0, g: 0.2, b: 0.4 },
+	 * 	customRange: [ 0, 127, 255 ],
+	 * };
+	 * gui.addColor( params, 'cssColor' );
+	 * gui.addColor( params, 'rgbColor' );
+	 * gui.addColor( params, 'customRange', 255 );
+	 * ```
+	 *
+	 * @param object The object the controller will modify.
+	 * @param property Name of the property to control.
+	 * @param [rgbScale] Maximum value for a color channel when using an RGB color. You may need to set this to 255 if your colors are too dark.
+	 * @returns color
+	 */
+	addColor(object: object, property: string, rgbScale?: number): GUIController;
+
+	/**
+	 * Adds a folder to the GUI, which is just another GUI. This method returns the nested GUI so you can add controllers to it.
+	 *
+	 * @param title Name to display in the folder's title bar.
+	 * @returns folder
+	 */
+	addFolder(title: string): GUI;
+
+	/**
+	 * Recalls values that were saved with gui.save().
+	 *
+	 * @param obj
+	 * @param [recursive] Pass false to exclude folders descending from this GUI. default **true**
+	 * @returns load
+	 */
+	load(obj: object, recursive?: boolean): this;
+
+	/**
+	 * Returns an object mapping controller names to values. The object can be passed to gui.load() to recall these values.
+	 *
+	 * @param [recursive] Pass false to exclude folders descending from this GUI. default **true**
+	 * @returns save
+	 */
+	save(recursive?: boolean): object;
+
+	/**
+	 * Opens a GUI or folder. GUI and folders are open by default.
+	 * ```js
+	 * gui.open(); // open
+	 * gui.open( false ); // close
+	 * gui.open( gui._closed ); // toggle
+	 * ```
+	 *
+	 * @param [open]
+	 * @returns open
+	 */
+	open(open?: boolean): this;
+
+	/**
+	 * Closes the GUI.
+	 *
+	 * @returns close
+	 */
+	close(): this;
+
+	/**
+	 * Hides the GUI.
+	 *
+	 * @returns hide
+	 */
+	hide(): this;
+
+	/**
+	 * Change the title of this GUI.
+	 *
+	 * @param title
+	 * @returns title
+	 */
+	title(title: string): this;
+
+	/**
+	 * Resets all controllers to their initial values.
+	 *
+	 * @param [recursive] Pass false to exclude folders descending from this GUI. default **true**
+	 * @returns reset
+	 */
+	reset(recursive?: boolean): this;
+
+	/**
+	 * Pass a function to be called whenever a controller in this GUI changes.
+	 *
+	 * @param callback
+	 * @returns change
+	 */
+	onChange(callback: GUICallBack): this;
+
+	/**
+	 * Pass a function to be called whenever a controller in this GUI has finished changing.
+	 *
+	 * @param callback
+	 * @returns finish change
+	 */
+	onFinishChange(callback: GUICallBack): this;
+
+	/**
+	 * Destroys all DOM elements and event listeners associated with this GUI
+	 */
+	destroy(): void;
+
+	/**
+	 * Returns an array of controllers contained by this GUI and its descendents.
+	 *
+	 * @returns recursive
+	 */
+	controllersRecursive(): GUIController[];
+
+	/**
+	 * Returns an array of folders contained by this GUI and its descendents.
+	 *
+	 * @returns recursive
+	 */
+	foldersRecursive(): GUI[];
+
+	/**
+	 * The list of controllers and folders contained by this GUI.
+	 */
+	children: Array<GUI | GUIController>;
+
+	/**
+	 * The list of controllers contained by this GUI.
+	 */
+	controllers: GUIController[];
+
+	/**
+	 * The outermost container element.
+	 *
+	 */
+	domElement: HTMLElement;
+
+	/**
+	 * The list of folders contained by this GUI.
+	 */
+	folders: GUI[];
+
+	/**
+	 * The GUI containing this folder, or undefined if this is the root GUI.
+	 */
+	parent: GUI;
+
+	/**
+	 * The top level GUI containing this folder, or this if this is the root GUI.
+	 */
+	root: GUI;
+
+	/**
+	 * Used to determine if the GUI is closed. Use gui.open() or gui.close() to change this.
+	 */
+	_closed: boolean;
+
+	/**
+	 * Used to determine if the GUI is hidden. Use gui.show() or gui.hide() to change this.
+	 */
+	_hidden: boolean;
 }
 
 export interface Panel {
@@ -1168,33 +1622,158 @@ export interface TweenUnknownProps {
 	[key: string]: any;
 }
 
-export interface Tween {
-	new (object: TweenUnknownProps, group?: TweenGroup | false): this;
+export interface Tween<T extends TweenUnknownProps = any> {
+	new (object: T, group?: TweenGroup | false): this;
+	_object : T;
 	getId(): number;
 	isPlaying(): boolean;
 	isPaused(): boolean;
-	to(properties: TweenUnknownProps, duration?: number): this;
+	to(properties: T, duration?: number): this;
 	duration(d?: number): this;
 	start(time?: number): this;
+
+	/**
+	 * So far we’ve learnt about the Tween.start method, but there are more methods that control individual tweens. Probably the most important one is the start counterpart: stop. If you want to cancel a tween, just call this method over an individual tween:
+	 * ```js
+	 *
+	 * ```
+	 * @returns stop
+	 */
 	stop(): this;
 	end(): this;
 	pause(time?: number): this;
 	resume(time?: number): this;
 	stopChainedTweens(): this;
 	group(group?: TweenGroup): this;
+
+	/**
+	 * More complex arrangements might require delaying a tween before it actually starts running. You can do that using the delay method:
+	 *
+	 * ```js
+	 * tween.delay(1000)
+	 * tween.start()
+	 * // will start executing 1 second after the start method has been called.
+	 * ```
+	 * @param [amount]
+	 * @returns delay
+	 */
 	delay(amount?: number): this;
+
+	/**
+	 * If you wanted a tween to repeat forever you could chain it to itself, but a better way is to use the repeat method. It accepts a parameter that describes how many repetitions you want after the first tween is completed:
+	 * ```js
+	 * tween.repeat(10) // repeats 10 times after the first tween and stops
+	 * tween.repeat(Infinity) // repeats forever
+	 * ```
+	 * @param [times]
+	 * @returns repeat
+	 */
 	repeat(times?: number): this;
+
+	/**
+	 * Normally the delay time is applied between repetitions of a tween, but if a value is provided to the repeatDelay function then that value will determine the total time elapsed between repetitions of a tween.
+	 *
+	 * ```js
+	 * tween.delay(1000)
+	 * tween.repeatDelay(500)
+	 * tween.start()
+	 * // The first iteration of the tween will happen after one second, the second iteration will happen a half second after the first iteration ends, the third iteration will happen a half second after the second iteration ends, etc. If you want to delay the initial iteration but you don’t want any delay between iterations, then make sure to call tween.repeatDelay(0).
+	 * ```
+	 *
+	 * @param [amount]
+	 * @returns delay
+	 */
 	repeatDelay(amount?: number): this;
+
+	/**
+	 * This function only has effect if used along with repeat. When active, the behaviour of the tween will be like a yoyo, i.e. it will bounce to and from the start and end values, instead of just repeating the same sequence from the beginning.
+	 * @param [yoyo]
+	 * @returns yoyo
+	 */
 	yoyo(yoyo?: boolean): this;
+
+	/**
+	 * Tween.js will perform the interpolation between values (i.e. the easing) in a linear manner, so the change will be directly proportional to the elapsed time. This is predictable but also quite uninteresting visually wise. Worry not–this behaviour can be easily changed using the easing method. For example:
+	 *
+	 * ```js
+	 * tween.easing(TWEEN.Easing.Quadratic.In)
+	 * ```
+	 *
+	 * @param [easingFunction]
+	 * @returns easing
+	 */
 	easing(easingFunction?: EasingFunction): this;
+
+	/**
+	 * For example, when the tween has just started (progress is 0), the interpolation function will return the first value in the array. When the tween is halfway, the interpolation function will return a value approximately in the middle of the array, and when the tween is at the end, the interpolation function will return the last value.
+	 *
+	 * @param [interpolationFunction]
+	 * @returns interpolation
+	 */
 	interpolation(interpolationFunction?: InterpolationFunction): this;
+
+	/**
+	 * Things get more interesting when you sequence different tweens in order, i.e. setup one tween to start once a previous one has finished. We call this chaining tweens, and it’s done with the chain method. Thus, to make tweenB start after tweenA finishes:
+	 * ```js
+	 * tweenA.chain(tweenB)
+	 * // Or, for an infinite chain, set tweenA to start once tweenB finishes:
+	 * tweenA.chain(tweenB)
+	 * tweenB.chain(tweenA)
+	 *
+	 * // In other cases, you may want to chain multiple tweens to another tween in a way that they (the chained tweens) all start animating at the same time:
+	 * tweenA.chain(tweenB, tweenC)
+	 * ```
+	 *
+	 * @param tweens
+	 * @returns chain
+	 */
 	chain(...tweens: Array<Tween>): this;
-	onStart(callback?: (object: TweenUnknownProps) => void): this;
-	onEveryStart(callback?: (object: TweenUnknownProps) => void): this;
-	onUpdate(callback?: (object: TweenUnknownProps, elapsed: number) => void): this;
-	onRepeat(callback?: (object: TweenUnknownProps) => void): this;
-	onComplete(callback?: (object: TweenUnknownProps) => void): this;
-	onStop(callback?: (object: TweenUnknownProps) => void): this;
+
+	/**
+	 * Executed right before the tween starts animating, after any delay time specified by the delay method. This will be executed only once per tween, i.e. it will not be run when the tween is repeated via repeat().
+	 *
+	 * @param [callback]
+	 * @returns start
+	 */
+	onStart(callback?: (object: T) => void): this;
+
+	onEveryStart(callback?: (object: T) => void): this;
+
+	/**
+	 * Executed each time the tween is updated, after the values have been actually updated.
+	 * The tweened object is passed in as the first parameter.
+	 *
+	 * @param [callback]
+	 * @returns update
+	 */
+	onUpdate(callback?: (object: T, elapsed: number) => void): this;
+
+	/**
+	 * Executed whenever a tween has just finished one repetition and will begin another.
+	 * The tweened object is passed in as the first parameter.
+	 *
+	 * @param [callback]
+	 * @returns repeat
+	 */
+	onRepeat(callback?: (object: T) => void): this;
+
+	/**
+	 * Executed when a tween is finished normally (i.e. not stopped).
+	 * The tweened object is passed in as the first parameter.
+	 *
+	 * @param [callback]
+	 * @returns complete
+	 */
+	onComplete(callback?: (object: T) => void): this;
+
+	/**
+	 * Executed when a tween is explicitly stopped via stop(), but not when it is completed normally, and before stopping any possible chained tween.
+	 *
+	 * @param [callback]
+	 * @returns stop
+	 */
+	onStop(callback?: (object: T) => void): this;
+
 	/**
 	 * @returns true if the tween is still playing after the update, false
 	 * otherwise (calling update on a paused tween still returns true because
@@ -1288,20 +1867,102 @@ export interface Interpolation {
 
 export interface TweenGroup {
 	new (): this;
+
+	/**
+	 * Used to get a reference to the active tweens array
+	 *
+	 * @returns all
+	 */
 	getAll(): Array<Tween>;
+
+	/**
+	 * Used to remove all of them from the array with just one call, respectively.
+	 */
 	removeAll(): void;
+
+	/**
+	 * Used to add a tween to the list of active tweens
+	 * @param tween
+	 */
 	add(tween: Tween): void;
+
+	/**
+	 * Used to remove a specific one from the list
+	 * @param tween
+	 */
 	remove(tween: Tween): void;
+
+	/**
+	 * We’ve already talked about this method. It is used to update all the active tweens. If time is not specified, it will use the current time.
+	 *
+	 * @param [time]
+	 * @param [preserve]
+	 * @returns true if update
+	 */
 	update(time?: number, preserve?: boolean): boolean;
 }
 
 export interface TWEEN {
+	/**
+	 * We’ve already talked about this method. It is used to update all the active tweens. If time is not specified, it will use the current time.
+	 *
+	 * @param [time]
+	 * @param [preserve]
+	 * @returns true if update
+	 */
 	update(time?: number, preserve?: boolean): boolean;
+
+	/**
+	 * Used to add a tween to the list of active tweens
+	 * @param tween
+	 */
+	add(tween: Tween): void;
+
+	/**
+	 * Used to remove a specific one from the list
+	 * @param tween
+	 */
+	remove(tween: Tween): void;
+
+	/**
+	 * Used to get a reference to the active tweens array
+	 *
+	 * @returns all
+	 */
 	getAll(): Array<Tween>;
+
+	/**
+	 * Used to remove all of them from the array with just one call, respectively.
+	 */
 	removeAll(): void;
+
 	nextId(): number;
+	
 	now(): number;
+
+	/**
+	 * There are a few existing easing functions provided with tween.js. They are grouped by the type of equation they represent: Linear, Quadratic, Cubic, Quartic, Quintic, Sinusoidal, Exponential, Circular, Elastic, Back and Bounce, and then by the easing type: In, Out and InOut.
+	 * 
+	 * So let’s suppose you wanted to use a custom easing function that eased the values but applied a Math.floor to the output, so only the integer part would be returned, resulting in a sort of step-ladder output:
+	 * ```js
+	 * function tenStepEasing(k) {
+	 * 	return Math.floor(k * 10) / 10
+	 * }
+	 * tween.easing(tenStepEasing)
+	 * ```
+	 */
 	Easing: Easing;
+	
+	/**
+	 * You can change the interpolation function with the interpolation method. For example:
+	 * ```js
+	 * tween.interpolation(TWEEN.Interpolation.Bezier)
+	 * ```
+	 * The following values are available:
+	 * - TWEEN.Interpolation.Linear
+	 * - TWEEN.Interpolation.Bezier
+	 * - TWEEN.Interpolation.CatmullRom
+	 */
 	Interpolation: InterpolationFunction;
 	Tween: Tween;
 	Group: TweenGroup;

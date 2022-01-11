@@ -6,7 +6,6 @@ import { IRendererTimer } from '../ngx-interface';
 import { NgxPassComponent } from '../pass/pass.component';
 import { NgxRenderTargetComponent } from '../render-target/render-target.component';
 import { NgxSceneComponent } from '../scene/scene.component';
-import { NgxAbstractTweenComponent } from '../tween.abstract';
 
 /**
  * The Effect component.
@@ -42,7 +41,7 @@ import { NgxAbstractTweenComponent } from '../tween.abstract';
 		},
 	],
 })
-export class NgxEffectComponent extends NgxAbstractTweenComponent implements OnInit {
+export class NgxEffectComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
 	 * The type of effect
 	 *

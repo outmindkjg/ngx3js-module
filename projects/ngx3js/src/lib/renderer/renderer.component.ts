@@ -13,7 +13,6 @@ import {
 	SimpleChanges,
 	ViewChild
 } from '@angular/core';
-import * as GSAP from 'gsap';
 import { Observable, Subject } from 'rxjs';
 import { NgxCanvasComponent } from '../canvas/canvas.component';
 import { NgxControlComponent } from '../control/control.component';
@@ -35,6 +34,8 @@ import { NgxCameraComponent } from './../camera/camera.component';
 import { NgxListenerComponent } from './../listener/listener.component';
 import { NgxLookatComponent } from './../lookat/lookat.component';
 import { NgxSceneComponent } from './../scene/scene.component';
+import { NgxTweenComponent } from './../tween/tween.component';
+
 
 /**
  * The Renderer component.
@@ -447,6 +448,11 @@ export class NgxRendererComponent
 	 * Content children of renderer component
 	 */
 	@ContentChildren(NgxAbstractThreeDirective, { descendants: true }) private threeDirectiveList: QueryList<NgxAbstractThreeDirective>;
+	 
+	/**
+	 * Content children of ngx renderer component
+	 */
+	@ContentChildren(NgxTweenComponent, { descendants: true }) private golbalTweenList: QueryList<NgxTweenComponent>;
 
 	/**
 	 * View child of renderer component
@@ -570,6 +576,7 @@ export class NgxRendererComponent
 		this.subscribeListQueryChange(this.canvas2dList, 'canvas2dList', 'canvas2d');
 		this.subscribeListQueryChange(this.sharedList, 'sharedList', 'shared');
 		this.subscribeListQueryChange(this.sizeList, 'sizeList', 'size');
+		this.subscribeListQueryChange(this.golbalTweenList, 'tweenList', 'tween');
 		super.ngAfterContentInit();
 	}
 
@@ -719,6 +726,10 @@ export class NgxRendererComponent
 				}
 			}
 			this.cssRenderer = null;
+		}
+		if (this._tweenGroup !== null) {
+			this._tweenGroup.removeAll();
+			this._tweenGroup = null;
 		}
 		if (this.stats !== null) {
 			this.stats = null;
@@ -1127,6 +1138,8 @@ export class NgxRendererComponent
 	 */
 	private renderlistener: I3JS.AudioListener = null;
 
+	private _tweenGroup : I3JS.TweenGroup = null;
+
 	/**
 	 * Applys changes
 	 * @param changes
@@ -1180,6 +1193,7 @@ export class NgxRendererComponent
 						'guiparams',
 						'guicontrol',
 						'size',
+						'tween'
 					],
 					this.OBJECT_ATTR
 				)
@@ -1206,6 +1220,7 @@ export class NgxRendererComponent
 					'canvas2d',
 					'statsmode',
 					'guicontrol',
+					'tween',
 					'webglrenderer',
 				]);
 			}
@@ -1383,6 +1398,21 @@ export class NgxRendererComponent
 						break;
 					case 'control':
 						this.controls = this.getControls(this.cameraList, this.sceneList, this.canvasEle.nativeElement);
+						break;
+					case 'tween' :
+						if (this.golbalTweenList.length > 0) {
+							if (this._tweenGroup === null) {
+								this._tweenGroup = new N3JS.TweenGroup();
+							}
+							this.golbalTweenList.forEach(tween => {
+								tween.setTweenGroup(this._tweenGroup);
+							});
+						} else {
+							if (this._tweenGroup !== null) {
+								this._tweenGroup.removeAll();
+							}
+							this._tweenGroup = null;
+						}
 						break;
 					case 'scene':
 						this.unSubscribeReferList('sceneList');
@@ -1667,10 +1697,6 @@ export class NgxRendererComponent
 			if (this.cssRenderer !== null) {
 				this.cssRenderer = null;
 			}
-			GSAP.gsap.ticker.fps(60);
-			if (this._renderCaller !== null) {
-				GSAP.gsap.ticker.remove(this._renderCaller);
-			}
 			this._renderCaller = () => {
 				this.render();
 			};
@@ -1814,6 +1840,10 @@ export class NgxRendererComponent
 			this.stats?.begin();
 		}
 		const renderTimer = this.clock.getTimer(this.renderer, this.events);
+		if (this._tweenGroup !== null) {
+			this._tweenGroup.update();
+			// this._tweenGroup.update(renderTimer.elapsedTime * 1000);
+		}
 		this.events.direction.lerp(this.events.keyInfo.xy, renderTimer.delta / 3);
 		this.onRender.emit(renderTimer);
 		this.controllerList.forEach((controller) => {

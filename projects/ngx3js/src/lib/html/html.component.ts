@@ -9,7 +9,6 @@ import {
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { ICssStyle } from '../ngx-interface';
-import { NgxAbstractTweenComponent } from '../tween.abstract';
 
 /**
  * The Html component.
@@ -28,7 +27,7 @@ import { NgxAbstractTweenComponent } from '../tween.abstract';
 		},
 	],
 })
-export class NgxHtmlComponent extends NgxAbstractTweenComponent implements OnInit {
+export class NgxHtmlComponent extends NgxAbstractSubscribeComponent implements OnInit {
 	/**
 	 * The html tag.
 	 *

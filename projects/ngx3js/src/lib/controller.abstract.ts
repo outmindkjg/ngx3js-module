@@ -1,5 +1,4 @@
 import { QueryList } from '@angular/core';
-import * as GSAP from 'gsap';
 import { NgxCameraComponent } from './camera/camera.component';
 import { NgxCanvasComponent } from './canvas/canvas.component';
 import { I3JS, N3JS, NgxThreeUtil } from './interface';
@@ -95,7 +94,7 @@ export abstract class NgxAbstractThreeController {
 	/**
 	 * Tween timer of abstract three controller
 	 */
-	protected _tweenTimer: GSAP.TimelineLite | GSAP.TimelineMax = null;
+	protected _tweenTimer: I3JS.Tween = null;
 
 	/**
 	 * Creates an instance of abstract three controller.
@@ -215,134 +214,55 @@ export abstract class NgxAbstractThreeController {
 	 * @param [isTemplate]
 	 * @returns easing
 	 */
-	protected getEasing(def?: string, isTemplate?: boolean): any {
+	protected getEasing(def?: string, isTemplate?: boolean): I3JS.EasingFunction {
 		const easing = isTemplate
 			? NgxThreeUtil.getTypeSafe(this.template, def, '')
 			: NgxThreeUtil.getTypeSafe(this.easing, def, '');
 		switch (easing.toLowerCase()) {
-			case 'power1':
-			case 'power1.easein':
-				return GSAP.Power1.easeIn;
-			case 'Power1.easeInOut':
-				return GSAP.Power1.easeInOut;
-			case 'Power1.easeOut':
-				return GSAP.Power1.easeOut;
-			case 'Power2':
-			case 'Power2.easeIn':
-				return GSAP.Power2.easeIn;
-			case 'Power2.easeInOut':
-				return GSAP.Power2.easeInOut;
-			case 'Power2.easeOut':
-				return GSAP.Power2.easeOut;
-			case 'Power3':
-			case 'Power3.easeIn':
-				return GSAP.Power3.easeIn;
-			case 'Power3.easeInOut':
-				return GSAP.Power3.easeInOut;
-			case 'Power3.easeOut':
-				return GSAP.Power3.easeOut;
-			case 'Power4':
-			case 'Power4.easeIn':
-				return GSAP.Power4.easeIn;
-			case 'Power4.easeInOut':
-				return GSAP.Power4.easeInOut;
-			case 'Power4.easeOut':
-				return GSAP.Power4.easeOut;
-			case 'Back':
-			case 'Back.easeIn':
-				return GSAP.Back.easeIn.config(this.getOvershoot(1.7));
-			case 'Back.easeInOut':
-				return GSAP.Back.easeInOut.config(this.getOvershoot(1.7));
-			case 'Back.easeOut':
-				return GSAP.Back.easeOut.config(this.getOvershoot(1.7));
-			case 'Elastic':
-			case 'Elastic.easeIn':
-				return GSAP.Elastic.easeIn.config(
-					this.getAmplitude(1),
-					this.getPeriod(0.3)
-				);
-			case 'Elastic.easeInOut':
-				return GSAP.Elastic.easeInOut.config(
-					this.getAmplitude(1),
-					this.getPeriod(0.3)
-				);
-			case 'Elastic.easeOut':
-				return GSAP.Elastic.easeOut.config(
-					this.getAmplitude(1),
-					this.getPeriod(0.3)
-				);
-			case 'Bounce':
-			case 'Bounce.easeIn':
-				return GSAP.Bounce.easeIn;
-			case 'Bounce.easeInOut':
-				return GSAP.Bounce.easeInOut;
-			case 'Bounce.easeOut':
-				return GSAP.Bounce.easeOut;
-			case 'Rough':
-			case 'Rough.easeIn':
-			case 'Rough.easeInOut':
-			case 'Rough.easeOut':
-
-			/*
-        return GSAP.RoughEase.config({
-          template: this.getEasing(null, true),
-          strength: 1,
-          points: 20,
-          taper: 'none',
-          randomize: true,
-          clamp: false,
-        });
-        */
-			case 'SlowMo':
-			case 'SlowMo.easeIn':
-			case 'SlowMo.easeInOut':
-			case 'SlowMo.easeOut':
-			/*
-        return GSAP.SlowMo.ease.config(
-          this.getLinearRatio(0.7),
-          this.getPower(0.7),
-          this.getYoyoMode(false)
-        );
-        */
-			case 'Stepped':
-			case 'Stepped.easeIn':
-			case 'Stepped.easeInOut':
-			case 'Stepped.easeOut':
-				//  return GSAP.SteppedEase;
-				return GSAP.SteppedEase.config(this.getSteps(12));
-			case 'Circ':
-			case 'Circ.easeIn':
-				return GSAP.Circ.easeIn;
-			case 'Circ.easeInOut':
-				return GSAP.Circ.easeInOut;
-			case 'Circ.easeOut':
-				return GSAP.Circ.easeOut;
-			case 'Expo':
-			case 'Expo.easeIn':
-				return GSAP.Expo.easeIn;
-			case 'Expo.easeInOut':
-				return GSAP.Expo.easeInOut;
-			case 'Expo.easeOut':
-				return GSAP.Expo.easeOut;
-			case 'Sine':
-			case 'Sine.easeIn':
-				return GSAP.Sine.easeIn;
-			case 'Sine.easeInOut':
-				return GSAP.Sine.easeInOut;
-			case 'Sine.easeOut':
-				return GSAP.Sine.easeOut;
-			case 'Custom':
-			case 'Custom.easeIn':
-			case 'Custom.easeInOut':
-			case 'Custom.easeOut':
-				return GSAP.Power0.easeNone;
-			//  return GSAP.CustomEase.create();
-			case 'Power0':
-			case 'Power0.easeIn':
-			case 'Power0.easeInOut':
-			case 'Power0.easeOut':
+			case 'back':
+			case 'back.easein':
+				return N3JS.Easing.Back.In;
+			case 'back.easeinout':
+				return N3JS.Easing.Back.InOut;
+			case 'back.easeout':
+				return N3JS.Easing.Back.Out;
+			case 'elastic':
+			case 'elastic.easein':
+				return N3JS.Easing.Elastic.In;
+			case 'elastic.easeinout':
+				return N3JS.Easing.Elastic.InOut;
+			case 'elastic.easeout':
+				return N3JS.Easing.Elastic.Out;
+			case 'bounce':
+			case 'bounce.easein':
+				return N3JS.Easing.Bounce.In;
+			case 'bounce.easeinout':
+				return N3JS.Easing.Bounce.InOut;
+			case 'bounce.easeout':
+				return N3JS.Easing.Bounce.Out;
+			case 'circ':
+			case 'circ.easein':
+				return N3JS.Easing.Circular.In;
+			case 'circ.easeinout':
+				return N3JS.Easing.Circular.InOut;
+			case 'circ.easeout':
+				return N3JS.Easing.Circular.Out;
+			case 'expo':
+			case 'expo.easein':
+				return N3JS.Easing.Exponential.In;
+			case 'expo.easeinout':
+				return N3JS.Easing.Exponential.InOut;
+			case 'expo.easeout':
+				return N3JS.Easing.Exponential.Out;
+			case 'sine':
+			case 'sine.easein':
+				return N3JS.Easing.Sinusoidal.In;
+			case 'sine.easeinout':
+				return N3JS.Easing.Sinusoidal.InOut;
+			case 'sine.easeout':
+				return N3JS.Easing.Sinusoidal.Out;
 			default:
-				return GSAP.Power0.easeNone;
+				return N3JS.Easing.Linear.None;
 		}
 	}
 
@@ -819,12 +739,13 @@ export abstract class NgxAbstractThreeController {
 		}
 	}
 
+
 	/**
 	 * Gets tween timer
 	 */
-	protected get tweenTimer(): GSAP.TimelineLite | GSAP.TimelineMax {
-		if (this._tweenTimer === null) {
-			this._tweenTimer = new GSAP.TimelineLite();
+	protected getTweenTimer(object : object): I3JS.Tween {
+		if (this._tweenTimer === null || this._tweenTimer._object !== object) {
+			this._tweenTimer = new N3JS.TWEEN.Tween(object);
 		}
 		return this._tweenTimer;
 	}
@@ -908,39 +829,10 @@ export class NgxAutoRotationController extends NgxAbstractThreeController {
 		super.setVariables(variables);
 		if (this.enable) {
 			if (this.refObject !== null) {
-				const tweenTimer = this.tweenTimer;
-				if (tweenTimer !== null) {
-					tweenTimer.clear();
-				}
-				const rotation = this.rotation.clone();
-				tweenTimer.to(rotation, {
-					...NgxThreeUtil.getEulerSafe(this.x, this.y, this.z),
-					duration: this.getDuration(),
-					ease: this.getEasing(),
-					repeat: this.getRepeat(),
-					yoyo: this.getYoyo(),
-					onUpdate: (e) => {
-						this.rotation.copy(rotation);
-					},
-				});
-				tweenTimer.play();
+				// todo
 			} else if (this.refObject2d !== null) {
-				const tweenTimer = this.tweenTimer;
-				if (tweenTimer !== null) {
-					tweenTimer.clear();
-				}
-				const target = NgxThreeUtil.getVector3Safe(this.x, this.y, this.z);
-				tweenTimer.to(this.refObject2d.html, {
-					...{ rotateX: target.x, rotateY: target.y, rotateZ: target.z },
-					duration: this.getDuration(),
-					ease: this.getEasing(),
-					repeat: this.getRepeat(),
-					yoyo: this.getYoyo(),
-				});
-				tweenTimer.play();
+				// todo
 			}
-		} else {
-			this.tweenTimer.pause();
 		}
 	}
 }
@@ -975,39 +867,10 @@ export class NgxAutoScaleController extends NgxAbstractThreeController {
 		super.setVariables(variables);
 		if (this.enable) {
 			if (this.refObject !== null) {
-				const tweenTimer = this.tweenTimer;
-				if (tweenTimer !== null) {
-					tweenTimer.clear();
-				}
-				const scale = this.scale.clone();
-				tweenTimer.to(scale, {
-					...NgxThreeUtil.getVector3Safe(this.x, this.y, this.z),
-					duration: this.getDuration(),
-					ease: this.getEasing(),
-					repeat: this.getRepeat(),
-					yoyo: this.getYoyo(),
-					onUpdate: (e) => {
-						this.scale.copy(scale);
-					},
-				});
-				tweenTimer.play();
+				// todo
 			} else if (this.refObject2d !== null) {
-				const tweenTimer = this.tweenTimer;
-				if (tweenTimer !== null) {
-					tweenTimer.clear();
-				}
-				const target = NgxThreeUtil.getVector3Safe(this.x, this.y, this.z);
-				tweenTimer.to(this.refObject2d.html, {
-					...{ scaleX: target.x, scaleY: target.y },
-					duration: this.getDuration(),
-					ease: this.getEasing(),
-					repeat: this.getRepeat(),
-					yoyo: this.getYoyo(),
-				});
-				tweenTimer.play();
+				// todo
 			}
-		} else {
-			this.tweenTimer.pause();
 		}
 	}
 }
@@ -1042,35 +905,10 @@ export class NgxAutoPositionController extends NgxAbstractThreeController {
 		super.setVariables(variables);
 		if (this.enable) {
 			if (this.refObject !== null) {
-				const tweenTimer = this.tweenTimer;
-				tweenTimer.clear();
-				const position = this.position.clone();
-				tweenTimer.to(position, {
-					...NgxThreeUtil.getVector3Safe(this.x, this.y, this.z),
-					duration: this.getDuration(),
-					ease: this.getEasing(),
-					repeat: this.getRepeat(),
-					yoyo: this.getYoyo(),
-					onUpdate: (e) => {
-						this.position.copy(position);
-					},
-				});
-				tweenTimer.play();
+				// todo
 			} else if (this.refObject2d !== null) {
-				const tweenTimer = this.tweenTimer;
-				tweenTimer.clear();
-				const target = NgxThreeUtil.getVector3Safe(this.x, this.y, this.z);
-				tweenTimer.to(this.refObject2d.html, {
-					...{ left: target.x, top: target.y },
-					duration: this.getDuration(),
-					ease: this.getEasing(),
-					repeat: this.getRepeat(),
-					yoyo: this.getYoyo(),
-				});
-				tweenTimer.play();
+				// todo
 			}
-		} else {
-			this.tweenTimer.pause();
 		}
 	}
 }
@@ -1100,51 +938,13 @@ export class NgxAutoMaterialController extends NgxAbstractThreeController {
 		super.setVariables(variables);
 		if (this.enable) {
 			if (this.refObject !== null) {
-				const material = this.material;
-				if (
-					material instanceof N3JS.MeshBasicMaterial ||
-					material instanceof N3JS.MeshLambertMaterial
-				) {
-					const tweenTimer = this.tweenTimer;
-					tweenTimer.clear();
-					const colorOpacity = {
-						...material.color.clone(),
-						materialOpacity: material.opacity,
-					};
-					tweenTimer.to(colorOpacity, {
-						...NgxThreeUtil.getColorSafe(this.color),
-						materialOpacity: this.opacity,
-						duration: this.getDuration(),
-						ease: this.getEasing(),
-						repeat: this.getRepeat(),
-						yoyo: this.getYoyo(),
-						onUpdate: (e) => {
-							material['color'].setRGB(
-								colorOpacity.r,
-								colorOpacity.g,
-								colorOpacity.b
-							);
-							material.opacity = colorOpacity.materialOpacity;
-						},
-					});
-					tweenTimer.play();
-				}
+				// todo
 			} else if (this.refObject2d !== null) {
-				const tweenTimer = this.tweenTimer;
-				tweenTimer.clear();
-				tweenTimer.to(this.refObject2d.html, {
-					backgroundColor: NgxThreeUtil.getColorSafe(this.color).getStyle(),
-					opacity: this.opacity,
-					duration: this.getDuration(),
-					ease: this.getEasing(),
-					repeat: this.getRepeat(),
-					yoyo: this.getYoyo(),
-				});
-				tweenTimer.play();
+				// todo
 			}
 		} else {
-			this.tweenTimer.pause();
-		}
+				// todo
+			}
 	}
 }
 

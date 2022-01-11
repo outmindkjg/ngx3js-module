@@ -1,10 +1,8 @@
 import { Directive, Inject } from '@angular/core';
-import * as GSAP from 'gsap';
 import { Subscription } from 'rxjs';
-import { I3JS, NgxThreeUtil } from './interface';
-import { IRendererTimer, IEaseFunction, TObjectFunction, TObject3dFunction, IDirectiveOptions } from './ngx-interface';
+import { I3JS, N3JS, NgxThreeUtil } from './interface';
+import { IRendererTimer, TObject3dFunction, TObjectFunction } from './ngx-interface';
 import { NgxAbstractObject3dComponent } from './object3d.abstract';
-
 
 /**
  * NgxAbstractObject3dDirective Abstract
@@ -136,165 +134,107 @@ export abstract class NgxAbstractThreeDirective {
 		this.enabled = false;
 	}
 
-	protected getEasing(
-		type: string,
-		speed: number,
-		repeat: string = 'yoyo',
-		start: number,
-		end: number
-	): IEaseFunction {
-		let easing: IEaseFunction = null;
+	protected getEasing(type: string, speed: number, repeat: string = 'yoyo', start: number, end: number): I3JS.EasingFunction {
+		let easing: I3JS.EasingFunction = null;
 		switch (type.toLowerCase()) {
 			case 'linearinout':
-				easing = GSAP.Linear.easeInOut;
-				break;
 			case 'linearout':
-				easing = GSAP.Linear.easeOut;
-				break;
 			case 'linearnone':
-				easing = GSAP.Linear.easeNone;
+				easing = N3JS.Easing.Linear.None;
 				break;
 			case 'quadin':
-				easing = GSAP.Quad.easeIn;
+				easing = N3JS.Easing.Quadratic.In;
 				break;
 			case 'quadinout':
-				easing = GSAP.Quad.easeInOut;
+				easing = N3JS.Easing.Quadratic.InOut;
 				break;
 			case 'quadout':
-				easing = GSAP.Quad.easeOut;
+				easing = N3JS.Easing.Quadratic.Out;
 				break;
 			case 'cubicin':
-				easing = GSAP.Cubic.easeIn;
+				easing = N3JS.Easing.Cubic.In;
 				break;
 			case 'cubicinout':
-				easing = GSAP.Cubic.easeInOut;
+				easing = N3JS.Easing.Cubic.InOut;
 				break;
 			case 'cubicout':
-				easing = GSAP.Cubic.easeOut;
+				easing = N3JS.Easing.Cubic.Out;
 				break;
 			case 'quartin':
-				easing = GSAP.Quart.easeIn;
+				easing = N3JS.Easing.Quartic.In;
 				break;
 			case 'quartinout':
-				easing = GSAP.Quart.easeInOut;
+				easing = N3JS.Easing.Quartic.InOut;
 				break;
 			case 'quartout':
-				easing = GSAP.Quart.easeOut;
+				easing = N3JS.Easing.Quartic.Out;
 				break;
 			case 'quintin':
-				easing = GSAP.Quint.easeIn;
+				easing = N3JS.Easing.Quintic.In;
 				break;
 			case 'quintinout':
-				easing = GSAP.Quint.easeInOut;
+				easing = N3JS.Easing.Quintic.InOut;
 				break;
 			case 'quintout':
-				easing = GSAP.Quint.easeOut;
-				break;
-			case 'strongin':
-				easing = GSAP.Strong.easeIn;
-				break;
-			case 'stronginout':
-				easing = GSAP.Strong.easeInOut;
-				break;
-			case 'strongout':
-				easing = GSAP.Strong.easeOut;
-				break;
-			case 'power1in':
-				easing = GSAP.Power1.easeIn;
-				break;
-			case 'power1inout':
-				easing = GSAP.Power1.easeInOut;
-				break;
-			case 'power1out':
-				easing = GSAP.Power1.easeOut;
-				break;
-			case 'power2in':
-				easing = GSAP.Power2.easeIn;
-				break;
-			case 'power2inout':
-				easing = GSAP.Power2.easeInOut;
-				break;
-			case 'power2out':
-				easing = GSAP.Power2.easeOut;
-				break;
-			case 'power3in':
-				easing = GSAP.Power3.easeIn;
-				break;
-			case 'power3inout':
-				easing = GSAP.Power3.easeInOut;
-				break;
-			case 'power3out':
-				easing = GSAP.Power3.easeOut;
-				break;
-			case 'power4in':
-				easing = GSAP.Power4.easeIn;
-				break;
-			case 'power4inout':
-				easing = GSAP.Power4.easeInOut;
-				break;
-			case 'power4out':
-				easing = GSAP.Power4.easeOut;
+				easing = N3JS.Easing.Quintic.Out;
 				break;
 			case 'backin':
-				easing = GSAP.Back.easeIn;
+				easing = N3JS.Easing.Back.In;
 				break;
 			case 'backinout':
-				easing = GSAP.Back.easeInOut;
+				easing = N3JS.Easing.Back.InOut;
 				break;
 			case 'backout':
-				easing = GSAP.Back.easeOut;
+				easing = N3JS.Easing.Back.Out;
 				break;
 			case 'elasticin':
-				easing = GSAP.Elastic.easeIn;
+				easing = N3JS.Easing.Elastic.In;
 				break;
 			case 'elasticinout':
-				easing = GSAP.Elastic.easeInOut;
+				easing = N3JS.Easing.Elastic.InOut;
 				break;
 			case 'elasticout':
-				easing = GSAP.Elastic.easeOut;
+				easing = N3JS.Easing.Elastic.Out;
 				break;
 			case 'bouncein':
-				easing = GSAP.Bounce.easeIn;
+				easing = N3JS.Easing.Bounce.In;
 				break;
 			case 'bounceinout':
-				easing = GSAP.Bounce.easeInOut;
+				easing = N3JS.Easing.Bounce.InOut;
 				break;
 			case 'bounceout':
-				easing = GSAP.Bounce.easeOut;
+				easing = N3JS.Easing.Bounce.Out;
 				break;
 			case 'circin':
-				easing = GSAP.Circ.easeIn;
+				easing = N3JS.Easing.Circular.In;
 				break;
 			case 'circinout':
-				easing = GSAP.Circ.easeInOut;
+				easing = N3JS.Easing.Circular.InOut;
 				break;
 			case 'circout':
-				easing = GSAP.Circ.easeOut;
+				easing = N3JS.Easing.Circular.Out;
 				break;
 			case 'expoin':
-				easing = GSAP.Expo.easeIn;
+				easing = N3JS.Easing.Exponential.In;
 				break;
 			case 'expoinout':
-				easing = GSAP.Expo.easeInOut;
+				easing = N3JS.Easing.Exponential.InOut;
 				break;
 			case 'expoout':
-				easing = GSAP.Expo.easeOut;
+				easing = N3JS.Easing.Exponential.Out;
 				break;
 			case 'sinein':
-				easing = GSAP.Sine.easeIn;
+				easing = N3JS.Easing.Sinusoidal.In;
 				break;
 			case 'sineinout':
-				easing = GSAP.Sine.easeInOut;
+				easing = N3JS.Easing.Sinusoidal.InOut;
 				break;
 			case 'sineout':
-				easing = GSAP.Sine.easeOut;
-				break;
-			case 'power0none':
-				easing = GSAP.Power0.easeNone;
+				easing = N3JS.Easing.Sinusoidal.Out;
 				break;
 			case 'linearin':
 			default:
-				easing = GSAP.Linear.easeIn;
+				easing = N3JS.Easing.Linear.None;
 				break;
 		}
 		let elapsedTime: number = 0;
@@ -336,11 +276,7 @@ export abstract class NgxAbstractThreeDirective {
 	 * @param object
 	 * @param [repeat]
 	 */
-	protected consoleLogTime(
-		key: string,
-		object: any,
-		repeat: number = 300
-	): void {
+	protected consoleLogTime(key: string, object: any, repeat: number = 300): void {
 		this._logTimeSeqn++;
 		if (this._logTimeSeqn % repeat === 0) {
 			console.log(key, object);

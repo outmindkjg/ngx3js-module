@@ -1,6 +1,5 @@
-import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as GSAP from 'gsap';
-import { NgxThreeUtil } from '../interface';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { NgxThreeUtil, I3JS, N3JS } from '../interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 
 /**
@@ -23,17 +22,8 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 	selector: 'ngx3js-tween',
 	templateUrl: './tween.component.html',
 	styleUrls: ['./tween.component.scss'],
-	providers: [
-		{
-			provide: NgxAbstractSubscribeComponent,
-			useExisting: forwardRef(() => NgxTweenComponent),
-		},
-	],
 })
-export class NgxTweenComponent
-	extends NgxAbstractSubscribeComponent
-	implements OnInit
-{
+export class NgxTweenComponent implements OnInit {
 	/**
 	 * The targets of tween component
 	 */
@@ -106,6 +96,21 @@ export class NgxTweenComponent
 	 * The steps of tween component
 	 */
 	@Input() public steps: number = null;
+
+	/**
+	 * Will be called when load completes. The argument will be the loaded self
+	 */
+	@Output() public onLoad: EventEmitter<this> = new EventEmitter<this>();
+
+	/**
+	 * The steps of tween component
+	 */
+	@Input() public events: string = null;
+
+	/**
+	 * Output  of ngx tween component
+	 */
+	@Output() public onTweenEvent: EventEmitter<string> = new EventEmitter<string>();
 
 	/**
 	 * Gets duration
@@ -203,134 +208,55 @@ export class NgxTweenComponent
 	 * @param [isTemplate]
 	 * @returns easing
 	 */
-	private getEasing(def?: string, isTemplate?: boolean): any {
+	private getEasing(def?: string, isTemplate?: boolean): I3JS.EasingFunction {
 		const easing = isTemplate
 			? NgxThreeUtil.getTypeSafe(this.template, def, '')
 			: NgxThreeUtil.getTypeSafe(this.easing, def, '');
 		switch (easing.toLowerCase()) {
-			case 'power1':
-			case 'power1.easein':
-				return GSAP.Power1.easeIn;
-			case 'power1.easeinout':
-				return GSAP.Power1.easeInOut;
-			case 'power1.easeout':
-				return GSAP.Power1.easeOut;
-			case 'power2':
-			case 'power2.easein':
-				return GSAP.Power2.easeIn;
-			case 'power2.easeinout':
-				return GSAP.Power2.easeInOut;
-			case 'power2.easeout':
-				return GSAP.Power2.easeOut;
-			case 'power3':
-			case 'power3.easein':
-				return GSAP.Power3.easeIn;
-			case 'power3.easeinout':
-				return GSAP.Power3.easeInOut;
-			case 'power3.easeout':
-				return GSAP.Power3.easeOut;
-			case 'power4':
-			case 'power4.easein':
-				return GSAP.Power4.easeIn;
-			case 'power4.easeinout':
-				return GSAP.Power4.easeInOut;
-			case 'power4.easeout':
-				return GSAP.Power4.easeOut;
 			case 'back':
 			case 'back.easein':
-				return GSAP.Back.easeIn.config(this.getOvershoot(1.7));
+				return N3JS.Easing.Back.In;
 			case 'back.easeinout':
-				return GSAP.Back.easeInOut.config(this.getOvershoot(1.7));
+				return N3JS.Easing.Back.InOut;
 			case 'back.easeout':
-				return GSAP.Back.easeOut.config(this.getOvershoot(1.7));
+				return N3JS.Easing.Back.Out;
 			case 'elastic':
 			case 'elastic.easein':
-				return GSAP.Elastic.easeIn.config(
-					this.getAmplitude(1),
-					this.getPeriod(0.3)
-				);
+				return N3JS.Easing.Elastic.In;
 			case 'elastic.easeinout':
-				return GSAP.Elastic.easeInOut.config(
-					this.getAmplitude(1),
-					this.getPeriod(0.3)
-				);
+				return N3JS.Easing.Elastic.InOut;
 			case 'elastic.easeout':
-				return GSAP.Elastic.easeOut.config(
-					this.getAmplitude(1),
-					this.getPeriod(0.3)
-				);
+				return N3JS.Easing.Elastic.Out;
 			case 'bounce':
 			case 'bounce.easein':
-				return GSAP.Bounce.easeIn;
+				return N3JS.Easing.Bounce.In;
 			case 'bounce.easeinout':
-				return GSAP.Bounce.easeInOut;
+				return N3JS.Easing.Bounce.InOut;
 			case 'bounce.easeout':
-				return GSAP.Bounce.easeOut;
-			case 'rough':
-			case 'rough.easein':
-			case 'rough.easeinout':
-			case 'rough.easeout':
-
-			/*
-        return GSAP.RoughEase.config({
-          template: this.getEasing(null, true),
-          strength: 1,
-          points: 20,
-          taper: 'none',
-          randomize: true,
-          clamp: false,
-        });
-        */
-			case 'slowmo':
-			case 'slowmo.easein':
-			case 'slowmo.easeinout':
-			case 'slowmo.easeout':
-			/*
-        return GSAP.SlowMo.ease.config(
-          this.getLinearRatio(0.7),
-          this.getPower(0.7),
-          this.getYoyoMode(false)
-        );
-        */
-			case 'stepped':
-			case 'stepped.easein':
-			case 'stepped.easeinout':
-			case 'stepped.easeout':
-				//  return GSAP.SteppedEase;
-				return GSAP.SteppedEase.config(this.getSteps(12));
+				return N3JS.Easing.Bounce.Out;
 			case 'circ':
 			case 'circ.easein':
-				return GSAP.Circ.easeIn;
+				return N3JS.Easing.Circular.In;
 			case 'circ.easeinout':
-				return GSAP.Circ.easeInOut;
+				return N3JS.Easing.Circular.InOut;
 			case 'circ.easeout':
-				return GSAP.Circ.easeOut;
+				return N3JS.Easing.Circular.Out;
 			case 'expo':
 			case 'expo.easein':
-				return GSAP.Expo.easeIn;
+				return N3JS.Easing.Exponential.In;
 			case 'expo.easeinout':
-				return GSAP.Expo.easeInOut;
+				return N3JS.Easing.Exponential.InOut;
 			case 'expo.easeout':
-				return GSAP.Expo.easeOut;
+				return N3JS.Easing.Exponential.Out;
 			case 'sine':
 			case 'sine.easein':
-				return GSAP.Sine.easeIn;
+				return N3JS.Easing.Sinusoidal.In;
 			case 'sine.easeinout':
-				return GSAP.Sine.easeInOut;
+				return N3JS.Easing.Sinusoidal.InOut;
 			case 'sine.easeout':
-				return GSAP.Sine.easeOut;
-			case 'custom':
-			case 'custom.easein':
-			case 'custom.easeinout':
-			case 'custom.easeout':
-				return GSAP.Power0.easeNone;
-			//  return GSAP.CustomEase.create();
-			case 'power0':
-			case 'power0.easein':
-			case 'power0.easeinout':
-			case 'power0.easeout':
+				return N3JS.Easing.Sinusoidal.Out;
 			default:
-				return GSAP.Power0.easeNone;
+				return N3JS.Easing.Linear.None;
 		}
 	}
 
@@ -369,23 +295,34 @@ export class NgxTweenComponent
 	/**
 	 * Creates an instance of tween component.
 	 */
-	constructor() {
-		super();
-	}
+	constructor() {}
 
 	/**
 	 * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked.
 	 * It is invoked only once when the directive is instantiated.
 	 */
-	ngOnInit(): void {
-		super.ngOnInit('tween');
-	}
+	ngOnInit(): void {}
 
 	/**
 	 * A callback method that performs custom clean-up, invoked immediately before a directive, pipe, or service instance is destroyed.
 	 */
 	ngOnDestroy(): void {
-		super.ngOnDestroy();
+		if (this._tween !== null) {
+			this._tween.stop();
+			if (this._tweenGroup !== null) {
+				this._tweenGroup.remove(this._tween);
+			}
+			this._tween = null;
+		}
+		if (this.parentEle !== null) {
+			this.parentEle = null;
+		}
+		if (this._tweenTarget !== null) {
+			this._tweenTarget = null;
+		}
+		if (this._tweenGroup !== null) {
+			this._tweenGroup = null;
+		}
 	}
 
 	/**
@@ -395,20 +332,13 @@ export class NgxTweenComponent
 	 *
 	 * @param changes The changed properties.
 	 */
-	ngOnChanges(changes: SimpleChanges): void {
-		super.ngOnChanges(changes);
-		if (changes && this.parentEle) {
-			this.addChanges(changes);
-		}
-	}
+	ngOnChanges(changes: SimpleChanges): void {}
 
 	/**
 	 * A callback method that is invoked immediately after Angular has completed initialization of all of the directive's content.
 	 * It is invoked only once when the directive is instantiated.
 	 */
-	ngAfterContentInit(): void {
-		super.ngAfterContentInit();
-	}
+	ngAfterContentInit(): void {}
 
 	/**
 	 * Parent ele of tween component
@@ -421,9 +351,14 @@ export class NgxTweenComponent
 	private _tweenTarget: any = null;
 
 	/**
+	 * Tween group of ngx tween component
+	 */
+	private _tweenGroup: I3JS.TweenGroup = null;
+
+	/**
 	 * The Tween of tween component
 	 */
-	private _tween: GSAP.TimelineLite = null;
+	private _tween: I3JS.Tween = null;
 
 	/**
 	 * Sets tween
@@ -432,31 +367,59 @@ export class NgxTweenComponent
 	 * @returns tween
 	 */
 	public setTween(to: any, duration?: number): any {
-		if (NgxThreeUtil.isNotNull(to)) {
+		if (NgxThreeUtil.isNotNull(to) && this._tweenGroup !== null) {
 			if (this._tween !== null) {
-				this._tween.kill();
+				this._tween.stop();
+				this._tweenGroup.remove(this._tween);
 			}
-			const fromVar: any = {};
 			const targets = this.getTargets(this._tweenTarget, null);
-			Object.entries(to).forEach(([key, value]) => {
-				fromVar[key] = targets[key];
-			});
-			this._tween = new GSAP.TimelineLite()
-				.fromTo(
-					targets,
-					fromVar,
-					{
-						...to,
-						duration: NgxThreeUtil.isNotNull(duration)
-							? duration
-							: this.getDuration(),
-						ease: this.getEasing(),
-						repeat: this.getRepeat(),
-						yoyo: this.getYoyo(),
-					},
-					1
-				)
-				.play();
+			this._tween = new N3JS.Tween(targets, this._tweenGroup).to(to);
+			if (NgxThreeUtil.isNotNull(this.duration)) {
+				this._tween.duration(this.getDuration() * 1000);
+			} else if (NgxThreeUtil.isNotNull(duration)) {
+				this._tween.duration(duration * 1000);
+			}
+			if (NgxThreeUtil.isNotNull(this.yoyo)) {
+				this._tween.yoyo(this.getYoyo());
+			}
+			if (NgxThreeUtil.isNotNull(this.repeat)) {
+				this._tween.repeat(this.getRepeat());
+			}
+			if (NgxThreeUtil.isNotNull(this.easing)) {
+				this._tween.easing(this.getEasing());
+			}
+			if (NgxThreeUtil.isNotNull(this.events)) {
+				this.events.split(',').forEach((event) => {
+					switch (event.toLowerCase()) {
+						case 'update':
+							this._tween.onUpdate(() => {
+								this.onTweenEvent.emit('update');
+							});
+							break;
+						case 'start':
+							this._tween.onStart(() => {
+								this.onTweenEvent.emit('start');
+							});
+							break;
+						case 'stop':
+							this._tween.onStop(() => {
+								this.onTweenEvent.emit('stop');
+							});
+							break;
+						case 'complete':
+							this._tween.onComplete(() => {
+								this.onTweenEvent.emit('complete');
+							});
+							break;
+						case 'repeat':
+							this._tween.onRepeat(() => {
+								this.onTweenEvent.emit('repeat');
+							});
+							break;
+					}
+				});
+			}
+			this._tween.start();
 		}
 	}
 
@@ -467,17 +430,30 @@ export class NgxTweenComponent
 	 * @param parentEle
 	 * @returns tween
 	 */
-	public getTween(
-		tween: GSAP.TimelineLite | GSAP.TimelineMax,
-		tweenTarget: any,
-		parentEle: any
-	): any {
+	public setTweenGroup(tweenGroup: I3JS.TweenGroup) {
+		if (this._tweenGroup !== tweenGroup) {
+			this._tweenGroup = tweenGroup;
+			if (this._tweenTarget !== null && this.parentEle !== null) {
+				this.getTween(this._tweenTarget, this.parentEle);
+			}
+		}
+	}
+
+	/**
+	 * Gets tween
+	 * @param tween
+	 * @param tweenTarget
+	 * @param parentEle
+	 * @returns tween
+	 */
+	public getTween(tweenTarget: any, parentEle: any) {
 		this.parentEle = parentEle;
 		this._tweenTarget = tweenTarget;
-		if (NgxThreeUtil.isNotNull(this.to)) {
-			this.setTween(this.getTo(), this.getDuration());
+		if (this._tweenGroup !== null) {
+			if (NgxThreeUtil.isNotNull(this.to)) {
+				this.setTween(this.getTo(), this.getDuration());
+			}
+			this.onLoad.emit(this);
 		}
-		super.callOnLoad();
-		return tween;
 	}
 }

@@ -884,6 +884,7 @@ export class NgxAbstractTextureComponent
 			texture = this.getTextureImage(image, cubeImage, null, loadOption, () => {
 				this.setTextureOptions(texture, textureOption);
 				if (NgxThreeUtil.isNotNull(onLoad)) {
+					texture.needsUpdate = true;
 					onLoad();
 				}
 			});

@@ -462,15 +462,19 @@ export class NgxHelperComponent extends NgxAbstractObject3dComponent implements 
 	/**
 	 * Sets update
 	 */
-	public setUpdate() {
+	public setUpdate(delay : number = 100) {
 		if (NgxThreeUtil.isNotNull(this.helper)) {
 			const helper: any = this.helper;
 			if (NgxThreeUtil.isNotNull(helper.update)) {
 				if (helper instanceof N3JS.SkeletonHelper) {
 				} else {
-					window.setTimeout(() => {
+					if (delay > 0) {
+						window.setTimeout(() => {
+							helper.update();
+						}, delay);
+					} else {
 						helper.update();
-					}, 100);
+					}
 				}
 			}
 		}

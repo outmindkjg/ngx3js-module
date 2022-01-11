@@ -69,7 +69,6 @@ import { NgxThreeGeometryCustom } from './three-geometry-custom';
 import { NgxToolsComponent } from './tools/tools.component';
 import { NgxTransformComponent } from './transform/transform.component';
 import { NgxTranslationComponent } from './translation/translation.component';
-import { NgxAbstractTweenComponent } from './tween.abstract';
 import { NgxTweenComponent } from './tween/tween.component';
 import { NgxViewerComponent } from './viewer/viewer.component';
 import { NgxViewportInComponent } from './viewport-in/viewport-in.component';
@@ -138,7 +137,6 @@ const N3JS_COMPONENTS: Array<Type<any>> = [
 	NgxChartPolarAreaComponent,
 	NgxChartControllerComponent,
 	NgxAbstractSubscribeComponent,
-	NgxAbstractTweenComponent,
 	NgxAbstractTextureComponent,
 	NgxAbstractMaterialComponent,
 	NgxAbstractGeometryComponent,

@@ -2,7 +2,6 @@ import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/co
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
 import { ITagAttributes } from '../ngx-interface';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
-import { NgxAbstractTweenComponent } from '../tween.abstract';
 
 /**
  * The Position component.
@@ -34,7 +33,7 @@ import { NgxAbstractTweenComponent } from '../tween.abstract';
 
 })
 export class NgxPositionComponent
-	extends NgxAbstractTweenComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit
 {
 	/**

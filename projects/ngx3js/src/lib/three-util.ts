@@ -3,11 +3,9 @@ import { NgxMeshComponent } from './mesh/mesh.component';
 import {
 	ICssStyle,
 	IGuiBaseControl,
-	IGuiControlParam,
-	IRendererTimer,
-	ITagAttributes,
-	INgxColor,
-	INgxThreeGuiController,
+	IGuiControlParam, INgxColor,
+	INgxThreeGuiController, IRendererTimer,
+	ITagAttributes
 } from './ngx-interface';
 import { NgxThreeClock } from './three-clock';
 import { NgxThreeStats } from './three-stats';
@@ -539,8 +537,6 @@ export class NgxThreeUtil {
 	public static render(renderTimer: IRendererTimer) {
 		if (this.renderTimer !== renderTimer) {
 			this.renderTimer = renderTimer;
-			// GSAP.update(renderTimer.elapsedTime * 1000);
-			// TWEEN.update();
 		}
 	}
 

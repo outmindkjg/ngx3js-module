@@ -1718,7 +1718,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					type: textureType,
 					component: texture,
 				});
-			} else {
+			} else if (typeof texture !== 'string'){
 				const foundTexture = NgxThreeUtil.getTexture(texture, textureType, false);
 				const anyMaterial: any = this.material;
 				if (anyMaterial[textureType] !== undefined) {

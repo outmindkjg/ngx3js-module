@@ -21,7 +21,7 @@ import { NgxPositionComponent } from './position/position.component';
 import { NgxRigidbodyComponent } from './rigidbody/rigidbody.component';
 import { NgxRotationComponent } from './rotation/rotation.component';
 import { NgxScaleComponent } from './scale/scale.component';
-import { NgxAbstractTweenComponent } from './tween.abstract';
+import { NgxAbstractSubscribeComponent } from './subscribe.abstract';
 
 
 /**
@@ -53,7 +53,7 @@ import { NgxAbstractTweenComponent } from './tween.abstract';
 	template: '',
 })
 export class NgxAbstractObject3dComponent
-	extends NgxAbstractTweenComponent
+	extends NgxAbstractSubscribeComponent
 	implements OnInit, OnChanges, AfterContentInit, OnDestroy
 {
 	/**

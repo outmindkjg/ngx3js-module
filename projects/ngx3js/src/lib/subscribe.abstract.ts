@@ -1,6 +1,7 @@
 import {
 	AfterContentInit,
 	Component,
+	ContentChildren,
 	EventEmitter,
 	Input,
 	OnChanges,
@@ -9,10 +10,11 @@ import {
 	Output,
 	QueryList,
 	SimpleChange,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { NgxThreeUtil } from './interface';
+import { NgxTweenComponent } from './tween/tween.component';
 
 /**
  * The Abstract Subscribe component.
@@ -38,9 +40,7 @@ import { NgxThreeUtil } from './interface';
 @Component({
 	template: '',
 })
-export class NgxAbstractSubscribeComponent
-	implements OnInit, OnChanges, OnDestroy, AfterContentInit
-{
+export class NgxAbstractSubscribeComponent implements OnInit, OnChanges, OnDestroy, AfterContentInit {
 	/**
 	 * Debug this Object
 	 */
@@ -72,6 +72,11 @@ export class NgxAbstractSubscribeComponent
 	@Input() public tween: { [key: string]: any } = null;
 
 	/**
+	 * Content children of abstract tween component
+	 */
+	@ContentChildren(NgxTweenComponent, { descendants: false }) private tweenList: QueryList<NgxTweenComponent>;
+
+	/**
 	 * Will be called when load completes. The argument will be the loaded self
 	 */
 	@Output() public onLoad: EventEmitter<this> = new EventEmitter<this>();
@@ -84,15 +89,7 @@ export class NgxAbstractSubscribeComponent
 	/**
 	 * Object attr of abstract subscribe component
 	 */
-	protected OBJECT_ATTR: string[] = [
-		'init',
-		'debug',
-		'enabled',
-		'userdata',
-		'overrideparams',
-		'windowexport',
-		'tween',
-	];
+	protected OBJECT_ATTR: string[] = ['init', 'debug', 'enabled', 'userdata', 'overrideparams', 'windowexport', 'tween'];
 
 	protected selfAny: any = this;
 
@@ -125,11 +122,7 @@ export class NgxAbstractSubscribeComponent
 	 */
 	ngOnInit(subscribeType?: string): void {
 		this.id =
-			subscribeType +
-			'_' +
-			Math.round(10000 + Math.random() * 10000) +
-			'_' +
-			Math.round(10000 + Math.random() * 10000);
+			subscribeType + '_' + Math.round(10000 + Math.random() * 10000) + '_' + Math.round(10000 + Math.random() * 10000);
 		this.setSubscribeType(subscribeType);
 		NgxThreeUtil.setThreeComponent(this.id, this);
 		this._userData.component = this.id;
@@ -318,11 +311,7 @@ export class NgxAbstractSubscribeComponent
 	 * @param object
 	 * @param [repeat]
 	 */
-	protected consoleLogTime(
-		key: string,
-		object: any,
-		repeat: number = 300
-	): void {
+	protected consoleLogTime(key: string, object: any, repeat: number = 300): void {
 		this._logTimeSeqn++;
 		if (this._logTimeSeqn % repeat === 0) {
 			this.consoleLog(key, object, 'info');
@@ -686,10 +675,7 @@ export class NgxAbstractSubscribeComponent
 	 * @param component
 	 * @returns local component
 	 */
-	protected initLocalComponent<T extends OnInit & OnDestroy>(
-		key: string,
-		component: T
-	): T {
+	protected initLocalComponent<T extends OnInit & OnDestroy>(key: string, component: T): T {
 		if (NgxThreeUtil.isNotNull(this._localComponents[key])) {
 			this.destroyLocalComponent(key);
 		}
@@ -715,16 +701,8 @@ export class NgxAbstractSubscribeComponent
 	) {
 		if (NgxThreeUtil.isNotNull(params)) {
 			Object.entries(params).forEach(([key, value]) => {
-				if (
-					this.selfAny[key] !== undefined &&
-					this.selfAny[key] !== value &&
-					NgxThreeUtil.isNotNull(value)
-				) {
-					changes[key] = new SimpleChange(
-						this.selfAny[key],
-						value,
-						firstChange
-					);
+				if (this.selfAny[key] !== undefined && this.selfAny[key] !== value && NgxThreeUtil.isNotNull(value)) {
+					changes[key] = new SimpleChange(this.selfAny[key], value, firstChange);
 					this.selfAny[key] = value;
 				}
 			});
@@ -732,11 +710,7 @@ export class NgxAbstractSubscribeComponent
 		if (NgxThreeUtil.isNotNull(type)) {
 			if (this.selfAny['type'] !== undefined) {
 				if (this.selfAny['type'] !== type) {
-					changes.type = new SimpleChange(
-						this.selfAny['type'],
-						type,
-						firstChange
-					);
+					changes.type = new SimpleChange(this.selfAny['type'], type, firstChange);
 					this.selfAny['type'] = type;
 				}
 			}
@@ -780,11 +754,7 @@ export class NgxAbstractSubscribeComponent
 	 * @param subscribeKey
 	 * @param changeKey
 	 */
-	protected subscribeListQueryChange(
-		queryList: QueryList<any>,
-		subscribeKey: string,
-		changeKey: string
-	) {
+	protected subscribeListQueryChange(queryList: QueryList<any>, subscribeKey: string, changeKey: string) {
 		if (NgxThreeUtil.isNotNull(queryList)) {
 			this.unSubscribeRefer(subscribeKey + 'Changes');
 			this.subscribeRefer(
@@ -802,11 +772,7 @@ export class NgxAbstractSubscribeComponent
 	 * @param subscribeKey
 	 * @param changeKey
 	 */
-	protected subscribeListQuery(
-		queryList: QueryList<any>,
-		subscribeKey: string,
-		changeKey: string
-	) {
+	protected subscribeListQuery(queryList: QueryList<any>, subscribeKey: string, changeKey: string) {
 		if (NgxThreeUtil.isNotNull(queryList)) {
 			this.unSubscribeReferList(subscribeKey);
 			queryList.forEach((query) => {
@@ -856,5 +822,36 @@ export class NgxAbstractSubscribeComponent
 				resolve();
 			}, timeDelay);
 		});
+	}
+
+	/**
+	 * Sets tween target
+	 * @param tweenTarget
+	 */
+	public setTweenTarget(tweenTarget: any) {
+		if (this.tweenTarget !== tweenTarget) {
+			this.tweenTarget = tweenTarget;
+			this.resetTween();
+		}
+	}
+
+	/**
+	 * Tween target of abstract tween component
+	 */
+	private tweenTarget: any = null;
+
+	/**
+	 * Resets tween
+	 */
+	public resetTween() {
+		if (
+			NgxThreeUtil.isNotNull(this.tweenTarget) &&
+			NgxThreeUtil.isNotNull(this.tweenList) &&
+			this.tweenList.length > 0
+		) {
+			this.tweenList.forEach((tween) => {
+				tween.getTween(this.tweenTarget, this);
+			});
+		}
 	}
 }

@@ -124,7 +124,6 @@ export * as THREE from './threejs-library/three-core';
 export * from './tools/tools.component';
 export * from './transform/transform.component';
 export * from './translation/translation.component';
-export * from './tween.abstract';
 export * from './tween/tween.component';
 export * from './viewer/viewer-canvas';
 export * from './viewer/viewer.component';
