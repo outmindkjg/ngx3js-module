@@ -15,7 +15,7 @@ import { NgxAbstractTextureComponent } from '../texture.abstract';
 /**
  * Texture Component
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TextureComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTextureComponent) page for details.
  *
  * ```html
  * <ngx3js-texture

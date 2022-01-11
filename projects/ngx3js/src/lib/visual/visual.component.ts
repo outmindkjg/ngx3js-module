@@ -18,7 +18,7 @@ import { NgxTransformComponent } from '../transform/transform.component';
 /**
  * The Visual component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/VisualComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxVisualComponent) page for details.
  *
  */
 @Component({

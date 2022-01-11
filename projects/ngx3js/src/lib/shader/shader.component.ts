@@ -4,7 +4,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Shader component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShaderComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShaderComponent) page for details.
  *
  */
 @Component({

@@ -11,7 +11,7 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 /**
  * The Canvas component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CanvasComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCanvasComponent) page for details.
  * See the [ngx hud](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_hud) page for a live demo.
  *
  */

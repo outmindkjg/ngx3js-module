@@ -7,7 +7,7 @@ import * as AmmoType from '../../threejs-library/ammo-type';
 /**
  * The Physics Constraint component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PhysicsConstraintComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPhysicsConstraintComponent) page for details.
  * See the [ngx physics](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_physics) page for a live demo.
  *
  */

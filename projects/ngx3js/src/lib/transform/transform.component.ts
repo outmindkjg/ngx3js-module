@@ -6,7 +6,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * Transform Component
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TransformComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTransformComponent) page for details.
  *
  */
 @Component({

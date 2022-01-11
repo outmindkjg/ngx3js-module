@@ -12,7 +12,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Shape component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapeComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxShapeComponent) page for details.
  *
  */
 @Component({

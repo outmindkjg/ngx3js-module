@@ -15,7 +15,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Animation Group component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AnimationGroupComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAnimationGroupComponent) page for details.
  *
  * A group of objects that receives a shared animation state.
  *

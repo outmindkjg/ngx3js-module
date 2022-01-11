@@ -21,7 +21,7 @@ import { NgxTranslationComponent } from './translation/translation.component';
 /**
  * The Abstract Geometry component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractGeometryComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAbstractGeometryComponent) page for details.
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
  *
  * ```ts

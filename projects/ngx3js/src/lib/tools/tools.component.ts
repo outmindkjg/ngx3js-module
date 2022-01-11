@@ -7,7 +7,7 @@ import { NgxAbstractTextureComponent } from '../texture.abstract';
 /**
  * Tools Component
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ToolsComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxToolsComponent) page for details.
  *
  * ```html
  * <ngx3js-tools

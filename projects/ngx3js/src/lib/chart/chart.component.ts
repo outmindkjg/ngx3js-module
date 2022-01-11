@@ -19,7 +19,7 @@ import {
 /**
  * The Chart component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxChartComponent) page for details.
  *
  */
 @Component({

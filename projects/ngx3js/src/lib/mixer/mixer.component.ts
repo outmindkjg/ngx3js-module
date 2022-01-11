@@ -15,7 +15,7 @@ import { NgxPhysicsComponent } from './../physics/physics.component';
 /**
  * The Mixer component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MixerComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMixerComponent) page for details.
  *
  * ```html
  * <ngx3js-mixer [action]="'default'">

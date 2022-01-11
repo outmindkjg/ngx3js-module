@@ -8,7 +8,7 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 /**
  * The Helper component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HelperComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxHelperComponent) page for details.
  *
  * |  Three Type        | Type Key           | Acceptable Input          |
  * |:--------------------------|:--------------------------|:--------------------------|

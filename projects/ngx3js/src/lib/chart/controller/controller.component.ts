@@ -13,7 +13,7 @@ import { IRendererTimer } from '../../ngx-interface';
 /**
  * The Chart Controller component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartControllerComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxChartControllerComponent) page for details.
  *
  */
 @Component({

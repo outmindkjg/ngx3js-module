@@ -6,7 +6,7 @@ import { NgxThreeUtil } from '../../interface';
 /**
  * The Rigidbody Node component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RigidbodyNodeComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRigidbodyNodeComponent) page for details.
  *
  */
 @Component({

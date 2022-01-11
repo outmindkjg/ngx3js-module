@@ -12,7 +12,7 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 /**
  * The Clip component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ClipComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxClipComponent) page for details.
  *
  * An AnimationClip is a reusable set of keyframe tracks which represent an animation.
  *

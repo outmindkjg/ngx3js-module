@@ -6,7 +6,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Audio component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AudioComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAudioComponent) page for details.
  *
  * Create a ( global ) audio object.
  *

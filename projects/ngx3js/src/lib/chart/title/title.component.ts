@@ -13,7 +13,7 @@ import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 /**
  * The Chart Title component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartTitleComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxChartTitleComponent) page for details.
  *
  */
 @Component({

@@ -7,7 +7,7 @@ import { NgxAbstractTextureComponent } from '../texture.abstract';
 /**
  * The Lensflareelement component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LensflareelementComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLensflareelementComponent) page for details.
  * See the [ngx lensflares](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lensflares) page for a live demo.
  *
  * ```html

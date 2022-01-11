@@ -13,7 +13,7 @@ import { ICssStyle } from '../ngx-interface';
 /**
  * The Html component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/HtmlComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxHtmlComponent) page for details.
  *
  */
 @Component({

@@ -6,7 +6,7 @@ import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 /**
  * The Fog component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FogComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxFogComponent) page for details.
  *
  * ```html
  * <ngx3js-fog

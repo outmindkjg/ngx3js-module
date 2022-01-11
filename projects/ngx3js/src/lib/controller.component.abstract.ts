@@ -17,7 +17,7 @@ import { NgxAbstractSubscribeComponent } from './subscribe.abstract';
 /**
  * The Abstract Controller component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractControllerComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAbstractControllerComponent) page for details.
  *
  *
  * ```ts

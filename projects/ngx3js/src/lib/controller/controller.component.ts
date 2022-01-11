@@ -19,7 +19,7 @@ import { NgxControllerItemComponent } from './controller-item/controller-item.co
 /**
  * NgxControllerComponent
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ControllerComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxControllerComponent) page for details.
  *
  * ```html
  * <ngx3js-controller

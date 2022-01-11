@@ -5,7 +5,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Plane component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PlaneComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPlaneComponent) page for details.
  *
  */
 @Component({

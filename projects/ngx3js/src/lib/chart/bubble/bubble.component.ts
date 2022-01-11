@@ -11,7 +11,7 @@ import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 /**
  * The Chart Bubble component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartBubbleComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxChartBubbleComponent) page for details.
  *
  */
 @Component({

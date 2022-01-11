@@ -18,7 +18,7 @@ import { NgxAbstractTextureComponent } from './texture.abstract';
 /**
  * NgxAbstractMaterialComponent
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractMaterialComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAbstractMaterialComponent) page for details.
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material) page for a live demo.
  *
  *

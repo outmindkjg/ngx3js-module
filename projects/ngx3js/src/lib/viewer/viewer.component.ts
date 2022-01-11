@@ -15,7 +15,7 @@ import { ViewerCanvas } from './viewer-canvas';
 /**
  * The Viewer component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ViewerComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxViewerComponent) page for details.
  *
  * ```html
  * <ngx3js-viewer

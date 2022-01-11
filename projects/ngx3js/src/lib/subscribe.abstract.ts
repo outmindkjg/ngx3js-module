@@ -19,7 +19,7 @@ import { NgxTweenComponent } from './tween/tween.component';
 /**
  * The Abstract Subscribe component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractSubscribeComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAbstractSubscribeComponent) page for details.
  *
  * ```ts
  * _@Component({

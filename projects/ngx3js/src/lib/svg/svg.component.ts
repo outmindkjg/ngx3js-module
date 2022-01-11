@@ -9,7 +9,7 @@ import { NgxTranslationComponent } from '../translation/translation.component';
 /**
  * The Svg component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SvgComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSvgComponent) page for details.
  *
  * ```html
  * <ngx3js-geometry

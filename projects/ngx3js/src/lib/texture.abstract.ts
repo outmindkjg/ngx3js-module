@@ -7,7 +7,7 @@ import { TextureUtils } from './texture/textureUtils';
 /**
  * The Abstract Texture component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractTextureComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAbstractTextureComponent) page for details.
  *
  * ```ts
  * _@Component({

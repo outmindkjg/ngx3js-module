@@ -17,7 +17,7 @@ import { NgxRigidbodyComponent } from './../rigidbody/rigidbody.component';
 /**
  * The Scene component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SceneComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSceneComponent) page for details.
  * See the [ngx scene](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_scene) page for a live demo.
  *
  * ```html

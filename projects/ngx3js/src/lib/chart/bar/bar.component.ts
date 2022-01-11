@@ -16,7 +16,7 @@ import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 /**
  * The Chart Bar component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartBarComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxChartBarComponent) page for details.
  *
  */
 @Component({

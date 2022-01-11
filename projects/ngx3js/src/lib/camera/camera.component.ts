@@ -11,7 +11,7 @@ import { NgxPingPongCamera } from './cameras/ngx-pingpong-camera';
 /**
  * The Camera component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CameraComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxCameraComponent) page for details.
  * See the [ngx camera](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_camera) page for a live demo.
  *
  * |  Three Type        | Type Key           | Acceptable Input          |

@@ -12,7 +12,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Listener component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ListenerComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxListenerComponent) page for details.
  *
  * The [name] represents a virtual [listener](https://developer.mozilla.org/de/docs/Web/API/AudioListener) of the all positional and non-positional audio effects in the scene.
  * A three.js application usually creates a single instance of [name]. It is a mandatory construtor parameter for audios entities like [Audio](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/audio/Audio) and [PositionalAudio](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/audio/PositionalAudio).

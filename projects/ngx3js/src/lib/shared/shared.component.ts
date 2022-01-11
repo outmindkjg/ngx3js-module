@@ -31,7 +31,7 @@ import { NgxScaleComponent } from './../scale/scale.component';
 /**
  * NgxSharedComponent
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SharedComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSharedComponent) page for details.
  *
  * ```html
  * <ngx3js-shared></ngx3js-shared>

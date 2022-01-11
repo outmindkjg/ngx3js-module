@@ -40,7 +40,7 @@ import { NgxTweenComponent } from './../tween/tween.component';
 /**
  * The Renderer component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RendererComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRendererComponent) page for details.
  * See the [ngx renderer](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_renderer) page for a live demo.
  *
  * ```html

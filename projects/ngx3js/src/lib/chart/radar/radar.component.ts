@@ -11,7 +11,7 @@ import { NgxAbstractObject3dComponent } from '../../object3d.abstract';
 /**
  * The Chart Radar component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ChartRadarComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxChartRadarComponent) page for details.
  *
  */
 @Component({

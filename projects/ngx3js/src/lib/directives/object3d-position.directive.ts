@@ -7,7 +7,7 @@ import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 /**
  * Position Directive
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PositionDirective) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPositionDirective) page for details.
  * See the [ngx directives](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_directives) page for a live demo.
  *
  * ```html

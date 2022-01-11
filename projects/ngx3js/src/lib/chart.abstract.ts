@@ -8,7 +8,7 @@ import * as NGX_GEOMETRY from './geometry/index';
 /**
  * The Abstract Chart component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/AbstractChartComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxAbstractChartComponent) page for details.
  *
  * ```ts
  * _@Component({

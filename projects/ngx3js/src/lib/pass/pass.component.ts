@@ -12,7 +12,7 @@ import * as NGX_PASS from './index';
 /**
  * The Pass component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PassComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPassComponent) page for details.
  * See the [ngx effect](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_effect) page for a live demo.
  *
  * |  Three Type        | Type Key           | Acceptable Input          |

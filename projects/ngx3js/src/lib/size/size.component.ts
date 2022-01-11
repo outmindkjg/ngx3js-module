@@ -10,7 +10,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Size component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SizeComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSizeComponent) page for details.
  *
  * ```html
  * <ngx3js-size #renderSize [width]="'100%'" [height]="'100%'"></ngx3js-size>

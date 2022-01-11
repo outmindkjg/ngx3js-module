@@ -19,7 +19,7 @@ import {
 /**
  * The Light component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LightComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLightComponent) page for details.
  * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light) page for a live demo.
  *
  * |  Three Type        | Type Key           | Acceptable Input          |

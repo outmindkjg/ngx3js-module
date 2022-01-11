@@ -15,7 +15,7 @@ import { NgxPhysicsConstraintComponent } from './physics-constraint/physics-cons
 /**
  * NgxPhysicsComponent
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PhysicsComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPhysicsComponent) page for details.
  * See the [ngx physics](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_physics) page for a live demo.
  *
  * ```html

@@ -24,7 +24,7 @@ import { NgxSelectBoxControls } from './controls/selection-box-controls';
 /**
  * NgxControlComponent
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ControlComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxControlComponent) page for details.
  * See the [ngx control](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_control) page for a live demo.
  *
  * |  Three Type        | Type Key           | Acceptable Input          |

@@ -6,7 +6,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Position component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PositionComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxPositionComponent) page for details.
  * See the [ngx position](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_position) page for a live demo.
  *
  * ```html

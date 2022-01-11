@@ -4,7 +4,7 @@ import { INgxColor } from '../../ngx-interface';
 /**
  * Select Box Controls
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SelectBoxControls) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxSelectBoxControls) page for details.
  *
  */
 export class NgxSelectBoxControls {

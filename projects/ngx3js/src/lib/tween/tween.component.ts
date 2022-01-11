@@ -5,7 +5,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * Tween Component
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/TweenComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTweenComponent) page for details.
  *
  * ```html
  * <ngx3js-tween

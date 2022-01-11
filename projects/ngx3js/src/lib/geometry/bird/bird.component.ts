@@ -5,7 +5,7 @@ import { NgxThreeGeometryCustom } from '../../three-geometry-custom';
 /**
  * The Geometry Bird component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GeometryBirdComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxGeometryBirdComponent) page for details.
  *
  */
 @Component({

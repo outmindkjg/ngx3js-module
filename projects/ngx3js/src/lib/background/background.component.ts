@@ -6,7 +6,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Background component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BackgroundComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxBackgroundComponent) page for details.
  *
  * The background shorthand CSS property sets all background style properties at once, such as color, image, origin and size, or repeat method.
  *

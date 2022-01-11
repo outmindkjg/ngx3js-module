@@ -6,7 +6,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Lookat component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LookatComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxLookatComponent) page for details.
  *
  * vector - A vector representing a position in world space.
  * Optionally, the [x](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3.x), [y](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3.y) and [z](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/math/Vector3.z) components of the world space position.

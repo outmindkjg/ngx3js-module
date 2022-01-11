@@ -22,7 +22,7 @@ import * as NGX_MATERIAL from './index';
 /**
  * The Material component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MaterialComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMaterialComponent) page for details.
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material) page for a live demo.
  *
  * Abstract base class for materials.

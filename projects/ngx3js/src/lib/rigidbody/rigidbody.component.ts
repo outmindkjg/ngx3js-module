@@ -45,7 +45,7 @@ export interface RigidbodyType {
 /**
  * The Rigidbody component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RigidbodyComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRigidbodyComponent) page for details.
  *
  * @see
  */

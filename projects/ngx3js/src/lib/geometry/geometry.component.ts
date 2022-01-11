@@ -22,7 +22,7 @@ import * as NGX_GEOMETRY from './index';
 /**
  * The Geometry component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/GeometryComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxGeometryComponent) page for details.
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry) page for a live demo.
  * See the [ngx font](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_font) page for a live font demo.
  * See the [ngx curve](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_curve) page for a live curve demo.

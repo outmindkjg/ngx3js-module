@@ -5,7 +5,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Keyframe component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/KeyframeComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxKeyframeComponent) page for details.
  *
  * ```html
  * <ngx3js-clip [duration]="3" [name]="'default'">

@@ -6,7 +6,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Rotation component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/RotationComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxRotationComponent) page for details.
  * See the [ngx rotation](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_rotation) page for a live demo.
  *
  * ```html

@@ -6,7 +6,7 @@ import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 /**
  * The Scale component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ScaleComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxScaleComponent) page for details.
  * See the [ngx scale](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_scale) page for a live demo.
  *
  */

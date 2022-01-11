@@ -11,7 +11,7 @@ import { NgxAbstractSubscribeComponent } from '../../subscribe.abstract';
 /**
  * The Controller Item component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ControllerItemComponent) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxControllerItemComponent) page for details.
  *
  * ```html
  * <ngx3js-controller>
