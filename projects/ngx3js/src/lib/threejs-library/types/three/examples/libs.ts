@@ -1141,6 +1141,16 @@ export interface unzip {
 export interface unzipSync {
 	(data: Uint8Array): Unzipped;
 }
+
+export interface Panel {
+	(name?: string, fg?: string, bg?: string): Panel;
+	dom: HTMLCanvasElement;
+	update(value: number, maxValue: number): void;
+}
+
+/**
+ * Adding the Stats panel to the document using TypeScript.
+ */
 export interface Stats {
 	(): Stats;
 	REVISION: number;
@@ -1153,6 +1163,7 @@ export interface Stats {
 	domElement: HTMLDivElement;
 	setMode(id: number): void;
 }
+
 export interface GUIParameters {
 	/**
 	 *  Adds this GUI as a child in another GUI. Usually this is done for you by addFolder
@@ -1610,12 +1621,6 @@ export interface GUI {
 	 * Used to determine if the GUI is hidden. Use gui.show() or gui.hide() to change this.
 	 */
 	_hidden: boolean;
-}
-
-export interface Panel {
-	(name?: string, fg?: string, bg?: string): Panel;
-	dom: HTMLCanvasElement;
-	update(value: number, maxValue: number): void;
 }
 
 export interface TweenUnknownProps {
