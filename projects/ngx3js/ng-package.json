@@ -262,7 +262,9 @@
 			"three/examples/jsm/webxr/XREstimatedLight": "XREstimatedLight",
 			"three/examples/jsm/webxr/XRHandMeshModel": "XRHandMeshModel",
 			"three/examples/jsm/webxr/XRHandModelFactory": "XRHandModelFactory",
-      "three/examples/jsm/webxr/XRHandPrimitiveModel" : "XRHandPrimitiveModel",
+			"three/examples/jsm/webxr/XRHandPrimitiveModel": "XRHandPrimitiveModel",
+			"three/examples/jsm/environments/DebugEnvironment" : "DebugEnvironment",
+			"three/examples/jsm/libs/tween.module.min" : "TWEEN",
 			"path": "path",
 			"fs": "fs"
 		}
