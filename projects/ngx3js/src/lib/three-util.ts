@@ -1611,6 +1611,21 @@ export class NgxThreeUtil {
 	}
 
 	/**
+	 * Gets timeout
+	 * 특정 시간후에 이벤트 발생시키기
+	 *
+	 * @param [timeDelay]
+	 * @returns timeout
+	 */
+	 public static getTimeout(timeDelay: number = 50): Promise<void> {
+		return new Promise<void>((resolve) => {
+			window.setTimeout(() => {
+				resolve();
+			}, timeDelay);
+		});
+	}
+
+	/**
 	 * Gets three component
 	 * @param object
 	 * @returns three component

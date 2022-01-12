@@ -606,6 +606,10 @@ export class NgxRendererComponent
 						case 'depth':
 							errorCode = 'WEBGL_depth_texture';
 							break;
+						case 'webgpu' :
+						case 'gpu' :
+							errorCode = 'webgpu';
+							break;
 						default:
 							errorCode = extension;
 							break;
@@ -616,6 +620,7 @@ export class NgxRendererComponent
 		if (errorCode !== null) {
 			const errorEle = document.createElement('DIV');
 			switch (errorCode) {
+				case 'webgpu':
 				case 'gpu':
 					errorEle.innerHTML = 'Your browser does not support WebGPU.';
 					break;
@@ -649,6 +654,9 @@ export class NgxRendererComponent
 	 */
 	private isAvailable(type: string): boolean {
 		switch (type.toLowerCase()) {
+			case 'webgpu' :
+				return false;
+				// return N3JS.WebGPU.isAvailable();
 			case 'gpu':
 				return (navigator as any)['gpu'] !== undefined;
 			case 'gl': {
