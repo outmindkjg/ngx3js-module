@@ -542,6 +542,7 @@ export class NgxAbstractMaterialComponent
 					const texture = NgxAbstractTextureComponent.getTextureImageOption(map, null, 'texture', null, () => {
 						this.addChanges('texture');
 					});
+					texture.userData.loadUrl = map;
 					return texture;
 				}
 			} else if (NgxThreeUtil.isNotNull(map['value'])) {
@@ -554,6 +555,7 @@ export class NgxAbstractMaterialComponent
 						this.addChanges('texture');
 					}
 				);
+				texture.userData.loadUrl = map;
 				return texture;
 			} else {
 				this.unSubscribeRefer(name);

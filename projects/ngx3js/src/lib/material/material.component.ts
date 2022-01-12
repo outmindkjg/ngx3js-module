@@ -1723,7 +1723,16 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					type: textureType,
 					component: texture,
 				});
-			} else if (typeof texture !== 'string'){
+			} else if (typeof texture === 'string' || NgxThreeUtil.isNotNull(texture.value)){
+				const anyMaterial: any = this.material;
+				let oldTexure : I3JS.Texture = null;
+				if (anyMaterial[textureType] !== undefined) {
+					oldTexure = anyMaterial[textureType];
+				}
+				if (oldTexure.userData.loadUrl !== texture) {
+					anyMaterial[textureType] = this.getTextureOption(texture, textureType);
+				}
+			} else {
 				const foundTexture = NgxThreeUtil.getTexture(texture, textureType, false);
 				const anyMaterial: any = this.material;
 				if (anyMaterial[textureType] !== undefined) {
