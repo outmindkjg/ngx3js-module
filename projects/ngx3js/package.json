@@ -1,6 +1,6 @@
 {
 	"name": "ngx3js",
-	"version": "0.136.0-2022011217",
+	"version": "0.136.0-2022011218",
 	"keywords": [
 		"three",
 		"three.js",
@@ -39,7 +39,6 @@
 		"path": false
 	},
 	"dependencies": {
-		"gsap": "^3.8.0",
 		"three": "0.136.0",
 		"tslib": "^2.3.0"
 	},

@@ -67,7 +67,6 @@ rl.question(question, function (agree) {
 			const dependencies = packageJson['dependencies'];
 			dependencies['fs'] = '0.0.1-security';
 			dependencies['fs-web'] = '^1.0.1';
-			dependencies['gsap'] = '^3.8.0';
 			dependencies['three'] = '0.136.0';
 
 			if (packageJson['devDependencies'] === undefined) {
