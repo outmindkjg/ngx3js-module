@@ -325,19 +325,20 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 				this.controls.meshShape.visible = this.mesh.getObject3d().visible;
 				const helperParams = NgxThreeUtil.getIGuiControlParam(controlsParams.children, 'helperVisible');
 				const helper = this.mesh.helperComponent;
-				if (helperParams && helperParams.controller) {
+				if (helperParams && helperParams.controller && helperParams.controller) {
+					const guiController =  helperParams.controller as I3JS.GUIController;
 					if (NgxThreeUtil.isNotNull(helper)) {
 						if (helper instanceof N3JS.SkeletonHelper) {
-							helperParams.controller.name('Skeleton');
+							guiController.name('Skeleton');
 						} else {
-							helperParams.controller.name('Helper');
+							guiController.name('Helper');
 						}
 						this.controls.meshShape.helperVisible = helper.visible;
-						NgxThreeUtil.setGuiEnabled(helperParams.controller, true);
+						NgxThreeUtil.setGuiEnabled(guiController, true);
 					} else {
 						this.controls.meshShape.helperVisible = false;
-						helperParams.controller.name('Not Supported');
-						NgxThreeUtil.setGuiEnabled(helperParams.controller, false);
+						guiController.name('Not Supported');
+						NgxThreeUtil.setGuiEnabled(guiController, false);
 					}
 				} else {
 					console.log(helperParams);

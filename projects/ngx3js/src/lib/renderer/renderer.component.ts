@@ -1266,7 +1266,7 @@ export class NgxRendererComponent
 							NgxThreeUtil.isNotNull(this.guiParams) &&
 							this.guiParams.length > 0
 						) {
-							const gui = NgxThreeUtil.setupGui(this.guiControl, this.getGui(), this.guiParams);
+							const gui = NgxThreeUtil.setupGui(this.guiControl, this.getGui(), this.guiParams) as I3JS.GUI;
 							if (this.guiOpen) {
 								gui.open();
 							} else {

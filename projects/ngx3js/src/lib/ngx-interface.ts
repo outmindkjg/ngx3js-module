@@ -712,7 +712,7 @@ export interface IGuiControlParam {
 	/**
 	 * The controller of gui
 	 */
-	controller?: INgxThreeGuiController;
+	controller?: I3JS.GUI | I3JS.GUIController;
 }
 
 /**

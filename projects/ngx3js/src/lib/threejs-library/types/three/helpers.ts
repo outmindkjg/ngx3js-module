@@ -13,6 +13,7 @@ import { Bone, Line, LineSegments, Mesh } from './objects';
  * [WebGL / shadowmesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmesh)
  *
  * ### Code Example
+ * 
  * ```js
  * const dir = new THREE.Vector3( 1, 2, 0 );
  * // normalize the direction vector (convert to vector of length 1)
@@ -25,6 +26,7 @@ import { Bone, Line, LineSegments, Mesh } from './objects';
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-helper [type]="'ArrowHelper'" [dirX]="1" [dirY]="2" [dirZ]="0" [originX]="0" [originY]="0" [originZ]="0" [color]="'0xffff00'" [length]="1"></ngx3js-helper>
  * ```
@@ -94,12 +96,14 @@ export interface ArrowHelper extends Object3D {
  * [webgl / loader / pcd](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_pcd)
  *
  * ### Code Example
+ * 
  * ```js
  * const axesHelper = new THREE.AxesHelper( 5 );
  * scene.add( axesHelper );
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-helper [type]="'AxesHelper'" [size]="5"></ngx3js-helper>
  * ```
@@ -135,6 +139,7 @@ export interface AxesHelper extends LineSegments {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Box3Helper) page for details.
  *
  * ### Code Example
+ * 
  * ```js
  * const box = new THREE.Box3();
  * box.setFromCenterAndSize( new THREE.Vector3( 1, 1, 1 ), new THREE.Vector3( 2, 1, 3 ) );
@@ -143,6 +148,7 @@ export interface AxesHelper extends LineSegments {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-helper [type]="'Box3Helper'"></ngx3js-helper>
  * ```
@@ -178,6 +184,7 @@ export interface Box3Helper extends LineSegments {
  * [WebGL / buffergeometry / drawrange](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_drawrange)
  *
  * ### Code Example
+ * 
  * ```js
  * const sphere = new THREE.SphereGeometry();
  * const object = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( 0xff0000 ) );
@@ -186,6 +193,7 @@ export interface Box3Helper extends LineSegments {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'SphereGeometry'"></ngx3js-geometry>
@@ -232,6 +240,7 @@ export interface BoxHelper extends LineSegments {
  * [webgl / animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending)
  *
  * ### Code Example
+ * 
  * ```js
  * const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
  * const helper = new THREE.CameraHelper( camera );
@@ -239,6 +248,7 @@ export interface BoxHelper extends LineSegments {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-camera [type]="'perspective'" [fov]="75" [near]="0.1" [far]="1000">
  * 	<ngx3js-helper [type]="'CameraHelper'"></ngx3js-helper>
@@ -288,6 +298,7 @@ export interface CameraHelper extends LineSegments {
  * [webgl / shadowmap / pcss](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmap_pcss)
  *
  * ### Code Example
+ * 
  * ```js
  * const light = new THREE.DirectionalLight( 0xFFFFFF );
  * const helper = new THREE.DirectionalLightHelper( light, 5 );
@@ -295,6 +306,7 @@ export interface CameraHelper extends LineSegments {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'DirectionalLight'" [color]="'0xffffff'">
  * 	<ngx3js-helper [type]="'DirectionalLightHelper'" [size]="5"></ngx3js-helper>
@@ -361,6 +373,7 @@ export interface DirectionalLightHelper extends Object3D {
  * [webgl / interactive / voxelpainter](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_voxelpainter)
  *
  * ### Code Example
+ * 
  * ```js
  * const size = 10;
  * const divisions = 10;
@@ -369,6 +382,7 @@ export interface DirectionalLightHelper extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-helper [type]="'GridHelper'" [size]="10" [divisions]="10"></ngx3js-helper>
  * ```
@@ -396,6 +410,7 @@ export interface GridHelper extends LineSegments {
  * [webgl / lights / hemisphere](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_hemisphere)
  *
  * ### Code Example
+ * 
  * ```js
  * const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
  * const helper = new THREE.HemisphereLightHelper( light, 5 );
@@ -403,6 +418,7 @@ export interface GridHelper extends LineSegments {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'HemisphereLight'" [skyColor]="'0xffffbb'" [groundColor]="'0x080820'" [intensity]="1">
  * 	<ngx3js-helper [type]="'HemisphereLightHelper'"></ngx3js-helper>
@@ -461,6 +477,7 @@ export interface HemisphereLightHelper extends Object3D {
  * [webgl / clipping / stencil](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping_stencil)
  *
  * ### Code Example
+ * 
  * ```js
  * const plane = new THREE.Plane( new THREE.Vector3( 1, 1, 0.2 ), 3 );
  * const helper = new THREE.PlaneHelper( plane, 1, 0xffff00 );
@@ -468,6 +485,7 @@ export interface HemisphereLightHelper extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-helper [type]="'PlaneHelper'"></ngx3js-helper>
  * ```
@@ -512,6 +530,7 @@ export interface PlaneHelper extends LineSegments {
  * [WebGL /  helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
  *
  * ### Code Example
+ * 
  * ```js
  * const pointLight = new THREE.PointLight( 0xff0000, 1, 100 );
  * pointLight.position.set( 10, 10, 10 );
@@ -522,6 +541,7 @@ export interface PlaneHelper extends LineSegments {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'PointLight'" [color]="'0xffffff'" [intensity]="1" [distance]="100">
  * 	<ngx3js-helper [type]="'PointLightHelper'"></ngx3js-helper>
@@ -579,6 +599,7 @@ export interface PointLightHelper extends Object3D {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PolarGridHelper) page for details.
  *
  * ### Code Example
+ * 
  * ```js
  * const radius = 10;
  * const radials = 16;
@@ -589,6 +610,7 @@ export interface PointLightHelper extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-helper [type]="'PolarGridHelper'" [radius]="10" [radials]="16" [circles]="8" [divisions]="64"></ngx3js-helper>
  * ```
@@ -633,12 +655,14 @@ export interface PolarGridHelper extends LineSegments {
  * [WebGL / loader / bvh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_bvh)
  *
  * ### Code Example
+ * 
  * ```js
  * const helper = new THREE.SkeletonHelper( skinnedMesh );
  * scene.add( helper );
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-helper [type]="'SkeletonHelper'"></ngx3js-helper>
  * ```
@@ -695,6 +719,7 @@ export interface SkeletonHelper extends LineSegments {
  * [webgl / lights / spotlight](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlight)
  *
  * ### Code Example
+ * 
  * ```js
  * const spotLight = new THREE.SpotLight( 0xffffff );
  * spotLight.position.set( 10, 10, 10 );
@@ -704,6 +729,7 @@ export interface SkeletonHelper extends LineSegments {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'SpotLight'" [color]="'0xffffff'">
  * 	<ngx3js-position [x]="10" [y]="10" [z]="10"></ngx3js-position>

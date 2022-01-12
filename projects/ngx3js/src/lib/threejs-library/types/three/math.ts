@@ -441,6 +441,7 @@ export interface HSL {
  * [webgl / geometry / colors](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_colors)
  *
  * ### Code Example
+ * 
  * ```js
  * // empty constructor - will default white
  * const color1 = new THREE.Color();
@@ -786,6 +787,7 @@ export interface Cylindrical {
  * [webgl / interactive / cubes / gpu](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_interactive_cubes_gpu)
  *
  * ### Code Example
+ * 
  * ```js
  * const a = new THREE.Euler( 0, 1, 1.57, 'XYZ' );
  * const b = new THREE.Vector3( 1, 0, 1 );
@@ -1359,6 +1361,7 @@ export interface Matrix {
  *
  *
  * ### Code Example
+ * 
  * ```js
  * const m = new Matrix3();
  * ```
@@ -2071,6 +2074,7 @@ export interface Plane {
  * [webgl / custom / attributes / points3](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_custom_attributes_points3)
  *
  * ### Code Example
+ * 
  * ```js
  * const quaternion = new THREE.Quaternion();
  * quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
@@ -3145,6 +3149,7 @@ export interface Vector {
  *
  *
  * ### Code Example
+ * 
  * ```js
  * const a = new THREE.Vector2( 0, 1 );
  * // no arguments; will be initialised to (0, 0)
@@ -3471,6 +3476,7 @@ export type Vector3Tuple = [number, number, number];
  * [physics / ammo / break](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_break)
  *
  * ### Code Example
+ * 
  * ```js
  * const a = new THREE.Vector3( 0, 1, 0 );
  * // no arguments; will be initialised to (0, 0, 0)
@@ -3915,6 +3921,7 @@ export type Vector4Tuple = [number, number, number, number];
  * [webgl / shadowmesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmesh)
  *
  * ### Code Example
+ * 
  * ```js
  * const a = new THREE.Vector4( 0, 1, 0, 0 );
  * // no arguments; will be initialised to (0, 0, 0, 1)
@@ -4234,6 +4241,7 @@ export interface Vector4 extends Vector {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/CubicInterpolant) page for details.
  *
  * ### Code Example
+ * 
  * ```js
  * const interpolant = new THREE.CubicInterpolant(
  * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );
@@ -4270,6 +4278,7 @@ export interface CubicInterpolant extends Interpolant {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/DiscreteInterpolant) page for details.
  *
  * ### Code Example
+ * 
  * ```js
  * const interpolant = new THREE.DiscreteInterpolant(
  * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );
@@ -4306,6 +4315,7 @@ export interface DiscreteInterpolant extends Interpolant {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/LinearInterpolant) page for details.
  *
  * ### Code Example
+ * 
  * ```js
  * const interpolant = new THREE.LinearInterpolant(
  * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );
@@ -4342,6 +4352,7 @@ export interface LinearInterpolant extends Interpolant {
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/QuaternionLinearInterpolant) page for details.
  *
  * ### Code Example
+ * 
  * ```js
  * const interpolant = new THREE.QuaternionLinearInterpolant(
  * new Float32Array( 2 ), new Float32Array( 2 ),, n, new Float32Array( 1 ) );

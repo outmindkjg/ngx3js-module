@@ -892,6 +892,7 @@ export interface IFCManager {
 	 * Returns all items of the specified type. You can import the types from *web-ifc*.
 	 *
 	 * Example to get all the standard walls of a project:
+	 * 
 	 * ```js
 	 * import { IFCWALLSTANDARDCASE } from 'web-ifc';
 	 * const walls = ifcLoader.getAllItemsOfType(IFCWALLSTANDARDCASE) : this;

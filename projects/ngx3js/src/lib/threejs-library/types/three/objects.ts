@@ -9,6 +9,7 @@ import { DataTexture } from './textures';
  * Bones are almost identical to a blank [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D).
  *
  * ### Code Example
+ * 
  * ```js
  * const root = new THREE.Bone();
  * const child = new THREE.Bone();
@@ -34,6 +35,7 @@ export interface Bone extends Object3D {
  * This is almost identical to an [Object3D](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D). Its purpose is to make working with groups of objects syntactically clearer.
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.BoxGeometry( 1, 1, 1 );
  * const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
@@ -49,6 +51,7 @@ export interface Bone extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-shared>
  * 	<ngx3js-geometry #geometry [type]="'BoxGeometry'" [width]="1" [height]="1" [depth]="1"></ngx3js-geometry>
@@ -163,6 +166,7 @@ export interface InstancedMesh<
  * [webgl / lod](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lod)
  *
  * ### Code Example
+ * 
  * ```js
  * const lod = new THREE.LOD();
  * // Create spheres with 3 levels of detail and create new LOD levels for them
@@ -175,6 +179,7 @@ export interface InstancedMesh<
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh [type]="'LOD'">
  * 	<ngx3js-mesh [loDistance]="10"></ngx3js-mesh>
@@ -251,6 +256,7 @@ export interface LOD extends Object3D {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Line) page for a live demo.
  *
  * ### Code Example
+ * 
  * ```js
  * const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
  * const points = [];
@@ -263,6 +269,7 @@ export interface LOD extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh [type]="'Line'">
  * 	<ngx3js-geometry [type]="'BufferGeometry'" [points]="[[- 10, 0, 0],[0, 10, 0],[10, 0, 0]]"></ngx3js-geometry>
@@ -382,6 +389,7 @@ export interface LineSegments<
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Mesh) page for a live demo.
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.BoxGeometry( 1, 1, 1 );
  * const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
@@ -390,6 +398,7 @@ export interface LineSegments<
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'BoxGeometry'" [width]="1" [height]="1" [depth]="1"></ngx3js-geometry>
@@ -515,6 +524,7 @@ export interface Points<
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Skeleton) page for a live demo.
  *
  * ### Code Example
+ * 
  * ```js
  * //  Create a simple "arm"
  * const bones = [];
@@ -622,6 +632,7 @@ export interface Skeleton {
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/SkinnedMesh) page for a live demo.
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.CylinderGeometry( 5, 5, 5, 5, 15, 5, 30 );
  * //  create the skin indices and skin weights
@@ -723,6 +734,7 @@ export interface SkinnedMesh<
  * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh/Sprite) page for a live demo.
  *
  * ### Code Example
+ * 
  * ```js
  * const map = new THREE.TextureLoader().load( 'sprite.png' );
  * const material = new THREE.SpriteMaterial( { map: map } );
@@ -731,6 +743,7 @@ export interface SkinnedMesh<
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh [type]="'Sprite'">
  * 	<ngx3js-material [type]="'SpriteMaterial'">

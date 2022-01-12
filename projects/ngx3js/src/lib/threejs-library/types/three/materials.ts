@@ -67,6 +67,7 @@ export interface LineBasicMaterialParameters extends MaterialParameters {
  * [physics / ammo / rope](https://outmindkjg.github.io/ngx3js-doc/#/examples/physics_ammo_rope)
  *
  * ### Code Example
+ * 
  * ```js
  * const material = new THREE.LineBasicMaterial( {
  * 	color: 0xffffff,
@@ -77,6 +78,7 @@ export interface LineBasicMaterialParameters extends MaterialParameters {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-material [type]="'LineBasicMaterial'" [color]="'0xffffff'" [linewidth]="1" [linecap]="'round'" [linejoin]="'round'"></ngx3js-material>
  * ```
@@ -160,6 +162,7 @@ export interface LineDashedMaterialParameters extends LineBasicMaterialParameter
  * [WebGL / lines / dashed](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_dashed)
  *
  * ### Code Example
+ * 
  * ```js
  * const material = new THREE.LineDashedMaterial( {
  * 	color: 0xffffff,
@@ -171,6 +174,7 @@ export interface LineDashedMaterialParameters extends LineBasicMaterialParameter
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-material [type]="'LineDashedMaterial'" [color]="'0xffffff'" [linewidth]="1" [scale]="1" [dashSize]="3" [gapSize]="1"></ngx3js-material>
  * ```
@@ -3401,6 +3405,7 @@ export interface PointsMaterialParameters extends MaterialParameters {
  * [WebGL / trails](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_trails)
  *
  * ### Code Example
+ * 
  * ```js
  * const vertices = [];
  * for ( let i = 0; i < 10000; i ++ ) {
@@ -3417,6 +3422,7 @@ export interface PointsMaterialParameters extends MaterialParameters {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh [type]="'Points'">
  * 	<ngx3js-geometry [type]="'BufferGeometry'" [attrPosition]="vertices"></ngx3js-geometry>
@@ -3494,6 +3500,7 @@ export interface PointsMaterial extends Material {
  * [WebGL 2 / volume / perlin](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_volume_perlin)
  *
  * ### Code Example
+ * 
  * ```js
  * const material = new THREE.RawShaderMaterial( {
  *      uniforms: {
@@ -3505,6 +3512,7 @@ export interface PointsMaterial extends Material {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-material [type]="'RawShaderMaterial'" [uniforms]="{ time : { value : 1.0 } }" [vertexShader]="..." [fragmentShader]="..."></ngx3js-material>
  * ```
@@ -3761,6 +3769,7 @@ export interface ShadowMaterialParameters extends MaterialParameters {
  * See the [ngx material](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_material/ShadowMaterial) page for a live demo.
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.PlaneGeometry( 2000, 2000 );
  * geometry.rotateX( - Math.PI / 2 );
@@ -3773,6 +3782,7 @@ export interface ShadowMaterialParameters extends MaterialParameters {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh [receiveShadow]="true">
  * 	<ngx3js-position [y]="-200" ></ngx3js-position>
@@ -3854,6 +3864,7 @@ export interface SpriteMaterialParameters extends MaterialParameters {
  * [SVG / sandbox](https://outmindkjg.github.io/ngx3js-doc/#/examples/svg_sandbox)
  *
  * ### Code Example
+ * 
  * ```js
  * const map = new THREE.TextureLoader().load( 'textures/sprite.png' );
  * const material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
@@ -3863,6 +3874,7 @@ export interface SpriteMaterialParameters extends MaterialParameters {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh [type]="'Sprite'" [receiveShadow]="true">
  * 	<ngx3js-scale [x]="200" [y]="200" [z]="1" ></ngx3js-scale>

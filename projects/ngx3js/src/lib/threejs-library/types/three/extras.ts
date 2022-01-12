@@ -277,6 +277,7 @@ export interface CurvePath<T extends Vector> extends Curve<T> {
  * A 2D path representation. The class provides methods for creating paths and contours of 2D shapes similar to the 2D Canvas API.
  *
  * ### Code Example
+ * 
  * ```js
  * const path = new THREE.Path();
  * path.lineTo( 0, 0.8 );
@@ -410,6 +411,7 @@ export interface Path extends CurvePath<Vector2> {
  * [ShapeGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ShapeGeometry), to get points, or to get triangulated faces.
  *
  * ### Code Example
+ * 
  * ```js
  * const heartShape = new THREE.Shape();
  * heartShape.moveTo( 25, 25 );
@@ -583,6 +585,7 @@ export interface CurveUtils {
  * [WebGL / geometry / extrude / splines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_splines)
  *
  * ### Code Example
+ * 
  * ```js
  * // Create a closed wavey loop
  * const curve = new THREE.CatmullRomCurve3( [
@@ -624,6 +627,7 @@ export interface CatmullRomCurve3 extends Curve<Vector3> {
  * Create a smooth 2d [cubic bezier curve](http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg), defined by a start point, endpoint and two control points.
  *
  * ### Code Example
+ * 
  * ```js
  * const curve = new THREE.CubicBezierCurve(
  * 	new THREE.Vector2( -10, 0 ),
@@ -681,6 +685,7 @@ export interface CubicBezierCurve extends Curve<Vector2> {
  * Create a smooth 3d [cubic bezier curve](http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg), defined by a start point, endpoint and two control points.
  *
  * ### Code Example
+ * 
  * ```js
  * const curve = new THREE.CubicBezierCurve3(
  * 	new THREE.Vector3( -10, 0, 0 ),
@@ -694,6 +699,7 @@ export interface CubicBezierCurve extends Curve<Vector2> {
  * // Create the final object to add to the scene
  * const curveObject = new THREE.Line( geometry, material );
  * ```
+ * 
  */
 export interface CubicBezierCurve3 extends Curve<Vector3> {
 	/**
@@ -738,6 +744,7 @@ export interface CubicBezierCurve3 extends Curve<Vector3> {
  * Creates a 2d curve in the shape of an ellipse. Setting the [xRadius](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) equal to the [yRadius](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Number) will result in a circle.
  *
  * ### Code Example
+ * 
  * ```js
  * const curve = new THREE.EllipseCurve(
  * 	  0,   0, // ax, aY
@@ -889,6 +896,7 @@ export interface LineCurve3 extends Curve<Vector3> {
  * Create a smooth 2d [quadratic bezier curve](http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif), defined by a startpoint, endpoint and a single control point.
  *
  * ### Code Example
+ * 
  * ```js
  * const curve = new THREE.QuadraticBezierCurve(
  * 	new THREE.Vector2( -10, 0 ),
@@ -938,6 +946,7 @@ export interface QuadraticBezierCurve extends Curve<Vector2> {
  * Create a smooth 3d [quadratic bezier curve](http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:B%C3%A9zier_2_big.gif), defined by a startpoint, endpoint and a single control point.
  *
  * ### Code Example
+ * 
  * ```js
  * const curve = new THREE.QuadraticBezierCurve3(
  * 	new THREE.Vector3( -10, 0, 0 ),
@@ -987,6 +996,7 @@ export interface QuadraticBezierCurve3 extends Curve<Vector3> {
  * Create a smooth 2d spline curve from a series of points. Internally this uses [Interpolations.CatmullRom](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Interpolations.CatmullRom) to create the curve.
  *
  * ### Code Example
+ * 
  * ```js
  * // Create a sine-like wave
  * const curve = new THREE.SplineCurve( [

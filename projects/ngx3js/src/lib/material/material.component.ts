@@ -300,13 +300,17 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 
 	/**
 	 * An object of the form:
+	 * 
 	 * ```json
 	 * { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }
 	 * ```
+	 * 
 	 * specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form
+	 * 
 	 * ```json
 	 * { value: 1.0 }
 	 * ```
+	 * 
 	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 */
 	@Input() public uniforms: INgxUniforms = null;
@@ -675,6 +679,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 
 	/**
 	 * 	An object with the following properties:
+	 * 
 	 * ```ts
 	 * this.extensions = {
 	 * 	derivatives: false, // set to use derivatives

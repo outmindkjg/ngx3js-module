@@ -84,6 +84,7 @@ export interface Camera extends Object3D {
  * [materials / cubemap / dynamic](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_cubemap_dynamic)
  *
  * ### Code Example
+ * 
  * ```js
  * //  Create cube render target
  * const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(
@@ -113,6 +114,7 @@ export interface Camera extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-camera #cubeCamera [type]="'cubeCamera'" [near]="1" [far]="100000"></ngx3js-camera>
@@ -164,6 +166,7 @@ export interface CubeCamera extends Object3D {
  * [shadowmap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shadowmap)
  *
  * ### Code Example
+ * 
  * ```js
  * const camera = new THREE.OrthographicCamera(
  * 		width / - 2,
@@ -177,6 +180,7 @@ export interface CubeCamera extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-camera [type]="'OrthographicCamera'" [left]="-1" [right]="1" [top]="1" [bottom]="-1" [near]="1" [far]="1000"></ngx3js-camera>
  * ```
@@ -311,6 +315,7 @@ export interface OrthographicCamera extends Camera {
  * [loader / collada / skinning](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_collada_skinning)
  *
  * ### Code Example
+ * 
  * ```js
  * const camera = new THREE.PerspectiveCamera(
  * 	45,
@@ -322,6 +327,7 @@ export interface OrthographicCamera extends Camera {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-camera [type]="'PerspectiveCamera'" [fov]="45" [near]="1" [far]="1000"></ngx3js-camera>
  * ```

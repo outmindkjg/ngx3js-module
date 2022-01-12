@@ -8,6 +8,7 @@ import { CompressedTexture, CubeTexture, DataTexture, Texture } from './textures
  * This uses the [FileLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FileLoader) internally for loading files.
  *
  * ### Code Example
+ * 
  * ```js
  * //  instantiate a loader
  * const loader = new THREE.AnimationLoader();
@@ -65,6 +66,7 @@ export interface AnimationLoader extends Loader {
  * This uses the [FileLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FileLoader) internally for loading files.
  *
  * ### Code Example
+ * 
  * ```js
  * // instantiate a listener
  * const audioListener = new THREE.AudioListener();
@@ -130,6 +132,7 @@ export interface AudioLoader extends Loader {
  * This uses the [FileLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FileLoader) internally for loading files.
  *
  * ### Code Example
+ * 
  * ```js
  * // instantiate a loader
  * const loader = new THREE.BufferGeometryLoader();
@@ -281,6 +284,7 @@ export interface CompressedTextureLoader extends Loader {
  * This uses the [ImageLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/ImageLoader) internally for loading files.
  *
  * ### Code Example
+ * 
  * ```js
  * const scene = new THREE.Scene();
  * scene.background = new THREE.CubeTextureLoader().setPath( 'textures/cubeMaps/' )
@@ -380,6 +384,7 @@ export interface DataTextureLoader extends Loader {
  * It can also be used directly to load any file type that does not have a loader.
  *
  * ### Code Example
+ * 
  * ```js
  * const loader = new THREE.FileLoader();
  * // load a text file and output the result to the console
@@ -472,6 +477,7 @@ export interface FileLoader extends Loader {
  * [WebGL / loader / ImageBitmap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_imagebitmap)
  *
  * ### Code Example
+ * 
  * ```js
  * // instantiate a loader
  * const loader = new THREE.ImageBitmapLoader();
@@ -543,6 +549,7 @@ export interface ImageBitmapLoader extends Loader {
  * [WebGL / shaders / ocean](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_shaders_ocean)
  *
  * ### Code Example
+ * 
  * ```js
  * // instantiate a loader
  * const loader = new THREE.ImageLoader();
@@ -709,6 +716,7 @@ export interface LoaderUtils {
  *
  * ### Code Example
  * This example shows how to use LoadingManager to track the progress of [OBJLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/OBJLoader).
+ * 
  * ```js
  * const manager = new THREE.LoadingManager();
  * manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
@@ -728,7 +736,9 @@ export interface LoaderUtils {
  * 		console.log( object);
  * });
  * ```
+ * 
  * In addition to observing progress, a LoadingManager can be used to override resource URLs during loading. This may be helpful for assets coming from drag-and-drop events, WebSockets, WebRTC, or other APIs. An example showing how to load an in-memory model using Blob URLs is below.
+ * 
  * ```js
  * // Blob or File objects created when dragging files into the webpage.
  * const blobs = {'fish.gltf': blob1, 'diffuse.png': blob2, 'normal.png': blob3};
@@ -854,6 +864,7 @@ export interface LoadingManager {
  * This uses the [FileLoader](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/FileLoader) internally for loading files.
  *
  * ### Code Example
+ * 
  * ```js
  * // instantiate a loader
  * const loader = new THREE.MaterialLoader();
@@ -927,6 +938,7 @@ export interface MaterialLoader extends Loader {
  * [WebGL / materials / lightmap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_lightmap)
  *
  * ### Code Example
+ * 
  * ```js
  * const loader = new THREE.ObjectLoader();
  * loader.load(
@@ -1048,6 +1060,7 @@ export interface ObjectLoader extends Loader {
  * [geometry / cube](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_cube)
  *
  * ### Code Example
+ * 
  * ```js
  * const texture = new THREE.TextureLoader().load( 'textures/land_ocean_ice_cloud_2048.jpg' );
  * // immediately use the texture for material creation
@@ -1055,6 +1068,7 @@ export interface ObjectLoader extends Loader {
  * ```
  *
  * ### Code Example with Callbacks
+ * 
  * ```js
  * // instantiate a loader
  * const loader = new THREE.TextureLoader();

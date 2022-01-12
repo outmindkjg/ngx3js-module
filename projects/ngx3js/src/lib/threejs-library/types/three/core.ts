@@ -363,6 +363,7 @@ export interface Float64BufferAttribute extends BufferAttribute {
  * [Raw Shaders](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_buffergeometry_rawshader)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.BufferGeometry();
  * //  create a simple square shape. We duplicate the top left and bottom right // vertices because each vertex needs to appear once per triangle.
@@ -744,6 +745,7 @@ export type EventListener<E, T, U> = (event: E & { type: T } & { target: U }) =>
  * [Eventdispatcher on GitHub](https://github.com/mrdoob/eventdispatcher.js)
  *
  * ### Code Example
+ * 
  * ```js
  * //  Adding events to a custom object
  * class Car extends EventDispatcher {
@@ -1827,6 +1829,7 @@ export interface RaycasterParameters {
  * [Raycast to a Texture](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_raycast_texture)
  *
  * ### Code Example
+ * 
  * ```js
  * const raycaster = new THREE.Raycaster();
  * const mouse = new THREE.Vector2();
@@ -1945,6 +1948,7 @@ export interface Raycaster {
  * Uniforms are global GLSL variables. They are passed to shader programs.
  *
  * ### Code Example
+ * 
  * ```js
  * uniforms: {
  *  time: { value: 1.0 }, resolution: new Uniform( new Vector2() )

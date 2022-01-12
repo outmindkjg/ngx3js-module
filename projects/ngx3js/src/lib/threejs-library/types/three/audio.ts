@@ -10,6 +10,7 @@ import { Object3D } from './core';
  * [webaudio / visualizer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
  *
  * ### Code Example
+ * 
  * ```js
  * //  create an AudioListener and add it to the camera
  * const listener = new THREE.AudioListener();
@@ -30,6 +31,7 @@ import { Object3D } from './core';
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-camera>
  * 	<ngx3js-listener></ngx3js-listener>
@@ -286,6 +288,7 @@ export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
  * [webaudio / visualizer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
  *
  * ### Code Example
+ * 
  * ```js
  * //  create an AudioListener and add it to the camera
  * const listener = new THREE.AudioListener();
@@ -310,12 +313,14 @@ export interface Audio<NodeType extends AudioNode = GainNode> extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-camera>
  * 	<ngx3js-listener></ngx3js-listener>
  * </ngx3js-camera>
  * <ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true" [play]="true"></ngx3js-audio>
  * ```
+ * 
  */
 export interface AudioAnalyser {
 	/**
@@ -408,6 +413,7 @@ export interface AudioContext {
  * [webaudio / visualizer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_visualizer)
  *
  * ### Code Example
+ * 
  * ```js
  * //  create an AudioListener and add it to the camera
  * const listener = new THREE.AudioListener();
@@ -428,12 +434,14 @@ export interface AudioContext {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-camera>
  * 	<ngx3js-listener></ngx3js-listener>
  * </ngx3js-camera>
  * <ngx3js-audio [url]="'sounds/ambient.ogg'" [volume]="0.5" [loop]="true"></ngx3js-audio>
  * ```
+ * 
  */
 export interface AudioListener extends Object3D {
 	/**
@@ -512,6 +520,7 @@ export interface AudioListener extends Object3D {
  * [webaudio / timing](https://outmindkjg.github.io/ngx3js-doc/#/examples/webaudio_timing)
  *
  * ### Code Example
+ * 
  * ```js
  * //  create an AudioListener and add it to the camera
  * const listener = new THREE.AudioListener();
@@ -538,6 +547,7 @@ export interface AudioListener extends Object3D {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-camera>
  * 	<ngx3js-listener></ngx3js-listener>

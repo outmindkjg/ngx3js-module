@@ -119,6 +119,7 @@ export interface CompressedTexture extends Texture {
  * Creates a cube texture made up of six images.
  *
  * ### Code Example
+ * 
  * ```js
  * const loader = new THREE.CubeTextureLoader();
  * loader.setPath( 'textures/cube/pisa/' );
@@ -131,6 +132,7 @@ export interface CompressedTexture extends Texture {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-texture [type]="'map'" [image]="'textures/cube/pisa/'" [cubeImage]="['px.png','nx.png','py.png','ny.png','pz.png','nz.png']"></ngx3js-texture>
  * ```
@@ -177,6 +179,7 @@ export interface CubeTexture extends Texture {
  * Creates a texture directly from raw data, width and height.
  *
  * ### Code Example
+ * 
  * ```js
  * // create a buffer with color data
  * const width = 512;
@@ -199,6 +202,7 @@ export interface CubeTexture extends Texture {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-texture [data]="data" [width]="512" [height]="512" [format]="'RGBFormat'"></ngx3js-texture>
  * ```
@@ -279,6 +283,7 @@ export interface DataTexture extends Texture {
  * [WebGL2 / materials / texture2darray](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl2_materials_texture2darray)
  *
  * ### Code Example
+ * 
  * ```js
  * This creates a DataTexture2DArray where each texture has a different color.
  * // create a buffer with color data
@@ -306,6 +311,7 @@ export interface DataTexture extends Texture {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-texture [data]="data" [width]="512" [height]="512" [depth]="100" [format]="'RGBFormat'"></ngx3js-texture>
  * ```
@@ -469,6 +475,7 @@ export interface DepthTexture extends Texture {
  * Note: After the initial use of a texture, its dimensions, format, and type cannot be changed. Instead, call *.dispose*() on the texture and instantiate a new one.
  *
  * ### Code Example
+ * 
  * ```js
  * // load a texture, set wrap mode to repeat
  * const texture = new THREE.TextureLoader().load( "textures/water.jpg" );
@@ -478,6 +485,7 @@ export interface DepthTexture extends Texture {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-texture [image]="'textures/water.jpg'" [wrapS]="'RepeatWrapping'" [wrapT]="'RepeatWrapping'" [repeatX]="4" [repeatY]="4"></ngx3js-texture>
  * ```
@@ -766,6 +774,7 @@ export interface Texture extends EventDispatcher {
  * [materials / video](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_video)
  *
  * ### Code Example
+ * 
  * ```js
  * // assuming you have created a HTML video element with id="video"
  * const video = document.getElementById( 'video' );
@@ -773,6 +782,7 @@ export interface Texture extends EventDispatcher {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-texture [image]="video url"></ngx3js-texture>
  * ```

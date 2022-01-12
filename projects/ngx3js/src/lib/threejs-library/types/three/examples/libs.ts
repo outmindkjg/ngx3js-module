@@ -1258,11 +1258,13 @@ export interface GUIController {
 
 	/**
 	 * Enables this controller.
+	 * 
 	 * ```js
 	 * controller.enable();
 	 * controller.enable( false ); // disable
 	 * controller.enable( controller._disabled ); // toggle
 	 * ```
+	 * 
 	 * @param [enabled]
 	 * @returns enable
 	 */
@@ -1270,11 +1272,13 @@ export interface GUIController {
 
 	/**
 	 * Disables this controller.
+	 * 
 	 * ```js
 	 * controller.disable();
 	 * controller.disable( false ); // enable
 	 * controller.disable( !controller._disabled ); // toggle
 	 * ```
+	 * 
 	 * @param [disabled]
 	 * @returns disable
 	 */
@@ -1283,6 +1287,7 @@ export interface GUIController {
 	/**
 	 * Destroys this controller and replaces it with a new option controller. Provided as a more descriptive syntax for gui.add, but primarily for compatibility with dat.gui.
 	 * Use caution, as this method will destroy old references to this controller. It will also change controller order if called out of sequence, moving the option controller to the end of the GUI.
+	 *
 	 * ```js
 	 * // safe usage
 	 * gui.add( object1, 'property' ).options( [ 'a', 'b', 'c' ] );
@@ -1296,8 +1301,8 @@ export interface GUIController {
 	 *
 	 * assert( c.parent.children.indexOf( c ) === -1 )
 	 * // c references a controller that no longer exists
-	 *
 	 * ```
+	 *
 	 * @param options
 	 * @returns options
 	 */
@@ -1414,6 +1419,7 @@ export interface GUIController {
 
 /**
  * Gui
+ * 
  * ```js
  * const gui = new GUI();
  * gui.add( document, 'title' );
@@ -1424,30 +1430,35 @@ export interface GUIController {
  * 	myNumber: 1,
  * 	myFunction: function() { alert( 'hi' ) }
  * }
- * gui.add( obj, 'myBoolean' ); 	// checkbox
- * gui.add( obj, 'myString' ); 	// text field
- * gui.add( obj, 'myNumber' ); 	// number field
- * gui.add( obj, 'myFunction' ); 	// button
+ * gui.add( obj, 'myBoolean' ); // checkbox
+ * gui.add( obj, 'myString' ); // text field
+ * gui.add( obj, 'myNumber' ); // number field
+ * gui.add( obj, 'myFunction' ); // button
  * ```
+ * 
  */
 export interface GUI {
 	/**
 	 * Creates a panel that holds controllers.
-	 * ```ts
+	 * 
+	 * ```js
 	 * new GUI();
 	 * new GUI( { container: document.getElementById( 'custom' ) } );
 	 * ```
+	 * 
 	 * @param param
 	 */
 	new (param?: GUIParameters): this;
 
 	/**
 	 * Adds a controller to the GUI, inferring controller type using the typeof operator.
+	 * 
 	 * ```js
 	 * gui.add( object, 'property' );
 	 * gui.add( object, 'number', 0, 100, 1 );
 	 * gui.add( object, 'options', [ 1, 2, 3 ] );
 	 * ```
+	 * 
 	 * @param object The object the controller will modify.
 	 * @param property Name of the property to control.
 	 * @param min Minimum value for number controllers, or the set of selectable values for a dropdown.
@@ -1505,6 +1516,7 @@ export interface GUI {
 
 	/**
 	 * Opens a GUI or folder. GUI and folders are open by default.
+	 * 
 	 * ```js
 	 * gui.open(); // open
 	 * gui.open( false ); // close
@@ -1629,7 +1641,7 @@ export interface TweenUnknownProps {
 
 export interface Tween<T extends TweenUnknownProps = any> {
 	new (object: T, group?: TweenGroup | false): this;
-	_object : T;
+	_object: T;
 	getId(): number;
 	isPlaying(): boolean;
 	isPaused(): boolean;
@@ -1639,9 +1651,7 @@ export interface Tween<T extends TweenUnknownProps = any> {
 
 	/**
 	 * So far we’ve learnt about the Tween.start method, but there are more methods that control individual tweens. Probably the most important one is the start counterpart: stop. If you want to cancel a tween, just call this method over an individual tween:
-	 * ```js
-	 *
-	 * ```
+	 * 
 	 * @returns stop
 	 */
 	stop(): this;
@@ -1659,6 +1669,7 @@ export interface Tween<T extends TweenUnknownProps = any> {
 	 * tween.start()
 	 * // will start executing 1 second after the start method has been called.
 	 * ```
+	 * 
 	 * @param [amount]
 	 * @returns delay
 	 */
@@ -1666,10 +1677,12 @@ export interface Tween<T extends TweenUnknownProps = any> {
 
 	/**
 	 * If you wanted a tween to repeat forever you could chain it to itself, but a better way is to use the repeat method. It accepts a parameter that describes how many repetitions you want after the first tween is completed:
+	 * 
 	 * ```js
 	 * tween.repeat(10) // repeats 10 times after the first tween and stops
 	 * tween.repeat(Infinity) // repeats forever
 	 * ```
+	 * 
 	 * @param [times]
 	 * @returns repeat
 	 */
@@ -1719,6 +1732,7 @@ export interface Tween<T extends TweenUnknownProps = any> {
 
 	/**
 	 * Things get more interesting when you sequence different tweens in order, i.e. setup one tween to start once a previous one has finished. We call this chaining tweens, and it’s done with the chain method. Thus, to make tweenB start after tweenA finishes:
+	 * 
 	 * ```js
 	 * tweenA.chain(tweenB)
 	 * // Or, for an infinite chain, set tweenA to start once tweenB finishes:
@@ -1942,24 +1956,27 @@ export interface TWEEN {
 	removeAll(): void;
 
 	nextId(): number;
-	
+
 	now(): number;
 
 	/**
 	 * There are a few existing easing functions provided with tween.js. They are grouped by the type of equation they represent: Linear, Quadratic, Cubic, Quartic, Quintic, Sinusoidal, Exponential, Circular, Elastic, Back and Bounce, and then by the easing type: In, Out and InOut.
-	 * 
+	 *
 	 * So let’s suppose you wanted to use a custom easing function that eased the values but applied a Math.floor to the output, so only the integer part would be returned, resulting in a sort of step-ladder output:
+	 * 
 	 * ```js
 	 * function tenStepEasing(k) {
 	 * 	return Math.floor(k * 10) / 10
 	 * }
 	 * tween.easing(tenStepEasing)
 	 * ```
+	 * 
 	 */
 	Easing: Easing;
-	
+
 	/**
 	 * You can change the interpolation function with the interpolation method. For example:
+	 * 
 	 * ```js
 	 * tween.interpolation(TWEEN.Interpolation.Bezier)
 	 * ```

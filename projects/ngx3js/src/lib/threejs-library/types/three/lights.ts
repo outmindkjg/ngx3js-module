@@ -14,11 +14,13 @@ import { WebGLRenderTarget } from './renderers';
  * [animation / skinning / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_blending)
  *
  * ### Code Example
+ * 
  * ```js
  * const light = new THREE.AmbientLight( 0x404040 ); // soft white light scene.add( light );
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'AmbientLight'" [color]="'0x404040'"></ngx3js-light>
  * ```
@@ -75,6 +77,7 @@ export interface AmbientLightProbe extends LightProbe {
  * [materials / bumpmap](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_materials_bumpmap)
  *
  * ### Code Example
+ * 
  * ```js
  * //  White directional light at half intensity shining from the top.
  * const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
@@ -82,6 +85,7 @@ export interface AmbientLightProbe extends LightProbe {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'DirectionalLight'" [color]="'0xffffff'" [intensity]="0.5"></ngx3js-light>
  * ```
@@ -113,11 +117,13 @@ export interface DirectionalLight extends Light {
 	 * It is also possible to set the target to be another object in the scene (anything with a [position](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.position) property), like so:
 	 *
 	 * ### Code Example
+	 * 
 	 * ```js
 	 * const targetObject = new THREE.Object3D();
 	 * scene.add(targetObject);
 	 * light.target = targetObject;
 	 * ```
+	 * 
 	 * The directionalLight will now track the target object.
 	 *
 	 * @default new THREE.Object3D()
@@ -173,12 +179,14 @@ export interface DirectionalLightShadow extends LightShadow {
  * [loader / stl](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_stl)
  *
  * ### Code Example
+ * 
  * ```js
  * const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
  * scene.add( light );
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'HemisphereLight'" [skyColor]="'0xffffbb'" [groundColor]="'0x080820'" [intensity]="0.5"></ngx3js-light>
  * ```
@@ -455,6 +463,7 @@ export interface LightShadow {
  * [lensflares](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lensflares)
  *
  * ### Code Example
+ * 
  * ```js
  * const light = new THREE.PointLight( 0xff0000, 1, 100 );
  * light.position.set( 50, 50, 50 );
@@ -462,6 +471,7 @@ export interface LightShadow {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'PointLight'" [color]="'0xff0000'" [intensity]="0.5" [distance]="100">
  * 	<ngx3js-position [x]="50" [y]="50" [z]="50" ></ngx3js-position>
@@ -526,6 +536,7 @@ export interface PointLight extends Light {
  * This is used internally by [PointLights](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/PointLight) for calculating shadows.
  *
  * ### Code Example
+ * 
  * ```js
  * // Create a WebGLRenderer and turn on shadows in the renderer
  * const renderer = new THREE.WebGLRenderer();
@@ -559,6 +570,7 @@ export interface PointLight extends Light {
  * const helper = new THREE.CameraHelper( light.shadow.camera );
  * scene.add( helper );
  * ```
+ * 
  */
 export interface PointLightShadow extends LightShadow {
 	/**
@@ -582,6 +594,7 @@ export interface PointLightShadow extends LightShadow {
  * See the [ngx light](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_light/RectAreaLight) page for a live demo.
  *
  * ### Code Example
+ * 
  * ```js
  * const width = 10;
  * const height = 10;
@@ -595,6 +608,7 @@ export interface PointLightShadow extends LightShadow {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-light [type]="'RectAreaLight'" [color]="'0xffffff'" [intensity]="1" [width]="10" [height]="10">
  * 	<ngx3js-position [x]="5" [y]="5" [z]="0" ></ngx3js-position>
@@ -665,6 +679,7 @@ export interface RectAreaLight extends Light {
  * [lights / spotlights](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lights_spotlights)
  *
  * ### Code Example
+ * 
  * ```js
  * //  white spotlight shining from the side, casting a shadow
  * const spotLight = new THREE.SpotLight( 0xffffff );
@@ -723,11 +738,13 @@ export interface SpotLight extends Light {
 	 * It is also possible to set the target to be another object in the scene (anything with a [position](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Object3D.position) property), like so:
 	 *
 	 * ### Code Example
+	 * 
 	 * ```js
 	 * const targetObject = new THREE.Object3D();
 	 * scene.add(targetObject);
 	 * light.target = targetObject;
 	 * ```
+	 * 
 	 * The spotlight will now track the target object.
 	 *
 	 * @default new THREE.Object3D()
@@ -797,6 +814,7 @@ export interface SpotLight extends Light {
  * This is used internally by [SpotLights](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SpotLight) for calculating shadows.
  *
  * ### Code Example
+ * 
  * ```js
  * // Create a WebGLRenderer and turn on shadows in the renderer
  * const renderer = new THREE.WebGLRenderer();

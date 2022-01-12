@@ -2046,8 +2046,8 @@ export class NgxThreeUtil {
 						const controlsParams = this.getIGuiControlParam(component.controlsParams, 'Mesh Rotation');
 						if (this.isNotNull(controlsParams)) {
 							if (component.controls.meshRotate.autoRotate) {
-								this.setGuiEnabled(controlsParams.children[1].controller, false);
-								this.setGuiEnabled(controlsParams.children[4].controller, true);
+								this.setGuiEnabled(controlsParams.children[1]?.controller as I3JS.GUIController, false);
+								this.setGuiEnabled(controlsParams.children[4]?.controller as I3JS.GUIController, true);
 							} else {
 								if (this.isNotNull(component.mesh)) {
 									const meshRotate = component.mesh.getRotation();
@@ -2055,8 +2055,8 @@ export class NgxThreeUtil {
 									component.controls.meshRotate.y = ((meshRotate.y / Math.PI) * 180) % 360;
 									component.controls.meshRotate.z = ((meshRotate.z / Math.PI) * 180) % 360;
 								}
-								this.setGuiEnabled(controlsParams.children[1].controller, true);
-								this.setGuiEnabled(controlsParams.children[4].controller, false);
+								this.setGuiEnabled(controlsParams.children[1]?.controller as I3JS.GUIController, true);
+								this.setGuiEnabled(controlsParams.children[4]?.controller as I3JS.GUIController, false);
 							}
 						}
 					}
@@ -2363,12 +2363,12 @@ export class NgxThreeUtil {
 	 * @returns gui change
 	 */
 	public static setupGuiChange(
-		control: INgxThreeGuiController,
+		control: I3JS.GUIController,
 		onFinishChange?: (value?: any) => void,
 		onChange?: (value?: any) => void,
 		listen?: boolean,
 		title?: string
-	): INgxThreeGuiController {
+	): I3JS.GUIController {
 		if (listen !== null && listen !== undefined && listen) {
 			control.listen();
 		}
@@ -2390,7 +2390,7 @@ export class NgxThreeUtil {
 	 * @param control
 	 * @param [isEnable]
 	 */
-	public static setGuiEnabled(control: INgxThreeGuiController, isEnable: boolean = true) {
+	public static setGuiEnabled(control: I3JS.GUIController, isEnable: boolean = true) {
 		if (control !== null && control !== undefined && control.domElement) {
 			const domElement = control.domElement;
 			if (isEnable) {
@@ -2436,61 +2436,66 @@ export class NgxThreeUtil {
 	 */
 	public static setupGui(
 		control: any,
-		gui: INgxThreeGuiController,
+		gui: I3JS.GUI | I3JS.GUIController,
 		params: IGuiControlParam[]
-	): INgxThreeGuiController {
+	): I3JS.GUI | I3JS.GUIController {
 		params.forEach((param) => {
 			const params = param.control ? control[param.control] : control;
 			if (this.isNotNull(params)) {
-				switch (param.type) {
-					case 'color':
-						param.controller = this.setupGuiChange(
-							gui.addColor(params, param.name),
-							param.finishChange,
-							param.change,
-							param.listen,
-							param.title
-						);
-						break;
-					case 'folder':
-						const folder = gui.addFolder(param.name);
-						param.controller = this.setupGui(params, folder, param.children);
-						if (param.isOpen) {
-							folder.open();
-						}
-						break;
-					case 'number':
-						param.controller = this.setupGuiChange(
-							gui.add(params, param.name, param.min, param.max, param.step),
-							param.finishChange,
-							param.change,
-							param.listen,
-							param.title
-						);
-						break;
-					case 'listen':
-						param.controller = gui.add(params, param.name).listen();
-						break;
-					case 'select':
-						param.controller = this.setupGuiChange(
-							gui.add(params, param.name, param.select),
-							param.finishChange,
-							param.change,
-							param.listen,
-							param.title
-						);
-						break;
-					case 'button':
-					default:
-						param.controller = this.setupGuiChange(
-							gui.add(params, param.name),
-							param.finishChange,
-							param.change,
-							param.listen,
-							param.title
-						);
-						break;
+				if (gui instanceof N3JS.GUI) {
+					const guiFolder : I3JS.GUI = gui;
+					switch (param.type) {
+						case 'color':
+							param.controller = this.setupGuiChange(
+								guiFolder.addColor(params, param.name),
+								param.finishChange,
+								param.change,
+								param.listen,
+								param.title
+							);
+							break;
+						case 'folder':
+							const folder = guiFolder.addFolder(param.name);
+							param.controller = this.setupGui(params, folder, param.children);
+							if (param.isOpen) {
+								folder.open();
+							}
+							break;
+						case 'number':
+							param.controller = this.setupGuiChange(
+								guiFolder.add(params, param.name, param.min, param.max, param.step),
+								param.finishChange,
+								param.change,
+								param.listen,
+								param.title
+							);
+							break;
+						case 'listen':
+							param.controller = guiFolder.add(params, param.name).listen();
+							break;
+						case 'select':
+							param.controller = this.setupGuiChange(
+								guiFolder.add(params, param.name, param.select),
+								param.finishChange,
+								param.change,
+								param.listen,
+								param.title
+							);
+							break;
+						case 'button':
+						default:
+							param.controller = this.setupGuiChange(
+								guiFolder.add(params, param.name),
+								param.finishChange,
+								param.change,
+								param.listen,
+								param.title
+							);
+							break;
+					}
 				}
+			} else {
+
 			}
 		});
 		return gui;

@@ -18,6 +18,7 @@ import { Vector2, Vector3 } from './math';
  * [webgl / decals ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_decals)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.BoxGeometry( 1, 1, 1 );
  * const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
@@ -26,6 +27,7 @@ import { Vector2, Vector3 } from './math';
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'BoxGeometry'" [width]="1" [height]="1" [depth]="1"></ngx3js-geometry>
@@ -111,6 +113,7 @@ export { TubeGeometry as TubeBufferGeometry };
  * [webgl / raycast / texture](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_raycast_texture)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.CircleGeometry( 5, 32 );
  * const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
@@ -119,6 +122,7 @@ export { TubeGeometry as TubeBufferGeometry };
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'CircleGeometry'" [radius]="5" [radialSegments]="32"></ngx3js-geometry>
@@ -169,6 +173,7 @@ export interface CircleGeometry extends BufferGeometry {
  * [webgl / postprocessing / pixel](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_postprocessing_pixel)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.ConeGeometry( 5, 20, 32 );
  * const material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
@@ -177,6 +182,7 @@ export interface CircleGeometry extends BufferGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'ConeGeometry'" [radius]="5" [height]="20" [radialSegments]="32"></ngx3js-geometry>
@@ -228,6 +234,7 @@ export interface ConeGeometry extends CylinderGeometry {
  * [webgl / mirror / nodes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_mirror_nodes)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
  * const material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
@@ -236,6 +243,7 @@ export interface ConeGeometry extends CylinderGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'CylinderGeometry'" [radiusTop]="5" [radiusBottom]="5" [height]="20" [radialSegments]="32"></ngx3js-geometry>
@@ -325,6 +333,7 @@ export interface DodecahedronGeometry extends PolyhedronGeometry {
  * [helpers](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_helpers)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.BoxGeometry( 100, 100, 100 );
  * const edges = new THREE.EdgesGeometry( geometry );
@@ -333,6 +342,7 @@ export interface DodecahedronGeometry extends PolyhedronGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh [type]="'LineSegments'">
  * 	<ngx3js-geometry [type]="'EdgesGeometry'">
@@ -463,6 +473,7 @@ export interface UVGenerator {
  * [webgl / geometry / shapes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_shapes)
  *
  * ### Code Example
+ * 
  * ```js
  * const length = 12, width = 8;
  * const shape = new THREE.Shape();
@@ -557,6 +568,7 @@ export interface IcosahedronGeometry extends PolyhedronGeometry {
  * [webgl / geometries ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometries)
  *
  * ### Code Example
+ * 
  * ```js
  * const points = [];
  * for ( let i = 0; i < 10; i ++ ) {
@@ -569,6 +581,7 @@ export interface IcosahedronGeometry extends PolyhedronGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'LatheGeometry'" [points]="points"></ngx3js-geometry>
@@ -649,6 +662,7 @@ export interface OctahedronGeometry extends PolyhedronGeometry {
  * [webgl / animation / skinning / additive / blending](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_animation_skinning_additive_blending)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.PlaneGeometry( 1, 1 );
  * const material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
@@ -657,6 +671,7 @@ export interface OctahedronGeometry extends PolyhedronGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'PlaneGeometry'" [width]="1" [height]="1"></ngx3js-geometry>
@@ -700,6 +715,7 @@ export interface PlaneGeometry extends BufferGeometry {
  * See the [ngx geometey](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_geometry/PolyhedronGeometry) page for a live demo.
  *
  * ### Code Example
+ * 
  * ```js
  * const verticesOfCube = [
  * 	-1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
@@ -717,6 +733,7 @@ export interface PlaneGeometry extends BufferGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'PolyhedronGeometry'"></ngx3js-geometry>
@@ -767,6 +784,7 @@ export interface PolyhedronGeometry extends BufferGeometry {
  * [webxr / vr / cubes](https://outmindkjg.github.io/ngx3js-doc/#/examples/webxr_vr_cubes)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.RingGeometry( 1, 5, 32 );
  * const material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
@@ -775,6 +793,7 @@ export interface PolyhedronGeometry extends BufferGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'RingGeometry'" [innerRadius]="1" [outerRadius]="5" [thetaSegments]="32"></ngx3js-geometry>
@@ -835,6 +854,7 @@ export interface RingGeometry extends BufferGeometry {
  * [webgl / loader / svg](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_loader_svg)
  *
  * ### Code Example
+ * 
  * ```js
  * const x = 0, y = 0;
  * const heartShape = new THREE.Shape();
@@ -852,6 +872,7 @@ export interface RingGeometry extends BufferGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'ShapeGeometry'"></ngx3js-geometry>
@@ -890,6 +911,7 @@ export interface ShapeGeometry extends BufferGeometry {
  * [webgl / camera ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_camera)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.SphereGeometry( 15, 32, 16 );
  * const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
@@ -898,6 +920,7 @@ export interface ShapeGeometry extends BufferGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'SphereGeometry'" [radius]="15" [widthSegments]="32" [heightSegments]="16"></ngx3js-geometry>
@@ -993,6 +1016,7 @@ export interface TetrahedronGeometry extends PolyhedronGeometry {
  * [webgl / read / float / buffer](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_read_float_buffer)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
  * const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
@@ -1001,6 +1025,7 @@ export interface TetrahedronGeometry extends PolyhedronGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'TorusGeometry'" [radius]="10" [tube]="3" [radialSegments]="16" [tubularSegments]="100"></ngx3js-geometry>
@@ -1053,6 +1078,7 @@ export interface TorusGeometry extends BufferGeometry {
  * [webgl / clipping ](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_clipping)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
  * const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
@@ -1061,6 +1087,7 @@ export interface TorusGeometry extends BufferGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'TorusKnotGeometry'" [radius]="10" [tube]="3" [tubularSegments]="100" [radialSegments]="16"></ngx3js-geometry>
@@ -1112,6 +1139,7 @@ export interface TorusKnotGeometry extends BufferGeometry {
  * [webgl / geometry / extrude / splines](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_geometry_extrude_splines)
  *
  * ### Code Example
+ * 
  * ```js
  * class CustomSinCurve extends THREE.Curve {
  * 	constructor( scale = 1 ) {
@@ -1133,6 +1161,7 @@ export interface TorusKnotGeometry extends BufferGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh>
  * 	<ngx3js-geometry [type]="'TorusKnotGeometry'" [radius]="10" [tube]="3" [tubularSegments]="100" [radialSegments]="16"></ngx3js-geometry>
@@ -1204,6 +1233,7 @@ export interface TubeGeometry extends BufferGeometry {
  * [webgl / lines / fat / wireframe](https://outmindkjg.github.io/ngx3js-doc/#/examples/webgl_lines_fat_wireframe)
  *
  * ### Code Example
+ * 
  * ```js
  * const geometry = new THREE.SphereGeometry( 100, 100, 100 );
  * const wireframe = new THREE.WireframeGeometry( geometry );
@@ -1215,6 +1245,7 @@ export interface TubeGeometry extends BufferGeometry {
  * ```
  *
  * ### Ngx3Js Code Example
+ * 
  * ```html
  * <ngx3js-mesh [type]="'LineSegments'">
  * 	<ngx3js-geometry [type]="'WireframeGeometry'">
