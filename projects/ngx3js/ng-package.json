@@ -269,5 +269,5 @@
 			"fs": "fs"
 		}
 	},
-	"allowedNonPeerDependencies": ["gsap", "three"]
+	"allowedNonPeerDependencies": [ "three"]
 }
