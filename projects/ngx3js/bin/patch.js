@@ -15,6 +15,7 @@ const fs = require('fs');
 const cwd = process.cwd();
 
 function readJson(fileName) {
+	console.log('Read File %s/%s.json', cwd , fileName);
 	let rawdata = fs.readFileSync(cwd + '/' + fileName + '.json');
 	rawdata = rawdata
 		.toString()
@@ -127,9 +128,6 @@ rl.question(question, function (agree) {
 								if (stdout) {
 									console.log(`stdout: ${stdout}`);
 								}
-								console.log(
-									'./angular.json -- assets && allowedCommonJsDependencies installed!\n'
-								);
 								console.log(
 									'RE RUN TO INSTALL "' + 'npm install'.red + '"' + ' in shell'
 								);
