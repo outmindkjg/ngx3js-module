@@ -65,8 +65,6 @@ rl.question(question, function (agree) {
 				packageJson['dependencies'] = {};
 			}
 			const dependencies = packageJson['dependencies'];
-			dependencies['fs'] = '0.0.1-security';
-			dependencies['fs-web'] = '^1.0.1';
 			dependencies['three'] = '0.136.0';
 
 			if (packageJson['devDependencies'] === undefined) {
@@ -78,15 +76,7 @@ rl.question(question, function (agree) {
 			if (tsconfigJson['compilerOptions'] === undefined) {
 				tsconfigJson['compilerOptions'] = {};
 			}
-			const compilerOptions = tsconfigJson['compilerOptions'];
-			if (compilerOptions['paths'] === undefined) {
-				compilerOptions['paths'] = {};
-			}
-			const compilerOptionsPaths = compilerOptions['paths'];
-			compilerOptionsPaths['fs'] = ['./node_modules/fs-web'];
-
 			const angularJson = readJson('angular');
-
 			const defaultProject = angularJson['defaultProject'];
 
 			const projects = angularJson['projects'][defaultProject];
@@ -114,21 +104,6 @@ rl.question(question, function (agree) {
 					input: './node_modules/ngx3js/assets',
 					output: '/assets/examples/',
 				});
-			}
-			if (architectBuildOptions['allowedCommonJsDependencies'] === undefined) {
-				architectBuildOptions['allowedCommonJsDependencies'] = [];
-			}
-			let allowedCommonJsDependencies = architectBuildOptions['allowedCommonJsDependencies'];
-			let isFsFounded = false;
-			allowedCommonJsDependencies.forEach(function (allowedCommonJs) {
-				if (typeof allowedCommonJs === 'string') {
-					if (allowedCommonJs === 'fs') {
-						isAssetFounded = true;
-					}
-				}
-			});
-			if (!isFsFounded) {
-				allowedCommonJsDependencies.push('fs');
 			}
 			writeJson('package', packageJson, null, function () {
 				console.log(
