@@ -98,7 +98,7 @@ export interface GPUComputationRenderer {
 		magFilter: TextureFilter
 	): WebGLRenderTarget;
 	createTexture(): DataTexture;
-	renderTexture(input: Texture, output: Texture): void;
+	renderTexture(input: Texture, output: Texture | WebGLRenderTarget): void;
 	doRenderTarget(material: Material, output: WebGLRenderTarget): void;
 }
 

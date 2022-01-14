@@ -1301,6 +1301,17 @@ export interface MathUtils {
 	 * @param order A string specifying the axes order: 'XYX', 'XZX', 'YXY', 'YZY', 'ZXZ', or 'ZYZ' Sets quaternion [q](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Quaternion) from the [intrinsic Proper Euler Angles](http://en.wikipedia.org/wiki/Euler_angles) defined by angles [a](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), [b](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and [c](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Float), and order [order](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/String).
 	 */
 	setQuaternionFromProperEuler(q: Quaternion, a: number, b: number, c: number, order: string): void;
+
+	/**
+	 * degree to radian
+	 */
+	DEG2RAD : number ;
+
+	/**
+	 * radian to degree
+	 */
+	RAD2DEG : number;
+
 }
 
 export type Matrix3Tuple = [number, number, number, number, number, number, number, number, number];
