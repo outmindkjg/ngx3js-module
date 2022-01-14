@@ -407,6 +407,7 @@ export class NgxAbstractObject3dComponent
 			if (changes.matrixAutoUpdate) {
 				if (NgxThreeUtil.isNotNull(this.matrixAutoUpdate)) {
 					this.object3d.matrixAutoUpdate = this.matrixAutoUpdate;
+					this.object3d.updateMatrix();
 				}
 				delete changes.matrixAutoUpdate;
 			}
