@@ -46,4 +46,4 @@ package-lock
 .DS_Store
 Thumbs.db
 projects/ngx3js/package-lock.json
-package.json
+package-lock.json
