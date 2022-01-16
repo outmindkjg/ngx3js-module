@@ -52,6 +52,9 @@ export const NodeNode: NodeNode = NODES.Node as any;
 export type NodeBuilder = I3JS.NodeBuilder;
 export const NodeBuilder: NodeBuilder = NODES.NodeBuilder as any;
 
+export type NodeUpdateType = I3JS.NodeUpdateType;
+export const NodeUpdateType: NodeUpdateType = ((NODES as any)?.NodeUpdateType || {}) as any ;
+
 export type NodeFrame = I3JS.NodeFrame;
 export const NodeFrame: NodeFrame = NODES.NodeFrame as any;
 

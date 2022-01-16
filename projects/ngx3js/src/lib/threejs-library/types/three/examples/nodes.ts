@@ -254,6 +254,13 @@ export interface FunctionNode extends TempNode {
 /**
  * Input node
  */
+ export interface NodeUpdateType  {
+	[ key : string] : any;
+ }
+
+/**
+ * Input node
+ */
 export interface InputNode extends TempNode {
 	new (type: string, params?: TempNodeParams): this;
 
@@ -455,7 +462,7 @@ export interface NodeBuilder {
  * Node frame
  */
 export interface NodeFrame {
-	new (time: number): this;
+	new (time?: number): this;
 	time: number;
 	id: number;
 	delta: number | undefined;

@@ -541,7 +541,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.tilt')) {
-			const tiltLoader : I3JS.TDSLoader = NgxThreeUtil.getLoader('tiltLoader', N3JS.TDSLoader, NgxThreeUtil.getStoreUrl(''));
+			const tiltLoader : I3JS.TiltLoader = NgxThreeUtil.getLoader('tiltLoader', N3JS.TiltLoader, NgxThreeUtil.getStoreUrl(''));
 			this.setLoaderWithOption(tiltLoader, options);
 			tiltLoader.load(
 				key,
