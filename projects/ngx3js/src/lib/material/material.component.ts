@@ -3148,7 +3148,8 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 						this.subscribeRefer(
 							'phongnodeUpdate',
 							NgxThreeUtil.getUpdateSubscribe().subscribe((timer: IRendererTimer) => {
-								nodeFrame.update(timer.delta).updateNode(phongNodeMaterial);
+								nodeFrame.update(timer.delta);
+								nodeFrame.updateNode(phongNodeMaterial);
 							})
 						);
 						material = phongNodeMaterial;

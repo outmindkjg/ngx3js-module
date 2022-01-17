@@ -8,6 +8,7 @@ import {
 	Matrix4,
 	Mesh,
 	Object3D,
+	PointsMaterial,
 	OrthographicCamera,
 	Scene,
 	ShaderMaterial,
@@ -88,6 +89,7 @@ export interface NormalNode extends TempNode {
 
 	LOCAL: string;
 	WORLD: string;
+	VIEW : string;
 }
 
 /**
@@ -162,7 +164,7 @@ export interface UVNode extends TempNode {
  * Attribute node
  */
 export interface AttributeNode extends TempNode {
-	new (name: string, type?: string): this;
+	new (name: string, type?: any): this;
 
 	name: string;
 	nodeType: string;
@@ -206,14 +208,14 @@ export interface ExpressionNode extends FunctionNode {
  * Function call node
  */
 export interface FunctionCallNode extends TempNode {
-	new (func: FunctionNode, inputs?: NodeNode[]): this;
+	new (func: any, inputs?: any): this;
 
 	nodeType: string;
 
 	value: FunctionNode;
-	inputs: NodeNode[];
+	inputs: any;
 
-	setFunction(func: FunctionNode, inputs?: NodeNode[]): void;
+	setFunction(func: any, inputs?: any): void;
 	getFunction(): FunctionNode;
 	getType(): string;
 	copy(source: FunctionCallNode): this;
@@ -263,9 +265,9 @@ export interface FunctionNode extends TempNode {
  */
 export interface InputNode extends TempNode {
 	new (type: string, params?: TempNodeParams): this;
-
 	readonly: boolean;
-
+	setConst( value : boolean ): this;
+	getConst() : boolean;
 	setReadonly(value: boolean): this;
 	getReadonly(builder: NodeBuilder): boolean;
 	copy(source: InputNode): this;
@@ -286,6 +288,7 @@ export interface NodeFlow {
 export interface NodeNode {
 	new (type?: string): this;
 
+	value : any;
 	uuid: string;
 	name: string;
 	type: string | undefined;
@@ -822,7 +825,7 @@ export interface RTTNodeOptions extends WebGLRenderTargetOptions {
  * Rttnode
  */
 export interface RTTNode extends TextureNode {
-	new (width: number, height: number, input: TextureNode, options?: RTTNodeOptions): this;
+	new (width: number, height: number, input: TextureNode | any, options?: RTTNodeOptions): this;
 
 	input: TextureNode;
 	clear: boolean;
@@ -831,6 +834,7 @@ export interface RTTNode extends TextureNode {
 	camera: OrthographicCamera;
 	scene: Scene;
 	quad: Mesh;
+	saveTo : any;
 	render: boolean;
 
 	build(builder: NodeBuilder, output: string, uuid?: string): string;
@@ -861,7 +865,7 @@ export interface ReflectorNode extends TempNode {
  * Screen node
  */
 export interface ScreenNode extends TextureNode {
-	new (uv?: UVNode): this;
+	new (uv?: any): this;
 
 	nodeType: string;
 
@@ -872,7 +876,7 @@ export interface ScreenNode extends TextureNode {
  * Texture node
  */
 export interface TextureNode extends InputNode {
-	new (value: Texture, uv?: UVNode | UVTransformNode, bias?: NodeNode, project?: boolean): this;
+	new (value: Texture, uv?: NodeNode, bias?: NodeNode, project?: boolean): this;
 
 	value: Texture;
 	uv: UVNode | UVTransformNode;
@@ -901,6 +905,7 @@ export interface Vector2Node extends InputNode {
 		ns?: string,
 		needsUpdate?: boolean
 	): string;
+
 	copy(source: Vector2Node): this;
 }
 
@@ -1188,7 +1193,7 @@ export interface CondNode extends TempNode {
  * Math node
  */
 export interface MathNode extends TempNode {
-	new (a: NodeNode, bOrMethod: NodeNode | string, cOrMethod?: NodeNode | string, method?: string): this;
+	new (a: NodeNode | string, bOrMethod: NodeNode | string, cOrMethod?: NodeNode | string, method?: NodeNode | string): this;
 
 	a: NodeNode;
 	b: NodeNode | string | undefined;
@@ -1245,7 +1250,7 @@ export interface MathNode extends TempNode {
  * Operator node
  */
 export interface OperatorNode extends TempNode {
-	new (a: NodeNode, b: NodeNode, op: string): this;
+	new (a: NodeNode | string, b: NodeNode, op: NodeNode | string): this;
 
 	a: NodeNode;
 	b: NodeNode;
@@ -1301,7 +1306,7 @@ export interface NormalMapNode extends TempNode {
  * Texture cube node
  */
 export interface TextureCubeNode extends TempNode {
-	new (value: TextureNode, textureSize?: FloatNode): this;
+	new (value: TextureNode, textureSize?: FloatNode, bias? : any): this;
 
 	value: TextureNode;
 	textureSize: FloatNode;
@@ -1341,12 +1346,14 @@ export interface NodePass extends ShaderPass {
 	name: string;
 	uuid: string;
 	userData: object;
-	input: ScreenNode;
+	input: ScreenNode | any;
 	needsUpdate: boolean;
 
 	copy(source: NodePass): this;
 	toJSON(meta?: object | string): object;
 }
+
+
 
 /**
  * Node post processing
@@ -1357,8 +1364,8 @@ export interface NodePostProcessing {
 	renderer: WebGLRenderer;
 	renderTarget: WebGLRenderTarget;
 
-	output: ScreenNode;
-	material: NodeMaterial;
+	output: ScreenNode | any;
+	material: NodeMaterial ;
 
 	camera: OrthographicCamera;
 	scene: Scene;
@@ -1370,6 +1377,13 @@ export interface NodePostProcessing {
 	setSize(width: number, height: number): void;
 	copy(source: NodePostProcessing): this;
 	toJSON(meta?: object | string): object;
+}
+
+/**
+ * Checker node
+ */
+export interface SubSlotNode extends TempNode {
+	slots : any;
 }
 
 /**
@@ -1591,6 +1605,8 @@ export interface VelocityNodeParams {
 export interface VelocityNode extends Vector3Node {
 	new (target: Object3D, params?: VelocityNodeParams): this;
 
+	params : VelocityNodeParams;
+
 	velocity: Vector3;
 	moment: Vector3 | undefined;
 	speed: Vector3 | undefined;
@@ -1605,3 +1621,106 @@ export interface VelocityNode extends Vector3Node {
 	updateFrame(frame: NodeFrame): void;
 	copy(source: VelocityNode): this;
 }
+
+/**
+ * Points node material
+ */
+export interface PointsNodeMaterial extends PointsMaterial {
+	colorNode : any;
+	opacityNode : any;
+	alphaTestNode : any;
+	lightNode : any;
+	sizeNode : any;
+	positionNode : any;
+}
+
+/**
+ * Point uvnode
+ */
+export interface PointUVNode extends NodeNode {}
+
+/**
+ * Point uvnode
+ */
+ export interface SpriteSheetUVNode extends NodeNode {
+	 new(countNode : any, uvNode? : any, frameNode? : any ) : this;
+ }
+ 
+ export type OnNodeBuildBeforeRender = (frame : NodeFrame, material : Material ) => void;
+
+
+ export interface NODES {
+	ArrayInputNode : any,
+	AttributeNode : AttributeNode,
+	BypassNode : BypassNode,
+	CodeNode : any,
+	ContextNode : any,
+	ExpressionNode : ExpressionNode,
+	FunctionCallNode : FunctionCallNode,
+	FunctionNode : FunctionNode,
+	InputNode : InputNode,
+	Node : Node,
+	NodeAttribute : any,
+	NodeBuilder : NodeBuilder,
+	NodeCode : any,
+	NodeFrame : NodeFrame,
+	NodeFunctionInput : any,
+	NodeKeywords : any,
+	NodeUniform : NodeUniform,
+	NodeVar : any,
+	NodeVary : any,
+	PropertyNode : PropertyNode,
+	TempNode : TempNode,
+	VarNode : VarNode,
+	VaryNode : any,
+
+	// accessors
+	CameraNode : CameraNode,
+	MaterialNode : any,
+	MaterialReferenceNode : any,
+	ModelNode : any,
+	ModelViewProjectionNode : any,
+	NormalNode : NormalNode,
+	Object3DNode : any,
+	PointUVNode : PointUVNode,
+	PositionNode : PositionNode,
+	ReferenceNode : any,
+	SkinningNode : any,
+	UVNode : UVNode,
+
+	// inputs
+	ColorNode : ColorNode,
+	FloatNode : FloatNode,
+	IntNode : IntNode,
+	Matrix3Node : Matrix3Node,
+	Matrix4Node : Matrix4Node,
+	TextureNode : TextureNode,
+	Vector2Node : Vector2Node,
+	Vector3Node : Vector3Node,
+	Vector4Node : Vector4Node,
+
+	// display
+	ColorSpaceNode : ColorSpaceNode,
+	NormalMapNode : NormalMapNode,
+
+	// math
+	MathNode : MathNode,
+	OperatorNode : OperatorNode,
+
+	// lights
+	LightContextNode : any,
+	LightNode : LightNode,
+	LightsNode : any,
+
+	// utils
+	ArrayElementNode : any,
+	ConvertNode : any,
+	JoinNode : JoinNode,
+	SplitNode : any,
+	SpriteSheetUVNode : SpriteSheetUVNode,
+	OscNode : any,
+	TimerNode : TimerNode,
+
+	// procedural
+	CheckerNode : CheckerNode,
+ }
