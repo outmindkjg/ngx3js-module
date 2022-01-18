@@ -705,7 +705,7 @@ export class NgxLocalStorageService {
 				key,
 				(object) => {
 					callBack({
-						object: object,
+						object: this.getStoreObject(object, options),
 						clips: object.animations,
 						source: object,
 					});

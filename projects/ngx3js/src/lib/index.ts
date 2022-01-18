@@ -119,6 +119,7 @@ export * from './three-stats';
 export * from './three-util';
 export * from './threejs-library/ammo';
 export * as AMMO from './threejs-library/ammo-type';
+export * as NODES from './threejs-library/modules/three/examples/nodes-renderer';
 export * from './threejs-library/three-core';
 export * as THREE from './threejs-library/three-core';
 export * from './tools/tools.component';
@@ -129,4 +130,5 @@ export * from './viewer/viewer-canvas';
 export * from './viewer/viewer.component';
 export * from './viewport-in/viewport-in.component';
 export * from './visual/visual.component';
+
 

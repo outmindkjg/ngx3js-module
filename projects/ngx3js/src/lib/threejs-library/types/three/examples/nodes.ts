@@ -17,6 +17,7 @@ import {
 	Vector2,
 	Vector3,
 	Vector4,
+	EventDispatcher,
 	WebGLRenderer,
 	WebGLRenderTarget,
 	WebGLRenderTargetOptions,
@@ -89,7 +90,7 @@ export interface NormalNode extends TempNode {
 
 	LOCAL: string;
 	WORLD: string;
-	VIEW : string;
+	VIEW: string;
 }
 
 /**
@@ -256,9 +257,9 @@ export interface FunctionNode extends TempNode {
 /**
  * Input node
  */
- export interface NodeUpdateType  {
-	[ key : string] : any;
- }
+export interface NodeUpdateType {
+	[key: string]: any;
+}
 
 /**
  * Input node
@@ -266,8 +267,8 @@ export interface FunctionNode extends TempNode {
 export interface InputNode extends TempNode {
 	new (type: string, params?: TempNodeParams): this;
 	readonly: boolean;
-	setConst( value : boolean ): this;
-	getConst() : boolean;
+	setConst(value: boolean): this;
+	getConst(): boolean;
 	setReadonly(value: boolean): this;
 	getReadonly(builder: NodeBuilder): boolean;
 	copy(source: InputNode): this;
@@ -288,7 +289,7 @@ export interface NodeFlow {
 export interface NodeNode {
 	new (type?: string): this;
 
-	value : any;
+	value: any;
 	uuid: string;
 	name: string;
 	type: string | undefined;
@@ -300,8 +301,8 @@ export interface NodeNode {
 	analyze(builder: NodeBuilder, settings?: object): void;
 	analyzeAndFlow(builder: NodeBuilder, output: string, settings?: object): NodeFlow;
 	flow(builder: NodeBuilder, output: string, settings?: object): NodeFlow;
-	build(builder: NodeBuilder, output: string, uuid?: string): string;
-	generate(builder: NodeBuilder, output: string, uuid?: string, type?: string, ns?: string): string;
+	build(builder: NodeBuilder, output?: string, uuid?: string): string;
+	generate(builder?: NodeBuilder, output?: string, uuid?: string, type?: string, ns?: string): string;
 	appendDepsNode(builder: NodeBuilder, data: object, output: string): void;
 	setName(name: string): this;
 	getName(builder: NodeBuilder): string;
@@ -311,6 +312,10 @@ export interface NodeNode {
 	copy(source: NodeNode): this;
 	createJSONNode(meta?: object | string): object;
 	toJSON(meta?: object | string): object;
+
+	getUpdateType(): string;
+	getNodeType(): string;
+	update(frame ? : any): void;
 }
 
 /**
@@ -834,7 +839,7 @@ export interface RTTNode extends TextureNode {
 	camera: OrthographicCamera;
 	scene: Scene;
 	quad: Mesh;
-	saveTo : any;
+	saveTo: any;
 	render: boolean;
 
 	build(builder: NodeBuilder, output: string, uuid?: string): string;
@@ -1193,7 +1198,12 @@ export interface CondNode extends TempNode {
  * Math node
  */
 export interface MathNode extends TempNode {
-	new (a: NodeNode | string, bOrMethod: NodeNode | string, cOrMethod?: NodeNode | string, method?: NodeNode | string): this;
+	new (
+		a: NodeNode | string,
+		bOrMethod: NodeNode | string,
+		cOrMethod?: NodeNode | string,
+		method?: NodeNode | string
+	): this;
 
 	a: NodeNode;
 	b: NodeNode | string | undefined;
@@ -1306,7 +1316,7 @@ export interface NormalMapNode extends TempNode {
  * Texture cube node
  */
 export interface TextureCubeNode extends TempNode {
-	new (value: TextureNode, textureSize?: FloatNode, bias? : any): this;
+	new (value: TextureNode, textureSize?: FloatNode, bias?: any): this;
 
 	value: TextureNode;
 	textureSize: FloatNode;
@@ -1353,8 +1363,6 @@ export interface NodePass extends ShaderPass {
 	toJSON(meta?: object | string): object;
 }
 
-
-
 /**
  * Node post processing
  */
@@ -1365,7 +1373,7 @@ export interface NodePostProcessing {
 	renderTarget: WebGLRenderTarget;
 
 	output: ScreenNode | any;
-	material: NodeMaterial ;
+	material: NodeMaterial;
 
 	camera: OrthographicCamera;
 	scene: Scene;
@@ -1383,7 +1391,7 @@ export interface NodePostProcessing {
  * Checker node
  */
 export interface SubSlotNode extends TempNode {
-	slots : any;
+	slots: any;
 }
 
 /**
@@ -1605,7 +1613,7 @@ export interface VelocityNodeParams {
 export interface VelocityNode extends Vector3Node {
 	new (target: Object3D, params?: VelocityNodeParams): this;
 
-	params : VelocityNodeParams;
+	params: VelocityNodeParams;
 
 	velocity: Vector3;
 	moment: Vector3 | undefined;
@@ -1626,12 +1634,12 @@ export interface VelocityNode extends Vector3Node {
  * Points node material
  */
 export interface PointsNodeMaterial extends PointsMaterial {
-	colorNode : any;
-	opacityNode : any;
-	alphaTestNode : any;
-	lightNode : any;
-	sizeNode : any;
-	positionNode : any;
+	colorNode: any;
+	opacityNode: any;
+	alphaTestNode: any;
+	lightNode: any;
+	sizeNode: any;
+	positionNode: any;
 }
 
 /**
@@ -1640,87 +1648,238 @@ export interface PointsNodeMaterial extends PointsMaterial {
 export interface PointUVNode extends NodeNode {}
 
 /**
- * Point uvnode
+ * Sprite sheet uvnode
  */
- export interface SpriteSheetUVNode extends NodeNode {
-	 new(countNode : any, uvNode? : any, frameNode? : any ) : this;
- }
- 
- export type OnNodeBuildBeforeRender = (frame : NodeFrame, material : Material ) => void;
+export interface SpriteSheetUVNode extends NodeNode {
+	new (countNode: any, uvNode?: any, frameNode?: any): this;
+}
 
+export type OnNodeBuildBeforeRender = (frame: NodeFrame, material: Material) => void;
 
- export interface NODES {
-	ArrayInputNode : any,
-	AttributeNode : AttributeNode,
-	BypassNode : BypassNode,
-	CodeNode : any,
-	ContextNode : any,
-	ExpressionNode : ExpressionNode,
-	FunctionCallNode : FunctionCallNode,
-	FunctionNode : FunctionNode,
-	InputNode : InputNode,
-	Node : Node,
-	NodeAttribute : any,
-	NodeBuilder : NodeBuilder,
-	NodeCode : any,
-	NodeFrame : NodeFrame,
-	NodeFunctionInput : any,
-	NodeKeywords : any,
-	NodeUniform : NodeUniform,
-	NodeVar : any,
-	NodeVary : any,
-	PropertyNode : PropertyNode,
-	TempNode : TempNode,
-	VarNode : VarNode,
-	VaryNode : any,
+export interface ArrayInputNode extends InputNode {
+	new (...obj: any[]): this;
+}
 
-	// accessors
-	CameraNode : CameraNode,
-	MaterialNode : any,
-	MaterialReferenceNode : any,
-	ModelNode : any,
-	ModelViewProjectionNode : any,
-	NormalNode : NormalNode,
-	Object3DNode : any,
-	PointUVNode : PointUVNode,
-	PositionNode : PositionNode,
-	ReferenceNode : any,
-	SkinningNode : any,
-	UVNode : UVNode,
+export interface CodeNode extends NodeNode {
+	new (...obj: any[]): this;
+	setIncludes(includes: any[]): this;
+	getIncludes(): any[];
+}
 
-	// inputs
-	ColorNode : ColorNode,
-	FloatNode : FloatNode,
-	IntNode : IntNode,
-	Matrix3Node : Matrix3Node,
-	Matrix4Node : Matrix4Node,
-	TextureNode : TextureNode,
-	Vector2Node : Vector2Node,
-	Vector3Node : Vector3Node,
-	Vector4Node : Vector4Node,
+export interface ContextNode extends NodeNode {
+	new (...obj: any[]): this;
+}
 
-	// display
-	ColorSpaceNode : ColorSpaceNode,
-	NormalMapNode : NormalMapNode,
+export interface NodeAttribute {
+	new (name: any, type: any): this;
+}
 
-	// math
-	MathNode : MathNode,
-	OperatorNode : OperatorNode,
+export interface NodeCode {
+	new (name: any, type: any, code?: any): this;
+}
 
-	// lights
-	LightContextNode : any,
-	LightNode : LightNode,
-	LightsNode : any,
+export interface NodeFunctionInput {
+	new (type: any, name: any, count?: any, qualifier?: any, isConst?: any): this;
+}
 
-	// utils
-	ArrayElementNode : any,
-	ConvertNode : any,
-	JoinNode : JoinNode,
-	SplitNode : any,
-	SpriteSheetUVNode : SpriteSheetUVNode,
-	OscNode : any,
-	TimerNode : TimerNode,
+export interface NodeKeywords extends NodeNode {
+	new (): this;
+	getNode(name: string): any;
+	addKeyword(name: any, callback: any): this;
+	parse(code: any): any;
+	include(builder: any, code: any): void;
+}
 
-	// procedural
-	CheckerNode : CheckerNode,
- }
+export interface NodeVar {
+	new (name: any, type: any): this;
+}
+
+export interface NodeVary {
+	new (name: any, type: any): this;
+}
+
+export interface VaryNode extends NodeNode {
+	new (node: any, name?: any): this;
+}
+
+export interface MaterialNode extends NodeNode {
+	new (scope?: any): this;
+}
+
+export interface MaterialReferenceNode extends ReferenceNode {
+	new (property: any, inputType: any, material?: any): this;
+}
+
+export interface ModelNode extends Object3DNode {
+	new (scope?: any): this;
+}
+
+export interface ModelViewProjectionNode extends NodeNode {
+	new (position?: any): this;
+}
+
+export interface Object3DNode extends NodeNode {
+	new (scope?: any, object3d?: any): this;
+}
+
+export interface ReferenceNode extends NodeNode {
+	new (property: any, inputType: any, object?: any): this;
+}
+
+export interface SkinningNode extends NodeNode {
+	new (skinnedMesh: any): this;
+}
+
+export interface LightContextNode extends ContextNode {
+	new (node: any): this;
+}
+
+export interface LightsNode extends NodeNode {
+	new (light?: any): this;
+}
+
+export interface ArrayElementNode extends NodeNode {
+	new (node: any, indexNode: any): this;
+}
+
+export interface ConvertNode extends NodeNode {
+	new (node: any, convertTo: any): this;
+}
+
+export interface SplitNode extends NodeNode {
+	new (node: any, components?: any): this;
+}
+
+export interface OscNode extends NodeNode {
+	new (method?: any, timeNode?: any): this;
+}
+
+export interface ObjectNode extends NodeNode {
+	new (name: any, inputLength: any, extra?: any, width?: any): this;
+	new (): this;
+	setExtra(value: any): this;
+	getExtra(value: any): any;
+	invalidate(): void;
+}
+
+export interface StandardMaterialEditor extends ObjectNode {
+	updateTransparent(): void;
+}
+
+export interface OperatorEditor extends ObjectNode {}
+export interface NormalizeEditor extends ObjectNode {}
+export interface InvertEditor extends ObjectNode {}
+export interface LimiterEditor extends ObjectNode {}
+export interface DotEditor extends ObjectNode {}
+export interface PowerEditor extends ObjectNode {}
+export interface TrigonometryEditor extends ObjectNode {}
+export interface FloatEditor extends ObjectNode {}
+export interface Vector2Editor extends ObjectNode {}
+export interface Vector3Editor extends ObjectNode {}
+export interface Vector4Editor extends ObjectNode {}
+export interface SliderEditor extends ObjectNode {}
+export interface ColorEditor extends ObjectNode {}
+export interface BlendEditor extends ObjectNode {}
+export interface UVEditor extends ObjectNode {}
+export interface PositionEditor extends ObjectNode {}
+export interface NormalEditor extends ObjectNode {}
+export interface TimerEditor extends ObjectNode {}
+export interface OscillatorEditor extends ObjectNode {}
+export interface CheckerEditor extends ObjectNode {}
+
+export interface NodeSerializer extends EventTarget {
+	new() : this ;
+	get id() : any ;
+	setSerializable( value : any ) : this ;
+	getSerializable() : any ;
+	toJSON( data ? : any) : any ;
+}
+
+/**
+ * Node canvas
+ */
+export interface NodeCanvas extends NodeSerializer{
+	dom : HTMLElement;
+	contentDOM : HTMLElement;
+	areaDOM : HTMLElement;
+	dropDOM : HTMLElement;
+	canvas : HTMLCanvasElement;
+	frontCanvas : HTMLCanvasElement;
+	context : CanvasRenderingContext2D;
+	frontContext : CanvasRenderingContext2D;
+	width : number;
+	height : number;
+	clientX : number;
+	clientY : number;
+	relativeClientX : number;
+	relativeClientY : number;
+	zoom : number;
+	nodes : any[];
+	selected : any;
+	updating : boolean;
+	droppedItems : any[];
+	get rect() : DOMRect;
+	get relativeX() : number ;
+	get relativeY() : number ;
+	get centerX() : number ;
+	get centerY() : number ;
+	onDrop( callback : any ) : this ;
+	start() : void ;
+	stop() : void ;
+	add( node : any ) : this ;
+	remove( node : any  ) : this ;
+	clear() : this ;
+	unlink( node : any ) : void ;
+	getLinks() : any[] ;
+	centralize() : this ;
+	select( node ? :any) : void ;
+	update() : void ;
+	serialize( data : any ) : void ;
+	deserialize( data : any ) : void ;
+}
+
+/**
+ * Node editor
+ */
+export interface NodeEditor extends EventDispatcher {
+	new (): this;
+
+	add(node: any): this;
+
+	get nodes(): any;
+
+	newProject(): void;
+
+	loadJSON(json: any): void;
+
+	domElement: HTMLElement;
+
+	canvas: NodeCanvas;
+
+	nodesContext: any;
+	examplesContext: any;
+}
+
+export interface NodeEditorClassLib {
+	StandardMaterialEditor: StandardMaterialEditor;
+	OperatorEditor: OperatorEditor;
+	NormalizeEditor: NormalizeEditor;
+	InvertEditor: InvertEditor;
+	LimiterEditor: LimiterEditor;
+	DotEditor: DotEditor;
+	PowerEditor: PowerEditor;
+	TrigonometryEditor: TrigonometryEditor;
+	FloatEditor: FloatEditor;
+	Vector2Editor: Vector2Editor;
+	Vector3Editor: Vector3Editor;
+	Vector4Editor: Vector4Editor;
+	SliderEditor: SliderEditor;
+	ColorEditor: ColorEditor;
+	BlendEditor: BlendEditor;
+	UVEditor: UVEditor;
+	PositionEditor: PositionEditor;
+	NormalEditor: NormalEditor;
+	TimerEditor: TimerEditor;
+	OscillatorEditor: OscillatorEditor;
+	CheckerEditor: CheckerEditor;
+}

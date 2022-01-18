@@ -3,9 +3,11 @@ import { NgxMeshComponent } from './mesh/mesh.component';
 import {
 	ICssStyle,
 	IGuiBaseControl,
-	IGuiControlParam, INgxColor,
-	INgxThreeGuiController, IRendererTimer,
-	ITagAttributes
+	IGuiControlParam,
+	INgxColor,
+	INgxThreeGuiController,
+	IRendererTimer,
+	ITagAttributes,
 } from './ngx-interface';
 import { NgxThreeClock } from './three-clock';
 import { NgxThreeStats } from './three-stats';
@@ -739,7 +741,7 @@ export class NgxThreeUtil {
 	/**
 	 * Clears loading manager
 	 */
-	 public static clearLoadingManager() {
+	public static clearLoadingManager() {
 		if (this._manager !== null) {
 			this._manager = null;
 		}
@@ -761,11 +763,11 @@ export class NgxThreeUtil {
 					console.error(url);
 				}
 			);
-			const cache:I3JS.Cache = N3JS.Cache;
+			const cache: I3JS.Cache = N3JS.Cache;
 			if (cache !== null && cache !== undefined) {
 				cache.enabled = true;
 			}
-			this._manager.addHandler(/\.dds$/i, this.getLoader('ddsLoader',N3JS.DDSLoader));
+			this._manager.addHandler(/\.dds$/i, this.getLoader('ddsLoader', N3JS.DDSLoader));
 		}
 		return this._manager;
 	}
@@ -1558,11 +1560,11 @@ export class NgxThreeUtil {
 	/**
 	 * Clears ngx three util
 	 */
-	public static clear(clearCache : boolean = false) {
+	public static clear(clearCache: boolean = false) {
 		this.clearThreeComponent();
 		this.clearLoadingManager();
 		if (clearCache) {
-			const cache:I3JS.Cache = N3JS.Cache;
+			const cache: I3JS.Cache = N3JS.Cache;
 			if (cache !== null && cache !== undefined) {
 				cache.clear();
 			}
@@ -1617,7 +1619,7 @@ export class NgxThreeUtil {
 	 * @param [timeDelay]
 	 * @returns timeout
 	 */
-	 public static getTimeout(timeDelay: number = 50): Promise<void> {
+	public static getTimeout(timeDelay: number = 50): Promise<void> {
 		return new Promise<void>((resolve) => {
 			window.setTimeout(() => {
 				resolve();
@@ -1723,8 +1725,8 @@ export class NgxThreeUtil {
 					callBack('anyevent');
 				} else {
 					const nextKeyList = nextKey.split(',');
-					let isCalled : boolean = false;
-					for(let i = 0; i < nextKeyList.length; i++) {
+					let isCalled: boolean = false;
+					for (let i = 0; i < nextKeyList.length; i++) {
 						const key = nextKeyList[i];
 						if (isCalled) {
 							break;
@@ -2421,6 +2423,61 @@ export class NgxThreeUtil {
 	}
 
 	/**
+	 * Clears gui
+	 * @param gui
+	 */
+	public static clearGui(gui: I3JS.GUI) {
+		if (gui !== null && gui !== undefined) {
+			gui.children.forEach((child) => {
+				child.domElement.parentNode.removeChild(child.domElement);
+			});
+			gui.children = [];
+		}
+	}
+
+	/**
+	 * Clears gui folder
+	 *
+	 * @param gui
+	 * @param name
+	 */
+	public static clearGuiFolder(gui: I3JS.GUI, name: string) {
+		this.clearGui(this.getGuiFolder(gui, name));
+	}
+
+	/**
+	 * Gets gui folder
+	 * @param gui
+	 * @param name
+	 * @returns gui folder
+	 */
+	public static getGuiFolder(gui: I3JS.GUI, name: string): I3JS.GUI {
+		for (let i = 0; i < gui.folders.length; i++) {
+			const folder = gui.folders[i];
+			if (folder._title === name) {
+				return folder;
+			}
+		}
+		return undefined;
+	}
+
+	/**
+	 * Gets gui folder
+	 * @param gui
+	 * @param name
+	 * @returns gui folder
+	 */
+	public static getGuiController(gui: I3JS.GUI, name: string): I3JS.GUIController {
+		for (let i = 0; i < gui.controllers.length; i++) {
+			const controllers = gui.controllers[i];
+			if (controllers._name === name) {
+				return controllers;
+			}
+		}
+		return undefined;
+	}
+
+	/**
 	 * Gets gui control param
 	 * @param children
 	 * @param name
@@ -2458,7 +2515,7 @@ export class NgxThreeUtil {
 			const params = param.control ? control[param.control] : control;
 			if (this.isNotNull(params)) {
 				if (gui instanceof N3JS.GUI) {
-					const guiFolder : I3JS.GUI = gui;
+					const guiFolder: I3JS.GUI = gui;
 					switch (param.type) {
 						case 'color':
 							param.controller = this.setupGuiChange(
@@ -2510,7 +2567,6 @@ export class NgxThreeUtil {
 					}
 				}
 			} else {
-
 			}
 		});
 		return gui;

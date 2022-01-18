@@ -1633,6 +1633,12 @@ export interface GUI {
 	 * Used to determine if the GUI is hidden. Use gui.show() or gui.hide() to change this.
 	 */
 	_hidden: boolean;
+
+	/**
+	 * title.
+	 */
+	 _title : string;
+
 }
 
 export interface TweenUnknownProps {

@@ -22,15 +22,6 @@ export const ReflectNode: ReflectNode = _NODES.ReflectNode as any;
 export type ResolutionNode = I3JS.ResolutionNode;
 export const ResolutionNode: ResolutionNode = _NODES.ResolutionNode as any;
 
-export type PointsNodeMaterial = I3JS.PointsNodeMaterial;
-export const PointsNodeMaterial: PointsNodeMaterial = _NODES.RENDERER_NODES.PointsNodeMaterial as any;
-
-export type PointUVNode = I3JS.PointUVNode;
-export const PointUVNode: PointUVNode = _NODES.RENDERER_NODES.PointUVNode as any;
-
-export type SpriteSheetUVNode = I3JS.SpriteSheetUVNode;
-export const SpriteSheetUVNode: SpriteSheetUVNode = _NODES.RENDERER_NODES.SpriteSheetUVNode as any;
-
 export type ScreenUVNode = I3JS.ScreenUVNode;
 export const ScreenUVNode: ScreenUVNode = _NODES.ScreenUVNode as any;
 
@@ -235,103 +226,6 @@ export const UVTransformNode: UVTransformNode = _NODES.UVTransformNode as any;
 export type NodePass = I3JS.NodePass;
 export const NodePass: NodePass = _NODES.NodePass as any;
 
-
 export type VelocityNode = I3JS.VelocityNode;
 export const VelocityNode: VelocityNode = _NODES.VelocityNode as any;
-
-export const NODES : I3JS.NODES = {
-	ArrayInputNode : _NODES.RENDERER_NODES.ArrayInputNode,
-	AttributeNode : _NODES.RENDERER_NODES.AttributeNode,
-	BypassNode : _NODES.RENDERER_NODES.BypassNode,
-	CodeNode : _NODES.RENDERER_NODES.CodeNode,
-	ContextNode : _NODES.RENDERER_NODES.ContextNode,
-	ExpressionNode : _NODES.RENDERER_NODES.ExpressionNode,
-	FunctionCallNode : _NODES.RENDERER_NODES.FunctionCallNode,
-	FunctionNode : _NODES.RENDERER_NODES.FunctionNode,
-	InputNode : _NODES.RENDERER_NODES.InputNode,
-	Node : _NODES.RENDERER_NODES.Node,
-	NodeAttribute : _NODES.RENDERER_NODES.NodeAttribute,
-	NodeBuilder : _NODES.RENDERER_NODES.NodeBuilder,
-	NodeCode : _NODES.RENDERER_NODES.NodeCode,
-	NodeFrame : _NODES.RENDERER_NODES.NodeFrame,
-	NodeFunctionInput : _NODES.RENDERER_NODES.NodeFunctionInput,
-	NodeKeywords : _NODES.RENDERER_NODES.NodeKeywords,
-	NodeUniform : _NODES.RENDERER_NODES.NodeUniform,
-	NodeVar : _NODES.RENDERER_NODES.NodeVar,
-	NodeVary : _NODES.RENDERER_NODES.NodeVary,
-	PropertyNode : _NODES.RENDERER_NODES.PropertyNode,
-	TempNode : _NODES.RENDERER_NODES.TempNode,
-	VarNode : _NODES.RENDERER_NODES.VarNode,
-	VaryNode : _NODES.RENDERER_NODES.VaryNode,
-
-	// accessors
-	CameraNode : _NODES.RENDERER_NODES.CameraNode,
-	MaterialNode : _NODES.RENDERER_NODES.MaterialNode,
-	MaterialReferenceNode : _NODES.RENDERER_NODES.MaterialReferenceNode,
-	ModelNode : _NODES.RENDERER_NODES.ModelNode,
-	ModelViewProjectionNode : _NODES.RENDERER_NODES.ModelViewProjectionNode,
-	NormalNode : _NODES.RENDERER_NODES.NormalNode,
-	Object3DNode : _NODES.RENDERER_NODES.Object3DNode,
-	PointUVNode : _NODES.RENDERER_NODES.PointUVNode,
-	PositionNode : _NODES.RENDERER_NODES.PositionNode,
-	ReferenceNode : _NODES.RENDERER_NODES.ReferenceNode,
-	SkinningNode : _NODES.RENDERER_NODES.SkinningNode,
-	UVNode : _NODES.RENDERER_NODES.UVNode,
-
-	// inputs
-	ColorNode : _NODES.RENDERER_NODES.ColorNode,
-	FloatNode : _NODES.RENDERER_NODES.FloatNode,
-	IntNode : _NODES.RENDERER_NODES.IntNode,
-	Matrix3Node : _NODES.RENDERER_NODES.Matrix3Node,
-	Matrix4Node : _NODES.RENDERER_NODES.Matrix4Node,
-	TextureNode : _NODES.RENDERER_NODES.TextureNode,
-	Vector2Node : _NODES.RENDERER_NODES.Vector2Node,
-	Vector3Node : _NODES.RENDERER_NODES.Vector3Node,
-	Vector4Node : _NODES.RENDERER_NODES.Vector4Node,
-
-	// display
-	ColorSpaceNode : _NODES.RENDERER_NODES.ColorSpaceNode,
-	NormalMapNode : _NODES.RENDERER_NODES.NormalMapNode,
-
-	// math
-	MathNode : _NODES.RENDERER_NODES.MathNode,
-	OperatorNode : _NODES.RENDERER_NODES.OperatorNode,
-
-	// lights
-	LightContextNode : _NODES.RENDERER_NODES.LightContextNode,
-	LightNode : _NODES.RENDERER_NODES.LightNode,
-	LightsNode : _NODES.RENDERER_NODES.LightsNode,
-
-	// utils
-	ArrayElementNode : _NODES.RENDERER_NODES.ArrayElementNode,
-	ConvertNode : _NODES.RENDERER_NODES.ConvertNode,
-	JoinNode : _NODES.RENDERER_NODES.JoinNode,
-	SplitNode : _NODES.RENDERER_NODES.SplitNode,
-	SpriteSheetUVNode : _NODES.RENDERER_NODES.SpriteSheetUVNode,
-	OscNode : _NODES.RENDERER_NODES.OscNode,
-	TimerNode : _NODES.RENDERER_NODES.TimerNode,
-
-	// procedural
-	CheckerNode : _NODES.RENDERER_NODES.CheckerNode,
-}
-
-export type OnNodeBuildBeforeRender = I3JS.OnNodeBuildBeforeRender;
-const builders = new WeakMap();
-export const OnNodeBuildBeforeRender: OnNodeBuildBeforeRender = (nodeFrame : any, material : any) => {
-    material.onBuild = ( object : any, parameters : any, renderer :any) => {
-        builders.set( material, new _NODES.WebGLNodeBuilder( object, renderer, parameters ).build() );
-    }
-    material.onBeforeRender = ( renderer : any, scene : any , camera : any , geometry : any , object : any ) => {
-        const nodeBuilder = builders.get( material );
-        if ( nodeBuilder !== undefined ) {
-            nodeFrame.material = material;
-            nodeFrame.camera = camera;
-            nodeFrame.object = object;
-            nodeFrame.renderer = renderer;
-            for ( const node of nodeBuilder.updateNodes ) {
-                nodeFrame.updateNode( node );
-            }
-        }
-    }
-};
 

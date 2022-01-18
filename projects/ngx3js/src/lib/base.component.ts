@@ -262,6 +262,57 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 	 */
 	protected meshChildren: I3JS.Object3D[] = null;
 
+	protected clearGui(folder? : string) {
+		if (this.renderer !== null && this.renderer.gui !== null) {
+			if (NgxThreeUtil.isNotNull(folder)) {
+				NgxThreeUtil.clearGuiFolder(this.renderer.gui, folder);
+			} else {
+				NgxThreeUtil.clearGui(this.renderer.gui);
+			}
+		}
+	}
+
+	protected addGui(
+		name: string,
+		value: any,
+		callback?: (value: any) => void,
+		isColor?: boolean,
+		min?: number,
+		max?: number,
+		param ? : { [key : string] : any },
+		folder? : string,
+	): I3JS.GUIController {
+		let node : I3JS.GUIController = undefined;
+		if (this.renderer !== null && this.renderer.gui !== null) {
+			let gui : I3JS.GUI = this.renderer.gui;
+			if (NgxThreeUtil.isNotNull(folder)) {
+				gui = NgxThreeUtil.getGuiFolder(this.renderer.gui, folder);
+			}
+			if (NgxThreeUtil.isNotNull(gui)) {
+				if (NgxThreeUtil.isNull(param)) {
+					param = {}
+				}
+				param[name] = value;
+				if (isColor) {
+					node = gui.addColor(param, name).onChange(() => {
+						callback(param[name]);
+					});
+				} else if (typeof value == 'object') {
+					param[name] = value[Object.keys(value)[0]];
+
+					node = gui.add(param, name, value).onChange(() => {
+						callback(param[name]);
+					});
+				} else {
+					node = gui.add(param, name, min, max).onChange(() => {
+						callback(param[name]);
+					});
+				}
+			}
+		}
+		return node;
+	}
+
 	/**
 	 * Updates gui controller
 	 */
