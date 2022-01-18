@@ -100,7 +100,7 @@ export {
 
 export {
     WebGLNodeBuilder
-} from 'three/examples/jsm/renderers/webgl/nodes/WebGLNodeBuilder.js';
+} from 'three/examples/jsm/renderers/webgl/nodes/WebGLNodeBuilder';
 
 
 export { NodePass } from 'three/examples/jsm/nodes/postprocessing/NodePass';

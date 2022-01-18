@@ -265,6 +265,10 @@
 			"three/examples/jsm/webxr/XRHandPrimitiveModel": "XRHandPrimitiveModel",
 			"three/examples/jsm/environments/DebugEnvironment" : "DebugEnvironment",
 			"three/examples/jsm/libs/tween.module.min" : "TWEEN",
+			"three/examples/jsm/nodes/postprocessing/NodePass" : "NodePass",
+			"three/examples/jsm/renderers/nodes/Nodes" : "Nodes",
+			"three/examples/jsm/renderers/webgl/nodes/WebGLNodeBuilder" : "WebGLNodeBuilder",
+			"three/examples/jsm/node-editor/NodeEditor" : "NodeEditor",
 			"path": "path",
 			"fs": "fs"
 		}
