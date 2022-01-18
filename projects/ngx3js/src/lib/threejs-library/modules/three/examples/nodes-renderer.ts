@@ -219,4 +219,18 @@ export const OnNodeBuildBeforeRender: OnNodeBuildBeforeRender = (nodeFrame: any,
 	};
 };
 
+export const SetNodeAssetLibPath = (path: any) => {
+	assetLibPath = path;
+}
+
 const builders = new WeakMap();
+
+let assetLibPath : string = '';
+
+if (_RENDERER_NODES.NodeEditorLoader.prototype._load === undefined) {
+	_RENDERER_NODES.NodeEditorLoader.prototype._load = _RENDERER_NODES.NodeEditorLoader.prototype.load;
+	_RENDERER_NODES.NodeEditorLoader.prototype.load = async function( url : any, lib : any = null ) {
+		return this._load(assetLibPath + url, lib);
+	}
+}
+
