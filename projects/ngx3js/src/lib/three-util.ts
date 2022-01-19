@@ -2512,7 +2512,7 @@ export class NgxThreeUtil {
 		params: IGuiControlParam[]
 	): I3JS.GUI | I3JS.GUIController {
 		params.forEach((param) => {
-			const params = param.control ? control[param.control] : control;
+			const params = (typeof param.control  === 'string') ? control[param.control] : control;
 			if (this.isNotNull(params)) {
 				if (gui instanceof N3JS.GUI) {
 					const guiFolder: I3JS.GUI = gui;

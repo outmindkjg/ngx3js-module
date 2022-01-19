@@ -667,27 +667,39 @@ export interface IGuiControlParam {
 	 * The name of gui control
 	 */
 	name: string;
+
+	/**
+	 * The name of gui control
+	 */
+	 value? : any;
+
 	/**
 	 * The type of gui control
 	 */
 	type?: 'number' | 'folder' | 'select' | 'folder' | 'button' | 'color' | 'checkbox' | 'input' | 'listen' | 'auto';
+
 	/**
 	 * The min value of number type
 	 */
 	min?: number;
+
 	/**
 	 * The max value of number type
 	 */
 	max?: number;
+
 	/**
 	 * The step value of number type
 	 */
 	step?: number;
+
 	/**
 	 * The select value of select type
 	 */
 	select?: string[] | { [key: string]: any };
-	control?: string;
+
+	control?: string | { [key: string]: any };
+
 	listen?: boolean;
 	/**
 	 * is opened in case folder
@@ -697,18 +709,22 @@ export interface IGuiControlParam {
 	 * The title of gui name
 	 */
 	title?: string;
+	
 	/**
 	 * on change value trigger
 	 */
 	change?: (value?: any) => void;
+
 	/**
 	 * on change finish value trigger
 	 */
 	finishChange?: (value?: any) => void;
+
 	/**
 	 * The children of folder type
 	 */
 	children?: IGuiControlParam[];
+
 	/**
 	 * The controller of gui
 	 */

@@ -27,11 +27,11 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 
 	/**
 	 * Creates an instance of ngx base component.
-	 * 
-	 * @param controls 
-	 * @param [controlsParams] 
-	 * @param [clearConsole] 
-	 * @param [addBaseParam] 
+	 *
+	 * @param controls
+	 * @param [controlsParams]
+	 * @param [clearConsole]
+	 * @param [addBaseParam]
 	 */
 	constructor(
 		@Inject('') controls: T,
@@ -262,58 +262,108 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 	 */
 	protected meshChildren: I3JS.Object3D[] = null;
 
-	protected clearGui(folder? : string) {
+	protected clearGui(folder?: string) {
 		if (this.renderer !== null && this.renderer.gui !== null) {
 			if (NgxThreeUtil.isNotNull(folder)) {
 				NgxThreeUtil.clearGuiFolder(this.renderer.gui, folder);
+				delete this._lastCalledFolder[folder];
 			} else {
 				NgxThreeUtil.clearGui(this.renderer.gui);
 			}
 		}
 	}
 
-	protected addGui(
-		name: string,
-		value: any,
-		callback?: (value?: any) => void,
-		isColor?: boolean,
-		min?: number,
-		max?: number,
-		param ? : { [key : string] : any },
-		folder? : string,
-	): I3JS.GUIController {
-		let node : I3JS.GUIController = undefined;
+	private _lastCalledFolder: { [key: string]: I3JS.GUI } = {};
+
+	protected addGui(options: IGuiControlParam, folder?: string | I3JS.GUI): I3JS.GUIController | I3JS.GUI {
+		let node: I3JS.GUIController | I3JS.GUI = undefined;
 		if (this.renderer !== null && this.renderer.gui !== null) {
-			let gui : I3JS.GUI = this.renderer.gui;
+			let gui: I3JS.GUI = this.renderer.gui;
 			if (NgxThreeUtil.isNotNull(folder)) {
-				gui = NgxThreeUtil.getGuiFolder(this.renderer.gui, folder);
+				if (typeof folder === 'string') {
+					if (this._lastCalledFolder[folder] === undefined) {
+						gui = NgxThreeUtil.getGuiFolder(this.renderer.gui, folder);
+						this._lastCalledFolder[folder] = gui;
+					} else {
+						gui = this._lastCalledFolder[folder];
+					}
+				} else {
+					gui = folder;
+				}
 			}
 			if (NgxThreeUtil.isNotNull(gui)) {
-				if (NgxThreeUtil.isNull(param)) {
-					param = {}
-				}
-				if (NgxThreeUtil.isNull(callback)) {
-					callback = () => {}
-				}
-				param[name] = value;
-				if (isColor) {
-					node = gui.addColor(param, name).onChange(() => {
-						callback(param[name]);
-					});
-				} else if (Array.isArray(value)) {
-					param[name] = value[0];
-					node = gui.add(param, name, value).onChange(() => {
-						callback(param[name]);
-					});
-				} else if (typeof value == 'object') {
-					param[name] = value[Object.keys(value)[0]];
-					node = gui.add(param, name, value).onChange(() => {
-						callback(param[name]);
-					});
-				} else {
-					node = gui.add(param, name, min, max).onChange(() => {
-						callback(param[name]);
-					});
+				if (options.type === 'folder') {
+					const folder = gui.addFolder(options.name);
+					if (options.children !== null) {
+						options.children.forEach(child => {
+							this.addGui(child, folder);
+						});
+					}
+					node = folder;
+				} else if (typeof options.control === 'object') {
+					const control = options.control;
+					const name = options.name;
+					let guiController: I3JS.GUIController = null;
+					if (options.type === undefined || options.type === 'auto') {
+						if (options.select !== undefined) {
+							options.type = 'select';
+						} else if (typeof control[name] == 'number') {
+							options.type = 'number';
+						} else if (typeof control[name] == 'function') {
+							options.type = 'button';
+						} else {
+							options.type = 'auto';
+						}
+					}
+					if (control[name] === undefined && options.value === undefined) {
+						switch (options.type) {
+							case 'select' :
+								options.value = Array.isArray(options.select) ? options.select[0] : options.select[ Object.keys( options.select )[ 0 ] ];
+								break;
+							case 'number' :
+								options.value = 0;
+								break;
+							case 'color' :
+								options.value = 0xffffff;
+								break;
+						}
+					}
+					if (control[name] === undefined) {
+						control[name] = options.value ;
+					}
+					switch (options.type) {
+						case 'color':
+							guiController = gui.addColor(control, name);
+							break;
+						case 'select' :
+							guiController = gui.add(control, name, options.select);
+							break;
+						case 'number':
+							guiController = gui.add(control, name, options.min, options.max, options.step);
+							break;
+						default:
+							guiController = gui.add(control, name);
+							break;
+					}
+					if (guiController !== null) {
+						if (options.change !== null) {
+							guiController.onChange(() => {
+								options.change(control[name]);
+							});
+						}
+						if (options.finishChange !== null) {
+							guiController.onFinishChange(() => {
+								options.finishChange(control[name]);
+							});
+						}
+						if (options.listen) {
+							guiController.listen(true);
+						}
+						if (options.title) {
+							guiController.name(options.title);
+						}
+					}
+					node = guiController;
 				}
 			}
 		}
@@ -384,7 +434,7 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 				const helperParams = NgxThreeUtil.getIGuiControlParam(controlsParams.children, 'helperVisible');
 				const helper = this.mesh.helperComponent;
 				if (helperParams && helperParams.controller && helperParams.controller) {
-					const guiController =  helperParams.controller as I3JS.GUIController;
+					const guiController = helperParams.controller as I3JS.GUIController;
 					if (NgxThreeUtil.isNotNull(helper)) {
 						if (helper instanceof N3JS.SkeletonHelper) {
 							guiController.name('Skeleton');
@@ -428,4 +478,3 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 		NgxThreeUtil.getControlsOnRender(timer, this);
 	}
 }
-
