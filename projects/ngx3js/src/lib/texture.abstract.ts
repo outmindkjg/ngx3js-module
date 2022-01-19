@@ -1057,6 +1057,16 @@ export class NgxAbstractTextureComponent
 						return texture;
 					} else if (image.endsWith('.room')) {
 						const pmremGenerator = NgxThreeUtil.getPmremGenerator();
+						const [_,sigma, near, far] = (image.substring(0, image.lastIndexOf('.')) + 'xxx').split('x');
+						if (sigma !== null && sigma != '') {
+							options.sigma = parseFloat(sigma);
+						}
+						if (near !== null && near != '') {
+							options.near = parseFloat(near);
+						}
+						if (far !== null && far != '') {
+							options.far = parseFloat(far);
+						}
 						const renderTarget = pmremGenerator.fromScene(
 							new N3JS.RoomEnvironment(),
 							NgxThreeUtil.getTypeSafe(options.sigma, 0),

@@ -674,7 +674,7 @@ export interface SkinnedMesh<
 	 * @param geometry an instance of [BufferGeometry](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/BufferGeometry).
 	 * @param material an instance of [Material](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/Material). Default is a new [MeshBasicMaterial](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/MeshBasicMaterial).
 	 */
-	new (geometry?: TGeometry, material?: TMaterial, useVertexTexture?: boolean): this;
+	new (geometry?: TGeometry, material?: TMaterial): this;
 
 	/**
 	 * Either "attached" or "detached". "attached" uses the [SkinnedMesh.matrixWorld](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh.matrixWorld) property for the base transform matrix of the bones. "detached" uses the [SkinnedMesh.bindMatrix](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/SkinnedMesh.bindMatrix). Default is "attached".

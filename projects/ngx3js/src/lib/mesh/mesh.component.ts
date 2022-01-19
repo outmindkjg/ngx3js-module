@@ -1845,6 +1845,9 @@ export class NgxMeshComponent extends NgxAbstractObject3dComponent implements On
 					});
 					basemesh = lensflare;
 					break;
+				case 'skinnedmesh' :
+					basemesh = new N3JS.SkinnedMesh(geometry, this.getMaterials());
+					break;
 				case 'instancedmesh':
 				case 'instanced':
 					const instanced = new N3JS.InstancedMesh(geometry, this.getMaterialOne(), this.getCount(1));

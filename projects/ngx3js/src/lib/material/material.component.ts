@@ -75,7 +75,7 @@ import * as NGX_MATERIAL from './index';
  * | THREE.Side | side | FrontSide, BackSide, DoubleSide |
  * | Boolean | vertexColors | true, false |
  * | Boolean | visible | true, false |
- * 
+ *
  * |   Three Type               | Type Value | Acceptable Input |
  * |:--------------------------|:--------------------------|:--------------------------|
  * | THREE.LineBasicMaterial | LineBasicMaterial, LineBasic | color, linewidth, linecap, linejoin |
@@ -300,17 +300,17 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 
 	/**
 	 * An object of the form:
-	 * 
+	 *
 	 * ```json
 	 * { "uniform1": { value: 1.0 }, "uniform2": { value: 2 } }
 	 * ```
-	 * 
+	 *
 	 * specifying the uniforms to be passed to the shader code; keys are uniform names, values are definitions of the form
-	 * 
+	 *
 	 * ```json
 	 * { value: 1.0 }
 	 * ```
-	 * 
+	 *
 	 * where *value* is the value of the uniform. Names must match the name of the uniform, as defined in the GLSL code. Note that uniforms are refreshed on every frame, so updating the value of the uniform will immediately update the value available to the GLSL code.
 	 */
 	@Input() public uniforms: INgxUniforms = null;
@@ -679,7 +679,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 
 	/**
 	 * 	An object with the following properties:
-	 * 
+	 *
 	 * ```ts
 	 * this.extensions = {
 	 * 	derivatives: false, // set to use derivatives
@@ -720,6 +720,13 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
 	 */
 	@Input() public alphaMap: INgxTexture = null;
+
+	/**
+	 * The alpha map is a grayscale texture that controls the opacity across the surface (black: fully transparent; white: fully opaque). Default is null.
+	 * Only the color of the texture is used, ignoring the alpha channel if one exists.
+	 * For RGB and RGBA textures, the [WebGL](https://outmindkjg.github.io/ngx3js-doc/#/docs/api/en/renderers/WebGLRenderer) renderer will use the green channel when sampling this texture due to the extra bit of precision provided for green in DXT-compressed and uncompressed RGB 565 formats. Luminance-only and luminance/alpha textures will also still work as expected.
+	 */
+	@Input() public gradientMap: INgxTexture = null;
 
 	/**
 	 * The texture to create a bump map. The black and white values map to the perceived depth in relation to the lights.
@@ -1649,6 +1656,11 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					texture = this.getTextureOption(this.alphaMap, 'alphaMap');
 				}
 				break;
+			case 'gradientmap':
+				if (NgxThreeUtil.isNotNull(this.gradientMap)) {
+					texture = this.getTextureOption(this.gradientMap, 'gradientMap');
+				}
+				break;
 			case 'bumpmap':
 				if (NgxThreeUtil.isNotNull(this.bumpMap)) {
 					texture = this.getTextureOption(this.bumpMap, 'bumpMap');
@@ -1723,13 +1735,13 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					type: textureType,
 					component: texture,
 				});
-			} else if (typeof texture === 'string' || NgxThreeUtil.isNotNull(texture.value)){
+			} else if (typeof texture === 'string' || NgxThreeUtil.isNotNull(texture.value)) {
 				const anyMaterial: any = this.material;
-				let oldTexure : I3JS.Texture = null;
+				let oldTexure: I3JS.Texture = null;
 				if (anyMaterial[textureType] !== undefined) {
 					oldTexure = anyMaterial[textureType];
 				}
-				if (oldTexure.userData.loadUrl !== texture) {
+				if (oldTexure === null || oldTexure?.userData?.loadUrl !== texture) {
 					anyMaterial[textureType] = this.getTextureOption(texture, textureType);
 				}
 			} else {
@@ -1989,6 +2001,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 						this.synkTexture(this.map, 'map', newTextureList);
 						this.synkTexture(this.specularMap, 'specularMap', newTextureList);
 						this.synkTexture(this.alphaMap, 'alphaMap', newTextureList);
+						this.synkTexture(this.gradientMap, 'gradientMap', newTextureList);
 						this.synkTexture(this.bumpMap, 'bumpMap', newTextureList);
 						this.synkTexture(this.normalMap, 'normalMap', newTextureList);
 						this.synkTexture(this.aoMap, 'aoMap', newTextureList);
@@ -2491,7 +2504,11 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 								}
 							});
 						}
-						const nodeMaterialLoader : I3JS.NodeMaterialLoader = NgxThreeUtil.getLoader('nodeMaterialLoader', N3JS.NodeMaterialLoader, modeMateriallibrary);
+						const nodeMaterialLoader: I3JS.NodeMaterialLoader = NgxThreeUtil.getLoader(
+							'nodeMaterialLoader',
+							N3JS.NodeMaterialLoader,
+							modeMateriallibrary
+						);
 						nodeMaterialLoader.load(NgxThreeUtil.getStoreUrl(this.storageName), (material: I3JS.Material) => {
 							this.setUserData('storageSource', nodeMaterialLoader);
 							this.setMaterial(material);

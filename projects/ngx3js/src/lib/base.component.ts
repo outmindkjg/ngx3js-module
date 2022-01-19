@@ -275,7 +275,7 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 	protected addGui(
 		name: string,
 		value: any,
-		callback?: (value: any) => void,
+		callback?: (value?: any) => void,
 		isColor?: boolean,
 		min?: number,
 		max?: number,
@@ -292,14 +292,21 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 				if (NgxThreeUtil.isNull(param)) {
 					param = {}
 				}
+				if (NgxThreeUtil.isNull(callback)) {
+					callback = () => {}
+				}
 				param[name] = value;
 				if (isColor) {
 					node = gui.addColor(param, name).onChange(() => {
 						callback(param[name]);
 					});
+				} else if (Array.isArray(value)) {
+					param[name] = value[0];
+					node = gui.add(param, name, value).onChange(() => {
+						callback(param[name]);
+					});
 				} else if (typeof value == 'object') {
 					param[name] = value[Object.keys(value)[0]];
-
 					node = gui.add(param, name, value).onChange(() => {
 						callback(param[name]);
 					});

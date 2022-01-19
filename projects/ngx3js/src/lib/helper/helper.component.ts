@@ -165,6 +165,11 @@ export class NgxHelperComponent extends NgxAbstractObject3dComponent implements 
 	@Input() public materialColor: INgxColor = null;
 
 	/**
+	 * The linewidth of material
+	 */
+	@Input() public materialLinewidth: number = null;
+
+	/**
 	 * The Input of helper component
 	 * Which blending to use when displaying objects with this material. Default is {@link NormalBlending}.
 	 *
@@ -462,7 +467,7 @@ export class NgxHelperComponent extends NgxAbstractObject3dComponent implements 
 	/**
 	 * Sets update
 	 */
-	public setUpdate(delay : number = 100) {
+	public setUpdate(delay: number = 100) {
 		if (NgxThreeUtil.isNotNull(this.helper)) {
 			const helper: any = this.helper;
 			if (NgxThreeUtil.isNotNull(helper.update)) {
@@ -801,8 +806,11 @@ export class NgxHelperComponent extends NgxAbstractObject3dComponent implements 
 					} else if (NgxThreeUtil.isNotNull(this.materialTransparent)) {
 						basemeshMaterial.transparent = this.materialTransparent;
 					}
+					if (NgxThreeUtil.isNotNull(this.materialLinewidth) && basemeshMaterial.linewidth !== undefined) {
+						basemeshMaterial.linewidth = NgxThreeUtil.getTypeSafe(this.materialLinewidth);
+					}
 					if (NgxThreeUtil.isNotNull(this.materialColor) && basemeshMaterial['color'] !== undefined) {
-						basemeshMaterial['color'] = NgxThreeUtil.getColorSafe(this.materialColor);
+						basemeshMaterial.color = NgxThreeUtil.getColorSafe(this.materialColor);
 					}
 					if (NgxThreeUtil.isNotNull(this.materialBlending)) {
 						basemeshMaterial.blending = NgxThreeUtil.getBlendingSafe(this.materialBlending, 'NormalBlending');
