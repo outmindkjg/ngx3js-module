@@ -1861,6 +1861,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 						'resolutionx',
 						'resolutiony',
 						'extensions',
+						'flatShading',
 					],
 					this.MATERIAL_ATTR
 				)
@@ -2141,6 +2142,11 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 							} else {
 								anyMaterial['normalScale'] = this.getNormalScale();
 							}
+						}
+						break;
+					case 'flatShading':
+						if (NgxThreeUtil.isNotNull(this.flatShading) && anyMaterial.flatShading !== undefined) {
+							anyMaterial.flatShading = NgxThreeUtil.getTypeSafe(this.flatShading, false);
 						}
 						break;
 					case 'displacementscale':
