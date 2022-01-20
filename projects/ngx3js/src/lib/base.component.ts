@@ -346,20 +346,20 @@ export abstract class NgxBaseComponent<T> implements OnInit, AfterViewInit {
 							break;
 					}
 					if (guiController !== null) {
-						if (options.change !== null) {
+						if (options.change !== null && options.change !== undefined) {
 							guiController.onChange(() => {
 								options.change(control[name]);
 							});
 						}
-						if (options.finishChange !== null) {
+						if (options.finishChange !== null && options.finishChange !== undefined) {
 							guiController.onFinishChange(() => {
 								options.finishChange(control[name]);
 							});
 						}
-						if (options.listen) {
+						if (options.listen !== undefined && options.listen !== null && options.listen) {
 							guiController.listen(true);
 						}
-						if (options.title) {
+						if (options.title !== null && options.title !== undefined) {
 							guiController.name(options.title);
 						}
 					}

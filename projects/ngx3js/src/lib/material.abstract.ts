@@ -603,7 +603,6 @@ export class NgxAbstractMaterialComponent
 		'precision',
 		'premultipliedalpha',
 		'dithering',
-		'flatshading',
 		'shadowside',
 		'tonemapped',
 		'transparent',
