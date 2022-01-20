@@ -14,6 +14,24 @@ export interface IApplyMatrix4 {
 }
 
 /**
+ * Iloading process
+ */
+export interface ILoadingProcess {
+	setLoadingProcess : (url: string, loaded: number, total: number) => void;
+}
+
+ /**
+  * Iloading process info
+  */
+ export interface ILoadingProcessInfo {
+	url : string;
+	loaded : number;
+	total : number;
+	percent : number;
+	remindPercent : number;
+}
+
+/**
  * Curves parameters
  */
 export interface ICurvesParameters {

@@ -1663,7 +1663,6 @@ export class NgxLocalStorageService {
 				}
 				break;
 			default:
-				console.log(fontName);
 				if (
 					fontName.startsWith('/') ||
 					fontName.startsWith('http://') ||

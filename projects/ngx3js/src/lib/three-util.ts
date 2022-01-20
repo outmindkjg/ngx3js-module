@@ -1,4 +1,5 @@
 import { Observable, Subscription } from 'rxjs';
+import { ILoadingProcess } from '.';
 import { NgxMeshComponent } from './mesh/mesh.component';
 import {
 	ICssStyle,
@@ -692,7 +693,50 @@ export class NgxThreeUtil {
 	 * @param total
 	 */
 	public static setLoadingProcess(url: string, loaded: number, total: number) {
-		console.log('Loaded %c%d%c/%d => %c%s', 'font-weight:bold', loaded, '', total, 'font-style:italic', url);
+		if (this._loadingProcess !== null) {
+			this._loadingProcess.setLoadingProcess(url, loaded, total);
+		} else {
+			console.log('Loaded %c%d%c/%d => %c%s', 'font-weight:bold', loaded, '', total, 'font-style:italic', url);
+		}
+	}
+
+	private static _loadingProcess : ILoadingProcess = null;
+
+	private static _loadingProcessSubscription : Subscription = null;
+	
+	/**
+	 * Sets loading process
+	 *
+	 * @param url
+	 * @param loaded
+	 * @param total
+	 */
+	public static setLoadingDisplay(loadingProcess: ILoadingProcess ) {
+		if (this._loadingProcess !== loadingProcess) {
+			this._loadingProcess = loadingProcess;
+			if (this._loadingProcessSubscription !== null) {
+				this._loadingProcessSubscription.unsubscribe();
+			}
+			this._loadingProcessSubscription = this.getSubscribe(this._loadingProcess, () => {
+				this.unsetLoadingDisplay(loadingProcess);
+			}, 'destroy');
+		}
+	}
+
+	/**
+	 * Sets loading process
+	 *
+	 * @param url
+	 * @param loaded
+	 * @param total
+	 */
+	public static unsetLoadingDisplay(loadingProcess: ILoadingProcess ) {
+		if (this._loadingProcess === loadingProcess) {
+			this._loadingProcess = null;
+			if (this._loadingProcessSubscription !== null) {
+				this._loadingProcessSubscription.unsubscribe();
+			}
+		}
 	}
 
 	/**

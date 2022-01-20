@@ -13,6 +13,9 @@
 		[ngClass]="cssClass"
 		(resize)="changeAutoSize()"
 	></div>
+	<div *ngIf="useAssetLoading && loadingProcess" class="loading-process">
+		<div class="loading-bar" [style.right]="loadingProcess.remindPercent + '%'"><span>{{loadingProcess.percent}} %</span></div>
+	</div>
 	<div class="hidden-wraper">
 		<ng-content></ng-content>
 	</div>

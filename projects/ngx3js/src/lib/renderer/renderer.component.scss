@@ -10,6 +10,32 @@
 		bottom: 0;
 		overflow: hidden;
 	}
+	.loading-process {
+		position: absolute;
+		left : 0;
+		right: 0;
+		height : 7px;
+		z-index: 100;
+		bottom: 0;
+		background-color: var(--background-color);
+		border: 1px solid var(-text-color);
+		opacity: 0.7;
+		display: inline-block;
+		>.loading-bar {
+			position: absolute;
+			display: inline-block;
+			left : 0;
+			top : 1px;
+			right : 0;
+			height : 5px;
+			overflow: visible;
+			background-color: var(--color-blue);
+			border-radius: 3px;
+			>span {
+				display: none;
+			}
+		}
+	}
 	.hidden-wraper {
 		display: none;
 	}

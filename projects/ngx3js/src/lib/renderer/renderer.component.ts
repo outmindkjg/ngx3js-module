@@ -4,16 +4,19 @@ import {
 	Component,
 	ContentChildren,
 	ElementRef,
-	EventEmitter, forwardRef, HostListener,
+	EventEmitter,
+	forwardRef,
+	HostListener,
 	Input,
 	OnChanges,
 	OnInit,
 	Output,
 	QueryList,
 	SimpleChanges,
-	ViewChild
+	ViewChild,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { ILoadingProcessInfo, ILoadingProcess } from '../ngx-interface';
 import { NgxCanvasComponent } from '../canvas/canvas.component';
 import { NgxControlComponent } from '../control/control.component';
 import { NgxAbstractControllerComponent } from '../controller.component.abstract';
@@ -35,7 +38,6 @@ import { NgxListenerComponent } from './../listener/listener.component';
 import { NgxLookatComponent } from './../lookat/lookat.component';
 import { NgxSceneComponent } from './../scene/scene.component';
 import { NgxTweenComponent } from './../tween/tween.component';
-
 
 /**
  * The Renderer component.
@@ -72,7 +74,7 @@ import { NgxTweenComponent } from './../tween/tween.component';
 })
 export class NgxRendererComponent
 	extends NgxAbstractSubscribeComponent
-	implements OnInit, AfterContentInit, AfterViewInit, OnChanges
+	implements OnInit, AfterContentInit, AfterViewInit, OnChanges, ILoadingProcess
 {
 	/**
 	 * The type of renderer
@@ -302,6 +304,11 @@ export class NgxRendererComponent
 	@Input() public guiOpen: boolean = false;
 
 	/**
+	 * The useAssetLoading of GUI
+	 */
+	@Input() public useAssetLoading: boolean = true;
+
+	/**
 	 * The guiStyle of GUI
 	 */
 	@Input() public guiStyle: any = null;
@@ -412,7 +419,8 @@ export class NgxRendererComponent
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxAbstractControllerComponent, { descendants: true }) private controllerList: QueryList<NgxAbstractControllerComponent>;
+	@ContentChildren(NgxAbstractControllerComponent, { descendants: true })
+	private controllerList: QueryList<NgxAbstractControllerComponent>;
 
 	/**
 	 * Content children of renderer component
@@ -447,8 +455,9 @@ export class NgxRendererComponent
 	/**
 	 * Content children of renderer component
 	 */
-	@ContentChildren(NgxAbstractThreeDirective, { descendants: true }) private threeDirectiveList: QueryList<NgxAbstractThreeDirective>;
-	 
+	@ContentChildren(NgxAbstractThreeDirective, { descendants: true })
+	private threeDirectiveList: QueryList<NgxAbstractThreeDirective>;
+
 	/**
 	 * Content children of ngx renderer component
 	 */
@@ -491,7 +500,7 @@ export class NgxRendererComponent
 		}
 	}
 
-	private static _showNgxLog : boolean = false;
+	private static _showNgxLog: boolean = false;
 
 	/**
 	 * Creates an instance of renderer component.
@@ -606,8 +615,8 @@ export class NgxRendererComponent
 						case 'depth':
 							errorCode = 'WEBGL_depth_texture';
 							break;
-						case 'webgpu' :
-						case 'gpu' :
+						case 'webgpu':
+						case 'gpu':
 							errorCode = 'webgpu';
 							break;
 						default:
@@ -654,9 +663,9 @@ export class NgxRendererComponent
 	 */
 	private isAvailable(type: string): boolean {
 		switch (type.toLowerCase()) {
-			case 'webgpu' :
+			case 'webgpu':
 				return false;
-				// return N3JS.WebGPU.isAvailable();
+			// return N3JS.WebGPU.isAvailable();
 			case 'gpu':
 				return (navigator as any)['gpu'] !== undefined;
 			case 'gl': {
@@ -1141,12 +1150,37 @@ export class NgxRendererComponent
 		return new N3JS.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
+	public loadingProcess : ILoadingProcessInfo = null;
+
+	/**
+	 * Sets loading process
+	 *
+	 * @param url
+	 * @param loaded
+	 * @param total
+	 */
+	 public setLoadingProcess(url: string, loaded: number, total: number) {
+		if (loaded < total && total > 0) {
+			if (this.loadingProcess === null) {
+				this.loadingProcess = { url : '', loaded : 0, total : 0, percent : 0, remindPercent : 100}
+			}
+			this.loadingProcess.url = url;
+			this.loadingProcess.loaded = loaded;
+			this.loadingProcess.total = total;
+			this.loadingProcess.percent = Math.round(((loaded + 1) / total ) * 100);
+			this.loadingProcess.remindPercent = 100 - this.loadingProcess.percent;
+		} else {
+			this.loadingProcess = null;
+		}
+	}
+
+
 	/**
 	 * The Renderlistener of renderer component
 	 */
 	private renderlistener: I3JS.AudioListener = null;
 
-	private _tweenGroup : I3JS.TweenGroup = null;
+	private _tweenGroup: I3JS.TweenGroup = null;
 
 	/**
 	 * Applys changes
@@ -1200,8 +1234,9 @@ export class NgxRendererComponent
 						'controloptions',
 						'guiparams',
 						'guicontrol',
+						'useassetloading',
 						'size',
-						'tween'
+						'tween',
 					],
 					this.OBJECT_ATTR
 				)
@@ -1229,6 +1264,7 @@ export class NgxRendererComponent
 					'statsmode',
 					'guicontrol',
 					'tween',
+					'useassetloading',
 					'webglrenderer',
 				]);
 			}
@@ -1263,6 +1299,13 @@ export class NgxRendererComponent
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
+					case 'useassetloading' :
+						if (this.useAssetLoading) {
+							NgxThreeUtil.setLoadingDisplay(this);
+						} else {
+							NgxThreeUtil.unsetLoadingDisplay(this);
+						}
+						break;
 					case 'guicontrol':
 						if (this.gui !== null && changes.indexOf('init') === -1) {
 							this.gui.domElement.parentNode.removeChild(this.gui.domElement);
@@ -1407,12 +1450,12 @@ export class NgxRendererComponent
 					case 'control':
 						this.controls = this.getControls(this.cameraList, this.sceneList, this.canvasEle.nativeElement);
 						break;
-					case 'tween' :
+					case 'tween':
 						if (this.golbalTweenList.length > 0) {
 							if (this._tweenGroup === null) {
 								this._tweenGroup = new N3JS.TweenGroup();
 							}
-							this.golbalTweenList.forEach(tween => {
+							this.golbalTweenList.forEach((tween) => {
 								tween.setTweenGroup(this._tweenGroup);
 							});
 						} else {
@@ -1708,6 +1751,9 @@ export class NgxRendererComponent
 			this._renderCaller = () => {
 				this.render();
 			};
+			if (this.useAssetLoading) {
+				NgxThreeUtil.setLoadingDisplay(this);
+			}
 			switch (this.cssType.toLowerCase()) {
 				case '3d,2d':
 				case '2d,3d':
