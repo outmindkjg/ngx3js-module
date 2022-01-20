@@ -703,7 +703,6 @@ export class NgxThreeUtil {
 	private static _loadingProcess : ILoadingProcess = null;
 
 	private static _loadingProcessSubscription : Subscription = null;
-	
 	/**
 	 * Sets loading process
 	 *
