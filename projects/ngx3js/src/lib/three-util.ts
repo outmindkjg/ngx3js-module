@@ -621,7 +621,7 @@ export class NgxThreeUtil {
 			}
 			let result: boolean = true;
 			data.forEach((txt) => {
-				if (findMe.indexOf(txt) === -1) {
+				if (!findMe.includes(txt)) {
 					result = false;
 				}
 			});
@@ -3666,7 +3666,7 @@ export class NgxThreeUtil {
 			case 'additive':
 				return I3JS.AnimationBlendMode.AdditiveAnimationBlendMode;
 		}
-		return N3JS.NormalAnimationBlendMode;
+		return undefined;
 	}
 
 	/**

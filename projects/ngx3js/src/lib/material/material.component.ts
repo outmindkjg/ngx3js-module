@@ -1882,6 +1882,7 @@ export class NgxMaterialComponent extends NgxAbstractMaterialComponent implement
 					'bumpmap',
 					'normalmap',
 					'aomap',
+					'gradientmap',
 					'displacementmap',
 				])
 			) {

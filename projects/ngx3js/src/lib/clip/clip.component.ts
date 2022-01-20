@@ -348,13 +348,26 @@ export class NgxClipComponent
 				this.getClip();
 				return;
 			}
-			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init'], this.OBJECT_ATTR)) {
+			if (!NgxThreeUtil.isOnlyIndexOf(changes, ['init', 'weight','timescale'], this.OBJECT_ATTR)) {
 				this.needUpdate = true;
 				return;
 			}
 			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
-				changes = NgxThreeUtil.pushUniq(changes, []);
+				changes = NgxThreeUtil.pushUniq(changes, ['weight', 'timescale']);
 			}
+			if (NgxThreeUtil.isIndexOf(changes, ['weight', 'timescale'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['weighttimescale']);
+			}
+			changes.forEach((change) => {
+				switch (change.toLowerCase()) {
+					case 'weighttimescale' :
+						if (this.action !== null && NgxThreeUtil.isNotNull(this.weight)) {
+							this.action.setEffectiveTimeScale(NgxThreeUtil.getTypeSafe(this.timeScale, 1));
+							this.action.setEffectiveWeight(NgxThreeUtil.getTypeSafe(this.weight, 1))
+						}
+						break;
+				}
+			});
 			super.applyChanges(changes);
 		}
 	}

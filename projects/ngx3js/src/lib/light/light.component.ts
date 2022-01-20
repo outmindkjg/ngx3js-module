@@ -1,20 +1,9 @@
-import {
-	Component,
-	forwardRef,
-	Input,
-	OnInit,
-	SimpleChanges
-} from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { INgxColor, ITagAttributes } from '../ngx-interface';
-import {
-	NgxAbstractObject3dComponent
-} from '../object3d.abstract';
+import { NgxAbstractObject3dComponent } from '../object3d.abstract';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
 import { NgxAbstractTextureComponent } from '../texture.abstract';
-import {
-	I3JS, N3JS, NgxThreeUtil
-} from './../interface';
-
+import { I3JS, N3JS, NgxThreeUtil } from './../interface';
 
 /**
  * The Light component.
@@ -84,10 +73,7 @@ import {
 		},
 	],
 })
-export class NgxLightComponent
-	extends NgxAbstractObject3dComponent
-	implements OnInit
-{
+export class NgxLightComponent extends NgxAbstractObject3dComponent implements OnInit {
 	/**
 	 * The type of light
 	 *
@@ -276,11 +262,7 @@ export class NgxLightComponent
 	 * @returns shadow map size width
 	 */
 	private getShadowMapSizeWidth(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(
-			this.shadowMapSizeWidth,
-			this.shadowMapSize,
-			def
-		);
+		return NgxThreeUtil.getTypeSafe(this.shadowMapSizeWidth, this.shadowMapSize, def);
 	}
 
 	/**
@@ -289,11 +271,7 @@ export class NgxLightComponent
 	 * @returns shadow map size height
 	 */
 	private getShadowMapSizeHeight(def?: number): number {
-		return NgxThreeUtil.getTypeSafe(
-			this.shadowMapSizeHeight,
-			this.shadowMapSize,
-			def
-		);
+		return NgxThreeUtil.getTypeSafe(this.shadowMapSizeHeight, this.shadowMapSize, def);
 	}
 
 	/**
@@ -366,7 +344,7 @@ export class NgxLightComponent
 		if (NgxThreeUtil.isNotNull(sh) && sh != '') {
 			switch (sh.toLowerCase()) {
 				case 'harmonics3':
-				default :
+				default:
 					return new N3JS.SphericalHarmonics3();
 			}
 		}
@@ -389,10 +367,7 @@ export class NgxLightComponent
 	 * @returns three renderer
 	 */
 	public getThreeRenderer(): I3JS.Renderer {
-		if (
-			NgxThreeUtil.isNotNull(this.renderer) &&
-			NgxThreeUtil.isNotNull(this.renderer.getRenderer)
-		) {
+		if (NgxThreeUtil.isNotNull(this.renderer) && NgxThreeUtil.isNotNull(this.renderer.getRenderer)) {
 			return this.renderer.getRenderer();
 		} else {
 			return NgxThreeUtil.getRenderer();
@@ -514,10 +489,7 @@ export class NgxLightComponent
 							break;
 						case 'shadowMapSizeWidth':
 						case 'shadowMapSizeHeight':
-							if (
-								NgxThreeUtil.isNotNull(light['shadow']) &&
-								NgxThreeUtil.isNotNull(light['shadow']['mapSize'])
-							) {
+							if (NgxThreeUtil.isNotNull(light['shadow']) && NgxThreeUtil.isNotNull(light['shadow']['mapSize'])) {
 								switch (key) {
 									case 'shadowMapSizeWidth':
 										tagAttributes.attributes.push({
@@ -550,10 +522,7 @@ export class NgxLightComponent
 						case 'shadowCameraTop':
 						case 'shadowCameraBottom':
 						case 'shadowCameraZoom':
-							if (
-								NgxThreeUtil.isNotNull(light['shadow']) &&
-								NgxThreeUtil.isNotNull(light['shadow']['camera'])
-							) {
+							if (NgxThreeUtil.isNotNull(light['shadow']) && NgxThreeUtil.isNotNull(light['shadow']['camera'])) {
 								const anyLightShadowCamera: any = light['shadow']['camera'];
 								switch (key) {
 									case 'shadowCameraNear':
@@ -652,19 +621,19 @@ export class NgxLightComponent
 				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
 					[
-						'shadowBias',
-						'shadowRadius',
-						'shadowMapSizeWidth',
-						'shadowMapSize',
-						'shadowMapSizeHeight',
-						'shadowCameraFov',
-						'shadowCameraNear',
-						'shadowCameraFar',
-						'shadowCameraZoom',
-						'shadowCameraLeft',
-						'shadowCameraRight',
-						'shadowCameraTop',
-						'shadowCameraBottom',
+						'shadowbias',
+						'shadowradius',
+						'shadowmapsizewidth',
+						'shadowmapsize',
+						'shadowmapsizeheight',
+						'shadowcamerafov',
+						'shadowcameranear',
+						'shadowcamerafar',
+						'shadowcamerazoom',
+						'shadowcameraleft',
+						'shadowcameraright',
+						'shadowcameratop',
+						'shadowcamerabottom',
 					],
 					this.OBJECT3D_ATTR
 				)
@@ -672,88 +641,59 @@ export class NgxLightComponent
 				this.needUpdate = true;
 				return;
 			}
-			if (
-				NgxThreeUtil.isIndexOf(changes, 'shadowMapSizeWidth') ||
-				NgxThreeUtil.isIndexOf(changes, 'shadowMapSizeHeight')
-			) {
-				changes = NgxThreeUtil.pushUniq(changes, ['shadowMapSize']);
+			if (NgxThreeUtil.isIndexOf(changes, ['shadowmapsizewidth', 'shadowmapsizeheight'])) {
+				changes = NgxThreeUtil.pushUniq(changes, ['shadowmapsize']);
 			}
 			if (
-				NgxThreeUtil.isIndexOf(changes, 'shadowCameraFov') ||
-				NgxThreeUtil.isIndexOf(changes, 'shadowCameraNear') ||
-				NgxThreeUtil.isIndexOf(changes, 'shadowCameraFar') ||
-				NgxThreeUtil.isIndexOf(changes, 'shadowCameraZoom') ||
-				NgxThreeUtil.isIndexOf(changes, 'shadowCameraLeft') ||
-				NgxThreeUtil.isIndexOf(changes, 'shadowCameraRight') ||
-				NgxThreeUtil.isIndexOf(changes, 'shadowCameraTop') ||
-				NgxThreeUtil.isIndexOf(changes, 'shadowCameraBottom')
+				NgxThreeUtil.isIndexOf(changes, [
+					'shadowcamerafov',
+					'shadowcameranear',
+					'shadowcamerafar',
+					'shadowcamerazoom',
+					'shadowcameraleft',
+					'shadowcameraright',
+					'shadowcameratop',
+					'shadowcamerabottom',
+				])
 			) {
-				changes = NgxThreeUtil.pushUniq(changes, ['shadowCamera']);
+				changes = NgxThreeUtil.pushUniq(changes, ['shadowcamera']);
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
 					case 'shadowbias':
 						if (NgxThreeUtil.isNotNull(this.shadowBias)) {
-							this.light.shadow.bias = NgxThreeUtil.getTypeSafe(
-								this.shadowBias,
-								0
-							);
+							this.light.shadow.bias = NgxThreeUtil.getTypeSafe(this.shadowBias, 0);
 						}
 						break;
 					case 'shadowradius':
 						if (NgxThreeUtil.isNotNull(this.shadowRadius)) {
-							this.light.shadow.radius = NgxThreeUtil.getTypeSafe(
-								this.shadowRadius,
-								1
-							);
+							this.light.shadow.radius = NgxThreeUtil.getTypeSafe(this.shadowRadius, 1);
 						}
 						break;
 					case 'shadowmapsize':
-						if (
-							NgxThreeUtil.isNotNull(this.shadowMapSizeWidth) ||
-							NgxThreeUtil.isNotNull(this.shadowMapSize)
-						) {
-							this.light.shadow.mapSize.width =
-								this.getShadowMapSizeWidth(1024);
+						if (NgxThreeUtil.isNotNull(this.shadowMapSizeWidth) || NgxThreeUtil.isNotNull(this.shadowMapSize)) {
+							this.light.shadow.mapSize.width = this.getShadowMapSizeWidth(1024);
 						}
-						if (
-							NgxThreeUtil.isNotNull(this.shadowMapSizeHeight) ||
-							NgxThreeUtil.isNotNull(this.shadowMapSize)
-						) {
-							this.light.shadow.mapSize.height =
-								this.getShadowMapSizeHeight(1024);
+						if (NgxThreeUtil.isNotNull(this.shadowMapSizeHeight) || NgxThreeUtil.isNotNull(this.shadowMapSize)) {
+							this.light.shadow.mapSize.height = this.getShadowMapSizeHeight(1024);
 						}
 						break;
 					case 'shadowcamera':
 						if (this.light.shadow.camera) {
 							if (this.light.shadow.camera instanceof N3JS.PerspectiveCamera) {
 								if (NgxThreeUtil.isNotNull(this.shadowCameraFov)) {
-									this.light.shadow.camera.fov = NgxThreeUtil.getTypeSafe(
-										this.shadowCameraFov,
-										50
-									);
+									this.light.shadow.camera.fov = NgxThreeUtil.getTypeSafe(this.shadowCameraFov, 50);
 								}
 								if (NgxThreeUtil.isNotNull(this.shadowCameraNear)) {
-									this.light.shadow.camera.near = NgxThreeUtil.getTypeSafe(
-										this.shadowCameraNear,
-										0.5
-									);
+									this.light.shadow.camera.near = NgxThreeUtil.getTypeSafe(this.shadowCameraNear, 0.5);
 								}
 								if (NgxThreeUtil.isNotNull(this.shadowCameraFar)) {
-									this.light.shadow.camera.far = NgxThreeUtil.getTypeSafe(
-										this.shadowCameraFar,
-										500
-									);
+									this.light.shadow.camera.far = NgxThreeUtil.getTypeSafe(this.shadowCameraFar, 500);
 								}
 								if (NgxThreeUtil.isNotNull(this.shadowCameraZoom)) {
-									this.light.shadow.camera.zoom = NgxThreeUtil.getTypeSafe(
-										this.shadowCameraZoom,
-										1
-									);
+									this.light.shadow.camera.zoom = NgxThreeUtil.getTypeSafe(this.shadowCameraZoom, 1);
 								}
-							} else if (
-								this.light.shadow.camera instanceof N3JS.OrthographicCamera
-							) {
+							} else if (this.light.shadow.camera instanceof N3JS.OrthographicCamera) {
 								if (NgxThreeUtil.isNotNull(this.shadowCameraLeft)) {
 									this.light.shadow.camera.left = this.getShadowCameraLeft(-5);
 								}
@@ -764,26 +704,16 @@ export class NgxLightComponent
 									this.light.shadow.camera.top = this.getShadowCameraTop(5);
 								}
 								if (NgxThreeUtil.isNotNull(this.shadowCameraBottom)) {
-									this.light.shadow.camera.bottom =
-										this.getShadowCameraBottom(-5);
+									this.light.shadow.camera.bottom = this.getShadowCameraBottom(-5);
 								}
 								if (NgxThreeUtil.isNotNull(this.shadowCameraNear)) {
-									this.light.shadow.camera.near = NgxThreeUtil.getTypeSafe(
-										this.shadowCameraNear,
-										0.5
-									);
+									this.light.shadow.camera.near = NgxThreeUtil.getTypeSafe(this.shadowCameraNear, 0.5);
 								}
 								if (NgxThreeUtil.isNotNull(this.shadowCameraFar)) {
-									this.light.shadow.camera.far = NgxThreeUtil.getTypeSafe(
-										this.shadowCameraFar,
-										500
-									);
+									this.light.shadow.camera.far = NgxThreeUtil.getTypeSafe(this.shadowCameraFar, 500);
 								}
 								if (NgxThreeUtil.isNotNull(this.shadowCameraZoom)) {
-									this.light.shadow.camera.zoom = NgxThreeUtil.getTypeSafe(
-										this.shadowCameraZoom,
-										1
-									);
+									this.light.shadow.camera.zoom = NgxThreeUtil.getTypeSafe(this.shadowCameraZoom, 1);
 								}
 							}
 						}
@@ -840,33 +770,20 @@ export class NgxLightComponent
 					break;
 				case 'lightprobe':
 				case 'probe':
-					basemesh = new N3JS.LightProbe(
-						this.getSh(),
-						NgxThreeUtil.getTypeSafe(this.intensity, 1)
-					);
+					basemesh = new N3JS.LightProbe(this.getSh(), NgxThreeUtil.getTypeSafe(this.intensity, 1));
 					if (NgxThreeUtil.isNotNull(this.texture)) {
 						this.unSubscribeRefer('texture');
 						const texture = this.texture.getTexture();
-						if (
-							NgxThreeUtil.isTextureLoaded(texture) &&
-							texture instanceof N3JS.CubeTexture
-						) {
-							basemesh.copy(
-								N3JS.LightProbeGenerator.fromCubeTexture(texture)
-							);
+						if (NgxThreeUtil.isTextureLoaded(texture) && texture instanceof N3JS.CubeTexture) {
+							basemesh.copy(N3JS.LightProbeGenerator.fromCubeTexture(texture));
 						}
 						this.subscribeRefer(
 							'texture',
 							NgxThreeUtil.getSubscribe(
 								this.texture,
 								() => {
-									if (
-										NgxThreeUtil.isTextureLoaded(texture) &&
-										texture instanceof N3JS.CubeTexture
-									) {
-										basemesh.copy(
-											N3JS.LightProbeGenerator.fromCubeTexture(texture)
-										);
+									if (NgxThreeUtil.isTextureLoaded(texture) && texture instanceof N3JS.CubeTexture) {
+										basemesh.copy(N3JS.LightProbeGenerator.fromCubeTexture(texture));
 									}
 								},
 								'loaded'
@@ -877,24 +794,14 @@ export class NgxLightComponent
 						let renderTarget = null;
 						if (NgxThreeUtil.isNotNull(this.renderTarget.getTool)) {
 							renderTarget = this.renderTarget.getTool();
-						} else if (
-							NgxThreeUtil.isNotNull(this.renderTarget.getCubeRenderTarget)
-						) {
+						} else if (NgxThreeUtil.isNotNull(this.renderTarget.getCubeRenderTarget)) {
 							renderTarget = this.renderTarget.getCubeRenderTarget();
 						} else {
 							renderTarget = this.renderTarget;
 						}
-						if (
-							renderer instanceof N3JS.WebGLRenderer &&
-							renderTarget instanceof N3JS.WebGLCubeRenderTarget
-						) {
+						if (renderer instanceof N3JS.WebGLRenderer && renderTarget instanceof N3JS.WebGLCubeRenderTarget) {
 							try {
-								basemesh.copy(
-									N3JS.LightProbeGenerator.fromCubeRenderTarget(
-										renderer,
-										renderTarget
-									)
-								);
+								basemesh.copy(N3JS.LightProbeGenerator.fromCubeRenderTarget(renderer, renderTarget));
 							} catch (ex) {
 								console.log(ex);
 							}
@@ -955,26 +862,17 @@ export class NgxLightComponent
 					NgxThreeUtil.isNotNull(this.targetY) &&
 					NgxThreeUtil.isNotNull(this.targetZ)
 				) {
-					anyBasemesh['target'].position.copy(
-						NgxThreeUtil.getVector3Safe(this.targetX, this.targetY, this.targetZ)
-					);
+					anyBasemesh['target'].position.copy(NgxThreeUtil.getVector3Safe(this.targetX, this.targetY, this.targetZ));
 				}
 			}
 			this.light = basemesh;
-			if (
-				this.light instanceof N3JS.SpotLight ||
-				this.light instanceof N3JS.DirectionalLight
-			) {
+			if (this.light instanceof N3JS.SpotLight || this.light instanceof N3JS.DirectionalLight) {
 				const target = this.getTarget();
 				if (NgxThreeUtil.isNotNull(target)) {
 					this.light.target = target;
 				}
 				if (NgxThreeUtil.isNotNull(this.light.target)) {
-					if (
-						this.parent !== null &&
-						this.light.target.parent === null &&
-						this.parent !== this.light.target
-					) {
+					if (this.parent !== null && this.light.target.parent === null && this.parent !== this.light.target) {
 						this.parent.add(this.light.target);
 					}
 				}
@@ -984,52 +882,29 @@ export class NgxLightComponent
 					this.light.shadow.bias = NgxThreeUtil.getTypeSafe(this.shadowBias, 0);
 				}
 				if (NgxThreeUtil.isNotNull(this.shadowRadius)) {
-					this.light.shadow.radius = NgxThreeUtil.getTypeSafe(
-						this.shadowRadius,
-						1
-					);
+					this.light.shadow.radius = NgxThreeUtil.getTypeSafe(this.shadowRadius, 1);
 				}
-				if (
-					NgxThreeUtil.isNotNull(this.shadowMapSizeWidth) ||
-					NgxThreeUtil.isNotNull(this.shadowMapSize)
-				) {
+				if (NgxThreeUtil.isNotNull(this.shadowMapSizeWidth) || NgxThreeUtil.isNotNull(this.shadowMapSize)) {
 					this.light.shadow.mapSize.width = this.getShadowMapSizeWidth(1024);
 				}
-				if (
-					NgxThreeUtil.isNotNull(this.shadowMapSizeHeight) ||
-					NgxThreeUtil.isNotNull(this.shadowMapSize)
-				) {
+				if (NgxThreeUtil.isNotNull(this.shadowMapSizeHeight) || NgxThreeUtil.isNotNull(this.shadowMapSize)) {
 					this.light.shadow.mapSize.height = this.getShadowMapSizeHeight(1024);
 				}
 				if (this.light.shadow.camera) {
 					if (this.light.shadow.camera instanceof N3JS.PerspectiveCamera) {
 						if (NgxThreeUtil.isNotNull(this.shadowCameraFov)) {
-							this.light.shadow.camera.fov = NgxThreeUtil.getTypeSafe(
-								this.shadowCameraFov,
-								50
-							);
+							this.light.shadow.camera.fov = NgxThreeUtil.getTypeSafe(this.shadowCameraFov, 50);
 						}
 						if (NgxThreeUtil.isNotNull(this.shadowCameraNear)) {
-							this.light.shadow.camera.near = NgxThreeUtil.getTypeSafe(
-								this.shadowCameraNear,
-								0.5
-							);
+							this.light.shadow.camera.near = NgxThreeUtil.getTypeSafe(this.shadowCameraNear, 0.5);
 						}
 						if (NgxThreeUtil.isNotNull(this.shadowCameraFar)) {
-							this.light.shadow.camera.far = NgxThreeUtil.getTypeSafe(
-								this.shadowCameraFar,
-								500
-							);
+							this.light.shadow.camera.far = NgxThreeUtil.getTypeSafe(this.shadowCameraFar, 500);
 						}
 						if (NgxThreeUtil.isNotNull(this.shadowCameraZoom)) {
-							this.light.shadow.camera.zoom = NgxThreeUtil.getTypeSafe(
-								this.shadowCameraZoom,
-								1
-							);
+							this.light.shadow.camera.zoom = NgxThreeUtil.getTypeSafe(this.shadowCameraZoom, 1);
 						}
-					} else if (
-						this.light.shadow.camera instanceof N3JS.OrthographicCamera
-					) {
+					} else if (this.light.shadow.camera instanceof N3JS.OrthographicCamera) {
 						if (NgxThreeUtil.isNotNull(this.shadowCameraLeft)) {
 							this.light.shadow.camera.left = this.getShadowCameraLeft(-5);
 						}
@@ -1043,22 +918,13 @@ export class NgxLightComponent
 							this.light.shadow.camera.bottom = this.getShadowCameraBottom(-5);
 						}
 						if (NgxThreeUtil.isNotNull(this.shadowCameraNear)) {
-							this.light.shadow.camera.near = NgxThreeUtil.getTypeSafe(
-								this.shadowCameraNear,
-								0.5
-							);
+							this.light.shadow.camera.near = NgxThreeUtil.getTypeSafe(this.shadowCameraNear, 0.5);
 						}
 						if (NgxThreeUtil.isNotNull(this.shadowCameraFar)) {
-							this.light.shadow.camera.far = NgxThreeUtil.getTypeSafe(
-								this.shadowCameraFar,
-								500
-							);
+							this.light.shadow.camera.far = NgxThreeUtil.getTypeSafe(this.shadowCameraFar, 500);
 						}
 						if (NgxThreeUtil.isNotNull(this.shadowCameraZoom)) {
-							this.light.shadow.camera.zoom = NgxThreeUtil.getTypeSafe(
-								this.shadowCameraZoom,
-								1
-							);
+							this.light.shadow.camera.zoom = NgxThreeUtil.getTypeSafe(this.shadowCameraZoom, 1);
 						}
 					}
 				}
