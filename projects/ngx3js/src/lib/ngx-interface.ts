@@ -675,6 +675,11 @@ export interface IRendererEvent {
 		xy: I3JS.Vector2;
 	};
 	event: any;
+	renderer? : I3JS.WebGL1Renderer;
+	mainCamera? : I3JS.Camera;
+	mainScene? : I3JS.Scene;
+	cameras? : I3JS.Camera[];
+	scenes? : I3JS.Scene[];
 }
 
 /**

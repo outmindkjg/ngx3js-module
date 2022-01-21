@@ -16,15 +16,25 @@ import {
 	ViewChild,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ILoadingProcessInfo, ILoadingProcess } from '../ngx-interface';
 import { NgxCanvasComponent } from '../canvas/canvas.component';
 import { NgxControlComponent } from '../control/control.component';
 import { NgxAbstractControllerComponent } from '../controller.component.abstract';
 import { NgxAbstractThreeDirective } from '../directive.abstract';
 import { NgxEffectComponent } from '../effect/effect.component';
 import { I3JS, N3JS, NgxThreeUtil } from '../interface';
-import { IControlOptions, IGuiControlParam, IRendererEvent, IRendererInfo, IRendererTimer } from '../ngx-interface';
+import {
+	IControlOptions,
+	IGuiControlParam,
+	ILoadingProcess,
+	ILoadingProcessInfo,
+	IRendererEvent,
+	IRendererInfo,
+	IRendererTimer,
+} from '../ngx-interface';
 import { NgxPlaneComponent } from '../plane/plane.component';
+import { NgxAbstractRendererUpdateComponent } from '../renderer-update.abstract';
+import { NgxAbstractRendererEventComponent } from '../renderer-event.abstract';
+
 import { NgxSharedComponent } from '../shared/shared.component';
 import { NgxSizeComponent } from '../size/size.component';
 import { NgxAbstractSubscribeComponent } from '../subscribe.abstract';
@@ -455,6 +465,18 @@ export class NgxRendererComponent
 	/**
 	 * Content children of renderer component
 	 */
+	@ContentChildren(NgxAbstractRendererUpdateComponent, { descendants: true })
+	private rendererUpdateList: QueryList<NgxAbstractRendererUpdateComponent>;
+
+	/**
+	 * Content children of renderer component
+	 */
+	@ContentChildren(NgxAbstractRendererEventComponent, { descendants: true })
+	private rendererEventList: QueryList<NgxAbstractRendererEventComponent>;
+
+	/**
+	 * Content children of renderer component
+	 */
 	@ContentChildren(NgxAbstractThreeDirective, { descendants: true })
 	private threeDirectiveList: QueryList<NgxAbstractThreeDirective>;
 
@@ -586,6 +608,7 @@ export class NgxRendererComponent
 		this.subscribeListQueryChange(this.sharedList, 'sharedList', 'shared');
 		this.subscribeListQueryChange(this.sizeList, 'sizeList', 'size');
 		this.subscribeListQueryChange(this.golbalTweenList, 'tweenList', 'tween');
+		this.subscribeListQueryChange(this.rendererEventList, 'eventList', 'useevent');
 		super.ngAfterContentInit();
 	}
 
@@ -806,6 +829,11 @@ export class NgxRendererComponent
 			xy: new N3JS.Vector2(),
 		},
 		event: {},
+		renderer: null,
+		mainCamera: null,
+		mainScene: null,
+		cameras: null,
+		scenes: null,
 	};
 
 	/**
@@ -894,6 +922,9 @@ export class NgxRendererComponent
 		this.events.mouse.set((offsetX / this.rendererWidth) * 2 - 1, -(offsetY / this.rendererHeight) * 2 + 1);
 		this.events.event = event;
 		this.eventListener.emit(this.events);
+		this.rendererEventList.forEach(event => {
+			event.updateEvent(this.events);
+		});
 	}
 
 	/**
@@ -1150,7 +1181,7 @@ export class NgxRendererComponent
 		return new N3JS.Vector2(this.rendererWidth, this.rendererHeight);
 	}
 
-	public loadingProcess : ILoadingProcessInfo = null;
+	public loadingProcess: ILoadingProcessInfo = null;
 
 	/**
 	 * Sets loading process
@@ -1159,21 +1190,20 @@ export class NgxRendererComponent
 	 * @param loaded
 	 * @param total
 	 */
-	 public setLoadingProcess(url: string, loaded: number, total: number) {
+	public setLoadingProcess(url: string, loaded: number, total: number) {
 		if (loaded < total && total > 0) {
 			if (this.loadingProcess === null) {
-				this.loadingProcess = { url : '', loaded : 0, total : 0, percent : 0, remindPercent : 100}
+				this.loadingProcess = { url: '', loaded: 0, total: 0, percent: 0, remindPercent: 100 };
 			}
 			this.loadingProcess.url = url;
 			this.loadingProcess.loaded = loaded;
 			this.loadingProcess.total = total;
-			this.loadingProcess.percent = Math.round(((loaded + 1) / total ) * 100);
+			this.loadingProcess.percent = Math.round(((loaded + 1) / total) * 100);
 			this.loadingProcess.remindPercent = 100 - this.loadingProcess.percent;
 		} else {
 			this.loadingProcess = null;
 		}
 	}
-
 
 	/**
 	 * The Renderlistener of renderer component
@@ -1299,7 +1329,10 @@ export class NgxRendererComponent
 			}
 			changes.forEach((change) => {
 				switch (change.toLowerCase()) {
-					case 'useassetloading' :
+					case 'init':
+						this.events.renderer = this.renderer as I3JS.WebGL1Renderer;
+						break;
+					case 'useassetloading':
 						if (this.useAssetLoading) {
 							NgxThreeUtil.setLoadingDisplay(this);
 						} else {
@@ -1327,6 +1360,10 @@ export class NgxRendererComponent
 						break;
 					case 'useevent':
 						const useEvents = NgxThreeUtil.isNotNull(this.useEvent) ? this.useEvent.toLowerCase().split(',') : [];
+						this.rendererEventList.forEach(event => {
+							console.log(event);
+							useEvents.push(...event.eventTypes);
+						});
 						if (useEvents.indexOf('change') > -1) {
 							this._eventListener.change = this.addEvent('change', this._eventListener.change);
 						} else {
@@ -1356,8 +1393,10 @@ export class NgxRendererComponent
 							useEvents.indexOf('move') > -1
 						) {
 							this._eventListener.pointermove = this.addEvent('pointermove', this._eventListener.pointermove);
+							this._eventListener.pointerleave = this.addEvent('pointerleave', this._eventListener.pointerleave);
 						} else {
 							this._eventListener.pointermove = this.removeEvent('pointermove', this._eventListener.pointermove);
+							this._eventListener.pointerleave = this.removeEvent('pointerleave', this._eventListener.pointerleave);
 						}
 						if (useEvents.indexOf('keydown') > -1) {
 							this._eventListener.keydown = this.addEvent('keydown', this._eventListener.keydown);
@@ -1467,20 +1506,34 @@ export class NgxRendererComponent
 						break;
 					case 'scene':
 						this.unSubscribeReferList('sceneList');
+						this.events.scenes = [];
 						if (NgxThreeUtil.isNotNull(this.sceneList)) {
 							this.sceneList.forEach((scene) => {
 								scene.setRenderer(this);
+								this.events.scenes.push(scene.getScene());
 							});
 							this.subscribeListQuery(this.sceneList, 'sceneList', 'scene');
+						}
+						if (this.events.scenes.length > 0) {
+							this.events.mainScene = this.events.scenes[0];
+						} else {
+							this.events.mainScene = null;
 						}
 						break;
 					case 'camera':
 						this.unSubscribeReferList('cameraList');
+						this.events.cameras = [];
 						if (NgxThreeUtil.isNotNull(this.cameraList)) {
 							this.cameraList.forEach((camera) => {
 								camera.setRenderer(this.renderer, this.cssRenderer, this.sceneList);
+								this.events.cameras.push(camera.getCamera());
 							});
 							this.subscribeListQuery(this.cameraList, 'cameraList', 'camera');
+						}
+						if (this.events.cameras.length > 0) {
+							this.events.mainCamera = this.events.cameras[0];
+						} else {
+							this.events.mainCamera = null;
 						}
 						break;
 					case 'composer':
@@ -1900,6 +1953,9 @@ export class NgxRendererComponent
 		}
 		this.events.direction.lerp(this.events.keyInfo.xy, renderTimer.delta / 3);
 		this.onRender.emit(renderTimer);
+		this.rendererUpdateList.forEach((update) => {
+			update.update(renderTimer);
+		});
 		this.controllerList.forEach((controller) => {
 			controller.update(renderTimer);
 		});

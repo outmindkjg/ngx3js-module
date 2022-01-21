@@ -60,6 +60,8 @@ export * from './pipes/index';
 export * from './plane/plane.component';
 export * from './position/position.component';
 export * from './render-target/render-target.component';
+export * from './renderer-update.abstract';
+export * from './renderer-event.abstract';
 export * from './renderer/renderer.component';
 export * from './rigidbody/rigidbody-node/rigidbody-node.component';
 export * from './rigidbody/rigidbody.component';

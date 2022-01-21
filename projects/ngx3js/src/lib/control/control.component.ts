@@ -484,17 +484,19 @@ export class NgxControlComponent
 				switch (change.toLowerCase()) {
 					case 'target':
 						const newLookatList: NgxLookatComponent[] = [];
-						if (NgxThreeUtil.isNotNull(this.target)) {
-							if (this.target instanceof NgxLookatComponent) {
-								newLookatList.push(this.target);
-							} else {
-								this.control['target'] = NgxThreeUtil.getLookAt(this.target);
+						if (this.control['target'] !== undefined) {
+							if (NgxThreeUtil.isNotNull(this.target)) {
+								if (this.target instanceof NgxLookatComponent) {
+									newLookatList.push(this.target);
+								} else {
+									this.control['target'] = NgxThreeUtil.getLookAt(this.target);
+								}
 							}
-						}
-						if (NgxThreeUtil.isNotNull(this.lookatList)) {
-							this.lookatList.forEach((lookat) => {
-								newLookatList.push(lookat);
-							});
+							if (NgxThreeUtil.isNotNull(this.lookatList)) {
+								this.lookatList.forEach((lookat) => {
+									newLookatList.push(lookat);
+								});
+							}
 						}
 						this._cachedLookatList.forEach((lookat) => {
 							if (newLookatList.indexOf(lookat) === -1) {
@@ -507,6 +509,9 @@ export class NgxControlComponent
 							}
 						});
 						this._cachedLookatList = newLookatList;
+						if (this.control['target'] !== undefined && this.control['object'] !== undefined) {
+							(this.control['object'] as I3JS.Camera).userData.target = this.control['target'];
+						}
 						// this.setSubscribeNext('lookat');
 						break;
 				}
