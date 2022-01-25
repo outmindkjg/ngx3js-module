@@ -122,7 +122,7 @@ export class NgxAbstractSubscribeComponent implements OnInit, OnChanges, OnDestr
 	 */
 	ngOnInit(subscribeType?: string): void {
 		this.id =
-			subscribeType + '_' + Math.round(10000 + Math.random() * 10000) + '_' + Math.round(10000 + Math.random() * 10000);
+			subscribeType + '_' + NgxThreeUtil.getUUID();
 		this.setSubscribeType(subscribeType);
 		NgxThreeUtil.setThreeComponent(this.id, this);
 		this._userData.component = this.id;

@@ -702,9 +702,9 @@ export class NgxThreeUtil {
 		}
 	}
 
-	private static _loadingProcess : ILoadingProcess = null;
+	private static _loadingProcess: ILoadingProcess = null;
 
-	private static _loadingProcessSubscription : Subscription = null;
+	private static _loadingProcessSubscription: Subscription = null;
 	/**
 	 * Sets loading process
 	 *
@@ -712,15 +712,19 @@ export class NgxThreeUtil {
 	 * @param loaded
 	 * @param total
 	 */
-	public static setLoadingDisplay(loadingProcess: ILoadingProcess ) {
+	public static setLoadingDisplay(loadingProcess: ILoadingProcess) {
 		if (this._loadingProcess !== loadingProcess) {
 			this._loadingProcess = loadingProcess;
 			if (this._loadingProcessSubscription !== null) {
 				this._loadingProcessSubscription.unsubscribe();
 			}
-			this._loadingProcessSubscription = this.getSubscribe(this._loadingProcess, () => {
-				this.unsetLoadingDisplay(loadingProcess);
-			}, 'destroy');
+			this._loadingProcessSubscription = this.getSubscribe(
+				this._loadingProcess,
+				() => {
+					this.unsetLoadingDisplay(loadingProcess);
+				},
+				'destroy'
+			);
 		}
 	}
 
@@ -731,7 +735,7 @@ export class NgxThreeUtil {
 	 * @param loaded
 	 * @param total
 	 */
-	public static unsetLoadingDisplay(loadingProcess: ILoadingProcess ) {
+	public static unsetLoadingDisplay(loadingProcess: ILoadingProcess) {
 		if (this._loadingProcess === loadingProcess) {
 			this._loadingProcess = null;
 			if (this._loadingProcessSubscription !== null) {
@@ -1639,6 +1643,18 @@ export class NgxThreeUtil {
 	 */
 	public static clearThreeComponent() {
 		this.loadedComponent = {};
+	}
+
+	/**
+	 * Gets uuid
+	 * @returns  
+	 */
+	public static getUUID() : string {
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+			var r = (Math.random() * 16) | 0,
+				v = c == 'x' ? r : (r & 3) | 8;
+			return v.toString(16);
+		});
 	}
 
 	/**
@@ -2557,7 +2573,7 @@ export class NgxThreeUtil {
 		params: IGuiControlParam[]
 	): I3JS.GUI | I3JS.GUIController {
 		params.forEach((param) => {
-			const params = (typeof param.control  === 'string') ? control[param.control] : control;
+			const params = typeof param.control === 'string' ? control[param.control] : control;
 			if (this.isNotNull(params)) {
 				if (gui instanceof N3JS.GUI) {
 					const guiFolder: I3JS.GUI = gui;
