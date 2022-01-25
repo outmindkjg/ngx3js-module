@@ -674,6 +674,8 @@ export class NgxThreeUtil {
 	 */
 	public static getStoreUrl(url: string) {
 		if (
+			url === 'auto' ||
+			url === '' ||
 			url.startsWith('/') ||
 			url.startsWith('http://') ||
 			url.startsWith('https://') ||
