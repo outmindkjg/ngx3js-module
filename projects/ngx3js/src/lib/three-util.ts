@@ -562,6 +562,16 @@ export class NgxThreeUtil {
 	}
 
 	/**
+	 * Determines whether not null is
+	 * 
+	 * @param value
+	 * @returns true if not null
+	 */
+	 public static isNotNullEmpty(value: any): boolean {
+		return !this.isNull(value) && value !== '' && value !== 0;
+	}
+
+	/**
 	 * Determines whether array is
 	 * @param value
 	 * @returns true if array
@@ -674,8 +684,12 @@ export class NgxThreeUtil {
 	 */
 	public static getStoreUrl(url: string) {
 		if (
+			typeof url !== 'string' ||
 			url === 'auto' ||
 			url === '' ||
+			url.startsWith('rgb(') ||
+			url.startsWith('rgba(') ||
+			url.startsWith('#') ||
 			url.startsWith('/') ||
 			url.startsWith('http://') ||
 			url.startsWith('https://') ||
@@ -2525,13 +2539,13 @@ export class NgxThreeUtil {
 	/**
 	 * Gets gui folder
 	 * @param gui
-	 * @param name
+	 * @param property
 	 * @returns gui folder
 	 */
-	public static getGuiController(gui: I3JS.GUI, name: string): I3JS.GUIController {
+	public static getGuiController(gui: I3JS.GUI, property: string): I3JS.GUIController {
 		for (let i = 0; i < gui.controllers.length; i++) {
 			const controllers = gui.controllers[i];
-			if (controllers._name === name) {
+			if (controllers.property === property) {
 				return controllers;
 			}
 		}
