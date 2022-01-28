@@ -1361,7 +1361,6 @@ export class NgxRendererComponent
 					case 'useevent':
 						const useEvents = NgxThreeUtil.isNotNull(this.useEvent) ? this.useEvent.toLowerCase().split(',') : [];
 						this.rendererEventList.forEach(event => {
-							console.log(event);
 							useEvents.push(...event.eventTypes);
 						});
 						if (useEvents.indexOf('change') > -1) {
