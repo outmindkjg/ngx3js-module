@@ -1,14 +1,10 @@
 import { Observable, Subscription } from 'rxjs';
-import { ILoadingProcess } from '.';
 import { NgxMeshComponent } from './mesh/mesh.component';
 import {
 	ICssStyle,
 	IGuiBaseControl,
-	IGuiControlParam,
-	INgxColor,
-	INgxThreeGuiController,
-	IRendererTimer,
-	ITagAttributes,
+	IGuiControlParam, ILoadingProcess, INgxColor, IRendererTimer,
+	ITagAttributes
 } from './ngx-interface';
 import { NgxThreeClock } from './three-clock';
 import { NgxThreeStats } from './three-stats';
