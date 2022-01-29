@@ -22,6 +22,7 @@ import * as CHARTJS from './chartjs.interface';
  * NgxTextureChartJsComponent
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTextureChartJsComponent) page for details.
+ * See the [ngx chartjs](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_chartjs) page for a live demo.
  *
  * ```html
  * <ngx3js-texture-chartjs [options]="options"></ngx3js-texture-chartjs>
@@ -208,6 +209,7 @@ export class NgxTextureChartJsComponent
 				sharedVar !== null &&
 				helpers !== null
 			) {
+				// rollup-disable-warning-next-line EVAL
 				eval('functionItem = ' + str + '');
 				if (
 					typeof functionItem === 'function' ||

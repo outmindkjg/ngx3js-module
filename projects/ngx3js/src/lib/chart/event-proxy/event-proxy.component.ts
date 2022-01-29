@@ -15,10 +15,12 @@ import { NgxAbstractSubscribeComponent } from './../../subscribe.abstract';
 /**
  * The Mesh component.
  *
- * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxEchart) page for details.
+ * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxEventProxyComponent) page for details.
+ * See the [ngx chartjs](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_chartjs) page for a live demo.
+ * See the [ngx echarts](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_echarts) page for a live demo.
  *
  * ```html
- * <ngx3js-echart [type]="'skybox'" [skyboxType]="'sun'"></ngx3js-echart>
+ * <ngx3js-event-proxy [lookatCamera]="false"></ngx3js-event-proxy>
  * ```
  *
  * @see THREE.Mesh

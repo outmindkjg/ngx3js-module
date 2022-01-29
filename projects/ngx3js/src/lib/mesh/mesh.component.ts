@@ -18,6 +18,7 @@ import * as THREE_OBJ from './objects/three-objects';
  * The Mesh component.
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxMeshComponent) page for details.
+ * See the [ngx mesh](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_mesh) page for a live demo.
  *
  * ```html
  * <ngx3js-mesh [type]="'skybox'" [skyboxType]="'sun'"></ngx3js-mesh>

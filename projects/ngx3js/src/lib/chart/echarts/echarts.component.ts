@@ -20,6 +20,7 @@ import * as ECHARTS from './echarts.interface';
  * NgxTextureEChartsComponent
  *
  * See the [ngx3js docs](https://outmindkjg.github.io/ngx3js-doc/#/docs/ngxapi/en/NgxTextureEChartsComponent) page for details.
+ * See the [ngx echarts](https://outmindkjg.github.io/ngx3js-doc/#/examples/ngx_echarts) page for a live demo.
  *
  * ```html
  * <ngx3js-texture-echarts [options]="options"></ngx3js-texture-echarts>
@@ -332,6 +333,7 @@ export class NgxTextureEChartsComponent
 				Utils !== null &&
 				sharedVar !== null
 			) {
+				// rollup-disable-warning-next-line EVAL
 				eval('functionItem = ' + str + '');
 				if (
 					typeof functionItem === 'function' ||

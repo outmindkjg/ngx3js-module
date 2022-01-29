@@ -28,9 +28,9 @@ export interface ChartSharedVar {
 }
 
 export class ChartUtils {
-	static _seed: number = new Date().getTime();
+	public static _seed: number = new Date().getTime();
 
-	static MONTHS: string[] = [
+	public static MONTHS: string[] = [
 		'January',
 		'February',
 		'March',
@@ -45,7 +45,7 @@ export class ChartUtils {
 		'December',
 	];
 
-	static DAYOFWEEK: string[] = [
+	public static DAYOFWEEK: string[] = [
 		'Mon',
 		'Tue',
 		'Wed',
@@ -55,7 +55,7 @@ export class ChartUtils {
 		'Sun',
 	];
 
-	static COLORS: string[] = [
+	public static COLORS: string[] = [
 		'#4dc9f6',
 		'#f67019',
 		'#f53794',
@@ -67,7 +67,7 @@ export class ChartUtils {
 		'#8549ba',
 	];
 
-	static CHART_COLORS: {
+	public static CHART_COLORS: {
 		[key: string]: string;
 		red: string;
 		orange: string;
@@ -86,7 +86,7 @@ export class ChartUtils {
 		grey: 'rgb(201, 203, 207)',
 	};
 
-	static NAMED_COLORS: string[] = [
+	public static NAMED_COLORS: string[] = [
 		'rgb(255, 99, 132)',
 		'rgb(255, 159, 64)',
 		'rgb(255, 205, 86)',
@@ -96,22 +96,22 @@ export class ChartUtils {
 		'rgb(201, 203, 207)',
 	];
 
-	static valueOrDefault(value: any, defaultValue: any): any {
+	public static valueOrDefault(value: any, defaultValue: any): any {
 		return typeof value === 'undefined' ? defaultValue : value;
 	}
 
-	static srand(seed: number) {
+	public static srand(seed: number) {
 		this._seed = seed;
 	}
 
-	static rand(min?: number, max?: number) {
+	public static rand(min?: number, max?: number) {
 		min = this.valueOrDefault(min, 0);
 		max = this.valueOrDefault(max, 0);
 		this._seed = (this._seed * 9301 + 49297) % 233280;
 		return min + (this._seed / 233280) * (max - min);
 	}
 
-	static numbers(config: ChartConfig): number[] {
+	public static numbers(config: ChartConfig): number[] {
 		var cfg = config || {};
 		var min = this.valueOrDefault(cfg.min, 0);
 		var max = this.valueOrDefault(cfg.max, 100);
@@ -133,20 +133,20 @@ export class ChartUtils {
 		return data;
 	}
 
-	static points(config: ChartConfig): { x: number; y: number }[] {
+	public static points(config: ChartConfig): { x: number; y: number }[] {
 		const xs = this.numbers(config);
 		const ys = this.numbers(config);
 		return xs.map((x, i) => ({ x, y: ys[i] }));
 	}
 
-	static bubbles(config?: ChartConfig): { x: number; y: number; r: number }[] {
+	public static bubbles(config?: ChartConfig): { x: number; y: number; r: number }[] {
 		return this.points(config).map((pt: any) => {
 			pt.r = this.rand(config.rmin, config.rmax);
 			return pt;
 		});
 	}
 
-	static labels(config?: ChartConfig): string[] {
+	public static labels(config?: ChartConfig): string[] {
 		var cfg = config || {};
 		var min = cfg.min || 0;
 		var max = cfg.max || 100;
@@ -163,7 +163,7 @@ export class ChartUtils {
 		return values;
 	}
 
-	static months(config?: ChartConfig): string[] {
+	public static months(config?: ChartConfig): string[] {
 		var cfg = config || {};
 		var count = cfg.count || 12;
 		var section = cfg.section || 30;
@@ -176,7 +176,7 @@ export class ChartUtils {
 		return values;
 	}
 
-	static dayofweek(config?: ChartConfig): string[] {
+	public static dayofweek(config?: ChartConfig): string[] {
 		var cfg = config || {};
 		var count = cfg.count || 7;
 		var section = cfg.section || 7;
@@ -189,11 +189,11 @@ export class ChartUtils {
 		return values;
 	}
 
-	static color(index : number) {
+	public static color(index : number) {
 		return this.COLORS[index % this.COLORS.length];
 	}
 
-	static colorHexMap : { [key : string] : number} = {
+	public static colorHexMap : { [key : string] : number} = {
 		'0': 0,
 		'1': 1,
 		'2': 2,
@@ -218,7 +218,7 @@ export class ChartUtils {
 		'f': 15,
 	}
 
-	static colorHexParse(str : string) {
+	public static colorHexParse(str : string) {
 		let len = str.length;
 		let ret;
 		if (str[0] === '#') {
@@ -247,7 +247,7 @@ export class ChartUtils {
 	 * @param {string} str - the rgb string
 	 * @returns {RGBA} - the parsed color
 	 */
-	static colorRgbParse(str : string) : { r : number, g : number, b : number, a : number } {
+	public static colorRgbParse(str : string) : { r : number, g : number, b : number, a : number } {
 		function round(v : number) {
 			return (v + 0.5) | 0;
 		}
@@ -292,7 +292,7 @@ export class ChartUtils {
 		};
 	}
 
-	static transparentize(value : string, opacity?: number) {
+	public static transparentize(value : string, opacity?: number) {
 		var alpha = opacity === undefined ? 0.5 : 1 - opacity;
 		const colorRgb = this.colorHexParse(value) || this.colorRgbParse(value);
 		return (
@@ -308,21 +308,21 @@ export class ChartUtils {
 		);
 	}
 
-	static namedColor(index : number) {
+	public static namedColor(index : number) {
 		return this.NAMED_COLORS[index % this.NAMED_COLORS.length];
 	}
 
-	static newDate(days : number): Date {
+	public static newDate(days : number): Date {
 		const now = new Date();
 		now.setDate(now.getDate() + days);
 		return now;
 	}
 
-	static newDateString(days : number) {
+	public static newDateString(days : number) {
 		return this.newDate(days).toISOString();
 	}
 
-	static stringify(option : any): string {
+	public static stringify(option : any): string {
 		return JSON.stringify(
 			option,
 			(_, value) => {
@@ -339,11 +339,11 @@ export class ChartUtils {
 		);
 	}
 
-	static parseISODate(dateString: string): Date {
+	public static parseISODate(dateString: string): Date {
 		return new Date(dateString);
 	}
 
-	static isFunctionString(str: string): boolean {
+	public static isFunctionString(str: string): boolean {
 		if (str !== null && str !== undefined) {
 			return (
 				/\)[ \t\n]*=>[ \t\n]*/.test(str) ||
@@ -356,18 +356,31 @@ export class ChartUtils {
 		}
 	}
 
-	static getFunctionString(str: string): string {
+	public static getFunctionString(str: string): string {
 		return str.replace(
 			/^(function|function [a-zA-Z][a-zA-Z_0-9]+|[a-zA-Z][a-zA-Z_0-9]+)(| )\(/,
 			'function('
 		);
 	}
 
-	static isObjectString(str: string): boolean {
+	public static isObjectString(str: string): boolean {
 		return /^\{/.test(str) && /\}$/.test(str);
 	}
 
-	static isCallableString(str: string): boolean {
+	public static isCallableString(str: string): boolean {
 		return /^(new |)(map|Date|[a-zA-Z][a-zA-Z0-9]+\.[a-zA-Z][a-zA-Z0-9_\.]+)(|\(.*\))$/.test(str);
+	}
+
+	public static runChartAction(action: ChartAction): void {
+		if (action !== null && action.onclick !== null) {
+			action.onclick();
+		}
+	}
+
+	public static getChartSharedVar(chart: any): ChartSharedVar {
+		if (chart.sharedVar !== null && chart.sharedVar !== undefined) {
+			return chart.sharedVar;
+		}
+		return null;
 	}
 }
