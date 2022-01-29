@@ -45,15 +45,7 @@ export class ChartUtils {
 		'December',
 	];
 
-	public static DAYOFWEEK: string[] = [
-		'Mon',
-		'Tue',
-		'Wed',
-		'Thu',
-		'Fri',
-		'Sat',
-		'Sun',
-	];
+	public static DAYOFWEEK: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 	public static COLORS: string[] = [
 		'#4dc9f6',
@@ -189,11 +181,11 @@ export class ChartUtils {
 		return values;
 	}
 
-	public static color(index : number) {
+	public static color(index: number) {
 		return this.COLORS[index % this.COLORS.length];
 	}
 
-	public static colorHexMap : { [key : string] : number} = {
+	public static colorHexMap: { [key: string]: number } = {
 		'0': 0,
 		'1': 1,
 		'2': 2,
@@ -204,21 +196,21 @@ export class ChartUtils {
 		'7': 7,
 		'8': 8,
 		'9': 9,
-		'A': 10,
-		'B': 11,
-		'C': 12,
-		'D': 13,
-		'E': 14,
-		'F': 15,
-		'a': 10,
-		'b': 11,
-		'c': 12,
-		'd': 13,
-		'e': 14,
-		'f': 15,
-	}
+		A: 10,
+		B: 11,
+		C: 12,
+		D: 13,
+		E: 14,
+		F: 15,
+		a: 10,
+		b: 11,
+		c: 12,
+		d: 13,
+		e: 14,
+		f: 15,
+	};
 
-	public static colorHexParse(str : string) {
+	public static colorHexParse(str: string) {
 		let len = str.length;
 		let ret;
 		if (str[0] === '#') {
@@ -247,23 +239,21 @@ export class ChartUtils {
 	 * @param {string} str - the rgb string
 	 * @returns {RGBA} - the parsed color
 	 */
-	public static colorRgbParse(str : string) : { r : number, g : number, b : number, a : number } {
-		function round(v : number) {
+	public static colorRgbParse(str: string): { r: number; g: number; b: number; a: number } {
+		function round(v: number) {
 			return (v + 0.5) | 0;
 		}
-		const lim = (v : number, l : number, h : number) => Math.max(Math.min(v, h), l);
+		const lim = (v: number, l: number, h: number) => Math.max(Math.min(v, h), l);
 		/**
 		 * convert percent to byte 0..255
 		 * @param {number} v - 0..100
 		 */
-		function p2b(v : number) {
+		function p2b(v: number) {
 			return lim(round(v * 2.55), 0, 255);
 		}
 
 		const m =
-			/^rgba?\(\s*([-+.\d]+)(%)?[\s,]+([-+.e\d]+)(%)?[\s,]+([-+.e\d]+)(%)?(?:[\s,/]+([-+.e\d]+)(%)?)?\s*\)$/.exec(
-				str
-			);
+			/^rgba?\(\s*([-+.\d]+)(%)?[\s,]+([-+.e\d]+)(%)?[\s,]+([-+.e\d]+)(%)?(?:[\s,/]+([-+.e\d]+)(%)?)?\s*\)$/.exec(str);
 		let a = 255;
 		let r, g, b;
 
@@ -292,37 +282,27 @@ export class ChartUtils {
 		};
 	}
 
-	public static transparentize(value : string, opacity?: number) {
+	public static transparentize(value: string, opacity?: number) {
 		var alpha = opacity === undefined ? 0.5 : 1 - opacity;
 		const colorRgb = this.colorHexParse(value) || this.colorRgbParse(value);
-		return (
-			'rgba(' +
-			colorRgb.r +
-			',' +
-			colorRgb.g +
-			',' +
-			colorRgb.b +
-			',' +
-			alpha +
-			')'
-		);
+		return 'rgba(' + colorRgb.r + ',' + colorRgb.g + ',' + colorRgb.b + ',' + alpha + ')';
 	}
 
-	public static namedColor(index : number) {
+	public static namedColor(index: number) {
 		return this.NAMED_COLORS[index % this.NAMED_COLORS.length];
 	}
 
-	public static newDate(days : number): Date {
+	public static newDate(days: number): Date {
 		const now = new Date();
 		now.setDate(now.getDate() + days);
 		return now;
 	}
 
-	public static newDateString(days : number) {
+	public static newDateString(days: number) {
 		return this.newDate(days).toISOString();
 	}
 
-	public static stringify(option : any): string {
+	public static stringify(option: any): string {
 		return JSON.stringify(
 			option,
 			(_, value) => {
@@ -330,7 +310,7 @@ export class ChartUtils {
 					return value
 						.toString()
 						.split('\n')
-						.map((line : string) => line.trim())
+						.map((line: string) => line.trim())
 						.join(' ');
 				}
 				return value;
@@ -347,9 +327,7 @@ export class ChartUtils {
 		if (str !== null && str !== undefined) {
 			return (
 				/\)[ \t\n]*=>[ \t\n]*/.test(str) ||
-				/^(function|function [a-zA-Z][a-zA-Z_0-9]+|[a-zA-Z][a-zA-Z_0-9]+)(| )\([^\)]*\)[ \t\n]*\{/.test(
-					str
-				)
+				/^(function|function [a-zA-Z][a-zA-Z_0-9]+|[a-zA-Z][a-zA-Z_0-9]+)(| )\([^\)]*\)[ \t\n]*\{/.test(str)
 			);
 		} else {
 			return false;
@@ -357,10 +335,7 @@ export class ChartUtils {
 	}
 
 	public static getFunctionString(str: string): string {
-		return str.replace(
-			/^(function|function [a-zA-Z][a-zA-Z_0-9]+|[a-zA-Z][a-zA-Z_0-9]+)(| )\(/,
-			'function('
-		);
+		return str.replace(/^(function|function [a-zA-Z][a-zA-Z_0-9]+|[a-zA-Z][a-zA-Z_0-9]+)(| )\(/, 'function(');
 	}
 
 	public static isObjectString(str: string): boolean {
@@ -382,5 +357,24 @@ export class ChartUtils {
 			return chart.sharedVar;
 		}
 		return null;
+	}
+
+	public static getString2Function(functionBody: string, args?: { [key: string]: any }) : any {
+		try {
+			if (args !== null && args !== undefined) {
+				const argsKeys: string[] = [];
+				const argsValues: any[] = [];
+				Object.entries(args).forEach(([key, value]) => {
+					argsKeys.push(key);
+					argsValues.push(value);
+				});
+				return new Function(...argsKeys, 'return ' + functionBody)(...argsValues);
+			} else {
+				return new Function('return ' + functionBody)();
+			}
+		} catch (ex) {
+			console.error(ex, functionBody);
+			return null;
+		}
 	}
 }

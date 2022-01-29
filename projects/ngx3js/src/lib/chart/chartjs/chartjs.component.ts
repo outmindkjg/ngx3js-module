@@ -195,35 +195,13 @@ export class NgxTextureChartJsComponent
 	 * @returns function option
 	 */
 	private checkEvalString(str: string): any {
-		let functionItem: any = null;
-		try {
-			const Chart = this.chartjs;
-			const THREE = N3JS;
-			const Utils = ChartUtils;
-			const sharedVar = this._sharedVar || {};
-			const helpers = this.helpers || {};
-			if (
-				Chart !== null &&
-				THREE !== null &&
-				Utils !== null &&
-				sharedVar !== null &&
-				helpers !== null
-			) {
-				// rollup-disable-warning-next-line EVAL
-				eval('functionItem = ' + str + '');
-				if (
-					typeof functionItem === 'function' ||
-					typeof functionItem === 'object'
-				) {
-					return functionItem;
-				} else {
-					functionItem = null;
-				}
-			}
-		} catch (ex) {
-			this.consoleLog('evalString', ex, 'error');
-			functionItem = null;
-		}
+		return ChartUtils.getString2Function(str, {
+			Chart : this.chartjs,
+			THREE : N3JS,
+			Utils : ChartUtils,
+			sharedVar : this._sharedVar || {},
+			helpers : this.helpers || {}
+		});
 	}
 
 	/**
@@ -705,15 +683,6 @@ export class NgxTextureChartJsComponent
 		}
 		this.texture.needsUpdate = true;
 		this.onInitChart.emit(this._chart);
-		this.getTimeout(1000).then(() => {
-			this._mapCanvas.dispatchEvent(
-				new MouseEvent('mousemove', {
-					clientX: Math.random(),
-					clientY: Math.random(),
-				})
-			);
-			this.texture.needsUpdate = true;
-		});
 	}
 
 	public getChart(): CHARTJS.Chart {

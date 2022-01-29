@@ -269,6 +269,7 @@
 			"three/examples/jsm/renderers/nodes/Nodes" : "Nodes",
 			"three/examples/jsm/renderers/webgl/nodes/WebGLNodeBuilder" : "WebGLNodeBuilder",
 			"three/examples/jsm/node-editor/NodeEditor" : "NodeEditor",
+			"three/examples/jsm/libs/flow.module" : "flow_module",
 			"path": "path",
 			"fs": "fs"
 		}
