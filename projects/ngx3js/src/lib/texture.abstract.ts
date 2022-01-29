@@ -335,6 +335,8 @@ export class NgxAbstractTextureComponent
 	 */
 	@Input() public offsetY: number = null;
 
+	@Input() public textureAlign: string = null;
+
 	/**
 	 * The point around which rotation occurs. A value of (0.5, 0.5) corresponds to the center of the texture. Default is (0, 0), the lower left.
 	 *
@@ -523,11 +525,32 @@ export class NgxAbstractTextureComponent
 	 * @returns offset
 	 */
 	protected getOffset(defX: number, defY: number): I3JS.Vector2 {
-		return NgxThreeUtil.getVector2Safe(
-			NgxThreeUtil.getTypeSafe(this.offsetX, this.offset),
-			NgxThreeUtil.getTypeSafe(this.offsetY, this.offset),
-			new N3JS.Vector2(defX, defY)
-		);
+		if (NgxThreeUtil.isNotNull(this.textureAlign) && this.textureAlign !== 'none') {
+			const textureAlign = this.textureAlign.toLowerCase();
+			const repeat = this.getRepeat(1, 1);
+			const offset = new N3JS.Vector2(0,0);
+			if (textureAlign.indexOf('left') > -1) {
+				offset.x = 0;
+			} else if (textureAlign.indexOf('right') > -1) {
+				offset.x = 1 - repeat.x;
+			} else if (textureAlign.indexOf('center') > -1) {
+				offset.x = 0.5 - repeat.x / 2;
+			} 
+			if (textureAlign.indexOf('bottom') > -1) {
+				offset.y = 0;
+			} else if (textureAlign.indexOf('top') > -1) {
+				offset.y = 1 - repeat.y;
+			} else if (textureAlign.indexOf('middle') > -1) {
+				offset.y = 0.5 - repeat.y / 2;
+			} 
+			return offset;
+		} else {
+			return NgxThreeUtil.getVector2Safe(
+				NgxThreeUtil.getTypeSafe(this.offsetX, this.offset),
+				NgxThreeUtil.getTypeSafe(this.offsetY, this.offset),
+				new N3JS.Vector2(defX, defY)
+			);
+		}
 	}
 
 	/**
@@ -1260,7 +1283,7 @@ export class NgxAbstractTextureComponent
 		if ((NgxThreeUtil.isNotNull(this.repeatX) && NgxThreeUtil.isNotNull(this.repeatY)) || NgxThreeUtil.isNotNull(this.repeat)) {
 			options.repeat = this.getRepeat(1, 1);
 		}
-		if ((NgxThreeUtil.isNotNull(this.offsetX) && NgxThreeUtil.isNotNull(this.offsetY)) || NgxThreeUtil.isNotNull(this.offset)) {
+		if (NgxThreeUtil.isNotNull(this.textureAlign) || (NgxThreeUtil.isNotNull(this.offsetX) && NgxThreeUtil.isNotNull(this.offsetY)) || NgxThreeUtil.isNotNull(this.offset)) {
 			options.offset = this.getOffset(0, 0);
 		}
 		if ((NgxThreeUtil.isNotNull(this.centerX) && NgxThreeUtil.isNotNull(this.centerY)) || NgxThreeUtil.isNotNull(this.center)) {
