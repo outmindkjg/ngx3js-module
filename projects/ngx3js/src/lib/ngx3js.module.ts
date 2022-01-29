@@ -5,20 +5,7 @@ import { NgxAudioComponent } from './audio/audio.component';
 import { NgxBackgroundComponent } from './background/background.component';
 import { NgxCameraComponent } from './camera/camera.component';
 import { NgxCanvasComponent } from './canvas/canvas.component';
-import { NgxAbstractChartComponent } from './chart.abstract';
-import { NgxChartAxesComponent } from './chart/axes/axes.component';
-import { NgxChartBarComponent } from './chart/bar/bar.component';
-import { NgxChartBubbleComponent } from './chart/bubble/bubble.component';
-import { NgxChartComponent } from './chart/chart.component';
-import { NgxChartControllerComponent } from './chart/controller/controller.component';
-import { NgxChartDoughnutComponent } from './chart/doughnut/doughnut.component';
-import { NgxChartLegendComponent } from './chart/legend/legend.component';
-import { NgxChartLineComponent } from './chart/line/line.component';
-import { NgxChartPieComponent } from './chart/pie/pie.component';
-import { NgxChartPolarAreaComponent } from './chart/polar-area/polar-area.component';
-import { NgxChartRadarComponent } from './chart/radar/radar.component';
-import { NgxChartScatterComponent } from './chart/scatter/scatter.component';
-import { NgxChartTitleComponent } from './chart/title/title.component';
+import { NgxTextureChartJsComponent, NgxTextureEChartsComponent,NgxEventProxyComponent } from './chart/index';
 import { NgxClipComponent } from './clip/clip.component';
 import { NgxControlComponent } from './control/control.component';
 import { NgxAbstractControllerComponent } from './controller.component.abstract';
@@ -123,19 +110,9 @@ const N3JS_COMPONENTS: Array<Type<any>> = [
 	NgxRigidbodyNodeComponent,
 	NgxRenderTargetComponent,
 	NgxSizeComponent,
-	NgxChartComponent,
-	NgxChartLineComponent,
-	NgxChartBarComponent,
-	NgxChartRadarComponent,
-	NgxChartDoughnutComponent,
-	NgxChartPieComponent,
-	NgxChartBubbleComponent,
-	NgxChartScatterComponent,
-	NgxChartAxesComponent,
-	NgxChartLegendComponent,
-	NgxChartTitleComponent,
-	NgxChartPolarAreaComponent,
-	NgxChartControllerComponent,
+	NgxTextureChartJsComponent, 
+	NgxTextureEChartsComponent,
+	NgxEventProxyComponent,
 	NgxAbstractSubscribeComponent,
 	NgxAbstractTextureComponent,
 	NgxAbstractMaterialComponent,
@@ -143,7 +120,6 @@ const N3JS_COMPONENTS: Array<Type<any>> = [
 	NgxAbstractControllerComponent,
 	NgxAbstractObject3dComponent,
 	NgxThreeGeometryCustom,
-	NgxAbstractChartComponent,
 	NgxViewportInComponent,
 ];
 
