@@ -196,18 +196,18 @@ export class ChartUtils {
 		'7': 7,
 		'8': 8,
 		'9': 9,
-		A: 10,
-		B: 11,
-		C: 12,
-		D: 13,
-		E: 14,
-		F: 15,
-		a: 10,
-		b: 11,
-		c: 12,
-		d: 13,
-		e: 14,
-		f: 15,
+		'A': 10,
+		'B': 11,
+		'C': 12,
+		'D': 13,
+		'E': 14,
+		'F': 15,
+		'a': 10,
+		'b': 11,
+		'c': 12,
+		'd': 13,
+		'e': 14,
+		'f': 15,
 	};
 
 	public static colorHexParse(str: string) {
@@ -321,6 +321,12 @@ export class ChartUtils {
 
 	public static parseISODate(dateString: string): Date {
 		return new Date(dateString);
+	}
+
+	public static addDate(dateString: string, add : number): string {
+		const date = new Date(dateString);
+		date.setDate(date.getDate() + add);
+		return date.toISOString().split('T')[0]; 
 	}
 
 	public static isFunctionString(str: string): boolean {
