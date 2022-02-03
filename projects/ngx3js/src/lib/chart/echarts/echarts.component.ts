@@ -540,14 +540,14 @@ export class NgxTextureEChartsComponent
 			NgxThreeUtil.isNotNullEmpty(this.optionSeqn) &&
 			this._lastChartInfo.seqn !== this.optionSeqn
 		) {
-			this._chart.dispose();
+			this.echarts.dispose(this._chart);
 			this._lastChartInfo.seqn = this.optionSeqn;
 			this._chart = null;
 		}
 		if (this._chart === null) {
 			this._chart = this.echarts.init(this._mapCanvas);
 		}
-		this._chart.setOption(this._chartOption, true, false);
+		this._chart.setOption(this._chartOption, true, true);
 		this._chart.resize({
 			width: this._mapCanvasSize.x,
 			height: this._mapCanvasSize.y,
@@ -573,21 +573,21 @@ export class NgxTextureEChartsComponent
 			}
 			if (this._chart !== null) {
 				this.echarts.dispose(this._chart);
+				this._chart = null;
 			}
-			const mapCanvas =
-				(this._mapCanvas =
-				this._mapCanvas =
-					document.createElement('canvas'));
+			const mapCanvas = this._mapCanvas = document.createElement('canvas');
 			this._mapCanvasSize = new N3JS.Vector2(
 				this.canvasSize,
 				Math.round((this.canvasSize * this.height) / this.width)
 			);
 			mapCanvas.width = this._mapCanvasSize.x;
 			mapCanvas.height = this._mapCanvasSize.y;
+			mapCanvas.style.position = 'absolute';
+			mapCanvas.style.left = '0';
+			mapCanvas.style.top = '0';
 			mapCanvas.style.pointerEvents = 'none';
 			mapCanvas.style.display = 'none';
 			document.body.append(mapCanvas);
-			this._chart = null;
 			this.texture = new N3JS.CanvasTexture(this._mapCanvas);
 			this.synkMaterial(this.texture);
 			super.setObject(this.texture);
