@@ -1,6 +1,6 @@
 {
   "name": "ngx3js-module",
-  "version": "0.136.0-2022013016",
+  "version": "0.137.5-2022020309",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "rxjs": "^6.6.7",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.4",
-    "three": "0.136.0"
+    "three": "0.137.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.0.3",
@@ -52,7 +52,7 @@
     "ng-packagr": "^12.2.5",
     "typedoc": "^0.22.8",
     "typescript": "~4.3.5",
-    "@types/three": "0.136.1"
+    "@types/three": "0.137.0"
   },
   "keywords": [
     "three",
