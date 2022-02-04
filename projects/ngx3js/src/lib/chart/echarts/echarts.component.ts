@@ -304,6 +304,23 @@ export class NgxTextureEChartsComponent
 
 	/**
 	 * Checks series option
+	 * @param axisOptions
+	 */
+	 private checkToolboxOption(toolbox: any) {
+		if (NgxThreeUtil.isNotNull(toolbox.feature)) {
+			const feature: any = toolbox.feature;
+			if (NgxThreeUtil.isNotNull(feature.saveAsImage)) {
+				delete feature.saveAsImage;
+			}
+			if (NgxThreeUtil.isNotNull(feature.dataView)) {
+				delete feature.dataView;
+			}
+		}
+	}
+	
+
+	/**
+	 * Checks series option
 	 * @param seriesOptions
 	 */
 	private checkSeriesOption(seriesOptions: any) {
@@ -519,15 +536,12 @@ export class NgxTextureEChartsComponent
 			}
 		}
 		if (NgxThreeUtil.isNotNull(this._chartOption.toolbox)) {
-			const toolbox: any = this._chartOption.toolbox;
-			if (NgxThreeUtil.isNotNull(toolbox.feature)) {
-				const feature: any = toolbox.feature;
-				if (NgxThreeUtil.isNotNull(feature.saveAsImage)) {
-					delete feature.saveAsImage;
-				}
-				if (NgxThreeUtil.isNotNull(feature.dataView)) {
-					delete feature.dataView;
-				}
+			if (Array.isArray(this._chartOption.toolbox)) {
+				this._chartOption.toolbox.forEach((toolbox) => {
+					this.checkToolboxOption(toolbox);
+				});
+			} else {
+				this.checkToolboxOption(this._chartOption.toolbox);
 			}
 		}
 		if (NgxThreeUtil.isNotNullEmpty(this.canvasBackground)) {
@@ -702,6 +716,9 @@ export class NgxTextureEChartsComponent
 			}
 			if (NgxThreeUtil.isNotNull(sharedVar.updateAxisPointer) && typeof sharedVar.updateAxisPointer === 'function') {
 				this._chart.on('updateAxisPointer', sharedVar.updateAxisPointer);
+			}
+			if (NgxThreeUtil.isNotNull(sharedVar.brushSelected) && typeof sharedVar.brushSelected === 'function') {
+				this._chart.on('brushSelected', sharedVar.brushSelected);
 			}
 		}
 		this.texture.needsUpdate = true;
