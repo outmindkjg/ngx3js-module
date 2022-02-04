@@ -88,6 +88,10 @@ export class NgxTextureEChartsComponent
 		if (this._mapCanvas !== null) {
 			this._mapCanvas.parentNode.removeChild(this._mapCanvas);
 		}
+		if (this._lastChartInfo.setInterval !== null) {
+			window.clearInterval(this._lastChartInfo.setInterval);
+			this._lastChartInfo.setInterval = null;
+		}
 		if (this._chart !== null) {
 			this.echarts.dispose(this._chart);
 		}
@@ -254,6 +258,9 @@ export class NgxTextureEChartsComponent
 	 * @param tooltipOptions
 	 */
 	 private checkTooltipOption(tooltipOptions: any) {
+		if (NgxThreeUtil.isNull(tooltipOptions.renderMode)) {
+			tooltipOptions.renderMode = 'richText';
+		}
 		if (NgxThreeUtil.isNotNullEmpty(tooltipOptions.position)) {
 			tooltipOptions.position = this.checkScriptOption(
 				tooltipOptions.position
@@ -263,6 +270,9 @@ export class NgxTextureEChartsComponent
 			tooltipOptions.formatter = this.checkScriptOption(
 				tooltipOptions.formatter
 			);
+			if (typeof tooltipOptions.formatter === 'string') {
+				tooltipOptions.formatter = tooltipOptions.formatter.replace(/<br\/>|<br \/>|<br>/i,'\n');	
+			}
 		}
 	}
 
@@ -327,6 +337,14 @@ export class NgxTextureEChartsComponent
 				}
 			});
 		}
+		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.endLabel)) {
+			const endLabel = seriesOptions.endLabel;
+			if (NgxThreeUtil.isNotNullEmpty(endLabel.formatter)) {
+				endLabel.formatter = this.checkScriptOption(
+					endLabel.formatter
+				);
+			}
+		}
 	}
 
 	/**
@@ -364,7 +382,7 @@ export class NgxTextureEChartsComponent
 	 */
 	private checkEvalString(str: string): any {
 		return ChartUtils.getString2Function(str, {
-			Chart : this.echarts,
+			echarts : this.echarts,
 			THREE : N3JS,
 			Utils : ChartUtils,
 			sharedVar : this._sharedVar || {},
@@ -416,10 +434,12 @@ export class NgxTextureEChartsComponent
 		url: string;
 		seqn: string;
 		background: any;
+		setInterval : any;
 	} = {
 		url: null,
 		seqn: null,
 		background: null,
+		setInterval : null
 	};
 
 	private initChart() {
@@ -448,6 +468,10 @@ export class NgxTextureEChartsComponent
 		if (mapResource.length > 0) {
 			this.checkMapResource(mapResource);
 			return;
+		}
+		if (this._lastChartInfo.setInterval !== null) {
+			window.clearInterval(this._lastChartInfo.setInterval);
+			this._lastChartInfo.setInterval = null;
 		}
 		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar)) {
 			Object.entries(this._chartOption.sharedVar).forEach(([key, value]) => {
@@ -492,6 +516,18 @@ export class NgxTextureEChartsComponent
 				});
 			} else {
 				this.checkAxisOption(this._chartOption.yAxis);
+			}
+		}
+		if (NgxThreeUtil.isNotNull(this._chartOption.toolbox)) {
+			const toolbox: any = this._chartOption.toolbox;
+			if (NgxThreeUtil.isNotNull(toolbox.feature)) {
+				const feature: any = toolbox.feature;
+				if (NgxThreeUtil.isNotNull(feature.saveAsImage)) {
+					delete feature.saveAsImage;
+				}
+				if (NgxThreeUtil.isNotNull(feature.dataView)) {
+					delete feature.dataView;
+				}
 			}
 		}
 		if (NgxThreeUtil.isNotNullEmpty(this.canvasBackground)) {
@@ -572,7 +608,6 @@ export class NgxTextureEChartsComponent
 				}
 			});
 		}
-
 		if (
 			NgxThreeUtil.isNotNull(this._chartOption.actions) &&
 			Array.isArray(this._chartOption.actions)
@@ -594,9 +629,15 @@ export class NgxTextureEChartsComponent
 				}
 				if (typeof actions.handler === 'function') {
 					const handler = actions.handler;
-					actions.onclick = () => {
-						handler(this._chart);
-					};
+					if (NgxThreeUtil.isNotNull(actions.value)) {
+						actions.change = () => {
+							handler(this._chart, actions.value);
+						};
+					} else {
+						actions.onclick = () => {
+							handler(this._chart);
+						};
+					}
 				} else if (
 					typeof actions.handler !== 'object' ||
 					NgxThreeUtil.isNull(actions.property)
@@ -618,13 +659,57 @@ export class NgxTextureEChartsComponent
 		if (this._chart === null) {
 			this._chart = this.echarts.init(this._mapCanvas);
 		}
-		this._chart.setOption(this._chartOption, true, true);
+		this._sharedVar.myChart = this._chart;
+		if (NgxThreeUtil.isNotNull(this._chartOption.animationDuration)) {
+			this._chart.setOption({}, true);
+			this.getTimeout(500).then(() => {
+				this._chart.setOption(this._chartOption);
+			});
+		} else {
+			this._chart.setOption(this._chartOption, true, false);
+		}
 		this._chart.resize({
 			width: this._mapCanvasSize.x,
 			height: this._mapCanvasSize.y,
 		});
+		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar)) {
+			const sharedVar = this._chartOption.sharedVar;
+			if (NgxThreeUtil.isNotNull(sharedVar.zrClick) || NgxThreeUtil.isNotNull(sharedVar.zrMousemove)) { 
+				const zr = this._chart.getZr();
+				if (NgxThreeUtil.isNotNull(sharedVar.zrClick) && typeof sharedVar.zrClick === 'function') {
+					const zrClick = sharedVar.zrClick;
+					zr.on('click', (params : any) => {
+						zrClick(params, this._chart);
+					})
+				}
+				if (NgxThreeUtil.isNotNull(sharedVar.zrMousemove) && typeof sharedVar.zrMousemove === 'function') {
+					const zrMousemove = sharedVar.zrMousemove;
+					zr.on('mousemove', (params : any) => {
+						zrMousemove(params, this._chart);
+					})
+				}
+			}
+			if (NgxThreeUtil.isNotNull(sharedVar.graphic) && typeof sharedVar.graphic === 'function') {
+				this.getTimeout().then(() => {
+					sharedVar.graphic();
+				})
+			}
+			if (NgxThreeUtil.isNotNull(sharedVar.click) && typeof sharedVar.click === 'function') {
+				this._chart.on('click', sharedVar.click);
+			}
+			if (NgxThreeUtil.isNotNull(sharedVar.dataZoom) && typeof sharedVar.dataZoom === 'function') {
+				this._chart.on('dataZoom', sharedVar.dataZoom);
+			}
+			if (NgxThreeUtil.isNotNull(sharedVar.updateAxisPointer) && typeof sharedVar.updateAxisPointer === 'function') {
+				this._chart.on('updateAxisPointer', sharedVar.updateAxisPointer);
+			}
+		}
 		this.texture.needsUpdate = true;
 		this.onInitChart.emit(this._chart);
+		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.setInterval) && typeof this._chartOption.sharedVar?.setInterval === 'function') {
+			this._lastChartInfo.setInterval = this._chartOption.sharedVar?.setInterval(this._chart);
+		}
+
 	}
 
 	public getChart(): ECHARTS.ECharts {

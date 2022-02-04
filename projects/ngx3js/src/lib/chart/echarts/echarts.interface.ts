@@ -362,6 +362,9 @@ export interface ECharts {
 	 * Disposes instance. Once disposed, the instance can not be used again.
 	 */
 	dispose(): void;
+
+	getZr() : any;
+	
 }
 
 export type TypedArray =

@@ -90,6 +90,10 @@ export class NgxTextureChartJsComponent
 		if (this._mapCanvas !== null) {
 			this._mapCanvas.parentNode.removeChild(this._mapCanvas);
 		}
+		if (this._lastChartInfo.setInterval !== null) {
+			window.clearInterval(this._lastChartInfo.setInterval);
+			this._lastChartInfo.setInterval = null;
+		}
 		if (this._chart !== null) {
 			this._chart.destroy();
 		}
@@ -332,10 +336,12 @@ export class NgxTextureChartJsComponent
 		url: string;
 		seqn: string;
 		background: any;
+		setInterval : any;
 	} = {
 		url: null,
 		seqn: null,
 		background: null,
+		setInterval : null
 	};
 
 	private changeCanvasBackground() {
@@ -445,6 +451,10 @@ export class NgxTextureChartJsComponent
 		this._chartOption.options = Object.assign(this._chartOption.options || {}, {
 			responsive: false,
 		});
+		if (this._lastChartInfo.setInterval !== null) {
+			window.clearInterval(this._lastChartInfo.setInterval);
+			this._lastChartInfo.setInterval = null;
+		}
 		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar)) {
 			Object.entries(this._chartOption.sharedVar).forEach(([key, value]) => {
 				let sharedValue = value;
@@ -683,6 +693,9 @@ export class NgxTextureChartJsComponent
 		}
 		this.texture.needsUpdate = true;
 		this.onInitChart.emit(this._chart);
+		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.setInterval) && typeof this._chartOption.sharedVar?.setInterval === 'function') {
+			this._lastChartInfo.setInterval = this._chartOption.sharedVar?.setInterval(this._chart);
+		}
 	}
 
 	public getChart(): CHARTJS.Chart {

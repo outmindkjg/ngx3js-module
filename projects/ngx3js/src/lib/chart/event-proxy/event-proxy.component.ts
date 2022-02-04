@@ -1,12 +1,8 @@
 import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 
-import {
-	I3JS,
-	N3JS,
-	NgxThreeUtil
-} from '../../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
 
-import {  IRendererEvent, IRendererTimer } from './../../ngx-interface';
+import { IRendererEvent, IRendererTimer } from './../../ngx-interface';
 import { NgxAbstractObject3dComponent } from './../../object3d.abstract';
 import { NgxAbstractRendererEventComponent } from './../../renderer-event.abstract';
 import { NgxAbstractRendererUpdateComponent } from './../../renderer-update.abstract';
@@ -49,13 +45,10 @@ import { NgxAbstractSubscribeComponent } from './../../subscribe.abstract';
 		},
 	],
 })
-export class NgxEventProxyComponent
-	extends NgxAbstractObject3dComponent
-	implements OnInit
-{
-	public eventTypes: string[] = ['pointermove', 'click'];
+export class NgxEventProxyComponent extends NgxAbstractObject3dComponent implements OnInit {
+	public eventTypes: string[] = ['pointermove', 'pointerdown', 'pointerup', 'click'];
 
-	@Input() public lookatCamera : boolean = false;
+	@Input() public lookatCamera: boolean = false;
 
 	/**
 	 * Creates an instance of mesh component.
@@ -112,14 +105,21 @@ export class NgxEventProxyComponent
 			this._parentMesh = parent as I3JS.Mesh;
 			this._parentMaterial = this._parentMesh.material as any;
 			this._parentGeometry = this._parentMesh.geometry;
-			const parentMaterial : any = this._parentMaterial;
+			const parentMaterial: any = this._parentMaterial;
 			const canvasMap = parentMaterial.map;
 			this.setCanvasTexture(canvasMap);
-			this.subscribeRefer('canvasMap', NgxThreeUtil.getSubscribe(canvasMap, () => {
-				const parentMaterial : any = this._parentMaterial;
-				const canvasMap = parentMaterial.map;
-				this.setCanvasTexture(canvasMap);
-			}, 'loaded'))
+			this.subscribeRefer(
+				'canvasMap',
+				NgxThreeUtil.getSubscribe(
+					canvasMap,
+					() => {
+						const parentMaterial: any = this._parentMaterial;
+						const canvasMap = parentMaterial.map;
+						this.setCanvasTexture(canvasMap);
+					},
+					'loaded'
+				)
+			);
 			return true;
 		}
 		return false;
@@ -127,16 +127,16 @@ export class NgxEventProxyComponent
 
 	/**
 	 * Sets canvas texture
-	 * 
-	 * @param map 
+	 *
+	 * @param map
 	 */
-	private setCanvasTexture(map : I3JS.CanvasTexture) {
+	private setCanvasTexture(map: I3JS.CanvasTexture) {
 		if (NgxThreeUtil.isNotNull(map)) {
 			this._parentTexture = map;
 			this._parentTextureCanvas = this._parentTexture.image;
 			const width = parseInt(this._parentTextureCanvas.style.width) || this._parentTextureCanvas.width;
 			const height = parseInt(this._parentTextureCanvas.style.height) || this._parentTextureCanvas.height;
-			this._mapCanvasSize = new N3JS.Vector2(width,height);
+			this._mapCanvasSize = new N3JS.Vector2(width, height);
 		}
 	}
 
@@ -145,7 +145,7 @@ export class NgxEventProxyComponent
 	private _parentGeometry: I3JS.BufferGeometry = null;
 	private _parentTexture: I3JS.Texture = null;
 	private _parentTextureCanvas: HTMLCanvasElement = null;
-	private _mapCanvasSize : I3JS.Vector2 = null;
+	private _mapCanvasSize: I3JS.Vector2 = null;
 
 	/**
 	 * Applys changes3d
@@ -196,10 +196,7 @@ export class NgxEventProxyComponent
 	 * @param [mouse]
 	 * @returns raycaster
 	 */
-	public getRaycaster(
-		mouse: I3JS.Vector2 = null,
-		camera: I3JS.Camera = null
-	): I3JS.Raycaster {
+	public getRaycaster(mouse: I3JS.Vector2 = null, camera: I3JS.Camera = null): I3JS.Raycaster {
 		if (this.raycaster === null) {
 			this.raycaster = new N3JS.Raycaster();
 		}
@@ -255,17 +252,12 @@ export class NgxEventProxyComponent
 
 	/**
 	 * Gets virtual event
-	 * 
-	 * @param renderEvent 
-	 * @returns virtual event 
+	 *
+	 * @param renderEvent
+	 * @returns virtual event
 	 */
 	protected getVirtualEvent(renderEvent: IRendererEvent): MouseEvent {
-		const intersectMove = this.getIntersection(
-			renderEvent.mouse,
-			this._parentMesh,
-			false,
-			renderEvent.mainCamera
-		);
+		const intersectMove = this.getIntersection(renderEvent.mouse, this._parentMesh, false, renderEvent.mainCamera);
 		if (intersectMove !== null) {
 			const uv = intersectMove.uv;
 			this._parentTexture.transformUv(uv);
@@ -273,8 +265,19 @@ export class NgxEventProxyComponent
 			switch (renderEvent.type) {
 				case 'click':
 					break;
+				case 'pointerup':
+					eventType = 'mouseup';
+					break;
+				case 'pointerdown':
+					eventType = 'mousedown';
+					renderEvent.event.stopPropagation();
+					renderEvent.event.stopImmediatePropagation();
+					break;
 				case 'pointermove':
 					eventType = 'mousemove';
+					break;
+				case 'pointerleave':
+					eventType = 'mouseleave';
 					break;
 			}
 			uv.multiply(this._mapCanvasSize);
@@ -288,23 +291,20 @@ export class NgxEventProxyComponent
 
 	/**
 	 * Updates event
-	 * 
-	 * @param renderEvent 
+	 *
+	 * @param renderEvent
 	 */
 	public updateEvent(renderEvent: IRendererEvent) {
 		if (this._parentTextureCanvas !== null) {
 			switch (renderEvent.type) {
 				case 'click':
 				case 'pointerleave':
-					const virtualEventClick = this.getVirtualEvent(renderEvent);
-					if (virtualEventClick !== null) {
-						this._parentTextureCanvas.dispatchEvent(virtualEventClick);
-					}
-					break;
+				case 'pointerdown':
+				case 'pointerup':
 				case 'pointermove':
-					const virtualEventMove = this.getVirtualEvent(renderEvent);
-					if (virtualEventMove !== null) {
-						this._parentTextureCanvas.dispatchEvent(virtualEventMove);
+					const virtualEvent = this.getVirtualEvent(renderEvent);
+					if (virtualEvent !== null) {
+						this._parentTextureCanvas.dispatchEvent(virtualEvent);
 					}
 					break;
 			}
@@ -313,8 +313,8 @@ export class NgxEventProxyComponent
 
 	/**
 	 * Updates ngx event proxy component
-	 * 
-	 * @param renderTimer 
+	 *
+	 * @param renderTimer
 	 */
 	public update(renderTimer: IRendererTimer) {
 		if (this._parentTexture !== null) {

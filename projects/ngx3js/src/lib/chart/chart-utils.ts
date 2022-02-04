@@ -16,9 +16,11 @@ export interface ChartAction {
 	handler?: string | Function | Object;
 	onclick?: Function;
 	property?: string;
+	value? : any;
 	select?: any[] | { [key: string]: any };
 	min?: number;
 	max?: number;
+	step?: number;
 	listen?: boolean;
 	change?: any;
 }
@@ -345,7 +347,7 @@ export class ChartUtils {
 	}
 
 	public static isObjectString(str: string): boolean {
-		return /^\{/.test(str) && /\}$/.test(str);
+		return /^\{/.test(str) && /'"[a-zA-Z0-9_]+"[ ]*:'/.test(str) && /\}$/.test(str);
 	}
 
 	public static isCallableString(str: string): boolean {
