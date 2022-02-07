@@ -617,6 +617,18 @@ export class NgxTextureEChartsComponent
 				this.checkTooltipOption(this._chartOption.tooltip);
 			}
 		}
+		if (NgxThreeUtil.isNotNull(this._chartOption.baseOption)) {
+			const baseOption = this._chartOption.baseOption;
+			if (NgxThreeUtil.isNotNull(baseOption.tooltip)) {
+				if (Array.isArray(baseOption.tooltip)) {
+					baseOption.tooltip.forEach((tooltip : any) => {
+						this.checkTooltipOption(tooltip);
+					});
+				} else {
+					this.checkTooltipOption(baseOption.tooltip);
+				}
+			}
+		}
 		if (NgxThreeUtil.isNotNull(this._chartOption.xAxis)) {
 			if (Array.isArray(this._chartOption.xAxis)) {
 				this._chartOption.xAxis.forEach((xAxis) => {
