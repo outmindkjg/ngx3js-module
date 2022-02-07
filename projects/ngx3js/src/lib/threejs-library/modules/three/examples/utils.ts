@@ -2,7 +2,7 @@ import * as O3JS_BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeomet
 import * as O3JS_CameraUtils from 'three/examples/jsm/utils/CameraUtils';
 import * as O3JS_GeometryCompressionUtils from 'three/examples/jsm/utils/GeometryCompressionUtils';
 import * as O3JS_GeometryUtils from 'three/examples/jsm/utils/GeometryUtils';
-import { RoughnessMipmapper as O3JS_RoughnessMipmapper } from 'three/examples/jsm/utils/RoughnessMipmapper';
+// import { RoughnessMipmapper as O3JS_RoughnessMipmapper } from 'three/examples/jsm/utils/RoughnessMipmapper';
 import * as O3JS_SceneUtils from 'three/examples/jsm/utils/SceneUtils';
 import { ShadowMapViewer as O3JS_ShadowMapViewer } from 'three/examples/jsm/utils/ShadowMapViewer';
 import * as O3JS_SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils';
@@ -15,8 +15,8 @@ export const CameraUtils: CameraUtils = O3JS_CameraUtils as any;
 export type GeometryCompressionUtils = I3JS.GeometryCompressionUtils;
 export const GeometryCompressionUtils: GeometryCompressionUtils = O3JS_GeometryCompressionUtils as any;
 
-export type RoughnessMipmapper = I3JS.RoughnessMipmapper;
-export const RoughnessMipmapper: RoughnessMipmapper = O3JS_RoughnessMipmapper as any;
+// export type RoughnessMipmapper = I3JS.RoughnessMipmapper;
+// export const RoughnessMipmapper: RoughnessMipmapper = O3JS_RoughnessMipmapper as any;
 
 export type SceneUtils = I3JS.SceneUtils;
 export const SceneUtils: SceneUtils = O3JS_SceneUtils as any;

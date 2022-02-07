@@ -1,6 +1,6 @@
 
-import { WEBGL as O3JS_WEBGL } from 'three/examples/jsm/WebGL';
-import { WEBGL as I3JS_WEBGL } from '../../../types/three/examples/index';
+// import { WEBGL as O3JS_WEBGL } from 'three/examples/jsm/WebGL';
+// import { WEBGL as I3JS_WEBGL } from '../../../types/three/examples/index';
 
 export * from './animation';
 export * from './cameras';
@@ -29,8 +29,8 @@ export * from './shaders';
 export * from './utils';
 export * from './webxr';
 
-export type WEBGL = I3JS_WEBGL;
-export const WEBGL: WEBGL = O3JS_WEBGL as any;
+// export type WEBGL = I3JS_WEBGL;
+// export const WEBGL: WEBGL = O3JS_WEBGL as any;
 
 /*
 node_modules/three/examples/jsm/animation
