@@ -288,6 +288,19 @@ export class NgxTextureEChartsComponent
 					axisLabel.formatter
 				);
 			}
+			if (NgxThreeUtil.isNotNullEmpty(axisLabel.rich)) {
+				const rich: { [key: string]: any } = axisLabel.rich;
+				Object.entries(rich).forEach(([key, value]) => {
+					if (
+						typeof value === 'object' &&
+						NgxThreeUtil.isNotNullEmpty(value.backgroundColor)
+					) {
+						value.backgroundColor = this.checkTextureOption(
+							value.backgroundColor
+						);
+					}
+				});
+			}
 		}
 		if (NgxThreeUtil.isNotNullEmpty(axisOptions.axisPointer)) {
 			const axisPointer = axisOptions.axisPointer;
@@ -329,13 +342,39 @@ export class NgxTextureEChartsComponent
 				seriesOptions.renderItem
 			);
 		}
+		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.animationDelay)) {
+			seriesOptions.animationDelay = this.checkScriptOption(
+				seriesOptions.animationDelay
+			);
+		}
+		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.symbolSize)) {
+			seriesOptions.symbolSize = this.checkScriptOption(
+				seriesOptions.symbolSize
+			);
+		}
+		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.emphasis)) {
+			const emphasis = seriesOptions.emphasis;
+			if (NgxThreeUtil.isNotNullEmpty(emphasis.label)) {
+				const label = emphasis.label;
+				if (NgxThreeUtil.isNotNullEmpty(label.formatter)) {
+					label.formatter = this.checkScriptOption(
+						label.formatter
+					);
+				}
+			}
+		}
+		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.labelLayout)) {
+			seriesOptions.labelLayout = this.checkScriptOption(
+				seriesOptions.labelLayout
+			);
+		}
 		if (
 			NgxThreeUtil.isNotNullEmpty(seriesOptions.data) &&
 			Array.isArray(seriesOptions.data)
 		) {
 			seriesOptions.data.forEach((data : any) => {
 				if (
-					typeof data === 'object' &&
+					typeof data === 'object' && data !== null &&
 					data.label !== undefined &&
 					typeof data.label === 'object' &&
 					typeof data.label.rich === 'object'
@@ -354,11 +393,36 @@ export class NgxTextureEChartsComponent
 				}
 			});
 		}
+		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.universalTransition)) {
+			const universalTransition = seriesOptions.universalTransition;
+			if (NgxThreeUtil.isNotNullEmpty(universalTransition.delay)) {
+				universalTransition.delay = this.checkScriptOption(
+					universalTransition.delay
+				);
+			}
+		}
+		
+		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.label)) {
+			const label = seriesOptions.label;
+			if (NgxThreeUtil.isNotNullEmpty(label.formatter)) {
+				label.formatter = this.checkScriptOption(
+					label.formatter
+				);
+			}
+		}
 		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.endLabel)) {
 			const endLabel = seriesOptions.endLabel;
 			if (NgxThreeUtil.isNotNullEmpty(endLabel.formatter)) {
 				endLabel.formatter = this.checkScriptOption(
 					endLabel.formatter
+				);
+			}
+		}
+		if (NgxThreeUtil.isNotNullEmpty(seriesOptions.itemStyle)) {
+			const itemStyle = seriesOptions.itemStyle;
+			if (NgxThreeUtil.isNotNullEmpty(itemStyle.color)) {
+				itemStyle.color = this.checkScriptOption(
+					itemStyle.color
 				);
 			}
 		}
@@ -379,6 +443,11 @@ export class NgxTextureEChartsComponent
 					const image = new Image();
 					image.src = imageSrc;
 					textureOptions.image = image;
+				} else if (ChartUtils.isFunctionString(imageSrc)) {
+					const imageFunction = this.checkEvalString(imageSrc);
+					if (typeof imageFunction === 'function') {
+						textureOptions.image = imageFunction();
+					}
 				} else {
 					textureOptions.image = NgxThreeUtil.getStoreUrl(imageSrc);
 				}
@@ -499,15 +568,46 @@ export class NgxTextureEChartsComponent
 				this._sharedVar[key] = this._chartOption.sharedVar[key] = sharedValue;
 			});
 		}
+		let hasAnimation : boolean = false;
 		if (NgxThreeUtil.isNotNull(this._chartOption.series)) {
 			if (Array.isArray(this._chartOption.series)) {
 				this._chartOption.series.forEach((series) => {
 					this.checkSeriesOption(series);
+					if (NgxThreeUtil.isNotNull(series.animationType) || NgxThreeUtil.isNotNull(series.animationEasing) || NgxThreeUtil.isNotNull(series.animationDelay)) {
+						hasAnimation = true;
+					}
 				});
 			} else {
-				this.checkSeriesOption(this._chartOption.series);
+				const series = this._chartOption.series;
+				this.checkSeriesOption(series);
+				if (NgxThreeUtil.isNotNull(series.animationType) || NgxThreeUtil.isNotNull(series.animationEasing) || NgxThreeUtil.isNotNull(series.animationDelay)) {
+					hasAnimation = true;
+				}
 			}
 		}
+		if (NgxThreeUtil.isNotNull(this._chartOption.options)) {
+			if (Array.isArray(this._chartOption.options)) {
+				this._chartOption.options.forEach((options) => {
+					if (NgxThreeUtil.isNotNull(options.series)) {
+						if (Array.isArray(options.series)) {
+							options.series.forEach((series : any) => {
+								this.checkSeriesOption(series);
+								if (NgxThreeUtil.isNotNull(series.animationType) || NgxThreeUtil.isNotNull(series.animationEasing) || NgxThreeUtil.isNotNull(series.animationDelay)) {
+									hasAnimation = true;
+								}
+							});
+						} else {
+							const series = options.series;
+							this.checkSeriesOption(series);
+							if (NgxThreeUtil.isNotNull(series.animationType) || NgxThreeUtil.isNotNull(series.animationEasing) || NgxThreeUtil.isNotNull(series.animationDelay)) {
+								hasAnimation = true;
+							}
+						}
+					}
+				});
+			}
+		}
+
 		if (NgxThreeUtil.isNotNull(this._chartOption.tooltip)) {
 			if (Array.isArray(this._chartOption.tooltip)) {
 				this._chartOption.tooltip.forEach((tooltip) => {
@@ -544,7 +644,12 @@ export class NgxTextureEChartsComponent
 				this.checkToolboxOption(this._chartOption.toolbox);
 			}
 		}
-		if (NgxThreeUtil.isNotNullEmpty(this.canvasBackground)) {
+		if (NgxThreeUtil.isNotNull(this._chartOption.animationDelayUpdate)) {
+			this._chartOption.animationDelayUpdate = this.checkScriptOption(
+				this._chartOption.animationDelayUpdate
+			);
+		}
+		if (NgxThreeUtil.isNotNullEmpty(this.canvasBackground) && NgxThreeUtil.isNull(this._chartOption.backgroundColor)) {
 			const backgroundColor = NgxThreeUtil.getColorAlphaSafe(
 				this.canvasBackground,
 				this.canvasBackgroundOpacity
@@ -674,7 +779,7 @@ export class NgxTextureEChartsComponent
 			this._chart = this.echarts.init(this._mapCanvas);
 		}
 		this._sharedVar.myChart = this._chart;
-		if (NgxThreeUtil.isNotNull(this._chartOption.animationDuration)) {
+		if (hasAnimation || NgxThreeUtil.isNotNull(this._chartOption.animationDuration) || NgxThreeUtil.isNotNull(this._chartOption.animationDelayUpdate) || NgxThreeUtil.isNotNull(this._chartOption.animationEasing)) {
 			this._chart.setOption({}, true);
 			this.getTimeout(500).then(() => {
 				this._chart.setOption(this._chartOption);
@@ -726,7 +831,15 @@ export class NgxTextureEChartsComponent
 		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.setInterval) && typeof this._chartOption.sharedVar?.setInterval === 'function') {
 			this._lastChartInfo.setInterval = this._chartOption.sharedVar?.setInterval(this._chart);
 		}
-
+		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.onInit) && typeof this._chartOption.sharedVar?.onInit === 'function') {
+			this.getTimeout(600).then(() => {
+				this._chartOption.sharedVar?.onInit();
+			});
+		} else if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.setTimeout) && typeof this._chartOption.sharedVar?.setTimeout === 'function') {
+			this.getTimeout(600).then(() => {
+				this._chartOption.sharedVar?.setTimeout();
+			});
+		}
 	}
 
 	public getChart(): ECHARTS.ECharts {

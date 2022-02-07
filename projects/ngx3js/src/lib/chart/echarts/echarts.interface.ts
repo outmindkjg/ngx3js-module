@@ -726,6 +726,8 @@ export interface EChartOption {
 	 */
 	series?: any[] | any;
 
+	options? : any[] | any;
+	
 	/**
 	 * The color list of palette.
 	 * If no color is set in series, the colors would be adopted sequentially
