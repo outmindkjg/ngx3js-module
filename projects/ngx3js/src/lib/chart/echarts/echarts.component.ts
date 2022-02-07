@@ -213,27 +213,30 @@ export class NgxTextureEChartsComponent
 		geoOptions: any,
 		mapResource: ECHARTS.EChartsMapResource[]
 	) {
-		if (NgxThreeUtil.isNotNull(geoOptions) && Array.isArray(geoOptions)) {
-			geoOptions.forEach((geo: any) => {
-				if (
-					NgxThreeUtil.isNotNull(geo.map) &&
-					typeof geo.map === 'object' &&
-					NgxThreeUtil.isNotNull(geo.map.url)
-				) {
-					if (this.echarts.getMap(geo.map.name) !== null) {
-						geo.map = geo.map.name;
-					} else {
-						mapResource.push({
-							name: geo.map.name,
-							url: geo.map.url,
-							type: 'map',
-							parent: geo,
-							key: 'map',
-							loaded: false,
-						});
-					}
+		if (NgxThreeUtil.isNotNull(geoOptions)) {
+			if (Array.isArray(geoOptions)) {
+				geoOptions.forEach(geo => {
+					this.checkGeoOption(geo, mapResource);
+				});
+			} else if (
+					NgxThreeUtil.isNotNull(geoOptions) &&
+					NgxThreeUtil.isNotNull(geoOptions.map) &&
+					typeof geoOptions.map === 'object' &&
+					NgxThreeUtil.isNotNull(geoOptions.map.url)
+			) {
+				if (this.echarts.getMap(geoOptions.map.name) !== null) {
+					geoOptions.map = geoOptions.map.name;
+				} else {
+					mapResource.push({
+						name: geoOptions.map.name,
+						url: geoOptions.map.url,
+						type: 'map',
+						parent: geoOptions,
+						key: 'map',
+						loaded: false,
+					});
 				}
-			});
+			}
 		}
 	}
 
@@ -836,6 +839,15 @@ export class NgxTextureEChartsComponent
 			}
 			if (NgxThreeUtil.isNotNull(sharedVar.brushSelected) && typeof sharedVar.brushSelected === 'function') {
 				this._chart.on('brushSelected', sharedVar.brushSelected);
+			}
+			if (NgxThreeUtil.isNotNull(sharedVar.geoselectchanged) && typeof sharedVar.geoselectchanged === 'function') {
+				this._chart.on('geoselectchanged', sharedVar.geoselectchanged);
+			}
+			if (NgxThreeUtil.isNotNull(sharedVar.mouseover) && typeof sharedVar.mouseover === 'function') {
+				sharedVar.mouseover();
+			}
+			if (NgxThreeUtil.isNotNull(sharedVar.mouseout) && typeof sharedVar.mouseout === 'function') {
+				sharedVar.mouseout();
 			}
 		}
 		this.texture.needsUpdate = true;
