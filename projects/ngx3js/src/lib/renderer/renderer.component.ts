@@ -828,6 +828,7 @@ export class NgxRendererComponent
 			timeRepeat: 0,
 			xy: new N3JS.Vector2(),
 		},
+		controls : [],
 		event: {},
 		renderer: null,
 		mainCamera: null,
@@ -1487,6 +1488,10 @@ export class NgxRendererComponent
 						break;
 					case 'control':
 						this.controls = this.getControls(this.cameraList, this.sceneList, this.canvasEle.nativeElement);
+						this.events.controls = [];
+						this.controls.forEach(controls => {
+							this.events.controls.push(controls.getControl());
+						})
 						break;
 					case 'tween':
 						if (this.golbalTweenList.length > 0) {

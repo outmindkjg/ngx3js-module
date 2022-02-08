@@ -50,6 +50,8 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 
 	@Input() public lookatCamera: boolean = false;
 
+	@Input() public useDrag: boolean = false;
+
 	/**
 	 * Creates an instance of mesh component.
 	 */
@@ -281,10 +283,10 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 					break;
 			}
 			uv.multiply(this._mapCanvasSize);
-			return new MouseEvent(eventType, {
+			return new MouseEvent(eventType, Object.assign({}, renderEvent.event, {
 				clientX: uv.x,
 				clientY: uv.y,
-			});
+			}));
 		}
 		return null;
 	}
@@ -297,10 +299,41 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 	public updateEvent(renderEvent: IRendererEvent) {
 		if (this._parentTextureCanvas !== null) {
 			switch (renderEvent.type) {
-				case 'click':
-				case 'pointerleave':
 				case 'pointerdown':
 				case 'pointerup':
+					if (this.useDrag) {
+						switch (renderEvent.type) {
+							case 'pointerdown' :
+								if (renderEvent.controls !== undefined && renderEvent.controls !== null && renderEvent.controls) {
+									renderEvent.controls.forEach(controls => {
+										if (controls._enabled !== undefined) {
+											controls.enabled = controls._enabled;
+											delete controls._enabled;
+										}
+									});
+								}
+								break;
+						}
+						const virtualEvent = this.getVirtualEvent(renderEvent);
+						if (virtualEvent !== null) {
+							switch (renderEvent.type) {
+								case 'pointerdown' :
+									if (renderEvent.controls !== undefined && renderEvent.controls !== null && renderEvent.controls) {
+										renderEvent.controls.forEach(controls => {
+											if (controls.enabled) {
+												controls._enabled = controls.enabled;
+												controls.enabled = false;
+											}
+										});
+									}
+									break;
+							}
+							this._parentTextureCanvas.dispatchEvent(virtualEvent);
+						}
+					}
+					break;
+				case 'click':
+				case 'pointerleave':
 				case 'pointermove':
 					const virtualEvent = this.getVirtualEvent(renderEvent);
 					if (virtualEvent !== null) {
