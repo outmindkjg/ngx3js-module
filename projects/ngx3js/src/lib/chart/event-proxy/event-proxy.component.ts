@@ -48,6 +48,8 @@ import { NgxAbstractSubscribeComponent } from './../../subscribe.abstract';
 export class NgxEventProxyComponent extends NgxAbstractObject3dComponent implements OnInit {
 	public eventTypes: string[] = ['pointermove', 'pointerdown', 'pointerup', 'click'];
 
+	@Input() public type: string = 'echarts';
+
 	@Input() public lookatCamera: boolean = false;
 
 	@Input() public useDrag: boolean = false;
@@ -266,6 +268,12 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 			let eventType: string = renderEvent.type;
 			switch (renderEvent.type) {
 				case 'click':
+					switch(this.type.toLowerCase()) {
+						case 'echarts' :
+						case 'echart' :
+							eventType = 'mousedown';
+							break;
+					}
 					break;
 				case 'pointerup':
 					eventType = 'mouseup';
