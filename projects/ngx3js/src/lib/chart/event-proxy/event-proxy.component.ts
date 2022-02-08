@@ -268,12 +268,6 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 			let eventType: string = renderEvent.type;
 			switch (renderEvent.type) {
 				case 'click':
-					switch(this.type.toLowerCase()) {
-						case 'echarts' :
-						case 'echart' :
-							eventType = 'mouseup';
-							break;
-					}
 					break;
 				case 'pointerup':
 					eventType = 'mouseup';
