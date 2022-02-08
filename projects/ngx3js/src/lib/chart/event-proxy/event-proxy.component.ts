@@ -271,7 +271,7 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 					switch(this.type.toLowerCase()) {
 						case 'echarts' :
 						case 'echart' :
-							eventType = 'mousedown';
+							eventType = 'mouseup';
 							break;
 					}
 					break;
