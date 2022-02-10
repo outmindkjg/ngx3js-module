@@ -13,10 +13,11 @@ import {
 	NgxThreeUtil
 } from '../../interface';
 import { ChartUtils } from '../chart-utils';
-import { INgxColor } from './../../ngx-interface';
+import { INgxColor, IRendererTimer } from './../../ngx-interface';
 import { NgxAbstractSubscribeComponent } from './../../subscribe.abstract';
 import { NgxAbstractTextureComponent } from './../../texture.abstract';
 import * as CHARTJS from './chartjs.interface';
+import { NgxAbstractRendererUpdateComponent } from '../../renderer-update.abstract';
 
 /**
  * NgxTextureChartJsComponent
@@ -41,6 +42,10 @@ import * as CHARTJS from './chartjs.interface';
 			provide: NgxAbstractSubscribeComponent,
 			useExisting: forwardRef(() => NgxTextureChartJsComponent),
 		},
+		{
+			provide: NgxAbstractRendererUpdateComponent,
+			useExisting: forwardRef(() => NgxTextureChartJsComponent),
+		}		
 	],
 })
 export class NgxTextureChartJsComponent
@@ -737,6 +742,17 @@ export class NgxTextureChartJsComponent
 			super.setObject(this.texture);
 		}
 		return this.texture as T;
+	}
+
+	/**
+	 * Updates ngx event proxy component
+	 *
+	 * @param renderTimer
+	 */
+	 public update(_: IRendererTimer) {
+		if (this.texture !== null) {
+			this.texture.needsUpdate = true;
+		}
 	}
 
 	private _chart: CHARTJS.Chart = null;

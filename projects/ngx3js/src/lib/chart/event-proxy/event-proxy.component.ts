@@ -38,11 +38,7 @@ import { NgxAbstractSubscribeComponent } from './../../subscribe.abstract';
 		{
 			provide: NgxAbstractRendererEventComponent,
 			useExisting: forwardRef(() => NgxEventProxyComponent),
-		},
-		{
-			provide: NgxAbstractRendererUpdateComponent,
-			useExisting: forwardRef(() => NgxEventProxyComponent),
-		},
+		}
 	],
 })
 export class NgxEventProxyComponent extends NgxAbstractObject3dComponent implements OnInit {
@@ -274,8 +270,6 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 					break;
 				case 'pointerdown':
 					eventType = 'mousedown';
-					renderEvent.event.stopPropagation();
-					renderEvent.event.stopImmediatePropagation();
 					break;
 				case 'pointermove':
 					eventType = 'mousemove';
@@ -285,10 +279,12 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 					break;
 			}
 			uv.multiply(this._mapCanvasSize);
-			return new MouseEvent(eventType, Object.assign({}, renderEvent.event, {
-				clientX: uv.x,
-				clientY: uv.y,
-			}));
+			const event = new MouseEvent(eventType, {
+				clientX : uv.x ,
+				clientY : uv.y
+			});
+			this.consoleLogTime(eventType, event);
+			return event;
 		}
 		return null;
 	}
@@ -352,9 +348,6 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 	 * @param renderTimer
 	 */
 	public update(renderTimer: IRendererTimer) {
-		if (this._parentTexture !== null) {
-			this._parentTexture.needsUpdate = true;
-		}
 		if (this._parentMesh !== null && this.lookatCamera && renderTimer.event.mainCamera !== null) {
 			this._parentMesh.lookAt(renderTimer.event.mainCamera.position);
 		}

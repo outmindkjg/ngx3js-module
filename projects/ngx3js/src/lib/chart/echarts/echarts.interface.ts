@@ -959,9 +959,11 @@ export type EChartsMediaOption = {
 
 export interface EChartsMapResource{
 	url?: string;
+	json? : string;
 	name? : string;
 	parent? : { [ key : string] : string};
 	key? : string;
+	specialAreas? :any;
 	type? : string;
 	loaded ? : boolean;
 }

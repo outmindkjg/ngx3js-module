@@ -2012,7 +2012,7 @@ export class NgxRendererComponent
 		if (!this._isPaused) {
 			this._renderOnce();
 		}
-		requestAnimationFrame(this._renderCaller);
+		window.requestAnimationFrame(this._renderCaller);
 	}
 
 	/**

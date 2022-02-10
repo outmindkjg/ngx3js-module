@@ -5,13 +5,14 @@ import {
 	Output,
 	SimpleChanges
 } from '@angular/core';
+import { NgxAbstractRendererUpdateComponent } from '../../renderer-update.abstract';
 import {
 	I3JS,
 	N3JS,
 	NgxThreeUtil
 } from '../../interface';
 import { ChartUtils } from '../chart-utils';
-import { INgxColor } from './../../ngx-interface';
+import { INgxColor, IRendererTimer } from './../../ngx-interface';
 import { NgxAbstractSubscribeComponent } from './../../subscribe.abstract';
 import { NgxAbstractTextureComponent } from './../../texture.abstract';
 import * as ECHARTS from './echarts.interface';
@@ -39,6 +40,10 @@ import * as ECHARTS from './echarts.interface';
 			provide: NgxAbstractSubscribeComponent,
 			useExisting: forwardRef(() => NgxTextureEChartsComponent),
 		},
+		{
+			provide: NgxAbstractRendererUpdateComponent,
+			useExisting: forwardRef(() => NgxTextureEChartsComponent),
+		}		
 	],
 })
 export class NgxTextureEChartsComponent
@@ -204,6 +209,14 @@ export class NgxTextureEChartsComponent
 							}
 							this.checkMapResource(mapResource);
 						});
+					} else if (resource.url.endsWith('.json')) {
+						this.jsonFileLoad(resource.url, (json) => {
+							this.echarts.registerMap(resource.name, json, resource.specialAreas);
+							if (resource.parent && resource.key) {
+								resource.parent[resource.key] = resource.name;
+							}
+							this.checkMapResource(mapResource);
+						});
 					}
 					break;
 			}
@@ -212,6 +225,54 @@ export class NgxTextureEChartsComponent
 		}
 	}
 
+	/**
+	 * Checks map resource option
+	 * 
+	 * @param mapOptions 
+	 * @param mapResource 
+	 * @param [mapParent] 
+	 * @param [mapParentKey] 
+	 */
+	private checkMapResourceOption(
+		mapOptions: any,
+		mapResource: ECHARTS.EChartsMapResource[],
+		mapParent: any = null,
+		mapParentKey: string = null,
+		
+	) {
+		if (NgxThreeUtil.isNotNull(mapOptions)) {
+			if (Array.isArray(mapOptions)) {
+				mapOptions.forEach(map => {
+					if (NgxThreeUtil.isNotNull(map?.map)) {
+						this.checkMapResourceOption(map?.map, mapResource, map, 'map');
+					} else {
+						this.checkMapResourceOption(map, mapResource);
+					}
+				})
+			} else if (typeof mapOptions === 'object') {
+				if (NgxThreeUtil.isNotNull(mapOptions.json)) {
+					this.echarts.registerMap(mapOptions.name, mapOptions.json, mapOptions.specialAreas);
+				}
+				if (this.echarts.getMap(mapOptions.name) !== null) {
+					if (mapParent !== null) {
+						mapParent[mapParentKey] = mapOptions.name;
+					}
+				} else {
+					mapResource.push({
+						name: mapOptions.name,
+						url: mapOptions.url,
+						json : mapOptions.json,
+						specialAreas : mapOptions.specialAreas,
+						type: 'map',
+						parent: mapParent,
+						key: mapParentKey,
+						loaded: false,
+					});
+				}
+			}
+		}
+	}
+	
 	private checkGeoOption(
 		geoOptions: any,
 		mapResource: ECHARTS.EChartsMapResource[]
@@ -223,22 +284,9 @@ export class NgxTextureEChartsComponent
 				});
 			} else if (NgxThreeUtil.isNotNull(geoOptions)){
 				if (
-					NgxThreeUtil.isNotNull(geoOptions.map) &&
-					typeof geoOptions.map === 'object' &&
-					NgxThreeUtil.isNotNull(geoOptions.map.url)
+					NgxThreeUtil.isNotNull(geoOptions.map) && typeof geoOptions.map === 'object'
 				) {
-					if (this.echarts.getMap(geoOptions.map.name) !== null) {
-						geoOptions.map = geoOptions.map.name;
-					} else {
-						mapResource.push({
-							name: geoOptions.map.name,
-							url: geoOptions.map.url,
-							type: 'map',
-							parent: geoOptions,
-							key: 'map',
-							loaded: false,
-						});
-					}
+					this.checkMapResourceOption(geoOptions.map, mapResource, geoOptions, 'map');
 				}
 				if (NgxThreeUtil.isNotNull(geoOptions.tooltip)) {
 					this.checkTooltipOption(geoOptions.tooltip);
@@ -668,6 +716,12 @@ export class NgxTextureEChartsComponent
 		if (NgxThreeUtil.isNotNull(this._chartOption.geo3D)) {
 			this.checkGeoOption(this._chartOption.geo3D, mapResource);
 		}
+		if (NgxThreeUtil.isNotNull(this._chartOption.series)) {
+			this.checkMapResourceOption(this._chartOption.series, mapResource, this._chartOption.series, 'map')
+		}
+		if (NgxThreeUtil.isNotNull(this._chartOption?.sharedVar.registerMap)) {
+			this.checkMapResourceOption(this._chartOption?.sharedVar.registerMap, mapResource);
+		}
 		if (mapResource.length > 0) {
 			this.checkMapResource(mapResource);
 			return;
@@ -943,7 +997,6 @@ export class NgxTextureEChartsComponent
 			}
 			if (this._mapCanvasHolder === null) {
 				this._mapCanvasHolder = document.createElement('div');
-				// this._mapCanvasHolder.style.display = 'none';
 				this._mapCanvasHolder.style.width = '0px';
 				this._mapCanvasHolder.style.height = '0px';
 				this._mapCanvasHolder.style.overflow = 'hidden';
@@ -963,14 +1016,23 @@ export class NgxTextureEChartsComponent
 			mapCanvas.style.left = '0';
 			mapCanvas.style.top = '0';
 			mapCanvas.style.pointerEvents = 'none';
-			mapCanvas.style.display = 'none';
-			mapCanvas.style.visibility = 'none';
 			this._mapCanvasHolder.append(mapCanvas);
 			this.texture = new N3JS.CanvasTexture(this._mapCanvas);
 			this.synkMaterial(this.texture);
 			super.setObject(this.texture);
 		}
 		return this.texture as T;
+	}
+
+	/**
+	 * Updates ngx event proxy component
+	 *
+	 * @param renderTimer
+	 */
+	 public update(_: IRendererTimer) {
+		if (this.texture !== null) {
+			this.texture.needsUpdate = true;
+		}
 	}
 
 	private _chart: ECHARTS.ECharts = null;
