@@ -1,16 +1,6 @@
-import {
-	Component, EventEmitter, forwardRef,
-	Input,
-	OnInit,
-	Output,
-	SimpleChanges
-} from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NgxAbstractRendererUpdateComponent } from '../../renderer-update.abstract';
-import {
-	I3JS,
-	N3JS,
-	NgxThreeUtil
-} from '../../interface';
+import { I3JS, N3JS, NgxThreeUtil } from '../../interface';
 import { ChartUtils } from '../chart-utils';
 import { INgxColor, IRendererTimer } from './../../ngx-interface';
 import { NgxAbstractSubscribeComponent } from './../../subscribe.abstract';
@@ -43,23 +33,17 @@ import * as ECHARTS from './echarts.interface';
 		{
 			provide: NgxAbstractRendererUpdateComponent,
 			useExisting: forwardRef(() => NgxTextureEChartsComponent),
-		}		
+		},
 	],
 })
-export class NgxTextureEChartsComponent
-	extends NgxAbstractTextureComponent
-	implements OnInit
-{
+export class NgxTextureEChartsComponent extends NgxAbstractTextureComponent implements OnInit {
 	@Input() public echarts: ECHARTS.echarts = null;
 
-	@Input() public option:
-		| ECHARTS.EChartOption
-		| ECHARTS.EChartsResponsiveOption = {};
+	@Input() public option: ECHARTS.EChartOption | ECHARTS.EChartsResponsiveOption = {};
 
 	@Input() public optionSeqn: string = null;
 
-	@Output() public onInitChart: EventEmitter<ECHARTS.ECharts> =
-		new EventEmitter<ECHARTS.ECharts>();
+	@Output() public onInitChart: EventEmitter<ECHARTS.ECharts> = new EventEmitter<ECHARTS.ECharts>();
 
 	@Input() public width: number = 1;
 
@@ -142,12 +126,7 @@ export class NgxTextureEChartsComponent
 			if (
 				!NgxThreeUtil.isOnlyIndexOf(
 					changes,
-					[
-						'option',
-						'optionseqn',
-						'canvasbackground',
-						'canvasbackgroundopacity',
-					],
+					['option', 'optionseqn', 'canvasbackground', 'canvasbackgroundopacity'],
 					this.TEXTURE_ATTR
 				)
 			) {
@@ -157,14 +136,7 @@ export class NgxTextureEChartsComponent
 			if (NgxThreeUtil.isIndexOf(changes, 'init')) {
 				changes = NgxThreeUtil.pushUniq(changes, ['initchart']);
 			}
-			if (
-				NgxThreeUtil.isIndexOf(changes, [
-					'option',
-					'optionseqn',
-					'canvasbackground',
-					'canvasbackgroundopacity',
-				])
-			) {
+			if (NgxThreeUtil.isIndexOf(changes, ['option', 'optionseqn', 'canvasbackground', 'canvasbackgroundopacity'])) {
 				changes = NgxThreeUtil.pushUniq(changes, ['initchart']);
 			}
 			changes.forEach((change) => {
@@ -187,10 +159,7 @@ export class NgxTextureEChartsComponent
 	}
 
 	private binaryFileLoad(url: string, callBack: (data: any) => void) {
-		const fileLoader: I3JS.FileLoader = NgxThreeUtil.getLoader(
-			'fileLoader',
-			N3JS.FileLoader
-		);
+		const fileLoader: I3JS.FileLoader = NgxThreeUtil.getLoader('fileLoader', N3JS.FileLoader);
 		fileLoader.load(NgxThreeUtil.getStoreUrl(url), (text) => {
 			callBack(text);
 		});
@@ -201,23 +170,36 @@ export class NgxTextureEChartsComponent
 		if (resource !== null && resource !== undefined) {
 			switch (resource.type) {
 				case 'map':
-					if (resource.url.endsWith('.svg')) {
-						this.binaryFileLoad(resource.url, (svg) => {
-							this.echarts.registerMap(resource.name, { svg: svg });
-							if (resource.parent && resource.key) {
-								resource.parent[resource.key] = resource.name;
-							}
-							this.checkMapResource(mapResource);
-						});
-					} else if (resource.url.endsWith('.json')) {
-						this.jsonFileLoad(resource.url, (json) => {
-							this.echarts.registerMap(resource.name, json, resource.specialAreas);
-							if (resource.parent && resource.key) {
-								resource.parent[resource.key] = resource.name;
-							}
-							this.checkMapResource(mapResource);
-						});
+					if (NgxThreeUtil.isNotNullEmpty(resource.url)) {
+						if (resource.url.endsWith('.svg')) {
+							this.binaryFileLoad(resource.url, (svg) => {
+								this.echarts.registerMap(resource.name, { svg: svg });
+								if (resource.parent && resource.key) {
+									resource.parent[resource.key] = resource.name;
+								}
+								this.checkMapResource(mapResource);
+							});
+						} else if (resource.url.endsWith('.json')) {
+							this.jsonFileLoad(resource.url, (json) => {
+								this.echarts.registerMap(resource.name, json, resource.specialAreas);
+								if (resource.parent && resource.key) {
+									resource.parent[resource.key] = resource.name;
+								}
+								this.checkMapResource(mapResource);
+							});
+						}
+					} else if (NgxThreeUtil.isNotNullEmpty(resource.json)) {
+						this.echarts.registerMap(resource.name, resource.json, resource.specialAreas);
+						if (resource.parent && resource.key) {
+							resource.parent[resource.key] = resource.name;
+						}
+						this.checkMapResource(mapResource);
+					} else {
+						this.checkMapResource(mapResource);
 					}
+					break;
+				default:
+					this.checkMapResource(mapResource);
 					break;
 			}
 		} else {
@@ -227,28 +209,27 @@ export class NgxTextureEChartsComponent
 
 	/**
 	 * Checks map resource option
-	 * 
-	 * @param mapOptions 
-	 * @param mapResource 
-	 * @param [mapParent] 
-	 * @param [mapParentKey] 
+	 *
+	 * @param mapOptions
+	 * @param mapResource
+	 * @param [mapParent]
+	 * @param [mapParentKey]
 	 */
 	private checkMapResourceOption(
 		mapOptions: any,
 		mapResource: ECHARTS.EChartsMapResource[],
 		mapParent: any = null,
-		mapParentKey: string = null,
-		
+		mapParentKey: string = null
 	) {
 		if (NgxThreeUtil.isNotNull(mapOptions)) {
 			if (Array.isArray(mapOptions)) {
-				mapOptions.forEach(map => {
+				mapOptions.forEach((map) => {
 					if (NgxThreeUtil.isNotNull(map?.map)) {
 						this.checkMapResourceOption(map?.map, mapResource, map, 'map');
 					} else {
 						this.checkMapResourceOption(map, mapResource);
 					}
-				})
+				});
 			} else if (typeof mapOptions === 'object') {
 				if (NgxThreeUtil.isNotNull(mapOptions.json)) {
 					this.echarts.registerMap(mapOptions.name, mapOptions.json, mapOptions.specialAreas);
@@ -257,12 +238,12 @@ export class NgxTextureEChartsComponent
 					if (mapParent !== null) {
 						mapParent[mapParentKey] = mapOptions.name;
 					}
-				} else {
+				} else if (NgxThreeUtil.isNotNull(mapOptions.url)) {
 					mapResource.push({
 						name: mapOptions.name,
 						url: mapOptions.url,
-						json : mapOptions.json,
-						specialAreas : mapOptions.specialAreas,
+						json: mapOptions.json,
+						specialAreas: mapOptions.specialAreas,
 						type: 'map',
 						parent: mapParent,
 						key: mapParentKey,
@@ -272,26 +253,20 @@ export class NgxTextureEChartsComponent
 			}
 		}
 	}
-	
-	private checkGeoOption(
-		geoOptions: any,
-		mapResource: ECHARTS.EChartsMapResource[]
-	) {
+
+	private checkGeoOption(geoOptions: any, mapResource: ECHARTS.EChartsMapResource[]) {
 		if (NgxThreeUtil.isNotNull(geoOptions)) {
 			if (Array.isArray(geoOptions)) {
-				geoOptions.forEach(geo => {
+				geoOptions.forEach((geo) => {
 					this.checkGeoOption(geo, mapResource);
 				});
-			} else if (NgxThreeUtil.isNotNull(geoOptions)){
-				if (
-					NgxThreeUtil.isNotNull(geoOptions.map) && typeof geoOptions.map === 'object'
-				) {
+			} else if (NgxThreeUtil.isNotNull(geoOptions)) {
+				if (NgxThreeUtil.isNotNull(geoOptions.map) && typeof geoOptions.map === 'object') {
 					this.checkMapResourceOption(geoOptions.map, mapResource, geoOptions, 'map');
 				}
 				if (NgxThreeUtil.isNotNull(geoOptions.tooltip)) {
 					this.checkTooltipOption(geoOptions.tooltip);
 				}
-					
 			}
 		}
 	}
@@ -306,9 +281,7 @@ export class NgxTextureEChartsComponent
 			NgxThreeUtil.isNotNull(lightOptions.ambientCubemap) &&
 			NgxThreeUtil.isNotNullEmpty(lightOptions.ambientCubemap.texture)
 		) {
-			lightOptions.ambientCubemap.texture = this.checkTextureOption(
-				lightOptions.ambientCubemap.texture
-			);
+			lightOptions.ambientCubemap.texture = this.checkTextureOption(lightOptions.ambientCubemap.texture);
 		}
 	}
 
@@ -316,7 +289,7 @@ export class NgxTextureEChartsComponent
 	 * Checks series option
 	 * @param tooltipOptions
 	 */
-	 private checkTooltipOption(tooltipOptions: any) {
+	private checkTooltipOption(tooltipOptions: any) {
 		if (NgxThreeUtil.isNotNull(tooltipOptions)) {
 			if (Array.isArray(tooltipOptions)) {
 				tooltipOptions.forEach((tooltip) => {
@@ -327,9 +300,7 @@ export class NgxTextureEChartsComponent
 					tooltipOptions.renderMode = 'richText';
 				}
 				if (NgxThreeUtil.isNotNullEmpty(tooltipOptions.position)) {
-					tooltipOptions.position = this.checkScriptOption(
-						tooltipOptions.position
-					);
+					tooltipOptions.position = this.checkScriptOption(tooltipOptions.position);
 				}
 				this.checkFormatterOption(tooltipOptions);
 			}
@@ -340,10 +311,10 @@ export class NgxTextureEChartsComponent
 	 * Checks series option
 	 * @param axisOptions
 	 */
-	 private checkAxisOption(axisOptions: any) {
+	private checkAxisOption(axisOptions: any) {
 		if (NgxThreeUtil.isNotNull(axisOptions)) {
 			if (Array.isArray(axisOptions)) {
-				axisOptions.forEach(axis => {
+				axisOptions.forEach((axis) => {
 					this.checkAxisOption(axis);
 				});
 			} else {
@@ -366,10 +337,10 @@ export class NgxTextureEChartsComponent
 	 * Checks series option
 	 * @param axisOptions
 	 */
-	 private checkToolboxOption(toolboxOptions: any) {
+	private checkToolboxOption(toolboxOptions: any) {
 		if (NgxThreeUtil.isNotNull(toolboxOptions)) {
 			if (Array.isArray(toolboxOptions)) {
-				toolboxOptions.forEach(toolbox => {
+				toolboxOptions.forEach((toolbox) => {
 					this.checkToolboxOption(toolbox);
 				});
 			} else {
@@ -385,42 +356,35 @@ export class NgxTextureEChartsComponent
 			}
 		}
 	}
-	
+
 	/**
 	 * Checks series option
 	 * @param seriesOptions
 	 */
-	 private checkFormatterOption(formatterOptions: any) {
+	private checkFormatterOption(formatterOptions: any) {
 		if (NgxThreeUtil.isNotNull(formatterOptions)) {
 			if (Array.isArray(formatterOptions)) {
-				formatterOptions.forEach(formatter => {
+				formatterOptions.forEach((formatter) => {
 					this.checkFormatterOption(formatter);
 				});
 			} else {
 				if (NgxThreeUtil.isNotNullEmpty(formatterOptions.formatter)) {
 					if (typeof formatterOptions.formatter === 'string') {
-						formatterOptions.formatter = formatterOptions.formatter.replace(/<br\/>|<br \/>|<br>/i,'\n');	
+						formatterOptions.formatter = formatterOptions.formatter.replace(/<br\/>|<br \/>|<br>/i, '\n');
 					}
-					formatterOptions.formatter = this.checkScriptOption(
-						formatterOptions.formatter
-					);
+					formatterOptions.formatter = this.checkScriptOption(formatterOptions.formatter);
 				}
 				if (NgxThreeUtil.isNotNullEmpty(formatterOptions.rich)) {
 					const rich: { [key: string]: any } = formatterOptions.rich;
 					Object.entries(rich).forEach(([key, value]) => {
-						if (
-							typeof value === 'object' &&
-							NgxThreeUtil.isNotNullEmpty(value.backgroundColor)
-						) {
-							value.backgroundColor = this.checkTextureOption(
-								value.backgroundColor
-							);
+						if (typeof value === 'object' && NgxThreeUtil.isNotNullEmpty(value.backgroundColor)) {
+							value.backgroundColor = this.checkTextureOption(value.backgroundColor);
 						}
 					});
 				}
 			}
 		}
-	 }
+	}
 
 	/**
 	 * Checks series option
@@ -436,19 +400,13 @@ export class NgxTextureEChartsComponent
 				seriesOptions.roam = false;
 			}
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.renderItem)) {
-				seriesOptions.renderItem = this.checkScriptOption(
-					seriesOptions.renderItem
-				);
+				seriesOptions.renderItem = this.checkScriptOption(seriesOptions.renderItem);
 			}
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.animationDelay)) {
-				seriesOptions.animationDelay = this.checkScriptOption(
-					seriesOptions.animationDelay
-				);
+				seriesOptions.animationDelay = this.checkScriptOption(seriesOptions.animationDelay);
 			}
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.symbolSize)) {
-				seriesOptions.symbolSize = this.checkScriptOption(
-					seriesOptions.symbolSize
-				);
+				seriesOptions.symbolSize = this.checkScriptOption(seriesOptions.symbolSize);
 			}
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.emphasis)) {
 				const emphasis = seriesOptions.emphasis;
@@ -458,9 +416,7 @@ export class NgxTextureEChartsComponent
 				}
 			}
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.labelLayout)) {
-				seriesOptions.labelLayout = this.checkScriptOption(
-					seriesOptions.labelLayout
-				);
+				seriesOptions.labelLayout = this.checkScriptOption(seriesOptions.labelLayout);
 			}
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.tooltip)) {
 				const tooltip = seriesOptions.tooltip;
@@ -481,23 +437,16 @@ export class NgxTextureEChartsComponent
 					this.checkFormatterOption(tooltip);
 				}
 			}
-			if (
-				NgxThreeUtil.isNotNullEmpty(seriesOptions.data) &&
-				Array.isArray(seriesOptions.data)
-			) {
-				seriesOptions.data.forEach((data : any) => {
-					if (
-						typeof data === 'object' && data !== null
-					) {
+			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.data) && Array.isArray(seriesOptions.data)) {
+				seriesOptions.data.forEach((data: any) => {
+					if (typeof data === 'object' && data !== null) {
 						if (data.label !== undefined && typeof data.label === 'object') {
 							const label = data.label;
 							this.checkFormatterOption(label);
 						}
 						if (NgxThreeUtil.isNotNullEmpty(data.animationDelay)) {
-							data.animationDelay = this.checkScriptOption(
-								data.animationDelay
-							);
-							this._lastChartInfo.hasAnimation = true;	
+							data.animationDelay = this.checkScriptOption(data.animationDelay);
+							this._lastChartInfo.hasAnimation = true;
 						}
 					}
 				});
@@ -505,12 +454,10 @@ export class NgxTextureEChartsComponent
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.universalTransition)) {
 				const universalTransition = seriesOptions.universalTransition;
 				if (NgxThreeUtil.isNotNullEmpty(universalTransition.delay)) {
-					universalTransition.delay = this.checkScriptOption(
-						universalTransition.delay
-					);
+					universalTransition.delay = this.checkScriptOption(universalTransition.delay);
 				}
 			}
-			
+
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.label)) {
 				const label = seriesOptions.label;
 				this.checkFormatterOption(label);
@@ -522,15 +469,21 @@ export class NgxTextureEChartsComponent
 			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.itemStyle)) {
 				const itemStyle = seriesOptions.itemStyle;
 				if (NgxThreeUtil.isNotNullEmpty(itemStyle.color)) {
-					itemStyle.color = this.checkScriptOption(
-						itemStyle.color
-					);
+					itemStyle.color = this.checkScriptOption(itemStyle.color);
 				}
 			}
-			if (NgxThreeUtil.isNotNullEmpty(seriesOptions.axisLabel) || NgxThreeUtil.isNotNullEmpty(seriesOptions.axisPointer)) {
+			if (
+				NgxThreeUtil.isNotNullEmpty(seriesOptions.axisLabel) ||
+				NgxThreeUtil.isNotNullEmpty(seriesOptions.axisPointer)
+			) {
 				this.checkAxisOption(seriesOptions);
 			}
-			if (NgxThreeUtil.isNotNull(seriesOptions.animationType) || NgxThreeUtil.isNotNull(seriesOptions.animationEasing) || NgxThreeUtil.isNotNull(seriesOptions.animationDelay) || NgxThreeUtil.isNotNull(seriesOptions.animationDurationUpdate)) {
+			if (
+				NgxThreeUtil.isNotNull(seriesOptions.animationType) ||
+				NgxThreeUtil.isNotNull(seriesOptions.animationEasing) ||
+				NgxThreeUtil.isNotNull(seriesOptions.animationDelay) ||
+				NgxThreeUtil.isNotNull(seriesOptions.animationDurationUpdate)
+			) {
 				this._lastChartInfo.hasAnimation = true;
 			}
 		}
@@ -542,10 +495,7 @@ export class NgxTextureEChartsComponent
 	 */
 	private checkTextureOption(textureOptions: any) {
 		if (NgxThreeUtil.isNotNullEmpty(textureOptions)) {
-			if (
-				typeof textureOptions === 'object' &&
-				typeof textureOptions.image === 'string'
-			) {
+			if (typeof textureOptions === 'object' && typeof textureOptions.image === 'string') {
 				const imageSrc: string = textureOptions.image;
 				if (imageSrc.startsWith('data:')) {
 					const image = new Image();
@@ -569,24 +519,23 @@ export class NgxTextureEChartsComponent
 	private checkGrid3DOption(grid3DOptions: any) {
 		if (NgxThreeUtil.isNotNull(grid3DOptions)) {
 			if (Array.isArray(grid3DOptions)) {
-				grid3DOptions.forEach(grid3D => {
+				grid3DOptions.forEach((grid3D) => {
 					this.checkGrid3DOption(grid3D);
-				})
+				});
 			} else {
 				if (NgxThreeUtil.isNotNull(grid3DOptions.light)) {
 					this.checkLightOption(grid3DOptions.light);
 				}
 			}
 		}
-
 	}
 
 	private checkGlobeOption(globeOptions: any) {
 		if (NgxThreeUtil.isNotNull(globeOptions)) {
 			if (Array.isArray(globeOptions)) {
-				globeOptions.forEach(globe => {
+				globeOptions.forEach((globe) => {
 					this.checkGlobeOption(globe);
-				})
+				});
 			} else {
 				if (NgxThreeUtil.isNotNull(globeOptions.environment)) {
 					globeOptions.environment = this.checkTextureOption(globeOptions.environment);
@@ -598,22 +547,20 @@ export class NgxTextureEChartsComponent
 					globeOptions.baseTexture = this.checkTextureOption(globeOptions.baseTexture);
 				}
 				if (NgxThreeUtil.isNotNull(globeOptions.displacementTexture)) {
-					globeOptions.displacementTexture = this.checkTextureOption(
-						globeOptions.displacementTexture
-					);
+					globeOptions.displacementTexture = this.checkTextureOption(globeOptions.displacementTexture);
 				}
 				if (NgxThreeUtil.isNotNull(globeOptions.light)) {
 					this.checkLightOption(globeOptions.light);
 				}
 				if (NgxThreeUtil.isNotNull(globeOptions.layers)) {
 					if (Array.isArray(globeOptions.layers)) {
-						globeOptions.layers.forEach((layer : any) => {
+						globeOptions.layers.forEach((layer: any) => {
 							if (NgxThreeUtil.isNotNull(layer.texture)) {
 								layer.texture = this.checkTextureOption(layer.texture);
 							}
 						});
 					}
-				}				
+				}
 			}
 		}
 	}
@@ -628,10 +575,10 @@ export class NgxTextureEChartsComponent
 	 */
 	private checkEvalString(str: string): any {
 		return ChartUtils.getString2Function(str, {
-			echarts : this.echarts,
-			THREE : N3JS,
-			Utils : ChartUtils,
-			sharedVar : this._sharedVar || {},
+			echarts: this.echarts,
+			THREE: N3JS,
+			Utils: ChartUtils,
+			sharedVar: this._sharedVar || {},
 		});
 	}
 
@@ -649,10 +596,7 @@ export class NgxTextureEChartsComponent
 				if (ChartUtils.isFunctionString(scriptOptionsTrim)) {
 					scriptOptionsTrim = ChartUtils.getFunctionString(scriptOptionsTrim);
 					functionItem = this.checkEvalString(scriptOptionsTrim);
-					if (
-						typeof functionItem === 'function' ||
-						typeof functionItem === 'object'
-					) {
+					if (typeof functionItem === 'function' || typeof functionItem === 'object') {
 						return functionItem;
 					} else {
 						functionItem = null;
@@ -680,27 +624,22 @@ export class NgxTextureEChartsComponent
 		url: string;
 		seqn: string;
 		background: any;
-		setInterval : any;
-		hasAnimation : boolean;
+		setInterval: any;
+		hasAnimation: boolean;
 	} = {
 		url: null,
 		seqn: null,
 		background: null,
-		setInterval : null,
-		hasAnimation : false
+		setInterval: null,
+		hasAnimation: false,
 	};
-
-	
 
 	private initChart() {
 		if (NgxThreeUtil.isNull(this.echarts)) {
 			return;
 		}
 		this._chartOption = this.option || {};
-		if (
-			NgxThreeUtil.isNotNullEmpty(this._chartOption.url) &&
-			this._chartOption.url !== this._lastChartInfo.url
-		) {
+		if (NgxThreeUtil.isNotNullEmpty(this._chartOption.url) && this._chartOption.url !== this._lastChartInfo.url) {
 			this.jsonFileLoad(this._chartOption.url, (json) => {
 				this._lastChartInfo.url = this._chartOption.url;
 				Object.assign(this._chartOption, json);
@@ -717,7 +656,7 @@ export class NgxTextureEChartsComponent
 			this.checkGeoOption(this._chartOption.geo3D, mapResource);
 		}
 		if (NgxThreeUtil.isNotNull(this._chartOption.series)) {
-			this.checkMapResourceOption(this._chartOption.series, mapResource, this._chartOption.series, 'map')
+			this.checkMapResourceOption(this._chartOption.series, mapResource, this._chartOption.series, 'map');
 		}
 		if (NgxThreeUtil.isNotNull(this._chartOption?.sharedVar.registerMap)) {
 			this.checkMapResourceOption(this._chartOption?.sharedVar.registerMap, mapResource);
@@ -732,11 +671,11 @@ export class NgxTextureEChartsComponent
 		}
 		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar)) {
 			Object.entries(this._chartOption.sharedVar).forEach(([key, value]) => {
-				switch(key) {
-					case 'on' :
-						const sharedValueOn : Function[] = [];
+				switch (key) {
+					case 'on':
+						const sharedValueOn: Function[] = [];
 						if (Array.isArray(value)) {
-							value.forEach(onValue => {
+							value.forEach((onValue) => {
 								let sharedValue = onValue;
 								if (typeof sharedValue === 'string') {
 									sharedValue = this.checkScriptOption(sharedValue);
@@ -756,7 +695,7 @@ export class NgxTextureEChartsComponent
 						}
 						this._sharedVar.on = this._chartOption.sharedVar.on = sharedValueOn;
 						break;
-					default :
+					default:
 						let sharedValue = value;
 						if (typeof value === 'string') {
 							sharedValue = this.checkScriptOption(value);
@@ -798,26 +737,15 @@ export class NgxTextureEChartsComponent
 			this.checkToolboxOption(this._chartOption.toolbox);
 		}
 		if (NgxThreeUtil.isNotNull(this._chartOption.animationDelayUpdate)) {
-			this._chartOption.animationDelayUpdate = this.checkScriptOption(
-				this._chartOption.animationDelayUpdate
-			);
+			this._chartOption.animationDelayUpdate = this.checkScriptOption(this._chartOption.animationDelayUpdate);
 		}
 		if (NgxThreeUtil.isNotNullEmpty(this.canvasBackground) && NgxThreeUtil.isNull(this._chartOption.backgroundColor)) {
-			const backgroundColor = NgxThreeUtil.getColorAlphaSafe(
-				this.canvasBackground,
-				this.canvasBackgroundOpacity
-			);
+			const backgroundColor = NgxThreeUtil.getColorAlphaSafe(this.canvasBackground, this.canvasBackgroundOpacity);
 			if (NgxThreeUtil.isNotNull(backgroundColor)) {
 				let backgroundColorRgb: string = 'transparent';
 				if (backgroundColor instanceof N3JS.Color) {
 					backgroundColorRgb =
-						'rgb( ' +
-						backgroundColor.r * 255 +
-						', ' +
-						backgroundColor.g * 255 +
-						', ' +
-						backgroundColor.b * 255 +
-						')';
+						'rgb( ' + backgroundColor.r * 255 + ', ' + backgroundColor.g * 255 + ', ' + backgroundColor.b * 255 + ')';
 				} else {
 					backgroundColorRgb =
 						'rgba( ' +
@@ -837,27 +765,17 @@ export class NgxTextureEChartsComponent
 			this._chartOption.backgroundColor = this._lastChartInfo.background;
 		}
 		this.checkTextureOption(this._chartOption.backgroundColor);
-		if (
-			NgxThreeUtil.isNotNull(this._chartOption.globe)
-		) {
+		if (NgxThreeUtil.isNotNull(this._chartOption.globe)) {
 			this.checkGlobeOption(this._chartOption.globe);
 		}
-		if (
-			NgxThreeUtil.isNotNull(this._chartOption.grid3D)
-		) {
+		if (NgxThreeUtil.isNotNull(this._chartOption.grid3D)) {
 			this.checkGrid3DOption(this._chartOption.grid3D);
 		}
-		if (
-			NgxThreeUtil.isNotNull(this._chartOption.actions) &&
-			Array.isArray(this._chartOption.actions)
-		) {
+		if (NgxThreeUtil.isNotNull(this._chartOption.actions) && Array.isArray(this._chartOption.actions)) {
 			this._chartOption.actions.forEach((actions) => {
 				if (typeof actions.handler === 'string') {
 					actions.handler = this.checkScriptOption(actions.handler);
-					if (
-						typeof actions.handler === 'string' &&
-						actions.handler.startsWith('sharedVar')
-					) {
+					if (typeof actions.handler === 'string' && actions.handler.startsWith('sharedVar')) {
 						const [_, sharedKey] = (actions.handler + '.').split('.');
 						if (sharedKey !== null && sharedKey.length > 0) {
 							actions.handler = this._sharedVar[sharedKey] || {};
@@ -877,10 +795,7 @@ export class NgxTextureEChartsComponent
 							handler(this._chart);
 						};
 					}
-				} else if (
-					typeof actions.handler !== 'object' ||
-					NgxThreeUtil.isNull(actions.property)
-				) {
+				} else if (typeof actions.handler !== 'object' || NgxThreeUtil.isNull(actions.property)) {
 					actions.handler = null;
 					actions.onclick = null;
 				}
@@ -899,7 +814,13 @@ export class NgxTextureEChartsComponent
 			this._chart = this.echarts.init(this._mapCanvas);
 		}
 		this._sharedVar.myChart = this._chart;
-		if (this._lastChartInfo.hasAnimation || NgxThreeUtil.isNotNull(this._chartOption.globe) || NgxThreeUtil.isNotNull(this._chartOption.animationDuration) || NgxThreeUtil.isNotNull(this._chartOption.animationDelayUpdate) || NgxThreeUtil.isNotNull(this._chartOption.animationEasing)) {
+		if (
+			this._lastChartInfo.hasAnimation ||
+			NgxThreeUtil.isNotNull(this._chartOption.globe) ||
+			NgxThreeUtil.isNotNull(this._chartOption.animationDuration) ||
+			NgxThreeUtil.isNotNull(this._chartOption.animationDelayUpdate) ||
+			NgxThreeUtil.isNotNull(this._chartOption.animationEasing)
+		) {
 			this._chart.setOption({}, true);
 			this.getTimeout(500).then(() => {
 				this._chart.setOption(this._chartOption);
@@ -913,25 +834,25 @@ export class NgxTextureEChartsComponent
 		});
 		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar)) {
 			const sharedVar = this._chartOption.sharedVar;
-			if (NgxThreeUtil.isNotNull(sharedVar.zrClick) || NgxThreeUtil.isNotNull(sharedVar.zrMousemove)) { 
+			if (NgxThreeUtil.isNotNull(sharedVar.zrClick) || NgxThreeUtil.isNotNull(sharedVar.zrMousemove)) {
 				const zr = this._chart.getZr();
 				if (NgxThreeUtil.isNotNull(sharedVar.zrClick) && typeof sharedVar.zrClick === 'function') {
 					const zrClick = sharedVar.zrClick;
-					zr.on('click', (params : any) => {
+					zr.on('click', (params: any) => {
 						zrClick(params, this._chart);
-					})
+					});
 				}
 				if (NgxThreeUtil.isNotNull(sharedVar.zrMousemove) && typeof sharedVar.zrMousemove === 'function') {
 					const zrMousemove = sharedVar.zrMousemove;
-					zr.on('mousemove', (params : any) => {
+					zr.on('mousemove', (params: any) => {
 						zrMousemove(params, this._chart);
-					})
+					});
 				}
 			}
 			if (NgxThreeUtil.isNotNull(sharedVar.graphic) && typeof sharedVar.graphic === 'function') {
 				this.getTimeout().then(() => {
 					sharedVar.graphic();
-				})
+				});
 			}
 			if (NgxThreeUtil.isNotNull(sharedVar.click) && typeof sharedVar.click === 'function') {
 				this._chart.on('click', sharedVar.click);
@@ -955,21 +876,30 @@ export class NgxTextureEChartsComponent
 				sharedVar.mouseout();
 			}
 			if (NgxThreeUtil.isNotNull(sharedVar.on) && Array.isArray(sharedVar.on)) {
-				sharedVar.on.forEach(onfun => {
+				sharedVar.on.forEach((onfun) => {
 					onfun(this._chart);
 				});
 			}
 		}
 		this.texture.needsUpdate = true;
 		this.onInitChart.emit(this._chart);
-		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.setInterval) && typeof this._chartOption.sharedVar?.setInterval === 'function') {
+		if (
+			NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.setInterval) &&
+			typeof this._chartOption.sharedVar?.setInterval === 'function'
+		) {
 			this._lastChartInfo.setInterval = this._chartOption.sharedVar?.setInterval(this._chart);
 		}
-		if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.onInit) && typeof this._chartOption.sharedVar?.onInit === 'function') {
+		if (
+			NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.onInit) &&
+			typeof this._chartOption.sharedVar?.onInit === 'function'
+		) {
 			this.getTimeout(600).then(() => {
 				this._chartOption.sharedVar?.onInit(this._chart);
 			});
-		} else if (NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.setTimeout) && typeof this._chartOption.sharedVar?.setTimeout === 'function') {
+		} else if (
+			NgxThreeUtil.isNotNull(this._chartOption.sharedVar?.setTimeout) &&
+			typeof this._chartOption.sharedVar?.setTimeout === 'function'
+		) {
 			this.getTimeout(600).then(() => {
 				this._chartOption.sharedVar?.setTimeout(this._chart);
 			});
@@ -1005,11 +935,8 @@ export class NgxTextureEChartsComponent
 				this._mapCanvasHolder.style.top = '0px';
 				document.body.append(this._mapCanvasHolder);
 			}
-			const mapCanvas = this._mapCanvas = document.createElement('canvas');
-			this._mapCanvasSize = new N3JS.Vector2(
-				this.canvasSize,
-				Math.round((this.canvasSize * this.height) / this.width)
-			);
+			const mapCanvas = (this._mapCanvas = document.createElement('canvas'));
+			this._mapCanvasSize = new N3JS.Vector2(this.canvasSize, Math.round((this.canvasSize * this.height) / this.width));
 			mapCanvas.width = this._mapCanvasSize.x;
 			mapCanvas.height = this._mapCanvasSize.y;
 			mapCanvas.style.position = 'absolute';
@@ -1029,15 +956,14 @@ export class NgxTextureEChartsComponent
 	 *
 	 * @param renderTimer
 	 */
-	 public update(_: IRendererTimer) {
+	public update(_: IRendererTimer) {
 		if (this.texture !== null) {
 			this.texture.needsUpdate = true;
 		}
 	}
 
 	private _chart: ECHARTS.ECharts = null;
-	private _chartOption: ECHARTS.EChartOption | ECHARTS.EChartsResponsiveOption =
-		{};
+	private _chartOption: ECHARTS.EChartOption | ECHARTS.EChartsResponsiveOption = {};
 	private _mapCanvasSize: I3JS.Vector2 = null;
 	private _mapCanvas: HTMLCanvasElement = null;
 	private _mapCanvasHolder: HTMLDivElement = null;
