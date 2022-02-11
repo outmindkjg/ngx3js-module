@@ -279,12 +279,10 @@ export class NgxEventProxyComponent extends NgxAbstractObject3dComponent impleme
 					break;
 			}
 			uv.multiply(this._mapCanvasSize);
-			const event = new MouseEvent(eventType, {
+			return new MouseEvent(eventType, {
 				clientX : uv.x ,
 				clientY : uv.y
 			});
-			this.consoleLogTime(eventType, event);
-			return event;
 		}
 		return null;
 	}
