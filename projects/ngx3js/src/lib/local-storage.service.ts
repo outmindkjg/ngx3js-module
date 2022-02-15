@@ -188,7 +188,7 @@ export class NgxLocalStorageService {
 			if (this.dracoExporter === null) {
 				this.dracoExporter = new N3JS.DRACOExporter();
 			}
-			// 
+			//
 			if (object instanceof N3JS.Mesh || object instanceof N3JS.Points) {
 				if ((window as any).DracoEncoderModule === undefined) {
 					console.log(
@@ -463,7 +463,7 @@ export class NgxLocalStorageService {
 	 */
 	private _getObjectFromKey(key: string, callBack: (mesh: ILoadedObject) => void, options: IStorageOption): void {
 		if (key.endsWith('.dae')) {
-			const colladaLoader : I3JS.ColladaLoader = NgxThreeUtil.getLoader('colladaLoader', N3JS.ColladaLoader);
+			const colladaLoader: I3JS.ColladaLoader = NgxThreeUtil.getLoader('colladaLoader', N3JS.ColladaLoader);
 			this.setLoaderWithOption(colladaLoader, options);
 			colladaLoader.load(key, (result) => {
 				callBack({
@@ -473,7 +473,7 @@ export class NgxLocalStorageService {
 				});
 			});
 		} else if (key.endsWith('.obj')) {
-			const objLoader : I3JS.OBJLoader = NgxThreeUtil.getLoader('objLoader', N3JS.OBJLoader);
+			const objLoader: I3JS.OBJLoader = NgxThreeUtil.getLoader('objLoader', N3JS.OBJLoader);
 			this.setLoaderWithOption(objLoader, options);
 			const materialUrl: string = options.material ? options.material : null;
 			if (materialUrl !== null && materialUrl.length > 0) {
@@ -512,7 +512,7 @@ export class NgxLocalStorageService {
 				);
 			}
 		} else if (key.endsWith('.mtl')) {
-			const mtlLoader : I3JS.MTLLoader = NgxThreeUtil.getLoader('mtlLoader', N3JS.MTLLoader);
+			const mtlLoader: I3JS.MTLLoader = NgxThreeUtil.getLoader('mtlLoader', N3JS.MTLLoader);
 			this.setLoaderWithOption(mtlLoader, options);
 			mtlLoader.load(
 				key,
@@ -527,7 +527,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.3ds')) {
-			const tdsLoader : I3JS.TDSLoader = NgxThreeUtil.getLoader('tdsLoader', N3JS.TDSLoader);
+			const tdsLoader: I3JS.TDSLoader = NgxThreeUtil.getLoader('tdsLoader', N3JS.TDSLoader);
 			this.setLoaderWithOption(tdsLoader, options);
 			tdsLoader.load(
 				key,
@@ -541,7 +541,11 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.tilt')) {
-			const tiltLoader : I3JS.TiltLoader = NgxThreeUtil.getLoader('tiltLoader', N3JS.TiltLoader, NgxThreeUtil.getStoreUrl(''));
+			const tiltLoader: I3JS.TiltLoader = NgxThreeUtil.getLoader(
+				'tiltLoader',
+				N3JS.TiltLoader,
+				NgxThreeUtil.getStoreUrl('')
+			);
 			this.setLoaderWithOption(tiltLoader, options);
 			tiltLoader.load(
 				key,
@@ -555,7 +559,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.amf')) {
-			const amfLoader : I3JS.AMFLoader = NgxThreeUtil.getLoader('amfLoader', N3JS.AMFLoader);
+			const amfLoader: I3JS.AMFLoader = NgxThreeUtil.getLoader('amfLoader', N3JS.AMFLoader);
 			this.setLoaderWithOption(amfLoader, options);
 			amfLoader.load(
 				key,
@@ -569,7 +573,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.vox')) {
-			const voxLoader : I3JS.VOXLoader = NgxThreeUtil.getLoader('voxLoader', N3JS.VOXLoader);
+			const voxLoader: I3JS.VOXLoader = NgxThreeUtil.getLoader('voxLoader', N3JS.VOXLoader);
 			this.setLoaderWithOption(voxLoader, options);
 			voxLoader.load(
 				key,
@@ -587,7 +591,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.exr')) {
-			const exrLoader : I3JS.EXRLoader = NgxThreeUtil.getLoader('exrLoader', N3JS.EXRLoader);
+			const exrLoader: I3JS.EXRLoader = NgxThreeUtil.getLoader('exrLoader', N3JS.EXRLoader);
 			this.setLoaderWithOption(exrLoader, options);
 			exrLoader.load(
 				key,
@@ -601,7 +605,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.pvr')) {
-			const pvrLoader : I3JS.PVRLoader = NgxThreeUtil.getLoader('pvrLoader', N3JS.PVRLoader);
+			const pvrLoader: I3JS.PVRLoader = NgxThreeUtil.getLoader('pvrLoader', N3JS.PVRLoader);
 			this.setLoaderWithOption(pvrLoader, options);
 			pvrLoader.load(
 				key,
@@ -615,7 +619,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.hdr')) {
-			const rgbeLoader : I3JS.RGBELoader = NgxThreeUtil.getLoader('rgbeLoader', N3JS.RGBELoader);
+			const rgbeLoader: I3JS.RGBELoader = NgxThreeUtil.getLoader('rgbeLoader', N3JS.RGBELoader);
 			this.setLoaderWithOption(rgbeLoader, options);
 			rgbeLoader.load(
 				key,
@@ -629,7 +633,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.ktx')) {
-			const ktxLoader : I3JS.KTXLoader = NgxThreeUtil.getLoader('ktxLoader', N3JS.KTXLoader);
+			const ktxLoader: I3JS.KTXLoader = NgxThreeUtil.getLoader('ktxLoader', N3JS.KTXLoader);
 			this.setLoaderWithOption(ktxLoader, options);
 			ktxLoader.load(
 				key,
@@ -643,7 +647,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.ifc')) {
-			const ifcLoader : I3JS.IFCLoader = NgxThreeUtil.getLoader('ifcLoader', N3JS.IFCLoader);
+			const ifcLoader: I3JS.IFCLoader = NgxThreeUtil.getLoader('ifcLoader', N3JS.IFCLoader);
 			this.setLoaderWithOption(ifcLoader, options);
 			ifcLoader.load(
 				key,
@@ -657,7 +661,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.ktx2')) {
-			const ktx2Loader : I3JS.KTX2Loader = NgxThreeUtil.getLoader('ktx2Loader', N3JS.KTX2Loader);
+			const ktx2Loader: I3JS.KTX2Loader = NgxThreeUtil.getLoader('ktx2Loader', N3JS.KTX2Loader);
 			this.setLoaderWithOption(ktx2Loader, options);
 			ktx2Loader.loadAsync(key, this.onProgress).then((texture) => {
 				callBack({
@@ -666,7 +670,7 @@ export class NgxLocalStorageService {
 				});
 			});
 		} else if (key.endsWith('.dds')) {
-			const ddsLoader : I3JS.DDSLoader = NgxThreeUtil.getLoader('ddsLoader', N3JS.DDSLoader);
+			const ddsLoader: I3JS.DDSLoader = NgxThreeUtil.getLoader('ddsLoader', N3JS.DDSLoader);
 			this.setLoaderWithOption(ddsLoader, options);
 			ddsLoader.load(
 				key,
@@ -680,7 +684,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.bvh')) {
-			const bvhLoader : I3JS.BVHLoader = NgxThreeUtil.getLoader('bvhLoader', N3JS.BVHLoader);
+			const bvhLoader: I3JS.BVHLoader = NgxThreeUtil.getLoader('bvhLoader', N3JS.BVHLoader);
 			this.setLoaderWithOption(bvhLoader, options);
 			bvhLoader.load(
 				key,
@@ -699,7 +703,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.fbx')) {
-			const fbxLoader : I3JS.FBXLoader = NgxThreeUtil.getLoader('fbxLoader', N3JS.FBXLoader);
+			const fbxLoader: I3JS.FBXLoader = NgxThreeUtil.getLoader('fbxLoader', N3JS.FBXLoader);
 			this.setLoaderWithOption(fbxLoader, options);
 			fbxLoader.load(
 				key,
@@ -714,7 +718,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.kmz')) {
-			const kmzLoader : I3JS.KMZLoader = NgxThreeUtil.getLoader('kmzLoader', N3JS.KMZLoader);
+			const kmzLoader: I3JS.KMZLoader = NgxThreeUtil.getLoader('kmzLoader', N3JS.KMZLoader);
 			if (options.resourcePath) {
 				kmzLoader.setResourcePath(NgxThreeUtil.getStoreUrl(options.resourcePath));
 			}
@@ -730,7 +734,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.lwo')) {
-			const lwoLoader : I3JS.LWOLoader = NgxThreeUtil.getLoader('lwoLoader', N3JS.LWOLoader);
+			const lwoLoader: I3JS.LWOLoader = NgxThreeUtil.getLoader('lwoLoader', N3JS.LWOLoader);
 			if (options.resourcePath) {
 				lwoLoader.setResourcePath(NgxThreeUtil.getStoreUrl(options.resourcePath));
 			}
@@ -750,7 +754,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.mpd')) {
-			const lDrawLoader : I3JS.LDrawLoader = NgxThreeUtil.getLoader('lDrawLoader', N3JS.LDrawLoader);
+			const lDrawLoader: I3JS.LDrawLoader = NgxThreeUtil.getLoader('lDrawLoader', N3JS.LDrawLoader);
 			if (options.resourcePath) {
 				lDrawLoader.setResourcePath(NgxThreeUtil.getStoreUrl(options.resourcePath));
 			}
@@ -766,7 +770,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.gcode')) {
-			const gCodeLoader : I3JS.GCodeLoader = NgxThreeUtil.getLoader('gCodeLoader', N3JS.GCodeLoader);
+			const gCodeLoader: I3JS.GCodeLoader = NgxThreeUtil.getLoader('gCodeLoader', N3JS.GCodeLoader);
 			this.setLoaderWithOption(gCodeLoader, options);
 			gCodeLoader.load(
 				key,
@@ -781,7 +785,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.3mf')) {
-			const threeMFLoader : I3JS.ThreeMFLoader = NgxThreeUtil.getLoader('threeMFLoader', N3JS.ThreeMFLoader);
+			const threeMFLoader: I3JS.ThreeMFLoader = NgxThreeUtil.getLoader('threeMFLoader', N3JS.ThreeMFLoader);
 			this.setLoaderWithOption(threeMFLoader, options);
 			threeMFLoader.load(
 				key,
@@ -795,7 +799,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.3dm')) {
-			const rhino3dmLoader : I3JS.Rhino3dmLoader = NgxThreeUtil.getLoader('rhino3dmLoader', N3JS.Rhino3dmLoader);
+			const rhino3dmLoader: I3JS.Rhino3dmLoader = NgxThreeUtil.getLoader('rhino3dmLoader', N3JS.Rhino3dmLoader);
 			this.setLoaderWithOption(rhino3dmLoader, options);
 			rhino3dmLoader.load(key, (result) => {
 				callBack({
@@ -805,7 +809,10 @@ export class NgxLocalStorageService {
 				});
 			});
 		} else if (key.endsWith('.basis')) {
-			const basisTextureLoader : I3JS.BasisTextureLoader = NgxThreeUtil.getLoader('basisTextureLoader', N3JS.BasisTextureLoader);
+			const basisTextureLoader: I3JS.BasisTextureLoader = NgxThreeUtil.getLoader(
+				'basisTextureLoader',
+				N3JS.BasisTextureLoader
+			);
 			this.setLoaderWithOption(basisTextureLoader, options);
 			basisTextureLoader.load(
 				key,
@@ -819,7 +826,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.drc')) {
-			const dracoLoader : I3JS.DRACOLoader = NgxThreeUtil.getLoader('dracoLoader', N3JS.DRACOLoader);
+			const dracoLoader: I3JS.DRACOLoader = NgxThreeUtil.getLoader('dracoLoader', N3JS.DRACOLoader);
 			this.setLoaderWithOption(dracoLoader, options);
 			dracoLoader.load(
 				key,
@@ -833,14 +840,14 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.gltf') || key.endsWith('.glb')) {
-			const gltfLoader : I3JS.GLTFLoader = NgxThreeUtil.getLoader('gltfLoader', N3JS.GLTFLoader);
+			const gltfLoader: I3JS.GLTFLoader = NgxThreeUtil.getLoader('gltfLoader', N3JS.GLTFLoader);
 			if (options) {
 				if (options.useDraco) {
-					const dracoLoader : I3JS.DRACOLoader = NgxThreeUtil.getLoader('dracoLoader', N3JS.DRACOLoader);
+					const dracoLoader: I3JS.DRACOLoader = NgxThreeUtil.getLoader('dracoLoader', N3JS.DRACOLoader);
 					gltfLoader.setDRACOLoader(dracoLoader);
 				}
 				if (options.useKtx2) {
-					const ktx2Loader : I3JS.KTX2Loader = NgxThreeUtil.getLoader('ktx2Loader', N3JS.KTX2Loader);
+					const ktx2Loader: I3JS.KTX2Loader = NgxThreeUtil.getLoader('ktx2Loader', N3JS.KTX2Loader);
 					gltfLoader.setKTX2Loader(ktx2Loader);
 					gltfLoader.setMeshoptDecoder(N3JS.MeshoptDecoder);
 				}
@@ -852,14 +859,14 @@ export class NgxLocalStorageService {
 					callBack({
 						object: this.getStoreObject(result.scene, options),
 						clips: result.animations,
-						source : result
+						source: result,
 					});
 				},
 				this.onProgress,
 				this.onError
 			);
 		} else if (key.endsWith('.pmd') || key.endsWith('.pmx') || key.endsWith('.vmd') || key.endsWith('.vpd')) {
-			const mmdLoader : I3JS.MMDLoader = NgxThreeUtil.getLoader('mmdLoader', N3JS.MMDLoader);
+			const mmdLoader: I3JS.MMDLoader = NgxThreeUtil.getLoader('mmdLoader', N3JS.MMDLoader);
 			this.setLoaderWithOption(mmdLoader, options);
 			const vmdUrl = options && options.vmdUrl ? options.vmdUrl : null;
 			if (vmdUrl !== null) {
@@ -883,7 +890,7 @@ export class NgxLocalStorageService {
 							this.onProgress,
 							this.onError
 						);
-					})
+					});
 				} else {
 					mmdLoader.loadWithAnimation(
 						key,
@@ -932,7 +939,7 @@ export class NgxLocalStorageService {
 				);
 			}
 		} else if (key.endsWith('.pcd')) {
-			const pcdLoader : I3JS.PCDLoader = NgxThreeUtil.getLoader('pcdLoader', N3JS.PCDLoader);
+			const pcdLoader: I3JS.PCDLoader = NgxThreeUtil.getLoader('pcdLoader', N3JS.PCDLoader);
 			this.setLoaderWithOption(pcdLoader, options);
 			pcdLoader.load(
 				key,
@@ -946,7 +953,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.prwm')) {
-			const prwmLoader : I3JS.PRWMLoader = NgxThreeUtil.getLoader('prwmLoader', N3JS.PRWMLoader);
+			const prwmLoader: I3JS.PRWMLoader = NgxThreeUtil.getLoader('prwmLoader', N3JS.PRWMLoader);
 			this.setLoaderWithOption(prwmLoader, options);
 			prwmLoader.load(
 				key,
@@ -960,7 +967,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.tga')) {
-			const tgaLoader : I3JS.TGALoader = NgxThreeUtil.getLoader('tgaLoader', N3JS.TGALoader);
+			const tgaLoader: I3JS.TGALoader = NgxThreeUtil.getLoader('tgaLoader', N3JS.TGALoader);
 			this.setLoaderWithOption(tgaLoader, options);
 			tgaLoader.load(key, (texture) => {
 				callBack({
@@ -969,7 +976,7 @@ export class NgxLocalStorageService {
 				});
 			});
 		} else if (key.endsWith('.svg')) {
-			const svgLoader : I3JS.SVGLoader = NgxThreeUtil.getLoader('svgLoader', N3JS.SVGLoader);
+			const svgLoader: I3JS.SVGLoader = NgxThreeUtil.getLoader('svgLoader', N3JS.SVGLoader);
 			this.setLoaderWithOption(svgLoader, options);
 			svgLoader.load(
 				key,
@@ -1026,7 +1033,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.ply')) {
-			const plyLoader : I3JS.PLYLoader = NgxThreeUtil.getLoader('plyLoader', N3JS.PLYLoader);
+			const plyLoader: I3JS.PLYLoader = NgxThreeUtil.getLoader('plyLoader', N3JS.PLYLoader);
 			this.setLoaderWithOption(plyLoader, options);
 			plyLoader.load(
 				key,
@@ -1040,7 +1047,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.vtk') || key.endsWith('.vtp')) {
-			const vtkLoader : I3JS.VTKLoader = NgxThreeUtil.getLoader('vtkLoader', N3JS.VTKLoader);
+			const vtkLoader: I3JS.VTKLoader = NgxThreeUtil.getLoader('vtkLoader', N3JS.VTKLoader);
 			this.setLoaderWithOption(vtkLoader, options);
 			vtkLoader.load(
 				key,
@@ -1054,7 +1061,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.mdd')) {
-			const mddLoader : I3JS.MDDLoader = NgxThreeUtil.getLoader('mddLoader', N3JS.MDDLoader);
+			const mddLoader: I3JS.MDDLoader = NgxThreeUtil.getLoader('mddLoader', N3JS.MDDLoader);
 			this.setLoaderWithOption(mddLoader, options);
 			mddLoader.load(
 				key,
@@ -1069,7 +1076,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.nrrd')) {
-			const nrrdLoader : I3JS.NRRDLoader = NgxThreeUtil.getLoader('nrrdLoader', N3JS.NRRDLoader);
+			const nrrdLoader: I3JS.NRRDLoader = NgxThreeUtil.getLoader('nrrdLoader', N3JS.NRRDLoader);
 			nrrdLoader.load(
 				key,
 				(volume) => {
@@ -1139,7 +1146,7 @@ export class NgxLocalStorageService {
 				};
 				character.loadParts(options);
 			} else {
-				const md2Loader : I3JS.MD2Loader = NgxThreeUtil.getLoader('md2Loader', N3JS.MD2Loader);
+				const md2Loader: I3JS.MD2Loader = NgxThreeUtil.getLoader('md2Loader', N3JS.MD2Loader);
 				this.setLoaderWithOption(md2Loader, options);
 				md2Loader.load(
 					key,
@@ -1154,7 +1161,7 @@ export class NgxLocalStorageService {
 				);
 			}
 		} else if (key.endsWith('.pdb')) {
-			const pdbLoader : I3JS.PDBLoader = NgxThreeUtil.getLoader('pdbLoader', N3JS.PDBLoader);
+			const pdbLoader: I3JS.PDBLoader = NgxThreeUtil.getLoader('pdbLoader', N3JS.PDBLoader);
 			this.setLoaderWithOption(pdbLoader, options);
 			pdbLoader.load(
 				key,
@@ -1235,7 +1242,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.stl')) {
-			const stlLoader : I3JS.STLLoader = NgxThreeUtil.getLoader('stlLoader', N3JS.STLLoader);
+			const stlLoader: I3JS.STLLoader = NgxThreeUtil.getLoader('stlLoader', N3JS.STLLoader);
 			this.setLoaderWithOption(stlLoader, options);
 			stlLoader.load(
 				key,
@@ -1252,7 +1259,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.wrl')) {
-			const vrmlLoader : I3JS.VRMLLoader = NgxThreeUtil.getLoader('vrmlLoader', N3JS.VRMLLoader);
+			const vrmlLoader: I3JS.VRMLLoader = NgxThreeUtil.getLoader('vrmlLoader', N3JS.VRMLLoader);
 			this.setLoaderWithOption(vrmlLoader, options);
 			vrmlLoader.load(
 				key,
@@ -1266,7 +1273,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.xyz')) {
-			const xyzLoader : I3JS.XYZLoader = NgxThreeUtil.getLoader('xyzLoader', N3JS.XYZLoader);
+			const xyzLoader: I3JS.XYZLoader = NgxThreeUtil.getLoader('xyzLoader', N3JS.XYZLoader);
 			this.setLoaderWithOption(xyzLoader, options);
 			xyzLoader.load(
 				key,
@@ -1280,7 +1287,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.CUBE') || key.endsWith('.cube')) {
-			const lutCubeLoader : I3JS.LUTCubeLoader = NgxThreeUtil.getLoader('lutCubeLoader', N3JS.LUTCubeLoader);
+			const lutCubeLoader: I3JS.LUTCubeLoader = NgxThreeUtil.getLoader('lutCubeLoader', N3JS.LUTCubeLoader);
 			this.setLoaderWithOption(lutCubeLoader, options);
 			lutCubeLoader.load(
 				key,
@@ -1294,7 +1301,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.vrm')) {
-			const vrmLoader : I3JS.VRMLoader = NgxThreeUtil.getLoader('vrmLoader', N3JS.VRMLoader);
+			const vrmLoader: I3JS.VRMLoader = NgxThreeUtil.getLoader('vrmLoader', N3JS.VRMLoader);
 			this.setLoaderWithOption(vrmLoader, options);
 			vrmLoader.load(
 				key,
@@ -1335,7 +1342,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.png') || key.endsWith('.jpg') || key.endsWith('.jpeg')) {
-			const rgbmLoader : I3JS.RGBMLoader = NgxThreeUtil.getLoader('rgbmLoader', N3JS.RGBMLoader);
+			const rgbmLoader: I3JS.RGBMLoader = NgxThreeUtil.getLoader('rgbmLoader', N3JS.RGBMLoader);
 			this.setLoaderWithOption(rgbmLoader, options);
 			rgbmLoader.load(
 				key,
@@ -1349,7 +1356,7 @@ export class NgxLocalStorageService {
 				this.onError
 			);
 		} else if (key.endsWith('.tif')) {
-			const logLuvLoader : I3JS.LogLuvLoader = NgxThreeUtil.getLoader('logLuvLoader', N3JS.LogLuvLoader);
+			const logLuvLoader: I3JS.LogLuvLoader = NgxThreeUtil.getLoader('logLuvLoader', N3JS.LogLuvLoader);
 			this.setLoaderWithOption(logLuvLoader, options);
 			logLuvLoader.load(
 				key,
@@ -1369,7 +1376,7 @@ export class NgxLocalStorageService {
 					const loaderType = options.loaderType || '';
 					switch (loaderType.toLowerCase()) {
 						case 'lottie':
-							const lottieLoader : I3JS.LottieLoader = NgxThreeUtil.getLoader('lottieLoader', N3JS.LottieLoader);
+							const lottieLoader: I3JS.LottieLoader = NgxThreeUtil.getLoader('lottieLoader', N3JS.LottieLoader);
 							if (NgxThreeUtil.isNull(options.quality)) {
 								lottieLoader.setQuality(options.quality);
 							}
@@ -1393,7 +1400,7 @@ export class NgxLocalStorageService {
 							}
 							break;
 						default:
-							const objectLoader : I3JS.ObjectLoader = NgxThreeUtil.getLoader('objectLoader', N3JS.ObjectLoader);
+							const objectLoader: I3JS.ObjectLoader = NgxThreeUtil.getLoader('objectLoader', N3JS.ObjectLoader);
 							this.setLoaderWithOption(objectLoader, options);
 							objectLoader.load(
 								key,
@@ -1409,7 +1416,10 @@ export class NgxLocalStorageService {
 							break;
 					}
 				} else {
-					const geometryLoader : I3JS.BufferGeometryLoader = NgxThreeUtil.getLoader('geometryLoader', N3JS.BufferGeometryLoader);
+					const geometryLoader: I3JS.BufferGeometryLoader = NgxThreeUtil.getLoader(
+						'geometryLoader',
+						N3JS.BufferGeometryLoader
+					);
 					this.setLoaderWithOption(geometryLoader, options);
 					geometryLoader.load(
 						key,
@@ -1662,6 +1672,10 @@ export class NgxLocalStorageService {
 						break;
 				}
 				break;
+			case 'material-icon':
+			case 'icon':
+				fontPath = 'fonts/ttf/MaterialIcons-Regular.ttf';
+				break;
 			default:
 				if (
 					fontName.startsWith('/') ||
@@ -1686,13 +1700,13 @@ export class NgxLocalStorageService {
 			}, 1);
 		} else {
 			if (fontPath.endsWith('.ttf')) {
-				const ttfLoader : I3JS.TTFLoader = NgxThreeUtil.getLoader('ttfLoader', N3JS.TTFLoader);
+				const ttfLoader: I3JS.TTFLoader = NgxThreeUtil.getLoader('ttfLoader', N3JS.TTFLoader);
 				ttfLoader.load(NgxThreeUtil.getStoreUrl(fontPath), (json: any) => {
 					this._loadedFonts[fontPath] = new N3JS.Font(json);
 					callBack(this._loadedFonts[fontPath]);
 				});
 			} else {
-				const fontLoader : I3JS.FontLoader = NgxThreeUtil.getLoader('fontLoader', N3JS.FontLoader);
+				const fontLoader: I3JS.FontLoader = NgxThreeUtil.getLoader('fontLoader', N3JS.FontLoader);
 				fontLoader.load(NgxThreeUtil.getStoreUrl(fontPath), (responseFont) => {
 					this._loadedFonts[fontPath] = responseFont;
 					callBack(this._loadedFonts[fontPath]);
