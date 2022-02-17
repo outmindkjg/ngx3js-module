@@ -42,12 +42,12 @@ export class NgxGeometryIconComponent extends NgxAbstractGeometryComponent imple
 	 *
 	 *
 	 */
-	@Input() private type: string = 'icon';
+	@Input() public type: string = 'icon';
 
 	/**
 	 * Height; that is, the length of the edges parallel to the Y axis. Optional; defaults to 1.
 	 */
-	@Input() private height: number = null;
+	@Input() public height: number = null;
 
 	/**
 	 * The icon of geometry component
@@ -145,42 +145,42 @@ export class NgxGeometryIconComponent extends NgxAbstractGeometryComponent imple
 	 * See the [Icons - Google Fonts](https://fonts.google.com/icons) page for more detail.
 	 *
 	 */
-	@Input() private icon: string | number | (string | number)[] = null;
+	@Input() public icon: string | number | (string | number)[] = null;
 
 	/**
 	 * The size of geometry component
 	 */
-	@Input() private size: number = null;
+	@Input() public size: number = null;
 
 	/**
 	 * The curveSegments of geometry component
 	 */
-	@Input() private curveSegments: number = null;
+	@Input() public curveSegments: number = null;
 
 	/**
 	 * The bevelEnabled of geometry component
 	 */
-	@Input() private bevelEnabled: boolean = null;
+	@Input() public bevelEnabled: boolean = null;
 
 	/**
 	 * The bevelThickness of geometry component
 	 */
-	@Input() private bevelThickness: number = null;
+	@Input() public bevelThickness: number = null;
 
 	/**
 	 * The bevelSize of geometry component
 	 */
-	@Input() private bevelSize: number = null;
+	@Input() public bevelSize: number = null;
 
 	/**
 	 * The bevelOffset of geometry component
 	 */
-	@Input() private bevelOffset: number = null;
+	@Input() public bevelOffset: number = null;
 
 	/**
 	 * The bevelSegments of geometry component
 	 */
-	@Input() private bevelSegments: number = null;
+	@Input() public bevelSegments: number = null;
 
 	/**
 	 * Creates an instance of geometry component.
