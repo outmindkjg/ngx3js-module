@@ -1917,3 +1917,17 @@ export interface IControlOptions {
 	 */
 	lookatList?: QueryList<any>;
 }
+
+
+export interface IIconInfo {
+	name?: string,
+	version?: number,
+	popularity?: number,
+	codepoint?: number,
+	unsupported_families?: string[],
+	categories?: string[],
+	tags?: string[],
+	codehex? : string,
+	char? : string; 
+	sizes_px?: number[]
+}

@@ -18,6 +18,8 @@ import { NgxFogComponent } from './fog/fog.component';
 import { NgxAbstractGeometryComponent } from './geometry.abstract';
 import { NgxGeometryBirdComponent } from './geometry/bird/bird.component';
 import { NgxGeometryComponent } from './geometry/geometry.component';
+import { NgxGeometryIconComponent }from './geometry-icon/geometry-icon.component';
+
 import { NgxHelperComponent } from './helper/helper.component';
 import { NgxHtmlComponent } from './html/html.component';
 import { NgxKeyframeComponent } from './keyframe/keyframe.component';
@@ -71,6 +73,7 @@ const N3JS_COMPONENTS: Array<Type<any>> = [
 	NgxCameraComponent,
 	NgxRendererComponent,
 	NgxGeometryComponent,
+	NgxGeometryIconComponent,
 	NgxMaterialComponent,
 	NgxMeshComponent,
 	NgxPositionComponent,

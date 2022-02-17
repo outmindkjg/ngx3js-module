@@ -1,3 +1,4 @@
+import { FileLoader } from 'three';
 import { Rhino3dmLoader as O3JS_Rhino3dmLoader } from 'three/examples/jsm/loaders/3DMLoader';
 import { ThreeMFLoader as O3JS_ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
 import { AMFLoader as O3JS_AMFLoader } from 'three/examples/jsm/loaders/AMFLoader';
@@ -48,6 +49,7 @@ import { VRMLoader as O3JS_VRMLoader } from 'three/examples/jsm/loaders/VRMLoade
 import { VTKLoader as O3JS_VTKLoader } from 'three/examples/jsm/loaders/VTKLoader';
 import { XYZLoader as O3JS_XYZLoader } from 'three/examples/jsm/loaders/XYZLoader';
 import * as I3JS from '../../../types/three/examples/loaders';
+import * as fflate from './fflate.module';
 import { NodeMaterialLoader as O3JS_NodeMaterialLoader } from './NodeMaterialLoader';
 import { TiltLoader as O3JS_TiltLoader } from './TiltLoader';
 
@@ -83,6 +85,34 @@ export const FBXLoader: FBXLoader = O3JS_FBXLoader as any;
 
 export type FontLoader = I3JS.FontLoader;
 export const FontLoader: FontLoader = O3JS_FontLoader as any;
+
+export class FontZipLoader extends FontLoader {
+    load(
+        url: string,
+        onLoad?: (responseFont: Font) => void,
+        onProgress?: (event: ProgressEvent) => void,
+        onError?: (event: ErrorEvent) => void,
+    ): void {
+		const loader = new FileLoader( this.manager );
+		loader.setResponseType('arraybuffer');
+		loader.setPath( this.path );
+		loader.setRequestHeader( this.requestHeader );
+		loader.setWithCredentials( this.withCredentials );
+		loader.load( url, ( zip ) => {
+			let json;
+			try {
+				const decompressed : { [key : string] : any } = fflate.unzipSync(new Uint8Array(zip as ArrayBuffer));
+				let text = fflate.strFromU8(Object.values(decompressed)[0]);
+				json = JSON.parse( text );
+			} catch ( e ) {
+				console.warn( 'N3JS.FontZipLoader: Parse zip Error ',e);
+				json = {};
+			}
+			const font = this.parse( json );
+			if ( onLoad ) onLoad( font );
+		}, onProgress, onError );		
+	}
+}
 
 export type Font = I3JS.Font;
 export const Font: Font = O3JS_Font as any;

@@ -23,6 +23,7 @@ export * from './geometry.abstract';
 export * from './geometry/bird/bird.component';
 export * from './geometry/geometry.component';
 export * from './geometry/index';
+export * from './geometry-icon/geometry-icon.component';
 export * from './helper/helper.component';
 export * from './html/html.component';
 export * from './interface';

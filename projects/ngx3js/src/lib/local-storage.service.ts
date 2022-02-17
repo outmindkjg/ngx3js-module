@@ -1614,33 +1614,33 @@ export class NgxLocalStorageService {
 			case 'helvetiker':
 				switch (fontWeight.toLowerCase()) {
 					case 'bold':
-						fontPath = 'fonts/helvetiker_bold.typeface.json';
+						fontPath = 'fonts/helvetiker_bold.typeface.json.zip';
 						break;
 					case 'regular':
 					default:
-						fontPath = 'fonts/helvetiker_regular.typeface.json';
+						fontPath = 'fonts/helvetiker_regular.typeface.json.zip';
 						break;
 				}
 				break;
 			case 'gentilis':
 				switch (fontWeight.toLowerCase()) {
 					case 'bold':
-						fontPath = 'fonts/gentilis_bold.typeface.json';
+						fontPath = 'fonts/gentilis_bold.typeface.json.zip';
 						break;
 					case 'regular':
 					default:
-						fontPath = 'fonts/gentilis_regular.typeface.json';
+						fontPath = 'fonts/gentilis_regular.typeface.json.zip';
 						break;
 				}
 				break;
 			case 'optimer':
 				switch (fontWeight.toLowerCase()) {
 					case 'bold':
-						fontPath = 'fonts/optimer_bold.typeface.json';
+						fontPath = 'fonts/optimer_bold.typeface.json.zip';
 						break;
 					case 'regular':
 					default:
-						fontPath = 'fonts/optimer_regular.typeface.json';
+						fontPath = 'fonts/optimer_regular.typeface.json.zip';
 						break;
 				}
 				break;
@@ -1648,33 +1648,53 @@ export class NgxLocalStorageService {
 			case 'droid_sans':
 				switch (fontWeight.toLowerCase()) {
 					case 'bold':
-						fontPath = 'fonts/droid/droid_sans_bold.typeface.json';
+						fontPath = 'fonts/droid/droid_sans_bold.typeface.json.zip';
 						break;
 					case 'regular':
 					default:
-						fontPath = 'fonts/droid/droid_sans_regular.typeface.json';
+						fontPath = 'fonts/droid/droid_sans_regular.typeface.json.zip';
 						break;
 				}
 				break;
 			case 'sans_mono':
 			case 'droid_sans_mono':
-				fontPath = 'fonts/droid/droid_sans_mono_regular.typeface.json';
+				fontPath = 'fonts/droid/droid_sans_mono_regular.typeface.json.zip';
 				break;
 			case 'serif':
 			case 'droid_serif':
 				switch (fontWeight.toLowerCase()) {
 					case 'bold':
-						fontPath = 'fonts/droid/droid_serif_bold.typeface.json';
+						fontPath = 'fonts/droid/droid_serif_bold.typeface.json.zip';
 						break;
 					case 'regular':
 					default:
-						fontPath = 'fonts/droid/droid_serif_regular.typeface.json';
+						fontPath = 'fonts/droid/droid_serif_regular.typeface.json.zip';
 						break;
 				}
 				break;
+			case 'materialicons':
+			case 'materialicons-regular':
 			case 'material-icon':
 			case 'icon':
-				fontPath = 'fonts/ttf/MaterialIcons-Regular.ttf';
+				fontPath = 'fonts/materialicons/materialicons-regular.typeface.json.zip';
+				break;
+			case 'materialiconsoutlined':
+			case 'materialiconsoutlined-regular':
+			case 'materialoutlined-icon':
+			case 'iconoutlined':
+				fontPath = 'fonts/materialicons/materialiconsoutlined-regular.typeface.json.zip';
+				break;
+			case 'materialiconsround':
+			case 'materialiconsround-regular':
+			case 'materialround-icon':
+			case 'iconround':
+				fontPath = 'fonts/materialicons/materialiconsround-regular.typeface.json.zip';
+				break;
+			case 'materialiconssharp':
+			case 'materialiconssharp-regular':
+			case 'materialsharp-icon':
+			case 'iconsharp':
+				fontPath = 'fonts/materialicons/materialiconssharp-regular.typeface.json.zip';
 				break;
 			default:
 				if (
@@ -1684,13 +1704,13 @@ export class NgxLocalStorageService {
 					fontName.endsWith('.json') ||
 					fontName.endsWith('.ttf')
 				) {
-					if (fontName.endsWith('.ttf') || fontName.endsWith('.json')) {
+					if (fontName.endsWith('.ttf') || fontName.endsWith('.json') || fontName.endsWith('.json.zip')) {
 						fontPath = fontName;
 					} else {
 						fontPath = fontName + '_' + fontWeight + '.typeface.json';
 					}
 				} else {
-					fontPath = 'fonts/helvetiker_regular.typeface.json';
+					fontPath = 'fonts/helvetiker_regular.typeface.json.zip';
 				}
 				break;
 		}
@@ -1703,6 +1723,12 @@ export class NgxLocalStorageService {
 				const ttfLoader: I3JS.TTFLoader = NgxThreeUtil.getLoader('ttfLoader', N3JS.TTFLoader);
 				ttfLoader.load(NgxThreeUtil.getStoreUrl(fontPath), (json: any) => {
 					this._loadedFonts[fontPath] = new N3JS.Font(json);
+					callBack(this._loadedFonts[fontPath]);
+				});
+			} else if (fontPath.endsWith('.json.zip')) {
+				const fontLoader: I3JS.FontLoader = NgxThreeUtil.getLoader('fontZipLoader', N3JS.FontZipLoader);
+				fontLoader.load(NgxThreeUtil.getStoreUrl(fontPath), (responseFont) => {
+					this._loadedFonts[fontPath] = responseFont;
 					callBack(this._loadedFonts[fontPath]);
 				});
 			} else {
